@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct ArrowStyle {};
+    struct ArrowStyle {};
 }
 
 
 void CDPLPythonVis::exportArrowStyles()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ArrowStyle, boost::noncopyable>("ArrowStyle", python::no_init)
-		.def_readonly("NONE", &Vis::ArrowStyle::NONE)
-		.def_readonly("REACTION_HOLLOW", &Vis::ArrowStyle::REACTION_HOLLOW)
-		.def_readonly("REACTION_SOLID", &Vis::ArrowStyle::REACTION_SOLID);
+    python::class_<ArrowStyle, boost::noncopyable>("ArrowStyle", python::no_init)
+        .def_readonly("NONE", &Vis::ArrowStyle::NONE)
+        .def_readonly("REACTION_HOLLOW", &Vis::ArrowStyle::REACTION_HOLLOW)
+        .def_readonly("REACTION_SOLID", &Vis::ArrowStyle::REACTION_SOLID);
 }

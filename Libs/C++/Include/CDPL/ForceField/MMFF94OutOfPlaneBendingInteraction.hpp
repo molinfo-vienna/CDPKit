@@ -40,58 +40,58 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteraction
-		{
+        class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteraction
+        {
 
-		  public:
-			MMFF94OutOfPlaneBendingInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx, 
-											   std::size_t oop_atom_idx, double force_const):
-				termAtom1Idx(term_atom1_idx), ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx), 
-				oopAtomIdx(oop_atom_idx), forceConst(force_const) {}
+          public:
+            MMFF94OutOfPlaneBendingInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx, 
+                                               std::size_t oop_atom_idx, double force_const):
+                termAtom1Idx(term_atom1_idx), ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx), 
+                oopAtomIdx(oop_atom_idx), forceConst(force_const) {}
 
-			std::size_t getTerminalAtom1Index() const {
-				return termAtom1Idx;
-			}
+            std::size_t getTerminalAtom1Index() const {
+                return termAtom1Idx;
+            }
 
-			std::size_t getCenterAtomIndex() const {
-				return ctrAtomIdx;
-			}
+            std::size_t getCenterAtomIndex() const {
+                return ctrAtomIdx;
+            }
 
-			std::size_t getTerminalAtom2Index() const {
-				return termAtom2Idx;
-			}
+            std::size_t getTerminalAtom2Index() const {
+                return termAtom2Idx;
+            }
 
-			std::size_t getOutOfPlaneAtomIndex() const {
-				return oopAtomIdx;
-			}
-	
-			std::size_t getAtom1Index() const {
-				return termAtom1Idx;
-			}
+            std::size_t getOutOfPlaneAtomIndex() const {
+                return oopAtomIdx;
+            }
+    
+            std::size_t getAtom1Index() const {
+                return termAtom1Idx;
+            }
 
-			std::size_t getAtom2Index() const {
-				return ctrAtomIdx;
-			}
+            std::size_t getAtom2Index() const {
+                return ctrAtomIdx;
+            }
 
-			std::size_t getAtom3Index() const {
-				return termAtom2Idx;
-			}
+            std::size_t getAtom3Index() const {
+                return termAtom2Idx;
+            }
 
-			std::size_t getAtom4Index() const {
-				return oopAtomIdx;
-			}
+            std::size_t getAtom4Index() const {
+                return oopAtomIdx;
+            }
 
-			double getForceConstant() const {
-				return forceConst;
-			}
+            double getForceConstant() const {
+                return forceConst;
+            }
 
-		  private:
-			std::size_t termAtom1Idx;
-			std::size_t ctrAtomIdx;
-			std::size_t termAtom2Idx;
-			std::size_t oopAtomIdx;
-			double      forceConst;
-		};			
+          private:
+            std::size_t termAtom1Idx;
+            std::size_t ctrAtomIdx;
+            std::size_t termAtom2Idx;
+            std::size_t oopAtomIdx;
+            double      forceConst;
+        };            
     }
 }
 

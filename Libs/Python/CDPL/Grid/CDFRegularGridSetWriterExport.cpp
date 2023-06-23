@@ -34,39 +34,39 @@
 
 void CDPLPythonGrid::exportCDFRegularGridSetWriter()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Grid::CDFDRegularGridSetWriter, python::bases<Base::DataWriter<Grid::DRegularGridSet> >,
-		boost::noncopyable>("CDFDRegularGridSetWriter", python::no_init)
-		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Grid::CDFDRegularGridSetWriter, python::bases<Base::DataWriter<Grid::DRegularGridSet> >,
+        boost::noncopyable>("CDFDRegularGridSetWriter", python::no_init)
+        .def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Grid::CDFDRegularGridSetWriter>, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("FileCDFDRegularGridSetWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Grid::CDFDRegularGridSetWriter>, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("FileCDFDRegularGridSetWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-	python::class_<Grid::CDFGZDRegularGridSetWriter, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("CDFGZDRegularGridSetWriter", python::no_init)
-		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Grid::CDFGZDRegularGridSetWriter, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("CDFGZDRegularGridSetWriter", python::no_init)
+        .def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Grid::CDFGZDRegularGridSetWriter>, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("FileCDFGZDRegularGridSetWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Grid::CDFGZDRegularGridSetWriter>, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("FileCDFGZDRegularGridSetWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-	python::class_<Grid::CDFBZ2DRegularGridSetWriter, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("CDFBZ2DRegularGridSetWriter", python::no_init)
-		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Grid::CDFBZ2DRegularGridSetWriter, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("CDFBZ2DRegularGridSetWriter", python::no_init)
+        .def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Grid::CDFBZ2DRegularGridSetWriter>, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("FileCDFBZ2DRegularGridSetWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Grid::CDFBZ2DRegularGridSetWriter>, python::bases<Base::DataWriter<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("FileCDFBZ2DRegularGridSetWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

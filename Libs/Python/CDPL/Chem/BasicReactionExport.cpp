@@ -31,31 +31,31 @@
 
 void CDPLPythonChem::exportBasicReaction()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	Chem::BasicMolecule& (Chem::BasicReaction::*addComponentFunc)(unsigned int) = &Chem::BasicReaction::addComponent;
-	Chem::BasicMolecule& (Chem::BasicReaction::*addComponentCopyFunc)(unsigned int, const Chem::Molecule&) = &Chem::BasicReaction::addComponent;
+    Chem::BasicMolecule& (Chem::BasicReaction::*addComponentFunc)(unsigned int) = &Chem::BasicReaction::addComponent;
+    Chem::BasicMolecule& (Chem::BasicReaction::*addComponentCopyFunc)(unsigned int, const Chem::Molecule&) = &Chem::BasicReaction::addComponent;
 
-	void (Chem::BasicReaction::*copyBasicRxnFunc)(const Chem::BasicReaction&) = &Chem::BasicReaction::copy;
-	void (Chem::BasicReaction::*copyRxnFunc)(const Chem::Reaction&) = &Chem::BasicReaction::copy;
+    void (Chem::BasicReaction::*copyBasicRxnFunc)(const Chem::BasicReaction&) = &Chem::BasicReaction::copy;
+    void (Chem::BasicReaction::*copyRxnFunc)(const Chem::Reaction&) = &Chem::BasicReaction::copy;
 
-	Chem::BasicReaction& (Chem::BasicReaction::*assignBasicRxnFunc)(const Chem::BasicReaction&) = &Chem::BasicReaction::operator=;
-	Chem::Reaction& (Chem::Reaction::*assignRxnFunc)(const Chem::Reaction&) = &Chem::Reaction::operator=;
+    Chem::BasicReaction& (Chem::BasicReaction::*assignBasicRxnFunc)(const Chem::BasicReaction&) = &Chem::BasicReaction::operator=;
+    Chem::Reaction& (Chem::Reaction::*assignRxnFunc)(const Chem::Reaction&) = &Chem::Reaction::operator=;
 
-	python::class_<Chem::BasicReaction, Chem::BasicReaction::SharedPointer, 
-		python::bases<Chem::Reaction> >("BasicReaction", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::BasicReaction&>((python::arg("self"), python::arg("mol"))))
-		.def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("mol"))))
-		.def("addComponent", addComponentFunc, (python::arg("self"), python::arg("role")), 
-			 python::return_internal_reference<1>())
-		.def("addComponent", addComponentCopyFunc, (python::arg("self"), python::arg("role"), python::arg("mol")), 
-		 	 python::return_internal_reference<1>())
-		.def("copy", copyBasicRxnFunc, (python::arg("self"), python::arg("rxn")))
-		.def("copy", copyRxnFunc, (python::arg("self"), python::arg("rxn")))
-		.def("assign", assignBasicRxnFunc, (python::arg("self"), python::arg("rxn")), 
-			 python::return_self<>())
-		.def("assign", assignRxnFunc, (python::arg("self"), python::arg("rxn")), 
-			 python::return_self<>());
+    python::class_<Chem::BasicReaction, Chem::BasicReaction::SharedPointer, 
+        python::bases<Chem::Reaction> >("BasicReaction", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::BasicReaction&>((python::arg("self"), python::arg("mol"))))
+        .def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("mol"))))
+        .def("addComponent", addComponentFunc, (python::arg("self"), python::arg("role")), 
+             python::return_internal_reference<1>())
+        .def("addComponent", addComponentCopyFunc, (python::arg("self"), python::arg("role"), python::arg("mol")), 
+              python::return_internal_reference<1>())
+        .def("copy", copyBasicRxnFunc, (python::arg("self"), python::arg("rxn")))
+        .def("copy", copyRxnFunc, (python::arg("self"), python::arg("rxn")))
+        .def("assign", assignBasicRxnFunc, (python::arg("self"), python::arg("rxn")), 
+             python::return_self<>())
+        .def("assign", assignRxnFunc, (python::arg("self"), python::arg("rxn")), 
+             python::return_self<>());
 }

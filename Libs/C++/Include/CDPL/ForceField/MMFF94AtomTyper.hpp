@@ -48,74 +48,74 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Fragment;
-	}
+        class Fragment;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94AtomTyper
-		{
+        class CDPL_FORCEFIELD_API MMFF94AtomTyper
+        {
 
-		  public:
-			typedef std::shared_ptr<MMFF94AtomTyper> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94AtomTyper> SharedPointer;
 
-			MMFF94AtomTyper();
+            MMFF94AtomTyper();
 
-			MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
+            MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
 
-			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
+            void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
-			void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
+            void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
-			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
+            void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
 
-			void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
+            void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
 
-			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
-		
-			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
+            void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
+        
+            void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
 
-		  private:
-			typedef MMFF94AromaticAtomTypeDefinitionTable::Entry AromTypeDefEntry;
+          private:
+            typedef MMFF94AromaticAtomTypeDefinitionTable::Entry AromTypeDefEntry;
 
-			void init(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types);
+            void init(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types);
 
-			void assignProvisionalSymbolicAtomTypes(bool strict);
-			void assignAromaticAtomTypes();
-			void assignHydrogenAtomTypes();
-			void assignNumericAtomTypes(Util::UIArray& num_types);
+            void assignProvisionalSymbolicAtomTypes(bool strict);
+            void assignAromaticAtomTypes();
+            void assignHydrogenAtomTypes();
+            void assignNumericAtomTypes(Util::UIArray& num_types);
 
-			void assignAromaticAtomTypes(const Chem::Fragment* ring);
+            void assignAromaticAtomTypes(const Chem::Fragment* ring);
 
-			std::size_t getUniqueHeteroAtomIndex(const Chem::Fragment& ring) const;
-			std::size_t calcHeteroAtomDistance(std::size_t r_size, std::size_t het_atom_idx, std::size_t from_atom_idx) const;
+            std::size_t getUniqueHeteroAtomIndex(const Chem::Fragment& ring) const;
+            std::size_t calcHeteroAtomDistance(std::size_t r_size, std::size_t het_atom_idx, std::size_t from_atom_idx) const;
 
-			bool isN5Anion(const Chem::Fragment& ring) const;
-			bool isImidazoliumCation(const Chem::Fragment& ring) const;
+            bool isN5Anion(const Chem::Fragment& ring) const;
+            bool isImidazoliumCation(const Chem::Fragment& ring) const;
 
-			bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, 
-										 std::size_t r_size, std::size_t het_dist, bool im_cat, bool n5_anion,
-										 const AromTypeDefEntry& entry) const;
-	
-			typedef std::vector<const Chem::Fragment*> RingList;
+            bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, 
+                                         std::size_t r_size, std::size_t het_dist, bool im_cat, bool n5_anion,
+                                         const AromTypeDefEntry& entry) const;
+    
+            typedef std::vector<const Chem::Fragment*> RingList;
 
-			MMFF94SymbolicAtomTypePatternTable::SharedPointer    symTypePatternTable;
-			MMFF94AromaticAtomTypeDefinitionTable::SharedPointer aromTypeDefTable;
-			MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer      hydTypeMap;
-			MMFF94SymbolicToNumericAtomTypeMap::SharedPointer    numTypeMap;
-			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
-			MMFF94RingSetFunction                                aromRingSetFunc;
-			const Chem::MolecularGraph*                          molGraph;
-			Util::SArray*                                        symTypes;
-			RingList                                             aromRings;
-			Chem::PatternAtomTyper                               atomTyper;
-		};
+            MMFF94SymbolicAtomTypePatternTable::SharedPointer    symTypePatternTable;
+            MMFF94AromaticAtomTypeDefinitionTable::SharedPointer aromTypeDefTable;
+            MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer      hydTypeMap;
+            MMFF94SymbolicToNumericAtomTypeMap::SharedPointer    numTypeMap;
+            MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
+            MMFF94RingSetFunction                                aromRingSetFunc;
+            const Chem::MolecularGraph*                          molGraph;
+            Util::SArray*                                        symTypes;
+            RingList                                             aromRings;
+            Chem::PatternAtomTyper                               atomTyper;
+        };
     }
 }
 

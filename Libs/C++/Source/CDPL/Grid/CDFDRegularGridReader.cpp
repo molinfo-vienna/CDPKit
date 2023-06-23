@@ -34,36 +34,36 @@ using namespace CDPL;
 
 
 Grid::CDFDRegularGridReader::CDFDRegularGridReader(std::istream& is): 
-	Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>(is), reader(new CDFRegularGridDataReader(*this)) {}
+    Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>(is), reader(new CDFRegularGridDataReader(*this)) {}
 
 Grid::CDFDRegularGridReader::~CDFDRegularGridReader() {}
 
 bool Grid::CDFDRegularGridReader::readData(std::istream& is, DRegularGrid& grid, bool overwrite)
 {
-	try {
-		if (overwrite)
-			grid.clear();
+    try {
+        if (overwrite)
+            grid.clear();
 
-		return reader->readGrid(is, grid);
+        return reader->readGrid(is, grid);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFDRegularGridReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFDRegularGridReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Grid::CDFDRegularGridReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipGrid(is);
+    try {
+        return reader->skipGrid(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFDRegularGridReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFDRegularGridReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Grid::CDFDRegularGridReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

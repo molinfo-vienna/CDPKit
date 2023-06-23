@@ -37,57 +37,57 @@
 namespace
 {
 
-	template <typename T>
-	struct ConstGridExpressionExport
-	{
+    template <typename T>
+    struct ConstGridExpressionExport
+    {
 
-		typedef CDPLPythonMath::ConstGridExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef CDPLPythonMath::ConstGridExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
 
-		ConstGridExpressionExport(const char* name) {
-			using namespace boost;
+        ConstGridExpressionExport(const char* name) {
+            using namespace boost;
 
-			python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
-				.def(CDPLPythonMath::ConstGridVisitor<ExpressionType>("e"));
-		}
-	};
+            python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
+                .def(CDPLPythonMath::ConstGridVisitor<ExpressionType>("e"));
+        }
+    };
 
-	template <typename T>
-	struct GridExpressionExport
-	{
+    template <typename T>
+    struct GridExpressionExport
+    {
 
-		typedef CDPLPythonMath::GridExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
-		typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
+        typedef CDPLPythonMath::GridExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
-		GridExpressionExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        GridExpressionExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<ExpressionType, ExpressionPointer, 
-				python::bases<ConstGridExpression<T> >, boost::noncopyable>(name, python::no_init)
-				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
-				.def(GridAssignAndSwapVisitor<ExpressionType>("e"))
-				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstGridExpression>("e"))
-				.def(GridNDArrayAssignVisitor<ExpressionType>())
-				.def(GridVisitor<ExpressionType>("e"));
+            python::class_<ExpressionType, ExpressionPointer, 
+                python::bases<ConstGridExpression<T> >, boost::noncopyable>(name, python::no_init)
+                .def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
+                .def(GridAssignAndSwapVisitor<ExpressionType>("e"))
+                .def(AssignFunctionGeneratorVisitor<ExpressionType, ConstGridExpression>("e"))
+                .def(GridNDArrayAssignVisitor<ExpressionType>())
+                .def(GridVisitor<ExpressionType>("e"));
 
-			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
-		}
+            python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
+        }
 
-		static void swapExpr(ExpressionType& grd1, const ExpressionPointer& grd2_expr) {
-			grd1.swap(*grd2_expr);
-		}
-	};
+        static void swapExpr(ExpressionType& grd1, const ExpressionPointer& grd2_expr) {
+            grd1.swap(*grd2_expr);
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportGridExpressionTypes()
 {
-	ConstGridExpressionExport<float>("ConstFGridExpression");
-	GridExpressionExport<float>("FGridExpression");
+    ConstGridExpressionExport<float>("ConstFGridExpression");
+    GridExpressionExport<float>("FGridExpression");
 
-	ConstGridExpressionExport<double>("ConstDGridExpression");
-	GridExpressionExport<double>("DGridExpression");
+    ConstGridExpressionExport<double>("ConstDGridExpression");
+    GridExpressionExport<double>("DGridExpression");
 }

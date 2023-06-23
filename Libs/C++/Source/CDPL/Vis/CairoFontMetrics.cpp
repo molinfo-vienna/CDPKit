@@ -38,87 +38,87 @@ using namespace CDPL;
 struct Vis::CairoFontMetrics::CairoExtents
 {
 
-	cairo_font_extents_t fontExtents;
-	cairo_text_extents_t textExtents;
+    cairo_font_extents_t fontExtents;
+    cairo_text_extents_t textExtents;
 };
 
 
 Vis::CairoFontMetrics::CairoFontMetrics(const CairoPointer<cairo_t>& ctxt_ptr): 
-	cairoContext(ctxt_ptr), cairoExtents(new CairoExtents()) 
+    cairoContext(ctxt_ptr), cairoExtents(new CairoExtents()) 
 {
-	if (!ctxt_ptr)
-		throw Base::NullPointerException("CairoFontMetrics: NULL cairo context pointer");
+    if (!ctxt_ptr)
+        throw Base::NullPointerException("CairoFontMetrics: NULL cairo context pointer");
 }
 
 Vis::CairoFontMetrics::~CairoFontMetrics() {}
 
 void Vis::CairoFontMetrics::setFont(const Font& font)
 {
-	cairo_select_font_face(cairoContext.get(), font.getFamily().c_str(), 
-						   font.isItalic() ? CAIRO_FONT_SLANT_ITALIC : CAIRO_FONT_SLANT_NORMAL,
-						   font.isBold() ? CAIRO_FONT_WEIGHT_BOLD : CAIRO_FONT_WEIGHT_NORMAL);
+    cairo_select_font_face(cairoContext.get(), font.getFamily().c_str(), 
+                           font.isItalic() ? CAIRO_FONT_SLANT_ITALIC : CAIRO_FONT_SLANT_NORMAL,
+                           font.isBold() ? CAIRO_FONT_WEIGHT_BOLD : CAIRO_FONT_WEIGHT_NORMAL);
 
-	cairo_set_font_size(cairoContext.get(), font.getSize());
+    cairo_set_font_size(cairoContext.get(), font.getSize());
 
-	cairo_font_extents(cairoContext.get(), &cairoExtents->fontExtents);
+    cairo_font_extents(cairoContext.get(), &cairoExtents->fontExtents);
 }
 
 double Vis::CairoFontMetrics::getAscent() const
 {
-	return cairoExtents->fontExtents.ascent;
+    return cairoExtents->fontExtents.ascent;
 }
 
 double Vis::CairoFontMetrics::getDescent() const
 {
-	return cairoExtents->fontExtents.descent;
+    return cairoExtents->fontExtents.descent;
 } 
 
 double Vis::CairoFontMetrics::getHeight() const
 {
-	return (cairoExtents->fontExtents.ascent + cairoExtents->fontExtents.descent + 1.0);
+    return (cairoExtents->fontExtents.ascent + cairoExtents->fontExtents.descent + 1.0);
 }
 
 double Vis::CairoFontMetrics::getLeading() const
 {
-	return (cairoExtents->fontExtents.height - getHeight());
+    return (cairoExtents->fontExtents.height - getHeight());
 } 
 
 double Vis::CairoFontMetrics::getWidth(const std::string& str) const
 {
-	cairo_text_extents(cairoContext.get(), str.c_str(), &cairoExtents->textExtents);
+    cairo_text_extents(cairoContext.get(), str.c_str(), &cairoExtents->textExtents);
 
-	return cairoExtents->textExtents.x_advance;
+    return cairoExtents->textExtents.x_advance;
 } 
 
 double Vis::CairoFontMetrics::getWidth(char ch) const
 {
-	const char str[] = { ch, 0 };
+    const char str[] = { ch, 0 };
 
-	cairo_text_extents(cairoContext.get(), str, &cairoExtents->textExtents);
+    cairo_text_extents(cairoContext.get(), str, &cairoExtents->textExtents);
 
-	return cairoExtents->textExtents.x_advance;
+    return cairoExtents->textExtents.x_advance;
 } 
 
 void Vis::CairoFontMetrics::getBounds(const std::string& str, Rectangle2D& bounds) const
 {
-	cairo_text_extents_t& text_extents = cairoExtents->textExtents;
+    cairo_text_extents_t& text_extents = cairoExtents->textExtents;
 
-	cairo_text_extents(cairoContext.get(), str.c_str(), &text_extents);
+    cairo_text_extents(cairoContext.get(), str.c_str(), &text_extents);
 
-	bounds.setBounds(text_extents.x_bearing, text_extents.y_bearing, 
-					 text_extents.width + text_extents.x_bearing, 
-					 text_extents.height + text_extents.y_bearing);
+    bounds.setBounds(text_extents.x_bearing, text_extents.y_bearing, 
+                     text_extents.width + text_extents.x_bearing, 
+                     text_extents.height + text_extents.y_bearing);
 } 
 
 void Vis::CairoFontMetrics::getBounds(char ch, Rectangle2D& bounds) const
 {
-	const char str[] = { ch, 0 };
+    const char str[] = { ch, 0 };
 
-	cairo_text_extents_t& text_extents = cairoExtents->textExtents;
+    cairo_text_extents_t& text_extents = cairoExtents->textExtents;
 
-	cairo_text_extents(cairoContext.get(), str, &text_extents);
+    cairo_text_extents(cairoContext.get(), str, &text_extents);
 
-	bounds.setBounds(text_extents.x_bearing, text_extents.y_bearing, 
-					 text_extents.width + text_extents.x_bearing, 
-					 text_extents.height + text_extents.y_bearing);
+    bounds.setBounds(text_extents.x_bearing, text_extents.y_bearing, 
+                     text_extents.width + text_extents.x_bearing, 
+                     text_extents.height + text_extents.y_bearing);
 } 

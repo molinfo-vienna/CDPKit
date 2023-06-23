@@ -41,107 +41,107 @@
 namespace CDPL 
 {
 
-	namespace ConfGen 
-	{
+    namespace ConfGen 
+    {
 
-		class CDPL_CONFGEN_API TorsionCategory
-		{
+        class CDPL_CONFGEN_API TorsionCategory
+        {
 
-			typedef std::vector<TorsionCategory> CategoryList;
-			typedef std::vector<TorsionRule> RuleList;
+            typedef std::vector<TorsionCategory> CategoryList;
+            typedef std::vector<TorsionRule> RuleList;
 
-		  public:
-			typedef CategoryList::iterator CategoryIterator;
-			typedef CategoryList::const_iterator ConstCategoryIterator;
-			typedef RuleList::iterator RuleIterator;
-			typedef RuleList::const_iterator ConstRuleIterator;
+          public:
+            typedef CategoryList::iterator CategoryIterator;
+            typedef CategoryList::const_iterator ConstCategoryIterator;
+            typedef RuleList::iterator RuleIterator;
+            typedef RuleList::const_iterator ConstRuleIterator;
 
-			TorsionCategory();
+            TorsionCategory();
 
-			virtual ~TorsionCategory() {}
+            virtual ~TorsionCategory() {}
 
-			const std::string& getName() const;
+            const std::string& getName() const;
 
-			void setName(const std::string& name);
-	
-			const std::string& getMatchPatternString() const;
+            void setName(const std::string& name);
+    
+            const std::string& getMatchPatternString() const;
 
-			void setMatchPatternString(const std::string& ptn_str);
+            void setMatchPatternString(const std::string& ptn_str);
 
-			const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
+            const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
-			void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
-			
-			unsigned int getBondAtom1Type() const;
+            void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
+            
+            unsigned int getBondAtom1Type() const;
 
-			void setBondAtom1Type(unsigned int type);
+            void setBondAtom1Type(unsigned int type);
 
-			unsigned int getBondAtom2Type() const;
+            unsigned int getBondAtom2Type() const;
 
-			void setBondAtom2Type(unsigned int type);
+            void setBondAtom2Type(unsigned int type);
 
-			TorsionCategory& addCategory();
+            TorsionCategory& addCategory();
 
-			TorsionCategory& addCategory(const TorsionCategory& cat);
+            TorsionCategory& addCategory(const TorsionCategory& cat);
 
-			TorsionRule& addRule();
+            TorsionRule& addRule();
 
-			TorsionRule& addRule(const TorsionRule& rule);
+            TorsionRule& addRule(const TorsionRule& rule);
 
-			std::size_t getNumCategories(bool recursive = false) const;
+            std::size_t getNumCategories(bool recursive = false) const;
 
-			std::size_t getNumRules(bool recursive = false) const;
+            std::size_t getNumRules(bool recursive = false) const;
 
-			TorsionCategory& getCategory(std::size_t idx);
+            TorsionCategory& getCategory(std::size_t idx);
 
-			const TorsionCategory& getCategory(std::size_t idx) const;
+            const TorsionCategory& getCategory(std::size_t idx) const;
 
-			TorsionRule& getRule(std::size_t idx);
+            TorsionRule& getRule(std::size_t idx);
 
-			const TorsionRule& getRule(std::size_t idx) const;
+            const TorsionRule& getRule(std::size_t idx) const;
 
-			void removeCategory(std::size_t idx);
+            void removeCategory(std::size_t idx);
 
-			void removeRule(std::size_t idx);
-	
-			void removeCategory(const CategoryIterator& it);
+            void removeRule(std::size_t idx);
+    
+            void removeCategory(const CategoryIterator& it);
 
-			void removeRule(const RuleIterator& it);
+            void removeRule(const RuleIterator& it);
 
-			CategoryIterator getCategoriesBegin();
+            CategoryIterator getCategoriesBegin();
 
-			CategoryIterator getCategoriesEnd();
+            CategoryIterator getCategoriesEnd();
 
-			ConstCategoryIterator getCategoriesBegin() const;
+            ConstCategoryIterator getCategoriesBegin() const;
 
-			ConstCategoryIterator getCategoriesEnd() const;
+            ConstCategoryIterator getCategoriesEnd() const;
 
-			RuleIterator getRulesBegin();
+            RuleIterator getRulesBegin();
 
-			RuleIterator getRulesEnd();
+            RuleIterator getRulesEnd();
 
-			ConstRuleIterator getRulesBegin() const;
+            ConstRuleIterator getRulesBegin() const;
 
-			ConstRuleIterator getRulesEnd() const;
+            ConstRuleIterator getRulesEnd() const;
 
-			void swap(TorsionCategory& cat);
+            void swap(TorsionCategory& cat);
 
-			void clear();
+            void clear();
 
-		  private:
-			void checkCategoryIndex(std::size_t idx, bool it) const;
+          private:
+            void checkCategoryIndex(std::size_t idx, bool it) const;
 
-			void checkRuleIndex(std::size_t idx, bool it) const;
+            void checkRuleIndex(std::size_t idx, bool it) const;
 
-			std::string                         name;      
-			std::string                         matchPatternStr;
-			Chem::MolecularGraph::SharedPointer matchPattern;
-			unsigned int                        bondAtom1Type;
-			unsigned int                        bondAtom2Type;
-			RuleList                            rules;
-			CategoryList                        categories;
-		};
-	}
+            std::string                         name;      
+            std::string                         matchPatternStr;
+            Chem::MolecularGraph::SharedPointer matchPattern;
+            unsigned int                        bondAtom1Type;
+            unsigned int                        bondAtom2Type;
+            RuleList                            rules;
+            CategoryList                        categories;
+        };
+    }
 }
 
 #endif // CDPL_CONFGEN_TORSIONCATEGORY_HPP

@@ -33,44 +33,44 @@
 namespace 
 {
 
-	struct MolecularGraphProperty {};
+    struct MolecularGraphProperty {};
 }
 
 
 void CDPLPythonChem::exportMolecularGraphProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
-		.def_readonly("NAME", &Chem::MolecularGraphProperty::NAME) 
-		.def_readonly("COMPONENTS", &Chem::MolecularGraphProperty::COMPONENTS)
-		.def_readonly("RINGS", &Chem::MolecularGraphProperty::RINGS)
-		.def_readonly("SSSR", &Chem::MolecularGraphProperty::SSSR)
-		.def_readonly("CYCLIC_SUBSTRUCTURE", &Chem::MolecularGraphProperty::CYCLIC_SUBSTRUCTURE)
-		.def_readonly("AROMATIC_SUBSTRUCTURE", &Chem::MolecularGraphProperty::AROMATIC_SUBSTRUCTURE)
-		.def_readonly("PI_ELECTRON_SYSTEMS", &Chem::MolecularGraphProperty::PI_ELECTRON_SYSTEMS)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::MolecularGraphProperty::MATCH_CONSTRAINTS)
-		.def_readonly("MATCH_EXPRESSION", &Chem::MolecularGraphProperty::MATCH_EXPRESSION)
-		.def_readonly("COMPONENT_GROUPS", &Chem::MolecularGraphProperty::COMPONENT_GROUPS)
-		.def_readonly("TOPOLOGICAL_DISTANCE_MATRIX", &Chem::MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX)
-		.def_readonly("GEOMETRICAL_DISTANCE_MATRIX", &Chem::MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX)
-		.def_readonly("STOICHIOMETRIC_NUMBER", &Chem::MolecularGraphProperty::STOICHIOMETRIC_NUMBER)
-		.def_readonly("CONFORMATION_INDEX", &Chem::MolecularGraphProperty::CONFORMATION_INDEX)
-		.def_readonly("CONFORMER_ENERGIES", &Chem::MolecularGraphProperty::CONFORMER_ENERGIES)
-		.def_readonly("STRUCTURE_DATA", &Chem::MolecularGraphProperty::STRUCTURE_DATA)
-		.def_readonly("HASH_CODE", &Chem::MolecularGraphProperty::HASH_CODE)
-		.def_readonly("MDL_USER_INITIALS", &Chem::MolecularGraphProperty::MDL_USER_INITIALS)
-		.def_readonly("MDL_PROGRAM_NAME", &Chem::MolecularGraphProperty::MDL_PROGRAM_NAME)
-		.def_readonly("MDL_TIMESTAMP", &Chem::MolecularGraphProperty::MDL_TIMESTAMP)
-		.def_readonly("MDL_REGISTRY_NUMBER", &Chem::MolecularGraphProperty::MDL_REGISTRY_NUMBER)
-		.def_readonly("MDL_COMMENT", &Chem::MolecularGraphProperty::MDL_COMMENT)
-		.def_readonly("MDL_CTAB_VERSION", &Chem::MolecularGraphProperty::MDL_CTAB_VERSION)
-		.def_readonly("MDL_DIMENSIONALITY", &Chem::MolecularGraphProperty::MDL_DIMENSIONALITY) 
-		.def_readonly("MDL_SCALING_FACTOR1", &Chem::MolecularGraphProperty::MDL_SCALING_FACTOR1)
-		.def_readonly("MDL_SCALING_FACTOR2", &Chem::MolecularGraphProperty::MDL_SCALING_FACTOR2)
-		.def_readonly("MDL_ENERGY", &Chem::MolecularGraphProperty::MDL_ENERGY)
-		.def_readonly("MDL_CHIRAL_FLAG", &Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG)
-		.def_readonly("MOL2_CHARGE_TYPE", &Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE)
-		.def_readonly("MOL2_MOLECULE_TYPE", &Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE);
+    python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
+        .def_readonly("NAME", &Chem::MolecularGraphProperty::NAME) 
+        .def_readonly("COMPONENTS", &Chem::MolecularGraphProperty::COMPONENTS)
+        .def_readonly("RINGS", &Chem::MolecularGraphProperty::RINGS)
+        .def_readonly("SSSR", &Chem::MolecularGraphProperty::SSSR)
+        .def_readonly("CYCLIC_SUBSTRUCTURE", &Chem::MolecularGraphProperty::CYCLIC_SUBSTRUCTURE)
+        .def_readonly("AROMATIC_SUBSTRUCTURE", &Chem::MolecularGraphProperty::AROMATIC_SUBSTRUCTURE)
+        .def_readonly("PI_ELECTRON_SYSTEMS", &Chem::MolecularGraphProperty::PI_ELECTRON_SYSTEMS)
+        .def_readonly("MATCH_CONSTRAINTS", &Chem::MolecularGraphProperty::MATCH_CONSTRAINTS)
+        .def_readonly("MATCH_EXPRESSION", &Chem::MolecularGraphProperty::MATCH_EXPRESSION)
+        .def_readonly("COMPONENT_GROUPS", &Chem::MolecularGraphProperty::COMPONENT_GROUPS)
+        .def_readonly("TOPOLOGICAL_DISTANCE_MATRIX", &Chem::MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX)
+        .def_readonly("GEOMETRICAL_DISTANCE_MATRIX", &Chem::MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX)
+        .def_readonly("STOICHIOMETRIC_NUMBER", &Chem::MolecularGraphProperty::STOICHIOMETRIC_NUMBER)
+        .def_readonly("CONFORMATION_INDEX", &Chem::MolecularGraphProperty::CONFORMATION_INDEX)
+        .def_readonly("CONFORMER_ENERGIES", &Chem::MolecularGraphProperty::CONFORMER_ENERGIES)
+        .def_readonly("STRUCTURE_DATA", &Chem::MolecularGraphProperty::STRUCTURE_DATA)
+        .def_readonly("HASH_CODE", &Chem::MolecularGraphProperty::HASH_CODE)
+        .def_readonly("MDL_USER_INITIALS", &Chem::MolecularGraphProperty::MDL_USER_INITIALS)
+        .def_readonly("MDL_PROGRAM_NAME", &Chem::MolecularGraphProperty::MDL_PROGRAM_NAME)
+        .def_readonly("MDL_TIMESTAMP", &Chem::MolecularGraphProperty::MDL_TIMESTAMP)
+        .def_readonly("MDL_REGISTRY_NUMBER", &Chem::MolecularGraphProperty::MDL_REGISTRY_NUMBER)
+        .def_readonly("MDL_COMMENT", &Chem::MolecularGraphProperty::MDL_COMMENT)
+        .def_readonly("MDL_CTAB_VERSION", &Chem::MolecularGraphProperty::MDL_CTAB_VERSION)
+        .def_readonly("MDL_DIMENSIONALITY", &Chem::MolecularGraphProperty::MDL_DIMENSIONALITY) 
+        .def_readonly("MDL_SCALING_FACTOR1", &Chem::MolecularGraphProperty::MDL_SCALING_FACTOR1)
+        .def_readonly("MDL_SCALING_FACTOR2", &Chem::MolecularGraphProperty::MDL_SCALING_FACTOR2)
+        .def_readonly("MDL_ENERGY", &Chem::MolecularGraphProperty::MDL_ENERGY)
+        .def_readonly("MDL_CHIRAL_FLAG", &Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG)
+        .def_readonly("MOL2_CHARGE_TYPE", &Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE)
+        .def_readonly("MOL2_MOLECULE_TYPE", &Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE);
 }

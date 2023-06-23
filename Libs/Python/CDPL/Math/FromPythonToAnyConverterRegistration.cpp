@@ -36,16 +36,16 @@
 
 void CDPLPythonMath::registerFromPythonToAnyConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::DMatrix::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::LMatrix::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::ULMatrix::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::DMatrix::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::LMatrix::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::ULMatrix::SharedPointer&>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::DVector::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::LVector::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::ULVector::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::DVector::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::LVector::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::ULVector::SharedPointer&>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::Vector2DArray::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::Vector3DArray::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::Vector2DArray::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Math::Vector3DArray::SharedPointer&>();
 }

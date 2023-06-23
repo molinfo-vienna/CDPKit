@@ -33,20 +33,20 @@
 namespace 
 {
 
-	struct MolecularGraphProperty {};
+    struct MolecularGraphProperty {};
 }
 
 
 void CDPLPythonBiomol::exportMolecularGraphProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
-		.def_readonly("RESIDUE_CODE", &Biomol::MolecularGraphProperty::RESIDUE_CODE)
-		.def_readonly("RESIDUE_SEQUENCE_NUMBER", &Biomol::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER)
-		.def_readonly("RESIDUE_INSERTION_CODE", &Biomol::MolecularGraphProperty::RESIDUE_INSERTION_CODE)
-		.def_readonly("CHAIN_ID", &Biomol::MolecularGraphProperty::CHAIN_ID)
-		.def_readonly("MODEL_NUMBER", &Biomol::MolecularGraphProperty::MODEL_NUMBER)
-		.def_readonly("PDB_DATA", &Biomol::MolecularGraphProperty::PDB_DATA);
+    python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
+        .def_readonly("RESIDUE_CODE", &Biomol::MolecularGraphProperty::RESIDUE_CODE)
+        .def_readonly("RESIDUE_SEQUENCE_NUMBER", &Biomol::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER)
+        .def_readonly("RESIDUE_INSERTION_CODE", &Biomol::MolecularGraphProperty::RESIDUE_INSERTION_CODE)
+        .def_readonly("CHAIN_ID", &Biomol::MolecularGraphProperty::CHAIN_ID)
+        .def_readonly("MODEL_NUMBER", &Biomol::MolecularGraphProperty::MODEL_NUMBER)
+        .def_readonly("PDB_DATA", &Biomol::MolecularGraphProperty::PDB_DATA);
 }

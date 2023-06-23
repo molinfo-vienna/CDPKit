@@ -39,18 +39,18 @@ namespace CDPL
     namespace Chem
     {
 
-	/**
-	 * \brief DefaultTautomerGenerator.
-	 */
-	class CDPL_CHEM_API DefaultTautomerGenerator : public TautomerGenerator 
-	{
+    /**
+     * \brief DefaultTautomerGenerator.
+     */
+    class CDPL_CHEM_API DefaultTautomerGenerator : public TautomerGenerator 
+    {
 
-	  public:
-	    /**
-	     * \brief Constructs the \c %DefaultTautomerGenerator instance.
-	     */
-	    DefaultTautomerGenerator();
-	};
+      public:
+        /**
+         * \brief Constructs the \c %DefaultTautomerGenerator instance.
+         */
+        DefaultTautomerGenerator();
+    };
     }
 }
 

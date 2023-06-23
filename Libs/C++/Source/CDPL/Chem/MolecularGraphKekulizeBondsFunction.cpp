@@ -36,8 +36,8 @@ using namespace CDPL;
 
 void Chem::kekulizeBonds(MolecularGraph& molgraph)
 {
-	Util::STArray orders;
-	KekuleStructureCalculator kekulizer(molgraph, orders);
+    Util::STArray orders;
+    KekuleStructureCalculator kekulizer(molgraph, orders);
 
-	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), orders.getElementsBegin(), &setOrder);
+    Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), orders.getElementsBegin(), &setOrder);
 }

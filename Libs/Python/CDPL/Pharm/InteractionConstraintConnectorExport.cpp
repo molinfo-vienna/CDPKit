@@ -37,9 +37,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::InteractionConstraintConnector& con, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+                      CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return con(ftr1, ftr2);
+        return con(ftr1, ftr2);
     }
 }
 
@@ -50,15 +50,15 @@ void CDPLPythonPharm::exportInteractionConstraintConnector()
     using namespace CDPL;
 
     python::class_<Pharm::InteractionConstraintConnector, 
-				   boost::noncopyable>("InteractionConstraintConnector", python::no_init)
-		.def(python::init<const Pharm::InteractionConstraintConnector&>(
-				 (python::arg("self"), python::arg("con"))))
-		.def(python::init<bool, const Pharm::InteractionConstraintConnector::ConstraintFunction&, 
-			 const Pharm::InteractionConstraintConnector::ConstraintFunction&>(
-				 (python::arg("self"), python::arg("and_expr"), python::arg("func2"), python::arg("func1"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionConstraintConnector>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionConstraintConnector::operator=), 
-			 (python::arg("self"), python::arg("con")), python::return_self<>())
-		.def("__call__", &callOperator, 
-			 (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
+                   boost::noncopyable>("InteractionConstraintConnector", python::no_init)
+        .def(python::init<const Pharm::InteractionConstraintConnector&>(
+                 (python::arg("self"), python::arg("con"))))
+        .def(python::init<bool, const Pharm::InteractionConstraintConnector::ConstraintFunction&, 
+             const Pharm::InteractionConstraintConnector::ConstraintFunction&>(
+                 (python::arg("self"), python::arg("and_expr"), python::arg("func2"), python::arg("func1"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionConstraintConnector>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionConstraintConnector::operator=), 
+             (python::arg("self"), python::arg("con")), python::return_self<>())
+        .def("__call__", &callOperator, 
+             (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
 }

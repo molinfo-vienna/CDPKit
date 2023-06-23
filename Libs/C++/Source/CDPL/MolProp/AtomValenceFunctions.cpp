@@ -33,10 +33,10 @@ using namespace CDPL;
 
 std::size_t MolProp::calcExplicitValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::calcExplicitValence(atom, molgraph);
+    return Internal::calcExplicitValence(atom, molgraph);
 }
-	
+    
 std::size_t MolProp::calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::calcValence(atom, molgraph);
+    return Internal::calcValence(atom, molgraph);
 }

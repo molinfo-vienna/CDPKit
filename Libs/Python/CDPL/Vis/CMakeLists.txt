@@ -90,7 +90,7 @@ IF(HAVE_CAIRO_PNG_SUPPORT)
       PNGReactionWriterExport.cpp
       PNGMolecularGraphOutputHandlerExport.cpp
       PNGReactionOutputHandlerExport.cpp
-     )	
+     )    
 ENDIF(HAVE_CAIRO_PNG_SUPPORT)
 
 IF(HAVE_CAIRO_PDF_SUPPORT)
@@ -100,7 +100,7 @@ IF(HAVE_CAIRO_PDF_SUPPORT)
       PDFReactionWriterExport.cpp
       PDFMolecularGraphOutputHandlerExport.cpp
       PDFReactionOutputHandlerExport.cpp
-     )	
+     )    
 ENDIF(HAVE_CAIRO_PDF_SUPPORT)
 
 IF(HAVE_CAIRO_PS_SUPPORT)
@@ -110,7 +110,7 @@ IF(HAVE_CAIRO_PS_SUPPORT)
       PSReactionWriterExport.cpp
       PSMolecularGraphOutputHandlerExport.cpp
       PSReactionOutputHandlerExport.cpp
-     )	
+     )    
 ENDIF(HAVE_CAIRO_PS_SUPPORT)
 
 IF(HAVE_CAIRO_SVG_SUPPORT)
@@ -120,7 +120,7 @@ IF(HAVE_CAIRO_SVG_SUPPORT)
       SVGReactionWriterExport.cpp
       SVGMolecularGraphOutputHandlerExport.cpp
       SVGReactionOutputHandlerExport.cpp
-     )	
+     )    
 ENDIF(HAVE_CAIRO_SVG_SUPPORT)
 
 ADD_LIBRARY(_vis MODULE ${vis_MOD_SRCS})
@@ -139,8 +139,8 @@ ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis" COMPONENT CDPLPythonModules)
 INSTALL(TARGETS _vis DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Vis" COMPONENT CDPLPythonModules)

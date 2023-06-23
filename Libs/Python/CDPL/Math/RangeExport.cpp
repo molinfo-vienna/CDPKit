@@ -34,31 +34,31 @@
 
 void CDPLPythonMath::exportRange()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	typedef Math::Range<std::size_t> RangeType;
-	typedef RangeType::SizeType SizeType;
+    typedef Math::Range<std::size_t> RangeType;
+    typedef RangeType::SizeType SizeType;
 
-	python::class_<RangeType>("Range", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const RangeType&>((python::arg("self"), python::arg("r"))))
-		.def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("start"), python::arg("stop"))))
-		.def("getStart", &RangeType::getStart, python::arg("self"))
-		.def("getStop", &RangeType::getStop, python::arg("self"))
-		.def("getSize", &RangeType::getSize, python::arg("self"))
-		.def("isEmpty", &RangeType::isEmpty, python::arg("self"))
-		.def("getIndex", &RangeType::operator(), (python::arg("self"), python::arg("i")))
-		.def("assign", CDPLPythonBase::copyAssOp(&RangeType::operator=), (python::arg("self"), python::arg("r")), python::return_self<>())
-		.def("swap", static_cast<void (RangeType::*)(RangeType&)>(&RangeType::swap), (python::arg("self"), python::arg("r")))
-		.def("__eq__", &RangeType::operator==, (python::arg("self"), python::arg("r")))
-		.def("__ne__", &RangeType::operator!=, (python::arg("self"), python::arg("r")))
-		.def("__call__", &RangeType::operator(), (python::arg("self"), python::arg("i")))
-		.def("__getitem__", &RangeType::operator(), (python::arg("self"), python::arg("i")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<RangeType>())
-		.add_property("start", &RangeType::getStart)
-		.add_property("stop", &RangeType::getStop)
-		.add_property("size", &RangeType::getSize);
+    python::class_<RangeType>("Range", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const RangeType&>((python::arg("self"), python::arg("r"))))
+        .def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("start"), python::arg("stop"))))
+        .def("getStart", &RangeType::getStart, python::arg("self"))
+        .def("getStop", &RangeType::getStop, python::arg("self"))
+        .def("getSize", &RangeType::getSize, python::arg("self"))
+        .def("isEmpty", &RangeType::isEmpty, python::arg("self"))
+        .def("getIndex", &RangeType::operator(), (python::arg("self"), python::arg("i")))
+        .def("assign", CDPLPythonBase::copyAssOp(&RangeType::operator=), (python::arg("self"), python::arg("r")), python::return_self<>())
+        .def("swap", static_cast<void (RangeType::*)(RangeType&)>(&RangeType::swap), (python::arg("self"), python::arg("r")))
+        .def("__eq__", &RangeType::operator==, (python::arg("self"), python::arg("r")))
+        .def("__ne__", &RangeType::operator!=, (python::arg("self"), python::arg("r")))
+        .def("__call__", &RangeType::operator(), (python::arg("self"), python::arg("i")))
+        .def("__getitem__", &RangeType::operator(), (python::arg("self"), python::arg("i")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<RangeType>())
+        .add_property("start", &RangeType::getStart)
+        .add_property("stop", &RangeType::getStop)
+        .add_property("size", &RangeType::getSize);
 
-	python::def("range", &Math::range, (python::arg("start"), python::arg("stop")));
+    python::def("range", &Math::range, (python::arg("start"), python::arg("stop")));
 }

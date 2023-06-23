@@ -41,30 +41,30 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
-		class MolecularGraph;
+        class Atom;
+        class MolecularGraph;
 
-		/**
-		 * \brief AtomArray3DCoordinatesFunctor.
-		 */
-		class CDPL_CHEM_API AtomArray3DCoordinatesFunctor
-		{
+        /**
+         * \brief AtomArray3DCoordinatesFunctor.
+         */
+        class CDPL_CHEM_API AtomArray3DCoordinatesFunctor
+        {
 
-		  public:
-			AtomArray3DCoordinatesFunctor(const Math::Vector3DArray& coords, const MolecularGraph& molgraph): 
-				coordinates(&coords), molGraph(&molgraph) {}
+          public:
+            AtomArray3DCoordinatesFunctor(const Math::Vector3DArray& coords, const MolecularGraph& molgraph): 
+                coordinates(&coords), molGraph(&molgraph) {}
 
-			/**
-			 * \brief Returns the 3D-coordinates of the argument atom.
-			 * \param atom The atom.
-			 * \return The 3D-coordinates of the atom.
-			 */
-			const Math::Vector3D& operator()(const Atom& atom) const;
+            /**
+             * \brief Returns the 3D-coordinates of the argument atom.
+             * \param atom The atom.
+             * \return The 3D-coordinates of the atom.
+             */
+            const Math::Vector3D& operator()(const Atom& atom) const;
 
-		  private:
-			const Math::Vector3DArray* coordinates;
-			const MolecularGraph*      molGraph;
-		};
+          private:
+            const Math::Vector3DArray* coordinates;
+            const MolecularGraph*      molGraph;
+        };
     }
 }
 

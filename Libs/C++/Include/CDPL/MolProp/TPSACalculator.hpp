@@ -39,58 +39,58 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
-	
-	namespace MolProp
-	{
+        class MolecularGraph;
+    }
+    
+    namespace MolProp
+    {
 
-		/**
-		 * \brief TPSACalculator.
-		 * \see [\ref TPSA]
-		 */
-		class CDPL_MOLPROP_API TPSACalculator
-		{
+        /**
+         * \brief TPSACalculator.
+         * \see [\ref TPSA]
+         */
+        class CDPL_MOLPROP_API TPSACalculator
+        {
 
-		  public:
-			/**
-			 * \brief Constructs the \c %TPSACalculator instance.
-			 */
-			TPSACalculator();
+          public:
+            /**
+             * \brief Constructs the \c %TPSACalculator instance.
+             */
+            TPSACalculator();
 
-			/**
-			 * \brief Constructs the \c %TPSACalculator instance and calculates the \e TPSA of the molecular
-			 *        graph \a molgraph.
-			 *
-			 * The calculated \e TPSA can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to calculate the \e TPSA.
-			 */
-			TPSACalculator(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Constructs the \c %TPSACalculator instance and calculates the \e TPSA of the molecular
+             *        graph \a molgraph.
+             *
+             * The calculated \e TPSA can be retrieved by a call to getResult().
+             *
+             * \param molgraph The molecular graph for which to calculate the \e TPSA.
+             */
+            TPSACalculator(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Calculates the \e TPSA of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the \e TPSA.
-			 * \return The calculated \e TPSA of the molecular graph \a molgraph.
-			 */
-			double calculate(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Calculates the \e TPSA of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the \e TPSA.
+             * \return The calculated \e TPSA of the molecular graph \a molgraph.
+             */
+            double calculate(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Returns the result of the last \e TPSA calculation.
-			 * \return The result of the last \e TPSA calculation, or zero if a calculation has not yet been performed.
-			 */
-			double getResult() const;
+            /**
+             * \brief Returns the result of the last \e TPSA calculation.
+             * \return The result of the last \e TPSA calculation, or zero if a calculation has not yet been performed.
+             */
+            double getResult() const;
 
-		  private:
-			void init();
+          private:
+            void init();
 
-			Chem::PatternAtomTyper atomTyper;
-			double                 area;
-		};
-	}
+            Chem::PatternAtomTyper atomTyper;
+            double                 area;
+        };
+    }
 }
 
 #endif // CDPL_MOLPROP_TPSACALCULATOR_HPP

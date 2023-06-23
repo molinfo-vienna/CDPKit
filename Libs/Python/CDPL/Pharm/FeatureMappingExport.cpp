@@ -38,11 +38,11 @@ void CDPLPythonPharm::exportFeatureMapping()
     using namespace CDPL;
 
     python::class_<Pharm::FeatureMapping, Pharm::FeatureMapping::SharedPointer>("FeatureMapping", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Pharm::FeatureMapping&>((python::arg("self"), python::arg("mapping")))
-	     [python::with_custodian_and_ward<1, 2>()])
-	.def(CDPLPythonUtil::MultiMapVisitor<Pharm::FeatureMapping,
-	     python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
-	     python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
-	     python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Pharm::FeatureMapping&>((python::arg("self"), python::arg("mapping")))
+         [python::with_custodian_and_ward<1, 2>()])
+    .def(CDPLPythonUtil::MultiMapVisitor<Pharm::FeatureMapping,
+         python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
+         python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
+         python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
 }

@@ -34,36 +34,36 @@
 namespace
 {
 
-	bool containsFragmentWithBond(const CDPL::Chem::FragmentList& frag_list, CDPL::Chem::Bond& bond)
-	{
-		return CDPL::Chem::containsFragmentWithBond(frag_list, bond);
-	}
+    bool containsFragmentWithBond(const CDPL::Chem::FragmentList& frag_list, CDPL::Chem::Bond& bond)
+    {
+        return CDPL::Chem::containsFragmentWithBond(frag_list, bond);
+    }
 }
 
 
 void CDPLPythonChem::exportUtilityFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("parseSMARTS", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&, bool)>(&Chem::parseSMARTS), 
-				(python::arg("smarts"), python::arg("init_qry") = true));
-	python::def("parseSMARTS", static_cast<bool (*)(const std::string&, Chem::Molecule&, bool)>(&Chem::parseSMARTS), 
-				(python::arg("smarts"), python::arg("mol"), python::arg("init_qry") = true));
-	python::def("parseSMILES", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&)>(&Chem::parseSMILES), 
-				python::arg("smiles"));
-	python::def("parseSMILES", static_cast<bool (*)(const std::string&, Chem::Molecule&)>(&Chem::parseSMILES), 
-				(python::arg("smiles"), python::arg("mol")));
-	python::def("extendBoundingBox", &Chem::extendBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords"), python::arg("reset") = false));
-	python::def("insideBoundingBox", &Chem::insideBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords")));
-	python::def("isAromatic", &Chem::isAromatic, (python::arg("ring"), python::arg("molgraph"), python::arg("arom_bond_mask")));
-	python::def("isNotAromatic", &Chem::isNotAromatic, (python::arg("ring"), python::arg("molgraph")));
-	python::def("containsFragmentWithBond", &containsFragmentWithBond, (python::arg("frag_list"), python::arg("bond")));
-	python::def("containsFragmentWithMinSize", &Chem::containsFragmentWithMinSize, (python::arg("frag_list"), python::arg("min_size")));
-	python::def("atomTypesMatch", &Chem::atomTypesMatch, (python::arg("qry_type"), python::arg("tgt_type")));
-	python::def("sybylToAtomType", &Chem::sybylToAtomType, python::arg("sybyl_type"));
-	python::def("getSybylAtomTypeString", &Chem::getSybylAtomTypeString,  python::arg("sybyl_type"),
-				python::return_value_policy<python::copy_const_reference>());
-	python::def("getSybylBondTypeString", &Chem::getSybylBondTypeString,  python::arg("sybyl_type"),
-				python::return_value_policy<python::copy_const_reference>());
+    python::def("parseSMARTS", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&, bool)>(&Chem::parseSMARTS), 
+                (python::arg("smarts"), python::arg("init_qry") = true));
+    python::def("parseSMARTS", static_cast<bool (*)(const std::string&, Chem::Molecule&, bool)>(&Chem::parseSMARTS), 
+                (python::arg("smarts"), python::arg("mol"), python::arg("init_qry") = true));
+    python::def("parseSMILES", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&)>(&Chem::parseSMILES), 
+                python::arg("smiles"));
+    python::def("parseSMILES", static_cast<bool (*)(const std::string&, Chem::Molecule&)>(&Chem::parseSMILES), 
+                (python::arg("smiles"), python::arg("mol")));
+    python::def("extendBoundingBox", &Chem::extendBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords"), python::arg("reset") = false));
+    python::def("insideBoundingBox", &Chem::insideBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords")));
+    python::def("isAromatic", &Chem::isAromatic, (python::arg("ring"), python::arg("molgraph"), python::arg("arom_bond_mask")));
+    python::def("isNotAromatic", &Chem::isNotAromatic, (python::arg("ring"), python::arg("molgraph")));
+    python::def("containsFragmentWithBond", &containsFragmentWithBond, (python::arg("frag_list"), python::arg("bond")));
+    python::def("containsFragmentWithMinSize", &Chem::containsFragmentWithMinSize, (python::arg("frag_list"), python::arg("min_size")));
+    python::def("atomTypesMatch", &Chem::atomTypesMatch, (python::arg("qry_type"), python::arg("tgt_type")));
+    python::def("sybylToAtomType", &Chem::sybylToAtomType, python::arg("sybyl_type"));
+    python::def("getSybylAtomTypeString", &Chem::getSybylAtomTypeString,  python::arg("sybyl_type"),
+                python::return_value_policy<python::copy_const_reference>());
+    python::def("getSybylBondTypeString", &Chem::getSybylBondTypeString,  python::arg("sybyl_type"),
+                python::return_value_policy<python::copy_const_reference>());
 }

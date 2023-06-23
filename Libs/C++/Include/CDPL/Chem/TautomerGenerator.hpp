@@ -50,111 +50,111 @@ namespace CDPL
     namespace Chem
     {
 
-		/**
-		 * \brief TautomerGenerator.
-		 */
-		class CDPL_CHEM_API TautomerGenerator 
-		{
+        /**
+         * \brief TautomerGenerator.
+         */
+        class CDPL_CHEM_API TautomerGenerator 
+        {
 
-		  public:
-			enum Mode 
-			{
+          public:
+            enum Mode 
+            {
 
-			    TOPOLOGICALLY_UNIQUE,
-				GEOMETRICALLY_UNIQUE,
-				EXHAUSTIVE
-			};
+                TOPOLOGICALLY_UNIQUE,
+                GEOMETRICALLY_UNIQUE,
+                EXHAUSTIVE
+            };
 
-			typedef std::shared_ptr<TautomerGenerator> SharedPointer;
+            typedef std::shared_ptr<TautomerGenerator> SharedPointer;
 
-			typedef std::function<bool(MolecularGraph&)> CallbackFunction;
-			typedef std::function<void(MolecularGraph&)> CustomSetupFunction;
+            typedef std::function<bool(MolecularGraph&)> CallbackFunction;
+            typedef std::function<void(MolecularGraph&)> CustomSetupFunction;
 
-			/**
-			 * \brief Constructs the \c %TautomerGenerator instance.
-			 */
-			TautomerGenerator();
+            /**
+             * \brief Constructs the \c %TautomerGenerator instance.
+             */
+            TautomerGenerator();
 
-			TautomerGenerator(const TautomerGenerator& gen);
+            TautomerGenerator(const TautomerGenerator& gen);
 
-			virtual ~TautomerGenerator() {}
+            virtual ~TautomerGenerator() {}
 
-			TautomerGenerator& operator=(const TautomerGenerator& gen);
+            TautomerGenerator& operator=(const TautomerGenerator& gen);
 
-			void addTautomerizationRule(const TautomerizationRule::SharedPointer& rule);
+            void addTautomerizationRule(const TautomerizationRule::SharedPointer& rule);
 
-			const TautomerizationRule::SharedPointer& getTautomerizationRule(std::size_t idx) const;
+            const TautomerizationRule::SharedPointer& getTautomerizationRule(std::size_t idx) const;
 
-			void removeTautomerizationRule(std::size_t idx);
+            void removeTautomerizationRule(std::size_t idx);
 
-			std::size_t getNumTautomerizationRules() const;
+            std::size_t getNumTautomerizationRules() const;
 
-			void setCallbackFunction(const CallbackFunction& func);
+            void setCallbackFunction(const CallbackFunction& func);
 
-			const CallbackFunction& getCallbackFunction() const;
+            const CallbackFunction& getCallbackFunction() const;
 
-			void setMode(Mode mode);
+            void setMode(Mode mode);
 
-			Mode getMode() const;
+            Mode getMode() const;
 
-			void regardStereochemistry(bool regard);
+            void regardStereochemistry(bool regard);
 
-			bool stereochemistryRegarded() const;
+            bool stereochemistryRegarded() const;
 
-			void regardIsotopes(bool regard);
+            void regardIsotopes(bool regard);
 
-			bool isotopesRegarded() const;
+            bool isotopesRegarded() const;
 
-			void setCustomSetupFunction(const CustomSetupFunction& func);
+            void setCustomSetupFunction(const CustomSetupFunction& func);
 
-			/**
-			 * \brief Generates all unique tautomers of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the tautomers.
-			 */
-			void generate(const MolecularGraph& molgraph);
+            /**
+             * \brief Generates all unique tautomers of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to generate the tautomers.
+             */
+            void generate(const MolecularGraph& molgraph);
 
-		  private:
-			typedef Util::ObjectPool<BasicMolecule> MoleculeCache;
-			typedef MoleculeCache::SharedObjectPointer MoleculePtr;
+          private:
+            typedef Util::ObjectPool<BasicMolecule> MoleculeCache;
+            typedef MoleculeCache::SharedObjectPointer MoleculePtr;
 
-			bool init(const MolecularGraph& molgraph);
-			void initHashCalculator();
+            bool init(const MolecularGraph& molgraph);
+            void initHashCalculator();
 
-			MoleculePtr copyInputMolGraph(const MolecularGraph& molgraph);
+            MoleculePtr copyInputMolGraph(const MolecularGraph& molgraph);
 
-			void extractStereoCenters(const MolecularGraph& molgraph);
-			void extractAtomStereoCenters(const MolecularGraph& molgraph);
-			void extractBondStereoCenters(const MolecularGraph& molgraph);
+            void extractStereoCenters(const MolecularGraph& molgraph);
+            void extractAtomStereoCenters(const MolecularGraph& molgraph);
+            void extractBondStereoCenters(const MolecularGraph& molgraph);
 
-			bool addNewTautomer(const MoleculePtr& mol);
+            bool addNewTautomer(const MoleculePtr& mol);
 
-			std::uint64_t calcTautomerHashCode(const BasicMolecule& tautomer);
-		
-			typedef std::array<std::size_t, 3> BondDescriptor;
-			typedef std::vector<MoleculePtr> MoleculeList;
-			typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
-			typedef std::vector<BondDescriptor> BondDescrArray;
-			typedef std::vector<std::size_t> SizeTArray;
-			typedef std::unordered_set<std::uint64_t> HashCodeSet;
-			typedef std::array<std::size_t, 6> StereoCenter;
-			typedef std::vector<StereoCenter> StereoCenterList;
+            std::uint64_t calcTautomerHashCode(const BasicMolecule& tautomer);
+        
+            typedef std::array<std::size_t, 3> BondDescriptor;
+            typedef std::vector<MoleculePtr> MoleculeList;
+            typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
+            typedef std::vector<BondDescriptor> BondDescrArray;
+            typedef std::vector<std::size_t> SizeTArray;
+            typedef std::unordered_set<std::uint64_t> HashCodeSet;
+            typedef std::array<std::size_t, 6> StereoCenter;
+            typedef std::vector<StereoCenter> StereoCenterList;
 
-			MoleculeCache         molCache;
-			CallbackFunction      callbackFunc;
-			Mode                  mode;
-			bool                  regStereo;
-			bool                  regIsotopes;
-			CustomSetupFunction   customSetupFunc;
-			TautRuleList          tautRules;
-			MoleculeList          currGeneration;
-			MoleculeList          nextGeneration;
-			StereoCenterList      atomStereoCenters;
-			StereoCenterList      bondStereoCenters;
-			HashCodeSet           tautHashCodes;
-			HashCodeCalculator    hashCalculator;
-			BondDescrArray        tautomerBonds;
-			SizeTArray            shaInput;
-		};
+            MoleculeCache         molCache;
+            CallbackFunction      callbackFunc;
+            Mode                  mode;
+            bool                  regStereo;
+            bool                  regIsotopes;
+            CustomSetupFunction   customSetupFunc;
+            TautRuleList          tautRules;
+            MoleculeList          currGeneration;
+            MoleculeList          nextGeneration;
+            StereoCenterList      atomStereoCenters;
+            StereoCenterList      bondStereoCenters;
+            HashCodeSet           tautHashCodes;
+            HashCodeCalculator    hashCalculator;
+            BondDescrArray        tautomerBonds;
+            SizeTArray            shaInput;
+        };
     }
 }
 

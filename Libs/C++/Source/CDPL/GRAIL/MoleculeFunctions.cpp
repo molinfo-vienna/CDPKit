@@ -40,7 +40,7 @@ using namespace CDPL;
 void GRAIL::prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_prot_state)
 {
     if (std_prot_state)
-	Chem::ProtonationStateStandardizer().standardize(mol, Chem::ProtonationStateStandardizer::PHYSIOLOGICAL_CONDITION_STATE);
+    Chem::ProtonationStateStandardizer().standardize(mol, Chem::ProtonationStateStandardizer::PHYSIOLOGICAL_CONDITION_STATE);
     
     Pharm::prepareForPharmacophoreGeneration(mol, false);
 
@@ -48,7 +48,7 @@ void GRAIL::prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_p
     const Math::DVector& logp_contribs = calculator.getAtomContributions();
 
     for (std::size_t i = 0, num_atoms = mol.getNumAtoms(); i < num_atoms; i++) 
-	MolProp::setHydrophobicity(mol.getAtom(i), logp_contribs[i]);
+    MolProp::setHydrophobicity(mol.getAtom(i), logp_contribs[i]);
     
     Chem::perceiveSybylAtomTypes(mol, true);
     ForceField::perceiveMMFF94AromaticRings(mol, true);

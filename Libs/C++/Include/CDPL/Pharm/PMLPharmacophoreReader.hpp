@@ -38,47 +38,47 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class PMLDataReader;
-		class Pharmacophore;
+        class PMLDataReader;
+        class Pharmacophore;
 
-		/**
-		 * \brief A reader for pharmacophore data in the native I/O format of <em>LigandScout</em>.
-		 */
-		class CDPL_PHARM_API PMLPharmacophoreReader : public Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>
-		{
+        /**
+         * \brief A reader for pharmacophore data in the native I/O format of <em>LigandScout</em>.
+         */
+        class CDPL_PHARM_API PMLPharmacophoreReader : public Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PMLPharmacophoreReader instance that will read the pharmacophore data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			PMLPharmacophoreReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %PMLPharmacophoreReader instance that will read the pharmacophore data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            PMLPharmacophoreReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~PMLPharmacophoreReader();
+            /**
+             * \brief Destructor.
+             */
+            ~PMLPharmacophoreReader();
 
-		private:
-			friend class Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>;
+        private:
+            friend class Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>;
 
-			PMLPharmacophoreReader(const PMLPharmacophoreReader&);
+            PMLPharmacophoreReader(const PMLPharmacophoreReader&);
 
-			PMLPharmacophoreReader& operator=(const PMLPharmacophoreReader&);
+            PMLPharmacophoreReader& operator=(const PMLPharmacophoreReader&);
 
-			bool readData(std::istream&, Pharmacophore&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Pharmacophore&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<PMLDataReader> PMLDataReaderPtr;
+            typedef std::auto_ptr<PMLDataReader> PMLDataReaderPtr;
 
-			PMLDataReaderPtr reader;
-		};
-	}
+            PMLDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_PHARM_PMLPHARMACOPHOREREADER_HPP

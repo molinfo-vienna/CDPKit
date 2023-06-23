@@ -37,77 +37,77 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename S>
-		class Range
-		{
+        template <typename S>
+        class Range
+        {
 
-			typedef Range<S> SelfType;
+            typedef Range<S> SelfType;
 
-		public:
-			typedef S SizeType;
+        public:
+            typedef S SizeType;
 
-			Range(): start(0), stop(0) {}
+            Range(): start(0), stop(0) {}
 
-			Range(SizeType start, SizeType stop): start(start), stop(stop) {
-				CDPL_MATH_CHECK(start <= stop, "Invalid range specification", Base::RangeError);
-			}
+            Range(SizeType start, SizeType stop): start(start), stop(stop) {
+                CDPL_MATH_CHECK(start <= stop, "Invalid range specification", Base::RangeError);
+            }
 
-			SizeType operator()(SizeType i) const {
-				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
-				return (start + i);
-			}
+            SizeType operator()(SizeType i) const {
+                CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
+                return (start + i);
+            }
 
-			SizeType getStart() const {
-				return start;
-			}
+            SizeType getStart() const {
+                return start;
+            }
 
-			SizeType getStop() const {
-				return stop;
-			}
+            SizeType getStop() const {
+                return stop;
+            }
 
-			SizeType getSize() const {
-				return (stop - start);
-			}
+            SizeType getSize() const {
+                return (stop - start);
+            }
 
-			bool isEmpty() const {
-				return (stop == start);
-			}
-			
-			bool operator==(const Range& r) const {
-				return (start == r.start && stop == r.stop);
-			}
-			
-			bool operator!=(const Range& r) const {
-				return !this->operator==(r);
-			}
+            bool isEmpty() const {
+                return (stop == start);
+            }
+            
+            bool operator==(const Range& r) const {
+                return (start == r.start && stop == r.stop);
+            }
+            
+            bool operator!=(const Range& r) const {
+                return !this->operator==(r);
+            }
 
-			void swap(Range& r) {
-				if (this == &r)
-					return;
+            void swap(Range& r) {
+                if (this == &r)
+                    return;
 
-				std::swap(start, r.start);
-				std::swap(stop, r.stop);
-			}
-	
-			friend void swap(Range& r1, Range& r2) {
-				r1.swap(r2);
-			}
+                std::swap(start, r.start);
+                std::swap(stop, r.stop);
+            }
+    
+            friend void swap(Range& r1, Range& r2) {
+                r1.swap(r2);
+            }
 
-		private:
-			SizeType start;
-			SizeType stop;
-		};
+        private:
+            SizeType start;
+            SizeType stop;
+        };
 
-		inline
-		Range<std::size_t> 
-		range(std::size_t start, std::size_t stop)
-		{
-			return Range<std::size_t>(start, stop);
-		}
-	}
+        inline
+        Range<std::size_t> 
+        range(std::size_t start, std::size_t stop)
+        {
+            return Range<std::size_t>(start, stop);
+        }
+    }
 }
 
 #endif // CDPL_MATH_RANGE_HPP

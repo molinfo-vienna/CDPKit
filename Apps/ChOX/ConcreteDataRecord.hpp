@@ -32,19 +32,19 @@
 namespace ChOX
 {
 
-	template <typename T>
-	class ConcreteDataRecord : public DataRecord
-	{
+    template <typename T>
+    class ConcreteDataRecord : public DataRecord
+    {
 
-	public:
-		virtual ~ConcreteDataRecord() {}
+    public:
+        virtual ~ConcreteDataRecord() {}
 
-		virtual typename T::SharedPointer getData() const = 0;
+        virtual typename T::SharedPointer getData() const = 0;
 
-		void accept(DataRecordVisitor& visitor) const {
-			visitor.visit(*this);
-		}
-	};
+        void accept(DataRecordVisitor& visitor) const {
+            visitor.visit(*this);
+        }
+    };
 }
 
 #endif // CHOX_CONCRETEDATARECORD_HPP

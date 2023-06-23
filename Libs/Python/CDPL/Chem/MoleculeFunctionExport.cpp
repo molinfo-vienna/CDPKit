@@ -32,13 +32,13 @@
 
 void CDPLPythonChem::exportMoleculeFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("makeHydrogenDeplete", &Chem::makeHydrogenDeplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
-	python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
-				(python::arg("mol"), python::arg("flags"), python::arg("corr_impl_h_count") = true));
-	python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
-	python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
-	python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));
+    python::def("makeHydrogenDeplete", &Chem::makeHydrogenDeplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
+    python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
+                (python::arg("mol"), python::arg("flags"), python::arg("corr_impl_h_count") = true));
+    python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
+    python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
+    python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));
 }

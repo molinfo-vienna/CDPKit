@@ -32,21 +32,21 @@
 namespace 
 {
 
-	struct BondPropertyFlag {};
+    struct BondPropertyFlag {};
 }
 
 
 void CDPLPythonChem::exportBondPropertyFlags()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondPropertyFlag, boost::noncopyable>("BondPropertyFlag", python::no_init)
-		.def_readonly("NONE", &Chem::BondPropertyFlag::NONE)
-		.def_readonly("DEFAULT", &Chem::BondPropertyFlag::DEFAULT)
-		.def_readonly("AROMATICITY", &Chem::BondPropertyFlag::AROMATICITY)
-		.def_readonly("CIP_CONFIGURATION", &Chem::BondPropertyFlag::CIP_CONFIGURATION)
-		.def_readonly("CONFIGURATION", &Chem::BondPropertyFlag::CONFIGURATION)
-		.def_readonly("ORDER", &Chem::BondPropertyFlag::ORDER)
-		.def_readonly("TOPOLOGY", &Chem::BondPropertyFlag::TOPOLOGY);
+    python::class_<BondPropertyFlag, boost::noncopyable>("BondPropertyFlag", python::no_init)
+        .def_readonly("NONE", &Chem::BondPropertyFlag::NONE)
+        .def_readonly("DEFAULT", &Chem::BondPropertyFlag::DEFAULT)
+        .def_readonly("AROMATICITY", &Chem::BondPropertyFlag::AROMATICITY)
+        .def_readonly("CIP_CONFIGURATION", &Chem::BondPropertyFlag::CIP_CONFIGURATION)
+        .def_readonly("CONFIGURATION", &Chem::BondPropertyFlag::CONFIGURATION)
+        .def_readonly("ORDER", &Chem::BondPropertyFlag::ORDER)
+        .def_readonly("TOPOLOGY", &Chem::BondPropertyFlag::TOPOLOGY);
 }

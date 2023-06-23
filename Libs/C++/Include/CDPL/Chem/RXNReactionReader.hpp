@@ -38,80 +38,80 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MDLDataReader;
-		class Reaction;
+        class MDLDataReader;
+        class Reaction;
 
-		/**
-		 * \brief A reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
-		 *
-		 * \c %RXNReactionReader supports the following control-parameters:
-		 *
-		 * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-		 *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-		 *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_IGNORE_PARITY</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether the stereo parity of atoms shall be ignored</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRIM_STRINGS</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to remove leading and trailing whitespace from string values</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRIM_LINES</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether to remove leading and trailing whitespace from data lines</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_IGNORE_LINE_LENGTH_LIMIT</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to check if data lines exceed the maximum allowed line length</td>
-		 *  </tr>
-		 * </table>
-		 */
-		class CDPL_CHEM_API RXNReactionReader : public Util::StreamDataReader<Reaction, RXNReactionReader>
-		{
+        /**
+         * \brief A reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+         *
+         * \c %RXNReactionReader supports the following control-parameters:
+         *
+         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
+         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
+         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_IGNORE_PARITY</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether the stereo parity of atoms shall be ignored</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRIM_STRINGS</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to remove leading and trailing whitespace from string values</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRIM_LINES</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether to remove leading and trailing whitespace from data lines</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_IGNORE_LINE_LENGTH_LIMIT</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to check if data lines exceed the maximum allowed line length</td>
+         *  </tr>
+         * </table>
+         */
+        class CDPL_CHEM_API RXNReactionReader : public Util::StreamDataReader<Reaction, RXNReactionReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %RXNReactionReader instance that will read the reaction data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			RXNReactionReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %RXNReactionReader instance that will read the reaction data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            RXNReactionReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~RXNReactionReader();
+            /**
+             * \brief Destructor.
+             */
+            ~RXNReactionReader();
 
-		private:
-			friend class Util::StreamDataReader<Reaction, RXNReactionReader>;
+        private:
+            friend class Util::StreamDataReader<Reaction, RXNReactionReader>;
 
-			RXNReactionReader(const RXNReactionReader&);
+            RXNReactionReader(const RXNReactionReader&);
 
-			RXNReactionReader& operator=(const RXNReactionReader&);
+            RXNReactionReader& operator=(const RXNReactionReader&);
 
-			bool readData(std::istream&, Reaction&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Reaction&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<MDLDataReader> MDLDataReaderPtr;
+            typedef std::auto_ptr<MDLDataReader> MDLDataReaderPtr;
 
-			MDLDataReaderPtr reader;
-		};
-	}
+            MDLDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_RXNREACTIONREADER_HPP

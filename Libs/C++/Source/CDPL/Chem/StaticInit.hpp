@@ -31,46 +31,46 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		void initAtomProperties();
-		void initBondProperties();
-		void initMolecularGraphProperties();
-		void initReactionProperties();
-		void initEntity3DProperties();
-		void initAtomPropertyDefaults();
-		void initBondPropertyDefaults();
-		void initMolecularGraphPropertyDefaults();
-		void initReactionPropertyDefaults();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-	}
+        void initAtomProperties();
+        void initBondProperties();
+        void initMolecularGraphProperties();
+        void initReactionProperties();
+        void initEntity3DProperties();
+        void initAtomPropertyDefaults();
+        void initBondPropertyDefaults();
+        void initMolecularGraphPropertyDefaults();
+        void initReactionPropertyDefaults();
+        void initControlParameters();
+        void initControlParameterDefaults();
+        void initDataFormats();
+    }
 }
 
 namespace
 {
 
-	struct CDPLChemInit
-	{
+    struct CDPLChemInit
+    {
 
-		CDPLChemInit() {
-			CDPL::Chem::initAtomProperties();
-			CDPL::Chem::initBondProperties();
-			CDPL::Chem::initMolecularGraphProperties();
-			CDPL::Chem::initReactionProperties();
-			CDPL::Chem::initEntity3DProperties();
-			CDPL::Chem::initAtomPropertyDefaults();
-			CDPL::Chem::initBondPropertyDefaults();
-			CDPL::Chem::initMolecularGraphPropertyDefaults();
-			CDPL::Chem::initReactionPropertyDefaults();
-			CDPL::Chem::initControlParameters();
-			CDPL::Chem::initControlParameterDefaults();
-			CDPL::Chem::initDataFormats();
-		}
+        CDPLChemInit() {
+            CDPL::Chem::initAtomProperties();
+            CDPL::Chem::initBondProperties();
+            CDPL::Chem::initMolecularGraphProperties();
+            CDPL::Chem::initReactionProperties();
+            CDPL::Chem::initEntity3DProperties();
+            CDPL::Chem::initAtomPropertyDefaults();
+            CDPL::Chem::initBondPropertyDefaults();
+            CDPL::Chem::initMolecularGraphPropertyDefaults();
+            CDPL::Chem::initReactionPropertyDefaults();
+            CDPL::Chem::initControlParameters();
+            CDPL::Chem::initControlParameterDefaults();
+            CDPL::Chem::initDataFormats();
+        }
 
-	} cdplChemInit;
+    } cdplChemInit;
 }
 
 #endif // CDPL_CHEM_STATIC_LINK

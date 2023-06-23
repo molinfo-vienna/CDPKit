@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
-	
-		typedef Util::CompressedDataReader<MMTFMoleculeReader, Util::BZip2IStream> MMTFBZ2MoleculeReader;
-	}
+    namespace Biomol
+    {
+    
+        typedef Util::CompressedDataReader<MMTFMoleculeReader, Util::BZip2IStream> MMTFBZ2MoleculeReader;
+    }
 }
 
 #endif // CDPL_BIOMOL_MMTFBZ2MOLECULEREADER_HPP

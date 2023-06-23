@@ -39,36 +39,36 @@
 namespace
 {
 
-	template <typename ObjType1, typename ObjType2 = void>
-	struct NOTMatchExprExport
-	{
+    template <typename ObjType1, typename ObjType2 = void>
+    struct NOTMatchExprExport
+    {
 
-		NOTMatchExprExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        NOTMatchExprExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			python::class_<Chem::NOTMatchExpression<ObjType1, ObjType2>, 
-				typename Chem::NOTMatchExpression<ObjType1, ObjType2>::SharedPointer, 
-				python::bases<Chem::MatchExpression<ObjType1, ObjType2> > >(name, python::no_init)
-				.def(python::init<const Chem::NOTMatchExpression<ObjType1, ObjType2>&>(python::arg("expression"))
-					 [python::with_custodian_and_ward<1, 2>()])
-				.def(python::init<const typename Chem::MatchExpression<ObjType1, ObjType2>::SharedPointer&>(python::arg("expression"))
-					 [python::with_custodian_and_ward<1, 2>()])
-				.def("assign", CDPLPythonBase::copyAssOp(&Chem::NOTMatchExpression<ObjType1, ObjType2>::operator=),
-					 python::arg("expression"), 
-					 python::return_self<python::with_custodian_and_ward<1, 2> >());
-		}
-	};
+            python::class_<Chem::NOTMatchExpression<ObjType1, ObjType2>, 
+                typename Chem::NOTMatchExpression<ObjType1, ObjType2>::SharedPointer, 
+                python::bases<Chem::MatchExpression<ObjType1, ObjType2> > >(name, python::no_init)
+                .def(python::init<const Chem::NOTMatchExpression<ObjType1, ObjType2>&>(python::arg("expression"))
+                     [python::with_custodian_and_ward<1, 2>()])
+                .def(python::init<const typename Chem::MatchExpression<ObjType1, ObjType2>::SharedPointer&>(python::arg("expression"))
+                     [python::with_custodian_and_ward<1, 2>()])
+                .def("assign", CDPLPythonBase::copyAssOp(&Chem::NOTMatchExpression<ObjType1, ObjType2>::operator=),
+                     python::arg("expression"), 
+                     python::return_self<python::with_custodian_and_ward<1, 2> >());
+        }
+    };
 }
 
 
 void CDPLPythonChem::exportNOTMatchExpressions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	NOTMatchExprExport<Chem::Atom, Chem::MolecularGraph>("NOTAtomMatchExpression");
-	NOTMatchExprExport<Chem::Bond, Chem::MolecularGraph>("NOTBondMatchExpression");
-	NOTMatchExprExport<Chem::MolecularGraph>("NOTMolecularGraphMatchExpression");
-	NOTMatchExprExport<Chem::Reaction>("NOTReactionMatchExpression");
+    NOTMatchExprExport<Chem::Atom, Chem::MolecularGraph>("NOTAtomMatchExpression");
+    NOTMatchExprExport<Chem::Bond, Chem::MolecularGraph>("NOTBondMatchExpression");
+    NOTMatchExprExport<Chem::MolecularGraph>("NOTMolecularGraphMatchExpression");
+    NOTMatchExprExport<Chem::Reaction>("NOTReactionMatchExpression");
 }

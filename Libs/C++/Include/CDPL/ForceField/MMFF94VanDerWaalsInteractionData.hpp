@@ -39,7 +39,7 @@ namespace CDPL
     namespace ForceField 
     {
 
-	typedef Util::Array<MMFF94VanDerWaalsInteraction> MMFF94VanDerWaalsInteractionData;
+    typedef Util::Array<MMFF94VanDerWaalsInteraction> MMFF94VanDerWaalsInteractionData;
     }
 }
 

@@ -30,13 +30,13 @@
 namespace CDPL
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		bool localtime(std::time_t time, std::tm& cal_time);
+        bool localtime(std::time_t time, std::tm& cal_time);
 
-		bool gmtime(std::time_t time, std::tm& cal_time);
-	}
+        bool gmtime(std::time_t time, std::tm& cal_time);
+    }
 }
 
 #endif // CDPL_INTERNAL_TIME_HPP

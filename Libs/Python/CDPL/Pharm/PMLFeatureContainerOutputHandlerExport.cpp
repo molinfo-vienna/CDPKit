@@ -31,10 +31,10 @@
 
 void CDPLPythonPharm::exportPMLFeatureContainerOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::PMLFeatureContainerOutputHandler, 
-				   python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("PMLFeatureContainerOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::PMLFeatureContainerOutputHandler, 
+                   python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("PMLFeatureContainerOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

@@ -38,32 +38,32 @@ void CDPLPythonForceField::exportMMFF94AngleBendingInteractionParameterizer()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94AngleBendingInteractionParameterizer, 
-				   ForceField::MMFF94AngleBendingInteractionParameterizer::SharedPointer>("MMFF94AngleBendingInteractionParameterizer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94AngleBendingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94AngleBendingInteractionData&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AngleBendingInteractionParameterizer>())	
-		.def("setFilterFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypeFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setBondTypeIndexFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setBondTypeIndexFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAromaticRingSetFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAromaticRingSetFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAngleBendingParameterTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAngleBendingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondStretchingParameterTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setBondStretchingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondStretchingRuleParameterTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setBondStretchingRuleParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setParameterAtomTypeMap", &ForceField::MMFF94AngleBendingInteractionParameterizer::setParameterAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingInteractionParameterizer::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("parameterize", &ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+                   ForceField::MMFF94AngleBendingInteractionParameterizer::SharedPointer>("MMFF94AngleBendingInteractionParameterizer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94AngleBendingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94AngleBendingInteractionData&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AngleBendingInteractionParameterizer>())    
+        .def("setFilterFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomTypeFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setBondTypeIndexFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setBondTypeIndexFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAromaticRingSetFunction", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAromaticRingSetFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAngleBendingParameterTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAngleBendingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondStretchingParameterTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setBondStretchingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondStretchingRuleParameterTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setBondStretchingRuleParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94AngleBendingInteractionParameterizer::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setParameterAtomTypeMap", &ForceField::MMFF94AngleBendingInteractionParameterizer::setParameterAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingInteractionParameterizer::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("parameterize", &ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
 }

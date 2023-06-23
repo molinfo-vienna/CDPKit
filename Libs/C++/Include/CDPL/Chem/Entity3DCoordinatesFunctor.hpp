@@ -36,27 +36,27 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Entity3D;
+        class Entity3D;
 
-		/**
-		 * \brief Entity3DCoordinatesFunctor.
-		 */
-		struct CDPL_CHEM_API Entity3DCoordinatesFunctor
-		{
+        /**
+         * \brief Entity3DCoordinatesFunctor.
+         */
+        struct CDPL_CHEM_API Entity3DCoordinatesFunctor
+        {
 
-		  public:
-			/**
-			 * \brief Returns the 3D-coordinates of the argument entity object.
-			 * \param entity The entity object.
-			 * \return The 3D-coordinates of the entity object.
-			 * \see Chem::get3DCoordinates(const Entity3D&)
-			 */
-			const Math::Vector3D& operator()(const Entity3D& entity) const;
-		};
-	}
+          public:
+            /**
+             * \brief Returns the 3D-coordinates of the argument entity object.
+             * \param entity The entity object.
+             * \return The 3D-coordinates of the entity object.
+             * \see Chem::get3DCoordinates(const Entity3D&)
+             */
+            const Math::Vector3D& operator()(const Entity3D& entity) const;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ENTITY3DCOORDINATESFUNCTOR_HPP

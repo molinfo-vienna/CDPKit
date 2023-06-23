@@ -27,10 +27,10 @@
 
 void CDPLPythonMath::exportCMatrixTypes3()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CMatrixExport<Math::Matrix4F>("Matrix4F");
-	CMatrixExport<Math::Matrix4D>("Matrix4D");
-	CMatrixExport<Math::Matrix4L>("Matrix4L");
-	CMatrixExport<Math::Matrix4UL>("Matrix4UL");
+    CMatrixExport<Math::Matrix4F>("Matrix4F");
+    CMatrixExport<Math::Matrix4D>("Matrix4D");
+    CMatrixExport<Math::Matrix4L>("Matrix4L");
+    CMatrixExport<Math::Matrix4UL>("Matrix4UL");
 }

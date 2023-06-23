@@ -40,52 +40,52 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteraction
-		{
+        class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteraction
+        {
 
-		  public:
-			MMFF94ElectrostaticInteraction(std::size_t atom1_idx, std::size_t atom2_idx, double atom1_chg, 
-										   double atom2_chg, double scale_fact, double de_const, double dist_expo):
-				atom1Idx(atom1_idx), atom2Idx(atom2_idx), atom1Chg(atom1_chg), atom2Chg(atom2_chg),
-				scaleFact(scale_fact), deConst(de_const), distExpo(dist_expo) {}
+          public:
+            MMFF94ElectrostaticInteraction(std::size_t atom1_idx, std::size_t atom2_idx, double atom1_chg, 
+                                           double atom2_chg, double scale_fact, double de_const, double dist_expo):
+                atom1Idx(atom1_idx), atom2Idx(atom2_idx), atom1Chg(atom1_chg), atom2Chg(atom2_chg),
+                scaleFact(scale_fact), deConst(de_const), distExpo(dist_expo) {}
 
-			std::size_t getAtom1Index() const {
-				return atom1Idx;
-			}
+            std::size_t getAtom1Index() const {
+                return atom1Idx;
+            }
 
-			std::size_t getAtom2Index() const {
-				return atom2Idx;
-			}
+            std::size_t getAtom2Index() const {
+                return atom2Idx;
+            }
 
-			double getAtom1Charge() const {
-				return atom1Chg;
-			}
+            double getAtom1Charge() const {
+                return atom1Chg;
+            }
 
-			double getAtom2Charge() const {
-				return atom2Chg;
-			}
+            double getAtom2Charge() const {
+                return atom2Chg;
+            }
 
-			double getScalingFactor() const {
-				return scaleFact;
-			}
+            double getScalingFactor() const {
+                return scaleFact;
+            }
 
-			double getDielectricConstant() const {
-				return deConst;
-			}
+            double getDielectricConstant() const {
+                return deConst;
+            }
 
-			double getDistanceExponent() const {
-				return distExpo;
-			}
+            double getDistanceExponent() const {
+                return distExpo;
+            }
 
-		  private:
-			std::size_t atom1Idx;
-			std::size_t atom2Idx;
-			double      atom1Chg;
-			double      atom2Chg;
-			double      scaleFact;
-			double      deConst;
-			double      distExpo;
-		};			
+          private:
+            std::size_t atom1Idx;
+            std::size_t atom2Idx;
+            double      atom1Chg;
+            double      atom2Chg;
+            double      scaleFact;
+            double      deConst;
+            double      distExpo;
+        };            
     }
 }
 

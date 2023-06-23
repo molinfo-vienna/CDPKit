@@ -47,166 +47,166 @@ namespace CDPL
 
     namespace Shape
     {
-		
-		class CDPL_SHAPE_API GaussianShapeFunctionAlignment
-		{
+        
+        class CDPL_SHAPE_API GaussianShapeFunctionAlignment
+        {
 
-		  public:
-			class Result;
+          public:
+            class Result;
 
-		  private:
-			typedef std::vector<Result> ResultList;
-			
-		  public:
-			static constexpr double      DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
-			static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+          private:
+            typedef std::vector<Result> ResultList;
+            
+          public:
+            static constexpr double      DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+            static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
-			typedef std::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
+            typedef std::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 
-			typedef ResultList::const_iterator ConstResultIterator;
+            typedef ResultList::const_iterator ConstResultIterator;
 
-			typedef GaussianShapeOverlapFunction::ColorFilterFunction ColorFilterFunction;
-			typedef GaussianShapeOverlapFunction::ColorMatchFunction ColorMatchFunction;
+            typedef GaussianShapeOverlapFunction::ColorFilterFunction ColorFilterFunction;
+            typedef GaussianShapeOverlapFunction::ColorMatchFunction ColorMatchFunction;
 
-			class Result
-			{
+            class Result
+            {
 
-			public:
-				Result(const Math::Matrix4D& xform, double overlap, double col_overlap):
-					transform(xform), overlap(overlap), colOverlap(col_overlap) {}
+            public:
+                Result(const Math::Matrix4D& xform, double overlap, double col_overlap):
+                    transform(xform), overlap(overlap), colOverlap(col_overlap) {}
 
-				const Math::Matrix4D& getTransform() const {
-					return transform;
-				}
+                const Math::Matrix4D& getTransform() const {
+                    return transform;
+                }
 
-				double getOverlap() const {
-					return overlap;
-				}
+                double getOverlap() const {
+                    return overlap;
+                }
 
-				double getColorOverlap() const {
-					return colOverlap;
-				}
-				
-			private:
-				friend class GaussianShapeFunctionAlignment;
+                double getColorOverlap() const {
+                    return colOverlap;
+                }
+                
+            private:
+                friend class GaussianShapeFunctionAlignment;
 
-				Result(): transform(), overlap(0.0), colOverlap(0.0) {}
+                Result(): transform(), overlap(0.0), colOverlap(0.0) {}
 
-				Math::Matrix4D transform;
-				double         overlap;
-				double         colOverlap;
-			};
+                Math::Matrix4D transform;
+                double         overlap;
+                double         colOverlap;
+            };
 
-			GaussianShapeFunctionAlignment();
+            GaussianShapeFunctionAlignment();
 
-			GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class);
+            GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class);
 
-			~GaussianShapeFunctionAlignment();
+            ~GaussianShapeFunctionAlignment();
 
-			void setOverlapFunction(GaussianShapeOverlapFunction& func);
-			
-			GaussianShapeOverlapFunction& getOverlapFunction() const;
+            void setOverlapFunction(GaussianShapeOverlapFunction& func);
+            
+            GaussianShapeOverlapFunction& getOverlapFunction() const;
 
-			const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
+            const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
 
-			FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
+            FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
 
-			void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
-			
-			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
+            void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
+            
+            GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 
-			const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
+            const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
 
-			PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
+            PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
 
-			void setColorMatchFunction(const ColorMatchFunction& func);
+            void setColorMatchFunction(const ColorMatchFunction& func);
 
-			const ColorMatchFunction& getColorMatchFunction() const;
-	
-			void setColorFilterFunction(const ColorFilterFunction& func);
+            const ColorMatchFunction& getColorMatchFunction() const;
+    
+            void setColorFilterFunction(const ColorFilterFunction& func);
 
-			const ColorFilterFunction& getColorFilterFunction() const;
+            const ColorFilterFunction& getColorFilterFunction() const;
 
-			void performAlignment(bool perf_align);
+            void performAlignment(bool perf_align);
 
-			bool performAlignment() const;
+            bool performAlignment() const;
 
-			void optimizeOverlap(bool optimize);
+            void optimizeOverlap(bool optimize);
 
-			bool optimizeOverlap() const;
+            bool optimizeOverlap() const;
 
-			void greedyOptimization(bool greedy);
+            void greedyOptimization(bool greedy);
 
-			bool greedyOptimization() const;
+            bool greedyOptimization() const;
 
-			void setMaxNumOptimizationIterations(std::size_t max_iter);
+            void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumOptimizationIterations() const;
+            std::size_t getMaxNumOptimizationIterations() const;
 
-			void setOptimizationStopGradient(double grad_norm);
+            void setOptimizationStopGradient(double grad_norm);
 
-			double getOptimizationStopGradient() const;
+            double getOptimizationStopGradient() const;
 
-			unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
+            unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
-			unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+            unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
+            void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
-			const GaussianShapeFunction* getReference() const;
-		
-			double calcSelfOverlap(const GaussianShapeFunction& func);
+            const GaussianShapeFunction* getReference() const;
+        
+            double calcSelfOverlap(const GaussianShapeFunction& func);
 
-			double calcColorSelfOverlap(const GaussianShapeFunction& func);
+            double calcColorSelfOverlap(const GaussianShapeFunction& func);
 
-			void calcColorOverlaps(bool calc);
+            void calcColorOverlaps(bool calc);
 
-			bool calcColorOverlaps() const;
+            bool calcColorOverlaps() const;
 
-			bool align(const GaussianShapeFunction& func, unsigned int sym_class);
+            bool align(const GaussianShapeFunction& func, unsigned int sym_class);
 
-			std::size_t getNumResults() const;
+            std::size_t getNumResults() const;
 
-			const Result& getResult(std::size_t idx) const;
+            const Result& getResult(std::size_t idx) const;
 
-			ConstResultIterator getResultsBegin() const;
+            ConstResultIterator getResultsBegin() const;
 
-			ConstResultIterator getResultsEnd() const;	
+            ConstResultIterator getResultsEnd() const;    
 
-			ConstResultIterator begin() const;
+            ConstResultIterator begin() const;
 
-			ConstResultIterator end() const;	
-		
-		  private:
-			GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);
+            ConstResultIterator end() const;    
+        
+          private:
+            GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);
 
-			GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment);
+            GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment);
 
-			bool checkValidity(const GaussianShapeFunction& func) const;
+            bool checkValidity(const GaussianShapeFunction& func) const;
 
-			double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
-			double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
-			
-			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
+            double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
+            double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
+            
+            typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
 
-			FastGaussianShapeOverlapFunction      defOverlapFunc;
-			PrincipalAxesAlignmentStartGenerator  defStartGen;
-			GaussianShapeOverlapFunction*         overlapFunc;
-			GaussianShapeAlignmentStartGenerator* startGen;
-			const GaussianShapeFunction*          refShapeFunc;
-			unsigned int                          refShapeSymClass;
-			bool                                  perfAlignment;
-			bool                                  calcColOverlaps;
-			bool                                  optOverlap;
-			bool                                  greedyOpt;
-			std::size_t                           maxNumOptIters;
-			double                                optStopGrad;
-			Math::Vector3DArray                   startPoseCoords;
-			Math::Vector3DArray                   optPoseCoords;
-			Math::Vector3DArray                   optPoseCoordsGrad;
-			BFGSMinimizer                         minimizer;
-			ResultList                            results;
-		};
+            FastGaussianShapeOverlapFunction      defOverlapFunc;
+            PrincipalAxesAlignmentStartGenerator  defStartGen;
+            GaussianShapeOverlapFunction*         overlapFunc;
+            GaussianShapeAlignmentStartGenerator* startGen;
+            const GaussianShapeFunction*          refShapeFunc;
+            unsigned int                          refShapeSymClass;
+            bool                                  perfAlignment;
+            bool                                  calcColOverlaps;
+            bool                                  optOverlap;
+            bool                                  greedyOpt;
+            std::size_t                           maxNumOptIters;
+            double                                optStopGrad;
+            Math::Vector3DArray                   startPoseCoords;
+            Math::Vector3DArray                   optPoseCoords;
+            Math::Vector3DArray                   optPoseCoordsGrad;
+            BFGSMinimizer                         minimizer;
+            ResultList                            results;
+        };
     }
 }
 

@@ -30,89 +30,89 @@
 
 BOOST_AUTO_TEST_CASE(AtomBondMappingTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
+    Molecule mol;
 
-	Atom* lap1 = &mol.addAtom();
-	Atom* rap1 = &mol.addAtom();
+    Atom* lap1 = &mol.addAtom();
+    Atom* rap1 = &mol.addAtom();
 
-	Bond* lbp1 = &mol.addBond(0, 1);
-	Bond* rbp1 = &mol.addBond(1, 0);
-
-//-----
-
-	AtomBondMapping m1;
-
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
-
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
+    Bond* lbp1 = &mol.addBond(0, 1);
+    Bond* rbp1 = &mol.addBond(1, 0);
 
 //-----
 
-	m1.getAtomMapping().insertEntry(lap1, rap1);
+    AtomBondMapping m1;
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
-
-//-----
-
-	m1.getBondMapping().insertEntry(lbp1, rbp1);
-
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
-
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
 
 //-----
 
-	AtomBondMapping m2;
+    m1.getAtomMapping().insertEntry(lap1, rap1);
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getAtomMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getAtomMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getBondMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getBondMapping().getSize() == 0);
-
-	BOOST_CHECK(m2 != m1);
-	BOOST_CHECK(m2 == m2);
-
-	m2 = m1;
-
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
-
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
-
-	BOOST_CHECK(m2 == m1);
-	BOOST_CHECK(m2 == m2);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
 
 //-----
 
-	m1.clear();
+    m1.getBondMapping().insertEntry(lbp1, rbp1);
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 1);
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 1);
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
+//-----
 
-	BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
-	BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
+    AtomBondMapping m2;
 
-	BOOST_CHECK(m2 != m1);
-	BOOST_CHECK(m2 == m2);
-	BOOST_CHECK(m1 == m1);
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getAtomMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getAtomMapping().getSize() == 0);
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getBondMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getBondMapping().getSize() == 0);
+
+    BOOST_CHECK(m2 != m1);
+    BOOST_CHECK(m2 == m2);
+
+    m2 = m1;
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
+
+    BOOST_CHECK(m2 == m1);
+    BOOST_CHECK(m2 == m2);
+
+//-----
+
+    m1.clear();
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getAtomMapping().getSize() == 0);
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m1).getBondMapping().getSize() == 0);
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getAtomMapping().getSize() == 1);
+
+    BOOST_CHECK(const_cast<const AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
+    BOOST_CHECK(const_cast<AtomBondMapping&>(m2).getBondMapping().getSize() == 1);
+
+    BOOST_CHECK(m2 != m1);
+    BOOST_CHECK(m2 == m2);
+    BOOST_CHECK(m1 == m1);
 }
 

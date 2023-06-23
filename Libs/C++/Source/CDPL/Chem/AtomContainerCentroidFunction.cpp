@@ -35,12 +35,12 @@ using namespace CDPL;
 bool Chem::calcCentroid(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr)
 {
     if (cntnr.getNumAtoms() == 0)
-		return false;
+        return false;
 
     ctr.clear();
 
     for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		ctr.plusAssign(coords_func(*it));
+        ctr.plusAssign(coords_func(*it));
 
     ctr /= cntnr.getNumAtoms();
 

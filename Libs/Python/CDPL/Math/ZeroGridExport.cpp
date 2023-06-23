@@ -37,34 +37,34 @@
 namespace
 {
 
-	template <typename GridType>
-	struct ZeroGridExport
-	{
+    template <typename GridType>
+    struct ZeroGridExport
+    {
 
-		ZeroGridExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ZeroGridExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename GridType::SizeType SizeType;
+            typedef typename GridType::SizeType SizeType;
 
-			python::class_<GridType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const GridType&>((python::arg("self"), python::arg("g"))))
-				.def(python::init<SizeType, SizeType, SizeType>((python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"))))
-				.def("resize", &GridType::resize, (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
-				.def(ConstGridVisitor<GridType>())
-				.def(ConstGridContainerVisitor<GridType>())
-				.def(GridAssignAndSwapVisitor<GridType>());
-		}
-	};
+            python::class_<GridType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const GridType&>((python::arg("self"), python::arg("g"))))
+                .def(python::init<SizeType, SizeType, SizeType>((python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"))))
+                .def("resize", &GridType::resize, (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
+                .def(ConstGridVisitor<GridType>())
+                .def(ConstGridContainerVisitor<GridType>())
+                .def(GridAssignAndSwapVisitor<GridType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportZeroGridTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ZeroGridExport<Math::FZeroGrid>("FZeroGrid");
-	ZeroGridExport<Math::DZeroGrid>("DZeroGrid");
+    ZeroGridExport<Math::FZeroGrid>("FZeroGrid");
+    ZeroGridExport<Math::DZeroGrid>("DZeroGrid");
 }

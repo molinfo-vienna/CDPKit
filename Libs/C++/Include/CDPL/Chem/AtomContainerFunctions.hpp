@@ -42,71 +42,71 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
-	
-		class AtomContainer;
-		class Fragment;
-		class Molecule;
+    namespace Chem 
+    {
+    
+        class AtomContainer;
+        class Fragment;
+        class Molecule;
 
-		
-		CDPL_CHEM_API bool hasCoordinates(const AtomContainer& cntnr, std::size_t dim);
+        
+        CDPL_CHEM_API bool hasCoordinates(const AtomContainer& cntnr, std::size_t dim);
 
-		
-		CDPL_CHEM_API void get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append = false);
+        
+        CDPL_CHEM_API void get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append = false);
 
-		CDPL_CHEM_API void set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coords);
+        CDPL_CHEM_API void set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coords);
 
-		CDPL_CHEM_API void transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx);
-
-
-		CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append = false);
+        CDPL_CHEM_API void transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx);
 
 
-		CDPL_CHEM_API void clearConformations(AtomContainer& cntnr);
-
-		CDPL_CHEM_API std::size_t getNumConformations(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API void applyConformation(AtomContainer& cntnr, std::size_t conf_idx);	
-
-		CDPL_CHEM_API void getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords, bool append = false);
-
-		CDPL_CHEM_API void setConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Vector3DArray& coords);
-
-		CDPL_CHEM_API void addConformation(AtomContainer& cntnr, const Math::Vector3DArray& coords);
-
-		CDPL_CHEM_API void transformConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Matrix4D& mtx);
-
-		CDPL_CHEM_API void transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mtx);
+        CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append = false);
 
 
-		CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
+        CDPL_CHEM_API void clearConformations(AtomContainer& cntnr);
 
-		CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);
+        CDPL_CHEM_API std::size_t getNumConformations(const AtomContainer& cntnr);
+
+        CDPL_CHEM_API void applyConformation(AtomContainer& cntnr, std::size_t conf_idx);    
+
+        CDPL_CHEM_API void getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords, bool append = false);
+
+        CDPL_CHEM_API void setConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Vector3DArray& coords);
+
+        CDPL_CHEM_API void addConformation(AtomContainer& cntnr, const Math::Vector3DArray& coords);
+
+        CDPL_CHEM_API void transformConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Matrix4D& mtx);
+
+        CDPL_CHEM_API void transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mtx);
 
 
-		CDPL_CHEM_API std::size_t buildAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true);
+        CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
+
+        CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);
 
 
-		CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
-
-		CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
-
-		CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
-
-		CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
+        CDPL_CHEM_API std::size_t buildAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true);
 
 
-		CDPL_CHEM_API bool calcCenterOfMass(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
+        CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
 
-		CDPL_CHEM_API bool calcCentroid(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
-		
-		CDPL_CHEM_API void calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func, bool reset = true);	
+        CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
 
-		CDPL_CHEM_API bool insideBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);	
+        CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);
 
-		CDPL_CHEM_API bool intersectsBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);	
-	}
+        CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
+
+
+        CDPL_CHEM_API bool calcCenterOfMass(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
+
+        CDPL_CHEM_API bool calcCentroid(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
+        
+        CDPL_CHEM_API void calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func, bool reset = true);    
+
+        CDPL_CHEM_API bool insideBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);    
+
+        CDPL_CHEM_API bool intersectsBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);    
+    }
 }
 
 #endif // CDPL_CHEM_ATOMCONTAINERFUNCTIONS_HPP

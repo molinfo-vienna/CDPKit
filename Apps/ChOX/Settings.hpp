@@ -43,61 +43,61 @@ class QSettings;
 namespace ChOX
 {
 
-	class Settings : public QObject, public SettingsContainer
-	{
+    class Settings : public QObject, public SettingsContainer
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		Settings(QObject* parent = 0);
+    public:
+        Settings(QObject* parent = 0);
 
-		const SettingsContainer& getReaderControlParameters(const std::string&) const;
-		const SettingsContainer& getWriterControlParameters(const std::string&) const;
+        const SettingsContainer& getReaderControlParameters(const std::string&) const;
+        const SettingsContainer& getWriterControlParameters(const std::string&) const;
 
-		SettingsContainer& getReaderControlParameters(const std::string&);
-		SettingsContainer& getWriterControlParameters(const std::string&);
+        SettingsContainer& getReaderControlParameters(const std::string&);
+        SettingsContainer& getWriterControlParameters(const std::string&);
 
-	public slots:
-		void load();
-		void save() const;
+    public slots:
+        void load();
+        void save() const;
 
-	signals:
-		void controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
+    signals:
+        void controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
 
-	private:
-		void writeLineStyleParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
-		void writeFontParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
-		void writeColorParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
-		void writeSizeSpecParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+    private:
+        void writeLineStyleParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeFontParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeColorParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeSizeSpecParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
-		void writeAtomColorTableParam(QSettings&) const;
+        void writeAtomColorTableParam(QSettings&) const;
 
-		void writeDBCreationModeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeDBCreationModeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
-		void writeStrParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        void writeStrParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
-		template <typename T>
-		void writeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+        template <typename T>
+        void writeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
-		void readLineStyleParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Pen::LineStyle&);
-		void readFontParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Font&);
-		void readColorParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Color&);
-		void readSizeSpecParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::SizeSpecification&);
+        void readLineStyleParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Pen::LineStyle&);
+        void readFontParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Font&);
+        void readColorParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::Color&);
+        void readSizeSpecParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::SizeSpecification&);
 
-		void readAtomColorTableParam(QSettings&);
+        void readAtomColorTableParam(QSettings&);
 
-		void readDBCreationModeParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, CDPL::Pharm::ScreeningDBCreator::Mode) const;
+        void readDBCreationModeParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, CDPL::Pharm::ScreeningDBCreator::Mode) const;
 
-		template <typename T>
-		void readParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const T&);
+        template <typename T>
+        void readParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const T&);
 
-		void parameterChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
+        void parameterChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
 
-		typedef std::map<std::string, SettingsContainer> IOControlParamMap;
+        typedef std::map<std::string, SettingsContainer> IOControlParamMap;
 
-		IOControlParamMap readerControlParams;
-		IOControlParamMap writerControlParams;
-	};
+        IOControlParamMap readerControlParams;
+        IOControlParamMap writerControlParams;
+    };
 }
 
 #endif // CHOX_SETTINGS_HPP

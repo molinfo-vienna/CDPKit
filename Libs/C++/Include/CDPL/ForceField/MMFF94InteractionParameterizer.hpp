@@ -75,130 +75,130 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
-		class Bond;
+        class Atom;
+        class Bond;
     }
 
     namespace ForceField 
     {
 
-		class MMFF94InteractionData;
+        class MMFF94InteractionData;
 
-		class CDPL_FORCEFIELD_API MMFF94InteractionParameterizer
-		{
+        class CDPL_FORCEFIELD_API MMFF94InteractionParameterizer
+        {
 
-		  public:
-			typedef std::shared_ptr<MMFF94InteractionParameterizer> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94InteractionParameterizer> SharedPointer;
 
-			MMFF94InteractionParameterizer(unsigned int param_set = MMFF94ParameterSet::STATIC);
+            MMFF94InteractionParameterizer(unsigned int param_set = MMFF94ParameterSet::STATIC);
 
-			MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer);
+            MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer);
 
-			void setBondStretchingFilterFunction(const InteractionFilterFunction2& func); 
+            void setBondStretchingFilterFunction(const InteractionFilterFunction2& func); 
 
-			void setAngleBendingFilterFunction(const InteractionFilterFunction3& func); 
+            void setAngleBendingFilterFunction(const InteractionFilterFunction3& func); 
 
-			void setStretchBendFilterFunction(const InteractionFilterFunction3& func); 
+            void setStretchBendFilterFunction(const InteractionFilterFunction3& func); 
 
-			void setOutOfPlaneBendingFilterFunction(const InteractionFilterFunction4& func); 
+            void setOutOfPlaneBendingFilterFunction(const InteractionFilterFunction4& func); 
 
-			void setTorsionFilterFunction(const InteractionFilterFunction4& func); 
+            void setTorsionFilterFunction(const InteractionFilterFunction4& func); 
 
-			void setElectrostaticFilterFunction(const InteractionFilterFunction2& func); 
+            void setElectrostaticFilterFunction(const InteractionFilterFunction2& func); 
 
-			void setVanDerWaalsFilterFunction(const InteractionFilterFunction2& func); 
+            void setVanDerWaalsFilterFunction(const InteractionFilterFunction2& func); 
 
-			void clearFilterFunctions();
+            void clearFilterFunctions();
 
-			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
+            void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
-			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
+            void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
 
-			void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
+            void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
 
-			void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
+            void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
-			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setFormalAtomChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
+            void setFormalAtomChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
 
-			void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
+            void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
 
-			void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
+            void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
 
-			void setPrimaryToParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
+            void setPrimaryToParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void setAngleBendingParameterTable(const MMFF94AngleBendingParameterTable::SharedPointer& table);
+            void setAngleBendingParameterTable(const MMFF94AngleBendingParameterTable::SharedPointer& table);
 
-			void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
+            void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
-			void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
+            void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
 
-			void setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table);
+            void setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table);
 
-			void setDefaultStretchBendParameterTable(const MMFF94DefaultStretchBendParameterTable::SharedPointer& table);
+            void setDefaultStretchBendParameterTable(const MMFF94DefaultStretchBendParameterTable::SharedPointer& table);
 
-			void setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table);
+            void setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table);
 
-			void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
+            void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
 
-			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
+            void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-			void setDielectricConstant(double de_const);
+            void setDielectricConstant(double de_const);
 
-			void setDistanceExponent(double dist_expo);
+            void setDistanceExponent(double dist_expo);
 
-			void setParameterSet(unsigned int param_set);
+            void setParameterSet(unsigned int param_set);
 
-			MMFF94InteractionParameterizer& operator=(const MMFF94InteractionParameterizer& parameterizer);
+            MMFF94InteractionParameterizer& operator=(const MMFF94InteractionParameterizer& parameterizer);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
-							  unsigned int ia_types = InteractionType::ALL, bool strict = true);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
+                              unsigned int ia_types = InteractionType::ALL, bool strict = true);
 
-		  private:
-			void setPropertyFunctions();
+          private:
+            void setPropertyFunctions();
 
-			unsigned int getBondTypeIndex(const Chem::Bond& bond) const;
+            unsigned int getBondTypeIndex(const Chem::Bond& bond) const;
 
-			unsigned int getNumericAtomType(const Chem::Atom& atom) const;
+            unsigned int getNumericAtomType(const Chem::Atom& atom) const;
 
-			const std::string& getSymbolicAtomType(const Chem::Atom& atom) const;
+            const std::string& getSymbolicAtomType(const Chem::Atom& atom) const;
 
-			double getAtomCharge(const Chem::Atom& atom) const;
+            double getAtomCharge(const Chem::Atom& atom) const;
 
-			const Chem::FragmentList::SharedPointer& getAromaticRings(const Chem::MolecularGraph& molgraph) const;
+            const Chem::FragmentList::SharedPointer& getAromaticRings(const Chem::MolecularGraph& molgraph) const;
 
-			std::size_t getTopologicalDistance(const Chem::Atom& atom1, const Chem::Atom& atom2, 
-											   const Chem::MolecularGraph& molgraph) const;
+            std::size_t getTopologicalDistance(const Chem::Atom& atom1, const Chem::Atom& atom2, 
+                                               const Chem::MolecularGraph& molgraph) const;
 
-			void setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types, bool strict);
+            void setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types, bool strict);
 
-			void setupAromaticRingSet();
-			void setupAtomTypes(bool strict);
-			void setupBondTypeIndices(bool strict);
-			void setupAtomCharges(bool strict);
-			void setupTopDistances();
+            void setupAromaticRingSet();
+            void setupAtomTypes(bool strict);
+            void setupBondTypeIndices(bool strict);
+            void setupAtomCharges(bool strict);
+            void setupTopDistances();
 
-			MMFF94BondStretchingInteractionParameterizer    bondStretchingParameterizer;
-			MMFF94AngleBendingInteractionParameterizer      angleBendingParameterizer;
-			MMFF94StretchBendInteractionParameterizer       stretchBendParameterizer;
-			MMFF94OutOfPlaneBendingInteractionParameterizer outOfPlaneParameterizer;
-			MMFF94TorsionInteractionParameterizer           torsionParameterizer;
-			MMFF94VanDerWaalsInteractionParameterizer       vanDerWaalsParameterizer;
-			MMFF94ElectrostaticInteractionParameterizer     electrostaticParameterizer;
-			MMFF94AtomTyper                                 atomTyper;
-			MMFF94BondTyper                                 bondTyper;
-			MMFF94ChargeCalculator                          chargeCalculator;
-			MMFF94AromaticSSSRSubset::SharedPointer         aromRings;
-			Chem::FragmentList::SharedPointer               usedAromRings;
-			Math::ULMatrix::SharedPointer                   topDistMatrix;
-			Math::ULMatrix::SharedPointer                   usedTopDistMatrix;
-			Util::UIArray                                   numAtomTypes;   
-			Util::SArray                                    symAtomTypes;   
-			Util::UIArray                                   bondTypeIndices;   
-			Util::DArray                                    atomCharges;
-			const Chem::MolecularGraph*                     molGraph;
-		};			
+            MMFF94BondStretchingInteractionParameterizer    bondStretchingParameterizer;
+            MMFF94AngleBendingInteractionParameterizer      angleBendingParameterizer;
+            MMFF94StretchBendInteractionParameterizer       stretchBendParameterizer;
+            MMFF94OutOfPlaneBendingInteractionParameterizer outOfPlaneParameterizer;
+            MMFF94TorsionInteractionParameterizer           torsionParameterizer;
+            MMFF94VanDerWaalsInteractionParameterizer       vanDerWaalsParameterizer;
+            MMFF94ElectrostaticInteractionParameterizer     electrostaticParameterizer;
+            MMFF94AtomTyper                                 atomTyper;
+            MMFF94BondTyper                                 bondTyper;
+            MMFF94ChargeCalculator                          chargeCalculator;
+            MMFF94AromaticSSSRSubset::SharedPointer         aromRings;
+            Chem::FragmentList::SharedPointer               usedAromRings;
+            Math::ULMatrix::SharedPointer                   topDistMatrix;
+            Math::ULMatrix::SharedPointer                   usedTopDistMatrix;
+            Util::UIArray                                   numAtomTypes;   
+            Util::SArray                                    symAtomTypes;   
+            Util::UIArray                                   bondTypeIndices;   
+            Util::DArray                                    atomCharges;
+            const Chem::MolecularGraph*                     molGraph;
+        };            
     }
 }
 

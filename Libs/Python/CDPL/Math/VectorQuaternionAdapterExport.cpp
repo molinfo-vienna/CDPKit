@@ -43,43 +43,43 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct VectorQuaternionAdapterExport
-	{
-		
-		typedef CDPL::Math::VectorQuaternionAdapter<ExpressionType> VectorAdapterType;
-		typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, VectorAdapterType> VectorAdapterWrapper;
-		typedef typename VectorAdapterWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename VectorAdapterWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct VectorQuaternionAdapterExport
+    {
+        
+        typedef CDPL::Math::VectorQuaternionAdapter<ExpressionType> VectorAdapterType;
+        typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, VectorAdapterType> VectorAdapterWrapper;
+        typedef typename VectorAdapterWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename VectorAdapterWrapper::SharedPointer WrapperPointerType;
 
-		VectorQuaternionAdapterExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        VectorQuaternionAdapterExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<VectorAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const VectorAdapterWrapper&>((python::arg("self"), python::arg("a"))))
-				.def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorAdapterType>())
-				.def(AssignFunctionGeneratorVisitor<VectorAdapterType, ConstQuaternionExpression>("e"))
-				.def(ConstQuaternionVisitor<VectorAdapterType>("a"))
-				.def(QuaternionAssignAndSwapVisitor<VectorAdapterType>("a"))
-				.def(QuaternionVisitor<VectorAdapterType>("a"))
-				.def(WrappedDataVisitor<VectorAdapterWrapper>());
+            python::class_<VectorAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const VectorAdapterWrapper&>((python::arg("self"), python::arg("a"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorAdapterType>())
+                .def(AssignFunctionGeneratorVisitor<VectorAdapterType, ConstQuaternionExpression>("e"))
+                .def(ConstQuaternionVisitor<VectorAdapterType>("a"))
+                .def(QuaternionAssignAndSwapVisitor<VectorAdapterType>("a"))
+                .def(QuaternionVisitor<VectorAdapterType>("a"))
+                .def(WrappedDataVisitor<VectorAdapterWrapper>());
 
-			python::def("quat", &quat, python::arg("e"));
-		}
+            python::def("quat", &quat, python::arg("e"));
+        }
 
-		static WrapperPointerType quat(const ExpressionPointerType& e) {
-			return WrapperPointerType(new VectorAdapterWrapper(e));
-		}
-	};
+        static WrapperPointerType quat(const ExpressionPointerType& e) {
+            return WrapperPointerType(new VectorAdapterWrapper(e));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportVectorQuaternionAdapterTypes()
 {
-	VectorQuaternionAdapterExport<VectorExpression<float> >("FVectorQuaternionAdapter");
-	VectorQuaternionAdapterExport<VectorExpression<double> >("DVectorQuaternionAdapter");
-	VectorQuaternionAdapterExport<VectorExpression<long> >("LVectorQuaternionAdapter");
-	VectorQuaternionAdapterExport<VectorExpression<unsigned long> >("ULVectorQuaternionAdapter");
+    VectorQuaternionAdapterExport<VectorExpression<float> >("FVectorQuaternionAdapter");
+    VectorQuaternionAdapterExport<VectorExpression<double> >("DVectorQuaternionAdapter");
+    VectorQuaternionAdapterExport<VectorExpression<long> >("LVectorQuaternionAdapter");
+    VectorQuaternionAdapterExport<VectorExpression<unsigned long> >("ULVectorQuaternionAdapter");
 }

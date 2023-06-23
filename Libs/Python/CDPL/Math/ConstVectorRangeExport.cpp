@@ -40,48 +40,48 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct ConstVectorRangeExport
-	{
-	
-		typedef CDPL::Math::Range<std::size_t> RangeType;
-		typedef CDPL::Math::VectorRange<const ExpressionType> VectorRangeType;
-		typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, RangeType, VectorRangeType> VectorRangeWrapper;
-		typedef typename VectorRangeWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename VectorRangeWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct ConstVectorRangeExport
+    {
+    
+        typedef CDPL::Math::Range<std::size_t> RangeType;
+        typedef CDPL::Math::VectorRange<const ExpressionType> VectorRangeType;
+        typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, RangeType, VectorRangeType> VectorRangeWrapper;
+        typedef typename VectorRangeWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename VectorRangeWrapper::SharedPointer WrapperPointerType;
 
-		ConstVectorRangeExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
-		
-			python::class_<VectorRangeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const VectorRangeWrapper&>((python::arg("self"), python::arg("r"))))
-				.def(python::init<const ExpressionPointerType&, const RangeType&>((python::arg("self"), python::arg("e"), python::arg("r"))))
-				.def("getStart", &VectorRangeType::getStart, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorRangeType>())
-				.def(ConstVectorVisitor<VectorRangeType>("r"))
-				.def(WrappedDataVisitor<VectorRangeWrapper>())
-				.add_property("start", &VectorRangeType::getStart);
+        ConstVectorRangeExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
+        
+            python::class_<VectorRangeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const VectorRangeWrapper&>((python::arg("self"), python::arg("r"))))
+                .def(python::init<const ExpressionPointerType&, const RangeType&>((python::arg("self"), python::arg("e"), python::arg("r"))))
+                .def("getStart", &VectorRangeType::getStart, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorRangeType>())
+                .def(ConstVectorVisitor<VectorRangeType>("r"))
+                .def(WrappedDataVisitor<VectorRangeWrapper>())
+                .add_property("start", &VectorRangeType::getStart);
 
-			python::def("range", &range1, (python::arg("e"), python::arg("r")));
-			python::def("range", &range2, (python::arg("e"), python::arg("start"), python::arg("stop")));
-		}
+            python::def("range", &range1, (python::arg("e"), python::arg("r")));
+            python::def("range", &range2, (python::arg("e"), python::arg("start"), python::arg("stop")));
+        }
 
-		static WrapperPointerType range1(const ExpressionPointerType& e, const RangeType& r) {
-			return WrapperPointerType(new VectorRangeWrapper(e, r));
-		}
+        static WrapperPointerType range1(const ExpressionPointerType& e, const RangeType& r) {
+            return WrapperPointerType(new VectorRangeWrapper(e, r));
+        }
 
-		static WrapperPointerType range2(const ExpressionPointerType& e, std::size_t start, std::size_t stop) {
-			return WrapperPointerType(new VectorRangeWrapper(e, RangeType(start, stop)));
-		}
-	};
+        static WrapperPointerType range2(const ExpressionPointerType& e, std::size_t start, std::size_t stop) {
+            return WrapperPointerType(new VectorRangeWrapper(e, RangeType(start, stop)));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportConstVectorRangeTypes()
 {
-	ConstVectorRangeExport<ConstVectorExpression<float> >("ConstFVectorRange");
-	ConstVectorRangeExport<ConstVectorExpression<double> >("ConstDVectorRange");
-	ConstVectorRangeExport<ConstVectorExpression<long> >("ConstLVectorRange");
-	ConstVectorRangeExport<ConstVectorExpression<unsigned long> >("ConstULVectorRange");
+    ConstVectorRangeExport<ConstVectorExpression<float> >("ConstFVectorRange");
+    ConstVectorRangeExport<ConstVectorExpression<double> >("ConstDVectorRange");
+    ConstVectorRangeExport<ConstVectorExpression<long> >("ConstLVectorRange");
+    ConstVectorRangeExport<ConstVectorExpression<unsigned long> >("ConstULVectorRange");
 }

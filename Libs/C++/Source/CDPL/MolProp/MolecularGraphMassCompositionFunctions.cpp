@@ -41,74 +41,74 @@ using namespace CDPL;
 
 double MolProp::calcMass(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	double mass = 0.0;
-	std::size_t imp_h_count = 0;
+    using namespace Chem;
+    
+    double mass = 0.0;
+    std::size_t imp_h_count = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
 
-		mass += getAtomicWeight(atom);
-		imp_h_count += getImplicitHydrogenCount(atom);
-	}
+        mass += getAtomicWeight(atom);
+        imp_h_count += getImplicitHydrogenCount(atom);
+    }
 
-	mass += AtomDictionary::getAtomicWeight(AtomType::H, 0) * imp_h_count;
+    mass += AtomDictionary::getAtomicWeight(AtomType::H, 0) * imp_h_count;
 
-	return mass;
+    return mass;
 }
 
 void MolProp::calcMassComposition(const Chem::MolecularGraph& molgraph, MassComposition& comp)
 {
-	using namespace Chem;
-	
-	double mass = 0.0;
-	std::size_t imp_h_count = 0;
-	
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), atoms_end = molgraph.getAtomsEnd(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		unsigned int atom_type = getType(atom);
+    using namespace Chem;
+    
+    double mass = 0.0;
+    std::size_t imp_h_count = 0;
+    
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), atoms_end = molgraph.getAtomsEnd(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
+        unsigned int atom_type = getType(atom);
 
-		if (atom_type > AtomType::MAX_ATOMIC_NO)
-			atom_type = AtomType::UNKNOWN;
+        if (atom_type > AtomType::MAX_ATOMIC_NO)
+            atom_type = AtomType::UNKNOWN;
 
-		double atomic_wt = getAtomicWeight(atom);
+        double atomic_wt = getAtomicWeight(atom);
 
-		comp[atom_type] += atomic_wt;
-		mass += atomic_wt;
-		imp_h_count += getImplicitHydrogenCount(atom);
-	}
+        comp[atom_type] += atomic_wt;
+        mass += atomic_wt;
+        imp_h_count += getImplicitHydrogenCount(atom);
+    }
 
-	double imp_h_mass = AtomDictionary::getAtomicWeight(AtomType::H, 0) * imp_h_count;
+    double imp_h_mass = AtomDictionary::getAtomicWeight(AtomType::H, 0) * imp_h_count;
 
-	comp[AtomType::H] += imp_h_mass;
-	mass += imp_h_mass;
+    comp[AtomType::H] += imp_h_mass;
+    mass += imp_h_mass;
 
-	for (MassComposition::EntryIterator it = comp.getEntriesBegin(), entries_end = comp.getEntriesEnd(); it != entries_end; ++it) 
-		it->second /= mass;
+    for (MassComposition::EntryIterator it = comp.getEntriesBegin(), entries_end = comp.getEntriesEnd(); it != entries_end; ++it) 
+        it->second /= mass;
 }
 
 void MolProp::buildMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp_str)
 {
-	using namespace Chem;
-	
-	MassComposition mass_comp;
+    using namespace Chem;
+    
+    MassComposition mass_comp;
 
-	calcMassComposition(molgraph, mass_comp);
+    calcMassComposition(molgraph, mass_comp);
 
-	std::ostringstream comp_str_os;
-	const std::string unknown_type_sym = "?";
+    std::ostringstream comp_str_os;
+    const std::string unknown_type_sym = "?";
 
-	for (MassComposition::ConstEntryIterator it = mass_comp.getEntriesBegin(), entries_end = mass_comp.getEntriesEnd(); it != entries_end; ) {
-		const std::string& symbol = (it->first == AtomType::UNKNOWN ? unknown_type_sym : 
-									 AtomDictionary::getSymbol(it->first));
+    for (MassComposition::ConstEntryIterator it = mass_comp.getEntriesBegin(), entries_end = mass_comp.getEntriesEnd(); it != entries_end; ) {
+        const std::string& symbol = (it->first == AtomType::UNKNOWN ? unknown_type_sym : 
+                                     AtomDictionary::getSymbol(it->first));
 
-		comp_str_os << symbol << ": " << std::fixed << std::showpoint << std::setprecision(3) << std::right 
-					<< (it->second * 100) << '%';
+        comp_str_os << symbol << ": " << std::fixed << std::showpoint << std::setprecision(3) << std::right 
+                    << (it->second * 100) << '%';
 
-		if (++it != entries_end)
-			comp_str_os << ' ';	
-	}
+        if (++it != entries_end)
+            comp_str_os << ' ';    
+    }
 
-	comp_str.append(comp_str_os.str());
+    comp_str.append(comp_str_os.str());
 }

@@ -39,95 +39,95 @@ using namespace CDPL;
 
 
 bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
-											  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact)
+                                              const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact)
 {
-	bool modif = false;
+    bool modif = false;
 
-	for (std::size_t i = 0; i < pharm.getNumFeatures(); ) {
-		const Feature& ftr = pharm.getFeature(i);
+    for (std::size_t i = 0; i < pharm.getNumFeatures(); ) {
+        const Feature& ftr = pharm.getFeature(i);
 
-		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME) {
-			i++;
-			continue;
-		}
+        if (getType(ftr) != FeatureType::EXCLUSION_VOLUME) {
+            i++;
+            continue;
+        }
 
-		const Math::Vector3D& xvol_pos = get3DCoordinates(ftr);
-		double xvol_tol = getTolerance(ftr);
-		Math::Vector3D tmp;
-		bool clash = false;
+        const Math::Vector3D& xvol_pos = get3DCoordinates(ftr);
+        double xvol_tol = getTolerance(ftr);
+        Math::Vector3D tmp;
+        bool clash = false;
 
-		for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-			const Chem::Atom& atom = *it;
-			const Math::Vector3D& atom_pos = coords_func(atom);
+        for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+            const Chem::Atom& atom = *it;
+            const Math::Vector3D& atom_pos = coords_func(atom);
 
-			tmp = xvol_pos;
-			tmp.minusAssign(atom_pos);
+            tmp = xvol_pos;
+            tmp.minusAssign(atom_pos);
 
-			if ((length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact) < 0.0) {
-				clash = true;
-				break;;
-			}
-		}
+            if ((length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact) < 0.0) {
+                clash = true;
+                break;;
+            }
+        }
 
-		if (clash) {
-			pharm.removeFeature(i);
-			modif = true;
-			continue;
-		}
+        if (clash) {
+            pharm.removeFeature(i);
+            modif = true;
+            continue;
+        }
 
-		i++;
-	}
+        i++;
+    }
 
-	return modif;
+    return modif;
 }
 
 bool Pharm::resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
-											  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact)
+                                              const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact)
 {
-	bool modif = false;
+    bool modif = false;
 
-	for (std::size_t i = 0; i < pharm.getNumFeatures(); ) {
-		Feature& ftr = pharm.getFeature(i);
+    for (std::size_t i = 0; i < pharm.getNumFeatures(); ) {
+        Feature& ftr = pharm.getFeature(i);
 
-		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME) {
-			i++;
-			continue;
-		}
+        if (getType(ftr) != FeatureType::EXCLUSION_VOLUME) {
+            i++;
+            continue;
+        }
 
-		const Math::Vector3D& xvol_pos = get3DCoordinates(ftr);
-		double xvol_tol = getTolerance(ftr);
-		Math::Vector3D tmp;
-		bool remove = false;
+        const Math::Vector3D& xvol_pos = get3DCoordinates(ftr);
+        double xvol_tol = getTolerance(ftr);
+        Math::Vector3D tmp;
+        bool remove = false;
 
-		for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-			const Chem::Atom& atom = *it;
-			const Math::Vector3D& atom_pos = coords_func(atom);
+        for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+            const Chem::Atom& atom = *it;
+            const Math::Vector3D& atom_pos = coords_func(atom);
 
-			tmp = xvol_pos;
-			tmp.minusAssign(atom_pos);
+            tmp = xvol_pos;
+            tmp.minusAssign(atom_pos);
 
-			double inters = (length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact);
+            double inters = (length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact);
 
-			if (inters < 0.0) {
-				modif = true;
+            if (inters < 0.0) {
+                modif = true;
 
-				if ((xvol_tol + inters) < 0.25) {
-					remove = true;
-					break;
-				}
+                if ((xvol_tol + inters) < 0.25) {
+                    remove = true;
+                    break;
+                }
 
-				xvol_tol += inters;
-			}
-		}
+                xvol_tol += inters;
+            }
+        }
 
-		if (remove) {
-			pharm.removeFeature(i);
-			continue;
-		}
+        if (remove) {
+            pharm.removeFeature(i);
+            continue;
+        }
 
-		setTolerance(ftr, xvol_tol);
-		i++;
-	}
+        setTolerance(ftr, xvol_tol);
+        i++;
+    }
 
-	return modif;
+    return modif;
 }

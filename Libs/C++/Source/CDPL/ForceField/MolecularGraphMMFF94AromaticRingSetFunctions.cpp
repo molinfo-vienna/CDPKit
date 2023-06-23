@@ -34,23 +34,23 @@ using namespace CDPL;
 
 Chem::FragmentList::SharedPointer ForceField::perceiveMMFF94AromaticRings(const Chem::MolecularGraph& molgraph)
 {
-	Chem::FragmentList::SharedPointer rings_ptr(new MMFF94AromaticSSSRSubset(molgraph));
+    Chem::FragmentList::SharedPointer rings_ptr(new MMFF94AromaticSSSRSubset(molgraph));
 
-	return rings_ptr;
+    return rings_ptr;
 }
 
 Chem::FragmentList::SharedPointer ForceField::perceiveMMFF94AromaticRings(Chem::MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_rings = molgraph.getProperty(MolecularGraphProperty::MMFF94_AROMATIC_RINGS, false);
-	
-		if (!prev_rings.isEmpty())
-			return prev_rings.getData<Chem::FragmentList::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_rings = molgraph.getProperty(MolecularGraphProperty::MMFF94_AROMATIC_RINGS, false);
+    
+        if (!prev_rings.isEmpty())
+            return prev_rings.getData<Chem::FragmentList::SharedPointer>();
+    }
 
-	Chem::FragmentList::SharedPointer rings_ptr(new MMFF94AromaticSSSRSubset(molgraph));
+    Chem::FragmentList::SharedPointer rings_ptr(new MMFF94AromaticSSSRSubset(molgraph));
 
-	molgraph.setProperty(MolecularGraphProperty::MMFF94_AROMATIC_RINGS, rings_ptr);
+    molgraph.setProperty(MolecularGraphProperty::MMFF94_AROMATIC_RINGS, rings_ptr);
 
-	return rings_ptr;
+    return rings_ptr;
 }

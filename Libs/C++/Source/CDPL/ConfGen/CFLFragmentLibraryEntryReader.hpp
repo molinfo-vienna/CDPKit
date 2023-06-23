@@ -34,27 +34,27 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		class FragmentLibraryEntry;
+        class FragmentLibraryEntry;
 
-		class CFLFragmentLibraryEntryReader : public Internal::CDFDataReaderBase
-		{
+        class CFLFragmentLibraryEntryReader : public Internal::CDFDataReaderBase
+        {
 
-		public:
-			CFLFragmentLibraryEntryReader();
+        public:
+            CFLFragmentLibraryEntryReader();
 
-			bool hasMoreData(std::istream& is);
+            bool hasMoreData(std::istream& is);
 
-			bool skip(std::istream& is);
+            bool skip(std::istream& is);
 
-			bool read(std::istream& is, FragmentLibraryEntry& entry);
+            bool read(std::istream& is, FragmentLibraryEntry& entry);
 
-		private:
-			Internal::ByteBuffer entryBuffer;
-		};
-	}
+        private:
+            Internal::ByteBuffer entryBuffer;
+        };
+    }
 }
 
 #endif // CDPL_CONFGEN_CFLFRAGMENTLIBRARYENTRYREADER_HPP

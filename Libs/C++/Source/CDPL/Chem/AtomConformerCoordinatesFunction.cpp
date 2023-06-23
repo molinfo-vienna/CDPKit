@@ -32,6 +32,6 @@ using namespace CDPL;
 
 const Math::Vector3D& Chem::getConformer3DCoordinates(const Atom& atom, std::size_t conf_idx)
 {
-	return get3DCoordinatesArray(atom)->getElement(conf_idx);
+    return get3DCoordinatesArray(atom)->getElement(conf_idx);
 }
 

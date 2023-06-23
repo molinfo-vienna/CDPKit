@@ -36,17 +36,17 @@ void CDPLPythonConfGen::exportConformerData()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<ConfGen::ConformerData, ConfGen::ConformerData::SharedPointer, python::bases<Math::Vector3DArray> >("ConformerData", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::ConformerData&>((python::arg("self"), python::arg("data"))))
-		.def(python::init<const Math::Vector3DArray&, double>((python::arg("self"), python::arg("coords"), python::arg("energy") = 0.0)))
-		.def("swap", &ConfGen::ConformerData::swap, 
-			 (python::arg("self"), python::arg("data")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerData::operator=), 
-			 (python::arg("self"), python::arg("data")), python::return_self<>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Math::Vector3DArray::operator=), 
-			 (python::arg("self"), python::arg("coords")), python::return_self<>())
-		.def("getEnergy", &ConfGen::ConformerData::getEnergy, python::arg("self"))
-		.def("setEnergy", &ConfGen::ConformerData::setEnergy, (python::arg("self"), python::arg("energy")))
-		.add_property("energy", &ConfGen::ConformerData::getEnergy, &ConfGen::ConformerData::setEnergy);
+    python::class_<ConfGen::ConformerData, ConfGen::ConformerData::SharedPointer, python::bases<Math::Vector3DArray> >("ConformerData", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ConfGen::ConformerData&>((python::arg("self"), python::arg("data"))))
+        .def(python::init<const Math::Vector3DArray&, double>((python::arg("self"), python::arg("coords"), python::arg("energy") = 0.0)))
+        .def("swap", &ConfGen::ConformerData::swap, 
+             (python::arg("self"), python::arg("data")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerData::operator=), 
+             (python::arg("self"), python::arg("data")), python::return_self<>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Math::Vector3DArray::operator=), 
+             (python::arg("self"), python::arg("coords")), python::return_self<>())
+        .def("getEnergy", &ConfGen::ConformerData::getEnergy, python::arg("self"))
+        .def("setEnergy", &ConfGen::ConformerData::setEnergy, (python::arg("self"), python::arg("energy")))
+        .add_property("energy", &ConfGen::ConformerData::getEnergy, &ConfGen::ConformerData::setEnergy);
 }

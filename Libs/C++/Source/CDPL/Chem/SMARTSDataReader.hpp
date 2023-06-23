@@ -41,146 +41,146 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataIOBase;
-	}
+        class DataIOBase;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
-		class Atom;
-		class Bond;
+        class Reaction;
+        class Atom;
+        class Bond;
 
-		class SMARTSDataReader
-		{
+        class SMARTSDataReader
+        {
 
-		public:
-			SMARTSDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+        public:
+            SMARTSDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool readReaction(std::istream&, Reaction&);
-			bool readMolecule(std::istream&, Molecule&);
+            bool readReaction(std::istream&, Reaction&);
+            bool readMolecule(std::istream&, Molecule&);
 
-			bool skipReaction(std::istream&);
-			bool skipMolecule(std::istream&);
+            bool skipReaction(std::istream&);
+            bool skipMolecule(std::istream&);
 
-			bool hasMoreData(std::istream&) const;
+            bool hasMoreData(std::istream&) const;
 
-			typedef std::vector<std::size_t> BondList;
+            typedef std::vector<std::size_t> BondList;
 
-		private:
-			void init(const Molecule&);
+        private:
+            void init(const Molecule&);
 
-			void setMoleculeMatchConstraints(Molecule&) const;
+            void setMoleculeMatchConstraints(Molecule&) const;
 
-			void parseSMARTS(Molecule&, const Atom*);
+            void parseSMARTS(Molecule&, const Atom*);
 
-			void parseRingClosures(Molecule&, const Atom&);
+            void parseRingClosures(Molecule&, const Atom&);
 
-			void createBond(Molecule&, const Atom*, const Atom*, MatchConstraintList::SharedPointer&, std::size_t);
+            void createBond(Molecule&, const Atom*, const Atom*, MatchConstraintList::SharedPointer&, std::size_t);
 
-			MatchConstraintList::SharedPointer combineBondMatchConstraints(const MatchConstraintList::SharedPointer&, 
-																		   const MatchConstraintList::SharedPointer&) const;
-			MatchConstraintList::SharedPointer parseBondExpression();
-			MatchConstraintList::SharedPointer parseBondExpression(std::size_t);
-			bool parseBondExpressionPrimitive(MatchConstraintList&);
+            MatchConstraintList::SharedPointer combineBondMatchConstraints(const MatchConstraintList::SharedPointer&, 
+                                                                           const MatchConstraintList::SharedPointer&) const;
+            MatchConstraintList::SharedPointer parseBondExpression();
+            MatchConstraintList::SharedPointer parseBondExpression(std::size_t);
+            bool parseBondExpressionPrimitive(MatchConstraintList&);
 
-			const Chem::Atom* parseAtom(Molecule&);
+            const Chem::Atom* parseAtom(Molecule&);
 
-			void setComponentGroupID(Atom&);
+            void setComponentGroupID(Atom&);
 
-			MatchConstraintList::SharedPointer parseAtomExpression(Atom&);
-			MatchConstraintList::SharedPointer parseAtomExpression(std::size_t, Atom&);
+            MatchConstraintList::SharedPointer parseAtomExpression(Atom&);
+            MatchConstraintList::SharedPointer parseAtomExpression(std::size_t, Atom&);
 
-			MatchConstraintList::SharedPointer parseExplicitHAtomExpression(Atom&);
-			MatchConstraintList::SharedPointer parseSimpleAtomExpression(char);
+            MatchConstraintList::SharedPointer parseExplicitHAtomExpression(Atom&);
+            MatchConstraintList::SharedPointer parseSimpleAtomExpression(char);
 
-			bool parseAtomExpressionPrimitive(MatchConstraintList&);
+            bool parseAtomExpressionPrimitive(MatchConstraintList&);
 
-			bool addEnvironmentConstraint(bool, MatchConstraintList&);
-			bool addAtomicNumberConstraint(bool, MatchConstraintList&);
-			bool addImplicitHCountConstraint(bool, MatchConstraintList&);
-			bool addTotalHCountConstraint(bool, MatchConstraintList&);
-			bool addRingSizeConstraint(bool, MatchConstraintList&);
-			bool addRingMembershipConstraint(bool, MatchConstraintList&);
-			bool addValenceConstraint(bool, MatchConstraintList&);
-			bool addUnsaturationConstraint(bool, MatchConstraintList&);
-			bool addExplicitDegreeConstraint(bool, MatchConstraintList&);
-			bool addConnectivityConstraint(bool, MatchConstraintList&);
-			bool addRingConnectivityConstraint(bool, MatchConstraintList&);
-			bool addChargeConstraint(char, bool, MatchConstraintList&);
-			bool addChiralityConstraint(bool, MatchConstraintList&);
-			bool addIsotopeConstraint(char, bool, MatchConstraintList&);
-			bool addAtomTypeConstraint(unsigned int, bool, MatchConstraintList&);
-			bool addAtomTypeConstraint(unsigned int, bool, bool, MatchConstraintList&);
-			bool addHybridizationStateConstraint(bool, MatchConstraintList&);
+            bool addEnvironmentConstraint(bool, MatchConstraintList&);
+            bool addAtomicNumberConstraint(bool, MatchConstraintList&);
+            bool addImplicitHCountConstraint(bool, MatchConstraintList&);
+            bool addTotalHCountConstraint(bool, MatchConstraintList&);
+            bool addRingSizeConstraint(bool, MatchConstraintList&);
+            bool addRingMembershipConstraint(bool, MatchConstraintList&);
+            bool addValenceConstraint(bool, MatchConstraintList&);
+            bool addUnsaturationConstraint(bool, MatchConstraintList&);
+            bool addExplicitDegreeConstraint(bool, MatchConstraintList&);
+            bool addConnectivityConstraint(bool, MatchConstraintList&);
+            bool addRingConnectivityConstraint(bool, MatchConstraintList&);
+            bool addChargeConstraint(char, bool, MatchConstraintList&);
+            bool addChiralityConstraint(bool, MatchConstraintList&);
+            bool addIsotopeConstraint(char, bool, MatchConstraintList&);
+            bool addAtomTypeConstraint(unsigned int, bool, MatchConstraintList&);
+            bool addAtomTypeConstraint(unsigned int, bool, bool, MatchConstraintList&);
+            bool addHybridizationStateConstraint(bool, MatchConstraintList&);
 
-			void parseReactionAtomMappingID(Atom&);
+            void parseReactionAtomMappingID(Atom&);
 
-			Molecule::SharedPointer parseSMARTS(const std::string&);
+            Molecule::SharedPointer parseSMARTS(const std::string&);
 
-			bool hasNOTOperatorPrefix();
-			bool hasUnspecStereoSuffix();
+            bool hasNOTOperatorPrefix();
+            bool hasUnspecStereoSuffix();
 
-			template <typename T>
-			bool parseNumber(T&, std::size_t = 0);
+            template <typename T>
+            bool parseNumber(T&, std::size_t = 0);
 
-			bool hasNextChar() const;
-			bool getChar(char&, bool);
-			void ungetChar();
+            bool hasNextChar() const;
+            bool getChar(char&, bool);
+            void ungetChar();
 
-			void setBondTableEntry(std::size_t, const Bond*);
+            void setBondTableEntry(std::size_t, const Bond*);
 
-			void addToBondList(std::size_t, std::size_t, bool = true);
-			const BondList& getBondList(std::size_t) const;
+            void addToBondList(std::size_t, std::size_t, bool = true);
+            const BondList& getBondList(std::size_t) const;
 
-			void setAtomStereoDescriptors(const Molecule&) const;
-			void setAtomStereoDescriptors(const Molecule&, const Atom&, MatchConstraintList&) const;
-			void setAtomStereoDescriptor(const Molecule&, const Atom&, MatchConstraint&) const;
+            void setAtomStereoDescriptors(const Molecule&) const;
+            void setAtomStereoDescriptors(const Molecule&, const Atom&, MatchConstraintList&) const;
+            void setAtomStereoDescriptor(const Molecule&, const Atom&, MatchConstraint&) const;
 
-			void addBondConfigurationConstraints(Molecule&) const;
-			bool hasBondDirectionConstraint(const MatchConstraintList&) const;
+            void addBondConfigurationConstraints(Molecule&) const;
+            bool hasBondDirectionConstraint(const MatchConstraintList&) const;
 
-			void destroySMARTSParser(SMARTSDataReader*) const;
+            void destroySMARTSParser(SMARTSDataReader*) const;
 
-			struct ClosureBond
-			{
+            struct ClosureBond
+            {
 
-				ClosureBond(std::size_t lex_bond_no, const Atom* start_atom, const MatchConstraintList::SharedPointer& match_constr):
-					lexBondNumber(lex_bond_no), startAtom(start_atom), matchConstraints(match_constr) {} 
+                ClosureBond(std::size_t lex_bond_no, const Atom* start_atom, const MatchConstraintList::SharedPointer& match_constr):
+                    lexBondNumber(lex_bond_no), startAtom(start_atom), matchConstraints(match_constr) {} 
 
-				std::size_t                        lexBondNumber;
-				const Atom*                        startAtom;
-				MatchConstraintList::SharedPointer matchConstraints;
-			};
+                std::size_t                        lexBondNumber;
+                const Atom*                        startAtom;
+                MatchConstraintList::SharedPointer matchConstraints;
+            };
 
-			typedef std::shared_ptr<SMARTSDataReader> SharedPointer;
+            typedef std::shared_ptr<SMARTSDataReader> SharedPointer;
 
-			typedef std::map<std::size_t, ClosureBond> ClosureBondMap;
-			typedef std::vector<const Bond*> BondTable;
-			typedef std::vector<BondList> BondListTable;
+            typedef std::map<std::size_t, ClosureBond> ClosureBondMap;
+            typedef std::vector<const Bond*> BondTable;
+            typedef std::vector<BondList> BondListTable;
 
-			const Base::DataIOBase& ioBase;
-			std::string             molSMARTSString;
-			std::string             rxnSMARTSString;
-			std::size_t             nextCharIndex;
-			std::size_t             openBranchCount;
-			std::size_t             startAtomIndex;
-			std::size_t             startBondIndex;
-			std::size_t             lexicalBondNumber;
-			std::size_t             componentGroupID;
-			std::size_t             atomMappingIDOffset;
-			BondTable               bondTable;
-			ClosureBondMap          closureBondMap;
-			BondListTable           nbrBondListTable;
-			SharedPointer           smartsParser;
-			bool                    haveRxnAtomMappingIDs;
-			bool                    haveComponentGroups;
-			bool                    strictErrorChecking;
-		};
-	}
+            const Base::DataIOBase& ioBase;
+            std::string             molSMARTSString;
+            std::string             rxnSMARTSString;
+            std::size_t             nextCharIndex;
+            std::size_t             openBranchCount;
+            std::size_t             startAtomIndex;
+            std::size_t             startBondIndex;
+            std::size_t             lexicalBondNumber;
+            std::size_t             componentGroupID;
+            std::size_t             atomMappingIDOffset;
+            BondTable               bondTable;
+            ClosureBondMap          closureBondMap;
+            BondListTable           nbrBondListTable;
+            SharedPointer           smartsParser;
+            bool                    haveRxnAtomMappingIDs;
+            bool                    haveComponentGroups;
+            bool                    strictErrorChecking;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_SMARTSDATAREADER_HPP

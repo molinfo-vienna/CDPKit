@@ -36,146 +36,146 @@ using namespace CDPL;
 namespace
 {
 
-	void checkRole(unsigned int role) 
-	{
-		using namespace Chem;
+    void checkRole(unsigned int role) 
+    {
+        using namespace Chem;
 
-		switch (role) {
-			
-			case ReactionRole::REACTANT:
-			case ReactionRole::AGENT:
-			case ReactionRole::PRODUCT:
-				return;
+        switch (role) {
+            
+            case ReactionRole::REACTANT:
+            case ReactionRole::AGENT:
+            case ReactionRole::PRODUCT:
+                return;
 
-			default:
-				throw Base::ValueError("Reaction: invalid reaction role");
-		}
-	}
+            default:
+                throw Base::ValueError("Reaction: invalid reaction role");
+        }
+    }
 }
 
 
 Chem::Reaction::ConstComponentIterator Chem::Reaction::getComponentsBegin() const
 {
-	return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), 0);
+    return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), 0);
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::getComponentsBegin()
 {
-	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), 0);
+    return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), 0);
 }
 
 Chem::Reaction::ConstComponentIterator Chem::Reaction::getComponentsEnd() const
 {
-	return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), getNumComponents());
+    return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), getNumComponents());
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::getComponentsEnd()
 {
-	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), getNumComponents());
+    return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), getNumComponents());
 }
 
 Chem::Reaction::ConstComponentIterator Chem::Reaction::begin() const
 {
-	return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), 0);
+    return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), 0);
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::begin()
 {
-	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), 0);
+    return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), 0);
 }
 
 Chem::Reaction::ConstComponentIterator Chem::Reaction::end() const
 {
-	return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), getNumComponents());
+    return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), getNumComponents());
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::end()
 {
-	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), getNumComponents());
+    return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), getNumComponents());
 }
 
 Chem::Reaction::ConstComponentIterator Chem::Reaction::getComponentsBegin(unsigned int role) const
 {
-	checkRole(role);
+    checkRole(role);
 
-	return ConstComponentIterator(ConstComponentAccessor(this, role), 0);
+    return ConstComponentIterator(ConstComponentAccessor(this, role), 0);
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::getComponentsBegin(unsigned int role)
 {
-	checkRole(role);
+    checkRole(role);
 
-	return ComponentIterator(ComponentAccessor(this, role), 0);
+    return ComponentIterator(ComponentAccessor(this, role), 0);
 }
 
 Chem::Reaction::ConstComponentIterator Chem::Reaction::getComponentsEnd(unsigned int role) const
 {
-	checkRole(role);
+    checkRole(role);
 
-	return ConstComponentIterator(ConstComponentAccessor(this, role), getNumComponents(role));
+    return ConstComponentIterator(ConstComponentAccessor(this, role), getNumComponents(role));
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::getComponentsEnd(unsigned int role)
 {
-	checkRole(role);
+    checkRole(role);
 
-	return ComponentIterator(ComponentAccessor(this, role), getNumComponents(role));
+    return ComponentIterator(ComponentAccessor(this, role), getNumComponents(role));
 }
 
 Chem::Reaction::ComponentIterator Chem::Reaction::removeComponent(const ComponentIterator& it)
 {
-	std::size_t index = it.getIndex();
-	unsigned int role = it.getAccessFunc().compRole;
+    std::size_t index = it.getIndex();
+    unsigned int role = it.getAccessFunc().compRole;
 
-	if (role == ReactionRole::NONE) {
-		if (index >= getNumComponents())
-			throw Base::RangeError("Reaction: component iterator out of valid range");
+    if (role == ReactionRole::NONE) {
+        if (index >= getNumComponents())
+            throw Base::RangeError("Reaction: component iterator out of valid range");
 
-		removeComponent(index);
+        removeComponent(index);
 
-	} else {
-		if (index >= getNumComponents(role))
-			throw Base::RangeError("Reaction: component iterator out of valid range");
+    } else {
+        if (index >= getNumComponents(role))
+            throw Base::RangeError("Reaction: component iterator out of valid range");
 
-		removeComponent(index, role);
-	}
+        removeComponent(index, role);
+    }
 
-	return it;
+    return it;
 }
 
 Chem::Reaction& Chem::Reaction::operator=(const Reaction& rxn) 
 {
-	if (this == &rxn)
-		return *this;
+    if (this == &rxn)
+        return *this;
 
-	copy(rxn);
+    copy(rxn);
 
-	return *this;
+    return *this;
 }
 
 
 const Chem::Molecule& Chem::Reaction::ConstComponentAccessor::operator()(std::size_t idx) const
 {
-	if (compRole == ReactionRole::NONE)
-		return reaction->getComponent(idx);
+    if (compRole == ReactionRole::NONE)
+        return reaction->getComponent(idx);
 
-	return reaction->getComponent(idx, compRole);
+    return reaction->getComponent(idx, compRole);
 }
 
 bool Chem::Reaction::ConstComponentAccessor::operator==(const ConstComponentAccessor& accessor) const 
 {
-	return (reaction == accessor.reaction && compRole == accessor.compRole);
+    return (reaction == accessor.reaction && compRole == accessor.compRole);
 }
 
 Chem::Molecule& Chem::Reaction::ComponentAccessor::operator()(std::size_t idx) const
 {
-	if (compRole == ReactionRole::NONE)
-		return reaction->getComponent(idx);
+    if (compRole == ReactionRole::NONE)
+        return reaction->getComponent(idx);
 
-	return reaction->getComponent(idx, compRole);
+    return reaction->getComponent(idx, compRole);
 }
 
 bool Chem::Reaction::ComponentAccessor::operator==(const ComponentAccessor& accessor) const 
 {
-	return (reaction == accessor.reaction && compRole == accessor.compRole);
+    return (reaction == accessor.reaction && compRole == accessor.compRole);
 }

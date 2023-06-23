@@ -35,57 +35,57 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataIOBase;
-	}
+        class DataIOBase;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
-		class Molecule;
-		class Atom;
+        class Reaction;
+        class Molecule;
+        class Atom;
 
-		class JMEDataReader
-		{
+        class JMEDataReader
+        {
 
-		public:
-			JMEDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+        public:
+            JMEDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool readReaction(std::istream&, Reaction&);
-			bool readMolecule(std::istream&, Molecule&);
+            bool readReaction(std::istream&, Reaction&);
+            bool readMolecule(std::istream&, Molecule&);
 
-			bool skipReaction(std::istream&);
-			bool skipMolecule(std::istream&);
+            bool skipReaction(std::istream&);
+            bool skipMolecule(std::istream&);
 
-			bool hasMoreData(std::istream&) const;
+            bool hasMoreData(std::istream&) const;
 
-		private:
-			void init();
+        private:
+            void init();
 
-			void readComponent(std::istream&, Molecule&) const;
-			void skipComponent(std::istream&) const;
+            void readComponent(std::istream&, Molecule&) const;
+            void skipComponent(std::istream&) const;
 
-			void readAtom(std::istream&, Molecule&) const;
+            void readAtom(std::istream&, Molecule&) const;
 
-			MatchConstraintList::SharedPointer readAtomList(std::string::const_iterator, std::string::const_iterator) const;
-			MatchConstraintList::SharedPointer readAtomSymbol(Atom*, std::string::const_iterator, 
-															  std::string::const_iterator, bool) const;
-			MatchConstraintList::SharedPointer readQueryFlags(std::string::const_iterator, std::string::const_iterator) const;
+            MatchConstraintList::SharedPointer readAtomList(std::string::const_iterator, std::string::const_iterator) const;
+            MatchConstraintList::SharedPointer readAtomSymbol(Atom*, std::string::const_iterator, 
+                                                              std::string::const_iterator, bool) const;
+            MatchConstraintList::SharedPointer readQueryFlags(std::string::const_iterator, std::string::const_iterator) const;
 
-			long readAtomCharge(std::string::const_iterator, std::string::const_iterator) const;
-			void readReactionAtomMappingID(Atom&, std::string::const_iterator, std::string::const_iterator) const;
+            long readAtomCharge(std::string::const_iterator, std::string::const_iterator) const;
+            void readReactionAtomMappingID(Atom&, std::string::const_iterator, std::string::const_iterator) const;
 
-			void readBond(std::istream&, Molecule&, std::size_t, std::size_t) const;
+            void readBond(std::istream&, Molecule&, std::size_t, std::size_t) const;
 
-			const Base::DataIOBase& ioBase;			
-			bool                    strictErrorChecking;
-			std::size_t             coordsDim;
-			std::size_t             atomMappingIDOffset;
-		};
-	}
+            const Base::DataIOBase& ioBase;            
+            bool                    strictErrorChecking;
+            std::size_t             coordsDim;
+            std::size_t             atomMappingIDOffset;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_JMEDATAREADER_HPP

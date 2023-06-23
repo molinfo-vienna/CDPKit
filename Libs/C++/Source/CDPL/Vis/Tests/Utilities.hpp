@@ -32,24 +32,24 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-		class Reaction;
-	}
+        class Molecule;
+        class Reaction;
+    }
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		class View2D;
+        class View2D;
 
-		void dumpImage(View2D& view, const std::string& prefix, std::size_t& img_id, const std::string& msg = "");
+        void dumpImage(View2D& view, const std::string& prefix, std::size_t& img_id, const std::string& msg = "");
 
-		void initMolecule(Chem::Molecule& mol);
+        void initMolecule(Chem::Molecule& mol);
 
-		void initReaction(Chem::Reaction& rxn);
-	}
+        void initReaction(Chem::Reaction& rxn);
+    }
 }
 
 #endif // CDPL_VIS_TEST_UTILITIES_HPP

@@ -38,20 +38,20 @@ using namespace CDPL;
 
 
 void Chem::calcBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds,
-							  std::size_t min_ring_size)
+                              std::size_t min_ring_size)
 {
-	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasDirection, std::placeholders::_1))) == molgraph.getBondsEnd())
-		return;
+    if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasDirection, std::placeholders::_1))) == molgraph.getBondsEnd())
+        return;
 
-	BondDirectionCalculator calculator;
-	Util::UIArray dirs;
+    BondDirectionCalculator calculator;
+    Util::UIArray dirs;
 
-	calculator.includeRingBonds(ring_bonds);
-	calculator.setRingSizeLimit(min_ring_size);
-	calculator.calculate(molgraph, dirs);
+    calculator.includeRingBonds(ring_bonds);
+    calculator.setRingSizeLimit(min_ring_size);
+    calculator.calculate(molgraph, dirs);
 
-	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), dirs.getElementsBegin(), &setDirection);
+    Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), dirs.getElementsBegin(), &setDirection);
 }
-	
+    

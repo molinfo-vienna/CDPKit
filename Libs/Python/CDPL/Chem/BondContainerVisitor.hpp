@@ -30,96 +30,96 @@
 
 
 #define BONDCONTAINER_IMPL()                                         \
-	void orderBonds(const CDPL::Chem::BondCompareFunction& func) {   \
-		this->get_override("orderBonds")(boost::ref(func));          \
-	}                                                                \
+    void orderBonds(const CDPL::Chem::BondCompareFunction& func) {   \
+        this->get_override("orderBonds")(boost::ref(func));          \
+    }                                                                \
                                                                      \
-	std::size_t getNumBonds() const {                                \
-		return this->get_override("getNumBonds")();                  \
-	}                                                                \
+    std::size_t getNumBonds() const {                                \
+        return this->get_override("getNumBonds")();                  \
+    }                                                                \
                                                                      \
-	const CDPL::Chem::Bond& getBond(std::size_t idx) const {         \
-		return this->get_override("getBond")(idx);                   \
-	}                                                                \
+    const CDPL::Chem::Bond& getBond(std::size_t idx) const {         \
+        return this->get_override("getBond")(idx);                   \
+    }                                                                \
                                                                      \
-	bool containsBond(const CDPL::Chem::Bond& bond) const {          \
-		return this->get_override("containsBond")(boost::ref(bond)); \
-	}                                                                \
+    bool containsBond(const CDPL::Chem::Bond& bond) const {          \
+        return this->get_override("containsBond")(boost::ref(bond)); \
+    }                                                                \
                                                                      \
-	std::size_t getBondIndex(const CDPL::Chem::Bond& bond) const {   \
-		return this->get_override("getBondIndex")(boost::ref(bond)); \
-	}                                                                \
+    std::size_t getBondIndex(const CDPL::Chem::Bond& bond) const {   \
+        return this->get_override("getBondIndex")(boost::ref(bond)); \
+    }                                                                \
                                                                      \
-	CDPL::Chem::Bond& getBond(std::size_t idx)  {                    \
-		return this->get_override("getBond")(idx);                   \
-	}
+    CDPL::Chem::Bond& getBond(std::size_t idx)  {                    \
+        return this->get_override("getBond")(idx);                   \
+    }
 
 
 namespace CDPLPythonChem
 {
 
-	class BondContainerVisitorBase
-	{
+    class BondContainerVisitorBase
+    {
 
-	protected:
-		static bool containsBond(CDPL::Chem::BondContainer& cntnr, CDPL::Chem::Bond& bond) {
-			return cntnr.containsBond(bond);
-		}
-	};
+    protected:
+        static bool containsBond(CDPL::Chem::BondContainer& cntnr, CDPL::Chem::Bond& bond) {
+            return cntnr.containsBond(bond);
+        }
+    };
 
-	class BondContainerVirtualFunctionsVisitor : private BondContainerVisitorBase, 
-												 public boost::python::def_visitor<BondContainerVirtualFunctionsVisitor>
-	{
+    class BondContainerVirtualFunctionsVisitor : private BondContainerVisitorBase, 
+                                                 public boost::python::def_visitor<BondContainerVirtualFunctionsVisitor>
+    {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			cl	
-				.def("getBond", python::pure_virtual(static_cast<Chem::Bond& (Chem::BondContainer::*)(std::size_t)>(&Chem::BondContainer::getBond)), 
-					 (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
-				.def("containsBond", python::pure_virtual(&this->containsBond), (python::arg("self"), python::arg("bond")))
-				.def("orderBonds", python::pure_virtual(&Chem::BondContainer::orderBonds), (python::arg("self"), python::arg("func")))
-				.def("getBondIndex", python::pure_virtual(&getBondIndex), (python::arg("self"), python::arg("bond")))
-				.def("getNumBonds", python::pure_virtual(&Chem::BondContainer::getNumBonds), python::arg("self"));
-		}
+            cl    
+                .def("getBond", python::pure_virtual(static_cast<Chem::Bond& (Chem::BondContainer::*)(std::size_t)>(&Chem::BondContainer::getBond)), 
+                     (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
+                .def("containsBond", python::pure_virtual(&this->containsBond), (python::arg("self"), python::arg("bond")))
+                .def("orderBonds", python::pure_virtual(&Chem::BondContainer::orderBonds), (python::arg("self"), python::arg("func")))
+                .def("getBondIndex", python::pure_virtual(&getBondIndex), (python::arg("self"), python::arg("bond")))
+                .def("getNumBonds", python::pure_virtual(&Chem::BondContainer::getNumBonds), python::arg("self"));
+        }
 
-		static std::size_t getBondIndex(CDPL::Chem::BondContainer& cntnr, CDPL::Chem::Bond& bond) {
-			return cntnr.getBondIndex(bond);
-		}
-	};
+        static std::size_t getBondIndex(CDPL::Chem::BondContainer& cntnr, CDPL::Chem::Bond& bond) {
+            return cntnr.getBondIndex(bond);
+        }
+    };
 
-	class BondContainerSpecialFunctionsVisitor : private BondContainerVisitorBase, 
-												 public boost::python::def_visitor<BondContainerSpecialFunctionsVisitor>
-	{
+    class BondContainerSpecialFunctionsVisitor : private BondContainerVisitorBase, 
+                                                 public boost::python::def_visitor<BondContainerSpecialFunctionsVisitor>
+    {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-	public:
-		BondContainerSpecialFunctionsVisitor(bool contains_only): containsOnly(contains_only) {}
+    public:
+        BondContainerSpecialFunctionsVisitor(bool contains_only): containsOnly(contains_only) {}
 
-	private:
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+    private:
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			cl.def("__contains__", &this->containsBond, (python::arg("self"), python::arg("bond")));
+            cl.def("__contains__", &this->containsBond, (python::arg("self"), python::arg("bond")));
 
-			if (containsOnly)
-				return;
+            if (containsOnly)
+                return;
 
-			cl
-				.def("__getitem__", static_cast<Chem::Bond& (Chem::BondContainer::*)(std::size_t)>(&Chem::BondContainer::getBond), (python::arg("self"), python::arg("idx")),
-				   python::return_internal_reference<1>())
-				.def("__len__", &Chem::BondContainer::getNumBonds, python::arg("self"));
-		}
+            cl
+                .def("__getitem__", static_cast<Chem::Bond& (Chem::BondContainer::*)(std::size_t)>(&Chem::BondContainer::getBond), (python::arg("self"), python::arg("idx")),
+                   python::return_internal_reference<1>())
+                .def("__len__", &Chem::BondContainer::getNumBonds, python::arg("self"));
+        }
 
-		bool containsOnly;
-	};
+        bool containsOnly;
+    };
 }
 
 #endif // CDPL_PYTHON_CHEM_BONDCONTAINERVISITOR_HPP

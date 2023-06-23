@@ -29,54 +29,54 @@
 
 using namespace CDPL;
 
-		
+        
 void Vis::SizeSpecification::setValue(double value)
 {
-	this->value = value;
+    this->value = value;
 }
 
 double Vis::SizeSpecification::getValue() const
 {
-	return value;
+    return value;
 }
 
 void Vis::SizeSpecification::setRelative(bool relative)
 {
-	this->relative = relative;
+    this->relative = relative;
 }
 
 bool Vis::SizeSpecification::isRelative() const
 {
-	return relative;
+    return relative;
 }
 
 void Vis::SizeSpecification::followInputScaling(bool follow)
 {
-	inputScaling = follow;
+    inputScaling = follow;
 }
 
 bool Vis::SizeSpecification::followsInputScaling() const
 {
-	return inputScaling;
+    return inputScaling;
 }
 
 void Vis::SizeSpecification::followOutputScaling(bool follow)
 {
-	outputScaling = follow;
+    outputScaling = follow;
 }
 
 bool Vis::SizeSpecification::followsOutputScaling() const
 {
-	return outputScaling;
+    return outputScaling;
 }
 
 bool Vis::SizeSpecification::operator==(const SizeSpecification& spec) const
 {
-	return (value == spec.value && relative == spec.relative 
-			&& inputScaling == spec.inputScaling && outputScaling == spec.outputScaling);
+    return (value == spec.value && relative == spec.relative 
+            && inputScaling == spec.inputScaling && outputScaling == spec.outputScaling);
 }
 
 bool Vis::SizeSpecification::operator!=(const SizeSpecification& spec) const
 {
-	return !operator==(spec);
+    return !operator==(spec);
 }

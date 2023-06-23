@@ -33,12 +33,12 @@
 #define MAKE_CONTROL_PARAM_FUNC_WRAPPERS(TYPE, FUNC_INFIX)                           \
 TYPE get##FUNC_INFIX##ParameterWrapper(CDPL::Base::ControlParameterContainer& cntnr) \
 {                                                                                    \
-	return CDPL::ConfGen::get##FUNC_INFIX##Parameter(cntnr);                           \
+    return CDPL::ConfGen::get##FUNC_INFIX##Parameter(cntnr);                           \
 }                                                                                    \
                                                                                      \
 bool has##FUNC_INFIX##ParameterWrapper(CDPL::Base::ControlParameterContainer& cntnr) \
 {                                                                                    \
-	return CDPL::ConfGen::has##FUNC_INFIX##Parameter(cntnr);                           \
+    return CDPL::ConfGen::has##FUNC_INFIX##Parameter(cntnr);                           \
 }
 
 #define EXPORT_CONTROL_PARAM_FUNCS(FUNC_INFIX, ARG_NAME)                                                                          \
@@ -51,14 +51,14 @@ python::def("set"#FUNC_INFIX"Parameter", &ConfGen::set##FUNC_INFIX##Parameter, (
 namespace
 {
 
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
 }
 
 
 void CDPLPythonConfGen::exportControlParameterFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
+    EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
 }

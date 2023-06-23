@@ -29,13 +29,13 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define ATTRIBUTEDGRID_IMPL()											\
+#define ATTRIBUTEDGRID_IMPL()                                            \
     std::size_t getNumElements() const {                                \
-		return this->get_override("getNumElements")();                  \
-    }																	\
-																		\
-    bool isEmpty() const {												\
-	    return this->get_override("isEmpty")();							\
+        return this->get_override("getNumElements")();                  \
+    }                                                                    \
+                                                                        \
+    bool isEmpty() const {                                                \
+        return this->get_override("isEmpty")();                            \
     }
 
 
@@ -45,32 +45,32 @@ namespace CDPLPythonGrid
     class AttributedGridVirtualFunctionsVisitor : public boost::python::def_visitor<AttributedGridVirtualFunctionsVisitor>
     {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			cl	
-				.def("isEmpty", python::pure_virtual(&Grid::AttributedGrid::isEmpty), python::arg("self"))
-				.def("getNumElements", python::pure_virtual(&Grid::AttributedGrid::getNumElements), python::arg("self"));
-		}
+            cl    
+                .def("isEmpty", python::pure_virtual(&Grid::AttributedGrid::isEmpty), python::arg("self"))
+                .def("getNumElements", python::pure_virtual(&Grid::AttributedGrid::getNumElements), python::arg("self"));
+        }
     };
 
     class AttributedGridSpecialFunctionsVisitor : public boost::python::def_visitor<AttributedGridSpecialFunctionsVisitor>
     {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			cl
-				.def("__len__", &Grid::AttributedGrid::getNumElements, python::arg("self"));
-		}
+            cl
+                .def("__len__", &Grid::AttributedGrid::getNumElements, python::arg("self"));
+        }
     };
 }
 

@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Chem::JMEReactionReader::JMEReactionReader(std::istream& is): 
-	Util::StreamDataReader<Reaction, JMEReactionReader>(is), reader(new JMEDataReader(*this)) {}
+    Util::StreamDataReader<Reaction, JMEReactionReader>(is), reader(new JMEDataReader(*this)) {}
 
 Chem::JMEReactionReader::~JMEReactionReader() {}
 
 bool Chem::JMEReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
-	try {
-		if (overwrite)
-			rxn.clear();
+    try {
+        if (overwrite)
+            rxn.clear();
 
-		return reader->readReaction(is, rxn);
+        return reader->readReaction(is, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("JMEReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("JMEReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::JMEReactionReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipReaction(is);
+    try {
+        return reader->skipReaction(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("JMEReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("JMEReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::JMEReactionReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

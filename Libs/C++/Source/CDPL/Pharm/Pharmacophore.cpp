@@ -35,7 +35,7 @@ using namespace CDPL;
 Pharm::Pharmacophore::FeatureIterator Pharm::Pharmacophore::removeFeature(const FeatureIterator& it)
 {
     if (it.getIndex() >= getNumFeatures())
-		throw Base::RangeError("Pharmacophore: feature iterator out of valid range");
+        throw Base::RangeError("Pharmacophore: feature iterator out of valid range");
 
     removeFeature(it.getIndex());
 
@@ -45,7 +45,7 @@ Pharm::Pharmacophore::FeatureIterator Pharm::Pharmacophore::removeFeature(const 
 Pharm::Pharmacophore& Pharm::Pharmacophore::operator=(const Pharmacophore& pharm) 
 {
     if (this == &pharm)
-		return *this;
+        return *this;
 
     copy(pharm);
 
@@ -62,7 +62,7 @@ Pharm::Pharmacophore& Pharm::Pharmacophore::operator+=(const Pharmacophore& phar
 Pharm::Pharmacophore& Pharm::Pharmacophore::operator=(const FeatureContainer& cntnr) 
 {
     if (this == &cntnr)
-		return *this;
+        return *this;
 
     copy(cntnr);
 

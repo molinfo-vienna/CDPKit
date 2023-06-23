@@ -42,46 +42,46 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief Implementation of the Bron-Kerbosch clique-detection algorithm [\ref BKA].
-		 */
-		class CDPL_UTIL_API BronKerboschAlgorithm
-		{
+        /**
+         * \brief Implementation of the Bron-Kerbosch clique-detection algorithm [\ref BKA].
+         */
+        class CDPL_UTIL_API BronKerboschAlgorithm
+        {
 
-		public:
-			BronKerboschAlgorithm() {}
+        public:
+            BronKerboschAlgorithm() {}
 
-			BronKerboschAlgorithm(const BitSetArray& adj_mtx);
+            BronKerboschAlgorithm(const BitSetArray& adj_mtx);
 
-			BronKerboschAlgorithm(const BronKerboschAlgorithm& bka);
+            BronKerboschAlgorithm(const BronKerboschAlgorithm& bka);
 
-			void init(const BitSetArray& adj_mtx);
+            void init(const BitSetArray& adj_mtx);
 
-			bool nextClique(BitSet& clique);
+            bool nextClique(BitSet& clique);
 
-			BronKerboschAlgorithm& operator=(const BronKerboschAlgorithm& bka);
+            BronKerboschAlgorithm& operator=(const BronKerboschAlgorithm& bka);
 
-		private:
-			struct State
-			{
-				
-				BitSet      curr;
-				BitSet      pool;
-				BitSet      excl;
-				std::size_t u;
-				std::size_t v;
-			};
+        private:
+            struct State
+            {
+                
+                BitSet      curr;
+                BitSet      pool;
+                BitSet      excl;
+                std::size_t u;
+                std::size_t v;
+            };
 
-			typedef std::vector<std::size_t> NodeDegreeTable;
-			typedef std::vector<State*> StateStack;
-			typedef Util::ObjectStack<State> StateCache;
+            typedef std::vector<std::size_t> NodeDegreeTable;
+            typedef std::vector<State*> StateStack;
+            typedef Util::ObjectStack<State> StateCache;
 
-			const BitSetArray* adjMatrix;
-			StateCache         stateCache;
-			NodeDegreeTable    nodeDegrees;
-			StateStack         states;
-			BitSet             pivotCandSet;
-		};
+            const BitSetArray* adjMatrix;
+            StateCache         stateCache;
+            NodeDegreeTable    nodeDegrees;
+            StateStack         states;
+            BitSet             pivotCandSet;
+        };
     }
 }
 

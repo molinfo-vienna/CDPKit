@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Pharm::CDFFeatureContainerWriter::CDFFeatureContainerWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new CDFPharmacophoreDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new CDFPharmacophoreDataWriter(*this)) {}
 
 Pharm::CDFFeatureContainerWriter::~CDFFeatureContainerWriter() {}
 
 Base::DataWriter<Pharm::FeatureContainer>& Pharm::CDFFeatureContainerWriter::write(const FeatureContainer& cntnr)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeFeatureContainer(output, cntnr);
+    try {
+        state = writer->writeFeatureContainer(output, cntnr);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFFeatureContainerWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFFeatureContainerWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Pharm::CDFFeatureContainerWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Pharm::CDFFeatureContainerWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

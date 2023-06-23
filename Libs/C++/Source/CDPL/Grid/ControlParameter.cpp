@@ -31,17 +31,17 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		namespace ControlParameter
-		{
+        namespace ControlParameter
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
-		
-			CDPL_DEFINE_LOOKUP_KEY(CDF_WRITE_SINGLE_PRECISION_FLOATS);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
+        
+            CDPL_DEFINE_LOOKUP_KEY(CDF_WRITE_SINGLE_PRECISION_FLOATS);
+        }
 
-		void initControlParameters() {}
-	}
+        void initControlParameters() {}
+    }
 }

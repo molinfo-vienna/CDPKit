@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SMILESGZMolecularGraphWriter, DataFormat::SMILES_GZ> SMILESGZMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SMILESGZMolecularGraphWriter, DataFormat::SMILES_GZ> SMILESGZMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_SMILESGZMOLECULARGRAPHOUTPUTHANDLER_HPP

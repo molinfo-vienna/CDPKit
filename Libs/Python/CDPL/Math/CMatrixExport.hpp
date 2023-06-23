@@ -43,31 +43,31 @@
 namespace CDPLPythonMath
 {
 
-	template <typename MatrixType>
-	struct CMatrixExport
-	{
+    template <typename MatrixType>
+    struct CMatrixExport
+    {
 
-		CMatrixExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        CMatrixExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::ValueType ValueType;
-	
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const ValueType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def("clear", &MatrixType::clear, (python::arg("self"), python::arg("v") = ValueType()))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>())
-				.def(MatrixNDArrayInitVisitor<MatrixType>())
-				.def(MatrixNDArrayAssignVisitor<MatrixType>())
-				.def(MatrixVisitor<MatrixType>());
-		}
-	};
+            typedef typename MatrixType::ValueType ValueType;
+    
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const ValueType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def("clear", &MatrixType::clear, (python::arg("self"), python::arg("v") = ValueType()))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>())
+                .def(MatrixNDArrayInitVisitor<MatrixType>())
+                .def(MatrixNDArrayAssignVisitor<MatrixType>())
+                .def(MatrixVisitor<MatrixType>());
+        }
+    };
 }       
 
 #endif // CDPL_PYTHON_MATH_CMATRIXEXPORT_HPP

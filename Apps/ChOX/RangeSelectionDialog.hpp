@@ -34,32 +34,32 @@ class QSpinBox;
 namespace ChOX
 {
 
-	class DataSet;
+    class DataSet;
 
-	class RangeSelectionDialog : public QDialog
-	{
+    class RangeSelectionDialog : public QDialog
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		RangeSelectionDialog(QWidget*, DataSet&, Qt::WindowFlags = 0);
+    public:
+        RangeSelectionDialog(QWidget*, DataSet&, Qt::WindowFlags = 0);
 
-		int exec();
+        int exec();
 
-	private slots:
-		void select();
-		void unselect();
+    private slots:
+        void select();
+        void unselect();
 
-		void handleRangeStartChange(int);
-		void handleRangeEndChange(int);
+        void handleRangeStartChange(int);
+        void handleRangeEndChange(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		DataSet&  dataSet;
-		QSpinBox* rangeStartSpinBox;
-		QSpinBox* rangeEndSpinBox;
-	};
+        DataSet&  dataSet;
+        QSpinBox* rangeStartSpinBox;
+        QSpinBox* rangeEndSpinBox;
+    };
 }
 
 #endif // CHOX_RANGESELECTIONDIALOG_HPP

@@ -37,29 +37,29 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
-	
-		class BondContainer;
-	}
-	
-	namespace MolProp
-	{
+    namespace Chem 
+    {
+    
+        class BondContainer;
+    }
+    
+    namespace MolProp
+    {
 
-		CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::BondContainer& cntnr);
+        CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::BondContainer& cntnr);
 
-		CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::BondContainer& cntnr, std::size_t order, bool inc_aro = true);
+        CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::BondContainer& cntnr, std::size_t order, bool inc_aro = true);
 
-		CDPL_MOLPROP_API std::size_t getExplicitHydrogenBondCount(const Chem::BondContainer& cntnr);
+        CDPL_MOLPROP_API std::size_t getExplicitHydrogenBondCount(const Chem::BondContainer& cntnr);
 
-		CDPL_MOLPROP_API std::size_t getExplicitChainBondCount(const Chem::BondContainer& cntnr);
+        CDPL_MOLPROP_API std::size_t getExplicitChainBondCount(const Chem::BondContainer& cntnr);
 
-		CDPL_MOLPROP_API std::size_t getRingBondCount(const Chem::BondContainer& cntnr);
+        CDPL_MOLPROP_API std::size_t getRingBondCount(const Chem::BondContainer& cntnr);
 
-		CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::BondContainer& cntnr);
+        CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::BondContainer& cntnr);
 
-		CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::BondContainer& cntnr);
-	}
+        CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::BondContainer& cntnr);
+    }
 }
 
 #endif // CDPL_MOLPROP_BONDCONTAINERFUNCTIONS_HPP

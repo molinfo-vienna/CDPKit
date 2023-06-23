@@ -31,36 +31,36 @@
 namespace CDPL
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initAtomPropertyDefaults();
-		void initMolecularGraphPropertyDefaults();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-	}
+        void initAtomProperties();
+        void initMolecularGraphProperties();
+        void initAtomPropertyDefaults();
+        void initMolecularGraphPropertyDefaults();
+        void initControlParameters();
+        void initControlParameterDefaults();
+        void initDataFormats();
+    }
 }
 
 namespace
 {
 
-	struct CDPLBiomolInit
-	{
+    struct CDPLBiomolInit
+    {
 
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initAtomPropertyDefaults();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initMolecularGraphPropertyDefaults();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
-		}
+        CDPLBiomolInit() {
+            CDPL::Biomol::initAtomProperties();
+            CDPL::Biomol::initAtomPropertyDefaults();
+            CDPL::Biomol::initMolecularGraphProperties();
+            CDPL::Biomol::initMolecularGraphPropertyDefaults();
+            CDPL::Biomol::initControlParameters();
+            CDPL::Biomol::initControlParameterDefaults();
+            CDPL::Biomol::initDataFormats();
+        }
 
-	} cdplBiomolInit;
+    } cdplBiomolInit;
 }
 
 #endif // CDPL_BIOMOL_STATIC_LINK

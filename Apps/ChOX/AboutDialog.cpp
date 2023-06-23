@@ -33,17 +33,17 @@
 namespace
 {
 
-	const char* ABOUT_TEXT =
-	"<h2 align=center><b>- ChOX -</b></h2>"
-	"<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer</b></h2>"
-	"<p align=center><i>An Application for the Visualization and Manipulation of Chemical Datasets</i></p>"
-	"<p align=center>&copy; 2003 Thomas Seidel (thomas.seidel@univie.ac.at)</p>"
-	"<p align=justify>This program is free software; you can redistribute it and/or modify it under "
-	"the terms<br>of the GNU Lesser General Public License as published by the Free Software "
-	"Foundation;<br>either version 2 of the License, or (at your option) any later version.</p>"
-	"<p align=justify>This program is distributed in the hope that it will be useful, but WITHOUT "
-	"ANY WARRANTY;<br>without even the implied warranty of MERCHANTABILITY or FITNESS FOR A "
-	"PARTICULAR<br>PURPOSE. See the GNU Lesser General Public License for more details.</p>";
+    const char* ABOUT_TEXT =
+    "<h2 align=center><b>- ChOX -</b></h2>"
+    "<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer</b></h2>"
+    "<p align=center><i>An Application for the Visualization and Manipulation of Chemical Datasets</i></p>"
+    "<p align=center>&copy; 2003 Thomas Seidel (thomas.seidel@univie.ac.at)</p>"
+    "<p align=justify>This program is free software; you can redistribute it and/or modify it under "
+    "the terms<br>of the GNU Lesser General Public License as published by the Free Software "
+    "Foundation;<br>either version 2 of the License, or (at your option) any later version.</p>"
+    "<p align=justify>This program is distributed in the hope that it will be useful, but WITHOUT "
+    "ANY WARRANTY;<br>without even the implied warranty of MERCHANTABILITY or FITNESS FOR A "
+    "PARTICULAR<br>PURPOSE. See the GNU Lesser General Public License for more details.</p>";
 }
 
 
@@ -51,51 +51,51 @@ using namespace ChOX;
 
 
 AboutDialog::AboutDialog(QWidget* parent, Qt::WindowFlags f):
-	QDialog(parent, f)
+    QDialog(parent, f)
 {
-	init();
+    init();
 }
 
 void AboutDialog::init()
 {
-	setAttribute(Qt::WA_DeleteOnClose);
-	setWindowTitle(tr("ChOX - About"));
+    setAttribute(Qt::WA_DeleteOnClose);
+    setWindowTitle(tr("ChOX - About"));
 
 // -------
 
-	QBoxLayout* main_layout = new QVBoxLayout(this);
+    QBoxLayout* main_layout = new QVBoxLayout(this);
 
 // -------
 
-	QBoxLayout* h_box_layout = new QHBoxLayout();
+    QBoxLayout* h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
+    main_layout->addLayout(h_box_layout);
 
-	h_box_layout->addSpacing(30);
+    h_box_layout->addSpacing(30);
 
-	h_box_layout->addWidget(new QLabel(tr(ABOUT_TEXT), this));
+    h_box_layout->addWidget(new QLabel(tr(ABOUT_TEXT), this));
 
-	h_box_layout->addSpacing(30);
+    h_box_layout->addSpacing(30);
 
 // -------
 
-	h_box_layout = new QHBoxLayout();
+    h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
+    main_layout->addLayout(h_box_layout);
 
-	h_box_layout->addStretch();
+    h_box_layout->addStretch();
 
 // +++
 
-	QPushButton* ok_button = new QPushButton(tr("OK"), this);
+    QPushButton* ok_button = new QPushButton(tr("OK"), this);
 
-	ok_button->setDefault(true);
+    ok_button->setDefault(true);
 
-	connect(ok_button, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(ok_button, SIGNAL(clicked()), this, SLOT(accept()));
 
-	h_box_layout->addWidget(ok_button);
+    h_box_layout->addWidget(ok_button);
 
-	h_box_layout->addStretch();
+    h_box_layout->addStretch();
 
 }
 

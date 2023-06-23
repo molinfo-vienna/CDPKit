@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct ReactionMatchConstraint {};
+    struct ReactionMatchConstraint {};
 }
 
 
 void CDPLPythonChem::exportReactionMatchConstraints()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ReactionMatchConstraint, boost::noncopyable>("ReactionMatchConstraint", python::no_init)
-		.def_readonly("CONSTRAINT_LIST", &Chem::ReactionMatchConstraint::CONSTRAINT_LIST)    
-		.def_readonly("ATOM_MAPPING", &Chem::ReactionMatchConstraint::ATOM_MAPPING)    
+    python::class_<ReactionMatchConstraint, boost::noncopyable>("ReactionMatchConstraint", python::no_init)
+        .def_readonly("CONSTRAINT_LIST", &Chem::ReactionMatchConstraint::CONSTRAINT_LIST)    
+        .def_readonly("ATOM_MAPPING", &Chem::ReactionMatchConstraint::ATOM_MAPPING)    
         .def_readonly("COMPONENT_GROUPING", &Chem::ReactionMatchConstraint::COMPONENT_GROUPING);
 }

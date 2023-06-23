@@ -35,7 +35,7 @@ void CDPLPythonChem::exportDefaultTautomerGenerator()
     using namespace CDPL;
 
     python::class_<Chem::DefaultTautomerGenerator,
-		   python::bases<Chem::TautomerGenerator>, boost::noncopyable>("DefaultTautomerGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<Chem::DefaultTautomerGenerator>((python::arg("self"), python::arg("gen"))));
+           python::bases<Chem::TautomerGenerator>, boost::noncopyable>("DefaultTautomerGenerator", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<Chem::DefaultTautomerGenerator>((python::arg("self"), python::arg("gen"))));
 }

@@ -35,7 +35,7 @@ void CDPLPythonChem::exportPhosphinicAcidTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::PhosphinicAcidTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("PhosphinicAcidTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::PhosphinicAcidTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("PhosphinicAcidTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::PhosphinicAcidTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

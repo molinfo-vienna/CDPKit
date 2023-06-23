@@ -34,53 +34,53 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class MOLFileIOSettingsEditWidget : public SettingsEditWidget
-	{
+    class MOLFileIOSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		MOLFileIOSettingsEditWidget(QWidget*, Settings&);
+    public:
+        MOLFileIOSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&    settings;
-		QCheckBox*   iptStrictErrorCheckingCheckBox;
-		QCheckBox*   iptIgnoreParityCheckBox;
-		QCheckBox*   iptTrimStringsCheckBox;
-		QCheckBox*   iptTrimLinesCheckBox;
-		QCheckBox*   iptCheckLineLengthCheckBox;
-		QCheckBox*   iptMultiConfImportCheckBox;
-		QCheckBox*   optStrictErrorCheckingCheckBox;
-		QCheckBox*   optUpdateTimeStampCheckBox;
-		QCheckBox*   optTrimStringsCheckBox;
-		QCheckBox*   optTrimLinesCheckBox;
-		QCheckBox*   optTruncateStringsCheckBox;
-		QCheckBox*   optTruncateLinesCheckBox;
-		QCheckBox*   optCheckLineLengthCheckBox;
-		QCheckBox*   optIgnoreParityCheckBox;
-		QCheckBox*   optConcatenateRecordsCheckBox;
-		QCheckBox*   optMultiConfExportCheckBox;
-		unsigned int optCTabVersion;
-		bool         haveChanges;
-	};
+        Settings&    settings;
+        QCheckBox*   iptStrictErrorCheckingCheckBox;
+        QCheckBox*   iptIgnoreParityCheckBox;
+        QCheckBox*   iptTrimStringsCheckBox;
+        QCheckBox*   iptTrimLinesCheckBox;
+        QCheckBox*   iptCheckLineLengthCheckBox;
+        QCheckBox*   iptMultiConfImportCheckBox;
+        QCheckBox*   optStrictErrorCheckingCheckBox;
+        QCheckBox*   optUpdateTimeStampCheckBox;
+        QCheckBox*   optTrimStringsCheckBox;
+        QCheckBox*   optTrimLinesCheckBox;
+        QCheckBox*   optTruncateStringsCheckBox;
+        QCheckBox*   optTruncateLinesCheckBox;
+        QCheckBox*   optCheckLineLengthCheckBox;
+        QCheckBox*   optIgnoreParityCheckBox;
+        QCheckBox*   optConcatenateRecordsCheckBox;
+        QCheckBox*   optMultiConfExportCheckBox;
+        unsigned int optCTabVersion;
+        bool         haveChanges;
+    };
 }
 
 #endif // CHOX_MOLFILEIOSETTINGSEDITWIDGET_HPP

@@ -38,14 +38,14 @@ using namespace CDPL;
 
 Pharm::PharmacophoreAlignment::PharmacophoreAlignment(bool query_mode)
 {
-	setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
-	setEntityMatchFunction(FeatureTypeMatchFunctor());
-	setEntityPairMatchFunction(FeaturePairDistanceMatchFunctor(query_mode));
+    setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
+    setEntityMatchFunction(FeatureTypeMatchFunctor());
+    setEntityPairMatchFunction(FeaturePairDistanceMatchFunctor(query_mode));
 }
 
 void Pharm::PharmacophoreAlignment::addFeatures(const FeatureContainer& cntnr, bool first_set)
 {
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it)
-		if (!getDisabledFlag(*it))
-			addEntity(*it, first_set);
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it)
+        if (!getDisabledFlag(*it))
+            addEntity(*it, first_set);
 }

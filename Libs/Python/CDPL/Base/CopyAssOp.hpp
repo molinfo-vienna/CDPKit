@@ -35,7 +35,7 @@ namespace CDPLPythonBase
 
     typedef T& (T::*Type)(const T&);
   };
-	
+    
   template <typename T>
   inline typename CopyAssOp<T>::Type copyAssOp(T& (T::*op)(const T&))
   {

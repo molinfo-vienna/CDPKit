@@ -33,5 +33,5 @@ using namespace CDPL;
 
 double MolProp::calcLogS(const Chem::MolecularGraph& molgraph)
 {
-	return LogSCalculator().calculate(molgraph);
+    return LogSCalculator().calculate(molgraph);
 }

@@ -32,19 +32,19 @@
 
 void CDPLPythonDescr::exportMolecularGraphFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
- 	python::def("calcTopologicalRadius", &Descr::calcTopologicalRadius, python::arg("molgraph"));
-	python::def("calcTopologicalDiameter", &Descr::calcTopologicalDiameter, python::arg("molgraph"));
-	python::def("calcRingComplexity", &Descr::calcRingComplexity, python::arg("molgraph"));
-	python::def("calcMolecularComplexity", &Descr::calcMolecularComplexity, python::arg("molgraph"));
-	python::def("calcKierShape1", &Descr::calcKierShape1, python::arg("molgraph"));
-	python::def("calcKierShape2", &Descr::calcKierShape2, python::arg("molgraph"));
-	python::def("calcKierShape3", &Descr::calcKierShape3, python::arg("molgraph"));
-	python::def("calcWienerIndex", &Descr::calcWienerIndex, python::arg("molgraph"));
-	python::def("calcRandicIndex", &Descr::calcRandicIndex, python::arg("molgraph"));
-	python::def("calcZagrebIndex1", &Descr::calcZagrebIndex1, python::arg("molgraph"));
-	python::def("calcZagrebIndex2", &Descr::calcZagrebIndex2, python::arg("molgraph"));
-	python::def("calcTotalWalkCount", &Descr::calcTotalWalkCount, python::arg("molgraph"));
+     python::def("calcTopologicalRadius", &Descr::calcTopologicalRadius, python::arg("molgraph"));
+    python::def("calcTopologicalDiameter", &Descr::calcTopologicalDiameter, python::arg("molgraph"));
+    python::def("calcRingComplexity", &Descr::calcRingComplexity, python::arg("molgraph"));
+    python::def("calcMolecularComplexity", &Descr::calcMolecularComplexity, python::arg("molgraph"));
+    python::def("calcKierShape1", &Descr::calcKierShape1, python::arg("molgraph"));
+    python::def("calcKierShape2", &Descr::calcKierShape2, python::arg("molgraph"));
+    python::def("calcKierShape3", &Descr::calcKierShape3, python::arg("molgraph"));
+    python::def("calcWienerIndex", &Descr::calcWienerIndex, python::arg("molgraph"));
+    python::def("calcRandicIndex", &Descr::calcRandicIndex, python::arg("molgraph"));
+    python::def("calcZagrebIndex1", &Descr::calcZagrebIndex1, python::arg("molgraph"));
+    python::def("calcZagrebIndex2", &Descr::calcZagrebIndex2, python::arg("molgraph"));
+    python::def("calcTotalWalkCount", &Descr::calcTotalWalkCount, python::arg("molgraph"));
 }

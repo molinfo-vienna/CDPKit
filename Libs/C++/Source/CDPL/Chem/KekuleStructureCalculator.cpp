@@ -47,186 +47,186 @@ Chem::KekuleStructureCalculator::KekuleStructureCalculator() {}
 
 Chem::KekuleStructureCalculator::KekuleStructureCalculator(const MolecularGraph& molgraph, Util::STArray& orders) 
 {
-	calculate(molgraph, orders);
+    calculate(molgraph, orders);
 }
 
 void Chem::KekuleStructureCalculator::calculate(const MolecularGraph& molgraph, Util::STArray& orders)
 {
-	init(molgraph, orders);
+    init(molgraph, orders);
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	if (startAtomIdx == num_atoms)
-		return;
+    if (startAtomIdx == num_atoms)
+        return;
 
-	for (std::size_t i = startAtomIdx; i < num_atoms; i++) {
-		const Atom& atom = molgraph.getAtom(i);
-		
-		unsigned int atom_type = getType(atom);
-		const Util::STArray& valence_states = AtomDictionary::getValenceStates(atom_type);		
+    for (std::size_t i = startAtomIdx; i < num_atoms; i++) {
+        const Atom& atom = molgraph.getAtom(i);
+        
+        unsigned int atom_type = getType(atom);
+        const Util::STArray& valence_states = AtomDictionary::getValenceStates(atom_type);        
 
-		if (valence_states.getSize() == 0) {
-			defineNbrBondOrders(atom);
-			continue;
-		}
+        if (valence_states.getSize() == 0) {
+            defineNbrBondOrders(atom);
+            continue;
+        }
 
-		long charge = getFormalCharge(atom);
+        long charge = getFormalCharge(atom);
 
-		if (atom_type == AtomType::C)
-			charge = std::min(charge, -charge);
+        if (atom_type == AtomType::C)
+            charge = std::min(charge, -charge);
 
-		long free_valence = valence_states[0] + charge;
+        long free_valence = valence_states[0] + charge;
 
-		if (hasImplicitHydrogenCount(atom))
-			free_valence -= getImplicitHydrogenCount(atom);
+        if (hasImplicitHydrogenCount(atom))
+            free_valence -= getImplicitHydrogenCount(atom);
 
-		std::size_t num_undef_nbr_bonds = 0;
-		Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
-		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+        std::size_t num_undef_nbr_bonds = 0;
+        Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
+        Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
-			const Bond& bond = *b_it;
+        for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
+            const Bond& bond = *b_it;
 
-			if (!molgraph.containsBond(bond) || !molgraph.containsAtom(*a_it))
-				continue;
+            if (!molgraph.containsBond(bond) || !molgraph.containsAtom(*a_it))
+                continue;
 
-			std::size_t bond_idx = molgraph.getBondIndex(bond);
+            std::size_t bond_idx = molgraph.getBondIndex(bond);
 
-			if (!defOrderMask.test(bond_idx))
-				num_undef_nbr_bonds++;
-			else
-				free_valence -= orders[bond_idx];
-		}
+            if (!defOrderMask.test(bond_idx))
+                num_undef_nbr_bonds++;
+            else
+                free_valence -= orders[bond_idx];
+        }
 
-		if (free_valence < 0 || long(num_undef_nbr_bonds) >= free_valence)
-			defineNbrBondOrders(atom);
-	}
+        if (free_valence < 0 || long(num_undef_nbr_bonds) >= free_valence)
+            defineNbrBondOrders(atom);
+    }
 
-	typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> BondGraph; 
-	typedef boost::property_map<BondGraph, boost::vertex_index_t>::type AtomIndexMap;
-	typedef boost::graph_traits<BondGraph>::vertex_descriptor VertexDescriptor;
-	typedef std::vector<VertexDescriptor> VertexList;
+    typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> BondGraph; 
+    typedef boost::property_map<BondGraph, boost::vertex_index_t>::type AtomIndexMap;
+    typedef boost::graph_traits<BondGraph>::vertex_descriptor VertexDescriptor;
+    typedef std::vector<VertexDescriptor> VertexList;
 
-	std::size_t num_verts = num_atoms - startAtomIdx;
+    std::size_t num_verts = num_atoms - startAtomIdx;
 
-	BondGraph bond_graph(num_verts);
-	VertexList max_match(num_verts);
-	std::size_t i = 0;
+    BondGraph bond_graph(num_verts);
+    VertexList max_match(num_verts);
+    std::size_t i = 0;
 
-	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it, i++) {
-		if (defOrderMask.test(i))
-			continue;
+    for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it, i++) {
+        if (defOrderMask.test(i))
+            continue;
 
-		const Bond& bond = *it;
+        const Bond& bond = *it;
 
-		if (&bond.getBegin() == &bond.getEnd())
-			continue;
+        if (&bond.getBegin() == &bond.getEnd())
+            continue;
 
-		conctdUndefBonds.clear();
+        conctdUndefBonds.clear();
 
-		getConnectedUndefBonds(bond.getEnd());
+        getConnectedUndefBonds(bond.getEnd());
 
-		bond_graph.clear();
+        bond_graph.clear();
 
-		BondList::iterator bonds_beg = conctdUndefBonds.begin();
-		BondList::iterator bonds_end = conctdUndefBonds.end();
+        BondList::iterator bonds_beg = conctdUndefBonds.begin();
+        BondList::iterator bonds_end = conctdUndefBonds.end();
 
-		for (BondList::iterator it = bonds_beg; it != bonds_end; ++it) {
-			const Bond* bond = *it;
+        for (BondList::iterator it = bonds_beg; it != bonds_end; ++it) {
+            const Bond* bond = *it;
 
-			boost::add_edge(molgraph.getAtomIndex(bond->getBegin()) - startAtomIdx, 
-							molgraph.getAtomIndex(bond->getEnd()) - startAtomIdx,
-							bond_graph);
-		}
+            boost::add_edge(molgraph.getAtomIndex(bond->getBegin()) - startAtomIdx, 
+                            molgraph.getAtomIndex(bond->getEnd()) - startAtomIdx,
+                            bond_graph);
+        }
 
-		max_match.assign(num_verts, boost::graph_traits<BondGraph>::null_vertex());
+        max_match.assign(num_verts, boost::graph_traits<BondGraph>::null_vertex());
 
-		boost::edmonds_maximum_cardinality_matching(bond_graph, &max_match[0]);
+        boost::edmonds_maximum_cardinality_matching(bond_graph, &max_match[0]);
 
-		AtomIndexMap atom_index_map = boost::get(boost::vertex_index, bond_graph);
-		boost::graph_traits<BondGraph>::vertex_iterator vi, vi_end;
+        AtomIndexMap atom_index_map = boost::get(boost::vertex_index, bond_graph);
+        boost::graph_traits<BondGraph>::vertex_iterator vi, vi_end;
   
-		for (boost::tie(vi, vi_end) = boost::vertices(bond_graph); vi != vi_end; ++vi) {
-			if (max_match[*vi] != boost::graph_traits<BondGraph>::null_vertex() && *vi < max_match[*vi]) {
-				std::size_t atom_idx1 = atom_index_map[*vi] + startAtomIdx;
-				std::size_t atom_idx2 = atom_index_map[max_match[*vi]] + startAtomIdx;
-				std::size_t bond_idx = molgraph.getBondIndex(molgraph.getAtom(atom_idx1).getBondToAtom(molgraph.getAtom(atom_idx2)));
+        for (boost::tie(vi, vi_end) = boost::vertices(bond_graph); vi != vi_end; ++vi) {
+            if (max_match[*vi] != boost::graph_traits<BondGraph>::null_vertex() && *vi < max_match[*vi]) {
+                std::size_t atom_idx1 = atom_index_map[*vi] + startAtomIdx;
+                std::size_t atom_idx2 = atom_index_map[max_match[*vi]] + startAtomIdx;
+                std::size_t bond_idx = molgraph.getBondIndex(molgraph.getAtom(atom_idx1).getBondToAtom(molgraph.getAtom(atom_idx2)));
 
-				orders[bond_idx] = 2;
-			}
-		}
-	}
+                orders[bond_idx] = 2;
+            }
+        }
+    }
 }
 
 void Chem::KekuleStructureCalculator::init(const MolecularGraph& molgraph, Util::STArray& orders)
 {
-	std::size_t num_bonds = molgraph.getNumBonds();
-	molGraph = &molgraph;
+    std::size_t num_bonds = molgraph.getNumBonds();
+    molGraph = &molgraph;
 
-	orders.assign(num_bonds, 0);
-	defOrderMask.resize(num_bonds);
-	defOrderMask.set();
+    orders.assign(num_bonds, 0);
+    defOrderMask.resize(num_bonds);
+    defOrderMask.set();
 
-	startAtomIdx = molgraph.getNumAtoms();
+    startAtomIdx = molgraph.getNumAtoms();
 
-	for (std::size_t i = 0; i < num_bonds; i++) {
-		const Bond& bond = molgraph.getBond(i);
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        const Bond& bond = molgraph.getBond(i);
 
-		if (!molgraph.containsAtom(bond.getBegin()) || !molgraph.containsAtom(bond.getEnd()))
-			continue;
+        if (!molgraph.containsAtom(bond.getBegin()) || !molgraph.containsAtom(bond.getEnd()))
+            continue;
 
-		if (hasOrder(bond)) {
-			orders[i] = getOrder(bond);
+        if (hasOrder(bond)) {
+            orders[i] = getOrder(bond);
 
-		} else {
-			orders[i] = 1;
-			defOrderMask.reset(i);
+        } else {
+            orders[i] = 1;
+            defOrderMask.reset(i);
 
-			startAtomIdx = std::min(startAtomIdx, molgraph.getAtomIndex(bond.getBegin()));
-			startAtomIdx = std::min(startAtomIdx, molgraph.getAtomIndex(bond.getEnd()));
-		}
-	}
+            startAtomIdx = std::min(startAtomIdx, molgraph.getAtomIndex(bond.getBegin()));
+            startAtomIdx = std::min(startAtomIdx, molgraph.getAtomIndex(bond.getEnd()));
+        }
+    }
 }
 
 void Chem::KekuleStructureCalculator::defineNbrBondOrders(const Atom& atom)
 {
-	Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
-	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
+    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
-		const Bond& bond = *b_it;
+    for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
+        const Bond& bond = *b_it;
 
-		if (!molGraph->containsBond(bond) || !molGraph->containsAtom(*a_it))
-			continue;
+        if (!molGraph->containsBond(bond) || !molGraph->containsAtom(*a_it))
+            continue;
 
-		defOrderMask.set(molGraph->getBondIndex(bond));
-	}
+        defOrderMask.set(molGraph->getBondIndex(bond));
+    }
 }
 
 void Chem::KekuleStructureCalculator::getConnectedUndefBonds(const Chem::Atom& atom)
 {
-	Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
-	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
+    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
-		const Atom& nbr_atom = *a_it;
+    for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
+        const Atom& nbr_atom = *a_it;
 
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
+        if (!molGraph->containsAtom(nbr_atom))
+            continue;
 
-		const Bond& bond = *b_it;
+        const Bond& bond = *b_it;
 
-		if (!molGraph->containsBond(bond))
-			continue;
+        if (!molGraph->containsBond(bond))
+            continue;
 
-		std::size_t bond_idx = molGraph->getBondIndex(bond);
+        std::size_t bond_idx = molGraph->getBondIndex(bond);
 
-		if (defOrderMask.test(bond_idx))
-			continue;
+        if (defOrderMask.test(bond_idx))
+            continue;
 
-		defOrderMask.set(bond_idx);
-		conctdUndefBonds.push_back(&bond);
+        defOrderMask.set(bond_idx);
+        conctdUndefBonds.push_back(&bond);
 
-		getConnectedUndefBonds(nbr_atom);
-	}
+        getConnectedUndefBonds(nbr_atom);
+    }
 }

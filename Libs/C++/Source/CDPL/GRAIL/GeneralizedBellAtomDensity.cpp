@@ -50,11 +50,11 @@ double GRAIL::GeneralizedBellAtomDensity::operator()(const Math::Vector3D& pos, 
 {
     Math::Vector3D tmp;
 
-	tmp = atom_pos;
-	tmp.minusAssign(pos);
+    tmp = atom_pos;
+    tmp.minusAssign(pos);
 
-	double dist = length(tmp);
-	double vdw_radius = Internal::getVdWRadius(atom);
+    double dist = length(tmp);
+    double vdw_radius = Internal::getVdWRadius(atom);
 
-	return Math::generalizedBell(dist, (vdw_radius + probeRadius) * radiusScalingFactor, 10.0, 0.0);
+    return Math::generalizedBell(dist, (vdw_radius + probeRadius) * radiusScalingFactor, 10.0, 0.0);
 }

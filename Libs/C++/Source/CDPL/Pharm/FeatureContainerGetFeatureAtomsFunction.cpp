@@ -40,18 +40,18 @@ using namespace CDPL;
 
 void Pharm::getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms, bool append)
 {
-	if (!append)
-		atoms.clear();
+    if (!append)
+        atoms.clear();
 
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ftr = *it;
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
+        const Feature& ftr = *it;
 
-		if (!hasSubstructure(ftr))
-			continue;
+        if (!hasSubstructure(ftr))
+            continue;
 
-		const Chem::Fragment::SharedPointer substruct = getSubstructure(ftr);
+        const Chem::Fragment::SharedPointer substruct = getSubstructure(ftr);
 
-		std::for_each(substruct->getAtomsBegin(), substruct->getAtomsEnd(), 
-					  std::bind(&Chem::Fragment::addAtom, std::ref(atoms), std::placeholders::_1));
-	}
+        std::for_each(substruct->getAtomsBegin(), substruct->getAtomsEnd(), 
+                      std::bind(&Chem::Fragment::addAtom, std::ref(atoms), std::placeholders::_1));
+    }
 }

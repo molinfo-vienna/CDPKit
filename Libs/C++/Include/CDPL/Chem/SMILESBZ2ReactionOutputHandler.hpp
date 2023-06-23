@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of bzip2-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SMILESBZ2ReactionWriter, DataFormat::SMILES_BZ2> SMILESBZ2ReactionOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of bzip2-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SMILESBZ2ReactionWriter, DataFormat::SMILES_BZ2> SMILESBZ2ReactionOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_SMILESBZ2REACTIONOUTPUTHANDLER_HPP

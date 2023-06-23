@@ -37,14 +37,14 @@ void CDPLPythonPharm::exportFeatureInteractionScoreCombiner()
     using namespace CDPL;
 
     python::class_<Pharm::FeatureInteractionScoreCombiner, Pharm::FeatureInteractionScoreCombiner::SharedPointer,
-				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("FeatureInteractionScoreCombiner", python::no_init)
-		.def(python::init<const Pharm::FeatureInteractionScoreCombiner&>(
-				 (python::arg("self"), python::arg("comb"))))
-		.def(python::init<const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, 
-			 const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, const Pharm::FeatureInteractionScoreCombiner::CombinationFunction&>(
-				 (python::arg("self"), python::arg("score1"), python::arg("score2"), python::arg("comb_func"))))
-		.def(python::init<const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, const Pharm::FeatureInteractionScoreCombiner::InteractionScore&>(
-				 (python::arg("self"), python::arg("score1"), python::arg("score2"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureInteractionScoreCombiner::operator=), 
-			 (python::arg("self"), python::arg("con")), python::return_self<>());
+                   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("FeatureInteractionScoreCombiner", python::no_init)
+        .def(python::init<const Pharm::FeatureInteractionScoreCombiner&>(
+                 (python::arg("self"), python::arg("comb"))))
+        .def(python::init<const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, 
+             const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, const Pharm::FeatureInteractionScoreCombiner::CombinationFunction&>(
+                 (python::arg("self"), python::arg("score1"), python::arg("score2"), python::arg("comb_func"))))
+        .def(python::init<const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, const Pharm::FeatureInteractionScoreCombiner::InteractionScore&>(
+                 (python::arg("self"), python::arg("score1"), python::arg("score2"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureInteractionScoreCombiner::operator=), 
+             (python::arg("self"), python::arg("con")), python::return_self<>());
 }

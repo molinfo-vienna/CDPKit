@@ -31,31 +31,31 @@
 
 BOOST_PYTHON_MODULE(_molprop)
 {
-	using namespace CDPLPythonMolProp;
+    using namespace CDPLPythonMolProp;
 
-	exportAtomProperties();
-	exportBondProperties();
-	exportAtomPropertyDefaults();
+    exportAtomProperties();
+    exportBondProperties();
+    exportAtomPropertyDefaults();
 
-	exportCoordinationGeometries();
-	exportHBondDonorAtomTypes();
-	exportHBondAcceptorAtomTypes();
-	
-	exportElementHistogram();
-	exportMassComposition();
+    exportCoordinationGeometries();
+    exportHBondDonorAtomTypes();
+    exportHBondAcceptorAtomTypes();
+    
+    exportElementHistogram();
+    exportMassComposition();
 
-	exportAtomHydrophobicityCalculator();
-	exportLogSCalculator();
-	exportXLogPCalculator();
-	exportTPSACalculator();
-	exportPEOESigmaChargeCalculator();
-	exportMHMOPiChargeCalculator();
-	exportHBondDonorAtomTyper();
-	exportHBondAcceptorAtomTyper();
-	
-	exportAtomContainerFunctions();
-	exportBondContainerFunctions();
-	exportAtomFunctions();
-	exportBondFunctions();
-	exportMolecularGraphFunctions();
+    exportAtomHydrophobicityCalculator();
+    exportLogSCalculator();
+    exportXLogPCalculator();
+    exportTPSACalculator();
+    exportPEOESigmaChargeCalculator();
+    exportMHMOPiChargeCalculator();
+    exportHBondDonorAtomTyper();
+    exportHBondAcceptorAtomTyper();
+    
+    exportAtomContainerFunctions();
+    exportBondContainerFunctions();
+    exportAtomFunctions();
+    exportBondFunctions();
+    exportMolecularGraphFunctions();
 }

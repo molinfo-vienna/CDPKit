@@ -29,26 +29,26 @@
 namespace CDPLPythonVis
 {
 
-	void exportAlignments();
-	void exportArrowStyles();
-	void exportLayoutDirections();
-	void exportLayoutStyles();
-	void exportSizeAdjustments();
-	void exportAtomColorTables();
+    void exportAlignments();
+    void exportArrowStyles();
+    void exportLayoutDirections();
+    void exportLayoutStyles();
+    void exportSizeAdjustments();
+    void exportAtomColorTables();
 
-	void exportMolecularGraphProperties();
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportReactionProperties();
-	void exportMolecularGraphPropertyDefaults();
-	void exportAtomPropertyDefaults();
-	void exportBondPropertyDefaults();
-	void exportReactionPropertyDefaults();
+    void exportMolecularGraphProperties();
+    void exportAtomProperties();
+    void exportBondProperties();
+    void exportReactionProperties();
+    void exportMolecularGraphPropertyDefaults();
+    void exportAtomPropertyDefaults();
+    void exportBondPropertyDefaults();
+    void exportReactionPropertyDefaults();
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+    void exportControlParameters();
+    void exportControlParameterDefaults();
 
-	void exportDataFormats();
+    void exportDataFormats();
 }
 
 #endif // CDPL_PYTHON_VIS_NAMESPACEEXPORTS_HPP

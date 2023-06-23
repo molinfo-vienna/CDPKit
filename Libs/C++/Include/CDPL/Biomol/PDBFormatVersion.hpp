@@ -33,32 +33,32 @@
 namespace CDPL
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief Provides constants for the specification of the <em>Brookhaven Protein Data Bank (PDB)</em>
-		 *        [\ref PDB] format version.
-		 */
-		namespace PDBFormatVersion
-		{
+        /**
+         * \brief Provides constants for the specification of the <em>Brookhaven Protein Data Bank (PDB)</em>
+         *        [\ref PDB] format version.
+         */
+        namespace PDBFormatVersion
+        {
 
-			/**
-			 * \brief Specifies that the data format version is undefined.
-			 */
-			const unsigned int UNDEF = 0;
+            /**
+             * \brief Specifies that the data format version is undefined.
+             */
+            const unsigned int UNDEF = 0;
 
-			/**
-			 * \brief Specifies the PDB format version \e V2.
-			 */
-			const unsigned int V2    = 2;
+            /**
+             * \brief Specifies the PDB format version \e V2.
+             */
+            const unsigned int V2    = 2;
 
-			/**
-			 * \brief Specifies the PDB format version \e V3.
-			 */
-			const unsigned int V3    = 3;
-		}
-	}
+            /**
+             * \brief Specifies the PDB format version \e V3.
+             */
+            const unsigned int V3    = 3;
+        }
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBFORMATVERSION_HPP

@@ -41,140 +41,140 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API ConformerGeneratorSettings
-		{
+        class CDPL_CONFGEN_API ConformerGeneratorSettings
+        {
 
-		  public:
-			static const ConformerGeneratorSettings DEFAULT;
+          public:
+            static const ConformerGeneratorSettings DEFAULT;
 
-			static const ConformerGeneratorSettings SMALL_SET_DIVERSE;
-			static const ConformerGeneratorSettings MEDIUM_SET_DIVERSE;
-			static const ConformerGeneratorSettings LARGE_SET_DIVERSE;
+            static const ConformerGeneratorSettings SMALL_SET_DIVERSE;
+            static const ConformerGeneratorSettings MEDIUM_SET_DIVERSE;
+            static const ConformerGeneratorSettings LARGE_SET_DIVERSE;
 
-			static const ConformerGeneratorSettings SMALL_SET_DENSE;
-			static const ConformerGeneratorSettings MEDIUM_SET_DENSE;
-			static const ConformerGeneratorSettings LARGE_SET_DENSE;
+            static const ConformerGeneratorSettings SMALL_SET_DENSE;
+            static const ConformerGeneratorSettings MEDIUM_SET_DENSE;
+            static const ConformerGeneratorSettings LARGE_SET_DENSE;
 
-			ConformerGeneratorSettings();
+            ConformerGeneratorSettings();
 
-			void setSamplingMode(unsigned int mode);
+            void setSamplingMode(unsigned int mode);
 
-			unsigned int getSamplingMode() const;
+            unsigned int getSamplingMode() const;
 
-			void sampleHeteroAtomHydrogens(bool sample);
-				
-			bool sampleHeteroAtomHydrogens() const;
+            void sampleHeteroAtomHydrogens(bool sample);
+                
+            bool sampleHeteroAtomHydrogens() const;
 
-			void sampleAngleToleranceRanges(bool sample);
-				
-			bool sampleAngleToleranceRanges() const;
+            void sampleAngleToleranceRanges(bool sample);
+                
+            bool sampleAngleToleranceRanges() const;
 
-			void enumerateRings(bool enumerate);
+            void enumerateRings(bool enumerate);
 
-			bool enumerateRings() const;
+            bool enumerateRings() const;
 
-			void setNitrogenEnumerationMode(unsigned int mode);
+            void setNitrogenEnumerationMode(unsigned int mode);
 
-			unsigned int getNitrogenEnumerationMode() const;
+            unsigned int getNitrogenEnumerationMode() const;
 
-			void generateCoordinatesFromScratch(bool generate);
-	
-			bool generateCoordinatesFromScratch() const;
+            void generateCoordinatesFromScratch(bool generate);
+    
+            bool generateCoordinatesFromScratch() const;
 
-			void includeInputCoordinates(bool include);
-	
-			bool includeInputCoordinates() const;
+            void includeInputCoordinates(bool include);
+    
+            bool includeInputCoordinates() const;
 
-			void setEnergyWindow(double win_size);
+            void setEnergyWindow(double win_size);
 
-			double getEnergyWindow() const;
+            double getEnergyWindow() const;
 
-			void setMaxPoolSize(std::size_t max_size);
+            void setMaxPoolSize(std::size_t max_size);
 
-			std::size_t getMaxPoolSize() const;
+            std::size_t getMaxPoolSize() const;
 
-			void setTimeout(std::size_t mil_secs);
+            void setTimeout(std::size_t mil_secs);
 
-			std::size_t getTimeout() const;
+            std::size_t getTimeout() const;
 
-			void setForceFieldTypeSystematic(unsigned int type);
-	    
-			unsigned int getForceFieldTypeSystematic() const;
+            void setForceFieldTypeSystematic(unsigned int type);
+        
+            unsigned int getForceFieldTypeSystematic() const;
 
-			void setForceFieldTypeStochastic(unsigned int type);
-	    
-			unsigned int getForceFieldTypeStochastic() const;
-			
-			void strictForceFieldParameterization(bool strict);
+            void setForceFieldTypeStochastic(unsigned int type);
+        
+            unsigned int getForceFieldTypeStochastic() const;
+            
+            void strictForceFieldParameterization(bool strict);
 
-			bool strictForceFieldParameterization() const;
+            bool strictForceFieldParameterization() const;
 
-			void setDielectricConstant(double de_const);
+            void setDielectricConstant(double de_const);
 
-			double getDielectricConstant() const;
+            double getDielectricConstant() const;
 
-			void setDistanceExponent(double exponent);
+            void setDistanceExponent(double exponent);
 
-			double getDistanceExponent() const;
+            double getDistanceExponent() const;
 
-			void setMaxNumOutputConformers(std::size_t max_num);
+            void setMaxNumOutputConformers(std::size_t max_num);
 
-			std::size_t getMaxNumOutputConformers() const;
+            std::size_t getMaxNumOutputConformers() const;
 
-			void setMinRMSD(double min_rmsd);
+            void setMinRMSD(double min_rmsd);
 
-			double getMinRMSD() const;
+            double getMinRMSD() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_iter);
+            void setMaxNumRefinementIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumRefinementIterations() const;
+            std::size_t getMaxNumRefinementIterations() const;
 
-			void setRefinementTolerance(double tol);
+            void setRefinementTolerance(double tol);
 
-			double getRefinementTolerance() const;
+            double getRefinementTolerance() const;
 
-			void setMaxNumSampledConformers(std::size_t max_num);
+            void setMaxNumSampledConformers(std::size_t max_num);
 
-			std::size_t getMaxNumSampledConformers() const;
+            std::size_t getMaxNumSampledConformers() const;
 
-			void setConvergenceCheckCycleSize(std::size_t size);
+            void setConvergenceCheckCycleSize(std::size_t size);
 
-			std::size_t getConvergenceCheckCycleSize() const;
+            std::size_t getConvergenceCheckCycleSize() const;
 
-			void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
+            void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
-			std::size_t getMacrocycleRotorBondCountThreshold() const;
+            std::size_t getMacrocycleRotorBondCountThreshold() const;
 
-			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
+            FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
-			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
+            const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
-		  private:
-			unsigned int                       samplingMode;
-			bool                               sampleHetAtomHs;
-			bool                               sampleTolRanges;
-			bool                               enumRings;
-			unsigned int                       nitrogenEnumMode;
-			bool                               fromScratch;
-			bool                               incInputCoords;
-			double                             eWindow;
-			std::size_t                        maxPoolSize;
-			std::size_t                        timeout;
-			unsigned int                       forceFieldTypeSys;
-			unsigned int                       forceFieldTypeStoch;
-			bool                               strictParam;
-			double                             dielectricConst;
-			double                             distExponent;
-			std::size_t                        maxNumOutputConfs;
-			double                             minRMSD;
-			std::size_t                        maxNumRefIters;
-			double                             refTolerance;
-			std::size_t                        maxNumSampledConfs;
-			std::size_t                        convCheckCycleSize;
-			std::size_t                        mcRotorBondCountThresh;
-			FragmentConformerGeneratorSettings fragBuildSettings;
-		};
-	};
+          private:
+            unsigned int                       samplingMode;
+            bool                               sampleHetAtomHs;
+            bool                               sampleTolRanges;
+            bool                               enumRings;
+            unsigned int                       nitrogenEnumMode;
+            bool                               fromScratch;
+            bool                               incInputCoords;
+            double                             eWindow;
+            std::size_t                        maxPoolSize;
+            std::size_t                        timeout;
+            unsigned int                       forceFieldTypeSys;
+            unsigned int                       forceFieldTypeStoch;
+            bool                               strictParam;
+            double                             dielectricConst;
+            double                             distExponent;
+            std::size_t                        maxNumOutputConfs;
+            double                             minRMSD;
+            std::size_t                        maxNumRefIters;
+            double                             refTolerance;
+            std::size_t                        maxNumSampledConfs;
+            std::size_t                        convCheckCycleSize;
+            std::size_t                        mcRotorBondCountThresh;
+            FragmentConformerGeneratorSettings fragBuildSettings;
+        };
+    };
 }
 
 #endif // CDPL_CONFGEN_CONFORMERGENERATORSETTINGS_HPP

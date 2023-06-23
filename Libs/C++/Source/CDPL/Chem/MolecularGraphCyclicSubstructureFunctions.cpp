@@ -36,23 +36,23 @@ using namespace CDPL;
 
 Chem::Fragment::SharedPointer Chem::perceiveCyclicSubstructure(const MolecularGraph& molgraph)
 {
-	Fragment::SharedPointer substruct_ptr(new CyclicSubstructure(molgraph));
+    Fragment::SharedPointer substruct_ptr(new CyclicSubstructure(molgraph));
 
-	return substruct_ptr;
+    return substruct_ptr;
 }
 
 Chem::Fragment::SharedPointer Chem::perceiveCyclicSubstructure(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_substruct = molgraph.getProperty(MolecularGraphProperty::CYCLIC_SUBSTRUCTURE, false);
-	
-		if (!prev_substruct.isEmpty())
-			return prev_substruct.getData<Fragment::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_substruct = molgraph.getProperty(MolecularGraphProperty::CYCLIC_SUBSTRUCTURE, false);
+    
+        if (!prev_substruct.isEmpty())
+            return prev_substruct.getData<Fragment::SharedPointer>();
+    }
 
-	Fragment::SharedPointer substruct_ptr(new CyclicSubstructure(molgraph));
+    Fragment::SharedPointer substruct_ptr(new CyclicSubstructure(molgraph));
 
-	molgraph.setProperty(MolecularGraphProperty::CYCLIC_SUBSTRUCTURE, substruct_ptr);
+    molgraph.setProperty(MolecularGraphProperty::CYCLIC_SUBSTRUCTURE, substruct_ptr);
 
-	return substruct_ptr;
+    return substruct_ptr;
 }

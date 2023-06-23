@@ -35,7 +35,7 @@ void CDPLPythonChem::exportSulfenicAcidTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::SulfenicAcidTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("SulfenicAcidTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::SulfenicAcidTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("SulfenicAcidTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::SulfenicAcidTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

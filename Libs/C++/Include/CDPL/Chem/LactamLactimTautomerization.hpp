@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief LactamLactimTautomerizationRule.
-		 */
-		class CDPL_CHEM_API LactamLactimTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief LactamLactimTautomerizationRule.
+         */
+        class CDPL_CHEM_API LactamLactimTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			LactamLactimTautomerization();
-		};
+          public:
+            LactamLactimTautomerization();
+        };
     }
 }
 

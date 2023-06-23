@@ -34,33 +34,33 @@
 
 void CDPLPythonMath::exportSlice()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	typedef Math::Slice<std::size_t, std::ptrdiff_t> SliceType;
-	typedef SliceType::SizeType SizeType;
-	typedef SliceType::DifferenceType DifferenceType;
+    typedef Math::Slice<std::size_t, std::ptrdiff_t> SliceType;
+    typedef SliceType::SizeType SizeType;
+    typedef SliceType::DifferenceType DifferenceType;
 
-	python::class_<SliceType>("Slice", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const SliceType&>((python::arg("self"), python::arg("s"))))
-		.def(python::init<SizeType, DifferenceType, SizeType>(
-				 (python::arg("self"), python::arg("start"), python::arg("stride"), python::arg("size"))))
-		.def("getStart", &SliceType::getStart, python::arg("self"))
-		.def("getStride", &SliceType::getStride, python::arg("self"))
-		.def("getSize", &SliceType::getSize, python::arg("self"))
-		.def("isEmpty", &SliceType::isEmpty, python::arg("self"))
-		.def("getIndex", &SliceType::operator(), (python::arg("self"), python::arg("i")))
-		.def("assign", CDPLPythonBase::copyAssOp(&SliceType::operator=), (python::arg("self"), python::arg("s")), python::return_self<>())
-		.def("swap", static_cast<void (SliceType::*)(SliceType&)>(&SliceType::swap), (python::arg("self"), python::arg("s")))
-		.def("__eq__", &SliceType::operator==, (python::arg("self"), python::arg("s")))
-		.def("__ne__", &SliceType::operator!=, (python::arg("self"), python::arg("s")))
-		.def("__call__", &SliceType::operator(), (python::arg("self"), python::arg("i")))
-		.def("__getitem__", &SliceType::operator(), (python::arg("self"), python::arg("i")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<SliceType>())
-		.add_property("start", &SliceType::getStart)
-		.add_property("stride", &SliceType::getStride)
-		.add_property("size", &SliceType::getSize);
+    python::class_<SliceType>("Slice", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const SliceType&>((python::arg("self"), python::arg("s"))))
+        .def(python::init<SizeType, DifferenceType, SizeType>(
+                 (python::arg("self"), python::arg("start"), python::arg("stride"), python::arg("size"))))
+        .def("getStart", &SliceType::getStart, python::arg("self"))
+        .def("getStride", &SliceType::getStride, python::arg("self"))
+        .def("getSize", &SliceType::getSize, python::arg("self"))
+        .def("isEmpty", &SliceType::isEmpty, python::arg("self"))
+        .def("getIndex", &SliceType::operator(), (python::arg("self"), python::arg("i")))
+        .def("assign", CDPLPythonBase::copyAssOp(&SliceType::operator=), (python::arg("self"), python::arg("s")), python::return_self<>())
+        .def("swap", static_cast<void (SliceType::*)(SliceType&)>(&SliceType::swap), (python::arg("self"), python::arg("s")))
+        .def("__eq__", &SliceType::operator==, (python::arg("self"), python::arg("s")))
+        .def("__ne__", &SliceType::operator!=, (python::arg("self"), python::arg("s")))
+        .def("__call__", &SliceType::operator(), (python::arg("self"), python::arg("i")))
+        .def("__getitem__", &SliceType::operator(), (python::arg("self"), python::arg("i")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<SliceType>())
+        .add_property("start", &SliceType::getStart)
+        .add_property("stride", &SliceType::getStride)
+        .add_property("size", &SliceType::getSize);
 
-	python::def("slice", &Math::slice, (python::arg("start"), python::arg("stride"), python::arg("size")));
+    python::def("slice", &Math::slice, (python::arg("start"), python::arg("stride"), python::arg("size")));
 }

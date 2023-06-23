@@ -28,8 +28,8 @@
 
 namespace CDPLPythonGRAIL
 {
-	
-	void registerFromPythonConverters();
+    
+    void registerFromPythonConverters();
 }
 
 #endif // CDPL_PYTHON_GRAIL_CONVERTERREGISTRATION_HPP

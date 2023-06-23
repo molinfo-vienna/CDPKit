@@ -44,120 +44,120 @@ using namespace CDPL;
 
 
 ConfGen::CFLDataReader::CFLDataReader(const Base::ControlParameterContainer& ctrl_params): 
-	ctrlParams(ctrl_params), smilesReader(smilesStream)
+    ctrlParams(ctrl_params), smilesReader(smilesStream)
 {}
 
 bool ConfGen::CFLDataReader::hasMoreData(std::istream& is)
 {
     entryReader.strictErrorChecking(ConfGen::getStrictErrorCheckingParameter(ctrlParams));
 
-	return entryReader.hasMoreData(is);
+    return entryReader.hasMoreData(is);
 }
 
 bool ConfGen::CFLDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 {
-	using namespace Chem;
-	using namespace std::placeholders;
-	
-	bool strict_error = ConfGen::getStrictErrorCheckingParameter(ctrlParams);
+    using namespace Chem;
+    using namespace std::placeholders;
+    
+    bool strict_error = ConfGen::getStrictErrorCheckingParameter(ctrlParams);
 
-	entryReader.strictErrorChecking(strict_error);
+    entryReader.strictErrorChecking(strict_error);
 
-	if (!entryReader.read(is, entry))
-		return false;
-	
-	smilesStream.str(entry.getSMILES());
-	smilesStream.seekg(std::istream::beg);
+    if (!entryReader.read(is, entry))
+        return false;
+    
+    smilesStream.str(entry.getSMILES());
+    smilesStream.seekg(std::istream::beg);
 
-	Chem::setStrictErrorCheckingParameter(smilesReader, strict_error);
+    Chem::setStrictErrorCheckingParameter(smilesReader, strict_error);
 
-	std::size_t prev_num_atoms = mol.getNumAtoms();
-	std::size_t prev_num_bonds = mol.getNumBonds();
+    std::size_t prev_num_atoms = mol.getNumAtoms();
+    std::size_t prev_num_bonds = mol.getNumBonds();
 
-	if (!smilesReader.read(mol, false))
-		return true;
-	
-	if (prev_num_atoms == 0)
-		setName(mol, std::to_string(entry.getHashCode()));
-	else
-		setName(mol, getName(mol) + '.' + std::to_string(entry.getHashCode()));
-	
-	MolecularGraph* molgraph = 0;
+    if (!smilesReader.read(mol, false))
+        return true;
+    
+    if (prev_num_atoms == 0)
+        setName(mol, std::to_string(entry.getHashCode()));
+    else
+        setName(mol, getName(mol) + '.' + std::to_string(entry.getHashCode()));
+    
+    MolecularGraph* molgraph = 0;
 
-	if (prev_num_atoms == 0)
-		molgraph = &mol;
+    if (prev_num_atoms == 0)
+        molgraph = &mol;
 
-	else {
-		tmpFragment.clear();
+    else {
+        tmpFragment.clear();
 
-		std::for_each(mol.getAtomsBegin() + prev_num_atoms, mol.getAtomsEnd(),
-					  std::bind(&Fragment::addAtom, &tmpFragment, _1));
-		std::for_each(mol.getBondsBegin() + prev_num_bonds, mol.getBondsEnd(),
-					  std::bind(&Fragment::addBond, &tmpFragment, _1));
-		
-		molgraph = &tmpFragment;
-	}
+        std::for_each(mol.getAtomsBegin() + prev_num_atoms, mol.getAtomsEnd(),
+                      std::bind(&Fragment::addAtom, &tmpFragment, _1));
+        std::for_each(mol.getBondsBegin() + prev_num_bonds, mol.getBondsEnd(),
+                      std::bind(&Fragment::addBond, &tmpFragment, _1));
+        
+        molgraph = &tmpFragment;
+    }
 
-	aromAtoms.clear();
-	
-	for (MolecularGraph::AtomIterator it = molgraph->getAtomsBegin(), end = molgraph->getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
-		
-		if (hasAromaticityFlag(atom) && getAromaticityFlag(atom))
-			aromAtoms.push_back(&atom);
-	}
-	
-	std::for_each(molgraph->getAtomsBegin(), molgraph->getAtomsEnd(),
-				  std::bind(&setImplicitHydrogenCount, _1, 0));
+    aromAtoms.clear();
+    
+    for (MolecularGraph::AtomIterator it = molgraph->getAtomsBegin(), end = molgraph->getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
+        
+        if (hasAromaticityFlag(atom) && getAromaticityFlag(atom))
+            aromAtoms.push_back(&atom);
+    }
+    
+    std::for_each(molgraph->getAtomsBegin(), molgraph->getAtomsEnd(),
+                  std::bind(&setImplicitHydrogenCount, _1, 0));
 
-	setRingFlags(*molgraph, true);
-	perceiveSSSR(*molgraph, true);
-	setAromaticityFlags(*molgraph, true);
-	perceiveHybridizationStates(*molgraph, true);
+    setRingFlags(*molgraph, true);
+    perceiveSSSR(*molgraph, true);
+    setAromaticityFlags(*molgraph, true);
+    perceiveHybridizationStates(*molgraph, true);
 
-	for (AtomList::const_iterator it = aromAtoms.begin(), end = aromAtoms.end(); it != end; ++it)
-		setAromaticityFlag(**it, true);
-	
-	canonFragment.create(*molgraph, *molgraph, false);
+    for (AtomList::const_iterator it = aromAtoms.begin(), end = aromAtoms.end(); it != end; ++it)
+        setAromaticityFlag(**it, true);
+    
+    canonFragment.create(*molgraph, *molgraph, false);
 
-	if (canonFragment.getHashCode() != entry.getHashCode()) {
-		if (strict_error)
-			throw Base::IOError("CFLDataReader: canonical fragment hash code mismatch");
+    if (canonFragment.getHashCode() != entry.getHashCode()) {
+        if (strict_error)
+            throw Base::IOError("CFLDataReader: canonical fragment hash code mismatch");
 
-		return true;
-	}
+        return true;
+    }
 
-	const CanonicalFragment::AtomMapping& atom_mpg = canonFragment.getAtomMapping();
+    const CanonicalFragment::AtomMapping& atom_mpg = canonFragment.getAtomMapping();
 
-	for (std::size_t i = 0, num_atoms = molgraph->getNumAtoms(); i < num_atoms; i++) {
-		Atom& atom = molgraph->getAtom(i);
-		Math::Vector3DArray::SharedPointer coords_array(new Math::Vector3DArray());
-		std::size_t canon_atom_idx = canonFragment.getAtomIndex(*atom_mpg[i]);
+    for (std::size_t i = 0, num_atoms = molgraph->getNumAtoms(); i < num_atoms; i++) {
+        Atom& atom = molgraph->getAtom(i);
+        Math::Vector3DArray::SharedPointer coords_array(new Math::Vector3DArray());
+        std::size_t canon_atom_idx = canonFragment.getAtomIndex(*atom_mpg[i]);
 
-		for (FragmentLibraryEntry::ConstConformerIterator it = entry.getConformersBegin(), end = entry.getConformersEnd(); it != end; ++it) {
-			const ConformerData& conf_data = *it;
+        for (FragmentLibraryEntry::ConstConformerIterator it = entry.getConformersBegin(), end = entry.getConformersEnd(); it != end; ++it) {
+            const ConformerData& conf_data = *it;
 
-			coords_array->addElement(conf_data[canon_atom_idx]);
-		}
-		
-		set3DCoordinatesArray(atom, coords_array);
-	}
+            coords_array->addElement(conf_data[canon_atom_idx]);
+        }
+        
+        set3DCoordinatesArray(atom, coords_array);
+    }
 
-	if (prev_num_atoms == 0) {
-		Util::DArray::SharedPointer conf_energies(new Util::DArray());
+    if (prev_num_atoms == 0) {
+        Util::DArray::SharedPointer conf_energies(new Util::DArray());
 
-		for (FragmentLibraryEntry::ConstConformerIterator it = entry.getConformersBegin(), end = entry.getConformersEnd(); it != end; ++it)
-			conf_energies->addElement(it->getEnergy());
+        for (FragmentLibraryEntry::ConstConformerIterator it = entry.getConformersBegin(), end = entry.getConformersEnd(); it != end; ++it)
+            conf_energies->addElement(it->getEnergy());
 
-		setConformerEnergies(*molgraph, conf_energies);
-	}
-	
-	return true;
+        setConformerEnergies(*molgraph, conf_energies);
+    }
+    
+    return true;
 }
 
 bool ConfGen::CFLDataReader::skipMolecule(std::istream& is)
 {
-	entryReader.strictErrorChecking(ConfGen::getStrictErrorCheckingParameter(ctrlParams));
+    entryReader.strictErrorChecking(ConfGen::getStrictErrorCheckingParameter(ctrlParams));
 
-	return entryReader.skip(is);
+    return entryReader.skip(is);
 }

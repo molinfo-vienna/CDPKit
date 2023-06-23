@@ -39,43 +39,43 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct ConstMatrixColumnExport
-	{
-	
-		typedef CDPL::Math::MatrixColumn<const ExpressionType> MatrixColumnType;
-		typedef typename MatrixColumnType::SizeType SizeType;
-		typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixColumnType> MatrixColumnWrapper;
-		typedef typename MatrixColumnWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixColumnWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct ConstMatrixColumnExport
+    {
+    
+        typedef CDPL::Math::MatrixColumn<const ExpressionType> MatrixColumnType;
+        typedef typename MatrixColumnType::SizeType SizeType;
+        typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixColumnType> MatrixColumnWrapper;
+        typedef typename MatrixColumnWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixColumnWrapper::SharedPointer WrapperPointerType;
 
-		ConstMatrixColumnExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ConstMatrixColumnExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<MatrixColumnWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixColumnWrapper&>((python::arg("self"), python::arg("c"))))
-				.def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
-				.def("getIndex", &MatrixColumnType::getIndex, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixColumnType>())
-				.def(ConstVectorVisitor<MatrixColumnType>("c"))
-				.def(WrappedDataVisitor<MatrixColumnWrapper>())
-				.add_property("index", &MatrixColumnType::getIndex);
+            python::class_<MatrixColumnWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixColumnWrapper&>((python::arg("self"), python::arg("c"))))
+                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
+                .def("getIndex", &MatrixColumnType::getIndex, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixColumnType>())
+                .def(ConstVectorVisitor<MatrixColumnType>("c"))
+                .def(WrappedDataVisitor<MatrixColumnWrapper>())
+                .add_property("index", &MatrixColumnType::getIndex);
 
-			python::def("column", &column, (python::arg("e"), python::arg("i")));
-		}
+            python::def("column", &column, (python::arg("e"), python::arg("i")));
+        }
 
-		static WrapperPointerType column(const ExpressionPointerType& e, SizeType i) {
-			return WrapperPointerType(new MatrixColumnWrapper(e, i));
-		}
-	};
+        static WrapperPointerType column(const ExpressionPointerType& e, SizeType i) {
+            return WrapperPointerType(new MatrixColumnWrapper(e, i));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportConstMatrixColumnTypes()
 {
-	ConstMatrixColumnExport<ConstMatrixExpression<float> >("ConstFMatrixColumn");
-	ConstMatrixColumnExport<ConstMatrixExpression<double> >("ConstDMatrixColumn");
-	ConstMatrixColumnExport<ConstMatrixExpression<long> >("ConstLMatrixColumn");
-	ConstMatrixColumnExport<ConstMatrixExpression<unsigned long> >("ConstULMatrixColumn");
+    ConstMatrixColumnExport<ConstMatrixExpression<float> >("ConstFMatrixColumn");
+    ConstMatrixColumnExport<ConstMatrixExpression<double> >("ConstDMatrixColumn");
+    ConstMatrixColumnExport<ConstMatrixExpression<long> >("ConstLMatrixColumn");
+    ConstMatrixColumnExport<ConstMatrixExpression<unsigned long> >("ConstULMatrixColumn");
 }

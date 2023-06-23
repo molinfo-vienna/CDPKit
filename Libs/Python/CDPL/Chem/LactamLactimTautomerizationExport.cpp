@@ -35,7 +35,7 @@ void CDPLPythonChem::exportLactamLactimTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::LactamLactimTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("LactamLactimTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::LactamLactimTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("LactamLactimTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::LactamLactimTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

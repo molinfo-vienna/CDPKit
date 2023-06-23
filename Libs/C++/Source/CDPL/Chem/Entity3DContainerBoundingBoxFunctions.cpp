@@ -35,69 +35,69 @@ using namespace CDPL;
 
 void Chem::calcBoundingBox(const Entity3DContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, bool reset)
 {
-	for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
-		const Math::Vector3D& coords = get3DCoordinates(*it);
+    for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
+        const Math::Vector3D& coords = get3DCoordinates(*it);
 
-		if (reset) {
-			max(0) = coords(0);
-			max(1) = coords(1);
-			max(2) = coords(2);
+        if (reset) {
+            max(0) = coords(0);
+            max(1) = coords(1);
+            max(2) = coords(2);
 
-			min(0) = coords(0);
-			min(1) = coords(1);
-			min(2) = coords(2);
+            min(0) = coords(0);
+            min(1) = coords(1);
+            min(2) = coords(2);
 
-			reset = false;
-			continue;
-		}
+            reset = false;
+            continue;
+        }
 
-		if (coords(0) > max(0))
-			max(0) = coords(0);
+        if (coords(0) > max(0))
+            max(0) = coords(0);
 
-		else if (coords(0) < min(0))
-			min(0) = coords(0);
+        else if (coords(0) < min(0))
+            min(0) = coords(0);
 
-		if (coords(1) > max(1))
-			max(1) = coords(1);
+        if (coords(1) > max(1))
+            max(1) = coords(1);
 
-		else if (coords(1) < min(1))
-			min(1) = coords(1);
+        else if (coords(1) < min(1))
+            min(1) = coords(1);
 
-		if (coords(2) > max(2))
-			max(2) = coords(2);
-			
-		else if (coords(2) < min(2))
-			min(2) = coords(2);
-	}
-}	
+        if (coords(2) > max(2))
+            max(2) = coords(2);
+            
+        else if (coords(2) < min(2))
+            min(2) = coords(2);
+    }
+}    
 
 bool Chem::insideBoundingBox(const Entity3DContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max)
 {
-	for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
-		const Math::Vector3D& coords = get3DCoordinates(*it);
+    for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
+        const Math::Vector3D& coords = get3DCoordinates(*it);
 
-		if (coords(0) <= max(0) && coords(0) >= min(0) &&
-			coords(1) <= max(1) && coords(1) >= min(1) &&
-			coords(2) <= max(2) && coords(2) >= min(2))
-			continue;
+        if (coords(0) <= max(0) && coords(0) >= min(0) &&
+            coords(1) <= max(1) && coords(1) >= min(1) &&
+            coords(2) <= max(2) && coords(2) >= min(2))
+            continue;
 
-		return false;
-	}
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool Chem::intersectsBoundingBox(const Entity3DContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max)
 {
-	for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
-		const Math::Vector3D& coords = get3DCoordinates(*it);
+    for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
+        const Math::Vector3D& coords = get3DCoordinates(*it);
 
-		if (coords(0) <= max(0) && coords(0) >= min(0) &&
-			coords(1) <= max(1) && coords(1) >= min(1) &&
-			coords(2) <= max(2) && coords(2) >= min(2))
-			return true;
-	}
+        if (coords(0) <= max(0) && coords(0) >= min(0) &&
+            coords(1) <= max(1) && coords(1) >= min(1) &&
+            coords(2) <= max(2) && coords(2) >= min(2))
+            return true;
+    }
 
-	return false;
+    return false;
 }
 

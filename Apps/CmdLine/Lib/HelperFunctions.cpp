@@ -32,16 +32,16 @@ std::string CmdLineLib::formatTimeDuration(std::size_t secs)
     std::size_t hours = (secs % (3600 * 24)) / 3600;
     std::size_t mins = (secs % 3600) / 60;
     
-	secs = secs % 60;
+    secs = secs % 60;
 
-	if (days > 0)
-		time_str.append(std::to_string(days)).push_back('d');
+    if (days > 0)
+        time_str.append(std::to_string(days)).push_back('d');
 
     if (days > 0 || hours > 0)
-		time_str.append(std::to_string(hours)).push_back('h');
+        time_str.append(std::to_string(hours)).push_back('h');
 
     if (days > 0 || hours > 0 || mins > 0)
-		time_str.append(std::to_string(mins)).push_back('m');
+        time_str.append(std::to_string(mins)).push_back('m');
 
     time_str.append(std::to_string(secs)).push_back('s');
 

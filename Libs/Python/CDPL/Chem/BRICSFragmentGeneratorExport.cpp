@@ -37,9 +37,9 @@ void CDPLPythonChem::exportBRICSFragmentGenerator()
     using namespace CDPL;
 
     python::class_<Chem::BRICSFragmentGenerator, Chem::BRICSFragmentGenerator::SharedPointer,
-				   python::bases<Chem::FragmentGenerator>, boost::noncopyable>("BRICSFragmentGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<Chem::BRICSFragmentGenerator>((python::arg("self"), python::arg("gen")))[python::with_custodian_and_ward<1, 2>()])
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::BRICSFragmentGenerator::operator=), 
-			 (python::arg("self"), python::arg("gen")), python::return_self<python::with_custodian_and_ward<1, 2> >());
+                   python::bases<Chem::FragmentGenerator>, boost::noncopyable>("BRICSFragmentGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<Chem::BRICSFragmentGenerator>((python::arg("self"), python::arg("gen")))[python::with_custodian_and_ward<1, 2>()])
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::BRICSFragmentGenerator::operator=), 
+             (python::arg("self"), python::arg("gen")), python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

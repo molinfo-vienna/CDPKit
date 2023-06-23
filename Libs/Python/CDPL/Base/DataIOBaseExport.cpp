@@ -31,22 +31,22 @@
 namespace
 {
 
-	struct DataIOBaseWrapper : CDPL::Base::DataIOBase, boost::python::wrapper<CDPL::Base::DataIOBase> 
-	{
-	};
+    struct DataIOBaseWrapper : CDPL::Base::DataIOBase, boost::python::wrapper<CDPL::Base::DataIOBase> 
+    {
+    };
 }
 
 
 void CDPLPythonBase::exportDataIOBase()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<DataIOBaseWrapper, python::bases<Base::ControlParameterContainer>, boost::noncopyable>("DataIOBase", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def("registerIOCallback", &Base::DataIOBase::registerIOCallback, (python::arg("self"), python::arg("func")))
-		.def("unregisterIOCallback", &Base::DataIOBase::unregisterIOCallback, 
-			 (python::arg("self"), python::arg("id")))
-		.def("invokeIOCallbacks", &Base::DataIOBase::invokeIOCallbacks, (python::arg("self"), python::arg("progress")))
-		.def("clearIOCallbacks", &Base::DataIOBase::clearIOCallbacks, python::arg("self"));
+    python::class_<DataIOBaseWrapper, python::bases<Base::ControlParameterContainer>, boost::noncopyable>("DataIOBase", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def("registerIOCallback", &Base::DataIOBase::registerIOCallback, (python::arg("self"), python::arg("func")))
+        .def("unregisterIOCallback", &Base::DataIOBase::unregisterIOCallback, 
+             (python::arg("self"), python::arg("id")))
+        .def("invokeIOCallbacks", &Base::DataIOBase::invokeIOCallbacks, (python::arg("self"), python::arg("progress")))
+        .def("clearIOCallbacks", &Base::DataIOBase::clearIOCallbacks, python::arg("self"));
 }

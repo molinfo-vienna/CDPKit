@@ -34,24 +34,24 @@ using namespace CDPL;
 
 std::size_t MolProp::getComponentCount(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	Util::BitSet vis_atoms(molgraph.getNumAtoms());
-	std::size_t count = 0;
-	std::size_t i = 0;
+    using namespace Chem;
+    
+    Util::BitSet vis_atoms(molgraph.getNumAtoms());
+    std::size_t count = 0;
+    std::size_t i = 0;
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-	
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
-		const Atom& atom = *it;
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
+        const Atom& atom = *it;
 
-		if (!vis_atoms.test(i)) {
-			count++;
-			vis_atoms.set(i);
+        if (!vis_atoms.test(i)) {
+            count++;
+            vis_atoms.set(i);
 
-			markReachableAtoms(atom, molgraph, vis_atoms, false);
-		}
-	}
+            markReachableAtoms(atom, molgraph, vis_atoms, false);
+        }
+    }
 
-	return count;
+    return count;
 }

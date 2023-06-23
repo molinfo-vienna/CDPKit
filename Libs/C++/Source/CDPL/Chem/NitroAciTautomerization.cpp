@@ -33,17 +33,17 @@ using namespace CDPL;
 
 
 Chem::NitroAciTautomerization::NitroAciTautomerization(): 
-	PatternBasedTautomerizationRule(TautomerizationType::NITRO_ACI)
+    PatternBasedTautomerizationRule(TautomerizationType::NITRO_ACI)
 {
-	BondOrderChange bond_changes[]= {
-		{ 1, 2, -1 },
-		{ 2, 3, 1 },
-		{ 3, 4, -1 },
-		{ 1, 4, 1 }
-	};
+    BondOrderChange bond_changes[]= {
+        { 1, 2, -1 },
+        { 2, 3, 1 },
+        { 3, 4, -1 },
+        { 1, 4, 1 }
+    };
 
-	addTransformationPattern(parseSMARTS("[#8:1]=[#7;+1;X3:2](-[#8])-[#6;X4:3]-[#1:4]"), 
-							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
-	addTransformationPattern(parseSMARTS("[#1:1]-[#8:2]-[#7;+1;X3:3](-[#8])=[#6:4]"), 
-							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#8:1]=[#7;+1;X3:2](-[#8])-[#6;X4:3]-[#1:4]"), 
+                             &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#1:1]-[#8:2]-[#7;+1;X3:3](-[#8])=[#6:4]"), 
+                             &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
 }

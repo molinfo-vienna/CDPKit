@@ -48,241 +48,241 @@ constexpr unsigned int Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 std::uint64_t Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor::operator()(const Chem::Atom& atom) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::uint64_t descr = 0;
+    std::uint64_t descr = 0;
 
-	if (flags & AtomPropertyFlag::ISOTOPE)
-		descr = getIsotope(atom);
+    if (flags & AtomPropertyFlag::ISOTOPE)
+        descr = getIsotope(atom);
 
-	if (flags & AtomPropertyFlag::TYPE) {
-		descr *= 512;
-		descr += getType(atom);
-	}
+    if (flags & AtomPropertyFlag::TYPE) {
+        descr *= 512;
+        descr += getType(atom);
+    }
 
-	if (flags & AtomPropertyFlag::FORMAL_CHARGE) {
-		descr *= 100;
+    if (flags & AtomPropertyFlag::FORMAL_CHARGE) {
+        descr *= 100;
 
-		long charge = getFormalCharge(atom);
+        long charge = getFormalCharge(atom);
 
-		if (charge < 0)
-			descr += 50 - std::size_t(-charge % 50);
-		else
-			descr += 50 + std::size_t(charge % 50);
-	}
+        if (charge < 0)
+            descr += 50 - std::size_t(-charge % 50);
+        else
+            descr += 50 + std::size_t(charge % 50);
+    }
 
-	if (flags & AtomPropertyFlag::AROMATICITY) {
-		descr *= 2;
-		descr += getAromaticityFlag(atom);
-	}
+    if (flags & AtomPropertyFlag::AROMATICITY) {
+        descr *= 2;
+        descr += getAromaticityFlag(atom);
+    }
 
-	return descr;
+    return descr;
 }
 
 //-----
 
 std::uint64_t Descr::PathFingerprintGenerator::DefBondDescriptorFunctor::operator()(const Chem::Bond& bond) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::uint64_t descr = 0;
+    std::uint64_t descr = 0;
 
-	if (flags & BondPropertyFlag::TOPOLOGY) {
-		if (getRingFlag(bond))
-			descr = 0x8000000000000000;
-	}
+    if (flags & BondPropertyFlag::TOPOLOGY) {
+        if (getRingFlag(bond))
+            descr = 0x8000000000000000;
+    }
 
-	if (flags & BondPropertyFlag::AROMATICITY) {
-		if (getAromaticityFlag(bond)) {
-			descr |= 0x4000000000000000;
-			return descr;
-		}
-	}
+    if (flags & BondPropertyFlag::AROMATICITY) {
+        if (getAromaticityFlag(bond)) {
+            descr |= 0x4000000000000000;
+            return descr;
+        }
+    }
 
-	if (flags & BondPropertyFlag::ORDER)
-		descr += getOrder(bond);
-	
-	return descr;
+    if (flags & BondPropertyFlag::ORDER)
+        descr += getOrder(bond);
+    
+    return descr;
 }
 
 //-----
 
 Descr::PathFingerprintGenerator::PathFingerprintGenerator():
-	molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5),
-	atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor()) {}
+    molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5),
+    atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor()) {}
 
 Descr::PathFingerprintGenerator::PathFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
-	molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5), 
-	atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor())
+    molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5), 
+    atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor())
 {
-	generate(molgraph, fp);
+    generate(molgraph, fp);
 }
 
 void Descr::PathFingerprintGenerator::setMinPathLength(std::size_t min_length)
 {
-	minPathLength = min_length;
+    minPathLength = min_length;
 }
 
 void Descr::PathFingerprintGenerator::setMaxPathLength(std::size_t max_length)
 {
-	maxPathLength = max_length;
+    maxPathLength = max_length;
 }
 
 void Descr::PathFingerprintGenerator::setNumBits(std::size_t num_bits)
 {
-	numBits = num_bits;
+    numBits = num_bits;
 }
 
 std::size_t Descr::PathFingerprintGenerator::getMinPathLength() const
 {
-	return minPathLength;
+    return minPathLength;
 }
 
 std::size_t Descr::PathFingerprintGenerator::getMaxPathLength() const
 {
-	return maxPathLength;
+    return maxPathLength;
 }
 
 std::size_t Descr::PathFingerprintGenerator::getNumBits() const
 {
-	return numBits;
+    return numBits;
 }
 
 void Descr::PathFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
 {
-	calcFingerprint(molgraph, fp);	
+    calcFingerprint(molgraph, fp);    
 }
 
 void Descr::PathFingerprintGenerator::setAtomDescriptorFunction(const AtomDescriptorFunction& func)
 {
-	atomDescriptorFunc = func;
+    atomDescriptorFunc = func;
 }
 
 void Descr::PathFingerprintGenerator::setBondDescriptorFunction(const BondDescriptorFunction& func)
 {
-	bondDescriptorFunc = func;
+    bondDescriptorFunc = func;
 }
 
 void Descr::PathFingerprintGenerator::calcFingerprint(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	fp.resize(numBits);
+    fp.resize(numBits);
 
-	if (numBits == 0)
-		return;
+    if (numBits == 0)
+        return;
 
-	fp.reset();
+    fp.reset();
 
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	if (atomDescriptors.size() < num_atoms)
-		atomDescriptors.resize(num_atoms);
+    if (atomDescriptors.size() < num_atoms)
+        atomDescriptors.resize(num_atoms);
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		std::size_t atom_idx = molgraph.getAtomIndex(atom);
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
+        std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
-		atomDescriptors[atom_idx] = atomDescriptorFunc(atom);
-	}
+        atomDescriptors[atom_idx] = atomDescriptorFunc(atom);
+    }
 
-	std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_bonds = molgraph.getNumBonds();
 
-	if (bondDescriptors.size() < num_bonds) {
-		bondDescriptors.resize(num_bonds);
-		visBondMask.resize(num_bonds);
-	}
+    if (bondDescriptors.size() < num_bonds) {
+        bondDescriptors.resize(num_bonds);
+        visBondMask.resize(num_bonds);
+    }
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom& atom1 = bond.getBegin();
-		const Atom& atom2 = bond.getEnd();
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom& atom1 = bond.getBegin();
+        const Atom& atom2 = bond.getEnd();
 
-		if (!molgraph.containsAtom(atom1) || !molgraph.containsAtom(atom2))
-			continue;
+        if (!molgraph.containsAtom(atom1) || !molgraph.containsAtom(atom2))
+            continue;
 
-		std::size_t bond_idx = molgraph.getBondIndex(bond);
+        std::size_t bond_idx = molgraph.getBondIndex(bond);
 
-		bondDescriptors[bond_idx] = bondDescriptorFunc(bond);
-	}
+        bondDescriptors[bond_idx] = bondDescriptorFunc(bond);
+    }
 
-	atomPath.clear();
-	bondPath.clear();
-	visBondMask.reset();
+    atomPath.clear();
+    bondPath.clear();
+    visBondMask.reset();
 
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  std::bind(&PathFingerprintGenerator::growPath, this,
-							std::placeholders::_1, std::ref(fp)));
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                  std::bind(&PathFingerprintGenerator::growPath, this,
+                            std::placeholders::_1, std::ref(fp)));
 }
 
 void Descr::PathFingerprintGenerator::growPath(const Chem::Atom& atom, Util::BitSet& fp)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t atom_idx = molGraph->getAtomIndex(atom);
+    std::size_t atom_idx = molGraph->getAtomIndex(atom);
 
-	atomPath.push_back(atom_idx);
+    atomPath.push_back(atom_idx);
 
-	std::size_t bond_path_len = bondPath.size();
+    std::size_t bond_path_len = bondPath.size();
 
-	if (bond_path_len >= minPathLength)
-		fp.set(calcBitIndex());
+    if (bond_path_len >= minPathLength)
+        fp.set(calcBitIndex());
 
-	if (bond_path_len < maxPathLength) {
-		Atom::ConstAtomIterator nbrs_end = atom.getAtomsEnd();
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    if (bond_path_len < maxPathLength) {
+        Atom::ConstAtomIterator nbrs_end = atom.getAtomsEnd();
+        Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != nbrs_end; ++a_it, ++b_it) {
-			if (!molGraph->containsBond(*b_it) || !molGraph->containsAtom(*a_it))
-				continue;
+        for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != nbrs_end; ++a_it, ++b_it) {
+            if (!molGraph->containsBond(*b_it) || !molGraph->containsAtom(*a_it))
+                continue;
 
-			std::size_t bond_idx = molGraph->getBondIndex(*b_it);
+            std::size_t bond_idx = molGraph->getBondIndex(*b_it);
 
-			if (visBondMask.test(bond_idx))
-				continue;
+            if (visBondMask.test(bond_idx))
+                continue;
 
-			visBondMask.set(bond_idx);
-			bondPath.push_back(bond_idx);
+            visBondMask.set(bond_idx);
+            bondPath.push_back(bond_idx);
 
-			growPath(*a_it, fp);
+            growPath(*a_it, fp);
 
-			bondPath.pop_back();
-			visBondMask.reset(bond_idx);
-		}
-	}
+            bondPath.pop_back();
+            visBondMask.reset(bond_idx);
+        }
+    }
 
-	atomPath.pop_back();
+    atomPath.pop_back();
 }
 
 std::size_t Descr::PathFingerprintGenerator::calcBitIndex()
 {
-	std::size_t atom_path_len = atomPath.size();
-	std::size_t bond_path_len = bondPath.size();
+    std::size_t atom_path_len = atomPath.size();
+    std::size_t bond_path_len = bondPath.size();
 
-	fwdPathDescriptor.clear();
+    fwdPathDescriptor.clear();
 
-	for (std::size_t i = 0; i < atom_path_len; i++) {
-		fwdPathDescriptor.push_back(atomDescriptors[atomPath[i]]);
+    for (std::size_t i = 0; i < atom_path_len; i++) {
+        fwdPathDescriptor.push_back(atomDescriptors[atomPath[i]]);
 
-		if (i < bond_path_len)
-			fwdPathDescriptor.push_back(bondDescriptors[bondPath[i]]);
-	}
+        if (i < bond_path_len)
+            fwdPathDescriptor.push_back(bondDescriptors[bondPath[i]]);
+    }
 
-	revPathDescriptor.clear();
+    revPathDescriptor.clear();
 
-	std::reverse_copy(fwdPathDescriptor.begin(), fwdPathDescriptor.end(), std::back_inserter(revPathDescriptor));
+    std::reverse_copy(fwdPathDescriptor.begin(), fwdPathDescriptor.end(), std::back_inserter(revPathDescriptor));
 
-	std::uint64_t fwd_descr_hash = Internal::calcHashCode<std::uint64_t>(fwdPathDescriptor.begin(), fwdPathDescriptor.end());
-	std::uint64_t rev_descr_hash = Internal::calcHashCode<std::uint64_t>(revPathDescriptor.begin(), revPathDescriptor.end());
-	boost::uint64_t rand_seed = (fwd_descr_hash < rev_descr_hash ? fwd_descr_hash : rev_descr_hash);
+    std::uint64_t fwd_descr_hash = Internal::calcHashCode<std::uint64_t>(fwdPathDescriptor.begin(), fwdPathDescriptor.end());
+    std::uint64_t rev_descr_hash = Internal::calcHashCode<std::uint64_t>(revPathDescriptor.begin(), revPathDescriptor.end());
+    boost::uint64_t rand_seed = (fwd_descr_hash < rev_descr_hash ? fwd_descr_hash : rev_descr_hash);
 
-	randGenerator.seed(rand_seed);
+    randGenerator.seed(rand_seed);
 
-	return std::size_t((double(randGenerator()) / randGenerator.max()) * (numBits - 1));
+    return std::size_t((double(randGenerator()) / randGenerator.max()) * (numBits - 1));
 }

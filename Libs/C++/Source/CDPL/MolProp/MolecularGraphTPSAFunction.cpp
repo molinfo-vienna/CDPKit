@@ -33,5 +33,5 @@ using namespace CDPL;
 
 double MolProp::calcTPSA(const Chem::MolecularGraph& molgraph)
 {
-	return TPSACalculator().calculate(molgraph);
+    return TPSACalculator().calculate(molgraph);
 }

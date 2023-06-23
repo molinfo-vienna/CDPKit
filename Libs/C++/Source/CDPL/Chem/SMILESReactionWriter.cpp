@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Chem::SMILESReactionWriter::SMILESReactionWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new SMILESDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new SMILESDataWriter(*this)) {}
 
 Chem::SMILESReactionWriter::~SMILESReactionWriter() {}
 
 Base::DataWriter<Chem::Reaction>& Chem::SMILESReactionWriter::write(const Reaction& rxn)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeReaction(output, rxn);
+    try {
+        state = writer->writeReaction(output, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("SMILESReactionWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("SMILESReactionWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Chem::SMILESReactionWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Chem::SMILESReactionWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

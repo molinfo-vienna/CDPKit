@@ -40,33 +40,33 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
-		class Molecule;
-	
-		/**
-		 * \brief TautomerizationRule.
-		 */
-		class CDPL_CHEM_API TautomerizationRule 
-		{
+        class MolecularGraph;
+        class Molecule;
+    
+        /**
+         * \brief TautomerizationRule.
+         */
+        class CDPL_CHEM_API TautomerizationRule 
+        {
 
-		  public:
-			typedef std::shared_ptr<TautomerizationRule> SharedPointer;
+          public:
+            typedef std::shared_ptr<TautomerizationRule> SharedPointer;
 
-			virtual ~TautomerizationRule() {}
+            virtual ~TautomerizationRule() {}
 
-			virtual bool setup(MolecularGraph& parent_molgraph) = 0;
+            virtual bool setup(MolecularGraph& parent_molgraph) = 0;
 
-			virtual unsigned int getID() const = 0;
+            virtual unsigned int getID() const = 0;
 
-			/**
-			 * \brief Generates the next tautomer.
-			 * \param tautomer The tautomer output molecule object.
-			 * \return \c true if a tautomer was generated, \c false if no more tautomers are available.
-			 */
-			virtual bool generate(Molecule& tautomer) = 0;
+            /**
+             * \brief Generates the next tautomer.
+             * \param tautomer The tautomer output molecule object.
+             * \return \c true if a tautomer was generated, \c false if no more tautomers are available.
+             */
+            virtual bool generate(Molecule& tautomer) = 0;
 
-			virtual SharedPointer clone() const = 0;
-		};
+            virtual SharedPointer clone() const = 0;
+        };
     }
 }
 

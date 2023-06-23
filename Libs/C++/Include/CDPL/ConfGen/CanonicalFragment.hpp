@@ -47,121 +47,121 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief CanonicalFragment.
-		 */
-		class CDPL_CONFGEN_API CanonicalFragment : public Chem::MolecularGraph
-		{
+        /**
+         * \brief CanonicalFragment.
+         */
+        class CDPL_CONFGEN_API CanonicalFragment : public Chem::MolecularGraph
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CanonicalFragment instances.
-			 */
-			typedef std::shared_ptr<CanonicalFragment> SharedPointer;
-		
-			typedef Chem::BasicMolecule::AtomIterator AtomIterator;
-			typedef Chem::BasicMolecule::ConstAtomIterator ConstAtomIterator;
-			typedef Chem::BasicMolecule::BondIterator BondIterator;
-			typedef Chem::BasicMolecule::ConstBondIterator ConstBondIterator;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CanonicalFragment instances.
+             */
+            typedef std::shared_ptr<CanonicalFragment> SharedPointer;
+        
+            typedef Chem::BasicMolecule::AtomIterator AtomIterator;
+            typedef Chem::BasicMolecule::ConstAtomIterator ConstAtomIterator;
+            typedef Chem::BasicMolecule::BondIterator BondIterator;
+            typedef Chem::BasicMolecule::ConstBondIterator ConstBondIterator;
 
-			typedef std::vector<const Chem::Atom*> AtomMapping;
+            typedef std::vector<const Chem::Atom*> AtomMapping;
 
-			/**
-			 * \brief Constructs an empty \c %CanonicalFragment instance.
-			 */
-			CanonicalFragment();
+            /**
+             * \brief Constructs an empty \c %CanonicalFragment instance.
+             */
+            CanonicalFragment();
 
-			/**
-			 * \brief Constructs a \c %CanonicalFragment instance that contains the relevant atoms and bonds of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the fragments.
-			 * \param parent The parent molecular graph the fragment is coming from.
-			 */
-			CanonicalFragment(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
-		
-			CanonicalFragment(const CanonicalFragment& frag);
+            /**
+             * \brief Constructs a \c %CanonicalFragment instance that contains the relevant atoms and bonds of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to generate the fragments.
+             * \param parent The parent molecular graph the fragment is coming from.
+             */
+            CanonicalFragment(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
+        
+            CanonicalFragment(const CanonicalFragment& frag);
 
-			void clear();
-	
-			std::size_t getNumAtoms() const;
+            void clear();
+    
+            std::size_t getNumAtoms() const;
 
-			const Chem::Atom& getAtom(std::size_t idx) const;
-		
-			Chem::Atom& getAtom(std::size_t idx);
+            const Chem::Atom& getAtom(std::size_t idx) const;
+        
+            Chem::Atom& getAtom(std::size_t idx);
 
-			ConstAtomIterator getAtomsBegin() const;
+            ConstAtomIterator getAtomsBegin() const;
 
-			ConstAtomIterator getAtomsEnd() const;
+            ConstAtomIterator getAtomsEnd() const;
 
-			AtomIterator getAtomsBegin();
+            AtomIterator getAtomsBegin();
 
-			AtomIterator getAtomsEnd();
+            AtomIterator getAtomsEnd();
 
-			bool containsAtom(const Chem::Atom& atom) const;
+            bool containsAtom(const Chem::Atom& atom) const;
 
-			std::size_t getAtomIndex(const Chem::Atom& atom) const;
+            std::size_t getAtomIndex(const Chem::Atom& atom) const;
 
-			std::size_t getNumEntities() const;
+            std::size_t getNumEntities() const;
 
-			const Chem::Entity3D& getEntity(std::size_t idx) const;
+            const Chem::Entity3D& getEntity(std::size_t idx) const;
 
-			Chem::Entity3D& getEntity(std::size_t idx);
+            Chem::Entity3D& getEntity(std::size_t idx);
 
-			std::size_t getNumBonds() const;
-	    
-			const Chem::Bond& getBond(std::size_t idx) const;
+            std::size_t getNumBonds() const;
+        
+            const Chem::Bond& getBond(std::size_t idx) const;
 
-			Chem::Bond& getBond(std::size_t idx);
+            Chem::Bond& getBond(std::size_t idx);
 
-			ConstBondIterator getBondsBegin() const;
+            ConstBondIterator getBondsBegin() const;
 
-			ConstBondIterator getBondsEnd() const;
+            ConstBondIterator getBondsEnd() const;
 
-			BondIterator getBondsBegin();
+            BondIterator getBondsBegin();
 
-			BondIterator getBondsEnd();
+            BondIterator getBondsEnd();
 
-			bool containsBond(const Chem::Bond& bond) const;
+            bool containsBond(const Chem::Bond& bond) const;
 
-			std::size_t getBondIndex(const Chem::Bond& bond) const;
+            std::size_t getBondIndex(const Chem::Bond& bond) const;
 
-			void orderAtoms(const Chem::AtomCompareFunction& func);
+            void orderAtoms(const Chem::AtomCompareFunction& func);
 
-			void orderBonds(const Chem::BondCompareFunction& func);
+            void orderBonds(const Chem::BondCompareFunction& func);
 
-			std::uint64_t getHashCode() const;
+            std::uint64_t getHashCode() const;
 
-			Chem::MolecularGraph::SharedPointer clone() const;
+            Chem::MolecularGraph::SharedPointer clone() const;
 
-			CanonicalFragment& operator=(const CanonicalFragment& frag);
+            CanonicalFragment& operator=(const CanonicalFragment& frag);
 
-			void create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify = true);
+            void create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify = true);
 
-			const AtomMapping& getAtomMapping() const;
+            const AtomMapping& getAtomMapping() const;
 
-			void perceiveSSSR();
+            void perceiveSSSR();
 
-		  private:
-			void copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify);
-			bool copyBonds(const Chem::MolecularGraph& molgraph);
+          private:
+            void copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify);
+            bool copyBonds(const Chem::MolecularGraph& molgraph);
 
-			void fixStereoDescriptors(const Chem::MolecularGraph& molgraph, bool clear_stereo);
-			void hydrogenize();
-			void canonicalize(bool stereo);
-			void calcHashCode(bool stereo);
+            void fixStereoDescriptors(const Chem::MolecularGraph& molgraph, bool clear_stereo);
+            void hydrogenize();
+            void canonicalize(bool stereo);
+            void calcHashCode(bool stereo);
 
-			bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
-		
-			typedef std::vector<std::uint32_t> HashInputData;
-			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
+            bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
+        
+            typedef std::vector<std::uint32_t> HashInputData;
+            typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 
-			Chem::BasicMolecule                molecule;
-			std::uint64_t                      hashCode;
-			Chem::CanonicalNumberingCalculator canonNumCalc;
-			SmallestSetOfSmallestRingsPtr      sssr;
-			Util::STArray                      canonNumbers;
-			HashInputData                      hashInputData;
-			AtomMapping                        atomMapping;
-		};
+            Chem::BasicMolecule                molecule;
+            std::uint64_t                      hashCode;
+            Chem::CanonicalNumberingCalculator canonNumCalc;
+            SmallestSetOfSmallestRingsPtr      sssr;
+            Util::STArray                      canonNumbers;
+            HashInputData                      hashInputData;
+            AtomMapping                        atomMapping;
+        };
     }
 }
 

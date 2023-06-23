@@ -42,325 +42,325 @@ using namespace ChOX;
 
 
 RDFileIOSettingsEditWidget::RDFileIOSettingsEditWidget(QWidget* parent, Settings& settings): 
-	SettingsEditWidget(parent), settings(settings)
+    SettingsEditWidget(parent), settings(settings)
 {
-	init();
+    init();
 }
 
 bool RDFileIOSettingsEditWidget::haveChangedSettings() const
 {
-	return haveChanges;
+    return haveChanges;
 }
 
 void RDFileIOSettingsEditWidget::apply()
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	SettingsContainer& reader_params = settings.getReaderControlParameters("RDF");
+    SettingsContainer& reader_params = settings.getReaderControlParameters("RDF");
 
-	setStrictErrorCheckingParameter(reader_params, iptStrictErrorCheckingCheckBox->isChecked());
-	setMDLIgnoreParityParameter(reader_params, iptIgnoreParityCheckBox->isChecked());
-	setMDLTrimStringsParameter(reader_params, iptTrimStringsCheckBox->isChecked());
-	setMDLTrimLinesParameter(reader_params, iptTrimLinesCheckBox->isChecked());
-	setCheckLineLengthParameter(reader_params, iptCheckLineLengthCheckBox->isChecked());
+    setStrictErrorCheckingParameter(reader_params, iptStrictErrorCheckingCheckBox->isChecked());
+    setMDLIgnoreParityParameter(reader_params, iptIgnoreParityCheckBox->isChecked());
+    setMDLTrimStringsParameter(reader_params, iptTrimStringsCheckBox->isChecked());
+    setMDLTrimLinesParameter(reader_params, iptTrimLinesCheckBox->isChecked());
+    setCheckLineLengthParameter(reader_params, iptCheckLineLengthCheckBox->isChecked());
 
-	SettingsContainer& writer_params = settings.getWriterControlParameters("RDF");
+    SettingsContainer& writer_params = settings.getWriterControlParameters("RDF");
 
-	setStrictErrorCheckingParameter(writer_params, optStrictErrorCheckingCheckBox->isChecked());
-	setMDLIgnoreParityParameter(writer_params, optIgnoreParityCheckBox->isChecked());
-	setMDLTrimStringsParameter(writer_params, optTrimStringsCheckBox->isChecked());
-	setMDLTrimLinesParameter(writer_params, optTrimLinesCheckBox->isChecked());
-	setCheckLineLengthParameter(writer_params, optCheckLineLengthCheckBox->isChecked());
-	setMDLUpdateTimestampParameter(writer_params, optUpdateTimeStampCheckBox->isChecked());
-	setMDLTruncateStringsParameter(writer_params, optTruncateStringsCheckBox->isChecked());
-	setMDLTruncateLinesParameter(writer_params, optTruncateLinesCheckBox->isChecked());
-	setWriteSingleRecordFilesParameter(writer_params, optSplitRecordsCheckBox->isChecked());
+    setStrictErrorCheckingParameter(writer_params, optStrictErrorCheckingCheckBox->isChecked());
+    setMDLIgnoreParityParameter(writer_params, optIgnoreParityCheckBox->isChecked());
+    setMDLTrimStringsParameter(writer_params, optTrimStringsCheckBox->isChecked());
+    setMDLTrimLinesParameter(writer_params, optTrimLinesCheckBox->isChecked());
+    setCheckLineLengthParameter(writer_params, optCheckLineLengthCheckBox->isChecked());
+    setMDLUpdateTimestampParameter(writer_params, optUpdateTimeStampCheckBox->isChecked());
+    setMDLTruncateStringsParameter(writer_params, optTruncateStringsCheckBox->isChecked());
+    setMDLTruncateLinesParameter(writer_params, optTruncateLinesCheckBox->isChecked());
+    setWriteSingleRecordFilesParameter(writer_params, optSplitRecordsCheckBox->isChecked());
 
-	setMDLCTABVersionParameter(writer_params, optCTabVersion);
-	setMDLRXNFileVersionParameter(writer_params, optRXNFileVersion);
+    setMDLCTABVersionParameter(writer_params, optCTabVersion);
+    setMDLRXNFileVersionParameter(writer_params, optRXNFileVersion);
 }
 
 void RDFileIOSettingsEditWidget::reset()
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	blockSignals(true);
+    blockSignals(true);
 
-	const SettingsContainer& reader_params = settings.getReaderControlParameters("RDF");
+    const SettingsContainer& reader_params = settings.getReaderControlParameters("RDF");
 
-	iptStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(reader_params)); 
-	iptIgnoreParityCheckBox->setChecked(getMDLIgnoreParityParameter(reader_params)); 
-	iptTrimStringsCheckBox->setChecked(getMDLTrimStringsParameter(reader_params)); 
-	iptTrimLinesCheckBox->setChecked(getMDLTrimLinesParameter(reader_params)); 
-	iptCheckLineLengthCheckBox->setChecked(getCheckLineLengthParameter(reader_params)); 
+    iptStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(reader_params)); 
+    iptIgnoreParityCheckBox->setChecked(getMDLIgnoreParityParameter(reader_params)); 
+    iptTrimStringsCheckBox->setChecked(getMDLTrimStringsParameter(reader_params)); 
+    iptTrimLinesCheckBox->setChecked(getMDLTrimLinesParameter(reader_params)); 
+    iptCheckLineLengthCheckBox->setChecked(getCheckLineLengthParameter(reader_params)); 
 
-	const SettingsContainer& writer_params = settings.getWriterControlParameters("RDF");
+    const SettingsContainer& writer_params = settings.getWriterControlParameters("RDF");
 
-	optStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(writer_params)); 
-	optIgnoreParityCheckBox->setChecked(getMDLIgnoreParityParameter(writer_params)); 
-	optTrimStringsCheckBox->setChecked(getMDLTrimStringsParameter(writer_params)); 
-	optTrimLinesCheckBox->setChecked(getMDLTrimLinesParameter(writer_params)); 
-	optCheckLineLengthCheckBox->setChecked(getCheckLineLengthParameter(writer_params)); 
-	optUpdateTimeStampCheckBox->setChecked(getMDLUpdateTimestampParameter(writer_params)); 
-	optTruncateStringsCheckBox->setChecked(getMDLTruncateStringsParameter(writer_params)); 
-	optTruncateLinesCheckBox->setChecked(getMDLTruncateLinesParameter(writer_params)); 
-	optSplitRecordsCheckBox->setChecked(getWriteSingleRecordFilesParameter(writer_params)); 
+    optStrictErrorCheckingCheckBox->setChecked(getStrictErrorCheckingParameter(writer_params)); 
+    optIgnoreParityCheckBox->setChecked(getMDLIgnoreParityParameter(writer_params)); 
+    optTrimStringsCheckBox->setChecked(getMDLTrimStringsParameter(writer_params)); 
+    optTrimLinesCheckBox->setChecked(getMDLTrimLinesParameter(writer_params)); 
+    optCheckLineLengthCheckBox->setChecked(getCheckLineLengthParameter(writer_params)); 
+    optUpdateTimeStampCheckBox->setChecked(getMDLUpdateTimestampParameter(writer_params)); 
+    optTruncateStringsCheckBox->setChecked(getMDLTruncateStringsParameter(writer_params)); 
+    optTruncateLinesCheckBox->setChecked(getMDLTruncateLinesParameter(writer_params)); 
+    optSplitRecordsCheckBox->setChecked(getWriteSingleRecordFilesParameter(writer_params)); 
 
-	optCTabVersion = getMDLCTABVersionParameter(writer_params); 
-	optRXNFileVersion = getMDLRXNFileVersionParameter(writer_params); 
+    optCTabVersion = getMDLCTABVersionParameter(writer_params); 
+    optRXNFileVersion = getMDLRXNFileVersionParameter(writer_params); 
 
-	blockSignals(false);
+    blockSignals(false);
 
-	haveChanges = false;
+    haveChanges = false;
 
-	handleRXNFileVersionChange();
+    handleRXNFileVersionChange();
 
-	emit updateGUI();
+    emit updateGUI();
 }
 
 void RDFileIOSettingsEditWidget::handleRXNFileVersionChange()
 {
-	optCTabVersionEditWidget->setEnabled(optRXNFileVersion != CDPL::Chem::MDLDataFormatVersion::V3000);
+    optCTabVersionEditWidget->setEnabled(optRXNFileVersion != CDPL::Chem::MDLDataFormatVersion::V3000);
 }
 
 void RDFileIOSettingsEditWidget::setDefaults()
 {
-	using namespace ControlParameterDefault;
+    using namespace ControlParameterDefault;
 
-	iptStrictErrorCheckingCheckBox->setChecked(RDF_INPUT_STRICT_ERROR_CHECKING);
-	iptIgnoreParityCheckBox->setChecked(RDF_INPUT_IGNORE_PARITY);
-	iptTrimStringsCheckBox->setChecked(RDF_INPUT_TRIM_STRINGS);
-	iptTrimLinesCheckBox->setChecked(RDF_INPUT_TRIM_LINES);
-	iptCheckLineLengthCheckBox->setChecked(RDF_INPUT_CHECK_LINE_LENGTH);
+    iptStrictErrorCheckingCheckBox->setChecked(RDF_INPUT_STRICT_ERROR_CHECKING);
+    iptIgnoreParityCheckBox->setChecked(RDF_INPUT_IGNORE_PARITY);
+    iptTrimStringsCheckBox->setChecked(RDF_INPUT_TRIM_STRINGS);
+    iptTrimLinesCheckBox->setChecked(RDF_INPUT_TRIM_LINES);
+    iptCheckLineLengthCheckBox->setChecked(RDF_INPUT_CHECK_LINE_LENGTH);
 
-	optStrictErrorCheckingCheckBox->setChecked(RDF_OUTPUT_STRICT_ERROR_CHECKING);
-	optIgnoreParityCheckBox->setChecked(RDF_OUTPUT_IGNORE_PARITY);
-	optTrimStringsCheckBox->setChecked(RDF_OUTPUT_TRIM_STRINGS);
-	optTrimLinesCheckBox->setChecked(RDF_OUTPUT_TRIM_LINES);
-	optCheckLineLengthCheckBox->setChecked(RDF_OUTPUT_CHECK_LINE_LENGTH);
-	optUpdateTimeStampCheckBox->setChecked(RDF_OUTPUT_UPDATE_TIMESTAMP);
-	optTruncateStringsCheckBox->setChecked(RDF_OUTPUT_TRUNCATE_STRINGS);
-	optTruncateLinesCheckBox->setChecked(RDF_OUTPUT_TRUNCATE_LINES);
-	optSplitRecordsCheckBox->setChecked(RDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+    optStrictErrorCheckingCheckBox->setChecked(RDF_OUTPUT_STRICT_ERROR_CHECKING);
+    optIgnoreParityCheckBox->setChecked(RDF_OUTPUT_IGNORE_PARITY);
+    optTrimStringsCheckBox->setChecked(RDF_OUTPUT_TRIM_STRINGS);
+    optTrimLinesCheckBox->setChecked(RDF_OUTPUT_TRIM_LINES);
+    optCheckLineLengthCheckBox->setChecked(RDF_OUTPUT_CHECK_LINE_LENGTH);
+    optUpdateTimeStampCheckBox->setChecked(RDF_OUTPUT_UPDATE_TIMESTAMP);
+    optTruncateStringsCheckBox->setChecked(RDF_OUTPUT_TRUNCATE_STRINGS);
+    optTruncateLinesCheckBox->setChecked(RDF_OUTPUT_TRUNCATE_LINES);
+    optSplitRecordsCheckBox->setChecked(RDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
 
-	optCTabVersion = RDF_OUTPUT_CTAB_VERSION;
-	optRXNFileVersion = RDF_OUTPUT_RXN_FILE_VERSION;
+    optCTabVersion = RDF_OUTPUT_CTAB_VERSION;
+    optRXNFileVersion = RDF_OUTPUT_RXN_FILE_VERSION;
 
-	haveChanges = true;
+    haveChanges = true;
 
-	handleRXNFileVersionChange();
+    handleRXNFileVersionChange();
 
-	emit updateGUI();
-	emit settingsChanged();
+    emit updateGUI();
+    emit settingsChanged();
 }
 
 void RDFileIOSettingsEditWidget::handleSettingsChange()
 {
-	haveChanges = true;
+    haveChanges = true;
 
-	emit SettingsEditWidget::settingsChanged();
+    emit SettingsEditWidget::settingsChanged();
 }
 
 void RDFileIOSettingsEditWidget::handleSettingsChange(bool)
 {
-	haveChanges = true;
+    haveChanges = true;
 
-	emit SettingsEditWidget::settingsChanged();
+    emit SettingsEditWidget::settingsChanged();
 }
 
 void RDFileIOSettingsEditWidget::init()
 {
-	QBoxLayout* main_layout = new QVBoxLayout(this);
+    QBoxLayout* main_layout = new QVBoxLayout(this);
 
 // ---------
 
-	QGroupBox* group_box = new QGroupBox(tr("Input"), this);
-	QBoxLayout* v_box_layout = new QVBoxLayout(group_box);
+    QGroupBox* group_box = new QGroupBox(tr("Input"), this);
+    QBoxLayout* v_box_layout = new QVBoxLayout(group_box);
 
 // +++
 
-	iptStrictErrorCheckingCheckBox = new QCheckBox(tr("&Perform strict Error Checking"), group_box);
+    iptStrictErrorCheckingCheckBox = new QCheckBox(tr("&Perform strict Error Checking"), group_box);
 
-	v_box_layout->addWidget(iptStrictErrorCheckingCheckBox);
+    v_box_layout->addWidget(iptStrictErrorCheckingCheckBox);
 
-	connect(iptStrictErrorCheckingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	iptIgnoreParityCheckBox = new QCheckBox(tr("Ignore Ato&m Stereo Parity"), group_box);
-
-	v_box_layout->addWidget(iptIgnoreParityCheckBox);
-
-	connect(iptIgnoreParityCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(iptStrictErrorCheckingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	iptTrimStringsCheckBox = new QCheckBox(tr("R&emove leading/trailing Whitespace from Strings"), group_box);
+    iptIgnoreParityCheckBox = new QCheckBox(tr("Ignore Ato&m Stereo Parity"), group_box);
 
-	v_box_layout->addWidget(iptTrimStringsCheckBox);
+    v_box_layout->addWidget(iptIgnoreParityCheckBox);
 
-	connect(iptTrimStringsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	iptTrimLinesCheckBox = new QCheckBox(tr("Remove &leading/trailing Whitespace from Lines"), group_box);
-
-	v_box_layout->addWidget(iptTrimLinesCheckBox);
-
-	connect(iptTrimLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(iptIgnoreParityCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	iptCheckLineLengthCheckBox = new QCheckBox(tr("Check Line Len&gth Limit"), group_box);
+    iptTrimStringsCheckBox = new QCheckBox(tr("R&emove leading/trailing Whitespace from Strings"), group_box);
 
-	v_box_layout->addWidget(iptCheckLineLengthCheckBox);
+    v_box_layout->addWidget(iptTrimStringsCheckBox);
 
-	connect(iptCheckLineLengthCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(iptTrimStringsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	setFocusProxy(iptStrictErrorCheckingCheckBox);
+    iptTrimLinesCheckBox = new QCheckBox(tr("Remove &leading/trailing Whitespace from Lines"), group_box);
 
-	main_layout->addWidget(group_box);
+    v_box_layout->addWidget(iptTrimLinesCheckBox);
+
+    connect(iptTrimLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    iptCheckLineLengthCheckBox = new QCheckBox(tr("Check Line Len&gth Limit"), group_box);
+
+    v_box_layout->addWidget(iptCheckLineLengthCheckBox);
+
+    connect(iptCheckLineLengthCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    setFocusProxy(iptStrictErrorCheckingCheckBox);
+
+    main_layout->addWidget(group_box);
 
 // ---------
 
-	group_box = new QGroupBox(tr("Output"), this);
-	v_box_layout = new QVBoxLayout(group_box);
+    group_box = new QGroupBox(tr("Output"), this);
+    v_box_layout = new QVBoxLayout(group_box);
 
 // +++
 
-	optStrictErrorCheckingCheckBox = new QCheckBox(tr("Per&form strict Error Checking"), group_box);
+    optStrictErrorCheckingCheckBox = new QCheckBox(tr("Per&form strict Error Checking"), group_box);
 
-	v_box_layout->addWidget(optStrictErrorCheckingCheckBox);
+    v_box_layout->addWidget(optStrictErrorCheckingCheckBox);
 
-	connect(optStrictErrorCheckingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	optIgnoreParityCheckBox = new QCheckBox(tr("Don't write Atom Stereo Parit&y"), group_box);
-
-	v_box_layout->addWidget(optIgnoreParityCheckBox);
-
-	connect(optIgnoreParityCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(optStrictErrorCheckingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	optTrimStringsCheckBox = new QCheckBox(tr("Remove leading/trailing W&hitespace from Strings"), group_box);
+    optIgnoreParityCheckBox = new QCheckBox(tr("Don't write Atom Stereo Parit&y"), group_box);
 
-	v_box_layout->addWidget(optTrimStringsCheckBox);
+    v_box_layout->addWidget(optIgnoreParityCheckBox);
 
-	connect(optTrimStringsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	optTrimLinesCheckBox = new QCheckBox(tr("Remove Leading/Trailing Whi&tespace from Lines"), group_box);
-
-	v_box_layout->addWidget(optTrimLinesCheckBox);
-
-	connect(optTrimLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(optIgnoreParityCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	optTruncateStringsCheckBox = new QCheckBox(tr("Truncate Strings to fit a&vailable Space"), group_box);
+    optTrimStringsCheckBox = new QCheckBox(tr("Remove leading/trailing W&hitespace from Strings"), group_box);
 
-	v_box_layout->addWidget(optTruncateStringsCheckBox);
+    v_box_layout->addWidget(optTrimStringsCheckBox);
 
-	connect(optTruncateStringsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	optTruncateLinesCheckBox = new QCheckBox(tr("Tr&uncate Lines to adhere to max. Line Length"), group_box);
-
-	v_box_layout->addWidget(optTruncateLinesCheckBox);
-
-	connect(optTruncateLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(optTrimStringsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	optCheckLineLengthCheckBox = new QCheckBox(tr("Check Li&ne Length Limit"), group_box);
+    optTrimLinesCheckBox = new QCheckBox(tr("Remove Leading/Trailing Whi&tespace from Lines"), group_box);
 
-	v_box_layout->addWidget(optCheckLineLengthCheckBox);
+    v_box_layout->addWidget(optTrimLinesCheckBox);
 
-	connect(optCheckLineLengthCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	optUpdateTimeStampCheckBox = new QCheckBox(tr("Update Time&stamps"), group_box);
-
-	v_box_layout->addWidget(optUpdateTimeStampCheckBox);
-
-	connect(optUpdateTimeStampCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(optTrimLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	optSplitRecordsCheckBox = new QCheckBox(tr("Create single Record F&iles"), group_box);
+    optTruncateStringsCheckBox = new QCheckBox(tr("Truncate Strings to fit a&vailable Space"), group_box);
 
-	v_box_layout->addWidget(optSplitRecordsCheckBox);
+    v_box_layout->addWidget(optTruncateStringsCheckBox);
 
-	connect(optSplitRecordsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
-
-// +++
-
-	QFrame* frame = new QFrame(group_box);
-
-	frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-
-	v_box_layout->addWidget(frame);
+    connect(optTruncateStringsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
 // +++
 
-	QGridLayout* grid_layout = new QGridLayout();
+    optTruncateLinesCheckBox = new QCheckBox(tr("Tr&uncate Lines to adhere to max. Line Length"), group_box);
 
-	v_box_layout->addLayout(grid_layout);
+    v_box_layout->addWidget(optTruncateLinesCheckBox);
 
-	grid_layout->setColumnStretch(0, 1);
-	grid_layout->setColumnStretch(1, 0);
-	grid_layout->setColumnStretch(2, 1);
+    connect(optTruncateLinesCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    optCheckLineLengthCheckBox = new QCheckBox(tr("Check Li&ne Length Limit"), group_box);
+
+    v_box_layout->addWidget(optCheckLineLengthCheckBox);
+
+    connect(optCheckLineLengthCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    optUpdateTimeStampCheckBox = new QCheckBox(tr("Update Time&stamps"), group_box);
+
+    v_box_layout->addWidget(optUpdateTimeStampCheckBox);
+
+    connect(optUpdateTimeStampCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    optSplitRecordsCheckBox = new QCheckBox(tr("Create single Record F&iles"), group_box);
+
+    v_box_layout->addWidget(optSplitRecordsCheckBox);
+
+    connect(optSplitRecordsCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+
+// +++
+
+    QFrame* frame = new QFrame(group_box);
+
+    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+
+    v_box_layout->addWidget(frame);
+
+// +++
+
+    QGridLayout* grid_layout = new QGridLayout();
+
+    v_box_layout->addLayout(grid_layout);
+
+    grid_layout->setColumnStretch(0, 1);
+    grid_layout->setColumnStretch(1, 0);
+    grid_layout->setColumnStretch(2, 1);
 
 // xxx
 
-	QLabel* label = new QLabel(tr("Component Molfile CTab-Version&:"), group_box);
+    QLabel* label = new QLabel(tr("Component Molfile CTab-Version&:"), group_box);
 
-	grid_layout->addWidget(label, 0, 0);
-
-// xxx
-
-	optCTabVersionEditWidget = new CTabVersionEditWidget(group_box, optCTabVersion);
-
-	label->setBuddy(optCTabVersionEditWidget);
-
-	connect(this, SIGNAL(updateGUI()), optCTabVersionEditWidget, SLOT(updateGUI()));
-	connect(optCTabVersionEditWidget, SIGNAL(versionChanged()), this, SLOT(handleSettingsChange()));
-
-	grid_layout->addWidget(optCTabVersionEditWidget, 0, 1);
+    grid_layout->addWidget(label, 0, 0);
 
 // xxx
 
-	label = new QLabel(tr("RXN-File Version&:"), group_box);
+    optCTabVersionEditWidget = new CTabVersionEditWidget(group_box, optCTabVersion);
 
-	grid_layout->addWidget(label, 1, 0);
+    label->setBuddy(optCTabVersionEditWidget);
+
+    connect(this, SIGNAL(updateGUI()), optCTabVersionEditWidget, SLOT(updateGUI()));
+    connect(optCTabVersionEditWidget, SIGNAL(versionChanged()), this, SLOT(handleSettingsChange()));
+
+    grid_layout->addWidget(optCTabVersionEditWidget, 0, 1);
 
 // xxx
 
-	CTabVersionEditWidget* version_edit_widget = new CTabVersionEditWidget(group_box, optRXNFileVersion);
+    label = new QLabel(tr("RXN-File Version&:"), group_box);
 
-	label->setBuddy(version_edit_widget);
+    grid_layout->addWidget(label, 1, 0);
 
-	connect(this, SIGNAL(updateGUI()), version_edit_widget, SLOT(updateGUI()));
-	connect(version_edit_widget, SIGNAL(versionChanged()), this, SLOT(handleSettingsChange()));
-	connect(version_edit_widget, SIGNAL(versionChanged()), this, SLOT(handleRXNFileVersionChange()));
+// xxx
 
-	grid_layout->addWidget(version_edit_widget, 1, 1);
+    CTabVersionEditWidget* version_edit_widget = new CTabVersionEditWidget(group_box, optRXNFileVersion);
+
+    label->setBuddy(version_edit_widget);
+
+    connect(this, SIGNAL(updateGUI()), version_edit_widget, SLOT(updateGUI()));
+    connect(version_edit_widget, SIGNAL(versionChanged()), this, SLOT(handleSettingsChange()));
+    connect(version_edit_widget, SIGNAL(versionChanged()), this, SLOT(handleRXNFileVersionChange()));
+
+    grid_layout->addWidget(version_edit_widget, 1, 1);
 
 // ---------
 
-	main_layout->addWidget(group_box);
-	main_layout->addStretch();
+    main_layout->addWidget(group_box);
+    main_layout->addStretch();
 
 // ---------
 
-	reset();
+    reset();
 }

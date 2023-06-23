@@ -50,11 +50,11 @@
 namespace
 {
 
-	const char* cdfFileExtensions[]    = { "cdf" };
-	const char* cdfGzFileExtensions[]  = { "cdf.gz" };
-	const char* cdfBz2FileExtensions[] = { "cdf.bz2" };
-	const char* pmlFileExtensions[]    = { "pml" };
-	const char* psdFileExtensions[]    = { "psd" };
+    const char* cdfFileExtensions[]    = { "cdf" };
+    const char* cdfGzFileExtensions[]  = { "cdf.gz" };
+    const char* cdfBz2FileExtensions[] = { "cdf.bz2" };
+    const char* pmlFileExtensions[]    = { "pml" };
+    const char* psdFileExtensions[]    = { "psd" };
 }
 
 
@@ -62,58 +62,58 @@ using namespace CDPL;
 
 
 const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
-											  cdfFileExtensions, cdfFileExtensions + 1, true);
+                                              cdfFileExtensions, cdfFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
-											  cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
+                                              cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
-											  cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
+                                              cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::PML("PML", "LigandScout Pharmaceutical Markup Language", "", 
-											  pmlFileExtensions, pmlFileExtensions + 1, true);
+                                              pmlFileExtensions, pmlFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::PSD("PSD", "Pharmacophore Screening Database", "", 
-											  psdFileExtensions, psdFileExtensions + 1, true);
+                                              psdFileExtensions, psdFileExtensions + 1, true);
 
 namespace CDPL
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		void initDataFormats() {}
-	}
+        void initDataFormats() {}
+    }
 }
 
 
 namespace
 {
 
-	struct Init 
-	{
+    struct Init 
+    {
 
-		Init() {
-			using namespace Base;
-			using namespace Pharm;
-			using namespace Chem;
+        Init() {
+            using namespace Base;
+            using namespace Pharm;
+            using namespace Chem;
 
-			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFPharmacophoreInputHandler()));
-			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PMLPharmacophoreInputHandler()));
-		
-			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFFeatureContainerOutputHandler()));
-			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new PMLFeatureContainerOutputHandler()));
-		
+            DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFPharmacophoreInputHandler()));
+            DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PMLPharmacophoreInputHandler()));
+        
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFFeatureContainerOutputHandler()));
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new PMLFeatureContainerOutputHandler()));
+        
 #ifdef HAVE_SQLITE3
 
-			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PSDPharmacophoreInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PSDMoleculeInputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSDMolecularGraphOutputHandler()));
+            DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PSDPharmacophoreInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PSDMoleculeInputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSDMolecularGraphOutputHandler()));
 
 #endif // HAVE_SQLITE3
 
-			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFGZPharmacophoreInputHandler()));
-			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFBZ2PharmacophoreInputHandler()));
-	
-			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFGZFeatureContainerOutputHandler()));
-			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFBZ2FeatureContainerOutputHandler()));
-		}
+            DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFGZPharmacophoreInputHandler()));
+            DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFBZ2PharmacophoreInputHandler()));
+    
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFGZFeatureContainerOutputHandler()));
+            DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFBZ2FeatureContainerOutputHandler()));
+        }
 
-	} init;
+    } init;
 }

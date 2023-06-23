@@ -32,24 +32,24 @@
 namespace CDPL
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		namespace FeaturePropertyDefault
-		{
+        namespace FeaturePropertyDefault
+        {
 
-			const bool OPTIONAL_FLAG             = false;
-			const bool DISABLED_FLAG             = false;
+            const bool OPTIONAL_FLAG             = false;
+            const bool DISABLED_FLAG             = false;
 
-			const double LENGTH                  = 1.0;
-			const double TOLERANCE               = 1.0;
-			const double WEIGHT                  = 1.0;
-			const double HYDROPHOBICITY          = 0.0;
+            const double LENGTH                  = 1.0;
+            const double TOLERANCE               = 1.0;
+            const double WEIGHT                  = 1.0;
+            const double HYDROPHOBICITY          = 0.0;
 
-			const unsigned int TYPE              = FeatureType::UNKNOWN;
-			const unsigned int GEOMETRY          = FeatureGeometry::UNDEF;
-		}
+            const unsigned int TYPE              = FeatureType::UNKNOWN;
+            const unsigned int GEOMETRY          = FeatureGeometry::UNDEF;
+        }
 
-		void initFeaturePropertyDefaults() {}
-	}
+        void initFeaturePropertyDefaults() {}
+    }
 }

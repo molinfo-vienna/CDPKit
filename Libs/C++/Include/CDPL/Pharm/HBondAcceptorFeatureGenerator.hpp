@@ -39,29 +39,29 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief HBondAcceptorFeatureGenerator.
-		 */
-		class CDPL_PHARM_API HBondAcceptorFeatureGenerator : public PatternBasedFeatureGenerator
-		{
+        /**
+         * \brief HBondAcceptorFeatureGenerator.
+         */
+        class CDPL_PHARM_API HBondAcceptorFeatureGenerator : public PatternBasedFeatureGenerator
+        {
 
-		  public:
-			/**
-			 * \brief Constructs the \c %HBondAcceptorFeatureGenerator instance.
-			 */
-			HBondAcceptorFeatureGenerator();
-				
-			/**
-			 * \brief Perceives the hydrogen bond acceptor features of the molecular graph a\ molgraph and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 */
-			HBondAcceptorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
-	    
-		  private:
-			void init();
-		};
+          public:
+            /**
+             * \brief Constructs the \c %HBondAcceptorFeatureGenerator instance.
+             */
+            HBondAcceptorFeatureGenerator();
+                
+            /**
+             * \brief Perceives the hydrogen bond acceptor features of the molecular graph a\ molgraph and adds 
+             *        them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             */
+            HBondAcceptorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
+        
+          private:
+            void init();
+        };
     }
 }
 

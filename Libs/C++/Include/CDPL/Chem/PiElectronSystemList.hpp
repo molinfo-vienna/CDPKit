@@ -39,60 +39,60 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		
-		/**
-		 * \brief Implements the perception of all pi electron systems present in a molecule.
-		 */
-		class CDPL_CHEM_API PiElectronSystemList : public ElectronSystemList 
-		{
+        class MolecularGraph;
+        
+        /**
+         * \brief Implements the perception of all pi electron systems present in a molecule.
+         */
+        class CDPL_CHEM_API PiElectronSystemList : public ElectronSystemList 
+        {
 
-		public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PiElectronSystemList instances.
-			 */
-			typedef std::shared_ptr<PiElectronSystemList> SharedPointer;
+        public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PiElectronSystemList instances.
+             */
+            typedef std::shared_ptr<PiElectronSystemList> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %PiElectronSystemList instance.
-			 */
-			PiElectronSystemList();
+            /**
+             * \brief Constructs an empty \c %PiElectronSystemList instance.
+             */
+            PiElectronSystemList();
 
-			/**
-			 * \brief Constructs a \c %PiElectronSystemList instance storing all pi electron systems of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive the pi electron systems.
-			 */
-			PiElectronSystemList(const MolecularGraph& molgraph);
+            /**
+             * \brief Constructs a \c %PiElectronSystemList instance storing all pi electron systems of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the pi electron systems.
+             */
+            PiElectronSystemList(const MolecularGraph& molgraph);
 
-			/**
-			 * \brief Perceives all pi electron systems present in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive the pi electron systems.
-			 */
-			void perceive(const MolecularGraph& molgraph);
+            /**
+             * \brief Perceives all pi electron systems present in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the pi electron systems.
+             */
+            void perceive(const MolecularGraph& molgraph);
 
-		private:
-			typedef std::list<ElectronSystem::SharedPointer> WorkingElecSysList;
+        private:
+            typedef std::list<ElectronSystem::SharedPointer> WorkingElecSysList;
 
-			void initStartElecSystems(const MolecularGraph& molgraph);
+            void initStartElecSystems(const MolecularGraph& molgraph);
 
-			void mergeElecSystems(const MolecularGraph& molgraph);
+            void mergeElecSystems(const MolecularGraph& molgraph);
 
-			void mergeElecSystemsPass1(const MolecularGraph& molgraph);
-			void mergeElecSystemsPass2(const MolecularGraph& molgraph);
+            void mergeElecSystemsPass1(const MolecularGraph& molgraph);
+            void mergeElecSystemsPass2(const MolecularGraph& molgraph);
 
-			bool isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys, 
-									   const MolecularGraph& molgraph) const;
-			bool isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys, 
-												 const MolecularGraph& molgraph) const;
-			bool has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys, 
-										const MolecularGraph& molgraph) const;
+            bool isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys, 
+                                       const MolecularGraph& molgraph) const;
+            bool isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys, 
+                                                 const MolecularGraph& molgraph) const;
+            bool has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys, 
+                                        const MolecularGraph& molgraph) const;
 
-			WorkingElecSysList workingElecSystems;
-		};
-	}
+            WorkingElecSysList workingElecSystems;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP

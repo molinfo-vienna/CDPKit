@@ -31,15 +31,15 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		namespace ControlParameter
-		{
+        namespace ControlParameter
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
+        }
 
-		void initControlParameters() {}
-	}
+        void initControlParameters() {}
+    }
 }

@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief PhosphinicAcidTautomerizationRule.
-		 */
-		class CDPL_CHEM_API PhosphinicAcidTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief PhosphinicAcidTautomerizationRule.
+         */
+        class CDPL_CHEM_API PhosphinicAcidTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			PhosphinicAcidTautomerization();
-		};
+          public:
+            PhosphinicAcidTautomerization();
+        };
     }
 }
 

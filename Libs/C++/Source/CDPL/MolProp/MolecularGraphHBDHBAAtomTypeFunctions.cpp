@@ -41,9 +41,9 @@ using namespace CDPL;
 void MolProp::perceiveHBondDonorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasHBondDonorType, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasHBondDonorType, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
     Util::UIArray types;
     HBondDonorAtomTyper typer(molgraph, types);
@@ -54,9 +54,9 @@ void MolProp::perceiveHBondDonorAtomTypes(Chem::MolecularGraph& molgraph, bool o
 void MolProp::perceiveHBondAcceptorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasHBondAcceptorType, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasHBondAcceptorType, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
     Util::UIArray types;
     HBondAcceptorAtomTyper typer(molgraph, types);

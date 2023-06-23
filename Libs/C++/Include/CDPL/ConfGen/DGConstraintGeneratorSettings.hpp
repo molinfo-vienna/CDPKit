@@ -38,33 +38,33 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API DGConstraintGeneratorSettings
-		{
+        class CDPL_CONFGEN_API DGConstraintGeneratorSettings
+        {
 
-		  public:
-			static const DGConstraintGeneratorSettings DEFAULT;
+          public:
+            static const DGConstraintGeneratorSettings DEFAULT;
 
-			DGConstraintGeneratorSettings();
+            DGConstraintGeneratorSettings();
 
-			virtual ~DGConstraintGeneratorSettings() {}
+            virtual ~DGConstraintGeneratorSettings() {}
 
-			void excludeHydrogens(bool exclude);
+            void excludeHydrogens(bool exclude);
 
-			bool excludeHydrogens() const;
+            bool excludeHydrogens() const;
 
-			void regardAtomConfiguration(bool regard);
+            void regardAtomConfiguration(bool regard);
 
-			bool regardAtomConfiguration() const;
+            bool regardAtomConfiguration() const;
 
-			void regardBondConfiguration(bool regard);
+            void regardBondConfiguration(bool regard);
 
-			bool regardBondConfiguration() const;
+            bool regardBondConfiguration() const;
 
-		  private:
-			bool  exclHydrogens;
-			bool  atomConfig;
-			bool  bondConfig;
-		};
+          private:
+            bool  exclHydrogens;
+            bool  atomConfig;
+            bool  bondConfig;
+        };
     }
 }
 

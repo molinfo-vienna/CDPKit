@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of reaction data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<CDFReactionWriter, DataFormat::CDF> CDFReactionOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of reaction data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<CDFReactionWriter, DataFormat::CDF> CDFReactionOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_CDFREACTIONOUTPUTHANDLER_HPP

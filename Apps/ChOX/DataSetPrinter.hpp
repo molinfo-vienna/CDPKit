@@ -38,36 +38,36 @@ class QWidget;
 namespace ChOX
 {
 
-	class DataSet;
-	class Settings;
+    class DataSet;
+    class Settings;
 
-	class DataSetPrinter : public QObject
-	{
+    class DataSetPrinter : public QObject
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		DataSetPrinter(const Settings&, const DataSet&);
+    public:
+        DataSetPrinter(const Settings&, const DataSet&);
 
-		void print(QWidget* caller, QPrinter& printer);
-		void printPage(QPainter& painter, int page_no, int num_pages, int page_offs, 
-					   double width, double height, int num_rows, int num_cols);
-		
-	signals:
-		void errorMessage(const QString&);
-		void statusMessage(const QString&);
+        void print(QWidget* caller, QPrinter& printer);
+        void printPage(QPainter& painter, int page_no, int num_pages, int page_offs, 
+                       double width, double height, int num_rows, int num_cols);
+        
+    signals:
+        void errorMessage(const QString&);
+        void statusMessage(const QString&);
 
-	private:
-		void drawFrame(QPainter& painter, double width, double height) const;
-		void drawTextLabels(QPainter& painter, int page_no, int num_pages, 
-							double width, double& height) const;
+    private:
+        void drawFrame(QPainter& painter, double width, double height) const;
+        void drawTextLabels(QPainter& painter, int page_no, int num_pages, 
+                            double width, double& height) const;
 
-		typedef std::vector<int> RecordIndexList;
+        typedef std::vector<int> RecordIndexList;
 
-		const DataSet&   dataSet;
-		const Settings&  settings;
-		RecordIndexList  recordList;
-	};
+        const DataSet&   dataSet;
+        const Settings&  settings;
+        RecordIndexList  recordList;
+    };
 }
 
 #endif // CHOX_DATASETPRINTER_HPP

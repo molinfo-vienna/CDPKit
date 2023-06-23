@@ -42,25 +42,25 @@ using namespace CDPL;
 void MolProp::calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite, bool from_logp)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasHydrophobicity, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasHydrophobicity, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
-	if (from_logp) {
-		const double SCALING_FACTOR = 2.3;
-		
-		XLogPCalculator calculator(molgraph);
-		const Math::DVector& logp_contribs = calculator.getAtomContributions();
+    if (from_logp) {
+        const double SCALING_FACTOR = 2.3;
+        
+        XLogPCalculator calculator(molgraph);
+        const Math::DVector& logp_contribs = calculator.getAtomContributions();
 
-		for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) 
-			setHydrophobicity(molgraph.getAtom(i), logp_contribs[i] > 0.0 ? logp_contribs[i] * SCALING_FACTOR: 0.0);
+        for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) 
+            setHydrophobicity(molgraph.getAtom(i), logp_contribs[i] > 0.0 ? logp_contribs[i] * SCALING_FACTOR: 0.0);
 
-		return;
-	}
-	
+        return;
+    }
+    
     Util::DArray hyd_table;
     AtomHydrophobicityCalculator calculator(molgraph, hyd_table);
 
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) 
-		setHydrophobicity(molgraph.getAtom(i), hyd_table[i]);
+        setHydrophobicity(molgraph.getAtom(i), hyd_table[i]);
 }

@@ -34,25 +34,25 @@
 namespace
 {
 
-	class TestPropertyContainer : public CDPL::Base::PropertyContainer {};
+    class TestPropertyContainer : public CDPL::Base::PropertyContainer {};
 }
 
 
 BOOST_AUTO_TEST_CASE(PropertyValueTest)
 {
-	using namespace CDPL;
-	using namespace Util;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Util;
+    using namespace Base;
 
-	TestPropertyContainer prop_cntnr;
-	LookupKey key1 = LookupKey::create("key1");
+    TestPropertyContainer prop_cntnr;
+    LookupKey key1 = LookupKey::create("key1");
 
-	prop_cntnr.setProperty(key1, std::string("C"));
+    prop_cntnr.setProperty(key1, std::string("C"));
 
-	BOOST_CHECK((PropertyValue<std::string>(key1)(prop_cntnr) == "C"));
+    BOOST_CHECK((PropertyValue<std::string>(key1)(prop_cntnr) == "C"));
 
-	prop_cntnr.setProperty(key1, std::string("H"));
+    prop_cntnr.setProperty(key1, std::string("H"));
 
-	BOOST_CHECK((PropertyValue<std::string>(key1)(prop_cntnr) == "H"));
+    BOOST_CHECK((PropertyValue<std::string>(key1)(prop_cntnr) == "H"));
 }
 

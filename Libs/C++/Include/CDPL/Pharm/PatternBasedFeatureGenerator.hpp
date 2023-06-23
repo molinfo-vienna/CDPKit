@@ -49,159 +49,159 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Pharmacophore;
+        class Pharmacophore;
 
-		/**
-		 * \brief PatternBasedFeatureGenerator.
-		 */
-		class CDPL_PHARM_API PatternBasedFeatureGenerator : public FeatureGenerator
-		{
+        /**
+         * \brief PatternBasedFeatureGenerator.
+         */
+        class CDPL_PHARM_API PatternBasedFeatureGenerator : public FeatureGenerator
+        {
 
-		  public:
-			typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
+          public:
+            typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
 
-			enum PatternAtomLabelFlag 
-			{
-			
-			    FEATURE_ATOM_FLAG   = 0x01,
-			    POS_REF_ATOM_FLAG   = 0x02,
-			    GEOM_REF_ATOM1_FLAG = 0x04,
-			    GEOM_REF_ATOM2_FLAG = 0x08
-			};
+            enum PatternAtomLabelFlag 
+            {
+            
+                FEATURE_ATOM_FLAG   = 0x01,
+                POS_REF_ATOM_FLAG   = 0x02,
+                GEOM_REF_ATOM1_FLAG = 0x04,
+                GEOM_REF_ATOM2_FLAG = 0x08
+            };
 
-			/**
-			 * \brief Constructs the \c %PatternBasedFeatureGenerator instance.
-			 */
-			PatternBasedFeatureGenerator();
-			
-			/**
-			 * \brief Constructs a copy of the \c %PatternBasedFeatureGenerator instance \a gen.
-			 * \param gen The \c %PatternBasedFeatureGenerator instance to copy.
-			 */
-			PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen);
+            /**
+             * \brief Constructs the \c %PatternBasedFeatureGenerator instance.
+             */
+            PatternBasedFeatureGenerator();
+            
+            /**
+             * \brief Constructs a copy of the \c %PatternBasedFeatureGenerator instance \a gen.
+             * \param gen The \c %PatternBasedFeatureGenerator instance to copy.
+             */
+            PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen);
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~PatternBasedFeatureGenerator();
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~PatternBasedFeatureGenerator();
 
-			/**
-			 * \brief Appends a new feature include pattern to the current set of patterns.
-			 * \param pattern The substructure search pattern of the feature.
-			 * \param type The value of the type property of the feature.
-			 * \param tol The value of the tolerance property of the feature.
-			 * \param geom The value of the geometry property of the feature.
-			 * \param length The value of the length property of vector features.
-			 */
-			void addIncludePattern(const Chem::MolecularGraph::SharedPointer& pattern, unsigned int type, 
-								   double tol, unsigned int geom, double length = 1.0);
+            /**
+             * \brief Appends a new feature include pattern to the current set of patterns.
+             * \param pattern The substructure search pattern of the feature.
+             * \param type The value of the type property of the feature.
+             * \param tol The value of the tolerance property of the feature.
+             * \param geom The value of the geometry property of the feature.
+             * \param length The value of the length property of vector features.
+             */
+            void addIncludePattern(const Chem::MolecularGraph::SharedPointer& pattern, unsigned int type, 
+                                   double tol, unsigned int geom, double length = 1.0);
 
-			/**
-			 * \brief Appends a new feature include pattern to the current set of patterns.
-			 * \param pattern The substructure search pattern of the feature.
-			 */
-			void addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern);
-		
-			/**
-			 * \brief Clears the current set of include patterns.
-			 */
-			void clearIncludePatterns();
-		
-			/**
-			 * \brief Clears the current set of exclude patterns.
-			 */
-			void clearExcludePatterns();
+            /**
+             * \brief Appends a new feature include pattern to the current set of patterns.
+             * \param pattern The substructure search pattern of the feature.
+             */
+            void addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern);
+        
+            /**
+             * \brief Clears the current set of include patterns.
+             */
+            void clearIncludePatterns();
+        
+            /**
+             * \brief Clears the current set of exclude patterns.
+             */
+            void clearExcludePatterns();
 
-			/**
-			 * \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 */
-			void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
+            /**
+             * \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds 
+             *        them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             */
+            void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
-			/**
-			 * \brief Replaces the current set include/exclude patterns by the patterns in the
-			 *        \c %PatternBasedFeatureGenerator instance \a gen.
-			 * \param gen The \c %PatternBasedFeatureGenerator instance providing the new patterns to use.
-			 * \return A reference to itself.
-			 */
-			PatternBasedFeatureGenerator& operator=(const PatternBasedFeatureGenerator& gen);
+            /**
+             * \brief Replaces the current set include/exclude patterns by the patterns in the
+             *        \c %PatternBasedFeatureGenerator instance \a gen.
+             * \param gen The \c %PatternBasedFeatureGenerator instance providing the new patterns to use.
+             * \return A reference to itself.
+             */
+            PatternBasedFeatureGenerator& operator=(const PatternBasedFeatureGenerator& gen);
 
-			FeatureGenerator::SharedPointer clone() const;
+            FeatureGenerator::SharedPointer clone() const;
 
-		  protected:
-			typedef std::vector<const Chem::Atom*> AtomList;
+          protected:
+            typedef std::vector<const Chem::Atom*> AtomList;
 
-			double calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
-			bool calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
-			bool calcCentroid(const AtomList&, Math::Vector3D&) const;
+            double calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
+            bool calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
+            bool calcCentroid(const AtomList&, Math::Vector3D&) const;
 
-			virtual void addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) {}
+            virtual void addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) {}
 
-			bool isContainedInIncMatchList(const Util::BitSet&) const;
-			bool isContainedInExMatchList(const Util::BitSet&) const;
+            bool isContainedInIncMatchList(const Util::BitSet&) const;
+            bool isContainedInExMatchList(const Util::BitSet&) const;
 
-		  private:
-			struct IncludePattern
-			{
+          private:
+            struct IncludePattern
+            {
 
-				IncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type, 
-							   double tol, unsigned int geom, double length): 
-					subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)), featureType(type),
-					featureTol(tol), featureGeom(geom), vectorLength(length) {
+                IncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type, 
+                               double tol, unsigned int geom, double length): 
+                    subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)), featureType(type),
+                    featureTol(tol), featureGeom(geom), vectorLength(length) {
 
-					subSearch->uniqueMappingsOnly(false);
-				}
+                    subSearch->uniqueMappingsOnly(false);
+                }
 
-				Chem::MolecularGraph::SharedPointer     subQuery;
-				Chem::SubstructureSearch::SharedPointer subSearch;
-				unsigned int                            featureType;
-				double                                  featureTol;
-				unsigned int                            featureGeom;
-				double                                  vectorLength;
-			};
+                Chem::MolecularGraph::SharedPointer     subQuery;
+                Chem::SubstructureSearch::SharedPointer subSearch;
+                unsigned int                            featureType;
+                double                                  featureTol;
+                unsigned int                            featureGeom;
+                double                                  vectorLength;
+            };
 
-			struct ExcludePattern
-			{
+            struct ExcludePattern
+            {
 
-				ExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct): 
-					subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)) {
+                ExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct): 
+                    subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)) {
 
-					subSearch->uniqueMappingsOnly(true);
-				}
+                    subSearch->uniqueMappingsOnly(true);
+                }
 
-				Chem::MolecularGraph::SharedPointer     subQuery;
-				Chem::SubstructureSearch::SharedPointer subSearch;
-			};
+                Chem::MolecularGraph::SharedPointer     subQuery;
+                Chem::SubstructureSearch::SharedPointer subSearch;
+            };
 
-			typedef std::vector<IncludePattern> IncludePatternList;
-			typedef std::vector<ExcludePattern> ExcludePatternList;
-			typedef Util::ObjectStack<Util::BitSet> BitSetCache;
-			typedef std::vector<Util::BitSet*> BitSetList;
+            typedef std::vector<IncludePattern> IncludePatternList;
+            typedef std::vector<ExcludePattern> ExcludePatternList;
+            typedef Util::ObjectStack<Util::BitSet> BitSetCache;
+            typedef std::vector<Util::BitSet*> BitSetList;
 
-			void init(const Chem::MolecularGraph& molgraph);
+            void init(const Chem::MolecularGraph& molgraph);
 
-			void getExcludeMatches();
+            void getExcludeMatches();
 
-			void addFeature(const Chem::AtomBondMapping&, const IncludePattern&, Pharmacophore&);
-		
-			void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
-			bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
+            void addFeature(const Chem::AtomBondMapping&, const IncludePattern&, Pharmacophore&);
+        
+            void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
+            bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
-			const Chem::MolecularGraph* molGraph;
-			IncludePatternList          includePatterns;
-			ExcludePatternList          excludePatterns;
-			BitSetList                  includeMatches;
-			BitSetList                  excludeMatches;
-			AtomList                    posRefAtomList;
-			AtomList                    geomRefAtom1List;
-			AtomList                    geomRefAtom2List;
-			Math::Matrix<double>        svdU;
-			Math::Matrix3D              svdV;
-			Math::Vector3D              svdW;
-			BitSetCache                 bitSetCache;
-		};
+            const Chem::MolecularGraph* molGraph;
+            IncludePatternList          includePatterns;
+            ExcludePatternList          excludePatterns;
+            BitSetList                  includeMatches;
+            BitSetList                  excludeMatches;
+            AtomList                    posRefAtomList;
+            AtomList                    geomRefAtom1List;
+            AtomList                    geomRefAtom2List;
+            Math::Matrix<double>        svdU;
+            Math::Matrix3D              svdV;
+            Math::Vector3D              svdW;
+            BitSetCache                 bitSetCache;
+        };
     }
 }
 

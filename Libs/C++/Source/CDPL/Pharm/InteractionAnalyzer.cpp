@@ -59,29 +59,29 @@ Pharm::InteractionAnalyzer::getConstraintFunction(unsigned int type1, unsigned i
 }
 
 void Pharm::InteractionAnalyzer::analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, 
-										 FeatureMapping& iactions, bool append) const
+                                         FeatureMapping& iactions, bool append) const
 {
-	if (!append)
-		iactions.clear();
-	
-	ConstraintFunctionMap::const_iterator cf_map_end = constraintFuncMap.end();
-	FeatureTypePair type_pair;
+    if (!append)
+        iactions.clear();
+    
+    ConstraintFunctionMap::const_iterator cf_map_end = constraintFuncMap.end();
+    FeatureTypePair type_pair;
 
-	for (FeatureContainer::ConstFeatureIterator it1 = cntnr1.getFeaturesBegin(), end1 = cntnr1.getFeaturesEnd(); it1 != end1; ++it1) {
-		const Feature& ftr1 = *it1;
-		type_pair.first = getType(ftr1);
+    for (FeatureContainer::ConstFeatureIterator it1 = cntnr1.getFeaturesBegin(), end1 = cntnr1.getFeaturesEnd(); it1 != end1; ++it1) {
+        const Feature& ftr1 = *it1;
+        type_pair.first = getType(ftr1);
 
-		for (FeatureContainer::ConstFeatureIterator it2 = cntnr2.getFeaturesBegin(), end2 = cntnr2.getFeaturesEnd(); it2 != end2; ++it2) {
-			const Feature& ftr2 = *it2;
-			type_pair.second = getType(ftr2);
+        for (FeatureContainer::ConstFeatureIterator it2 = cntnr2.getFeaturesBegin(), end2 = cntnr2.getFeaturesEnd(); it2 != end2; ++it2) {
+            const Feature& ftr2 = *it2;
+            type_pair.second = getType(ftr2);
 
-			ConstraintFunctionMap::const_iterator cf_it = constraintFuncMap.find(type_pair);
+            ConstraintFunctionMap::const_iterator cf_it = constraintFuncMap.find(type_pair);
 
-			if (cf_it == cf_map_end || !cf_it->second)
-				continue;
+            if (cf_it == cf_map_end || !cf_it->second)
+                continue;
 
-			if (cf_it->second(ftr1, ftr2))
-				iactions.insertEntry(&ftr1, &ftr2);
-		}
-	}
+            if (cf_it->second(ftr1, ftr2))
+                iactions.insertEntry(&ftr1, &ftr2);
+        }
+    }
 }

@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Chem::SMARTSMolecularGraphWriter::SMARTSMolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new SMARTSDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new SMARTSDataWriter(*this)) {}
 
 Chem::SMARTSMolecularGraphWriter::~SMARTSMolecularGraphWriter() {}
 
 Base::DataWriter<Chem::MolecularGraph>& Chem::SMARTSMolecularGraphWriter::write(const MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeMolGraph(output, molgraph);
+    try {
+        state = writer->writeMolGraph(output, molgraph);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("SMARTSMolecularGraphWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("SMARTSMolecularGraphWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Chem::SMARTSMolecularGraphWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Chem::SMARTSMolecularGraphWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

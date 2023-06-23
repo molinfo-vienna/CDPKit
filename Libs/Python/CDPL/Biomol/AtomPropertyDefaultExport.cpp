@@ -32,20 +32,20 @@
 namespace 
 {
 
-	struct AtomPropertyDefault {};
+    struct AtomPropertyDefault {};
 }
 
 
 void CDPLPythonBiomol::exportAtomPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
-		.def_readonly("MODEL_NUMBER", &Biomol::AtomPropertyDefault::MODEL_NUMBER)
-		.def_readonly("B_FACTOR", &Biomol::AtomPropertyDefault::B_FACTOR)
-		.def_readonly("OCCUPANCY", &Biomol::AtomPropertyDefault::OCCUPANCY)
-		.def_readonly("RESIDUE_LEAVING_ATOM_FLAG", &Biomol::AtomPropertyDefault::RESIDUE_LEAVING_ATOM_FLAG)
-		.def_readonly("RESIDUE_LINKING_ATOM_FLAG", &Biomol::AtomPropertyDefault::RESIDUE_LINKING_ATOM_FLAG)
-		.def_readonly("RESIDUE_INSERTION_CODE", &Biomol::AtomPropertyDefault::RESIDUE_INSERTION_CODE);
+    python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
+        .def_readonly("MODEL_NUMBER", &Biomol::AtomPropertyDefault::MODEL_NUMBER)
+        .def_readonly("B_FACTOR", &Biomol::AtomPropertyDefault::B_FACTOR)
+        .def_readonly("OCCUPANCY", &Biomol::AtomPropertyDefault::OCCUPANCY)
+        .def_readonly("RESIDUE_LEAVING_ATOM_FLAG", &Biomol::AtomPropertyDefault::RESIDUE_LEAVING_ATOM_FLAG)
+        .def_readonly("RESIDUE_LINKING_ATOM_FLAG", &Biomol::AtomPropertyDefault::RESIDUE_LINKING_ATOM_FLAG)
+        .def_readonly("RESIDUE_INSERTION_CODE", &Biomol::AtomPropertyDefault::RESIDUE_INSERTION_CODE);
 }

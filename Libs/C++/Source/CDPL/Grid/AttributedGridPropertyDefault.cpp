@@ -30,15 +30,15 @@
 namespace CDPL
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		namespace AttributedGridPropertyDefault
-		{
+        namespace AttributedGridPropertyDefault
+        {
 
-			const std::string NAME = "";
-		}
+            const std::string NAME = "";
+        }
 
-		void initAttributedGridPropertyDefaults() {}
-	}
+        void initAttributedGridPropertyDefaults() {}
+    }
 }

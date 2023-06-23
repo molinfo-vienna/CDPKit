@@ -33,13 +33,13 @@
 
 void CDPLPythonGRAIL::registerFromPythonConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<const GRAIL::FeatureInteractionScoreGridCalculator::MaxScoreFunctor&,
-											   GRAIL::FeatureInteractionScoreGridCalculator::ScoreCombinationFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const GRAIL::FeatureInteractionScoreGridCalculator::ScoreSumFunctor&,
-											   GRAIL::FeatureInteractionScoreGridCalculator::ScoreCombinationFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const GRAIL::FeatureInteractionScoreGridCalculator::MaxScoreFunctor&,
+                                               GRAIL::FeatureInteractionScoreGridCalculator::ScoreCombinationFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const GRAIL::FeatureInteractionScoreGridCalculator::ScoreSumFunctor&,
+                                               GRAIL::FeatureInteractionScoreGridCalculator::ScoreCombinationFunction>();
 
-	CDPLPythonBase::GenericFromPythonConverter<const GRAIL::GeneralizedBellAtomDensity&, 
-											   GRAIL::AtomDensityGridCalculator::DensityFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const GRAIL::GeneralizedBellAtomDensity&, 
+                                               GRAIL::AtomDensityGridCalculator::DensityFunction>();
 }

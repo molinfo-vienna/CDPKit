@@ -40,61 +40,61 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API TorsionDriverSettings
-		{
+        class CDPL_CONFGEN_API TorsionDriverSettings
+        {
 
-		  public:
-			static const TorsionDriverSettings DEFAULT;
+          public:
+            static const TorsionDriverSettings DEFAULT;
 
-			TorsionDriverSettings();
+            TorsionDriverSettings();
 
-			void sampleHeteroAtomHydrogens(bool sample);
-				
-			bool sampleHeteroAtomHydrogens() const;
+            void sampleHeteroAtomHydrogens(bool sample);
+                
+            bool sampleHeteroAtomHydrogens() const;
 
-			void sampleAngleToleranceRanges(bool sample);
-				
-			bool sampleAngleToleranceRanges() const;
+            void sampleAngleToleranceRanges(bool sample);
+                
+            bool sampleAngleToleranceRanges() const;
 
-			void orderByEnergy(bool order);
+            void orderByEnergy(bool order);
 
-			bool orderByEnergy() const;
+            bool orderByEnergy() const;
 
-			void setEnergyWindow(double win_size);
+            void setEnergyWindow(double win_size);
 
-			double getEnergyWindow() const;
+            double getEnergyWindow() const;
 
-			void setMaxPoolSize(std::size_t max_size);
+            void setMaxPoolSize(std::size_t max_size);
 
-			std::size_t getMaxPoolSize() const;
+            std::size_t getMaxPoolSize() const;
 
-			void setForceFieldType(unsigned int type);
-	    
-			unsigned int getForceFieldType() const;
-			
-			void strictForceFieldParameterization(bool strict);
+            void setForceFieldType(unsigned int type);
+        
+            unsigned int getForceFieldType() const;
+            
+            void strictForceFieldParameterization(bool strict);
 
-			bool strictForceFieldParameterization() const;
+            bool strictForceFieldParameterization() const;
 
-			void setDielectricConstant(double de_const);
+            void setDielectricConstant(double de_const);
 
-			double getDielectricConstant() const;
+            double getDielectricConstant() const;
 
-			void setDistanceExponent(double exponent);
+            void setDistanceExponent(double exponent);
 
-			double getDistanceExponent() const;
+            double getDistanceExponent() const;
 
-		  private:
-			bool         sampleHetAtomHs;
-			bool         sampleTolRanges;
-			bool         energyOrdered;
-			double       eWindow;
-			std::size_t  maxPoolSize;
-			unsigned int forceFieldType;
-			bool         strictParam;
-			double       dielectricConst;
-			double       distExponent;
-		};
+          private:
+            bool         sampleHetAtomHs;
+            bool         sampleTolRanges;
+            bool         energyOrdered;
+            double       eWindow;
+            std::size_t  maxPoolSize;
+            unsigned int forceFieldType;
+            bool         strictParam;
+            double       dielectricConst;
+            double       distExponent;
+        };
     }
 }
 

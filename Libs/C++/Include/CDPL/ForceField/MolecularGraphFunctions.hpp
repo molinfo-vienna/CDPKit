@@ -36,31 +36,31 @@
 namespace CDPL 
 {
 
-	namespace ForceField 
-	{
+    namespace ForceField 
+    {
 
-		CDPL_FORCEFIELD_API const Chem::FragmentList::SharedPointer& getMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
+        CDPL_FORCEFIELD_API const Chem::FragmentList::SharedPointer& getMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
 
-		CDPL_FORCEFIELD_API void setMMFF94AromaticRings(Chem::MolecularGraph& molgraph, const Chem::FragmentList::SharedPointer& rings);
+        CDPL_FORCEFIELD_API void setMMFF94AromaticRings(Chem::MolecularGraph& molgraph, const Chem::FragmentList::SharedPointer& rings);
 
-		CDPL_FORCEFIELD_API void clearMMFF94AromaticRings(Chem::MolecularGraph& molgraph);
+        CDPL_FORCEFIELD_API void clearMMFF94AromaticRings(Chem::MolecularGraph& molgraph);
 
-		CDPL_FORCEFIELD_API bool hasMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
+        CDPL_FORCEFIELD_API bool hasMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
 
-		CDPL_FORCEFIELD_API Chem::FragmentList::SharedPointer perceiveMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
+        CDPL_FORCEFIELD_API Chem::FragmentList::SharedPointer perceiveMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
 
-		CDPL_FORCEFIELD_API Chem::FragmentList::SharedPointer perceiveMMFF94AromaticRings(Chem::MolecularGraph& molgraph, bool overwrite);
-
-
-		CDPL_FORCEFIELD_API void assignMMFF94AtomTypes(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
-
-		CDPL_FORCEFIELD_API void assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
-
-		CDPL_FORCEFIELD_API void calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
+        CDPL_FORCEFIELD_API Chem::FragmentList::SharedPointer perceiveMMFF94AromaticRings(Chem::MolecularGraph& molgraph, bool overwrite);
 
 
-		CDPL_FORCEFIELD_API void assignUFFAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
-	}
+        CDPL_FORCEFIELD_API void assignMMFF94AtomTypes(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
+
+        CDPL_FORCEFIELD_API void assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
+
+        CDPL_FORCEFIELD_API void calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
+
+
+        CDPL_FORCEFIELD_API void assignUFFAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
+    }
 }
 
 #endif // CDPL_FORCEFIELD_MOLECULARGRAPHFUNCTIONS_HPP

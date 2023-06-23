@@ -42,17 +42,17 @@ Chem::ElectronSystemList::SharedPointer Chem::perceivePiElectronSystems(const Mo
 Chem::ElectronSystemList::SharedPointer Chem::perceivePiElectronSystems(MolecularGraph& molgraph, bool overwrite)
 {
     if (!overwrite) {
-		Base::Any prev_pi_systems = molgraph.getProperty(MolecularGraphProperty::PI_ELECTRON_SYSTEMS, false);
-	
-		if (!prev_pi_systems.isEmpty())
-			return prev_pi_systems.getData<ElectronSystemList::SharedPointer>();
+        Base::Any prev_pi_systems = molgraph.getProperty(MolecularGraphProperty::PI_ELECTRON_SYSTEMS, false);
+    
+        if (!prev_pi_systems.isEmpty())
+            return prev_pi_systems.getData<ElectronSystemList::SharedPointer>();
     }
 
     PiElectronSystemList pi_systems(molgraph);
     ElectronSystemList::SharedPointer pi_systems_ptr(new ElectronSystemList());
 
     pi_systems_ptr->swap(pi_systems);
-	
+    
     setPiElectronSystems(molgraph, pi_systems_ptr);
 
     return pi_systems_ptr;

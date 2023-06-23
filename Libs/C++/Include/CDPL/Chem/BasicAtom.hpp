@@ -41,166 +41,166 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
+    namespace Chem 
+    {
 
-		class BasicMolecule;
-		class BasicBond;
+        class BasicMolecule;
+        class BasicBond;
 
-		/**
-		 * \brief BasicAtom.
-		 */
-		class CDPL_CHEM_API BasicAtom : public Atom
-		{
+        /**
+         * \brief BasicAtom.
+         */
+        class CDPL_CHEM_API BasicAtom : public Atom
+        {
 
-			friend class BasicMolecule;
+            friend class BasicMolecule;
 
-			typedef std::pair<BasicAtom*, BasicBond*> AtomBondPair;
-			typedef std::vector<AtomBondPair> NeighborList;
+            typedef std::pair<BasicAtom*, BasicBond*> AtomBondPair;
+            typedef std::vector<AtomBondPair> NeighborList;
 
-			template <typename AtomType>
-			struct AtomAccessor
-			{
+            template <typename AtomType>
+            struct AtomAccessor
+            {
 
-				typedef AtomType& result_type;
+                typedef AtomType& result_type;
 
-				AtomType& operator()(const AtomBondPair& ab_pair) const {
-					return *ab_pair.first;
-				}
-			};
+                AtomType& operator()(const AtomBondPair& ab_pair) const {
+                    return *ab_pair.first;
+                }
+            };
 
-			template <typename BondType>
-			struct BondAccessor
-			{
+            template <typename BondType>
+            struct BondAccessor
+            {
 
-				typedef BondType& result_type;
+                typedef BondType& result_type;
 
-				BondType& operator()(const AtomBondPair& ab_pair) const {
-					return *ab_pair.second;
-				}
-			};
+                BondType& operator()(const AtomBondPair& ab_pair) const {
+                    return *ab_pair.second;
+                }
+            };
 
-		public:
-			typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator> AtomIterator;
-			typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
-			typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator> BondIterator;
-			typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
-	
-			const Molecule& getMolecule() const;
+        public:
+            typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator> AtomIterator;
+            typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
+            typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator> BondIterator;
+            typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
+    
+            const Molecule& getMolecule() const;
 
-			Molecule& getMolecule();
-		
-			std::size_t getNumAtoms() const;
-		
-			std::size_t getNumBonds() const;
-	
-			const Bond& getBond(std::size_t idx) const;
-		
-			Bond& getBond(std::size_t idx);
-			
-			const Bond& getBondToAtom(const Atom& atom) const;
-		
-			Bond& getBondToAtom(const Atom& atom);
+            Molecule& getMolecule();
+        
+            std::size_t getNumAtoms() const;
+        
+            std::size_t getNumBonds() const;
+    
+            const Bond& getBond(std::size_t idx) const;
+        
+            Bond& getBond(std::size_t idx);
+            
+            const Bond& getBondToAtom(const Atom& atom) const;
+        
+            Bond& getBondToAtom(const Atom& atom);
 
-			const Bond* findBondToAtom(const Atom& atom) const;
+            const Bond* findBondToAtom(const Atom& atom) const;
 
-			Bond* findBondToAtom(const Atom& atom);
+            Bond* findBondToAtom(const Atom& atom);
 
-			const Atom& getAtom(std::size_t idx) const;
+            const Atom& getAtom(std::size_t idx) const;
 
-			Atom& getAtom(std::size_t idx);
-		
-			/*
-			 * \brief Returns a constant iterator pointing to the beginning of the connected atoms.
-			 * \return A constant iterator pointing to the beginning of the connected atoms.
-			 */
-			ConstAtomIterator getAtomsBegin() const;
+            Atom& getAtom(std::size_t idx);
+        
+            /*
+             * \brief Returns a constant iterator pointing to the beginning of the connected atoms.
+             * \return A constant iterator pointing to the beginning of the connected atoms.
+             */
+            ConstAtomIterator getAtomsBegin() const;
 
-			/*
-			 * \brief Returns a mutable iterator pointing to the beginning of the connected atoms.
-			 * \return A mutable iterator pointing to the beginning of the connected atoms.
-			 */
-			AtomIterator getAtomsBegin();
+            /*
+             * \brief Returns a mutable iterator pointing to the beginning of the connected atoms.
+             * \return A mutable iterator pointing to the beginning of the connected atoms.
+             */
+            AtomIterator getAtomsBegin();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the connected atoms.
-			 * \return A constant iterator pointing to the end of the connected atoms.
-			 */
-			ConstAtomIterator getAtomsEnd() const;
+            /**
+             * \brief Returns a constant iterator pointing to the end of the connected atoms.
+             * \return A constant iterator pointing to the end of the connected atoms.
+             */
+            ConstAtomIterator getAtomsEnd() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the connected atoms.
-			 * \return A mutable iterator pointing to the end of the connected atoms.
-			 */
-			AtomIterator getAtomsEnd();
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the connected atoms.
+             * \return A mutable iterator pointing to the end of the connected atoms.
+             */
+            AtomIterator getAtomsEnd();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the incident bonds.
-			 * \return A constant iterator pointing to the beginning of the incident bonds.
-			 */
-			ConstBondIterator getBondsBegin() const; 
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the incident bonds.
+             * \return A constant iterator pointing to the beginning of the incident bonds.
+             */
+            ConstBondIterator getBondsBegin() const; 
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the incident bonds.
-			 * \return A mutable iterator pointing to the beginning of the incident bonds.
-			 */
-			BondIterator getBondsBegin(); 
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the incident bonds.
+             * \return A mutable iterator pointing to the beginning of the incident bonds.
+             */
+            BondIterator getBondsBegin(); 
 
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the incident bonds.
-			 * \return A constant iterator pointing to the end of the incident bonds.
-			 */
-			ConstBondIterator getBondsEnd() const;
+            /**
+             * \brief Returns a constant iterator pointing to the end of the incident bonds.
+             * \return A constant iterator pointing to the end of the incident bonds.
+             */
+            ConstBondIterator getBondsEnd() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the incident bonds.
-			 * \return A mutable iterator pointing to the end of the incident bonds.
-			 */
-			BondIterator getBondsEnd();
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the incident bonds.
+             * \return A mutable iterator pointing to the end of the incident bonds.
+             */
+            BondIterator getBondsEnd();
 
-			bool containsAtom(const Atom& atom) const;
+            bool containsAtom(const Atom& atom) const;
 
-			bool containsBond(const Bond& bond) const;
+            bool containsBond(const Bond& bond) const;
 
-			std::size_t getAtomIndex(const Atom& atom) const;
+            std::size_t getAtomIndex(const Atom& atom) const;
 
-			std::size_t getBondIndex(const Bond& bond) const;
+            std::size_t getBondIndex(const Bond& bond) const;
 
-			std::size_t getIndex() const;
+            std::size_t getIndex() const;
 
-			void orderAtoms(const AtomCompareFunction& func);
+            void orderAtoms(const AtomCompareFunction& func);
 
-			void orderBonds(const BondCompareFunction& func);
+            void orderBonds(const BondCompareFunction& func);
 
-			/**
-			 * \brief Assignment operator that replaces the current set of properties with the properties of \a atom;
-			 * \param atom The atom whose properties get copied.
-			 * \return A reference to itself.
-			 */
-			BasicAtom& operator=(const BasicAtom& atom);
+            /**
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a atom;
+             * \param atom The atom whose properties get copied.
+             * \return A reference to itself.
+             */
+            BasicAtom& operator=(const BasicAtom& atom);
 
-			using Atom::operator=;
+            using Atom::operator=;
 
-		private:
-			BasicAtom(BasicMolecule* mol);
+        private:
+            BasicAtom(BasicMolecule* mol);
 
-			BasicAtom(const BasicAtom& atom);
+            BasicAtom(const BasicAtom& atom);
 
-			~BasicAtom();
+            ~BasicAtom();
 
-			void setIndex(std::size_t idx);
+            void setIndex(std::size_t idx);
 
-			void clearAdjacencyLists();
+            void clearAdjacencyLists();
 
-			static void reserveMemForNewBond(BasicAtom& atom1, BasicAtom& atom2);
-			static void connectAtoms(BasicAtom& atom1, BasicAtom& atom2, BasicBond& bond);
-			static void disconnectAtoms(BasicBond& bond);
+            static void reserveMemForNewBond(BasicAtom& atom1, BasicAtom& atom2);
+            static void connectAtoms(BasicAtom& atom1, BasicAtom& atom2, BasicBond& bond);
+            static void disconnectAtoms(BasicBond& bond);
 
-			BasicMolecule* molecule;
-			std::size_t    index;
-			NeighborList   neighbors;
-		};
-	}
+            BasicMolecule* molecule;
+            std::size_t    index;
+            NeighborList   neighbors;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_BASICATOM_HPP

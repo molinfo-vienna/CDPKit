@@ -38,26 +38,26 @@ using namespace CDPL;
 
 
 void Chem::perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
-								   unsigned int atom_flags, unsigned int bond_flags, bool inc_impl_h)
+                                   unsigned int atom_flags, unsigned int bond_flags, bool inc_impl_h)
 {
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasSymmetryClass, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+    if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasSymmetryClass, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
-	Util::STArray sym_classes;
-	SymmetryClassCalculator calculator;
+    Util::STArray sym_classes;
+    SymmetryClassCalculator calculator;
 
-	if (atom_flags == AtomPropertyFlag::DEFAULT)
-		atom_flags = SymmetryClassCalculator::DEF_ATOM_PROPERTY_FLAGS;
+    if (atom_flags == AtomPropertyFlag::DEFAULT)
+        atom_flags = SymmetryClassCalculator::DEF_ATOM_PROPERTY_FLAGS;
 
-	if (bond_flags == BondPropertyFlag::DEFAULT)
-		bond_flags = SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS;
+    if (bond_flags == BondPropertyFlag::DEFAULT)
+        bond_flags = SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS;
 
-	calculator.setAtomPropertyFlags(atom_flags);
-	calculator.setBondPropertyFlags(bond_flags);
-	calculator.includeImplicitHydrogens(inc_impl_h);
-	calculator.calculate(molgraph, sym_classes);
+    calculator.setAtomPropertyFlags(atom_flags);
+    calculator.setBondPropertyFlags(bond_flags);
+    calculator.includeImplicitHydrogens(inc_impl_h);
+    calculator.calculate(molgraph, sym_classes);
 
-	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), sym_classes.getElementsBegin(), &setSymmetryClass);
+    Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), sym_classes.getElementsBegin(), &setSymmetryClass);
 }

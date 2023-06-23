@@ -30,40 +30,40 @@
 
 BOOST_AUTO_TEST_CASE(PointArray2DTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	Math::Vector2D test_points[10] = {
-		 Math::vec(0.1, -0.2),
-		 Math::vec(10.1, 0.0),
-		 Math::vec(-3.1, -13.4),
-		 Math::vec(4.1,  10.0),
-		 Math::vec(0.0,  12.2),
-		 Math::vec(4.1,  10.0),
-		 Math::vec(10.1, 0.0),
-		 Math::vec(-3.1, -13.4),
-		 Math::vec(0.1, -0.2),
-		 Math::vec(0.0,  12.2)
-	};
+    Math::Vector2D test_points[10] = {
+         Math::vec(0.1, -0.2),
+         Math::vec(10.1, 0.0),
+         Math::vec(-3.1, -13.4),
+         Math::vec(4.1,  10.0),
+         Math::vec(0.0,  12.2),
+         Math::vec(4.1,  10.0),
+         Math::vec(10.1, 0.0),
+         Math::vec(-3.1, -13.4),
+         Math::vec(0.1, -0.2),
+         Math::vec(0.0,  12.2)
+    };
 
-	PointArray2D pa;
+    PointArray2D pa;
 
 //-----
 
-	pa.insertElements(pa.getElementsBegin(), &test_points[0], &test_points[0] + 10);
+    pa.insertElements(pa.getElementsBegin(), &test_points[0], &test_points[0] + 10);
 
-	BOOST_CHECK(pa.getSize() == 10);	
+    BOOST_CHECK(pa.getSize() == 10);    
 
-	Math::Vector2D t = Math::vec(-2.0, 3.36);
+    Math::Vector2D t = Math::vec(-2.0, 3.36);
 
-	pa.translate(t);
+    pa.translate(t);
 
-	std::size_t i = 0;
+    std::size_t i = 0;
 
-	for (PointArray2D::ConstElementIterator it = pa.getElementsBegin(), end = pa.getElementsEnd(); it != end; ++it, i++) {
+    for (PointArray2D::ConstElementIterator it = pa.getElementsBegin(), end = pa.getElementsEnd(); it != end; ++it, i++) {
 
-		BOOST_CHECK_CLOSE(test_points[i](0) - 2.0, (*it)(0), 0.00001);
-		BOOST_CHECK_CLOSE(test_points[i](1) + 3.36, (*it)(1), 0.00001);
-	}
+        BOOST_CHECK_CLOSE(test_points[i](0) - 2.0, (*it)(0), 0.00001);
+        BOOST_CHECK_CLOSE(test_points[i](1) + 3.36, (*it)(1), 0.00001);
+    }
 }
 

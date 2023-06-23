@@ -46,7 +46,7 @@ Pharm::FeatureSet::FeatureSet(const FeatureContainer& cntnr):
     FeatureContainer(cntnr)
 {
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
+                  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
 }
 
 Pharm::FeatureSet::~FeatureSet() {} 
@@ -61,7 +61,7 @@ std::size_t Pharm::FeatureSet::getFeatureIndex(const Feature& feature) const
     FeatureIndexMap::const_iterator it = featureIndices.find(&feature);
 
     if (it != featureIndices.end())
-		return it->second;
+        return it->second;
 
     throw Base::ItemNotFound("FeatureSet: argument feature not part of the feature set");
 }
@@ -94,7 +94,7 @@ Pharm::FeatureSet::FeatureIterator Pharm::FeatureSet::getFeaturesEnd()
 const Pharm::Feature& Pharm::FeatureSet::getFeature(std::size_t idx) const 
 {
     if (idx >= features.size())
-		throw Base::IndexError("FeatureSet: feature index out of bounds");
+        throw Base::IndexError("FeatureSet: feature index out of bounds");
 
     return *features[idx];
 }
@@ -102,7 +102,7 @@ const Pharm::Feature& Pharm::FeatureSet::getFeature(std::size_t idx) const
 Pharm::Feature& Pharm::FeatureSet::getFeature(std::size_t idx)
 {
     if (idx >= features.size())
-		throw Base::IndexError("FeatureSet: feature index out of bounds");
+        throw Base::IndexError("FeatureSet: feature index out of bounds");
 
     return *features[idx];
 }
@@ -112,7 +112,7 @@ bool Pharm::FeatureSet::addFeature(const Feature& feature)
     features.reserve(features.size() + 1);
 
     if (!featureIndices.insert(FeatureIndexMap::value_type(&feature, features.size())).second)
-		return false;
+        return false;
 
     features.push_back(const_cast<Feature*>(&feature));
 
@@ -124,16 +124,16 @@ void Pharm::FeatureSet::removeFeature(std::size_t idx)
     std::size_t num_features = features.size();
 
     if (idx >= num_features)
-		throw Base::IndexError("FeatureSet: feature index out of bounds");
+        throw Base::IndexError("FeatureSet: feature index out of bounds");
 
     FeatureList::iterator it = features.begin() + idx;
 
     featureIndices.erase(*it);
-	
+    
     it = features.erase(it);
-	
+    
     for (num_features--; idx < num_features; idx++, ++it)
-		featureIndices[*it] = idx;
+        featureIndices[*it] = idx;
 }
 
 Pharm::FeatureSet::FeatureIterator Pharm::FeatureSet::removeFeature(const FeatureIterator& it) 
@@ -141,16 +141,16 @@ Pharm::FeatureSet::FeatureIterator Pharm::FeatureSet::removeFeature(const Featur
     const FeatureList::iterator& base = it.base();
 
     if (base < features.begin() || base >= features.end())
-		throw Base::RangeError("FeatureSet: feature iterator out of valid range");
+        throw Base::RangeError("FeatureSet: feature iterator out of valid range");
 
     const Feature* feature = *base;
 
     featureIndices.erase(feature);
 
     FeatureList::iterator rit = features.erase(base);
-		
+        
     for (std::size_t num_features = features.size(), i = rit - features.begin(); i < num_features; i++)
-		featureIndices[features[i]] = i;
+        featureIndices[features[i]] = i;
 
     return rit;
 }
@@ -160,18 +160,18 @@ bool Pharm::FeatureSet::removeFeature(const Feature& feature)
     FeatureIndexMap::iterator idx_it = featureIndices.find(&feature);
 
     if (idx_it == featureIndices.end())
-		return false;
+        return false;
 
     std::size_t idx = idx_it->second;
 
     FeatureList::iterator it = features.begin() + idx;
 
     featureIndices.erase(idx_it);
-	
+    
     it = features.erase(it);
-	
+    
     for (std::size_t num_features = features.size(); idx < num_features; idx++, ++it)
-		featureIndices[*it] = idx;
+        featureIndices[*it] = idx;
 
     return true;
 }
@@ -187,7 +187,7 @@ void Pharm::FeatureSet::clear()
 Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureSet& ftr_set)
 {
     if (this == &ftr_set)
-		return *this;
+        return *this;
 
     featureIndices = ftr_set.featureIndices;
     features = ftr_set.features;
@@ -199,14 +199,14 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureSet& ftr_set)
 
 Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureContainer& cntnr)
 {
-	if (this == &cntnr)
-		return *this;
+    if (this == &cntnr)
+        return *this;
 
-	features.clear();
+    features.clear();
     featureIndices.clear();
 
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
+                  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
 
     copyProperties(cntnr);
 
@@ -215,27 +215,27 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureContainer& cntnr)
 
 Pharm::FeatureSet& Pharm::FeatureSet::operator+=(const FeatureContainer& cntnr)
 {
- 	if (this == &cntnr)
-		return *this;
+     if (this == &cntnr)
+        return *this;
 
-	features.reserve(features.size() + cntnr.getNumFeatures());
+    features.reserve(features.size() + cntnr.getNumFeatures());
 
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
+                  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
 
     return *this;
 }
 
 Pharm::FeatureSet& Pharm::FeatureSet::operator-=(const FeatureContainer& cntnr)
 {
- 	if (this == &cntnr) {
-		clear();
-		return *this;
-	}
-	
+     if (this == &cntnr) {
+        clear();
+        return *this;
+    }
+    
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  std::bind(static_cast<bool (FeatureSet::*)(const Feature&)>(&FeatureSet::removeFeature),
-							this, std::placeholders::_1));
+                  std::bind(static_cast<bool (FeatureSet::*)(const Feature&)>(&FeatureSet::removeFeature),
+                            this, std::placeholders::_1));
 
     return *this;
 }

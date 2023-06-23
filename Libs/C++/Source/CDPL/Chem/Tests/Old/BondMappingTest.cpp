@@ -30,20 +30,20 @@
 
 BOOST_AUTO_TEST_CASE(BondMappingTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	/*
-	Molecule mol;
+    using namespace CDPL;
+    using namespace Chem;
+    /*
+    Molecule mol;
 
-	mol.addAtom();
-	mol.addAtom();
+    mol.addAtom();
+    mol.addAtom();
 
-	Bond* lbp1 = &mol.addBond(0, 1);
-	Bond* rbp1 = &mol.addBond(0, 1);
+    Bond* lbp1 = &mol.addBond(0, 1);
+    Bond* rbp1 = &mol.addBond(0, 1);
 
-	Bond* lbp2 = &mol.addBond(0, 1);
-	Bond* rbp2 = &mol.addBond(0, 1);
+    Bond* lbp2 = &mol.addBond(0, 1);
+    Bond* rbp2 = &mol.addBond(0, 1);
 
-	Bond* rbp3 = &mol.addBond(0, 1);
-	*/
+    Bond* rbp3 = &mol.addBond(0, 1);
+    */
 }

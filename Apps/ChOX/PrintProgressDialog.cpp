@@ -38,87 +38,87 @@ using namespace ChOX;
 
 
 PrintProgressDialog::PrintProgressDialog(QWidget* parent, const DataSet& data_set, int num_pages):
-	QDialog(parent), numPages(num_pages)
+    QDialog(parent), numPages(num_pages)
 {
-	init(data_set);
+    init(data_set);
 }
 
 void PrintProgressDialog::setProgress(int page_no)
 {
-	progressLabel->setText(tr("Sending Page %1 of %2 to Printer...").arg(page_no).arg(numPages));
+    progressLabel->setText(tr("Sending Page %1 of %2 to Printer...").arg(page_no).arg(numPages));
 }
 
 bool PrintProgressDialog::aborted() const
 {
-	return (result() == Rejected);
+    return (result() == Rejected);
 }
 
 void PrintProgressDialog::init(const DataSet& data_set)
 {
-	setWindowTitle(tr("ChOX - Printing Data"));
-	setResult(Accepted);
+    setWindowTitle(tr("ChOX - Printing Data"));
+    setResult(Accepted);
 
 // ------
 
-	QBoxLayout* main_layout = new QVBoxLayout(this);
-	QBoxLayout* h_box_layout = new QHBoxLayout();
+    QBoxLayout* main_layout = new QVBoxLayout(this);
+    QBoxLayout* h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
-
-// ++++
-
-	QLabel* label = new QLabel(this);
-
-	label->setPixmap(QPixmap(":/Icons/printer.png"));
-	label->setAlignment(Qt::AlignCenter);
-
-	h_box_layout->addStretch();
-	h_box_layout->addWidget(label);
+    main_layout->addLayout(h_box_layout);
 
 // ++++
 
-	const QStringList& file_list = data_set.getFileNames();
+    QLabel* label = new QLabel(this);
 
-	QString file_list_str;
+    label->setPixmap(QPixmap(":/Icons/printer.png"));
+    label->setAlignment(Qt::AlignCenter);
 
-	for (QStringList::ConstIterator it = file_list.begin(); it != file_list.end(); ) {
-		file_list_str.append("'" + QFileInfo(*it).fileName() + "'");
-
-		if (++it != file_list.end())
-			file_list_str.append(" + ");
-	}
-
-	label = new QLabel(tr("Printing File(s): ") + file_list_str, this);
-
-	label->setAlignment(Qt::AlignCenter);
-
-	h_box_layout->addWidget(label, 1);
-	h_box_layout->addStretch();
+    h_box_layout->addStretch();
+    h_box_layout->addWidget(label);
 
 // ++++
 
-	progressLabel = new QLabel(this);
+    const QStringList& file_list = data_set.getFileNames();
 
-	progressLabel->setAlignment(Qt::AlignCenter);
+    QString file_list_str;
 
-	main_layout->addWidget(progressLabel);
+    for (QStringList::ConstIterator it = file_list.begin(); it != file_list.end(); ) {
+        file_list_str.append("'" + QFileInfo(*it).fileName() + "'");
+
+        if (++it != file_list.end())
+            file_list_str.append(" + ");
+    }
+
+    label = new QLabel(tr("Printing File(s): ") + file_list_str, this);
+
+    label->setAlignment(Qt::AlignCenter);
+
+    h_box_layout->addWidget(label, 1);
+    h_box_layout->addStretch();
+
+// ++++
+
+    progressLabel = new QLabel(this);
+
+    progressLabel->setAlignment(Qt::AlignCenter);
+
+    main_layout->addWidget(progressLabel);
 
 // ------
 
-	h_box_layout = new QHBoxLayout();
+    h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
+    main_layout->addLayout(h_box_layout);
 
 // ++++
 
-	QPushButton* button = new QPushButton(tr("Abort"), this);
+    QPushButton* button = new QPushButton(tr("Abort"), this);
 
-	button->setDefault(true);
+    button->setDefault(true);
 
-	connect(button, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(button, SIGNAL(clicked()), this, SLOT(reject()));
 
-	h_box_layout->addStretch();
-	h_box_layout->addWidget(button);
-	h_box_layout->addStretch();
+    h_box_layout->addStretch();
+    h_box_layout->addWidget(button);
+    h_box_layout->addStretch();
 }
 

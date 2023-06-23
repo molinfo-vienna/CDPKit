@@ -33,18 +33,18 @@
 
 void CDPLPythonChem::exportSMILESMoleculeInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SMILESMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMILESMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::SMILESGZMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESGZMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMILESGZMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESGZMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::SMILESBZ2MoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESBZ2MoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMILESBZ2MoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESBZ2MoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

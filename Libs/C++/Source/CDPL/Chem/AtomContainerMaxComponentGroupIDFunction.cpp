@@ -37,10 +37,10 @@ using namespace CDPL;
 
 std::size_t Chem::getMaxComponentGroupID(const AtomContainer& cntnr)
 {
-	std::size_t max_id = 0;
+    std::size_t max_id = 0;
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		max_id = std::max(getComponentGroupID(*it), max_id);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        max_id = std::max(getComponentGroupID(*it), max_id);
 
-	return max_id;
+    return max_id;
 }

@@ -39,25 +39,25 @@ namespace CDPL
     namespace GRAIL
     {
 
-		/**
-		 * \brief BindingAffinityCalculator.
-		 */
-		class CDPL_GRAIL_API BindingAffinityCalculator
-		{
+        /**
+         * \brief BindingAffinityCalculator.
+         */
+        class CDPL_GRAIL_API BindingAffinityCalculator
+        {
 
-		  public:
-			enum AffinityMeasure
-		    {
+          public:
+            enum AffinityMeasure
+            {
 
-			  PKD,
-			  PKI,
-			  PKD_PKI
-			};
-	    
-			BindingAffinityCalculator() {}
+              PKD,
+              PKI,
+              PKD_PKI
+            };
+        
+            BindingAffinityCalculator() {}
 
-			double operator()(const Math::DVector& grail_descr, AffinityMeasure measure) const;
-		};
+            double operator()(const Math::DVector& grail_descr, AffinityMeasure measure) const;
+        };
     }
 }
 

@@ -42,84 +42,84 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-	}
+        class Atom;
+    }
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		/**
-		 * \brief LogSCalculator.
-		 * \see [\ref LOGS]
-		 */
-		class CDPL_MOLPROP_API LogSCalculator 
-		{
-			
-		  public:
-			/**
-			 * \brief Specifies the number of different features used by the \f$ \log S \f$ model.
-			 */
-			static constexpr std::size_t FEATURE_VECTOR_SIZE = 79;
+        /**
+         * \brief LogSCalculator.
+         * \see [\ref LOGS]
+         */
+        class CDPL_MOLPROP_API LogSCalculator 
+        {
+            
+          public:
+            /**
+             * \brief Specifies the number of different features used by the \f$ \log S \f$ model.
+             */
+            static constexpr std::size_t FEATURE_VECTOR_SIZE = 79;
 
-			/**
-			 * \brief Constructs the \c %LogSCalculator instance.
-			 */
-			LogSCalculator();
+            /**
+             * \brief Constructs the \c %LogSCalculator instance.
+             */
+            LogSCalculator();
 
-			/**
-			 * \brief Constructs the \c %LogSCalculator instance and calculates the \f$ \log S \f$ of the molecular
-			 *        graph \a molgraph.
-			 *
-			 * The calculated \f$ \log S \f$ can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
-			 */
-			LogSCalculator(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Constructs the \c %LogSCalculator instance and calculates the \f$ \log S \f$ of the molecular
+             *        graph \a molgraph.
+             *
+             * The calculated \f$ \log S \f$ can be retrieved by a call to getResult().
+             *
+             * \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
+             */
+            LogSCalculator(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Calculates the \f$ \log S \f$ of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
-			 * \return The calculated \f$ \log S \f$ of the molecular graph \a molgraph.
-			 */
-			double calculate(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Calculates the \f$ \log S \f$ of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
+             * \return The calculated \f$ \log S \f$ of the molecular graph \a molgraph.
+             */
+            double calculate(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Returns the result of the last \f$ \log S \f$ calculation.
-			 * \return The result of the last \f$ \log S \f$ calculation, or zero if a calculation
-			 *         has not yet been performed.
-			 */
-			double getResult() const;
+            /**
+             * \brief Returns the result of the last \f$ \log S \f$ calculation.
+             * \return The result of the last \f$ \log S \f$ calculation, or zero if a calculation
+             *         has not yet been performed.
+             */
+            double getResult() const;
 
-			/**
-			 * \brief Returns the feature count vector of the last \f$ \log S \f$ calculation.
-			 *
-			 * The occurrence count of a particular structural feature can be retrieved from the returned vector
-			 * via its feature index. The feature index correspond to the numerical identifier of the feature's definition 
-			 * in the original publication [\ref LOGS].
-			 *
-			 * \return The feature count vector of the last \f$ \log S \f$ calculation.
-			 * \note The returned feature vector is of size LogSCalculator::FEATURE_VECTOR_SIZE.
-			 */
-			const Math::DVector& getFeatureVector() const;
+            /**
+             * \brief Returns the feature count vector of the last \f$ \log S \f$ calculation.
+             *
+             * The occurrence count of a particular structural feature can be retrieved from the returned vector
+             * via its feature index. The feature index correspond to the numerical identifier of the feature's definition 
+             * in the original publication [\ref LOGS].
+             *
+             * \return The feature count vector of the last \f$ \log S \f$ calculation.
+             * \note The returned feature vector is of size LogSCalculator::FEATURE_VECTOR_SIZE.
+             */
+            const Math::DVector& getFeatureVector() const;
 
-		  private:
-			void init(const Chem::MolecularGraph& molgraph);
+          private:
+            void init(const Chem::MolecularGraph& molgraph);
 
-			void countHydrophicCarbons(const Chem::MolecularGraph& molgraph);
+            void countHydrophicCarbons(const Chem::MolecularGraph& molgraph);
 
-			bool hasTopDistanceBelow4(const Chem::Atom& curr_atom, const Chem::Atom& tgt_atom, const Chem::MolecularGraph& molgraph,
-									  const Chem::Atom& prev_atom, std::size_t curr_dist);
+            bool hasTopDistanceBelow4(const Chem::Atom& curr_atom, const Chem::Atom& tgt_atom, const Chem::MolecularGraph& molgraph,
+                                      const Chem::Atom& prev_atom, std::size_t curr_dist);
 
-			void calcLogS(const Chem::MolecularGraph& molgraph);
+            void calcLogS(const Chem::MolecularGraph& molgraph);
 
-			Chem::PatternAtomTyper atomTyper;
-			Math::DVector          featureVector;
-			double                 logS;
-		};
-	}
+            Chem::PatternAtomTyper atomTyper;
+            Math::DVector          featureVector;
+            double                 logS;
+        };
+    }
 }
 
 #endif // CDPL_MOLPROP_LOGSCALCULATOR_HPP

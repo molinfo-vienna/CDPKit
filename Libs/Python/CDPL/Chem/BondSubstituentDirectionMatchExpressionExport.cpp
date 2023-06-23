@@ -33,13 +33,13 @@
 
 void CDPLPythonChem::exportBondSubstituentDirectionMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
-		
-	python::class_<Chem::BondSubstituentDirectionMatchExpression, Chem::BondSubstituentDirectionMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph> > >("BondSubstituentDirectionMatchExpression", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::BondSubstituentDirectionMatchExpression&>((python::arg("self"), python::arg("expr"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::BondSubstituentDirectionMatchExpression::operator=), (python::arg("self"), python::arg("expr")), 
-			 python::return_self<>());
+    using namespace boost;
+    using namespace CDPL;
+        
+    python::class_<Chem::BondSubstituentDirectionMatchExpression, Chem::BondSubstituentDirectionMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph> > >("BondSubstituentDirectionMatchExpression", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::BondSubstituentDirectionMatchExpression&>((python::arg("self"), python::arg("expr"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::BondSubstituentDirectionMatchExpression::operator=), (python::arg("self"), python::arg("expr")), 
+             python::return_self<>());
 }

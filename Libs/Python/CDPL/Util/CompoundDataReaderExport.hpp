@@ -37,26 +37,26 @@ namespace CDPLPythonUtil
     struct CompoundDataReaderExport
     {
 
-		CompoundDataReaderExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        CompoundDataReaderExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			typedef Util::CompoundDataReader<T> ReaderType;
+            typedef Util::CompoundDataReader<T> ReaderType;
 
-			python::class_<ReaderType, typename Util::CompoundDataReader<T>::SharedPointer,
-						   python::bases<Base::DataReader<T> >, boost::noncopyable>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const ReaderType&>((python::arg("self"), python::arg("reader"))))
-				.def("assign", &ReaderType::operator=, (python::arg("self"), python::arg("reader")),
-					 python::return_self<>())
-				.def("getNumReaders", &ReaderType::getNumReaders, python::arg("self"))
-				.def("addReader", &ReaderType::addReader, (python::arg("self"), python::arg("reader")))
-				.def("removeReader", &ReaderType::removeReader, (python::arg("self"), python::arg("idx")))
-				.def("clear", &ReaderType::clear, python::arg("self"))
-				.def("getReader", &ReaderType::getReader, (python::arg("self"), python::arg("idx")),
-					 python::return_value_policy<python::copy_const_reference>())
-				.add_property("numReaders", &ReaderType::getNumReaders);
-		}
+            python::class_<ReaderType, typename Util::CompoundDataReader<T>::SharedPointer,
+                           python::bases<Base::DataReader<T> >, boost::noncopyable>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const ReaderType&>((python::arg("self"), python::arg("reader"))))
+                .def("assign", &ReaderType::operator=, (python::arg("self"), python::arg("reader")),
+                     python::return_self<>())
+                .def("getNumReaders", &ReaderType::getNumReaders, python::arg("self"))
+                .def("addReader", &ReaderType::addReader, (python::arg("self"), python::arg("reader")))
+                .def("removeReader", &ReaderType::removeReader, (python::arg("self"), python::arg("idx")))
+                .def("clear", &ReaderType::clear, python::arg("self"))
+                .def("getReader", &ReaderType::getReader, (python::arg("self"), python::arg("idx")),
+                     python::return_value_policy<python::copy_const_reference>())
+                .add_property("numReaders", &ReaderType::getNumReaders);
+        }
     };
 }
 

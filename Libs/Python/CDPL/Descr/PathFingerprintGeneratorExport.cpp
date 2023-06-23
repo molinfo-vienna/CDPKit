@@ -38,64 +38,64 @@
 namespace
 {
 
-	std::uint64_t defAtomDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor& func,
-											CDPL::Chem::Atom& atom)
-	{
-		return func(atom);
-	}
+    std::uint64_t defAtomDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor& func,
+                                            CDPL::Chem::Atom& atom)
+    {
+        return func(atom);
+    }
 
-	std::uint64_t defBondDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefBondDescriptorFunctor& func, 
-											CDPL::Chem::Bond& bond)
-	{
-		return func(bond);
-	}
+    std::uint64_t defBondDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefBondDescriptorFunctor& func, 
+                                            CDPL::Chem::Bond& bond)
+    {
+        return func(bond);
+    }
 }
 
 
 void CDPLPythonDescr::exportPathFingerprintGenerator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::scope scope = python::class_<Descr::PathFingerprintGenerator>("PathFingerprintGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::BitSet&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("fp"))))
-		.def(python::init<const Descr::PathFingerprintGenerator&>((python::arg("self"), python::arg("gen"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PathFingerprintGenerator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Descr::PathFingerprintGenerator::operator=), 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("setAtomDescriptorFunction", &Descr::PathFingerprintGenerator::setAtomDescriptorFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setBondDescriptorFunction", &Descr::PathFingerprintGenerator::setBondDescriptorFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setMinPathLength", &Descr::PathFingerprintGenerator::setMinPathLength, 
-			 (python::arg("self"), python::arg("min_length")))
-		.def("setMaxPathLength", &Descr::PathFingerprintGenerator::setMaxPathLength, 
-			 (python::arg("self"), python::arg("max_length")))
-		.def("setNumBits", &Descr::PathFingerprintGenerator::setNumBits, 
-			 (python::arg("self"), python::arg("num_bits")))
-		.def("getMinPathLength", &Descr::PathFingerprintGenerator::getMinPathLength, python::arg("self"))
-		.def("getMaxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength, python::arg("self"))
-		.def("getNumBits", &Descr::PathFingerprintGenerator::getNumBits, python::arg("self"))
-		.def("generate", &Descr::PathFingerprintGenerator::generate,
-			 (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
-		.add_property("minPathLength", &Descr::PathFingerprintGenerator::getMinPathLength,
-					  &Descr::PathFingerprintGenerator::setMinPathLength)
-		.add_property("maxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength,
-					  &Descr::PathFingerprintGenerator::setMaxPathLength)
-		.add_property("numBits", &Descr::PathFingerprintGenerator::getNumBits,
-					  &Descr::PathFingerprintGenerator::setNumBits)
-		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)
-		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS);
+    python::scope scope = python::class_<Descr::PathFingerprintGenerator>("PathFingerprintGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::BitSet&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("fp"))))
+        .def(python::init<const Descr::PathFingerprintGenerator&>((python::arg("self"), python::arg("gen"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PathFingerprintGenerator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Descr::PathFingerprintGenerator::operator=), 
+             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .def("setAtomDescriptorFunction", &Descr::PathFingerprintGenerator::setAtomDescriptorFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setBondDescriptorFunction", &Descr::PathFingerprintGenerator::setBondDescriptorFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setMinPathLength", &Descr::PathFingerprintGenerator::setMinPathLength, 
+             (python::arg("self"), python::arg("min_length")))
+        .def("setMaxPathLength", &Descr::PathFingerprintGenerator::setMaxPathLength, 
+             (python::arg("self"), python::arg("max_length")))
+        .def("setNumBits", &Descr::PathFingerprintGenerator::setNumBits, 
+             (python::arg("self"), python::arg("num_bits")))
+        .def("getMinPathLength", &Descr::PathFingerprintGenerator::getMinPathLength, python::arg("self"))
+        .def("getMaxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength, python::arg("self"))
+        .def("getNumBits", &Descr::PathFingerprintGenerator::getNumBits, python::arg("self"))
+        .def("generate", &Descr::PathFingerprintGenerator::generate,
+             (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
+        .add_property("minPathLength", &Descr::PathFingerprintGenerator::getMinPathLength,
+                      &Descr::PathFingerprintGenerator::setMinPathLength)
+        .add_property("maxPathLength", &Descr::PathFingerprintGenerator::getMaxPathLength,
+                      &Descr::PathFingerprintGenerator::setMaxPathLength)
+        .add_property("numBits", &Descr::PathFingerprintGenerator::getNumBits,
+                      &Descr::PathFingerprintGenerator::setNumBits)
+        .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)
+        .def_readonly("DEF_BOND_PROPERTY_FLAGS", Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS);
 
-	python::class_<Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor>("DefAtomDescriptorFunctor", python::no_init)
-		.def(python::init<unsigned int>((python::arg("self"), python::arg("flags") = 
-										 Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)))
-		.def("__call__", &defAtomDescriptorFunction, (python::arg("self"), python::arg("atom")));
+    python::class_<Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor>("DefAtomDescriptorFunctor", python::no_init)
+        .def(python::init<unsigned int>((python::arg("self"), python::arg("flags") = 
+                                         Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)))
+        .def("__call__", &defAtomDescriptorFunction, (python::arg("self"), python::arg("atom")));
 
-	python::class_<Descr::PathFingerprintGenerator::DefBondDescriptorFunctor>("DefBondDescriptorFunctor", python::no_init)
-		.def(python::init<unsigned int>((python::arg("self"), python::arg("flags") = 
-										 Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS)))
-		.def("__call__", &defBondDescriptorFunction, (python::arg("self"), python::arg("bond")));
+    python::class_<Descr::PathFingerprintGenerator::DefBondDescriptorFunctor>("DefBondDescriptorFunctor", python::no_init)
+        .def(python::init<unsigned int>((python::arg("self"), python::arg("flags") = 
+                                         Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS)))
+        .def("__call__", &defBondDescriptorFunction, (python::arg("self"), python::arg("bond")));
 }

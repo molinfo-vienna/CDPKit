@@ -31,37 +31,37 @@
 namespace CDPL
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		void initFeatureContainerProperties();
-		void initFeatureProperties();
-		void initFeaturePropertyDefaults();
-		void initFeatureContainerPropertyDefaults();
-		void initFeaturePropertyDefaults();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
-	}
+        void initFeatureContainerProperties();
+        void initFeatureProperties();
+        void initFeaturePropertyDefaults();
+        void initFeatureContainerPropertyDefaults();
+        void initFeaturePropertyDefaults();
+        void initDataFormats();
+        void initControlParameters();
+        void initControlParameterDefaults();
+    }
 }
 
 namespace
 {
 
-	struct CDPLPharmInit
-	{
+    struct CDPLPharmInit
+    {
 
-		CDPLPharmInit() {
-			CDPL::Pharm::initFeatureContainerProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initFeatureContainerPropertyDefaults();
-			CDPL::Pharm::initFeaturePropertyDefaults();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
-		}
+        CDPLPharmInit() {
+            CDPL::Pharm::initFeatureContainerProperties();
+            CDPL::Pharm::initFeatureProperties();
+            CDPL::Pharm::initFeatureContainerPropertyDefaults();
+            CDPL::Pharm::initFeaturePropertyDefaults();
+            CDPL::Pharm::initDataFormats();
+            CDPL::Pharm::initControlParameters();
+            CDPL::Pharm::initControlParameterDefaults();
+        }
 
-	} cdplPharmInit;
+    } cdplPharmInit;
 }
 
 #endif // CDPL_PHARM_STATIC_LINK

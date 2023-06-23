@@ -32,13 +32,13 @@
 
 void CDPLPythonChem::exportAtomConfigurationMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
-	
-	python::class_<Chem::AtomConfigurationMatchExpression, Chem::AtomConfigurationMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> > >("AtomConfigurationMatchExpression", python::no_init)
-		.def(python::init<const Chem::AtomConfigurationMatchExpression&>((python::arg("self"), python::arg("expr"))))
-		.def(python::init<const Chem::StereoDescriptor&, Chem::Atom&, bool, bool>
-			 ((python::arg("self"), python::arg("query_stereo_descr"), python::arg("query_atom"), python::arg("not_match"),
-			   python::arg("allow_part_maps")))[python::with_custodian_and_ward<1, 3>()]);
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::class_<Chem::AtomConfigurationMatchExpression, Chem::AtomConfigurationMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> > >("AtomConfigurationMatchExpression", python::no_init)
+        .def(python::init<const Chem::AtomConfigurationMatchExpression&>((python::arg("self"), python::arg("expr"))))
+        .def(python::init<const Chem::StereoDescriptor&, Chem::Atom&, bool, bool>
+             ((python::arg("self"), python::arg("query_stereo_descr"), python::arg("query_atom"), python::arg("not_match"),
+               python::arg("allow_part_maps")))[python::with_custodian_and_ward<1, 3>()]);
 }

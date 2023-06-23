@@ -39,79 +39,79 @@ using namespace CDPL;
 
 Chem::AromaticRingSet::AromaticRingSet(const MolecularGraph& molgraph)
 {
-	perceive(molgraph);
+    perceive(molgraph);
 }
 
 void Chem::AromaticRingSet::perceive(const MolecularGraph& molgraph)
 {
-	clear();
+    clear();
 
-	if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
-		return;
+    if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
+        return;
 
-	init(molgraph);
-	findAromaticRings();
+    init(molgraph);
+    findAromaticRings();
 }
 
 void Chem::AromaticRingSet::init(const MolecularGraph& molgraph)
 {
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 
-	const FragmentList::BaseType& rings = *getRings(molgraph);
+    const FragmentList::BaseType& rings = *getRings(molgraph);
 
-	FragmentList::BaseType::ConstElementIterator rings_end = rings.getElementsEnd();
+    FragmentList::BaseType::ConstElementIterator rings_end = rings.getElementsEnd();
 
-	for (FragmentList::BaseType::ConstElementIterator it = rings.getElementsBegin(); it != rings_end; ++it) {
-		const Fragment::SharedPointer& ring_ptr = *it;
+    for (FragmentList::BaseType::ConstElementIterator it = rings.getElementsBegin(); it != rings_end; ++it) {
+        const Fragment::SharedPointer& ring_ptr = *it;
 
-		std::size_t num_ring_bonds = ring_ptr->getNumBonds();
+        std::size_t num_ring_bonds = ring_ptr->getNumBonds();
 
-		if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
-			continue;
-	
+        if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
+            continue;
+    
         if (isNotAromatic(*ring_ptr, molgraph))
-			continue;
+            continue;
 
-		addElement(ring_ptr);
-	}
+        addElement(ring_ptr);
+    }
 
-	std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_bonds = molgraph.getNumBonds();
 
-	if (!aromBondMask.empty())
-		aromBondMask.clear();
+    if (!aromBondMask.empty())
+        aromBondMask.clear();
 
-	aromBondMask.resize(num_bonds);
+    aromBondMask.resize(num_bonds);
 }
 
 void Chem::AromaticRingSet::findAromaticRings()
 {
-	BaseType::ElementIterator rings_end = getBase().getElementsEnd();
-	BaseType::ElementIterator arom_rings_end = getBase().getElementsBegin();
+    BaseType::ElementIterator rings_end = getBase().getElementsEnd();
+    BaseType::ElementIterator arom_rings_end = getBase().getElementsBegin();
 
-	while (true) {
-		BaseType::ElementIterator next_arom_rings_end =
-			std::partition(arom_rings_end, rings_end, 
-						   std::bind(&AromaticRingSet::isAromatic, this, std::placeholders::_1));
+    while (true) {
+        BaseType::ElementIterator next_arom_rings_end =
+            std::partition(arom_rings_end, rings_end, 
+                           std::bind(&AromaticRingSet::isAromatic, this, std::placeholders::_1));
 
-		if (next_arom_rings_end == arom_rings_end)
-			break;
+        if (next_arom_rings_end == arom_rings_end)
+            break;
 
-		arom_rings_end = next_arom_rings_end;
-	}
+        arom_rings_end = next_arom_rings_end;
+    }
 
-	removeElements(arom_rings_end, rings_end);
+    removeElements(arom_rings_end, rings_end);
 }
 
 bool Chem::AromaticRingSet::isAromatic(const Fragment::SharedPointer& ring_ptr)
 {
-	const Fragment& ring = *ring_ptr;
+    const Fragment& ring = *ring_ptr;
 
-	if (!Chem::isAromatic(ring, *molGraph, aromBondMask))
-		return false;
+    if (!Chem::isAromatic(ring, *molGraph, aromBondMask))
+        return false;
 
-	std::for_each(ring.getBondsBegin(), ring.getBondsEnd(), 
-				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), std::ref(aromBondMask), 
-							std::bind(&BondContainer::getBondIndex, molGraph, std::placeholders::_1), true));
+    std::for_each(ring.getBondsBegin(), ring.getBondsEnd(), 
+                  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), std::ref(aromBondMask), 
+                            std::bind(&BondContainer::getBondIndex, molGraph, std::placeholders::_1), true));
 
-	return true;
+    return true;
 }

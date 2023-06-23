@@ -35,24 +35,24 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace ForceField
-	{
+    namespace ForceField
+    {
 
-		/**
-		 * \brief Provides keys for built-in Chem::Bond properties.
-		 */
-		namespace BondProperty
-		{
+        /**
+         * \brief Provides keys for built-in Chem::Bond properties.
+         */
+        namespace BondProperty
+        {
 
-			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE_INDEX;
-		}
-	}
+            extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE_INDEX;
+        }
+    }
 }
 
 #endif // CDPL_FORCEFIELD_BONDPROPERTY_HPP

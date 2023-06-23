@@ -39,89 +39,89 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
+        class MolecularGraph;
+        class Atom;
 
-	}
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief AutoCorrelation2DVectorCalculator.
-		 * \see [\ref AUCOR, \ref HBMD]
-		 */
-		class CDPL_DESCR_API AutoCorrelation2DVectorCalculator
-		{
+        /**
+         * \brief AutoCorrelation2DVectorCalculator.
+         * \see [\ref AUCOR, \ref HBMD]
+         */
+        class CDPL_DESCR_API AutoCorrelation2DVectorCalculator
+        {
 
-		public:
-			/**
-			 * \brief Type of the generic functor class used to store user-defined atom pair weight functions.
-			 *
-			 * The provided atom pair weight function (or function object) is required to take the two atoms (as a
-			 * \c const reference to Chem::Atom) as its arguments and return the weight of the atom pair as
-			 * a floating-point value of type \c double (see [\ref FUNWRP]).
-			 */
-			typedef std::function<double(const Chem::Atom&, const Chem::Atom&)> AtomPairWeightFunction;
+        public:
+            /**
+             * \brief Type of the generic functor class used to store user-defined atom pair weight functions.
+             *
+             * The provided atom pair weight function (or function object) is required to take the two atoms (as a
+             * \c const reference to Chem::Atom) as its arguments and return the weight of the atom pair as
+             * a floating-point value of type \c double (see [\ref FUNWRP]).
+             */
+            typedef std::function<double(const Chem::Atom&, const Chem::Atom&)> AtomPairWeightFunction;
 
-			/**
-			 * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance.
-			 */
-			AutoCorrelation2DVectorCalculator();
+            /**
+             * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance.
+             */
+            AutoCorrelation2DVectorCalculator();
 
-			/**
-			 * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance and calculates the autocorrelation
-			 *        vector of the molecular graph \a molgraph.
-			 *
-			 * The calculated autocorrelation vector can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
-			 * \param corr_vec The calculated autocorrelation vector. 
-			 */
-			AutoCorrelation2DVectorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec);
+            /**
+             * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance and calculates the autocorrelation
+             *        vector of the molecular graph \a molgraph.
+             *
+             * The calculated autocorrelation vector can be retrieved by a call to getResult().
+             *
+             * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
+             * \param corr_vec The calculated autocorrelation vector. 
+             */
+            AutoCorrelation2DVectorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec);
 
-			/**
-			 * \brief Allows to specify that maximum bond path length to consider.
-			 * \param max_dist The maximum considered bond path length.
-			 * \note The default value is \e 0 which signals no path length limit.
-			 */
-			void setMaxDistance(std::size_t max_dist);
+            /**
+             * \brief Allows to specify that maximum bond path length to consider.
+             * \param max_dist The maximum considered bond path length.
+             * \note The default value is \e 0 which signals no path length limit.
+             */
+            void setMaxDistance(std::size_t max_dist);
 
-			/**
-			 * \brief Returns the maximum considered bond path length.
-			 * \return The maximum considered bond path length.
-			 */
-			std::size_t getMaxDistance() const;
+            /**
+             * \brief Returns the maximum considered bond path length.
+             * \return The maximum considered bond path length.
+             */
+            std::size_t getMaxDistance() const;
 
-			/**
-			 * \brief Allows to specify a custom atom pair weight function.
-			 * \param func An AutoCorrelation2DVectorCalculator::AtomPairWeightFunction instance that wraps the target function.
-			 * \note The default atom pair weight function returns the product of the atom types (see namespace
-			 *       Chem::AtomType).
-			 */
-			void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
+            /**
+             * \brief Allows to specify a custom atom pair weight function.
+             * \param func An AutoCorrelation2DVectorCalculator::AtomPairWeightFunction instance that wraps the target function.
+             * \note The default atom pair weight function returns the product of the atom types (see namespace
+             *       Chem::AtomType).
+             */
+            void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
 
-			/**
-			 * \brief Calculates the topological autocorrelation vector of the molecular graph \a molgraph.
-			 *
-			 * The elements of the calculated vector provide the sum of the weights of all atom pairs with a
-			 * topological distance equal to the element index. The size of the vector is limited by the
-			 * topological diameter of the molecular graph or the specified maximum considered bond path length 
-			 * (\see setMaxDistance()).
-			 *
-			 * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
-			 * \param corr_vec The calculated autocorrelation vector. 
-			 */
-			void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec);
+            /**
+             * \brief Calculates the topological autocorrelation vector of the molecular graph \a molgraph.
+             *
+             * The elements of the calculated vector provide the sum of the weights of all atom pairs with a
+             * topological distance equal to the element index. The size of the vector is limited by the
+             * topological diameter of the molecular graph or the specified maximum considered bond path length 
+             * (\see setMaxDistance()).
+             *
+             * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
+             * \param corr_vec The calculated autocorrelation vector. 
+             */
+            void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec);
 
-		private:
-			AtomPairWeightFunction weightFunc;
-			std::size_t            maxDist;
-		}; 
-	}
+        private:
+            AtomPairWeightFunction weightFunc;
+            std::size_t            maxDist;
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_AUTOCORRELATION2DVECTORCALCULATOR_HPP

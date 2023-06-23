@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<RXNReactionWriter, DataFormat::RXN> RXNReactionOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+         */
+        typedef Util::DefaultDataOutputHandler<RXNReactionWriter, DataFormat::RXN> RXNReactionOutputHandler;    
+    }
 }
 
 #endif // CDPL_CHEM_RXNREACTIONOUTPUTHANDLER_HPP

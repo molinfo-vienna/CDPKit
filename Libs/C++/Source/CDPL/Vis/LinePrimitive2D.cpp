@@ -34,31 +34,31 @@ using namespace CDPL;
 
 void Vis::LinePrimitive2D::render(Renderer2D& renderer) const
 {
-	const Math::Vector2D& beg = getBegin();
-	const Math::Vector2D& end = getEnd();
+    const Math::Vector2D& beg = getBegin();
+    const Math::Vector2D& end = getEnd();
 
-	renderer.setPen(pen);
-	renderer.drawLine(beg(0), beg(1), end(0), end(1));
+    renderer.setPen(pen);
+    renderer.drawLine(beg(0), beg(1), end(0), end(1));
 }
 
 void Vis::LinePrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::LinePrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::LinePrimitive2D::clone() const
 {
-	return SharedPointer(new LinePrimitive2D(*this));
+    return SharedPointer(new LinePrimitive2D(*this));
 }
 
 void Vis::LinePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	bounds.addPoint(getBegin());
-	bounds.addPoint(getEnd());
-	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    bounds.addPoint(getBegin());
+    bounds.addPoint(getEnd());
+    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

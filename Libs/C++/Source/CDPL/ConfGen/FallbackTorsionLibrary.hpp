@@ -32,8 +32,8 @@ namespace CDPL
 
     namespace ConfGen 
     {
-	
-		const TorsionLibrary::SharedPointer& getFallbackTorsionLibrary();
+    
+        const TorsionLibrary::SharedPointer& getFallbackTorsionLibrary();
     }
 }
 

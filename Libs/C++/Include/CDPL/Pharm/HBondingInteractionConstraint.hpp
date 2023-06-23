@@ -38,50 +38,50 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief HBondingInteractionConstraint.
-		 */
-		class CDPL_PHARM_API HBondingInteractionConstraint
-		{
+        /**
+         * \brief HBondingInteractionConstraint.
+         */
+        class CDPL_PHARM_API HBondingInteractionConstraint
+        {
 
-		  public:
-			static constexpr double DEF_MIN_HB_LENGTH = 1.2;
-			static constexpr double DEF_MAX_HB_LENGTH = 2.8;
-			static constexpr double DEF_MIN_AHD_ANGLE = 130.0;
-			static constexpr double DEF_MAX_ACC_ANGLE = 85.0;
+          public:
+            static constexpr double DEF_MIN_HB_LENGTH = 1.2;
+            static constexpr double DEF_MAX_HB_LENGTH = 2.8;
+            static constexpr double DEF_MIN_AHD_ANGLE = 130.0;
+            static constexpr double DEF_MAX_ACC_ANGLE = 85.0;
 
-			/**
-			 * \brief Constructs a \c %HBondingInteractionConstraint functor with the specified constraints.
-			 * \param don_acc \c true if the first feature argument represents the donor- and the second one
-			 *                the acceptor-feature, and \c false otherwise.
-			 * \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
-			 * \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
-			 * \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
-			 * \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
-			 */
-			HBondingInteractionConstraint(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
-										  double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE): 
-				donAccOrder(don_acc), minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), maxAccAngle(max_acc_ang) {}
+            /**
+             * \brief Constructs a \c %HBondingInteractionConstraint functor with the specified constraints.
+             * \param don_acc \c true if the first feature argument represents the donor- and the second one
+             *                the acceptor-feature, and \c false otherwise.
+             * \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+             * \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+             * \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
+             * \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
+             */
+            HBondingInteractionConstraint(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
+                                          double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE): 
+                donAccOrder(don_acc), minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), maxAccAngle(max_acc_ang) {}
 
-			double getMinLength() const;
+            double getMinLength() const;
 
-			double getMaxLength() const;
+            double getMaxLength() const;
 
-			double getMinAHDAngle() const;
+            double getMinAHDAngle() const;
 
-			double getMaxAcceptorAngle() const;
+            double getMaxAcceptorAngle() const;
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			bool   donAccOrder;
-			double minLength;
-			double maxLength;
-			double minAHDAngle;
-			double maxAccAngle;
-		};
+          private:
+            bool   donAccOrder;
+            double minLength;
+            double maxLength;
+            double minAHDAngle;
+            double maxAccAngle;
+        };
     }
 }
 

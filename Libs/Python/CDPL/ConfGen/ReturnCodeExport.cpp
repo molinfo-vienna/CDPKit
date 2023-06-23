@@ -32,28 +32,28 @@
 namespace 
 {
 
-	struct ReturnCode {};
+    struct ReturnCode {};
 }
 
 
 void CDPLPythonConfGen::exportReturnCodes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ReturnCode, boost::noncopyable>("ReturnCode", python::no_init)
-		.def_readonly("SUCCESS", &ConfGen::ReturnCode::SUCCESS)
-		.def_readonly("UNINITIALIZED", &ConfGen::ReturnCode::UNINITIALIZED)
-		.def_readonly("TIMEOUT", &ConfGen::ReturnCode::TIMEOUT)
-		.def_readonly("ABORTED", &ConfGen::ReturnCode::ABORTED)
-		.def_readonly("FORCEFIELD_SETUP_FAILED", &ConfGen::ReturnCode::FORCEFIELD_SETUP_FAILED)
-		.def_readonly("FORCEFIELD_MINIMIZATION_FAILED", &ConfGen::ReturnCode::FORCEFIELD_MINIMIZATION_FAILED)
-		.def_readonly("FRAGMENT_LIBRARY_NOT_SET", &ConfGen::ReturnCode::FRAGMENT_LIBRARY_NOT_SET)
-		.def_readonly("FRAGMENT_CONF_GEN_FAILED", &ConfGen::ReturnCode::FRAGMENT_CONF_GEN_FAILED)
-		.def_readonly("FRAGMENT_CONF_GEN_TIMEOUT", &ConfGen::ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT)
-		.def_readonly("FRAGMENT_ALREADY_PROCESSED", &ConfGen::ReturnCode::FRAGMENT_ALREADY_PROCESSED)
-		.def_readonly("TORSION_DRIVING_FAILED", &ConfGen::ReturnCode::TORSION_DRIVING_FAILED)
-		.def_readonly("CONF_GEN_FAILED", &ConfGen::ReturnCode::CONF_GEN_FAILED)
-		.def_readonly("TOO_MUCH_SYMMETRY", &ConfGen::ReturnCode::TOO_MUCH_SYMMETRY)
-		;
+    python::class_<ReturnCode, boost::noncopyable>("ReturnCode", python::no_init)
+        .def_readonly("SUCCESS", &ConfGen::ReturnCode::SUCCESS)
+        .def_readonly("UNINITIALIZED", &ConfGen::ReturnCode::UNINITIALIZED)
+        .def_readonly("TIMEOUT", &ConfGen::ReturnCode::TIMEOUT)
+        .def_readonly("ABORTED", &ConfGen::ReturnCode::ABORTED)
+        .def_readonly("FORCEFIELD_SETUP_FAILED", &ConfGen::ReturnCode::FORCEFIELD_SETUP_FAILED)
+        .def_readonly("FORCEFIELD_MINIMIZATION_FAILED", &ConfGen::ReturnCode::FORCEFIELD_MINIMIZATION_FAILED)
+        .def_readonly("FRAGMENT_LIBRARY_NOT_SET", &ConfGen::ReturnCode::FRAGMENT_LIBRARY_NOT_SET)
+        .def_readonly("FRAGMENT_CONF_GEN_FAILED", &ConfGen::ReturnCode::FRAGMENT_CONF_GEN_FAILED)
+        .def_readonly("FRAGMENT_CONF_GEN_TIMEOUT", &ConfGen::ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT)
+        .def_readonly("FRAGMENT_ALREADY_PROCESSED", &ConfGen::ReturnCode::FRAGMENT_ALREADY_PROCESSED)
+        .def_readonly("TORSION_DRIVING_FAILED", &ConfGen::ReturnCode::TORSION_DRIVING_FAILED)
+        .def_readonly("CONF_GEN_FAILED", &ConfGen::ReturnCode::CONF_GEN_FAILED)
+        .def_readonly("TOO_MUCH_SYMMETRY", &ConfGen::ReturnCode::TOO_MUCH_SYMMETRY)
+        ;
 }

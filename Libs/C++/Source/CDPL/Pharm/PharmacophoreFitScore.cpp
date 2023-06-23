@@ -41,31 +41,31 @@ using namespace CDPL;
 namespace
 {
 
-	struct FeatureCmpFunc
-	{
+    struct FeatureCmpFunc
+    {
 
-	public:
-		bool operator()(const Pharm::Feature* ftr1, const Pharm::Feature* ftr2) const {
-			unsigned int type1 = getType(*ftr1);
-			unsigned int type2 = getType(*ftr2);
+    public:
+        bool operator()(const Pharm::Feature* ftr1, const Pharm::Feature* ftr2) const {
+            unsigned int type1 = getType(*ftr1);
+            unsigned int type2 = getType(*ftr2);
 
-			if (type1 == type2) {
-				const Math::Vector3D& pos1 = get3DCoordinates(*ftr1);
-				const Math::Vector3D& pos2 = get3DCoordinates(*ftr2);
+            if (type1 == type2) {
+                const Math::Vector3D& pos1 = get3DCoordinates(*ftr1);
+                const Math::Vector3D& pos2 = get3DCoordinates(*ftr2);
 
-				if (pos1(0) == pos2(0)) {
-					if (pos1(1) == pos2(1)) 
-						return (pos1(2) < pos2(2));
-					
-					return (pos1(1) < pos2(1));
-				}
+                if (pos1(0) == pos2(0)) {
+                    if (pos1(1) == pos2(1)) 
+                        return (pos1(2) < pos2(2));
+                    
+                    return (pos1(1) < pos2(1));
+                }
 
-				return (pos1(0) < pos2(0));
-			}
+                return (pos1(0) < pos2(0));
+            }
 
-			return (type1 < type2);
-		}
-	};
+            return (type1 < type2);
+        }
+    };
 }
 
 
@@ -75,7 +75,7 @@ constexpr double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT;
 
 
 Pharm::PharmacophoreFitScore::PharmacophoreFitScore(double match_cnt_weight, double pos_match_weight, 
-						    double geom_match_weight):
+                            double geom_match_weight):
     ftrMatchCntWeight(match_cnt_weight), ftrPosMatchWeight(pos_match_weight), ftrGeomMatchWeight(geom_match_weight)
 {}
 
@@ -110,73 +110,73 @@ void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchWeight(double weight)
 }
 
 double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
-												const Math::Matrix4D& xform)
+                                                const Math::Matrix4D& xform)
 {
-	spatFtrMapping.perceive(ref_ftrs, algnd_ftrs, xform);
+    spatFtrMapping.perceive(ref_ftrs, algnd_ftrs, xform);
 
-	return this->operator()(ref_ftrs, spatFtrMapping);
+    return this->operator()(ref_ftrs, spatFtrMapping);
 }
 
 double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping)
 {
-	groupedRefFtrs.clear();
+    groupedRefFtrs.clear();
 
-	for (FeatureContainer::ConstFeatureIterator it = ref_ftrs.getFeaturesBegin(), end = ref_ftrs.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ref_ftr = *it;
+    for (FeatureContainer::ConstFeatureIterator it = ref_ftrs.getFeaturesBegin(), end = ref_ftrs.getFeaturesEnd(); it != end; ++it) {
+        const Feature& ref_ftr = *it;
  
-		if (getDisabledFlag(ref_ftr))
-			continue;
+        if (getDisabledFlag(ref_ftr))
+            continue;
 
-		if (getType(ref_ftr) == FeatureType::EXCLUSION_VOLUME)
-			continue;
+        if (getType(ref_ftr) == FeatureType::EXCLUSION_VOLUME)
+            continue;
 
-		groupedRefFtrs.push_back(&ref_ftr);
-	}
+        groupedRefFtrs.push_back(&ref_ftr);
+    }
 
-	if (groupedRefFtrs.empty())
-		return 0.0;
+    if (groupedRefFtrs.empty())
+        return 0.0;
 
-	std::sort(groupedRefFtrs.begin(), groupedRefFtrs.end(), FeatureCmpFunc());
+    std::sort(groupedRefFtrs.begin(), groupedRefFtrs.end(), FeatureCmpFunc());
 
-	std::size_t mat_ftr_cnt = 0;
-	double tot_fit_score = 0.0;
-	
-	for (FeatureList::const_iterator it = groupedRefFtrs.begin(), end = groupedRefFtrs.end(); it != end; ) {
-		unsigned int ref_type = 0;
-		const Math::Vector3D* ref_pos = 0;
-		double best_fit_score = 0.0;
-		bool found_mapping = false;
+    std::size_t mat_ftr_cnt = 0;
+    double tot_fit_score = 0.0;
+    
+    for (FeatureList::const_iterator it = groupedRefFtrs.begin(), end = groupedRefFtrs.end(); it != end; ) {
+        unsigned int ref_type = 0;
+        const Math::Vector3D* ref_pos = 0;
+        double best_fit_score = 0.0;
+        bool found_mapping = false;
 
-		for ( ; it != end; ++it) {
-			const Feature* ref_ftr = *it;
+        for ( ; it != end; ++it) {
+            const Feature* ref_ftr = *it;
 
-			if (ref_pos == 0) {
-				ref_type = getType(*ref_ftr);
-				ref_pos = &get3DCoordinates(*ref_ftr);
+            if (ref_pos == 0) {
+                ref_type = getType(*ref_ftr);
+                ref_pos = &get3DCoordinates(*ref_ftr);
 
-			} else if (ref_type != getType(*ref_ftr) || *ref_pos != get3DCoordinates(*ref_ftr))
-				break;
+            } else if (ref_type != getType(*ref_ftr) || *ref_pos != get3DCoordinates(*ref_ftr))
+                break;
 
-			FeatureMapping::ConstEntryIteratorRange mpd_ftrs = mapping.getEntries(ref_ftr);
+            FeatureMapping::ConstEntryIteratorRange mpd_ftrs = mapping.getEntries(ref_ftr);
 
-			for (FeatureMapping::ConstEntryIterator mf_it = mpd_ftrs.first; mf_it != mpd_ftrs.second; ++mf_it) {
-				const Feature* m_ftr = mf_it->second;
-				double pair_pos_score = mapping.getPositionMatchScore(*ref_ftr, *m_ftr);
-				double pair_geom_score = mapping.getGeometryMatchScore(*ref_ftr, *m_ftr);
-			
-				best_fit_score = std::max(best_fit_score, ftrPosMatchWeight * pair_pos_score + ftrGeomMatchWeight * pair_geom_score);
-				found_mapping = true;
-			}
-		}
+            for (FeatureMapping::ConstEntryIterator mf_it = mpd_ftrs.first; mf_it != mpd_ftrs.second; ++mf_it) {
+                const Feature* m_ftr = mf_it->second;
+                double pair_pos_score = mapping.getPositionMatchScore(*ref_ftr, *m_ftr);
+                double pair_geom_score = mapping.getGeometryMatchScore(*ref_ftr, *m_ftr);
+            
+                best_fit_score = std::max(best_fit_score, ftrPosMatchWeight * pair_pos_score + ftrGeomMatchWeight * pair_geom_score);
+                found_mapping = true;
+            }
+        }
 
-		if (found_mapping) {
-			mat_ftr_cnt++;
-			tot_fit_score += best_fit_score;
-		}
-	}
+        if (found_mapping) {
+            mat_ftr_cnt++;
+            tot_fit_score += best_fit_score;
+        }
+    }
 
-	if (mat_ftr_cnt == 0)
-		return 0.0;
-	
-	return (ftrMatchCntWeight * mat_ftr_cnt + tot_fit_score / mat_ftr_cnt);
+    if (mat_ftr_cnt == 0)
+        return 0.0;
+    
+    return (ftrMatchCntWeight * mat_ftr_cnt + tot_fit_score / mat_ftr_cnt);
 }

@@ -39,53 +39,53 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct ConstMatrixRangeExport
-	{
-	
-		typedef CDPL::Math::Range<std::size_t> RangeType;
-		typedef CDPL::Math::MatrixRange<const ExpressionType> MatrixRangeType;
-		typedef CDPLPythonMath::MatrixExpressionProxyWrapper<ExpressionType, RangeType, MatrixRangeType> MatrixRangeWrapper;
-		typedef typename MatrixRangeWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixRangeWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct ConstMatrixRangeExport
+    {
+    
+        typedef CDPL::Math::Range<std::size_t> RangeType;
+        typedef CDPL::Math::MatrixRange<const ExpressionType> MatrixRangeType;
+        typedef CDPLPythonMath::MatrixExpressionProxyWrapper<ExpressionType, RangeType, MatrixRangeType> MatrixRangeWrapper;
+        typedef typename MatrixRangeWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixRangeWrapper::SharedPointer WrapperPointerType;
 
-		ConstMatrixRangeExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
-		
-			python::class_<MatrixRangeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixRangeWrapper&>((python::arg("self"), python::arg("r"))))
-				.def(python::init<const ExpressionPointerType&, const RangeType&, const RangeType&>(
-						 (python::arg("self"), python::arg("e"), python::arg("r1"), python::arg("r2"))))
-				.def("getStart1", &MatrixRangeType::getStart1, python::arg("self"))
-				.def("getStart2", &MatrixRangeType::getStart2, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRangeType>())
-				.def(ConstMatrixVisitor<MatrixRangeType>("r"))
-				.def(WrappedDataVisitor<MatrixRangeWrapper>())
-				.add_property("start1", &MatrixRangeType::getStart1)
-				.add_property("start2", &MatrixRangeType::getStart2);
+        ConstMatrixRangeExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
+        
+            python::class_<MatrixRangeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixRangeWrapper&>((python::arg("self"), python::arg("r"))))
+                .def(python::init<const ExpressionPointerType&, const RangeType&, const RangeType&>(
+                         (python::arg("self"), python::arg("e"), python::arg("r1"), python::arg("r2"))))
+                .def("getStart1", &MatrixRangeType::getStart1, python::arg("self"))
+                .def("getStart2", &MatrixRangeType::getStart2, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRangeType>())
+                .def(ConstMatrixVisitor<MatrixRangeType>("r"))
+                .def(WrappedDataVisitor<MatrixRangeWrapper>())
+                .add_property("start1", &MatrixRangeType::getStart1)
+                .add_property("start2", &MatrixRangeType::getStart2);
 
-			python::def("range", &range1, (python::arg("e"), python::arg("r1"), python::arg("r2")));
-			python::def("range", &range2, (python::arg("e"), python::arg("start1"), python::arg("stop1"),
-										   python::arg("start2"), python::arg("stop2")));
-		}
+            python::def("range", &range1, (python::arg("e"), python::arg("r1"), python::arg("r2")));
+            python::def("range", &range2, (python::arg("e"), python::arg("start1"), python::arg("stop1"),
+                                           python::arg("start2"), python::arg("stop2")));
+        }
 
-		static WrapperPointerType range1(const ExpressionPointerType& e, const RangeType& r1, const RangeType& r2) {
-			return WrapperPointerType(new MatrixRangeWrapper(e, r1, r2));
-		}
+        static WrapperPointerType range1(const ExpressionPointerType& e, const RangeType& r1, const RangeType& r2) {
+            return WrapperPointerType(new MatrixRangeWrapper(e, r1, r2));
+        }
 
-		static WrapperPointerType range2(const ExpressionPointerType& e, std::size_t start1, std::size_t stop1, 
-										 std::size_t start2, std::size_t stop2) {
-			return WrapperPointerType(new MatrixRangeWrapper(e, RangeType(start1, stop1), RangeType(start2, stop2)));
-		}
-	};
+        static WrapperPointerType range2(const ExpressionPointerType& e, std::size_t start1, std::size_t stop1, 
+                                         std::size_t start2, std::size_t stop2) {
+            return WrapperPointerType(new MatrixRangeWrapper(e, RangeType(start1, stop1), RangeType(start2, stop2)));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportConstMatrixRangeTypes()
 {
-	ConstMatrixRangeExport<ConstMatrixExpression<float> >("ConstFMatrixRange");
-	ConstMatrixRangeExport<ConstMatrixExpression<double> >("ConstDMatrixRange");
-	ConstMatrixRangeExport<ConstMatrixExpression<long> >("ConstLMatrixRange");
-	ConstMatrixRangeExport<ConstMatrixExpression<unsigned long> >("ConstULMatrixRange");
+    ConstMatrixRangeExport<ConstMatrixExpression<float> >("ConstFMatrixRange");
+    ConstMatrixRangeExport<ConstMatrixExpression<double> >("ConstDMatrixRange");
+    ConstMatrixRangeExport<ConstMatrixExpression<long> >("ConstLMatrixRange");
+    ConstMatrixRangeExport<ConstMatrixExpression<unsigned long> >("ConstULMatrixRange");
 }

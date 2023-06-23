@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of bzip2-compressed molecule data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataInputHandler<CDFBZ2MoleculeReader, DataFormat::CDF_BZ2> CDFBZ2MoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of bzip2-compressed molecule data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataInputHandler<CDFBZ2MoleculeReader, DataFormat::CDF_BZ2> CDFBZ2MoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_CDFBZ2MOLECULEINPUTHANDLER_HPP

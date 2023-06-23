@@ -45,78 +45,78 @@
 namespace
 {
 
-	void checkRingCount(const CDPL::Chem::FragmentList& frag_list, std::size_t size, std::size_t count)
-	{
-		using namespace CDPL;
-		using namespace Chem;
+    void checkRingCount(const CDPL::Chem::FragmentList& frag_list, std::size_t size, std::size_t count)
+    {
+        using namespace CDPL;
+        using namespace Chem;
 
-		BOOST_CHECK(std::size_t(std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
-											  std::bind(std::equal_to<std::size_t>(), size, 
-														std::bind(&Fragment::getNumBonds, std::placeholders::_1)))) == count);
-	}
+        BOOST_CHECK(std::size_t(std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
+                                              std::bind(std::equal_to<std::size_t>(), size, 
+                                                        std::bind(&Fragment::getNumBonds, std::placeholders::_1)))) == count);
+    }
 }
 
 
 BOOST_AUTO_TEST_CASE(MolecularGraphRingsTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<FragmentList>(MolecularGraphProperty::RINGS).getSize() == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<FragmentList>(MolecularGraphProperty::RINGS).getSize() == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
-
-	const FragmentList& rings = mol.getProperty<FragmentList>(MolecularGraphProperty::RINGS);
-
-	BOOST_CHECK(rings.getSize() == 24);
-
-	checkRingCount(rings, 5, 1);
-	checkRingCount(rings, 6, 4);
-	checkRingCount(rings, 8, 1);
-	checkRingCount(rings, 9, 3);
-	checkRingCount(rings, 10, 3);
-	checkRingCount(rings, 11, 3);
-	checkRingCount(rings, 12, 1);
-	checkRingCount(rings, 13, 4);
-	checkRingCount(rings, 14, 1);
-	checkRingCount(rings, 15, 1);
-	checkRingCount(rings, 17, 2);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::RINGS, mol, AtomContainerProperty::ATOM_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::RINGS, mol, BondContainerProperty::BOND_COUNT);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
+
+    const FragmentList& rings = mol.getProperty<FragmentList>(MolecularGraphProperty::RINGS);
+
+    BOOST_CHECK(rings.getSize() == 24);
+
+    checkRingCount(rings, 5, 1);
+    checkRingCount(rings, 6, 4);
+    checkRingCount(rings, 8, 1);
+    checkRingCount(rings, 9, 3);
+    checkRingCount(rings, 10, 3);
+    checkRingCount(rings, 11, 3);
+    checkRingCount(rings, 12, 1);
+    checkRingCount(rings, 13, 4);
+    checkRingCount(rings, 14, 1);
+    checkRingCount(rings, 15, 1);
+    checkRingCount(rings, 17, 2);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, MolecularGraphProperty::RINGS, *it, BondContainerProperty::BOND_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::RINGS, mol, AtomContainerProperty::ATOM_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::RINGS, mol, BondContainerProperty::BOND_COUNT);
 
 //-----
 
-	mol.getProperty<FragmentList>(MolecularGraphProperty::RINGS);
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, MolecularGraphProperty::RINGS, *it, BondContainerProperty::BOND_COUNT);
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
+//-----
 
-	mol.addAtom();
+    mol.getProperty<FragmentList>(MolecularGraphProperty::RINGS);
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
+
+    mol.addAtom();
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::RINGS, false, false).isEmpty());
 }

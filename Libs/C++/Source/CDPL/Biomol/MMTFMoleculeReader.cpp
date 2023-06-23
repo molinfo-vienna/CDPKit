@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Biomol::MMTFMoleculeReader::MMTFMoleculeReader(std::istream& is): 
-	Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>(is), reader(new MMTFDataReader(*this)) {}
+    Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>(is), reader(new MMTFDataReader(*this)) {}
 
 Biomol::MMTFMoleculeReader::~MMTFMoleculeReader() {}
 
 bool Biomol::MMTFMoleculeReader::readData(std::istream& is, Chem::Molecule& mol, bool overwrite)
 {
-	try {
-		if (overwrite)
-			mol.clear();
+    try {
+        if (overwrite)
+            mol.clear();
 
-		return reader->readRecord(is, mol);
+        return reader->readRecord(is, mol);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("MMTFMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("MMTFMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Biomol::MMTFMoleculeReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipRecord(is);
+    try {
+        return reader->skipRecord(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("MMTFMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("MMTFMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Biomol::MMTFMoleculeReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

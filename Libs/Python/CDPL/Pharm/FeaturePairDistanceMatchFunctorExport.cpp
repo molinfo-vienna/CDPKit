@@ -37,10 +37,10 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::FeaturePairDistanceMatchFunctor& func, 
-					  CDPL::Pharm::Feature& p1_ftr1, CDPL::Pharm::Feature& p1_ftr2,
-					  CDPL::Pharm::Feature& p2_ftr1, CDPL::Pharm::Feature& p2_ftr2)
+                      CDPL::Pharm::Feature& p1_ftr1, CDPL::Pharm::Feature& p1_ftr2,
+                      CDPL::Pharm::Feature& p2_ftr1, CDPL::Pharm::Feature& p2_ftr2)
     {
-		return func(p1_ftr1, p1_ftr2, p2_ftr1, p2_ftr2);
+        return func(p1_ftr1, p1_ftr2, p2_ftr1, p2_ftr2);
     }
 }
 
@@ -51,14 +51,14 @@ void CDPLPythonPharm::exportFeaturePairDistanceMatchFunctor()
     using namespace CDPL;
 
     python::class_<Pharm::FeaturePairDistanceMatchFunctor, boost::noncopyable>("FeaturePairDistanceMatchFunctor", python::no_init)
-		.def(python::init<const Pharm::FeaturePairDistanceMatchFunctor&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePairDistanceMatchFunctor>())
-		.def("queryMode", &Pharm::FeaturePairDistanceMatchFunctor::queryMode, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePairDistanceMatchFunctor::operator=), 
-			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, 
-			 (python::arg("self"), python::arg("p1_ftr1"), 
-			  python::arg("p1_ftr2"), python::arg("p2_ftr1"), python::arg("p2_ftr2")))
-		.add_property("qryMode", &Pharm::FeaturePairDistanceMatchFunctor::queryMode);
+        .def(python::init<const Pharm::FeaturePairDistanceMatchFunctor&>((python::arg("self"), python::arg("func"))))
+        .def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePairDistanceMatchFunctor>())
+        .def("queryMode", &Pharm::FeaturePairDistanceMatchFunctor::queryMode, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePairDistanceMatchFunctor::operator=), 
+             (python::arg("self"), python::arg("func")), python::return_self<>())
+        .def("__call__", &callOperator, 
+             (python::arg("self"), python::arg("p1_ftr1"), 
+              python::arg("p1_ftr2"), python::arg("p2_ftr1"), python::arg("p2_ftr2")))
+        .add_property("qryMode", &Pharm::FeaturePairDistanceMatchFunctor::queryMode);
 }

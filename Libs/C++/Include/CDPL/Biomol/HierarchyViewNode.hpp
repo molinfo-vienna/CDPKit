@@ -41,27 +41,27 @@ namespace CDPL
     namespace Biomol
     {
 
-		/**
-		 * \brief HierarchyViewNode.
-		 */
-		class CDPL_BIOMOL_API HierarchyViewNode : public Chem::Fragment
-		{
+        /**
+         * \brief HierarchyViewNode.
+         */
+        class CDPL_BIOMOL_API HierarchyViewNode : public Chem::Fragment
+        {
 
-		  public:
-			const ResidueList& getResidues() const;
+          public:
+            const ResidueList& getResidues() const;
 
-		  protected:
-			HierarchyViewNode(): initResidues(true) {}
+          protected:
+            HierarchyViewNode(): initResidues(true) {}
 
-			~HierarchyViewNode() {}
+            ~HierarchyViewNode() {}
 
-			std::mutex& getMutex() const;
+            std::mutex& getMutex() const;
 
-		  private:
-			mutable ResidueList  residues;
-			mutable bool         initResidues;
-			mutable std::mutex   initMutex;
-		};
+          private:
+            mutable ResidueList  residues;
+            mutable bool         initResidues;
+            mutable std::mutex   initMutex;
+        };
     }
 }
 

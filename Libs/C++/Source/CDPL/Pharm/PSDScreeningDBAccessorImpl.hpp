@@ -47,78 +47,78 @@ namespace CDPL
     namespace Chem
     {
 
-		class Molecule;
+        class Molecule;
     }
 
     namespace Pharm
     {
-	
-		class PSDScreeningDBAccessorImpl : private SQLiteDataIOBase
-		{
+    
+        class PSDScreeningDBAccessorImpl : private SQLiteDataIOBase
+        {
 
-		public:
-			PSDScreeningDBAccessorImpl();
+        public:
+            PSDScreeningDBAccessorImpl();
 
-			void open(const std::string& name);
+            void open(const std::string& name);
 
-			void close();
+            void close();
 
-			const std::string& getDatabaseName() const;
+            const std::string& getDatabaseName() const;
 
-			std::size_t getNumMolecules();
+            std::size_t getNumMolecules();
 
-			std::size_t getNumPharmacophores();
+            std::size_t getNumPharmacophores();
 
-			std::size_t getNumPharmacophores(std::size_t mol_idx);
+            std::size_t getNumPharmacophores(std::size_t mol_idx);
 
-			void getMolecule(std::size_t mol_idx, Chem::Molecule& mol);
+            void getMolecule(std::size_t mol_idx, Chem::Molecule& mol);
 
-			void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm);
+            void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm);
 
-			void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm);
+            void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm);
 
-			std::size_t getMoleculeIndex(std::size_t pharm_idx);
+            std::size_t getMoleculeIndex(std::size_t pharm_idx);
 
-			std::size_t getConformationIndex(std::size_t pharm_idx);
+            std::size_t getConformationIndex(std::size_t pharm_idx);
 
-			const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx);
+            const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx);
 
-			const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx); 
+            const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx); 
 
-		private:
-			void initControlParams();
+        private:
+            void initControlParams();
 
-			void closeDBConnection();
+            void closeDBConnection();
 
-			void loadPharmacophore(std::int64_t mol_id, int conf_idx, Pharmacophore& pharm);
+            void loadPharmacophore(std::int64_t mol_id, int conf_idx, Pharmacophore& pharm);
 
-			void initMolIdxIDMappings();
-			void initPharmIdxMolIDConfIdxMappings();
-			void loadFeatureCounts();
-	
-			typedef std::vector<FeatureTypeHistogram> FeatureCountsArray;
-			typedef std::pair<std::int64_t, std::size_t> MolIDConfIdxPair;
-			typedef std::vector<std::int64_t> MolIDArray;
-			typedef std::vector<MolIDConfIdxPair> MolIDConfIdxPairArray;
-			typedef std::unordered_map<std::int64_t, std::size_t> MolIDToUIntMap;
-			typedef std::unordered_map<MolIDConfIdxPair, std::size_t, boost::hash<MolIDConfIdxPair> > MolIDConfIdxToPharmIdxMap;
+            void initMolIdxIDMappings();
+            void initPharmIdxMolIDConfIdxMappings();
+            void loadFeatureCounts();
+    
+            typedef std::vector<FeatureTypeHistogram> FeatureCountsArray;
+            typedef std::pair<std::int64_t, std::size_t> MolIDConfIdxPair;
+            typedef std::vector<std::int64_t> MolIDArray;
+            typedef std::vector<MolIDConfIdxPair> MolIDConfIdxPairArray;
+            typedef std::unordered_map<std::int64_t, std::size_t> MolIDToUIntMap;
+            typedef std::unordered_map<MolIDConfIdxPair, std::size_t, boost::hash<MolIDConfIdxPair> > MolIDConfIdxToPharmIdxMap;
 
-			SQLite3StmtPointer               selMolDataStmt;
-			SQLite3StmtPointer               selPharmDataStmt;
-			SQLite3StmtPointer               selMolIDStmt;
-			SQLite3StmtPointer               selMolIDConfIdxStmt;
-			SQLite3StmtPointer               selFtrCountsStmt;
-			FeatureCountsArray               featureCounts;
-			MolIDArray                       molIdxToIDMap;
-			MolIDToUIntMap                   molIDToIdxMap;
-			MolIDToUIntMap                   molIDConfCountMap;
-			MolIDConfIdxPairArray            pharmIdxToMolIDConfIdxMap;
-			MolIDConfIdxToPharmIdxMap        molIDConfIdxToPharmIdxMap;
-			Internal::ByteBuffer             byteBuffer;
-			CDFPharmacophoreDataReader       pharmReader;
-			Chem::CDFDataReader              molReader;
-			Base::ControlParameterList       controlParams;
-		};
+            SQLite3StmtPointer               selMolDataStmt;
+            SQLite3StmtPointer               selPharmDataStmt;
+            SQLite3StmtPointer               selMolIDStmt;
+            SQLite3StmtPointer               selMolIDConfIdxStmt;
+            SQLite3StmtPointer               selFtrCountsStmt;
+            FeatureCountsArray               featureCounts;
+            MolIDArray                       molIdxToIDMap;
+            MolIDToUIntMap                   molIDToIdxMap;
+            MolIDToUIntMap                   molIDConfCountMap;
+            MolIDConfIdxPairArray            pharmIdxToMolIDConfIdxMap;
+            MolIDConfIdxToPharmIdxMap        molIDConfIdxToPharmIdxMap;
+            Internal::ByteBuffer             byteBuffer;
+            CDFPharmacophoreDataReader       pharmReader;
+            Chem::CDFDataReader              molReader;
+            Base::ControlParameterList       controlParams;
+        };
     }
 }
 

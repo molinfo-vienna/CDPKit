@@ -29,8 +29,8 @@
 namespace CDPLPythonGrid
 {
 
-	void exportAttributedGridFunctions();
-	void exportControlParameterFunctions();
+    void exportAttributedGridFunctions();
+    void exportControlParameterFunctions();
 }
 
 #endif // CDPL_PYTHON_GRID_FUNCTIONEXPORTS_HPP

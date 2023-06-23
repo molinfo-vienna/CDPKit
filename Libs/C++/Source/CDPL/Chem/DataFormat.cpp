@@ -88,158 +88,158 @@
 namespace
 {
 
-	const char* jmeFileExtensions[]       = { "jme" };
-	const char* molFileExtensions[]       = { "mol" };
-	const char* sdfFileExtensions[]       = { "sdf", "sd" };
-	const char* sdfGzFileExtensions[]     = { "sdf.gz", "sd.gz", "sdz" };
-	const char* sdfBz2FileExtensions[]    = { "sdf.bz2", "sd.bz2" };
-	const char* rxnFileExtensions[]       = { "rxn" };
-	const char* rdfFileExtensions[]       = { "rdf", "rd" };
-	const char* rdfGzFileExtensions[]     = { "rdf.gz", "rd.gz", "rdz" };
-	const char* rdfBz2FileExtensions[]    = { "rdf.bz2", "rd.bz2" };
-	const char* smilesFileExtensions[]    = { "smi" };
-	const char* smilesGzFileExtensions[]  = { "smi.gz" };
-	const char* smilesBz2FileExtensions[] = { "smi.bz2" };
-	const char* smartsFileExtensions[]    = { "sma" };
-	const char* inchiFileExtensions[]     = { "inchi", "ichi" };
-	const char* cdfFileExtensions[]       = { "cdf" };
-	const char* cdfGzFileExtensions[]     = { "cdf.gz" };
-	const char* cdfBz2FileExtensions[]    = { "cdf.bz2" };
-	const char* mol2FileExtensions[]      = { "mol2" };
-	const char* mol2GzFileExtensions[]    = { "mol2.gz" };
-	const char* mol2Bz2FileExtensions[]   = { "mol2.bz2" };
+    const char* jmeFileExtensions[]       = { "jme" };
+    const char* molFileExtensions[]       = { "mol" };
+    const char* sdfFileExtensions[]       = { "sdf", "sd" };
+    const char* sdfGzFileExtensions[]     = { "sdf.gz", "sd.gz", "sdz" };
+    const char* sdfBz2FileExtensions[]    = { "sdf.bz2", "sd.bz2" };
+    const char* rxnFileExtensions[]       = { "rxn" };
+    const char* rdfFileExtensions[]       = { "rdf", "rd" };
+    const char* rdfGzFileExtensions[]     = { "rdf.gz", "rd.gz", "rdz" };
+    const char* rdfBz2FileExtensions[]    = { "rdf.bz2", "rd.bz2" };
+    const char* smilesFileExtensions[]    = { "smi" };
+    const char* smilesGzFileExtensions[]  = { "smi.gz" };
+    const char* smilesBz2FileExtensions[] = { "smi.bz2" };
+    const char* smartsFileExtensions[]    = { "sma" };
+    const char* inchiFileExtensions[]     = { "inchi", "ichi" };
+    const char* cdfFileExtensions[]       = { "cdf" };
+    const char* cdfGzFileExtensions[]     = { "cdf.gz" };
+    const char* cdfBz2FileExtensions[]    = { "cdf.bz2" };
+    const char* mol2FileExtensions[]      = { "mol2" };
+    const char* mol2GzFileExtensions[]    = { "mol2.gz" };
+    const char* mol2Bz2FileExtensions[]   = { "mol2.bz2" };
 }
 
 
 using namespace CDPL;
 
-		
+        
 const Base::DataFormat Chem::DataFormat::JME("JME", "JME Molecular Editor String", "", 
-											 jmeFileExtensions, jmeFileExtensions + 1, true);
+                                             jmeFileExtensions, jmeFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::MOL("MOL", "MDL Molfile", "chemical/x-mdl-molfile", 
-											 molFileExtensions, molFileExtensions + 1, true);
+                                             molFileExtensions, molFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SDF("SDF", "MDL Structure-Data File", "chemical/x-mdl-sdfile", 
-											 sdfFileExtensions, sdfFileExtensions + 2, true);
+                                             sdfFileExtensions, sdfFileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::SDF_GZ("SDF_GZ", "GZip-Compressed MDL Structure-Data File", "chemical/x-mdl-sdfile", 
-											 sdfGzFileExtensions, sdfGzFileExtensions + 3, true);
+                                             sdfGzFileExtensions, sdfGzFileExtensions + 3, true);
 const Base::DataFormat Chem::DataFormat::SDF_BZ2("SDF_BZ2", "BZip2-Compressed MDL Structure-Data File", "chemical/x-mdl-sdfile", 
-											 sdfBz2FileExtensions, sdfBz2FileExtensions + 2, true);
+                                             sdfBz2FileExtensions, sdfBz2FileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::RXN("RXN", "MDL Reaction File", "chemical/x-mdl-rxnfile", 
-											 rxnFileExtensions, rxnFileExtensions + 1, true);
+                                             rxnFileExtensions, rxnFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::RDF("RDF", "MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
-											 rdfFileExtensions, rdfFileExtensions + 2, true);
+                                             rdfFileExtensions, rdfFileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::RDF_GZ("RDF_GZ", "GZip-Compressed MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
-											 rdfGzFileExtensions, rdfGzFileExtensions + 3, true);
+                                             rdfGzFileExtensions, rdfGzFileExtensions + 3, true);
 const Base::DataFormat Chem::DataFormat::RDF_BZ2("RDF_BZ2", "BZip2-Compressed MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
-											 rdfBz2FileExtensions, rdfBz2FileExtensions + 2, true);
+                                             rdfBz2FileExtensions, rdfBz2FileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::SMILES("SMILES", "Daylight SMILES String", "chemical/x-daylight-smiles", 
-												smilesFileExtensions, smilesFileExtensions + 1, true);
+                                                smilesFileExtensions, smilesFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SMILES_GZ("SMILES_GZ", "GZip-Compressed Daylight SMILES String", "chemical/x-daylight-smiles", 
-												smilesGzFileExtensions, smilesGzFileExtensions + 1, true);
+                                                smilesGzFileExtensions, smilesGzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SMILES_BZ2("SMILES_BZ2", "BZip2-Compressed Daylight SMILES String", "chemical/x-daylight-smiles", 
-												smilesBz2FileExtensions, smilesBz2FileExtensions + 1, true);
+                                                smilesBz2FileExtensions, smilesBz2FileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SMARTS("SMARTS", "Daylight SMARTS String", "", 
-												smartsFileExtensions, smartsFileExtensions + 1, true);
+                                                smartsFileExtensions, smartsFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::INCHI("INCHI", "IUPAC International Chemical Identifier", "chemical/x-inchi", 
-											   inchiFileExtensions, inchiFileExtensions + 2, true);
+                                               inchiFileExtensions, inchiFileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
-											 cdfFileExtensions, cdfFileExtensions + 1, true);
+                                             cdfFileExtensions, cdfFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
-											 cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
+                                             cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
-											 cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
+                                             cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::MOL2("MOL2", "Tripos Sybyl MOL2 File", "", 
-											 mol2FileExtensions, mol2FileExtensions + 1, true);
+                                             mol2FileExtensions, mol2FileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::MOL2_GZ("MOL2_GZ", "GZip-Compressed Tripos Sybyl MOL2 File", "", 
-											 mol2GzFileExtensions, mol2GzFileExtensions + 1, true);
+                                             mol2GzFileExtensions, mol2GzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::MOL2_BZ2("MOL2_BZ2", "BZip2-Compressed Tripos Sybyl MOL2 File", "", 
-											 mol2Bz2FileExtensions, mol2Bz2FileExtensions + 1, true);
+                                             mol2Bz2FileExtensions, mol2Bz2FileExtensions + 1, true);
 
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		void initDataFormats() {}
-	}
+        void initDataFormats() {}
+    }
 }
 
 
 namespace
 {
 
-	struct Init 
-	{
+    struct Init 
+    {
 
-		Init() {
-			using namespace Base;
-			using namespace Chem;
+        Init() {
+            using namespace Base;
+            using namespace Chem;
 
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new JMEMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOLMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMARTSMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new INCHIMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2MoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new JMEMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOLMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMARTSMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new INCHIMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2MoleculeInputHandler()));
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new JMEMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOLMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMARTSMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new INCHIMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2MolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new JMEMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOLMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMARTSMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new INCHIMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2MolecularGraphOutputHandler()));
 
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new JMEReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RXNReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMARTSReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new JMEReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RXNReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMARTSReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFReactionInputHandler()));
 
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new JMEReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RXNReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMARTSReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new JMEReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RXNReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMARTSReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFReactionOutputHandler()));
 
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFGZMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFBZ2MoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFGZMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFBZ2MoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESGZMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESBZ2MoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2GZMoleculeInputHandler()));
-			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2BZ2MoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFGZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFBZ2MoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFGZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFBZ2MoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESGZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESBZ2MoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2GZMoleculeInputHandler()));
+            DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2BZ2MoleculeInputHandler()));
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFGZMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFBZ2MolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFGZMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFBZ2MolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESGZMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESBZ2MolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2GZMolecularGraphOutputHandler()));
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2BZ2MolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFGZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFBZ2MolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFGZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFBZ2MolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESGZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESBZ2MolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2GZMolecularGraphOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2BZ2MolecularGraphOutputHandler()));
 
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFGZReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFBZ2ReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESGZReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESBZ2ReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFGZReactionInputHandler()));
-			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFBZ2ReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFGZReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFBZ2ReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESGZReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESBZ2ReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFGZReactionInputHandler()));
+            DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFBZ2ReactionInputHandler()));
 
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFGZReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFBZ2ReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESGZReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESBZ2ReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFGZReactionOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFBZ2ReactionOutputHandler()));
-		}
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFGZReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFBZ2ReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESGZReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESBZ2ReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFGZReactionOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFBZ2ReactionOutputHandler()));
+        }
 
-	} init;
+    } init;
 }

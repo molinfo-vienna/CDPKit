@@ -43,62 +43,62 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief CompoundDataReader.
-		 */
-		template <typename DataType>
-		class CompoundDataReader : public Base::DataReader<DataType>
-		{
+        /**
+         * \brief CompoundDataReader.
+         */
+        template <typename DataType>
+        class CompoundDataReader : public Base::DataReader<DataType>
+        {
 
-		public:
-			typedef std::shared_ptr<CompoundDataReader> SharedPointer;
+        public:
+            typedef std::shared_ptr<CompoundDataReader> SharedPointer;
 
-			typedef Base::DataReader<DataType> ReaderType;
-			typedef typename ReaderType::SharedPointer ReaderPointer;
+            typedef Base::DataReader<DataType> ReaderType;
+            typedef typename ReaderType::SharedPointer ReaderPointer;
 
-			CompoundDataReader(); 
+            CompoundDataReader(); 
 
-			~CompoundDataReader(); 
+            ~CompoundDataReader(); 
 
-			void addReader(const ReaderPointer& reader);
+            void addReader(const ReaderPointer& reader);
 
-			void removeReader(std::size_t idx);
+            void removeReader(std::size_t idx);
 
-			std::size_t getNumReaders();
+            std::size_t getNumReaders();
 
-			void clear();
+            void clear();
 
-			std::size_t getReaderIDForRecordIndex(std::size_t idx) const;
+            std::size_t getReaderIDForRecordIndex(std::size_t idx) const;
 
-			const ReaderPointer& getReader(std::size_t idx) const;
+            const ReaderPointer& getReader(std::size_t idx) const;
 
-			CompoundDataReader& read(DataType& obj, bool overwrite = true);
-			CompoundDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
+            CompoundDataReader& read(DataType& obj, bool overwrite = true);
+            CompoundDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
-			CompoundDataReader& skip();
+            CompoundDataReader& skip();
 
-			bool hasMoreData();
+            bool hasMoreData();
 
-			std::size_t getRecordIndex() const;
-			void setRecordIndex(std::size_t idx);
+            std::size_t getRecordIndex() const;
+            void setRecordIndex(std::size_t idx);
 
-			std::size_t getNumRecords();
+            std::size_t getNumRecords();
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			ReaderType* getReaderForRecordIndex(std::size_t& idx) const;
+        private:
+            ReaderType* getReaderForRecordIndex(std::size_t& idx) const;
 
-			typedef std::vector<ReaderPointer> ReaderArray;
-			typedef std::vector<std::size_t> RecordIndexArray;
+            typedef std::vector<ReaderPointer> ReaderArray;
+            typedef std::vector<std::size_t> RecordIndexArray;
 
-			ReaderArray        readers;
-			bool               state;
-			RecordIndexArray   recordIdxBounds;
-			std::size_t        recordIdx;
-			std::size_t        numRecords;
-		};
+            ReaderArray        readers;
+            bool               state;
+            RecordIndexArray   recordIdxBounds;
+            std::size_t        recordIdx;
+            std::size_t        numRecords;
+        };
     }
 }
 
@@ -113,88 +113,88 @@ CDPL::Util::CompoundDataReader<DataType>::CompoundDataReader():
 template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>::~CompoundDataReader()
 {
-	clear();
+    clear();
 }
 
 template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::clear()
 {
-	std::for_each(readers.begin(), readers.end(),
-				  std::bind(&ReaderType::setParent, std::placeholders::_1, static_cast<CompoundDataReader*>(0)));
+    std::for_each(readers.begin(), readers.end(),
+                  std::bind(&ReaderType::setParent, std::placeholders::_1, static_cast<CompoundDataReader*>(0)));
 
-	readers.clear();
-	recordIdxBounds.clear();
+    readers.clear();
+    recordIdxBounds.clear();
 
-	numRecords = 0;
-	state = false;
-	recordIdx = 0;
+    numRecords = 0;
+    state = false;
+    recordIdx = 0;
 }
 
 template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::addReader(const ReaderPointer& reader)
 {
-	readers.reserve(readers.size() + 1);
-	recordIdxBounds.reserve(readers.size() + 1);
+    readers.reserve(readers.size() + 1);
+    recordIdxBounds.reserve(readers.size() + 1);
 
-	reader->setParent(this);
+    reader->setParent(this);
 
-	std::size_t num_recs = reader->getNumRecords();
+    std::size_t num_recs = reader->getNumRecords();
 
-	readers.push_back(reader);
-	numRecords += num_recs;
-	recordIdxBounds.push_back(numRecords);
+    readers.push_back(reader);
+    numRecords += num_recs;
+    recordIdxBounds.push_back(numRecords);
 
-	state |= static_cast<bool>(reader->operator const void*());
+    state |= static_cast<bool>(reader->operator const void*());
 }
 
 template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::removeReader(std::size_t idx)
 {
-	if (idx >= readers.size())
-		throw Base::IndexError("CompoundDataReader: reader index out of bounds");
+    if (idx >= readers.size())
+        throw Base::IndexError("CompoundDataReader: reader index out of bounds");
 
-	std::size_t num_lost_records = readers[idx]->getNumRecords();
+    std::size_t num_lost_records = readers[idx]->getNumRecords();
 
-	readers[idx]->setParent(0);
+    readers[idx]->setParent(0);
 
-	readers.erase(readers.begin() + idx);
-	recordIdxBounds.erase(recordIdxBounds.begin() + idx);
+    readers.erase(readers.begin() + idx);
+    recordIdxBounds.erase(recordIdxBounds.begin() + idx);
 
-	for ( ; idx < readers.size(); idx++)
-		recordIdxBounds[idx] -= num_lost_records;
+    for ( ; idx < readers.size(); idx++)
+        recordIdxBounds[idx] -= num_lost_records;
 
-	numRecords -= num_lost_records;
+    numRecords -= num_lost_records;
 }
 
 template <typename DataType>
 std::size_t CDPL::Util::CompoundDataReader<DataType>::getNumReaders()
 {
-	return readers.size();
+    return readers.size();
 }
 
 template <typename DataType>
 const typename CDPL::Util::CompoundDataReader<DataType>::ReaderPointer&
 CDPL::Util::CompoundDataReader<DataType>::getReader(std::size_t idx) const
 {
-	if (idx >= readers.size())
-		throw Base::IndexError("CompoundDataReader: reader index out of bounds");
+    if (idx >= readers.size())
+        throw Base::IndexError("CompoundDataReader: reader index out of bounds");
 
-	return readers[idx];
+    return readers[idx];
 }
 
 template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>&
 CDPL::Util::CompoundDataReader<DataType>::read(DataType& obj, bool overwrite)
 {
-	state = false;
-	
-	std::size_t idx = recordIdx;
-	ReaderType* reader = getReaderForRecordIndex(idx);
+    state = false;
+    
+    std::size_t idx = recordIdx;
+    ReaderType* reader = getReaderForRecordIndex(idx);
 
-	if (reader && (state = reader->read(idx, obj, overwrite))) {
-		recordIdx++;
-		this->invokeIOCallbacks(1.0);
-	}
+    if (reader && (state = reader->read(idx, obj, overwrite))) {
+        recordIdx++;
+        this->invokeIOCallbacks(1.0);
+    }
 
     return *this;
 }
@@ -203,7 +203,7 @@ template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>&
 CDPL::Util::CompoundDataReader<DataType>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
- 	setRecordIndex(idx);
+     setRecordIndex(idx);
 
     return read(obj, overwrite);
 }
@@ -212,15 +212,15 @@ template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>&
 CDPL::Util::CompoundDataReader<DataType>::skip()
 {
- 	state = false;
-	
-	if (recordIdx >= numRecords)
-		return *this;
+     state = false;
+    
+    if (recordIdx >= numRecords)
+        return *this;
 
-	recordIdx++;
-	state = true;
+    recordIdx++;
+    state = true;
 
-	this->invokeIOCallbacks(1.0);
+    this->invokeIOCallbacks(1.0);
 
     return *this;
 }
@@ -228,28 +228,28 @@ CDPL::Util::CompoundDataReader<DataType>::skip()
 template <typename DataType>
 bool CDPL::Util::CompoundDataReader<DataType>::hasMoreData()
 {
-	return (recordIdx < numRecords);
+    return (recordIdx < numRecords);
 }
 
 template <typename DataType>
 std::size_t CDPL::Util::CompoundDataReader<DataType>::getRecordIndex() const
-{	
-	return recordIdx;
+{    
+    return recordIdx;
 }
 
 template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::setRecordIndex(std::size_t idx)
 {
-	if (idx >= numRecords)
-		throw Base::IndexError("CompoundDataReader: record index out of bounds");
+    if (idx >= numRecords)
+        throw Base::IndexError("CompoundDataReader: record index out of bounds");
 
-	recordIdx = idx;
+    recordIdx = idx;
 }
 
 template <typename DataType>
 std::size_t CDPL::Util::CompoundDataReader<DataType>::getNumRecords()
 {
-	return numRecords;
+    return numRecords;
 }
 
 template <typename DataType>
@@ -267,26 +267,26 @@ bool CDPL::Util::CompoundDataReader<DataType>::operator!() const
 template <typename DataType>
 std::size_t CDPL::Util::CompoundDataReader<DataType>::getReaderIDForRecordIndex(std::size_t idx) const
 {
-	for (std::size_t i = 0; i < readers.size(); i++) {
-		if (idx < recordIdxBounds[i])
-			return (i + 1);
-	}
+    for (std::size_t i = 0; i < readers.size(); i++) {
+        if (idx < recordIdxBounds[i])
+            return (i + 1);
+    }
 
-	return 0;
+    return 0;
 }
 
 template <typename DataType>
 typename CDPL::Util::CompoundDataReader<DataType>::ReaderType* 
 CDPL::Util::CompoundDataReader<DataType>::getReaderForRecordIndex(std::size_t& idx) const
 {
-	for (std::size_t i = 0; i < readers.size(); i++) {
-		if (idx < recordIdxBounds[i]) {
-			idx -= (i == 0 ? std::size_t(0) : recordIdxBounds[i - 1]);
-			return readers[i].get();
-		}
-	}
+    for (std::size_t i = 0; i < readers.size(); i++) {
+        if (idx < recordIdxBounds[i]) {
+            idx -= (i == 0 ? std::size_t(0) : recordIdxBounds[i - 1]);
+            return readers[i].get();
+        }
+    }
 
-	return 0;
+    return 0;
 }
 
 #endif // CDPL_UTIL_COMPOUNDDATAREADER_HPP

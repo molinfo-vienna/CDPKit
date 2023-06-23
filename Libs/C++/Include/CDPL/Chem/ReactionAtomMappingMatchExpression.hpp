@@ -39,67 +39,67 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
+        class Reaction;
 
-		/**
-		 * \brief ReactionAtomMappingMatchExpression.
-		 */
-		class CDPL_CHEM_API ReactionAtomMappingMatchExpression : public MatchExpression<Reaction>
-		{
+        /**
+         * \brief ReactionAtomMappingMatchExpression.
+         */
+        class CDPL_CHEM_API ReactionAtomMappingMatchExpression : public MatchExpression<Reaction>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionAtomMappingMatchExpression
-			 *        instances.
-			 */
-			typedef std::shared_ptr<ReactionAtomMappingMatchExpression> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionAtomMappingMatchExpression
+             *        instances.
+             */
+            typedef std::shared_ptr<ReactionAtomMappingMatchExpression> SharedPointer;
 
-			/**
-			 * \brief Constructs a \c %ReactionAtomMappingMatchExpression instance for the specified reactant to product atom mapping.
-			 * \param atom_mapping Specifies the reactant to product atom mapping constraint that has to be fulfilled by matching target
-			 *                     reactions.
-			 */
-			ReactionAtomMappingMatchExpression(const AtomMapping::SharedPointer& atom_mapping);
+            /**
+             * \brief Constructs a \c %ReactionAtomMappingMatchExpression instance for the specified reactant to product atom mapping.
+             * \param atom_mapping Specifies the reactant to product atom mapping constraint that has to be fulfilled by matching target
+             *                     reactions.
+             */
+            ReactionAtomMappingMatchExpression(const AtomMapping::SharedPointer& atom_mapping);
 
-			/**
-			 * \brief Checks whether the reactant to product atom mapping of the target reaction matches the query atom mapping 
-			 *        specified in the constructor.
-			 *
-			 * The query reactant to product atom mapping that was specified at construction time (see constructor) restricts the allowed
-			 * correspondences between reactant and product atoms of the evaluated target reaction.
-			 * The atom mapping of the target reaction is considered to match the query mapping only if each reactant/product atom pair
-			 * of the query mapping matches a pair of target reactant/product atoms that belong to the same atom class (according to the target
-			 * reaction's atom mapping retrieved from the property Chem::ReactionProperty::ATOM_MAPPING). If the mapping of a query reactant atom
-			 * is not unique (i.e. maps to multiple product atoms of the same class), then the target reaction has to match only one of the specified
-			 * mappings for that query atom.
-			 *
-			 * \param query_rxn The query reaction (ignored).
-			 * \param target_rxn The checked target reaction.
-			 * \param mapping The current query to target atom/bond mapping candidate.
-			 * \param matched_rxn_roles Holds a bitwise OR combination of the flags defined in namespace Chem::ReactionRole specifying
-			 *                          the reaction roles that were considered in the performed reaction substructure search.
-			 * \return \c true if the reactant to product atom mapping of the target reaction matches the query atom mapping, and \c false
-			 *         otherwise.
-			 * \note If an invalid query reactant to product atom mapping has been specified (\e null pointer or empty mapping) or the reaction substructure
-			 *       matching is incomplete (the RSSS did not consider both the reactants and products of the query reaction - see argument \a matched_rxn_roles),
-			 *       the expression will evaluate to \c true.
-			 */
-			bool operator()(const Reaction& query_rxn, const Reaction& target_rxn,
-							const AtomBondMapping& mapping, const Base::Any& matched_rxn_roles) const;
+            /**
+             * \brief Checks whether the reactant to product atom mapping of the target reaction matches the query atom mapping 
+             *        specified in the constructor.
+             *
+             * The query reactant to product atom mapping that was specified at construction time (see constructor) restricts the allowed
+             * correspondences between reactant and product atoms of the evaluated target reaction.
+             * The atom mapping of the target reaction is considered to match the query mapping only if each reactant/product atom pair
+             * of the query mapping matches a pair of target reactant/product atoms that belong to the same atom class (according to the target
+             * reaction's atom mapping retrieved from the property Chem::ReactionProperty::ATOM_MAPPING). If the mapping of a query reactant atom
+             * is not unique (i.e. maps to multiple product atoms of the same class), then the target reaction has to match only one of the specified
+             * mappings for that query atom.
+             *
+             * \param query_rxn The query reaction (ignored).
+             * \param target_rxn The checked target reaction.
+             * \param mapping The current query to target atom/bond mapping candidate.
+             * \param matched_rxn_roles Holds a bitwise OR combination of the flags defined in namespace Chem::ReactionRole specifying
+             *                          the reaction roles that were considered in the performed reaction substructure search.
+             * \return \c true if the reactant to product atom mapping of the target reaction matches the query atom mapping, and \c false
+             *         otherwise.
+             * \note If an invalid query reactant to product atom mapping has been specified (\e null pointer or empty mapping) or the reaction substructure
+             *       matching is incomplete (the RSSS did not consider both the reactants and products of the query reaction - see argument \a matched_rxn_roles),
+             *       the expression will evaluate to \c true.
+             */
+            bool operator()(const Reaction& query_rxn, const Reaction& target_rxn,
+                            const AtomBondMapping& mapping, const Base::Any& matched_rxn_roles) const;
 
-			/**
-			 * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
-			 * \return \c true.
-			 */
-			bool requiresAtomBondMapping() const;
+            /**
+             * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
+             * \return \c true.
+             */
+            bool requiresAtomBondMapping() const;
 
-		private:
-			AtomMapping::SharedPointer atomMapping;
-		};
-	}
+        private:
+            AtomMapping::SharedPointer atomMapping;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_REACTIONATOMMAPPINGMATCHEXPRESSION_HPP

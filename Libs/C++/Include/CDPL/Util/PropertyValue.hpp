@@ -36,39 +36,39 @@
 namespace CDPL 
 {
 
-	namespace Util
-	{
+    namespace Util
+    {
 
-		/**
-		 * \brief An unary functor that retrieves the value of a given property from the
-		 *        Base::PropertyContainer instance provided as argument.
-		 * \tparam T The type of the property value.
-		 */
-		template <typename T>
-		class PropertyValue
-		{
+        /**
+         * \brief An unary functor that retrieves the value of a given property from the
+         *        Base::PropertyContainer instance provided as argument.
+         * \tparam T The type of the property value.
+         */
+        template <typename T>
+        class PropertyValue
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PropertyValue instance for the property specified by \a key.
-			 * \param key The key of the property.
-			 */
-			PropertyValue(const Base::LookupKey& key): propKey(key) {}
+        public:
+            /**
+             * \brief Constructs a \c %PropertyValue instance for the property specified by \a key.
+             * \param key The key of the property.
+             */
+            PropertyValue(const Base::LookupKey& key): propKey(key) {}
 
-			/**
-			 * \brief Retrievs the value of the property specified in the constructor from the
-			 *        Base::PropertyContainer instance \a cntnr.
-			 * \param cntnr The Base::PropertyContainer instance storing the property value.
-			 * \return The value of the property.
-			 */
-			const T& operator()(const Base::PropertyContainer& cntnr) const {
-				return cntnr.getProperty<T>(propKey);
-			}
+            /**
+             * \brief Retrievs the value of the property specified in the constructor from the
+             *        Base::PropertyContainer instance \a cntnr.
+             * \param cntnr The Base::PropertyContainer instance storing the property value.
+             * \return The value of the property.
+             */
+            const T& operator()(const Base::PropertyContainer& cntnr) const {
+                return cntnr.getProperty<T>(propKey);
+            }
 
-		private:
-			Base::LookupKey propKey;
-		};
-	}
+        private:
+            Base::LookupKey propKey;
+        };
+    }
 }
 
 #endif // CDPL_UTIL_PROPERTYVALUE_HPP

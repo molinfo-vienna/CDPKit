@@ -36,19 +36,19 @@
 
 void CDPLPythonForceField::exportFunctionWrappers()
 {
-	using namespace boost;
+    using namespace boost;
     using namespace CDPL;
     using namespace Chem;
 
-	CDPLPythonBase::Function1Export<unsigned int(const Atom&), Atom&>("MMFF94NumericAtomTypeFunction");
-	CDPLPythonBase::Function1Export<const std::string&(const Atom&), Atom&, python::return_internal_reference<> >("MMFF94SymbolicAtomTypeFunction");
-	CDPLPythonBase::Function1Export<double(const Atom&), Atom&>("MMFF94AtomChargeFunction");
-	CDPLPythonBase::Function1Export<unsigned int(const Bond&), Bond&>("MMFF94BondTypeIndexFunction");
-	CDPLPythonBase::Function1Export<const FragmentList::SharedPointer&(const MolecularGraph&), MolecularGraph&,	python::return_value_policy<python::copy_const_reference> >("MMFF94RingSetFunction");
+    CDPLPythonBase::Function1Export<unsigned int(const Atom&), Atom&>("MMFF94NumericAtomTypeFunction");
+    CDPLPythonBase::Function1Export<const std::string&(const Atom&), Atom&, python::return_internal_reference<> >("MMFF94SymbolicAtomTypeFunction");
+    CDPLPythonBase::Function1Export<double(const Atom&), Atom&>("MMFF94AtomChargeFunction");
+    CDPLPythonBase::Function1Export<unsigned int(const Bond&), Bond&>("MMFF94BondTypeIndexFunction");
+    CDPLPythonBase::Function1Export<const FragmentList::SharedPointer&(const MolecularGraph&), MolecularGraph&,    python::return_value_policy<python::copy_const_reference> >("MMFF94RingSetFunction");
 
-	CDPLPythonBase::Function2Export<bool(const Atom&, const Atom&), Atom&, Atom&>("InteractionFilterFunction2");
-	CDPLPythonBase::Function3Export<bool(const Atom&, const Atom&, const Atom&), Atom&, Atom&, Atom&>("InteractionFilterFunction3");
-	CDPLPythonBase::Function4Export<bool(const Atom&, const Atom&, const Atom&, const Atom&), Atom&, Atom&, Atom&, Atom&>("InteractionFilterFunction4");
+    CDPLPythonBase::Function2Export<bool(const Atom&, const Atom&), Atom&, Atom&>("InteractionFilterFunction2");
+    CDPLPythonBase::Function3Export<bool(const Atom&, const Atom&, const Atom&), Atom&, Atom&, Atom&>("InteractionFilterFunction3");
+    CDPLPythonBase::Function4Export<bool(const Atom&, const Atom&, const Atom&, const Atom&), Atom&, Atom&, Atom&, Atom&>("InteractionFilterFunction4");
 
-	CDPLPythonBase::Function3Export<std::size_t(const Atom&, const Atom&, const MolecularGraph&), Atom&, Atom&, MolecularGraph&>("TopologicalAtomDistanceFunction");
+    CDPLPythonBase::Function3Export<std::size_t(const Atom&, const Atom&, const MolecularGraph&), Atom&, Atom&, MolecularGraph&>("TopologicalAtomDistanceFunction");
 }

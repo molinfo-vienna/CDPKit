@@ -41,68 +41,68 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief XBondingInteractionScore.
-		 */
-		class CDPL_PHARM_API XBondingInteractionScore : public FeatureInteractionScore
-		{
+        /**
+         * \brief XBondingInteractionScore.
+         */
+        class CDPL_PHARM_API XBondingInteractionScore : public FeatureInteractionScore
+        {
 
-		  public:
-			static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
-			static constexpr double DEF_MAX_AX_DISTANCE = 4.0;
-			static constexpr double DEF_MIN_AXB_ANGLE   = 150.0;
-			static constexpr double DEF_MAX_ACC_ANGLE   = 35.0;
+          public:
+            static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
+            static constexpr double DEF_MAX_AX_DISTANCE = 4.0;
+            static constexpr double DEF_MIN_AXB_ANGLE   = 150.0;
+            static constexpr double DEF_MAX_ACC_ANGLE   = 35.0;
 
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %XBondingInteractionScore instances.
-			 */
-			typedef std::shared_ptr<XBondingInteractionScore> SharedPointer;
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %XBondingInteractionScore instances.
+             */
+            typedef std::shared_ptr<XBondingInteractionScore> SharedPointer;
 
-			typedef std::function<double(double)> DistanceScoringFunction;
-			typedef std::function<double(double)> AngleScoringFunction;
+            typedef std::function<double(double)> DistanceScoringFunction;
+            typedef std::function<double(double)> AngleScoringFunction;
 
-			/**
-			 * \brief Constructs a \c %XBondingInteractionScore functor with the specified scores.
-			 * \param don_acc \c true if the first feature argument represents the donor- and the second one
-			 *                the acceptor-feature, and \c false otherwise.
-			 * \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
-			 * \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
-			 * \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
-			 * \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
-			 */
-			XBondingInteractionScore(bool don_acc, double min_ax_dist = DEF_MIN_AX_DISTANCE, double max_ax_dist = DEF_MAX_AX_DISTANCE,
-									 double min_axb_ang = DEF_MIN_AXB_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE);
+            /**
+             * \brief Constructs a \c %XBondingInteractionScore functor with the specified scores.
+             * \param don_acc \c true if the first feature argument represents the donor- and the second one
+             *                the acceptor-feature, and \c false otherwise.
+             * \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
+             * \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
+             * \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
+             * \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
+             */
+            XBondingInteractionScore(bool don_acc, double min_ax_dist = DEF_MIN_AX_DISTANCE, double max_ax_dist = DEF_MAX_AX_DISTANCE,
+                                     double min_axb_ang = DEF_MIN_AXB_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE);
 
-			double getMinAXDistance() const;
+            double getMinAXDistance() const;
 
-			double getMaxAXDistance() const;
+            double getMaxAXDistance() const;
 
-			double getMinAXBAngle() const;
+            double getMinAXBAngle() const;
 
-			double getMaxAcceptorAngle() const;
+            double getMaxAcceptorAngle() const;
 
-			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+            void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
-			void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
+            void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
 
-			void setAXBAngleScoringFunction(const AngleScoringFunction& func);
-			
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            void setAXBAngleScoringFunction(const AngleScoringFunction& func);
+            
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
+            double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
-		  private:
-			bool                    donAccOrder;
-			double                  minAXDist;
-			double                  maxAXDist;
-			double                  minAXBAngle;
-			double                  maxAccAngle;
-			DistanceScoringFunction distScoringFunc;
-			AngleScoringFunction    accAngleScoringFunc;
-			AngleScoringFunction    axbAngleScoringFunc;
-		};
+          private:
+            bool                    donAccOrder;
+            double                  minAXDist;
+            double                  maxAXDist;
+            double                  minAXBAngle;
+            double                  maxAccAngle;
+            DistanceScoringFunction distScoringFunc;
+            AngleScoringFunction    accAngleScoringFunc;
+            AngleScoringFunction    axbAngleScoringFunc;
+        };
     }
 }
 

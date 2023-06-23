@@ -42,98 +42,98 @@ using namespace CDPL;
 
 unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& molgraph)
 {
-	return calcCIPConfiguration(bond, molgraph, &getCIPPriority);
+    return calcCIPConfiguration(bond, molgraph, &getCIPPriority);
 }
 
 unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func)
 {
     if (getOrder(bond) != 2)
-		return BondConfiguration::NONE;
+        return BondConfiguration::NONE;
 
     if (getAromaticityFlag(bond))
-		return BondConfiguration::NONE;
+        return BondConfiguration::NONE;
 
     const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
     for (std::size_t i = 0; i < 2; i++) {
-		std::size_t num_bonds = Internal::getExplicitBondCount(*bond_atoms[i], molgraph);
+        std::size_t num_bonds = Internal::getExplicitBondCount(*bond_atoms[i], molgraph);
 
-		if (num_bonds < 2 || num_bonds > 3)
-			return BondConfiguration::NONE;
+        if (num_bonds < 2 || num_bonds > 3)
+            return BondConfiguration::NONE;
 
-		if (getHybridizationState(*bond_atoms[i]) != HybridizationState::SP2)
-			return BondConfiguration::NONE;
+        if (getHybridizationState(*bond_atoms[i]) != HybridizationState::SP2)
+            return BondConfiguration::NONE;
 
-		if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
-			return BondConfiguration::NONE;
+        if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
+            return BondConfiguration::NONE;
 
-		if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
-			return BondConfiguration::NONE;
+        if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+            return BondConfiguration::NONE;
     }
   
     const Atom* cip_ref_atoms[2] = { 0, 0 };
   
     for (std::size_t i = 0; i < 2; i++) {
-		Atom::ConstAtomIterator atoms_end = bond_atoms[i]->getAtomsEnd();
-		Atom::ConstBondIterator b_it = bond_atoms[i]->getBondsBegin();
+        Atom::ConstAtomIterator atoms_end = bond_atoms[i]->getAtomsEnd();
+        Atom::ConstBondIterator b_it = bond_atoms[i]->getBondsBegin();
 
-		for (Atom::ConstAtomIterator a_it = bond_atoms[i]->getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-			const Bond& nbr_bond = *b_it;
+        for (Atom::ConstAtomIterator a_it = bond_atoms[i]->getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+            const Bond& nbr_bond = *b_it;
 
-			if (&nbr_bond == &bond)
-				continue;
+            if (&nbr_bond == &bond)
+                continue;
 
-			if (!molgraph.containsBond(nbr_bond))
-				continue;
+            if (!molgraph.containsBond(nbr_bond))
+                continue;
 
-			const Atom* nbr_atom = &*a_it;
+            const Atom* nbr_atom = &*a_it;
 
-			if (!molgraph.containsAtom(*nbr_atom))
-				continue;
+            if (!molgraph.containsAtom(*nbr_atom))
+                continue;
 
-			if (!cip_ref_atoms[i])
-				cip_ref_atoms[i] = nbr_atom;
-			
-			else {
-				std::size_t pri1 = cip_pri_func(*cip_ref_atoms[i]);
-				std::size_t pri2 = cip_pri_func(*nbr_atom);
+            if (!cip_ref_atoms[i])
+                cip_ref_atoms[i] = nbr_atom;
+            
+            else {
+                std::size_t pri1 = cip_pri_func(*cip_ref_atoms[i]);
+                std::size_t pri2 = cip_pri_func(*nbr_atom);
 
-				if (pri1 == pri2)
-					return BondConfiguration::NONE;
+                if (pri1 == pri2)
+                    return BondConfiguration::NONE;
 
-				if (pri2 > pri1)
-					cip_ref_atoms[i] = nbr_atom;
-			}
-		}
+                if (pri2 > pri1)
+                    cip_ref_atoms[i] = nbr_atom;
+            }
+        }
     }
 
-	const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
+    const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
 
-	if (!stereo_desc.isValid(bond))
-		return BondConfiguration::UNDEF;
+    if (!stereo_desc.isValid(bond))
+        return BondConfiguration::UNDEF;
 
-	const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
+    const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
 
-	if (bond_atoms[0] == sto_ref_atoms[2] && bond_atoms[1] == sto_ref_atoms[1])
-		std::swap(cip_ref_atoms[0], cip_ref_atoms[1]);
+    if (bond_atoms[0] == sto_ref_atoms[2] && bond_atoms[1] == sto_ref_atoms[1])
+        std::swap(cip_ref_atoms[0], cip_ref_atoms[1]);
 
-	unsigned int bond_config = stereo_desc.getConfiguration();
+    unsigned int bond_config = stereo_desc.getConfiguration();
 
     switch (bond_config) {
 
-		case BondConfiguration::Z:
-			return ((cip_ref_atoms[0] == sto_ref_atoms[0]) ^ (cip_ref_atoms[1] == sto_ref_atoms[3]) ?
-					BondConfiguration::E : BondConfiguration::Z);
+        case BondConfiguration::Z:
+            return ((cip_ref_atoms[0] == sto_ref_atoms[0]) ^ (cip_ref_atoms[1] == sto_ref_atoms[3]) ?
+                    BondConfiguration::E : BondConfiguration::Z);
 
-		case BondConfiguration::E:
-			return ((cip_ref_atoms[0] == sto_ref_atoms[0]) ^ (cip_ref_atoms[1] == sto_ref_atoms[3]) ? 
-					BondConfiguration::Z : BondConfiguration::E);
+        case BondConfiguration::E:
+            return ((cip_ref_atoms[0] == sto_ref_atoms[0]) ^ (cip_ref_atoms[1] == sto_ref_atoms[3]) ? 
+                    BondConfiguration::Z : BondConfiguration::E);
 
-		case BondConfiguration::EITHER:
-			return BondConfiguration::EITHER;
+        case BondConfiguration::EITHER:
+            return BondConfiguration::EITHER;
 
-		default:
-			return BondConfiguration::UNDEF;
+        default:
+            return BondConfiguration::UNDEF;
     }
 }
-	
+    

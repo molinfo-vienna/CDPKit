@@ -44,137 +44,137 @@ using namespace CDPL;
 
 bool ConfGen::TorsionLibraryDataWriter::write(std::ostream& os, const TorsionLibrary& lib)
 {
-  	using namespace TorsionLibraryFormatData;
+      using namespace TorsionLibraryFormatData;
 
-	os << std::fixed << std::setprecision(2) << std::boolalpha;
+    os << std::fixed << std::setprecision(2) << std::boolalpha;
 
-	writeStartTag(os, 0, LIBRARY_TAG, false);
-	writeAttribute(os, CATEGORY_NAME_ATTR, lib.getName(), true, false);
-	writeCategory(os, 0, lib, true);
-	writeEndTag(os, 0, LIBRARY_TAG);
+    writeStartTag(os, 0, LIBRARY_TAG, false);
+    writeAttribute(os, CATEGORY_NAME_ATTR, lib.getName(), true, false);
+    writeCategory(os, 0, lib, true);
+    writeEndTag(os, 0, LIBRARY_TAG);
 
-	return os.good();
+    return os.good();
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeCategory(std::ostream& os, std::size_t ident, const TorsionCategory& cat, bool contents_only) const
 {
-  	using namespace TorsionLibraryFormatData;
-	using namespace std::placeholders;
-	
-	if (!contents_only) {
-		writeStartTag(os, ident, CATEGORY_TAG, false);
-		writeAttribute(os, CATEGORY_NAME_ATTR, cat.getName(), false, false);
-	
-		if (!cat.getMatchPatternString().empty())
-			writeAttribute(os, CATEGORY_PATTERN_ATTR, cat.getMatchPatternString(), true, false);
+      using namespace TorsionLibraryFormatData;
+    using namespace std::placeholders;
+    
+    if (!contents_only) {
+        writeStartTag(os, ident, CATEGORY_TAG, false);
+        writeAttribute(os, CATEGORY_NAME_ATTR, cat.getName(), false, false);
+    
+        if (!cat.getMatchPatternString().empty())
+            writeAttribute(os, CATEGORY_PATTERN_ATTR, cat.getMatchPatternString(), true, false);
 
-		else if (cat.getMatchPattern())
-			writeAttribute(os, CATEGORY_PATTERN_ATTR, getSMARTSPattern(*cat.getMatchPattern()), true, false);
+        else if (cat.getMatchPattern())
+            writeAttribute(os, CATEGORY_PATTERN_ATTR, getSMARTSPattern(*cat.getMatchPattern()), true, false);
 
-		else if (cat.getBondAtom1Type() != Chem::AtomType::UNKNOWN && cat.getBondAtom2Type() != Chem::AtomType::UNKNOWN) {
-			writeAttribute(os, CATEGORY_ATOM_TYPE1_ATTR, Chem::AtomDictionary::getSymbol(cat.getBondAtom1Type()), false, false);
-			writeAttribute(os, CATEGORY_ATOM_TYPE2_ATTR, Chem::AtomDictionary::getSymbol(cat.getBondAtom2Type()), true, false);
+        else if (cat.getBondAtom1Type() != Chem::AtomType::UNKNOWN && cat.getBondAtom2Type() != Chem::AtomType::UNKNOWN) {
+            writeAttribute(os, CATEGORY_ATOM_TYPE1_ATTR, Chem::AtomDictionary::getSymbol(cat.getBondAtom1Type()), false, false);
+            writeAttribute(os, CATEGORY_ATOM_TYPE2_ATTR, Chem::AtomDictionary::getSymbol(cat.getBondAtom2Type()), true, false);
 
-		} else
-			throw Base::IOError("TorsionLibraryDataWriter: missing category pattern or bond atom types");
-	}
+        } else
+            throw Base::IOError("TorsionLibraryDataWriter: missing category pattern or bond atom types");
+    }
 
-	std::for_each(cat.getCategoriesBegin(), cat.getCategoriesEnd(),
-				  std::bind(&TorsionLibraryDataWriter::writeCategory, this, std::ref(os), ident + 1, _1, false));
-	std::for_each(cat.getRulesBegin(), cat.getRulesEnd(),
-				  std::bind(&TorsionLibraryDataWriter::writeRule, this, std::ref(os), ident + 1, _1));
+    std::for_each(cat.getCategoriesBegin(), cat.getCategoriesEnd(),
+                  std::bind(&TorsionLibraryDataWriter::writeCategory, this, std::ref(os), ident + 1, _1, false));
+    std::for_each(cat.getRulesBegin(), cat.getRulesEnd(),
+                  std::bind(&TorsionLibraryDataWriter::writeRule, this, std::ref(os), ident + 1, _1));
 
-	if (!contents_only)
-		writeEndTag(os, ident, CATEGORY_TAG);
+    if (!contents_only)
+        writeEndTag(os, ident, CATEGORY_TAG);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeRule(std::ostream& os, std::size_t ident, const TorsionRule& rule) const
 {
-  	using namespace TorsionLibraryFormatData;
+      using namespace TorsionLibraryFormatData;
 
-	writeStartTag(os, ident, RULE_TAG, false);
+    writeStartTag(os, ident, RULE_TAG, false);
 
-	if (!rule.getMatchPatternString().empty())
-		writeAttribute(os, RULE_PATTERN_ATTR, rule.getMatchPatternString(), true, false);
+    if (!rule.getMatchPatternString().empty())
+        writeAttribute(os, RULE_PATTERN_ATTR, rule.getMatchPatternString(), true, false);
 
-	else if (rule.getMatchPattern())
-		writeAttribute(os, RULE_PATTERN_ATTR, getSMARTSPattern(*rule.getMatchPattern()), true, false);
+    else if (rule.getMatchPattern())
+        writeAttribute(os, RULE_PATTERN_ATTR, getSMARTSPattern(*rule.getMatchPattern()), true, false);
 
-	else
-		throw Base::IOError("TorsionLibraryDataWriter: missing rule pattern");
+    else
+        throw Base::IOError("TorsionLibraryDataWriter: missing rule pattern");
 
-	writeAngleList(os, ident + 1, rule);
-	writeEndTag(os, ident, RULE_TAG);
+    writeAngleList(os, ident + 1, rule);
+    writeEndTag(os, ident, RULE_TAG);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeAngleList(std::ostream& os, std::size_t ident, const TorsionRule& rule) const
 {
-  	using namespace TorsionLibraryFormatData;
+      using namespace TorsionLibraryFormatData;
 
-	writeStartTag(os, ident, ANGLE_LIST_TAG, true);
-	
-	std::for_each(rule.getAnglesBegin(), rule.getAnglesEnd(),
-				  std::bind(&TorsionLibraryDataWriter::writeAngleEntry, this,
-							std::ref(os), ident + 1, std::placeholders::_1));
+    writeStartTag(os, ident, ANGLE_LIST_TAG, true);
+    
+    std::for_each(rule.getAnglesBegin(), rule.getAnglesEnd(),
+                  std::bind(&TorsionLibraryDataWriter::writeAngleEntry, this,
+                            std::ref(os), ident + 1, std::placeholders::_1));
 
-	writeEndTag(os, ident, ANGLE_LIST_TAG);
+    writeEndTag(os, ident, ANGLE_LIST_TAG);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeAngleEntry(std::ostream& os, std::size_t ident, const TorsionRule::AngleEntry& angle_entry) const
 {
-  	using namespace TorsionLibraryFormatData;
+      using namespace TorsionLibraryFormatData;
 
-	writeStartTag(os, ident, ANGLE_TAG, false);
-	writeAttribute(os, ANGLE_VALUE_ATTR, angle_entry.getAngle(), false, true);
-	writeAttribute(os, ANGLE_TOLERANCE1_ATTR, angle_entry.getTolerance1(), false, true);
-	writeAttribute(os, ANGLE_TOLERANCE2_ATTR, angle_entry.getTolerance2(), false, true);
-	writeAttribute(os, ANGLE_SCORE_ATTR, angle_entry.getScore(), true, true);
+    writeStartTag(os, ident, ANGLE_TAG, false);
+    writeAttribute(os, ANGLE_VALUE_ATTR, angle_entry.getAngle(), false, true);
+    writeAttribute(os, ANGLE_TOLERANCE1_ATTR, angle_entry.getTolerance1(), false, true);
+    writeAttribute(os, ANGLE_TOLERANCE2_ATTR, angle_entry.getTolerance2(), false, true);
+    writeAttribute(os, ANGLE_SCORE_ATTR, angle_entry.getScore(), true, true);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeStartTag(std::ostream& os, std::size_t ident, const std::string& tag, bool close) const
 {
-	if (ident > 0)
-		Internal::writeWhitespace(os, ident);
+    if (ident > 0)
+        Internal::writeWhitespace(os, ident);
 
-	os << '<' << tag;
+    os << '<' << tag;
 
-	if (close)
-		closeTag(os);
+    if (close)
+        closeTag(os);
 }
 
 void ConfGen::TorsionLibraryDataWriter::writeEndTag(std::ostream& os, std::size_t ident, const std::string& tag) const
 {
-	if (ident > 0)
-		Internal::writeWhitespace(os, ident);
+    if (ident > 0)
+        Internal::writeWhitespace(os, ident);
 
-	os << "</" << tag; 
+    os << "</" << tag; 
 
-	closeTag(os);
+    closeTag(os);
 }
 
 template <typename T>
 void ConfGen::TorsionLibraryDataWriter::writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty) const
 {
-	os << ' ' << name << "=\"" << value << "\"";
+    os << ' ' << name << "=\"" << value << "\"";
 
-	if (close) 
-		os << (empty ? " />\n" : ">\n");
+    if (close) 
+        os << (empty ? " />\n" : ">\n");
 }
 
 void ConfGen::TorsionLibraryDataWriter::closeTag(std::ostream& os) const
 {
-	os << ">\n";
+    os << ">\n";
 }
 
 std::string ConfGen::TorsionLibraryDataWriter::getSMARTSPattern(const Chem::MolecularGraph& molgraph) const
 {
-	if (molgraph.getNumAtoms() < 2)
-		throw Base::IOError("TorsionLibraryDataWriter: molecular graph of match pattern missing atoms");
+    if (molgraph.getNumAtoms() < 2)
+        throw Base::IOError("TorsionLibraryDataWriter: molecular graph of match pattern missing atoms");
 
-	std::ostringstream oss;
+    std::ostringstream oss;
 
-	if (!Chem::SMARTSMolecularGraphWriter(oss).write(molgraph))
-		throw Base::IOError("TorsionLibraryDataWriter: error while generating SMARTS pattern");
+    if (!Chem::SMARTSMolecularGraphWriter(oss).write(molgraph))
+        throw Base::IOError("TorsionLibraryDataWriter: error while generating SMARTS pattern");
 
-	return oss.str();
+    return oss.str();
 }

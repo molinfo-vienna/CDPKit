@@ -35,16 +35,16 @@ using namespace CDPL;
 
 void ForceField::assignUFFAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite)
 {
-	using namespace Chem;
-	
+    using namespace Chem;
+    
     MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
     for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasUFFType(atom))
-			continue;
+        if (!overwrite && hasUFFType(atom))
+            continue;
 
-		setUFFType(atom, perceiveUFFType(atom, molgraph));
+        setUFFType(atom, perceiveUFFType(atom, molgraph));
     }
 }

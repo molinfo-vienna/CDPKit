@@ -29,30 +29,30 @@
 namespace CDPLPythonGrid
 {
 
-	void exportAttributedGrid();
-	void exportSpatialGrid();
-	void exportRegularGrid();
-	void exportRegularGridSet();
+    void exportAttributedGrid();
+    void exportSpatialGrid();
+    void exportRegularGrid();
+    void exportRegularGridSet();
 
-	void exportRegularGridReader();
-	void exportRegularGridSetReader();
-	void exportRegularGridWriter();
-	void exportRegularGridSetWriter();
-	void exportRegularGridInputHandler();
-	void exportRegularGridSetInputHandler();
-	void exportRegularGridOutputHandler();
-	void exportRegularGridSetOutputHandler();
-	void exportRegularGridIOManager();
-	void exportRegularGridSetIOManager();
+    void exportRegularGridReader();
+    void exportRegularGridSetReader();
+    void exportRegularGridWriter();
+    void exportRegularGridSetWriter();
+    void exportRegularGridInputHandler();
+    void exportRegularGridSetInputHandler();
+    void exportRegularGridOutputHandler();
+    void exportRegularGridSetOutputHandler();
+    void exportRegularGridIOManager();
+    void exportRegularGridSetIOManager();
 
-	void exportCDFRegularGridInputHandler();
-	void exportCDFRegularGridOutputHandler();
-	void exportCDFRegularGridSetInputHandler();
-	void exportCDFRegularGridSetOutputHandler();
-	void exportCDFRegularGridReader();
-	void exportCDFRegularGridWriter();
-	void exportCDFRegularGridSetReader();
-	void exportCDFRegularGridSetWriter();
+    void exportCDFRegularGridInputHandler();
+    void exportCDFRegularGridOutputHandler();
+    void exportCDFRegularGridSetInputHandler();
+    void exportCDFRegularGridSetOutputHandler();
+    void exportCDFRegularGridReader();
+    void exportCDFRegularGridWriter();
+    void exportCDFRegularGridSetReader();
+    void exportCDFRegularGridSetWriter();
 }
 
 #endif // CDPL_PYTHON_GRID_CLASSEXPORTS_HPP

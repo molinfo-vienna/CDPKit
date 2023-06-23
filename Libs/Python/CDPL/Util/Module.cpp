@@ -31,17 +31,17 @@
 
 BOOST_PYTHON_MODULE(_util)
 {
-	using namespace CDPLPythonUtil;
+    using namespace CDPLPythonUtil;
 
-	exportBitSet();
-	exportArrays();
-	exportBronKerboschAlgorithm();
-	exportDGCoordinatesGenerator();
-	exportCompressionStreams();
+    exportBitSet();
+    exportArrays();
+    exportBronKerboschAlgorithm();
+    exportDGCoordinatesGenerator();
+    exportCompressionStreams();
 
-	exportFileFunctions();
-	exportSequenceFunctions();
-	
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    exportFileFunctions();
+    exportSequenceFunctions();
+    
+    registerToPythonConverters();
+    registerFromPythonConverters();
 }

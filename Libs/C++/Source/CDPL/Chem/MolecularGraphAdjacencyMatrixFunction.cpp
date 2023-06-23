@@ -33,29 +33,29 @@ using namespace CDPL;
 
 void Chem::buildAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	mtx.resize(num_atoms, num_atoms);
-	mtx.clear();
+    mtx.resize(num_atoms, num_atoms);
+    mtx.clear();
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom& atom1 = bond.getBegin();
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom& atom1 = bond.getBegin();
 
-		if (!molgraph.containsAtom(atom1))
-			continue;
+        if (!molgraph.containsAtom(atom1))
+            continue;
 
-		const Atom& atom2 = bond.getEnd();
+        const Atom& atom2 = bond.getEnd();
 
-		if (!molgraph.containsAtom(atom2))
-			continue;
+        if (!molgraph.containsAtom(atom2))
+            continue;
 
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
+        std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
+        std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
 
-		mtx(atom1_idx, atom2_idx) = 1;
-		mtx(atom2_idx, atom1_idx) = 1;
-	}
+        mtx(atom1_idx, atom2_idx) = 1;
+        mtx(atom2_idx, atom1_idx) = 1;
+    }
 }

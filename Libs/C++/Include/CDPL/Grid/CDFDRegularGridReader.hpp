@@ -39,46 +39,46 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class CDFRegularGridDataReader;
+        class CDFRegularGridDataReader;
 
-		/**
-		 * \brief A reader for spatial regular grid data in the native I/O format of the <em>CDPL</em>.
-		 */
-		class CDPL_GRID_API CDFDRegularGridReader : public Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>
-		{
+        /**
+         * \brief A reader for spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+         */
+        class CDPL_GRID_API CDFDRegularGridReader : public Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %CDFDRegularGridReader instance that will read the pharmacophore data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			CDFDRegularGridReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %CDFDRegularGridReader instance that will read the pharmacophore data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            CDFDRegularGridReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~CDFDRegularGridReader();
+            /**
+             * \brief Destructor.
+             */
+            ~CDFDRegularGridReader();
 
-		private:
-			friend class Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>;
+        private:
+            friend class Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>;
 
-			CDFDRegularGridReader(const CDFDRegularGridReader&);
+            CDFDRegularGridReader(const CDFDRegularGridReader&);
 
-			CDFDRegularGridReader& operator=(const CDFDRegularGridReader&);
+            CDFDRegularGridReader& operator=(const CDFDRegularGridReader&);
 
-			bool readData(std::istream&, DRegularGrid&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, DRegularGrid&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<CDFRegularGridDataReader> CDFDataReaderPtr;
+            typedef std::auto_ptr<CDFRegularGridDataReader> CDFDataReaderPtr;
 
-			CDFDataReaderPtr reader;
-		};
-	}
+            CDFDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_GRID_CDFDREGULARGRIDREADER_HPP

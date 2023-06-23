@@ -32,12 +32,12 @@ using namespace CDPL;
 
 Chem::Atom& Chem::Atom::operator=(const Atom& atom) 
 {
-	if (this == &atom)
-		return *this;
+    if (this == &atom)
+        return *this;
 
-	AtomContainer::operator=(atom);
-	BondContainer::operator=(atom);
-	Entity3D::operator=(atom);
+    AtomContainer::operator=(atom);
+    BondContainer::operator=(atom);
+    Entity3D::operator=(atom);
 
-	return *this;
+    return *this;
 }

@@ -35,11 +35,11 @@
 
 void CDPLPythonVis::registerFromPythonConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::Color&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::Font&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::Rectangle2D&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::SizeSpecification&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::ColorTable::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::Color&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::Font&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::Rectangle2D&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::SizeSpecification&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Vis::ColorTable::SharedPointer&>();
 }

@@ -48,121 +48,121 @@ namespace CDPL
     namespace Chem
     {
 
-		/**
-		 * \brief SubstructureHistogramCalculator.
-		 */
-		class CDPL_CHEM_API SubstructureHistogramCalculator
-		{
+        /**
+         * \brief SubstructureHistogramCalculator.
+         */
+        class CDPL_CHEM_API SubstructureHistogramCalculator
+        {
 
-		  public:
-			class Pattern;
+          public:
+            class Pattern;
 
-		  private:
-			typedef std::vector<Pattern> PatternList;
+          private:
+            typedef std::vector<Pattern> PatternList;
 
-		  public:
-			typedef std::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
+          public:
+            typedef std::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
 
-			typedef PatternList::const_iterator ConstPatternIterator;
-			typedef PatternList::iterator PatternIterator;
+            typedef PatternList::const_iterator ConstPatternIterator;
+            typedef PatternList::iterator PatternIterator;
 
-			class CDPL_CHEM_API Pattern
-			{
+            class CDPL_CHEM_API Pattern
+            {
 
-			public:
-				Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0, 
-						bool all_matches = true, bool unique_matches = true);
-		    
-				const MolecularGraph::SharedPointer& getStructure() const;
+            public:
+                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0, 
+                        bool all_matches = true, bool unique_matches = true);
+            
+                const MolecularGraph::SharedPointer& getStructure() const;
 
-				std::size_t getID() const;
+                std::size_t getID() const;
 
-				std::size_t getPriority() const;
+                std::size_t getPriority() const;
 
-				bool processAllMatches() const;
+                bool processAllMatches() const;
 
-				bool processUniqueMatchesOnly() const;
+                bool processUniqueMatchesOnly() const;
 
-			private:
+            private:
 
-				MolecularGraph::SharedPointer structure;
-				std::size_t                   id;
-				std::size_t                   priority;
-				bool                          allMatches;
-				bool                          uniqueMatches;
-			};
+                MolecularGraph::SharedPointer structure;
+                std::size_t                   id;
+                std::size_t                   priority;
+                bool                          allMatches;
+                bool                          uniqueMatches;
+            };
 
-			SubstructureHistogramCalculator();
+            SubstructureHistogramCalculator();
 
-			SubstructureHistogramCalculator(const SubstructureHistogramCalculator& gen);
+            SubstructureHistogramCalculator(const SubstructureHistogramCalculator& gen);
 
-			void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0, 
-							bool all_matches = true, bool unique_matches = true);
+            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0, 
+                            bool all_matches = true, bool unique_matches = true);
 
-			void addPattern(const Pattern& ptn);
+            void addPattern(const Pattern& ptn);
 
-			const Pattern& getPattern(std::size_t idx) const;
+            const Pattern& getPattern(std::size_t idx) const;
 
-			void removePattern(std::size_t idx);
+            void removePattern(std::size_t idx);
 
-			void removePattern(const PatternIterator& ptn_it);
+            void removePattern(const PatternIterator& ptn_it);
 
-			void clear();
+            void clear();
 
-			std::size_t getNumPatterns() const;
+            std::size_t getNumPatterns() const;
 
-			ConstPatternIterator getPatternsBegin() const;
-			ConstPatternIterator getPatternsEnd() const;
+            ConstPatternIterator getPatternsBegin() const;
+            ConstPatternIterator getPatternsEnd() const;
 
-			PatternIterator getPatternsBegin();
-			PatternIterator getPatternsEnd();
+            PatternIterator getPatternsBegin();
+            PatternIterator getPatternsEnd();
 
-			ConstPatternIterator begin() const;
-			ConstPatternIterator end() const;
+            ConstPatternIterator begin() const;
+            ConstPatternIterator end() const;
 
-			PatternIterator begin();
-			PatternIterator end();
+            PatternIterator begin();
+            PatternIterator end();
 
-			template <typename T>
-			void calculate(const MolecularGraph& molgraph, T& histo);
+            template <typename T>
+            void calculate(const MolecularGraph& molgraph, T& histo);
 
-			SubstructureHistogramCalculator& operator=(const SubstructureHistogramCalculator& gen);
+            SubstructureHistogramCalculator& operator=(const SubstructureHistogramCalculator& gen);
 
-		  private:
-			typedef std::function<void(std::size_t)> HistoUpdateFunction;
+          private:
+            typedef std::function<void(std::size_t)> HistoUpdateFunction;
 
-			template <typename T>
-			class HistoUpdateFunctor
-			{
-				
-			public:
-				HistoUpdateFunctor(T& histo): histo(histo) {}
+            template <typename T>
+            class HistoUpdateFunctor
+            {
+                
+            public:
+                HistoUpdateFunctor(T& histo): histo(histo) {}
 
-				void operator()(std::size_t id) {
-					histo[id] += 1;
-				}
+                void operator()(std::size_t id) {
+                    histo[id] += 1;
+                }
 
-			private:
-				T& histo;
-			};
+            private:
+                T& histo;
+            };
 
-			void doCalculate(const MolecularGraph& molgraph, const HistoUpdateFunction& func);
+            void doCalculate(const MolecularGraph& molgraph, const HistoUpdateFunction& func);
 
-			void init(const MolecularGraph& molgraph);
+            void init(const MolecularGraph& molgraph);
 
-			void processPattern(const Pattern& ptn, const HistoUpdateFunction& func);
-			bool processMatch(const AtomBondMapping& mapping, const Pattern& ptn, const HistoUpdateFunction& func);
+            void processPattern(const Pattern& ptn, const HistoUpdateFunction& func);
+            bool processMatch(const AtomBondMapping& mapping, const Pattern& ptn, const HistoUpdateFunction& func);
 
-			typedef std::pair<Util::BitSet, Util::BitSet> AtomBondMask;
-			typedef std::map<std::size_t, AtomBondMask> PriorityToAtomBondMaskMap;
+            typedef std::pair<Util::BitSet, Util::BitSet> AtomBondMask;
+            typedef std::map<std::size_t, AtomBondMask> PriorityToAtomBondMaskMap;
 
-			const MolecularGraph*     molGraph;
-			PatternList               patterns;
-			SubstructureSearch        substructSearch;
-			PriorityToAtomBondMaskMap matchedSubstructMasks;
-			AtomBondMask              testingAtomBondMask;   
-			Util::BitSet              tmpMask;   
-		};
+            const MolecularGraph*     molGraph;
+            PatternList               patterns;
+            SubstructureSearch        substructSearch;
+            PriorityToAtomBondMaskMap matchedSubstructMasks;
+            AtomBondMask              testingAtomBondMask;   
+            Util::BitSet              tmpMask;   
+        };
     }
 }
 
@@ -170,7 +170,7 @@ namespace CDPL
 template <typename T>
 void CDPL::Chem::SubstructureHistogramCalculator::calculate(const MolecularGraph& molgraph, T& histo) 
 {
-	doCalculate(molgraph, HistoUpdateFunctor<T>(histo));
+    doCalculate(molgraph, HistoUpdateFunctor<T>(histo));
 }
 
 #endif // CDPL_CHEM_SUBSTRUCTUREHISTOGRAMCALCULATOR_HPP

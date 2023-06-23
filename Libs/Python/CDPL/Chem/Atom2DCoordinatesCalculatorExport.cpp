@@ -34,13 +34,13 @@
 
 void CDPLPythonChem::exportAtom2DCoordinatesCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::Atom2DCoordinatesCalculator, boost::noncopyable>("Atom2DCoordinatesCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Math::Vector2DArray&>((python::arg("self"), python::arg("molgraph"), python::arg("coords"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Atom2DCoordinatesCalculator>())	
-		.def("calculate", &Chem::Atom2DCoordinatesCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("coords")));
+    python::class_<Chem::Atom2DCoordinatesCalculator, boost::noncopyable>("Atom2DCoordinatesCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Math::Vector2DArray&>((python::arg("self"), python::arg("molgraph"), python::arg("coords"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Atom2DCoordinatesCalculator>())    
+        .def("calculate", &Chem::Atom2DCoordinatesCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("coords")));
 }

@@ -38,64 +38,64 @@ using namespace CDPL;
 
 
 Chem::ReactionAtomMappingMatchExpression::ReactionAtomMappingMatchExpression(const AtomMapping::SharedPointer& atom_mapping):
-	atomMapping(atom_mapping) {}
+    atomMapping(atom_mapping) {}
 
 bool Chem::ReactionAtomMappingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, const AtomBondMapping& mapping, 
-														  const Base::Any& matched_rxn_roles) const
+                                                          const Base::Any& matched_rxn_roles) const
 {
-	if (matched_rxn_roles.isEmpty())
-		return true;
+    if (matched_rxn_roles.isEmpty())
+        return true;
 
-	if (!atomMapping || atomMapping->getSize() == 0)
-		return true;
+    if (!atomMapping || atomMapping->getSize() == 0)
+        return true;
 
-	if ((matched_rxn_roles.getData<unsigned int>() & (ReactionRole::REACTANT | ReactionRole::PRODUCT)) !=
-		(ReactionRole::REACTANT | ReactionRole::PRODUCT))
-		return true;
+    if ((matched_rxn_roles.getData<unsigned int>() & (ReactionRole::REACTANT | ReactionRole::PRODUCT)) !=
+        (ReactionRole::REACTANT | ReactionRole::PRODUCT))
+        return true;
 
-	const AtomMapping& target_rxn_atom_mapping = *getAtomMapping(target_rxn);
+    const AtomMapping& target_rxn_atom_mapping = *getAtomMapping(target_rxn);
 
-	if (target_rxn_atom_mapping.getSize() == 0)
-		return false;
+    if (target_rxn_atom_mapping.getSize() == 0)
+        return false;
 
-	const AtomMapping& atom_mapping = mapping.getAtomMapping();
+    const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-	AtomMapping::ConstEntryIterator query_atom_pairs_end = atomMapping->getEntriesEnd();
+    AtomMapping::ConstEntryIterator query_atom_pairs_end = atomMapping->getEntriesEnd();
 
-	for (AtomMapping::ConstEntryIterator query_ap_it = atomMapping->getEntriesBegin(); query_ap_it != query_atom_pairs_end; ) {
-		const Atom* query_reac_atom = query_ap_it->first;
-		const Atom* target_reac_atom = atom_mapping[query_reac_atom];
+    for (AtomMapping::ConstEntryIterator query_ap_it = atomMapping->getEntriesBegin(); query_ap_it != query_atom_pairs_end; ) {
+        const Atom* query_reac_atom = query_ap_it->first;
+        const Atom* target_reac_atom = atom_mapping[query_reac_atom];
 
-		AtomMapping::ConstEntryIteratorRange target_atom_pair_range = target_rxn_atom_mapping.getEntries(target_reac_atom);
+        AtomMapping::ConstEntryIteratorRange target_atom_pair_range = target_rxn_atom_mapping.getEntries(target_reac_atom);
 
-		if (target_atom_pair_range.first == target_atom_pair_range.second)
-			return false;
+        if (target_atom_pair_range.first == target_atom_pair_range.second)
+            return false;
 
-		bool found_mapping = false;
+        bool found_mapping = false;
 
-		for ( ; query_ap_it != query_atom_pairs_end && query_ap_it->first == query_reac_atom; ++query_ap_it) {
-			const Atom* query_prod_atom = query_ap_it->second;
-			const Atom* target_prod_atom = atom_mapping[query_prod_atom];
-	
-			if (std::find_if(target_atom_pair_range.first, target_atom_pair_range.second,
-							 std::bind(std::equal_to<const Atom*>(), target_prod_atom, 
-									   std::bind(&AtomMapping::Entry::second, std::placeholders::_1))) != target_atom_pair_range.second) {
-				
-				found_mapping = true;
-				break;
-			}
-		}
+        for ( ; query_ap_it != query_atom_pairs_end && query_ap_it->first == query_reac_atom; ++query_ap_it) {
+            const Atom* query_prod_atom = query_ap_it->second;
+            const Atom* target_prod_atom = atom_mapping[query_prod_atom];
+    
+            if (std::find_if(target_atom_pair_range.first, target_atom_pair_range.second,
+                             std::bind(std::equal_to<const Atom*>(), target_prod_atom, 
+                                       std::bind(&AtomMapping::Entry::second, std::placeholders::_1))) != target_atom_pair_range.second) {
+                
+                found_mapping = true;
+                break;
+            }
+        }
 
-		if (!found_mapping)
-			return false;
-		
-		for ( ; query_ap_it != query_atom_pairs_end && query_ap_it->first == query_reac_atom; ++query_ap_it);
-	}
+        if (!found_mapping)
+            return false;
+        
+        for ( ; query_ap_it != query_atom_pairs_end && query_ap_it->first == query_reac_atom; ++query_ap_it);
+    }
 
-	return true;
+    return true;
 }
 
 bool Chem::ReactionAtomMappingMatchExpression::requiresAtomBondMapping() const
 {
-	return true;
+    return true;
 }

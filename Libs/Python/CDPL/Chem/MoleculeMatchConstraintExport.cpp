@@ -32,16 +32,16 @@
 namespace 
 {
 
-	struct MoleculeMatchConstraint {};
+    struct MoleculeMatchConstraint {};
 }
 
 
 void CDPLPythonChem::exportMoleculeMatchConstraints()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MoleculeMatchConstraint, boost::noncopyable>("MoleculeMatchConstraint", python::no_init)
-		.def_readonly("CONSTRAINT_LIST", &Chem::MoleculeMatchConstraint::CONSTRAINT_LIST)    
-		.def_readonly("COMPONENT_GROUPING", &Chem::MoleculeMatchConstraint::COMPONENT_GROUPING);
+    python::class_<MoleculeMatchConstraint, boost::noncopyable>("MoleculeMatchConstraint", python::no_init)
+        .def_readonly("CONSTRAINT_LIST", &Chem::MoleculeMatchConstraint::CONSTRAINT_LIST)    
+        .def_readonly("COMPONENT_GROUPING", &Chem::MoleculeMatchConstraint::COMPONENT_GROUPING);
 }

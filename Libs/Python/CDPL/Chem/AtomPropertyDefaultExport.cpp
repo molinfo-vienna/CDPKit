@@ -32,30 +32,30 @@
 namespace 
 {
 
-	struct AtomPropertyDefault {};
+    struct AtomPropertyDefault {};
 }
 
 
 void CDPLPythonChem::exportAtomPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
-		.def_readonly("SYMBOL", &Chem::AtomPropertyDefault::SYMBOL)
-		.def_readonly("NAME", &Chem::AtomPropertyDefault::NAME)
-		.def_readonly("FORMAL_CHARGE", &Chem::AtomPropertyDefault::FORMAL_CHARGE)
-		.def_readonly("ISOTOPE", &Chem::AtomPropertyDefault::ISOTOPE)
-		.def_readonly("UNPAIRED_ELECTRON_COUNT", &Chem::AtomPropertyDefault::UNPAIRED_ELECTRON_COUNT)
-		.def_readonly("RADICAL_TYPE", &Chem::AtomPropertyDefault::RADICAL_TYPE)
-		.def_readonly("TYPE", &Chem::AtomPropertyDefault::TYPE)
-		.def_readonly("SYBYL_TYPE", &Chem::AtomPropertyDefault::SYBYL_TYPE)
-		.def_readonly("REACTION_CENTER_STATUS", &Chem::AtomPropertyDefault::REACTION_CENTER_STATUS)
-		.def_readonly("STEREO_DESCRIPTOR", &Chem::AtomPropertyDefault::STEREO_DESCRIPTOR)
-		.def_readonly("COMPONENT_GROUP_ID", &Chem::AtomPropertyDefault::COMPONENT_GROUP_ID)
-		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyDefault::ATOM_MAPPING_ID)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::AtomPropertyDefault::MATCH_CONSTRAINTS)
-		.def_readonly("MOL2_NAME", &Chem::AtomPropertyDefault::MOL2_NAME)
-		.def_readonly("MOL2_CHARGE", &Chem::AtomPropertyDefault::MOL2_CHARGE)
-		.def_readonly("MDL_DB_STEREO_CARE_FLAG", &Chem::AtomPropertyDefault::MDL_DB_STEREO_CARE_FLAG);
+    python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
+        .def_readonly("SYMBOL", &Chem::AtomPropertyDefault::SYMBOL)
+        .def_readonly("NAME", &Chem::AtomPropertyDefault::NAME)
+        .def_readonly("FORMAL_CHARGE", &Chem::AtomPropertyDefault::FORMAL_CHARGE)
+        .def_readonly("ISOTOPE", &Chem::AtomPropertyDefault::ISOTOPE)
+        .def_readonly("UNPAIRED_ELECTRON_COUNT", &Chem::AtomPropertyDefault::UNPAIRED_ELECTRON_COUNT)
+        .def_readonly("RADICAL_TYPE", &Chem::AtomPropertyDefault::RADICAL_TYPE)
+        .def_readonly("TYPE", &Chem::AtomPropertyDefault::TYPE)
+        .def_readonly("SYBYL_TYPE", &Chem::AtomPropertyDefault::SYBYL_TYPE)
+        .def_readonly("REACTION_CENTER_STATUS", &Chem::AtomPropertyDefault::REACTION_CENTER_STATUS)
+        .def_readonly("STEREO_DESCRIPTOR", &Chem::AtomPropertyDefault::STEREO_DESCRIPTOR)
+        .def_readonly("COMPONENT_GROUP_ID", &Chem::AtomPropertyDefault::COMPONENT_GROUP_ID)
+        .def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyDefault::ATOM_MAPPING_ID)
+        .def_readonly("MATCH_CONSTRAINTS", &Chem::AtomPropertyDefault::MATCH_CONSTRAINTS)
+        .def_readonly("MOL2_NAME", &Chem::AtomPropertyDefault::MOL2_NAME)
+        .def_readonly("MOL2_CHARGE", &Chem::AtomPropertyDefault::MOL2_CHARGE)
+        .def_readonly("MDL_DB_STEREO_CARE_FLAG", &Chem::AtomPropertyDefault::MDL_DB_STEREO_CARE_FLAG);
 }

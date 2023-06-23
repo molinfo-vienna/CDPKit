@@ -29,36 +29,36 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-		class Reaction;
-	}
+        class Molecule;
+        class Reaction;
+    }
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class PropertyContainer;
-		class ControlParameterContainer;
-		class LookupKey;
-		class Any;
-		class Exception;
-		class DataFormat;
-	}
+        class PropertyContainer;
+        class ControlParameterContainer;
+        class LookupKey;
+        class Any;
+        class Exception;
+        class DataFormat;
+    }
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		class View2D;
-		class StructureView2D;
-		class ReactionView2D;
-		class Renderer2D;
-		class Font;
-		class Color;
-		class SizeSpecification;
-		class QtFontMetrics;
-	}
+        class View2D;
+        class StructureView2D;
+        class ReactionView2D;
+        class Renderer2D;
+        class Font;
+        class Color;
+        class SizeSpecification;
+        class QtFontMetrics;
+    }
 }
 
 #endif // CHOX_CDPLFWD_HPP

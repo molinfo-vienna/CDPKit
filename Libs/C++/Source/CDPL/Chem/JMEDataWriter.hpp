@@ -32,55 +32,55 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataIOBase;
-	}
+        class DataIOBase;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
-		class MolecularGraph;
-		class Atom;
-		class Bond;
-		class MatchConstraintList;
+        class Reaction;
+        class MolecularGraph;
+        class Atom;
+        class Bond;
+        class MatchConstraintList;
 
-		class JMEDataWriter
-		{
+        class JMEDataWriter
+        {
 
-		public:
-			JMEDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+        public:
+            JMEDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool writeReaction(std::ostream&, const Reaction&);
+            bool writeReaction(std::ostream&, const Reaction&);
 
-			bool writeMolGraph(std::ostream&, const MolecularGraph&, bool = true);
+            bool writeMolGraph(std::ostream&, const MolecularGraph&, bool = true);
 
-		private:
-			void init(std::ostream&);
+        private:
+            void init(std::ostream&);
 
-			bool writeComponent(std::ostream&, const MolecularGraph&);
+            bool writeComponent(std::ostream&, const MolecularGraph&);
 
-			void writeAtom(std::ostream&, const MolecularGraph&, const Atom&);
-			void writeAtomSymbol(std::ostream&, const Atom&) const;
-			void writeAtomCharge(std::ostream&, const Atom&) const;
-			void writeAtomString(std::ostream&, const MolecularGraph&, const Atom&);
-			bool writeAtomList(std::ostream&, const Atom&, const MatchConstraintList&, bool);
-			bool writeAtomType(std::ostream&, const Atom&, const MatchConstraintList&, bool, bool);
-			bool writeAtomType(std::ostream&, unsigned int, bool, bool, bool) const;
-			bool writeQueryFlags(std::ostream&, const MolecularGraph&, const Atom&, const MatchConstraintList&) const;
+            void writeAtom(std::ostream&, const MolecularGraph&, const Atom&);
+            void writeAtomSymbol(std::ostream&, const Atom&) const;
+            void writeAtomCharge(std::ostream&, const Atom&) const;
+            void writeAtomString(std::ostream&, const MolecularGraph&, const Atom&);
+            bool writeAtomList(std::ostream&, const Atom&, const MatchConstraintList&, bool);
+            bool writeAtomType(std::ostream&, const Atom&, const MatchConstraintList&, bool, bool);
+            bool writeAtomType(std::ostream&, unsigned int, bool, bool, bool) const;
+            bool writeQueryFlags(std::ostream&, const MolecularGraph&, const Atom&, const MatchConstraintList&) const;
 
-			void writeBond(std::ostream&, const MolecularGraph&, const Bond&) const;
+            void writeBond(std::ostream&, const MolecularGraph&, const Bond&) const;
 
-			const Base::DataIOBase&  ioBase;
-			bool                     strictErrorChecking;
-			bool                     separateComponents;
-			bool                     bondMemberSwapStereoFix;
-			std::size_t              coordsDim;
-			const void*              writtenAromConstraint;
-		};
-	}
+            const Base::DataIOBase&  ioBase;
+            bool                     strictErrorChecking;
+            bool                     separateComponents;
+            bool                     bondMemberSwapStereoFix;
+            std::size_t              coordsDim;
+            const void*              writtenAromConstraint;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_JMEDATAWRITER_HPP

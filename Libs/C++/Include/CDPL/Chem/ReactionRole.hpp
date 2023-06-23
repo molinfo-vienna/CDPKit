@@ -33,47 +33,47 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the role of molecules (components) in
-		 *        a chemical reaction.
-		 */
-		namespace ReactionRole
-		{
+        /**
+         * \brief Provides constants that are used to specify the role of molecules (components) in
+         *        a chemical reaction.
+         */
+        namespace ReactionRole
+        {
 
-			/**
-			 * \brief Specifies that a molecule is not a reaction component.
-			 */
-			const unsigned int NONE     = 0x0;
+            /**
+             * \brief Specifies that a molecule is not a reaction component.
+             */
+            const unsigned int NONE     = 0x0;
 
-			/**
-			 * \brief Specifies the reactants of a reaction.
-			 */
-			const unsigned int REACTANT = 0x1;
+            /**
+             * \brief Specifies the reactants of a reaction.
+             */
+            const unsigned int REACTANT = 0x1;
 
-			/**
-			 * \brief Specifies the agents of a reaction (e.g. solvent or catalyst).
-			 */
-			const unsigned int AGENT    = 0x2;
+            /**
+             * \brief Specifies the agents of a reaction (e.g. solvent or catalyst).
+             */
+            const unsigned int AGENT    = 0x2;
 
-			/**
-			 * \brief Equivalent to ReactionRole::AGENT.
-			 */
-			const unsigned int CATALYST = AGENT;
+            /**
+             * \brief Equivalent to ReactionRole::AGENT.
+             */
+            const unsigned int CATALYST = AGENT;
 
-			/**
-			 * \brief Specifies the products of a reaction.
-			 */
-			const unsigned int PRODUCT  = 0x4;
+            /**
+             * \brief Specifies the products of a reaction.
+             */
+            const unsigned int PRODUCT  = 0x4;
 
-			/**
-			 * \brief Specifies reactants, agents and products of a reaction.
-			 */
-			const unsigned int ALL      = REACTANT | AGENT | PRODUCT;
-		}
-	}
+            /**
+             * \brief Specifies reactants, agents and products of a reaction.
+             */
+            const unsigned int ALL      = REACTANT | AGENT | PRODUCT;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_REACTIONROLE_HPP

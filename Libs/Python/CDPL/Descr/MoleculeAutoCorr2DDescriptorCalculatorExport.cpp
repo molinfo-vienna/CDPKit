@@ -35,40 +35,40 @@
 
 void CDPLPythonDescr::exportMoleculeAutoCorr2DDescriptorCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Descr::MoleculeAutoCorr2DDescriptorCalculator, boost::noncopyable> cl("MoleculeAutoCorr2DDescriptorCalculator", python::no_init);
+    python::class_<Descr::MoleculeAutoCorr2DDescriptorCalculator, boost::noncopyable> cl("MoleculeAutoCorr2DDescriptorCalculator", python::no_init);
 
-	python::scope scope = cl;
+    python::scope scope = cl;
   
-	python::enum_<Descr::MoleculeAutoCorr2DDescriptorCalculator::Mode>("Mode")
-		.value("SEMI_SPLIT", Descr::MoleculeAutoCorr2DDescriptorCalculator::SEMI_SPLIT)
-		.value("FULL_SPLIT", Descr::MoleculeAutoCorr2DDescriptorCalculator::FULL_SPLIT)
-		.export_values();
+    python::enum_<Descr::MoleculeAutoCorr2DDescriptorCalculator::Mode>("Mode")
+        .value("SEMI_SPLIT", Descr::MoleculeAutoCorr2DDescriptorCalculator::SEMI_SPLIT)
+        .value("FULL_SPLIT", Descr::MoleculeAutoCorr2DDescriptorCalculator::FULL_SPLIT)
+        .export_values();
 
-	cl
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::MoleculeAutoCorr2DDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeAutoCorr2DDescriptorCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeAutoCorr2DDescriptorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setMaxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance,
-			 (python::arg("self"), python::arg("max_dist")))
-		.def("getMaxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,
-			 python::arg("self"))
-		.def("setMode", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMode,
-			 (python::arg("self"), python::arg("max_dist")))
-		.def("getMode", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMode,
-			 python::arg("self"))
-		.def("setAtomPairWeightFunction", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setAtomPairWeightFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("calculate", &Descr::MoleculeAutoCorr2DDescriptorCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")))
-		.add_property("maxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,
-					  &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance)
-		.add_property("mode", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMode,
-					  &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMode);
+    cl
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Descr::MoleculeAutoCorr2DDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeAutoCorr2DDescriptorCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeAutoCorr2DDescriptorCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setMaxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance,
+             (python::arg("self"), python::arg("max_dist")))
+        .def("getMaxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,
+             python::arg("self"))
+        .def("setMode", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMode,
+             (python::arg("self"), python::arg("max_dist")))
+        .def("getMode", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMode,
+             python::arg("self"))
+        .def("setAtomPairWeightFunction", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setAtomPairWeightFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("calculate", &Descr::MoleculeAutoCorr2DDescriptorCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")))
+        .add_property("maxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,
+                      &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance)
+        .add_property("mode", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMode,
+                      &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMode);
 }

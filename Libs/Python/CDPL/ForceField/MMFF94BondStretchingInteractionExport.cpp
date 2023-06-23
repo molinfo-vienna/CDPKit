@@ -38,24 +38,24 @@ void CDPLPythonForceField::exportMMFF94BondStretchingInteraction()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94BondStretchingInteraction>("MMFF94BondStretchingInteraction", python::no_init)
-		.def(python::init<const ForceField::MMFF94BondStretchingInteraction&>((python::arg("self"), python::arg("iactn"))))
-		.def(python::init<std::size_t, std::size_t, unsigned int, double, double>(
-				 (python::arg("self"), python::arg("atom1_idx"), python::arg("atom2_idx"), python::arg("bond_type_idx"),
-				  python::arg("force_const"), python::arg("ref_length"))))
-		.def("getAtom1Index", &ForceField::MMFF94BondStretchingInteraction::getAtom1Index, python::arg("self"))
-		.def("getAtom2Index", &ForceField::MMFF94BondStretchingInteraction::getAtom2Index, python::arg("self"))
-		.def("getBondTypeIndex", &ForceField::MMFF94BondStretchingInteraction::getBondTypeIndex, python::arg("self"))
-		.def("getForceConstant", &ForceField::MMFF94BondStretchingInteraction::getForceConstant, python::arg("self"))
-		.def("getReferenceLength", &ForceField::MMFF94BondStretchingInteraction::getReferenceLength, python::arg("self"))
-		.def("setReferenceLength", &ForceField::MMFF94BondStretchingInteraction::setReferenceLength, 
-			 (python::arg("self"), python::arg("length")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingInteraction::operator=),
-			 (python::arg("self"), python::arg("iactn")), python::return_self<>())
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingInteraction>())
-		.add_property("atom1Index", &ForceField::MMFF94BondStretchingInteraction::getAtom1Index) 
-		.add_property("atom2Index", &ForceField::MMFF94BondStretchingInteraction::getAtom2Index)
-		.add_property("bondTypeIndex", &ForceField::MMFF94BondStretchingInteraction::getBondTypeIndex)
-		.add_property("forceConstant", &ForceField::MMFF94BondStretchingInteraction::getForceConstant)
-		.add_property("referenceLength", &ForceField::MMFF94BondStretchingInteraction::getReferenceLength,
-					  &ForceField::MMFF94BondStretchingInteraction::setReferenceLength);
+        .def(python::init<const ForceField::MMFF94BondStretchingInteraction&>((python::arg("self"), python::arg("iactn"))))
+        .def(python::init<std::size_t, std::size_t, unsigned int, double, double>(
+                 (python::arg("self"), python::arg("atom1_idx"), python::arg("atom2_idx"), python::arg("bond_type_idx"),
+                  python::arg("force_const"), python::arg("ref_length"))))
+        .def("getAtom1Index", &ForceField::MMFF94BondStretchingInteraction::getAtom1Index, python::arg("self"))
+        .def("getAtom2Index", &ForceField::MMFF94BondStretchingInteraction::getAtom2Index, python::arg("self"))
+        .def("getBondTypeIndex", &ForceField::MMFF94BondStretchingInteraction::getBondTypeIndex, python::arg("self"))
+        .def("getForceConstant", &ForceField::MMFF94BondStretchingInteraction::getForceConstant, python::arg("self"))
+        .def("getReferenceLength", &ForceField::MMFF94BondStretchingInteraction::getReferenceLength, python::arg("self"))
+        .def("setReferenceLength", &ForceField::MMFF94BondStretchingInteraction::setReferenceLength, 
+             (python::arg("self"), python::arg("length")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingInteraction::operator=),
+             (python::arg("self"), python::arg("iactn")), python::return_self<>())
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingInteraction>())
+        .add_property("atom1Index", &ForceField::MMFF94BondStretchingInteraction::getAtom1Index) 
+        .add_property("atom2Index", &ForceField::MMFF94BondStretchingInteraction::getAtom2Index)
+        .add_property("bondTypeIndex", &ForceField::MMFF94BondStretchingInteraction::getBondTypeIndex)
+        .add_property("forceConstant", &ForceField::MMFF94BondStretchingInteraction::getForceConstant)
+        .add_property("referenceLength", &ForceField::MMFF94BondStretchingInteraction::getReferenceLength,
+                      &ForceField::MMFF94BondStretchingInteraction::setReferenceLength);
 }

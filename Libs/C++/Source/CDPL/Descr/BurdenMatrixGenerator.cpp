@@ -36,87 +36,87 @@ using namespace CDPL;
 
 
 Descr::BurdenMatrixGenerator::BurdenMatrixGenerator(): 
-	atomWeightFunc(&Chem::getType) {}
+    atomWeightFunc(&Chem::getType) {}
 
 Descr::BurdenMatrixGenerator::BurdenMatrixGenerator(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx): 
-	atomWeightFunc(&Chem::getType)
+    atomWeightFunc(&Chem::getType)
 {
-	generate(molgraph, mtx);
+    generate(molgraph, mtx);
 }
 
 void Descr::BurdenMatrixGenerator::generate(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	mtx = Math::ScalarMatrix<double>(num_atoms, num_atoms, 0.001);
+    mtx = Math::ScalarMatrix<double>(num_atoms, num_atoms, 0.001);
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		std::size_t atom_idx = molgraph.getAtomIndex(atom);
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
+        std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
-		mtx(atom_idx, atom_idx) = atomWeightFunc(atom);
-	}
+        mtx(atom_idx, atom_idx) = atomWeightFunc(atom);
+    }
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom* atoms[2];
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom* atoms[2];
 
-		atoms[0] = &bond.getBegin();
+        atoms[0] = &bond.getBegin();
 
-		if (!molgraph.containsAtom(*atoms[0]))
-			continue;
+        if (!molgraph.containsAtom(*atoms[0]))
+            continue;
 
-		atoms[1] = &bond.getEnd();
+        atoms[1] = &bond.getEnd();
 
-		if (!molgraph.containsAtom(*atoms[1]))
-			continue;
+        if (!molgraph.containsAtom(*atoms[1]))
+            continue;
 
-		std::size_t atom_idx1 = molgraph.getAtomIndex(*atoms[0]);
-		std::size_t atom_idx2 = molgraph.getAtomIndex(*atoms[1]);
+        std::size_t atom_idx1 = molgraph.getAtomIndex(*atoms[0]);
+        std::size_t atom_idx2 = molgraph.getAtomIndex(*atoms[1]);
 
-		double bond_val;
+        double bond_val;
 
-		if (getAromaticityFlag(bond)) 
-			bond_val = 0.15;
+        if (getAromaticityFlag(bond)) 
+            bond_val = 0.15;
 
-		else
-			switch (getOrder(bond)) {
+        else
+            switch (getOrder(bond)) {
 
-				case 1:
-					bond_val = 0.1;
-					break;
+                case 1:
+                    bond_val = 0.1;
+                    break;
 
-				case 2:
-					bond_val = 0.2;
-					break;
+                case 2:
+                    bond_val = 0.2;
+                    break;
 
-				case 3:
-					bond_val = 0.3;
-					break;
-					
-				default:
-					continue;
-			}
-		
-		for (std::size_t i = 0; i < 2; i++) {
-			if (MolProp::getExplicitBondCount(*atoms[i], molgraph) == 1) {
-				bond_val += 0.01;
-				break;
-			}
-		}
+                case 3:
+                    bond_val = 0.3;
+                    break;
+                    
+                default:
+                    continue;
+            }
+        
+        for (std::size_t i = 0; i < 2; i++) {
+            if (MolProp::getExplicitBondCount(*atoms[i], molgraph) == 1) {
+                bond_val += 0.01;
+                break;
+            }
+        }
 
-		mtx(atom_idx2, atom_idx1) = bond_val;
-		mtx(atom_idx1, atom_idx2) = bond_val;
-	}
+        mtx(atom_idx2, atom_idx1) = bond_val;
+        mtx(atom_idx1, atom_idx2) = bond_val;
+    }
 }
 
 void Descr::BurdenMatrixGenerator::setAtomWeightFunction(const AtomWeightFunction& func)
 {
-	atomWeightFunc = func;
+    atomWeightFunc = func;
 }

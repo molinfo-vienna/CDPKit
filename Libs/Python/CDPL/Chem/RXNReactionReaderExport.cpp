@@ -31,11 +31,11 @@
 
 void CDPLPythonChem::exportRXNReactionReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::RXNReactionReader, python::bases<Base::DataReader<Chem::Reaction> >, 
-		boost::noncopyable>("RXNReactionReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::RXNReactionReader, python::bases<Base::DataReader<Chem::Reaction> >, 
+        boost::noncopyable>("RXNReactionReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 }

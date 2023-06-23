@@ -39,104 +39,104 @@
 
 BOOST_AUTO_TEST_CASE(AtomIsOrdinaryHydrogenFunctionTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace MolProp;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace MolProp;
 
-	BasicMolecule mol;
+    BasicMolecule mol;
 
-	Atom& atom1 = mol.addAtom();
-	Atom& atom2 = mol.addAtom();
-	Bond& bond = mol.addBond(0, 1);
+    Atom& atom1 = mol.addAtom();
+    Atom& atom2 = mol.addAtom();
+    Bond& bond = mol.addBond(0, 1);
 
-	setOrder(bond, 1);
-	calcImplicitHydrogenCounts(mol, false);
-	
+    setOrder(bond, 1);
+    calcImplicitHydrogenCounts(mol, false);
+    
 //------
 
-	setType(atom1, AtomType::H);
+    setType(atom1, AtomType::H);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom1, mol));
+    BOOST_CHECK(isOrdinaryHydrogen(atom1, mol));
 
-	setIsotope(atom1, 1);
+    setIsotope(atom1, 1);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom1, mol, AtomPropertyFlag::ISOTOPE));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom1, mol, AtomPropertyFlag::ISOTOPE));
 
-	setType(atom1, AtomType::X);
+    setType(atom1, AtomType::X);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom1, mol));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom1, mol));
 
-	setType(atom1, AtomType::UNKNOWN);
+    setType(atom1, AtomType::UNKNOWN);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
 
-	setType(atom2, AtomType::H);
+    setType(atom2, AtomType::H);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
 
-	setType(atom2, AtomType::Cl);
+    setType(atom2, AtomType::Cl);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
 
-	setType(atom2, AtomType::H);
+    setType(atom2, AtomType::H);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
-	
-	setFormalCharge(atom2, -1);
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    
+    setFormalCharge(atom2, -1);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
 
-	setFormalCharge(atom2, 1);
+    setFormalCharge(atom2, 1);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
 
-	setFormalCharge(atom2, 0);
+    setFormalCharge(atom2, 0);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
 
-	//------
+    //------
 
-	setOrder(bond, 2);
+    setOrder(bond, 2);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
 
-	setOrder(bond, 1);
+    setOrder(bond, 1);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
 
-	set2DStereoFlag(bond, BondStereoFlag::UP);
+    set2DStereoFlag(bond, BondStereoFlag::UP);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::CONFIGURATION));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::CONFIGURATION));
 
-	set2DStereoFlag(bond, BondStereoFlag::PLAIN);
+    set2DStereoFlag(bond, BondStereoFlag::PLAIN);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::CONFIGURATION));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::CONFIGURATION));
 
-	set2DStereoFlag(bond, BondStereoFlag::PLAIN);
+    set2DStereoFlag(bond, BondStereoFlag::PLAIN);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::CONFIGURATION));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::CONFIGURATION));
 
-	//------
+    //------
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
 
-	setAtomMappingID(atom1, 0);
+    setAtomMappingID(atom1, 0);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
 
-	setAtomMappingID(atom1, 1);
+    setAtomMappingID(atom1, 1);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
 
-	setAtomMappingID(atom2, 0);
+    setAtomMappingID(atom2, 0);
 
-	BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
+    BOOST_CHECK(isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
 
-	setAtomMappingID(atom2, 1);
+    setAtomMappingID(atom2, 1);
 
-	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
+    BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
 }

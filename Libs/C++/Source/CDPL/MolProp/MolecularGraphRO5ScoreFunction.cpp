@@ -33,19 +33,19 @@ using namespace CDPL;
 
 std::size_t MolProp::getRuleOfFiveScore(const Chem::MolecularGraph& molgraph)
 {
-	std::size_t score = 0;
+    std::size_t score = 0;
 
-	if (getHBondDonorAtomCount(molgraph) <= 5)
-		score++;
+    if (getHBondDonorAtomCount(molgraph) <= 5)
+        score++;
 
-	if (getHBondAcceptorAtomCount(molgraph) <= 10)
-		score++;
+    if (getHBondAcceptorAtomCount(molgraph) <= 10)
+        score++;
 
-	if (calcXLogP(molgraph) <= 5.0)
-		score++;
+    if (calcXLogP(molgraph) <= 5.0)
+        score++;
 
-	if (calcMass(molgraph) <= 500.0)
-		score++;
+    if (calcMass(molgraph) <= 500.0)
+        score++;
 
-	return score;
+    return score;
 }

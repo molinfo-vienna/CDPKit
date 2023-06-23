@@ -33,47 +33,47 @@
 namespace CDPL 
 {
 
-	namespace MolProp 
-	{
+    namespace MolProp 
+    {
 
-		namespace AtomicHybridPolarizability
-		{
+        namespace AtomicHybridPolarizability
+        {
 
-			const double H          = 0.387;
+            const double H          = 0.387;
 
-			const double F          = 0.296;
-			const double Cl         = 2.315;
-			const double Br         = 3.013;
-			const double I          = 5.415;
+            const double F          = 0.296;
+            const double Cl         = 2.315;
+            const double Br         = 3.013;
+            const double I          = 5.415;
 
-			const double CTE        = 1.061;
-			const double CTR        = 1.352;
-			const double CBR        = 1.896;
-			const double CDI        = 1.283;
-			const double C_DEFAULT  = (CTE + CTR + CBR + CDI) * 0.25;
+            const double CTE        = 1.061;
+            const double CTR        = 1.352;
+            const double CBR        = 1.896;
+            const double CDI        = 1.283;
+            const double C_DEFAULT  = (CTE + CTR + CBR + CDI) * 0.25;
 
-			const double NTE        = 0.964;
-			const double NTR2       = 1.030;
-			const double NPI2       = 1.090;
-			const double NDI        = 0.956;
-			const double N_DEFAULT  = (NTE + NTR2 + NPI2 + NDI) * 0.25;
+            const double NTE        = 0.964;
+            const double NTR2       = 1.030;
+            const double NPI2       = 1.090;
+            const double NDI        = 0.956;
+            const double N_DEFAULT  = (NTE + NTR2 + NPI2 + NDI) * 0.25;
 
-			const double OTE        = 0.637;
-			const double OTR4       = 0.569;
-			const double OPI2       = 0.274;
-			const double O_DEFAULT  = (OTE + OTR4 + OPI2) / 3.0;
+            const double OTE        = 0.637;
+            const double OTR4       = 0.569;
+            const double OPI2       = 0.274;
+            const double O_DEFAULT  = (OTE + OTR4 + OPI2) / 3.0;
 
-			const double STE        = 3.000;
-			const double STR4       = 3.729;
-			const double SPI2       = 2.700;
-			const double S_DEFAULT  = STE;
+            const double STE        = 3.000;
+            const double STR4       = 3.729;
+            const double SPI2       = 2.700;
+            const double S_DEFAULT  = STE;
 
-			const double PTE        = 1.538;
+            const double PTE        = 1.538;
 
-			const double DEFAULT    = (H + F + Cl + Br + I + C_DEFAULT 
-									   + N_DEFAULT + O_DEFAULT + S_DEFAULT + PTE) / 10.0;
-		}
-	}
+            const double DEFAULT    = (H + F + Cl + Br + I + C_DEFAULT 
+                                       + N_DEFAULT + O_DEFAULT + S_DEFAULT + PTE) / 10.0;
+        }
+    }
 }
 
 #endif // CDPL_MOLPROP_ATOMICHYBRIDPOLARIZABILITIES_HPP

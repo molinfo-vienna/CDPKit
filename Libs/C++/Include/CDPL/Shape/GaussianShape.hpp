@@ -44,101 +44,101 @@ namespace CDPL
     namespace Shape
     {
 
-		/**
-		 * \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
-		 */
-		class CDPL_SHAPE_API GaussianShape : public Base::PropertyContainer
-		{
+        /**
+         * \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
+         */
+        class CDPL_SHAPE_API GaussianShape : public Base::PropertyContainer
+        {
 
-		  public:
-			class Element
-			{
+          public:
+            class Element
+            {
 
-			public:
-				Element(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7):
-					position(pos), radius(radius), hardness(hardness), color(color) {}
+            public:
+                Element(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7):
+                    position(pos), radius(radius), hardness(hardness), color(color) {}
 
-				const Math::Vector3D& getPosition() const {
-					return position;
-				}
+                const Math::Vector3D& getPosition() const {
+                    return position;
+                }
 
-				void setPosition(const Math::Vector3D& pos) {
-					position = pos;
-				}
-		
-				double getRadius() const {
-					return radius;
-				}
+                void setPosition(const Math::Vector3D& pos) {
+                    position = pos;
+                }
+        
+                double getRadius() const {
+                    return radius;
+                }
 
-				void setRadius(double radius) {
-					this->radius = radius;
-				}
-		
-				std::size_t getColor() const {
-					return color;
-				}
+                void setRadius(double radius) {
+                    this->radius = radius;
+                }
+        
+                std::size_t getColor() const {
+                    return color;
+                }
 
-				void setColor(std::size_t color) {
-					this->color = color;
-				}
-		
-				double getHardness() const {
-					return hardness;
-				}
+                void setColor(std::size_t color) {
+                    this->color = color;
+                }
+        
+                double getHardness() const {
+                    return hardness;
+                }
 
-				void setHardness(double hardness) {
-					this->hardness = hardness;
-				}
-		
-			private:
-				Math::Vector3D position;
-				double         radius;
-				double         hardness;
-				std::size_t    color;
-			};
-	    
-		  private:
-			typedef std::vector<Element> ElementList;
+                void setHardness(double hardness) {
+                    this->hardness = hardness;
+                }
+        
+            private:
+                Math::Vector3D position;
+                double         radius;
+                double         hardness;
+                std::size_t    color;
+            };
+        
+          private:
+            typedef std::vector<Element> ElementList;
 
-		  public:
-			typedef std::shared_ptr<GaussianShape> SharedPointer;
+          public:
+            typedef std::shared_ptr<GaussianShape> SharedPointer;
 
-			typedef ElementList::const_iterator ConstElementIterator;
-			typedef ElementList::iterator ElementIterator;
-		    
-			void clear();
+            typedef ElementList::const_iterator ConstElementIterator;
+            typedef ElementList::iterator ElementIterator;
+            
+            void clear();
 
-			std::size_t getNumElements() const;
-	    
-			void addElement(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7);
+            std::size_t getNumElements() const;
+        
+            void addElement(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7);
 
-			void addElement(const Element& elem);
+            void addElement(const Element& elem);
 
-			void removeElement(std::size_t idx);
-	    
-			const Element& getElement(std::size_t idx) const;
+            void removeElement(std::size_t idx);
+        
+            const Element& getElement(std::size_t idx) const;
 
-			Element& getElement(std::size_t idx);
+            Element& getElement(std::size_t idx);
 
-			ConstElementIterator getElementsBegin() const;
+            ConstElementIterator getElementsBegin() const;
 
-			ConstElementIterator getElementsEnd() const;
+            ConstElementIterator getElementsEnd() const;
 
-			ElementIterator getElementsBegin();
+            ElementIterator getElementsBegin();
 
-			ElementIterator getElementsEnd();
+            ElementIterator getElementsEnd();
 
-			ConstElementIterator begin() const;
+            ConstElementIterator begin() const;
 
-			ConstElementIterator end() const;
+            ConstElementIterator end() const;
 
-			ElementIterator begin();
+            ElementIterator begin();
 
-			ElementIterator end();
-	    
-		  private:
-			ElementList elements;
-		};
+            ElementIterator end();
+        
+          private:
+            ElementList elements;
+        };
     }
 }
 

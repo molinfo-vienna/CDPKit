@@ -38,18 +38,18 @@ Pharm::FeatureGenerator::FeatureGenerator(const FeatureGenerator& gen): coordsFu
 
 void Pharm::FeatureGenerator::setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func)
 {
-	coordsFunc = func;
+    coordsFunc = func;
 }
 
 const Chem::Atom3DCoordinatesFunction& Pharm::FeatureGenerator::getAtom3DCoordinatesFunction() const
 {
-	return coordsFunc;
+    return coordsFunc;
 }
 
 Pharm::FeatureGenerator& Pharm::FeatureGenerator::operator=(const FeatureGenerator& gen)
 {
-	if (this != &gen)
-		coordsFunc = gen.coordsFunc;
+    if (this != &gen)
+        coordsFunc = gen.coordsFunc;
 
-	return *this;
+    return *this;
 }

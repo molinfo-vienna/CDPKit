@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data from conformer generator fragment libraries.
-		 */
-		typedef Util::DefaultDataInputHandler<CFLMoleculeReader, DataFormat::CFL> CFLMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data from conformer generator fragment libraries.
+         */
+        typedef Util::DefaultDataInputHandler<CFLMoleculeReader, DataFormat::CFL> CFLMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CONFGEN_CFLMOLECULEINPUTHANDLER_HPP

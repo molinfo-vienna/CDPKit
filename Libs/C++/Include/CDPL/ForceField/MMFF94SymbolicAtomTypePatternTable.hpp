@@ -45,82 +45,82 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94SymbolicAtomTypePatternTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94SymbolicAtomTypePatternTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::vector<Entry> DataStorage;
+          private:
+            typedef std::vector<Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94SymbolicAtomTypePatternTable> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94SymbolicAtomTypePatternTable> SharedPointer;
 
-			typedef DataStorage::const_iterator ConstEntryIterator;
-			typedef DataStorage::iterator EntryIterator;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+            typedef DataStorage::const_iterator ConstEntryIterator;
+            typedef DataStorage::iterator EntryIterator;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
+              public:
+                Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
 
-				bool isFallbackType() const;
+                bool isFallbackType() const;
 
-				const Chem::MolecularGraph::SharedPointer& getPattern() const;
+                const Chem::MolecularGraph::SharedPointer& getPattern() const;
 
-				const std::string& getSymbolicType() const;
+                const std::string& getSymbolicType() const;
 
-			  private:
-				Chem::MolecularGraph::SharedPointer pattern;
-				std::string                         symType;
-				bool                                fallback;
-			};			
+              private:
+                Chem::MolecularGraph::SharedPointer pattern;
+                std::string                         symType;
+                bool                                fallback;
+            };            
 
-			MMFF94SymbolicAtomTypePatternTable();
+            MMFF94SymbolicAtomTypePatternTable();
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void addEntry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
+            void addEntry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
 
-			const Entry& getEntry(std::size_t idx) const;
+            const Entry& getEntry(std::size_t idx) const;
 
-			void clear();
+            void clear();
 
-			void removeEntry(std::size_t idx);
+            void removeEntry(std::size_t idx);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
-	}
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
+    }
 }
 
 #endif // CDPL_FORCEFIELD_MMFF94SYMBOLICATOMTYPEPATTERNTABLE_HPP

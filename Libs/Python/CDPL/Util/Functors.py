@@ -24,22 +24,22 @@
 
 class PropertyValue(object):
 
-	def __init__(self, key):
-		"__init__(PropertyValue self, PropertyKey key) -> None :"	
-		self.key = key
+    def __init__(self, key):
+        "__init__(PropertyValue self, PropertyKey key) -> None :"    
+        self.key = key
 
-	def __call__(self, cntnr):
-		"__call__(PropertyValue self, PropertyContainer cntnr) -> object :"	
-		return cntnr[self.key]
+    def __call__(self, cntnr):
+        "__call__(PropertyValue self, PropertyContainer cntnr) -> object :"    
+        return cntnr[self.key]
 
 
 class PropertyValueProduct(object):
 
-	def __init__(self, key):
-		"__init__(PropertyValueProduct self, PropertyKey key) -> None :"	
-		self.key = key
+    def __init__(self, key):
+        "__init__(PropertyValueProduct self, PropertyKey key) -> None :"    
+        self.key = key
 
-	def __call__(self, cntnr1, cntnr2):
-		"__call__(PropertyValueProduct self, PropertyContainer cntnr1, PropertyContainer cntnr2) -> object :"	
-		return cntnr1[self.key] * cntnr2[self.key]
+    def __call__(self, cntnr1, cntnr2):
+        "__call__(PropertyValueProduct self, PropertyContainer cntnr1, PropertyContainer cntnr2) -> object :"    
+        return cntnr1[self.key] * cntnr2[self.key]
 

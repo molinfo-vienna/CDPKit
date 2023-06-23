@@ -38,44 +38,44 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphAromaticBondCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::AROMATIC_BOND_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::AROMATIC_BOND_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::AROMATIC_BOND_COUNT) == 6);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(mol, MolecularGraphProperty::AROMATIC_BOND_COUNT, mol, MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	Fragment frag(mol);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(frag.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::AROMATIC_BOND_COUNT) == 6);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
 
-	TestUtils::checkDependency(frag, MolecularGraphProperty::AROMATIC_BOND_COUNT, frag, MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::AROMATIC_BOND_COUNT) == 6);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::AROMATIC_BOND_COUNT, mol, MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
+
+//-----
+
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::AROMATIC_BOND_COUNT) == 6);
+
+    BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::AROMATIC_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(frag, MolecularGraphProperty::AROMATIC_BOND_COUNT, frag, MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
 }

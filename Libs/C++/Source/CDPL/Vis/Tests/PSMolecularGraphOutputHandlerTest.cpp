@@ -40,39 +40,39 @@
 
 BOOST_AUTO_TEST_CASE(PSMolecularGraphOutputHandlerTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Vis;
+    using namespace Chem;
+    using namespace Base;
 
-	const DataOutputHandler<MolecularGraph>::SharedPointer handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::PS);
+    const DataOutputHandler<MolecularGraph>::SharedPointer handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::PS);
 
-	BOOST_CHECK(handler);
+    BOOST_CHECK(handler);
 
-	BOOST_CHECK(handler->getDataFormat() == Vis::DataFormat::PS);
+    BOOST_CHECK(handler->getDataFormat() == Vis::DataFormat::PS);
 
-	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByName("ps") == handler);
-	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("application/postscript") == handler);
-	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("eps") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByName("ps") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("application/postscript") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("eps") == handler);
 
-	std::fstream os("PSMolecularGraphOutputHandlerTest.ps", 
-					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    std::fstream os("PSMolecularGraphOutputHandlerTest.ps", 
+                     std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
+    BOOST_CHECK(os);
 
-	DataWriter<MolecularGraph>::SharedPointer writer_ptr(handler->createWriter(os));
+    DataWriter<MolecularGraph>::SharedPointer writer_ptr(handler->createWriter(os));
 
-	BOOST_CHECK(writer_ptr);
+    BOOST_CHECK(writer_ptr);
 
-	BasicMolecule mol;
+    BasicMolecule mol;
 
-	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestMolData.jme").c_str());
+    std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestMolData.jme").c_str());
 
-	BOOST_CHECK(is);
-	BOOST_CHECK(JMEMoleculeReader(is).read(mol));
+    BOOST_CHECK(is);
+    BOOST_CHECK(JMEMoleculeReader(is).read(mol));
 
-	initMolecule(mol);
+    initMolecule(mol);
 
-	BOOST_CHECK(writer_ptr->write(mol));
+    BOOST_CHECK(writer_ptr->write(mol));
 }
 

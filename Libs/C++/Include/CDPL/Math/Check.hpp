@@ -33,10 +33,10 @@
 #  ifdef CDPL_MATH_CHECKS_DISABLE
 #    define CDPL_MATH_CHECK(expr, msg, e)
 #  else // !CDPL_MATH_CHECKS_DISABLE
-#    define CDPL_MATH_CHECK(expr, msg, e)	 \
-	   if (!(expr)) {						 \
-		   throw e(msg);					 \
-	   }
+#    define CDPL_MATH_CHECK(expr, msg, e)     \
+       if (!(expr)) {                         \
+           throw e(msg);                     \
+       }
 #  endif // CDPL_MATH_CHECKS_DISABLE
 #endif // !CDPL_MATH_CHECK
 
@@ -44,19 +44,19 @@
 namespace
 {
 
-	template <typename E, typename T>
-	T checkSizeEquality(const T& size1, const T& size2)
-	{
-		CDPL_MATH_CHECK(size1 == size2, "Size mismatch", E);
-		return std::min(size1, size2);
-	}
+    template <typename E, typename T>
+    T checkSizeEquality(const T& size1, const T& size2)
+    {
+        CDPL_MATH_CHECK(size1 == size2, "Size mismatch", E);
+        return std::min(size1, size2);
+    }
 
-	template <typename E, typename T>
-	T checkMaxSize(const T& size, const T& max_size)
-	{
-		CDPL_MATH_CHECK(size <= max_size, "Max. size exceeded", E);
-		return std::min(size, max_size);
-	}
+    template <typename E, typename T>
+    T checkMaxSize(const T& size, const T& max_size)
+    {
+        CDPL_MATH_CHECK(size <= max_size, "Max. size exceeded", E);
+        return std::min(size, max_size);
+    }
 }
 
 #define CDPL_MATH_CHECK_SIZE_EQUALITY(size1, size2, e) checkSizeEquality<e>(size1, size2)

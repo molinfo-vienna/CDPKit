@@ -38,19 +38,19 @@ void CDPLPythonForceField::exportMMFF94BondTyper()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94BondTyper>("MMFF94BondTyper", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94BondTyper&>((python::arg("self"), python::arg("typer"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondTyper>())	
-		.def("setAtomTypeFunction", &ForceField::MMFF94BondTyper::setAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAromaticRingSetFunction", &ForceField::MMFF94BondTyper::setAromaticRingSetFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94BondTyper::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondTyper::operator=),
-			 (python::arg("self"), python::arg("typer")), python::return_self<>())
-		.def("perceiveTypes", &ForceField::MMFF94BondTyper::perceiveTypes, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict")));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94BondTyper&>((python::arg("self"), python::arg("typer"))))
+        .def(python::init<const Chem::MolecularGraph&, Util::UIArray&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondTyper>())    
+        .def("setAtomTypeFunction", &ForceField::MMFF94BondTyper::setAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAromaticRingSetFunction", &ForceField::MMFF94BondTyper::setAromaticRingSetFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94BondTyper::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondTyper::operator=),
+             (python::arg("self"), python::arg("typer")), python::return_self<>())
+        .def("perceiveTypes", &ForceField::MMFF94BondTyper::perceiveTypes, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict")));
 }

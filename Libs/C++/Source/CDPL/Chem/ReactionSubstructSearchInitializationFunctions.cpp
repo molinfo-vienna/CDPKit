@@ -37,19 +37,19 @@ using namespace CDPL;
 
 void Chem::initSubstructureSearchQuery(Reaction& rxn, bool overwrite)
 {
-	perceiveComponentGroups(rxn, overwrite);
-	perceiveAtomMapping(rxn, overwrite);
+    perceiveComponentGroups(rxn, overwrite);
+    perceiveAtomMapping(rxn, overwrite);
 
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchQuery),
-							std::placeholders::_1, overwrite));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchQuery),
+                            std::placeholders::_1, overwrite));
 
-	buildMatchExpressions(rxn ,overwrite);
+    buildMatchExpressions(rxn ,overwrite);
 }
 
 void Chem::initSubstructureSearchTarget(Reaction& rxn, bool overwrite)
 {
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchTarget),
-							std::placeholders::_1, overwrite));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchTarget),
+                            std::placeholders::_1, overwrite));
 }

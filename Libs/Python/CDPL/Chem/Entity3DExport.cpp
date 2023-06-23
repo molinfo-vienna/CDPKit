@@ -46,6 +46,6 @@ void CDPLPythonChem::exportEntity3D()
     using namespace CDPL;
 
     python::class_<Entity3DWrapper, python::bases<Base::PropertyContainer>, boost::noncopyable>("Entity3D", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
+    .def(python::init<>(python::arg("self")))
+    .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
 }

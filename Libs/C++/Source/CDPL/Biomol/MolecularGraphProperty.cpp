@@ -31,21 +31,21 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		namespace MolecularGraphProperty
-		{
+        namespace MolecularGraphProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(RESIDUE_CODE);
-			CDPL_DEFINE_LOOKUP_KEY(RESIDUE_SEQUENCE_NUMBER);
-			CDPL_DEFINE_LOOKUP_KEY(RESIDUE_INSERTION_CODE);
+            CDPL_DEFINE_LOOKUP_KEY(RESIDUE_CODE);
+            CDPL_DEFINE_LOOKUP_KEY(RESIDUE_SEQUENCE_NUMBER);
+            CDPL_DEFINE_LOOKUP_KEY(RESIDUE_INSERTION_CODE);
 
-			CDPL_DEFINE_LOOKUP_KEY(CHAIN_ID);
-			CDPL_DEFINE_LOOKUP_KEY(MODEL_NUMBER);
-			CDPL_DEFINE_LOOKUP_KEY(PDB_DATA);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(CHAIN_ID);
+            CDPL_DEFINE_LOOKUP_KEY(MODEL_NUMBER);
+            CDPL_DEFINE_LOOKUP_KEY(PDB_DATA);
+        }
 
-		void initMolecularGraphProperties() {}
-	}
+        void initMolecularGraphProperties() {}
+    }
 }

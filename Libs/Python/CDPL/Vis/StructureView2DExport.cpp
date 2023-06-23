@@ -34,25 +34,25 @@
 
 void CDPLPythonVis::exportStructureView2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::StructureView2D, 
-		python::bases<Vis::View2D>, boost::noncopyable>("StructureView2D", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph*>((python::arg("self"), python::arg("molgraph")))[python::with_custodian_and_ward<1, 2>()])
-		.def("setStructure", &Vis::StructureView2D::setStructure, (python::arg("self"), python::arg("molgraph")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("getStructure", &Vis::StructureView2D::getStructure, python::arg("self"),
-			 python::return_internal_reference<1>())
-		.def("getFontMetrics", &Vis::StructureView2D::getFontMetrics, python::arg("self"),
-			 python::return_internal_reference<1>())
-		.add_property("structure", python::make_function(&Vis::StructureView2D::getStructure,
-														 python::return_internal_reference<1>()),
-					  python::make_function(&Vis::StructureView2D::setStructure, 
-											python::with_custodian_and_ward<1, 2>()))
-		.add_property("fontMetrics", python::make_function(&Vis::StructureView2D::getFontMetrics,
-														   python::return_internal_reference<1>()),
-					  python::make_function(&Vis::StructureView2D::setFontMetrics,	 
-											python::with_custodian_and_ward<1, 2>()));
+    python::class_<Vis::StructureView2D, 
+        python::bases<Vis::View2D>, boost::noncopyable>("StructureView2D", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph*>((python::arg("self"), python::arg("molgraph")))[python::with_custodian_and_ward<1, 2>()])
+        .def("setStructure", &Vis::StructureView2D::setStructure, (python::arg("self"), python::arg("molgraph")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("getStructure", &Vis::StructureView2D::getStructure, python::arg("self"),
+             python::return_internal_reference<1>())
+        .def("getFontMetrics", &Vis::StructureView2D::getFontMetrics, python::arg("self"),
+             python::return_internal_reference<1>())
+        .add_property("structure", python::make_function(&Vis::StructureView2D::getStructure,
+                                                         python::return_internal_reference<1>()),
+                      python::make_function(&Vis::StructureView2D::setStructure, 
+                                            python::with_custodian_and_ward<1, 2>()))
+        .add_property("fontMetrics", python::make_function(&Vis::StructureView2D::getFontMetrics,
+                                                           python::return_internal_reference<1>()),
+                      python::make_function(&Vis::StructureView2D::setFontMetrics,     
+                                            python::with_custodian_and_ward<1, 2>()));
 }

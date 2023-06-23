@@ -29,8 +29,8 @@
 
 BOOST_AUTO_TEST_CASE(IndirectArrayTest)
 {
-	using namespace CDPL;
-	using namespace Util;
+    using namespace CDPL;
+    using namespace Util;
 
 }
 

@@ -40,96 +40,96 @@ namespace CDPL
     namespace Pharm 
     {
 
-		class Feature;
-	
-		CDPL_PHARM_API unsigned int getType(const Feature& feature);
+        class Feature;
+    
+        CDPL_PHARM_API unsigned int getType(const Feature& feature);
 
-		CDPL_PHARM_API void setType(Feature& feature, unsigned int type);
+        CDPL_PHARM_API void setType(Feature& feature, unsigned int type);
 
-		CDPL_PHARM_API void clearType(Feature& feature);
+        CDPL_PHARM_API void clearType(Feature& feature);
 
-		CDPL_PHARM_API bool hasType(const Feature& feature);
-
-
-		CDPL_PHARM_API unsigned int getGeometry(const Feature& feature);
-
-		CDPL_PHARM_API void setGeometry(Feature& feature, unsigned int geom);
-
-		CDPL_PHARM_API void clearGeometry(Feature& feature);
-
-		CDPL_PHARM_API bool hasGeometry(const Feature& feature);
-
-		
-		CDPL_PHARM_API const Math::Vector3D& getOrientation(const Feature& feature);
-
-		CDPL_PHARM_API void setOrientation(Feature& feature, const Math::Vector3D& orient);
-
-		CDPL_PHARM_API void clearOrientation(Feature& feature);
-	
-		CDPL_PHARM_API bool hasOrientation(const Feature& feature);
+        CDPL_PHARM_API bool hasType(const Feature& feature);
 
 
-		CDPL_PHARM_API double getLength(const Feature& feature);
+        CDPL_PHARM_API unsigned int getGeometry(const Feature& feature);
 
-		CDPL_PHARM_API void setLength(Feature& feature, double length);
+        CDPL_PHARM_API void setGeometry(Feature& feature, unsigned int geom);
 
-		CDPL_PHARM_API void clearLength(Feature& feature);
+        CDPL_PHARM_API void clearGeometry(Feature& feature);
 
-		CDPL_PHARM_API bool hasLength(const Feature& feature);
+        CDPL_PHARM_API bool hasGeometry(const Feature& feature);
 
+        
+        CDPL_PHARM_API const Math::Vector3D& getOrientation(const Feature& feature);
 
-		CDPL_PHARM_API double getTolerance(const Feature& feature);
+        CDPL_PHARM_API void setOrientation(Feature& feature, const Math::Vector3D& orient);
 
-		CDPL_PHARM_API void setTolerance(Feature& feature, double tol);
-
-		CDPL_PHARM_API void clearTolerance(Feature& feature);
-
-		CDPL_PHARM_API bool hasTolerance(const Feature& feature);
-
-
-		CDPL_PHARM_API double getWeight(const Feature& feature);
-
-		CDPL_PHARM_API void setWeight(Feature& feature, double weight);
-
-		CDPL_PHARM_API void clearWeight(Feature& feature);
-
-		CDPL_PHARM_API bool hasWeight(const Feature& feature);
+        CDPL_PHARM_API void clearOrientation(Feature& feature);
+    
+        CDPL_PHARM_API bool hasOrientation(const Feature& feature);
 
 
-		CDPL_PHARM_API const Chem::Fragment::SharedPointer& getSubstructure(const Feature& feature);
+        CDPL_PHARM_API double getLength(const Feature& feature);
 
-		CDPL_PHARM_API void setSubstructure(Feature& feature, const Chem::Fragment::SharedPointer& substruct);
+        CDPL_PHARM_API void setLength(Feature& feature, double length);
 
-		CDPL_PHARM_API void clearSubstructure(Feature& feature);
+        CDPL_PHARM_API void clearLength(Feature& feature);
 
-		CDPL_PHARM_API bool hasSubstructure(const Feature& feature);
-
-
-		CDPL_PHARM_API bool getDisabledFlag(const Feature& feature);
-
-		CDPL_PHARM_API void setDisabledFlag(Feature& feature, bool flag);
-
-		CDPL_PHARM_API void clearDisabledFlag(Feature& feature);
-
-		CDPL_PHARM_API bool hasDisabledFlag(const Feature& feature);
+        CDPL_PHARM_API bool hasLength(const Feature& feature);
 
 
-		CDPL_PHARM_API bool getOptionalFlag(const Feature& feature);
+        CDPL_PHARM_API double getTolerance(const Feature& feature);
 
-		CDPL_PHARM_API void setOptionalFlag(Feature& feature, bool flag);
+        CDPL_PHARM_API void setTolerance(Feature& feature, double tol);
 
-		CDPL_PHARM_API void clearOptionalFlag(Feature& feature);
+        CDPL_PHARM_API void clearTolerance(Feature& feature);
 
-		CDPL_PHARM_API bool hasOptionalFlag(const Feature& feature);
+        CDPL_PHARM_API bool hasTolerance(const Feature& feature);
 
-	
-		CDPL_PHARM_API double getHydrophobicity(const Feature& feature);
 
-		CDPL_PHARM_API void setHydrophobicity(Feature& feature, double hyd);
+        CDPL_PHARM_API double getWeight(const Feature& feature);
 
-		CDPL_PHARM_API void clearHydrophobicity(Feature& feature);
+        CDPL_PHARM_API void setWeight(Feature& feature, double weight);
 
-		CDPL_PHARM_API bool hasHydrophobicity(const Feature& feature);
+        CDPL_PHARM_API void clearWeight(Feature& feature);
+
+        CDPL_PHARM_API bool hasWeight(const Feature& feature);
+
+
+        CDPL_PHARM_API const Chem::Fragment::SharedPointer& getSubstructure(const Feature& feature);
+
+        CDPL_PHARM_API void setSubstructure(Feature& feature, const Chem::Fragment::SharedPointer& substruct);
+
+        CDPL_PHARM_API void clearSubstructure(Feature& feature);
+
+        CDPL_PHARM_API bool hasSubstructure(const Feature& feature);
+
+
+        CDPL_PHARM_API bool getDisabledFlag(const Feature& feature);
+
+        CDPL_PHARM_API void setDisabledFlag(Feature& feature, bool flag);
+
+        CDPL_PHARM_API void clearDisabledFlag(Feature& feature);
+
+        CDPL_PHARM_API bool hasDisabledFlag(const Feature& feature);
+
+
+        CDPL_PHARM_API bool getOptionalFlag(const Feature& feature);
+
+        CDPL_PHARM_API void setOptionalFlag(Feature& feature, bool flag);
+
+        CDPL_PHARM_API void clearOptionalFlag(Feature& feature);
+
+        CDPL_PHARM_API bool hasOptionalFlag(const Feature& feature);
+
+    
+        CDPL_PHARM_API double getHydrophobicity(const Feature& feature);
+
+        CDPL_PHARM_API void setHydrophobicity(Feature& feature, double hyd);
+
+        CDPL_PHARM_API void clearHydrophobicity(Feature& feature);
+
+        CDPL_PHARM_API bool hasHydrophobicity(const Feature& feature);
     }
 }
 

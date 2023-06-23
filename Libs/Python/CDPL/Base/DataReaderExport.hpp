@@ -35,114 +35,114 @@
 namespace CDPLPythonBase
 {
 
-	template <typename T>
-	struct DataReaderWrapper : CDPL::Base::DataReader<T>, boost::python::wrapper<CDPL::Base::DataReader<T> >
-	{
+    template <typename T>
+    struct DataReaderWrapper : CDPL::Base::DataReader<T>, boost::python::wrapper<CDPL::Base::DataReader<T> >
+    {
 
-		typedef std::shared_ptr<DataReaderWrapper<T> > SharedPointer;
+        typedef std::shared_ptr<DataReaderWrapper<T> > SharedPointer;
 
-		CDPL::Base::DataReader<T>& read(T& obj, bool overwrite) {
-			this->get_override("read")(boost::ref(obj), overwrite);
+        CDPL::Base::DataReader<T>& read(T& obj, bool overwrite) {
+            this->get_override("read")(boost::ref(obj), overwrite);
 
-			return *this;
-		}
+            return *this;
+        }
 
-		CDPL::Base::DataReader<T>& read(std::size_t idx, T& obj, bool overwrite) {
-			this->get_override("read")(idx, boost::ref(obj), overwrite);
+        CDPL::Base::DataReader<T>& read(std::size_t idx, T& obj, bool overwrite) {
+            this->get_override("read")(idx, boost::ref(obj), overwrite);
 
-			return *this;		
-		}
+            return *this;        
+        }
 
-		CDPL::Base::DataReader<T>& skip() {
-			this->get_override("skip")();
+        CDPL::Base::DataReader<T>& skip() {
+            this->get_override("skip")();
 
-			return *this;
-		}
+            return *this;
+        }
 
-		bool hasMoreData() {
-			return this->get_override("hasMoreData")();
-		}
+        bool hasMoreData() {
+            return this->get_override("hasMoreData")();
+        }
 
-		std::size_t getRecordIndex() const {
-			return this->get_override("getRecordIndex")();
-		}
+        std::size_t getRecordIndex() const {
+            return this->get_override("getRecordIndex")();
+        }
 
-		void setRecordIndex(std::size_t idx) {
-			this->get_override("getRecordIndex")(idx);
-		}
+        void setRecordIndex(std::size_t idx) {
+            this->get_override("getRecordIndex")(idx);
+        }
 
-		std::size_t getNumRecords() {
-			return this->get_override("getNumRecords")();
-		}
-		
-		operator const void*() const {
-			if (boost::python::override f = this->get_override("__nonzero__"))
-				return (f() ? static_cast<const void*>(this) : static_cast<const void*>(0));
+        std::size_t getNumRecords() {
+            return this->get_override("getNumRecords")();
+        }
+        
+        operator const void*() const {
+            if (boost::python::override f = this->get_override("__nonzero__"))
+                return (f() ? static_cast<const void*>(this) : static_cast<const void*>(0));
 
-			if (this->get_override("__bool__")())
-				return this;
+            if (this->get_override("__bool__")())
+                return this;
 
-			return 0;
-		}
+            return 0;
+        }
 
-		bool operator!() const {
-			if (boost::python::override f = this->get_override("__nonzero__"))
-				return !f();
+        bool operator!() const {
+            if (boost::python::override f = this->get_override("__nonzero__"))
+                return !f();
 
-			return !this->get_override("__bool__")();
-		}
+            return !this->get_override("__bool__")();
+        }
 
-		void close() {
-			if (boost::python::override f = this->get_override("close")) {
-				f();                                                      
-				return;                                                   
-			}                                                             
+        void close() {
+            if (boost::python::override f = this->get_override("close")) {
+                f();                                                      
+                return;                                                   
+            }                                                             
                               
-			CDPL::Base::DataReader<T>::close();
-		}
+            CDPL::Base::DataReader<T>::close();
+        }
 
-		void closeDef() {
-			CDPL::Base::DataReader<T>::close();
-		}
-	};
+        void closeDef() {
+            CDPL::Base::DataReader<T>::close();
+        }
+    };
 
-	template <typename T>
-	struct DataReaderExport
-	{
+    template <typename T>
+    struct DataReaderExport
+    {
 
-		DataReaderExport(const char* name, const char* obj_arg_name) {
-			using namespace boost;
-			using namespace CDPL;
+        DataReaderExport(const char* name, const char* obj_arg_name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			typedef Base::DataReader<T> ReaderType;
+            typedef Base::DataReader<T> ReaderType;
 
-			ReaderType& (ReaderType::*readFunc1)(T&, bool) = &ReaderType::read;
-			ReaderType& (ReaderType::*readFunc2)(std::size_t, T&, bool) = &ReaderType::read;
+            ReaderType& (ReaderType::*readFunc1)(T&, bool) = &ReaderType::read;
+            ReaderType& (ReaderType::*readFunc2)(std::size_t, T&, bool) = &ReaderType::read;
 
-			python::class_<DataReaderWrapper<T>, typename DataReaderWrapper<T>::SharedPointer,
-				python::bases<Base::DataIOBase>, boost::noncopyable>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def("read", python::pure_virtual(readFunc1), (python::arg("self"), python::arg(obj_arg_name), python::arg("overwrite") = true), 
-					 python::return_self<>())
-				.def("read", python::pure_virtual(readFunc2), (python::arg("self"), python::arg("idx"), python::arg(obj_arg_name), python::arg("overwrite") = true), 
-					 python::return_self<>())
-				.def("skip", python::pure_virtual(&ReaderType::skip), python::arg("self"), python::return_self<>())
-				.def("hasMoreData", python::pure_virtual(&ReaderType::hasMoreData), python::arg("self"))
-				.def("getRecordIndex", python::pure_virtual(&ReaderType::getRecordIndex), python::arg("self"))
-				.def("setRecordIndex", python::pure_virtual(&ReaderType::setRecordIndex), (python::arg("self"), python::arg("idx")))
-				.def("getNumRecords", python::pure_virtual(&ReaderType::getNumRecords), python::arg("self"))
-				.def("close", &ReaderType::close, &DataReaderWrapper<T>::closeDef, python::arg("self"))
-				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"))
-				.def("__bool__", python::pure_virtual(&nonZero), python::arg("self"))
-				.add_property("numRecords", &ReaderType::getNumRecords);
+            python::class_<DataReaderWrapper<T>, typename DataReaderWrapper<T>::SharedPointer,
+                python::bases<Base::DataIOBase>, boost::noncopyable>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def("read", python::pure_virtual(readFunc1), (python::arg("self"), python::arg(obj_arg_name), python::arg("overwrite") = true), 
+                     python::return_self<>())
+                .def("read", python::pure_virtual(readFunc2), (python::arg("self"), python::arg("idx"), python::arg(obj_arg_name), python::arg("overwrite") = true), 
+                     python::return_self<>())
+                .def("skip", python::pure_virtual(&ReaderType::skip), python::arg("self"), python::return_self<>())
+                .def("hasMoreData", python::pure_virtual(&ReaderType::hasMoreData), python::arg("self"))
+                .def("getRecordIndex", python::pure_virtual(&ReaderType::getRecordIndex), python::arg("self"))
+                .def("setRecordIndex", python::pure_virtual(&ReaderType::setRecordIndex), (python::arg("self"), python::arg("idx")))
+                .def("getNumRecords", python::pure_virtual(&ReaderType::getNumRecords), python::arg("self"))
+                .def("close", &ReaderType::close, &DataReaderWrapper<T>::closeDef, python::arg("self"))
+                .def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"))
+                .def("__bool__", python::pure_virtual(&nonZero), python::arg("self"))
+                .add_property("numRecords", &ReaderType::getNumRecords);
 
-			python::register_ptr_to_python<typename Base::DataReader<T>::SharedPointer>();
-		}
+            python::register_ptr_to_python<typename Base::DataReader<T>::SharedPointer>();
+        }
 
-		static bool nonZero(CDPL::Base::DataReader<T>& reader) {
-			return reader.operator const void*();
-		}
-	};
+        static bool nonZero(CDPL::Base::DataReader<T>& reader) {
+            return reader.operator const void*();
+        }
+    };
 }
 
 #endif // CDPL_PYTHON_BASE_DATAREADEREXPORT_HPP

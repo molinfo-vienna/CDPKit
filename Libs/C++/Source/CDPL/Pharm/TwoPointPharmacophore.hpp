@@ -32,34 +32,34 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		class TwoPointPharmacophore
-		{
+        class TwoPointPharmacophore
+        {
 
-		public:
-			TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
+        public:
+            TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
 
-			TwoPointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, double ftr_dist):
-				ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftrDistance(ftr_dist) {}
+            TwoPointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, double ftr_dist):
+                ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftrDistance(ftr_dist) {}
 
-			unsigned int getFeature1Type() const {
-				return ftr1Type;
-			}
+            unsigned int getFeature1Type() const {
+                return ftr1Type;
+            }
 
-			unsigned int getFeature2Type() const {
-				return ftr2Type;
-			}
+            unsigned int getFeature2Type() const {
+                return ftr2Type;
+            }
 
-			double getFeatureDistance() const {
-				return ftrDistance;
-			}
+            double getFeatureDistance() const {
+                return ftrDistance;
+            }
 
-		private:
-			unsigned int ftr1Type;
-			unsigned int ftr2Type;
-			double       ftrDistance;
-		};
+        private:
+            unsigned int ftr1Type;
+            unsigned int ftr2Type;
+            double       ftrDistance;
+        };
     }
 }
 

@@ -39,86 +39,86 @@
 namespace ChOX
 {
 
-	class DataSet : public QObject
-	{
+    class DataSet : public QObject
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		DataSet(QObject*);
+    public:
+        DataSet(QObject*);
 
-		~DataSet();
+        ~DataSet();
 
-		int getSize() const;
+        int getSize() const;
 
-		const DataRecord& getRecord(int) const;
+        const DataRecord& getRecord(int) const;
 
-		const QStringList& getFileNames() const;
+        const QStringList& getFileNames() const;
 
-		void setRecordSelected(int, bool = true);
-		void selectRecordRange(int, int, bool = true, bool = false);
+        void setRecordSelected(int, bool = true);
+        void selectRecordRange(int, int, bool = true, bool = false);
 
-		bool isRecordSelected(int) const;
+        bool isRecordSelected(int) const;
 
-		bool hasSelectedRecords() const;
-		int getNumSelectedRecords() const;
+        bool hasSelectedRecords() const;
+        int getNumSelectedRecords() const;
 
-		template <typename InputIter>
-		void appendRecords(InputIter begin, InputIter end, const QString& file_name) {
-			workingState = states[currStateIdx];
+        template <typename InputIter>
+        void appendRecords(InputIter begin, InputIter end, const QString& file_name) {
+            workingState = states[currStateIdx];
 
-			workingState.records.insert(workingState.records.end(), begin, end);
-			workingState.selectionMask.resize(workingState.records.size());
+            workingState.records.insert(workingState.records.end(), begin, end);
+            workingState.selectionMask.resize(workingState.records.size());
 
-			workingState.fileNames.append(file_name);
+            workingState.fileNames.append(file_name);
 
-			commitNewState();
+            commitNewState();
 
-			emit sizeChanged(int(states[currStateIdx].records.size()));
-			emit fileListChanged();
-		}
+            emit sizeChanged(int(states[currStateIdx].records.size()));
+            emit fileListChanged();
+        }
 
-	signals:	
-		void sizeChanged(int);
-		void selectionStatusChanged(bool);
-		void fileListChanged();
+    signals:    
+        void sizeChanged(int);
+        void selectionStatusChanged(bool);
+        void fileListChanged();
 
-		void undoStatusChanged(bool);
-		void redoStatusChanged(bool);
+        void undoStatusChanged(bool);
+        void redoStatusChanged(bool);
 
-	public slots:
-		void clear();
+    public slots:
+        void clear();
 
-		void undo();
-		void redo();
+        void undo();
+        void redo();
 
-		void selectAll();
-		void unselectAll();
-		void invertSelection();
-		void removeSelected();
+        void selectAll();
+        void unselectAll();
+        void invertSelection();
+        void removeSelected();
 
-	private:
-		typedef std::vector<DataRecord::SharedPointer> DataRecordList;
+    private:
+        typedef std::vector<DataRecord::SharedPointer> DataRecordList;
 
-		struct DataSetState 
-		{
+        struct DataSetState 
+        {
 
-			void swap(DataSetState&);
+            void swap(DataSetState&);
 
-			QStringList        fileNames;
-			DataRecordList     records;
-			CDPL::Util::BitSet selectionMask;
-		};
+            QStringList        fileNames;
+            DataRecordList     records;
+            CDPL::Util::BitSet selectionMask;
+        };
 
-		typedef std::vector<DataSetState> DataSetStateList;
+        typedef std::vector<DataSetState> DataSetStateList;
 
-		void commitNewState();
+        void commitNewState();
 
-		DataSetStateList states;
-		DataSetState     workingState;
-		std::size_t      currStateIdx;
-		std::size_t      numSavedStates;
-	};
+        DataSetStateList states;
+        DataSetState     workingState;
+        std::size_t      currStateIdx;
+        std::size_t      numSavedStates;
+    };
 }
 
 #endif // CHOX_DATASET_HPP

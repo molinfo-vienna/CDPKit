@@ -41,53 +41,53 @@ Grid::CDFDataReader::PropertyHandlerList Grid::CDFDataReader::extPropertyHandler
 
 void Grid::CDFDataReader::registerExternalPropertyHandler(const PropertyHandler& handler)
 {
-	extPropertyHandlers.push_back(handler);
+    extPropertyHandlers.push_back(handler);
 }
 
 void Grid::CDFDataReader::readProperties(AttributedGrid& grid, Internal::ByteBuffer& bbuf) const
 {
-	CDF::PropertySpec prop_spec;
-	std::string str_val;
+    CDF::PropertySpec prop_spec;
+    std::string str_val;
 
-	while (true) {
-		unsigned int prop_id = getPropertySpec(prop_spec, bbuf);
+    while (true) {
+        unsigned int prop_id = getPropertySpec(prop_spec, bbuf);
 
-		if (prop_id == CDF::PROP_LIST_END)
-			break;
+        if (prop_id == CDF::PROP_LIST_END)
+            break;
 
-		switch (prop_id) {
+        switch (prop_id) {
 
-			case CDF::EXTENDED_PROP_LIST:
-				readExternalProperties(prop_spec, grid, bbuf);
-				continue;
+            case CDF::EXTENDED_PROP_LIST:
+                readExternalProperties(prop_spec, grid, bbuf);
+                continue;
 
-			case CDF::AttributedGridProperty::NAME:
-				getStringProperty(prop_spec, str_val, bbuf);
-				setName(grid, str_val);
-				continue;
+            case CDF::AttributedGridProperty::NAME:
+                getStringProperty(prop_spec, str_val, bbuf);
+                setName(grid, str_val);
+                continue;
 
-			default:
-				throw Base::IOError("CDFRegularGridDataReader: unsupported property");
-		}
-	}
+            default:
+                throw Base::IOError("CDFRegularGridDataReader: unsupported property");
+        }
+    }
 }
 
 void Grid::CDFDataReader::readExternalProperties(CDF::PropertySpec prop_spec, AttributedGrid& grid, Internal::ByteBuffer& bbuf) const
 {
-	CDF::SizeType size_val;
+    CDF::SizeType size_val;
 
-	getIntProperty(prop_spec, size_val, bbuf);
-	
-	unsigned int handler_id = getPropertySpec(prop_spec, bbuf);
+    getIntProperty(prop_spec, size_val, bbuf);
+    
+    unsigned int handler_id = getPropertySpec(prop_spec, bbuf);
 
-	if (!readExternalProperties(handler_id, grid, bbuf))
-		bbuf.setIOPointer(bbuf.getIOPointer() + size_val);
+    if (!readExternalProperties(handler_id, grid, bbuf))
+        bbuf.setIOPointer(bbuf.getIOPointer() + size_val);
 }
 
 bool Grid::CDFDataReader::readExternalProperties(unsigned int handler_id, AttributedGrid& grid, Internal::ByteBuffer& bbuf) const
 {
-	return (std::find_if(extPropertyHandlers.begin(), extPropertyHandlers.end(),
-						 std::bind(&PropertyHandler::operator(), std::placeholders::_1, handler_id,
-								   std::ref(*this), std::ref(grid), std::ref(bbuf)))
-			!= extPropertyHandlers.end());
+    return (std::find_if(extPropertyHandlers.begin(), extPropertyHandlers.end(),
+                         std::bind(&PropertyHandler::operator(), std::placeholders::_1, handler_id,
+                                   std::ref(*this), std::ref(grid), std::ref(bbuf)))
+            != extPropertyHandlers.end());
 }

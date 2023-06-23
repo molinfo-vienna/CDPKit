@@ -69,76 +69,76 @@ bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, c
 {
     Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
 
-	bool has_orient1 = hasOrientation(ftr1);
-	bool has_orient2 = hasOrientation(ftr2);
+    bool has_orient1 = hasOrientation(ftr1);
+    bool has_orient2 = hasOrientation(ftr2);
 
-	if (!has_orient1 && !has_orient2) {
-		double min_dist = minVDist;
-		double max_dist = std::sqrt(maxHDist * maxHDist + maxVDist * maxVDist);
-		double dist = length(ftr1_ftr2_vec);
+    if (!has_orient1 && !has_orient2) {
+        double min_dist = minVDist;
+        double max_dist = std::sqrt(maxHDist * maxHDist + maxVDist * maxVDist);
+        double dist = length(ftr1_ftr2_vec);
 
-		if (dist < min_dist)
-			return false;
+        if (dist < min_dist)
+            return false;
   
-		return (dist <= max_dist);
-	}
+        return (dist <= max_dist);
+    }
 
-	if (has_orient1 && has_orient2) {
-		const Math::Vector3D& orient1 = getOrientation(ftr1);
-		const Math::Vector3D& orient2 = getOrientation(ftr2);
+    if (has_orient1 && has_orient2) {
+        const Math::Vector3D& orient1 = getOrientation(ftr1);
+        const Math::Vector3D& orient2 = getOrientation(ftr2);
 
-		double ang_cos = std::abs(angleCos(orient1, orient2, 1));
-		double ang = std::acos(ang_cos) * 180.0 / M_PI;
+        double ang_cos = std::abs(angleCos(orient1, orient2, 1));
+        double ang = std::acos(ang_cos) * 180.0 / M_PI;
 
-		if (ang > maxAngle)
-			return false;
+        if (ang > maxAngle)
+            return false;
     
-		double v_dist1 = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
-		double h_dist1 = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
+        double v_dist1 = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
+        double h_dist1 = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
 
-		if (v_dist1 >= minVDist && v_dist1 <= maxVDist && h_dist1 <= maxHDist)
-			return true;
-			
-		double v_dist2 = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
-  		double h_dist2 = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
+        if (v_dist1 >= minVDist && v_dist1 <= maxVDist && h_dist1 <= maxHDist)
+            return true;
+            
+        double v_dist2 = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
+          double h_dist2 = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
 
-		if (v_dist2 >= minVDist && v_dist2 <= maxVDist && h_dist2 <= maxHDist)
-			return true;
+        if (v_dist2 >= minVDist && v_dist2 <= maxVDist && h_dist2 <= maxHDist)
+            return true;
    
-		return false;
-	}
+        return false;
+    }
 
-	if (has_orient1) {
-		const Math::Vector3D& orient1 = getOrientation(ftr1);
-		double v_dist = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
+    if (has_orient1) {
+        const Math::Vector3D& orient1 = getOrientation(ftr1);
+        double v_dist = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
 
-		if (v_dist < minVDist)
-			return false;
+        if (v_dist < minVDist)
+            return false;
   
-		if (v_dist > maxVDist)
-			return false;
+        if (v_dist > maxVDist)
+            return false;
     
-		double h_dist = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
+        double h_dist = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
   
-		if (h_dist > maxHDist)
-			return false;
+        if (h_dist > maxHDist)
+            return false;
    
-		return true;
-	}
+        return true;
+    }
 
-	const Math::Vector3D& orient2 = getOrientation(ftr2);
-	double v_dist = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
+    const Math::Vector3D& orient2 = getOrientation(ftr2);
+    double v_dist = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
 
-	if (v_dist < minVDist)
-		return false;
+    if (v_dist < minVDist)
+        return false;
   
-	if (v_dist > maxVDist)
-		return false;
+    if (v_dist > maxVDist)
+        return false;
     
-	double h_dist = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
+    double h_dist = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
   
-	if (h_dist > maxHDist)
-		return false;
+    if (h_dist > maxHDist)
+        return false;
    
-	return true;
+    return true;
 }

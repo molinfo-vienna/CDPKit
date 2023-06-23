@@ -31,12 +31,12 @@
 
 void CDPLPythonPharm::exportPSDMoleculeReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::PSDMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-				   boost::noncopyable>("PSDMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const std::string&>((python::arg("self"), python::arg("file_name"))));
+    python::class_<Pharm::PSDMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+                   boost::noncopyable>("PSDMoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const std::string&>((python::arg("self"), python::arg("file_name"))));
 }

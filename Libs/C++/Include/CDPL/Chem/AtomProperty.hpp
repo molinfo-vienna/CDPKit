@@ -35,69 +35,69 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides keys for built-in Chem::Atom properties.
-		 */
-		namespace AtomProperty
-		{
+        /**
+         * \brief Provides keys for built-in Chem::Atom properties.
+         */
+        namespace AtomProperty
+        {
 
-			extern CDPL_CHEM_API const Base::LookupKey NAME;
-			extern CDPL_CHEM_API const Base::LookupKey SYMBOL;
-			extern CDPL_CHEM_API const Base::LookupKey TYPE;
+            extern CDPL_CHEM_API const Base::LookupKey NAME;
+            extern CDPL_CHEM_API const Base::LookupKey SYMBOL;
+            extern CDPL_CHEM_API const Base::LookupKey TYPE;
 
-			extern CDPL_CHEM_API const Base::LookupKey FORMAL_CHARGE;
-			extern CDPL_CHEM_API const Base::LookupKey ISOTOPE;
-			extern CDPL_CHEM_API const Base::LookupKey RADICAL_TYPE;
-			extern CDPL_CHEM_API const Base::LookupKey HYBRIDIZATION; 
+            extern CDPL_CHEM_API const Base::LookupKey FORMAL_CHARGE;
+            extern CDPL_CHEM_API const Base::LookupKey ISOTOPE;
+            extern CDPL_CHEM_API const Base::LookupKey RADICAL_TYPE;
+            extern CDPL_CHEM_API const Base::LookupKey HYBRIDIZATION; 
 
-			extern CDPL_CHEM_API const Base::LookupKey RING_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey AROMATICITY_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey RING_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey AROMATICITY_FLAG;
 
-			extern CDPL_CHEM_API const Base::LookupKey UNPAIRED_ELECTRON_COUNT;
-	
-			extern CDPL_CHEM_API const Base::LookupKey IMPLICIT_HYDROGEN_COUNT;
-	
-			extern CDPL_CHEM_API const Base::LookupKey COORDINATES_2D;
-			extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D_ARRAY;
-		
-			extern CDPL_CHEM_API const Base::LookupKey MORGAN_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey CANONICAL_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
-			extern CDPL_CHEM_API const Base::LookupKey SYMMETRY_CLASS;
+            extern CDPL_CHEM_API const Base::LookupKey UNPAIRED_ELECTRON_COUNT;
+    
+            extern CDPL_CHEM_API const Base::LookupKey IMPLICIT_HYDROGEN_COUNT;
+    
+            extern CDPL_CHEM_API const Base::LookupKey COORDINATES_2D;
+            extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D_ARRAY;
+        
+            extern CDPL_CHEM_API const Base::LookupKey MORGAN_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey CANONICAL_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
+            extern CDPL_CHEM_API const Base::LookupKey SYMMETRY_CLASS;
 
-			extern CDPL_CHEM_API const Base::LookupKey STEREO_DESCRIPTOR;
-			extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_PARITY;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_DB_STEREO_CARE_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey STEREO_DESCRIPTOR;
+            extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_PARITY;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_DB_STEREO_CARE_FLAG;
 
-			extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_NAME;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_ID;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_NAME;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_SUBTYPE;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_CHAIN;
+            extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_NAME;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_ID;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_NAME;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_SUBTYPE;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_CHAIN;
 
-			extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
-			extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING_ID;
-			
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
-		
-			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUP_ID;
-		}
-	}
+            extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
+            extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING_ID;
+            
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
+        
+            extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUP_ID;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_ATOMPROPERTY_HPP

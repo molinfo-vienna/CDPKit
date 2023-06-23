@@ -33,16 +33,16 @@
 
 BOOST_AUTO_TEST_CASE(AtomIsMetalFunctionTest)
 {
-	using namespace CDPL;
-	using namespace MolProp;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace MolProp;
+    using namespace Chem;
    
-	BasicMolecule mol;
-	Atom& atom = mol.addAtom();
+    BasicMolecule mol;
+    Atom& atom = mol.addAtom();
 
-	for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
-		setType(atom, atom_type);
+    for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
+        setType(atom, atom_type);
 
-		BOOST_CHECK(isMetal(atom) == AtomDictionary::isMetal(atom_type));
-	}
+        BOOST_CHECK(isMetal(atom) == AtomDictionary::isMetal(atom_type));
+    }
 }

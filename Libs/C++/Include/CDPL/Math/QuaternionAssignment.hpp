@@ -33,42 +33,42 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename E> class QuaternionExpression;
+        template <typename E> class QuaternionExpression;
 
-		template <template <typename T1, typename T2> class F, typename Q, typename E>
-		void quaternionAssignQuaternion(Q& q, const QuaternionExpression<E>& e)
-		{
-			typedef F<typename Q::Reference, typename E::ValueType> FunctorType;
+        template <template <typename T1, typename T2> class F, typename Q, typename E>
+        void quaternionAssignQuaternion(Q& q, const QuaternionExpression<E>& e)
+        {
+            typedef F<typename Q::Reference, typename E::ValueType> FunctorType;
 
-			FunctorType::apply(q.getC1(), e().getC1());
-			FunctorType::apply(q.getC2(), e().getC2());
-			FunctorType::apply(q.getC3(), e().getC3());
-			FunctorType::apply(q.getC4(), e().getC4());
-		}
+            FunctorType::apply(q.getC1(), e().getC1());
+            FunctorType::apply(q.getC2(), e().getC2());
+            FunctorType::apply(q.getC3(), e().getC3());
+            FunctorType::apply(q.getC4(), e().getC4());
+        }
 
-		template <template <typename T1, typename T2> class F, typename Q, typename T>
-		void quaternionAssignScalar(Q& q, const T& t)
-		{
-			typedef F<typename Q::Reference, T> FunctorType;
-		
-			FunctorType::apply(q.getC1(), t);
-			FunctorType::apply(q.getC2(), t);
-			FunctorType::apply(q.getC3(), t);
-			FunctorType::apply(q.getC4(), t);
-		}
+        template <template <typename T1, typename T2> class F, typename Q, typename T>
+        void quaternionAssignScalar(Q& q, const T& t)
+        {
+            typedef F<typename Q::Reference, T> FunctorType;
+        
+            FunctorType::apply(q.getC1(), t);
+            FunctorType::apply(q.getC2(), t);
+            FunctorType::apply(q.getC3(), t);
+            FunctorType::apply(q.getC4(), t);
+        }
 
-		template <typename Q, typename E>
-		void quaternionSwap(Q& q, QuaternionExpression<E>& e)
-		{
-			std::swap(q.getC1(), e().getC1());
-			std::swap(q.getC2(), e().getC2());
-			std::swap(q.getC3(), e().getC3());
-			std::swap(q.getC4(), e().getC4());
-		}
-	}
+        template <typename Q, typename E>
+        void quaternionSwap(Q& q, QuaternionExpression<E>& e)
+        {
+            std::swap(q.getC1(), e().getC1());
+            std::swap(q.getC2(), e().getC2());
+            std::swap(q.getC3(), e().getC3());
+            std::swap(q.getC4(), e().getC4());
+        }
+    }
 }
 
 #endif // CDPL_MATH_QUATERNIONASSIGNMENT_HPP

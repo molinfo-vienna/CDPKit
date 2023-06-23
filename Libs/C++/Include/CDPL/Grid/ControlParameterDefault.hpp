@@ -35,23 +35,23 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		/**
-		 * \brief Provides default values for built-in control-parameters.
-		 */
-		namespace ControlParameterDefault
-		{
+        /**
+         * \brief Provides default values for built-in control-parameters.
+         */
+        namespace ControlParameterDefault
+        {
 
-			/**
-			 * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::STRICT_ERROR_CHECKING.
-			 */
-			extern CDPL_GRID_API const bool STRICT_ERROR_CHECKING;
+            /**
+             * \brief Default setting (= \c false) for the control-parameter Grid::ControlParameter::STRICT_ERROR_CHECKING.
+             */
+            extern CDPL_GRID_API const bool STRICT_ERROR_CHECKING;
 
-			extern CDPL_GRID_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
-		}
-	}
+            extern CDPL_GRID_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
+        }
+    }
 }
 
 #endif // CDPL_GRID_CONTROLPARAMETERDEFAULT_HPP

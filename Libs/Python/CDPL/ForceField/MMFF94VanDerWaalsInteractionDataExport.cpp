@@ -37,9 +37,9 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionData()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94VanDerWaalsInteractionData, ForceField::MMFF94VanDerWaalsInteractionData::SharedPointer>("MMFF94VanDerWaalsInteractionData", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94VanDerWaalsInteractionData&>((python::arg("self"), python::arg("ia_data"))))
-		.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94VanDerWaalsInteractionData, 
-			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-			 python::default_call_policies>());
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94VanDerWaalsInteractionData&>((python::arg("self"), python::arg("ia_data"))))
+        .def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94VanDerWaalsInteractionData, 
+             python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
+             python::default_call_policies>());
 }

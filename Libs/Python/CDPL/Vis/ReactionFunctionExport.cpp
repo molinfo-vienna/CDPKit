@@ -35,12 +35,12 @@
 #define MAKE_REACTION_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)     \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Reaction& rxn)  \
 {                                                          \
-	return CDPL::Vis::get##FUNC_SUFFIX(rxn);			   \
+    return CDPL::Vis::get##FUNC_SUFFIX(rxn);               \
 }                                                          \
                                                            \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Reaction& rxn)  \
 {                                                          \
-	return CDPL::Vis::has##FUNC_SUFFIX(rxn);			   \
+    return CDPL::Vis::has##FUNC_SUFFIX(rxn);               \
 }
 
 #define EXPORT_REACTION_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                \
@@ -60,52 +60,52 @@ python::def("set"#FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("rxn"), pyth
 namespace
 {
 
-	MAKE_REACTION_FUNC_WRAPPERS(unsigned int, ArrowStyle)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::Color&, ArrowColor)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowLength)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowHeadLength)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowHeadWidth)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowShaftWidth)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowLineWidth)
-	MAKE_REACTION_FUNC_WRAPPERS(unsigned int, ComponentLayout)
-	MAKE_REACTION_FUNC_WRAPPERS(unsigned int, ComponentLayoutDirection)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ComponentMargin)
-	MAKE_REACTION_FUNC_WRAPPERS(bool, ShowReactants)
-	MAKE_REACTION_FUNC_WRAPPERS(bool, ShowAgents)
-	MAKE_REACTION_FUNC_WRAPPERS(bool, ShowProducts)
-	MAKE_REACTION_FUNC_WRAPPERS(unsigned int, AgentAlignment)
-	MAKE_REACTION_FUNC_WRAPPERS(unsigned int, AgentLayout)
-	MAKE_REACTION_FUNC_WRAPPERS(unsigned int, AgentLayoutDirection)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::Color&, PlusSignColor)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, PlusSignSize)
-	MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, PlusSignLineWidth)
-	MAKE_REACTION_FUNC_WRAPPERS(bool, ShowPlusSigns)
+    MAKE_REACTION_FUNC_WRAPPERS(unsigned int, ArrowStyle)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::Color&, ArrowColor)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowLength)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowHeadLength)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowHeadWidth)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowShaftWidth)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ArrowLineWidth)
+    MAKE_REACTION_FUNC_WRAPPERS(unsigned int, ComponentLayout)
+    MAKE_REACTION_FUNC_WRAPPERS(unsigned int, ComponentLayoutDirection)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ComponentMargin)
+    MAKE_REACTION_FUNC_WRAPPERS(bool, ShowReactants)
+    MAKE_REACTION_FUNC_WRAPPERS(bool, ShowAgents)
+    MAKE_REACTION_FUNC_WRAPPERS(bool, ShowProducts)
+    MAKE_REACTION_FUNC_WRAPPERS(unsigned int, AgentAlignment)
+    MAKE_REACTION_FUNC_WRAPPERS(unsigned int, AgentLayout)
+    MAKE_REACTION_FUNC_WRAPPERS(unsigned int, AgentLayoutDirection)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::Color&, PlusSignColor)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, PlusSignSize)
+    MAKE_REACTION_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, PlusSignLineWidth)
+    MAKE_REACTION_FUNC_WRAPPERS(bool, ShowPlusSigns)
 }
 
 
 void CDPLPythonVis::exportReactionFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	EXPORT_REACTION_FUNCS(ArrowStyle, style)
-	EXPORT_REACTION_FUNCS_INT_REF(ArrowColor, color)
-	EXPORT_REACTION_FUNCS_INT_REF(ArrowLength, length)
-	EXPORT_REACTION_FUNCS_INT_REF(ArrowHeadLength, length)
-	EXPORT_REACTION_FUNCS_INT_REF(ArrowHeadWidth, width)
-	EXPORT_REACTION_FUNCS_INT_REF(ArrowShaftWidth, width)
-	EXPORT_REACTION_FUNCS_INT_REF(ArrowLineWidth, width)
-	EXPORT_REACTION_FUNCS(ComponentLayout, layout)
-	EXPORT_REACTION_FUNCS(ComponentLayoutDirection, dir)
-	EXPORT_REACTION_FUNCS_INT_REF(ComponentMargin, margin)
-	EXPORT_REACTION_FUNCS(ShowReactants, show)
-	EXPORT_REACTION_FUNCS(ShowAgents, show)
-	EXPORT_REACTION_FUNCS(ShowProducts, show)
-	EXPORT_REACTION_FUNCS(AgentAlignment, show)
-	EXPORT_REACTION_FUNCS(AgentLayout, show)
-	EXPORT_REACTION_FUNCS(AgentLayoutDirection, dir)
-	EXPORT_REACTION_FUNCS_INT_REF(PlusSignColor, color)
-	EXPORT_REACTION_FUNCS_INT_REF(PlusSignSize, size)
-	EXPORT_REACTION_FUNCS_INT_REF(PlusSignLineWidth, width)
-	EXPORT_REACTION_FUNCS(ShowPlusSigns, show)
+    EXPORT_REACTION_FUNCS(ArrowStyle, style)
+    EXPORT_REACTION_FUNCS_INT_REF(ArrowColor, color)
+    EXPORT_REACTION_FUNCS_INT_REF(ArrowLength, length)
+    EXPORT_REACTION_FUNCS_INT_REF(ArrowHeadLength, length)
+    EXPORT_REACTION_FUNCS_INT_REF(ArrowHeadWidth, width)
+    EXPORT_REACTION_FUNCS_INT_REF(ArrowShaftWidth, width)
+    EXPORT_REACTION_FUNCS_INT_REF(ArrowLineWidth, width)
+    EXPORT_REACTION_FUNCS(ComponentLayout, layout)
+    EXPORT_REACTION_FUNCS(ComponentLayoutDirection, dir)
+    EXPORT_REACTION_FUNCS_INT_REF(ComponentMargin, margin)
+    EXPORT_REACTION_FUNCS(ShowReactants, show)
+    EXPORT_REACTION_FUNCS(ShowAgents, show)
+    EXPORT_REACTION_FUNCS(ShowProducts, show)
+    EXPORT_REACTION_FUNCS(AgentAlignment, show)
+    EXPORT_REACTION_FUNCS(AgentLayout, show)
+    EXPORT_REACTION_FUNCS(AgentLayoutDirection, dir)
+    EXPORT_REACTION_FUNCS_INT_REF(PlusSignColor, color)
+    EXPORT_REACTION_FUNCS_INT_REF(PlusSignSize, size)
+    EXPORT_REACTION_FUNCS_INT_REF(PlusSignLineWidth, width)
+    EXPORT_REACTION_FUNCS(ShowPlusSigns, show)
 }

@@ -38,52 +38,52 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphTotalChainBondCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT) == 22);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, mol, 
-							   MolecularGraphProperty::CHAIN_BOND_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, mol, 
-							   MolecularGraphProperty::IMPLICIT_H_COUNT);
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	Fragment frag(mol);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(frag.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT) == 22);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+//-----
 
-	TestUtils::checkDependency(frag, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, frag, 
-							   MolecularGraphProperty::CHAIN_BOND_COUNT);
-	TestUtils::checkDependency(frag, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, frag, 
-							   MolecularGraphProperty::IMPLICIT_H_COUNT);
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT) == 22);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, mol, 
+                               MolecularGraphProperty::CHAIN_BOND_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, mol, 
+                               MolecularGraphProperty::IMPLICIT_H_COUNT);
+
+//-----
+
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT) == 22);
+
+    BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(frag, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, frag, 
+                               MolecularGraphProperty::CHAIN_BOND_COUNT);
+    TestUtils::checkDependency(frag, MolecularGraphProperty::TOTAL_CHAIN_BOND_COUNT, frag, 
+                               MolecularGraphProperty::IMPLICIT_H_COUNT);
 }

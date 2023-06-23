@@ -35,43 +35,43 @@
 
 namespace
 {
-	
-	void generateGaussianShapeForAtoms1(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
-										bool append, double radius, bool inc_h, double p)
-	{
-		CDPL::Shape::generateGaussianShape(atoms, shape, append, radius, inc_h, p);
-	}
+    
+    void generateGaussianShapeForAtoms1(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
+                                        bool append, double radius, bool inc_h, double p)
+    {
+        CDPL::Shape::generateGaussianShape(atoms, shape, append, radius, inc_h, p);
+    }
 
-	void generateGaussianShapeForAtoms2(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
-										const CDPL::Chem::Atom3DCoordinatesFunction& coords_func,
-										bool append, double radius, bool inc_h, double p)
-	{
-		CDPL::Shape::generateGaussianShape(atoms, shape, coords_func, append, radius, inc_h, p);
-	}
+    void generateGaussianShapeForAtoms2(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
+                                        const CDPL::Chem::Atom3DCoordinatesFunction& coords_func,
+                                        bool append, double radius, bool inc_h, double p)
+    {
+        CDPL::Shape::generateGaussianShape(atoms, shape, coords_func, append, radius, inc_h, p);
+    }
 
-	void generateGaussianShapeForFeatures(CDPL::Pharm::FeatureContainer& features, CDPL::Shape::GaussianShape& shape,
-										  bool append, double radius, bool inc_xv, double p)
-	{
-		CDPL::Shape::generateGaussianShape(features, shape, append, radius, inc_xv, p);
-	}
+    void generateGaussianShapeForFeatures(CDPL::Pharm::FeatureContainer& features, CDPL::Shape::GaussianShape& shape,
+                                          bool append, double radius, bool inc_xv, double p)
+    {
+        CDPL::Shape::generateGaussianShape(features, shape, append, radius, inc_xv, p);
+    }
 }
 
 
 void CDPLPythonShape::exportGaussianShapeFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("generateGaussianShape", &generateGaussianShapeForAtoms1,
-				(python::arg("atoms"), python::arg("shape"), python::arg("append") = false,
-				 python::arg("radius") = -1.0, python::arg("inc_h") = false, python::arg("p") = 2.7));
-	python::def("generateGaussianShape", &generateGaussianShapeForAtoms2,
-				(python::arg("atoms"), python::arg("shape"), python::arg("coords_func"), python::arg("append") = false,
-				 python::arg("radius") = -1.0, python::arg("inc_h") = false, python::arg("p") = 2.7));
-	python::def("generateGaussianShape", &generateGaussianShapeForFeatures,
-				(python::arg("features"), python::arg("shape"), python::arg("append") = false,
-				 python::arg("radius") = -1.0, python::arg("inc_xv") = false, python::arg("p") = 5.0));
-	python::def("transform", &Shape::transform, (python::arg("shape"), python::arg("xform")));
-	python::def("centerAndAlignPrincipalAxes", &Shape::centerAndAlignPrincipalAxes,
-				(python::arg("shape"), python::arg("func"), python::arg("back_xform"), python::arg("mom_eq_thresh") = 0.15));
+    python::def("generateGaussianShape", &generateGaussianShapeForAtoms1,
+                (python::arg("atoms"), python::arg("shape"), python::arg("append") = false,
+                 python::arg("radius") = -1.0, python::arg("inc_h") = false, python::arg("p") = 2.7));
+    python::def("generateGaussianShape", &generateGaussianShapeForAtoms2,
+                (python::arg("atoms"), python::arg("shape"), python::arg("coords_func"), python::arg("append") = false,
+                 python::arg("radius") = -1.0, python::arg("inc_h") = false, python::arg("p") = 2.7));
+    python::def("generateGaussianShape", &generateGaussianShapeForFeatures,
+                (python::arg("features"), python::arg("shape"), python::arg("append") = false,
+                 python::arg("radius") = -1.0, python::arg("inc_xv") = false, python::arg("p") = 5.0));
+    python::def("transform", &Shape::transform, (python::arg("shape"), python::arg("xform")));
+    python::def("centerAndAlignPrincipalAxes", &Shape::centerAndAlignPrincipalAxes,
+                (python::arg("shape"), python::arg("func"), python::arg("back_xform"), python::arg("mom_eq_thresh") = 0.15));
 }

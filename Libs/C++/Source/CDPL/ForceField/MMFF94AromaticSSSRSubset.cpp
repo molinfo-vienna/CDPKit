@@ -51,20 +51,20 @@ void ForceField::MMFF94AromaticSSSRSubset::extract(const Chem::MolecularGraph& m
     clear();
 
     if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
-		return;
+        return;
 
-	init(molgraph);
+    init(molgraph);
     perceiveAromaticRings(sssr);
 }
 
 void ForceField::MMFF94AromaticSSSRSubset::init(const Chem::MolecularGraph& molgraph)
 {
-	aromBondMask.resize(molgraph.getNumBonds());
-	aromBondMask.reset();
+    aromBondMask.resize(molgraph.getNumBonds());
+    aromBondMask.reset();
 
-	candidateRings.clear();
+    candidateRings.clear();
 
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 }
 
 void ForceField::MMFF94AromaticSSSRSubset::perceiveAromaticRings(const Chem::FragmentList& sssr)
@@ -72,41 +72,41 @@ void ForceField::MMFF94AromaticSSSRSubset::perceiveAromaticRings(const Chem::Fra
     using namespace Chem;
 
     for (FragmentList::BaseType::ConstElementIterator it = sssr.FragmentList::BaseType::getElementsBegin(), 
-			 end = sssr.FragmentList::BaseType::getElementsEnd(); it != end; ++it) {
+             end = sssr.FragmentList::BaseType::getElementsEnd(); it != end; ++it) {
 
-		const Fragment::SharedPointer& ring = *it;
-		std::size_t r_size = ring->getNumAtoms();
+        const Fragment::SharedPointer& ring = *it;
+        std::size_t r_size = ring->getNumAtoms();
 
-		if (r_size < 4 || r_size > 6)
-			continue;
+        if (r_size < 4 || r_size > 6)
+            continue;
 
-		if (!isNotAromatic(*ring, *molGraph)) {
-			if (Chem::isAromatic(*ring, *molGraph, aromBondMask)) {
-				addToAromaticBondMask(*ring);
-				addElement(ring);
+        if (!isNotAromatic(*ring, *molGraph)) {
+            if (Chem::isAromatic(*ring, *molGraph, aromBondMask)) {
+                addToAromaticBondMask(*ring);
+                addElement(ring);
 
-			} else
-				candidateRings.push_back(ring);
-		}
+            } else
+                candidateRings.push_back(ring);
+        }
     }
-	
+    
     for (bool new_aro_rings = true; new_aro_rings; ) {
-		new_aro_rings = false;
+        new_aro_rings = false;
 
-		for (RingList::iterator it = candidateRings.begin(); it != candidateRings.end(); ) {
-			const Fragment::SharedPointer& ring = *it;
+        for (RingList::iterator it = candidateRings.begin(); it != candidateRings.end(); ) {
+            const Fragment::SharedPointer& ring = *it;
 
-			if (!Chem::isAromatic(*ring, *molGraph, aromBondMask)) {
-				++it;
-				continue;
-			}
+            if (!Chem::isAromatic(*ring, *molGraph, aromBondMask)) {
+                ++it;
+                continue;
+            }
 
-			addToAromaticBondMask(*ring);
-			addElement(ring);
+            addToAromaticBondMask(*ring);
+            addElement(ring);
 
-			new_aro_rings = true;
-			it = candidateRings.erase(it);
-		}
+            new_aro_rings = true;
+            it = candidateRings.erase(it);
+        }
     }
 }
 
@@ -115,7 +115,7 @@ void ForceField::MMFF94AromaticSSSRSubset::addToAromaticBondMask(const Chem::Fra
     using namespace Chem;
 
     std::for_each(ring.getBondsBegin(), ring.getBondsEnd(),
-				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>
-							(&Util::BitSet::set), std::ref(aromBondMask),
-							std::bind(&BondContainer::getBondIndex, molGraph, std::placeholders::_1), true));
+                  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>
+                            (&Util::BitSet::set), std::ref(aromBondMask),
+                            std::bind(&BondContainer::getBondIndex, molGraph, std::placeholders::_1), true));
 }

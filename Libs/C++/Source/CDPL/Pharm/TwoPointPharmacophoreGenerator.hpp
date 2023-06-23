@@ -36,15 +36,15 @@ namespace CDPL
     namespace Pharm
     {
 
-		template <typename PharmType>
-		class TwoPointPharmacophoreGenerator : private NPointPharmacophoreGeneratorBase
-		{
+        template <typename PharmType>
+        class TwoPointPharmacophoreGenerator : private NPointPharmacophoreGeneratorBase
+        {
 
-		public:
-			
-			template <typename Iter, typename OutIter> 
-			void generate(const Iter& beg, const Iter& end, OutIter out);
-		};
+        public:
+            
+            template <typename Iter, typename OutIter> 
+            void generate(const Iter& beg, const Iter& end, OutIter out);
+        };
     }
 }
 
@@ -55,16 +55,16 @@ template <typename PharmType>
 template <typename Iter, typename OutIter> 
 void CDPL::Pharm::TwoPointPharmacophoreGenerator<PharmType>::generate(const Iter& beg, const Iter& end, OutIter out)
 {
-	const FeatureAndTypeArray& canon_ftrs = getCanonOrderedFeatures(beg, end);
-	std::size_t num_ftrs = canon_ftrs.size();
+    const FeatureAndTypeArray& canon_ftrs = getCanonOrderedFeatures(beg, end);
+    std::size_t num_ftrs = canon_ftrs.size();
 
-	for (std::size_t i = 0; i < num_ftrs; i++) {
-		const Feature& ftr1 = *canon_ftrs[i].first;
+    for (std::size_t i = 0; i < num_ftrs; i++) {
+        const Feature& ftr1 = *canon_ftrs[i].first;
 
-		for (std::size_t j = i + 1; j < num_ftrs; j++) {
-			*out = PharmType(ftr1, *canon_ftrs[j].first); ++out;
-		}
-	}
+        for (std::size_t j = i + 1; j < num_ftrs; j++) {
+            *out = PharmType(ftr1, *canon_ftrs[j].first); ++out;
+        }
+    }
 }
 
 #endif // CDPL_PHARM_TWOPOINTPHARMACOPHOREGENERATOR_HPP

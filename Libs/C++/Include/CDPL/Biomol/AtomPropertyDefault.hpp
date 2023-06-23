@@ -40,19 +40,19 @@ namespace CDPL
     namespace Biomol
     {
 
-		/**
-		 * \brief Provides default values for built-in Chem::Atom properties.
-		 */
-		namespace AtomPropertyDefault
-		{
+        /**
+         * \brief Provides default values for built-in Chem::Atom properties.
+         */
+        namespace AtomPropertyDefault
+        {
 
-			extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
-			extern CDPL_BIOMOL_API const double B_FACTOR;
-			extern CDPL_BIOMOL_API const double OCCUPANCY;
-			extern CDPL_BIOMOL_API const bool RESIDUE_LEAVING_ATOM_FLAG;
-			extern CDPL_BIOMOL_API const bool RESIDUE_LINKING_ATOM_FLAG;
-			extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;
-		}
+            extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
+            extern CDPL_BIOMOL_API const double B_FACTOR;
+            extern CDPL_BIOMOL_API const double OCCUPANCY;
+            extern CDPL_BIOMOL_API const bool RESIDUE_LEAVING_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const bool RESIDUE_LINKING_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;
+        }
     }
 }
 

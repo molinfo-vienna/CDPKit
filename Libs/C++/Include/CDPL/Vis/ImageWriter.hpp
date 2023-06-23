@@ -36,58 +36,58 @@ typedef struct _cairo_surface cairo_surface_t;
 namespace CDPL 
 {
 
-	namespace Base
-	{
-		
-		class DataIOBase;
-	}
+    namespace Base
+    {
+        
+        class DataIOBase;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
-		class MolecularGraph;
-	}
+        class Reaction;
+        class MolecularGraph;
+    }
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		class View2D;
-		class ReactionView2D;
-		class StructureView2D;
-		class Rectangle2D;
+        class View2D;
+        class ReactionView2D;
+        class StructureView2D;
+        class Rectangle2D;
 
-		class CDPL_VIS_API ImageWriter
-		{
+        class CDPL_VIS_API ImageWriter
+        {
 
-		protected:
-			ImageWriter(const Base::DataIOBase& io_base);
+        protected:
+            ImageWriter(const Base::DataIOBase& io_base);
 
-			virtual ~ImageWriter();
+            virtual ~ImageWriter();
 
-			cairo_surface_t* renderMolGraphImage(const Chem::MolecularGraph&);
-			cairo_surface_t* renderReactionImage(const Chem::Reaction&);
+            cairo_surface_t* renderMolGraphImage(const Chem::MolecularGraph&);
+            cairo_surface_t* renderReactionImage(const Chem::Reaction&);
 
-			virtual cairo_surface_t* createCairoSurface(double, double) const = 0;
-			virtual cairo_surface_t* createCairoSurface() const = 0;
+            virtual cairo_surface_t* createCairoSurface(double, double) const = 0;
+            virtual cairo_surface_t* createCairoSurface() const = 0;
 
-		private:
-			ImageWriter(const ImageWriter&);
+        private:
+            ImageWriter(const ImageWriter&);
 
-			cairo_surface_t* renderImage(View2D&) const;
+            cairo_surface_t* renderImage(View2D&) const;
 
-			void getImageBounds(View2D&, Rectangle2D&) const;
+            void getImageBounds(View2D&, Rectangle2D&) const;
 
-			ImageWriter& operator=(const ImageWriter&);
+            ImageWriter& operator=(const ImageWriter&);
 
-			typedef std::auto_ptr<StructureView2D> StructureViewPtr;
-			typedef std::auto_ptr<ReactionView2D> ReactionViewPtr;
+            typedef std::auto_ptr<StructureView2D> StructureViewPtr;
+            typedef std::auto_ptr<ReactionView2D> ReactionViewPtr;
 
-			const Base::DataIOBase& ioBase;
-			StructureViewPtr        structureView;
-			ReactionViewPtr         reactionView;
-		};
-	}
+            const Base::DataIOBase& ioBase;
+            StructureViewPtr        structureView;
+            ReactionViewPtr         reactionView;
+        };
+    }
 }
 
 #endif // CDPL_VIS_IMAGEWRITER_HPP

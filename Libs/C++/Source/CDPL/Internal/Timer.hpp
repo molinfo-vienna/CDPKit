@@ -37,41 +37,41 @@ namespace CDPL
     namespace Internal
     {
 
-		class Timer
-		{
+        class Timer
+        {
 
-		 public:
-			typedef std::chrono::high_resolution_clock::duration Duration;
-	    
-			Timer(): start(std::chrono::high_resolution_clock::now()) {}
+         public:
+            typedef std::chrono::high_resolution_clock::duration Duration;
+        
+            Timer(): start(std::chrono::high_resolution_clock::now()) {}
 
-			void reset() {
-				start = std::chrono::high_resolution_clock::now();
-			}
+            void reset() {
+                start = std::chrono::high_resolution_clock::now();
+            }
 
-			Duration elapsed() const {
-				return (std::chrono::high_resolution_clock::now() - start);
-			}
+            Duration elapsed() const {
+                return (std::chrono::high_resolution_clock::now() - start);
+            }
 
-			template <int PREC = 0, typename PERIOD = std::ratio<1> >
-			std::string format() {
-				std::ostringstream oss;
+            template <int PREC = 0, typename PERIOD = std::ratio<1> >
+            std::string format() {
+                std::ostringstream oss;
 
-				if (PREC > 0) {
-					oss << std::fixed << std::setprecision(PREC);
-					oss << std::chrono::duration_cast<std::chrono::duration<double, PERIOD> >(elapsed()).count();
+                if (PREC > 0) {
+                    oss << std::fixed << std::setprecision(PREC);
+                    oss << std::chrono::duration_cast<std::chrono::duration<double, PERIOD> >(elapsed()).count();
 
-				} else 
-					oss << std::chrono::duration_cast<std::chrono::duration<std::uintmax_t, PERIOD> >(elapsed()).count();
-				
-				return oss.str();
-			}
-	    
-		 private:
-			typedef std::chrono::high_resolution_clock::time_point TimePoint;
+                } else 
+                    oss << std::chrono::duration_cast<std::chrono::duration<std::uintmax_t, PERIOD> >(elapsed()).count();
+                
+                return oss.str();
+            }
+        
+         private:
+            typedef std::chrono::high_resolution_clock::time_point TimePoint;
 
-			TimePoint start;
-		};
+            TimePoint start;
+        };
     }
 }
 

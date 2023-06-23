@@ -32,19 +32,19 @@
 namespace 
 {
 
-	struct AtomPropertyFlag {};
+    struct AtomPropertyFlag {};
 }
 
 
 void CDPLPythonBiomol::exportAtomPropertyFlags()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomPropertyFlag, boost::noncopyable>("AtomPropertyFlag", python::no_init)
-		.def_readonly("RESIDUE_CODE", &Biomol::AtomPropertyFlag::RESIDUE_CODE)
-		.def_readonly("RESIDUE_SEQ_NO", &Biomol::AtomPropertyFlag::RESIDUE_SEQ_NO)
-		.def_readonly("RESIDUE_INS_CODE", &Biomol::AtomPropertyFlag::RESIDUE_INS_CODE)
-		.def_readonly("CHAIN_ID", &Biomol::AtomPropertyFlag::CHAIN_ID)
-		.def_readonly("MODEL_NUMBER", &Biomol::AtomPropertyFlag::MODEL_NUMBER);
+    python::class_<AtomPropertyFlag, boost::noncopyable>("AtomPropertyFlag", python::no_init)
+        .def_readonly("RESIDUE_CODE", &Biomol::AtomPropertyFlag::RESIDUE_CODE)
+        .def_readonly("RESIDUE_SEQ_NO", &Biomol::AtomPropertyFlag::RESIDUE_SEQ_NO)
+        .def_readonly("RESIDUE_INS_CODE", &Biomol::AtomPropertyFlag::RESIDUE_INS_CODE)
+        .def_readonly("CHAIN_ID", &Biomol::AtomPropertyFlag::CHAIN_ID)
+        .def_readonly("MODEL_NUMBER", &Biomol::AtomPropertyFlag::MODEL_NUMBER);
 }

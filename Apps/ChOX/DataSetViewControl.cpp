@@ -40,154 +40,154 @@ using namespace ChOX;
 
 
 DataSetViewControl::DataSetViewControl(QMainWindow* parent, DataSetView& view): 
-	QToolBar(parent), dataSetView(view)
+    QToolBar(parent), dataSetView(view)
 {
-	init();
+    init();
 }
 
 void DataSetViewControl::handlePageOffsetInput()
 {
-	dataSetView.getPageView().setPageOffset(pageOffsetLineEdit->text().toInt() - 1);
+    dataSetView.getPageView().setPageOffset(pageOffsetLineEdit->text().toInt() - 1);
 }
 
 void DataSetViewControl::handleNextPageButtonClick()
 {
-	DataSetPageView& page_view = dataSetView.getPageView();
+    DataSetPageView& page_view = dataSetView.getPageView();
 
-	page_view.setPageOffset(page_view.getPageOffset() + page_view.getNumRows() * page_view.getNumColumns());
+    page_view.setPageOffset(page_view.getPageOffset() + page_view.getNumRows() * page_view.getNumColumns());
 }
 
 void DataSetViewControl::handlePrevPageButtonClick()
 {
-	DataSetPageView& page_view = dataSetView.getPageView();
+    DataSetPageView& page_view = dataSetView.getPageView();
 
-	page_view.setPageOffset(page_view.getPageOffset() - page_view.getNumRows() * page_view.getNumColumns());
+    page_view.setPageOffset(page_view.getPageOffset() - page_view.getNumRows() * page_view.getNumColumns());
 }
 
 void DataSetViewControl::handleNextLineButtonClick()
 {
-	DataSetPageView& page_view = dataSetView.getPageView();
+    DataSetPageView& page_view = dataSetView.getPageView();
 
-	page_view.setPageOffset(page_view.getPageOffset() + page_view.getNumColumns());
+    page_view.setPageOffset(page_view.getPageOffset() + page_view.getNumColumns());
 }
 
 void DataSetViewControl::handlePrevLineButtonClick()
 {
-	DataSetPageView& page_view = dataSetView.getPageView();
+    DataSetPageView& page_view = dataSetView.getPageView();
 
-	page_view.setPageOffset(page_view.getPageOffset() - page_view.getNumColumns());
+    page_view.setPageOffset(page_view.getPageOffset() - page_view.getNumColumns());
 }
 
 void DataSetViewControl::updateGUI(int)
 {
-	int num_records = dataSetView.getDataSet().getSize();
-	int page_offs = dataSetView.getPageView().getPageOffset();
-	
-	if (num_records > 0) {
-		pageOffsetValidator->setRange(1, num_records);
-		pageOffsetLineEdit->setText(QString().setNum(page_offs + 1));
-		pageOffsetLineEdit->setEnabled(true);
+    int num_records = dataSetView.getDataSet().getSize();
+    int page_offs = dataSetView.getPageView().getPageOffset();
+    
+    if (num_records > 0) {
+        pageOffsetValidator->setRange(1, num_records);
+        pageOffsetLineEdit->setText(QString().setNum(page_offs + 1));
+        pageOffsetLineEdit->setEnabled(true);
 
-		prevPageButton->setEnabled(page_offs > 0);
-		nextPageButton->setEnabled(page_offs < num_records - 1);
+        prevPageButton->setEnabled(page_offs > 0);
+        nextPageButton->setEnabled(page_offs < num_records - 1);
 
-		prevLineButton->setEnabled(page_offs > 0);
-		nextLineButton->setEnabled(page_offs < num_records - 1);
+        prevLineButton->setEnabled(page_offs > 0);
+        nextLineButton->setEnabled(page_offs < num_records - 1);
 
-	} else {
-		pageOffsetLineEdit->setEnabled(false);
-		pageOffsetLineEdit->setText("1");
-		pageOffsetValidator->setRange(1, 1);
+    } else {
+        pageOffsetLineEdit->setEnabled(false);
+        pageOffsetLineEdit->setText("1");
+        pageOffsetValidator->setRange(1, 1);
 
-		prevPageButton->setEnabled(false);
-		nextPageButton->setEnabled(false);
-		prevLineButton->setEnabled(false);
-		nextLineButton->setEnabled(false);
-	}
+        prevPageButton->setEnabled(false);
+        nextPageButton->setEnabled(false);
+        prevLineButton->setEnabled(false);
+        nextLineButton->setEnabled(false);
+    }
 }
 
 void DataSetViewControl::init()
 {
-	setObjectName("dataSetViewControl");
-	setWindowTitle(tr("Navigation Toolbar"));
+    setObjectName("dataSetViewControl");
+    setWindowTitle(tr("Navigation Toolbar"));
 
-	addWidget(new QLabel(tr("Rows") + ":", this));
+    addWidget(new QLabel(tr("Rows") + ":", this));
 
-	rowCountSpinBox = new QSpinBox(this);
+    rowCountSpinBox = new QSpinBox(this);
 
-	rowCountSpinBox->setMinimum(1);
-	rowCountSpinBox->setValue(1);
-	rowCountSpinBox->setToolTip(tr("Set number of rows"));
+    rowCountSpinBox->setMinimum(1);
+    rowCountSpinBox->setValue(1);
+    rowCountSpinBox->setToolTip(tr("Set number of rows"));
 
-	addWidget(rowCountSpinBox);
+    addWidget(rowCountSpinBox);
 
-	addWidget(new QLabel(tr("Columns") + ":", this));
+    addWidget(new QLabel(tr("Columns") + ":", this));
 
-	columnCountSpinBox = new QSpinBox(this);
+    columnCountSpinBox = new QSpinBox(this);
 
-	columnCountSpinBox->setMinimum(1);
-	columnCountSpinBox->setValue(1);
-	columnCountSpinBox->setToolTip(tr("Set number of columns"));
+    columnCountSpinBox->setMinimum(1);
+    columnCountSpinBox->setValue(1);
+    columnCountSpinBox->setToolTip(tr("Set number of columns"));
 
-	addWidget(columnCountSpinBox);
+    addWidget(columnCountSpinBox);
 
-	prevPageButton = new QToolButton(this);
+    prevPageButton = new QToolButton(this);
 
-	prevPageButton->setIcon(QIcon(":/Icons/2leftarrow.png"));
-	prevPageButton->setToolTip(tr("Previous page"));
+    prevPageButton->setIcon(QIcon(":/Icons/2leftarrow.png"));
+    prevPageButton->setToolTip(tr("Previous page"));
 
-	addWidget(prevPageButton);
+    addWidget(prevPageButton);
 
-	prevLineButton = new QToolButton(this);
+    prevLineButton = new QToolButton(this);
 
-	prevLineButton->setIcon(QIcon(":/Icons/1leftarrow.png"));
-	prevLineButton->setToolTip(tr("Previous row"));
+    prevLineButton->setIcon(QIcon(":/Icons/1leftarrow.png"));
+    prevLineButton->setToolTip(tr("Previous row"));
 
-	addWidget(prevLineButton);
+    addWidget(prevLineButton);
 
-	pageOffsetLineEdit = new QLineEdit("1", this);
-	pageOffsetValidator = new QIntValidator(pageOffsetLineEdit);
+    pageOffsetLineEdit = new QLineEdit("1", this);
+    pageOffsetValidator = new QIntValidator(pageOffsetLineEdit);
 
-	pageOffsetLineEdit->setValidator(pageOffsetValidator);
-	pageOffsetLineEdit->setToolTip(tr("Go to record"));
-	pageOffsetLineEdit->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, 
-												  pageOffsetLineEdit->sizePolicy().verticalPolicy()));
+    pageOffsetLineEdit->setValidator(pageOffsetValidator);
+    pageOffsetLineEdit->setToolTip(tr("Go to record"));
+    pageOffsetLineEdit->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, 
+                                                  pageOffsetLineEdit->sizePolicy().verticalPolicy()));
 
-	addWidget(pageOffsetLineEdit);
+    addWidget(pageOffsetLineEdit);
 
-	nextLineButton = new QToolButton(this);
+    nextLineButton = new QToolButton(this);
 
-	nextLineButton->setIcon(QIcon(":/Icons/1rightarrow.png"));
-	nextLineButton->setToolTip(tr("Next row"));
+    nextLineButton->setIcon(QIcon(":/Icons/1rightarrow.png"));
+    nextLineButton->setToolTip(tr("Next row"));
 
-	addWidget(nextLineButton);
+    addWidget(nextLineButton);
 
-	nextPageButton = new QToolButton(this);
+    nextPageButton = new QToolButton(this);
 
-	nextPageButton->setIcon(QIcon(":/Icons/2rightarrow.png"));
-	nextPageButton->setToolTip(tr("Next Page"));
+    nextPageButton->setIcon(QIcon(":/Icons/2rightarrow.png"));
+    nextPageButton->setToolTip(tr("Next Page"));
 
-	addWidget(nextPageButton);
+    addWidget(nextPageButton);
 
-	updateGUI(0);
+    updateGUI(0);
 
-	DataSetPageView* page_view = &dataSetView.getPageView();
+    DataSetPageView* page_view = &dataSetView.getPageView();
 
-	connect(page_view, SIGNAL(numRowsChanged(int)), rowCountSpinBox, SLOT(setValue(int)));
-	connect(rowCountSpinBox, SIGNAL(valueChanged(int)), page_view, SLOT(setNumRows(int)));
+    connect(page_view, SIGNAL(numRowsChanged(int)), rowCountSpinBox, SLOT(setValue(int)));
+    connect(rowCountSpinBox, SIGNAL(valueChanged(int)), page_view, SLOT(setNumRows(int)));
 
-	connect(page_view, SIGNAL(numColumnsChanged(int)), columnCountSpinBox, SLOT(setValue(int)));
-	connect(columnCountSpinBox, SIGNAL(valueChanged(int)), page_view, SLOT(setNumColumns(int)));
+    connect(page_view, SIGNAL(numColumnsChanged(int)), columnCountSpinBox, SLOT(setValue(int)));
+    connect(columnCountSpinBox, SIGNAL(valueChanged(int)), page_view, SLOT(setNumColumns(int)));
 
-	connect(page_view, SIGNAL(pageOffsetChanged(int)), this, SLOT(updateGUI(int)));
-	connect(page_view, SIGNAL(numRowsChanged(int)), this, SLOT(updateGUI(int)));
-	connect(page_view, SIGNAL(numColumnsChanged(int)), this, SLOT(updateGUI(int)));
-	connect(&dataSetView.getDataSet(), SIGNAL(sizeChanged(int)), this, SLOT(updateGUI(int)));
+    connect(page_view, SIGNAL(pageOffsetChanged(int)), this, SLOT(updateGUI(int)));
+    connect(page_view, SIGNAL(numRowsChanged(int)), this, SLOT(updateGUI(int)));
+    connect(page_view, SIGNAL(numColumnsChanged(int)), this, SLOT(updateGUI(int)));
+    connect(&dataSetView.getDataSet(), SIGNAL(sizeChanged(int)), this, SLOT(updateGUI(int)));
 
-	connect(prevPageButton, SIGNAL(clicked()), this, SLOT(handlePrevPageButtonClick()));
-	connect(nextPageButton, SIGNAL(clicked()), this, SLOT(handleNextPageButtonClick()));
-	connect(prevLineButton, SIGNAL(clicked()), this, SLOT(handlePrevLineButtonClick()));
-	connect(nextLineButton, SIGNAL(clicked()), this, SLOT(handleNextLineButtonClick()));
+    connect(prevPageButton, SIGNAL(clicked()), this, SLOT(handlePrevPageButtonClick()));
+    connect(nextPageButton, SIGNAL(clicked()), this, SLOT(handleNextPageButtonClick()));
+    connect(prevLineButton, SIGNAL(clicked()), this, SLOT(handlePrevLineButtonClick()));
+    connect(nextLineButton, SIGNAL(clicked()), this, SLOT(handleNextLineButtonClick()));
 
-	connect(pageOffsetLineEdit, SIGNAL(returnPressed()), this, SLOT(handlePageOffsetInput()));
+    connect(pageOffsetLineEdit, SIGNAL(returnPressed()), this, SLOT(handlePageOffsetInput()));
 }

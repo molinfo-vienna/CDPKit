@@ -44,61 +44,61 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief FragmentLibraryGenerator.
-		 */
-		class CDPL_CONFGEN_API FragmentLibraryGenerator
-		{
+        /**
+         * \brief FragmentLibraryGenerator.
+         */
+        class CDPL_CONFGEN_API FragmentLibraryGenerator
+        {
 
-		  public:
-			FragmentLibraryGenerator();
+          public:
+            FragmentLibraryGenerator();
 
-			FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib);
+            FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib);
 
-			void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+            void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
+            const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
 
-			FragmentConformerGeneratorSettings& getSettings();
+            FragmentConformerGeneratorSettings& getSettings();
 
-			const FragmentConformerGeneratorSettings& getSettings() const;
+            const FragmentConformerGeneratorSettings& getSettings() const;
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
-	
-			std::size_t getNumGeneratedConformers() const;
+            unsigned int process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
+    
+            std::size_t getNumGeneratedConformers() const;
 
-			std::uint64_t getLibraryEntryHashCode() const;
+            std::uint64_t getLibraryEntryHashCode() const;
 
-		  private:
-			FragmentLibraryGenerator(const FragmentLibraryGenerator&);
+          private:
+            FragmentLibraryGenerator(const FragmentLibraryGenerator&);
 
-			FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
+            FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
 
-			FragmentLibraryEntry::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
+            FragmentLibraryEntry::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
 
-			void removeNewLibraryEntry() const;
+            void removeNewLibraryEntry() const;
 
-			void init();
+            void init();
 
-			FragmentLibrary::SharedPointer   fragLib;
-			CanonicalFragment                canonFrag;
-			FragmentConformerGenerator       fragConfGen;
-			std::ostringstream               smilesStream;
-			Chem::SMILESMolecularGraphWriter smilesGen;
-			std::size_t                      numGenConfs;
-		};
+            FragmentLibrary::SharedPointer   fragLib;
+            CanonicalFragment                canonFrag;
+            FragmentConformerGenerator       fragConfGen;
+            std::ostringstream               smilesStream;
+            Chem::SMILESMolecularGraphWriter smilesGen;
+            std::size_t                      numGenConfs;
+        };
     }
 }
 

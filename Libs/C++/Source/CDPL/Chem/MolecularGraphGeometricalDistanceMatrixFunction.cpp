@@ -34,18 +34,18 @@ using namespace CDPL;
 
 Math::DMatrix::SharedPointer Chem::calcGeometricalDistanceMatrix(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any mtx_prop = molgraph.getProperty(MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX);
+    if (!overwrite) {
+        Base::Any mtx_prop = molgraph.getProperty(MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX);
 
-		if (!mtx_prop.isEmpty())
-			return mtx_prop.getData<Math::DMatrix::SharedPointer>();
-	}
+        if (!mtx_prop.isEmpty())
+            return mtx_prop.getData<Math::DMatrix::SharedPointer>();
+    }
 
-	Math::DMatrix::SharedPointer mtx_ptr(new Math::DMatrix());
+    Math::DMatrix::SharedPointer mtx_ptr(new Math::DMatrix());
 
-	calcGeometricalDistanceMatrix(molgraph, *mtx_ptr);
+    calcGeometricalDistanceMatrix(molgraph, *mtx_ptr);
 
-	molgraph.setProperty(MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX, mtx_ptr);
+    molgraph.setProperty(MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX, mtx_ptr);
 
-	return mtx_ptr;
+    return mtx_ptr;
 }

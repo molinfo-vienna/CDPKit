@@ -40,12 +40,12 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
-		 */
-		typedef std::function<const Math::Vector3D&(const Pharm::Feature&)> Feature3DCoordinatesFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
+         */
+        typedef std::function<const Math::Vector3D&(const Pharm::Feature&)> Feature3DCoordinatesFunction;
     }
 }
 

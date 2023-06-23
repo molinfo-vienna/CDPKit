@@ -53,600 +53,600 @@ using namespace CmdLineLib;
 namespace
 {
 
-	const std::size_t TEXT_BLOCK_WIDTH = 80;
+    const std::size_t TEXT_BLOCK_WIDTH = 80;
 
-	std::atomic<bool> signalCaught(false);
+    std::atomic<bool> signalCaught(false);
 
-	const char* sigNumberToString(int sig)
-	{
+    const char* sigNumberToString(int sig)
+    {
 
-		switch (sig) {
+        switch (sig) {
 
-			case SIGTERM:
-				return "Terminated";
-				
-			case SIGINT:
-				return "Interrupt";
-#ifndef _WIN32				
-			case SIGHUP:
-				return "Hangup";
-				
-			case SIGQUIT:
-				return "Quit";
-#endif // !defined _WIN32				
-			default:
-				return "Unknown";
-		}
+            case SIGTERM:
+                return "Terminated";
+                
+            case SIGINT:
+                return "Interrupt";
+#ifndef _WIN32                
+            case SIGHUP:
+                return "Hangup";
+                
+            case SIGQUIT:
+                return "Quit";
+#endif // !defined _WIN32                
+            default:
+                return "Unknown";
+        }
 
-		return 0;
-	}
-	
-	void handleSignal(int sig) 
-	{
-		if (signalCaught.load()) {
-			std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - exiting..." << std::endl;
-			std::exit(EXIT_FAILURE);
-		}
-			
-		std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - attempting graceful shutdown..." << std::endl;
-		signalCaught.store(true);
-	}
+        return 0;
+    }
+    
+    void handleSignal(int sig) 
+    {
+        if (signalCaught.load()) {
+            std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - exiting..." << std::endl;
+            std::exit(EXIT_FAILURE);
+        }
+            
+        std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - attempting graceful shutdown..." << std::endl;
+        signalCaught.store(true);
+    }
 }
 
 
 CmdLineBase::CmdLineBase(): 
-	optOptions("Other Options"), mandOptions("Mandatory Options"), verbLevel(INFO), 
-	logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1),
-	inProgressLine(false), inNewLine(true)
+    optOptions("Other Options"), mandOptions("Mandatory Options"), verbLevel(INFO), 
+    logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1),
+    inProgressLine(false), inNewLine(true)
 {
-	addOption("help,h", "Print help message and exit (ABOUT, USAGE, SHORT, ALL or 'name of option', default: SHORT).", 
-			  value<std::string>()->implicit_value("SHORT"));
-	addOption("version,V", "Print version information and exit.");
-	addOption("verbosity,v", "Verbosity level of information output (QUIET, ERROR, INFO, VERBOSE, DEBUG, default: INFO).", 
-			  value<std::string>()->implicit_value("VERBOSE")->notifier(std::bind(&CmdLineBase::setVerbosityLevel, this, std::placeholders::_1)));
-	addOption("config,c", "Use file with program options.", 
-			  value<std::string>());
-	addOption("log-file,l", "Redirect text-output to file.", 
-			  value<std::string>());
-	addOption("progress,p", "Show progress bar (default: true).", 
-			   value<bool>(&showProgress)->implicit_value(true));
+    addOption("help,h", "Print help message and exit (ABOUT, USAGE, SHORT, ALL or 'name of option', default: SHORT).", 
+              value<std::string>()->implicit_value("SHORT"));
+    addOption("version,V", "Print version information and exit.");
+    addOption("verbosity,v", "Verbosity level of information output (QUIET, ERROR, INFO, VERBOSE, DEBUG, default: INFO).", 
+              value<std::string>()->implicit_value("VERBOSE")->notifier(std::bind(&CmdLineBase::setVerbosityLevel, this, std::placeholders::_1)));
+    addOption("config,c", "Use file with program options.", 
+              value<std::string>());
+    addOption("log-file,l", "Redirect text-output to file.", 
+              value<std::string>());
+    addOption("progress,p", "Show progress bar (default: true).", 
+               value<bool>(&showProgress)->implicit_value(true));
 
-	std::signal(SIGTERM, &handleSignal);
-	std::signal(SIGINT, &handleSignal);
+    std::signal(SIGTERM, &handleSignal);
+    std::signal(SIGINT, &handleSignal);
 
 #ifndef _WIN32
-	std::signal(SIGHUP, &handleSignal);
-	std::signal(SIGQUIT, &handleSignal);
+    std::signal(SIGHUP, &handleSignal);
+    std::signal(SIGQUIT, &handleSignal);
 #endif // !defined _WIN32
 }
 
 int CmdLineBase::run(int argc, char* argv[])
 {
-	namespace po = boost::program_options;
+    namespace po = boost::program_options;
 
-	try {
-		init();
+    try {
+        init();
 
-		parsedOptions.clear();
-		logStreamPtr = &std::cerr;
+        parsedOptions.clear();
+        logStreamPtr = &std::cerr;
 
-		OptionsDescription options;
+        OptionsDescription options;
 
-		options
-			.add(optOptions)
-			.add(mandOptions);
+        options
+            .add(optOptions)
+            .add(mandOptions);
 
-		po::store(po::parse_command_line(argc, argv, options), parsedOptions);
+        po::store(po::parse_command_line(argc, argv, options), parsedOptions);
 
-		if (wasOptionSet("config"))
-			po::store(po::parse_config_file<char>(getOptionValue<std::string>("config").c_str(), options), parsedOptions);
+        if (wasOptionSet("config"))
+            po::store(po::parse_config_file<char>(getOptionValue<std::string>("config").c_str(), options), parsedOptions);
 
-		if (wasOptionSet("help")) {
-			printHelp(argv[0], getOptionValue<std::string>("help"));
-			return EXIT_SUCCESS;
-		}
+        if (wasOptionSet("help")) {
+            printHelp(argv[0], getOptionValue<std::string>("help"));
+            return EXIT_SUCCESS;
+        }
 
-		if (wasOptionSet("version")) {
-			printVersion();
-			return EXIT_SUCCESS;
-		}
+        if (wasOptionSet("version")) {
+            printVersion();
+            return EXIT_SUCCESS;
+        }
 
-		po::notify(parsedOptions);    
+        po::notify(parsedOptions);    
 
-		processOptions();
-		openLogFile();
+        processOptions();
+        openLogFile();
 
-	} catch (const std::exception& e) {
-		std::cerr << "Error while processing command line: " << e.what() << std::endl;
-		std::cerr << "Try '" << boost::filesystem::path(argv[0]).filename().string()
-				  <<  " -h' for more information." << std::endl;
-		return EXIT_FAILURE;
-	}
+    } catch (const std::exception& e) {
+        std::cerr << "Error while processing command line: " << e.what() << std::endl;
+        std::cerr << "Try '" << boost::filesystem::path(argv[0]).filename().string()
+                  <<  " -h' for more information." << std::endl;
+        return EXIT_FAILURE;
+    }
 
-	int result = EXIT_FAILURE;
+    int result = EXIT_FAILURE;
 
-	try {
-		result = process();
+    try {
+        result = process();
 
-	} catch (const std::exception& e) {
-		printMessage(ERROR, std::string("Error: ") + e.what());
+    } catch (const std::exception& e) {
+        printMessage(ERROR, std::string("Error: ") + e.what());
 
-	} catch (...) {
-		printMessage(ERROR, "Unspecified Error");
-	}
+    } catch (...) {
+        printMessage(ERROR, "Unspecified Error");
+    }
 
-	if (logFile.is_open())
-		logFile.close();
+    if (logFile.is_open())
+        logFile.close();
 
-	if (termSignalCaught())
-		return EXIT_FAILURE;
-	
-	return result;
+    if (termSignalCaught())
+        return EXIT_FAILURE;
+    
+    return result;
 }
 
 CmdLineBase::VerbosityLevel CmdLineBase::getVerbosityLevel() const
 {
-	return verbLevel;
+    return verbLevel;
 }
 
 bool CmdLineBase::termSignalCaught()
 {
-	return signalCaught.load();
+    return signalCaught.load();
 }
 
 void CmdLineBase::addOption(const char* name, const std::string& descr)
 {
-	optOptions.add_options()(name, descr.empty() ? static_cast<const char*>(0) : descr.c_str());
+    optOptions.add_options()(name, descr.empty() ? static_cast<const char*>(0) : descr.c_str());
 }
 
 void CmdLineBase::addOption(const char* name, const std::string& descr, 
-							const boost::program_options::value_semantic* sem)
+                            const boost::program_options::value_semantic* sem)
 {
-	if (sem->is_required())
-		mandOptions.add_options()(name, sem, descr.empty() ? static_cast<const char*>(0) : descr.c_str());
-	else
-		optOptions.add_options()(name, sem, descr.empty() ? static_cast<const char*>(0) : descr.c_str());
+    if (sem->is_required())
+        mandOptions.add_options()(name, sem, descr.empty() ? static_cast<const char*>(0) : descr.c_str());
+    else
+        optOptions.add_options()(name, sem, descr.empty() ? static_cast<const char*>(0) : descr.c_str());
 }
 
 void CmdLineBase::addOptionLongDescription(const char* name, const std::string& descr)
 {
-	optionLongDescrs[name] = descr;
+    optionLongDescrs[name] = descr;
 }
 
 bool CmdLineBase::wasOptionSet(const char* name) const
 {
-	return (parsedOptions.count(name) > 0);
+    return (parsedOptions.count(name) > 0);
 }
 
 boost::program_options::typed_value<bool>* CmdLineBase::boolSwitch()
 {
-	return boost::program_options::bool_switch();
+    return boost::program_options::bool_switch();
 }
 
 boost::program_options::typed_value<bool>* CmdLineBase::boolSwitch(bool* v)
 {
-	return boost::program_options::bool_switch(v);
+    return boost::program_options::bool_switch(v);
 }
 
 const char* CmdLineBase::getProgVersion() const
 {
-	return CDPL_VERSION_STRING;
+    return CDPL_VERSION_STRING;
 }
 
 const char* CmdLineBase::getProgCopyright() const
 {
-	return 0;
+    return 0;
 }
 
 std::string CmdLineBase::getProgTitleString() const
 {
-	std::string title(getProgName());
+    std::string title(getProgName());
 
-	title += " V";
-	title += getProgVersion();
+    title += " V";
+    title += getProgVersion();
 
-	if (getProgCopyright()) {
-		title += " (C) ";
-		title += getProgCopyright();
-	}
+    if (getProgCopyright()) {
+        title += " (C) ";
+        title += getProgCopyright();
+    }
 
-	return title;
+    return title;
 }
 
 const char* CmdLineBase::getProgAboutText() const
 {
-	return "";
+    return "";
 }
 
 void CmdLineBase::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
 {
-	if (level > verbLevel || (termSignalCaught() && level != ERROR))
-		return;
+    if (level > verbLevel || (termSignalCaught() && level != ERROR))
+        return;
 
-	if (file_only && logStreamPtr == &std::cerr)
-		return;
+    if (file_only && logStreamPtr == &std::cerr)
+        return;
 
-	if (logStreamPtr == &std::cerr && inProgressLine)
-		logStream() << std::endl;
+    if (logStreamPtr == &std::cerr && inProgressLine)
+        logStream() << std::endl;
 
-	logStream() << msg;
+    logStream() << msg;
 
-	if (nl) 
-		logStream() << std::endl;
-	
-	inNewLine = nl;
-	inProgressLine = false;
+    if (nl) 
+        logStream() << std::endl;
+    
+    inNewLine = nl;
+    inProgressLine = false;
 
-	logStream().flush();
+    logStream().flush();
 }
 
 std::ostream& CmdLineBase::logStream() const 
 {
-	return *logStreamPtr;
+    return *logStreamPtr;
 }
 
 bool CmdLineBase::progressEnabled() const
 {
-	return showProgress;
+    return showProgress;
 }
 
 void CmdLineBase::initProgress(std::size_t prog_bar_len)
 {
-	progressBarLen = prog_bar_len;
-	lastProgressValue = -1;
-	progTimer.reset();
+    progressBarLen = prog_bar_len;
+    lastProgressValue = -1;
+    progTimer.reset();
 }
 
 void CmdLineBase::printProgress(const std::string& prefix, double progress)
 {
-	if (!showProgress || verbLevel == QUIET || termSignalCaught())
-		return;
+    if (!showProgress || verbLevel == QUIET || termSignalCaught())
+        return;
 
-	progress = std::min(1.0, progress);
+    progress = std::min(1.0, progress);
 
-	if (progress <= 0.0) 
-		return;
-	
-	long curr_prog_value = progress * 10000;
+    if (progress <= 0.0) 
+        return;
+    
+    long curr_prog_value = progress * 10000;
 
-	if (curr_prog_value <= lastProgressValue)
-		return;
+    if (curr_prog_value <= lastProgressValue)
+        return;
 
-	lastProgressValue = curr_prog_value;
-	std::size_t curr_prog_bar_len = progressBarLen * progress;
+    lastProgressValue = curr_prog_value;
+    std::size_t curr_prog_bar_len = progressBarLen * progress;
 
-	if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
-		std::cerr << std::endl;
+    if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
+        std::cerr << std::endl;
 
-	std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
-			  << (double(lastProgressValue) / 100) 
-			  << "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
-			  << std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
+    std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
+              << (double(lastProgressValue) / 100) 
+              << "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
+              << std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
 
-	std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
+    std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
-	std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) 
-			  << std::setw(10) << "\r";
+    std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) 
+              << std::setw(10) << "\r";
 
-	inProgressLine = true;
-	inNewLine = false;
+    inProgressLine = true;
+    inNewLine = false;
 }
 
 void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
 {
-	if (!showProgress || verbLevel == QUIET || termSignalCaught() || maxProgressDotCount == 0)
-		return;
+    if (!showProgress || verbLevel == QUIET || termSignalCaught() || maxProgressDotCount == 0)
+        return;
 
-	if (!force) {
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(progTimer.elapsed()) < std::chrono::milliseconds(progressUpdateInterv))
-			return;
-	}
+    if (!force) {
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(progTimer.elapsed()) < std::chrono::milliseconds(progressUpdateInterv))
+            return;
+    }
 
-	if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
-		std::cerr << std::endl;
+    if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
+        std::cerr << std::endl;
 
-	std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << 
-		std::setfill(' ') << std::setw(maxProgressDotCount - lastProgressDotCount) << "" << "\r";
+    std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << 
+        std::setfill(' ') << std::setw(maxProgressDotCount - lastProgressDotCount) << "" << "\r";
 
-	if (++lastProgressDotCount > maxProgressDotCount)
-		lastProgressDotCount = 1;
+    if (++lastProgressDotCount > maxProgressDotCount)
+        lastProgressDotCount = 1;
 
-	progTimer.reset();
-	inProgressLine = true;
-	inNewLine = false;
+    progTimer.reset();
+    inProgressLine = true;
+    inNewLine = false;
 }
 
 void CmdLineBase::initInfiniteProgress(std::size_t prog_update_interv, std::size_t max_num_dots)
 {
-	progressUpdateInterv = prog_update_interv;
-	lastProgressDotCount = 1;
-	maxProgressDotCount = max_num_dots;
+    progressUpdateInterv = prog_update_interv;
+    lastProgressDotCount = 1;
+    maxProgressDotCount = max_num_dots;
 }
 
 void CmdLineBase::throwValidationError(const std::string& opt_name) const
 {
-	namespace po = boost::program_options;
+    namespace po = boost::program_options;
 
-	throw po::validation_error(po::validation_error::invalid_option_value, opt_name);
+    throw po::validation_error(po::validation_error::invalid_option_value, opt_name);
 }
 
 void CmdLineBase::setVerbosityLevel(const std::string& level)
 {
-	std::string uc_level = level;
-	boost::to_upper(uc_level);
+    std::string uc_level = level;
+    boost::to_upper(uc_level);
 
-	if (uc_level == "QUIET")
-		verbLevel = QUIET;
-	else if (uc_level == "ERROR")
-		verbLevel = ERROR;
-	else if (uc_level == "INFO")
-		verbLevel = INFO;
-	else if (uc_level == "VERBOSE")
-		verbLevel = VERBOSE;
-	else if (uc_level == "DEBUG")
-		verbLevel = DEBUG;
-	else
-		throwValidationError("verbosity");
+    if (uc_level == "QUIET")
+        verbLevel = QUIET;
+    else if (uc_level == "ERROR")
+        verbLevel = ERROR;
+    else if (uc_level == "INFO")
+        verbLevel = INFO;
+    else if (uc_level == "VERBOSE")
+        verbLevel = VERBOSE;
+    else if (uc_level == "DEBUG")
+        verbLevel = DEBUG;
+    else
+        throwValidationError("verbosity");
 }
 
 void CmdLineBase::openLogFile()
 {
-	if (!wasOptionSet("log-file"))
-		return; 
-		
-	logFile.open(getOptionValue<std::string>("log-file").c_str(), std::ios_base::out | std::ios_base::trunc);
+    if (!wasOptionSet("log-file"))
+        return; 
+        
+    logFile.open(getOptionValue<std::string>("log-file").c_str(), std::ios_base::out | std::ios_base::trunc);
 
-	if (!logFile)
-		throw CDPL::Base::IOError("opening log-file failed");
+    if (!logFile)
+        throw CDPL::Base::IOError("opening log-file failed");
 
-	logStreamPtr = &logFile;
+    logStreamPtr = &logFile;
 }
 
 void CmdLineBase::printVersion() const
 {
-	std::cerr << getProgTitleString() << std::endl 
-			  << "(CDPL-Version: " <<  CDPL_VERSION_STRING 
-			  << ", Build: " << CDPL_BUILD_TIME << ", Compiler: " << CDPL_COMPILER_ID 
-			  << " " << CDPL_COMPILER_VERSION
-			  << " on " << CDPL_BUILD_SYSTEM << ")" << std::endl;
+    std::cerr << getProgTitleString() << std::endl 
+              << "(CDPL-Version: " <<  CDPL_VERSION_STRING 
+              << ", Build: " << CDPL_BUILD_TIME << ", Compiler: " << CDPL_COMPILER_ID 
+              << " " << CDPL_COMPILER_VERSION
+              << " on " << CDPL_BUILD_SYSTEM << ")" << std::endl;
 }
 
 void CmdLineBase::printHelp(const char* bin_path, const std::string& what) const
 {
-	std::string lc_what = what;
-	boost::to_lower(lc_what);
+    std::string lc_what = what;
+    boost::to_lower(lc_what);
 
-	if (lc_what == "usage") {
-		printUsage(bin_path); 
-		return;
-	}
+    if (lc_what == "usage") {
+        printUsage(bin_path); 
+        return;
+    }
 
-	if (lc_what == "about") {
-		printAbout();
-		return;
-	}
+    if (lc_what == "about") {
+        printAbout();
+        return;
+    }
 
-	if (lc_what == "short") {
-		printUsage(bin_path); 
+    if (lc_what == "short") {
+        printUsage(bin_path); 
 
-		std::cerr << std::endl;
+        std::cerr << std::endl;
 
-		printOptionsShortHelp();
-		return;
-	}
+        printOptionsShortHelp();
+        return;
+    }
 
-	if (lc_what == "all") {
-		printAbout();
+    if (lc_what == "all") {
+        printAbout();
 
-		std::cerr << std::endl;
+        std::cerr << std::endl;
 
-		printUsage(bin_path); 
+        printUsage(bin_path); 
 
-		std::cerr << std::endl;
+        std::cerr << std::endl;
 
-		printOptionsLongHelp();
-		return;
-	}
+        printOptionsLongHelp();
+        return;
+    }
 
-	printHelpForOption(lc_what);
+    printHelpForOption(lc_what);
 }
 
 void CmdLineBase::printOptionsShortHelp() const
 {
-	std::cerr << mandOptions << std::endl << optOptions;
+    std::cerr << mandOptions << std::endl << optOptions;
 }
 
 void CmdLineBase::printOptionsLongHelp() const
 {
-	namespace po = boost::program_options;
+    namespace po = boost::program_options;
 
-	std::cerr << "Mandatory Options:" << std::endl;
+    std::cerr << "Mandatory Options:" << std::endl;
 
-	const std::vector<boost::shared_ptr<po::option_description> >& mand_options = mandOptions.options();
+    const std::vector<boost::shared_ptr<po::option_description> >& mand_options = mandOptions.options();
 
-	for (std::size_t i = 0; i < mand_options.size(); i++) {
-		std::cerr << "  " << mand_options[i]->format_name() << ' ' << mand_options[i]->format_parameter() 
-				  << std::endl << std::endl;
-		std::cerr << formatTextBlock(getOptionDescription(mand_options[i]->key("*")), 4, TEXT_BLOCK_WIDTH) << std::endl << std::endl;
-	}
+    for (std::size_t i = 0; i < mand_options.size(); i++) {
+        std::cerr << "  " << mand_options[i]->format_name() << ' ' << mand_options[i]->format_parameter() 
+                  << std::endl << std::endl;
+        std::cerr << formatTextBlock(getOptionDescription(mand_options[i]->key("*")), 4, TEXT_BLOCK_WIDTH) << std::endl << std::endl;
+    }
 
-	std::cerr << "Other Options:" << std::endl;
+    std::cerr << "Other Options:" << std::endl;
 
-	const std::vector<boost::shared_ptr<po::option_description> >& opt_options = optOptions.options();
+    const std::vector<boost::shared_ptr<po::option_description> >& opt_options = optOptions.options();
 
-	for (std::size_t i = 0; i < opt_options.size(); i++) {
-		std::cerr << "  " << opt_options[i]->format_name() << ' ' << opt_options[i]->format_parameter() 
-				  << std::endl << std::endl;
-		std::cerr << formatTextBlock(getOptionDescription(opt_options[i]->key("*")), 4, TEXT_BLOCK_WIDTH) << std::endl << std::endl;
-	}
+    for (std::size_t i = 0; i < opt_options.size(); i++) {
+        std::cerr << "  " << opt_options[i]->format_name() << ' ' << opt_options[i]->format_parameter() 
+                  << std::endl << std::endl;
+        std::cerr << formatTextBlock(getOptionDescription(opt_options[i]->key("*")), 4, TEXT_BLOCK_WIDTH) << std::endl << std::endl;
+    }
 }
 
 void CmdLineBase::printHelpForOption(const std::string& name) const
 {
-	namespace po = boost::program_options;
+    namespace po = boost::program_options;
 
-	const OptionDescription* opt_desc = getOptionDescriptor(name);
+    const OptionDescription* opt_desc = getOptionDescriptor(name);
 
-	if (!opt_desc)
-		throwValidationError(name);
+    if (!opt_desc)
+        throwValidationError(name);
 
-	std::cerr << opt_desc->format_name() << ' ' << opt_desc->format_parameter() 
-			  << std::endl << std::endl;
-	std::cerr << formatTextBlock(getOptionDescription(name), 0, TEXT_BLOCK_WIDTH) << std::endl;
+    std::cerr << opt_desc->format_name() << ' ' << opt_desc->format_parameter() 
+              << std::endl << std::endl;
+    std::cerr << formatTextBlock(getOptionDescription(name), 0, TEXT_BLOCK_WIDTH) << std::endl;
 }
 
 void CmdLineBase::printAbout() const
 {
-	std::cerr << getProgTitleString() << std::endl;
+    std::cerr << getProgTitleString() << std::endl;
 
-	std::string about(getProgAboutText());
+    std::string about(getProgAboutText());
 
-	if (!about.empty())
-		std::cerr << std::endl << formatTextBlock(about, 0, TEXT_BLOCK_WIDTH) << std::endl;
+    if (!about.empty())
+        std::cerr << std::endl << formatTextBlock(about, 0, TEXT_BLOCK_WIDTH) << std::endl;
 }
 
 void CmdLineBase::printUsage(const char* bin_path) const
 {
-	namespace po = boost::program_options;
+    namespace po = boost::program_options;
 
-	std::cerr << "Usage: " << std::endl;
-	std::cerr << "  " << boost::filesystem::path(bin_path).filename().string();
+    std::cerr << "Usage: " << std::endl;
+    std::cerr << "  " << boost::filesystem::path(bin_path).filename().string();
 
-	const std::vector<boost::shared_ptr<po::option_description> >& opt_options = optOptions.options();
+    const std::vector<boost::shared_ptr<po::option_description> >& opt_options = optOptions.options();
 
-	bool first_short = true;
+    bool first_short = true;
 
-	for (std::size_t i = 0; i < opt_options.size(); i++) {
-		if (opt_options[i]->semantic()->min_tokens() != 0)
-			continue;
+    for (std::size_t i = 0; i < opt_options.size(); i++) {
+        if (opt_options[i]->semantic()->min_tokens() != 0)
+            continue;
 
-		std::string name = opt_options[i]->canonical_display_name(4);
+        std::string name = opt_options[i]->canonical_display_name(4);
 
-		if (name.size() == 2 && name[0] == '-') {
-			if (first_short) {
-				std::cerr << " [-";
-				first_short = false;
-			}
+        if (name.size() == 2 && name[0] == '-') {
+            if (first_short) {
+                std::cerr << " [-";
+                first_short = false;
+            }
 
-			std::cerr << name[1];
-		}
-	}
+            std::cerr << name[1];
+        }
+    }
 
-	if (!first_short)
-		std::cerr << ']';
+    if (!first_short)
+        std::cerr << ']';
 
-	for (std::size_t i = 0; i < opt_options.size(); i++) {
-		std::string name = opt_options[i]->canonical_display_name(4);
+    for (std::size_t i = 0; i < opt_options.size(); i++) {
+        std::string name = opt_options[i]->canonical_display_name(4);
 
-		if (name.size() != 2 || name[0] != '-')
-			std::cerr << " [--" << name;
+        if (name.size() != 2 || name[0] != '-')
+            std::cerr << " [--" << name;
 
-		else {
-			if (opt_options[i]->semantic()->min_tokens() == 0)
-				continue;
+        else {
+            if (opt_options[i]->semantic()->min_tokens() == 0)
+                continue;
 
-			std::cerr << " [" << name;
-		}
+            std::cerr << " [" << name;
+        }
 
-		if (opt_options[i]->semantic()->min_tokens() > 0)
-			std::cerr << " arg";
+        if (opt_options[i]->semantic()->min_tokens() > 0)
+            std::cerr << " arg";
 
-		if (opt_options[i]->semantic()->max_tokens() > 1)
-			std::cerr << " [arg]...";
+        if (opt_options[i]->semantic()->max_tokens() > 1)
+            std::cerr << " [arg]...";
 
-		std::cerr << ']';
-	}
+        std::cerr << ']';
+    }
 
-	const std::vector<boost::shared_ptr<po::option_description> >& mand_options = mandOptions.options();
+    const std::vector<boost::shared_ptr<po::option_description> >& mand_options = mandOptions.options();
 
-	for (std::size_t i = 0; i < mand_options.size(); i++) {
-		std::string name = mand_options[i]->canonical_display_name(4);
+    for (std::size_t i = 0; i < mand_options.size(); i++) {
+        std::string name = mand_options[i]->canonical_display_name(4);
 
-		if (name.size() != 2 || name[0] != '-')
-			std::cerr << " --" << name;
-		else
-			std::cerr << ' ' << name;
+        if (name.size() != 2 || name[0] != '-')
+            std::cerr << " --" << name;
+        else
+            std::cerr << ' ' << name;
 
-		if (mand_options[i]->semantic()->min_tokens() > 0)
-			std::cerr << " arg";
+        if (mand_options[i]->semantic()->min_tokens() > 0)
+            std::cerr << " arg";
 
-		if (mand_options[i]->semantic()->max_tokens() > 1)
-			std::cerr << " [arg]...";
-	}
+        if (mand_options[i]->semantic()->max_tokens() > 1)
+            std::cerr << " [arg]...";
+    }
 
-	std::cerr << std::endl;
+    std::cerr << std::endl;
 }
 
 const std::string& CmdLineBase::getOptionDescription(const std::string& name) const
 {
-	namespace po = boost::program_options;
+    namespace po = boost::program_options;
 
-	StringMap::const_iterator it = optionLongDescrs.find(name);
+    StringMap::const_iterator it = optionLongDescrs.find(name);
 
-	if (it != optionLongDescrs.end())
-		return it->second;
+    if (it != optionLongDescrs.end())
+        return it->second;
 
-	const OptionDescription* opt_desc = getOptionDescriptor(name);
+    const OptionDescription* opt_desc = getOptionDescriptor(name);
 
-	if (opt_desc)
-		return opt_desc->description();
+    if (opt_desc)
+        return opt_desc->description();
 
-	throwValidationError(name);
+    throwValidationError(name);
 
-	return name;
+    return name;
 }
 
 const CmdLineBase::OptionDescription* CmdLineBase::getOptionDescriptor(const std::string& name) const
 {
-	const OptionDescription* opt_desc = mandOptions.find_nothrow(name, false);
+    const OptionDescription* opt_desc = mandOptions.find_nothrow(name, false);
 
-	if (opt_desc)
-		return opt_desc;
+    if (opt_desc)
+        return opt_desc;
 
-	return optOptions.find_nothrow(name, false);
+    return optOptions.find_nothrow(name, false);
 }
 
 std::string CmdLineBase::formatTextBlock(const std::string& text, std::size_t ident, std::size_t width) const
 {
-	typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
+    typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
-	std::string ident_fill(ident, ' ');
-	std::string form_text(ident_fill);
-	std::string delim = " -+\n";
-	std::string word;
+    std::string ident_fill(ident, ' ');
+    std::string form_text(ident_fill);
+    std::string delim = " -+\n";
+    std::string word;
 
-	Tokenizer tokenizer(text, boost::char_separator<char>("", delim.c_str()));
-	std::size_t line_len = 0;
+    Tokenizer tokenizer(text, boost::char_separator<char>("", delim.c_str()));
+    std::size_t line_len = 0;
 
-	for (Tokenizer::iterator it = tokenizer.begin(); it != tokenizer.end(); ++it) {
-		std::string token = *it;
+    for (Tokenizer::iterator it = tokenizer.begin(); it != tokenizer.end(); ++it) {
+        std::string token = *it;
 
-		if (token.length() == 1 && delim.find(token[0]) != std::string::npos) {
-			word.append(token);
+        if (token.length() == 1 && delim.find(token[0]) != std::string::npos) {
+            word.append(token);
 
-			if (token[0] == '\n') {
-				line_len = 0;
-				form_text.append(word);
-				form_text.append(ident_fill);
-				word.clear();
-			}				
+            if (token[0] == '\n') {
+                line_len = 0;
+                form_text.append(word);
+                form_text.append(ident_fill);
+                word.clear();
+            }                
 
-			continue;
-		}
+            continue;
+        }
 
-		form_text.append(word);
-		line_len += word.length();
+        form_text.append(word);
+        line_len += word.length();
 
-		std::swap(word, token);
+        std::swap(word, token);
 
-		if (line_len >= width) {
-			line_len = 0;
-			form_text.push_back('\n');
-			form_text.append(ident_fill);
-		}
-	}
-	
-	form_text.append(word);
+        if (line_len >= width) {
+            line_len = 0;
+            form_text.push_back('\n');
+            form_text.append(ident_fill);
+        }
+    }
+    
+    form_text.append(word);
 
-	return form_text;
+    return form_text;
 }

@@ -29,12 +29,12 @@
 namespace CDPLPythonForceField
 {
 
-	void exportUtilityFunctions();
-	void exportMMFF94EnergyFunctions();
-	void exportMMFF94GradientFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
+    void exportUtilityFunctions();
+    void exportMMFF94EnergyFunctions();
+    void exportMMFF94GradientFunctions();
+    void exportAtomFunctions();
+    void exportBondFunctions();
+    void exportMolecularGraphFunctions();
 }
 
 #endif // CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP

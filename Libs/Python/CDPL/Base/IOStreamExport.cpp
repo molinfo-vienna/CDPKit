@@ -37,166 +37,166 @@
 namespace
 {
 
-	class FileIOStream : public CDPLPythonBase::IOStream<std::fstream>, 
-						 public boost::python::wrapper<CDPLPythonBase::IOStream<std::fstream> >
-	{
+    class FileIOStream : public CDPLPythonBase::IOStream<std::fstream>, 
+                         public boost::python::wrapper<CDPLPythonBase::IOStream<std::fstream> >
+    {
 
-	public:
-		FileIOStream(const char* file_name, const std::string& mode_str): 
-			std::fstream(file_name, parseOpenModeFlags(mode_str)), 
-			CDPLPythonBase::IOStream<std::fstream>(mode_str, parseOpenModeFlags(mode_str)), fileName(file_name) {
+    public:
+        FileIOStream(const char* file_name, const std::string& mode_str): 
+            std::fstream(file_name, parseOpenModeFlags(mode_str)), 
+            CDPLPythonBase::IOStream<std::fstream>(mode_str, parseOpenModeFlags(mode_str)), fileName(file_name) {
 
-			if (good())
-				return;
+            if (good())
+                return;
 
-			throw CDPL::Base::IOError("FileIOStream: could not open file");
-		}
+            throw CDPL::Base::IOError("FileIOStream: could not open file");
+        }
 
-		FileIOStream(const char* file_name, std::ios_base::openmode mode): 
-			std::fstream(file_name, mode), 
-			CDPLPythonBase::IOStream<std::fstream>("", mode), fileName(file_name) {
-			
-			if (good())
-				return;
+        FileIOStream(const char* file_name, std::ios_base::openmode mode): 
+            std::fstream(file_name, mode), 
+            CDPLPythonBase::IOStream<std::fstream>("", mode), fileName(file_name) {
+            
+            if (good())
+                return;
 
-			throw CDPL::Base::IOError("FileIOStream: could not open file");
-		}
+            throw CDPL::Base::IOError("FileIOStream: could not open file");
+        }
 
-		void close() {
+        void close() {
             std::fstream::close();
 
-			if (!good())
-				throw CDPL::Base::IOError("FileIOStream: could not close file");
+            if (!good())
+                throw CDPL::Base::IOError("FileIOStream: could not close file");
 
             closeStream();
-		}
+        }
 
-		const std::string& getFileName() const {
-			return fileName;
-		}
+        const std::string& getFileName() const {
+            return fileName;
+        }
 /*
-		bool isATTY() const {
-			checkIfClosed();
+        bool isATTY() const {
+            checkIfClosed();
 
-			int fd = ::open(fileName.c_str(), O_RDONLY);
+            int fd = ::open(fileName.c_str(), O_RDONLY);
 
-			if (fd < 0)
-				throw CDPL::Base::IOError("FileIOStream: could not open file");
+            if (fd < 0)
+                throw CDPL::Base::IOError("FileIOStream: could not open file");
 
-			bool is_a_tty = isatty(fd);
+            bool is_a_tty = isatty(fd);
 
-			::close(fd);
+            ::close(fd);
 
-			return is_a_tty;
-		}
+            return is_a_tty;
+        }
 
-		void truncate(long new_length = -1) {
-			std::size_t saved_fpos = tellWritePos();
+        void truncate(long new_length = -1) {
+            std::size_t saved_fpos = tellWritePos();
 
-			checkIfWriteOpAllowed();
+            checkIfWriteOpAllowed();
 
-			close();
+            close();
 
-			::truncate(fileName.c_str(), new_length < 0 ? ::off_t(saved_fpos) : ::off_t(new_length));
+            ::truncate(fileName.c_str(), new_length < 0 ? ::off_t(saved_fpos) : ::off_t(new_length));
 
-			open(fileName.c_str(), getOpenModeFlags());
-			seekg(saved_fpos);
+            open(fileName.c_str(), getOpenModeFlags());
+            seekg(saved_fpos);
 
-			checkIfInGoodState();
-		}
+            checkIfInGoodState();
+        }
 */
-	private:
-		std::string fileName;
-	};
+    private:
+        std::string fileName;
+    };
 
-	class StringIOStream : public CDPLPythonBase::IOStream<std::stringstream>, 
-						   public boost::python::wrapper<CDPLPythonBase::IOStream<std::stringstream> >
-	{
+    class StringIOStream : public CDPLPythonBase::IOStream<std::stringstream>, 
+                           public boost::python::wrapper<CDPLPythonBase::IOStream<std::stringstream> >
+    {
 
-	public:
-		StringIOStream(const std::string& init_str, const std::string& mode_str): 
-			std::stringstream(init_str, parseOpenModeFlags(mode_str)), 
-			CDPLPythonBase::IOStream<std::stringstream>(mode_str, parseOpenModeFlags(mode_str)) {}
+    public:
+        StringIOStream(const std::string& init_str, const std::string& mode_str): 
+            std::stringstream(init_str, parseOpenModeFlags(mode_str)), 
+            CDPLPythonBase::IOStream<std::stringstream>(mode_str, parseOpenModeFlags(mode_str)) {}
 
-		StringIOStream(const std::string& init_str, std::ios_base::openmode mode): 
-			std::stringstream(init_str, mode), IOStream<std::stringstream>("", mode) {}
+        StringIOStream(const std::string& init_str, std::ios_base::openmode mode): 
+            std::stringstream(init_str, mode), IOStream<std::stringstream>("", mode) {}
 
-		bool isATTY() const {
-			checkIfClosed();
+        bool isATTY() const {
+            checkIfClosed();
 
-			return false;
-		}
+            return false;
+        }
 
-		void truncate(long new_length = -1) {
-			std::size_t saved_fpos = tellWritePos();
+        void truncate(long new_length = -1) {
+            std::size_t saved_fpos = tellWritePos();
 
-			checkIfWriteOpAllowed();
+            checkIfWriteOpAllowed();
 
-			std::string value = str();
+            std::string value = str();
 
-			value.resize(new_length < 0 ? std::string::size_type(saved_fpos) : std::string::size_type(new_length));
+            value.resize(new_length < 0 ? std::string::size_type(saved_fpos) : std::string::size_type(new_length));
 
-			str(value);
+            str(value);
 
-			checkIfInGoodState();
-		}
+            checkIfInGoodState();
+        }
 
-		std::string getValue() const {
-			checkIfClosed();
+        std::string getValue() const {
+            checkIfClosed();
 
-			return str();
-		}
+            return str();
+        }
 
-		void setValue(const std::string& value) {
-			checkIfClosed();
+        void setValue(const std::string& value) {
+            checkIfClosed();
 
-			str(value);
-		}
-	};
+            str(value);
+        }
+    };
 }
 
 
 void CDPLPythonBase::exportIOStreams()
 {
-	using namespace boost;
+    using namespace boost;
 
-	python::class_<std::istream, boost::noncopyable>("IStream", python::no_init)
-		.def(ObjectIdentityCheckVisitor<std::istream>());
+    python::class_<std::istream, boost::noncopyable>("IStream", python::no_init)
+        .def(ObjectIdentityCheckVisitor<std::istream>());
 
-	python::class_<std::ostream, boost::noncopyable>("OStream", python::no_init)
-		.def(ObjectIdentityCheckVisitor<std::ostream>());
+    python::class_<std::ostream, boost::noncopyable>("OStream", python::no_init)
+        .def(ObjectIdentityCheckVisitor<std::ostream>());
 
-	{
-		python::scope scope = python::class_<std::iostream, python::bases<std::istream, std::ostream>, boost::noncopyable>("IOStream", python::no_init);
+    {
+        python::scope scope = python::class_<std::iostream, python::bases<std::istream, std::ostream>, boost::noncopyable>("IOStream", python::no_init);
 
-		python::enum_<std::ios_base::openmode>("OpenMode")
-			.value("IN", std::ios_base::in)
-			.value("OUT", std::ios_base::out)
-			.value("TRUNC", std::ios_base::trunc)
-			.value("APP", std::ios_base::app)
-			.value("ATE", std::ios_base::ate)
-			.value("BIN", std::ios_base::binary)
-			.export_values();
-	}
+        python::enum_<std::ios_base::openmode>("OpenMode")
+            .value("IN", std::ios_base::in)
+            .value("OUT", std::ios_base::out)
+            .value("TRUNC", std::ios_base::trunc)
+            .value("APP", std::ios_base::app)
+            .value("ATE", std::ios_base::ate)
+            .value("BIN", std::ios_base::binary)
+            .export_values();
+    }
 
-	python::class_<FileIOStream, python::bases<std::iostream>, boost::noncopyable>("FileIOStream", python::no_init)
-		.def(python::init<const char*, const std::string&>((python::arg("self"), python::arg("file_name"), python::arg("mode") = "r")))
-		.def(python::init<const char*, std::ios_base::openmode>((python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in)))
-		.def(IStreamVisitor<FileIOStream>())
-		.def(OStreamVisitor<FileIOStream>())
-		.def("close", &FileIOStream::close, python::arg("self"))
-		.add_property("name", python::make_function(&FileIOStream::getFileName, 
-													python::return_value_policy<python::copy_const_reference>()));
+    python::class_<FileIOStream, python::bases<std::iostream>, boost::noncopyable>("FileIOStream", python::no_init)
+        .def(python::init<const char*, const std::string&>((python::arg("self"), python::arg("file_name"), python::arg("mode") = "r")))
+        .def(python::init<const char*, std::ios_base::openmode>((python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in)))
+        .def(IStreamVisitor<FileIOStream>())
+        .def(OStreamVisitor<FileIOStream>())
+        .def("close", &FileIOStream::close, python::arg("self"))
+        .add_property("name", python::make_function(&FileIOStream::getFileName, 
+                                                    python::return_value_policy<python::copy_const_reference>()));
 
-	python::class_<StringIOStream, python::bases<std::iostream>, boost::noncopyable>("StringIOStream", python::no_init)
-		.def(python::init<const std::string&, const std::string&>((python::arg("self"), python::arg("string") = "", python::arg("mode") = "r+")))
-		.def(python::init<const std::string&, std::ios_base::openmode>((python::arg("self"), python::arg("string") = "", python::arg("mode") = std::ios_base::in | std::ios_base::out)))
-		.def(IStreamVisitor<StringIOStream>())
-		.def(OStreamVisitor<StringIOStream>())
-		.def("isatty", &StringIOStream::isATTY, python::arg("self"))
-		.def("truncate", &StringIOStream::truncate, (python::arg("self"), python::arg("length") = -1))
-		.def("getvalue", &StringIOStream::getValue, python::arg("self"))
-		.def("setvalue", &StringIOStream::setValue, (python::arg("self"), python::arg("value")))
-		//.def("close", &StringIOStream::closeStream, python::arg("self"))
-		.add_property("value", &StringIOStream::getValue, &StringIOStream::setValue);
+    python::class_<StringIOStream, python::bases<std::iostream>, boost::noncopyable>("StringIOStream", python::no_init)
+        .def(python::init<const std::string&, const std::string&>((python::arg("self"), python::arg("string") = "", python::arg("mode") = "r+")))
+        .def(python::init<const std::string&, std::ios_base::openmode>((python::arg("self"), python::arg("string") = "", python::arg("mode") = std::ios_base::in | std::ios_base::out)))
+        .def(IStreamVisitor<StringIOStream>())
+        .def(OStreamVisitor<StringIOStream>())
+        .def("isatty", &StringIOStream::isATTY, python::arg("self"))
+        .def("truncate", &StringIOStream::truncate, (python::arg("self"), python::arg("length") = -1))
+        .def("getvalue", &StringIOStream::getValue, python::arg("self"))
+        .def("setvalue", &StringIOStream::setValue, (python::arg("self"), python::arg("value")))
+        //.def("close", &StringIOStream::closeStream, python::arg("self"))
+        .add_property("value", &StringIOStream::getValue, &StringIOStream::setValue);
 }

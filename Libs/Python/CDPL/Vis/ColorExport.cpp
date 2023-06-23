@@ -37,43 +37,43 @@
 namespace
 {
 
-	std::string toString(const CDPL::Vis::Color& col)
-	{
-		std::ostringstream oss;
+    std::string toString(const CDPL::Vis::Color& col)
+    {
+        std::ostringstream oss;
 
-		oss << "CDPL.Vis.Color(";
-		
-		if (col == CDPL::Vis::Color())
-			oss << ')';
-		
-		else {
-			oss << "r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue();
+        oss << "CDPL.Vis.Color(";
+        
+        if (col == CDPL::Vis::Color())
+            oss << ')';
+        
+        else {
+            oss << "r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue();
 
-			if (col.getAlpha() != 1.0)
-				oss << ", a=" << col.getAlpha();
+            if (col.getAlpha() != 1.0)
+                oss << ", a=" << col.getAlpha();
 
-			oss << ')';
-		}
-		
-		return oss.str();
-	}
+            oss << ')';
+        }
+        
+        return oss.str();
+    }
 }
 
 
 void CDPLPythonVis::exportColor()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::Color>("Color", python::no_init)
-		.def(python::init<>(python::arg("self")))    
-		.def(python::init<const Vis::Color&>((python::arg("self"), python::arg("color"))))
-		.def(python::init<double, double, double, double>(
-				 (python::arg("self"), python::arg("red"), python::arg("green"), 
-				  python::arg("blue"), python::arg("alpha") = 1.0)))   
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Color>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Vis::Color::operator=), (python::arg("self"), python::arg("color")), 
-			 python::return_self<>())
+    python::class_<Vis::Color>("Color", python::no_init)
+        .def(python::init<>(python::arg("self")))    
+        .def(python::init<const Vis::Color&>((python::arg("self"), python::arg("color"))))
+        .def(python::init<double, double, double, double>(
+                 (python::arg("self"), python::arg("red"), python::arg("green"), 
+                  python::arg("blue"), python::arg("alpha") = 1.0)))   
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Color>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Vis::Color::operator=), (python::arg("self"), python::arg("color")), 
+             python::return_self<>())
         .def("getAlpha", &Vis::Color::getAlpha, python::arg("self"))    
         .def("setAlpha", &Vis::Color::setAlpha, (python::arg("self"), python::arg("alpha")))
         .def("getBlue", &Vis::Color::getBlue, python::arg("self"))    
@@ -83,15 +83,15 @@ void CDPLPythonVis::exportColor()
         .def("getRed", &Vis::Color::getRed, python::arg("self"))    
         .def("setRed", &Vis::Color::setRed, (python::arg("self"), python::arg("red")))
         .def("setRGBA", &Vis::Color::setRGBA, 
-			 (python::arg("self"), python::arg("red"), python::arg("green"), 
-			  python::arg("blue"), python::arg("alpha") = 1.0))    
+             (python::arg("self"), python::arg("red"), python::arg("green"), 
+              python::arg("blue"), python::arg("alpha") = 1.0))    
         .def("__eq__", &Vis::Color::operator==, (python::arg("self"), python::arg("color")))
-		.def("__ne__", &Vis::Color::operator!=, (python::arg("self"), python::arg("color")))
-		.def("__str__", &toString, python::arg("self"))
-		.add_property("red", &Vis::Color::getRed, &Vis::Color::setRed)
-		.add_property("green", &Vis::Color::getGreen, &Vis::Color::setGreen)
-		.add_property("blue", &Vis::Color::getBlue, &Vis::Color::setBlue)
-		.add_property("alpha", &Vis::Color::getAlpha, &Vis::Color::setAlpha)
+        .def("__ne__", &Vis::Color::operator!=, (python::arg("self"), python::arg("color")))
+        .def("__str__", &toString, python::arg("self"))
+        .add_property("red", &Vis::Color::getRed, &Vis::Color::setRed)
+        .add_property("green", &Vis::Color::getGreen, &Vis::Color::setGreen)
+        .add_property("blue", &Vis::Color::getBlue, &Vis::Color::setBlue)
+        .add_property("alpha", &Vis::Color::getAlpha, &Vis::Color::setAlpha)
         .def_readonly("BLACK", Vis::Color::BLACK)    
         .def_readonly("BLUE", Vis::Color::BLUE)    
         .def_readonly("CYAN", Vis::Color::CYAN)    

@@ -33,11 +33,11 @@ using namespace CDPL;
 
 
 Chem::AtomTypeMatchExpression::AtomTypeMatchExpression(unsigned int atom_type, bool not_match): 
-	atomType(atom_type), notMatch(not_match) {}
+    atomType(atom_type), notMatch(not_match) {}
 
 bool Chem::AtomTypeMatchExpression::operator()(const Atom&, const MolecularGraph&, 
-											   const Atom& target_atom, const MolecularGraph&, 
-											   const Base::Any&) const
+                                               const Atom& target_atom, const MolecularGraph&, 
+                                               const Base::Any&) const
 {
-	return (notMatch ? !atomTypesMatch(atomType, getType(target_atom)) : atomTypesMatch(atomType, getType(target_atom)));
+    return (notMatch ? !atomTypesMatch(atomType, getType(target_atom)) : atomTypesMatch(atomType, getType(target_atom)));
 }

@@ -41,61 +41,61 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A graphics primitive representing a polygon.
-		 */
-		class CDPL_VIS_API PolygonPrimitive2D : public PointArray2D, public GraphicsPrimitive2D
-		{
+        /**
+         * \brief A graphics primitive representing a polygon.
+         */
+        class CDPL_VIS_API PolygonPrimitive2D : public PointArray2D, public GraphicsPrimitive2D
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolygonPrimitive2D instances.
-			 */
-			typedef std::shared_ptr<PolygonPrimitive2D> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolygonPrimitive2D instances.
+             */
+            typedef std::shared_ptr<PolygonPrimitive2D> SharedPointer;
 
-			/**
-			 * \brief Constructs an undefined polygon primitive.
-			 */
-			PolygonPrimitive2D() {}
+            /**
+             * \brief Constructs an undefined polygon primitive.
+             */
+            PolygonPrimitive2D() {}
 
-			void render(Renderer2D& renderer) const;
-		
-			/**
-			 * \brief Sets the pen defining the color, width, line style, cap style and join style of the polygon outline.
-			 * \param pen The pen defining the color, width, line style, cap style and join style of the polygon's outline.
-			 */
-			void setPen(const Pen& pen);
+            void render(Renderer2D& renderer) const;
+        
+            /**
+             * \brief Sets the pen defining the color, width, line style, cap style and join style of the polygon outline.
+             * \param pen The pen defining the color, width, line style, cap style and join style of the polygon's outline.
+             */
+            void setPen(const Pen& pen);
 
-			/**
-			 * \brief Returns the pen defining the color, width, line style, cap style and join style of the polygon outline.
-			 * \return The pen defining the color, width, line style, cap style and join style of the polygon outline.
-			 */
-			const Pen& getPen() const;
+            /**
+             * \brief Returns the pen defining the color, width, line style, cap style and join style of the polygon outline.
+             * \return The pen defining the color, width, line style, cap style and join style of the polygon outline.
+             */
+            const Pen& getPen() const;
 
-			/**
-			 * \brief Sets the brush defining the fill color and fill pattern.
-			 * \param brush The brush defining the fill color and fill pattern.
-			 */
-			void setBrush(const Brush& brush);
+            /**
+             * \brief Sets the brush defining the fill color and fill pattern.
+             * \param brush The brush defining the fill color and fill pattern.
+             */
+            void setBrush(const Brush& brush);
 
-			/**
-			 * \brief Returns the brush defining the fill color and fill pattern.
-			 * \return The brush defining the fill color and fill pattern.
-			 */
-			const Brush& getBrush() const;
+            /**
+             * \brief Returns the brush defining the fill color and fill pattern.
+             * \return The brush defining the fill color and fill pattern.
+             */
+            const Brush& getBrush() const;
 
-			GraphicsPrimitive2D::SharedPointer clone() const;
+            GraphicsPrimitive2D::SharedPointer clone() const;
 
-			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
+            void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-		private:
-			Pen   pen;
-			Brush brush;
-		};
-	}
+        private:
+            Pen   pen;
+            Brush brush;
+        };
+    }
 }
 
 #endif // CDPL_VIS_POLYGONPRIMITIVE2D_HPP

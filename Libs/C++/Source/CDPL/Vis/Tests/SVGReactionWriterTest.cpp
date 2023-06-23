@@ -47,85 +47,85 @@
 
 BOOST_AUTO_TEST_CASE(SVGReactionWriterTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Vis;
+    using namespace Chem;
 
-	BasicReaction rxn;
+    BasicReaction rxn;
 
-	std::ofstream os("SVGReactionWriterTest_1.svg", 
-					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    std::ofstream os("SVGReactionWriterTest_1.svg", 
+                     std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
+    BOOST_CHECK(os);
 
-	SVGReactionWriter writer(os);
+    SVGReactionWriter writer(os);
 
-	initReaction(rxn);
+    initReaction(rxn);
 
-	BOOST_CHECK(writer.write(rxn));
-
-//-----
-
-	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestRxnData.jme").c_str());
-
-	BOOST_CHECK(is);
-	BOOST_CHECK(JMEReactionReader(is).read(rxn));
-
-	initReaction(rxn);
-
-	rxn.getComponent(0).getAtom(16).setProperty(AtomProperty::COLOR, Color::BLUE);
-	rxn.getComponent(0).getBond(0).setProperty(BondProperty::COLOR, Color::RED);
-	
-	os.close();
-	os.open("SVGReactionWriterTest_2.svg",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-	BOOST_CHECK(writer.write(rxn));
+    BOOST_CHECK(writer.write(rxn));
 
 //-----
 
-	writer.setParameter(ControlParameter::ATOM_COLOR, Color::MAGENTA);
+    std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestRxnData.jme").c_str());
 
-	os.close();
-	os.open("SVGReactionWriterTest_3.svg",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    BOOST_CHECK(is);
+    BOOST_CHECK(JMEReactionReader(is).read(rxn));
 
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(rxn));
+    initReaction(rxn);
 
-//-----
+    rxn.getComponent(0).getAtom(16).setProperty(AtomProperty::COLOR, Color::BLUE);
+    rxn.getComponent(0).getBond(0).setProperty(BondProperty::COLOR, Color::RED);
+    
+    os.close();
+    os.open("SVGReactionWriterTest_2.svg",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	writer.setParameter(ControlParameter::VIEWPORT, Rectangle2D(10.0, 10.0, 700.0, 400.0));
-
-	os.close();
-	os.open("SVGReactionWriterTest_4.svg",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(rxn));
+    BOOST_CHECK(writer.write(rxn));
 
 //-----
 
-	writer.setParameter(ControlParameter::SIZE_ADJUSTMENT, SizeAdjustment::BEST_FIT);
+    writer.setParameter(ControlParameter::ATOM_COLOR, Color::MAGENTA);
 
-	os.close();
-	os.open("SVGReactionWriterTest_5.svg",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    os.close();
+    os.open("SVGReactionWriterTest_3.svg",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(rxn));
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(rxn));
 
 //-----
 
-	writer.removeParameter(ControlParameter::VIEWPORT);
-	writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::LIGHT_GRAY);
-	writer.setParameter(ControlParameter::BOND_LENGTH, SizeSpecification(50.0));
+    writer.setParameter(ControlParameter::VIEWPORT, Rectangle2D(10.0, 10.0, 700.0, 400.0));
 
-	os.close();
-	os.open("SVGReactionWriterTest_6.svg",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    os.close();
+    os.open("SVGReactionWriterTest_4.svg",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(rxn));
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(rxn));
+
+//-----
+
+    writer.setParameter(ControlParameter::SIZE_ADJUSTMENT, SizeAdjustment::BEST_FIT);
+
+    os.close();
+    os.open("SVGReactionWriterTest_5.svg",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(rxn));
+
+//-----
+
+    writer.removeParameter(ControlParameter::VIEWPORT);
+    writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::LIGHT_GRAY);
+    writer.setParameter(ControlParameter::BOND_LENGTH, SizeSpecification(50.0));
+
+    os.close();
+    os.open("SVGReactionWriterTest_6.svg",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(rxn));
 }
 

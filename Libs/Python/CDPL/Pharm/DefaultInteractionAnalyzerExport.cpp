@@ -38,11 +38,11 @@ void CDPLPythonPharm::exportDefaultInteractionAnalyzer()
     using namespace CDPL;
 
     python::class_<Pharm::DefaultInteractionAnalyzer, python::bases<Pharm::InteractionAnalyzer>,
-				   boost::noncopyable>("DefaultInteractionAnalyzer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, Pharm::FeatureMapping&>(
-				 (python::arg("self"), python::arg("pharm"), python::arg("pharm"))))
-		.def(python::init<const Pharm::DefaultInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::DefaultInteractionAnalyzer::operator=), 
-			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
+                   boost::noncopyable>("DefaultInteractionAnalyzer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, Pharm::FeatureMapping&>(
+                 (python::arg("self"), python::arg("pharm"), python::arg("pharm"))))
+        .def(python::init<const Pharm::DefaultInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::DefaultInteractionAnalyzer::operator=), 
+             (python::arg("self"), python::arg("analyzer")), python::return_self<>());
 }

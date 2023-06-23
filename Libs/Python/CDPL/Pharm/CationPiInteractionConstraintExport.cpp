@@ -37,9 +37,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::CationPiInteractionConstraint& constr, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+                      CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return constr(ftr1, ftr2);
+        return constr(ftr1, ftr2);
     }
 }
 
@@ -50,22 +50,22 @@ void CDPLPythonPharm::exportCationPiInteractionConstraint()
     using namespace CDPL;
 
     python::class_<Pharm::CationPiInteractionConstraint, boost::noncopyable>("CationPiInteractionConstraint", python::no_init)
-		.def(python::init<const Pharm::CationPiInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
-		.def(python::init<bool, double, double, double>((python::arg("self"), python::arg("aro_cat"), 
-														 python::arg("min_dist") = Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE, 
-														 python::arg("max_dist") = Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE,
-														 python::arg("max_ang") = Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::CationPiInteractionConstraint>())
-		.def("getMinDistance", &Pharm::CationPiInteractionConstraint::getMinDistance, python::arg("self"))
-		.def("getMaxDistance", &Pharm::CationPiInteractionConstraint::getMaxDistance, python::arg("self"))
-		.def("getMaxAngle", &Pharm::CationPiInteractionConstraint::getMaxAngle, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionConstraint::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.add_property("minDistance", &Pharm::CationPiInteractionConstraint::getMinDistance)
-		.add_property("maxDistance", &Pharm::CationPiInteractionConstraint::getMaxDistance)
-		.add_property("maxAngle", &Pharm::CationPiInteractionConstraint::getMaxAngle)
-		.def_readonly("DEF_MIN_DISTANCE", Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE)
-		.def_readonly("DEF_MAX_DISTANCE", Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE)
-		.def_readonly("DEF_MAX_ANGLE", Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE);
+        .def(python::init<const Pharm::CationPiInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
+        .def(python::init<bool, double, double, double>((python::arg("self"), python::arg("aro_cat"), 
+                                                         python::arg("min_dist") = Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE, 
+                                                         python::arg("max_dist") = Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE,
+                                                         python::arg("max_ang") = Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE)))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::CationPiInteractionConstraint>())
+        .def("getMinDistance", &Pharm::CationPiInteractionConstraint::getMinDistance, python::arg("self"))
+        .def("getMaxDistance", &Pharm::CationPiInteractionConstraint::getMaxDistance, python::arg("self"))
+        .def("getMaxAngle", &Pharm::CationPiInteractionConstraint::getMaxAngle, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionConstraint::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+        .add_property("minDistance", &Pharm::CationPiInteractionConstraint::getMinDistance)
+        .add_property("maxDistance", &Pharm::CationPiInteractionConstraint::getMaxDistance)
+        .add_property("maxAngle", &Pharm::CationPiInteractionConstraint::getMaxAngle)
+        .def_readonly("DEF_MIN_DISTANCE", Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE)
+        .def_readonly("DEF_MAX_DISTANCE", Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE)
+        .def_readonly("DEF_MAX_ANGLE", Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE);
 }

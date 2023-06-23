@@ -43,39 +43,39 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief FileDataReader.
-		 */
-		template <typename ReaderImpl, typename DataType = typename ReaderImpl::DataType>
-		class FileDataReader : public Base::DataReader<DataType>
-		{
+        /**
+         * \brief FileDataReader.
+         */
+        template <typename ReaderImpl, typename DataType = typename ReaderImpl::DataType>
+        class FileDataReader : public Base::DataReader<DataType>
+        {
 
-		public:
-			FileDataReader(const std::string& file_name, 
-						   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary); 
+        public:
+            FileDataReader(const std::string& file_name, 
+                           std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary); 
 
-			FileDataReader& read(DataType& obj, bool overwrite = true);
-			FileDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
+            FileDataReader& read(DataType& obj, bool overwrite = true);
+            FileDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
-			FileDataReader& skip();
+            FileDataReader& skip();
 
-			bool hasMoreData();
+            bool hasMoreData();
 
-			std::size_t getRecordIndex() const;
-			void setRecordIndex(std::size_t idx);
+            std::size_t getRecordIndex() const;
+            void setRecordIndex(std::size_t idx);
 
-			std::size_t getNumRecords();
+            std::size_t getNumRecords();
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-			void close();
+            void close();
 
-		private:
-			std::ifstream stream;
-			std::string   fileName;
-			ReaderImpl    reader;
-		};
+        private:
+            std::ifstream stream;
+            std::string   fileName;
+            ReaderImpl    reader;
+        };
     }
 }
 
@@ -87,19 +87,19 @@ CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::stri
     stream(file_name.c_str(), mode), fileName(file_name), reader(stream) 
 {
     reader.setParent(this);
-	reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
+    reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }
 
 template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(DataType& obj, bool overwrite)
 {
-	try {
-		reader.read(obj, overwrite);
+    try {
+        reader.read(obj, overwrite);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
+    }
 
     return *this;
 }
@@ -108,12 +108,12 @@ template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
-	try {
-		reader.read(idx, obj, overwrite);
+    try {
+        reader.read(idx, obj, overwrite);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
+    }
 
     return *this;
 }
@@ -122,12 +122,12 @@ template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::skip()
 {
-	try {
-		reader.skip();
+    try {
+        reader.skip();
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
+    }
 
     return *this;
 }
@@ -140,7 +140,7 @@ bool CDPL::Util::FileDataReader<ReaderImpl, DataType>::hasMoreData()
 
 template <typename ReaderImpl, typename DataType>
 std::size_t CDPL::Util::FileDataReader<ReaderImpl, DataType>::getRecordIndex() const
-{	
+{    
     return reader.getRecordIndex();
 }
 
@@ -171,7 +171,7 @@ bool CDPL::Util::FileDataReader<ReaderImpl, DataType>::operator!() const
 template <typename ReaderImpl, typename DataType>
 void CDPL::Util::FileDataReader<ReaderImpl, DataType>::close()
 {
-	reader.close();
+    reader.close();
     stream.close();
 }
 

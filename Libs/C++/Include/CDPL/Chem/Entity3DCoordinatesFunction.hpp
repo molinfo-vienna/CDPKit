@@ -40,12 +40,12 @@ namespace CDPL
     namespace Chem
     {
 
-		class Entity;
+        class Entity;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined entity3D coordinates function.
-		 */
-		typedef std::function<const Math::Vector3D&(const Chem::Entity&)> Entity3DCoordinatesFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined entity3D coordinates function.
+         */
+        typedef std::function<const Math::Vector3D&(const Chem::Entity&)> Entity3DCoordinatesFunction;
     }
 }
 

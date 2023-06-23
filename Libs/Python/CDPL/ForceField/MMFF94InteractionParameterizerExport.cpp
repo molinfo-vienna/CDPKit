@@ -39,68 +39,68 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94InteractionParameterizer, ForceField::MMFF94InteractionParameterizer::SharedPointer>("MMFF94InteractionParameterizer", python::no_init)
-		.def(python::init<unsigned int>((python::arg("self"), python::arg("param_set") = ForceField::MMFF94ParameterSet::STATIC)))
-		.def(python::init<const ForceField::MMFF94InteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94InteractionParameterizer>())	
-		.def("setBondStretchingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setBondStretchingFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAngleBendingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setAngleBendingFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setStretchBendFilterFunction", &ForceField::MMFF94InteractionParameterizer::setStretchBendFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setOutOfPlaneBendingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setOutOfPlaneBendingFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setTorsionFilterFunction", &ForceField::MMFF94InteractionParameterizer::setTorsionFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setElectrostaticFilterFunction", &ForceField::MMFF94InteractionParameterizer::setElectrostaticFilterFunction,
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setVanDerWaalsFilterFunction", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("clearFilterFunctions", &ForceField::MMFF94InteractionParameterizer::clearFilterFunctions, 
-			 python::arg("self"))
-		.def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setHeavyToHydrogenAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("setSymbolicToNumericAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setSymbolicToNumericAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("setAromaticAtomTypeDefinitionTable", &ForceField::MMFF94InteractionParameterizer::setAromaticAtomTypeDefinitionTable,
-			 (python::arg("self"), python::arg("table")))
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94InteractionParameterizer::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setFormalAtomChargeDefinitionTable", &ForceField::MMFF94InteractionParameterizer::setFormalAtomChargeDefinitionTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondChargeIncrementTable", &ForceField::MMFF94InteractionParameterizer::setBondChargeIncrementTable,
-			 (python::arg("self"), python::arg("table")))
-		.def("setPartialBondChargeIncrementTable", &ForceField::MMFF94InteractionParameterizer::setPartialBondChargeIncrementTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setPrimaryToParameterAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setPrimaryToParameterAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("setAngleBendingParameterTable", &ForceField::MMFF94InteractionParameterizer::setAngleBendingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondStretchingParameterTable", &ForceField::MMFF94InteractionParameterizer::setBondStretchingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondStretchingRuleParameterTable", &ForceField::MMFF94InteractionParameterizer::setBondStretchingRuleParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setStretchBendParameterTable", &ForceField::MMFF94InteractionParameterizer::setStretchBendParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setDefaultStretchBendParameterTable", &ForceField::MMFF94InteractionParameterizer::setDefaultStretchBendParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setOutOfPlaneBendingParameterTable", &ForceField::MMFF94InteractionParameterizer::setOutOfPlaneBendingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setTorsionParameterTable", &ForceField::MMFF94InteractionParameterizer::setTorsionParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setVanDerWaalsParameterTable", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setDielectricConstant", &ForceField::MMFF94InteractionParameterizer::setDielectricConstant, 
-			 (python::arg("self"), python::arg("de_const")))
-		.def("setDistanceExponent", &ForceField::MMFF94InteractionParameterizer::setDistanceExponent, 
-			 (python::arg("self"), python::arg("dist_expo")))
-		.def("setParameterSet", &ForceField::MMFF94InteractionParameterizer::setParameterSet, 
-			 (python::arg("self"), python::arg("param_set")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("parameterize", &ForceField::MMFF94InteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), 
-			  python::arg("ia_types") = ForceField::InteractionType::ALL, python::arg("strict") = true));
+        .def(python::init<unsigned int>((python::arg("self"), python::arg("param_set") = ForceField::MMFF94ParameterSet::STATIC)))
+        .def(python::init<const ForceField::MMFF94InteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94InteractionParameterizer>())    
+        .def("setBondStretchingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setBondStretchingFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAngleBendingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setAngleBendingFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setStretchBendFilterFunction", &ForceField::MMFF94InteractionParameterizer::setStretchBendFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setOutOfPlaneBendingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setOutOfPlaneBendingFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setTorsionFilterFunction", &ForceField::MMFF94InteractionParameterizer::setTorsionFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setElectrostaticFilterFunction", &ForceField::MMFF94InteractionParameterizer::setElectrostaticFilterFunction,
+             (python::arg("self"), python::arg("func"))) 
+        .def("setVanDerWaalsFilterFunction", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("clearFilterFunctions", &ForceField::MMFF94InteractionParameterizer::clearFilterFunctions, 
+             python::arg("self"))
+        .def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setHeavyToHydrogenAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("setSymbolicToNumericAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setSymbolicToNumericAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("setAromaticAtomTypeDefinitionTable", &ForceField::MMFF94InteractionParameterizer::setAromaticAtomTypeDefinitionTable,
+             (python::arg("self"), python::arg("table")))
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94InteractionParameterizer::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setFormalAtomChargeDefinitionTable", &ForceField::MMFF94InteractionParameterizer::setFormalAtomChargeDefinitionTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondChargeIncrementTable", &ForceField::MMFF94InteractionParameterizer::setBondChargeIncrementTable,
+             (python::arg("self"), python::arg("table")))
+        .def("setPartialBondChargeIncrementTable", &ForceField::MMFF94InteractionParameterizer::setPartialBondChargeIncrementTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setPrimaryToParameterAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setPrimaryToParameterAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("setAngleBendingParameterTable", &ForceField::MMFF94InteractionParameterizer::setAngleBendingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondStretchingParameterTable", &ForceField::MMFF94InteractionParameterizer::setBondStretchingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondStretchingRuleParameterTable", &ForceField::MMFF94InteractionParameterizer::setBondStretchingRuleParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setStretchBendParameterTable", &ForceField::MMFF94InteractionParameterizer::setStretchBendParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setDefaultStretchBendParameterTable", &ForceField::MMFF94InteractionParameterizer::setDefaultStretchBendParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setOutOfPlaneBendingParameterTable", &ForceField::MMFF94InteractionParameterizer::setOutOfPlaneBendingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setTorsionParameterTable", &ForceField::MMFF94InteractionParameterizer::setTorsionParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setVanDerWaalsParameterTable", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setDielectricConstant", &ForceField::MMFF94InteractionParameterizer::setDielectricConstant, 
+             (python::arg("self"), python::arg("de_const")))
+        .def("setDistanceExponent", &ForceField::MMFF94InteractionParameterizer::setDistanceExponent, 
+             (python::arg("self"), python::arg("dist_expo")))
+        .def("setParameterSet", &ForceField::MMFF94InteractionParameterizer::setParameterSet, 
+             (python::arg("self"), python::arg("param_set")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("parameterize", &ForceField::MMFF94InteractionParameterizer::parameterize, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), 
+              python::arg("ia_types") = ForceField::InteractionType::ALL, python::arg("strict") = true));
 }

@@ -34,34 +34,34 @@ using namespace CDPL;
 
 void Vis::PointListPrimitive2D::render(Renderer2D& renderer) const
 {
-	renderer.setPen(pen);
+    renderer.setPen(pen);
 
-	ConstElementIterator points_end = getElementsEnd();
+    ConstElementIterator points_end = getElementsEnd();
 
-	for (ConstElementIterator p_it = getElementsBegin(); p_it != points_end; ++p_it) {
-		const Math::Vector2D& pos = *p_it;
+    for (ConstElementIterator p_it = getElementsBegin(); p_it != points_end; ++p_it) {
+        const Math::Vector2D& pos = *p_it;
 
-		renderer.drawPoint(pos(0), pos(1));
-	}
+        renderer.drawPoint(pos(0), pos(1));
+    }
 }
 
 void Vis::PointListPrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::PointListPrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::PointListPrimitive2D::clone() const
 {
-	return SharedPointer(new PointListPrimitive2D(*this));
+    return SharedPointer(new PointListPrimitive2D(*this));
 }
 
 void Vis::PointListPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	PointArray2D::getBounds(bounds);
-	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    PointArray2D::getBounds(bounds);
+    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

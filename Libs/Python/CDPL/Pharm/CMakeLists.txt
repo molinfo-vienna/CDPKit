@@ -107,7 +107,7 @@ SET(pharm_MOD_SRCS
 
     FeatureTypeMatchFunctorExport.cpp
     FeaturePairDistanceMatchFunctorExport.cpp
-    TopologicalEntityAlignmentExport.cpp	
+    TopologicalEntityAlignmentExport.cpp    
     PharmacophoreAlignmentExport.cpp
     SpatialFeatureMappingExport.cpp
     FeaturePositionMatchFunctorExport.cpp
@@ -148,7 +148,7 @@ IF(SQLITE3_FOUND)
       PSDPharmacophoreReaderExport.cpp 
       PSDMoleculeReaderExport.cpp 
       PSDMolecularGraphWriterExport.cpp
-      )	
+      )    
 ENDIF(SQLITE3_FOUND)
 
 ADD_LIBRARY(_pharm MODULE ${pharm_MOD_SRCS})
@@ -167,8 +167,8 @@ ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Pharm" COMPONENT CDPLPythonModules)
 INSTALL(TARGETS _pharm DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Pharm" COMPONENT CDPLPythonModules)

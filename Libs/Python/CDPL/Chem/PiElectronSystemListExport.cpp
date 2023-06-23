@@ -36,10 +36,10 @@ void CDPLPythonChem::exportPiElectronSystemList()
     using namespace CDPL;
 
     python::class_<Chem::PiElectronSystemList, Chem::PiElectronSystemList::SharedPointer,
-		   python::bases<Chem::ElectronSystemList>, boost::noncopyable>("PiElectronSystemList", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
-	     [python::with_custodian_and_ward<1, 2>()])
-	.def("perceive", &Chem::PiElectronSystemList::perceive, (python::arg("self"), python::arg("molgraph")), 
-	     python::with_custodian_and_ward<1, 2>());
+           python::bases<Chem::ElectronSystemList>, boost::noncopyable>("PiElectronSystemList", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+         [python::with_custodian_and_ward<1, 2>()])
+    .def("perceive", &Chem::PiElectronSystemList::perceive, (python::arg("self"), python::arg("molgraph")), 
+         python::with_custodian_and_ward<1, 2>());
 }

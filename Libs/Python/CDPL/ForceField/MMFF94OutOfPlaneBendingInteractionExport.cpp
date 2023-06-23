@@ -38,29 +38,29 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingInteraction()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94OutOfPlaneBendingInteraction>("MMFF94OutOfPlaneBendingInteraction", python::no_init)
-		.def(python::init<const ForceField::MMFF94OutOfPlaneBendingInteraction&>((python::arg("self"), python::arg("iactn"))))
-		.def(python::init<std::size_t, std::size_t, std::size_t, std::size_t, double>(
-				 (python::arg("self"), python::arg("term_atom1_idx"), python::arg("ctr_atom_idx"), python::arg("term_atom2_idx"),
-				  python::arg("oop_atom_idx"), python::arg("force_const"))))
-		.def("getTerminalAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom1Index, python::arg("self"))
-		.def("getTerminalAtom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom2Index, python::arg("self"))
-		.def("getCenterAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getCenterAtomIndex, python::arg("self"))
-		.def("getOutOfPlaneAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getOutOfPlaneAtomIndex, python::arg("self"))
-		.def("getAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom1Index, python::arg("self"))
-		.def("getAtom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom2Index, python::arg("self"))
-		.def("getAtom3Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom3Index, python::arg("self"))
-		.def("getAtom4Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom4Index, python::arg("self"))
-		.def("getForceConstant", &ForceField::MMFF94OutOfPlaneBendingInteraction::getForceConstant, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingInteraction::operator=),
-			 (python::arg("self"), python::arg("iactn")), python::return_self<>())
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingInteraction>())
-		.add_property("termAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom1Index) 
-		.add_property("termAtom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom2Index)
-		.add_property("ctrAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getCenterAtomIndex)
-		.add_property("oopAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getOutOfPlaneAtomIndex)
-		.add_property("atom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom1Index) 
-		.add_property("atom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom2Index)
-		.add_property("atom3Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom3Index)
-		.add_property("atom4Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom4Index)
-		.add_property("forceConstant", &ForceField::MMFF94OutOfPlaneBendingInteraction::getForceConstant);
+        .def(python::init<const ForceField::MMFF94OutOfPlaneBendingInteraction&>((python::arg("self"), python::arg("iactn"))))
+        .def(python::init<std::size_t, std::size_t, std::size_t, std::size_t, double>(
+                 (python::arg("self"), python::arg("term_atom1_idx"), python::arg("ctr_atom_idx"), python::arg("term_atom2_idx"),
+                  python::arg("oop_atom_idx"), python::arg("force_const"))))
+        .def("getTerminalAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom1Index, python::arg("self"))
+        .def("getTerminalAtom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom2Index, python::arg("self"))
+        .def("getCenterAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getCenterAtomIndex, python::arg("self"))
+        .def("getOutOfPlaneAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getOutOfPlaneAtomIndex, python::arg("self"))
+        .def("getAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom1Index, python::arg("self"))
+        .def("getAtom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom2Index, python::arg("self"))
+        .def("getAtom3Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom3Index, python::arg("self"))
+        .def("getAtom4Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom4Index, python::arg("self"))
+        .def("getForceConstant", &ForceField::MMFF94OutOfPlaneBendingInteraction::getForceConstant, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingInteraction::operator=),
+             (python::arg("self"), python::arg("iactn")), python::return_self<>())
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingInteraction>())
+        .add_property("termAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom1Index) 
+        .add_property("termAtom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom2Index)
+        .add_property("ctrAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getCenterAtomIndex)
+        .add_property("oopAtomIndex", &ForceField::MMFF94OutOfPlaneBendingInteraction::getOutOfPlaneAtomIndex)
+        .add_property("atom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom1Index) 
+        .add_property("atom2Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom2Index)
+        .add_property("atom3Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom3Index)
+        .add_property("atom4Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom4Index)
+        .add_property("forceConstant", &ForceField::MMFF94OutOfPlaneBendingInteraction::getForceConstant);
 }

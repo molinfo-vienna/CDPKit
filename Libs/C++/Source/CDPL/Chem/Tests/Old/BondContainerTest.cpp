@@ -33,47 +33,47 @@
 
 BOOST_AUTO_TEST_CASE(BondContainerTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
+    Molecule mol;
 
-	mol.addAtom();
-	mol.addAtom();
+    mol.addAtom();
+    mol.addAtom();
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 0);
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 0);
 
-	BOOST_CHECK(static_cast<BondContainer&>(mol).getBondsBegin() == static_cast<BondContainer&>(mol).getBondsEnd());
+    BOOST_CHECK(static_cast<BondContainer&>(mol).getBondsBegin() == static_cast<BondContainer&>(mol).getBondsEnd());
 
-	BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsEnd() - static_cast<BondContainer&>(mol).getBondsBegin()) == 0);
-
-//-----
-
-	Bond& bond1 = mol.addBond(0, 1);
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 1);
-
-	BOOST_CHECK(static_cast<BondContainer&>(mol).getBondsBegin() != static_cast<BondContainer&>(mol).getBondsEnd());
-
-	BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsEnd() - static_cast<BondContainer&>(mol).getBondsBegin()) == 1);
-
-	BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsBegin() + 1) == static_cast<BondContainer&>(mol).getBondsEnd());
-
-	BOOST_CHECK(&*static_cast<BondContainer&>(mol).getBondsBegin() == &bond1);
+    BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsEnd() - static_cast<BondContainer&>(mol).getBondsBegin()) == 0);
 
 //-----
 
-	Bond& bond2 = mol.addBond(0, 0);
+    Bond& bond1 = mol.addBond(0, 1);
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 2);
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 1);
 
-	BOOST_CHECK(static_cast<BondContainer&>(mol).getBondsBegin() != static_cast<BondContainer&>(mol).getBondsEnd());
+    BOOST_CHECK(static_cast<BondContainer&>(mol).getBondsBegin() != static_cast<BondContainer&>(mol).getBondsEnd());
 
-	BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsEnd() - static_cast<BondContainer&>(mol).getBondsBegin()) == 2);
+    BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsEnd() - static_cast<BondContainer&>(mol).getBondsBegin()) == 1);
 
-	BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsBegin() + 1) != static_cast<BondContainer&>(mol).getBondsEnd());
-	BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsBegin() + 2) == static_cast<BondContainer&>(mol).getBondsEnd());
+    BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsBegin() + 1) == static_cast<BondContainer&>(mol).getBondsEnd());
 
-	BOOST_CHECK(&*static_cast<BondContainer&>(mol).getBondsBegin() == &bond1);
-	BOOST_CHECK(&*(static_cast<BondContainer&>(mol).getBondsBegin() + 1) == &bond2);
+    BOOST_CHECK(&*static_cast<BondContainer&>(mol).getBondsBegin() == &bond1);
+
+//-----
+
+    Bond& bond2 = mol.addBond(0, 0);
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 2);
+
+    BOOST_CHECK(static_cast<BondContainer&>(mol).getBondsBegin() != static_cast<BondContainer&>(mol).getBondsEnd());
+
+    BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsEnd() - static_cast<BondContainer&>(mol).getBondsBegin()) == 2);
+
+    BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsBegin() + 1) != static_cast<BondContainer&>(mol).getBondsEnd());
+    BOOST_CHECK((static_cast<BondContainer&>(mol).getBondsBegin() + 2) == static_cast<BondContainer&>(mol).getBondsEnd());
+
+    BOOST_CHECK(&*static_cast<BondContainer&>(mol).getBondsBegin() == &bond1);
+    BOOST_CHECK(&*(static_cast<BondContainer&>(mol).getBondsBegin() + 1) == &bond2);
 }

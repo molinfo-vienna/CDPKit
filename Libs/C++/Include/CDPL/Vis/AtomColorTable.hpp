@@ -36,26 +36,26 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Provides preinitialized color tables for the visualization of atomic properties.
-		 */
-		namespace AtomColorTable
-		{
+        /**
+         * \brief Provides preinitialized color tables for the visualization of atomic properties.
+         */
+        namespace AtomColorTable
+        {
 
-			/**
-			 * \brief Provides colors for frequently occurring chemical elements.
-			 *
-			 * The table is used for the element dependent coloring of atom labels in 2D depictions 
-			 * of chemical structures. Currently, colors for the following elements are provided:
-			 * <em>C, H, N, O, S, P, F, Cl, Br, I, Li, Na, B, Fe, Ba, Mg, Zn, Cu, Ni, Ca, Mn, Al, Ti,
-			 * Cr, Ag, Si, Au</em> and <em>He</em>.
-			 */
-			extern CDPL_VIS_API const ColorTable ELEMENT_COLORS_2D;
-		}
-	}
+            /**
+             * \brief Provides colors for frequently occurring chemical elements.
+             *
+             * The table is used for the element dependent coloring of atom labels in 2D depictions 
+             * of chemical structures. Currently, colors for the following elements are provided:
+             * <em>C, H, N, O, S, P, F, Cl, Br, I, Li, Na, B, Fe, Ba, Mg, Zn, Cu, Ni, Ca, Mn, Al, Ti,
+             * Cr, Ag, Si, Au</em> and <em>He</em>.
+             */
+            extern CDPL_VIS_API const ColorTable ELEMENT_COLORS_2D;
+        }
+    }
 }
 
 #endif // CDPL_VIS_ATOMCOLORTABLE_HPP

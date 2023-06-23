@@ -32,25 +32,25 @@
 namespace 
 {
 
-	struct TautomerizationType {};
+    struct TautomerizationType {};
 }
 
 
 void CDPLPythonChem::exportTautomerizationTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<TautomerizationType, boost::noncopyable>("TautomerizationType", python::no_init)
-		.def_readonly("KETO_ENOL", &Chem::TautomerizationType::KETO_ENOL)
-		.def_readonly("IMINE_ENAMINE", &Chem::TautomerizationType::IMINE_ENAMINE)
-		.def_readonly("NITROSO_OXIME", &Chem::TautomerizationType::NITROSO_OXIME)
-		.def_readonly("AMIDE_IMIDIC_ACID", &Chem::TautomerizationType::AMIDE_IMIDIC_ACID)
-		.def_readonly("LACTAM_LACTIM", &Chem::TautomerizationType::LACTAM_LACTIM)
-		.def_readonly("KETENE_YNOL", &Chem::TautomerizationType::KETENE_YNOL)
-		.def_readonly("NITRO_ACI", &Chem::TautomerizationType::NITRO_ACI)
-		.def_readonly("PHOSPHINIC_ACID", &Chem::TautomerizationType::PHOSPHINIC_ACID)
-		.def_readonly("SULFENIC_ACID", &Chem::TautomerizationType::SULFENIC_ACID)
-		.def_readonly("GENERIC_H_13_SHIFT", &Chem::TautomerizationType::GENERIC_H_13_SHIFT)
-		.def_readonly("GENERIC_H_15_SHIFT", &Chem::TautomerizationType::GENERIC_H_15_SHIFT);
+    python::class_<TautomerizationType, boost::noncopyable>("TautomerizationType", python::no_init)
+        .def_readonly("KETO_ENOL", &Chem::TautomerizationType::KETO_ENOL)
+        .def_readonly("IMINE_ENAMINE", &Chem::TautomerizationType::IMINE_ENAMINE)
+        .def_readonly("NITROSO_OXIME", &Chem::TautomerizationType::NITROSO_OXIME)
+        .def_readonly("AMIDE_IMIDIC_ACID", &Chem::TautomerizationType::AMIDE_IMIDIC_ACID)
+        .def_readonly("LACTAM_LACTIM", &Chem::TautomerizationType::LACTAM_LACTIM)
+        .def_readonly("KETENE_YNOL", &Chem::TautomerizationType::KETENE_YNOL)
+        .def_readonly("NITRO_ACI", &Chem::TautomerizationType::NITRO_ACI)
+        .def_readonly("PHOSPHINIC_ACID", &Chem::TautomerizationType::PHOSPHINIC_ACID)
+        .def_readonly("SULFENIC_ACID", &Chem::TautomerizationType::SULFENIC_ACID)
+        .def_readonly("GENERIC_H_13_SHIFT", &Chem::TautomerizationType::GENERIC_H_13_SHIFT)
+        .def_readonly("GENERIC_H_15_SHIFT", &Chem::TautomerizationType::GENERIC_H_15_SHIFT);
 }

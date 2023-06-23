@@ -41,94 +41,94 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A graphics primitive representing a text label.
-		 */
-		class CDPL_VIS_API TextLabelPrimitive2D : public GraphicsPrimitive2D
-		{
+        /**
+         * \brief A graphics primitive representing a text label.
+         */
+        class CDPL_VIS_API TextLabelPrimitive2D : public GraphicsPrimitive2D
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TextLabelPrimitive2D instances.
-			 */
-			typedef std::shared_ptr<TextLabelPrimitive2D> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TextLabelPrimitive2D instances.
+             */
+            typedef std::shared_ptr<TextLabelPrimitive2D> SharedPointer;
 
-			/**
-			 * \brief Construct an empty text label primitive at position <em>(0, 0)</em>.
-			 */
-			TextLabelPrimitive2D();
+            /**
+             * \brief Construct an empty text label primitive at position <em>(0, 0)</em>.
+             */
+            TextLabelPrimitive2D();
 
-			void render(Renderer2D& renderer) const;
+            void render(Renderer2D& renderer) const;
 
-			/**
-			 * \brief Sets the text of the label.
-			 * \param txt The text of the label.
-			 */
-			void setText(const std::string& txt);
+            /**
+             * \brief Sets the text of the label.
+             * \param txt The text of the label.
+             */
+            void setText(const std::string& txt);
 
-			/**
-			 * \brief Returns the text of the label.
-			 * \return The text of the label.
-			 */
-			const std::string& getText() const;
+            /**
+             * \brief Returns the text of the label.
+             * \return The text of the label.
+             */
+            const std::string& getText() const;
 
-			/**
-			 * \brief Sets the position of the text label.
-			 * \param pos The baseline position of the text label.
-			 */
-			void setPosition(const Math::Vector2D& pos);
+            /**
+             * \brief Sets the position of the text label.
+             * \param pos The baseline position of the text label.
+             */
+            void setPosition(const Math::Vector2D& pos);
 
-			/**
-			 * \brief Sets the position of the text label to <em>(x, y)</em>.
-			 * \param x The x-position of the text label.
-			 * \param y The y-position of the baseline.
-			 */
-			void setPosition(double x, double y);
+            /**
+             * \brief Sets the position of the text label to <em>(x, y)</em>.
+             * \param x The x-position of the text label.
+             * \param y The y-position of the baseline.
+             */
+            void setPosition(double x, double y);
 
-			/**
-			 * \brief Returns the position of the text label.
-			 * \return The position of the text label.
-			 */
-			const Math::Vector2D& getPosition() const;
-		
-			/**
-			 * \brief Sets the pen defining the color of the text label.
-			 * \param pen The pen defining the color of the text label.
-			 */
-			void setPen(const Pen& pen);
+            /**
+             * \brief Returns the position of the text label.
+             * \return The position of the text label.
+             */
+            const Math::Vector2D& getPosition() const;
+        
+            /**
+             * \brief Sets the pen defining the color of the text label.
+             * \param pen The pen defining the color of the text label.
+             */
+            void setPen(const Pen& pen);
 
-			/**
-			 * \brief Returns the pen defining the color of the text label.
-			 * \return The pen defining the color of the text label.
-			 */
-			const Pen& getPen() const;
+            /**
+             * \brief Returns the pen defining the color of the text label.
+             * \return The pen defining the color of the text label.
+             */
+            const Pen& getPen() const;
 
-			/**
-			 * \brief Sets the font of the text label.
-			 * \param font The font of the text label.
-			 */
-			void setFont(const Font& font);
+            /**
+             * \brief Sets the font of the text label.
+             * \param font The font of the text label.
+             */
+            void setFont(const Font& font);
 
-			/**
-			 * \brief Returns the font of the text label.
-			 * \return The font of the text label.
-			 */
-			const Font& getFont() const;
+            /**
+             * \brief Returns the font of the text label.
+             * \return The font of the text label.
+             */
+            const Font& getFont() const;
 
-			GraphicsPrimitive2D::SharedPointer clone() const;
+            GraphicsPrimitive2D::SharedPointer clone() const;
 
-			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics) const;
+            void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics) const;
 
-		private:
-			Pen            pen;
-			Font           font;
-			Math::Vector2D position;
-			std::string    text;
-		};
-	}
+        private:
+            Pen            pen;
+            Font           font;
+            Math::Vector2D position;
+            std::string    text;
+        };
+    }
 }
 
 #endif // CDPL_VIS_TEXTLABELPRIMITIVE2D_HPP

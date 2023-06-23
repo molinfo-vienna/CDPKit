@@ -31,46 +31,46 @@
 namespace CDPL
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		void initAtomProperties();
-		void initBondProperties();
-		void initMolecularGraphProperties();
-		void initReactionProperties();
-		void initAtomPropertyDefaults();
-		void initBondPropertyDefaults();
-		void initMolecularGraphPropertyDefaults();
-		void initReactionPropertyDefaults();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-		void initAtomColors();
-	}
+        void initAtomProperties();
+        void initBondProperties();
+        void initMolecularGraphProperties();
+        void initReactionProperties();
+        void initAtomPropertyDefaults();
+        void initBondPropertyDefaults();
+        void initMolecularGraphPropertyDefaults();
+        void initReactionPropertyDefaults();
+        void initControlParameters();
+        void initControlParameterDefaults();
+        void initDataFormats();
+        void initAtomColors();
+    }
 }
 
 namespace
 {
 
-	struct CDPLVisInit
-	{
+    struct CDPLVisInit
+    {
 
-		CDPLVisInit() {
-			CDPL::Vis::initAtomProperties();
-			CDPL::Vis::initBondProperties();
-			CDPL::Vis::initMolecularGraphProperties();
-			CDPL::Vis::initReactionProperties();
-			CDPL::Vis::initAtomPropertyDefaults();
-			CDPL::Vis::initBondPropertyDefaults();
-			CDPL::Vis::initMolecularGraphPropertyDefaults();
-			CDPL::Vis::initReactionPropertyDefaults();
-			CDPL::Vis::initControlParameters();
-			CDPL::Vis::initControlParameterDefaults();
-			CDPL::Vis::initDataFormats();
-			CDPL::Vis::initAtomColors();
-		}
+        CDPLVisInit() {
+            CDPL::Vis::initAtomProperties();
+            CDPL::Vis::initBondProperties();
+            CDPL::Vis::initMolecularGraphProperties();
+            CDPL::Vis::initReactionProperties();
+            CDPL::Vis::initAtomPropertyDefaults();
+            CDPL::Vis::initBondPropertyDefaults();
+            CDPL::Vis::initMolecularGraphPropertyDefaults();
+            CDPL::Vis::initReactionPropertyDefaults();
+            CDPL::Vis::initControlParameters();
+            CDPL::Vis::initControlParameterDefaults();
+            CDPL::Vis::initDataFormats();
+            CDPL::Vis::initAtomColors();
+        }
 
-	} cdplVisInit;
+    } cdplVisInit;
 }
 
 #endif // CDPL_VIS_STATIC_LINK

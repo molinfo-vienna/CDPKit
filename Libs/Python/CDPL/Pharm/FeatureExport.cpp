@@ -38,21 +38,21 @@ namespace
     struct FeatureWrapper : CDPL::Pharm::Feature, boost::python::wrapper<CDPL::Pharm::Feature> 
     {
 
-		const CDPL::Pharm::Pharmacophore& getPharmacophore() const {
-			return this->get_override("getPharmacophore")();
-		}
+        const CDPL::Pharm::Pharmacophore& getPharmacophore() const {
+            return this->get_override("getPharmacophore")();
+        }
 
-		CDPL::Pharm::Pharmacophore& getPharmacophore() {
-			return this->get_override("getPharmacophore")();
-		}
+        CDPL::Pharm::Pharmacophore& getPharmacophore() {
+            return this->get_override("getPharmacophore")();
+        }
 
-		std::size_t getIndex() const {
-			return this->get_override("getIndex")();
-		}
+        std::size_t getIndex() const {
+            return this->get_override("getIndex")();
+        }
 
-		static CDPL::Pharm::Feature& assign(CDPL::Pharm::Feature& self, CDPL::Pharm::Feature& ftr) {
-			return (self = ftr);
-		}
+        static CDPL::Pharm::Feature& assign(CDPL::Pharm::Feature& self, CDPL::Pharm::Feature& ftr) {
+            return (self = ftr);
+        }
     };
 }
 
@@ -65,15 +65,15 @@ void CDPLPythonPharm::exportFeature()
     Pharm::Pharmacophore& (Pharm::Feature::*getPharmacophoreFunc)() = &Pharm::Feature::getPharmacophore;
 
     python::class_<FeatureWrapper, python::bases<Chem::Entity3D>,
-				   boost::noncopyable>("Feature", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def("getPharmacophore", python::pure_virtual(getPharmacophoreFunc), python::arg("self"),
-			 python::return_internal_reference<1>())
-		.def("getIndex", python::pure_virtual(&Pharm::Feature::getIndex), python::arg("self"))
-		.def("assign", &FeatureWrapper::assign, (python::arg("self"), python::arg("ftr")), 
-			 python::return_self<>())
-		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
-		.add_property("pharmacophore", python::make_function(getPharmacophoreFunc, 
-															 python::return_internal_reference<1>()))
-		.add_property("index", &Pharm::Feature::getIndex);
+                   boost::noncopyable>("Feature", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def("getPharmacophore", python::pure_virtual(getPharmacophoreFunc), python::arg("self"),
+             python::return_internal_reference<1>())
+        .def("getIndex", python::pure_virtual(&Pharm::Feature::getIndex), python::arg("self"))
+        .def("assign", &FeatureWrapper::assign, (python::arg("self"), python::arg("ftr")), 
+             python::return_self<>())
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .add_property("pharmacophore", python::make_function(getPharmacophoreFunc, 
+                                                             python::return_internal_reference<1>()))
+        .add_property("index", &Pharm::Feature::getIndex);
 }

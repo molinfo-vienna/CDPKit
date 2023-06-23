@@ -34,68 +34,68 @@ using namespace ChOX;
 
 
 CTabVersionEditWidget::CTabVersionEditWidget(QWidget* parent, unsigned int& ctab_version):
-	QWidget(parent), ctabVersion(ctab_version)
+    QWidget(parent), ctabVersion(ctab_version)
 {
-	init();
+    init();
 }
 
 void CTabVersionEditWidget::updateGUI()
 {
-	ctabVersionComboBox->blockSignals(true);
+    ctabVersionComboBox->blockSignals(true);
 
-	switch (ctabVersion) {
+    switch (ctabVersion) {
 
-		case CDPL::Chem::MDLDataFormatVersion::V2000:
-			ctabVersionComboBox->setCurrentIndex(1);
-			break;
+        case CDPL::Chem::MDLDataFormatVersion::V2000:
+            ctabVersionComboBox->setCurrentIndex(1);
+            break;
 
-		case CDPL::Chem::MDLDataFormatVersion::V3000:
-			ctabVersionComboBox->setCurrentIndex(2);
-			break;
+        case CDPL::Chem::MDLDataFormatVersion::V3000:
+            ctabVersionComboBox->setCurrentIndex(2);
+            break;
 
-		default:
-			ctabVersionComboBox->setCurrentIndex(0);
-	}
+        default:
+            ctabVersionComboBox->setCurrentIndex(0);
+    }
 
-	ctabVersionComboBox->blockSignals(false);
+    ctabVersionComboBox->blockSignals(false);
 }
 
 void CTabVersionEditWidget::handleVersionSelection(int idx)
 {
-	switch (idx) {
+    switch (idx) {
 
-		case 1:
-			ctabVersion = CDPL::Chem::MDLDataFormatVersion::V2000;
-			break;
+        case 1:
+            ctabVersion = CDPL::Chem::MDLDataFormatVersion::V2000;
+            break;
 
-		case 2:
-			ctabVersion = CDPL::Chem::MDLDataFormatVersion::V3000;
-			break;
+        case 2:
+            ctabVersion = CDPL::Chem::MDLDataFormatVersion::V3000;
+            break;
 
-		default:
-			ctabVersion = 0;
-	}
+        default:
+            ctabVersion = 0;
+    }
 
-	emit versionChanged();
+    emit versionChanged();
 }
 
 void CTabVersionEditWidget::init()
 {
-	QBoxLayout* main_layout = new QHBoxLayout(this);
+    QBoxLayout* main_layout = new QHBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	ctabVersionComboBox = new QComboBox(this);
+    ctabVersionComboBox = new QComboBox(this);
 
-	connect(ctabVersionComboBox, SIGNAL(activated(int)), this, SLOT(handleVersionSelection(int)));
+    connect(ctabVersionComboBox, SIGNAL(activated(int)), this, SLOT(handleVersionSelection(int)));
 
-	setFocusProxy(ctabVersionComboBox);
+    setFocusProxy(ctabVersionComboBox);
 
-	ctabVersionComboBox->addItem(tr("Auto Select"));
-	ctabVersionComboBox->addItem(tr("V2000"));
-	ctabVersionComboBox->addItem(tr("V3000"));
+    ctabVersionComboBox->addItem(tr("Auto Select"));
+    ctabVersionComboBox->addItem(tr("V2000"));
+    ctabVersionComboBox->addItem(tr("V3000"));
 
-	main_layout->addWidget(ctabVersionComboBox);
+    main_layout->addWidget(ctabVersionComboBox);
 
-	updateGUI();
+    updateGUI();
 }

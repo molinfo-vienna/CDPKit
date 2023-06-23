@@ -35,7 +35,7 @@ using namespace CDPL;
 
 bool MolProp::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
-	return Internal::isOrdinaryHydrogen(atom, molgraph, flags);
+    return Internal::isOrdinaryHydrogen(atom, molgraph, flags);
 }
 
 bool MolProp::isHeavy(const Chem::Atom& atom)
@@ -45,43 +45,43 @@ bool MolProp::isHeavy(const Chem::Atom& atom)
 
 bool MolProp::isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::isUnsaturated(atom, molgraph);
+    return Internal::isUnsaturated(atom, molgraph);
 }
 
 bool MolProp::isHBondAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-		
+    using namespace Chem;
+        
     if (getFormalCharge(atom) > 0)
-		return false;
+        return false;
 
     unsigned int atom_type = getType(atom);
     std::size_t valence = calcValence(atom, molgraph);
 
     switch (atom_type) {
 
-		case AtomType::P: 
-		case AtomType::N:
-	    	if (valence > 3 || valence == 0)
-	     	   return false;
-	    	break;
+        case AtomType::P: 
+        case AtomType::N:
+            if (valence > 3 || valence == 0)
+                return false;
+            break;
 
-		case AtomType::O:
-		case AtomType::S:
-	    	if (valence > 2 || valence == 0)
-				return false;
-	    	break;
+        case AtomType::O:
+        case AtomType::S:
+            if (valence > 2 || valence == 0)
+                return false;
+            break;
 
-		default:
-	    	return false;
+        default:
+            return false;
     }
 
     if (getAromaticityFlag(atom)) {
-		if (atom_type == AtomType::O || atom_type == AtomType::S || atom_type == AtomType::P)
-			return false;
+        if (atom_type == AtomType::O || atom_type == AtomType::S || atom_type == AtomType::P)
+            return false;
 
-		if (getBondCount(atom, molgraph) == 3) // Pyrrole-like N
-			return false;
+        if (getBondCount(atom, molgraph) == 3) // Pyrrole-like N
+            return false;
     }
 
     return true;
@@ -89,40 +89,40 @@ bool MolProp::isHBondAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph
 
 bool MolProp::isHBondDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
+    using namespace Chem;
+    
     unsigned int atom_type = getType(atom);
 
     if (atom_type != AtomType::O && atom_type != AtomType::N && atom_type != AtomType::S && atom_type != AtomType::P) 
-		return false;
+        return false;
 
     if (getFormalCharge(atom) < 0)
-		return false;
+        return false;
 
     return (getAtomCount(atom, molgraph, AtomType::H) > 0);
 }
 
 bool MolProp::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
-	return Internal::isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only);
+    return Internal::isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only);
 }
 
 bool MolProp::isAmideCenterAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
-	return (isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only) && getExplicitBondCount(atom, molgraph, 1, Chem::AtomType::N, true) > 0);
+    return (isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only) && getExplicitBondCount(atom, molgraph, 1, Chem::AtomType::N, true) > 0);
 }
 
 bool MolProp::isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
-	return Internal::isAmideNitrogen(atom, molgraph, c_only, db_o_only);
+    return Internal::isAmideNitrogen(atom, molgraph, c_only, db_o_only);
 }
 
 bool MolProp::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::isInvertibleNitrogen(atom, molgraph);
+    return Internal::isInvertibleNitrogen(atom, molgraph);
 }
 
 bool MolProp::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::isPlanarNitrogen(atom, molgraph);
+    return Internal::isPlanarNitrogen(atom, molgraph);
 }

@@ -29,20 +29,20 @@
 namespace CDPLPythonBiomol
 {
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportProcessingFlags();
-	void exportPDBFormatVersions();
+    void exportAtomPropertyFlags();
+    void exportResidueTypes();
+    void exportProcessingFlags();
+    void exportPDBFormatVersions();
 
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
+    void exportAtomProperties();
+    void exportMolecularGraphProperties();
+    void exportAtomPropertyDefaults();
+    void exportMolecularGraphPropertyDefaults();
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+    void exportControlParameters();
+    void exportControlParameterDefaults();
 
-	void exportDataFormats();
+    void exportDataFormats();
 }
 
 #endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP

@@ -41,43 +41,43 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief FeatureInteractionScoreCombiner.
-		 */
-		class CDPL_PHARM_API FeatureInteractionScoreCombiner : public FeatureInteractionScore
-		{
+        /**
+         * \brief FeatureInteractionScoreCombiner.
+         */
+        class CDPL_PHARM_API FeatureInteractionScoreCombiner : public FeatureInteractionScore
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScoreCombiner instances.
-			 */
-			typedef std::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScoreCombiner instances.
+             */
+            typedef std::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
 
-			typedef std::function<double(double, double)> CombinationFunction;
+            typedef std::function<double(double, double)> CombinationFunction;
 
-			typedef FeatureInteractionScore::SharedPointer InteractionScore;
-			
-			/**
-			 * \brief Constructs a \c %FeatureInteractionScoreCombiner that combines the score values calculated by two feature 
-			 *        interaction scoring functions.
-			 * \param score1 The first interaction scoring function.
-			 * \param score2 The second interaction scoring function.
-			 * \param comb_func The function calculating the final score value.
-			 */
+            typedef FeatureInteractionScore::SharedPointer InteractionScore;
+            
+            /**
+             * \brief Constructs a \c %FeatureInteractionScoreCombiner that combines the score values calculated by two feature 
+             *        interaction scoring functions.
+             * \param score1 The first interaction scoring function.
+             * \param score2 The second interaction scoring function.
+             * \param comb_func The function calculating the final score value.
+             */
             FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2,
-									 const CombinationFunction& comb_func);
+                                     const CombinationFunction& comb_func);
 
             FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2);
 
-			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
+            double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			InteractionScore    scoringFunc1;
-			InteractionScore    scoringFunc2;
-			CombinationFunction combFunc;
-		};
+          private:
+            InteractionScore    scoringFunc1;
+            InteractionScore    scoringFunc2;
+            CombinationFunction combFunc;
+        };
     }
 }
 

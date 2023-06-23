@@ -34,74 +34,74 @@ using namespace ChOX;
 
 
 SizeAdjustmentEditWidget::SizeAdjustmentEditWidget(QWidget* parent, unsigned int& size_adjustment):
-	QWidget(parent), sizeAdjustment(size_adjustment)
+    QWidget(parent), sizeAdjustment(size_adjustment)
 {
-	init();
+    init();
 }
 
 void SizeAdjustmentEditWidget::updateGUI()
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	sizeAdjustmentComboBox->blockSignals(true);
+    sizeAdjustmentComboBox->blockSignals(true);
 
-	switch (sizeAdjustment) {
+    switch (sizeAdjustment) {
 
-		case SizeAdjustment::NONE:
-			sizeAdjustmentComboBox->setCurrentIndex(0);
-			break;
+        case SizeAdjustment::NONE:
+            sizeAdjustmentComboBox->setCurrentIndex(0);
+            break;
 
-		case SizeAdjustment::BEST_FIT:
-			sizeAdjustmentComboBox->setCurrentIndex(2);
-			break;
+        case SizeAdjustment::BEST_FIT:
+            sizeAdjustmentComboBox->setCurrentIndex(2);
+            break;
 
-		default:
-			sizeAdjustmentComboBox->setCurrentIndex(1);
-	}
+        default:
+            sizeAdjustmentComboBox->setCurrentIndex(1);
+    }
 
-	sizeAdjustmentComboBox->blockSignals(false);
+    sizeAdjustmentComboBox->blockSignals(false);
 }
 
 void SizeAdjustmentEditWidget::handleAdjustmentSelection(int idx)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	switch (idx) {
+    switch (idx) {
 
-		case 0:
-			sizeAdjustment = SizeAdjustment::NONE;
-			break;
+        case 0:
+            sizeAdjustment = SizeAdjustment::NONE;
+            break;
 
-		case 2:
-			sizeAdjustment = SizeAdjustment::BEST_FIT;
-			break;
+        case 2:
+            sizeAdjustment = SizeAdjustment::BEST_FIT;
+            break;
 
-		default:
-			sizeAdjustment = SizeAdjustment::IF_REQUIRED;
-	}
+        default:
+            sizeAdjustment = SizeAdjustment::IF_REQUIRED;
+    }
 
-	emit sizeAdjustmentChanged();
+    emit sizeAdjustmentChanged();
 }
 
 void SizeAdjustmentEditWidget::init()
 {
-	QHBoxLayout* main_layout = new QHBoxLayout(this);
+    QHBoxLayout* main_layout = new QHBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	sizeAdjustmentComboBox = new QComboBox(this);
+    sizeAdjustmentComboBox = new QComboBox(this);
 
-	connect(sizeAdjustmentComboBox, SIGNAL(activated(int)), this, SLOT(handleAdjustmentSelection(int)));
+    connect(sizeAdjustmentComboBox, SIGNAL(activated(int)), this, SLOT(handleAdjustmentSelection(int)));
 
-	setFocusProxy(sizeAdjustmentComboBox);
+    setFocusProxy(sizeAdjustmentComboBox);
 
-	sizeAdjustmentComboBox->addItem(tr("None"));
-	sizeAdjustmentComboBox->addItem(tr("Ensure Visibility"));
-	sizeAdjustmentComboBox->addItem(tr("Best Fit"));
+    sizeAdjustmentComboBox->addItem(tr("None"));
+    sizeAdjustmentComboBox->addItem(tr("Ensure Visibility"));
+    sizeAdjustmentComboBox->addItem(tr("Best Fit"));
 
-	main_layout->addWidget(sizeAdjustmentComboBox);
+    main_layout->addWidget(sizeAdjustmentComboBox);
 
-	updateGUI();
+    updateGUI();
 }

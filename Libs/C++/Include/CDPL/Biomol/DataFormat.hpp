@@ -35,58 +35,58 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	}
+        class DataFormat;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported biopolymer data formats.
-		 */
-		namespace DataFormat
-		{
-	
-			/**
-			 * \brief Provides meta-information about the <em>Brookhaven Protein Data Bank Format</em>
-			 *        [\ref PDB] format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat PDB;
+        /**
+         * \brief Provides preinitialized Base::DataFormat objects for all supported biopolymer data formats.
+         */
+        namespace DataFormat
+        {
+    
+            /**
+             * \brief Provides meta-information about the <em>Brookhaven Protein Data Bank Format</em>
+             *        [\ref PDB] format.
+             */
+            extern CDPL_BIOMOL_API const Base::DataFormat PDB;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed <em>Brookhaven Protein Data Bank Format</em>
-			 *        [\ref PDB] format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat PDB_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>Brookhaven Protein Data Bank Format</em>
+             *        [\ref PDB] format.
+             */
+            extern CDPL_BIOMOL_API const Base::DataFormat PDB_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed <em>Brookhaven Protein Data Bank Format</em>
-			 *        [\ref PDB] format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat PDB_BZ2;
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>Brookhaven Protein Data Bank Format</em>
+             *        [\ref PDB] format.
+             */
+            extern CDPL_BIOMOL_API const Base::DataFormat PDB_BZ2;
 
-			/**
-			 * \brief Provides meta-information about the <em>Macromolecular Transmission Format</em>
-			 *        [\ref MMTF] format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat MMTF;
+            /**
+             * \brief Provides meta-information about the <em>Macromolecular Transmission Format</em>
+             *        [\ref MMTF] format.
+             */
+            extern CDPL_BIOMOL_API const Base::DataFormat MMTF;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed <em>Macromolecular Transmission Format</em>
-			 *        [\ref MMTF] format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat MMTF_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>Macromolecular Transmission Format</em>
+             *        [\ref MMTF] format.
+             */
+            extern CDPL_BIOMOL_API const Base::DataFormat MMTF_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Transmission Format</em>
-			 *        [\ref MMTF] format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat MMTF_BZ2;
-		}
-	}
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Transmission Format</em>
+             *        [\ref MMTF] format.
+             */
+            extern CDPL_BIOMOL_API const Base::DataFormat MMTF_BZ2;
+        }
+    }
 }
 
 #endif // CDPL_BIOMOL_DATAFORMAT_HPP

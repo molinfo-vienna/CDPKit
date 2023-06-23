@@ -46,85 +46,85 @@
 
 BOOST_AUTO_TEST_CASE(PNGMolecularGraphWriterTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Vis;
+    using namespace Chem;
 
-	BasicMolecule mol;
+    BasicMolecule mol;
 
-	std::ofstream os("PNGMolecularGraphWriterTest_1.png",
-					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    std::ofstream os("PNGMolecularGraphWriterTest_1.png",
+                     std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
+    BOOST_CHECK(os);
 
-	PNGMolecularGraphWriter writer(os);
+    PNGMolecularGraphWriter writer(os);
 
-	initMolecule(mol);
+    initMolecule(mol);
 
-	BOOST_CHECK(writer.write(mol));
-
-//-----
-
-	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestMolData.jme").c_str());
-
-	BOOST_CHECK(is);
-	BOOST_CHECK(JMEMoleculeReader(is).read(mol));
-
-	initMolecule(mol);
-
-	mol.getAtom(16).setProperty(AtomProperty::COLOR, Color::GREEN);
-	mol.getBond(0).setProperty(BondProperty::COLOR, Color::RED);
-	
-	os.close();
-	os.open("PNGMolecularGraphWriterTest_2.png",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-	BOOST_CHECK(writer.write(mol));
+    BOOST_CHECK(writer.write(mol));
 
 //-----
 
-	writer.setParameter(ControlParameter::BOND_COLOR, Color::BLUE);
+    std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestMolData.jme").c_str());
 
-	os.close();
-	os.open("PNGMolecularGraphWriterTest_3.png",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    BOOST_CHECK(is);
+    BOOST_CHECK(JMEMoleculeReader(is).read(mol));
 
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(mol));
+    initMolecule(mol);
 
-//-----
+    mol.getAtom(16).setProperty(AtomProperty::COLOR, Color::GREEN);
+    mol.getBond(0).setProperty(BondProperty::COLOR, Color::RED);
+    
+    os.close();
+    os.open("PNGMolecularGraphWriterTest_2.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	writer.setParameter(ControlParameter::VIEWPORT, Rectangle2D(10.0, 10.0, 300.0, 300.0));
-
-	os.close();
-	os.open("PNGMolecularGraphWriterTest_4.png",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(mol));
+    BOOST_CHECK(writer.write(mol));
 
 //-----
 
-	writer.setParameter(ControlParameter::SIZE_ADJUSTMENT, SizeAdjustment::BEST_FIT);
+    writer.setParameter(ControlParameter::BOND_COLOR, Color::BLUE);
 
-	os.close();
-	os.open("PNGMolecularGraphWriterTest_5.png",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    os.close();
+    os.open("PNGMolecularGraphWriterTest_3.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(mol));
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(mol));
 
 //-----
 
-	writer.removeParameter(ControlParameter::VIEWPORT);
-	writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::LIGHT_GRAY);
-	writer.setParameter(ControlParameter::BOND_LENGTH, SizeSpecification(50.0));
+    writer.setParameter(ControlParameter::VIEWPORT, Rectangle2D(10.0, 10.0, 300.0, 300.0));
 
-	os.close();
-	os.open("PNGMolecularGraphWriterTest_6.png",
-			std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    os.close();
+    os.open("PNGMolecularGraphWriterTest_4.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
-	BOOST_CHECK(writer.write(mol));
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(mol));
+
+//-----
+
+    writer.setParameter(ControlParameter::SIZE_ADJUSTMENT, SizeAdjustment::BEST_FIT);
+
+    os.close();
+    os.open("PNGMolecularGraphWriterTest_5.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(mol));
+
+//-----
+
+    writer.removeParameter(ControlParameter::VIEWPORT);
+    writer.setParameter(ControlParameter::BACKGROUND_COLOR, Color::LIGHT_GRAY);
+    writer.setParameter(ControlParameter::BOND_LENGTH, SizeSpecification(50.0));
+
+    os.close();
+    os.open("PNGMolecularGraphWriterTest_6.png",
+            std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+
+    BOOST_CHECK(os);
+    BOOST_CHECK(writer.write(mol));
 }
 

@@ -34,202 +34,202 @@
 
 BOOST_AUTO_TEST_CASE(AffineTransformsTest)
 {
-	using namespace CDPL;
-	using namespace Math;
+    using namespace CDPL;
+    using namespace Math;
 
-	double a = M_PI / 180.0 * 67.0;
+    double a = M_PI / 180.0 * 67.0;
 
-	double test_x_scaling_mtx_data[] = { 4, 0, 0, 0,
-										 0, 1, 0, 0,
-										 0, 0, 1, 0,
-										 0, 0, 0, 1 };
-	
-	double test_y_scaling_mtx_data[] = { 1, 0, 0, 0,
-										 0, 3, 0, 0,
-										 0, 0, 1, 0,
-										 0, 0, 0, 1 };
-	
-	double test_z_scaling_mtx_data[] = { 1, 0, 0, 0,
-										 0, 1, 0, 0,
-										 0, 0, 5, 0,
-										 0, 0, 0, 1 };
-	
-	double test_x_translation_mtx_data[] = { 1, 0, 0, 4,
-											 0, 1, 0, 0,
-											 0, 0, 1, 0,
-											 0, 0, 0, 1 };
-	
-	double test_y_translation_mtx_data[] = { 1, 0, 0, 0,
-											 0, 1, 0, 1,
-											 0, 0, 1, 0,
-											 0, 0, 0, 1 };
-	
-	double test_z_translation_mtx_data[] = { 1, 0, 0, 0,
-											 0, 1, 0, 0,
-											 0, 0, 1, 5,
-											 0, 0, 0, 1 };
-	
-	double test_x_rotation_mtx_data[] = { 1, 0,            0,           0,
-										  0, std::cos(a), -std::sin(a), 0,
-										  0, std::sin(a),  std::cos(a), 0,
-										  0, 0,            0,           1 };
-	
-	double test_y_rotation_mtx_data[] = {  std::cos(a), 0, std::sin(a), 0,
-										   0,           1, 0,           0,
-										  -std::sin(a), 0, std::cos(a), 0,
-										   0,           0, 0,           1 };
-	
-	double test_z_rotation_mtx_data[] = { std::cos(a), -std::sin(a), 0, 0,
-										  std::sin(a),  std::cos(a), 0, 0,
-										  0,            0,           1, 0,
-										  0,            0,           0, 1 };
+    double test_x_scaling_mtx_data[] = { 4, 0, 0, 0,
+                                         0, 1, 0, 0,
+                                         0, 0, 1, 0,
+                                         0, 0, 0, 1 };
+    
+    double test_y_scaling_mtx_data[] = { 1, 0, 0, 0,
+                                         0, 3, 0, 0,
+                                         0, 0, 1, 0,
+                                         0, 0, 0, 1 };
+    
+    double test_z_scaling_mtx_data[] = { 1, 0, 0, 0,
+                                         0, 1, 0, 0,
+                                         0, 0, 5, 0,
+                                         0, 0, 0, 1 };
+    
+    double test_x_translation_mtx_data[] = { 1, 0, 0, 4,
+                                             0, 1, 0, 0,
+                                             0, 0, 1, 0,
+                                             0, 0, 0, 1 };
+    
+    double test_y_translation_mtx_data[] = { 1, 0, 0, 0,
+                                             0, 1, 0, 1,
+                                             0, 0, 1, 0,
+                                             0, 0, 0, 1 };
+    
+    double test_z_translation_mtx_data[] = { 1, 0, 0, 0,
+                                             0, 1, 0, 0,
+                                             0, 0, 1, 5,
+                                             0, 0, 0, 1 };
+    
+    double test_x_rotation_mtx_data[] = { 1, 0,            0,           0,
+                                          0, std::cos(a), -std::sin(a), 0,
+                                          0, std::sin(a),  std::cos(a), 0,
+                                          0, 0,            0,           1 };
+    
+    double test_y_rotation_mtx_data[] = {  std::cos(a), 0, std::sin(a), 0,
+                                           0,           1, 0,           0,
+                                          -std::sin(a), 0, std::cos(a), 0,
+                                           0,           0, 0,           1 };
+    
+    double test_z_rotation_mtx_data[] = { std::cos(a), -std::sin(a), 0, 0,
+                                          std::sin(a),  std::cos(a), 0, 0,
+                                          0,            0,           1, 0,
+                                          0,            0,           0, 1 };
 
-	Matrix<double> mtx(4, 4);
-
-//-----
-
-	BOOST_CHECK_SMALL(double(norm_frobenius(AffineTransform<double, 4>() - IdentityMatrix<double>(4))), 0.00001);
+    Matrix<double> mtx(4, 4);
 
 //-----
 
-	initMatrix(mtx, test_x_scaling_mtx_data);
-
-	BOOST_CHECK_SMALL(double(norm_frobenius(XScaling<double, 4>(4) - mtx)), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(AffineTransform<double, 4>() - IdentityMatrix<double>(4))), 0.00001);
 
 //-----
 
-	initMatrix(mtx, test_y_scaling_mtx_data);
+    initMatrix(mtx, test_x_scaling_mtx_data);
 
-	BOOST_CHECK_SMALL(double(norm_frobenius(YScaling<double, 4>(3) - mtx)), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(XScaling<double, 4>(4) - mtx)), 0.00001);
 
 //-----
 
-	initMatrix(mtx, test_z_scaling_mtx_data);
+    initMatrix(mtx, test_y_scaling_mtx_data);
 
-	BOOST_CHECK_SMALL(double(norm_frobenius(ZScaling<double, 4>(5) - mtx)), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(YScaling<double, 4>(3) - mtx)), 0.00001);
 
-//------
+//-----
 
-	initMatrix(mtx, test_x_translation_mtx_data);
+    initMatrix(mtx, test_z_scaling_mtx_data);
 
-	BOOST_CHECK_SMALL(double(norm_frobenius(XTranslation<double, 4>(4) - mtx)), 0.00001);
-
-//------
-
-	initMatrix(mtx, test_y_translation_mtx_data);
-
-	BOOST_CHECK_SMALL(double(norm_frobenius(YTranslation<double, 4>(1) - mtx)), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(ZScaling<double, 4>(5) - mtx)), 0.00001);
 
 //------
 
+    initMatrix(mtx, test_x_translation_mtx_data);
 
-	initMatrix(mtx, test_z_translation_mtx_data);
-
-	BOOST_CHECK_SMALL(double(norm_frobenius(ZTranslation<double, 4>(5) - mtx)), 0.00001);
-
-//------
-
-	initMatrix(mtx, test_x_rotation_mtx_data);
-
-	BOOST_CHECK_SMALL(double(norm_frobenius(XRotation<double, 4>(a) - mtx)), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(XTranslation<double, 4>(4) - mtx)), 0.00001);
 
 //------
 
-	initMatrix(mtx, test_y_rotation_mtx_data);
+    initMatrix(mtx, test_y_translation_mtx_data);
 
-	BOOST_CHECK_SMALL(double(norm_frobenius(YRotation<double, 4>(a) - mtx)), 0.00001);
-
-//------
-
-	initMatrix(mtx, test_z_rotation_mtx_data);
-
-	BOOST_CHECK_SMALL(double(norm_frobenius(ZRotation<double, 4>(a) - mtx)), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(YTranslation<double, 4>(1) - mtx)), 0.00001);
 
 //------
 
-	XScaling3D s(2.0);
 
-	s.concatenate(YScaling3D(4.0)).concatenate(ZScaling3D(6.0));
+    initMatrix(mtx, test_z_translation_mtx_data);
 
-	BOOST_CHECK_CLOSE(s(0, 0), 2.0, 0.00001);
-	BOOST_CHECK_CLOSE(s(1, 1), 4.0, 0.00001);
-	BOOST_CHECK_CLOSE(s(2, 2), 6.0, 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(ZTranslation<double, 4>(5) - mtx)), 0.00001);
 
 //------
 
-	ZRotation3D r(M_PI * 0.5);
+    initMatrix(mtx, test_x_rotation_mtx_data);
 
-	r.concatenate(YRotation3D(M_PI));
-
-	BOOST_CHECK_SMALL(norm_2(prod(ZRotation3D(-M_PI * 0.5), UnitVector<double>(3, 0)) - prod(r, UnitVector<double>(3, 0))), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(XRotation<double, 4>(a) - mtx)), 0.00001);
 
 //------
 
-	Vector2D vec1;
+    initMatrix(mtx, test_y_rotation_mtx_data);
 
-	BOOST_CHECK(vec1(0) == 0.0);
-	BOOST_CHECK(vec1(1) == 0.0);
-
-	transformPoint(vec1, XTranslation<double, 1>(3.0));
-
-	BOOST_CHECK_SMALL(vec1(0), 0.00001);
-	BOOST_CHECK_SMALL(vec1(1), 0.00001);
-
-	transformPoint(vec1, XTranslation<double, 2>(3.0));
-
-	BOOST_CHECK_SMALL(vec1(0), 0.00001);
-	BOOST_CHECK_SMALL(vec1(1), 0.00001);
-
-	transformPoint(vec1, XTranslation<double, 3>(4.0));
-
-	BOOST_CHECK_CLOSE(vec1(0), 4.0, 0.00001);
-	BOOST_CHECK_CLOSE(vec1(1), 0.0, 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(YRotation<double, 4>(a) - mtx)), 0.00001);
 
 //------
 
-	Vector2D vec2;
+    initMatrix(mtx, test_z_rotation_mtx_data);
 
-	transformVector(vec2, XTranslation<double, 1>(3.0));
-
-	BOOST_CHECK_SMALL(vec2(0), 0.00001);
-	BOOST_CHECK_SMALL(vec2(1), 0.00001);
-
-	transformVector(vec2, XTranslation<double, 2>(3.0));
-
-	BOOST_CHECK_SMALL(vec2(0), 0.00001);
-	BOOST_CHECK_SMALL(vec2(1), 0.00001);
-
-	transformVector(vec2, XTranslation<double, 3>(4.0));
-
-	BOOST_CHECK_SMALL(vec2(0), 0.00001);
-	BOOST_CHECK_SMALL(vec2(1), 0.00001);
+    BOOST_CHECK_SMALL(double(norm_frobenius(ZRotation<double, 4>(a) - mtx)), 0.00001);
 
 //------
 
-	Vector2D vec3(1.0, 0.0);
+    XScaling3D s(2.0);
 
-	BOOST_CHECK(vec3(0) == 1.0);
-	BOOST_CHECK(vec3(1) == 0.0);
+    s.concatenate(YScaling3D(4.0)).concatenate(ZScaling3D(6.0));
 
-	transformVector(vec3, XTranslation<double, 1>(3.0));
+    BOOST_CHECK_CLOSE(s(0, 0), 2.0, 0.00001);
+    BOOST_CHECK_CLOSE(s(1, 1), 4.0, 0.00001);
+    BOOST_CHECK_CLOSE(s(2, 2), 6.0, 0.00001);
 
-	BOOST_CHECK_CLOSE(vec3(0), 1.0, 0.00001);
-	BOOST_CHECK_SMALL(vec3(1), 0.00001);
+//------
 
-	transformVector(vec3, XTranslation<double, 2>(4.0));
+    ZRotation3D r(M_PI * 0.5);
 
-	BOOST_CHECK_CLOSE(vec3(0), 1.0, 0.00001);
-	BOOST_CHECK_SMALL(vec3(1), 0.00001);
+    r.concatenate(YRotation3D(M_PI));
 
-	transformVector(vec3, XTranslation<double, 3>(5.0));
+    BOOST_CHECK_SMALL(norm_2(prod(ZRotation3D(-M_PI * 0.5), UnitVector<double>(3, 0)) - prod(r, UnitVector<double>(3, 0))), 0.00001);
 
-	BOOST_CHECK_CLOSE(vec3(0), 1.0, 0.00001);
-	BOOST_CHECK_SMALL(vec3(1), 0.00001);
+//------
 
-	transformVector(vec3, ZRotation<double, 2>(M_PI * 0.5));
+    Vector2D vec1;
 
-	BOOST_CHECK_SMALL(vec3(0), 0.00001);
-	BOOST_CHECK_CLOSE(vec3(1), 1.0, 0.00001);
+    BOOST_CHECK(vec1(0) == 0.0);
+    BOOST_CHECK(vec1(1) == 0.0);
+
+    transformPoint(vec1, XTranslation<double, 1>(3.0));
+
+    BOOST_CHECK_SMALL(vec1(0), 0.00001);
+    BOOST_CHECK_SMALL(vec1(1), 0.00001);
+
+    transformPoint(vec1, XTranslation<double, 2>(3.0));
+
+    BOOST_CHECK_SMALL(vec1(0), 0.00001);
+    BOOST_CHECK_SMALL(vec1(1), 0.00001);
+
+    transformPoint(vec1, XTranslation<double, 3>(4.0));
+
+    BOOST_CHECK_CLOSE(vec1(0), 4.0, 0.00001);
+    BOOST_CHECK_CLOSE(vec1(1), 0.0, 0.00001);
+
+//------
+
+    Vector2D vec2;
+
+    transformVector(vec2, XTranslation<double, 1>(3.0));
+
+    BOOST_CHECK_SMALL(vec2(0), 0.00001);
+    BOOST_CHECK_SMALL(vec2(1), 0.00001);
+
+    transformVector(vec2, XTranslation<double, 2>(3.0));
+
+    BOOST_CHECK_SMALL(vec2(0), 0.00001);
+    BOOST_CHECK_SMALL(vec2(1), 0.00001);
+
+    transformVector(vec2, XTranslation<double, 3>(4.0));
+
+    BOOST_CHECK_SMALL(vec2(0), 0.00001);
+    BOOST_CHECK_SMALL(vec2(1), 0.00001);
+
+//------
+
+    Vector2D vec3(1.0, 0.0);
+
+    BOOST_CHECK(vec3(0) == 1.0);
+    BOOST_CHECK(vec3(1) == 0.0);
+
+    transformVector(vec3, XTranslation<double, 1>(3.0));
+
+    BOOST_CHECK_CLOSE(vec3(0), 1.0, 0.00001);
+    BOOST_CHECK_SMALL(vec3(1), 0.00001);
+
+    transformVector(vec3, XTranslation<double, 2>(4.0));
+
+    BOOST_CHECK_CLOSE(vec3(0), 1.0, 0.00001);
+    BOOST_CHECK_SMALL(vec3(1), 0.00001);
+
+    transformVector(vec3, XTranslation<double, 3>(5.0));
+
+    BOOST_CHECK_CLOSE(vec3(0), 1.0, 0.00001);
+    BOOST_CHECK_SMALL(vec3(1), 0.00001);
+
+    transformVector(vec3, ZRotation<double, 2>(M_PI * 0.5));
+
+    BOOST_CHECK_SMALL(vec3(0), 0.00001);
+    BOOST_CHECK_CLOSE(vec3(1), 1.0, 0.00001);
 
 }
 

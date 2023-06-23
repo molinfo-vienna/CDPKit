@@ -32,21 +32,21 @@
 namespace 
 {
 
-	struct BondPropertyDefault {};
+    struct BondPropertyDefault {};
 }
 
 
 void CDPLPythonChem::exportBondPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondPropertyDefault, boost::noncopyable>("BondPropertyDefault", python::no_init)
-		.def_readonly("ORDER", &Chem::BondPropertyDefault::ORDER)
-		.def_readonly("SYBYL_TYPE", &Chem::BondPropertyDefault::SYBYL_TYPE)
-		.def_readonly("DIRECTION", &Chem::BondPropertyDefault::DIRECTION)
-		.def_readonly("STEREO_2D_FLAG", &Chem::BondPropertyDefault::STEREO_2D_FLAG)
-		.def_readonly("STEREO_DESCRIPTOR", &Chem::BondPropertyDefault::STEREO_DESCRIPTOR)
-		.def_readonly("REACTION_CENTER_STATUS", &Chem::BondPropertyDefault::REACTION_CENTER_STATUS)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::BondPropertyDefault::MATCH_CONSTRAINTS);
+    python::class_<BondPropertyDefault, boost::noncopyable>("BondPropertyDefault", python::no_init)
+        .def_readonly("ORDER", &Chem::BondPropertyDefault::ORDER)
+        .def_readonly("SYBYL_TYPE", &Chem::BondPropertyDefault::SYBYL_TYPE)
+        .def_readonly("DIRECTION", &Chem::BondPropertyDefault::DIRECTION)
+        .def_readonly("STEREO_2D_FLAG", &Chem::BondPropertyDefault::STEREO_2D_FLAG)
+        .def_readonly("STEREO_DESCRIPTOR", &Chem::BondPropertyDefault::STEREO_DESCRIPTOR)
+        .def_readonly("REACTION_CENTER_STATUS", &Chem::BondPropertyDefault::REACTION_CENTER_STATUS)
+        .def_readonly("MATCH_CONSTRAINTS", &Chem::BondPropertyDefault::MATCH_CONSTRAINTS);
 }

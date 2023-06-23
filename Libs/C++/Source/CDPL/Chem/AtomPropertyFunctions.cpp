@@ -35,37 +35,37 @@ using namespace CDPL;
 
 
 #define MAKE_ATOM_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	void Chem::set##FUNC_SUFFIX(Chem::Atom& atom, TYPE arg)				\
-	{																	\
-		atom.setProperty(AtomProperty::PROP_NAME, arg);					\
-	}																	\
-																		\
-	bool Chem::has##FUNC_SUFFIX(const Chem::Atom& atom)					\
-	{																	\
-		return atom.isPropertySet(AtomProperty::PROP_NAME);				\
-	}																	\
-																		\
-	void Chem::clear##FUNC_SUFFIX(Chem::Atom& atom)						\
-	{																	\
-		atom.removeProperty(AtomProperty::PROP_NAME);					\
-	}
+    void Chem::set##FUNC_SUFFIX(Chem::Atom& atom, TYPE arg)                \
+    {                                                                    \
+        atom.setProperty(AtomProperty::PROP_NAME, arg);                    \
+    }                                                                    \
+                                                                        \
+    bool Chem::has##FUNC_SUFFIX(const Chem::Atom& atom)                    \
+    {                                                                    \
+        return atom.isPropertySet(AtomProperty::PROP_NAME);                \
+    }                                                                    \
+                                                                        \
+    void Chem::clear##FUNC_SUFFIX(Chem::Atom& atom)                        \
+    {                                                                    \
+        atom.removeProperty(AtomProperty::PROP_NAME);                    \
+    }
 
-#define MAKE_ATOM_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)		\
-	TYPE Chem::get##FUNC_SUFFIX(const Chem::Atom& atom)					\
-	{																	\
-		return atom.getProperty<TYPE>(AtomProperty::PROP_NAME);			\
-	}																	\
-																		\
-	MAKE_ATOM_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_ATOM_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)        \
+    TYPE Chem::get##FUNC_SUFFIX(const Chem::Atom& atom)                    \
+    {                                                                    \
+        return atom.getProperty<TYPE>(AtomProperty::PROP_NAME);            \
+    }                                                                    \
+                                                                        \
+    MAKE_ATOM_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 #define MAKE_ATOM_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	TYPE Chem::get##FUNC_SUFFIX(const Chem::Atom& atom)					\
-	{																	\
-		return atom.getPropertyOrDefault<TYPE>(AtomProperty::PROP_NAME,	\
-											   AtomPropertyDefault::PROP_NAME); \
-	}																	\
-																		\
-	MAKE_ATOM_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+    TYPE Chem::get##FUNC_SUFFIX(const Chem::Atom& atom)                    \
+    {                                                                    \
+        return atom.getPropertyOrDefault<TYPE>(AtomProperty::PROP_NAME,    \
+                                               AtomPropertyDefault::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    MAKE_ATOM_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
 typedef const Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>::SharedPointer& MatchExpressionPtr;

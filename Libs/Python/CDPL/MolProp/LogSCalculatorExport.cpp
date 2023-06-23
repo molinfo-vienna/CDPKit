@@ -35,20 +35,20 @@
 
 void CDPLPythonMolProp::exportLogSCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolProp::LogSCalculator, boost::noncopyable>("LogSCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const MolProp::LogSCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::LogSCalculator>())
-		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::LogSCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("calculate", &MolProp::LogSCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &MolProp::LogSCalculator::getResult, python::arg("self"))
-		.def("getFeatureVector", &MolProp::LogSCalculator::getFeatureVector, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", &MolProp::LogSCalculator::getResult)
-		.def_readonly("FEATURE_VECTOR_SIZE", &MolProp::LogSCalculator::FEATURE_VECTOR_SIZE);
+    python::class_<MolProp::LogSCalculator, boost::noncopyable>("LogSCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const MolProp::LogSCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::LogSCalculator>())
+        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::LogSCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("calculate", &MolProp::LogSCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+        .def("getResult", &MolProp::LogSCalculator::getResult, python::arg("self"))
+        .def("getFeatureVector", &MolProp::LogSCalculator::getFeatureVector, python::arg("self"),
+             python::return_internal_reference<>())
+        .add_property("result", &MolProp::LogSCalculator::getResult)
+        .def_readonly("FEATURE_VECTOR_SIZE", &MolProp::LogSCalculator::FEATURE_VECTOR_SIZE);
 }

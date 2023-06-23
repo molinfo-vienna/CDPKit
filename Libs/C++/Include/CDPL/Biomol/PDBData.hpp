@@ -40,125 +40,125 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-	    /**
-		 * \brief A datastructure for the storage of imported PDB data records (see [\ref CTFILE]).
-		 */
-	    class CDPL_BIOMOL_API PDBData
-	    {
-		
-		public:
-			typedef std::shared_ptr<PDBData> SharedPointer;
+        /**
+         * \brief A datastructure for the storage of imported PDB data records (see [\ref CTFILE]).
+         */
+        class CDPL_BIOMOL_API PDBData
+        {
+        
+        public:
+            typedef std::shared_ptr<PDBData> SharedPointer;
 
-			enum RecordType 
-			{
+            enum RecordType 
+            {
 
-				HEADER,
-				OBSLTE,
-				TITLE,
-				SPLIT,
-				CAVEAT,
-				COMPND,
-				SOURCE,
-				KEYWDS,
-				EXPDTA,
-			    AUTHOR,
-				REVDAT,
-				SPRSDE,
-				JRNL,
-				REMARK,
-				DBREF,
-				DBREF1,
-				DBREF2,
-				SEQADV,
-				SEQRES,
-				MODRES,
-				HET,
-				FORMUL,
-				HETNAM,
-				HETSYN,
-				HELIX,
-				SHEET,
-				TURN,
-				SSBOND,
-				LINK,
-				CISPEP,
-				SITE,
-				CRYST1,
-				MTRIX1,
-				MTRIX2,
-				MTRIX3,
-				ORIGX1,
-				ORIGX2,
-				ORIGX3,
-				SCALE1,
-				SCALE2,
-				SCALE3,
-				STRUCTURE_ID,
-				DEPOSITION_DATE,
-				RESOLUTION
-			};
+                HEADER,
+                OBSLTE,
+                TITLE,
+                SPLIT,
+                CAVEAT,
+                COMPND,
+                SOURCE,
+                KEYWDS,
+                EXPDTA,
+                AUTHOR,
+                REVDAT,
+                SPRSDE,
+                JRNL,
+                REMARK,
+                DBREF,
+                DBREF1,
+                DBREF2,
+                SEQADV,
+                SEQRES,
+                MODRES,
+                HET,
+                FORMUL,
+                HETNAM,
+                HETSYN,
+                HELIX,
+                SHEET,
+                TURN,
+                SSBOND,
+                LINK,
+                CISPEP,
+                SITE,
+                CRYST1,
+                MTRIX1,
+                MTRIX2,
+                MTRIX3,
+                ORIGX1,
+                ORIGX2,
+                ORIGX3,
+                SCALE1,
+                SCALE2,
+                SCALE3,
+                STRUCTURE_ID,
+                DEPOSITION_DATE,
+                RESOLUTION
+            };
 
-		private:
-			typedef std::map<RecordType, std::string> TypeToDataMap;
-		
-		public:
-			typedef typename TypeToDataMap::value_type Record;
+        private:
+            typedef std::map<RecordType, std::string> TypeToDataMap;
+        
+        public:
+            typedef typename TypeToDataMap::value_type Record;
 
-			typedef typename TypeToDataMap::const_iterator ConstRecordIterator;
+            typedef typename TypeToDataMap::const_iterator ConstRecordIterator;
 
-			typedef typename TypeToDataMap::iterator RecordIterator;
-		
-			PDBData(): data() {}
+            typedef typename TypeToDataMap::iterator RecordIterator;
+        
+            PDBData(): data() {}
 
-			PDBData(const PDBData& other): data(other.data) {}
+            PDBData(const PDBData& other): data(other.data) {}
 
-			void clear();
+            void clear();
 
-			std::size_t getNumRecords() const;
+            std::size_t getNumRecords() const;
 
-			bool isEmpty() const;
+            bool isEmpty() const;
 
-			bool containsRecord(const RecordType& type) const;
+            bool containsRecord(const RecordType& type) const;
 
-			RecordIterator getRecord(const RecordType& type);
+            RecordIterator getRecord(const RecordType& type);
 
-			ConstRecordIterator getRecord(const RecordType& type) const;
+            ConstRecordIterator getRecord(const RecordType& type) const;
 
-			std::string& getData(const RecordType& type);
+            std::string& getData(const RecordType& type);
 
-			const std::string& getData(const RecordType& type) const;
+            const std::string& getData(const RecordType& type) const;
 
-			void removeRecord(const RecordIterator& it);
-		
-			bool removeRecord(const RecordType& type);
+            void removeRecord(const RecordIterator& it);
+        
+            bool removeRecord(const RecordType& type);
 
-			RecordIterator setRecord(const Record& rec);
+            RecordIterator setRecord(const Record& rec);
 
-			RecordIterator setRecord(const RecordType& type, const std::string& data);
+            RecordIterator setRecord(const RecordType& type, const std::string& data);
 
-			ConstRecordIterator getRecordsBegin() const;
+            ConstRecordIterator getRecordsBegin() const;
 
-			RecordIterator getRecordsBegin();
+            RecordIterator getRecordsBegin();
 
-			ConstRecordIterator getRecordsEnd() const;
+            ConstRecordIterator getRecordsEnd() const;
 
-			RecordIterator getRecordsEnd();
+            RecordIterator getRecordsEnd();
 
-		    ConstRecordIterator begin() const;
+            ConstRecordIterator begin() const;
 
-			RecordIterator begin();
+            RecordIterator begin();
 
-			ConstRecordIterator end() const;
+            ConstRecordIterator end() const;
 
-			RecordIterator end();
+            RecordIterator end();
 
-		private:
-			TypeToDataMap data;
-	    };
-	}
+        private:
+            TypeToDataMap data;
+        };
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBDATA_HPP

@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		typedef Util::CompressedDataReader<CDFPharmacophoreReader, Util::BZip2IStream> CDFBZ2PharmacophoreReader;
-	}
+        typedef Util::CompressedDataReader<CDFPharmacophoreReader, Util::BZip2IStream> CDFBZ2PharmacophoreReader;
+    }
 }
 
 #endif // CDPL_PHARM_CDFBZ2PHARMACOPHOREREADER_HPP

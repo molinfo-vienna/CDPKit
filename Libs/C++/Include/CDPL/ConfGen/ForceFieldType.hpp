@@ -33,28 +33,28 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the forcefield that shall be used 
-		 *        for 3D coordinates refinement and energy calculations.
-		 */
-		namespace ForceFieldType
-		{
-					
-			const unsigned int MMFF94                     = 0;
-			const unsigned int MMFF94_NO_ESTAT            = 1;
-			const unsigned int MMFF94S                    = 2;
-			const unsigned int MMFF94S_NO_ESTAT           = 3;
-			const unsigned int MMFF94S_XOOP               = 4;
-			const unsigned int MMFF94S_XOOP_NO_ESTAT      = 5;
-			const unsigned int MMFF94S_RTOR               = 6;
-			const unsigned int MMFF94S_RTOR_NO_ESTAT      = 7;
-			const unsigned int MMFF94S_RTOR_XOOP          = 8;
-			const unsigned int MMFF94S_RTOR_XOOP_NO_ESTAT = 9;
-		}
-	}
+        /**
+         * \brief Provides constants that are used to specify the forcefield that shall be used 
+         *        for 3D coordinates refinement and energy calculations.
+         */
+        namespace ForceFieldType
+        {
+                    
+            const unsigned int MMFF94                     = 0;
+            const unsigned int MMFF94_NO_ESTAT            = 1;
+            const unsigned int MMFF94S                    = 2;
+            const unsigned int MMFF94S_NO_ESTAT           = 3;
+            const unsigned int MMFF94S_XOOP               = 4;
+            const unsigned int MMFF94S_XOOP_NO_ESTAT      = 5;
+            const unsigned int MMFF94S_RTOR               = 6;
+            const unsigned int MMFF94S_RTOR_NO_ESTAT      = 7;
+            const unsigned int MMFF94S_RTOR_XOOP          = 8;
+            const unsigned int MMFF94S_RTOR_XOOP_NO_ESTAT = 9;
+        }
+    }
 }
 
 #endif // CDPL_CONFGEN_FORCEFIELDTYPE_HPP

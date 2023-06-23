@@ -29,8 +29,8 @@
 
 BOOST_AUTO_TEST_CASE(MultiMapTest)
 {
-	using namespace CDPL;
-	using namespace Util;
+    using namespace CDPL;
+    using namespace Util;
 
 }
 

@@ -37,37 +37,37 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct ScalarMatrixExport
-	{
+    template <typename MatrixType>
+    struct ScalarMatrixExport
+    {
 
-		ScalarMatrixExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ScalarMatrixExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::SizeType SizeType;
-			typedef typename MatrixType::ValueType ValueType;
+            typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::ValueType ValueType;
 
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, SizeType, const ValueType&>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("v") = ValueType())))
-				.def("resize", &MatrixType::resize, (python::arg("self"), python::arg("m"), python::arg("n")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, SizeType, const ValueType&>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("v") = ValueType())))
+                .def("resize", &MatrixType::resize, (python::arg("self"), python::arg("m"), python::arg("n")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportScalarMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ScalarMatrixExport<Math::FScalarMatrix>("FScalarMatrix");
-	ScalarMatrixExport<Math::DScalarMatrix>("DScalarMatrix");
-	ScalarMatrixExport<Math::LScalarMatrix>("LScalarMatrix");
-	ScalarMatrixExport<Math::ULScalarMatrix>("ULScalarMatrix");
+    ScalarMatrixExport<Math::FScalarMatrix>("FScalarMatrix");
+    ScalarMatrixExport<Math::DScalarMatrix>("DScalarMatrix");
+    ScalarMatrixExport<Math::LScalarMatrix>("LScalarMatrix");
+    ScalarMatrixExport<Math::ULScalarMatrix>("ULScalarMatrix");
 }

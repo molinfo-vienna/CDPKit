@@ -38,7 +38,7 @@ namespace
 
     void calculate(CDPL::Descr::FeatureRDFCodeCalculator& calculator, CDPL::Pharm::FeatureContainer& cntnr, CDPL::Math::DVector& rdf_code)
     {
-		calculator.calculate(cntnr, rdf_code);
+        calculator.calculate(cntnr, rdf_code);
     }
 }
 
@@ -49,46 +49,46 @@ void CDPLPythonDescr::exportFeatureRDFCodeCalculator()
     using namespace CDPL;
 
     python::class_<Descr::FeatureRDFCodeCalculator, boost::noncopyable>("FeatureRDFCodeCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::FeatureRDFCodeCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
-				 (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::FeatureRDFCodeCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Descr::FeatureRDFCodeCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setEntityPairWeightFunction", &Descr::FeatureRDFCodeCalculator::setEntityPairWeightFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setEntity3DCoordinatesFunction", &Descr::FeatureRDFCodeCalculator::setEntity3DCoordinatesFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setNumSteps", &Descr::FeatureRDFCodeCalculator::setNumSteps, 
-			 (python::arg("self"), python::arg("num_steps")))
-		.def("getNumSteps", &Descr::FeatureRDFCodeCalculator::getNumSteps, python::arg("self"))
-		.def("setRadiusIncrement", &Descr::FeatureRDFCodeCalculator::setRadiusIncrement, 
-			 (python::arg("self"), python::arg("radius_inc")))
-		.def("getRadiusIncrement", &Descr::FeatureRDFCodeCalculator::getRadiusIncrement, python::arg("self"))
-		.def("setStartRadius", &Descr::FeatureRDFCodeCalculator::setStartRadius, 
-			 (python::arg("self"), python::arg("start_radius")))
-		.def("getStartRadius", &Descr::FeatureRDFCodeCalculator::getStartRadius, python::arg("self"))
-		.def("setSmoothingFactor", &Descr::FeatureRDFCodeCalculator::setSmoothingFactor, 
-			 (python::arg("self"), python::arg("factor")))
-		.def("getSmoothingFactor", &Descr::FeatureRDFCodeCalculator::getSmoothingFactor, python::arg("self"))
-		.def("setScalingFactor", &Descr::FeatureRDFCodeCalculator::setScalingFactor, 
-			 (python::arg("self"), python::arg("factor")))
-		.def("getScalingFactor", &Descr::FeatureRDFCodeCalculator::getScalingFactor, python::arg("self"))
-		.def("enableDistanceToIntervalCenterRounding", &Descr::FeatureRDFCodeCalculator::enableDistanceToIntervalCenterRounding, 
-			 (python::arg("self"), python::arg("enable")))
-		.def("distanceToIntervalsCenterRoundingEnabled", &Descr::FeatureRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
-		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code")))
-		.add_property("distanceToIntervalCenterRounding", &Descr::FeatureRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled,
-					  &Descr::FeatureRDFCodeCalculator::enableDistanceToIntervalCenterRounding)
-		.add_property("smoothingFactor", &Descr::FeatureRDFCodeCalculator::getSmoothingFactor,
-					  &Descr::FeatureRDFCodeCalculator::setSmoothingFactor)
-		.add_property("scalingFactor", &Descr::FeatureRDFCodeCalculator::getScalingFactor,
-					  &Descr::FeatureRDFCodeCalculator::setScalingFactor)
-		.add_property("startRadius", &Descr::FeatureRDFCodeCalculator::getStartRadius,
-					  &Descr::FeatureRDFCodeCalculator::setStartRadius)
-		.add_property("radiusIncrement", &Descr::FeatureRDFCodeCalculator::getRadiusIncrement,
-					  &Descr::FeatureRDFCodeCalculator::setRadiusIncrement)
-		.add_property("numSteps", &Descr::FeatureRDFCodeCalculator::getNumSteps,
-					  &Descr::FeatureRDFCodeCalculator::setNumSteps);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Descr::FeatureRDFCodeCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
+                 (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::FeatureRDFCodeCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Descr::FeatureRDFCodeCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setEntityPairWeightFunction", &Descr::FeatureRDFCodeCalculator::setEntityPairWeightFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setEntity3DCoordinatesFunction", &Descr::FeatureRDFCodeCalculator::setEntity3DCoordinatesFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setNumSteps", &Descr::FeatureRDFCodeCalculator::setNumSteps, 
+             (python::arg("self"), python::arg("num_steps")))
+        .def("getNumSteps", &Descr::FeatureRDFCodeCalculator::getNumSteps, python::arg("self"))
+        .def("setRadiusIncrement", &Descr::FeatureRDFCodeCalculator::setRadiusIncrement, 
+             (python::arg("self"), python::arg("radius_inc")))
+        .def("getRadiusIncrement", &Descr::FeatureRDFCodeCalculator::getRadiusIncrement, python::arg("self"))
+        .def("setStartRadius", &Descr::FeatureRDFCodeCalculator::setStartRadius, 
+             (python::arg("self"), python::arg("start_radius")))
+        .def("getStartRadius", &Descr::FeatureRDFCodeCalculator::getStartRadius, python::arg("self"))
+        .def("setSmoothingFactor", &Descr::FeatureRDFCodeCalculator::setSmoothingFactor, 
+             (python::arg("self"), python::arg("factor")))
+        .def("getSmoothingFactor", &Descr::FeatureRDFCodeCalculator::getSmoothingFactor, python::arg("self"))
+        .def("setScalingFactor", &Descr::FeatureRDFCodeCalculator::setScalingFactor, 
+             (python::arg("self"), python::arg("factor")))
+        .def("getScalingFactor", &Descr::FeatureRDFCodeCalculator::getScalingFactor, python::arg("self"))
+        .def("enableDistanceToIntervalCenterRounding", &Descr::FeatureRDFCodeCalculator::enableDistanceToIntervalCenterRounding, 
+             (python::arg("self"), python::arg("enable")))
+        .def("distanceToIntervalsCenterRoundingEnabled", &Descr::FeatureRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
+        .def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code")))
+        .add_property("distanceToIntervalCenterRounding", &Descr::FeatureRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled,
+                      &Descr::FeatureRDFCodeCalculator::enableDistanceToIntervalCenterRounding)
+        .add_property("smoothingFactor", &Descr::FeatureRDFCodeCalculator::getSmoothingFactor,
+                      &Descr::FeatureRDFCodeCalculator::setSmoothingFactor)
+        .add_property("scalingFactor", &Descr::FeatureRDFCodeCalculator::getScalingFactor,
+                      &Descr::FeatureRDFCodeCalculator::setScalingFactor)
+        .add_property("startRadius", &Descr::FeatureRDFCodeCalculator::getStartRadius,
+                      &Descr::FeatureRDFCodeCalculator::setStartRadius)
+        .add_property("radiusIncrement", &Descr::FeatureRDFCodeCalculator::getRadiusIncrement,
+                      &Descr::FeatureRDFCodeCalculator::setRadiusIncrement)
+        .add_property("numSteps", &Descr::FeatureRDFCodeCalculator::getNumSteps,
+                      &Descr::FeatureRDFCodeCalculator::setNumSteps);
 }

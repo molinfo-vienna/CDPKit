@@ -32,12 +32,12 @@ using namespace CDPL;
 
 Chem::MolecularGraph& Chem::MolecularGraph::operator=(const MolecularGraph& molgraph)
 {
-	if (this == &molgraph)
-		return *this;
+    if (this == &molgraph)
+        return *this;
 
-	AtomContainer::operator=(molgraph);
-	BondContainer::operator=(molgraph);
-	PropertyContainer::operator=(molgraph);
+    AtomContainer::operator=(molgraph);
+    BondContainer::operator=(molgraph);
+    PropertyContainer::operator=(molgraph);
 
-	return *this;
+    return *this;
 }

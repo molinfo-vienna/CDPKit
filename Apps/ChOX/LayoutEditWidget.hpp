@@ -34,32 +34,32 @@ class QComboBox;
 namespace ChOX
 {
 
-	class LayoutEditWidget : public QWidget
-	{
+    class LayoutEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		LayoutEditWidget(QWidget*, unsigned int&, unsigned int&);
+    public:
+        LayoutEditWidget(QWidget*, unsigned int&, unsigned int&);
 
-	signals:
-		void layoutChanged();
+    signals:
+        void layoutChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleStyleChange(int);
-		void handleDirectionChange(int);
+    private slots:
+        void handleStyleChange(int);
+        void handleDirectionChange(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		unsigned int& layoutStyle;
-		unsigned int& layoutDirection;
-		QComboBox*    layoutStyleComboBox;
-		QComboBox*    layoutDirComboBox;
-	};
+        unsigned int& layoutStyle;
+        unsigned int& layoutDirection;
+        QComboBox*    layoutStyleComboBox;
+        QComboBox*    layoutDirComboBox;
+    };
 }
 
 #endif // CHOX_LAYOUTEDITWIDGET_HPP

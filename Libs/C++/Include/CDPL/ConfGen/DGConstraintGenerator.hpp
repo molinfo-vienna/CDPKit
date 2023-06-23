@@ -47,139 +47,139 @@ namespace CDPL
     namespace ForceField
     {
 
-		class MMFF94InteractionData;
+        class MMFF94InteractionData;
     }
 
     namespace Chem
     {
 
-		class FragmentList;
-		class MolecularGraph;
-		class Atom;
-		class Bond;
+        class FragmentList;
+        class MolecularGraph;
+        class Atom;
+        class Bond;
     }
 
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API DGConstraintGenerator
-		{
+        class CDPL_CONFGEN_API DGConstraintGenerator
+        {
 
-		  public:
-			typedef std::pair<std::size_t, Chem::StereoDescriptor> StereoCenterData;
+          public:
+            typedef std::pair<std::size_t, Chem::StereoDescriptor> StereoCenterData;
 
-		  private:
-			typedef std::vector<StereoCenterData> StereoCenterDataArray;
+          private:
+            typedef std::vector<StereoCenterData> StereoCenterDataArray;
 
-		  public:
-			typedef StereoCenterDataArray::const_iterator ConstStereoCenterDataIterator;
+          public:
+            typedef StereoCenterDataArray::const_iterator ConstStereoCenterDataIterator;
 
-			DGConstraintGenerator();
+            DGConstraintGenerator();
 
-			DGConstraintGeneratorSettings& getSettings();
+            DGConstraintGeneratorSettings& getSettings();
 
-			const DGConstraintGeneratorSettings& getSettings() const;
+            const DGConstraintGeneratorSettings& getSettings() const;
 
-			void addAtomStereoCenter(const Chem::Atom& atom, const Chem::StereoDescriptor& descr);
-			void addBondStereoCenter(const Chem::Bond& bond, const Chem::StereoDescriptor& descr);
+            void addAtomStereoCenter(const Chem::Atom& atom, const Chem::StereoDescriptor& descr);
+            void addBondStereoCenter(const Chem::Bond& bond, const Chem::StereoDescriptor& descr);
 
-			void setup(const Chem::MolecularGraph& molgraph);
-			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
+            void setup(const Chem::MolecularGraph& molgraph);
+            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
 
-			const Util::BitSet& getExcludedHydrogenMask() const;
-	
-			std::size_t getNumAtomStereoCenters() const;
-			std::size_t getNumBondStereoCenters() const;
+            const Util::BitSet& getExcludedHydrogenMask() const;
+    
+            std::size_t getNumAtomStereoCenters() const;
+            std::size_t getNumBondStereoCenters() const;
 
-			const StereoCenterData& getAtomStereoCenterData(std::size_t idx) const;
-			const StereoCenterData& getBondStereoCenterData(std::size_t idx) const;
+            const StereoCenterData& getAtomStereoCenterData(std::size_t idx) const;
+            const StereoCenterData& getBondStereoCenterData(std::size_t idx) const;
 
-			ConstStereoCenterDataIterator getAtomStereoCenterDataBegin() const;
-			ConstStereoCenterDataIterator getAtomStereoCenterDataEnd() const;
+            ConstStereoCenterDataIterator getAtomStereoCenterDataBegin() const;
+            ConstStereoCenterDataIterator getAtomStereoCenterDataEnd() const;
 
-			ConstStereoCenterDataIterator getBondStereoCenterDataBegin() const;
-			ConstStereoCenterDataIterator getBondStereoCenterDataEnd() const;
+            ConstStereoCenterDataIterator getBondStereoCenterDataBegin() const;
+            ConstStereoCenterDataIterator getBondStereoCenterDataEnd() const;
 
-			void addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
-			void addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
-			void add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
-			void addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
-			void addAtomConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
-			void addBondConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addAtomConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addBondConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
-			void addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
-			void addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+            void addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
-		  private:
-			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
+          private:
+            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
-			void init(const Chem::MolecularGraph& molgraph);
+            void init(const Chem::MolecularGraph& molgraph);
 
-			void assignBondLengths(const ForceField::MMFF94InteractionData* ia_data);
-			void assignBondAngles(const ForceField::MMFF94InteractionData* ia_data);
+            void assignBondLengths(const ForceField::MMFF94InteractionData* ia_data);
+            void assignBondAngles(const ForceField::MMFF94InteractionData* ia_data);
 
-			void extractAtomStereoCenterData();
-			void extractBondStereoCenterData();
+            void extractAtomStereoCenterData();
+            void extractBondStereoCenterData();
 
-			void setBondLength(std::size_t atom1_idx, std::size_t atom2_idx, double length);
-			double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
+            void setBondLength(std::size_t atom1_idx, std::size_t atom2_idx, double length);
+            double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-			void setBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx, double angle);
-			double getBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx) const;
+            void setBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx, double angle);
+            double getBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx) const;
 
-			std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, const Chem::Bond& bond1, const Chem::Bond& bond2) const; 
-			std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, std::size_t atom1_idx, std::size_t atom2_idx) const; 
+            std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, const Chem::Bond& bond1, const Chem::Bond& bond2) const; 
+            std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, std::size_t atom1_idx, std::size_t atom2_idx) const; 
 
-			void markAtomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx); 
-			bool atomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx) const; 
+            void markAtomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx); 
+            bool atomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx) const; 
 
-			double calc13AtomDistance(double bond1_len, double bond2_len, double angle) const;
+            double calc13AtomDistance(double bond1_len, double bond2_len, double angle) const;
 
-			double calcCis14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
-										 double angle_12, double angle_23) const;
-			double calcTrans14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
-										   double angle_12, double angle_23) const;
+            double calcCis14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
+                                         double angle_12, double angle_23) const;
+            double calcTrans14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
+                                           double angle_12, double angle_23) const;
 
-			bool isPlanar(const Chem::Atom& atom) const;
-			bool isPlanar(const Chem::Bond& bond) const;
+            bool isPlanar(const Chem::Atom& atom) const;
+            bool isPlanar(const Chem::Bond& bond) const;
 
-			typedef std::vector<std::size_t> AtomIndexList;
+            typedef std::vector<std::size_t> AtomIndexList;
 
-			std::size_t getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list,
-										 const Chem::Atom* x_atom = 0) const;
+            std::size_t getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list,
+                                         const Chem::Atom* x_atom = 0) const;
 
-			typedef std::pair<std::size_t, std::size_t> BondLengthKey;
-			typedef std::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
+            typedef std::pair<std::size_t, std::size_t> BondLengthKey;
+            typedef std::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
 
-			struct CDPL_CONFGEN_API BondAngleKeyHash
-			{
+            struct CDPL_CONFGEN_API BondAngleKeyHash
+            {
 
-				std::size_t operator()(const BondAngleKey& k) const;
-			};
+                std::size_t operator()(const BondAngleKey& k) const;
+            };
 
-			struct CDPL_CONFGEN_API BondLengthKeyHash
-			{
+            struct CDPL_CONFGEN_API BondLengthKeyHash
+            {
 
-				std::size_t operator()(const BondLengthKey& k) const;
-			};
+                std::size_t operator()(const BondLengthKey& k) const;
+            };
 
-			typedef std::unordered_map<BondLengthKey, double, BondLengthKeyHash> BondLengthTable;
-			typedef std::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
+            typedef std::unordered_map<BondLengthKey, double, BondLengthKeyHash> BondLengthTable;
+            typedef std::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
 
-			const Chem::MolecularGraph*   molGraph;
-			Util::BitSet                  hAtomMask;
-			Util::BitSet                  procAtomPairMask;
-			Util::BitSet                  stereoAtomMask;
-			BondLengthTable               bondLengthTable;
-			BondAngleTable                bondAngleTable;
-			StereoCenterDataArray         atomStereoData;
-			StereoCenterDataArray         bondStereoData;
-			std::size_t                   numAtoms;
-			AtomIndexList                 atomIndexList1;
-			AtomIndexList                 atomIndexList2;
-			DGConstraintGeneratorSettings settings;
-		};
+            const Chem::MolecularGraph*   molGraph;
+            Util::BitSet                  hAtomMask;
+            Util::BitSet                  procAtomPairMask;
+            Util::BitSet                  stereoAtomMask;
+            BondLengthTable               bondLengthTable;
+            BondAngleTable                bondAngleTable;
+            StereoCenterDataArray         atomStereoData;
+            StereoCenterDataArray         bondStereoData;
+            std::size_t                   numAtoms;
+            AtomIndexList                 atomIndexList1;
+            AtomIndexList                 atomIndexList2;
+            DGConstraintGeneratorSettings settings;
+        };
     }
 }
 

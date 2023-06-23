@@ -38,356 +38,356 @@
 
 BOOST_AUTO_TEST_CASE(CairoFontMetricsTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 500, 300));
+    CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 500, 300));
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	CairoPointer<cairo_t> ctxt_ptr(cairo_create(surf_ptr.get()));
+    CairoPointer<cairo_t> ctxt_ptr(cairo_create(surf_ptr.get()));
 
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	CairoRenderer2D renderer(ctxt_ptr);
-	CairoFontMetrics fm(ctxt_ptr);
+    CairoRenderer2D renderer(ctxt_ptr);
+    CairoFontMetrics fm(ctxt_ptr);
 
-	Rectangle2D bounds;
-
-//-----
-
-	double y = 40.0;
-
-	Font font = Font();
-	std::string text = "Default Font";
-
-	renderer.setPen(Color::BLUE);
-	renderer.setFont(font);
-
-	renderer.drawText(10.0, y, text);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	fm.setFont(font);
-	fm.getBounds(text, bounds);
-
-	bounds.translate(Math::vec(10.0, y));
-
-	renderer.setPen(Color::GREEN);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::YELLOW);
-	renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	fm.getBounds(text[0], bounds);
-
-	bounds.translate(Math::vec(10.0, y));
-
-	renderer.setPen(Color::RED);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    Rectangle2D bounds;
 
 //-----
 
-	y += 50.0;
+    double y = 40.0;
 
-	font = Font("Helvetica", 35.0);
-	text = "Helvetica; 35";
+    Font font = Font();
+    std::string text = "Default Font";
 
-	renderer.setPen(Color::BLUE);
-	renderer.setFont(font);
+    renderer.setPen(Color::BLUE);
+    renderer.setFont(font);
 
-	renderer.drawText(10.0, y, text);
+    renderer.drawText(10.0, y, text);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	fm.setFont(font);
-	fm.getBounds(text, bounds);
+    fm.setFont(font);
+    fm.getBounds(text, bounds);
 
-	bounds.translate(Math::vec(10.0, y));
+    bounds.translate(Math::vec(10.0, y));
 
-	renderer.setPen(Color::GREEN);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+    renderer.setPen(Color::GREEN);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::YELLOW);
-	renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
+    renderer.setPen(Color::YELLOW);
+    renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
+    renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	fm.getBounds(text[0], bounds);
+    fm.getBounds(text[0], bounds);
 
-	bounds.translate(Math::vec(10.0, y));
+    bounds.translate(Math::vec(10.0, y));
 
-	renderer.setPen(Color::RED);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+    renderer.setPen(Color::RED);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-//-----
-
-	y += 50.0;
-
-	font = Font("Times", 35.0);
-	font.setBold(true);
-
-	text = "Times; 35; bold";
-
-	renderer.setPen(Color::BLUE);
-	renderer.setFont(font);
-
-	renderer.drawText(10.0, y, text);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	fm.setFont(font);
-	fm.getBounds(text, bounds);
-
-	bounds.translate(Math::vec(10.0, y));
-
-	renderer.setPen(Color::GREEN);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::YELLOW);
-	renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	fm.getBounds(text[0], bounds);
-
-	bounds.translate(Math::vec(10.0, y));
-
-	renderer.setPen(Color::RED);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
 //-----
 
-	y += 50.0;
+    y += 50.0;
 
-	font = Font("Courier", 35.0);
-	font.setItalic(true);
+    font = Font("Helvetica", 35.0);
+    text = "Helvetica; 35";
 
-	text = "Courier; 35; italic";
+    renderer.setPen(Color::BLUE);
+    renderer.setFont(font);
 
-	renderer.setPen(Color::BLUE);
-	renderer.setFont(font);
+    renderer.drawText(10.0, y, text);
 
-	renderer.drawText(10.0, y, text);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    fm.setFont(font);
+    fm.getBounds(text, bounds);
 
-	fm.setFont(font);
-	fm.getBounds(text, bounds);
+    bounds.translate(Math::vec(10.0, y));
 
-	bounds.translate(Math::vec(10.0, y));
+    renderer.setPen(Color::GREEN);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
 
-	renderer.setPen(Color::GREEN);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    renderer.setPen(Color::YELLOW);
+    renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
 
-	renderer.setPen(Color::YELLOW);
-	renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
 
-	renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    fm.getBounds(text[0], bounds);
 
-	fm.getBounds(text[0], bounds);
+    bounds.translate(Math::vec(10.0, y));
 
-	bounds.translate(Math::vec(10.0, y));
+    renderer.setPen(Color::RED);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
 
-	renderer.setPen(Color::RED);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
-
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
 //-----
 
-	y += 50.0;
+    y += 50.0;
 
-	font = Font("Default", 35.0);
-	font.setBold(true);
-	font.setItalic(true);
+    font = Font("Times", 35.0);
+    font.setBold(true);
 
-	text = "Default; 35; bold; italic";
+    text = "Times; 35; bold";
 
-	renderer.setPen(Color::BLUE);
-	renderer.setFont(font);
+    renderer.setPen(Color::BLUE);
+    renderer.setFont(font);
 
-	renderer.drawText(10.0, y, text);
+    renderer.drawText(10.0, y, text);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	fm.setFont(font);
-	fm.getBounds(text, bounds);
+    fm.setFont(font);
+    fm.getBounds(text, bounds);
 
-	bounds.translate(Math::vec(10.0, y));
+    bounds.translate(Math::vec(10.0, y));
 
-	renderer.setPen(Color::GREEN);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+    renderer.setPen(Color::GREEN);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::YELLOW);
-	renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
+    renderer.setPen(Color::YELLOW);
+    renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
+    renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	fm.getBounds(text[0], bounds);
+    fm.getBounds(text[0], bounds);
 
-	bounds.translate(Math::vec(10.0, y));
+    bounds.translate(Math::vec(10.0, y));
 
-	renderer.setPen(Color::RED);
-	renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+    renderer.setPen(Color::RED);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	renderer.setPen(Color::MAGENTA);
-	renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
 //-----
 
-	BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoFontMetricsTest.png") == CAIRO_STATUS_SUCCESS);
+    y += 50.0;
+
+    font = Font("Courier", 35.0);
+    font.setItalic(true);
+
+    text = "Courier; 35; italic";
+
+    renderer.setPen(Color::BLUE);
+    renderer.setFont(font);
+
+    renderer.drawText(10.0, y, text);
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    fm.setFont(font);
+    fm.getBounds(text, bounds);
+
+    bounds.translate(Math::vec(10.0, y));
+
+    renderer.setPen(Color::GREEN);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::YELLOW);
+    renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    fm.getBounds(text[0], bounds);
+
+    bounds.translate(Math::vec(10.0, y));
+
+    renderer.setPen(Color::RED);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+//-----
+
+    y += 50.0;
+
+    font = Font("Default", 35.0);
+    font.setBold(true);
+    font.setItalic(true);
+
+    text = "Default; 35; bold; italic";
+
+    renderer.setPen(Color::BLUE);
+    renderer.setFont(font);
+
+    renderer.drawText(10.0, y, text);
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    fm.setFont(font);
+    fm.getBounds(text, bounds);
+
+    bounds.translate(Math::vec(10.0, y));
+
+    renderer.setPen(Color::GREEN);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::YELLOW);
+    renderer.drawLine(bounds.getMin()(0), y, bounds.getMin()(0) + fm.getWidth(text), y);
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(50.0, y, 50.0, y - fm.getAscent());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.drawLine(70.0, y, 70.0, y + fm.getDescent());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(5.0, bounds.getMax()(1), 5.0, bounds.getMax()(1) - fm.getHeight());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    fm.getBounds(text[0], bounds);
+
+    bounds.translate(Math::vec(10.0, y));
+
+    renderer.setPen(Color::RED);
+    renderer.drawRectangle(bounds.getMin()(0), bounds.getMin()(1), bounds.getWidth(), bounds.getHeight());
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+    renderer.setPen(Color::MAGENTA);
+    renderer.drawLine(bounds.getMin()(0), y - 4.0, bounds.getMin()(0) + fm.getWidth(text[0]), y - 4.0);
+
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+
+//-----
+
+    BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "CairoFontMetricsTest.png") == CAIRO_STATUS_SUCCESS);
 }
 

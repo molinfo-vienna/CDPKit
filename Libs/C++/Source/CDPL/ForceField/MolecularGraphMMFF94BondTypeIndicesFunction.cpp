@@ -40,12 +40,12 @@ using namespace CDPL;
 void ForceField::assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, bool strict, bool overwrite)
 {
      if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-									std::bind(std::equal_to<bool>(), false,
-											  std::bind(&hasMMFF94TypeIndex, std::placeholders::_1))) == molgraph.getBondsEnd())
-		return;
+                                    std::bind(std::equal_to<bool>(), false,
+                                              std::bind(&hasMMFF94TypeIndex, std::placeholders::_1))) == molgraph.getBondsEnd())
+        return;
 
-	 Util::UIArray types;
-	 MMFF94BondTyper typer(molgraph, types, strict);
+     Util::UIArray types;
+     MMFF94BondTyper typer(molgraph, types, strict);
 
-	 Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), types.getElementsBegin(), &setMMFF94TypeIndex);
+     Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), types.getElementsBegin(), &setMMFF94TypeIndex);
 }

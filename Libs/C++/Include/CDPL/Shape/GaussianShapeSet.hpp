@@ -42,17 +42,17 @@ namespace CDPL
     namespace Shape
     {
 
-		class CDPL_SHAPE_API GaussianShapeSet : public Util::IndirectArray<GaussianShape>
-		{
+        class CDPL_SHAPE_API GaussianShapeSet : public Util::IndirectArray<GaussianShape>
+        {
 
-		  public:
-			typedef std::shared_ptr<GaussianShapeSet> SharedPointer;
+          public:
+            typedef std::shared_ptr<GaussianShapeSet> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "GaussianShapeSet";
-			}
-		};
+          private:
+            const char* getClassName() const {
+                return "GaussianShapeSet";
+            }
+        };
     }
 }
 

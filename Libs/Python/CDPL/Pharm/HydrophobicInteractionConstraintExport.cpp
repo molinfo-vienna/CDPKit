@@ -36,11 +36,11 @@ void CDPLPythonPharm::exportHydrophobicInteractionConstraint()
     using namespace CDPL;
 
     python::class_<Pharm::HydrophobicInteractionConstraint, python::bases<Pharm::FeatureDistanceConstraint>,
-				   boost::noncopyable>("HydrophobicInteractionConstraint", python::no_init)
-		.def(python::init<const Pharm::HydrophobicInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
-		.def(python::init<double, double>((python::arg("self"), 
-										   python::arg("min_dist") = Pharm::HydrophobicInteractionConstraint::DEF_MIN_DISTANCE,
-										   python::arg("max_dist") = Pharm::HydrophobicInteractionConstraint::DEF_MAX_DISTANCE)))
-		.def_readonly("DEF_MIN_DISTANCE", Pharm::HydrophobicInteractionConstraint::DEF_MIN_DISTANCE)
-		.def_readonly("DEF_MAX_DISTANCE", Pharm::HydrophobicInteractionConstraint::DEF_MAX_DISTANCE);
+                   boost::noncopyable>("HydrophobicInteractionConstraint", python::no_init)
+        .def(python::init<const Pharm::HydrophobicInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
+        .def(python::init<double, double>((python::arg("self"), 
+                                           python::arg("min_dist") = Pharm::HydrophobicInteractionConstraint::DEF_MIN_DISTANCE,
+                                           python::arg("max_dist") = Pharm::HydrophobicInteractionConstraint::DEF_MAX_DISTANCE)))
+        .def_readonly("DEF_MIN_DISTANCE", Pharm::HydrophobicInteractionConstraint::DEF_MIN_DISTANCE)
+        .def_readonly("DEF_MAX_DISTANCE", Pharm::HydrophobicInteractionConstraint::DEF_MAX_DISTANCE);
 }

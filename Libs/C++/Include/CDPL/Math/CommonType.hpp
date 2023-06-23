@@ -33,16 +33,16 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename T1, typename T2>
-		struct CommonType
-		{
+        template <typename T1, typename T2>
+        struct CommonType
+        {
 
-			typedef typename std::common_type<T1, T2>::type Type;
-		};
-	}
+            typedef typename std::common_type<T1, T2>::type Type;
+        };
+    }
 }
 
 #endif // CDPL_MATH_COMMONTYPE_HPP

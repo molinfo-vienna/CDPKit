@@ -44,74 +44,74 @@ namespace CDPL
     namespace Shape
     {
 
-		class GaussianShape;
-		class GaussianProductList;
-		class ExactGaussianShapeOverlapFunction;
-		class FastGaussianShapeOverlapFunction;
-		
-		class CDPL_SHAPE_API GaussianShapeFunction
-		{
-			
-		  public:
-			static constexpr std::size_t DEF_MAX_PRODUCT_ORDER = 6;
-			static constexpr double      DEF_DISTANCE_CUTOFF   = 0.0;
-			
-			typedef std::shared_ptr<GaussianShapeFunction> SharedPointer;
+        class GaussianShape;
+        class GaussianProductList;
+        class ExactGaussianShapeOverlapFunction;
+        class FastGaussianShapeOverlapFunction;
+        
+        class CDPL_SHAPE_API GaussianShapeFunction
+        {
+            
+          public:
+            static constexpr std::size_t DEF_MAX_PRODUCT_ORDER = 6;
+            static constexpr double      DEF_DISTANCE_CUTOFF   = 0.0;
+            
+            typedef std::shared_ptr<GaussianShapeFunction> SharedPointer;
 
-			GaussianShapeFunction();
+            GaussianShapeFunction();
 
-			GaussianShapeFunction(const GaussianShapeFunction& func);
+            GaussianShapeFunction(const GaussianShapeFunction& func);
 
-			GaussianShapeFunction(const GaussianShape& shape);
+            GaussianShapeFunction(const GaussianShape& shape);
 
-			~GaussianShapeFunction();
+            ~GaussianShapeFunction();
 
-			void setMaxOrder(std::size_t max_order);
+            void setMaxOrder(std::size_t max_order);
 
-			std::size_t getMaxOrder() const;
+            std::size_t getMaxOrder() const;
 
-			void setDistanceCutoff(double cutoff);
+            void setDistanceCutoff(double cutoff);
 
-			double getDistanceCutoff() const;
-			
-			void setShape(const GaussianShape& shape);
+            double getDistanceCutoff() const;
+            
+            void setShape(const GaussianShape& shape);
 
-			const GaussianShape* getShape() const;
+            const GaussianShape* getShape() const;
 
-			void reset();
-			
-			void transform(const Math::Matrix4D& xform);
+            void reset();
+            
+            void transform(const Math::Matrix4D& xform);
 
-			const Math::Vector3D& getElementPosition(std::size_t idx) const;
+            const Math::Vector3D& getElementPosition(std::size_t idx) const;
 
-			void getElementPositions(Math::Vector3DArray& coords) const;
+            void getElementPositions(Math::Vector3DArray& coords) const;
 
-			double calcDensity(const Math::Vector3D& pos) const;
-			
-			double calcVolume() const;
+            double calcDensity(const Math::Vector3D& pos) const;
+            
+            double calcVolume() const;
 
-			double calcSurfaceArea() const;
+            double calcSurfaceArea() const;
 
-			double calcSurfaceArea(std::size_t elem_idx) const;
+            double calcSurfaceArea(std::size_t elem_idx) const;
 
-			void calcCentroid(Math::Vector3D& ctr) const;
+            void calcCentroid(Math::Vector3D& ctr) const;
 
-			void calcQuadrupoleTensor(const Math::Vector3D& ctr, Math::Matrix3D& quad_tensor) const;
-			
-			GaussianShapeFunction& operator=(const GaussianShapeFunction& func);
-			
-		  private:
-			friend class FastGaussianShapeOverlapFunction;
-			friend class ExactGaussianShapeOverlapFunction;
-			
-			const GaussianProductList* getProductList() const;
-			
-			typedef std::auto_ptr<GaussianProductList> ProductListPtr;
+            void calcQuadrupoleTensor(const Math::Vector3D& ctr, Math::Matrix3D& quad_tensor) const;
+            
+            GaussianShapeFunction& operator=(const GaussianShapeFunction& func);
+            
+          private:
+            friend class FastGaussianShapeOverlapFunction;
+            friend class ExactGaussianShapeOverlapFunction;
+            
+            const GaussianProductList* getProductList() const;
+            
+            typedef std::auto_ptr<GaussianProductList> ProductListPtr;
 
-			const GaussianShape* shape;
-			double               volume;
-			ProductListPtr       prodList;
-		};
+            const GaussianShape* shape;
+            double               volume;
+            ProductListPtr       prodList;
+        };
     }
 }
 

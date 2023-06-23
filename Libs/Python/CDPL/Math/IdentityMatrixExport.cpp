@@ -38,35 +38,35 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct IdentityMatrixExport
-	{
+    template <typename MatrixType>
+    struct IdentityMatrixExport
+    {
 
-		IdentityMatrixExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        IdentityMatrixExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::SizeType SizeType;
 
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("m"), python::arg("n"))))
-				.def("resize", &MatrixType::resize, (python::arg("self"), python::arg("m"), python::arg("n")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("m"), python::arg("n"))))
+                .def("resize", &MatrixType::resize, (python::arg("self"), python::arg("m"), python::arg("n")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportIdentityMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	IdentityMatrixExport<Math::FIdentityMatrix>("FIdentityMatrix");
-	IdentityMatrixExport<Math::DIdentityMatrix>("DIdentityMatrix");
-	IdentityMatrixExport<Math::LIdentityMatrix>("LIdentityMatrix");
-	IdentityMatrixExport<Math::ULIdentityMatrix>("ULIdentityMatrix");
+    IdentityMatrixExport<Math::FIdentityMatrix>("FIdentityMatrix");
+    IdentityMatrixExport<Math::DIdentityMatrix>("DIdentityMatrix");
+    IdentityMatrixExport<Math::LIdentityMatrix>("LIdentityMatrix");
+    IdentityMatrixExport<Math::ULIdentityMatrix>("ULIdentityMatrix");
 }

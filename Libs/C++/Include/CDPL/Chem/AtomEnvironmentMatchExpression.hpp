@@ -41,55 +41,55 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief AtomEnvironmentMatchExpression.
-		 */
-		class CDPL_CHEM_API AtomEnvironmentMatchExpression : public MatchExpression<Atom, MolecularGraph>
-		{
+        /**
+         * \brief AtomEnvironmentMatchExpression.
+         */
+        class CDPL_CHEM_API AtomEnvironmentMatchExpression : public MatchExpression<Atom, MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomEnvironmentMatchExpression instances.
-			 */
-			typedef std::shared_ptr<AtomEnvironmentMatchExpression> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomEnvironmentMatchExpression instances.
+             */
+            typedef std::shared_ptr<AtomEnvironmentMatchExpression> SharedPointer;
 
-			/**
-			 * \brief Constructs an \c %AtomEnvironmentMatchExpression instance for the specified atom environment pattern and matching mode.
-			 * \param env_pattern A substructure search pattern that describes the required (or not desired) structural environment of matching target atoms. 
-			 *                    Note: The substructure pattern has to be formulated in a way that the first atom of the pattern molecule matches the
-			 *                    target atoms.
-			 * \param not_match Specifies whether the environment of a target atom actually has to match (\c true) or \e not match (\c false)
-			 *                  the given query environment pattern.
-			 */
-			AtomEnvironmentMatchExpression(const MolecularGraph::SharedPointer& env_pattern, bool not_match); 
+            /**
+             * \brief Constructs an \c %AtomEnvironmentMatchExpression instance for the specified atom environment pattern and matching mode.
+             * \param env_pattern A substructure search pattern that describes the required (or not desired) structural environment of matching target atoms. 
+             *                    Note: The substructure pattern has to be formulated in a way that the first atom of the pattern molecule matches the
+             *                    target atoms.
+             * \param not_match Specifies whether the environment of a target atom actually has to match (\c true) or \e not match (\c false)
+             *                  the given query environment pattern.
+             */
+            AtomEnvironmentMatchExpression(const MolecularGraph::SharedPointer& env_pattern, bool not_match); 
 
-			/**
-			 * \brief Checks whether the structural environment of \a target_atom matches (or does not match) the query environment pattern specified
-			 *        in the constructor.
-			 * \param query_atom The query atom (ignored).
-			 * \param query_molgraph The molecular graph containing the query atom (ignored).
-			 * \param target_atom The checked target atom.
-			 * \param target_molgraph The molecular graph containing the target atom.
-			 * \param aux_data Auxiliary information for expression evaluation (ignored).
-			 * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the structural environment of the
-			 *         target atom matches the query environment pattern, and \c true if the pattern is not matched. 
-			 *         Otherwise, \c true is returned if the atom environments match, and \c false if they do not.
-			 * \note If an invalid query environment pattern has been specified (\e null pointer or the atom count is zero), the method will always return
-			 *       \c true - irrespective of matching mode and target atom environment.
-			 */
-			bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
-							const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
+            /**
+             * \brief Checks whether the structural environment of \a target_atom matches (or does not match) the query environment pattern specified
+             *        in the constructor.
+             * \param query_atom The query atom (ignored).
+             * \param query_molgraph The molecular graph containing the query atom (ignored).
+             * \param target_atom The checked target atom.
+             * \param target_molgraph The molecular graph containing the target atom.
+             * \param aux_data Auxiliary information for expression evaluation (ignored).
+             * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the structural environment of the
+             *         target atom matches the query environment pattern, and \c true if the pattern is not matched. 
+             *         Otherwise, \c true is returned if the atom environments match, and \c false if they do not.
+             * \note If an invalid query environment pattern has been specified (\e null pointer or the atom count is zero), the method will always return
+             *       \c true - irrespective of matching mode and target atom environment.
+             */
+            bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
+                            const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
-		private:
-			MolecularGraph::SharedPointer envPattern;
-			mutable SubstructureSearch    substructSearch;
-			mutable std::mutex            mutex;
-			bool                          notMatch;
-		};
-	}
+        private:
+            MolecularGraph::SharedPointer envPattern;
+            mutable SubstructureSearch    substructSearch;
+            mutable std::mutex            mutex;
+            bool                          notMatch;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ATOMENVIRONMENTMATCHEXPRESSION_HPP

@@ -40,46 +40,46 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A container for the storage and evaluation of logical match expression lists.
-		 *
-		 * \c %MatchExpressionList allows for a concatenation of multiple Chem::MatchExpression instances that
-		 * get evaluated in turn according to some logic. The actual logic of expression list evaluation
-		 * has to be implemented by subclasses by overriding the virtual function call operator methods of the 
-		 * Chem::MatchExpression interface.
-		 *
-		 * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
-		 * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
-		 *                  expression list evaluation.
-		 */
-		template <typename ObjType1, typename ObjType2 = void>
-		class MatchExpressionList : 
-			public MatchExpression<ObjType1, ObjType2>, public Util::IndirectArray<MatchExpression<ObjType1, ObjType2> >
-		{
+        /**
+         * \brief A container for the storage and evaluation of logical match expression lists.
+         *
+         * \c %MatchExpressionList allows for a concatenation of multiple Chem::MatchExpression instances that
+         * get evaluated in turn according to some logic. The actual logic of expression list evaluation
+         * has to be implemented by subclasses by overriding the virtual function call operator methods of the 
+         * Chem::MatchExpression interface.
+         *
+         * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
+         * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
+         *                  expression list evaluation.
+         */
+        template <typename ObjType1, typename ObjType2 = void>
+        class MatchExpressionList : 
+            public MatchExpression<ObjType1, ObjType2>, public Util::IndirectArray<MatchExpression<ObjType1, ObjType2> >
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpressionList instances.
-			 */
-			typedef std::shared_ptr<MatchExpressionList> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpressionList instances.
+             */
+            typedef std::shared_ptr<MatchExpressionList> SharedPointer;
 
-			/**
-			 * \brief Tells whether the expression list requires a reevaluation after a query to target object mapping
-			 *        candidate has been found.
-			 * \return \c true if one of the stored expressions requires a reevaluation after a mapping candidate has been found,
-			 *         and \c false otherwise.
-			 */
-			bool requiresAtomBondMapping() const;
+            /**
+             * \brief Tells whether the expression list requires a reevaluation after a query to target object mapping
+             *        candidate has been found.
+             * \return \c true if one of the stored expressions requires a reevaluation after a mapping candidate has been found,
+             *         and \c false otherwise.
+             */
+            bool requiresAtomBondMapping() const;
 
-		private:
-			const char* getClassName() const {
-				return "MatchExpressionList";
-			}
-		};
-	}
+        private:
+            const char* getClassName() const {
+                return "MatchExpressionList";
+            }
+        };
+    }
 }
 
 
@@ -88,9 +88,9 @@ namespace CDPL
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::MatchExpressionList<ObjType1, ObjType2>::requiresAtomBondMapping() const
 {
-	return (std::find_if(this->getElementsBegin(), this->getElementsEnd(),
-						 std::bind(&MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping, std::placeholders::_1)) !=
-			this->getElementsEnd());
+    return (std::find_if(this->getElementsBegin(), this->getElementsEnd(),
+                         std::bind(&MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping, std::placeholders::_1)) !=
+            this->getElementsEnd());
 }
 
 #endif // CDPL_CHEM_MATCHEXPRESSIONLIST_HPP

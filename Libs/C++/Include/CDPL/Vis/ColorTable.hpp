@@ -37,28 +37,28 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A container for the storage and lookup of Vis::Color objects that are associated with a
-		 *        numeric identifier.
-		 */
-		class CDPL_VIS_API ColorTable : public Util::Map<std::size_t, Color>
-		{
-	 
-		  public:
-			typedef std::shared_ptr<ColorTable> SharedPointer;
+        /**
+         * \brief A container for the storage and lookup of Vis::Color objects that are associated with a
+         *        numeric identifier.
+         */
+        class CDPL_VIS_API ColorTable : public Util::Map<std::size_t, Color>
+        {
+     
+          public:
+            typedef std::shared_ptr<ColorTable> SharedPointer;
 
-			ColorTable(): Map<std::size_t, Color>() {}
+            ColorTable(): Map<std::size_t, Color>() {}
 
-			template <typename Iter>
-			ColorTable(const Iter& beg, const Iter& end): Map<std::size_t, Color>(beg, end) {}
+            template <typename Iter>
+            ColorTable(const Iter& beg, const Iter& end): Map<std::size_t, Color>(beg, end) {}
 
-		  private:
-			const char* getClassName() const;
-		};
-	}
+          private:
+            const char* getClassName() const;
+        };
+    }
 }
 
 #endif // CDPL_VIS_COLORTABLE_HPP

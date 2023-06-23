@@ -35,42 +35,42 @@
 
 BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 {
-	using namespace CDPL;
-	using namespace Testing;
+    using namespace CDPL;
+    using namespace Testing;
 
-	OptimolLogReader::SymbolicAtomTypeArray sym_types;
-	OptimolLogReader::NumericAtomTypeArray num_types;
+    OptimolLogReader::SymbolicAtomTypeArray sym_types;
+    OptimolLogReader::NumericAtomTypeArray num_types;
 
-	ForceField::MMFF94AtomTyper atom_typer;
-	Util::UIArray perc_num_types;
-	Util::SArray perc_sym_types;
+    ForceField::MMFF94AtomTyper atom_typer;
+    Util::UIArray perc_num_types;
+    Util::SArray perc_sym_types;
 
-	for (std::size_t mol_idx = 0; mol_idx <	MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-		const Chem::Molecule& mol =	*MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-		const std::string& mol_name = getName(mol);
+    for (std::size_t mol_idx = 0; mol_idx <    MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
+        const Chem::Molecule& mol =    *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+        const std::string& mol_name = getName(mol);
 
-		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getSymbolicAtomTypes(mol_name, sym_types));
-		BOOST_CHECK_EQUAL(sym_types.size(), mol.getNumAtoms());
+        BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getSymbolicAtomTypes(mol_name, sym_types));
+        BOOST_CHECK_EQUAL(sym_types.size(), mol.getNumAtoms());
 
-		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getNumericAtomTypes(mol_name, num_types));
-		BOOST_CHECK_EQUAL(num_types.size(), mol.getNumAtoms());
+        BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getNumericAtomTypes(mol_name, num_types));
+        BOOST_CHECK_EQUAL(num_types.size(), mol.getNumAtoms());
 
-		atom_typer.perceiveTypes(mol, perc_sym_types, perc_num_types, true);
+        atom_typer.perceiveTypes(mol, perc_sym_types, perc_num_types, true);
 
-		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
-			const std::string& correct_type = sym_types[i];
-			const std::string& perceived_type = perc_sym_types[i];
+        for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
+            const std::string& correct_type = sym_types[i];
+            const std::string& perceived_type = perc_sym_types[i];
 
-			BOOST_CHECK_MESSAGE(perceived_type == correct_type, "Symbolic atom type mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) << 
-								") of molecule #" << mol_idx << " (" << mol_name << "): " << perceived_type << " != " << correct_type);
-		}
-			
-		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
-			unsigned int correct_type = num_types[i];
-			unsigned int perceived_type = perc_num_types[i];
+            BOOST_CHECK_MESSAGE(perceived_type == correct_type, "Symbolic atom type mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) << 
+                                ") of molecule #" << mol_idx << " (" << mol_name << "): " << perceived_type << " != " << correct_type);
+        }
+            
+        for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
+            unsigned int correct_type = num_types[i];
+            unsigned int perceived_type = perc_num_types[i];
 
-			BOOST_CHECK_MESSAGE(perceived_type == correct_type, "Numeric atom type mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) << 
-								") of molecule #" << mol_idx << " (" << mol_name << "): " << perceived_type << " != " << correct_type);
-		}
-	}
+            BOOST_CHECK_MESSAGE(perceived_type == correct_type, "Numeric atom type mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) << 
+                                ") of molecule #" << mol_idx << " (" << mol_name << "): " << perceived_type << " != " << correct_type);
+        }
+    }
 }

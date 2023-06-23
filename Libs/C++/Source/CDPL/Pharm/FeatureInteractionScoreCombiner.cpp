@@ -35,10 +35,10 @@ using namespace CDPL;
 namespace
 {
 
-	double maxValue(double v1, double v2)
-	{
-		return std::max(v1, v2);
-	}
+    double maxValue(double v1, double v2)
+    {
+        return std::max(v1, v2);
+    }
 }
 
 

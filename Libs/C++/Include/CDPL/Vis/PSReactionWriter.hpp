@@ -39,46 +39,46 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Creates 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS] format. 
-		 *
-		 * \c %PSReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
-		 * properties provided for the customization of Vis::ReactionView2D are also supported by \c %PSReactionWriter.
-		 */
-		class CDPL_VIS_API PSReactionWriter : public Base::DataWriter<Chem::Reaction>, private ImageWriter
-		{
+        /**
+         * \brief Creates 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS] format. 
+         *
+         * \c %PSReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
+         * properties provided for the customization of Vis::ReactionView2D are also supported by \c %PSReactionWriter.
+         */
+        class CDPL_VIS_API PSReactionWriter : public Base::DataWriter<Chem::Reaction>, private ImageWriter
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PSReactionWriter instance that will write the image data to the output stream \a os.
-			 * \param os The output stream to write to.
-			 * \note To ensure the validity of the written data, it is recommended to open the output stream in binary mode.
-			 */
-			PSReactionWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %PSReactionWriter instance that will write the image data to the output stream \a os.
+             * \param os The output stream to write to.
+             * \note To ensure the validity of the written data, it is recommended to open the output stream in binary mode.
+             */
+            PSReactionWriter(std::ostream& os);
 
-			/**
-			 * \brief Creates and outputs a 2D depiction of the reaction \a rxn.
-			 * \param rxn The reaction for which to output the 2D depiction.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<Chem::Reaction>& write(const Chem::Reaction& rxn);
+            /**
+             * \brief Creates and outputs a 2D depiction of the reaction \a rxn.
+             * \param rxn The reaction for which to output the 2D depiction.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<Chem::Reaction>& write(const Chem::Reaction& rxn);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			PSReactionWriter(const PSReactionWriter&);
+        private:
+            PSReactionWriter(const PSReactionWriter&);
 
-			cairo_surface_t* createCairoSurface(double, double) const;
-			cairo_surface_t* createCairoSurface() const;
+            cairo_surface_t* createCairoSurface(double, double) const;
+            cairo_surface_t* createCairoSurface() const;
 
-			std::ostream& output;
-			bool          state;
-		};
-	}
+            std::ostream& output;
+            bool          state;
+        };
+    }
 }
 
 #endif // CDPL_VIS_PSREACTIONWRITER_HPP

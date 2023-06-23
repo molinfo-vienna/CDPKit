@@ -36,40 +36,40 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class AtomColorSettingsEditWidget : public SettingsEditWidget
-	{
+    class AtomColorSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		AtomColorSettingsEditWidget(QWidget*, Settings&);
+    public:
+        AtomColorSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&             settings;
-		CDPL::Vis::ColorTable atomColors;
-		CDPL::Vis::Color      defaultColor;
-		QCheckBox*            enableColorTabCheckBox;
-		QWidget*              colorTabWidget;
-		bool                  haveChanges;
-	};
+        Settings&             settings;
+        CDPL::Vis::ColorTable atomColors;
+        CDPL::Vis::Color      defaultColor;
+        QCheckBox*            enableColorTabCheckBox;
+        QWidget*              colorTabWidget;
+        bool                  haveChanges;
+    };
 }
 
 #endif // CHOX_ATOMCOLORSETTINGSEDITWIDGET_HPP

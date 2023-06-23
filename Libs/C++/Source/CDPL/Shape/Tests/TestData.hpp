@@ -33,7 +33,7 @@
 namespace TestData
 {
 
-	CDPL::Shape::GaussianShape::SharedPointer getShapeData(const std::string& id, double p);
+    CDPL::Shape::GaussianShape::SharedPointer getShapeData(const std::string& id, double p);
 }
 
 #endif // CDPL_SHAPE_TEST_TESTDATA_HPP

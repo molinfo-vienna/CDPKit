@@ -37,40 +37,40 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct TranslationExport
-	{
+    template <typename MatrixType>
+    struct TranslationExport
+    {
 
-		TranslationExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        TranslationExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::ValueType ValueType;
-			typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::ValueType ValueType;
+            typedef typename MatrixType::SizeType SizeType;
 
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, const ValueType&, const ValueType&, const ValueType&>(
-						 (python::arg("self"), python::arg("n"), python::arg("tx") = ValueType(), python::arg("ty") = ValueType(), 
-						  python::arg("tz") = ValueType())))
-				.def("set", &MatrixType::set,
-					 (python::arg("self"), python::arg("tx") = ValueType(), python::arg("ty") = ValueType(), 
-					  python::arg("tz") = ValueType()))
-				.def("resize", &MatrixType::resize, python::arg("n"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, const ValueType&, const ValueType&, const ValueType&>(
+                         (python::arg("self"), python::arg("n"), python::arg("tx") = ValueType(), python::arg("ty") = ValueType(), 
+                          python::arg("tz") = ValueType())))
+                .def("set", &MatrixType::set,
+                     (python::arg("self"), python::arg("tx") = ValueType(), python::arg("ty") = ValueType(), 
+                      python::arg("tz") = ValueType()))
+                .def("resize", &MatrixType::resize, python::arg("n"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportTranslationMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	TranslationExport<Math::FTranslationMatrix>("FTranslationMatrix");
-	TranslationExport<Math::DTranslationMatrix>("DTranslationMatrix");
-	TranslationExport<Math::LTranslationMatrix>("LTranslationMatrix");
-	TranslationExport<Math::ULTranslationMatrix>("ULTranslationMatrix");
+    TranslationExport<Math::FTranslationMatrix>("FTranslationMatrix");
+    TranslationExport<Math::DTranslationMatrix>("DTranslationMatrix");
+    TranslationExport<Math::LTranslationMatrix>("LTranslationMatrix");
+    TranslationExport<Math::ULTranslationMatrix>("ULTranslationMatrix");
 }

@@ -47,49 +47,49 @@ namespace CDPL
     namespace Biomol
     {
 
-		class HierarchyView;
+        class HierarchyView;
 
-		/**
-		 * \brief HierarchyViewModel.
-		 */
-		class CDPL_BIOMOL_API HierarchyViewModel : public HierarchyViewNode
-		{
+        /**
+         * \brief HierarchyViewModel.
+         */
+        class CDPL_BIOMOL_API HierarchyViewModel : public HierarchyViewNode
+        {
 
-			friend class HierarchyView;
+            friend class HierarchyView;
 
-			typedef std::shared_ptr<HierarchyViewChain> ChainPtr;
-			typedef std::vector<ChainPtr> ChainList;
+            typedef std::shared_ptr<HierarchyViewChain> ChainPtr;
+            typedef std::vector<ChainPtr> ChainList;
 
-		  public:
-			typedef boost::indirect_iterator<ChainList::const_iterator, const HierarchyViewChain> ConstChainIterator;
+          public:
+            typedef boost::indirect_iterator<ChainList::const_iterator, const HierarchyViewChain> ConstChainIterator;
 
-			std::size_t getNumChains() const;
+            std::size_t getNumChains() const;
 
-			const HierarchyViewChain& getChain(std::size_t idx) const;
+            const HierarchyViewChain& getChain(std::size_t idx) const;
 
-			bool hasChainWithID(const std::string& id) const;
+            bool hasChainWithID(const std::string& id) const;
 
-			const HierarchyViewChain& getChainByID(const std::string& id) const;
+            const HierarchyViewChain& getChainByID(const std::string& id) const;
 
-			ConstChainIterator getChainsBegin() const;
+            ConstChainIterator getChainsBegin() const;
 
-			ConstChainIterator getChainsEnd() const;
+            ConstChainIterator getChainsEnd() const;
 
-			ConstChainIterator begin() const;
+            ConstChainIterator begin() const;
 
-			ConstChainIterator end() const;
+            ConstChainIterator end() const;
 
-		  private:
-			HierarchyViewModel(): initChains(true) {}
+          private:
+            HierarchyViewModel(): initChains(true) {}
 
-			void initChainList() const;
+            void initChainList() const;
 
-			typedef std::unordered_map<std::string, ChainPtr> IDToChainMap;
+            typedef std::unordered_map<std::string, ChainPtr> IDToChainMap;
 
-			mutable ChainList    chains;
-			mutable IDToChainMap idToChainMap;
-			mutable bool         initChains;
-		};
+            mutable ChainList    chains;
+            mutable IDToChainMap idToChainMap;
+            mutable bool         initChains;
+        };
     }
 }
 

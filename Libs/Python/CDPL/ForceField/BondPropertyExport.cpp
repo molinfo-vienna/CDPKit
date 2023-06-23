@@ -33,15 +33,15 @@
 namespace 
 {
 
-	struct BondProperty {};
+    struct BondProperty {};
 }
 
 
 void CDPLPythonForceField::exportBondProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
-		.def_readonly("MMFF94_TYPE_INDEX", &ForceField::BondProperty::MMFF94_TYPE_INDEX);
+    python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
+        .def_readonly("MMFF94_TYPE_INDEX", &ForceField::BondProperty::MMFF94_TYPE_INDEX);
 }

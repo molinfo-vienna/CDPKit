@@ -48,216 +48,216 @@ std::size_t ConfGen::buildFragmentLinkBondMask(const Chem::MolecularGraph& molgr
 {
     using namespace Chem;
 
-	std::size_t num_bonds = molgraph.getNumBonds();
-	std::size_t num_lnk_bonds = 0;
+    std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_lnk_bonds = 0;
 
-	if (bond_mask.size() < num_bonds)
-		bond_mask.resize(num_bonds);
+    if (bond_mask.size() < num_bonds)
+        bond_mask.resize(num_bonds);
 
-	if (reset)
-		bond_mask.reset();
+    if (reset)
+        bond_mask.reset();
 
-	for (std::size_t i = 0; i < num_bonds; i++) {
-		if (isFragmentLinkBond(molgraph.getBond(i), molgraph)) {
-			bond_mask.set(i);
-			num_lnk_bonds++;
-		}
-	}
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        if (isFragmentLinkBond(molgraph.getBond(i), molgraph)) {
+            bond_mask.set(i);
+            num_lnk_bonds++;
+        }
+    }
 
-	return num_lnk_bonds;
+    return num_lnk_bonds;
 }
 
 std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 
-											bool het_h_rotors, bool reset)
+                                            bool het_h_rotors, bool reset)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_bonds = molgraph.getNumBonds();
-	std::size_t num_rot_bonds = 0;
+    std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_rot_bonds = 0;
 
-	if (bond_mask.size() < num_bonds)
-		bond_mask.resize(num_bonds);
+    if (bond_mask.size() < num_bonds)
+        bond_mask.resize(num_bonds);
 
-	if (reset) 
-		bond_mask.reset();
-	
-	for (std::size_t i = 0; i < num_bonds; i++) {
-		if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) {
-			bond_mask.set(i);
-			num_rot_bonds++;
-		}
-	} 
+    if (reset) 
+        bond_mask.reset();
+    
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) {
+            bond_mask.set(i);
+            num_rot_bonds++;
+        }
+    } 
 
-	return num_rot_bonds;
+    return num_rot_bonds;
 }
 
 std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask, 
-											Util::BitSet& bond_mask, bool het_h_rotors, bool reset)
+                                            Util::BitSet& bond_mask, bool het_h_rotors, bool reset)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_bonds = molgraph.getNumBonds();
-	std::size_t num_rot_bonds = 0;
+    std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_rot_bonds = 0;
 
-	if (bond_mask.size() < num_bonds)
-		bond_mask.resize(num_bonds);
-	
-	if (reset)
-		bond_mask.reset();
+    if (bond_mask.size() < num_bonds)
+        bond_mask.resize(num_bonds);
+    
+    if (reset)
+        bond_mask.reset();
 
-	for (std::size_t i = 0; i < num_bonds; i++) {
-		if (excl_bond_mask.test(i))
-			continue;
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        if (excl_bond_mask.test(i))
+            continue;
 
-		if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) {
-			bond_mask.set(i);
-			num_rot_bonds++;
-		}
-	} 
+        if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) {
+            bond_mask.set(i);
+            num_rot_bonds++;
+        }
+    } 
 
-	return num_rot_bonds;
+    return num_rot_bonds;
 }
 
 std::size_t ConfGen::getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool het_h_rotors)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_bonds = molgraph.getNumBonds();
-	std::size_t num_rot_bonds = 0;
+    std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_rot_bonds = 0;
 
-	for (std::size_t i = 0; i < num_bonds; i++) 
-		if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) 
-			num_rot_bonds++;
+    for (std::size_t i = 0; i < num_bonds; i++) 
+        if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) 
+            num_rot_bonds++;
 
-	return num_rot_bonds;
+    return num_rot_bonds;
 }
 
 unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
 
-	bool has_rigid_ring_bonds = false;
+    bool has_rigid_ring_bonds = false;
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
-		const Bond& bond = *it;
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+        const Bond& bond = *it;
 
-		if (getRingFlag(bond)) {
-			if (getOrder(bond) != 1 || getAromaticityFlag(bond))
-				has_rigid_ring_bonds = true;
-			else
-				return FragmentType::FLEXIBLE_RING_SYSTEM;
-		}
-	}
+        if (getRingFlag(bond)) {
+            if (getOrder(bond) != 1 || getAromaticityFlag(bond))
+                has_rigid_ring_bonds = true;
+            else
+                return FragmentType::FLEXIBLE_RING_SYSTEM;
+        }
+    }
 
-	if (has_rigid_ring_bonds)
-		return FragmentType::RIGID_RING_SYSTEM;
-	
-	return FragmentType::CHAIN;
+    if (has_rigid_ring_bonds)
+        return FragmentType::RIGID_RING_SYSTEM;
+    
+    return FragmentType::CHAIN;
 }
 
 void ConfGen::setConformers(Chem::MolecularGraph& molgraph, const ConformerDataArray& conf_array)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_confs = conf_array.size();
+    std::size_t num_confs = conf_array.size();
 
-	if (num_confs == 0) {
-		clearConformations(molgraph);
-		clearConformerEnergies(molgraph);
-		return;
-	}
+    if (num_confs == 0) {
+        clearConformations(molgraph);
+        clearConformerEnergies(molgraph);
+        return;
+    }
 
-	Util::DArray::SharedPointer conf_energies(new Util::DArray());
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    Util::DArray::SharedPointer conf_energies(new Util::DArray());
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	for (std::size_t i = 0; i < num_confs; i++) {
-		const ConformerData& conf_data = *conf_array[i];
+    for (std::size_t i = 0; i < num_confs; i++) {
+        const ConformerData& conf_data = *conf_array[i];
 
-		for (std::size_t j = 0; j < num_atoms; j++) {
-			Atom& atom = molgraph.getAtom(j);
-			Math::Vector3DArray::SharedPointer coords_array;
-			
-			if (i == 0) {
-				coords_array.reset(new Math::Vector3DArray());
-				set3DCoordinatesArray(atom, coords_array);
+        for (std::size_t j = 0; j < num_atoms; j++) {
+            Atom& atom = molgraph.getAtom(j);
+            Math::Vector3DArray::SharedPointer coords_array;
+            
+            if (i == 0) {
+                coords_array.reset(new Math::Vector3DArray());
+                set3DCoordinatesArray(atom, coords_array);
 
-			} else 
-				coords_array = get3DCoordinatesArray(atom);
+            } else 
+                coords_array = get3DCoordinatesArray(atom);
 
-			coords_array->addElement(conf_data[j]);
-		}
-		
-		conf_energies->addElement(conf_data.getEnergy());
-	}
+            coords_array->addElement(conf_data[j]);
+        }
+        
+        conf_energies->addElement(conf_data.getEnergy());
+    }
 
-	setConformerEnergies(molgraph, conf_energies);
+    setConformerEnergies(molgraph, conf_energies);
 }
 
 unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,
-													 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type, bool strict, 
-													 double estat_de_const, double estat_dist_expo)
+                                                     ForceField::MMFF94InteractionData& param_data, unsigned int ff_type, bool strict, 
+                                                     double estat_de_const, double estat_dist_expo)
 {
-	using namespace ForceField;
+    using namespace ForceField;
 
-	unsigned int int_types = InteractionType::ALL;
+    unsigned int int_types = InteractionType::ALL;
 
-	switch (ff_type) {
+    switch (ff_type) {
 
-		case ForceFieldType::MMFF94:
-			parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
-			break;
+        case ForceFieldType::MMFF94:
+            parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
+            break;
 
-		case ForceFieldType::MMFF94S:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
-			break;
+        case ForceFieldType::MMFF94S:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
+            break;
 
-		case ForceFieldType::MMFF94S_XOOP:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_XOOP);
-			break;
+        case ForceFieldType::MMFF94S_XOOP:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_XOOP);
+            break;
 
-		case ForceFieldType::MMFF94S_RTOR:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR);
-			break;
+        case ForceFieldType::MMFF94S_RTOR:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR);
+            break;
 
-		case ForceFieldType::MMFF94S_RTOR_XOOP:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR_XOOP);
-			break;
+        case ForceFieldType::MMFF94S_RTOR_XOOP:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR_XOOP);
+            break;
 
-		case ForceFieldType::MMFF94_NO_ESTAT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
-			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
-			break;
+        case ForceFieldType::MMFF94_NO_ESTAT:
+            parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
+            int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+            break;
 
-		case ForceFieldType::MMFF94S_NO_ESTAT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
-			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
-			break;
+        case ForceFieldType::MMFF94S_NO_ESTAT:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
+            int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+            break;
 
-		case ForceFieldType::MMFF94S_XOOP_NO_ESTAT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_XOOP);
-			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
-			break;
+        case ForceFieldType::MMFF94S_XOOP_NO_ESTAT:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_XOOP);
+            int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+            break;
 
-		case ForceFieldType::MMFF94S_RTOR_NO_ESTAT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR);
-			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
-			break;
+        case ForceFieldType::MMFF94S_RTOR_NO_ESTAT:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR);
+            int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+            break;
 
-		case ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR_XOOP);
-			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
-			break;
+        case ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT:
+            parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR_XOOP);
+            int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+            break;
 
-		default:
-			return ReturnCode::FORCEFIELD_SETUP_FAILED;
-			
-	}	
+        default:
+            return ReturnCode::FORCEFIELD_SETUP_FAILED;
+            
+    }    
 
-	param_data.clear();
+    param_data.clear();
 
-	parameterizer.setDielectricConstant(estat_de_const);
-	parameterizer.setDistanceExponent(estat_dist_expo);
-	parameterizer.parameterize(molgraph, param_data, int_types, strict);
+    parameterizer.setDielectricConstant(estat_de_const);
+    parameterizer.setDistanceExponent(estat_dist_expo);
+    parameterizer.parameterize(molgraph, param_data, int_types, strict);
 
-	return ReturnCode::SUCCESS;
+    return ReturnCode::SUCCESS;
 } 

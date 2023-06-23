@@ -37,15 +37,15 @@ std::string Util::genCheckedTempFilePath(const std::string& dir, const std::stri
     bfs::path prefix(dir);
 
     if (prefix.empty())
-		prefix = bfs::temp_directory_path();
+        prefix = bfs::temp_directory_path();
 
     while (true) {
-		bfs::path tmp_file_path = prefix;
+        bfs::path tmp_file_path = prefix;
 
-		tmp_file_path /= bfs::unique_path(ptn);
+        tmp_file_path /= bfs::unique_path(ptn);
 
-		if (!bfs::exists(tmp_file_path))
-			return tmp_file_path.string();
+        if (!bfs::exists(tmp_file_path))
+            return tmp_file_path.string();
     }
 }
 
@@ -54,7 +54,7 @@ bool Util::checkIfSameFile(const std::string& path1, const std::string& path2)
     namespace bfs = boost::filesystem;
 
     if (bfs::exists(path1) && bfs::exists(path2))
-		return bfs::equivalent(path1, path2);
+        return bfs::equivalent(path1, path2);
 
     return (bfs::absolute(path1) == bfs::absolute(path2));
 }

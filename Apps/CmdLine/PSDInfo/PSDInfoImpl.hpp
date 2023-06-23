@@ -39,30 +39,30 @@ namespace PSDInfo
     {
 
     public:
-		PSDInfoImpl();
+        PSDInfoImpl();
 
     private:
-		const char* getProgName() const;
-		const char* getProgCopyright() const;
-		const char* getProgAboutText() const;
+        const char* getProgName() const;
+        const char* getProgCopyright() const;
+        const char* getProgAboutText() const;
 
-		int process();
+        int process();
 
-		int printStatistics();
-		void printStatistics(const std::string& db_name);
-	
-		void checkInputFiles() const;
-		void printOptionSummary();
+        int printStatistics();
+        void printStatistics(const std::string& db_name);
+    
+        void checkInputFiles() const;
+        void printOptionSummary();
 
-		void printTableRow(std::ostream& os, const std::string& stat_type, 
-						   std::size_t min, double avg, std::size_t max) const;
+        void printTableRow(std::ostream& os, const std::string& stat_type, 
+                           std::size_t min, double avg, std::size_t max) const;
 
-		typedef std::vector<std::string> StringList;
+        typedef std::vector<std::string> StringList;
 
-		StringList  inputDatabases;
-		bool        printConfStats;
-		bool        printPharmStats;
-		bool        printFeatureStats;
+        StringList  inputDatabases;
+        bool        printConfStats;
+        bool        printPharmStats;
+        bool        printFeatureStats;
     };
 }
 

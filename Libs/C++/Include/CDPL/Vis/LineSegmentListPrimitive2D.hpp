@@ -40,48 +40,48 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A graphics primitive representing a list of disjoint line segments.
-		 */
-		class CDPL_VIS_API LineSegmentListPrimitive2D : public PointArray2D, public GraphicsPrimitive2D
-		{
+        /**
+         * \brief A graphics primitive representing a list of disjoint line segments.
+         */
+        class CDPL_VIS_API LineSegmentListPrimitive2D : public PointArray2D, public GraphicsPrimitive2D
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %LineSegmentListPrimitive2D instances.
-			 */
-			typedef std::shared_ptr<LineSegmentListPrimitive2D> SharedPointer;
-		
-			/**
-			 * \brief Constructs an empty line segment list primitive.
-			 */
-			LineSegmentListPrimitive2D() {}
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %LineSegmentListPrimitive2D instances.
+             */
+            typedef std::shared_ptr<LineSegmentListPrimitive2D> SharedPointer;
+        
+            /**
+             * \brief Constructs an empty line segment list primitive.
+             */
+            LineSegmentListPrimitive2D() {}
 
-			void render(Renderer2D& renderer) const;
-		
-			/**
-			 * \brief Sets the pen defining the color, width, line style and cap style of the line segments.
-			 * \param pen The pen defining the color, width, line style and cap style of the line segments.
-			 */
-			void setPen(const Pen& pen);
-		
-			/**
-			 * \brief Returns the pen defining the color, width, line style and cap style of the line segments.
-			 * \return The pen defining the color, width, line style and cap style of the line segments.
-			 */
-			const Pen& getPen() const;
+            void render(Renderer2D& renderer) const;
+        
+            /**
+             * \brief Sets the pen defining the color, width, line style and cap style of the line segments.
+             * \param pen The pen defining the color, width, line style and cap style of the line segments.
+             */
+            void setPen(const Pen& pen);
+        
+            /**
+             * \brief Returns the pen defining the color, width, line style and cap style of the line segments.
+             * \return The pen defining the color, width, line style and cap style of the line segments.
+             */
+            const Pen& getPen() const;
 
-			GraphicsPrimitive2D::SharedPointer clone() const;
+            GraphicsPrimitive2D::SharedPointer clone() const;
 
-			void getBounds(Rectangle2D& bounds, FontMetrics* font_mtrics = 0) const;
+            void getBounds(Rectangle2D& bounds, FontMetrics* font_mtrics = 0) const;
 
-		private:
-			Pen   pen;
-		};
-	}
+        private:
+            Pen   pen;
+        };
+    }
 }
 
 #endif // CDPL_VIS_LINESEGMENTLISTPRIMITIVE2D_HPP

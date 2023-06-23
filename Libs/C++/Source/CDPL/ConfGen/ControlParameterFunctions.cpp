@@ -33,27 +33,27 @@
 using namespace CDPL; 
 
 
-#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)		\
-	TYPE ConfGen::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-	{																	\
-		return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME, \
-												 ControlParameterDefault::PARAM_NAME); \
-	}																	\
-																		\
-	void ConfGen::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
-	{																	\
-		cntnr.setParameter(ControlParameter::PARAM_NAME, arg);			\
-	}																	\
-																		\
-	bool ConfGen::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
-	{																	\
-		return cntnr.isParameterSet(ControlParameter::PARAM_NAME);		\
-	}																	\
-																		\
-	void ConfGen::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr) \
-	{																	\
-		cntnr.removeParameter(ControlParameter::PARAM_NAME);			\
-	}
+#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)        \
+    TYPE ConfGen::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
+    {                                                                    \
+        return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME, \
+                                                 ControlParameterDefault::PARAM_NAME); \
+    }                                                                    \
+                                                                        \
+    void ConfGen::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
+    {                                                                    \
+        cntnr.setParameter(ControlParameter::PARAM_NAME, arg);            \
+    }                                                                    \
+                                                                        \
+    bool ConfGen::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr) \
+    {                                                                    \
+        return cntnr.isParameterSet(ControlParameter::PARAM_NAME);        \
+    }                                                                    \
+                                                                        \
+    void ConfGen::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr) \
+    {                                                                    \
+        cntnr.removeParameter(ControlParameter::PARAM_NAME);            \
+    }
 
 
 MAKE_CONTROL_PARAM_FUNCTIONS(STRICT_ERROR_CHECKING, bool, StrictErrorChecking)

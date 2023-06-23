@@ -32,35 +32,35 @@
 namespace 
 {
 
-	struct RECAPAtomLabel {};
+    struct RECAPAtomLabel {};
 }
 
 
 void CDPLPythonChem::exportRECAPAtomLabels()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<RECAPAtomLabel, boost::noncopyable>("RECAPAtomLabel", python::no_init)
-		.def_readonly("NONE", &Chem::RECAPAtomLabel::NONE)
-		.def_readonly("AMIDE_N", &Chem::RECAPAtomLabel::AMIDE_N)
-		.def_readonly("AMIDE_C", &Chem::RECAPAtomLabel::AMIDE_C)
-		.def_readonly("ESTER_O", &Chem::RECAPAtomLabel::ESTER_O)
-		.def_readonly("ESTER_C", &Chem::RECAPAtomLabel::ESTER_C)
-		.def_readonly("AMINE_N", &Chem::RECAPAtomLabel::AMINE_N)
-		.def_readonly("AMINE_C", &Chem::RECAPAtomLabel::AMINE_C)
-		.def_readonly("UREA_N", &Chem::RECAPAtomLabel::UREA_N)
-		.def_readonly("UREA_C", &Chem::RECAPAtomLabel::UREA_C)
-		.def_readonly("ETHER_O", &Chem::RECAPAtomLabel::ETHER_O)
-		.def_readonly("ETHER_C", &Chem::RECAPAtomLabel::ETHER_C)
-		.def_readonly("OLEFIN_C", &Chem::RECAPAtomLabel::OLEFIN_C)
-		.def_readonly("QUARTERNARY_N_N", &Chem::RECAPAtomLabel::QUARTERNARY_N_N)
-		.def_readonly("QUARTERNARY_N_C", &Chem::RECAPAtomLabel::QUARTERNARY_N_C)
-		.def_readonly("AROMATIC_N_ALIPHATIC_C_N", &Chem::RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_N)
-		.def_readonly("AROMATIC_N_ALIPHATIC_C_C", &Chem::RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_C)
-		.def_readonly("LACTAM_N_ALIPHATIC_C_N", &Chem::RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_N)
-		.def_readonly("LACTAM_N_ALIPHATIC_C_C", &Chem::RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_C)
-		.def_readonly("AROMATIC_C_AROMATIC_C_C", &Chem::RECAPAtomLabel::AROMATIC_C_AROMATIC_C_C)
-		.def_readonly("SULFONAMIDE_N", &Chem::RECAPAtomLabel::SULFONAMIDE_N)
-		.def_readonly("SULFONAMIDE_S", &Chem::RECAPAtomLabel::SULFONAMIDE_S);
+    python::class_<RECAPAtomLabel, boost::noncopyable>("RECAPAtomLabel", python::no_init)
+        .def_readonly("NONE", &Chem::RECAPAtomLabel::NONE)
+        .def_readonly("AMIDE_N", &Chem::RECAPAtomLabel::AMIDE_N)
+        .def_readonly("AMIDE_C", &Chem::RECAPAtomLabel::AMIDE_C)
+        .def_readonly("ESTER_O", &Chem::RECAPAtomLabel::ESTER_O)
+        .def_readonly("ESTER_C", &Chem::RECAPAtomLabel::ESTER_C)
+        .def_readonly("AMINE_N", &Chem::RECAPAtomLabel::AMINE_N)
+        .def_readonly("AMINE_C", &Chem::RECAPAtomLabel::AMINE_C)
+        .def_readonly("UREA_N", &Chem::RECAPAtomLabel::UREA_N)
+        .def_readonly("UREA_C", &Chem::RECAPAtomLabel::UREA_C)
+        .def_readonly("ETHER_O", &Chem::RECAPAtomLabel::ETHER_O)
+        .def_readonly("ETHER_C", &Chem::RECAPAtomLabel::ETHER_C)
+        .def_readonly("OLEFIN_C", &Chem::RECAPAtomLabel::OLEFIN_C)
+        .def_readonly("QUARTERNARY_N_N", &Chem::RECAPAtomLabel::QUARTERNARY_N_N)
+        .def_readonly("QUARTERNARY_N_C", &Chem::RECAPAtomLabel::QUARTERNARY_N_C)
+        .def_readonly("AROMATIC_N_ALIPHATIC_C_N", &Chem::RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_N)
+        .def_readonly("AROMATIC_N_ALIPHATIC_C_C", &Chem::RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_C)
+        .def_readonly("LACTAM_N_ALIPHATIC_C_N", &Chem::RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_N)
+        .def_readonly("LACTAM_N_ALIPHATIC_C_C", &Chem::RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_C)
+        .def_readonly("AROMATIC_C_AROMATIC_C_C", &Chem::RECAPAtomLabel::AROMATIC_C_AROMATIC_C_C)
+        .def_readonly("SULFONAMIDE_N", &Chem::RECAPAtomLabel::SULFONAMIDE_N)
+        .def_readonly("SULFONAMIDE_S", &Chem::RECAPAtomLabel::SULFONAMIDE_S);
 }

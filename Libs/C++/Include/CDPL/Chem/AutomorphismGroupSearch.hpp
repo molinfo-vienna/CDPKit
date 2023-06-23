@@ -45,266 +45,266 @@ namespace CDPL
     namespace Chem
     {
 
-		/**
-		 * \brief AutomorphismGroupSearch.
-		 */
-		class CDPL_CHEM_API AutomorphismGroupSearch
-		{
-		  public:
-			/**
-			 * \brief Specifies the default set of atomic properties considered for atom matching.
-			 */
-			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
-				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
-				AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-				AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
-				AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE;
+        /**
+         * \brief AutomorphismGroupSearch.
+         */
+        class CDPL_CHEM_API AutomorphismGroupSearch
+        {
+          public:
+            /**
+             * \brief Specifies the default set of atomic properties considered for atom matching.
+             */
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+                AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
+                AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
+                AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
+                AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE;
 
-			/**
-			 * \brief Specifies the default set of bond properties considered for bond matching.
-			 */
-			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
-				BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
-				BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
+            /**
+             * \brief Specifies the default set of bond properties considered for bond matching.
+             */
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+                BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
+                BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
-			typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
+            typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
 
-			/**
-			 * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
-			 */
-			typedef SubstructureSearch::MappingIterator MappingIterator;
+            /**
+             * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
+             */
+            typedef SubstructureSearch::MappingIterator MappingIterator;
 
-			/**
-			 * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
-			 */
-			typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
+            /**
+             * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
+             */
+            typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
 
-			typedef std::function<bool(const MolecularGraph&, const AtomBondMapping&)> MappingCallbackFunction;
+            typedef std::function<bool(const MolecularGraph&, const AtomBondMapping&)> MappingCallbackFunction;
 
-			/**
-			 * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.
-			 */
-			AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, 
-									unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
-		  
-		    void setAtomPropertyFlags(unsigned int flags);
+            /**
+             * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.
+             */
+            AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, 
+                                    unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
+          
+            void setAtomPropertyFlags(unsigned int flags);
 
-			unsigned int getAtomPropertyFlags() const;
+            unsigned int getAtomPropertyFlags() const;
 
-			void setBondPropertyFlags(unsigned int flags);
-	
-			unsigned int getBondPropertyFlags() const;
+            void setBondPropertyFlags(unsigned int flags);
+    
+            unsigned int getBondPropertyFlags() const;
 
-			void includeIdentityMapping(bool include);
+            void includeIdentityMapping(bool include);
 
-			bool identityMappingIncluded() const;
+            bool identityMappingIncluded() const;
 
-			/**
-			 * \brief Searches for the possible atom/bond mappings in the automorphism group of the given molecular graph.
-			 *
-			 * The method will store all found mappings up to the maximum number of recorded mappings specified
-			 * by setMaxNumMappings(). 
-			 *
-			 * \param molgraph The molecular graph that has to be searched for automorphisms.
-			 * \return \c true if any mappings of the specified molecular graph have been found, and \c false
-			 *         otherwise.
-			 * \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be
-			 *       discarded.
-			 */
-			bool findMappings(const MolecularGraph& molgraph);
+            /**
+             * \brief Searches for the possible atom/bond mappings in the automorphism group of the given molecular graph.
+             *
+             * The method will store all found mappings up to the maximum number of recorded mappings specified
+             * by setMaxNumMappings(). 
+             *
+             * \param molgraph The molecular graph that has to be searched for automorphisms.
+             * \return \c true if any mappings of the specified molecular graph have been found, and \c false
+             *         otherwise.
+             * \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be
+             *       discarded.
+             */
+            bool findMappings(const MolecularGraph& molgraph);
 
-		    void stopSearch();
-		  
-			/**
-			 * \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
-			 * \return The number of atom/bond mappings that were recorded in the last call to findMappings().
-			 */
-			std::size_t getNumMappings() const;
+            void stopSearch();
+          
+            /**
+             * \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
+             * \return The number of atom/bond mappings that were recorded in the last call to findMappings().
+             */
+            std::size_t getNumMappings() const;
 
-			/**
-			 * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
-			 * \param idx The zero-based index of the atom/bond mapping object to return.
-			 * \return A non-\c const reference to the atom/bond mapping object at index \a idx.
-			 * \throw Base::IndexError if no mappings are available or \a idx is not in the range [0, getNumMappings() - 1].
-			 */
-			AtomBondMapping& getMapping(std::size_t idx);
+            /**
+             * \brief Returns a non-\c const reference to the stored atom/bond mapping object at index \a idx.
+             * \param idx The zero-based index of the atom/bond mapping object to return.
+             * \return A non-\c const reference to the atom/bond mapping object at index \a idx.
+             * \throw Base::IndexError if no mappings are available or \a idx is not in the range [0, getNumMappings() - 1].
+             */
+            AtomBondMapping& getMapping(std::size_t idx);
 
-			/**
-			 * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
-			 * \param idx The zero-based index of the atom/bond mapping object to return.
-			 * \return A \c const reference to the atom/bond mapping object at index \a idx.
-			 * \throw Base::IndexError if no mappings are available or \a idx is not in the range [0, getNumMappings() - 1].
-			 */
-			const AtomBondMapping& getMapping(std::size_t idx) const;
+            /**
+             * \brief Returns a \c const reference to the stored atom/bond mapping object at index \a idx.
+             * \param idx The zero-based index of the atom/bond mapping object to return.
+             * \return A \c const reference to the atom/bond mapping object at index \a idx.
+             * \throw Base::IndexError if no mappings are available or \a idx is not in the range [0, getNumMappings() - 1].
+             */
+            const AtomBondMapping& getMapping(std::size_t idx) const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 */
-			MappingIterator getMappingsBegin();
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             */
+            MappingIterator getMappingsBegin();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 */
-			ConstMappingIterator getMappingsBegin() const;
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             */
+            ConstMappingIterator getMappingsBegin() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-			 * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
-			 */
-			MappingIterator getMappingsEnd();
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             */
+            MappingIterator getMappingsEnd();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-			 * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
-			 */
-			ConstMappingIterator getMappingsEnd() const;
+            /**
+             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             */
+            ConstMappingIterator getMappingsEnd() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 */
-			MappingIterator begin();
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+             */
+            MappingIterator begin();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
-			 */
-			ConstMappingIterator begin() const;
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+             */
+            ConstMappingIterator begin() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
-			 * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
-			 */
-			MappingIterator end();
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+             */
+            MappingIterator end();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
-			 * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
-			 */
-			ConstMappingIterator end() const;
+            /**
+             * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
+             * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+             */
+            ConstMappingIterator end() const;
 
-			/**
-			 * \brief Allows to specify a limit on the number of stored atom/bond mappings.
-			 *
-			 * In a call to findMappings() the automorphism search will terminate as soon as the specified maximum number of stored
-			 * atom/bond mappings has been reached. A previously set limit on the number of mappings can be disabled
-			 * by providing zero for the value of \a max_num_mappings.
-			 *
-			 * \param max_num_mappings The maximum number of atom/bond mappings to store.
-			 * \note By default, no limit is imposed on the number of stored mappings.
-			 */
-			void setMaxNumMappings(std::size_t max_num_mappings);
+            /**
+             * \brief Allows to specify a limit on the number of stored atom/bond mappings.
+             *
+             * In a call to findMappings() the automorphism search will terminate as soon as the specified maximum number of stored
+             * atom/bond mappings has been reached. A previously set limit on the number of mappings can be disabled
+             * by providing zero for the value of \a max_num_mappings.
+             *
+             * \param max_num_mappings The maximum number of atom/bond mappings to store.
+             * \note By default, no limit is imposed on the number of stored mappings.
+             */
+            void setMaxNumMappings(std::size_t max_num_mappings);
 
-			/**
-			 * \brief Returns the specified limit on the number of stored atom/bond mappings.
-			 * \return The specified maximum number of stored atom/bond mappings.
-			 * \see setMaxNumMappings(), findMappings() 
-			 */
-			std::size_t getMaxNumMappings() const;
+            /**
+             * \brief Returns the specified limit on the number of stored atom/bond mappings.
+             * \return The specified maximum number of stored atom/bond mappings.
+             * \see setMaxNumMappings(), findMappings() 
+             */
+            std::size_t getMaxNumMappings() const;
 
-			void setFoundMappingCallback(const MappingCallbackFunction& func);
+            void setFoundMappingCallback(const MappingCallbackFunction& func);
 
-			const MappingCallbackFunction& getFoundMappingCallback() const;
+            const MappingCallbackFunction& getFoundMappingCallback() const;
 
-		  private:
-			AutomorphismGroupSearch(const AutomorphismGroupSearch&);
+          private:
+            AutomorphismGroupSearch(const AutomorphismGroupSearch&);
 
-			AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&);
-	
-			const MatchExpression<Atom, MolecularGraph>::SharedPointer&
-			getAtomMatchExpression(const Atom& atom) const;
+            AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&);
+    
+            const MatchExpression<Atom, MolecularGraph>::SharedPointer&
+            getAtomMatchExpression(const Atom& atom) const;
 
-			const MatchExpression<Bond, MolecularGraph>::SharedPointer&
-			getBondMatchExpression(const Bond& bond) const;
+            const MatchExpression<Bond, MolecularGraph>::SharedPointer&
+            getBondMatchExpression(const Bond& bond) const;
 
-			const MatchExpression<MolecularGraph>::SharedPointer&
-			getMolGraphMatchExpression(const MolecularGraph& molgraph) const;
-	
-			class AtomMatchExpression : public MatchExpression<Atom, MolecularGraph>
-			{
+            const MatchExpression<MolecularGraph>::SharedPointer&
+            getMolGraphMatchExpression(const MolecularGraph& molgraph) const;
+    
+            class AtomMatchExpression : public MatchExpression<Atom, MolecularGraph>
+            {
 
-			public:
-				AtomMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
+            public:
+                AtomMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
 
-				bool requiresAtomBondMapping() const;
+                bool requiresAtomBondMapping() const;
 
-				bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
-								const Atom& target_atom, const MolecularGraph& target_molgraph,
-								const Base::Any& aux_data) const;
+                bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
+                                const Atom& target_atom, const MolecularGraph& target_molgraph,
+                                const Base::Any& aux_data) const;
 
-				bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
-								const Atom& target_atom, const MolecularGraph& target_molgraph, 
-								const AtomBondMapping& mapping, const Base::Any& aux_data) const;
-			private:
-				AutomorphismGroupSearch*       parent;
-				mutable unsigned int           type;
-				mutable unsigned int           hybState;
-				mutable std::size_t            isotope;
-				mutable std::size_t            hCount;
-				mutable long                   charge;
-				mutable bool                   aromatic;
-				mutable std::size_t            expBondCount;
-			};
-	 
-			class BondMatchExpression : public MatchExpression<Bond, MolecularGraph>
-			{
-			
-			public:
-				BondMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
-			
-				bool requiresAtomBondMapping() const;
+                bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
+                                const Atom& target_atom, const MolecularGraph& target_molgraph, 
+                                const AtomBondMapping& mapping, const Base::Any& aux_data) const;
+            private:
+                AutomorphismGroupSearch*       parent;
+                mutable unsigned int           type;
+                mutable unsigned int           hybState;
+                mutable std::size_t            isotope;
+                mutable std::size_t            hCount;
+                mutable long                   charge;
+                mutable bool                   aromatic;
+                mutable std::size_t            expBondCount;
+            };
+     
+            class BondMatchExpression : public MatchExpression<Bond, MolecularGraph>
+            {
+            
+            public:
+                BondMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
+            
+                bool requiresAtomBondMapping() const;
 
-				bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
-								const Bond& target_bond, const MolecularGraph& target_molgraph, 
-								const Base::Any& aux_data) const;
+                bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
+                                const Bond& target_bond, const MolecularGraph& target_molgraph, 
+                                const Base::Any& aux_data) const;
 
-				bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
-								const Bond& target_bond, const MolecularGraph& target_molgraph, 
-								const AtomBondMapping& mapping, const Base::Any& aux_data) const;
-			private:
-				AutomorphismGroupSearch*       parent;
-				mutable std::size_t            order;
-				mutable bool                   inRing;
-				mutable bool                   aromatic;
-			};
+                bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
+                                const Bond& target_bond, const MolecularGraph& target_molgraph, 
+                                const AtomBondMapping& mapping, const Base::Any& aux_data) const;
+            private:
+                AutomorphismGroupSearch*       parent;
+                mutable std::size_t            order;
+                mutable bool                   inRing;
+                mutable bool                   aromatic;
+            };
 
-			class MolGraphMatchExpression : public MatchExpression<MolecularGraph>
-			{
-			
-			public:
-				MolGraphMatchExpression(const AutomorphismGroupSearch* parent): parent(parent) {}
+            class MolGraphMatchExpression : public MatchExpression<MolecularGraph>
+            {
+            
+            public:
+                MolGraphMatchExpression(const AutomorphismGroupSearch* parent): parent(parent) {}
 
-				bool requiresAtomBondMapping() const;
+                bool requiresAtomBondMapping() const;
 
-				bool operator()(const MolecularGraph& query_molgraph, 
-								const MolecularGraph& target_molgraph, 
-								const Base::Any& aux_data) const;
+                bool operator()(const MolecularGraph& query_molgraph, 
+                                const MolecularGraph& target_molgraph, 
+                                const Base::Any& aux_data) const;
 
-				bool operator()(const MolecularGraph& query_molgraph, 
-								const MolecularGraph& target_molgraph, 
-								const AtomBondMapping& mapping, const Base::Any& aux_data) const;
+                bool operator()(const MolecularGraph& query_molgraph, 
+                                const MolecularGraph& target_molgraph, 
+                                const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
-			private:
-				const AutomorphismGroupSearch* parent;
-			};
+            private:
+                const AutomorphismGroupSearch* parent;
+            };
 
-			typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
-			typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
-			typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
+            typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
+            typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
+            typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
 
-			SubstructureSearch           substructSearch;
-			bool                         incIdentityMapping;
-			unsigned int                 atomPropFlags;
-			unsigned int                 bondPropFlags;
-			AtomMatchExprPtr             atomMatchExpr;
-			BondMatchExprPtr             bondMatchExpr;
-			MolGraphMatchExprPtr         molGraphMatchExpr;
-			MappingCallbackFunction      mappingCallbackFunc;
-			const Atom*                  lastQueryAtom;
-			const Bond*                  lastQueryBond;
-		};
+            SubstructureSearch           substructSearch;
+            bool                         incIdentityMapping;
+            unsigned int                 atomPropFlags;
+            unsigned int                 bondPropFlags;
+            AtomMatchExprPtr             atomMatchExpr;
+            BondMatchExprPtr             bondMatchExpr;
+            MolGraphMatchExprPtr         molGraphMatchExpr;
+            MappingCallbackFunction      mappingCallbackFunc;
+            const Atom*                  lastQueryAtom;
+            const Bond*                  lastQueryBond;
+        };
     }
 }
 

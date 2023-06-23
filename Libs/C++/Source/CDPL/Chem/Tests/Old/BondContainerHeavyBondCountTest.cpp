@@ -39,39 +39,39 @@
 
 BOOST_AUTO_TEST_CASE(BondContainerHeavyBondCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::HEAVY_BOND_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::HEAVY_BOND_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::HEAVY_BOND_COUNT) == 25);
-
-	BOOST_CHECK(!mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(mol, BondContainerProperty::HEAVY_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
+    BOOST_CHECK(!mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, BondContainerProperty::HEAVY_BOND_COUNT, *it, BondProperty::IS_HEAVY);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+
+//-----
+
+    BOOST_CHECK(mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::HEAVY_BOND_COUNT) == 25);
+
+    BOOST_CHECK(!mol.getProperty(BondContainerProperty::HEAVY_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(mol, BondContainerProperty::HEAVY_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
+
+//-----
+
+    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, BondContainerProperty::HEAVY_BOND_COUNT, *it, BondProperty::IS_HEAVY);
 }

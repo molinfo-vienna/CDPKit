@@ -31,10 +31,10 @@
 
 void CDPLPythonChem::exportJMEReactionOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::JMEReactionOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("JMEReactionOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::JMEReactionOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::Reaction> > >("JMEReactionOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

@@ -32,21 +32,21 @@
 namespace CDPL
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		namespace AtomProperty
-		{
+        namespace AtomProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(COLOR);
-			CDPL_DEFINE_LOOKUP_KEY(LABEL_FONT);
-			CDPL_DEFINE_LOOKUP_KEY(LABEL_SIZE);
-			CDPL_DEFINE_LOOKUP_KEY(SECONDARY_LABEL_FONT);
-			CDPL_DEFINE_LOOKUP_KEY(SECONDARY_LABEL_SIZE);
-			CDPL_DEFINE_LOOKUP_KEY(LABEL_MARGIN);
-			CDPL_DEFINE_LOOKUP_KEY(RADICAL_ELECTRON_DOT_SIZE);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(COLOR);
+            CDPL_DEFINE_LOOKUP_KEY(LABEL_FONT);
+            CDPL_DEFINE_LOOKUP_KEY(LABEL_SIZE);
+            CDPL_DEFINE_LOOKUP_KEY(SECONDARY_LABEL_FONT);
+            CDPL_DEFINE_LOOKUP_KEY(SECONDARY_LABEL_SIZE);
+            CDPL_DEFINE_LOOKUP_KEY(LABEL_MARGIN);
+            CDPL_DEFINE_LOOKUP_KEY(RADICAL_ELECTRON_DOT_SIZE);
+        }
 
-		void initAtomProperties() {}
-	}
+        void initAtomProperties() {}
+    }
 }

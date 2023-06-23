@@ -47,101 +47,101 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingParameterTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingParameterTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94OutOfPlaneBendingParameterTable> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<MMFF94OutOfPlaneBendingParameterTable> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
-					  unsigned int oop_atom_type, double force_const);
+                Entry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+                      unsigned int oop_atom_type, double force_const);
 
-				unsigned int getTerminalAtom1Type() const;
+                unsigned int getTerminalAtom1Type() const;
 
-				unsigned int getTerminalAtom2Type() const;
+                unsigned int getTerminalAtom2Type() const;
 
-				unsigned int getCenterAtomType() const;
+                unsigned int getCenterAtomType() const;
 
-				unsigned int getOutOfPlaneAtomType() const;
+                unsigned int getOutOfPlaneAtomType() const;
 
-				double getForceConstant() const;
+                double getForceConstant() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int termAtom1Type;
-				unsigned int ctrAtomType;
-				unsigned int termAtom2Type;
-				unsigned int oopAtomType;
-				double       forceConst;
-				bool         initialized;
-			};			
+              private:
+                unsigned int termAtom1Type;
+                unsigned int ctrAtomType;
+                unsigned int termAtom2Type;
+                unsigned int oopAtomType;
+                double       forceConst;
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94OutOfPlaneBendingParameterTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94OutOfPlaneBendingParameterTable();
 
-			void addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
-						  unsigned int oop_atom_type, double force_const);
+            void addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+                          unsigned int oop_atom_type, double force_const);
 
-			const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
-								  unsigned int oop_atom_type) const;
+            const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+                                  unsigned int oop_atom_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
-							 unsigned int oop_atom_type);
+            bool removeEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+                             unsigned int oop_atom_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults(unsigned int param_set);
+            void loadDefaults(unsigned int param_set);
 
-			static void set(const SharedPointer& table, unsigned int param_set);
+            static void set(const SharedPointer& table, unsigned int param_set);
 
-			static const SharedPointer& get(unsigned int param_set);
+            static const SharedPointer& get(unsigned int param_set);
 
-		  private:
-			static SharedPointer defaultDynTable;
-			static SharedPointer defaultStatTable;
-			static SharedPointer defaultStatExtTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultDynTable;
+            static SharedPointer defaultStatTable;
+            static SharedPointer defaultStatExtTable;
+            DataStorage          entries;
+        };
     }
 }
 

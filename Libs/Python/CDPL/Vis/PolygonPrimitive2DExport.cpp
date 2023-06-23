@@ -33,26 +33,26 @@
 
 void CDPLPythonVis::exportPolygonPrimitive2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::PolygonPrimitive2D, 
-		python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PolygonPrimitive2D", python::no_init)
-		.def(python::init<>(python::arg("self")))    
-		.def(python::init<const Vis::PolygonPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Vis::PolygonPrimitive2D::operator=),
-			 (python::arg("self"), python::arg("prim")),
-			 python::return_self<>())
-		.def("setPen", &Vis::PolygonPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
-		.def("getPen", &Vis::PolygonPrimitive2D::getPen, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.def("setBrush", &Vis::PolygonPrimitive2D::setBrush, (python::arg("self"), python::arg("brush")))
-		.def("getBrush", &Vis::PolygonPrimitive2D::getBrush, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.add_property("pen", python::make_function(&Vis::PolygonPrimitive2D::getPen, 
-												   python::return_internal_reference<1>()),
-					  &Vis::PolygonPrimitive2D::setPen)
-		.add_property("brush", python::make_function(&Vis::PolygonPrimitive2D::getBrush, 
-												   python::return_internal_reference<1>()),
-					  &Vis::PolygonPrimitive2D::setBrush);
+    python::class_<Vis::PolygonPrimitive2D, 
+        python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PolygonPrimitive2D", python::no_init)
+        .def(python::init<>(python::arg("self")))    
+        .def(python::init<const Vis::PolygonPrimitive2D&>((python::arg("self"), python::arg("prim"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Vis::PolygonPrimitive2D::operator=),
+             (python::arg("self"), python::arg("prim")),
+             python::return_self<>())
+        .def("setPen", &Vis::PolygonPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
+        .def("getPen", &Vis::PolygonPrimitive2D::getPen, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .def("setBrush", &Vis::PolygonPrimitive2D::setBrush, (python::arg("self"), python::arg("brush")))
+        .def("getBrush", &Vis::PolygonPrimitive2D::getBrush, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .add_property("pen", python::make_function(&Vis::PolygonPrimitive2D::getPen, 
+                                                   python::return_internal_reference<1>()),
+                      &Vis::PolygonPrimitive2D::setPen)
+        .add_property("brush", python::make_function(&Vis::PolygonPrimitive2D::getBrush, 
+                                                   python::return_internal_reference<1>()),
+                      &Vis::PolygonPrimitive2D::setBrush);
 }

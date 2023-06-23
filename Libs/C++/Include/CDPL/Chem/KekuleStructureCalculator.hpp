@@ -40,58 +40,58 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-		class Bond;
+        class MolecularGraph;
+        class Atom;
+        class Bond;
 
-		/**
-		 * \brief KekuleStructureCalculator.
-		 */
-		class CDPL_CHEM_API KekuleStructureCalculator 
-		{
+        /**
+         * \brief KekuleStructureCalculator.
+         */
+        class CDPL_CHEM_API KekuleStructureCalculator 
+        {
 
-		public:
-			/**
-			 * \brief Constructs the \c %KekuleStructureCalculator instance.
-			 */
-			KekuleStructureCalculator();
+        public:
+            /**
+             * \brief Constructs the \c %KekuleStructureCalculator instance.
+             */
+            KekuleStructureCalculator();
 
-			/**
-			 * \brief Constructs the \c %KekuleStructureCalculator instance and calculates an alternating
-			 *        single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
-			 * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
-			 *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
-			 *         accessible via its index in the molecular graph.
-			 */
-			KekuleStructureCalculator(const MolecularGraph& molgraph, Util::STArray& orders);
+            /**
+             * \brief Constructs the \c %KekuleStructureCalculator instance and calculates an alternating
+             *        single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
+             * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
+             *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
+             *         accessible via its index in the molecular graph.
+             */
+            KekuleStructureCalculator(const MolecularGraph& molgraph, Util::STArray& orders);
 
-			/**
-			 * \brief Calculates an alternating single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
-			 * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
-			 *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
-			 *         accessible via its index in the molecular graph.
-			 */
-			void calculate(const MolecularGraph& molgraph, Util::STArray& orders);
+            /**
+             * \brief Calculates an alternating single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
+             * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
+             *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
+             *         accessible via its index in the molecular graph.
+             */
+            void calculate(const MolecularGraph& molgraph, Util::STArray& orders);
 
-		private:
-			void init(const MolecularGraph& molgraph, Util::STArray& orders);
+        private:
+            void init(const MolecularGraph& molgraph, Util::STArray& orders);
 
-			void defineNbrBondOrders(const Atom& atom);
-			void getConnectedUndefBonds(const Atom& atom);
+            void defineNbrBondOrders(const Atom& atom);
+            void getConnectedUndefBonds(const Atom& atom);
 
-			typedef std::vector<const Bond*> BondList;
+            typedef std::vector<const Bond*> BondList;
 
-			const MolecularGraph*  molGraph;
-			std::size_t            startAtomIdx;
-			Util::BitSet           defOrderMask;
-			BondList               conctdUndefBonds;
-		};
-	}
+            const MolecularGraph*  molGraph;
+            std::size_t            startAtomIdx;
+            Util::BitSet           defOrderMask;
+            BondList               conctdUndefBonds;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_KEKULESTRUCTURECALCULATOR_HPP

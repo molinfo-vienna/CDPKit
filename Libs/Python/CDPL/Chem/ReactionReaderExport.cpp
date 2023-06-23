@@ -32,6 +32,6 @@
 
 void CDPLPythonChem::exportReactionReader()
 {
-	CDPLPythonBase::DataReaderExport<CDPL::Chem::Reaction>("ReactionReader", "rxn");
-	CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Reaction>("CompoundReactionReader");
+    CDPLPythonBase::DataReaderExport<CDPL::Chem::Reaction>("ReactionReader", "rxn");
+    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Reaction>("CompoundReactionReader");
 }

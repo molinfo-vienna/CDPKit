@@ -32,24 +32,24 @@
 namespace
 {
 
-	CDPL::Chem::BasicAtom& assignBasicAtom(CDPL::Chem::BasicAtom& self, CDPL::Chem::BasicAtom& atom)
-	{
-		return self.operator=(atom);
-	}
+    CDPL::Chem::BasicAtom& assignBasicAtom(CDPL::Chem::BasicAtom& self, CDPL::Chem::BasicAtom& atom)
+    {
+        return self.operator=(atom);
+    }
 
-	CDPL::Chem::Atom& assignAtom(CDPL::Chem::Atom& self, CDPL::Chem::Atom& atom)
-	{
-		return self.operator=(atom);
-	}
+    CDPL::Chem::Atom& assignAtom(CDPL::Chem::Atom& self, CDPL::Chem::Atom& atom)
+    {
+        return self.operator=(atom);
+    }
 }
 
 
 void CDPLPythonChem::exportBasicAtom()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::BasicAtom, python::bases<Chem::Atom>, boost::noncopyable>("BasicAtom", python::no_init)
-		.def("assign", &assignAtom, (python::arg("self"), python::arg("atom")), python::return_self<>())
-		.def("assign", &assignBasicAtom, (python::arg("self"), python::arg("atom")), python::return_self<>());
+    python::class_<Chem::BasicAtom, python::bases<Chem::Atom>, boost::noncopyable>("BasicAtom", python::no_init)
+        .def("assign", &assignAtom, (python::arg("self"), python::arg("atom")), python::return_self<>())
+        .def("assign", &assignBasicAtom, (python::arg("self"), python::arg("atom")), python::return_self<>());
 }

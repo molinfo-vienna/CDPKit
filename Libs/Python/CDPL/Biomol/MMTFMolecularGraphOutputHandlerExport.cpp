@@ -33,18 +33,18 @@
 
 void CDPLPythonBiomol::exportMMTFMolecularGraphOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Biomol::MMTFMolecularGraphOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFMolecularGraphOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::MMTFMolecularGraphOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFMolecularGraphOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Biomol::MMTFGZMolecularGraphOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFGZMolecularGraphOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::MMTFGZMolecularGraphOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFGZMolecularGraphOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Biomol::MMTFBZ2MolecularGraphOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFBZ2MolecularGraphOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::MMTFBZ2MolecularGraphOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFBZ2MolecularGraphOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

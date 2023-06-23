@@ -38,28 +38,28 @@ namespace CDPL
     namespace Grid
     {
 
-		class AttributedGrid;
+        class AttributedGrid;
     }
 
     namespace GRAIL 
     {
-	
-		CDPL_GRAIL_API unsigned int getFeatureType(const Grid::AttributedGrid& grid);
+    
+        CDPL_GRAIL_API unsigned int getFeatureType(const Grid::AttributedGrid& grid);
 
-		CDPL_GRAIL_API void setFeatureType(Grid::AttributedGrid& grid, unsigned int type);
+        CDPL_GRAIL_API void setFeatureType(Grid::AttributedGrid& grid, unsigned int type);
 
-		CDPL_GRAIL_API void clearFeatureType(Grid::AttributedGrid& grid);
+        CDPL_GRAIL_API void clearFeatureType(Grid::AttributedGrid& grid);
 
-		CDPL_GRAIL_API bool hasFeatureType(const Grid::AttributedGrid& grid);
+        CDPL_GRAIL_API bool hasFeatureType(const Grid::AttributedGrid& grid);
 
 
-		CDPL_GRAIL_API unsigned int getTargetFeatureType(const Grid::AttributedGrid& grid);
+        CDPL_GRAIL_API unsigned int getTargetFeatureType(const Grid::AttributedGrid& grid);
 
-		CDPL_GRAIL_API void setTargetFeatureType(Grid::AttributedGrid& grid, unsigned int type);
+        CDPL_GRAIL_API void setTargetFeatureType(Grid::AttributedGrid& grid, unsigned int type);
 
-		CDPL_GRAIL_API void clearTargetFeatureType(Grid::AttributedGrid& grid);
+        CDPL_GRAIL_API void clearTargetFeatureType(Grid::AttributedGrid& grid);
 
-		CDPL_GRAIL_API bool hasTargetFeatureType(const Grid::AttributedGrid& grid);
+        CDPL_GRAIL_API bool hasTargetFeatureType(const Grid::AttributedGrid& grid);
     }
 }
 

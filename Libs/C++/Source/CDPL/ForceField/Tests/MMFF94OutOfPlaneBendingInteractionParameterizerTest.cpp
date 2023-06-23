@@ -39,76 +39,76 @@
 namespace
 {
 
-	void performTesting(const Testing::MMFF94TestData::MoleculeList& mols, Testing::OptimolLogReader& log_reader, bool stat)
-	{
-		using namespace CDPL;
-		using namespace Testing;
+    void performTesting(const Testing::MMFF94TestData::MoleculeList& mols, Testing::OptimolLogReader& log_reader, bool stat)
+    {
+        using namespace CDPL;
+        using namespace Testing;
 
-		OptimolLogReader::OutOfPlaneBendingInteractionData ia_data;
-		ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer parameterizer;
-		ForceField::MMFF94OutOfPlaneBendingInteractionData found_ia_data;
+        OptimolLogReader::OutOfPlaneBendingInteractionData ia_data;
+        ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer parameterizer;
+        ForceField::MMFF94OutOfPlaneBendingInteractionData found_ia_data;
 
-		parameterizer.setOutOfPlaneBendingParameterTable(ForceField::MMFF94OutOfPlaneBendingParameterTable::get(stat));
+        parameterizer.setOutOfPlaneBendingParameterTable(ForceField::MMFF94OutOfPlaneBendingParameterTable::get(stat));
 
-		for (std::size_t mol_idx = 0; mol_idx <	mols.size(); mol_idx++) {
-			const Chem::Molecule& mol =	*mols[mol_idx];
-			const std::string& mol_name = getName(mol);
+        for (std::size_t mol_idx = 0; mol_idx <    mols.size(); mol_idx++) {
+            const Chem::Molecule& mol =    *mols[mol_idx];
+            const std::string& mol_name = getName(mol);
 
-			BOOST_CHECK(log_reader.getOutOfPlaneBendingInteractions(mol_name, ia_data));
+            BOOST_CHECK(log_reader.getOutOfPlaneBendingInteractions(mol_name, ia_data));
 
-			parameterizer.parameterize(mol, found_ia_data, true);
+            parameterizer.parameterize(mol, found_ia_data, true);
 
-			BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Out-Of-Plane bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-								found_ia_data.getSize() << " != " << ia_data.size());
+            BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Out-Of-Plane bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+                                found_ia_data.getSize() << " != " << ia_data.size());
 
-			for (std::size_t i = 0; i < ia_data.size(); i++) {
-				bool iaction_found = false;
-				std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
-				std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
-				std::size_t ctr_atom_idx = TestUtils::getAtomIndex(mol, ia_data[i].ctrAtomName);
+            for (std::size_t i = 0; i < ia_data.size(); i++) {
+                bool iaction_found = false;
+                std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
+                std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
+                std::size_t ctr_atom_idx = TestUtils::getAtomIndex(mol, ia_data[i].ctrAtomName);
 
-				for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-					const ForceField::MMFF94OutOfPlaneBendingInteraction& iaction = found_ia_data[j];
+                for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+                    const ForceField::MMFF94OutOfPlaneBendingInteraction& iaction = found_ia_data[j];
 
-					if (iaction.getCenterAtomIndex() != ctr_atom_idx)
-						continue;
+                    if (iaction.getCenterAtomIndex() != ctr_atom_idx)
+                        continue;
 
-					if (iaction.getOutOfPlaneAtomIndex() != ia_data[i].oopAtomIdx)
-						continue;
+                    if (iaction.getOutOfPlaneAtomIndex() != ia_data[i].oopAtomIdx)
+                        continue;
 
-					if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
-						(iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
-		
-						BOOST_CHECK_MESSAGE(std::abs(iaction.getForceConstant() - ia_data[i].forceConst) < 0.0005, 
-											"Force constant mismatch for out-of-plane bending interaction <#" << term_atom1_idx << "(" << 
-											ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
-											ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
-											ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
-											getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
-											" (" << mol_name << "): " << iaction.getForceConstant() << " != " << ia_data[i].forceConst);
+                    if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
+                        (iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
+        
+                        BOOST_CHECK_MESSAGE(std::abs(iaction.getForceConstant() - ia_data[i].forceConst) < 0.0005, 
+                                            "Force constant mismatch for out-of-plane bending interaction <#" << term_atom1_idx << "(" << 
+                                            ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
+                                            ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
+                                            ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
+                                            getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
+                                            " (" << mol_name << "): " << iaction.getForceConstant() << " != " << ia_data[i].forceConst);
 
-						iaction_found = true;
-						break;
-					}
-				}
-		
-				BOOST_CHECK_MESSAGE(iaction_found, "Out-Of-Plane bending interaction <#" << term_atom1_idx << "(" << 
-									ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
-									ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
-									ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
-									getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
-									" (" << mol_name << ") has not been found");
-			}
-		}
-	}
+                        iaction_found = true;
+                        break;
+                    }
+                }
+        
+                BOOST_CHECK_MESSAGE(iaction_found, "Out-Of-Plane bending interaction <#" << term_atom1_idx << "(" << 
+                                    ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
+                                    ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
+                                    ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
+                                    getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
+                                    " (" << mol_name << ") has not been found");
+            }
+        }
+    }
 }
 
 
 BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingInteractionParameterizerTest)
 {
-	using namespace CDPL;
-	using namespace Testing;
+    using namespace CDPL;
+    using namespace Testing;
 
-	performTesting(MMFF94TestData::DYN_TEST_MOLECULES, MMFF94TestData::DYN_LOG_READER, false);
-	performTesting(MMFF94TestData::STAT_TEST_MOLECULES, MMFF94TestData::STAT_LOG_READER, true);
+    performTesting(MMFF94TestData::DYN_TEST_MOLECULES, MMFF94TestData::DYN_LOG_READER, false);
+    performTesting(MMFF94TestData::STAT_TEST_MOLECULES, MMFF94TestData::STAT_LOG_READER, true);
 }

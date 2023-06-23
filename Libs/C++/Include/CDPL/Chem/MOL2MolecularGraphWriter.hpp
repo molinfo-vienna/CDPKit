@@ -39,50 +39,50 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MOL2DataWriter;
-		class MolecularGraph;
+        class MOL2DataWriter;
+        class MolecularGraph;
 
-		class CDPL_CHEM_API MOL2MolecularGraphWriter : public Base::DataWriter<MolecularGraph>
-		{
+        class CDPL_CHEM_API MOL2MolecularGraphWriter : public Base::DataWriter<MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %MOL2MolecularGraphWriter instance that will write data of molecular graphs to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			MOL2MolecularGraphWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %MOL2MolecularGraphWriter instance that will write data of molecular graphs to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            MOL2MolecularGraphWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~MOL2MolecularGraphWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~MOL2MolecularGraphWriter();
 
-			/**
-			 * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
-			 * \param molgraph The molecular graph to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
+            /**
+             * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
+             * \param molgraph The molecular graph to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			MOL2MolecularGraphWriter(const MOL2MolecularGraphWriter&);
+        private:
+            MOL2MolecularGraphWriter(const MOL2MolecularGraphWriter&);
 
-			MOL2MolecularGraphWriter& operator=(const MOL2MolecularGraphWriter&);
+            MOL2MolecularGraphWriter& operator=(const MOL2MolecularGraphWriter&);
 
-			typedef std::auto_ptr<MOL2DataWriter> MOL2DataWriterPtr;
+            typedef std::auto_ptr<MOL2DataWriter> MOL2DataWriterPtr;
 
-			std::ostream&     output;
-			bool              state;
-			MOL2DataWriterPtr writer;
-		};
-	}
+            std::ostream&     output;
+            bool              state;
+            MOL2DataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_MOL2MOLECULARGRAPHWRITER_HPP

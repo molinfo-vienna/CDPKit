@@ -37,15 +37,15 @@ namespace
 
     boost::python::list getEntries(const CDPL::ForceField::MMFF94HeavyToHydrogenAtomTypeMap& map)
     {
-		using namespace CDPL;
-		using namespace ForceField;
+        using namespace CDPL;
+        using namespace ForceField;
 
-		boost::python::list entries;
+        boost::python::list entries;
 
-		for (MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator it = map.getEntriesBegin(), end = map.getEntriesEnd(); it != end; ++it)
-			entries.append(boost::ref(*it));
+        for (MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator it = map.getEntriesBegin(), end = map.getEntriesEnd(); it != end; ++it)
+            entries.append(boost::ref(*it));
 
-		return entries;
+        return entries;
     }
 }
 
@@ -56,36 +56,36 @@ void CDPLPythonForceField::exportMMFF94HeavyToHydrogenAtomTypeMap()
     using namespace CDPL;
 
     python::scope scope = python::class_<ForceField::MMFF94HeavyToHydrogenAtomTypeMap, 
-										 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer>("MMFF94HeavyToHydrogenAtomTypeMap", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94HeavyToHydrogenAtomTypeMap&>((python::arg("self"), python::arg("map"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94HeavyToHydrogenAtomTypeMap>())	
-		.def("addEntry", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::addEntry, 
-			 (python::arg("self"), python::arg("parent_type"), python::arg("h_atom_type"))) 
-		.def("removeEntry", static_cast<bool (ForceField::MMFF94HeavyToHydrogenAtomTypeMap::*)(const std::string&)>(
-				 &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry), (python::arg("self"), python::arg("parent_type"))) 
-		.def("getEntry", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntry, 
-			 (python::arg("self"), python::arg("parent_type")), python::return_internal_reference<>()) 
-		.def("clear", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::clear, python::arg("self")) 
-		.def("getNumEntries", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getNumEntries, python::arg("self")) 
-		.def("getEntries", &getEntries, python::arg("self")) 
-		.def("load", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::load, (python::arg("self"), python::arg("is"))) 
-		.def("loadDefaults", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults, python::arg("self")) 
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94HeavyToHydrogenAtomTypeMap::operator=), 
-			 (python::arg("self"), python::arg("map")), python::return_self<>())
-		.add_property("numEntries", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getNumEntries)
-		.add_property("entries", python::make_function(&getEntries))
-		.def("set", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::set, python::arg("map"))
-		.staticmethod("set")
-		.def("get", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::get, python::return_value_policy<python::copy_const_reference>())
-		.staticmethod("get");
+                                         ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer>("MMFF94HeavyToHydrogenAtomTypeMap", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94HeavyToHydrogenAtomTypeMap&>((python::arg("self"), python::arg("map"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94HeavyToHydrogenAtomTypeMap>())    
+        .def("addEntry", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::addEntry, 
+             (python::arg("self"), python::arg("parent_type"), python::arg("h_atom_type"))) 
+        .def("removeEntry", static_cast<bool (ForceField::MMFF94HeavyToHydrogenAtomTypeMap::*)(const std::string&)>(
+                 &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry), (python::arg("self"), python::arg("parent_type"))) 
+        .def("getEntry", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntry, 
+             (python::arg("self"), python::arg("parent_type")), python::return_internal_reference<>()) 
+        .def("clear", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::clear, python::arg("self")) 
+        .def("getNumEntries", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getNumEntries, python::arg("self")) 
+        .def("getEntries", &getEntries, python::arg("self")) 
+        .def("load", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::load, (python::arg("self"), python::arg("is"))) 
+        .def("loadDefaults", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults, python::arg("self")) 
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94HeavyToHydrogenAtomTypeMap::operator=), 
+             (python::arg("self"), python::arg("map")), python::return_self<>())
+        .add_property("numEntries", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getNumEntries)
+        .add_property("entries", python::make_function(&getEntries))
+        .def("set", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::set, python::arg("map"))
+        .staticmethod("set")
+        .def("get", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::get, python::return_value_policy<python::copy_const_reference>())
+        .staticmethod("get");
 
     python::class_<ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry>("Entry", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry&>((python::arg("self"), python::arg("entry"))))
-		.def(python::init<const std::string&, const std::string&>(
-				 (python::arg("self"), python::arg("parent_type"), python::arg("h_atom_type"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry>())	
-		.def_readonly("parentAtomType", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry::first)
-		.def_readonly("hydrogenAtomType", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry::second);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry&>((python::arg("self"), python::arg("entry"))))
+        .def(python::init<const std::string&, const std::string&>(
+                 (python::arg("self"), python::arg("parent_type"), python::arg("h_atom_type"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry>())    
+        .def_readonly("parentAtomType", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry::first)
+        .def_readonly("hydrogenAtomType", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry::second);
 }

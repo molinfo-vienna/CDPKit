@@ -42,53 +42,53 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerHCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::H_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::H_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	makeHydrogenComplete(mol);
-
-	Molecule::AtomIterator it = std::find_if(mol.getAtomsBegin(), mol.getAtomsEnd(), IsHydrogen());
-
-	BOOST_CHECK(it != mol.getAtomsEnd());
-
-	it->setProperty(AtomProperty::SYMBOL, std::string("D"));
-
-	it = std::find_if(++it, mol.getAtomsEnd(), IsHydrogen());
-
-	BOOST_CHECK(it != mol.getAtomsEnd());
-
-	it->setProperty(AtomProperty::SYMBOL, std::string("T"));
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::H_COUNT) == 19);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, AtomContainerProperty::H_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+
+    makeHydrogenComplete(mol);
+
+    Molecule::AtomIterator it = std::find_if(mol.getAtomsBegin(), mol.getAtomsEnd(), IsHydrogen());
+
+    BOOST_CHECK(it != mol.getAtomsEnd());
+
+    it->setProperty(AtomProperty::SYMBOL, std::string("D"));
+
+    it = std::find_if(++it, mol.getAtomsEnd(), IsHydrogen());
+
+    BOOST_CHECK(it != mol.getAtomsEnd());
+
+    it->setProperty(AtomProperty::SYMBOL, std::string("T"));
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::H_COUNT) == 19);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::H_COUNT, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, AtomContainerProperty::H_COUNT, *it, AtomProperty::TYPE);
+    TestUtils::checkDependency(mol, AtomContainerProperty::H_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, AtomContainerProperty::H_COUNT, *it, AtomProperty::TYPE);
 }

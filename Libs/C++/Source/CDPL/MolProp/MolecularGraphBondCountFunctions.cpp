@@ -36,36 +36,36 @@ using namespace CDPL;
 
 std::size_t MolProp::getBondCount(const Chem::MolecularGraph& molgraph)
 {
-	return (molgraph.getNumBonds() + getImplicitHydrogenCount(molgraph));
+    return (molgraph.getNumBonds() + getImplicitHydrogenCount(molgraph));
 }
 
 std::size_t MolProp::getBondCount(const Chem::MolecularGraph& molgraph, std::size_t order, bool inc_aro)
 {
-	std::size_t count = getExplicitBondCount(molgraph, order, inc_aro);
+    std::size_t count = getExplicitBondCount(molgraph, order, inc_aro);
 
-	if (order == 1)
-		count += getImplicitHydrogenCount(molgraph);
+    if (order == 1)
+        count += getImplicitHydrogenCount(molgraph);
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getHydrogenBondCount(const Chem::MolecularGraph& molgraph)
 {
-	return (getExplicitHydrogenBondCount(molgraph) + getImplicitHydrogenCount(molgraph));
+    return (getExplicitHydrogenBondCount(molgraph) + getImplicitHydrogenCount(molgraph));
 }
 
 std::size_t MolProp::getChainBondCount(const Chem::MolecularGraph& molgraph)
 {
-	return (getExplicitChainBondCount(molgraph) + getImplicitHydrogenCount(molgraph));
+    return (getExplicitChainBondCount(molgraph) + getImplicitHydrogenCount(molgraph));
 }
 
 std::size_t MolProp::getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool h_rotors, bool ring_bonds, bool amide_bonds)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it)
-		if (isRotatable(*it, molgraph, h_rotors, ring_bonds, amide_bonds))
-			count++;
+    for (Chem::MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it)
+        if (isRotatable(*it, molgraph, h_rotors, ring_bonds, amide_bonds))
+            count++;
 
-	return count;
+    return count;
 }

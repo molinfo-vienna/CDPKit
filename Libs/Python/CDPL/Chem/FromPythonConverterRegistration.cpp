@@ -45,94 +45,94 @@
 namespace
 {
 
-	struct BondOrderChangeFromPySequenceConverter 
-	{
+    struct BondOrderChangeFromPySequenceConverter 
+    {
 
-		BondOrderChangeFromPySequenceConverter() {
-			using namespace boost;
+        BondOrderChangeFromPySequenceConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, 
-												python::type_id<CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange>());
-		}
+            python::converter::registry::insert(&convertible, &construct, 
+                                                python::type_id<CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
+        static void* convertible(PyObject* obj_ptr) {
+            using namespace boost;
 
-			if (!obj_ptr)
-				return 0;
+            if (!obj_ptr)
+                return 0;
 
-			if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
-				return 0;
+            if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
+                return 0;
 
-			python::ssize_t size = PySequence_Size(obj_ptr);
+            python::ssize_t size = PySequence_Size(obj_ptr);
 
-			if (size < 3)
-				return 0;
+            if (size < 3)
+                return 0;
 
-			if (!python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 0)).check())
-				return 0;
+            if (!python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 0)).check())
+                return 0;
 
-			if (!python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 1)).check())
-				return 0;
+            if (!python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 1)).check())
+                return 0;
 
-			if (!python::extract<long>(PySequence_GetItem(obj_ptr, 2)).check())
-				return 0;
+            if (!python::extract<long>(PySequence_GetItem(obj_ptr, 2)).check())
+                return 0;
 
-			return obj_ptr;
-		}
+            return obj_ptr;
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-			using namespace CDPL;
-			using namespace Chem;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
+            using namespace CDPL;
+            using namespace Chem;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<PatternBasedTautomerizationRule::BondOrderChange>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<PatternBasedTautomerizationRule::BondOrderChange>*)data)->storage.bytes;
 
-			new (storage) PatternBasedTautomerizationRule::BondOrderChange();
+            new (storage) PatternBasedTautomerizationRule::BondOrderChange();
 
-			static_cast<PatternBasedTautomerizationRule::BondOrderChange*>(storage)->atom1ID = python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 0))();
-			static_cast<PatternBasedTautomerizationRule::BondOrderChange*>(storage)->atom2ID = python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 1))();
-			static_cast<PatternBasedTautomerizationRule::BondOrderChange*>(storage)->orderChange = python::extract<long>(PySequence_GetItem(obj_ptr, 2))();
+            static_cast<PatternBasedTautomerizationRule::BondOrderChange*>(storage)->atom1ID = python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 0))();
+            static_cast<PatternBasedTautomerizationRule::BondOrderChange*>(storage)->atom2ID = python::extract<std::size_t>(PySequence_GetItem(obj_ptr, 1))();
+            static_cast<PatternBasedTautomerizationRule::BondOrderChange*>(storage)->orderChange = python::extract<long>(PySequence_GetItem(obj_ptr, 2))();
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 }
 
 
 void CDPLPythonChem::registerFromPythonConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchConstraintList::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchConstraintList::SharedPointer&>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MolecularGraph::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MolecularGraph::SharedPointer&>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::FragmentList::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Fragment::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::AtomMapping::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::FragmentList::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Fragment::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::AtomMapping::SharedPointer&>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Molecule::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Reaction::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Molecule::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Reaction::SharedPointer&>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Atom>::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Bond>::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Molecule>::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Reaction>::SharedPointer&>();
-	
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::StringDataBlock::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Atom>::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Bond>::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Molecule>::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Reaction>::SharedPointer&>();
+    
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::StringDataBlock::SharedPointer&>();
 
-	CDPLPythonBase::GenericFromPythonConverter<const Chem::Atom3DCoordinatesFunctor&,
-											   Chem::Atom3DCoordinatesFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Chem::AtomConformer3DCoordinatesFunctor&, 
-											   Chem::Atom3DCoordinatesFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Chem::AtomArray3DCoordinatesFunctor&, 
-											   Chem::Atom3DCoordinatesFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Chem::Atom3DCoordinatesFunctor&,
+                                               Chem::Atom3DCoordinatesFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Chem::AtomConformer3DCoordinatesFunctor&, 
+                                               Chem::Atom3DCoordinatesFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Chem::AtomArray3DCoordinatesFunctor&, 
+                                               Chem::Atom3DCoordinatesFunction>();
 
-	CDPLPythonBase::GenericFromPythonConverter<const Chem::HashCodeCalculator::DefAtomHashSeedFunctor&,
-											   Chem::HashCodeCalculator::AtomHashSeedFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Chem::HashCodeCalculator::DefBondHashSeedFunctor&,
-											   Chem::HashCodeCalculator::BondHashSeedFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Chem::HashCodeCalculator::DefAtomHashSeedFunctor&,
+                                               Chem::HashCodeCalculator::AtomHashSeedFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Chem::HashCodeCalculator::DefBondHashSeedFunctor&,
+                                               Chem::HashCodeCalculator::BondHashSeedFunction>();
 
-	BondOrderChangeFromPySequenceConverter();
+    BondOrderChangeFromPySequenceConverter();
 }

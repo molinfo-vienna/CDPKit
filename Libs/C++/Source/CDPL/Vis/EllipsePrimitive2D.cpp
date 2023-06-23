@@ -34,70 +34,70 @@ using namespace CDPL;
 
 void Vis::EllipsePrimitive2D::render(Renderer2D& renderer) const
 {
-	renderer.setPen(pen);
-	renderer.setBrush(brush);
+    renderer.setPen(pen);
+    renderer.setBrush(brush);
 
-	renderer.drawEllipse(position(0), position(1), width, height);
+    renderer.drawEllipse(position(0), position(1), width, height);
 }
 
 void Vis::EllipsePrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::EllipsePrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 void Vis::EllipsePrimitive2D::setBrush(const Brush& brush)
 {
-	this->brush = brush;
+    this->brush = brush;
 }
 
 const Vis::Brush& Vis::EllipsePrimitive2D::getBrush() const
 {
-	return brush;
+    return brush;
 }
 
 void Vis::EllipsePrimitive2D::setPosition(const Math::Vector2D& pos)
 {
-	position = pos;
+    position = pos;
 }
 
 const Math::Vector2D& Vis::EllipsePrimitive2D::getPosition() const
 {
-	return position;
+    return position;
 }
 
 void Vis::EllipsePrimitive2D::setWidth(double width)
 {
-	this->width = width;
+    this->width = width;
 }
 
 double Vis::EllipsePrimitive2D::getWidth() const
 {
-	return width;
+    return width;
 }
 
 void Vis::EllipsePrimitive2D::setHeight(double height)
 {
-	this->height = height;
+    this->height = height;
 }
 
 double Vis::EllipsePrimitive2D::getHeight() const
 {
-	return height;
+    return height;
 }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::EllipsePrimitive2D::clone() const
 {
-	return SharedPointer(new EllipsePrimitive2D(*this));
+    return SharedPointer(new EllipsePrimitive2D(*this));
 }
 
 void Vis::EllipsePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	bounds.setBounds(position(0) - width * 0.5, position(1) - height * 0.5, 
-					 position(0) + width * 0.5, position(1) + height * 0.5);
-	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    bounds.setBounds(position(0) - width * 0.5, position(1) - height * 0.5, 
+                     position(0) + width * 0.5, position(1) + height * 0.5);
+    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

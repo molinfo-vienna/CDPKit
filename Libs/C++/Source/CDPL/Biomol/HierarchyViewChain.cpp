@@ -46,7 +46,7 @@ const Biomol::HierarchyViewFragment& Biomol::HierarchyViewChain::getFragment(std
     initFragmentList();
 
     if (idx >= fragments.size())
-		throw Base::IndexError("HierarchyViewChain: fragment index out of bounds");
+        throw Base::IndexError("HierarchyViewChain: fragment index out of bounds");
 
     return *fragments[idx];
 }
@@ -84,31 +84,31 @@ void Biomol::HierarchyViewChain::initFragmentList() const
     std::lock_guard<std::mutex> lock(getMutex());
 
     if (!initFragments)
-		return;
+        return;
 
     using namespace Chem;
 
     Util::BitSet vis_atoms(getNumAtoms());
     std::size_t i = 0;
 
-	const std::string& chain_id = getChainID(*this);
-	std::size_t model_no = getModelNumber(*this);
+    const std::string& chain_id = getChainID(*this);
+    std::size_t model_no = getModelNumber(*this);
 
     for (Fragment::ConstAtomIterator it = getAtomsBegin(), atoms_end = getAtomsEnd(); it != atoms_end; ++it, i++)
-		if (!vis_atoms.test(i)) {
-			FragmentPtr frag_ptr(new HierarchyViewFragment());
+        if (!vis_atoms.test(i)) {
+            FragmentPtr frag_ptr(new HierarchyViewFragment());
 
-			setModelNumber(*frag_ptr, model_no);
-			setChainID(*frag_ptr, chain_id);
+            setModelNumber(*frag_ptr, model_no);
+            setChainID(*frag_ptr, chain_id);
 
-			const Atom& atom = *it;
-	    
-			frag_ptr->addAtom(atom);
-	    
-			visitAtom(atom, *frag_ptr, vis_atoms);
-	    
-			fragments.push_back(frag_ptr);
-		}
+            const Atom& atom = *it;
+        
+            frag_ptr->addAtom(atom);
+        
+            visitAtom(atom, *frag_ptr, vis_atoms);
+        
+            fragments.push_back(frag_ptr);
+        }
 
     initFragments = false;
 }
@@ -117,26 +117,26 @@ void Biomol::HierarchyViewChain::visitAtom(const Chem::Atom& atom, HierarchyView
 {
     using namespace Chem;
 
-	vis_atoms.set(getAtomIndex(atom));
+    vis_atoms.set(getAtomIndex(atom));
 
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-		
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		const Bond& bond = *b_it;
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+        
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+        const Bond& bond = *b_it;
 
-		if (!containsBond(bond))
-			continue;
+        if (!containsBond(bond))
+            continue;
 
-		const Atom& nbr_atom = *a_it;
+        const Atom& nbr_atom = *a_it;
 
-		if (!containsAtom(nbr_atom))
-			continue;
+        if (!containsAtom(nbr_atom))
+            continue;
 
-		if (!frag.containsBond(bond))
-			frag.addBond(bond);
+        if (!frag.containsBond(bond))
+            frag.addBond(bond);
 
-		if (!vis_atoms.test(getAtomIndex(nbr_atom))) 
-		    visitAtom(nbr_atom, frag, vis_atoms);
-	}
+        if (!vis_atoms.test(getAtomIndex(nbr_atom))) 
+            visitAtom(nbr_atom, frag, vis_atoms);
+    }
 }

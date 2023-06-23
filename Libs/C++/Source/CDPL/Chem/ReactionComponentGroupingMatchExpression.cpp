@@ -40,95 +40,95 @@ using namespace CDPL;
 
 
 Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping):
-	compGrouping(comp_grouping) {}
+    compGrouping(comp_grouping) {}
 
 Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs):
-	compGrouping(rhs.compGrouping) {}
+    compGrouping(rhs.compGrouping) {}
 
 bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, 
-																const AtomBondMapping& mapping, const Base::Any&) const
+                                                                const AtomBondMapping& mapping, const Base::Any&) const
 {
-	if (!compGrouping || compGrouping->getSize() == 0)
-		return true;
+    if (!compGrouping || compGrouping->getSize() == 0)
+        return true;
 
-	std::lock_guard<std::mutex> lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
 
-	compList.clear();
+    compList.clear();
 
-	Reaction::ConstComponentIterator target_comps_end = target_rxn.getComponentsEnd();
+    Reaction::ConstComponentIterator target_comps_end = target_rxn.getComponentsEnd();
 
-	for (Reaction::ConstComponentIterator comp_it = target_rxn.getComponentsBegin(); comp_it != target_comps_end; ++comp_it) {
-		const FragmentList& target_sub_comps = *getComponents(*comp_it);
+    for (Reaction::ConstComponentIterator comp_it = target_rxn.getComponentsBegin(); comp_it != target_comps_end; ++comp_it) {
+        const FragmentList& target_sub_comps = *getComponents(*comp_it);
 
-		std::transform(target_sub_comps.getElementsBegin(), target_sub_comps.getElementsEnd(), std::back_inserter(compList),
-					  [](const Fragment& frag) { return &frag; });
-	}
+        std::transform(target_sub_comps.getElementsBegin(), target_sub_comps.getElementsEnd(), std::back_inserter(compList),
+                      [](const Fragment& frag) { return &frag; });
+    }
 
-	const AtomMapping& atom_mapping = mapping.getAtomMapping();
+    const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-	FragmentList::ConstElementIterator comp_grps_end = compGrouping->getElementsEnd();
+    FragmentList::ConstElementIterator comp_grps_end = compGrouping->getElementsEnd();
 
-	for (FragmentList::ConstElementIterator cg_it = compGrouping->getElementsBegin(); cg_it != comp_grps_end; ) {
-		const Fragment& comp_grp = *cg_it;
-		const Atom* first_mpd_atom = 0;
+    for (FragmentList::ConstElementIterator cg_it = compGrouping->getElementsBegin(); cg_it != comp_grps_end; ) {
+        const Fragment& comp_grp = *cg_it;
+        const Atom* first_mpd_atom = 0;
 
-		Fragment::ConstAtomIterator atoms_end = comp_grp.getAtomsEnd();
-		Fragment::ConstAtomIterator a_it = comp_grp.getAtomsBegin();
+        Fragment::ConstAtomIterator atoms_end = comp_grp.getAtomsEnd();
+        Fragment::ConstAtomIterator a_it = comp_grp.getAtomsBegin();
 
-		for ( ; a_it != atoms_end && !(first_mpd_atom = atom_mapping[&*a_it]); ++a_it);
+        for ( ; a_it != atoms_end && !(first_mpd_atom = atom_mapping[&*a_it]); ++a_it);
 
-		if (!first_mpd_atom) {
-			++cg_it;
-			continue;
-		}
+        if (!first_mpd_atom) {
+            ++cg_it;
+            continue;
+        }
 
-		ComponentList::iterator target_comp_it = std::find_if(compList.begin(), compList.end(),
-															  std::bind(&Fragment::containsAtom,
-																		std::placeholders::_1, std::ref(*first_mpd_atom)));
+        ComponentList::iterator target_comp_it = std::find_if(compList.begin(), compList.end(),
+                                                              std::bind(&Fragment::containsAtom,
+                                                                        std::placeholders::_1, std::ref(*first_mpd_atom)));
 
-		if (target_comp_it == compList.end())
-			return false;
+        if (target_comp_it == compList.end())
+            return false;
 
-		const Fragment* target_comp = *target_comp_it;
+        const Fragment* target_comp = *target_comp_it;
 
-		for  (++a_it; a_it != atoms_end; ++a_it) {
-			const Atom* mpd_atom = atom_mapping[&*a_it];
+        for  (++a_it; a_it != atoms_end; ++a_it) {
+            const Atom* mpd_atom = atom_mapping[&*a_it];
 
-			if (mpd_atom && !target_comp->containsAtom(*mpd_atom))
-				return false;
-		}
+            if (mpd_atom && !target_comp->containsAtom(*mpd_atom))
+                return false;
+        }
 
-		for (FragmentList::ConstElementIterator cg_it2 = ++cg_it; cg_it2 != comp_grps_end; ++cg_it2) {
-			const Fragment& other_comp_grp = *cg_it2;
+        for (FragmentList::ConstElementIterator cg_it2 = ++cg_it; cg_it2 != comp_grps_end; ++cg_it2) {
+            const Fragment& other_comp_grp = *cg_it2;
 
-			atoms_end = other_comp_grp.getAtomsEnd();
+            atoms_end = other_comp_grp.getAtomsEnd();
 
-			for (a_it = other_comp_grp.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-				const Atom* mpd_atom = atom_mapping[&*a_it];
-				
-				if (mpd_atom && target_comp->containsAtom(*mpd_atom))
-					return false;
-			}
-		}
+            for (a_it = other_comp_grp.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+                const Atom* mpd_atom = atom_mapping[&*a_it];
+                
+                if (mpd_atom && target_comp->containsAtom(*mpd_atom))
+                    return false;
+            }
+        }
 
-		compList.erase(target_comp_it);
-	}
+        compList.erase(target_comp_it);
+    }
 
-	return true;
+    return true;
 }
 
 bool Chem::ReactionComponentGroupingMatchExpression::requiresAtomBondMapping() const
 {
-	return true;
+    return true;
 }
 
 Chem::ReactionComponentGroupingMatchExpression& 
 Chem::ReactionComponentGroupingMatchExpression::operator=(const ReactionComponentGroupingMatchExpression& rhs)
 {
-	if (this == &rhs)
-		return *this;
+    if (this == &rhs)
+        return *this;
 
-	compGrouping = rhs.compGrouping;
+    compGrouping = rhs.compGrouping;
 
-	return *this;
+    return *this;
 }

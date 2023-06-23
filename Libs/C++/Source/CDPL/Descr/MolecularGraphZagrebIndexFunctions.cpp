@@ -38,82 +38,82 @@ using namespace CDPL;
 
 std::size_t Descr::calcZagrebIndex1(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	Util::BitSet h_mask(molgraph.getNumAtoms());
-	buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    using namespace Chem;
+    
+    Util::BitSet h_mask(molgraph.getNumAtoms());
+    buildAtomTypeMask(molgraph, h_mask, AtomType::H);
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	std::size_t index1 = 0;
+    std::size_t index1 = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
 
-		if (h_mask.test(molgraph.getAtomIndex(atom)))
-			continue;
+        if (h_mask.test(molgraph.getAtomIndex(atom)))
+            continue;
 
-		std::size_t hvy_bond_count = 0;
+        std::size_t hvy_bond_count = 0;
 
-		Atom::ConstBondIterator nbr_bonds_end = atom.getBondsEnd();
-		Atom::ConstAtomIterator nbr_a_it = atom.getAtomsBegin();
+        Atom::ConstBondIterator nbr_bonds_end = atom.getBondsEnd();
+        Atom::ConstAtomIterator nbr_a_it = atom.getAtomsBegin();
 
-		for (Atom::ConstBondIterator nbr_b_it = atom.getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
-			const Atom& nbr_atom= *nbr_a_it;
+        for (Atom::ConstBondIterator nbr_b_it = atom.getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
+            const Atom& nbr_atom= *nbr_a_it;
 
-			if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
+                continue;
 
-			if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
-				hvy_bond_count++;
-		}
+            if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
+                hvy_bond_count++;
+        }
 
-		index1 += hvy_bond_count * hvy_bond_count;
-	}
+        index1 += hvy_bond_count * hvy_bond_count;
+    }
 
-	return index1;
+    return index1;
 }
 
 std::size_t Descr::calcZagrebIndex2(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	Util::BitSet h_mask(molgraph.getNumAtoms());
-	buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    using namespace Chem;
+    
+    Util::BitSet h_mask(molgraph.getNumAtoms());
+    buildAtomTypeMask(molgraph, h_mask, AtomType::H);
 
-	std::size_t index2 = 0;
+    std::size_t index2 = 0;
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom* atoms[2] = { &bond.getBegin(), &bond.getEnd() };
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom* atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
-		if (!molgraph.containsAtom(*atoms[0]) || !molgraph.containsAtom(*atoms[1]))
-			continue;
+        if (!molgraph.containsAtom(*atoms[0]) || !molgraph.containsAtom(*atoms[1]))
+            continue;
 
-		if (h_mask.test(molgraph.getAtomIndex(*atoms[0])) || h_mask.test(molgraph.getAtomIndex(*atoms[1])))
-			continue;
+        if (h_mask.test(molgraph.getAtomIndex(*atoms[0])) || h_mask.test(molgraph.getAtomIndex(*atoms[1])))
+            continue;
 
-		std::size_t bond_counts[2] = { 0, 0 };
+        std::size_t bond_counts[2] = { 0, 0 };
 
-		for (std::size_t i = 0; i < 2; i++) {
-			Atom::ConstBondIterator nbr_bonds_end = atoms[i]->getBondsEnd();
-			Atom::ConstAtomIterator nbr_a_it = atoms[i]->getAtomsBegin();
+        for (std::size_t i = 0; i < 2; i++) {
+            Atom::ConstBondIterator nbr_bonds_end = atoms[i]->getBondsEnd();
+            Atom::ConstAtomIterator nbr_a_it = atoms[i]->getAtomsBegin();
 
-			for (Atom::ConstBondIterator nbr_b_it = atoms[i]->getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
-				const Atom& nbr_atom= *nbr_a_it;
+            for (Atom::ConstBondIterator nbr_b_it = atoms[i]->getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
+                const Atom& nbr_atom= *nbr_a_it;
 
-				if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
-					continue;
+                if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
+                    continue;
 
-				if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
-					bond_counts[i]++;
-			}
-		}
+                if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
+                    bond_counts[i]++;
+            }
+        }
 
-		index2 += bond_counts[0] * bond_counts[1];
-	}
+        index2 += bond_counts[0] * bond_counts[1];
+    }
 
-	return index2;
+    return index2;
 }

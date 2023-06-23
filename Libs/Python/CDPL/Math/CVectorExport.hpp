@@ -42,31 +42,31 @@
 namespace CDPLPythonMath
 {
 
-	template <typename VectorType>
-	struct CVectorExport
-	{
+    template <typename VectorType>
+    struct CVectorExport
+    {
 
-		CVectorExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        CVectorExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename VectorType::ValueType ValueType;
-			
-			python::class_<VectorType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<const ValueType&>((python::arg("self"), python::arg("v"))))
-				.def("clear", &VectorType::clear, (python::arg("self"), python::arg("v") = ValueType()))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
-				.def(InitFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
-				.def(ConstVectorVisitor<VectorType>())
-				.def(VectorAssignAndSwapVisitor<VectorType>())
-				.def(VectorNDArrayInitVisitor<VectorType>())
-				.def(VectorNDArrayAssignVisitor<VectorType>())
-				.def(VectorVisitor<VectorType>());
-		}
-	};
+            typedef typename VectorType::ValueType ValueType;
+            
+            python::class_<VectorType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<const ValueType&>((python::arg("self"), python::arg("v"))))
+                .def("clear", &VectorType::clear, (python::arg("self"), python::arg("v") = ValueType()))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
+                .def(InitFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
+                .def(ConstVectorVisitor<VectorType>())
+                .def(VectorAssignAndSwapVisitor<VectorType>())
+                .def(VectorNDArrayInitVisitor<VectorType>())
+                .def(VectorNDArrayAssignVisitor<VectorType>())
+                .def(VectorVisitor<VectorType>());
+        }
+    };
 }
 
 #endif // CDPL_PYTHON_MATH_CVECTOREXPORT_HPP

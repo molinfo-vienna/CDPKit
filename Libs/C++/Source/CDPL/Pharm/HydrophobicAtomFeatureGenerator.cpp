@@ -47,18 +47,18 @@ constexpr unsigned int Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_GEOM;
 
 
 Pharm::HydrophobicAtomFeatureGenerator::HydrophobicAtomFeatureGenerator():
-	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
-	hydThreshold(DEF_HYD_THRESHOLD)
+    featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
+    hydThreshold(DEF_HYD_THRESHOLD)
 {}
 
 Pharm::HydrophobicAtomFeatureGenerator::HydrophobicAtomFeatureGenerator(const HydrophobicAtomFeatureGenerator& gen):
-	PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureTol(gen.featureTol), 
-	featureGeom(gen.featureGeom), hydThreshold(gen.hydThreshold)
+    PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureTol(gen.featureTol), 
+    featureGeom(gen.featureGeom), hydThreshold(gen.hydThreshold)
 {}
 
 Pharm::HydrophobicAtomFeatureGenerator::HydrophobicAtomFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm):
-	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
-	hydThreshold(DEF_HYD_THRESHOLD)
+    featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
+    hydThreshold(DEF_HYD_THRESHOLD)
 {
     generate(molgraph, pharm);
 }
@@ -67,111 +67,111 @@ Pharm::HydrophobicAtomFeatureGenerator::~HydrophobicAtomFeatureGenerator() {}
 
 void Pharm::HydrophobicAtomFeatureGenerator::setFeatureType(unsigned int type)
 {
-	featureType = type;
+    featureType = type;
 }
 
 unsigned int Pharm::HydrophobicAtomFeatureGenerator::getFeatureType() const
 {
-	return featureType;
+    return featureType;
 }
 
 void Pharm::HydrophobicAtomFeatureGenerator::setFeatureTolerance(double tol)
 {
-	featureTol = tol;
+    featureTol = tol;
 }
 
 double Pharm::HydrophobicAtomFeatureGenerator::getFeatureTolerance() const
 {
-	return featureTol;
+    return featureTol;
 }
 
 void Pharm::HydrophobicAtomFeatureGenerator::setFeatureGeometry(unsigned int geom)
 {
-	featureGeom = geom;
+    featureGeom = geom;
 }
 
 unsigned int Pharm::HydrophobicAtomFeatureGenerator::getFeatureGeometry() const
 {
-	return featureGeom;
+    return featureGeom;
 }
 
 void Pharm::HydrophobicAtomFeatureGenerator::setHydrophobicityThreshold(double thresh)
 {
-	hydThreshold = thresh;
+    hydThreshold = thresh;
 }
 
 double Pharm::HydrophobicAtomFeatureGenerator::getHydrophobicityThreshold() const
 {
-	return hydThreshold;
+    return hydThreshold;
 }
 
 Pharm::HydrophobicAtomFeatureGenerator& Pharm::HydrophobicAtomFeatureGenerator::operator=(const HydrophobicAtomFeatureGenerator& gen)
 {
-	if (this == &gen)
-		return *this;
+    if (this == &gen)
+        return *this;
 
-	FeatureGenerator::operator=(gen);
+    FeatureGenerator::operator=(gen);
 
-	featureType = gen.featureType; 
-	featureTol = gen.featureTol; 
-	featureGeom = gen.featureGeom;
-	hydThreshold = gen.hydThreshold;
+    featureType = gen.featureType; 
+    featureTol = gen.featureTol; 
+    featureGeom = gen.featureGeom;
+    hydThreshold = gen.hydThreshold;
 
-	return *this;
+    return *this;
 }
 
 Pharm::FeatureGenerator::SharedPointer Pharm::HydrophobicAtomFeatureGenerator::clone() const
 {
-	return FeatureGenerator::SharedPointer(new HydrophobicAtomFeatureGenerator(*this));
+    return FeatureGenerator::SharedPointer(new HydrophobicAtomFeatureGenerator(*this));
 }
 
 void Pharm::HydrophobicAtomFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		double hyd = MolProp::getHydrophobicity(atom);
-		
-		if (hyd < hydThreshold)
-			continue;
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        double hyd = MolProp::getHydrophobicity(atom);
+        
+        if (hyd < hydThreshold)
+            continue;
 
-		emitFeature(atom, pharm, makeFragment(atom), hyd);
-	}
+        emitFeature(atom, pharm, makeFragment(atom), hyd);
+    }
 }
 
 void Pharm::HydrophobicAtomFeatureGenerator::emitFeature(const Chem::Atom& atom, Pharmacophore& pharm, 
-														 const Chem::Fragment::SharedPointer& substruct, 
-														 double hyd) const
+                                                         const Chem::Fragment::SharedPointer& substruct, 
+                                                         double hyd) const
 {
-	Feature& feature = pharm.addFeature();
+    Feature& feature = pharm.addFeature();
 
-	setType(feature, featureType);
-	setTolerance(feature, featureTol);
-	setGeometry(feature, featureGeom);
-	setSubstructure(feature, substruct);
-	setHydrophobicity(feature, hyd);
+    setType(feature, featureType);
+    setTolerance(feature, featureTol);
+    setGeometry(feature, featureGeom);
+    setSubstructure(feature, substruct);
+    setHydrophobicity(feature, hyd);
 
-	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+    const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (!coords_func)
-		return;
+    if (!coords_func)
+        return;
 
-	try {
-		set3DCoordinates(feature, coords_func(atom));
-	} catch (const Base::ItemNotFound& e) {
-	} catch (...) {
-		throw;
-	}
+    try {
+        set3DCoordinates(feature, coords_func(atom));
+    } catch (const Base::ItemNotFound& e) {
+    } catch (...) {
+        throw;
+    }
 }
 
 Chem::Fragment::SharedPointer Pharm::HydrophobicAtomFeatureGenerator::makeFragment(const Chem::Atom& atom) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	Fragment::SharedPointer frag(new Fragment());
+    Fragment::SharedPointer frag(new Fragment());
 
-	frag->addAtom(atom);
+    frag->addAtom(atom);
 
-	return frag;
+    return frag;
 }

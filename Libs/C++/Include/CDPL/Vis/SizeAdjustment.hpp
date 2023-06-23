@@ -33,32 +33,32 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
-		
-		/**
-		 * \brief Provides constants that are used to specify the size adjustment policy for graphical objects within
-		 *        a bounded rectangular area.
-		 */
-		namespace SizeAdjustment
-		{
+    namespace Vis
+    {
+        
+        /**
+         * \brief Provides constants that are used to specify the size adjustment policy for graphical objects within
+         *        a bounded rectangular area.
+         */
+        namespace SizeAdjustment
+        {
 
-			/**
-			 * \brief Specifies that the size of a graphical object shall be left unchanged.
-			 */
-			const unsigned int NONE        = 0;
+            /**
+             * \brief Specifies that the size of a graphical object shall be left unchanged.
+             */
+            const unsigned int NONE        = 0;
 
-			/**
-			 * \brief Specifies that a graphical object shall be resized to achieve a maximum coverage of the available area.
-			 */
-			const unsigned int BEST_FIT    = 1;
+            /**
+             * \brief Specifies that a graphical object shall be resized to achieve a maximum coverage of the available area.
+             */
+            const unsigned int BEST_FIT    = 1;
 
-			/**
-			 * \brief Specifies that a graphical object shall only be resized if its bounds exceed the available area.
-			 */
-			const unsigned int IF_REQUIRED = 2;
-		}
-	}
+            /**
+             * \brief Specifies that a graphical object shall only be resized if its bounds exceed the available area.
+             */
+            const unsigned int IF_REQUIRED = 2;
+        }
+    }
 }
 
 #endif // CDPL_VIS_SIZEADJUSTMENTS_HPP

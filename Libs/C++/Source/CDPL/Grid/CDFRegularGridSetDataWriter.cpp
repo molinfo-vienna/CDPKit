@@ -38,61 +38,61 @@ using namespace CDPL;
 
 bool Grid::CDFRegularGridSetDataWriter::writeGridSet(std::ostream& os, const DRegularGridSet& grid_set)
 {
-	writeGridSet(grid_set, dataBuffer);
+    writeGridSet(grid_set, dataBuffer);
 
-	return writeRecordData(os);
+    return writeRecordData(os);
 }
 
 void Grid::CDFRegularGridSetDataWriter::writeGridSet(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf)
 {
-	init();
+    init();
 
-	bbuf.setIOPointer(0);
+    bbuf.setIOPointer(0);
 
-	appendGridSet(grid_set, bbuf);
+    appendGridSet(grid_set, bbuf);
 
-	bbuf.resize(bbuf.getIOPointer());
+    bbuf.resize(bbuf.getIOPointer());
 }
 
 void Grid::CDFRegularGridSetDataWriter::appendGridSet(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf)
 {
-	std::size_t init_pos = bbuf.getIOPointer();
+    std::size_t init_pos = bbuf.getIOPointer();
 
-	bbuf.setIOPointer(init_pos + CDF::HEADER_SIZE);
+    bbuf.setIOPointer(init_pos + CDF::HEADER_SIZE);
 
-	outputGridSetData(grid_set, bbuf);
+    outputGridSetData(grid_set, bbuf);
 
-	std::size_t saved_pos = bbuf.getIOPointer();
+    std::size_t saved_pos = bbuf.getIOPointer();
 
-	bbuf.setIOPointer(init_pos);
+    bbuf.setIOPointer(init_pos);
 
-	outputGridSetHeader(grid_set, bbuf, saved_pos - init_pos - CDF::HEADER_SIZE);
+    outputGridSetHeader(grid_set, bbuf, saved_pos - init_pos - CDF::HEADER_SIZE);
 
-	bbuf.setIOPointer(saved_pos);
+    bbuf.setIOPointer(saved_pos);
 
-	for (DRegularGridSet::ConstElementIterator it = grid_set.getElementsBegin(), end = grid_set.getElementsEnd(); it != end; ++it) 
-		appendGrid(*it, bbuf);
+    for (DRegularGridSet::ConstElementIterator it = grid_set.getElementsBegin(), end = grid_set.getElementsEnd(); it != end; ++it) 
+        appendGrid(*it, bbuf);
 }
 
 void Grid::CDFRegularGridSetDataWriter::outputGridSetData(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf) const
 {
-	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid_set.getSize()), false);
+    bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid_set.getSize()), false);
 }
 
 void Grid::CDFRegularGridSetDataWriter::outputGridSetHeader(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf, std::size_t rec_size) const
 {
-	CDF::Header cdf_header;
+    CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(rec_size);
-	cdf_header.recordTypeID = CDF::DREGULAR_GRID_SET_RECORD_ID;
-	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+    cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(rec_size);
+    cdf_header.recordTypeID = CDF::DREGULAR_GRID_SET_RECORD_ID;
+    cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
-	putHeader(cdf_header, bbuf);
+    putHeader(cdf_header, bbuf);
 }
 
 bool Grid::CDFRegularGridSetDataWriter::writeRecordData(std::ostream& os) const
 {
-	dataBuffer.writeBuffer(os);
+    dataBuffer.writeBuffer(os);
 
-	return os.good();
+    return os.good();
 }

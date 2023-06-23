@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct LayoutStyle {};
+    struct LayoutStyle {};
 }
 
 
 void CDPLPythonVis::exportLayoutStyles()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<LayoutStyle, boost::noncopyable>("LayoutStyle", python::no_init)
-		.def_readonly("LINEAR", &Vis::LayoutStyle::LINEAR)
-		.def_readonly("NONE", &Vis::LayoutStyle::NONE)
-		.def_readonly("PACKED", &Vis::LayoutStyle::PACKED);
+    python::class_<LayoutStyle, boost::noncopyable>("LayoutStyle", python::no_init)
+        .def_readonly("LINEAR", &Vis::LayoutStyle::LINEAR)
+        .def_readonly("NONE", &Vis::LayoutStyle::NONE)
+        .def_readonly("PACKED", &Vis::LayoutStyle::PACKED);
 }

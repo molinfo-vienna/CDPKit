@@ -33,19 +33,19 @@ using namespace CDPL;
 
 
 Chem::BondDirectionMatchExpression::BondDirectionMatchExpression(unsigned int dir_flags, bool not_match): 
-	dirFlags(dir_flags & (BondDirection::UP | BondDirection::DOWN | BondDirection::UNSPECIFIED)), notMatch(not_match) {}
+    dirFlags(dir_flags & (BondDirection::UP | BondDirection::DOWN | BondDirection::UNSPECIFIED)), notMatch(not_match) {}
 
 bool Chem::BondDirectionMatchExpression::operator()(const Bond&, const MolecularGraph&, const Bond&, const MolecularGraph&,
-													const AtomBondMapping&, const Base::Any& target_bond_dir) const
+                                                    const AtomBondMapping&, const Base::Any& target_bond_dir) const
 {
-	if (dirFlags == 0)
-		return true;
+    if (dirFlags == 0)
+        return true;
 
-	if (target_bond_dir.isEmpty())
-		return true;
+    if (target_bond_dir.isEmpty())
+        return true;
 
-	if (notMatch)
-		return ((dirFlags & target_bond_dir.getData<unsigned int>()) == 0);
+    if (notMatch)
+        return ((dirFlags & target_bond_dir.getData<unsigned int>()) == 0);
 
-	return ((dirFlags & target_bond_dir.getData<unsigned int>()) != 0);
+    return ((dirFlags & target_bond_dir.getData<unsigned int>()) != 0);
 }

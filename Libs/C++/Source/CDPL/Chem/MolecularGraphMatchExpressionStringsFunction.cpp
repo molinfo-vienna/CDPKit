@@ -36,33 +36,33 @@ using namespace CDPL;
 
 void Chem::buildMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite)
 {
-	std::string expr_str;
+    std::string expr_str;
 
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasMatchExpressionString(atom))
-			continue;
+        if (!overwrite && hasMatchExpressionString(atom))
+            continue;
 
-		buildMatchExpressionString(atom, molgraph, expr_str);
-		setMatchExpressionString(atom, expr_str);
+        buildMatchExpressionString(atom, molgraph, expr_str);
+        setMatchExpressionString(atom, expr_str);
 
-		expr_str.clear();
-	}
+        expr_str.clear();
+    }
 
-	MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
-		Bond& bond = *b_it;
+    for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
+        Bond& bond = *b_it;
  
-		if (!overwrite && hasMatchExpressionString(bond))
-			continue;
+        if (!overwrite && hasMatchExpressionString(bond))
+            continue;
 
-		buildMatchExpressionString(bond, molgraph, expr_str);
-		setMatchExpressionString(bond, expr_str);
+        buildMatchExpressionString(bond, molgraph, expr_str);
+        setMatchExpressionString(bond, expr_str);
 
-		expr_str.clear();
-	}
+        expr_str.clear();
+    }
 }

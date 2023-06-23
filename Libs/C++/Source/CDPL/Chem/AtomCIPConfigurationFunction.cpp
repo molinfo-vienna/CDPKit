@@ -43,40 +43,40 @@ using namespace CDPL;
 
 unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph)
 {
-	return calcCIPConfiguration(atom, molgraph, &getCIPPriority);
+    return calcCIPConfiguration(atom, molgraph, &getCIPPriority);
 }
 
 unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func)
 {
-	using namespace std::placeholders;
-	
+    using namespace std::placeholders;
+    
     std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
-		return AtomConfiguration::NONE;
+        return AtomConfiguration::NONE;
   
     if (getHybridizationState(atom) != HybridizationState::SP3)
-		return AtomConfiguration::NONE;
+        return AtomConfiguration::NONE;
 
     if (getAromaticityFlag(atom))
-		return AtomConfiguration::NONE;
+        return AtomConfiguration::NONE;
 
-	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
-		return AtomConfiguration::NONE;
+    if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
+        return AtomConfiguration::NONE;
 
-	if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
-	    return AtomConfiguration::NONE;
+    if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+        return AtomConfiguration::NONE;
 
     const Atom* nbr_atoms[4];
-	num_bonds = getConnectedAtoms(atom, molgraph, &nbr_atoms[0]);
+    num_bonds = getConnectedAtoms(atom, molgraph, &nbr_atoms[0]);
 
-	if (num_bonds < 3)
-		return AtomConfiguration::NONE;
+    if (num_bonds < 3)
+        return AtomConfiguration::NONE;
 
     std::sort(nbr_atoms, nbr_atoms + num_bonds,
-			  std::bind(std::greater<std::size_t>(),
-						std::bind(cip_pri_func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
-						std::bind(cip_pri_func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
+              std::bind(std::greater<std::size_t>(),
+                        std::bind(cip_pri_func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
+                        std::bind(cip_pri_func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
 
     std::size_t cip_pri1 = getCIPPriority(*nbr_atoms[0]);
     std::size_t cip_pri2 = getCIPPriority(*nbr_atoms[1]);
@@ -84,28 +84,28 @@ unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& 
     std::size_t cip_pri4 = (num_bonds > 3 ? getCIPPriority(*nbr_atoms[3]) : 0);
 
     if (cip_pri1 == cip_pri2 || cip_pri2 == cip_pri3 || (num_bonds == 4 && cip_pri3 == cip_pri4))
-		return AtomConfiguration::NONE;
+        return AtomConfiguration::NONE;
 
     const StereoDescriptor stereo_desc = getStereoDescriptor(atom);
     unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
-								stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
+                                stereo_desc.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
 
     if (perm_parity != 1 && perm_parity != 2)
-		return AtomConfiguration::UNDEF;
+        return AtomConfiguration::UNDEF;
 
     switch (stereo_desc.getConfiguration()) {
 
-		case AtomConfiguration::S:
-			return (perm_parity == 2 ? AtomConfiguration::S : AtomConfiguration::R);
-	
-		case AtomConfiguration::R:
-			return (perm_parity == 2 ? AtomConfiguration::R : AtomConfiguration::S);
+        case AtomConfiguration::S:
+            return (perm_parity == 2 ? AtomConfiguration::S : AtomConfiguration::R);
+    
+        case AtomConfiguration::R:
+            return (perm_parity == 2 ? AtomConfiguration::R : AtomConfiguration::S);
 
-		case AtomConfiguration::EITHER:
-			return AtomConfiguration::EITHER;
+        case AtomConfiguration::EITHER:
+            return AtomConfiguration::EITHER;
 
-		default:
-			return AtomConfiguration::UNDEF;
+        default:
+            return AtomConfiguration::UNDEF;
     }
 }
-	
+    

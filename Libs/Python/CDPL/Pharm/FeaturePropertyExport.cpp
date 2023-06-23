@@ -33,25 +33,25 @@
 namespace 
 {
 
-	struct FeatureProperty {};
+    struct FeatureProperty {};
 }
 
 
 void CDPLPythonPharm::exportFeatureProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<FeatureProperty, boost::noncopyable>("FeatureProperty", python::no_init)
-	    .def_readonly("TYPE", &Pharm::FeatureProperty::TYPE)
-	    .def_readonly("GEOMETRY", &Pharm::FeatureProperty::GEOMETRY)
-	    .def_readonly("LENGTH", &Pharm::FeatureProperty::LENGTH)
-	    .def_readonly("ORIENTATION", &Pharm::FeatureProperty::ORIENTATION)
-	    .def_readonly("TOLERANCE", &Pharm::FeatureProperty::TOLERANCE)
-	    .def_readonly("WEIGHT", &Pharm::FeatureProperty::WEIGHT)
-	    .def_readonly("SUBSTRUCTURE", &Pharm::FeatureProperty::SUBSTRUCTURE)
-	    .def_readonly("DISABLED_FLAG", &Pharm::FeatureProperty::DISABLED_FLAG)
-	    .def_readonly("OPTIONAL_FLAG", &Pharm::FeatureProperty::OPTIONAL_FLAG)
-	    .def_readonly("HYDROPHOBICITY", &Pharm::FeatureProperty::HYDROPHOBICITY)
-		;
+    python::class_<FeatureProperty, boost::noncopyable>("FeatureProperty", python::no_init)
+        .def_readonly("TYPE", &Pharm::FeatureProperty::TYPE)
+        .def_readonly("GEOMETRY", &Pharm::FeatureProperty::GEOMETRY)
+        .def_readonly("LENGTH", &Pharm::FeatureProperty::LENGTH)
+        .def_readonly("ORIENTATION", &Pharm::FeatureProperty::ORIENTATION)
+        .def_readonly("TOLERANCE", &Pharm::FeatureProperty::TOLERANCE)
+        .def_readonly("WEIGHT", &Pharm::FeatureProperty::WEIGHT)
+        .def_readonly("SUBSTRUCTURE", &Pharm::FeatureProperty::SUBSTRUCTURE)
+        .def_readonly("DISABLED_FLAG", &Pharm::FeatureProperty::DISABLED_FLAG)
+        .def_readonly("OPTIONAL_FLAG", &Pharm::FeatureProperty::OPTIONAL_FLAG)
+        .def_readonly("HYDROPHOBICITY", &Pharm::FeatureProperty::HYDROPHOBICITY)
+        ;
 }

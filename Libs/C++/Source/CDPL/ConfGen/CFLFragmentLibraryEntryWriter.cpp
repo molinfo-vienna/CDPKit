@@ -40,36 +40,36 @@ using namespace CDPL;
 
 bool ConfGen::CFLFragmentLibraryEntryWriter::write(std::ostream& os, const FragmentLibraryEntry& entry)
 {
-	entryBuffer.setIOPointer(CDF::HEADER_SIZE);
-	entryBuffer.putInt(entry.getHashCode(), false);
-	entryBuffer.putInt(boost::numeric_cast<CDF::SizeType>(entry.getNumConformers()), false);
-	
-	putString(entry.getSMILES(), entryBuffer);
+    entryBuffer.setIOPointer(CDF::HEADER_SIZE);
+    entryBuffer.putInt(entry.getHashCode(), false);
+    entryBuffer.putInt(boost::numeric_cast<CDF::SizeType>(entry.getNumConformers()), false);
+    
+    putString(entry.getSMILES(), entryBuffer);
 
-	for (FragmentLibraryEntry::ConstConformerIterator it = entry.getConformersBegin(), end = entry.getConformersEnd(); it != end; ++it) {
-		const ConformerData& conf_data = *it;
-		std::size_t num_coords = conf_data.getSize();
+    for (FragmentLibraryEntry::ConstConformerIterator it = entry.getConformersBegin(), end = entry.getConformersEnd(); it != end; ++it) {
+        const ConformerData& conf_data = *it;
+        std::size_t num_coords = conf_data.getSize();
 
-		entryBuffer.putInt(boost::numeric_cast<CDF::SizeType>(num_coords), false);
-		entryBuffer.putFloat(float(conf_data.getEnergy()));
+        entryBuffer.putInt(boost::numeric_cast<CDF::SizeType>(num_coords), false);
+        entryBuffer.putFloat(float(conf_data.getEnergy()));
 
-		for (std::size_t i = 0; i < num_coords; i++)
-			for (std::size_t j = 0; j < 3; j++)
-				entryBuffer.putFloat(float(conf_data[i][j]));
-	}
+        for (std::size_t i = 0; i < num_coords; i++)
+            for (std::size_t j = 0; j < 3; j++)
+                entryBuffer.putFloat(float(conf_data[i][j]));
+    }
 
-	entryBuffer.resize(entryBuffer.getIOPointer());
-	entryBuffer.setIOPointer(0);
+    entryBuffer.resize(entryBuffer.getIOPointer());
+    entryBuffer.setIOPointer(0);
 
-	CDF::Header cdf_header;
+    CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(entryBuffer.getSize() - CDF::HEADER_SIZE);
-	cdf_header.recordTypeID = CDF::FRAGLIB_DATA_RECORD_ID;
-	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+    cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(entryBuffer.getSize() - CDF::HEADER_SIZE);
+    cdf_header.recordTypeID = CDF::FRAGLIB_DATA_RECORD_ID;
+    cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
-	putHeader(cdf_header, entryBuffer);
+    putHeader(cdf_header, entryBuffer);
 
-	entryBuffer.writeBuffer(os);
+    entryBuffer.writeBuffer(os);
 
-	return os.good();
+    return os.good();
 }

@@ -38,36 +38,36 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
-		class Fragment;
-		class Atom;
-		class Bond;
+        class MolecularGraph;
+        class Fragment;
+        class Atom;
+        class Bond;
 
-		/**
-		 * \brief TautomerScore.
-		 */
-		class CDPL_CHEM_API TautomerScore
-		{
+        /**
+         * \brief TautomerScore.
+         */
+        class CDPL_CHEM_API TautomerScore
+        {
 
-		  public:
-			TautomerScore();
+          public:
+            TautomerScore();
 
-			TautomerScore(const TautomerScore& ts);
+            TautomerScore(const TautomerScore& ts);
 
-			double operator()(const MolecularGraph& molgraph);
+            double operator()(const MolecularGraph& molgraph);
 
-			TautomerScore& operator=(const TautomerScore& ts);
+            TautomerScore& operator=(const TautomerScore& ts);
 
-		  private:
-			double getAtomTypeScoreIncrement(unsigned int type) const;
-			double getExocyclicBondIncrement(const Bond& bond) const;
+          private:
+            double getAtomTypeScoreIncrement(unsigned int type) const;
+            double getExocyclicBondIncrement(const Bond& bond) const;
 
-			std::size_t getUnsaturatedNeighborCount(const Atom& atom, const Bond& bond, const MolecularGraph& molgraph) const;
+            std::size_t getUnsaturatedNeighborCount(const Atom& atom, const Bond& bond, const MolecularGraph& molgraph) const;
 
-			bool isLactim(const Fragment& ring, const MolecularGraph& molgraph) const;
+            bool isLactim(const Fragment& ring, const MolecularGraph& molgraph) const;
 
-			bool hasExocyclicOH(const Atom& atom, const MolecularGraph& molgraph) const;
-		};
+            bool hasExocyclicOH(const Atom& atom, const MolecularGraph& molgraph) const;
+        };
     }
 }
 

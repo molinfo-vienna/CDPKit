@@ -35,41 +35,41 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides keys for built-in Chem::Reaction properties.
-		 */
-		namespace ReactionProperty
-		{
+        /**
+         * \brief Provides keys for built-in Chem::Reaction properties.
+         */
+        namespace ReactionProperty
+        {
 
-			extern CDPL_CHEM_API const Base::LookupKey NAME;
+            extern CDPL_CHEM_API const Base::LookupKey NAME;
 
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
-			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
-			extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
+            extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
+            extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING;
 
-			extern CDPL_CHEM_API const Base::LookupKey REACTION_DATA;
-		
-			extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_MOLECULE_RECORD;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_INTERNAL_REGISTRY_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_EXTERNAL_REGISTRY_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_RXN_FILE_VERSION;
-		}
-	}
+            extern CDPL_CHEM_API const Base::LookupKey REACTION_DATA;
+        
+            extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_MOLECULE_RECORD;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_INTERNAL_REGISTRY_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_EXTERNAL_REGISTRY_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_RXN_FILE_VERSION;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_REACTIONPROPERTY_HPP

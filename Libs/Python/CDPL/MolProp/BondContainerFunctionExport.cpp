@@ -34,27 +34,27 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitBondCount, CDPL::Chem::BondContainer&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitHydrogenBondCount, CDPL::Chem::BondContainer&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitChainBondCount, CDPL::Chem::BondContainer&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getRingBondCount, CDPL::Chem::BondContainer&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticBondCount, CDPL::Chem::BondContainer&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyBondCount, CDPL::Chem::BondContainer&);
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitBondCount, CDPL::Chem::BondContainer&);
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitHydrogenBondCount, CDPL::Chem::BondContainer&);
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitChainBondCount, CDPL::Chem::BondContainer&);
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getRingBondCount, CDPL::Chem::BondContainer&);
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticBondCount, CDPL::Chem::BondContainer&);
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyBondCount, CDPL::Chem::BondContainer&);
 
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitBondCount, CDPL::Chem::BondContainer&, std::size_t, bool);
+    MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitBondCount, CDPL::Chem::BondContainer&, std::size_t, bool);
 }
 
 
 void CDPLPythonMolProp::exportBondContainerFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("getExplicitBondCount", &getExplicitBondCountWrapper1, python::arg("cntnr"));
-	python::def("getExplicitBondCount", &getExplicitBondCountWrapper3, (python::arg("cntnr"), python::arg("order"), python::arg("inc_aro") = true));
-	python::def("getExplicitHydrogenBondCount", &getExplicitHydrogenBondCountWrapper1, python::arg("cntnr"));
-	python::def("getExplicitChainBondCount", &getExplicitChainBondCountWrapper1, python::arg("cntnr"));
-	python::def("getRingBondCount", &getRingBondCountWrapper1, python::arg("cntnr"));
-	python::def("getAromaticBondCount", &getAromaticBondCountWrapper1, python::arg("cntnr"));
-	python::def("getHeavyBondCount", &getHeavyBondCountWrapper1, python::arg("cntnr"));
+    python::def("getExplicitBondCount", &getExplicitBondCountWrapper1, python::arg("cntnr"));
+    python::def("getExplicitBondCount", &getExplicitBondCountWrapper3, (python::arg("cntnr"), python::arg("order"), python::arg("inc_aro") = true));
+    python::def("getExplicitHydrogenBondCount", &getExplicitHydrogenBondCountWrapper1, python::arg("cntnr"));
+    python::def("getExplicitChainBondCount", &getExplicitChainBondCountWrapper1, python::arg("cntnr"));
+    python::def("getRingBondCount", &getRingBondCountWrapper1, python::arg("cntnr"));
+    python::def("getAromaticBondCount", &getAromaticBondCountWrapper1, python::arg("cntnr"));
+    python::def("getHeavyBondCount", &getHeavyBondCountWrapper1, python::arg("cntnr"));
 }

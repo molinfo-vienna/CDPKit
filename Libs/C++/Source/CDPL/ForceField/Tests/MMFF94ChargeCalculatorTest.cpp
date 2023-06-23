@@ -36,41 +36,41 @@
 
 BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 {
-	using namespace CDPL;
-	using namespace Testing;
+    using namespace CDPL;
+    using namespace Testing;
 
-	OptimolLogReader::AtomChargeArray part_charges;
-	OptimolLogReader::AtomChargeArray form_charges;
+    OptimolLogReader::AtomChargeArray part_charges;
+    OptimolLogReader::AtomChargeArray form_charges;
 
-	ForceField::MMFF94ChargeCalculator charge_calc;
-	Util::DArray calc_charges;
+    ForceField::MMFF94ChargeCalculator charge_calc;
+    Util::DArray calc_charges;
 
-	for (std::size_t mol_idx = 0; mol_idx <	MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-		const Chem::Molecule& mol =	*MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-		const std::string& mol_name = getName(mol);
+    for (std::size_t mol_idx = 0; mol_idx <    MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
+        const Chem::Molecule& mol =    *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+        const std::string& mol_name = getName(mol);
 
-		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getPartialAtomCharges(mol_name, part_charges));
-		BOOST_CHECK_EQUAL(part_charges.size(), mol.getNumAtoms());
+        BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getPartialAtomCharges(mol_name, part_charges));
+        BOOST_CHECK_EQUAL(part_charges.size(), mol.getNumAtoms());
 
-		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getFormalAtomCharges(mol_name, form_charges));
-		BOOST_CHECK_EQUAL(form_charges.size(), mol.getNumAtoms());
+        BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getFormalAtomCharges(mol_name, form_charges));
+        BOOST_CHECK_EQUAL(form_charges.size(), mol.getNumAtoms());
 
-		charge_calc.calculate(mol, calc_charges, true);
+        charge_calc.calculate(mol, calc_charges, true);
 
-		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
-			double correct_charge = form_charges[i];
-			double calc_charge = charge_calc.getFormalCharges()[i];
+        for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
+            double correct_charge = form_charges[i];
+            double calc_charge = charge_calc.getFormalCharges()[i];
 
-			BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0005, "Formal charge mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) <<
-								") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
-		}
-		
-		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
-			double correct_charge = part_charges[i];
-			double calc_charge = calc_charges[i];
-		
-			BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0006, "Partial charge mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) <<
-								") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
-		}
-	}
+            BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0005, "Formal charge mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) <<
+                                ") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
+        }
+        
+        for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
+            double correct_charge = part_charges[i];
+            double calc_charge = calc_charges[i];
+        
+            BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0006, "Partial charge mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) <<
+                                ") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
+        }
+    }
 }

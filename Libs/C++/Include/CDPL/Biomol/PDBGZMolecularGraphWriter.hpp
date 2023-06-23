@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		typedef Util::CompressedDataWriter<PDBMolecularGraphWriter, Util::GZipOStream> PDBGZMolecularGraphWriter;
-	}
+        typedef Util::CompressedDataWriter<PDBMolecularGraphWriter, Util::GZipOStream> PDBGZMolecularGraphWriter;
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBGZMOLECULARGRAPHWRITER_HPP

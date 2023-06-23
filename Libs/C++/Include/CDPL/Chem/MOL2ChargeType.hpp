@@ -36,26 +36,26 @@ namespace CDPL
     namespace Chem 
     {
 
-	/**
-	 * \brief Provides constants for the specification of the atom charge type in <em>Tripos MOL2</em> files.
-	 */
-	namespace MOL2ChargeType 
-	{
+    /**
+     * \brief Provides constants for the specification of the atom charge type in <em>Tripos MOL2</em> files.
+     */
+    namespace MOL2ChargeType 
+    {
 
-	    const unsigned int UNKNOWN     = 0;
-	    const unsigned int NO_CHARGES  = 1;
-	    const unsigned int DEL_RE      = 2;
-	    const unsigned int GASTEIGER   = 3;
-	    const unsigned int GAST_HUCK   = 4;
-	    const unsigned int HUCKEL      = 5;
-	    const unsigned int PULLMAN     = 6;
-	    const unsigned int GAUSS80     = 7;
-	    const unsigned int AMPAC       = 8;
-	    const unsigned int MULLIKEN    = 9;
-	    const unsigned int DICT        = 10;
-	    const unsigned int MMFF94      = 11;
-	    const unsigned int USER        = 12;
-	}
+        const unsigned int UNKNOWN     = 0;
+        const unsigned int NO_CHARGES  = 1;
+        const unsigned int DEL_RE      = 2;
+        const unsigned int GASTEIGER   = 3;
+        const unsigned int GAST_HUCK   = 4;
+        const unsigned int HUCKEL      = 5;
+        const unsigned int PULLMAN     = 6;
+        const unsigned int GAUSS80     = 7;
+        const unsigned int AMPAC       = 8;
+        const unsigned int MULLIKEN    = 9;
+        const unsigned int DICT        = 10;
+        const unsigned int MMFF94      = 11;
+        const unsigned int USER        = 12;
+    }
     }
 }
 

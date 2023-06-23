@@ -32,31 +32,31 @@
 namespace ChOX
 {
 
-	class RecentFilesList : public QObject
-	{
+    class RecentFilesList : public QObject
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		static RecentFilesList& instance();
+    public:
+        static RecentFilesList& instance();
 
-		void addEntry(const QString&);
+        void addEntry(const QString&);
 
-		const QStringList& getEntries() const;
+        const QStringList& getEntries() const;
 
-	public slots:
-		void clear();
+    public slots:
+        void clear();
 
-	signals:
-		void entriesChanged();
+    signals:
+        void entriesChanged();
 
-	private:
-		RecentFilesList();
+    private:
+        RecentFilesList();
 
-		~RecentFilesList();
+        ~RecentFilesList();
 
-		QStringList fileNames;
-	};
+        QStringList fileNames;
+    };
 }
 
 #endif // CHOX_RECENTFILESLIST_HPP

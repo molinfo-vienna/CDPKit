@@ -37,33 +37,33 @@ using namespace CDPL;
 
 void Pharm::buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append)
 {
-	if (!append)
-		hist.clear();
+    if (!append)
+        hist.clear();
 
-	FeatureContainer::ConstFeatureIterator ftrs_end = cntnr.getFeaturesEnd();
+    FeatureContainer::ConstFeatureIterator ftrs_end = cntnr.getFeaturesEnd();
 
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(); it != ftrs_end; ++it) {
-		const Feature& ftr = *it;
-		unsigned int feature_type = getType(ftr);
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(); it != ftrs_end; ++it) {
+        const Feature& ftr = *it;
+        unsigned int feature_type = getType(ftr);
 
-		hist[feature_type]++;
-	}
+        hist[feature_type]++;
+    }
 }
 
 void Pharm::buildFeatureTypeHistogramString(const FeatureContainer& cntnr, std::string& histo_str)
 {
-	FeatureTypeHistogram histo;
+    FeatureTypeHistogram histo;
     
     buildFeatureTypeHistogram(cntnr, histo);
-	histo_str.clear();
-	
+    histo_str.clear();
+    
     for (const auto& entry : histo) {
         if (!histo_str.empty())
             histo_str += ", ";
-	
+    
         histo_str += getFeatureTypeString(entry.first);
-		histo_str += '(';
+        histo_str += '(';
         histo_str += std::to_string(entry.second);
-		histo_str += ')';
-	}
+        histo_str += ')';
+    }
 }

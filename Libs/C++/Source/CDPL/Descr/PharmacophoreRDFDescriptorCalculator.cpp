@@ -40,31 +40,31 @@ using namespace CDPL;
 namespace
 {
 
-	struct FeaturePairWeightFunc
-	{
+    struct FeaturePairWeightFunc
+    {
 
-		double operator()(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2, unsigned int slot_ftr_type) const {
-			unsigned int ftr_type1 = getType(ftr1);
-			unsigned int ftr_type2 = getType(ftr2);
+        double operator()(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2, unsigned int slot_ftr_type) const {
+            unsigned int ftr_type1 = getType(ftr1);
+            unsigned int ftr_type2 = getType(ftr2);
 
-			if (ftr_type1 == slot_ftr_type && ftr_type2 == slot_ftr_type)
-				return 2;
+            if (ftr_type1 == slot_ftr_type && ftr_type2 == slot_ftr_type)
+                return 2;
 
-			if (ftr_type1 == slot_ftr_type || ftr_type2 == slot_ftr_type)
-				return 1;
+            if (ftr_type1 == slot_ftr_type || ftr_type2 == slot_ftr_type)
+                return 1;
 
-			return 0;
-		}
-	};
+            return 0;
+        }
+    };
 
-	unsigned int FEATURE_TYPES[] = {
-	    Pharm::FeatureType::HYDROPHOBIC,
-		Pharm::FeatureType::AROMATIC,
-		Pharm::FeatureType::NEGATIVE_IONIZABLE,
-		Pharm::FeatureType::POSITIVE_IONIZABLE,
-		Pharm::FeatureType::H_BOND_DONOR,
-		Pharm::FeatureType::H_BOND_ACCEPTOR
-	};
+    unsigned int FEATURE_TYPES[] = {
+        Pharm::FeatureType::HYDROPHOBIC,
+        Pharm::FeatureType::AROMATIC,
+        Pharm::FeatureType::NEGATIVE_IONIZABLE,
+        Pharm::FeatureType::POSITIVE_IONIZABLE,
+        Pharm::FeatureType::H_BOND_DONOR,
+        Pharm::FeatureType::H_BOND_ACCEPTOR
+    };
 }
 
 
@@ -83,7 +83,7 @@ void CDPL::Descr::PharmacophoreRDFDescriptorCalculator::setSmoothingFactor(doubl
 {
     rdfCalculator.setSmoothingFactor(factor);
 }
-		
+        
 double CDPL::Descr::PharmacophoreRDFDescriptorCalculator::getSmoothingFactor() const
 {
     return rdfCalculator.getSmoothingFactor();
@@ -141,31 +141,31 @@ void CDPL::Descr::PharmacophoreRDFDescriptorCalculator::setFeaturePairWeightFunc
 
 void CDPL::Descr::PharmacophoreRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding(bool enable)
 {
-	rdfCalculator.enableDistanceToIntervalCenterRounding(enable);
+    rdfCalculator.enableDistanceToIntervalCenterRounding(enable);
 }
 
 bool CDPL::Descr::PharmacophoreRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled() const
 {
-	return rdfCalculator.distanceToIntervalsCenterRoundingEnabled();
+    return rdfCalculator.distanceToIntervalsCenterRoundingEnabled();
 }
 
 void CDPL::Descr::PharmacophoreRDFDescriptorCalculator::calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr)
 {
-	using namespace std::placeholders;
-	
-	std::size_t sub_descr_size = rdfCalculator.getNumSteps() + 1;
-	std::size_t num_ftr_types = sizeof(FEATURE_TYPES) / sizeof(unsigned int);
+    using namespace std::placeholders;
+    
+    std::size_t sub_descr_size = rdfCalculator.getNumSteps() + 1;
+    std::size_t num_ftr_types = sizeof(FEATURE_TYPES) / sizeof(unsigned int);
 
-	descr.resize(sub_descr_size * num_ftr_types, false);
+    descr.resize(sub_descr_size * num_ftr_types, false);
 
-	for (std::size_t i = 0; i < num_ftr_types; i++) {
-		if (weightFunc)
-			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
-		else
-			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
+    for (std::size_t i = 0; i < num_ftr_types; i++) {
+        if (weightFunc)
+            rdfCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
+        else
+            rdfCalculator.setEntityPairWeightFunction(std::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
 
-		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
+        Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 
-		rdfCalculator.calculate(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), sub_descr);
-	}
+        rdfCalculator.calculate(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), sub_descr);
+    }
 }

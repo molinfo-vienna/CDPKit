@@ -38,64 +38,64 @@ using namespace ChOX;
 
 
 ColorEditWidget::ColorEditWidget(QWidget* parent, CDPL::Vis::Color& color, bool v_layout):
-	QWidget(parent), color(color)
+    QWidget(parent), color(color)
 {
-	init(v_layout);
+    init(v_layout);
 }
 
 void ColorEditWidget::updateGUI()
 {
-	QPalette palette = colorLabel->palette();
-	palette.setColor(colorLabel->backgroundRole(), CDPL::Vis::QtObjectFactory::createQColor(color));
+    QPalette palette = colorLabel->palette();
+    palette.setColor(colorLabel->backgroundRole(), CDPL::Vis::QtObjectFactory::createQColor(color));
 
-	colorLabel->setPalette(palette);
+    colorLabel->setPalette(palette);
 }
 
 void ColorEditWidget::editColor()
 {
-	bool ok;
-	QColor new_col;
+    bool ok;
+    QColor new_col;
 
-	new_col.setRgba(QColorDialog::getRgba(CDPL::Vis::QtObjectFactory::createQColor(color).rgba(), &ok, this));
+    new_col.setRgba(QColorDialog::getRgba(CDPL::Vis::QtObjectFactory::createQColor(color).rgba(), &ok, this));
 
-	if (!ok)
-		return;
+    if (!ok)
+        return;
 
-	color.setRed(new_col.redF());
-	color.setGreen(new_col.greenF());
-	color.setBlue(new_col.blueF());
-	color.setAlpha(new_col.alphaF());
+    color.setRed(new_col.redF());
+    color.setGreen(new_col.greenF());
+    color.setBlue(new_col.blueF());
+    color.setAlpha(new_col.alphaF());
 
-	updateGUI();
+    updateGUI();
 
-	emit colorChanged();
+    emit colorChanged();
 }
 
 void ColorEditWidget::init(bool v_layout)
 {
-	QBoxLayout* main_layout = new QBoxLayout(v_layout ? QBoxLayout::TopToBottom : QBoxLayout::LeftToRight, this);
+    QBoxLayout* main_layout = new QBoxLayout(v_layout ? QBoxLayout::TopToBottom : QBoxLayout::LeftToRight, this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	colorLabel = new QFrame(this);
+    colorLabel = new QFrame(this);
 
-	colorLabel->setFrameStyle(QFrame::StyledPanel);
-	colorLabel->setMinimumWidth(80);
-	colorLabel->setFixedHeight(25);
-	colorLabel->setAutoFillBackground(true);
+    colorLabel->setFrameStyle(QFrame::StyledPanel);
+    colorLabel->setMinimumWidth(80);
+    colorLabel->setFixedHeight(25);
+    colorLabel->setAutoFillBackground(true);
 
-	main_layout->addWidget(colorLabel);
-	main_layout->addStretch();
+    main_layout->addWidget(colorLabel);
+    main_layout->addStretch();
 
-	QPushButton* button = new QPushButton(tr("Change..."), this);
+    QPushButton* button = new QPushButton(tr("Change..."), this);
 
-	setFocusProxy(button);
+    setFocusProxy(button);
 
-	button->setMinimumHeight(30);
+    button->setMinimumHeight(30);
 
-	connect(button, SIGNAL(clicked()), this, SLOT(editColor()));
+    connect(button, SIGNAL(clicked()), this, SLOT(editColor()));
 
-	main_layout->addWidget(button);
+    main_layout->addWidget(button);
 
-	updateGUI();
+    updateGUI();
 }

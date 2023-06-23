@@ -42,53 +42,53 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphHCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_H_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_H_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_H_COUNT) == 19);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
 
 //-----
 
-	Molecule::AtomIterator it = std::find_if(mol.getAtomsBegin(), mol.getAtomsEnd(), IsHydrogen());
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(it != mol.getAtomsEnd());
+    BOOST_CHECK(ifs);
 
-	it->setProperty(AtomProperty::SYMBOL, std::string("D"));
-
-	it = std::find_if(++it, mol.getAtomsEnd(), IsHydrogen());
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_H_COUNT) == 19);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_H_COUNT, mol, MolecularGraphProperty::IMPLICIT_H_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_H_COUNT, mol, AtomContainerProperty::H_COUNT);
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_H_COUNT) == 19);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+
+//-----
+
+    Molecule::AtomIterator it = std::find_if(mol.getAtomsBegin(), mol.getAtomsEnd(), IsHydrogen());
+
+    BOOST_CHECK(it != mol.getAtomsEnd());
+
+    it->setProperty(AtomProperty::SYMBOL, std::string("D"));
+
+    it = std::find_if(++it, mol.getAtomsEnd(), IsHydrogen());
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_H_COUNT) == 19);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_H_COUNT, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_H_COUNT, mol, MolecularGraphProperty::IMPLICIT_H_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_H_COUNT, mol, AtomContainerProperty::H_COUNT);
 }

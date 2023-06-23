@@ -31,13 +31,13 @@ using namespace ChOX;
 
 
 AtomSettingsEditWidget::AtomSettingsEditWidget(QWidget* parent, Settings& settings): 
-	TabSettingsEditWidget(parent)
+    TabSettingsEditWidget(parent)
 {
-	init(settings);
+    init(settings);
 }
 
 void AtomSettingsEditWidget::init(Settings& settings)
 {
-	addEditWidget(new AtomGeneralSettingsEditWidget(this, settings), tr("&General"));
-	addEditWidget(new AtomColorSettingsEditWidget(this, settings), tr("Color&s"));
+    addEditWidget(new AtomGeneralSettingsEditWidget(this, settings), tr("&General"));
+    addEditWidget(new AtomColorSettingsEditWidget(this, settings), tr("Color&s"));
 }

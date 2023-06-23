@@ -41,113 +41,113 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
+        class MolecularGraph;
+        class Atom;
 
-		/**
-		 * \brief CIPPriorityCalculator.
-		 * \see [\ref TCIP]
-		 */
-		class CDPL_CHEM_API CIPPriorityCalculator 
-		{
+        /**
+         * \brief CIPPriorityCalculator.
+         * \see [\ref TCIP]
+         */
+        class CDPL_CHEM_API CIPPriorityCalculator 
+        {
 
-		public:
-			typedef std::function<std::size_t(const Atom&)> ImplicitHydrogenCountFunction;
+        public:
+            typedef std::function<std::size_t(const Atom&)> ImplicitHydrogenCountFunction;
 
-			/**
-			 * \brief Constructs the \c %CIPPriorityCalculator instance.
-			 */
-			CIPPriorityCalculator();
+            /**
+             * \brief Constructs the \c %CIPPriorityCalculator instance.
+             */
+            CIPPriorityCalculator();
 
-			/**
-			 * \brief Constructs the \c %CIPPriorityCalculator instance and calculates the topological \e CIP priorities
-			 *        of the atoms in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
-			 * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
-			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-			 *         (i.e. the \e CIP priority of an atom is accessible via its index).
-			 */
-			CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
+            /**
+             * \brief Constructs the \c %CIPPriorityCalculator instance and calculates the topological \e CIP priorities
+             *        of the atoms in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
+             * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
+             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+             *         (i.e. the \e CIP priority of an atom is accessible via its index).
+             */
+            CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
 
-			void setImplicitHydrogenCountFunction(const ImplicitHydrogenCountFunction& func);
+            void setImplicitHydrogenCountFunction(const ImplicitHydrogenCountFunction& func);
 
-			const ImplicitHydrogenCountFunction& getImplicitHydrogenCountFunction();
+            const ImplicitHydrogenCountFunction& getImplicitHydrogenCountFunction();
 
-			/**
-			 * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
-			 * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
-			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-			 *         (i.e. the \e CIP priority of an atom is accessible via its index).
-			 */
-			void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
+            /**
+             * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
+             * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
+             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+             *         (i.e. the \e CIP priority of an atom is accessible via its index).
+             */
+            void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
 
-		private:
-			class AtomNode;
+        private:
+            class AtomNode;
 
-			CIPPriorityCalculator(const CIPPriorityCalculator&);
+            CIPPriorityCalculator(const CIPPriorityCalculator&);
 
-			CIPPriorityCalculator& operator=(const CIPPriorityCalculator&);
+            CIPPriorityCalculator& operator=(const CIPPriorityCalculator&);
 
-			void init(const MolecularGraph&, Util::STArray&);
-			void determinePriorities(Util::STArray&);
+            void init(const MolecularGraph&, Util::STArray&);
+            void determinePriorities(Util::STArray&);
 
-			AtomNode* allocNode(std::size_t p);
+            AtomNode* allocNode(std::size_t p);
 
-			typedef std::vector<AtomNode*> NodeList;
+            typedef std::vector<AtomNode*> NodeList;
 
-			class AtomNode
-			{
+            class AtomNode
+            {
 
-			public:
-				void clear();
+            public:
+                void clear();
 
-				void addNbrNode(AtomNode*);
+                void addNbrNode(AtomNode*);
 
-				void setNewPriority(std::size_t);
+                void setNewPriority(std::size_t);
 
-				void updateNbrList();
-				void updatePriority();
+                void updateNbrList();
+                void updatePriority();
 
-				void setPriority(std::size_t p);
+                void setPriority(std::size_t p);
 
-				std::size_t getPriority() const;
+                std::size_t getPriority() const;
 
-				struct LessCmpFunc
-				{
+                struct LessCmpFunc
+                {
 
-					bool operator()(const AtomNode*, const AtomNode*) const;
-				};
+                    bool operator()(const AtomNode*, const AtomNode*) const;
+                };
 
-				struct PriorityLessCmpFunc
-				{
+                struct PriorityLessCmpFunc
+                {
 
-					bool operator()(const AtomNode*, const AtomNode*) const;
-				};
+                    bool operator()(const AtomNode*, const AtomNode*) const;
+                };
 
-				struct PriorityGreaterCmpFunc
-				{
+                struct PriorityGreaterCmpFunc
+                {
 
-					bool operator()(const AtomNode*, const AtomNode*) const;
-				};
+                    bool operator()(const AtomNode*, const AtomNode*) const;
+                };
 
-			private:
-				std::size_t    priority;
-				std::size_t    newPriority;
-				NodeList       nbrNodes;
-			};
-		 
-			typedef Util::ObjectStack<AtomNode> NodeCache;
+            private:
+                std::size_t    priority;
+                std::size_t    newPriority;
+                NodeList       nbrNodes;
+            };
+         
+            typedef Util::ObjectStack<AtomNode> NodeCache;
 
-			NodeCache                     nodeCache;
-			NodeList                      expAtomNodes;
-			NodeList                      atomNodes;
-			ImplicitHydrogenCountFunction implHCountFunc;
-		};
-	}
+            NodeCache                     nodeCache;
+            NodeList                      expAtomNodes;
+            NodeList                      atomNodes;
+            ImplicitHydrogenCountFunction implHCountFunc;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_CIPPRIORITYCALCULATOR_HPP

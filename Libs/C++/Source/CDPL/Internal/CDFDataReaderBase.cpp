@@ -33,132 +33,132 @@ using namespace CDPL;
 bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& header, std::uint8_t rec_type, bool seek_beg, ByteBuffer& bbuf) const
 {
     while (true) {
-		std::istream::pos_type last_spos = is.tellg();
+        std::istream::pos_type last_spos = is.tellg();
 
-		if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) 
-			break;
+        if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) 
+            break;
 
-		if (!readHeader(is, header, bbuf))
-			return false;
+        if (!readHeader(is, header, bbuf))
+            return false;
 
-		if (header.recordTypeID == rec_type) {
-			if (seek_beg)
-				is.seekg(last_spos);
+        if (header.recordTypeID == rec_type) {
+            if (seek_beg)
+                is.seekg(last_spos);
 
-			return true;
-		}
+            return true;
+        }
 
-		is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
-	}
+        is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
+    }
 
-	return false;
+    return false;
 }
 
 bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, std::uint8_t rec_type, ByteBuffer& bbuf) const
 {
-	CDF::Header header;
+    CDF::Header header;
 
     while (true) {
-		std::istream::pos_type last_spos = is.tellg();
+        std::istream::pos_type last_spos = is.tellg();
 
-		if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof()))
-			break;
+        if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof()))
+            break;
 
-		if (!readHeader(is, header, bbuf))
-			return false;
+        if (!readHeader(is, header, bbuf))
+            return false;
 
-		is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
+        is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
 
-		if (header.recordTypeID == rec_type)
-			return true;
-	}
+        if (header.recordTypeID == rec_type)
+            return true;
+    }
 
-	return false;
+    return false;
 }
 
 bool Internal::CDFDataReaderBase::readHeader(std::istream& is, CDF::Header& header, ByteBuffer& bbuf) const
-{	
-	std::size_t num_read = bbuf.readBuffer(is, CDF::HEADER_SIZE);
+{    
+    std::size_t num_read = bbuf.readBuffer(is, CDF::HEADER_SIZE);
 
-	if (is.bad() || (is.fail() && !is.eof()))
-		throw Base::IOError("CDFDataReaderBase: could not read CDF-header, input stream read error");
+    if (is.bad() || (is.fail() && !is.eof()))
+        throw Base::IOError("CDFDataReaderBase: could not read CDF-header, input stream read error");
 
-	if (num_read != CDF::HEADER_SIZE) {
-		if (strictErrorChecks)
-			throw Base::IOError("CDFDataReaderBase: could not read CDF-header, unexpected end of input");
+    if (num_read != CDF::HEADER_SIZE) {
+        if (strictErrorChecks)
+            throw Base::IOError("CDFDataReaderBase: could not read CDF-header, unexpected end of input");
 
-		return false;
-	}
+        return false;
+    }
 
-	bbuf.setIOPointer(0);
+    bbuf.setIOPointer(0);
 
-	return getHeader(header, bbuf);
+    return getHeader(header, bbuf);
 }
 
 bool Internal::CDFDataReaderBase::getHeader(CDF::Header& header, ByteBuffer& bbuf) const
-{	
-	bbuf.getInt(header.formatID);
-	bbuf.getInt(header.recordTypeID);
-	bbuf.getInt(header.recordFormatVersion);
-	bbuf.getInt(header.recordDataLength);
+{    
+    bbuf.getInt(header.formatID);
+    bbuf.getInt(header.recordTypeID);
+    bbuf.getInt(header.recordFormatVersion);
+    bbuf.getInt(header.recordDataLength);
 
-	if (header.formatID == CDF::FORMAT_ID)
-		return true;
+    if (header.formatID == CDF::FORMAT_ID)
+        return true;
 
-	if (strictErrorChecks)
-		throw Base::IOError("CDFDataReaderBase: invalid CDF-header, format-ID mismatch");
+    if (strictErrorChecks)
+        throw Base::IOError("CDFDataReaderBase: invalid CDF-header, format-ID mismatch");
 
-	return false;
+    return false;
 }
 
 void Internal::CDFDataReaderBase::readData(std::istream& is, std::size_t length, ByteBuffer& bbuf) const
 {
-	std::size_t num_read = bbuf.readBuffer(is, length);
+    std::size_t num_read = bbuf.readBuffer(is, length);
 
-	if (!is.good())
-		throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, input stream read error");
+    if (!is.good())
+        throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, input stream read error");
 
-	if (num_read != length)
-		throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, unexpected end of input");
+    if (num_read != length)
+        throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, unexpected end of input");
 }
 
 void Internal::CDFDataReaderBase::getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const
 {
-	CDF::SizeType str_len; 
+    CDF::SizeType str_len; 
 
-	getIntProperty(prop_spec, str_len, bbuf);
+    getIntProperty(prop_spec, str_len, bbuf);
 
-	str.resize(str_len);
+    str.resize(str_len);
 
-	bbuf.getBytes(&str[0], str_len);
+    bbuf.getBytes(&str[0], str_len);
 }
 
 void Internal::CDFDataReaderBase::getString(std::string& str, ByteBuffer& bbuf) const
 {
-	std::size_t size_len;
-	std::size_t str_len;
+    std::size_t size_len;
+    std::size_t str_len;
 
-	bbuf.getInt(size_len, 1);
-	bbuf.getInt(str_len, size_len); 
+    bbuf.getInt(size_len, 1);
+    bbuf.getInt(str_len, size_len); 
 
-	str.resize(str_len);
+    str.resize(str_len);
 
-	bbuf.getBytes(&str[0], str_len);
+    bbuf.getBytes(&str[0], str_len);
 }
 
 unsigned int Internal::CDFDataReaderBase::getPropertySpec(CDF::PropertySpec& prop_spec, ByteBuffer& bbuf) const
 {
-	bbuf.getInt(prop_spec);
+    bbuf.getInt(prop_spec);
 
-	return extractPropertyID(prop_spec);
+    return extractPropertyID(prop_spec);
 }
 
 bool Internal::CDFDataReaderBase::strictErrorChecking() const
 {
-	return strictErrorChecks;
+    return strictErrorChecks;
 }
 
 void Internal::CDFDataReaderBase::strictErrorChecking(bool strict)
 {
-	strictErrorChecks = strict;
+    strictErrorChecks = strict;
 }

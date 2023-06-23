@@ -33,39 +33,39 @@
 namespace CDPLPythonBase
 {
 
-	template <typename SourceType>
-	struct GenericAnyFromPythonConverter 
-	{
+    template <typename SourceType>
+    struct GenericAnyFromPythonConverter 
+    {
 
-		GenericAnyFromPythonConverter() {
-			using namespace boost;
+        GenericAnyFromPythonConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
-		}
+            python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
+        static void* convertible(PyObject* obj_ptr) {
+            using namespace boost;
 
-			if (!obj_ptr)
-				return 0;
+            if (!obj_ptr)
+                return 0;
 
-			if (!python::extract<SourceType>(obj_ptr).check())
-				return 0;
+            if (!python::extract<SourceType>(obj_ptr).check())
+                return 0;
 
-			return obj_ptr;
-		}
+            return obj_ptr;
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-			using namespace CDPL;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
+            using namespace CDPL;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
 
-			new (storage) Base::Any(python::extract<SourceType>(obj_ptr)());
+            new (storage) Base::Any(python::extract<SourceType>(obj_ptr)());
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 }
 
 #endif // CDPL_PYTHON_BASE_GENERICANYFROMPYTHONCONVERTER_HPP

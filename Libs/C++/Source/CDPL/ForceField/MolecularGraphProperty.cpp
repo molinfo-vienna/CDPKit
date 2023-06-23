@@ -31,15 +31,15 @@
 namespace CDPL 
 {
 
-	namespace ForceField
-	{
+    namespace ForceField
+    {
 
-		namespace MolecularGraphProperty
-		{
+        namespace MolecularGraphProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(MMFF94_AROMATIC_RINGS);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(MMFF94_AROMATIC_RINGS);
+        }
 
-		void initMolecularGraphProperties() {}
-	}
+        void initMolecularGraphProperties() {}
+    }
 }

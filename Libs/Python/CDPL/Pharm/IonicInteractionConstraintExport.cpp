@@ -36,11 +36,11 @@ void CDPLPythonPharm::exportIonicInteractionConstraint()
     using namespace CDPL;
 
     python::class_<Pharm::IonicInteractionConstraint, python::bases<Pharm::FeatureDistanceConstraint>,
-				   boost::noncopyable>("IonicInteractionConstraint", python::no_init)
-		.def(python::init<const Pharm::IonicInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
-		.def(python::init<double, double>((python::arg("self"), 
-										   python::arg("min_dist") = Pharm::IonicInteractionConstraint::DEF_MIN_DISTANCE,
-										   python::arg("max_dist") = Pharm::IonicInteractionConstraint::DEF_MAX_DISTANCE)))
-		.def_readonly("DEF_MIN_DISTANCE", Pharm::IonicInteractionConstraint::DEF_MIN_DISTANCE)
-		.def_readonly("DEF_MAX_DISTANCE", Pharm::IonicInteractionConstraint::DEF_MAX_DISTANCE);
+                   boost::noncopyable>("IonicInteractionConstraint", python::no_init)
+        .def(python::init<const Pharm::IonicInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
+        .def(python::init<double, double>((python::arg("self"), 
+                                           python::arg("min_dist") = Pharm::IonicInteractionConstraint::DEF_MIN_DISTANCE,
+                                           python::arg("max_dist") = Pharm::IonicInteractionConstraint::DEF_MAX_DISTANCE)))
+        .def_readonly("DEF_MIN_DISTANCE", Pharm::IonicInteractionConstraint::DEF_MIN_DISTANCE)
+        .def_readonly("DEF_MAX_DISTANCE", Pharm::IonicInteractionConstraint::DEF_MAX_DISTANCE);
 }

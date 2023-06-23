@@ -42,87 +42,87 @@ namespace CDPL
     namespace Shape
     {
 
-		class GaussianShape;
-		class GaussianProduct;
-		
-		class GaussianProductList
-		{
+        class GaussianShape;
+        class GaussianProduct;
+        
+        class GaussianProductList
+        {
 
-			typedef std::vector<GaussianProduct*> ProductList;
-				
-		  public:
-			typedef ProductList::const_iterator ConstProductIterator;
+            typedef std::vector<GaussianProduct*> ProductList;
+                
+          public:
+            typedef ProductList::const_iterator ConstProductIterator;
 
-			GaussianProductList();
+            GaussianProductList();
 
-			GaussianProductList(const GaussianProductList& prod_list);
+            GaussianProductList(const GaussianProductList& prod_list);
 
-			GaussianProductList(const GaussianShape& shape);
+            GaussianProductList(const GaussianShape& shape);
 
-			~GaussianProductList();
-			
-			void setMaxOrder(std::size_t max_order);
+            ~GaussianProductList();
+            
+            void setMaxOrder(std::size_t max_order);
 
-			std::size_t getMaxOrder() const;
+            std::size_t getMaxOrder() const;
 
-			void setDistanceCutoff(double cutoff);
+            void setDistanceCutoff(double cutoff);
 
-			double getDistanceCutoff() const;
+            double getDistanceCutoff() const;
 
-			GaussianProductList& operator=(const GaussianProductList& prod_list);
-			
-			void setup(const GaussianShape& shape);
+            GaussianProductList& operator=(const GaussianProductList& prod_list);
+            
+            void setup(const GaussianShape& shape);
 
-			const GaussianProduct* getProduct(std::size_t idx) const;
+            const GaussianProduct* getProduct(std::size_t idx) const;
 
-			ConstProductIterator getProductsBegin() const;
+            ConstProductIterator getProductsBegin() const;
 
-			ConstProductIterator getProductsEnd() const;
+            ConstProductIterator getProductsEnd() const;
 
-			std::size_t getNumProducts() const;
+            std::size_t getNumProducts() const;
 
-			std::size_t getNumShapeElements() const;
-			
-			double getVolume() const;
-			
-		  private:
-			void generateProducts(std::size_t elem_idx);
+            std::size_t getNumShapeElements() const;
+            
+            double getVolume() const;
+            
+          private:
+            void generateProducts(std::size_t elem_idx);
 
-			bool checkNeighborhood(std::size_t elem_idx) const;
+            bool checkNeighborhood(std::size_t elem_idx) const;
 
-			void copy(const GaussianProductList& prod_list);
-			
-			typedef std::vector<std::size_t> NeighborList;
-			typedef std::vector<NeighborList> NeighborListArray;
-			typedef std::vector<Util::BitSet> AdjacencyMatrix;
-			typedef Util::ObjectStack<GaussianProduct> GaussianProductCache;
+            void copy(const GaussianProductList& prod_list);
+            
+            typedef std::vector<std::size_t> NeighborList;
+            typedef std::vector<NeighborList> NeighborListArray;
+            typedef std::vector<Util::BitSet> AdjacencyMatrix;
+            typedef Util::ObjectStack<GaussianProduct> GaussianProductCache;
 
-			GaussianProductCache prodCache;
-			NeighborListArray    elemNbrLists;
-			AdjacencyMatrix      elemAdjMatrix;
-			std::size_t          maxOrder;
-			double               distCutoff;
-			GaussianProduct*     currProduct;
-			ProductList          products;
-			double               volume;
-			std::size_t          numElements;
-		};
+            GaussianProductCache prodCache;
+            NeighborListArray    elemNbrLists;
+            AdjacencyMatrix      elemAdjMatrix;
+            std::size_t          maxOrder;
+            double               distCutoff;
+            GaussianProduct*     currProduct;
+            ProductList          products;
+            double               volume;
+            std::size_t          numElements;
+        };
     }
-	
-	inline const Shape::GaussianProduct* Shape::GaussianProductList::getProduct(std::size_t idx) const
-	{
-		return products[idx];
-	}
-	
-	inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsBegin() const
-	{
-		return products.begin();
-	}
+    
+    inline const Shape::GaussianProduct* Shape::GaussianProductList::getProduct(std::size_t idx) const
+    {
+        return products[idx];
+    }
+    
+    inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsBegin() const
+    {
+        return products.begin();
+    }
 
-	inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsEnd() const
-	{
-		return products.end();
-	}
+    inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsEnd() const
+    {
+        return products.end();
+    }
 }
 
 #endif // CDPL_SHAPE_GAUSSIANPRODUCTLIST_HPP

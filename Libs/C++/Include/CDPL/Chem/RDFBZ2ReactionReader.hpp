@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		typedef Util::CompressedDataReader<RDFReactionReader, Util::BZip2IStream> RDFBZ2ReactionReader;
-	}
+        typedef Util::CompressedDataReader<RDFReactionReader, Util::BZip2IStream> RDFBZ2ReactionReader;
+    }
 }
 
 #endif // CDPL_CHEM_RDFBZ2REACTIONREADER_HPP

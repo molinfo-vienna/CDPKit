@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Chem::SMILESMoleculeReader::SMILESMoleculeReader(std::istream& is): 
-	Util::StreamDataReader<Molecule, SMILESMoleculeReader>(is), reader(new SMILESDataReader(*this)) {}
+    Util::StreamDataReader<Molecule, SMILESMoleculeReader>(is), reader(new SMILESDataReader(*this)) {}
 
 Chem::SMILESMoleculeReader::~SMILESMoleculeReader() {}
 
 bool Chem::SMILESMoleculeReader::readData(std::istream& is, Molecule& mol, bool overwrite)
 {
-	try {
-		if (overwrite)
-			mol.clear();
+    try {
+        if (overwrite)
+            mol.clear();
 
-		return reader->readMolecule(is, mol);
+        return reader->readMolecule(is, mol);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("SMILESMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("SMILESMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::SMILESMoleculeReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipMolecule(is);
+    try {
+        return reader->skipMolecule(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("SMILESMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("SMILESMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::SMILESMoleculeReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

@@ -32,17 +32,17 @@
 
 void CDPLPythonShape::exportUtilityFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("calcQuadrupoleTensorEigenDecomposition", &Shape::calcQuadrupoleTensorEigenDecomposition,
-				(python::arg("quad_tensor"), python::arg("eigen_vecs"), python::arg("eigen_vals")));
-	python::def("calcPrincipalAxes", &Shape::calcPrincipalAxes,
-				(python::arg("quad_tensor"), python::arg("x_axis"), python::arg("y_axis"), python::arg("z_axis"), python::arg("moments")));
-	python::def("perceiveSymmetryClass", &Shape::perceiveSymmetryClass,
-				(python::arg("moments"), python::arg("eq_thresh") = 0.15));
-	python::def("calcCenterAlignmentTransforms", &Shape::calcCenterAlignmentTransforms,
-				(python::arg("func"), python::arg("to_ctr_xform"), python::arg("from_ctr_xform"), python::arg("mom_eq_thresh") = 0.15));
-	python::def("matrixToQuaternion", &Shape::matrixToQuaternion, (python::arg("mtx"), python::arg("quat")));
-	python::def("quaternionToMatrix", &Shape::quaternionToMatrix, (python::arg("quat"), python::arg("mtx")));
+    python::def("calcQuadrupoleTensorEigenDecomposition", &Shape::calcQuadrupoleTensorEigenDecomposition,
+                (python::arg("quad_tensor"), python::arg("eigen_vecs"), python::arg("eigen_vals")));
+    python::def("calcPrincipalAxes", &Shape::calcPrincipalAxes,
+                (python::arg("quad_tensor"), python::arg("x_axis"), python::arg("y_axis"), python::arg("z_axis"), python::arg("moments")));
+    python::def("perceiveSymmetryClass", &Shape::perceiveSymmetryClass,
+                (python::arg("moments"), python::arg("eq_thresh") = 0.15));
+    python::def("calcCenterAlignmentTransforms", &Shape::calcCenterAlignmentTransforms,
+                (python::arg("func"), python::arg("to_ctr_xform"), python::arg("from_ctr_xform"), python::arg("mom_eq_thresh") = 0.15));
+    python::def("matrixToQuaternion", &Shape::matrixToQuaternion, (python::arg("mtx"), python::arg("quat")));
+    python::def("quaternionToMatrix", &Shape::quaternionToMatrix, (python::arg("quat"), python::arg("mtx")));
 }

@@ -34,26 +34,26 @@ using namespace CDPL;
 
 Chem::FragmentList::SharedPointer Chem::perceiveRings(const MolecularGraph& molgraph)
 {
-	FragmentList::SharedPointer rings_ptr(new CompleteRingSet(molgraph));
+    FragmentList::SharedPointer rings_ptr(new CompleteRingSet(molgraph));
 
-	return rings_ptr;
+    return rings_ptr;
 }
 
 Chem::FragmentList::SharedPointer Chem::perceiveRings(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_rings = molgraph.getProperty(MolecularGraphProperty::RINGS, false);
-	
-		if (!prev_rings.isEmpty())
-			return prev_rings.getData<FragmentList::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_rings = molgraph.getProperty(MolecularGraphProperty::RINGS, false);
+    
+        if (!prev_rings.isEmpty())
+            return prev_rings.getData<FragmentList::SharedPointer>();
+    }
 
-	CompleteRingSet rset(molgraph);
-	FragmentList::SharedPointer rings_ptr(new FragmentList());
+    CompleteRingSet rset(molgraph);
+    FragmentList::SharedPointer rings_ptr(new FragmentList());
 
-	rings_ptr->swap(rset);
+    rings_ptr->swap(rset);
 
-	molgraph.setProperty(MolecularGraphProperty::RINGS, rings_ptr);
+    molgraph.setProperty(MolecularGraphProperty::RINGS, rings_ptr);
 
-	return rings_ptr;
+    return rings_ptr;
 }

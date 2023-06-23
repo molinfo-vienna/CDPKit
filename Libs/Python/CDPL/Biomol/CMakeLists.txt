@@ -92,8 +92,8 @@ ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Biomol" COMPONENT CDPLPythonModules)
 INSTALL(TARGETS _biomol DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Biomol" COMPONENT CDPLPythonModules)

@@ -34,120 +34,120 @@ using namespace ChOX;
 
 
 AlignmentEditWidget::AlignmentEditWidget(QWidget* parent, unsigned int& alignment, bool hor_dir, bool allow_center):
-	QWidget(parent), alignment(alignment), horDirection(hor_dir), allowCenter(allow_center)
+    QWidget(parent), alignment(alignment), horDirection(hor_dir), allowCenter(allow_center)
 {
-	init();
+    init();
 }
 
 void AlignmentEditWidget::updateGUI()
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	alignmentComboBox->blockSignals(true);
+    alignmentComboBox->blockSignals(true);
 
-	if (horDirection) {
-		switch (alignment & Alignment::H_ALIGNMENT_MASK) {
+    if (horDirection) {
+        switch (alignment & Alignment::H_ALIGNMENT_MASK) {
 
-			case Alignment::LEFT:
-				alignmentComboBox->setCurrentIndex(0);
-				break;
+            case Alignment::LEFT:
+                alignmentComboBox->setCurrentIndex(0);
+                break;
 
-			case Alignment::RIGHT:
-				alignmentComboBox->setCurrentIndex(1);
-				break;
+            case Alignment::RIGHT:
+                alignmentComboBox->setCurrentIndex(1);
+                break;
 
-			default:
-				alignmentComboBox->setCurrentIndex(allowCenter ? 2 : 0);
-		}
+            default:
+                alignmentComboBox->setCurrentIndex(allowCenter ? 2 : 0);
+        }
 
-	} else {
-		switch (alignment & Alignment::V_ALIGNMENT_MASK) {
+    } else {
+        switch (alignment & Alignment::V_ALIGNMENT_MASK) {
 
-			case Alignment::TOP:
-				alignmentComboBox->setCurrentIndex(0);
-				break;
+            case Alignment::TOP:
+                alignmentComboBox->setCurrentIndex(0);
+                break;
 
-			case Alignment::BOTTOM:
-				alignmentComboBox->setCurrentIndex(1);
-				break;
+            case Alignment::BOTTOM:
+                alignmentComboBox->setCurrentIndex(1);
+                break;
 
-			default:
-				alignmentComboBox->setCurrentIndex(allowCenter ? 2 : 0);
-		}
-	}
+            default:
+                alignmentComboBox->setCurrentIndex(allowCenter ? 2 : 0);
+        }
+    }
 
-	alignmentComboBox->blockSignals(false);
+    alignmentComboBox->blockSignals(false);
 }
 
 void AlignmentEditWidget::handleAlignmentSelection(int idx)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	if (horDirection) {
-		alignment &= ~Alignment::H_ALIGNMENT_MASK;
+    if (horDirection) {
+        alignment &= ~Alignment::H_ALIGNMENT_MASK;
 
-		switch (idx) {
+        switch (idx) {
 
-			case 0:
-				alignment |= Alignment::LEFT;
-				break;
+            case 0:
+                alignment |= Alignment::LEFT;
+                break;
 
-			case 1:
-				alignment |= Alignment::RIGHT;
-				break;
+            case 1:
+                alignment |= Alignment::RIGHT;
+                break;
 
-			default:
-				alignment |= Alignment::H_CENTER;
-		}
+            default:
+                alignment |= Alignment::H_CENTER;
+        }
 
-	} else {
-		alignment &= ~Alignment::V_ALIGNMENT_MASK;
+    } else {
+        alignment &= ~Alignment::V_ALIGNMENT_MASK;
 
-		switch (idx) {
+        switch (idx) {
 
-			case 0:
-				alignment |= Alignment::TOP;
-				break;
+            case 0:
+                alignment |= Alignment::TOP;
+                break;
 
-			case 1:
-				alignment |= Alignment::BOTTOM;
-				break;
+            case 1:
+                alignment |= Alignment::BOTTOM;
+                break;
 
-			default:
-				alignment |= Alignment::V_CENTER;
-		}
-	}
+            default:
+                alignment |= Alignment::V_CENTER;
+        }
+    }
 
-	emit alignmentChanged();
+    emit alignmentChanged();
 }
 
 void AlignmentEditWidget::init()
 {
-	QBoxLayout* main_layout = new QHBoxLayout(this);
+    QBoxLayout* main_layout = new QHBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	alignmentComboBox = new QComboBox(this);
+    alignmentComboBox = new QComboBox(this);
 
-	connect(alignmentComboBox, SIGNAL(activated(int)), this, SLOT(handleAlignmentSelection(int)));
+    connect(alignmentComboBox, SIGNAL(activated(int)), this, SLOT(handleAlignmentSelection(int)));
 
-	setFocusProxy(alignmentComboBox);
+    setFocusProxy(alignmentComboBox);
 
-	if (horDirection) {
-		alignmentComboBox->addItem(tr("Left"));
-		alignmentComboBox->addItem(tr("Right"));
+    if (horDirection) {
+        alignmentComboBox->addItem(tr("Left"));
+        alignmentComboBox->addItem(tr("Right"));
 
-	} else {
-		alignmentComboBox->addItem(tr("Top"));
-		alignmentComboBox->addItem(tr("Bottom"));
-	}
+    } else {
+        alignmentComboBox->addItem(tr("Top"));
+        alignmentComboBox->addItem(tr("Bottom"));
+    }
 
-	if (allowCenter)
-		alignmentComboBox->addItem(tr("Center"));
+    if (allowCenter)
+        alignmentComboBox->addItem(tr("Center"));
 
-	main_layout->addWidget(alignmentComboBox);
+    main_layout->addWidget(alignmentComboBox);
 
-	updateGUI();
+    updateGUI();
 }

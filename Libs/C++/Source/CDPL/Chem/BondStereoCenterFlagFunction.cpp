@@ -41,66 +41,66 @@ using namespace CDPL;
 bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_cip_sym, std::size_t min_ring_size)
 {
     if (getOrder(bond) != 2)
-		return false;
+        return false;
 
-	if (getAromaticityFlag(bond))
-		return false;
+    if (getAromaticityFlag(bond))
+        return false;
 
-	if (min_ring_size > 0) {
-		std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
+    if (min_ring_size > 0) {
+        std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
 
-		if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
-			return false;
-	}
+        if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
+            return false;
+    }
 
     const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
     for (std::size_t i = 0; i < 2; i++) {
-		std::size_t num_bonds = Internal::getExplicitBondCount(*bond_atoms[i], molgraph);
+        std::size_t num_bonds = Internal::getExplicitBondCount(*bond_atoms[i], molgraph);
 
-		if (num_bonds < 2 || num_bonds > 3)
-			return false;
+        if (num_bonds < 2 || num_bonds > 3)
+            return false;
 
-		if (getHybridizationState(*bond_atoms[i]) != HybridizationState::SP2)
-			return false;
+        if (getHybridizationState(*bond_atoms[i]) != HybridizationState::SP2)
+            return false;
 
-		if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
-			return false;
+        if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
+            return false;
 
-		if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
-			return false;
+        if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+            return false;
 
-		if (!check_cip_sym)
-			continue;
+        if (!check_cip_sym)
+            continue;
 
-		Atom::ConstAtomIterator atoms_end = bond_atoms[i]->getAtomsEnd();
-		Atom::ConstBondIterator b_it = bond_atoms[i]->getBondsBegin();
-		std::size_t first_cip_pri = 0;
-		bool have_first_nbr = false;
+        Atom::ConstAtomIterator atoms_end = bond_atoms[i]->getAtomsEnd();
+        Atom::ConstBondIterator b_it = bond_atoms[i]->getBondsBegin();
+        std::size_t first_cip_pri = 0;
+        bool have_first_nbr = false;
 
-		for (Atom::ConstAtomIterator a_it = bond_atoms[i]->getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-			const Bond& nbr_bond = *b_it;
+        for (Atom::ConstAtomIterator a_it = bond_atoms[i]->getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+            const Bond& nbr_bond = *b_it;
 
-			if (&nbr_bond == &bond)
-				continue;
+            if (&nbr_bond == &bond)
+                continue;
 
-			if (!molgraph.containsBond(nbr_bond))
-				continue;
+            if (!molgraph.containsBond(nbr_bond))
+                continue;
 
-			const Atom& nbr_atom = *a_it;
+            const Atom& nbr_atom = *a_it;
 
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
 
-			std::size_t cip_pri = getCIPPriority(nbr_atom);
+            std::size_t cip_pri = getCIPPriority(nbr_atom);
 
-			if (!have_first_nbr) {
-				have_first_nbr = true;
-				first_cip_pri = cip_pri;
-			
-			} else if (cip_pri == first_cip_pri)
-				return false;
-		}
+            if (!have_first_nbr) {
+                have_first_nbr = true;
+                first_cip_pri = cip_pri;
+            
+            } else if (cip_pri == first_cip_pri)
+                return false;
+        }
     }
 
     return true;

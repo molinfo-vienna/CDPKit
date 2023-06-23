@@ -54,10 +54,10 @@ const Biomol::ResidueList& Biomol::HierarchyView::getResidues() const
     std::lock_guard<std::mutex> lock(initMutex);
 
     if (!initResidues)
-		return residues;
+        return residues;
 
     if (molGraph)
-		residues.extract(*molGraph);
+        residues.extract(*molGraph);
 
     initResidues = false;
 
@@ -66,66 +66,66 @@ const Biomol::ResidueList& Biomol::HierarchyView::getResidues() const
 
 std::size_t Biomol::HierarchyView::getNumModels() const
 {
-	initModelList();
+    initModelList();
 
-	return models.size();
+    return models.size();
 }
 
 const Biomol::HierarchyViewModel& Biomol::HierarchyView::getModel(std::size_t idx) const
 {
-	initModelList();
+    initModelList();
 
-	if (idx >= models.size())
-		throw Base::IndexError("HierarchyView: model index out of bounds");
+    if (idx >= models.size())
+        throw Base::IndexError("HierarchyView: model index out of bounds");
 
-	return *models[idx];
+    return *models[idx];
 }
 
 bool Biomol::HierarchyView::hasModelWithNumber(std::size_t num) const
 {
-	initModelList();
+    initModelList();
 
-	return (idToModelMap.find(num) != idToModelMap.end());
+    return (idToModelMap.find(num) != idToModelMap.end());
 }
 
 const Biomol::HierarchyViewModel& Biomol::HierarchyView::getModelByNumber(std::size_t num) const
 {
-	initModelList();
+    initModelList();
 
-	IDToModelMap::const_iterator it = idToModelMap.find(num);
+    IDToModelMap::const_iterator it = idToModelMap.find(num);
 
-	if (it != idToModelMap.end())
-		return *it->second;
+    if (it != idToModelMap.end())
+        return *it->second;
 
-	throw Base::ItemNotFound("HierarchyView: model with specified number not found");
+    throw Base::ItemNotFound("HierarchyView: model with specified number not found");
 }
 
 Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::getModelsBegin() const
 {
-	initModelList();
+    initModelList();
 
-	return ConstModelIterator(models.begin());
+    return ConstModelIterator(models.begin());
 }
 
 Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::getModelsEnd() const
 {
-	initModelList();
+    initModelList();
 
-	return ConstModelIterator(models.end());
+    return ConstModelIterator(models.end());
 }
 
 Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::begin() const
 {
-	initModelList();
+    initModelList();
 
-	return ConstModelIterator(models.begin());
+    return ConstModelIterator(models.begin());
 }
 
 Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::end() const
 {
-	initModelList();
+    initModelList();
 
-	return ConstModelIterator(models.end());
+    return ConstModelIterator(models.end());
 }
 
 void Biomol::HierarchyView::initModelList() const
@@ -133,62 +133,62 @@ void Biomol::HierarchyView::initModelList() const
     std::lock_guard<std::mutex> lock(initMutex);
 
     if (!initModels)
-		return;
+        return;
 
-	models.clear();
-	idToModelMap.clear();
+    models.clear();
+    idToModelMap.clear();
 
-	if (!molGraph) {
-		initModels = false;
-		return;
-	}
+    if (!molGraph) {
+        initModels = false;
+        return;
+    }
 
-	using namespace Chem;
+    using namespace Chem;
 
-	for (MolecularGraph::ConstAtomIterator a_it = molGraph->getAtomsBegin(), a_end = molGraph->getAtomsEnd(); a_it != a_end; ++a_it) {
-		const Atom& atom = *a_it;
-		std::size_t model_no = getModelNumber(atom);
+    for (MolecularGraph::ConstAtomIterator a_it = molGraph->getAtomsBegin(), a_end = molGraph->getAtomsEnd(); a_it != a_end; ++a_it) {
+        const Atom& atom = *a_it;
+        std::size_t model_no = getModelNumber(atom);
 
-		IDToModelMap::iterator m_it = idToModelMap.find(model_no);
+        IDToModelMap::iterator m_it = idToModelMap.find(model_no);
 
-		if (m_it != idToModelMap.end()) {
-			m_it->second->addAtom(atom);
-			continue;
-		}
+        if (m_it != idToModelMap.end()) {
+            m_it->second->addAtom(atom);
+            continue;
+        }
 
-		ModelPtr model_ptr(new HierarchyViewModel());
+        ModelPtr model_ptr(new HierarchyViewModel());
 
-		setModelNumber(*model_ptr, model_no);
+        setModelNumber(*model_ptr, model_no);
 
-		model_ptr->addAtom(atom);
+        model_ptr->addAtom(atom);
 
-		models.push_back(model_ptr);
-		idToModelMap.insert(IDToModelMap::value_type(model_no, model_ptr));
-	}
+        models.push_back(model_ptr);
+        idToModelMap.insert(IDToModelMap::value_type(model_no, model_ptr));
+    }
 
-	for (ModelList::iterator m_it = models.begin(), m_end = models.end(); m_it != m_end; ++m_it) {
-		HierarchyViewModel& model = **m_it;
+    for (ModelList::iterator m_it = models.begin(), m_end = models.end(); m_it != m_end; ++m_it) {
+        HierarchyViewModel& model = **m_it;
 
-		for (std::size_t i = 0, num_atoms = model.getNumAtoms(); i < num_atoms; i++) {
-			const Atom& atom = model.getAtom(i);
-			Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+        for (std::size_t i = 0, num_atoms = model.getNumAtoms(); i < num_atoms; i++) {
+            const Atom& atom = model.getAtom(i);
+            Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-			for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-				const Bond& bond = *b_it;
+            for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+                const Bond& bond = *b_it;
 
-				if (model.containsBond(bond))
-					continue;
+                if (model.containsBond(bond))
+                    continue;
 
-				if (!model.containsAtom(*a_it))
-					continue;
+                if (!model.containsAtom(*a_it))
+                    continue;
 
-				if (!molGraph->containsBond(bond))
-					continue;
+                if (!molGraph->containsBond(bond))
+                    continue;
 
-				model.addBond(bond);
-			}
-		}
-	}
+                model.addBond(bond);
+            }
+        }
+    }
 
     initModels = false;
 }

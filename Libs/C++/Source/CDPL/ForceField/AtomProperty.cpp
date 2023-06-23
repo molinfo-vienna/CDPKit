@@ -31,19 +31,19 @@
 namespace CDPL 
 {
 
-	namespace ForceField
-	{
+    namespace ForceField
+    {
 
-		namespace AtomProperty
-		{
+        namespace AtomProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(MMFF94_SYMBOLIC_TYPE);
-			CDPL_DEFINE_LOOKUP_KEY(MMFF94_NUMERIC_TYPE);
-			CDPL_DEFINE_LOOKUP_KEY(MMFF94_CHARGE);
+            CDPL_DEFINE_LOOKUP_KEY(MMFF94_SYMBOLIC_TYPE);
+            CDPL_DEFINE_LOOKUP_KEY(MMFF94_NUMERIC_TYPE);
+            CDPL_DEFINE_LOOKUP_KEY(MMFF94_CHARGE);
 
-			CDPL_DEFINE_LOOKUP_KEY(UFF_TYPE);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(UFF_TYPE);
+        }
 
-		void initAtomProperties() {}
-	}
+        void initAtomProperties() {}
+    }
 }

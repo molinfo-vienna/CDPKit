@@ -33,27 +33,27 @@
 using namespace CDPL; 
 
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
-	TYPE Vis::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
-	{																	\
-		return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
-												   MolecularGraphPropertyDefault::PROP_NAME); \
-	}																	\
-																		\
-	void Vis::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg) \
-	{																	\
-		molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);	\
-	}																	\
-																		\
-	bool Vis::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
-	{																	\
-		return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
-	}																	\
-																		\
-	void Vis::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)		\
-	{																	\
-		molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);		\
-	}
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
+    TYPE Vis::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
+    {                                                                    \
+        return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
+                                                   MolecularGraphPropertyDefault::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    void Vis::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg) \
+    {                                                                    \
+        molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);    \
+    }                                                                    \
+                                                                        \
+    bool Vis::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
+    {                                                                    \
+        return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    void Vis::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)        \
+    {                                                                    \
+        molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);        \
+    }
 
 
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(ATOM_COLOR_TABLE, const Vis::ColorTable::SharedPointer&, AtomColorTable)

@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataInputHandler<CDFMoleculeReader, DataFormat::CDF> CDFMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataInputHandler<CDFMoleculeReader, DataFormat::CDF> CDFMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_CDFMOLECULEINPUTHANDLER_HPP

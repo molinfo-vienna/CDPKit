@@ -38,86 +38,86 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Bond;
-		class MolecularGraph;
+        class Bond;
+        class MolecularGraph;
 
-		/**
-		 * \brief BondReactionCenterStatusMatchExpression.
-		 */
-		class CDPL_CHEM_API BondReactionCenterStatusMatchExpression : public MatchExpression<Bond, MolecularGraph>
-		{
+        /**
+         * \brief BondReactionCenterStatusMatchExpression.
+         */
+        class CDPL_CHEM_API BondReactionCenterStatusMatchExpression : public MatchExpression<Bond, MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondReactionCenterStatusMatchExpression
-			 *        instances.
-			 */
-			typedef std::shared_ptr<BondReactionCenterStatusMatchExpression> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondReactionCenterStatusMatchExpression
+             *        instances.
+             */
+            typedef std::shared_ptr<BondReactionCenterStatusMatchExpression> SharedPointer;
 
-			/**
-			 * \brief Constructs a \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction center status.
-			 * \param status The query reaction center status as a (valid) bitwise OR combination of the flags defined in namespace Chem::ReactionCenterStatus.
-			 *               The following flags are supported: Chem::ReactionCenterStatus::NO_CENTER, Chem::ReactionCenterStatus::IS_CENTER, 
-			 *				 Chem::ReactionCenterStatus::BOND_MADE, Chem::ReactionCenterStatus::BOND_BROKEN, Chem::ReactionCenterStatus::BOND_ORDER_CHANGE 
-			 *               and Chem::ReactionCenterStatus::NO_CHANGE - all other flags are ignored. For valid flag combinations see operator()().
-			 */
-			BondReactionCenterStatusMatchExpression(unsigned int status);
+            /**
+             * \brief Constructs a \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction center status.
+             * \param status The query reaction center status as a (valid) bitwise OR combination of the flags defined in namespace Chem::ReactionCenterStatus.
+             *               The following flags are supported: Chem::ReactionCenterStatus::NO_CENTER, Chem::ReactionCenterStatus::IS_CENTER, 
+             *                 Chem::ReactionCenterStatus::BOND_MADE, Chem::ReactionCenterStatus::BOND_BROKEN, Chem::ReactionCenterStatus::BOND_ORDER_CHANGE 
+             *               and Chem::ReactionCenterStatus::NO_CHANGE - all other flags are ignored. For valid flag combinations see operator()().
+             */
+            BondReactionCenterStatusMatchExpression(unsigned int status);
 
-			/**
-			 * \brief Checks whether the reaction center status of \a target_bond matches the query reaction center status
-			 *        specified in the constructor.
-			 *
-			 * The following table lists all supported combinations of query reaction center status flags and the associated
-			 * matching target reaction center states:
-			 *
-			 * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-			 *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-			 *   <th>Query %Reaction Center Status</th> <th>Matching Target %Reaction Center Status</th>
-			 *  </tr>
-			 *  <tr>
-			 *   <td>None specified</td>
-			 *   <td>Expression evaluates to \c true for any target reaction center status</td>
-			 *  </tr>
-			 *  <tr>
-			 *   <td>Chem::ReactionCenterStatus::NO_CENTER</td>
-			 *   <td>Chem::ReactionCenterStatus::NO_CENTER or Chem::ReactionCenterStatus::NONE</td>
-			 *  </tr>
-			 *  <tr>
-			 *   <td>Chem::ReactionCenterStatus::IS_CENTER</td>
-			 *   <td>At least one of the flags Chem::ReactionCenterStatus::IS_CENTER,<br>ReactionCenterStatus::BOND_MADE, 
-			 *	     Chem::ReactionCenterStatus::BOND_BROKEN<br>or Chem::ReactionCenterStatus::BOND_ORDER_CHANGE must be set</td>
-			 *  </tr>
-			 *  <tr>
-			 *   <td>Chem::ReactionCenterStatus::NO_CHANGE</td>
-			 *   <td>None of the flags ReactionCenterStatus::BOND_MADE,<br>Chem::ReactionCenterStatus::BOND_BROKEN and<br>
-			 *       Chem::ReactionCenterStatus::BOND_ORDER_CHANGE must be set</td>
-			 *  </tr>
-			 *  <tr>
-			 *   <td>Any combination of the flags Chem::ReactionCenterStatus::BOND_MADE,<br>Chem::ReactionCenterStatus::BOND_BROKEN
-			 *       and<br>Chem::ReactionCenterStatus::BOND_ORDER_CHANGE</td>
-			 *   <td>The same combination of flags must be set</td>
-			 *  </tr>
-			 * </table>
-			 *
-			 * \param query_bond The query bond (ignored).
-			 * \param query_molgraph The molecular graph containing the query bond (ignored).
-			 * \param target_bond The checked target bond.
-			 * \param target_molgraph The molecular graph containing the target bond (ignored).
-			 * \param aux_data Auxiliary information for expression evaluation (ignored).
-			 * \return \c true if the reaction center status of the target bond matches the query reaction center status (see constructor),
-			 *         and \c false otherwise.
-			 * \note The reaction center status of \a target_bond is retrieved from the Chem::Bond property Chem::BondProperty::REACTION_CENTER_STATUS.
-			 */
-			bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, const Bond& target_bond, 
-							const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
+            /**
+             * \brief Checks whether the reaction center status of \a target_bond matches the query reaction center status
+             *        specified in the constructor.
+             *
+             * The following table lists all supported combinations of query reaction center status flags and the associated
+             * matching target reaction center states:
+             *
+             * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
+             *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
+             *   <th>Query %Reaction Center Status</th> <th>Matching Target %Reaction Center Status</th>
+             *  </tr>
+             *  <tr>
+             *   <td>None specified</td>
+             *   <td>Expression evaluates to \c true for any target reaction center status</td>
+             *  </tr>
+             *  <tr>
+             *   <td>Chem::ReactionCenterStatus::NO_CENTER</td>
+             *   <td>Chem::ReactionCenterStatus::NO_CENTER or Chem::ReactionCenterStatus::NONE</td>
+             *  </tr>
+             *  <tr>
+             *   <td>Chem::ReactionCenterStatus::IS_CENTER</td>
+             *   <td>At least one of the flags Chem::ReactionCenterStatus::IS_CENTER,<br>ReactionCenterStatus::BOND_MADE, 
+             *         Chem::ReactionCenterStatus::BOND_BROKEN<br>or Chem::ReactionCenterStatus::BOND_ORDER_CHANGE must be set</td>
+             *  </tr>
+             *  <tr>
+             *   <td>Chem::ReactionCenterStatus::NO_CHANGE</td>
+             *   <td>None of the flags ReactionCenterStatus::BOND_MADE,<br>Chem::ReactionCenterStatus::BOND_BROKEN and<br>
+             *       Chem::ReactionCenterStatus::BOND_ORDER_CHANGE must be set</td>
+             *  </tr>
+             *  <tr>
+             *   <td>Any combination of the flags Chem::ReactionCenterStatus::BOND_MADE,<br>Chem::ReactionCenterStatus::BOND_BROKEN
+             *       and<br>Chem::ReactionCenterStatus::BOND_ORDER_CHANGE</td>
+             *   <td>The same combination of flags must be set</td>
+             *  </tr>
+             * </table>
+             *
+             * \param query_bond The query bond (ignored).
+             * \param query_molgraph The molecular graph containing the query bond (ignored).
+             * \param target_bond The checked target bond.
+             * \param target_molgraph The molecular graph containing the target bond (ignored).
+             * \param aux_data Auxiliary information for expression evaluation (ignored).
+             * \return \c true if the reaction center status of the target bond matches the query reaction center status (see constructor),
+             *         and \c false otherwise.
+             * \note The reaction center status of \a target_bond is retrieved from the Chem::Bond property Chem::BondProperty::REACTION_CENTER_STATUS.
+             */
+            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, const Bond& target_bond, 
+                            const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
-		private:
-			unsigned int rxnCtrStatus;
-		};
-	}
+        private:
+            unsigned int rxnCtrStatus;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_BONDREACTIONCENTERSTATUSMATCHEXPRESSION_HPP

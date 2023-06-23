@@ -37,116 +37,116 @@
 namespace
 {
 
-	const CDPL::Base::Any& getPropertyOrDef(CDPL::Base::PropertyContainer& cntnr, 
-												const CDPL::Base::LookupKey& key, 
-												const CDPL::Base::Any& def_val)
-	{
-		const CDPL::Base::Any& val = cntnr.getProperty(key, false);
+    const CDPL::Base::Any& getPropertyOrDef(CDPL::Base::PropertyContainer& cntnr, 
+                                                const CDPL::Base::LookupKey& key, 
+                                                const CDPL::Base::Any& def_val)
+    {
+        const CDPL::Base::Any& val = cntnr.getProperty(key, false);
 
-		if (val.isEmpty())
-			return def_val;
+        if (val.isEmpty())
+            return def_val;
 
-		return val;
-	}
+        return val;
+    }
 
-	boost::python::list getPropertyKeys(CDPL::Base::PropertyContainer& cntnr)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    boost::python::list getPropertyKeys(CDPL::Base::PropertyContainer& cntnr)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::list keys;
+        python::list keys;
 
-		std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
-					  std::bind(&python::list::append<Base::LookupKey>, std::ref(keys),
-								std::bind(&Base::PropertyContainer::PropertyEntry::first, std::placeholders::_1)));
+        std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
+                      std::bind(&python::list::append<Base::LookupKey>, std::ref(keys),
+                                std::bind(&Base::PropertyContainer::PropertyEntry::first, std::placeholders::_1)));
 
-		return keys;
-	}
+        return keys;
+    }
 
-	boost::python::list getPropertyValues(CDPL::Base::PropertyContainer& cntnr)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    boost::python::list getPropertyValues(CDPL::Base::PropertyContainer& cntnr)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::list values;
+        python::list values;
 
-		std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
-					  std::bind(&python::list::append<Base::Any>, std::ref(values),
-								std::bind(&Base::PropertyContainer::PropertyEntry::second, std::placeholders::_1)));
+        std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
+                      std::bind(&python::list::append<Base::Any>, std::ref(values),
+                                std::bind(&Base::PropertyContainer::PropertyEntry::second, std::placeholders::_1)));
 
-		return values;
-	}
+        return values;
+    }
 
-	boost::python::list getProperties(CDPL::Base::PropertyContainer& cntnr)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    boost::python::list getProperties(CDPL::Base::PropertyContainer& cntnr)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::list props;
+        python::list props;
 
-		Base::PropertyContainer::ConstPropertyIterator props_end = cntnr.getPropertiesEnd();
+        Base::PropertyContainer::ConstPropertyIterator props_end = cntnr.getPropertiesEnd();
 
-		for (Base::PropertyContainer::ConstPropertyIterator it = cntnr.getPropertiesBegin(); it!= props_end; ++it)  
-			props.append(python::make_tuple(it->first, it->second));
+        for (Base::PropertyContainer::ConstPropertyIterator it = cntnr.getPropertiesBegin(); it!= props_end; ++it)  
+            props.append(python::make_tuple(it->first, it->second));
 
-		return props;
-	}
+        return props;
+    }
 
-	void addProperties(CDPL::Base::PropertyContainer& cntnr, CDPL::Base::PropertyContainer& other)
-	{
-		cntnr.addProperties(other);
-	}
+    void addProperties(CDPL::Base::PropertyContainer& cntnr, CDPL::Base::PropertyContainer& other)
+    {
+        cntnr.addProperties(other);
+    }
 
-	void copyProperties(CDPL::Base::PropertyContainer& cntnr, CDPL::Base::PropertyContainer& other)
-	{
-		cntnr.copyProperties(other);
-	}
+    void copyProperties(CDPL::Base::PropertyContainer& cntnr, CDPL::Base::PropertyContainer& other)
+    {
+        cntnr.copyProperties(other);
+    }
 
-	struct PropertyContainerWrapper : CDPL::Base::PropertyContainer, boost::python::wrapper<CDPL::Base::PropertyContainer>
-	{
-	};
+    struct PropertyContainerWrapper : CDPL::Base::PropertyContainer, boost::python::wrapper<CDPL::Base::PropertyContainer>
+    {
+    };
 }
 
 
 void CDPLPythonBase::exportPropertyContainer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	const Base::Any& (Base::PropertyContainer::*getPropertyFunc)(const Base::LookupKey&, bool) const
-		= &Base::PropertyContainer::getProperty;
-			
-	python::class_<PropertyContainerWrapper, boost::noncopyable>("PropertyContainer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(ObjectIdentityCheckVisitor<Base::PropertyContainer>())
-		.def("getNumProperties", &Base::PropertyContainer::getNumProperties, python::arg("self"))
-		.def("getPropertyOrDefault", &getPropertyOrDef, 
-			 ((python::arg("self"), python::arg("key"), python::arg("def_value"))),
-			 python::return_value_policy<python::copy_const_reference>()) 
-		.def("getPropertyKeys", &getPropertyKeys, python::arg("self"))
-		.def("getPropertyValues", &getPropertyValues, python::arg("self"))
-		.def("getProperties", &getProperties, python::arg("self"))
-		.def("setProperty", &Base::PropertyContainer::setProperty<const Base::Any&>,
-			 (python::arg("self"), python::arg("key"), python::arg("value")))
-		.def("removeProperty", &Base::PropertyContainer::removeProperty,
-			 (python::arg("self"), python::arg("key")))
-		.def("getProperty", getPropertyFunc,
-			 (python::arg("self"), python::arg("key"), python::arg("throw_") = false),
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("isPropertySet", &Base::PropertyContainer::isPropertySet,
-			 (python::arg("self"), python::arg("key")))
-		.def("clearProperties", &Base::PropertyContainer::clearProperties,
-			 python::arg("self"))
-		.def("addProperties", &addProperties,
-			 (python::arg("self"), python::arg("cntnr")))
-		.def("copyProperties", &copyProperties,
-			 (python::arg("self"), python::arg("cntnr")))
-		.def("swap", &Base::PropertyContainer::swap,
-			 (python::arg("self"), python::arg("cntnr")))
-		.def(PropertyContainerSpecialFunctionsVisitor())
-		.add_property("propertyKeys", &getPropertyKeys)
-		.add_property("propertyValues", &getPropertyValues)
-		.add_property("properties", &getProperties)
-		.add_property("numProperties", &Base::PropertyContainer::getNumProperties);
+    const Base::Any& (Base::PropertyContainer::*getPropertyFunc)(const Base::LookupKey&, bool) const
+        = &Base::PropertyContainer::getProperty;
+            
+    python::class_<PropertyContainerWrapper, boost::noncopyable>("PropertyContainer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(ObjectIdentityCheckVisitor<Base::PropertyContainer>())
+        .def("getNumProperties", &Base::PropertyContainer::getNumProperties, python::arg("self"))
+        .def("getPropertyOrDefault", &getPropertyOrDef, 
+             ((python::arg("self"), python::arg("key"), python::arg("def_value"))),
+             python::return_value_policy<python::copy_const_reference>()) 
+        .def("getPropertyKeys", &getPropertyKeys, python::arg("self"))
+        .def("getPropertyValues", &getPropertyValues, python::arg("self"))
+        .def("getProperties", &getProperties, python::arg("self"))
+        .def("setProperty", &Base::PropertyContainer::setProperty<const Base::Any&>,
+             (python::arg("self"), python::arg("key"), python::arg("value")))
+        .def("removeProperty", &Base::PropertyContainer::removeProperty,
+             (python::arg("self"), python::arg("key")))
+        .def("getProperty", getPropertyFunc,
+             (python::arg("self"), python::arg("key"), python::arg("throw_") = false),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("isPropertySet", &Base::PropertyContainer::isPropertySet,
+             (python::arg("self"), python::arg("key")))
+        .def("clearProperties", &Base::PropertyContainer::clearProperties,
+             python::arg("self"))
+        .def("addProperties", &addProperties,
+             (python::arg("self"), python::arg("cntnr")))
+        .def("copyProperties", &copyProperties,
+             (python::arg("self"), python::arg("cntnr")))
+        .def("swap", &Base::PropertyContainer::swap,
+             (python::arg("self"), python::arg("cntnr")))
+        .def(PropertyContainerSpecialFunctionsVisitor())
+        .add_property("propertyKeys", &getPropertyKeys)
+        .add_property("propertyValues", &getPropertyValues)
+        .add_property("properties", &getProperties)
+        .add_property("numProperties", &Base::PropertyContainer::getNumProperties);
 }
 

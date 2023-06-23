@@ -30,15 +30,15 @@
 namespace CDPL
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		namespace FeatureContainerPropertyDefault
-		{
+        namespace FeatureContainerPropertyDefault
+        {
 
-			const std::string NAME = "";
-		}
+            const std::string NAME = "";
+        }
 
-		void initFeatureContainerPropertyDefaults() {}
-	}
+        void initFeatureContainerPropertyDefaults() {}
+    }
 }

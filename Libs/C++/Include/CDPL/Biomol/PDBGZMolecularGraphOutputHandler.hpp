@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
-		 *        [\ref PDB] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<PDBGZMolecularGraphWriter, DataFormat::PDB_GZ> PDBGZMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
+         *        [\ref PDB] format.
+         */
+        typedef Util::DefaultDataOutputHandler<PDBGZMolecularGraphWriter, DataFormat::PDB_GZ> PDBGZMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBGZMOLECULARGRAPHOUTPUTHANDLER_HPP

@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief AmideImidicAcidTautomerizationRule.
-		 */
-		class CDPL_CHEM_API AmideImidicAcidTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief AmideImidicAcidTautomerizationRule.
+         */
+        class CDPL_CHEM_API AmideImidicAcidTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			AmideImidicAcidTautomerization();
-		};
+          public:
+            AmideImidicAcidTautomerization();
+        };
     }
 }
 

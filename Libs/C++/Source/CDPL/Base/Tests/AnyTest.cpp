@@ -38,350 +38,350 @@
 namespace
 {
 
-	struct TestType 
-	{
+    struct TestType 
+    {
 
-		bool operator==(const TestType&) const {
-			return true;
-		}
-	};
+        bool operator==(const TestType&) const {
+            return true;
+        }
+    };
 }
 
 
 BOOST_AUTO_TEST_CASE(AnyTest)
 {
-	using namespace CDPL;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Base;
 
-	std::locale::global(std::locale::classic());
+    std::locale::global(std::locale::classic());
 
-	Any v1;
+    Any v1;
 
-	BOOST_CHECK(v1.isEmpty());
+    BOOST_CHECK(v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(void));
+    BOOST_CHECK(v1.getTypeID() == typeid(void));
 
-	BOOST_CHECK(v1.getDataPointer() == 0);
+    BOOST_CHECK(v1.getDataPointer() == 0);
 
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
 
-	BOOST_CHECK_THROW(v1.getData<char>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<unsigned char>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<signed char>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<unsigned short>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<signed short>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<unsigned int>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<signed int>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<unsigned long>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<signed long>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<float>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<double>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<long double>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<char>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<unsigned char>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<signed char>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<unsigned short>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<signed short>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<unsigned int>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<signed int>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<unsigned long>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<signed long>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<float>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<double>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<long double>(), BadCast);
 
-	BOOST_CHECK_THROW(v1.getData<std::string>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<std::string>(), BadCast);
 
-	BOOST_CHECK_THROW(v1.getData<bool>(), BadCast);
-
-//-----
-
-	v1 = 'X';
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(char));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<char>() == 'X');
-
-	BOOST_CHECK_THROW(v1.getData<unsigned char>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<bool>(), BadCast);
 
 //-----
 
-	v1 = static_cast<unsigned char>(240);
+    v1 = 'X';
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(unsigned char));
+    BOOST_CHECK(v1.getTypeID() == typeid(char));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<unsigned char>() == static_cast<unsigned char>(240));
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<char>() == 'X');
 
-	BOOST_CHECK_THROW(v1.getData<signed char>(), BadCast);
-
-//-----
-
-	v1 = static_cast<signed char>(-120);
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(signed char));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<signed char>() == static_cast<signed char>(-120));
-
-	BOOST_CHECK_THROW(v1.getData<int>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<unsigned char>(), BadCast);
 
 //-----
 
-	v1 = static_cast<unsigned long>(50000000);
+    v1 = static_cast<unsigned char>(240);
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(unsigned long));
+    BOOST_CHECK(v1.getTypeID() == typeid(unsigned char));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(v1.getData<unsigned long>() == static_cast<unsigned long>(50000000));
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<unsigned char>() == static_cast<unsigned char>(240));
 
-	BOOST_CHECK_THROW(v1.getData<signed long>(), BadCast);
-
-//-----
-
-	v1 = 3001.1f;
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(float));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(v1.getData<float>() == 3001.1f);
-
-	BOOST_CHECK_THROW(v1.getData<double>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<signed char>(), BadCast);
 
 //-----
 
-	v1 = 4001.1;
+    v1 = static_cast<signed char>(-120);
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(double));
+    BOOST_CHECK(v1.getTypeID() == typeid(signed char));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(v1.getData<double>() == 4001.1);
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<signed char>() == static_cast<signed char>(-120));
 
-	BOOST_CHECK_THROW(v1.getData<long double>(), BadCast);
-
-//-----
-
-	v1 = true;
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(bool));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<bool>() == true);
-
-	BOOST_CHECK_THROW(v1.getData<int>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<int>(), BadCast);
 
 //-----
 
-	v1 = false;
+    v1 = static_cast<unsigned long>(50000000);
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(bool));
+    BOOST_CHECK(v1.getTypeID() == typeid(unsigned long));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(v1.getData<bool>() == false);
+    BOOST_CHECK(v1.getData<unsigned long>() == static_cast<unsigned long>(50000000));
 
-	BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
-
-//-----
-
-	v1 = std::string("");
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(std::string));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<std::string>() == "");
-
-	BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<signed long>(), BadCast);
 
 //-----
 
-	v1 = std::string("1");
+    v1 = 3001.1f;
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(std::string));
+    BOOST_CHECK(v1.getTypeID() == typeid(float));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<std::string>() == "1");
+    BOOST_CHECK(v1.getData<float>() == 3001.1f);
 
-	BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
-
-//-----
-
-	int int_value = 3;
-
-	v1 = &int_value;
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(int*));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<int*>() == &int_value);
-
-	BOOST_CHECK_THROW(v1.getData<unsigned int*>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<double>(), BadCast);
 
 //-----
 
-	v1 = TestType();
+    v1 = 4001.1;
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(TestType));
+    BOOST_CHECK(v1.getTypeID() == typeid(double));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<TestType>() == TestType());
+    BOOST_CHECK(v1.getData<double>() == 4001.1);
 
-	BOOST_CHECK_THROW(v1.getData<int>(), BadCast);
-
-//-----
-
-	std::shared_ptr<std::string> string_ptr(new std::string("Test"));
-
-	v1 = string_ptr;
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(std::shared_ptr<std::string>));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
-
-	BOOST_CHECK_THROW(v1.getData<std::string>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<long double>(), BadCast);
 
 //-----
 
-	Any v2(static_cast<unsigned short>(30000));
+    v1 = true;
 
-	BOOST_CHECK(!v2.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v2.getTypeID() == typeid(unsigned short));
+    BOOST_CHECK(v1.getTypeID() == typeid(bool));
 
-	BOOST_CHECK(v2.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(&v2.getData<Any>() == &v2);
-	BOOST_CHECK(v2.getData<unsigned short>() == static_cast<unsigned short>(30000));
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<bool>() == true);
 
-	BOOST_CHECK_THROW(v2.getData<short>(), BadCast);
-
-//-----
-
-	Any v3(v1);
-
-	BOOST_CHECK(!v3.isEmpty());
-
-	BOOST_CHECK(v3.getTypeID() == typeid(std::shared_ptr<std::string>));
-
-	BOOST_CHECK(v3.getDataPointer() != 0);
-
-	BOOST_CHECK(&v3.getData<Any>() == &v3);
-	BOOST_CHECK(v3.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
-
-	BOOST_CHECK_THROW(v3.getData<std::string>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<int>(), BadCast);
 
 //-----
 
-	v1 = v2;
+    v1 = false;
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(unsigned short));
+    BOOST_CHECK(v1.getTypeID() == typeid(bool));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(v1.getData<unsigned short>() == static_cast<unsigned short>(30000));
+    BOOST_CHECK(v1.getData<bool>() == false);
 
-	BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<std::shared_ptr<unsigned short> >(), BadCast);
-
-//-----
-
-	v3.swap(v1);
-
-	BOOST_CHECK(!v3.isEmpty());
-
-	BOOST_CHECK(v3.getTypeID() == typeid(unsigned short));
-
-	BOOST_CHECK(v3.getDataPointer() != 0);
-
-	BOOST_CHECK(v3.getData<unsigned short>() == static_cast<unsigned short>(30000));
-
-	BOOST_CHECK_THROW(v3.getData<std::shared_ptr<unsigned short> >(), BadCast);
-
-
-	BOOST_CHECK(!v1.isEmpty());
-
-	BOOST_CHECK(v1.getTypeID() == typeid(std::shared_ptr<std::string>));
-
-	BOOST_CHECK(v1.getDataPointer() != 0);
-
-	BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
-
-	BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
+    BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
 
 //-----
 
-	v1 = Any();
+    v1 = std::string("");
 
-	BOOST_CHECK(v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(void));
+    BOOST_CHECK(v1.getTypeID() == typeid(std::string));
 
-	BOOST_CHECK(v1.getDataPointer() == 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<std::string>() == "");
 
-	BOOST_CHECK(!v3.isEmpty());
-
-	BOOST_CHECK(v3.getTypeID() == typeid(unsigned short));
-
-	BOOST_CHECK(v3.getDataPointer() != 0);
-
-	BOOST_CHECK(v3.getData<unsigned short>() == static_cast<unsigned short>(30000));
+    BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
 
 //-----
 
-	v1.swap(v3);
+    v1 = std::string("1");
 
-	BOOST_CHECK(v3.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v3.getTypeID() == typeid(void));
+    BOOST_CHECK(v1.getTypeID() == typeid(std::string));
 
-	BOOST_CHECK(v3.getDataPointer() == 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
+
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<std::string>() == "1");
+
+    BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
+
+//-----
+
+    int int_value = 3;
+
+    v1 = &int_value;
+
+    BOOST_CHECK(!v1.isEmpty());
+
+    BOOST_CHECK(v1.getTypeID() == typeid(int*));
+
+    BOOST_CHECK(v1.getDataPointer() != 0);
+
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<int*>() == &int_value);
+
+    BOOST_CHECK_THROW(v1.getData<unsigned int*>(), BadCast);
+
+//-----
+
+    v1 = TestType();
+
+    BOOST_CHECK(!v1.isEmpty());
+
+    BOOST_CHECK(v1.getTypeID() == typeid(TestType));
+
+    BOOST_CHECK(v1.getDataPointer() != 0);
+
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<TestType>() == TestType());
+
+    BOOST_CHECK_THROW(v1.getData<int>(), BadCast);
+
+//-----
+
+    std::shared_ptr<std::string> string_ptr(new std::string("Test"));
+
+    v1 = string_ptr;
+
+    BOOST_CHECK(!v1.isEmpty());
+
+    BOOST_CHECK(v1.getTypeID() == typeid(std::shared_ptr<std::string>));
+
+    BOOST_CHECK(v1.getDataPointer() != 0);
+
+    BOOST_CHECK(&v1.getData<Any>() == &v1);
+    BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
+
+    BOOST_CHECK_THROW(v1.getData<std::string>(), BadCast);
+
+//-----
+
+    Any v2(static_cast<unsigned short>(30000));
+
+    BOOST_CHECK(!v2.isEmpty());
+
+    BOOST_CHECK(v2.getTypeID() == typeid(unsigned short));
+
+    BOOST_CHECK(v2.getDataPointer() != 0);
+
+    BOOST_CHECK(&v2.getData<Any>() == &v2);
+    BOOST_CHECK(v2.getData<unsigned short>() == static_cast<unsigned short>(30000));
+
+    BOOST_CHECK_THROW(v2.getData<short>(), BadCast);
+
+//-----
+
+    Any v3(v1);
+
+    BOOST_CHECK(!v3.isEmpty());
+
+    BOOST_CHECK(v3.getTypeID() == typeid(std::shared_ptr<std::string>));
+
+    BOOST_CHECK(v3.getDataPointer() != 0);
+
+    BOOST_CHECK(&v3.getData<Any>() == &v3);
+    BOOST_CHECK(v3.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
+
+    BOOST_CHECK_THROW(v3.getData<std::string>(), BadCast);
+
+//-----
+
+    v1 = v2;
+
+    BOOST_CHECK(!v1.isEmpty());
+
+    BOOST_CHECK(v1.getTypeID() == typeid(unsigned short));
+
+    BOOST_CHECK(v1.getDataPointer() != 0);
+
+    BOOST_CHECK(v1.getData<unsigned short>() == static_cast<unsigned short>(30000));
+
+    BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
+    BOOST_CHECK_THROW(v1.getData<std::shared_ptr<unsigned short> >(), BadCast);
+
+//-----
+
+    v3.swap(v1);
+
+    BOOST_CHECK(!v3.isEmpty());
+
+    BOOST_CHECK(v3.getTypeID() == typeid(unsigned short));
+
+    BOOST_CHECK(v3.getDataPointer() != 0);
+
+    BOOST_CHECK(v3.getData<unsigned short>() == static_cast<unsigned short>(30000));
+
+    BOOST_CHECK_THROW(v3.getData<std::shared_ptr<unsigned short> >(), BadCast);
 
 
-	BOOST_CHECK(!v1.isEmpty());
+    BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(unsigned short));
+    BOOST_CHECK(v1.getTypeID() == typeid(std::shared_ptr<std::string>));
 
-	BOOST_CHECK(v1.getDataPointer() != 0);
+    BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(v1.getData<unsigned short>() == static_cast<unsigned short>(30000));
+    BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
+
+    BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
+
+//-----
+
+    v1 = Any();
+
+    BOOST_CHECK(v1.isEmpty());
+
+    BOOST_CHECK(v1.getTypeID() == typeid(void));
+
+    BOOST_CHECK(v1.getDataPointer() == 0);
+
+
+    BOOST_CHECK(!v3.isEmpty());
+
+    BOOST_CHECK(v3.getTypeID() == typeid(unsigned short));
+
+    BOOST_CHECK(v3.getDataPointer() != 0);
+
+    BOOST_CHECK(v3.getData<unsigned short>() == static_cast<unsigned short>(30000));
+
+//-----
+
+    v1.swap(v3);
+
+    BOOST_CHECK(v3.isEmpty());
+
+    BOOST_CHECK(v3.getTypeID() == typeid(void));
+
+    BOOST_CHECK(v3.getDataPointer() == 0);
+
+
+    BOOST_CHECK(!v1.isEmpty());
+
+    BOOST_CHECK(v1.getTypeID() == typeid(unsigned short));
+
+    BOOST_CHECK(v1.getDataPointer() != 0);
+
+    BOOST_CHECK(v1.getData<unsigned short>() == static_cast<unsigned short>(30000));
 }

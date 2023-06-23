@@ -32,195 +32,195 @@
 namespace
 {
 
-	class TestExpression1 : public CDPL::Chem::MatchExpression<int>
-	{
+    class TestExpression1 : public CDPL::Chem::MatchExpression<int>
+    {
 
-	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
-		{
-			return false;
-		}
+    public:
+        bool operator()(const int&, const int&, const CDPL::Base::Any&) const
+        {
+            return false;
+        }
 
-		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
-		{
-			return true;
-		}
+        bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
+        {
+            return true;
+        }
 
-		bool requiresAtomBondMapping() const
-		{
-			return true;
-		}
-	};
+        bool requiresAtomBondMapping() const
+        {
+            return true;
+        }
+    };
 
-	class TestExpression2 : public CDPL::Chem::MatchExpression<int>
-	{
+    class TestExpression2 : public CDPL::Chem::MatchExpression<int>
+    {
 
-	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
-		{
-			return true;
-		}
+    public:
+        bool operator()(const int&, const int&, const CDPL::Base::Any&) const
+        {
+            return true;
+        }
 
-		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
-		{
-			return false;
-		}
+        bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
+        {
+            return false;
+        }
 
-		bool requiresAtomBondMapping() const
-		{
-			return true;
-		}
-	};
+        bool requiresAtomBondMapping() const
+        {
+            return true;
+        }
+    };
 }
 
 
 BOOST_AUTO_TEST_CASE(ORMatchExpressionListTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace Base;
 
-	ORMatchExpressionList<int> lexpr1;
+    ORMatchExpressionList<int> lexpr1;
 
-	BOOST_CHECK(lexpr1.getSize() == 0);
-	BOOST_CHECK(lexpr1.requiresAtomBondMapping() == false);
+    BOOST_CHECK(lexpr1.getSize() == 0);
+    BOOST_CHECK(lexpr1.requiresAtomBondMapping() == false);
 
-	BOOST_CHECK(lexpr1(0, 0, 0) == true);
-	BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
 
-	BOOST_CHECK(lexpr1.getSize() == 1);
-	BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr1.getSize() == 1);
+    BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr1(0, 0, 0) == false);
-	BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, 0) == false);
+    BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
 
-	BOOST_CHECK(lexpr1.getSize() == 2);
-	BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr1.getSize() == 2);
+    BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr1(0, 0, 0) == false);
-	BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, 0) == false);
+    BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
 
-	BOOST_CHECK(lexpr1.getSize() == 5);
-	BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr1.getSize() == 5);
+    BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr1(0, 0, 0) == false);
-	BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, 0) == false);
+    BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
 
-	BOOST_CHECK(lexpr1.getSize() == 6);
-	BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr1.getSize() == 6);
+    BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr1(0, 0, 0) == true);
-	BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr1.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
 
-	BOOST_CHECK(lexpr1.getSize() == 7);
-	BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr1.getSize() == 7);
+    BOOST_CHECK(lexpr1.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr1(0, 0, 0) == true);
-	BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, 0) == true);
+    BOOST_CHECK(lexpr1(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	ORMatchExpressionList<int> lexpr2;
+    ORMatchExpressionList<int> lexpr2;
 
-	lexpr2.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
+    lexpr2.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
 
-	BOOST_CHECK(lexpr2.getSize() == 1);
-	BOOST_CHECK(lexpr2.requiresAtomBondMapping() == false);
+    BOOST_CHECK(lexpr2.getSize() == 1);
+    BOOST_CHECK(lexpr2.requiresAtomBondMapping() == false);
 
-	BOOST_CHECK(lexpr2(0, 0, 0) == true);
-	BOOST_CHECK(lexpr2(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr2(0, 0, 0) == true);
+    BOOST_CHECK(lexpr2(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr2.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
-	lexpr2.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
-	lexpr2.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr2.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr2.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
+    lexpr2.addElement(MatchExpression<int>::SharedPointer(new TestExpression1()));
 
-	BOOST_CHECK(lexpr2.getSize() == 4);
-	BOOST_CHECK(lexpr2.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr2.getSize() == 4);
+    BOOST_CHECK(lexpr2.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr2(0, 0, 0) == true);
-	BOOST_CHECK(lexpr2(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr2(0, 0, 0) == true);
+    BOOST_CHECK(lexpr2(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	ORMatchExpressionList<int> lexpr3;
+    ORMatchExpressionList<int> lexpr3;
 
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
 
-	BOOST_CHECK(lexpr3.getSize() == 5);
-	BOOST_CHECK(lexpr3.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr3.getSize() == 5);
+    BOOST_CHECK(lexpr3.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr3(0, 0, 0) == true);
-	BOOST_CHECK(lexpr3(0, 0, AtomBondMapping(), 0) == false);
+    BOOST_CHECK(lexpr3(0, 0, 0) == true);
+    BOOST_CHECK(lexpr3(0, 0, AtomBondMapping(), 0) == false);
 
-//-----	
+//-----    
 
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
 
-	BOOST_CHECK(lexpr3.getSize() == 6);
-	BOOST_CHECK(lexpr3.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr3.getSize() == 6);
+    BOOST_CHECK(lexpr3.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr3(0, 0, 0) == true);
-	BOOST_CHECK(lexpr3(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr3(0, 0, 0) == true);
+    BOOST_CHECK(lexpr3(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr3.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
 
-	BOOST_CHECK(lexpr3.getSize() == 7);
-	BOOST_CHECK(lexpr3.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr3.getSize() == 7);
+    BOOST_CHECK(lexpr3.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr3(0, 0, 0) == true);
-	BOOST_CHECK(lexpr3(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr3(0, 0, 0) == true);
+    BOOST_CHECK(lexpr3(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	ORMatchExpressionList<int> lexpr4;
+    ORMatchExpressionList<int> lexpr4;
 
-	lexpr4.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
+    lexpr4.addElement(MatchExpression<int>::SharedPointer(new MatchExpression<int>()));
 
-	BOOST_CHECK(lexpr4.getSize() == 1);
-	BOOST_CHECK(lexpr4.requiresAtomBondMapping() == false);
+    BOOST_CHECK(lexpr4.getSize() == 1);
+    BOOST_CHECK(lexpr4.requiresAtomBondMapping() == false);
 
-	BOOST_CHECK(lexpr4(0, 0, 0) == true);
-	BOOST_CHECK(lexpr4(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr4(0, 0, 0) == true);
+    BOOST_CHECK(lexpr4(0, 0, AtomBondMapping(), 0) == true);
 
-//-----	
+//-----    
 
-	lexpr4.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
-	lexpr4.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
-	lexpr4.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr4.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr4.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
+    lexpr4.addElement(MatchExpression<int>::SharedPointer(new TestExpression2()));
 
-	BOOST_CHECK(lexpr4.getSize() == 4);
-	BOOST_CHECK(lexpr4.requiresAtomBondMapping() == true);
+    BOOST_CHECK(lexpr4.getSize() == 4);
+    BOOST_CHECK(lexpr4.requiresAtomBondMapping() == true);
 
-	BOOST_CHECK(lexpr4(0, 0, 0) == true);
-	BOOST_CHECK(lexpr4(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(lexpr4(0, 0, 0) == true);
+    BOOST_CHECK(lexpr4(0, 0, AtomBondMapping(), 0) == true);
 }

@@ -37,57 +37,57 @@ using namespace CDPL;
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const MolecularGraph& molgraph)
 {
-	typedef std::map<std::size_t, Fragment::SharedPointer> ComponentGroupMap;
+    typedef std::map<std::size_t, Fragment::SharedPointer> ComponentGroupMap;
 
-	ComponentGroupMap group_map;
-	const FragmentList& comps = *getComponents(molgraph);
+    ComponentGroupMap group_map;
+    const FragmentList& comps = *getComponents(molgraph);
 
-	FragmentList::ConstElementIterator comps_end = comps.getElementsEnd();
+    FragmentList::ConstElementIterator comps_end = comps.getElementsEnd();
 
-	for (FragmentList::ConstElementIterator c_it = comps.getElementsBegin(); c_it != comps_end; ++c_it) {
-		const Fragment& comp = *c_it;
-		Fragment::ConstAtomIterator atoms_end = comp.getAtomsEnd();
+    for (FragmentList::ConstElementIterator c_it = comps.getElementsBegin(); c_it != comps_end; ++c_it) {
+        const Fragment& comp = *c_it;
+        Fragment::ConstAtomIterator atoms_end = comp.getAtomsEnd();
 
-		for (Fragment::ConstAtomIterator a_it = comp.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-			const Atom& atom = *a_it;
-			std::size_t group_id = getComponentGroupID(atom);
-		
-			if (group_id == 0)
-				continue;
+        for (Fragment::ConstAtomIterator a_it = comp.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+            const Atom& atom = *a_it;
+            std::size_t group_id = getComponentGroupID(atom);
+        
+            if (group_id == 0)
+                continue;
 
-			Fragment::SharedPointer& grp_ptr = group_map[group_id];
+            Fragment::SharedPointer& grp_ptr = group_map[group_id];
 
-			if (!grp_ptr) 
-				grp_ptr.reset(new Fragment(comp));
+            if (!grp_ptr) 
+                grp_ptr.reset(new Fragment(comp));
 
-			else 
-				(*grp_ptr) += comp;
-			
-			break;
-		}
-	}
+            else 
+                (*grp_ptr) += comp;
+            
+            break;
+        }
+    }
 
-	FragmentList::SharedPointer comp_grps_ptr(new FragmentList());
-	FragmentList* comp_grps = comp_grps_ptr.get();
+    FragmentList::SharedPointer comp_grps_ptr(new FragmentList());
+    FragmentList* comp_grps = comp_grps_ptr.get();
 
-	for (ComponentGroupMap::const_iterator g_it = group_map.begin(), grps_end = group_map.end(); g_it != grps_end; ++g_it)
-		comp_grps->addElement(g_it->second);
+    for (ComponentGroupMap::const_iterator g_it = group_map.begin(), grps_end = group_map.end(); g_it != grps_end; ++g_it)
+        comp_grps->addElement(g_it->second);
 
-	return comp_grps_ptr;
+    return comp_grps_ptr;
 }
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_groups = molgraph.getProperty(MolecularGraphProperty::COMPONENT_GROUPS, false);
-	
-		if (!prev_groups.isEmpty())
-			return prev_groups.getData<FragmentList::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_groups = molgraph.getProperty(MolecularGraphProperty::COMPONENT_GROUPS, false);
+    
+        if (!prev_groups.isEmpty())
+            return prev_groups.getData<FragmentList::SharedPointer>();
+    }
 
-	FragmentList::SharedPointer comp_grps_ptr = perceiveComponentGroups(molgraph);
+    FragmentList::SharedPointer comp_grps_ptr = perceiveComponentGroups(molgraph);
 
-	setComponentGroups(molgraph, comp_grps_ptr);
+    setComponentGroups(molgraph, comp_grps_ptr);
 
-	return comp_grps_ptr;
+    return comp_grps_ptr;
 }

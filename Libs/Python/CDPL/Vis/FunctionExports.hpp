@@ -29,11 +29,11 @@
 namespace CDPLPythonVis
 {
 
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportReactionFunctions();
-	void exportControlParameterFunctions();
+    void exportAtomFunctions();
+    void exportBondFunctions();
+    void exportMolecularGraphFunctions();
+    void exportReactionFunctions();
+    void exportControlParameterFunctions();
 }
 
 #endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP

@@ -32,9 +32,9 @@
 
 void CDPLPythonPharm::exportMoleculeFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
-	
-	python::def("prepareForPharmacophoreGeneration", &Pharm::prepareForPharmacophoreGeneration,
-				(python::arg("mol"), python::arg("calc_hyd") = true, python::arg("from_logp") = false));
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::def("prepareForPharmacophoreGeneration", &Pharm::prepareForPharmacophoreGeneration,
+                (python::arg("mol"), python::arg("calc_hyd") = true, python::arg("from_logp") = false));
 }

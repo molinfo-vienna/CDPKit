@@ -32,16 +32,16 @@
 
 void CDPLPythonPharm::exportPMLPharmacophoreReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::PMLPharmacophoreReader, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
-				   boost::noncopyable>("PMLPharmacophoreReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Pharm::PMLPharmacophoreReader, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+                   boost::noncopyable>("PMLPharmacophoreReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Pharm::PMLPharmacophoreReader>, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
-		boost::noncopyable>("FilePMLPharmacophoreReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Pharm::PMLPharmacophoreReader>, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+        boost::noncopyable>("FilePMLPharmacophoreReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

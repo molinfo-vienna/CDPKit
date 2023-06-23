@@ -38,47 +38,47 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief ParallelPiPiInteractionConstraint.
-		 */
-		class CDPL_PHARM_API ParallelPiPiInteractionConstraint
-		{
+        /**
+         * \brief ParallelPiPiInteractionConstraint.
+         */
+        class CDPL_PHARM_API ParallelPiPiInteractionConstraint
+        {
 
-		  public:
-			static constexpr double DEF_MAX_H_DISTANCE = 2.8;
-			static constexpr double DEF_MIN_V_DISTANCE = 3.0;
-			static constexpr double DEF_MAX_V_DISTANCE = 5.5;
-			static constexpr double DEF_MAX_ANGLE      = 30.0;
-	
-			/**
-			 * \brief Constructs a \c %ParallelPiPiInteractionConstraint functor with the specified constraints.
-			 * \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
-			 * \param max_v_dist The maximum allowed distance of the two feature-positions orthogonal to the ring-planes.
-			 * \param max_h_dist The maximum allowed distance of the feature-position along the their ring-planes.
-			 * \param max_ang The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
-			 */
-			ParallelPiPiInteractionConstraint(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
-											  double max_h_dist = DEF_MAX_H_DISTANCE, double max_ang = DEF_MAX_ANGLE):
-				minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), maxAngle(max_ang) {}
+          public:
+            static constexpr double DEF_MAX_H_DISTANCE = 2.8;
+            static constexpr double DEF_MIN_V_DISTANCE = 3.0;
+            static constexpr double DEF_MAX_V_DISTANCE = 5.5;
+            static constexpr double DEF_MAX_ANGLE      = 30.0;
+    
+            /**
+             * \brief Constructs a \c %ParallelPiPiInteractionConstraint functor with the specified constraints.
+             * \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
+             * \param max_v_dist The maximum allowed distance of the two feature-positions orthogonal to the ring-planes.
+             * \param max_h_dist The maximum allowed distance of the feature-position along the their ring-planes.
+             * \param max_ang The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
+             */
+            ParallelPiPiInteractionConstraint(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
+                                              double max_h_dist = DEF_MAX_H_DISTANCE, double max_ang = DEF_MAX_ANGLE):
+                minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), maxAngle(max_ang) {}
 
-			double getMinVDistance() const;
+            double getMinVDistance() const;
 
-			double getMaxVDistance() const;
+            double getMaxVDistance() const;
 
-			double getMaxHDistance() const;
+            double getMaxHDistance() const;
 
-			double getMaxAngle() const;
+            double getMaxAngle() const;
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			double minVDist;
-			double maxVDist;
-			double maxHDist;
-			double maxAngle;
-		};
+          private:
+            double minVDist;
+            double maxVDist;
+            double maxHDist;
+            double maxAngle;
+        };
     }
 }
 

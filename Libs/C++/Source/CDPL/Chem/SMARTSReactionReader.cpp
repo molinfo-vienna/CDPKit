@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Chem::SMARTSReactionReader::SMARTSReactionReader(std::istream& is): 
-	Util::StreamDataReader<Reaction, SMARTSReactionReader>(is), reader(new SMARTSDataReader(*this)) {}
+    Util::StreamDataReader<Reaction, SMARTSReactionReader>(is), reader(new SMARTSDataReader(*this)) {}
 
 Chem::SMARTSReactionReader::~SMARTSReactionReader() {}
 
 bool Chem::SMARTSReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
-	try {
-		if (overwrite)
-			rxn.clear();
+    try {
+        if (overwrite)
+            rxn.clear();
 
-		return reader->readReaction(is, rxn);
+        return reader->readReaction(is, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("SMARTSReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("SMARTSReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::SMARTSReactionReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipReaction(is);
+    try {
+        return reader->skipReaction(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("SMARTSReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("SMARTSReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::SMARTSReactionReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

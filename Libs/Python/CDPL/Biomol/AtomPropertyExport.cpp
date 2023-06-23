@@ -33,28 +33,28 @@
 namespace 
 {
 
-	struct AtomProperty {};
+    struct AtomProperty {};
 }
 
 
 void CDPLPythonBiomol::exportAtomProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomProperty, boost::noncopyable>("AtomProperty", python::no_init)
-		.def_readonly("RESIDUE_ATOM_NAME", &Biomol::AtomProperty::RESIDUE_ATOM_NAME)
-		.def_readonly("RESIDUE_ALT_ATOM_NAME", &Biomol::AtomProperty::RESIDUE_ALT_ATOM_NAME)
-		.def_readonly("RESIDUE_LEAVING_ATOM_FLAG", &Biomol::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG)
-		.def_readonly("RESIDUE_LINKING_ATOM_FLAG", &Biomol::AtomProperty::RESIDUE_LINKING_ATOM_FLAG)
-		.def_readonly("RESIDUE_CODE", &Biomol::AtomProperty::RESIDUE_CODE)
-		.def_readonly("RESIDUE_SEQUENCE_NUMBER", &Biomol::AtomProperty::RESIDUE_SEQUENCE_NUMBER)
-		.def_readonly("RESIDUE_INSERTION_CODE", &Biomol::AtomProperty::RESIDUE_INSERTION_CODE)
-		.def_readonly("HETERO_ATOM_FLAG", &Biomol::AtomProperty::HETERO_ATOM_FLAG)
-		.def_readonly("CHAIN_ID", &Biomol::AtomProperty::CHAIN_ID)
-		.def_readonly("ALT_LOCATION_ID", &Biomol::AtomProperty::ALT_LOCATION_ID)
-		.def_readonly("MODEL_NUMBER", &Biomol::AtomProperty::MODEL_NUMBER)
-		.def_readonly("SERIAL_NUMBER", &Biomol::AtomProperty::SERIAL_NUMBER)
-		.def_readonly("OCCUPANCY", &Biomol::AtomProperty::OCCUPANCY)
-		.def_readonly("B_FACTOR", &Biomol::AtomProperty::B_FACTOR);
+    python::class_<AtomProperty, boost::noncopyable>("AtomProperty", python::no_init)
+        .def_readonly("RESIDUE_ATOM_NAME", &Biomol::AtomProperty::RESIDUE_ATOM_NAME)
+        .def_readonly("RESIDUE_ALT_ATOM_NAME", &Biomol::AtomProperty::RESIDUE_ALT_ATOM_NAME)
+        .def_readonly("RESIDUE_LEAVING_ATOM_FLAG", &Biomol::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG)
+        .def_readonly("RESIDUE_LINKING_ATOM_FLAG", &Biomol::AtomProperty::RESIDUE_LINKING_ATOM_FLAG)
+        .def_readonly("RESIDUE_CODE", &Biomol::AtomProperty::RESIDUE_CODE)
+        .def_readonly("RESIDUE_SEQUENCE_NUMBER", &Biomol::AtomProperty::RESIDUE_SEQUENCE_NUMBER)
+        .def_readonly("RESIDUE_INSERTION_CODE", &Biomol::AtomProperty::RESIDUE_INSERTION_CODE)
+        .def_readonly("HETERO_ATOM_FLAG", &Biomol::AtomProperty::HETERO_ATOM_FLAG)
+        .def_readonly("CHAIN_ID", &Biomol::AtomProperty::CHAIN_ID)
+        .def_readonly("ALT_LOCATION_ID", &Biomol::AtomProperty::ALT_LOCATION_ID)
+        .def_readonly("MODEL_NUMBER", &Biomol::AtomProperty::MODEL_NUMBER)
+        .def_readonly("SERIAL_NUMBER", &Biomol::AtomProperty::SERIAL_NUMBER)
+        .def_readonly("OCCUPANCY", &Biomol::AtomProperty::OCCUPANCY)
+        .def_readonly("B_FACTOR", &Biomol::AtomProperty::B_FACTOR);
 }

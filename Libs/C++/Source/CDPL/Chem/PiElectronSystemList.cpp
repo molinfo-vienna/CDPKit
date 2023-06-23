@@ -41,23 +41,23 @@ using namespace CDPL;
 namespace
 {
 
-	struct ElecSysCmpFunc
-	{
+    struct ElecSysCmpFunc
+    {
 
-		bool operator()(const Chem::ElectronSystem::SharedPointer& e_sys1, const Chem::ElectronSystem::SharedPointer& e_sys2) const {
-			switch (e_sys1->getNumElectrons()) {
+        bool operator()(const Chem::ElectronSystem::SharedPointer& e_sys1, const Chem::ElectronSystem::SharedPointer& e_sys2) const {
+            switch (e_sys1->getNumElectrons()) {
 
-				case 0:
-					return false;
-					
-				case 1:
-					return (e_sys2->getNumElectrons() != 1);
-					
-				default:
-					return (e_sys2->getNumElectrons() == 0);
-			};
-		}
-	};
+                case 0:
+                    return false;
+                    
+                case 1:
+                    return (e_sys2->getNumElectrons() != 1);
+                    
+                default:
+                    return (e_sys2->getNumElectrons() == 0);
+            };
+        }
+    };
 }
 
 
@@ -71,258 +71,258 @@ Chem::PiElectronSystemList::PiElectronSystemList(const MolecularGraph& molgraph)
 void Chem::PiElectronSystemList::perceive(const MolecularGraph& molgraph)
 {
     clear();
-	
-	initStartElecSystems(molgraph);
-	mergeElecSystems(molgraph);
+    
+    initStartElecSystems(molgraph);
+    mergeElecSystems(molgraph);
 
-	insertElements(getElementsEnd(), workingElecSystems.begin(), workingElecSystems.end());
+    insertElements(getElementsEnd(), workingElecSystems.begin(), workingElecSystems.end());
 }
 
 void Chem::PiElectronSystemList::initStartElecSystems(const MolecularGraph& molgraph)
 {
-	workingElecSystems.clear();
+    workingElecSystems.clear();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		unsigned int type = getType(atom);
-		std::size_t iupac_grp = AtomDictionary::getIUPACGroup(type);
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        unsigned int type = getType(atom);
+        std::size_t iupac_grp = AtomDictionary::getIUPACGroup(type);
 
-		if (iupac_grp < 13 || iupac_grp > 17)
-			continue;
+        if (iupac_grp < 13 || iupac_grp > 17)
+            continue;
 
-		std::size_t num_bonds = getImplicitHydrogenCount(atom);
-		Atom::ConstBondIterator nb_it = atom.getBondsBegin();
+        std::size_t num_bonds = getImplicitHydrogenCount(atom);
+        Atom::ConstBondIterator nb_it = atom.getBondsBegin();
 
-		for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
-			const Bond& bond = *nb_it;
+        for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
+            const Bond& bond = *nb_it;
 
-			if (!molgraph.containsBond(bond))
-				continue;
+            if (!molgraph.containsBond(bond))
+                continue;
 
-			if (!molgraph.containsAtom(*na_it))
-				continue;
+            if (!molgraph.containsAtom(*na_it))
+                continue;
 
-			num_bonds++;
-		}
+            num_bonds++;
+        }
 
-		long form_chg = getFormalCharge(atom);
-		std::size_t num_sys = 4;
+        long form_chg = getFormalCharge(atom);
+        std::size_t num_sys = 4;
 
-		if (type > AtomType::O) {
+        if (type > AtomType::O) {
 
-			switch (iupac_grp) {
+            switch (iupac_grp) {
 
-				case 15:
-					if (num_bonds >= 4)
-						num_sys = 5;
+                case 15:
+                    if (num_bonds >= 4)
+                        num_sys = 5;
 
-					break;
+                    break;
 
-				case 16:
-					if (num_bonds == 3) {
-						if (form_chg == 0)
-							num_sys = 5;
+                case 16:
+                    if (num_bonds == 3) {
+                        if (form_chg == 0)
+                            num_sys = 5;
 
-					} else if (num_bonds >= 4)
-						num_sys = 6;
-					
-					break;
+                    } else if (num_bonds >= 4)
+                        num_sys = 6;
+                    
+                    break;
 
-				case 17:
-					if (num_bonds == 2)
-						num_sys = 5;
+                case 17:
+                    if (num_bonds == 2)
+                        num_sys = 5;
 
-					else if (num_bonds == 3)
-						num_sys = 6;
+                    else if (num_bonds == 3)
+                        num_sys = 6;
 
-					else if (num_bonds >= 4)
-						num_sys = 7;
+                    else if (num_bonds >= 4)
+                        num_sys = 7;
 
-				default:
-					break;
-			}
-		}
+                default:
+                    break;
+            }
+        }
 
-		if (num_bonds >= num_sys)
-			continue;
+        if (num_bonds >= num_sys)
+            continue;
 
-		num_sys -= num_bonds;
+        num_sys -= num_bonds;
 
-		long num_el = AtomDictionary::getNumValenceElectrons(type) - form_chg - num_bonds;
-		std::size_t el_cnts[7];
+        long num_el = AtomDictionary::getNumValenceElectrons(type) - form_chg - num_bonds;
+        std::size_t el_cnts[7];
 
-		std::fill(el_cnts, el_cnts + num_sys, 0);
+        std::fill(el_cnts, el_cnts + num_sys, 0);
 
-		for (long i = 0; i < num_el; i++)
-			el_cnts[i % num_sys] += 1;
+        for (long i = 0; i < num_el; i++)
+            el_cnts[i % num_sys] += 1;
 
-		std::size_t num_lps = 0;
+        std::size_t num_lps = 0;
 
-		for ( ; num_lps < num_sys && el_cnts[num_lps] == 2; num_lps++);
-		
-		std::size_t max_lp_cnt = 1; // allow only at most one lone-pair to be part of a pi-system
+        for ( ; num_lps < num_sys && el_cnts[num_lps] == 2; num_lps++);
+        
+        std::size_t max_lp_cnt = 1; // allow only at most one lone-pair to be part of a pi-system
 
-		if (num_lps < num_sys && el_cnts[num_lps] > 0)
-			max_lp_cnt = 0;
-				
-		for (std::size_t i = 0; i < num_sys; i++) {
-			ElectronSystem::SharedPointer e_sys(new ElectronSystem());
-			
-			e_sys->addAtom(atom, el_cnts[i]);
+        if (num_lps < num_sys && el_cnts[num_lps] > 0)
+            max_lp_cnt = 0;
+                
+        for (std::size_t i = 0; i < num_sys; i++) {
+            ElectronSystem::SharedPointer e_sys(new ElectronSystem());
+            
+            e_sys->addAtom(atom, el_cnts[i]);
 
-			if (num_lps >= 1 && i < (num_lps - max_lp_cnt)) 
-				addElement(e_sys);
-			else
-				workingElecSystems.push_back(e_sys);
-		}
-	}
+            if (num_lps >= 1 && i < (num_lps - max_lp_cnt)) 
+                addElement(e_sys);
+            else
+                workingElecSystems.push_back(e_sys);
+        }
+    }
 }
 
 void Chem::PiElectronSystemList::mergeElecSystems(const MolecularGraph& molgraph)
 {
-	workingElecSystems.sort(ElecSysCmpFunc()); 	// elec. system merge priority: single electron > lone-pair > empty system
+    workingElecSystems.sort(ElecSysCmpFunc());     // elec. system merge priority: single electron > lone-pair > empty system
 
-	mergeElecSystemsPass1(molgraph);
-	mergeElecSystemsPass2(molgraph);
+    mergeElecSystemsPass1(molgraph);
+    mergeElecSystemsPass2(molgraph);
 }
 
 void Chem::PiElectronSystemList::mergeElecSystemsPass1(const MolecularGraph& molgraph)
 {
-	for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
-		ElectronSystem& e_sys1 = **it1;
-		std::size_t num_el1 = e_sys1.getNumElectrons();
+    for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
+        ElectronSystem& e_sys1 = **it1;
+        std::size_t num_el1 = e_sys1.getNumElectrons();
 
-		if (num_el1 == 0) // don't merge empty systems
-			break;
+        if (num_el1 == 0) // don't merge empty systems
+            break;
 
-		for (bool merges = true, sys1_is_lp = (e_sys1.getNumAtoms() == 1 && num_el1 == 2); merges; ) {
-			merges = false;
-			WorkingElecSysList::iterator it2 = it1;
-			
-			for (++it2; it2 != workingElecSystems.end(); ++it2) {
-				const ElectronSystem& e_sys2 = **it2;
-		
-				if (sys1_is_lp && e_sys2.getNumAtoms() == 1 && e_sys2.getNumElectrons() == 2) // don't merge two lone-pairs
-					continue;
-				
-				if (e_sys1.connected(e_sys2, molgraph)) {
-					e_sys1.addAtoms(e_sys2);
-					workingElecSystems.erase(it2);
+        for (bool merges = true, sys1_is_lp = (e_sys1.getNumAtoms() == 1 && num_el1 == 2); merges; ) {
+            merges = false;
+            WorkingElecSysList::iterator it2 = it1;
+            
+            for (++it2; it2 != workingElecSystems.end(); ++it2) {
+                const ElectronSystem& e_sys2 = **it2;
+        
+                if (sys1_is_lp && e_sys2.getNumAtoms() == 1 && e_sys2.getNumElectrons() == 2) // don't merge two lone-pairs
+                    continue;
+                
+                if (e_sys1.connected(e_sys2, molgraph)) {
+                    e_sys1.addAtoms(e_sys2);
+                    workingElecSystems.erase(it2);
 
-					merges = true;
-					sys1_is_lp = false;
-					break;
-				}
-			}
-		}
-	}
+                    merges = true;
+                    sys1_is_lp = false;
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void Chem::PiElectronSystemList::mergeElecSystemsPass2(const MolecularGraph& molgraph) // merge split pi-systems of cumulenes with even number of bonds (helical orbitals)
 {
-	for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
-		ElectronSystem& e_sys1 = **it1;
+    for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
+        ElectronSystem& e_sys1 = **it1;
 
-		if (e_sys1.getNumElectrons() == 0) // don't merge empty systems
-			break;
+        if (e_sys1.getNumElectrons() == 0) // don't merge empty systems
+            break;
 
-		bool sys1_maybe_cumulene = ((e_sys1.getNumAtoms() % 2) == 1 && isLinChainPiSysWith1ElecPerAtom(e_sys1, molgraph));
-		WorkingElecSysList::iterator it2 = it1;
+        bool sys1_maybe_cumulene = ((e_sys1.getNumAtoms() % 2) == 1 && isLinChainPiSysWith1ElecPerAtom(e_sys1, molgraph));
+        WorkingElecSysList::iterator it2 = it1;
 
-		for (++it2; it2 != workingElecSystems.end(); ++it2) {
-			const ElectronSystem& e_sys2 = **it2;
-		
-			if ((sys1_maybe_cumulene && isCumuleneSubPiSystem(e_sys1, e_sys2, molgraph)) || 
-				((e_sys2.getNumAtoms() % 2) == 1 && isLinChainPiSysWith1ElecPerAtom(e_sys2, molgraph) && isCumuleneSubPiSystem(e_sys2, e_sys1, molgraph))) {
+        for (++it2; it2 != workingElecSystems.end(); ++it2) {
+            const ElectronSystem& e_sys2 = **it2;
+        
+            if ((sys1_maybe_cumulene && isCumuleneSubPiSystem(e_sys1, e_sys2, molgraph)) || 
+                ((e_sys2.getNumAtoms() % 2) == 1 && isLinChainPiSysWith1ElecPerAtom(e_sys2, molgraph) && isCumuleneSubPiSystem(e_sys2, e_sys1, molgraph))) {
 
-				e_sys1.merge(e_sys2);
-				workingElecSystems.erase(it2);
-				break;
-			}
-		}
-	}
+                e_sys1.merge(e_sys2);
+                workingElecSystems.erase(it2);
+                break;
+            }
+        }
+    }
 }
 
 bool Chem::PiElectronSystemList::isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys, const MolecularGraph& molgraph) const 
 {
-	if (parent_e_sys.getNumAtoms() <= sub_e_sys.getNumAtoms())
-		return false;
+    if (parent_e_sys.getNumAtoms() <= sub_e_sys.getNumAtoms())
+        return false;
 
-	for (ElectronSystem::ConstAtomIterator a_it = sub_e_sys.getAtomsBegin(), a_end = sub_e_sys.getAtomsEnd(); a_it != a_end; ++a_it) {
-		const Atom& atom = *a_it;
+    for (ElectronSystem::ConstAtomIterator a_it = sub_e_sys.getAtomsBegin(), a_end = sub_e_sys.getAtomsEnd(); a_it != a_end; ++a_it) {
+        const Atom& atom = *a_it;
 
-		if (!parent_e_sys.containsAtom(atom) || parent_e_sys.getElectronContrib(atom) != 1 || !has2NeighborsWith1Elec(atom, parent_e_sys, molgraph))
-			return false;
-	}
+        if (!parent_e_sys.containsAtom(atom) || parent_e_sys.getElectronContrib(atom) != 1 || !has2NeighborsWith1Elec(atom, parent_e_sys, molgraph))
+            return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool Chem::PiElectronSystemList::isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys, const MolecularGraph& molgraph) const
 {
-	if (e_sys.getNumAtoms() == 1) 
-		return (e_sys.getElectronContrib(e_sys.getAtom(0)) == 1);
+    if (e_sys.getNumAtoms() == 1) 
+        return (e_sys.getElectronContrib(e_sys.getAtom(0)) == 1);
 
-	std::size_t num_term_atoms = 0;
+    std::size_t num_term_atoms = 0;
 
-	for (ElectronSystem::ConstAtomIterator it = e_sys.getAtomsBegin(), end = e_sys.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
+    for (ElectronSystem::ConstAtomIterator it = e_sys.getAtomsBegin(), end = e_sys.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
 
-		if (e_sys.getElectronContrib(atom) != 1)
-			return false;
+        if (e_sys.getElectronContrib(atom) != 1)
+            return false;
 
-		Atom::ConstBondIterator nb_it = atom.getBondsBegin();
-		std::size_t num_e_sys_nbrs = 0;
+        Atom::ConstBondIterator nb_it = atom.getBondsBegin();
+        std::size_t num_e_sys_nbrs = 0;
 
-		for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
-			if (!molgraph.containsBond(*nb_it))
-				continue;
+        for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
+            if (!molgraph.containsBond(*nb_it))
+                continue;
 
-			if (!molgraph.containsAtom(*na_it))
-				continue;
+            if (!molgraph.containsAtom(*na_it))
+                continue;
 
-			if (e_sys.containsAtom(*na_it))
-				if (++num_e_sys_nbrs > 2)
-					return false;
-		}
+            if (e_sys.containsAtom(*na_it))
+                if (++num_e_sys_nbrs > 2)
+                    return false;
+        }
 
-		switch (num_e_sys_nbrs) {
+        switch (num_e_sys_nbrs) {
 
-			case 1:
-				num_term_atoms++;
+            case 1:
+                num_term_atoms++;
 
-			case 2:
-				continue;
+            case 2:
+                continue;
 
-			default:
-				return false;
-		}
-	}
+            default:
+                return false;
+        }
+    }
 
-	return (num_term_atoms == 2);
+    return (num_term_atoms == 2);
 }
 
 bool Chem::PiElectronSystemList::has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys, const MolecularGraph& molgraph) const
 {
-	Atom::ConstBondIterator nb_it = atom.getBondsBegin();
-	std::size_t num_e_sys_nbrs = 0;
+    Atom::ConstBondIterator nb_it = atom.getBondsBegin();
+    std::size_t num_e_sys_nbrs = 0;
 
-	for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
-		if (!molgraph.containsBond(*nb_it))
-			continue;
+    for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
+        if (!molgraph.containsBond(*nb_it))
+            continue;
 
-		const Atom& nbr_atom = *na_it;
+        const Atom& nbr_atom = *na_it;
 
-		if (!molgraph.containsAtom(nbr_atom))
-			continue;
+        if (!molgraph.containsAtom(nbr_atom))
+            continue;
 
-		if (e_sys.containsAtom(nbr_atom)) {
-			if (e_sys.getElectronContrib(nbr_atom) != 1)
-				continue;
+        if (e_sys.containsAtom(nbr_atom)) {
+            if (e_sys.getElectronContrib(nbr_atom) != 1)
+                continue;
 
-			num_e_sys_nbrs++;
-		}
-	}
+            num_e_sys_nbrs++;
+        }
+    }
 
-	return (num_e_sys_nbrs >= 2);
+    return (num_e_sys_nbrs >= 2);
 }

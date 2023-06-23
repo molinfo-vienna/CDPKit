@@ -41,65 +41,65 @@ using namespace CDPL;
 
 std::size_t Descr::calcTotalWalkCount(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	typedef std::vector<std::size_t> ECValueArray;
+    using namespace Chem;
+    
+    typedef std::vector<std::size_t> ECValueArray;
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	ECValueArray ec_values(num_atoms);
-	ECValueArray new_ec_values(num_atoms);
+    ECValueArray ec_values(num_atoms);
+    ECValueArray new_ec_values(num_atoms);
 
-	std::size_t num_graph_atoms = 0;
+    std::size_t num_graph_atoms = 0;
 
-	MolecularGraph::ConstAtomIterator atoms_beg = molgraph.getAtomsBegin();
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_beg = molgraph.getAtomsBegin();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it = atoms_beg; it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		unsigned int atom_type = getType(atom);
+    for (MolecularGraph::ConstAtomIterator it = atoms_beg; it != atoms_end; ++it) {
+        const Atom& atom = *it;
+        unsigned int atom_type = getType(atom);
 
-		if (atom_type == AtomType::H)
-			continue;
+        if (atom_type == AtomType::H)
+            continue;
 
-		ec_values[molgraph.getAtomIndex(atom)] = 1;
-		num_graph_atoms++;
-	}
+        ec_values[molgraph.getAtomIndex(atom)] = 1;
+        num_graph_atoms++;
+    }
 
     std::size_t twc = 0;
 
-	for (std::size_t i = 1; i < num_graph_atoms; i++) {
-		for (MolecularGraph::ConstAtomIterator it = atoms_beg; it != atoms_end; ++it) {
-			const Atom& atom = *it;
-			std::size_t atom_idx = molgraph.getAtomIndex(atom);
+    for (std::size_t i = 1; i < num_graph_atoms; i++) {
+        for (MolecularGraph::ConstAtomIterator it = atoms_beg; it != atoms_end; ++it) {
+            const Atom& atom = *it;
+            std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
-			if (ec_values[atom_idx] == 0)
-				continue;
+            if (ec_values[atom_idx] == 0)
+                continue;
 
-			new_ec_values[atom_idx] = 0;
+            new_ec_values[atom_idx] = 0;
 
-			Atom::ConstAtomIterator nbr_atoms_end = atom.getAtomsEnd();
-			Atom::ConstBondIterator nbr_b_it = atom.getBondsBegin();
+            Atom::ConstAtomIterator nbr_atoms_end = atom.getAtomsEnd();
+            Atom::ConstBondIterator nbr_b_it = atom.getBondsBegin();
 
-			for (Atom::ConstAtomIterator nbr_a_it = atom.getAtomsBegin(); nbr_a_it != nbr_atoms_end; ++nbr_a_it, ++nbr_b_it) {
-				if (!molgraph.containsBond(*nbr_b_it))
-					continue;
+            for (Atom::ConstAtomIterator nbr_a_it = atom.getAtomsBegin(); nbr_a_it != nbr_atoms_end; ++nbr_a_it, ++nbr_b_it) {
+                if (!molgraph.containsBond(*nbr_b_it))
+                    continue;
 
-				const Atom& nbr_atom = *nbr_a_it;
+                const Atom& nbr_atom = *nbr_a_it;
 
-				if (!molgraph.containsAtom(nbr_atom))
-					continue;
+                if (!molgraph.containsAtom(nbr_atom))
+                    continue;
 
-				std::size_t nbr_atom_idx = molgraph.getAtomIndex(nbr_atom);
+                std::size_t nbr_atom_idx = molgraph.getAtomIndex(nbr_atom);
 
-				new_ec_values[atom_idx] += ec_values[nbr_atom_idx];
-			}
-		}
+                new_ec_values[atom_idx] += ec_values[nbr_atom_idx];
+            }
+        }
 
-		ec_values.swap(new_ec_values);
+        ec_values.swap(new_ec_values);
 
-		twc = std::accumulate(ec_values.begin(), ec_values.end(), twc);
-	}
+        twc = std::accumulate(ec_values.begin(), ec_values.end(), twc);
+    }
 
-	return twc;
+    return twc;
 }

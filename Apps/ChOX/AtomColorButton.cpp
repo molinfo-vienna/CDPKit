@@ -39,79 +39,79 @@ using namespace ChOX;
 
 
 AtomColorButton::AtomColorButton(QWidget* parent, CDPL::Vis::ColorTable& color_tab, const CDPL::Vis::Color& def_color, std::size_t atom_type): 
-	QLabel(parent), atomType(atom_type), atomColors(color_tab), defaultColor(def_color)
+    QLabel(parent), atomType(atom_type), atomColors(color_tab), defaultColor(def_color)
 {
-	init();
+    init();
 }
 
 void AtomColorButton::updateGUI()
-{	
-	QPalette p = palette();
+{    
+    QPalette p = palette();
 
-	p.setColor(foregroundRole(), CDPL::Vis::QtObjectFactory::createQColor(atomColors.getValue(atomType, defaultColor)));
+    p.setColor(foregroundRole(), CDPL::Vis::QtObjectFactory::createQColor(atomColors.getValue(atomType, defaultColor)));
 
-	setPalette(p);
+    setPalette(p);
 }
 
 void AtomColorButton::editColor()
 {
-	bool ok;
-	QColor new_col;
+    bool ok;
+    QColor new_col;
 
-	setFrameStyle(Panel | Sunken);
+    setFrameStyle(Panel | Sunken);
 
-	new_col.setRgba(QColorDialog::getRgba(CDPL::Vis::QtObjectFactory::createQColor(atomColors.getValue(atomType, defaultColor)).rgba(), 
-										  &ok, this));
-	setFrameStyle(Panel | Raised);
+    new_col.setRgba(QColorDialog::getRgba(CDPL::Vis::QtObjectFactory::createQColor(atomColors.getValue(atomType, defaultColor)).rgba(), 
+                                          &ok, this));
+    setFrameStyle(Panel | Raised);
 
-	if (!ok)
-		return;
+    if (!ok)
+        return;
 
-	atomColors.setEntry(atomType, CDPL::Vis::Color(new_col.redF(), new_col.greenF(), new_col.blueF(), new_col.alphaF()));
-	updateGUI();
+    atomColors.setEntry(atomType, CDPL::Vis::Color(new_col.redF(), new_col.greenF(), new_col.blueF(), new_col.alphaF()));
+    updateGUI();
 
-	emit colorChanged();
+    emit colorChanged();
 }
 
 void AtomColorButton::useDefaultColor()
 {
-	atomColors.removeEntry(atomType);
+    atomColors.removeEntry(atomType);
 
-	updateGUI();
+    updateGUI();
 
-	emit colorChanged();
+    emit colorChanged();
 }
 
 void AtomColorButton::mousePressEvent(QMouseEvent* e)
 {
-	QLabel::mousePressEvent(e);
+    QLabel::mousePressEvent(e);
 
-	if (e->button() != Qt::LeftButton)
-		return;
+    if (e->button() != Qt::LeftButton)
+        return;
 
-	editColor();
+    editColor();
 }
 
 void AtomColorButton::contextMenuEvent(QContextMenuEvent* e)
 {
-	e->accept();
+    e->accept();
 
-	contextMenu->actions().first()->setEnabled(atomColors.containsEntry(atomType));
-	contextMenu->popup(e->globalPos());
+    contextMenu->actions().first()->setEnabled(atomColors.containsEntry(atomType));
+    contextMenu->popup(e->globalPos());
 }
 
 void AtomColorButton::init()
 {
-	setText(QString::fromStdString(CDPL::Chem::AtomDictionary::getSymbol(atomType)));
-	setFrameStyle(Panel | Raised);
-	setAlignment(Qt::AlignCenter);
+    setText(QString::fromStdString(CDPL::Chem::AtomDictionary::getSymbol(atomType)));
+    setFrameStyle(Panel | Raised);
+    setAlignment(Qt::AlignCenter);
 
-	setToolTip(QString::fromStdString(CDPL::Chem::AtomDictionary::getName(atomType)));
+    setToolTip(QString::fromStdString(CDPL::Chem::AtomDictionary::getName(atomType)));
 
-	contextMenu = new QMenu(this);
+    contextMenu = new QMenu(this);
 
-	contextMenu->addAction(tr("Use Default Color"), this, SLOT(useDefaultColor()));
-	contextMenu->addAction(tr("Edit Color..."), this, SLOT(editColor()));
+    contextMenu->addAction(tr("Use Default Color"), this, SLOT(useDefaultColor()));
+    contextMenu->addAction(tr("Edit Color..."), this, SLOT(editColor()));
 
-	updateGUI();
+    updateGUI();
 }

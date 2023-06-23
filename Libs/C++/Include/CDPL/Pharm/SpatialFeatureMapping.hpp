@@ -46,89 +46,89 @@ namespace CDPL
     namespace Pharm
     {
 
-		class FeatureContainer;
+        class FeatureContainer;
 
-		/**
-		 * \brief SpatialFeatureMapping.
-		 */
-		class CDPL_PHARM_API SpatialFeatureMapping : public FeatureMapping
-		{
+        /**
+         * \brief SpatialFeatureMapping.
+         */
+        class CDPL_PHARM_API SpatialFeatureMapping : public FeatureMapping
+        {
 
-		  public:
-			/**
-			 * \brief A generic wrapper class used to store a user-defined feature type match function.
-			 */
-			typedef std::function<bool(const Feature&, const Feature&)> TypeMatchFunction;
+          public:
+            /**
+             * \brief A generic wrapper class used to store a user-defined feature type match function.
+             */
+            typedef std::function<bool(const Feature&, const Feature&)> TypeMatchFunction;
 
-			/**
-			 * \brief A generic wrapper class used to store a user-defined feature position match function.
-			 */
-			typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> PositionMatchFunction;
+            /**
+             * \brief A generic wrapper class used to store a user-defined feature position match function.
+             */
+            typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> PositionMatchFunction;
 
-			/**
-			 * \brief A generic wrapper class used to store a user-defined feature geometry match function.
-			 */
-			typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> GeometryMatchFunction;
+            /**
+             * \brief A generic wrapper class used to store a user-defined feature geometry match function.
+             */
+            typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> GeometryMatchFunction;
 
-			/**
-			 * \brief Constructs a \c %SpatialFeatureMapping instance.
-			 * \param query_mode If \c true, the reference feature container is interpreted as a query feature container and some of the
-			 *                   set default functions will operate in a special query mode.
-			 */
-			SpatialFeatureMapping(bool query_mode = false);
-			
-			/**
-			 * \brief Specifies a function for testing the type compatibility of features.
-			 * \param func The type compatibility test function.
-			 */
-			void setTypeMatchFunction(const TypeMatchFunction& func);
+            /**
+             * \brief Constructs a \c %SpatialFeatureMapping instance.
+             * \param query_mode If \c true, the reference feature container is interpreted as a query feature container and some of the
+             *                   set default functions will operate in a special query mode.
+             */
+            SpatialFeatureMapping(bool query_mode = false);
+            
+            /**
+             * \brief Specifies a function for testing the type compatibility of features.
+             * \param func The type compatibility test function.
+             */
+            void setTypeMatchFunction(const TypeMatchFunction& func);
 
-			/**
-			 * \brief Returns the function that was registered for testing the type compatibility of the features.
-			 * \return The registered type compatibility test function.
-			 */
-			const TypeMatchFunction& getTypeMatchFunction() const;
+            /**
+             * \brief Returns the function that was registered for testing the type compatibility of the features.
+             * \return The registered type compatibility test function.
+             */
+            const TypeMatchFunction& getTypeMatchFunction() const;
 
-			/**
-			 * \brief Specifies a function for checking the proximity of mapped feature positions.
-			 * \param func The position proximity test function.
-			 */
-			void setPositionMatchFunction(const PositionMatchFunction& func);
+            /**
+             * \brief Specifies a function for checking the proximity of mapped feature positions.
+             * \param func The position proximity test function.
+             */
+            void setPositionMatchFunction(const PositionMatchFunction& func);
 
-			/**
-			 * \brief Returns the function that was registered for checking the proximity of mapped feature positions.
-			 * \return The registered position proximity test function.
-			 */
-			const PositionMatchFunction& getPositionMatchFunction() const;
+            /**
+             * \brief Returns the function that was registered for checking the proximity of mapped feature positions.
+             * \return The registered position proximity test function.
+             */
+            const PositionMatchFunction& getPositionMatchFunction() const;
 
-			/**
-			 * \brief Specifies a function for checking the match of mapped feature geometries.
-			 * \param func The feature geometry match test function.
-			 */
-			void setGeometryMatchFunction(const GeometryMatchFunction& func);
+            /**
+             * \brief Specifies a function for checking the match of mapped feature geometries.
+             * \param func The feature geometry match test function.
+             */
+            void setGeometryMatchFunction(const GeometryMatchFunction& func);
 
-			/**
-			 * \brief Returns the function that was registered for checking the match of mapped feature geometries.
-			 * \return The registered geometry match test function.
-			 */
-			const GeometryMatchFunction& getGeometryMatchFunction() const;
+            /**
+             * \brief Returns the function that was registered for checking the match of mapped feature geometries.
+             * \return The registered geometry match test function.
+             */
+            const GeometryMatchFunction& getGeometryMatchFunction() const;
 
-			double getPositionMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
+            double getPositionMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
 
-			double getGeometryMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
+            double getGeometryMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
 
-			void perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform);
+            void perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform);
 
-		  private:
+          private:
             typedef std::pair<const Feature*, const Feature*> FeaturePair;
             typedef std::unordered_map<FeaturePair, double, boost::hash<FeaturePair> > FeaturePairToScoreMap;
 
-			TypeMatchFunction     typeMatchFunc;
-			PositionMatchFunction posMatchFunc;
-			GeometryMatchFunction geomMatchFunc;
-			FeaturePairToScoreMap posMatchScores;
-			FeaturePairToScoreMap geomMatchScores;
-		};
+            TypeMatchFunction     typeMatchFunc;
+            PositionMatchFunction posMatchFunc;
+            GeometryMatchFunction geomMatchFunc;
+            FeaturePairToScoreMap posMatchScores;
+            FeaturePairToScoreMap geomMatchScores;
+        };
     }
 }
 

@@ -37,43 +37,43 @@ namespace CDPL
 
     namespace Shape
     {
-		
-		class AlignmentResult;
+        
+        class AlignmentResult;
 
-		CDPL_SHAPE_API double calcTotalOverlapTanimotoScore(const AlignmentResult& res);
+        CDPL_SHAPE_API double calcTotalOverlapTanimotoScore(const AlignmentResult& res);
 
-		CDPL_SHAPE_API double calcShapeTanimotoScore(const AlignmentResult& res);
+        CDPL_SHAPE_API double calcShapeTanimotoScore(const AlignmentResult& res);
 
-		CDPL_SHAPE_API double calcColorTanimotoScore(const AlignmentResult& res);
+        CDPL_SHAPE_API double calcColorTanimotoScore(const AlignmentResult& res);
 
-		CDPL_SHAPE_API double calcTanimotoComboScore(const AlignmentResult& res);
-
-
-		CDPL_SHAPE_API double calcTotalOverlapTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
-
-		CDPL_SHAPE_API double calcShapeTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
-
-		CDPL_SHAPE_API double calcColorTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
-
-		CDPL_SHAPE_API double calcTverskyComboScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
+        CDPL_SHAPE_API double calcTanimotoComboScore(const AlignmentResult& res);
 
 
-		CDPL_SHAPE_API double calcReferenceTotalOverlapTverskyScore(const AlignmentResult& res, double alpha = 0.95);
+        CDPL_SHAPE_API double calcTotalOverlapTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
-		CDPL_SHAPE_API double calcReferenceShapeTverskyScore(const AlignmentResult& res, double alpha = 0.95);
+        CDPL_SHAPE_API double calcShapeTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
-		CDPL_SHAPE_API double calcReferenceColorTverskyScore(const AlignmentResult& res, double alpha = 0.95);
+        CDPL_SHAPE_API double calcColorTverskyScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
-		CDPL_SHAPE_API double calcReferenceTverskyComboScore(const AlignmentResult& res, double alpha = 0.95);
+        CDPL_SHAPE_API double calcTverskyComboScore(const AlignmentResult& res, double alpha = 0.95, double beta = 0.05);
 
 
-		CDPL_SHAPE_API double calcAlignedTotalOverlapTverskyScore(const AlignmentResult& res, double beta = 0.95);
+        CDPL_SHAPE_API double calcReferenceTotalOverlapTverskyScore(const AlignmentResult& res, double alpha = 0.95);
 
-		CDPL_SHAPE_API double calcAlignedShapeTverskyScore(const AlignmentResult& res, double beta = 0.95);
+        CDPL_SHAPE_API double calcReferenceShapeTverskyScore(const AlignmentResult& res, double alpha = 0.95);
 
-		CDPL_SHAPE_API double calcAlignedColorTverskyScore(const AlignmentResult& res, double beta = 0.95);
+        CDPL_SHAPE_API double calcReferenceColorTverskyScore(const AlignmentResult& res, double alpha = 0.95);
 
-		CDPL_SHAPE_API double calcAlignedTverskyComboScore(const AlignmentResult& res, double beta = 0.95);
+        CDPL_SHAPE_API double calcReferenceTverskyComboScore(const AlignmentResult& res, double alpha = 0.95);
+
+
+        CDPL_SHAPE_API double calcAlignedTotalOverlapTverskyScore(const AlignmentResult& res, double beta = 0.95);
+
+        CDPL_SHAPE_API double calcAlignedShapeTverskyScore(const AlignmentResult& res, double beta = 0.95);
+
+        CDPL_SHAPE_API double calcAlignedColorTverskyScore(const AlignmentResult& res, double beta = 0.95);
+
+        CDPL_SHAPE_API double calcAlignedTverskyComboScore(const AlignmentResult& res, double beta = 0.95);
     }
 }
 

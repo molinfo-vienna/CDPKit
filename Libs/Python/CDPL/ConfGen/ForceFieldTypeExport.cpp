@@ -32,24 +32,24 @@
 namespace 
 {
 
-	struct ForceFieldType {};
+    struct ForceFieldType {};
 }
 
 
 void CDPLPythonConfGen::exportForceFieldTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ForceFieldType, boost::noncopyable>("ForceFieldType", python::no_init)
-		.def_readonly("MMFF94", &ConfGen::ForceFieldType::MMFF94)
-		.def_readonly("MMFF94_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94_NO_ESTAT)
-		.def_readonly("MMFF94S", &ConfGen::ForceFieldType::MMFF94S)
-		.def_readonly("MMFF94S_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_NO_ESTAT)
-		.def_readonly("MMFF94S_XOOP", &ConfGen::ForceFieldType::MMFF94S_XOOP)
-		.def_readonly("MMFF94S_XOOP_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_XOOP_NO_ESTAT)
-		.def_readonly("MMFF94S_RTOR", &ConfGen::ForceFieldType::MMFF94S_RTOR)
-		.def_readonly("MMFF94S_RTOR_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_RTOR_NO_ESTAT)
-		.def_readonly("MMFF94S_RTOR_XOOP", &ConfGen::ForceFieldType::MMFF94S_RTOR_XOOP)
-		.def_readonly("MMFF94S_RTOR_XOOP_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT);
+    python::class_<ForceFieldType, boost::noncopyable>("ForceFieldType", python::no_init)
+        .def_readonly("MMFF94", &ConfGen::ForceFieldType::MMFF94)
+        .def_readonly("MMFF94_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94_NO_ESTAT)
+        .def_readonly("MMFF94S", &ConfGen::ForceFieldType::MMFF94S)
+        .def_readonly("MMFF94S_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_NO_ESTAT)
+        .def_readonly("MMFF94S_XOOP", &ConfGen::ForceFieldType::MMFF94S_XOOP)
+        .def_readonly("MMFF94S_XOOP_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_XOOP_NO_ESTAT)
+        .def_readonly("MMFF94S_RTOR", &ConfGen::ForceFieldType::MMFF94S_RTOR)
+        .def_readonly("MMFF94S_RTOR_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_RTOR_NO_ESTAT)
+        .def_readonly("MMFF94S_RTOR_XOOP", &ConfGen::ForceFieldType::MMFF94S_RTOR_XOOP)
+        .def_readonly("MMFF94S_RTOR_XOOP_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT);
 }

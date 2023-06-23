@@ -29,17 +29,17 @@
 namespace CDPLPythonMath
 {
 
-	void registerFromPythonToVectorConverters();
-	void registerFromPythonToCVectorConverters();
-	void registerFromPythonToMatrixConverters();
-	void registerFromPythonToCMatrixConverters();
-	void registerFromPythonToGridConverters();
-	void registerFromPythonToQuaternionConverters();
-	void registerFromPythonToVectorArrayConverters();
-	void registerFromPythonToExpressionPointerConverters();
-	void registerFromPythonToAnyConverters();
+    void registerFromPythonToVectorConverters();
+    void registerFromPythonToCVectorConverters();
+    void registerFromPythonToMatrixConverters();
+    void registerFromPythonToCMatrixConverters();
+    void registerFromPythonToGridConverters();
+    void registerFromPythonToQuaternionConverters();
+    void registerFromPythonToVectorArrayConverters();
+    void registerFromPythonToExpressionPointerConverters();
+    void registerFromPythonToAnyConverters();
 
-	void registerToPythonConverters();
+    void registerToPythonConverters();
 }
 
 #endif // CDPL_PYTHON_MATH_CONVERTERREGISTRATION_HPP

@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct StructureGenerationMode {};
+    struct StructureGenerationMode {};
 }
 
 
 void CDPLPythonConfGen::exportStructureGenerationModes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<StructureGenerationMode, boost::noncopyable>("StructureGenerationMode", python::no_init)
-		.def_readonly("AUTO", &ConfGen::StructureGenerationMode::AUTO)
-		.def_readonly("FRAGMENT", &ConfGen::StructureGenerationMode::FRAGMENT)
-		.def_readonly("DISTANCE_GEOMETRY", &ConfGen::StructureGenerationMode::DISTANCE_GEOMETRY);
+    python::class_<StructureGenerationMode, boost::noncopyable>("StructureGenerationMode", python::no_init)
+        .def_readonly("AUTO", &ConfGen::StructureGenerationMode::AUTO)
+        .def_readonly("FRAGMENT", &ConfGen::StructureGenerationMode::FRAGMENT)
+        .def_readonly("DISTANCE_GEOMETRY", &ConfGen::StructureGenerationMode::DISTANCE_GEOMETRY);
 }

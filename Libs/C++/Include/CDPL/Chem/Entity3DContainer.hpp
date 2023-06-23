@@ -38,164 +38,164 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Entity3D;
+        class Entity3D;
 
-		/**
-		 * \brief A common interface for data-structures that support a random access to stored Chem::Entity3D instances.
-		 *
-		 * Implementations have to guarantee that a given Chem::Entity3D object is stored only once and its index is unique amongst
-		 * all contained Chem::Entity3D instances. Otherwise algorithms that rely on this behaviour may not work correctly!
-		 */
-		class CDPL_CHEM_API Entity3DContainer
-		{
+        /**
+         * \brief A common interface for data-structures that support a random access to stored Chem::Entity3D instances.
+         *
+         * Implementations have to guarantee that a given Chem::Entity3D object is stored only once and its index is unique amongst
+         * all contained Chem::Entity3D instances. Otherwise algorithms that rely on this behaviour may not work correctly!
+         */
+        class CDPL_CHEM_API Entity3DContainer
+        {
 
-			class ConstEntityAccessor;
-			class EntityAccessor;
+            class ConstEntityAccessor;
+            class EntityAccessor;
 
-		public:
-			/**
-			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::Entity3D objects.
-			 */
-			typedef Util::IndexedElementIterator<const Entity3D, ConstEntityAccessor> ConstEntityIterator;
+        public:
+            /**
+             * \brief A constant random access iterator used to iterate over the stored \c const Chem::Entity3D objects.
+             */
+            typedef Util::IndexedElementIterator<const Entity3D, ConstEntityAccessor> ConstEntityIterator;
 
-			/**
-			 * \brief A mutable random access iterator used to iterate over the stored Chem::Entity3D objects.
-			 */
-			typedef Util::IndexedElementIterator<Entity3D, EntityAccessor> EntityIterator;
+            /**
+             * \brief A mutable random access iterator used to iterate over the stored Chem::Entity3D objects.
+             */
+            typedef Util::IndexedElementIterator<Entity3D, EntityAccessor> EntityIterator;
 
-			/**
-			 * \brief Returns the number of stored Chem::Entity3D objects.
-			 * \return The number of stored Chem::Entity3D objects.
-			 */
-			virtual std::size_t getNumEntities() const = 0;
+            /**
+             * \brief Returns the number of stored Chem::Entity3D objects.
+             * \return The number of stored Chem::Entity3D objects.
+             */
+            virtual std::size_t getNumEntities() const = 0;
 
-			/**
-			 * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx.
-			 * \param idx The zero-based index of the Chem::Entity3D instance to return.
-			 * \return A \c const reference to the Chem::Entity3D instance at the specified index.
-			 * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumEntities() - 1].
-			 */
-			virtual const Entity3D& getEntity(std::size_t idx) const = 0;
+            /**
+             * \brief Returns a \c const reference to the Chem::Entity3D instance at index \a idx.
+             * \param idx The zero-based index of the Chem::Entity3D instance to return.
+             * \return A \c const reference to the Chem::Entity3D instance at the specified index.
+             * \throw Base::IndexError if the container is empty or \a idx is not in the range [0, getNumEntities() - 1].
+             */
+            virtual const Entity3D& getEntity(std::size_t idx) const = 0;
 
-			/**
-			 * \brief Returns a non-\c const reference to the entity at index \a idx.
-			 * \param idx The zero-based index of the Chem::Entity3D instance to return.
-			 * \return A non-\c const reference to the entity at the specified index.
-			 * \throw Base::IndexError if the number of entities is zero or \a idx is not in the range [0, getNumEntities() - 1].
-			 */
-			virtual Entity3D& getEntity(std::size_t idx) = 0;
+            /**
+             * \brief Returns a non-\c const reference to the entity at index \a idx.
+             * \param idx The zero-based index of the Chem::Entity3D instance to return.
+             * \return A non-\c const reference to the entity at the specified index.
+             * \throw Base::IndexError if the number of entities is zero or \a idx is not in the range [0, getNumEntities() - 1].
+             */
+            virtual Entity3D& getEntity(std::size_t idx) = 0;
 
-			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
-			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
-			 */
-			ConstEntityIterator getEntitiesBegin() const;
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+             */
+            ConstEntityIterator getEntitiesBegin() const;
 
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
-			 * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
-			 */
-			ConstEntityIterator getEntitiesEnd() const;
+            /**
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+             */
+            ConstEntityIterator getEntitiesEnd() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
-			 * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
-			 */
-			EntityIterator getEntitiesBegin();
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+             */
+            EntityIterator getEntitiesBegin();
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
-			 * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
-			 */
-			EntityIterator getEntitiesEnd();
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+             */
+            EntityIterator getEntitiesEnd();
 
-			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
-			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
-			 */
-			ConstEntityIterator begin() const;
+            /**
+             * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+             * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+             */
+            ConstEntityIterator begin() const;
 
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
-			 * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
-			 */
-			ConstEntityIterator end() const;
+            /**
+             * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+             * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+             */
+            ConstEntityIterator end() const;
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
-			 * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
-			 */
-			EntityIterator begin();
+            /**
+             * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+             * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+             */
+            EntityIterator begin();
 
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
-			 * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
-			 */
-			EntityIterator end();
-	
-		protected:
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~Entity3DContainer() {}
-		
-			/**
-			 * \brief Assignment operator.
-			 * \param cntnr The other container to copy.
-			 * \return A reference to itself.
-			 */
-			Entity3DContainer& operator=(const Entity3DContainer& cntnr);
+            /**
+             * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+             * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+             */
+            EntityIterator end();
+    
+        protected:
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~Entity3DContainer() {}
+        
+            /**
+             * \brief Assignment operator.
+             * \param cntnr The other container to copy.
+             * \return A reference to itself.
+             */
+            Entity3DContainer& operator=(const Entity3DContainer& cntnr);
 
-		  private:
-			class CDPL_CHEM_API ConstEntityAccessor
-			{
-			
-			public:
-				ConstEntityAccessor(const EntityAccessor& accessor): container(accessor.container) {}
+          private:
+            class CDPL_CHEM_API ConstEntityAccessor
+            {
+            
+            public:
+                ConstEntityAccessor(const EntityAccessor& accessor): container(accessor.container) {}
 
-				ConstEntityAccessor(const Entity3DContainer* cntnr): container(cntnr) {}
+                ConstEntityAccessor(const Entity3DContainer* cntnr): container(cntnr) {}
 
-				const Entity3D& operator()(std::size_t idx) const {
-					return container->getEntity(idx);
-				}
+                const Entity3D& operator()(std::size_t idx) const {
+                    return container->getEntity(idx);
+                }
 
-				bool operator==(const ConstEntityAccessor& accessor) const {
-					return (container == accessor.container);
-				} 
+                bool operator==(const ConstEntityAccessor& accessor) const {
+                    return (container == accessor.container);
+                } 
 
-				ConstEntityAccessor& operator=(const EntityAccessor& accessor) {
-					container = accessor.container;
-					return *this;
-				}
+                ConstEntityAccessor& operator=(const EntityAccessor& accessor) {
+                    container = accessor.container;
+                    return *this;
+                }
 
-			private:
-				const Entity3DContainer* container;
-			};
+            private:
+                const Entity3DContainer* container;
+            };
 
-			class CDPL_CHEM_API EntityAccessor
-			{
-			
-				friend class ConstEntityAccessor;
+            class CDPL_CHEM_API EntityAccessor
+            {
+            
+                friend class ConstEntityAccessor;
 
-			public:
-				EntityAccessor(Entity3DContainer* cntnr): container(cntnr) {}
+            public:
+                EntityAccessor(Entity3DContainer* cntnr): container(cntnr) {}
 
-				Entity3D& operator()(std::size_t idx) const {
-					return container->getEntity(idx);
-				}
+                Entity3D& operator()(std::size_t idx) const {
+                    return container->getEntity(idx);
+                }
 
-				bool operator==(const EntityAccessor& accessor) const {
-					return (container == accessor.container);
-				}
+                bool operator==(const EntityAccessor& accessor) const {
+                    return (container == accessor.container);
+                }
 
-			private:
-				Entity3DContainer* container;
-			};
-		};
-	}
+            private:
+                Entity3DContainer* container;
+            };
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ENTITYCONTAINER_HPP

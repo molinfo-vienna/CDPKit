@@ -37,39 +37,39 @@ void CDPLPythonPharm::exportHydrophobicAtomFeatureGenerator()
     using namespace CDPL;
 
     python::class_<Pharm::HydrophobicAtomFeatureGenerator, Pharm::HydrophobicAtomFeatureGenerator::SharedPointer,
-				   python::bases<Pharm::PatternBasedFeatureGenerator>, 
-				   boost::noncopyable>("HydrophobicAtomFeatureGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<const Pharm::HydrophobicAtomFeatureGenerator&>(
-				 (python::arg("self"), python::arg("gen"))))
-		.def("assign", &Pharm::HydrophobicAtomFeatureGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("setFeatureType", &Pharm::HydrophobicAtomFeatureGenerator::setFeatureType, 
-			 (python::arg("self"), python::arg("type")))
-		.def("setFeatureGeometry", &Pharm::HydrophobicAtomFeatureGenerator::setFeatureGeometry, 
-			 (python::arg("self"), python::arg("geom")))
-		.def("setFeatureTolerance", &Pharm::HydrophobicAtomFeatureGenerator::setFeatureTolerance, 
-			 (python::arg("self"), python::arg("tol")))
-		.def("setHydrophobicityThreshold", &Pharm::HydrophobicAtomFeatureGenerator::setHydrophobicityThreshold, 
-			 (python::arg("self"), python::arg("thresh")))
-		.def("getFeatureType", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureType, python::arg("self"))
-		.def("getFeatureGeometry", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureGeometry, python::arg("self"))
-		.def("getFeatureTolerance", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureTolerance, python::arg("self"))
-		.def("getHydrophobicityThreshold", &Pharm::HydrophobicAtomFeatureGenerator::getHydrophobicityThreshold, python::arg("self"))
-		.def("assign", &Pharm::HydrophobicAtomFeatureGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def_readonly("DEF_FEATURE_TOL", Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TOL)
-		.def_readonly("DEF_FEATURE_TYPE", Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TYPE)
-		.def_readonly("DEF_FEATURE_GEOM", Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_GEOM)
-		.def_readonly("DEF_HYD_THRESHOLD", Pharm::HydrophobicAtomFeatureGenerator::DEF_HYD_THRESHOLD)
-		.add_property("featureType", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureType,
-					  &Pharm::HydrophobicAtomFeatureGenerator::setFeatureType)
-		.add_property("featureGeometry", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureGeometry,
-					  &Pharm::HydrophobicAtomFeatureGenerator::setFeatureGeometry)
-		.add_property("featureTolerance", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureTolerance,
-					  &Pharm::HydrophobicAtomFeatureGenerator::setFeatureTolerance)
-		.add_property("hydThreshold", &Pharm::HydrophobicAtomFeatureGenerator::getHydrophobicityThreshold,
-					  &Pharm::HydrophobicAtomFeatureGenerator::setHydrophobicityThreshold);
+                   python::bases<Pharm::PatternBasedFeatureGenerator>, 
+                   boost::noncopyable>("HydrophobicAtomFeatureGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
+        .def(python::init<const Pharm::HydrophobicAtomFeatureGenerator&>(
+                 (python::arg("self"), python::arg("gen"))))
+        .def("assign", &Pharm::HydrophobicAtomFeatureGenerator::operator=, 
+             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .def("setFeatureType", &Pharm::HydrophobicAtomFeatureGenerator::setFeatureType, 
+             (python::arg("self"), python::arg("type")))
+        .def("setFeatureGeometry", &Pharm::HydrophobicAtomFeatureGenerator::setFeatureGeometry, 
+             (python::arg("self"), python::arg("geom")))
+        .def("setFeatureTolerance", &Pharm::HydrophobicAtomFeatureGenerator::setFeatureTolerance, 
+             (python::arg("self"), python::arg("tol")))
+        .def("setHydrophobicityThreshold", &Pharm::HydrophobicAtomFeatureGenerator::setHydrophobicityThreshold, 
+             (python::arg("self"), python::arg("thresh")))
+        .def("getFeatureType", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureType, python::arg("self"))
+        .def("getFeatureGeometry", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureGeometry, python::arg("self"))
+        .def("getFeatureTolerance", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureTolerance, python::arg("self"))
+        .def("getHydrophobicityThreshold", &Pharm::HydrophobicAtomFeatureGenerator::getHydrophobicityThreshold, python::arg("self"))
+        .def("assign", &Pharm::HydrophobicAtomFeatureGenerator::operator=, 
+             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .def_readonly("DEF_FEATURE_TOL", Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TOL)
+        .def_readonly("DEF_FEATURE_TYPE", Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TYPE)
+        .def_readonly("DEF_FEATURE_GEOM", Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_GEOM)
+        .def_readonly("DEF_HYD_THRESHOLD", Pharm::HydrophobicAtomFeatureGenerator::DEF_HYD_THRESHOLD)
+        .add_property("featureType", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureType,
+                      &Pharm::HydrophobicAtomFeatureGenerator::setFeatureType)
+        .add_property("featureGeometry", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureGeometry,
+                      &Pharm::HydrophobicAtomFeatureGenerator::setFeatureGeometry)
+        .add_property("featureTolerance", &Pharm::HydrophobicAtomFeatureGenerator::getFeatureTolerance,
+                      &Pharm::HydrophobicAtomFeatureGenerator::setFeatureTolerance)
+        .add_property("hydThreshold", &Pharm::HydrophobicAtomFeatureGenerator::getHydrophobicityThreshold,
+                      &Pharm::HydrophobicAtomFeatureGenerator::setHydrophobicityThreshold);
 }

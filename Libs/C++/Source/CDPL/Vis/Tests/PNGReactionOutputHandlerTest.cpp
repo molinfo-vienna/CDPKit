@@ -40,37 +40,37 @@
 
 BOOST_AUTO_TEST_CASE(PNGReactionOutputHandlerTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Vis;
+    using namespace Chem;
+    using namespace Base;
 
-	const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PNG);
+    const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PNG);
 
-	BOOST_CHECK(handler);
+    BOOST_CHECK(handler);
 
-	BOOST_CHECK(handler->getDataFormat() == Vis::DataFormat::PNG);
+    BOOST_CHECK(handler->getDataFormat() == Vis::DataFormat::PNG);
 
-	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByName("png") == handler);
-	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("image/png") == handler);
-	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("png") == handler);
+    BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByName("png") == handler);
+    BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("image/png") == handler);
+    BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("png") == handler);
 
-	std::fstream os("PNGReactionOutputHandlerTest.png", 
-					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+    std::fstream os("PNGReactionOutputHandlerTest.png", 
+                     std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
-	BOOST_CHECK(os);
+    BOOST_CHECK(os);
 
-	DataWriter<Reaction>::SharedPointer writer_ptr(handler->createWriter(os));
+    DataWriter<Reaction>::SharedPointer writer_ptr(handler->createWriter(os));
 
-	BOOST_CHECK(writer_ptr);
+    BOOST_CHECK(writer_ptr);
 
-	BasicReaction rxn;
-	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestRxnData.jme").c_str());
+    BasicReaction rxn;
+    std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestRxnData.jme").c_str());
 
-	BOOST_CHECK(is);
-	BOOST_CHECK(JMEReactionReader(is).read(rxn));
+    BOOST_CHECK(is);
+    BOOST_CHECK(JMEReactionReader(is).read(rxn));
 
-	initReaction(rxn);
+    initReaction(rxn);
 
-	BOOST_CHECK(writer_ptr->write(rxn));
+    BOOST_CHECK(writer_ptr->write(rxn));
 }

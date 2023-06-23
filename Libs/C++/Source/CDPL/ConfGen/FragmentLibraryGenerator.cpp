@@ -38,168 +38,168 @@ using namespace CDPL;
 
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(): 
-	fragLib(), smilesGen(smilesStream), numGenConfs(0)
+    fragLib(), smilesGen(smilesStream), numGenConfs(0)
 {
-	init();
+    init();
 }
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib): 
-	fragLib(lib), smilesGen(smilesStream), numGenConfs(0)
+    fragLib(lib), smilesGen(smilesStream), numGenConfs(0)
 {
-	init();
+    init();
 }
 
 void ConfGen::FragmentLibraryGenerator::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
 {
-	fragLib = lib;
+    fragLib = lib;
 }
 
 const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibraryGenerator::getFragmentLibrary() const
 {
-	return fragLib;
+    return fragLib;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentLibraryGenerator::getSettings()
 {
-	return fragConfGen.getSettings();
+    return fragConfGen.getSettings();
 }
 
 const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentLibraryGenerator::getSettings() const
 {
-	return fragConfGen.getSettings();
+    return fragConfGen.getSettings();
 }
 
 void ConfGen::FragmentLibraryGenerator::setAbortCallback(const CallbackFunction& func)
 {
-	fragConfGen.setAbortCallback(func);
+    fragConfGen.setAbortCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::FragmentLibraryGenerator::getAbortCallback() const
 {
-	return fragConfGen.getAbortCallback();
+    return fragConfGen.getAbortCallback();
 }
 
 void ConfGen::FragmentLibraryGenerator::setTimeoutCallback(const CallbackFunction& func)
 {
-	fragConfGen.setTimeoutCallback(func);
+    fragConfGen.setTimeoutCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::FragmentLibraryGenerator::getTimeoutCallback() const
 {
-	return fragConfGen.getTimeoutCallback();
+    return fragConfGen.getTimeoutCallback();
 }
 
 void ConfGen::FragmentLibraryGenerator::setLogMessageCallback(const LogMessageCallbackFunction& func)
 {
-	fragConfGen.setLogMessageCallback(func);
+    fragConfGen.setLogMessageCallback(func);
 }
 
 const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentLibraryGenerator::getLogMessageCallback() const
 {
-	return fragConfGen.getLogMessageCallback();
+    return fragConfGen.getLogMessageCallback();
 }
 
 unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
 {
-	using namespace Chem;
-	using namespace ConfGen;
+    using namespace Chem;
+    using namespace ConfGen;
 
-	if (!fragLib)
-		return ReturnCode::FRAGMENT_LIBRARY_NOT_SET;
+    if (!fragLib)
+        return ReturnCode::FRAGMENT_LIBRARY_NOT_SET;
 
-	numGenConfs = 0;
+    numGenConfs = 0;
 
-	FragmentLibraryEntry::SharedPointer fl_entry = addNewLibraryEntry(frag, parent);
+    FragmentLibraryEntry::SharedPointer fl_entry = addNewLibraryEntry(frag, parent);
 
-	if (!fl_entry) 
-		return ReturnCode::FRAGMENT_ALREADY_PROCESSED;
-	
-	try {
-		canonFrag.perceiveSSSR();
-		perceiveComponents(canonFrag, false);
+    if (!fl_entry) 
+        return ReturnCode::FRAGMENT_ALREADY_PROCESSED;
+    
+    try {
+        canonFrag.perceiveSSSR();
+        perceiveComponents(canonFrag, false);
 
-		smilesStream.str(std::string());
-		smilesGen.write(canonFrag);
+        smilesStream.str(std::string());
+        smilesGen.write(canonFrag);
 
-		fl_entry->setSMILES(smilesStream.str());
+        fl_entry->setSMILES(smilesStream.str());
 
-		if (getLogMessageCallback()) {
-			getLogMessageCallback()("Canon. Fragment: " + fl_entry->getSMILES() + "\n");
-			getLogMessageCallback()("Hash Code: " + std::to_string(fl_entry->getHashCode()) + "\n");
-		}
+        if (getLogMessageCallback()) {
+            getLogMessageCallback()("Canon. Fragment: " + fl_entry->getSMILES() + "\n");
+            getLogMessageCallback()("Hash Code: " + std::to_string(fl_entry->getHashCode()) + "\n");
+        }
 
-		unsigned int ret_code = fragConfGen.generate(canonFrag);
-		numGenConfs = fragConfGen.getNumConformers();
+        unsigned int ret_code = fragConfGen.generate(canonFrag);
+        numGenConfs = fragConfGen.getNumConformers();
 
-		if (numGenConfs == 0) {
-			removeNewLibraryEntry();
-			return ret_code;
-		}
+        if (numGenConfs == 0) {
+            removeNewLibraryEntry();
+            return ret_code;
+        }
 
-		for (FragmentConformerGenerator::ConformerIterator it = fragConfGen.getConformersBegin(), end = fragConfGen.getConformersEnd(); it != end; ++it) {
-			ConformerData::SharedPointer conf_data(new ConformerData());
+        for (FragmentConformerGenerator::ConformerIterator it = fragConfGen.getConformersBegin(), end = fragConfGen.getConformersEnd(); it != end; ++it) {
+            ConformerData::SharedPointer conf_data(new ConformerData());
 
-			conf_data->swap(*it);
-			fl_entry->addConformer(conf_data);
-		}
+            conf_data->swap(*it);
+            fl_entry->addConformer(conf_data);
+        }
 
-		return ret_code;
+        return ret_code;
 
-	} catch (const std::exception& e) {
-		removeNewLibraryEntry();
-		throw e;
-	}
+    } catch (const std::exception& e) {
+        removeNewLibraryEntry();
+        throw e;
+    }
 
-	return ReturnCode::SUCCESS;
+    return ReturnCode::SUCCESS;
 }
 
 std::size_t ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers() const
 {
-	return numGenConfs;
+    return numGenConfs;
 }
 
 std::uint64_t ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const
 {
-	return canonFrag.getHashCode();
+    return canonFrag.getHashCode();
 }
 
 ConfGen::FragmentLibraryEntry::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	canonFrag.create(frag, parent);
+    canonFrag.create(frag, parent);
 
-	std::lock_guard<std::mutex> lock(fragLib->getMutex());
+    std::lock_guard<std::mutex> lock(fragLib->getMutex());
 
-	if (fragLib->containsEntry(canonFrag.getHashCode())) 
-		return FragmentLibraryEntry::SharedPointer();
+    if (fragLib->containsEntry(canonFrag.getHashCode())) 
+        return FragmentLibraryEntry::SharedPointer();
 
-	FragmentLibraryEntry::SharedPointer entry_ptr(new FragmentLibraryEntry());
+    FragmentLibraryEntry::SharedPointer entry_ptr(new FragmentLibraryEntry());
 
-	entry_ptr->setHashCode(canonFrag.getHashCode());
-	fragLib->addEntry(entry_ptr);
+    entry_ptr->setHashCode(canonFrag.getHashCode());
+    fragLib->addEntry(entry_ptr);
 
-	return entry_ptr;
+    return entry_ptr;
 }
 
 void ConfGen::FragmentLibraryGenerator::removeNewLibraryEntry() const
 {
-	std::lock_guard<std::mutex> lock(fragLib->getMutex());
+    std::lock_guard<std::mutex> lock(fragLib->getMutex());
 
-	fragLib->removeEntry(canonFrag.getHashCode());
+    fragLib->removeEntry(canonFrag.getHashCode());
 }
 
 void ConfGen::FragmentLibraryGenerator::init()
-{	
-	setRecordSeparatorParameter(smilesGen, "");
-	setOrdinaryHydrogenDepleteParameter(smilesGen, false);
-	setSMILESWriteCanonicalFormParameter(smilesGen, false);
-	setSMILESMolWriteAtomMappingIDParameter(smilesGen, false);
-	setSMILESWriteIsotopeParameter(smilesGen, false);
-	setSMILESWriteAtomStereoParameter(smilesGen, true);
-	setSMILESWriteBondStereoParameter(smilesGen, true);
-	setSMILESWriteRingBondStereoParameter(smilesGen, true);
-	setSMILESWriteAromaticBondsParameter(smilesGen, false);
-	setSMILESWriteKekuleFormParameter(smilesGen, false);
+{    
+    setRecordSeparatorParameter(smilesGen, "");
+    setOrdinaryHydrogenDepleteParameter(smilesGen, false);
+    setSMILESWriteCanonicalFormParameter(smilesGen, false);
+    setSMILESMolWriteAtomMappingIDParameter(smilesGen, false);
+    setSMILESWriteIsotopeParameter(smilesGen, false);
+    setSMILESWriteAtomStereoParameter(smilesGen, true);
+    setSMILESWriteBondStereoParameter(smilesGen, true);
+    setSMILESWriteRingBondStereoParameter(smilesGen, true);
+    setSMILESWriteAromaticBondsParameter(smilesGen, false);
+    setSMILESWriteKekuleFormParameter(smilesGen, false);
 }
 

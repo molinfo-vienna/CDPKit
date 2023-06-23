@@ -33,17 +33,17 @@
 namespace 
 {
 
-	struct AtomProperty {};
+    struct AtomProperty {};
 }
 
 
 void CDPLPythonForceField::exportAtomProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomProperty, boost::noncopyable>("AtomProperty", python::no_init)
-		.def_readonly("MMFF94_SYMBOLIC_TYPE", &ForceField::AtomProperty::MMFF94_SYMBOLIC_TYPE)
-		.def_readonly("MMFF94_NUMERIC_TYPE", &ForceField::AtomProperty::MMFF94_NUMERIC_TYPE)
-		.def_readonly("MMFF94_CHARGE", &ForceField::AtomProperty::MMFF94_CHARGE);
+    python::class_<AtomProperty, boost::noncopyable>("AtomProperty", python::no_init)
+        .def_readonly("MMFF94_SYMBOLIC_TYPE", &ForceField::AtomProperty::MMFF94_SYMBOLIC_TYPE)
+        .def_readonly("MMFF94_NUMERIC_TYPE", &ForceField::AtomProperty::MMFF94_NUMERIC_TYPE)
+        .def_readonly("MMFF94_CHARGE", &ForceField::AtomProperty::MMFF94_CHARGE);
 }

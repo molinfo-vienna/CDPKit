@@ -32,87 +32,87 @@
 namespace CDPLPythonBase
 {
 
-	struct AnyToPythonConverter 
-	{
+    struct AnyToPythonConverter 
+    {
 
-		static PyObject* convert(const CDPL::Base::Any& var) {
-			using namespace boost;
-			using namespace CDPL;
+        static PyObject* convert(const CDPL::Base::Any& var) {
+            using namespace boost;
+            using namespace CDPL;
 
-			if (var.isEmpty()) 
-				return python::incref(python::object().ptr());
+            if (var.isEmpty()) 
+                return python::incref(python::object().ptr());
 
-			python::type_info type(var.getTypeID());
+            python::type_info type(var.getTypeID());
 
-			if (type == python::type_id<python::handle<> >()) 
-				return python::incref(python::object(var.getData<python::handle<> >()).ptr());
+            if (type == python::type_id<python::handle<> >()) 
+                return python::incref(python::object(var.getData<python::handle<> >()).ptr());
 
-			if (type == python::type_id<char>()) 
-				return python::incref(python::object(var.getData<char>()).ptr());
+            if (type == python::type_id<char>()) 
+                return python::incref(python::object(var.getData<char>()).ptr());
 
-			if (type == python::type_id<unsigned char>()) 
-				return python::incref(python::object(var.getData<unsigned char>()).ptr());
+            if (type == python::type_id<unsigned char>()) 
+                return python::incref(python::object(var.getData<unsigned char>()).ptr());
 
-			if (type == python::type_id<signed char>()) 
-				return python::incref(python::object(var.getData<signed char>()).ptr());
+            if (type == python::type_id<signed char>()) 
+                return python::incref(python::object(var.getData<signed char>()).ptr());
 
-			if (type == python::type_id<unsigned short>()) 
-				return python::incref(python::object(var.getData<unsigned short>()).ptr());
+            if (type == python::type_id<unsigned short>()) 
+                return python::incref(python::object(var.getData<unsigned short>()).ptr());
 
-			if (type == python::type_id<signed short>()) 
-				return python::incref(python::object(var.getData<signed short>()).ptr());
+            if (type == python::type_id<signed short>()) 
+                return python::incref(python::object(var.getData<signed short>()).ptr());
 
-			if (type == python::type_id<unsigned int>()) 
-				return python::incref(python::object(var.getData<unsigned int>()).ptr());
+            if (type == python::type_id<unsigned int>()) 
+                return python::incref(python::object(var.getData<unsigned int>()).ptr());
 
-			if (type == python::type_id<signed int>()) 
-				return python::incref(python::object(var.getData<signed int>()).ptr());
+            if (type == python::type_id<signed int>()) 
+                return python::incref(python::object(var.getData<signed int>()).ptr());
 
-			if (type == python::type_id<unsigned long>()) 
-				return python::incref(python::object(var.getData<unsigned long>()).ptr());
+            if (type == python::type_id<unsigned long>()) 
+                return python::incref(python::object(var.getData<unsigned long>()).ptr());
 
-			if (type == python::type_id<signed long>()) 
-				return python::incref(python::object(var.getData<signed long>()).ptr());
+            if (type == python::type_id<signed long>()) 
+                return python::incref(python::object(var.getData<signed long>()).ptr());
 
-			if (type == python::type_id<bool>()) 
-				return python::incref(python::object(var.getData<bool>()).ptr());
+            if (type == python::type_id<bool>()) 
+                return python::incref(python::object(var.getData<bool>()).ptr());
 
-			if (type == python::type_id<float>()) 
-				return python::incref(python::object(var.getData<float>()).ptr());
+            if (type == python::type_id<float>()) 
+                return python::incref(python::object(var.getData<float>()).ptr());
 
-			if (type == python::type_id<double>()) 
-				return python::incref(python::object(var.getData<double>()).ptr());
+            if (type == python::type_id<double>()) 
+                return python::incref(python::object(var.getData<double>()).ptr());
 
-			if (type == python::type_id<long double>()) 
-				return python::incref(python::object(var.getData<long double>()).ptr());
+            if (type == python::type_id<long double>()) 
+                return python::incref(python::object(var.getData<long double>()).ptr());
 
-			if (type == python::type_id<std::string>()) 
-				return python::incref(python::object(var.getData<std::string>()).ptr());
-			
-			type = python::type_info(var.getTypeID());
+            if (type == python::type_id<std::string>()) 
+                return python::incref(python::object(var.getData<std::string>()).ptr());
+            
+            type = python::type_info(var.getTypeID());
 
-			const python::converter::registration* reg = python::converter::registry::query(type);
+            const python::converter::registration* reg = python::converter::registry::query(type);
 
-			if (!reg) {
-				python::handle<> msg(PyUnicode_FromFormat("No to_python (by-value) converter found for C++ type: %s" , type.name()));
+            if (!reg) {
+                python::handle<> msg(PyUnicode_FromFormat("No to_python (by-value) converter found for C++ type: %s" , type.name()));
 
-				PyErr_SetObject(PyExc_TypeError, msg.get());
+                PyErr_SetObject(PyExc_TypeError, msg.get());
 
-				python::throw_error_already_set();
+                python::throw_error_already_set();
             }
 
-			return reg->to_python(var.getDataPointer());
-		}
-	};
+            return reg->to_python(var.getDataPointer());
+        }
+    };
 }
 
 
 void CDPLPythonBase::registerToPythonConverters()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::to_python_converter<Base::Any, AnyToPythonConverter>();         // for Any value to Python conversions
+    python::to_python_converter<Base::Any, AnyToPythonConverter>();         // for Any value to Python conversions
 
-	python::class_<Base::Any, boost::noncopyable>("Any", python::no_init);  // for holding a reference/pointer to Any 
+    python::class_<Base::Any, boost::noncopyable>("Any", python::no_init);  // for holding a reference/pointer to Any 
 }

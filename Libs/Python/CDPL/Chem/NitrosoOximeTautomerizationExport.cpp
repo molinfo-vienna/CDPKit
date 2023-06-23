@@ -35,7 +35,7 @@ void CDPLPythonChem::exportNitrosoOximeTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::NitrosoOximeTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("NitrosoOximeTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::NitrosoOximeTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("NitrosoOximeTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::NitrosoOximeTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

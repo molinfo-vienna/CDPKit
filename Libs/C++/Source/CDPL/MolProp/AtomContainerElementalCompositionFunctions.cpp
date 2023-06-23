@@ -40,74 +40,74 @@ using namespace CDPL;
 
 void MolProp::buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	typedef std::map<std::string, std::size_t> ElemCountMap;
+    typedef std::map<std::string, std::size_t> ElemCountMap;
 
-	ElemCountMap elem_counts;
-	std::size_t unknown_count = 0;
+    ElemCountMap elem_counts;
+    std::size_t unknown_count = 0;
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), atoms_end = cntnr.getAtomsEnd(); it != atoms_end; ++it) {
-		unsigned int atom_type = getType(*it);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), atoms_end = cntnr.getAtomsEnd(); it != atoms_end; ++it) {
+        unsigned int atom_type = getType(*it);
 
-		if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
-			unknown_count++;
-		else
-			elem_counts[AtomDictionary::getSymbol(atom_type)]++;
-	}
+        if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
+            unknown_count++;
+        else
+            elem_counts[AtomDictionary::getSymbol(atom_type)]++;
+    }
 
-	std::ostringstream formula_os;
+    std::ostringstream formula_os;
 
-	ElemCountMap::iterator it = elem_counts.find("C");
+    ElemCountMap::iterator it = elem_counts.find("C");
 
-	if (it != elem_counts.end()) {
-		formula_os << 'C';
+    if (it != elem_counts.end()) {
+        formula_os << 'C';
 
-		if (it->second > 1)
-			formula_os << it->second;
+        if (it->second > 1)
+            formula_os << it->second;
 
-		elem_counts.erase(it);
+        elem_counts.erase(it);
 
-		it = elem_counts.find("H");
+        it = elem_counts.find("H");
 
-		if (it != elem_counts.end()) {
-			formula_os << 'H';
-			
-			if (it->second > 1)
-				formula_os << it->second;
+        if (it != elem_counts.end()) {
+            formula_os << 'H';
+            
+            if (it->second > 1)
+                formula_os << it->second;
 
-			elem_counts.erase(it);
-		}
-	}
+            elem_counts.erase(it);
+        }
+    }
 
-	for (ElemCountMap::const_iterator it = elem_counts.begin(), end = elem_counts.end(); it != end; ++it) {
-		formula_os << it->first;
+    for (ElemCountMap::const_iterator it = elem_counts.begin(), end = elem_counts.end(); it != end; ++it) {
+        formula_os << it->first;
 
-		if (it->second > 1)
-			formula_os << std::to_string(it->second);
-	}
+        if (it->second > 1)
+            formula_os << std::to_string(it->second);
+    }
 
-	if (unknown_count > 0)
-		formula_os << '?';
-	if (unknown_count > 1)
-		formula_os << std::to_string(unknown_count);
-	
-	formula = formula_os.str();
+    if (unknown_count > 0)
+        formula_os << '?';
+    if (unknown_count > 1)
+        formula_os << std::to_string(unknown_count);
+    
+    formula = formula_os.str();
 }
 
 void MolProp::buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append)
 {
-	using namespace Chem;
-	
-	if (!append)
-		hist.clear();
+    using namespace Chem;
+    
+    if (!append)
+        hist.clear();
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), atoms_end = cntnr.getAtomsEnd(); it != atoms_end; ++it) {
-		unsigned int atom_type = getType(*it);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), atoms_end = cntnr.getAtomsEnd(); it != atoms_end; ++it) {
+        unsigned int atom_type = getType(*it);
 
-		if (atom_type > AtomType::MAX_ATOMIC_NO)
-			atom_type = AtomType::UNKNOWN;
+        if (atom_type > AtomType::MAX_ATOMIC_NO)
+            atom_type = AtomType::UNKNOWN;
 
-		hist[atom_type]++;
-	}
+        hist[atom_type]++;
+    }
 }

@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Biomol::PDBMoleculeReader::PDBMoleculeReader(std::istream& is): 
-	Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>(is), reader(new PDBDataReader(*this)) {}
+    Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>(is), reader(new PDBDataReader(*this)) {}
 
 Biomol::PDBMoleculeReader::~PDBMoleculeReader() {}
 
 bool Biomol::PDBMoleculeReader::readData(std::istream& is, Chem::Molecule& mol, bool overwrite)
 {
-	try {
-		if (overwrite)
-			mol.clear();
+    try {
+        if (overwrite)
+            mol.clear();
 
-		return reader->readPDBFile(is, mol);
+        return reader->readPDBFile(is, mol);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PDBMoleculeReader: while reading entry " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PDBMoleculeReader: while reading entry " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Biomol::PDBMoleculeReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipPDBFile(is);
+    try {
+        return reader->skipPDBFile(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PDBMoleculeReader: while skipping entry " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PDBMoleculeReader: while skipping entry " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Biomol::PDBMoleculeReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

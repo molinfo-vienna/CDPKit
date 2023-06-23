@@ -33,45 +33,45 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
+    Molecule mol;
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
 
-	BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() == static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() == static_cast<AtomContainer&>(mol).getAtomsEnd());
 
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 0);
-
-//-----
-
-	Atom& atom1 = mol.addAtom();
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
-
-	BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
-
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 1);
-
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == static_cast<AtomContainer&>(mol).getAtomsEnd());
-
-	BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 0);
 
 //-----
 
-	Atom& atom2 = mol.addAtom();
+    Atom& atom1 = mol.addAtom();
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
 
-	BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
 
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 2);
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 1);
 
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) != static_cast<AtomContainer&>(mol).getAtomsEnd());
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 2) == static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == static_cast<AtomContainer&>(mol).getAtomsEnd());
 
-	BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
-	BOOST_CHECK(&*(static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == &atom2);
+    BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
+
+//-----
+
+    Atom& atom2 = mol.addAtom();
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
+
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 2);
+
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) != static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 2) == static_cast<AtomContainer&>(mol).getAtomsEnd());
+
+    BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
+    BOOST_CHECK(&*(static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == &atom2);
 }
 

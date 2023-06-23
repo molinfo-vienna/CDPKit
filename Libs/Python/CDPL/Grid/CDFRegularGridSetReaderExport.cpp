@@ -34,36 +34,36 @@
 
 void CDPLPythonGrid::exportCDFRegularGridSetReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Grid::CDFDRegularGridSetReader, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("CDFDRegularGridSetReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Grid::CDFDRegularGridSetReader, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("CDFDRegularGridSetReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Grid::CDFDRegularGridSetReader>, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("FileCDFDRegularGridSetReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Grid::CDFDRegularGridSetReader>, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("FileCDFDRegularGridSetReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-	python::class_<Grid::CDFGZDRegularGridSetReader, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("CDFGZDRegularGridSetReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Grid::CDFGZDRegularGridSetReader, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("CDFGZDRegularGridSetReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Grid::CDFGZDRegularGridSetReader>, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("FileCDFGZDRegularGridSetReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Grid::CDFGZDRegularGridSetReader>, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("FileCDFGZDRegularGridSetReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-	python::class_<Grid::CDFBZ2DRegularGridSetReader, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("CDFBZ2DRegularGridSetReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Grid::CDFBZ2DRegularGridSetReader, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("CDFBZ2DRegularGridSetReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Grid::CDFBZ2DRegularGridSetReader>, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
-		boost::noncopyable>("FileCDFBZ2DRegularGridSetReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Grid::CDFBZ2DRegularGridSetReader>, python::bases<Base::DataReader<Grid::DRegularGridSet> >, 
+        boost::noncopyable>("FileCDFBZ2DRegularGridSetReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

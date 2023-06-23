@@ -33,7 +33,7 @@ using namespace CDPL;
 Pharm::Feature& Pharm::Feature::operator=(const Feature& feature) 
 {
     if (this == &feature)
-		return *this;
+        return *this;
 
     Entity3D::operator=(feature);
 

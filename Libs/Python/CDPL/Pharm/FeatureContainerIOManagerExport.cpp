@@ -31,5 +31,5 @@
 
 void CDPLPythonPharm::exportFeatureContainerIOManager()
 {
-	CDPLPythonBase::DataIOManagerExport<CDPL::Pharm::FeatureContainer>("FeatureContainerIOManager");
+    CDPLPythonBase::DataIOManagerExport<CDPL::Pharm::FeatureContainer>("FeatureContainerIOManager");
 }

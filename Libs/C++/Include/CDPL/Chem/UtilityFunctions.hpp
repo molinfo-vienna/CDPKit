@@ -42,43 +42,43 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
+    namespace Chem 
+    {
 
-		CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
+        CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
 
-		CDPL_CHEM_API bool parseSMARTS(const std::string& smarts, Molecule& mol, bool init_qry = true);
-		
+        CDPL_CHEM_API bool parseSMARTS(const std::string& smarts, Molecule& mol, bool init_qry = true);
+        
 
-		CDPL_CHEM_API Molecule::SharedPointer parseSMILES(const std::string& smiles);
+        CDPL_CHEM_API Molecule::SharedPointer parseSMILES(const std::string& smiles);
 
-		CDPL_CHEM_API bool parseSMILES(const std::string& smiles, Molecule& mol);
-		
+        CDPL_CHEM_API bool parseSMILES(const std::string& smiles, Molecule& mol);
+        
 
-		CDPL_CHEM_API void extendBoundingBox(Math::Vector3D& min, Math::Vector3D& max, const Math::Vector3D& coords, bool reset = false);
+        CDPL_CHEM_API void extendBoundingBox(Math::Vector3D& min, Math::Vector3D& max, const Math::Vector3D& coords, bool reset = false);
 
-		CDPL_CHEM_API bool insideBoundingBox(const Math::Vector3D& min, const Math::Vector3D& max, const Math::Vector3D& coords);
-		
+        CDPL_CHEM_API bool insideBoundingBox(const Math::Vector3D& min, const Math::Vector3D& max, const Math::Vector3D& coords);
+        
 
-		CDPL_CHEM_API bool isAromatic(const Fragment& ring, const MolecularGraph& molgraph, const Util::BitSet& arom_bond_mask);
+        CDPL_CHEM_API bool isAromatic(const Fragment& ring, const MolecularGraph& molgraph, const Util::BitSet& arom_bond_mask);
 
-		CDPL_CHEM_API bool isNotAromatic(const Fragment& ring, const MolecularGraph& molgraph);
-		
+        CDPL_CHEM_API bool isNotAromatic(const Fragment& ring, const MolecularGraph& molgraph);
+        
 
-		CDPL_CHEM_API bool containsFragmentWithBond(const FragmentList& frag_list, const Bond& bond);
+        CDPL_CHEM_API bool containsFragmentWithBond(const FragmentList& frag_list, const Bond& bond);
 
-		CDPL_CHEM_API bool containsFragmentWithMinSize(const FragmentList& frag_list, std::size_t min_size);
-		
+        CDPL_CHEM_API bool containsFragmentWithMinSize(const FragmentList& frag_list, std::size_t min_size);
+        
 
-		CDPL_CHEM_API bool atomTypesMatch(unsigned int qry_type, unsigned int tgt_type);
+        CDPL_CHEM_API bool atomTypesMatch(unsigned int qry_type, unsigned int tgt_type);
 
 
-		CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
+        CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
 
-		CDPL_CHEM_API const std::string& getSybylAtomTypeString(unsigned int sybyl_type);
+        CDPL_CHEM_API const std::string& getSybylAtomTypeString(unsigned int sybyl_type);
 
-		CDPL_CHEM_API const std::string& getSybylBondTypeString(unsigned int sybyl_type);
-	}
+        CDPL_CHEM_API const std::string& getSybylBondTypeString(unsigned int sybyl_type);
+    }
 }
 
 #endif // CDPL_CHEM_UTILITYFUNCTIONS_HPP

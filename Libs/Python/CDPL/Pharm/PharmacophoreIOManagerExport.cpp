@@ -31,5 +31,5 @@
 
 void CDPLPythonPharm::exportPharmacophoreIOManager()
 {
-	CDPLPythonBase::DataIOManagerExport<CDPL::Pharm::Pharmacophore>("PharmacophoreIOManager");
+    CDPLPythonBase::DataIOManagerExport<CDPL::Pharm::Pharmacophore>("PharmacophoreIOManager");
 }

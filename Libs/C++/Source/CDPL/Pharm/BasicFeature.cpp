@@ -58,7 +58,7 @@ void Pharm::BasicFeature::setIndex(std::size_t idx)
 Pharm::BasicFeature& Pharm::BasicFeature::operator=(const BasicFeature& feature) 
 {
     if (this == &feature)
-		return *this;
+        return *this;
 
     Feature::operator=(feature);
 

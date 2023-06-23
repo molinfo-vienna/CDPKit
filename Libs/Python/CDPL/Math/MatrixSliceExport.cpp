@@ -40,64 +40,64 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct MatrixSliceExport
-	{
-	
-		typedef CDPL::Math::Slice<std::size_t, std::ptrdiff_t> SliceType;
-		typedef CDPL::Math::MatrixSlice<ExpressionType> MatrixSliceType;
-		typedef CDPLPythonMath::MatrixExpressionProxyWrapper<ExpressionType, SliceType, MatrixSliceType> MatrixSliceWrapper;
-		typedef typename MatrixSliceWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixSliceWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct MatrixSliceExport
+    {
+    
+        typedef CDPL::Math::Slice<std::size_t, std::ptrdiff_t> SliceType;
+        typedef CDPL::Math::MatrixSlice<ExpressionType> MatrixSliceType;
+        typedef CDPLPythonMath::MatrixExpressionProxyWrapper<ExpressionType, SliceType, MatrixSliceType> MatrixSliceWrapper;
+        typedef typename MatrixSliceWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixSliceWrapper::SharedPointer WrapperPointerType;
 
-		MatrixSliceExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        MatrixSliceExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<MatrixSliceWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixSliceWrapper&>((python::arg("self"), python::arg("s"))))
-				.def(python::init<const ExpressionPointerType&, const SliceType&, const SliceType&>(
-						 (python::arg("self"), python::arg("e"), python::arg("s1"), python::arg("s2"))))
-				.def("getStart1", &MatrixSliceType::getStart1, python::arg("self"))
-				.def("getStart2", &MatrixSliceType::getStart2, python::arg("self"))
-				.def("getStride1", &MatrixSliceType::getStride1, python::arg("self"))
-				.def("getStride2", &MatrixSliceType::getStride2, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixSliceType>())
-				.def(AssignFunctionGeneratorVisitor<MatrixSliceType, ConstMatrixExpression>("e"))
-				.def(ConstMatrixVisitor<MatrixSliceType>("s"))
-				.def(MatrixAssignAndSwapVisitor<MatrixSliceType>("s"))
-				.def(MatrixVisitor<MatrixSliceType>("s"))
-				.def(MatrixNDArrayAssignVisitor<MatrixSliceType>())
-				.def(WrappedDataVisitor<MatrixSliceWrapper>())
-				.add_property("start1", &MatrixSliceType::getStart1)
-				.add_property("start2", &MatrixSliceType::getStart2)
-				.add_property("stride1", &MatrixSliceType::getStride1)
-				.add_property("stride2", &MatrixSliceType::getStride2);
+            python::class_<MatrixSliceWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixSliceWrapper&>((python::arg("self"), python::arg("s"))))
+                .def(python::init<const ExpressionPointerType&, const SliceType&, const SliceType&>(
+                         (python::arg("self"), python::arg("e"), python::arg("s1"), python::arg("s2"))))
+                .def("getStart1", &MatrixSliceType::getStart1, python::arg("self"))
+                .def("getStart2", &MatrixSliceType::getStart2, python::arg("self"))
+                .def("getStride1", &MatrixSliceType::getStride1, python::arg("self"))
+                .def("getStride2", &MatrixSliceType::getStride2, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixSliceType>())
+                .def(AssignFunctionGeneratorVisitor<MatrixSliceType, ConstMatrixExpression>("e"))
+                .def(ConstMatrixVisitor<MatrixSliceType>("s"))
+                .def(MatrixAssignAndSwapVisitor<MatrixSliceType>("s"))
+                .def(MatrixVisitor<MatrixSliceType>("s"))
+                .def(MatrixNDArrayAssignVisitor<MatrixSliceType>())
+                .def(WrappedDataVisitor<MatrixSliceWrapper>())
+                .add_property("start1", &MatrixSliceType::getStart1)
+                .add_property("start2", &MatrixSliceType::getStart2)
+                .add_property("stride1", &MatrixSliceType::getStride1)
+                .add_property("stride2", &MatrixSliceType::getStride2);
 
-			python::def("slice", &slice1, (python::arg("e"), python::arg("s1"), python::arg("s2")));
-			python::def("slice", &slice2, (python::arg("e"), python::arg("start1"), python::arg("stride1"), 
-										   python::arg("size1"), python::arg("start2"), python::arg("stride2"), 
-										   python::arg("size2")));
-		}
+            python::def("slice", &slice1, (python::arg("e"), python::arg("s1"), python::arg("s2")));
+            python::def("slice", &slice2, (python::arg("e"), python::arg("start1"), python::arg("stride1"), 
+                                           python::arg("size1"), python::arg("start2"), python::arg("stride2"), 
+                                           python::arg("size2")));
+        }
 
-		static WrapperPointerType slice1(const ExpressionPointerType& e, const SliceType& s1, const SliceType& s2) {
-			return WrapperPointerType(new MatrixSliceWrapper(e, s1, s2));
-		}
+        static WrapperPointerType slice1(const ExpressionPointerType& e, const SliceType& s1, const SliceType& s2) {
+            return WrapperPointerType(new MatrixSliceWrapper(e, s1, s2));
+        }
 
-		static WrapperPointerType slice2(const ExpressionPointerType& e, std::size_t start1, 
-										 std::ptrdiff_t stride1, std::size_t size1, std::size_t start2, 
-										 std::ptrdiff_t stride2, std::size_t size2) {
-			return WrapperPointerType(new MatrixSliceWrapper(e, SliceType(start1, stride1, size1),
-															 SliceType(start2, stride2, size2)));
-		}
-	};
+        static WrapperPointerType slice2(const ExpressionPointerType& e, std::size_t start1, 
+                                         std::ptrdiff_t stride1, std::size_t size1, std::size_t start2, 
+                                         std::ptrdiff_t stride2, std::size_t size2) {
+            return WrapperPointerType(new MatrixSliceWrapper(e, SliceType(start1, stride1, size1),
+                                                             SliceType(start2, stride2, size2)));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportMatrixSliceTypes()
 {
-	MatrixSliceExport<MatrixExpression<float> >("FMatrixSlice");
-	MatrixSliceExport<MatrixExpression<double> >("DMatrixSlice");
-	MatrixSliceExport<MatrixExpression<long> >("LMatrixSlice");
-	MatrixSliceExport<MatrixExpression<unsigned long> >("ULMatrixSlice");
+    MatrixSliceExport<MatrixExpression<float> >("FMatrixSlice");
+    MatrixSliceExport<MatrixExpression<double> >("DMatrixSlice");
+    MatrixSliceExport<MatrixExpression<long> >("LMatrixSlice");
+    MatrixSliceExport<MatrixExpression<unsigned long> >("ULMatrixSlice");
 }

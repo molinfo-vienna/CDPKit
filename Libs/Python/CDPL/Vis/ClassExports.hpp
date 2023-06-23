@@ -31,62 +31,62 @@
 namespace CDPLPythonVis
 {
 
-	void exportSizeSpecification();
-	void exportColor();
-	void exportPen();
-	void exportBrush();
-	void exportFont();
-	void exportFontMetrics();
-	void exportLine2D();
-	void exportRectangle2D();
-	void exportPointArray2D();
-	void exportColorTable();
-	void exportGraphicsPrimitive2D();
-	void exportView2D();
-	void exportRenderer2D();
-	void exportStructureView2D();
-	void exportReactionView2D();
-	void exportLinePrimitive2D();
-	void exportPolygonPrimitive2D();
-	void exportPolylinePrimitive2D();
-	void exportLineSegmentListPrimitive2D();
-	void exportPointListPrimitive2D();
-	void exportTextLabelPrimitive2D();
-	void exportEllipsePrimitive2D();
+    void exportSizeSpecification();
+    void exportColor();
+    void exportPen();
+    void exportBrush();
+    void exportFont();
+    void exportFontMetrics();
+    void exportLine2D();
+    void exportRectangle2D();
+    void exportPointArray2D();
+    void exportColorTable();
+    void exportGraphicsPrimitive2D();
+    void exportView2D();
+    void exportRenderer2D();
+    void exportStructureView2D();
+    void exportReactionView2D();
+    void exportLinePrimitive2D();
+    void exportPolygonPrimitive2D();
+    void exportPolylinePrimitive2D();
+    void exportLineSegmentListPrimitive2D();
+    void exportPointListPrimitive2D();
+    void exportTextLabelPrimitive2D();
+    void exportEllipsePrimitive2D();
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
-	void exportPNGMolecularGraphWriter();
-	void exportPNGReactionWriter();
-	void exportPNGMolecularGraphOutputHandler();
-	void exportPNGReactionOutputHandler();
+    void exportPNGMolecularGraphWriter();
+    void exportPNGReactionWriter();
+    void exportPNGMolecularGraphOutputHandler();
+    void exportPNGReactionOutputHandler();
 
 #endif // HAVE_CAIRO_PNG_SUPPORT
 
 #ifdef HAVE_CAIRO_PDF_SUPPORT
 
-	void exportPDFMolecularGraphWriter();
-	void exportPDFReactionWriter();
-	void exportPDFMolecularGraphOutputHandler();
-	void exportPDFReactionOutputHandler();
+    void exportPDFMolecularGraphWriter();
+    void exportPDFReactionWriter();
+    void exportPDFMolecularGraphOutputHandler();
+    void exportPDFReactionOutputHandler();
 
 #endif // HAVE_CAIRO_PDF_SUPPORT
 
 #ifdef HAVE_CAIRO_PS_SUPPORT
 
-	void exportPSMolecularGraphWriter();
-	void exportPSReactionWriter();
-	void exportPSMolecularGraphOutputHandler();
-	void exportPSReactionOutputHandler();
+    void exportPSMolecularGraphWriter();
+    void exportPSReactionWriter();
+    void exportPSMolecularGraphOutputHandler();
+    void exportPSReactionOutputHandler();
 
 #endif // HAVE_CAIRO_PS_SUPPORT
 
 #ifdef HAVE_CAIRO_SVG_SUPPORT
 
-	void exportSVGMolecularGraphWriter();
-	void exportSVGReactionWriter();
-	void exportSVGMolecularGraphOutputHandler();
-	void exportSVGReactionOutputHandler();
+    void exportSVGMolecularGraphWriter();
+    void exportSVGReactionWriter();
+    void exportSVGMolecularGraphOutputHandler();
+    void exportSVGReactionOutputHandler();
 
 #endif // HAVE_CAIRO_SVG_SUPPORT
 

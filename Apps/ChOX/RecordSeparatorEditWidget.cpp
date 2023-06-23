@@ -32,61 +32,61 @@ using namespace ChOX;
 
 
 RecordSeparatorEditWidget::RecordSeparatorEditWidget(QWidget* parent, std::string& separator):
-	QWidget(parent), recordSeparator(separator)
+    QWidget(parent), recordSeparator(separator)
 {
-	init();
+    init();
 }
 
 void RecordSeparatorEditWidget::updateGUI()
 {
-	recordSeparatorComboBox->blockSignals(true);
+    recordSeparatorComboBox->blockSignals(true);
 
-	if (recordSeparator.empty()) 
-		recordSeparatorComboBox->setCurrentIndex(0);
-	else if (recordSeparator == " ")
-		recordSeparatorComboBox->setCurrentIndex(1);
-	else
-		recordSeparatorComboBox->setCurrentIndex(2);
+    if (recordSeparator.empty()) 
+        recordSeparatorComboBox->setCurrentIndex(0);
+    else if (recordSeparator == " ")
+        recordSeparatorComboBox->setCurrentIndex(1);
+    else
+        recordSeparatorComboBox->setCurrentIndex(2);
 
-	recordSeparatorComboBox->blockSignals(false);
+    recordSeparatorComboBox->blockSignals(false);
 }
 
 void RecordSeparatorEditWidget::handleSeparatorSelection(int idx)
 {
-	switch (idx) {
+    switch (idx) {
 
-		case 1:
-			recordSeparator = " ";
-			break;
+        case 1:
+            recordSeparator = " ";
+            break;
 
-		case 2:
-			recordSeparator = "\n";
-			break;
+        case 2:
+            recordSeparator = "\n";
+            break;
 
-		default:
-			recordSeparator = "";
-	}
+        default:
+            recordSeparator = "";
+    }
 
-	emit recordSeparatorChanged();
+    emit recordSeparatorChanged();
 }
 
 void RecordSeparatorEditWidget::init()
 {
-	QBoxLayout* main_layout = new QHBoxLayout(this);
+    QBoxLayout* main_layout = new QHBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	recordSeparatorComboBox = new QComboBox(this);
+    recordSeparatorComboBox = new QComboBox(this);
 
-	connect(recordSeparatorComboBox, SIGNAL(activated(int)), this, SLOT(handleSeparatorSelection(int)));
+    connect(recordSeparatorComboBox, SIGNAL(activated(int)), this, SLOT(handleSeparatorSelection(int)));
 
-	setFocusProxy(recordSeparatorComboBox);
+    setFocusProxy(recordSeparatorComboBox);
 
-	recordSeparatorComboBox->addItem(tr("None"));
-	recordSeparatorComboBox->addItem(tr("Space"));
-	recordSeparatorComboBox->addItem(tr("Linebreak"));
+    recordSeparatorComboBox->addItem(tr("None"));
+    recordSeparatorComboBox->addItem(tr("Space"));
+    recordSeparatorComboBox->addItem(tr("Linebreak"));
 
-	main_layout->addWidget(recordSeparatorComboBox);
+    main_layout->addWidget(recordSeparatorComboBox);
 
-	updateGUI();
+    updateGUI();
 }

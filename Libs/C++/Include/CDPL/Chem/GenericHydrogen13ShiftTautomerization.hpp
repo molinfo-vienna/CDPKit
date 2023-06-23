@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief GenericHydrogen13ShiftTautomerizationRule.
-		 */
-		class CDPL_CHEM_API GenericHydrogen13ShiftTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief GenericHydrogen13ShiftTautomerizationRule.
+         */
+        class CDPL_CHEM_API GenericHydrogen13ShiftTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			GenericHydrogen13ShiftTautomerization();
-		};
+          public:
+            GenericHydrogen13ShiftTautomerization();
+        };
     }
 }
 

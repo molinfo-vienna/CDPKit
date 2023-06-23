@@ -35,32 +35,32 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		/**
-		 * \brief Provides keys for built-in MolProp::Atom properties.
-		 */
-		namespace AtomProperty
-		{
+        /**
+         * \brief Provides keys for built-in MolProp::Atom properties.
+         */
+        namespace AtomProperty
+        {
 
-			extern CDPL_MOLPROP_API const Base::LookupKey HYDROPHOBICITY;
+            extern CDPL_MOLPROP_API const Base::LookupKey HYDROPHOBICITY;
 
-			extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_CHARGE;
-			extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_ELECTRONEGATIVITY;
+            extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_CHARGE;
+            extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_ELECTRONEGATIVITY;
 
-			extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_CHARGE;
+            extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_CHARGE;
 
-			extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_DONOR_TYPE;
-			extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_ACCEPTOR_TYPE;
-		}
-	}
+            extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_DONOR_TYPE;
+            extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_ACCEPTOR_TYPE;
+        }
+    }
 }
 
 #endif // CDPL_MOLPROP_ATOMPROPERTY_HPP

@@ -38,34 +38,34 @@ void CDPLPythonShape::exportScreeningProcessor()
     using namespace CDPL;
 
     python::class_<Shape::ScreeningProcessor, Shape::ScreeningProcessor::SharedPointer, boost::noncopyable>("ScreeningProcessor", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::ScreeningProcessor>())
-		.def("setHitCallback", &Shape::ScreeningProcessor::setHitCallback,
-			 (python::arg("self"), python::arg("func")))
-		.def("getHitCallback", &Shape::ScreeningProcessor::getHitCallback,
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("getSettings", 
-			 static_cast<Shape::ScreeningSettings& (Shape::ScreeningProcessor::*)()>
-			 (&Shape::ScreeningProcessor::getSettings), 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("clearQuerySet", &Shape::ScreeningProcessor::clearQuerySet,
-			 python::arg("self"))
-		.def("addQuery", &Shape::ScreeningProcessor::addQuery,
-			 (python::arg("self"), python::arg("molgraph")), python::with_custodian_and_ward<1, 2>())
-		.def("getQuerySetSize", &Shape::ScreeningProcessor::getQuerySetSize, 
-			 python::arg("self"))
-		.def("getQuery", &Shape::ScreeningProcessor::getQuery,
-			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.def("process", static_cast<bool (Shape::ScreeningProcessor::*)(const Chem::MolecularGraph&)>(&Shape::ScreeningProcessor::process), 
-			 (python::arg("self"), python::arg("molgraph")))
-		.add_property("hitCallback", python::make_function(&Shape::ScreeningProcessor::getHitCallback,
-														   python::return_internal_reference<>()),
-					  &Shape::ScreeningProcessor::setHitCallback)
-		.add_property("settings", 
-					  python::make_function(static_cast<Shape::ScreeningSettings& (Shape::ScreeningProcessor::*)()>
-											(&Shape::ScreeningProcessor::getSettings),
-											python::return_internal_reference<>()))
-		.add_property("querySetSize", &Shape::ScreeningProcessor::getQuerySetSize);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::ScreeningProcessor>())
+        .def("setHitCallback", &Shape::ScreeningProcessor::setHitCallback,
+             (python::arg("self"), python::arg("func")))
+        .def("getHitCallback", &Shape::ScreeningProcessor::getHitCallback,
+             python::arg("self"), python::return_internal_reference<>())
+        .def("getSettings", 
+             static_cast<Shape::ScreeningSettings& (Shape::ScreeningProcessor::*)()>
+             (&Shape::ScreeningProcessor::getSettings), 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("clearQuerySet", &Shape::ScreeningProcessor::clearQuerySet,
+             python::arg("self"))
+        .def("addQuery", &Shape::ScreeningProcessor::addQuery,
+             (python::arg("self"), python::arg("molgraph")), python::with_custodian_and_ward<1, 2>())
+        .def("getQuerySetSize", &Shape::ScreeningProcessor::getQuerySetSize, 
+             python::arg("self"))
+        .def("getQuery", &Shape::ScreeningProcessor::getQuery,
+             (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
+        .def("process", static_cast<bool (Shape::ScreeningProcessor::*)(const Chem::MolecularGraph&)>(&Shape::ScreeningProcessor::process), 
+             (python::arg("self"), python::arg("molgraph")))
+        .add_property("hitCallback", python::make_function(&Shape::ScreeningProcessor::getHitCallback,
+                                                           python::return_internal_reference<>()),
+                      &Shape::ScreeningProcessor::setHitCallback)
+        .add_property("settings", 
+                      python::make_function(static_cast<Shape::ScreeningSettings& (Shape::ScreeningProcessor::*)()>
+                                            (&Shape::ScreeningProcessor::getSettings),
+                                            python::return_internal_reference<>()))
+        .add_property("querySetSize", &Shape::ScreeningProcessor::getQuerySetSize);
 }

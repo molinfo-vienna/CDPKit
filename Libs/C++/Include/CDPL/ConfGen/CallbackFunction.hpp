@@ -38,10 +38,10 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined callback functions (see [\ref FUNWRP]).
-		 */
-		typedef std::function<bool()> CallbackFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined callback functions (see [\ref FUNWRP]).
+         */
+        typedef std::function<bool()> CallbackFunction;
     }
 }
 

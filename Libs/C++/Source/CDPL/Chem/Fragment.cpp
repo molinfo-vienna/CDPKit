@@ -40,421 +40,421 @@ using namespace CDPL;
 Chem::Fragment::Fragment() {}
 
 Chem::Fragment::Fragment(const Fragment& frag): 
-	MolecularGraph(frag),
-	atoms(frag.atoms), bonds(frag.bonds),
-	atomIndices(frag.atomIndices), bondIndices(frag.bondIndices) {}
+    MolecularGraph(frag),
+    atoms(frag.atoms), bonds(frag.bonds),
+    atomIndices(frag.atomIndices), bondIndices(frag.bondIndices) {}
 
 Chem::Fragment::Fragment(const MolecularGraph& molgraph): 
-	MolecularGraph(molgraph)
+    MolecularGraph(molgraph)
 {
-	using namespace std::placeholders;
+    using namespace std::placeholders;
 
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
-				  std::bind(&Fragment::addAtom, this, _1));
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
+                  std::bind(&Fragment::addAtom, this, _1));
 
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
-				  std::bind(&Fragment::addBond, this, _1));
+    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
+                  std::bind(&Fragment::addBond, this, _1));
 }
 
 Chem::Fragment::~Fragment() {} 
 
 std::size_t Chem::Fragment::getNumAtoms() const
 {
-	return atoms.size();
+    return atoms.size();
 }
 
 std::size_t Chem::Fragment::getNumBonds() const 
 {
-	return bonds.size();
+    return bonds.size();
 }
 
 std::size_t Chem::Fragment::getAtomIndex(const Atom& atom) const
 {
-	AtomIndexMap::const_iterator it = atomIndices.find(&atom);
+    AtomIndexMap::const_iterator it = atomIndices.find(&atom);
 
-	if (it != atomIndices.end())
-		return it->second;
+    if (it != atomIndices.end())
+        return it->second;
 
-	throw Base::ItemNotFound("Fragment: argument atom not part of the fragment");
+    throw Base::ItemNotFound("Fragment: argument atom not part of the fragment");
 }
 
 std::size_t Chem::Fragment::getBondIndex(const Bond& bond) const
 {
-	BondIndexMap::const_iterator it = bondIndices.find(&bond);
+    BondIndexMap::const_iterator it = bondIndices.find(&bond);
 
-	if (it != bondIndices.end())
-		return it->second;
+    if (it != bondIndices.end())
+        return it->second;
 
-	throw Base::ItemNotFound("Fragment: argument bond not part of the fragment");
+    throw Base::ItemNotFound("Fragment: argument bond not part of the fragment");
 }
 
 bool Chem::Fragment::containsAtom(const Atom& atom) const 
 {
-	return (atomIndices.find(&atom) != atomIndices.end());
+    return (atomIndices.find(&atom) != atomIndices.end());
 }
 
 bool Chem::Fragment::containsBond(const Bond& bond) const 
 {
-	return (bondIndices.find(&bond) != bondIndices.end());
+    return (bondIndices.find(&bond) != bondIndices.end());
 }
 
 Chem::Fragment::ConstAtomIterator Chem::Fragment::getAtomsBegin() const 
 {
-	return atoms.begin();
+    return atoms.begin();
 }
 
 Chem::Fragment::ConstAtomIterator Chem::Fragment::getAtomsEnd() const 
 {
-	return atoms.end();
+    return atoms.end();
 }
 
 Chem::Fragment::AtomIterator Chem::Fragment::getAtomsBegin() 
 {
-	return atoms.begin();
+    return atoms.begin();
 }
 
 Chem::Fragment::AtomIterator Chem::Fragment::getAtomsEnd() 
 {
-	return atoms.end();
+    return atoms.end();
 }
 
 Chem::Fragment::ConstBondIterator Chem::Fragment::getBondsBegin() const 
 {
-	return bonds.begin();
+    return bonds.begin();
 }
 
 Chem::Fragment::ConstBondIterator Chem::Fragment::getBondsEnd() const 
 {
-	return bonds.end();
+    return bonds.end();
 }
 
 Chem::Fragment::BondIterator Chem::Fragment::getBondsBegin() 
 {
-	return bonds.begin();
+    return bonds.begin();
 }
 
 Chem::Fragment::BondIterator Chem::Fragment::getBondsEnd() 
 {
-	return bonds.end();
+    return bonds.end();
 }
 
 const Chem::Atom& Chem::Fragment::getAtom(std::size_t idx) const 
 {
-	if (idx >= atoms.size())
-		throw Base::IndexError("Fragment: atom index out of bounds");
+    if (idx >= atoms.size())
+        throw Base::IndexError("Fragment: atom index out of bounds");
 
-	return *atoms[idx];
+    return *atoms[idx];
 }
 
 Chem::Atom& Chem::Fragment::getAtom(std::size_t idx)
 {
-	if (idx >= atoms.size())
-		throw Base::IndexError("Fragment: atom index out of bounds");
+    if (idx >= atoms.size())
+        throw Base::IndexError("Fragment: atom index out of bounds");
 
-	return *atoms[idx];
+    return *atoms[idx];
 }
 
 bool Chem::Fragment::addAtom(const Atom& atom) 
 {
-	atoms.reserve(atoms.size() + 1);
+    atoms.reserve(atoms.size() + 1);
 
-	if (!atomIndices.insert(AtomIndexMap::value_type(&atom, atoms.size())).second)
-		return false;
+    if (!atomIndices.insert(AtomIndexMap::value_type(&atom, atoms.size())).second)
+        return false;
 
-	atoms.push_back(const_cast<Atom*>(&atom));
+    atoms.push_back(const_cast<Atom*>(&atom));
 
-	return true;
+    return true;
 }
 
 void Chem::Fragment::removeAtom(std::size_t idx) 
 {
-	std::size_t num_atoms = atoms.size();
+    std::size_t num_atoms = atoms.size();
 
-	if (idx >= num_atoms)
-		throw Base::IndexError("Fragment: atom index out of bounds");
+    if (idx >= num_atoms)
+        throw Base::IndexError("Fragment: atom index out of bounds");
 
-	const Atom& atom = *atoms[idx];
-	AtomList::iterator it = atoms.begin() + idx;
+    const Atom& atom = *atoms[idx];
+    AtomList::iterator it = atoms.begin() + idx;
 
-	atomIndices.erase(&atom);
-	
-	it = atoms.erase(it);
-	
-	for (num_atoms--; idx < num_atoms; idx++, ++it)
-		atomIndices[*it] = idx;
+    atomIndices.erase(&atom);
+    
+    it = atoms.erase(it);
+    
+    for (num_atoms--; idx < num_atoms; idx++, ++it)
+        atomIndices[*it] = idx;
 
-	std::for_each(atom.getBondsBegin(), atom.getBondsEnd(),
-				  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this,
-							std::placeholders::_1));
+    std::for_each(atom.getBondsBegin(), atom.getBondsEnd(),
+                  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this,
+                            std::placeholders::_1));
 }
 
 Chem::Fragment::AtomIterator Chem::Fragment::removeAtom(const AtomIterator& it) 
 {
-	const AtomList::iterator& base = it.base();
+    const AtomList::iterator& base = it.base();
 
-	if (base < atoms.begin() || base >= atoms.end())
-		throw Base::RangeError("Fragment: atom iterator out of valid range");
+    if (base < atoms.begin() || base >= atoms.end())
+        throw Base::RangeError("Fragment: atom iterator out of valid range");
 
-	const Atom* atom = *base;
+    const Atom* atom = *base;
 
-	atomIndices.erase(atom);
+    atomIndices.erase(atom);
 
-	AtomList::iterator rit = atoms.erase(base);
-		
-	for (std::size_t num_atoms = atoms.size(), i = rit - atoms.begin(); i < num_atoms; i++)
-		atomIndices[atoms[i]] = i;
+    AtomList::iterator rit = atoms.erase(base);
+        
+    for (std::size_t num_atoms = atoms.size(), i = rit - atoms.begin(); i < num_atoms; i++)
+        atomIndices[atoms[i]] = i;
 
-	std::for_each(atom->getBondsBegin(), atom->getBondsEnd(),
-				  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this,
-							std::placeholders::_1));
+    std::for_each(atom->getBondsBegin(), atom->getBondsEnd(),
+                  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this,
+                            std::placeholders::_1));
 
-	return rit;
+    return rit;
 }
 
 bool Chem::Fragment::removeAtom(const Atom& atom) 
 {
-	AtomIndexMap::iterator idx_it = atomIndices.find(&atom);
+    AtomIndexMap::iterator idx_it = atomIndices.find(&atom);
 
-	if (idx_it == atomIndices.end())
-		return false;
+    if (idx_it == atomIndices.end())
+        return false;
 
-	std::size_t idx = idx_it->second;
-	AtomList::iterator it = atoms.begin() + idx;
+    std::size_t idx = idx_it->second;
+    AtomList::iterator it = atoms.begin() + idx;
 
-	atomIndices.erase(idx_it);
-	
-	it = atoms.erase(it);
-	
-	for (std::size_t num_atoms = atoms.size(); idx < num_atoms; idx++, ++it)
-		atomIndices[*it] = idx;
+    atomIndices.erase(idx_it);
+    
+    it = atoms.erase(it);
+    
+    for (std::size_t num_atoms = atoms.size(); idx < num_atoms; idx++, ++it)
+        atomIndices[*it] = idx;
 
-	std::for_each(atom.getBondsBegin(), atom.getBondsEnd(),
-				  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this,
-							std::placeholders::_1));
+    std::for_each(atom.getBondsBegin(), atom.getBondsEnd(),
+                  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this,
+                            std::placeholders::_1));
 
-	return true;
+    return true;
 }
 
 const Chem::Bond& Chem::Fragment::getBond(std::size_t idx) const 
 {
-	if (idx >= bonds.size())
-		throw Base::IndexError("Fragment: bond index out of bounds");
+    if (idx >= bonds.size())
+        throw Base::IndexError("Fragment: bond index out of bounds");
 
-	return *bonds[idx];
+    return *bonds[idx];
 }
 
 Chem::Bond& Chem::Fragment::getBond(std::size_t idx)
 {
-	if (idx >= bonds.size())
-		throw Base::IndexError("Fragment: bond index out of bounds");
+    if (idx >= bonds.size())
+        throw Base::IndexError("Fragment: bond index out of bounds");
 
-	return *bonds[idx];
+    return *bonds[idx];
 }
 
 bool Chem::Fragment::addBond(const Bond& bond) 
 {
-	bonds.reserve(bonds.size() + 1);
-	atoms.reserve(atoms.size() + 2);
+    bonds.reserve(bonds.size() + 1);
+    atoms.reserve(atoms.size() + 2);
 
-	if (!bondIndices.insert(BondIndexMap::value_type(&bond, bonds.size())).second)
-		return false;
+    if (!bondIndices.insert(BondIndexMap::value_type(&bond, bonds.size())).second)
+        return false;
 
-	bonds.push_back(const_cast<Bond*>(&bond));
+    bonds.push_back(const_cast<Bond*>(&bond));
 
-	addAtom(bond.getBegin());
-	addAtom(bond.getEnd());
+    addAtom(bond.getBegin());
+    addAtom(bond.getEnd());
 
-	return true;
+    return true;
 }
 
 void Chem::Fragment::removeBond(std::size_t idx) 
 {
-	std::size_t num_bonds = bonds.size();
+    std::size_t num_bonds = bonds.size();
 
-	if (idx >= num_bonds)
-		throw Base::IndexError("Fragment: bond index out of bounds");
+    if (idx >= num_bonds)
+        throw Base::IndexError("Fragment: bond index out of bounds");
 
-	BondList::iterator it = bonds.begin() + idx;
+    BondList::iterator it = bonds.begin() + idx;
 
-	bondIndices.erase(*it);
-	
-	it = bonds.erase(it);
-	
-	for (num_bonds--; idx < num_bonds; idx++, ++it)
-		bondIndices[*it] = idx;
+    bondIndices.erase(*it);
+    
+    it = bonds.erase(it);
+    
+    for (num_bonds--; idx < num_bonds; idx++, ++it)
+        bondIndices[*it] = idx;
 }
 
 Chem::Fragment::BondIterator Chem::Fragment::removeBond(const BondIterator& it) 
 {
-	const BondList::iterator& base = it.base();
+    const BondList::iterator& base = it.base();
 
-	if (base < bonds.begin() || base >= bonds.end())
-		throw Base::RangeError("Fragment: bond iterator out of valid range");
+    if (base < bonds.begin() || base >= bonds.end())
+        throw Base::RangeError("Fragment: bond iterator out of valid range");
 
-	bondIndices.erase(*base);
+    bondIndices.erase(*base);
 
-	BondList::iterator rit = bonds.erase(base);
-		
-	for (std::size_t num_bonds = bonds.size(), i = rit - bonds.begin(); i < num_bonds; i++)
-		bondIndices[bonds[i]] = i;
+    BondList::iterator rit = bonds.erase(base);
+        
+    for (std::size_t num_bonds = bonds.size(), i = rit - bonds.begin(); i < num_bonds; i++)
+        bondIndices[bonds[i]] = i;
 
-	return rit;
+    return rit;
 }
 
 bool Chem::Fragment::removeBond(const Bond& bond) 
 {
-	BondIndexMap::iterator idx_it = bondIndices.find(&bond);
+    BondIndexMap::iterator idx_it = bondIndices.find(&bond);
 
-	if (idx_it == bondIndices.end())
-		return false;
+    if (idx_it == bondIndices.end())
+        return false;
 
-	std::size_t idx = idx_it->second;
+    std::size_t idx = idx_it->second;
 
-	BondList::iterator it = bonds.begin() + idx;
+    BondList::iterator it = bonds.begin() + idx;
 
-	bondIndices.erase(idx_it);
-	
-	it = bonds.erase(it);
-	
-	for (std::size_t num_bonds = bonds.size(); idx < num_bonds; idx++, ++it)
-		bondIndices[*it] = idx;
+    bondIndices.erase(idx_it);
+    
+    it = bonds.erase(it);
+    
+    for (std::size_t num_bonds = bonds.size(); idx < num_bonds; idx++, ++it)
+        bondIndices[*it] = idx;
 
-	return true;
+    return true;
 }
 
 void Chem::Fragment::orderAtoms(const AtomCompareFunction& func)
 {
-	using namespace std::placeholders;
-	
-	std::sort(atoms.begin(), atoms.end(), 
-			  std::bind(func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1), 
-						std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2)));
+    using namespace std::placeholders;
+    
+    std::sort(atoms.begin(), atoms.end(), 
+              std::bind(func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1), 
+                        std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2)));
 
-	for (std::size_t i = 0, num_atoms = atoms.size(); i < num_atoms; i++)
-		atomIndices[atoms[i]] = i;
+    for (std::size_t i = 0, num_atoms = atoms.size(); i < num_atoms; i++)
+        atomIndices[atoms[i]] = i;
 }
 
 void Chem::Fragment::orderBonds(const BondCompareFunction& func)
 {
-	using namespace std::placeholders;
-	
-	std::sort(bonds.begin(), bonds.end(), 
-			  std::bind(func, std::bind(Util::Dereferencer<const Bond*, const Bond&>(), _1), 
-						  std::bind(Util::Dereferencer<const Bond*, const Bond&>(), _2)));
+    using namespace std::placeholders;
+    
+    std::sort(bonds.begin(), bonds.end(), 
+              std::bind(func, std::bind(Util::Dereferencer<const Bond*, const Bond&>(), _1), 
+                          std::bind(Util::Dereferencer<const Bond*, const Bond&>(), _2)));
 
-	for (std::size_t i = 0, num_bonds = bonds.size(); i < num_bonds; i++)
-		bondIndices[bonds[i]] = i;
+    for (std::size_t i = 0, num_bonds = bonds.size(); i < num_bonds; i++)
+        bondIndices[bonds[i]] = i;
 }
 
 void Chem::Fragment::reserveMemoryForAtoms(std::size_t num_atoms)
 {
-	atoms.reserve(num_atoms);
+    atoms.reserve(num_atoms);
 }
 
 void Chem::Fragment::swap(Fragment& frag)
 {
-	Base::PropertyContainer::swap(frag);
+    Base::PropertyContainer::swap(frag);
 
-	atoms.swap(frag.atoms);
-	bonds.swap(frag.bonds);
-	atomIndices.swap(frag.atomIndices);
-	bondIndices.swap(frag.bondIndices);
+    atoms.swap(frag.atoms);
+    bonds.swap(frag.bonds);
+    atomIndices.swap(frag.atomIndices);
+    bondIndices.swap(frag.bondIndices);
 }
 
 void Chem::Fragment::reserveMemoryForBonds(std::size_t num_bonds)
 {
-	bonds.reserve(num_bonds);
+    bonds.reserve(num_bonds);
 }
 
 void Chem::Fragment::clear()
 {
-	clearProperties();
+    clearProperties();
 
-	atoms.clear();
-	bonds.clear();
-	atomIndices.clear();
-	bondIndices.clear();
+    atoms.clear();
+    bonds.clear();
+    atomIndices.clear();
+    bondIndices.clear();
 }
 
 Chem::Fragment& Chem::Fragment::operator=(const Fragment& frag)
 {
-	if (this == &frag)
-		return *this;
+    if (this == &frag)
+        return *this;
 
-	atomIndices = frag.atomIndices;
-	bondIndices = frag.bondIndices;
-	atoms = frag.atoms;
-	bonds = frag.bonds;
+    atomIndices = frag.atomIndices;
+    bondIndices = frag.bondIndices;
+    atoms = frag.atoms;
+    bonds = frag.bonds;
 
-	copyProperties(frag);
+    copyProperties(frag);
 
-	return *this;
+    return *this;
 }
 
 Chem::Fragment& Chem::Fragment::operator=(const MolecularGraph& molgraph)
 {
-	using namespace std::placeholders;
+    using namespace std::placeholders;
 
-	if (this == &molgraph)
-		return *this;
+    if (this == &molgraph)
+        return *this;
 
-	atoms.clear();
-	bonds.clear();
-	atomIndices.clear();
-	bondIndices.clear();
+    atoms.clear();
+    bonds.clear();
+    atomIndices.clear();
+    bondIndices.clear();
 
-	atoms.reserve(molgraph.getNumAtoms());
-	bonds.reserve(molgraph.getNumBonds());
+    atoms.reserve(molgraph.getNumAtoms());
+    bonds.reserve(molgraph.getNumBonds());
 
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
-				  std::bind(&Fragment::addAtom, this, _1));
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
+                  std::bind(&Fragment::addAtom, this, _1));
 
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
-				  std::bind(&Fragment::addBond, this, _1));
+    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
+                  std::bind(&Fragment::addBond, this, _1));
 
-	copyProperties(molgraph);
+    copyProperties(molgraph);
 
-	return *this;
+    return *this;
 }
 
 Chem::Fragment& Chem::Fragment::operator+=(const MolecularGraph& molgraph)
 {
-	using namespace std::placeholders;
-	
-	if (this == &molgraph)
-		return *this;
+    using namespace std::placeholders;
+    
+    if (this == &molgraph)
+        return *this;
 
-	atoms.reserve(atoms.size() + molgraph.getNumAtoms());
-	bonds.reserve(bonds.size() + molgraph.getNumBonds());
+    atoms.reserve(atoms.size() + molgraph.getNumAtoms());
+    bonds.reserve(bonds.size() + molgraph.getNumBonds());
 
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
-				  std::bind(&Fragment::addAtom, this, _1));
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
+                  std::bind(&Fragment::addAtom, this, _1));
 
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
-				  std::bind(&Fragment::addBond, this, _1));
+    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
+                  std::bind(&Fragment::addBond, this, _1));
 
-	return *this;
+    return *this;
 }
 
 Chem::Fragment& Chem::Fragment::operator-=(const MolecularGraph& molgraph)
 {
-	using namespace std::placeholders;
-	
-	if (this == &molgraph) {
-		clear();
-		return *this;
-	}
+    using namespace std::placeholders;
+    
+    if (this == &molgraph) {
+        clear();
+        return *this;
+    }
 
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
-				  std::bind(static_cast<bool (Fragment::*)(const Atom&)>(&Fragment::removeAtom), this, _1));
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
+                  std::bind(static_cast<bool (Fragment::*)(const Atom&)>(&Fragment::removeAtom), this, _1));
 
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
-				  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this, _1));
-	
-	return *this;
+    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
+                  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this, _1));
+    
+    return *this;
 }
 
 Chem::MolecularGraph::SharedPointer Chem::Fragment::clone()  const
 {
-	return MolecularGraph::SharedPointer(new Fragment(*this));
+    return MolecularGraph::SharedPointer(new Fragment(*this));
 }

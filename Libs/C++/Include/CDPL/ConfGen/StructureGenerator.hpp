@@ -43,66 +43,66 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ConfGen 
     {
 
-		class ConformerGeneratorImpl;
+        class ConformerGeneratorImpl;
 
-		class CDPL_CONFGEN_API StructureGenerator
-		{
+        class CDPL_CONFGEN_API StructureGenerator
+        {
 
-		public:
-			StructureGenerator();
-		
-			~StructureGenerator();
+        public:
+            StructureGenerator();
+        
+            ~StructureGenerator();
 
-			const StructureGeneratorSettings& getSettings() const;
+            const StructureGeneratorSettings& getSettings() const;
 
-			StructureGeneratorSettings& getSettings();
+            StructureGeneratorSettings& getSettings();
 
-			void clearFragmentLibraries();
+            void clearFragmentLibraries();
 
-			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+            void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void clearTorsionLibraries();
+            void clearTorsionLibraries();
 
-			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+            void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph);
+            unsigned int generate(const Chem::MolecularGraph& molgraph);
 
-			void setCoordinates(Chem::MolecularGraph& molgraph) const;
+            void setCoordinates(Chem::MolecularGraph& molgraph) const;
 
-			const ConformerData& getCoordinates() const;
+            const ConformerData& getCoordinates() const;
 
-		private:
-			StructureGenerator(const StructureGenerator&);
+        private:
+            StructureGenerator(const StructureGenerator&);
 
-			StructureGenerator& operator=(const StructureGenerator&);
+            StructureGenerator& operator=(const StructureGenerator&);
 
-			typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
+            typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
 
-			ImplementationPointer      impl;
-			StructureGeneratorSettings settings;
-			ConformerData              coordinates;
-		};
+            ImplementationPointer      impl;
+            StructureGeneratorSettings settings;
+            ConformerData              coordinates;
+        };
     }
 }
 

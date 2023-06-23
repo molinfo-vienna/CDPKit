@@ -33,17 +33,17 @@ using namespace CDPL;
 
 
 Chem::NitrosoOximeTautomerization::NitrosoOximeTautomerization(): 
-	PatternBasedTautomerizationRule(TautomerizationType::NITROSO_OXIME)
+    PatternBasedTautomerizationRule(TautomerizationType::NITROSO_OXIME)
 {
-	BondOrderChange bond_changes[]= {
-		{ 1, 2, -1 },
-		{ 2, 3, 1 },
-		{ 3, 4, -1 },
-		{ 1, 4, 1 }
-	};
+    BondOrderChange bond_changes[]= {
+        { 1, 2, -1 },
+        { 2, 3, 1 },
+        { 3, 4, -1 },
+        { 1, 4, 1 }
+    };
 
-	addTransformationPattern(parseSMARTS("[#8:1]=[#7;+0;X2:2]-[#6;X4:3]-[#1:4]"), 
-							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
-	addTransformationPattern(parseSMARTS("[#1:1]-[#8:2]-[#7;+0;X2:3]=[#6:4]"), 
-							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#8:1]=[#7;+0;X2:2]-[#6;X4:3]-[#1:4]"), 
+                             &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#1:1]-[#8:2]-[#7;+0;X2:3]=[#6:4]"), 
+                             &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
 }

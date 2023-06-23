@@ -35,6 +35,6 @@ void CDPLPythonBiomol::exportMoleculeFunctions()
     using namespace boost;
     using namespace CDPL;
 
-	python::def("combineInterferingResidueCoordinates", &Biomol::combineInterferingResidueCoordinates, 
-				(python::arg("mol"), python::arg("max_ctr_dist") = 1.0));
+    python::def("combineInterferingResidueCoordinates", &Biomol::combineInterferingResidueCoordinates, 
+                (python::arg("mol"), python::arg("max_ctr_dist") = 1.0));
 }

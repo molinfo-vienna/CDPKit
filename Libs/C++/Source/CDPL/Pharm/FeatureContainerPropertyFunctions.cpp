@@ -34,37 +34,37 @@ using namespace CDPL;
 
 
 #define MAKE_FTRCONT_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	void Pharm::set##FUNC_SUFFIX(Pharm::FeatureContainer& cont, TYPE arg) \
-	{																	\
-		cont.setProperty(FeatureContainerProperty::PROP_NAME, arg);		\
-	}																	\
-																		\
-	bool Pharm::has##FUNC_SUFFIX(const Pharm::FeatureContainer& cont)	\
-	{																	\
-		return cont.isPropertySet(FeatureContainerProperty::PROP_NAME);	\
-	}																	\
-																		\
-	void Pharm::clear##FUNC_SUFFIX(Pharm::FeatureContainer& cont)		\
-	{																	\
-		cont.removeProperty(FeatureContainerProperty::PROP_NAME);		\
-	}
+    void Pharm::set##FUNC_SUFFIX(Pharm::FeatureContainer& cont, TYPE arg) \
+    {                                                                    \
+        cont.setProperty(FeatureContainerProperty::PROP_NAME, arg);        \
+    }                                                                    \
+                                                                        \
+    bool Pharm::has##FUNC_SUFFIX(const Pharm::FeatureContainer& cont)    \
+    {                                                                    \
+        return cont.isPropertySet(FeatureContainerProperty::PROP_NAME);    \
+    }                                                                    \
+                                                                        \
+    void Pharm::clear##FUNC_SUFFIX(Pharm::FeatureContainer& cont)        \
+    {                                                                    \
+        cont.removeProperty(FeatureContainerProperty::PROP_NAME);        \
+    }
 
-#define MAKE_FTRCONT_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
-	TYPE Pharm::get##FUNC_SUFFIX(const Pharm::FeatureContainer& cont)	\
-	{																	\
-		return cont.getProperty<TYPE>(FeatureContainerProperty::PROP_NAME);	\
-	}																	\
-																		\
-	MAKE_FTRCONT_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_FTRCONT_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
+    TYPE Pharm::get##FUNC_SUFFIX(const Pharm::FeatureContainer& cont)    \
+    {                                                                    \
+        return cont.getProperty<TYPE>(FeatureContainerProperty::PROP_NAME);    \
+    }                                                                    \
+                                                                        \
+    MAKE_FTRCONT_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 #define MAKE_FTRCONT_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	TYPE Pharm::get##FUNC_SUFFIX(const Pharm::FeatureContainer& cont)	\
-	{																	\
-		return cont.getPropertyOrDefault<TYPE>(FeatureContainerProperty::PROP_NAME,	\
-											   FeatureContainerPropertyDefault::PROP_NAME);	\
-	}																	\
-																		\
-	MAKE_FTRCONT_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+    TYPE Pharm::get##FUNC_SUFFIX(const Pharm::FeatureContainer& cont)    \
+    {                                                                    \
+        return cont.getPropertyOrDefault<TYPE>(FeatureContainerProperty::PROP_NAME,    \
+                                               FeatureContainerPropertyDefault::PROP_NAME);    \
+    }                                                                    \
+                                                                        \
+    MAKE_FTRCONT_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
 MAKE_FTRCONT_PROPERTY_FUNCTIONS_WITH_DEF(NAME, const std::string&, Name)

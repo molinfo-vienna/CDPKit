@@ -38,81 +38,81 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
+    Molecule mol;
 
-	BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() == static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() == static_cast<AtomContainer&>(mol).getAtomsEnd());
 
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 0);
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 0);
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
-
-//-----
-
-	Atom& atom1 = mol.addAtom();
-
-	atom1.setProperty(AtomProperty::SYMBOL, std::string("C"));
-
-	BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
-
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 1);
-
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == static_cast<AtomContainer&>(mol).getAtomsEnd());
-
-	BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_ATOM_COUNT) == 5);
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_BOND_COUNT) == 4);
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
 
 //-----
 
-	Atom& atom2 = mol.addAtom();
+    Atom& atom1 = mol.addAtom();
 
-	atom2.setProperty(AtomProperty::SYMBOL, std::string("O"));
+    atom1.setProperty(AtomProperty::SYMBOL, std::string("C"));
 
-	BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
 
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 2);
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 1);
 
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) != static_cast<AtomContainer&>(mol).getAtomsEnd());
-	BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 2) == static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == static_cast<AtomContainer&>(mol).getAtomsEnd());
 
-	BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
-	BOOST_CHECK(&*(static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == &atom2);
+    BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_ATOM_COUNT) == 8);
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_BOND_COUNT) == 6);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_ATOM_COUNT) == 5);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_BOND_COUNT) == 4);
 
 //-----
 
-	BOOST_CHECK(static_cast<MolecularGraph&>(mol).getBondsBegin() == static_cast<MolecularGraph&>(mol).getBondsEnd());
+    Atom& atom2 = mol.addAtom();
 
-	BOOST_CHECK((static_cast<MolecularGraph&>(mol).getBondsEnd() - static_cast<MolecularGraph&>(mol).getBondsBegin()) == 0);
+    atom2.setProperty(AtomProperty::SYMBOL, std::string("O"));
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 0);
+    BOOST_CHECK(static_cast<AtomContainer&>(mol).getAtomsBegin() != static_cast<AtomContainer&>(mol).getAtomsEnd());
+
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsEnd() - static_cast<AtomContainer&>(mol).getAtomsBegin()) == 2);
+
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) != static_cast<AtomContainer&>(mol).getAtomsEnd());
+    BOOST_CHECK((static_cast<AtomContainer&>(mol).getAtomsBegin() + 2) == static_cast<AtomContainer&>(mol).getAtomsEnd());
+
+    BOOST_CHECK(&*static_cast<AtomContainer&>(mol).getAtomsBegin() == &atom1);
+    BOOST_CHECK(&*(static_cast<AtomContainer&>(mol).getAtomsBegin() + 1) == &atom2);
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_ATOM_COUNT) == 8);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_BOND_COUNT) == 6);
 
 //-----
 
-	Bond& bond1 = mol.addBond(0, 1);
+    BOOST_CHECK(static_cast<MolecularGraph&>(mol).getBondsBegin() == static_cast<MolecularGraph&>(mol).getBondsEnd());
 
-	bond1.setProperty(BondProperty::ORDER, std::size_t(2));
+    BOOST_CHECK((static_cast<MolecularGraph&>(mol).getBondsEnd() - static_cast<MolecularGraph&>(mol).getBondsBegin()) == 0);
 
-	BOOST_CHECK(static_cast<MolecularGraph&>(mol).getBondsBegin() != static_cast<MolecularGraph&>(mol).getBondsEnd());
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 0);
 
-	BOOST_CHECK((static_cast<MolecularGraph&>(mol).getBondsEnd() - static_cast<MolecularGraph&>(mol).getBondsBegin()) == 1);
+//-----
 
-	BOOST_CHECK((static_cast<MolecularGraph&>(mol).getBondsBegin() + 1) == static_cast<MolecularGraph&>(mol).getBondsEnd());
+    Bond& bond1 = mol.addBond(0, 1);
 
-	BOOST_CHECK(&*static_cast<MolecularGraph&>(mol).getBondsBegin() == &bond1);
+    bond1.setProperty(BondProperty::ORDER, std::size_t(2));
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 1);
+    BOOST_CHECK(static_cast<MolecularGraph&>(mol).getBondsBegin() != static_cast<MolecularGraph&>(mol).getBondsEnd());
 
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_ATOM_COUNT) == 4);
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_BOND_COUNT) == 3);
+    BOOST_CHECK((static_cast<MolecularGraph&>(mol).getBondsEnd() - static_cast<MolecularGraph&>(mol).getBondsBegin()) == 1);
+
+    BOOST_CHECK((static_cast<MolecularGraph&>(mol).getBondsBegin() + 1) == static_cast<MolecularGraph&>(mol).getBondsEnd());
+
+    BOOST_CHECK(&*static_cast<MolecularGraph&>(mol).getBondsBegin() == &bond1);
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::BOND_COUNT) == 1);
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_ATOM_COUNT) == 4);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_BOND_COUNT) == 3);
 }

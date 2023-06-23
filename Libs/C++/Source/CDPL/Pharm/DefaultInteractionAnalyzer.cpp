@@ -52,22 +52,22 @@ Pharm::DefaultInteractionAnalyzer::DefaultInteractionAnalyzer(const FeatureConta
 
 void Pharm::DefaultInteractionAnalyzer::init()
 {
-	setConstraintFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::NEGATIVE_IONIZABLE, IonicInteractionConstraint());
-	setConstraintFunction(FeatureType::NEGATIVE_IONIZABLE, FeatureType::POSITIVE_IONIZABLE, IonicInteractionConstraint());
+    setConstraintFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::NEGATIVE_IONIZABLE, IonicInteractionConstraint());
+    setConstraintFunction(FeatureType::NEGATIVE_IONIZABLE, FeatureType::POSITIVE_IONIZABLE, IonicInteractionConstraint());
 
-	setConstraintFunction(FeatureType::HYDROPHOBIC, FeatureType::HYDROPHOBIC, HydrophobicInteractionConstraint());
+    setConstraintFunction(FeatureType::HYDROPHOBIC, FeatureType::HYDROPHOBIC, HydrophobicInteractionConstraint());
 
-	setConstraintFunction(FeatureType::H_BOND_DONOR, FeatureType::H_BOND_ACCEPTOR, HBondingInteractionConstraint(true));
-	setConstraintFunction(FeatureType::H_BOND_ACCEPTOR, FeatureType::H_BOND_DONOR, HBondingInteractionConstraint(false));
+    setConstraintFunction(FeatureType::H_BOND_DONOR, FeatureType::H_BOND_ACCEPTOR, HBondingInteractionConstraint(true));
+    setConstraintFunction(FeatureType::H_BOND_ACCEPTOR, FeatureType::H_BOND_DONOR, HBondingInteractionConstraint(false));
 
-	setConstraintFunction(FeatureType::HALOGEN_BOND_DONOR, FeatureType::HALOGEN_BOND_ACCEPTOR, XBondingInteractionConstraint(true));
-	setConstraintFunction(FeatureType::HALOGEN_BOND_ACCEPTOR, FeatureType::HALOGEN_BOND_DONOR, XBondingInteractionConstraint(false));
+    setConstraintFunction(FeatureType::HALOGEN_BOND_DONOR, FeatureType::HALOGEN_BOND_ACCEPTOR, XBondingInteractionConstraint(true));
+    setConstraintFunction(FeatureType::HALOGEN_BOND_ACCEPTOR, FeatureType::HALOGEN_BOND_DONOR, XBondingInteractionConstraint(false));
 
-	setConstraintFunction(FeatureType::AROMATIC, FeatureType::POSITIVE_IONIZABLE, CationPiInteractionConstraint(true));
-	setConstraintFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::AROMATIC, CationPiInteractionConstraint(false));
+    setConstraintFunction(FeatureType::AROMATIC, FeatureType::POSITIVE_IONIZABLE, CationPiInteractionConstraint(true));
+    setConstraintFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::AROMATIC, CationPiInteractionConstraint(false));
 
-	setConstraintFunction(FeatureType::AROMATIC, FeatureType::AROMATIC, 
-						  InteractionConstraintConnector(false, 
-														 OrthogonalPiPiInteractionConstraint(), 
-														 ParallelPiPiInteractionConstraint()));
+    setConstraintFunction(FeatureType::AROMATIC, FeatureType::AROMATIC, 
+                          InteractionConstraintConnector(false, 
+                                                         OrthogonalPiPiInteractionConstraint(), 
+                                                         ParallelPiPiInteractionConstraint()));
 }

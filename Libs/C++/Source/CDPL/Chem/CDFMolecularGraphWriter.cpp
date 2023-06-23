@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Chem::CDFMolecularGraphWriter::CDFMolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new CDFDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new CDFDataWriter(*this)) {}
 
 Chem::CDFMolecularGraphWriter::~CDFMolecularGraphWriter() {}
 
 Base::DataWriter<Chem::MolecularGraph>& Chem::CDFMolecularGraphWriter::write(const MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeMolGraph(output, molgraph);
+    try {
+        state = writer->writeMolGraph(output, molgraph);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFMolecularGraphWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFMolecularGraphWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Chem::CDFMolecularGraphWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Chem::CDFMolecularGraphWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

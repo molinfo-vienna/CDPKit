@@ -37,35 +37,35 @@
 namespace
 {
 
-	template <typename VectorType>
-	struct ZeroVectorExport
-	{
+    template <typename VectorType>
+    struct ZeroVectorExport
+    {
 
-		ZeroVectorExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ZeroVectorExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename VectorType::SizeType SizeType;
-		
-			python::class_<VectorType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<SizeType>((python::arg("self"), python::arg("n"))))
-				.def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
-				.def(ConstVectorVisitor<VectorType>())
-				.def(VectorAssignAndSwapVisitor<VectorType>());
-		}
-	};
+            typedef typename VectorType::SizeType SizeType;
+        
+            python::class_<VectorType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<SizeType>((python::arg("self"), python::arg("n"))))
+                .def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
+                .def(ConstVectorVisitor<VectorType>())
+                .def(VectorAssignAndSwapVisitor<VectorType>());
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportZeroVectorTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ZeroVectorExport<Math::FZeroVector>("FZeroVector");
-	ZeroVectorExport<Math::DZeroVector>("DZeroVector");
-	ZeroVectorExport<Math::LZeroVector>("LZeroVector");
-	ZeroVectorExport<Math::ULZeroVector>("ULZeroVector");
+    ZeroVectorExport<Math::FZeroVector>("FZeroVector");
+    ZeroVectorExport<Math::DZeroVector>("DZeroVector");
+    ZeroVectorExport<Math::LZeroVector>("LZeroVector");
+    ZeroVectorExport<Math::ULZeroVector>("ULZeroVector");
 }

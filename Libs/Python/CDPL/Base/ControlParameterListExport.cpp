@@ -32,21 +32,21 @@
 namespace
 {
 
-	CDPL::Base::ControlParameterList& assignFunc(CDPL::Base::ControlParameterList& cpl, CDPL::Base::ControlParameterContainer& cntnr)
-	{
-		return cpl.operator=(cntnr);
-	}
+    CDPL::Base::ControlParameterList& assignFunc(CDPL::Base::ControlParameterList& cpl, CDPL::Base::ControlParameterContainer& cntnr)
+    {
+        return cpl.operator=(cntnr);
+    }
 }
 
 
 void CDPLPythonBase::exportControlParameterList()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Base::ControlParameterList, Base::ControlParameterList::SharedPointer, 
-				   python::bases<Base::ControlParameterContainer> >("ControlParameterList", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<Base::ControlParameterContainer&>((python::arg("self"), python::arg("cntnr"))))
-		.def("assign", &assignFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>());
+    python::class_<Base::ControlParameterList, Base::ControlParameterList::SharedPointer, 
+                   python::bases<Base::ControlParameterContainer> >("ControlParameterList", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<Base::ControlParameterContainer&>((python::arg("self"), python::arg("cntnr"))))
+        .def("assign", &assignFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>());
 }

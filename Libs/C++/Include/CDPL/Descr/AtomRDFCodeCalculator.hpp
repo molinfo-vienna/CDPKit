@@ -37,34 +37,34 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-		class AtomContainer;
-	}
+        class Atom;
+        class AtomContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief AtomRDFCodeCalculator.
-		 * \see [\ref CITB, \ref HBMD]
-		 */
-		class CDPL_DESCR_API AtomRDFCodeCalculator : public RDFCodeCalculator<Chem::Atom>
-		{
+        /**
+         * \brief AtomRDFCodeCalculator.
+         * \see [\ref CITB, \ref HBMD]
+         */
+        class CDPL_DESCR_API AtomRDFCodeCalculator : public RDFCodeCalculator<Chem::Atom>
+        {
 
-		public:
-			/**
-			 * \brief Constructs the \c %AtomRDFCodeCalculator instance.
-			 */
-			AtomRDFCodeCalculator();
-			
-			AtomRDFCodeCalculator(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
+        public:
+            /**
+             * \brief Constructs the \c %AtomRDFCodeCalculator instance.
+             */
+            AtomRDFCodeCalculator();
+            
+            AtomRDFCodeCalculator(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
 
-			void calculate(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
-		}; 
-	}
+            void calculate(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_ATOMRDFCODECALCULATOR_HPP

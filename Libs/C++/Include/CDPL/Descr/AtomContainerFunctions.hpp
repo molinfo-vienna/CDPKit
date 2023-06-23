@@ -36,19 +36,19 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
-	
-		class AtomContainer;
-	}
+    namespace Chem 
+    {
+    
+        class AtomContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		CDPL_DESCR_API double calcGeometricalRadius(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
+        CDPL_DESCR_API double calcGeometricalRadius(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
 
-		CDPL_DESCR_API double calcGeometricalDiameter(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
-	}
+        CDPL_DESCR_API double calcGeometricalDiameter(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
+    }
 }
 
 #endif // CDPL_DESCR_ATOMCONTAINERFUNCTIONS_HPP

@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of gzip-compressed molecular graph data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<CDFGZMolecularGraphWriter, DataFormat::CDF_GZ> CDFGZMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of gzip-compressed molecular graph data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<CDFGZMolecularGraphWriter, DataFormat::CDF_GZ> CDFGZMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_CDFGZMOLECULARGRAPHOUTPUTHANDLER_HPP

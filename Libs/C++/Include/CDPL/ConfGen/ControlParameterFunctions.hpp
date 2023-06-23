@@ -35,24 +35,24 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace ConfGen 
-	{
-	
-		CDPL_CONFGEN_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
+    namespace ConfGen 
+    {
+    
+        CDPL_CONFGEN_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_CONFGEN_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
+        CDPL_CONFGEN_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
 
-		CDPL_CONFGEN_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_CONFGEN_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_CONFGEN_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_CONFGEN_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
-	}
+    }
 }
 
 #endif // CDPL_CONFGEN_CONTROLPARAMETERFUNCTIONS_HPP

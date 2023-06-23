@@ -70,28 +70,28 @@ TARGET_LINK_LIBRARIES(cdpl-shape-shared cdpl-base-shared cdpl-util-shared cdpl-m
 
 SET_TARGET_PROPERTIES(cdpl-shape-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-shape
-		      CLEAN_DIRECT_OUTPUT 1
-		      INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-		      )
+              CLEAN_DIRECT_OUTPUT 1
+              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
+              )
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-shape.dll")
 ELSEIF(APPLE)
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-shape.dylib")
-ELSE()			
+ELSE()            
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-shape.so")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(TARGETS cdpl-shape-shared
         RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-	)
+    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
+    )
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

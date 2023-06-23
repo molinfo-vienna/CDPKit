@@ -31,26 +31,26 @@
 namespace CDPL
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		void initAttributedGridProperties();
-		void initAttributedGridPropertyDefaults();
-	}
+        void initAttributedGridProperties();
+        void initAttributedGridPropertyDefaults();
+    }
 }
 
 namespace
 {
 
-	struct CDPLGridInit
-	{
+    struct CDPLGridInit
+    {
 
-		CDPLGridInit() {
-			CDPL::Grid::initAttributedGridProperties();
-			CDPL::Grid::initAttributedGridPropertyDefaults();
-		}
+        CDPLGridInit() {
+            CDPL::Grid::initAttributedGridProperties();
+            CDPL::Grid::initAttributedGridPropertyDefaults();
+        }
 
-	} cdplGridInit;
+    } cdplGridInit;
 }
 
 #endif // CDPL_GRID_STATIC_LINK

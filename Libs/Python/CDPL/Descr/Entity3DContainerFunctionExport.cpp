@@ -34,15 +34,15 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER1(double, calcGeometricalRadius, CDPL::Chem::Entity3DContainer&);
-	MAKE_FUNCTION_WRAPPER1(double, calcGeometricalDiameter, CDPL::Chem::Entity3DContainer&);
+    MAKE_FUNCTION_WRAPPER1(double, calcGeometricalRadius, CDPL::Chem::Entity3DContainer&);
+    MAKE_FUNCTION_WRAPPER1(double, calcGeometricalDiameter, CDPL::Chem::Entity3DContainer&);
 }
 
 
 void CDPLPythonDescr::exportEntity3DContainerFunctions()
 {
-	using namespace boost;
+    using namespace boost;
 
-	python::def("calcGeometricalRadius", &calcGeometricalRadiusWrapper1, python::arg("cntnr"));
-	python::def("calcGeometricalDiameter", &calcGeometricalDiameterWrapper1, python::arg("cntnr"));
+    python::def("calcGeometricalRadius", &calcGeometricalRadiusWrapper1, python::arg("cntnr"));
+    python::def("calcGeometricalDiameter", &calcGeometricalDiameterWrapper1, python::arg("cntnr"));
 }

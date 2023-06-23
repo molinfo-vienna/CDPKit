@@ -36,41 +36,41 @@
 namespace CDPL 
 {
 
-	namespace Util
-	{
+    namespace Util
+    {
 
-		/**
-		 * \brief A binary functor that calculates the product of two property values retrieved 
-		 *        from a pair of Base::PropertyContainer instances passed as argument.
-		 * \tparam ResType The result type.
-		 * \tparam PropertyValueType The property value type.
-		 */
-		template <typename ResType, typename PropertyValueType = ResType>
-		class PropertyValueProduct
-		{
+        /**
+         * \brief A binary functor that calculates the product of two property values retrieved 
+         *        from a pair of Base::PropertyContainer instances passed as argument.
+         * \tparam ResType The result type.
+         * \tparam PropertyValueType The property value type.
+         */
+        template <typename ResType, typename PropertyValueType = ResType>
+        class PropertyValueProduct
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PropertyValueProduct instance for the property specified by \a key.
-			 * \param key The key of the property.
-			 */
-			PropertyValueProduct(const Base::LookupKey& key): propKey(key) {}
+        public:
+            /**
+             * \brief Constructs a \c %PropertyValueProduct instance for the property specified by \a key.
+             * \param key The key of the property.
+             */
+            PropertyValueProduct(const Base::LookupKey& key): propKey(key) {}
 
-			/**
-			 * \brief Calculates the product of the property values stored in the Base::PropertyContainer instances
-			 *        \a cntnr1 and \a cntnr2.
-			 * \param cntnr1 The Base::PropertyContainer instance storing the first property value.
-			 * \param cntnr2 The Base::PropertyContainer instance storing the second property value.
-			 * \return The product of the property values.
-			 */
-			ResType operator()(const Base::PropertyContainer& cntnr1, const Base::PropertyContainer& cntnr2) const {
-				return (cntnr1.getProperty<PropertyValueType>(propKey) * cntnr2.getProperty<PropertyValueType>(propKey));
-			}
+            /**
+             * \brief Calculates the product of the property values stored in the Base::PropertyContainer instances
+             *        \a cntnr1 and \a cntnr2.
+             * \param cntnr1 The Base::PropertyContainer instance storing the first property value.
+             * \param cntnr2 The Base::PropertyContainer instance storing the second property value.
+             * \return The product of the property values.
+             */
+            ResType operator()(const Base::PropertyContainer& cntnr1, const Base::PropertyContainer& cntnr2) const {
+                return (cntnr1.getProperty<PropertyValueType>(propKey) * cntnr2.getProperty<PropertyValueType>(propKey));
+            }
 
-		private:
-			Base::LookupKey propKey;
-		};
-	}
+        private:
+            Base::LookupKey propKey;
+        };
+    }
 }
 
 #endif // CDPL_UTIL_PROPERTYVALUEPRODUCT_HPP

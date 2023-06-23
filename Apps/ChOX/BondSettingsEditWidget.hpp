@@ -38,52 +38,52 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class BondSettingsEditWidget : public SettingsEditWidget
-	{
+    class BondSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		BondSettingsEditWidget(QWidget*, Settings&);
+    public:
+        BondSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&                    settings;
-		CDPL::Vis::Color             color;
-		CDPL::Vis::Font              labelFont;
-		CDPL::Vis::SizeSpecification labelSize;
-		CDPL::Vis::SizeSpecification labelMargin;
-		CDPL::Vis::SizeSpecification bondLength;
-		CDPL::Vis::SizeSpecification bondLineWidth;
-		CDPL::Vis::SizeSpecification bondLineSpacing;
-		CDPL::Vis::SizeSpecification wedgeWidth;
-		CDPL::Vis::SizeSpecification hashSpacing;
-		CDPL::Vis::SizeSpecification rxnCenterLineLength;
-		CDPL::Vis::SizeSpecification rxnCenterLineSpacing;
-		CDPL::Vis::SizeSpecification doubleBondTrimLength;
-		CDPL::Vis::SizeSpecification tripleBondTrimLength;
-		QCheckBox*                   showQueryInfosCheckBox;
-		QCheckBox*                   showReactionInfosCheckBox;
-		QCheckBox*                   showBondStereoCheckBox;
-		bool                         haveChanges;
-	};
+        Settings&                    settings;
+        CDPL::Vis::Color             color;
+        CDPL::Vis::Font              labelFont;
+        CDPL::Vis::SizeSpecification labelSize;
+        CDPL::Vis::SizeSpecification labelMargin;
+        CDPL::Vis::SizeSpecification bondLength;
+        CDPL::Vis::SizeSpecification bondLineWidth;
+        CDPL::Vis::SizeSpecification bondLineSpacing;
+        CDPL::Vis::SizeSpecification wedgeWidth;
+        CDPL::Vis::SizeSpecification hashSpacing;
+        CDPL::Vis::SizeSpecification rxnCenterLineLength;
+        CDPL::Vis::SizeSpecification rxnCenterLineSpacing;
+        CDPL::Vis::SizeSpecification doubleBondTrimLength;
+        CDPL::Vis::SizeSpecification tripleBondTrimLength;
+        QCheckBox*                   showQueryInfosCheckBox;
+        QCheckBox*                   showReactionInfosCheckBox;
+        QCheckBox*                   showBondStereoCheckBox;
+        bool                         haveChanges;
+    };
 }
 
 #endif // CHOX_BONDSETTINGSEDITWIDGET_HPP

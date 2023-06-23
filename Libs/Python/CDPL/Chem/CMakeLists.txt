@@ -84,7 +84,7 @@ SET(chem_MOD_SRCS
 
     ReactorExport.cpp 
   
-    TopologicalEntityAlignmentExport.cpp	
+    TopologicalEntityAlignmentExport.cpp    
     SpatialEntityAlignmentExport.cpp
    
     CompleteRingSetExport.cpp 
@@ -284,8 +284,8 @@ ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Chem" COMPONENT CDPLPythonModules)
 INSTALL(TARGETS _chem DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Chem" COMPONENT CDPLPythonModules)

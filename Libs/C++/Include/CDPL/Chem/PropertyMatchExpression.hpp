@@ -37,146 +37,146 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief PropertyMatchExpression.
-		 * \tparam ValueType The type of the checked property values.
-		 * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
-		 *                   values against the query property values. The overloaded function call operator is
-		 *                   required to take the target property value as its first argument and the query value as the
-		 *                   second argument (both provided as \c const reference to \c ValueType). The returned result
-		 *                   must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
-		 * \tparam ObjType1 The type of the primary query/target objects for which the expression gets evaluated.
-		 * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
-		 *                  expression evaluation.
-		 */
-		template <typename ValueType, typename MatchFunc, typename ObjType1, typename ObjType2 = void>
-		class PropertyMatchExpression : public MatchExpression<ObjType1, ObjType2>
-		{
+        /**
+         * \brief PropertyMatchExpression.
+         * \tparam ValueType The type of the checked property values.
+         * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
+         *                   values against the query property values. The overloaded function call operator is
+         *                   required to take the target property value as its first argument and the query value as the
+         *                   second argument (both provided as \c const reference to \c ValueType). The returned result
+         *                   must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
+         * \tparam ObjType1 The type of the primary query/target objects for which the expression gets evaluated.
+         * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
+         *                  expression evaluation.
+         */
+        template <typename ValueType, typename MatchFunc, typename ObjType1, typename ObjType2 = void>
+        class PropertyMatchExpression : public MatchExpression<ObjType1, ObjType2>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
-			 */
-			typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
+             */
+            typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
 
-			/**
-			 * \brief Type of the generic functor class used to store user-defined property accessor functions.
-			 *
-			 * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
-			 * two arguments of type <tt>const ObjType1&</tt> and <tt>const ObjType2&</tt> (see [\ref FUNWRP]).
-			 */
-			typedef std::function<ValueType(const ObjType1&, const ObjType2&)> PropertyFunction;
-	
-			/**
-			 * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
-			 *        property values returned by \a property_func.
-			 * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified property value accessor function.
-			 */
-			PropertyMatchExpression(const PropertyFunction& property_func): 
-				value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
+            /**
+             * \brief Type of the generic functor class used to store user-defined property accessor functions.
+             *
+             * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
+             * two arguments of type <tt>const ObjType1&</tt> and <tt>const ObjType2&</tt> (see [\ref FUNWRP]).
+             */
+            typedef std::function<ValueType(const ObjType1&, const ObjType2&)> PropertyFunction;
+    
+            /**
+             * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
+             *        property values returned by \a property_func.
+             * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified property value accessor function.
+             */
+            PropertyMatchExpression(const PropertyFunction& property_func): 
+                value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
 
-			/**
-			 * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
-			 *        target object property values returned by \a property_func and the specified query value.
-			 * \param value The query property value.
-			 * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified target property value accessor function.
-			 */
-			PropertyMatchExpression(const ValueType& value, const PropertyFunction& property_func):
-				value(value), matchFunc(), propertyFunc(property_func), fixed(true) {}
-	
-			/**
-			 * \brief Checks whether the value of the target object propery matches the query property value.
-			 *
-			 * The actual equivalence test between the query and target property values is performed by an
-			 * instance of the function object type that was provided as template argument for \a MatchFunc. 
-			 *
-			 * \param query_obj1 The primary query object.
-			 * \param query_obj2 The secondary query object.
-			 * \param target_obj1 The primary target object.
-			 * \param target_obj2 The secondary target object.
-			 * \param aux_data Provides auxiliary information for the evaluation of the expression (ignored).	
-			 * \return \c true if the target property value matches the query property value under the conditions defined by \a MatchFunc,
-			 *         and \c false otherwise.
-			 */
-			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, 
-							const ObjType2& target_obj2, const Base::Any& aux_data) const;
+            /**
+             * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
+             *        target object property values returned by \a property_func and the specified query value.
+             * \param value The query property value.
+             * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified target property value accessor function.
+             */
+            PropertyMatchExpression(const ValueType& value, const PropertyFunction& property_func):
+                value(value), matchFunc(), propertyFunc(property_func), fixed(true) {}
+    
+            /**
+             * \brief Checks whether the value of the target object propery matches the query property value.
+             *
+             * The actual equivalence test between the query and target property values is performed by an
+             * instance of the function object type that was provided as template argument for \a MatchFunc. 
+             *
+             * \param query_obj1 The primary query object.
+             * \param query_obj2 The secondary query object.
+             * \param target_obj1 The primary target object.
+             * \param target_obj2 The secondary target object.
+             * \param aux_data Provides auxiliary information for the evaluation of the expression (ignored).    
+             * \return \c true if the target property value matches the query property value under the conditions defined by \a MatchFunc,
+             *         and \c false otherwise.
+             */
+            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, 
+                            const ObjType2& target_obj2, const Base::Any& aux_data) const;
 
-		private:
-			ValueType         value;
-			MatchFunc         matchFunc;
-			PropertyFunction  propertyFunc;
-			bool              fixed;
-		};
+        private:
+            ValueType         value;
+            MatchFunc         matchFunc;
+            PropertyFunction  propertyFunc;
+            bool              fixed;
+        };
 
-		/**
-		 * \brief PropertyMatchExpression.
-		 * \tparam ValueType The type of the checked property values.
-		 * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
-		 *                   values against the query property values. The overloaded function call operator is
-		 *                   required to take the target property value as its first argument and the query value as the
-		 *                   second argument (both provided as \c const reference to \c ValueType). The returned result
-		 *                   must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
-		 * \tparam ObjType The type of the query/target objects for which the expression gets evaluated.
-		 */
-		template <typename ValueType, typename MatchFunc, typename ObjType>
-		class PropertyMatchExpression<ValueType, MatchFunc, ObjType, void> : public MatchExpression<ObjType, void>
-		{
+        /**
+         * \brief PropertyMatchExpression.
+         * \tparam ValueType The type of the checked property values.
+         * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
+         *                   values against the query property values. The overloaded function call operator is
+         *                   required to take the target property value as its first argument and the query value as the
+         *                   second argument (both provided as \c const reference to \c ValueType). The returned result
+         *                   must be implicitly convertible to type \c bool (\c true indicates a match, \c false a mismatch).
+         * \tparam ObjType The type of the query/target objects for which the expression gets evaluated.
+         */
+        template <typename ValueType, typename MatchFunc, typename ObjType>
+        class PropertyMatchExpression<ValueType, MatchFunc, ObjType, void> : public MatchExpression<ObjType, void>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
-			 */
-			typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
-	
-			/**
-			 * \brief Type of the generic functor class used to store user-defined property accessor functions.
-			 *
-			 * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
-			 * an argument of type <tt>const ObjType&</tt> (see [\ref FUNWRP]).
-			 */
-			typedef std::function<ValueType(const ObjType&)> PropertyFunction;
-		
-			/**
-			 * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
-			 *        property values returned by \a property_func.
-			 * \param property_func A PropertyMatchExpression::PropertyFunction instance that wraps the specified property value accessor function.
-			 */
-			PropertyMatchExpression(const PropertyFunction& property_func): 
-				value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
+             */
+            typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
+    
+            /**
+             * \brief Type of the generic functor class used to store user-defined property accessor functions.
+             *
+             * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
+             * an argument of type <tt>const ObjType&</tt> (see [\ref FUNWRP]).
+             */
+            typedef std::function<ValueType(const ObjType&)> PropertyFunction;
+        
+            /**
+             * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
+             *        property values returned by \a property_func.
+             * \param property_func A PropertyMatchExpression::PropertyFunction instance that wraps the specified property value accessor function.
+             */
+            PropertyMatchExpression(const PropertyFunction& property_func): 
+                value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
 
-			/**
-			 * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
-			 *        target object property values returned by \a property_func and the specified query value.
-			 * \param value The query property value.
-			 * \param property_func A PropertyMatchExpression::PropertyFunction instance that wraps the specified target property value accessor function.
-			 */
-			PropertyMatchExpression(const ValueType& value, const PropertyFunction& property_func):
-				value(value), matchFunc(), propertyFunc(property_func), fixed(true) {}
+            /**
+             * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
+             *        target object property values returned by \a property_func and the specified query value.
+             * \param value The query property value.
+             * \param property_func A PropertyMatchExpression::PropertyFunction instance that wraps the specified target property value accessor function.
+             */
+            PropertyMatchExpression(const ValueType& value, const PropertyFunction& property_func):
+                value(value), matchFunc(), propertyFunc(property_func), fixed(true) {}
 
-			/**
-			 * \brief Checks whether the value of the target object propery matches the query property value.
-			 *
-			 * The actual equivalence test between the query and target property values is performed by an
-			 * instance of the function object type that was provided as template argument for \a MatchFunc. 
-			 *
-			 * \param query_obj The query object.
-			 * \param target_obj The target object.
-			 * \param aux_data Provides auxiliary information for the evaluation of the expression (ignored).	
-			 * \return \c true if the target property value matches the query property value under the conditions defined by \a MatchFunc,
-			 *         and \c false otherwise.
-			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
+            /**
+             * \brief Checks whether the value of the target object propery matches the query property value.
+             *
+             * The actual equivalence test between the query and target property values is performed by an
+             * instance of the function object type that was provided as template argument for \a MatchFunc. 
+             *
+             * \param query_obj The query object.
+             * \param target_obj The target object.
+             * \param aux_data Provides auxiliary information for the evaluation of the expression (ignored).    
+             * \return \c true if the target property value matches the query property value under the conditions defined by \a MatchFunc,
+             *         and \c false otherwise.
+             */
+            bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
-		private:
-			ValueType         value;
-			MatchFunc         matchFunc;
-			PropertyFunction  propertyFunc;
-			bool              fixed;
-		};
-	}
+        private:
+            ValueType         value;
+            MatchFunc         matchFunc;
+            PropertyFunction  propertyFunc;
+            bool              fixed;
+        };
+    }
 }
 
 
@@ -184,24 +184,24 @@ namespace CDPL
 
 template <typename ValueType, typename MatchFunc, typename ObjType1, typename ObjType2>
 bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
-																									  const ObjType1& target_obj1, const ObjType2& target_obj2,
-																									  const Base::Any&) const
+                                                                                                      const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                                                      const Base::Any&) const
 {
-	if (fixed)
-		return matchFunc(propertyFunc(target_obj1, target_obj2), value);
+    if (fixed)
+        return matchFunc(propertyFunc(target_obj1, target_obj2), value);
 
-	return matchFunc(propertyFunc(target_obj1, target_obj2), propertyFunc(query_obj1, query_obj2));
+    return matchFunc(propertyFunc(target_obj1, target_obj2), propertyFunc(query_obj1, query_obj2));
 }
 
 
 template <typename ValueType, typename MatchFunc, typename ObjType>
 bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
-																								 const Base::Any&) const
+                                                                                                 const Base::Any&) const
 {
-	if (fixed)
-		return matchFunc(propertyFunc(target_obj), value);
+    if (fixed)
+        return matchFunc(propertyFunc(target_obj), value);
 
-	return matchFunc(propertyFunc(target_obj), propertyFunc(query_obj));
+    return matchFunc(propertyFunc(target_obj), propertyFunc(query_obj));
 }
 
 #endif // CDPL_CHEM_PROPERTYMATCHEXPRESSION_HPP

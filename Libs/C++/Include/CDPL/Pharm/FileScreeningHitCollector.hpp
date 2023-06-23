@@ -38,62 +38,62 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		template <typename T> class DataWriter;
-	}
+        template <typename T> class DataWriter;
+    }
 
     namespace Pharm
     {
 
-		/**
-		 * \brief FileScreeningHitCollector.
-		 */
+        /**
+         * \brief FileScreeningHitCollector.
+         */
         class CDPL_PHARM_API FileScreeningHitCollector
-		{
+        {
 
-		  public:
-			typedef Base::DataWriter<Chem::MolecularGraph> MolecularGraphWriter;
+          public:
+            typedef Base::DataWriter<Chem::MolecularGraph> MolecularGraphWriter;
 
-			FileScreeningHitCollector(MolecularGraphWriter& writer);
+            FileScreeningHitCollector(MolecularGraphWriter& writer);
 
-			void setDataWriter(MolecularGraphWriter& writer);
+            void setDataWriter(MolecularGraphWriter& writer);
 
-			MolecularGraphWriter& getDataWriter() const;
+            MolecularGraphWriter& getDataWriter() const;
 
-			void alignHitMolecule(bool align);
+            void alignHitMolecule(bool align);
 
-			bool isHitMoleculeAligned() const;
+            bool isHitMoleculeAligned() const;
 
-			void writeScoreProperty(bool write);
+            void writeScoreProperty(bool write);
 
-			bool isScorePropertyWritten() const;
+            bool isScorePropertyWritten() const;
 
-			void writeDBNameProperty(bool write);
+            void writeDBNameProperty(bool write);
 
-			bool isDBNamePropertyWritten() const;
+            bool isDBNamePropertyWritten() const;
 
-			void writeDBMoleculeIndexProperty(bool write);
+            void writeDBMoleculeIndexProperty(bool write);
 
-			bool isDBMoleculeIndexPropertyWritten() const;
-	
-			void writeMoleculeConfIndexProperty(bool write);
+            bool isDBMoleculeIndexPropertyWritten() const;
+    
+            void writeMoleculeConfIndexProperty(bool write);
 
-			bool isMoleculeConfIndexPropertyWritten() const;
+            bool isMoleculeConfIndexPropertyWritten() const;
 
-			bool operator()(const ScreeningProcessor::SearchHit& hit, double score);
+            bool operator()(const ScreeningProcessor::SearchHit& hit, double score);
 
-		  private:
-			MolecularGraphWriter* dataWriter;
-			bool                  alignMolecule;
-			bool                  outputScore;
-			bool                  outputDBName;
-			bool                  outputMolIndex;
-			bool                  outputConfIndex;
-			Math::Vector3DArray   alignedCoords;
-			Chem::BasicMolecule   molecule;
-		};
+          private:
+            MolecularGraphWriter* dataWriter;
+            bool                  alignMolecule;
+            bool                  outputScore;
+            bool                  outputDBName;
+            bool                  outputMolIndex;
+            bool                  outputConfIndex;
+            Math::Vector3DArray   alignedCoords;
+            Chem::BasicMolecule   molecule;
+        };
     }
 }
 

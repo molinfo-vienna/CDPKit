@@ -38,35 +38,35 @@ class QMenu;
 namespace ChOX
 {
 
-	class AtomColorButton : public QLabel
-	{
+    class AtomColorButton : public QLabel
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		AtomColorButton(QWidget*, CDPL::Vis::ColorTable&, const CDPL::Vis::Color&, std::size_t);
+    public:
+        AtomColorButton(QWidget*, CDPL::Vis::ColorTable&, const CDPL::Vis::Color&, std::size_t);
 
-	signals:
-		void colorChanged();
+    signals:
+        void colorChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void editColor();
-		void useDefaultColor();
+    private slots:
+        void editColor();
+        void useDefaultColor();
 
-	private:
-		void init();
+    private:
+        void init();
 
-		void mousePressEvent(QMouseEvent*);
-		void contextMenuEvent(QContextMenuEvent*);
+        void mousePressEvent(QMouseEvent*);
+        void contextMenuEvent(QContextMenuEvent*);
 
-		std::size_t             atomType;
-		CDPL::Vis::ColorTable&  atomColors;
-		const CDPL::Vis::Color& defaultColor;
-		QMenu*                  contextMenu;
-	};
+        std::size_t             atomType;
+        CDPL::Vis::ColorTable&  atomColors;
+        const CDPL::Vis::Color& defaultColor;
+        QMenu*                  contextMenu;
+    };
 }
 
 #endif // CHOX_ATOMCOLORBUTTON_HPP

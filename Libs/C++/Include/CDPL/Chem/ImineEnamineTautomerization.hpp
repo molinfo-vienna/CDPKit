@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief ImineEnamineTautomerizationRule.
-		 */
-		class CDPL_CHEM_API ImineEnamineTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief ImineEnamineTautomerizationRule.
+         */
+        class CDPL_CHEM_API ImineEnamineTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			ImineEnamineTautomerization();
-		};
+          public:
+            ImineEnamineTautomerization();
+        };
     }
 }
 

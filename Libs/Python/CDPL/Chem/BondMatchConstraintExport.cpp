@@ -32,18 +32,18 @@
 namespace 
 {
 
-	struct BondMatchConstraint {};
+    struct BondMatchConstraint {};
 }
 
 
 void CDPLPythonChem::exportBondMatchConstraints()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondMatchConstraint, boost::noncopyable>("BondMatchConstraint", python::no_init)
-		.def_readonly("CONSTRAINT_LIST", &Chem::BondMatchConstraint::CONSTRAINT_LIST)  
-		.def_readonly("ANY_ORDER", &Chem::BondMatchConstraint::ANY_ORDER)    
+    python::class_<BondMatchConstraint, boost::noncopyable>("BondMatchConstraint", python::no_init)
+        .def_readonly("CONSTRAINT_LIST", &Chem::BondMatchConstraint::CONSTRAINT_LIST)  
+        .def_readonly("ANY_ORDER", &Chem::BondMatchConstraint::ANY_ORDER)    
         .def_readonly("AROMATIC", &Chem::BondMatchConstraint::AROMATIC)    
         .def_readonly("AROMATICITY", &Chem::BondMatchConstraint::AROMATICITY)    
         .def_readonly("DIRECTION", &Chem::BondMatchConstraint::DIRECTION)    

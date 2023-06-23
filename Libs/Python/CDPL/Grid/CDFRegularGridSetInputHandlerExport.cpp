@@ -33,18 +33,18 @@
 
 void CDPLPythonGrid::exportCDFRegularGridSetInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Grid::CDFDRegularGridSetInputHandler, 
-		python::bases<Base::DataInputHandler<Grid::DRegularGridSet> > >("CDFDRegularGridSetInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Grid::CDFDRegularGridSetInputHandler, 
+        python::bases<Base::DataInputHandler<Grid::DRegularGridSet> > >("CDFDRegularGridSetInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Grid::CDFGZDRegularGridSetInputHandler, 
-		python::bases<Base::DataInputHandler<Grid::DRegularGridSet> > >("CDFGZDRegularGridSetInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Grid::CDFGZDRegularGridSetInputHandler, 
+        python::bases<Base::DataInputHandler<Grid::DRegularGridSet> > >("CDFGZDRegularGridSetInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Grid::CDFBZ2DRegularGridSetInputHandler, 
-		python::bases<Base::DataInputHandler<Grid::DRegularGridSet> > >("CDFBZ2DRegularGridSetInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Grid::CDFBZ2DRegularGridSetInputHandler, 
+        python::bases<Base::DataInputHandler<Grid::DRegularGridSet> > >("CDFBZ2DRegularGridSetInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

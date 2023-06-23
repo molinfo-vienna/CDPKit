@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Chem::RXNReactionWriter::RXNReactionWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new MDLDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new MDLDataWriter(*this)) {}
 
 Chem::RXNReactionWriter::~RXNReactionWriter() {}
 
 Base::DataWriter<Chem::Reaction>& Chem::RXNReactionWriter::write(const Reaction& rxn)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeRXNFile(output, rxn);
+    try {
+        state = writer->writeRXNFile(output, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("RXNReactionWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("RXNReactionWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Chem::RXNReactionWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Chem::RXNReactionWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

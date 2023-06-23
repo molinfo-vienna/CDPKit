@@ -37,57 +37,57 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class ReactionSettingsEditWidget : public SettingsEditWidget
-	{
+    class ReactionSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		ReactionSettingsEditWidget(QWidget*, Settings&);
+    public:
+        ReactionSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(int);
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(int);
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&                    settings;
-		CDPL::Vis::Color             arrowColor;
-		CDPL::Vis::Color             plusSignColor;
-		CDPL::Vis::SizeSpecification plusSignSize;
-		CDPL::Vis::SizeSpecification plusSignLineWidth;
-		CDPL::Vis::SizeSpecification componentMargin;
-		CDPL::Vis::SizeSpecification arrowLength;
-		CDPL::Vis::SizeSpecification arrowHeadLength;
-		CDPL::Vis::SizeSpecification arrowHeadWidth;
-		CDPL::Vis::SizeSpecification arrowShaftWidth;
-		CDPL::Vis::SizeSpecification arrowLineWidth;
-		QCheckBox*                   showPlusSignsCheckBox;
-		QCheckBox*                   showReactantsCheckBox;
-		QCheckBox*                   showAgentsCheckBox;
-		QCheckBox*                   showProductsCheckBox;
-		unsigned int                 componentLayoutStyle;
-		unsigned int                 componentLayoutDir;
-		unsigned int                 agentLayoutStyle;
-		unsigned int                 agentLayoutDir;
-		unsigned int                 agentAlignment;
-		unsigned int                 arrowStyle;
-		bool                         haveChanges;
-	};
+        Settings&                    settings;
+        CDPL::Vis::Color             arrowColor;
+        CDPL::Vis::Color             plusSignColor;
+        CDPL::Vis::SizeSpecification plusSignSize;
+        CDPL::Vis::SizeSpecification plusSignLineWidth;
+        CDPL::Vis::SizeSpecification componentMargin;
+        CDPL::Vis::SizeSpecification arrowLength;
+        CDPL::Vis::SizeSpecification arrowHeadLength;
+        CDPL::Vis::SizeSpecification arrowHeadWidth;
+        CDPL::Vis::SizeSpecification arrowShaftWidth;
+        CDPL::Vis::SizeSpecification arrowLineWidth;
+        QCheckBox*                   showPlusSignsCheckBox;
+        QCheckBox*                   showReactantsCheckBox;
+        QCheckBox*                   showAgentsCheckBox;
+        QCheckBox*                   showProductsCheckBox;
+        unsigned int                 componentLayoutStyle;
+        unsigned int                 componentLayoutDir;
+        unsigned int                 agentLayoutStyle;
+        unsigned int                 agentLayoutDir;
+        unsigned int                 agentAlignment;
+        unsigned int                 arrowStyle;
+        bool                         haveChanges;
+    };
 }
 
 #endif // CHOX_REACTIONSETTINGSEDITWIDGET_HPP

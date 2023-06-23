@@ -41,92 +41,92 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API StructureGeneratorSettings
-		{
+        class CDPL_CONFGEN_API StructureGeneratorSettings
+        {
 
-		  public:
-			static const StructureGeneratorSettings DEFAULT;
+          public:
+            static const StructureGeneratorSettings DEFAULT;
 
-			StructureGeneratorSettings();
+            StructureGeneratorSettings();
 
-			void setGenerationMode(unsigned int mode);
+            void setGenerationMode(unsigned int mode);
 
-			unsigned int getGenerationMode() const;
+            unsigned int getGenerationMode() const;
 
-			void generateCoordinatesFromScratch(bool generate);
-	
-			bool generateCoordinatesFromScratch() const;
-		
-			void sampleAngleToleranceRanges(bool sample);
-				
-			bool sampleAngleToleranceRanges() const;
+            void generateCoordinatesFromScratch(bool generate);
+    
+            bool generateCoordinatesFromScratch() const;
+        
+            void sampleAngleToleranceRanges(bool sample);
+                
+            bool sampleAngleToleranceRanges() const;
 
-			void setTimeout(std::size_t mil_secs);
+            void setTimeout(std::size_t mil_secs);
 
-			std::size_t getTimeout() const;
-			
-			void setFragmentModeForceFieldType(unsigned int type);
-	    
-			unsigned int getFragmentModeForceFieldType() const;
+            std::size_t getTimeout() const;
+            
+            void setFragmentModeForceFieldType(unsigned int type);
+        
+            unsigned int getFragmentModeForceFieldType() const;
 
-			void setDGModeForceFieldType(unsigned int type);
-	    
-			unsigned int getDGModeForceFieldType() const;
-			
-			void strictForceFieldParameterization(bool strict);
+            void setDGModeForceFieldType(unsigned int type);
+        
+            unsigned int getDGModeForceFieldType() const;
+            
+            void strictForceFieldParameterization(bool strict);
 
-			bool strictForceFieldParameterization() const;
+            bool strictForceFieldParameterization() const;
 
-			void setDielectricConstant(double de_const);
+            void setDielectricConstant(double de_const);
 
-			double getDielectricConstant() const;
+            double getDielectricConstant() const;
 
-			void setDistanceExponent(double exponent);
+            void setDistanceExponent(double exponent);
 
-			double getDistanceExponent() const;
+            double getDistanceExponent() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_iter);
+            void setMaxNumRefinementIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumRefinementIterations() const;
+            std::size_t getMaxNumRefinementIterations() const;
 
-			void setRefinementTolerance(double tol);
+            void setRefinementTolerance(double tol);
 
-			double getRefinementTolerance() const;
+            double getRefinementTolerance() const;
 
-			void setMaxNumSampledConformers(std::size_t max_num);
+            void setMaxNumSampledConformers(std::size_t max_num);
 
-			std::size_t getMaxNumSampledConformers() const;
+            std::size_t getMaxNumSampledConformers() const;
 
-			void setConvergenceCheckCycleSize(std::size_t size);
+            void setConvergenceCheckCycleSize(std::size_t size);
 
-			std::size_t getConvergenceCheckCycleSize() const;
+            std::size_t getConvergenceCheckCycleSize() const;
 
-			void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
+            void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
-			std::size_t getMacrocycleRotorBondCountThreshold() const;
-		
-			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
+            std::size_t getMacrocycleRotorBondCountThreshold() const;
+        
+            FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
-			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
+            const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
-		  private:
-			unsigned int                       generationMode;
-			bool                               fromScratch;
-			bool                               sampleTolRanges;
-			std::size_t                        timeout;
-			unsigned int                       fragModeForceFieldType;
-			unsigned int                       dgModeForceFieldType;
-			bool                               strictParam;
-			double                             dielectricConst;
-			double                             distExponent;
-			std::size_t                        maxNumRefIters;
-			double                             refTolerance;
-			std::size_t                        maxNumSampledConfs;
-			std::size_t                        convCheckCycleSize;
-			std::size_t                        mcRotorBondCountThresh;
-			FragmentConformerGeneratorSettings fragBuildSettings;
-		};
-	};
+          private:
+            unsigned int                       generationMode;
+            bool                               fromScratch;
+            bool                               sampleTolRanges;
+            std::size_t                        timeout;
+            unsigned int                       fragModeForceFieldType;
+            unsigned int                       dgModeForceFieldType;
+            bool                               strictParam;
+            double                             dielectricConst;
+            double                             distExponent;
+            std::size_t                        maxNumRefIters;
+            double                             refTolerance;
+            std::size_t                        maxNumSampledConfs;
+            std::size_t                        convCheckCycleSize;
+            std::size_t                        mcRotorBondCountThresh;
+            FragmentConformerGeneratorSettings fragBuildSettings;
+        };
+    };
 }
 
 #endif // CDPL_CONFGEN_STRUCTUREGENERATORSETTINGS_HPP

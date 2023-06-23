@@ -34,14 +34,14 @@ using namespace CDPL;
 
 void Chem::calcImplicitHydrogenCounts(MolecularGraph& molgraph, bool overwrite)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasImplicitHydrogenCount(atom))
-			continue;
+        if (!overwrite && hasImplicitHydrogenCount(atom))
+            continue;
 
-		setImplicitHydrogenCount(atom, calcImplicitHydrogenCount(atom, molgraph));
-	}
+        setImplicitHydrogenCount(atom, calcImplicitHydrogenCount(atom, molgraph));
+    }
 }

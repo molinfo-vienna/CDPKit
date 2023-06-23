@@ -39,28 +39,28 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief DefaultDataInputHandler.
-		 */
-		template <typename ReaderImpl, const Base::DataFormat& Format, typename DataType = typename ReaderImpl::DataType>
-		class DefaultDataInputHandler : public Base::DataInputHandler<DataType>
-		{
+        /**
+         * \brief DefaultDataInputHandler.
+         */
+        template <typename ReaderImpl, const Base::DataFormat& Format, typename DataType = typename ReaderImpl::DataType>
+        class DefaultDataInputHandler : public Base::DataInputHandler<DataType>
+        {
 
-		public:
-			typedef typename Base::DataInputHandler<DataType>::ReaderType ReaderType;
+        public:
+            typedef typename Base::DataInputHandler<DataType>::ReaderType ReaderType;
 
-			const Base::DataFormat& getDataFormat() const {
-				return Format;
-			}
-		
-			typename ReaderType::SharedPointer createReader(std::istream& is) const {
-				return typename ReaderType::SharedPointer(new ReaderImpl(is));
-			}
+            const Base::DataFormat& getDataFormat() const {
+                return Format;
+            }
+        
+            typename ReaderType::SharedPointer createReader(std::istream& is) const {
+                return typename ReaderType::SharedPointer(new ReaderImpl(is));
+            }
 
-			typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const {
-				return typename ReaderType::SharedPointer(new Util::FileDataReader<ReaderImpl>(file_name, mode));
-			}
-		};
+            typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const {
+                return typename ReaderType::SharedPointer(new Util::FileDataReader<ReaderImpl>(file_name, mode));
+            }
+        };
     }
 }
 

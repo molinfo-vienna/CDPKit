@@ -36,69 +36,69 @@
 using namespace CDPL;
 
 Descr::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator():
-	weightFunc(std::bind(std::multiplies<unsigned int>(),
-						 std::bind(&Chem::getType, std::placeholders::_1),
-						 std::bind(&Chem::getType, std::placeholders::_1))) {}
+    weightFunc(std::bind(std::multiplies<unsigned int>(),
+                         std::bind(&Chem::getType, std::placeholders::_1),
+                         std::bind(&Chem::getType, std::placeholders::_1))) {}
 
 Descr::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec):
-	weightFunc(std::bind(std::multiplies<unsigned int>(),
-						 std::bind(&Chem::getType, std::placeholders::_1),
-						 std::bind(&Chem::getType, std::placeholders::_1)))
+    weightFunc(std::bind(std::multiplies<unsigned int>(),
+                         std::bind(&Chem::getType, std::placeholders::_1),
+                         std::bind(&Chem::getType, std::placeholders::_1)))
 {
-	calculate(molgraph, corr_vec);
+    calculate(molgraph, corr_vec);
 }
 
 void Descr::AutoCorrelation2DVectorCalculator::calculate(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (maxDist > 0) {
-		corr_vec.resize(maxDist + 1, false);
-		corr_vec.clear(0.0);
-	} else
-		corr_vec.resize(0, false);
+    if (maxDist > 0) {
+        corr_vec.resize(maxDist + 1, false);
+        corr_vec.clear(0.0);
+    } else
+        corr_vec.resize(0, false);
 
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
+    const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != atoms_end; ++it1) {
-		const Atom& atom1 = *it1;
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
+    for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != atoms_end; ++it1) {
+        const Atom& atom1 = *it1;
+        std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
 
-		for (MolecularGraph::ConstAtomIterator it2 = it1; it2 != atoms_end; ++it2) {
-			const Atom& atom2 = *it2;
-			std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-			std::size_t dist = dist_mtx(atom1_idx, atom2_idx);
+        for (MolecularGraph::ConstAtomIterator it2 = it1; it2 != atoms_end; ++it2) {
+            const Atom& atom2 = *it2;
+            std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
+            std::size_t dist = dist_mtx(atom1_idx, atom2_idx);
 
-			if (dist == 0 && atom1_idx != atom2_idx)
-				continue;
+            if (dist == 0 && atom1_idx != atom2_idx)
+                continue;
 
-			if (maxDist > 0) {
-				if (dist > maxDist)
-					continue;
+            if (maxDist > 0) {
+                if (dist > maxDist)
+                    continue;
 
-			} else if (dist >= corr_vec.getSize())
-				corr_vec.resize(dist + 1, 0.0);
+            } else if (dist >= corr_vec.getSize())
+                corr_vec.resize(dist + 1, 0.0);
 
-			double weight = (weightFunc ? weightFunc(atom1, atom2) : 1.0);
-		
-			corr_vec(dist) += weight;
-		}
-	}
+            double weight = (weightFunc ? weightFunc(atom1, atom2) : 1.0);
+        
+            corr_vec(dist) += weight;
+        }
+    }
 }
 
 void Descr::AutoCorrelation2DVectorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)
 {
-	weightFunc = func;
+    weightFunc = func;
 }
 
 void Descr::AutoCorrelation2DVectorCalculator::setMaxDistance(std::size_t max_dist)
 {
-	maxDist = max_dist;
+    maxDist = max_dist;
 }
 
 std::size_t Descr::AutoCorrelation2DVectorCalculator::getMaxDistance() const
 {
-	return maxDist;
+    return maxDist;
 }

@@ -36,37 +36,37 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		class TorsionLibrary;
-		class TorsionCategory;
-		class TorsionRule;
+        class TorsionLibrary;
+        class TorsionCategory;
+        class TorsionRule;
 
-		class TorsionLibraryDataReader
-		{
+        class TorsionLibraryDataReader
+        {
 
-		public:
-			void read(std::istream& is, TorsionLibrary& lib);
-			void read(const char* data, TorsionLibrary& lib);
+        public:
+            void read(std::istream& is, TorsionLibrary& lib);
+            void read(const char* data, TorsionLibrary& lib);
 
-		private:
-			typedef rapidxml::xml_document<char> XMLDocument;
-			typedef rapidxml::xml_node<char> XMLNode;
-			typedef rapidxml::xml_attribute<char> XMLAttribute;
-			typedef std::vector<char> CharBuffer;
+        private:
+            typedef rapidxml::xml_document<char> XMLDocument;
+            typedef rapidxml::xml_node<char> XMLNode;
+            typedef rapidxml::xml_attribute<char> XMLAttribute;
+            typedef std::vector<char> CharBuffer;
 
-			void processData(char* data, TorsionLibrary& lib);
-			void processCategory(const XMLNode* cat_node, TorsionCategory& cat) const;
-			void processRule(const XMLNode* rule_node, TorsionRule& rule) const;
-			void processAngleList(const XMLNode* ang_list_node, TorsionRule& rule) const;
+            void processData(char* data, TorsionLibrary& lib);
+            void processCategory(const XMLNode* cat_node, TorsionCategory& cat) const;
+            void processRule(const XMLNode* rule_node, TorsionRule& rule) const;
+            void processAngleList(const XMLNode* ang_list_node, TorsionRule& rule) const;
 
-			Chem::MolecularGraph::SharedPointer parseSMARTS(const char* str) const;
+            Chem::MolecularGraph::SharedPointer parseSMARTS(const char* str) const;
 
-			CharBuffer  charBuffer;
-			XMLDocument torLibDocument;
-		};
-	}
+            CharBuffer  charBuffer;
+            XMLDocument torLibDocument;
+        };
+    }
 }
 
 #endif // CDPL_CONFGEN_TORSIONLIBRARYDATAREADER_HPP

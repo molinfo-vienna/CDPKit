@@ -31,23 +31,23 @@
 namespace CDPL 
 {
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		namespace AtomProperty
-		{
+        namespace AtomProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(HYDROPHOBICITY);
+            CDPL_DEFINE_LOOKUP_KEY(HYDROPHOBICITY);
 
-			CDPL_DEFINE_LOOKUP_KEY(PEOE_SIGMA_CHARGE);
-			CDPL_DEFINE_LOOKUP_KEY(PEOE_SIGMA_ELECTRONEGATIVITY);
+            CDPL_DEFINE_LOOKUP_KEY(PEOE_SIGMA_CHARGE);
+            CDPL_DEFINE_LOOKUP_KEY(PEOE_SIGMA_ELECTRONEGATIVITY);
 
-			CDPL_DEFINE_LOOKUP_KEY(MHMO_PI_CHARGE);
+            CDPL_DEFINE_LOOKUP_KEY(MHMO_PI_CHARGE);
 
-			CDPL_DEFINE_LOOKUP_KEY(H_BOND_DONOR_TYPE);
-			CDPL_DEFINE_LOOKUP_KEY(H_BOND_ACCEPTOR_TYPE);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(H_BOND_DONOR_TYPE);
+            CDPL_DEFINE_LOOKUP_KEY(H_BOND_ACCEPTOR_TYPE);
+        }
 
-		void initAtomProperties() {}
-	}
+        void initAtomProperties() {}
+    }
 }

@@ -32,51 +32,51 @@
 
 BOOST_PYTHON_MODULE(_biomol)
 {
-	using namespace CDPLPythonBiomol;
+    using namespace CDPLPythonBiomol;
 
-	exportPDBData();
-	exportResidueList();
-	exportResidueDictionary();
+    exportPDBData();
+    exportResidueList();
+    exportResidueDictionary();
 
-	exportPDBMoleculeReader();
-	exportPDBMolecularGraphWriter();
-	exportMMTFMoleculeReader();
-	exportMMTFMolecularGraphWriter();
-	
-	exportPDBMoleculeInputHandler();
-	exportPDBMolecularGraphOutputHandler();
-	exportMMTFMoleculeInputHandler();
-	exportMMTFMolecularGraphOutputHandler();
-	
-	exportHierarchyViewNode();
-	exportHierarchyViewModel();
-	exportHierarchyViewChain();
-	exportHierarchyViewFragment();
-	exportHierarchyView();
+    exportPDBMoleculeReader();
+    exportPDBMolecularGraphWriter();
+    exportMMTFMoleculeReader();
+    exportMMTFMolecularGraphWriter();
+    
+    exportPDBMoleculeInputHandler();
+    exportPDBMolecularGraphOutputHandler();
+    exportMMTFMoleculeInputHandler();
+    exportMMTFMolecularGraphOutputHandler();
+    
+    exportHierarchyViewNode();
+    exportHierarchyViewModel();
+    exportHierarchyViewChain();
+    exportHierarchyViewFragment();
+    exportHierarchyView();
 
-	exportAtomProperties();
-	exportMolecularGraphProperties();
-	exportAtomPropertyDefaults();
-	exportMolecularGraphPropertyDefaults();
+    exportAtomProperties();
+    exportMolecularGraphProperties();
+    exportAtomPropertyDefaults();
+    exportMolecularGraphPropertyDefaults();
 
-	exportControlParameters();
-	exportControlParameterDefaults();
+    exportControlParameters();
+    exportControlParameterDefaults();
 
-	exportDataFormats();
+    exportDataFormats();
 
-	exportAtomPropertyFlags();
-	exportResidueTypes();
-	exportProcessingFlags();
-	exportPDBFormatVersions();
+    exportAtomPropertyFlags();
+    exportResidueTypes();
+    exportProcessingFlags();
+    exportPDBFormatVersions();
 
-	exportAtomFunctions();
-	exportMolecularGraphFunctions();
-	exportMoleculeFunctions();
-	exportControlParameterFunctions();
-	exportUtilityFunctions();
+    exportAtomFunctions();
+    exportMolecularGraphFunctions();
+    exportMoleculeFunctions();
+    exportControlParameterFunctions();
+    exportUtilityFunctions();
 
-	exportFunctionWrappers();
+    exportFunctionWrappers();
 
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    registerToPythonConverters();
+    registerFromPythonConverters();
 }

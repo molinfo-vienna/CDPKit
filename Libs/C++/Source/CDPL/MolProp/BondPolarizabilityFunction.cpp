@@ -34,10 +34,10 @@ using namespace CDPL;
 
 double MolProp::calcPolarizability(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, double damping)
 {
-	const Chem::Atom& atom1 = bond.getBegin();
-	const Chem::Atom& atom2 = bond.getEnd();
+    const Chem::Atom& atom1 = bond.getBegin();
+    const Chem::Atom& atom2 = bond.getEnd();
 
-	double polarizability = (calcEffectivePolarizability(atom1, molgraph, damping) + calcEffectivePolarizability(atom2, molgraph, damping)) * 0.5;
+    double polarizability = (calcEffectivePolarizability(atom1, molgraph, damping) + calcEffectivePolarizability(atom2, molgraph, damping)) * 0.5;
 
-	return polarizability;
+    return polarizability;
 }

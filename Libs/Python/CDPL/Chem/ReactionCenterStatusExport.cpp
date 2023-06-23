@@ -32,24 +32,24 @@
 namespace 
 {
 
-	struct ReactionCenterStatus {};
+    struct ReactionCenterStatus {};
 }
 
 
 void CDPLPythonChem::exportReactionCenterStates()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ReactionCenterStatus, boost::noncopyable>("ReactionCenterStatus", python::no_init)
-		.def_readonly("NONE", &Chem::ReactionCenterStatus::NONE)
-		.def_readonly("BOND_BROKEN", &Chem::ReactionCenterStatus::BOND_BROKEN)
-		.def_readonly("BOND_MADE", &Chem::ReactionCenterStatus::BOND_MADE)
-		.def_readonly("BOND_ORDER_CHANGE", &Chem::ReactionCenterStatus::BOND_ORDER_CHANGE)
-		.def_readonly("EXACT_CHANGE", &Chem::ReactionCenterStatus::EXACT_CHANGE)
-		.def_readonly("IS_CENTER", &Chem::ReactionCenterStatus::IS_CENTER)
-		.def_readonly("NO_CENTER", &Chem::ReactionCenterStatus::NO_CENTER)
-		.def_readonly("NO_CHANGE", &Chem::ReactionCenterStatus::NO_CHANGE)
-		.def_readonly("STEREO_INVERSION", &Chem::ReactionCenterStatus::STEREO_INVERSION)
-		.def_readonly("STEREO_RETENTION", &Chem::ReactionCenterStatus::STEREO_RETENTION);
+    python::class_<ReactionCenterStatus, boost::noncopyable>("ReactionCenterStatus", python::no_init)
+        .def_readonly("NONE", &Chem::ReactionCenterStatus::NONE)
+        .def_readonly("BOND_BROKEN", &Chem::ReactionCenterStatus::BOND_BROKEN)
+        .def_readonly("BOND_MADE", &Chem::ReactionCenterStatus::BOND_MADE)
+        .def_readonly("BOND_ORDER_CHANGE", &Chem::ReactionCenterStatus::BOND_ORDER_CHANGE)
+        .def_readonly("EXACT_CHANGE", &Chem::ReactionCenterStatus::EXACT_CHANGE)
+        .def_readonly("IS_CENTER", &Chem::ReactionCenterStatus::IS_CENTER)
+        .def_readonly("NO_CENTER", &Chem::ReactionCenterStatus::NO_CENTER)
+        .def_readonly("NO_CHANGE", &Chem::ReactionCenterStatus::NO_CHANGE)
+        .def_readonly("STEREO_INVERSION", &Chem::ReactionCenterStatus::STEREO_INVERSION)
+        .def_readonly("STEREO_RETENTION", &Chem::ReactionCenterStatus::STEREO_RETENTION);
 }

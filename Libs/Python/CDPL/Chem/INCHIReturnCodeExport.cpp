@@ -32,22 +32,22 @@
 namespace 
 {
 
-	struct INCHIReturnCode {};
+    struct INCHIReturnCode {};
 }
 
 
 void CDPLPythonChem::exportINCHIReturnCodes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<INCHIReturnCode, boost::noncopyable>("INCHIReturnCode", python::no_init)
-		.def_readonly("SKIP", &Chem::INCHIReturnCode::SKIP)
-		.def_readonly("EOF_", &Chem::INCHIReturnCode::EOF_)
-		.def_readonly("OKAY", &Chem::INCHIReturnCode::OKAY)
-		.def_readonly("WARNING", &Chem::INCHIReturnCode::WARNING)
-		.def_readonly("ERROR", &Chem::INCHIReturnCode::ERROR)
-		.def_readonly("FATAL", &Chem::INCHIReturnCode::FATAL)
-		.def_readonly("UNKNOWN", &Chem::INCHIReturnCode::UNKNOWN)
-		.def_readonly("BUSY", &Chem::INCHIReturnCode::BUSY);
+    python::class_<INCHIReturnCode, boost::noncopyable>("INCHIReturnCode", python::no_init)
+        .def_readonly("SKIP", &Chem::INCHIReturnCode::SKIP)
+        .def_readonly("EOF_", &Chem::INCHIReturnCode::EOF_)
+        .def_readonly("OKAY", &Chem::INCHIReturnCode::OKAY)
+        .def_readonly("WARNING", &Chem::INCHIReturnCode::WARNING)
+        .def_readonly("ERROR", &Chem::INCHIReturnCode::ERROR)
+        .def_readonly("FATAL", &Chem::INCHIReturnCode::FATAL)
+        .def_readonly("UNKNOWN", &Chem::INCHIReturnCode::UNKNOWN)
+        .def_readonly("BUSY", &Chem::INCHIReturnCode::BUSY);
 }

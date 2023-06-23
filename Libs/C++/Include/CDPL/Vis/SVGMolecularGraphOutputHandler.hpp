@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A handler for the output of 2D depictions of chemical structures in the <em>Scalable Vector Graphics (SVG)</em>
-		 *        [\ref WSVG] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SVGMolecularGraphWriter, DataFormat::SVG> SVGMolecularGraphOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of 2D depictions of chemical structures in the <em>Scalable Vector Graphics (SVG)</em>
+         *        [\ref WSVG] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SVGMolecularGraphWriter, DataFormat::SVG> SVGMolecularGraphOutputHandler;    
+    }
 }
 
 #endif // CDPL_VIS_SVGMOLECULARGRAPHOUTPUTHANDLER_HPP

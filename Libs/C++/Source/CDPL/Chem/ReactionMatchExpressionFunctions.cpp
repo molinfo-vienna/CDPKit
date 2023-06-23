@@ -45,139 +45,139 @@ using namespace CDPL;
 namespace
 {
 
-	Chem::MatchExpression<Chem::Reaction>::SharedPointer 
-	createMatchExpressionList(const Chem::Reaction& rxn, const Chem::MatchConstraint& constraint);
+    Chem::MatchExpression<Chem::Reaction>::SharedPointer 
+    createMatchExpressionList(const Chem::Reaction& rxn, const Chem::MatchConstraint& constraint);
 
-	Chem::MatchExpression<Chem::Reaction>::SharedPointer 
-	createMatchExpression(const Chem::Reaction& rxn, const Chem::MatchConstraintList& constr_list)
-	{
-		using namespace Chem;
+    Chem::MatchExpression<Chem::Reaction>::SharedPointer 
+    createMatchExpression(const Chem::Reaction& rxn, const Chem::MatchConstraintList& constr_list)
+    {
+        using namespace Chem;
 
-		MatchExpressionList<Reaction>::SharedPointer expr_list_ptr;
+        MatchExpressionList<Reaction>::SharedPointer expr_list_ptr;
 
-		if (constr_list.getType() == MatchConstraintList::AND_LIST || 
-			constr_list.getType() == MatchConstraintList::NOT_AND_LIST)
-			expr_list_ptr.reset(new ANDMatchExpressionList<Reaction>());
-		else
-			expr_list_ptr.reset(new ORMatchExpressionList<Reaction>());
+        if (constr_list.getType() == MatchConstraintList::AND_LIST || 
+            constr_list.getType() == MatchConstraintList::NOT_AND_LIST)
+            expr_list_ptr.reset(new ANDMatchExpressionList<Reaction>());
+        else
+            expr_list_ptr.reset(new ORMatchExpressionList<Reaction>());
 
-		MatchConstraintList::ConstElementIterator constr_end = constr_list.getElementsEnd();
+        MatchConstraintList::ConstElementIterator constr_end = constr_list.getElementsEnd();
 
-		for (MatchConstraintList::ConstElementIterator it = constr_list.getElementsBegin(); it != constr_end; ++it) {
-			const MatchConstraint& constraint = *it;
+        for (MatchConstraintList::ConstElementIterator it = constr_list.getElementsBegin(); it != constr_end; ++it) {
+            const MatchConstraint& constraint = *it;
 
-			if (constraint.getID() == ReactionMatchConstraint::COMPONENT_GROUPING && 
-				constraint.getRelation() == MatchConstraint::EQUAL) {
+            if (constraint.getID() == ReactionMatchConstraint::COMPONENT_GROUPING && 
+                constraint.getRelation() == MatchConstraint::EQUAL) {
 
-				const FragmentList::SharedPointer& comp_groups = 
-					rxn.getProperty<FragmentList::SharedPointer>(ReactionProperty::COMPONENT_GROUPS);
+                const FragmentList::SharedPointer& comp_groups = 
+                    rxn.getProperty<FragmentList::SharedPointer>(ReactionProperty::COMPONENT_GROUPS);
 
-				if (comp_groups->getSize() == 0)
-					continue;
+                if (comp_groups->getSize() == 0)
+                    continue;
 
-				MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionComponentGroupingMatchExpression(comp_groups));
-				
-				expr_list_ptr->addElement(expr_ptr);
-				continue;
-			}
+                MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionComponentGroupingMatchExpression(comp_groups));
+                
+                expr_list_ptr->addElement(expr_ptr);
+                continue;
+            }
 
-			if (constraint.getID() == ReactionMatchConstraint::ATOM_MAPPING && 
-				constraint.getRelation() == MatchConstraint::EQUAL) {
+            if (constraint.getID() == ReactionMatchConstraint::ATOM_MAPPING && 
+                constraint.getRelation() == MatchConstraint::EQUAL) {
 
-				const AtomMapping::SharedPointer& atom_mapping = 
-					rxn.getProperty<AtomMapping::SharedPointer>(ReactionProperty::ATOM_MAPPING);
+                const AtomMapping::SharedPointer& atom_mapping = 
+                    rxn.getProperty<AtomMapping::SharedPointer>(ReactionProperty::ATOM_MAPPING);
 
-				if (atom_mapping->getSize() == 0)
-					continue;
+                if (atom_mapping->getSize() == 0)
+                    continue;
 
-				MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionAtomMappingMatchExpression(atom_mapping));
+                MatchExpression<Reaction>::SharedPointer expr_ptr(new ReactionAtomMappingMatchExpression(atom_mapping));
 
-				expr_list_ptr->addElement(expr_ptr);
-				continue;
-			}
+                expr_list_ptr->addElement(expr_ptr);
+                continue;
+            }
 
-			if (constraint.getID() == ReactionMatchConstraint::CONSTRAINT_LIST) {
-				MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpressionList(rxn, constraint);
-			
-				if (expr_ptr)
-					expr_list_ptr->addElement(expr_ptr);
-			}
-		}
+            if (constraint.getID() == ReactionMatchConstraint::CONSTRAINT_LIST) {
+                MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpressionList(rxn, constraint);
+            
+                if (expr_ptr)
+                    expr_list_ptr->addElement(expr_ptr);
+            }
+        }
 
-		MatchExpression<Reaction>::SharedPointer expr_ptr;
+        MatchExpression<Reaction>::SharedPointer expr_ptr;
 
-		if (expr_list_ptr->getSize() == 0)
-			expr_ptr.reset(new MatchExpression<Reaction>());
-	
-		else {
-			if (expr_list_ptr->getSize() == 1)
-				expr_ptr = expr_list_ptr->getBase().getFirstElement();
-			else
-				expr_ptr = expr_list_ptr;
+        if (expr_list_ptr->getSize() == 0)
+            expr_ptr.reset(new MatchExpression<Reaction>());
+    
+        else {
+            if (expr_list_ptr->getSize() == 1)
+                expr_ptr = expr_list_ptr->getBase().getFirstElement();
+            else
+                expr_ptr = expr_list_ptr;
 
-			if (constr_list.getType() == MatchConstraintList::NOT_AND_LIST || 
-				constr_list.getType() == MatchConstraintList::NOT_OR_LIST) 
-				expr_ptr.reset(new NOTMatchExpression<Reaction>(expr_ptr));
-		}
+            if (constr_list.getType() == MatchConstraintList::NOT_AND_LIST || 
+                constr_list.getType() == MatchConstraintList::NOT_OR_LIST) 
+                expr_ptr.reset(new NOTMatchExpression<Reaction>(expr_ptr));
+        }
 
-		return expr_ptr; 
-	}
+        return expr_ptr; 
+    }
 
-	Chem::MatchExpression<Chem::Reaction>::SharedPointer 
-	createMatchExpressionList(const Chem::Reaction& rxn, const Chem::MatchConstraint& constraint)
-	{
-		using namespace Chem;
+    Chem::MatchExpression<Chem::Reaction>::SharedPointer 
+    createMatchExpressionList(const Chem::Reaction& rxn, const Chem::MatchConstraint& constraint)
+    {
+        using namespace Chem;
 
-		if (constraint.getRelation() != MatchConstraint::EQUAL && 
-			constraint.getRelation() != MatchConstraint::NOT_EQUAL)
-			return MatchExpression<Reaction>::SharedPointer();
+        if (constraint.getRelation() != MatchConstraint::EQUAL && 
+            constraint.getRelation() != MatchConstraint::NOT_EQUAL)
+            return MatchExpression<Reaction>::SharedPointer();
 
-		const MatchConstraintList& constr_list = 
-			*constraint.getValue<MatchConstraintList::SharedPointer>();
-		MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpression(rxn, constr_list);
+        const MatchConstraintList& constr_list = 
+            *constraint.getValue<MatchConstraintList::SharedPointer>();
+        MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpression(rxn, constr_list);
 
-		if (!expr_ptr)
-			return expr_ptr;
+        if (!expr_ptr)
+            return expr_ptr;
 
-		if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
-			expr_ptr.reset(new NOTMatchExpression<Reaction>(expr_ptr));
+        if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
+            expr_ptr.reset(new NOTMatchExpression<Reaction>(expr_ptr));
 
-		return expr_ptr;
-	}
+        return expr_ptr;
+    }
 }
 
 
 Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(const Reaction& rxn)
 {
-	MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpression(rxn, *getMatchConstraints(rxn));
+    MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpression(rxn, *getMatchConstraints(rxn));
 
-	if (!expr_ptr)
-		expr_ptr.reset(new MatchExpression<Reaction>());
+    if (!expr_ptr)
+        expr_ptr.reset(new MatchExpression<Reaction>());
 
-	return expr_ptr; 
+    return expr_ptr; 
 }
 
 Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(Reaction& rxn, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_expr = rxn.getProperty(ReactionProperty::MATCH_EXPRESSION, false);
-	
-		if (!prev_expr.isEmpty())
-			return prev_expr.getData<MatchExpression<Reaction>::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_expr = rxn.getProperty(ReactionProperty::MATCH_EXPRESSION, false);
+    
+        if (!prev_expr.isEmpty())
+            return prev_expr.getData<MatchExpression<Reaction>::SharedPointer>();
+    }
 
-	MatchExpression<Reaction>::SharedPointer expr_ptr = buildMatchExpression(rxn);
+    MatchExpression<Reaction>::SharedPointer expr_ptr = buildMatchExpression(rxn);
 
-	setMatchExpression(rxn, expr_ptr);
+    setMatchExpression(rxn, expr_ptr);
 
-	return expr_ptr; 
+    return expr_ptr; 
 }
-	
+    
 void Chem::buildMatchExpressions(Reaction& rxn, bool overwrite)
 {
-	buildMatchExpression(rxn, overwrite);
+    buildMatchExpression(rxn, overwrite);
 
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&buildMatchExpressions),
-							std::placeholders::_1, overwrite));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&buildMatchExpressions),
+                            std::placeholders::_1, overwrite));
 }

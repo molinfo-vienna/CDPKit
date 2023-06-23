@@ -38,29 +38,29 @@ namespace CDPL
     namespace Pharm
     {
 
-		struct TwoPointPharmHashFunc
-		{
+        struct TwoPointPharmHashFunc
+        {
 
-			inline std::size_t operator()(const TwoPointPharmacophore& pharm) const {
-				std::size_t hv = 0;
+            inline std::size_t operator()(const TwoPointPharmacophore& pharm) const {
+                std::size_t hv = 0;
 
-				boost::hash_combine(hv, pharm.getFeature1Type());
-				boost::hash_combine(hv, pharm.getFeature2Type());
+                boost::hash_combine(hv, pharm.getFeature1Type());
+                boost::hash_combine(hv, pharm.getFeature2Type());
 
-				return hv;
-			}
-		};
+                return hv;
+            }
+        };
 
-		struct TwoPointPharmEqCmpFunc
-		{
+        struct TwoPointPharmEqCmpFunc
+        {
 
-			inline bool operator()(const TwoPointPharmacophore& pharm1, const TwoPointPharmacophore& pharm2) const {
-				return (pharm1.getFeature1Type() == pharm2.getFeature1Type() &&
-						pharm1.getFeature2Type() == pharm2.getFeature2Type());
-			}
-		};
+            inline bool operator()(const TwoPointPharmacophore& pharm1, const TwoPointPharmacophore& pharm2) const {
+                return (pharm1.getFeature1Type() == pharm2.getFeature1Type() &&
+                        pharm1.getFeature2Type() == pharm2.getFeature2Type());
+            }
+        };
 
-		typedef std::unordered_multiset<TwoPointPharmacophore, TwoPointPharmHashFunc, TwoPointPharmEqCmpFunc> TwoPointPharmacophoreSet;
+        typedef std::unordered_multiset<TwoPointPharmacophore, TwoPointPharmHashFunc, TwoPointPharmEqCmpFunc> TwoPointPharmacophoreSet;
     }
 }
 

@@ -35,40 +35,40 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class CDFRegularGridDataReader : protected CDFDataReader
-		{
+        class CDFRegularGridDataReader : protected CDFDataReader
+        {
 
-		public:
-			CDFRegularGridDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+        public:
+            CDFRegularGridDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool readGrid(std::istream& is, DRegularGrid& grid);
+            bool readGrid(std::istream& is, DRegularGrid& grid);
 
-			bool readGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf);
+            bool readGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf);
 
-			bool skipGrid(std::istream& is);
+            bool skipGrid(std::istream& is);
 
-			bool hasMoreData(std::istream& is);
+            bool hasMoreData(std::istream& is);
 
-		protected:
-			bool doReadGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const;
+        protected:
+            bool doReadGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const;
 
-			void readGridData(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const;
+            void readGridData(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const;
 
-			void init(); 
+            void init(); 
 
-			const Base::ControlParameterContainer& ctrlParams;	
-			Internal::ByteBuffer                   dataBuffer;
-		};
-	}
+            const Base::ControlParameterContainer& ctrlParams;    
+            Internal::ByteBuffer                   dataBuffer;
+        };
+    }
 }
 
 #endif // CDPL_GRID_CDFREGULARGRIDDATAREADER_HPP

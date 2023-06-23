@@ -34,14 +34,14 @@
 
 void CDPLPythonChem::exportMorganNumberingCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::MorganNumberingCalculator, boost::noncopyable>("MorganNumberingCalculator", 
-																	   python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("numbering"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MorganNumberingCalculator>())	
-		.def("calculate", &Chem::MorganNumberingCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("numbering")));
+    python::class_<Chem::MorganNumberingCalculator, boost::noncopyable>("MorganNumberingCalculator", 
+                                                                       python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("numbering"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MorganNumberingCalculator>())    
+        .def("calculate", &Chem::MorganNumberingCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("numbering")));
 }

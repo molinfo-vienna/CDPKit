@@ -31,15 +31,15 @@
 namespace CDPL 
 {
 
-	namespace ForceField
-	{
+    namespace ForceField
+    {
 
-		namespace BondProperty
-		{
+        namespace BondProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(MMFF94_TYPE_INDEX);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(MMFF94_TYPE_INDEX);
+        }
 
-		void initBondProperties() {}
-	}
+        void initBondProperties() {}
+    }
 }

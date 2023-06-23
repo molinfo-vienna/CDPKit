@@ -35,34 +35,34 @@ using namespace CDPL;
 
 
 void MolProp::calcPEOEProperties(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter, 
-								 double damping)
+                                 double damping)
 {
-	if (!overwrite) {
-		Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd();
-		
-		for ( ; it != end; ++it) {
-			const Chem::Atom& atom = *it;
+    if (!overwrite) {
+        Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd();
+        
+        for ( ; it != end; ++it) {
+            const Chem::Atom& atom = *it;
 
-			if (!hasPEOESigmaCharge(atom) || !hasPEOESigmaElectronegativity(atom))
-				break;
-		}
-		
-		if (it == end)
-			return;
-	}
+            if (!hasPEOESigmaCharge(atom) || !hasPEOESigmaElectronegativity(atom))
+                break;
+        }
+        
+        if (it == end)
+            return;
+    }
 
-	PEOESigmaChargeCalculator calculator;
+    PEOESigmaChargeCalculator calculator;
 
-	calculator.setNumIterations(num_iter);
-	calculator.setDampingFactor(damping);
-	calculator.calculate(molgraph);
-	
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    calculator.setNumIterations(num_iter);
+    calculator.setDampingFactor(damping);
+    calculator.calculate(molgraph);
+    
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		Chem::Atom& atom = molgraph.getAtom(i);
-		
-		setPEOESigmaCharge(atom, calculator.getCharge(i));
-		setPEOESigmaElectronegativity(atom, calculator.getElectronegativity(i));
-	}
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        Chem::Atom& atom = molgraph.getAtom(i);
+        
+        setPEOESigmaCharge(atom, calculator.getCharge(i));
+        setPEOESigmaElectronegativity(atom, calculator.getElectronegativity(i));
+    }
 }

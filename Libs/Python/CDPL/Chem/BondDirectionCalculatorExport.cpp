@@ -34,20 +34,20 @@
 
 void CDPLPythonChem::exportBondDirectionCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::BondDirectionCalculator, boost::noncopyable>("BondDirectionCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("dirs"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondDirectionCalculator>())	
-		.def("includeRingBonds", &Chem::BondDirectionCalculator::includeRingBonds, (python::arg("self"), python::arg("include")))
-		.def("ringBondsIncluded", &Chem::BondDirectionCalculator::ringBondsIncluded, python::arg("self"))
-		.def("setRingSizeLimit", &Chem::BondDirectionCalculator::setRingSizeLimit, (python::arg("self"), python::arg("min_size")))
-		.def("getRingSizeLimit", &Chem::BondDirectionCalculator::getRingSizeLimit, python::arg("self"))
-		.def("calculate", &Chem::BondDirectionCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("dirs")))
-		.add_property("ringSizeLimit", &Chem::BondDirectionCalculator::getRingSizeLimit, 
-					  &Chem::BondDirectionCalculator::setRingSizeLimit)
-		.add_property("ringBonds", &Chem::BondDirectionCalculator::ringBondsIncluded,
-					  &Chem::BondDirectionCalculator::includeRingBonds);
+    python::class_<Chem::BondDirectionCalculator, boost::noncopyable>("BondDirectionCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("dirs"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondDirectionCalculator>())    
+        .def("includeRingBonds", &Chem::BondDirectionCalculator::includeRingBonds, (python::arg("self"), python::arg("include")))
+        .def("ringBondsIncluded", &Chem::BondDirectionCalculator::ringBondsIncluded, python::arg("self"))
+        .def("setRingSizeLimit", &Chem::BondDirectionCalculator::setRingSizeLimit, (python::arg("self"), python::arg("min_size")))
+        .def("getRingSizeLimit", &Chem::BondDirectionCalculator::getRingSizeLimit, python::arg("self"))
+        .def("calculate", &Chem::BondDirectionCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("dirs")))
+        .add_property("ringSizeLimit", &Chem::BondDirectionCalculator::getRingSizeLimit, 
+                      &Chem::BondDirectionCalculator::setRingSizeLimit)
+        .add_property("ringBonds", &Chem::BondDirectionCalculator::ringBondsIncluded,
+                      &Chem::BondDirectionCalculator::includeRingBonds);
 }

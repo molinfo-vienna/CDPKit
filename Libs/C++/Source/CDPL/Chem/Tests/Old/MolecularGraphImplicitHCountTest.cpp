@@ -44,67 +44,67 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphImplicitHCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::IMPLICIT_H_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::IMPLICIT_H_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::IMPLICIT_H_COUNT) == 17);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, mol, BondContainerProperty::BOND_COUNT);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
 //-----
 
-	Fragment frag(mol);
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::IMPLICIT_H_COUNT) == 17);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::IMPLICIT_H_COUNT) == 17);
-
-	BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(frag, MolecularGraphProperty::IMPLICIT_H_COUNT, frag, AtomContainerProperty::ATOM_COUNT);
-	TestUtils::checkDependency(frag, MolecularGraphProperty::IMPLICIT_H_COUNT, frag, BondContainerProperty::BOND_COUNT);
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
+    TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, mol, BondContainerProperty::BOND_COUNT);
 
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::TYPE);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::FORMAL_CHARGE);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::TOTAL_VALENCE);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::UNPAIRED_VALENCE_ELECTRON_COUNT);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::IMPLICIT_H_COUNT);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, BondContainerProperty::BOND_COUNT);
-	}
+//-----
 
-	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
-		TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, *it, BondProperty::ORDER);
-	}
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::IMPLICIT_H_COUNT) == 17);
+
+    BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::IMPLICIT_H_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(frag, MolecularGraphProperty::IMPLICIT_H_COUNT, frag, AtomContainerProperty::ATOM_COUNT);
+    TestUtils::checkDependency(frag, MolecularGraphProperty::IMPLICIT_H_COUNT, frag, BondContainerProperty::BOND_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
+
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::TYPE);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::FORMAL_CHARGE);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::TOTAL_VALENCE);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::UNPAIRED_VALENCE_ELECTRON_COUNT);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, AtomProperty::IMPLICIT_H_COUNT);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, atom, BondContainerProperty::BOND_COUNT);
+    }
+
+    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
+        TestUtils::checkDependency(mol, MolecularGraphProperty::IMPLICIT_H_COUNT, *it, BondProperty::ORDER);
+    }
 }

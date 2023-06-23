@@ -40,66 +40,66 @@ namespace CDPL
 
     namespace Pharm
     {
-	
-		class PSDScreeningDBCreatorImpl;
+    
+        class PSDScreeningDBCreatorImpl;
 
-		/**
-		 * \brief A class for the creation of optimized pharmacophore screening databases.
-		 */
+        /**
+         * \brief A class for the creation of optimized pharmacophore screening databases.
+         */
         class CDPL_PHARM_API PSDScreeningDBCreator : public ScreeningDBCreator
-		{
+        {
 
-		  public:
-			typedef std::shared_ptr<PSDScreeningDBCreator> SharedPointer;
+          public:
+            typedef std::shared_ptr<PSDScreeningDBCreator> SharedPointer;
 
-			PSDScreeningDBCreator();
+            PSDScreeningDBCreator();
 
-			/**
-			 * \brief Constructs a \c %PSDScreeningDBCreator instance that will write data to the 
-			 *        database-file specified by \a name in the given insert mode.
-			 * \param name The name of the database-file.
-			 * \param mode Specifies whether to (re)create the database or to update/append to existing records.
-			 * \param allow_dup_entries Specifies whether input molecules that are duplicates of already
-			 *                          stored molecules should be discarded. 
-			 */
-			PSDScreeningDBCreator(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
+            /**
+             * \brief Constructs a \c %PSDScreeningDBCreator instance that will write data to the 
+             *        database-file specified by \a name in the given insert mode.
+             * \param name The name of the database-file.
+             * \param mode Specifies whether to (re)create the database or to update/append to existing records.
+             * \param allow_dup_entries Specifies whether input molecules that are duplicates of already
+             *                          stored molecules should be discarded. 
+             */
+            PSDScreeningDBCreator(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~PSDScreeningDBCreator();
+            /**
+             * \brief Destructor.
+             */
+            ~PSDScreeningDBCreator();
 
-			void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
+            void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
-			void close();
+            void close();
 
-			Mode getMode() const;
+            Mode getMode() const;
 
-			bool allowDuplicateEntries() const;
+            bool allowDuplicateEntries() const;
 
-			bool process(const Chem::MolecularGraph& molgraph);
+            bool process(const Chem::MolecularGraph& molgraph);
 
-			bool merge(const ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func);
+            bool merge(const ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func);
 
-			const std::string& getDatabaseName() const;
+            const std::string& getDatabaseName() const;
 
-			std::size_t getNumProcessed() const;
+            std::size_t getNumProcessed() const;
 
-			std::size_t getNumRejected() const;
+            std::size_t getNumRejected() const;
 
-			std::size_t getNumDeleted() const;
+            std::size_t getNumDeleted() const;
 
-			std::size_t getNumInserted() const;
+            std::size_t getNumInserted() const;
 
-		  private:
-			typedef std::auto_ptr<PSDScreeningDBCreatorImpl> ImplementationPointer;
+          private:
+            typedef std::auto_ptr<PSDScreeningDBCreatorImpl> ImplementationPointer;
 
-			PSDScreeningDBCreator(const PSDScreeningDBCreator&);
+            PSDScreeningDBCreator(const PSDScreeningDBCreator&);
 
-			PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&);
-		
-			ImplementationPointer impl;
-		};
+            PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&);
+        
+            ImplementationPointer impl;
+        };
     }
 }
 

@@ -30,14 +30,14 @@ namespace CDPL
 
     namespace Chem 
     {
-	
-		class Bond;
+    
+        class Bond;
     }
     
     namespace Internal
     {
 
-		inline bool isHydrogenBond(const Chem::Bond& bond);
+        inline bool isHydrogenBond(const Chem::Bond& bond);
     }
 }
 

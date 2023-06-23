@@ -30,9 +30,9 @@
 
 BOOST_AUTO_TEST_CASE(MatchConstraintListTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace Base;
 
 
 }

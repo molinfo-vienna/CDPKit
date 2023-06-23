@@ -35,35 +35,35 @@ using namespace CDPL;
 
 void Chem::markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph, Util::BitSet& atom_mask, bool reset)
 {
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	if (atom_mask.size() < num_atoms)
-		atom_mask.resize(num_atoms);
+    if (atom_mask.size() < num_atoms)
+        atom_mask.resize(num_atoms);
 
     if (reset)
-		atom_mask.reset();
+        atom_mask.reset();
 
-	atom_mask.set(molgraph.getAtomIndex(atom));
+    atom_mask.set(molgraph.getAtomIndex(atom));
 
     Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
+        const Atom& nbr_atom = *a_it;
 
-		if (!molgraph.containsAtom(nbr_atom))
-			continue;
+        if (!molgraph.containsAtom(nbr_atom))
+            continue;
 
-		if (!molgraph.containsBond(*b_it))
-			continue;
+        if (!molgraph.containsBond(*b_it))
+            continue;
 
-		std::size_t atom_idx = molgraph.getAtomIndex(nbr_atom);
+        std::size_t atom_idx = molgraph.getAtomIndex(nbr_atom);
 
-		if (atom_mask.test(atom_idx))
-			continue;
+        if (atom_mask.test(atom_idx))
+            continue;
 
-		atom_mask.set(atom_idx);
+        atom_mask.set(atom_idx);
 
-		markReachableAtoms(nbr_atom, molgraph, atom_mask, false);
+        markReachableAtoms(nbr_atom, molgraph, atom_mask, false);
     }
 }
 

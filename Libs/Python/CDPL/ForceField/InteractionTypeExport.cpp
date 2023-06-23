@@ -32,23 +32,23 @@
 namespace 
 {
 
-	struct InteractionType {};
+    struct InteractionType {};
 }
 
 
 void CDPLPythonForceField::exportInteractionTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<InteractionType, boost::noncopyable>("InteractionType", python::no_init)
-		.def_readonly("NONE", &ForceField::InteractionType::NONE)
-		.def_readonly("BOND_STRETCHING", &ForceField::InteractionType::BOND_STRETCHING)
-		.def_readonly("ANGLE_BENDING", &ForceField::InteractionType::ANGLE_BENDING)
-		.def_readonly("STRETCH_BEND", &ForceField::InteractionType::STRETCH_BEND)
-		.def_readonly("OUT_OF_PLANE_BENDING", &ForceField::InteractionType::OUT_OF_PLANE_BENDING)
-		.def_readonly("TORSION", &ForceField::InteractionType::TORSION)
-		.def_readonly("VAN_DER_WAALS", &ForceField::InteractionType::VAN_DER_WAALS)
-		.def_readonly("ELECTROSTATIC", &ForceField::InteractionType::ELECTROSTATIC)
-		.def_readonly("ALL", &ForceField::InteractionType::ALL);
+    python::class_<InteractionType, boost::noncopyable>("InteractionType", python::no_init)
+        .def_readonly("NONE", &ForceField::InteractionType::NONE)
+        .def_readonly("BOND_STRETCHING", &ForceField::InteractionType::BOND_STRETCHING)
+        .def_readonly("ANGLE_BENDING", &ForceField::InteractionType::ANGLE_BENDING)
+        .def_readonly("STRETCH_BEND", &ForceField::InteractionType::STRETCH_BEND)
+        .def_readonly("OUT_OF_PLANE_BENDING", &ForceField::InteractionType::OUT_OF_PLANE_BENDING)
+        .def_readonly("TORSION", &ForceField::InteractionType::TORSION)
+        .def_readonly("VAN_DER_WAALS", &ForceField::InteractionType::VAN_DER_WAALS)
+        .def_readonly("ELECTROSTATIC", &ForceField::InteractionType::ELECTROSTATIC)
+        .def_readonly("ALL", &ForceField::InteractionType::ALL);
 }

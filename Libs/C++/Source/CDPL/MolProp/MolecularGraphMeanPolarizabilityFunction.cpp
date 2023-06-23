@@ -38,16 +38,16 @@ using namespace CDPL;
 
 double MolProp::calcMeanPolarizability(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	double polarizability = 0;
+    using namespace Chem;
+    
+    double polarizability = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), atoms_end = molgraph.getAtomsEnd(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), atoms_end = molgraph.getAtomsEnd(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
 
-		polarizability += getHybridPolarizability(atom, molgraph);
-		polarizability += getImplicitHydrogenCount(atom) * AtomicHybridPolarizability::H;
-	}
+        polarizability += getHybridPolarizability(atom, molgraph);
+        polarizability += getImplicitHydrogenCount(atom) * AtomicHybridPolarizability::H;
+    }
 
-	return polarizability;
+    return polarizability;
 }

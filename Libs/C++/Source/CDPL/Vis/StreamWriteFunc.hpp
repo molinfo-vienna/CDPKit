@@ -29,11 +29,11 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
-		
-		cairo_status_t streamWriteFunc(void*, const unsigned char*, unsigned int);
-	}
+    namespace Vis
+    {
+        
+        cairo_status_t streamWriteFunc(void*, const unsigned char*, unsigned int);
+    }
 }
 
 #endif // CDPL_VIS_STREAMWRITEFUNC_HPP

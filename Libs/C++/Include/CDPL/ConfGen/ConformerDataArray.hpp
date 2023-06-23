@@ -40,10 +40,10 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \brief A data type for the storage of dyn. allocated ConfGen::ConformerData objects.
-		 */
-		typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
+        /**
+         * \brief A data type for the storage of dyn. allocated ConfGen::ConformerData objects.
+         */
+        typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
     }
 }
 

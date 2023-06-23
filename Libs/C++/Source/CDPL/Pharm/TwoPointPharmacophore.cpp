@@ -36,5 +36,5 @@ using namespace CDPL;
 
 
 Pharm::TwoPointPharmacophore::TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2): 
-	ftr1Type(getType(ftr1)), ftr2Type(getType(ftr2)), ftrDistance(length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1)))
+    ftr1Type(getType(ftr1)), ftr2Type(getType(ftr2)), ftrDistance(length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1)))
 {}

@@ -34,74 +34,74 @@ using namespace ChOX;
 
 
 ArrowStyleEditWidget::ArrowStyleEditWidget(QWidget* parent, unsigned int& arrow_style):
-	QWidget(parent), arrowStyle(arrow_style)
+    QWidget(parent), arrowStyle(arrow_style)
 {
-	init();
+    init();
 }
 
 void ArrowStyleEditWidget::updateGUI()
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	arrowStyleComboBox->blockSignals(true);
+    arrowStyleComboBox->blockSignals(true);
 
-	switch (arrowStyle) {
+    switch (arrowStyle) {
 
-		case ArrowStyle::NONE:
-			arrowStyleComboBox->setCurrentIndex(0);
-			break;
+        case ArrowStyle::NONE:
+            arrowStyleComboBox->setCurrentIndex(0);
+            break;
 
-		case ArrowStyle::REACTION_HOLLOW:
-			arrowStyleComboBox->setCurrentIndex(2);
-			break;
+        case ArrowStyle::REACTION_HOLLOW:
+            arrowStyleComboBox->setCurrentIndex(2);
+            break;
 
-		default:
-			arrowStyleComboBox->setCurrentIndex(1);
-	}
+        default:
+            arrowStyleComboBox->setCurrentIndex(1);
+    }
 
-	arrowStyleComboBox->blockSignals(false);
+    arrowStyleComboBox->blockSignals(false);
 }
 
 void ArrowStyleEditWidget::handleArrowStyleSelection(int idx)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	switch (idx) {
+    switch (idx) {
 
-		case 0:
-			arrowStyle = ArrowStyle::NONE;
-			break;
+        case 0:
+            arrowStyle = ArrowStyle::NONE;
+            break;
 
-		case 2:
-			arrowStyle = ArrowStyle::REACTION_HOLLOW;
-			break;
+        case 2:
+            arrowStyle = ArrowStyle::REACTION_HOLLOW;
+            break;
 
-		default:
-			arrowStyle = ArrowStyle::REACTION_SOLID;
-	}
+        default:
+            arrowStyle = ArrowStyle::REACTION_SOLID;
+    }
 
-	emit arrowStyleChanged();
+    emit arrowStyleChanged();
 }
 
 void ArrowStyleEditWidget::init()
 {
-	QBoxLayout* main_layout = new QHBoxLayout(this);
+    QBoxLayout* main_layout = new QHBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	arrowStyleComboBox = new QComboBox(this);
+    arrowStyleComboBox = new QComboBox(this);
 
-	connect(arrowStyleComboBox, SIGNAL(activated(int)), this, SLOT(handleArrowStyleSelection(int)));
+    connect(arrowStyleComboBox, SIGNAL(activated(int)), this, SLOT(handleArrowStyleSelection(int)));
 
-	setFocusProxy(arrowStyleComboBox);
+    setFocusProxy(arrowStyleComboBox);
 
-	arrowStyleComboBox->addItem(tr("No Arrow"));
-	arrowStyleComboBox->addItem(tr("Solid"));
-	arrowStyleComboBox->addItem(tr("Hollow"));
+    arrowStyleComboBox->addItem(tr("No Arrow"));
+    arrowStyleComboBox->addItem(tr("Solid"));
+    arrowStyleComboBox->addItem(tr("Hollow"));
 
-	main_layout->addWidget(arrowStyleComboBox);
+    main_layout->addWidget(arrowStyleComboBox);
 
-	updateGUI();
+    updateGUI();
 }

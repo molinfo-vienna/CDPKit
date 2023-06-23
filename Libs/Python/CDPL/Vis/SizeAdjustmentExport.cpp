@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct SizeAdjustment {};
+    struct SizeAdjustment {};
 }
 
 
 void CDPLPythonVis::exportSizeAdjustments()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<SizeAdjustment, boost::noncopyable>("SizeAdjustment", python::no_init)
-		.def_readonly("BEST_FIT", &Vis::SizeAdjustment::BEST_FIT)
-		.def_readonly("IF_REQUIRED", &Vis::SizeAdjustment::IF_REQUIRED)
-		.def_readonly("NONE", &Vis::SizeAdjustment::NONE);
+    python::class_<SizeAdjustment, boost::noncopyable>("SizeAdjustment", python::no_init)
+        .def_readonly("BEST_FIT", &Vis::SizeAdjustment::BEST_FIT)
+        .def_readonly("IF_REQUIRED", &Vis::SizeAdjustment::IF_REQUIRED)
+        .def_readonly("NONE", &Vis::SizeAdjustment::NONE);
 }

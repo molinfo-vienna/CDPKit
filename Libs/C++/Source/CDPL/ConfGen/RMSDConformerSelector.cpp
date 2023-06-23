@@ -45,11 +45,11 @@
 namespace
 {
 
-	const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE           = 1000;
-	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE          = 2000;
-	const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
-	const std::size_t ABORT_CALLBACK_ALIGNMENT_COUNT       = 10;
-	const std::size_t ABORT_CALLBACK_SYM_MAPPING_COUNT     = 1;
+    const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE           = 1000;
+    const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE          = 2000;
+    const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
+    const std::size_t ABORT_CALLBACK_ALIGNMENT_COUNT       = 10;
+    const std::size_t ABORT_CALLBACK_SYM_MAPPING_COUNT     = 1;
 }
 
 
@@ -60,19 +60,19 @@ constexpr std::size_t ConfGen::RMSDConformerSelector::DEF_MAX_NUM_SYMMETRY_MAPPI
 
 
 ConfGen::RMSDConformerSelector::RMSDConformerSelector(): 
-	idxArrayCache(MAX_INDEX_ARRAY_CACHE_SIZE), vecArrayCache(MAX_VECTOR_ARRAY_CACHE_SIZE), 
-	molGraph(0), minRMSD(0.0), maxNumSymMappings(DEF_MAX_NUM_SYMMETRY_MAPPINGS)
+    idxArrayCache(MAX_INDEX_ARRAY_CACHE_SIZE), vecArrayCache(MAX_VECTOR_ARRAY_CACHE_SIZE), 
+    molGraph(0), minRMSD(0.0), maxNumSymMappings(DEF_MAX_NUM_SYMMETRY_MAPPINGS)
 {
-	using namespace Chem;
-	using namespace std::placeholders;
-	
-	symMappingSearch.includeIdentityMapping(true);
-	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY |
-										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
-	symMappingSearch.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
-										  BondPropertyFlag::AROMATICITY);
-	symMappingSearch.setFoundMappingCallback(
-		std::bind(&ConfGen::RMSDConformerSelector::processSymMapping, this, _1, _2));
+    using namespace Chem;
+    using namespace std::placeholders;
+    
+    symMappingSearch.includeIdentityMapping(true);
+    symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY |
+                                          AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
+    symMappingSearch.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
+                                          BondPropertyFlag::AROMATICITY);
+    symMappingSearch.setFoundMappingCallback(
+        std::bind(&ConfGen::RMSDConformerSelector::processSymMapping, this, _1, _2));
 }
 
 void ConfGen::RMSDConformerSelector::setMinRMSD(double min_rmsd)
@@ -87,293 +87,293 @@ double ConfGen::RMSDConformerSelector::getMinRMSD() const
 
 void ConfGen::RMSDConformerSelector::setAbortCallback(const CallbackFunction& func)
 {
-	abortCallback = func;
+    abortCallback = func;
 }
 
 const ConfGen::CallbackFunction& ConfGen::RMSDConformerSelector::getAbortCallback() const
 {
-	return abortCallback;
+    return abortCallback;
 }
 
 void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask)
 {
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 
-	buildSymMappingSearchMolGraph(atom_mask);
+    buildSymMappingSearchMolGraph(atom_mask);
 
-	atomStereoDescrs.clear();
-	idxArrayCache.putAll();
-	confAlignCoords.clear();
-	selectedConfAlignCoords.clear();
-	symMappings.clear();
+    atomStereoDescrs.clear();
+    idxArrayCache.putAll();
+    confAlignCoords.clear();
+    selectedConfAlignCoords.clear();
+    symMappings.clear();
 }
 
 void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
-										   const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords)
+                                           const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords)
 {
-	setup(molgraph, atom_mask);
-	setupSymMappingValidationData(stable_config_atom_mask, coords);
+    setup(molgraph, atom_mask);
+    setupSymMappingValidationData(stable_config_atom_mask, coords);
 }
 
 std::size_t ConfGen::RMSDConformerSelector::getNumSymmetryMappings() const 
 {
-	return symMappings.size();
+    return symMappings.size();
 }
 
 void ConfGen::RMSDConformerSelector::setMaxNumSymmetryMappings(std::size_t max_num)
 {
-	maxNumSymMappings = max_num;
+    maxNumSymMappings = max_num;
 }
 
 std::size_t ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings() const
 {
-	return maxNumSymMappings;
+    return maxNumSymMappings;
 }
 
 bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_coords)
 {
-	if (symMappings.empty()) {
-		symMappingSearch.findMappings(symMappingSearchMolGraph);
-		
-		if (symMappings.empty())
-			throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
-	}
+    if (symMappings.empty()) {
+        symMappingSearch.findMappings(symMappingSearchMolGraph);
+        
+        if (symMappings.empty())
+            throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
+    }
 
-	if (abortCallback && abortCallback())
-		return false;
+    if (abortCallback && abortCallback())
+        return false;
 
-	if (!selectedConfAlignCoords.empty()) {
-		std::size_t num_mappings = symMappings.size();
-		bool first_pass = true;
-		Math::Matrix4D conf_xform;
-		std::size_t num_perf_almnts = 0;
-		
-		confAlignCoords.clear();
-		
-		for (VectorArrayList::const_reverse_iterator it = selectedConfAlignCoords.rbegin(), end = selectedConfAlignCoords.rend(); 
-			 it != end; ++it, first_pass = false) {
+    if (!selectedConfAlignCoords.empty()) {
+        std::size_t num_mappings = symMappings.size();
+        bool first_pass = true;
+        Math::Matrix4D conf_xform;
+        std::size_t num_perf_almnts = 0;
+        
+        confAlignCoords.clear();
+        
+        for (VectorArrayList::const_reverse_iterator it = selectedConfAlignCoords.rbegin(), end = selectedConfAlignCoords.rend(); 
+             it != end; ++it, first_pass = false) {
 
-			const Math::Vector3DArray& sel_conf_algn_coords = **it;
+            const Math::Vector3DArray& sel_conf_algn_coords = **it;
 
-			for (std::size_t i = 0; i < num_mappings; i++) {
-				if (first_pass) 
-					confAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings[i], conf_coords));
-				
-				if (!alignmentCalc.calculate(sel_conf_algn_coords, *confAlignCoords[i], false)) 
-					return false;
+            for (std::size_t i = 0; i < num_mappings; i++) {
+                if (first_pass) 
+                    confAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings[i], conf_coords));
+                
+                if (!alignmentCalc.calculate(sel_conf_algn_coords, *confAlignCoords[i], false)) 
+                    return false;
 
-				conf_xform = alignmentCalc.getTransform();
+                conf_xform = alignmentCalc.getTransform();
 
-				double rmsd = calcRMSD(sel_conf_algn_coords, *confAlignCoords[i], conf_xform);
+                double rmsd = calcRMSD(sel_conf_algn_coords, *confAlignCoords[i], conf_xform);
 
-				if (rmsd < minRMSD) 
-					return false;
+                if (rmsd < minRMSD) 
+                    return false;
 
-				if (abortCallback && ++num_perf_almnts == ABORT_CALLBACK_ALIGNMENT_COUNT) {
-					if (abortCallback())
-						return false;
+                if (abortCallback && ++num_perf_almnts == ABORT_CALLBACK_ALIGNMENT_COUNT) {
+                    if (abortCallback())
+                        return false;
 
-					num_perf_almnts = 0;
-				}
-			}
-		}
+                    num_perf_almnts = 0;
+                }
+            }
+        }
 
-		selectedConfAlignCoords.push_back(confAlignCoords.front());
+        selectedConfAlignCoords.push_back(confAlignCoords.front());
 
-	} else
-		selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), conf_coords));
+    } else
+        selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), conf_coords));
 
-	return true;
+    return true;
 }
 
 void ConfGen::RMSDConformerSelector::buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	symMappingSearchMolGraph.clear();
+    symMappingSearchMolGraph.clear();
 
-	for (Util::BitSet::size_type i = atom_mask.find_first(); i != Util::BitSet::npos; i = atom_mask.find_next(i)) 
-		symMappingSearchMolGraph.addAtom(molGraph->getAtom(i));
+    for (Util::BitSet::size_type i = atom_mask.find_first(); i != Util::BitSet::npos; i = atom_mask.find_next(i)) 
+        symMappingSearchMolGraph.addAtom(molGraph->getAtom(i));
 
-	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
-		const Bond& bond = *it;
+    for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
+        const Bond& bond = *it;
 
-		if (symMappingSearchMolGraph.containsAtom(bond.getBegin()) && symMappingSearchMolGraph.containsAtom(bond.getEnd()))
-			symMappingSearchMolGraph.addBond(bond);
-	}
+        if (symMappingSearchMolGraph.containsAtom(bond.getBegin()) && symMappingSearchMolGraph.containsAtom(bond.getEnd()))
+            symMappingSearchMolGraph.addBond(bond);
+    }
 }
 
 void ConfGen::RMSDConformerSelector::setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,
-																   const Math::Vector3DArray& conf_coords)
+                                                                   const Math::Vector3DArray& conf_coords)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	atomStereoDescrs.clear();
+    atomStereoDescrs.clear();
 
-	for (Util::BitSet::size_type i = stable_config_atom_mask.find_first(); i != Util::BitSet::npos; i = stable_config_atom_mask.find_next(i)) {
-		const Atom& atom = molGraph->getAtom(i);
+    for (Util::BitSet::size_type i = stable_config_atom_mask.find_first(); i != Util::BitSet::npos; i = stable_config_atom_mask.find_next(i)) {
+        const Atom& atom = molGraph->getAtom(i);
 
-		if (getHybridizationState(atom) != HybridizationState::SP3)
-			continue;
+        if (getHybridizationState(atom) != HybridizationState::SP3)
+            continue;
 
-		atomNeighbors.clear();
+        atomNeighbors.clear();
 
-		std::size_t nbr_cnt = getConnectedAtoms(atom, symMappingSearchMolGraph, std::back_inserter(atomNeighbors));
+        std::size_t nbr_cnt = getConnectedAtoms(atom, symMappingSearchMolGraph, std::back_inserter(atomNeighbors));
 
-		if (nbr_cnt < 3 || nbr_cnt > 4)
-			continue;
+        if (nbr_cnt < 3 || nbr_cnt > 4)
+            continue;
 
-		std::size_t nbr_atom1_idx = molGraph->getAtomIndex(*atomNeighbors[0]);
-		std::size_t nbr_atom2_idx = molGraph->getAtomIndex(*atomNeighbors[1]);
-		std::size_t nbr_atom3_idx = molGraph->getAtomIndex(*atomNeighbors[2]);
-		std::size_t nbr_atom4_idx = (nbr_cnt == 4 ? molGraph->getAtomIndex(*atomNeighbors[3]) : i);
+        std::size_t nbr_atom1_idx = molGraph->getAtomIndex(*atomNeighbors[0]);
+        std::size_t nbr_atom2_idx = molGraph->getAtomIndex(*atomNeighbors[1]);
+        std::size_t nbr_atom3_idx = molGraph->getAtomIndex(*atomNeighbors[2]);
+        std::size_t nbr_atom4_idx = (nbr_cnt == 4 ? molGraph->getAtomIndex(*atomNeighbors[3]) : i);
 
-		const Math::Vector3D& nbr_atom1_coords = conf_coords[nbr_atom1_idx];
-		const Math::Vector3D& nbr_atom2_coords = conf_coords[nbr_atom2_idx];
-		const Math::Vector3D& nbr_atom3_coords = conf_coords[nbr_atom3_idx];
-		const Math::Vector3D& nbr_atom4_coords = conf_coords[nbr_atom4_idx];
+        const Math::Vector3D& nbr_atom1_coords = conf_coords[nbr_atom1_idx];
+        const Math::Vector3D& nbr_atom2_coords = conf_coords[nbr_atom2_idx];
+        const Math::Vector3D& nbr_atom3_coords = conf_coords[nbr_atom3_idx];
+        const Math::Vector3D& nbr_atom4_coords = conf_coords[nbr_atom4_idx];
 
-		if (nbr_cnt == 3) {
-			double oop_angle = ForceField::calcOutOfPlaneAngle<double>(nbr_atom1_coords, nbr_atom4_coords, nbr_atom2_coords, nbr_atom3_coords);
+        if (nbr_cnt == 3) {
+            double oop_angle = ForceField::calcOutOfPlaneAngle<double>(nbr_atom1_coords, nbr_atom4_coords, nbr_atom2_coords, nbr_atom3_coords);
 
-			if (std::abs(oop_angle) < MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE)
-				continue;
-		}
+            if (std::abs(oop_angle) < MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE)
+                continue;
+        }
 
-		double vol = innerProd(crossProd(nbr_atom4_coords - nbr_atom2_coords, nbr_atom4_coords - nbr_atom1_coords), 
-							   nbr_atom4_coords - nbr_atom3_coords); 
-		unsigned int config = (vol > 0.0 ? AtomConfiguration::S : vol < 0.0 ? AtomConfiguration::R : AtomConfiguration::NONE);
+        double vol = innerProd(crossProd(nbr_atom4_coords - nbr_atom2_coords, nbr_atom4_coords - nbr_atom1_coords), 
+                               nbr_atom4_coords - nbr_atom3_coords); 
+        unsigned int config = (vol > 0.0 ? AtomConfiguration::S : vol < 0.0 ? AtomConfiguration::R : AtomConfiguration::NONE);
 
-		if (config == AtomConfiguration::NONE)
-			continue;
-		
-		if (nbr_cnt == 3) 
-			atomStereoDescrs.insert(AtomStereoDescriptorMap::value_type(&atom, StereoDescriptor(config, *atomNeighbors[0], 
-																								*atomNeighbors[1], *atomNeighbors[2])));
-		else
-			atomStereoDescrs.insert(AtomStereoDescriptorMap::value_type(&atom, StereoDescriptor(config, *atomNeighbors[0], 
-																								*atomNeighbors[1], *atomNeighbors[2], 
-																								*atomNeighbors[3])));
-	}
+        if (config == AtomConfiguration::NONE)
+            continue;
+        
+        if (nbr_cnt == 3) 
+            atomStereoDescrs.insert(AtomStereoDescriptorMap::value_type(&atom, StereoDescriptor(config, *atomNeighbors[0], 
+                                                                                                *atomNeighbors[1], *atomNeighbors[2])));
+        else
+            atomStereoDescrs.insert(AtomStereoDescriptorMap::value_type(&atom, StereoDescriptor(config, *atomNeighbors[0], 
+                                                                                                *atomNeighbors[1], *atomNeighbors[2], 
+                                                                                                *atomNeighbors[3])));
+    }
 }
 
 bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping)
 {
-	using namespace Chem;
-	
-	if (abortCallback && (symMappings.size() % ABORT_CALLBACK_SYM_MAPPING_COUNT) == 0 && abortCallback()) {
-		symMappingSearch.stopSearch();
-		return false;
-	}
-	
-	if (!isValidSymMapping(mapping))
-		return false;
+    using namespace Chem;
+    
+    if (abortCallback && (symMappings.size() % ABORT_CALLBACK_SYM_MAPPING_COUNT) == 0 && abortCallback()) {
+        symMappingSearch.stopSearch();
+        return false;
+    }
+    
+    if (!isValidSymMapping(mapping))
+        return false;
 
-	IndexArray* idx_mapping = idxArrayCache.getRaw();
-	const AtomMapping& atom_mapping = mapping.getAtomMapping();
+    IndexArray* idx_mapping = idxArrayCache.getRaw();
+    const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-	idx_mapping->clear();
+    idx_mapping->clear();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-		const Atom* mpd_atom = atom_mapping[&*it];
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        const Atom* mpd_atom = atom_mapping[&*it];
 
-		assert(mpd_atom);
+        assert(mpd_atom);
 
-		idx_mapping->push_back(molGraph->getAtomIndex(*mpd_atom));
-	}
+        idx_mapping->push_back(molGraph->getAtomIndex(*mpd_atom));
+    }
 
-	symMappings.push_back(idx_mapping);
-	
-	if (maxNumSymMappings > 0 && symMappings.size() >= maxNumSymMappings)
-		symMappingSearch.stopSearch();
+    symMappings.push_back(idx_mapping);
+    
+    if (maxNumSymMappings > 0 && symMappings.size() >= maxNumSymMappings)
+        symMappingSearch.stopSearch();
 
-	return false;
+    return false;
 }
 
 bool ConfGen::RMSDConformerSelector::isValidSymMapping(const Chem::AtomBondMapping& mapping) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (atomStereoDescrs.empty())
-		return true;
+    if (atomStereoDescrs.empty())
+        return true;
 
-	const AtomMapping& atom_mapping = mapping.getAtomMapping();
+    const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
-	for (AtomStereoDescriptorMap::const_iterator it = atomStereoDescrs.begin(), end = atomStereoDescrs.end(); it != end; ++it) {
-		const Atom* atom = it->first;
-		const Atom* mpd_atom = atom_mapping[atom];
-		
-		if (!mpd_atom)
-			continue;
+    for (AtomStereoDescriptorMap::const_iterator it = atomStereoDescrs.begin(), end = atomStereoDescrs.end(); it != end; ++it) {
+        const Atom* atom = it->first;
+        const Atom* mpd_atom = atom_mapping[atom];
+        
+        if (!mpd_atom)
+            continue;
 
-		AtomStereoDescriptorMap::const_iterator mpd_atom_stereo_it = atomStereoDescrs.find(mpd_atom);
-		
-		if (mpd_atom_stereo_it == end)
-			continue;
+        AtomStereoDescriptorMap::const_iterator mpd_atom_stereo_it = atomStereoDescrs.find(mpd_atom);
+        
+        if (mpd_atom_stereo_it == end)
+            continue;
 
-		const StereoDescriptor& atom_stereo = it->second;
-		const Atom* const* ref_atoms = atom_stereo.getReferenceAtoms();
-		std::size_t num_ref_atoms = atom_stereo.getNumReferenceAtoms();
-		const Atom* mpd_ref_atoms[4] = { 0 };
-		bool valid = true;
+        const StereoDescriptor& atom_stereo = it->second;
+        const Atom* const* ref_atoms = atom_stereo.getReferenceAtoms();
+        std::size_t num_ref_atoms = atom_stereo.getNumReferenceAtoms();
+        const Atom* mpd_ref_atoms[4] = { 0 };
+        bool valid = true;
 
-		for (std::size_t i = 0; i < num_ref_atoms; i++) {
-			if ((mpd_ref_atoms[i] = atom_mapping[ref_atoms[i]]))
-				continue;
+        for (std::size_t i = 0; i < num_ref_atoms; i++) {
+            if ((mpd_ref_atoms[i] = atom_mapping[ref_atoms[i]]))
+                continue;
 
-			valid = false;
-			break;
-		}
+            valid = false;
+            break;
+        }
 
-		if (!valid)
-			continue;
+        if (!valid)
+            continue;
 
-		const StereoDescriptor& mpd_atom_stereo = mpd_atom_stereo_it->second;
-		unsigned int perm_parity = (num_ref_atoms == 4 ? 
-									mpd_atom_stereo.getPermutationParity(*mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2], *mpd_ref_atoms[3]) :
-									mpd_atom_stereo.getPermutationParity(*mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2]));
+        const StereoDescriptor& mpd_atom_stereo = mpd_atom_stereo_it->second;
+        unsigned int perm_parity = (num_ref_atoms == 4 ? 
+                                    mpd_atom_stereo.getPermutationParity(*mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2], *mpd_ref_atoms[3]) :
+                                    mpd_atom_stereo.getPermutationParity(*mpd_ref_atoms[0], *mpd_ref_atoms[1], *mpd_ref_atoms[2]));
 
-		switch (perm_parity) {
+        switch (perm_parity) {
 
-			case 1:
-				if (atom_stereo.getConfiguration() == mpd_atom_stereo.getConfiguration()) 
-					return false;
-				break;
+            case 1:
+                if (atom_stereo.getConfiguration() == mpd_atom_stereo.getConfiguration()) 
+                    return false;
+                break;
 
-			case 2:
-				if (atom_stereo.getConfiguration() != mpd_atom_stereo.getConfiguration())
-					return false;
+            case 2:
+                if (atom_stereo.getConfiguration() != mpd_atom_stereo.getConfiguration())
+                    return false;
 
-			default:
-				break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 
-	return true;
+    return true;
 }
 
 ConfGen::RMSDConformerSelector::VectorArrayPtr 
 ConfGen::RMSDConformerSelector::buildCoordsArrayForMapping(const IndexArray& mapping, const Math::Vector3DArray& conf_coords)
 {
-	VectorArrayPtr coords_ptr = vecArrayCache.get();
-	Math::Vector3DArray& coords = *coords_ptr;
-	Math::Vector3DArray::StorageType& coords_data = coords.getData();
-	std::size_t arr_size = mapping.size();
-	Math::Vector3D ctr;
+    VectorArrayPtr coords_ptr = vecArrayCache.get();
+    Math::Vector3DArray& coords = *coords_ptr;
+    Math::Vector3DArray::StorageType& coords_data = coords.getData();
+    std::size_t arr_size = mapping.size();
+    Math::Vector3D ctr;
 
-	coords.resize(arr_size);
+    coords.resize(arr_size);
 
-	for (std::size_t i = 0; i < arr_size; i++) {
-		const Math::Vector3D& pos = conf_coords[mapping[i]];
+    for (std::size_t i = 0; i < arr_size; i++) {
+        const Math::Vector3D& pos = conf_coords[mapping[i]];
 
-		ctr.plusAssign(pos);
-		coords_data[i] = pos;
-	}
+        ctr.plusAssign(pos);
+        coords_data[i] = pos;
+    }
 
-	ctr /= arr_size;
+    ctr /= arr_size;
 
-	for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it)
-		it->minusAssign(ctr);
+    for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it)
+        it->minusAssign(ctr);
 
-	return coords_ptr;
+    return coords_ptr;
 }

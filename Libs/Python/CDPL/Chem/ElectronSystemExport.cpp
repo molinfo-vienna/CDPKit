@@ -37,67 +37,67 @@
 namespace
 {
 
-	bool addAtom(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom, std::size_t elec_contrib)
-	{
-		return elec_sys.addAtom(atom, elec_contrib);
-	}
+    bool addAtom(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom, std::size_t elec_contrib)
+    {
+        return elec_sys.addAtom(atom, elec_contrib);
+    }
 
-	bool removeAtom(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom)
-	{
-		return elec_sys.removeAtom(atom);
-	}
+    bool removeAtom(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom)
+    {
+        return elec_sys.removeAtom(atom);
+    }
 
-	std::size_t getElectronContrib(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom)
-	{
-		return elec_sys.getElectronContrib(atom);
-	}
+    std::size_t getElectronContrib(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom)
+    {
+        return elec_sys.getElectronContrib(atom);
+    }
 
-	void setElectronContrib(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom, std::size_t elec_contrib)
-	{
-		elec_sys.setElectronContrib(atom, elec_contrib);
-	}
+    void setElectronContrib(CDPL::Chem::ElectronSystem& elec_sys, CDPL::Chem::Atom& atom, std::size_t elec_contrib)
+    {
+        elec_sys.setElectronContrib(atom, elec_contrib);
+    }
 
-	bool connected(CDPL::Chem::ElectronSystem& elec_sys1, CDPL::Chem::ElectronSystem& elec_sys2, CDPL::Chem::BondContainer& bonds)
-	{
-		return elec_sys1.connected(elec_sys2, bonds);
-	}
+    bool connected(CDPL::Chem::ElectronSystem& elec_sys1, CDPL::Chem::ElectronSystem& elec_sys2, CDPL::Chem::BondContainer& bonds)
+    {
+        return elec_sys1.connected(elec_sys2, bonds);
+    }
 }
 
 
 void CDPLPythonChem::exportElectronSystem()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::ElectronSystem, Chem::ElectronSystem::SharedPointer, 
-				   python::bases<Chem::AtomContainer> >("ElectronSystem", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::ElectronSystem&>((python::arg("self"), python::arg("elec_sys")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ElectronSystem>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::ElectronSystem::operator=), (python::arg("self"), python::arg("elec_sys")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("addAtom", &addAtom, (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("addAtoms", &Chem::ElectronSystem::addAtoms, (python::arg("self"), python::arg("elec_sys")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("removeAtom", static_cast<void (Chem::ElectronSystem::*)(std::size_t)>(&Chem::ElectronSystem::removeAtom),
-			 (python::arg("self"), python::arg("idx")))
-		.def("removeAtom", &removeAtom, (python::arg("self"), python::arg("atom")))
-		.def("clear", &Chem::ElectronSystem::clear, python::arg("self"))
-		.def("swap", &Chem::ElectronSystem::swap, (python::arg("self"), python::arg("elec_sys")))
-		.def("getNumElectrons", &Chem::ElectronSystem::getNumElectrons, python::arg("self"))
-		.def("getElectronContrib", &getElectronContrib, (python::arg("self"), python::arg("atom")))
-		.def("getElectronContrib", static_cast<std::size_t (Chem::ElectronSystem::*)(std::size_t) const>(&Chem::ElectronSystem::getElectronContrib),
-			 (python::arg("self"), python::arg("atom")))
-		.def("setElectronContrib", &setElectronContrib, (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")))
-		.def("setElectronContrib", static_cast<void (Chem::ElectronSystem::*)(std::size_t, std::size_t)>(&Chem::ElectronSystem::setElectronContrib),
-			 (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")))
-		.def("merge", &Chem::ElectronSystem::merge, (python::arg("self"), python::arg("elec_sys")))
-		.def("overlaps", &Chem::ElectronSystem::overlaps, (python::arg("self"), python::arg("elec_sys")))
-		.def("contains", &Chem::ElectronSystem::contains, (python::arg("self"), python::arg("elec_sys")))
-		.def("connected", &connected, (python::arg("self"), python::arg("elec_sys"), python::arg("bonds")))
-		.def(AtomContainerSpecialFunctionsVisitor(false))
-		.add_property("numElectrons", &Chem::ElectronSystem::getNumElectrons);
+    python::class_<Chem::ElectronSystem, Chem::ElectronSystem::SharedPointer, 
+                   python::bases<Chem::AtomContainer> >("ElectronSystem", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::ElectronSystem&>((python::arg("self"), python::arg("elec_sys")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ElectronSystem>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::ElectronSystem::operator=), (python::arg("self"), python::arg("elec_sys")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("addAtom", &addAtom, (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("addAtoms", &Chem::ElectronSystem::addAtoms, (python::arg("self"), python::arg("elec_sys")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("removeAtom", static_cast<void (Chem::ElectronSystem::*)(std::size_t)>(&Chem::ElectronSystem::removeAtom),
+             (python::arg("self"), python::arg("idx")))
+        .def("removeAtom", &removeAtom, (python::arg("self"), python::arg("atom")))
+        .def("clear", &Chem::ElectronSystem::clear, python::arg("self"))
+        .def("swap", &Chem::ElectronSystem::swap, (python::arg("self"), python::arg("elec_sys")))
+        .def("getNumElectrons", &Chem::ElectronSystem::getNumElectrons, python::arg("self"))
+        .def("getElectronContrib", &getElectronContrib, (python::arg("self"), python::arg("atom")))
+        .def("getElectronContrib", static_cast<std::size_t (Chem::ElectronSystem::*)(std::size_t) const>(&Chem::ElectronSystem::getElectronContrib),
+             (python::arg("self"), python::arg("atom")))
+        .def("setElectronContrib", &setElectronContrib, (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")))
+        .def("setElectronContrib", static_cast<void (Chem::ElectronSystem::*)(std::size_t, std::size_t)>(&Chem::ElectronSystem::setElectronContrib),
+             (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")))
+        .def("merge", &Chem::ElectronSystem::merge, (python::arg("self"), python::arg("elec_sys")))
+        .def("overlaps", &Chem::ElectronSystem::overlaps, (python::arg("self"), python::arg("elec_sys")))
+        .def("contains", &Chem::ElectronSystem::contains, (python::arg("self"), python::arg("elec_sys")))
+        .def("connected", &connected, (python::arg("self"), python::arg("elec_sys"), python::arg("bonds")))
+        .def(AtomContainerSpecialFunctionsVisitor(false))
+        .add_property("numElectrons", &Chem::ElectronSystem::getNumElectrons);
 }
 

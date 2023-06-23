@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		/**
-		 * \brief A handler for the output of gzip-compressed spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<CDFGZDRegularGridSetWriter, DataFormat::CDF_GZ> CDFGZDRegularGridSetOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of gzip-compressed spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<CDFGZDRegularGridSetWriter, DataFormat::CDF_GZ> CDFGZDRegularGridSetOutputHandler;
+    }
 }
 
 #endif // CDPL_GRID_CDFGZDREGULARGRIDSETOUTPUTHANDLER_HPP

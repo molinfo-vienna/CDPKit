@@ -37,28 +37,28 @@ void CDPLPythonPharm::exportHBondingInteractionScore()
     using namespace CDPL;
 
     python::class_<Pharm::HBondingInteractionScore, Pharm::HBondingInteractionScore::SharedPointer,
-				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("HBondingInteractionScore", python::no_init)
-		.def(python::init<const Pharm::HBondingInteractionScore&>((python::arg("self"), python::arg("score"))))
-		.def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
-																 python::arg("min_len") = Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH, 
-																 python::arg("max_len") = Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH,
-																 python::arg("min_ahd_ang") = Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE,
-																 python::arg("max_acc_ang") = Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE)))
-		.def("setDistanceScoringFunction", &Pharm::HBondingInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("setAcceptorAngleScoringFunction", &Pharm::HBondingInteractionScore::setAcceptorAngleScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("setAHDAngleScoringFunction", &Pharm::HBondingInteractionScore::setAHDAngleScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("getMinLength", &Pharm::HBondingInteractionScore::getMinLength, python::arg("self"))
-		.def("getMaxLength", &Pharm::HBondingInteractionScore::getMaxLength, python::arg("self"))
-		.def("getMinAHDAngle", &Pharm::HBondingInteractionScore::getMinAHDAngle, python::arg("self"))
-		.def("getMaxAcceptorAngle", &Pharm::HBondingInteractionScore::getMaxAcceptorAngle, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::HBondingInteractionScore::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.add_property("minLength", &Pharm::HBondingInteractionScore::getMinLength)
-		.add_property("maxLength", &Pharm::HBondingInteractionScore::getMaxLength)
-		.add_property("minAHDAngle", &Pharm::HBondingInteractionScore::getMinAHDAngle)
-		.add_property("maxAcceptorAngle", &Pharm::HBondingInteractionScore::getMaxAcceptorAngle)
-		.def_readonly("DEF_MIN_HB_LENGTH", Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH)
-		.def_readonly("DEF_MAX_HB_LENGTH", Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH)
-		.def_readonly("DEF_MIN_AHD_ANGLE", Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE)
-		.def_readonly("DEF_MAX_ACC_ANGLE", Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE);
+                   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("HBondingInteractionScore", python::no_init)
+        .def(python::init<const Pharm::HBondingInteractionScore&>((python::arg("self"), python::arg("score"))))
+        .def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
+                                                                 python::arg("min_len") = Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH, 
+                                                                 python::arg("max_len") = Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH,
+                                                                 python::arg("min_ahd_ang") = Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE,
+                                                                 python::arg("max_acc_ang") = Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE)))
+        .def("setDistanceScoringFunction", &Pharm::HBondingInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("setAcceptorAngleScoringFunction", &Pharm::HBondingInteractionScore::setAcceptorAngleScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("setAHDAngleScoringFunction", &Pharm::HBondingInteractionScore::setAHDAngleScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("getMinLength", &Pharm::HBondingInteractionScore::getMinLength, python::arg("self"))
+        .def("getMaxLength", &Pharm::HBondingInteractionScore::getMaxLength, python::arg("self"))
+        .def("getMinAHDAngle", &Pharm::HBondingInteractionScore::getMinAHDAngle, python::arg("self"))
+        .def("getMaxAcceptorAngle", &Pharm::HBondingInteractionScore::getMaxAcceptorAngle, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::HBondingInteractionScore::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .add_property("minLength", &Pharm::HBondingInteractionScore::getMinLength)
+        .add_property("maxLength", &Pharm::HBondingInteractionScore::getMaxLength)
+        .add_property("minAHDAngle", &Pharm::HBondingInteractionScore::getMinAHDAngle)
+        .add_property("maxAcceptorAngle", &Pharm::HBondingInteractionScore::getMaxAcceptorAngle)
+        .def_readonly("DEF_MIN_HB_LENGTH", Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH)
+        .def_readonly("DEF_MAX_HB_LENGTH", Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH)
+        .def_readonly("DEF_MIN_AHD_ANGLE", Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE)
+        .def_readonly("DEF_MAX_ACC_ANGLE", Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE);
 }

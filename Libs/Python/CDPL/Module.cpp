@@ -29,8 +29,8 @@
 
 BOOST_PYTHON_MODULE(_cdpl)
 {
-	using namespace CDPLPython;
+    using namespace CDPLPython;
 
-	exportVersionInfo();
-	exportConfigInfo();
+    exportVersionInfo();
+    exportConfigInfo();
 }

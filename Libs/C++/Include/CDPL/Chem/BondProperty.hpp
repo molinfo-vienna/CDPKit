@@ -35,41 +35,41 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides keys for built-in Chem::Bond properties.
-		 */
-		namespace BondProperty
-		{
+        /**
+         * \brief Provides keys for built-in Chem::Bond properties.
+         */
+        namespace BondProperty
+        {
 
-			extern CDPL_CHEM_API const Base::LookupKey ORDER;
+            extern CDPL_CHEM_API const Base::LookupKey ORDER;
 
-			extern CDPL_CHEM_API const Base::LookupKey RING_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey AROMATICITY_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey RING_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey AROMATICITY_FLAG;
 
-			extern CDPL_CHEM_API const Base::LookupKey STEREO_DESCRIPTOR;
-			extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
-			extern CDPL_CHEM_API const Base::LookupKey DIRECTION;
-			extern CDPL_CHEM_API const Base::LookupKey STEREO_2D_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey STEREO_DESCRIPTOR;
+            extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
+            extern CDPL_CHEM_API const Base::LookupKey DIRECTION;
+            extern CDPL_CHEM_API const Base::LookupKey STEREO_2D_FLAG;
 
-			extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
+            extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
 
-			extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
+            extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
 
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
-		}
-	}
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_BONDPROPERTY_HPP

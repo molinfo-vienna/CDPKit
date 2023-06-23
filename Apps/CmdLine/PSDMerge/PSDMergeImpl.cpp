@@ -45,36 +45,36 @@ using namespace PSDMerge;
 struct PSDMergeImpl::MergeDBsProgressCallback
 {
 
-	MergeDBsProgressCallback(PSDMergeImpl* parent, double offset, double scale): 
-		parent(parent), offset(offset), scale(scale) {}
+    MergeDBsProgressCallback(PSDMergeImpl* parent, double offset, double scale): 
+        parent(parent), offset(offset), scale(scale) {}
 
-	bool operator()(double progress) const {
-		if (PSDMergeImpl::termSignalCaught())
-			return false;
+    bool operator()(double progress) const {
+        if (PSDMergeImpl::termSignalCaught())
+            return false;
 
-		parent->printProgress("Merging Databases... ", offset + scale * progress);
-		return true;
-	}
+        parent->printProgress("Merging Databases... ", offset + scale * progress);
+        return true;
+    }
 
-	PSDMergeImpl* parent;
-	double         offset;
-	double         scale;
+    PSDMergeImpl* parent;
+    double         offset;
+    double         scale;
 };
 
 
 PSDMergeImpl::PSDMergeImpl(): 
-	dropDuplicates(false), creationMode(CDPL::Pharm::ScreeningDBCreator::APPEND)
+    dropDuplicates(false), creationMode(CDPL::Pharm::ScreeningDBCreator::APPEND)
 {
-	using namespace std::placeholders;
-	
-	addOption("input,i", "Input database file(s).", 
-			  value<StringList>(&inputDatabases)->multitoken()->required());
-	addOption("output,o", "Output database file.", 
-			  value<std::string>(&outputDatabase)->required());
-	addOption("mode,m", "Database merge mode (CREATE, APPEND, UPDATE, default: APPEND).", 
-			  value<std::string>()->notifier(std::bind(&PSDMergeImpl::setCreationMode, this, _1)));
-	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
-			  value<bool>(&dropDuplicates)->implicit_value(true));
+    using namespace std::placeholders;
+    
+    addOption("input,i", "Input database file(s).", 
+              value<StringList>(&inputDatabases)->multitoken()->required());
+    addOption("output,o", "Output database file.", 
+              value<std::string>(&outputDatabase)->required());
+    addOption("mode,m", "Database merge mode (CREATE, APPEND, UPDATE, default: APPEND).", 
+              value<std::string>()->notifier(std::bind(&PSDMergeImpl::setCreationMode, this, _1)));
+    addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
+              value<bool>(&dropDuplicates)->implicit_value(true));
 }
 
 const char* PSDMergeImpl::getProgName() const
@@ -89,155 +89,155 @@ const char* PSDMergeImpl::getProgCopyright() const
 
 const char* PSDMergeImpl::getProgAboutText() const
 {
-	return "Merges multiple pharmacophore-screening databases into a single database.";
+    return "Merges multiple pharmacophore-screening databases into a single database.";
 }
 
 void PSDMergeImpl::setCreationMode(const std::string& mode)
 {
-	using namespace CDPL::Pharm;
+    using namespace CDPL::Pharm;
 
-	std::string uc_mode = mode;
-	boost::to_upper(uc_mode);
+    std::string uc_mode = mode;
+    boost::to_upper(uc_mode);
 
-	if (uc_mode == "CREATE")
-		creationMode = ScreeningDBCreator::CREATE;
-	else if (uc_mode == "APPEND")
-		creationMode = ScreeningDBCreator::APPEND;
-	else if (uc_mode == "UPDATE")
-		creationMode = ScreeningDBCreator::UPDATE;
-	else
-		throwValidationError("mode");
+    if (uc_mode == "CREATE")
+        creationMode = ScreeningDBCreator::CREATE;
+    else if (uc_mode == "APPEND")
+        creationMode = ScreeningDBCreator::APPEND;
+    else if (uc_mode == "UPDATE")
+        creationMode = ScreeningDBCreator::UPDATE;
+    else
+        throwValidationError("mode");
 }
 
 int PSDMergeImpl::process()
 {
-	timer.reset();
+    timer.reset();
 
-	printMessage(INFO, getProgTitleString());
-	printMessage(INFO, "");
+    printMessage(INFO, getProgTitleString());
+    printMessage(INFO, "");
 
-	checkInputFiles();
-	printOptionSummary();
+    checkInputFiles();
+    printOptionSummary();
 
-	return mergeDatabases();
+    return mergeDatabases();
 }
 
 int PSDMergeImpl::mergeDatabases()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	typedef std::vector<Pharm::ScreeningDBAccessor::SharedPointer> DBAccessorList;
+    typedef std::vector<Pharm::ScreeningDBAccessor::SharedPointer> DBAccessorList;
 
-	std::size_t num_mols = 0;
-	std::size_t num_pharms = 0;
-	DBAccessorList db_accessors;
+    std::size_t num_mols = 0;
+    std::size_t num_pharms = 0;
+    DBAccessorList db_accessors;
 
-	printMessage(INFO, "Analyzing Input Databases...");
+    printMessage(INFO, "Analyzing Input Databases...");
 
-	for (std::size_t i = 0; i < inputDatabases.size(); i++) {
-		if (termSignalCaught())
-			return EXIT_FAILURE;
+    for (std::size_t i = 0; i < inputDatabases.size(); i++) {
+        if (termSignalCaught())
+            return EXIT_FAILURE;
 
-		Pharm::ScreeningDBAccessor::SharedPointer db_acc(new Pharm::PSDScreeningDBAccessor(inputDatabases[i]));
+        Pharm::ScreeningDBAccessor::SharedPointer db_acc(new Pharm::PSDScreeningDBAccessor(inputDatabases[i]));
 
-		num_pharms += db_acc->getNumPharmacophores();
-		num_mols += db_acc->getNumMolecules();
+        num_pharms += db_acc->getNumPharmacophores();
+        num_mols += db_acc->getNumMolecules();
 
-		db_accessors.push_back(db_acc);
-	}
+        db_accessors.push_back(db_acc);
+    }
 
-	if (termSignalCaught())
-		return EXIT_FAILURE;
+    if (termSignalCaught())
+        return EXIT_FAILURE;
 
-	printMessage(INFO, " - Found " + std::to_string(num_mols) + " molecules/" +
-				 std::to_string(num_pharms) + " pharmacophores");
-	printMessage(INFO, "");
+    printMessage(INFO, " - Found " + std::to_string(num_mols) + " molecules/" +
+                 std::to_string(num_pharms) + " pharmacophores");
+    printMessage(INFO, "");
 
-	Pharm::PSDScreeningDBCreator db_creator(outputDatabase, creationMode, !dropDuplicates);
+    Pharm::PSDScreeningDBCreator db_creator(outputDatabase, creationMode, !dropDuplicates);
 
-	if (progressEnabled()) {
-		initProgress();
-		printMessage(INFO, "Merging Databases...", true, true); 
-	} else
-		printMessage(INFO, "Merging Databases..."); 
+    if (progressEnabled()) {
+        initProgress();
+        printMessage(INFO, "Merging Databases...", true, true); 
+    } else
+        printMessage(INFO, "Merging Databases..."); 
 
-	for (std::size_t i = 0; i < inputDatabases.size(); i++) {
-		if (termSignalCaught())
-			return EXIT_FAILURE;
+    for (std::size_t i = 0; i < inputDatabases.size(); i++) {
+        if (termSignalCaught())
+            return EXIT_FAILURE;
 
-		db_creator.merge(*db_accessors[i], 
-						 MergeDBsProgressCallback(this, i * 1.0 / inputDatabases.size(), 
-												  1.0 / inputDatabases.size()));
-	}
+        db_creator.merge(*db_accessors[i], 
+                         MergeDBsProgressCallback(this, i * 1.0 / inputDatabases.size(), 
+                                                  1.0 / inputDatabases.size()));
+    }
 
-	printMessage(INFO, "");
+    printMessage(INFO, "");
 
-	if (termSignalCaught())
-		return EXIT_FAILURE;
+    if (termSignalCaught())
+        return EXIT_FAILURE;
 
-	printStatistics(db_creator.getNumProcessed(), db_creator.getNumRejected(),
-					db_creator.getNumDeleted(), db_creator.getNumInserted());
+    printStatistics(db_creator.getNumProcessed(), db_creator.getNumRejected(),
+                    db_creator.getNumDeleted(), db_creator.getNumInserted());
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 
 void PSDMergeImpl::printStatistics(std::size_t num_proc, std::size_t num_rej, 
-								   std::size_t num_del, std::size_t num_ins)
+                                   std::size_t num_del, std::size_t num_ins)
 {
-	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
-	
-	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc));
-	printMessage(INFO, " Rejected  Molecules: " + std::to_string(num_rej));
-	printMessage(INFO, " Deleted Molecules:   " + std::to_string(num_del));
-	printMessage(INFO, " Inserted Molecules:  " + std::to_string(num_ins));
-	printMessage(INFO, " Processing Time:     " + CmdLineLib::formatTimeDuration(proc_time));
+    std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
+    
+    printMessage(INFO, "Statistics:");
+    printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc));
+    printMessage(INFO, " Rejected  Molecules: " + std::to_string(num_rej));
+    printMessage(INFO, " Deleted Molecules:   " + std::to_string(num_del));
+    printMessage(INFO, " Inserted Molecules:  " + std::to_string(num_ins));
+    printMessage(INFO, " Processing Time:     " + CmdLineLib::formatTimeDuration(proc_time));
 }
 
 void PSDMergeImpl::checkInputFiles() const
 {
-	using namespace CDPL;
-	using namespace std::placeholders;
-	
-	StringList::const_iterator it = std::find_if(inputDatabases.begin(), inputDatabases.end(),
-												 std::bind(std::logical_not<bool>(), 
-														   std::bind(Util::fileExists, _1)));
-	if (it != inputDatabases.end())
-		throw Base::IOError("file '" + *it + "' does not exist");
-			
-														 
-	if (std::find_if(inputDatabases.begin(), inputDatabases.end(),
-					 std::bind(Util::checkIfSameFile, boost::ref(outputDatabase),
-							   _1)) != inputDatabases.end())
-		throw Base::ValueError("output file must not occur in list of input files");
+    using namespace CDPL;
+    using namespace std::placeholders;
+    
+    StringList::const_iterator it = std::find_if(inputDatabases.begin(), inputDatabases.end(),
+                                                 std::bind(std::logical_not<bool>(), 
+                                                           std::bind(Util::fileExists, _1)));
+    if (it != inputDatabases.end())
+        throw Base::IOError("file '" + *it + "' does not exist");
+            
+                                                         
+    if (std::find_if(inputDatabases.begin(), inputDatabases.end(),
+                     std::bind(Util::checkIfSameFile, boost::ref(outputDatabase),
+                               _1)) != inputDatabases.end())
+        throw Base::ValueError("output file must not occur in list of input files");
 }
 
 void PSDMergeImpl::printOptionSummary()
 {
-	printMessage(VERBOSE, "Option Summary:");
-	printMessage(VERBOSE, " Input Databases(s):       " + inputDatabases[0]);
-	
-	for (StringList::const_iterator it = ++inputDatabases.begin(), end = inputDatabases.end(); it != end; ++it)
-		printMessage(VERBOSE, std::string(27, ' ') + *it);
+    printMessage(VERBOSE, "Option Summary:");
+    printMessage(VERBOSE, " Input Databases(s):       " + inputDatabases[0]);
+    
+    for (StringList::const_iterator it = ++inputDatabases.begin(), end = inputDatabases.end(); it != end; ++it)
+        printMessage(VERBOSE, std::string(27, ' ') + *it);
 
-	printMessage(VERBOSE, " Output Database:          " + outputDatabase);
- 	printMessage(VERBOSE, " Creation Mode:            " + getModeString());
- 	printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
-	printMessage(VERBOSE, "");
+    printMessage(VERBOSE, " Output Database:          " + outputDatabase);
+     printMessage(VERBOSE, " Creation Mode:            " + getModeString());
+     printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
+    printMessage(VERBOSE, "");
 }
 
 std::string PSDMergeImpl::getModeString() const
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	if (creationMode == Pharm::ScreeningDBCreator::CREATE)
-		return "CREATE";
+    if (creationMode == Pharm::ScreeningDBCreator::CREATE)
+        return "CREATE";
 
-	if (creationMode == Pharm::ScreeningDBCreator::APPEND)
-		return "APPEND";
+    if (creationMode == Pharm::ScreeningDBCreator::APPEND)
+        return "APPEND";
 
-	if (creationMode == Pharm::ScreeningDBCreator::UPDATE)
-		return "UPDATE";
-	
-	return "UNKNOWN";
+    if (creationMode == Pharm::ScreeningDBCreator::UPDATE)
+        return "UPDATE";
+    
+    return "UNKNOWN";
 }

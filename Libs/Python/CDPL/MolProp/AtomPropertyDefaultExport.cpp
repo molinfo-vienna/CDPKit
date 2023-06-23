@@ -32,16 +32,16 @@
 namespace 
 {
 
-	struct AtomPropertyDefault {};
+    struct AtomPropertyDefault {};
 }
 
 
 void CDPLPythonMolProp::exportAtomPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
-		.def_readonly("H_BOND_DONOR_TYPE", &MolProp::AtomPropertyDefault::H_BOND_DONOR_TYPE)
-		.def_readonly("H_BOND_ACCEPTOR_TYPE", &MolProp::AtomPropertyDefault::H_BOND_ACCEPTOR_TYPE);
+    python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
+        .def_readonly("H_BOND_DONOR_TYPE", &MolProp::AtomPropertyDefault::H_BOND_DONOR_TYPE)
+        .def_readonly("H_BOND_ACCEPTOR_TYPE", &MolProp::AtomPropertyDefault::H_BOND_ACCEPTOR_TYPE);
 }

@@ -33,28 +33,28 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		namespace MolecularGraphPropertyDefault
-		{
+        namespace MolecularGraphPropertyDefault
+        {
 
-			const std::string NAME                                     = "";
-			const double STOICHIOMETRIC_NUMBER                         = 1.0;
-			const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-			const unsigned int MDL_CTAB_VERSION                        = MDLDataFormatVersion::UNDEF;
-			const std::string MDL_COMMENT                              = "";
-			const std::string MDL_PROGRAM_NAME                         = "CDPL";
-			const std::string MDL_USER_INITIALS                        = "";
-			const std::size_t MDL_DIMENSIONALITY                       = 0;
-			const double MDL_ENERGY                                    = 0.0 ;
-			const bool MDL_CHIRAL_FLAG                                 = false;
-			const long MDL_SCALING_FACTOR1                             = 1;
-			const double MDL_SCALING_FACTOR2                           = 1;
-			const unsigned int MOL2_MOLECULE_TYPE                      = MOL2MoleculeType::UNKNOWN;
-			const unsigned int MOL2_CHARGE_TYPE                        = MOL2ChargeType::UNKNOWN;
-		}
+            const std::string NAME                                     = "";
+            const double STOICHIOMETRIC_NUMBER                         = 1.0;
+            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
+            const unsigned int MDL_CTAB_VERSION                        = MDLDataFormatVersion::UNDEF;
+            const std::string MDL_COMMENT                              = "";
+            const std::string MDL_PROGRAM_NAME                         = "CDPL";
+            const std::string MDL_USER_INITIALS                        = "";
+            const std::size_t MDL_DIMENSIONALITY                       = 0;
+            const double MDL_ENERGY                                    = 0.0 ;
+            const bool MDL_CHIRAL_FLAG                                 = false;
+            const long MDL_SCALING_FACTOR1                             = 1;
+            const double MDL_SCALING_FACTOR2                           = 1;
+            const unsigned int MOL2_MOLECULE_TYPE                      = MOL2MoleculeType::UNKNOWN;
+            const unsigned int MOL2_CHARGE_TYPE                        = MOL2ChargeType::UNKNOWN;
+        }
 
-		void initMolecularGraphPropertyDefaults() {}
-	}
+        void initMolecularGraphPropertyDefaults() {}
+    }
 }

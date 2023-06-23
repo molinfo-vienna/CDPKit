@@ -42,125 +42,125 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief ConnectedSubstructureSet.
-		 */
-		class CDPL_CHEM_API ConnectedSubstructureSet : public FragmentList
-		{
+        /**
+         * \brief ConnectedSubstructureSet.
+         */
+        class CDPL_CHEM_API ConnectedSubstructureSet : public FragmentList
+        {
 
-		public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConnectedSubstructureSet instances.
-			 */
-			typedef std::shared_ptr<ConnectedSubstructureSet> SharedPointer;
+        public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConnectedSubstructureSet instances.
+             */
+            typedef std::shared_ptr<ConnectedSubstructureSet> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %ConnectedSubstructureSet instance.
-			 */
-			ConnectedSubstructureSet();
+            /**
+             * \brief Constructs an empty \c %ConnectedSubstructureSet instance.
+             */
+            ConnectedSubstructureSet();
 
-			/**
-			 * \brief Constructs and initialzes a \c %ConnectedSubstructureSet instance for the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph to search for connected substructures.
-			 */
-			ConnectedSubstructureSet(const MolecularGraph& molgraph);
+            /**
+             * \brief Constructs and initialzes a \c %ConnectedSubstructureSet instance for the molecular graph \a molgraph.
+             * \param molgraph The molecular graph to search for connected substructures.
+             */
+            ConnectedSubstructureSet(const MolecularGraph& molgraph);
 
-			/**
-			 * \brief Specifies the molecular graph that is searched for connected substructures.
-			 *
-			 * The current substructure size is reset to zero.
-			 *
-			 * \param molgraph The molecular graph to search for connected substructures.
-			 */
-			void reset(const MolecularGraph& molgraph);
+            /**
+             * \brief Specifies the molecular graph that is searched for connected substructures.
+             *
+             * The current substructure size is reset to zero.
+             *
+             * \param molgraph The molecular graph to search for connected substructures.
+             */
+            void reset(const MolecularGraph& molgraph);
 
-			/**
-			 * \brief Searches the specified molecular graph for connected substructures of the given size.
-			 * 
-			 * If a molecular graph has not yet been specified (in the constructor or by a prior call to reset(const Chem::MolecularGraph&)), the
-			 * method has no effect. Otherwise, all connected substructures of the specified size are added as Chem::Fragment
-			 * objects to the list of previously found (if any) substructures. If the specified size is zero, substructures
-			 * of size \e 1 (i.e. the bonds of the molecular graph) will be extracted.
-			 *
-			 * \param size The substructure size in terms of number of bonds.
-			 */
-			void findSubstructures(std::size_t size);
+            /**
+             * \brief Searches the specified molecular graph for connected substructures of the given size.
+             * 
+             * If a molecular graph has not yet been specified (in the constructor or by a prior call to reset(const Chem::MolecularGraph&)), the
+             * method has no effect. Otherwise, all connected substructures of the specified size are added as Chem::Fragment
+             * objects to the list of previously found (if any) substructures. If the specified size is zero, substructures
+             * of size \e 1 (i.e. the bonds of the molecular graph) will be extracted.
+             *
+             * \param size The substructure size in terms of number of bonds.
+             */
+            void findSubstructures(std::size_t size);
 
-			/**
-			 * \brief Returns the current substructure size in terms of number of bonds.
-			 *
-			 * The current substructure size corresponds to the size that was specified in the the last call to findSubstructures().
-			 * If findSubstructures() has not yet been called, the current substructure size is zero.
-			 *
-			 * \return The current substructure size.
-			 */
-			std::size_t getSubstructureSize() const;
+            /**
+             * \brief Returns the current substructure size in terms of number of bonds.
+             *
+             * The current substructure size corresponds to the size that was specified in the the last call to findSubstructures().
+             * If findSubstructures() has not yet been called, the current substructure size is zero.
+             *
+             * \return The current substructure size.
+             */
+            std::size_t getSubstructureSize() const;
 
-		private:
-			class SubstructDescriptor;
-		
-			typedef Util::ObjectPool<SubstructDescriptor> SubstructDescriptorCache;
-			typedef SubstructDescriptorCache::SharedObjectPointer SubstructDescriptorPtr;
+        private:
+            class SubstructDescriptor;
+        
+            typedef Util::ObjectPool<SubstructDescriptor> SubstructDescriptorCache;
+            typedef SubstructDescriptorCache::SharedObjectPointer SubstructDescriptorPtr;
 
-			ConnectedSubstructureSet(const ConnectedSubstructureSet&);
+            ConnectedSubstructureSet(const ConnectedSubstructureSet&);
 
-			ConnectedSubstructureSet& operator=(const ConnectedSubstructureSet&);
+            ConnectedSubstructureSet& operator=(const ConnectedSubstructureSet&);
 
-			void reset();
+            void reset();
 
-			void growSubstructDescriptors(std::size_t);
-			void createSubstructFragments();
+            void growSubstructDescriptors(std::size_t);
+            void createSubstructFragments();
 
-			SubstructDescriptorPtr allocSubstructDescriptor(const Bond&);
+            SubstructDescriptorPtr allocSubstructDescriptor(const Bond&);
 
-			class SubstructDescriptor
-			{
+            class SubstructDescriptor
+            {
 
-			public:
-				void init(const MolecularGraph*, const Bond&);
+            public:
+                void init(const MolecularGraph*, const Bond&);
 
-				bool grow(const Util::BitSet&);
-				void ungrow();
+                bool grow(const Util::BitSet&);
+                void ungrow();
 
-				Fragment::SharedPointer createFragment() const;
+                Fragment::SharedPointer createFragment() const;
 
-				void copy(const SubstructDescriptor&);
+                void copy(const SubstructDescriptor&);
 
-				bool operator<(const SubstructDescriptor&) const;
+                bool operator<(const SubstructDescriptor&) const;
 
-			private:
-				typedef std::vector<const Atom*> AtomList;
-				typedef std::vector<std::size_t> BondCountList;
+            private:
+                typedef std::vector<const Atom*> AtomList;
+                typedef std::vector<std::size_t> BondCountList;
 
-				const MolecularGraph* molGraph;
-				Util::BitSet          bondMask;
-				AtomList              unsatAtoms;
-				BondCountList         atomBondCounts;
-				std::size_t           unsatAListIdx;
-				std::size_t           nbrBListIdx;
-				std::size_t           lastBondIdx;
-				bool                  addedAtom;
-				const Atom*           startAtom;
-			};
+                const MolecularGraph* molGraph;
+                Util::BitSet          bondMask;
+                AtomList              unsatAtoms;
+                BondCountList         atomBondCounts;
+                std::size_t           unsatAListIdx;
+                std::size_t           nbrBListIdx;
+                std::size_t           lastBondIdx;
+                bool                  addedAtom;
+                const Atom*           startAtom;
+            };
 
-			struct SubstructDescriptorLessCmpFunc
-			{
+            struct SubstructDescriptorLessCmpFunc
+            {
 
-				bool operator()(const SubstructDescriptorPtr&, const SubstructDescriptorPtr&) const;
-			};
+                bool operator()(const SubstructDescriptorPtr&, const SubstructDescriptorPtr&) const;
+            };
 
-			typedef std::vector<SubstructDescriptorPtr> SubstructDescriptorList;
+            typedef std::vector<SubstructDescriptorPtr> SubstructDescriptorList;
 
-			SubstructDescriptorCache substructDescrCache;
-			SubstructDescriptorList  foundSubstructDescriptors;
-			Util::BitSet             bondMask;
-			std::size_t              currSubstructSize;
-			const MolecularGraph*    molGraph;
-		};
-	}
+            SubstructDescriptorCache substructDescrCache;
+            SubstructDescriptorList  foundSubstructDescriptors;
+            Util::BitSet             bondMask;
+            std::size_t              currSubstructSize;
+            const MolecularGraph*    molGraph;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_CONNECTEDSUBSTRUCTURESET_HPP

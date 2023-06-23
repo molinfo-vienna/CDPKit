@@ -55,244 +55,244 @@ namespace CDPL
 
     namespace Shape
     {
-		
-		class CDPL_SHAPE_API FastGaussianShapeAlignment
-		{
+        
+        class CDPL_SHAPE_API FastGaussianShapeAlignment
+        {
 
-			typedef std::vector<AlignmentResult> ResultList;
+            typedef std::vector<AlignmentResult> ResultList;
 
-		  public:
-			static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
-			static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-			static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
-			static constexpr double       DEF_SYMMETRY_THRESHOLD          = 0.15;
-			static constexpr std::size_t  DEF_NUM_RANDOM_STARTS           = 4;
-			static constexpr double       DEF_MAX_RANDOM_TRANSLATION      = 2.0;
+          public:
+            static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+            static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+            static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
+            static constexpr double       DEF_SYMMETRY_THRESHOLD          = 0.15;
+            static constexpr std::size_t  DEF_NUM_RANDOM_STARTS           = 4;
+            static constexpr double       DEF_MAX_RANDOM_TRANSLATION      = 2.0;
 
-			typedef std::shared_ptr<FastGaussianShapeAlignment> SharedPointer;
+            typedef std::shared_ptr<FastGaussianShapeAlignment> SharedPointer;
 
-			typedef ResultList::const_iterator ConstResultIterator;
-			typedef ResultList::iterator ResultIterator;
-		
-			typedef std::function<double(const AlignmentResult&)> ScoringFunction;
-			typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
+            typedef ResultList::const_iterator ConstResultIterator;
+            typedef ResultList::iterator ResultIterator;
+        
+            typedef std::function<double(const AlignmentResult&)> ScoringFunction;
+            typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
-			FastGaussianShapeAlignment();
+            FastGaussianShapeAlignment();
 
-			FastGaussianShapeAlignment(const GaussianShape& ref_shape);
+            FastGaussianShapeAlignment(const GaussianShape& ref_shape);
 
-			FastGaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
+            FastGaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
 
-			~FastGaussianShapeAlignment();
-			
-			void setResultCompareFunction(const ResultCompareFunction& func);
+            ~FastGaussianShapeAlignment();
+            
+            void setResultCompareFunction(const ResultCompareFunction& func);
 
-			const ResultCompareFunction& getResultCompareFunction() const;
+            const ResultCompareFunction& getResultCompareFunction() const;
 
-			void setScoringFunction(const ScoringFunction& func);
+            void setScoringFunction(const ScoringFunction& func);
 
-			const ScoringFunction& getScoringFunction() const;
+            const ScoringFunction& getScoringFunction() const;
 
-			void setResultSelectionMode(unsigned int mode);
+            void setResultSelectionMode(unsigned int mode);
 
-			unsigned int getResultSelectionMode() const;
+            unsigned int getResultSelectionMode() const;
 
-			void performAlignment(bool perf_align);
+            void performAlignment(bool perf_align);
 
-			bool performAlignment() const;
+            bool performAlignment() const;
 
-			void optimizeOverlap(bool optimize);
+            void optimizeOverlap(bool optimize);
 
-			bool optimizeOverlap() const;
+            bool optimizeOverlap() const;
 
-			void greedyOptimization(bool greedy);
+            void greedyOptimization(bool greedy);
 
-			bool greedyOptimization() const;
+            bool greedyOptimization() const;
 
-			void setMaxNumOptimizationIterations(std::size_t max_iter);
+            void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumOptimizationIterations() const;
+            std::size_t getMaxNumOptimizationIterations() const;
 
-			void setOptimizationStopGradient(double grad_norm);
+            void setOptimizationStopGradient(double grad_norm);
 
-			double getOptimizationStopGradient() const;
+            double getOptimizationStopGradient() const;
 
-			void clearReferenceShapes();
+            void clearReferenceShapes();
 
-			void addReferenceShape(const GaussianShape& shape, bool new_set = true);
+            void addReferenceShape(const GaussianShape& shape, bool new_set = true);
 
-			void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
+            void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
 
-			std::size_t getNumReferenceShapes() const;
+            std::size_t getNumReferenceShapes() const;
 
-			void genShapeCenterStarts(bool generate);
+            void genShapeCenterStarts(bool generate);
 
-			bool genShapeCenterStarts() const;
-			
-			void genColorCenterStarts(bool generate);
+            bool genShapeCenterStarts() const;
+            
+            void genColorCenterStarts(bool generate);
 
-			bool genColorCenterStarts() const;
+            bool genColorCenterStarts() const;
 
-			void genNonColorCenterStarts(bool generate);
+            void genNonColorCenterStarts(bool generate);
 
-			bool genNonColorCenterStarts() const;
-			
-			void genRandomStarts(bool generate);
+            bool genNonColorCenterStarts() const;
+            
+            void genRandomStarts(bool generate);
 
-			bool genRandomStarts() const;
+            bool genRandomStarts() const;
 
-			void genForAlignedShapeCenters(bool generate);
+            void genForAlignedShapeCenters(bool generate);
 
-			bool genForAlignedShapeCenters() const;
+            bool genForAlignedShapeCenters() const;
 
-			void genForReferenceShapeCenters(bool generate);
+            void genForReferenceShapeCenters(bool generate);
 
-			bool genForReferenceShapeCenters() const;
+            bool genForReferenceShapeCenters() const;
 
-			void genForLargerShapeCenters(bool generate);
+            void genForLargerShapeCenters(bool generate);
 
-			bool genForLargerShapeCenters() const;
-			
-			void setSymmetryThreshold(double thresh);
+            bool genForLargerShapeCenters() const;
+            
+            void setSymmetryThreshold(double thresh);
 
-			double getSymmetryThreshold();
+            double getSymmetryThreshold();
 
-			void setMaxRandomTranslation(double max_trans);
+            void setMaxRandomTranslation(double max_trans);
 
-			double getMaxRandomTranslation() const;
+            double getMaxRandomTranslation() const;
 
-			void setNumRandomStarts(std::size_t num_starts);
+            void setNumRandomStarts(std::size_t num_starts);
 
-			std::size_t getNumRandomStarts() const;
+            std::size_t getNumRandomStarts() const;
 
-			void setRandomSeed(unsigned int seed);
+            void setRandomSeed(unsigned int seed);
 
-			bool align(const GaussianShape& shape);
+            bool align(const GaussianShape& shape);
 
-			bool align(const GaussianShapeSet& shapes);
+            bool align(const GaussianShapeSet& shapes);
 
-			std::size_t getNumResults() const;
+            std::size_t getNumResults() const;
 
-			const AlignmentResult& getResult(std::size_t idx) const;
+            const AlignmentResult& getResult(std::size_t idx) const;
 
-			AlignmentResult& getResult(std::size_t idx);
+            AlignmentResult& getResult(std::size_t idx);
 
-			ConstResultIterator getResultsBegin() const;
+            ConstResultIterator getResultsBegin() const;
 
-			ConstResultIterator getResultsEnd() const;
+            ConstResultIterator getResultsEnd() const;
 
-			ResultIterator getResultsBegin();
+            ResultIterator getResultsBegin();
 
-			ResultIterator getResultsEnd();
+            ResultIterator getResultsEnd();
 
-			ConstResultIterator begin() const;
+            ConstResultIterator begin() const;
 
-			ConstResultIterator end() const;
+            ConstResultIterator end() const;
 
-			ResultIterator begin();
+            ResultIterator begin();
 
-			ResultIterator end();
-						
-		  private:
-			struct ShapeData
-			{
+            ResultIterator end();
+                        
+          private:
+            struct ShapeData
+            {
 
-				struct Element
-				{
+                struct Element
+                {
 
-					std::size_t    color;
-					Math::Vector3D center;
-					double         radius;
-					double         delta;
-					double         weightFactor;
-					double         volume;				
-				};
+                    std::size_t    color;
+                    Math::Vector3D center;
+                    double         radius;
+                    double         delta;
+                    double         weightFactor;
+                    double         volume;                
+                };
 
-				typedef std::vector<Element> ElementArray;
+                typedef std::vector<Element> ElementArray;
 
-				ElementArray     elements;
-				std::size_t      colElemOffs;
-				std::size_t      setIndex;
-				std::size_t      index;
-				unsigned int     symClass;
-				Math::Matrix4D   transform;
-				double           selfOverlap;
-				double           colSelfOverlap;
-				bool             equalNonColDelta;
-			};
+                ElementArray     elements;
+                std::size_t      colElemOffs;
+                std::size_t      setIndex;
+                std::size_t      index;
+                unsigned int     symClass;
+                Math::Matrix4D   transform;
+                double           selfOverlap;
+                double           colSelfOverlap;
+                bool             equalNonColDelta;
+            };
 
-			typedef std::pair<std::size_t, std::size_t> ResultID;
-	
-			FastGaussianShapeAlignment(const FastGaussianShapeAlignment& alignment);
+            typedef std::pair<std::size_t, std::size_t> ResultID;
+    
+            FastGaussianShapeAlignment(const FastGaussianShapeAlignment& alignment);
 
-			FastGaussianShapeAlignment& operator=(const FastGaussianShapeAlignment& alignment);
+            FastGaussianShapeAlignment& operator=(const FastGaussianShapeAlignment& alignment);
 
-			void alignAndProcessResults(std::size_t ref_idx, std::size_t al_idx);
-			void processResult(AlignmentResult& res, std::size_t ref_idx, std::size_t al_idx);
+            void alignAndProcessResults(std::size_t ref_idx, std::size_t al_idx);
+            void processResult(AlignmentResult& res, std::size_t ref_idx, std::size_t al_idx);
 
-			void setupShapeData(const GaussianShape& shape, ShapeData& data, bool ref);
-			void setupShapeDataElement(const GaussianShape::Element& gs_elem, ShapeData::Element& sd_elem) const;
+            void setupShapeData(const GaussianShape& shape, ShapeData& data, bool ref);
+            void setupShapeDataElement(const GaussianShape::Element& gs_elem, ShapeData::Element& sd_elem) const;
 
-			void prepareForAlignment();
+            void prepareForAlignment();
 
-			bool generateStartTransforms(const ShapeData& ref_data);
+            bool generateStartTransforms(const ShapeData& ref_data);
 
-			void generateTransformsForElementCenters(const ShapeData& data, unsigned int axes_swap_flags, bool ref_shape);
-			void generateTransforms(const Math::Vector3D& ctr_trans, unsigned int axes_swap_flags);
+            void generateTransformsForElementCenters(const ShapeData& data, unsigned int axes_swap_flags, bool ref_shape);
+            void generateTransforms(const Math::Vector3D& ctr_trans, unsigned int axes_swap_flags);
 
-			template <typename QE>
-			void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
+            template <typename QE>
+            void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
 
-			void transformAlignedShape();
+            void transformAlignedShape();
 
-			double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
-			double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
+            double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
+            double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
 
-			double calcOverlap(const ShapeData& ref_data, const ShapeData& ovl_data, bool color) const;
-			double calcOverlapGradient(const ShapeData& ref_data, Math::Vector3DArray& grad) const;
+            double calcOverlap(const ShapeData& ref_data, const ShapeData& ovl_data, bool color) const;
+            double calcOverlapGradient(const ShapeData& ref_data, Math::Vector3DArray& grad) const;
 
-			bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
+            bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
 
-			typedef std::vector<ShapeData> ShapeDataArray;
-			typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
-			typedef std::vector<QuaternionTransformation> StartTransformList;
-			typedef boost::random::mt11213b RandomEngine;
-			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
+            typedef std::vector<ShapeData> ShapeDataArray;
+            typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
+            typedef std::vector<QuaternionTransformation> StartTransformList;
+            typedef boost::random::mt11213b RandomEngine;
+            typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
 
-			bool                           perfAlignment;
-			bool                           optOverlap;
-			bool                           greedyOpt;
-			std::size_t                    maxNumOptIters;
-			double                         optStopGrad;
-			unsigned int                   resultSelMode;
-			ResultCompareFunction          resultCmpFunc;
-			ScoringFunction                scoringFunc;
-			ShapeDataArray                 refShapeData;
-			ShapeData                      algdShapeData;
-			ResultIndexMap                 resIndexMap;
-			ResultList                     results;
-			std::size_t                    currSetIndex;
-			std::size_t                    currShapeIndex;
-			bool                           shapeCtrStarts;
-			bool                           colCtrStarts;
-			bool                           nonColCtrStarts;
-			bool                           randomStarts;
-			bool                           genForAlgdShape;
-			bool                           genForRefShape;
-			bool                           genForLargerShape;
-			double                         symThreshold;
-			double                         maxRandomTrans;
-			std::size_t                    numRandomStarts;
-			std::size_t                    numSubTransforms;
-			RandomEngine                   randomEngine;
-			StartTransformList             startTransforms;
-			Math::Vector3DArray            startPoseCoords;
-			Math::Vector3DArray            optPoseCoordsGrad;
-			BFGSMinimizer                  minimizer;
-			Math::Matrix4D                 xformMatrix;
-			QuaternionTransformation       normXformQuat;
-			std::size_t                    currRefShapeIdx;
-		};
+            bool                           perfAlignment;
+            bool                           optOverlap;
+            bool                           greedyOpt;
+            std::size_t                    maxNumOptIters;
+            double                         optStopGrad;
+            unsigned int                   resultSelMode;
+            ResultCompareFunction          resultCmpFunc;
+            ScoringFunction                scoringFunc;
+            ShapeDataArray                 refShapeData;
+            ShapeData                      algdShapeData;
+            ResultIndexMap                 resIndexMap;
+            ResultList                     results;
+            std::size_t                    currSetIndex;
+            std::size_t                    currShapeIndex;
+            bool                           shapeCtrStarts;
+            bool                           colCtrStarts;
+            bool                           nonColCtrStarts;
+            bool                           randomStarts;
+            bool                           genForAlgdShape;
+            bool                           genForRefShape;
+            bool                           genForLargerShape;
+            double                         symThreshold;
+            double                         maxRandomTrans;
+            std::size_t                    numRandomStarts;
+            std::size_t                    numSubTransforms;
+            RandomEngine                   randomEngine;
+            StartTransformList             startTransforms;
+            Math::Vector3DArray            startPoseCoords;
+            Math::Vector3DArray            optPoseCoordsGrad;
+            BFGSMinimizer                  minimizer;
+            Math::Matrix4D                 xformMatrix;
+            QuaternionTransformation       normXformQuat;
+            std::size_t                    currRefShapeIdx;
+        };
     }
 }
 

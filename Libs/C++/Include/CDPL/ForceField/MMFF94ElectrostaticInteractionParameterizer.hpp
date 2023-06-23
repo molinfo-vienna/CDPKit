@@ -41,50 +41,50 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionParameterizer
-		{
+        class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionParameterizer
+        {
 
-		  public:
-			static constexpr double DEF_DISTANCE_EXPONENT     = 1.0;
-			static constexpr double DEF_DIELECTRIC_CONSTANT   = 1.0;
-			static constexpr double DIELECTRIC_CONSTANT_WATER = 80.0;
+          public:
+            static constexpr double DEF_DISTANCE_EXPONENT     = 1.0;
+            static constexpr double DEF_DIELECTRIC_CONSTANT   = 1.0;
+            static constexpr double DIELECTRIC_CONSTANT_WATER = 80.0;
 
-			typedef std::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
+            typedef std::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
 
-			MMFF94ElectrostaticInteractionParameterizer();
+            MMFF94ElectrostaticInteractionParameterizer();
 
-			MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-														MMFF94ElectrostaticInteractionData& ia_data,
-														bool strict);
+            MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+                                                        MMFF94ElectrostaticInteractionData& ia_data,
+                                                        bool strict);
 
-			void setFilterFunction(const InteractionFilterFunction2& func); 
+            void setFilterFunction(const InteractionFilterFunction2& func); 
 
-			void setAtomChargeFunction(const MMFF94AtomChargeFunction& func); 
+            void setAtomChargeFunction(const MMFF94AtomChargeFunction& func); 
 
-			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
+            void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
 
-			void setDielectricConstant(double de_const);
+            void setDielectricConstant(double de_const);
 
-			void setDistanceExponent(double dist_expo);
+            void setDistanceExponent(double dist_expo);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionData& ia_data, bool strict);
 
-		  private:
-			InteractionFilterFunction2      filterFunc;
-			MMFF94AtomChargeFunction        chargeFunc;
-			TopologicalAtomDistanceFunction distFunc;
-			double                          deConst;
-			double                          distExpo;
-		};			
+          private:
+            InteractionFilterFunction2      filterFunc;
+            MMFF94AtomChargeFunction        chargeFunc;
+            TopologicalAtomDistanceFunction distFunc;
+            double                          deConst;
+            double                          distExpo;
+        };            
     }
 }
 

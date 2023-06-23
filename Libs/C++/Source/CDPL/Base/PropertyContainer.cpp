@@ -36,73 +36,73 @@ Base::PropertyContainer::~PropertyContainer() {}
 
 std::size_t Base::PropertyContainer::getNumProperties() const
 {
-	return properties.size();
+    return properties.size();
 }
 
 Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::getPropertiesBegin() const
 {
-	return properties.begin();
+    return properties.begin();
 }
 
 Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::getPropertiesEnd() const
 {
-	return properties.end();
+    return properties.end();
 }
 
 Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::begin() const
 {
-	return properties.begin();
+    return properties.begin();
 }
 
 Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::end() const
 {
-	return properties.end();
+    return properties.end();
 }
 
 bool Base::PropertyContainer::removeProperty(const LookupKey& key)
 {
-	return (properties.erase(key) > 0);
+    return (properties.erase(key) > 0);
 }
 
 void Base::PropertyContainer::clearProperties()
 {
-	properties.clear();
+    properties.clear();
 }
 
 void Base::PropertyContainer::addProperties(const PropertyContainer& cntnr)
 {
-	if (this == &cntnr)
-		return;
+    if (this == &cntnr)
+        return;
 
-	PropertyMap::const_iterator cntnr_props_end = cntnr.properties.end();
+    PropertyMap::const_iterator cntnr_props_end = cntnr.properties.end();
 
-	for (PropertyMap::const_iterator it = cntnr.properties.begin(); it != cntnr_props_end; ++it) {
-		const Any& val = it->second;
-		const LookupKey& key = it->first;
+    for (PropertyMap::const_iterator it = cntnr.properties.begin(); it != cntnr_props_end; ++it) {
+        const Any& val = it->second;
+        const LookupKey& key = it->first;
 
-		properties[key] = val;
-	}
+        properties[key] = val;
+    }
 }
 
 void Base::PropertyContainer::copyProperties(const PropertyContainer& cntnr)
 {
-	if (this == &cntnr)
-		return;
+    if (this == &cntnr)
+        return;
 
-	properties = cntnr.properties;
+    properties = cntnr.properties;
 }
 
 void Base::PropertyContainer::swap(PropertyContainer& cntnr)
 {
-	properties.swap(cntnr.properties);
+    properties.swap(cntnr.properties);
 }
 
 Base::PropertyContainer& Base::PropertyContainer::operator=(const PropertyContainer& cntnr)
 {
-	if (this == &cntnr)
-		return *this;
+    if (this == &cntnr)
+        return *this;
 
-	copyProperties(cntnr);
+    copyProperties(cntnr);
 
-	return *this;
+    return *this;
 }

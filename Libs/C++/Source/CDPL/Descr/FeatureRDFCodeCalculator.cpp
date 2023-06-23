@@ -46,7 +46,7 @@ CDPL::Descr::FeatureRDFCodeCalculator::FeatureRDFCodeCalculator(const Pharm::Fea
 
 void CDPL::Descr::FeatureRDFCodeCalculator::calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code)
 {
-	rdf_code.resize(getNumSteps() + 1, false);
+    rdf_code.resize(getNumSteps() + 1, false);
 
-	RDFCodeCalculator<Pharm::Feature>::calculate(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), rdf_code);
+    RDFCodeCalculator<Pharm::Feature>::calculate(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), rdf_code);
 }

@@ -39,45 +39,45 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct SparseMatrixExport
-	{
+    template <typename MatrixType>
+    struct SparseMatrixExport
+    {
 
-		SparseMatrixExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        SparseMatrixExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::SizeType SizeType;
 
-			python::class_<MatrixType, typename MatrixType::SharedPointer>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, SizeType>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"))))
-				.def("resize", &MatrixType::resize, 
-					 (python::arg("self"), python::arg("m"), python::arg("n")))
-				.def("clear", &MatrixType::clear, python::arg("self"))
-				.def("getNumElements", &MatrixType::getNumElements, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>())
-				.def(MatrixNDArrayInitVisitor<MatrixType, true>())
-				.def(MatrixNDArrayAssignVisitor<MatrixType, true>())
-				.def(MatrixVisitor<MatrixType>())
-				.add_property("numElements", &MatrixType::getNumElements);
-		}
-	};
+            python::class_<MatrixType, typename MatrixType::SharedPointer>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, SizeType>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"))))
+                .def("resize", &MatrixType::resize, 
+                     (python::arg("self"), python::arg("m"), python::arg("n")))
+                .def("clear", &MatrixType::clear, python::arg("self"))
+                .def("getNumElements", &MatrixType::getNumElements, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>())
+                .def(MatrixNDArrayInitVisitor<MatrixType, true>())
+                .def(MatrixNDArrayAssignVisitor<MatrixType, true>())
+                .def(MatrixVisitor<MatrixType>())
+                .add_property("numElements", &MatrixType::getNumElements);
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportSparseMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	SparseMatrixExport<Math::SparseFMatrix>("SparseFMatrix");
-	SparseMatrixExport<Math::SparseDMatrix>("SparseDMatrix");
-	SparseMatrixExport<Math::SparseLMatrix>("SparseLMatrix");
-	SparseMatrixExport<Math::SparseULMatrix>("SparseULMatrix");
+    SparseMatrixExport<Math::SparseFMatrix>("SparseFMatrix");
+    SparseMatrixExport<Math::SparseDMatrix>("SparseDMatrix");
+    SparseMatrixExport<Math::SparseLMatrix>("SparseLMatrix");
+    SparseMatrixExport<Math::SparseULMatrix>("SparseULMatrix");
 }

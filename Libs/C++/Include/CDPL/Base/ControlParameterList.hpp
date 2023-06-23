@@ -37,44 +37,44 @@
 
 namespace CDPL 
 {
-	
-	namespace Base
-	{
-		
-		/**
-		 * \brief A data structure for the storage and lookup of control-parameter values.
-		 * \see Base::ControlParameterContainer for a description of the available methods.
-		 */
-		class CDPL_BASE_API ControlParameterList : public ControlParameterContainer
-		{
-		
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ControlParameterList instances.
-			 */
-			typedef std::shared_ptr<ControlParameterList> SharedPointer;
+    
+    namespace Base
+    {
+        
+        /**
+         * \brief A data structure for the storage and lookup of control-parameter values.
+         * \see Base::ControlParameterContainer for a description of the available methods.
+         */
+        class CDPL_BASE_API ControlParameterList : public ControlParameterContainer
+        {
+        
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ControlParameterList instances.
+             */
+            typedef std::shared_ptr<ControlParameterList> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %ControlParameterList instance.
-			 */
-			ControlParameterList(): ControlParameterContainer() {}
+            /**
+             * \brief Constructs an empty \c %ControlParameterList instance.
+             */
+            ControlParameterList(): ControlParameterContainer() {}
 
-			/**
-			 * \brief Constructs a copy of the \c %ControlParameterContainer instance \a cntnr.
-			 * \param cntnr The \c %ControlParameterContainer instance to copy.
-			 * \note Only the control-parameter entries of \a cntnr are copied. Entries in the parent container
-			 *       of \a cntnr (if set) will be ignored (see setParent()).
-			 */
-			ControlParameterList(const ControlParameterContainer& cntnr): ControlParameterContainer(cntnr) {}
+            /**
+             * \brief Constructs a copy of the \c %ControlParameterContainer instance \a cntnr.
+             * \param cntnr The \c %ControlParameterContainer instance to copy.
+             * \note Only the control-parameter entries of \a cntnr are copied. Entries in the parent container
+             *       of \a cntnr (if set) will be ignored (see setParent()).
+             */
+            ControlParameterList(const ControlParameterContainer& cntnr): ControlParameterContainer(cntnr) {}
 
-			/**
-			 * \brief Assignment operator.
-			 * \param cntnr The \c %ControlParameterContainer instance to copy.
-			 * \return A reference to itself.
-			 */
-			ControlParameterList& operator=(const ControlParameterContainer& cntnr);
-		};
-	}
+            /**
+             * \brief Assignment operator.
+             * \param cntnr The \c %ControlParameterContainer instance to copy.
+             * \return A reference to itself.
+             */
+            ControlParameterList& operator=(const ControlParameterContainer& cntnr);
+        };
+    }
 }
 
 #endif // CDPL_BASE_CONTROLPARAMETERLIST_HPP

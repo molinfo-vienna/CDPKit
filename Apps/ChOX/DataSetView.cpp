@@ -37,114 +37,114 @@ using namespace ChOX;
 
 
 DataSetView::DataSetView(QWidget* parent, Settings& settings, DataSet& data_set): 
-	QFrame(parent), dataSet(data_set), settings(settings)
+    QFrame(parent), dataSet(data_set), settings(settings)
 {
-	init();
+    init();
 }
 
 DataSetPageView& DataSetView::getPageView() const
 {
-	return *pageView;
+    return *pageView;
 }
 
 DataSet& DataSetView::getDataSet() const
 {
-	return dataSet;
+    return dataSet;
 }
 
 void DataSetView::wheelEvent(QWheelEvent* e)
 {
-	e->accept();
+    e->accept();
 
-	if (e->delta() > 0)
-		pageView->toPrevRow();
-	else
-		pageView->toNextRow();
+    if (e->delta() > 0)
+        pageView->toPrevRow();
+    else
+        pageView->toNextRow();
 }
 
 void DataSetView::init()
 {
-	QHBoxLayout* main_layout = new QHBoxLayout();
+    QHBoxLayout* main_layout = new QHBoxLayout();
 
-	setLayout(main_layout);
+    setLayout(main_layout);
 
-	main_layout->setSpacing(0);
-	main_layout->setMargin(2);
+    main_layout->setSpacing(0);
+    main_layout->setMargin(2);
 
-	scrollBar = new QScrollBar(this);
+    scrollBar = new QScrollBar(this);
 
-	scrollBar->hide();
-	scrollBar->setPageStep(1);
-	scrollBar->setSingleStep(1);
-	scrollBar->setMinimum(0);
-	scrollBar->setMaximum(0);
+    scrollBar->hide();
+    scrollBar->setPageStep(1);
+    scrollBar->setSingleStep(1);
+    scrollBar->setMinimum(0);
+    scrollBar->setMaximum(0);
 
-	pageView = new DataSetPageView(this, settings, dataSet);
+    pageView = new DataSetPageView(this, settings, dataSet);
 
-	main_layout->addWidget(pageView);
-	main_layout->addWidget(scrollBar);
+    main_layout->addWidget(pageView);
+    main_layout->addWidget(scrollBar);
 
-	connect(scrollBar, SIGNAL(valueChanged(int)), pageView, SLOT(setPageOffset(int)));
+    connect(scrollBar, SIGNAL(valueChanged(int)), pageView, SLOT(setPageOffset(int)));
 
-	connect(&dataSet, SIGNAL(sizeChanged(int)), this, SLOT(adjustScrollBar(int)));
-	connect(pageView, SIGNAL(numRowsChanged(int)), this, SLOT(adjustScrollBar(int)));
-	connect(pageView, SIGNAL(numColumnsChanged(int)), this, SLOT(adjustScrollBar(int)));
-	connect(pageView, SIGNAL(pageOffsetChanged(int)), this, SLOT(adjustScrollBar(int)));
+    connect(&dataSet, SIGNAL(sizeChanged(int)), this, SLOT(adjustScrollBar(int)));
+    connect(pageView, SIGNAL(numRowsChanged(int)), this, SLOT(adjustScrollBar(int)));
+    connect(pageView, SIGNAL(numColumnsChanged(int)), this, SLOT(adjustScrollBar(int)));
+    connect(pageView, SIGNAL(pageOffsetChanged(int)), this, SLOT(adjustScrollBar(int)));
 
-	QShortcut* shortcut = new QShortcut(Qt::Key_PageDown, this);
-	shortcut->setContext(Qt::WidgetShortcut);
+    QShortcut* shortcut = new QShortcut(Qt::Key_PageDown, this);
+    shortcut->setContext(Qt::WidgetShortcut);
 
-	connect(shortcut, SIGNAL(activated()), pageView, SLOT(toNextPage()));
+    connect(shortcut, SIGNAL(activated()), pageView, SLOT(toNextPage()));
 
-	shortcut = new QShortcut(Qt::Key_PageUp, this);
-	shortcut->setContext(Qt::WidgetShortcut);
+    shortcut = new QShortcut(Qt::Key_PageUp, this);
+    shortcut->setContext(Qt::WidgetShortcut);
 
-	connect(shortcut, SIGNAL(activated()), pageView, SLOT(toPrevPage()));
+    connect(shortcut, SIGNAL(activated()), pageView, SLOT(toPrevPage()));
 
-	shortcut = new QShortcut(Qt::Key_Down, this);
-	shortcut->setContext(Qt::WidgetShortcut);
+    shortcut = new QShortcut(Qt::Key_Down, this);
+    shortcut->setContext(Qt::WidgetShortcut);
 
-	connect(shortcut, SIGNAL(activated()), pageView, SLOT(toNextRow()));
+    connect(shortcut, SIGNAL(activated()), pageView, SLOT(toNextRow()));
 
-	shortcut = new QShortcut(Qt::Key_Up, this);
-	shortcut->setContext(Qt::WidgetShortcut);
+    shortcut = new QShortcut(Qt::Key_Up, this);
+    shortcut->setContext(Qt::WidgetShortcut);
 
-	connect(shortcut, SIGNAL(activated()), pageView, SLOT(toPrevRow()));
+    connect(shortcut, SIGNAL(activated()), pageView, SLOT(toPrevRow()));
 
-	shortcut = new QShortcut(Qt::Key_Home, this);
-	shortcut->setContext(Qt::WidgetShortcut);
+    shortcut = new QShortcut(Qt::Key_Home, this);
+    shortcut->setContext(Qt::WidgetShortcut);
 
-	connect(shortcut, SIGNAL(activated()), pageView, SLOT(toFirstRecord()));
+    connect(shortcut, SIGNAL(activated()), pageView, SLOT(toFirstRecord()));
 
-	shortcut = new QShortcut(Qt::Key_End, this);
-	shortcut->setContext(Qt::WidgetShortcut);
+    shortcut = new QShortcut(Qt::Key_End, this);
+    shortcut->setContext(Qt::WidgetShortcut);
 
-	connect(shortcut, SIGNAL(activated()), pageView, SLOT(toLastRecord()));
+    connect(shortcut, SIGNAL(activated()), pageView, SLOT(toLastRecord()));
 
-	setFocusPolicy(Qt::StrongFocus);
+    setFocusPolicy(Qt::StrongFocus);
 
-	setFrameStyle(StyledPanel);
+    setFrameStyle(StyledPanel);
 }
 
 void DataSetView::adjustScrollBar(int)
 {
-	scrollBar->blockSignals(true);
-	
-	int num_recs = dataSet.getSize();
-	int num_cols = pageView->getNumColumns();
-	int num_recs_per_page = num_cols * pageView->getNumRows();
+    scrollBar->blockSignals(true);
+    
+    int num_recs = dataSet.getSize();
+    int num_cols = pageView->getNumColumns();
+    int num_recs_per_page = num_cols * pageView->getNumRows();
 
-	if (num_recs_per_page <= num_recs) {
-		scrollBar->setMaximum(num_recs - num_recs_per_page);
-		scrollBar->setPageStep(num_recs_per_page);
-		scrollBar->setSingleStep(num_cols);	
-		scrollBar->setValue(pageView->getPageOffset());
-		scrollBar->show();
+    if (num_recs_per_page <= num_recs) {
+        scrollBar->setMaximum(num_recs - num_recs_per_page);
+        scrollBar->setPageStep(num_recs_per_page);
+        scrollBar->setSingleStep(num_cols);    
+        scrollBar->setValue(pageView->getPageOffset());
+        scrollBar->show();
 
-	} else {
-		scrollBar->hide();
-		scrollBar->setValue(0);
-	}
+    } else {
+        scrollBar->hide();
+        scrollBar->setValue(0);
+    }
 
-	scrollBar->blockSignals(false);
+    scrollBar->blockSignals(false);
 }

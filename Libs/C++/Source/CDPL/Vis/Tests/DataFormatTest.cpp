@@ -30,50 +30,50 @@
 
 BOOST_AUTO_TEST_CASE(DataFormatTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	BOOST_CHECK(DataFormat::PNG.getName() == "PNG");
-	BOOST_CHECK(DataFormat::PNG.getDescription() == "Portable Network Graphics");
-	BOOST_CHECK(DataFormat::PNG.getMimeType() == "image/png");
-	BOOST_CHECK(DataFormat::PNG.isMultiRecordFormat() == false);
+    BOOST_CHECK(DataFormat::PNG.getName() == "PNG");
+    BOOST_CHECK(DataFormat::PNG.getDescription() == "Portable Network Graphics");
+    BOOST_CHECK(DataFormat::PNG.getMimeType() == "image/png");
+    BOOST_CHECK(DataFormat::PNG.isMultiRecordFormat() == false);
 
-	BOOST_CHECK(DataFormat::PNG.matchesName("png"));
-	BOOST_CHECK(DataFormat::PNG.matchesMimeType("image/png"));
-	BOOST_CHECK(DataFormat::PNG.matchesFileExtension("png"));
-
-//-----
-
-	BOOST_CHECK(DataFormat::PDF.getName() == "PDF");
-	BOOST_CHECK(DataFormat::PDF.getDescription() == "Adobe Portable Document Format");
-	BOOST_CHECK(DataFormat::PDF.getMimeType() == "application/pdf");
-	BOOST_CHECK(DataFormat::PDF.isMultiRecordFormat() == false);
-
-	BOOST_CHECK(DataFormat::PDF.matchesName("pdf"));
-	BOOST_CHECK(DataFormat::PDF.matchesMimeType("application/pdf"));
-	BOOST_CHECK(DataFormat::PDF.matchesFileExtension("pdf"));
+    BOOST_CHECK(DataFormat::PNG.matchesName("png"));
+    BOOST_CHECK(DataFormat::PNG.matchesMimeType("image/png"));
+    BOOST_CHECK(DataFormat::PNG.matchesFileExtension("png"));
 
 //-----
 
-	BOOST_CHECK(DataFormat::SVG.getName() == "SVG");
-	BOOST_CHECK(DataFormat::SVG.getDescription() == "Scalable Vector Graphics");
-	BOOST_CHECK(DataFormat::SVG.getMimeType() == "image/svg+xml");
-	BOOST_CHECK(DataFormat::SVG.isMultiRecordFormat() == false);
+    BOOST_CHECK(DataFormat::PDF.getName() == "PDF");
+    BOOST_CHECK(DataFormat::PDF.getDescription() == "Adobe Portable Document Format");
+    BOOST_CHECK(DataFormat::PDF.getMimeType() == "application/pdf");
+    BOOST_CHECK(DataFormat::PDF.isMultiRecordFormat() == false);
 
-	BOOST_CHECK(DataFormat::SVG.matchesName("svg"));
-	BOOST_CHECK(DataFormat::SVG.matchesMimeType("image/svg+xml"));
-	BOOST_CHECK(DataFormat::SVG.matchesFileExtension("svg"));
+    BOOST_CHECK(DataFormat::PDF.matchesName("pdf"));
+    BOOST_CHECK(DataFormat::PDF.matchesMimeType("application/pdf"));
+    BOOST_CHECK(DataFormat::PDF.matchesFileExtension("pdf"));
 
 //-----
 
-	BOOST_CHECK(DataFormat::PS.getName() == "PS");
-	BOOST_CHECK(DataFormat::PS.getDescription() == "Adobe PostScript");
-	BOOST_CHECK(DataFormat::PS.getMimeType() == "application/postscript");
-	BOOST_CHECK(DataFormat::PS.isMultiRecordFormat() == false);
+    BOOST_CHECK(DataFormat::SVG.getName() == "SVG");
+    BOOST_CHECK(DataFormat::SVG.getDescription() == "Scalable Vector Graphics");
+    BOOST_CHECK(DataFormat::SVG.getMimeType() == "image/svg+xml");
+    BOOST_CHECK(DataFormat::SVG.isMultiRecordFormat() == false);
 
-	BOOST_CHECK(DataFormat::PS.matchesName("ps"));
-	BOOST_CHECK(DataFormat::PS.matchesMimeType("application/postscript"));
-	BOOST_CHECK(DataFormat::PS.matchesFileExtension("ps"));
-	BOOST_CHECK(DataFormat::PS.matchesFileExtension("eps"));
+    BOOST_CHECK(DataFormat::SVG.matchesName("svg"));
+    BOOST_CHECK(DataFormat::SVG.matchesMimeType("image/svg+xml"));
+    BOOST_CHECK(DataFormat::SVG.matchesFileExtension("svg"));
+
+//-----
+
+    BOOST_CHECK(DataFormat::PS.getName() == "PS");
+    BOOST_CHECK(DataFormat::PS.getDescription() == "Adobe PostScript");
+    BOOST_CHECK(DataFormat::PS.getMimeType() == "application/postscript");
+    BOOST_CHECK(DataFormat::PS.isMultiRecordFormat() == false);
+
+    BOOST_CHECK(DataFormat::PS.matchesName("ps"));
+    BOOST_CHECK(DataFormat::PS.matchesMimeType("application/postscript"));
+    BOOST_CHECK(DataFormat::PS.matchesFileExtension("ps"));
+    BOOST_CHECK(DataFormat::PS.matchesFileExtension("eps"));
 }
 

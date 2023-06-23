@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		typedef Util::CompressedDataWriter<CDFDRegularGridWriter, Util::GZipOStream> CDFGZDRegularGridWriter;
-	}
+        typedef Util::CompressedDataWriter<CDFDRegularGridWriter, Util::GZipOStream> CDFGZDRegularGridWriter;
+    }
 }
 
 #endif // CDPL_GRID_CDFGZDREGULARGRIDWRITER_HPP

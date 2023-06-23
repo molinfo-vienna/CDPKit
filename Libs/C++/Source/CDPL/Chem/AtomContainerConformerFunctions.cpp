@@ -39,96 +39,96 @@ using namespace CDPL;
 
 void Chem::clearConformations(AtomContainer& cntnr)
 {
-	std::for_each(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), &clear3DCoordinatesArray);
+    std::for_each(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), &clear3DCoordinatesArray);
 }
 
 std::size_t Chem::getNumConformations(const AtomContainer& cntnr)
 {
-	std::size_t num_confs = std::numeric_limits<std::size_t>::max();
+    std::size_t num_confs = std::numeric_limits<std::size_t>::max();
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
 
-		if (!has3DCoordinatesArray(atom))
-			return 0;
+        if (!has3DCoordinatesArray(atom))
+            return 0;
 
-		const Math::Vector3DArray::SharedPointer& coords_array = get3DCoordinatesArray(atom);
-		
-		num_confs = std::min(num_confs, coords_array->getSize());
-	}
+        const Math::Vector3DArray::SharedPointer& coords_array = get3DCoordinatesArray(atom);
+        
+        num_confs = std::min(num_confs, coords_array->getSize());
+    }
 
-	return (num_confs == std::numeric_limits<std::size_t>::max() ? 0 : num_confs);
+    return (num_confs == std::numeric_limits<std::size_t>::max() ? 0 : num_confs);
 }
 
 void Chem::applyConformation(AtomContainer& cntnr, std::size_t conf_idx)
 {
-	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
+    for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
 
-		set3DCoordinates(atom, (*get3DCoordinatesArray(atom))[conf_idx]);
-	}
+        set3DCoordinates(atom, (*get3DCoordinatesArray(atom))[conf_idx]);
+    }
 }
 
 void Chem::getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords, bool append)
 {
-	if (!append)
-		coords.clear();
+    if (!append)
+        coords.clear();
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		coords.addElement((*get3DCoordinatesArray(*it))[conf_idx]);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        coords.addElement((*get3DCoordinatesArray(*it))[conf_idx]);
 }
 
 void Chem::setConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Vector3DArray& coords)
 {
-	for (std::size_t i = 0, num_atoms = cntnr.getNumAtoms(); i < num_atoms; i++)
-		(*get3DCoordinatesArray(cntnr.getAtom(i)))[conf_idx] = coords[i];
+    for (std::size_t i = 0, num_atoms = cntnr.getNumAtoms(); i < num_atoms; i++)
+        (*get3DCoordinatesArray(cntnr.getAtom(i)))[conf_idx] = coords[i];
 }
 
 void Chem::addConformation(AtomContainer& cntnr, const Math::Vector3DArray& coords)
 {
-	std::size_t i = 0;
-	
-	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it, i++) {
-		Atom& atom = *it;
-		Math::Vector3DArray::SharedPointer coords_array;
+    std::size_t i = 0;
+    
+    for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it, i++) {
+        Atom& atom = *it;
+        Math::Vector3DArray::SharedPointer coords_array;
 
-		if (!has3DCoordinatesArray(atom)) {
-			coords_array.reset(new Math::Vector3DArray());
+        if (!has3DCoordinatesArray(atom)) {
+            coords_array.reset(new Math::Vector3DArray());
 
-			set3DCoordinatesArray(atom, coords_array);
+            set3DCoordinatesArray(atom, coords_array);
 
-		} else
-			coords_array = get3DCoordinatesArray(atom);
-		
-		coords_array->addElement(coords[i]);
-	}
+        } else
+            coords_array = get3DCoordinatesArray(atom);
+        
+        coords_array->addElement(coords[i]);
+    }
 }
 
 void Chem::transformConformation(AtomContainer& cntnr, std::size_t conf_idx, const Math::Matrix4D& mtx)
 {
-	Math::Vector4D tmp1;
-	Math::Vector4D tmp2;
+    Math::Vector4D tmp1;
+    Math::Vector4D tmp2;
 
-	tmp1[3] = 1.0;
+    tmp1[3] = 1.0;
 
-	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
-		Math::Vector3DArray& coords_array = *get3DCoordinatesArray(atom);
+    for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
+        Math::Vector3DArray& coords_array = *get3DCoordinatesArray(atom);
 
-		tmp1[0] = coords_array[conf_idx][0];
-		tmp1[1] = coords_array[conf_idx][1];
-		tmp1[2] = coords_array[conf_idx][2];
+        tmp1[0] = coords_array[conf_idx][0];
+        tmp1[1] = coords_array[conf_idx][1];
+        tmp1[2] = coords_array[conf_idx][2];
 
-		prod(mtx, tmp1, tmp2);
+        prod(mtx, tmp1, tmp2);
 
-		coords_array[conf_idx][0] = tmp2[0];
-		coords_array[conf_idx][1] = tmp2[1];
-		coords_array[conf_idx][2] = tmp2[2];
-	}
+        coords_array[conf_idx][0] = tmp2[0];
+        coords_array[conf_idx][1] = tmp2[1];
+        coords_array[conf_idx][2] = tmp2[2];
+    }
 }
 
 void Chem::transformConformations(AtomContainer& cntnr, const Math::Matrix4D& mtx)
 {
-	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		transform(*get3DCoordinatesArray(*it), mtx);
+    for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        transform(*get3DCoordinatesArray(*it), mtx);
 }

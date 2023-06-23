@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Biomol::MMTFMolecularGraphWriter::MMTFMolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new MMTFDataWriter()) {}
+    output(os), state(os.good()), writer(new MMTFDataWriter()) {}
 
 Biomol::MMTFMolecularGraphWriter::~MMTFMolecularGraphWriter() {}
 
 Base::DataWriter<Chem::MolecularGraph>& Biomol::MMTFMolecularGraphWriter::write(const Chem::MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeRecord(output, molgraph);
+    try {
+        state = writer->writeRecord(output, molgraph);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("MMTFMolecularGraphWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("MMTFMolecularGraphWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Biomol::MMTFMolecularGraphWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Biomol::MMTFMolecularGraphWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

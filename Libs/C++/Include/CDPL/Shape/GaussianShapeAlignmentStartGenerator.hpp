@@ -42,29 +42,29 @@ namespace CDPL
     namespace Shape
     {
 
-		class GaussianShape;
-		class GaussianShapeFunction;
-		
-		class CDPL_SHAPE_API GaussianShapeAlignmentStartGenerator
-		{
-			
-		  public:
-			virtual ~GaussianShapeAlignmentStartGenerator() {}
+        class GaussianShape;
+        class GaussianShapeFunction;
+        
+        class CDPL_SHAPE_API GaussianShapeAlignmentStartGenerator
+        {
+            
+          public:
+            virtual ~GaussianShapeAlignmentStartGenerator() {}
 
-			virtual unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+            virtual unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			virtual unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+            virtual unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			virtual void setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class) = 0;
+            virtual void setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class) = 0;
 
-			virtual bool generate(const GaussianShapeFunction& func, unsigned int sym_class) = 0;
-			
-			virtual std::size_t getNumStartTransforms() const = 0;
+            virtual bool generate(const GaussianShapeFunction& func, unsigned int sym_class) = 0;
+            
+            virtual std::size_t getNumStartTransforms() const = 0;
 
-			virtual std::size_t getNumStartSubTransforms() const = 0;
+            virtual std::size_t getNumStartSubTransforms() const = 0;
 
-			virtual const QuaternionTransformation& getStartTransform(std::size_t idx) const = 0;
-		};
+            virtual const QuaternionTransformation& getStartTransform(std::size_t idx) const = 0;
+        };
     }
 }
 

@@ -34,28 +34,28 @@
 namespace
 {
 
-	template <typename T>
-	void doExportRegularGridSet(const char* name)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    template <typename T>
+    void doExportRegularGridSet(const char* name)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::class_<T, typename T::SharedPointer>(name, python::no_init)
-			.def(python::init<>(python::arg("self")))
-			.def(python::init<const T&>((python::arg("self"), python::arg("set"))))
-			.def(CDPLPythonUtil::ArrayVisitor<T, 
-				 python::return_value_policy<python::return_by_value>, python::default_call_policies,
-				 python::default_call_policies, python::default_call_policies>())
-			.def("__eq__", &T::operator==, (python::arg("self"), python::arg("set")))
-			.def("__ne__", &T::operator!=, (python::arg("self"), python::arg("set")));
-	}
+        python::class_<T, typename T::SharedPointer>(name, python::no_init)
+            .def(python::init<>(python::arg("self")))
+            .def(python::init<const T&>((python::arg("self"), python::arg("set"))))
+            .def(CDPLPythonUtil::ArrayVisitor<T, 
+                 python::return_value_policy<python::return_by_value>, python::default_call_policies,
+                 python::default_call_policies, python::default_call_policies>())
+            .def("__eq__", &T::operator==, (python::arg("self"), python::arg("set")))
+            .def("__ne__", &T::operator!=, (python::arg("self"), python::arg("set")));
+    }
 }
 
 
 void CDPLPythonGrid::exportRegularGridSet()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	doExportRegularGridSet<Grid::FRegularGridSet>("FRegularGridSet");
-	doExportRegularGridSet<Grid::DRegularGridSet>("DRegularGridSet");
+    doExportRegularGridSet<Grid::FRegularGridSet>("FRegularGridSet");
+    doExportRegularGridSet<Grid::DRegularGridSet>("DRegularGridSet");
 }

@@ -34,15 +34,15 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER2(double, calcGeometricalRadius, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&);
-	MAKE_FUNCTION_WRAPPER2(double, calcGeometricalDiameter, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&);
+    MAKE_FUNCTION_WRAPPER2(double, calcGeometricalRadius, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&);
+    MAKE_FUNCTION_WRAPPER2(double, calcGeometricalDiameter, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&);
 }
 
 
 void CDPLPythonDescr::exportAtomContainerFunctions()
 {
-	using namespace boost;
+    using namespace boost;
 
-	python::def("calcGeometricalRadius", &calcGeometricalRadiusWrapper2, (python::arg("cntnr"), python::arg("coords_func")));
-	python::def("calcGeometricalDiameter", &calcGeometricalDiameterWrapper2, (python::arg("cntnr"), python::arg("coords_func")));
+    python::def("calcGeometricalRadius", &calcGeometricalRadiusWrapper2, (python::arg("cntnr"), python::arg("coords_func")));
+    python::def("calcGeometricalDiameter", &calcGeometricalDiameterWrapper2, (python::arg("cntnr"), python::arg("coords_func")));
 }

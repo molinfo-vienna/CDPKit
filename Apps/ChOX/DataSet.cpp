@@ -33,224 +33,224 @@ using namespace ChOX;
 namespace
 {
 
-	const std::size_t MAX_NUM_SAVED_STATES = 10;
+    const std::size_t MAX_NUM_SAVED_STATES = 10;
 }
 
 
 DataSet::DataSet(QObject* parent): 
-	QObject(parent), states(MAX_NUM_SAVED_STATES), currStateIdx(0), numSavedStates(1) {}
+    QObject(parent), states(MAX_NUM_SAVED_STATES), currStateIdx(0), numSavedStates(1) {}
 
 DataSet::~DataSet() {}
 
 int DataSet::getSize() const
 {
-	return int(states[currStateIdx].records.size());
+    return int(states[currStateIdx].records.size());
 }
 
 const DataRecord& DataSet::getRecord(int index) const
 {
-	return *states[currStateIdx].records.at(index);
+    return *states[currStateIdx].records.at(index);
 }
 
 const QStringList& DataSet::getFileNames() const
 {
-	return states[currStateIdx].fileNames;
+    return states[currStateIdx].fileNames;
 }
 
 bool DataSet::isRecordSelected(int index) const
 {
-	return states[currStateIdx].selectionMask.test(index);
+    return states[currStateIdx].selectionMask.test(index);
 }
 
 bool DataSet::hasSelectedRecords() const
 {
-	return states[currStateIdx].selectionMask.any();
+    return states[currStateIdx].selectionMask.any();
 }
 
 int DataSet::getNumSelectedRecords() const
 {
-	return int(states[currStateIdx].selectionMask.count());
+    return int(states[currStateIdx].selectionMask.count());
 }
 
 void DataSet::setRecordSelected(int index, bool select)
 {
-	if (states[currStateIdx].selectionMask.test(index) == select) 
-		return;
+    if (states[currStateIdx].selectionMask.test(index) == select) 
+        return;
 
-	workingState = states[currStateIdx];
+    workingState = states[currStateIdx];
 
-	workingState.selectionMask.set(index, select);
+    workingState.selectionMask.set(index, select);
 
-	commitNewState();
+    commitNewState();
 
-	if (select)
-		emit selectionStatusChanged(true);
-	else
-		emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
+    if (select)
+        emit selectionStatusChanged(true);
+    else
+        emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
 }
 
 void DataSet::selectRecordRange(int start, int end, bool select, bool xor_selection)
 {
-	if (states[currStateIdx].records.empty())
-		return;
+    if (states[currStateIdx].records.empty())
+        return;
 
-	if (!xor_selection && !select && !states[currStateIdx].selectionMask.any()) 
-		return;
+    if (!xor_selection && !select && !states[currStateIdx].selectionMask.any()) 
+        return;
 
-	if (end < start)
-		std::swap(end, start);
+    if (end < start)
+        std::swap(end, start);
 
-	start = std::max(0, start);
-	end = std::max(0, end);
+    start = std::max(0, start);
+    end = std::max(0, end);
 
-	workingState = states[currStateIdx];
+    workingState = states[currStateIdx];
 
-	start = std::min(int(workingState.records.size()) - 1, start);
-	end = std::min(int(workingState.records.size()) - 1, end);
+    start = std::min(int(workingState.records.size()) - 1, start);
+    end = std::min(int(workingState.records.size()) - 1, end);
 
-	for (int i = start; i <= end; i++) {
-		if (!xor_selection)
-			workingState.selectionMask.set(i, select);
-		else
-			workingState.selectionMask.set(i, !workingState.selectionMask.test(i));
-	}
+    for (int i = start; i <= end; i++) {
+        if (!xor_selection)
+            workingState.selectionMask.set(i, select);
+        else
+            workingState.selectionMask.set(i, !workingState.selectionMask.test(i));
+    }
 
-	commitNewState();
+    commitNewState();
 
-	if (select)
-		emit selectionStatusChanged(states[currStateIdx].records.empty() ? false : true);
-	else
-		emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
+    if (select)
+        emit selectionStatusChanged(states[currStateIdx].records.empty() ? false : true);
+    else
+        emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
 }
 
 void DataSet::selectAll()
 {
-	workingState = states[currStateIdx];
+    workingState = states[currStateIdx];
 
-	workingState.selectionMask.set();
+    workingState.selectionMask.set();
 
-	commitNewState();
+    commitNewState();
 
-	emit selectionStatusChanged(states[currStateIdx].records.empty() ? false : true);
+    emit selectionStatusChanged(states[currStateIdx].records.empty() ? false : true);
 }
 
 void DataSet::unselectAll()
 {
-	if (!states[currStateIdx].selectionMask.any())
-		return;
+    if (!states[currStateIdx].selectionMask.any())
+        return;
 
-	workingState = states[currStateIdx];
+    workingState = states[currStateIdx];
 
-	workingState.selectionMask.reset();
+    workingState.selectionMask.reset();
 
-	commitNewState();
+    commitNewState();
 
-	emit selectionStatusChanged(false);
+    emit selectionStatusChanged(false);
 }
 
 void DataSet::invertSelection()
 {
-	workingState = states[currStateIdx];
+    workingState = states[currStateIdx];
 
-	workingState.selectionMask.flip();
+    workingState.selectionMask.flip();
 
-	commitNewState();
+    commitNewState();
 
-	emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
+    emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
 }
 
 void DataSet::removeSelected()
 {
-	const DataSetState& curr_state = states[currStateIdx];
+    const DataSetState& curr_state = states[currStateIdx];
 
-	if (!curr_state.selectionMask.any())
-		return;
+    if (!curr_state.selectionMask.any())
+        return;
 
-	workingState.records.clear();
+    workingState.records.clear();
 
-	workingState.selectionMask.resize(curr_state.selectionMask.size());
-	workingState.selectionMask.reset();
+    workingState.selectionMask.resize(curr_state.selectionMask.size());
+    workingState.selectionMask.reset();
 
-	workingState.fileNames = curr_state.fileNames;
+    workingState.fileNames = curr_state.fileNames;
 
-	std::size_t num_records = curr_state.records.size();
+    std::size_t num_records = curr_state.records.size();
 
-	for (std::size_t i = 0; i < num_records; i++) {
-		if (curr_state.selectionMask.test(i))
-			continue;
+    for (std::size_t i = 0; i < num_records; i++) {
+        if (curr_state.selectionMask.test(i))
+            continue;
 
-		workingState.records.push_back(curr_state.records[i]);
-	}
+        workingState.records.push_back(curr_state.records[i]);
+    }
 
-	commitNewState();
+    commitNewState();
 
-	emit sizeChanged(int(states[currStateIdx].records.size()));
-	emit selectionStatusChanged(false);
+    emit sizeChanged(int(states[currStateIdx].records.size()));
+    emit selectionStatusChanged(false);
 }
 
 void DataSet::clear()
 {
-	if (states[currStateIdx].fileNames.empty())
-		return;
+    if (states[currStateIdx].fileNames.empty())
+        return;
 
-	workingState.records.clear();
-	workingState.fileNames.clear();
-	workingState.selectionMask.clear();
+    workingState.records.clear();
+    workingState.fileNames.clear();
+    workingState.selectionMask.clear();
 
-	commitNewState();
+    commitNewState();
 
-	emit sizeChanged(0);
-	emit selectionStatusChanged(false);
-	emit fileListChanged();
+    emit sizeChanged(0);
+    emit selectionStatusChanged(false);
+    emit fileListChanged();
 }
 
 void DataSet::undo()
 {
-	if (currStateIdx == 0)
-		return;
+    if (currStateIdx == 0)
+        return;
 
-	emit undoStatusChanged(--currStateIdx > 0);
-	emit redoStatusChanged(true);
+    emit undoStatusChanged(--currStateIdx > 0);
+    emit redoStatusChanged(true);
 
-	emit sizeChanged(int(states[currStateIdx].records.size()));
-	emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
-	emit fileListChanged();
+    emit sizeChanged(int(states[currStateIdx].records.size()));
+    emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
+    emit fileListChanged();
 }
 
 void DataSet::redo()
 {
-	if (currStateIdx == numSavedStates - 1)
-		return;
+    if (currStateIdx == numSavedStates - 1)
+        return;
 
-	emit undoStatusChanged(true);
-	emit redoStatusChanged(++currStateIdx < numSavedStates - 1);	
+    emit undoStatusChanged(true);
+    emit redoStatusChanged(++currStateIdx < numSavedStates - 1);    
 
-	emit sizeChanged(int(states[currStateIdx].records.size()));
-	emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
-	emit fileListChanged();
+    emit sizeChanged(int(states[currStateIdx].records.size()));
+    emit selectionStatusChanged(states[currStateIdx].selectionMask.any());
+    emit fileListChanged();
 }
 
 void DataSet::commitNewState()
 {
-	if (currStateIdx == MAX_NUM_SAVED_STATES - 1) {
-		for (std::size_t i = 0; i < MAX_NUM_SAVED_STATES - 1; i++)
-			states[i].swap(states[i + 1]);
+    if (currStateIdx == MAX_NUM_SAVED_STATES - 1) {
+        for (std::size_t i = 0; i < MAX_NUM_SAVED_STATES - 1; i++)
+            states[i].swap(states[i + 1]);
 
-		workingState.swap(states[currStateIdx]);
-	
-	} else {
-		workingState.swap(states[++currStateIdx]);
-	
-		numSavedStates = currStateIdx + 1;
-	}
+        workingState.swap(states[currStateIdx]);
+    
+    } else {
+        workingState.swap(states[++currStateIdx]);
+    
+        numSavedStates = currStateIdx + 1;
+    }
 
-	emit undoStatusChanged(true);
-	emit redoStatusChanged(false);	
+    emit undoStatusChanged(true);
+    emit redoStatusChanged(false);    
 }
 
 void DataSet::DataSetState::swap(DataSetState& other)
 {
-	std::swap(fileNames, other.fileNames);
-	std::swap(records, other.records);
-	std::swap(selectionMask, other.selectionMask);
+    std::swap(fileNames, other.fileNames);
+    std::swap(records, other.records);
+    std::swap(selectionMask, other.selectionMask);
 }

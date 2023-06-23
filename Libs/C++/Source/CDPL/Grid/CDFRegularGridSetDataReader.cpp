@@ -35,84 +35,84 @@ using namespace CDPL;
 
 bool Grid::CDFRegularGridSetDataReader::hasMoreData(std::istream& is)
 {
-	init();
+    init();
 
-	CDF::Header header;
+    CDF::Header header;
 
-	return CDFDataReaderBase::skipToRecord(is, header, CDF::DREGULAR_GRID_SET_RECORD_ID, true, dataBuffer);
+    return CDFDataReaderBase::skipToRecord(is, header, CDF::DREGULAR_GRID_SET_RECORD_ID, true, dataBuffer);
 }
 
 bool Grid::CDFRegularGridSetDataReader::readGridSet(std::istream& is, DRegularGridSet& grid_set)
 {
-	init();
+    init();
 
-	CDF::Header header;
+    CDF::Header header;
 
-	if (!skipToRecord(is, header, CDF::DREGULAR_GRID_SET_RECORD_ID, false, dataBuffer))
-		return false;
+    if (!skipToRecord(is, header, CDF::DREGULAR_GRID_SET_RECORD_ID, false, dataBuffer))
+        return false;
 
-	readData(is, header.recordDataLength, dataBuffer);
+    readData(is, header.recordDataLength, dataBuffer);
 
-	dataBuffer.setIOPointer(0);
+    dataBuffer.setIOPointer(0);
 
-	CDF::SizeType num_grids;
+    CDF::SizeType num_grids;
 
-	dataBuffer.getInt(num_grids);
+    dataBuffer.getInt(num_grids);
 
-	for (std::size_t i = 0; i < num_grids; i++) {
-		DRegularGrid::SharedPointer grid_ptr(new DRegularGrid(0));
+    for (std::size_t i = 0; i < num_grids; i++) {
+        DRegularGrid::SharedPointer grid_ptr(new DRegularGrid(0));
 
-		if (!readGrid(is, *grid_ptr))
-			return false;
+        if (!readGrid(is, *grid_ptr))
+            return false;
 
-		grid_set.addElement(grid_ptr);
-	}
+        grid_set.addElement(grid_ptr);
+    }
 
-	return true;
+    return true;
 }
 
 bool Grid::CDFRegularGridSetDataReader::skipGridSet(std::istream& is)
 {
-	init();
+    init();
 
-	return skipNextRecord(is, CDF::DREGULAR_GRID_SET_RECORD_ID, dataBuffer);
+    return skipNextRecord(is, CDF::DREGULAR_GRID_SET_RECORD_ID, dataBuffer);
 }
 
 bool Grid::CDFRegularGridSetDataReader::readGridSet(DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf)
 {
-	init();
+    init();
 
-	bbuf.setIOPointer(0);
+    bbuf.setIOPointer(0);
 
-	return doReadGridSet(grid_set, bbuf);
+    return doReadGridSet(grid_set, bbuf);
 }
 
 bool Grid::CDFRegularGridSetDataReader::doReadGridSet(DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf) const
 {
-	CDF::Header header;
+    CDF::Header header;
 
-	if (!getHeader(header, bbuf))
-		return false;
+    if (!getHeader(header, bbuf))
+        return false;
 
-	if (header.recordTypeID != CDF::DREGULAR_GRID_SET_RECORD_ID) {
-		if (strictErrorChecking())
-			throw Base::IOError("CDFRegularGridSetDataReader: trying to read a non-interaction score grid set record");
+    if (header.recordTypeID != CDF::DREGULAR_GRID_SET_RECORD_ID) {
+        if (strictErrorChecking())
+            throw Base::IOError("CDFRegularGridSetDataReader: trying to read a non-interaction score grid set record");
 
-		return false;
-	}
+        return false;
+    }
 
-	CDF::SizeType num_grids;
+    CDF::SizeType num_grids;
 
-	bbuf.getInt(num_grids);
+    bbuf.getInt(num_grids);
 
-	for (std::size_t i = 0; i < num_grids; i++) {
-		DRegularGrid::SharedPointer grid_ptr(new DRegularGrid(0));
+    for (std::size_t i = 0; i < num_grids; i++) {
+        DRegularGrid::SharedPointer grid_ptr(new DRegularGrid(0));
 
-		if (!doReadGrid(*grid_ptr, bbuf))
-			return false;
+        if (!doReadGrid(*grid_ptr, bbuf))
+            return false;
 
-		grid_set.addElement(grid_ptr);
-	}
+        grid_set.addElement(grid_ptr);
+    }
 
-	return true;
+    return true;
 }

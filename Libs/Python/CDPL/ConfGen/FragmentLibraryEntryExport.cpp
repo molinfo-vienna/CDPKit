@@ -34,34 +34,34 @@
 
 void CDPLPythonConfGen::exportFragmentLibraryEntry()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ConfGen::FragmentLibraryEntry, ConfGen::FragmentLibraryEntry::SharedPointer>("FragmentLibraryEntry", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::FragmentLibraryEntry&>((python::arg("self"), python::arg("entry"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryEntry>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibraryEntry::operator=),
-			 (python::arg("self"), python::arg("entry")), python::return_self<>())
-		.def("setHashCode", &ConfGen::FragmentLibraryEntry::setHashCode, (python::arg("self"), python::arg("hash_code")))
-		.def("getHashCode", &ConfGen::FragmentLibraryEntry::getHashCode, python::arg("self"))
-		.def("setSMILES", &ConfGen::FragmentLibraryEntry::setSMILES, (python::arg("self"), python::arg("smiles")))
-		.def("getSMILES", &ConfGen::FragmentLibraryEntry::getSMILES, python::arg("self"), 
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("getNumAtoms", &ConfGen::FragmentLibraryEntry::getNumAtoms, python::arg("self"))
-		.def("getNumConformers", &ConfGen::FragmentLibraryEntry::getNumConformers, python::arg("self"))
-		.def("clearConformers", &ConfGen::FragmentLibraryEntry::clearConformers, python::arg("self"))
-		.def("addConformer", &ConfGen::FragmentLibraryEntry::addConformer, (python::arg("self"), python::arg("conf_data")))
-		.def("getConformer", static_cast<ConfGen::ConformerData& (ConfGen::FragmentLibraryEntry::*)(std::size_t idx)>
-			 (&ConfGen::FragmentLibraryEntry::getConformer),
-			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.def("__getitem__", static_cast<ConfGen::ConformerData& (ConfGen::FragmentLibraryEntry::*)(std::size_t idx)>
-			 (&ConfGen::FragmentLibraryEntry::getConformer),
-			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.add_property("numConformers", &ConfGen::FragmentLibraryEntry::getNumConformers)
-		.add_property("numAtoms", &ConfGen::FragmentLibraryEntry::getNumAtoms)
-		.add_property("hashCode", &ConfGen::FragmentLibraryEntry::getHashCode, &ConfGen::FragmentLibraryEntry::setHashCode)
-		.add_property("smiles", python::make_function(&ConfGen::FragmentLibraryEntry::getSMILES,
-													  python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::FragmentLibraryEntry::setSMILES);
+    python::class_<ConfGen::FragmentLibraryEntry, ConfGen::FragmentLibraryEntry::SharedPointer>("FragmentLibraryEntry", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ConfGen::FragmentLibraryEntry&>((python::arg("self"), python::arg("entry"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryEntry>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibraryEntry::operator=),
+             (python::arg("self"), python::arg("entry")), python::return_self<>())
+        .def("setHashCode", &ConfGen::FragmentLibraryEntry::setHashCode, (python::arg("self"), python::arg("hash_code")))
+        .def("getHashCode", &ConfGen::FragmentLibraryEntry::getHashCode, python::arg("self"))
+        .def("setSMILES", &ConfGen::FragmentLibraryEntry::setSMILES, (python::arg("self"), python::arg("smiles")))
+        .def("getSMILES", &ConfGen::FragmentLibraryEntry::getSMILES, python::arg("self"), 
+             python::return_value_policy<python::copy_const_reference>())
+        .def("getNumAtoms", &ConfGen::FragmentLibraryEntry::getNumAtoms, python::arg("self"))
+        .def("getNumConformers", &ConfGen::FragmentLibraryEntry::getNumConformers, python::arg("self"))
+        .def("clearConformers", &ConfGen::FragmentLibraryEntry::clearConformers, python::arg("self"))
+        .def("addConformer", &ConfGen::FragmentLibraryEntry::addConformer, (python::arg("self"), python::arg("conf_data")))
+        .def("getConformer", static_cast<ConfGen::ConformerData& (ConfGen::FragmentLibraryEntry::*)(std::size_t idx)>
+             (&ConfGen::FragmentLibraryEntry::getConformer),
+             (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
+        .def("__getitem__", static_cast<ConfGen::ConformerData& (ConfGen::FragmentLibraryEntry::*)(std::size_t idx)>
+             (&ConfGen::FragmentLibraryEntry::getConformer),
+             (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
+        .add_property("numConformers", &ConfGen::FragmentLibraryEntry::getNumConformers)
+        .add_property("numAtoms", &ConfGen::FragmentLibraryEntry::getNumAtoms)
+        .add_property("hashCode", &ConfGen::FragmentLibraryEntry::getHashCode, &ConfGen::FragmentLibraryEntry::setHashCode)
+        .add_property("smiles", python::make_function(&ConfGen::FragmentLibraryEntry::getSMILES,
+                                                      python::return_value_policy<python::copy_const_reference>()),
+                      &ConfGen::FragmentLibraryEntry::setSMILES);
 }

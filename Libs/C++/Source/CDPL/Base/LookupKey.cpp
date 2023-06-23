@@ -35,25 +35,25 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		void initLookupKey() {}
-	}
+        void initLookupKey() {}
+    }
 }
 
 
 namespace
 {
 
-	typedef std::unordered_map<std::size_t, std::string> KeyNameMap;
+    typedef std::unordered_map<std::size_t, std::string> KeyNameMap;
 
-	KeyNameMap& getNameMap()
-	{
-		static KeyNameMap map;
+    KeyNameMap& getNameMap()
+    {
+        static KeyNameMap map;
 
-		return map;
-	}
+        return map;
+    }
 }
 
 
@@ -65,33 +65,33 @@ const Base::LookupKey Base::LookupKey::NONE = Base::LookupKey::create("NONE");
 
 Base::LookupKey Base::LookupKey::create(const std::string& name)
 {
-	static std::atomic<std::size_t> next_id(0);
+    static std::atomic<std::size_t> next_id(0);
 
-	LookupKey key(next_id.fetch_add(1, std::memory_order_relaxed));
+    LookupKey key(next_id.fetch_add(1, std::memory_order_relaxed));
 
-	key.setName(name);
+    key.setName(name);
 
-	return key;
+    return key;
 }
 
 void Base::LookupKey::setName(const std::string& name) const
 {
-	static std::mutex mutex;
+    static std::mutex mutex;
 
-	std::lock_guard<std::mutex> lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
 
-	getNameMap()[numericID] = name;
+    getNameMap()[numericID] = name;
 }
 
 const std::string& Base::LookupKey::getName() const
 {
-	KeyNameMap& name_map = getNameMap();
+    KeyNameMap& name_map = getNameMap();
 
-	KeyNameMap::const_iterator it = name_map.find(numericID);
+    KeyNameMap::const_iterator it = name_map.find(numericID);
 
-	if (it != name_map.end())
-		return it->second;
+    if (it != name_map.end())
+        return it->second;
 
-	throw ItemNotFound("LookupKey: name of key not found");
+    throw ItemNotFound("LookupKey: name of key not found");
 }
 

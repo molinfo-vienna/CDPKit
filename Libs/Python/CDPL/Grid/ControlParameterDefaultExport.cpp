@@ -32,16 +32,16 @@
 namespace 
 {
 
-	struct ControlParameterDefault {};
+    struct ControlParameterDefault {};
 }
 
 
 void CDPLPythonGrid::exportControlParameterDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
-		.def_readonly("STRICT_ERROR_CHECKING", &Grid::ControlParameterDefault::STRICT_ERROR_CHECKING)
-		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Grid::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+    python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
+        .def_readonly("STRICT_ERROR_CHECKING", &Grid::ControlParameterDefault::STRICT_ERROR_CHECKING)
+        .def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Grid::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS);
 }

@@ -39,26 +39,26 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API DGStructureGeneratorSettings : public DGConstraintGeneratorSettings
-		{
+        class CDPL_CONFGEN_API DGStructureGeneratorSettings : public DGConstraintGeneratorSettings
+        {
 
-		public:
-			static const DGStructureGeneratorSettings DEFAULT;
+        public:
+            static const DGStructureGeneratorSettings DEFAULT;
 
-			DGStructureGeneratorSettings();
+            DGStructureGeneratorSettings();
 
-			void setBoxSize(double size);
+            void setBoxSize(double size);
 
-			double getBoxSize() const;
+            double getBoxSize() const;
 
-			void enablePlanarityConstraints(bool enable);
+            void enablePlanarityConstraints(bool enable);
 
-			bool enablePlanarityConstraints() const;
+            bool enablePlanarityConstraints() const;
 
-		  private:
-			double  boxSize;
-			bool    planarConstr;
-		};
+          private:
+            double  boxSize;
+            bool    planarConstr;
+        };
     }
 }
 

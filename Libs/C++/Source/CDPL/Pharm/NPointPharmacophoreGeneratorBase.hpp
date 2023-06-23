@@ -38,27 +38,27 @@ namespace CDPL
     namespace Pharm
     {
 
-		class NPointPharmacophoreGeneratorBase
-		{
+        class NPointPharmacophoreGeneratorBase
+        {
 
-		public:
-			typedef std::pair<const Feature*, unsigned int> FeatureAndType;
-			typedef std::vector<FeatureAndType> FeatureAndTypeArray;
+        public:
+            typedef std::pair<const Feature*, unsigned int> FeatureAndType;
+            typedef std::vector<FeatureAndType> FeatureAndTypeArray;
 
-			template <typename Iter> 
-			const FeatureAndTypeArray& getCanonOrderedFeatures(const Iter& beg, const Iter& end);
+            template <typename Iter> 
+            const FeatureAndTypeArray& getCanonOrderedFeatures(const Iter& beg, const Iter& end);
 
-		private:
-			struct FeatureAndTypeCmpFunc
-			{
+        private:
+            struct FeatureAndTypeCmpFunc
+            {
 
-				inline bool operator()(const FeatureAndType& ft1, const FeatureAndType& ft2) const {
-					return (ft1.second < ft2.second);
-				}
-			};
+                inline bool operator()(const FeatureAndType& ft1, const FeatureAndType& ft2) const {
+                    return (ft1.second < ft2.second);
+                }
+            };
 
-			FeatureAndTypeArray features;
-		};
+            FeatureAndTypeArray features;
+        };
     }
 }
 
@@ -69,17 +69,17 @@ template <typename Iter>
 const CDPL::Pharm::NPointPharmacophoreGeneratorBase::FeatureAndTypeArray& 
 CDPL::Pharm::NPointPharmacophoreGeneratorBase::getCanonOrderedFeatures(const Iter& beg, const Iter& end)
 {
-	features.clear();
+    features.clear();
 
-	for (Iter it = beg; it != end; ++it) {
-		const Feature& ftr = *it;
+    for (Iter it = beg; it != end; ++it) {
+        const Feature& ftr = *it;
 
-		features.push_back(FeatureAndType(&ftr, getType(ftr)));
-	}
+        features.push_back(FeatureAndType(&ftr, getType(ftr)));
+    }
 
-	std::sort(features.begin(), features.end(), FeatureAndTypeCmpFunc());
+    std::sort(features.begin(), features.end(), FeatureAndTypeCmpFunc());
 
-	return features;
+    return features;
 }
 
 #endif // CDPL_PHARM_NPOINTPHARMACOPHOREGENERATORBASE_HPP

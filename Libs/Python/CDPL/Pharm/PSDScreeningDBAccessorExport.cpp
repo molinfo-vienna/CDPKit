@@ -35,8 +35,8 @@ void CDPLPythonPharm::exportPSDScreeningDBAccessor()
     using namespace CDPL;
 
     python::class_<Pharm::PSDScreeningDBAccessor, Pharm::PSDScreeningDBAccessor::SharedPointer,
-		   python::bases<Pharm::ScreeningDBAccessor>,
-		   boost::noncopyable>("PSDScreeningDBAccessor", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const std::string&>((python::arg("self"), python::arg("name"))));
+           python::bases<Pharm::ScreeningDBAccessor>,
+           boost::noncopyable>("PSDScreeningDBAccessor", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const std::string&>((python::arg("self"), python::arg("name"))));
 }

@@ -32,20 +32,20 @@
 namespace 
 {
 
-	struct ReactionRole {};
+    struct ReactionRole {};
 }
 
 
 void CDPLPythonChem::exportReactionRoles()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ReactionRole, boost::noncopyable>("ReactionRole", python::no_init)
-		.def_readonly("NONE", &Chem::ReactionRole::NONE)
-		.def_readonly("ALL", &Chem::ReactionRole::ALL)
-		.def_readonly("AGENT", &Chem::ReactionRole::AGENT)
-		.def_readonly("CATALYST", &Chem::ReactionRole::CATALYST)
-		.def_readonly("PRODUCT", &Chem::ReactionRole::PRODUCT)
-		.def_readonly("REACTANT", &Chem::ReactionRole::REACTANT);
+    python::class_<ReactionRole, boost::noncopyable>("ReactionRole", python::no_init)
+        .def_readonly("NONE", &Chem::ReactionRole::NONE)
+        .def_readonly("ALL", &Chem::ReactionRole::ALL)
+        .def_readonly("AGENT", &Chem::ReactionRole::AGENT)
+        .def_readonly("CATALYST", &Chem::ReactionRole::CATALYST)
+        .def_readonly("PRODUCT", &Chem::ReactionRole::PRODUCT)
+        .def_readonly("REACTANT", &Chem::ReactionRole::REACTANT);
 }

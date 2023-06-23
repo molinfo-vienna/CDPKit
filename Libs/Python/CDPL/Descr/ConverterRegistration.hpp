@@ -28,8 +28,8 @@
 
 namespace CDPLPythonDescr
 {
-	
-	void registerFromPythonConverters();
+    
+    void registerFromPythonConverters();
 }
 
 #endif // CDPL_PYTHON_DESCR_CONVERTERREGISTRATION_HPP

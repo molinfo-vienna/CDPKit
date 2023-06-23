@@ -38,25 +38,25 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteraction()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94ElectrostaticInteraction>("MMFF94ElectrostaticInteraction", python::no_init)
-		.def(python::init<const ForceField::MMFF94ElectrostaticInteraction&>((python::arg("self"), python::arg("iactn"))))
-		.def(python::init<std::size_t, std::size_t, double, double, double, double, double>(
-				 (python::arg("self"), python::arg("atom1_idx"), python::arg("atom2_idx"), python::arg("atom1_chg"),
-				  python::arg("atom2_chg"), python::arg("scale_fact"), python::arg("de_const"), python::arg("dist_expo"))))
-		.def("getAtom1Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Index, python::arg("self"))
-		.def("getAtom2Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Index, python::arg("self"))
-		.def("getAtom1Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Charge, python::arg("self"))
-		.def("getAtom2Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Charge, python::arg("self"))
-		.def("getScalingFactor", &ForceField::MMFF94ElectrostaticInteraction::getScalingFactor, python::arg("self"))
-		.def("getDielectricConstant", &ForceField::MMFF94ElectrostaticInteraction::getDielectricConstant, python::arg("self"))
-		.def("getDistanceExponent", &ForceField::MMFF94ElectrostaticInteraction::getDistanceExponent, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteraction::operator=),
-			 (python::arg("self"), python::arg("iactn")), python::return_self<>())
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ElectrostaticInteraction>())
-		.add_property("atom1Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Index) 
-		.add_property("atom2Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Index)
-		.add_property("atom1Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Charge)
-		.add_property("atom2Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Charge)
-		.add_property("scalingFactor", &ForceField::MMFF94ElectrostaticInteraction::getScalingFactor)
-		.add_property("dielectricConstant", &ForceField::MMFF94ElectrostaticInteraction::getDielectricConstant)
-		.add_property("distanceExponent", &ForceField::MMFF94ElectrostaticInteraction::getDistanceExponent);
+        .def(python::init<const ForceField::MMFF94ElectrostaticInteraction&>((python::arg("self"), python::arg("iactn"))))
+        .def(python::init<std::size_t, std::size_t, double, double, double, double, double>(
+                 (python::arg("self"), python::arg("atom1_idx"), python::arg("atom2_idx"), python::arg("atom1_chg"),
+                  python::arg("atom2_chg"), python::arg("scale_fact"), python::arg("de_const"), python::arg("dist_expo"))))
+        .def("getAtom1Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Index, python::arg("self"))
+        .def("getAtom2Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Index, python::arg("self"))
+        .def("getAtom1Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Charge, python::arg("self"))
+        .def("getAtom2Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Charge, python::arg("self"))
+        .def("getScalingFactor", &ForceField::MMFF94ElectrostaticInteraction::getScalingFactor, python::arg("self"))
+        .def("getDielectricConstant", &ForceField::MMFF94ElectrostaticInteraction::getDielectricConstant, python::arg("self"))
+        .def("getDistanceExponent", &ForceField::MMFF94ElectrostaticInteraction::getDistanceExponent, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteraction::operator=),
+             (python::arg("self"), python::arg("iactn")), python::return_self<>())
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ElectrostaticInteraction>())
+        .add_property("atom1Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Index) 
+        .add_property("atom2Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Index)
+        .add_property("atom1Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Charge)
+        .add_property("atom2Charge", &ForceField::MMFF94ElectrostaticInteraction::getAtom2Charge)
+        .add_property("scalingFactor", &ForceField::MMFF94ElectrostaticInteraction::getScalingFactor)
+        .add_property("dielectricConstant", &ForceField::MMFF94ElectrostaticInteraction::getDielectricConstant)
+        .add_property("distanceExponent", &ForceField::MMFF94ElectrostaticInteraction::getDistanceExponent);
 }

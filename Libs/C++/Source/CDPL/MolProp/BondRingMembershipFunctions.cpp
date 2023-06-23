@@ -38,123 +38,123 @@ using namespace CDPL;
 namespace
 {
 
-	bool checkIsInRingOfSize(const Chem::Bond& bond, const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t size, Util::BitSet& vis_atoms, std::size_t path_len)
+    bool checkIsInRingOfSize(const Chem::Bond& bond, const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t size, Util::BitSet& vis_atoms, std::size_t path_len)
     {
-		using namespace Chem;
+        using namespace Chem;
 
-		std::size_t atom_idx = molgraph.getAtomIndex(atom);
+        std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
-		vis_atoms.set(atom_idx);
-		path_len++;
+        vis_atoms.set(atom_idx);
+        path_len++;
 
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+        Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-		for (Atom::ConstAtomIterator it = atom.getAtomsBegin(), end = atom.getAtomsEnd(); it != end; ++it, ++b_it) {
-			const Chem::Atom& nbr_atom = *it;
+        for (Atom::ConstAtomIterator it = atom.getAtomsBegin(), end = atom.getAtomsEnd(); it != end; ++it, ++b_it) {
+            const Chem::Atom& nbr_atom = *it;
 
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
 
-			if (!molgraph.containsBond(*b_it))
-				continue;
+            if (!molgraph.containsBond(*b_it))
+                continue;
 
-			if (&nbr_atom == &bond.getBegin()) {
-				if (path_len == (size - 1))
-					return true;
+            if (&nbr_atom == &bond.getBegin()) {
+                if (path_len == (size - 1))
+                    return true;
 
-				continue;
-			}
+                continue;
+            }
 
-			if (vis_atoms.test(molgraph.getAtomIndex(nbr_atom)))
-				continue;
-			
-			if (nbr_atom.getNumAtoms() < 2)
-				continue;
+            if (vis_atoms.test(molgraph.getAtomIndex(nbr_atom)))
+                continue;
+            
+            if (nbr_atom.getNumAtoms() < 2)
+                continue;
 
-			if (path_len < (size - 1))
-				if (checkIsInRingOfSize(bond, nbr_atom, molgraph, size, vis_atoms, path_len))
-					return true;
-		}
+            if (path_len < (size - 1))
+                if (checkIsInRingOfSize(bond, nbr_atom, molgraph, size, vis_atoms, path_len))
+                    return true;
+        }
 
-		path_len--;
-		vis_atoms.reset(atom_idx);
+        path_len--;
+        vis_atoms.reset(atom_idx);
 
-		return false;
+        return false;
     }
 
     bool checkIsInRing(const Chem::Bond& bond, const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Util::BitSet& vis_atoms)
     {
-		using namespace Chem;
+        using namespace Chem;
 
-		std::size_t atom_idx = molgraph.getAtomIndex(atom);
+        std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
-		vis_atoms.set(atom_idx);
+        vis_atoms.set(atom_idx);
 
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+        Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-		for (Atom::ConstAtomIterator it = atom.getAtomsBegin(), end = atom.getAtomsEnd(); it != end; ++it, ++b_it) {
-			const Atom& nbr_atom = *it;
+        for (Atom::ConstAtomIterator it = atom.getAtomsBegin(), end = atom.getAtomsEnd(); it != end; ++it, ++b_it) {
+            const Atom& nbr_atom = *it;
 
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
 
-			if (!molgraph.containsBond(*b_it))
-				continue;
+            if (!molgraph.containsBond(*b_it))
+                continue;
 
-			if (&nbr_atom == &bond.getBegin()) {
-				if (&atom == &bond.getEnd())
-					continue;
+            if (&nbr_atom == &bond.getBegin()) {
+                if (&atom == &bond.getEnd())
+                    continue;
 
-				return true;
-			}
+                return true;
+            }
 
-			if (vis_atoms.test(molgraph.getAtomIndex(nbr_atom))) 
-				continue;
-			
-			if (nbr_atom.getNumAtoms() < 2)
-				continue;
+            if (vis_atoms.test(molgraph.getAtomIndex(nbr_atom))) 
+                continue;
+            
+            if (nbr_atom.getNumAtoms() < 2)
+                continue;
 
-			if (checkIsInRing(bond, nbr_atom, molgraph, vis_atoms))
-				return true;
-		}
+            if (checkIsInRing(bond, nbr_atom, molgraph, vis_atoms))
+                return true;
+        }
 
-		vis_atoms.reset(atom_idx);
+        vis_atoms.reset(atom_idx);
 
-		return false;
+        return false;
     }
 }
 
 
 bool MolProp::isInRing(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
 {
-	if (bond.getBegin().getNumBonds() < 2)
-		return false;
+    if (bond.getBegin().getNumBonds() < 2)
+        return false;
 
-	if (bond.getEnd().getNumBonds() < 2)
-		return false;
+    if (bond.getEnd().getNumBonds() < 2)
+        return false;
 
-	Util::BitSet vis_atoms(molgraph.getNumAtoms());
+    Util::BitSet vis_atoms(molgraph.getNumAtoms());
 
-	return checkIsInRing(bond, bond.getEnd(), molgraph, vis_atoms);
+    return checkIsInRing(bond, bond.getEnd(), molgraph, vis_atoms);
 }
 
 bool MolProp::isInRingOfSize(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, std::size_t size)
 {
-	if (size < 3)
-		return false;
+    if (size < 3)
+        return false;
 
-	if (bond.getBegin().getNumBonds() < 2)
-		return false;
+    if (bond.getBegin().getNumBonds() < 2)
+        return false;
 
-	if (bond.getEnd().getNumBonds() < 2)
-		return false;
+    if (bond.getEnd().getNumBonds() < 2)
+        return false;
 
-	Util::BitSet vis_atoms(molgraph.getNumAtoms());
+    Util::BitSet vis_atoms(molgraph.getNumAtoms());
 
-	return checkIsInRingOfSize(bond, bond.getEnd(), molgraph, size, vis_atoms, 0);
+    return checkIsInRingOfSize(bond, bond.getEnd(), molgraph, size, vis_atoms, 0);
 }
 
 std::size_t MolProp::getNumContainingSSSRRings(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
 {
-	return getNumContainingFragments(bond, *getSSSR(molgraph));
+    return getNumContainingFragments(bond, *getSSSR(molgraph));
 }

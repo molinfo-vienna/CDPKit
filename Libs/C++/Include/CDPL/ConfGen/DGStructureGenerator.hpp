@@ -46,43 +46,43 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API DGStructureGenerator
-		{
+        class CDPL_CONFGEN_API DGStructureGenerator
+        {
 
-		public:
-			DGStructureGenerator();
+        public:
+            DGStructureGenerator();
 
-			DGStructureGeneratorSettings& getSettings();
+            DGStructureGeneratorSettings& getSettings();
 
-			const DGStructureGeneratorSettings& getSettings() const;
+            const DGStructureGeneratorSettings& getSettings() const;
 
-			const Util::BitSet& getExcludedHydrogenMask() const;
+            const Util::BitSet& getExcludedHydrogenMask() const;
 
-			void setup(const Chem::MolecularGraph& molgraph);
-			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
+            void setup(const Chem::MolecularGraph& molgraph);
+            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
 
-			bool generate(Math::Vector3DArray& coords);
+            bool generate(Math::Vector3DArray& coords);
 
-			bool checkAtomConfigurations(Math::Vector3DArray& coords) const;
-			bool checkBondConfigurations(Math::Vector3DArray& coords) const;
+            bool checkAtomConfigurations(Math::Vector3DArray& coords) const;
+            bool checkBondConfigurations(Math::Vector3DArray& coords) const;
 
-			std::size_t getNumAtomStereoCenters() const;
-			std::size_t getNumBondStereoCenters() const;
+            std::size_t getNumAtomStereoCenters() const;
+            std::size_t getNumBondStereoCenters() const;
 
-			const DGConstraintGenerator& getConstraintGenerator() const;
+            const DGConstraintGenerator& getConstraintGenerator() const;
 
-		private:
-			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
+        private:
+            void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
-			typedef boost::random::mt11213b RandNumEngine;
+            typedef boost::random::mt11213b RandNumEngine;
 
-			const Chem::MolecularGraph*    molGraph;
-			DGConstraintGenerator          dgConstraintsGen;
-			Util::DG3DCoordinatesGenerator phase1CoordsGen;
-			Util::DG3DCoordinatesGenerator phase2CoordsGen;
-			RandNumEngine                  randomEngine;
-			DGStructureGeneratorSettings   settings;
-		};
+            const Chem::MolecularGraph*    molGraph;
+            DGConstraintGenerator          dgConstraintsGen;
+            Util::DG3DCoordinatesGenerator phase1CoordsGen;
+            Util::DG3DCoordinatesGenerator phase2CoordsGen;
+            RandNumEngine                  randomEngine;
+            DGStructureGeneratorSettings   settings;
+        };
     }
 }
 

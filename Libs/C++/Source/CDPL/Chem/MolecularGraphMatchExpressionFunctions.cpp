@@ -43,146 +43,146 @@ using namespace CDPL;
 namespace
 {
 
-	Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
-	createMatchExpressionList(const Chem::MolecularGraph& molgraph, const Chem::MatchConstraint& constraint);
+    Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
+    createMatchExpressionList(const Chem::MolecularGraph& molgraph, const Chem::MatchConstraint& constraint);
 
-	Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
-	createMatchExpression(const Chem::MolecularGraph& molgraph, const Chem::MatchConstraintList& constr_list)
-	{
-		using namespace Chem;
+    Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
+    createMatchExpression(const Chem::MolecularGraph& molgraph, const Chem::MatchConstraintList& constr_list)
+    {
+        using namespace Chem;
 
-		MatchExpressionList<MolecularGraph>::SharedPointer expr_list_ptr;
+        MatchExpressionList<MolecularGraph>::SharedPointer expr_list_ptr;
 
-		if (constr_list.getType() == MatchConstraintList::AND_LIST || 
-			constr_list.getType() == MatchConstraintList::NOT_AND_LIST)
-			expr_list_ptr.reset(new ANDMatchExpressionList<MolecularGraph>());
-		else
-			expr_list_ptr.reset(new ORMatchExpressionList<MolecularGraph>());
+        if (constr_list.getType() == MatchConstraintList::AND_LIST || 
+            constr_list.getType() == MatchConstraintList::NOT_AND_LIST)
+            expr_list_ptr.reset(new ANDMatchExpressionList<MolecularGraph>());
+        else
+            expr_list_ptr.reset(new ORMatchExpressionList<MolecularGraph>());
 
-		MatchConstraintList::ConstElementIterator constr_end = constr_list.getElementsEnd();
+        MatchConstraintList::ConstElementIterator constr_end = constr_list.getElementsEnd();
 
-		for (MatchConstraintList::ConstElementIterator it = constr_list.getElementsBegin(); it != constr_end; ++it) {
-			const MatchConstraint& constraint = *it;
+        for (MatchConstraintList::ConstElementIterator it = constr_list.getElementsBegin(); it != constr_end; ++it) {
+            const MatchConstraint& constraint = *it;
 
-			if (constraint.getID() == MolecularGraphMatchConstraint::CONSTRAINT_LIST) {
-				MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpressionList(molgraph, constraint);
-			
-				if (expr_ptr)
-					expr_list_ptr->addElement(expr_ptr);
+            if (constraint.getID() == MolecularGraphMatchConstraint::CONSTRAINT_LIST) {
+                MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpressionList(molgraph, constraint);
+            
+                if (expr_ptr)
+                    expr_list_ptr->addElement(expr_ptr);
 
-				continue;
-			}
+                continue;
+            }
 
-			if (constraint.getID() != MolecularGraphMatchConstraint::COMPONENT_GROUPING)
-				continue;
+            if (constraint.getID() != MolecularGraphMatchConstraint::COMPONENT_GROUPING)
+                continue;
 
-			if (constraint.getRelation() != MatchConstraint::EQUAL)
-				continue;
+            if (constraint.getRelation() != MatchConstraint::EQUAL)
+                continue;
 
-			const FragmentList::SharedPointer& comp_groups = 
-				molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::COMPONENT_GROUPS);
+            const FragmentList::SharedPointer& comp_groups = 
+                molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::COMPONENT_GROUPS);
 
-			if (comp_groups->getSize() == 0)
-				continue;
+            if (comp_groups->getSize() == 0)
+                continue;
 
-			MatchExpression<MolecularGraph>::SharedPointer expr_ptr(new MolecularGraphComponentGroupingMatchExpression(comp_groups));
-				
-			expr_list_ptr->addElement(expr_ptr);
-		}
+            MatchExpression<MolecularGraph>::SharedPointer expr_ptr(new MolecularGraphComponentGroupingMatchExpression(comp_groups));
+                
+            expr_list_ptr->addElement(expr_ptr);
+        }
 
-		MatchExpression<MolecularGraph>::SharedPointer expr_ptr;
+        MatchExpression<MolecularGraph>::SharedPointer expr_ptr;
 
-		if (expr_list_ptr->getSize() == 0)
-			expr_ptr.reset(new MatchExpression<MolecularGraph>());
-	
-		else {
-			if (expr_list_ptr->getSize() == 1)
-				expr_ptr = expr_list_ptr->getBase().getFirstElement();
-			else
-				expr_ptr = expr_list_ptr;
+        if (expr_list_ptr->getSize() == 0)
+            expr_ptr.reset(new MatchExpression<MolecularGraph>());
+    
+        else {
+            if (expr_list_ptr->getSize() == 1)
+                expr_ptr = expr_list_ptr->getBase().getFirstElement();
+            else
+                expr_ptr = expr_list_ptr;
 
-			if (constr_list.getType() == MatchConstraintList::NOT_AND_LIST || 
-				constr_list.getType() == MatchConstraintList::NOT_OR_LIST) 
-				expr_ptr.reset(new NOTMatchExpression<MolecularGraph>(expr_ptr));
-		}
+            if (constr_list.getType() == MatchConstraintList::NOT_AND_LIST || 
+                constr_list.getType() == MatchConstraintList::NOT_OR_LIST) 
+                expr_ptr.reset(new NOTMatchExpression<MolecularGraph>(expr_ptr));
+        }
 
-		return expr_ptr; 
-	}
+        return expr_ptr; 
+    }
 
-	Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
-	createMatchExpressionList(const Chem::MolecularGraph& molgraph, const Chem::MatchConstraint& constraint)
-	{
-		using namespace Chem;
+    Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
+    createMatchExpressionList(const Chem::MolecularGraph& molgraph, const Chem::MatchConstraint& constraint)
+    {
+        using namespace Chem;
 
-		if (constraint.getRelation() != MatchConstraint::EQUAL && 
-			constraint.getRelation() != MatchConstraint::NOT_EQUAL)
-			return MatchExpression<MolecularGraph>::SharedPointer();
+        if (constraint.getRelation() != MatchConstraint::EQUAL && 
+            constraint.getRelation() != MatchConstraint::NOT_EQUAL)
+            return MatchExpression<MolecularGraph>::SharedPointer();
 
-		const MatchConstraintList& constr_list = 
-			*constraint.getValue<MatchConstraintList::SharedPointer>();
+        const MatchConstraintList& constr_list = 
+            *constraint.getValue<MatchConstraintList::SharedPointer>();
 
-		MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(molgraph, constr_list);
+        MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(molgraph, constr_list);
 
-		if (!expr_ptr)
-			return expr_ptr;
+        if (!expr_ptr)
+            return expr_ptr;
 
-		if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
-			expr_ptr.reset(new NOTMatchExpression<MolecularGraph>(expr_ptr));
+        if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
+            expr_ptr.reset(new NOTMatchExpression<MolecularGraph>(expr_ptr));
 
-		return expr_ptr;
-	}
+        return expr_ptr;
+    }
 }
 
 
 Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(const MolecularGraph& molgraph)
 {
-	MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(molgraph, *getMatchConstraints(molgraph));
+    MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(molgraph, *getMatchConstraints(molgraph));
 
-	if (!expr_ptr)
-		expr_ptr.reset(new MatchExpression<MolecularGraph>());
+    if (!expr_ptr)
+        expr_ptr.reset(new MatchExpression<MolecularGraph>());
 
-	return expr_ptr; 
+    return expr_ptr; 
 }
-	
+    
 Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_expr = molgraph.getProperty(MolecularGraphProperty::MATCH_EXPRESSION, false);
-	
-		if (!prev_expr.isEmpty())
-			return prev_expr.getData<MatchExpression<MolecularGraph>::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_expr = molgraph.getProperty(MolecularGraphProperty::MATCH_EXPRESSION, false);
+    
+        if (!prev_expr.isEmpty())
+            return prev_expr.getData<MatchExpression<MolecularGraph>::SharedPointer>();
+    }
 
-	MatchExpression<MolecularGraph>::SharedPointer expr_ptr = buildMatchExpression(molgraph);
+    MatchExpression<MolecularGraph>::SharedPointer expr_ptr = buildMatchExpression(molgraph);
 
-	setMatchExpression(molgraph, expr_ptr);
+    setMatchExpression(molgraph, expr_ptr);
 
-	return expr_ptr; 
+    return expr_ptr; 
 }
 
 void Chem::buildMatchExpressions(MolecularGraph& molgraph, bool overwrite)
 {
-	buildMatchExpression(molgraph, overwrite);
+    buildMatchExpression(molgraph, overwrite);
 
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasMatchExpression(atom))
-			continue;
+        if (!overwrite && hasMatchExpression(atom))
+            continue;
 
-		setMatchExpression(atom, buildMatchExpression(atom, molgraph));
-	}
+        setMatchExpression(atom, buildMatchExpression(atom, molgraph));
+    }
 
-	MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
-		Bond& bond = *b_it;
+    for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
+        Bond& bond = *b_it;
  
-		if (!overwrite && hasMatchExpression(bond))
-			continue;
+        if (!overwrite && hasMatchExpression(bond))
+            continue;
 
-		setMatchExpression(bond, buildMatchExpression(bond, molgraph));
-	}
+        setMatchExpression(bond, buildMatchExpression(bond, molgraph));
+    }
 }

@@ -37,103 +37,103 @@
 
 BOOST_PYTHON_MODULE(_math)
 {
-	using namespace CDPLPythonMath;
+    using namespace CDPLPythonMath;
 
 #ifdef HAVE_NUMPY
-	NumPy::init();
+    NumPy::init();
 #endif // HAVE_NUMPY
 
-	exportVectorExpressionTypes();
-	exportMatrixExpressionTypes();
-	exportQuaternionExpressionTypes();
-	exportGridExpressionTypes();
+    exportVectorExpressionTypes();
+    exportMatrixExpressionTypes();
+    exportQuaternionExpressionTypes();
+    exportGridExpressionTypes();
 
-	exportVectorTypes();
-	exportSparseVectorTypes();
-	exportCVectorTypes1();
-	exportCVectorTypes2();
-	exportCVectorTypes3();
-	exportScalarVectorTypes();
-	exportZeroVectorTypes();
-	exportUnitVectorTypes();
-	
-	exportMatrixTypes();
-	exportSparseMatrixTypes();
-	exportTranslationMatrixTypes();
-	exportScalingMatrixTypes();
-	exportRotationMatrixTypes();
-	exportCMatrixTypes1();
-	exportCMatrixTypes2();
-	exportCMatrixTypes3();
-	exportZeroMatrixTypes();
-	exportScalarMatrixTypes();
-	exportIdentityMatrixTypes();
-			
-	exportQuaternionTypes();
-	exportRealQuaternionTypes();
+    exportVectorTypes();
+    exportSparseVectorTypes();
+    exportCVectorTypes1();
+    exportCVectorTypes2();
+    exportCVectorTypes3();
+    exportScalarVectorTypes();
+    exportZeroVectorTypes();
+    exportUnitVectorTypes();
+    
+    exportMatrixTypes();
+    exportSparseMatrixTypes();
+    exportTranslationMatrixTypes();
+    exportScalingMatrixTypes();
+    exportRotationMatrixTypes();
+    exportCMatrixTypes1();
+    exportCMatrixTypes2();
+    exportCMatrixTypes3();
+    exportZeroMatrixTypes();
+    exportScalarMatrixTypes();
+    exportIdentityMatrixTypes();
+            
+    exportQuaternionTypes();
+    exportRealQuaternionTypes();
 
-	exportGridTypes();
-	exportZeroGridTypes();
-	exportScalarGridTypes();
-	exportRegularSpatialGridTypes();
+    exportGridTypes();
+    exportZeroGridTypes();
+    exportScalarGridTypes();
+    exportRegularSpatialGridTypes();
 
-	exportRange();
-	exportSlice();
+    exportRange();
+    exportSlice();
 
-	exportVectorSliceTypes();
-	exportConstVectorSliceTypes();
-	exportVectorRangeTypes();
-	exportConstVectorRangeTypes();
+    exportVectorSliceTypes();
+    exportConstVectorSliceTypes();
+    exportVectorRangeTypes();
+    exportConstVectorRangeTypes();
 
-	exportMatrixRangeTypes();
-	exportConstMatrixRangeTypes();
-	exportMatrixSliceTypes();
-	exportConstMatrixSliceTypes();
-	exportMatrixRowTypes();
-	exportConstMatrixRowTypes();
-	exportMatrixColumnTypes();
-	exportConstMatrixColumnTypes();
+    exportMatrixRangeTypes();
+    exportConstMatrixRangeTypes();
+    exportMatrixSliceTypes();
+    exportConstMatrixSliceTypes();
+    exportMatrixRowTypes();
+    exportConstMatrixRowTypes();
+    exportMatrixColumnTypes();
+    exportConstMatrixColumnTypes();
 
-	exportVectorQuaternionAdapterTypes();
-	exportConstVectorQuaternionAdapterTypes();
-	exportHomogenousCoordsAdapterTypes();
-	exportConstHomogenousCoordsAdapterTypes();
+    exportVectorQuaternionAdapterTypes();
+    exportConstVectorQuaternionAdapterTypes();
+    exportHomogenousCoordsAdapterTypes();
+    exportConstHomogenousCoordsAdapterTypes();
 
-	exportTriangularMatrixTypes();
-	exportTriangularMatrixAdapterTypes1();
-	exportTriangularMatrixAdapterTypes2();
-	exportTriangularMatrixAdapterTypes3();
-	exportTriangularMatrixAdapterTypes4();
-	exportMatrixTransposeTypes();
-	exportConstMatrixTransposeTypes();
+    exportTriangularMatrixTypes();
+    exportTriangularMatrixAdapterTypes1();
+    exportTriangularMatrixAdapterTypes2();
+    exportTriangularMatrixAdapterTypes3();
+    exportTriangularMatrixAdapterTypes4();
+    exportMatrixTransposeTypes();
+    exportConstMatrixTransposeTypes();
 
-	exportQuaternionAdapterTypes();
+    exportQuaternionAdapterTypes();
 
-	exportVectorArrayTypes();
-	exportMLRModelTypes();
-	exportBFGSMinimizerTypes();
-	exportKabschAlgorithmTypes();
-	exportVectorArrayAlignmentCalculatorTypes();
+    exportVectorArrayTypes();
+    exportMLRModelTypes();
+    exportBFGSMinimizerTypes();
+    exportKabschAlgorithmTypes();
+    exportVectorArrayAlignmentCalculatorTypes();
 
-	exportVectorFunctions();
-	exportMatrixFunctions();
-	exportQuaternionFunctions();
-	exportGridFunctions();
-	exportRegularSpatialGridFunctions();
-	exportSpecialFunctions();
-	exportVectorArrayFunctions();
+    exportVectorFunctions();
+    exportMatrixFunctions();
+    exportQuaternionFunctions();
+    exportGridFunctions();
+    exportRegularSpatialGridFunctions();
+    exportSpecialFunctions();
+    exportVectorArrayFunctions();
 
-	exportFunctionWrappers();
+    exportFunctionWrappers();
 
-	registerToPythonConverters();
+    registerToPythonConverters();
 
-	registerFromPythonToCVectorConverters();
-	registerFromPythonToVectorConverters();
-	registerFromPythonToCMatrixConverters();
-	registerFromPythonToMatrixConverters();
-	registerFromPythonToGridConverters();
-	registerFromPythonToQuaternionConverters();
-	registerFromPythonToVectorArrayConverters();
-	registerFromPythonToExpressionPointerConverters();
-	registerFromPythonToAnyConverters();
+    registerFromPythonToCVectorConverters();
+    registerFromPythonToVectorConverters();
+    registerFromPythonToCMatrixConverters();
+    registerFromPythonToMatrixConverters();
+    registerFromPythonToGridConverters();
+    registerFromPythonToQuaternionConverters();
+    registerFromPythonToVectorArrayConverters();
+    registerFromPythonToExpressionPointerConverters();
+    registerFromPythonToAnyConverters();
 }

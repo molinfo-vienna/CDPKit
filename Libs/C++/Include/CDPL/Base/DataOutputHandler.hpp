@@ -38,54 +38,54 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
+        class DataFormat;
 
-		/**
-		 * \brief A factory interface providing methods for the creation of Base::DataWriter instances handling a particular
-		 *        object type and storage format.
-		 * \tparam T The type of objects handled by the created Base::DataWriter instances.
-		 */
-		template <typename T>
-		class DataOutputHandler 
-		{
+        /**
+         * \brief A factory interface providing methods for the creation of Base::DataWriter instances handling a particular
+         *        object type and storage format.
+         * \tparam T The type of objects handled by the created Base::DataWriter instances.
+         */
+        template <typename T>
+        class DataOutputHandler 
+        {
 
-		public:
-			typedef DataWriter<T> WriterType;
+        public:
+            typedef DataWriter<T> WriterType;
 
-			typedef std::shared_ptr<DataOutputHandler> SharedPointer;
+            typedef std::shared_ptr<DataOutputHandler> SharedPointer;
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~DataOutputHandler() {}
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~DataOutputHandler() {}
 
-			/**
-			 * \brief Returns a Base::DataFormat object that provides information about the handled output data format.
-			 * \return A Base::DataFormat object that provides information about the handled data format.
-			 */
-			virtual const DataFormat& getDataFormat() const = 0;
+            /**
+             * \brief Returns a Base::DataFormat object that provides information about the handled output data format.
+             * \return A Base::DataFormat object that provides information about the handled data format.
+             */
+            virtual const DataFormat& getDataFormat() const = 0;
 
-			/**
-			 * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
-			 * \param ios The I/O stream to write to.
-			 * \return A shared pointer to the created Base::DataWriter instance.
-			 */
-			virtual typename WriterType::SharedPointer createWriter(std::iostream& ios) const = 0;
+            /**
+             * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
+             * \param ios The I/O stream to write to.
+             * \return A shared pointer to the created Base::DataWriter instance.
+             */
+            virtual typename WriterType::SharedPointer createWriter(std::iostream& ios) const = 0;
 
-			/**
-			 * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
-			 * \param file_name The name of the file to write to.
-			 * \param mode Flags specifying the file open-mode.
-			 * \return A shared pointer to the created Base::DataWriter instance.
-			 */
-			virtual typename WriterType::SharedPointer createWriter(const std::string& file_name, 
-																	std::ios_base::openmode mode = 
-																	std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
-		};
-	}
+            /**
+             * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
+             * \param file_name The name of the file to write to.
+             * \param mode Flags specifying the file open-mode.
+             * \return A shared pointer to the created Base::DataWriter instance.
+             */
+            virtual typename WriterType::SharedPointer createWriter(const std::string& file_name, 
+                                                                    std::ios_base::openmode mode = 
+                                                                    std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
+        };
+    }
 }
 
 #endif // CDPL_BASE_DATAOUTPUTHANDLER_HPP

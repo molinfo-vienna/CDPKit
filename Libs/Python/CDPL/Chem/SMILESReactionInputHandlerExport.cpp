@@ -33,18 +33,18 @@
 
 void CDPLPythonChem::exportSMILESReactionInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SMILESReactionInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMILESReactionInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMILESReactionInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMILESReactionInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::SMILESGZReactionInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMILESGZReactionInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMILESGZReactionInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMILESGZReactionInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::SMILESBZ2ReactionInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMILESBZ2ReactionInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMILESBZ2ReactionInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMILESBZ2ReactionInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

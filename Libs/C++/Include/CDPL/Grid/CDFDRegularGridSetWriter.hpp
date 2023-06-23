@@ -40,52 +40,52 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class CDFRegularGridSetDataWriter;
+        class CDFRegularGridSetDataWriter;
 
-		/**
-		 * \brief A writer for spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
-		 */
-		class CDPL_GRID_API CDFDRegularGridSetWriter : public Base::DataWriter<DRegularGridSet>
-		{
+        /**
+         * \brief A writer for spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
+         */
+        class CDPL_GRID_API CDFDRegularGridSetWriter : public Base::DataWriter<DRegularGridSet>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %CDFDRegularGridSetWriter instance that will write data of spatial regular grids to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			CDFDRegularGridSetWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %CDFDRegularGridSetWriter instance that will write data of spatial regular grids to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            CDFDRegularGridSetWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~CDFDRegularGridSetWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~CDFDRegularGridSetWriter();
 
-			/**
-			 * \brief Writes data of the spatial regular grid set \a grid_set to the output stream specified in the constructor.
-			 * \param grid_set The spatial regular grid set to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<DRegularGridSet>& write(const DRegularGridSet& grid_set);
+            /**
+             * \brief Writes data of the spatial regular grid set \a grid_set to the output stream specified in the constructor.
+             * \param grid_set The spatial regular grid set to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<DRegularGridSet>& write(const DRegularGridSet& grid_set);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			typedef std::auto_ptr<CDFRegularGridSetDataWriter> CDFDataWriterPtr;
+        private:
+            typedef std::auto_ptr<CDFRegularGridSetDataWriter> CDFDataWriterPtr;
 
-			CDFDRegularGridSetWriter(const CDFDRegularGridSetWriter&);
+            CDFDRegularGridSetWriter(const CDFDRegularGridSetWriter&);
 
-			CDFDRegularGridSetWriter& operator=(const CDFDRegularGridSetWriter&);
+            CDFDRegularGridSetWriter& operator=(const CDFDRegularGridSetWriter&);
 
-			std::ostream&    output;
-			bool             state;
-			CDFDataWriterPtr writer;
-		};
-	}
+            std::ostream&    output;
+            bool             state;
+            CDFDataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_GRID_CDFDREGULARGRIDSETWRITER_HPP

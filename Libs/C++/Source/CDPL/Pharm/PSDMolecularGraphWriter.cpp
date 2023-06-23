@@ -39,97 +39,97 @@ using namespace CDPL;
 
 
 Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(std::iostream& ios): 
-	output(&ios), outputPos(ios.tellp()), state(false), closed(true)
+    output(&ios), outputPos(ios.tellp()), state(false), closed(true)
 {
-	Util::FileRemover tmp_file_rem(Util::genCheckedTempFilePath());
+    Util::FileRemover tmp_file_rem(Util::genCheckedTempFilePath());
 
-	try {
+    try {
         std::ofstream tmp_fs(tmp_file_rem.getPath().c_str());
 
-		boost::iostreams::copy(ios, tmp_fs);
+        boost::iostreams::copy(ios, tmp_fs);
 
-		if (!ios.good() || !tmp_fs.good())
-			throw Base::IOError("copying input data failed");
+        if (!ios.good() || !tmp_fs.good())
+            throw Base::IOError("copying input data failed");
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMolecularGraphWriter: could not create temporary database file: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMolecularGraphWriter: could not create temporary database file: ") + e.what());
+    }
 
-	try {
-		creator.open(tmp_file_rem.getPath(), getPSDCreationModeParameter(*this), 
-					 getPSDAllowDuplicatesParameter(*this));
-		state = true;
-		closed = false;
+    try {
+        creator.open(tmp_file_rem.getPath(), getPSDCreationModeParameter(*this), 
+                     getPSDAllowDuplicatesParameter(*this));
+        state = true;
+        closed = false;
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMolecularGraphWriter: could not open database: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMolecularGraphWriter: could not open database: ") + e.what());
+    }
 }
 
 Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(const std::string& file_name):
-	output(0), state(true), closed(true)
+    output(0), state(true), closed(true)
 {
-	try {
-		creator.open(file_name, getPSDCreationModeParameter(*this), 
-					 getPSDAllowDuplicatesParameter(*this));
-		state = true;
-		closed = false;
+    try {
+        creator.open(file_name, getPSDCreationModeParameter(*this), 
+                     getPSDAllowDuplicatesParameter(*this));
+        state = true;
+        closed = false;
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMolecularGraphWriter: could not open database: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMolecularGraphWriter: could not open database: ") + e.what());
+    }
 }
 
 Pharm::PSDMolecularGraphWriter::~PSDMolecularGraphWriter() 
 {
-	try { close(); } catch (...) {}
+    try { close(); } catch (...) {}
 }
 
 Pharm::PSDMolecularGraphWriter& Pharm::PSDMolecularGraphWriter::write(const Chem::MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	try {
-		creator.process(molgraph);
+    try {
+        creator.process(molgraph);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMolecularGraphWriter: could not write record: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMolecularGraphWriter: could not write record: ") + e.what());
+    }
 
-	state = true;
+    state = true;
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
     return *this;
 }
 
 void Pharm::PSDMolecularGraphWriter::close()
 {
-	state = false;
+    state = false;
 
-	if (output && !closed) {
-		try {
-			std::ifstream tmp_fs(creator.getDatabaseName().c_str());
+    if (output && !closed) {
+        try {
+            std::ifstream tmp_fs(creator.getDatabaseName().c_str());
 
-			creator.close();
-			closed = true;
+            creator.close();
+            closed = true;
 
-			output->seekp(outputPos);
-			boost::iostreams::copy(tmp_fs, *output);
+            output->seekp(outputPos);
+            boost::iostreams::copy(tmp_fs, *output);
 
-			if (!output->good() || !tmp_fs.good())
-				throw Base::IOError("copying of temporary database file failed");
+            if (!output->good() || !tmp_fs.good())
+                throw Base::IOError("copying of temporary database file failed");
 
-		} catch (const std::exception& e) {
-			throw Base::IOError(std::string("PSDMolecularGraphWriter: could not close database: ") + e.what());
-		}
+        } catch (const std::exception& e) {
+            throw Base::IOError(std::string("PSDMolecularGraphWriter: could not close database: ") + e.what());
+        }
 
-	} else if (!closed) {
-		creator.close();
-		closed = true;
-	}
+    } else if (!closed) {
+        creator.close();
+        closed = true;
+    }
 
-	state = true;
+    state = true;
 }
 
 Pharm::PSDMolecularGraphWriter::operator const void*() const

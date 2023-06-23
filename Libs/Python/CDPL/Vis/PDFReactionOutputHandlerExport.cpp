@@ -31,10 +31,10 @@
 
 void CDPLPythonVis::exportPDFReactionOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::PDFReactionOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("PDFReactionOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Vis::PDFReactionOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::Reaction> > >("PDFReactionOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

@@ -31,16 +31,16 @@
 
 BOOST_AUTO_TEST_CASE(LookupKeyDefinitionTest)
 {
-	using namespace CDPL;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Base;
 
-	CDPL_DEFINE_LOOKUP_KEY(key1);
-	CDPL_DEFINE_LOOKUP_KEY(key2);
+    CDPL_DEFINE_LOOKUP_KEY(key1);
+    CDPL_DEFINE_LOOKUP_KEY(key2);
 
-	BOOST_CHECK(!(key1 == key2));
-	BOOST_CHECK(key1.getID() != key2.getID());
+    BOOST_CHECK(!(key1 == key2));
+    BOOST_CHECK(key1.getID() != key2.getID());
 
-	BOOST_CHECK(key1.getName() == "key1");
-	BOOST_CHECK(key2.getName() == "key2");
+    BOOST_CHECK(key1.getName() == "key1");
+    BOOST_CHECK(key2.getName() == "key2");
 }
 

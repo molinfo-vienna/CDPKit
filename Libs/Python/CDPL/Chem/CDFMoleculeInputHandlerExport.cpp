@@ -33,18 +33,18 @@
 
 void CDPLPythonChem::exportCDFMoleculeInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::CDFMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::CDFMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::CDFGZMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFGZMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::CDFGZMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFGZMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::CDFBZ2MoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFBZ2MoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::CDFBZ2MoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFBZ2MoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

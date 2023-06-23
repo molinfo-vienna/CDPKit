@@ -34,175 +34,175 @@
 namespace CDPLPythonMath
 {
 
-	template <typename EDT, typename WDT>
-	class ConstQuaternionExpressionAdapter : 
-		public ConstQuaternionExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
-	{
+    template <typename EDT, typename WDT>
+    class ConstQuaternionExpressionAdapter : 
+        public ConstQuaternionExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
+    {
 
-	public:
-		typedef EDT HeldExpressionDataType;
-		typedef WDT KeepAliveWardDataType;
-		typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-		typedef typename HeldExpressionType::ValueType ValueType;
-		typedef ConstQuaternionExpression<ValueType> ExpressionType;
-		typedef typename ExpressionType::ConstReference ConstReference;
-		typedef typename ExpressionType::SharedPointer ConstExpressionPointer;
+    public:
+        typedef EDT HeldExpressionDataType;
+        typedef WDT KeepAliveWardDataType;
+        typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
+        typedef typename HeldExpressionType::ValueType ValueType;
+        typedef ConstQuaternionExpression<ValueType> ExpressionType;
+        typedef typename ExpressionType::ConstReference ConstReference;
+        typedef typename ExpressionType::SharedPointer ConstExpressionPointer;
 
-		ConstQuaternionExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-			exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-		
-		~ConstQuaternionExpressionAdapter() {} 
+        ConstQuaternionExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
+        
+        ~ConstQuaternionExpressionAdapter() {} 
 
-		ConstReference getC1() const {
-			return boost::unwrap_ref(exprData).getC1();
-		}
+        ConstReference getC1() const {
+            return boost::unwrap_ref(exprData).getC1();
+        }
 
-		ConstReference getC2() const {
-			return boost::unwrap_ref(exprData).getC2();
-		}
-	
-		ConstReference getC3() const {
-			return boost::unwrap_ref(exprData).getC3();
-		}
-	
-		ConstReference getC4() const {
-			return boost::unwrap_ref(exprData).getC4();
-		}
+        ConstReference getC2() const {
+            return boost::unwrap_ref(exprData).getC2();
+        }
+    
+        ConstReference getC3() const {
+            return boost::unwrap_ref(exprData).getC3();
+        }
+    
+        ConstReference getC4() const {
+            return boost::unwrap_ref(exprData).getC4();
+        }
 
-	protected:
-		HeldExpressionDataType exprData;
-		KeepAliveWardDataType  keepAliveWardData;
-	};
+    protected:
+        HeldExpressionDataType exprData;
+        KeepAliveWardDataType  keepAliveWardData;
+    };
 
-	template <typename EDT, typename WDT>
-	class QuaternionExpressionAdapter : public QuaternionExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
-	{
+    template <typename EDT, typename WDT>
+    class QuaternionExpressionAdapter : public QuaternionExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
+    {
 
-	public:
-		typedef EDT HeldExpressionDataType;
-		typedef WDT KeepAliveWardDataType;
-		typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-		typedef typename HeldExpressionType::ValueType ValueType;
-		typedef QuaternionExpression<ValueType> ExpressionType;
-		typedef typename ExpressionType::ConstExpressionType ConstExpressionType;
-		typedef typename ExpressionType::ConstReference ConstReference;
-		typedef typename ExpressionType::Reference Reference;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
-		typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
+    public:
+        typedef EDT HeldExpressionDataType;
+        typedef WDT KeepAliveWardDataType;
+        typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
+        typedef typename HeldExpressionType::ValueType ValueType;
+        typedef QuaternionExpression<ValueType> ExpressionType;
+        typedef typename ExpressionType::ConstExpressionType ConstExpressionType;
+        typedef typename ExpressionType::ConstReference ConstReference;
+        typedef typename ExpressionType::Reference Reference;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
-		QuaternionExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-			exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-		
-		~QuaternionExpressionAdapter() {} 
+        QuaternionExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
+        
+        ~QuaternionExpressionAdapter() {} 
 
-		ConstReference getC1() const {
-			return boost::unwrap_ref(exprData).getC1();
-		}
+        ConstReference getC1() const {
+            return boost::unwrap_ref(exprData).getC1();
+        }
 
-		ConstReference getC2() const {
-			return boost::unwrap_ref(exprData).getC2();
-		}
-	
-		ConstReference getC3() const {
-			return boost::unwrap_ref(exprData).getC3();
-		}
-	
-		ConstReference getC4() const {
-			return boost::unwrap_ref(exprData).getC4();
-		}
+        ConstReference getC2() const {
+            return boost::unwrap_ref(exprData).getC2();
+        }
+    
+        ConstReference getC3() const {
+            return boost::unwrap_ref(exprData).getC3();
+        }
+    
+        ConstReference getC4() const {
+            return boost::unwrap_ref(exprData).getC4();
+        }
 
-		Reference getC1() {
-			return boost::unwrap_ref(exprData).getC1();
-		}
+        Reference getC1() {
+            return boost::unwrap_ref(exprData).getC1();
+        }
 
-		Reference getC2() {
-			return boost::unwrap_ref(exprData).getC2();
-		}
-	
-		Reference getC3() {
-			return boost::unwrap_ref(exprData).getC3();
-		}
-	
-		Reference getC4() {
-			return boost::unwrap_ref(exprData).getC4();
-		}
+        Reference getC2() {
+            return boost::unwrap_ref(exprData).getC2();
+        }
+    
+        Reference getC3() {
+            return boost::unwrap_ref(exprData).getC3();
+        }
+    
+        Reference getC4() {
+            return boost::unwrap_ref(exprData).getC4();
+        }
 
-		void set(const ValueType& c1, const ValueType& c2, const ValueType& c3, const ValueType& c4) {
-			boost::unwrap_ref(exprData).set(c1, c2, c3, c4);
-		}
+        void set(const ValueType& c1, const ValueType& c2, const ValueType& c3, const ValueType& c4) {
+            boost::unwrap_ref(exprData).set(c1, c2, c3, c4);
+        }
 
-		QuaternionExpressionAdapter& operator=(const ConstExpressionType& e) {
-			if (this == &e)
-				return *this;
+        QuaternionExpressionAdapter& operator=(const ConstExpressionType& e) {
+            if (this == &e)
+                return *this;
 
-			boost::unwrap_ref(exprData) = e;
-			return *this;
-		}
+            boost::unwrap_ref(exprData) = e;
+            return *this;
+        }
 
-		QuaternionExpressionAdapter& operator+=(const ConstExpressionType& e) {
-			boost::unwrap_ref(exprData) += e;
-			return *this;
-		}
-		
-		QuaternionExpressionAdapter& operator-=(const ConstExpressionType& e) {
-			boost::unwrap_ref(exprData) -= e;
-			return *this;
-		}
+        QuaternionExpressionAdapter& operator+=(const ConstExpressionType& e) {
+            boost::unwrap_ref(exprData) += e;
+            return *this;
+        }
+        
+        QuaternionExpressionAdapter& operator-=(const ConstExpressionType& e) {
+            boost::unwrap_ref(exprData) -= e;
+            return *this;
+        }
 
-		QuaternionExpressionAdapter& operator*=(const ConstExpressionType& e) {
-			boost::unwrap_ref(exprData) *= e;
-			return *this;
-		}
-		
-		QuaternionExpressionAdapter& operator/=(const ConstExpressionType& e) {
-			boost::unwrap_ref(exprData) /= e;
-			return *this;
-		}
-		
-		QuaternionExpressionAdapter& operator+=(const ValueType& t) {
-			boost::unwrap_ref(exprData) += t;
-			return *this;
-		}
-		
-		QuaternionExpressionAdapter& operator-=(const ValueType& t) {
-			boost::unwrap_ref(exprData) -= t;
-			return *this;
-		}
+        QuaternionExpressionAdapter& operator*=(const ConstExpressionType& e) {
+            boost::unwrap_ref(exprData) *= e;
+            return *this;
+        }
+        
+        QuaternionExpressionAdapter& operator/=(const ConstExpressionType& e) {
+            boost::unwrap_ref(exprData) /= e;
+            return *this;
+        }
+        
+        QuaternionExpressionAdapter& operator+=(const ValueType& t) {
+            boost::unwrap_ref(exprData) += t;
+            return *this;
+        }
+        
+        QuaternionExpressionAdapter& operator-=(const ValueType& t) {
+            boost::unwrap_ref(exprData) -= t;
+            return *this;
+        }
 
-		QuaternionExpressionAdapter& operator*=(const ValueType& t) {
-			boost::unwrap_ref(exprData) *= t;
-			return *this;
-		}
-		
-		QuaternionExpressionAdapter& operator/=(const ValueType& t) {
-			boost::unwrap_ref(exprData) /= t;
-			return *this;
-		}
+        QuaternionExpressionAdapter& operator*=(const ValueType& t) {
+            boost::unwrap_ref(exprData) *= t;
+            return *this;
+        }
+        
+        QuaternionExpressionAdapter& operator/=(const ValueType& t) {
+            boost::unwrap_ref(exprData) /= t;
+            return *this;
+        }
 
-	protected:
-		HeldExpressionDataType exprData;
-		KeepAliveWardDataType  keepAliveWardData;
-	};
+    protected:
+        HeldExpressionDataType exprData;
+        KeepAliveWardDataType  keepAliveWardData;
+    };
 
-	template <typename EDT, typename WDT>
-	inline
-	typename ConstQuaternionExpressionAdapter<EDT, WDT>::ConstExpressionPointer 
-	makeConstQuaternionExpressionAdapter(const EDT& e, const WDT& ward)
-	{
-		typedef typename ConstQuaternionExpressionAdapter<EDT, WDT>::ConstExpressionPointer ExpressionPointerType;
+    template <typename EDT, typename WDT>
+    inline
+    typename ConstQuaternionExpressionAdapter<EDT, WDT>::ConstExpressionPointer 
+    makeConstQuaternionExpressionAdapter(const EDT& e, const WDT& ward)
+    {
+        typedef typename ConstQuaternionExpressionAdapter<EDT, WDT>::ConstExpressionPointer ExpressionPointerType;
 
-		return ExpressionPointerType(new ConstQuaternionExpressionAdapter<EDT, WDT>(e, ward));
-	}
+        return ExpressionPointerType(new ConstQuaternionExpressionAdapter<EDT, WDT>(e, ward));
+    }
 
-	template <typename EDT, typename WDT>
-	inline
-	typename QuaternionExpressionAdapter<EDT, WDT>::ExpressionPointer 
-	makeQuaternionExpressionAdapter(const EDT& e, const WDT& ward)
-	{
-		typedef typename QuaternionExpressionAdapter<EDT, WDT>::ExpressionPointer ExpressionPointerType;
+    template <typename EDT, typename WDT>
+    inline
+    typename QuaternionExpressionAdapter<EDT, WDT>::ExpressionPointer 
+    makeQuaternionExpressionAdapter(const EDT& e, const WDT& ward)
+    {
+        typedef typename QuaternionExpressionAdapter<EDT, WDT>::ExpressionPointer ExpressionPointerType;
 
-		return ExpressionPointerType(new QuaternionExpressionAdapter<EDT, WDT>(e, ward));
-	}
+        return ExpressionPointerType(new QuaternionExpressionAdapter<EDT, WDT>(e, ward));
+    }
 }
 
 #endif // CDPL_PYTHON_MATH_QUATERNIONEXPRESSIONADAPTER_HPP

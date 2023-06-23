@@ -44,96 +44,96 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94AromaticAtomTypeDefinitionTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94AromaticAtomTypeDefinitionTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::vector<Entry> DataStorage;
+          private:
+            typedef std::vector<Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
 
-			typedef DataStorage::const_iterator ConstEntryIterator;
-			typedef DataStorage::iterator EntryIterator;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+            typedef DataStorage::const_iterator ConstEntryIterator;
+            typedef DataStorage::iterator EntryIterator;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
-					  std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
+              public:
+                Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
+                      std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
-				const std::string& getOldAtomType() const;
-				
-				const std::string& getAromAtomType() const;
-				
-				unsigned int getAtomicNumber() const;
+                const std::string& getOldAtomType() const;
+                
+                const std::string& getAromAtomType() const;
+                
+                unsigned int getAtomicNumber() const;
 
-				std::size_t getRingSize() const;
+                std::size_t getRingSize() const;
 
-				std::size_t getHeteroAtomDistance() const;
+                std::size_t getHeteroAtomDistance() const;
 
-				bool isImidazoliumCation() const;
+                bool isImidazoliumCation() const;
 
-				bool isN5RingAnion() const;
+                bool isN5RingAnion() const;
 
-			  private:
-				std::string   oldType;
-				std::string   aroType;
-				unsigned int  atomicNumber; 
-				std::size_t   ringSize;
-				std::size_t   hetAtomDist;
-				bool          imCation;
-				bool          n5Anion;
-			};			
+              private:
+                std::string   oldType;
+                std::string   aroType;
+                unsigned int  atomicNumber; 
+                std::size_t   ringSize;
+                std::size_t   hetAtomDist;
+                bool          imCation;
+                bool          n5Anion;
+            };            
 
-			MMFF94AromaticAtomTypeDefinitionTable();
+            MMFF94AromaticAtomTypeDefinitionTable();
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void addEntry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
-						  std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
+            void addEntry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
+                          std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
-			const Entry& getEntry(std::size_t idx) const;
+            const Entry& getEntry(std::size_t idx) const;
 
-			void clear();
+            void clear();
 
-			void removeEntry(std::size_t idx);
+            void removeEntry(std::size_t idx);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
-			
-			void load(std::istream& is);
+            EntryIterator end();
+            
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
-	}
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
+    }
 }
 
 #endif // CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP

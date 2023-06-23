@@ -44,80 +44,80 @@ using namespace CDPL;
 
 unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgraph)
 {
-	using namespace std::placeholders;
+    using namespace std::placeholders;
 
-	std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
+    std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
-		return MDLParity::NONE;
+        return MDLParity::NONE;
 
     if (getHybridizationState(atom) != HybridizationState::SP3)
-		return MDLParity::NONE;
+        return MDLParity::NONE;
 
     if (getAromaticityFlag(atom))
-		return MDLParity::NONE;
+        return MDLParity::NONE;
 
-	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
-		return MDLParity::NONE;
+    if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
+        return MDLParity::NONE;
 
     const Atom* ordered_nbrs[4];
     const Atom* ordinary_h_nbr = 0;
 
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
     std::size_t i = 0;
 
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+        const Atom& nbr_atom = *a_it;
 
-		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*b_it))
-			continue;
+        if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*b_it))
+            continue;
 
-		if (Internal::isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
-			if (ordinary_h_nbr) 
-				return MDLParity::NONE;
+        if (Internal::isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
+            if (ordinary_h_nbr) 
+                return MDLParity::NONE;
 
-			ordinary_h_nbr = &nbr_atom;
-			continue;
-		}
+            ordinary_h_nbr = &nbr_atom;
+            continue;
+        }
 
-		ordered_nbrs[i++] = &nbr_atom;
+        ordered_nbrs[i++] = &nbr_atom;
     }
 
     if (ordinary_h_nbr) {
-		if (i != 3) // sanity check
-			return MDLParity::NONE;
+        if (i != 3) // sanity check
+            return MDLParity::NONE;
 
-		ordered_nbrs[3] = ordinary_h_nbr;
+        ordered_nbrs[3] = ordinary_h_nbr;
     }
 
     std::sort(ordered_nbrs, ordered_nbrs + i,
-			  std::bind(std::less<std::size_t>(),
-						std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
-						std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
+              std::bind(std::less<std::size_t>(),
+                        std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
+                                  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
+                        std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
+                                  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
 
     const StereoDescriptor stereo_desc = getStereoDescriptor(atom);
     unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2]) :
-								stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2], *ordered_nbrs[3]));
+                                stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2], *ordered_nbrs[3]));
 
     if (perm_parity != 1 && perm_parity != 2)
-		return MDLParity::UNDEF;
+        return MDLParity::UNDEF;
 
     switch (stereo_desc.getConfiguration()) {
 
-		case AtomConfiguration::R:
-			return (perm_parity == 2 ? MDLParity::ODD : MDLParity::EVEN);
+        case AtomConfiguration::R:
+            return (perm_parity == 2 ? MDLParity::ODD : MDLParity::EVEN);
 
-		case AtomConfiguration::S:
-			return (perm_parity == 2 ? MDLParity::EVEN : MDLParity::ODD);
+        case AtomConfiguration::S:
+            return (perm_parity == 2 ? MDLParity::EVEN : MDLParity::ODD);
 
-		case AtomConfiguration::EITHER:
-			return MDLParity::EITHER;
+        case AtomConfiguration::EITHER:
+            return MDLParity::EITHER;
 
-		default:
-			return MDLParity::UNDEF;
+        default:
+            return MDLParity::UNDEF;
     }
 }
-	
+    

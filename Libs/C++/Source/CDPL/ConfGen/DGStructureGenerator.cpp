@@ -36,31 +36,31 @@ using namespace CDPL;
 
 
 ConfGen::DGStructureGenerator::DGStructureGenerator(): 
-	molGraph(0), settings(DGStructureGeneratorSettings::DEFAULT)
+    molGraph(0), settings(DGStructureGeneratorSettings::DEFAULT)
 {
-	phase1CoordsGen.setNumCycles(70);
-	phase1CoordsGen.setCycleStepCountFactor(1.3);
-	phase1CoordsGen.setStartLearningRate(1.0);
-	phase1CoordsGen.setLearningRateDecrement(0.9 / 70);
+    phase1CoordsGen.setNumCycles(70);
+    phase1CoordsGen.setCycleStepCountFactor(1.3);
+    phase1CoordsGen.setStartLearningRate(1.0);
+    phase1CoordsGen.setLearningRateDecrement(0.9 / 70);
 }
 
 ConfGen::DGStructureGeneratorSettings& ConfGen::DGStructureGenerator::getSettings()
 {
-	return settings;
+    return settings;
 }
 
 const ConfGen::DGStructureGeneratorSettings& ConfGen::DGStructureGenerator::getSettings() const
 {
-	return settings;
+    return settings;
 }
 
 const Util::BitSet& ConfGen::DGStructureGenerator::getExcludedHydrogenMask() const
 {
-	return dgConstraintsGen.getExcludedHydrogenMask();
+    return dgConstraintsGen.getExcludedHydrogenMask();
 }
 
 void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, 
-										  const ForceField::MMFF94InteractionData& ia_data)
+                                          const ForceField::MMFF94InteractionData& ia_data)
 {
     setup(molgraph, &ia_data);
 }
@@ -72,65 +72,65 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph)
 
 std::size_t ConfGen::DGStructureGenerator::getNumAtomStereoCenters() const
 {
-	return dgConstraintsGen.getNumAtomStereoCenters();
+    return dgConstraintsGen.getNumAtomStereoCenters();
 }
 
 std::size_t ConfGen::DGStructureGenerator::getNumBondStereoCenters() const
 {
-	return dgConstraintsGen.getNumBondStereoCenters();
+    return dgConstraintsGen.getNumBondStereoCenters();
 }
 
 bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
 {
     if (!molGraph)
-		return false;
+        return false;
 
-	std::size_t num_atoms = molGraph->getNumAtoms();
-	const Util::BitSet& x_h_mask = dgConstraintsGen.getExcludedHydrogenMask();
+    std::size_t num_atoms = molGraph->getNumAtoms();
+    const Util::BitSet& x_h_mask = dgConstraintsGen.getExcludedHydrogenMask();
 
-	coords.resize(num_atoms);
+    coords.resize(num_atoms);
 
-	boost::random::uniform_real_distribution<double> coord_dist(-settings.getBoxSize() * 0.5, settings.getBoxSize() * 0.5);
+    boost::random::uniform_real_distribution<double> coord_dist(-settings.getBoxSize() * 0.5, settings.getBoxSize() * 0.5);
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		if (x_h_mask.test(i))
-			continue;
-		
-		Math::Vector3D::Pointer pos = coords[i].getData();
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        if (x_h_mask.test(i))
+            continue;
+        
+        Math::Vector3D::Pointer pos = coords[i].getData();
 
-		pos[0] = coord_dist(randomEngine);
-		pos[1] = coord_dist(randomEngine);
-		pos[2] = coord_dist(randomEngine);
-	}
+        pos[0] = coord_dist(randomEngine);
+        pos[1] = coord_dist(randomEngine);
+        pos[2] = coord_dist(randomEngine);
+    }
 
     phase1CoordsGen.generate(molGraph->getNumAtoms(), coords.getData());
 
-	if (settings.enablePlanarityConstraints()) 
-		phase2CoordsGen.generate(molGraph->getNumAtoms(), coords.getData());
-	
-	if (settings.regardAtomConfiguration() && !checkAtomConfigurations(coords))
-		return false;
+    if (settings.enablePlanarityConstraints()) 
+        phase2CoordsGen.generate(molGraph->getNumAtoms(), coords.getData());
+    
+    if (settings.regardAtomConfiguration() && !checkAtomConfigurations(coords))
+        return false;
 
-	if (settings.regardBondConfiguration() && !checkBondConfigurations(coords))
-		return false;
+    if (settings.regardBondConfiguration() && !checkBondConfigurations(coords))
+        return false;
 
     return true;
 }
 
 void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph, 
-										  const ForceField::MMFF94InteractionData* ia_data)
+                                          const ForceField::MMFF94InteractionData* ia_data)
 {
     molGraph = &molgraph;
-	dgConstraintsGen.getSettings() = settings;
+    dgConstraintsGen.getSettings() = settings;
 
     if (ia_data)
-		dgConstraintsGen.setup(molgraph, *ia_data);
+        dgConstraintsGen.setup(molgraph, *ia_data);
     else
-		dgConstraintsGen.setup(molgraph);
+        dgConstraintsGen.setup(molgraph);
 
-	phase1CoordsGen.clearDistanceConstraints();
+    phase1CoordsGen.clearDistanceConstraints();
     phase1CoordsGen.clearVolumeConstraints();
-	phase1CoordsGen.setRandomSeed(170375);
+    phase1CoordsGen.setRandomSeed(170375);
 
     dgConstraintsGen.addBondLengthConstraints(phase1CoordsGen);
     dgConstraintsGen.addBondAngleConstraints(phase1CoordsGen);
@@ -141,51 +141,51 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph,
     
     phase1CoordsGen.orderDistanceConstraints();
 
-	if (settings.enablePlanarityConstraints()) {
-		phase2CoordsGen = phase1CoordsGen;
+    if (settings.enablePlanarityConstraints()) {
+        phase2CoordsGen = phase1CoordsGen;
 
-		dgConstraintsGen.addAtomPlanarityConstraints(phase2CoordsGen);	 
-		dgConstraintsGen.addBondPlanarityConstraints(phase2CoordsGen);
+        dgConstraintsGen.addAtomPlanarityConstraints(phase2CoordsGen);     
+        dgConstraintsGen.addBondPlanarityConstraints(phase2CoordsGen);
 
-	} else {
-		phase2CoordsGen.clearVolumeConstraints();
-		phase2CoordsGen.clearDistanceConstraints();
-	}
+    } else {
+        phase2CoordsGen.clearVolumeConstraints();
+        phase2CoordsGen.clearDistanceConstraints();
+    }
 
-	randomEngine.seed(170375);
+    randomEngine.seed(170375);
 }
 
 bool ConfGen::DGStructureGenerator::checkAtomConfigurations(Math::Vector3DArray& coords) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getAtomStereoCenterDataBegin(),
-			 end = dgConstraintsGen.getAtomStereoCenterDataEnd(); it != end; ++it) {
+    for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getAtomStereoCenterDataBegin(),
+             end = dgConstraintsGen.getAtomStereoCenterDataEnd(); it != end; ++it) {
 
-		const DGConstraintGenerator::StereoCenterData& sc_data = *it;
+        const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-		if (calcAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration()) 
-			return false;
-	}
+        if (calcAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration()) 
+            return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool ConfGen::DGStructureGenerator::checkBondConfigurations(Math::Vector3DArray& coords) const
 {
-	for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getBondStereoCenterDataBegin(),
-			 end = dgConstraintsGen.getBondStereoCenterDataEnd(); it != end; ++it) {
+    for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getBondStereoCenterDataBegin(),
+             end = dgConstraintsGen.getBondStereoCenterDataEnd(); it != end; ++it) {
 
-		const DGConstraintGenerator::StereoCenterData& sc_data = *it;
+        const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-		if (calcBondConfiguration(molGraph->getBond(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
-			return false;
-	}
+        if (calcBondConfiguration(molGraph->getBond(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
+            return false;
+    }
 
-	return true;
+    return true;
 }
 
 const ConfGen::DGConstraintGenerator& ConfGen::DGStructureGenerator::getConstraintGenerator() const
 {
-	return dgConstraintsGen;
+    return dgConstraintsGen;
 }

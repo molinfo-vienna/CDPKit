@@ -32,88 +32,88 @@
 
 BOOST_AUTO_TEST_CASE(DereferencerTest)
 {
-	using namespace CDPL;
-	using namespace Util;
+    using namespace CDPL;
+    using namespace Util;
 
-	int data = 5;
-	int* data_ptr = &data;
+    int data = 5;
+    int* data_ptr = &data;
 
-	std::shared_ptr<int> shared_ptr(new int(6));
-
-//------
-
-	Dereferencer<int*, int> deref1;
-
-	BOOST_CHECK(data == deref1(data_ptr));
+    std::shared_ptr<int> shared_ptr(new int(6));
 
 //------
 
-	Dereferencer<int*, int&> deref2;
+    Dereferencer<int*, int> deref1;
 
-	BOOST_CHECK(&deref2(data_ptr) == data_ptr);
-	BOOST_CHECK(data == deref2(data_ptr));
-
-	deref2(data_ptr) = 3;
-
-	BOOST_CHECK(data == 3);
+    BOOST_CHECK(data == deref1(data_ptr));
 
 //------
 
-	Dereferencer<std::shared_ptr<int>, int> deref3;
+    Dereferencer<int*, int&> deref2;
 
-	BOOST_CHECK(*shared_ptr == deref3(shared_ptr));
+    BOOST_CHECK(&deref2(data_ptr) == data_ptr);
+    BOOST_CHECK(data == deref2(data_ptr));
+
+    deref2(data_ptr) = 3;
+
+    BOOST_CHECK(data == 3);
 
 //------
 
-	Dereferencer<std::shared_ptr<int>, int&> deref4;
+    Dereferencer<std::shared_ptr<int>, int> deref3;
 
-	BOOST_CHECK(&deref4(shared_ptr) == shared_ptr.get());
-	BOOST_CHECK(*shared_ptr == deref4(shared_ptr));
+    BOOST_CHECK(*shared_ptr == deref3(shared_ptr));
 
-	deref4(shared_ptr) = 2;
+//------
 
-	BOOST_CHECK(*shared_ptr == 2);
+    Dereferencer<std::shared_ptr<int>, int&> deref4;
+
+    BOOST_CHECK(&deref4(shared_ptr) == shared_ptr.get());
+    BOOST_CHECK(*shared_ptr == deref4(shared_ptr));
+
+    deref4(shared_ptr) = 2;
+
+    BOOST_CHECK(*shared_ptr == 2);
 
 //---------------
 
-	NullCheckDereferencer<int*, int> deref5;
+    NullCheckDereferencer<int*, int> deref5;
 
-	BOOST_CHECK_THROW(deref5(0), Base::NullPointerException);
+    BOOST_CHECK_THROW(deref5(0), Base::NullPointerException);
 
-	BOOST_CHECK(data == deref5(data_ptr));
-
-//------
-
-	NullCheckDereferencer<int*, int&> deref6;
-
-	BOOST_CHECK_THROW(deref6(0), Base::NullPointerException);
-
-	BOOST_CHECK(&deref6(data_ptr) == data_ptr);
-	BOOST_CHECK(data == deref6(data_ptr));
-
-	deref6(data_ptr) = 3;
-
-	BOOST_CHECK(data == 3);
+    BOOST_CHECK(data == deref5(data_ptr));
 
 //------
 
-	NullCheckDereferencer<std::shared_ptr<int>, int> deref7;
+    NullCheckDereferencer<int*, int&> deref6;
 
-	BOOST_CHECK_THROW(deref7(std::shared_ptr<int>()), Base::NullPointerException);
+    BOOST_CHECK_THROW(deref6(0), Base::NullPointerException);
 
-	BOOST_CHECK(*shared_ptr == deref7(shared_ptr));
+    BOOST_CHECK(&deref6(data_ptr) == data_ptr);
+    BOOST_CHECK(data == deref6(data_ptr));
+
+    deref6(data_ptr) = 3;
+
+    BOOST_CHECK(data == 3);
 
 //------
 
-	NullCheckDereferencer<std::shared_ptr<int>, int&> deref8;
+    NullCheckDereferencer<std::shared_ptr<int>, int> deref7;
 
-	BOOST_CHECK_THROW(deref8(std::shared_ptr<int>()), Base::NullPointerException);
+    BOOST_CHECK_THROW(deref7(std::shared_ptr<int>()), Base::NullPointerException);
 
-	BOOST_CHECK(&deref8(shared_ptr) == shared_ptr.get());
-	BOOST_CHECK(*shared_ptr == deref8(shared_ptr));
+    BOOST_CHECK(*shared_ptr == deref7(shared_ptr));
 
-	deref8(shared_ptr) = 9;
+//------
 
-	BOOST_CHECK(*shared_ptr == 9);
+    NullCheckDereferencer<std::shared_ptr<int>, int&> deref8;
+
+    BOOST_CHECK_THROW(deref8(std::shared_ptr<int>()), Base::NullPointerException);
+
+    BOOST_CHECK(&deref8(shared_ptr) == shared_ptr.get());
+    BOOST_CHECK(*shared_ptr == deref8(shared_ptr));
+
+    deref8(shared_ptr) = 9;
+
+    BOOST_CHECK(*shared_ptr == 9);
 }
 

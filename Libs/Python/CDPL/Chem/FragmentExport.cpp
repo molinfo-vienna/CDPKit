@@ -40,79 +40,79 @@
 namespace
 {
 
-	bool addAtom(CDPL::Chem::Fragment& frag, CDPL::Chem::Atom& atom)
-	{
-		return frag.addAtom(atom);
-	}
+    bool addAtom(CDPL::Chem::Fragment& frag, CDPL::Chem::Atom& atom)
+    {
+        return frag.addAtom(atom);
+    }
 
-	bool addBond(CDPL::Chem::Fragment& frag, CDPL::Chem::Bond& bond)
-	{
-		return frag.addBond(bond);
-	}
+    bool addBond(CDPL::Chem::Fragment& frag, CDPL::Chem::Bond& bond)
+    {
+        return frag.addBond(bond);
+    }
 
-	bool removeAtom(CDPL::Chem::Fragment& frag, CDPL::Chem::Atom& atom)
-	{
-		return frag.removeAtom(atom);
-	}
+    bool removeAtom(CDPL::Chem::Fragment& frag, CDPL::Chem::Atom& atom)
+    {
+        return frag.removeAtom(atom);
+    }
 
-	bool removeBond(CDPL::Chem::Fragment& frag, CDPL::Chem::Bond& bond)
-	{
-		return frag.removeBond(bond);
-	}
+    bool removeBond(CDPL::Chem::Fragment& frag, CDPL::Chem::Bond& bond)
+    {
+        return frag.removeBond(bond);
+    }
 }
 
 
 void CDPLPythonChem::exportFragment()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	void (Chem::Fragment::*removeAtomFunc)(std::size_t) = &Chem::Fragment::removeAtom;
-	void (Chem::Fragment::*removeBondFunc)(std::size_t) = &Chem::Fragment::removeBond;
+    void (Chem::Fragment::*removeAtomFunc)(std::size_t) = &Chem::Fragment::removeAtom;
+    void (Chem::Fragment::*removeBondFunc)(std::size_t) = &Chem::Fragment::removeBond;
 
-	Chem::Fragment& (Chem::Fragment::*copyMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::Fragment::operator=;
-	Chem::Fragment& (Chem::Fragment::*copyFragFunc)(const Chem::Fragment&) = &Chem::Fragment::operator=;
+    Chem::Fragment& (Chem::Fragment::*copyMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::Fragment::operator=;
+    Chem::Fragment& (Chem::Fragment::*copyFragFunc)(const Chem::Fragment&) = &Chem::Fragment::operator=;
 
-	python::scope scope = python::class_<Chem::Fragment, Chem::Fragment::SharedPointer, 
-										 python::bases<Chem::MolecularGraph> >("Fragment", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Fragment&>((python::arg("self"), python::arg("frag")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("assign", copyFragFunc, (python::arg("self"), python::arg("frag")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("assign", copyMolGraphFunc, (python::arg("self"), python::arg("molgraph")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("addAtom", &addAtom, (python::arg("self"), python::arg("atom")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("removeAtom", removeAtomFunc, (python::arg("self"), python::arg("idx")))
-		.def("removeAtom", &removeAtom, (python::arg("self"), python::arg("atom")))
-		.def("addBond", &addBond, (python::arg("self"), python::arg("bond")), 
-			 python::with_custodian_and_ward<1, 2>())
-		.def("removeBond", removeBondFunc, (python::arg("self"), python::arg("idx")))
-		.def("removeBond", &removeBond, (python::arg("self"), python::arg("bond")))
-		.def("clear", &Chem::Fragment::clear, python::arg("self"))
-		.def("swap", static_cast<void (Chem::Fragment::*)(Chem::Fragment&)>(&Chem::Fragment::swap), (python::arg("self"), python::arg("frag")))
-		.def("getAtoms", &createMutableAtomSequence<Chem::Fragment>, python::arg("self"),
-			 python::with_custodian_and_ward_postcall<0, 1>())
-		.def("getBonds", &createMutableBondSequence<Chem::Fragment>, python::arg("self"),
-			 python::with_custodian_and_ward_postcall<0, 1>())
-		.def("reserveMemoryForAtoms", &Chem::Fragment::reserveMemoryForAtoms, (python::arg("self"), python::arg("num_atoms")))
-		.def("reserveMemoryForBonds", &Chem::Fragment::reserveMemoryForBonds, (python::arg("self"), python::arg("num_bonds")))
-		.def(AtomContainerSpecialFunctionsVisitor(true))
-		.def(BondContainerSpecialFunctionsVisitor(true))
-		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
-		.def("__iadd__", &Chem::Fragment::operator+=, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("__isub__", &Chem::Fragment::operator-=, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_self<>())
-		.add_property("atoms", python::make_function(&createMutableAtomSequence<Chem::Fragment>,
-													 python::with_custodian_and_ward_postcall<0, 1>()))
-		.add_property("bonds", python::make_function(&createMutableBondSequence<Chem::Fragment>,
-													 python::with_custodian_and_ward_postcall<0, 1>()));
+    python::scope scope = python::class_<Chem::Fragment, Chem::Fragment::SharedPointer, 
+                                         python::bases<Chem::MolecularGraph> >("Fragment", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::Fragment&>((python::arg("self"), python::arg("frag")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("assign", copyFragFunc, (python::arg("self"), python::arg("frag")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("assign", copyMolGraphFunc, (python::arg("self"), python::arg("molgraph")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("addAtom", &addAtom, (python::arg("self"), python::arg("atom")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("removeAtom", removeAtomFunc, (python::arg("self"), python::arg("idx")))
+        .def("removeAtom", &removeAtom, (python::arg("self"), python::arg("atom")))
+        .def("addBond", &addBond, (python::arg("self"), python::arg("bond")), 
+             python::with_custodian_and_ward<1, 2>())
+        .def("removeBond", removeBondFunc, (python::arg("self"), python::arg("idx")))
+        .def("removeBond", &removeBond, (python::arg("self"), python::arg("bond")))
+        .def("clear", &Chem::Fragment::clear, python::arg("self"))
+        .def("swap", static_cast<void (Chem::Fragment::*)(Chem::Fragment&)>(&Chem::Fragment::swap), (python::arg("self"), python::arg("frag")))
+        .def("getAtoms", &createMutableAtomSequence<Chem::Fragment>, python::arg("self"),
+             python::with_custodian_and_ward_postcall<0, 1>())
+        .def("getBonds", &createMutableBondSequence<Chem::Fragment>, python::arg("self"),
+             python::with_custodian_and_ward_postcall<0, 1>())
+        .def("reserveMemoryForAtoms", &Chem::Fragment::reserveMemoryForAtoms, (python::arg("self"), python::arg("num_atoms")))
+        .def("reserveMemoryForBonds", &Chem::Fragment::reserveMemoryForBonds, (python::arg("self"), python::arg("num_bonds")))
+        .def(AtomContainerSpecialFunctionsVisitor(true))
+        .def(BondContainerSpecialFunctionsVisitor(true))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .def("__iadd__", &Chem::Fragment::operator+=, (python::arg("self"), python::arg("molgraph")), 
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("__isub__", &Chem::Fragment::operator-=, (python::arg("self"), python::arg("molgraph")), 
+             python::return_self<>())
+        .add_property("atoms", python::make_function(&createMutableAtomSequence<Chem::Fragment>,
+                                                     python::with_custodian_and_ward_postcall<0, 1>()))
+        .add_property("bonds", python::make_function(&createMutableBondSequence<Chem::Fragment>,
+                                                     python::with_custodian_and_ward_postcall<0, 1>()));
 
-	MutableAtomSequenceExport<Chem::Fragment>("AtomSequence");
-	MutableBondSequenceExport<Chem::Fragment>("BondSequence");
+    MutableAtomSequenceExport<Chem::Fragment>("AtomSequence");
+    MutableBondSequenceExport<Chem::Fragment>("BondSequence");
 }
 

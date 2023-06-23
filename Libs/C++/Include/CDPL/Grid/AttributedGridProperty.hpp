@@ -38,20 +38,20 @@ namespace CDPL
     namespace Base
     {
 
-		class LookupKey;
+        class LookupKey;
     }
 
     namespace Grid
     {
 
-		/**
-		 * \brief Provides keys for built-in Grid::AttributedGrid properties.
-		 */
-		namespace AttributedGridProperty
-		{
+        /**
+         * \brief Provides keys for built-in Grid::AttributedGrid properties.
+         */
+        namespace AttributedGridProperty
+        {
 
-			extern CDPL_GRID_API const Base::LookupKey NAME; 
-		}
+            extern CDPL_GRID_API const Base::LookupKey NAME; 
+        }
     }
 }
 

@@ -39,56 +39,56 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
+        class MolecularGraph;
 
-		/**
-		 * \brief Implements the perception of aromatic rings in a molecular graph.
-		 */
-		class CDPL_CHEM_API AromaticRingSet : public FragmentList 
-		{
+        /**
+         * \brief Implements the perception of aromatic rings in a molecular graph.
+         */
+        class CDPL_CHEM_API AromaticRingSet : public FragmentList 
+        {
 
-		public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticRingSet instances.
-			 */
-			typedef std::shared_ptr<AromaticRingSet> SharedPointer;
+        public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticRingSet instances.
+             */
+            typedef std::shared_ptr<AromaticRingSet> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %AromaticRingSet instance.
-			 */
-			AromaticRingSet() {}
+            /**
+             * \brief Constructs an empty \c %AromaticRingSet instance.
+             */
+            AromaticRingSet() {}
 
-			/**
-			 * \brief Construct a \c %AromaticRingSet instance that contains all aromatic rings of the
-			 *        molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive the aromatic rings.
-			 */
-			AromaticRingSet(const MolecularGraph& molgraph);
+            /**
+             * \brief Construct a \c %AromaticRingSet instance that contains all aromatic rings of the
+             *        molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the aromatic rings.
+             */
+            AromaticRingSet(const MolecularGraph& molgraph);
 
-			/**
-			 * \brief Replaces the current set of rings by the aromatic rings of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive the aromatic rings.
-			 */
-			void perceive(const MolecularGraph& molgraph);
+            /**
+             * \brief Replaces the current set of rings by the aromatic rings of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the aromatic rings.
+             */
+            void perceive(const MolecularGraph& molgraph);
 
-		private:
-			AromaticRingSet(const AromaticRingSet&);
+        private:
+            AromaticRingSet(const AromaticRingSet&);
 
-			AromaticRingSet& operator=(const AromaticRingSet&);
+            AromaticRingSet& operator=(const AromaticRingSet&);
 
-			void init(const MolecularGraph&);
+            void init(const MolecularGraph&);
 
-			void findAromaticRings();
+            void findAromaticRings();
 
-			bool isAromatic(const Fragment::SharedPointer&);
-		
-			Util::BitSet          aromBondMask;
-			const MolecularGraph* molGraph;
-		};
-	}
+            bool isAromatic(const Fragment::SharedPointer&);
+        
+            Util::BitSet          aromBondMask;
+            const MolecularGraph* molGraph;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_AROMATICRINGSET_HPP

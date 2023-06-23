@@ -41,66 +41,66 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief HBondingInteractionScore.
-		 */
-		class CDPL_PHARM_API HBondingInteractionScore : public FeatureInteractionScore
-		{
+        /**
+         * \brief HBondingInteractionScore.
+         */
+        class CDPL_PHARM_API HBondingInteractionScore : public FeatureInteractionScore
+        {
 
-		  public:
-			static constexpr double DEF_MIN_HB_LENGTH = 1.2;
-			static constexpr double DEF_MAX_HB_LENGTH = 2.8;
-			static constexpr double DEF_MIN_AHD_ANGLE = 150.0;
-			static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
+          public:
+            static constexpr double DEF_MIN_HB_LENGTH = 1.2;
+            static constexpr double DEF_MAX_HB_LENGTH = 2.8;
+            static constexpr double DEF_MIN_AHD_ANGLE = 150.0;
+            static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
 
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondingInteractionScore instances.
-			 */
-			typedef std::shared_ptr<HBondingInteractionScore> SharedPointer;
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondingInteractionScore instances.
+             */
+            typedef std::shared_ptr<HBondingInteractionScore> SharedPointer;
 
-			typedef std::function<double(double)> DistanceScoringFunction;
-			typedef std::function<double(double)> AngleScoringFunction;
+            typedef std::function<double(double)> DistanceScoringFunction;
+            typedef std::function<double(double)> AngleScoringFunction;
 
-			/**
-			 * \brief Constructs a \c %HBondingInteractionScore functor with the specified constraints.
-			 * \param don_acc \c true if the first feature argument represents the donor- and the second one
-			 *                the acceptor-feature, and \c false otherwise.
-			 * \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
-			 * \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
-			 * \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
-			 * \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
-			 */
-			HBondingInteractionScore(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
-									 double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE);
+            /**
+             * \brief Constructs a \c %HBondingInteractionScore functor with the specified constraints.
+             * \param don_acc \c true if the first feature argument represents the donor- and the second one
+             *                the acceptor-feature, and \c false otherwise.
+             * \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+             * \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+             * \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
+             * \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
+             */
+            HBondingInteractionScore(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
+                                     double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE);
 
-			double getMinLength() const;
+            double getMinLength() const;
 
-			double getMaxLength() const;
+            double getMaxLength() const;
 
-			double getMinAHDAngle() const;
+            double getMinAHDAngle() const;
 
-			double getMaxAcceptorAngle() const;
+            double getMaxAcceptorAngle() const;
 
-			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+            void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
-			void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
+            void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
 
-			void setAHDAngleScoringFunction(const AngleScoringFunction& func);
+            void setAHDAngleScoringFunction(const AngleScoringFunction& func);
 
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
+            double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
-		  private:
-			bool                    donAccOrder;
-			double                  minLength;
-			double                  maxLength;
-			double                  minAHDAngle;
-			double                  maxAccAngle;
-			DistanceScoringFunction distScoringFunc;
-			AngleScoringFunction    accAngleScoringFunc;
-			AngleScoringFunction    ahdAngleScoringFunc;
-		};
+          private:
+            bool                    donAccOrder;
+            double                  minLength;
+            double                  maxLength;
+            double                  minAHDAngle;
+            double                  maxAccAngle;
+            DistanceScoringFunction distScoringFunc;
+            AngleScoringFunction    accAngleScoringFunc;
+            AngleScoringFunction    ahdAngleScoringFunc;
+        };
     }
 }
 

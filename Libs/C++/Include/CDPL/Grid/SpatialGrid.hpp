@@ -36,38 +36,38 @@
 namespace CDPL
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		/**
-		 * \brief SpatialGrid.
-		 */
-		template <typename T, typename CVT = T> 
-		class SpatialGrid : public AttributedGrid
-		{
+        /**
+         * \brief SpatialGrid.
+         */
+        template <typename T, typename CVT = T> 
+        class SpatialGrid : public AttributedGrid
+        {
 
-		public:
-			typedef std::shared_ptr<SpatialGrid> SharedPointer;
-			typedef T ValueType;
-			typedef CVT CoordinatesValueType;
-			typedef Math::CVector<CVT, 3> CoordinatesType;
-			
-			virtual ValueType& operator()(std::size_t i) = 0;
+        public:
+            typedef std::shared_ptr<SpatialGrid> SharedPointer;
+            typedef T ValueType;
+            typedef CVT CoordinatesValueType;
+            typedef Math::CVector<CVT, 3> CoordinatesType;
+            
+            virtual ValueType& operator()(std::size_t i) = 0;
 
-			virtual const ValueType& operator()(std::size_t i) const = 0;
-	
-			virtual void getCoordinates(std::size_t i, CoordinatesType& coords) const = 0;
+            virtual const ValueType& operator()(std::size_t i) const = 0;
+    
+            virtual void getCoordinates(std::size_t i, CoordinatesType& coords) const = 0;
 
-		protected:
-			SpatialGrid& operator=(const SpatialGrid& grid) {
-				AttributedGrid::operator=(grid);
-				return *this;
-			}
-		};
+        protected:
+            SpatialGrid& operator=(const SpatialGrid& grid) {
+                AttributedGrid::operator=(grid);
+                return *this;
+            }
+        };
 
-		typedef SpatialGrid<float> FSpatialGrid;
-		typedef SpatialGrid<double> DSpatialGrid;
-	}
+        typedef SpatialGrid<float> FSpatialGrid;
+        typedef SpatialGrid<double> DSpatialGrid;
+    }
 }
 
 #endif // CDPL_GRID_SPATIALGRID_HPP

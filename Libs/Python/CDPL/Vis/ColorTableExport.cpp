@@ -36,48 +36,48 @@
 namespace
 {
 
-	std::string toString(const CDPL::Vis::ColorTable& tab)
-	{
-		std::ostringstream oss;
+    std::string toString(const CDPL::Vis::ColorTable& tab)
+    {
+        std::ostringstream oss;
 
-		oss << "CDPL.Vis.ColorTable(";
-		
-		if (tab.isEmpty())
-			oss << ')';
+        oss << "CDPL.Vis.ColorTable(";
+        
+        if (tab.isEmpty())
+            oss << ')';
 
-		else  {
-			bool first_entry = true;
+        else  {
+            bool first_entry = true;
 
-			for (CDPL::Vis::ColorTable::ConstEntryIterator it = tab.getEntriesBegin(), end = tab.getEntriesEnd(); it != end; ++it) {
-				if (!first_entry)
-					oss << ", ";
-				else
-					oss << '{';
-			
-				oss << it->first << ": (" << it->second.getRed() << ", " << it->second.getGreen() << ", " << it->second.getBlue() << ", " << it->second.getAlpha() << ')'; 
-				first_entry = false;
-			}
+            for (CDPL::Vis::ColorTable::ConstEntryIterator it = tab.getEntriesBegin(), end = tab.getEntriesEnd(); it != end; ++it) {
+                if (!first_entry)
+                    oss << ", ";
+                else
+                    oss << '{';
+            
+                oss << it->first << ": (" << it->second.getRed() << ", " << it->second.getGreen() << ", " << it->second.getBlue() << ", " << it->second.getAlpha() << ')'; 
+                first_entry = false;
+            }
 
-			oss << "})";
-		}
-		
-		return oss.str();
-	}
+            oss << "})";
+        }
+        
+        return oss.str();
+    }
 }
 
 
 void CDPLPythonVis::exportColorTable()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::ColorTable, Vis::ColorTable::SharedPointer>("ColorTable", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Vis::ColorTable&>((python::arg("self"), python::arg("table"))))
-		.def(CDPLPythonUtil::MapVisitor<Vis::ColorTable, 
-			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies,
-			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>())	
-		.def("__str__", &toString, python::arg("self"))
-		.def("__eq__", &Vis::ColorTable::operator==, (python::arg("self"), python::arg("table")))
-		.def("__ne__", &Vis::ColorTable::operator!=, (python::arg("self"), python::arg("table")));
+    python::class_<Vis::ColorTable, Vis::ColorTable::SharedPointer>("ColorTable", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Vis::ColorTable&>((python::arg("self"), python::arg("table"))))
+        .def(CDPLPythonUtil::MapVisitor<Vis::ColorTable, 
+             python::return_internal_reference<>, python::default_call_policies, python::default_call_policies,
+             python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>())    
+        .def("__str__", &toString, python::arg("self"))
+        .def("__eq__", &Vis::ColorTable::operator==, (python::arg("self"), python::arg("table")))
+        .def("__ne__", &Vis::ColorTable::operator!=, (python::arg("self"), python::arg("table")));
 }

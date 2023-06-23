@@ -35,7 +35,7 @@ void CDPLPythonChem::exportAmideImidicAcidTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::AmideImidicAcidTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("AmideImidicAcidTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::AmideImidicAcidTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("AmideImidicAcidTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::AmideImidicAcidTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

@@ -27,12 +27,12 @@
 
 void CDPLPythonMath::exportCVectorTypes3()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CVectorExport<Math::Vector4F>("Vector4F");
-	CVectorExport<Math::Vector4D>("Vector4D");
-	CVectorExport<Math::Vector4L>("Vector4L");
-	CVectorExport<Math::Vector4UL>("Vector4UL");
+    CVectorExport<Math::Vector4F>("Vector4F");
+    CVectorExport<Math::Vector4D>("Vector4D");
+    CVectorExport<Math::Vector4L>("Vector4L");
+    CVectorExport<Math::Vector4UL>("Vector4UL");
 
-	CVectorExport<Math::CVector<double, 7> >("Vector7D");
+    CVectorExport<Math::CVector<double, 7> >("Vector7D");
 }

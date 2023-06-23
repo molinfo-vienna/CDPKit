@@ -35,12 +35,12 @@
 #define MAKE_BOND_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Bond& bond)             \
 {                                                                  \
-	return CDPL::MolProp::get##FUNC_SUFFIX(bond);				   \
+    return CDPL::MolProp::get##FUNC_SUFFIX(bond);                   \
 }                                                                  \
                                                                    \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Bond& bond)             \
 {                                                                  \
-	return CDPL::MolProp::has##FUNC_SUFFIX(bond);                  \
+    return CDPL::MolProp::has##FUNC_SUFFIX(bond);                  \
 }
 
 #define EXPORT_BOND_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
@@ -59,11 +59,11 @@ python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"),
 #define EXPORT_BOND_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
             python::return_value_policy<python::copy_const_reference,                                        \
-			python::with_custodian_and_ward_postcall<0, 1> >());                                             \
+            python::with_custodian_and_ward_postcall<0, 1> >());                                             \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
 python::def("clear"#FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("bond"));                         \
 python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)),    \
-			python::with_custodian_and_ward<1, 2>());                                                            
+            python::with_custodian_and_ward<1, 2>());                                                            
 
 #define EXPORT_BOND_FUNCS_INT_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                  \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
@@ -71,54 +71,54 @@ python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"), 
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
 python::def("clear"#FUNC_SUFFIX, &MolProp::clear##FUNC_SUFFIX, python::arg("bond"));                         \
 python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)),    \
-			python::with_custodian_and_ward<1, 2>());  
+            python::with_custodian_and_ward<1, 2>());  
 
 
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER1(bool, isHydrogenBond, CDPL::Chem::Bond&)
+    MAKE_FUNCTION_WRAPPER1(bool, isHydrogenBond, CDPL::Chem::Bond&)
 
-	MAKE_FUNCTION_WRAPPER2(bool, isInRing, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isHeteroAtomHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(bool, isInRing, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(bool, isHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(bool, isHeteroAtomHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
-	MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
-	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
+    MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
+    MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
 
-	MAKE_FUNCTION_WRAPPER4(bool, isAmideBond, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
+    MAKE_FUNCTION_WRAPPER4(bool, isAmideBond, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
 
-	MAKE_FUNCTION_WRAPPER5(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
+    MAKE_FUNCTION_WRAPPER5(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
 
-	MAKE_BOND_FUNC_WRAPPERS(double, MHMOPiOrder)
+    MAKE_BOND_FUNC_WRAPPERS(double, MHMOPiOrder)
 }
 
 
 void CDPLPythonMolProp::exportBondFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("isHydrogenBond", &isHydrogenBondWrapper1, python::arg("bond"));
+    python::def("isHydrogenBond", &isHydrogenBondWrapper1, python::arg("bond"));
 
-	python::def("isInRing", &isInRingWrapper2, (python::arg("bond"), python::arg("molgraph")));
-	python::def("isHydrogenRotor", &isHydrogenRotorWrapper2, (python::arg("bond"), python::arg("molgraph")));
-	python::def("isHeteroAtomHydrogenRotor", &isHeteroAtomHydrogenRotorWrapper2,
-				(python::arg("bond"), python::arg("molgraph")));
-	python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 
-				(python::arg("bond"), python::arg("molgraph")));
+    python::def("isInRing", &isInRingWrapper2, (python::arg("bond"), python::arg("molgraph")));
+    python::def("isHydrogenRotor", &isHydrogenRotorWrapper2, (python::arg("bond"), python::arg("molgraph")));
+    python::def("isHeteroAtomHydrogenRotor", &isHeteroAtomHydrogenRotorWrapper2,
+                (python::arg("bond"), python::arg("molgraph")));
+    python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 
+                (python::arg("bond"), python::arg("molgraph")));
 
-	python::def("calcPolarizability", &calcPolarizabilityWrapper3, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("damping") = 0.75));
-	python::def("isInRingOfSize", &isInRingOfSizeWrapper3,
-				(python::arg("bond"), python::arg("molgraph"), python::arg("size")));
+    python::def("calcPolarizability", &calcPolarizabilityWrapper3, 
+                (python::arg("bond"), python::arg("molgraph"), python::arg("damping") = 0.75));
+    python::def("isInRingOfSize", &isInRingOfSizeWrapper3,
+                (python::arg("bond"), python::arg("molgraph"), python::arg("size")));
 
-	python::def("isAmideBond", &isAmideBondWrapper4, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
+    python::def("isAmideBond", &isAmideBondWrapper4, 
+                (python::arg("bond"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
 
-	python::def("isRotatable", &isRotatableWrapper5, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("h_rotors"), python::arg("ring_bonds"), python::arg("amide_bonds")));
+    python::def("isRotatable", &isRotatableWrapper5, 
+                (python::arg("bond"), python::arg("molgraph"), python::arg("h_rotors"), python::arg("ring_bonds"), python::arg("amide_bonds")));
 
-	EXPORT_BOND_FUNCS(MHMOPiOrder, order)
+    EXPORT_BOND_FUNCS(MHMOPiOrder, order)
 }

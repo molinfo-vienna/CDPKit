@@ -33,5 +33,5 @@ using namespace CDPL;
 
 
 Pharm::QueryTwoPointPharmacophore::QueryTwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2): 
-	TwoPointPharmacophore(ftr1, ftr2), ftr1Tol(getTolerance(ftr1)), ftr2Tol(getTolerance(ftr2))
+    TwoPointPharmacophore(ftr1, ftr2), ftr1Tol(getTolerance(ftr1)), ftr2Tol(getTolerance(ftr2))
 {}

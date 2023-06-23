@@ -29,224 +29,224 @@
 
 BOOST_AUTO_TEST_CASE(FontTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	Font f1;
+    Font f1;
 
-	BOOST_CHECK(f1.getFamily() == "");
-	BOOST_CHECK(f1.getSize() == 12.0);
-	BOOST_CHECK(f1.isBold() == false);
-	BOOST_CHECK(f1.isItalic() == false);
-	BOOST_CHECK(f1.isUnderlined() == false);
-	BOOST_CHECK(f1.isOverlined() == false);
-	BOOST_CHECK(f1.isStrikedOut() == false);
-	BOOST_CHECK(f1.hasFixedPitch() == false);
+    BOOST_CHECK(f1.getFamily() == "");
+    BOOST_CHECK(f1.getSize() == 12.0);
+    BOOST_CHECK(f1.isBold() == false);
+    BOOST_CHECK(f1.isItalic() == false);
+    BOOST_CHECK(f1.isUnderlined() == false);
+    BOOST_CHECK(f1.isOverlined() == false);
+    BOOST_CHECK(f1.isStrikedOut() == false);
+    BOOST_CHECK(f1.hasFixedPitch() == false);
 
-	Font f2("Arial");
+    Font f2("Arial");
 
-	BOOST_CHECK(f2.getFamily() == "Arial");
-	BOOST_CHECK(f2.getSize() == 12.0);
-	BOOST_CHECK(f2.isBold() == false);
-	BOOST_CHECK(f2.isItalic() == false);
-	BOOST_CHECK(f2.isUnderlined() == false);
-	BOOST_CHECK(f2.isOverlined() == false);
-	BOOST_CHECK(f2.isStrikedOut() == false);
-	BOOST_CHECK(f2.hasFixedPitch() == false);
+    BOOST_CHECK(f2.getFamily() == "Arial");
+    BOOST_CHECK(f2.getSize() == 12.0);
+    BOOST_CHECK(f2.isBold() == false);
+    BOOST_CHECK(f2.isItalic() == false);
+    BOOST_CHECK(f2.isUnderlined() == false);
+    BOOST_CHECK(f2.isOverlined() == false);
+    BOOST_CHECK(f2.isStrikedOut() == false);
+    BOOST_CHECK(f2.hasFixedPitch() == false);
 
-	Font f3("Helvetica", -3.0);
+    Font f3("Helvetica", -3.0);
 
-	BOOST_CHECK(f3.getFamily() == "Helvetica");
-	BOOST_CHECK(f3.getSize() == 0.0);
-	BOOST_CHECK(f3.isBold() == false);
-	BOOST_CHECK(f3.isItalic() == false);
-	BOOST_CHECK(f3.isUnderlined() == false);
-	BOOST_CHECK(f3.isOverlined() == false);
-	BOOST_CHECK(f3.isStrikedOut() == false);
-	BOOST_CHECK(f3.hasFixedPitch() == false);
+    BOOST_CHECK(f3.getFamily() == "Helvetica");
+    BOOST_CHECK(f3.getSize() == 0.0);
+    BOOST_CHECK(f3.isBold() == false);
+    BOOST_CHECK(f3.isItalic() == false);
+    BOOST_CHECK(f3.isUnderlined() == false);
+    BOOST_CHECK(f3.isOverlined() == false);
+    BOOST_CHECK(f3.isStrikedOut() == false);
+    BOOST_CHECK(f3.hasFixedPitch() == false);
 
-	Font f4("Serif", 10.0);
+    Font f4("Serif", 10.0);
 
-	BOOST_CHECK(f4.getFamily() == "Serif");
-	BOOST_CHECK(f4.getSize() == 10.0);
-	BOOST_CHECK(f4.isBold() == false);
-	BOOST_CHECK(f4.isItalic() == false);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-//-----
-
-	f4.setFamily("");
-
-	BOOST_CHECK(f4.getFamily() == "");
-	BOOST_CHECK(f4.getSize() == 10.0);
-	BOOST_CHECK(f4.isBold() == false);
-	BOOST_CHECK(f4.isItalic() == false);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setFamily("Arial Black");
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 10.0);
-	BOOST_CHECK(f4.isBold() == false);
-	BOOST_CHECK(f4.isItalic() == false);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setSize(-0.1);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 0.0);
-	BOOST_CHECK(f4.isBold() == false);
-	BOOST_CHECK(f4.isItalic() == false);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setSize(11.0);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == false);
-	BOOST_CHECK(f4.isItalic() == false);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setBold(true);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == true);
-	BOOST_CHECK(f4.isItalic() == false);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setItalic(true);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == true);
-	BOOST_CHECK(f4.isItalic() == true);
-	BOOST_CHECK(f4.isUnderlined() == false);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setUnderlined(true);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == true);
-	BOOST_CHECK(f4.isItalic() == true);
-	BOOST_CHECK(f4.isUnderlined() == true);
-	BOOST_CHECK(f4.isOverlined() == false);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setOverlined(true);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == true);
-	BOOST_CHECK(f4.isItalic() == true);
-	BOOST_CHECK(f4.isUnderlined() == true);
-	BOOST_CHECK(f4.isOverlined() == true);
-	BOOST_CHECK(f4.isStrikedOut() == false);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setStrikedOut(true);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == true);
-	BOOST_CHECK(f4.isItalic() == true);
-	BOOST_CHECK(f4.isUnderlined() == true);
-	BOOST_CHECK(f4.isOverlined() == true);
-	BOOST_CHECK(f4.isStrikedOut() == true);
-	BOOST_CHECK(f4.hasFixedPitch() == false);
-
-	f4.setFixedPitch(true);
-
-	BOOST_CHECK(f4.getFamily() == "Arial Black");
-	BOOST_CHECK(f4.getSize() == 11.0);
-	BOOST_CHECK(f4.isBold() == true);
-	BOOST_CHECK(f4.isItalic() == true);
-	BOOST_CHECK(f4.isUnderlined() == true);
-	BOOST_CHECK(f4.isOverlined() == true);
-	BOOST_CHECK(f4.isStrikedOut() == true);
-	BOOST_CHECK(f4.hasFixedPitch() == true);
+    BOOST_CHECK(f4.getFamily() == "Serif");
+    BOOST_CHECK(f4.getSize() == 10.0);
+    BOOST_CHECK(f4.isBold() == false);
+    BOOST_CHECK(f4.isItalic() == false);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
 //-----
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f4 == f3));
+    f4.setFamily("");
 
-	f3.setFamily("Arial Black");
+    BOOST_CHECK(f4.getFamily() == "");
+    BOOST_CHECK(f4.getSize() == 10.0);
+    BOOST_CHECK(f4.isBold() == false);
+    BOOST_CHECK(f4.isItalic() == false);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setFamily("Arial Black");
 
-	f3.setSize(11.0);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 10.0);
+    BOOST_CHECK(f4.isBold() == false);
+    BOOST_CHECK(f4.isItalic() == false);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setSize(-0.1);
 
-	f3.setBold(true);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 0.0);
+    BOOST_CHECK(f4.isBold() == false);
+    BOOST_CHECK(f4.isItalic() == false);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setSize(11.0);
 
-	f3.setItalic(true);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == false);
+    BOOST_CHECK(f4.isItalic() == false);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setBold(true);
 
-	f3.setUnderlined(true);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == true);
+    BOOST_CHECK(f4.isItalic() == false);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setItalic(true);
 
-	f3.setOverlined(true);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == true);
+    BOOST_CHECK(f4.isItalic() == true);
+    BOOST_CHECK(f4.isUnderlined() == false);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setUnderlined(true);
 
-	f3.setStrikedOut(true);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == true);
+    BOOST_CHECK(f4.isItalic() == true);
+    BOOST_CHECK(f4.isUnderlined() == true);
+    BOOST_CHECK(f4.isOverlined() == false);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    f4.setOverlined(true);
 
-	f3.setFixedPitch(true);
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == true);
+    BOOST_CHECK(f4.isItalic() == true);
+    BOOST_CHECK(f4.isUnderlined() == true);
+    BOOST_CHECK(f4.isOverlined() == true);
+    BOOST_CHECK(f4.isStrikedOut() == false);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
 
-	BOOST_CHECK(f3 == f4);
-	BOOST_CHECK(!(f3 != f4));
+    f4.setStrikedOut(true);
+
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == true);
+    BOOST_CHECK(f4.isItalic() == true);
+    BOOST_CHECK(f4.isUnderlined() == true);
+    BOOST_CHECK(f4.isOverlined() == true);
+    BOOST_CHECK(f4.isStrikedOut() == true);
+    BOOST_CHECK(f4.hasFixedPitch() == false);
+
+    f4.setFixedPitch(true);
+
+    BOOST_CHECK(f4.getFamily() == "Arial Black");
+    BOOST_CHECK(f4.getSize() == 11.0);
+    BOOST_CHECK(f4.isBold() == true);
+    BOOST_CHECK(f4.isItalic() == true);
+    BOOST_CHECK(f4.isUnderlined() == true);
+    BOOST_CHECK(f4.isOverlined() == true);
+    BOOST_CHECK(f4.isStrikedOut() == true);
+    BOOST_CHECK(f4.hasFixedPitch() == true);
 
 //-----
 
-	BOOST_CHECK(f3 == f3);
-	BOOST_CHECK(!(f3 != f3));
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f4 == f3));
 
-	f3 = f2;
+    f3.setFamily("Arial Black");
 
-	BOOST_CHECK(f3 != f4);
-	BOOST_CHECK(!(f3 == f4));
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
 
-	BOOST_CHECK(f3 == f2);
-	BOOST_CHECK(!(f3 != f2));
+    f3.setSize(11.0);
 
-	BOOST_CHECK(f2 != f4);
-	BOOST_CHECK(!(f2 == f4));
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    f3.setBold(true);
+
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    f3.setItalic(true);
+
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    f3.setUnderlined(true);
+
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    f3.setOverlined(true);
+
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    f3.setStrikedOut(true);
+
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    f3.setFixedPitch(true);
+
+    BOOST_CHECK(f3 == f4);
+    BOOST_CHECK(!(f3 != f4));
+
+//-----
+
+    BOOST_CHECK(f3 == f3);
+    BOOST_CHECK(!(f3 != f3));
+
+    f3 = f2;
+
+    BOOST_CHECK(f3 != f4);
+    BOOST_CHECK(!(f3 == f4));
+
+    BOOST_CHECK(f3 == f2);
+    BOOST_CHECK(!(f3 != f2));
+
+    BOOST_CHECK(f2 != f4);
+    BOOST_CHECK(!(f2 == f4));
 }
 

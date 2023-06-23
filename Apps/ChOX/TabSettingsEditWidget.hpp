@@ -36,32 +36,32 @@ class QTabWidget;
 namespace ChOX
 {
 
-	class TabSettingsEditWidget : public SettingsEditWidget
-	{
+    class TabSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		TabSettingsEditWidget(QWidget* = 0);
+    public:
+        TabSettingsEditWidget(QWidget* = 0);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	protected:
-		void addEditWidget(SettingsEditWidget*, const QString&);
+    protected:
+        void addEditWidget(SettingsEditWidget*, const QString&);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		typedef std::vector<SettingsEditWidget*> EditWidgetList;
+        typedef std::vector<SettingsEditWidget*> EditWidgetList;
 
-		QTabWidget*    tabWidget;
-		EditWidgetList editWidgetList;
-	};
+        QTabWidget*    tabWidget;
+        EditWidgetList editWidgetList;
+    };
 }
 
 #endif // CHOX_TABSETTINGSEDITWIDGET_HPP

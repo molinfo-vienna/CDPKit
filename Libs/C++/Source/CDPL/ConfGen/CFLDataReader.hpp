@@ -39,34 +39,34 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		class CFLDataReader
-		{
+        class CFLDataReader
+        {
 
-		public:
-			CFLDataReader(const Base::ControlParameterContainer& ctrl_params);
+        public:
+            CFLDataReader(const Base::ControlParameterContainer& ctrl_params);
 
-			bool readMolecule(std::istream& is, Chem::Molecule& mol);
-		
-			bool skipMolecule(std::istream& is);
+            bool readMolecule(std::istream& is, Chem::Molecule& mol);
+        
+            bool skipMolecule(std::istream& is);
 
-			bool hasMoreData(std::istream& is);
+            bool hasMoreData(std::istream& is);
 
-		private:
-			typedef std::vector<Chem::Atom*> AtomList;
-			
-			const Base::ControlParameterContainer& ctrlParams;
-			CFLFragmentLibraryEntryReader          entryReader;
-			FragmentLibraryEntry                   entry;
-			std::istringstream                     smilesStream;
-			Chem::SMILESMoleculeReader             smilesReader;
-			Chem::Fragment                         tmpFragment;
-			CanonicalFragment                      canonFragment;
-			AtomList                               aromAtoms;
-		};
-	}
+        private:
+            typedef std::vector<Chem::Atom*> AtomList;
+            
+            const Base::ControlParameterContainer& ctrlParams;
+            CFLFragmentLibraryEntryReader          entryReader;
+            FragmentLibraryEntry                   entry;
+            std::istringstream                     smilesStream;
+            Chem::SMILESMoleculeReader             smilesReader;
+            Chem::Fragment                         tmpFragment;
+            CanonicalFragment                      canonFragment;
+            AtomList                               aromAtoms;
+        };
+    }
 }
 
 #endif // CDPL_CONFGEN_CDFDATAREADER_HPP

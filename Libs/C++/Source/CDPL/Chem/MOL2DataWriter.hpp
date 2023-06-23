@@ -37,79 +37,79 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataIOBase;
-	}
+        class DataIOBase;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-		class Bond;
+        class MolecularGraph;
+        class Atom;
+        class Bond;
 
-		class MOL2DataWriter
-		{
+        class MOL2DataWriter
+        {
 
-		public:
-			MOL2DataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+        public:
+            MOL2DataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph);
-		
-		private:
-			void init(std::ostream& os);
+            bool writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph);
+        
+        private:
+            void init(std::ostream& os);
 
-			void getAtomCoordsDim(const MolecularGraph& molgraph);
-			void initSubstructureData(const MolecularGraph& molgraph);
+            void getAtomCoordsDim(const MolecularGraph& molgraph);
+            void initSubstructureData(const MolecularGraph& molgraph);
 
-			void writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx = 0);
-			void writeConformerEnergyComment(std::ostream& os, double energy);
-			void writeAtomSection(std::ostream& os, const MolecularGraph& molgraph);
-			void writeBondSection(std::ostream& os, const MolecularGraph& molgraph) const;
-			void writeSubstructSection(std::ostream& os) const;
+            void writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx = 0);
+            void writeConformerEnergyComment(std::ostream& os, double energy);
+            void writeAtomSection(std::ostream& os, const MolecularGraph& molgraph);
+            void writeBondSection(std::ostream& os, const MolecularGraph& molgraph) const;
+            void writeSubstructSection(std::ostream& os) const;
 
-			const std::string& getMoleculeTypeString(const MolecularGraph& molgraph) const; 
-			const std::string& getChargeTypeString(const MolecularGraph& molgraph); 
+            const std::string& getMoleculeTypeString(const MolecularGraph& molgraph) const; 
+            const std::string& getChargeTypeString(const MolecularGraph& molgraph); 
 
-			std::string getAtomName(const Atom& atom);
+            std::string getAtomName(const Atom& atom);
 
-			const std::string& getAtomTypeString(const Atom& atom, const MolecularGraph& molgraph) const;
-			const std::string& getBondTypeString(const Bond& bond, const MolecularGraph& molgraph) const;
-			const std::string& getBondOrderString(const Bond& bond) const;
+            const std::string& getAtomTypeString(const Atom& atom, const MolecularGraph& molgraph) const;
+            const std::string& getBondTypeString(const Bond& bond, const MolecularGraph& molgraph) const;
+            const std::string& getBondOrderString(const Bond& bond) const;
 
-			struct SubstructData
-			{
+            struct SubstructData
+            {
 
-				std::size_t rootAtom;
-				std::string name;
-				std::string subtype;
-				std::string chain;
-			};
+                std::size_t rootAtom;
+                std::string name;
+                std::string subtype;
+                std::string chain;
+            };
 
-			typedef std::unordered_map<std::string, std::size_t> StringToSizeMap;
-			typedef std::unordered_map<const Atom*, std::size_t> AtomToIDMap;
-			typedef std::vector<SubstructData> SubstructDataArray;
+            typedef std::unordered_map<std::string, std::size_t> StringToSizeMap;
+            typedef std::unordered_map<const Atom*, std::size_t> AtomToIDMap;
+            typedef std::vector<SubstructData> SubstructDataArray;
 
-			const Base::DataIOBase& ioBase;
-			bool                    strictErrorChecking;
-			bool                    multiConfExport;
-			bool                    extendedAtomTypes;
-			bool                    aromaticBondTypes;
-			bool                    outputSubstructs;
-			unsigned int            atomChargeType;
-			unsigned int            moleculeType;
-			bool                    writeConfEnergyComment;
-			std::string             confIdxSuffixPattern;
-			std::size_t             coordsDim;
-			Math::Vector3DArray     confCoordinates;
-			StringToSizeMap         atomSymbolCounts;
-			StringToSizeMap         substructNamesToIDs;
-			AtomToIDMap             atomsToSubstructIDs;
-			SubstructDataArray      substructData;
-		};
-	}
+            const Base::DataIOBase& ioBase;
+            bool                    strictErrorChecking;
+            bool                    multiConfExport;
+            bool                    extendedAtomTypes;
+            bool                    aromaticBondTypes;
+            bool                    outputSubstructs;
+            unsigned int            atomChargeType;
+            unsigned int            moleculeType;
+            bool                    writeConfEnergyComment;
+            std::string             confIdxSuffixPattern;
+            std::size_t             coordsDim;
+            Math::Vector3DArray     confCoordinates;
+            StringToSizeMap         atomSymbolCounts;
+            StringToSizeMap         substructNamesToIDs;
+            AtomToIDMap             atomsToSubstructIDs;
+            SubstructDataArray      substructData;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_MOL2DATAWRITER_HPP

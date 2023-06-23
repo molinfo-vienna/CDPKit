@@ -35,72 +35,72 @@
 namespace
 {
 
-	struct AtomMapping
-	{
+    struct AtomMapping
+    {
 
-		AtomMapping(const CDPL::ConfGen::CanonicalFragment& frag): frag(frag) {}
+        AtomMapping(const CDPL::ConfGen::CanonicalFragment& frag): frag(frag) {}
 
-		std::size_t getNumAtoms() const {
-			return frag.getAtomMapping().size();
-		}
+        std::size_t getNumAtoms() const {
+            return frag.getAtomMapping().size();
+        }
 
-		const CDPL::Chem::Atom& getAtom(std::size_t idx) const {
-			if (idx >= frag.getAtomMapping().size())
-				throw CDPL::Base::IndexError("CanonicalFragment.AtomMapping: index out of bounds");
+        const CDPL::Chem::Atom& getAtom(std::size_t idx) const {
+            if (idx >= frag.getAtomMapping().size())
+                throw CDPL::Base::IndexError("CanonicalFragment.AtomMapping: index out of bounds");
 
-			return *frag.getAtomMapping()[idx];
-		}
+            return *frag.getAtomMapping()[idx];
+        }
 
-		const CDPL::ConfGen::CanonicalFragment& frag;
-	};
+        const CDPL::ConfGen::CanonicalFragment& frag;
+    };
 
-	AtomMapping getAtomMapping(CDPL::ConfGen::CanonicalFragment& frag)
-	{
-		return AtomMapping(frag);
-	}
+    AtomMapping getAtomMapping(CDPL::ConfGen::CanonicalFragment& frag)
+    {
+        return AtomMapping(frag);
+    }
 
-	struct AtomMappingExport
-	{
+    struct AtomMappingExport
+    {
 
-		AtomMappingExport(const char* name) {
-			using namespace boost;
+        AtomMappingExport(const char* name) {
+            using namespace boost;
 
-			python::class_<AtomMapping>(name, python::no_init)
-				.def("__len__", &AtomMapping::getNumAtoms, python::arg("self"))
-				.def("__getitem__", &AtomMapping::getAtom, (python::arg("self"), python::arg("idx")), 
-					 python::return_internal_reference<1>());
-		}
-	};
+            python::class_<AtomMapping>(name, python::no_init)
+                .def("__len__", &AtomMapping::getNumAtoms, python::arg("self"))
+                .def("__getitem__", &AtomMapping::getAtom, (python::arg("self"), python::arg("idx")), 
+                     python::return_internal_reference<1>());
+        }
+    };
 }
 
 
 void CDPLPythonConfGen::exportCanonicalFragment()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ConfGen::CanonicalFragment, ConfGen::CanonicalFragment::SharedPointer, 
-				   python::bases<Chem::MolecularGraph>, boost::noncopyable> cl("CanonicalFragment", python::no_init);
+    python::class_<ConfGen::CanonicalFragment, ConfGen::CanonicalFragment::SharedPointer, 
+                   python::bases<Chem::MolecularGraph>, boost::noncopyable> cl("CanonicalFragment", python::no_init);
 
-	python::scope scope = cl;
+    python::scope scope = cl;
   
-	python::class_<AtomMapping>("AtomMapping", python::no_init)
-		.def("__len__", &AtomMapping::getNumAtoms, python::arg("self"))
-		.def("__getitem__", &AtomMapping::getAtom, (python::arg("self"), python::arg("idx")), 
-			 python::return_internal_reference<1>());
+    python::class_<AtomMapping>("AtomMapping", python::no_init)
+        .def("__len__", &AtomMapping::getNumAtoms, python::arg("self"))
+        .def("__getitem__", &AtomMapping::getAtom, (python::arg("self"), python::arg("idx")), 
+             python::return_internal_reference<1>());
 
-	cl
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"), python::arg("parent"))))
-		.def(python::init<const ConfGen::CanonicalFragment&>((python::arg("self"), python::arg("frag"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::CanonicalFragment>())	
-		.def("assign", &ConfGen::CanonicalFragment::operator=, (python::arg("self"), python::arg("frag")),
-			 python::return_self<>())
-		.def("create", &ConfGen::CanonicalFragment::create, (python::arg("self"), python::arg("molgraph"), python::arg("parent"), python::arg("modify") = true))
-		.def("getHashCode", &ConfGen::CanonicalFragment::getHashCode, python::arg("self"))
-		.def("clear", &ConfGen::CanonicalFragment::clear, python::arg("self"))
-		.def("getAtomMapping", &getAtomMapping, python::arg("self"), python::with_custodian_and_ward_postcall<0, 1>())
-		.add_property("hashCode", &ConfGen::CanonicalFragment::getHashCode)
-		.add_property("atomMapping", python::make_function(&getAtomMapping,
-														   python::with_custodian_and_ward_postcall<0, 1>()));
+    cl
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"), python::arg("parent"))))
+        .def(python::init<const ConfGen::CanonicalFragment&>((python::arg("self"), python::arg("frag"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::CanonicalFragment>())    
+        .def("assign", &ConfGen::CanonicalFragment::operator=, (python::arg("self"), python::arg("frag")),
+             python::return_self<>())
+        .def("create", &ConfGen::CanonicalFragment::create, (python::arg("self"), python::arg("molgraph"), python::arg("parent"), python::arg("modify") = true))
+        .def("getHashCode", &ConfGen::CanonicalFragment::getHashCode, python::arg("self"))
+        .def("clear", &ConfGen::CanonicalFragment::clear, python::arg("self"))
+        .def("getAtomMapping", &getAtomMapping, python::arg("self"), python::with_custodian_and_ward_postcall<0, 1>())
+        .add_property("hashCode", &ConfGen::CanonicalFragment::getHashCode)
+        .add_property("atomMapping", python::make_function(&getAtomMapping,
+                                                           python::with_custodian_and_ward_postcall<0, 1>()));
 }

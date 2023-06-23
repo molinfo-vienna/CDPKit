@@ -31,35 +31,35 @@
 namespace
 {
 
-	template <typename T>	
-	void appendInputFilters(QString& filters)
-	{
-		using namespace CDPL;
-		using namespace Base;
+    template <typename T>    
+    void appendInputFilters(QString& filters)
+    {
+        using namespace CDPL;
+        using namespace Base;
 
-		typename DataIOManager<T>::InputHandlerIterator handlers_end = DataIOManager<T>::getInputHandlersEnd();
+        typename DataIOManager<T>::InputHandlerIterator handlers_end = DataIOManager<T>::getInputHandlersEnd();
 
-		for (typename DataIOManager<T>::InputHandlerIterator h_it = DataIOManager<T>::getInputHandlersBegin(); 
-			 h_it != handlers_end; ++h_it) {
+        for (typename DataIOManager<T>::InputHandlerIterator h_it = DataIOManager<T>::getInputHandlersBegin(); 
+             h_it != handlers_end; ++h_it) {
 
-			const DataFormat& fmt_descr = (*h_it)->getDataFormat();
+            const DataFormat& fmt_descr = (*h_it)->getDataFormat();
 
-			if (filters.contains(QString::fromStdString(fmt_descr.getDescription())))
-				continue;
+            if (filters.contains(QString::fromStdString(fmt_descr.getDescription())))
+                continue;
 
-			filters.append(QString::fromStdString(fmt_descr.getDescription()));
-			filters.append(" (");
+            filters.append(QString::fromStdString(fmt_descr.getDescription()));
+            filters.append(" (");
 
-			DataFormat::ConstFileExtensionIterator exts_end = fmt_descr.getFileExtensionsEnd();
+            DataFormat::ConstFileExtensionIterator exts_end = fmt_descr.getFileExtensionsEnd();
 
-			for (DataFormat::ConstFileExtensionIterator e_it = fmt_descr.getFileExtensionsBegin(); e_it != exts_end; ++e_it) {
-				filters.append(" *.");
-				filters.append(QString::fromStdString(*e_it));
-			}
+            for (DataFormat::ConstFileExtensionIterator e_it = fmt_descr.getFileExtensionsBegin(); e_it != exts_end; ++e_it) {
+                filters.append(" *.");
+                filters.append(QString::fromStdString(*e_it));
+            }
 
-			filters.append(" );");
-		}
-	}
+            filters.append(" );");
+        }
+    }
 }
 
 
@@ -68,32 +68,32 @@ using namespace ChOX;
 
 InputFileFilterList::InputFileFilterList(const DataSet& data_set)
 {
-	if (data_set.getSize() == 0) {
-		appendInputFilters<CDPL::Chem::Reaction>(filterString);
-		appendInputFilters<CDPL::Chem::Molecule>(filterString);
+    if (data_set.getSize() == 0) {
+        appendInputFilters<CDPL::Chem::Reaction>(filterString);
+        appendInputFilters<CDPL::Chem::Molecule>(filterString);
 
-	} else
-		data_set.getRecord(0).accept(*this);
+    } else
+        data_set.getRecord(0).accept(*this);
 
-	QStringList::operator=(filterString.split(';', QString::SkipEmptyParts));
+    QStringList::operator=(filterString.split(';', QString::SkipEmptyParts));
 }
 
 InputFileFilterList::InputFileFilterList()
 {
-	appendInputFilters<CDPL::Chem::Reaction>(filterString);
-	appendInputFilters<CDPL::Chem::Molecule>(filterString);
+    appendInputFilters<CDPL::Chem::Reaction>(filterString);
+    appendInputFilters<CDPL::Chem::Molecule>(filterString);
 
-	QStringList::operator=(filterString.split(';', QString::SkipEmptyParts));
+    QStringList::operator=(filterString.split(';', QString::SkipEmptyParts));
 
-	append("All Files (*)");
+    append("All Files (*)");
 }
 
 void InputFileFilterList::visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&)
 {
-	appendInputFilters<CDPL::Chem::Reaction>(filterString);
+    appendInputFilters<CDPL::Chem::Reaction>(filterString);
 }
 
 void InputFileFilterList::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&)
 {
-	appendInputFilters<CDPL::Chem::Molecule>(filterString);
+    appendInputFilters<CDPL::Chem::Molecule>(filterString);
 }

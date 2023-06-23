@@ -32,26 +32,26 @@
 namespace 
 {
 
-	struct BondPropertyDefault {};
+    struct BondPropertyDefault {};
 }
 
 
 void CDPLPythonVis::exportBondPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondPropertyDefault, boost::noncopyable>("BondPropertyDefault", python::no_init)
-		.def_readonly("COLOR", &Vis::BondPropertyDefault::COLOR)
-		.def_readonly("LINE_WIDTH", &Vis::BondPropertyDefault::LINE_WIDTH)
-		.def_readonly("LINE_SPACING", &Vis::BondPropertyDefault::LINE_SPACING)
-		.def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondPropertyDefault::STEREO_BOND_WEDGE_WIDTH)
-		.def_readonly("STEREO_BOND_HASH_SPACING", &Vis::BondPropertyDefault::STEREO_BOND_HASH_SPACING)
-		.def_readonly("REACTION_CENTER_LINE_LENGTH", &Vis::BondPropertyDefault::REACTION_CENTER_LINE_LENGTH)
-		.def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::BondPropertyDefault::REACTION_CENTER_LINE_SPACING)
-		.def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::BondPropertyDefault::DOUBLE_BOND_TRIM_LENGTH)
-		.def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::BondPropertyDefault::TRIPLE_BOND_TRIM_LENGTH)
-		.def_readonly("LABEL_FONT", &Vis::BondPropertyDefault::LABEL_FONT)
-		.def_readonly("LABEL_SIZE", &Vis::BondPropertyDefault::LABEL_SIZE)
-		.def_readonly("LABEL_MARGIN", &Vis::BondPropertyDefault::LABEL_MARGIN);
+    python::class_<BondPropertyDefault, boost::noncopyable>("BondPropertyDefault", python::no_init)
+        .def_readonly("COLOR", &Vis::BondPropertyDefault::COLOR)
+        .def_readonly("LINE_WIDTH", &Vis::BondPropertyDefault::LINE_WIDTH)
+        .def_readonly("LINE_SPACING", &Vis::BondPropertyDefault::LINE_SPACING)
+        .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondPropertyDefault::STEREO_BOND_WEDGE_WIDTH)
+        .def_readonly("STEREO_BOND_HASH_SPACING", &Vis::BondPropertyDefault::STEREO_BOND_HASH_SPACING)
+        .def_readonly("REACTION_CENTER_LINE_LENGTH", &Vis::BondPropertyDefault::REACTION_CENTER_LINE_LENGTH)
+        .def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::BondPropertyDefault::REACTION_CENTER_LINE_SPACING)
+        .def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::BondPropertyDefault::DOUBLE_BOND_TRIM_LENGTH)
+        .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::BondPropertyDefault::TRIPLE_BOND_TRIM_LENGTH)
+        .def_readonly("LABEL_FONT", &Vis::BondPropertyDefault::LABEL_FONT)
+        .def_readonly("LABEL_SIZE", &Vis::BondPropertyDefault::LABEL_SIZE)
+        .def_readonly("LABEL_MARGIN", &Vis::BondPropertyDefault::LABEL_MARGIN);
 }

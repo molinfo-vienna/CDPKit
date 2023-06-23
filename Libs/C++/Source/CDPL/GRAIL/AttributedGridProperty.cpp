@@ -34,13 +34,13 @@ namespace CDPL
     namespace GRAIL
     {
 
-		namespace AttributedGridProperty
-		{
+        namespace AttributedGridProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(FEATURE_TYPE);
-			CDPL_DEFINE_LOOKUP_KEY(TARGET_FEATURE_TYPE);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(FEATURE_TYPE);
+            CDPL_DEFINE_LOOKUP_KEY(TARGET_FEATURE_TYPE);
+        }
 
-		void initAttributedGridProperties() {}
+        void initAttributedGridProperties() {}
     }
 }

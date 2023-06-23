@@ -31,28 +31,28 @@
 namespace CDPL
 {
 
-	namespace MolProp
-	{
-		
-		void initAtomProperties();
-		void initBondProperties();
-		void initAtomPropertyDefaults();
-	}
+    namespace MolProp
+    {
+        
+        void initAtomProperties();
+        void initBondProperties();
+        void initAtomPropertyDefaults();
+    }
 }
 
 namespace
 {
 
-	struct CDPLMolPropInit
-	{
+    struct CDPLMolPropInit
+    {
 
-		CDPLMolPropInit() {
-			CDPL::MolProp::initAtomProperties();
-			CDPL::MolProp::initBondProperties();
-			CDPL::MolProp::initAtomPropertyDefaults();
-		}
+        CDPLMolPropInit() {
+            CDPL::MolProp::initAtomProperties();
+            CDPL::MolProp::initBondProperties();
+            CDPL::MolProp::initAtomPropertyDefaults();
+        }
 
-	} cdplMolPropInit;
+    } cdplMolPropInit;
 }
 
 #endif // CDPL_MOLPROP_STATIC_LINK

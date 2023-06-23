@@ -47,92 +47,92 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
 
-			class CDPL_FORCEFIELD_API Entry
-			{
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+                Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
 
-				unsigned int getBondTypeIndex() const;
+                unsigned int getBondTypeIndex() const;
 
-				unsigned int getAtom1Type() const;
+                unsigned int getAtom1Type() const;
 
-				unsigned int getAtom2Type() const;
+                unsigned int getAtom2Type() const;
 
-				double getChargeIncrement() const;
+                double getChargeIncrement() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int bondTypeIdx;
-				unsigned int atom1Type;
-				unsigned int atom2Type;
-				double       chargeIncr;
-				bool         initialized;
-			};			
-	
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+              private:
+                unsigned int bondTypeIdx;
+                unsigned int atom1Type;
+                unsigned int atom2Type;
+                double       chargeIncr;
+                bool         initialized;
+            };            
+    
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94BondChargeIncrementTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94BondChargeIncrementTable();
 
-			void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+            void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
 
-			const Entry& getEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
+            const Entry& getEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type);
+            bool removeEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
     }
 }
 

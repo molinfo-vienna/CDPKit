@@ -42,49 +42,49 @@ namespace CDPL
     namespace Pharm
     {
 
-		class FeatureContainer;
+        class FeatureContainer;
 
-		/**
-		 * \brief PharmacophoreFitScore.
-		 */
-		class CDPL_PHARM_API PharmacophoreFitScore
-		{
+        /**
+         * \brief PharmacophoreFitScore.
+         */
+        class CDPL_PHARM_API PharmacophoreFitScore
+        {
 
-		  public:
-			static constexpr double DEF_FTR_MATCH_COUNT_WEIGHT = 1.0;
-			static constexpr double DEF_FTR_POS_MATCH_WEIGHT   = 0.5;
-			static constexpr double DEF_FTR_GEOM_MATCH_WEIGHT  = 0.4;
-	  
-			PharmacophoreFitScore(double match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
-								  double pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
-								  double geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
+          public:
+            static constexpr double DEF_FTR_MATCH_COUNT_WEIGHT = 1.0;
+            static constexpr double DEF_FTR_POS_MATCH_WEIGHT   = 0.5;
+            static constexpr double DEF_FTR_GEOM_MATCH_WEIGHT  = 0.4;
+      
+            PharmacophoreFitScore(double match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
+                                  double pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
+                                  double geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
-			double getFeatureMatchCountWeight() const;
+            double getFeatureMatchCountWeight() const;
 
-			void setFeatureMatchCountWeight(double weight);
+            void setFeatureMatchCountWeight(double weight);
 
-			double getFeaturePositionMatchWeight() const;
+            double getFeaturePositionMatchWeight() const;
 
-			void setFeaturePositionMatchWeight(double weight);
+            void setFeaturePositionMatchWeight(double weight);
 
-			double getFeatureGeometryMatchWeight() const;
+            double getFeatureGeometryMatchWeight() const;
 
-			void setFeatureGeometryMatchWeight(double weight);
+            void setFeatureGeometryMatchWeight(double weight);
 
-			double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
-							  const Math::Matrix4D& xform);
+            double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
+                              const Math::Matrix4D& xform);
 
-			double operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping);
+            double operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping);
 
-		  private:
-			typedef std::vector<const Feature*> FeatureList;
+          private:
+            typedef std::vector<const Feature*> FeatureList;
 
-			SpatialFeatureMapping spatFtrMapping;
-			double                ftrMatchCntWeight;
-			double                ftrPosMatchWeight;
-			double                ftrGeomMatchWeight;
-			FeatureList           groupedRefFtrs;
-		};
+            SpatialFeatureMapping spatFtrMapping;
+            double                ftrMatchCntWeight;
+            double                ftrPosMatchWeight;
+            double                ftrGeomMatchWeight;
+            FeatureList           groupedRefFtrs;
+        };
     }
 }
 

@@ -36,5 +36,5 @@ void CDPLPythonGRAIL::exportMoleculeFunctions()
     using namespace CDPL;
     
     python::def("prepareForGRAILDescriptorCalculation", &GRAIL::prepareForGRAILDescriptorCalculation,
-		(python::arg("mol"), python::arg("std_prot_state") = false));
+        (python::arg("mol"), python::arg("std_prot_state") = false));
 }

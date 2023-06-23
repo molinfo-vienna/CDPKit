@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
-	
-		typedef Util::CompressedDataReader<PDBMoleculeReader, Util::GZipIStream> PDBGZMoleculeReader;
-	}
+    namespace Biomol
+    {
+    
+        typedef Util::CompressedDataReader<PDBMoleculeReader, Util::GZipIStream> PDBGZMoleculeReader;
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBGZMOLECULEREADER_HPP

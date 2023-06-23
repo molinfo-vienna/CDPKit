@@ -46,65 +46,65 @@
 
 BOOST_AUTO_TEST_CASE(SMILESMoleculeInputHandlerTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace Base;
 
-	Molecule mol1;
-	Molecule mol2;
+    Molecule mol1;
+    Molecule mol2;
 
-	const DataInputHandler<Molecule>* handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::SMILES);
+    const DataInputHandler<Molecule>* handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::SMILES);
 
-	BOOST_CHECK(handler);
+    BOOST_CHECK(handler);
 
-	BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::SMILES);
+    BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::SMILES);
 
-	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByName("smiles") == handler);
-	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("smi") == handler);
-	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByMimeType("chemical/x-daylight-smiles") == handler);
+    BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByName("smiles") == handler);
+    BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("smi") == handler);
+    BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByMimeType("chemical/x-daylight-smiles") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol1));
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol1));
 
-	std::ostringstream oss;
+    std::ostringstream oss;
 
-	BOOST_CHECK(oss);
+    BOOST_CHECK(oss);
 
-	SMILESMolecularGraphWriter writer(oss);
+    SMILESMolecularGraphWriter writer(oss);
 
-	writer.setParameter(ControlParameter::SMILES_WRITE_ATOM_STEREO, true);
-	writer.setParameter(ControlParameter::SMILES_WRITE_BOND_STEREO, true);
-	writer.setParameter(ControlParameter::SMILES_WRITE_RING_BOND_STEREO, true);
-	writer.setParameter(ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE, std::size_t(3));
+    writer.setParameter(ControlParameter::SMILES_WRITE_ATOM_STEREO, true);
+    writer.setParameter(ControlParameter::SMILES_WRITE_BOND_STEREO, true);
+    writer.setParameter(ControlParameter::SMILES_WRITE_RING_BOND_STEREO, true);
+    writer.setParameter(ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE, std::size_t(3));
 
-	BOOST_CHECK(writer.write(mol1));
+    BOOST_CHECK(writer.write(mol1));
 
-	std::istringstream iss(oss.str());
+    std::istringstream iss(oss.str());
 
-	BOOST_CHECK(iss);
+    BOOST_CHECK(iss);
 
-	DataReader<Molecule>::SharedPointer reader_ptr(handler->createReader(iss));
+    DataReader<Molecule>::SharedPointer reader_ptr(handler->createReader(iss));
 
-	BOOST_CHECK(reader_ptr);
-	BOOST_CHECK(reader_ptr->read(mol2));
+    BOOST_CHECK(reader_ptr);
+    BOOST_CHECK(reader_ptr->read(mol2));
 
-	ControlParameterList::SharedPointer cpl(new ControlParameterList());
+    ControlParameterList::SharedPointer cpl(new ControlParameterList());
 
-	unsigned int atom_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT
-		| AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY;
+    unsigned int atom_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT
+        | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY;
 
-	unsigned int bond_flags = BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY 
-		| BondPropertyFlag::CONFIGURATION;
+    unsigned int bond_flags = BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY 
+        | BondPropertyFlag::CONFIGURATION;
 
-	cpl->setParameter(ControlParameter::ATOM_PROPERTY_FLAGS, atom_flags);
-	cpl->setParameter(ControlParameter::BOND_PROPERTY_FLAGS, bond_flags);
+    cpl->setParameter(ControlParameter::ATOM_PROPERTY_FLAGS, atom_flags);
+    cpl->setParameter(ControlParameter::BOND_PROPERTY_FLAGS, bond_flags);
 
-	mol1.setProperty(MolecularGraphProperty::HASH_CODE_PARAMETERS, cpl);
-	mol2.setProperty(MolecularGraphProperty::HASH_CODE_PARAMETERS, cpl);
+    mol1.setProperty(MolecularGraphProperty::HASH_CODE_PARAMETERS, cpl);
+    mol2.setProperty(MolecularGraphProperty::HASH_CODE_PARAMETERS, cpl);
 
-	BOOST_CHECK(mol1.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE) == 
-				mol2.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE));
+    BOOST_CHECK(mol1.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE) == 
+                mol2.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE));
 }

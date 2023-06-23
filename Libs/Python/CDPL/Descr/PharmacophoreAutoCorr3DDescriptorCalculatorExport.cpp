@@ -38,7 +38,7 @@ namespace
 
     void calculate(CDPL::Descr::PharmacophoreAutoCorr3DDescriptorCalculator& calculator, CDPL::Pharm::FeatureContainer& cntnr, CDPL::Math::DVector& descr)
     {
-		calculator.calculate(cntnr, descr);
+        calculator.calculate(cntnr, descr);
     }
 }
 
@@ -49,31 +49,31 @@ void CDPLPythonDescr::exportPharmacophoreAutoCorr3DDescriptorCalculator()
     using namespace CDPL;
 
     python::class_<Descr::PharmacophoreAutoCorr3DDescriptorCalculator, boost::noncopyable>("PharmacophoreAutoCorr3DDescriptorCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::PharmacophoreAutoCorr3DDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
-				 (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PharmacophoreAutoCorr3DDescriptorCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Descr::PharmacophoreAutoCorr3DDescriptorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setFeature3DCoordinatesFunction", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setFeature3DCoordinatesFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setFeaturePairWeightFunction", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setFeaturePairWeightFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setNumSteps", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setNumSteps, 
-			 (python::arg("self"), python::arg("num_steps")))
-		.def("getNumSteps", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getNumSteps, python::arg("self"))
-		.def("setRadiusIncrement", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setRadiusIncrement, 
-			 (python::arg("self"), python::arg("radius_inc")))
-		.def("getRadiusIncrement", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getRadiusIncrement, python::arg("self"))
-		.def("setStartRadius", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setStartRadius, 
-			 (python::arg("self"), python::arg("start_radius")))
-		.def("getStartRadius", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getStartRadius, python::arg("self"))
-		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("descr")))
-		.add_property("startRadius", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getStartRadius,
-					  &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setStartRadius)
-		.add_property("radiusIncrement", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getRadiusIncrement,
-					  &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setRadiusIncrement)
-		.add_property("numSteps", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getNumSteps,
-					  &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setNumSteps);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Descr::PharmacophoreAutoCorr3DDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
+                 (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PharmacophoreAutoCorr3DDescriptorCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Descr::PharmacophoreAutoCorr3DDescriptorCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setFeature3DCoordinatesFunction", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setFeature3DCoordinatesFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setFeaturePairWeightFunction", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setFeaturePairWeightFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setNumSteps", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setNumSteps, 
+             (python::arg("self"), python::arg("num_steps")))
+        .def("getNumSteps", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getNumSteps, python::arg("self"))
+        .def("setRadiusIncrement", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setRadiusIncrement, 
+             (python::arg("self"), python::arg("radius_inc")))
+        .def("getRadiusIncrement", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getRadiusIncrement, python::arg("self"))
+        .def("setStartRadius", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setStartRadius, 
+             (python::arg("self"), python::arg("start_radius")))
+        .def("getStartRadius", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getStartRadius, python::arg("self"))
+        .def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("descr")))
+        .add_property("startRadius", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getStartRadius,
+                      &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setStartRadius)
+        .add_property("radiusIncrement", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getRadiusIncrement,
+                      &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setRadiusIncrement)
+        .add_property("numSteps", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::getNumSteps,
+                      &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setNumSteps);
 }

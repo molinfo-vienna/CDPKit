@@ -39,99 +39,99 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-		class AtomContainer;
-	}
+        class Atom;
+        class AtomContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief MoleculeAutoCorr3DDescriptorCalculator.
-		 */
-		class CDPL_DESCR_API MoleculeAutoCorr3DDescriptorCalculator
-		{
+        /**
+         * \brief MoleculeAutoCorr3DDescriptorCalculator.
+         */
+        class CDPL_DESCR_API MoleculeAutoCorr3DDescriptorCalculator
+        {
 
-			typedef AutoCorrelation3DVectorCalculator<Chem::Atom> AutoCorr3DVectorCalculator;
+            typedef AutoCorrelation3DVectorCalculator<Chem::Atom> AutoCorr3DVectorCalculator;
 
-		public:
-			typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
-			typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
-		
-			/**
-			 * \brief Constructs the \c %MoleculeAutoCorr3DDescriptorCalculator instance.
-			 */
-			MoleculeAutoCorr3DDescriptorCalculator();
-			
-			MoleculeAutoCorr3DDescriptorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& descr);
+        public:
+            typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
+            typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
+        
+            /**
+             * \brief Constructs the \c %MoleculeAutoCorr3DDescriptorCalculator instance.
+             */
+            MoleculeAutoCorr3DDescriptorCalculator();
+            
+            MoleculeAutoCorr3DDescriptorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
-			/**
-			 * \brief Sets the starting value of the radius.
-			 * \param start_radius The starting value of the radius.
-			 * \note The default starting radius is <em>0.0</em>&Aring;.
-			 */
-			void setStartRadius(double start_radius);
+            /**
+             * \brief Sets the starting value of the radius.
+             * \param start_radius The starting value of the radius.
+             * \note The default starting radius is <em>0.0</em>&Aring;.
+             */
+            void setStartRadius(double start_radius);
 
-			/**
-			 * \brief Returns the starting value of the radius.
-			 * \return The current radius starting value.
-			 */
-			double getStartRadius() const;
+            /**
+             * \brief Returns the starting value of the radius.
+             * \return The current radius starting value.
+             */
+            double getStartRadius() const;
 
-			/**
-			 * \brief Sets the radius step size between successive descriptor vector elements.
-			 * \param radius_inc The radius step size.
-			 * \note The default radius step size is <em>0.1</em>&Aring;.
-			 */
-			void setRadiusIncrement(double radius_inc);
+            /**
+             * \brief Sets the radius step size between successive descriptor vector elements.
+             * \param radius_inc The radius step size.
+             * \note The default radius step size is <em>0.1</em>&Aring;.
+             */
+            void setRadiusIncrement(double radius_inc);
 
-			/**
-			 * \brief Returns the radius step size between successive \e AutoCorr3D code elements.
-			 * \return The applied radius step size.
-			 */
-			double getRadiusIncrement() const;
+            /**
+             * \brief Returns the radius step size between successive \e AutoCorr3D code elements.
+             * \return The applied radius step size.
+             */
+            double getRadiusIncrement() const;
 
-			/**
-			 * \brief Sets the number of desired radius incrementation steps.
-			 *
-			 * The number of performed radius incrementation steps defines the size of the calculated descriptor vector
-			 * which is equal to the number of steps.
-			 *
-			 * \param num_steps The number of radius incrementation steps.
-			 * \note The default number of steps is \e 99.
-			 */
-			void setNumSteps(std::size_t num_steps);
+            /**
+             * \brief Sets the number of desired radius incrementation steps.
+             *
+             * The number of performed radius incrementation steps defines the size of the calculated descriptor vector
+             * which is equal to the number of steps.
+             *
+             * \param num_steps The number of radius incrementation steps.
+             * \note The default number of steps is \e 99.
+             */
+            void setNumSteps(std::size_t num_steps);
 
-			/**
-			 * \brief Returns the number of performed radius incrementation steps.
-			 * \return The number of performed radius incrementation steps.
-			 */
-			std::size_t getNumSteps() const;
+            /**
+             * \brief Returns the number of performed radius incrementation steps.
+             * \return The number of performed radius incrementation steps.
+             */
+            std::size_t getNumSteps() const;
 
-			/**
-			 * \brief Allows to specify the atom coordinates function.
-			 * \param func A Atom3DCoordinatesFunction instance that wraps the target function.
-			 * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
-			 *       for each atom pair will be used for the calculation.
-			 */
-			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+            /**
+             * \brief Allows to specify the atom coordinates function.
+             * \param func A Atom3DCoordinatesFunction instance that wraps the target function.
+             * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
+             *       for each atom pair will be used for the calculation.
+             */
+            void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
-			/**
-			 * \brief Allows to specify a custom atom pair weight function.
-			 * \param func A AtomPairWeightFunction instance that wraps the target function.
-			 */
-			void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
+            /**
+             * \brief Allows to specify a custom atom pair weight function.
+             * \param func A AtomPairWeightFunction instance that wraps the target function.
+             */
+            void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
 
-			void calculate(const Chem::AtomContainer& cntnr, Math::DVector& descr);
+            void calculate(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
-		  private:
-			AutoCorr3DVectorCalculator autoCorrCalculator;
-			AtomPairWeightFunction     weightFunc;
-		}; 
-	}
+          private:
+            AutoCorr3DVectorCalculator autoCorrCalculator;
+            AtomPairWeightFunction     weightFunc;
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP

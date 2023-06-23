@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct MDLDataFormatVersion {};
+    struct MDLDataFormatVersion {};
 }
 
 
 void CDPLPythonChem::exportMDLDataFormatVersions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MDLDataFormatVersion, boost::noncopyable>("MDLDataFormatVersion", python::no_init)
-		.def_readonly("UNDEF", &Chem::MDLDataFormatVersion::UNDEF)
-		.def_readonly("V2000", &Chem::MDLDataFormatVersion::V2000)
-		.def_readonly("V3000", &Chem::MDLDataFormatVersion::V3000);
+    python::class_<MDLDataFormatVersion, boost::noncopyable>("MDLDataFormatVersion", python::no_init)
+        .def_readonly("UNDEF", &Chem::MDLDataFormatVersion::UNDEF)
+        .def_readonly("V2000", &Chem::MDLDataFormatVersion::V2000)
+        .def_readonly("V3000", &Chem::MDLDataFormatVersion::V3000);
 }

@@ -42,121 +42,121 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-		class Bond;
-	}
-	
-	namespace Descr
-	{
+        class MolecularGraph;
+        class Atom;
+        class Bond;
+    }
+    
+    namespace Descr
+    {
 
-		/**
-		 * \brief MolecularComplexityCalculator.
-		 * \see [\ref MCPLX]
-		 */
-		class CDPL_DESCR_API MolecularComplexityCalculator
-		{
+        /**
+         * \brief MolecularComplexityCalculator.
+         * \see [\ref MCPLX]
+         */
+        class CDPL_DESCR_API MolecularComplexityCalculator
+        {
 
-		  public:	
-			/**
-			 * \brief Constructs the \c %MolecularComplexityCalculator instance.
-			 */
-			MolecularComplexityCalculator(): complexity(0.0) {} 
+          public:    
+            /**
+             * \brief Constructs the \c %MolecularComplexityCalculator instance.
+             */
+            MolecularComplexityCalculator(): complexity(0.0) {} 
 
-			/**
-			 * \brief Constructs the \c %MolecularComplexityCalculator instance and calculates the complexity
-			 *        of the molecular graph \a molgraph.
-			 *
-			 * The calculated complexity can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to calculate the complexity.
-			 */
-			MolecularComplexityCalculator(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Constructs the \c %MolecularComplexityCalculator instance and calculates the complexity
+             *        of the molecular graph \a molgraph.
+             *
+             * The calculated complexity can be retrieved by a call to getResult().
+             *
+             * \param molgraph The molecular graph for which to calculate the complexity.
+             */
+            MolecularComplexityCalculator(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Calculates the complexity of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the complexity.
-			 * \return The calculated complexity of the molecular graph \a molgraph.
-			 */
-			double calculate(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Calculates the complexity of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the complexity.
+             * \return The calculated complexity of the molecular graph \a molgraph.
+             */
+            double calculate(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Returns the result of the last molecular graph complexity calculation.
-			 * \return The result of the last molecular graph complexity calculation, or zero if a
-			 *         calculation has not yet been performed.
-			 */
-			double getResult() const;
+            /**
+             * \brief Returns the result of the last molecular graph complexity calculation.
+             * \return The result of the last molecular graph complexity calculation, or zero if a
+             *         calculation has not yet been performed.
+             */
+            double getResult() const;
 
-		private:
-			MolecularComplexityCalculator(const MolecularComplexityCalculator&);
+        private:
+            MolecularComplexityCalculator(const MolecularComplexityCalculator&);
 
-			MolecularComplexityCalculator& operator=(const MolecularComplexityCalculator&);
+            MolecularComplexityCalculator& operator=(const MolecularComplexityCalculator&);
 
-			void processAtom(const Chem::Atom&);
-			void processBond(const Chem::Bond&);
+            void processAtom(const Chem::Atom&);
+            void processBond(const Chem::Bond&);
 
-			void calcAtomTypeComplexity();
-			void calcStructuralComplexity();
+            void calcAtomTypeComplexity();
+            void calcStructuralComplexity();
 
-			class SymmetryTerm
-			{
+            class SymmetryTerm
+            {
 
-			public:
-				SymmetryTerm(const Chem::MolecularGraph&, const Chem::Atom&);
+            public:
+                SymmetryTerm(const Chem::MolecularGraph&, const Chem::Atom&);
 
-				void incNumEquivAtoms();
+                void incNumEquivAtoms();
 
-				double getValue() const;
-				double getEtaContribution() const;
-				double getNumEquivAtoms() const;
+                double getValue() const;
+                double getEtaContribution() const;
+                double getNumEquivAtoms() const;
 
-				std::size_t getID() const;
-				
-			private:
-				double      numEquivAtoms;
-				std::size_t id;
-				std::size_t hCount;
-			};
+                std::size_t getID() const;
+                
+            private:
+                double      numEquivAtoms;
+                std::size_t id;
+                std::size_t hCount;
+            };
 
-			typedef std::map<std::size_t, SymmetryTerm> SymmetryTermMap; 
+            typedef std::map<std::size_t, SymmetryTerm> SymmetryTermMap; 
 
-			class PiBondTerm
-			{
+            class PiBondTerm
+            {
 
-			public:
-				PiBondTerm(std::size_t, std::size_t, std::size_t);
+            public:
+                PiBondTerm(std::size_t, std::size_t, std::size_t);
 
-				double getCorrection(const SymmetryTermMap&) const;
-		
-				bool isRelevant(const SymmetryTermMap&) const;
+                double getCorrection(const SymmetryTermMap&) const;
+        
+                bool isRelevant(const SymmetryTermMap&) const;
 
-				bool operator<(const PiBondTerm&) const;
+                bool operator<(const PiBondTerm&) const;
 
-			private:
-				std::size_t symClassID1;
-				std::size_t symClassID2;
-				std::size_t order;
-			};
+            private:
+                std::size_t symClassID1;
+                std::size_t symClassID2;
+                std::size_t order;
+            };
 
-			typedef std::map<std::size_t, std::size_t> AtomTypeCountMap; 
-			typedef std::set<PiBondTerm> PiBondTermSet;
+            typedef std::map<std::size_t, std::size_t> AtomTypeCountMap; 
+            typedef std::set<PiBondTerm> PiBondTermSet;
 
-			const Chem::MolecularGraph* molGraph;
-			SymmetryTermMap             symmetryTerms;
-			AtomTypeCountMap            atomTypeCounts;
-			PiBondTermSet               piBondTerms;
-			std::size_t                 numHeavyAtoms;
-			std::size_t                 numDoubleBonds;
-			std::size_t                 numTripleBonds;
-			double                      etaTotal;
-			double                      atmTypeComplexity;
-			double                      structComplexity;
-			double                      complexity;
-		};
-	}
+            const Chem::MolecularGraph* molGraph;
+            SymmetryTermMap             symmetryTerms;
+            AtomTypeCountMap            atomTypeCounts;
+            PiBondTermSet               piBondTerms;
+            std::size_t                 numHeavyAtoms;
+            std::size_t                 numDoubleBonds;
+            std::size_t                 numTripleBonds;
+            double                      etaTotal;
+            double                      atmTypeComplexity;
+            double                      structComplexity;
+            double                      complexity;
+        };
+    }
 }
 
 #endif // CDPL_DESCR_MOLECULARCOMPLEXITYCALCULATOR_HPP

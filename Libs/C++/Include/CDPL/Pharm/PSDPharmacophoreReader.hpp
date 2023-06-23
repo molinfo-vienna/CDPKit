@@ -43,53 +43,53 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Pharmacophore;
+        class Pharmacophore;
 
-		/**
-		 * \brief A reader for pharmacophore data in the PSD-format of the <em>CDPL</em>.
-		 */
-		class CDPL_PHARM_API PSDPharmacophoreReader : public Base::DataReader<Pharmacophore>
-		{
+        /**
+         * \brief A reader for pharmacophore data in the PSD-format of the <em>CDPL</em>.
+         */
+        class CDPL_PHARM_API PSDPharmacophoreReader : public Base::DataReader<Pharmacophore>
+        {
 
-		  public:
-			/**
-			 * \brief Constructs a \c %PSDPharmacophoreReader instance that will read the pharmacophore data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			PSDPharmacophoreReader(std::istream& is);
+          public:
+            /**
+             * \brief Constructs a \c %PSDPharmacophoreReader instance that will read the pharmacophore data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            PSDPharmacophoreReader(std::istream& is);
 
-			/**
-			 * \brief Constructs a \c %PSDPharmacophoreReader instance that will read the pharmacophore data from the input
-			 *        file \a file_name.
-			 * \param file_name The input file to read from.
-			 */
-			PSDPharmacophoreReader(const std::string& file_name);
+            /**
+             * \brief Constructs a \c %PSDPharmacophoreReader instance that will read the pharmacophore data from the input
+             *        file \a file_name.
+             * \param file_name The input file to read from.
+             */
+            PSDPharmacophoreReader(const std::string& file_name);
 
-			~PSDPharmacophoreReader();
+            ~PSDPharmacophoreReader();
 
-			PSDPharmacophoreReader& read(Pharmacophore& pharm, bool overwrite = true);
+            PSDPharmacophoreReader& read(Pharmacophore& pharm, bool overwrite = true);
 
-			PSDPharmacophoreReader& read(std::size_t idx, Pharmacophore& pharm, bool overwrite = true);
+            PSDPharmacophoreReader& read(std::size_t idx, Pharmacophore& pharm, bool overwrite = true);
 
-			PSDPharmacophoreReader& skip();
+            PSDPharmacophoreReader& skip();
 
-			bool hasMoreData();
+            bool hasMoreData();
 
-			std::size_t getRecordIndex() const;
-			void setRecordIndex(std::size_t idx);
+            std::size_t getRecordIndex() const;
+            void setRecordIndex(std::size_t idx);
 
-			std::size_t getNumRecords();
+            std::size_t getNumRecords();
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		  private:
-			PSDScreeningDBAccessor accessor;
-			std::size_t            recordIndex;
-			std::size_t            numRecords;
-			bool                   state;
-		};
+          private:
+            PSDScreeningDBAccessor accessor;
+            std::size_t            recordIndex;
+            std::size_t            numRecords;
+            bool                   state;
+        };
     }
 }
 

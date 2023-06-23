@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		typedef Util::CompressedDataReader<CDFDRegularGridReader, Util::GZipIStream> CDFGZDRegularGridReader;
-	}
+        typedef Util::CompressedDataReader<CDFDRegularGridReader, Util::GZipIStream> CDFGZDRegularGridReader;
+    }
 }
 
 #endif // CDPL_GRID_CDFGZDREGULARGRIDREADER_HPP

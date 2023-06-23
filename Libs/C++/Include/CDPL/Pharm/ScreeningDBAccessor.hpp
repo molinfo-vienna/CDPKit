@@ -39,63 +39,63 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 
     namespace Pharm
     {
-	
-		class Pharmacophore;
-		class FeatureTypeHistogram;
+    
+        class Pharmacophore;
+        class FeatureTypeHistogram;
 
-		/**
-		 * \brief A class for accessing the data stored in pharmacophore screening databases.
-		 */
-		class CDPL_PHARM_API ScreeningDBAccessor
-		{
+        /**
+         * \brief A class for accessing the data stored in pharmacophore screening databases.
+         */
+        class CDPL_PHARM_API ScreeningDBAccessor
+        {
 
-		  public:
-			typedef std::shared_ptr<ScreeningDBAccessor> SharedPointer;
+          public:
+            typedef std::shared_ptr<ScreeningDBAccessor> SharedPointer;
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~ScreeningDBAccessor() {}
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~ScreeningDBAccessor() {}
 
-			virtual void open(const std::string& name) = 0;
+            virtual void open(const std::string& name) = 0;
 
-			virtual void close() = 0;
+            virtual void close() = 0;
 
-			virtual const std::string& getDatabaseName() const = 0;
+            virtual const std::string& getDatabaseName() const = 0;
 
-			virtual std::size_t getNumMolecules() const = 0;
+            virtual std::size_t getNumMolecules() const = 0;
 
-			virtual std::size_t getNumPharmacophores() const = 0;
+            virtual std::size_t getNumPharmacophores() const = 0;
 
-			virtual std::size_t getNumPharmacophores(std::size_t mol_idx) const = 0;
+            virtual std::size_t getNumPharmacophores(std::size_t mol_idx) const = 0;
 
-			virtual void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const = 0; 
+            virtual void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const = 0; 
 
-			virtual void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const = 0; 
+            virtual void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const = 0; 
 
-			virtual void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const = 0; 
+            virtual void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const = 0; 
 
-			virtual std::size_t getMoleculeIndex(std::size_t pharm_idx) const = 0;
+            virtual std::size_t getMoleculeIndex(std::size_t pharm_idx) const = 0;
 
-			virtual std::size_t getConformationIndex(std::size_t pharm_idx) const = 0;
+            virtual std::size_t getConformationIndex(std::size_t pharm_idx) const = 0;
 
-			virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const = 0;
+            virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const = 0;
 
-			virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const = 0; 
+            virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const = 0; 
 
-		  protected:
-			ScreeningDBAccessor& operator=(const ScreeningDBAccessor&) {
-				return *this;
-			}
-		};
+          protected:
+            ScreeningDBAccessor& operator=(const ScreeningDBAccessor&) {
+                return *this;
+            }
+        };
     }
 }
 

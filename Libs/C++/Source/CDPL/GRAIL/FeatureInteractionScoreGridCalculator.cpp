@@ -42,40 +42,40 @@ constexpr double GRAIL::FeatureInteractionScoreGridCalculator::DEF_DISTANCE_CUTO
 
 
 GRAIL::FeatureInteractionScoreGridCalculator::FeatureInteractionScoreGridCalculator(): 
-	scoreCombinationFunc(MaxScoreFunctor()), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
+    scoreCombinationFunc(MaxScoreFunctor()), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 GRAIL::FeatureInteractionScoreGridCalculator::FeatureInteractionScoreGridCalculator(const ScoringFunction& func): 
-	scoringFunc(func), scoreCombinationFunc(MaxScoreFunctor()), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
+    scoringFunc(func), scoreCombinationFunc(MaxScoreFunctor()), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 GRAIL::FeatureInteractionScoreGridCalculator::FeatureInteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func): 
-	scoringFunc(scoring_func), scoreCombinationFunc(comb_func), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
+    scoringFunc(scoring_func), scoreCombinationFunc(comb_func), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 GRAIL::FeatureInteractionScoreGridCalculator::FeatureInteractionScoreGridCalculator(const FeatureInteractionScoreGridCalculator& calc):
-	scoringFunc(calc.scoringFunc), scoreCombinationFunc(calc.scoreCombinationFunc), ftrSelectionPred(calc.ftrSelectionPred), distCutoff(calc.distCutoff) {}
+    scoringFunc(calc.scoringFunc), scoreCombinationFunc(calc.scoreCombinationFunc), ftrSelectionPred(calc.ftrSelectionPred), distCutoff(calc.distCutoff) {}
 
 GRAIL::FeatureInteractionScoreGridCalculator::~FeatureInteractionScoreGridCalculator() {}
 
 void GRAIL::FeatureInteractionScoreGridCalculator::setDistanceCutoff(double dist)
 {
-	distCutoff = dist;
+    distCutoff = dist;
 }
 
 double GRAIL::FeatureInteractionScoreGridCalculator::getDistanceCutoff() const
 {
-	return distCutoff;
+    return distCutoff;
 }
 
 void GRAIL::FeatureInteractionScoreGridCalculator::normalizeScores(bool normalize)
 {
-	normScores = normalize;
+    normScores = normalize;
 }
 
 bool GRAIL::FeatureInteractionScoreGridCalculator::scoresNormalized() const
 {
-	return normScores;
+    return normScores;
 }
 
 void GRAIL::FeatureInteractionScoreGridCalculator::setScoringFunction(const ScoringFunction& func)
@@ -100,101 +100,101 @@ const GRAIL::FeatureInteractionScoreGridCalculator::ScoreCombinationFunction& GR
 
 void GRAIL::FeatureInteractionScoreGridCalculator::setFeatureSelectionPredicate(const FeaturePredicate& pred)
 {
-	ftrSelectionPred = pred;
+    ftrSelectionPred = pred;
 }
 
 const GRAIL::FeatureInteractionScoreGridCalculator::FeaturePredicate& GRAIL::FeatureInteractionScoreGridCalculator::getFeatureSelectionPredicate() const
 {
-	return ftrSelectionPred;
+    return ftrSelectionPred;
 }
 
 GRAIL::FeatureInteractionScoreGridCalculator& GRAIL::FeatureInteractionScoreGridCalculator::operator=(const FeatureInteractionScoreGridCalculator& calc) 
 {
-	if (this == &calc)
-		return *this;
+    if (this == &calc)
+        return *this;
 
-	scoringFunc = calc.scoringFunc;
-	scoreCombinationFunc = calc.scoreCombinationFunc;
-	ftrSelectionPred = calc.ftrSelectionPred;
-	distCutoff = calc.distCutoff;
+    scoringFunc = calc.scoringFunc;
+    scoreCombinationFunc = calc.scoreCombinationFunc;
+    ftrSelectionPred = calc.ftrSelectionPred;
+    distCutoff = calc.distCutoff;
 
-	return *this;
+    return *this;
 }
 
 void GRAIL::FeatureInteractionScoreGridCalculator::calculate(const Pharm::FeatureContainer& tgt_ftrs, Grid::DSpatialGrid& grid)
 {
-	using namespace Pharm;
-	
-	tgtFeatures.clear();
+    using namespace Pharm;
+    
+    tgtFeatures.clear();
 
-	for (FeatureContainer::ConstFeatureIterator it = tgt_ftrs.getFeaturesBegin(), end = tgt_ftrs.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ftr = *it;
+    for (FeatureContainer::ConstFeatureIterator it = tgt_ftrs.getFeaturesBegin(), end = tgt_ftrs.getFeaturesEnd(); it != end; ++it) {
+        const Feature& ftr = *it;
 
-		if (!ftrSelectionPred || ftrSelectionPred(ftr))
-			tgtFeatures.push_back(&ftr);
-	}
+        if (!ftrSelectionPred || ftrSelectionPred(ftr))
+            tgtFeatures.push_back(&ftr);
+    }
 
-	std::size_t num_features = tgtFeatures.size();
+    std::size_t num_features = tgtFeatures.size();
 
-	if (num_features == 0) {
-		for (std::size_t i = 0, num_pts = grid.getNumElements(); i < num_pts; i++)
-			grid(i) = 0.0;
+    if (num_features == 0) {
+        for (std::size_t i = 0, num_pts = grid.getNumElements(); i < num_pts; i++)
+            grid(i) = 0.0;
 
-		return;
-	}
-	
-	featureCoords.resize(num_features);
+        return;
+    }
+    
+    featureCoords.resize(num_features);
 
-	for (std::size_t i = 0; i < num_features; i++)
-		featureCoords[i] = get3DCoordinates(*tgtFeatures[i]);
+    for (std::size_t i = 0; i < num_features; i++)
+        featureCoords[i] = get3DCoordinates(*tgtFeatures[i]);
 
-	if (!octree)
-		octree.reset(new Octree());
+    if (!octree)
+        octree.reset(new Octree());
 
-	octree->initialize(featureCoords, 4);
+    octree->initialize(featureCoords, 4);
 
-	std::size_t num_pts = grid.getNumElements();
-	Math::Vector3D grid_pos;
-	double max_score = -std::numeric_limits<double>::max();
-	double min_score = std::numeric_limits<double>::max();
+    std::size_t num_pts = grid.getNumElements();
+    Math::Vector3D grid_pos;
+    double max_score = -std::numeric_limits<double>::max();
+    double min_score = std::numeric_limits<double>::max();
 
     for (std::size_t i = 0; i < num_pts; i++) {
-		grid.getCoordinates(i, grid_pos);
-		featureIndices.clear();
+        grid.getCoordinates(i, grid_pos);
+        featureIndices.clear();
 
-		octree->radiusNeighbors<Octree::L2Distance>(grid_pos, distCutoff, std::back_inserter(featureIndices));
+        octree->radiusNeighbors<Octree::L2Distance>(grid_pos, distCutoff, std::back_inserter(featureIndices));
 
-		std::size_t num_inc_ftrs = featureIndices.size();
+        std::size_t num_inc_ftrs = featureIndices.size();
 
-		if (num_inc_ftrs == 0) {
-			grid(i) = 0.0;
+        if (num_inc_ftrs == 0) {
+            grid(i) = 0.0;
 
-		} else {
-			partialScores.resize(num_inc_ftrs, false);
+        } else {
+            partialScores.resize(num_inc_ftrs, false);
 
-			for (std::size_t j = 0; j < num_inc_ftrs; j++) 
-				partialScores[j] = scoringFunc(grid_pos, *tgtFeatures[featureIndices[j]]);
+            for (std::size_t j = 0; j < num_inc_ftrs; j++) 
+                partialScores[j] = scoringFunc(grid_pos, *tgtFeatures[featureIndices[j]]);
 
-			grid(i) = scoreCombinationFunc(partialScores);
-		}
+            grid(i) = scoreCombinationFunc(partialScores);
+        }
 
-		max_score = std::max(grid(i), max_score);
-		min_score = std::min(grid(i), min_score);
-	}
+        max_score = std::max(grid(i), max_score);
+        min_score = std::min(grid(i), min_score);
+    }
 
-	if (!normScores)
-		return;
+    if (!normScores)
+        return;
 
-	// normalize to range [0, 1]
+    // normalize to range [0, 1]
 
-	double score_range = max_score - min_score;
+    double score_range = max_score - min_score;
 
-	if (score_range > 0.0) {
-		for (std::size_t i = 0; i < num_pts; i++)
-			grid(i) = (grid(i) - min_score) / (max_score - min_score);
+    if (score_range > 0.0) {
+        for (std::size_t i = 0; i < num_pts; i++)
+            grid(i) = (grid(i) - min_score) / (max_score - min_score);
 
-	} else {
-		for (std::size_t i = 0; i < num_pts; i++)
-			grid(i) = 0.0;
-	}
+    } else {
+        for (std::size_t i = 0; i < num_pts; i++)
+            grid(i) = 0.0;
+    }
 }

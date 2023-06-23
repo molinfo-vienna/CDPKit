@@ -31,30 +31,30 @@
 
 BOOST_PYTHON_MODULE(_descr)
 {
-	using namespace CDPLPythonDescr;
+    using namespace CDPLPythonDescr;
 
-	exportAutoCorrelation2DVectorCalculator();
-	exportAtomRDFCodeCalculator();
-	exportMoleculeRDFDescriptorCalculator();
-	exportAtomAutoCorrelation3DVectorCalculator();
-	exportMoleculeAutoCorr3DDescriptorCalculator();
-	exportMoleculeAutoCorr2DDescriptorCalculator();
-	exportBurdenMatrixGenerator();
-	exportBCUTDescriptorCalculator();
-	exportMolecularComplexityCalculator();
-	
-	exportFeatureRDFCodeCalculator();
-	exportPharmacophoreRDFDescriptorCalculator();
-	exportFeatureAutoCorrelation3DVectorCalculator();
+    exportAutoCorrelation2DVectorCalculator();
+    exportAtomRDFCodeCalculator();
+    exportMoleculeRDFDescriptorCalculator();
+    exportAtomAutoCorrelation3DVectorCalculator();
+    exportMoleculeAutoCorr3DDescriptorCalculator();
+    exportMoleculeAutoCorr2DDescriptorCalculator();
+    exportBurdenMatrixGenerator();
+    exportBCUTDescriptorCalculator();
+    exportMolecularComplexityCalculator();
+    
+    exportFeatureRDFCodeCalculator();
+    exportPharmacophoreRDFDescriptorCalculator();
+    exportFeatureAutoCorrelation3DVectorCalculator();
     exportPharmacophoreAutoCorr3DDescriptorCalculator();
 
-	exportPathFingerprintGenerator();
-	exportCircularFingerprintGenerator();
+    exportPathFingerprintGenerator();
+    exportCircularFingerprintGenerator();
 
-	exportEntity3DContainerFunctions();
-	exportAtomContainerFunctions();
-	exportMolecularGraphFunctions();
-	exportSimilarityFunctions();
+    exportEntity3DContainerFunctions();
+    exportAtomContainerFunctions();
+    exportMolecularGraphFunctions();
+    exportSimilarityFunctions();
 
-	registerFromPythonConverters();
+    registerFromPythonConverters();
 }

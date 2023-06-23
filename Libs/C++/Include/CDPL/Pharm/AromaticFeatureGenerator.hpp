@@ -43,106 +43,106 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief AromaticFeatureGenerator.
-		 */
-		class CDPL_PHARM_API AromaticFeatureGenerator : public PatternBasedFeatureGenerator
-		{
+        /**
+         * \brief AromaticFeatureGenerator.
+         */
+        class CDPL_PHARM_API AromaticFeatureGenerator : public PatternBasedFeatureGenerator
+        {
 
-		  public:
-			static constexpr double       DEF_FEATURE_TOL   = 0.9;
-			static constexpr unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
-			static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
+          public:
+            static constexpr double       DEF_FEATURE_TOL   = 0.9;
+            static constexpr unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
+            static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
 
-			/**
-			 * \brief Constructs the \c %AromaticFeatureGenerator instance.
-			 */
-			AromaticFeatureGenerator();
+            /**
+             * \brief Constructs the \c %AromaticFeatureGenerator instance.
+             */
+            AromaticFeatureGenerator();
 
-			/**
-			 * \brief Constructs a copy of the \c %AromaticFeatureGenerator instance \a gen.
-			 * \param gen The \c %AromaticFeatureGenerator instance to copy.
-			 */
-			AromaticFeatureGenerator(const AromaticFeatureGenerator& gen);
-	
-			/**
-			 * \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 */
-			AromaticFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
+            /**
+             * \brief Constructs a copy of the \c %AromaticFeatureGenerator instance \a gen.
+             * \param gen The \c %AromaticFeatureGenerator instance to copy.
+             */
+            AromaticFeatureGenerator(const AromaticFeatureGenerator& gen);
+    
+            /**
+             * \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds 
+             *        them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             */
+            AromaticFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
-			/**
-			 * Destructor.
-			 */
-			~AromaticFeatureGenerator();
+            /**
+             * Destructor.
+             */
+            ~AromaticFeatureGenerator();
 
-			/**
-			 * \brief Specifies the value of the feature type property that has to be set on newly generated features.
-			 * \param type The value of the feature type property.
-			 * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TYPE.
-			 * \see FeatureProperty::TYPE
-			 */			
-			void setFeatureType(unsigned int type);
+            /**
+             * \brief Specifies the value of the feature type property that has to be set on newly generated features.
+             * \param type The value of the feature type property.
+             * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TYPE.
+             * \see FeatureProperty::TYPE
+             */            
+            void setFeatureType(unsigned int type);
 
-			/**
-			 * \brief Returns the value of the feature type property that gets set on newly generated features.
-			 * \return The used value of the feature type property.
-			 * \see FeatureProperty::TYPE
-			 */
-			unsigned int getFeatureType() const;
+            /**
+             * \brief Returns the value of the feature type property that gets set on newly generated features.
+             * \return The used value of the feature type property.
+             * \see FeatureProperty::TYPE
+             */
+            unsigned int getFeatureType() const;
 
-			/**
-			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
-			 * \param geom The value of the feature geometry property.
-			 * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_GEOM.
-			 * \see FeatureProperty::GEOMETRY
-			 */
-			void setFeatureGeometry(unsigned int geom);
+            /**
+             * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
+             * \param geom The value of the feature geometry property.
+             * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_GEOM.
+             * \see FeatureProperty::GEOMETRY
+             */
+            void setFeatureGeometry(unsigned int geom);
 
-			/**
-			 * \brief Returns the value of the feature geometry property that gets set on newly generated features.
-			 * \return The used value of the feature geometry property.
-			 * \see FeatureProperty::GEOMETRY
-			 */
-			unsigned int getFeatureGeometry() const;
+            /**
+             * \brief Returns the value of the feature geometry property that gets set on newly generated features.
+             * \return The used value of the feature geometry property.
+             * \see FeatureProperty::GEOMETRY
+             */
+            unsigned int getFeatureGeometry() const;
 
-			/**
-			 * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
-			 * \param tol The value of the feature tolerance property.
-			 * \note The default value is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TOL.
-			 * \see FeatureProperty::TOLERANCE
-			 */
-			void setFeatureTolerance(double tol);
+            /**
+             * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
+             * \param tol The value of the feature tolerance property.
+             * \note The default value is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TOL.
+             * \see FeatureProperty::TOLERANCE
+             */
+            void setFeatureTolerance(double tol);
 
-			/**
-			 * \brief Returns the value of the feature tolerance property that gets set on newly generated features.
-			 * \return The value of the feature tolerance property.
-			 * \see FeatureProperty::TOLERANCE
-			 */
-			double getFeatureTolerance() const;
-			
-			/**
-			 * \brief Replaces the current set include/exclude patterns and attributes by a copy of the
-			 *        \c %AromaticFeatureGenerator instance \a gen.
-			 * \param gen The \c %AromaticFeatureGenerator instance to copy.
-			 * \return A reference to itself.
-			 */
-			AromaticFeatureGenerator& operator=(const AromaticFeatureGenerator& gen);
+            /**
+             * \brief Returns the value of the feature tolerance property that gets set on newly generated features.
+             * \return The value of the feature tolerance property.
+             * \see FeatureProperty::TOLERANCE
+             */
+            double getFeatureTolerance() const;
+            
+            /**
+             * \brief Replaces the current set include/exclude patterns and attributes by a copy of the
+             *        \c %AromaticFeatureGenerator instance \a gen.
+             * \param gen The \c %AromaticFeatureGenerator instance to copy.
+             * \return A reference to itself.
+             */
+            AromaticFeatureGenerator& operator=(const AromaticFeatureGenerator& gen);
 
-			FeatureGenerator::SharedPointer clone() const;
+            FeatureGenerator::SharedPointer clone() const;
 
-		  private:
-			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
+          private:
+            void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 
-			Chem::AromaticSSSRSubset aromSSSRSubset;
-			Util::BitSet             ringAtomMask;
-			unsigned int             featureType;
-			unsigned int             featureGeom;
-			double                   featureTol;
-			AtomList                 featureAtoms;
-		};
+            Chem::AromaticSSSRSubset aromSSSRSubset;
+            Util::BitSet             ringAtomMask;
+            unsigned int             featureType;
+            unsigned int             featureGeom;
+            double                   featureTol;
+            AtomList                 featureAtoms;
+        };
     }
 }
 

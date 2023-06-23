@@ -34,44 +34,44 @@ using namespace CDPL;
 
 cairo_t* Vis::CairoPointerTraits<cairo_t>::reference(cairo_t* p) throw()
 {
-	if (p)
-		return cairo_reference(p);
+    if (p)
+        return cairo_reference(p);
 
-	return 0;
+    return 0;
 }
 
 void Vis::CairoPointerTraits<cairo_t>::destroy(cairo_t* p) throw()
 {
-	if (p)
-		cairo_destroy(p);
+    if (p)
+        cairo_destroy(p);
 }
 
 
 cairo_surface_t* Vis::CairoPointerTraits<cairo_surface_t>::reference(cairo_surface_t* p) throw()
 {
-	if (p)
-		return cairo_surface_reference(p);
+    if (p)
+        return cairo_surface_reference(p);
 
-	return 0;
+    return 0;
 }
 
 void Vis::CairoPointerTraits<cairo_surface_t>::destroy(cairo_surface_t* p) throw()
 {
-	if (p)
-		cairo_surface_destroy(p);
+    if (p)
+        cairo_surface_destroy(p);
 }
 
 
 cairo_pattern_t* Vis::CairoPointerTraits<cairo_pattern_t>::reference(cairo_pattern_t* p) throw()
 {
-	if (p)
-		return cairo_pattern_reference(p);
+    if (p)
+        return cairo_pattern_reference(p);
 
-	return 0;
+    return 0;
 }
 
 void Vis::CairoPointerTraits<cairo_pattern_t>::destroy(cairo_pattern_t* p) throw()
 {
-	if (p)
-		cairo_pattern_destroy(p);
+    if (p)
+        cairo_pattern_destroy(p);
 }

@@ -31,5 +31,5 @@
 
 void CDPLPythonGrid::exportRegularGridSetWriter()
 {
-	CDPLPythonBase::DataWriterExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetWriter", "grid_set");
+    CDPLPythonBase::DataWriterExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetWriter", "grid_set");
 }

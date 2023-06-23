@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Chem::MOL2MolecularGraphWriter::MOL2MolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new MOL2DataWriter(*this)) {}
+    output(os), state(os.good()), writer(new MOL2DataWriter(*this)) {}
 
 Chem::MOL2MolecularGraphWriter::~MOL2MolecularGraphWriter() {}
 
 Base::DataWriter<Chem::MolecularGraph>& Chem::MOL2MolecularGraphWriter::write(const MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeMolecularGraph(output, molgraph);
+    try {
+        state = writer->writeMolecularGraph(output, molgraph);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("MOL2MolecularGraphWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("MOL2MolecularGraphWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Chem::MOL2MolecularGraphWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Chem::MOL2MolecularGraphWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

@@ -34,21 +34,21 @@
 namespace ChOX
 {
 
-	class DataSet;
+    class DataSet;
 
-	class OutputFileFilterList : public QStringList, private DataRecordVisitor
-	{
+    class OutputFileFilterList : public QStringList, private DataRecordVisitor
+    {
 
-	public:
-		OutputFileFilterList(const DataSet&);
-		OutputFileFilterList();
+    public:
+        OutputFileFilterList(const DataSet&);
+        OutputFileFilterList();
 
-	private:
-		void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
-		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
+    private:
+        void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
+        void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
-		QString filterString;
-	};
+        QString filterString;
+    };
 }
 
 #endif // CHOX_OUTPUTFILEFILTERLIST_HPP

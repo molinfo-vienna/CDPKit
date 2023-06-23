@@ -39,19 +39,19 @@ namespace CDPL
     namespace Biomol
     {
 
-	class HierarchyViewChain;
+    class HierarchyViewChain;
 
-	/**
-	 * \brief HierarchyViewFragment.
-	 */
-	class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
-	{
+    /**
+     * \brief HierarchyViewFragment.
+     */
+    class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
+    {
 
-	    friend class HierarchyViewChain;
+        friend class HierarchyViewChain;
 
-	  private:
-	    HierarchyViewFragment() {}
-	};
+      private:
+        HierarchyViewFragment() {}
+    };
     }
 }
 

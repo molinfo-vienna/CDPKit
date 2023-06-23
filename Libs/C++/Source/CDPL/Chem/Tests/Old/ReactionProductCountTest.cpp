@@ -31,259 +31,259 @@
 
 BOOST_AUTO_TEST_CASE(ReactionProductCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Reaction rxn1;
+    Reaction rxn1;
 
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn1.addComponent(ReactionRole::REACTANT);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.addReactant();
+    rxn1.addComponent(ReactionRole::REACTANT);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn1.addComponent(ReactionRole::AGENT);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.addAgent();
+    rxn1.addReactant();
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn1.addComponent(ReactionRole::PRODUCT);
-
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 1);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.addProduct();
+    rxn1.addComponent(ReactionRole::AGENT);
 
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 2);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	Reaction rxn2;
-
-	BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn2.getNumProducts() == 0);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn2 = rxn1;
+    rxn1.addAgent();
 
-	BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn2.getNumProducts() == 2);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn2.removeComponents(ReactionRole::REACTANT);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn2.getNumProducts() == 2);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn2.removeComponents(ReactionRole::PRODUCT);
+    rxn1.addComponent(ReactionRole::PRODUCT);
 
-	BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn2.getNumProducts() == 0);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+    BOOST_CHECK(rxn1.getNumProducts() == 1);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
 
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-	
-	rxn2 = rxn1;
-
-	BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn2.getNumProducts() == 2);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-	
-	rxn2.swapRoles(ReactionRole::REACTANT, ReactionRole::PRODUCT);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn2.getNumProducts() == 2);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-	
-	rxn2.swapRoles(ReactionRole::REACTANT, ReactionRole::AGENT);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn2.getNumProducts() == 2);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
-
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn2.removeComponents(ReactionRole::AGENT);
+    rxn1.addProduct();
 
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn2.getNumProducts() == 2);
-	BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+    BOOST_CHECK(rxn1.getNumProducts() == 2);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
 
-	BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn1.removeComponent(4);
-
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 1);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-	
-	rxn1.swapRoles(ReactionRole::REACTANT, ReactionRole::PRODUCT);
-
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 2);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.removeComponent(0, ReactionRole::PRODUCT);
+    Reaction rxn2;
 
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 1);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+    BOOST_CHECK(rxn2.getNumProducts() == 0);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn1.removeComponent(0, ReactionRole::REACTANT);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 1);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.removeComponent(0, ReactionRole::AGENT);
+    rxn2 = rxn1;
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 1);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+    BOOST_CHECK(rxn2.getNumProducts() == 2);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-//-----
-
-	rxn1.removeComponent(rxn1.getComponentsBegin());
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(rxn1.getNumProducts() == 1);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
-
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.removeComponent(rxn1.getProductsBegin());
+    rxn2.removeComponents(ReactionRole::REACTANT);
 
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+    BOOST_CHECK(rxn2.getNumProducts() == 2);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
 //-----
 
-	rxn1.clear();
+    rxn2.removeComponents(ReactionRole::PRODUCT);
 
-	BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(rxn1.getNumProducts() == 0);
-	BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+    BOOST_CHECK(rxn2.getNumProducts() == 0);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
 
-	BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+    
+    rxn2 = rxn1;
+
+    BOOST_CHECK(rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn2.getNumProducts() == 2);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+    
+    rxn2.swapRoles(ReactionRole::REACTANT, ReactionRole::PRODUCT);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn2.getNumProducts() == 2);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+    
+    rxn2.swapRoles(ReactionRole::REACTANT, ReactionRole::AGENT);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn2.getNumProducts() == 2);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn2.removeComponents(ReactionRole::AGENT);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn2.getNumProducts() == 2);
+    BOOST_CHECK(rxn2.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+
+    BOOST_CHECK(!rxn2.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.removeComponent(4);
+
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 1);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+    
+    rxn1.swapRoles(ReactionRole::REACTANT, ReactionRole::PRODUCT);
+
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 2);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 2);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.removeComponent(0, ReactionRole::PRODUCT);
+
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 1);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.removeComponent(0, ReactionRole::REACTANT);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 1);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.removeComponent(0, ReactionRole::AGENT);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 1);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.removeComponent(rxn1.getComponentsBegin());
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 1);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 1);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.removeComponent(rxn1.getProductsBegin());
+
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+//-----
+
+    rxn1.clear();
+
+    BOOST_CHECK(rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(rxn1.getNumProducts() == 0);
+    BOOST_CHECK(rxn1.getProperty<std::size_t>(ReactionProperty::PRODUCT_COUNT) == 0);
+
+    BOOST_CHECK(!rxn1.getProperty(ReactionProperty::PRODUCT_COUNT, false, false).isEmpty());
 }
 
 

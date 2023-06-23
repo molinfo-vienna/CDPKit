@@ -34,29 +34,29 @@ class QComboBox;
 namespace ChOX
 {
 
-	class SizeAdjustmentEditWidget : public QWidget
-	{
+    class SizeAdjustmentEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		SizeAdjustmentEditWidget(QWidget*, unsigned int&);
+    public:
+        SizeAdjustmentEditWidget(QWidget*, unsigned int&);
 
-	signals:
-		void sizeAdjustmentChanged();
+    signals:
+        void sizeAdjustmentChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleAdjustmentSelection(int);
+    private slots:
+        void handleAdjustmentSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		unsigned int& sizeAdjustment;
-		QComboBox*    sizeAdjustmentComboBox;
-	};
+        unsigned int& sizeAdjustment;
+        QComboBox*    sizeAdjustmentComboBox;
+    };
 }
 
 #endif // CHOX_SIZEADJUSTMENTEDITWIDGET_HPP

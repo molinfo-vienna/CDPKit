@@ -39,25 +39,25 @@ namespace CDPL
     namespace Chem
     {
 
-		class Molecule;
+        class Molecule;
     }
 
     namespace Pharm
     {
 
-		/**
-		 * \brief A handler for the input of molecule data in the PSD-format of the <em>CDPL</em>.
-		 */
-		class CDPL_PHARM_API PSDMoleculeInputHandler : public Base::DataInputHandler<Chem::Molecule>
-		{
+        /**
+         * \brief A handler for the input of molecule data in the PSD-format of the <em>CDPL</em>.
+         */
+        class CDPL_PHARM_API PSDMoleculeInputHandler : public Base::DataInputHandler<Chem::Molecule>
+        {
 
-		  public:
-			const Base::DataFormat& getDataFormat() const;
+          public:
+            const Base::DataFormat& getDataFormat() const;
 
-			ReaderType::SharedPointer createReader(std::istream& is) const;
+            ReaderType::SharedPointer createReader(std::istream& is) const;
 
-			ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
-		};
+            ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
+        };
     }
 }
 

@@ -31,10 +31,10 @@
 
 void CDPLPythonConfGen::exportCFLMoleculeInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ConfGen::CFLMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CFLMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<ConfGen::CFLMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("CFLMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

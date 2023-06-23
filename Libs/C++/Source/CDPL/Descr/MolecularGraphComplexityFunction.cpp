@@ -33,5 +33,5 @@ using namespace CDPL;
 
 double Descr::calcMolecularComplexity(const Chem::MolecularGraph& molgraph)
 {
-	return MolecularComplexityCalculator().calculate(molgraph);
+    return MolecularComplexityCalculator().calculate(molgraph);
 }

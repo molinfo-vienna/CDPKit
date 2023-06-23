@@ -33,15 +33,15 @@
 namespace 
 {
 
-	struct ControlParameter {};
+    struct ControlParameter {};
 }
 
 
 void CDPLPythonConfGen::exportControlParameters()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ControlParameter, boost::noncopyable>("ControlParameter", python::no_init)
-		.def_readonly("STRICT_ERROR_CHECKING", &ConfGen::ControlParameter::STRICT_ERROR_CHECKING);
+    python::class_<ControlParameter, boost::noncopyable>("ControlParameter", python::no_init)
+        .def_readonly("STRICT_ERROR_CHECKING", &ConfGen::ControlParameter::STRICT_ERROR_CHECKING);
 }

@@ -36,61 +36,61 @@ ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(): hashCode(0)
 
 void ConfGen::FragmentLibraryEntry::setHashCode(std::uint64_t hash_code)
 {
-	hashCode = hash_code;
+    hashCode = hash_code;
 }
 
 std::uint64_t ConfGen::FragmentLibraryEntry::getHashCode() const
 {
-	return hashCode;
+    return hashCode;
 }
 
 void ConfGen::FragmentLibraryEntry::setSMILES(const std::string& smiles)
 {
-	this->smiles = smiles;
+    this->smiles = smiles;
 }
 
 const std::string& ConfGen::FragmentLibraryEntry::getSMILES() const
 {
-	return smiles;
+    return smiles;
 }
 
 void ConfGen::FragmentLibraryEntry::clearConformers()
 {
-	conformers.clear();
+    conformers.clear();
 }
 
 std::size_t ConfGen::FragmentLibraryEntry::getNumAtoms() const
 {
-	if (conformers.empty())
-		return 0;
+    if (conformers.empty())
+        return 0;
 
-	return conformers[0]->getSize();
+    return conformers[0]->getSize();
 }
 
 std::size_t ConfGen::FragmentLibraryEntry::getNumConformers() const
 {
-	return conformers.size();
+    return conformers.size();
 }
 
 void ConfGen::FragmentLibraryEntry::addConformer(const ConformerData::SharedPointer& conf_data)
 {
-	conformers.push_back(conf_data);
+    conformers.push_back(conf_data);
 }
 
 const ConfGen::ConformerData& ConfGen::FragmentLibraryEntry::getConformer(std::size_t idx) const
 {
-	if (idx >= conformers.size())
-		throw Base::IndexError("FragmentLibraryEntry: conformer index out of bounds");
+    if (idx >= conformers.size())
+        throw Base::IndexError("FragmentLibraryEntry: conformer index out of bounds");
 
-	return *conformers[idx];
+    return *conformers[idx];
 }
 
 ConfGen::ConformerData& ConfGen::FragmentLibraryEntry::getConformer(std::size_t idx)
 {
-	if (idx >= conformers.size())
-		throw Base::IndexError("FragmentLibraryEntry: conformer index out of bounds");
+    if (idx >= conformers.size())
+        throw Base::IndexError("FragmentLibraryEntry: conformer index out of bounds");
 
-	return *conformers[idx];
+    return *conformers[idx];
 }
 
 ConfGen::FragmentLibraryEntry::ConstConformerIterator ConfGen::FragmentLibraryEntry::getConformersBegin() const
@@ -135,5 +135,5 @@ ConfGen::FragmentLibraryEntry::ConformerIterator ConfGen::FragmentLibraryEntry::
 
 const ConfGen::ConformerDataArray& ConfGen::FragmentLibraryEntry:: getData() const
 {
-	return conformers;
+    return conformers;
 }

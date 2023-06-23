@@ -40,45 +40,45 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94BondStretchingInteraction
-		{
+        class CDPL_FORCEFIELD_API MMFF94BondStretchingInteraction
+        {
 
-		  public:
-			MMFF94BondStretchingInteraction(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int bond_type_idx, 
-											double force_const, double ref_length):
-				atom1Idx(atom1_idx), atom2Idx(atom2_idx), bondTypeIdx(bond_type_idx), forceConst(force_const), refLength(ref_length) {}
+          public:
+            MMFF94BondStretchingInteraction(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int bond_type_idx, 
+                                            double force_const, double ref_length):
+                atom1Idx(atom1_idx), atom2Idx(atom2_idx), bondTypeIdx(bond_type_idx), forceConst(force_const), refLength(ref_length) {}
 
-			std::size_t getAtom1Index() const {
-				return atom1Idx;
-			}
+            std::size_t getAtom1Index() const {
+                return atom1Idx;
+            }
 
-			std::size_t getAtom2Index() const {
-				return atom2Idx;
-			}
+            std::size_t getAtom2Index() const {
+                return atom2Idx;
+            }
 
-			unsigned int getBondTypeIndex() const {
-				return bondTypeIdx;
-			}
+            unsigned int getBondTypeIndex() const {
+                return bondTypeIdx;
+            }
 
-			double getForceConstant() const {
-				return forceConst;
-			}
+            double getForceConstant() const {
+                return forceConst;
+            }
 
-			double getReferenceLength() const {
-				return refLength;
-			}
-	
-			void setReferenceLength(double length) {
-				refLength = length;
-			}
+            double getReferenceLength() const {
+                return refLength;
+            }
+    
+            void setReferenceLength(double length) {
+                refLength = length;
+            }
 
-		  private:
-			std::size_t  atom1Idx;
-			std::size_t  atom2Idx;
-			unsigned int bondTypeIdx;
-			double       forceConst;
-			double       refLength;
-		};			
+          private:
+            std::size_t  atom1Idx;
+            std::size_t  atom2Idx;
+            unsigned int bondTypeIdx;
+            double       forceConst;
+            double       refLength;
+        };            
     }
 }
 

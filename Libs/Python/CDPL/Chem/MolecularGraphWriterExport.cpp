@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportMolecularGraphWriter()
 {
-	CDPLPythonBase::DataWriterExport<CDPL::Chem::MolecularGraph>("MolecularGraphWriter", "molgraph");
+    CDPLPythonBase::DataWriterExport<CDPL::Chem::MolecularGraph>("MolecularGraphWriter", "molgraph");
 }

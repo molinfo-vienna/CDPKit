@@ -37,106 +37,106 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief ANDMatchExpressionList.
-		 * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
-		 * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
-		 *                  expression list evaluation.
-		 */
-		template <typename ObjType1, typename ObjType2 = void>
-		class ANDMatchExpressionList : public MatchExpressionList<ObjType1, ObjType2>
-		{
+        /**
+         * \brief ANDMatchExpressionList.
+         * \tparam ObjType1 The type of the primary query/target objects for which the expression list gets evaluated.
+         * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
+         *                  expression list evaluation.
+         */
+        template <typename ObjType1, typename ObjType2 = void>
+        class ANDMatchExpressionList : public MatchExpressionList<ObjType1, ObjType2>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
-			 */
-			typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
+             */
+            typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
 
-			/**
-			 * Performs an evaluation of the conjunctive expression list for the given query and target objects.
-			 *
-			 * \param query_obj1 The primary query object.
-			 * \param query_obj2 The secondary query object.
-			 * \param target_obj1 The primary target object.
-			 * \param target_obj2 The secondary target object.
-			 * \param aux_data Provides auxiliary information for the evaluation of the expression list.
-			 * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
-			 * \note If the list is empty, the expression list evaluates to \c true.
-			 */
-			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
-							const Base::Any& aux_data) const;
+            /**
+             * Performs an evaluation of the conjunctive expression list for the given query and target objects.
+             *
+             * \param query_obj1 The primary query object.
+             * \param query_obj2 The secondary query object.
+             * \param target_obj1 The primary target object.
+             * \param target_obj2 The secondary target object.
+             * \param aux_data Provides auxiliary information for the evaluation of the expression list.
+             * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
+             * \note If the list is empty, the expression list evaluates to \c true.
+             */
+            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
+                            const Base::Any& aux_data) const;
 
-			/**
-			 * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
-			 * provided candidate atom/bond mapping.
-			 *
-			 * \param query_obj1 The primary query object.
-			 * \param query_obj2 The secondary query object.
-			 * \param target_obj1 The primary target object.
-			 * \param target_obj2 The secondary target object.
-			 * \param mapping The current query to target atom/bond mapping candidate to evaluate.
-			 * \param aux_data Provides auxiliary information for the evaluation of the expression list.
-			 * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
-			 * \note If the list is empty, the expression list evaluates to \c true.
-			 */
-			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
-							const AtomBondMapping& mapping, const Base::Any& aux_data) const;
+            /**
+             * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
+             * provided candidate atom/bond mapping.
+             *
+             * \param query_obj1 The primary query object.
+             * \param query_obj2 The secondary query object.
+             * \param target_obj1 The primary target object.
+             * \param target_obj2 The secondary target object.
+             * \param mapping The current query to target atom/bond mapping candidate to evaluate.
+             * \param aux_data Provides auxiliary information for the evaluation of the expression list.
+             * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
+             * \note If the list is empty, the expression list evaluates to \c true.
+             */
+            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
+                            const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
-		private:
-			const char* getClassName() const {
-				return "ANDMatchExpressionList";
-			}
-		};
+        private:
+            const char* getClassName() const {
+                return "ANDMatchExpressionList";
+            }
+        };
 
-		/**
-		 * \brief ANDMatchExpressionList.
-		 * \tparam ObjType The type of the query/target objects for which the expression list gets evaluated.
-		 */
-		template <typename ObjType>
-		class ANDMatchExpressionList<ObjType, void> : public MatchExpressionList<ObjType, void>
-		{
+        /**
+         * \brief ANDMatchExpressionList.
+         * \tparam ObjType The type of the query/target objects for which the expression list gets evaluated.
+         */
+        template <typename ObjType>
+        class ANDMatchExpressionList<ObjType, void> : public MatchExpressionList<ObjType, void>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
-			 */
-			typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
+             */
+            typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
 
-			/**
-			 * Performs an evaluation of the conjunctive expression list for the given query and target objects.
-			 *
-			 * \param query_obj The query object.
-			 * \param target_obj The target object.
-			 * \param aux_data Provides auxiliary information for the evaluation of the expression list.
-			 * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
-			 * \note If the list is empty, the expression list evaluates to \c true.
-			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
+            /**
+             * Performs an evaluation of the conjunctive expression list for the given query and target objects.
+             *
+             * \param query_obj The query object.
+             * \param target_obj The target object.
+             * \param aux_data Provides auxiliary information for the evaluation of the expression list.
+             * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
+             * \note If the list is empty, the expression list evaluates to \c true.
+             */
+            bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
-			/**
-			 * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
-			 * provided candidate atom/bond mapping.
-			 *
-			 * \param query_obj The query object.
-			 * \param target_obj The target object.
-			 * \param mapping The current query to target atom/bond mapping candidate to evaluate.
-			 * \param aux_data Provides auxiliary information for the evaluation of the expression list.
-			 * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
-			 * \note If the list is empty, the expression list evaluates to \c true.
-			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping,
-							const Base::Any& aux_data) const;
+            /**
+             * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
+             * provided candidate atom/bond mapping.
+             *
+             * \param query_obj The query object.
+             * \param target_obj The target object.
+             * \param mapping The current query to target atom/bond mapping candidate to evaluate.
+             * \param aux_data Provides auxiliary information for the evaluation of the expression list.
+             * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
+             * \note If the list is empty, the expression list evaluates to \c true.
+             */
+            bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping,
+                            const Base::Any& aux_data) const;
 
-		private:
-			const char* getClassName() const {
-				return "ANDMatchExpressionList";
-			}
-		};
-	}
+        private:
+            const char* getClassName() const {
+                return "ANDMatchExpressionList";
+            }
+        };
+    }
 }
 
 
@@ -144,57 +144,57 @@ namespace CDPL
 
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-																			   const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																			   const Base::Any& data) const
+                                                                               const ObjType1& target_obj1, const ObjType2& target_obj2, 
+                                                                               const Base::Any& data) const
 {
-	typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
+    typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
 
-	for (typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
-		if (!(*it)(query_obj1, query_obj2, target_obj1, target_obj2, data))
-			return false;
+    for (typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
+        if (!(*it)(query_obj1, query_obj2, target_obj1, target_obj2, data))
+            return false;
 
-	return true;
+    return true;
 }
 
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-																			  const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																			  const AtomBondMapping& mapping, const Base::Any& data) const
+                                                                              const ObjType1& target_obj1, const ObjType2& target_obj2, 
+                                                                              const AtomBondMapping& mapping, const Base::Any& data) const
 {
-	typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
+    typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
 
-	for (typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
-		if (!(*it)(query_obj1, query_obj2, target_obj1, target_obj2, mapping, data))
-			return false;
+    for (typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
+        if (!(*it)(query_obj1, query_obj2, target_obj1, target_obj2, mapping, data))
+            return false;
 
-	return true;
+    return true;
 }
 
 
 template <typename ObjType>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																		  const Base::Any& data) const
+                                                                          const Base::Any& data) const
 {
-	typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
+    typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
 
-	for (typename MatchExpressionList<ObjType, void>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
-		if (!(*it)(query_obj, target_obj, data))
-			return false;
+    for (typename MatchExpressionList<ObjType, void>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
+        if (!(*it)(query_obj, target_obj, data))
+            return false;
 
-	return true;
+    return true;
 }
 
 template <typename ObjType>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																		  const AtomBondMapping& mapping, const Base::Any& data) const
+                                                                          const AtomBondMapping& mapping, const Base::Any& data) const
 {
-	typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
+    typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
 
-	for (typename MatchExpressionList<ObjType, void>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
-		if (!(*it)(query_obj, target_obj, mapping, data))
-			return false;
+    for (typename MatchExpressionList<ObjType, void>::ConstElementIterator it = this->getElementsBegin(); it != exprs_end; ++it)
+        if (!(*it)(query_obj, target_obj, mapping, data))
+            return false;
 
-	return true;
+    return true;
 }
 
 #endif // CDPL_CHEM_ANDMATCHEXPRESSIONLIST_HPP

@@ -29,8 +29,8 @@
 namespace CDPLPython
 {
 
-	void exportVersionInfo();
-	void exportConfigInfo();
+    void exportVersionInfo();
+    void exportConfigInfo();
 }
 
 #endif // CDPL_PYTHON_EXPORTS_HPP

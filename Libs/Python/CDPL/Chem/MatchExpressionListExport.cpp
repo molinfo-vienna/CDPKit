@@ -40,44 +40,44 @@
 namespace
 {
 
-	template <typename ObjType1, typename ObjType2 = void>
-	struct MatchExpressionListExport
-	{
+    template <typename ObjType1, typename ObjType2 = void>
+    struct MatchExpressionListExport
+    {
 
-		MatchExpressionListExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        MatchExpressionListExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			python::class_<Chem::MatchExpressionList<ObjType1, ObjType2>, 
-				typename Chem::MatchExpressionList<ObjType1, ObjType2>::SharedPointer,
-				python::bases<Chem::MatchExpression<ObjType1, ObjType2> > >(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const Chem::MatchExpressionList<ObjType1, ObjType2>&>((python::arg("self"), python::arg("expr")))
-					 [python::with_custodian_and_ward<1, 2>()])
-				.def(CDPLPythonUtil::ArrayVisitor<Chem::MatchExpressionList<ObjType1, ObjType2>, 
-					 python::return_value_policy<python::copy_non_const_reference, 
-					 python::with_custodian_and_ward_postcall<0, 1> >, 
-					 python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, 
-					 python::with_custodian_and_ward<1, 4> >())
-				.def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchExpressionList<ObjType1, ObjType2>::operator=),
-					 (python::arg("self"), python::arg("expr")),
-					 python::return_self<python::with_custodian_and_ward<1, 2> >())
-				.def("__eq__", &Chem::MatchExpressionList<ObjType1, ObjType2>::operator==, 
-					 (python::arg("self"), python::arg("expr")))
-				.def("__ne__", &Chem::MatchExpressionList<ObjType1, ObjType2>::operator!=, 
-					 (python::arg("self"), python::arg("expr")));
-		}
-	};
+            python::class_<Chem::MatchExpressionList<ObjType1, ObjType2>, 
+                typename Chem::MatchExpressionList<ObjType1, ObjType2>::SharedPointer,
+                python::bases<Chem::MatchExpression<ObjType1, ObjType2> > >(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const Chem::MatchExpressionList<ObjType1, ObjType2>&>((python::arg("self"), python::arg("expr")))
+                     [python::with_custodian_and_ward<1, 2>()])
+                .def(CDPLPythonUtil::ArrayVisitor<Chem::MatchExpressionList<ObjType1, ObjType2>, 
+                     python::return_value_policy<python::copy_non_const_reference, 
+                     python::with_custodian_and_ward_postcall<0, 1> >, 
+                     python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, 
+                     python::with_custodian_and_ward<1, 4> >())
+                .def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchExpressionList<ObjType1, ObjType2>::operator=),
+                     (python::arg("self"), python::arg("expr")),
+                     python::return_self<python::with_custodian_and_ward<1, 2> >())
+                .def("__eq__", &Chem::MatchExpressionList<ObjType1, ObjType2>::operator==, 
+                     (python::arg("self"), python::arg("expr")))
+                .def("__ne__", &Chem::MatchExpressionList<ObjType1, ObjType2>::operator!=, 
+                     (python::arg("self"), python::arg("expr")));
+        }
+    };
 }
 
 
 void CDPLPythonChem::exportMatchExpressionLists()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	MatchExpressionListExport<Chem::Atom, Chem::MolecularGraph>("AtomMatchExpressionList");
-	MatchExpressionListExport<Chem::Bond, Chem::MolecularGraph>("BondMatchExpressionList");
-	MatchExpressionListExport<Chem::MolecularGraph>("MolecularGraphMatchExpressionList");
-	MatchExpressionListExport<Chem::Reaction>("ReactionMatchExpressionList");
+    MatchExpressionListExport<Chem::Atom, Chem::MolecularGraph>("AtomMatchExpressionList");
+    MatchExpressionListExport<Chem::Bond, Chem::MolecularGraph>("BondMatchExpressionList");
+    MatchExpressionListExport<Chem::MolecularGraph>("MolecularGraphMatchExpressionList");
+    MatchExpressionListExport<Chem::Reaction>("ReactionMatchExpressionList");
 }

@@ -35,31 +35,31 @@ using namespace CDPL;
 
 
 bool Chem::generateSMILES(const MolecularGraph& molgraph, std::string& smiles, bool canonical, 
-						  bool ord_h_deplete, unsigned int atom_flags, unsigned int bond_flags)
+                          bool ord_h_deplete, unsigned int atom_flags, unsigned int bond_flags)
 {
-	std::ostringstream oss;
-	SMILESMolecularGraphWriter smi_writer(oss);
+    std::ostringstream oss;
+    SMILESMolecularGraphWriter smi_writer(oss);
 
-	if (atom_flags == AtomPropertyFlag::DEFAULT)
-		atom_flags = AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::CONFIGURATION;
+    if (atom_flags == AtomPropertyFlag::DEFAULT)
+        atom_flags = AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::CONFIGURATION;
 
-	if (bond_flags == BondPropertyFlag::DEFAULT)
-		bond_flags = BondPropertyFlag::CONFIGURATION;
+    if (bond_flags == BondPropertyFlag::DEFAULT)
+        bond_flags = BondPropertyFlag::CONFIGURATION;
 
-	setRecordSeparatorParameter(smi_writer, "");
-	setOrdinaryHydrogenDepleteParameter(smi_writer, ord_h_deplete);
-	setSMILESWriteCanonicalFormParameter(smi_writer, canonical);
-	setSMILESMolWriteAtomMappingIDParameter(smi_writer, atom_flags & AtomPropertyFlag::ATOM_MAPPING_ID);
-	setSMILESWriteIsotopeParameter(smi_writer, atom_flags & AtomPropertyFlag::ISOTOPE);
-	setSMILESWriteAtomStereoParameter(smi_writer, atom_flags & AtomPropertyFlag::CONFIGURATION);
-	setSMILESWriteBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
-	setSMILESWriteRingBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
-	setSMILESWriteAromaticBondsParameter(smi_writer, bond_flags & BondPropertyFlag::AROMATICITY);
-	setSMILESWriteKekuleFormParameter(smi_writer, bond_flags & BondPropertyFlag::ORDER);
+    setRecordSeparatorParameter(smi_writer, "");
+    setOrdinaryHydrogenDepleteParameter(smi_writer, ord_h_deplete);
+    setSMILESWriteCanonicalFormParameter(smi_writer, canonical);
+    setSMILESMolWriteAtomMappingIDParameter(smi_writer, atom_flags & AtomPropertyFlag::ATOM_MAPPING_ID);
+    setSMILESWriteIsotopeParameter(smi_writer, atom_flags & AtomPropertyFlag::ISOTOPE);
+    setSMILESWriteAtomStereoParameter(smi_writer, atom_flags & AtomPropertyFlag::CONFIGURATION);
+    setSMILESWriteBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
+    setSMILESWriteRingBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
+    setSMILESWriteAromaticBondsParameter(smi_writer, bond_flags & BondPropertyFlag::AROMATICITY);
+    setSMILESWriteKekuleFormParameter(smi_writer, bond_flags & BondPropertyFlag::ORDER);
 
-	bool result = !(!smi_writer.write(molgraph));
+    bool result = !(!smi_writer.write(molgraph));
 
-	smiles = oss.str();
+    smiles = oss.str();
 
-	return result;
+    return result;
 }

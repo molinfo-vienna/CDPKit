@@ -45,63 +45,63 @@ typedef struct _cairo cairo_t;
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Implements the Renderer2D interface on top of the <em>Cairo 2D Graphics Library</em>.
-		 *
-		 * For more information about the <em>Cairo 2D Graphics Library</em> see [\ref CAIRO].
-		 */
-		class CDPL_VIS_API CairoRenderer2D : public Renderer2D
-		{
+        /**
+         * \brief Implements the Renderer2D interface on top of the <em>Cairo 2D Graphics Library</em>.
+         *
+         * For more information about the <em>Cairo 2D Graphics Library</em> see [\ref CAIRO].
+         */
+        class CDPL_VIS_API CairoRenderer2D : public Renderer2D
+        {
 
-		public:
-			/**
-			 * \brief Constructs a renderer object that operates on the \e Cairo cdrawing ontext specified by \a cairo_ctxt.
-			 * \param cairo_ctxt The \e Cairo drawing context.
-			 * \throw Base::NullPointerException if \a cairo_ctxt is \e null.
-			 */
-			CairoRenderer2D(const CairoPointer<cairo_t>& cairo_ctxt);
-	
-			/**
-			 * \brief Destructor.
-			 */
-			~CairoRenderer2D();
+        public:
+            /**
+             * \brief Constructs a renderer object that operates on the \e Cairo cdrawing ontext specified by \a cairo_ctxt.
+             * \param cairo_ctxt The \e Cairo drawing context.
+             * \throw Base::NullPointerException if \a cairo_ctxt is \e null.
+             */
+            CairoRenderer2D(const CairoPointer<cairo_t>& cairo_ctxt);
+    
+            /**
+             * \brief Destructor.
+             */
+            ~CairoRenderer2D();
 
-			void saveState();
-			void restoreState();
+            void saveState();
+            void restoreState();
 
-			void setTransform(const Math::Matrix3D& xform);
-			void transform(const Math::Matrix3D& xform);
+            void setTransform(const Math::Matrix3D& xform);
+            void transform(const Math::Matrix3D& xform);
 
-			void setPen(const Pen& pen);
-			void setBrush(const Brush& brush);
-			void setFont(const Font& font);
+            void setPen(const Pen& pen);
+            void setBrush(const Brush& brush);
+            void setFont(const Font& font);
 
-			void drawRectangle(double x1, double y1, double x2, double y2);
-			void drawPolygon(const Math::Vector2DArray& points);
-			void drawLine(double x1, double y1, double x2, double y2);
-			void drawPolyline(const Math::Vector2DArray& points);
-			void drawLineSegments(const Math::Vector2DArray& points);
-			void drawPoint(double x, double y);
-			void drawText(double x, double y, const std::string& txt);
-			void drawEllipse(double x, double y, double width, double height);
+            void drawRectangle(double x1, double y1, double x2, double y2);
+            void drawPolygon(const Math::Vector2DArray& points);
+            void drawLine(double x1, double y1, double x2, double y2);
+            void drawPolyline(const Math::Vector2DArray& points);
+            void drawLineSegments(const Math::Vector2DArray& points);
+            void drawPoint(double x, double y);
+            void drawText(double x, double y, const std::string& txt);
+            void drawEllipse(double x, double y, double width, double height);
 
-		private:
-			void fillPath() const;
-			void strokePath() const;
+        private:
+            void fillPath() const;
+            void strokePath() const;
 
-			typedef std::vector<Pen> PenStack;
-			typedef std::vector<Brush> BrushStack;
-			typedef std::vector<Font> FontStack;
+            typedef std::vector<Pen> PenStack;
+            typedef std::vector<Brush> BrushStack;
+            typedef std::vector<Font> FontStack;
 
-			CairoPointer<cairo_t> cairoContext;
-			PenStack              penStack;
-			BrushStack            brushStack;
-			FontStack             fontStack;
-		};
-	}
+            CairoPointer<cairo_t> cairoContext;
+            PenStack              penStack;
+            BrushStack            brushStack;
+            FontStack             fontStack;
+        };
+    }
 }
 
 #endif // CDPL_VIS_CAIRORENDERER2D_HPP

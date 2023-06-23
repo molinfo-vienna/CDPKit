@@ -31,99 +31,99 @@
 
 BOOST_AUTO_TEST_CASE(FoldBitSetFunctionTest)
 {
-	using namespace CDPL;
-	using namespace Util;
+    using namespace CDPL;
+    using namespace Util;
 
-	BitSet bs1(std::string("101010101010101010101010"));
-	std::string bs_string;
+    BitSet bs1(std::string("101010101010101010101010"));
+    std::string bs_string;
 
-	fold(bs1, 0);
-	to_string(bs1, bs_string);
-	BOOST_CHECK(bs_string == "101010101010101010101010");
+    fold(bs1, 0);
+    to_string(bs1, bs_string);
+    BOOST_CHECK(bs_string == "101010101010101010101010");
 
-	fold(bs1, 1);
-	to_string(bs1, bs_string);
-	BOOST_CHECK(bs_string == "101010101010");
+    fold(bs1, 1);
+    to_string(bs1, bs_string);
+    BOOST_CHECK(bs_string == "101010101010");
 
-	fold(bs1, 1);
-	to_string(bs1, bs_string);
-	BOOST_CHECK(bs_string == "101010");
+    fold(bs1, 1);
+    to_string(bs1, bs_string);
+    BOOST_CHECK(bs_string == "101010");
 
-	BitSet bs2(std::string("101010101010010101010101"));
+    BitSet bs2(std::string("101010101010010101010101"));
 
-	fold(bs2, 0);
-	to_string(bs2, bs_string);
-	BOOST_CHECK(bs_string == "101010101010010101010101");
+    fold(bs2, 0);
+    to_string(bs2, bs_string);
+    BOOST_CHECK(bs_string == "101010101010010101010101");
 
-	fold(bs2, 1);
-	to_string(bs2, bs_string);
-	BOOST_CHECK(bs_string == "111111111111");
+    fold(bs2, 1);
+    to_string(bs2, bs_string);
+    BOOST_CHECK(bs_string == "111111111111");
 
-	fold(bs2, 1);
-	to_string(bs2, bs_string);
-	BOOST_CHECK(bs_string == "111111");
+    fold(bs2, 1);
+    to_string(bs2, bs_string);
+    BOOST_CHECK(bs_string == "111111");
 
-	BitSet bs3(std::string("010101010101010101010"));
+    BitSet bs3(std::string("010101010101010101010"));
 
-	fold(bs3, 0);
-	to_string(bs3, bs_string);
-	BOOST_CHECK(bs_string == "010101010101010101010");
+    fold(bs3, 0);
+    to_string(bs3, bs_string);
+    BOOST_CHECK(bs_string == "010101010101010101010");
 
-	fold(bs3, 1);
-	to_string(bs3, bs_string);
-	BOOST_CHECK(bs_string == "1010101010");
+    fold(bs3, 1);
+    to_string(bs3, bs_string);
+    BOOST_CHECK(bs_string == "1010101010");
 
-	fold(bs3, 1);
-	to_string(bs3, bs_string);
-	BOOST_CHECK(bs_string == "11111");
+    fold(bs3, 1);
+    to_string(bs3, bs_string);
+    BOOST_CHECK(bs_string == "11111");
 
-	BitSet bs4(std::string("111111111100000000000000"));	
+    BitSet bs4(std::string("111111111100000000000000"));    
 
-	fold(bs4, 2);
-	to_string(bs4, bs_string);
-	BOOST_CHECK(bs_string == "111111");
+    fold(bs4, 2);
+    to_string(bs4, bs_string);
+    BOOST_CHECK(bs_string == "111111");
 
-	fold(bs4, 0);
-	to_string(bs4, bs_string);
-	BOOST_CHECK(bs_string == "111111");
+    fold(bs4, 0);
+    to_string(bs4, bs_string);
+    BOOST_CHECK(bs_string == "111111");
 
-	fold(bs4, 1);
-	to_string(bs4, bs_string);
-	BOOST_CHECK(bs_string == "111");
+    fold(bs4, 1);
+    to_string(bs4, bs_string);
+    BOOST_CHECK(bs_string == "111");
 
-	fold(bs4, 1);
-	to_string(bs4, bs_string);
-	BOOST_CHECK(bs_string == "1");
+    fold(bs4, 1);
+    to_string(bs4, bs_string);
+    BOOST_CHECK(bs_string == "1");
 
-	fold(bs4, 1);
-	to_string(bs4, bs_string);
-	BOOST_CHECK(bs_string == "");
+    fold(bs4, 1);
+    to_string(bs4, bs_string);
+    BOOST_CHECK(bs_string == "");
 
-	BitSet bs5;	
+    BitSet bs5;    
 
-	fold(bs5, 0);
-	to_string(bs5, bs_string);
-	BOOST_CHECK(bs_string == "");
+    fold(bs5, 0);
+    to_string(bs5, bs_string);
+    BOOST_CHECK(bs_string == "");
 
-	fold(bs5, 1);
-	to_string(bs5, bs_string);
-	BOOST_CHECK(bs_string == "");
+    fold(bs5, 1);
+    to_string(bs5, bs_string);
+    BOOST_CHECK(bs_string == "");
 
-	fold(bs5, 50);
-	to_string(bs5, bs_string);
-	BOOST_CHECK(bs_string == "");
+    fold(bs5, 50);
+    to_string(bs5, bs_string);
+    BOOST_CHECK(bs_string == "");
 
-	BitSet bs6(std::string("000000000000000000000000"));
+    BitSet bs6(std::string("000000000000000000000000"));
 
-	fold(bs6, 0);
-	to_string(bs6, bs_string);
-	BOOST_CHECK(bs_string == "000000000000000000000000");
+    fold(bs6, 0);
+    to_string(bs6, bs_string);
+    BOOST_CHECK(bs_string == "000000000000000000000000");
 
-	fold(bs6, 1);
-	to_string(bs6, bs_string);
-	BOOST_CHECK(bs_string == "000000000000");
+    fold(bs6, 1);
+    to_string(bs6, bs_string);
+    BOOST_CHECK(bs_string == "000000000000");
 
-	fold(bs6, 2);
-	to_string(bs6, bs_string);
-	BOOST_CHECK(bs_string == "000");
+    fold(bs6, 2);
+    to_string(bs6, bs_string);
+    BOOST_CHECK(bs_string == "000");
 }

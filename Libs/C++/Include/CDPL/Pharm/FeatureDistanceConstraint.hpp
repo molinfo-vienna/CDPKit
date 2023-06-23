@@ -38,34 +38,34 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeatureDistanceConstraint.
-		 */
-		class CDPL_PHARM_API FeatureDistanceConstraint
-		{
+        /**
+         * \brief FeatureDistanceConstraint.
+         */
+        class CDPL_PHARM_API FeatureDistanceConstraint
+        {
 
-		  public:
-			/**
-			 * \brief Constructs a \c %FeatureDistanceConstraint functor with a 
-			 *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
-			 * \param min_dist The minimum feature pair distance.
-			 * \param max_dist The maximum feature pair distance.
-			 */
-			FeatureDistanceConstraint(double min_dist, double max_dist): 
-				minDist(min_dist), maxDist(max_dist) {}
+          public:
+            /**
+             * \brief Constructs a \c %FeatureDistanceConstraint functor with a 
+             *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
+             * \param min_dist The minimum feature pair distance.
+             * \param max_dist The maximum feature pair distance.
+             */
+            FeatureDistanceConstraint(double min_dist, double max_dist): 
+                minDist(min_dist), maxDist(max_dist) {}
 
-			double getMinDistance() const;
+            double getMinDistance() const;
 
-			double getMaxDistance() const;
+            double getMaxDistance() const;
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			double minDist;
-			double maxDist;
-		};
+          private:
+            double minDist;
+            double maxDist;
+        };
     }
 }
 

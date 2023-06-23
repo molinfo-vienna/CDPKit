@@ -41,85 +41,85 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphTotalMassCompositionStringTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	std::locale::global(std::locale::classic());
+    std::locale::global(std::locale::classic());
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == "");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == "");
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
-				"H: 6.712% C: 71.558% N: 4.909% O: 16.822%");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
-				"H: 6.665% C: 66.881% N: 9.749% O: 16.705%");
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
 
-//-----
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
+                "H: 6.712% C: 71.558% N: 4.909% O: 16.822%");
 
-	mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
-				"?: 0.000% H: 6.956% C: 65.436% N: 10.175% O: 17.433%");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+    mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
 
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
-				"?: 0.000% H: 6.917% C: 64.105% N: 10.680% O: 18.299%");
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
+                "H: 6.665% C: 66.881% N: 9.749% O: 16.705%");
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-//-----
-
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		it->setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
-				"?: nan%" ||
-				mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
-				"?: -nan%");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, mol,
-							   MolecularGraphProperty::TOTAL_MASS_COMPOSITION);
+    mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
+                "?: 0.000% H: 6.956% C: 65.436% N: 10.175% O: 17.433%");
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+//-----
+
+    mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
+                "?: 0.000% H: 6.917% C: 64.105% N: 10.680% O: 18.299%");
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        it->setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
+                "?: nan%" ||
+                mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING) == 
+                "?: -nan%");
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MASS_COMPOSITION_STRING, mol,
+                               MolecularGraphProperty::TOTAL_MASS_COMPOSITION);
 }

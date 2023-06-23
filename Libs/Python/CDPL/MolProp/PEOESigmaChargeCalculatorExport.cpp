@@ -34,26 +34,26 @@
 
 void CDPLPythonMolProp::exportPEOESigmaChargeCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolProp::PEOESigmaChargeCalculator, boost::noncopyable>("PEOESigmaChargeCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>(
-				 (python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::PEOESigmaChargeCalculator>())	
-		.def("setNumIterations", &MolProp::PEOESigmaChargeCalculator::setNumIterations, (python::arg("self"), python::arg("num_iter")))
-		.def("setDampingFactor", &MolProp::PEOESigmaChargeCalculator::setDampingFactor, (python::arg("self"), python::arg("factor")))
-		.def("getNumIterations", &MolProp::PEOESigmaChargeCalculator::getNumIterations, python::arg("self"))
-		.def("getDampingFactor", &MolProp::PEOESigmaChargeCalculator::getDampingFactor, python::arg("self"))
-		.def("calculate", &MolProp::PEOESigmaChargeCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getCharge", &MolProp::PEOESigmaChargeCalculator::getCharge, (python::arg("self"), python::arg("idx")))
-		.def("getElectronegativity", &MolProp::PEOESigmaChargeCalculator::getElectronegativity,
-			 (python::arg("self"), python::arg("idx")))
-		.def_readonly("DEF_NUM_ITERATIONS", MolProp::PEOESigmaChargeCalculator::DEF_NUM_ITERATIONS)
-		.def_readonly("DEF_DAMPING_FACTOR", MolProp::PEOESigmaChargeCalculator::DEF_DAMPING_FACTOR)
-		.add_property("numIterations", &MolProp::PEOESigmaChargeCalculator::getNumIterations, 
-					  &MolProp::PEOESigmaChargeCalculator::setNumIterations)
-		.add_property("dampingFactor", &MolProp::PEOESigmaChargeCalculator::getDampingFactor,
-					  &MolProp::PEOESigmaChargeCalculator::setDampingFactor);
+    python::class_<MolProp::PEOESigmaChargeCalculator, boost::noncopyable>("PEOESigmaChargeCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>(
+                 (python::arg("self"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::PEOESigmaChargeCalculator>())    
+        .def("setNumIterations", &MolProp::PEOESigmaChargeCalculator::setNumIterations, (python::arg("self"), python::arg("num_iter")))
+        .def("setDampingFactor", &MolProp::PEOESigmaChargeCalculator::setDampingFactor, (python::arg("self"), python::arg("factor")))
+        .def("getNumIterations", &MolProp::PEOESigmaChargeCalculator::getNumIterations, python::arg("self"))
+        .def("getDampingFactor", &MolProp::PEOESigmaChargeCalculator::getDampingFactor, python::arg("self"))
+        .def("calculate", &MolProp::PEOESigmaChargeCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+        .def("getCharge", &MolProp::PEOESigmaChargeCalculator::getCharge, (python::arg("self"), python::arg("idx")))
+        .def("getElectronegativity", &MolProp::PEOESigmaChargeCalculator::getElectronegativity,
+             (python::arg("self"), python::arg("idx")))
+        .def_readonly("DEF_NUM_ITERATIONS", MolProp::PEOESigmaChargeCalculator::DEF_NUM_ITERATIONS)
+        .def_readonly("DEF_DAMPING_FACTOR", MolProp::PEOESigmaChargeCalculator::DEF_DAMPING_FACTOR)
+        .add_property("numIterations", &MolProp::PEOESigmaChargeCalculator::getNumIterations, 
+                      &MolProp::PEOESigmaChargeCalculator::setNumIterations)
+        .add_property("dampingFactor", &MolProp::PEOESigmaChargeCalculator::getDampingFactor,
+                      &MolProp::PEOESigmaChargeCalculator::setDampingFactor);
 }

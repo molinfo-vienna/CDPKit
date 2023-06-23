@@ -33,32 +33,32 @@ using namespace CDPL;
 
 
 std::uint64_t Chem::calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags, unsigned int bond_flags,
-								 bool global_stereo, bool ord_h_deplete)
+                                 bool global_stereo, bool ord_h_deplete)
 {
-	HashCodeCalculator hash_calc;
+    HashCodeCalculator hash_calc;
 
-	if (atom_flags == AtomPropertyFlag::DEFAULT)
-		atom_flags = HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS;
+    if (atom_flags == AtomPropertyFlag::DEFAULT)
+        atom_flags = HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS;
 
-	if (bond_flags == BondPropertyFlag::DEFAULT)
-		bond_flags = HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS;
+    if (bond_flags == BondPropertyFlag::DEFAULT)
+        bond_flags = HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS;
 
-	hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, atom_flags));
-	hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(bond_flags));
-	hash_calc.includeGlobalStereoFeatures(global_stereo);
+    hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, atom_flags));
+    hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(bond_flags));
+    hash_calc.includeGlobalStereoFeatures(global_stereo);
 
-	std::uint64_t hash_code;
+    std::uint64_t hash_code;
 
-	if (ord_h_deplete) {
-		Fragment tmp(molgraph);
+    if (ord_h_deplete) {
+        Fragment tmp(molgraph);
 
-		makeOrdinaryHydrogenDeplete(tmp, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT |
-									AtomPropertyFlag::FORMAL_CHARGE);
+        makeOrdinaryHydrogenDeplete(tmp, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT |
+                                    AtomPropertyFlag::FORMAL_CHARGE);
 
-		hash_code = hash_calc.calculate(tmp);
+        hash_code = hash_calc.calculate(tmp);
 
-	} else
-		hash_code = hash_calc.calculate(molgraph);
+    } else
+        hash_code = hash_calc.calculate(molgraph);
 
-	return hash_code;
+    return hash_code;
 }

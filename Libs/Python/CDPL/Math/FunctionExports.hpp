@@ -29,13 +29,13 @@
 namespace CDPLPythonMath
 {
 
-	void exportVectorFunctions();
-	void exportMatrixFunctions();
-	void exportQuaternionFunctions();
-	void exportGridFunctions();
-	void exportRegularSpatialGridFunctions();
-	void exportSpecialFunctions();
-	void exportVectorArrayFunctions();
+    void exportVectorFunctions();
+    void exportMatrixFunctions();
+    void exportQuaternionFunctions();
+    void exportGridFunctions();
+    void exportRegularSpatialGridFunctions();
+    void exportSpecialFunctions();
+    void exportVectorArrayFunctions();
 }
 
 #endif // CDPL_PYTHON_MATH_FUNCTIONEXPORTS_HPP

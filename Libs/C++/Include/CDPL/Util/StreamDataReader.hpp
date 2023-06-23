@@ -39,80 +39,80 @@
 namespace CDPL 
 {
 
-	namespace Util
-	{
+    namespace Util
+    {
 
-		/**
-		 * \brief A helper class that implements Base::DataReader for \c std::istream based data readers.
-		 *
-		 * \c %StreamDataReader implements common operations for readers which retrieve the input data
-		 * from a \c std::istream instance. However, since \c %StreamDataReader does not know anything
-		 * about the underlying storage format, the actual decoding of a data object record has to be 
-		 * implemented by a class which has enough knowledge to deal with the given data format.
-		 * \c %StreamDataReader is designed to be used as a base class and requires the derived class
-		 * (whose type has to be specified as the second template parameter \a ReaderImpl) to provide
-		 * three methods which perform the actual data decoding.
-		 *
-		 * These methods must have the following signatures and semantics:
-		 *  - \c bool \c readData(std::istream& is, DataType& obj, bool overwrite) \n
-		 *   Reads the next data record from the input stream \a is into the data object \a obj of
-		 *   type \c DataType. Returns \c true if the read operation was successful, and \c false
-		 *   if the end of input has already been reached.
-		 *  - \c bool \c skipData(std::istream& is) \n
-		 *   Skips the next data record. Returns \c true if the operation was successful, and
-		 *   \c false if the end of input has already been reached.
-		 *  - \c bool \c moreData(std::istream& is) \n
-		 *   Tells if more data records are available to read. Returns \c true if data records are available,
-		 *   and \c false otherwise.
-		 *
-		 * \tparam DataType The type of the objects holding the read data.
-		 * \tparam ReaderImpl The type of the subclass implementing the basic input operations.
-		 */
-		template <typename DataType, typename ReaderImpl>
-		class StreamDataReader : public Base::DataReader<DataType>
-		{
+        /**
+         * \brief A helper class that implements Base::DataReader for \c std::istream based data readers.
+         *
+         * \c %StreamDataReader implements common operations for readers which retrieve the input data
+         * from a \c std::istream instance. However, since \c %StreamDataReader does not know anything
+         * about the underlying storage format, the actual decoding of a data object record has to be 
+         * implemented by a class which has enough knowledge to deal with the given data format.
+         * \c %StreamDataReader is designed to be used as a base class and requires the derived class
+         * (whose type has to be specified as the second template parameter \a ReaderImpl) to provide
+         * three methods which perform the actual data decoding.
+         *
+         * These methods must have the following signatures and semantics:
+         *  - \c bool \c readData(std::istream& is, DataType& obj, bool overwrite) \n
+         *   Reads the next data record from the input stream \a is into the data object \a obj of
+         *   type \c DataType. Returns \c true if the read operation was successful, and \c false
+         *   if the end of input has already been reached.
+         *  - \c bool \c skipData(std::istream& is) \n
+         *   Skips the next data record. Returns \c true if the operation was successful, and
+         *   \c false if the end of input has already been reached.
+         *  - \c bool \c moreData(std::istream& is) \n
+         *   Tells if more data records are available to read. Returns \c true if data records are available,
+         *   and \c false otherwise.
+         *
+         * \tparam DataType The type of the objects holding the read data.
+         * \tparam ReaderImpl The type of the subclass implementing the basic input operations.
+         */
+        template <typename DataType, typename ReaderImpl>
+        class StreamDataReader : public Base::DataReader<DataType>
+        {
 
-		public:
-			Base::DataReader<DataType>& read(DataType& obj, bool overwrite = true);
-			Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
+        public:
+            Base::DataReader<DataType>& read(DataType& obj, bool overwrite = true);
+            Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
-			Base::DataReader<DataType>& skip();
+            Base::DataReader<DataType>& skip();
 
-			bool hasMoreData();
+            bool hasMoreData();
 
-			std::size_t getRecordIndex() const;
-			void setRecordIndex(std::size_t idx);
+            std::size_t getRecordIndex() const;
+            void setRecordIndex(std::size_t idx);
 
-			std::size_t getNumRecords();
+            std::size_t getNumRecords();
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		protected:
-			/**
-			 * \brief Constructs a \c %StreamDataReader instance that will read from the input stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			StreamDataReader(std::istream& is): 
-				input(is), recordIndex(0), initStreamPos(is.tellg()), state(is.good()), streamScanned(false) {} 
+        protected:
+            /**
+             * \brief Constructs a \c %StreamDataReader instance that will read from the input stream \a is.
+             * \param is The input stream to read from.
+             */
+            StreamDataReader(std::istream& is): 
+                input(is), recordIndex(0), initStreamPos(is.tellg()), state(is.good()), streamScanned(false) {} 
 
-		private:
-			StreamDataReader(const StreamDataReader& reader); 
+        private:
+            StreamDataReader(const StreamDataReader& reader); 
 
-			StreamDataReader& operator=(const StreamDataReader& reader);
+            StreamDataReader& operator=(const StreamDataReader& reader);
 
-			void scanDataStream();
+            void scanDataStream();
 
-			typedef std::vector<std::istream::pos_type> RecordStreamPosTable;
+            typedef std::vector<std::istream::pos_type> RecordStreamPosTable;
 
-			std::istream&          input;
-			std::size_t            recordIndex;
-			std::istream::pos_type initStreamPos;
-			bool                   state;
-			bool                   streamScanned;
-			RecordStreamPosTable   recordPositions;
-		};
-	}
+            std::istream&          input;
+            std::size_t            recordIndex;
+            std::istream::pos_type initStreamPos;
+            bool                   state;
+            bool                   streamScanned;
+            RecordStreamPosTable   recordPositions;
+        };
+    }
 }
 
 
@@ -122,125 +122,125 @@ template <typename DataType, typename ReaderImpl>
 CDPL::Base::DataReader<DataType>&
 CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(DataType& obj, bool overwrite)
 {
-	state = false;
+    state = false;
 
-	if ((state = static_cast<ReaderImpl*>(this)->readData(input, obj, overwrite))) {
-		recordIndex++;
-		this->invokeIOCallbacks(1.0);
-	}
+    if ((state = static_cast<ReaderImpl*>(this)->readData(input, obj, overwrite))) {
+        recordIndex++;
+        this->invokeIOCallbacks(1.0);
+    }
 
-	return *this;
+    return *this;
 }
 
 template <typename DataType, typename ReaderImpl>
 CDPL::Base::DataReader<DataType>&
 CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
-	setRecordIndex(idx);
+    setRecordIndex(idx);
 
-	return read(obj, overwrite);
+    return read(obj, overwrite);
 }
 
 template <typename DataType, typename ReaderImpl>
 CDPL::Base::DataReader<DataType>&
 CDPL::Util::StreamDataReader<DataType, ReaderImpl>::skip()
 {
-	state = false;
+    state = false;
 
-	if ((state = static_cast<ReaderImpl*>(this)->skipData(input))) {
-		recordIndex++;
-		this->invokeIOCallbacks(1.0);
-	}
+    if ((state = static_cast<ReaderImpl*>(this)->skipData(input))) {
+        recordIndex++;
+        this->invokeIOCallbacks(1.0);
+    }
 
-	return *this;
+    return *this;
 }
 
 template <typename DataType, typename ReaderImpl>
 bool CDPL::Util::StreamDataReader<DataType, ReaderImpl>::hasMoreData()
 {
-	return static_cast<ReaderImpl*>(this)->moreData(input);
+    return static_cast<ReaderImpl*>(this)->moreData(input);
 }
 
 template <typename DataType, typename ReaderImpl>
 std::size_t CDPL::Util::StreamDataReader<DataType, ReaderImpl>::getRecordIndex() const
-{	
-	return recordIndex;
+{    
+    return recordIndex;
 }
 
 template <typename DataType, typename ReaderImpl>
 void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::setRecordIndex(std::size_t idx)
 {
-	scanDataStream();
+    scanDataStream();
 
-	if (idx >= recordPositions.size())
-		throw Base::IndexError("StreamDataReader: record index out of bounds");
+    if (idx >= recordPositions.size())
+        throw Base::IndexError("StreamDataReader: record index out of bounds");
 
-	input.clear();
-	input.seekg(recordPositions[idx]);
+    input.clear();
+    input.seekg(recordPositions[idx]);
 
-	recordIndex = idx;
+    recordIndex = idx;
 }
 
 template <typename DataType, typename ReaderImpl>
 std::size_t CDPL::Util::StreamDataReader<DataType, ReaderImpl>::getNumRecords()
 {
-	scanDataStream();
+    scanDataStream();
 
-	return recordPositions.size();
+    return recordPositions.size();
 }
 
 template <typename DataType, typename ReaderImpl>
 CDPL::Util::StreamDataReader<DataType, ReaderImpl>::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 template <typename DataType, typename ReaderImpl>
 bool CDPL::Util::StreamDataReader<DataType, ReaderImpl>::operator!() const
 {
-	return !state;
+    return !state;
 }
 
 template <typename DataType, typename ReaderImpl>
 void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::scanDataStream()
 {
-	if (streamScanned)
-		return;
+    if (streamScanned)
+        return;
 
-	streamScanned = true;
+    streamScanned = true;
 
-	std::size_t saved_rec_index = recordIndex;
+    std::size_t saved_rec_index = recordIndex;
 
-	recordIndex = 0;
+    recordIndex = 0;
 
-	input.clear();
-	input.seekg(0, std::ios_base::end);
+    input.clear();
+    input.seekg(0, std::ios_base::end);
 
-	std::istream::pos_type end_pos = input.tellg();
+    std::istream::pos_type end_pos = input.tellg();
 
-	input.seekg(initStreamPos);
+    input.seekg(initStreamPos);
 
-	while (hasMoreData()) {
-		std::istream::pos_type record_pos = input.tellg();
-		state = false;
+    while (hasMoreData()) {
+        std::istream::pos_type record_pos = input.tellg();
+        state = false;
 
-		if (!(state = static_cast<ReaderImpl*>(this)->skipData(input)))
-			break;
+        if (!(state = static_cast<ReaderImpl*>(this)->skipData(input)))
+            break;
  
-		recordPositions.push_back(record_pos);
-		recordIndex++;
+        recordPositions.push_back(record_pos);
+        recordIndex++;
 
-		this->invokeIOCallbacks(record_pos / double(end_pos));
-	}
+        this->invokeIOCallbacks(record_pos / double(end_pos));
+    }
 
-	this->invokeIOCallbacks(1.0);
+    this->invokeIOCallbacks(1.0);
 
-	if (saved_rec_index < recordPositions.size()) {
-		recordIndex = saved_rec_index;
+    if (saved_rec_index < recordPositions.size()) {
+        recordIndex = saved_rec_index;
 
-		input.clear();
-		input.seekg(recordPositions[recordIndex]);
-	}
+        input.clear();
+        input.seekg(recordPositions[recordIndex]);
+    }
 }
 
 #endif // CDPL_UTIL_STREAMDATAREADER_HPP

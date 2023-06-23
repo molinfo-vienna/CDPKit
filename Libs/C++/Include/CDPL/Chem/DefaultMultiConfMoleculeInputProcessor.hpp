@@ -38,39 +38,39 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief MultiConfMoleculeInputProcessor.
-		 */
-		class CDPL_CHEM_API DefaultMultiConfMoleculeInputProcessor : public MultiConfMoleculeInputProcessor
-		{
+        /**
+         * \brief MultiConfMoleculeInputProcessor.
+         */
+        class CDPL_CHEM_API DefaultMultiConfMoleculeInputProcessor : public MultiConfMoleculeInputProcessor
+        {
 
-		public:
-			typedef std::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
-			
-			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
-				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
-				AtomPropertyFlag::FORMAL_CHARGE;
+        public:
+            typedef std::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
+            
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+                AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
+                AtomPropertyFlag::FORMAL_CHARGE;
 
             static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
-				BondPropertyFlag::ORDER;
+                BondPropertyFlag::ORDER;
 
-			DefaultMultiConfMoleculeInputProcessor(bool comp_names = false, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
-			
-			bool init(MolecularGraph& tgt_molgraph) const;
+            DefaultMultiConfMoleculeInputProcessor(bool comp_names = false, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
+            
+            bool init(MolecularGraph& tgt_molgraph) const;
 
-			bool isConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
+            bool isConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
 
-			bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
+            bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
 
-		private:
-			bool compareNames;
-			unsigned int atomFlags;
-			unsigned int bondFlags;
-		};
-	}
+        private:
+            bool compareNames;
+            unsigned int atomFlags;
+            unsigned int bondFlags;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_DEFAULTMULTICONFMOLECULEINPUTPROCESSOR_HPP

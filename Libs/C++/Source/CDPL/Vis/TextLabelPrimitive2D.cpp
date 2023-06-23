@@ -38,72 +38,72 @@ Vis::TextLabelPrimitive2D::TextLabelPrimitive2D() {}
 
 void Vis::TextLabelPrimitive2D::render(Renderer2D& renderer) const
 {
-	renderer.setPen(pen);
-	renderer.setFont(font);
+    renderer.setPen(pen);
+    renderer.setFont(font);
 
-	renderer.drawText(position(0), position(1), text);
+    renderer.drawText(position(0), position(1), text);
 }
 
 void Vis::TextLabelPrimitive2D::setText(const std::string& txt)
 {
-	text = txt;
+    text = txt;
 }
 
 const std::string& Vis::TextLabelPrimitive2D::getText() const
 {
-	return text;
+    return text;
 }
 
 void Vis::TextLabelPrimitive2D::setPosition(const Math::Vector2D& pos)
 {
-	position = pos;
+    position = pos;
 }
 
 void Vis::TextLabelPrimitive2D::setPosition(double x, double y)
 {
-	position(0) = x;
-	position(1) = y;
+    position(0) = x;
+    position(1) = y;
 }
 
 const Math::Vector2D& Vis::TextLabelPrimitive2D::getPosition() const
 {
-	return position;
+    return position;
 }
 
 void Vis::TextLabelPrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::TextLabelPrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 void Vis::TextLabelPrimitive2D::setFont(const Font& font)
 {
-	this->font = font;
+    this->font = font;
 }
 
 const Vis::Font& Vis::TextLabelPrimitive2D::getFont() const
 {
-	return font;
-}	
+    return font;
+}    
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::TextLabelPrimitive2D::clone() const
 {
-	return SharedPointer(new TextLabelPrimitive2D(*this));
+    return SharedPointer(new TextLabelPrimitive2D(*this));
 }
 
 void Vis::TextLabelPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	if (!fm) {
-		bounds.reset();
-		return;
-	}
+    if (!fm) {
+        bounds.reset();
+        return;
+    }
 
-	fm->setFont(font);
-	fm->getBounds(text, bounds);
+    fm->setFont(font);
+    fm->getBounds(text, bounds);
 
-	bounds.translate(position);
+    bounds.translate(position);
 }

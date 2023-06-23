@@ -34,12 +34,12 @@
 #define MAKE_FEATURE_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)               \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Pharm::Feature& feature)       \
 {                                                                   \
-	return get##FUNC_SUFFIX(feature);                               \
+    return get##FUNC_SUFFIX(feature);                               \
 }                                                                   \
                                                                     \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Pharm::Feature& feature)       \
 {                                                                   \
-	return has##FUNC_SUFFIX(feature);                               \
+    return has##FUNC_SUFFIX(feature);                               \
 }
 
 #define EXPORT_FEATURE_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                           \
@@ -58,11 +58,11 @@ python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("feature")
 #define EXPORT_FEATURE_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                               \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"),                            \
             python::return_value_policy<python::copy_const_reference,                                         \
-			python::with_custodian_and_ward_postcall<0, 1> >());                                              \
+            python::with_custodian_and_ward_postcall<0, 1> >());                                              \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
 python::def("clear"#FUNC_SUFFIX, &Pharm::clear##FUNC_SUFFIX, python::arg("feature"));                         \
 python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME)),    \
-			python::with_custodian_and_ward<1, 2>());                                                            
+            python::with_custodian_and_ward<1, 2>());                                                            
 
 
 namespace
@@ -75,8 +75,8 @@ namespace
     MAKE_FEATURE_FUNC_WRAPPERS(double, Weight)
     MAKE_FEATURE_FUNC_WRAPPERS(bool, DisabledFlag)
     MAKE_FEATURE_FUNC_WRAPPERS(bool, OptionalFlag)
-	MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, Orientation)
-	MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
+    MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, Orientation)
+    MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
     MAKE_FEATURE_FUNC_WRAPPERS(double, Hydrophobicity)
 }
 
@@ -93,7 +93,7 @@ void CDPLPythonPharm::exportFeatureFunctions()
     EXPORT_FEATURE_FUNCS(Weight, weight)
     EXPORT_FEATURE_FUNCS(DisabledFlag, flag)
     EXPORT_FEATURE_FUNCS(OptionalFlag, flag)
-	EXPORT_FEATURE_FUNCS_INT_REF(Orientation, orient)
-	EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
+    EXPORT_FEATURE_FUNCS_INT_REF(Orientation, orient)
+    EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
     EXPORT_FEATURE_FUNCS(Hydrophobicity, hyd)
 }

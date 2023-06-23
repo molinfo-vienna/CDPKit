@@ -34,27 +34,27 @@ using namespace CDPL;
 
 void Vis::LineSegmentListPrimitive2D::render(Renderer2D& renderer) const
 {
-	renderer.setPen(pen);
-	renderer.drawLineSegments(*this);
+    renderer.setPen(pen);
+    renderer.drawLineSegments(*this);
 }
 
 void Vis::LineSegmentListPrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::LineSegmentListPrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::LineSegmentListPrimitive2D::clone() const
 {
-	return SharedPointer(new LineSegmentListPrimitive2D(*this));
+    return SharedPointer(new LineSegmentListPrimitive2D(*this));
 }
 
 void Vis::LineSegmentListPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	PointArray2D::getBounds(bounds);
-	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    PointArray2D::getBounds(bounds);
+    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

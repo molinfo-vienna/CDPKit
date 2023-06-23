@@ -36,28 +36,28 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		/**
-		 * \brief A data type for the storage of feature type histograms of pharmacophores.
-		 *
-		 * \c %FeatureTypeHistogram is an unique associative map where the keys specify the feature type
-		 * (defined in namespace Pharm::FeatureType) of the pharmacophore features and the mapped integer values
-		 * correspond to the feature type frequencies.
-		 */
-		class CDPL_PHARM_API FeatureTypeHistogram : public Util::Map<unsigned int, std::size_t, true>
-		{
+        /**
+         * \brief A data type for the storage of feature type histograms of pharmacophores.
+         *
+         * \c %FeatureTypeHistogram is an unique associative map where the keys specify the feature type
+         * (defined in namespace Pharm::FeatureType) of the pharmacophore features and the mapped integer values
+         * correspond to the feature type frequencies.
+         */
+        class CDPL_PHARM_API FeatureTypeHistogram : public Util::Map<unsigned int, std::size_t, true>
+        {
 
-		  public:
-			typedef std::shared_ptr<FeatureTypeHistogram> SharedPointer;
+          public:
+            typedef std::shared_ptr<FeatureTypeHistogram> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "FeatureTypeHistogram";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "FeatureTypeHistogram";
+            }
+        };
+    }
 }
 
 #endif // CDPL_PHARM_FEATURETYPEHISTOGRAM_HPP

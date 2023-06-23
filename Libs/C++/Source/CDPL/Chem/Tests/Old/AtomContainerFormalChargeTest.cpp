@@ -39,63 +39,63 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerFormalChargeTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 0);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 0);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::FORMAL_CHARGE, long(1));
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 1);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
 //-----
 
-	mol.getAtom(1).setProperty(AtomProperty::FORMAL_CHARGE, long(1));
-	mol.getAtom(2).setProperty(AtomProperty::FORMAL_CHARGE, long(-1));
-	mol.getAtom(3).setProperty(AtomProperty::FORMAL_CHARGE, long(1));
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 0);
 
-	BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 2);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, AtomContainerProperty::FORMAL_CHARGE, mol, AtomContainerProperty::ATOM_COUNT);
+    mol.getAtom(0).setProperty(AtomProperty::FORMAL_CHARGE, long(1));
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 1);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, AtomContainerProperty::FORMAL_CHARGE, *it, AtomProperty::FORMAL_CHARGE);
+    mol.getAtom(1).setProperty(AtomProperty::FORMAL_CHARGE, long(1));
+    mol.getAtom(2).setProperty(AtomProperty::FORMAL_CHARGE, long(-1));
+    mol.getAtom(3).setProperty(AtomProperty::FORMAL_CHARGE, long(1));
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<long>(AtomContainerProperty::FORMAL_CHARGE) == 2);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::FORMAL_CHARGE, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, AtomContainerProperty::FORMAL_CHARGE, mol, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, AtomContainerProperty::FORMAL_CHARGE, *it, AtomProperty::FORMAL_CHARGE);
 }

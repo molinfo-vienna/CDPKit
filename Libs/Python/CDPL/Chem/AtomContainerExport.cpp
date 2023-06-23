@@ -34,22 +34,22 @@
 namespace
 {
 
-	struct AtomContainerWrapper : CDPL::Chem::AtomContainer, boost::python::wrapper<CDPL::Chem::AtomContainer> 
-	{
+    struct AtomContainerWrapper : CDPL::Chem::AtomContainer, boost::python::wrapper<CDPL::Chem::AtomContainer> 
+    {
 
-		ATOMCONTAINER_IMPL()
-	};
+        ATOMCONTAINER_IMPL()
+    };
 }
 
 
 void CDPLPythonChem::exportAtomContainer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomContainerWrapper, python::bases<Chem::Entity3DContainer>, boost::noncopyable>("AtomContainer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(AtomContainerVirtualFunctionsVisitor<AtomContainerWrapper>())
-		.def(AtomContainerSpecialFunctionsVisitor(false))
-		.add_property("numAtoms", &Chem::AtomContainer::getNumAtoms);
+    python::class_<AtomContainerWrapper, python::bases<Chem::Entity3DContainer>, boost::noncopyable>("AtomContainer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(AtomContainerVirtualFunctionsVisitor<AtomContainerWrapper>())
+        .def(AtomContainerSpecialFunctionsVisitor(false))
+        .add_property("numAtoms", &Chem::AtomContainer::getNumAtoms);
 }

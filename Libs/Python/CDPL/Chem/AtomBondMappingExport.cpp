@@ -34,24 +34,24 @@
 
 void CDPLPythonChem::exportAtomBondMapping()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	Chem::AtomMapping& (Chem::AtomBondMapping::*getAtomMappingFunc)() = &Chem::AtomBondMapping::getAtomMapping;
-	Chem::BondMapping& (Chem::AtomBondMapping::*getBondMappingFunc)() = &Chem::AtomBondMapping::getBondMapping;
+    Chem::AtomMapping& (Chem::AtomBondMapping::*getAtomMappingFunc)() = &Chem::AtomBondMapping::getAtomMapping;
+    Chem::BondMapping& (Chem::AtomBondMapping::*getBondMappingFunc)() = &Chem::AtomBondMapping::getBondMapping;
 
-	python::class_<Chem::AtomBondMapping, Chem::AtomBondMapping::SharedPointer>("AtomBondMapping", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::AtomBondMapping&>((python::arg("self"), python::arg("mapping")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomBondMapping>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomBondMapping::operator=), (python::arg("self"), python::arg("mapping")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("getAtomMapping", getAtomMappingFunc, python::arg("self"), python::return_internal_reference<>())
-		.def("getBondMapping", getBondMappingFunc, python::arg("self"), python::return_internal_reference<>())
-		.def("clear", &Chem::AtomBondMapping::clear, python::arg("self"))
-		.def("__eq__", &Chem::AtomBondMapping::operator==, (python::arg("self"), python::arg("mapping")))
-		.def("__ne__", &Chem::AtomBondMapping::operator!=, (python::arg("self"), python::arg("mapping")))
-		.add_property("atomMapping", python::make_function(getAtomMappingFunc, python::return_internal_reference<>()))
-		.add_property("bondMapping", python::make_function(getBondMappingFunc, python::return_internal_reference<>()));
+    python::class_<Chem::AtomBondMapping, Chem::AtomBondMapping::SharedPointer>("AtomBondMapping", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::AtomBondMapping&>((python::arg("self"), python::arg("mapping")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomBondMapping>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomBondMapping::operator=), (python::arg("self"), python::arg("mapping")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("getAtomMapping", getAtomMappingFunc, python::arg("self"), python::return_internal_reference<>())
+        .def("getBondMapping", getBondMappingFunc, python::arg("self"), python::return_internal_reference<>())
+        .def("clear", &Chem::AtomBondMapping::clear, python::arg("self"))
+        .def("__eq__", &Chem::AtomBondMapping::operator==, (python::arg("self"), python::arg("mapping")))
+        .def("__ne__", &Chem::AtomBondMapping::operator!=, (python::arg("self"), python::arg("mapping")))
+        .add_property("atomMapping", python::make_function(getAtomMappingFunc, python::return_internal_reference<>()))
+        .add_property("bondMapping", python::make_function(getBondMappingFunc, python::return_internal_reference<>()));
 }

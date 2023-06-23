@@ -33,21 +33,21 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		/**
-		 * \brief Provides constants that are used to describe the nature of fragments used 
-		 *        to build-up molecule 3D models.
-		 */
-		namespace FragmentType
-		{
-					
-			const unsigned int CHAIN                 = 0;
-			const unsigned int FLEXIBLE_RING_SYSTEM  = 1;
-			const unsigned int RIGID_RING_SYSTEM     = 2;
-		}
-	}
+        /**
+         * \brief Provides constants that are used to describe the nature of fragments used 
+         *        to build-up molecule 3D models.
+         */
+        namespace FragmentType
+        {
+                    
+            const unsigned int CHAIN                 = 0;
+            const unsigned int FLEXIBLE_RING_SYSTEM  = 1;
+            const unsigned int RIGID_RING_SYSTEM     = 2;
+        }
+    }
 }
 
 #endif // CDPL_CONFGEN_FRAGMENTTYPE_HPP

@@ -37,20 +37,20 @@ using namespace CDPL;
 
 bool ForceField::readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg)
 {
-	while (!std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) {
-		Internal::readLine(is, line, err_msg, true, false, 0, MMFF94DataFormat::END_OF_LINE);
+    while (!std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) {
+        Internal::readLine(is, line, err_msg, true, false, 0, MMFF94DataFormat::END_OF_LINE);
 
-		if (line.empty())
-			continue;
+        if (line.empty())
+            continue;
 
-		if (line[0] == MMFF94DataFormat::COMMENT_PREFIX)
-			continue;
+        if (line[0] == MMFF94DataFormat::COMMENT_PREFIX)
+            continue;
 
-		if (line.size() == 1 && line[0] == MMFF94DataFormat::END_OF_FILE)
-			return false;
+        if (line.size() == 1 && line[0] == MMFF94DataFormat::END_OF_FILE)
+            return false;
 
-		return true;
-	}
+        return true;
+    }
 
-	return false;
+    return false;
 }

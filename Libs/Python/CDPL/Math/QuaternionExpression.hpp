@@ -34,94 +34,94 @@
 namespace CDPLPythonMath
 {
 
-	template <typename T>
-	class ConstQuaternionExpression : public CDPL::Math::QuaternionExpression<ConstQuaternionExpression<T> >
-	{
+    template <typename T>
+    class ConstQuaternionExpression : public CDPL::Math::QuaternionExpression<ConstQuaternionExpression<T> >
+    {
 
-	public:
-		typedef ConstQuaternionExpression SelfType;
-		typedef T ValueType;
-		typedef const T Reference;
-		typedef const T ConstReference;
-		typedef const SelfType& ClosureType;
-		typedef const SelfType& ConstClosureType;
-		typedef std::shared_ptr<SelfType> SharedPointer;
+    public:
+        typedef ConstQuaternionExpression SelfType;
+        typedef T ValueType;
+        typedef const T Reference;
+        typedef const T ConstReference;
+        typedef const SelfType& ClosureType;
+        typedef const SelfType& ConstClosureType;
+        typedef std::shared_ptr<SelfType> SharedPointer;
 
-		virtual ~ConstQuaternionExpression() {} 
+        virtual ~ConstQuaternionExpression() {} 
 
-		virtual ConstReference getC1() const = 0;
-		virtual ConstReference getC2() const = 0;
-		virtual ConstReference getC3() const = 0;
-		virtual ConstReference getC4() const = 0;
+        virtual ConstReference getC1() const = 0;
+        virtual ConstReference getC2() const = 0;
+        virtual ConstReference getC3() const = 0;
+        virtual ConstReference getC4() const = 0;
 
-	protected:
-		ConstQuaternionExpression() {} 
-	};
+    protected:
+        ConstQuaternionExpression() {} 
+    };
 
-	template <typename T>
-	class QuaternionExpression : 
-		public ConstQuaternionExpression<T>, public CDPL::Math::QuaternionExpression<QuaternionExpression<T> >
-	{
+    template <typename T>
+    class QuaternionExpression : 
+        public ConstQuaternionExpression<T>, public CDPL::Math::QuaternionExpression<QuaternionExpression<T> >
+    {
 
-	public:
-		typedef QuaternionExpression SelfType;
-		typedef ConstQuaternionExpression<T> ConstExpressionType;
-		typedef T ValueType;
-		typedef T& Reference;
-		typedef const T ConstReference;
-		typedef SelfType& ClosureType;
-		typedef const SelfType& ConstClosureType;
-		typedef std::shared_ptr<SelfType> SharedPointer;
-		typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
+    public:
+        typedef QuaternionExpression SelfType;
+        typedef ConstQuaternionExpression<T> ConstExpressionType;
+        typedef T ValueType;
+        typedef T& Reference;
+        typedef const T ConstReference;
+        typedef SelfType& ClosureType;
+        typedef const SelfType& ConstClosureType;
+        typedef std::shared_ptr<SelfType> SharedPointer;
+        typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
 
-		virtual ~QuaternionExpression() {} 
+        virtual ~QuaternionExpression() {} 
 
-		using ConstQuaternionExpression<T>::getC1;
-		using ConstQuaternionExpression<T>::getC2;
-		using ConstQuaternionExpression<T>::getC3;
-		using ConstQuaternionExpression<T>::getC4;
-		
-		virtual Reference getC1() = 0;
-		virtual Reference getC2() = 0;
-		virtual Reference getC3() = 0;
-		virtual Reference getC4() = 0;
-		
-		virtual void set(const ValueType& c1, const ValueType& c2, const ValueType& c3, const ValueType& c4) = 0;
+        using ConstQuaternionExpression<T>::getC1;
+        using ConstQuaternionExpression<T>::getC2;
+        using ConstQuaternionExpression<T>::getC3;
+        using ConstQuaternionExpression<T>::getC4;
+        
+        virtual Reference getC1() = 0;
+        virtual Reference getC2() = 0;
+        virtual Reference getC3() = 0;
+        virtual Reference getC4() = 0;
+        
+        virtual void set(const ValueType& c1, const ValueType& c2, const ValueType& c3, const ValueType& c4) = 0;
 
-		virtual QuaternionExpression& operator=(const ConstExpressionType& e) = 0;
+        virtual QuaternionExpression& operator=(const ConstExpressionType& e) = 0;
 
-		virtual QuaternionExpression& operator+=(const ConstExpressionType& e) = 0;
-		virtual QuaternionExpression& operator-=(const ConstExpressionType& e) = 0;
+        virtual QuaternionExpression& operator+=(const ConstExpressionType& e) = 0;
+        virtual QuaternionExpression& operator-=(const ConstExpressionType& e) = 0;
 
-		virtual QuaternionExpression& operator+=(const ValueType& t) = 0;
-		virtual QuaternionExpression& operator-=(const ValueType& t) = 0;
-	
-		virtual QuaternionExpression& operator*=(const ConstExpressionType& e) = 0;
-		virtual QuaternionExpression& operator/=(const ConstExpressionType& e) = 0;
+        virtual QuaternionExpression& operator+=(const ValueType& t) = 0;
+        virtual QuaternionExpression& operator-=(const ValueType& t) = 0;
+    
+        virtual QuaternionExpression& operator*=(const ConstExpressionType& e) = 0;
+        virtual QuaternionExpression& operator/=(const ConstExpressionType& e) = 0;
 
-		virtual QuaternionExpression& operator*=(const ValueType& t) = 0;
-		virtual QuaternionExpression& operator/=(const ValueType& t) = 0;
+        virtual QuaternionExpression& operator*=(const ValueType& t) = 0;
+        virtual QuaternionExpression& operator/=(const ValueType& t) = 0;
 
-		void swap(QuaternionExpression& e) {
-			CDPL::Math::quaternionSwap<QuaternionExpression, QuaternionExpression>(*this, e);
-		}
+        void swap(QuaternionExpression& e) {
+            CDPL::Math::quaternionSwap<QuaternionExpression, QuaternionExpression>(*this, e);
+        }
 
-		QuaternionExpression& operator=(const QuaternionExpression& e) {
-			return operator=(static_cast<const ConstExpressionType&>(e));
-		}
+        QuaternionExpression& operator=(const QuaternionExpression& e) {
+            return operator=(static_cast<const ConstExpressionType&>(e));
+        }
 
-		template <typename T1>
-		QuaternionExpression& operator=(ConstQuaternionExpression<T1>& e) {
-			using namespace CDPL;
-			using namespace Math;
+        template <typename T1>
+        QuaternionExpression& operator=(ConstQuaternionExpression<T1>& e) {
+            using namespace CDPL;
+            using namespace Math;
 
-			quaternionAssignQuaternion<ScalarAssignment>(*this, e);
-			return *this;
-		}
+            quaternionAssignQuaternion<ScalarAssignment>(*this, e);
+            return *this;
+        }
 
-	protected:
-		QuaternionExpression() {} 
-	};
+    protected:
+        QuaternionExpression() {} 
+    };
 }
 
 #endif // CDPL_PYTHON_MATH_QUATERNIONEXPRESSION_HPP

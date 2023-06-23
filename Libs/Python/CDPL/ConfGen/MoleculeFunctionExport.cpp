@@ -32,9 +32,9 @@
 
 void CDPLPythonConfGen::exportMoleculeFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, 
-				(python::arg("mol"), python::arg("canonicalize") = false));
+    python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, 
+                (python::arg("mol"), python::arg("canonicalize") = false));
 }

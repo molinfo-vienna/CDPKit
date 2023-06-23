@@ -34,24 +34,24 @@ using namespace CDPL;
 
 void Chem::removeAtomsIf(Fragment& frag, const AtomPredicate& pred)
 {
-	for (std::size_t i = 0; i < frag.getNumAtoms(); ) {
-		if (pred(frag.getAtom(i))) {
-			frag.removeAtom(i);
-			continue;
-		}
+    for (std::size_t i = 0; i < frag.getNumAtoms(); ) {
+        if (pred(frag.getAtom(i))) {
+            frag.removeAtom(i);
+            continue;
+        }
 
-		i++;
-	}
+        i++;
+    }
 }
 
 void Chem::removeAtomsIfNot(Fragment& frag, const AtomPredicate& pred)
 {
-	for (std::size_t i = 0; i < frag.getNumAtoms(); ) {
-		if (!pred(frag.getAtom(i))) {
-			frag.removeAtom(i);
-			continue;
-		}
+    for (std::size_t i = 0; i < frag.getNumAtoms(); ) {
+        if (!pred(frag.getAtom(i))) {
+            frag.removeAtom(i);
+            continue;
+        }
 
-		i++;
-	}
+        i++;
+    }
 }

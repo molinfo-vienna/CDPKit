@@ -36,29 +36,29 @@
 namespace CDPL 
 {
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		/**
-		 * \brief A data type for the storage of mass percent compositions of chemical compounds.
-		 *
-		 * \c %MassComposition is an unique associative map where the keys specify the atom type
-		 * (defined in namespace Chem::AtomType) of the chemical elements and the mapped floating-point
-		 * values correspond to the percentage contribution of the elements to the total
-		 * mass of the compound.
-		 */
-		class CDPL_MOLPROP_API MassComposition : public Util::Map<unsigned int, double, true>
-		{
+        /**
+         * \brief A data type for the storage of mass percent compositions of chemical compounds.
+         *
+         * \c %MassComposition is an unique associative map where the keys specify the atom type
+         * (defined in namespace Chem::AtomType) of the chemical elements and the mapped floating-point
+         * values correspond to the percentage contribution of the elements to the total
+         * mass of the compound.
+         */
+        class CDPL_MOLPROP_API MassComposition : public Util::Map<unsigned int, double, true>
+        {
 
-		  public:
-			typedef std::shared_ptr<MassComposition> SharedPointer;
+          public:
+            typedef std::shared_ptr<MassComposition> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "MassComposition";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "MassComposition";
+            }
+        };
+    }
 }
 
 #endif // CDPL_MOLPROP_MASSCOMPOSITION_HPP

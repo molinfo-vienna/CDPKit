@@ -43,174 +43,174 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief A data structure that caches instances of type \c T up to a user specified amount. 
-		 *
-		 * Instances of type \c T that are allocated via this pool (see get()) are preferentially taken from an
-		 * internally maintained list of previously allocated but now unused objects. If there are no
-		 * free objects a new object instance will be created on the fly. Allocated objects are returned as
-		 * smart pointers which keep track of all current references to the object. If the reference count
-		 * drops to zero at some point, the object is automatically returned to the pool it was allocated from.
-		 * \e Warning: Due to this automatic return of unused objects it is necessary that all objects have returned
-		 * to their source pool before the pool instance gets destroyed!!!!
-		 */
-		template <typename T>
-		class ObjectPool
-		{
+        /**
+         * \brief A data structure that caches instances of type \c T up to a user specified amount. 
+         *
+         * Instances of type \c T that are allocated via this pool (see get()) are preferentially taken from an
+         * internally maintained list of previously allocated but now unused objects. If there are no
+         * free objects a new object instance will be created on the fly. Allocated objects are returned as
+         * smart pointers which keep track of all current references to the object. If the reference count
+         * drops to zero at some point, the object is automatically returned to the pool it was allocated from.
+         * \e Warning: Due to this automatic return of unused objects it is necessary that all objects have returned
+         * to their source pool before the pool instance gets destroyed!!!!
+         */
+        template <typename T>
+        class ObjectPool
+        {
 
-		public:
-			typedef T ObjectType;
+        public:
+            typedef T ObjectType;
 
-			typedef std::shared_ptr<ObjectType> SharedObjectPointer;
+            typedef std::shared_ptr<ObjectType> SharedObjectPointer;
 
-			typedef std::function<ObjectType*()> ConstructorFunction;
-			typedef std::function<void(ObjectType*)> DestructorFunction;
-			typedef std::function<void(ObjectType&)> ObjectFunction;
+            typedef std::function<ObjectType*()> ConstructorFunction;
+            typedef std::function<void(ObjectType*)> DestructorFunction;
+            typedef std::function<void(ObjectType&)> ObjectFunction;
 
-			struct DefaultConstructor
-			{
+            struct DefaultConstructor
+            {
 
-				T* operator()() const {
-					return new T();
-				}
-			};
+                T* operator()() const {
+                    return new T();
+                }
+            };
 
-			struct DefaultDestructor
-			{
+            struct DefaultDestructor
+            {
 
-				void operator()(T* obj) const {
-					delete obj;
-				}
-			};
+                void operator()(T* obj) const {
+                    delete obj;
+                }
+            };
 
-			ObjectPool(const ObjectPool& pool): 
-				maxSize(pool.maxSize), ctorFunc(pool.ctorFunc), dtorFunc(pool.dtorFunc),
-				initFunc(pool.initFunc), cleanFunc(pool.cleanFunc) {}
+            ObjectPool(const ObjectPool& pool): 
+                maxSize(pool.maxSize), ctorFunc(pool.ctorFunc), dtorFunc(pool.dtorFunc),
+                initFunc(pool.initFunc), cleanFunc(pool.cleanFunc) {}
 
-			ObjectPool(std::size_t max_size = 0): 
-				maxSize(max_size), ctorFunc(DefaultConstructor()), dtorFunc(DefaultDestructor()) {}
-	
-			template <typename C, typename D>
-			ObjectPool(const C& ctor_func, const D& dtor_func, std::size_t max_size = 0): 
-				maxSize(max_size), ctorFunc(ctor_func), dtorFunc(dtor_func) {}
+            ObjectPool(std::size_t max_size = 0): 
+                maxSize(max_size), ctorFunc(DefaultConstructor()), dtorFunc(DefaultDestructor()) {}
+    
+            template <typename C, typename D>
+            ObjectPool(const C& ctor_func, const D& dtor_func, std::size_t max_size = 0): 
+                maxSize(max_size), ctorFunc(ctor_func), dtorFunc(dtor_func) {}
 
-			~ObjectPool() {
-				std::for_each(pool.begin(), pool.end(), dtorFunc);
-			}
+            ~ObjectPool() {
+                std::for_each(pool.begin(), pool.end(), dtorFunc);
+            }
 
-			SharedObjectPointer get() {
-				ObjectType* obj;
+            SharedObjectPointer get() {
+                ObjectType* obj;
 
-				if (!pool.empty()) {
-					obj = pool.back();
-					pool.pop_back();
+                if (!pool.empty()) {
+                    obj = pool.back();
+                    pool.pop_back();
 
-				} else {
-					obj = ctorFunc();
+                } else {
+                    obj = ctorFunc();
 
-					if (!obj)
-						throw std::bad_alloc();
-				}
+                    if (!obj)
+                        throw std::bad_alloc();
+                }
 
-				SharedObjectPointer obj_ptr(obj, PutObject(*this));
+                SharedObjectPointer obj_ptr(obj, PutObject(*this));
 
-				if (initFunc) 
-					initFunc(*obj);
+                if (initFunc) 
+                    initFunc(*obj);
 
-				return obj_ptr;
-			}
+                return obj_ptr;
+            }
 
-			std::size_t getSize() const {
-				return pool.size();
-			}
+            std::size_t getSize() const {
+                return pool.size();
+            }
 
-			std::size_t getMaxSize() const {
-				return maxSize;
-			}
+            std::size_t getMaxSize() const {
+                return maxSize;
+            }
 
-			void setMaxSize(std::size_t max_size) {
-				maxSize = max_size;
+            void setMaxSize(std::size_t max_size) {
+                maxSize = max_size;
 
-				shrinkToMaxSize();
-			}
+                shrinkToMaxSize();
+            }
 
-			void freeMemory() {
-				std::for_each(pool.begin(), pool.end(), dtorFunc);
+            void freeMemory() {
+                std::for_each(pool.begin(), pool.end(), dtorFunc);
 
-				pool.clear();
-			}
+                pool.clear();
+            }
 
-			void setInitFunction(const ObjectFunction& func) {
-				initFunc = func;
-			}
+            void setInitFunction(const ObjectFunction& func) {
+                initFunc = func;
+            }
 
-			void setCleanupFunction(const ObjectFunction& func) {
-				cleanFunc = func;
-			}
+            void setCleanupFunction(const ObjectFunction& func) {
+                cleanFunc = func;
+            }
 
-			ObjectPool& operator=(const ObjectPool& pool) {
-				if (this == &pool)
-					return *this;
+            ObjectPool& operator=(const ObjectPool& pool) {
+                if (this == &pool)
+                    return *this;
 
-				maxSize = pool.maxSize;
-				ctorFunc = pool.ctorFunc;
-				dtorFunc = pool.dtorFunc;
-				initFunc = pool.initFunc;
+                maxSize = pool.maxSize;
+                ctorFunc = pool.ctorFunc;
+                dtorFunc = pool.dtorFunc;
+                initFunc = pool.initFunc;
 
-				shrinkToMaxSize();
+                shrinkToMaxSize();
 
-				return *this;
-			}
+                return *this;
+            }
 
-		private:
-			void shrinkToMaxSize() {
-				if (maxSize == 0)
-					return;
+        private:
+            void shrinkToMaxSize() {
+                if (maxSize == 0)
+                    return;
 
-				while (pool.size() > maxSize) {
-					dtorFunc(pool.back());
-					pool.pop_back();
-				} 
-			}
+                while (pool.size() > maxSize) {
+                    dtorFunc(pool.back());
+                    pool.pop_back();
+                } 
+            }
 
-			struct PutObject
-			{
+            struct PutObject
+            {
 
-				PutObject(ObjectPool& pool): pool(pool) {}
+                PutObject(ObjectPool& pool): pool(pool) {}
 
-				void operator()(ObjectType* obj) const {
-					pool.put(obj);
-				}
+                void operator()(ObjectType* obj) const {
+                    pool.put(obj);
+                }
 
-				ObjectPool& pool;
-			};
-	    
-			void put(ObjectType* obj) {
-				if (maxSize > 0 && pool.size() >= maxSize) {
-					dtorFunc(obj);
-					return;
-				}
+                ObjectPool& pool;
+            };
+        
+            void put(ObjectType* obj) {
+                if (maxSize > 0 && pool.size() >= maxSize) {
+                    dtorFunc(obj);
+                    return;
+                }
 
-				try {
-					if (cleanFunc)
-						cleanFunc(*obj);
+                try {
+                    if (cleanFunc)
+                        cleanFunc(*obj);
 
-					pool.push_back(obj);
+                    pool.push_back(obj);
 
-				} catch (...) {
-					dtorFunc(obj);
-				}
-			}
+                } catch (...) {
+                    dtorFunc(obj);
+                }
+            }
 
-			typedef std::vector<ObjectType*> PooledObjectList;
+            typedef std::vector<ObjectType*> PooledObjectList;
 
-			std::size_t         maxSize;
-			PooledObjectList    pool;
-			ConstructorFunction ctorFunc;
-			DestructorFunction  dtorFunc;
-			ObjectFunction      initFunc;
-			ObjectFunction      cleanFunc;
-		};
+            std::size_t         maxSize;
+            PooledObjectList    pool;
+            ConstructorFunction ctorFunc;
+            DestructorFunction  dtorFunc;
+            ObjectFunction      initFunc;
+            ObjectFunction      cleanFunc;
+        };
     }
 }
 

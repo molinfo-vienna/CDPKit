@@ -37,9 +37,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::FeatureTypeMatchFunctor& func, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+                      CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return func(ftr1, ftr2);
+        return func(ftr1, ftr2);
     }
 }
 
@@ -50,10 +50,10 @@ void CDPLPythonPharm::exportFeatureTypeMatchFunctor()
     using namespace CDPL;
 
     python::class_<Pharm::FeatureTypeMatchFunctor, boost::noncopyable>("FeatureTypeMatchFunctor", python::no_init)
-		.def(python::init<const Pharm::FeatureTypeMatchFunctor&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureTypeMatchFunctor>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureTypeMatchFunctor::operator=), 
-			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
+        .def(python::init<const Pharm::FeatureTypeMatchFunctor&>((python::arg("self"), python::arg("func"))))
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureTypeMatchFunctor>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureTypeMatchFunctor::operator=), 
+             (python::arg("self"), python::arg("func")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
 }

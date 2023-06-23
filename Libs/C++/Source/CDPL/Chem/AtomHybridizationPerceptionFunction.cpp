@@ -49,58 +49,58 @@ namespace
     typedef std::map<std::uint64_t, unsigned int> HybridizationMap;
 
     HybridizationMap::value_type hybrMapEntries[] = {
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  2, 1, 0, 0 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 2, 0, 0 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  1, 0, 1, 0 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 0, 1, 2 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 1, 0, 2 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 2, 0, 0 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::B,  3, 0, 0, 0 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::B,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Si, 4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Si, 6, 0, 0, 0 ), Chem::HybridizationState::SP3D2),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  3, 0, 0, 2 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  1, 1, 0, 2 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 0, 1, 2 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 0, 1, 0 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  1, 0, 1, 0 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  1, 2, 0, 0 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  2, 1, 0, 0 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 2, 0, 0 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 1, 0, 4 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  3, 0, 0, 2 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  3, 1, 0, 0 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Sb, 5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  1, 0, 0, 6 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  2, 0, 0, 4 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  0, 1, 0, 4 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  0, 0, 1, 2 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  0, 1, 0, 6 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  0, 3, 0, 0 ), Chem::HybridizationState::SP2  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  2, 2, 0, 0 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  2, 1, 0, 2 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  2, 0, 0, 4 ), Chem::HybridizationState::SP3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  4, 0, 0, 2 ), Chem::HybridizationState::SP3D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Cl, 3, 0, 0, 4 ), Chem::HybridizationState::SP3D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::I,  2, 0, 0, 6 ), Chem::HybridizationState::DP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::I,  7, 0, 0, 0 ), Chem::HybridizationState::SP3D3),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Hg, 2, 0, 0, 10), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Au, 2, 0, 0, 9 ), Chem::HybridizationState::SP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Xe, 2, 0, 0, 6 ), Chem::HybridizationState::DP   ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Cr, 2, 2, 0, 0 ), Chem::HybridizationState::SD3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Mn, 1, 3, 0, 0 ), Chem::HybridizationState::SD3  ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Au, 4, 0, 0, 7 ), Chem::HybridizationState::SP2D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Ni, 4, 0, 0, 6 ), Chem::HybridizationState::SP2D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Pt, 4, 0, 0, 6 ), Chem::HybridizationState::SP2D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Ta, 5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
-	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Te, 6, 0, 0, 0 ), Chem::HybridizationState::SP3D2)
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  2, 1, 0, 0 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 2, 0, 0 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  1, 0, 1, 0 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 0, 1, 2 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 1, 0, 2 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  0, 2, 0, 0 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::B,  3, 0, 0, 0 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::B,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Si, 4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Si, 6, 0, 0, 0 ), Chem::HybridizationState::SP3D2),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  3, 0, 0, 2 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  1, 1, 0, 2 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 0, 1, 2 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 0, 1, 0 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  1, 0, 1, 0 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  1, 2, 0, 0 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  2, 1, 0, 0 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 2, 0, 0 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::N,  0, 1, 0, 4 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  3, 0, 0, 2 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  3, 1, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::P,  5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Sb, 5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  1, 0, 0, 6 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  2, 0, 0, 4 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  0, 1, 0, 4 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::O,  0, 0, 1, 2 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  0, 1, 0, 6 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  0, 3, 0, 0 ), Chem::HybridizationState::SP2  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  2, 2, 0, 0 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  2, 1, 0, 2 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  2, 0, 0, 4 ), Chem::HybridizationState::SP3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::S,  4, 0, 0, 2 ), Chem::HybridizationState::SP3D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Cl, 3, 0, 0, 4 ), Chem::HybridizationState::SP3D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::I,  2, 0, 0, 6 ), Chem::HybridizationState::DP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::I,  7, 0, 0, 0 ), Chem::HybridizationState::SP3D3),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Hg, 2, 0, 0, 10), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Au, 2, 0, 0, 9 ), Chem::HybridizationState::SP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Xe, 2, 0, 0, 6 ), Chem::HybridizationState::DP   ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Cr, 2, 2, 0, 0 ), Chem::HybridizationState::SD3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Mn, 1, 3, 0, 0 ), Chem::HybridizationState::SD3  ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Au, 4, 0, 0, 7 ), Chem::HybridizationState::SP2D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Ni, 4, 0, 0, 6 ), Chem::HybridizationState::SP2D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Pt, 4, 0, 0, 6 ), Chem::HybridizationState::SP2D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Ta, 5, 0, 0, 0 ), Chem::HybridizationState::SP3D ),
+    HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::Te, 6, 0, 0, 0 ), Chem::HybridizationState::SP3D2)
     };
 
     HybridizationMap atomHybridizations(hybrMapEntries, hybrMapEntries + sizeof(hybrMapEntries) 
-					/ sizeof(HybridizationMap::value_type));
+                    / sizeof(HybridizationMap::value_type));
 }
 
 
@@ -112,36 +112,36 @@ unsigned int Chem::perceiveHybridizationState(const Atom& atom, const MolecularG
     Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
  
     for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
-		if (!molgraph.containsAtom(*a_it))
-			continue;
+        if (!molgraph.containsAtom(*a_it))
+            continue;
 
-		const Bond& bond = *b_it;
+        const Bond& bond = *b_it;
 
-		if (!molgraph.containsBond(bond))
-			continue;
+        if (!molgraph.containsBond(bond))
+            continue;
 
-		std::size_t bnd_order = getOrder(bond);
+        std::size_t bnd_order = getOrder(bond);
 
-		if (bnd_order > 3 || bnd_order < 1)
-			return HybridizationState::UNKNOWN;
+        if (bnd_order > 3 || bnd_order < 1)
+            return HybridizationState::UNKNOWN;
 
-		bnd_order_counts[bnd_order - 1]++;
+        bnd_order_counts[bnd_order - 1]++;
     }
 
     std::size_t impl_h_count = getImplicitHydrogenCount(atom);
-	
+    
     bnd_order_counts[0] += impl_h_count;
 
     long free_val_el_count = Internal::calcValenceElectronCount(atom) - Internal::calcExplicitValence(atom, molgraph) - impl_h_count;
 
     std::uint64_t atom_descr = MAKE_ATOM_DESCR(getType(atom),
-											   bnd_order_counts[0], bnd_order_counts[1], bnd_order_counts[2],
-											   (free_val_el_count < 0 ? 0 : free_val_el_count));
+                                               bnd_order_counts[0], bnd_order_counts[1], bnd_order_counts[2],
+                                               (free_val_el_count < 0 ? 0 : free_val_el_count));
 
     HybridizationMap::const_iterator it = atomHybridizations.find(atom_descr);
 
     if (it != atomHybridizations.end())
-		return it->second;
+        return it->second;
 
     return HybridizationState::UNKNOWN;
 }

@@ -42,9 +42,9 @@ void CDPLPythonShape::exportSymmetryClasses()
     using namespace CDPL;
 
     python::class_<SymmetryClass, boost::noncopyable>("SymmetryClass", python::no_init)
-	.def_readonly("UNDEF", &Shape::SymmetryClass::UNDEF)
-	.def_readonly("ASYMMETRIC", &Shape::SymmetryClass::ASYMMETRIC)
-	.def_readonly("OBLATE", &Shape::SymmetryClass::OBLATE)
-	.def_readonly("PROLATE", &Shape::SymmetryClass::PROLATE)
-	.def_readonly("SPHERICAL", &Shape::SymmetryClass::SPHERICAL);
+    .def_readonly("UNDEF", &Shape::SymmetryClass::UNDEF)
+    .def_readonly("ASYMMETRIC", &Shape::SymmetryClass::ASYMMETRIC)
+    .def_readonly("OBLATE", &Shape::SymmetryClass::OBLATE)
+    .def_readonly("PROLATE", &Shape::SymmetryClass::PROLATE)
+    .def_readonly("SPHERICAL", &Shape::SymmetryClass::SPHERICAL);
 }

@@ -36,16 +36,16 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief Provides constants used to specify the employed structure generation method.
-		 */
-		namespace StructureGenerationMode
-		{
-					
-			const unsigned int AUTO              = 0;
-			const unsigned int FRAGMENT          = 1;
-			const unsigned int DISTANCE_GEOMETRY = 2;
-		}
+        /**
+         * \brief Provides constants used to specify the employed structure generation method.
+         */
+        namespace StructureGenerationMode
+        {
+                    
+            const unsigned int AUTO              = 0;
+            const unsigned int FRAGMENT          = 1;
+            const unsigned int DISTANCE_GEOMETRY = 2;
+        }
     }
 }
 

@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		typedef Util::CompressedDataWriter<SMILESMolecularGraphWriter, Util::GZipOStream> SMILESGZMolecularGraphWriter;
-	}
+        typedef Util::CompressedDataWriter<SMILESMolecularGraphWriter, Util::GZipOStream> SMILESGZMolecularGraphWriter;
+    }
 }
 
 #endif // CDPL_CHEM_SMILESGZMOLECULARGRAPHWRITER_HPP

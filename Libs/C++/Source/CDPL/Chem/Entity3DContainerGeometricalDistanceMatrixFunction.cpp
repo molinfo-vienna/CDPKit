@@ -34,23 +34,23 @@ using namespace CDPL;
 
 void Chem::calcGeometricalDistanceMatrix(const Entity3DContainer& cntnr, Math::DMatrix& mtx)
 {
-	std::size_t num_entities = cntnr.getNumEntities();
+    std::size_t num_entities = cntnr.getNumEntities();
 
-	mtx.resize(num_entities, num_entities, false);
-	mtx.clear();
+    mtx.resize(num_entities, num_entities, false);
+    mtx.clear();
 
-	for (std::size_t i = 0; i < num_entities; ) {
-		const Entity3D& entity1 = cntnr.getEntity(i);
-		const Math::Vector3D& coords1 = get3DCoordinates(entity1);
+    for (std::size_t i = 0; i < num_entities; ) {
+        const Entity3D& entity1 = cntnr.getEntity(i);
+        const Math::Vector3D& coords1 = get3DCoordinates(entity1);
 
-		for (std::size_t j = ++i; j < num_entities; j++) {
-			const Entity3D& entity2 = cntnr.getEntity(j);
-			const Math::Vector3D& coords2 = get3DCoordinates(entity2);
+        for (std::size_t j = ++i; j < num_entities; j++) {
+            const Entity3D& entity2 = cntnr.getEntity(j);
+            const Math::Vector3D& coords2 = get3DCoordinates(entity2);
 
-			double dist = norm2(coords1 - coords2);
+            double dist = norm2(coords1 - coords2);
 
-			mtx(i, j) = dist;
-			mtx(j, i) = dist;
-		}
-	}
+            mtx(i, j) = dist;
+            mtx(j, i) = dist;
+        }
+    }
 }

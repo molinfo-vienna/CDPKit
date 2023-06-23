@@ -34,222 +34,222 @@ using namespace CDPL;
 
 double Descr::calcTanimotoSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
 
-	if (bs1_size == bs2_size) {
-		std::size_t bab = (bs1 & bs2).count();
+    if (bs1_size == bs2_size) {
+        std::size_t bab = (bs1 & bs2).count();
 
-		return (double(bab) / (bs1.count() + bs2.count() - bab));
-	}
+        return (double(bab) / (bs1.count() + bs2.count() - bab));
+    }
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		std::size_t bab = (tmp & bs2).count();
+        std::size_t bab = (tmp & bs2).count();
 
-		return (double(bab) / (bs1.count() + bs2.count() - bab));
-	}
+        return (double(bab) / (bs1.count() + bs2.count() - bab));
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
   
-	std::size_t bab = (bs1 & tmp).count();
+    std::size_t bab = (bs1 & tmp).count();
 
-	return (double(bab) / (bs1.count() + bs2.count() - bab));
+    return (double(bab) / (bs1.count() + bs2.count() - bab));
 }
 
 std::size_t Descr::calcHammingDistance(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
 
-	if (bs1_size == bs2_size)
-		return (bs1 ^ bs2).count();
+    if (bs1_size == bs2_size)
+        return (bs1 ^ bs2).count();
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		return (tmp ^ bs2).count();
-	}
+        return (tmp ^ bs2).count();
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
   
-	return (bs1 ^ tmp).count();
+    return (bs1 ^ tmp).count();
 }
 
 double Descr::calcEuclideanDistance(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	return std::sqrt(double(calcHammingDistance(bs1, bs2)));
+    return std::sqrt(double(calcHammingDistance(bs1, bs2)));
 }
 
 double Descr::calcCosineSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
 
-	if (bs1_size == bs2_size) {
-		std::size_t bab = (bs1 & bs2).count();
-		
-		return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
-	}
+    if (bs1_size == bs2_size) {
+        std::size_t bab = (bs1 & bs2).count();
+        
+        return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
+    }
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		std::size_t bab = (tmp & bs2).count();
-		
-		return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
-	}
+        std::size_t bab = (tmp & bs2).count();
+        
+        return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
-  	
-	std::size_t bab = (tmp & bs1).count();
-	
-	return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
+      
+    std::size_t bab = (tmp & bs1).count();
+    
+    return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
 }
 
 double Descr::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
-	std::size_t a = bs1.count();
-	std::size_t b = bs2.count();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
+    std::size_t a = bs1.count();
+    std::size_t b = bs2.count();
 
-	if (bs1_size == bs2_size) {
-		std::size_t bab = (bs1 & bs2).count();
-		std::size_t oa = a - bab;
-		std::size_t ob = b - bab;
-		std::size_t nab = bs1_size - (bs1 | bs2).count();
+    if (bs1_size == bs2_size) {
+        std::size_t bab = (bs1 & bs2).count();
+        std::size_t oa = a - bab;
+        std::size_t ob = b - bab;
+        std::size_t nab = bs1_size - (bs1 | bs2).count();
 
-		return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
-	}
+        return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+    }
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		std::size_t bab = (tmp & bs2).count();
-		std::size_t oa = a - bab;
-		std::size_t ob = b - bab;
-		std::size_t nab = bs2_size - (tmp | bs2).count();
+        std::size_t bab = (tmp & bs2).count();
+        std::size_t oa = a - bab;
+        std::size_t ob = b - bab;
+        std::size_t nab = bs2_size - (tmp | bs2).count();
 
-		return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
-	}
+        return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
-  	
-	std::size_t bab = (bs1 & tmp).count();
-	std::size_t oa = a - bab;
-	std::size_t ob = b - bab;
-	std::size_t nab = bs1_size - (bs1 | tmp).count();
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
+      
+    std::size_t bab = (bs1 & tmp).count();
+    std::size_t oa = a - bab;
+    std::size_t ob = b - bab;
+    std::size_t nab = bs1_size - (bs1 | tmp).count();
 
-	return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+    return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
 }
 
 double Descr::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
-	std::size_t a = bs1.count();
-	std::size_t b = bs2.count();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
+    std::size_t a = bs1.count();
+    std::size_t b = bs2.count();
 
-	if (bs1_size == bs2_size) {
-		std::size_t bab = (bs1 & bs2).count();
-		std::size_t oa = a - bab;
-		std::size_t ob = b - bab;
-		std::size_t nab = bs1_size - (bs1 | bs2).count();
+    if (bs1_size == bs2_size) {
+        std::size_t bab = (bs1 & bs2).count();
+        std::size_t oa = a - bab;
+        std::size_t ob = b - bab;
+        std::size_t nab = bs1_size - (bs1 | bs2).count();
 
-		return (double(oa + ob) / double(oa + ob + bab + nab));
-	}
+        return (double(oa + ob) / double(oa + ob + bab + nab));
+    }
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		std::size_t bab = (tmp & bs2).count();
-		std::size_t oa = a - bab;
-		std::size_t ob = b - bab;
-		std::size_t nab = bs2_size - (tmp | bs2).count();
+        std::size_t bab = (tmp & bs2).count();
+        std::size_t oa = a - bab;
+        std::size_t ob = b - bab;
+        std::size_t nab = bs2_size - (tmp | bs2).count();
 
-		return (double(oa + ob) / double(oa + ob + bab + nab));
-	}
+        return (double(oa + ob) / double(oa + ob + bab + nab));
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
-  	
-	std::size_t bab = (bs1 & tmp).count();
-	std::size_t oa = a - bab;
-	std::size_t ob = b - bab;
-	std::size_t nab = bs1_size - (bs1 | tmp).count();
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
+      
+    std::size_t bab = (bs1 & tmp).count();
+    std::size_t oa = a - bab;
+    std::size_t ob = b - bab;
+    std::size_t nab = bs1_size - (bs1 | tmp).count();
 
-	return (double(oa + ob) / double(oa + ob + bab + nab));
+    return (double(oa + ob) / double(oa + ob + bab + nab));
 }
 
 double Descr::calcDiceSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
 
-	if (bs1_size == bs2_size) {
-		std::size_t bab = (bs1 & bs2).count();
-		
-		return (double(2 * bab) / double(bs1.count() + bs2.count()));
-	}
+    if (bs1_size == bs2_size) {
+        std::size_t bab = (bs1 & bs2).count();
+        
+        return (double(2 * bab) / double(bs1.count() + bs2.count()));
+    }
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		std::size_t bab = (tmp & bs2).count();
-		
-		return (double(2 * bab) / double(bs1.count() + bs2.count()));
-	}
+        std::size_t bab = (tmp & bs2).count();
+        
+        return (double(2 * bab) / double(bs1.count() + bs2.count()));
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
-  	
-	std::size_t bab = (bs1 & tmp).count();
-		
-	return (double(2 * bab) / double(bs1.count() + bs2.count()));
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
+      
+    std::size_t bab = (bs1 & tmp).count();
+        
+    return (double(2 * bab) / double(bs1.count() + bs2.count()));
 }
 
 double Descr::calcTverskySimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2, double a, double b)
 {
-	std::size_t bs1_size = bs1.size();
-	std::size_t bs2_size = bs2.size();
+    std::size_t bs1_size = bs1.size();
+    std::size_t bs2_size = bs2.size();
 
-	if (bs1_size == bs2_size) {
-		std::size_t bab = (bs1 & bs2).count();
-		std::size_t oa = bs1.count() - bab;
-		std::size_t ob = bs2.count() - bab;
+    if (bs1_size == bs2_size) {
+        std::size_t bab = (bs1 & bs2).count();
+        std::size_t oa = bs1.count() - bab;
+        std::size_t ob = bs2.count() - bab;
 
-		return (double(bab) / (a * oa + b * ob + bab));
-	}
+        return (double(bab) / (a * oa + b * ob + bab));
+    }
 
-	if (bs1_size < bs2_size) {
-		Util::BitSet tmp(bs1);
-		tmp.resize(bs2_size);
+    if (bs1_size < bs2_size) {
+        Util::BitSet tmp(bs1);
+        tmp.resize(bs2_size);
 
-		std::size_t bab = (tmp & bs2).count();
-		std::size_t oa = bs1.count() - bab;
-		std::size_t ob = bs2.count() - bab;
+        std::size_t bab = (tmp & bs2).count();
+        std::size_t oa = bs1.count() - bab;
+        std::size_t ob = bs2.count() - bab;
 
-		return (double(bab) / (a * oa + b * ob + bab));
-	}
+        return (double(bab) / (a * oa + b * ob + bab));
+    }
 
-	Util::BitSet tmp(bs2);
-	tmp.resize(bs1_size);
+    Util::BitSet tmp(bs2);
+    tmp.resize(bs1_size);
   
-	std::size_t bab = (bs1 & tmp).count();
-	std::size_t oa = bs1.count() - bab;
-	std::size_t ob = bs2.count() - bab;
+    std::size_t bab = (bs1 & tmp).count();
+    std::size_t oa = bs1.count() - bab;
+    std::size_t ob = bs2.count() - bab;
 
-	return (double(bab) / (a * oa + b * ob + bab));
+    return (double(bab) / (a * oa + b * ob + bab));
 }

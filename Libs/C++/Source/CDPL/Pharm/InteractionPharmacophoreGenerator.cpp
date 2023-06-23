@@ -40,138 +40,138 @@ using namespace CDPL;
 namespace
 {
 
-	bool isPDBAlphaAtom(const Chem::Atom& atom)
-	{
-		return (Biomol::getResidueAtomName(atom) == "CA");
-	}
+    bool isPDBAlphaAtom(const Chem::Atom& atom)
+    {
+        return (Biomol::getResidueAtomName(atom) == "CA");
+    }
 }
 
 
 Pharm::InteractionPharmacophoreGenerator::InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg,
-																			DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg):
-	corePharmGen(core_ph4_gen_cfg), envPharmGen(env_ph4_gen_cfg), coreEnvRadius(8.0), addXVolumes(true)
+                                                                            DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg):
+    corePharmGen(core_ph4_gen_cfg), envPharmGen(env_ph4_gen_cfg), coreEnvRadius(8.0), addXVolumes(true)
 {
-	envPharmGen.enableFeature(FeatureType::HALOGEN_BOND_ACCEPTOR, true);
+    envPharmGen.enableFeature(FeatureType::HALOGEN_BOND_ACCEPTOR, true);
 }
 
 void Pharm::InteractionPharmacophoreGenerator::setCoreEnvironmentRadius(double radius)
 {
-	coreEnvRadius = radius;
+    coreEnvRadius = radius;
 }
 
 double Pharm::InteractionPharmacophoreGenerator::getCoreEnvironmentRadius() const
 {
-	return coreEnvRadius;
+    return coreEnvRadius;
 }
 
 void Pharm::InteractionPharmacophoreGenerator::addExclusionVolumes(bool add)
 {
-	addXVolumes = add;
+    addXVolumes = add;
 }
 
 bool Pharm::InteractionPharmacophoreGenerator::exclusionVolumesAdded() const
 {
-	return addXVolumes;
+    return addXVolumes;
 }
 
 Pharm::PharmacophoreGenerator& Pharm::InteractionPharmacophoreGenerator::getCorePharmacophoreGenerator()
 {
-	return corePharmGen;
+    return corePharmGen;
 }
 
 const Pharm::PharmacophoreGenerator& Pharm::InteractionPharmacophoreGenerator::getCorePharmacophoreGenerator() const
 {
-	return corePharmGen;
+    return corePharmGen;
 }
 
 Pharm::PharmacophoreGenerator& Pharm::InteractionPharmacophoreGenerator::getEnvironmentPharmacophoreGenerator()
 {
-	return envPharmGen;
+    return envPharmGen;
 }
 
 const Pharm::PharmacophoreGenerator& Pharm::InteractionPharmacophoreGenerator::getEnvironmentPharmacophoreGenerator() const
 {
-	return envPharmGen;
+    return envPharmGen;
 }
 
 Pharm::InteractionAnalyzer& Pharm::InteractionPharmacophoreGenerator::getInteractionAnalyzer()
 {
-	return iaAnalyzer;
+    return iaAnalyzer;
 }
 
 const Pharm::InteractionAnalyzer& Pharm::InteractionPharmacophoreGenerator::getInteractionAnalyzer() const
 {
-	return iaAnalyzer;
+    return iaAnalyzer;
 }
 
 const Pharm::Pharmacophore& Pharm::InteractionPharmacophoreGenerator::getCorePharmacophore() const
 {
-	return corePharm;
+    return corePharm;
 }
 
 const Pharm::Pharmacophore& Pharm::InteractionPharmacophoreGenerator::getEnvironmentPharmacophore() const
 {
-	return envPharm;
+    return envPharm;
 }
 
 const Pharm::FeatureMapping& Pharm::InteractionPharmacophoreGenerator::getInteractionMapping() const
 {
-	return iaMapping;
+    return iaMapping;
 }
 
 const Chem::Fragment& Pharm::InteractionPharmacophoreGenerator::getCoreEnvironment() const
 {
-	return coreEnv;
+    return coreEnv;
 }
 
 void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGraph& core, const Chem::MolecularGraph& tgt, 
-														Pharmacophore& ia_pharm, bool extract_core_env, bool append)
+                                                        Pharmacophore& ia_pharm, bool extract_core_env, bool append)
 {
-	const Chem::MolecularGraph* env = &tgt;
+    const Chem::MolecularGraph* env = &tgt;
 
-	if (extract_core_env) {
-		env = &coreEnv;
+    if (extract_core_env) {
+        env = &coreEnv;
 
-		Biomol::extractEnvironmentResidues(core, tgt, coreEnv, corePharmGen.getAtom3DCoordinatesFunction(), coreEnvRadius, false);
+        Biomol::extractEnvironmentResidues(core, tgt, coreEnv, corePharmGen.getAtom3DCoordinatesFunction(), coreEnvRadius, false);
 
-		perceiveSSSR(coreEnv, true);
-	}
+        perceiveSSSR(coreEnv, true);
+    }
 
-	corePharmGen.generate(core, corePharm, false);
-	envPharmGen.generate(*env, envPharm, false);
+    corePharmGen.generate(core, corePharm, false);
+    envPharmGen.generate(*env, envPharm, false);
 
-	iaAnalyzer.analyze(corePharm, envPharm, iaMapping, false);
+    iaAnalyzer.analyze(corePharm, envPharm, iaMapping, false);
 
-	buildInteractionPharmacophore(ia_pharm, iaMapping, append);
+    buildInteractionPharmacophore(ia_pharm, iaMapping, append);
 
-	if (addXVolumes) {
-		iaEnvFeatures.clear();
+    if (addXVolumes) {
+        iaEnvFeatures.clear();
 
-		for (FeatureMapping::EntryIterator it = iaMapping.getEntriesBegin(), end = iaMapping.getEntriesEnd(); it != end; ++it) {
-			Feature& env_ftr = envPharm.getFeature(envPharm.getFeatureIndex(*it->second));
+        for (FeatureMapping::EntryIterator it = iaMapping.getEntriesBegin(), end = iaMapping.getEntriesEnd(); it != end; ++it) {
+            Feature& env_ftr = envPharm.getFeature(envPharm.getFeatureIndex(*it->second));
 
-			if (iaEnvFeatures.addFeature(env_ftr)) {
-				unsigned int type = getType(env_ftr);
+            if (iaEnvFeatures.addFeature(env_ftr)) {
+                unsigned int type = getType(env_ftr);
 
-				if (type == FeatureType::H_BOND_DONOR || type == FeatureType::H_BOND_ACCEPTOR)
-					setTolerance(env_ftr, 1.0);
-				else
-					setTolerance(env_ftr, 1.5);
-			}
-		}
+                if (type == FeatureType::H_BOND_DONOR || type == FeatureType::H_BOND_ACCEPTOR)
+                    setTolerance(env_ftr, 1.0);
+                else
+                    setTolerance(env_ftr, 1.5);
+            }
+        }
 
-		createExclusionVolumes(ia_pharm, iaEnvFeatures, 0.0, 0.1, false);
+        createExclusionVolumes(ia_pharm, iaEnvFeatures, 0.0, 0.1, false);
 
-		iaEnvFeatureResAtoms.clear();
-		iaEnvFeatureAtoms.clear();
+        iaEnvFeatureResAtoms.clear();
+        iaEnvFeatureAtoms.clear();
 
-		getFeatureAtoms(iaEnvFeatures, iaEnvFeatureAtoms);
-		Biomol::extractResidueSubstructures(iaEnvFeatureAtoms, *env, iaEnvFeatureResAtoms, true);
+        getFeatureAtoms(iaEnvFeatures, iaEnvFeatureAtoms);
+        Biomol::extractResidueSubstructures(iaEnvFeatureAtoms, *env, iaEnvFeatureResAtoms, true);
 
-		makeHydrogenDeplete(iaEnvFeatureResAtoms);
-		removeAtomsIfNot(iaEnvFeatureResAtoms, &isPDBAlphaAtom);
+        makeHydrogenDeplete(iaEnvFeatureResAtoms);
+        removeAtomsIfNot(iaEnvFeatureResAtoms, &isPDBAlphaAtom);
 
-		createExclusionVolumes(ia_pharm, iaEnvFeatureResAtoms, envPharmGen.getAtom3DCoordinatesFunction(), 1.0, 2.0, false);
-		resizeExclusionVolumesWithClashes(ia_pharm, core, corePharmGen.getAtom3DCoordinatesFunction());
-	}
+        createExclusionVolumes(ia_pharm, iaEnvFeatureResAtoms, envPharmGen.getAtom3DCoordinatesFunction(), 1.0, 2.0, false);
+        resizeExclusionVolumesWithClashes(ia_pharm, core, corePharmGen.getAtom3DCoordinatesFunction());
+    }
 }

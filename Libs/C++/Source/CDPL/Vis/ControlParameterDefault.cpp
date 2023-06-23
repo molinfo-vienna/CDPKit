@@ -39,75 +39,75 @@
 namespace CDPL
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		namespace ControlParameterDefault
-		{
+        namespace ControlParameterDefault
+        {
 
-			const Rectangle2D               VIEWPORT                             = Rectangle2D();
-			const unsigned int              SIZE_ADJUSTMENT                      = SizeAdjustment::IF_REQUIRED;
-			const unsigned int              ALIGNMENT                            = Alignment::CENTER;
-			const Color                     BACKGROUND_COLOR                     = Color(0, 0, 0, 0);
+            const Rectangle2D               VIEWPORT                             = Rectangle2D();
+            const unsigned int              SIZE_ADJUSTMENT                      = SizeAdjustment::IF_REQUIRED;
+            const unsigned int              ALIGNMENT                            = Alignment::CENTER;
+            const Color                     BACKGROUND_COLOR                     = Color(0, 0, 0, 0);
 
-			const unsigned int              REACTION_ARROW_STYLE                 = ArrowStyle::REACTION_SOLID;
-			const Color                     REACTION_ARROW_COLOR                 = Color(0, 0, 0);
-			const SizeSpecification         REACTION_ARROW_LENGTH                = SizeSpecification(35.0, true, true, true);
-			const SizeSpecification         REACTION_ARROW_HEAD_LENGTH           = SizeSpecification(8.0, false, true, true);
-			const SizeSpecification         REACTION_ARROW_HEAD_WIDTH            = SizeSpecification(5.0, false, true, true);
-			const SizeSpecification         REACTION_ARROW_SHAFT_WIDTH           = SizeSpecification(0.0, false, true, true);
-			const SizeSpecification         REACTION_ARROW_LINE_WIDTH            = SizeSpecification(1.0, false, true, true);
-			const unsigned int              REACTION_COMPONENT_LAYOUT            = LayoutStyle::PACKED;
-			const unsigned int              REACTION_COMPONENT_LAYOUT_DIRECTION  = LayoutDirection::HORIZONTAL;
-			const SizeSpecification         REACTION_COMPONENT_MARGIN            = SizeSpecification(5.0, false, true, true);
-			const bool                      SHOW_REACTION_REACTANTS              = true;
-			const bool                      SHOW_REACTION_AGENTS                 = true;
-			const bool                      SHOW_REACTION_PRODUCTS               = true;
-			const unsigned int              REACTION_AGENT_ALIGNMENT             = Alignment::V_CENTER;
-			const unsigned int              REACTION_AGENT_LAYOUT                = LayoutStyle::LINEAR;
-			const unsigned int              REACTION_AGENT_LAYOUT_DIRECTION      = LayoutDirection::HORIZONTAL;
-			const Color                     REACTION_PLUS_SIGN_COLOR             = Color(0, 0, 0);
-			const SizeSpecification         REACTION_PLUS_SIGN_SIZE              = SizeSpecification(10.0, false, true, true);
-			const SizeSpecification         REACTION_PLUS_SIGN_LINE_WIDTH        = SizeSpecification(3.0, false, true, true);
-			const bool                      SHOW_REACTION_PLUS_SIGNS             = true;
+            const unsigned int              REACTION_ARROW_STYLE                 = ArrowStyle::REACTION_SOLID;
+            const Color                     REACTION_ARROW_COLOR                 = Color(0, 0, 0);
+            const SizeSpecification         REACTION_ARROW_LENGTH                = SizeSpecification(35.0, true, true, true);
+            const SizeSpecification         REACTION_ARROW_HEAD_LENGTH           = SizeSpecification(8.0, false, true, true);
+            const SizeSpecification         REACTION_ARROW_HEAD_WIDTH            = SizeSpecification(5.0, false, true, true);
+            const SizeSpecification         REACTION_ARROW_SHAFT_WIDTH           = SizeSpecification(0.0, false, true, true);
+            const SizeSpecification         REACTION_ARROW_LINE_WIDTH            = SizeSpecification(1.0, false, true, true);
+            const unsigned int              REACTION_COMPONENT_LAYOUT            = LayoutStyle::PACKED;
+            const unsigned int              REACTION_COMPONENT_LAYOUT_DIRECTION  = LayoutDirection::HORIZONTAL;
+            const SizeSpecification         REACTION_COMPONENT_MARGIN            = SizeSpecification(5.0, false, true, true);
+            const bool                      SHOW_REACTION_REACTANTS              = true;
+            const bool                      SHOW_REACTION_AGENTS                 = true;
+            const bool                      SHOW_REACTION_PRODUCTS               = true;
+            const unsigned int              REACTION_AGENT_ALIGNMENT             = Alignment::V_CENTER;
+            const unsigned int              REACTION_AGENT_LAYOUT                = LayoutStyle::LINEAR;
+            const unsigned int              REACTION_AGENT_LAYOUT_DIRECTION      = LayoutDirection::HORIZONTAL;
+            const Color                     REACTION_PLUS_SIGN_COLOR             = Color(0, 0, 0);
+            const SizeSpecification         REACTION_PLUS_SIGN_SIZE              = SizeSpecification(10.0, false, true, true);
+            const SizeSpecification         REACTION_PLUS_SIGN_LINE_WIDTH        = SizeSpecification(3.0, false, true, true);
+            const bool                      SHOW_REACTION_PLUS_SIGNS             = true;
 
-			const Color                     ATOM_COLOR                           = Color(0, 0, 0);		
-			const ColorTable::SharedPointer ATOM_COLOR_TABLE                     = ColorTable::SharedPointer(new ColorTable());
-			const bool                      USE_CALCULATED_ATOM_COORDINATES      = false;
-			const Font                      ATOM_LABEL_FONT                      = Font();
-			const SizeSpecification         ATOM_LABEL_SIZE                      = SizeSpecification(10.0, false, false, true);
-			const Font                      SECONDARY_ATOM_LABEL_FONT            = Font();
-			const SizeSpecification         SECONDARY_ATOM_LABEL_SIZE            = SizeSpecification(6.0, false, false, true);
-			const SizeSpecification         ATOM_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
-			const SizeSpecification         RADICAL_ELECTRON_DOT_SIZE            = SizeSpecification(1.0, false, false, true);
-			const bool                      SHOW_CARBONS                         = false;
-			const bool                      SHOW_EXPLICIT_HYDROGENS              = false;
-			const bool                      SHOW_CHARGES                         = true;
-			const bool                      SHOW_ISOTOPES                        = true;
-			const bool                      SHOW_HYDROGEN_COUNTS                 = false;
-			const bool                      SHOW_NON_CARBON_HYDROGEN_COUNTS      = true;
-			const bool                      SHOW_ATOM_QUERY_INFOS                = true;
-			const bool                      SHOW_ATOM_REACTION_INFOS             = true;
-			const bool                      SHOW_RADICAL_ELECTRONS               = true;
+            const Color                     ATOM_COLOR                           = Color(0, 0, 0);        
+            const ColorTable::SharedPointer ATOM_COLOR_TABLE                     = ColorTable::SharedPointer(new ColorTable());
+            const bool                      USE_CALCULATED_ATOM_COORDINATES      = false;
+            const Font                      ATOM_LABEL_FONT                      = Font();
+            const SizeSpecification         ATOM_LABEL_SIZE                      = SizeSpecification(10.0, false, false, true);
+            const Font                      SECONDARY_ATOM_LABEL_FONT            = Font();
+            const SizeSpecification         SECONDARY_ATOM_LABEL_SIZE            = SizeSpecification(6.0, false, false, true);
+            const SizeSpecification         ATOM_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
+            const SizeSpecification         RADICAL_ELECTRON_DOT_SIZE            = SizeSpecification(1.0, false, false, true);
+            const bool                      SHOW_CARBONS                         = false;
+            const bool                      SHOW_EXPLICIT_HYDROGENS              = false;
+            const bool                      SHOW_CHARGES                         = true;
+            const bool                      SHOW_ISOTOPES                        = true;
+            const bool                      SHOW_HYDROGEN_COUNTS                 = false;
+            const bool                      SHOW_NON_CARBON_HYDROGEN_COUNTS      = true;
+            const bool                      SHOW_ATOM_QUERY_INFOS                = true;
+            const bool                      SHOW_ATOM_REACTION_INFOS             = true;
+            const bool                      SHOW_RADICAL_ELECTRONS               = true;
 
-			const Color                     BOND_COLOR                           = Color(0, 0, 0);
-			const SizeSpecification         BOND_LENGTH                          = SizeSpecification(30.0);
-			const SizeSpecification         BOND_LINE_WIDTH                      = SizeSpecification(1.0, false, false, true);
-			const SizeSpecification         BOND_LINE_SPACING                    = SizeSpecification(0.15, true, true, true);
-			const SizeSpecification         STEREO_BOND_WEDGE_WIDTH              = SizeSpecification(0.15, true, true, true);
-			const SizeSpecification         STEREO_BOND_HASH_SPACING             = SizeSpecification(0.1, true, true, true);
-			const SizeSpecification         REACTION_CENTER_LINE_LENGTH          = SizeSpecification(0.4, true, true, true);
-			const SizeSpecification         REACTION_CENTER_LINE_SPACING         = SizeSpecification(0.1, true, true, true);
-			const SizeSpecification         DOUBLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
-			const SizeSpecification         TRIPLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
-			const Font                      BOND_LABEL_FONT                      = Font();
-			const SizeSpecification         BOND_LABEL_SIZE                      = SizeSpecification(8.0, false, false, true);
-			const SizeSpecification         BOND_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
-			const bool                      SHOW_BOND_REACTION_INFOS             = true;
-			const bool                      SHOW_BOND_QUERY_INFOS                = true;
-			const bool                      SHOW_STEREO_BONDS                    = true;
-		}
+            const Color                     BOND_COLOR                           = Color(0, 0, 0);
+            const SizeSpecification         BOND_LENGTH                          = SizeSpecification(30.0);
+            const SizeSpecification         BOND_LINE_WIDTH                      = SizeSpecification(1.0, false, false, true);
+            const SizeSpecification         BOND_LINE_SPACING                    = SizeSpecification(0.15, true, true, true);
+            const SizeSpecification         STEREO_BOND_WEDGE_WIDTH              = SizeSpecification(0.15, true, true, true);
+            const SizeSpecification         STEREO_BOND_HASH_SPACING             = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification         REACTION_CENTER_LINE_LENGTH          = SizeSpecification(0.4, true, true, true);
+            const SizeSpecification         REACTION_CENTER_LINE_SPACING         = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification         DOUBLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
+            const SizeSpecification         TRIPLE_BOND_TRIM_LENGTH              = SizeSpecification(0.1, true, true, true);
+            const Font                      BOND_LABEL_FONT                      = Font();
+            const SizeSpecification         BOND_LABEL_SIZE                      = SizeSpecification(8.0, false, false, true);
+            const SizeSpecification         BOND_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
+            const bool                      SHOW_BOND_REACTION_INFOS             = true;
+            const bool                      SHOW_BOND_QUERY_INFOS                = true;
+            const bool                      SHOW_STEREO_BONDS                    = true;
+        }
 
-		void initControlParameterDefaults() {}
-	}
+        void initControlParameterDefaults() {}
+    }
 }

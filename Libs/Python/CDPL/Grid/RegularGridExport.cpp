@@ -41,46 +41,46 @@ namespace
     template <typename GridType>
     struct RegularGridExport
     {
-		RegularGridExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        RegularGridExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			typedef typename GridType::ValueType ValueType;
-			typedef typename GridType::CoordinatesValueType CoordinatesValueType;
-			typedef typename GridType::GridDataType GridDataType;
-			typedef Math::RegularSpatialGrid<ValueType, ValueType> MathGridType;
-			typedef typename MathGridType::SSizeType SSizeType;
+            typedef typename GridType::ValueType ValueType;
+            typedef typename GridType::CoordinatesValueType CoordinatesValueType;
+            typedef typename GridType::GridDataType GridDataType;
+            typedef Math::RegularSpatialGrid<ValueType, ValueType> MathGridType;
+            typedef typename MathGridType::SSizeType SSizeType;
 
-			python::class_<GridType, typename GridType::SharedPointer, python::bases<Grid::SpatialGrid<ValueType, ValueType>, MathGridType> >(name, python::no_init)
-				.def(python::init<const GridType&>((python::arg("self"), python::arg("grid"))))
-				.def(python::init<const GridDataType&, const CoordinatesValueType&, const CoordinatesValueType&, const CoordinatesValueType&>(
-						 (python::arg("self"), python::arg("data"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
-				.def(python::init<const GridDataType&, const CoordinatesValueType&>(
-						 (python::arg("self"), python::arg("data"), python::arg("s"))))
-				.def(python::init<const CoordinatesValueType&, const CoordinatesValueType&, const CoordinatesValueType&>(
-						 (python::arg("self"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
-				.def(python::init<const CoordinatesValueType&>(
-						 (python::arg("self"), python::arg("s"))))
-				.def("getCoordinates", static_cast<void (GridType::*)(SSizeType, SSizeType, SSizeType, python::object&) const>(&GridType::template getCoordinates<python::object>), 
-					 (python::arg("self"), python::arg("i"), python::arg("j"), python::arg("k"), python::arg("coords"))) 
-				.def("getCoordinates", static_cast<void (GridType::*)(std::size_t, python::object&) const>(&GridType::template getCoordinates<python::object>), 
-					 (python::arg("self"), python::arg("i"), python::arg("coords"))) 
-				.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
-				.def(CDPLPythonMath::AssignFunctionGeneratorVisitor<MathGridType, CDPLPythonMath::ConstGridExpression>("e"))
-				.def(CDPLPythonMath::ConstGridVisitor<MathGridType>())
-				.def(CDPLPythonMath::ConstGridContainerVisitor<MathGridType>())
-				.def(CDPLPythonMath::GridAssignAndSwapVisitor<MathGridType>())
-				.def(CDPLPythonMath::GridVisitor<MathGridType>())
-				.def(CDPLPythonMath::GridNDArrayAssignVisitor<MathGridType, true>())
-				.def(CDPLPythonMath::GridContainerVisitor<MathGridType>());
-		}
+            python::class_<GridType, typename GridType::SharedPointer, python::bases<Grid::SpatialGrid<ValueType, ValueType>, MathGridType> >(name, python::no_init)
+                .def(python::init<const GridType&>((python::arg("self"), python::arg("grid"))))
+                .def(python::init<const GridDataType&, const CoordinatesValueType&, const CoordinatesValueType&, const CoordinatesValueType&>(
+                         (python::arg("self"), python::arg("data"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
+                .def(python::init<const GridDataType&, const CoordinatesValueType&>(
+                         (python::arg("self"), python::arg("data"), python::arg("s"))))
+                .def(python::init<const CoordinatesValueType&, const CoordinatesValueType&, const CoordinatesValueType&>(
+                         (python::arg("self"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
+                .def(python::init<const CoordinatesValueType&>(
+                         (python::arg("self"), python::arg("s"))))
+                .def("getCoordinates", static_cast<void (GridType::*)(SSizeType, SSizeType, SSizeType, python::object&) const>(&GridType::template getCoordinates<python::object>), 
+                     (python::arg("self"), python::arg("i"), python::arg("j"), python::arg("k"), python::arg("coords"))) 
+                .def("getCoordinates", static_cast<void (GridType::*)(std::size_t, python::object&) const>(&GridType::template getCoordinates<python::object>), 
+                     (python::arg("self"), python::arg("i"), python::arg("coords"))) 
+                .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+                .def(CDPLPythonMath::AssignFunctionGeneratorVisitor<MathGridType, CDPLPythonMath::ConstGridExpression>("e"))
+                .def(CDPLPythonMath::ConstGridVisitor<MathGridType>())
+                .def(CDPLPythonMath::ConstGridContainerVisitor<MathGridType>())
+                .def(CDPLPythonMath::GridAssignAndSwapVisitor<MathGridType>())
+                .def(CDPLPythonMath::GridVisitor<MathGridType>())
+                .def(CDPLPythonMath::GridNDArrayAssignVisitor<MathGridType, true>())
+                .def(CDPLPythonMath::GridContainerVisitor<MathGridType>());
+        }
     };
 }
 
 
 void CDPLPythonGrid::exportRegularGrid()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
     RegularGridExport<Grid::FRegularGrid>("FRegularGrid");
     RegularGridExport<Grid::DRegularGrid>("DRegularGrid");

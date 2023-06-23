@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief KeteneYnolTautomerizationRule.
-		 */
-		class CDPL_CHEM_API KeteneYnolTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief KeteneYnolTautomerizationRule.
+         */
+        class CDPL_CHEM_API KeteneYnolTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			KeteneYnolTautomerization();
-		};
+          public:
+            KeteneYnolTautomerization();
+        };
     }
 }
 

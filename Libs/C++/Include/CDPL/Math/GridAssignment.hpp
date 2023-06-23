@@ -37,58 +37,58 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename E> class GridExpression;
-		template <template <typename T1, typename T2> class F, typename G, typename E>
-		void gridAssignGrid(G& g, const GridExpression<E>& e)
-		{
-			typedef typename CommonType<typename G::SizeType, typename E::SizeType>::Type SizeType;
+        template <typename E> class GridExpression;
+        template <template <typename T1, typename T2> class F, typename G, typename E>
+        void gridAssignGrid(G& g, const GridExpression<E>& e)
+        {
+            typedef typename CommonType<typename G::SizeType, typename E::SizeType>::Type SizeType;
 
-			SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize1()), SizeType(e().getSize1()), Base::SizeError);
-			SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize2()), SizeType(e().getSize2()), Base::SizeError);
-			SizeType size3 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize3()), SizeType(e().getSize3()), Base::SizeError);
+            SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize1()), SizeType(e().getSize1()), Base::SizeError);
+            SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize2()), SizeType(e().getSize2()), Base::SizeError);
+            SizeType size3 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize3()), SizeType(e().getSize3()), Base::SizeError);
 
-			typedef F<typename G::Reference, typename E::ValueType> FunctorType;
+            typedef F<typename G::Reference, typename E::ValueType> FunctorType;
 
-			for (SizeType i = 0; i < size1; i++)
-				for (SizeType j = 0; j < size2; j++)
-					for (SizeType k = 0; k < size3; k++)
-						FunctorType::apply(g(i, j, k), e()(i, j, k));
-		}
+            for (SizeType i = 0; i < size1; i++)
+                for (SizeType j = 0; j < size2; j++)
+                    for (SizeType k = 0; k < size3; k++)
+                        FunctorType::apply(g(i, j, k), e()(i, j, k));
+        }
 
-		template <template <typename T1, typename T2> class F, typename G, typename T>
-		void gridAssignScalar(G& g, const T& t)
-		{
-			typedef F<typename G::Reference, T> FunctorType;
-			typedef typename G::SizeType SizeType;
+        template <template <typename T1, typename T2> class F, typename G, typename T>
+        void gridAssignScalar(G& g, const T& t)
+        {
+            typedef F<typename G::Reference, T> FunctorType;
+            typedef typename G::SizeType SizeType;
 
-			SizeType size1 = g.getSize1();
-			SizeType size2 = g.getSize2();
-			SizeType size3 = g.getSize3();
+            SizeType size1 = g.getSize1();
+            SizeType size2 = g.getSize2();
+            SizeType size3 = g.getSize3();
 
-			for (SizeType i = 0; i < size1; i++)
-				for (SizeType j = 0; j < size2; j++)
-					for (SizeType k = 0; k < size3; k++)
-						FunctorType::apply(g(i, j, k), t);
-		}
+            for (SizeType i = 0; i < size1; i++)
+                for (SizeType j = 0; j < size2; j++)
+                    for (SizeType k = 0; k < size3; k++)
+                        FunctorType::apply(g(i, j, k), t);
+        }
 
-		template <typename G, typename E>
-		void gridSwap(G& g, GridExpression<E>& e)
-		{
-			typedef typename CommonType<typename G::SizeType, typename E::SizeType>::Type SizeType;
+        template <typename G, typename E>
+        void gridSwap(G& g, GridExpression<E>& e)
+        {
+            typedef typename CommonType<typename G::SizeType, typename E::SizeType>::Type SizeType;
 
-			SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize1()), SizeType(e().getSize1()), Base::SizeError);
-			SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize2()), SizeType(e().getSize2()), Base::SizeError);
-			SizeType size3 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize3()), SizeType(e().getSize3()), Base::SizeError);
+            SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize1()), SizeType(e().getSize1()), Base::SizeError);
+            SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize2()), SizeType(e().getSize2()), Base::SizeError);
+            SizeType size3 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize3()), SizeType(e().getSize3()), Base::SizeError);
 
-			for (SizeType i = 0; i < size1; i++)
-				for (SizeType j = 0; j < size2; j++)
-					for (SizeType k = 0; k < size3; k++)
-						std::swap(g(i, j, k), e()(i, j, k));
-		}
-	}
+            for (SizeType i = 0; i < size1; i++)
+                for (SizeType j = 0; j < size2; j++)
+                    for (SizeType k = 0; k < size3; k++)
+                        std::swap(g(i, j, k), e()(i, j, k));
+        }
+    }
 }
 
 #endif // CDPL_MATH_GRIDASSIGNMENT_HPP

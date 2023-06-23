@@ -34,35 +34,35 @@ using namespace CDPL;
 
 #define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
     void ForceField::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg) \
-    {									\
-	molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);	\
-    }									\
-									\
+    {                                    \
+    molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);    \
+    }                                    \
+                                    \
     bool ForceField::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph) \
-    {									\
-	return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
-    }									\
-									\
-    void ForceField::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)	\
-    {									\
-	molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);	\
+    {                                    \
+    return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
+    }                                    \
+                                    \
+    void ForceField::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)    \
+    {                                    \
+    molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);    \
     }
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
     TYPE ForceField::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph) \
-    {									\
-	return molgraph.getProperty<TYPE>(MolecularGraphProperty::PROP_NAME); \
-    }									\
-									\
+    {                                    \
+    return molgraph.getProperty<TYPE>(MolecularGraphProperty::PROP_NAME); \
+    }                                    \
+                                    \
     MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)	\
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)    \
     TYPE ForceField::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph) \
-    {									\
-	return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
-						   MolecularGraphPropertyDefault::PROP_NAME); \
-    }									\
-									\
+    {                                    \
+    return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
+                           MolecularGraphPropertyDefault::PROP_NAME); \
+    }                                    \
+                                    \
     MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 

@@ -35,124 +35,124 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	}
+        class DataFormat;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported chemical data formats.
-		 */
-		namespace DataFormat
-		{
-	
-			/**
-			 * \brief Provides meta-information about the native I/O format of the <em>JME Molecular Editor</em>
-			 *        [\ref JME] java applet.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat JME;
+        /**
+         * \brief Provides preinitialized Base::DataFormat objects for all supported chemical data formats.
+         */
+        namespace DataFormat
+        {
+    
+            /**
+             * \brief Provides meta-information about the native I/O format of the <em>JME Molecular Editor</em>
+             *        [\ref JME] java applet.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat JME;
 
-			/**
-			 * \brief Provides meta-information about the <em>MDL Mol-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat MOL;
+            /**
+             * \brief Provides meta-information about the <em>MDL Mol-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat MOL;
 
-			/**
-			 * \brief Provides meta-information about the <em>MDL SD-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SDF;
+            /**
+             * \brief Provides meta-information about the <em>MDL SD-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SDF;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SDF_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SDF_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SDF_BZ2;
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SDF_BZ2;
 
-			/**
-			 * \brief Provides meta-information about the <em>MDL Rxn-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat RXN;
+            /**
+             * \brief Provides meta-information about the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat RXN;
 
-			/**
-			 * \brief Provides meta-information about the <em>MDL RD-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat RDF;
+            /**
+             * \brief Provides meta-information about the <em>MDL RD-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat RDF;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat RDF_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat RDF_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat RDF_BZ2;
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat RDF_BZ2;
 
-			/**
-			 * \brief Provides meta-information about the <em>Daylight SMILES</em> [\ref SMILES] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SMILES;
+            /**
+             * \brief Provides meta-information about the <em>Daylight SMILES</em> [\ref SMILES] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SMILES;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SMILES_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SMILES_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SMILES_BZ2;
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SMILES_BZ2;
 
-			/**
-			 * \brief Provides meta-information about the <em>Daylight SMARTS</em> [\ref SMARTS] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat SMARTS;
+            /**
+             * \brief Provides meta-information about the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat SMARTS;
 
-			/**
-			 * \brief Provides meta-information about the <em>IUPAC International Chemical Identifier (InChI)</em>
-			 *        [\ref INCHI] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat INCHI;
-	
-			/**
-			 * \brief Provides meta-information about the native <em>CDPL</em> format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat CDF;
+            /**
+             * \brief Provides meta-information about the <em>IUPAC International Chemical Identifier (InChI)</em>
+             *        [\ref INCHI] format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat INCHI;
+    
+            /**
+             * \brief Provides meta-information about the native <em>CDPL</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat CDF;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat CDF_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat CDF_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat CDF_BZ2;
+            /**
+             * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat CDF_BZ2;
 
-			/**
-			 * \brief Provides meta-information about the <em>Sybyl MOL2</em> format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat MOL2;
+            /**
+             * \brief Provides meta-information about the <em>Sybyl MOL2</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat MOL2;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed <em>Sybyl MOL2</em> format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat MOL2_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed <em>Sybyl MOL2</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat MOL2_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed <em>Sybyl MOL2</em> format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat MOL2_BZ2;
-		}
-	}
+            /**
+             * \brief Provides meta-information about the bzip2-compressed <em>Sybyl MOL2</em> format.
+             */
+            extern CDPL_CHEM_API const Base::DataFormat MOL2_BZ2;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_DATAFORMAT_HPP

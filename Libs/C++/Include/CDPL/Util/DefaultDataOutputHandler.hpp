@@ -39,28 +39,28 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief DefaultDataOutputHandler.
-		 */
-		template <typename WriterImpl, const Base::DataFormat& FORMAT, typename DataType = typename WriterImpl::DataType>
-		class DefaultDataOutputHandler : public Base::DataOutputHandler<DataType>
-		{
+        /**
+         * \brief DefaultDataOutputHandler.
+         */
+        template <typename WriterImpl, const Base::DataFormat& FORMAT, typename DataType = typename WriterImpl::DataType>
+        class DefaultDataOutputHandler : public Base::DataOutputHandler<DataType>
+        {
 
-		public:
-			typedef typename Base::DataOutputHandler<DataType>::WriterType WriterType;
+        public:
+            typedef typename Base::DataOutputHandler<DataType>::WriterType WriterType;
 
-			const Base::DataFormat& getDataFormat() const {
-				return FORMAT;
-			}
-		
-			typename WriterType::SharedPointer createWriter(std::iostream& ios) const {
-				return typename WriterType::SharedPointer(new WriterImpl(ios));
-			}
+            const Base::DataFormat& getDataFormat() const {
+                return FORMAT;
+            }
+        
+            typename WriterType::SharedPointer createWriter(std::iostream& ios) const {
+                return typename WriterType::SharedPointer(new WriterImpl(ios));
+            }
 
-			typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const {
-				return typename WriterType::SharedPointer(new Util::FileDataWriter<WriterImpl>(file_name, mode));
-			}
-		};
+            typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const {
+                return typename WriterType::SharedPointer(new Util::FileDataWriter<WriterImpl>(file_name, mode));
+            }
+        };
     }
 }
 

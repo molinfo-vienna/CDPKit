@@ -36,47 +36,47 @@ namespace CDPL
 
     namespace Pharm
     {
-	
-		class SQLiteDataIOBase
-		{
+    
+        class SQLiteDataIOBase
+        {
 
-		public:
-			typedef std::shared_ptr<sqlite3> SQLite3DBPointer;
-			typedef std::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
+        public:
+            typedef std::shared_ptr<sqlite3> SQLite3DBPointer;
+            typedef std::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
 
-			SQLiteDataIOBase() {}
+            SQLiteDataIOBase() {}
 
-			virtual ~SQLiteDataIOBase();
+            virtual ~SQLiteDataIOBase();
 
-			void openDBConnection(const std::string& name, int mode);
+            void openDBConnection(const std::string& name, int mode);
 
-			virtual void closeDBConnection();
+            virtual void closeDBConnection();
 
-			const std::string& getDBName() const;
+            const std::string& getDBName() const;
 
-			void setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const;
+            void setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const;
 
-			sqlite3_stmt* prepareStatement(const std::string& sql_stmt) const;
-		
-			int evalStatement(const SQLite3StmtPointer& stmt_ptr) const;
-			void execStatements(const std::string& sql_stmts) const;
+            sqlite3_stmt* prepareStatement(const std::string& sql_stmt) const;
+        
+            int evalStatement(const SQLite3StmtPointer& stmt_ptr) const;
+            void execStatements(const std::string& sql_stmts) const;
 
-			void resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const;
+            void resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const;
 
-			void throwSQLiteIOError(const char* msg_prefix) const;
+            void throwSQLiteIOError(const char* msg_prefix) const;
 
-			const SQLite3DBPointer& getDBConnection() const;
+            const SQLite3DBPointer& getDBConnection() const;
 
-		private:
-			void composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const;
+        private:
+            void composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const;
 
-			SQLiteDataIOBase(const SQLiteDataIOBase&);
+            SQLiteDataIOBase(const SQLiteDataIOBase&);
 
-			SQLiteDataIOBase& operator=(const SQLiteDataIOBase&);
+            SQLiteDataIOBase& operator=(const SQLiteDataIOBase&);
 
-			SQLite3DBPointer database;
-			std::string      databaseName;
-		};
+            SQLite3DBPointer database;
+            std::string      databaseName;
+        };
     }
 }
 

@@ -37,14 +37,14 @@ void CDPLPythonPharm::exportFeatureDistanceScore()
     using namespace CDPL;
 
     python::class_<Pharm::FeatureDistanceScore, Pharm::FeatureDistanceScore::SharedPointer,
-				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("FeatureDistanceScore", python::no_init)
-		.def(python::init<const Pharm::FeatureDistanceScore&>((python::arg("self"), python::arg("score"))))
-		.def(python::init<double, double>((python::arg("self"), python::arg("min_dist"), python::arg("max_dist"))))
-		.def("setDistanceScoringFunction", &Pharm::FeatureDistanceScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("getMinDistance", &Pharm::FeatureDistanceScore::getMinDistance, python::arg("self"))
-		.def("getMaxDistance", &Pharm::FeatureDistanceScore::getMaxDistance, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceScore::operator=), 
-			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.add_property("minDistance", &Pharm::FeatureDistanceScore::getMinDistance)
-		.add_property("maxDistance", &Pharm::FeatureDistanceScore::getMaxDistance);
+                   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("FeatureDistanceScore", python::no_init)
+        .def(python::init<const Pharm::FeatureDistanceScore&>((python::arg("self"), python::arg("score"))))
+        .def(python::init<double, double>((python::arg("self"), python::arg("min_dist"), python::arg("max_dist"))))
+        .def("setDistanceScoringFunction", &Pharm::FeatureDistanceScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("getMinDistance", &Pharm::FeatureDistanceScore::getMinDistance, python::arg("self"))
+        .def("getMaxDistance", &Pharm::FeatureDistanceScore::getMaxDistance, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceScore::operator=), 
+             (python::arg("self"), python::arg("func")), python::return_self<>())
+        .add_property("minDistance", &Pharm::FeatureDistanceScore::getMinDistance)
+        .add_property("maxDistance", &Pharm::FeatureDistanceScore::getMaxDistance);
 }

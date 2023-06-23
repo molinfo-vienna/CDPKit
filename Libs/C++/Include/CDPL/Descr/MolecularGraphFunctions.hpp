@@ -37,39 +37,39 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
-	
-	namespace Descr 
-	{
+        class MolecularGraph;
+    }
+    
+    namespace Descr 
+    {
 
-		CDPL_DESCR_API std::size_t calcTopologicalRadius(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API std::size_t calcTopologicalRadius(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API std::size_t calcTopologicalDiameter(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API std::size_t calcTopologicalDiameter(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API double calcRingComplexity(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API double calcRingComplexity(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API double calcMolecularComplexity(const Chem::MolecularGraph& molgraph);
-		
-		CDPL_DESCR_API double calcKierShape1(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API double calcMolecularComplexity(const Chem::MolecularGraph& molgraph);
+        
+        CDPL_DESCR_API double calcKierShape1(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API double calcKierShape2(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API double calcKierShape2(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API double calcKierShape3(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API double calcKierShape3(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API std::size_t calcWienerIndex(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API std::size_t calcWienerIndex(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API double calcRandicIndex(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API double calcRandicIndex(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API std::size_t calcZagrebIndex1(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API std::size_t calcZagrebIndex1(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API std::size_t calcZagrebIndex2(const Chem::MolecularGraph& molgraph);
+        CDPL_DESCR_API std::size_t calcZagrebIndex2(const Chem::MolecularGraph& molgraph);
 
-		CDPL_DESCR_API std::size_t calcTotalWalkCount(const Chem::MolecularGraph& molgraph);
-	}
+        CDPL_DESCR_API std::size_t calcTotalWalkCount(const Chem::MolecularGraph& molgraph);
+    }
 }
 
 #endif // CDPL_DESCR_MOLECULARGRAPHFUNCTIONS_HPP

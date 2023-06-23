@@ -40,60 +40,60 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Implements the perception of ring atoms and bonds in a molecular graph.
-		 */
-		class CDPL_CHEM_API CyclicSubstructure : public Fragment
-		{
+        /**
+         * \brief Implements the perception of ring atoms and bonds in a molecular graph.
+         */
+        class CDPL_CHEM_API CyclicSubstructure : public Fragment
+        {
 
-		public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CyclicSubstructure instances.
-			 */
-			typedef std::shared_ptr<CyclicSubstructure> SharedPointer;
+        public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CyclicSubstructure instances.
+             */
+            typedef std::shared_ptr<CyclicSubstructure> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %CyclicSubstructure instance.
-			 */
-			CyclicSubstructure() {}
+            /**
+             * \brief Constructs an empty \c %CyclicSubstructure instance.
+             */
+            CyclicSubstructure() {}
 
-			/**
-			 * \brief Construct a \c %CyclicSubstructure instance that consists of the ring atoms and bonds of the
-			 *        molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive ring atoms and bonds.
-			 */
-			CyclicSubstructure(const MolecularGraph& molgraph);
+            /**
+             * \brief Construct a \c %CyclicSubstructure instance that consists of the ring atoms and bonds of the
+             *        molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive ring atoms and bonds.
+             */
+            CyclicSubstructure(const MolecularGraph& molgraph);
 
-			/**
-			 * \brief Replaces the currently stored atoms and bonds by the set of ring atoms and bonds of the
-			 *        molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive ring atoms and bonds.
-			 */
-			void perceive(const MolecularGraph& molgraph);
+            /**
+             * \brief Replaces the currently stored atoms and bonds by the set of ring atoms and bonds of the
+             *        molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive ring atoms and bonds.
+             */
+            void perceive(const MolecularGraph& molgraph);
 
-		private:
-			CyclicSubstructure(const CyclicSubstructure&);
+        private:
+            CyclicSubstructure(const CyclicSubstructure&);
 
-			CyclicSubstructure& operator=(const CyclicSubstructure&);
+            CyclicSubstructure& operator=(const CyclicSubstructure&);
 
-			typedef std::vector<const Atom*> AtomStack;
-			typedef std::vector<const Bond*> BondStack;
+            typedef std::vector<const Atom*> AtomStack;
+            typedef std::vector<const Bond*> BondStack;
 
-			void init(const MolecularGraph&);
+            void init(const MolecularGraph&);
 
-			void findRingAtomsAndBonds();
-			void findRingAtomsAndBonds(const Atom* atom);
+            void findRingAtomsAndBonds();
+            void findRingAtomsAndBonds(const Atom* atom);
 
-			Util::BitSet          visAtomMask;
-			Util::BitSet          pathAtomMask;
-			AtomStack             atomStack;
-			BondStack             bondStack;
-			const MolecularGraph* molGraph;
-		};
-	}
+            Util::BitSet          visAtomMask;
+            Util::BitSet          pathAtomMask;
+            AtomStack             atomStack;
+            BondStack             bondStack;
+            const MolecularGraph* molGraph;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_CYCLICSUBSTRUCTURE_HPP

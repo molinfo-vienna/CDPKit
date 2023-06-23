@@ -54,296 +54,296 @@ using namespace ChOX;
 
 namespace
 {
-	
-	template <typename T>
-	class RecordWriter;
+    
+    template <typename T>
+    class RecordWriter;
 
-	template <>
-	class RecordWriter<CDPL::Chem::MolecularGraph> : public DataRecordVisitor 
-	{
+    template <>
+    class RecordWriter<CDPL::Chem::MolecularGraph> : public DataRecordVisitor 
+    {
 
-	public:
-		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer WriterPointer;
+    public:
+        typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer WriterPointer;
 
-		RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt): writerPointer(writer_ptr), format(fmt) {}
+        RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt): writerPointer(writer_ptr), format(fmt) {}
 
-	private:
-		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mol_record) {
-			try {
-				CDPL::Chem::Molecule::SharedPointer mol_ptr = mol_record.getData();
+    private:
+        void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mol_record) {
+            try {
+                CDPL::Chem::Molecule::SharedPointer mol_ptr = mol_record.getData();
 
-				prepareOutputData(*mol_ptr, format, *writerPointer);
+                prepareOutputData(*mol_ptr, format, *writerPointer);
 
-				writerPointer->write(*mol_ptr);
+                writerPointer->write(*mol_ptr);
 
-			} catch (const CDPL::Base::Exception& e) {
-				std::cerr << "Error while writing: " << e.what() << std::endl;
-			}
-		}
+            } catch (const CDPL::Base::Exception& e) {
+                std::cerr << "Error while writing: " << e.what() << std::endl;
+            }
+        }
 
-		void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& rxn_record) {}
+        void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& rxn_record) {}
 
-		WriterPointer writerPointer;
-		const CDPL::Base::DataFormat& format;
-	};
+        WriterPointer writerPointer;
+        const CDPL::Base::DataFormat& format;
+    };
 
-	template <>
-	class RecordWriter<CDPL::Chem::Reaction> : public DataRecordVisitor 
-	{
+    template <>
+    class RecordWriter<CDPL::Chem::Reaction> : public DataRecordVisitor 
+    {
 
-	public:
-		typedef CDPL::Base::DataWriter<CDPL::Chem::Reaction>::SharedPointer WriterPointer;
+    public:
+        typedef CDPL::Base::DataWriter<CDPL::Chem::Reaction>::SharedPointer WriterPointer;
 
-		RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt): writerPointer(writer_ptr), format(fmt) {}
+        RecordWriter(const WriterPointer& writer_ptr, const CDPL::Base::DataFormat& fmt): writerPointer(writer_ptr), format(fmt) {}
 
-	private:
-		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mol_record) {}
+    private:
+        void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mol_record) {}
 
-		void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& rxn_record) {
-			try {
-				CDPL::Chem::Reaction::SharedPointer rxn_ptr = rxn_record.getData();
+        void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>& rxn_record) {
+            try {
+                CDPL::Chem::Reaction::SharedPointer rxn_ptr = rxn_record.getData();
 
-				prepareOutputData(*rxn_ptr, format, *writerPointer);
+                prepareOutputData(*rxn_ptr, format, *writerPointer);
 
-				writerPointer->write(*rxn_ptr);
+                writerPointer->write(*rxn_ptr);
 
-			} catch (const CDPL::Base::Exception& e) {
-				 std::cerr << " while writing: " << e.what() << std::endl;
-			}
-		}
+            } catch (const CDPL::Base::Exception& e) {
+                 std::cerr << " while writing: " << e.what() << std::endl;
+            }
+        }
 
-		WriterPointer writerPointer;
-		const CDPL::Base::DataFormat& format;
-	};
+        WriterPointer writerPointer;
+        const CDPL::Base::DataFormat& format;
+    };
 }
 
 
 DataSetWriter::DataSetWriter(const DataSet& data_set, QWidget* parent, const QString& file_name, 
-							 const QString& filter, const Settings& settings, bool selection):
-	QObject(), dataSet(data_set), parent(parent), fileName(file_name), filter(filter), settings(settings), 
-	writeSelection(selection) {}
+                             const QString& filter, const Settings& settings, bool selection):
+    QObject(), dataSet(data_set), parent(parent), fileName(file_name), filter(filter), settings(settings), 
+    writeSelection(selection) {}
 
 DataSetWriter::~DataSetWriter() {}
 
 void DataSetWriter::write()
 {
-	if (dataSet.getSize() == 0)
-		return;
+    if (dataSet.getSize() == 0)
+        return;
 
-	dataSet.getRecord(0).accept(*this);
+    dataSet.getRecord(0).accept(*this);
 }
 
 void DataSetWriter::visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&)
 {
-	writeRecords<CDPL::Chem::Reaction>(getDefaultRxnOutputFormatParameter(settings));
+    writeRecords<CDPL::Chem::Reaction>(getDefaultRxnOutputFormatParameter(settings));
 }
-	
+    
 void DataSetWriter::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&)
 {
-	writeRecords<CDPL::Chem::MolecularGraph>(getDefaultMolOutputFormatParameter(settings));
+    writeRecords<CDPL::Chem::MolecularGraph>(getDefaultMolOutputFormatParameter(settings));
 }
 
 template <typename T>
 void DataSetWriter::writeRecords(const std::string& def_format)
 {
-	using namespace CDPL;
-	using namespace Base;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Base;
+    using namespace Vis;
 
-	QFileInfo file_info(fileName);
-	QString file_ext = file_info.completeSuffix();
-	QString base_name;
+    QFileInfo file_info(fileName);
+    QString file_ext = file_info.completeSuffix();
+    QString base_name;
 
-	typename DataOutputHandler<T>::SharedPointer handler;
+    typename DataOutputHandler<T>::SharedPointer handler;
 
-	if (file_ext.isEmpty() || !(handler = DataIOManager<T>::getOutputHandlerByFileExtension(file_ext.toStdString()))) {
-		typename DataIOManager<T>::OutputHandlerIterator handlers_end = DataIOManager<T>::getOutputHandlersEnd();
+    if (file_ext.isEmpty() || !(handler = DataIOManager<T>::getOutputHandlerByFileExtension(file_ext.toStdString()))) {
+        typename DataIOManager<T>::OutputHandlerIterator handlers_end = DataIOManager<T>::getOutputHandlersEnd();
 
-		for (typename DataIOManager<T>::OutputHandlerIterator h_it = DataIOManager<T>::getOutputHandlersBegin(); 
-			 h_it != handlers_end; ++h_it) {
+        for (typename DataIOManager<T>::OutputHandlerIterator h_it = DataIOManager<T>::getOutputHandlersBegin(); 
+             h_it != handlers_end; ++h_it) {
 
-			handler = *h_it;
+            handler = *h_it;
 
-			const DataFormat& fmt_descr = handler->getDataFormat();
+            const DataFormat& fmt_descr = handler->getDataFormat();
 
-			if (filter.startsWith(QString::fromStdString(fmt_descr.getDescription()))) 
-				break;
+            if (filter.startsWith(QString::fromStdString(fmt_descr.getDescription()))) 
+                break;
 
-			handler = 0;
-		}
+            handler = 0;
+        }
 
-		if (!handler)  
-			handler = DataIOManager<T>::getOutputHandlerByName(def_format);
+        if (!handler)  
+            handler = DataIOManager<T>::getOutputHandlerByName(def_format);
 
-		file_ext = QString::fromStdString(*handler->getDataFormat().getFileExtensionsBegin());		
-		base_name = fileName;
+        file_ext = QString::fromStdString(*handler->getDataFormat().getFileExtensionsBegin());        
+        base_name = fileName;
 
-	} else
-		base_name = file_info.absolutePath() + QDir::separator() + file_info.baseName();	
+    } else
+        base_name = file_info.absolutePath() + QDir::separator() + file_info.baseName();    
 
-	const DataFormat& fmt_descr = handler->getDataFormat();
-	const SettingsContainer& params = settings.getWriterControlParameters(fmt_descr.getName());
-	bool single_rec_files = getWriteSingleRecordFilesParameter(params) || !fmt_descr.isMultiRecordFormat();
+    const DataFormat& fmt_descr = handler->getDataFormat();
+    const SettingsContainer& params = settings.getWriterControlParameters(fmt_descr.getName());
+    bool single_rec_files = getWriteSingleRecordFilesParameter(params) || !fmt_descr.isMultiRecordFormat();
 
-	QProgressDialog progress_dlg(tr("Please wait ..."), tr("Abort"), 0, 100, parent);
+    QProgressDialog progress_dlg(tr("Please wait ..."), tr("Abort"), 0, 100, parent);
 
-	progress_dlg.setWindowTitle(tr("ChOX - Writing Data"));
-	progress_dlg.setAutoClose(true);
-	progress_dlg.setAutoReset(true);
-	progress_dlg.setWindowModality(Qt::ApplicationModal);
+    progress_dlg.setWindowTitle(tr("ChOX - Writing Data"));
+    progress_dlg.setAutoClose(true);
+    progress_dlg.setAutoReset(true);
+    progress_dlg.setWindowModality(Qt::ApplicationModal);
 
-	qApp->processEvents();
+    qApp->processEvents();
 
-	if (writeSelection) {
-		progress_dlg.setMaximum(dataSet.getNumSelectedRecords());
+    if (writeSelection) {
+        progress_dlg.setMaximum(dataSet.getNumSelectedRecords());
 
-		if (!single_rec_files) {
-			QString fileName = base_name + "." + file_ext;
-		
-			emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
+        if (!single_rec_files) {
+            QString fileName = base_name + "." + file_ext;
+        
+            emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
 
-			typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
+            typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
-			RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+            RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 
-			writer_ptr->setParent(&params);
+            writer_ptr->setParent(&params);
 
-			for (int i = 0, j = 0; i < dataSet.getSize(); i++) {
-				if (progress_dlg.wasCanceled()) {
-					emit statusMessage(tr("Writing aborted."));
-					return;
-				}
+            for (int i = 0, j = 0; i < dataSet.getSize(); i++) {
+                if (progress_dlg.wasCanceled()) {
+                    emit statusMessage(tr("Writing aborted."));
+                    return;
+                }
 
-				if (!dataSet.isRecordSelected(i))
-					continue;
+                if (!dataSet.isRecordSelected(i))
+                    continue;
 
-				if (getImgOutputEraseBackgroundParameter(params))
-					setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
+                if (getImgOutputEraseBackgroundParameter(params))
+                    setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
 
-				const DataRecord& data_record = dataSet.getRecord(i);
+                const DataRecord& data_record = dataSet.getRecord(i);
 
-				data_record.accept(record_writer);
-				j++;
+                data_record.accept(record_writer);
+                j++;
 
-				if (!(*writer_ptr)) {
-					emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
-					return;
-				}
+                if (!(*writer_ptr)) {
+                    emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
+                    return;
+                }
 
-				progress_dlg.setValue(j);
+                progress_dlg.setValue(j);
 
-				qApp->processEvents();
-			}
-		
-		} else {
-			emit statusMessage(tr("Writing data, please wait ..."));
+                qApp->processEvents();
+            }
+        
+        } else {
+            emit statusMessage(tr("Writing data, please wait ..."));
 
-			for (int i = 0, j = 0; i < dataSet.getSize(); i++) {
-				if (progress_dlg.wasCanceled()) {
-					emit statusMessage(tr("Writing aborted."));
-					return;
-				}
+            for (int i = 0, j = 0; i < dataSet.getSize(); i++) {
+                if (progress_dlg.wasCanceled()) {
+                    emit statusMessage(tr("Writing aborted."));
+                    return;
+                }
 
-				if (!dataSet.isRecordSelected(i))
-					continue;
+                if (!dataSet.isRecordSelected(i))
+                    continue;
 
-				QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
-		
-				typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
-				RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+                QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
+        
+                typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
+                RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 
-				writer_ptr->setParent(&params);
+                writer_ptr->setParent(&params);
 
-				if (getImgOutputEraseBackgroundParameter(params))
-					setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
+                if (getImgOutputEraseBackgroundParameter(params))
+                    setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
 
-				const DataRecord& data_record = dataSet.getRecord(i);
+                const DataRecord& data_record = dataSet.getRecord(i);
 
-				data_record.accept(record_writer);
-				j++;
+                data_record.accept(record_writer);
+                j++;
 
-				if (!(*writer_ptr)) {
-					emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
-					return;
-				}
+                if (!(*writer_ptr)) {
+                    emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
+                    return;
+                }
 
-				progress_dlg.setValue(j++);
+                progress_dlg.setValue(j++);
 
-				qApp->processEvents();
-			}
-		}
+                qApp->processEvents();
+            }
+        }
 
-	} else {
-		progress_dlg.setMaximum(dataSet.getSize());
+    } else {
+        progress_dlg.setMaximum(dataSet.getSize());
 
-		if (!single_rec_files) {
-			QString fileName = base_name + "." + file_ext;
+        if (!single_rec_files) {
+            QString fileName = base_name + "." + file_ext;
 
-			emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
-			typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
+            emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
+            typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
-			RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
-			
-			writer_ptr->setParent(&params);
+            RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+            
+            writer_ptr->setParent(&params);
 
-			if (getImgOutputEraseBackgroundParameter(params))
-				setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
+            if (getImgOutputEraseBackgroundParameter(params))
+                setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
 
-			for (int i = 0; i < dataSet.getSize(); i++) {
-				if (progress_dlg.wasCanceled()) {
-					emit statusMessage(tr("Writing aborted."));
-					return;
-				}
+            for (int i = 0; i < dataSet.getSize(); i++) {
+                if (progress_dlg.wasCanceled()) {
+                    emit statusMessage(tr("Writing aborted."));
+                    return;
+                }
 
-				const DataRecord& data_record = dataSet.getRecord(i);
+                const DataRecord& data_record = dataSet.getRecord(i);
 
-				data_record.accept(record_writer);
+                data_record.accept(record_writer);
 
-				if (!(*writer_ptr)) {
-					emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
-					return;
-				}
+                if (!(*writer_ptr)) {
+                    emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
+                    return;
+                }
 
-				progress_dlg.setValue(i);
+                progress_dlg.setValue(i);
 
-				qApp->processEvents();
-			}
-		
-		} else {
-			emit statusMessage(tr("Writing data, please wait ..."));
+                qApp->processEvents();
+            }
+        
+        } else {
+            emit statusMessage(tr("Writing data, please wait ..."));
 
-			for (int i = 0; i < dataSet.getSize(); i++) {
-				if (progress_dlg.wasCanceled()) {
-					emit statusMessage(tr("Writing aborted."));
-					return;
-				}
+            for (int i = 0; i < dataSet.getSize(); i++) {
+                if (progress_dlg.wasCanceled()) {
+                    emit statusMessage(tr("Writing aborted."));
+                    return;
+                }
 
-				QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
-		
-				typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
+                QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
+        
+                typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
-				RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
+                RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 
-				writer_ptr->setParent(&params);
-	
-				if (getImgOutputEraseBackgroundParameter(params))
-					setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
+                writer_ptr->setParent(&params);
+    
+                if (getImgOutputEraseBackgroundParameter(params))
+                    setBackgroundColorParameter(*writer_ptr, getImgOutputBackgroundColorParameter(params));
 
-				const DataRecord& data_record = dataSet.getRecord(i);
+                const DataRecord& data_record = dataSet.getRecord(i);
 
-				data_record.accept(record_writer);
+                data_record.accept(record_writer);
 
-				if (!(*writer_ptr)) {
-					emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
-					return;
-				}
+                if (!(*writer_ptr)) {
+                    emit errorMessage(tr("Error while writing to file '%1'!").arg(QFileInfo(fileName).fileName()));
+                    return;
+                }
 
-				progress_dlg.setValue(i);
+                progress_dlg.setValue(i);
 
-				qApp->processEvents();
-			}
-		}
-	}
+                qApp->processEvents();
+            }
+        }
+    }
 
-	emit statusMessage(QString());
+    emit statusMessage(QString());
 }

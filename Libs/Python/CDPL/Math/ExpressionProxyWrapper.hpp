@@ -33,43 +33,43 @@
 namespace CDPLPythonMath
 {
 
-	template <typename ExpressionType, typename ProxySpec, typename ProxyType>
-	struct VectorExpressionProxyWrapper : ProxyType, boost::python::wrapper<ProxyType>
-	{
+    template <typename ExpressionType, typename ProxySpec, typename ProxyType>
+    struct VectorExpressionProxyWrapper : ProxyType, boost::python::wrapper<ProxyType>
+    {
 
-		typedef typename ExpressionType::SharedPointer ExpressionPointerType;
-		typedef std::shared_ptr<VectorExpressionProxyWrapper> SharedPointer;
+        typedef typename ExpressionType::SharedPointer ExpressionPointerType;
+        typedef std::shared_ptr<VectorExpressionProxyWrapper> SharedPointer;
 
-		VectorExpressionProxyWrapper(const VectorExpressionProxyWrapper& ph): ProxyType(ph), exprPointer(ph.exprPointer) {}
+        VectorExpressionProxyWrapper(const VectorExpressionProxyWrapper& ph): ProxyType(ph), exprPointer(ph.exprPointer) {}
 
-		VectorExpressionProxyWrapper(const ExpressionPointerType& expr_ptr, const ProxySpec& proxy_spec): 
-			ProxyType(*expr_ptr, proxy_spec), exprPointer(expr_ptr) {}
-		
-		ExpressionPointerType getData() const {
-			return exprPointer;
-		} 
+        VectorExpressionProxyWrapper(const ExpressionPointerType& expr_ptr, const ProxySpec& proxy_spec): 
+            ProxyType(*expr_ptr, proxy_spec), exprPointer(expr_ptr) {}
+        
+        ExpressionPointerType getData() const {
+            return exprPointer;
+        } 
 
-		ExpressionPointerType exprPointer;
-	};
+        ExpressionPointerType exprPointer;
+    };
 
-	template <typename ExpressionType, typename ProxySpec, typename ProxyType>
-	struct MatrixExpressionProxyWrapper : ProxyType, boost::python::wrapper<ProxyType>
-	{
+    template <typename ExpressionType, typename ProxySpec, typename ProxyType>
+    struct MatrixExpressionProxyWrapper : ProxyType, boost::python::wrapper<ProxyType>
+    {
 
-		typedef typename ExpressionType::SharedPointer ExpressionPointerType;
-		typedef std::shared_ptr<MatrixExpressionProxyWrapper> SharedPointer;
+        typedef typename ExpressionType::SharedPointer ExpressionPointerType;
+        typedef std::shared_ptr<MatrixExpressionProxyWrapper> SharedPointer;
 
-		MatrixExpressionProxyWrapper(const MatrixExpressionProxyWrapper& ph): ProxyType(ph), exprPointer(ph.exprPointer) {}
+        MatrixExpressionProxyWrapper(const MatrixExpressionProxyWrapper& ph): ProxyType(ph), exprPointer(ph.exprPointer) {}
 
-		MatrixExpressionProxyWrapper(const ExpressionPointerType& expr_ptr, const ProxySpec& proxy_spec1, const ProxySpec& proxy_spec2): 
-			ProxyType(*expr_ptr, proxy_spec1, proxy_spec2), exprPointer(expr_ptr) {}
+        MatrixExpressionProxyWrapper(const ExpressionPointerType& expr_ptr, const ProxySpec& proxy_spec1, const ProxySpec& proxy_spec2): 
+            ProxyType(*expr_ptr, proxy_spec1, proxy_spec2), exprPointer(expr_ptr) {}
 
-		ExpressionPointerType getData() const {
-			return exprPointer;
-		} 
+        ExpressionPointerType getData() const {
+            return exprPointer;
+        } 
 
-		ExpressionPointerType exprPointer;
-	};
+        ExpressionPointerType exprPointer;
+    };
 }
 
 #endif // CDPL_PYTHON_MATH_EXPRESSIONPROXYWRAPPER_HPP

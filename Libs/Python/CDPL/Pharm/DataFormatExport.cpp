@@ -33,19 +33,19 @@
 namespace 
 {
 
-	struct DataFormat {};
+    struct DataFormat {};
 }
 
 
 void CDPLPythonPharm::exportDataFormats()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("CDF", &Pharm::DataFormat::CDF)
-		.def_readonly("CDF_GZ", &Pharm::DataFormat::CDF_GZ)
-		.def_readonly("CDF_BZ2", &Pharm::DataFormat::CDF_BZ2)
-		.def_readonly("PML", &Pharm::DataFormat::PML)
-		.def_readonly("PSD", &Pharm::DataFormat::PSD);
+    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
+        .def_readonly("CDF", &Pharm::DataFormat::CDF)
+        .def_readonly("CDF_GZ", &Pharm::DataFormat::CDF_GZ)
+        .def_readonly("CDF_BZ2", &Pharm::DataFormat::CDF_BZ2)
+        .def_readonly("PML", &Pharm::DataFormat::PML)
+        .def_readonly("PSD", &Pharm::DataFormat::PSD);
 }

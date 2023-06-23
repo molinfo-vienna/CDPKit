@@ -34,31 +34,31 @@
 namespace
 {
 
-	class TestPropertyContainer : public CDPL::Base::PropertyContainer {};
+    class TestPropertyContainer : public CDPL::Base::PropertyContainer {};
 }
 
 
 BOOST_AUTO_TEST_CASE(PropertyValueProductTest)
 {
-	using namespace CDPL;
-	using namespace Util;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Util;
+    using namespace Base;
 
-	TestPropertyContainer prop_cntnr1, prop_cntnr2;
-	//LookupKey key1 = LookupKey::create("key1");
-	LookupKey key2 = LookupKey::create("key2");
+    TestPropertyContainer prop_cntnr1, prop_cntnr2;
+    //LookupKey key1 = LookupKey::create("key1");
+    LookupKey key2 = LookupKey::create("key2");
 
-	prop_cntnr1.setProperty(key2, long(-3));
-	prop_cntnr2.setProperty(key2, long(0));
+    prop_cntnr1.setProperty(key2, long(-3));
+    prop_cntnr2.setProperty(key2, long(0));
 
-	BOOST_CHECK((PropertyValueProduct<long>(key2)(prop_cntnr1, prop_cntnr2) == 0));
+    BOOST_CHECK((PropertyValueProduct<long>(key2)(prop_cntnr1, prop_cntnr2) == 0));
 
-	prop_cntnr2.setProperty(key2, long(4));
+    prop_cntnr2.setProperty(key2, long(4));
 
-	BOOST_CHECK((PropertyValueProduct<long>(key2)(prop_cntnr2, prop_cntnr1) == -12));
+    BOOST_CHECK((PropertyValueProduct<long>(key2)(prop_cntnr2, prop_cntnr1) == -12));
 
-	prop_cntnr1.setProperty(key2, long(5));
+    prop_cntnr1.setProperty(key2, long(5));
 
-	BOOST_CHECK((PropertyValueProduct<long>(key2)(prop_cntnr1, prop_cntnr2) == 20));
+    BOOST_CHECK((PropertyValueProduct<long>(key2)(prop_cntnr1, prop_cntnr2) == 20));
 }
 

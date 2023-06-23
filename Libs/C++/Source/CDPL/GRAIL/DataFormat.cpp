@@ -34,24 +34,24 @@ using namespace CDPL;
 namespace CDPL
 {
 
-	namespace GRAIL
-	{
+    namespace GRAIL
+    {
 
-		void initDataFormats() {}
-	}
+        void initDataFormats() {}
+    }
 }
 
 
 namespace
 {
 
-	struct Init 
-	{
+    struct Init 
+    {
 
-		Init() {
-			GRAIL::CDFAttributedGridPropertyReader::registerExternalPropertyHandlers();
-			GRAIL::CDFAttributedGridPropertyWriter::registerExternalPropertyHandlers();
-		}
+        Init() {
+            GRAIL::CDFAttributedGridPropertyReader::registerExternalPropertyHandlers();
+            GRAIL::CDFAttributedGridPropertyWriter::registerExternalPropertyHandlers();
+        }
 
-	} init;
+    } init;
 }

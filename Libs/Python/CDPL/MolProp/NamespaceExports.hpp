@@ -29,13 +29,13 @@
 namespace CDPLPythonMolProp
 {
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportAtomPropertyDefaults();
-	
-	void exportCoordinationGeometries();
-	void exportHBondDonorAtomTypes();
-	void exportHBondAcceptorAtomTypes();
+    void exportAtomProperties();
+    void exportBondProperties();
+    void exportAtomPropertyDefaults();
+    
+    void exportCoordinationGeometries();
+    void exportHBondDonorAtomTypes();
+    void exportHBondAcceptorAtomTypes();
 }
 
 #endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP

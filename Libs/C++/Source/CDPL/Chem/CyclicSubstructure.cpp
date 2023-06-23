@@ -34,97 +34,97 @@ using namespace CDPL;
 
 Chem::CyclicSubstructure::CyclicSubstructure(const MolecularGraph& molgraph)
 {
-	perceive(molgraph);
+    perceive(molgraph);
 }
 
 void Chem::CyclicSubstructure::perceive(const MolecularGraph& molgraph)
 {
-	clear();
+    clear();
 
-	if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
-		return;
+    if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
+        return;
 
-	init(molgraph);
-	findRingAtomsAndBonds();
+    init(molgraph);
+    findRingAtomsAndBonds();
 }
 
 void Chem::CyclicSubstructure::init(const MolecularGraph& molgraph)
 {
-	molGraph = &molgraph;
-	
-	visAtomMask.resize(molgraph.getNumAtoms());
-	visAtomMask.reset();
-	pathAtomMask.resize(molgraph.getNumAtoms());
-	pathAtomMask.reset();
+    molGraph = &molgraph;
+    
+    visAtomMask.resize(molgraph.getNumAtoms());
+    visAtomMask.reset();
+    pathAtomMask.resize(molgraph.getNumAtoms());
+    pathAtomMask.reset();
 
-	atomStack.clear();
-	bondStack.clear();
+    atomStack.clear();
+    bondStack.clear();
 }
 
 void Chem::CyclicSubstructure::findRingAtomsAndBonds()
 {
-	std::size_t num_atoms = molGraph->getNumAtoms();
+    std::size_t num_atoms = molGraph->getNumAtoms();
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		if (!visAtomMask.test(i))
-			findRingAtomsAndBonds(&molGraph->getAtom(i));
-	}
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        if (!visAtomMask.test(i))
+            findRingAtomsAndBonds(&molGraph->getAtom(i));
+    }
 }
 
 void Chem::CyclicSubstructure::findRingAtomsAndBonds(const Atom* atom)
 {
-	std::size_t atom_idx = molGraph->getAtomIndex(*atom);
+    std::size_t atom_idx = molGraph->getAtomIndex(*atom);
 
-	if (pathAtomMask.test(atom_idx)) {
-		BondStack::const_reverse_iterator b_it = bondStack.rbegin();
-		AtomStack::const_reverse_iterator a_it = atomStack.rbegin();
+    if (pathAtomMask.test(atom_idx)) {
+        BondStack::const_reverse_iterator b_it = bondStack.rbegin();
+        AtomStack::const_reverse_iterator a_it = atomStack.rbegin();
 
-		while (true) {
-			const Atom* rng_atom = *a_it;
-			const Bond* rng_bond = *b_it;
+        while (true) {
+            const Atom* rng_atom = *a_it;
+            const Bond* rng_bond = *b_it;
 
-			addAtom(*rng_atom);
-			addBond(*rng_bond);
+            addAtom(*rng_atom);
+            addBond(*rng_bond);
 
-			if (rng_atom == atom)
-				return;
+            if (rng_atom == atom)
+                return;
 
-			++a_it;
-			++b_it;
-		}
+            ++a_it;
+            ++b_it;
+        }
 
-		return;
-	}
+        return;
+    }
 
-	if (visAtomMask.test(atom_idx))
-		return;
-	
-	atomStack.push_back(atom);
-	visAtomMask.set(atom_idx);
-	pathAtomMask.set(atom_idx);
+    if (visAtomMask.test(atom_idx))
+        return;
+    
+    atomStack.push_back(atom);
+    visAtomMask.set(atom_idx);
+    pathAtomMask.set(atom_idx);
 
-	const Bond* prev_bond = (bondStack.empty() ? 0 : bondStack.back());
-	Atom::ConstBondIterator b_it = atom->getBondsBegin();
+    const Bond* prev_bond = (bondStack.empty() ? 0 : bondStack.back());
+    Atom::ConstBondIterator b_it = atom->getBondsBegin();
 
-	for (Atom::ConstAtomIterator a_it = atom->getAtomsBegin(), a_end = atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Bond& nbr_bond = *b_it;
+    for (Atom::ConstAtomIterator a_it = atom->getAtomsBegin(), a_end = atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+        const Bond& nbr_bond = *b_it;
 
-		if (&nbr_bond == prev_bond || !molGraph->containsBond(nbr_bond))
-			continue;
+        if (&nbr_bond == prev_bond || !molGraph->containsBond(nbr_bond))
+            continue;
 
-		const Atom& nbr_atom = *a_it;
-	
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
+        const Atom& nbr_atom = *a_it;
+    
+        if (!molGraph->containsAtom(nbr_atom))
+            continue;
 
-		bondStack.push_back(&nbr_bond);
+        bondStack.push_back(&nbr_bond);
 
-		findRingAtomsAndBonds(&nbr_atom);
+        findRingAtomsAndBonds(&nbr_atom);
 
-		bondStack.pop_back();
-	}
+        bondStack.pop_back();
+    }
 
-	atomStack.pop_back();
-	pathAtomMask.reset(atom_idx);
+    atomStack.pop_back();
+    pathAtomMask.reset(atom_idx);
 }
 

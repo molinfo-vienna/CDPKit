@@ -38,41 +38,41 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeaturePairDistanceMatchFunctor.
-		 */
-		class CDPL_PHARM_API FeaturePairDistanceMatchFunctor
-		{
+        /**
+         * \brief FeaturePairDistanceMatchFunctor.
+         */
+        class CDPL_PHARM_API FeaturePairDistanceMatchFunctor
+        {
 
-		  public:
-			/**
-			 * \brief Constructs the \c %FeaturePairDistanceMatchFunctor instance.
-			 * \param query_mode If \c true, the second pair feature distance must fall in the distance +/- tolerances
-			 *                   of the first pair for the compatibility check to succeed. If \c false, it is sufficient
-			 *                   that any one of the pairs matches the distance range of the other. 
-			 */
-			FeaturePairDistanceMatchFunctor(bool query_mode): qryMode(query_mode) {}
+          public:
+            /**
+             * \brief Constructs the \c %FeaturePairDistanceMatchFunctor instance.
+             * \param query_mode If \c true, the second pair feature distance must fall in the distance +/- tolerances
+             *                   of the first pair for the compatibility check to succeed. If \c false, it is sufficient
+             *                   that any one of the pairs matches the distance range of the other. 
+             */
+            FeaturePairDistanceMatchFunctor(bool query_mode): qryMode(query_mode) {}
 
-			bool queryMode() const;
+            bool queryMode() const;
 
-			/**
-			 * \brief Checks if the feature pairs (\a p1_ftr1, \a p1_ftr2) and (\a p2_ftr1, \a p2_ftr2) are matching
-			 *        in terms of their feature distance.
-			 * \param p1_ftr1 The first feature of the first pair.
-			 * \param p1_ftr2 The second feature of the first pair.
-			 * \param p2_ftr1 The first feature of the second pair.
-			 * \param p2_ftr2 The second feature of the second pair.
-			 * \return \c true if the feature pair distance are compatible, and \c false otherwise.
-			 * \see FeaturePairDistanceMatchFunctor()
-			 */
-			bool operator()(const Feature& p1_ftr1, const Feature& p1_ftr2,
-							const Feature& p2_ftr1, const Feature& p2_ftr2) const;
+            /**
+             * \brief Checks if the feature pairs (\a p1_ftr1, \a p1_ftr2) and (\a p2_ftr1, \a p2_ftr2) are matching
+             *        in terms of their feature distance.
+             * \param p1_ftr1 The first feature of the first pair.
+             * \param p1_ftr2 The second feature of the first pair.
+             * \param p2_ftr1 The first feature of the second pair.
+             * \param p2_ftr2 The second feature of the second pair.
+             * \return \c true if the feature pair distance are compatible, and \c false otherwise.
+             * \see FeaturePairDistanceMatchFunctor()
+             */
+            bool operator()(const Feature& p1_ftr1, const Feature& p1_ftr2,
+                            const Feature& p2_ftr1, const Feature& p2_ftr2) const;
 
-		  private:
-			bool qryMode;
-		};
+          private:
+            bool qryMode;
+        };
     }
 }
 

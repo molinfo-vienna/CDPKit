@@ -47,102 +47,102 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94StretchBendParameterTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94StretchBendParameterTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94StretchBendParameterTable> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<MMFF94StretchBendParameterTable> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-					  unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
+                Entry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+                      unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
 
-				unsigned int getStretchBendTypeIndex() const;
+                unsigned int getStretchBendTypeIndex() const;
 
-				unsigned int getTerminalAtom1Type() const;
+                unsigned int getTerminalAtom1Type() const;
 
-				unsigned int getCenterAtomType() const;
+                unsigned int getCenterAtomType() const;
 
-				unsigned int getTerminalAtom2Type() const;
+                unsigned int getTerminalAtom2Type() const;
 
-				double getIJKForceConstant() const;
+                double getIJKForceConstant() const;
 
-				double getKJIForceConstant() const;
+                double getKJIForceConstant() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int sbTypeIdx;
-				unsigned int termAtom1Type;
-				unsigned int ctrAtomType;
-				unsigned int termAtom2Type;
-				double       ijkForceConst;
-				double       kjiForceConst;
-				bool         initialized;
-			};			
+              private:
+                unsigned int sbTypeIdx;
+                unsigned int termAtom1Type;
+                unsigned int ctrAtomType;
+                unsigned int termAtom2Type;
+                double       ijkForceConst;
+                double       kjiForceConst;
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94StretchBendParameterTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94StretchBendParameterTable();
 
-			void addEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-						  unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
+            void addEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+                          unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
 
-			const Entry& getEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-								  unsigned int term_atom2_type) const;
+            const Entry& getEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+                                  unsigned int term_atom2_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-							 unsigned int term_atom2_type);
+            bool removeEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+                             unsigned int term_atom2_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
     }
 }
 

@@ -39,13 +39,13 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
 
     double points[][3] = { 
         { 1, 1, 1},
-	{ 0, 1, 1},
-	{ 0, 1, 0},
-	{ 1, 1, 0},
-	{ 1, 0, 1},
-	{ 0, 0, 1},
-	{ 0, 0, 0},
-	{ 1, 0, 0}
+    { 0, 1, 1},
+    { 0, 1, 0},
+    { 1, 1, 0},
+    { 1, 0, 1},
+    { 0, 0, 1},
+    { 0, 0, 0},
+    { 1, 0, 0}
     }; 
 
     Matrix<double> points_mtx(3, 8);
@@ -53,8 +53,8 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
     KabschAlgorithm<double> algo;
 
     for (std::size_t i = 0; i < 3; i++)
-	for (std::size_t j = 0; j < 8; j++)
-	    points_mtx(i, j) = points[j][i];
+    for (std::size_t j = 0; j < 8; j++)
+        points_mtx(i, j) = points[j][i];
     
     // ---------
 
@@ -120,9 +120,9 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
     Vector4D vec1 = vec(0, 0, 0, 1.0), vec2 = vec(0, 0, 0, 1.0);
 
     for (std::size_t i = 0; i < 8; i++) {
-	range(vec1, 0, 3) = column(points_mtx, i);
-	range(vec2, 0, 3) = column(ref_points_mtx, i);
-	BOOST_CHECK_SMALL(norm2(algo.getTransform() * vec1 - vec2), 1.0e-13);
+    range(vec1, 0, 3) = column(points_mtx, i);
+    range(vec2, 0, 3) = column(ref_points_mtx, i);
+    BOOST_CHECK_SMALL(norm2(algo.getTransform() * vec1 - vec2), 1.0e-13);
     }
 
     // ---------
@@ -130,15 +130,15 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
     BOOST_CHECK(algo.align(points_mtx, ref_points_mtx));
 
     for (std::size_t i = 0; i < 8; i++) {
-	range(vec1, 0, 3) = column(points_mtx, i);
-	range(vec2, 0, 3) = column(ref_points_mtx, i);
-	BOOST_CHECK_SMALL(norm2(algo.getTransform() * vec1 - vec2), 1.0e-13);
+    range(vec1, 0, 3) = column(points_mtx, i);
+    range(vec2, 0, 3) = column(ref_points_mtx, i);
+    BOOST_CHECK_SMALL(norm2(algo.getTransform() * vec1 - vec2), 1.0e-13);
     }
 
     // ---------
   
     Matrix<double> orig_xform = RotationMatrix<double>(3, 13.2 * M_PI / 180.0, 0.0, 1.0, 0.0) *
-	RotationMatrix<double>(3, 37.2 * M_PI / 180.0, 0.0, 0.0, 1.0);
+    RotationMatrix<double>(3, 37.2 * M_PI / 180.0, 0.0, 0.0, 1.0);
 
     ref_points_mtx = prod(orig_xform, points_mtx);
 

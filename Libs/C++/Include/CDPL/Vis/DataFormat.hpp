@@ -35,42 +35,42 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	}
+        class DataFormat;
+    }
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported image output formats.
-		 */
-		namespace DataFormat
-		{
+        /**
+         * \brief Provides preinitialized Base::DataFormat objects for all supported image output formats.
+         */
+        namespace DataFormat
+        {
 
-			/**
-			 * \brief Provides meta-information about the <em>Portable Network Graphics</em> [\ref WPNG] format.
-			 */
-			extern CDPL_VIS_API const Base::DataFormat PNG;
+            /**
+             * \brief Provides meta-information about the <em>Portable Network Graphics</em> [\ref WPNG] format.
+             */
+            extern CDPL_VIS_API const Base::DataFormat PNG;
 
-			/**
-			 * \brief Provides meta-information about the <em>Portable Document Format</em> [\ref WPDF].
-			 */
-			extern CDPL_VIS_API const Base::DataFormat PDF;
+            /**
+             * \brief Provides meta-information about the <em>Portable Document Format</em> [\ref WPDF].
+             */
+            extern CDPL_VIS_API const Base::DataFormat PDF;
 
-			/**
-			 * \brief Provides meta-information about the <em>PostScript</em> [\ref WPS] format.
-			 */
-			extern CDPL_VIS_API const Base::DataFormat PS;
-			
-			/**
-			 * \brief Provides meta-information about the <em>Scalable Vector Graphics</em> [\ref WSVG] format.
-			 */
-			extern CDPL_VIS_API const Base::DataFormat SVG;
-		}
-	}
+            /**
+             * \brief Provides meta-information about the <em>PostScript</em> [\ref WPS] format.
+             */
+            extern CDPL_VIS_API const Base::DataFormat PS;
+            
+            /**
+             * \brief Provides meta-information about the <em>Scalable Vector Graphics</em> [\ref WSVG] format.
+             */
+            extern CDPL_VIS_API const Base::DataFormat SVG;
+        }
+    }
 }
 
 #endif // CDPL_VIS_DATAFORMAT_HPP

@@ -36,40 +36,40 @@ using namespace CDPL;
 
 
 Pharm::PMLFeatureContainerWriter::PMLFeatureContainerWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new PMLDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new PMLDataWriter(*this)) {}
 
 Pharm::PMLFeatureContainerWriter::~PMLFeatureContainerWriter() 
 {
-	close();
+    close();
 }
 
 Base::DataWriter<Pharm::FeatureContainer>& Pharm::PMLFeatureContainerWriter::write(const FeatureContainer& cntnr)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeFeatureContainer(output, cntnr);
+    try {
+        state = writer->writeFeatureContainer(output, cntnr);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PMLFeatureContainerWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PMLFeatureContainerWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Pharm::PMLFeatureContainerWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Pharm::PMLFeatureContainerWriter::operator!() const
 {
-	return !state;
+    return !state;
 }
 
 void Pharm::PMLFeatureContainerWriter::close()
 {
-	writer->close(output);
+    writer->close(output);
 }

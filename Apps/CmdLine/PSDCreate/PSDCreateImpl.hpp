@@ -41,11 +41,11 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 }
 
 
@@ -56,69 +56,69 @@ namespace PSDCreate
     {
 
     public:
-		PSDCreateImpl();
+        PSDCreateImpl();
 
     private:
-		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-		typedef InputHandler::SharedPointer InputHandlerPtr;
+        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
+        typedef InputHandler::SharedPointer InputHandlerPtr;
 
-		const char* getProgName() const;
-		const char* getProgCopyright() const;
-		const char* getProgAboutText() const;
+        const char* getProgName() const;
+        const char* getProgCopyright() const;
+        const char* getProgAboutText() const;
 
-		void setCreationMode(const std::string& mode);
-		void setInputFormat(const std::string& file_ext);
-		void setTmpFileDirectory(const std::string& dir_path);
+        void setCreationMode(const std::string& mode);
+        void setInputFormat(const std::string& file_ext);
+        void setTmpFileDirectory(const std::string& dir_path);
 
-		int process();
+        int process();
 
-		void processSingleThreaded();
-		void processMultiThreaded();
+        void processSingleThreaded();
+        void processMultiThreaded();
 
-		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
-		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
+        std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
+        std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
-		void setErrorMessage(const std::string& msg);
-		bool haveErrorMessage();
+        void setErrorMessage(const std::string& msg);
+        bool haveErrorMessage();
 
-		void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
-							 std::size_t num_ins);
+        void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
+                             std::size_t num_ins);
 
-		void checkInputFiles() const;
-		void printOptionSummary();
-		void initInputReader();
+        void checkInputFiles() const;
+        void printOptionSummary();
+        void initInputReader();
 
-		std::string getCreationModeString() const;
+        std::string getCreationModeString() const;
 
-		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
-		std::string createMoleculeIdentifier(std::size_t rec_idx);
+        std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
+        std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-		InputHandlerPtr getInputHandler(const std::string& file_path) const;
+        InputHandlerPtr getInputHandler(const std::string& file_path) const;
 
-		void addOptionLongDescriptions();
+        void addOptionLongDescriptions();
 
-		struct InputScanProgressCallback;
-		struct MergeDBsProgressCallback;
-		struct DBCreationWorker;
+        struct InputScanProgressCallback;
+        struct MergeDBsProgressCallback;
+        struct DBCreationWorker;
 
-		typedef std::vector<std::string> StringList;
-		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
-		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
-		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-		typedef CDPL::Internal::Timer Timer;
+        typedef std::vector<std::string> StringList;
+        typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
+        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
+        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+        typedef CDPL::Internal::Timer Timer;
 
-		StringList             inputFiles;
-		std::string            outputDatabase;
-		bool                   dropDuplicates;
-		std::size_t            numThreads;
-		CreationMode           creationMode;
-		InputHandlerPtr        inputHandler;
-		CompMoleculeReader     inputReader;   
-		std::mutex             mutex;
-		std::mutex             molReadMutex;
-		std::string            errorMessage;
-		bool                   addSourceFileProp;
-		Timer                  timer;
+        StringList             inputFiles;
+        std::string            outputDatabase;
+        bool                   dropDuplicates;
+        std::size_t            numThreads;
+        CreationMode           creationMode;
+        InputHandlerPtr        inputHandler;
+        CompMoleculeReader     inputReader;   
+        std::mutex             mutex;
+        std::mutex             molReadMutex;
+        std::string            errorMessage;
+        bool                   addSourceFileProp;
+        Timer                  timer;
     };
 }
 

@@ -74,7 +74,7 @@ Pharm::FeatureContainer::FeatureIterator Pharm::FeatureContainer::end()
 Pharm::FeatureContainer& Pharm::FeatureContainer::operator=(const FeatureContainer& cntnr) 
 {
     if (this == &cntnr)
-		return *this;
+        return *this;
 
     Base::PropertyContainer::operator=(cntnr);
     Chem::Entity3DContainer::operator=(cntnr);
@@ -84,17 +84,17 @@ Pharm::FeatureContainer& Pharm::FeatureContainer::operator=(const FeatureContain
 
 std::size_t Pharm::FeatureContainer::getNumEntities() const
 {
-	return getNumFeatures();
+    return getNumFeatures();
 }
 
 const Chem::Entity3D& Pharm::FeatureContainer::getEntity(std::size_t idx) const
 {
-	return getFeature(idx);
+    return getFeature(idx);
 }
 
 Chem::Entity3D& Pharm::FeatureContainer::getEntity(std::size_t idx)
 {
-	return getFeature(idx);
+    return getFeature(idx);
 }
 
 

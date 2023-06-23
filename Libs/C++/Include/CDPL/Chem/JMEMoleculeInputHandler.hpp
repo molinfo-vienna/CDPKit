@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data in the native I/O format of the <em>JME Molecular Editor</em>
-		 *        [\ref JME] java applet.
-		 */
-		typedef Util::DefaultDataInputHandler<JMEMoleculeReader, DataFormat::JME> JMEMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data in the native I/O format of the <em>JME Molecular Editor</em>
+         *        [\ref JME] java applet.
+         */
+        typedef Util::DefaultDataInputHandler<JMEMoleculeReader, DataFormat::JME> JMEMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_JMEMOLECULEINPUTHANDLER_HPP

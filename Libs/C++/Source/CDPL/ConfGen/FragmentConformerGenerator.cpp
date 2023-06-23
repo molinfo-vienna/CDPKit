@@ -35,7 +35,7 @@ using namespace CDPL;
 
 
 ConfGen::FragmentConformerGenerator::FragmentConformerGenerator(): 
-	impl(new FragmentConformerGeneratorImpl())
+    impl(new FragmentConformerGeneratorImpl())
 {}
 
 ConfGen::FragmentConformerGenerator::~FragmentConformerGenerator() 
@@ -43,78 +43,78 @@ ConfGen::FragmentConformerGenerator::~FragmentConformerGenerator()
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGenerator::getSettings()
 {
-	return impl->getSettings();
+    return impl->getSettings();
 }
 
 const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGenerator::getSettings() const
 {
-	return impl->getSettings();
+    return impl->getSettings();
 }
 
 void ConfGen::FragmentConformerGenerator::setAbortCallback(const CallbackFunction& func)
 {
-	impl->setAbortCallback(func);
+    impl->setAbortCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::FragmentConformerGenerator::getAbortCallback() const
 {
-	return impl->getAbortCallback();
+    return impl->getAbortCallback();
 }
 
 void ConfGen::FragmentConformerGenerator::setTimeoutCallback(const CallbackFunction& func)
 {
-	impl->setTimeoutCallback(func);
+    impl->setTimeoutCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::FragmentConformerGenerator::getTimeoutCallback() const
 {
-	return impl->getTimeoutCallback();
+    return impl->getTimeoutCallback();
 }
 
 void ConfGen::FragmentConformerGenerator::setLogMessageCallback(const LogMessageCallbackFunction& func)
 {
-	impl->setLogMessageCallback(func);
+    impl->setLogMessageCallback(func);
 }
 
 const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentConformerGenerator::getLogMessageCallback() const
 {
-	return impl->getLogMessageCallback();
+    return impl->getLogMessageCallback();
 }
 
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph) 
 {
-	return generate(molgraph, perceiveFragmentType(molgraph));
+    return generate(molgraph, perceiveFragmentType(molgraph));
 }
 
 void ConfGen::FragmentConformerGenerator::setConformers(Chem::MolecularGraph& molgraph) const
 {
-	impl->setConformers(molgraph);
+    impl->setConformers(molgraph);
 }
 
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 
 {
-	return impl->generate(molgraph, frag_type);
+    return impl->generate(molgraph, frag_type);
 }
 
 std::size_t ConfGen::FragmentConformerGenerator::getNumConformers() const
 {
-	return impl->getNumConformers();
+    return impl->getNumConformers();
 }
 
 const ConfGen::ConformerData& ConfGen::FragmentConformerGenerator::getConformer(std::size_t idx) const
 {
-	if (idx >= impl->getNumConformers())
-		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
+    if (idx >= impl->getNumConformers())
+        throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
 
-	return impl->getConformer(idx);
+    return impl->getConformer(idx);
 }
 
 ConfGen::ConformerData& ConfGen::FragmentConformerGenerator::getConformer(std::size_t idx)
 {
-	if (idx >= impl->getNumConformers())
-		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
+    if (idx >= impl->getNumConformers())
+        throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
 
-	return impl->getConformer(idx);
+    return impl->getConformer(idx);
 }
 
 ConfGen::FragmentConformerGenerator::ConstConformerIterator ConfGen::FragmentConformerGenerator::getConformersBegin() const

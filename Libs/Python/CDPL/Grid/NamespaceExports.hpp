@@ -29,13 +29,13 @@
 namespace CDPLPythonGrid
 {
 
-	void exportAttributedGridProperties();
-	void exportAttributedGridPropertyDefaults();
+    void exportAttributedGridProperties();
+    void exportAttributedGridPropertyDefaults();
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+    void exportControlParameters();
+    void exportControlParameterDefaults();
 
-	void exportDataFormats();
+    void exportDataFormats();
 }
 
 #endif // CDPL_PYTHON_GRID_NAMESPACEEXPORTS_HPP

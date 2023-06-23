@@ -42,28 +42,28 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief CompressedDataWriter.
-		 */
-		template <typename WriterImpl, typename CompStream, typename DataType = typename WriterImpl::DataType>
-		class CompressedDataWriter : public Base::DataWriter<DataType>
-		{
+        /**
+         * \brief CompressedDataWriter.
+         */
+        template <typename WriterImpl, typename CompStream, typename DataType = typename WriterImpl::DataType>
+        class CompressedDataWriter : public Base::DataWriter<DataType>
+        {
 
-		public:
-			CompressedDataWriter(std::iostream& ios); 
+        public:
+            CompressedDataWriter(std::iostream& ios); 
 
-			CompressedDataWriter& write(const DataType& obj);
-		
-			void close();
-		
-			operator const void*() const;
-		
-			bool operator!() const;
+            CompressedDataWriter& write(const DataType& obj);
+        
+            void close();
+        
+            operator const void*() const;
+        
+            bool operator!() const;
 
-		private:
-			CompStream  stream;
-			WriterImpl  writer;
-		};
+        private:
+            CompStream  stream;
+            WriterImpl  writer;
+        };
     }
 }
 
@@ -75,7 +75,7 @@ CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::Compressed
     stream(ios), writer(stream) 
 {
     writer.setParent(this);
-	writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
+    writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }
 
 template <typename WriterImpl, typename DecompStream, typename DataType>
@@ -91,7 +91,7 @@ template <typename WriterImpl, typename DecompStream, typename DataType>
 void CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::close()
 {
     writer.close();
-	stream.close();
+    stream.close();
 }
 
 template <typename WriterImpl, typename DecompStream, typename DataType>

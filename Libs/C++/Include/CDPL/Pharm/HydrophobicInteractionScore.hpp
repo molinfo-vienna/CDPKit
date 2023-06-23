@@ -39,30 +39,30 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief HydrophobicInteractionScore.
-		 */
-		class CDPL_PHARM_API HydrophobicInteractionScore : public FeatureDistanceScore
-		{
+        /**
+         * \brief HydrophobicInteractionScore.
+         */
+        class CDPL_PHARM_API HydrophobicInteractionScore : public FeatureDistanceScore
+        {
 
-		  public:
-			static constexpr double DEF_MIN_DISTANCE = 2.0;
-			static constexpr double DEF_MAX_DISTANCE = 6.0;
+          public:
+            static constexpr double DEF_MIN_DISTANCE = 2.0;
+            static constexpr double DEF_MAX_DISTANCE = 6.0;
 
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicInteractionScore instances.
-			 */
-			typedef std::shared_ptr<HydrophobicInteractionScore> SharedPointer;
-			
-			/**
-			 * \brief Constructs a \c %HydrophobicInteractionScore functor with a 
-			 *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
-			 * \param min_dist The minimum allowed feature pair distance.
-			 * \param max_dist The maximum allowed feature pair distance.
-			 */
-			HydrophobicInteractionScore(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
-				FeatureDistanceScore(min_dist, max_dist) {}
-		};
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicInteractionScore instances.
+             */
+            typedef std::shared_ptr<HydrophobicInteractionScore> SharedPointer;
+            
+            /**
+             * \brief Constructs a \c %HydrophobicInteractionScore functor with a 
+             *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
+             * \param min_dist The minimum allowed feature pair distance.
+             * \param max_dist The maximum allowed feature pair distance.
+             */
+            HydrophobicInteractionScore(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
+                FeatureDistanceScore(min_dist, max_dist) {}
+        };
     }
 }
 

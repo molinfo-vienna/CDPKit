@@ -51,106 +51,106 @@ ConfGen::FragmentAssembler::getSettings()
 
 void ConfGen::FragmentAssembler::clearFragmentLibraries()
 {
-	impl->clearFragmentLibraries();
+    impl->clearFragmentLibraries();
 }
 
 void ConfGen::FragmentAssembler::addFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
 {
-	impl->addFragmentLibrary(lib);
+    impl->addFragmentLibrary(lib);
 }
 
 void ConfGen::FragmentAssembler::setAbortCallback(const CallbackFunction& func)
 {
-	impl->setAbortCallback(func);
+    impl->setAbortCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::FragmentAssembler::getAbortCallback() const
 {
-	return impl->getAbortCallback();
+    return impl->getAbortCallback();
 }
 
 void ConfGen::FragmentAssembler::setTimeoutCallback(const CallbackFunction& func)
 {
-	impl->setTimeoutCallback(func);
+    impl->setTimeoutCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::FragmentAssembler::getTimeoutCallback() const
 {
-	return impl->getTimeoutCallback();
+    return impl->getTimeoutCallback();
 }
 
 void ConfGen::FragmentAssembler::setLogMessageCallback(const LogMessageCallbackFunction& func)
 {
-	impl->setLogMessageCallback(func);
+    impl->setLogMessageCallback(func);
 }
 
 const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentAssembler::getLogMessageCallback() const
 {
-	return impl->getLogMessageCallback();
+    return impl->getLogMessageCallback();
 }
 
 unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& molgraph)
 {
-	return impl->assemble(molgraph, molgraph);
+    return impl->assemble(molgraph, molgraph);
 }
-		
+        
 std::size_t ConfGen::FragmentAssembler::getNumConformers() const
 {
-	return impl->getNumConformers();
+    return impl->getNumConformers();
 }
 
 const ConfGen::ConformerData& ConfGen::FragmentAssembler::getConformer(std::size_t idx) const
 {
-	if (idx >= impl->getNumConformers())
-		throw Base::IndexError("FragmentAssembler: conformer index out of bounds");
+    if (idx >= impl->getNumConformers())
+        throw Base::IndexError("FragmentAssembler: conformer index out of bounds");
 
-	return impl->getConformer(idx);
+    return impl->getConformer(idx);
 }
 
 ConfGen::ConformerData& ConfGen::FragmentAssembler::getConformer(std::size_t idx)
 {
-	if (idx >= impl->getNumConformers())
-		throw Base::IndexError("FragmentAssembler: conformer index out of bounds");
+    if (idx >= impl->getNumConformers())
+        throw Base::IndexError("FragmentAssembler: conformer index out of bounds");
 
-	return impl->getConformer(idx);
+    return impl->getConformer(idx);
 }
 
 ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::getConformersBegin() const
 {
-	return impl->getConformersBegin();
+    return impl->getConformersBegin();
 }
 
 ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::getConformersEnd() const
 {
-	return impl->getConformersEnd();
+    return impl->getConformersEnd();
 }
 
 ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getConformersBegin()
 {
-	return impl->getConformersBegin();
+    return impl->getConformersBegin();
 }
 
 ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getConformersEnd()
 {
-	return impl->getConformersEnd();
+    return impl->getConformersEnd();
 }
 
 ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::begin() const
 {
-	return impl->getConformersBegin();
+    return impl->getConformersBegin();
 }
 
 ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::end() const
 {
-	return impl->getConformersEnd();
+    return impl->getConformersEnd();
 }
 
 ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::begin()
 {
-	return impl->getConformersBegin();
+    return impl->getConformersBegin();
 }
 
 ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::end()
 {
-	return impl->getConformersEnd();
+    return impl->getConformersEnd();
 }

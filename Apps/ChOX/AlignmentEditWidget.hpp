@@ -34,31 +34,31 @@ class QComboBox;
 namespace ChOX
 {
 
-	class AlignmentEditWidget : public QWidget
-	{
+    class AlignmentEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		AlignmentEditWidget(QWidget*, unsigned int&, bool, bool = true);
+    public:
+        AlignmentEditWidget(QWidget*, unsigned int&, bool, bool = true);
 
-	signals:
-		void alignmentChanged();
+    signals:
+        void alignmentChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleAlignmentSelection(int);
+    private slots:
+        void handleAlignmentSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		unsigned int& alignment;
-		bool          horDirection;
-		bool          allowCenter;
-		QComboBox*    alignmentComboBox;
-	};
+        unsigned int& alignment;
+        bool          horDirection;
+        bool          allowCenter;
+        QComboBox*    alignmentComboBox;
+    };
 }
 
 #endif // CHOX_ALIGNMENTEDITWIDGET_HPP

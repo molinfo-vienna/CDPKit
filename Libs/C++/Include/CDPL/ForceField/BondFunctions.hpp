@@ -35,23 +35,23 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Bond;
-	}
+        class Bond;
+    }
 
-	namespace ForceField 
-	{
+    namespace ForceField 
+    {
 
-		CDPL_FORCEFIELD_API unsigned int getMMFF94TypeIndex(const Chem::Bond& bond);
+        CDPL_FORCEFIELD_API unsigned int getMMFF94TypeIndex(const Chem::Bond& bond);
 
-		CDPL_FORCEFIELD_API void setMMFF94TypeIndex(Chem::Bond& bond, unsigned int type_idx);
+        CDPL_FORCEFIELD_API void setMMFF94TypeIndex(Chem::Bond& bond, unsigned int type_idx);
 
-		CDPL_FORCEFIELD_API void clearMMFF94TypeIndex(Chem::Bond& bond);
+        CDPL_FORCEFIELD_API void clearMMFF94TypeIndex(Chem::Bond& bond);
 
-		CDPL_FORCEFIELD_API bool hasMMFF94TypeIndex(const Chem::Bond& bond);
-	}
+        CDPL_FORCEFIELD_API bool hasMMFF94TypeIndex(const Chem::Bond& bond);
+    }
 }
 
 #endif // CDPL_FORCEFIELD_BONDFUNCTIONS_HPP

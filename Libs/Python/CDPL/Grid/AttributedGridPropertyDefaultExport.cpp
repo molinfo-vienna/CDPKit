@@ -32,15 +32,15 @@
 namespace 
 {
 
-	struct AttributedGridPropertyDefault {};
+    struct AttributedGridPropertyDefault {};
 }
 
 
 void CDPLPythonGrid::exportAttributedGridPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AttributedGridPropertyDefault, boost::noncopyable>("AttributedGridPropertyDefault", python::no_init)
-		.def_readonly("NAME", &Grid::AttributedGridPropertyDefault::NAME);
+    python::class_<AttributedGridPropertyDefault, boost::noncopyable>("AttributedGridPropertyDefault", python::no_init)
+        .def_readonly("NAME", &Grid::AttributedGridPropertyDefault::NAME);
 }

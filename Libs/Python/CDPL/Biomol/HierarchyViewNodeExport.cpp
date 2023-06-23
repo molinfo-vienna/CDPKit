@@ -35,8 +35,8 @@ void CDPLPythonBiomol::exportHierarchyViewNode()
     using namespace CDPL;
 
     python::class_<Biomol::HierarchyViewNode, python::bases<Chem::Fragment>, boost::noncopyable>("HierarchyViewNode", python::no_init)
-		.def("getResidues", &Biomol::HierarchyViewNode::getResidues, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("residues", python::make_function(&Biomol::HierarchyViewNode::getResidues, python::return_internal_reference<>()))
-	;
+        .def("getResidues", &Biomol::HierarchyViewNode::getResidues, python::arg("self"),
+             python::return_internal_reference<>())
+        .add_property("residues", python::make_function(&Biomol::HierarchyViewNode::getResidues, python::return_internal_reference<>()))
+    ;
 }

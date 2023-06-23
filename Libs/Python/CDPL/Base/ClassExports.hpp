@@ -29,14 +29,14 @@
 namespace CDPLPythonBase
 {
 
-	void exportLookupKey();
-	void exportPropertyContainer();
-	void exportControlParameterContainer();
-	void exportControlParameterList();
-	void exportDataFormat();
-	void exportDataIOBase();
-	void exportIOStreams();
-	void exportFunctionWrappers();
+    void exportLookupKey();
+    void exportPropertyContainer();
+    void exportControlParameterContainer();
+    void exportControlParameterList();
+    void exportDataFormat();
+    void exportDataIOBase();
+    void exportIOStreams();
+    void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_BASE_CLASSEXPORTS_HPP

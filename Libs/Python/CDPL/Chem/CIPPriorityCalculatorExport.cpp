@@ -34,21 +34,21 @@
 
 void CDPLPythonChem::exportCIPPriorityCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::CIPPriorityCalculator, boost::noncopyable>("CIPPriorityCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("priorities"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CIPPriorityCalculator>())	
-		.def("setImplicitHydrogenCountFunction", &Chem::CIPPriorityCalculator::setImplicitHydrogenCountFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getImplicitHydrogenCountFunction", &Chem::CIPPriorityCalculator::getImplicitHydrogenCountFunction, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("calculate", &Chem::CIPPriorityCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("priorities")))
-		.add_property("implHydrogenCountFunc", 
-					  python::make_function(&Chem::CIPPriorityCalculator::getImplicitHydrogenCountFunction, 
-											python::return_internal_reference<>()),
-					  &Chem::CIPPriorityCalculator::setImplicitHydrogenCountFunction);
+    python::class_<Chem::CIPPriorityCalculator, boost::noncopyable>("CIPPriorityCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("priorities"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CIPPriorityCalculator>())    
+        .def("setImplicitHydrogenCountFunction", &Chem::CIPPriorityCalculator::setImplicitHydrogenCountFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("getImplicitHydrogenCountFunction", &Chem::CIPPriorityCalculator::getImplicitHydrogenCountFunction, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("calculate", &Chem::CIPPriorityCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("priorities")))
+        .add_property("implHydrogenCountFunc", 
+                      python::make_function(&Chem::CIPPriorityCalculator::getImplicitHydrogenCountFunction, 
+                                            python::return_internal_reference<>()),
+                      &Chem::CIPPriorityCalculator::setImplicitHydrogenCountFunction);
 }

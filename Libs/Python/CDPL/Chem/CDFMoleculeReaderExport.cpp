@@ -34,36 +34,36 @@
 
 void CDPLPythonChem::exportCDFMoleculeReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::CDFMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("CDFMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::CDFMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("CDFMoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::CDFMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileCDFMoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::CDFMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileCDFMoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-	python::class_<Chem::CDFGZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("CDFGZMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::CDFGZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("CDFGZMoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::CDFGZMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileCDFGZMoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::CDFGZMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileCDFGZMoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-	python::class_<Chem::CDFBZ2MoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("CDFBZ2MoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::CDFBZ2MoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("CDFBZ2MoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::CDFBZ2MoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileCDFBZ2MoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::CDFBZ2MoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileCDFBZ2MoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

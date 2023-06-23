@@ -39,43 +39,43 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct ConstMatrixRowExport
-	{
-	
-		typedef CDPL::Math::MatrixRow<const ExpressionType> MatrixRowType;
-		typedef typename MatrixRowType::SizeType SizeType;
-		typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixRowType> MatrixRowWrapper;
-		typedef typename MatrixRowWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixRowWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct ConstMatrixRowExport
+    {
+    
+        typedef CDPL::Math::MatrixRow<const ExpressionType> MatrixRowType;
+        typedef typename MatrixRowType::SizeType SizeType;
+        typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixRowType> MatrixRowWrapper;
+        typedef typename MatrixRowWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixRowWrapper::SharedPointer WrapperPointerType;
 
-		ConstMatrixRowExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ConstMatrixRowExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<MatrixRowWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixRowWrapper&>((python::arg("self"), python::arg("r"))))
-				.def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
-				.def("getIndex", &MatrixRowType::getIndex, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRowType>())
-				.def(ConstVectorVisitor<MatrixRowType>("r"))
-				.def(WrappedDataVisitor<MatrixRowWrapper>())
-				.add_property("index", &MatrixRowType::getIndex);
+            python::class_<MatrixRowWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixRowWrapper&>((python::arg("self"), python::arg("r"))))
+                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
+                .def("getIndex", &MatrixRowType::getIndex, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRowType>())
+                .def(ConstVectorVisitor<MatrixRowType>("r"))
+                .def(WrappedDataVisitor<MatrixRowWrapper>())
+                .add_property("index", &MatrixRowType::getIndex);
 
-			python::def("row", &row, (python::arg("e"), python::arg("i")));
-		}
+            python::def("row", &row, (python::arg("e"), python::arg("i")));
+        }
 
-		static WrapperPointerType row(const ExpressionPointerType& e, SizeType i) {
-			return WrapperPointerType(new MatrixRowWrapper(e, i));
-		}
-	};
+        static WrapperPointerType row(const ExpressionPointerType& e, SizeType i) {
+            return WrapperPointerType(new MatrixRowWrapper(e, i));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportConstMatrixRowTypes()
 {
-	ConstMatrixRowExport<ConstMatrixExpression<float> >("ConstFMatrixRow");
-	ConstMatrixRowExport<ConstMatrixExpression<double> >("ConstDMatrixRow");
-	ConstMatrixRowExport<ConstMatrixExpression<long> >("ConstLMatrixRow");
-	ConstMatrixRowExport<ConstMatrixExpression<unsigned long> >("ConstULMatrixRow");
+    ConstMatrixRowExport<ConstMatrixExpression<float> >("ConstFMatrixRow");
+    ConstMatrixRowExport<ConstMatrixExpression<double> >("ConstDMatrixRow");
+    ConstMatrixRowExport<ConstMatrixExpression<long> >("ConstLMatrixRow");
+    ConstMatrixRowExport<ConstMatrixExpression<unsigned long> >("ConstULMatrixRow");
 }

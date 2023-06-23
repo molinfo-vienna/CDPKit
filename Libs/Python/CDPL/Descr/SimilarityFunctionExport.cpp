@@ -31,15 +31,15 @@
 
 void CDPLPythonDescr::exportSimilarityFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity, (python::arg("bs1"), python::arg("bs2")));
-	python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity, (python::arg("bs1"), python::arg("bs2")));
-	python::def("calcEuclideanSimilarity", &Descr::calcEuclideanSimilarity, (python::arg("bs1"), python::arg("bs2")));
-	python::def("calcDiceSimilarity", &Descr::calcDiceSimilarity, (python::arg("bs1"), python::arg("bs2")));
-	python::def("calcManhattanSimilarity", &Descr::calcManhattanSimilarity, (python::arg("bs1"), python::arg("bs2")));
-	python::def("calcTverskySimilarity", &Descr::calcTverskySimilarity, (python::arg("bs1"), python::arg("bs2"), python::arg("a"), (python::arg("b"))));
-	python::def("calcHammingDistance", &Descr::calcHammingDistance, (python::arg("bs1"), python::arg("bs2")));
-	python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcTanimotoSimilarity", &Descr::calcTanimotoSimilarity, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcCosineSimilarity", &Descr::calcCosineSimilarity, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcEuclideanSimilarity", &Descr::calcEuclideanSimilarity, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcDiceSimilarity", &Descr::calcDiceSimilarity, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcManhattanSimilarity", &Descr::calcManhattanSimilarity, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcTverskySimilarity", &Descr::calcTverskySimilarity, (python::arg("bs1"), python::arg("bs2"), python::arg("a"), (python::arg("b"))));
+    python::def("calcHammingDistance", &Descr::calcHammingDistance, (python::arg("bs1"), python::arg("bs2")));
+    python::def("calcEuclideanDistance", &Descr::calcEuclideanDistance, (python::arg("bs1"), python::arg("bs2")));
 }

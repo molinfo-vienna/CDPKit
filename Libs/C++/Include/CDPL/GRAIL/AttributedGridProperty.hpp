@@ -38,21 +38,21 @@ namespace CDPL
     namespace Base
     {
 
-		class LookupKey;
+        class LookupKey;
     }
 
     namespace GRAIL
     {
 
-		/**
-		 * \brief Provides keys for built-in Grid::AttributedGrid properties.
-		 */
-		namespace AttributedGridProperty
-		{
+        /**
+         * \brief Provides keys for built-in Grid::AttributedGrid properties.
+         */
+        namespace AttributedGridProperty
+        {
 
-			extern CDPL_GRAIL_API const Base::LookupKey FEATURE_TYPE; 
-			extern CDPL_GRAIL_API const Base::LookupKey TARGET_FEATURE_TYPE; 
-		}
+            extern CDPL_GRAIL_API const Base::LookupKey FEATURE_TYPE; 
+            extern CDPL_GRAIL_API const Base::LookupKey TARGET_FEATURE_TYPE; 
+        }
     }
 }
 

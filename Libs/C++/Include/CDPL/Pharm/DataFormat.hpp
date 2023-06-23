@@ -35,47 +35,47 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	}
+        class DataFormat;
+    }
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
-		 */
-		namespace DataFormat
-		{
-	
-			/**
-			 * \brief Provides meta-information about the native binary <em>CDPL</em> format.
-			 */
-			extern CDPL_PHARM_API const Base::DataFormat CDF;
+        /**
+         * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
+         */
+        namespace DataFormat
+        {
+    
+            /**
+             * \brief Provides meta-information about the native binary <em>CDPL</em> format.
+             */
+            extern CDPL_PHARM_API const Base::DataFormat CDF;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
-			 */
-			extern CDPL_PHARM_API const Base::DataFormat CDF_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+             */
+            extern CDPL_PHARM_API const Base::DataFormat CDF_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
-			 */
-			extern CDPL_PHARM_API const Base::DataFormat CDF_BZ2;
+            /**
+             * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+             */
+            extern CDPL_PHARM_API const Base::DataFormat CDF_BZ2;
 
-			/**
-			 * \brief Provides meta-information about the native pharmacophore <em>LigandScout</em> format.
-			 */
-			extern CDPL_PHARM_API const Base::DataFormat PML;
+            /**
+             * \brief Provides meta-information about the native pharmacophore <em>LigandScout</em> format.
+             */
+            extern CDPL_PHARM_API const Base::DataFormat PML;
 
-			/**
-			 * \brief Provides meta-information about the pharmacophore screening database <em>PSD</em> format.
-			 */
-			extern CDPL_PHARM_API const Base::DataFormat PSD;
-		}
-	}
+            /**
+             * \brief Provides meta-information about the pharmacophore screening database <em>PSD</em> format.
+             */
+            extern CDPL_PHARM_API const Base::DataFormat PSD;
+        }
+    }
 }
 
 #endif // CDPL_PHARM_DATAFORMAT_HPP

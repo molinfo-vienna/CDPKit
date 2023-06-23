@@ -39,78 +39,78 @@ using namespace CDPL;
 
 
 Vis::QtFontMetrics::QtFontMetrics(QPaintDevice* paint_dev): 
-	qPaintDevice(paint_dev), qFontMetrics(new QFontMetricsF(QFont(), paint_dev)) {}
+    qPaintDevice(paint_dev), qFontMetrics(new QFontMetricsF(QFont(), paint_dev)) {}
 
 Vis::QtFontMetrics::~QtFontMetrics() {}
 
 void Vis::QtFontMetrics::setFont(const Font& font)
 {
-	qFontMetrics = std::auto_ptr<QFontMetricsF>(new QFontMetricsF(QtObjectFactory::createQFont(font), qPaintDevice));
+    qFontMetrics = std::auto_ptr<QFontMetricsF>(new QFontMetricsF(QtObjectFactory::createQFont(font), qPaintDevice));
 }
 
 double Vis::QtFontMetrics::getAscent() const
 {
-	return qFontMetrics->ascent();
+    return qFontMetrics->ascent();
 }
 
 double Vis::QtFontMetrics::getDescent() const
 {
-	return qFontMetrics->descent();
+    return qFontMetrics->descent();
 } 
 
 double Vis::QtFontMetrics::getHeight() const
 {
-	return qFontMetrics->height();
+    return qFontMetrics->height();
 }
 
 double Vis::QtFontMetrics::getLeading() const
 {
-	return qFontMetrics->leading();
+    return qFontMetrics->leading();
 } 
 
 double Vis::QtFontMetrics::getWidth(const std::string& str) const
 {
-	return qFontMetrics->width(QString::fromStdString(str));
+    return qFontMetrics->width(QString::fromStdString(str));
 } 
 
 double Vis::QtFontMetrics::getWidth(char ch) const
 {
-	return qFontMetrics->width(ch);
+    return qFontMetrics->width(ch);
 } 
 
 void Vis::QtFontMetrics::getBounds(const std::string& str, Rectangle2D& bounds) const
 {
-	if (str.size() == 1)
-		return getBounds(str[0], bounds);
+    if (str.size() == 1)
+        return getBounds(str[0], bounds);
 
-	// Qt4 has some problems with the determination of the right string bounding box height! 
+    // Qt4 has some problems with the determination of the right string bounding box height! 
 
-	/*
-	  QRectF str_bounds = qFontMetrics->boundingRect(QString::fromStdString(str));
+    /*
+      QRectF str_bounds = qFontMetrics->boundingRect(QString::fromStdString(str));
 
-	  bounds.setBounds(str_bounds.left(), str_bounds.top(), str_bounds.right(), str_bounds.bottom());
-	*/
+      bounds.setBounds(str_bounds.left(), str_bounds.top(), str_bounds.right(), str_bounds.bottom());
+    */
 
-	// This is the (slower) workaround:
+    // This is the (slower) workaround:
 
-	QRectF str_bounds = qFontMetrics->boundingRect(QString::fromStdString(str));
+    QRectF str_bounds = qFontMetrics->boundingRect(QString::fromStdString(str));
 
-	bounds.setMin(str_bounds.left(), 0.0);
-	bounds.setMax(str_bounds.right(), 0.0);
+    bounds.setMin(str_bounds.left(), 0.0);
+    bounds.setMax(str_bounds.right(), 0.0);
 
-	std::string::const_iterator str_end = str.end();
+    std::string::const_iterator str_end = str.end();
 
-	for (std::string::const_iterator it = str.begin(); it != str_end; ++it) {
-		str_bounds = qFontMetrics->boundingRect(*it);
+    for (std::string::const_iterator it = str.begin(); it != str_end; ++it) {
+        str_bounds = qFontMetrics->boundingRect(*it);
 
-		bounds.addPoint(bounds.getMin()[0], str_bounds.top());
-		bounds.addPoint(bounds.getMax()[0], str_bounds.bottom());
-	}
+        bounds.addPoint(bounds.getMin()[0], str_bounds.top());
+        bounds.addPoint(bounds.getMax()[0], str_bounds.bottom());
+    }
 } 
 
 void Vis::QtFontMetrics::getBounds(char ch, Rectangle2D& bounds) const
 {
-	QRectF ch_bounds = qFontMetrics->boundingRect(ch);
+    QRectF ch_bounds = qFontMetrics->boundingRect(ch);
 
-	bounds.setBounds(ch_bounds.left(), ch_bounds.top(), ch_bounds.right(), ch_bounds.bottom());
+    bounds.setBounds(ch_bounds.left(), ch_bounds.top(), ch_bounds.right(), ch_bounds.bottom());
 } 

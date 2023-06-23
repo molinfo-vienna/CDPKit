@@ -36,22 +36,22 @@ namespace
 {
 
     struct MultiConfMoleculeInputProcessorWrapper :
-		CDPL::Chem::MultiConfMoleculeInputProcessor, boost::python::wrapper<CDPL::Chem::MultiConfMoleculeInputProcessor> 
+        CDPL::Chem::MultiConfMoleculeInputProcessor, boost::python::wrapper<CDPL::Chem::MultiConfMoleculeInputProcessor> 
     {
-	
-		typedef std::shared_ptr<MultiConfMoleculeInputProcessorWrapper> SharedPointer;
+    
+        typedef std::shared_ptr<MultiConfMoleculeInputProcessorWrapper> SharedPointer;
 
-		bool init(CDPL::Chem::MolecularGraph& tgt_molgraph) const {
-			return this->get_override("init")(boost::ref(tgt_molgraph));
-		}
+        bool init(CDPL::Chem::MolecularGraph& tgt_molgraph) const {
+            return this->get_override("init")(boost::ref(tgt_molgraph));
+        }
 
-		bool isConformation(CDPL::Chem::MolecularGraph& tgt_molgraph, CDPL::Chem::MolecularGraph& conf_molgraph) const {
-			return this->get_override("isConformation")(boost::ref(tgt_molgraph), boost::ref(conf_molgraph));
-		}
+        bool isConformation(CDPL::Chem::MolecularGraph& tgt_molgraph, CDPL::Chem::MolecularGraph& conf_molgraph) const {
+            return this->get_override("isConformation")(boost::ref(tgt_molgraph), boost::ref(conf_molgraph));
+        }
 
-		bool addConformation(CDPL::Chem::MolecularGraph& tgt_molgraph, CDPL::Chem::MolecularGraph& conf_molgraph) const {
-			return this->get_override("addConformation")(boost::ref(tgt_molgraph), boost::ref(conf_molgraph));
-		}
+        bool addConformation(CDPL::Chem::MolecularGraph& tgt_molgraph, CDPL::Chem::MolecularGraph& conf_molgraph) const {
+            return this->get_override("addConformation")(boost::ref(tgt_molgraph), boost::ref(conf_molgraph));
+        }
     };
 }
 
@@ -62,15 +62,15 @@ void CDPLPythonChem::exportMultiConfMoleculeInputProcessor()
     using namespace CDPL;
 
     python::class_<MultiConfMoleculeInputProcessorWrapper, MultiConfMoleculeInputProcessorWrapper::SharedPointer,
-				   boost::noncopyable>("MultiConfMoleculeInputProcessor", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MultiConfMoleculeInputProcessor>())
-		.def("init", python::pure_virtual(&Chem::MultiConfMoleculeInputProcessor::init), 
-			 python::arg("tgt_molgraph"))
-		.def("isConformation", python::pure_virtual(&Chem::MultiConfMoleculeInputProcessor::isConformation), 
-			 (python::arg("tgt_molgraph"), python::arg("conf_molgraph")))
-		.def("addConformation", python::pure_virtual(&Chem::MultiConfMoleculeInputProcessor::addConformation), 
-			 (python::arg("tgt_molgraph"), python::arg("conf_molgraph")));
+                   boost::noncopyable>("MultiConfMoleculeInputProcessor", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MultiConfMoleculeInputProcessor>())
+        .def("init", python::pure_virtual(&Chem::MultiConfMoleculeInputProcessor::init), 
+             python::arg("tgt_molgraph"))
+        .def("isConformation", python::pure_virtual(&Chem::MultiConfMoleculeInputProcessor::isConformation), 
+             (python::arg("tgt_molgraph"), python::arg("conf_molgraph")))
+        .def("addConformation", python::pure_virtual(&Chem::MultiConfMoleculeInputProcessor::addConformation), 
+             (python::arg("tgt_molgraph"), python::arg("conf_molgraph")));
 
     python::register_ptr_to_python<Chem::MultiConfMoleculeInputProcessor::SharedPointer>();
 }

@@ -40,15 +40,15 @@ namespace CDPL
     namespace Grid 
     {
 
-		class AttributedGrid;
-	
-		CDPL_GRID_API const std::string& getName(const AttributedGrid& grid);
+        class AttributedGrid;
+    
+        CDPL_GRID_API const std::string& getName(const AttributedGrid& grid);
 
-		CDPL_GRID_API void setName(AttributedGrid& grid, const std::string& name);
+        CDPL_GRID_API void setName(AttributedGrid& grid, const std::string& name);
 
-		CDPL_GRID_API void clearName(AttributedGrid& grid);
+        CDPL_GRID_API void clearName(AttributedGrid& grid);
 
-		CDPL_GRID_API bool hasName(const AttributedGrid& grid);
+        CDPL_GRID_API bool hasName(const AttributedGrid& grid);
     }
 }
 

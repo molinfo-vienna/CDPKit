@@ -55,88 +55,88 @@ const ConfGen::ConformerDataArray* ConfGen::FragmentConformerCache::getEntry(std
     HashToCacheEntryMap::const_iterator it = inst.hashToEntryMap.find(frag_hash);
 
     if (it == inst.hashToEntryMap.end())
-		return 0;
+        return 0;
 
-	Entry* entry = it->second;
+    Entry* entry = it->second;
 
-	// unlink entry
-	entry->previous->next = entry->next;
-	entry->next->previous = entry->previous;
+    // unlink entry
+    entry->previous->next = entry->next;
+    entry->next->previous = entry->previous;
 
-	// insert entry before current head of the LRU list  
-	entry->next = inst.lruListHead;
-	entry->previous = inst.lruListHead->previous;
-	entry->previous->next = entry;
-	inst.lruListHead->previous = entry;
-	
-	// make entry new head of the LRU list  
-	inst.lruListHead = entry;
+    // insert entry before current head of the LRU list  
+    entry->next = inst.lruListHead;
+    entry->previous = inst.lruListHead->previous;
+    entry->previous->next = entry;
+    inst.lruListHead->previous = entry;
+    
+    // make entry new head of the LRU list  
+    inst.lruListHead = entry;
 
     return &entry->conformers;
 }
 
 void ConfGen::FragmentConformerCache::addEntry(std::uint64_t frag_hash, 
-											   const ConformerDataArray::const_iterator& confs_beg, 
-											   const ConformerDataArray::const_iterator& confs_end)
+                                               const ConformerDataArray::const_iterator& confs_beg, 
+                                               const ConformerDataArray::const_iterator& confs_end)
 {
     FragmentConformerCache& inst = getInstance();
     HashToCacheEntryMap::const_iterator it = inst.hashToEntryMap.find(frag_hash);
 
     if (it != inst.hashToEntryMap.end())
-		return;
+        return;
 
-	std::ptrdiff_t num_new_confs = confs_end - confs_beg;
+    std::ptrdiff_t num_new_confs = confs_end - confs_beg;
 
-	if (num_new_confs <= 0) // sanity check
-		return;
+    if (num_new_confs <= 0) // sanity check
+        return;
 
-	if (!inst.lruListHead) { // create first entry
-		Entry* new_entry = new Entry();
+    if (!inst.lruListHead) { // create first entry
+        Entry* new_entry = new Entry();
 
-		new_entry->next = new_entry;
-		new_entry->previous = new_entry;
+        new_entry->next = new_entry;
+        new_entry->previous = new_entry;
 
-		inst.lruListHead = new_entry;
-		inst.numEntries = 1;
+        inst.lruListHead = new_entry;
+        inst.numEntries = 1;
 
-	} else if (inst.numEntries < MAX_CACHE_SIZE) { // add new entry
-		Entry* new_entry = new Entry();
+    } else if (inst.numEntries < MAX_CACHE_SIZE) { // add new entry
+        Entry* new_entry = new Entry();
 
-		new_entry->next = inst.lruListHead;
-		new_entry->previous = inst.lruListHead->previous;
-		new_entry->previous->next = new_entry;
-		inst.lruListHead->previous = new_entry;
+        new_entry->next = inst.lruListHead;
+        new_entry->previous = inst.lruListHead->previous;
+        new_entry->previous->next = new_entry;
+        inst.lruListHead->previous = new_entry;
 
-		inst.numEntries++;
+        inst.numEntries++;
 
     } else // reuse old entry at LRU list tail
-		inst.hashToEntryMap.erase(inst.lruListHead->previous->fragHash);
+        inst.hashToEntryMap.erase(inst.lruListHead->previous->fragHash);
     
-	Entry* entry = inst.lruListHead->previous;
+    Entry* entry = inst.lruListHead->previous;
 
-	entry->fragHash = frag_hash;
-	entry->conformers.reserve(num_new_confs);
+    entry->fragHash = frag_hash;
+    entry->conformers.reserve(num_new_confs);
 
-	while (entry->conformers.size() > std::size_t(num_new_confs)) {
-		inst.confDataCache.push_back(entry->conformers.back());
-		entry->conformers.pop_back();
-	}
+    while (entry->conformers.size() > std::size_t(num_new_confs)) {
+        inst.confDataCache.push_back(entry->conformers.back());
+        entry->conformers.pop_back();
+    }
 
-	while (entry->conformers.size() < std::size_t(num_new_confs)) {
-		if (inst.confDataCache.empty()) 
-			entry->conformers.push_back(ConformerData::SharedPointer(new ConformerData()));
+    while (entry->conformers.size() < std::size_t(num_new_confs)) {
+        if (inst.confDataCache.empty()) 
+            entry->conformers.push_back(ConformerData::SharedPointer(new ConformerData()));
 
-		else {
-			entry->conformers.push_back(inst.confDataCache.back());
-			inst.confDataCache.pop_back();
-		}
-	}
+        else {
+            entry->conformers.push_back(inst.confDataCache.back());
+            inst.confDataCache.pop_back();
+        }
+    }
 
-	for (ConformerDataArray::const_iterator src_it = confs_beg, tgt_it = entry->conformers.begin(); src_it != confs_end; ++src_it, ++tgt_it)
-		(*src_it)->swap(**tgt_it);
+    for (ConformerDataArray::const_iterator src_it = confs_beg, tgt_it = entry->conformers.begin(); src_it != confs_end; ++src_it, ++tgt_it)
+        (*src_it)->swap(**tgt_it);
 
-	inst.hashToEntryMap.insert(HashToCacheEntryMap::value_type(frag_hash, entry));
-	inst.lruListHead = entry;
+    inst.hashToEntryMap.insert(HashToCacheEntryMap::value_type(frag_hash, entry));
+    inst.lruListHead = entry;
 }
 
 std::mutex& ConfGen::FragmentConformerCache::getMutex()

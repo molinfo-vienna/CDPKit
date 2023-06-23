@@ -41,73 +41,73 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
+        class Reaction;
 
-		/**
-		 * \brief ReactionComponentGroupingMatchExpression.
-		 * \see [\ref SMARTS]
-		 */
-		class CDPL_CHEM_API ReactionComponentGroupingMatchExpression : public MatchExpression<Reaction>
-		{
+        /**
+         * \brief ReactionComponentGroupingMatchExpression.
+         * \see [\ref SMARTS]
+         */
+        class CDPL_CHEM_API ReactionComponentGroupingMatchExpression : public MatchExpression<Reaction>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionComponentGroupingMatchExpression
-			 *        instances.
-			 */
-			typedef std::shared_ptr<ReactionComponentGroupingMatchExpression> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionComponentGroupingMatchExpression
+             *        instances.
+             */
+            typedef std::shared_ptr<ReactionComponentGroupingMatchExpression> SharedPointer;
 
-			/**
-			 * \brief Constructs a \c %ReactionComponentGroupingMatchExpression instance for the specified component-level grouping.
-			 * \param comp_grouping Specifies the component-level grouping constraints that must be fulfilled by matching target reactions.
-			 */
-			ReactionComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
+            /**
+             * \brief Constructs a \c %ReactionComponentGroupingMatchExpression instance for the specified component-level grouping.
+             * \param comp_grouping Specifies the component-level grouping constraints that must be fulfilled by matching target reactions.
+             */
+            ReactionComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 
-			ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs);
+            ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs);
 
-			/**
-			 * \brief Checks whether the provided query to target atom/bond mapping candidate statisfies the component-level grouping constraints
-			 *        specified in the constructor.
-			 *
-			 * Component-level grouping constraints are specified as a list of Chem::Fragment objects (see constructor argument
-			 * \a comp_grouping). The expression evaluates to \c true only if for each of the specified fragments the provided
-			 * query to target atom/bond mapping candidate is able to satisfy the following conditions: All query reaction atoms stored in
-			 * a given Chem::Fragment object must map to atoms that are part of the same molecular graph component of the target
-			 * reaction. Query atoms in different Chem::Fragment objects must also map to atoms in different target molecular graph
-			 * components. If the provided mapping candidate fails to fulfill one of these requirements, the expression evaluates
-			 * to \c false.
-			 *
-			 * \param query_rxn The query reaction (ignored).
-			 * \param target_rxn The target reaction.
-			 * \param mapping The currrent query to target atom/bond mapping candidate.
-			 * \param aux_data Auxiliary information for expression evaluation (ignored).
-			 * \return \c true if the provided query to target mapping fulfills the component-level grouping constraints, and \c false
-			 *         otherwise.
-			 * \note If invalid component-level grouping constraints have been specified (\e null pointer or empty fragment list), the expression will always
-			 *       evaluate to \c true.
-			 */
-			bool operator()(const Reaction& query_rxn, const Reaction& target_rxn, const AtomBondMapping& mapping, 
-							const Base::Any& aux_data) const;
+            /**
+             * \brief Checks whether the provided query to target atom/bond mapping candidate statisfies the component-level grouping constraints
+             *        specified in the constructor.
+             *
+             * Component-level grouping constraints are specified as a list of Chem::Fragment objects (see constructor argument
+             * \a comp_grouping). The expression evaluates to \c true only if for each of the specified fragments the provided
+             * query to target atom/bond mapping candidate is able to satisfy the following conditions: All query reaction atoms stored in
+             * a given Chem::Fragment object must map to atoms that are part of the same molecular graph component of the target
+             * reaction. Query atoms in different Chem::Fragment objects must also map to atoms in different target molecular graph
+             * components. If the provided mapping candidate fails to fulfill one of these requirements, the expression evaluates
+             * to \c false.
+             *
+             * \param query_rxn The query reaction (ignored).
+             * \param target_rxn The target reaction.
+             * \param mapping The currrent query to target atom/bond mapping candidate.
+             * \param aux_data Auxiliary information for expression evaluation (ignored).
+             * \return \c true if the provided query to target mapping fulfills the component-level grouping constraints, and \c false
+             *         otherwise.
+             * \note If invalid component-level grouping constraints have been specified (\e null pointer or empty fragment list), the expression will always
+             *       evaluate to \c true.
+             */
+            bool operator()(const Reaction& query_rxn, const Reaction& target_rxn, const AtomBondMapping& mapping, 
+                            const Base::Any& aux_data) const;
 
-			/**
-			 * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
-			 * \return \c true.
-			 */
-			bool requiresAtomBondMapping() const;
+            /**
+             * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
+             * \return \c true.
+             */
+            bool requiresAtomBondMapping() const;
 
-			ReactionComponentGroupingMatchExpression& operator=(const ReactionComponentGroupingMatchExpression& rhs);
+            ReactionComponentGroupingMatchExpression& operator=(const ReactionComponentGroupingMatchExpression& rhs);
 
-		private:
-			typedef std::vector<const Fragment*> ComponentList;
+        private:
+            typedef std::vector<const Fragment*> ComponentList;
 
-			FragmentList::SharedPointer compGrouping;
-			mutable ComponentList       compList;
-			mutable std::mutex          mutex;
-		};
-	}
+            FragmentList::SharedPointer compGrouping;
+            mutable ComponentList       compList;
+            mutable std::mutex          mutex;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_REACTIONCOMPONENTGROUPINGMATCHEXPRESSION_HPP

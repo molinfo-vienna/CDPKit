@@ -39,122 +39,122 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MDLDataWriter;
-		class Reaction;
+        class MDLDataWriter;
+        class Reaction;
 
-		/**
-		 * \brief A writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
-		 *
-		 * \c %RDFReactionWriter supports the following control-parameters:
-		 *
-		 * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-		 *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-		 *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::COORDINATES_DIMENSION</td>
-		 *   <td align="center">\c 0</td>
-		 *   <td>Specifies the dimension of atom coordinates</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a write operation to fail</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::BOND_MEMBER_SWAP_STEREO_FIX</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether reverse stereo bonds shall be converted to regular stereo bonds by swapping bond start and end
-		 *       atoms</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_CTAB_VERSION</td>
-		 *   <td align="center">\c 0</td>
-		 *   <td>Specifies the desired connection table format</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_RXN_FILE_VERSION</td>
-		 *   <td align="center">\c 0</td>
-		 *   <td>Specifies the desired \e Rxn-File format</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_IGNORE_PARITY</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether the stereo parity of atoms shall be ignored</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_UPDATE_TIMESTAMP</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether the timestamp of \e Mol- and \e Rxn-File header blocks has to be updated</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRIM_STRINGS</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to remove leading and trailing whitespace from string values</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRIM_LINES</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether to remove leading and trailing whitespace from data lines</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRUNCATE_STRINGS</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether string values that exceed the size of an output data field may be truncated</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRUNCATE_LINES</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether data lines that exceed the maximum allowed line length may be truncated</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_IGNORE_LINE_LENGTH_LIMIT</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to check if data lines exceed the maximum allowed line length</td>
-		 *  </tr>
-		 * </table>
-		 */
-		class CDPL_CHEM_API RDFReactionWriter : public Base::DataWriter<Reaction>
-		{
+        /**
+         * \brief A writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+         *
+         * \c %RDFReactionWriter supports the following control-parameters:
+         *
+         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
+         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
+         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::COORDINATES_DIMENSION</td>
+         *   <td align="center">\c 0</td>
+         *   <td>Specifies the dimension of atom coordinates</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a write operation to fail</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::BOND_MEMBER_SWAP_STEREO_FIX</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether reverse stereo bonds shall be converted to regular stereo bonds by swapping bond start and end
+         *       atoms</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_CTAB_VERSION</td>
+         *   <td align="center">\c 0</td>
+         *   <td>Specifies the desired connection table format</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_RXN_FILE_VERSION</td>
+         *   <td align="center">\c 0</td>
+         *   <td>Specifies the desired \e Rxn-File format</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_IGNORE_PARITY</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether the stereo parity of atoms shall be ignored</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_UPDATE_TIMESTAMP</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether the timestamp of \e Mol- and \e Rxn-File header blocks has to be updated</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRIM_STRINGS</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to remove leading and trailing whitespace from string values</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRIM_LINES</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether to remove leading and trailing whitespace from data lines</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRUNCATE_STRINGS</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether string values that exceed the size of an output data field may be truncated</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRUNCATE_LINES</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether data lines that exceed the maximum allowed line length may be truncated</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_IGNORE_LINE_LENGTH_LIMIT</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to check if data lines exceed the maximum allowed line length</td>
+         *  </tr>
+         * </table>
+         */
+        class CDPL_CHEM_API RDFReactionWriter : public Base::DataWriter<Reaction>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %RDFReactionWriter instance that will write the reaction data to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			RDFReactionWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %RDFReactionWriter instance that will write the reaction data to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            RDFReactionWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~RDFReactionWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~RDFReactionWriter();
 
-			/**
-			 * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
-			 * \param rxn The reaction to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<Reaction>& write(const Reaction& rxn);
+            /**
+             * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
+             * \param rxn The reaction to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<Reaction>& write(const Reaction& rxn);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			RDFReactionWriter(const RDFReactionWriter&);
+        private:
+            RDFReactionWriter(const RDFReactionWriter&);
 
-			RDFReactionWriter& operator=(const RDFReactionWriter&);
+            RDFReactionWriter& operator=(const RDFReactionWriter&);
 
-			typedef std::auto_ptr<MDLDataWriter> MDLDataWriterPtr;
+            typedef std::auto_ptr<MDLDataWriter> MDLDataWriterPtr;
 
-			std::ostream&    output;
-			bool             state;
-			MDLDataWriterPtr writer;
-		};
-	}
+            std::ostream&    output;
+            bool             state;
+            MDLDataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_RDFREACTIONWRITER_HPP

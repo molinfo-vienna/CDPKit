@@ -38,69 +38,69 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-	}
+        class MolecularGraph;
+        class Atom;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief BurdenMatrixGenerator.
-		 * \see [\ref BURMA]
-		 */
-		class CDPL_DESCR_API BurdenMatrixGenerator
-		{
+        /**
+         * \brief BurdenMatrixGenerator.
+         * \see [\ref BURMA]
+         */
+        class CDPL_DESCR_API BurdenMatrixGenerator
+        {
 
-		public:
-			/**
-			 * \brief Type of the generic functor class used to store user-defined atom weight functions.
-			 *
-			 * The provided atom weight function (or function object) is required to take the atom (as a
-			 * \c const reference to Chem::Atom) as argument and return the weight of the atom as
-			 * a floating-point value of type \c double (see [\ref FUNWRP]).
-			 */
-			typedef std::function<double(const Chem::Atom&)> AtomWeightFunction;
+        public:
+            /**
+             * \brief Type of the generic functor class used to store user-defined atom weight functions.
+             *
+             * The provided atom weight function (or function object) is required to take the atom (as a
+             * \c const reference to Chem::Atom) as argument and return the weight of the atom as
+             * a floating-point value of type \c double (see [\ref FUNWRP]).
+             */
+            typedef std::function<double(const Chem::Atom&)> AtomWeightFunction;
 
-			/**
-			 * \brief Constructs the \c %BurdenMatrixGenerator instance.
-			 */
-			BurdenMatrixGenerator();
+            /**
+             * \brief Constructs the \c %BurdenMatrixGenerator instance.
+             */
+            BurdenMatrixGenerator();
 
-			/**
-			 * \brief Constructs the \c %BCUTDescriptorGenerator instance and generates the \e Burden matrix of
-			 *        the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the \e Burden matrix.
-			 * \param mtx The generated \e Burden matrix of the specified molecular graph.
-			 */
-			BurdenMatrixGenerator(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
+            /**
+             * \brief Constructs the \c %BCUTDescriptorGenerator instance and generates the \e Burden matrix of
+             *        the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to generate the \e Burden matrix.
+             * \param mtx The generated \e Burden matrix of the specified molecular graph.
+             */
+            BurdenMatrixGenerator(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
 
-			/**
-			 * \brief Allows to specify a custom atom weight function for the diagonal elements of the \e Burden matrix.
-			 * \param func A BurdenMatrixGenerator::AtomWeightFunction instance that wraps the target function.
-			 * \note By default, the diagonal elements of the \e Burden matrix are atom types (see namespace
-			 *       Chem::AtomType).
-			 */
-			void setAtomWeightFunction(const AtomWeightFunction& func);
+            /**
+             * \brief Allows to specify a custom atom weight function for the diagonal elements of the \e Burden matrix.
+             * \param func A BurdenMatrixGenerator::AtomWeightFunction instance that wraps the target function.
+             * \note By default, the diagonal elements of the \e Burden matrix are atom types (see namespace
+             *       Chem::AtomType).
+             */
+            void setAtomWeightFunction(const AtomWeightFunction& func);
 
-			/**
-			 * \brief Generates the \e Burden matrix of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the \e Burden matrix.
-			 * \param mtx The generated \e Burden matrix of the specified molecular graph.
-			 */
-			void generate(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
+            /**
+             * \brief Generates the \e Burden matrix of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to generate the \e Burden matrix.
+             * \param mtx The generated \e Burden matrix of the specified molecular graph.
+             */
+            void generate(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
 
-		private:
-			BurdenMatrixGenerator(const BurdenMatrixGenerator&);
+        private:
+            BurdenMatrixGenerator(const BurdenMatrixGenerator&);
 
-			BurdenMatrixGenerator& operator=(const BurdenMatrixGenerator&);
+            BurdenMatrixGenerator& operator=(const BurdenMatrixGenerator&);
 
-			AtomWeightFunction atomWeightFunc;
-		}; 
-	}
+            AtomWeightFunction atomWeightFunc;
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_BURDENMATRIXGENERATOR_HPP

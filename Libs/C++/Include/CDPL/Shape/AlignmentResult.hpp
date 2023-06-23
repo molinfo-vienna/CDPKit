@@ -40,70 +40,70 @@ namespace CDPL
 
     namespace Shape
     {
-		
-		class CDPL_SHAPE_API AlignmentResult
-		{
+        
+        class CDPL_SHAPE_API AlignmentResult
+        {
 
-		  public:
-			AlignmentResult();
+          public:
+            AlignmentResult();
 
-			const Math::Matrix4D& getTransform() const;
+            const Math::Matrix4D& getTransform() const;
 
-			void setTransform(const Math::Matrix4D& xform);
+            void setTransform(const Math::Matrix4D& xform);
 
-			double getScore() const;
+            double getScore() const;
 
-			void setScore(double score);
+            void setScore(double score);
 
-			std::size_t getReferenceShapeSetIndex() const;
+            std::size_t getReferenceShapeSetIndex() const;
 
-			void setReferenceShapeSetIndex(std::size_t idx);
+            void setReferenceShapeSetIndex(std::size_t idx);
 
-			std::size_t getReferenceShapeIndex() const;
+            std::size_t getReferenceShapeIndex() const;
 
-			void setReferenceShapeIndex(std::size_t idx);
+            void setReferenceShapeIndex(std::size_t idx);
 
-			std::size_t getAlignedShapeIndex() const;
+            std::size_t getAlignedShapeIndex() const;
 
-			void setAlignedShapeIndex(std::size_t idx);
-		
-			double getReferenceSelfOverlap() const;
+            void setAlignedShapeIndex(std::size_t idx);
+        
+            double getReferenceSelfOverlap() const;
 
-			void setReferenceSelfOverlap(double overlap);
+            void setReferenceSelfOverlap(double overlap);
 
-			double getReferenceColorSelfOverlap() const;
+            double getReferenceColorSelfOverlap() const;
 
-			void setReferenceColorSelfOverlap(double overlap);
+            void setReferenceColorSelfOverlap(double overlap);
 
-			double getAlignedSelfOverlap() const;
+            double getAlignedSelfOverlap() const;
 
-			void setAlignedSelfOverlap(double overlap);
+            void setAlignedSelfOverlap(double overlap);
 
-			double getAlignedColorSelfOverlap() const;
+            double getAlignedColorSelfOverlap() const;
 
-			void setAlignedColorSelfOverlap(double overlap);
+            void setAlignedColorSelfOverlap(double overlap);
 
-			double getOverlap() const;
+            double getOverlap() const;
 
-			void setOverlap(double overlap);
+            void setOverlap(double overlap);
 
-			double getColorOverlap() const;
+            double getColorOverlap() const;
 
-			void setColorOverlap(double overlap);
-				
-		  private:
-			Math::Matrix4D transform;
-			double         score;
-			std::size_t    refShapeSetIdx;
-			std::size_t    refShapeIdx;
-			std::size_t    algdShapeIdx;
-			double         refSelfOverlap;
-			double         refColSelfOverlap;
-			double         algdSelfOverlap;
-			double         algdColSelfOverlap;
-			double         overlap;
-			double         colOverlap;
-		};
+            void setColorOverlap(double overlap);
+                
+          private:
+            Math::Matrix4D transform;
+            double         score;
+            std::size_t    refShapeSetIdx;
+            std::size_t    refShapeIdx;
+            std::size_t    algdShapeIdx;
+            double         refSelfOverlap;
+            double         refColSelfOverlap;
+            double         algdSelfOverlap;
+            double         algdColSelfOverlap;
+            double         overlap;
+            double         colOverlap;
+        };
     }
 }
 

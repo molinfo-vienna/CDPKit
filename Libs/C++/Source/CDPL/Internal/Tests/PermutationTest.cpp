@@ -31,35 +31,35 @@
 
 BOOST_AUTO_TEST_CASE(PermutationTest)
 {
-	using namespace CDPL;
-	using namespace Internal;
+    using namespace CDPL;
+    using namespace Internal;
 
-	int data[25 * 4] = { 0, 1, 2, 3 };
+    int data[25 * 4] = { 0, 1, 2, 3 };
 
-	BOOST_CHECK(nextPermutation(data, data) == 0);
-	BOOST_CHECK(nextPermutation(data, data + 1) == 0);
+    BOOST_CHECK(nextPermutation(data, data) == 0);
+    BOOST_CHECK(nextPermutation(data, data + 1) == 0);
 
-	int* data_ptr = data;
+    int* data_ptr = data;
 
-	for (int i = 0; i < 24; i++, data_ptr += 4) {
-		std::copy(data_ptr, data_ptr + 4, data_ptr + 4);
-		
-		nextPermutation(data_ptr + 4, data_ptr + 8);
-	}
+    for (int i = 0; i < 24; i++, data_ptr += 4) {
+        std::copy(data_ptr, data_ptr + 4, data_ptr + 4);
+        
+        nextPermutation(data_ptr + 4, data_ptr + 8);
+    }
 
-	BOOST_CHECK(std::equal(data_ptr, data_ptr + 4, data));
+    BOOST_CHECK(std::equal(data_ptr, data_ptr + 4, data));
 
-	bool no_duplicates = true;
+    bool no_duplicates = true;
 
-	for (int i = 0; i < 24 && no_duplicates; i++) {
-		for (int j = i + 1; j < 24; j++) {
-			if (std::equal(data + i * 4, data + i * 4 + 4, data + j * 4)) {
-				no_duplicates = false;
-				break;
-			}
-		}
-	}
+    for (int i = 0; i < 24 && no_duplicates; i++) {
+        for (int j = i + 1; j < 24; j++) {
+            if (std::equal(data + i * 4, data + i * 4 + 4, data + j * 4)) {
+                no_duplicates = false;
+                break;
+            }
+        }
+    }
 
-	BOOST_CHECK(no_duplicates);
+    BOOST_CHECK(no_duplicates);
 }
 

@@ -38,63 +38,63 @@
 namespace
 {
 
-	template <typename T>
-	struct ConstVectorExpressionExport
-	{
+    template <typename T>
+    struct ConstVectorExpressionExport
+    {
 
-		typedef CDPLPythonMath::ConstVectorExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef CDPLPythonMath::ConstVectorExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
 
-		ConstVectorExpressionExport(const char* name) {
-			using namespace boost;
+        ConstVectorExpressionExport(const char* name) {
+            using namespace boost;
 
-			python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
-				.def(CDPLPythonMath::ConstVectorVisitor<ExpressionType>("e"));
-		}
-	};
+            python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
+                .def(CDPLPythonMath::ConstVectorVisitor<ExpressionType>("e"));
+        }
+    };
 
-	template <typename T>
-	struct VectorExpressionExport
-	{
+    template <typename T>
+    struct VectorExpressionExport
+    {
 
-		typedef CDPLPythonMath::VectorExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
-		typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
+        typedef CDPLPythonMath::VectorExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
-		VectorExpressionExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        VectorExpressionExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<ExpressionType, ExpressionPointer, 
-				python::bases<ConstVectorExpression<T> >, boost::noncopyable>(name, python::no_init)
-				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
-				.def(VectorAssignAndSwapVisitor<ExpressionType>("e"))
-				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstVectorExpression>("e"))
-				.def(VectorNDArrayAssignVisitor<ExpressionType, false>())
-				.def(VectorVisitor<ExpressionType>("e"));
+            python::class_<ExpressionType, ExpressionPointer, 
+                python::bases<ConstVectorExpression<T> >, boost::noncopyable>(name, python::no_init)
+                .def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
+                .def(VectorAssignAndSwapVisitor<ExpressionType>("e"))
+                .def(AssignFunctionGeneratorVisitor<ExpressionType, ConstVectorExpression>("e"))
+                .def(VectorNDArrayAssignVisitor<ExpressionType, false>())
+                .def(VectorVisitor<ExpressionType>("e"));
 
-			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
-		}
+            python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
+        }
 
-		static void swapExpr(ExpressionType& vec1, const ExpressionPointer& vec2_expr) {
-			vec1.swap(*vec2_expr);
-		}
-	};
+        static void swapExpr(ExpressionType& vec1, const ExpressionPointer& vec2_expr) {
+            vec1.swap(*vec2_expr);
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportVectorExpressionTypes()
 {
-	ConstVectorExpressionExport<float>("ConstFVectorExpression");
-	VectorExpressionExport<float>("FVectorExpression");
+    ConstVectorExpressionExport<float>("ConstFVectorExpression");
+    VectorExpressionExport<float>("FVectorExpression");
 
-	ConstVectorExpressionExport<double>("ConstDVectorExpression");
-	VectorExpressionExport<double>("DVectorExpression");
+    ConstVectorExpressionExport<double>("ConstDVectorExpression");
+    VectorExpressionExport<double>("DVectorExpression");
 
-	ConstVectorExpressionExport<long>("ConstLVectorExpression");
-	VectorExpressionExport<long>("LVectorExpression");
+    ConstVectorExpressionExport<long>("ConstLVectorExpression");
+    VectorExpressionExport<long>("LVectorExpression");
 
-	ConstVectorExpressionExport<unsigned long>("ConstULVectorExpression");
-	VectorExpressionExport<unsigned long>("ULVectorExpression");
+    ConstVectorExpressionExport<unsigned long>("ConstULVectorExpression");
+    VectorExpressionExport<unsigned long>("ULVectorExpression");
 }

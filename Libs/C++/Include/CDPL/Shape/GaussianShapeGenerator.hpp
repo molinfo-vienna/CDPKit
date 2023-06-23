@@ -42,94 +42,94 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-	}
+        class Atom;
+    }
 
     namespace Shape
     {
-		
-		class CDPL_SHAPE_API GaussianShapeGenerator
-		{
-			
-		  public:
-		    typedef std::shared_ptr<GaussianShapeGenerator> SharedPointer;
+        
+        class CDPL_SHAPE_API GaussianShapeGenerator
+        {
+            
+          public:
+            typedef std::shared_ptr<GaussianShapeGenerator> SharedPointer;
 
-			GaussianShapeGenerator();
+            GaussianShapeGenerator();
 
-			void generateMoleculeShape(bool generate);
+            void generateMoleculeShape(bool generate);
 
-			bool generateMoleculeShape() const;
+            bool generateMoleculeShape() const;
 
-			void generatePharmacophoreShape(bool generate);
+            void generatePharmacophoreShape(bool generate);
 
-			bool generatePharmacophoreShape() const;
+            bool generatePharmacophoreShape() const;
 
-			void multiConformerMode(bool multi_conf);
+            void multiConformerMode(bool multi_conf);
 
-			bool multiConformerMode() const;
+            bool multiConformerMode() const;
 
-			void includeHydrogens(bool include);
+            void includeHydrogens(bool include);
 
-			bool includeHydrogens() const;
+            bool includeHydrogens() const;
 
-			void setAtomRadius(double radius);
+            void setAtomRadius(double radius);
 
-			double getAtomRadius() const;
+            double getAtomRadius() const;
 
-			void setAtomHardness(double hardness);
+            void setAtomHardness(double hardness);
 
-			double getAtomHardness();
+            double getAtomHardness();
 
-			void setFeatureRadius(double radius);
+            void setFeatureRadius(double radius);
 
-			double getFeatureRadius() const;
-	
-			void setFeatureHardness(double hardness);
+            double getFeatureRadius() const;
+    
+            void setFeatureHardness(double hardness);
 
-			double getFeatureHardness();
+            double getFeatureHardness();
 
-			void setPharmacophoreGenerator(Pharm::PharmacophoreGenerator& gen);
+            void setPharmacophoreGenerator(Pharm::PharmacophoreGenerator& gen);
 
-			Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
+            Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
 
-			const Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator() const;
+            const Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator() const;
 
-			Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator();
+            Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator();
 
-			const GaussianShapeSet& generate(const Chem::MolecularGraph& molgraph);
+            const GaussianShapeSet& generate(const Chem::MolecularGraph& molgraph);
 
-		    const GaussianShapeSet& getShapes() const;
-		  
-		  private:
-			typedef std::vector<const Chem::Atom*> AtomList;
+            const GaussianShapeSet& getShapes() const;
+          
+          private:
+            typedef std::vector<const Chem::Atom*> AtomList;
 
-			template <typename CoordsFunc>
-			void createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, 
-							 GaussianShape& shape);
+            template <typename CoordsFunc>
+            void createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, 
+                             GaussianShape& shape);
 
-			template <typename CoordsFunc>
-			void createShape(const CoordsFunc& coords_func, GaussianShape& shape) const;
+            template <typename CoordsFunc>
+            void createShape(const CoordsFunc& coords_func, GaussianShape& shape) const;
 
-		    typedef Util::ObjectStack<GaussianShape> ShapeCache;
+            typedef Util::ObjectStack<GaussianShape> ShapeCache;
 
-		    ShapeCache                           shapeCache;
-			Pharm::DefaultPharmacophoreGenerator defPharmGen;
-			Pharm::PharmacophoreGenerator*       pharmGen;
-			bool                                 genMolShape;
-			bool                                 genPharmShape;
-			bool                                 incHydrogens;
-			bool                                 multiConf;
-			double                               atomRadius;
-			double                               atomHardness;
-			double                               ftrRadius;
-			double                               ftrHardness;
-		    GaussianShapeSet                     shapes;
-			Pharm::BasicPharmacophore            pharm;
-			AtomList                             shapeAtoms;
-		};
+            ShapeCache                           shapeCache;
+            Pharm::DefaultPharmacophoreGenerator defPharmGen;
+            Pharm::PharmacophoreGenerator*       pharmGen;
+            bool                                 genMolShape;
+            bool                                 genPharmShape;
+            bool                                 incHydrogens;
+            bool                                 multiConf;
+            double                               atomRadius;
+            double                               atomHardness;
+            double                               ftrRadius;
+            double                               ftrHardness;
+            GaussianShapeSet                     shapes;
+            Pharm::BasicPharmacophore            pharm;
+            AtomList                             shapeAtoms;
+        };
     }
 }
 

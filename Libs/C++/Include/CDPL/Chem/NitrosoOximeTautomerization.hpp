@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief NitrosoOximeTautomerizationRule.
-		 */
-		class CDPL_CHEM_API NitrosoOximeTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief NitrosoOximeTautomerizationRule.
+         */
+        class CDPL_CHEM_API NitrosoOximeTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			NitrosoOximeTautomerization();
-		};
+          public:
+            NitrosoOximeTautomerization();
+        };
     }
 }
 

@@ -41,34 +41,34 @@ void GRAIL::CDFAttributedGridPropertyReader::registerExternalPropertyHandlers()
 }
 
 bool GRAIL::CDFAttributedGridPropertyReader::readProperties(unsigned int handler_id, const Grid::CDFDataReader& reader, 
-															 Grid::AttributedGrid& grid, Internal::ByteBuffer& data)
+                                                             Grid::AttributedGrid& grid, Internal::ByteBuffer& data)
 {
     if (handler_id != CDF::AttributedGridProperty::PROPERTY_HANDLER_ID)
-		return false;
+        return false;
 
     CDF::PropertySpec prop_spec;
     CDF::UIntType uint_val;
 
     while (true) {
-		unsigned int prop_id = reader.getPropertySpec(prop_spec, data);
+        unsigned int prop_id = reader.getPropertySpec(prop_spec, data);
 
-		if (prop_id == CDF::PROP_LIST_END)
-			return true;
+        if (prop_id == CDF::PROP_LIST_END)
+            return true;
 
-		switch (prop_id) {
+        switch (prop_id) {
 
-			case CDF::AttributedGridProperty::FEATURE_TYPE:
-				reader.getIntProperty(prop_spec, uint_val, data);
-				setFeatureType(grid, uint_val);
-				continue;
+            case CDF::AttributedGridProperty::FEATURE_TYPE:
+                reader.getIntProperty(prop_spec, uint_val, data);
+                setFeatureType(grid, uint_val);
+                continue;
   
-			case CDF::AttributedGridProperty::TARGET_FEATURE_TYPE:
-				reader.getIntProperty(prop_spec, uint_val, data);
-				setTargetFeatureType(grid, uint_val);
-				continue;
+            case CDF::AttributedGridProperty::TARGET_FEATURE_TYPE:
+                reader.getIntProperty(prop_spec, uint_val, data);
+                setTargetFeatureType(grid, uint_val);
+                continue;
 
-			default:
-				throw Base::IOError("CDFAttributedGridPropertyReader: unsupported grid property");
-		}
+            default:
+                throw Base::IOError("CDFAttributedGridPropertyReader: unsupported grid property");
+        }
     }
 }

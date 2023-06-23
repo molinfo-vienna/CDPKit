@@ -38,23 +38,23 @@ using namespace CDPL;
 
 void ForceField::assignMMFF94AtomTypes(Chem::MolecularGraph& molgraph, bool strict, bool overwrite)
 {
-	using namespace std::placeholders;
-	
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasMMFF94SymbolicType, _1))) == molgraph.getAtomsEnd() &&
-		std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-					 std::bind(std::equal_to<bool>(), false,
-							   std::bind(&hasMMFF94NumericType, _1))) == molgraph.getAtomsEnd())
-		return;
+    using namespace std::placeholders;
+    
+    if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasMMFF94SymbolicType, _1))) == molgraph.getAtomsEnd() &&
+        std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                     std::bind(std::equal_to<bool>(), false,
+                               std::bind(&hasMMFF94NumericType, _1))) == molgraph.getAtomsEnd())
+        return;
 
-	 Util::UIArray num_types;
-	 Util::SArray sym_types;
-	 
-	 MMFF94AtomTyper typer(molgraph, sym_types, num_types, strict);
+     Util::UIArray num_types;
+     Util::SArray sym_types;
+     
+     MMFF94AtomTyper typer(molgraph, sym_types, num_types, strict);
 
-	 for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
-		 setMMFF94SymbolicType(molgraph.getAtom(i), sym_types[i]);
-		 setMMFF94NumericType(molgraph.getAtom(i), num_types[i]);
-	 }
+     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
+         setMMFF94SymbolicType(molgraph.getAtom(i), sym_types[i]);
+         setMMFF94NumericType(molgraph.getAtom(i), num_types[i]);
+     }
 }

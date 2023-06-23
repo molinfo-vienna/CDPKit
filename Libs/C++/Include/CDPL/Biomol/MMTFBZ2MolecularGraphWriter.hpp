@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		typedef Util::CompressedDataWriter<MMTFMolecularGraphWriter, Util::BZip2OStream> MMTFBZ2MolecularGraphWriter;
-	}
+        typedef Util::CompressedDataWriter<MMTFMolecularGraphWriter, Util::BZip2OStream> MMTFBZ2MolecularGraphWriter;
+    }
 }
 
 #endif // CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHWRITER_HPP

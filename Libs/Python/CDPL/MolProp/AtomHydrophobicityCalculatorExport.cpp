@@ -39,12 +39,12 @@ void CDPLPythonMolProp::exportAtomHydrophobicityCalculator()
     using namespace CDPL;
 
     python::class_<MolProp::AtomHydrophobicityCalculator, boost::noncopyable>("AtomHydrophobicityCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const MolProp::AtomHydrophobicityCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::AtomHydrophobicityCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::AtomHydrophobicityCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("calculate", &MolProp::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const MolProp::AtomHydrophobicityCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::AtomHydrophobicityCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::AtomHydrophobicityCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("calculate", &MolProp::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")));
 }

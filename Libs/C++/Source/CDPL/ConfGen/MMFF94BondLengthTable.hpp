@@ -44,35 +44,35 @@ namespace CDPL
 
     namespace ConfGen 
     {
-	
-		class MMFF94BondLengthTable 
-		{
+    
+        class MMFF94BondLengthTable 
+        {
 
-		public:
-			MMFF94BondLengthTable();
+        public:
+            MMFF94BondLengthTable();
 
-			void setup(const Chem::MolecularGraph& molgraph, bool strict_param);
+            void setup(const Chem::MolecularGraph& molgraph, bool strict_param);
 
-			double get(std::size_t atom1_idx, std::size_t atom2_idx) const;
+            double get(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-		private:
-			unsigned int getBondTypeIndex(const Chem::Bond& bond) const;
+        private:
+            unsigned int getBondTypeIndex(const Chem::Bond& bond) const;
 
-			unsigned int getNumericAtomType(const Chem::Atom& atom) const;
+            unsigned int getNumericAtomType(const Chem::Atom& atom) const;
 
-			const Chem::FragmentList::SharedPointer& getAromaticRings(const Chem::MolecularGraph& molgraph) const;
+            const Chem::FragmentList::SharedPointer& getAromaticRings(const Chem::MolecularGraph& molgraph) const;
 
-			const Chem::MolecularGraph*                              molGraph;
-			ForceField::MMFF94AtomTyper                              atomTyper;
-			ForceField::MMFF94BondTyper                              bondTyper;
-			ForceField::MMFF94BondStretchingInteractionParameterizer bondStretchingParameterizer;
-			ForceField::MMFF94AromaticSSSRSubset::SharedPointer      aromRings;
-			Chem::FragmentList::SharedPointer                        usedAromRings;
-			ForceField::MMFF94BondStretchingInteractionData          bondStretchingParams;
-			Util::UIArray                                            numAtomTypes;   
-			Util::SArray                                             symAtomTypes;   
-			Util::UIArray                                            bondTypeIndices;   
-		};
+            const Chem::MolecularGraph*                              molGraph;
+            ForceField::MMFF94AtomTyper                              atomTyper;
+            ForceField::MMFF94BondTyper                              bondTyper;
+            ForceField::MMFF94BondStretchingInteractionParameterizer bondStretchingParameterizer;
+            ForceField::MMFF94AromaticSSSRSubset::SharedPointer      aromRings;
+            Chem::FragmentList::SharedPointer                        usedAromRings;
+            ForceField::MMFF94BondStretchingInteractionData          bondStretchingParams;
+            Util::UIArray                                            numAtomTypes;   
+            Util::SArray                                             symAtomTypes;   
+            Util::UIArray                                            bondTypeIndices;   
+        };
     }
 }
 

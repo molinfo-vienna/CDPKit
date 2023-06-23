@@ -37,35 +37,35 @@
 namespace
 {
 
-	struct GraphicsPrimitive2DWrapper : CDPL::Vis::GraphicsPrimitive2D, boost::python::wrapper<CDPL::Vis::GraphicsPrimitive2D>
-	{
+    struct GraphicsPrimitive2DWrapper : CDPL::Vis::GraphicsPrimitive2D, boost::python::wrapper<CDPL::Vis::GraphicsPrimitive2D>
+    {
 
-		void render(CDPL::Vis::Renderer2D& renderer) const {
-			this->get_override("render")(boost::ref(renderer));
-		}
+        void render(CDPL::Vis::Renderer2D& renderer) const {
+            this->get_override("render")(boost::ref(renderer));
+        }
 
-		CDPL::Vis::GraphicsPrimitive2D::SharedPointer clone() const {
-			return this->get_override("clone")();
-		}
+        CDPL::Vis::GraphicsPrimitive2D::SharedPointer clone() const {
+            return this->get_override("clone")();
+        }
 
-		void getBounds(CDPL::Vis::Rectangle2D& bbox, CDPL::Vis::FontMetrics* fm) const {
-			this->get_override("getBounds")(boost::ref(bbox), fm);
-		}
-	};
+        void getBounds(CDPL::Vis::Rectangle2D& bbox, CDPL::Vis::FontMetrics* fm) const {
+            this->get_override("getBounds")(boost::ref(bbox), fm);
+        }
+    };
 }
 
 
 void CDPLPythonVis::exportGraphicsPrimitive2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<GraphicsPrimitive2DWrapper, boost::noncopyable>("GraphicsPrimitive2D", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::GraphicsPrimitive2D>())	
-		.def("render", python::pure_virtual(&Vis::GraphicsPrimitive2D::render), 
-			 (python::arg("self"), python::arg("renderer")))
-		.def("getBounds", python::pure_virtual(&Vis::GraphicsPrimitive2D::getBounds), 
-			 (python::arg("self"), python::arg("bounds"), python::arg("font_metrics") = 0))
-		.def("clone", python::pure_virtual(&Vis::GraphicsPrimitive2D::clone), python::arg("self"));
+    python::class_<GraphicsPrimitive2DWrapper, boost::noncopyable>("GraphicsPrimitive2D", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::GraphicsPrimitive2D>())    
+        .def("render", python::pure_virtual(&Vis::GraphicsPrimitive2D::render), 
+             (python::arg("self"), python::arg("renderer")))
+        .def("getBounds", python::pure_virtual(&Vis::GraphicsPrimitive2D::getBounds), 
+             (python::arg("self"), python::arg("bounds"), python::arg("font_metrics") = 0))
+        .def("clone", python::pure_virtual(&Vis::GraphicsPrimitive2D::clone), python::arg("self"));
 }

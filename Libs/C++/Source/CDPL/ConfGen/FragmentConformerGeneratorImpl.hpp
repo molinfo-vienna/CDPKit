@@ -56,124 +56,124 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class FragmentConformerGeneratorImpl
-		{
+        class FragmentConformerGeneratorImpl
+        {
 
-		  public:
-			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+          public:
+            typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
-			FragmentConformerGeneratorImpl();
-	
-			FragmentConformerGeneratorSettings& getSettings();
+            FragmentConformerGeneratorImpl();
+    
+            FragmentConformerGeneratorSettings& getSettings();
 
-			const FragmentConformerGeneratorSettings& getSettings() const;
+            const FragmentConformerGeneratorSettings& getSettings() const;
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
+            unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
-			void setConformers(Chem::MolecularGraph& molgraph) const;
+            void setConformers(Chem::MolecularGraph& molgraph) const;
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			bool generateConformerFromInputCoordinates(const Chem::MolecularGraph& molgraph);
+            bool generateConformerFromInputCoordinates(const Chem::MolecularGraph& molgraph);
 
-		  private:
-			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-			typedef std::vector<const Chem::Atom*> AtomList;
+          private:
+            typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+            typedef std::vector<const Chem::Atom*> AtomList;
 
-			FragmentConformerGeneratorImpl(const FragmentConformerGeneratorImpl&);
+            FragmentConformerGeneratorImpl(const FragmentConformerGeneratorImpl&);
 
-			FragmentConformerGeneratorImpl& operator=(const FragmentConformerGeneratorImpl&);
+            FragmentConformerGeneratorImpl& operator=(const FragmentConformerGeneratorImpl&);
 
-			void init(const Chem::MolecularGraph& molgraph);
+            void init(const Chem::MolecularGraph& molgraph);
 
-			bool generateConformerFromInputCoordinates(ConformerDataArray& conf_array);
+            bool generateConformerFromInputCoordinates(ConformerDataArray& conf_array);
 
-			bool setupForceField();
+            bool setupForceField();
 
-			void setupRandomConformerGeneration(bool reg_stereo);
+            void setupRandomConformerGeneration(bool reg_stereo);
 
-			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
+            bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
-			unsigned int generateChainConformer();
-			unsigned int generateRigidRingConformer();
-			unsigned int generateFlexibleRingConformers();
+            unsigned int generateChainConformer();
+            unsigned int generateRigidRingConformer();
+            unsigned int generateFlexibleRingConformers();
 
-			void addSymmetryMappedConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
-			void addMirroredConformer(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
+            void addSymmetryMappedConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
+            void addMirroredConformer(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
 
-			unsigned int generateRandomConformer(ConformerData& conf);
+            unsigned int generateRandomConformer(ConformerData& conf);
 
-			bool checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd);
-			
-			ConformerData::SharedPointer getRingAtomCoordinates(const Math::Vector3DArray& conf_coords);
+            bool checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd);
+            
+            ConformerData::SharedPointer getRingAtomCoordinates(const Math::Vector3DArray& conf_coords);
 
-			void getRingAtomIndices();
-			void getSymmetryMappings();
-			void getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const;
+            void getRingAtomIndices();
+            void getSymmetryMappings();
+            void getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const;
 
-			std::size_t calcNumChainConfSamples() const;
-			std::size_t calcNumSmallRingSystemConfSamples() const;
-			std::size_t calcNumMacrocyclicRingSystemConfSamples() const;
+            std::size_t calcNumChainConfSamples() const;
+            std::size_t calcNumSmallRingSystemConfSamples() const;
+            std::size_t calcNumMacrocyclicRingSystemConfSamples() const;
 
-			ConformerData::SharedPointer allocConformerData();
+            ConformerData::SharedPointer allocConformerData();
 
-			unsigned int invokeCallbacks() const;
-			bool timedout(std::size_t timeout) const;
+            unsigned int invokeCallbacks() const;
+            bool timedout(std::size_t timeout) const;
 
-			bool has3DCoordinates(const Chem::Atom& atom) const;
+            bool has3DCoordinates(const Chem::Atom& atom) const;
 
-			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
-			typedef ForceField::MMFF94InteractionParameterizer MMFF94InteractionParameterizer;
-			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
-			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
-			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
-			typedef std::vector<std::size_t> IndexList;
+            typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
+            typedef ForceField::MMFF94InteractionParameterizer MMFF94InteractionParameterizer;
+            typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+            typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
+            typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
+            typedef std::vector<std::size_t> IndexList;
 
-			ConformerDataCache                     confDataCache;
-			CallbackFunction                       abortCallback;
-			CallbackFunction                       timeoutCallback;
-			LogMessageCallbackFunction             logCallback;
-			Internal::Timer                        timer;
-			const Chem::MolecularGraph*            molGraph;
-			std::size_t                            numAtoms;
-			MMFF94InteractionParameterizer         mmff94Parameterizer;
-			MMFF94InteractionData                  mmff94Data;
-			MMFF94GradientCalculator               mmff94GradientCalc;
-			BFGSMinimizer                          energyMinimizer;
-			DGStructureGenerator                   dgStructureGen;
-			Chem::Hydrogen3DCoordinatesCalculator  hCoordsCalc;
-			Chem::AutomorphismGroupSearch          symMappingSearch;
-			AlignmentCalculator                    alignmentCalc;
-			Math::Vector3DArray::StorageType       energyGradient;
-			IndexList                              ringAtomIndices;
-			IndexList                              symMappings;
-			AtomList                               nbrHydrogens1;
-			AtomList                               nbrHydrogens2;
-			Chem::Fragment                         symMappingSearchMolGraph;
-			Util::BitSet                           coreAtomMask;
-			ConformerDataArray                     ringAtomCoords;
-			ConformerDataArray                     outputConfs;
-			ConformerDataArray                     workingConfs;
-			FragmentConformerGeneratorSettings     settings;
-		};
+            ConformerDataCache                     confDataCache;
+            CallbackFunction                       abortCallback;
+            CallbackFunction                       timeoutCallback;
+            LogMessageCallbackFunction             logCallback;
+            Internal::Timer                        timer;
+            const Chem::MolecularGraph*            molGraph;
+            std::size_t                            numAtoms;
+            MMFF94InteractionParameterizer         mmff94Parameterizer;
+            MMFF94InteractionData                  mmff94Data;
+            MMFF94GradientCalculator               mmff94GradientCalc;
+            BFGSMinimizer                          energyMinimizer;
+            DGStructureGenerator                   dgStructureGen;
+            Chem::Hydrogen3DCoordinatesCalculator  hCoordsCalc;
+            Chem::AutomorphismGroupSearch          symMappingSearch;
+            AlignmentCalculator                    alignmentCalc;
+            Math::Vector3DArray::StorageType       energyGradient;
+            IndexList                              ringAtomIndices;
+            IndexList                              symMappings;
+            AtomList                               nbrHydrogens1;
+            AtomList                               nbrHydrogens2;
+            Chem::Fragment                         symMappingSearchMolGraph;
+            Util::BitSet                           coreAtomMask;
+            ConformerDataArray                     ringAtomCoords;
+            ConformerDataArray                     outputConfs;
+            ConformerDataArray                     workingConfs;
+            FragmentConformerGeneratorSettings     settings;
+        };
     }
 }
 

@@ -35,30 +35,30 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		namespace AtomPropertyDefault
-		{
+        namespace AtomPropertyDefault
+        {
 
-			const std::string SYMBOL                                   = "";
-			const std::string NAME                                     = "";
-			const long FORMAL_CHARGE                                   = 0;
-			const std::size_t ISOTOPE                                  = 0;
-			const std::size_t UNPAIRED_ELECTRON_COUNT                  = 0;
+            const std::string SYMBOL                                   = "";
+            const std::string NAME                                     = "";
+            const long FORMAL_CHARGE                                   = 0;
+            const std::size_t ISOTOPE                                  = 0;
+            const std::size_t UNPAIRED_ELECTRON_COUNT                  = 0;
             const unsigned int TYPE                                    = AtomType::UNKNOWN;
             const unsigned int SYBYL_TYPE                              = SybylAtomType::UNKNOWN;
             const unsigned int RADICAL_TYPE                            = RadicalType::NOT_RADICALIC;
-			const unsigned int REACTION_CENTER_STATUS                  = ReactionCenterStatus::NONE;
-			const StereoDescriptor STEREO_DESCRIPTOR                   = StereoDescriptor(AtomConfiguration::UNDEF);
-			const std::size_t COMPONENT_GROUP_ID                       = 0;
-			const std::size_t ATOM_MAPPING_ID                          = 0;
-			const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-			const double MOL2_CHARGE                                   = 0.0;
-			const std::string MOL2_NAME                                = "";
-			const bool MDL_DB_STEREO_CARE_FLAG                         = false;
-		}
+            const unsigned int REACTION_CENTER_STATUS                  = ReactionCenterStatus::NONE;
+            const StereoDescriptor STEREO_DESCRIPTOR                   = StereoDescriptor(AtomConfiguration::UNDEF);
+            const std::size_t COMPONENT_GROUP_ID                       = 0;
+            const std::size_t ATOM_MAPPING_ID                          = 0;
+            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
+            const double MOL2_CHARGE                                   = 0.0;
+            const std::string MOL2_NAME                                = "";
+            const bool MDL_DB_STEREO_CARE_FLAG                         = false;
+        }
 
-		void initAtomPropertyDefaults() {}
-	}
+        void initAtomPropertyDefaults() {}
+    }
 }

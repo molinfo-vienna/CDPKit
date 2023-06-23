@@ -37,36 +37,36 @@
 namespace
 {
 
-	template <typename GridType>
-	struct ScalarGridExport
-	{
+    template <typename GridType>
+    struct ScalarGridExport
+    {
 
-		ScalarGridExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ScalarGridExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename GridType::SizeType SizeType;
-			typedef typename GridType::ValueType ValueType;
+            typedef typename GridType::SizeType SizeType;
+            typedef typename GridType::ValueType ValueType;
 
-			python::class_<GridType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const GridType&>((python::arg("self"), python::arg("g"))))
-				.def(python::init<SizeType, SizeType, SizeType, const ValueType&>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("v") = ValueType())))
-				.def("resize", &GridType::resize, (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
-				.def(ConstGridVisitor<GridType>())
-				.def(ConstGridContainerVisitor<GridType>())
-				.def(GridAssignAndSwapVisitor<GridType>());
-		}
-	};
+            python::class_<GridType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const GridType&>((python::arg("self"), python::arg("g"))))
+                .def(python::init<SizeType, SizeType, SizeType, const ValueType&>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("v") = ValueType())))
+                .def("resize", &GridType::resize, (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
+                .def(ConstGridVisitor<GridType>())
+                .def(ConstGridContainerVisitor<GridType>())
+                .def(GridAssignAndSwapVisitor<GridType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportScalarGridTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ScalarGridExport<Math::FScalarGrid>("FScalarGrid");
-	ScalarGridExport<Math::DScalarGrid>("DScalarGrid");
+    ScalarGridExport<Math::FScalarGrid>("FScalarGrid");
+    ScalarGridExport<Math::DScalarGrid>("DScalarGrid");
 }

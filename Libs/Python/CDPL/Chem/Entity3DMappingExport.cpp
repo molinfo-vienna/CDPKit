@@ -34,15 +34,15 @@
 
 void CDPLPythonChem::exportEntity3DMapping()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::Entity3DMapping, Chem::Entity3DMapping::SharedPointer>("Entity3DMapping", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Entity3DMapping&>((python::arg("self"), python::arg("mapping")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonUtil::MultiMapVisitor<Chem::Entity3DMapping,
-			 python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
-			 python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
-			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
+    python::class_<Chem::Entity3DMapping, Chem::Entity3DMapping::SharedPointer>("Entity3DMapping", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::Entity3DMapping&>((python::arg("self"), python::arg("mapping")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonUtil::MultiMapVisitor<Chem::Entity3DMapping,
+             python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
+             python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
+             python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
 }

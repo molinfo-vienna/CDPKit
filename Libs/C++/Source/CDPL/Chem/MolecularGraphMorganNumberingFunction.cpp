@@ -39,13 +39,13 @@ using namespace CDPL;
 
 void Chem::calcMorganNumbering(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasMorganNumber, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+    if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasMorganNumber, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
-	Util::STArray numbering;
-	MorganNumberingCalculator calculator(molgraph, numbering);
+    Util::STArray numbering;
+    MorganNumberingCalculator calculator(molgraph, numbering);
 
-	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), numbering.getElementsBegin(), &setMorganNumber);
+    Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), numbering.getElementsBegin(), &setMorganNumber);
 }

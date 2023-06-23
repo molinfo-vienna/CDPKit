@@ -37,23 +37,23 @@ void CDPLPythonPharm::exportCationPiInteractionScore()
     using namespace CDPL;
 
     python::class_<Pharm::CationPiInteractionScore, Pharm::CationPiInteractionScore::SharedPointer,
-				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("CationPiInteractionScore", python::no_init)
-		.def(python::init<const Pharm::CationPiInteractionScore&>((python::arg("self"), python::arg("score"))))
-		.def(python::init<bool, double, double, double>((python::arg("self"), python::arg("aro_cat"), 
-														 python::arg("min_dist") = Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE, 
-														 python::arg("max_dist") = Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE,
-														 python::arg("max_ang") = Pharm::CationPiInteractionScore::DEF_MAX_ANGLE)))
-		.def("setDistanceScoringFunction", &Pharm::CationPiInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("setAngleScoringFunction", &Pharm::CationPiInteractionScore::setAngleScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("getMinDistance", &Pharm::CationPiInteractionScore::getMinDistance, python::arg("self"))
-		.def("getMaxDistance", &Pharm::CationPiInteractionScore::getMaxDistance, python::arg("self"))
-		.def("getMaxAngle", &Pharm::CationPiInteractionScore::getMaxAngle, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionScore::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.add_property("minDistance", &Pharm::CationPiInteractionScore::getMinDistance)
-		.add_property("maxDistance", &Pharm::CationPiInteractionScore::getMaxDistance)
-		.add_property("maxAngle", &Pharm::CationPiInteractionScore::getMaxAngle)
-		.def_readonly("DEF_MIN_DISTANCE", Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE)
-		.def_readonly("DEF_MAX_DISTANCE", Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE)
-		.def_readonly("DEF_MAX_ANGLE", Pharm::CationPiInteractionScore::DEF_MAX_ANGLE);
+                   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("CationPiInteractionScore", python::no_init)
+        .def(python::init<const Pharm::CationPiInteractionScore&>((python::arg("self"), python::arg("score"))))
+        .def(python::init<bool, double, double, double>((python::arg("self"), python::arg("aro_cat"), 
+                                                         python::arg("min_dist") = Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE, 
+                                                         python::arg("max_dist") = Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE,
+                                                         python::arg("max_ang") = Pharm::CationPiInteractionScore::DEF_MAX_ANGLE)))
+        .def("setDistanceScoringFunction", &Pharm::CationPiInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("setAngleScoringFunction", &Pharm::CationPiInteractionScore::setAngleScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("getMinDistance", &Pharm::CationPiInteractionScore::getMinDistance, python::arg("self"))
+        .def("getMaxDistance", &Pharm::CationPiInteractionScore::getMaxDistance, python::arg("self"))
+        .def("getMaxAngle", &Pharm::CationPiInteractionScore::getMaxAngle, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionScore::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .add_property("minDistance", &Pharm::CationPiInteractionScore::getMinDistance)
+        .add_property("maxDistance", &Pharm::CationPiInteractionScore::getMaxDistance)
+        .add_property("maxAngle", &Pharm::CationPiInteractionScore::getMaxAngle)
+        .def_readonly("DEF_MIN_DISTANCE", Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE)
+        .def_readonly("DEF_MAX_DISTANCE", Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE)
+        .def_readonly("DEF_MAX_ANGLE", Pharm::CationPiInteractionScore::DEF_MAX_ANGLE);
 }

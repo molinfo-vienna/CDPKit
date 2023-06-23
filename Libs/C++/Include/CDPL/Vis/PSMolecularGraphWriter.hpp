@@ -39,46 +39,46 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Creates 2D structure diagrams of molecular graphs in the <em>PostScript (PS)</em> [\ref WPS] format. 
-		 *
-		 * \c %PSMolecularGraphWriter uses Vis::StructureView2D for the creation of 2D structure diagrams. All control-parameters and
-		 * properties provided for the customization of Vis::StructureView2D are also supported by \c %PSMolecularGraphWriter.
-		 */
-		class CDPL_VIS_API PSMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>, private ImageWriter
-		{
+        /**
+         * \brief Creates 2D structure diagrams of molecular graphs in the <em>PostScript (PS)</em> [\ref WPS] format. 
+         *
+         * \c %PSMolecularGraphWriter uses Vis::StructureView2D for the creation of 2D structure diagrams. All control-parameters and
+         * properties provided for the customization of Vis::StructureView2D are also supported by \c %PSMolecularGraphWriter.
+         */
+        class CDPL_VIS_API PSMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>, private ImageWriter
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PSMolecularGraphWriter instance that will write the image data to the output stream \a os.
-			 * \param os The output stream to write to.
-			 * \note To ensure the validity of the written data, it is recommended to open the output stream in binary mode.
-			 */
-			PSMolecularGraphWriter(std::ostream& os);
-		
-			/**
-			 * \brief Creates and outputs the 2D structure diagram of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to output the 2D structure diagram.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
+        public:
+            /**
+             * \brief Constructs a \c %PSMolecularGraphWriter instance that will write the image data to the output stream \a os.
+             * \param os The output stream to write to.
+             * \note To ensure the validity of the written data, it is recommended to open the output stream in binary mode.
+             */
+            PSMolecularGraphWriter(std::ostream& os);
+        
+            /**
+             * \brief Creates and outputs the 2D structure diagram of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to output the 2D structure diagram.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			PSMolecularGraphWriter(const PSMolecularGraphWriter&);
+        private:
+            PSMolecularGraphWriter(const PSMolecularGraphWriter&);
 
-			cairo_surface_t* createCairoSurface(double, double) const;
-			cairo_surface_t* createCairoSurface() const;
+            cairo_surface_t* createCairoSurface(double, double) const;
+            cairo_surface_t* createCairoSurface() const;
 
-			std::ostream& output;
-			bool          state;
-		};
-	}
+            std::ostream& output;
+            bool          state;
+        };
+    }
 }
 
 #endif // CDPL_VIS_PSMOLECULARGRAPHWRITER_HPP

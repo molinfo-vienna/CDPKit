@@ -35,40 +35,40 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		/**
-		 * \brief Provides keys for built-in control-parameters.
-		 */
-		namespace ControlParameter
-		{
+        /**
+         * \brief Provides keys for built-in control-parameters.
+         */
+        namespace ControlParameter
+        {
 
-			/**
-			 * \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
-			 *
-			 * If the control-parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
-			 * non-fatal errors from which a recovery would be possible. 
-			 * If the control-parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
-			 * detected.
-			 *
-			 * \valuetype \c bool
-			 */
-			extern CDPL_PHARM_API const Base::LookupKey STRICT_ERROR_CHECKING;
+            /**
+             * \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
+             *
+             * If the control-parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
+             * non-fatal errors from which a recovery would be possible. 
+             * If the control-parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
+             * detected.
+             *
+             * \valuetype \c bool
+             */
+            extern CDPL_PHARM_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
-			extern CDPL_PHARM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
+            extern CDPL_PHARM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
 
-			extern CDPL_PHARM_API const Base::LookupKey PSD_CREATION_MODE;
+            extern CDPL_PHARM_API const Base::LookupKey PSD_CREATION_MODE;
 
-			extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
-		}
-	}
+            extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
+        }
+    }
 }
 
 #endif // CDPL_PHARM_CONTROLPARAMETER_HPP

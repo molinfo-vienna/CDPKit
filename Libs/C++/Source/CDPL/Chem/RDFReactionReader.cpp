@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Chem::RDFReactionReader::RDFReactionReader(std::istream& is): 
-	Util::StreamDataReader<Reaction, RDFReactionReader>(is), reader(new MDLDataReader(*this)) {}
+    Util::StreamDataReader<Reaction, RDFReactionReader>(is), reader(new MDLDataReader(*this)) {}
 
 Chem::RDFReactionReader::~RDFReactionReader() {}
 
 bool Chem::RDFReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
-	try {
-		if (overwrite)
-			rxn.clear();
+    try {
+        if (overwrite)
+            rxn.clear();
 
-		return reader->readRDFileRecord(is, rxn);
+        return reader->readRDFileRecord(is, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("RDFReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("RDFReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::RDFReactionReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipRDFileRecord(is);
+    try {
+        return reader->skipRDFileRecord(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("RDFReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("RDFReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::RDFReactionReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

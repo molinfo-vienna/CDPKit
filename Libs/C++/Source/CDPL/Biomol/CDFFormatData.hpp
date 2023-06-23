@@ -36,43 +36,43 @@ namespace CDPL
     namespace Biomol
     {
 
-		namespace CDF
-		{
-			
-			using namespace Chem::CDF;
+        namespace CDF
+        {
+            
+            using namespace Chem::CDF;
 
-			typedef std::int8_t CharType;
+            typedef std::int8_t CharType;
 
-			namespace AtomProperty
-			{
+            namespace AtomProperty
+            {
 
-				const unsigned int PROPERTY_HANDLER_ID       = 1;
+                const unsigned int PROPERTY_HANDLER_ID       = 1;
 
-				const unsigned int RESIDUE_ATOM_NAME         = 1;
-				const unsigned int RESIDUE_ALT_ATOM_NAME     = 2;
-				const unsigned int RESIDUE_LEAVING_ATOM_FLAG = 3;
-				const unsigned int RESIDUE_LINKING_ATOM_FLAG = 4;
-				const unsigned int RESIDUE_CODE              = 5;
-				const unsigned int RESIDUE_SEQUENCE_NUMBER   = 6;
-				const unsigned int RESIDUE_INSERTION_CODE    = 7;
-				const unsigned int HETERO_ATOM_FLAG          = 8;
-				const unsigned int CHAIN_ID                  = 9;
-				const unsigned int MODEL_NUMBER              = 10;
-				const unsigned int SERIAL_NUMBER             = 11;
-			}
+                const unsigned int RESIDUE_ATOM_NAME         = 1;
+                const unsigned int RESIDUE_ALT_ATOM_NAME     = 2;
+                const unsigned int RESIDUE_LEAVING_ATOM_FLAG = 3;
+                const unsigned int RESIDUE_LINKING_ATOM_FLAG = 4;
+                const unsigned int RESIDUE_CODE              = 5;
+                const unsigned int RESIDUE_SEQUENCE_NUMBER   = 6;
+                const unsigned int RESIDUE_INSERTION_CODE    = 7;
+                const unsigned int HETERO_ATOM_FLAG          = 8;
+                const unsigned int CHAIN_ID                  = 9;
+                const unsigned int MODEL_NUMBER              = 10;
+                const unsigned int SERIAL_NUMBER             = 11;
+            }
 
-			namespace MolecularGraphProperty
-			{
-				
-				const unsigned int PROPERTY_HANDLER_ID       = 1;
+            namespace MolecularGraphProperty
+            {
+                
+                const unsigned int PROPERTY_HANDLER_ID       = 1;
 
-				const unsigned int RESIDUE_CODE              = 1;
-				const unsigned int RESIDUE_SEQUENCE_NUMBER   = 2;
-				const unsigned int RESIDUE_INSERTION_CODE    = 3;
-				const unsigned int CHAIN_ID                  = 4;
-				const unsigned int MODEL_NUMBER              = 5;
-			}
-		}
+                const unsigned int RESIDUE_CODE              = 1;
+                const unsigned int RESIDUE_SEQUENCE_NUMBER   = 2;
+                const unsigned int RESIDUE_INSERTION_CODE    = 3;
+                const unsigned int CHAIN_ID                  = 4;
+                const unsigned int MODEL_NUMBER              = 5;
+            }
+        }
     }
 }
 

@@ -33,269 +33,269 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerAtomCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol1;
+    Molecule mol1;
 
-	BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(mol1.getNumAtoms() == 0);
-	BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+    BOOST_CHECK(mol1.getNumAtoms() == 0);
+    BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
 
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	mol1.addAtom();
-	mol1.addAtom();
-	mol1.addAtom();
+    mol1.addAtom();
+    mol1.addAtom();
+    mol1.addAtom();
 
-	BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-//-----
-
-	BOOST_CHECK(mol1.getNumAtoms() == 3);
-	BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 3);
-
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol1.addAtom(mol1.getAtom(0));
-
-	BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getNumAtoms() == 4);
-	BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 4);
-
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol1.removeAtom(2);
-
-	BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getNumAtoms() == 3);
-	BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 3);
-
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol1.removeAtom(mol1.getAtomsBegin());
-
-	BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getNumAtoms() == 2);
-	BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
-
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	Fragment frag1(mol1);
-	Molecule mol2;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 0);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol2 = mol1;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 2);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-	
-	mol2 = mol1;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 2);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol2.clear();
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 0);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol2 = frag1;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 2);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-	
-	mol2 = frag1;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 2);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol2 += mol1;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 4);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 4);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol2 += frag1;
-
-	BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol2.getNumAtoms() == 6);
-	BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 6);
-
-	BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
 //-----
 
-	BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol1.getNumAtoms() == 3);
+    BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 3);
 
-	BOOST_CHECK(frag1.getNumAtoms() == 2);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    mol1.addAtom(mol1.getAtom(0));
 
-	BOOST_CHECK(!frag1.addAtom(mol1.getAtom(0)));
+    BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol1.getNumAtoms() == 4);
+    BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 4);
 
-	BOOST_CHECK(frag1.getNumAtoms() == 2);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    mol1.removeAtom(2);
 
-	frag1.removeAtom(0);
+    BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol1.getNumAtoms() == 3);
+    BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 3);
 
-	BOOST_CHECK(frag1.getNumAtoms() == 1);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    mol1.removeAtom(mol1.getAtomsBegin());
 
-	frag1.removeAtom(frag1.getAtomsBegin());
+    BOOST_CHECK(mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol1.getNumAtoms() == 2);
+    BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
 
-	BOOST_CHECK(frag1.getNumAtoms() == 0);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    Fragment frag1(mol1);
+    Molecule mol2;
 
-	frag1 += mol1;
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getNumAtoms() == 0);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
 
-	BOOST_CHECK(frag1.getNumAtoms() == 2);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    mol2 = mol1;
 
-	frag1 = mol1;
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getNumAtoms() == 2);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
 
-	BOOST_CHECK(frag1.getNumAtoms() == 2);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    
+    mol2 = mol1;
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	frag1 = mol1;
+    BOOST_CHECK(mol2.getNumAtoms() == 2);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
 
-	BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag1.getNumAtoms() == 2);
-	BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    mol2.clear();
 
-	BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	Fragment frag2;
+    BOOST_CHECK(mol2.getNumAtoms() == 0);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
 
-	BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag2.getNumAtoms() == 0);
-	BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+    mol2 = frag1;
 
-	BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	frag2 = frag1;
+    BOOST_CHECK(mol2.getNumAtoms() == 2);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
 
-	BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    
+    mol2 = frag1;
 
-	BOOST_CHECK(frag2.getNumAtoms() == 2);
-	BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getNumAtoms() == 2);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
 
-	frag2 = frag1;
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    mol2 += mol1;
 
-	BOOST_CHECK(frag2.getNumAtoms() == 2);
-	BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getNumAtoms() == 4);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 4);
 
-	frag2.clear();
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    mol2 += frag1;
 
-	BOOST_CHECK(frag2.getNumAtoms() == 0);
-	BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+    BOOST_CHECK(mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(mol2.getNumAtoms() == 6);
+    BOOST_CHECK(mol2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 6);
 
-//-----
-
-	mol1.addAtom();
-	mol1.addAtom();
-
-	BOOST_CHECK(mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 4);
-
-	BOOST_CHECK(mol1.getAtom(0).getNumAtoms() == 0);
-	BOOST_CHECK(mol1.getAtom(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
-
-	BOOST_CHECK(!mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol1.addBond(0, 1);
-
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getAtom(0).getNumAtoms() == 1);
-	BOOST_CHECK(mol1.getAtom(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
-
-	BOOST_CHECK(!mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	mol1.addBond(0, 2);
-
-	BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol1.getAtom(0).getNumAtoms() == 2);
-	BOOST_CHECK(mol1.getAtom(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
-
-	BOOST_CHECK(!mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
 
 //-----
 
-	BOOST_CHECK(mol1.getBond(0).getNumAtoms() == 2);
-	BOOST_CHECK(mol1.getBond(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+    BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 2);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(!frag1.addAtom(mol1.getAtom(0)));
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 2);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag1.removeAtom(0);
+
+    BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 1);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag1.removeAtom(frag1.getAtomsBegin());
+
+    BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 0);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag1 += mol1;
+
+    BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 2);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag1 = mol1;
+
+    BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 2);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag1 = mol1;
+
+    BOOST_CHECK(frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag1.getNumAtoms() == 2);
+    BOOST_CHECK(frag1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    Fragment frag2;
+
+    BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag2.getNumAtoms() == 0);
+    BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+
+    BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag2 = frag1;
+
+    BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag2.getNumAtoms() == 2);
+    BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag2 = frag1;
+
+    BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag2.getNumAtoms() == 2);
+    BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    frag2.clear();
+
+    BOOST_CHECK(frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag2.getNumAtoms() == 0);
+    BOOST_CHECK(frag2.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+
+    BOOST_CHECK(!frag2.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+//-----
+
+    mol1.addAtom();
+    mol1.addAtom();
+
+    BOOST_CHECK(mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol1.getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 4);
+
+    BOOST_CHECK(mol1.getAtom(0).getNumAtoms() == 0);
+    BOOST_CHECK(mol1.getAtom(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 0);
+
+    BOOST_CHECK(!mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    mol1.addBond(0, 1);
+
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol1.getAtom(0).getNumAtoms() == 1);
+    BOOST_CHECK(mol1.getAtom(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 1);
+
+    BOOST_CHECK(!mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    mol1.addBond(0, 2);
+
+    BOOST_CHECK(!mol1.getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol1.getAtom(0).getNumAtoms() == 2);
+    BOOST_CHECK(mol1.getAtom(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
+
+    BOOST_CHECK(!mol1.getAtom(0).getProperty(AtomContainerProperty::ATOM_COUNT, false, false).isEmpty());
+
+//-----
+
+    BOOST_CHECK(mol1.getBond(0).getNumAtoms() == 2);
+    BOOST_CHECK(mol1.getBond(0).getProperty<std::size_t>(AtomContainerProperty::ATOM_COUNT) == 2);
 }
 

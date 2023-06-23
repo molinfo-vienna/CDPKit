@@ -41,45 +41,45 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeatureDistanceScore.
-		 */
-		class CDPL_PHARM_API FeatureDistanceScore : public FeatureInteractionScore
-		{
+        /**
+         * \brief FeatureDistanceScore.
+         */
+        class CDPL_PHARM_API FeatureDistanceScore : public FeatureInteractionScore
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureDistanceScore instances.
-			 */
-			typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureDistanceScore instances.
+             */
+            typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
 
-			typedef std::function<double(double)> DistanceScoringFunction;
+            typedef std::function<double(double)> DistanceScoringFunction;
 
-			/**
-			 * \brief Constructs a \c %FeatureDistanceScore functor with a 
-			 *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
-			 * \param min_dist The minimum feature pair distance.
-			 * \param max_dist The maximum feature pair distance.
-			 */
-			FeatureDistanceScore(double min_dist, double max_dist);
+            /**
+             * \brief Constructs a \c %FeatureDistanceScore functor with a 
+             *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
+             * \param min_dist The minimum feature pair distance.
+             * \param max_dist The maximum feature pair distance.
+             */
+            FeatureDistanceScore(double min_dist, double max_dist);
 
-			double getMinDistance() const;
+            double getMinDistance() const;
 
-			double getMaxDistance() const;
+            double getMaxDistance() const;
 
-			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+            void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
+            double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
-		  private:
-			double                  minDist;
-			double                  maxDist;
-			DistanceScoringFunction distScoringFunc;
-		};
+          private:
+            double                  minDist;
+            double                  maxDist;
+            DistanceScoringFunction distScoringFunc;
+        };
     }
 }
 

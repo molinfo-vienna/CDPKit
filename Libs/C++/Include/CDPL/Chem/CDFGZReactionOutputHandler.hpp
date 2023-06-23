@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<CDFGZReactionWriter, DataFormat::CDF_GZ> CDFGZReactionOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<CDFGZReactionWriter, DataFormat::CDF_GZ> CDFGZReactionOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_CDFGZREACTIONOUTPUTHANDLER_HPP

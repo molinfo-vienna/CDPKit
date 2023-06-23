@@ -43,121 +43,121 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerMassCompositionTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION).getSize() == 0);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION).getSize() == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
-
-	const MassComposition* mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
-
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00752, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.76130, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.05222, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.17896, 0.1);
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::B], 0.0000001);
-
-	BOOST_CHECK(mass_comp->getSize() == 4);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00746, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.71122, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.10368, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.17764, 0.1);
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::Li], 0.0000001);
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
 
-	BOOST_CHECK(mass_comp->getSize() == 4);
+    const MassComposition* mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00752, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.76130, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.05222, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.17896, 0.1);
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::B], 0.0000001);
 
-//-----
+    BOOST_CHECK(mass_comp->getSize() == 4);
 
-	mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
-
-	mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
-
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::UNKNOWN], 0.00001);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00781, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.69779, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.10850, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.18590, 0.1);
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::F], 0.0000001);
-
-	BOOST_CHECK(mass_comp->getSize() == 5);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+    mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
 
-	mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
+    mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
 
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::UNKNOWN], 0.00001);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00819, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.68304, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.11379, 0.1);
-	BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.19497, 0.1);
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::I], 0.0000001);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00746, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.71122, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.10368, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.17764, 0.1);
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::Li], 0.0000001);
 
-	BOOST_CHECK(mass_comp->getSize() == 5);
+    BOOST_CHECK(mass_comp->getSize() == 4);
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
-
-//-----
-
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		it->setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
-
-	mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
-
-	BOOST_CHECK(std::isnan((*mass_comp)[AtomType::UNKNOWN]));
-	BOOST_CHECK_SMALL((*mass_comp)[AtomType::C], 0.000001);
-
-	BOOST_CHECK(mass_comp->getSize() == 1);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
-
-//-----
-	
-	TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION, mol, AtomContainerProperty::ATOM_COUNT);
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-		TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION, *it, AtomProperty::ATOMIC_WEIGHT);
-		TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION, *it, AtomProperty::TYPE);
-	}
+    mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+
+    mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
+
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::UNKNOWN], 0.00001);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00781, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.69779, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.10850, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.18590, 0.1);
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::F], 0.0000001);
+
+    BOOST_CHECK(mass_comp->getSize() == 5);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+
+//-----
+
+    mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+
+    mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
+
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::UNKNOWN], 0.00001);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::H], 0.00819, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::C], 0.68304, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::N], 0.11379, 0.1);
+    BOOST_CHECK_CLOSE((*mass_comp)[AtomType::O], 0.19497, 0.1);
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::I], 0.0000001);
+
+    BOOST_CHECK(mass_comp->getSize() == 5);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        it->setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+
+    mass_comp = &mol.getProperty<MassComposition>(AtomContainerProperty::MASS_COMPOSITION);
+
+    BOOST_CHECK(std::isnan((*mass_comp)[AtomType::UNKNOWN]));
+    BOOST_CHECK_SMALL((*mass_comp)[AtomType::C], 0.000001);
+
+    BOOST_CHECK(mass_comp->getSize() == 1);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION, false, false).isEmpty());
+
+//-----
+    
+    TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION, mol, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+        TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION, *it, AtomProperty::ATOMIC_WEIGHT);
+        TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION, *it, AtomProperty::TYPE);
+    }
 }

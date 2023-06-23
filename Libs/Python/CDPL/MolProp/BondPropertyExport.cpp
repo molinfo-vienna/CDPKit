@@ -33,15 +33,15 @@
 namespace 
 {
 
-	struct BondProperty {};
+    struct BondProperty {};
 }
 
 
 void CDPLPythonMolProp::exportBondProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
-		.def_readonly("MHMO_PI_ORDER", &MolProp::BondProperty::MHMO_PI_ORDER);
+    python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
+        .def_readonly("MHMO_PI_ORDER", &MolProp::BondProperty::MHMO_PI_ORDER);
 }

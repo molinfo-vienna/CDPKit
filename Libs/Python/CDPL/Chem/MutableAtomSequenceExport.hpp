@@ -31,38 +31,38 @@
 namespace
 {
 
-	template <typename T>
-	struct MutableAtomSequence : public AtomSequence<T>
-	{
+    template <typename T>
+    struct MutableAtomSequence : public AtomSequence<T>
+    {
 
-		MutableAtomSequence(T& cntnr): AtomSequence<T>(cntnr) {}
+        MutableAtomSequence(T& cntnr): AtomSequence<T>(cntnr) {}
 
-		void removeAtom(std::size_t idx) {
-			AtomSequence<T>::container.removeAtom(idx);
-		}
-	};
+        void removeAtom(std::size_t idx) {
+            AtomSequence<T>::container.removeAtom(idx);
+        }
+    };
 
-	template <typename T>
-	MutableAtomSequence<T> createMutableAtomSequence(T& molgraph)
-	{
-		return MutableAtomSequence<T>(molgraph);
-	}
+    template <typename T>
+    MutableAtomSequence<T> createMutableAtomSequence(T& molgraph)
+    {
+        return MutableAtomSequence<T>(molgraph);
+    }
 
-	template <typename T>
-	struct MutableAtomSequenceExport
-	{
+    template <typename T>
+    struct MutableAtomSequenceExport
+    {
 
-		MutableAtomSequenceExport(const char* name) {
-			using namespace boost;
+        MutableAtomSequenceExport(const char* name) {
+            using namespace boost;
 
-			python::class_<MutableAtomSequence<T> >(name, python::no_init)
-				.def("__len__", &AtomSequence<T>::getNumAtoms, python::arg("self"))
-				.def("__getitem__", &AtomSequence<T>::getAtom, (python::arg("self"), python::arg("idx")),
-					 python::return_internal_reference<1>())
-				.def("__delitem__", &MutableAtomSequence<T>::removeAtom, (python::arg("self"), python::arg("idx")))
-				.def("__contains__", &AtomSequence<T>::containsAtom, (python::arg("self"), python::arg("atom")));
-		}
-	};
+            python::class_<MutableAtomSequence<T> >(name, python::no_init)
+                .def("__len__", &AtomSequence<T>::getNumAtoms, python::arg("self"))
+                .def("__getitem__", &AtomSequence<T>::getAtom, (python::arg("self"), python::arg("idx")),
+                     python::return_internal_reference<1>())
+                .def("__delitem__", &MutableAtomSequence<T>::removeAtom, (python::arg("self"), python::arg("idx")))
+                .def("__contains__", &AtomSequence<T>::containsAtom, (python::arg("self"), python::arg("atom")));
+        }
+    };
 }
 
 #endif // CDPL_PYTHON_CHEM_MUTABLEATOMSEQUENCEEXPORT_HPP

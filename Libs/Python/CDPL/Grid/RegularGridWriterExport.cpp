@@ -31,5 +31,5 @@
 
 void CDPLPythonGrid::exportRegularGridWriter()
 {
-	CDPLPythonBase::DataWriterExport<CDPL::Grid::DRegularGrid>("DRegularGridWriter", "grid");
+    CDPLPythonBase::DataWriterExport<CDPL::Grid::DRegularGrid>("DRegularGridWriter", "grid");
 }

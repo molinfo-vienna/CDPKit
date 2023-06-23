@@ -58,7 +58,7 @@ double Pharm::CationPiInteractionConstraint::getMaxAngle() const
 
 bool Pharm::CationPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);
+    const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);
     const Feature& cat_ftr = (aroCatOrder ? ftr2 : ftr1);
     const Math::Vector3D& aro_pos = get3DCoordinates(aro_ftr);
     const Math::Vector3D& cat_pos = get3DCoordinates(cat_ftr);
@@ -67,17 +67,17 @@ bool Pharm::CationPiInteractionConstraint::operator()(const Feature& ftr1, const
     double ctr_dist = length(aro_cat_vec);
    
     if (hasOrientation(aro_ftr)) {
-		const Math::Vector3D& orient = getOrientation(aro_ftr);
-		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
-		double angle = std::acos(ang_cos) * 180.0 / M_PI;
+        const Math::Vector3D& orient = getOrientation(aro_ftr);
+        double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
+        double angle = std::acos(ang_cos) * 180.0 / M_PI;
 
-		if (angle > maxAngle)
-			return false;
+        if (angle > maxAngle)
+            return false;
 
-		double plane_dist = ang_cos * ctr_dist;
+        double plane_dist = ang_cos * ctr_dist;
 
-		return (plane_dist >= minDist && plane_dist <= maxDist);
+        return (plane_dist >= minDist && plane_dist <= maxDist);
     }
 
-	return (ctr_dist >= minDist && ctr_dist <= maxDist);
+    return (ctr_dist >= minDist && ctr_dist <= maxDist);
 }

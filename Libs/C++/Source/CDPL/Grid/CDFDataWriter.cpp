@@ -43,44 +43,44 @@ Grid::CDFDataWriter::PropertyHandlerList Grid::CDFDataWriter::extPropertyHandler
 
 void Grid::CDFDataWriter::registerExternalPropertyHandler(const PropertyHandler& handler)
 {
-	extPropertyHandlers.push_back(handler);
+    extPropertyHandlers.push_back(handler);
 }
 
 void Grid::CDFDataWriter::outputProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf)
 {
-	if (hasName(grid))
-		putStringProperty(CDF::AttributedGridProperty::NAME, getName(grid), bbuf);
+    if (hasName(grid))
+        putStringProperty(CDF::AttributedGridProperty::NAME, getName(grid), bbuf);
 
-	outputExternalProperties(grid, bbuf);
+    outputExternalProperties(grid, bbuf);
 
-	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
+    putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
 
 void Grid::CDFDataWriter::outputExternalProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf)
 {
-	std::for_each(extPropertyHandlers.begin(), extPropertyHandlers.end(),
-				  std::bind(static_cast<void (CDFDataWriter::*)(const PropertyHandler&, const AttributedGrid&, Internal::ByteBuffer&)>
-							(&CDFDataWriter::outputExternalProperties), 
-							this, std::placeholders::_1, std::ref(grid), std::ref(bbuf)));
+    std::for_each(extPropertyHandlers.begin(), extPropertyHandlers.end(),
+                  std::bind(static_cast<void (CDFDataWriter::*)(const PropertyHandler&, const AttributedGrid&, Internal::ByteBuffer&)>
+                            (&CDFDataWriter::outputExternalProperties), 
+                            this, std::placeholders::_1, std::ref(grid), std::ref(bbuf)));
 }
 
 void Grid::CDFDataWriter::outputExternalProperties(const PropertyHandler& handler, const AttributedGrid& grid, Internal::ByteBuffer& bbuf)
 {
-	extDataBuffer.setIOPointer(0);
+    extDataBuffer.setIOPointer(0);
 
-	unsigned int handler_id = handler(*this, grid, extDataBuffer);
+    unsigned int handler_id = handler(*this, grid, extDataBuffer);
 
-	if (extDataBuffer.getIOPointer() == 0)
-		return;
+    if (extDataBuffer.getIOPointer() == 0)
+        return;
 
-	putPropertyListMarker(CDF::PROP_LIST_END, extDataBuffer);
+    putPropertyListMarker(CDF::PROP_LIST_END, extDataBuffer);
 
-	std::size_t ext_data_len = extDataBuffer.getIOPointer();
+    std::size_t ext_data_len = extDataBuffer.getIOPointer();
 
-	extDataBuffer.resize(ext_data_len);
+    extDataBuffer.resize(ext_data_len);
 
-	putIntProperty(CDF::EXTENDED_PROP_LIST, boost::numeric_cast<CDF::SizeType>(ext_data_len), bbuf);
-	putPropertyListMarker(handler_id, bbuf);
+    putIntProperty(CDF::EXTENDED_PROP_LIST, boost::numeric_cast<CDF::SizeType>(ext_data_len), bbuf);
+    putPropertyListMarker(handler_id, bbuf);
 
-	bbuf.putBytes(extDataBuffer);
+    bbuf.putBytes(extDataBuffer);
 }

@@ -36,12 +36,12 @@ using namespace CDPL;
 bool Chem::calcCentroid(const Entity3DContainer& cntnr, Math::Vector3D& ctr)
 {
     if (cntnr.getNumEntities() == 0)
-		return false;
+        return false;
 
     ctr.clear();
 
     for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it)
-		ctr.plusAssign(get3DCoordinates(*it));
+        ctr.plusAssign(get3DCoordinates(*it));
 
     ctr /= cntnr.getNumEntities();
 

@@ -37,66 +37,66 @@ using namespace CDPL;
 
 std::size_t Biomol::HierarchyViewModel::getNumChains() const
 {
-	initChainList();
+    initChainList();
 
-	return chains.size();
+    return chains.size();
 }
 
 const Biomol::HierarchyViewChain& Biomol::HierarchyViewModel::getChain(std::size_t idx) const
 {
-	initChainList();
+    initChainList();
 
-	if (idx >= chains.size())
-		throw Base::IndexError("HierarchyViewModel: chain index out of bounds");
+    if (idx >= chains.size())
+        throw Base::IndexError("HierarchyViewModel: chain index out of bounds");
 
-	return *chains[idx];
+    return *chains[idx];
 }
 
 bool Biomol::HierarchyViewModel::hasChainWithID(const std::string& id) const
 {
-	initChainList();
+    initChainList();
 
-	return (idToChainMap.find(id) != idToChainMap.end());
+    return (idToChainMap.find(id) != idToChainMap.end());
 }
 
 const Biomol::HierarchyViewChain& Biomol::HierarchyViewModel::getChainByID(const std::string& id) const
 {
-	initChainList();
+    initChainList();
 
-	IDToChainMap::const_iterator it = idToChainMap.find(id);
+    IDToChainMap::const_iterator it = idToChainMap.find(id);
 
-	if (it != idToChainMap.end())
-		return *it->second;
+    if (it != idToChainMap.end())
+        return *it->second;
 
-	throw Base::ItemNotFound("HierarchyViewModel: chain with specified ID not found");
+    throw Base::ItemNotFound("HierarchyViewModel: chain with specified ID not found");
 }
 
 Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::getChainsBegin() const
 {
-	initChainList();
+    initChainList();
 
-	return ConstChainIterator(chains.begin());
+    return ConstChainIterator(chains.begin());
 }
 
 Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::getChainsEnd() const
 {
-	initChainList();
+    initChainList();
 
-	return ConstChainIterator(chains.end());
+    return ConstChainIterator(chains.end());
 }
 
 Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::begin() const
 {
-	initChainList();
+    initChainList();
 
-	return ConstChainIterator(chains.begin());
+    return ConstChainIterator(chains.begin());
 }
 
 Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::end() const
 {
-	initChainList();
+    initChainList();
 
-	return ConstChainIterator(chains.end());
+    return ConstChainIterator(chains.end());
 }
 
 void Biomol::HierarchyViewModel::initChainList() const
@@ -104,57 +104,57 @@ void Biomol::HierarchyViewModel::initChainList() const
     std::lock_guard<std::mutex> lock(getMutex());
 
     if (!initChains)
-		return;
+        return;
 
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t model_no = getModelNumber(*this);
+    std::size_t model_no = getModelNumber(*this);
 
-	for (Fragment::ConstAtomIterator a_it = getAtomsBegin(), a_end = getAtomsEnd(); a_it != a_end; ++a_it) {
-		const Atom& atom = *a_it;
-		const std::string& chain_id = getChainID(atom);
+    for (Fragment::ConstAtomIterator a_it = getAtomsBegin(), a_end = getAtomsEnd(); a_it != a_end; ++a_it) {
+        const Atom& atom = *a_it;
+        const std::string& chain_id = getChainID(atom);
 
-		IDToChainMap::iterator c_it = idToChainMap.find(chain_id);
+        IDToChainMap::iterator c_it = idToChainMap.find(chain_id);
 
-		if (c_it != idToChainMap.end()) {
-			c_it->second->addAtom(atom);
-			continue;
-		}
+        if (c_it != idToChainMap.end()) {
+            c_it->second->addAtom(atom);
+            continue;
+        }
 
-		ChainPtr chain_ptr(new HierarchyViewChain());
+        ChainPtr chain_ptr(new HierarchyViewChain());
 
-		chain_ptr->addAtom(atom);
+        chain_ptr->addAtom(atom);
 
-		setModelNumber(*chain_ptr, model_no);
-		setChainID(*chain_ptr, chain_id);
+        setModelNumber(*chain_ptr, model_no);
+        setChainID(*chain_ptr, chain_id);
 
-		chains.push_back(chain_ptr);
-		idToChainMap.insert(IDToChainMap::value_type(chain_id, chain_ptr));
-	}
+        chains.push_back(chain_ptr);
+        idToChainMap.insert(IDToChainMap::value_type(chain_id, chain_ptr));
+    }
 
-	for (ChainList::iterator m_it = chains.begin(), m_end = chains.end(); m_it != m_end; ++m_it) {
-		HierarchyViewChain& chain = **m_it;
+    for (ChainList::iterator m_it = chains.begin(), m_end = chains.end(); m_it != m_end; ++m_it) {
+        HierarchyViewChain& chain = **m_it;
 
-		for (std::size_t i = 0, num_atoms = chain.getNumAtoms(); i < num_atoms; i++) {
-			const Atom& atom = chain.getAtom(i);
-			Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+        for (std::size_t i = 0, num_atoms = chain.getNumAtoms(); i < num_atoms; i++) {
+            const Atom& atom = chain.getAtom(i);
+            Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-			for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-				const Bond& bond = *b_it;
+            for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+                const Bond& bond = *b_it;
 
-				if (chain.containsBond(bond))
-					continue;
+                if (chain.containsBond(bond))
+                    continue;
 
-				if (!chain.containsAtom(*a_it))
-					continue;
+                if (!chain.containsAtom(*a_it))
+                    continue;
 
-				if (!containsBond(bond))
-					continue;
+                if (!containsBond(bond))
+                    continue;
 
-				chain.addBond(bond);
-			}
-		}
-	}
+                chain.addBond(bond);
+            }
+        }
+    }
 
     initChains = false;
 }

@@ -33,20 +33,20 @@
 
 void CDPLPythonVis::exportPointListPrimitive2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::PointListPrimitive2D, 
-		python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PointListPrimitive2D", python::no_init)
-		.def(python::init<>(python::arg("self")))    
-		.def(python::init<const Vis::PointListPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Vis::PointListPrimitive2D::operator=),
-			 (python::arg("self"),  python::arg("prim")),
-			 python::return_self<>())
-		.def("setPen", &Vis::PointListPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
-		.def("getPen", &Vis::PointListPrimitive2D::getPen, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.add_property("pen", python::make_function(&Vis::PointListPrimitive2D::getPen, 
-												   python::return_internal_reference<1>()),
-					  &Vis::PointListPrimitive2D::setPen);
+    python::class_<Vis::PointListPrimitive2D, 
+        python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PointListPrimitive2D", python::no_init)
+        .def(python::init<>(python::arg("self")))    
+        .def(python::init<const Vis::PointListPrimitive2D&>((python::arg("self"), python::arg("prim"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Vis::PointListPrimitive2D::operator=),
+             (python::arg("self"),  python::arg("prim")),
+             python::return_self<>())
+        .def("setPen", &Vis::PointListPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
+        .def("getPen", &Vis::PointListPrimitive2D::getPen, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .add_property("pen", python::make_function(&Vis::PointListPrimitive2D::getPen, 
+                                                   python::return_internal_reference<1>()),
+                      &Vis::PointListPrimitive2D::setPen);
 }

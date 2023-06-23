@@ -36,66 +36,66 @@
 namespace
 {
 
-	struct FontMetricsWrapper : CDPL::Vis::FontMetrics, boost::python::wrapper<CDPL::Vis::FontMetrics>
-	{
+    struct FontMetricsWrapper : CDPL::Vis::FontMetrics, boost::python::wrapper<CDPL::Vis::FontMetrics>
+    {
 
-		void setFont(const CDPL::Vis::Font& font) {
-			this->get_override("setFont")(boost::ref(font));
-		}
+        void setFont(const CDPL::Vis::Font& font) {
+            this->get_override("setFont")(boost::ref(font));
+        }
 
-		double getAscent() const {
-			return this->get_override("getAscent")();
-		} 
+        double getAscent() const {
+            return this->get_override("getAscent")();
+        } 
 
-		double getDescent() const {
-			return this->get_override("getDescent")();
-		}
+        double getDescent() const {
+            return this->get_override("getDescent")();
+        }
  
-		double getHeight() const {
-			return this->get_override("getHeight")();
-		}
+        double getHeight() const {
+            return this->get_override("getHeight")();
+        }
 
-		double getLeading() const {
-			return this->get_override("getLeading")();
-		} 
+        double getLeading() const {
+            return this->get_override("getLeading")();
+        } 
 
-		double getWidth(const std::string& str) const {
-			return this->get_override("getWidth")(str);
-		} 
+        double getWidth(const std::string& str) const {
+            return this->get_override("getWidth")(str);
+        } 
 
-		double getWidth(char ch) const {
-			return getWidth(std::string(1, ch));
-		} 
+        double getWidth(char ch) const {
+            return getWidth(std::string(1, ch));
+        } 
 
-		void getBounds(const std::string& str, CDPL::Vis::Rectangle2D& bounds) const {
-			this->get_override("getBounds")(str, boost::ref(bounds));
-		} 
+        void getBounds(const std::string& str, CDPL::Vis::Rectangle2D& bounds) const {
+            this->get_override("getBounds")(str, boost::ref(bounds));
+        } 
 
-		void getBounds(char ch, CDPL::Vis::Rectangle2D& bounds) const {
-			getBounds(std::string(1, ch), bounds);
-		} 
-	};
+        void getBounds(char ch, CDPL::Vis::Rectangle2D& bounds) const {
+            getBounds(std::string(1, ch), bounds);
+        } 
+    };
 }
 
 
 void CDPLPythonVis::exportFontMetrics()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	double (Vis::FontMetrics::*getWidthFunc)(const std::string&) const = &Vis::FontMetrics::getWidth;
-	void (Vis::FontMetrics::*getBoundsFunc)(const std::string&, Vis::Rectangle2D&) const = &Vis::FontMetrics::getBounds;
+    double (Vis::FontMetrics::*getWidthFunc)(const std::string&) const = &Vis::FontMetrics::getWidth;
+    void (Vis::FontMetrics::*getBoundsFunc)(const std::string&, Vis::Rectangle2D&) const = &Vis::FontMetrics::getBounds;
 
-	python::class_<FontMetricsWrapper, boost::noncopyable>("FontMetrics", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::FontMetrics>())	
-		.def("setFont", python::pure_virtual(&Vis::FontMetrics::setFont), 
-			 (python::arg("self"), python::arg("font")))
-		.def("getAscent", python::pure_virtual(&Vis::FontMetrics::getAscent), python::arg("self"))
-		.def("getDescent", python::pure_virtual(&Vis::FontMetrics::getDescent), python::arg("self"))
-		.def("getHeight", python::pure_virtual(&Vis::FontMetrics::getHeight), python::arg("self"))
-		.def("getLeading", python::pure_virtual(&Vis::FontMetrics::getLeading), python::arg("self"))
-		.def("getWidth", python::pure_virtual(getWidthFunc), (python::arg("self"), python::arg("string")))
-		.def("getBounds", python::pure_virtual(getBoundsFunc), 
-			 (python::arg("self"), python::arg("string"), python::arg("bounds")));
+    python::class_<FontMetricsWrapper, boost::noncopyable>("FontMetrics", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::FontMetrics>())    
+        .def("setFont", python::pure_virtual(&Vis::FontMetrics::setFont), 
+             (python::arg("self"), python::arg("font")))
+        .def("getAscent", python::pure_virtual(&Vis::FontMetrics::getAscent), python::arg("self"))
+        .def("getDescent", python::pure_virtual(&Vis::FontMetrics::getDescent), python::arg("self"))
+        .def("getHeight", python::pure_virtual(&Vis::FontMetrics::getHeight), python::arg("self"))
+        .def("getLeading", python::pure_virtual(&Vis::FontMetrics::getLeading), python::arg("self"))
+        .def("getWidth", python::pure_virtual(getWidthFunc), (python::arg("self"), python::arg("string")))
+        .def("getBounds", python::pure_virtual(getBoundsFunc), 
+             (python::arg("self"), python::arg("string"), python::arg("bounds")));
 }

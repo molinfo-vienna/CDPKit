@@ -39,58 +39,58 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		class PDBDataWriter;
+        class PDBDataWriter;
 
-		/**
-		 * \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
-		 */
-		class CDPL_BIOMOL_API PDBMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
-		{
+        /**
+         * \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+         */
+        class CDPL_BIOMOL_API PDBMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PDBMolecularGraphWriter instance that will write data of molecular graphs to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			PDBMolecularGraphWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %PDBMolecularGraphWriter instance that will write data of molecular graphs to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            PDBMolecularGraphWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~PDBMolecularGraphWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~PDBMolecularGraphWriter();
 
-			/**
-			 * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
-			 * \param molgraph The molecular graph to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
+             * \param molgraph The molecular graph to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			typedef std::auto_ptr<PDBDataWriter> PDBDataWriterPtr;
+        private:
+            typedef std::auto_ptr<PDBDataWriter> PDBDataWriterPtr;
 
-			PDBMolecularGraphWriter(const PDBMolecularGraphWriter&);
+            PDBMolecularGraphWriter(const PDBMolecularGraphWriter&);
 
-			PDBMolecularGraphWriter& operator=(const PDBMolecularGraphWriter&);
+            PDBMolecularGraphWriter& operator=(const PDBMolecularGraphWriter&);
 
-			std::ostream&    output;
-			bool             state;
-			PDBDataWriterPtr writer;
-		};
-	}
+            std::ostream&    output;
+            bool             state;
+            PDBDataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBMOLECULARGRAPHWRITER_HPP

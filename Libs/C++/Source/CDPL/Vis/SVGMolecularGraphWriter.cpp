@@ -39,37 +39,37 @@ using namespace CDPL;
 
 
 Vis::SVGMolecularGraphWriter::SVGMolecularGraphWriter(std::ostream& os): 
-	ImageWriter(static_cast<const DataIOBase&>(*this)), output(os), state(os.good()) {}
+    ImageWriter(static_cast<const DataIOBase&>(*this)), output(os), state(os.good()) {}
 
 Base::DataWriter<Chem::MolecularGraph>& Vis::SVGMolecularGraphWriter::write(const Chem::MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	CairoPointer<cairo_surface_t> surf(renderMolGraphImage(molgraph));
+    CairoPointer<cairo_surface_t> surf(renderMolGraphImage(molgraph));
 
-	state = surf.get();
+    state = surf.get();
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Vis::SVGMolecularGraphWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Vis::SVGMolecularGraphWriter::operator!() const
 {
-	return !state;
+    return !state;
 }
 
 cairo_surface_t* Vis::SVGMolecularGraphWriter::createCairoSurface(double w, double h) const
 {
-	return cairo_svg_surface_create_for_stream(&streamWriteFunc, &output, w, h);
+    return cairo_svg_surface_create_for_stream(&streamWriteFunc, &output, w, h);
 }
 
 cairo_surface_t* Vis::SVGMolecularGraphWriter::createCairoSurface() const
 {
-	return cairo_svg_surface_create_for_stream(&streamWriteFunc, 0, 0.0, 0.0);
+    return cairo_svg_surface_create_for_stream(&streamWriteFunc, 0, 0.0, 0.0);
 }

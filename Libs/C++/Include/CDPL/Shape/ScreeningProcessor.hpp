@@ -49,71 +49,71 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
+        class MolecularGraph;
     }
 
     namespace Shape
     {
-		
-		class AlignmentResult;
+        
+        class AlignmentResult;
 
-		class CDPL_SHAPE_API ScreeningProcessor
-		{
+        class CDPL_SHAPE_API ScreeningProcessor
+        {
 
-			typedef std::vector<const Chem::MolecularGraph*> MolecularGraphList;
+            typedef std::vector<const Chem::MolecularGraph*> MolecularGraphList;
 
-		  public:
-			typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
-			typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph> ConstMolecularGraphIterator;
-			typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
+          public:
+            typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
+            typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph> ConstMolecularGraphIterator;
+            typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
 
-			ScreeningProcessor();
+            ScreeningProcessor();
 
-			ScreeningProcessor(const Chem::MolecularGraph& query);
+            ScreeningProcessor(const Chem::MolecularGraph& query);
 
-			~ScreeningProcessor();
+            ~ScreeningProcessor();
 
-			void setHitCallback(const HitCallbackFunction& func);
+            void setHitCallback(const HitCallbackFunction& func);
 
-			const HitCallbackFunction& getHitCallback() const;
+            const HitCallbackFunction& getHitCallback() const;
 
-			const ScreeningSettings& getSettings() const;
+            const ScreeningSettings& getSettings() const;
 
-			ScreeningSettings& getSettings();
+            ScreeningSettings& getSettings();
 
-			void clearQuerySet();
+            void clearQuerySet();
 
-			void addQuery(const Chem::MolecularGraph& molgraph);
+            void addQuery(const Chem::MolecularGraph& molgraph);
 
-			std::size_t getQuerySetSize() const;
+            std::size_t getQuerySetSize() const;
 
-			const Chem::MolecularGraph& getQuery(std::size_t idx) const;
+            const Chem::MolecularGraph& getQuery(std::size_t idx) const;
 
-			ConstMolecularGraphIterator getQuerySetBegin() const;
+            ConstMolecularGraphIterator getQuerySetBegin() const;
 
-			ConstMolecularGraphIterator getQuerySetEnd() const;
+            ConstMolecularGraphIterator getQuerySetEnd() const;
 
-			bool process(const Chem::MolecularGraph& molgraph);
-						
-		  private:
-			ScreeningProcessor(const ScreeningProcessor& proc);
+            bool process(const Chem::MolecularGraph& molgraph);
+                        
+          private:
+            ScreeningProcessor(const ScreeningProcessor& proc);
 
-			ScreeningProcessor& operator=(const ScreeningProcessor& proc);
+            ScreeningProcessor& operator=(const ScreeningProcessor& proc);
 
-			void init();
-			void applyShapeGenSettings(bool query);
-			void applyAlignmentSettings();
-			void resetQuery();
+            void init();
+            void applyShapeGenSettings(bool query);
+            void applyAlignmentSettings();
+            void resetQuery();
 
-			ScreeningSettings                    settings;
-			ScreeningSettings::ColorFeatureType  colorFtrType;
-			bool                                 allCarbon;
-			Pharm::DefaultPharmacophoreGenerator expChgPharmGen;
-			FastGaussianShapeAlignment           alignment;
-			GaussianShapeGenerator               shapeGen;
-			MolecularGraphList                   queryList;
-			HitCallbackFunction                  hitCallback;
-		};
+            ScreeningSettings                    settings;
+            ScreeningSettings::ColorFeatureType  colorFtrType;
+            bool                                 allCarbon;
+            Pharm::DefaultPharmacophoreGenerator expChgPharmGen;
+            FastGaussianShapeAlignment           alignment;
+            GaussianShapeGenerator               shapeGen;
+            MolecularGraphList                   queryList;
+            HitCallbackFunction                  hitCallback;
+        };
     }
 }
 

@@ -43,17 +43,17 @@ SET(PARAMETER_FILES
     MMFFSRTOR.PAR
     MMFFSYMB.PAR
     MMFFTOR.PAR
-    MMFFVDW.PAR	
-    MMFFFCHG.PAR	
+    MMFFVDW.PAR    
+    MMFFFCHG.PAR    
    )
 
 FOREACH(PARAM_FILE ${PARAMETER_FILES})
   ADD_CUSTOM_COMMAND(OUTPUT "${PARAM_FILE}.str"
-		     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-  		     "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}" 
-		     "${PARAM_FILE}.str"
-		     DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}"
-		     )
+             COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+               "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}" 
+             "${PARAM_FILE}.str"
+             DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}"
+             )
   SET(PARAMETER_FILE_STRINGS "${PARAMETER_FILE_STRINGS}" "${PARAM_FILE}.str") 
 ENDFOREACH(PARAM_FILE)
 
@@ -140,28 +140,28 @@ TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared c
 
 SET_TARGET_PROPERTIES(cdpl-forcefield-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-forcefield
-		      CLEAN_DIRECT_OUTPUT 1
-		      INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-		      )
+              CLEAN_DIRECT_OUTPUT 1
+              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
+              )
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-forcefield.dll")
 ELSEIF(APPLE)
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-forcefield.dylib")
-ELSE()			
+ELSE()            
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-forcefield.so")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(TARGETS cdpl-forcefield-shared
         RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-	)
+    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
+    )
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

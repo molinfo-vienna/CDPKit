@@ -33,17 +33,17 @@ using namespace CDPL;
 
 
 Chem::LactamLactimTautomerization::LactamLactimTautomerization(): 
-	PatternBasedTautomerizationRule(TautomerizationType::LACTAM_LACTIM)
+    PatternBasedTautomerizationRule(TautomerizationType::LACTAM_LACTIM)
 {
-	BondOrderChange bond_changes[]= {
-		{ 1, 2, -1 },
-		{ 2, 3, 1 },
-		{ 3, 4, -1 },
-		{ 1, 4, 1 }
-	};
+    BondOrderChange bond_changes[]= {
+        { 1, 2, -1 },
+        { 2, 3, 1 },
+        { 3, 4, -1 },
+        { 1, 4, 1 }
+    };
 
-	addTransformationPattern(parseSMARTS("[#8,#16,#34:1]=;!@[#6:2]-;@[#7:3]-[#1:4]"), 
-							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
-	addTransformationPattern(parseSMARTS("[#1:1]-[#8,#16,#34:2]-;!@[#6:3]=;@[#7:4]"), 
-							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#8,#16,#34:1]=;!@[#6:2]-;@[#7:3]-[#1:4]"), 
+                             &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#1:1]-[#8,#16,#34:2]-;!@[#6:3]=;@[#7:4]"), 
+                             &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
 }

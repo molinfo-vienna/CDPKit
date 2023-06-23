@@ -35,24 +35,24 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		/**
-		 * \brief Provides keys for built-in MolProp::Bond properties.
-		 */
-		namespace BondProperty
-		{
+        /**
+         * \brief Provides keys for built-in MolProp::Bond properties.
+         */
+        namespace BondProperty
+        {
 
-			extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_ORDER;
-		}
-	}
+            extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_ORDER;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_BONDPROPERTY_HPP

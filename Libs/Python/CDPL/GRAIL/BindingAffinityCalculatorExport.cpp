@@ -39,17 +39,17 @@ void CDPLPythonGRAIL::exportBindingAffinityCalculator()
   
     python::class_<GRAIL::BindingAffinityCalculator, boost::noncopyable> cls("BindingAffinityCalculator", python::no_init);
 
-	python::scope scope = cls;
+    python::scope scope = cls;
 
-	python::enum_<GRAIL::BindingAffinityCalculator::AffinityMeasure>("AffinityMeasure")
-		.value("PKD", GRAIL::BindingAffinityCalculator::PKD)
-		.value("PKI", GRAIL::BindingAffinityCalculator::PKI)
-		.value("PKD_PKI", GRAIL::BindingAffinityCalculator::PKD_PKI)
-		.export_values();
+    python::enum_<GRAIL::BindingAffinityCalculator::AffinityMeasure>("AffinityMeasure")
+        .value("PKD", GRAIL::BindingAffinityCalculator::PKD)
+        .value("PKI", GRAIL::BindingAffinityCalculator::PKI)
+        .value("PKD_PKI", GRAIL::BindingAffinityCalculator::PKD_PKI)
+        .export_values();
 
-	cls
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BindingAffinityCalculator>())
-		.def("__call__", &GRAIL::BindingAffinityCalculator::operator(),
-			 (python::arg("self"), python::arg("grail_descr"), python::arg("measure")));
+    cls
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BindingAffinityCalculator>())
+        .def("__call__", &GRAIL::BindingAffinityCalculator::operator(),
+             (python::arg("self"), python::arg("grail_descr"), python::arg("measure")));
 }

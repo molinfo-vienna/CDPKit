@@ -35,39 +35,39 @@
 namespace CDPL
 {
 
-	namespace Util
-	{
+    namespace Util
+    {
 
-		/**
-		 * \brief A dynamic bitset class.
-		 *
-		 * For further information see [\ref BDBS].
-		 */
-		typedef boost::dynamic_bitset<> BitSet;
+        /**
+         * \brief A dynamic bitset class.
+         *
+         * For further information see [\ref BDBS].
+         */
+        typedef boost::dynamic_bitset<> BitSet;
 
-		/**
-		 * \brief Folds the bitset \a bs the specified number of times.
-		 *
-		 * Folding a bitset means that the lower and upper half of the bitset are combined
-		 * by a logical OR operation to produce a new bitset which is half of the original
-		 * size. This process is repeated the specified number of times. See also [\ref DTPFP].
-		 *
-		 * \param bs The bitset to fold.
-		 * \param num_times The number of times the bitset has to be folded.
-		 */
-		inline void fold(BitSet& bs, std::size_t num_times)
-		{
-			BitSet tmp;
+        /**
+         * \brief Folds the bitset \a bs the specified number of times.
+         *
+         * Folding a bitset means that the lower and upper half of the bitset are combined
+         * by a logical OR operation to produce a new bitset which is half of the original
+         * size. This process is repeated the specified number of times. See also [\ref DTPFP].
+         *
+         * \param bs The bitset to fold.
+         * \param num_times The number of times the bitset has to be folded.
+         */
+        inline void fold(BitSet& bs, std::size_t num_times)
+        {
+            BitSet tmp;
 
-			for (std::size_t i = 0, new_num_bits = bs.size() >> 1; i < num_times; i++, new_num_bits >>= 1) {
-				tmp = bs;
-				tmp >>= new_num_bits;
-		
-				bs |= tmp;
-				bs.resize(new_num_bits);
-			}
-		}
-	}
+            for (std::size_t i = 0, new_num_bits = bs.size() >> 1; i < num_times; i++, new_num_bits >>= 1) {
+                tmp = bs;
+                tmp >>= new_num_bits;
+        
+                bs |= tmp;
+                bs.resize(new_num_bits);
+            }
+        }
+    }
 }
 
 #endif // CDPL_UTIL_BITSET_HPP

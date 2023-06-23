@@ -44,63 +44,63 @@
 namespace CDPL 
 {
 
- 	namespace Internal 
-	{
-
-		template <typename PT, typename CT, typename ST> class Octree;
-	}
-
-	namespace GRAIL
+     namespace Internal 
     {
 
-		/**
-		 * \brief BuriednessGridCalculator.
-		 */
-		class CDPL_GRAIL_API BuriednessGridCalculator
-		{
+        template <typename PT, typename CT, typename ST> class Octree;
+    }
 
-		  public:
-			typedef std::shared_ptr<BuriednessGridCalculator> SharedPointer;
+    namespace GRAIL
+    {
 
-			BuriednessGridCalculator();
+        /**
+         * \brief BuriednessGridCalculator.
+         */
+        class CDPL_GRAIL_API BuriednessGridCalculator
+        {
 
-			BuriednessGridCalculator(const BuriednessGridCalculator& calc);
+          public:
+            typedef std::shared_ptr<BuriednessGridCalculator> SharedPointer;
 
-			void setProbeRadius(double radius);
+            BuriednessGridCalculator();
 
-			double getProbeRadius() const;
+            BuriednessGridCalculator(const BuriednessGridCalculator& calc);
 
-			void setMinVdWSurfaceDistance(double dist);
+            void setProbeRadius(double radius);
 
-			double getMinVdWSurfaceDistance() const;
+            double getProbeRadius() const;
 
-			void setNumTestRays(std::size_t num_rays);
+            void setMinVdWSurfaceDistance(double dist);
 
-			std::size_t getNumTestRays() const;
+            double getMinVdWSurfaceDistance() const;
 
-			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
-			 * \param func The atom 3D-coordinates function.
-			 */
-			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+            void setNumTestRays(std::size_t num_rays);
 
-			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+            std::size_t getNumTestRays() const;
 
-			void calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid);
+            /**
+             * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
+             * \param func The atom 3D-coordinates function.
+             */
+            void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
-			BuriednessGridCalculator& operator=(const BuriednessGridCalculator& calc);
+            const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
-		  private:
-			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-			typedef std::shared_ptr<Octree> OctreePtr;
-			typedef std::vector<std::size_t> AtomIndexList;
+            void calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid);
 
-			BuriednessScore      buriednessScore; 
-			OctreePtr            octree;
-			Math::Vector3DArray  atomCoords;
-			AtomIndexList        atomIndices;
-			Chem::Fragment       atomSubset;
-		};
+            BuriednessGridCalculator& operator=(const BuriednessGridCalculator& calc);
+
+          private:
+            typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+            typedef std::shared_ptr<Octree> OctreePtr;
+            typedef std::vector<std::size_t> AtomIndexList;
+
+            BuriednessScore      buriednessScore; 
+            OctreePtr            octree;
+            Math::Vector3DArray  atomCoords;
+            AtomIndexList        atomIndices;
+            Chem::Fragment       atomSubset;
+        };
     }
 }
 

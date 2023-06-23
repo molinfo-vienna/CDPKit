@@ -38,7 +38,7 @@ namespace
 
     void calculate(CDPL::Descr::MoleculeRDFDescriptorCalculator& calculator, CDPL::Chem::AtomContainer& cntnr, CDPL::Math::DVector& descr)
     {
-		calculator.calculate(cntnr, descr);
+        calculator.calculate(cntnr, descr);
     }
 }
 
@@ -48,46 +48,46 @@ void CDPLPythonDescr::exportMoleculeRDFDescriptorCalculator()
     using namespace CDPL;
 
     python::class_<Descr::MoleculeRDFDescriptorCalculator, boost::noncopyable>("MoleculeRDFDescriptorCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::MoleculeRDFDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<Chem::AtomContainer&, Math::DVector&>(
-				 (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeRDFDescriptorCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeRDFDescriptorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setAtom3DCoordinatesFunction", &Descr::MoleculeRDFDescriptorCalculator::setAtom3DCoordinatesFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setAtomPairWeightFunction", &Descr::MoleculeRDFDescriptorCalculator::setAtomPairWeightFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setNumSteps", &Descr::MoleculeRDFDescriptorCalculator::setNumSteps, 
-			 (python::arg("self"), python::arg("num_steps")))
-		.def("getNumSteps", &Descr::MoleculeRDFDescriptorCalculator::getNumSteps, python::arg("self"))
-		.def("setRadiusIncrement", &Descr::MoleculeRDFDescriptorCalculator::setRadiusIncrement, 
-			 (python::arg("self"), python::arg("radius_inc")))
-		.def("getRadiusIncrement", &Descr::MoleculeRDFDescriptorCalculator::getRadiusIncrement, python::arg("self"))
-		.def("setStartRadius", &Descr::MoleculeRDFDescriptorCalculator::setStartRadius, 
-			 (python::arg("self"), python::arg("start_radius")))
-		.def("getStartRadius", &Descr::MoleculeRDFDescriptorCalculator::getStartRadius, python::arg("self"))
-		.def("setSmoothingFactor", &Descr::MoleculeRDFDescriptorCalculator::setSmoothingFactor, 
-			 (python::arg("self"), python::arg("factor")))
-		.def("getSmoothingFactor", &Descr::MoleculeRDFDescriptorCalculator::getSmoothingFactor, python::arg("self"))
-		.def("setScalingFactor", &Descr::MoleculeRDFDescriptorCalculator::setScalingFactor, 
-			 (python::arg("self"), python::arg("factor")))
-		.def("getScalingFactor", &Descr::MoleculeRDFDescriptorCalculator::getScalingFactor, python::arg("self"))
-		.def("enableDistanceToIntervalCenterRounding", &Descr::MoleculeRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding, 
-			 (python::arg("self"), python::arg("enable")))
-		.def("distanceToIntervalsCenterRoundingEnabled", &Descr::MoleculeRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
-		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("descr")))
-		.add_property("distanceToIntervalCenterRounding", &Descr::MoleculeRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled,
-					  &Descr::MoleculeRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding)
-		.add_property("smoothingFactor", &Descr::MoleculeRDFDescriptorCalculator::getSmoothingFactor,
-					  &Descr::MoleculeRDFDescriptorCalculator::setSmoothingFactor)
-		.add_property("scalingFactor", &Descr::MoleculeRDFDescriptorCalculator::getScalingFactor,
-					  &Descr::MoleculeRDFDescriptorCalculator::setScalingFactor)
-		.add_property("startRadius", &Descr::MoleculeRDFDescriptorCalculator::getStartRadius,
-					  &Descr::MoleculeRDFDescriptorCalculator::setStartRadius)
-		.add_property("radiusIncrement", &Descr::MoleculeRDFDescriptorCalculator::getRadiusIncrement,
-					  &Descr::MoleculeRDFDescriptorCalculator::setRadiusIncrement)
-		.add_property("numSteps", &Descr::MoleculeRDFDescriptorCalculator::getNumSteps,
-					  &Descr::MoleculeRDFDescriptorCalculator::setNumSteps);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Descr::MoleculeRDFDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<Chem::AtomContainer&, Math::DVector&>(
+                 (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeRDFDescriptorCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeRDFDescriptorCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setAtom3DCoordinatesFunction", &Descr::MoleculeRDFDescriptorCalculator::setAtom3DCoordinatesFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setAtomPairWeightFunction", &Descr::MoleculeRDFDescriptorCalculator::setAtomPairWeightFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setNumSteps", &Descr::MoleculeRDFDescriptorCalculator::setNumSteps, 
+             (python::arg("self"), python::arg("num_steps")))
+        .def("getNumSteps", &Descr::MoleculeRDFDescriptorCalculator::getNumSteps, python::arg("self"))
+        .def("setRadiusIncrement", &Descr::MoleculeRDFDescriptorCalculator::setRadiusIncrement, 
+             (python::arg("self"), python::arg("radius_inc")))
+        .def("getRadiusIncrement", &Descr::MoleculeRDFDescriptorCalculator::getRadiusIncrement, python::arg("self"))
+        .def("setStartRadius", &Descr::MoleculeRDFDescriptorCalculator::setStartRadius, 
+             (python::arg("self"), python::arg("start_radius")))
+        .def("getStartRadius", &Descr::MoleculeRDFDescriptorCalculator::getStartRadius, python::arg("self"))
+        .def("setSmoothingFactor", &Descr::MoleculeRDFDescriptorCalculator::setSmoothingFactor, 
+             (python::arg("self"), python::arg("factor")))
+        .def("getSmoothingFactor", &Descr::MoleculeRDFDescriptorCalculator::getSmoothingFactor, python::arg("self"))
+        .def("setScalingFactor", &Descr::MoleculeRDFDescriptorCalculator::setScalingFactor, 
+             (python::arg("self"), python::arg("factor")))
+        .def("getScalingFactor", &Descr::MoleculeRDFDescriptorCalculator::getScalingFactor, python::arg("self"))
+        .def("enableDistanceToIntervalCenterRounding", &Descr::MoleculeRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding, 
+             (python::arg("self"), python::arg("enable")))
+        .def("distanceToIntervalsCenterRoundingEnabled", &Descr::MoleculeRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
+        .def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("descr")))
+        .add_property("distanceToIntervalCenterRounding", &Descr::MoleculeRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled,
+                      &Descr::MoleculeRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding)
+        .add_property("smoothingFactor", &Descr::MoleculeRDFDescriptorCalculator::getSmoothingFactor,
+                      &Descr::MoleculeRDFDescriptorCalculator::setSmoothingFactor)
+        .add_property("scalingFactor", &Descr::MoleculeRDFDescriptorCalculator::getScalingFactor,
+                      &Descr::MoleculeRDFDescriptorCalculator::setScalingFactor)
+        .add_property("startRadius", &Descr::MoleculeRDFDescriptorCalculator::getStartRadius,
+                      &Descr::MoleculeRDFDescriptorCalculator::setStartRadius)
+        .add_property("radiusIncrement", &Descr::MoleculeRDFDescriptorCalculator::getRadiusIncrement,
+                      &Descr::MoleculeRDFDescriptorCalculator::setRadiusIncrement)
+        .add_property("numSteps", &Descr::MoleculeRDFDescriptorCalculator::getNumSteps,
+                      &Descr::MoleculeRDFDescriptorCalculator::setNumSteps);
 }

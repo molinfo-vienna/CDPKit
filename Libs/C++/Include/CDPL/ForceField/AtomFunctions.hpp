@@ -37,55 +37,55 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-		class MolecularGraph;
-	}
+        class Atom;
+        class MolecularGraph;
+    }
 
-	namespace ForceField 
-	{
+    namespace ForceField 
+    {
 
-		CDPL_FORCEFIELD_API const std::string& getMMFF94SymbolicType(const Chem::Atom& atom);
+        CDPL_FORCEFIELD_API const std::string& getMMFF94SymbolicType(const Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API void setMMFF94SymbolicType(Chem::Atom& atom, const std::string& type);
+        CDPL_FORCEFIELD_API void setMMFF94SymbolicType(Chem::Atom& atom, const std::string& type);
 
-		CDPL_FORCEFIELD_API void clearMMFF94SymbolicType(Chem::Atom& atom);
+        CDPL_FORCEFIELD_API void clearMMFF94SymbolicType(Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API bool hasMMFF94SymbolicType(const Chem::Atom& atom);
-
-
-		CDPL_FORCEFIELD_API unsigned int getMMFF94NumericType(const Chem::Atom& atom);
-
-		CDPL_FORCEFIELD_API void setMMFF94NumericType(Chem::Atom& atom, unsigned int type);
-
-		CDPL_FORCEFIELD_API void clearMMFF94NumericType(Chem::Atom& atom);
-
-		CDPL_FORCEFIELD_API bool hasMMFF94NumericType(const Chem::Atom& atom);
+        CDPL_FORCEFIELD_API bool hasMMFF94SymbolicType(const Chem::Atom& atom);
 
 
-		CDPL_FORCEFIELD_API double getMMFF94Charge(const Chem::Atom& atom);
+        CDPL_FORCEFIELD_API unsigned int getMMFF94NumericType(const Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API void setMMFF94Charge(Chem::Atom& atom, double charge);
+        CDPL_FORCEFIELD_API void setMMFF94NumericType(Chem::Atom& atom, unsigned int type);
 
-		CDPL_FORCEFIELD_API void clearMMFF94Charge(Chem::Atom& atom);
+        CDPL_FORCEFIELD_API void clearMMFF94NumericType(Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
-
-		CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
+        CDPL_FORCEFIELD_API bool hasMMFF94NumericType(const Chem::Atom& atom);
 
 
-		CDPL_FORCEFIELD_API unsigned int getUFFType(const Chem::Atom& atom);
+        CDPL_FORCEFIELD_API double getMMFF94Charge(const Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API void setUFFType(Chem::Atom& atom, unsigned int type);
+        CDPL_FORCEFIELD_API void setMMFF94Charge(Chem::Atom& atom, double charge);
 
-		CDPL_FORCEFIELD_API void clearUFFType(Chem::Atom& atom);
+        CDPL_FORCEFIELD_API void clearMMFF94Charge(Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API bool hasUFFType(const Chem::Atom& atom);
+        CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API unsigned int perceiveUFFType(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-	}
+        CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
+
+
+        CDPL_FORCEFIELD_API unsigned int getUFFType(const Chem::Atom& atom);
+
+        CDPL_FORCEFIELD_API void setUFFType(Chem::Atom& atom, unsigned int type);
+
+        CDPL_FORCEFIELD_API void clearUFFType(Chem::Atom& atom);
+
+        CDPL_FORCEFIELD_API bool hasUFFType(const Chem::Atom& atom);
+
+        CDPL_FORCEFIELD_API unsigned int perceiveUFFType(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+    }
 }
 
 #endif // CDPL_FORCEFIELD_ATOMFUNCTIONS_HPP

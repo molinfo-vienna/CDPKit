@@ -35,10 +35,10 @@ void CDPLPythonPharm::exportPSDScreeningDBCreator()
     using namespace CDPL;
 
     python::class_<Pharm::PSDScreeningDBCreator, Pharm::PSDScreeningDBCreator::SharedPointer, 
-				   python::bases<Pharm::ScreeningDBCreator>, 
-				   boost::noncopyable>("PSDScreeningDBCreator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const std::string&, Pharm::ScreeningDBCreator::Mode, bool>
-			 ((python::arg("self"), python::arg("name"), python::arg("mode") = Pharm::ScreeningDBCreator::CREATE, 
-			   python::arg("allow_dup_entries") = true)));
+                   python::bases<Pharm::ScreeningDBCreator>, 
+                   boost::noncopyable>("PSDScreeningDBCreator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const std::string&, Pharm::ScreeningDBCreator::Mode, bool>
+             ((python::arg("self"), python::arg("name"), python::arg("mode") = Pharm::ScreeningDBCreator::CREATE, 
+               python::arg("allow_dup_entries") = true)));
 }

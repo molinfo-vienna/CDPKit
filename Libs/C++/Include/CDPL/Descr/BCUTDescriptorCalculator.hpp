@@ -38,76 +38,76 @@
 namespace CDPL 
 {
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief BCUTDescriptorCalculator.
-		 * \see [\ref BCUT]
-		 */
-		class CDPL_DESCR_API BCUTDescriptorCalculator
-		{
-			 
-		public:
-			/**
-			 * \brief Type of the generic functor class used to store user-defined atom weight functions for the initialization
-			 *        of the underlying \e Burden matrix [\ref BURMA].
-			 *
-			 * An atom weight function (or function object) is required to take the atom (as a
-			 * \c const reference to Chem::Atom) as argument and return the weight of the atom as
-			 * a floating-point value of type \c double.
-			 */
-			typedef BurdenMatrixGenerator::AtomWeightFunction AtomWeightFunction;
+        /**
+         * \brief BCUTDescriptorCalculator.
+         * \see [\ref BCUT]
+         */
+        class CDPL_DESCR_API BCUTDescriptorCalculator
+        {
+             
+        public:
+            /**
+             * \brief Type of the generic functor class used to store user-defined atom weight functions for the initialization
+             *        of the underlying \e Burden matrix [\ref BURMA].
+             *
+             * An atom weight function (or function object) is required to take the atom (as a
+             * \c const reference to Chem::Atom) as argument and return the weight of the atom as
+             * a floating-point value of type \c double.
+             */
+            typedef BurdenMatrixGenerator::AtomWeightFunction AtomWeightFunction;
 
-			/**
-			 * \brief Constructs the \c %BCUTDescriptorCalculator instance.
-			 */
-			BCUTDescriptorCalculator() {}
+            /**
+             * \brief Constructs the \c %BCUTDescriptorCalculator instance.
+             */
+            BCUTDescriptorCalculator() {}
 
-			/**
-			 * \brief Constructs the \c %BCUTDescriptorCalculator instance and calculates the \e BCUT descriptor of
-			 *        the molecular graph \a molgraph.
-			 *
-			 * The calculated descriptor can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to calculate the \e BCUT descriptor.
-			 * \param descr The calculated \e BCUT descriptor. 
-			 */
-			BCUTDescriptorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
+            /**
+             * \brief Constructs the \c %BCUTDescriptorCalculator instance and calculates the \e BCUT descriptor of
+             *        the molecular graph \a molgraph.
+             *
+             * The calculated descriptor can be retrieved by a call to getResult().
+             *
+             * \param molgraph The molecular graph for which to calculate the \e BCUT descriptor.
+             * \param descr The calculated \e BCUT descriptor. 
+             */
+            BCUTDescriptorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
-			/**
-			 * \brief Allows to specify a custom atom weight function for the initialization of the
-			 *        underlying \e Burden matrix [\ref BURMA].
-			 * \param func A BCUTDescriptorCalculator::AtomWeightFunction instance that wraps the target function.
-			 * \see Descr::BurdenMatrixGenerator::setAtomWeightFunction()
-			 */
-			void setAtomWeightFunction(const AtomWeightFunction& func);
+            /**
+             * \brief Allows to specify a custom atom weight function for the initialization of the
+             *        underlying \e Burden matrix [\ref BURMA].
+             * \param func A BCUTDescriptorCalculator::AtomWeightFunction instance that wraps the target function.
+             * \see Descr::BurdenMatrixGenerator::setAtomWeightFunction()
+             */
+            void setAtomWeightFunction(const AtomWeightFunction& func);
 
-			/**
-			 * \brief Calculates the \e BCUT descriptor of the molecular graph \a molgraph.
-			 *
-			 * The calculated \e BCUT descriptor is a vector that contains the calculated eigenvalues of the
-			 * underlying \e Burden matrix [\ref BURMA]. The elements of the vector are sorted in ascending order.
-			 * Note that explicit hydrogen atoms are included in the calculation of the \e BCUT descriptor.
-			 * In order to calculate the descriptor for a hydrogen depleted molecular graph, any hydrogen atoms have
-			 * to be removed from the molecular graph \e before the calculation is performed.
-			 *
-			 * \param molgraph The molecular graph for which to calculate the \e BCUT descriptor.
-			 * \param descr The calculated \e BCUT descriptor. 
-			 */
-			void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
+            /**
+             * \brief Calculates the \e BCUT descriptor of the molecular graph \a molgraph.
+             *
+             * The calculated \e BCUT descriptor is a vector that contains the calculated eigenvalues of the
+             * underlying \e Burden matrix [\ref BURMA]. The elements of the vector are sorted in ascending order.
+             * Note that explicit hydrogen atoms are included in the calculation of the \e BCUT descriptor.
+             * In order to calculate the descriptor for a hydrogen depleted molecular graph, any hydrogen atoms have
+             * to be removed from the molecular graph \e before the calculation is performed.
+             *
+             * \param molgraph The molecular graph for which to calculate the \e BCUT descriptor.
+             * \param descr The calculated \e BCUT descriptor. 
+             */
+            void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
-		private:
-			BCUTDescriptorCalculator(const BCUTDescriptorCalculator&);
+        private:
+            BCUTDescriptorCalculator(const BCUTDescriptorCalculator&);
 
-			BCUTDescriptorCalculator& operator=(const BCUTDescriptorCalculator&);
+            BCUTDescriptorCalculator& operator=(const BCUTDescriptorCalculator&);
 
-			BurdenMatrixGenerator  burdenMatrixGenerator;
-			Math::DVector          bcutDescriptor;
-			Math::DMatrix          tmpBurdenMatrix;
-			Math::DMatrix          eigenVectors;
-		}; 
-	}
+            BurdenMatrixGenerator  burdenMatrixGenerator;
+            Math::DVector          bcutDescriptor;
+            Math::DMatrix          tmpBurdenMatrix;
+            Math::DMatrix          eigenVectors;
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_BCUTDESCRIPTORCALCULATOR_HPP

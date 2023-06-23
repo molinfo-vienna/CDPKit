@@ -35,12 +35,12 @@
 #define MAKE_ENTITY_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                    \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Entity3D& entity)            \
 {                                                                       \
-	return get##FUNC_SUFFIX(entity);                                    \
+    return get##FUNC_SUFFIX(entity);                                    \
 }                                                                       \
                                                                         \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Entity3D& entity)            \
 {                                                                       \
-	return has##FUNC_SUFFIX(entity);                                    \
+    return has##FUNC_SUFFIX(entity);                                    \
 }
 
 #define EXPORT_ENTITY_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                          \
@@ -69,5 +69,5 @@ void CDPLPythonChem::exportEntity3DFunctions()
     using namespace boost;
     using namespace CDPL;
     
-	EXPORT_ENTITY_FUNCS_INT_REF(3DCoordinates, coords)
+    EXPORT_ENTITY_FUNCS_INT_REF(3DCoordinates, coords)
 }

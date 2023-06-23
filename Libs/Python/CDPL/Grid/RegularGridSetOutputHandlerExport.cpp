@@ -31,5 +31,5 @@
 
 void CDPLPythonGrid::exportRegularGridSetOutputHandler()
 {
-	CDPLPythonBase::DataOutputHandlerExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetOutputHandler");
+    CDPLPythonBase::DataOutputHandlerExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetOutputHandler");
 }

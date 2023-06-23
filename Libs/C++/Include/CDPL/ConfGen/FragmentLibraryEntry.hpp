@@ -46,69 +46,69 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief FragmentLibraryEntry.
-		 */
-		class CDPL_CONFGEN_API FragmentLibraryEntry
-		{
+        /**
+         * \brief FragmentLibraryEntry.
+         */
+        class CDPL_CONFGEN_API FragmentLibraryEntry
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentLibraryEntry instances.
-			 */
-			typedef std::shared_ptr<FragmentLibraryEntry> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentLibraryEntry instances.
+             */
+            typedef std::shared_ptr<FragmentLibraryEntry> SharedPointer;
 
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData> ConformerIterator;
-		
-			/**
-			 * \brief Constructs an empty \c %FragmentLibraryEntry instance.
-			 */
-			FragmentLibraryEntry();
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData> ConformerIterator;
+        
+            /**
+             * \brief Constructs an empty \c %FragmentLibraryEntry instance.
+             */
+            FragmentLibraryEntry();
 
-			void setHashCode(std::uint64_t hash_code);
+            void setHashCode(std::uint64_t hash_code);
 
-			std::uint64_t getHashCode() const;
+            std::uint64_t getHashCode() const;
 
-			void setSMILES(const std::string& smiles);
+            void setSMILES(const std::string& smiles);
 
-			const std::string& getSMILES() const;
+            const std::string& getSMILES() const;
 
-			void clearConformers();
-	
-			std::size_t getNumAtoms() const;
+            void clearConformers();
+    
+            std::size_t getNumAtoms() const;
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			void addConformer(const ConformerData::SharedPointer& conf_data);
+            void addConformer(const ConformerData::SharedPointer& conf_data);
 
-			const ConformerData& getConformer(std::size_t idx) const;
+            const ConformerData& getConformer(std::size_t idx) const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			ConformerIterator getConformersBegin();
+            ConformerIterator getConformersBegin();
 
-			ConformerIterator getConformersEnd();
+            ConformerIterator getConformersEnd();
 
-			ConstConformerIterator begin() const;
+            ConstConformerIterator begin() const;
 
-			ConstConformerIterator end() const;
+            ConstConformerIterator end() const;
 
-			ConformerIterator begin();
+            ConformerIterator begin();
 
-			ConformerIterator end();
-	
-			const ConformerDataArray& getData() const;
+            ConformerIterator end();
+    
+            const ConformerDataArray& getData() const;
 
-		  private:
-			std::uint64_t      hashCode;
-			std::string        smiles;
-			ConformerDataArray conformers;
-		};
+          private:
+            std::uint64_t      hashCode;
+            std::string        smiles;
+            ConformerDataArray conformers;
+        };
     }
 }
 

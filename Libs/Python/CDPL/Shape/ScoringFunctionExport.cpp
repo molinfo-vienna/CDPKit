@@ -32,38 +32,38 @@
 
 void CDPLPythonShape::exportScoringFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("calcTotalOverlapTanimotoScore", &Shape::calcTotalOverlapTanimotoScore, python::arg("res"));
-	python::def("calcShapeTanimotoScore", &Shape::calcShapeTanimotoScore, python::arg("res"));
-	python::def("calcColorTanimotoScore", &Shape::calcColorTanimotoScore, python::arg("res"));
-	python::def("calcTanimotoComboScore", &Shape::calcTanimotoComboScore, python::arg("res"));
+    python::def("calcTotalOverlapTanimotoScore", &Shape::calcTotalOverlapTanimotoScore, python::arg("res"));
+    python::def("calcShapeTanimotoScore", &Shape::calcShapeTanimotoScore, python::arg("res"));
+    python::def("calcColorTanimotoScore", &Shape::calcColorTanimotoScore, python::arg("res"));
+    python::def("calcTanimotoComboScore", &Shape::calcTanimotoComboScore, python::arg("res"));
 
-	python::def("calcTotalOverlapTverskyScore", &Shape::calcTotalOverlapTverskyScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
-	python::def("calcShapeTverskyScore", &Shape::calcShapeTverskyScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
-	python::def("calcColorTverskyScore", &Shape::calcColorTverskyScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
-	python::def("calcTverskyComboScore", &Shape::calcTverskyComboScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
+    python::def("calcTotalOverlapTverskyScore", &Shape::calcTotalOverlapTverskyScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
+    python::def("calcShapeTverskyScore", &Shape::calcShapeTverskyScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
+    python::def("calcColorTverskyScore", &Shape::calcColorTverskyScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
+    python::def("calcTverskyComboScore", &Shape::calcTverskyComboScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95, python::arg("beta") = 0.05));
 
-	python::def("calcReferenceTotalOverlapTverskyScore", &Shape::calcReferenceTotalOverlapTverskyScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95));
-	python::def("calcReferenceShapeTverskyScore", &Shape::calcReferenceShapeTverskyScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95));
-	python::def("calcReferenceColorTverskyScore", &Shape::calcReferenceColorTverskyScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95));
-	python::def("calcReferenceTverskyComboScore", &Shape::calcReferenceTverskyComboScore, 
-				(python::arg("res"), python::arg("alpha") = 0.95));
+    python::def("calcReferenceTotalOverlapTverskyScore", &Shape::calcReferenceTotalOverlapTverskyScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95));
+    python::def("calcReferenceShapeTverskyScore", &Shape::calcReferenceShapeTverskyScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95));
+    python::def("calcReferenceColorTverskyScore", &Shape::calcReferenceColorTverskyScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95));
+    python::def("calcReferenceTverskyComboScore", &Shape::calcReferenceTverskyComboScore, 
+                (python::arg("res"), python::arg("alpha") = 0.95));
 
-	python::def("calcAlignedTotalOverlapTverskyScore", &Shape::calcAlignedTotalOverlapTverskyScore, 
-				(python::arg("res"), python::arg("beta") = 0.95));
-	python::def("calcAlignedShapeTverskyScore", &Shape::calcAlignedShapeTverskyScore, 
-				(python::arg("res"), python::arg("beta") = 0.95));
-	python::def("calcAlignedColorTverskyScore", &Shape::calcAlignedColorTverskyScore, 
-				(python::arg("res"), python::arg("beta") = 0.95));
-	python::def("calcAlignedTverskyComboScore", &Shape::calcAlignedTverskyComboScore, 
-				(python::arg("res"), python::arg("beta") = 0.95));
+    python::def("calcAlignedTotalOverlapTverskyScore", &Shape::calcAlignedTotalOverlapTverskyScore, 
+                (python::arg("res"), python::arg("beta") = 0.95));
+    python::def("calcAlignedShapeTverskyScore", &Shape::calcAlignedShapeTverskyScore, 
+                (python::arg("res"), python::arg("beta") = 0.95));
+    python::def("calcAlignedColorTverskyScore", &Shape::calcAlignedColorTverskyScore, 
+                (python::arg("res"), python::arg("beta") = 0.95));
+    python::def("calcAlignedTverskyComboScore", &Shape::calcAlignedTverskyComboScore, 
+                (python::arg("res"), python::arg("beta") = 0.95));
 }

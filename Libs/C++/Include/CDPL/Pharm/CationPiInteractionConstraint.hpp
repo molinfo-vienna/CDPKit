@@ -38,45 +38,45 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief CationPiInteractionConstraint.
-		 */
-		class CDPL_PHARM_API CationPiInteractionConstraint
-		{
+        /**
+         * \brief CationPiInteractionConstraint.
+         */
+        class CDPL_PHARM_API CationPiInteractionConstraint
+        {
 
-		  public:
-			static constexpr double DEF_MIN_DISTANCE = 3.5;
-			static constexpr double DEF_MAX_DISTANCE = 5.5;
-			static constexpr double DEF_MAX_ANGLE    = 45.0;
-	
-			/**
-			 * \brief Constructs a \c %CationPiInteractionConstraint functor with the specified constraints.
-			 * \param aro_cat \c true if the first feature argument represents the aromatic- and the second one
-			 *                the cationic-feature, and \c false otherwise.
-			 * \param min_dist The minimum allowed distance between the cationic- and aromatic-feature centers.
-			 * \param max_dist The maximum allowed distance between the cationic- and aromatic-feature centers.
-			 * \param max_ang The maximum allowed angle between the cationic- and aromatic-feature plane normal.
-			 */
-			CationPiInteractionConstraint(bool aro_cat, double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE,
-										  double max_ang = DEF_MAX_ANGLE):
-				aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang) {}
+          public:
+            static constexpr double DEF_MIN_DISTANCE = 3.5;
+            static constexpr double DEF_MAX_DISTANCE = 5.5;
+            static constexpr double DEF_MAX_ANGLE    = 45.0;
+    
+            /**
+             * \brief Constructs a \c %CationPiInteractionConstraint functor with the specified constraints.
+             * \param aro_cat \c true if the first feature argument represents the aromatic- and the second one
+             *                the cationic-feature, and \c false otherwise.
+             * \param min_dist The minimum allowed distance between the cationic- and aromatic-feature centers.
+             * \param max_dist The maximum allowed distance between the cationic- and aromatic-feature centers.
+             * \param max_ang The maximum allowed angle between the cationic- and aromatic-feature plane normal.
+             */
+            CationPiInteractionConstraint(bool aro_cat, double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE,
+                                          double max_ang = DEF_MAX_ANGLE):
+                aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang) {}
 
-			double getMinDistance() const;
+            double getMinDistance() const;
 
-			double getMaxDistance() const;
+            double getMaxDistance() const;
 
-			double getMaxAngle() const;
+            double getMaxAngle() const;
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			bool   aroCatOrder;
-			double minDist;
-			double maxDist;
-			double maxAngle;
-		};
+          private:
+            bool   aroCatOrder;
+            double minDist;
+            double maxDist;
+            double maxAngle;
+        };
     }
 }
 

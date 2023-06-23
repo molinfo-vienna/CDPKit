@@ -39,7 +39,7 @@ namespace
 
     void calculate(CDPL::GRAIL::BuriednessGridCalculator& calculator, CDPL::Chem::AtomContainer& atoms, CDPL::Grid::DSpatialGrid& grid)
     {
-		calculator.calculate(atoms, grid);
+        calculator.calculate(atoms, grid);
     }
 }
 
@@ -50,28 +50,28 @@ void CDPLPythonGRAIL::exportBuriednessGridCalculator()
     using namespace CDPL;
 
     python::class_<GRAIL::BuriednessGridCalculator, GRAIL::BuriednessGridCalculator::SharedPointer, boost::noncopyable>("BuriednessGridCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const GRAIL::BuriednessGridCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BuriednessGridCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::BuriednessGridCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance, (python::arg("self"), python::arg("dist")))
-		.def("getMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance, python::arg("self"))
-		.def("setProbeRadius", &GRAIL::BuriednessGridCalculator::setProbeRadius, (python::arg("self"), python::arg("radius")))
-		.def("getProbeRadius", &GRAIL::BuriednessGridCalculator::getProbeRadius, python::arg("self"))
-		.def("setNumTestRays", &GRAIL::BuriednessGridCalculator::setNumTestRays, (python::arg("self"), python::arg("num_rays")))
-		.def("getNumTestRays", &GRAIL::BuriednessGridCalculator::getNumTestRays, python::arg("self"))
-		.def("setAtom3DCoordinatesFunction", &GRAIL::BuriednessGridCalculator::setAtom3DCoordinatesFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("getAtom3DCoordinatesFunction", &GRAIL::BuriednessGridCalculator::getAtom3DCoordinatesFunction,
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("calculate", &calculate, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
-		.add_property("probeRadius", &GRAIL::BuriednessGridCalculator::getProbeRadius, &GRAIL::BuriednessGridCalculator::setProbeRadius)
-		.add_property("minVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance, 
-					  &GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance)
-		.add_property("numTestRays", &GRAIL::BuriednessGridCalculator::getNumTestRays, &GRAIL::BuriednessGridCalculator::setNumTestRays)
-		.add_property("atom3DCoordinatesFunction", 
-					  python::make_function(&GRAIL::BuriednessGridCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
-					  &GRAIL::BuriednessGridCalculator::setAtom3DCoordinatesFunction);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const GRAIL::BuriednessGridCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BuriednessGridCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::BuriednessGridCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance, (python::arg("self"), python::arg("dist")))
+        .def("getMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance, python::arg("self"))
+        .def("setProbeRadius", &GRAIL::BuriednessGridCalculator::setProbeRadius, (python::arg("self"), python::arg("radius")))
+        .def("getProbeRadius", &GRAIL::BuriednessGridCalculator::getProbeRadius, python::arg("self"))
+        .def("setNumTestRays", &GRAIL::BuriednessGridCalculator::setNumTestRays, (python::arg("self"), python::arg("num_rays")))
+        .def("getNumTestRays", &GRAIL::BuriednessGridCalculator::getNumTestRays, python::arg("self"))
+        .def("setAtom3DCoordinatesFunction", &GRAIL::BuriednessGridCalculator::setAtom3DCoordinatesFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("getAtom3DCoordinatesFunction", &GRAIL::BuriednessGridCalculator::getAtom3DCoordinatesFunction,
+             python::arg("self"), python::return_internal_reference<>())
+        .def("calculate", &calculate, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
+        .add_property("probeRadius", &GRAIL::BuriednessGridCalculator::getProbeRadius, &GRAIL::BuriednessGridCalculator::setProbeRadius)
+        .add_property("minVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance, 
+                      &GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance)
+        .add_property("numTestRays", &GRAIL::BuriednessGridCalculator::getNumTestRays, &GRAIL::BuriednessGridCalculator::setNumTestRays)
+        .add_property("atom3DCoordinatesFunction", 
+                      python::make_function(&GRAIL::BuriednessGridCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
+                      &GRAIL::BuriednessGridCalculator::setAtom3DCoordinatesFunction);
 
 }

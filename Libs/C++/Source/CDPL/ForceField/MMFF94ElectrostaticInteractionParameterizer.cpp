@@ -39,70 +39,70 @@ constexpr double ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELEC
 
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																									 MMFF94ElectrostaticInteractionData& ia_data,
-																									 bool strict):
-	filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
-	deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT)
+                                                                                                     MMFF94ElectrostaticInteractionData& ia_data,
+                                                                                                     bool strict):
+    filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
+    deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT)
 {
     parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer():
-	filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
-	deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT) 
+    filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
+    deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT) 
 {}
-	
+    
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::setFilterFunction(const InteractionFilterFunction2& func)
 {
-	filterFunc = func;
+    filterFunc = func;
 } 
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::setAtomChargeFunction(const MMFF94AtomChargeFunction& func)
 {
-	chargeFunc = func;
+    chargeFunc = func;
 }  
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func)
 {
-	distFunc = func;
+    distFunc = func;
 }  
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::setDielectricConstant(double de_const)
 {
-	deConst = de_const;
+    deConst = de_const;
 } 
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponent(double dist_expo)
 {
-	distExpo = dist_expo;
+    distExpo = dist_expo;
 } 
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-																		   MMFF94ElectrostaticInteractionData& ia_data, bool strict)
+                                                                           MMFF94ElectrostaticInteractionData& ia_data, bool strict)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	ia_data.clear();
+    ia_data.clear();
 
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
-		const Atom& atom1 = molgraph.getAtom(i);
+    for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
+        const Atom& atom1 = molgraph.getAtom(i);
 
-		for (std::size_t j = i + 1; j < num_atoms; j++) {
-			const Atom& atom2 = molgraph.getAtom(j);
-			std::size_t top_dist = distFunc(atom1, atom2, molgraph);
-			double factor = 0.0;
+        for (std::size_t j = i + 1; j < num_atoms; j++) {
+            const Atom& atom2 = molgraph.getAtom(j);
+            std::size_t top_dist = distFunc(atom1, atom2, molgraph);
+            double factor = 0.0;
 
-			if (top_dist == 0 || top_dist > 3)
-				factor = 1.0;
-			else if (top_dist == 3)
-				factor = 0.75;
-			else
-				continue;
+            if (top_dist == 0 || top_dist > 3)
+                factor = 1.0;
+            else if (top_dist == 3)
+                factor = 0.75;
+            else
+                continue;
 
-			if (filterFunc && !filterFunc(atom1, atom2))
-				continue;
-	
-			ia_data.addElement(MMFF94ElectrostaticInteraction(i, j, chargeFunc(atom1), chargeFunc(atom2), factor, deConst, distExpo));
-		}
-	}
+            if (filterFunc && !filterFunc(atom1, atom2))
+                continue;
+    
+            ia_data.addElement(MMFF94ElectrostaticInteraction(i, j, chargeFunc(atom1), chargeFunc(atom2), factor, deConst, distExpo));
+        }
+    }
 }

@@ -56,94 +56,94 @@ namespace CDPL
 
     namespace Chem
     {
-		
-		/**
-		 * \brief Implementation of the ChEMBL structure preprocessing pipeline.
-		 * \see [\ref CSCP]
-		 */
-		class CDPL_CHEM_API ChEMBLStandardizer 
-		{
+        
+        /**
+         * \brief Implementation of the ChEMBL structure preprocessing pipeline.
+         * \see [\ref CSCP]
+         */
+        class CDPL_CHEM_API ChEMBLStandardizer 
+        {
 
-		  public:
-			typedef std::shared_ptr<ChEMBLStandardizer> SharedPointer;
+          public:
+            typedef std::shared_ptr<ChEMBLStandardizer> SharedPointer;
 
-			enum ChangeFlags {
-			
-			    NONE                         = 0x0,
-				EXCLUDED                     = 0x1,
-				EXPLICIT_HYDROGENS_REMOVED   = 0x2,
-				UNKNOWN_STEREO_STANDARDIZED  = 0x4,
-				BONDS_KEKULIZED              = 0x8,
-				STRUCTURE_NORMALIZED         = 0x10,
-				CHARGES_REMOVED              = 0x20,
-				TARTRATE_STEREO_CLEARED      = 0x40,
-				STRUCTURE_2D_CORRECTED       = 0x80,
-				ISOTOPE_INFO_CLEARED         = 0x100,
-				SALT_COMPONENTS_REMOVED      = 0x200,
-				SOLVENT_COMPONENTS_REMOVED   = 0x400,
-				DUPLICATE_COMPONENTS_REMOVED = 0x800
-			};
+            enum ChangeFlags {
+            
+                NONE                         = 0x0,
+                EXCLUDED                     = 0x1,
+                EXPLICIT_HYDROGENS_REMOVED   = 0x2,
+                UNKNOWN_STEREO_STANDARDIZED  = 0x4,
+                BONDS_KEKULIZED              = 0x8,
+                STRUCTURE_NORMALIZED         = 0x10,
+                CHARGES_REMOVED              = 0x20,
+                TARTRATE_STEREO_CLEARED      = 0x40,
+                STRUCTURE_2D_CORRECTED       = 0x80,
+                ISOTOPE_INFO_CLEARED         = 0x100,
+                SALT_COMPONENTS_REMOVED      = 0x200,
+                SOLVENT_COMPONENTS_REMOVED   = 0x400,
+                DUPLICATE_COMPONENTS_REMOVED = 0x800
+            };
 
-			ChEMBLStandardizer();
+            ChEMBLStandardizer();
 
-			ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
-		
-			ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
+            ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
+        
+            ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
 
-			ChangeFlags standardize(const Molecule& mol, Molecule& std_mol, bool proc_excluded = false);
+            ChangeFlags standardize(const Molecule& mol, Molecule& std_mol, bool proc_excluded = false);
 
-			ChangeFlags getParent(Molecule& mol, bool neutralize = true, bool check_exclusion = true);
+            ChangeFlags getParent(Molecule& mol, bool neutralize = true, bool check_exclusion = true);
 
-			ChangeFlags getParent(const Molecule& mol, Molecule& parent_mol, bool neutralize = true, bool check_exclusion = true);
-			
-			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
-	    
-		  private:
-			typedef std::vector<Atom*> AtomList;
+            ChangeFlags getParent(const Molecule& mol, Molecule& parent_mol, bool neutralize = true, bool check_exclusion = true);
+            
+            ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
+        
+          private:
+            typedef std::vector<Atom*> AtomList;
 
-			void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
+            void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
 
-			bool checkExclusionCriterions(const Molecule& mol) const;
-			bool checkExclusionCriterions(const MolecularGraph& molgraph, std::size_t& boron_cnt) const;
-			
-			bool standardizeUnknownStereochemistry(Molecule& mol) const;
+            bool checkExclusionCriterions(const Molecule& mol) const;
+            bool checkExclusionCriterions(const MolecularGraph& molgraph, std::size_t& boron_cnt) const;
+            
+            bool standardizeUnknownStereochemistry(Molecule& mol) const;
 
-			bool kekulizeBonds(Molecule& mol);
+            bool kekulizeBonds(Molecule& mol);
 
-			bool removeExplicitHydrogens(Molecule& mol) const;			
-			bool isRemovableHydrogen(const Atom& atom) const;
+            bool removeExplicitHydrogens(Molecule& mol) const;            
+            bool isRemovableHydrogen(const Atom& atom) const;
 
-			bool normalizeStructure(Molecule& mol);
-			const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
+            bool normalizeStructure(Molecule& mol);
+            const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
 
-			bool removeCharges(Molecule& mol);
+            bool removeCharges(Molecule& mol);
 
-			bool removeTartrateStereochemistry(Molecule& mol);
+            bool removeTartrateStereochemistry(Molecule& mol);
 
-			bool cleanup2DStructure(Molecule& mol);
-			double calc2DBondAngle(const Molecule& mol, const Atom& ctr_atom, const Atom& nbr_atom1, const Atom& nbr_atom2);
-			void rotateSubstituent(const Molecule& mol, const Atom& ctr_atom, const Atom& subst_atom, double rot_ang);
+            bool cleanup2DStructure(Molecule& mol);
+            double calc2DBondAngle(const Molecule& mol, const Atom& ctr_atom, const Atom& nbr_atom1, const Atom& nbr_atom2);
+            void rotateSubstituent(const Molecule& mol, const Atom& ctr_atom, const Atom& subst_atom, double rot_ang);
 
-			void clearMatchConstraints(Molecule& mol) const;
-			
-			typedef std::pair<std::uint64_t, std::uint64_t> StructureID;
-			typedef std::pair<const Fragment*, StructureID> MoleculeComponent;
-			typedef std::vector<MoleculeComponent> MoleculeComponentList;
-			typedef std::unordered_set<StructureID, boost::hash<StructureID> > StructureIDSet;
+            void clearMatchConstraints(Molecule& mol) const;
+            
+            typedef std::pair<std::uint64_t, std::uint64_t> StructureID;
+            typedef std::pair<const Fragment*, StructureID> MoleculeComponent;
+            typedef std::vector<MoleculeComponent> MoleculeComponentList;
+            typedef std::unordered_set<StructureID, boost::hash<StructureID> > StructureIDSet;
 
-			HashCodeCalculator           hashCodeCalc;
-			KekuleStructureCalculator    kekuleStructureCalc;
-			Util::STArray                kekulizedBondOrders;
-			SubstructureSearch           substructSearch;
-			ProtonationStateStandardizer chargeStandardizer;
-			Math::Vector2DArray          atom2DCoords;
-			Util::BitSet                 markedAtomSet;
-			Fragment                     tmpFragment;
-			BasicMolecule                tmpMolecule;
-			MoleculeComponentList        molCompList1;
-			MoleculeComponentList        molCompList2;
-			StructureIDSet               uniqueMolComps;
-		};
+            HashCodeCalculator           hashCodeCalc;
+            KekuleStructureCalculator    kekuleStructureCalc;
+            Util::STArray                kekulizedBondOrders;
+            SubstructureSearch           substructSearch;
+            ProtonationStateStandardizer chargeStandardizer;
+            Math::Vector2DArray          atom2DCoords;
+            Util::BitSet                 markedAtomSet;
+            Fragment                     tmpFragment;
+            BasicMolecule                tmpMolecule;
+            MoleculeComponentList        molCompList1;
+            MoleculeComponentList        molCompList2;
+            StructureIDSet               uniqueMolComps;
+        };
     }
 }
 

@@ -43,67 +43,67 @@ namespace CDPL
 
     namespace Chem
     {
-		
-		class MolecularGraph;
+        
+        class MolecularGraph;
     }
 
     namespace ForceField
     {
 
-		/**
-		 * \brief Implements the extraction of all rings in the SSSR of a molecular graph that 
-		 *        are aromatic according to MMFF94 conventions.
-		 */
-		class CDPL_FORCEFIELD_API MMFF94AromaticSSSRSubset : public Chem::FragmentList 
-		{
+        /**
+         * \brief Implements the extraction of all rings in the SSSR of a molecular graph that 
+         *        are aromatic according to MMFF94 conventions.
+         */
+        class CDPL_FORCEFIELD_API MMFF94AromaticSSSRSubset : public Chem::FragmentList 
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AromaticSSSRSubset instances.
-			 */
-			typedef std::shared_ptr<MMFF94AromaticSSSRSubset> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AromaticSSSRSubset instances.
+             */
+            typedef std::shared_ptr<MMFF94AromaticSSSRSubset> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %MMFF94AromaticSSSRSubset instance.
-			 */
-			MMFF94AromaticSSSRSubset() {}
+            /**
+             * \brief Constructs an empty \c %MMFF94AromaticSSSRSubset instance.
+             */
+            MMFF94AromaticSSSRSubset() {}
 
-			/**
-			 * \brief Construct a \c %MMFF94AromaticSSSRSubset instance that contains all aromatic rings of the
-			 *        SSSR of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to extract the aromatic rings.
-			 */
-			MMFF94AromaticSSSRSubset(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Construct a \c %MMFF94AromaticSSSRSubset instance that contains all aromatic rings of the
+             *        SSSR of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the aromatic rings.
+             */
+            MMFF94AromaticSSSRSubset(const Chem::MolecularGraph& molgraph);
 
-			/**
-			 * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to extract the aromatic rings.
-			 */
-			void extract(const Chem::MolecularGraph& molgraph);
-	
-			/**
-			 * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to extract the aromatic rings.
-			 * \param sssr The SSSR of the molecular graph \a molgraph.
-			 */
-			void extract(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& sssr);
+            /**
+             * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the aromatic rings.
+             */
+            void extract(const Chem::MolecularGraph& molgraph);
+    
+            /**
+             * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the aromatic rings.
+             * \param sssr The SSSR of the molecular graph \a molgraph.
+             */
+            void extract(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& sssr);
 
-		  private:
-			MMFF94AromaticSSSRSubset(const MMFF94AromaticSSSRSubset&);
+          private:
+            MMFF94AromaticSSSRSubset(const MMFF94AromaticSSSRSubset&);
 
-			MMFF94AromaticSSSRSubset& operator=(const MMFF94AromaticSSSRSubset&);
+            MMFF94AromaticSSSRSubset& operator=(const MMFF94AromaticSSSRSubset&);
 
-			void init(const Chem::MolecularGraph& molgraph);
+            void init(const Chem::MolecularGraph& molgraph);
 
-			void perceiveAromaticRings(const Chem::FragmentList& sssr);
-			void addToAromaticBondMask(const Chem::Fragment& ring);
+            void perceiveAromaticRings(const Chem::FragmentList& sssr);
+            void addToAromaticBondMask(const Chem::Fragment& ring);
 
-			typedef std::vector<Chem::Fragment::SharedPointer> RingList;
+            typedef std::vector<Chem::Fragment::SharedPointer> RingList;
 
-			const Chem::MolecularGraph* molGraph;
-			RingList                    candidateRings;
-			Util::BitSet                aromBondMask;
-		};
+            const Chem::MolecularGraph* molGraph;
+            RingList                    candidateRings;
+            Util::BitSet                aromBondMask;
+        };
     }
 }
 

@@ -31,41 +31,41 @@
 
 void CDPLPythonChem::exportBasicMolecule()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	void (Chem::BasicMolecule::*copyBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::copy;
-	void (Chem::BasicMolecule::*copyMolFunc)(const Chem::Molecule&) = &Chem::BasicMolecule::copy;
-	void (Chem::BasicMolecule::*copyMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::BasicMolecule::copy;
+    void (Chem::BasicMolecule::*copyBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::copy;
+    void (Chem::BasicMolecule::*copyMolFunc)(const Chem::Molecule&) = &Chem::BasicMolecule::copy;
+    void (Chem::BasicMolecule::*copyMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::BasicMolecule::copy;
 
-	void (Chem::BasicMolecule::*appendBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::append;
-	void (Chem::BasicMolecule::*appendMolFunc)(const Chem::Molecule&) = &Chem::BasicMolecule::append;
-	void (Chem::BasicMolecule::*appendMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::BasicMolecule::append;
+    void (Chem::BasicMolecule::*appendBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::append;
+    void (Chem::BasicMolecule::*appendMolFunc)(const Chem::Molecule&) = &Chem::BasicMolecule::append;
+    void (Chem::BasicMolecule::*appendMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::BasicMolecule::append;
 
-	Chem::BasicMolecule& (Chem::BasicMolecule::*assignBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::operator=;
-	Chem::Molecule& (Chem::Molecule::*assignMolFunc)(const Chem::Molecule&) = &Chem::Molecule::operator=;
-	Chem::Molecule& (Chem::Molecule::*assignMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::Molecule::operator=;
+    Chem::BasicMolecule& (Chem::BasicMolecule::*assignBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::operator=;
+    Chem::Molecule& (Chem::Molecule::*assignMolFunc)(const Chem::Molecule&) = &Chem::Molecule::operator=;
+    Chem::Molecule& (Chem::Molecule::*assignMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::Molecule::operator=;
 
-	Chem::BasicMolecule& (Chem::BasicMolecule::*addBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::operator+=;
-	Chem::Molecule& (Chem::Molecule::*addMolFunc)(const Chem::Molecule&) = &Chem::Molecule::operator+=;
-	Chem::Molecule& (Chem::Molecule::*addMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::Molecule::operator+=;
+    Chem::BasicMolecule& (Chem::BasicMolecule::*addBasicMolFunc)(const Chem::BasicMolecule&) = &Chem::BasicMolecule::operator+=;
+    Chem::Molecule& (Chem::Molecule::*addMolFunc)(const Chem::Molecule&) = &Chem::Molecule::operator+=;
+    Chem::Molecule& (Chem::Molecule::*addMolGraphFunc)(const Chem::MolecularGraph&) = &Chem::Molecule::operator+=;
 
-	python::class_<Chem::BasicMolecule, Chem::BasicMolecule::SharedPointer, 
-		python::bases<Chem::Molecule> >("BasicMolecule", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::BasicMolecule&>((python::arg("self"), python::arg("mol"))))
-		.def(python::init<const Chem::Molecule&>((python::arg("self"), python::arg("mol"))))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def("copy", copyBasicMolFunc, (python::arg("self"), python::arg("mol")))
-		.def("copy", copyMolFunc, (python::arg("self"), python::arg("mol")))
-		.def("copy", copyMolGraphFunc, (python::arg("self"), python::arg("molgraph")))
-		.def("append", appendBasicMolFunc, (python::arg("self"), python::arg("mol")))
-		.def("append", appendMolFunc, (python::arg("self"), python::arg("mol")))
-		.def("append", appendMolGraphFunc, (python::arg("self"), python::arg("molgraph")))
-		.def("assign", assignBasicMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
-		.def("assign", assignMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
-		.def("assign", assignMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
-		.def("__iadd__", addBasicMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
-		.def("__iadd__", addMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
-		.def("__iadd__", addMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>());
+    python::class_<Chem::BasicMolecule, Chem::BasicMolecule::SharedPointer, 
+        python::bases<Chem::Molecule> >("BasicMolecule", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::BasicMolecule&>((python::arg("self"), python::arg("mol"))))
+        .def(python::init<const Chem::Molecule&>((python::arg("self"), python::arg("mol"))))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def("copy", copyBasicMolFunc, (python::arg("self"), python::arg("mol")))
+        .def("copy", copyMolFunc, (python::arg("self"), python::arg("mol")))
+        .def("copy", copyMolGraphFunc, (python::arg("self"), python::arg("molgraph")))
+        .def("append", appendBasicMolFunc, (python::arg("self"), python::arg("mol")))
+        .def("append", appendMolFunc, (python::arg("self"), python::arg("mol")))
+        .def("append", appendMolGraphFunc, (python::arg("self"), python::arg("molgraph")))
+        .def("assign", assignBasicMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
+        .def("assign", assignMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
+        .def("assign", assignMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
+        .def("__iadd__", addBasicMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
+        .def("__iadd__", addMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
+        .def("__iadd__", addMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>());
 }

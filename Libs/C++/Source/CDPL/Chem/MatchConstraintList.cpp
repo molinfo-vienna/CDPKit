@@ -32,51 +32,51 @@ using namespace CDPL;
 
 unsigned int Chem::MatchConstraint::getID() const
 {
-	return id;
+    return id;
 }
 
 void Chem::MatchConstraint::setID(unsigned int id)
 {
-	this->id = id;
+    this->id = id;
 }
 
 Chem::MatchConstraint::Relation Chem::MatchConstraint::getRelation() const
 {
-	return relation;
+    return relation;
 }
 
 void Chem::MatchConstraint::setRelation(Relation rel)
 {
-	relation = rel;
+    relation = rel;
 }
 
 const Base::Any& Chem::MatchConstraint::getValue() const
 {
- 	return value;
+     return value;
 }
 
 bool Chem::MatchConstraint::hasValue() const
 {
-	return !value.isEmpty();
+    return !value.isEmpty();
 }
 
 
 Chem::MatchConstraintList::Type Chem::MatchConstraintList::getType() const
 {
-	return type;
+    return type;
 }
 
 void Chem::MatchConstraintList::setType(Type type)
 {
-	this->type = type;
+    this->type = type;
 }
 
 void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Relation rel)
 {
-	addElement(MatchConstraint(id, rel));
+    addElement(MatchConstraint(id, rel));
 }
 
 const char* Chem::MatchConstraintList::getClassName() const
 {
-	return "MatchConstraintList";
+    return "MatchConstraintList";
 }

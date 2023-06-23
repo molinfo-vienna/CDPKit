@@ -35,17 +35,17 @@ using namespace ChOX;
 
 
 IOSettingsEditWidget::IOSettingsEditWidget(QWidget* parent, Settings& settings): 
-	TabSettingsEditWidget(parent)
+    TabSettingsEditWidget(parent)
 {
-	init(settings);
+    init(settings);
 }
 
 void IOSettingsEditWidget::init(Settings& settings)
 {
-	addEditWidget(new MOLFileIOSettingsEditWidget(this, settings), tr("MOL-Files"));
-	addEditWidget(new SDFileIOSettingsEditWidget(this, settings), tr("SD-Files"));
-	addEditWidget(new RXNFileIOSettingsEditWidget(this, settings), tr("RXN-Files"));
-	addEditWidget(new RDFileIOSettingsEditWidget(this, settings), tr("RD-Files"));
-	addEditWidget(new SMILESIOSettingsEditWidget(this, settings), tr("SMILES"));
-	addEditWidget(new OtherIOSettingsEditWidget(this, settings), tr("Others"));
+    addEditWidget(new MOLFileIOSettingsEditWidget(this, settings), tr("MOL-Files"));
+    addEditWidget(new SDFileIOSettingsEditWidget(this, settings), tr("SD-Files"));
+    addEditWidget(new RXNFileIOSettingsEditWidget(this, settings), tr("RXN-Files"));
+    addEditWidget(new RDFileIOSettingsEditWidget(this, settings), tr("RD-Files"));
+    addEditWidget(new SMILESIOSettingsEditWidget(this, settings), tr("SMILES"));
+    addEditWidget(new OtherIOSettingsEditWidget(this, settings), tr("Others"));
 }

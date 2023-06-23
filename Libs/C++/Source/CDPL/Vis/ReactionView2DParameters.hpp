@@ -34,146 +34,146 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-		class Any;
-	}
+        class LookupKey;
+        class Any;
+    }
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		class View2D;
+        class View2D;
 
-		class ReactionView2DParameters
-		{
+        class ReactionView2DParameters
+        {
 
-		public:
-			ReactionView2DParameters(View2D&);
+        public:
+            ReactionView2DParameters(View2D&);
 
-			~ReactionView2DParameters();
+            ~ReactionView2DParameters();
 
-			const Rectangle2D& getViewport() const;
-			unsigned int getAlignment() const;
-			unsigned int getSizeAdjustment() const;
+            const Rectangle2D& getViewport() const;
+            unsigned int getAlignment() const;
+            unsigned int getSizeAdjustment() const;
 
-			bool eraseBackground() const;
-			const Color& getBackgroundColor() const;
+            bool eraseBackground() const;
+            const Color& getBackgroundColor() const;
 
-			unsigned int getArrowStyle() const;
-			const Color& getArrowColor() const;
-			const SizeSpecification& getArrowLength() const;
-			const SizeSpecification& getArrowHeadLength() const;
-			const SizeSpecification& getArrowHeadWidth() const;
-			const SizeSpecification& getArrowShaftWidth() const;
-			const SizeSpecification& getArrowLineWidth() const;
+            unsigned int getArrowStyle() const;
+            const Color& getArrowColor() const;
+            const SizeSpecification& getArrowLength() const;
+            const SizeSpecification& getArrowHeadLength() const;
+            const SizeSpecification& getArrowHeadWidth() const;
+            const SizeSpecification& getArrowShaftWidth() const;
+            const SizeSpecification& getArrowLineWidth() const;
 
-			unsigned int getComponentLayout() const;
-			unsigned int getComponentLayoutDirection() const;
-			const SizeSpecification& getComponentMargin() const;
-			
-			bool showReactants() const;
-			bool showAgents() const;
-			bool showProducts() const;
+            unsigned int getComponentLayout() const;
+            unsigned int getComponentLayoutDirection() const;
+            const SizeSpecification& getComponentMargin() const;
+            
+            bool showReactants() const;
+            bool showAgents() const;
+            bool showProducts() const;
 
-			unsigned int getAgentAlignment() const;
-			unsigned int getAgentLayout() const;
-			unsigned int getAgentLayoutDirection() const;
+            unsigned int getAgentAlignment() const;
+            unsigned int getAgentLayout() const;
+            unsigned int getAgentLayoutDirection() const;
 
-			const Color& getPlusSignColor() const;
-			const SizeSpecification& getPlusSignSize() const;
-			const SizeSpecification& getPlusSignLineWidth() const;
-			bool showPlusSigns() const;
+            const Color& getPlusSignColor() const;
+            const SizeSpecification& getPlusSignSize() const;
+            const SizeSpecification& getPlusSignLineWidth() const;
+            bool showPlusSigns() const;
 
-			bool viewportChanged() const;
-			bool alignmentChanged() const;
-			bool sizeAdjustmentChanged() const;
-			bool componentBoundsChanged() const;
-			bool layoutChanged() const;
-			bool plusSignSizeChanged() const;
-			bool plusSignAttributeChanged() const;
-			bool arrowSizeChanged() const;
-			bool arrowAttributeChanged() const;
-			bool componentVisibilityChanged() const;
+            bool viewportChanged() const;
+            bool alignmentChanged() const;
+            bool sizeAdjustmentChanged() const;
+            bool componentBoundsChanged() const;
+            bool layoutChanged() const;
+            bool plusSignSizeChanged() const;
+            bool plusSignAttributeChanged() const;
+            bool arrowSizeChanged() const;
+            bool arrowAttributeChanged() const;
+            bool componentVisibilityChanged() const;
 
-			void clearChangeFlags();
+            void clearChangeFlags();
 
-		private:
-			void parentChanged();
-			void parameterChanged(const Base::LookupKey&, Base::Any);
-			void parameterRemoved(const Base::LookupKey&);
+        private:
+            void parentChanged();
+            void parameterChanged(const Base::LookupKey&, Base::Any);
+            void parameterRemoved(const Base::LookupKey&);
 
-			void setViewport(const Rectangle2D&);
-			void setAlignment(unsigned int);
-			void setSizeAdjustment(unsigned int);
+            void setViewport(const Rectangle2D&);
+            void setAlignment(unsigned int);
+            void setSizeAdjustment(unsigned int);
 
-			void eraseBackground(bool);
-			void setBackgroundColor(const Color&);
+            void eraseBackground(bool);
+            void setBackgroundColor(const Color&);
 
-			void setArrowStyle(unsigned int);
-			void setArrowColor(const Color&);
-			void setArrowLength(const SizeSpecification&);
-			void setArrowHeadLength(const SizeSpecification&);
-			void setArrowHeadWidth(const SizeSpecification&);
-			void setArrowShaftWidth(const SizeSpecification&);
-			void setArrowLineWidth(const SizeSpecification&);
+            void setArrowStyle(unsigned int);
+            void setArrowColor(const Color&);
+            void setArrowLength(const SizeSpecification&);
+            void setArrowHeadLength(const SizeSpecification&);
+            void setArrowHeadWidth(const SizeSpecification&);
+            void setArrowShaftWidth(const SizeSpecification&);
+            void setArrowLineWidth(const SizeSpecification&);
 
-			void setComponentLayout(unsigned int);
-			void setComponentLayoutDirection(unsigned int);
-			void setComponentMargin(const SizeSpecification&);
+            void setComponentLayout(unsigned int);
+            void setComponentLayoutDirection(unsigned int);
+            void setComponentMargin(const SizeSpecification&);
 
-			void showReactants(bool);
-			void showAgents(bool);
-			void showProducts(bool);
+            void showReactants(bool);
+            void showAgents(bool);
+            void showProducts(bool);
 
-			void setAgentAlignment(unsigned int);
-			void setAgentLayout(unsigned int);
-			void setAgentLayoutDirection(unsigned int);
+            void setAgentAlignment(unsigned int);
+            void setAgentLayout(unsigned int);
+            void setAgentLayoutDirection(unsigned int);
 
-			void setPlusSignColor(const Color&);
-			void setPlusSignSize(const SizeSpecification&);
-			void setPlusSignLineWidth(const SizeSpecification&);
-			void showPlusSigns(bool);
+            void setPlusSignColor(const Color&);
+            void setPlusSignSize(const SizeSpecification&);
+            void setPlusSignLineWidth(const SizeSpecification&);
+            void showPlusSigns(bool);
 
-			const View2D&      view;
-			Rectangle2D        viewport;
-			unsigned int       sizeAdjustment;
-			unsigned int       alignment;
-			Color              backgroundColor;
-			bool               eraseBackgroundFlag;
-			unsigned int       arrowStyle;
-			Color              arrowColor;
-			SizeSpecification  arrowLength;
-			SizeSpecification  arrowHeadLength;
-			SizeSpecification  arrowHeadWidth;
-			SizeSpecification  arrowShaftWidth;
-			SizeSpecification  arrowLineWidth;
-			unsigned int       componentLayout;
-			unsigned int       componentLayoutDirection;
-			SizeSpecification  componentMargin;
-			bool               showReactantsFlag;
-			bool               showAgentsFlag;
-			bool               showProductsFlag;
-			unsigned int       agentAlignment;		
-			unsigned int       agentLayout;
-			unsigned int       agentLayoutDirection;
-			Color              plusSignColor;
-			SizeSpecification  plusSignSize;
-			SizeSpecification  plusSignLineWidth;
-			bool               showPlusSignsFlag;
-			bool               viewportChangedFlag;
-			bool               alignmentChangedFlag;
-			bool               sizeAdjustmentChangedFlag;
-			bool               componentBoundsChangedFlag;
-			bool               layoutChangedFlag;
-			bool               plusSignSizeChangedFlag;
-			bool               plusSignAttributeChangedFlag;
-			bool               arrowSizeChangedFlag;
-			bool               arrowAttributeChangedFlag;
-			bool               componentVisibilityChangedFlag;
-		};
-	}
+            const View2D&      view;
+            Rectangle2D        viewport;
+            unsigned int       sizeAdjustment;
+            unsigned int       alignment;
+            Color              backgroundColor;
+            bool               eraseBackgroundFlag;
+            unsigned int       arrowStyle;
+            Color              arrowColor;
+            SizeSpecification  arrowLength;
+            SizeSpecification  arrowHeadLength;
+            SizeSpecification  arrowHeadWidth;
+            SizeSpecification  arrowShaftWidth;
+            SizeSpecification  arrowLineWidth;
+            unsigned int       componentLayout;
+            unsigned int       componentLayoutDirection;
+            SizeSpecification  componentMargin;
+            bool               showReactantsFlag;
+            bool               showAgentsFlag;
+            bool               showProductsFlag;
+            unsigned int       agentAlignment;        
+            unsigned int       agentLayout;
+            unsigned int       agentLayoutDirection;
+            Color              plusSignColor;
+            SizeSpecification  plusSignSize;
+            SizeSpecification  plusSignLineWidth;
+            bool               showPlusSignsFlag;
+            bool               viewportChangedFlag;
+            bool               alignmentChangedFlag;
+            bool               sizeAdjustmentChangedFlag;
+            bool               componentBoundsChangedFlag;
+            bool               layoutChangedFlag;
+            bool               plusSignSizeChangedFlag;
+            bool               plusSignAttributeChangedFlag;
+            bool               arrowSizeChangedFlag;
+            bool               arrowAttributeChangedFlag;
+            bool               componentVisibilityChangedFlag;
+        };
+    }
 }
 
 #endif // CDPL_VIS_REACTIONVIEW2DPARAMETERS_HPP

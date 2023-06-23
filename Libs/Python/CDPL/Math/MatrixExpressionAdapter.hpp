@@ -34,134 +34,134 @@
 namespace CDPLPythonMath
 {
 
-	template <typename EDT, typename WDT>
-	class ConstMatrixExpressionAdapter : 
-		public ConstMatrixExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
-	{
+    template <typename EDT, typename WDT>
+    class ConstMatrixExpressionAdapter : 
+        public ConstMatrixExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
+    {
 
-	public:
-		typedef EDT HeldExpressionDataType;
-		typedef WDT KeepAliveWardDataType;
-		typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-		typedef typename HeldExpressionType::ValueType ValueType;
-		typedef ConstMatrixExpression<ValueType> ExpressionType;
-		typedef typename ExpressionType::ConstReference ConstReference;
-		typedef typename ExpressionType::SizeType SizeType;
-		typedef typename ExpressionType::SharedPointer ConstExpressionPointer;
+    public:
+        typedef EDT HeldExpressionDataType;
+        typedef WDT KeepAliveWardDataType;
+        typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
+        typedef typename HeldExpressionType::ValueType ValueType;
+        typedef ConstMatrixExpression<ValueType> ExpressionType;
+        typedef typename ExpressionType::ConstReference ConstReference;
+        typedef typename ExpressionType::SizeType SizeType;
+        typedef typename ExpressionType::SharedPointer ConstExpressionPointer;
 
-		ConstMatrixExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-			exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-		
-		~ConstMatrixExpressionAdapter() {} 
+        ConstMatrixExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
+        
+        ~ConstMatrixExpressionAdapter() {} 
 
-		ConstReference operator()(SizeType i, SizeType j) const {
-			return boost::unwrap_ref(exprData)(i, j);
-		}
+        ConstReference operator()(SizeType i, SizeType j) const {
+            return boost::unwrap_ref(exprData)(i, j);
+        }
 
-		SizeType getSize1() const {
-			return boost::unwrap_ref(exprData).getSize1();
-		}
+        SizeType getSize1() const {
+            return boost::unwrap_ref(exprData).getSize1();
+        }
 
-		SizeType getSize2() const {
-			return boost::unwrap_ref(exprData).getSize2();
-		}
+        SizeType getSize2() const {
+            return boost::unwrap_ref(exprData).getSize2();
+        }
 
-	private:
-		HeldExpressionDataType exprData;
-		KeepAliveWardDataType  keepAliveWardData;
-	};
+    private:
+        HeldExpressionDataType exprData;
+        KeepAliveWardDataType  keepAliveWardData;
+    };
 
-	template <typename EDT, typename WDT>
-	class MatrixExpressionAdapter : public MatrixExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
-	{
+    template <typename EDT, typename WDT>
+    class MatrixExpressionAdapter : public MatrixExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
+    {
 
-	public:
-		typedef EDT HeldExpressionDataType;
-		typedef WDT KeepAliveWardDataType;
-		typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-		typedef typename HeldExpressionType::ValueType ValueType;
-		typedef MatrixExpression<ValueType> ExpressionType;
-		typedef typename ExpressionType::ConstExpressionType ConstExpressionType;
-		typedef typename ExpressionType::ConstReference ConstReference;
-		typedef typename ExpressionType::Reference Reference;
-		typedef typename ExpressionType::SizeType SizeType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
-		typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
+    public:
+        typedef EDT HeldExpressionDataType;
+        typedef WDT KeepAliveWardDataType;
+        typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
+        typedef typename HeldExpressionType::ValueType ValueType;
+        typedef MatrixExpression<ValueType> ExpressionType;
+        typedef typename ExpressionType::ConstExpressionType ConstExpressionType;
+        typedef typename ExpressionType::ConstReference ConstReference;
+        typedef typename ExpressionType::Reference Reference;
+        typedef typename ExpressionType::SizeType SizeType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
-		MatrixExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-			exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-		
-		~MatrixExpressionAdapter() {} 
-	
-		ConstReference operator()(SizeType i, SizeType j) const {
-			return boost::unwrap_ref(exprData)(i, j);
-		}
+        MatrixExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
+        
+        ~MatrixExpressionAdapter() {} 
+    
+        ConstReference operator()(SizeType i, SizeType j) const {
+            return boost::unwrap_ref(exprData)(i, j);
+        }
 
-		Reference operator()(SizeType i, SizeType j) {
-			return boost::unwrap_ref(exprData)(i, j);
-		}
+        Reference operator()(SizeType i, SizeType j) {
+            return boost::unwrap_ref(exprData)(i, j);
+        }
 
-		SizeType getSize1() const {
-			return boost::unwrap_ref(exprData).getSize1();
-		}
+        SizeType getSize1() const {
+            return boost::unwrap_ref(exprData).getSize1();
+        }
 
-		SizeType getSize2() const {
-			return boost::unwrap_ref(exprData).getSize2();
-		}
+        SizeType getSize2() const {
+            return boost::unwrap_ref(exprData).getSize2();
+        }
 
-		MatrixExpressionAdapter& operator=(const ConstExpressionType& e) {
-			if (this == &e)
-				return *this;
+        MatrixExpressionAdapter& operator=(const ConstExpressionType& e) {
+            if (this == &e)
+                return *this;
 
-			boost::unwrap_ref(exprData) = e;
-			return *this;
-		}
+            boost::unwrap_ref(exprData) = e;
+            return *this;
+        }
 
-		MatrixExpressionAdapter& operator+=(const ConstExpressionType& e) {
-			boost::unwrap_ref(exprData) += e;
-			return *this;
-		}
-		
-		MatrixExpressionAdapter& operator-=(const ConstExpressionType& e) {
-			boost::unwrap_ref(exprData) -= e;
-			return *this;
-		}
-		
-		MatrixExpressionAdapter& operator*=(const ValueType& t) {
-			boost::unwrap_ref(exprData) *= t;
-			return *this;
-		}
-		
-		MatrixExpressionAdapter& operator/=(const ValueType& t) {
-			boost::unwrap_ref(exprData) /= t;
-			return *this;
-		}
+        MatrixExpressionAdapter& operator+=(const ConstExpressionType& e) {
+            boost::unwrap_ref(exprData) += e;
+            return *this;
+        }
+        
+        MatrixExpressionAdapter& operator-=(const ConstExpressionType& e) {
+            boost::unwrap_ref(exprData) -= e;
+            return *this;
+        }
+        
+        MatrixExpressionAdapter& operator*=(const ValueType& t) {
+            boost::unwrap_ref(exprData) *= t;
+            return *this;
+        }
+        
+        MatrixExpressionAdapter& operator/=(const ValueType& t) {
+            boost::unwrap_ref(exprData) /= t;
+            return *this;
+        }
 
-	private:
-		HeldExpressionDataType exprData;
-		KeepAliveWardDataType  keepAliveWardData;
-	};
+    private:
+        HeldExpressionDataType exprData;
+        KeepAliveWardDataType  keepAliveWardData;
+    };
 
 
-	template <typename EDT, typename WDT>
-	inline
-	typename ConstMatrixExpressionAdapter<EDT, WDT>::ConstExpressionPointer 
-	makeConstMatrixExpressionAdapter(const EDT& e, const WDT& ward)
-	{
-		typedef typename ConstMatrixExpressionAdapter<EDT, WDT>::ConstExpressionPointer ExpressionPointerType;
+    template <typename EDT, typename WDT>
+    inline
+    typename ConstMatrixExpressionAdapter<EDT, WDT>::ConstExpressionPointer 
+    makeConstMatrixExpressionAdapter(const EDT& e, const WDT& ward)
+    {
+        typedef typename ConstMatrixExpressionAdapter<EDT, WDT>::ConstExpressionPointer ExpressionPointerType;
 
-		return ExpressionPointerType(new ConstMatrixExpressionAdapter<EDT, WDT>(e, ward));
-	}
+        return ExpressionPointerType(new ConstMatrixExpressionAdapter<EDT, WDT>(e, ward));
+    }
 
-	template <typename EDT, typename WDT>
-	inline
-	typename MatrixExpressionAdapter<EDT, WDT>::ExpressionPointer 
-	makeMatrixExpressionAdapter(const EDT& e, const WDT& ward)
-	{
-		typedef typename MatrixExpressionAdapter<EDT, WDT>::ExpressionPointer ExpressionPointerType;
+    template <typename EDT, typename WDT>
+    inline
+    typename MatrixExpressionAdapter<EDT, WDT>::ExpressionPointer 
+    makeMatrixExpressionAdapter(const EDT& e, const WDT& ward)
+    {
+        typedef typename MatrixExpressionAdapter<EDT, WDT>::ExpressionPointer ExpressionPointerType;
 
-		return ExpressionPointerType(new MatrixExpressionAdapter<EDT, WDT>(e, ward));
-	}
+        return ExpressionPointerType(new MatrixExpressionAdapter<EDT, WDT>(e, ward));
+    }
 }
 
 #endif // CDPL_PYTHON_MATH_MATRIXEXPRESSIONADAPTER_HPP

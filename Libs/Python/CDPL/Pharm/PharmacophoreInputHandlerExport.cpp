@@ -31,5 +31,5 @@
 
 void CDPLPythonPharm::exportPharmacophoreInputHandler()
 {
-	CDPLPythonBase::DataInputHandlerExport<CDPL::Pharm::Pharmacophore>("PharmacophoreInputHandler");
+    CDPLPythonBase::DataInputHandlerExport<CDPL::Pharm::Pharmacophore>("PharmacophoreInputHandler");
 }

@@ -39,20 +39,20 @@ void CDPLPythonPharm::exportInteractionAnalyzer()
     using namespace CDPL;
 
     python::class_<Pharm::InteractionAnalyzer, boost::noncopyable>("InteractionAnalyzer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Pharm::InteractionAnalyzer&>(
-				 (python::arg("self"), python::arg("analyzer"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionAnalyzer>())	
-		.def("setConstraintFunction", &Pharm::InteractionAnalyzer::setConstraintFunction, 
-			 (python::arg("self"), python::arg("type1"), python::arg("type2"), python::arg("func")))
-		.def("removeConstraintFunction", &Pharm::InteractionAnalyzer::removeConstraintFunction, 
-			 (python::arg("self"), python::arg("type1"), python::arg("type2")))
-		.def("getConstraintFunction", &Pharm::InteractionAnalyzer::getConstraintFunction, 
-			 (python::arg("self"), python::arg("type1"), python::arg("type2")),
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("assign", &Pharm::InteractionAnalyzer::operator=, 
-			 (python::arg("self"), python::arg("analyzer")), python::return_self<>())
-		.def("analyze", &Pharm::InteractionAnalyzer::analyze,
-			 (python::arg("self"), python::arg("cntnr1"), python::arg("cntnr2"), 
-			  python::arg("iactions"), python::arg("append") = false));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Pharm::InteractionAnalyzer&>(
+                 (python::arg("self"), python::arg("analyzer"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionAnalyzer>())    
+        .def("setConstraintFunction", &Pharm::InteractionAnalyzer::setConstraintFunction, 
+             (python::arg("self"), python::arg("type1"), python::arg("type2"), python::arg("func")))
+        .def("removeConstraintFunction", &Pharm::InteractionAnalyzer::removeConstraintFunction, 
+             (python::arg("self"), python::arg("type1"), python::arg("type2")))
+        .def("getConstraintFunction", &Pharm::InteractionAnalyzer::getConstraintFunction, 
+             (python::arg("self"), python::arg("type1"), python::arg("type2")),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("assign", &Pharm::InteractionAnalyzer::operator=, 
+             (python::arg("self"), python::arg("analyzer")), python::return_self<>())
+        .def("analyze", &Pharm::InteractionAnalyzer::analyze,
+             (python::arg("self"), python::arg("cntnr1"), python::arg("cntnr2"), 
+              python::arg("iactions"), python::arg("append") = false));
 }

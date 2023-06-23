@@ -38,7 +38,7 @@ using namespace CDPL;
 
 Pharm::FeatureDistanceScore::FeatureDistanceScore(double min_dist, double max_dist): 
     minDist(min_dist), maxDist(max_dist),
-	distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)) {}
+    distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)) {}
 
 double Pharm::FeatureDistanceScore::getMinDistance() const
 {
@@ -65,5 +65,5 @@ double Pharm::FeatureDistanceScore::operator()(const Math::Vector3D& ftr1_pos, c
     double dist = length(get3DCoordinates(ftr2) - ftr1_pos);
     double ctr_dev = (dist - (maxDist + minDist) * 0.5) / (maxDist - minDist);
 
-	return distScoringFunc(ctr_dev) * getWeight(ftr2);
+    return distScoringFunc(ctr_dev) * getWeight(ftr2);
 }

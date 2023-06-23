@@ -33,32 +33,32 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the connection table and \e Rxn-File version for the
-		 *        I/O of molecular graphs and reactions in \e MDL format [\ref CTFILE].
-		 */
-		namespace MDLDataFormatVersion
-		{
+        /**
+         * \brief Provides constants that are used to specify the connection table and \e Rxn-File version for the
+         *        I/O of molecular graphs and reactions in \e MDL format [\ref CTFILE].
+         */
+        namespace MDLDataFormatVersion
+        {
 
-			/**
-			 * \brief Specifies that the data format version is undefined.
-			 */
-			const unsigned int UNDEF    = 0;
+            /**
+             * \brief Specifies that the data format version is undefined.
+             */
+            const unsigned int UNDEF    = 0;
 
-			/**
-			 * \brief Specifies the data format version \e V2000.
-			 */
-			const unsigned int V2000    = 2000;
+            /**
+             * \brief Specifies the data format version \e V2000.
+             */
+            const unsigned int V2000    = 2000;
 
-			/**
-			 * \brief Specifies the extended data format version \e V3000.
-			 */
-			const unsigned int V3000    = 3000;
-		}
-	}
+            /**
+             * \brief Specifies the extended data format version \e V3000.
+             */
+            const unsigned int V3000    = 3000;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_MDLDATAFORMATVERSION_HPP

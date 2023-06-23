@@ -34,126 +34,126 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename C, typename K = typename C::KeyType>
-		class SparseContainerElement
-		{
-				
-		public:
-			typedef C ContainerType;
-			typedef K KeyType;
-			typedef typename ContainerType::ValueType ValueType;
-			typedef typename ContainerType::SizeType SizeType;
-			typedef ValueType& Reference;
-			typedef typename ContainerType::ConstReference ConstReference;
-			typedef typename ContainerType::ArrayType ArrayType;
+        template <typename C, typename K = typename C::KeyType>
+        class SparseContainerElement
+        {
+                
+        public:
+            typedef C ContainerType;
+            typedef K KeyType;
+            typedef typename ContainerType::ValueType ValueType;
+            typedef typename ContainerType::SizeType SizeType;
+            typedef ValueType& Reference;
+            typedef typename ContainerType::ConstReference ConstReference;
+            typedef typename ContainerType::ArrayType ArrayType;
 
-			SparseContainerElement(ContainerType& c, KeyType key): cntnr(c), key(key) {}
+            SparseContainerElement(ContainerType& c, KeyType key): cntnr(c), key(key) {}
 
-			// Assignment
-			SparseContainerElement& operator=(const SparseContainerElement &p) {
-				p.get();
-				set(p.value);
+            // Assignment
+            SparseContainerElement& operator=(const SparseContainerElement &p) {
+                p.get();
+                set(p.value);
 
-				return *this;
-			}
+                return *this;
+            }
 
-			template <typename D>
-			SparseContainerElement& operator=(const D &d) {
-				set(d);
+            template <typename D>
+            SparseContainerElement& operator=(const D &d) {
+                set(d);
 
-				return *this;
-			}
+                return *this;
+            }
 
-			template <typename D>
-			SparseContainerElement& operator+=(const D &d) {
-				get();
-				value += d;
-				set(value);
+            template <typename D>
+            SparseContainerElement& operator+=(const D &d) {
+                get();
+                value += d;
+                set(value);
 
-				return *this;
-			}
+                return *this;
+            }
 
-			template <typename D>
-			SparseContainerElement& operator-=(const D &d) {
-				get();
-				value -= d;
-				set(value);
+            template <typename D>
+            SparseContainerElement& operator-=(const D &d) {
+                get();
+                value -= d;
+                set(value);
 
-				return *this;
-			}
+                return *this;
+            }
 
-			template <typename D>
-			SparseContainerElement& operator*=(const D &d) {
-				get();
-				value *= d;
-				set(value);
+            template <typename D>
+            SparseContainerElement& operator*=(const D &d) {
+                get();
+                value *= d;
+                set(value);
 
-				return *this;
-			}
+                return *this;
+            }
 
-			template <typename D>
-			SparseContainerElement& operator/=(const D &d) {
-				get();
-				value /= d;
-				set(value);
+            template <typename D>
+            SparseContainerElement& operator/=(const D &d) {
+                get();
+                value /= d;
+                set(value);
 
-				return *this;
-			}
+                return *this;
+            }
 
-			// Comparison
-			template <typename D>
-			bool operator==(const D &d) const {
-				get();
+            // Comparison
+            template <typename D>
+            bool operator==(const D &d) const {
+                get();
 
-				return (value == d);
-			}
+                return (value == d);
+            }
 
-			template <typename D>
-			bool operator!=(const D &d) const {
-				get();
+            template <typename D>
+            bool operator!=(const D &d) const {
+                get();
 
-				return (value != d);
-			}
+                return (value != d);
+            }
 
-			operator ConstReference() const {
-				get();
+            operator ConstReference() const {
+                get();
 
-				return value;
-			}
+                return value;
+            }
 
-		private:
-			void set(const ValueType& v) {
-				if (v == ValueType())
-					cntnr.getData().erase(key);
+        private:
+            void set(const ValueType& v) {
+                if (v == ValueType())
+                    cntnr.getData().erase(key);
 
-				else {
-					std::pair<typename ArrayType::iterator, bool> pos = cntnr.getData().insert(typename ArrayType::value_type(key, v));
+                else {
+                    std::pair<typename ArrayType::iterator, bool> pos = cntnr.getData().insert(typename ArrayType::value_type(key, v));
 
-					if (!pos.second)
-						pos.first->second = v;
-				}
-			}
+                    if (!pos.second)
+                        pos.first->second = v;
+                }
+            }
 
-			void get() const {
-				typename ArrayType::const_iterator it = cntnr.getData().find(key);
+            void get() const {
+                typename ArrayType::const_iterator it = cntnr.getData().find(key);
 
-				if (it == cntnr.getData().end())
-					value = ValueType();
-				else
-					value = it->second;
-			}
+                if (it == cntnr.getData().end())
+                    value = ValueType();
+                else
+                    value = it->second;
+            }
 
-			ContainerType&    cntnr;
-			KeyType           key;
-			mutable ValueType value;
-		};
+            ContainerType&    cntnr;
+            KeyType           key;
+            mutable ValueType value;
+        };
 
-		template <typename C>
-		struct TypeTraits<SparseContainerElement<C> > : public TypeTraits<typename SparseContainerElement<C>::ValueType>  {};
-	}
+        template <typename C>
+        struct TypeTraits<SparseContainerElement<C> > : public TypeTraits<typename SparseContainerElement<C>::ValueType>  {};
+    }
 }
 
 #endif // CDPL_MATH_SPARSECONTAINERELEMENT_HPP

@@ -32,6 +32,6 @@
 
 void CDPLPythonChem::exportMoleculeReader()
 {
-	CDPLPythonBase::DataReaderExport<CDPL::Chem::Molecule>("MoleculeReader", "mol");
-	CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Molecule>("CompoundMoleculeReader");
+    CDPLPythonBase::DataReaderExport<CDPL::Chem::Molecule>("MoleculeReader", "mol");
+    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Molecule>("CompoundMoleculeReader");
 }

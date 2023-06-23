@@ -32,20 +32,20 @@
 namespace 
 {
 
-	struct ReactionPropertyDefault {};
+    struct ReactionPropertyDefault {};
 }
 
 
 void CDPLPythonChem::exportReactionPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ReactionPropertyDefault, boost::noncopyable>("ReactionPropertyDefault", python::no_init)
-		.def_readonly("NAME", &Chem::ReactionPropertyDefault::NAME)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::ReactionPropertyDefault::MATCH_CONSTRAINTS)
-		.def_readonly("MDL_RXN_FILE_VERSION", &Chem::ReactionPropertyDefault::MDL_RXN_FILE_VERSION)
-		.def_readonly("MDL_COMMENT", &Chem::ReactionPropertyDefault::MDL_COMMENT)
-		.def_readonly("MDL_PROGRAM_NAME", &Chem::ReactionPropertyDefault::MDL_PROGRAM_NAME)
-		.def_readonly("MDL_USER_INITIALS", &Chem::ReactionPropertyDefault::MDL_USER_INITIALS);
+    python::class_<ReactionPropertyDefault, boost::noncopyable>("ReactionPropertyDefault", python::no_init)
+        .def_readonly("NAME", &Chem::ReactionPropertyDefault::NAME)
+        .def_readonly("MATCH_CONSTRAINTS", &Chem::ReactionPropertyDefault::MATCH_CONSTRAINTS)
+        .def_readonly("MDL_RXN_FILE_VERSION", &Chem::ReactionPropertyDefault::MDL_RXN_FILE_VERSION)
+        .def_readonly("MDL_COMMENT", &Chem::ReactionPropertyDefault::MDL_COMMENT)
+        .def_readonly("MDL_PROGRAM_NAME", &Chem::ReactionPropertyDefault::MDL_PROGRAM_NAME)
+        .def_readonly("MDL_USER_INITIALS", &Chem::ReactionPropertyDefault::MDL_USER_INITIALS);
 }

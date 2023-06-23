@@ -40,46 +40,46 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct MatrixTransposeExport
-	{
+    template <typename ExpressionType>
+    struct MatrixTransposeExport
+    {
 
-		typedef CDPL::Math::MatrixTranspose<ExpressionType> MatrixTransposeType;
-		typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, MatrixTransposeType> MatrixTransposeWrapper;
-		typedef typename MatrixTransposeWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixTransposeWrapper::SharedPointer WrapperPointerType;
+        typedef CDPL::Math::MatrixTranspose<ExpressionType> MatrixTransposeType;
+        typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, MatrixTransposeType> MatrixTransposeWrapper;
+        typedef typename MatrixTransposeWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixTransposeWrapper::SharedPointer WrapperPointerType;
 
-		MatrixTransposeExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
-		
-			python::class_<MatrixTransposeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixTransposeWrapper&>((python::arg("self"), python::arg("mt"))))
-				.def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixTransposeType>())
-				.def(AssignFunctionGeneratorVisitor<MatrixTransposeType, ConstMatrixExpression>("e"))
-				.def(ConstMatrixVisitor<MatrixTransposeType>("mt"))
-				.def(MatrixAssignAndSwapVisitor<MatrixTransposeType>("mt"))
-				.def(MatrixVisitor<MatrixTransposeType>("mt"))
-				.def(MatrixNDArrayAssignVisitor<MatrixTransposeType>())
-				.def(WrappedDataVisitor<MatrixTransposeWrapper>());
+        MatrixTransposeExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
+        
+            python::class_<MatrixTransposeWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixTransposeWrapper&>((python::arg("self"), python::arg("mt"))))
+                .def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixTransposeType>())
+                .def(AssignFunctionGeneratorVisitor<MatrixTransposeType, ConstMatrixExpression>("e"))
+                .def(ConstMatrixVisitor<MatrixTransposeType>("mt"))
+                .def(MatrixAssignAndSwapVisitor<MatrixTransposeType>("mt"))
+                .def(MatrixVisitor<MatrixTransposeType>("mt"))
+                .def(MatrixNDArrayAssignVisitor<MatrixTransposeType>())
+                .def(WrappedDataVisitor<MatrixTransposeWrapper>());
 
-			python::def("trans", &trans, python::arg("e"));
-		}
+            python::def("trans", &trans, python::arg("e"));
+        }
 
-		static WrapperPointerType trans(const ExpressionPointerType& e) {
-			return WrapperPointerType(new MatrixTransposeWrapper(e));
-		}
-	};
+        static WrapperPointerType trans(const ExpressionPointerType& e) {
+            return WrapperPointerType(new MatrixTransposeWrapper(e));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportMatrixTransposeTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	MatrixTransposeExport<MatrixExpression<float> >("FMatrixTranspose");
-	MatrixTransposeExport<MatrixExpression<double> >("DMatrixTranspose");
-	MatrixTransposeExport<MatrixExpression<long> >("LMatrixTranspose");
-	MatrixTransposeExport<MatrixExpression<unsigned long> >("ULMatrixTranspose");
+    MatrixTransposeExport<MatrixExpression<float> >("FMatrixTranspose");
+    MatrixTransposeExport<MatrixExpression<double> >("DMatrixTranspose");
+    MatrixTransposeExport<MatrixExpression<long> >("LMatrixTranspose");
+    MatrixTransposeExport<MatrixExpression<unsigned long> >("ULMatrixTranspose");
 }

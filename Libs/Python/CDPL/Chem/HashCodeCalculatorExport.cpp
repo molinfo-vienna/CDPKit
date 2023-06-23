@@ -37,53 +37,53 @@
 namespace
 {
 
-	std::uint64_t defAtomHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefAtomHashSeedFunctor& func, 
-										  CDPL::Chem::Atom& atom)
-	{
-		return func(atom);
-	}
+    std::uint64_t defAtomHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefAtomHashSeedFunctor& func, 
+                                          CDPL::Chem::Atom& atom)
+    {
+        return func(atom);
+    }
 
-	std::uint64_t defBondHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefBondHashSeedFunctor& func,
-										  CDPL::Chem::Bond& bond)
-	{
-		return func(bond);
-	}
+    std::uint64_t defBondHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefBondHashSeedFunctor& func,
+                                          CDPL::Chem::Bond& bond)
+    {
+        return func(bond);
+    }
 }
 
 
 void CDPLPythonChem::exportHashCodeCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::scope scope = python::class_<Chem::HashCodeCalculator, boost::noncopyable>("HashCodeCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::HashCodeCalculator>())	
-		.def("setAtomHashSeedFunction", &Chem::HashCodeCalculator::setAtomHashSeedFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setBondHashSeedFunction", &Chem::HashCodeCalculator::setBondHashSeedFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("includeGlobalStereoFeatures", &Chem::HashCodeCalculator::includeGlobalStereoFeatures, 
-			 (python::arg("self"), python::arg("include")))
-		.def("globalStereoFeaturesIncluded", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded, python::arg("self"))
-		.def("calculate", &Chem::HashCodeCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &Chem::HashCodeCalculator::getResult, python::arg("self"))
-		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)
-		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)
-		.add_property("result", &Chem::HashCodeCalculator::getResult)
-		.add_property("globalStereoFeatures", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded,
-					  &Chem::HashCodeCalculator::includeGlobalStereoFeatures)
-		.def("__call__", &Chem::HashCodeCalculator::calculate, (python::arg("self"), python::arg("molgraph")));
+    python::scope scope = python::class_<Chem::HashCodeCalculator, boost::noncopyable>("HashCodeCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::HashCodeCalculator>())    
+        .def("setAtomHashSeedFunction", &Chem::HashCodeCalculator::setAtomHashSeedFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setBondHashSeedFunction", &Chem::HashCodeCalculator::setBondHashSeedFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("includeGlobalStereoFeatures", &Chem::HashCodeCalculator::includeGlobalStereoFeatures, 
+             (python::arg("self"), python::arg("include")))
+        .def("globalStereoFeaturesIncluded", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded, python::arg("self"))
+        .def("calculate", &Chem::HashCodeCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+        .def("getResult", &Chem::HashCodeCalculator::getResult, python::arg("self"))
+        .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)
+        .def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)
+        .add_property("result", &Chem::HashCodeCalculator::getResult)
+        .add_property("globalStereoFeatures", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded,
+                      &Chem::HashCodeCalculator::includeGlobalStereoFeatures)
+        .def("__call__", &Chem::HashCodeCalculator::calculate, (python::arg("self"), python::arg("molgraph")));
 
-	python::class_<Chem::HashCodeCalculator::DefAtomHashSeedFunctor>("DefAtomHashSeedFunctor", python::no_init)
-		.def(python::init<const Chem::HashCodeCalculator&, 
-			 unsigned int>((python::arg("self"), python::arg("calc"), 
-							python::arg("flags") = Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)))
-		.def("__call__", &defAtomHashSeedFunction, (python::arg("self"), python::arg("atom")));
+    python::class_<Chem::HashCodeCalculator::DefAtomHashSeedFunctor>("DefAtomHashSeedFunctor", python::no_init)
+        .def(python::init<const Chem::HashCodeCalculator&, 
+             unsigned int>((python::arg("self"), python::arg("calc"), 
+                            python::arg("flags") = Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)))
+        .def("__call__", &defAtomHashSeedFunction, (python::arg("self"), python::arg("atom")));
 
-	python::class_<Chem::HashCodeCalculator::DefBondHashSeedFunctor>("DefBondHashSeedFunctor", python::no_init)
-		.def(python::init<unsigned int>((python::arg("self"), 
-										python::arg("flags") = Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)))
-		.def("__call__", &defBondHashSeedFunction, (python::arg("self"), python::arg("bond")));
+    python::class_<Chem::HashCodeCalculator::DefBondHashSeedFunctor>("DefBondHashSeedFunctor", python::no_init)
+        .def(python::init<unsigned int>((python::arg("self"), 
+                                        python::arg("flags") = Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)))
+        .def("__call__", &defBondHashSeedFunction, (python::arg("self"), python::arg("bond")));
 }

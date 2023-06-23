@@ -35,37 +35,37 @@ using namespace CDPL;
 
 
 ConfGen::CFLMoleculeReader::CFLMoleculeReader(std::istream& is): 
-	Util::StreamDataReader<Chem::Molecule, CFLMoleculeReader>(is), reader(new CFLDataReader(*this))
+    Util::StreamDataReader<Chem::Molecule, CFLMoleculeReader>(is), reader(new CFLDataReader(*this))
 {}
 
 ConfGen::CFLMoleculeReader::~CFLMoleculeReader() {}
 
 bool ConfGen::CFLMoleculeReader::readData(std::istream& is, Chem::Molecule& mol, bool overwrite)
 {
-	try {
-		if (overwrite)
-			mol.clear();
+    try {
+        if (overwrite)
+            mol.clear();
 
-		return reader->readMolecule(is, mol);
+        return reader->readMolecule(is, mol);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CFLMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CFLMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool ConfGen::CFLMoleculeReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipMolecule(is);
+    try {
+        return reader->skipMolecule(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CFLMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CFLMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool ConfGen::CFLMoleculeReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

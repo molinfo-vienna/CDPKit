@@ -32,51 +32,51 @@ using namespace ChOX;
 
 RecentFilesList::RecentFilesList() 
 { 
-	QSettings settings;
+    QSettings settings;
 
-	fileNames = settings.value("/General/RecentFiles").toStringList();
+    fileNames = settings.value("/General/RecentFiles").toStringList();
 }
 
 RecentFilesList::~RecentFilesList()
 {
-	QSettings settings;
+    QSettings settings;
 
-	settings.setValue("/General/RecentFiles", fileNames);
+    settings.setValue("/General/RecentFiles", fileNames);
 }
 
 RecentFilesList& RecentFilesList::instance()
 {
-	static RecentFilesList inst;
+    static RecentFilesList inst;
 
-	return inst;
+    return inst;
 }
 
 void RecentFilesList::clear()
 {
-	fileNames.clear();
+    fileNames.clear();
 
-	emit entriesChanged();
+    emit entriesChanged();
 }
 
 void RecentFilesList::addEntry(const QString& file_name)
 {
-	int idx = fileNames.indexOf(file_name);
+    int idx = fileNames.indexOf(file_name);
 
-	if (idx == -1) {
-		fileNames.push_front(file_name);
+    if (idx == -1) {
+        fileNames.push_front(file_name);
 
-		if (fileNames.size() > 15)
-			fileNames.pop_back();
+        if (fileNames.size() > 15)
+            fileNames.pop_back();
 
-	} else {
-		fileNames.removeAt(idx);
-		fileNames.push_front(file_name);
-	}
+    } else {
+        fileNames.removeAt(idx);
+        fileNames.push_front(file_name);
+    }
 
-	emit entriesChanged();
+    emit entriesChanged();
 }
 
 const QStringList& RecentFilesList::getEntries() const
 {
-	return fileNames;
+    return fileNames;
 }

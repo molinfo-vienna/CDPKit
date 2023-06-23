@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em>
-		 *        [\ref MMTF].
-		 */
-		typedef Util::DefaultDataOutputHandler<MMTFBZ2MolecularGraphWriter, DataFormat::MMTF_BZ2> MMTFBZ2MolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em>
+         *        [\ref MMTF].
+         */
+        typedef Util::DefaultDataOutputHandler<MMTFBZ2MolecularGraphWriter, DataFormat::MMTF_BZ2> MMTFBZ2MolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP

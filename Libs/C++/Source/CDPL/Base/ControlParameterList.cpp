@@ -32,7 +32,7 @@ using namespace CDPL;
 
 Base::ControlParameterList& Base::ControlParameterList::operator=(const ControlParameterContainer& cntnr)
 {
-	ControlParameterContainer::operator=(cntnr);
+    ControlParameterContainer::operator=(cntnr);
 
-	return *this;
+    return *this;
 }

@@ -60,7 +60,7 @@ IF(Qt5Gui_FOUND)
       QtRenderer2DTest.cpp
       QtFontMetricsTest.cpp
       QtObjectFactoryTest.cpp
-     )	
+     )    
 
   LINK_LIBRARIES(Qt5::Gui Qt5::Widgets)
 ENDIF(Qt5Gui_FOUND)
@@ -75,7 +75,7 @@ IF(CAIRO_FOUND)
         PNGReactionWriterTest.cpp
         PNGMolecularGraphOutputHandlerTest.cpp
         PNGReactionOutputHandlerTest.cpp 
-       )	
+       )    
   ENDIF(HAVE_CAIRO_PNG_SUPPORT)
 
   IF(HAVE_CAIRO_PDF_SUPPORT)
@@ -85,7 +85,7 @@ IF(CAIRO_FOUND)
         PDFReactionWriterTest.cpp
         PDFMolecularGraphOutputHandlerTest.cpp
         PDFReactionOutputHandlerTest.cpp 
-       )	
+       )    
   ENDIF(HAVE_CAIRO_PDF_SUPPORT)
 
   IF(HAVE_CAIRO_PS_SUPPORT)
@@ -95,7 +95,7 @@ IF(CAIRO_FOUND)
         PSReactionWriterTest.cpp
         PSMolecularGraphOutputHandlerTest.cpp
         PSReactionOutputHandlerTest.cpp 
-       )	
+       )    
   ENDIF(HAVE_CAIRO_PS_SUPPORT)
 
   IF(HAVE_CAIRO_SVG_SUPPORT)
@@ -105,7 +105,7 @@ IF(CAIRO_FOUND)
         SVGReactionWriterTest.cpp
         SVGMolecularGraphOutputHandlerTest.cpp
         SVGReactionOutputHandlerTest.cpp 
-       )	
+       )    
   ENDIF(HAVE_CAIRO_SVG_SUPPORT)
 
   LINK_LIBRARIES(${CAIRO_LIBRARIES})

@@ -39,50 +39,50 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class PrintSettingsEditWidget : public SettingsEditWidget
-	{
+    class PrintSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		PrintSettingsEditWidget(QWidget*, Settings&);
+    public:
+        PrintSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&                    settings;
-		CDPL::Vis::Color             frameColor;
-		CDPL::Vis::Color             textLabelColor;
-		CDPL::Vis::SizeSpecification frameLineWidth;
-		CDPL::Vis::SizeSpecification textLabelSize;
-		CDPL::Vis::SizeSpecification textLabelSpacing;
-		CDPL::Vis::Pen::LineStyle    frameLineStyle;
-		CDPL::Vis::Font              textLabelFont;
-		unsigned int                 pageNumberAlignment;
-		unsigned int                 fileNameAlignment;
-		unsigned int                 dateAlignment;
-		QCheckBox*                   printFrameCheckBox;
-		QCheckBox*                   printDateCheckBox;
-		QCheckBox*                   printPageNumberCheckBox;
-		QCheckBox*                   printFileNameCheckBox;
-		bool                         haveChanges;
-	};
+        Settings&                    settings;
+        CDPL::Vis::Color             frameColor;
+        CDPL::Vis::Color             textLabelColor;
+        CDPL::Vis::SizeSpecification frameLineWidth;
+        CDPL::Vis::SizeSpecification textLabelSize;
+        CDPL::Vis::SizeSpecification textLabelSpacing;
+        CDPL::Vis::Pen::LineStyle    frameLineStyle;
+        CDPL::Vis::Font              textLabelFont;
+        unsigned int                 pageNumberAlignment;
+        unsigned int                 fileNameAlignment;
+        unsigned int                 dateAlignment;
+        QCheckBox*                   printFrameCheckBox;
+        QCheckBox*                   printDateCheckBox;
+        QCheckBox*                   printPageNumberCheckBox;
+        QCheckBox*                   printFileNameCheckBox;
+        bool                         haveChanges;
+    };
 }
 
 #endif // CHOX_PRINTSETTINGSEDITWIDGET_HPP

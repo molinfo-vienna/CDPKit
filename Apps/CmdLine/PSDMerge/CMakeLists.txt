@@ -40,8 +40,8 @@ ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 TARGET_LINK_LIBRARIES(psdmerge cmdline-static cdpl-pharm-shared cdpl-util-shared)
 

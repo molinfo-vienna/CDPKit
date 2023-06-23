@@ -52,308 +52,308 @@ using namespace CDPL;
 namespace
 {
 
-	struct SymmetryPattern
-	{
+    struct SymmetryPattern
+    {
 
-		SymmetryPattern(Chem::MolecularGraph::SharedPointer&& ptn, std::size_t sym):
-			pattern(std::move(ptn)), symmetry(sym) {}
+        SymmetryPattern(Chem::MolecularGraph::SharedPointer&& ptn, std::size_t sym):
+            pattern(std::move(ptn)), symmetry(sym) {}
 
-		Chem::MolecularGraph::SharedPointer pattern;
-		std::size_t                         symmetry;
-	};
+        Chem::MolecularGraph::SharedPointer pattern;
+        std::size_t                         symmetry;
+    };
 
-	typedef std::vector<SymmetryPattern> SymmetryPatternList;
+    typedef std::vector<SymmetryPattern> SymmetryPatternList;
 
-	SymmetryPatternList symmetryPatterns;
+    SymmetryPatternList symmetryPatterns;
 
-	std::once_flag initSymmetryPatternsFlag;
+    std::once_flag initSymmetryPatternsFlag;
 
-	void initSymmetryPatterns()
-	{
-		symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[#1])(-[#1])-[#1]"), 3);
+    void initSymmetryPatterns()
+    {
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[#1])(-[#1])-[#1]"), 3);
 
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3);
 
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2);
 
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2);
 
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2);
-  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2);
+          symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2);
 
-	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[#1,*X1,CH3]"), 360);
-	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360);
-	};
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[#1,*X1,CH3]"), 360);
+        symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360);
+    };
 
-	const std::size_t MAX_CONF_DATA_CACHE_SIZE   = 10000;
-	const double      MIN_TORSION_ANGLE_DISTANCE = 30.0;
+    const std::size_t MAX_CONF_DATA_CACHE_SIZE   = 10000;
+    const double      MIN_TORSION_ANGLE_DISTANCE = 30.0;
 
-	bool hasAngleWithinDistance(double angle, const ConfGen::FragmentTreeNode::DoubleArray& angles, double dist)
-	{
-		using namespace ConfGen;
+    bool hasAngleWithinDistance(double angle, const ConfGen::FragmentTreeNode::DoubleArray& angles, double dist)
+    {
+        using namespace ConfGen;
 
-		for (FragmentTreeNode::DoubleArray::const_iterator it = angles.begin(), end = angles.end(); it != end; ++it)
-			if (getAbsoluteAngleDistance(angle, *it) < dist)
-				return true;
+        for (FragmentTreeNode::DoubleArray::const_iterator it = angles.begin(), end = angles.end(); it != end; ++it)
+            if (getAbsoluteAngleDistance(angle, *it) < dist)
+                return true;
 
-		return false;
-	}
+        return false;
+    }
 }
 
 
 ConfGen::TorsionDriverImpl::TorsionDriverImpl(): 
-	settings(TorsionDriverSettings::DEFAULT), fragTree(MAX_CONF_DATA_CACHE_SIZE)
+    settings(TorsionDriverSettings::DEFAULT), fragTree(MAX_CONF_DATA_CACHE_SIZE)
 {
-	torLibs.push_back(TorsionLibrary::get());
+    torLibs.push_back(TorsionLibrary::get());
 
-	torRuleMatcher.findUniqueMappingsOnly(true);
-	torRuleMatcher.findAllRuleMappings(false);
-	torRuleMatcher.stopAtFirstMatchingRule(true);
+    torRuleMatcher.findUniqueMappingsOnly(true);
+    torRuleMatcher.findAllRuleMappings(false);
+    torRuleMatcher.stopAtFirstMatchingRule(true);
 
-	subSearch.uniqueMappingsOnly(true);
+    subSearch.uniqueMappingsOnly(true);
 
-	std::call_once(initSymmetryPatternsFlag, &initSymmetryPatterns);
+    std::call_once(initSymmetryPatternsFlag, &initSymmetryPatterns);
 } 
 
 ConfGen::TorsionDriverImpl::~TorsionDriverImpl() {}
 
 ConfGen::TorsionDriverSettings& ConfGen::TorsionDriverImpl::getSettings()
 {
-	return settings;
+    return settings;
 }
 
 void ConfGen::TorsionDriverImpl::clearTorsionLibraries()
 {
-	torLibs.clear();
+    torLibs.clear();
 }
 
 void ConfGen::TorsionDriverImpl::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	torLibs.push_back(lib);
+    torLibs.push_back(lib);
 }
 
 void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph)
 {
-	std::size_t num_bonds = molgraph.getNumBonds();
-	
-	rotBondMask.resize(num_bonds);
-	rotBondMask.reset();
-	rotBonds.clear();
+    std::size_t num_bonds = molgraph.getNumBonds();
+    
+    rotBondMask.resize(num_bonds);
+    rotBondMask.reset();
+    rotBonds.clear();
 
-	for (std::size_t i = 0; i < num_bonds; i++) {
-		const Chem::Bond& bond = molgraph.getBond(i);
+    for (std::size_t i = 0; i < num_bonds; i++) {
+        const Chem::Bond& bond = molgraph.getBond(i);
 
-		if (isRotatableBond(bond, molgraph, settings.sampleHeteroAtomHydrogens())) {
-			rotBonds.push_back(&bond);
-			rotBondMask.set(i);
-		}
-	}
+        if (isRotatableBond(bond, molgraph, settings.sampleHeteroAtomHydrogens())) {
+            rotBonds.push_back(&bond);
+            rotBondMask.set(i);
+        }
+    }
 
-	splitIntoFragments(molgraph, fragments, rotBondMask, false);
-	setup(fragments, molgraph, rotBonds.begin(), rotBonds.end());
+    splitIntoFragments(molgraph, fragments, rotBondMask, false);
+    setup(fragments, molgraph, rotBonds.begin(), rotBonds.end());
 }
 
 void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask)
 {
-	rotBonds.clear();
+    rotBonds.clear();
 
-	for (Util::BitSet::size_type i = bond_mask.find_first(); i != Util::BitSet::npos; i = bond_mask.find_next(i))
-		rotBonds.push_back(&molgraph.getBond(i));
+    for (Util::BitSet::size_type i = bond_mask.find_first(); i != Util::BitSet::npos; i = bond_mask.find_next(i))
+        rotBonds.push_back(&molgraph.getBond(i));
 
-	splitIntoFragments(molgraph, fragments, bond_mask, false);
-	setup(fragments, molgraph, rotBonds.begin(), rotBonds.end());
+    splitIntoFragments(molgraph, fragments, bond_mask, false);
+    setup(fragments, molgraph, rotBonds.begin(), rotBonds.end());
 }
 
 void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMask& ia_mask)
 {
-	fragTree.getRoot()->distMMFF94Parameters(ia_data, ia_mask);
+    fragTree.getRoot()->distMMFF94Parameters(ia_data, ia_mask);
 }
 
 void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data)
 {
-	mmff94InteractionMask.setup(ia_data);
+    mmff94InteractionMask.setup(ia_data);
 
-	fragTree.getRoot()->distMMFF94Parameters(ia_data, mmff94InteractionMask);
+    fragTree.getRoot()->distMMFF94Parameters(ia_data, mmff94InteractionMask);
 }
 
 bool ConfGen::TorsionDriverImpl::setMMFF94Parameters()
 {
-	using namespace ForceField;
+    using namespace ForceField;
 
-	const Chem::MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+    const Chem::MolecularGraph& molgraph = *fragTree.getMolecularGraph();
 
-	if (!mmff94Parameterizer.get())
-		mmff94Parameterizer.reset(new MMFF94InteractionParameterizer());
+    if (!mmff94Parameterizer.get())
+        mmff94Parameterizer.reset(new MMFF94InteractionParameterizer());
 
-	if (!mmff94Data.get())
-		mmff94Data.reset(new MMFF94InteractionData());
+    if (!mmff94Data.get())
+        mmff94Data.reset(new MMFF94InteractionData());
 
-	try {
-		if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType(),
-										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
-										   settings.getDistanceExponent()) == ReturnCode::SUCCESS) {
+    try {
+        if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType(),
+                                           settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
+                                           settings.getDistanceExponent()) == ReturnCode::SUCCESS) {
 
-			setMMFF94Parameters(*mmff94Data);		
-			return true;
-		}
+            setMMFF94Parameters(*mmff94Data);        
+            return true;
+        }
 
-		if (logCallback)
-			logCallback("Force field setup failed!\n");
+        if (logCallback)
+            logCallback("Force field setup failed!\n");
 
-	} catch (const Error& e) {
-		if (logCallback)
-			logCallback("Force field setup failed: " + std::string(e.what()) + '\n');
-	}
+    } catch (const Error& e) {
+        if (logCallback)
+            logCallback("Force field setup failed: " + std::string(e.what()) + '\n');
+    }
 
-	return false;
+    return false;
 }
 
 void ConfGen::TorsionDriverImpl::clearInputCoordinates()
 {
-	fragTree.getRoot()->clearConformersDownwards();
+    fragTree.getRoot()->clearConformersDownwards();
 }
 
 void ConfGen::TorsionDriverImpl::clearInputCoordinates(std::size_t frag_idx)
 {
-	fragTree.getFragmentNode(frag_idx)->clearConformersUpwards();
+    fragTree.getFragmentNode(frag_idx)->clearConformersUpwards();
 }
 
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& coords)
 {
-	for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
-		FragmentTreeNode* node = fragTree.getFragmentNode(i);
+    for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
+        FragmentTreeNode* node = fragTree.getFragmentNode(i);
 
-		node->addConformer(coords);
-		
-		if (node->getParent())
-			node->getParent()->clearConformersUpwards();
-	}
+        node->addConformer(coords);
+        
+        if (node->getParent())
+            node->getParent()->clearConformersUpwards();
+    }
 }
 
 void ConfGen::TorsionDriverImpl::setInputCoordinates(const Math::Vector3DArray& coords)
 {
-	fragTree.getRoot()->clearConformersDownwards();
+    fragTree.getRoot()->clearConformersDownwards();
 
-	for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
-		FragmentTreeNode* node = fragTree.getFragmentNode(i);
+    for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
+        FragmentTreeNode* node = fragTree.getFragmentNode(i);
 
-		node->addConformer(coords);
-	}
+        node->addConformer(coords);
+    }
 }
 
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
 {
-	doAddInputCoordinates(coords, frag_idx);
+    doAddInputCoordinates(coords, frag_idx);
 }
 
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx)
 {
-	doAddInputCoordinates(conf_data, frag_idx);
+    doAddInputCoordinates(conf_data, frag_idx);
 }
 
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
 {
-	doAddInputCoordinates(conf_data, frag_idx);
+    doAddInputCoordinates(conf_data, frag_idx);
 }
 
 void ConfGen::TorsionDriverImpl::setInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
 {
-	fragTree.getFragmentNode(frag_idx)->clearConformers();
+    fragTree.getFragmentNode(frag_idx)->clearConformers();
 
-	doAddInputCoordinates(coords, frag_idx);
+    doAddInputCoordinates(coords, frag_idx);
 }
 
 void ConfGen::TorsionDriverImpl::setInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx)
 {
-	fragTree.getFragmentNode(frag_idx)->clearConformers();
+    fragTree.getFragmentNode(frag_idx)->clearConformers();
 
-	doAddInputCoordinates(conf_data, frag_idx);
+    doAddInputCoordinates(conf_data, frag_idx);
 }
 
 void ConfGen::TorsionDriverImpl::setInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
 {
-	fragTree.getFragmentNode(frag_idx)->clearConformers();
+    fragTree.getFragmentNode(frag_idx)->clearConformers();
 
-	doAddInputCoordinates(conf_data, frag_idx);
+    doAddInputCoordinates(conf_data, frag_idx);
 }
 
 void ConfGen::TorsionDriverImpl::setAbortCallback(const CallbackFunction& func)
 {
-	fragTree.setAbortCallback(func);
+    fragTree.setAbortCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::TorsionDriverImpl::getAbortCallback() const
 {
-	return fragTree.getAbortCallback();
+    return fragTree.getAbortCallback();
 }
 
 void ConfGen::TorsionDriverImpl::setTimeoutCallback(const CallbackFunction& func)
 {
-	fragTree.setTimeoutCallback(func);
+    fragTree.setTimeoutCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::TorsionDriverImpl::getTimeoutCallback() const
 {
-	return fragTree.getTimeoutCallback();
+    return fragTree.getTimeoutCallback();
 }
 
 void ConfGen::TorsionDriverImpl::setLogMessageCallback(const LogMessageCallbackFunction& func)
 {
-	logCallback = func;
+    logCallback = func;
 }
 
 const ConfGen::LogMessageCallbackFunction& ConfGen::TorsionDriverImpl::getLogMessageCallback() const
 {
-	return logCallback;
+    return logCallback;
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getNumFragments() const
 {
-	return fragTree.getNumFragments();
+    return fragTree.getNumFragments();
 }
 
 const Chem::Fragment& ConfGen::TorsionDriverImpl::getFragment(std::size_t idx) const
 {
-	return *fragTree.getFragment(idx);
+    return *fragTree.getFragment(idx);
 }
 
 ConfGen::FragmentTreeNode& ConfGen::TorsionDriverImpl::getFragmentNode(std::size_t idx) const
 {
-	return *fragTree.getFragmentNode(idx);
+    return *fragTree.getFragmentNode(idx);
 }
 
 unsigned int ConfGen::TorsionDriverImpl::generateConformers()
 {
-	unsigned int ret_code = fragTree.getRoot()->generateConformers(settings.getEnergyWindow(), settings.getMaxPoolSize());
+    unsigned int ret_code = fragTree.getRoot()->generateConformers(settings.getEnergyWindow(), settings.getMaxPoolSize());
 
-	if (ret_code != ReturnCode::SUCCESS)
-		return ret_code;
+    if (ret_code != ReturnCode::SUCCESS)
+        return ret_code;
 
-	if (settings.orderByEnergy())
-		fragTree.getRoot()->orderConformersByEnergy();
-	
-	return ReturnCode::SUCCESS;
+    if (settings.orderByEnergy())
+        fragTree.getRoot()->orderConformersByEnergy();
+    
+    return ReturnCode::SUCCESS;
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getNumConformers() const
 {
-	return fragTree.getRoot()->getNumConformers();
+    return fragTree.getRoot()->getNumConformers();
 }
 
 ConfGen::ConformerData& ConfGen::TorsionDriverImpl::getConformer(std::size_t idx)
 {
-	return fragTree.getRoot()->getConformer(idx);
+    return fragTree.getRoot()->getConformer(idx);
 }
 
 ConfGen::TorsionDriverImpl::ConstConformerIterator ConfGen::TorsionDriverImpl::getConformersBegin() const
@@ -369,184 +369,184 @@ ConfGen::TorsionDriverImpl::ConstConformerIterator ConfGen::TorsionDriverImpl::g
 template <typename ConfData>
 void ConfGen::TorsionDriverImpl::doAddInputCoordinates(const ConfData& conf_data, std::size_t frag_idx) const
 {
-	FragmentTreeNode* node = fragTree.getFragmentNode(frag_idx);
+    FragmentTreeNode* node = fragTree.getFragmentNode(frag_idx);
 
-	node->addConformer(conf_data);
-		
-	if (node->getParent())
-		node->getParent()->clearConformersUpwards();
+    node->addConformer(conf_data);
+        
+    if (node->getParent())
+        node->getParent()->clearConformersUpwards();
 }
 
 void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (!node->hasChildren())
-		return;
+    if (!node->hasChildren())
+        return;
 
-	assignTorsionAngles(node->getLeftChild());
-	assignTorsionAngles(node->getRightChild());
+    assignTorsionAngles(node->getLeftChild());
+    assignTorsionAngles(node->getRightChild());
 
-	const Bond* bond = node->getSplitBond();
+    const Bond* bond = node->getSplitBond();
 
-	if (!bond)
-		return;
+    if (!bond)
+        return;
 
-	std::size_t rot_sym = getRotationalSymmetry(*bond);
-	const Atom* const* bond_atoms = node->getSplitBondAtoms();
-	const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, node, rot_sym);
+    std::size_t rot_sym = getRotationalSymmetry(*bond);
+    const Atom* const* bond_atoms = node->getSplitBondAtoms();
+    const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, node, rot_sym);
 
-	if (match && node->getNumTorsionAngles() != 0) {
-		const Atom* const* match_atoms = match->getAtoms();
-				
-		if (match_atoms[1] == bond_atoms[0])
-			node->setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
-		else
-			node->setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
-	}
-		
-	if (logCallback) {
-		logCallback("Torsion angle assignment for bond #" + std::to_string(fragTree.getMolecularGraph()->getBondIndex(*bond)) + ":\n");
+    if (match && node->getNumTorsionAngles() != 0) {
+        const Atom* const* match_atoms = match->getAtoms();
+                
+        if (match_atoms[1] == bond_atoms[0])
+            node->setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
+        else
+            node->setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
+    }
+        
+    if (logCallback) {
+        logCallback("Torsion angle assignment for bond #" + std::to_string(fragTree.getMolecularGraph()->getBondIndex(*bond)) + ":\n");
 
-		if (match)
-			logCallback(" Matching rule: " + match->getRule().getMatchPatternString() + '\n');
-		else
-			logCallback(" No matching rule found - fallback to 30° grid search!\n");
-	}
+        if (match)
+            logCallback(" Matching rule: " + match->getRule().getMatchPatternString() + '\n');
+        else
+            logCallback(" No matching rule found - fallback to 30° grid search!\n");
+    }
 
-	if (node->getNumTorsionAngles() == 0) {
-		// fallback: rotation in 30° steps
+    if (node->getNumTorsionAngles() == 0) {
+        // fallback: rotation in 30° steps
 
-		for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++) 
-			node->addTorsionAngle(i * 30.0);
+        for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++) 
+            node->addTorsionAngle(i * 30.0);
 
-		node->setTorsionReferenceAtoms(getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node), 
-									   getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node));
+        node->setTorsionReferenceAtoms(getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node), 
+                                       getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node));
 
-		if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
-			node->setTorsionReferenceAtoms(0, 0);
+        if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
+            node->setTorsionReferenceAtoms(0, 0);
 
-	} else if (node->getNumTorsionAngles() > 1)
-		node->removeDuplicateTorsionAngles();
+    } else if (node->getNumTorsionAngles() > 1)
+        node->removeDuplicateTorsionAngles();
 
-	if (logCallback) {
-		logCallback(" Symmetry: C" + std::to_string(rot_sym) + '\n');
-		logCallback(" Angles: ");
+    if (logCallback) {
+        logCallback(" Symmetry: C" + std::to_string(rot_sym) + '\n');
+        logCallback(" Angles: ");
 
-		for (FragmentTreeNode::DoubleArray::const_iterator it = node->getTorsionAngles().begin(), end = node->getTorsionAngles().end(); it != end; ++it)
-			logCallback(std::to_string(*it) + ' ');
+        for (FragmentTreeNode::DoubleArray::const_iterator it = node->getTorsionAngles().begin(), end = node->getTorsionAngles().end(); it != end; ++it)
+            logCallback(std::to_string(*it) + ' ');
 
-		logCallback("\n");
-	}
+        logCallback("\n");
+    }
 }
 
 const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node, std::size_t rot_sym)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
-	const TorsionRuleMatch* match = 0;
+    const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+    const TorsionRuleMatch* match = 0;
 
-	for (TorsionLibraryList::const_reverse_iterator it = torLibs.rbegin(), end = torLibs.rend(); it != end; ++it) {
-		torRuleMatcher.setTorsionLibrary(*it);
+    for (TorsionLibraryList::const_reverse_iterator it = torLibs.rbegin(), end = torLibs.rend(); it != end; ++it) {
+        torRuleMatcher.setTorsionLibrary(*it);
 
-		if (torRuleMatcher.findMatches(bond, molgraph, false)) {
-			match = &torRuleMatcher.getMatch(0);
-			break;
-		}
-	} 
+        if (torRuleMatcher.findMatches(bond, molgraph, false)) {
+            match = &torRuleMatcher.getMatch(0);
+            break;
+        }
+    } 
 
-	if (!match) {
-		torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
+    if (!match) {
+        torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
 
-		if (!torRuleMatcher.findMatches(bond, molgraph, false))
-			return 0;
+        if (!torRuleMatcher.findMatches(bond, molgraph, false))
+            return 0;
 
-		match = &torRuleMatcher.getMatch(0);
-	}
+        match = &torRuleMatcher.getMatch(0);
+    }
 
-	double ident_rot = 360.0 / rot_sym;
-	const TorsionRule& rule = match->getRule();
+    double ident_rot = 360.0 / rot_sym;
+    const TorsionRule& rule = match->getRule();
 
-	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it)
-		node->addTorsionAngle(std::fmod(normalizeAngle(it->getAngle()), ident_rot));
+    for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it)
+        node->addTorsionAngle(std::fmod(normalizeAngle(it->getAngle()), ident_rot));
 
-	if (settings.sampleAngleToleranceRanges()) {
-		for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
-			double tol = it->getTolerance1();
+    if (settings.sampleAngleToleranceRanges()) {
+        for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
+            double tol = it->getTolerance1();
 
-			if (tol >= MIN_TORSION_ANGLE_DISTANCE) {
-				double angle = std::fmod(normalizeAngle(it->getAngle() + tol), ident_rot);
+            if (tol >= MIN_TORSION_ANGLE_DISTANCE) {
+                double angle = std::fmod(normalizeAngle(it->getAngle() + tol), ident_rot);
 
-				if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
-					node->addTorsionAngle(angle);
+                if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
+                    node->addTorsionAngle(angle);
 
-				angle = std::fmod(normalizeAngle(it->getAngle() - tol), ident_rot);
+                angle = std::fmod(normalizeAngle(it->getAngle() - tol), ident_rot);
 
-				if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
-					node->addTorsionAngle(angle);
-			}
-		}
-	}
+                if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
+                    node->addTorsionAngle(angle);
+            }
+        }
+    }
 
-	return match; 
+    return match; 
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& bond)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
-	std::size_t node_bond_idx = molgraph.getBondIndex(bond);
+    const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+    std::size_t node_bond_idx = molgraph.getBondIndex(bond);
 
-	for (const auto& ptn_data : symmetryPatterns) {
-		const MolecularGraph& ptn = *ptn_data.pattern;
-		std::size_t num_ptn_bonds = ptn.getNumBonds();
-		std::size_t ptn_bond_idx = 0;
+    for (const auto& ptn_data : symmetryPatterns) {
+        const MolecularGraph& ptn = *ptn_data.pattern;
+        std::size_t num_ptn_bonds = ptn.getNumBonds();
+        std::size_t ptn_bond_idx = 0;
 
-		for ( ; ptn_bond_idx < num_ptn_bonds; ptn_bond_idx++) {
-			const Bond& bond = ptn.getBond(ptn_bond_idx);
-		
-			if (getAtomMappingID(bond.getBegin()) != 0 && getAtomMappingID(bond.getEnd()) != 0)
-				break;
-		}
+        for ( ; ptn_bond_idx < num_ptn_bonds; ptn_bond_idx++) {
+            const Bond& bond = ptn.getBond(ptn_bond_idx);
+        
+            if (getAtomMappingID(bond.getBegin()) != 0 && getAtomMappingID(bond.getEnd()) != 0)
+                break;
+        }
 
-		if (ptn_bond_idx == num_ptn_bonds)
-			continue;
+        if (ptn_bond_idx == num_ptn_bonds)
+            continue;
 
-		subSearch.clearBondMappingConstraints();
-		subSearch.addBondMappingConstraint(ptn_bond_idx, node_bond_idx);
-		subSearch.setQuery(ptn);
-	
-		if (!subSearch.mappingExists(molgraph)) 
-			continue;
+        subSearch.clearBondMappingConstraints();
+        subSearch.addBondMappingConstraint(ptn_bond_idx, node_bond_idx);
+        subSearch.setQuery(ptn);
+    
+        if (!subSearch.mappingExists(molgraph)) 
+            continue;
 
-		return ptn_data.symmetry;
-	}
+        return ptn_data.symmetry;
+    }
 
-	return 1;
+    return 1;
 }
 
 const Chem::Atom* ConfGen::TorsionDriverImpl::getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
-																   const FragmentTreeNode* node) const
+                                                                   const FragmentTreeNode* node) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	Atom::ConstBondIterator b_it = ctr_atom->getBondsBegin();
-	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+    Atom::ConstBondIterator b_it = ctr_atom->getBondsBegin();
+    const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
 
-	for (Atom::ConstAtomIterator a_it = ctr_atom->getAtomsBegin(), a_end = ctr_atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
+    for (Atom::ConstAtomIterator a_it = ctr_atom->getAtomsBegin(), a_end = ctr_atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+        const Atom& nbr_atom = *a_it;
 
-		if (excl_atom == &nbr_atom)
-			continue;
+        if (excl_atom == &nbr_atom)
+            continue;
 
-		if (!parent_molgraph.containsBond(*b_it))
-			continue;
+        if (!parent_molgraph.containsBond(*b_it))
+            continue;
 
-		if (node->containsAtom(nbr_atom))
-			return &nbr_atom;
-	}
+        if (node->containsAtom(nbr_atom))
+            return &nbr_atom;
+    }
 
-	return 0;
+    return 0;
 }

@@ -39,13 +39,13 @@ using namespace CDPL;
 
 void Chem::calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&has2DStereoFlag, std::placeholders::_1))) == molgraph.getBondsEnd())
-		return;
+    if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&has2DStereoFlag, std::placeholders::_1))) == molgraph.getBondsEnd())
+        return;
 
-	Util::UIArray flags;
-	BondStereoFlagCalculator calculator(molgraph, flags);
+    Util::UIArray flags;
+    BondStereoFlagCalculator calculator(molgraph, flags);
 
-	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), flags.getElementsBegin(), &set2DStereoFlag);
+    Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), flags.getElementsBegin(), &set2DStereoFlag);
 }

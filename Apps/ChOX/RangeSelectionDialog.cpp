@@ -36,158 +36,158 @@ using namespace ChOX;
 
 
 RangeSelectionDialog::RangeSelectionDialog(QWidget* parent, DataSet& data_set, Qt::WindowFlags f):
-	QDialog(parent, f), dataSet(data_set)
+    QDialog(parent, f), dataSet(data_set)
 {
-	init();
+    init();
 }
 
 int RangeSelectionDialog::exec()
 {
-	if (dataSet.getSize() == 0) {
-		rangeStartSpinBox->setEnabled(false);
-		rangeEndSpinBox->setEnabled(false);
+    if (dataSet.getSize() == 0) {
+        rangeStartSpinBox->setEnabled(false);
+        rangeEndSpinBox->setEnabled(false);
 
-	} else {
-		rangeStartSpinBox->setEnabled(true);
-		rangeEndSpinBox->setEnabled(true);
+    } else {
+        rangeStartSpinBox->setEnabled(true);
+        rangeEndSpinBox->setEnabled(true);
 
-		rangeEndSpinBox->setMaximum(int(dataSet.getSize()));
-		rangeStartSpinBox->setMaximum(rangeEndSpinBox->value());
-		rangeEndSpinBox->setMinimum(rangeStartSpinBox->value());
-	}
+        rangeEndSpinBox->setMaximum(int(dataSet.getSize()));
+        rangeStartSpinBox->setMaximum(rangeEndSpinBox->value());
+        rangeEndSpinBox->setMinimum(rangeStartSpinBox->value());
+    }
 
-	return QDialog::exec();
+    return QDialog::exec();
 }
 
 void RangeSelectionDialog::select()
 {
-	if (dataSet.getSize() > 0) 
-		dataSet.selectRecordRange(rangeStartSpinBox->value() - 1, rangeEndSpinBox->value() - 1, true);
-	
-	QDialog::accept();
+    if (dataSet.getSize() > 0) 
+        dataSet.selectRecordRange(rangeStartSpinBox->value() - 1, rangeEndSpinBox->value() - 1, true);
+    
+    QDialog::accept();
 }
 
 void RangeSelectionDialog::unselect()
 {
-	if (dataSet.getSize() > 0) 
-		dataSet.selectRecordRange(rangeStartSpinBox->value() - 1, rangeEndSpinBox->value() - 1, false);
-	
-	QDialog::accept();
+    if (dataSet.getSize() > 0) 
+        dataSet.selectRecordRange(rangeStartSpinBox->value() - 1, rangeEndSpinBox->value() - 1, false);
+    
+    QDialog::accept();
 }
 
 void RangeSelectionDialog::handleRangeStartChange(int start)
 {
-	rangeEndSpinBox->setMinimum(start);
+    rangeEndSpinBox->setMinimum(start);
 }
 
 void RangeSelectionDialog::handleRangeEndChange(int end)
 {
-	rangeStartSpinBox->setMaximum(end);
+    rangeStartSpinBox->setMaximum(end);
 }
 
 void RangeSelectionDialog::init()
 {
-	setWindowTitle(tr("ChOX - Select/Unselect Record Range"));
+    setWindowTitle(tr("ChOX - Select/Unselect Record Range"));
 
 // ------
 
-	QBoxLayout* main_layout = new QVBoxLayout(this);
+    QBoxLayout* main_layout = new QVBoxLayout(this);
 
-	main_layout->addStretch();
-
-// ------
-
-	QLabel* label = new QLabel(tr("Select/Unselect Records"), this);
-
-	label->setAlignment(Qt::AlignCenter);
-	
-	main_layout->addWidget(label);
+    main_layout->addStretch();
 
 // ------
 
-	QGridLayout* grid_layout = new QGridLayout();
-	
-	main_layout->addLayout(grid_layout);
+    QLabel* label = new QLabel(tr("Select/Unselect Records"), this);
 
-	grid_layout->setColumnStretch(1, 1);
-
-// ++++
-
-	label = new QLabel(tr("&From:"), this);
-	
-	grid_layout->addWidget(label, 0, 0);
-
-// ++++
-
-	rangeStartSpinBox = new QSpinBox(this);
-
-	rangeStartSpinBox->setMinimum(1);
-	rangeStartSpinBox->setValue(1);
-
-	label->setBuddy(rangeStartSpinBox);
-
-	grid_layout->addWidget(rangeStartSpinBox, 0, 1);
-
-	connect(rangeStartSpinBox, SIGNAL(valueChanged(int)), this, SLOT(handleRangeStartChange(int)));
-
-// ++++
-
-	label = new QLabel(tr("&To:"), this);
-	
-	grid_layout->addWidget(label, 1, 0);
-
-// ++++
-
-	rangeEndSpinBox = new QSpinBox(this);
-
-	rangeEndSpinBox->setValue(1);
-
-	label->setBuddy(rangeEndSpinBox);
-
-	grid_layout->addWidget(rangeEndSpinBox, 1, 1);
-
-	connect(rangeEndSpinBox, SIGNAL(valueChanged(int)), this, SLOT(handleRangeEndChange(int)));
+    label->setAlignment(Qt::AlignCenter);
+    
+    main_layout->addWidget(label);
 
 // ------
 
-	main_layout->addStretch();
+    QGridLayout* grid_layout = new QGridLayout();
+    
+    main_layout->addLayout(grid_layout);
 
-	QFrame* frame = new QFrame(this);
+    grid_layout->setColumnStretch(1, 1);
 
-	frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+// ++++
 
-	main_layout->addWidget(frame);
+    label = new QLabel(tr("&From:"), this);
+    
+    grid_layout->addWidget(label, 0, 0);
+
+// ++++
+
+    rangeStartSpinBox = new QSpinBox(this);
+
+    rangeStartSpinBox->setMinimum(1);
+    rangeStartSpinBox->setValue(1);
+
+    label->setBuddy(rangeStartSpinBox);
+
+    grid_layout->addWidget(rangeStartSpinBox, 0, 1);
+
+    connect(rangeStartSpinBox, SIGNAL(valueChanged(int)), this, SLOT(handleRangeStartChange(int)));
+
+// ++++
+
+    label = new QLabel(tr("&To:"), this);
+    
+    grid_layout->addWidget(label, 1, 0);
+
+// ++++
+
+    rangeEndSpinBox = new QSpinBox(this);
+
+    rangeEndSpinBox->setValue(1);
+
+    label->setBuddy(rangeEndSpinBox);
+
+    grid_layout->addWidget(rangeEndSpinBox, 1, 1);
+
+    connect(rangeEndSpinBox, SIGNAL(valueChanged(int)), this, SLOT(handleRangeEndChange(int)));
 
 // ------
 
-	QBoxLayout* h_box_layout = new QHBoxLayout();
+    main_layout->addStretch();
 
-	main_layout->addLayout(h_box_layout);
+    QFrame* frame = new QFrame(this);
 
-// ++++
+    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
 
-	QPushButton* button = new QPushButton(tr("&Select"), this);
+    main_layout->addWidget(frame);
 
-	connect(button, SIGNAL(clicked()), this, SLOT(select()));
+// ------
 
-	h_box_layout->addStretch();
-	h_box_layout->addWidget(button);
+    QBoxLayout* h_box_layout = new QHBoxLayout();
 
-// ++++
-
-	button = new QPushButton(tr("&Unselect"), this);
-
-	connect(button, SIGNAL(clicked()), this, SLOT(unselect()));
-
-	h_box_layout->addWidget(button);
+    main_layout->addLayout(h_box_layout);
 
 // ++++
 
-	button = new QPushButton(tr("&Cancel"), this);
+    QPushButton* button = new QPushButton(tr("&Select"), this);
 
-	connect(button, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(button, SIGNAL(clicked()), this, SLOT(select()));
 
-	h_box_layout->addWidget(button);
-	h_box_layout->addStretch();
+    h_box_layout->addStretch();
+    h_box_layout->addWidget(button);
+
+// ++++
+
+    button = new QPushButton(tr("&Unselect"), this);
+
+    connect(button, SIGNAL(clicked()), this, SLOT(unselect()));
+
+    h_box_layout->addWidget(button);
+
+// ++++
+
+    button = new QPushButton(tr("&Cancel"), this);
+
+    connect(button, SIGNAL(clicked()), this, SLOT(reject()));
+
+    h_box_layout->addWidget(button);
+    h_box_layout->addStretch();
 }
 

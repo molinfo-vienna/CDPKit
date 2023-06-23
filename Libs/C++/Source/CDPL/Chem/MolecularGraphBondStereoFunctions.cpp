@@ -35,43 +35,43 @@ using namespace CDPL;
 
 void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym, std::size_t min_ring_size)
 {
-	MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
-		Bond& bond = *b_it;
+    for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
+        Bond& bond = *b_it;
  
-		if (!overwrite && hasStereoCenterFlag(bond))
-			continue;
+        if (!overwrite && hasStereoCenterFlag(bond))
+            continue;
 
-		setStereoCenterFlag(bond, isStereoCenter(bond, molgraph, check_cip_sym, min_ring_size));
-	}
+        setStereoCenterFlag(bond, isStereoCenter(bond, molgraph, check_cip_sym, min_ring_size));
+    }
 }
 
 void Chem::calcBondStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim, 
-									 std::size_t min_ring_size)
+                                     std::size_t min_ring_size)
 {
-	MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
-		Bond& bond = *b_it;
+    for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
+        Bond& bond = *b_it;
  
-		if (!overwrite && hasStereoDescriptor(bond))
-			continue;
+        if (!overwrite && hasStereoDescriptor(bond))
+            continue;
 
-		setStereoDescriptor(bond, calcStereoDescriptor(bond, molgraph, dim, min_ring_size));
-	}
+        setStereoDescriptor(bond, calcStereoDescriptor(bond, molgraph, dim, min_ring_size));
+    }
 }
 
 void Chem::calcBondCIPConfigurations(MolecularGraph& molgraph, bool overwrite)
 {
-	MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
-		Bond& bond = *b_it;
+    for (MolecularGraph::BondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end; ++b_it) {
+        Bond& bond = *b_it;
  
-		if (!overwrite && hasCIPConfiguration(bond))
-			continue;
+        if (!overwrite && hasCIPConfiguration(bond))
+            continue;
 
-		setCIPConfiguration(bond, calcCIPConfiguration(bond, molgraph));
-	}
+        setCIPConfiguration(bond, calcCIPConfiguration(bond, molgraph));
+    }
 }

@@ -38,52 +38,52 @@ namespace CDPLPythonMath
     struct AssignFunctionGeneratorHelper
     {
 
-		template <typename ClassType>
-		static void apply(ClassType& cl, const char* var_name) {
-			using namespace boost;
+        template <typename ClassType>
+        static void apply(ClassType& cl, const char* var_name) {
+            using namespace boost;
 
-			typedef typename mpl::front<ValueTypeList>::type ValueType;
-			typedef typename mpl::pop_front<ValueTypeList>::type NewValueTypeList;
-			typedef typename mpl::empty<NewValueTypeList>::type IsEmpty;
+            typedef typename mpl::front<ValueTypeList>::type ValueType;
+            typedef typename mpl::pop_front<ValueTypeList>::type NewValueTypeList;
+            typedef typename mpl::empty<NewValueTypeList>::type IsEmpty;
 
-			cl.def("assign", &assign<ValueType>, (python::arg("self"), python::arg(var_name)),
-				   python::return_self<>());
+            cl.def("assign", &assign<ValueType>, (python::arg("self"), python::arg(var_name)),
+                   python::return_self<>());
 
-			AssignFunctionGeneratorHelper<ObjectType, ExpressionType, NewValueTypeList, IsEmpty>::apply(cl, var_name);
-		}
+            AssignFunctionGeneratorHelper<ObjectType, ExpressionType, NewValueTypeList, IsEmpty>::apply(cl, var_name);
+        }
 
-		template <typename ValueType>
-		static void assign(ObjectType& obj, const typename ExpressionType<ValueType>::SharedPointer& expr_ptr) {
-			obj = *expr_ptr;
-		}
+        template <typename ValueType>
+        static void assign(ObjectType& obj, const typename ExpressionType<ValueType>::SharedPointer& expr_ptr) {
+            obj = *expr_ptr;
+        }
     };
 
     template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList> 
     struct AssignFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, boost::mpl::true_>
     {
 
-		template <typename ClassType>
-		static void apply(ClassType& cl, const char* var_name) {}
+        template <typename ClassType>
+        static void apply(ClassType& cl, const char* var_name) {}
     };
 
     template <typename ObjectType, template <typename T> class ExpressionType, 
-			  typename ValueTypeList = SupportedValueTypes> 
+              typename ValueTypeList = SupportedValueTypes> 
     struct AssignFunctionGeneratorVisitor : 
-		public boost::python::def_visitor<AssignFunctionGeneratorVisitor<ObjectType, ExpressionType, ValueTypeList> >
+        public boost::python::def_visitor<AssignFunctionGeneratorVisitor<ObjectType, ExpressionType, ValueTypeList> >
     {
-	
-		friend class boost::python::def_visitor_access;
+    
+        friend class boost::python::def_visitor_access;
 
-		AssignFunctionGeneratorVisitor(const char* var_name): variableName(var_name) {}
+        AssignFunctionGeneratorVisitor(const char* var_name): variableName(var_name) {}
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			typedef typename boost::mpl::empty<ValueTypeList>::type IsEmpty;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            typedef typename boost::mpl::empty<ValueTypeList>::type IsEmpty;
 
-			AssignFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, IsEmpty>::apply(cl, variableName);
-		}
+            AssignFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, IsEmpty>::apply(cl, variableName);
+        }
 
-		const char* variableName;
+        const char* variableName;
     };
 }
 

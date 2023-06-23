@@ -39,11 +39,11 @@ void CDPLPythonChem::exportTautomerScore()
     using namespace CDPL;
 
     python::class_<Chem::TautomerScore, boost::noncopyable>("TautomerScore", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::TautomerScore&>((python::arg("self"), python::arg("score"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TautomerScore>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::TautomerScore::operator=), 
-			 (python::arg("self"), python::arg("score")), python::return_self<>())
-		.def("__call__", &Chem::TautomerScore::operator(), (python::arg("self"), python::arg("molgraph")))
-		;
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::TautomerScore&>((python::arg("self"), python::arg("score"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TautomerScore>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::TautomerScore::operator=), 
+             (python::arg("self"), python::arg("score")), python::return_self<>())
+        .def("__call__", &Chem::TautomerScore::operator(), (python::arg("self"), python::arg("molgraph")))
+        ;
 }

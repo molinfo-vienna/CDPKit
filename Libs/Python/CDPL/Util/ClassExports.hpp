@@ -29,11 +29,11 @@
 namespace CDPLPythonUtil
 {
 
-	void exportBitSet();
-	void exportArrays();
-	void exportBronKerboschAlgorithm();
-	void exportDGCoordinatesGenerator();
-	void exportCompressionStreams();
+    void exportBitSet();
+    void exportArrays();
+    void exportBronKerboschAlgorithm();
+    void exportDGCoordinatesGenerator();
+    void exportCompressionStreams();
 }
 
 #endif // CDPL_PYTHON_UTIL_CLASSEXPORTS_HPP

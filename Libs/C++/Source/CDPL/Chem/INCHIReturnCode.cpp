@@ -32,20 +32,20 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-	
-		namespace INCHIReturnCode
-		{
-	
-			const int SKIP      = inchi_Ret_SKIP; 
-			const int EOF_      = inchi_Ret_EOF; 
-			const int OKAY      = inchi_Ret_OKAY;  
-			const int WARNING   = inchi_Ret_WARNING;  
-			const int ERROR     = inchi_Ret_ERROR; 
-			const int FATAL     = inchi_Ret_FATAL;  
-			const int UNKNOWN   = inchi_Ret_UNKNOWN;  
-			const int BUSY      = inchi_Ret_BUSY;
-		}
-	}
+    namespace Chem
+    {
+    
+        namespace INCHIReturnCode
+        {
+    
+            const int SKIP      = inchi_Ret_SKIP; 
+            const int EOF_      = inchi_Ret_EOF; 
+            const int OKAY      = inchi_Ret_OKAY;  
+            const int WARNING   = inchi_Ret_WARNING;  
+            const int ERROR     = inchi_Ret_ERROR; 
+            const int FATAL     = inchi_Ret_FATAL;  
+            const int UNKNOWN   = inchi_Ret_UNKNOWN;  
+            const int BUSY      = inchi_Ret_BUSY;
+        }
+    }
 }

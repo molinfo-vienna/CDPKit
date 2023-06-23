@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Grid::CDFDRegularGridWriter::CDFDRegularGridWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new CDFRegularGridDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new CDFRegularGridDataWriter(*this)) {}
 
 Grid::CDFDRegularGridWriter::~CDFDRegularGridWriter() {}
 
 Base::DataWriter<Grid::DRegularGrid>& Grid::CDFDRegularGridWriter::write(const DRegularGrid& grid)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeGrid(output, grid);
+    try {
+        state = writer->writeGrid(output, grid);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFDRegularGridWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFDRegularGridWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Grid::CDFDRegularGridWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Grid::CDFDRegularGridWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

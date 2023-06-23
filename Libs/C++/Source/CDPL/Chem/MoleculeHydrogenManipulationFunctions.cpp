@@ -40,81 +40,81 @@ using namespace CDPL;
 
 bool Chem::makeHydrogenDeplete(Molecule& mol, bool corr_impl_h_count)
 {
-	std::size_t num_atoms = mol.getNumAtoms();
-	bool changes = false;
+    std::size_t num_atoms = mol.getNumAtoms();
+    bool changes = false;
 
-	for (std::size_t i = 0; i < num_atoms; ) {
-		const Atom& atom = mol.getAtom(i);
+    for (std::size_t i = 0; i < num_atoms; ) {
+        const Atom& atom = mol.getAtom(i);
 
-		if (getType(atom) != AtomType::H) {
-			i++;
-			continue;
-		}
+        if (getType(atom) != AtomType::H) {
+            i++;
+            continue;
+        }
 
-		mol.removeAtom(i);
-		num_atoms--;
-		changes = true;
-	}
+        mol.removeAtom(i);
+        num_atoms--;
+        changes = true;
+    }
 
-	if (changes && corr_impl_h_count)
-		calcImplicitHydrogenCounts(mol, true);
-	
-	return changes;
+    if (changes && corr_impl_h_count)
+        calcImplicitHydrogenCounts(mol, true);
+    
+    return changes;
 }
-	
+    
 bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags, bool corr_impl_h_count)
 {
-	std::size_t num_atoms = mol.getNumAtoms();
-	bool changes = false;
+    std::size_t num_atoms = mol.getNumAtoms();
+    bool changes = false;
 
-	for (std::size_t i = 0; i < num_atoms; ) {
-		const Atom& atom = mol.getAtom(i);
+    for (std::size_t i = 0; i < num_atoms; ) {
+        const Atom& atom = mol.getAtom(i);
 
-		if (!Internal::isOrdinaryHydrogen(atom, mol, flags)) {
-			i++;
-			continue;
-		}
+        if (!Internal::isOrdinaryHydrogen(atom, mol, flags)) {
+            i++;
+            continue;
+        }
 
-		mol.removeAtom(i);
-		num_atoms--;
-		changes = true;
-	}
+        mol.removeAtom(i);
+        num_atoms--;
+        changes = true;
+    }
 
-	if (changes && corr_impl_h_count)
-		calcImplicitHydrogenCounts(mol, true);
-	
-	return changes;
+    if (changes && corr_impl_h_count)
+        calcImplicitHydrogenCounts(mol, true);
+    
+    return changes;
 }
 
 bool Chem::makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count)
 {
-	calcImplicitHydrogenCounts(mol, false);
-	
-	std::size_t num_atoms = mol.getNumAtoms();
-	bool changes = false;
+    calcImplicitHydrogenCounts(mol, false);
+    
+    std::size_t num_atoms = mol.getNumAtoms();
+    bool changes = false;
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		Atom& atom = mol.getAtom(i);
-		std::size_t impl_h_cnt = getImplicitHydrogenCount(atom);
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        Atom& atom = mol.getAtom(i);
+        std::size_t impl_h_cnt = getImplicitHydrogenCount(atom);
 
-		for (std::size_t j = 0; j < impl_h_cnt; j++) {
-			Atom& new_atom = mol.addAtom();
-			Bond& new_bond = mol.addBond(i, mol.getAtomIndex(new_atom));
-			
-			setType(new_atom, AtomType::H);
-			setOrder(new_bond, 1);
-			setRingFlag(new_bond, false);
-			setRingFlag(new_atom, false);
-			setAromaticityFlag(new_bond, false);
-			setAromaticityFlag(new_atom, false);
-			setHybridizationState(new_atom, HybridizationState::UNKNOWN);
-			setImplicitHydrogenCount(new_atom, 0);
-			changes = true;
-		}
+        for (std::size_t j = 0; j < impl_h_cnt; j++) {
+            Atom& new_atom = mol.addAtom();
+            Bond& new_bond = mol.addBond(i, mol.getAtomIndex(new_atom));
+            
+            setType(new_atom, AtomType::H);
+            setOrder(new_bond, 1);
+            setRingFlag(new_bond, false);
+            setRingFlag(new_atom, false);
+            setAromaticityFlag(new_bond, false);
+            setAromaticityFlag(new_atom, false);
+            setHybridizationState(new_atom, HybridizationState::UNKNOWN);
+            setImplicitHydrogenCount(new_atom, 0);
+            changes = true;
+        }
 
-		if (corr_impl_h_count && impl_h_cnt > 0)
-			setImplicitHydrogenCount(atom, 0);
-	}
+        if (corr_impl_h_count && impl_h_cnt > 0)
+            setImplicitHydrogenCount(atom, 0);
+    }
 
-	return changes;
+    return changes;
 }

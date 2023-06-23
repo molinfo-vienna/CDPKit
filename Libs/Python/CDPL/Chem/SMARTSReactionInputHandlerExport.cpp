@@ -31,10 +31,10 @@
 
 void CDPLPythonChem::exportSMARTSReactionInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SMARTSReactionInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMARTSReactionInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMARTSReactionInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Reaction> > >("SMARTSReactionInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

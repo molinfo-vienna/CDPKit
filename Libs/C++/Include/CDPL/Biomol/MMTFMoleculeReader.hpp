@@ -39,53 +39,53 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		class MMTFDataReader;
+        class MMTFDataReader;
 
-		/**
-		 * \brief A reader for molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
-		 *        [\ref MMTF].
-		 */
-		class CDPL_BIOMOL_API MMTFMoleculeReader : public Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>
-		{
+        /**
+         * \brief A reader for molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
+         *        [\ref MMTF].
+         */
+        class CDPL_BIOMOL_API MMTFMoleculeReader : public Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %MMTFMoleculeReader instance that will read molecule data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			MMTFMoleculeReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %MMTFMoleculeReader instance that will read molecule data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            MMTFMoleculeReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~MMTFMoleculeReader();
+            /**
+             * \brief Destructor.
+             */
+            ~MMTFMoleculeReader();
 
-		private:
-			friend class Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>;
+        private:
+            friend class Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>;
 
-			MMTFMoleculeReader(const MMTFMoleculeReader&);
+            MMTFMoleculeReader(const MMTFMoleculeReader&);
 
-			MMTFMoleculeReader& operator=(const MMTFMoleculeReader&);
+            MMTFMoleculeReader& operator=(const MMTFMoleculeReader&);
 
-			bool readData(std::istream&, Chem::Molecule&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Chem::Molecule&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<MMTFDataReader> MMTFDataReaderPtr;
+            typedef std::auto_ptr<MMTFDataReader> MMTFDataReaderPtr;
 
-			MMTFDataReaderPtr reader;
-		};
-	}
+            MMTFDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_BIOMOL_MMTFMOLECULEREADER_HPP

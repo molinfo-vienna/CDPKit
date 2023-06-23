@@ -35,7 +35,7 @@ const Biomol::ResidueList& Biomol::HierarchyViewNode::getResidues() const
     std::lock_guard<std::mutex> lock(initMutex);
 
     if (!initResidues)
-		return residues;
+        return residues;
 
     residues.extract(*this);
     initResidues = false;

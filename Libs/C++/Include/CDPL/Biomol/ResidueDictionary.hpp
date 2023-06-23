@@ -46,102 +46,102 @@ namespace CDPL
     namespace Biomol 
     {
 
-		/**
-		 * \brief A global dictionary for the lookup of meta-data associated with the residues
-		 *        in biological macromolecules.
-		 */ 
-		class CDPL_BIOMOL_API ResidueDictionary
-		{
+        /**
+         * \brief A global dictionary for the lookup of meta-data associated with the residues
+         *        in biological macromolecules.
+         */ 
+        class CDPL_BIOMOL_API ResidueDictionary
+        {
 
-		  public:
-			class CDPL_BIOMOL_API Entry
-			{
+          public:
+            class CDPL_BIOMOL_API Entry
+            {
 
-			  public:
-				typedef std::function<Chem::MolecularGraph::SharedPointer(const std::string&)> StructureRetrievalFunction;
+              public:
+                typedef std::function<Chem::MolecularGraph::SharedPointer(const std::string&)> StructureRetrievalFunction;
 
-				Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
-					  const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
+                Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
+                      const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
 
-				Entry();
+                Entry();
 
-				const std::string& getCode() const;
+                const std::string& getCode() const;
 
-				const std::string& getReplacedCode() const;
+                const std::string& getReplacedCode() const;
 
-				const std::string& getReplacedByCode() const;
+                const std::string& getReplacedByCode() const;
 
-				bool isObsolete() const;
+                bool isObsolete() const;
 
-				const std::string& getName() const;
+                const std::string& getName() const;
 
-				unsigned int getType() const;
+                unsigned int getType() const;
 
-				Chem::MolecularGraph::SharedPointer getStructure() const;
-				
-			  private:
-				std::string                code;
-				std::string                replacesCode;
-				std::string                replacedByCode;
-				bool                       obsolete;
-				std::string                name;
-				unsigned int               type;
-				StructureRetrievalFunction structRetrievalFunc;
-			};
+                Chem::MolecularGraph::SharedPointer getStructure() const;
+                
+              private:
+                std::string                code;
+                std::string                replacesCode;
+                std::string                replacedByCode;
+                bool                       obsolete;
+                std::string                name;
+                unsigned int               type;
+                StructureRetrievalFunction structRetrievalFunc;
+            };
 
-		  private:
-			typedef std::unordered_map<std::string, Entry> EntryLookupTable;
+          private:
+            typedef std::unordered_map<std::string, Entry> EntryLookupTable;
 
-		  public:
-			typedef std::shared_ptr<ResidueDictionary> SharedPointer;
+          public:
+            typedef std::shared_ptr<ResidueDictionary> SharedPointer;
 
-			typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>, 
-											  EntryLookupTable::const_iterator> ConstEntryIterator;
-			
-			void addEntry(const Entry& entry);
+            typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>, 
+                                              EntryLookupTable::const_iterator> ConstEntryIterator;
+            
+            void addEntry(const Entry& entry);
 
-			bool containsEntry(const std::string& code) const;
+            bool containsEntry(const std::string& code) const;
 
-			void removeEntry(const std::string& code);
-			
-			const Entry& getEntry(const std::string& code) const;
+            void removeEntry(const std::string& code);
+            
+            const Entry& getEntry(const std::string& code) const;
 
-			void clear();
+            void clear();
 
-			std::size_t getNumEntries() const;
-			
-			ConstEntryIterator getEntriesBegin() const;
+            std::size_t getNumEntries() const;
+            
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
+            ConstEntryIterator getEntriesEnd() const;
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-			
-			void loadDefaults();
+            ConstEntryIterator end() const;
+            
+            void loadDefaults();
 
-			static void set(const SharedPointer& dict);
+            static void set(const SharedPointer& dict);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-			static const std::string& getReplacedCode(const std::string& code);
+            static const std::string& getReplacedCode(const std::string& code);
 
-			static const std::string& getReplacedByCode(const std::string& code);
+            static const std::string& getReplacedByCode(const std::string& code);
 
-			static bool isObsolete(const std::string& code);
+            static bool isObsolete(const std::string& code);
 
-			static const std::string& getName(const std::string& code);
+            static const std::string& getName(const std::string& code);
 
-			static bool isStdResidue(const std::string& code);
+            static bool isStdResidue(const std::string& code);
 
-			static unsigned int getType(const std::string& code);
+            static unsigned int getType(const std::string& code);
 
-			static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
+            static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
 
-		  private:
-			static SharedPointer defaultDict;
-			EntryLookupTable     entries;
-		};
+          private:
+            static SharedPointer defaultDict;
+            EntryLookupTable     entries;
+        };
     }
 }
 

@@ -33,62 +33,62 @@ using namespace CDPL;
 
 Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::getAtomsBegin() const
 {
-	return ConstAtomIterator(this, 0);
+    return ConstAtomIterator(this, 0);
 }
 
 Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::getAtomsEnd() const
 {
-	return ConstAtomIterator(this, getNumAtoms());
+    return ConstAtomIterator(this, getNumAtoms());
 }
 
 Chem::AtomContainer::AtomIterator Chem::AtomContainer::getAtomsBegin()
 {
-	return AtomIterator(this, 0);
+    return AtomIterator(this, 0);
 }
 
 Chem::AtomContainer::AtomIterator Chem::AtomContainer::getAtomsEnd()
 {
-	return AtomIterator(this, getNumAtoms());
+    return AtomIterator(this, getNumAtoms());
 }
 
 Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::begin() const
 {
-	return ConstAtomIterator(this, 0);
+    return ConstAtomIterator(this, 0);
 }
 
 Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::end() const
 {
-	return ConstAtomIterator(this, getNumAtoms());
+    return ConstAtomIterator(this, getNumAtoms());
 }
 
 Chem::AtomContainer::AtomIterator Chem::AtomContainer::begin()
 {
-	return AtomIterator(this, 0);
+    return AtomIterator(this, 0);
 }
 
 Chem::AtomContainer::AtomIterator Chem::AtomContainer::end()
 {
-	return AtomIterator(this, getNumAtoms());
+    return AtomIterator(this, getNumAtoms());
 }
 
 Chem::AtomContainer& Chem::AtomContainer::operator=(const AtomContainer& cntnr) 
 {
-	Entity3DContainer::operator=(cntnr);
+    Entity3DContainer::operator=(cntnr);
 
-	return *this;
+    return *this;
 }
 
 std::size_t Chem::AtomContainer::getNumEntities() const
 {
-	return getNumAtoms();
+    return getNumAtoms();
 }
 
 const Chem::Entity3D& Chem::AtomContainer::getEntity(std::size_t idx) const
 {
-	return getAtom(idx);
+    return getAtom(idx);
 }
 
 Chem::Entity3D& Chem::AtomContainer::getEntity(std::size_t idx)
 {
-	return getAtom(idx);
+    return getAtom(idx);
 }

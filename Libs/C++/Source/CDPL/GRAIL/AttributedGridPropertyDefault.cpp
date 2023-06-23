@@ -31,16 +31,16 @@
 namespace CDPL
 {
 
-	namespace GRAIL
-	{
+    namespace GRAIL
+    {
 
-		namespace AttributedGridPropertyDefault
-		{
+        namespace AttributedGridPropertyDefault
+        {
 
-			const unsigned int FEATURE_TYPE        = Pharm::FeatureType::UNKNOWN;
-			const unsigned int TARGET_FEATURE_TYPE = Pharm::FeatureType::UNKNOWN;
-		}
+            const unsigned int FEATURE_TYPE        = Pharm::FeatureType::UNKNOWN;
+            const unsigned int TARGET_FEATURE_TYPE = Pharm::FeatureType::UNKNOWN;
+        }
 
-		void initAttributedGridPropertyDefaults() {}
-	}
+        void initAttributedGridPropertyDefaults() {}
+    }
 }

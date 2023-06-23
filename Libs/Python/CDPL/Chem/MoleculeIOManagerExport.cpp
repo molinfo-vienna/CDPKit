@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportMoleculeIOManager()
 {
-	CDPLPythonBase::DataIOManagerExport<CDPL::Chem::Molecule>("MoleculeIOManager");
+    CDPLPythonBase::DataIOManagerExport<CDPL::Chem::Molecule>("MoleculeIOManager");
 }

@@ -36,38 +36,38 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER7(void, createExclusionVolumes, CDPL::Pharm::Pharmacophore&,
-						   CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&,
-						   double, double, bool, bool);
+    MAKE_FUNCTION_WRAPPER7(void, createExclusionVolumes, CDPL::Pharm::Pharmacophore&,
+                           CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&,
+                           double, double, bool, bool);
 
-	MAKE_FUNCTION_WRAPPER6(void, createExclusionVolumes, CDPL::Pharm::Pharmacophore&,
-						   CDPL::Pharm::FeatureContainer&, double, double, bool, bool);
+    MAKE_FUNCTION_WRAPPER6(void, createExclusionVolumes, CDPL::Pharm::Pharmacophore&,
+                           CDPL::Pharm::FeatureContainer&, double, double, bool, bool);
 
-	MAKE_FUNCTION_WRAPPER4(bool, removeExclusionVolumesWithClashes, CDPL::Pharm::Pharmacophore&,
-						   CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, double);
-	MAKE_FUNCTION_WRAPPER4(bool, resizeExclusionVolumesWithClashes, CDPL::Pharm::Pharmacophore&,
-						   CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, double);
+    MAKE_FUNCTION_WRAPPER4(bool, removeExclusionVolumesWithClashes, CDPL::Pharm::Pharmacophore&,
+                           CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, double);
+    MAKE_FUNCTION_WRAPPER4(bool, resizeExclusionVolumesWithClashes, CDPL::Pharm::Pharmacophore&,
+                           CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, double);
 
 }
 
 
 void CDPLPythonPharm::exportPharmacophoreFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
-	
-	python::def("buildInteractionPharmacophore", &Pharm::buildInteractionPharmacophore, 
-				(python::arg("pharm"), python::arg("iactions"), python::arg("append") = false));
-	python::def("createExclusionVolumes", &createExclusionVolumesWrapper7,
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), 
-				 python::arg("tol") = 0.0, python::arg("min_dist") = 0.0, python::arg("rel_dist") = true, 
-				 python::arg("append") = true));
-	python::def("createExclusionVolumes", &createExclusionVolumesWrapper6,
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("tol") = 0.0, 
-				 python::arg("min_dist") = 0.0, python::arg("rel_dist") = true, 
-				 python::arg("append") = true));
-	python::def("removeExclusionVolumesWithClashes", &removeExclusionVolumesWithClashesWrapper4,
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
-	python::def("resizeExclusionVolumesWithClashes", &resizeExclusionVolumesWithClashesWrapper4,
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::def("buildInteractionPharmacophore", &Pharm::buildInteractionPharmacophore, 
+                (python::arg("pharm"), python::arg("iactions"), python::arg("append") = false));
+    python::def("createExclusionVolumes", &createExclusionVolumesWrapper7,
+                (python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), 
+                 python::arg("tol") = 0.0, python::arg("min_dist") = 0.0, python::arg("rel_dist") = true, 
+                 python::arg("append") = true));
+    python::def("createExclusionVolumes", &createExclusionVolumesWrapper6,
+                (python::arg("pharm"), python::arg("cntnr"), python::arg("tol") = 0.0, 
+                 python::arg("min_dist") = 0.0, python::arg("rel_dist") = true, 
+                 python::arg("append") = true));
+    python::def("removeExclusionVolumesWithClashes", &removeExclusionVolumesWithClashesWrapper4,
+                (python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
+    python::def("resizeExclusionVolumesWithClashes", &resizeExclusionVolumesWithClashesWrapper4,
+                (python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
 }

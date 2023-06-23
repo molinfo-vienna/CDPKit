@@ -37,55 +37,55 @@ class QLineEdit;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class OtherIOSettingsEditWidget : public SettingsEditWidget
-	{
+    class OtherIOSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		OtherIOSettingsEditWidget(QWidget*, Settings&);
+    public:
+        OtherIOSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
-		void handleSettingsChange(const QString&);
-		void handleImgBackgroundSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
+        void handleSettingsChange(const QString&);
+        void handleImgBackgroundSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&        settings;
-		QCheckBox*       jmeIptStrictErrorCheckingCheckBox;
-		QCheckBox*       jmeOptStrictErrorCheckingCheckBox;
-		QCheckBox*       jmeOptConcatenateRecordsCheckBox;
-		std::string      jmeOptRecordSeparator;
-		QCheckBox*       smartsIptStrictErrorCheckingCheckBox;
-		QCheckBox*       smartsOptStrictErrorCheckingCheckBox;
-		QCheckBox*       smartsOptConcatenateRecordsCheckBox;
-		std::string      smartsOptRecordSeparator;
-		QCheckBox*       inchiIptStrictErrorCheckingCheckBox;
-		QLineEdit*       inchiIptOptionsLineEdit;
-		QCheckBox*       inchiOptStrictErrorCheckingCheckBox;
-		QCheckBox*       inchiOptConcatenateRecordsCheckBox;
-		QLineEdit*       inchiOptOptionsLineEdit;
-		std::string      inchiOptRecordSeparator;
-		QCheckBox*       imgOptEraseBackgroundCheckBox;
-		CDPL::Vis::Color imgOptBackgroundColor;
-		QWidget*         imgBackgroundColorWidget;
-		bool             haveChanges;
-	};
+        Settings&        settings;
+        QCheckBox*       jmeIptStrictErrorCheckingCheckBox;
+        QCheckBox*       jmeOptStrictErrorCheckingCheckBox;
+        QCheckBox*       jmeOptConcatenateRecordsCheckBox;
+        std::string      jmeOptRecordSeparator;
+        QCheckBox*       smartsIptStrictErrorCheckingCheckBox;
+        QCheckBox*       smartsOptStrictErrorCheckingCheckBox;
+        QCheckBox*       smartsOptConcatenateRecordsCheckBox;
+        std::string      smartsOptRecordSeparator;
+        QCheckBox*       inchiIptStrictErrorCheckingCheckBox;
+        QLineEdit*       inchiIptOptionsLineEdit;
+        QCheckBox*       inchiOptStrictErrorCheckingCheckBox;
+        QCheckBox*       inchiOptConcatenateRecordsCheckBox;
+        QLineEdit*       inchiOptOptionsLineEdit;
+        std::string      inchiOptRecordSeparator;
+        QCheckBox*       imgOptEraseBackgroundCheckBox;
+        CDPL::Vis::Color imgOptBackgroundColor;
+        QWidget*         imgBackgroundColorWidget;
+        bool             haveChanges;
+    };
 }
 
 #endif // CHOX_OTHERIOSETTINGSEDITWIDGET_HPP

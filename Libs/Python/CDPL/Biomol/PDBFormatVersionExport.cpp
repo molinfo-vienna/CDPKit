@@ -42,7 +42,7 @@ void CDPLPythonBiomol::exportPDBFormatVersions()
     using namespace CDPL;
 
     python::class_<PDBFormatVersion, boost::noncopyable>("PDBFormatVersion", python::no_init)
-		.def_readonly("UNDEF", Biomol::PDBFormatVersion::UNDEF)
-	    .def_readonly("V2", Biomol::PDBFormatVersion::V2)
-	    .def_readonly("V3", Biomol::PDBFormatVersion::V3);
+        .def_readonly("UNDEF", Biomol::PDBFormatVersion::UNDEF)
+        .def_readonly("V2", Biomol::PDBFormatVersion::V2)
+        .def_readonly("V3", Biomol::PDBFormatVersion::V3);
 }

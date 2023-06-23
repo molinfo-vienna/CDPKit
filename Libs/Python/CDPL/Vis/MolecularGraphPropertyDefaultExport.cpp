@@ -32,34 +32,34 @@
 namespace 
 {
 
-	struct MolecularGraphPropertyDefault {};
+    struct MolecularGraphPropertyDefault {};
 }
 
 
 void CDPLPythonVis::exportMolecularGraphPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolecularGraphPropertyDefault, boost::noncopyable>("MolecularGraphPropertyDefault", python::no_init)
-		.def_readonly("ATOM_COLOR_TABLE", &Vis::MolecularGraphPropertyDefault::ATOM_COLOR_TABLE)
-		.def_readonly("ATOM_COLOR", &Vis::MolecularGraphPropertyDefault::ATOM_COLOR)
-		.def_readonly("ATOM_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::ATOM_LABEL_FONT)
-		.def_readonly("ATOM_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::ATOM_LABEL_SIZE)
-		.def_readonly("SECONDARY_ATOM_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::SECONDARY_ATOM_LABEL_FONT)
-		.def_readonly("SECONDARY_ATOM_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::SECONDARY_ATOM_LABEL_SIZE)
-		.def_readonly("ATOM_LABEL_MARGIN", &Vis::MolecularGraphPropertyDefault::ATOM_LABEL_MARGIN)
-		.def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::MolecularGraphPropertyDefault::RADICAL_ELECTRON_DOT_SIZE)
-		.def_readonly("BOND_COLOR", &Vis::MolecularGraphPropertyDefault::BOND_COLOR)
-		.def_readonly("BOND_LINE_WIDTH", &Vis::MolecularGraphPropertyDefault::BOND_LINE_WIDTH)
-		.def_readonly("BOND_LINE_SPACING", &Vis::MolecularGraphPropertyDefault::BOND_LINE_SPACING)
-		.def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::MolecularGraphPropertyDefault::STEREO_BOND_WEDGE_WIDTH)
-		.def_readonly("STEREO_BOND_HASH_SPACING", &Vis::MolecularGraphPropertyDefault::STEREO_BOND_HASH_SPACING)
-		.def_readonly("REACTION_CENTER_LINE_LENGTH", &Vis::MolecularGraphPropertyDefault::REACTION_CENTER_LINE_LENGTH)
-		.def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::MolecularGraphPropertyDefault::REACTION_CENTER_LINE_SPACING)
-		.def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphPropertyDefault::DOUBLE_BOND_TRIM_LENGTH)
-		.def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphPropertyDefault::TRIPLE_BOND_TRIM_LENGTH)
-		.def_readonly("BOND_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::BOND_LABEL_FONT)
-		.def_readonly("BOND_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::BOND_LABEL_SIZE)
-		.def_readonly("BOND_LABEL_MARGIN", &Vis::MolecularGraphPropertyDefault::BOND_LABEL_MARGIN);
+    python::class_<MolecularGraphPropertyDefault, boost::noncopyable>("MolecularGraphPropertyDefault", python::no_init)
+        .def_readonly("ATOM_COLOR_TABLE", &Vis::MolecularGraphPropertyDefault::ATOM_COLOR_TABLE)
+        .def_readonly("ATOM_COLOR", &Vis::MolecularGraphPropertyDefault::ATOM_COLOR)
+        .def_readonly("ATOM_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::ATOM_LABEL_FONT)
+        .def_readonly("ATOM_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::ATOM_LABEL_SIZE)
+        .def_readonly("SECONDARY_ATOM_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::SECONDARY_ATOM_LABEL_FONT)
+        .def_readonly("SECONDARY_ATOM_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::SECONDARY_ATOM_LABEL_SIZE)
+        .def_readonly("ATOM_LABEL_MARGIN", &Vis::MolecularGraphPropertyDefault::ATOM_LABEL_MARGIN)
+        .def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::MolecularGraphPropertyDefault::RADICAL_ELECTRON_DOT_SIZE)
+        .def_readonly("BOND_COLOR", &Vis::MolecularGraphPropertyDefault::BOND_COLOR)
+        .def_readonly("BOND_LINE_WIDTH", &Vis::MolecularGraphPropertyDefault::BOND_LINE_WIDTH)
+        .def_readonly("BOND_LINE_SPACING", &Vis::MolecularGraphPropertyDefault::BOND_LINE_SPACING)
+        .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::MolecularGraphPropertyDefault::STEREO_BOND_WEDGE_WIDTH)
+        .def_readonly("STEREO_BOND_HASH_SPACING", &Vis::MolecularGraphPropertyDefault::STEREO_BOND_HASH_SPACING)
+        .def_readonly("REACTION_CENTER_LINE_LENGTH", &Vis::MolecularGraphPropertyDefault::REACTION_CENTER_LINE_LENGTH)
+        .def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::MolecularGraphPropertyDefault::REACTION_CENTER_LINE_SPACING)
+        .def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphPropertyDefault::DOUBLE_BOND_TRIM_LENGTH)
+        .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::MolecularGraphPropertyDefault::TRIPLE_BOND_TRIM_LENGTH)
+        .def_readonly("BOND_LABEL_FONT", &Vis::MolecularGraphPropertyDefault::BOND_LABEL_FONT)
+        .def_readonly("BOND_LABEL_SIZE", &Vis::MolecularGraphPropertyDefault::BOND_LABEL_SIZE)
+        .def_readonly("BOND_LABEL_MARGIN", &Vis::MolecularGraphPropertyDefault::BOND_LABEL_MARGIN);
 }

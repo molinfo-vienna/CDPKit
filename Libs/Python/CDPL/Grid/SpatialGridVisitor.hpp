@@ -29,75 +29,75 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define SPATIALGRID_IMPL()												\
-    const ValueType& operator()(std::size_t idx) const {				\
-	    return this->get_override("__call__")(idx);						\
-    }																	\
-																		\
-    ValueType& operator()(std::size_t idx) {							\
-	    return this->get_override("__call__")(idx);						\
-    }																	\
-																		\
+#define SPATIALGRID_IMPL()                                                \
+    const ValueType& operator()(std::size_t idx) const {                \
+        return this->get_override("__call__")(idx);                        \
+    }                                                                    \
+                                                                        \
+    ValueType& operator()(std::size_t idx) {                            \
+        return this->get_override("__call__")(idx);                        \
+    }                                                                    \
+                                                                        \
     void getCoordinates(std::size_t i, CoordinatesType& coords) const { \
-	    this->get_override("getCoordinates")(i, boost::ref(coords));	\
+        this->get_override("getCoordinates")(i, boost::ref(coords));    \
     }
 
 
 namespace CDPLPythonGrid
 {
 
-	class SpatialGridVisitorBase
-	{
+    class SpatialGridVisitorBase
+    {
 
-	protected:
-		template <typename GridType>
-		static void setItem(GridType& grid, std::size_t i, const typename GridType::ValueType& v) {
-			grid(i) = v;
-		}
-	};
+    protected:
+        template <typename GridType>
+        static void setItem(GridType& grid, std::size_t i, const typename GridType::ValueType& v) {
+            grid(i) = v;
+        }
+    };
 
-	template <typename GridType>
+    template <typename GridType>
     class SpatialGridVirtualFunctionsVisitor : private SpatialGridVisitorBase, public boost::python::def_visitor<SpatialGridVirtualFunctionsVisitor<GridType> >
     {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
-			
-			typedef typename GridType::ValueType ValueType;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
+            
+            typedef typename GridType::ValueType ValueType;
 
-			cl	
-				.def("__call__", python::pure_virtual(static_cast<const ValueType& (GridType::*)(std::size_t) const>(&GridType::operator())), 
-					 (python::arg("self"), python::arg("i")), python::return_value_policy<python::copy_const_reference>())
-				.def("getElement", python::pure_virtual(static_cast<const ValueType& (GridType::*)(std::size_t) const>(&GridType::operator())), 
-					 (python::arg("self"), python::arg("i")), python::return_value_policy<python::copy_const_reference>())
-				.def("setElement", &setItem<GridType>, (python::arg("self"), python::arg("i"), python::arg("value")))
-				.def("getCoordinates", python::pure_virtual(&GridType::getCoordinates), (python::arg("self"), python::arg("i"), python::arg("coords")));
-		}
+            cl    
+                .def("__call__", python::pure_virtual(static_cast<const ValueType& (GridType::*)(std::size_t) const>(&GridType::operator())), 
+                     (python::arg("self"), python::arg("i")), python::return_value_policy<python::copy_const_reference>())
+                .def("getElement", python::pure_virtual(static_cast<const ValueType& (GridType::*)(std::size_t) const>(&GridType::operator())), 
+                     (python::arg("self"), python::arg("i")), python::return_value_policy<python::copy_const_reference>())
+                .def("setElement", &setItem<GridType>, (python::arg("self"), python::arg("i"), python::arg("value")))
+                .def("getCoordinates", python::pure_virtual(&GridType::getCoordinates), (python::arg("self"), python::arg("i"), python::arg("coords")));
+        }
     };
 
-	template <typename GridType>
+    template <typename GridType>
     class SpatialGridSpecialFunctionsVisitor : private SpatialGridVisitorBase, public boost::python::def_visitor<SpatialGridSpecialFunctionsVisitor<GridType> >
     {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			typedef typename GridType::ValueType ValueType;
+            typedef typename GridType::ValueType ValueType;
 
-			cl
-				.def("__getitem__", static_cast<const ValueType& (GridType::*)(std::size_t) const>(&GridType::operator()),
-					 (python::arg("self"), python::arg("i")),
-					 python::return_value_policy<python::copy_const_reference>())
-				.def("__setitem__", &setItem<GridType>, (python::arg("self"), python::arg("i"), python::arg("value")));
-		}
+            cl
+                .def("__getitem__", static_cast<const ValueType& (GridType::*)(std::size_t) const>(&GridType::operator()),
+                     (python::arg("self"), python::arg("i")),
+                     python::return_value_policy<python::copy_const_reference>())
+                .def("__setitem__", &setItem<GridType>, (python::arg("self"), python::arg("i"), python::arg("value")));
+        }
     };
 }
 

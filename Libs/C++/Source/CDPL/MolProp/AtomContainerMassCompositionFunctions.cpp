@@ -42,60 +42,60 @@ using namespace CDPL;
 
 double MolProp::calcExplicitMass(const Chem::AtomContainer& cntnr)
 {
-	double mass = 0.0;
+    double mass = 0.0;
 
-	for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		mass += getAtomicWeight(*it);
+    for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        mass += getAtomicWeight(*it);
 
-	return mass;
+    return mass;
 }
 
 void MolProp::calcExplicitMassComposition(const Chem::AtomContainer& cntnr, MassComposition& comp)
 {
-	using namespace Chem;
-	
-	double mass = 0.0;
-	
-	comp.clear();
+    using namespace Chem;
+    
+    double mass = 0.0;
+    
+    comp.clear();
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), atoms_end = cntnr.getAtomsEnd(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		unsigned int atom_type = getType(atom);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), atoms_end = cntnr.getAtomsEnd(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
+        unsigned int atom_type = getType(atom);
 
-		if (atom_type > AtomType::MAX_ATOMIC_NO)
-			atom_type = AtomType::UNKNOWN;
+        if (atom_type > AtomType::MAX_ATOMIC_NO)
+            atom_type = AtomType::UNKNOWN;
 
-		double atomic_wt = getAtomicWeight(atom);
+        double atomic_wt = getAtomicWeight(atom);
 
-		comp[atom_type] += atomic_wt;
-		mass += atomic_wt;
-	}
+        comp[atom_type] += atomic_wt;
+        mass += atomic_wt;
+    }
 
-	for (MassComposition::EntryIterator it = comp.getEntriesBegin(), entries_end = comp.getEntriesEnd(); it != entries_end; ++it) 
-		it->second /= mass;
+    for (MassComposition::EntryIterator it = comp.getEntriesBegin(), entries_end = comp.getEntriesEnd(); it != entries_end; ++it) 
+        it->second /= mass;
 }
 
 void MolProp::buildExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str)
 {
-	using namespace Chem;
-	
-	MassComposition mass_comp;
+    using namespace Chem;
+    
+    MassComposition mass_comp;
 
-	calcExplicitMassComposition(cntnr, mass_comp);
+    calcExplicitMassComposition(cntnr, mass_comp);
 
-	std::ostringstream comp_str_os;
-	const std::string unknown_type_sym = "?";
+    std::ostringstream comp_str_os;
+    const std::string unknown_type_sym = "?";
 
-	for (MassComposition::ConstEntryIterator it = mass_comp.getEntriesBegin(), entries_end = mass_comp.getEntriesEnd(); it != entries_end; ) {
-		const std::string& symbol = (it->first == AtomType::UNKNOWN ? unknown_type_sym : 
-									 AtomDictionary::getSymbol(it->first));
+    for (MassComposition::ConstEntryIterator it = mass_comp.getEntriesBegin(), entries_end = mass_comp.getEntriesEnd(); it != entries_end; ) {
+        const std::string& symbol = (it->first == AtomType::UNKNOWN ? unknown_type_sym : 
+                                     AtomDictionary::getSymbol(it->first));
 
-		comp_str_os << symbol << ": " << std::fixed << std::showpoint << std::setprecision(3) << std::right 
-					<< (it->second * 100) << '%';
+        comp_str_os << symbol << ": " << std::fixed << std::showpoint << std::setprecision(3) << std::right 
+                    << (it->second * 100) << '%';
 
-		if (++it != entries_end)
-			comp_str_os << ' ';	
-	}
+        if (++it != entries_end)
+            comp_str_os << ' ';    
+    }
 
-	comp_str.append(comp_str_os.str());
+    comp_str.append(comp_str_os.str());
 }

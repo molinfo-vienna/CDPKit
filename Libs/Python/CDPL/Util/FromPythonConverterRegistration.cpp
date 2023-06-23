@@ -34,67 +34,67 @@
 namespace
 {
 
-	template <typename ArrayType>
-	struct ArrayFromPySequenceConverter 
-	{
+    template <typename ArrayType>
+    struct ArrayFromPySequenceConverter 
+    {
 
-		ArrayFromPySequenceConverter() {
-			using namespace boost;
+        ArrayFromPySequenceConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<ArrayType>());
-		}
+            python::converter::registry::insert(&convertible, &construct, python::type_id<ArrayType>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
+        static void* convertible(PyObject* obj_ptr) {
+            using namespace boost;
 
-			if (!obj_ptr)
-				return 0;
+            if (!obj_ptr)
+                return 0;
 
-			if (!PySequence_Check(obj_ptr))
-				return 0;
+            if (!PySequence_Check(obj_ptr))
+                return 0;
 
-			python::ssize_t size = PySequence_Size(obj_ptr);
+            python::ssize_t size = PySequence_Size(obj_ptr);
 
-			for (python::ssize_t i = 0; i < size; i++) 
-				if (!python::extract<typename ArrayType::ElementType>(PySequence_GetItem(obj_ptr, i)).check())
-					return 0;
+            for (python::ssize_t i = 0; i < size; i++) 
+                if (!python::extract<typename ArrayType::ElementType>(PySequence_GetItem(obj_ptr, i)).check())
+                    return 0;
 
-			return obj_ptr;
-		}
+            return obj_ptr;
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
 
-			python::ssize_t size = PySequence_Size(obj_ptr);
+            python::ssize_t size = PySequence_Size(obj_ptr);
 
-			ArrayType array(size);
+            ArrayType array(size);
 
-			for (python::ssize_t i = 0; i < size; i++)
-				array.setElement(i, python::extract<typename ArrayType::ElementType>(PySequence_GetItem(obj_ptr, i)));
+            for (python::ssize_t i = 0; i < size; i++)
+                array.setElement(i, python::extract<typename ArrayType::ElementType>(PySequence_GetItem(obj_ptr, i)));
 
-			void* storage = ((python::converter::rvalue_from_python_storage<ArrayType>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<ArrayType>*)data)->storage.bytes;
 
-			new (storage) ArrayType();
+            new (storage) ArrayType();
 
-			static_cast<ArrayType*>(storage)->swap(array);
+            static_cast<ArrayType*>(storage)->swap(array);
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 }
 
 
 void CDPLPythonUtil::registerFromPythonConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ArrayFromPySequenceConverter<Util::UIArray>();
-	ArrayFromPySequenceConverter<Util::STArray>();
-	ArrayFromPySequenceConverter<Util::DArray>();
-	ArrayFromPySequenceConverter<Util::SArray>();
+    ArrayFromPySequenceConverter<Util::UIArray>();
+    ArrayFromPySequenceConverter<Util::STArray>();
+    ArrayFromPySequenceConverter<Util::DArray>();
+    ArrayFromPySequenceConverter<Util::SArray>();
 
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::UIArray::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::STArray::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::DArray::SharedPointer&>();
-	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::SArray::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Util::UIArray::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Util::STArray::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Util::DArray::SharedPointer&>();
+    CDPLPythonBase::GenericAnyFromPythonConverter<const Util::SArray::SharedPointer&>();
 }

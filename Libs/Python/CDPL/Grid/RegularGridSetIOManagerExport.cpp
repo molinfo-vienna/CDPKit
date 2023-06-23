@@ -31,5 +31,5 @@
 
 void CDPLPythonGrid::exportRegularGridSetIOManager()
 {
-	CDPLPythonBase::DataIOManagerExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetIOManager");
+    CDPLPythonBase::DataIOManagerExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetIOManager");
 }

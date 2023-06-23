@@ -39,73 +39,73 @@ using namespace CDPL;
 
 void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append)
 {
-	if (!append)
-		pharm.clear();
+    if (!append)
+        pharm.clear();
 
-	for (FeatureMapping::ConstEntryIterator it = iactions.getEntriesBegin(), end = iactions.getEntriesEnd(); it != end; ) {
-		if (!it->first || !it->second) {
-			++it;
-			continue;
-		}
+    for (FeatureMapping::ConstEntryIterator it = iactions.getEntriesBegin(), end = iactions.getEntriesEnd(); it != end; ) {
+        if (!it->first || !it->second) {
+            ++it;
+            continue;
+        }
 
-		const Feature& ftr1 = *it->first;
+        const Feature& ftr1 = *it->first;
 
-		if (has3DCoordinates(ftr1)) {
-			double dir_factor = 0.0;
+        if (has3DCoordinates(ftr1)) {
+            double dir_factor = 0.0;
 
-			switch (getType(ftr1)) {
+            switch (getType(ftr1)) {
 
-				case FeatureType::H_BOND_ACCEPTOR:
-				case FeatureType::HALOGEN_BOND_ACCEPTOR:
-					dir_factor = -1.0;
-					break;
+                case FeatureType::H_BOND_ACCEPTOR:
+                case FeatureType::HALOGEN_BOND_ACCEPTOR:
+                    dir_factor = -1.0;
+                    break;
 
-				case FeatureType::H_BOND_DONOR:
-				case FeatureType::HALOGEN_BOND_DONOR:
-					dir_factor = 1.0;
+                case FeatureType::H_BOND_DONOR:
+                case FeatureType::HALOGEN_BOND_DONOR:
+                    dir_factor = 1.0;
 
-				default:
-					break;
-			}
+                default:
+                    break;
+            }
 
-			if (dir_factor != 0.0) {
-				bool created_ftrs = false;
-				const Math::Vector3D& ftr1_pos = get3DCoordinates(ftr1);
+            if (dir_factor != 0.0) {
+                bool created_ftrs = false;
+                const Math::Vector3D& ftr1_pos = get3DCoordinates(ftr1);
 
-				for ( ; it != end && &ftr1 == it->first; ++it) {
-					if (!it->second)
-						continue;
+                for ( ; it != end && &ftr1 == it->first; ++it) {
+                    if (!it->second)
+                        continue;
 
-					const Feature& ftr2 = *it->second;
+                    const Feature& ftr2 = *it->second;
 
-					if (!has3DCoordinates(ftr2))
-						continue;
-					
-					Feature& new_ftr = (pharm.addFeature() = ftr1);
-					Math::Vector3D orient = get3DCoordinates(ftr2);
-					
-					orient.minusAssign(ftr1_pos);
+                    if (!has3DCoordinates(ftr2))
+                        continue;
+                    
+                    Feature& new_ftr = (pharm.addFeature() = ftr1);
+                    Math::Vector3D orient = get3DCoordinates(ftr2);
+                    
+                    orient.minusAssign(ftr1_pos);
 
-					double len = length(orient);
+                    double len = length(orient);
 
-					orient *= dir_factor / len; 
+                    orient *= dir_factor / len; 
 
-					setOrientation(new_ftr, orient);
-					setGeometry(new_ftr, FeatureGeometry::VECTOR);
-					setLength(new_ftr, len);
+                    setOrientation(new_ftr, orient);
+                    setGeometry(new_ftr, FeatureGeometry::VECTOR);
+                    setLength(new_ftr, len);
 
-					created_ftrs = true;
-				}
+                    created_ftrs = true;
+                }
 
-				if (!created_ftrs)
-					pharm.addFeature() = ftr1;
+                if (!created_ftrs)
+                    pharm.addFeature() = ftr1;
 
-				continue;
-			}
-		}
+                continue;
+            }
+        }
 
-		pharm.addFeature() = ftr1;
-		
-		for (++it; it != end && &ftr1 == it->first; ++it);
-	}
+        pharm.addFeature() = ftr1;
+        
+        for (++it; it != end && &ftr1 == it->first; ++it);
+    }
 }

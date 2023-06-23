@@ -42,25 +42,25 @@ Chem::CDFReactionReader::~CDFReactionReader() {}
 bool Chem::CDFReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
     try {
-		if (overwrite)
-			rxn.clear();
+        if (overwrite)
+            rxn.clear();
 
-		return reader->readReaction(is, rxn);
+        return reader->readReaction(is, rxn);
 
     } catch (const std::exception& e) {
-		throw Base::IOError("CDFReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
+        throw Base::IOError("CDFReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
     }
 }
 
 bool Chem::CDFReactionReader::skipData(std::istream& is)
 {
     try {
-		return reader->skipReaction(is);
+        return reader->skipReaction(is);
 
     } catch (const std::exception& e) {
-		throw Base::IOError("CDFReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
+        throw Base::IOError("CDFReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
     }
 }
 

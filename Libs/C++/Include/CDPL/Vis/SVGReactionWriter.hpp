@@ -39,45 +39,45 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Creates 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format. 
-		 *
-		 * \c %SVGReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
-		 * properties provided for the customization of Vis::ReactionView2D are also supported by \c %SVGReactionWriter.
-		 */
-		class CDPL_VIS_API SVGReactionWriter : public Base::DataWriter<Chem::Reaction>, private ImageWriter
-		{
+        /**
+         * \brief Creates 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format. 
+         *
+         * \c %SVGReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
+         * properties provided for the customization of Vis::ReactionView2D are also supported by \c %SVGReactionWriter.
+         */
+        class CDPL_VIS_API SVGReactionWriter : public Base::DataWriter<Chem::Reaction>, private ImageWriter
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %SVGReactionWriter instance that will write the image data to the output stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			SVGReactionWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %SVGReactionWriter instance that will write the image data to the output stream \a os.
+             * \param os The output stream to write to.
+             */
+            SVGReactionWriter(std::ostream& os);
 
-			/**
-			 * \brief Creates and outputs a 2D depiction of the reaction \a rxn.
-			 * \param rxn The reaction for which to output the 2D depiction.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<Chem::Reaction>& write(const Chem::Reaction& rxn);
+            /**
+             * \brief Creates and outputs a 2D depiction of the reaction \a rxn.
+             * \param rxn The reaction for which to output the 2D depiction.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<Chem::Reaction>& write(const Chem::Reaction& rxn);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			SVGReactionWriter(const SVGReactionWriter&);
+        private:
+            SVGReactionWriter(const SVGReactionWriter&);
 
-			cairo_surface_t* createCairoSurface(double, double) const;
-			cairo_surface_t* createCairoSurface() const;
+            cairo_surface_t* createCairoSurface(double, double) const;
+            cairo_surface_t* createCairoSurface() const;
 
-			std::ostream& output;
-			bool          state;
-		};
-	}
+            std::ostream& output;
+            bool          state;
+        };
+    }
 }
 
 #endif // CDPL_VIS_SVGREACTIONWRITER_HPP

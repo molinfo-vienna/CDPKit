@@ -38,163 +38,163 @@ using namespace ChOX;
 
 
 SizeSpecEditWidget::SizeSpecEditWidget(QWidget* parent, CDPL::Vis::SizeSpecification& size_spec, 
-									   bool type_editable, bool v_layout, bool policy_editable):
-	QWidget(parent), sizeSpec(size_spec)
+                                       bool type_editable, bool v_layout, bool policy_editable):
+    QWidget(parent), sizeSpec(size_spec)
 {
-	init(type_editable, v_layout, policy_editable);
+    init(type_editable, v_layout, policy_editable);
 }
 
 void SizeSpecEditWidget::updateGUI()
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	if (inputScalingCheckBox && outputScalingCheckBox) {
-		inputScalingCheckBox->blockSignals(true);
-		inputScalingCheckBox->setChecked(sizeSpec.followsInputScaling());
-		inputScalingCheckBox->blockSignals(false);
+    if (inputScalingCheckBox && outputScalingCheckBox) {
+        inputScalingCheckBox->blockSignals(true);
+        inputScalingCheckBox->setChecked(sizeSpec.followsInputScaling());
+        inputScalingCheckBox->blockSignals(false);
 
-		outputScalingCheckBox->blockSignals(true);
-		outputScalingCheckBox->setChecked(sizeSpec.followsOutputScaling());
-		outputScalingCheckBox->blockSignals(false);
-	}
+        outputScalingCheckBox->blockSignals(true);
+        outputScalingCheckBox->setChecked(sizeSpec.followsOutputScaling());
+        outputScalingCheckBox->blockSignals(false);
+    }
 
-	valueSpinBox->blockSignals(true);
-	
-	if (typeComboBox)
-		typeComboBox->blockSignals(true);
+    valueSpinBox->blockSignals(true);
+    
+    if (typeComboBox)
+        typeComboBox->blockSignals(true);
 
-	if (sizeSpec.isRelative()) {
-		if (typeComboBox) {
-			typeComboBox->setCurrentIndex(1);
-			
-			valueSpinBox->setValue(sizeSpec.getValue() * 100.0);
-		}
+    if (sizeSpec.isRelative()) {
+        if (typeComboBox) {
+            typeComboBox->setCurrentIndex(1);
+            
+            valueSpinBox->setValue(sizeSpec.getValue() * 100.0);
+        }
 
-	} else {
-		if (typeComboBox)
-			typeComboBox->setCurrentIndex(0);
+    } else {
+        if (typeComboBox)
+            typeComboBox->setCurrentIndex(0);
 
-		valueSpinBox->setValue(sizeSpec.getValue());
-	}
+        valueSpinBox->setValue(sizeSpec.getValue());
+    }
 
-	valueSpinBox->blockSignals(false);
+    valueSpinBox->blockSignals(false);
 
-	if (typeComboBox)
-		typeComboBox->blockSignals(false);
+    if (typeComboBox)
+        typeComboBox->blockSignals(false);
 }
 
 void SizeSpecEditWidget::handleValueChange(double value)
 {
-	if (typeComboBox && sizeSpec.isRelative())
-		sizeSpec.setValue(value / 100.0);
-	else
-		sizeSpec.setValue(value);
+    if (typeComboBox && sizeSpec.isRelative())
+        sizeSpec.setValue(value / 100.0);
+    else
+        sizeSpec.setValue(value);
 
-	emit sizeSpecChanged();
+    emit sizeSpecChanged();
 }
 
 void SizeSpecEditWidget::handleTypeChange(int idx)
 {
-	if (idx == 0) {
-		sizeSpec.setValue(valueSpinBox->value());
-		sizeSpec.setRelative(false);
-		
-	} else {
-		sizeSpec.setValue(valueSpinBox->value() / 100.0);
-		sizeSpec.setRelative(true);
-	}
+    if (idx == 0) {
+        sizeSpec.setValue(valueSpinBox->value());
+        sizeSpec.setRelative(false);
+        
+    } else {
+        sizeSpec.setValue(valueSpinBox->value() / 100.0);
+        sizeSpec.setRelative(true);
+    }
 
-	emit sizeSpecChanged();
+    emit sizeSpecChanged();
 }
 
 void SizeSpecEditWidget::handlePolicyChange(bool)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	sizeSpec.followInputScaling(inputScalingCheckBox->isChecked());
-	sizeSpec.followOutputScaling(outputScalingCheckBox->isChecked());
+    sizeSpec.followInputScaling(inputScalingCheckBox->isChecked());
+    sizeSpec.followOutputScaling(outputScalingCheckBox->isChecked());
 
-	emit sizeSpecChanged();
+    emit sizeSpecChanged();
 }
 
 void SizeSpecEditWidget::init(bool type_editable, bool v_layout, bool policy_editable)
 {
-	QBoxLayout* main_layout = new QBoxLayout(v_layout ? QBoxLayout::TopToBottom : QBoxLayout::LeftToRight, this);
+    QBoxLayout* main_layout = new QBoxLayout(v_layout ? QBoxLayout::TopToBottom : QBoxLayout::LeftToRight, this);
 
-	main_layout->setMargin(0);
-
-// ---------
-
-	QHBoxLayout* h_box_layout = new QHBoxLayout();
-
-	main_layout->addLayout(h_box_layout);
+    main_layout->setMargin(0);
 
 // ---------
 
-	valueSpinBox = new QDoubleSpinBox(this);
+    QHBoxLayout* h_box_layout = new QHBoxLayout();
 
-	valueSpinBox->setMinimum(0.0);
-	valueSpinBox->setSingleStep(0.1);
-
-	setFocusProxy(valueSpinBox);
-
-	h_box_layout->addWidget(valueSpinBox, 2);
-
-	connect(valueSpinBox, SIGNAL(valueChanged(double)), this, SLOT(handleValueChange(double)));
+    main_layout->addLayout(h_box_layout);
 
 // ---------
 
-	if (type_editable) {
-		typeComboBox = new QComboBox(this);
+    valueSpinBox = new QDoubleSpinBox(this);
 
-		typeComboBox->addItem("pt");
-		typeComboBox->addItem("%");
+    valueSpinBox->setMinimum(0.0);
+    valueSpinBox->setSingleStep(0.1);
 
-		h_box_layout->addWidget(typeComboBox, 1);
+    setFocusProxy(valueSpinBox);
 
-		connect(typeComboBox, SIGNAL(activated(int)), this, SLOT(handleTypeChange(int)));
+    h_box_layout->addWidget(valueSpinBox, 2);
 
-	} else {
-		QLabel* label = new QLabel("pt", this);
-
-		h_box_layout->addWidget(label, 1);
-
-		typeComboBox = 0;
-	}
+    connect(valueSpinBox, SIGNAL(valueChanged(double)), this, SLOT(handleValueChange(double)));
 
 // ---------
 
-	if (policy_editable) {
-		inputScalingCheckBox = new QCheckBox(tr("Follow Bond-Length Normalization"), this);
-		outputScalingCheckBox = new QCheckBox(tr("Follow Viewport Scaling"), this);
+    if (type_editable) {
+        typeComboBox = new QComboBox(this);
 
-		if (!v_layout)
-			main_layout->addStretch();
+        typeComboBox->addItem("pt");
+        typeComboBox->addItem("%");
 
-		main_layout->addWidget(inputScalingCheckBox);
+        h_box_layout->addWidget(typeComboBox, 1);
 
-		if (!v_layout)
-			main_layout->addStretch();
+        connect(typeComboBox, SIGNAL(activated(int)), this, SLOT(handleTypeChange(int)));
 
-		main_layout->addWidget(outputScalingCheckBox);
+    } else {
+        QLabel* label = new QLabel("pt", this);
 
-		if (!v_layout)
-			main_layout->addStretch();
+        h_box_layout->addWidget(label, 1);
 
-		connect(inputScalingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handlePolicyChange(bool)));
-		connect(outputScalingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handlePolicyChange(bool)));
-
-	} else {
-		if (!v_layout) 
-			main_layout->addStretch(1);
-		
-		inputScalingCheckBox = 0;
-		outputScalingCheckBox = 0;
-	}
+        typeComboBox = 0;
+    }
 
 // ---------
 
-	updateGUI();
+    if (policy_editable) {
+        inputScalingCheckBox = new QCheckBox(tr("Follow Bond-Length Normalization"), this);
+        outputScalingCheckBox = new QCheckBox(tr("Follow Viewport Scaling"), this);
+
+        if (!v_layout)
+            main_layout->addStretch();
+
+        main_layout->addWidget(inputScalingCheckBox);
+
+        if (!v_layout)
+            main_layout->addStretch();
+
+        main_layout->addWidget(outputScalingCheckBox);
+
+        if (!v_layout)
+            main_layout->addStretch();
+
+        connect(inputScalingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handlePolicyChange(bool)));
+        connect(outputScalingCheckBox, SIGNAL(toggled(bool)), this, SLOT(handlePolicyChange(bool)));
+
+    } else {
+        if (!v_layout) 
+            main_layout->addStretch(1);
+        
+        inputScalingCheckBox = 0;
+        outputScalingCheckBox = 0;
+    }
+
+// ---------
+
+    updateGUI();
 }

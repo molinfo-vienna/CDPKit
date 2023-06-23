@@ -39,40 +39,40 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<ConfGen::DGStructureGenerator>("DGStructureGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::DGStructureGenerator&>((python::arg("self"), python::arg("gen"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGStructureGenerator>())
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGStructureGenerator::operator=), 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("getExcludedHydrogenMask", &ConfGen::DGStructureGenerator::getExcludedHydrogenMask, python::arg("self"), 
-			 python::return_internal_reference<>())
-		.def("setup", static_cast<void (ConfGen::DGStructureGenerator::*)(const Chem::MolecularGraph&)>
-			 (&ConfGen::DGStructureGenerator::setup), (python::arg("self"), python::arg("molgraph")))
-		.def("setup", static_cast<void (ConfGen::DGStructureGenerator::*)(const Chem::MolecularGraph&, const ForceField::MMFF94InteractionData&)>
-			 (&ConfGen::DGStructureGenerator::setup), 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data")))
-		.def("generate", &ConfGen::DGStructureGenerator::generate, (python::arg("self"), python::arg("coords")))
-		.def("getNumAtomStereoCenters", &ConfGen::DGStructureGenerator::getNumAtomStereoCenters, python::arg("self"))
-		.def("getNumBondStereoCenters", &ConfGen::DGStructureGenerator::getNumBondStereoCenters, python::arg("self"))
-		.def("checkAtomConfigurations", &ConfGen::DGStructureGenerator::checkAtomConfigurations,
-			 (python::arg("self"), python::arg("coords")))
-		.def("checkBondConfigurations", &ConfGen::DGStructureGenerator::checkBondConfigurations,
-			 (python::arg("self"), python::arg("coords")))
-		.def("getSettings", 
-			 static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
-			 (&ConfGen::DGStructureGenerator::getSettings), 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("getConstraintGenerator", &ConfGen::DGStructureGenerator::getConstraintGenerator, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.add_property("numAtomStereoCenters",  &ConfGen::DGStructureGenerator::getNumAtomStereoCenters)
-		.add_property("numBondStereoCenters",  &ConfGen::DGStructureGenerator::getNumBondStereoCenters)
-		.add_property("settings", 
-					  python::make_function(static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
-											(&ConfGen::DGStructureGenerator::getSettings),
-											python::return_internal_reference<>()))
-		.add_property("constraintGenerator", python::make_function(&ConfGen::DGStructureGenerator::getConstraintGenerator, 
-																   python::return_internal_reference<>()))
-		.add_property("exclHydrogenMask", python::make_function(&ConfGen::DGStructureGenerator::getExcludedHydrogenMask, 
-																python::return_internal_reference<>()));
+    python::class_<ConfGen::DGStructureGenerator>("DGStructureGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ConfGen::DGStructureGenerator&>((python::arg("self"), python::arg("gen"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGStructureGenerator>())
+        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGStructureGenerator::operator=), 
+             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .def("getExcludedHydrogenMask", &ConfGen::DGStructureGenerator::getExcludedHydrogenMask, python::arg("self"), 
+             python::return_internal_reference<>())
+        .def("setup", static_cast<void (ConfGen::DGStructureGenerator::*)(const Chem::MolecularGraph&)>
+             (&ConfGen::DGStructureGenerator::setup), (python::arg("self"), python::arg("molgraph")))
+        .def("setup", static_cast<void (ConfGen::DGStructureGenerator::*)(const Chem::MolecularGraph&, const ForceField::MMFF94InteractionData&)>
+             (&ConfGen::DGStructureGenerator::setup), 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data")))
+        .def("generate", &ConfGen::DGStructureGenerator::generate, (python::arg("self"), python::arg("coords")))
+        .def("getNumAtomStereoCenters", &ConfGen::DGStructureGenerator::getNumAtomStereoCenters, python::arg("self"))
+        .def("getNumBondStereoCenters", &ConfGen::DGStructureGenerator::getNumBondStereoCenters, python::arg("self"))
+        .def("checkAtomConfigurations", &ConfGen::DGStructureGenerator::checkAtomConfigurations,
+             (python::arg("self"), python::arg("coords")))
+        .def("checkBondConfigurations", &ConfGen::DGStructureGenerator::checkBondConfigurations,
+             (python::arg("self"), python::arg("coords")))
+        .def("getSettings", 
+             static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
+             (&ConfGen::DGStructureGenerator::getSettings), 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("getConstraintGenerator", &ConfGen::DGStructureGenerator::getConstraintGenerator, 
+             python::arg("self"), python::return_internal_reference<>())
+        .add_property("numAtomStereoCenters",  &ConfGen::DGStructureGenerator::getNumAtomStereoCenters)
+        .add_property("numBondStereoCenters",  &ConfGen::DGStructureGenerator::getNumBondStereoCenters)
+        .add_property("settings", 
+                      python::make_function(static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
+                                            (&ConfGen::DGStructureGenerator::getSettings),
+                                            python::return_internal_reference<>()))
+        .add_property("constraintGenerator", python::make_function(&ConfGen::DGStructureGenerator::getConstraintGenerator, 
+                                                                   python::return_internal_reference<>()))
+        .add_property("exclHydrogenMask", python::make_function(&ConfGen::DGStructureGenerator::getExcludedHydrogenMask, 
+                                                                python::return_internal_reference<>()));
 }

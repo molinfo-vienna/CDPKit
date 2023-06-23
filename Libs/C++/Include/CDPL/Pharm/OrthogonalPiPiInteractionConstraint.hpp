@@ -39,49 +39,49 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief OrthogonalPiPiInteractionConstraint.
-		 */
-		class CDPL_PHARM_API OrthogonalPiPiInteractionConstraint
-		{
+        /**
+         * \brief OrthogonalPiPiInteractionConstraint.
+         */
+        class CDPL_PHARM_API OrthogonalPiPiInteractionConstraint
+        {
 
-		  public:
-			static constexpr double DEF_MAX_V_DISTANCE  = 1.4;
-			static constexpr double DEF_MIN_H_DISTANCE  = 4.0;
-			static constexpr double DEF_MAX_H_DISTANCE  = 6.0;
-			static constexpr double DEF_MAX_ANGLE       = 30.0;
-	
-			/**
-			 * \brief Constructs a \c %OrthogonalPiPiInteractionConstraint functor with the specified constraints.
-			 * \param min_h_dist The minimum allowed aromatic ring center distance in the plane of the vertically oriented ring.
-			 * \param max_h_dist The maximum allowed aromatic ring center distance in the plane of the vertically oriented ring.
-			 * \param max_v_dist The maximum allowed distance distance of the center of the horizontally oriented aromatic ring to the plane of the vertically oriented ring.
-			 * \param max_ang The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
-			 */
-			OrthogonalPiPiInteractionConstraint(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
-												double max_v_dist = DEF_MAX_V_DISTANCE,double max_ang = DEF_MAX_ANGLE):
-				minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), maxAngle(max_ang) {}
+          public:
+            static constexpr double DEF_MAX_V_DISTANCE  = 1.4;
+            static constexpr double DEF_MIN_H_DISTANCE  = 4.0;
+            static constexpr double DEF_MAX_H_DISTANCE  = 6.0;
+            static constexpr double DEF_MAX_ANGLE       = 30.0;
+    
+            /**
+             * \brief Constructs a \c %OrthogonalPiPiInteractionConstraint functor with the specified constraints.
+             * \param min_h_dist The minimum allowed aromatic ring center distance in the plane of the vertically oriented ring.
+             * \param max_h_dist The maximum allowed aromatic ring center distance in the plane of the vertically oriented ring.
+             * \param max_v_dist The maximum allowed distance distance of the center of the horizontally oriented aromatic ring to the plane of the vertically oriented ring.
+             * \param max_ang The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
+             */
+            OrthogonalPiPiInteractionConstraint(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
+                                                double max_v_dist = DEF_MAX_V_DISTANCE,double max_ang = DEF_MAX_ANGLE):
+                minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), maxAngle(max_ang) {}
 
-			double getMinHDistance() const;
+            double getMinHDistance() const;
 
-			double getMaxHDistance() const;
+            double getMaxHDistance() const;
 
-			double getMaxVDistance() const;
+            double getMaxVDistance() const;
 
-			double getMaxAngle() const;
+            double getMaxAngle() const;
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			bool checkDistances(const Math::Vector3D&, const Math::Vector3D&) const;
+          private:
+            bool checkDistances(const Math::Vector3D&, const Math::Vector3D&) const;
 
-			double minHDist;
-			double maxHDist;
-			double maxVDist;
-			double maxAngle;
-		};
+            double minHDist;
+            double maxHDist;
+            double maxVDist;
+            double maxAngle;
+        };
     }
 }
 

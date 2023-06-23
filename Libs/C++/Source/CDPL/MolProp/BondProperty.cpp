@@ -31,15 +31,15 @@
 namespace CDPL 
 {
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		namespace BondProperty
-		{
+        namespace BondProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(MHMO_PI_ORDER);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(MHMO_PI_ORDER);
+        }
 
-		void initBondProperties() {}
-	}
+        void initBondProperties() {}
+    }
 }

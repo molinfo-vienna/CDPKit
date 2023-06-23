@@ -31,10 +31,10 @@
 
 void CDPLPythonVis::exportPDFMolecularGraphOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::PDFMolecularGraphOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("PDFMolecularGraphOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Vis::PDFMolecularGraphOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("PDFMolecularGraphOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

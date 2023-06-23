@@ -33,18 +33,18 @@
 
 void CDPLPythonBiomol::exportMMTFMoleculeInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Biomol::MMTFMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::MMTFMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Biomol::MMTFGZMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFGZMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::MMTFGZMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFGZMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Biomol::MMTFBZ2MoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFBZ2MoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::MMTFBZ2MoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFBZ2MoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

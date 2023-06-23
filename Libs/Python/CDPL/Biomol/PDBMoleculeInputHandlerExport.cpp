@@ -33,18 +33,18 @@
 
 void CDPLPythonBiomol::exportPDBMoleculeInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Biomol::PDBMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::PDBMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Biomol::PDBGZMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBGZMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::PDBGZMoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBGZMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Biomol::PDBBZ2MoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBBZ2MoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Biomol::PDBBZ2MoleculeInputHandler, 
+        python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBBZ2MoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

@@ -35,28 +35,28 @@
 
 BOOST_AUTO_TEST_CASE(AtomSymbolTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
    
-	Molecule mol;
-	Atom& atom = mol.addAtom();
+    Molecule mol;
+    Atom& atom = mol.addAtom();
 
-	BOOST_CHECK(atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+    BOOST_CHECK(atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
 
-	BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == "");
+    BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == "");
 
-	BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+    BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
 
 //-----
 
-	for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
-		atom.setProperty(AtomProperty::TYPE, atom_type);
+    for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
+        atom.setProperty(AtomProperty::TYPE, atom_type);
 
-		BOOST_CHECK(atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+        BOOST_CHECK(atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
 
-		BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == AtomTypeDB::getSymbol(atom_type));
+        BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == AtomTypeDB::getSymbol(atom_type));
 
-		BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
-	}
+        BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+    }
 }
 

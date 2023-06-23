@@ -39,53 +39,53 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class CDFPharmacophoreDataWriter;
-		class FeatureContainer;
+        class CDFPharmacophoreDataWriter;
+        class FeatureContainer;
 
-		/**
-		 * \brief A writer for feature container data in the native I/O format of the <em>CDPL</em>.
-		 */
-		class CDPL_PHARM_API CDFFeatureContainerWriter : public Base::DataWriter<FeatureContainer>
-		{
+        /**
+         * \brief A writer for feature container data in the native I/O format of the <em>CDPL</em>.
+         */
+        class CDPL_PHARM_API CDFFeatureContainerWriter : public Base::DataWriter<FeatureContainer>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %CDFFeatureContainerWriter instance that will write data of feature containers to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			CDFFeatureContainerWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %CDFFeatureContainerWriter instance that will write data of feature containers to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            CDFFeatureContainerWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~CDFFeatureContainerWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~CDFFeatureContainerWriter();
 
-			/**
-			 * \brief Writes data of the feature container \a cntnr to the output stream specified in the constructor.
-			 * \param cntnr The feature container to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<FeatureContainer>& write(const FeatureContainer& cntnr);
+            /**
+             * \brief Writes data of the feature container \a cntnr to the output stream specified in the constructor.
+             * \param cntnr The feature container to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<FeatureContainer>& write(const FeatureContainer& cntnr);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			typedef std::auto_ptr<CDFPharmacophoreDataWriter> CDFDataWriterPtr;
+        private:
+            typedef std::auto_ptr<CDFPharmacophoreDataWriter> CDFDataWriterPtr;
 
-			CDFFeatureContainerWriter(const CDFFeatureContainerWriter&);
+            CDFFeatureContainerWriter(const CDFFeatureContainerWriter&);
 
-			CDFFeatureContainerWriter& operator=(const CDFFeatureContainerWriter&);
+            CDFFeatureContainerWriter& operator=(const CDFFeatureContainerWriter&);
 
-			std::ostream&    output;
-			bool             state;
-			CDFDataWriterPtr writer;
-		};
-	}
+            std::ostream&    output;
+            bool             state;
+            CDFDataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_PHARM_CDFFEATURECONTAINERWRITER_HPP

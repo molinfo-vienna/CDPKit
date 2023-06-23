@@ -29,7 +29,7 @@
 namespace CDPLPythonBase
 {
 
-	void registerExceptionTranslators();
+    void registerExceptionTranslators();
 }
 
 #endif // CDPL_PYTHON_BASE_EXCEPTIONTRANSLATORREGISTRATION_HPP

@@ -40,49 +40,49 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerMassTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
-
-	BOOST_CHECK_SMALL(mol.getProperty<double>(AtomContainerProperty::MASS), 0.000001);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK_SMALL(mol.getProperty<double>(AtomContainerProperty::MASS), 0.000001);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
-
-	BOOST_CHECK_CLOSE(mol.getProperty<double>(AtomContainerProperty::MASS), 268.213, 0.01);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::SYMBOL, std::string("N"));
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK_CLOSE(mol.getProperty<double>(AtomContainerProperty::MASS), 270.199, 0.01);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
+
+    BOOST_CHECK_CLOSE(mol.getProperty<double>(AtomContainerProperty::MASS), 268.213, 0.01);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, AtomContainerProperty::MASS, mol, AtomContainerProperty::ATOM_COUNT);
+    mol.getAtom(0).setProperty(AtomProperty::SYMBOL, std::string("N"));
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
+
+    BOOST_CHECK_CLOSE(mol.getProperty<double>(AtomContainerProperty::MASS), 270.199, 0.01);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, AtomContainerProperty::MASS, *it, AtomProperty::ATOMIC_WEIGHT);
+    TestUtils::checkDependency(mol, AtomContainerProperty::MASS, mol, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, AtomContainerProperty::MASS, *it, AtomProperty::ATOMIC_WEIGHT);
 }

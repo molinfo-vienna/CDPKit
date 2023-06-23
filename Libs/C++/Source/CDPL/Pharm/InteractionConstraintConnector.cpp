@@ -33,7 +33,7 @@ using namespace CDPL;
 bool Pharm::InteractionConstraintConnector::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
     if (andExpr)
-		return (function1(ftr1, ftr2) && function2(ftr1, ftr2));
+        return (function1(ftr1, ftr2) && function2(ftr1, ftr2));
 
     return (function1(ftr1, ftr2) || function2(ftr1, ftr2));
 }

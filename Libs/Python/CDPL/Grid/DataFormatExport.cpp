@@ -33,17 +33,17 @@
 namespace 
 {
 
-	struct DataFormat {};
+    struct DataFormat {};
 }
 
 
 void CDPLPythonGrid::exportDataFormats()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("CDF", &Grid::DataFormat::CDF)
-		.def_readonly("CDF_GZ", &Grid::DataFormat::CDF_GZ)
-		.def_readonly("CDF_BZ2", &Grid::DataFormat::CDF_BZ2);
+    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
+        .def_readonly("CDF", &Grid::DataFormat::CDF)
+        .def_readonly("CDF_GZ", &Grid::DataFormat::CDF_GZ)
+        .def_readonly("CDF_BZ2", &Grid::DataFormat::CDF_BZ2);
 }

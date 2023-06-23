@@ -34,39 +34,39 @@
 
 void CDPLPythonChem::exportSDFMolecularGraphWriter()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SDFMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >,
-		boost::noncopyable>("SDFMolecularGraphWriter", python::no_init)
-		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SDFMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >,
+        boost::noncopyable>("SDFMolecularGraphWriter", python::no_init)
+        .def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Chem::SDFMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("FileSDFMolecularGraphWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Chem::SDFMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("FileSDFMolecularGraphWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-	python::class_<Chem::SDFGZMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("SDFGZMolecularGraphWriter", python::no_init)
-		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SDFGZMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("SDFGZMolecularGraphWriter", python::no_init)
+        .def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Chem::SDFGZMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("FileSDFGZMolecularGraphWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Chem::SDFGZMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("FileSDFGZMolecularGraphWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-	python::class_<Chem::SDFBZ2MolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("SDFBZ2MolecularGraphWriter", python::no_init)
-		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SDFBZ2MolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("SDFBZ2MolecularGraphWriter", python::no_init)
+        .def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Chem::SDFBZ2MolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("FileSDFBZ2MolecularGraphWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Chem::SDFBZ2MolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("FileSDFBZ2MolecularGraphWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

@@ -39,7 +39,7 @@ namespace
 
     const CDPL::Math::Vector3D& callOperator(CDPL::Chem::AtomArray3DCoordinatesFunctor& func, CDPL::Chem::Atom& atom)
     {
-		return func(atom);
+        return func(atom);
     }
 }
 
@@ -50,11 +50,11 @@ void CDPLPythonChem::exportAtomArray3DCoordinatesFunctor()
     using namespace CDPL;
 
     python::class_<Chem::AtomArray3DCoordinatesFunctor, boost::noncopyable>("AtomArray3DCoordinatesFunctor", python::no_init)
-		.def(python::init<const Chem::AtomArray3DCoordinatesFunctor&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<const Math::Vector3DArray&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("coords"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomArray3DCoordinatesFunctor>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomArray3DCoordinatesFunctor::operator=), 
-			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("atom")),
-			 boost::python::return_internal_reference<2>());
+        .def(python::init<const Chem::AtomArray3DCoordinatesFunctor&>((python::arg("self"), python::arg("func"))))
+        .def(python::init<const Math::Vector3DArray&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("coords"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomArray3DCoordinatesFunctor>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomArray3DCoordinatesFunctor::operator=), 
+             (python::arg("self"), python::arg("func")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("atom")),
+             boost::python::return_internal_reference<2>());
 }

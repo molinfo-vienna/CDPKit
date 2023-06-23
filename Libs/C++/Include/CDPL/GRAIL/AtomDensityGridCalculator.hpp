@@ -44,81 +44,81 @@
 namespace CDPL 
 {
 
-	namespace Internal 
-	{
+    namespace Internal 
+    {
 
-		template <typename PT, typename CT, typename ST> class Octree;
-	}
+        template <typename PT, typename CT, typename ST> class Octree;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class AtomContainer;
-	}
-	
+        class AtomContainer;
+    }
+    
     namespace GRAIL
     {
 
-		/**
-		 * \brief AtomDensityGridCalculator.
-		 */
-		class CDPL_GRAIL_API AtomDensityGridCalculator
-		{
+        /**
+         * \brief AtomDensityGridCalculator.
+         */
+        class CDPL_GRAIL_API AtomDensityGridCalculator
+        {
 
-		  public:
-			static constexpr double DEF_DISTANCE_CUTOFF = 4.5;
+          public:
+            static constexpr double DEF_DISTANCE_CUTOFF = 4.5;
 
-			typedef std::shared_ptr<AtomDensityGridCalculator> SharedPointer;
+            typedef std::shared_ptr<AtomDensityGridCalculator> SharedPointer;
 
-			typedef std::function<double(const Math::Vector3D&, const Math::Vector3D&, const Chem::Atom&)> DensityFunction;
-			typedef std::function<double(const Math::DVector&)> DensityCombinationFunction;
+            typedef std::function<double(const Math::Vector3D&, const Math::Vector3D&, const Chem::Atom&)> DensityFunction;
+            typedef std::function<double(const Math::DVector&)> DensityCombinationFunction;
 
-			AtomDensityGridCalculator();
+            AtomDensityGridCalculator();
 
-			AtomDensityGridCalculator(const AtomDensityGridCalculator& calc);
+            AtomDensityGridCalculator(const AtomDensityGridCalculator& calc);
 
-			AtomDensityGridCalculator(const DensityFunction& func);
+            AtomDensityGridCalculator(const DensityFunction& func);
 
-			AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func); 
+            AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func); 
 
-			void setDistanceCutoff(double dist);
+            void setDistanceCutoff(double dist);
 
-			double getDistanceCutoff() const;
+            double getDistanceCutoff() const;
 
-			void setDensityFunction(const DensityFunction& func);
+            void setDensityFunction(const DensityFunction& func);
 
-			const DensityFunction& getDensityFunction() const;
+            const DensityFunction& getDensityFunction() const;
 
-			void setDensityCombinationFunction(const DensityCombinationFunction& func);
+            void setDensityCombinationFunction(const DensityCombinationFunction& func);
 
-			const DensityCombinationFunction& getDensityCombinationFunction() const;
+            const DensityCombinationFunction& getDensityCombinationFunction() const;
 
-			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
-			 * \param func The atom 3D-coordinates function.
-			 */
-			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+            /**
+             * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
+             * \param func The atom 3D-coordinates function.
+             */
+            void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
-			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+            const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
-			void calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid);
+            void calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid);
 
-			AtomDensityGridCalculator& operator=(const AtomDensityGridCalculator& calc);
+            AtomDensityGridCalculator& operator=(const AtomDensityGridCalculator& calc);
 
-		  private:
-			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-			typedef std::shared_ptr<Octree> OctreePtr;
-			typedef std::vector<std::size_t> AtomIndexList;
+          private:
+            typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+            typedef std::shared_ptr<Octree> OctreePtr;
+            typedef std::vector<std::size_t> AtomIndexList;
 
-			Math::DVector                    partialDensities;
-			DensityFunction                  densityFunc;
-			DensityCombinationFunction       densityCombinationFunc;
-			Chem::Atom3DCoordinatesFunction  coordsFunc;
-			double                           distCutoff;
-			OctreePtr                        octree;
-			Math::Vector3DArray              atomCoords;
-			AtomIndexList                    atomIndices;
-		};
+            Math::DVector                    partialDensities;
+            DensityFunction                  densityFunc;
+            DensityCombinationFunction       densityCombinationFunc;
+            Chem::Atom3DCoordinatesFunction  coordsFunc;
+            double                           distCutoff;
+            OctreePtr                        octree;
+            Math::Vector3DArray              atomCoords;
+            AtomIndexList                    atomIndices;
+        };
     }
 }
 

@@ -34,34 +34,34 @@ class QScrollBar;
 namespace ChOX
 {
 
-	class DataSet;
-	class DataSetPageView;
-	class Settings;
+    class DataSet;
+    class DataSetPageView;
+    class Settings;
 
-	class DataSetView : public QFrame
-	{
+    class DataSetView : public QFrame
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		DataSetView(QWidget*, Settings&, DataSet&);
+    public:
+        DataSetView(QWidget*, Settings&, DataSet&);
 
-		DataSetPageView& getPageView() const;
-		DataSet& getDataSet() const;
+        DataSetPageView& getPageView() const;
+        DataSet& getDataSet() const;
 
-	private slots:
-		void adjustScrollBar(int);
+    private slots:
+        void adjustScrollBar(int);
 
-	private:
-		void wheelEvent(QWheelEvent*);
+    private:
+        void wheelEvent(QWheelEvent*);
 
-		void init();
+        void init();
 
-		QScrollBar*      scrollBar;
-		DataSetPageView* pageView;
-		DataSet&         dataSet;
-		Settings&        settings;
-	};
+        QScrollBar*      scrollBar;
+        DataSetPageView* pageView;
+        DataSet&         dataSet;
+        Settings&        settings;
+    };
 }
 
 #endif // CHOX_DATASETVIEW_HPP

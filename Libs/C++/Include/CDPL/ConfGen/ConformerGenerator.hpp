@@ -45,87 +45,87 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ConfGen 
     {
 
-		class ConformerGeneratorImpl;
+        class ConformerGeneratorImpl;
 
-		class CDPL_CONFGEN_API ConformerGenerator
-		{
+        class CDPL_CONFGEN_API ConformerGenerator
+        {
 
-		public:
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+        public:
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
 
-			ConformerGenerator();
-		
-			~ConformerGenerator();
+            ConformerGenerator();
+        
+            ~ConformerGenerator();
 
-			const ConformerGeneratorSettings& getSettings() const;
+            const ConformerGeneratorSettings& getSettings() const;
 
-			ConformerGeneratorSettings& getSettings();
+            ConformerGeneratorSettings& getSettings();
 
-			void clearFragmentLibraries();
+            void clearFragmentLibraries();
 
-			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+            void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void clearTorsionLibraries();
+            void clearTorsionLibraries();
 
-			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+            void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
-			
-			unsigned int generate(const Chem::MolecularGraph& molgraph);
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
+            
+            unsigned int generate(const Chem::MolecularGraph& molgraph);
 
-			void setConformers(Chem::MolecularGraph& molgraph) const;
+            void setConformers(Chem::MolecularGraph& molgraph) const;
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			const ConformerData& getConformer(std::size_t idx) const;
+            const ConformerData& getConformer(std::size_t idx) const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			ConformerIterator getConformersBegin();
+            ConformerIterator getConformersBegin();
 
-			ConformerIterator getConformersEnd();
+            ConformerIterator getConformersEnd();
 
-		    ConstConformerIterator begin() const;
+            ConstConformerIterator begin() const;
 
-			ConstConformerIterator end() const;
+            ConstConformerIterator end() const;
 
-			ConformerIterator begin();
+            ConformerIterator begin();
 
-			ConformerIterator end();
+            ConformerIterator end();
 
-		private:
-			ConformerGenerator(const ConformerGenerator&);
+        private:
+            ConformerGenerator(const ConformerGenerator&);
 
-			ConformerGenerator& operator=(const ConformerGenerator&);
+            ConformerGenerator& operator=(const ConformerGenerator&);
 
-			typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
+            typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
 
-			ImplementationPointer impl;
-		};
+            ImplementationPointer impl;
+        };
     }
 }
 

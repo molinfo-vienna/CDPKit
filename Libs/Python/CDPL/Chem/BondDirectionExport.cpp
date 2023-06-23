@@ -32,18 +32,18 @@
 namespace 
 {
 
-	struct BondDirection {};
+    struct BondDirection {};
 }
 
 
 void CDPLPythonChem::exportBondDirections()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondDirection, boost::noncopyable>("BondDirection", python::no_init)
-		.def_readonly("NONE", &Chem::BondDirection::NONE)
-		.def_readonly("DOWN", &Chem::BondDirection::DOWN)
-		.def_readonly("UNSPECIFIED", &Chem::BondDirection::UNSPECIFIED)
-		.def_readonly("UP", &Chem::BondDirection::UP);
+    python::class_<BondDirection, boost::noncopyable>("BondDirection", python::no_init)
+        .def_readonly("NONE", &Chem::BondDirection::NONE)
+        .def_readonly("DOWN", &Chem::BondDirection::DOWN)
+        .def_readonly("UNSPECIFIED", &Chem::BondDirection::UNSPECIFIED)
+        .def_readonly("UP", &Chem::BondDirection::UP);
 }

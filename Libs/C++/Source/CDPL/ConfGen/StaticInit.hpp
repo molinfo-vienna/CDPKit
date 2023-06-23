@@ -31,36 +31,36 @@
 namespace CDPL
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		void initAtomProperties();
-		void initBondProperties();
-		void initMolecularGraphProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
-	}
+        void initAtomProperties();
+        void initBondProperties();
+        void initMolecularGraphProperties();
+        void initDataFormats();
+        void initControlParameters();
+        void initControlParameterDefaults();
+    }
 }
 
 namespace
 {
 
-	struct CDPLConfGenInit
-	{
+    struct CDPLConfGenInit
+    {
 
-		CDPLConfGenInit() {
-			CDPL::ConfGen::initDataFormats();
-			CDPL::ConfGen::initControlParameters();
-			CDPL::ConfGen::initControlParameterDefaults();
+        CDPLConfGenInit() {
+            CDPL::ConfGen::initDataFormats();
+            CDPL::ConfGen::initControlParameters();
+            CDPL::ConfGen::initControlParameterDefaults();
 /*
-			CDPL::ConfGen::initAtomProperties();
-			CDPL::ConfGen::initBondProperties();
-			CDPL::ConfGen::initMolecularGraphProperties();
+            CDPL::ConfGen::initAtomProperties();
+            CDPL::ConfGen::initBondProperties();
+            CDPL::ConfGen::initMolecularGraphProperties();
 */
-		}
+        }
 
-	} cdplConfGenInit;
+    } cdplConfGenInit;
 }
 
 #endif // CDPL_CONFGEN_STATIC_LINK

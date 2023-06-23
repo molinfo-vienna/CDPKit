@@ -39,24 +39,24 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A data type for the storage of Chem::Fragment objects.
-		 */
-		class CDPL_CHEM_API FragmentList : public Util::IndirectArray<Fragment>
-		{
+        /**
+         * \brief A data type for the storage of Chem::Fragment objects.
+         */
+        class CDPL_CHEM_API FragmentList : public Util::IndirectArray<Fragment>
+        {
 
-		  public:
-			typedef std::shared_ptr<FragmentList> SharedPointer;
+          public:
+            typedef std::shared_ptr<FragmentList> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "FragmentList";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "FragmentList";
+            }
+        };
+    }
 }
 
 #endif // CDPL_CHEM_FRAGMENTLIST_HPP

@@ -35,49 +35,49 @@
 
 void CDPLPythonChem::exportCommonConnectedSubstructureSearch()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	Chem::AtomBondMapping& (Chem::CommonConnectedSubstructureSearch::*getMappingFunc)(std::size_t) = &Chem::CommonConnectedSubstructureSearch::getMapping;
+    Chem::AtomBondMapping& (Chem::CommonConnectedSubstructureSearch::*getMappingFunc)(std::size_t) = &Chem::CommonConnectedSubstructureSearch::getMapping;
 
-	bool (Chem::CommonConnectedSubstructureSearch::*uniqueMappingsOnlyGetFunc)() const = &Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly;
-	void (Chem::CommonConnectedSubstructureSearch::*uniqueMappingsOnlySetFunc)(bool) = &Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly;
+    bool (Chem::CommonConnectedSubstructureSearch::*uniqueMappingsOnlyGetFunc)() const = &Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly;
+    void (Chem::CommonConnectedSubstructureSearch::*uniqueMappingsOnlySetFunc)(bool) = &Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly;
 
-	python::class_<Chem::CommonConnectedSubstructureSearch, boost::noncopyable>("CommonConnectedSubstructureSearch", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CommonConnectedSubstructureSearch>())	
-		.def("mappingExists", &Chem::CommonConnectedSubstructureSearch::mappingExists, 
-			 (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
-		.def("findAllMappings", &Chem::CommonConnectedSubstructureSearch::findAllMappings, 
-			 (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
-		.def("findMaxMappings", &Chem::CommonConnectedSubstructureSearch::findMaxMappings, 
-			 (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
-		.def("getNumMappings", &Chem::CommonConnectedSubstructureSearch::getNumMappings, python::arg("self"))
-		.def("getMapping", getMappingFunc, (python::arg("self"), python::arg("idx")), 
-			 python::return_internal_reference<1>())
-		.def("uniqueMappingsOnly", uniqueMappingsOnlySetFunc, (python::arg("self"), python::arg("unique")))
-		.def("uniqueMappingsOnly", uniqueMappingsOnlyGetFunc, python::arg("self"))
-		.def("getMaxNumMappings", &Chem::CommonConnectedSubstructureSearch::getMaxNumMappings, 
-			 python::arg("self"))
-		.def("setMaxNumMappings", &Chem::CommonConnectedSubstructureSearch::setMaxNumMappings,
-			 (python::arg("self"), python::arg("max_num_mappings")))
-		.def("getMinSubstructureSize", &Chem::CommonConnectedSubstructureSearch::getMinSubstructureSize, 
-			 python::arg("self"))
-		.def("setMinSubstructureSize", &Chem::CommonConnectedSubstructureSearch::setMinSubstructureSize, 
-			 (python::arg("self"), python::arg("min_size")))
-		.def("setQuery", &Chem::CommonConnectedSubstructureSearch::setQuery, 
-			 (python::arg("self"), python::arg("query")), python::with_custodian_and_ward<1, 2>())
-		.add_property("numMappings", &Chem::CommonConnectedSubstructureSearch::getNumMappings)
-		.add_property("uniqueMappings", uniqueMappingsOnlyGetFunc, uniqueMappingsOnlySetFunc)
-		.add_property("maxNumMappings", &Chem::CommonConnectedSubstructureSearch::getMaxNumMappings, 
-					  &Chem::CommonConnectedSubstructureSearch::setMaxNumMappings)
-		.add_property("minSubstructureSize", &Chem::CommonConnectedSubstructureSearch::getMinSubstructureSize, 
-					  &Chem::CommonConnectedSubstructureSearch::setMinSubstructureSize)
-		.def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")),
-			 python::return_internal_reference<1>())
-		.def("__len__", &Chem::CommonConnectedSubstructureSearch::getNumMappings, python::arg("self"))
-		.def("__nonzero__", &Chem::CommonConnectedSubstructureSearch::mappingExists, python::arg("self"))
-		.def("__bool__", &Chem::CommonConnectedSubstructureSearch::mappingExists, python::arg("self"));
+    python::class_<Chem::CommonConnectedSubstructureSearch, boost::noncopyable>("CommonConnectedSubstructureSearch", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CommonConnectedSubstructureSearch>())    
+        .def("mappingExists", &Chem::CommonConnectedSubstructureSearch::mappingExists, 
+             (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
+        .def("findAllMappings", &Chem::CommonConnectedSubstructureSearch::findAllMappings, 
+             (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
+        .def("findMaxMappings", &Chem::CommonConnectedSubstructureSearch::findMaxMappings, 
+             (python::arg("self"), python::arg("target")), python::with_custodian_and_ward<1, 2>())
+        .def("getNumMappings", &Chem::CommonConnectedSubstructureSearch::getNumMappings, python::arg("self"))
+        .def("getMapping", getMappingFunc, (python::arg("self"), python::arg("idx")), 
+             python::return_internal_reference<1>())
+        .def("uniqueMappingsOnly", uniqueMappingsOnlySetFunc, (python::arg("self"), python::arg("unique")))
+        .def("uniqueMappingsOnly", uniqueMappingsOnlyGetFunc, python::arg("self"))
+        .def("getMaxNumMappings", &Chem::CommonConnectedSubstructureSearch::getMaxNumMappings, 
+             python::arg("self"))
+        .def("setMaxNumMappings", &Chem::CommonConnectedSubstructureSearch::setMaxNumMappings,
+             (python::arg("self"), python::arg("max_num_mappings")))
+        .def("getMinSubstructureSize", &Chem::CommonConnectedSubstructureSearch::getMinSubstructureSize, 
+             python::arg("self"))
+        .def("setMinSubstructureSize", &Chem::CommonConnectedSubstructureSearch::setMinSubstructureSize, 
+             (python::arg("self"), python::arg("min_size")))
+        .def("setQuery", &Chem::CommonConnectedSubstructureSearch::setQuery, 
+             (python::arg("self"), python::arg("query")), python::with_custodian_and_ward<1, 2>())
+        .add_property("numMappings", &Chem::CommonConnectedSubstructureSearch::getNumMappings)
+        .add_property("uniqueMappings", uniqueMappingsOnlyGetFunc, uniqueMappingsOnlySetFunc)
+        .add_property("maxNumMappings", &Chem::CommonConnectedSubstructureSearch::getMaxNumMappings, 
+                      &Chem::CommonConnectedSubstructureSearch::setMaxNumMappings)
+        .add_property("minSubstructureSize", &Chem::CommonConnectedSubstructureSearch::getMinSubstructureSize, 
+                      &Chem::CommonConnectedSubstructureSearch::setMinSubstructureSize)
+        .def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")),
+             python::return_internal_reference<1>())
+        .def("__len__", &Chem::CommonConnectedSubstructureSearch::getNumMappings, python::arg("self"))
+        .def("__nonzero__", &Chem::CommonConnectedSubstructureSearch::mappingExists, python::arg("self"))
+        .def("__bool__", &Chem::CommonConnectedSubstructureSearch::mappingExists, python::arg("self"));
 }

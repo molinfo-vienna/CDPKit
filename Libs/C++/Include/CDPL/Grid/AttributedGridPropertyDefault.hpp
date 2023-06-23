@@ -40,14 +40,14 @@ namespace CDPL
     namespace Grid
     {
 
-		/**
-		 * \brief Provides default values for built-in Grid::AttributedGrid properties.
-		 */
-		namespace AttributedGridPropertyDefault
-		{
+        /**
+         * \brief Provides default values for built-in Grid::AttributedGrid properties.
+         */
+        namespace AttributedGridPropertyDefault
+        {
 
-			extern CDPL_GRID_API const std::string NAME;
-		}
+            extern CDPL_GRID_API const std::string NAME;
+        }
     }
 }
 

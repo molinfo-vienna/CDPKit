@@ -45,62 +45,62 @@ namespace CDPL
     namespace Biomol
     {
 
-		/**
-		 * \brief Implements the extraction of residues in biological macromolecules.
-		 */
-		class CDPL_BIOMOL_API ResidueList : public Chem::FragmentList
-		{
+        /**
+         * \brief Implements the extraction of residues in biological macromolecules.
+         */
+        class CDPL_BIOMOL_API ResidueList : public Chem::FragmentList
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResidueList instances.
-			 */
-			typedef std::shared_ptr<ResidueList> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResidueList instances.
+             */
+            typedef std::shared_ptr<ResidueList> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %ResidueList instance.
-			 */
-			ResidueList() {}
+            /**
+             * \brief Constructs an empty \c %ResidueList instance.
+             */
+            ResidueList() {}
 
-			/**
-			 * \brief Constructs a \c %ResidueList instance that contains the residues of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to extract the residues.
-			 * \param flags The set of atom properties uniquely identifying a residue.
-			 */
-			ResidueList(const Chem::MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
+            /**
+             * \brief Constructs a \c %ResidueList instance that contains the residues of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the residues.
+             * \param flags The set of atom properties uniquely identifying a residue.
+             */
+            ResidueList(const Chem::MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
 
-			/**
-			 * \brief Replaces the current list of residues by the residues in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to extract the residues.
-			 * \param flags The set of atom properties uniquely identifying a residue.
-			 */
-			void extract(const Chem::MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
+            /**
+             * \brief Replaces the current list of residues by the residues in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to extract the residues.
+             * \param flags The set of atom properties uniquely identifying a residue.
+             */
+            void extract(const Chem::MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
 
-		  private:
-			struct ResidueID
-			{
-		
-				std::size_t modelNumber;
-				std::string chainID;
-				char        insCode;
-				std::string resCode;
-				long        seqNumber;
+          private:
+            struct ResidueID
+            {
+        
+                std::size_t modelNumber;
+                std::string chainID;
+                char        insCode;
+                std::string resCode;
+                long        seqNumber;
 
-				bool operator==(const ResidueID& res_id) const;
-			};
+                bool operator==(const ResidueID& res_id) const;
+            };
 
-			struct ResidueIDHashFunc
-			{
+            struct ResidueIDHashFunc
+            {
 
-				std::size_t operator()(const ResidueID& res_id) const;
-			};
+                std::size_t operator()(const ResidueID& res_id) const;
+            };
 
-			void initResidueID(const Chem::Atom& atom, ResidueID& res_id, unsigned int flags) const; 
+            void initResidueID(const Chem::Atom& atom, ResidueID& res_id, unsigned int flags) const; 
 
-			typedef std::unordered_map<ResidueID, Chem::Fragment::SharedPointer, ResidueIDHashFunc> ResidueIDToFragmentMap;
+            typedef std::unordered_map<ResidueID, Chem::Fragment::SharedPointer, ResidueIDHashFunc> ResidueIDToFragmentMap;
 
-			ResidueIDToFragmentMap resIDsToFragments;
-		};
+            ResidueIDToFragmentMap resIDsToFragments;
+        };
     }
 }
 

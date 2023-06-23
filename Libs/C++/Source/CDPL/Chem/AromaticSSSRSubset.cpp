@@ -37,50 +37,50 @@ using namespace CDPL;
 
 Chem::AromaticSSSRSubset::AromaticSSSRSubset(const MolecularGraph& molgraph)
 {
-	extract(molgraph);
+    extract(molgraph);
 }
 
 void Chem::AromaticSSSRSubset::extract(const MolecularGraph& molgraph)
 {
-	clear();
+    clear();
 
-	if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
-		return;
+    if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
+        return;
 
-	init(molgraph);
-	findAromaticRings();
+    init(molgraph);
+    findAromaticRings();
 }
 
 void Chem::AromaticSSSRSubset::init(const MolecularGraph& molgraph)
 {
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 
-	std::size_t num_bonds = molgraph.getNumBonds();
+    std::size_t num_bonds = molgraph.getNumBonds();
 
-	if (!aromBondMask.empty())
-		aromBondMask.clear();
+    if (!aromBondMask.empty())
+        aromBondMask.clear();
 
-	aromBondMask.resize(num_bonds);
+    aromBondMask.resize(num_bonds);
 
-	for (std::size_t i = 0; i < num_bonds; i++)
-		if (getAromaticityFlag(molgraph.getBond(i)))
-			aromBondMask.set(i);
+    for (std::size_t i = 0; i < num_bonds; i++)
+        if (getAromaticityFlag(molgraph.getBond(i)))
+            aromBondMask.set(i);
 }
 
 void Chem::AromaticSSSRSubset::findAromaticRings()
 {
-	const FragmentList::BaseType& sssr = *getSSSR(*molGraph);
-	FragmentList::BaseType::ConstElementIterator sssr_end = sssr.getElementsEnd();
+    const FragmentList::BaseType& sssr = *getSSSR(*molGraph);
+    FragmentList::BaseType::ConstElementIterator sssr_end = sssr.getElementsEnd();
 
-	for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(); it != sssr_end; ++it) {
-		const Fragment::SharedPointer& ring_ptr = *it;
+    for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(); it != sssr_end; ++it) {
+        const Fragment::SharedPointer& ring_ptr = *it;
 
-		std::size_t num_ring_bonds = ring_ptr->getNumBonds();
+        std::size_t num_ring_bonds = ring_ptr->getNumBonds();
 
-		if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
-			continue;
+        if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
+            continue;
 
-		if (Chem::isAromatic(*ring_ptr, *molGraph, aromBondMask))
-			addElement(ring_ptr);
-	}
+        if (Chem::isAromatic(*ring_ptr, *molGraph, aromBondMask))
+            addElement(ring_ptr);
+    }
 }

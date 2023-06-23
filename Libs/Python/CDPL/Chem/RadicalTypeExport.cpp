@@ -32,18 +32,18 @@
 namespace 
 {
 
-	struct RadicalType {};
+    struct RadicalType {};
 }
 
 
 void CDPLPythonChem::exportRadicalTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<RadicalType, boost::noncopyable>("RadicalType", python::no_init)
-		.def_readonly("NOT_RADICALIC", &Chem::RadicalType::NOT_RADICALIC)
-		.def_readonly("DOUBLET", &Chem::RadicalType::DOUBLET)
-		.def_readonly("SINGLET", &Chem::RadicalType::SINGLET)
-		.def_readonly("TRIPLET", &Chem::RadicalType::TRIPLET);
+    python::class_<RadicalType, boost::noncopyable>("RadicalType", python::no_init)
+        .def_readonly("NOT_RADICALIC", &Chem::RadicalType::NOT_RADICALIC)
+        .def_readonly("DOUBLET", &Chem::RadicalType::DOUBLET)
+        .def_readonly("SINGLET", &Chem::RadicalType::SINGLET)
+        .def_readonly("TRIPLET", &Chem::RadicalType::TRIPLET);
 }

@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SDFBZ2MolecularGraphWriter, DataFormat::SDF_BZ2> SDFBZ2MolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of bzip2-compressed molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SDFBZ2MolecularGraphWriter, DataFormat::SDF_BZ2> SDFBZ2MolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_SDFBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP

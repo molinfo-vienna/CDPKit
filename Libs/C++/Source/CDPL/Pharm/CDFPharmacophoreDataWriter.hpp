@@ -34,40 +34,40 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class FeatureContainer;
+        class FeatureContainer;
 
-		class CDFPharmacophoreDataWriter : private Internal::CDFDataWriterBase
-		{
+        class CDFPharmacophoreDataWriter : private Internal::CDFDataWriterBase
+        {
 
-		public:
-			CDFPharmacophoreDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+        public:
+            CDFPharmacophoreDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr);
+            bool writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr);
 
-			void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
+            void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
 
-		private:
-			void init();
+        private:
+            void init();
 
-			void outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
-			void outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
-			void outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+            void outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+            void outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+            void outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
 
-			bool writeRecordData(std::ostream& os) const;
+            bool writeRecordData(std::ostream& os) const;
 
-			const Base::ControlParameterContainer& ctrlParams;	
-			Internal::ByteBuffer                   dataBuffer;
-		};
-	}
+            const Base::ControlParameterContainer& ctrlParams;    
+            Internal::ByteBuffer                   dataBuffer;
+        };
+    }
 }
 
 #endif // CDPL_PHARM_CDFPHARMACOPHOREDATAWRITER_HPP

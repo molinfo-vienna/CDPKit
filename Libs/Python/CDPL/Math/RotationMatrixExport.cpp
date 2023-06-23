@@ -37,38 +37,38 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct RotationExport
-	{
+    template <typename MatrixType>
+    struct RotationExport
+    {
 
-		RotationExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        RotationExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::ValueType ValueType;
-			typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::ValueType ValueType;
+            typedef typename MatrixType::SizeType SizeType;
 
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, const double&, const ValueType&, const ValueType&, const ValueType&>(
-						 (python::arg("self"), python::arg("n"), python::arg("w"), python::arg("ux"), python::arg("uy"), python::arg("uz"))))
-				.def("set", &MatrixType::template set<ValueType, ValueType, ValueType, ValueType>,
-					 (python::arg("self"), python::arg("w"), python::arg("ux"), python::arg("uy"), python::arg("uz")))
-				.def("resize", &MatrixType::resize, python::arg("n"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, const double&, const ValueType&, const ValueType&, const ValueType&>(
+                         (python::arg("self"), python::arg("n"), python::arg("w"), python::arg("ux"), python::arg("uy"), python::arg("uz"))))
+                .def("set", &MatrixType::template set<ValueType, ValueType, ValueType, ValueType>,
+                     (python::arg("self"), python::arg("w"), python::arg("ux"), python::arg("uy"), python::arg("uz")))
+                .def("resize", &MatrixType::resize, python::arg("n"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportRotationMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	RotationExport<Math::FRotationMatrix>("FRotationMatrix");
-	RotationExport<Math::DRotationMatrix>("DRotationMatrix");
-	RotationExport<Math::LRotationMatrix>("LRotationMatrix");
-	RotationExport<Math::ULRotationMatrix>("ULRotationMatrix");
+    RotationExport<Math::FRotationMatrix>("FRotationMatrix");
+    RotationExport<Math::DRotationMatrix>("DRotationMatrix");
+    RotationExport<Math::LRotationMatrix>("LRotationMatrix");
+    RotationExport<Math::ULRotationMatrix>("ULRotationMatrix");
 }

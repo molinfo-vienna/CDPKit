@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		typedef Util::CompressedDataWriter<CDFReactionWriter, Util::BZip2OStream> CDFBZ2ReactionWriter;
-	}
+        typedef Util::CompressedDataWriter<CDFReactionWriter, Util::BZip2OStream> CDFBZ2ReactionWriter;
+    }
 }
 
 #endif // CDPL_CHEM_CDFBZ2REACTIONWRITER_HPP

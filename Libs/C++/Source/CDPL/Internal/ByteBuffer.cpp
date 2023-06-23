@@ -82,23 +82,23 @@ std::size_t Internal::ByteBuffer::getSize() const
 
 void Internal::ByteBuffer::putBytes(const char* bytes, std::size_t num_bytes)
 {
-	reserveWriteSpace(num_bytes);
+    reserveWriteSpace(num_bytes);
 
-	std::memcpy(&data[ioPointer], bytes, num_bytes);
-	ioPointer += num_bytes;
+    std::memcpy(&data[ioPointer], bytes, num_bytes);
+    ioPointer += num_bytes;
 }
 
 void Internal::ByteBuffer::putBytes(const ByteBuffer& buffer)
 {
-	putBytes(&buffer.data[0], buffer.getSize());
+    putBytes(&buffer.data[0], buffer.getSize());
 }
 
 void Internal::ByteBuffer::getBytes(char* bytes, std::size_t num_bytes)
 {
-	checkReadSpace(num_bytes);
+    checkReadSpace(num_bytes);
 
-	std::memcpy(bytes, &data[ioPointer], num_bytes);
-	ioPointer += num_bytes;
+    std::memcpy(bytes, &data[ioPointer], num_bytes);
+    ioPointer += num_bytes;
 }
 
 std::size_t Internal::ByteBuffer::readBuffer(std::istream& is, std::size_t num_bytes)
@@ -119,7 +119,7 @@ void Internal::ByteBuffer::reserveWriteSpace(std::size_t num_bytes)
     std::size_t req_size = ioPointer + num_bytes;
 
     if (req_size > data.size())
-		data.resize(req_size);
+        data.resize(req_size);
 }
 
 void Internal::ByteBuffer::checkReadSpace(std::size_t num_bytes) const
@@ -127,64 +127,64 @@ void Internal::ByteBuffer::checkReadSpace(std::size_t num_bytes) const
     std::size_t req_size = ioPointer + num_bytes;
 
     if (req_size > data.size())
-		throw Base::IOError("ByteBuffer: attempting to read beyond the end of data");
+        throw Base::IOError("ByteBuffer: attempting to read beyond the end of data");
 }
 
 std::size_t Internal::ByteBuffer::putValueBytes(const char* bytes, std::size_t num_bytes, bool compress)
 {
-	if (CDPL_BIG_ENDIAN_NATIVE_ORDER) {
-		if (compress) {
-			std::size_t nz_offs = 0;
+    if (CDPL_BIG_ENDIAN_NATIVE_ORDER) {
+        if (compress) {
+            std::size_t nz_offs = 0;
 
-			for ( ; nz_offs < (num_bytes - 1) && bytes[nz_offs] == 0; nz_offs++);
+            for ( ; nz_offs < (num_bytes - 1) && bytes[nz_offs] == 0; nz_offs++);
 
-			bytes += num_bytes;
-			num_bytes -= nz_offs;
-	
-		} else
-			bytes += num_bytes;	
+            bytes += num_bytes;
+            num_bytes -= nz_offs;
+    
+        } else
+            bytes += num_bytes;    
 
-		reserveWriteSpace(num_bytes);
+        reserveWriteSpace(num_bytes);
 
-		for (std::size_t i = 0; i < num_bytes; i++)
-			data[ioPointer++] = *(--bytes);
+        for (std::size_t i = 0; i < num_bytes; i++)
+            data[ioPointer++] = *(--bytes);
 
-		return num_bytes;
-	} 
+        return num_bytes;
+    } 
 
-	if (compress)
-		for ( ; num_bytes > 1 && bytes[num_bytes - 1] == 0; num_bytes--);
+    if (compress)
+        for ( ; num_bytes > 1 && bytes[num_bytes - 1] == 0; num_bytes--);
 
-	reserveWriteSpace(num_bytes);
+    reserveWriteSpace(num_bytes);
 
-	std::memcpy(&data[ioPointer], bytes, num_bytes);
-	ioPointer += num_bytes;
+    std::memcpy(&data[ioPointer], bytes, num_bytes);
+    ioPointer += num_bytes;
 
-	return num_bytes;
+    return num_bytes;
 }
 
 void Internal::ByteBuffer::getValueBytes(char* bytes, std::size_t type_size, std::size_t num_bytes)
 {
-	checkReadSpace(num_bytes);
+    checkReadSpace(num_bytes);
 
-	if (CDPL_BIG_ENDIAN_NATIVE_ORDER) {
-		bytes += type_size;
+    if (CDPL_BIG_ENDIAN_NATIVE_ORDER) {
+        bytes += type_size;
 
-		for (std::size_t i = 0; i < num_bytes; i++)
-			*(--bytes) = data[ioPointer++];
+        for (std::size_t i = 0; i < num_bytes; i++)
+            *(--bytes) = data[ioPointer++];
 
-	} else {
-		std::memcpy(bytes, &data[ioPointer], num_bytes);
-		ioPointer += num_bytes;
-	}
+    } else {
+        std::memcpy(bytes, &data[ioPointer], num_bytes);
+        ioPointer += num_bytes;
+    }
 }
 
 const char* Internal::ByteBuffer::getData() const
 {
-	return &data[0];
+    return &data[0];
 }
 
 char* Internal::ByteBuffer::getData()
 {
-	return &data[0];
+    return &data[0];
 }

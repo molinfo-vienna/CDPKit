@@ -36,39 +36,39 @@ using namespace CDPL;
 
 void Chem::buildBondElectronMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	mtx.resize(num_atoms, num_atoms);
-	mtx.clear();
+    mtx.resize(num_atoms, num_atoms);
+    mtx.clear();
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom& atom1 = bond.getBegin();
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom& atom1 = bond.getBegin();
 
-		if (!molgraph.containsAtom(atom1))
-			continue;
+        if (!molgraph.containsAtom(atom1))
+            continue;
 
-		const Atom& atom2 = bond.getEnd();
+        const Atom& atom2 = bond.getEnd();
 
-		if (!molgraph.containsAtom(atom2))
-			continue;
+        if (!molgraph.containsAtom(atom2))
+            continue;
 
-		std::size_t bond_order = getOrder(bond);
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
+        std::size_t bond_order = getOrder(bond);
+        std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
+        std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
 
-		mtx(atom1_idx, atom2_idx) = bond_order;
-		mtx(atom2_idx, atom1_idx) = bond_order;
-	}
+        mtx(atom1_idx, atom2_idx) = bond_order;
+        mtx(atom2_idx, atom1_idx) = bond_order;
+    }
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-	std::size_t i = 0;
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    std::size_t i = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
-		std::size_t free_el_count = Internal::calcFreeValenceElectronCount(*it, molgraph);
-	
-		mtx(i, i) = free_el_count;
-	}
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
+        std::size_t free_el_count = Internal::calcFreeValenceElectronCount(*it, molgraph);
+    
+        mtx(i, i) = free_el_count;
+    }
 }

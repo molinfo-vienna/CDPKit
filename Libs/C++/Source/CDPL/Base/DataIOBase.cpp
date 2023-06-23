@@ -35,44 +35,44 @@ using namespace CDPL;
 
 std::size_t Base::DataIOBase::registerIOCallback(const IOCallbackFunction& cb)
 {
-	std::size_t id = 0;
-	std::size_t num_callbacks = callbacks.size();
+    std::size_t id = 0;
+    std::size_t num_callbacks = callbacks.size();
 
-	for ( ; id < num_callbacks && std::find_if(callbacks.begin(), callbacks.end(),
-											   std::bind(std::equal_to<std::size_t>(),
-														 std::bind(&CallbackListEntry::first, std::placeholders::_1),
-														 id)) != callbacks.end(); id++);
-	callbacks.push_back(CallbackListEntry(id, cb));
+    for ( ; id < num_callbacks && std::find_if(callbacks.begin(), callbacks.end(),
+                                               std::bind(std::equal_to<std::size_t>(),
+                                                         std::bind(&CallbackListEntry::first, std::placeholders::_1),
+                                                         id)) != callbacks.end(); id++);
+    callbacks.push_back(CallbackListEntry(id, cb));
 
-	return id;
+    return id;
 }
 
 void Base::DataIOBase::unregisterIOCallback(std::size_t id)
 {
-	callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(), std::bind(std::equal_to<std::size_t>(),
-																				 std::bind(&CallbackListEntry::first, std::placeholders::_1),
-																				 id)),
-					callbacks.end());
+    callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(), std::bind(std::equal_to<std::size_t>(),
+                                                                                 std::bind(&CallbackListEntry::first, std::placeholders::_1),
+                                                                                 id)),
+                    callbacks.end());
 }
 
 void Base::DataIOBase::clearIOCallbacks()
 {
-	callbacks.clear();
+    callbacks.clear();
 }
 
 void Base::DataIOBase::invokeIOCallbacks(double progress) const
 {
-	std::for_each(callbacks.begin(), callbacks.end(), std::bind(&IOCallbackFunction::operator(),
-																std::bind(&CallbackListEntry::second, std::placeholders::_1), 
-																std::ref(*this), progress));
+    std::for_each(callbacks.begin(), callbacks.end(), std::bind(&IOCallbackFunction::operator(),
+                                                                std::bind(&CallbackListEntry::second, std::placeholders::_1), 
+                                                                std::ref(*this), progress));
 }
 
 Base::DataIOBase& Base::DataIOBase::operator=(const DataIOBase& io_base)
 {
-	if (&io_base == this)
-		return *this;
+    if (&io_base == this)
+        return *this;
 
-	ControlParameterContainer::operator=(io_base);
+    ControlParameterContainer::operator=(io_base);
 
-	return *this;
+    return *this;
 }

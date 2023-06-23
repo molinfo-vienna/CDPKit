@@ -47,25 +47,25 @@ unsigned int Chem::getGenericType(const Atom& atom)
     unsigned int atom_type = getType(atom);
 
     if (atom_type == AtomType::UNKNOWN || (atom_type > AtomType::MAX_ATOMIC_NO && atom_type <= AtomType::MAX_TYPE))
-		return atom_type; 
+        return atom_type; 
 
     if (atom_type > AtomType::MAX_TYPE)
-		return AtomType::UNKNOWN; 
+        return AtomType::UNKNOWN; 
 
-	if (atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S || atom_type == AtomType::P)
-		return AtomType::HET;
+    if (atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S || atom_type == AtomType::P)
+        return AtomType::HET;
 
     if (AtomDictionary::isHalogen(atom_type))
-		return AtomType::X;
+        return AtomType::X;
 
     if (AtomDictionary::isMetal(atom_type))
-		return AtomType::M;
+        return AtomType::M;
 
     if (atom_type == AtomType::C)
-		return AtomType::A;
+        return AtomType::A;
     
     if (atom_type == AtomType::H)
-		return AtomType::QH;
+        return AtomType::QH;
 
     return AtomType::Q; 
 }

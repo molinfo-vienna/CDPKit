@@ -37,40 +37,40 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief InteractionConstraintConnector.
-		 */
-		class CDPL_PHARM_API InteractionConstraintConnector
-		{
+        /**
+         * \brief InteractionConstraintConnector.
+         */
+        class CDPL_PHARM_API InteractionConstraintConnector
+        {
 
-		  public:
-			/**
-			 * \brief A generic wrapper class used to store feature interaction constraint test functions.
-			 */
-			typedef std::function<bool(const Feature&, const Feature&)> ConstraintFunction;
+          public:
+            /**
+             * \brief A generic wrapper class used to store feature interaction constraint test functions.
+             */
+            typedef std::function<bool(const Feature&, const Feature&)> ConstraintFunction;
 
-			/**
-			 * \brief Constructs a \c %InteractionConstraintConnector that serves as a logical connective for the two specified constraint functions.
-			 * \param and_expr \c true for a logical conjuction of the function results, and \c false for a disjunction.
-			 * \param func1 The first interaction constraint function.
-			 * \param func2 The second interaction constraint function.
-			 */
-			InteractionConstraintConnector(bool and_expr, const ConstraintFunction& func1, const ConstraintFunction& func2): 
-				andExpr(and_expr), function1(func1), function2(func2) {}
+            /**
+             * \brief Constructs a \c %InteractionConstraintConnector that serves as a logical connective for the two specified constraint functions.
+             * \param and_expr \c true for a logical conjuction of the function results, and \c false for a disjunction.
+             * \param func1 The first interaction constraint function.
+             * \param func2 The second interaction constraint function.
+             */
+            InteractionConstraintConnector(bool and_expr, const ConstraintFunction& func1, const ConstraintFunction& func2): 
+                andExpr(and_expr), function1(func1), function2(func2) {}
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			bool               andExpr;
-			ConstraintFunction function1;
-			ConstraintFunction function2;
-		};
-	}
+          private:
+            bool               andExpr;
+            ConstraintFunction function1;
+            ConstraintFunction function2;
+        };
+    }
 }
 
 #endif // CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP

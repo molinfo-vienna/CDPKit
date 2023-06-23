@@ -29,27 +29,27 @@
 namespace CDPLPythonBiomol
 {
 
-	void exportPDBData();
-	void exportResidueList();
-	void exportResidueDictionary();
+    void exportPDBData();
+    void exportResidueList();
+    void exportResidueDictionary();
 
-	void exportPDBMoleculeReader();
-	void exportPDBMolecularGraphWriter();
-	void exportMMTFMoleculeReader();
-	void exportMMTFMolecularGraphWriter();
-	
-	void exportPDBMoleculeInputHandler();
-	void exportPDBMolecularGraphOutputHandler();
-	void exportMMTFMoleculeInputHandler();
-	void exportMMTFMolecularGraphOutputHandler();
-	
-	void exportHierarchyViewNode();
-	void exportHierarchyViewModel();
-	void exportHierarchyViewChain();
-	void exportHierarchyViewFragment();
-	void exportHierarchyView();
+    void exportPDBMoleculeReader();
+    void exportPDBMolecularGraphWriter();
+    void exportMMTFMoleculeReader();
+    void exportMMTFMolecularGraphWriter();
+    
+    void exportPDBMoleculeInputHandler();
+    void exportPDBMolecularGraphOutputHandler();
+    void exportMMTFMoleculeInputHandler();
+    void exportMMTFMolecularGraphOutputHandler();
+    
+    void exportHierarchyViewNode();
+    void exportHierarchyViewModel();
+    void exportHierarchyViewChain();
+    void exportHierarchyViewFragment();
+    void exportHierarchyView();
 
-	void exportFunctionWrappers();
+    void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_BIOMOL_CLASSEXPORTS_HPP

@@ -33,5 +33,5 @@ using namespace CDPL;
 
 
 Pharm::QueryThreePointPharmacophore::QueryThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3): 
-	ThreePointPharmacophore(ftr1, ftr2, ftr3), ftr1Tol(getTolerance(ftr1)), ftr2Tol(getTolerance(ftr2)), ftr3Tol(getTolerance(ftr3))
+    ThreePointPharmacophore(ftr1, ftr2, ftr3), ftr1Tol(getTolerance(ftr1)), ftr2Tol(getTolerance(ftr2)), ftr3Tol(getTolerance(ftr3))
 {}

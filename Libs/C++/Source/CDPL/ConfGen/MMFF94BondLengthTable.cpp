@@ -36,8 +36,8 @@ using namespace CDPL;
 
 ConfGen::MMFF94BondLengthTable::MMFF94BondLengthTable()
 {
-	using namespace std::placeholders;
-	
+    using namespace std::placeholders;
+    
     atomTyper.setAromaticRingSetFunction(std::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
 
     bondTyper.setAtomTypeFunction(std::bind(&MMFF94BondLengthTable::getNumericAtomType, this, _1));
@@ -55,14 +55,14 @@ void ConfGen::MMFF94BondLengthTable::setup(const Chem::MolecularGraph& molgraph,
     molGraph = &molgraph;
 
     if (hasMMFF94AromaticRings(molgraph))
-		usedAromRings = getMMFF94AromaticRings(molgraph);
+        usedAromRings = getMMFF94AromaticRings(molgraph);
 
     else {
-		if (!aromRings)
-			aromRings.reset(new MMFF94AromaticSSSRSubset());
+        if (!aromRings)
+            aromRings.reset(new MMFF94AromaticSSSRSubset());
 
-		aromRings->extract(molgraph);
-		usedAromRings = aromRings;
+        aromRings->extract(molgraph);
+        usedAromRings = aromRings;
     }
 
     std::size_t num_atoms = molgraph.getNumAtoms();
@@ -85,13 +85,13 @@ double ConfGen::MMFF94BondLengthTable::get(std::size_t atom1_idx, std::size_t at
     using namespace ForceField;
 
     for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bondStretchingParams.getElementsBegin(), 
-			 end = bondStretchingParams.getElementsEnd(); it != end; ++it) { 
+             end = bondStretchingParams.getElementsEnd(); it != end; ++it) { 
 
-		const MMFF94BondStretchingInteraction& params = *it;
+        const MMFF94BondStretchingInteraction& params = *it;
 
-		if ((params.getAtom1Index() == atom1_idx && params.getAtom2Index() == atom2_idx) ||
-			(params.getAtom1Index() == atom2_idx && params.getAtom2Index() == atom1_idx))
-			return params.getReferenceLength();
+        if ((params.getAtom1Index() == atom1_idx && params.getAtom2Index() == atom2_idx) ||
+            (params.getAtom1Index() == atom2_idx && params.getAtom2Index() == atom1_idx))
+            return params.getReferenceLength();
     }
 
     return 0.0;

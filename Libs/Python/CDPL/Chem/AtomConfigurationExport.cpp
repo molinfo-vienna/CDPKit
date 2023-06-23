@@ -32,19 +32,19 @@
 namespace 
 {
 
-	struct AtomConfiguration {};
+    struct AtomConfiguration {};
 }
 
 
 void CDPLPythonChem::exportAtomConfigurations()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomConfiguration, boost::noncopyable>("AtomConfiguration", python::no_init)
-		.def_readonly("UNDEF", &Chem::AtomConfiguration::UNDEF)
-		.def_readonly("NONE", &Chem::AtomConfiguration::NONE)
-		.def_readonly("R", &Chem::AtomConfiguration::R)
-		.def_readonly("S", &Chem::AtomConfiguration::S)
-		.def_readonly("EITHER", &Chem::AtomConfiguration::EITHER);
+    python::class_<AtomConfiguration, boost::noncopyable>("AtomConfiguration", python::no_init)
+        .def_readonly("UNDEF", &Chem::AtomConfiguration::UNDEF)
+        .def_readonly("NONE", &Chem::AtomConfiguration::NONE)
+        .def_readonly("R", &Chem::AtomConfiguration::R)
+        .def_readonly("S", &Chem::AtomConfiguration::S)
+        .def_readonly("EITHER", &Chem::AtomConfiguration::EITHER);
 }

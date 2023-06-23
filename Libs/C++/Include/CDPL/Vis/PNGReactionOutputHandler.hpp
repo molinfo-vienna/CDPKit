@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable
-		 *        Network Graphics (PNG)</em> [\ref WPNG] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<PNGReactionWriter, DataFormat::PNG> PNGReactionOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable
+         *        Network Graphics (PNG)</em> [\ref WPNG] format.
+         */
+        typedef Util::DefaultDataOutputHandler<PNGReactionWriter, DataFormat::PNG> PNGReactionOutputHandler;    
+    }
 }
 
 #endif // CDPL_VIS_PNGREACTIONOUTPUTHANDLER_HPP

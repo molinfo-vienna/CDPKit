@@ -39,25 +39,25 @@ using namespace CDPL;
 
 void Chem::setAromaticityFlags(MolecularGraph& molgraph, bool overwrite)
 {
-	using namespace std::placeholders;
-	
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(static_cast<bool (*)(const Atom&)>(&hasAromaticityFlag), _1))) == molgraph.getAtomsEnd() &&
-		std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-					 std::bind(std::equal_to<bool>(), false,
-							   std::bind(static_cast<bool (*)(const Bond&)>(&hasAromaticityFlag), _1))) == molgraph.getBondsEnd())
-		return;
+    using namespace std::placeholders;
+    
+    if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(static_cast<bool (*)(const Atom&)>(&hasAromaticityFlag), _1))) == molgraph.getAtomsEnd() &&
+        std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
+                     std::bind(std::equal_to<bool>(), false,
+                               std::bind(static_cast<bool (*)(const Bond&)>(&hasAromaticityFlag), _1))) == molgraph.getBondsEnd())
+        return;
 
-	const Fragment::SharedPointer& arom_substruct = perceiveAromaticSubstructure(molgraph);
+    const Fragment::SharedPointer& arom_substruct = perceiveAromaticSubstructure(molgraph);
 
-	setAromaticSubstructure(molgraph, arom_substruct);
+    setAromaticSubstructure(molgraph, arom_substruct);
 
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  std::bind(static_cast<void (*)(Atom&, bool)>(&setAromaticityFlag), _1, 
-							std::bind(&Fragment::containsAtom, std::ref(*arom_substruct), _1)));
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                  std::bind(static_cast<void (*)(Atom&, bool)>(&setAromaticityFlag), _1, 
+                            std::bind(&Fragment::containsAtom, std::ref(*arom_substruct), _1)));
 
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  std::bind(static_cast<void (*)(Bond&, bool)>(&setAromaticityFlag), _1, 
-							std::bind(&Fragment::containsBond, std::ref(*arom_substruct), _1)));
+    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
+                  std::bind(static_cast<void (*)(Bond&, bool)>(&setAromaticityFlag), _1, 
+                            std::bind(&Fragment::containsBond, std::ref(*arom_substruct), _1)));
 }

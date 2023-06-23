@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A handler for the output of 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS]
-		 *        format.
-		 */
-		typedef Util::DefaultDataOutputHandler<PSReactionWriter, DataFormat::PS> PSReactionOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS]
+         *        format.
+         */
+        typedef Util::DefaultDataOutputHandler<PSReactionWriter, DataFormat::PS> PSReactionOutputHandler;    
+    }
 }
 
 #endif // CDPL_VIS_PSREACTIONOUTPUTHANDLER_HPP

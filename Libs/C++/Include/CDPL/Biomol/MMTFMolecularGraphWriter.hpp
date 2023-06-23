@@ -39,58 +39,58 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		class MMTFDataWriter;
+        class MMTFDataWriter;
 
-		/**
-		 * \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
-		 */
-		class CDPL_BIOMOL_API MMTFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
-		{
+        /**
+         * \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
+         */
+        class CDPL_BIOMOL_API MMTFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %MMTFMolecularGraphWriter instance that will write data of molecular graphs to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			MMTFMolecularGraphWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %MMTFMolecularGraphWriter instance that will write data of molecular graphs to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            MMTFMolecularGraphWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~MMTFMolecularGraphWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~MMTFMolecularGraphWriter();
 
-			/**
-			 * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
-			 * \param molgraph The molecular graph to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
+             * \param molgraph The molecular graph to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			typedef std::auto_ptr<MMTFDataWriter> MMTFDataWriterPtr;
+        private:
+            typedef std::auto_ptr<MMTFDataWriter> MMTFDataWriterPtr;
 
-			MMTFMolecularGraphWriter(const MMTFMolecularGraphWriter&);
+            MMTFMolecularGraphWriter(const MMTFMolecularGraphWriter&);
 
-			MMTFMolecularGraphWriter& operator=(const MMTFMolecularGraphWriter&);
+            MMTFMolecularGraphWriter& operator=(const MMTFMolecularGraphWriter&);
 
-			std::ostream&     output;
-			bool              state;
-			MMTFDataWriterPtr writer;
-		};
-	}
+            std::ostream&     output;
+            bool              state;
+            MMTFDataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_BIOMOL_MMTFMOLECULARGRAPHWRITER_HPP

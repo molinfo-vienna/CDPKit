@@ -32,54 +32,54 @@
 
 BOOST_PYTHON_MODULE(_confgen)
 {
-	using namespace CDPLPythonConfGen;
+    using namespace CDPLPythonConfGen;
 
-	exportDGConstraintGeneratorSettings();
-	exportDGConstraintGenerator();
-	exportDGStructureGeneratorSettings();
-	exportDGStructureGenerator();
-	exportStructureGenerator();
-	exportConformerGenerator();
-	exportFragmentConformerGenerator();
-	exportFragmentLibraryGenerator();
-	exportFragmentAssembler();
-	exportCanonicalFragment();
-	exportFragmentLibraryEntry();
-	exportFragmentLibrary();
-	exportConformerData();
-	exportTorsionRule();
-	exportTorsionCategory();
-	exportTorsionLibrary();
-	exportTorsionRuleMatch();
-	exportTorsionRuleMatcher();
-	exportTorsionDriverSettings();
-	exportTorsionDriver();
-	exportRMSDConformerSelector();
-	exportStructureGeneratorSettings();
-	exportConformerGeneratorSettings();
-	exportFragmentConformerGeneratorSettings();
-	exportFragmentAssemblerSettings();
+    exportDGConstraintGeneratorSettings();
+    exportDGConstraintGenerator();
+    exportDGStructureGeneratorSettings();
+    exportDGStructureGenerator();
+    exportStructureGenerator();
+    exportConformerGenerator();
+    exportFragmentConformerGenerator();
+    exportFragmentLibraryGenerator();
+    exportFragmentAssembler();
+    exportCanonicalFragment();
+    exportFragmentLibraryEntry();
+    exportFragmentLibrary();
+    exportConformerData();
+    exportTorsionRule();
+    exportTorsionCategory();
+    exportTorsionLibrary();
+    exportTorsionRuleMatch();
+    exportTorsionRuleMatcher();
+    exportTorsionDriverSettings();
+    exportTorsionDriver();
+    exportRMSDConformerSelector();
+    exportStructureGeneratorSettings();
+    exportConformerGeneratorSettings();
+    exportFragmentConformerGeneratorSettings();
+    exportFragmentAssemblerSettings();
 
-	exportCFLMoleculeReader();
-	exportCFLMoleculeInputHandler();
+    exportCFLMoleculeReader();
+    exportCFLMoleculeInputHandler();
 
-	exportFragmentTypes();
-	exportForceFieldTypes();
-	exportReturnCodes();
-	exportNitrogenEnumerationModes();
-	exportConformerSamplingModes();
-	exportStructureGenerationModes();
-	exportDataFormats();
-	exportControlParameters();
-	exportControlParameterDefaults();
+    exportFragmentTypes();
+    exportForceFieldTypes();
+    exportReturnCodes();
+    exportNitrogenEnumerationModes();
+    exportConformerSamplingModes();
+    exportStructureGenerationModes();
+    exportDataFormats();
+    exportControlParameters();
+    exportControlParameterDefaults();
 
-	exportBondFunctions();
-	exportMolecularGraphFunctions();
-	exportMoleculeFunctions();
-	exportControlParameterFunctions();
+    exportBondFunctions();
+    exportMolecularGraphFunctions();
+    exportMoleculeFunctions();
+    exportControlParameterFunctions();
 
-	exportFunctionWrappers();
+    exportFunctionWrappers();
 
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    registerToPythonConverters();
+    registerFromPythonConverters();
 }

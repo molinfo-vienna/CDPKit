@@ -45,98 +45,98 @@ namespace CDPL
     namespace Shape
     {
 
-		class CDPL_SHAPE_API PrincipalAxesAlignmentStartGenerator : public GaussianShapeAlignmentStartGenerator
-		{
-			
-		  public:
-			static constexpr double      DEF_SYMMETRY_THRESHOLD     = 0.15;
-			static constexpr std::size_t DEF_NUM_RANDOM_STARTS      = 4;
-			static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
-			
-			PrincipalAxesAlignmentStartGenerator();
-				
-			unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+        class CDPL_SHAPE_API PrincipalAxesAlignmentStartGenerator : public GaussianShapeAlignmentStartGenerator
+        {
+            
+          public:
+            static constexpr double      DEF_SYMMETRY_THRESHOLD     = 0.15;
+            static constexpr std::size_t DEF_NUM_RANDOM_STARTS      = 4;
+            static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
+            
+            PrincipalAxesAlignmentStartGenerator();
+                
+            unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+            unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			void genShapeCenterStarts(bool generate);
+            void genShapeCenterStarts(bool generate);
 
-			bool genShapeCenterStarts() const;
-			
-			void genColorCenterStarts(bool generate);
+            bool genShapeCenterStarts() const;
+            
+            void genColorCenterStarts(bool generate);
 
-			bool genColorCenterStarts() const;
+            bool genColorCenterStarts() const;
 
-			void genNonColorCenterStarts(bool generate);
+            void genNonColorCenterStarts(bool generate);
 
-			bool genNonColorCenterStarts() const;
-			
-			void genRandomStarts(bool generate);
+            bool genNonColorCenterStarts() const;
+            
+            void genRandomStarts(bool generate);
 
-			bool genRandomStarts() const;
+            bool genRandomStarts() const;
 
-			void genForAlignedShapeCenters(bool generate);
+            void genForAlignedShapeCenters(bool generate);
 
-			bool genForAlignedShapeCenters() const;
+            bool genForAlignedShapeCenters() const;
 
-			void genForReferenceShapeCenters(bool generate);
+            void genForReferenceShapeCenters(bool generate);
 
-			bool genForReferenceShapeCenters() const;
+            bool genForReferenceShapeCenters() const;
 
-			void genForLargerShapeCenters(bool generate);
+            void genForLargerShapeCenters(bool generate);
 
-			bool genForLargerShapeCenters() const;
-			
-			void setSymmetryThreshold(double thresh);
+            bool genForLargerShapeCenters() const;
+            
+            void setSymmetryThreshold(double thresh);
 
-			double getSymmetryThreshold();
+            double getSymmetryThreshold();
 
-			void setMaxRandomTranslation(double max_trans);
+            void setMaxRandomTranslation(double max_trans);
 
-			double getMaxRandomTranslation() const;
+            double getMaxRandomTranslation() const;
 
-			void setNumRandomStarts(std::size_t num_starts);
+            void setNumRandomStarts(std::size_t num_starts);
 
-			std::size_t getNumRandomStarts() const;
+            std::size_t getNumRandomStarts() const;
 
-			void setRandomSeed(unsigned int seed);
-			
-			void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
+            void setRandomSeed(unsigned int seed);
+            
+            void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
-			bool generate(const GaussianShapeFunction& func, unsigned int sym_class);
-			
-			std::size_t getNumStartTransforms() const;
+            bool generate(const GaussianShapeFunction& func, unsigned int sym_class);
+            
+            std::size_t getNumStartTransforms() const;
 
-			std::size_t getNumStartSubTransforms() const;
+            std::size_t getNumStartSubTransforms() const;
 
-			const QuaternionTransformation& getStartTransform(std::size_t idx) const;
+            const QuaternionTransformation& getStartTransform(std::size_t idx) const;
 
-		  private:
-			void generateForElementCenters(const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape);
-			void generate(const Math::Vector3D& ctr_trans, unsigned int axes_swap_flags);
+          private:
+            void generateForElementCenters(const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape);
+            void generate(const Math::Vector3D& ctr_trans, unsigned int axes_swap_flags);
 
-			template <typename QE>
-			void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
+            template <typename QE>
+            void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
 
-			typedef std::vector<QuaternionTransformation> StartTransformList;
-			typedef boost::random::mt11213b RandomEngine;
+            typedef std::vector<QuaternionTransformation> StartTransformList;
+            typedef boost::random::mt11213b RandomEngine;
 
-			bool                         shapeCtrStarts;
-			bool                         colCtrStarts;
-			bool                         nonColCtrStarts;
-			bool                         randomStarts;
-			bool                         genForAlgdShape;
-			bool                         genForRefShape;
-			bool                         genForLargerShape;
-			StartTransformList           startTransforms;
-			const GaussianShapeFunction* refShapeFunc;
-			double                       symThreshold;
-			double                       maxRandomTrans;
-			std::size_t                  numRandomStarts;
-			unsigned int                 refAxesSwapFlags;
-			std::size_t                  numSubTransforms;
-			RandomEngine                 randomEngine;
-		};
+            bool                         shapeCtrStarts;
+            bool                         colCtrStarts;
+            bool                         nonColCtrStarts;
+            bool                         randomStarts;
+            bool                         genForAlgdShape;
+            bool                         genForRefShape;
+            bool                         genForLargerShape;
+            StartTransformList           startTransforms;
+            const GaussianShapeFunction* refShapeFunc;
+            double                       symThreshold;
+            double                       maxRandomTrans;
+            std::size_t                  numRandomStarts;
+            unsigned int                 refAxesSwapFlags;
+            std::size_t                  numSubTransforms;
+            RandomEngine                 randomEngine;
+        };
     }
 }
 

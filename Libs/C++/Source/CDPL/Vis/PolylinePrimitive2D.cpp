@@ -34,28 +34,28 @@ using namespace CDPL;
 
 void Vis::PolylinePrimitive2D::render(Renderer2D& renderer) const
 {
-	renderer.setPen(pen);
+    renderer.setPen(pen);
 
-	renderer.drawPolyline(*this);
+    renderer.drawPolyline(*this);
 }
 
 void Vis::PolylinePrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::PolylinePrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::PolylinePrimitive2D::clone() const
 {
-	return SharedPointer(new PolylinePrimitive2D(*this));
+    return SharedPointer(new PolylinePrimitive2D(*this));
 }
 
 void Vis::PolylinePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	PointArray2D::getBounds(bounds);
-	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    PointArray2D::getBounds(bounds);
+    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

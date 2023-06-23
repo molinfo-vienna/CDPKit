@@ -54,17 +54,17 @@
  */
 #cmakedefine HAVE_CAIRO_SVG_SUPPORT
 
-/**	
+/**    
  * \brief Defined if the \e Qt libraries are available.
  */
 #cmakedefine HAVE_QT
 
-/**	
+/**    
  * \brief Defined if the \e SQLite3 library is available.
  */
 #cmakedefine HAVE_SQLITE3
 
-/**	
+/**    
  * \brief Defined if the \e NumPy python module is available.
  */
 #cmakedefine HAVE_NUMPY

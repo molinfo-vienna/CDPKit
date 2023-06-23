@@ -38,60 +38,60 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class SMARTSDataReader;
-		class Molecule;
+        class SMARTSDataReader;
+        class Molecule;
 
-		/**
-		 * \brief A reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
-		 *
-		 * \c %SMARTSMoleculeReader supports the following control-parameter:
-		 *
-		 * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-		 *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-		 *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
-		 *  </tr>
-		 * </table>
-		 */
-		class CDPL_CHEM_API SMARTSMoleculeReader : public Util::StreamDataReader<Molecule, SMARTSMoleculeReader>
-		{
+        /**
+         * \brief A reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+         *
+         * \c %SMARTSMoleculeReader supports the following control-parameter:
+         *
+         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
+         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
+         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
+         *  </tr>
+         * </table>
+         */
+        class CDPL_CHEM_API SMARTSMoleculeReader : public Util::StreamDataReader<Molecule, SMARTSMoleculeReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %SMARTSMoleculeReader instance that will read the molecule data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			SMARTSMoleculeReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %SMARTSMoleculeReader instance that will read the molecule data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            SMARTSMoleculeReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~SMARTSMoleculeReader();
+            /**
+             * \brief Destructor.
+             */
+            ~SMARTSMoleculeReader();
 
-		private:
-			friend class Util::StreamDataReader<Molecule, SMARTSMoleculeReader>;
+        private:
+            friend class Util::StreamDataReader<Molecule, SMARTSMoleculeReader>;
 
-			SMARTSMoleculeReader(const SMARTSMoleculeReader&);
+            SMARTSMoleculeReader(const SMARTSMoleculeReader&);
 
-			SMARTSMoleculeReader& operator=(const SMARTSMoleculeReader&);
+            SMARTSMoleculeReader& operator=(const SMARTSMoleculeReader&);
 
-			bool readData(std::istream&, Molecule&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Molecule&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<SMARTSDataReader> SMARTSDataReaderPtr;
+            typedef std::auto_ptr<SMARTSDataReader> SMARTSDataReaderPtr;
 
-			SMARTSDataReaderPtr reader;
-		};
-	}
+            SMARTSDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_SMARTSMOLECULEREADER_HPP

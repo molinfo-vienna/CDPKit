@@ -32,15 +32,15 @@
 
 void CDPLPythonChem::exportReactionComponentGroupingMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::ReactionComponentGroupingMatchExpression, Chem::ReactionComponentGroupingMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::Reaction> > >("ReactionComponentGroupingMatchExpression", python::no_init)
-		.def(python::init<const Chem::ReactionComponentGroupingMatchExpression&>((python::arg("self"), python::arg("expr")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const Chem::FragmentList::SharedPointer&>((python::arg("self"), python::arg("comp_grouping")))
-			 [python::with_custodian_and_ward<1, 2>()]) 
-		.def("assign", &Chem::ReactionComponentGroupingMatchExpression::operator=, (python::arg("self"), python::arg("expr")), 
-			 python::return_self<python::with_custodian_and_ward<1, 2> >());
+    python::class_<Chem::ReactionComponentGroupingMatchExpression, Chem::ReactionComponentGroupingMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::Reaction> > >("ReactionComponentGroupingMatchExpression", python::no_init)
+        .def(python::init<const Chem::ReactionComponentGroupingMatchExpression&>((python::arg("self"), python::arg("expr")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const Chem::FragmentList::SharedPointer&>((python::arg("self"), python::arg("comp_grouping")))
+             [python::with_custodian_and_ward<1, 2>()]) 
+        .def("assign", &Chem::ReactionComponentGroupingMatchExpression::operator=, (python::arg("self"), python::arg("expr")), 
+             python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

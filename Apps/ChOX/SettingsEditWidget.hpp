@@ -31,26 +31,26 @@
 namespace ChOX
 {
 
-	class SettingsEditWidget : public QWidget
-	{
+    class SettingsEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		SettingsEditWidget(QWidget* = 0);
+    public:
+        SettingsEditWidget(QWidget* = 0);
 
-		virtual ~SettingsEditWidget() {}
+        virtual ~SettingsEditWidget() {}
 
-		virtual bool haveChangedSettings() const = 0;
+        virtual bool haveChangedSettings() const = 0;
 
-	signals:
-		void settingsChanged();
+    signals:
+        void settingsChanged();
 
-	public slots:
-		virtual void apply() = 0;
-		virtual void reset() = 0;
-		virtual void setDefaults() = 0;
-	};
+    public slots:
+        virtual void apply() = 0;
+        virtual void reset() = 0;
+        virtual void setDefaults() = 0;
+    };
 }
 
 #endif // CHOX_SETTINGSEDITWIDGET_HPP

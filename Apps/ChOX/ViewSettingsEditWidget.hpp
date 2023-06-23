@@ -39,55 +39,55 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class ViewSettingsEditWidget : public SettingsEditWidget
-	{
+    class ViewSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		ViewSettingsEditWidget(QWidget*, Settings&);
+    public:
+        ViewSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&                    settings;
-		CDPL::Vis::Color             backgroundColor;
-		CDPL::Vis::Color             selectionColor;
-		CDPL::Vis::SizeSpecification viewportMargin;
-		CDPL::Vis::Color             recordNumberColor;
-		CDPL::Vis::Color             recordNameColor;
-		CDPL::Vis::Color             gridColor;
-		CDPL::Vis::Font              recordNumberFont;
-		CDPL::Vis::Font              recordNameFont;
-		CDPL::Vis::SizeSpecification gridLineWidth;
-		CDPL::Vis::SizeSpecification recordNumberSize;
-		CDPL::Vis::SizeSpecification recordNameSize;
-		CDPL::Vis::Pen::LineStyle    gridLineStyle;
-		unsigned int                 recordNumberAlignment;
-		unsigned int                 recordNameAlignment;
-		unsigned int                 recordSizeAdjustment;
-		unsigned int                 recordAlignment;
-		QCheckBox*                   showGridCheckBox;
-		QCheckBox*                   showRecordNumbersCheckBox;
-		QCheckBox*                   showRecordNamesCheckBox;
-		bool                         haveChanges;
-	};
+        Settings&                    settings;
+        CDPL::Vis::Color             backgroundColor;
+        CDPL::Vis::Color             selectionColor;
+        CDPL::Vis::SizeSpecification viewportMargin;
+        CDPL::Vis::Color             recordNumberColor;
+        CDPL::Vis::Color             recordNameColor;
+        CDPL::Vis::Color             gridColor;
+        CDPL::Vis::Font              recordNumberFont;
+        CDPL::Vis::Font              recordNameFont;
+        CDPL::Vis::SizeSpecification gridLineWidth;
+        CDPL::Vis::SizeSpecification recordNumberSize;
+        CDPL::Vis::SizeSpecification recordNameSize;
+        CDPL::Vis::Pen::LineStyle    gridLineStyle;
+        unsigned int                 recordNumberAlignment;
+        unsigned int                 recordNameAlignment;
+        unsigned int                 recordSizeAdjustment;
+        unsigned int                 recordAlignment;
+        QCheckBox*                   showGridCheckBox;
+        QCheckBox*                   showRecordNumbersCheckBox;
+        QCheckBox*                   showRecordNamesCheckBox;
+        bool                         haveChanges;
+    };
 }
 
 #endif // CHOX_VIEWSETTINGSEDITWIDGET_HPP

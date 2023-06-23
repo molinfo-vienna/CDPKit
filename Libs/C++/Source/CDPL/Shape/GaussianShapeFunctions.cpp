@@ -47,99 +47,99 @@ using namespace CDPL;
 
 
 void Shape::generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape,
-								  bool append, double radius, bool inc_h, double p)
+                                  bool append, double radius, bool inc_h, double p)
 {
-	generateGaussianShape(atoms, shape, &Chem::get3DCoordinates, append, radius, inc_h, p);
+    generateGaussianShape(atoms, shape, &Chem::get3DCoordinates, append, radius, inc_h, p);
 }
 
 void Shape::generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape, const Chem::Atom3DCoordinatesFunction& coords_func,
-								  bool append, double radius, bool inc_h, double p)
+                                  bool append, double radius, bool inc_h, double p)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (!append)
-		shape.clear();
+    if (!append)
+        shape.clear();
 
-	if (p <= 0.0) // sanity check
-		p = 2.7;
-	
-	for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		unsigned int atom_type = getType(atom);
-		
-		if (!inc_h && atom_type == AtomType::H)
-			continue;
+    if (p <= 0.0) // sanity check
+        p = 2.7;
+    
+    for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        unsigned int atom_type = getType(atom);
+        
+        if (!inc_h && atom_type == AtomType::H)
+            continue;
 
-		if (radius > 0.0)
-			shape.addElement(coords_func(atom), radius, 0, p);
+        if (radius > 0.0)
+            shape.addElement(coords_func(atom), radius, 0, p);
 
-		else {
-			double r = AtomDictionary::getVdWRadius(atom_type);
+        else {
+            double r = AtomDictionary::getVdWRadius(atom_type);
 
-			if (r > 0.0)  // sanity check
-				shape.addElement(coords_func(atom), r, 0, p);
-			else
-				shape.addElement(coords_func(atom), 1.0, 0, p);
-		}
-	}
+            if (r > 0.0)  // sanity check
+                shape.addElement(coords_func(atom), r, 0, p);
+            else
+                shape.addElement(coords_func(atom), 1.0, 0, p);
+        }
+    }
 }
 
 void Shape::generateGaussianShape(const Pharm::FeatureContainer& features, GaussianShape& shape,
-								  bool append, double radius, bool inc_xv, double p)
+                                  bool append, double radius, bool inc_xv, double p)
 {
-	using namespace Pharm;
+    using namespace Pharm;
 
-	if (!append)
-		shape.clear();
+    if (!append)
+        shape.clear();
 
-	if (p <= 0.0) // sanity check
-		p = 5.0;
-	
-	for (FeatureContainer::ConstFeatureIterator it = features.getFeaturesBegin(), end = features.getFeaturesEnd(); it != end; ++it) {
-		const Feature& feature = *it;
-		unsigned int feature_type = getType(feature);
-		
-		if (!inc_xv && feature_type == FeatureType::EXCLUSION_VOLUME)
-			continue;
+    if (p <= 0.0) // sanity check
+        p = 5.0;
+    
+    for (FeatureContainer::ConstFeatureIterator it = features.getFeaturesBegin(), end = features.getFeaturesEnd(); it != end; ++it) {
+        const Feature& feature = *it;
+        unsigned int feature_type = getType(feature);
+        
+        if (!inc_xv && feature_type == FeatureType::EXCLUSION_VOLUME)
+            continue;
 
-		if (radius > 0.0)
-			shape.addElement(get3DCoordinates(feature), radius, feature_type + 1, p);
+        if (radius > 0.0)
+            shape.addElement(get3DCoordinates(feature), radius, feature_type + 1, p);
 
-		else {
-			double r = getTolerance(feature);
+        else {
+            double r = getTolerance(feature);
 
-			if (r > 0.0)  // sanity check
-				shape.addElement(get3DCoordinates(feature), r, feature_type + 1, p);
-			else
-				shape.addElement(get3DCoordinates(feature), 1.0, feature_type + 1, p);
-		}
-	}
+            if (r > 0.0)  // sanity check
+                shape.addElement(get3DCoordinates(feature), r, feature_type + 1, p);
+            else
+                shape.addElement(get3DCoordinates(feature), 1.0, feature_type + 1, p);
+        }
+    }
 }
 
 void Shape::transform(GaussianShape& shape, const Math::Matrix4D& xform)
 {
-	Math::Vector3D xf_pos;
-	Math::Vector3D::Pointer xf_pos_data = xf_pos.getData();
-	Math::Matrix4D::ConstArrayPointer xform_data = xform.getData();
-	
-	for (GaussianShape::ElementIterator it = shape.getElementsBegin(), end = shape.getElementsEnd(); it != end; ++it) {
-		GaussianShape::Element& elem = *it;
+    Math::Vector3D xf_pos;
+    Math::Vector3D::Pointer xf_pos_data = xf_pos.getData();
+    Math::Matrix4D::ConstArrayPointer xform_data = xform.getData();
+    
+    for (GaussianShape::ElementIterator it = shape.getElementsBegin(), end = shape.getElementsEnd(); it != end; ++it) {
+        GaussianShape::Element& elem = *it;
 
-		transform(xf_pos_data, xform_data, elem.getPosition().getData());
-		elem.setPosition(xf_pos);
-	}
+        transform(xf_pos_data, xform_data, elem.getPosition().getData());
+        elem.setPosition(xf_pos);
+    }
 }
 
 unsigned int Shape::centerAndAlignPrincipalAxes(GaussianShape& shape, const GaussianShapeFunction& func, Math::Matrix4D& back_xform, 
-												double mom_eq_thresh)
+                                                double mom_eq_thresh)
 {
-	Math::Matrix4D to_ctr_xform;
-	unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, back_xform, mom_eq_thresh);
+    Math::Matrix4D to_ctr_xform;
+    unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, back_xform, mom_eq_thresh);
 
-	if (sym_class == SymmetryClass::UNDEF)
-		return SymmetryClass::UNDEF;
+    if (sym_class == SymmetryClass::UNDEF)
+        return SymmetryClass::UNDEF;
 
-	transform(shape, to_ctr_xform);
-	
-	return sym_class;
+    transform(shape, to_ctr_xform);
+    
+    return sym_class;
 }

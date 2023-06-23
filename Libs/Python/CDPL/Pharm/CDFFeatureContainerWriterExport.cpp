@@ -34,39 +34,39 @@
 
 void CDPLPythonPharm::exportCDFFeatureContainerWriter()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::CDFFeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >,
-		boost::noncopyable>("CDFFeatureContainerWriter", python::no_init)
-		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Pharm::CDFFeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >,
+        boost::noncopyable>("CDFFeatureContainerWriter", python::no_init)
+        .def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Pharm::CDFFeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
-		boost::noncopyable>("FileCDFFeatureContainerWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Pharm::CDFFeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
+        boost::noncopyable>("FileCDFFeatureContainerWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-	python::class_<Pharm::CDFGZFeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
-		boost::noncopyable>("CDFGZFeatureContainerWriter", python::no_init)
-		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Pharm::CDFGZFeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
+        boost::noncopyable>("CDFGZFeatureContainerWriter", python::no_init)
+        .def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Pharm::CDFGZFeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
-		boost::noncopyable>("FileCDFGZFeatureContainerWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Pharm::CDFGZFeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
+        boost::noncopyable>("FileCDFGZFeatureContainerWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-	python::class_<Pharm::CDFBZ2FeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
-		boost::noncopyable>("CDFBZ2FeatureContainerWriter", python::no_init)
-		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Pharm::CDFBZ2FeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
+        boost::noncopyable>("CDFBZ2FeatureContainerWriter", python::no_init)
+        .def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataWriter<Pharm::CDFBZ2FeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
-		boost::noncopyable>("FileCDFBZ2FeatureContainerWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Pharm::CDFBZ2FeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
+        boost::noncopyable>("FileCDFBZ2FeatureContainerWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

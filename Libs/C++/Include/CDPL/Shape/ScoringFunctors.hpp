@@ -38,226 +38,226 @@ namespace CDPL
 
     namespace Shape
     {
-		
-		class CDPL_SHAPE_API TotalOverlapTanimotoScore
-		{
+        
+        class CDPL_SHAPE_API TotalOverlapTanimotoScore
+        {
 
-		  public:
-			double operator()(const AlignmentResult& res) const {
-				return calcTotalOverlapTanimotoScore(res);
-			}
-		};
+          public:
+            double operator()(const AlignmentResult& res) const {
+                return calcTotalOverlapTanimotoScore(res);
+            }
+        };
 
-		class CDPL_SHAPE_API ShapeTanimotoScore
-		{
+        class CDPL_SHAPE_API ShapeTanimotoScore
+        {
 
-		  public:
-			double operator()(const AlignmentResult& res) const {
-				return calcShapeTanimotoScore(res);
-			}
-		};
+          public:
+            double operator()(const AlignmentResult& res) const {
+                return calcShapeTanimotoScore(res);
+            }
+        };
 
-		class CDPL_SHAPE_API ColorTanimotoScore
-		{
+        class CDPL_SHAPE_API ColorTanimotoScore
+        {
 
-		  public:
-			double operator()(const AlignmentResult& res) const {
-				return calcColorTanimotoScore(res);
-			}
-		};
+          public:
+            double operator()(const AlignmentResult& res) const {
+                return calcColorTanimotoScore(res);
+            }
+        };
 
-		class CDPL_SHAPE_API TanimotoComboScore
-		{
+        class CDPL_SHAPE_API TanimotoComboScore
+        {
 
-		  public:
-			double operator()(const AlignmentResult& res) const {
-				return calcTanimotoComboScore(res);
-			}
-		};
+          public:
+            double operator()(const AlignmentResult& res) const {
+                return calcTanimotoComboScore(res);
+            }
+        };
 
-		class CDPL_SHAPE_API TotalOverlapTverskyScore
-		{
+        class CDPL_SHAPE_API TotalOverlapTverskyScore
+        {
 
-		  public:
-			TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05): 
-				alpha(alpha), beta(beta) {}
+          public:
+            TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05): 
+                alpha(alpha), beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcTotalOverlapTverskyScore(res, alpha, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcTotalOverlapTverskyScore(res, alpha, beta);
+            }
 
-		  private:
-			double alpha;
-			double beta;
-		};
+          private:
+            double alpha;
+            double beta;
+        };
 
-		class CDPL_SHAPE_API ShapeTverskyScore
-		{
+        class CDPL_SHAPE_API ShapeTverskyScore
+        {
 
-		  public:
-			ShapeTverskyScore(double alpha = 0.95, double beta = 0.05): 
-				alpha(alpha), beta(beta) {}
+          public:
+            ShapeTverskyScore(double alpha = 0.95, double beta = 0.05): 
+                alpha(alpha), beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcShapeTverskyScore(res, alpha, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcShapeTverskyScore(res, alpha, beta);
+            }
 
-		  private:
-			double alpha;
-			double beta;
-		};
+          private:
+            double alpha;
+            double beta;
+        };
 
-		class CDPL_SHAPE_API ColorTverskyScore
-		{
+        class CDPL_SHAPE_API ColorTverskyScore
+        {
 
-		  public:
-			ColorTverskyScore(double alpha = 0.95, double beta = 0.05): 
-				alpha(alpha), beta(beta) {}
+          public:
+            ColorTverskyScore(double alpha = 0.95, double beta = 0.05): 
+                alpha(alpha), beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcColorTverskyScore(res, alpha, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcColorTverskyScore(res, alpha, beta);
+            }
 
-		  private:
-			double alpha;
-			double beta;
-		};
+          private:
+            double alpha;
+            double beta;
+        };
 
-		class CDPL_SHAPE_API TverskyComboScore
-		{
+        class CDPL_SHAPE_API TverskyComboScore
+        {
 
-		  public:
-			TverskyComboScore(double alpha = 0.95, double beta = 0.05): 
-				alpha(alpha), beta(beta) {}
+          public:
+            TverskyComboScore(double alpha = 0.95, double beta = 0.05): 
+                alpha(alpha), beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcTverskyComboScore(res, alpha, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcTverskyComboScore(res, alpha, beta);
+            }
 
-		  private:
-			double alpha;
-			double beta;
-		};
+          private:
+            double alpha;
+            double beta;
+        };
 
-		class CDPL_SHAPE_API ReferenceTotalOverlapTverskyScore
-		{
+        class CDPL_SHAPE_API ReferenceTotalOverlapTverskyScore
+        {
 
-		  public:
-			ReferenceTotalOverlapTverskyScore(double alpha = 0.95): 
-				alpha(alpha) {}
+          public:
+            ReferenceTotalOverlapTverskyScore(double alpha = 0.95): 
+                alpha(alpha) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcReferenceTotalOverlapTverskyScore(res, alpha);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcReferenceTotalOverlapTverskyScore(res, alpha);
+            }
 
-		  private:
-			double alpha;
-		};
+          private:
+            double alpha;
+        };
 
-		class CDPL_SHAPE_API ReferenceShapeTverskyScore
-		{
+        class CDPL_SHAPE_API ReferenceShapeTverskyScore
+        {
 
-		  public:
-			ReferenceShapeTverskyScore(double alpha = 0.95): 
-				alpha(alpha) {}
+          public:
+            ReferenceShapeTverskyScore(double alpha = 0.95): 
+                alpha(alpha) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcReferenceShapeTverskyScore(res, alpha);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcReferenceShapeTverskyScore(res, alpha);
+            }
 
-		  private:
-			double alpha;
-		};
+          private:
+            double alpha;
+        };
 
-		class CDPL_SHAPE_API ReferenceColorTverskyScore
-		{
+        class CDPL_SHAPE_API ReferenceColorTverskyScore
+        {
 
-		  public:
-			ReferenceColorTverskyScore(double alpha = 0.95): 
-				alpha(alpha) {}
+          public:
+            ReferenceColorTverskyScore(double alpha = 0.95): 
+                alpha(alpha) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcReferenceColorTverskyScore(res, alpha);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcReferenceColorTverskyScore(res, alpha);
+            }
 
-		  private:
-			double alpha;
-		};
+          private:
+            double alpha;
+        };
 
-		class CDPL_SHAPE_API ReferenceTverskyComboScore
-		{
+        class CDPL_SHAPE_API ReferenceTverskyComboScore
+        {
 
-		  public:
-			ReferenceTverskyComboScore(double alpha = 0.95): 
-				alpha(alpha) {}
+          public:
+            ReferenceTverskyComboScore(double alpha = 0.95): 
+                alpha(alpha) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcReferenceTverskyComboScore(res, alpha);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcReferenceTverskyComboScore(res, alpha);
+            }
 
-		  private:
-			double alpha;
-		};
+          private:
+            double alpha;
+        };
 
-		class CDPL_SHAPE_API AlignedTotalOverlapTverskyScore
-		{
+        class CDPL_SHAPE_API AlignedTotalOverlapTverskyScore
+        {
 
-		  public:
-			AlignedTotalOverlapTverskyScore(double beta = 0.95): 
-				beta(beta) {}
+          public:
+            AlignedTotalOverlapTverskyScore(double beta = 0.95): 
+                beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcAlignedTotalOverlapTverskyScore(res, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcAlignedTotalOverlapTverskyScore(res, beta);
+            }
 
-		  private:
-			double beta;
-		};
+          private:
+            double beta;
+        };
 
-		class CDPL_SHAPE_API AlignedShapeTverskyScore
-		{
+        class CDPL_SHAPE_API AlignedShapeTverskyScore
+        {
 
-		  public:
-			AlignedShapeTverskyScore(double beta = 0.95): 
-				beta(beta) {}
+          public:
+            AlignedShapeTverskyScore(double beta = 0.95): 
+                beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcAlignedShapeTverskyScore(res, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcAlignedShapeTverskyScore(res, beta);
+            }
 
-		  private:
-			double beta;
-		};
+          private:
+            double beta;
+        };
 
-		class CDPL_SHAPE_API AlignedColorTverskyScore
-		{
+        class CDPL_SHAPE_API AlignedColorTverskyScore
+        {
 
-		  public:
-			AlignedColorTverskyScore(double beta = 0.95): 
-				beta(beta) {}
+          public:
+            AlignedColorTverskyScore(double beta = 0.95): 
+                beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcAlignedColorTverskyScore(res, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcAlignedColorTverskyScore(res, beta);
+            }
 
-		  private:
-			double beta;
-		};
+          private:
+            double beta;
+        };
 
-		class CDPL_SHAPE_API AlignedTverskyComboScore
-		{
+        class CDPL_SHAPE_API AlignedTverskyComboScore
+        {
 
-		  public:
-			AlignedTverskyComboScore(double beta = 0.95): 
-				beta(beta) {}
+          public:
+            AlignedTverskyComboScore(double beta = 0.95): 
+                beta(beta) {}
 
-			double operator()(const AlignmentResult& res) const {
-				return calcAlignedTverskyComboScore(res, beta);
-			}
+            double operator()(const AlignmentResult& res) const {
+                return calcAlignedTverskyComboScore(res, beta);
+            }
 
-		  private:
-			double beta;
-		};
+          private:
+            double beta;
+        };
     }
 }
 

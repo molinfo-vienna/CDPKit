@@ -38,7 +38,7 @@
 namespace
 {
 
-	const std::size_t MAX_SUBSTRUCT_DESCR_CACHE_SIZE = 5000;
+    const std::size_t MAX_SUBSTRUCT_DESCR_CACHE_SIZE = 5000;
 }
 
 
@@ -46,292 +46,292 @@ using namespace CDPL;
 
 
 Chem::ConnectedSubstructureSet::ConnectedSubstructureSet(): 
-	substructDescrCache(MAX_SUBSTRUCT_DESCR_CACHE_SIZE), currSubstructSize(0), molGraph(0) 
+    substructDescrCache(MAX_SUBSTRUCT_DESCR_CACHE_SIZE), currSubstructSize(0), molGraph(0) 
 {}
 
 Chem::ConnectedSubstructureSet::ConnectedSubstructureSet(const MolecularGraph& molgraph): 
-	substructDescrCache(MAX_SUBSTRUCT_DESCR_CACHE_SIZE), currSubstructSize(0), molGraph(&molgraph) 
+    substructDescrCache(MAX_SUBSTRUCT_DESCR_CACHE_SIZE), currSubstructSize(0), molGraph(&molgraph) 
 {
-	bondMask.resize(molgraph.getNumBonds());
+    bondMask.resize(molgraph.getNumBonds());
 }
 
 void Chem::ConnectedSubstructureSet::reset(const MolecularGraph& molgraph)
 {
-	bondMask.resize(molgraph.getNumBonds());
+    bondMask.resize(molgraph.getNumBonds());
 
-	if (molGraph)
-		reset();
-	else
-		currSubstructSize = 0;
+    if (molGraph)
+        reset();
+    else
+        currSubstructSize = 0;
 
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 }
 
 void Chem::ConnectedSubstructureSet::findSubstructures(std::size_t size)
 {
-	if (!molGraph)
-		return;
+    if (!molGraph)
+        return;
 
-	growSubstructDescriptors(size);
-	createSubstructFragments();
+    growSubstructDescriptors(size);
+    createSubstructFragments();
 }
 
 std::size_t Chem::ConnectedSubstructureSet::getSubstructureSize() const
 {
-	return currSubstructSize;
+    return currSubstructSize;
 }
 
 void Chem::ConnectedSubstructureSet::reset()
 {
-	currSubstructSize = 0;
+    currSubstructSize = 0;
 
-	bondMask.reset();
-	foundSubstructDescriptors.clear();
+    bondMask.reset();
+    foundSubstructDescriptors.clear();
 }
 
 void Chem::ConnectedSubstructureSet::growSubstructDescriptors(std::size_t size)
 {
-	if (size < currSubstructSize) 
-		reset();
+    if (size < currSubstructSize) 
+        reset();
 
-	typedef std::set<SubstructDescriptorPtr, SubstructDescriptorLessCmpFunc> UniqueSubstructDescriptorList;
+    typedef std::set<SubstructDescriptorPtr, SubstructDescriptorLessCmpFunc> UniqueSubstructDescriptorList;
 
-	UniqueSubstructDescriptorList grown_substruct_descrs;
-	
-	for ( ; currSubstructSize < size; currSubstructSize++) {
-		if (currSubstructSize == 0) {
-			std::size_t i = 0;
-			MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
+    UniqueSubstructDescriptorList grown_substruct_descrs;
+    
+    for ( ; currSubstructSize < size; currSubstructSize++) {
+        if (currSubstructSize == 0) {
+            std::size_t i = 0;
+            MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
 
-			for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(); it != bonds_end; ++it, i++) {
-				const Bond& bond = *it;
-			
-				if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
-					continue;
+            for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(); it != bonds_end; ++it, i++) {
+                const Bond& bond = *it;
+            
+                if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
+                    continue;
 
-				foundSubstructDescriptors.push_back(allocSubstructDescriptor(bond));
-				bondMask.set(i);
-			}
+                foundSubstructDescriptors.push_back(allocSubstructDescriptor(bond));
+                bondMask.set(i);
+            }
 
-			continue;
-		}
+            continue;
+        }
 
-		SubstructDescriptorList::const_iterator descr_list_end = foundSubstructDescriptors.end();
+        SubstructDescriptorList::const_iterator descr_list_end = foundSubstructDescriptors.end();
 
-		for (SubstructDescriptorList::const_iterator it = foundSubstructDescriptors.begin(); it != descr_list_end; ++it) {
-			const SubstructDescriptorPtr& substruct_descr = *it; 
+        for (SubstructDescriptorList::const_iterator it = foundSubstructDescriptors.begin(); it != descr_list_end; ++it) {
+            const SubstructDescriptorPtr& substruct_descr = *it; 
 
-			while (substruct_descr->grow(bondMask)) {
-				UniqueSubstructDescriptorList::iterator lb = grown_substruct_descrs.lower_bound(substruct_descr);
+            while (substruct_descr->grow(bondMask)) {
+                UniqueSubstructDescriptorList::iterator lb = grown_substruct_descrs.lower_bound(substruct_descr);
 
-				if (lb == grown_substruct_descrs.end() || grown_substruct_descrs.key_comp()(substruct_descr, *lb)) {
-					SubstructDescriptorPtr new_substruct_descr = substructDescrCache.get();
+                if (lb == grown_substruct_descrs.end() || grown_substruct_descrs.key_comp()(substruct_descr, *lb)) {
+                    SubstructDescriptorPtr new_substruct_descr = substructDescrCache.get();
 
-					new_substruct_descr->copy(*substruct_descr);
-					grown_substruct_descrs.insert(lb, new_substruct_descr);
-				} 
+                    new_substruct_descr->copy(*substruct_descr);
+                    grown_substruct_descrs.insert(lb, new_substruct_descr);
+                } 
 
-				substruct_descr->ungrow();
-			}
-		}
+                substruct_descr->ungrow();
+            }
+        }
 
-		foundSubstructDescriptors.clear();
-		foundSubstructDescriptors.insert(foundSubstructDescriptors.end(), 
-										 grown_substruct_descrs.begin(), grown_substruct_descrs.end());
+        foundSubstructDescriptors.clear();
+        foundSubstructDescriptors.insert(foundSubstructDescriptors.end(), 
+                                         grown_substruct_descrs.begin(), grown_substruct_descrs.end());
 
-		grown_substruct_descrs.clear();
-	}
+        grown_substruct_descrs.clear();
+    }
 }
 
 void Chem::ConnectedSubstructureSet::createSubstructFragments()
 {
-	SubstructDescriptorList::const_iterator frags_end = foundSubstructDescriptors.end();
+    SubstructDescriptorList::const_iterator frags_end = foundSubstructDescriptors.end();
 
-	for (SubstructDescriptorList::const_iterator it = foundSubstructDescriptors.begin(); it != frags_end; ++it)
-		addElement((*it)->createFragment());
+    for (SubstructDescriptorList::const_iterator it = foundSubstructDescriptors.begin(); it != frags_end; ++it)
+        addElement((*it)->createFragment());
 }
 
 Chem::ConnectedSubstructureSet::SubstructDescriptorPtr Chem::ConnectedSubstructureSet::allocSubstructDescriptor(const Bond& bond)
 {
-	SubstructDescriptorPtr substruct_descr = substructDescrCache.get();
+    SubstructDescriptorPtr substruct_descr = substructDescrCache.get();
 
-	substruct_descr->init(molGraph, bond);
+    substruct_descr->init(molGraph, bond);
 
-	return substruct_descr;
+    return substruct_descr;
 }
 
 
 void Chem::ConnectedSubstructureSet::SubstructDescriptor::init(const MolecularGraph* molgraph, const Bond& bond) 
 {
-	molGraph = molgraph;
+    molGraph = molgraph;
 
-	bondMask.resize(molgraph->getNumBonds());
-	bondMask.reset();
-	bondMask.set(molgraph->getBondIndex(bond));
+    bondMask.resize(molgraph->getNumBonds());
+    bondMask.reset();
+    bondMask.set(molgraph->getBondIndex(bond));
 
-	unsatAListIdx = 0;
-	nbrBListIdx = 0;
+    unsatAListIdx = 0;
+    nbrBListIdx = 0;
 
-	unsatAtoms.clear();
-	atomBondCounts.clear();
+    unsatAtoms.clear();
+    atomBondCounts.clear();
 
-	startAtom = &bond.getBegin();
+    startAtom = &bond.getBegin();
 
-	if (Internal::getExplicitBondCount(*startAtom, *molgraph) > 1) {
-		unsatAtoms.push_back(startAtom);
-		atomBondCounts.push_back(1);
-	}
+    if (Internal::getExplicitBondCount(*startAtom, *molgraph) > 1) {
+        unsatAtoms.push_back(startAtom);
+        atomBondCounts.push_back(1);
+    }
 
-	const Atom* atom2 = &bond.getEnd();
+    const Atom* atom2 = &bond.getEnd();
 
-	if (Internal::getExplicitBondCount(*atom2, *molgraph) > 1) {
-		unsatAtoms.push_back(atom2);
-		atomBondCounts.push_back(1);
-	}
+    if (Internal::getExplicitBondCount(*atom2, *molgraph) > 1) {
+        unsatAtoms.push_back(atom2);
+        atomBondCounts.push_back(1);
+    }
 }
 
 bool Chem::ConnectedSubstructureSet::SubstructDescriptor::grow(const Util::BitSet& molgraph_bond_mask)
 {
-	std::size_t num_unsat_atoms = unsatAtoms.size();
+    std::size_t num_unsat_atoms = unsatAtoms.size();
 
-	for ( ; unsatAListIdx < num_unsat_atoms; unsatAListIdx++) {
-		const Atom* atom = unsatAtoms[unsatAListIdx];
-		std::size_t num_bonds = atom->getNumBonds();
+    for ( ; unsatAListIdx < num_unsat_atoms; unsatAListIdx++) {
+        const Atom* atom = unsatAtoms[unsatAListIdx];
+        std::size_t num_bonds = atom->getNumBonds();
 
-		for ( ; nbrBListIdx < num_bonds; nbrBListIdx++) {
-			const Bond& bond = atom->getBond(nbrBListIdx);
-			
-			if (!molGraph->containsBond(bond))
-				continue;
+        for ( ; nbrBListIdx < num_bonds; nbrBListIdx++) {
+            const Bond& bond = atom->getBond(nbrBListIdx);
+            
+            if (!molGraph->containsBond(bond))
+                continue;
 
-			lastBondIdx = molGraph->getBondIndex(bond);
+            lastBondIdx = molGraph->getBondIndex(bond);
 
-			if (!molgraph_bond_mask.test(lastBondIdx) || bondMask.test(lastBondIdx))
-				continue;
-			
-			bondMask.set(lastBondIdx);
+            if (!molgraph_bond_mask.test(lastBondIdx) || bondMask.test(lastBondIdx))
+                continue;
+            
+            bondMask.set(lastBondIdx);
 
-			const Atom& nbr_atom = atom->getAtom(nbrBListIdx);
+            const Atom& nbr_atom = atom->getAtom(nbrBListIdx);
 
-			if (Internal::getExplicitBondCount(nbr_atom, *molGraph) > 1) {
-				unsatAtoms.push_back(&nbr_atom);
-				atomBondCounts.push_back(1);
+            if (Internal::getExplicitBondCount(nbr_atom, *molGraph) > 1) {
+                unsatAtoms.push_back(&nbr_atom);
+                atomBondCounts.push_back(1);
 
-				addedAtom = true;
+                addedAtom = true;
 
-			} else
-				addedAtom = false;
+            } else
+                addedAtom = false;
 
-			if (++atomBondCounts[unsatAListIdx] == Internal::getExplicitBondCount(*atom, *molGraph))
-				nbrBListIdx = num_bonds;
-			else 
-				nbrBListIdx++;
-		 
-			return true;
-		}
-		
-		nbrBListIdx = 0;
-	}
+            if (++atomBondCounts[unsatAListIdx] == Internal::getExplicitBondCount(*atom, *molGraph))
+                nbrBListIdx = num_bonds;
+            else 
+                nbrBListIdx++;
+         
+            return true;
+        }
+        
+        nbrBListIdx = 0;
+    }
 
-	return false;
+    return false;
 }
 
 void Chem::ConnectedSubstructureSet::SubstructDescriptor::ungrow()
 {
-	bondMask.reset(lastBondIdx);
+    bondMask.reset(lastBondIdx);
 
-	if (addedAtom) {
-		unsatAtoms.pop_back();
-		atomBondCounts.pop_back();
-	}
+    if (addedAtom) {
+        unsatAtoms.pop_back();
+        atomBondCounts.pop_back();
+    }
 
-	atomBondCounts[unsatAListIdx]--;
+    atomBondCounts[unsatAListIdx]--;
 }
 
 Chem::Fragment::SharedPointer Chem::ConnectedSubstructureSet::SubstructDescriptor::createFragment() const
 {  
-	Fragment::SharedPointer frag_ptr(new Fragment());
-	Fragment& frag = *frag_ptr;
+    Fragment::SharedPointer frag_ptr(new Fragment());
+    Fragment& frag = *frag_ptr;
 
-	AtomList atoms;
-	AtomList next_atoms;
+    AtomList atoms;
+    AtomList next_atoms;
 
-	next_atoms.push_back(startAtom);
+    next_atoms.push_back(startAtom);
 
-	for (std::size_t num_atoms = 1; num_atoms > 0; num_atoms = next_atoms.size()) {
-		atoms.swap(next_atoms);
-		next_atoms.clear();
+    for (std::size_t num_atoms = 1; num_atoms > 0; num_atoms = next_atoms.size()) {
+        atoms.swap(next_atoms);
+        next_atoms.clear();
 
-		AtomList::const_iterator atoms_end = atoms.end(); 
+        AtomList::const_iterator atoms_end = atoms.end(); 
 
-		for (AtomList::const_iterator it1 = atoms.begin(); it1 != atoms_end; ++it1) {
-			const Atom* atom = *it1;
+        for (AtomList::const_iterator it1 = atoms.begin(); it1 != atoms_end; ++it1) {
+            const Atom* atom = *it1;
 
-			Atom::ConstBondIterator bonds_end = atom->getBondsEnd();
+            Atom::ConstBondIterator bonds_end = atom->getBondsEnd();
 
-			for (Atom::ConstBondIterator it2 = atom->getBondsBegin(); it2 != bonds_end; ++it2) {
-				const Bond& bond = *it2;
+            for (Atom::ConstBondIterator it2 = atom->getBondsBegin(); it2 != bonds_end; ++it2) {
+                const Bond& bond = *it2;
 
-				if (!molGraph->containsBond(bond))
-					continue;
+                if (!molGraph->containsBond(bond))
+                    continue;
 
-				if (bondMask.test(molGraph->getBondIndex(bond)) && !frag.containsBond(bond)) {
-					const Atom& nbr_atom = bond.getNeighbor(*atom);
-					bool nbr_visited = frag.containsAtom(nbr_atom);
+                if (bondMask.test(molGraph->getBondIndex(bond)) && !frag.containsBond(bond)) {
+                    const Atom& nbr_atom = bond.getNeighbor(*atom);
+                    bool nbr_visited = frag.containsAtom(nbr_atom);
 
-					frag.addBond(bond);
+                    frag.addBond(bond);
 
-					if (nbr_visited)
-						continue;
+                    if (nbr_visited)
+                        continue;
 
-					next_atoms.push_back(&nbr_atom);
-				}
-			}
-		}
-	}
+                    next_atoms.push_back(&nbr_atom);
+                }
+            }
+        }
+    }
 
-	return frag_ptr;
+    return frag_ptr;
 }
 
 void Chem::ConnectedSubstructureSet::SubstructDescriptor::copy(const SubstructDescriptor& descr)
 {
-	unsatAListIdx = 0;
-	nbrBListIdx = 0;
+    unsatAListIdx = 0;
+    nbrBListIdx = 0;
 
-	molGraph = descr.molGraph;
-	bondMask = descr.bondMask;
-	startAtom = descr.startAtom;
+    molGraph = descr.molGraph;
+    bondMask = descr.bondMask;
+    startAtom = descr.startAtom;
 
-	if (descr.atomBondCounts[descr.unsatAListIdx] < Internal::getExplicitBondCount(*descr.unsatAtoms[descr.unsatAListIdx], *molGraph)) {
-		unsatAtoms = descr.unsatAtoms;
-		atomBondCounts = descr.atomBondCounts;
+    if (descr.atomBondCounts[descr.unsatAListIdx] < Internal::getExplicitBondCount(*descr.unsatAtoms[descr.unsatAListIdx], *molGraph)) {
+        unsatAtoms = descr.unsatAtoms;
+        atomBondCounts = descr.atomBondCounts;
 
-	} else {
-		unsatAtoms.clear();
-		atomBondCounts.clear();
+    } else {
+        unsatAtoms.clear();
+        atomBondCounts.clear();
 
-		std::copy(descr.unsatAtoms.begin(), descr.unsatAtoms.begin() + descr.unsatAListIdx, 
-				  std::back_inserter(unsatAtoms));
+        std::copy(descr.unsatAtoms.begin(), descr.unsatAtoms.begin() + descr.unsatAListIdx, 
+                  std::back_inserter(unsatAtoms));
 
-		std::copy(descr.atomBondCounts.begin(), descr.atomBondCounts.begin() + descr.unsatAListIdx, 
-				  std::back_inserter(atomBondCounts));
+        std::copy(descr.atomBondCounts.begin(), descr.atomBondCounts.begin() + descr.unsatAListIdx, 
+                  std::back_inserter(atomBondCounts));
 
-		std::copy(descr.unsatAtoms.begin() + descr.unsatAListIdx + 1, descr.unsatAtoms.end(), 
-				  std::back_inserter(unsatAtoms));
+        std::copy(descr.unsatAtoms.begin() + descr.unsatAListIdx + 1, descr.unsatAtoms.end(), 
+                  std::back_inserter(unsatAtoms));
 
-		std::copy(descr.atomBondCounts.begin() + descr.unsatAListIdx + 1, descr.atomBondCounts.end(), 
-				  std::back_inserter(atomBondCounts));
-	}
+        std::copy(descr.atomBondCounts.begin() + descr.unsatAListIdx + 1, descr.atomBondCounts.end(), 
+                  std::back_inserter(atomBondCounts));
+    }
 }
 
 bool Chem::ConnectedSubstructureSet::SubstructDescriptor::operator<(const SubstructDescriptor& descr) const
 {
-	return (bondMask < descr.bondMask);
+    return (bondMask < descr.bondMask);
 }
 
 
 bool Chem::ConnectedSubstructureSet::SubstructDescriptorLessCmpFunc::operator()(const SubstructDescriptorPtr& descr1, 
-																				const SubstructDescriptorPtr& descr2) const
+                                                                                const SubstructDescriptorPtr& descr2) const
 {
-	return (*descr1 < *descr2);
+    return (*descr1 < *descr2);
 }

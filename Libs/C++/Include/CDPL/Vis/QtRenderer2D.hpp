@@ -42,61 +42,61 @@ class QPolygonF;
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Implements the Renderer2D interface on top of the <em>Qt Toolkit</em>.
-		 *
-		 * \c %QtRenderer2D is implemented by forwarding the drawing operations to a provided \c QPainter
-		 * instance which has been created for the desired output device (screen, printer, off-screen image, ...). 
-		 * For more information about \c QPainter and the <em>Qt Toolkit</em> see [\ref QTDOC].
-		 */
-		class CDPL_VIS_API QtRenderer2D : public Renderer2D
-		{
+        /**
+         * \brief Implements the Renderer2D interface on top of the <em>Qt Toolkit</em>.
+         *
+         * \c %QtRenderer2D is implemented by forwarding the drawing operations to a provided \c QPainter
+         * instance which has been created for the desired output device (screen, printer, off-screen image, ...). 
+         * For more information about \c QPainter and the <em>Qt Toolkit</em> see [\ref QTDOC].
+         */
+        class CDPL_VIS_API QtRenderer2D : public Renderer2D
+        {
 
-		public:
-			/**
-			 * \brief Constructs a renderer object which uses the \c QPainter instance \a painter for its drawing operations.
-			 * \param painter The wrapped \c QPainter instance.
-			 */
-			QtRenderer2D(QPainter& painter);
+        public:
+            /**
+             * \brief Constructs a renderer object which uses the \c QPainter instance \a painter for its drawing operations.
+             * \param painter The wrapped \c QPainter instance.
+             */
+            QtRenderer2D(QPainter& painter);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~QtRenderer2D();
+            /**
+             * \brief Destructor.
+             */
+            ~QtRenderer2D();
 
-			void saveState();
-			void restoreState();
+            void saveState();
+            void restoreState();
 
-			void setTransform(const Math::Matrix3D& xform);
-			void transform(const Math::Matrix3D& xform);
+            void setTransform(const Math::Matrix3D& xform);
+            void transform(const Math::Matrix3D& xform);
 
-			void setPen(const Pen& pen);
-			void setBrush(const Brush& brush);
-			void setFont(const Font& font);
+            void setPen(const Pen& pen);
+            void setBrush(const Brush& brush);
+            void setFont(const Font& font);
 
-			void drawRectangle(double x1, double y1, double x2, double y2);
-			void drawPolygon(const Math::Vector2DArray& points);
-			void drawLine(double x1, double y1, double x2, double y2);
-			void drawPolyline(const Math::Vector2DArray& points);
-			void drawLineSegments(const Math::Vector2DArray& points);
-			void drawPoint(double x, double y);
-			void drawText(double x, double y, const std::string& txt);
-			void drawEllipse(double x, double y, double width, double height);
+            void drawRectangle(double x1, double y1, double x2, double y2);
+            void drawPolygon(const Math::Vector2DArray& points);
+            void drawLine(double x1, double y1, double x2, double y2);
+            void drawPolyline(const Math::Vector2DArray& points);
+            void drawLineSegments(const Math::Vector2DArray& points);
+            void drawPoint(double x, double y);
+            void drawText(double x, double y, const std::string& txt);
+            void drawEllipse(double x, double y, double width, double height);
 
-		private:
-			QtRenderer2D(const QtRenderer2D&);
+        private:
+            QtRenderer2D(const QtRenderer2D&);
 
-			QtRenderer2D& operator=(const QtRenderer2D&);
+            QtRenderer2D& operator=(const QtRenderer2D&);
 
-			void convertToQPolygon(const Math::Vector2DArray&);
+            void convertToQPolygon(const Math::Vector2DArray&);
 
-			QPainter&                qPainter;
-			std::auto_ptr<QPolygonF> qPolygon;
-		};
-	}
+            QPainter&                qPainter;
+            std::auto_ptr<QPolygonF> qPolygon;
+        };
+    }
 }
 
 #endif // CDPL_VIS_QTRENDERER2D_HPP

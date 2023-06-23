@@ -31,184 +31,184 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename E>
-		class Expression
-		{
+        template <typename E>
+        class Expression
+        {
 
-		public:
-			typedef E ExpressionType;
+        public:
+            typedef E ExpressionType;
 
-		protected:
-			Expression() {};
-			~Expression() {};
-		
-		private:
-			const Expression& operator=(const Expression&);
-		};
+        protected:
+            Expression() {};
+            ~Expression() {};
+        
+        private:
+            const Expression& operator=(const Expression&);
+        };
 
-		template <typename E>
-		class VectorExpression : public Expression<E>
-		{
+        template <typename E>
+        class VectorExpression : public Expression<E>
+        {
 
-		public:
-			typedef E ExpressionType;
+        public:
+            typedef E ExpressionType;
 
-			const ExpressionType& operator()() const {
-				return *static_cast<const ExpressionType*>(this);
-			}
+            const ExpressionType& operator()() const {
+                return *static_cast<const ExpressionType*>(this);
+            }
 
-			ExpressionType& operator()() {
-				return *static_cast<ExpressionType*>(this);
-			}
+            ExpressionType& operator()() {
+                return *static_cast<ExpressionType*>(this);
+            }
 
-		protected:
-			VectorExpression() {};
-			~VectorExpression() {};
-		};
+        protected:
+            VectorExpression() {};
+            ~VectorExpression() {};
+        };
 
-		template <typename E>
-		class MatrixExpression : public Expression<E>
-		{
+        template <typename E>
+        class MatrixExpression : public Expression<E>
+        {
 
-		public:
-			typedef E ExpressionType;
+        public:
+            typedef E ExpressionType;
 
-			const ExpressionType& operator()() const {
-				return *static_cast<const ExpressionType*>(this);
-			}
+            const ExpressionType& operator()() const {
+                return *static_cast<const ExpressionType*>(this);
+            }
 
-			ExpressionType& operator()() {
-				return *static_cast<ExpressionType*>(this);
-			}
+            ExpressionType& operator()() {
+                return *static_cast<ExpressionType*>(this);
+            }
 
-		protected:
-			MatrixExpression() {};
-			~MatrixExpression() {};
-		};
+        protected:
+            MatrixExpression() {};
+            ~MatrixExpression() {};
+        };
 
-		template <typename E>
-		class QuaternionExpression : public Expression<E>
-		{
+        template <typename E>
+        class QuaternionExpression : public Expression<E>
+        {
 
-		public:
-			typedef E ExpressionType;
+        public:
+            typedef E ExpressionType;
 
-			const ExpressionType& operator()() const {
-				return *static_cast<const ExpressionType*>(this);
-			}
+            const ExpressionType& operator()() const {
+                return *static_cast<const ExpressionType*>(this);
+            }
 
-			ExpressionType& operator()() {
-				return *static_cast<ExpressionType*>(this);
-			}
+            ExpressionType& operator()() {
+                return *static_cast<ExpressionType*>(this);
+            }
 
-		protected:
-			QuaternionExpression() {};
-			~QuaternionExpression() {};
-		};
+        protected:
+            QuaternionExpression() {};
+            ~QuaternionExpression() {};
+        };
 
-		template <typename E>
-		class GridExpression : public Expression<E>
-		{
+        template <typename E>
+        class GridExpression : public Expression<E>
+        {
 
-		public:
-			typedef E ExpressionType;
+        public:
+            typedef E ExpressionType;
 
-			const ExpressionType& operator()() const {
-				return *static_cast<const ExpressionType*>(this);
-			}
+            const ExpressionType& operator()() const {
+                return *static_cast<const ExpressionType*>(this);
+            }
 
-			ExpressionType& operator()() {
-				return *static_cast<ExpressionType*>(this);
-			}
+            ExpressionType& operator()() {
+                return *static_cast<ExpressionType*>(this);
+            }
 
-		protected:
-			GridExpression() {};
-			~GridExpression() {};
-		};
+        protected:
+            GridExpression() {};
+            ~GridExpression() {};
+        };
 
-		template <typename C> 
-		class VectorContainer : public VectorExpression<C>
-		{
+        template <typename C> 
+        class VectorContainer : public VectorExpression<C>
+        {
 
-		public:
-			typedef C ContainerType;
+        public:
+            typedef C ContainerType;
 
-			const ContainerType& operator()() const {
-				return *static_cast<const ContainerType*>(this);
-			}
+            const ContainerType& operator()() const {
+                return *static_cast<const ContainerType*>(this);
+            }
 
-			ContainerType& operator()() {
-				return *static_cast<ContainerType*>(this);
-			}
+            ContainerType& operator()() {
+                return *static_cast<ContainerType*>(this);
+            }
 
-		protected:
-			VectorContainer() {};
-			~VectorContainer() {};
-		};
-	
-		template <typename C> 
-		class MatrixContainer : public MatrixExpression<C>
-		{
+        protected:
+            VectorContainer() {};
+            ~VectorContainer() {};
+        };
+    
+        template <typename C> 
+        class MatrixContainer : public MatrixExpression<C>
+        {
 
-		public:
-			typedef C ContainerType;
+        public:
+            typedef C ContainerType;
 
-			const ContainerType& operator()() const {
-				return *static_cast<const ContainerType*>(this);
-			}
+            const ContainerType& operator()() const {
+                return *static_cast<const ContainerType*>(this);
+            }
 
-			ContainerType& operator()() {
-				return *static_cast<ContainerType*>(this);
-			}
+            ContainerType& operator()() {
+                return *static_cast<ContainerType*>(this);
+            }
 
-		protected:
-			MatrixContainer() {};
-			~MatrixContainer() {};
-		};
-	
-		template <typename C> 
-		class QuaternionContainer : public QuaternionExpression<C>
-		{
+        protected:
+            MatrixContainer() {};
+            ~MatrixContainer() {};
+        };
+    
+        template <typename C> 
+        class QuaternionContainer : public QuaternionExpression<C>
+        {
 
-		public:
-			typedef C ContainerType;
+        public:
+            typedef C ContainerType;
 
-			const ContainerType& operator()() const {
-				return *static_cast<const ContainerType*>(this);
-			}
+            const ContainerType& operator()() const {
+                return *static_cast<const ContainerType*>(this);
+            }
 
-			ContainerType& operator()() {
-				return *static_cast<ContainerType*>(this);
-			}
+            ContainerType& operator()() {
+                return *static_cast<ContainerType*>(this);
+            }
 
-		protected:
-			QuaternionContainer() {};
-			~QuaternionContainer() {};
-		};
+        protected:
+            QuaternionContainer() {};
+            ~QuaternionContainer() {};
+        };
 
-		template <typename C> 
-		class GridContainer : public GridExpression<C>
-		{
+        template <typename C> 
+        class GridContainer : public GridExpression<C>
+        {
 
-		public:
-			typedef C ContainerType;
+        public:
+            typedef C ContainerType;
 
-			const ContainerType& operator()() const {
-				return *static_cast<const ContainerType*>(this);
-			}
+            const ContainerType& operator()() const {
+                return *static_cast<const ContainerType*>(this);
+            }
 
-			ContainerType& operator()() {
-				return *static_cast<ContainerType*>(this);
-			}
+            ContainerType& operator()() {
+                return *static_cast<ContainerType*>(this);
+            }
 
-		protected:
-			GridContainer() {};
-			~GridContainer() {};
-		};
-	}
+        protected:
+            GridContainer() {};
+            ~GridContainer() {};
+        };
+    }
 }
 
 #endif // CDPL_MATH_EXPRESSION_HPP

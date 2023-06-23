@@ -40,43 +40,43 @@
 
 BOOST_AUTO_TEST_CASE(SMARTSReactionOutputHandlerTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace Base;
 
-	Reaction rxn1;
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
+    Reaction rxn1;
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
 
-	BOOST_CHECK(ifs);
-	BOOST_CHECK(JMEReactionReader(ifs).read(rxn1));
+    BOOST_CHECK(ifs);
+    BOOST_CHECK(JMEReactionReader(ifs).read(rxn1));
 
-	const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Chem::DataFormat::SMARTS);
+    const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Chem::DataFormat::SMARTS);
 
-	BOOST_CHECK(handler);
+    BOOST_CHECK(handler);
 
-	BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::SMARTS);
+    BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::SMARTS);
 
-	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByName("smarts") == handler);
-	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("sma") == handler);
+    BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByName("smarts") == handler);
+    BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("sma") == handler);
 
-	std::ostringstream oss;
+    std::ostringstream oss;
 
-	BOOST_CHECK(oss);
+    BOOST_CHECK(oss);
 
-	DataWriter<Reaction>::SharedPointer writer_ptr(handler->createWriter(oss));
+    DataWriter<Reaction>::SharedPointer writer_ptr(handler->createWriter(oss));
 
-	Reaction rxn2;
+    Reaction rxn2;
 
-	BOOST_CHECK(writer_ptr);
-	BOOST_CHECK(writer_ptr->write(rxn1));
+    BOOST_CHECK(writer_ptr);
+    BOOST_CHECK(writer_ptr->write(rxn1));
 
-	std::istringstream iss(oss.str());
+    std::istringstream iss(oss.str());
 
-	BOOST_CHECK(iss);
-	BOOST_CHECK(SMARTSReactionReader(iss).read(rxn2));
+    BOOST_CHECK(iss);
+    BOOST_CHECK(SMARTSReactionReader(iss).read(rxn2));
 
-	BOOST_CHECK(rxn1.getNumReactants() == rxn2.getNumReactants());
-	BOOST_CHECK(rxn1.getNumAgents() == rxn2.getNumAgents());
-	BOOST_CHECK(rxn1.getNumProducts() == rxn2.getNumProducts());
+    BOOST_CHECK(rxn1.getNumReactants() == rxn2.getNumReactants());
+    BOOST_CHECK(rxn1.getNumAgents() == rxn2.getNumAgents());
+    BOOST_CHECK(rxn1.getNumProducts() == rxn2.getNumProducts());
 }
 

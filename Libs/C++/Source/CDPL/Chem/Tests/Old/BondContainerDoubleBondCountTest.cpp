@@ -40,57 +40,57 @@
 
 BOOST_AUTO_TEST_CASE(BondContainerDoubleBondCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == 0);
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::SINGLE_BOND_COUNT) +
-				mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == mol.getNumBonds());
-
-	BOOST_CHECK(!mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == 0);
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::SINGLE_BOND_COUNT) +
+                mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == mol.getNumBonds());
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == 4);
-	BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::SINGLE_BOND_COUNT) +
-				mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == mol.getNumBonds());
-
-	BOOST_CHECK(!mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(mol, BondContainerProperty::DOUBLE_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
+    BOOST_CHECK(!mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	Fragment frag(mol);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(frag.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == 4);
-	BOOST_CHECK(frag.getProperty<std::size_t>(BondContainerProperty::SINGLE_BOND_COUNT) +
-				frag.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == frag.getNumBonds());
-
-	BOOST_CHECK(!frag.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(frag, BondContainerProperty::DOUBLE_BOND_COUNT, frag, BondContainerProperty::BOND_COUNT);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
 //-----
 
-	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) 
-		TestUtils::checkDependency(mol, BondContainerProperty::DOUBLE_BOND_COUNT, *it, BondProperty::ORDER);
+    BOOST_CHECK(mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == 4);
+    BOOST_CHECK(mol.getProperty<std::size_t>(BondContainerProperty::SINGLE_BOND_COUNT) +
+                mol.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == mol.getNumBonds());
+
+    BOOST_CHECK(!mol.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(mol, BondContainerProperty::DOUBLE_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
+
+//-----
+
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == 4);
+    BOOST_CHECK(frag.getProperty<std::size_t>(BondContainerProperty::SINGLE_BOND_COUNT) +
+                frag.getProperty<std::size_t>(BondContainerProperty::DOUBLE_BOND_COUNT) == frag.getNumBonds());
+
+    BOOST_CHECK(!frag.getProperty(BondContainerProperty::DOUBLE_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(frag, BondContainerProperty::DOUBLE_BOND_COUNT, frag, BondContainerProperty::BOND_COUNT);
+
+//-----
+
+    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) 
+        TestUtils::checkDependency(mol, BondContainerProperty::DOUBLE_BOND_COUNT, *it, BondProperty::ORDER);
 }

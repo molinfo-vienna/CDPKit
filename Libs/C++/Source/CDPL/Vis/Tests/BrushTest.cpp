@@ -30,64 +30,64 @@
 
 BOOST_AUTO_TEST_CASE(BrushTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	Brush b1;
+    Brush b1;
 
-	BOOST_CHECK(b1.getStyle() == Brush::NO_PATTERN);
-	BOOST_CHECK(b1.getColor() == Color::BLACK);
+    BOOST_CHECK(b1.getStyle() == Brush::NO_PATTERN);
+    BOOST_CHECK(b1.getColor() == Color::BLACK);
 
-	Brush b2(Brush::CROSS_PATTERN);
+    Brush b2(Brush::CROSS_PATTERN);
 
-	BOOST_CHECK(b2.getStyle() == Brush::CROSS_PATTERN);
-	BOOST_CHECK(b2.getColor() == Color::BLACK);
+    BOOST_CHECK(b2.getStyle() == Brush::CROSS_PATTERN);
+    BOOST_CHECK(b2.getColor() == Color::BLACK);
 
-	Brush b3(Color::RED);
+    Brush b3(Color::RED);
 
-	BOOST_CHECK(b3.getStyle() == Brush::SOLID_PATTERN);
-	BOOST_CHECK(b3.getColor() == Color::RED);
+    BOOST_CHECK(b3.getStyle() == Brush::SOLID_PATTERN);
+    BOOST_CHECK(b3.getColor() == Color::RED);
 
-	Brush b4(Color::GREEN, Brush::H_PATTERN);
+    Brush b4(Color::GREEN, Brush::H_PATTERN);
 
-	BOOST_CHECK(b4.getStyle() == Brush::H_PATTERN);
-	BOOST_CHECK(b4.getColor() == Color::GREEN);
-
-//-----
-
-	BOOST_CHECK(b1 != b4);
-	BOOST_CHECK(!(b1 == b4));
-
-	b1.setStyle(Brush::H_PATTERN);
-
-	BOOST_CHECK(b1.getStyle() == Brush::H_PATTERN);
-	BOOST_CHECK(b1.getColor() == Color::BLACK);
-
-	BOOST_CHECK(b1 != b4);
-	BOOST_CHECK(!(b1 == b4));
-
-	b1.setColor(Color::GREEN);
-
-	BOOST_CHECK(b1.getStyle() == Brush::H_PATTERN);
-	BOOST_CHECK(b1.getColor() == Color::GREEN);
-
-	BOOST_CHECK(b1 == b4);
-	BOOST_CHECK(!(b1 != b4));
+    BOOST_CHECK(b4.getStyle() == Brush::H_PATTERN);
+    BOOST_CHECK(b4.getColor() == Color::GREEN);
 
 //-----
 
-	BOOST_CHECK(b2 == b2);
-	BOOST_CHECK(!(b2 != b2));
+    BOOST_CHECK(b1 != b4);
+    BOOST_CHECK(!(b1 == b4));
 
-	b1 = b2;
+    b1.setStyle(Brush::H_PATTERN);
 
-	BOOST_CHECK(b1 != b4);
-	BOOST_CHECK(!(b1 == b4));
+    BOOST_CHECK(b1.getStyle() == Brush::H_PATTERN);
+    BOOST_CHECK(b1.getColor() == Color::BLACK);
 
-	BOOST_CHECK(b1 == b2);
-	BOOST_CHECK(!(b1 != b2));
+    BOOST_CHECK(b1 != b4);
+    BOOST_CHECK(!(b1 == b4));
 
-	BOOST_CHECK(b2 != b4);
-	BOOST_CHECK(!(b2 == b4));
+    b1.setColor(Color::GREEN);
+
+    BOOST_CHECK(b1.getStyle() == Brush::H_PATTERN);
+    BOOST_CHECK(b1.getColor() == Color::GREEN);
+
+    BOOST_CHECK(b1 == b4);
+    BOOST_CHECK(!(b1 != b4));
+
+//-----
+
+    BOOST_CHECK(b2 == b2);
+    BOOST_CHECK(!(b2 != b2));
+
+    b1 = b2;
+
+    BOOST_CHECK(b1 != b4);
+    BOOST_CHECK(!(b1 == b4));
+
+    BOOST_CHECK(b1 == b2);
+    BOOST_CHECK(!(b1 != b2));
+
+    BOOST_CHECK(b2 != b4);
+    BOOST_CHECK(!(b2 == b4));
 }
 

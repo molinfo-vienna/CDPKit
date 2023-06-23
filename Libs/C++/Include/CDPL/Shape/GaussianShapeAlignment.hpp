@@ -54,198 +54,198 @@ namespace CDPL
 
     namespace Shape
     {
-		
-		class CDPL_SHAPE_API GaussianShapeAlignment
-		{
+        
+        class CDPL_SHAPE_API GaussianShapeAlignment
+        {
 
-			typedef std::vector<AlignmentResult> ResultList;
-			typedef std::vector<GaussianShapeFunction*> ShapeFunctionList;
+            typedef std::vector<AlignmentResult> ResultList;
+            typedef std::vector<GaussianShapeFunction*> ShapeFunctionList;
 
-			typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
+            typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
-		  public:
-			static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
-			static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-			static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER           = 1;
-			static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
-			static constexpr double       DEF_DISTANCE_CUTOFF             = 0.0;
+          public:
+            static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+            static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+            static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER           = 1;
+            static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
+            static constexpr double       DEF_DISTANCE_CUTOFF             = 0.0;
 
-			typedef std::shared_ptr<GaussianShapeAlignment> SharedPointer;
+            typedef std::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
-			typedef ResultList::const_iterator ConstResultIterator;
-			typedef ResultList::iterator ResultIterator;
-			typedef boost::transform_iterator<GetShapeFunction, ShapeFunctionList::const_iterator> ConstShapeIterator;
+            typedef ResultList::const_iterator ConstResultIterator;
+            typedef ResultList::iterator ResultIterator;
+            typedef boost::transform_iterator<GetShapeFunction, ShapeFunctionList::const_iterator> ConstShapeIterator;
 
-			typedef GaussianShapeFunctionAlignment::ColorFilterFunction ColorFilterFunction;
-			typedef GaussianShapeFunctionAlignment::ColorMatchFunction ColorMatchFunction;
-			typedef std::function<double(const AlignmentResult&)> ScoringFunction;
-			typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
+            typedef GaussianShapeFunctionAlignment::ColorFilterFunction ColorFilterFunction;
+            typedef GaussianShapeFunctionAlignment::ColorMatchFunction ColorMatchFunction;
+            typedef std::function<double(const AlignmentResult&)> ScoringFunction;
+            typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
-			GaussianShapeAlignment();
+            GaussianShapeAlignment();
 
-			GaussianShapeAlignment(const GaussianShape& ref_shape);
+            GaussianShapeAlignment(const GaussianShape& ref_shape);
 
-			GaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
+            GaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
 
-			~GaussianShapeAlignment();
+            ~GaussianShapeAlignment();
 
-			void setOverlapFunction(GaussianShapeOverlapFunction& func);
-			
-			GaussianShapeOverlapFunction& getOverlapFunction() const;
+            void setOverlapFunction(GaussianShapeOverlapFunction& func);
+            
+            GaussianShapeOverlapFunction& getOverlapFunction() const;
 
-			const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
+            const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
 
-			FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
+            FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
 
-			void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
-			
-			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
+            void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
+            
+            GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 
-			const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
+            const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
 
-			PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
+            PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
 
-			void setColorMatchFunction(const ColorMatchFunction& func);
+            void setColorMatchFunction(const ColorMatchFunction& func);
 
-			const ColorMatchFunction& getColorMatchFunction() const;
-	
-			void setColorFilterFunction(const ColorFilterFunction& func);
+            const ColorMatchFunction& getColorMatchFunction() const;
+    
+            void setColorFilterFunction(const ColorFilterFunction& func);
 
-			const ColorFilterFunction& getColorFilterFunction() const;
+            const ColorFilterFunction& getColorFilterFunction() const;
 
-			void setResultCompareFunction(const ResultCompareFunction& func);
+            void setResultCompareFunction(const ResultCompareFunction& func);
 
-			const ResultCompareFunction& getResultCompareFunction() const;
+            const ResultCompareFunction& getResultCompareFunction() const;
 
-			void setScoringFunction(const ScoringFunction& func);
+            void setScoringFunction(const ScoringFunction& func);
 
-			const ScoringFunction& getScoringFunction() const;
+            const ScoringFunction& getScoringFunction() const;
 
-			void setResultSelectionMode(unsigned int mode);
+            void setResultSelectionMode(unsigned int mode);
 
-			unsigned int getResultSelectionMode() const;
+            unsigned int getResultSelectionMode() const;
 
-			void calcSelfOverlaps(bool calc);
+            void calcSelfOverlaps(bool calc);
 
-			bool calcSelfOverlaps() const;
+            bool calcSelfOverlaps() const;
 
-			void calcColorSelfOverlaps(bool calc);
+            void calcColorSelfOverlaps(bool calc);
 
-			bool calcColorSelfOverlaps() const;
+            bool calcColorSelfOverlaps() const;
 
-			void calcColorOverlaps(bool calc);
+            void calcColorOverlaps(bool calc);
 
-			bool calcColorOverlaps() const;
+            bool calcColorOverlaps() const;
 
-			void performAlignment(bool perf_align);
+            void performAlignment(bool perf_align);
 
-			bool performAlignment() const;
+            bool performAlignment() const;
 
-			void optimizeOverlap(bool optimize);
+            void optimizeOverlap(bool optimize);
 
-			bool optimizeOverlap() const;
+            bool optimizeOverlap() const;
 
-			void greedyOptimization(bool greedy);
+            void greedyOptimization(bool greedy);
 
-			bool greedyOptimization() const;
+            bool greedyOptimization() const;
 
-			void setMaxNumOptimizationIterations(std::size_t max_iter);
+            void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumOptimizationIterations() const;
+            std::size_t getMaxNumOptimizationIterations() const;
 
-			void setOptimizationStopGradient(double grad_norm);
+            void setOptimizationStopGradient(double grad_norm);
 
-			double getOptimizationStopGradient() const;
+            double getOptimizationStopGradient() const;
 
-			void setMaxOrder(std::size_t max_order);
+            void setMaxOrder(std::size_t max_order);
 
-			std::size_t getMaxOrder() const;
+            std::size_t getMaxOrder() const;
 
-			void setDistanceCutoff(double cutoff);
+            void setDistanceCutoff(double cutoff);
 
-			double getDistanceCutoff() const;
+            double getDistanceCutoff() const;
 
-			void clearReferenceShapes();
+            void clearReferenceShapes();
 
-			void addReferenceShape(const GaussianShape& shape, bool new_set = true);
+            void addReferenceShape(const GaussianShape& shape, bool new_set = true);
 
-			void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
+            void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
 
-			std::size_t getNumReferenceShapes() const;
+            std::size_t getNumReferenceShapes() const;
 
-			const GaussianShape& getReferenceShape(std::size_t idx) const;
-		
-			ConstShapeIterator getReferenceShapesBegin() const;
+            const GaussianShape& getReferenceShape(std::size_t idx) const;
+        
+            ConstShapeIterator getReferenceShapesBegin() const;
 
-			ConstShapeIterator getReferenceShapesEnd() const;
+            ConstShapeIterator getReferenceShapesEnd() const;
 
-			bool align(const GaussianShape& shape);
+            bool align(const GaussianShape& shape);
 
-			bool align(const GaussianShapeSet& shapes);
+            bool align(const GaussianShapeSet& shapes);
 
-			std::size_t getNumResults() const;
+            std::size_t getNumResults() const;
 
-			const AlignmentResult& getResult(std::size_t idx) const;
+            const AlignmentResult& getResult(std::size_t idx) const;
 
-			AlignmentResult& getResult(std::size_t idx);
+            AlignmentResult& getResult(std::size_t idx);
 
-			ConstResultIterator getResultsBegin() const;
+            ConstResultIterator getResultsBegin() const;
 
-			ConstResultIterator getResultsEnd() const;
+            ConstResultIterator getResultsEnd() const;
 
-			ResultIterator getResultsBegin();
+            ResultIterator getResultsBegin();
 
-			ResultIterator getResultsEnd();
-						
-		  private:
-			typedef GaussianShape::SharedPointer GaussianShapePtr;
+            ResultIterator getResultsEnd();
+                        
+          private:
+            typedef GaussianShape::SharedPointer GaussianShapePtr;
 
-			struct ShapeMetaData 
-			{
+            struct ShapeMetaData 
+            {
 
-				std::size_t      setIndex;
-				std::size_t      index;
-				unsigned int     symClass;
-				Math::Matrix4D   transform;
-				double           selfOverlap;
-				double           colSelfOverlap;
-				GaussianShapePtr shape;
-			};
+                std::size_t      setIndex;
+                std::size_t      index;
+                unsigned int     symClass;
+                Math::Matrix4D   transform;
+                double           selfOverlap;
+                double           colSelfOverlap;
+                GaussianShapePtr shape;
+            };
 
-			typedef std::pair<std::size_t, std::size_t> ResultID;
-	
-			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
+            typedef std::pair<std::size_t, std::size_t> ResultID;
+    
+            GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
 
-			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
+            GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
-			void prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref);
+            void prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref);
 
-			void processResults(std::size_t ref_idx, std::size_t al_idx);
+            void processResults(std::size_t ref_idx, std::size_t al_idx);
 
-			bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
+            bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
 
-			GaussianShapeFunction* allocShapeFunction(const GaussianShape& shape);
+            GaussianShapeFunction* allocShapeFunction(const GaussianShape& shape);
 
-			typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
-			typedef std::vector<ShapeMetaData> ShapeMetaDataArray;
-			 typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
+            typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
+            typedef std::vector<ShapeMetaData> ShapeMetaDataArray;
+             typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
 
-			ShapeFunctionCache             shapeFuncCache;
-			bool                           calcSlfOverlaps;
-			bool                           calcColSlfOverlaps;
-			unsigned int                   resultSelMode;
-			ResultCompareFunction          resultCmpFunc;
-			ScoringFunction                scoringFunc;
-			GaussianShapeFunctionAlignment shapeFuncAlmnt;
-			ShapeFunctionList              refShapeFuncs;
-			ShapeMetaDataArray             refShapeMetaData;
-			GaussianShapeFunction          algdShapeFunc;
-			ShapeMetaData                  algdShapeMetaData;
-			ResultIndexMap                 resIndexMap;
-			ResultList                     results;
-			std::size_t                    currSetIndex;
-			std::size_t                    currShapeIndex;
-		};
+            ShapeFunctionCache             shapeFuncCache;
+            bool                           calcSlfOverlaps;
+            bool                           calcColSlfOverlaps;
+            unsigned int                   resultSelMode;
+            ResultCompareFunction          resultCmpFunc;
+            ScoringFunction                scoringFunc;
+            GaussianShapeFunctionAlignment shapeFuncAlmnt;
+            ShapeFunctionList              refShapeFuncs;
+            ShapeMetaDataArray             refShapeMetaData;
+            GaussianShapeFunction          algdShapeFunc;
+            ShapeMetaData                  algdShapeMetaData;
+            ResultIndexMap                 resIndexMap;
+            ResultList                     results;
+            std::size_t                    currSetIndex;
+            std::size_t                    currShapeIndex;
+        };
     }
 }
 

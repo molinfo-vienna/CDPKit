@@ -34,31 +34,31 @@
 
 void CDPLPythonChem::exportSymmetryClassCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SymmetryClassCalculator, boost::noncopyable>("SymmetryClassCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("class_ids"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SymmetryClassCalculator>())	
-		.def("setAtomPropertyFlags", &Chem::SymmetryClassCalculator::setAtomPropertyFlags, 
-			 (python::arg("self"), python::arg("flags")))
-		.def("setBondPropertyFlags", &Chem::SymmetryClassCalculator::setBondPropertyFlags, 
-			 (python::arg("self"), python::arg("flags")))
-		.def("includeImplicitHydrogens", &Chem::SymmetryClassCalculator::includeImplicitHydrogens, 
-			 (python::arg("self"), python::arg("include")))
-		.def("getAtomPropertyFlags", &Chem::SymmetryClassCalculator::getAtomPropertyFlags, python::arg("self"))
-		.def("getBondPropertyFlags", &Chem::SymmetryClassCalculator::getBondPropertyFlags, python::arg("self"))
-		.def("implicitHydrogensIncluded", &Chem::SymmetryClassCalculator::implicitHydrogensIncluded, python::arg("self"))
-		.def("calculate", &Chem::SymmetryClassCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("class_ids")))
-		.add_property("atomPropertyFlags", &Chem::SymmetryClassCalculator::getAtomPropertyFlags, 
-					  &Chem::SymmetryClassCalculator::setAtomPropertyFlags)
-		.add_property("bondPropertyFlags", &Chem::SymmetryClassCalculator::getBondPropertyFlags, 
-					  &Chem::SymmetryClassCalculator::setBondPropertyFlags)
-		.add_property("hydrogenComplete", &Chem::SymmetryClassCalculator::implicitHydrogensIncluded, 
-					  &Chem::SymmetryClassCalculator::includeImplicitHydrogens)
-		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::SymmetryClassCalculator::DEF_ATOM_PROPERTY_FLAGS)
-		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS);
+    python::class_<Chem::SymmetryClassCalculator, boost::noncopyable>("SymmetryClassCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::STArray&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("class_ids"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SymmetryClassCalculator>())    
+        .def("setAtomPropertyFlags", &Chem::SymmetryClassCalculator::setAtomPropertyFlags, 
+             (python::arg("self"), python::arg("flags")))
+        .def("setBondPropertyFlags", &Chem::SymmetryClassCalculator::setBondPropertyFlags, 
+             (python::arg("self"), python::arg("flags")))
+        .def("includeImplicitHydrogens", &Chem::SymmetryClassCalculator::includeImplicitHydrogens, 
+             (python::arg("self"), python::arg("include")))
+        .def("getAtomPropertyFlags", &Chem::SymmetryClassCalculator::getAtomPropertyFlags, python::arg("self"))
+        .def("getBondPropertyFlags", &Chem::SymmetryClassCalculator::getBondPropertyFlags, python::arg("self"))
+        .def("implicitHydrogensIncluded", &Chem::SymmetryClassCalculator::implicitHydrogensIncluded, python::arg("self"))
+        .def("calculate", &Chem::SymmetryClassCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("class_ids")))
+        .add_property("atomPropertyFlags", &Chem::SymmetryClassCalculator::getAtomPropertyFlags, 
+                      &Chem::SymmetryClassCalculator::setAtomPropertyFlags)
+        .add_property("bondPropertyFlags", &Chem::SymmetryClassCalculator::getBondPropertyFlags, 
+                      &Chem::SymmetryClassCalculator::setBondPropertyFlags)
+        .add_property("hydrogenComplete", &Chem::SymmetryClassCalculator::implicitHydrogensIncluded, 
+                      &Chem::SymmetryClassCalculator::includeImplicitHydrogens)
+        .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::SymmetryClassCalculator::DEF_ATOM_PROPERTY_FLAGS)
+        .def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS);
 }

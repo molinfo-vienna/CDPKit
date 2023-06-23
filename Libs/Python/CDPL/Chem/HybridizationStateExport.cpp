@@ -32,25 +32,25 @@
 namespace 
 {
 
-	struct HybridizationState {};
+    struct HybridizationState {};
 }
 
 
 void CDPLPythonChem::exportHybridizationStates()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<HybridizationState, boost::noncopyable>("HybridizationState", python::no_init)
-		.def_readonly("UNKNOWN", &Chem::HybridizationState::UNKNOWN)
-		.def_readonly("DP", &Chem::HybridizationState::DP)
-		.def_readonly("SD3", &Chem::HybridizationState::SD3)
-		.def_readonly("SP", &Chem::HybridizationState::SP)
-		.def_readonly("SP1", &Chem::HybridizationState::SP1)
-		.def_readonly("SP2", &Chem::HybridizationState::SP2)
-		.def_readonly("SP2D", &Chem::HybridizationState::SP2D)
-		.def_readonly("SP3", &Chem::HybridizationState::SP3)
-		.def_readonly("SP3D", &Chem::HybridizationState::SP3D)
-		.def_readonly("SP3D2", &Chem::HybridizationState::SP3D2)
-		.def_readonly("SP3D3", &Chem::HybridizationState::SP3D3);
+    python::class_<HybridizationState, boost::noncopyable>("HybridizationState", python::no_init)
+        .def_readonly("UNKNOWN", &Chem::HybridizationState::UNKNOWN)
+        .def_readonly("DP", &Chem::HybridizationState::DP)
+        .def_readonly("SD3", &Chem::HybridizationState::SD3)
+        .def_readonly("SP", &Chem::HybridizationState::SP)
+        .def_readonly("SP1", &Chem::HybridizationState::SP1)
+        .def_readonly("SP2", &Chem::HybridizationState::SP2)
+        .def_readonly("SP2D", &Chem::HybridizationState::SP2D)
+        .def_readonly("SP3", &Chem::HybridizationState::SP3)
+        .def_readonly("SP3D", &Chem::HybridizationState::SP3D)
+        .def_readonly("SP3D2", &Chem::HybridizationState::SP3D2)
+        .def_readonly("SP3D3", &Chem::HybridizationState::SP3D3);
 }

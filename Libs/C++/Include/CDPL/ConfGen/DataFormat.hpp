@@ -35,27 +35,27 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	}
+        class DataFormat;
+    }
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
-		 */
-		namespace DataFormat
-		{
-	
-			/**
-			 * \brief Provides meta-information about the conformer generator fragment library format.
-			 */
-			extern CDPL_CONFGEN_API const Base::DataFormat CFL;
-		}
-	}
+        /**
+         * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
+         */
+        namespace DataFormat
+        {
+    
+            /**
+             * \brief Provides meta-information about the conformer generator fragment library format.
+             */
+            extern CDPL_CONFGEN_API const Base::DataFormat CFL;
+        }
+    }
 }
 
 #endif // CDPL_CONFGEN_DATAFORMAT_HPP

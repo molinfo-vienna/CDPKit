@@ -39,40 +39,40 @@ class QWidget;
 namespace ChOX
 {
 
-	class Settings;
-	class DataSet;
+    class Settings;
+    class DataSet;
 
-	class DataSetWriter : public QObject, private DataRecordVisitor
-	{
+    class DataSetWriter : public QObject, private DataRecordVisitor
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		DataSetWriter(const DataSet& data_set, QWidget* parent, const QString& file_name, 
-					  const QString& filter, const Settings& settings, bool selection);
+    public:
+        DataSetWriter(const DataSet& data_set, QWidget* parent, const QString& file_name, 
+                      const QString& filter, const Settings& settings, bool selection);
 
-		~DataSetWriter();
+        ~DataSetWriter();
 
-		void write();
+        void write();
 
-	signals:	
-		void errorMessage(const QString&);
-		void statusMessage(const QString&);
+    signals:    
+        void errorMessage(const QString&);
+        void statusMessage(const QString&);
 
-	private:
-		void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
-		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
+    private:
+        void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
+        void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
-		template <typename T>
-		void writeRecords(const std::string& def_format);
+        template <typename T>
+        void writeRecords(const std::string& def_format);
 
-		const DataSet&        dataSet;
-		QWidget*              parent;
-		QString               fileName;
-		QString               filter;
-		const Settings&       settings;
-		bool                  writeSelection;
-	};
+        const DataSet&        dataSet;
+        QWidget*              parent;
+        QString               fileName;
+        QString               filter;
+        const Settings&       settings;
+        bool                  writeSelection;
+    };
 }
 
 #endif // CHOX_DATASETWRITER_HPP

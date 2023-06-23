@@ -37,43 +37,43 @@
 namespace ChOX
 {
 
-	class DataRecord;
-	class Settings;
+    class DataRecord;
+    class Settings;
  
-	class DataRecordPainter : private DataRecordVisitor
-	{
+    class DataRecordPainter : private DataRecordVisitor
+    {
 
-	public:
-		typedef std::shared_ptr<DataRecordPainter> SharedPointer;
+    public:
+        typedef std::shared_ptr<DataRecordPainter> SharedPointer;
 
-		DataRecordPainter(CDPL::Vis::QtFontMetrics&, QPainter&, const Settings&, const DataRecord&);
+        DataRecordPainter(CDPL::Vis::QtFontMetrics&, QPainter&, const Settings&, const DataRecord&);
 
-		~DataRecordPainter();
+        ~DataRecordPainter();
 
-		void drawRecord(int rec_no, double vp_width, double vp_height);
-	
-	private:
-		void drawRecordNumber(int rec_no, double vp_width, double vp_height) const;
-		void drawRecordName(double vp_width, double vp_height) const;
+        void drawRecord(int rec_no, double vp_width, double vp_height);
+    
+    private:
+        void drawRecordNumber(int rec_no, double vp_width, double vp_height) const;
+        void drawRecordName(double vp_width, double vp_height) const;
 
-		bool setupViewport(double vp_width, double vp_height) const;
+        bool setupViewport(double vp_width, double vp_height) const;
 
-		void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
-		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
+        void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
+        void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
-		typedef std::shared_ptr<CDPL::Vis::View2D> DataViewPointer;
-		typedef std::shared_ptr<CDPL::Base::PropertyContainer> PropertyContainerPointer;
+        typedef std::shared_ptr<CDPL::Vis::View2D> DataViewPointer;
+        typedef std::shared_ptr<CDPL::Base::PropertyContainer> PropertyContainerPointer;
 
-		QPainter&                 painter;
-		const Settings&           settings;
-		PropertyContainerPointer  data;
-		DataViewPointer           dataView;
-		QString                   recordName;
-		CDPL::Vis::QtRenderer2D   renderer;
-		CDPL::Vis::QtFontMetrics& fontMetrics;
-		bool                      recordNosVisible;
-		bool                      recordNamesVisible;
-	};
+        QPainter&                 painter;
+        const Settings&           settings;
+        PropertyContainerPointer  data;
+        DataViewPointer           dataView;
+        QString                   recordName;
+        CDPL::Vis::QtRenderer2D   renderer;
+        CDPL::Vis::QtFontMetrics& fontMetrics;
+        bool                      recordNosVisible;
+        bool                      recordNamesVisible;
+    };
 }
 
 #endif // CHOX_DATARECORDPAINTER_HPP

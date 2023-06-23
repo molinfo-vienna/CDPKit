@@ -33,18 +33,18 @@
 namespace
 {
 
-	template <typename T>
-	T interpolateTrilinear(const CDPL::Math::RegularSpatialGrid<T>& grid, const CDPL::Math::CVector<T, 3>& pos, bool local_pos)
-	{
-		return CDPL::Math::interpolateTrilinear(grid, pos, local_pos);
-	}
+    template <typename T>
+    T interpolateTrilinear(const CDPL::Math::RegularSpatialGrid<T>& grid, const CDPL::Math::CVector<T, 3>& pos, bool local_pos)
+    {
+        return CDPL::Math::interpolateTrilinear(grid, pos, local_pos);
+    }
 }
 
 
 void CDPLPythonMath::exportRegularSpatialGridFunctions()
 {
-	using namespace boost;
+    using namespace boost;
 
-	python::def("interpolateTrilinear", &interpolateTrilinear<float>, (python::arg("grid"), python::arg("pos"), python::arg("local_pos")));
-	python::def("interpolateTrilinear", &interpolateTrilinear<double>, (python::arg("grid"), python::arg("pos"), python::arg("local_pos")));
+    python::def("interpolateTrilinear", &interpolateTrilinear<float>, (python::arg("grid"), python::arg("pos"), python::arg("local_pos")));
+    python::def("interpolateTrilinear", &interpolateTrilinear<double>, (python::arg("grid"), python::arg("pos"), python::arg("local_pos")));
 }

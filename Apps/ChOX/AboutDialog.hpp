@@ -31,17 +31,17 @@
 namespace ChOX
 {
 
-	class AboutDialog : public QDialog
-	{
+    class AboutDialog : public QDialog
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		AboutDialog(QWidget* = 0, Qt::WindowFlags = 0);
+    public:
+        AboutDialog(QWidget* = 0, Qt::WindowFlags = 0);
 
-	private:
-		void init();
-	};
+    private:
+        void init();
+    };
 }
 
 #endif // CHOX_ABOUTDIALOG_HPP

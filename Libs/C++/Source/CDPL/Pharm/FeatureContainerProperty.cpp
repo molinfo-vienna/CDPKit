@@ -34,12 +34,12 @@ namespace CDPL
     namespace Pharm
     {
 
-		namespace FeatureContainerProperty
-		{
+        namespace FeatureContainerProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(NAME);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(NAME);
+        }
 
-		void initFeatureContainerProperties() {}
+        void initFeatureContainerProperties() {}
     }
 }

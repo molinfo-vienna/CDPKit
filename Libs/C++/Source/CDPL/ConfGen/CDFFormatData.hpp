@@ -36,14 +36,14 @@ namespace CDPL
     namespace ConfGen
     {
 
-		namespace CDF
-		{
-			
-			using namespace Internal::CDF;
+        namespace CDF
+        {
+            
+            using namespace Internal::CDF;
 
-			const std::uint8_t FRAGLIB_DATA_RECORD_ID  = 6;
-			const std::uint8_t CURR_FORMAT_VERSION     = 1;
-		}
+            const std::uint8_t FRAGLIB_DATA_RECORD_ID  = 6;
+            const std::uint8_t CURR_FORMAT_VERSION     = 1;
+        }
     }
 }
 

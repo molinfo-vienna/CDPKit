@@ -30,18 +30,18 @@
 
 BOOST_AUTO_TEST_CASE(AtomMappingTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	/*
-	Molecule mol;
+    using namespace CDPL;
+    using namespace Chem;
+    /*
+    Molecule mol;
 
-	Atom* lap1 = &mol.addAtom();
-	Atom* rap1 = &mol.addAtom();
+    Atom* lap1 = &mol.addAtom();
+    Atom* rap1 = &mol.addAtom();
 
-	Atom* lap2 = &mol.addAtom();
-	Atom* rap2 = &mol.addAtom();
+    Atom* lap2 = &mol.addAtom();
+    Atom* rap2 = &mol.addAtom();
 
-	Atom* rap3 = &mol.addAtom();
-	*/
+    Atom* rap3 = &mol.addAtom();
+    */
 }
 

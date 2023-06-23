@@ -27,10 +27,10 @@
 
 void CDPLPythonMath::exportTriangularMatrixAdapterTypes3()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	TriangularAdapterExport<ConstMatrixExpression<long>, Math::Upper>("ConstUpperTriangularLMatrixAdapter");
-	TriangularAdapterExport<ConstMatrixExpression<long>, Math::UnitUpper>("ConstUnitUpperTriangularLMatrixAdapter");
-	TriangularAdapterExport<ConstMatrixExpression<long>, Math::Lower>("ConstLowerTriangularLMatrixAdapter");
-	TriangularAdapterExport<ConstMatrixExpression<long>, Math::UnitLower>("ConstUnitLowerTriangularLMatrixAdapter");
+    TriangularAdapterExport<ConstMatrixExpression<long>, Math::Upper>("ConstUpperTriangularLMatrixAdapter");
+    TriangularAdapterExport<ConstMatrixExpression<long>, Math::UnitUpper>("ConstUnitUpperTriangularLMatrixAdapter");
+    TriangularAdapterExport<ConstMatrixExpression<long>, Math::Lower>("ConstLowerTriangularLMatrixAdapter");
+    TriangularAdapterExport<ConstMatrixExpression<long>, Math::UnitLower>("ConstUnitLowerTriangularLMatrixAdapter");
 }

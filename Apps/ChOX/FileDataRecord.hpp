@@ -36,30 +36,30 @@
 namespace ChOX
 {
 
-	template <typename T, typename ImplT>
-	class FileDataRecord : public ConcreteDataRecord<T>
-	{
+    template <typename T, typename ImplT>
+    class FileDataRecord : public ConcreteDataRecord<T>
+    {
 
-	public:
-		typedef typename CDPL::Base::DataReader<T>::SharedPointer ReaderPointer;
+    public:
+        typedef typename CDPL::Base::DataReader<T>::SharedPointer ReaderPointer;
 
-		FileDataRecord(const ReaderPointer& reader, std::size_t rec_idx):
-			reader(reader), recordIndex(rec_idx) {}
+        FileDataRecord(const ReaderPointer& reader, std::size_t rec_idx):
+            reader(reader), recordIndex(rec_idx) {}
 
-		typename T::SharedPointer getData() const {
-			typename T::SharedPointer data_ptr(new ImplT());
-			
-			reader->read(recordIndex, *data_ptr);
-			
-			initData(*data_ptr);
+        typename T::SharedPointer getData() const {
+            typename T::SharedPointer data_ptr(new ImplT());
+            
+            reader->read(recordIndex, *data_ptr);
+            
+            initData(*data_ptr);
 
-			return data_ptr;
-		}
+            return data_ptr;
+        }
 
-	private:
-		ReaderPointer   reader;
-		std::size_t     recordIndex;
-	};
+    private:
+        ReaderPointer   reader;
+        std::size_t     recordIndex;
+    };
 }
 
 #endif // CHOX_FILEDATARECORD_HPP

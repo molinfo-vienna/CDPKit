@@ -35,37 +35,37 @@ using namespace CDPL;
 bool Chem::containsMolecularGraph(const MolecularGraph& molgraph, const MolecularGraph& sub_molgraph, bool atoms, bool bonds)
 {
     if (atoms)
-		for (MolecularGraph::ConstAtomIterator it = sub_molgraph.getAtomsBegin(), end = sub_molgraph.getAtomsEnd(); it != end; ++it)
-			if (!molgraph.containsAtom(*it))
-				return false;
-	if (bonds)
-		for (MolecularGraph::ConstBondIterator it = sub_molgraph.getBondsBegin(), end = sub_molgraph.getBondsEnd(); it != end; ++it)
-			if (!molgraph.containsBond(*it))
-				return false;
+        for (MolecularGraph::ConstAtomIterator it = sub_molgraph.getAtomsBegin(), end = sub_molgraph.getAtomsEnd(); it != end; ++it)
+            if (!molgraph.containsAtom(*it))
+                return false;
+    if (bonds)
+        for (MolecularGraph::ConstBondIterator it = sub_molgraph.getBondsBegin(), end = sub_molgraph.getBondsEnd(); it != end; ++it)
+            if (!molgraph.containsBond(*it))
+                return false;
 
-	return true;
+    return true;
 }
 
 void Chem::getContainedFragments(const MolecularGraph& molgraph, const FragmentList& frag_list, 
-								 FragmentList& cont_frag_list, bool append, bool atoms, bool bonds)
+                                 FragmentList& cont_frag_list, bool append, bool atoms, bool bonds)
 {
     if (!append)
-		cont_frag_list.clear();
+        cont_frag_list.clear();
 
     for (FragmentList::BaseType::ConstElementIterator it = frag_list.getBase().getElementsBegin(), 
-			 end = frag_list.getBase().getElementsEnd(); it != end; ++it)
-		if (containsMolecularGraph(molgraph, **it, atoms, bonds))
-			cont_frag_list.addElement(*it);
+             end = frag_list.getBase().getElementsEnd(); it != end; ++it)
+        if (containsMolecularGraph(molgraph, **it, atoms, bonds))
+            cont_frag_list.addElement(*it);
 }
 
 void Chem::getContainingFragments(const MolecularGraph& molgraph, const FragmentList& frag_list, 
-								  FragmentList& cont_frag_list, bool append, bool atoms, bool bonds)
+                                  FragmentList& cont_frag_list, bool append, bool atoms, bool bonds)
 {
     if (!append)
-		cont_frag_list.clear();
+        cont_frag_list.clear();
 
     for (FragmentList::BaseType::ConstElementIterator it = frag_list.getBase().getElementsBegin(), 
-			 end = frag_list.getBase().getElementsEnd(); it != end; ++it)
-		if (containsMolecularGraph(**it, molgraph , atoms, bonds))
-			cont_frag_list.addElement(*it);
+             end = frag_list.getBase().getElementsEnd(); it != end; ++it)
+        if (containsMolecularGraph(**it, molgraph , atoms, bonds))
+            cont_frag_list.addElement(*it);
 }

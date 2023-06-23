@@ -34,94 +34,94 @@
 
 BOOST_PYTHON_MODULE(_vis)
 {
-	using namespace CDPLPythonVis;
+    using namespace CDPLPythonVis;
 
-	exportSizeSpecification();
-	exportColor();
-	exportPen();
-	exportBrush();
-	exportFont();
-	exportFontMetrics();
-	exportLine2D();
-	exportRectangle2D();
-	exportPointArray2D();
-	exportColorTable();
-	exportGraphicsPrimitive2D();
-	exportView2D();
-	exportRenderer2D();
-	exportStructureView2D();
-	exportReactionView2D();
-	exportLinePrimitive2D();
-	exportPolygonPrimitive2D();
-	exportPolylinePrimitive2D();
-	exportLineSegmentListPrimitive2D();
-	exportPointListPrimitive2D();
-	exportTextLabelPrimitive2D();
-	exportEllipsePrimitive2D();
+    exportSizeSpecification();
+    exportColor();
+    exportPen();
+    exportBrush();
+    exportFont();
+    exportFontMetrics();
+    exportLine2D();
+    exportRectangle2D();
+    exportPointArray2D();
+    exportColorTable();
+    exportGraphicsPrimitive2D();
+    exportView2D();
+    exportRenderer2D();
+    exportStructureView2D();
+    exportReactionView2D();
+    exportLinePrimitive2D();
+    exportPolygonPrimitive2D();
+    exportPolylinePrimitive2D();
+    exportLineSegmentListPrimitive2D();
+    exportPointListPrimitive2D();
+    exportTextLabelPrimitive2D();
+    exportEllipsePrimitive2D();
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
-	exportPNGMolecularGraphWriter();
-	exportPNGReactionWriter();
-	exportPNGMolecularGraphOutputHandler();
-	exportPNGReactionOutputHandler();
+    exportPNGMolecularGraphWriter();
+    exportPNGReactionWriter();
+    exportPNGMolecularGraphOutputHandler();
+    exportPNGReactionOutputHandler();
 
 #endif // HAVE_CAIRO_PNG_SUPPORT
 
 #ifdef HAVE_CAIRO_PDF_SUPPORT
 
-	exportPDFMolecularGraphWriter();
-	exportPDFReactionWriter();
-	exportPDFMolecularGraphOutputHandler();
-	exportPDFReactionOutputHandler();
+    exportPDFMolecularGraphWriter();
+    exportPDFReactionWriter();
+    exportPDFMolecularGraphOutputHandler();
+    exportPDFReactionOutputHandler();
 
 #endif // HAVE_CAIRO_PDF_SUPPORT
 
 #ifdef HAVE_CAIRO_PS_SUPPORT
 
-	exportPSMolecularGraphWriter();
-	exportPSReactionWriter();
-	exportPSMolecularGraphOutputHandler();
-	exportPSReactionOutputHandler();
+    exportPSMolecularGraphWriter();
+    exportPSReactionWriter();
+    exportPSMolecularGraphOutputHandler();
+    exportPSReactionOutputHandler();
 
 #endif // HAVE_CAIRO_PS_SUPPORT
 
 #ifdef HAVE_CAIRO_SVG_SUPPORT
 
-	exportSVGMolecularGraphWriter();
-	exportSVGReactionWriter();
-	exportSVGMolecularGraphOutputHandler();
-	exportSVGReactionOutputHandler();
+    exportSVGMolecularGraphWriter();
+    exportSVGReactionWriter();
+    exportSVGMolecularGraphOutputHandler();
+    exportSVGReactionOutputHandler();
 
 #endif // HAVE_CAIRO_SVG_SUPPORT
 
-	exportMolecularGraphFunctions();
-	exportAtomFunctions();
-	exportBondFunctions();
-	exportReactionFunctions();
-	exportControlParameterFunctions();
+    exportMolecularGraphFunctions();
+    exportAtomFunctions();
+    exportBondFunctions();
+    exportReactionFunctions();
+    exportControlParameterFunctions();
 
-	exportMolecularGraphProperties();
-	exportAtomProperties();
-	exportBondProperties();
-	exportReactionProperties();
-	exportMolecularGraphPropertyDefaults();
-	exportAtomPropertyDefaults();
-	exportBondPropertyDefaults();
-	exportReactionPropertyDefaults();
+    exportMolecularGraphProperties();
+    exportAtomProperties();
+    exportBondProperties();
+    exportReactionProperties();
+    exportMolecularGraphPropertyDefaults();
+    exportAtomPropertyDefaults();
+    exportBondPropertyDefaults();
+    exportReactionPropertyDefaults();
 
-	exportControlParameters();
-	exportControlParameterDefaults();
+    exportControlParameters();
+    exportControlParameterDefaults();
 
-	exportDataFormats();
-	exportAtomColorTables();
+    exportDataFormats();
+    exportAtomColorTables();
 
-	exportAlignments();
-	exportArrowStyles();
-	exportLayoutDirections();
-	exportLayoutStyles();
-	exportSizeAdjustments();
+    exportAlignments();
+    exportArrowStyles();
+    exportLayoutDirections();
+    exportLayoutStyles();
+    exportSizeAdjustments();
 
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    registerToPythonConverters();
+    registerFromPythonConverters();
 }

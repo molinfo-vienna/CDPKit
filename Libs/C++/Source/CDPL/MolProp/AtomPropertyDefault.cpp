@@ -32,16 +32,16 @@
 namespace CDPL
 {
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		namespace AtomPropertyDefault
-		{
+        namespace AtomPropertyDefault
+        {
 
-			const unsigned int H_BOND_DONOR_TYPE    = HBondDonorAtomType::UNDEF;
-			const unsigned int H_BOND_ACCEPTOR_TYPE = HBondAcceptorAtomType::UNDEF;
-		}
+            const unsigned int H_BOND_DONOR_TYPE    = HBondDonorAtomType::UNDEF;
+            const unsigned int H_BOND_ACCEPTOR_TYPE = HBondAcceptorAtomType::UNDEF;
+        }
 
-		void initAtomPropertyDefaults() {}
-	}
+        void initAtomPropertyDefaults() {}
+    }
 }

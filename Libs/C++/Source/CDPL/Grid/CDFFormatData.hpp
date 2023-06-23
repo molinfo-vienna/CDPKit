@@ -36,27 +36,27 @@ namespace CDPL
     namespace Grid
     {
 
-		namespace CDF
-		{
-			
-			using namespace Internal::CDF;
+        namespace CDF
+        {
+            
+            using namespace Internal::CDF;
 
-			typedef std::uint32_t UIntType;
-			typedef std::uint8_t  BoolType;
+            typedef std::uint32_t UIntType;
+            typedef std::uint8_t  BoolType;
 
-			const std::uint8_t DREGULAR_GRID_RECORD_ID     = 4;
-			const std::uint8_t DREGULAR_GRID_SET_RECORD_ID = 5;
+            const std::uint8_t DREGULAR_GRID_RECORD_ID     = 4;
+            const std::uint8_t DREGULAR_GRID_SET_RECORD_ID = 5;
 
-			const std::uint8_t CURR_FORMAT_VERSION  = 1;
+            const std::uint8_t CURR_FORMAT_VERSION  = 1;
 
-			const unsigned int EXTENDED_PROP_LIST  = 31;
+            const unsigned int EXTENDED_PROP_LIST  = 31;
 
-			namespace AttributedGridProperty
-			{
-				
-				const unsigned int NAME            = 1; 
-			}
-		}
+            namespace AttributedGridProperty
+            {
+                
+                const unsigned int NAME            = 1; 
+            }
+        }
     }
 }
 

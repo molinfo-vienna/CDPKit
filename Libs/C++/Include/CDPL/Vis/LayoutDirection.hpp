@@ -33,26 +33,26 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the main direction of object layouts.
-		 */
-		namespace LayoutDirection
-		{
+        /**
+         * \brief Provides constants that are used to specify the main direction of object layouts.
+         */
+        namespace LayoutDirection
+        {
 
-			/**
-			 * \brief Specifies a horizontal layout (parallel to the x-axis).
-			 */
-			const unsigned int HORIZONTAL = 0;
+            /**
+             * \brief Specifies a horizontal layout (parallel to the x-axis).
+             */
+            const unsigned int HORIZONTAL = 0;
 
-			/**
-			 * \brief Specifies a vertical layout (parallel to the y-axis).
-			 */
-			const unsigned int VERTICAL   = 1;
-		}
-	}
+            /**
+             * \brief Specifies a vertical layout (parallel to the y-axis).
+             */
+            const unsigned int VERTICAL   = 1;
+        }
+    }
 }
 
 #endif // CDPL_VIS_LAYOUTDIRECTION_HPP

@@ -35,242 +35,242 @@ using namespace CDPL;
 
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
-	samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(true), 
-	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), timeout(60 * 60 * 1000), 
-	forceFieldTypeSys(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S_RTOR), strictParam(true), 
-	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
-	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(2000),
-	convCheckCycleSize(100), mcRotorBondCountThresh(10)
+    samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(true), 
+    enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
+    fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), timeout(60 * 60 * 1000), 
+    forceFieldTypeSys(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S_RTOR), strictParam(true), 
+    dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
+    distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
+    maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(2000),
+    convCheckCycleSize(100), mcRotorBondCountThresh(10)
 {}
 
 void ConfGen::ConformerGeneratorSettings::setSamplingMode(unsigned int mode)
 {
-	samplingMode = mode;
+    samplingMode = mode;
 }
 
 unsigned int ConfGen::ConformerGeneratorSettings::getSamplingMode() const
 {
-	return samplingMode;
+    return samplingMode;
 }
 
 void ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens(bool sample)
 {
-	sampleHetAtomHs = sample;
+    sampleHetAtomHs = sample;
 }
-				
+                
 bool ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens() const
 {
-	return sampleHetAtomHs;
+    return sampleHetAtomHs;
 }
 
 void ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges(bool sample)
 {
-	sampleTolRanges = sample;
+    sampleTolRanges = sample;
 }
-				
+                
 bool ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges() const
 {
-	return sampleTolRanges;
+    return sampleTolRanges;
 }
 
 void ConfGen::ConformerGeneratorSettings::enumerateRings(bool enumerate)
 {
-	enumRings = enumerate;
+    enumRings = enumerate;
 }
 
 bool ConfGen::ConformerGeneratorSettings::enumerateRings() const
 {
-	return enumRings;
+    return enumRings;
 }
 
 void ConfGen::ConformerGeneratorSettings::setNitrogenEnumerationMode(unsigned int mode)
 {
-	nitrogenEnumMode = mode;
+    nitrogenEnumMode = mode;
 }
 
 unsigned int ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode() const
 {
-	return nitrogenEnumMode;
+    return nitrogenEnumMode;
 }
 
 void ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch(bool generate)
 {
-	fromScratch = generate;
+    fromScratch = generate;
 }
-	
+    
 bool ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch() const
 {
-	return fromScratch;
+    return fromScratch;
 }
 
 void ConfGen::ConformerGeneratorSettings::includeInputCoordinates(bool include)
 {
-	incInputCoords = include;
+    incInputCoords = include;
 }
-	
+    
 bool ConfGen::ConformerGeneratorSettings::includeInputCoordinates() const
 {
-	return incInputCoords;
+    return incInputCoords;
 }
 
 void ConfGen::ConformerGeneratorSettings::setEnergyWindow(double win_size)
 {
-	eWindow = win_size;
+    eWindow = win_size;
 }
 
 double ConfGen::ConformerGeneratorSettings::getEnergyWindow() const
 {
-	return eWindow;
+    return eWindow;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMaxPoolSize(std::size_t max_size)
 {
-	maxPoolSize = max_size;
+    maxPoolSize = max_size;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getMaxPoolSize() const
 {
-	return maxPoolSize;
+    return maxPoolSize;
 }
 
 void ConfGen::ConformerGeneratorSettings::setTimeout(std::size_t mil_secs)
 {
-	timeout = mil_secs;
+    timeout = mil_secs;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getTimeout() const
 {
-	return timeout;
+    return timeout;
 }
 
 void ConfGen::ConformerGeneratorSettings::setForceFieldTypeSystematic(unsigned int type)
 {
-	forceFieldTypeSys = type;
+    forceFieldTypeSys = type;
 }
-	    
+        
 unsigned int ConfGen::ConformerGeneratorSettings::getForceFieldTypeSystematic() const
 {
-	return forceFieldTypeSys;
+    return forceFieldTypeSys;
 }
 
 void ConfGen::ConformerGeneratorSettings::setForceFieldTypeStochastic(unsigned int type)
 {
-	forceFieldTypeStoch = type;
+    forceFieldTypeStoch = type;
 }
-	    
+        
 unsigned int ConfGen::ConformerGeneratorSettings::getForceFieldTypeStochastic() const
 {
-	return forceFieldTypeStoch;
+    return forceFieldTypeStoch;
 }
-			
+            
 void ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization(bool strict)
 {
-	strictParam = strict;
+    strictParam = strict;
 }
 
 bool ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization() const
 {
-	return strictParam;
+    return strictParam;
 }
-			
+            
 void ConfGen::ConformerGeneratorSettings::setDielectricConstant(double de_const)
 {
-	dielectricConst = de_const;
+    dielectricConst = de_const;
 }
 
 double ConfGen::ConformerGeneratorSettings::getDielectricConstant() const
 {
-	return dielectricConst;
+    return dielectricConst;
 }
 
 void ConfGen::ConformerGeneratorSettings::setDistanceExponent(double exponent)
 {
-	distExponent = exponent;
+    distExponent = exponent;
 }
 
 double ConfGen::ConformerGeneratorSettings::getDistanceExponent() const
 {
-	return distExponent;
+    return distExponent;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers(std::size_t max_num)
 {
-	maxNumOutputConfs = max_num;
+    maxNumOutputConfs = max_num;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers() const
 {
-	return maxNumOutputConfs;
+    return maxNumOutputConfs;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMinRMSD(double min_rmsd)
 {
-	minRMSD = min_rmsd;
+    minRMSD = min_rmsd;
 }
 
 double ConfGen::ConformerGeneratorSettings::getMinRMSD() const
 {
-	return minRMSD;
+    return minRMSD;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)
 {
-	maxNumRefIters = max_iter;
+    maxNumRefIters = max_iter;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations() const
 {
-	return maxNumRefIters;
+    return maxNumRefIters;
 }
 
 void ConfGen::ConformerGeneratorSettings::setRefinementTolerance(double tol)
 {
-	refTolerance = tol;
+    refTolerance = tol;
 }
 
 double ConfGen::ConformerGeneratorSettings::getRefinementTolerance() const
 {
-	return refTolerance;
+    return refTolerance;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers(std::size_t max_num)
 {
-	maxNumSampledConfs = max_num;
+    maxNumSampledConfs = max_num;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers() const
 {
-	return maxNumSampledConfs;
+    return maxNumSampledConfs;
 }
 
 void ConfGen::ConformerGeneratorSettings::setConvergenceCheckCycleSize(std::size_t size)
 {
-	convCheckCycleSize = size;
+    convCheckCycleSize = size;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getConvergenceCheckCycleSize() const
 {
-	return convCheckCycleSize;
+    return convCheckCycleSize;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold(std::size_t min_count)
 {
-	mcRotorBondCountThresh = min_count;
+    mcRotorBondCountThresh = min_count;
 }
 
 std::size_t ConfGen::ConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold() const
 {
-	return mcRotorBondCountThresh;
+    return mcRotorBondCountThresh;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings()
 {
-	return fragBuildSettings;
+    return fragBuildSettings;
 }
 
 const ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings() const
 {
-	return fragBuildSettings;
+    return fragBuildSettings;
 }

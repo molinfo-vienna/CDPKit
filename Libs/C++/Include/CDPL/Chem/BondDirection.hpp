@@ -33,52 +33,52 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants for the specification of directional bonds in <em>Daylight SMILES</em> and
-		 *        \e SMARTS strings.
-		 *
-		 * Directional bonds in <em>Daylight SMILES</em> or \e SMARTS strings are used to specify the configuration 
-		 * around a double bond by indicating the relative direction of the bonds to its substituent atoms. They have only
-		 * a meaning when they occur on both sides of the double bond (see [\ref SMILES, \ref SMARTS]). 
-		 */
-		namespace BondDirection
-		{
+        /**
+         * \brief Provides constants for the specification of directional bonds in <em>Daylight SMILES</em> and
+         *        \e SMARTS strings.
+         *
+         * Directional bonds in <em>Daylight SMILES</em> or \e SMARTS strings are used to specify the configuration 
+         * around a double bond by indicating the relative direction of the bonds to its substituent atoms. They have only
+         * a meaning when they occur on both sides of the double bond (see [\ref SMILES, \ref SMARTS]). 
+         */
+        namespace BondDirection
+        {
 
-			/**
-			 * \brief Specifies that the bond has no associated direction.
-			 */
-			const unsigned int NONE        = 0x0; 
+            /**
+             * \brief Specifies that the bond has no associated direction.
+             */
+            const unsigned int NONE        = 0x0; 
 
-			/**
-			 * \brief Specifies that the bond is directed upwards.
-			 *
-			 * In \e SMILES and \e SMARTS strings \e up bonds are specified by a slash '/'.
-			 */
-			const unsigned int UP          = 0x1; 
+            /**
+             * \brief Specifies that the bond is directed upwards.
+             *
+             * In \e SMILES and \e SMARTS strings \e up bonds are specified by a slash '/'.
+             */
+            const unsigned int UP          = 0x1; 
 
-			/**
-			 * \brief Specifies that the bond is directed downwards.
-			 *
-			 * In \e SMILES and \e SMARTS strings \e down bonds are specified by a backslash '\'.
-			 */
-			const unsigned int DOWN        = 0x2; 
+            /**
+             * \brief Specifies that the bond is directed downwards.
+             *
+             * In \e SMILES and \e SMARTS strings \e down bonds are specified by a backslash '\'.
+             */
+            const unsigned int DOWN        = 0x2; 
 
-			/**
-			 * \brief In a substructure search query pattern this flag indicates that the specified query bond direction is not mandatory and
-			 *        that target bonds with an unspecified direction shall also be considered as a match.
-			 *
-			 * The flag only has a meaning for directional bonds in \e SMARTS patterns where
-			 * - its resulting bitwise OR combination with BondDirection::UP specifies that a matching target bond is required to have an
-			 *   <em>upward or unspecified</em> direction 
-			 * - and its combination with BondDirection::DOWN specifies that a target bond must have a
-			 *   <em>downward or unspecified</em> direction to be considered as a match.
-			 */
-			const unsigned int UNSPECIFIED = 0x4; 
-		}
-	}
+            /**
+             * \brief In a substructure search query pattern this flag indicates that the specified query bond direction is not mandatory and
+             *        that target bonds with an unspecified direction shall also be considered as a match.
+             *
+             * The flag only has a meaning for directional bonds in \e SMARTS patterns where
+             * - its resulting bitwise OR combination with BondDirection::UP specifies that a matching target bond is required to have an
+             *   <em>upward or unspecified</em> direction 
+             * - and its combination with BondDirection::DOWN specifies that a target bond must have a
+             *   <em>downward or unspecified</em> direction to be considered as a match.
+             */
+            const unsigned int UNSPECIFIED = 0x4; 
+        }
+    }
 }
 
 #endif // CDPL_CHEM_BONDDIRECTION_HPP

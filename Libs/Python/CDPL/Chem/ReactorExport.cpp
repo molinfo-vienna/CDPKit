@@ -34,22 +34,22 @@
 
 void CDPLPythonChem::exportReactor()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	Chem::Reactor::ReactionSite& (Chem::Reactor::*getReactionSiteFunc)(std::size_t) = &Chem::Reactor::getReactionSite;
+    Chem::Reactor::ReactionSite& (Chem::Reactor::*getReactionSiteFunc)(std::size_t) = &Chem::Reactor::getReactionSite;
 
-	python::class_<Chem::Reactor, boost::noncopyable>("Reactor", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("rxn_pattern")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Reactor>())	
-		.def("setReactionPattern", &Chem::Reactor::setReactionPattern, (python::arg("self"), python::arg("rxn_pattern")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("findReactionSites", &Chem::Reactor::findReactionSites, (python::arg("self"), python::arg("rxn_target")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("getNumReactionSites", &Chem::Reactor::getNumReactionSites, python::arg("self"))
-		.def("getReactionSite", getReactionSiteFunc, (python::arg("self"), python::arg("idx")), 
-			 python::return_internal_reference<1>())
-		.def("performReaction", &Chem::Reactor::performReaction, (python::arg("self"), python::arg("rxn_site")));
+    python::class_<Chem::Reactor, boost::noncopyable>("Reactor", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("rxn_pattern")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Reactor>())    
+        .def("setReactionPattern", &Chem::Reactor::setReactionPattern, (python::arg("self"), python::arg("rxn_pattern")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("findReactionSites", &Chem::Reactor::findReactionSites, (python::arg("self"), python::arg("rxn_target")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("getNumReactionSites", &Chem::Reactor::getNumReactionSites, python::arg("self"))
+        .def("getReactionSite", getReactionSiteFunc, (python::arg("self"), python::arg("idx")), 
+             python::return_internal_reference<1>())
+        .def("performReaction", &Chem::Reactor::performReaction, (python::arg("self"), python::arg("rxn_site")));
 }

@@ -38,10 +38,10 @@ void CDPLPythonChem::exportKekuleStructureCalculator()
     using namespace CDPL;
 
     python::class_<Chem::KekuleStructureCalculator, boost::noncopyable>("KekuleStructureCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("orders"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::KekuleStructureCalculator>())	
-		.def("calculate", &Chem::KekuleStructureCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("orders")));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::STArray&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("orders"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::KekuleStructureCalculator>())    
+        .def("calculate", &Chem::KekuleStructureCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("orders")));
 }

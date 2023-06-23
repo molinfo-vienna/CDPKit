@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief A handler for the output of molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
-		 *        [\ref PDB] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<PDBMolecularGraphWriter, DataFormat::PDB> PDBMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em>
+         *        [\ref PDB] format.
+         */
+        typedef Util::DefaultDataOutputHandler<PDBMolecularGraphWriter, DataFormat::PDB> PDBMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBMOLECULARGRAPHOUTPUTHANDLER_HPP

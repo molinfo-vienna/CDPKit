@@ -37,19 +37,19 @@ using namespace CDPL;
 
 ConfGen::CFLFragmentLibraryEntryReader::CFLFragmentLibraryEntryReader()
 {
-	strictErrorChecking(true);
+    strictErrorChecking(true);
 }
 
 bool ConfGen::CFLFragmentLibraryEntryReader::hasMoreData(std::istream& is)
 {
-	CDF::Header header;
+    CDF::Header header;
 
-	return skipToRecord(is, header, CDF::FRAGLIB_DATA_RECORD_ID, true, entryBuffer);
+    return skipToRecord(is, header, CDF::FRAGLIB_DATA_RECORD_ID, true, entryBuffer);
 }
 
 bool ConfGen::CFLFragmentLibraryEntryReader::skip(std::istream& is)
 {
-	return skipNextRecord(is, CDF::FRAGLIB_DATA_RECORD_ID, entryBuffer);
+    return skipNextRecord(is, CDF::FRAGLIB_DATA_RECORD_ID, entryBuffer);
 }
 
 bool ConfGen::CFLFragmentLibraryEntryReader::read(std::istream& is, FragmentLibraryEntry& entry)
@@ -57,44 +57,44 @@ bool ConfGen::CFLFragmentLibraryEntryReader::read(std::istream& is, FragmentLibr
     CDF::Header header;
 
     if (!skipToRecord(is, header, CDF::FRAGLIB_DATA_RECORD_ID, false, entryBuffer))
-		return false;
+        return false;
 
     readData(is, header.recordDataLength, entryBuffer);
 
-	std::uint64_t hash_code;
-	CDF::SizeType num_confs;
-	std::string smiles;
+    std::uint64_t hash_code;
+    CDF::SizeType num_confs;
+    std::string smiles;
 
     entryBuffer.setIOPointer(0);
     entryBuffer.getInt(hash_code);
     entryBuffer.getInt(num_confs);
 
-	getString(smiles, entryBuffer);
+    getString(smiles, entryBuffer);
 
-	entry.setHashCode(hash_code);
-	entry.setSMILES(smiles);
-	entry.clearConformers();
+    entry.setHashCode(hash_code);
+    entry.setSMILES(smiles);
+    entry.clearConformers();
 
-	for (CDF::SizeType i = 0; i < num_confs; i++) {
-		ConformerData::SharedPointer conf_data(new ConformerData());
-		CDF::SizeType num_coords;
-		float tmp;
+    for (CDF::SizeType i = 0; i < num_confs; i++) {
+        ConformerData::SharedPointer conf_data(new ConformerData());
+        CDF::SizeType num_coords;
+        float tmp;
 
-		entryBuffer.getInt(num_coords);
-		entryBuffer.getFloat(tmp);
+        entryBuffer.getInt(num_coords);
+        entryBuffer.getFloat(tmp);
 
-		conf_data->resize(num_coords);
-		conf_data->setEnergy(tmp);
+        conf_data->resize(num_coords);
+        conf_data->setEnergy(tmp);
 
-		for (CDF::SizeType j = 0; j < num_coords; j++) {
-			for (std::size_t k = 0; k < 3; k++) {
-				entryBuffer.getFloat(tmp);
+        for (CDF::SizeType j = 0; j < num_coords; j++) {
+            for (std::size_t k = 0; k < 3; k++) {
+                entryBuffer.getFloat(tmp);
                 (*conf_data)[j][k] = tmp;
-			}
-		}
+            }
+        }
 
-		entry.addConformer(conf_data);
-	}
+        entry.addConformer(conf_data);
+    }
 
     return true;
 }

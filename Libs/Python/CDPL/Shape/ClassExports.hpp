@@ -29,30 +29,30 @@
 namespace CDPLPythonShape
 {
 
-	void exportGaussianShape();
-	void exportGaussianShapeSet();
-	
-	void exportGaussianShapeGenerator();
+    void exportGaussianShape();
+    void exportGaussianShapeSet();
+    
+    void exportGaussianShapeGenerator();
 
-	void exportGaussianShapeFunction();
+    void exportGaussianShapeFunction();
 
-	void exportGaussianShapeOverlapFunction();
-	void exportExactGaussianShapeOverlapFunction();
-	void exportFastGaussianShapeOverlapFunction();
+    void exportGaussianShapeOverlapFunction();
+    void exportExactGaussianShapeOverlapFunction();
+    void exportFastGaussianShapeOverlapFunction();
 
-	void exportAlignmentResult();
-	void exportScoringFunctors();
+    void exportAlignmentResult();
+    void exportScoringFunctors();
 
-	void exportScreeningSettings();
-	void exportScreeningProcessor();
+    void exportScreeningSettings();
+    void exportScreeningProcessor();
 
-	void exportGaussianShapeAlignmentStartGenerator();
-	void exportPrincipalAxesAlignmentStartGenerator();
-	void exportGaussianShapeFunctionAlignment();
-	void exportGaussianShapeAlignment();
-	void exportFastGaussianShapeAlignment();
+    void exportGaussianShapeAlignmentStartGenerator();
+    void exportPrincipalAxesAlignmentStartGenerator();
+    void exportGaussianShapeFunctionAlignment();
+    void exportGaussianShapeAlignment();
+    void exportFastGaussianShapeAlignment();
 
-	void exportFunctionWrappers();
+    void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP

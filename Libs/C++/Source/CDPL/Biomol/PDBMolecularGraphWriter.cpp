@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Biomol::PDBMolecularGraphWriter::PDBMolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new PDBDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new PDBDataWriter(*this)) {}
 
 Biomol::PDBMolecularGraphWriter::~PDBMolecularGraphWriter() {}
 
 Base::DataWriter<Chem::MolecularGraph>& Biomol::PDBMolecularGraphWriter::write(const Chem::MolecularGraph& molgraph)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writePDBFileRecord(output, molgraph);
+    try {
+        state = writer->writePDBFileRecord(output, molgraph);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PDBMolecularGraphWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PDBMolecularGraphWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Biomol::PDBMolecularGraphWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Biomol::PDBMolecularGraphWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

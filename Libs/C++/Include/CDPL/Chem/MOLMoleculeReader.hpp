@@ -38,91 +38,91 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MDLDataReader;
-		class Molecule;
+        class MDLDataReader;
+        class Molecule;
 
-		/**
-		 * \brief A reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
-		 *
-		 * \c %MOLMoleculeReader supports the following control-parameters:
-		 *
-		 * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-		 *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-		 *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MULTI_CONF_IMPORT</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to check for and import multi-conformer molecules</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MULTI_CONF_INPUT_PROCESSOR</td>
-		 *   <td align="center">pointer to a Chem::DefaultMultiConfMoleculeInputProcessor instance</td>
-		 *   <td>Specifies an instance of Chem::MultiConfMoleculeInputProcessor that implements the logic of
-		 *       multi-conformer molecule detection and conformational data processing</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_IGNORE_PARITY</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether the stereo parity of atoms shall be ignored</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRIM_STRINGS</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to remove leading and trailing whitespace from string values</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_TRIM_LINES</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether to remove leading and trailing whitespace from data lines</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::MDL_IGNORE_LINE_LENGTH_LIMIT</td>
-		 *   <td align="center">\c true</td>
-		 *   <td>Specifies whether to check if data lines exceed the maximum allowed line length</td>
-		 *  </tr>
-		 * </table>
-		 */
-		class CDPL_CHEM_API MOLMoleculeReader : public Util::StreamDataReader<Molecule, MOLMoleculeReader>
-		{
+        /**
+         * \brief A reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+         *
+         * \c %MOLMoleculeReader supports the following control-parameters:
+         *
+         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
+         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
+         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MULTI_CONF_IMPORT</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to check for and import multi-conformer molecules</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MULTI_CONF_INPUT_PROCESSOR</td>
+         *   <td align="center">pointer to a Chem::DefaultMultiConfMoleculeInputProcessor instance</td>
+         *   <td>Specifies an instance of Chem::MultiConfMoleculeInputProcessor that implements the logic of
+         *       multi-conformer molecule detection and conformational data processing</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_IGNORE_PARITY</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether the stereo parity of atoms shall be ignored</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRIM_STRINGS</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to remove leading and trailing whitespace from string values</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_TRIM_LINES</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether to remove leading and trailing whitespace from data lines</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::MDL_IGNORE_LINE_LENGTH_LIMIT</td>
+         *   <td align="center">\c true</td>
+         *   <td>Specifies whether to check if data lines exceed the maximum allowed line length</td>
+         *  </tr>
+         * </table>
+         */
+        class CDPL_CHEM_API MOLMoleculeReader : public Util::StreamDataReader<Molecule, MOLMoleculeReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %MOLMoleculeReader instance that will read the molecule data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			MOLMoleculeReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %MOLMoleculeReader instance that will read the molecule data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            MOLMoleculeReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~MOLMoleculeReader();
+            /**
+             * \brief Destructor.
+             */
+            ~MOLMoleculeReader();
 
-		private:
-			friend class Util::StreamDataReader<Molecule, MOLMoleculeReader>;
+        private:
+            friend class Util::StreamDataReader<Molecule, MOLMoleculeReader>;
 
-			MOLMoleculeReader(const MOLMoleculeReader&);
+            MOLMoleculeReader(const MOLMoleculeReader&);
 
-			MOLMoleculeReader& operator=(const MOLMoleculeReader&);
+            MOLMoleculeReader& operator=(const MOLMoleculeReader&);
 
-			bool readData(std::istream&, Molecule&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Molecule&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<MDLDataReader> MDLDataReaderPtr;
+            typedef std::auto_ptr<MDLDataReader> MDLDataReaderPtr;
 
-			MDLDataReaderPtr reader;
-		};
-	}
+            MDLDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_MOLMOLECULEREADER_HPP

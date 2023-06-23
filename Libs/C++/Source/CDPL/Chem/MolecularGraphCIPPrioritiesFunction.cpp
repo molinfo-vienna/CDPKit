@@ -39,13 +39,13 @@ using namespace CDPL;
 
 void Chem::calcCIPPriorities(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasCIPPriority, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+    if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasCIPPriority, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
-	Util::STArray priorities;
-	CIPPriorityCalculator calculator(molgraph, priorities);
+    Util::STArray priorities;
+    CIPPriorityCalculator calculator(molgraph, priorities);
 
-	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), priorities.getElementsBegin(), &setCIPPriority);
+    Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), priorities.getElementsBegin(), &setCIPPriority);
 }

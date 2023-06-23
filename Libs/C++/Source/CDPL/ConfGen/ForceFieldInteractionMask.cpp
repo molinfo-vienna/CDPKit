@@ -33,38 +33,38 @@ using namespace CDPL;
 
 
 void ConfGen::ForceFieldInteractionMask::setup(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
-											  std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
-											  std::size_t num_els_ia) 
+                                              std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
+                                              std::size_t num_els_ia) 
 {
-	bondStretching.resize(num_bs_ia);
-	bondStretching.set();
+    bondStretching.resize(num_bs_ia);
+    bondStretching.set();
 
-	angleBending.resize(num_ab_ia);
-	angleBending.set();
+    angleBending.resize(num_ab_ia);
+    angleBending.set();
 
-	stretchBend.resize(num_sb_ia);
-	stretchBend.set();
+    stretchBend.resize(num_sb_ia);
+    stretchBend.set();
 
-	outOfPlaneBending.resize(num_oop_ia);
-	outOfPlaneBending.set();
+    outOfPlaneBending.resize(num_oop_ia);
+    outOfPlaneBending.set();
 
-	torsion.resize(num_tor_ia);
-	torsion.set();
+    torsion.resize(num_tor_ia);
+    torsion.set();
 
-	vanDerWaals.resize(num_vdw_ia);
-	vanDerWaals.set();
+    vanDerWaals.resize(num_vdw_ia);
+    vanDerWaals.set();
 
-	electrostatic.resize(num_els_ia);
-	electrostatic.set();
+    electrostatic.resize(num_els_ia);
+    electrostatic.set();
 }
 
 void ConfGen::ForceFieldInteractionMask::setup(const ForceField::MMFF94InteractionData& ia_data)
 {
     setup(ia_data.getBondStretchingInteractions().getSize(),
-		  ia_data.getAngleBendingInteractions().getSize(),
-		  ia_data.getStretchBendInteractions().getSize(),
-		  ia_data.getOutOfPlaneBendingInteractions().getSize(),
-		  ia_data.getTorsionInteractions().getSize(),
-		  ia_data.getVanDerWaalsInteractions().getSize(),
-		  ia_data.getElectrostaticInteractions().getSize());
+          ia_data.getAngleBendingInteractions().getSize(),
+          ia_data.getStretchBendInteractions().getSize(),
+          ia_data.getOutOfPlaneBendingInteractions().getSize(),
+          ia_data.getTorsionInteractions().getSize(),
+          ia_data.getVanDerWaalsInteractions().getSize(),
+          ia_data.getElectrostaticInteractions().getSize());
 }

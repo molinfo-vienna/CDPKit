@@ -41,53 +41,53 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphChainBondCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::CHAIN_BOND_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::CHAIN_BOND_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::CHAIN_BOND_COUNT) == 5);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol, MolecularGraphProperty::RING_BOND_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
-
-//-----
-	
-	TestUtils::checkIndependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol.getAtom(0), AtomProperty::SYMBOL);
-	TestUtils::checkIndependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol.getBond(0), BondProperty::ORDER);
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	Fragment frag(mol);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(frag.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::CHAIN_BOND_COUNT) == 5);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+//-----
 
-	TestUtils::checkDependency(frag, MolecularGraphProperty::CHAIN_BOND_COUNT, frag, MolecularGraphProperty::RING_BOND_COUNT);
-	TestUtils::checkDependency(frag, MolecularGraphProperty::CHAIN_BOND_COUNT, frag, BondContainerProperty::BOND_COUNT);
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::CHAIN_BOND_COUNT) == 5);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol, MolecularGraphProperty::RING_BOND_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
+
+//-----
+    
+    TestUtils::checkIndependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol.getAtom(0), AtomProperty::SYMBOL);
+    TestUtils::checkIndependency(mol, MolecularGraphProperty::CHAIN_BOND_COUNT, mol.getBond(0), BondProperty::ORDER);
+
+//-----
+
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::CHAIN_BOND_COUNT) == 5);
+
+    BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::CHAIN_BOND_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(frag, MolecularGraphProperty::CHAIN_BOND_COUNT, frag, MolecularGraphProperty::RING_BOND_COUNT);
+    TestUtils::checkDependency(frag, MolecularGraphProperty::CHAIN_BOND_COUNT, frag, BondContainerProperty::BOND_COUNT);
 }

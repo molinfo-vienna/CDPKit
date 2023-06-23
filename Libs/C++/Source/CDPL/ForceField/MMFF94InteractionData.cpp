@@ -32,92 +32,92 @@ using namespace CDPL;
 
 const ForceField::MMFF94BondStretchingInteractionData& ForceField::MMFF94InteractionData::getBondStretchingInteractions() const
 {
-	return bondStretchingData;
+    return bondStretchingData;
 }
 
 ForceField::MMFF94BondStretchingInteractionData& ForceField::MMFF94InteractionData::getBondStretchingInteractions()
 {
-	return bondStretchingData;
+    return bondStretchingData;
 }
 
 const ForceField::MMFF94AngleBendingInteractionData& ForceField::MMFF94InteractionData::getAngleBendingInteractions() const
 {
-	return angleBendingData;
+    return angleBendingData;
 }
 
 ForceField::MMFF94AngleBendingInteractionData& ForceField::MMFF94InteractionData::getAngleBendingInteractions()
 {
-	return angleBendingData;
+    return angleBendingData;
 }
 
 const ForceField::MMFF94StretchBendInteractionData& ForceField::MMFF94InteractionData::getStretchBendInteractions() const
 {
-	return stretchBendData;
+    return stretchBendData;
 }
 
 ForceField::MMFF94StretchBendInteractionData& ForceField::MMFF94InteractionData::getStretchBendInteractions()
 {
-	return stretchBendData;
+    return stretchBendData;
 }
 
 const ForceField::MMFF94OutOfPlaneBendingInteractionData& ForceField::MMFF94InteractionData::getOutOfPlaneBendingInteractions() const
 {
-	return outOfPlaneData;
+    return outOfPlaneData;
 }
 
 ForceField::MMFF94OutOfPlaneBendingInteractionData& ForceField::MMFF94InteractionData::getOutOfPlaneBendingInteractions()
 {
-	return outOfPlaneData;
+    return outOfPlaneData;
 }
 
 const ForceField::MMFF94TorsionInteractionData& ForceField::MMFF94InteractionData::getTorsionInteractions() const
 {
-	return torsionData;
+    return torsionData;
 }
 
 ForceField::MMFF94TorsionInteractionData& ForceField::MMFF94InteractionData::getTorsionInteractions()
 {
-	return torsionData;
+    return torsionData;
 }
 
 const ForceField::MMFF94ElectrostaticInteractionData& ForceField::MMFF94InteractionData::getElectrostaticInteractions() const
 {
-	return electrostaticData;
+    return electrostaticData;
 }
 
 ForceField::MMFF94ElectrostaticInteractionData& ForceField::MMFF94InteractionData::getElectrostaticInteractions()
 {
-	return electrostaticData;
+    return electrostaticData;
 }
 
 const ForceField::MMFF94VanDerWaalsInteractionData& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions() const
 {
-	return vanDerWaalsData;
+    return vanDerWaalsData;
 }
 
 ForceField::MMFF94VanDerWaalsInteractionData& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions()
 {
-	return vanDerWaalsData;
+    return vanDerWaalsData;
 }
 
 void ForceField::MMFF94InteractionData::clear()
 {
-	bondStretchingData.clear();
-	angleBendingData.clear();
-	stretchBendData.clear();
-	outOfPlaneData.clear();
-	torsionData.clear();
-	electrostaticData.clear();
-	vanDerWaalsData.clear();
+    bondStretchingData.clear();
+    angleBendingData.clear();
+    stretchBendData.clear();
+    outOfPlaneData.clear();
+    torsionData.clear();
+    electrostaticData.clear();
+    vanDerWaalsData.clear();
 }
 
 void ForceField::MMFF94InteractionData::swap(MMFF94InteractionData& ia_data)
 {
-	bondStretchingData.swap(ia_data.bondStretchingData);
-	angleBendingData.swap(ia_data.angleBendingData);
-	stretchBendData.swap(ia_data.stretchBendData);
-	outOfPlaneData.swap(ia_data.outOfPlaneData);
-	torsionData.swap(ia_data.torsionData);
-	electrostaticData.swap(ia_data.electrostaticData);
-	vanDerWaalsData.swap(ia_data.vanDerWaalsData);
+    bondStretchingData.swap(ia_data.bondStretchingData);
+    angleBendingData.swap(ia_data.angleBendingData);
+    stretchBendData.swap(ia_data.stretchBendData);
+    outOfPlaneData.swap(ia_data.outOfPlaneData);
+    torsionData.swap(ia_data.torsionData);
+    electrostaticData.swap(ia_data.electrostaticData);
+    vanDerWaalsData.swap(ia_data.vanDerWaalsData);
 }

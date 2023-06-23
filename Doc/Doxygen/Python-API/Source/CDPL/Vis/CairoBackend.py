@@ -27,55 +27,55 @@
 #
 class CairoFontMetrics(CDPL.Vis.FontMetrics):
 
-	def __init__(self, cairo_ctxt): pass
+    def __init__(self, cairo_ctxt): pass
 
-	def setFont(self, font): pass
-		
-	def getAscent(self): pass
-	
-	def getDescent(self): pass
-	
-	def getHeight(self): pass
-	
-	def getLeading(self): pass
-	
-	def getWidth(self, string): pass
+    def setFont(self, font): pass
+        
+    def getAscent(self): pass
+    
+    def getDescent(self): pass
+    
+    def getHeight(self): pass
+    
+    def getLeading(self): pass
+    
+    def getWidth(self, string): pass
 
-	def getBounds(self, string, bounds): pass
+    def getBounds(self, string, bounds): pass
 
 ##
 # \brief class CairoRenderer2D.
 #
 class CairoRenderer2D(CDPL.Vis.Renderer2D):
 
-	def __init__(self, cairo_ctxt): pass
+    def __init__(self, cairo_ctxt): pass
 
-	def saveState(self): pass
+    def saveState(self): pass
 
-	def restoreState(self): pass
+    def restoreState(self): pass
 
-	def setTransform(self, xform): pass
+    def setTransform(self, xform): pass
 
-	def transform(self, xform): pass
+    def transform(self, xform): pass
 
-	def setPen(self, pen): pass
+    def setPen(self, pen): pass
 
-	def setBrush(self, brush): pass
+    def setBrush(self, brush): pass
 
-	def setFont(self, font): pass
+    def setFont(self, font): pass
 
-	def drawRectangle(self, x, y, width, height): pass
+    def drawRectangle(self, x, y, width, height): pass
 
-	def drawPolygon(self, points): pass
+    def drawPolygon(self, points): pass
 
-	def drawLine(self, x1, y1, x2, y2): pass
+    def drawLine(self, x1, y1, x2, y2): pass
 
-	def drawPolyline(self, points): pass
+    def drawPolyline(self, points): pass
 
-	def drawLineSegments(self, points): pass
+    def drawLineSegments(self, points): pass
 
-	def drawPoint(self, x, y): pass
+    def drawPoint(self, x, y): pass
 
-	def drawEllipse(self, x, y, width, height): pass
+    def drawEllipse(self, x, y, width, height): pass
 
-	def drawText(self, x, y, txt): pass
+    def drawText(self, x, y, txt): pass

@@ -32,44 +32,44 @@
 namespace
 {
 
-	struct ExceptionMapping {};
+    struct ExceptionMapping {};
 
-	template <typename T>
-	struct ExceptionTranslator
-	{
-	
-		void operator()(const T& ex) const {
-			using namespace boost;
+    template <typename T>
+    struct ExceptionTranslator
+    {
+    
+        void operator()(const T& ex) const {
+            using namespace boost;
 
-			boost::python::object& mapped_ex_type = getMappedExceptionType();
+            boost::python::object& mapped_ex_type = getMappedExceptionType();
 
-			if (mapped_ex_type.ptr() != Py_None) {
-				python::object trans_ex_inst = mapped_ex_type(ex.what());
-			
-				PyErr_SetObject(mapped_ex_type.ptr(), trans_ex_inst.ptr());
+            if (mapped_ex_type.ptr() != Py_None) {
+                python::object trans_ex_inst = mapped_ex_type(ex.what());
+            
+                PyErr_SetObject(mapped_ex_type.ptr(), trans_ex_inst.ptr());
 
-			} else
-				throw ex;
-		}
+            } else
+                throw ex;
+        }
 
-		static boost::python::object& getMappedExceptionType() {
-			static boost::python::object mappedExceptionType;
+        static boost::python::object& getMappedExceptionType() {
+            static boost::python::object mappedExceptionType;
 
-			return mappedExceptionType;
-		}
-	};
+            return mappedExceptionType;
+        }
+    };
 }
 
 
 void CDPLPythonForceField::registerExceptionTranslators()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ExceptionMapping, boost::noncopyable>("_ExceptionMapping", python::no_init)
-		.def_readwrite("Error", ExceptionTranslator<ForceField::Error>::getMappedExceptionType())
-		.def_readwrite("ParameterizationFailed", ExceptionTranslator<ForceField::ParameterizationFailed>::getMappedExceptionType());
+    python::class_<ExceptionMapping, boost::noncopyable>("_ExceptionMapping", python::no_init)
+        .def_readwrite("Error", ExceptionTranslator<ForceField::Error>::getMappedExceptionType())
+        .def_readwrite("ParameterizationFailed", ExceptionTranslator<ForceField::ParameterizationFailed>::getMappedExceptionType());
 
-	python::register_exception_translator<ForceField::Error>(ExceptionTranslator<ForceField::Error>());
-	python::register_exception_translator<ForceField::ParameterizationFailed>(ExceptionTranslator<ForceField::ParameterizationFailed>());
+    python::register_exception_translator<ForceField::Error>(ExceptionTranslator<ForceField::Error>());
+    python::register_exception_translator<ForceField::ParameterizationFailed>(ExceptionTranslator<ForceField::ParameterizationFailed>());
 }

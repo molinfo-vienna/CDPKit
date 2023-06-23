@@ -36,34 +36,34 @@ class QLabel;
 namespace ChOX
 {
 
-	class FontEditWidget : public QWidget
-	{
+    class FontEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		FontEditWidget(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, 
-					   const CDPL::Vis::SizeSpecification*, bool = true, bool = true);
+    public:
+        FontEditWidget(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, 
+                       const CDPL::Vis::SizeSpecification*, bool = true, bool = true);
 
-	signals:
-		void fontChanged();
+    signals:
+        void fontChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void editFont();
+    private slots:
+        void editFont();
 
-	private:
-		void init();
+    private:
+        void init();
 
-		CDPL::Vis::Font&                    font;
-		CDPL::Vis::SizeSpecification&       sizeSpec;
-		const CDPL::Vis::SizeSpecification* parentSizeSpec;
-		QLabel*                             fontLabel;
-		bool                                sizeTypeEditable;
-		bool                                policyEditable;
-	};
+        CDPL::Vis::Font&                    font;
+        CDPL::Vis::SizeSpecification&       sizeSpec;
+        const CDPL::Vis::SizeSpecification* parentSizeSpec;
+        QLabel*                             fontLabel;
+        bool                                sizeTypeEditable;
+        bool                                policyEditable;
+    };
 }
 
 #endif // CHOX_FONTEDITWIDGET_HPP

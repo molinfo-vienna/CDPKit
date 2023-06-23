@@ -36,38 +36,38 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-	}
-	
+        class Atom;
+    }
+    
     namespace GRAIL
     {
 
-		/**
-		 * \brief GeneralizedBellAtomDensity.
-		 */
-		class CDPL_GRAIL_API GeneralizedBellAtomDensity
-		{
+        /**
+         * \brief GeneralizedBellAtomDensity.
+         */
+        class CDPL_GRAIL_API GeneralizedBellAtomDensity
+        {
 
-		  public:
-			static constexpr double DEF_PROBE_RADIUS          = 0.0;
-			static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.0;
+          public:
+            static constexpr double DEF_PROBE_RADIUS          = 0.0;
+            static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.0;
 
-			GeneralizedBellAtomDensity(double probe_radius = DEF_PROBE_RADIUS, double rad_scaling_factor = DEF_RADIUS_SCALING_FACTOR): 
-				probeRadius(probe_radius), radiusScalingFactor(rad_scaling_factor) {}
+            GeneralizedBellAtomDensity(double probe_radius = DEF_PROBE_RADIUS, double rad_scaling_factor = DEF_RADIUS_SCALING_FACTOR): 
+                probeRadius(probe_radius), radiusScalingFactor(rad_scaling_factor) {}
 
-			double getProbeRadius() const;
+            double getProbeRadius() const;
 
-			double getRadiusScalingFactor() const;
+            double getRadiusScalingFactor() const;
 
-			double operator()(const Math::Vector3D& pos, const Math::Vector3D& atom_pos, const Chem::Atom& atom) const;
+            double operator()(const Math::Vector3D& pos, const Math::Vector3D& atom_pos, const Chem::Atom& atom) const;
 
-		  private:
-			double probeRadius;
-			double radiusScalingFactor;
-		};
+          private:
+            double probeRadius;
+            double radiusScalingFactor;
+        };
     }
 }
 

@@ -34,14 +34,14 @@ using namespace CDPL;
 
 void Chem::perceiveHybridizationStates(MolecularGraph& molgraph, bool overwrite)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasHybridizationState(atom))
-			continue;
+        if (!overwrite && hasHybridizationState(atom))
+            continue;
 
-		setHybridizationState(atom, perceiveHybridizationState(atom, molgraph));
-	}
+        setHybridizationState(atom, perceiveHybridizationState(atom, molgraph));
+    }
 }

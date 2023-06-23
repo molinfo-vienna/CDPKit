@@ -32,24 +32,24 @@
 namespace
 {
 
-	CDPL::Chem::BasicBond& assignBasicBond(CDPL::Chem::BasicBond& self, CDPL::Chem::BasicBond& bond)
-	{
-		return self.operator=(bond);
-	}
+    CDPL::Chem::BasicBond& assignBasicBond(CDPL::Chem::BasicBond& self, CDPL::Chem::BasicBond& bond)
+    {
+        return self.operator=(bond);
+    }
 
-	CDPL::Chem::Bond& assignBond(CDPL::Chem::Bond& self, CDPL::Chem::Bond& bond)
-	{
-		return self.operator=(bond);
-	}
+    CDPL::Chem::Bond& assignBond(CDPL::Chem::Bond& self, CDPL::Chem::Bond& bond)
+    {
+        return self.operator=(bond);
+    }
 }
 
 
 void CDPLPythonChem::exportBasicBond()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::BasicBond, python::bases<Chem::Bond>, boost::noncopyable>("BasicBond", python::no_init)
-		.def("assign", &assignBond, (python::arg("self"), python::arg("bond")), python::return_self<>())
-		.def("assign", &assignBasicBond, (python::arg("self"), python::arg("bond")), python::return_self<>());
+    python::class_<Chem::BasicBond, python::bases<Chem::Bond>, boost::noncopyable>("BasicBond", python::no_init)
+        .def("assign", &assignBond, (python::arg("self"), python::arg("bond")), python::return_self<>())
+        .def("assign", &assignBasicBond, (python::arg("self"), python::arg("bond")), python::return_self<>());
 }

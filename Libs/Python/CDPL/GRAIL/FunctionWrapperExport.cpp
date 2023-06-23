@@ -35,7 +35,7 @@ void CDPLPythonGRAIL::exportFunctionWrappers()
 {
     using namespace CDPL;
 
-	CDPLPythonBase::Function1Export<void(CDPL::Pharm::Pharmacophore&)>("VoidPharmacophoreFunctor");
+    CDPLPythonBase::Function1Export<void(CDPL::Pharm::Pharmacophore&)>("VoidPharmacophoreFunctor");
 
     CDPLPythonBase::Function2Export<double(const Math::Vector3D&, const Pharm::Feature&), const Math::Vector3D&, Pharm::Feature&>("DoubleVector3DFeatureFunctor");
 }

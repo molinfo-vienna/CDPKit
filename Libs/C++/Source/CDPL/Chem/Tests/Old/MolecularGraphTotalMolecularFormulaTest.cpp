@@ -41,72 +41,72 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphTotalMolecularFormulaTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "");
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C17H19NO3");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C16H19N2O3");
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
 
-//-----
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C17H19NO3");
 
-	mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C15H19N2O3?");
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+    mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
 
-	BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C14H18N2O3?2");
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C16H19N2O3");
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
-
-//-----
-
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, mol,
-							   MolecularGraphProperty::IMPLICIT_H_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, mol,
-							   AtomContainerProperty::ATOM_COUNT);
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, *it, AtomProperty::TYPE);
+    mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C15H19N2O3?");
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+
+//-----
+
+    mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA) == "C14H18N2O3?2");
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, mol,
+                               MolecularGraphProperty::IMPLICIT_H_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, mol,
+                               AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MOLECULAR_FORMULA, *it, AtomProperty::TYPE);
 }

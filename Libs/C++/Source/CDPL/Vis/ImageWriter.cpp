@@ -46,87 +46,87 @@ Vis::ImageWriter::~ImageWriter() {}
 
 cairo_surface_t* Vis::ImageWriter::renderMolGraphImage(const Chem::MolecularGraph& molgraph)
 {
-	if (!structureView.get()) {
-		structureView.reset(new StructureView2D());
+    if (!structureView.get()) {
+        structureView.reset(new StructureView2D());
 
-		structureView->setParent(&ioBase);
-	}
+        structureView->setParent(&ioBase);
+    }
 
-	structureView->setStructure(&molgraph);
+    structureView->setStructure(&molgraph);
 
-	return renderImage(*structureView);
+    return renderImage(*structureView);
 }
 
 cairo_surface_t* Vis::ImageWriter::renderReactionImage(const Chem::Reaction& rxn)
 {
-	if (!reactionView.get()) {
-		reactionView.reset(new ReactionView2D());
+    if (!reactionView.get()) {
+        reactionView.reset(new ReactionView2D());
 
-		reactionView->setParent(&ioBase);
-	}
+        reactionView->setParent(&ioBase);
+    }
 
-	reactionView->setReaction(&rxn);
+    reactionView->setReaction(&rxn);
 
-	return renderImage(*reactionView);
+    return renderImage(*reactionView);
 }
 
 cairo_surface_t* Vis::ImageWriter::renderImage(View2D& view) const
 {
-	CairoPointer<cairo_surface_t> fm_surf(createCairoSurface());
-	CairoPointer<cairo_t> fm_ctxt(cairo_create(fm_surf.get()));
+    CairoPointer<cairo_surface_t> fm_surf(createCairoSurface());
+    CairoPointer<cairo_t> fm_ctxt(cairo_create(fm_surf.get()));
 
-	if (cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS 
-		|| cairo_status(fm_ctxt.get()) != CAIRO_STATUS_SUCCESS) 
-		return 0;
+    if (cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS 
+        || cairo_status(fm_ctxt.get()) != CAIRO_STATUS_SUCCESS) 
+        return 0;
 
-	CairoFontMetrics font_metrics(fm_ctxt);
+    CairoFontMetrics font_metrics(fm_ctxt);
 
-	view.setFontMetrics(&font_metrics);
+    view.setFontMetrics(&font_metrics);
 
-	Rectangle2D brect;
+    Rectangle2D brect;
 
-	getImageBounds(view, brect);
+    getImageBounds(view, brect);
 
-	if (cairo_status(fm_ctxt.get()) != CAIRO_STATUS_SUCCESS 
-		|| cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS) 
-		return 0;
+    if (cairo_status(fm_ctxt.get()) != CAIRO_STATUS_SUCCESS 
+        || cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS) 
+        return 0;
 
-	CairoPointer<cairo_surface_t> render_surf(createCairoSurface(brect.getWidth(), brect.getHeight()));
-	CairoPointer<cairo_t> render_ctxt(cairo_create(render_surf.get()));
+    CairoPointer<cairo_surface_t> render_surf(createCairoSurface(brect.getWidth(), brect.getHeight()));
+    CairoPointer<cairo_t> render_ctxt(cairo_create(render_surf.get()));
 
-	if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS 
-		|| cairo_surface_status(render_surf.get()) != CAIRO_STATUS_SUCCESS) 
-		return 0;
+    if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS 
+        || cairo_surface_status(render_surf.get()) != CAIRO_STATUS_SUCCESS) 
+        return 0;
 
-	CairoRenderer2D renderer(render_ctxt);  
-	Math::Matrix3D transform = Math::IdentityMatrix<double>(3, 3);
+    CairoRenderer2D renderer(render_ctxt);  
+    Math::Matrix3D transform = Math::IdentityMatrix<double>(3, 3);
 
-	transform(0, 2) = -brect.getMin()(0);
-	transform(1, 2) = -brect.getMin()(1);
+    transform(0, 2) = -brect.getMin()(0);
+    transform(1, 2) = -brect.getMin()(1);
 
-	renderer.transform(transform);
+    renderer.transform(transform);
 
-	view.render(renderer);
+    view.render(renderer);
 
-	if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS 
-		|| cairo_status(fm_ctxt.get()) != CAIRO_STATUS_SUCCESS 
-		|| cairo_surface_status(render_surf.get()) != CAIRO_STATUS_SUCCESS 
-		|| cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS) 
-		return 0;
+    if (cairo_status(render_ctxt.get()) != CAIRO_STATUS_SUCCESS 
+        || cairo_status(fm_ctxt.get()) != CAIRO_STATUS_SUCCESS 
+        || cairo_surface_status(render_surf.get()) != CAIRO_STATUS_SUCCESS 
+        || cairo_surface_status(fm_surf.get()) != CAIRO_STATUS_SUCCESS) 
+        return 0;
 
-	cairo_show_page(render_ctxt.get());
+    cairo_show_page(render_ctxt.get());
 
-	return render_surf.release();
+    return render_surf.release();
 }
 
 void Vis::ImageWriter::getImageBounds(View2D& view, Rectangle2D& brect) const
 {
-	brect = getViewportParameter(ioBase);
+    brect = getViewportParameter(ioBase);
 
-	if (!brect.isDefined()) {
-		view.getModelBounds(brect);
+    if (!brect.isDefined()) {
+        view.getModelBounds(brect);
 
-		if (!brect.isDefined())
-			brect.setBounds(0.0, 0.0, 1.0, 1.0);
-	}
+        if (!brect.isDefined())
+            brect.setBounds(0.0, 0.0, 1.0, 1.0);
+    }
 }

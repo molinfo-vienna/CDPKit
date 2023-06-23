@@ -43,48 +43,48 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class FragmentConformerCache
-		{
-	    
-		public:
-			static const ConformerDataArray* getEntry(std::uint64_t frag_hash);
+        class FragmentConformerCache
+        {
+        
+        public:
+            static const ConformerDataArray* getEntry(std::uint64_t frag_hash);
 
-			static void addEntry(std::uint64_t frag_hash, 
-								 const ConformerDataArray::const_iterator& confs_beg, 
-								 const ConformerDataArray::const_iterator& confs_end);
+            static void addEntry(std::uint64_t frag_hash, 
+                                 const ConformerDataArray::const_iterator& confs_beg, 
+                                 const ConformerDataArray::const_iterator& confs_end);
 
-			static std::mutex& getMutex();
+            static std::mutex& getMutex();
 
-		private:
-			struct Entry
-			{
+        private:
+            struct Entry
+            {
 
-				std::uint64_t       fragHash;
-				ConformerDataArray conformers;
-				Entry*             previous;
-				Entry*             next;
-			};
+                std::uint64_t       fragHash;
+                ConformerDataArray conformers;
+                Entry*             previous;
+                Entry*             next;
+            };
 
-			FragmentConformerCache();
-			FragmentConformerCache(const FragmentConformerCache& cache);
+            FragmentConformerCache();
+            FragmentConformerCache(const FragmentConformerCache& cache);
 
-			~FragmentConformerCache();
+            ~FragmentConformerCache();
 
-			FragmentConformerCache& operator=(const FragmentConformerCache& cache);
+            FragmentConformerCache& operator=(const FragmentConformerCache& cache);
 
-			static FragmentConformerCache& getInstance();
-			static void createInstance();
-	    
-			typedef std::unordered_map<std::uint64_t, Entry*> HashToCacheEntryMap;
+            static FragmentConformerCache& getInstance();
+            static void createInstance();
+        
+            typedef std::unordered_map<std::uint64_t, Entry*> HashToCacheEntryMap;
 
-			static FragmentConformerCache* instance;
-			static std::once_flag          onceFlag;
-			ConformerDataArray             confDataCache;
-			HashToCacheEntryMap            hashToEntryMap;
-			Entry*                         lruListHead;
-			std::size_t                    numEntries;
-			std::mutex                     mutex;
-		};
+            static FragmentConformerCache* instance;
+            static std::once_flag          onceFlag;
+            ConformerDataArray             confDataCache;
+            HashToCacheEntryMap            hashToEntryMap;
+            Entry*                         lruListHead;
+            std::size_t                    numEntries;
+            std::mutex                     mutex;
+        };
     }
 }
 

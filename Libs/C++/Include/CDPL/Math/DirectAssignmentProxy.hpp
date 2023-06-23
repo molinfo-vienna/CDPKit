@@ -31,59 +31,59 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename C>
-		class DirectAssignmentProxy
-		{
+        template <typename C>
+        class DirectAssignmentProxy
+        {
 
-			typedef C LValueType;
-			typedef typename C::ClosureType ClosureType;
+            typedef C LValueType;
+            typedef typename C::ClosureType ClosureType;
 
-		public:
-			explicit DirectAssignmentProxy(LValueType& lval): lvalue(lval) {}
+        public:
+            explicit DirectAssignmentProxy(LValueType& lval): lvalue(lval) {}
 
-			DirectAssignmentProxy(const DirectAssignmentProxy& proxy): lvalue(proxy.lvalue) {}
+            DirectAssignmentProxy(const DirectAssignmentProxy& proxy): lvalue(proxy.lvalue) {}
 
-			template <typename E>
-			ClosureType& operator=(const E& e) {
-				lvalue.assign(e);
-				return lvalue;
-			}
+            template <typename E>
+            ClosureType& operator=(const E& e) {
+                lvalue.assign(e);
+                return lvalue;
+            }
 
-			template <typename E>
-			ClosureType& operator+=(const E& e) {
-				lvalue.plusAssign(e);
-				return lvalue;
-			}
+            template <typename E>
+            ClosureType& operator+=(const E& e) {
+                lvalue.plusAssign(e);
+                return lvalue;
+            }
 
-			template <typename E>
-			ClosureType& operator-=(const E& e) {
-				lvalue.minusAssign(e);
-				return lvalue;
-			}
+            template <typename E>
+            ClosureType& operator-=(const E& e) {
+                lvalue.minusAssign(e);
+                return lvalue;
+            }
 
-		private:
-			DirectAssignmentProxy() {};
+        private:
+            DirectAssignmentProxy() {};
 
-			const DirectAssignmentProxy& operator=(const DirectAssignmentProxy&);
+            const DirectAssignmentProxy& operator=(const DirectAssignmentProxy&);
 
-			ClosureType lvalue;
-		};
+            ClosureType lvalue;
+        };
 
-		template <typename C>
-		DirectAssignmentProxy<const C> direct(const C& lvalue)
-		{
-			return DirectAssignmentProxy<const C>(lvalue);
-		}
+        template <typename C>
+        DirectAssignmentProxy<const C> direct(const C& lvalue)
+        {
+            return DirectAssignmentProxy<const C>(lvalue);
+        }
 
-		template <typename C>
-		DirectAssignmentProxy<C> direct(C& lvalue)
-		{
-			return DirectAssignmentProxy<C>(lvalue);
-		}
-	}
+        template <typename C>
+        DirectAssignmentProxy<C> direct(C& lvalue)
+        {
+            return DirectAssignmentProxy<C>(lvalue);
+        }
+    }
 }
 
 #endif // CDPL_MATH_DIRECTASSIGNMENTPROXY_HPP

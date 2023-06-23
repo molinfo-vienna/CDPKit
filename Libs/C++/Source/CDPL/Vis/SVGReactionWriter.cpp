@@ -39,37 +39,37 @@ using namespace CDPL;
 
 
 Vis::SVGReactionWriter::SVGReactionWriter(std::ostream& os): 
-	ImageWriter(static_cast<const DataIOBase&>(*this)), output(os), state(os.good()) {}
+    ImageWriter(static_cast<const DataIOBase&>(*this)), output(os), state(os.good()) {}
 
 Base::DataWriter<Chem::Reaction>& Vis::SVGReactionWriter::write(const Chem::Reaction& rxn)
 {
-	state = false;
+    state = false;
 
-	CairoPointer<cairo_surface_t> surf(renderReactionImage(rxn));
+    CairoPointer<cairo_surface_t> surf(renderReactionImage(rxn));
 
-	state = surf.get();
+    state = surf.get();
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Vis::SVGReactionWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Vis::SVGReactionWriter::operator!() const
 {
-	return !state;
+    return !state;
 }
 
 cairo_surface_t* Vis::SVGReactionWriter::createCairoSurface(double w, double h) const
 {
-	return cairo_svg_surface_create_for_stream(&streamWriteFunc, &output, w, h);
+    return cairo_svg_surface_create_for_stream(&streamWriteFunc, &output, w, h);
 }
 
 cairo_surface_t* Vis::SVGReactionWriter::createCairoSurface() const
 {
-	return cairo_svg_surface_create_for_stream(&streamWriteFunc, 0, 0.0, 0.0);
+    return cairo_svg_surface_create_for_stream(&streamWriteFunc, 0, 0.0, 0.0);
 }

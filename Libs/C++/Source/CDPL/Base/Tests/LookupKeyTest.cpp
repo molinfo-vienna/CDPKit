@@ -29,86 +29,86 @@
 
 BOOST_AUTO_TEST_CASE(LookupKeyTest)
 {
-	using namespace CDPL;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Base;
 
-	LookupKey key1 = LookupKey::create("key1");
-	LookupKey key2 = LookupKey::create("key2");
+    LookupKey key1 = LookupKey::create("key1");
+    LookupKey key2 = LookupKey::create("key2");
 
-	BOOST_CHECK(key1.getName() == "key1");
-	BOOST_CHECK(key2.getName() == "key2");
+    BOOST_CHECK(key1.getName() == "key1");
+    BOOST_CHECK(key2.getName() == "key2");
 
-	key1.setName("keyX");
+    key1.setName("keyX");
 
-	BOOST_CHECK(key1.getName() == "keyX");
-	BOOST_CHECK(key2.getName() == "key2");
+    BOOST_CHECK(key1.getName() == "keyX");
+    BOOST_CHECK(key2.getName() == "key2");
 
-	key2.setName("keyY");
+    key2.setName("keyY");
 
-	BOOST_CHECK(key1.getName() == "keyX");
-	BOOST_CHECK(key2.getName() == "keyY");
+    BOOST_CHECK(key1.getName() == "keyX");
+    BOOST_CHECK(key2.getName() == "keyY");
 
-	key2.setName("keyX");
+    key2.setName("keyX");
 
-	BOOST_CHECK(key1.getName() == "keyX");
-	BOOST_CHECK(key2.getName() == "keyX");
+    BOOST_CHECK(key1.getName() == "keyX");
+    BOOST_CHECK(key2.getName() == "keyX");
 
-	LookupKey key3 = LookupKey::create("keyX");
+    LookupKey key3 = LookupKey::create("keyX");
 
-	BOOST_CHECK(key1.getName() == "keyX");
-	BOOST_CHECK(key2.getName() == "keyX");
-	BOOST_CHECK(key3.getName() == "keyX");
+    BOOST_CHECK(key1.getName() == "keyX");
+    BOOST_CHECK(key2.getName() == "keyX");
+    BOOST_CHECK(key3.getName() == "keyX");
 
-	key1.setName("keyZ");
+    key1.setName("keyZ");
 
-	BOOST_CHECK(key1.getName() == "keyZ");
-	BOOST_CHECK(key2.getName() == "keyX");
-	BOOST_CHECK(key3.getName() == "keyX");	
+    BOOST_CHECK(key1.getName() == "keyZ");
+    BOOST_CHECK(key2.getName() == "keyX");
+    BOOST_CHECK(key3.getName() == "keyX");    
 
-	LookupKey key4 = LookupKey::create("");
+    LookupKey key4 = LookupKey::create("");
 
-	BOOST_CHECK(key4.getName() == "");
+    BOOST_CHECK(key4.getName() == "");
 
-	key1.setName("");
+    key1.setName("");
 
-	BOOST_CHECK(key1.getName() == "");
+    BOOST_CHECK(key1.getName() == "");
 
-	// ---------
+    // ---------
 
-	BOOST_CHECK(!(key1 == key2));
-	BOOST_CHECK(key1 != key2);
-	BOOST_CHECK(key1.getID() != key2.getID());
+    BOOST_CHECK(!(key1 == key2));
+    BOOST_CHECK(key1 != key2);
+    BOOST_CHECK(key1.getID() != key2.getID());
 
-	BOOST_CHECK(key1 < key2);
+    BOOST_CHECK(key1 < key2);
 
-	LookupKey key5(key1);
+    LookupKey key5(key1);
 
-	BOOST_CHECK(key5.getName() == key1.getName());
-	BOOST_CHECK(key5.getName() != "key1");
+    BOOST_CHECK(key5.getName() == key1.getName());
+    BOOST_CHECK(key5.getName() != "key1");
 
-	key5.setName("key1");
+    key5.setName("key1");
 
-	BOOST_CHECK(key5.getName() == "key1");
-	BOOST_CHECK(key5.getName() == key1.getName());
+    BOOST_CHECK(key5.getName() == "key1");
+    BOOST_CHECK(key5.getName() == key1.getName());
 
-	BOOST_CHECK(key1 == key5);
-	BOOST_CHECK(!(key1 != key5));
-	BOOST_CHECK(key1.getID() == key5.getID());
-	
-	BOOST_CHECK(!(key2 == key5));
-	BOOST_CHECK(key2 != key5);
-	BOOST_CHECK(key2.getID() != key5.getID());
+    BOOST_CHECK(key1 == key5);
+    BOOST_CHECK(!(key1 != key5));
+    BOOST_CHECK(key1.getID() == key5.getID());
+    
+    BOOST_CHECK(!(key2 == key5));
+    BOOST_CHECK(key2 != key5);
+    BOOST_CHECK(key2.getID() != key5.getID());
 
-	key5 = key2;
-	
-	BOOST_CHECK(key5.getName() == key2.getName());
-	BOOST_CHECK(key5.getName() != key1.getName());
+    key5 = key2;
+    
+    BOOST_CHECK(key5.getName() == key2.getName());
+    BOOST_CHECK(key5.getName() != key1.getName());
 
-	BOOST_CHECK(key2 == key5);
-	BOOST_CHECK(!(key2 != key5));
-	BOOST_CHECK(key2.getID() == key5.getID());
+    BOOST_CHECK(key2 == key5);
+    BOOST_CHECK(!(key2 != key5));
+    BOOST_CHECK(key2.getID() == key5.getID());
 
-	BOOST_CHECK(!(key1 == key5));
-	BOOST_CHECK(key1 != key5);
-	BOOST_CHECK(key1.getID() != key5.getID());
+    BOOST_CHECK(!(key1 == key5));
+    BOOST_CHECK(key1 != key5);
+    BOOST_CHECK(key1.getID() != key5.getID());
 }

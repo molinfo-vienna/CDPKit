@@ -42,55 +42,55 @@ typedef struct _cairo _cairo_t;
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Implements the FontMetrics interface for the \e Cairo rendering backend.
-		 *
-		 * For more information about the <em>Cairo 2D Graphics Library</em> see [\ref CAIRO].
-		 */
-		class CDPL_VIS_API CairoFontMetrics : public FontMetrics
-		{
+        /**
+         * \brief Implements the FontMetrics interface for the \e Cairo rendering backend.
+         *
+         * For more information about the <em>Cairo 2D Graphics Library</em> see [\ref CAIRO].
+         */
+        class CDPL_VIS_API CairoFontMetrics : public FontMetrics
+        {
 
-		public:
-			/**
-			 * \brief Constructs a font metrics object that operates on the \e Cairo drawing context specified by
-			 *        \a cairo_ctxt.
-			 * \param cairo_ctxt The \e Cairo drawing context.
-			 * \throw Base::NullPointerException if \a cairo_ctxt is \e null.
-			 */
-			CairoFontMetrics(const CairoPointer<cairo_t>& cairo_ctxt);
+        public:
+            /**
+             * \brief Constructs a font metrics object that operates on the \e Cairo drawing context specified by
+             *        \a cairo_ctxt.
+             * \param cairo_ctxt The \e Cairo drawing context.
+             * \throw Base::NullPointerException if \a cairo_ctxt is \e null.
+             */
+            CairoFontMetrics(const CairoPointer<cairo_t>& cairo_ctxt);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~CairoFontMetrics();
+            /**
+             * \brief Destructor.
+             */
+            ~CairoFontMetrics();
 
-			void setFont(const Font& font);
+            void setFont(const Font& font);
 
-			double getAscent() const; 
-			double getDescent() const; 
-			double getHeight() const; 
-			double getLeading() const; 
+            double getAscent() const; 
+            double getDescent() const; 
+            double getHeight() const; 
+            double getLeading() const; 
 
-			double getWidth(const std::string& str) const; 
-			double getWidth(char ch) const; 
+            double getWidth(const std::string& str) const; 
+            double getWidth(char ch) const; 
 
-			void getBounds(const std::string& str, Rectangle2D& bounds) const; 
-			void getBounds(char ch, Rectangle2D& bounds) const; 
+            void getBounds(const std::string& str, Rectangle2D& bounds) const; 
+            void getBounds(char ch, Rectangle2D& bounds) const; 
 
-		private:
-			struct CairoExtents;
+        private:
+            struct CairoExtents;
 
-			CairoFontMetrics(const CairoFontMetrics&);
+            CairoFontMetrics(const CairoFontMetrics&);
 
-			CairoFontMetrics& operator=(const CairoFontMetrics&);
+            CairoFontMetrics& operator=(const CairoFontMetrics&);
 
-			CairoPointer<cairo_t>       cairoContext;
-			std::auto_ptr<CairoExtents> cairoExtents;
-		};
-	}
+            CairoPointer<cairo_t>       cairoContext;
+            std::auto_ptr<CairoExtents> cairoExtents;
+        };
+    }
 }
 
 #endif // CDPL_VIS_CAIROFONTMETRICS_HPP

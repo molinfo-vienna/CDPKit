@@ -36,12 +36,12 @@
 #define MAKE_ATOM_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)     \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Atom& atom) \
 {                                                      \
-	return CDPL::Vis::get##FUNC_SUFFIX(atom);          \
+    return CDPL::Vis::get##FUNC_SUFFIX(atom);          \
 }                                                      \
                                                        \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Atom& atom) \
 {                                                      \
-	return CDPL::Vis::has##FUNC_SUFFIX(atom);          \
+    return CDPL::Vis::has##FUNC_SUFFIX(atom);          \
 }
 
 #define EXPORT_ATOM_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                     \
@@ -55,26 +55,26 @@ python::def("set"#FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("atom"), pyt
 namespace
 {
 
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Color&, Color)
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, LabelFont)
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelSize)
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, SecondaryLabelFont)
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, SecondaryLabelSize)
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelMargin)
-	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, RadicalElectronDotSize)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Color&, Color)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, LabelFont)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelSize)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::Font&, SecondaryLabelFont)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, SecondaryLabelSize)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelMargin)
+    MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, RadicalElectronDotSize)
 }
 
 
 void CDPLPythonVis::exportAtomFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	EXPORT_ATOM_FUNCS_INT_REF(Color, color)
-	EXPORT_ATOM_FUNCS_INT_REF(LabelFont, font)
-	EXPORT_ATOM_FUNCS_INT_REF(LabelSize, size)
-	EXPORT_ATOM_FUNCS_INT_REF(SecondaryLabelFont, font)
-	EXPORT_ATOM_FUNCS_INT_REF(SecondaryLabelSize, size)
-	EXPORT_ATOM_FUNCS_INT_REF(LabelMargin, margin)
-	EXPORT_ATOM_FUNCS_INT_REF(RadicalElectronDotSize, size)
+    EXPORT_ATOM_FUNCS_INT_REF(Color, color)
+    EXPORT_ATOM_FUNCS_INT_REF(LabelFont, font)
+    EXPORT_ATOM_FUNCS_INT_REF(LabelSize, size)
+    EXPORT_ATOM_FUNCS_INT_REF(SecondaryLabelFont, font)
+    EXPORT_ATOM_FUNCS_INT_REF(SecondaryLabelSize, size)
+    EXPORT_ATOM_FUNCS_INT_REF(LabelMargin, margin)
+    EXPORT_ATOM_FUNCS_INT_REF(RadicalElectronDotSize, size)
 }

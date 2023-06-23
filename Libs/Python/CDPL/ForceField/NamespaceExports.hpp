@@ -29,13 +29,13 @@
 namespace CDPLPythonForceField
 {
 
-	void exportInteractionTypes();
-	void exportUFFAtomTypes();
-	void exportMMFF94ParameterSets();
+    void exportInteractionTypes();
+    void exportUFFAtomTypes();
+    void exportMMFF94ParameterSets();
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportMolecularGraphProperties();
+    void exportAtomProperties();
+    void exportBondProperties();
+    void exportMolecularGraphProperties();
 }
 
 #endif // CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP

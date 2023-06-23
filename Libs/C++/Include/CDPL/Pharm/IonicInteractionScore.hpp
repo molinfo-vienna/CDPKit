@@ -39,30 +39,30 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief IonicInteractionScore.
-		 */
-		class CDPL_PHARM_API IonicInteractionScore : public FeatureDistanceScore
-		{
+        /**
+         * \brief IonicInteractionScore.
+         */
+        class CDPL_PHARM_API IonicInteractionScore : public FeatureDistanceScore
+        {
 
-		  public:
-			static constexpr double DEF_MIN_DISTANCE = 1.5;
-			static constexpr double DEF_MAX_DISTANCE = 5.5;
+          public:
+            static constexpr double DEF_MIN_DISTANCE = 1.5;
+            static constexpr double DEF_MAX_DISTANCE = 5.5;
 
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %IonicInteractionScore instances.
-			 */
-			typedef std::shared_ptr<IonicInteractionScore> SharedPointer;
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %IonicInteractionScore instances.
+             */
+            typedef std::shared_ptr<IonicInteractionScore> SharedPointer;
 
-			/**
-			 * \brief Constructs a \c %IonicInteractionScore functor with a 
-			 *        minimum ionic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
-			 * \param min_dist The minimum allowed feature pair distance.
-			 * \param max_dist The maximum allowed feature pair distance.
-			 */
-			IonicInteractionScore(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
-				FeatureDistanceScore(min_dist, max_dist) {}
-		};
+            /**
+             * \brief Constructs a \c %IonicInteractionScore functor with a 
+             *        minimum ionic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
+             * \param min_dist The minimum allowed feature pair distance.
+             * \param max_dist The maximum allowed feature pair distance.
+             */
+            IonicInteractionScore(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
+                FeatureDistanceScore(min_dist, max_dist) {}
+        };
     }
 }
 

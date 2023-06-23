@@ -33,12 +33,12 @@
 #define MAKE_CONTROL_PARAM_FUNC_WRAPPERS(TYPE, FUNC_INFIX)                           \
 TYPE get##FUNC_INFIX##ParameterWrapper(CDPL::Base::ControlParameterContainer& cntnr) \
 {                                                                                    \
-	return CDPL::Biomol::get##FUNC_INFIX##Parameter(cntnr);                          \
+    return CDPL::Biomol::get##FUNC_INFIX##Parameter(cntnr);                          \
 }                                                                                    \
                                                                                      \
 bool has##FUNC_INFIX##ParameterWrapper(CDPL::Base::ControlParameterContainer& cntnr) \
 {                                                                                    \
-	return CDPL::Biomol::has##FUNC_INFIX##Parameter(cntnr);                          \
+    return CDPL::Biomol::has##FUNC_INFIX##Parameter(cntnr);                          \
 }
 
 #define EXPORT_CONTROL_PARAM_FUNCS(FUNC_INFIX, ARG_NAME)                                                                          \
@@ -58,56 +58,56 @@ python::def("set"#FUNC_INFIX"Parameter", &Biomol::set##FUNC_INFIX##Parameter, (p
 namespace
 {
 
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CheckLineLength)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Biomol::ResidueDictionary::SharedPointer&, PDBResidueDictionary)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomBondingToNonStdResidues)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomBondingToStdResidues)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictBondOrdersToNonStdResidues)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictBondOrdersToStdResidues)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBIgnoreConectRecords)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBDeduceBondOrdersFromCONECTRecords)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBIgnoreFormalChargeField)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictFormalAtomCharges)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomTypes)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBCalcMissingFormalCharges)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBPerceiveMissingBondOrders)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBEvaluateMASTERRecord)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBTruncateLines)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteFormalCharges)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecords)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecordsForAllBonds)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecordsReflectingBondOrder)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, PDBFormatVersion)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CombineInterferingResidueCoordinates)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CheckLineLength)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Biomol::ResidueDictionary::SharedPointer&, PDBResidueDictionary)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomBondingToNonStdResidues)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomBondingToStdResidues)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictBondOrdersToNonStdResidues)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictBondOrdersToStdResidues)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBIgnoreConectRecords)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBDeduceBondOrdersFromCONECTRecords)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBIgnoreFormalChargeField)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictFormalAtomCharges)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomTypes)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBCalcMissingFormalCharges)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBPerceiveMissingBondOrders)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBEvaluateMASTERRecord)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBTruncateLines)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteFormalCharges)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecords)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecordsForAllBonds)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecordsReflectingBondOrder)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, PDBFormatVersion)
+    MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CombineInterferingResidueCoordinates)
 }
 
 
 void CDPLPythonBiomol::exportControlParameterFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
-	EXPORT_CONTROL_PARAM_FUNCS(CheckLineLength, check)
-	EXPORT_CONTROL_PARAM_FUNCS_INT_REF(PDBResidueDictionary, dict)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomBondingToNonStdResidues, apply)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomBondingToStdResidues, apply)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictBondOrdersToNonStdResidues, apply)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictBondOrdersToStdResidues, apply)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBIgnoreConectRecords, ignore)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBDeduceBondOrdersFromCONECTRecords, deduce)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBIgnoreFormalChargeField, ignore)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictFormalAtomCharges, apply)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomTypes, apply)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBCalcMissingFormalCharges, calc)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBPerceiveMissingBondOrders, perceive)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBEvaluateMASTERRecord, evaluate)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBTruncateLines, trunc)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteFormalCharges, write)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecords, write)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecordsForAllBonds, write)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecordsReflectingBondOrder, write)
-	EXPORT_CONTROL_PARAM_FUNCS(PDBFormatVersion, ver)
-	EXPORT_CONTROL_PARAM_FUNCS(CombineInterferingResidueCoordinates, comb)
+    EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
+    EXPORT_CONTROL_PARAM_FUNCS(CheckLineLength, check)
+    EXPORT_CONTROL_PARAM_FUNCS_INT_REF(PDBResidueDictionary, dict)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomBondingToNonStdResidues, apply)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomBondingToStdResidues, apply)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictBondOrdersToNonStdResidues, apply)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictBondOrdersToStdResidues, apply)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBIgnoreConectRecords, ignore)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBDeduceBondOrdersFromCONECTRecords, deduce)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBIgnoreFormalChargeField, ignore)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictFormalAtomCharges, apply)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomTypes, apply)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBCalcMissingFormalCharges, calc)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBPerceiveMissingBondOrders, perceive)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBEvaluateMASTERRecord, evaluate)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBTruncateLines, trunc)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBWriteFormalCharges, write)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecords, write)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecordsForAllBonds, write)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecordsReflectingBondOrder, write)
+    EXPORT_CONTROL_PARAM_FUNCS(PDBFormatVersion, ver)
+    EXPORT_CONTROL_PARAM_FUNCS(CombineInterferingResidueCoordinates, comb)
 }

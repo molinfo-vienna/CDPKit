@@ -46,88 +46,88 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94PrimaryToParameterAtomTypeMap
-		{
+        class CDPL_FORCEFIELD_API MMFF94PrimaryToParameterAtomTypeMap
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<unsigned int, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				static constexpr std::size_t NUM_TYPES = 4;
+              public:
+                static constexpr std::size_t NUM_TYPES = 4;
 
-				Entry();
+                Entry();
  
-				Entry(unsigned int atom_type, unsigned int param_types[]);
+                Entry(unsigned int atom_type, unsigned int param_types[]);
 
-				unsigned int getAtomType() const;
+                unsigned int getAtomType() const;
 
-				const unsigned int* getParameterTypes() const;
+                const unsigned int* getParameterTypes() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int atomType;
-				unsigned int paramTypes[NUM_TYPES];
-				bool         initialized;
-			};			
+              private:
+                unsigned int atomType;
+                unsigned int paramTypes[NUM_TYPES];
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94PrimaryToParameterAtomTypeMap();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94PrimaryToParameterAtomTypeMap();
 
-			void addEntry(unsigned int atom_type, unsigned int param_types[]);
+            void addEntry(unsigned int atom_type, unsigned int param_types[]);
 
-			const Entry& getEntry(unsigned int atom_type) const;
+            const Entry& getEntry(unsigned int atom_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int atom_type);
+            bool removeEntry(unsigned int atom_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultMap;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultMap;
+            DataStorage          entries;
+        };
     }
 }
 

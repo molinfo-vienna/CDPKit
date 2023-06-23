@@ -39,43 +39,43 @@
 namespace
 {
 
-	template <typename VectorType>
-	struct VectorExport
-	{
+    template <typename VectorType>
+    struct VectorExport
+    {
 
-		VectorExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        VectorExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename VectorType::ValueType ValueType;
-			typedef typename VectorType::SizeType SizeType;
-		
-			python::class_<VectorType, typename VectorType::SharedPointer>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<SizeType>((python::arg("self"), python::arg("n"))))
-				.def(python::init<SizeType, const ValueType&>((python::arg("self"), python::arg("n"), python::arg("v"))))
-				.def("resize", &VectorType::resize, (python::arg("self"), python::arg("n"), python::arg("v") = ValueType()))
-				.def("clear", &VectorType::clear, (python::arg("self"), python::arg("v") = ValueType()))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
-				.def(InitFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
-				.def(ConstVectorVisitor<VectorType>())
-				.def(VectorAssignAndSwapVisitor<VectorType>())
-				.def(VectorNDArrayInitVisitor<VectorType, true>())
-				.def(VectorNDArrayAssignVisitor<VectorType, true>())
-				.def(VectorVisitor<VectorType>());
-		}
-	};
+            typedef typename VectorType::ValueType ValueType;
+            typedef typename VectorType::SizeType SizeType;
+        
+            python::class_<VectorType, typename VectorType::SharedPointer>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<SizeType>((python::arg("self"), python::arg("n"))))
+                .def(python::init<SizeType, const ValueType&>((python::arg("self"), python::arg("n"), python::arg("v"))))
+                .def("resize", &VectorType::resize, (python::arg("self"), python::arg("n"), python::arg("v") = ValueType()))
+                .def("clear", &VectorType::clear, (python::arg("self"), python::arg("v") = ValueType()))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
+                .def(InitFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
+                .def(ConstVectorVisitor<VectorType>())
+                .def(VectorAssignAndSwapVisitor<VectorType>())
+                .def(VectorNDArrayInitVisitor<VectorType, true>())
+                .def(VectorNDArrayAssignVisitor<VectorType, true>())
+                .def(VectorVisitor<VectorType>());
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportVectorTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	VectorExport<Math::FVector>("FVector");
-	VectorExport<Math::DVector>("DVector");
-	VectorExport<Math::LVector>("LVector");
-	VectorExport<Math::ULVector>("ULVector");
+    VectorExport<Math::FVector>("FVector");
+    VectorExport<Math::DVector>("DVector");
+    VectorExport<Math::LVector>("LVector");
+    VectorExport<Math::ULVector>("ULVector");
 }

@@ -36,29 +36,29 @@ class QComboBox;
 namespace ChOX
 {
 
-	class LineStyleEditWidget : public QWidget
-	{
+    class LineStyleEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		LineStyleEditWidget(QWidget*, CDPL::Vis::Pen::LineStyle&);
+    public:
+        LineStyleEditWidget(QWidget*, CDPL::Vis::Pen::LineStyle&);
 
-	signals:
-		void lineStyleChanged();
+    signals:
+        void lineStyleChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleLineStyleSelection(int);
+    private slots:
+        void handleLineStyleSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		CDPL::Vis::Pen::LineStyle& lineStyle;
-		QComboBox*                 lineStyleComboBox;
-	};
+        CDPL::Vis::Pen::LineStyle& lineStyle;
+        QComboBox*                 lineStyleComboBox;
+    };
 }
 
 #endif // CHOX_LINESTYLEEDITWIDGET_HPP

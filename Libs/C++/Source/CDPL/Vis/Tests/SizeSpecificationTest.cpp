@@ -29,103 +29,103 @@
 
 BOOST_AUTO_TEST_CASE(SizeSpecificationTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	SizeSpecification ss1;
+    SizeSpecification ss1;
 
-	BOOST_CHECK(ss1.getValue() == 0.0);
-	BOOST_CHECK(ss1.isRelative() == false);
-	BOOST_CHECK(ss1.followsInputScaling() == false);
-	BOOST_CHECK(ss1.followsOutputScaling() == false);
+    BOOST_CHECK(ss1.getValue() == 0.0);
+    BOOST_CHECK(ss1.isRelative() == false);
+    BOOST_CHECK(ss1.followsInputScaling() == false);
+    BOOST_CHECK(ss1.followsOutputScaling() == false);
 
-	SizeSpecification ss2(0.3);
+    SizeSpecification ss2(0.3);
 
-	BOOST_CHECK(ss2.getValue() == 0.3);
-	BOOST_CHECK(ss2.isRelative() == false);
-	BOOST_CHECK(ss2.followsInputScaling() == false);
-	BOOST_CHECK(ss2.followsOutputScaling() == false);
+    BOOST_CHECK(ss2.getValue() == 0.3);
+    BOOST_CHECK(ss2.isRelative() == false);
+    BOOST_CHECK(ss2.followsInputScaling() == false);
+    BOOST_CHECK(ss2.followsOutputScaling() == false);
 
-	SizeSpecification ss3(0.5, true);
+    SizeSpecification ss3(0.5, true);
 
-	BOOST_CHECK(ss3.getValue() == 0.5);
-	BOOST_CHECK(ss3.isRelative() == true);
-	BOOST_CHECK(ss3.followsInputScaling() == false);
-	BOOST_CHECK(ss3.followsOutputScaling() == false);
+    BOOST_CHECK(ss3.getValue() == 0.5);
+    BOOST_CHECK(ss3.isRelative() == true);
+    BOOST_CHECK(ss3.followsInputScaling() == false);
+    BOOST_CHECK(ss3.followsOutputScaling() == false);
 
-	SizeSpecification ss4(0.7, false, true);
+    SizeSpecification ss4(0.7, false, true);
 
-	BOOST_CHECK(ss4.getValue() == 0.7);
-	BOOST_CHECK(ss4.isRelative() == false);
-	BOOST_CHECK(ss4.followsInputScaling() == true);
-	BOOST_CHECK(ss4.followsOutputScaling() == false);
+    BOOST_CHECK(ss4.getValue() == 0.7);
+    BOOST_CHECK(ss4.isRelative() == false);
+    BOOST_CHECK(ss4.followsInputScaling() == true);
+    BOOST_CHECK(ss4.followsOutputScaling() == false);
 
-	SizeSpecification ss5(-0.7, true, false, true);
+    SizeSpecification ss5(-0.7, true, false, true);
 
-	BOOST_CHECK(ss5.getValue() == -0.7);
-	BOOST_CHECK(ss5.isRelative() == true);
-	BOOST_CHECK(ss5.followsInputScaling() == false);
-	BOOST_CHECK(ss5.followsOutputScaling() == true);
-
-//-----
-
-	BOOST_CHECK(ss4 != ss5);
-	BOOST_CHECK(!(ss4 == ss5));
-
-	ss4.setValue(-0.7);
-
-	BOOST_CHECK(ss4.getValue() == -0.7);
-	BOOST_CHECK(ss4.isRelative() == false);
-	BOOST_CHECK(ss4.followsInputScaling() == true);
-	BOOST_CHECK(ss4.followsOutputScaling() == false);
-
-	BOOST_CHECK(ss4 != ss5);
-	BOOST_CHECK(!(ss4 == ss5));
-
-	ss4.setRelative(true);
-
-	BOOST_CHECK(ss4.getValue() == -0.7);
-	BOOST_CHECK(ss4.isRelative() == true);
-	BOOST_CHECK(ss4.followsInputScaling() == true);
-	BOOST_CHECK(ss4.followsOutputScaling() == false);
-
-	BOOST_CHECK(ss4 != ss5);
-	BOOST_CHECK(!(ss4 == ss5));
-
-	ss4.followInputScaling(false);
-
-	BOOST_CHECK(ss4.getValue() == -0.7);
-	BOOST_CHECK(ss4.isRelative() == true);
-	BOOST_CHECK(ss4.followsInputScaling() == false);
-	BOOST_CHECK(ss4.followsOutputScaling() == false);
-
-	BOOST_CHECK(ss4 != ss5);
-	BOOST_CHECK(!(ss4 == ss5));
-
-	ss4.followOutputScaling(true);
-
-	BOOST_CHECK(ss4.getValue() == -0.7);
-	BOOST_CHECK(ss4.isRelative() == true);
-	BOOST_CHECK(ss4.followsInputScaling() == false);
-	BOOST_CHECK(ss4.followsOutputScaling() == true);
-
-	BOOST_CHECK(ss4 == ss5);
-	BOOST_CHECK(!(ss4 != ss5));
+    BOOST_CHECK(ss5.getValue() == -0.7);
+    BOOST_CHECK(ss5.isRelative() == true);
+    BOOST_CHECK(ss5.followsInputScaling() == false);
+    BOOST_CHECK(ss5.followsOutputScaling() == true);
 
 //-----
 
-	BOOST_CHECK(ss4 == ss4);
-	BOOST_CHECK(!(ss4 != ss4));
+    BOOST_CHECK(ss4 != ss5);
+    BOOST_CHECK(!(ss4 == ss5));
 
-	ss4 = ss2;
+    ss4.setValue(-0.7);
 
-	BOOST_CHECK(ss4 != ss5);
-	BOOST_CHECK(!(ss4 == ss5));
+    BOOST_CHECK(ss4.getValue() == -0.7);
+    BOOST_CHECK(ss4.isRelative() == false);
+    BOOST_CHECK(ss4.followsInputScaling() == true);
+    BOOST_CHECK(ss4.followsOutputScaling() == false);
 
-	BOOST_CHECK(ss4 == ss2);
-	BOOST_CHECK(!(ss4 != ss2));
+    BOOST_CHECK(ss4 != ss5);
+    BOOST_CHECK(!(ss4 == ss5));
 
-	BOOST_CHECK(ss2 != ss5);
-	BOOST_CHECK(!(ss2 == ss5));
+    ss4.setRelative(true);
+
+    BOOST_CHECK(ss4.getValue() == -0.7);
+    BOOST_CHECK(ss4.isRelative() == true);
+    BOOST_CHECK(ss4.followsInputScaling() == true);
+    BOOST_CHECK(ss4.followsOutputScaling() == false);
+
+    BOOST_CHECK(ss4 != ss5);
+    BOOST_CHECK(!(ss4 == ss5));
+
+    ss4.followInputScaling(false);
+
+    BOOST_CHECK(ss4.getValue() == -0.7);
+    BOOST_CHECK(ss4.isRelative() == true);
+    BOOST_CHECK(ss4.followsInputScaling() == false);
+    BOOST_CHECK(ss4.followsOutputScaling() == false);
+
+    BOOST_CHECK(ss4 != ss5);
+    BOOST_CHECK(!(ss4 == ss5));
+
+    ss4.followOutputScaling(true);
+
+    BOOST_CHECK(ss4.getValue() == -0.7);
+    BOOST_CHECK(ss4.isRelative() == true);
+    BOOST_CHECK(ss4.followsInputScaling() == false);
+    BOOST_CHECK(ss4.followsOutputScaling() == true);
+
+    BOOST_CHECK(ss4 == ss5);
+    BOOST_CHECK(!(ss4 != ss5));
+
+//-----
+
+    BOOST_CHECK(ss4 == ss4);
+    BOOST_CHECK(!(ss4 != ss4));
+
+    ss4 = ss2;
+
+    BOOST_CHECK(ss4 != ss5);
+    BOOST_CHECK(!(ss4 == ss5));
+
+    BOOST_CHECK(ss4 == ss2);
+    BOOST_CHECK(!(ss4 != ss2));
+
+    BOOST_CHECK(ss2 != ss5);
+    BOOST_CHECK(!(ss2 == ss5));
 }
 

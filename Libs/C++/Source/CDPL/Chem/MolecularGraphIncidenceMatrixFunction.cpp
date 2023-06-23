@@ -33,23 +33,23 @@ using namespace CDPL;
 
 void Chem::buildIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
-	mtx.resize(molgraph.getNumAtoms(), molgraph.getNumBonds());
-	mtx.clear();
+    mtx.resize(molgraph.getNumAtoms(), molgraph.getNumBonds());
+    mtx.clear();
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
-	std::size_t i = 0;
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    std::size_t i = 0;
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it, i++) {
-		const Bond& bond = *it;
-		const Atom& atom1 = bond.getBegin();
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it, i++) {
+        const Bond& bond = *it;
+        const Atom& atom1 = bond.getBegin();
 
-		if (molgraph.containsAtom(atom1))
-			mtx(molgraph.getAtomIndex(atom1), i) = 1;
+        if (molgraph.containsAtom(atom1))
+            mtx(molgraph.getAtomIndex(atom1), i) = 1;
 
-		const Atom& atom2 = bond.getEnd();
+        const Atom& atom2 = bond.getEnd();
 
-		if (molgraph.containsAtom(atom2))
-			mtx(molgraph.getAtomIndex(atom2), i) = 1;
-	}
+        if (molgraph.containsAtom(atom2))
+            mtx(molgraph.getAtomIndex(atom2), i) = 1;
+    }
 
 }

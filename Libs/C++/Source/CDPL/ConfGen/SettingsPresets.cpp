@@ -54,121 +54,121 @@ namespace
 
     struct Init {
 
-		Init() {
-			using namespace ConfGen;
+        Init() {
+            using namespace ConfGen;
 
-			FRAG_CONF_GEN_FAST.preserveInputBondingGeometries(false);
-			FRAG_CONF_GEN_FAST.setForceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT);
-			FRAG_CONF_GEN_FAST.strictForceFieldParameterization(true);
-			FRAG_CONF_GEN_FAST.setMaxNumRefinementIterations(0);
-			FRAG_CONF_GEN_FAST.setRefinementStopGradient(0.25);
-			FRAG_CONF_GEN_FAST.setMacrocycleRotorBondCountThreshold(10);
-			FRAG_CONF_GEN_FAST.setSmallRingSystemSamplingFactor(6);
+            FRAG_CONF_GEN_FAST.preserveInputBondingGeometries(false);
+            FRAG_CONF_GEN_FAST.setForceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT);
+            FRAG_CONF_GEN_FAST.strictForceFieldParameterization(true);
+            FRAG_CONF_GEN_FAST.setMaxNumRefinementIterations(0);
+            FRAG_CONF_GEN_FAST.setRefinementStopGradient(0.25);
+            FRAG_CONF_GEN_FAST.setMacrocycleRotorBondCountThreshold(10);
+            FRAG_CONF_GEN_FAST.setSmallRingSystemSamplingFactor(6);
 
-			FragmentConformerGeneratorSettings::FragmentSettings* chain_settings = &FRAG_CONF_GEN_FAST.getChainSettings();
+            FragmentConformerGeneratorSettings::FragmentSettings* chain_settings = &FRAG_CONF_GEN_FAST.getChainSettings();
 
-			chain_settings->setMaxNumSampledConformers(50);
-			chain_settings->setMinNumSampledConformers(10);
-			chain_settings->setMaxNumOutputConformers(1);
-			chain_settings->setTimeout(400 * 1000);
-			chain_settings->setEnergyWindow(8.0);
-			chain_settings->setMinRMSD(0.1);
+            chain_settings->setMaxNumSampledConformers(50);
+            chain_settings->setMinNumSampledConformers(10);
+            chain_settings->setMaxNumOutputConformers(1);
+            chain_settings->setTimeout(400 * 1000);
+            chain_settings->setEnergyWindow(8.0);
+            chain_settings->setMinRMSD(0.1);
 
-			FragmentConformerGeneratorSettings::FragmentSettings* sr_settings = &FRAG_CONF_GEN_FAST.getSmallRingSystemSettings();
+            FragmentConformerGeneratorSettings::FragmentSettings* sr_settings = &FRAG_CONF_GEN_FAST.getSmallRingSystemSettings();
 
-			sr_settings->setMaxNumSampledConformers(1000);
-			sr_settings->setMinNumSampledConformers(30);
-			sr_settings->setMaxNumOutputConformers(1000);
-			sr_settings->setTimeout(800 * 1000);
-			sr_settings->setEnergyWindow(8.0);
-			sr_settings->setMinRMSD(0.1);
+            sr_settings->setMaxNumSampledConformers(1000);
+            sr_settings->setMinNumSampledConformers(30);
+            sr_settings->setMaxNumOutputConformers(1000);
+            sr_settings->setTimeout(800 * 1000);
+            sr_settings->setEnergyWindow(8.0);
+            sr_settings->setMinRMSD(0.1);
 
-			FragmentConformerGeneratorSettings::FragmentSettings* mc_settings = &FRAG_CONF_GEN_FAST.getMacrocycleSettings();
+            FragmentConformerGeneratorSettings::FragmentSettings* mc_settings = &FRAG_CONF_GEN_FAST.getMacrocycleSettings();
 
-			mc_settings->setMaxNumSampledConformers(2000);
-			mc_settings->setMinNumSampledConformers(100);
-			mc_settings->setMaxNumOutputConformers(1000);
-			mc_settings->setTimeout(1800 * 1000);
-			mc_settings->setEnergyWindow(25.0);
-			mc_settings->setMinRMSD(0.1);
+            mc_settings->setMaxNumSampledConformers(2000);
+            mc_settings->setMinNumSampledConformers(100);
+            mc_settings->setMaxNumOutputConformers(1000);
+            mc_settings->setTimeout(1800 * 1000);
+            mc_settings->setEnergyWindow(25.0);
+            mc_settings->setMinRMSD(0.1);
 
-			//--
+            //--
 
-			FRAG_CONF_GEN_THOROUGH = FRAG_CONF_GEN_FAST;
-			FRAG_CONF_GEN_THOROUGH.setRefinementStopGradient(0.1);
-			FRAG_CONF_GEN_THOROUGH.setSmallRingSystemSamplingFactor(20);
+            FRAG_CONF_GEN_THOROUGH = FRAG_CONF_GEN_FAST;
+            FRAG_CONF_GEN_THOROUGH.setRefinementStopGradient(0.1);
+            FRAG_CONF_GEN_THOROUGH.setSmallRingSystemSamplingFactor(20);
 
-			chain_settings = &FRAG_CONF_GEN_THOROUGH.getChainSettings();
+            chain_settings = &FRAG_CONF_GEN_THOROUGH.getChainSettings();
 
-			chain_settings->setMaxNumSampledConformers(200);
-			chain_settings->setMinNumSampledConformers(40);
-			chain_settings->setEnergyWindow(2.0);
-			chain_settings->setTimeout(1800 * 1000);
+            chain_settings->setMaxNumSampledConformers(200);
+            chain_settings->setMinNumSampledConformers(40);
+            chain_settings->setEnergyWindow(2.0);
+            chain_settings->setTimeout(1800 * 1000);
 
-			sr_settings = &FRAG_CONF_GEN_THOROUGH.getSmallRingSystemSettings();
+            sr_settings = &FRAG_CONF_GEN_THOROUGH.getSmallRingSystemSettings();
 
-			sr_settings->setMinNumSampledConformers(50);
-			//sr_settings->setEnergyWindow(6.0);
-			sr_settings->setTimeout(1800 * 1000);
+            sr_settings->setMinNumSampledConformers(50);
+            //sr_settings->setEnergyWindow(6.0);
+            sr_settings->setTimeout(1800 * 1000);
 
-			//----------------
+            //----------------
 
-			CONF_GEN_SMALL_SET_DIVERSE.getFragmentBuildSettings() = FRAG_CONF_GEN_FAST;
-			CONF_GEN_SMALL_SET_DIVERSE.setSamplingMode(ConformerSamplingMode::AUTO);
-			CONF_GEN_SMALL_SET_DIVERSE.sampleHeteroAtomHydrogens(false);
-			CONF_GEN_SMALL_SET_DIVERSE.sampleAngleToleranceRanges(false);
-			CONF_GEN_SMALL_SET_DIVERSE.enumerateRings(true);
-			CONF_GEN_SMALL_SET_DIVERSE.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
-			CONF_GEN_SMALL_SET_DIVERSE.generateCoordinatesFromScratch(true);
-			CONF_GEN_SMALL_SET_DIVERSE.includeInputCoordinates(false);
-			CONF_GEN_SMALL_SET_DIVERSE.setTimeout(60 * 60 * 1000);
-			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeSystematic(ForceFieldType::MMFF94S_RTOR_NO_ESTAT);
-			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeStochastic(ForceFieldType::MMFF94S_RTOR);
-			CONF_GEN_SMALL_SET_DIVERSE.strictForceFieldParameterization(true);
-			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumRefinementIterations(0);
-			CONF_GEN_SMALL_SET_DIVERSE.setRefinementTolerance(0.001);
-			CONF_GEN_SMALL_SET_DIVERSE.setMacrocycleRotorBondCountThreshold(10);
-			CONF_GEN_SMALL_SET_DIVERSE.setConvergenceCheckCycleSize(100);
-			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumSampledConformers(2000);
-			CONF_GEN_SMALL_SET_DIVERSE.setEnergyWindow(10.0);
-			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumOutputConformers(50);
-			CONF_GEN_SMALL_SET_DIVERSE.setMinRMSD(0.5);
-			
-			//--
+            CONF_GEN_SMALL_SET_DIVERSE.getFragmentBuildSettings() = FRAG_CONF_GEN_FAST;
+            CONF_GEN_SMALL_SET_DIVERSE.setSamplingMode(ConformerSamplingMode::AUTO);
+            CONF_GEN_SMALL_SET_DIVERSE.sampleHeteroAtomHydrogens(false);
+            CONF_GEN_SMALL_SET_DIVERSE.sampleAngleToleranceRanges(false);
+            CONF_GEN_SMALL_SET_DIVERSE.enumerateRings(true);
+            CONF_GEN_SMALL_SET_DIVERSE.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
+            CONF_GEN_SMALL_SET_DIVERSE.generateCoordinatesFromScratch(true);
+            CONF_GEN_SMALL_SET_DIVERSE.includeInputCoordinates(false);
+            CONF_GEN_SMALL_SET_DIVERSE.setTimeout(60 * 60 * 1000);
+            CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeSystematic(ForceFieldType::MMFF94S_RTOR_NO_ESTAT);
+            CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeStochastic(ForceFieldType::MMFF94S_RTOR);
+            CONF_GEN_SMALL_SET_DIVERSE.strictForceFieldParameterization(true);
+            CONF_GEN_SMALL_SET_DIVERSE.setMaxNumRefinementIterations(0);
+            CONF_GEN_SMALL_SET_DIVERSE.setRefinementTolerance(0.001);
+            CONF_GEN_SMALL_SET_DIVERSE.setMacrocycleRotorBondCountThreshold(10);
+            CONF_GEN_SMALL_SET_DIVERSE.setConvergenceCheckCycleSize(100);
+            CONF_GEN_SMALL_SET_DIVERSE.setMaxNumSampledConformers(2000);
+            CONF_GEN_SMALL_SET_DIVERSE.setEnergyWindow(10.0);
+            CONF_GEN_SMALL_SET_DIVERSE.setMaxNumOutputConformers(50);
+            CONF_GEN_SMALL_SET_DIVERSE.setMinRMSD(0.5);
+            
+            //--
 
-			CONF_GEN_MEDIUM_SET_DIVERSE = CONF_GEN_SMALL_SET_DIVERSE;
-			CONF_GEN_MEDIUM_SET_DIVERSE.setEnergyWindow(15.0);
-			CONF_GEN_MEDIUM_SET_DIVERSE.setMaxNumOutputConformers(100);
-			CONF_GEN_MEDIUM_SET_DIVERSE.setMinRMSD(0.5);
+            CONF_GEN_MEDIUM_SET_DIVERSE = CONF_GEN_SMALL_SET_DIVERSE;
+            CONF_GEN_MEDIUM_SET_DIVERSE.setEnergyWindow(15.0);
+            CONF_GEN_MEDIUM_SET_DIVERSE.setMaxNumOutputConformers(100);
+            CONF_GEN_MEDIUM_SET_DIVERSE.setMinRMSD(0.5);
 
-			//--
+            //--
 
-			CONF_GEN_LARGE_SET_DIVERSE = CONF_GEN_SMALL_SET_DIVERSE;
-			CONF_GEN_LARGE_SET_DIVERSE.setEnergyWindow(20.0);
-			CONF_GEN_LARGE_SET_DIVERSE.setMaxNumOutputConformers(250);
-			CONF_GEN_LARGE_SET_DIVERSE.setMinRMSD(0.5);
+            CONF_GEN_LARGE_SET_DIVERSE = CONF_GEN_SMALL_SET_DIVERSE;
+            CONF_GEN_LARGE_SET_DIVERSE.setEnergyWindow(20.0);
+            CONF_GEN_LARGE_SET_DIVERSE.setMaxNumOutputConformers(250);
+            CONF_GEN_LARGE_SET_DIVERSE.setMinRMSD(0.5);
 
-			//--
+            //--
 
-			CONF_GEN_SMALL_SET_DENSE = CONF_GEN_SMALL_SET_DIVERSE;
-			CONF_GEN_SMALL_SET_DENSE.setEnergyWindow(10.0);
-			CONF_GEN_SMALL_SET_DENSE.setMaxNumOutputConformers(50);
-			CONF_GEN_SMALL_SET_DENSE.setMinRMSD(0.3);
+            CONF_GEN_SMALL_SET_DENSE = CONF_GEN_SMALL_SET_DIVERSE;
+            CONF_GEN_SMALL_SET_DENSE.setEnergyWindow(10.0);
+            CONF_GEN_SMALL_SET_DENSE.setMaxNumOutputConformers(50);
+            CONF_GEN_SMALL_SET_DENSE.setMinRMSD(0.3);
 
-			//--
+            //--
 
-			CONF_GEN_MEDIUM_SET_DENSE = CONF_GEN_MEDIUM_SET_DIVERSE;
-			CONF_GEN_MEDIUM_SET_DENSE.setEnergyWindow(15.0);
-			CONF_GEN_MEDIUM_SET_DENSE.setMaxNumOutputConformers(100);
-			CONF_GEN_MEDIUM_SET_DENSE.setMinRMSD(0.3);
+            CONF_GEN_MEDIUM_SET_DENSE = CONF_GEN_MEDIUM_SET_DIVERSE;
+            CONF_GEN_MEDIUM_SET_DENSE.setEnergyWindow(15.0);
+            CONF_GEN_MEDIUM_SET_DENSE.setMaxNumOutputConformers(100);
+            CONF_GEN_MEDIUM_SET_DENSE.setMinRMSD(0.3);
 
-			//--
+            //--
 
-			CONF_GEN_LARGE_SET_DENSE = CONF_GEN_LARGE_SET_DIVERSE;
-			CONF_GEN_LARGE_SET_DENSE.setEnergyWindow(20.0);
-			CONF_GEN_LARGE_SET_DENSE.setMaxNumOutputConformers(250);
-			CONF_GEN_LARGE_SET_DENSE.setMinRMSD(0.3);
-		}
+            CONF_GEN_LARGE_SET_DENSE = CONF_GEN_LARGE_SET_DIVERSE;
+            CONF_GEN_LARGE_SET_DENSE.setEnergyWindow(20.0);
+            CONF_GEN_LARGE_SET_DENSE.setMaxNumOutputConformers(250);
+            CONF_GEN_LARGE_SET_DENSE.setMinRMSD(0.3);
+        }
 
     } init;
 }

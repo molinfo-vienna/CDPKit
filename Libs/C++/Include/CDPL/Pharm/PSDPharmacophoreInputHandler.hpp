@@ -39,21 +39,21 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Pharmacophore;
+        class Pharmacophore;
 
-		/**
-		 * \brief A handler for the input of pharmacophore data in the PSD-format of the <em>CDPL</em>.
-		 */
-		class CDPL_PHARM_API PSDPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
-		{
+        /**
+         * \brief A handler for the input of pharmacophore data in the PSD-format of the <em>CDPL</em>.
+         */
+        class CDPL_PHARM_API PSDPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
+        {
 
-		  public:
-			const Base::DataFormat& getDataFormat() const;
+          public:
+            const Base::DataFormat& getDataFormat() const;
 
-			ReaderType::SharedPointer createReader(std::istream& is) const;
+            ReaderType::SharedPointer createReader(std::istream& is) const;
 
-			ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
-		};
+            ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
+        };
     }
 }
 

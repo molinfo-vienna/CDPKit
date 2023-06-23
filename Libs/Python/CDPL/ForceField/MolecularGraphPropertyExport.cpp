@@ -33,15 +33,15 @@
 namespace 
 {
 
-	struct MolecularGraphProperty {};
+    struct MolecularGraphProperty {};
 }
 
 
 void CDPLPythonForceField::exportMolecularGraphProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
-		.def_readonly("MMFF94_AROMATIC_RINGS", &ForceField::MolecularGraphProperty::MMFF94_AROMATIC_RINGS);
+    python::class_<MolecularGraphProperty, boost::noncopyable>("MolecularGraphProperty", python::no_init)
+        .def_readonly("MMFF94_AROMATIC_RINGS", &ForceField::MolecularGraphProperty::MMFF94_AROMATIC_RINGS);
 }

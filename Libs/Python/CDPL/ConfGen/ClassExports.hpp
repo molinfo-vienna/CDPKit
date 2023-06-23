@@ -29,36 +29,36 @@
 namespace CDPLPythonConfGen
 {
 
-	void exportDGConstraintGenerator();
-	void exportDGConstraintGeneratorSettings();
-	void exportDGStructureGenerator();
-	void exportDGStructureGeneratorSettings();
-	void exportCanonicalFragment();
-	void exportFragmentLibraryEntry();
-	void exportFragmentLibrary();
-	void exportConformerData();
-	void exportTorsionRule();
-	void exportTorsionCategory();
-	void exportTorsionLibrary();
-	void exportTorsionRuleMatch();
-	void exportTorsionRuleMatcher();
-	void exportTorsionDriverSettings();
-	void exportTorsionDriver();
-	void exportRMSDConformerSelector();
-	void exportStructureGeneratorSettings();
-	void exportConformerGeneratorSettings();
-	void exportFragmentConformerGeneratorSettings();
-	void exportFragmentAssemblerSettings();
-	void exportStructureGenerator();
-	void exportConformerGenerator();
-	void exportFragmentConformerGenerator();
-	void exportFragmentLibraryGenerator();
-	void exportFragmentAssembler();
-	
-	void exportCFLMoleculeReader();
-	void exportCFLMoleculeInputHandler();
+    void exportDGConstraintGenerator();
+    void exportDGConstraintGeneratorSettings();
+    void exportDGStructureGenerator();
+    void exportDGStructureGeneratorSettings();
+    void exportCanonicalFragment();
+    void exportFragmentLibraryEntry();
+    void exportFragmentLibrary();
+    void exportConformerData();
+    void exportTorsionRule();
+    void exportTorsionCategory();
+    void exportTorsionLibrary();
+    void exportTorsionRuleMatch();
+    void exportTorsionRuleMatcher();
+    void exportTorsionDriverSettings();
+    void exportTorsionDriver();
+    void exportRMSDConformerSelector();
+    void exportStructureGeneratorSettings();
+    void exportConformerGeneratorSettings();
+    void exportFragmentConformerGeneratorSettings();
+    void exportFragmentAssemblerSettings();
+    void exportStructureGenerator();
+    void exportConformerGenerator();
+    void exportFragmentConformerGenerator();
+    void exportFragmentLibraryGenerator();
+    void exportFragmentAssembler();
+    
+    void exportCFLMoleculeReader();
+    void exportCFLMoleculeInputHandler();
 
-	void exportFunctionWrappers();
+    void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

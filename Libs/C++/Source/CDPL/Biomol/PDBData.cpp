@@ -33,117 +33,117 @@ using namespace CDPL;
 
 void Biomol::PDBData::clear()
 {
-	data.clear();
+    data.clear();
 }
 
 std::size_t Biomol::PDBData::getNumRecords() const
 {
-	return data.size();
+    return data.size();
 }
 
 bool Biomol::PDBData::isEmpty() const
 {
-	return data.empty();
+    return data.empty();
 }
 
 bool Biomol::PDBData::containsRecord(const RecordType& type) const
 {
-	return (data.find(type) != data.end());
+    return (data.find(type) != data.end());
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::getRecord(const RecordType& type)
 {
-	return data.find(type);
+    return data.find(type);
 }
 
 Biomol::PDBData::ConstRecordIterator Biomol::PDBData::getRecord(const RecordType& type) const
 {
-	return data.find(type);
+    return data.find(type);
 }
 
 std::string& Biomol::PDBData::getData(const RecordType& type)
 {
-	RecordIterator it = data.find(type);
+    RecordIterator it = data.find(type);
 
-	if (it == data.end()) 
-		throw Base::ItemNotFound("PDBData: data record not found");
-	
-	return (*it).second;
+    if (it == data.end()) 
+        throw Base::ItemNotFound("PDBData: data record not found");
+    
+    return (*it).second;
 }
 
 const std::string& Biomol::PDBData::getData(const RecordType& type) const
 {
-	ConstRecordIterator it = data.find(type);
+    ConstRecordIterator it = data.find(type);
 
-	if (it == data.end()) 
-		throw Base::ItemNotFound("PDBData: data record not found");
-	
-	return (*it).second;
+    if (it == data.end()) 
+        throw Base::ItemNotFound("PDBData: data record not found");
+    
+    return (*it).second;
 }
 
 void Biomol::PDBData::removeRecord(const RecordIterator& it)
 {
-	data.erase(it);
+    data.erase(it);
 }
-		
+        
 bool Biomol::PDBData::removeRecord(const RecordType& type)
 {
-	return (data.erase(type) > 0);
+    return (data.erase(type) > 0);
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::setRecord(const Record& rec)
 {
-	RecordIterator lb = data.lower_bound(rec.first);
+    RecordIterator lb = data.lower_bound(rec.first);
 
-	if (lb == data.end() || data.key_comp()(rec.first, (*lb).first))
-		return data.insert(lb, rec);
+    if (lb == data.end() || data.key_comp()(rec.first, (*lb).first))
+        return data.insert(lb, rec);
 
-	(*lb).second = rec.second;
+    (*lb).second = rec.second;
 
-	return lb;
+    return lb;
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::setRecord(const RecordType& type, const std::string& data)
 {
-	return setRecord(Record(type, data));
+    return setRecord(Record(type, data));
 }
 
 Biomol::PDBData::ConstRecordIterator Biomol::PDBData::getRecordsBegin() const
 {
-	return data.begin();
+    return data.begin();
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::getRecordsBegin()
 {
-	return data.begin();
+    return data.begin();
 }
 
 Biomol::PDBData::ConstRecordIterator Biomol::PDBData::getRecordsEnd() const
 {
-	return data.end();
+    return data.end();
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::getRecordsEnd()
 {
-	return data.end();
+    return data.end();
 }
 
 Biomol::PDBData::ConstRecordIterator Biomol::PDBData::begin() const
 {
-	return data.begin();
+    return data.begin();
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::begin()
 {
-	return data.begin();
+    return data.begin();
 }
 
 Biomol::PDBData::ConstRecordIterator Biomol::PDBData::end() const
 {
-	return data.end();
+    return data.end();
 }
 
 Biomol::PDBData::RecordIterator Biomol::PDBData::end()
 {
-	return data.end();
+    return data.end();
 }

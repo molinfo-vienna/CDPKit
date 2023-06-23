@@ -39,23 +39,23 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief DefaultInteractionAnalyzer.
-		 */
-		class CDPL_PHARM_API DefaultInteractionAnalyzer : public InteractionAnalyzer
-		{
+        /**
+         * \brief DefaultInteractionAnalyzer.
+         */
+        class CDPL_PHARM_API DefaultInteractionAnalyzer : public InteractionAnalyzer
+        {
 
-		  public:
-			/**
-			 * \brief Constructs the \c %DefaultInteractionAnalyzer instance.
-			 */
-			DefaultInteractionAnalyzer();
+          public:
+            /**
+             * \brief Constructs the \c %DefaultInteractionAnalyzer instance.
+             */
+            DefaultInteractionAnalyzer();
 
-			DefaultInteractionAnalyzer(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& interactions);
+            DefaultInteractionAnalyzer(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& interactions);
 
-		  private:
-			void init();
-		};
+          private:
+            void init();
+        };
     }
 }
 

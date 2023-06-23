@@ -41,32 +41,32 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeatureInteractionScore.
-		 */
-		class CDPL_PHARM_API FeatureInteractionScore
-		{
+        /**
+         * \brief FeatureInteractionScore.
+         */
+        class CDPL_PHARM_API FeatureInteractionScore
+        {
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScore instances.
-			 */
-			typedef std::shared_ptr<FeatureInteractionScore> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScore instances.
+             */
+            typedef std::shared_ptr<FeatureInteractionScore> SharedPointer;
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~FeatureInteractionScore() {}
-	    
-			virtual double operator()(const Feature& ftr1, const Feature& ftr2) const = 0;
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~FeatureInteractionScore() {}
+        
+            virtual double operator()(const Feature& ftr1, const Feature& ftr2) const = 0;
 
-			virtual double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const = 0;
+            virtual double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const = 0;
 
-		  protected:
-			FeatureInteractionScore() {}
-		};
+          protected:
+            FeatureInteractionScore() {}
+        };
     }
 }
 

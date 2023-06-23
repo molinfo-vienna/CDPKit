@@ -32,101 +32,101 @@ using namespace ChOX;
 
 
 LineStyleEditWidget::LineStyleEditWidget(QWidget* parent, CDPL::Vis::Pen::LineStyle& line_style):
-	QWidget(parent), lineStyle(line_style)
+    QWidget(parent), lineStyle(line_style)
 {
-	init();
+    init();
 }
 
 void LineStyleEditWidget::updateGUI()
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	lineStyleComboBox->blockSignals(true);
+    lineStyleComboBox->blockSignals(true);
 
-	switch (lineStyle) {
+    switch (lineStyle) {
 
-		case Pen::NO_LINE:
-			lineStyleComboBox->setCurrentIndex(0);
-			break;
+        case Pen::NO_LINE:
+            lineStyleComboBox->setCurrentIndex(0);
+            break;
 
-		case Pen::DASH_LINE:
-			lineStyleComboBox->setCurrentIndex(2);
-			break;
+        case Pen::DASH_LINE:
+            lineStyleComboBox->setCurrentIndex(2);
+            break;
 
-		case Pen::DOT_LINE:
-			lineStyleComboBox->setCurrentIndex(3);
-			break;
+        case Pen::DOT_LINE:
+            lineStyleComboBox->setCurrentIndex(3);
+            break;
 
-		case Pen::DASH_DOT_LINE:
-			lineStyleComboBox->setCurrentIndex(4);
-			break;
+        case Pen::DASH_DOT_LINE:
+            lineStyleComboBox->setCurrentIndex(4);
+            break;
 
-		case Pen::DASH_DOT_DOT_LINE:
-			lineStyleComboBox->setCurrentIndex(5);
-			break;
+        case Pen::DASH_DOT_DOT_LINE:
+            lineStyleComboBox->setCurrentIndex(5);
+            break;
 
-		default:
-			lineStyleComboBox->setCurrentIndex(1);
-	}
+        default:
+            lineStyleComboBox->setCurrentIndex(1);
+    }
  
-	lineStyleComboBox->blockSignals(false);
+    lineStyleComboBox->blockSignals(false);
 }
 
 void LineStyleEditWidget::handleLineStyleSelection(int idx)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	switch (idx) {
+    switch (idx) {
 
-		case 0:
-			lineStyle = Pen::NO_LINE;
-			break;
+        case 0:
+            lineStyle = Pen::NO_LINE;
+            break;
 
-		case 2:
-			lineStyle = Pen::DASH_LINE;
-			break;
+        case 2:
+            lineStyle = Pen::DASH_LINE;
+            break;
 
-		case 3:
-			lineStyle = Pen::DOT_LINE;
-			break;
+        case 3:
+            lineStyle = Pen::DOT_LINE;
+            break;
 
-		case 4:
-			lineStyle = Pen::DASH_DOT_LINE;
-			break;
+        case 4:
+            lineStyle = Pen::DASH_DOT_LINE;
+            break;
 
-		case 5:
-			lineStyle = Pen::DASH_DOT_DOT_LINE;
-			break;
+        case 5:
+            lineStyle = Pen::DASH_DOT_DOT_LINE;
+            break;
 
-		default:
-			lineStyle = Pen::SOLID_LINE;
-	}
+        default:
+            lineStyle = Pen::SOLID_LINE;
+    }
 
-	emit lineStyleChanged();
+    emit lineStyleChanged();
 }
 
 void LineStyleEditWidget::init()
 {
-	QBoxLayout* main_layout = new QHBoxLayout(this);
+    QBoxLayout* main_layout = new QHBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	lineStyleComboBox = new QComboBox(this);
+    lineStyleComboBox = new QComboBox(this);
 
-	connect(lineStyleComboBox, SIGNAL(activated(int)), this, SLOT(handleLineStyleSelection(int)));
+    connect(lineStyleComboBox, SIGNAL(activated(int)), this, SLOT(handleLineStyleSelection(int)));
 
-	setFocusProxy(lineStyleComboBox);
+    setFocusProxy(lineStyleComboBox);
 
-	lineStyleComboBox->addItem(tr("No Line"));
-	lineStyleComboBox->addItem(tr("Solid"));
-	lineStyleComboBox->addItem(tr("Dashed"));
-	lineStyleComboBox->addItem(tr("Dot"));
-	lineStyleComboBox->addItem(tr("Dash Dot"));
-	lineStyleComboBox->addItem(tr("Dash Dot Dot"));
+    lineStyleComboBox->addItem(tr("No Line"));
+    lineStyleComboBox->addItem(tr("Solid"));
+    lineStyleComboBox->addItem(tr("Dashed"));
+    lineStyleComboBox->addItem(tr("Dot"));
+    lineStyleComboBox->addItem(tr("Dash Dot"));
+    lineStyleComboBox->addItem(tr("Dash Dot Dot"));
 
-	main_layout->addWidget(lineStyleComboBox);
+    main_layout->addWidget(lineStyleComboBox);
 
-	updateGUI();
+    updateGUI();
 }

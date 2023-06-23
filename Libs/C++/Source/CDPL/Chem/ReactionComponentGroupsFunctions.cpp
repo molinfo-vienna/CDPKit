@@ -35,37 +35,37 @@ using namespace CDPL;
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const Reaction& rxn)
 {
-	FragmentList::SharedPointer comp_grps_ptr(new FragmentList());
-	Reaction::ConstComponentIterator comps_end = rxn.getComponentsEnd();
+    FragmentList::SharedPointer comp_grps_ptr(new FragmentList());
+    Reaction::ConstComponentIterator comps_end = rxn.getComponentsEnd();
 
-	for (Reaction::ConstComponentIterator c_it = rxn.getComponentsBegin(); c_it != comps_end; ++c_it) {
-		const Molecule& comp = *c_it;
-		const Base::Any& comp_comp_grps_prop = comp.getProperty(MolecularGraphProperty::COMPONENT_GROUPS);
+    for (Reaction::ConstComponentIterator c_it = rxn.getComponentsBegin(); c_it != comps_end; ++c_it) {
+        const Molecule& comp = *c_it;
+        const Base::Any& comp_comp_grps_prop = comp.getProperty(MolecularGraphProperty::COMPONENT_GROUPS);
 
-		if (comp_comp_grps_prop.isEmpty())
-			continue;
+        if (comp_comp_grps_prop.isEmpty())
+            continue;
 
-		const FragmentList& comp_comp_grps = *comp_comp_grps_prop.getData<FragmentList::SharedPointer>();
+        const FragmentList& comp_comp_grps = *comp_comp_grps_prop.getData<FragmentList::SharedPointer>();
 
-		comp_grps_ptr->insertElements(comp_grps_ptr->getElementsEnd(), 
-									  comp_comp_grps.getBase().getElementsBegin(), comp_comp_grps.getBase().getElementsEnd());
-	}
+        comp_grps_ptr->insertElements(comp_grps_ptr->getElementsEnd(), 
+                                      comp_comp_grps.getBase().getElementsBegin(), comp_comp_grps.getBase().getElementsEnd());
+    }
 
-	return comp_grps_ptr;
+    return comp_grps_ptr;
 }
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(Reaction& rxn, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_groups = rxn.getProperty(ReactionProperty::COMPONENT_GROUPS, false);
-	
-		if (!prev_groups.isEmpty())
-			return prev_groups.getData<FragmentList::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_groups = rxn.getProperty(ReactionProperty::COMPONENT_GROUPS, false);
+    
+        if (!prev_groups.isEmpty())
+            return prev_groups.getData<FragmentList::SharedPointer>();
+    }
 
-	FragmentList::SharedPointer comp_grps_ptr = perceiveComponentGroups(rxn);
+    FragmentList::SharedPointer comp_grps_ptr = perceiveComponentGroups(rxn);
 
-	setComponentGroups(rxn, comp_grps_ptr);
+    setComponentGroups(rxn, comp_grps_ptr);
 
-	return comp_grps_ptr;
+    return comp_grps_ptr;
 }

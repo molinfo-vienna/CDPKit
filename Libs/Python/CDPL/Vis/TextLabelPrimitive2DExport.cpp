@@ -33,42 +33,42 @@
 
 void CDPLPythonVis::exportTextLabelPrimitive2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	void (Vis::TextLabelPrimitive2D::*setPositionFunc1)(const Math::Vector2D&) = &Vis::TextLabelPrimitive2D::setPosition;
-	void (Vis::TextLabelPrimitive2D::*setPositionFunc2)(double, double) = &Vis::TextLabelPrimitive2D::setPosition;
+    void (Vis::TextLabelPrimitive2D::*setPositionFunc1)(const Math::Vector2D&) = &Vis::TextLabelPrimitive2D::setPosition;
+    void (Vis::TextLabelPrimitive2D::*setPositionFunc2)(double, double) = &Vis::TextLabelPrimitive2D::setPosition;
 
-	python::class_<Vis::TextLabelPrimitive2D, 
-		python::bases<Vis::GraphicsPrimitive2D> >("TextLabelPrimitive2D", python::no_init)
-		.def(python::init<>(python::arg("self")))    
-		.def(python::init<const Vis::TextLabelPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Vis::TextLabelPrimitive2D::operator=),
-			 (python::arg("self"), python::arg("prim")), 
-			 python::return_self<>())
-		.def("setText", &Vis::TextLabelPrimitive2D::setText, (python::arg("self"), python::arg("txt")))
-		.def("getText", &Vis::TextLabelPrimitive2D::getText, python::arg("self"), 
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("setPosition", setPositionFunc1, (python::arg("self"), python::arg("pos")))
-		.def("setPosition", setPositionFunc2, (python::arg("self"), python::arg("x"), python::arg("y")))
-		.def("getPosition", &Vis::TextLabelPrimitive2D::getPosition, python::arg("self"), 
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("setPen", &Vis::TextLabelPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
-		.def("getPen", &Vis::TextLabelPrimitive2D::getPen, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.def("setFont", &Vis::TextLabelPrimitive2D::setFont, (python::arg("self"), python::arg("font")))
-		.def("getFont", &Vis::TextLabelPrimitive2D::getFont, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.add_property("text", python::make_function(&Vis::TextLabelPrimitive2D::getText, 
-												   python::return_value_policy<python::copy_const_reference>()),
-					  &Vis::TextLabelPrimitive2D::setText)
-		.add_property("position", python::make_function(&Vis::TextLabelPrimitive2D::getPosition, 
-												   python::return_value_policy<python::copy_const_reference>()),
-					  setPositionFunc1)
-		.add_property("pen", python::make_function(&Vis::TextLabelPrimitive2D::getPen, 
-												   python::return_internal_reference<1>()),
-					  &Vis::TextLabelPrimitive2D::setPen)
-		.add_property("font", python::make_function(&Vis::TextLabelPrimitive2D::getFont, 
-												   python::return_internal_reference<1>()),
-					  &Vis::TextLabelPrimitive2D::setFont);
+    python::class_<Vis::TextLabelPrimitive2D, 
+        python::bases<Vis::GraphicsPrimitive2D> >("TextLabelPrimitive2D", python::no_init)
+        .def(python::init<>(python::arg("self")))    
+        .def(python::init<const Vis::TextLabelPrimitive2D&>((python::arg("self"), python::arg("prim"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Vis::TextLabelPrimitive2D::operator=),
+             (python::arg("self"), python::arg("prim")), 
+             python::return_self<>())
+        .def("setText", &Vis::TextLabelPrimitive2D::setText, (python::arg("self"), python::arg("txt")))
+        .def("getText", &Vis::TextLabelPrimitive2D::getText, python::arg("self"), 
+             python::return_value_policy<python::copy_const_reference>())
+        .def("setPosition", setPositionFunc1, (python::arg("self"), python::arg("pos")))
+        .def("setPosition", setPositionFunc2, (python::arg("self"), python::arg("x"), python::arg("y")))
+        .def("getPosition", &Vis::TextLabelPrimitive2D::getPosition, python::arg("self"), 
+             python::return_value_policy<python::copy_const_reference>())
+        .def("setPen", &Vis::TextLabelPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
+        .def("getPen", &Vis::TextLabelPrimitive2D::getPen, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .def("setFont", &Vis::TextLabelPrimitive2D::setFont, (python::arg("self"), python::arg("font")))
+        .def("getFont", &Vis::TextLabelPrimitive2D::getFont, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .add_property("text", python::make_function(&Vis::TextLabelPrimitive2D::getText, 
+                                                   python::return_value_policy<python::copy_const_reference>()),
+                      &Vis::TextLabelPrimitive2D::setText)
+        .add_property("position", python::make_function(&Vis::TextLabelPrimitive2D::getPosition, 
+                                                   python::return_value_policy<python::copy_const_reference>()),
+                      setPositionFunc1)
+        .add_property("pen", python::make_function(&Vis::TextLabelPrimitive2D::getPen, 
+                                                   python::return_internal_reference<1>()),
+                      &Vis::TextLabelPrimitive2D::setPen)
+        .add_property("font", python::make_function(&Vis::TextLabelPrimitive2D::getFont, 
+                                                   python::return_internal_reference<1>()),
+                      &Vis::TextLabelPrimitive2D::setFont);
 }

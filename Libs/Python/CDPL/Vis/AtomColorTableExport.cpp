@@ -32,15 +32,15 @@
 namespace 
 {
 
-	struct AtomColorTable {};
+    struct AtomColorTable {};
 }
 
 
 void CDPLPythonVis::exportAtomColorTables()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomColorTable, boost::noncopyable>("AtomColorTable", python::no_init)
-		.def_readonly("ELEMENT_COLORS_2D", Vis::AtomColorTable::ELEMENT_COLORS_2D); 
+    python::class_<AtomColorTable, boost::noncopyable>("AtomColorTable", python::no_init)
+        .def_readonly("ELEMENT_COLORS_2D", Vis::AtomColorTable::ELEMENT_COLORS_2D); 
 }

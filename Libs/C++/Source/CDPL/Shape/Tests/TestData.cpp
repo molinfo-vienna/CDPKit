@@ -47,128 +47,128 @@ using namespace CDPL;
 namespace
 {
 
-	std::unordered_map<std::string, Shape::GaussianShape::SharedPointer> nameToShapeMap;
-	
-	double getRadius(const Chem::Atom& atom)
-	{
-		using namespace Chem;
-			
-		unsigned int type = getType(atom);
+    std::unordered_map<std::string, Shape::GaussianShape::SharedPointer> nameToShapeMap;
+    
+    double getRadius(const Chem::Atom& atom)
+    {
+        using namespace Chem;
+            
+        unsigned int type = getType(atom);
 
-		switch (type) {
+        switch (type) {
 
-			case AtomType::C:
-				return 1.70;
-				
-			case AtomType::N:
-				return 1.65;
-				
-			case AtomType::H:
-				return 1.00;
-				
-			case AtomType::O:
-				return 1.60;
-				
-			case AtomType::S:
-				return 1.90;
+            case AtomType::C:
+                return 1.70;
+                
+            case AtomType::N:
+                return 1.65;
+                
+            case AtomType::H:
+                return 1.00;
+                
+            case AtomType::O:
+                return 1.60;
+                
+            case AtomType::S:
+                return 1.90;
 
-			default:
-				break;
-		}
+            default:
+                break;
+        }
 
-		return AtomDictionary::getVdWRadius(type);
-	}
-	
-	Shape::GaussianShape::SharedPointer generateMoleculeShape(Chem::Molecule& mol)
-	{
-		using namespace Chem;
-		using namespace Shape;
+        return AtomDictionary::getVdWRadius(type);
+    }
+    
+    Shape::GaussianShape::SharedPointer generateMoleculeShape(Chem::Molecule& mol)
+    {
+        using namespace Chem;
+        using namespace Shape;
 
-		GaussianShape::SharedPointer shape_ptr(new GaussianShape());
-		
-		for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-			Atom& atom = *it;
+        GaussianShape::SharedPointer shape_ptr(new GaussianShape());
+        
+        for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+            Atom& atom = *it;
 
-			shape_ptr->addElement(get3DCoordinates(atom), getRadius(atom));
-		}
+            shape_ptr->addElement(get3DCoordinates(atom), getRadius(atom));
+        }
 
-		return shape_ptr;
-	}
+        return shape_ptr;
+    }
 
-	bool readPDBMolecule(const std::string& fname, Chem::Molecule& mol)
-	{
-		using namespace Biomol;
-		
-		Util::FileDataReader<PDBMoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/") + fname);
+    bool readPDBMolecule(const std::string& fname, Chem::Molecule& mol)
+    {
+        using namespace Biomol;
+        
+        Util::FileDataReader<PDBMoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/") + fname);
 
-		if (!mol_reader.read(mol))
-			return false;
+        if (!mol_reader.read(mol))
+            return false;
 
-		for (std::size_t i = 0; i < mol.getNumAtoms(); ) {
-			if (getHeteroAtomFlag(mol.getAtom(i))) {
-				mol.removeAtom(i);
-				continue;
-			}
+        for (std::size_t i = 0; i < mol.getNumAtoms(); ) {
+            if (getHeteroAtomFlag(mol.getAtom(i))) {
+                mol.removeAtom(i);
+                continue;
+            }
 
-			i++;
-		}
+            i++;
+        }
 /*
-		calcImplicitHydrogenCounts(mol, true);
-		perceiveHybridizationStates(mol, true);
-		setRingFlags(mol, true);
-		setAromaticityFlags(mol, true);
-		makeHydrogenComplete(mol);
-		generateHydrogen3DCoordinates(mol);
-*/		
-		return true;
-	}
-	
-	bool readSDFMolecule(const std::string& fname, Chem::Molecule& mol)
-	{
-		using namespace Chem;
-		
-		Util::FileDataReader<SDFMoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/") + fname);
+        calcImplicitHydrogenCounts(mol, true);
+        perceiveHybridizationStates(mol, true);
+        setRingFlags(mol, true);
+        setAromaticityFlags(mol, true);
+        makeHydrogenComplete(mol);
+        generateHydrogen3DCoordinates(mol);
+*/        
+        return true;
+    }
+    
+    bool readSDFMolecule(const std::string& fname, Chem::Molecule& mol)
+    {
+        using namespace Chem;
+        
+        Util::FileDataReader<SDFMoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/") + fname);
 
-		return mol_reader.read(mol);
-	}
+        return mol_reader.read(mol);
+    }
 
-	struct Init
-	{
+    struct Init
+    {
 
-		Init() {
-			using namespace Chem;
+        Init() {
+            using namespace Chem;
 
-			BasicMolecule mol;
-			
-			if (readPDBMolecule("1crn.pdb", mol))
-				nameToShapeMap["1crn"] = generateMoleculeShape(mol);
+            BasicMolecule mol;
+            
+            if (readPDBMolecule("1crn.pdb", mol))
+                nameToShapeMap["1crn"] = generateMoleculeShape(mol);
 
-			if (readPDBMolecule("2ins.pdb", mol))
-				nameToShapeMap["2ins"] = generateMoleculeShape(mol);
+            if (readPDBMolecule("2ins.pdb", mol))
+                nameToShapeMap["2ins"] = generateMoleculeShape(mol);
 
-			if (readPDBMolecule("3app.pdb", mol))
-				nameToShapeMap["3app"] = generateMoleculeShape(mol);
+            if (readPDBMolecule("3app.pdb", mol))
+                nameToShapeMap["3app"] = generateMoleculeShape(mol);
 
-			if (readSDFMolecule("1dwc_MIT.sdf", mol))
-				nameToShapeMap["1dwc_MIT"] = generateMoleculeShape(mol);
+            if (readSDFMolecule("1dwc_MIT.sdf", mol))
+                nameToShapeMap["1dwc_MIT"] = generateMoleculeShape(mol);
 
-			if (readSDFMolecule("1tmn_0ZN.sdf", mol))
-				nameToShapeMap["1tmn_0ZN"] = generateMoleculeShape(mol);
+            if (readSDFMolecule("1tmn_0ZN.sdf", mol))
+                nameToShapeMap["1tmn_0ZN"] = generateMoleculeShape(mol);
 
-			if (readSDFMolecule("4phv_VAC.sdf", mol))
-				nameToShapeMap["4phv_VAC"] = generateMoleculeShape(mol);
-		}
+            if (readSDFMolecule("4phv_VAC.sdf", mol))
+                nameToShapeMap["4phv_VAC"] = generateMoleculeShape(mol);
+        }
 
-	} init;
+    } init;
 }
 
 Shape::GaussianShape::SharedPointer TestData::getShapeData(const std::string& id, double p)
 {
-	Shape::GaussianShape::SharedPointer shape = nameToShapeMap[id];
+    Shape::GaussianShape::SharedPointer shape = nameToShapeMap[id];
 
-	if (shape)
-		for (Shape::GaussianShape::ElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it)
-			it->setHardness(p);
-	
-	return shape;
+    if (shape)
+        for (Shape::GaussianShape::ElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it)
+            it->setHardness(p);
+    
+    return shape;
 }

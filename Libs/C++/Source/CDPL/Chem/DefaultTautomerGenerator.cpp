@@ -37,9 +37,9 @@ using namespace CDPL;
 
 Chem::DefaultTautomerGenerator::DefaultTautomerGenerator() 
 {
-	addTautomerizationRule(TautomerizationRule::SharedPointer(new GenericHydrogen13ShiftTautomerization()));
-	addTautomerizationRule(TautomerizationRule::SharedPointer(new GenericHydrogen15ShiftTautomerization()));
-	addTautomerizationRule(TautomerizationRule::SharedPointer(new KeteneYnolTautomerization()));
-	addTautomerizationRule(TautomerizationRule::SharedPointer(new PhosphinicAcidTautomerization()));
-	addTautomerizationRule(TautomerizationRule::SharedPointer(new SulfenicAcidTautomerization()));
+    addTautomerizationRule(TautomerizationRule::SharedPointer(new GenericHydrogen13ShiftTautomerization()));
+    addTautomerizationRule(TautomerizationRule::SharedPointer(new GenericHydrogen15ShiftTautomerization()));
+    addTautomerizationRule(TautomerizationRule::SharedPointer(new KeteneYnolTautomerization()));
+    addTautomerizationRule(TautomerizationRule::SharedPointer(new PhosphinicAcidTautomerization()));
+    addTautomerizationRule(TautomerizationRule::SharedPointer(new SulfenicAcidTautomerization()));
 }

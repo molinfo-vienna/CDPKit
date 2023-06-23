@@ -39,55 +39,55 @@ using namespace CDPL;
 
 void ConfGen::SubstituentBulkinessCalculator::calculate(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
+    using namespace Chem;
 
     std::size_t num_atoms = molgraph.getNumAtoms();
 
-	hAtomMask.resize(num_atoms);
-	hAtomMask.reset();
+    hAtomMask.resize(num_atoms);
+    hAtomMask.reset();
 
-	buildAtomTypeMask(molgraph, hAtomMask, AtomType::H, false);
+    buildAtomTypeMask(molgraph, hAtomMask, AtomType::H, false);
 
     ecArray.assign(num_atoms, 1);
 
     std::size_t last_num_classes = 0;
 
     while (true) {
-		tmpECArray.assign(num_atoms, 0);
+        tmpECArray.assign(num_atoms, 0);
 
-		for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
-			const Bond& bond = *it;
-			std::size_t atom1_idx = molgraph.getAtomIndex(bond.getBegin());
+        for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+            const Bond& bond = *it;
+            std::size_t atom1_idx = molgraph.getAtomIndex(bond.getBegin());
 
-			if (hAtomMask.test(atom1_idx))
-				continue;
+            if (hAtomMask.test(atom1_idx))
+                continue;
 
-			std::size_t atom2_idx = molgraph.getAtomIndex(bond.getEnd());
-	
-			if (hAtomMask.test(atom2_idx))
-				continue;
+            std::size_t atom2_idx = molgraph.getAtomIndex(bond.getEnd());
+    
+            if (hAtomMask.test(atom2_idx))
+                continue;
 
-			tmpECArray[atom1_idx] += ecArray[atom2_idx];
-			tmpECArray[atom2_idx] += ecArray[atom1_idx];
-		}
+            tmpECArray[atom1_idx] += ecArray[atom2_idx];
+            tmpECArray[atom2_idx] += ecArray[atom1_idx];
+        }
 
-		ecArray = tmpECArray;
+        ecArray = tmpECArray;
 
-		std::sort(tmpECArray.begin(), tmpECArray.end());
+        std::sort(tmpECArray.begin(), tmpECArray.end());
 
-		std::size_t num_classes = 0;
-		std::size_t curr_ec = 0;
+        std::size_t num_classes = 0;
+        std::size_t curr_ec = 0;
 
-		for (std::size_t i = 0; i < num_atoms; i++) {
-			if (num_classes == 0 || curr_ec != tmpECArray[i]) {
-				curr_ec = tmpECArray[i];
-				num_classes++;
-			}
-		}
+        for (std::size_t i = 0; i < num_atoms; i++) {
+            if (num_classes == 0 || curr_ec != tmpECArray[i]) {
+                curr_ec = tmpECArray[i];
+                num_classes++;
+            }
+        }
 
-		if (num_classes <= last_num_classes) 
-			break;
+        if (num_classes <= last_num_classes) 
+            break;
 
-		last_num_classes = num_classes;
+        last_num_classes = num_classes;
     }
 }

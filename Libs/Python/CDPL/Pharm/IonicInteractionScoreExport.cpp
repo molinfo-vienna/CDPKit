@@ -36,11 +36,11 @@ void CDPLPythonPharm::exportIonicInteractionScore()
     using namespace CDPL;
 
     python::class_<Pharm::IonicInteractionScore, Pharm::IonicInteractionScore::SharedPointer,
-				   python::bases<Pharm::FeatureDistanceScore>, boost::noncopyable>("IonicInteractionScore", python::no_init)
-		.def(python::init<const Pharm::IonicInteractionScore&>((python::arg("self"), python::arg("score"))))
-		.def(python::init<double, double>((python::arg("self"), 
-										   python::arg("min_dist") = Pharm::IonicInteractionScore::DEF_MIN_DISTANCE,
-										   python::arg("max_dist") = Pharm::IonicInteractionScore::DEF_MAX_DISTANCE)))
-		.def_readonly("DEF_MIN_DISTANCE", Pharm::IonicInteractionScore::DEF_MIN_DISTANCE)
-		.def_readonly("DEF_MAX_DISTANCE", Pharm::IonicInteractionScore::DEF_MAX_DISTANCE);
+                   python::bases<Pharm::FeatureDistanceScore>, boost::noncopyable>("IonicInteractionScore", python::no_init)
+        .def(python::init<const Pharm::IonicInteractionScore&>((python::arg("self"), python::arg("score"))))
+        .def(python::init<double, double>((python::arg("self"), 
+                                           python::arg("min_dist") = Pharm::IonicInteractionScore::DEF_MIN_DISTANCE,
+                                           python::arg("max_dist") = Pharm::IonicInteractionScore::DEF_MAX_DISTANCE)))
+        .def_readonly("DEF_MIN_DISTANCE", Pharm::IonicInteractionScore::DEF_MIN_DISTANCE)
+        .def_readonly("DEF_MAX_DISTANCE", Pharm::IonicInteractionScore::DEF_MAX_DISTANCE);
 }

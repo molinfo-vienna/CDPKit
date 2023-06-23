@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em>
-		 *        [\ref INCHI] format.
-		 */
-		typedef Util::DefaultDataInputHandler<INCHIMoleculeReader, DataFormat::INCHI> INCHIMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em>
+         *        [\ref INCHI] format.
+         */
+        typedef Util::DefaultDataInputHandler<INCHIMoleculeReader, DataFormat::INCHI> INCHIMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_INCHIMOLECULEINPUTHANDLER_HPP

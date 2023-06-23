@@ -40,14 +40,14 @@
 
 BOOST_AUTO_TEST_CASE(MMFF94GradientCalculatorTest)
 {
-	const static double E_DELTA_MAX = 0.00000001;
-	const static double GRAD_DELTA_MAX = 0.000004;
-	const static double EPSILON = 0.0000001;
+    const static double E_DELTA_MAX = 0.00000001;
+    const static double GRAD_DELTA_MAX = 0.000004;
+    const static double EPSILON = 0.0000001;
 
     using namespace CDPL;
     using namespace Testing;
 
-	ForceField::MMFF94InteractionParameterizer parameterizer;
+    ForceField::MMFF94InteractionParameterizer parameterizer;
     ForceField::MMFF94InteractionData ia_data;
     ForceField::MMFF94EnergyCalculator<double> en_calc;
     ForceField::MMFF94GradientCalculator<double> gr_calc;
@@ -55,85 +55,85 @@ BOOST_AUTO_TEST_CASE(MMFF94GradientCalculatorTest)
     Math::Vector3DArray grad;
     Math::Vector3D num_atom_grad;
 
-	for (bool stat = false; !stat; stat = true) {
-		const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
+    for (bool stat = false; !stat; stat = true) {
+        const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
 
-		if (stat)
-			parameterizer.setParameterSet(ForceField::MMFF94ParameterSet::STATIC);
-		else
-			parameterizer.setParameterSet(ForceField::MMFF94ParameterSet::DYNAMIC);
+        if (stat)
+            parameterizer.setParameterSet(ForceField::MMFF94ParameterSet::STATIC);
+        else
+            parameterizer.setParameterSet(ForceField::MMFF94ParameterSet::DYNAMIC);
 
-		for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
-			const Chem::Molecule& mol = *mols[mol_idx];
-	
-			coords.clear();
-			get3DCoordinates(mol, coords);
-
-			grad.resize(coords.getSize());
-	
-			parameterizer.parameterize(mol, ia_data);
-			en_calc.setup(ia_data);
-			gr_calc.setup(ia_data, mol.getNumAtoms());
-
-			gr_calc(coords, grad);
-			en_calc(coords);
-		   
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getTotalEnergy() - en_calc.getTotalEnergy()) <= E_DELTA_MAX, 
-								"Total energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getTotalEnergy() << " != " << en_calc.getTotalEnergy());
-
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getBondStretchingEnergy() - en_calc.getBondStretchingEnergy()) <= E_DELTA_MAX, 
-								"Total bond stretching energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getBondStretchingEnergy() << " != " << en_calc.getBondStretchingEnergy());
-
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getAngleBendingEnergy() - en_calc.getAngleBendingEnergy()) <= E_DELTA_MAX, 
-								"Total angle bending energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getAngleBendingEnergy() << " != " << en_calc.getAngleBendingEnergy());
-
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getStretchBendEnergy() - en_calc.getStretchBendEnergy()) <= E_DELTA_MAX, 
-								"Total stretch-bend energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getStretchBendEnergy() << " != " << en_calc.getStretchBendEnergy());
-
-  			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getOutOfPlaneBendingEnergy() - en_calc.getOutOfPlaneBendingEnergy()) <= E_DELTA_MAX, 
-								"Total out-of-plane bending energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getOutOfPlaneBendingEnergy() << " != " << en_calc.getOutOfPlaneBendingEnergy());
-
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getTorsionEnergy() - en_calc.getTorsionEnergy()) <= E_DELTA_MAX, 
-								"Total torsion energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getTorsionEnergy() << " != " << en_calc.getTorsionEnergy());
-	    
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getVanDerWaalsEnergy() - en_calc.getVanDerWaalsEnergy()) <= E_DELTA_MAX, 
-								"Total van der Waals energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getVanDerWaalsEnergy() << " != " << en_calc.getVanDerWaalsEnergy());
+        for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
+            const Chem::Molecule& mol = *mols[mol_idx];
     
-			BOOST_CHECK_MESSAGE(std::abs(gr_calc.getElectrostaticEnergy() - en_calc.getElectrostaticEnergy()) <= E_DELTA_MAX, 
-								"Total electrostatic energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): grad. calculator energy " << gr_calc.getElectrostaticEnergy() << " != " << en_calc.getElectrostaticEnergy());
+            coords.clear();
+            get3DCoordinates(mol, coords);
 
-			double max_diff = 0.0;
+            grad.resize(coords.getSize());
+    
+            parameterizer.parameterize(mol, ia_data);
+            en_calc.setup(ia_data);
+            gr_calc.setup(ia_data, mol.getNumAtoms());
 
-			for (std::size_t i = 0; i < coords.getSize(); i++) {
-				Math::Vector3D& atom_pos = coords[i];
+            gr_calc(coords, grad);
+            en_calc(coords);
+           
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getTotalEnergy() - en_calc.getTotalEnergy()) <= E_DELTA_MAX, 
+                                "Total energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getTotalEnergy() << " != " << en_calc.getTotalEnergy());
 
-				for (std::size_t j = 0; j < 3; j++) {
-					double c = atom_pos[j];
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getBondStretchingEnergy() - en_calc.getBondStretchingEnergy()) <= E_DELTA_MAX, 
+                                "Total bond stretching energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getBondStretchingEnergy() << " != " << en_calc.getBondStretchingEnergy());
 
-					atom_pos[j] = c + EPSILON;
-					double e1 = en_calc(coords);
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getAngleBendingEnergy() - en_calc.getAngleBendingEnergy()) <= E_DELTA_MAX, 
+                                "Total angle bending energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getAngleBendingEnergy() << " != " << en_calc.getAngleBendingEnergy());
 
-					atom_pos[j] = c - EPSILON;
-					double e2 = en_calc(coords);
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getStretchBendEnergy() - en_calc.getStretchBendEnergy()) <= E_DELTA_MAX, 
+                                "Total stretch-bend energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getStretchBendEnergy() << " != " << en_calc.getStretchBendEnergy());
 
-					atom_pos[j] = c;
-					num_atom_grad[j] = (e1 - e2) / (2 * EPSILON);
-				}
+              BOOST_CHECK_MESSAGE(std::abs(gr_calc.getOutOfPlaneBendingEnergy() - en_calc.getOutOfPlaneBendingEnergy()) <= E_DELTA_MAX, 
+                                "Total out-of-plane bending energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getOutOfPlaneBendingEnergy() << " != " << en_calc.getOutOfPlaneBendingEnergy());
 
-				max_diff = std::max(max_diff, normInf(grad[i] - num_atom_grad));
-			}
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getTorsionEnergy() - en_calc.getTorsionEnergy()) <= E_DELTA_MAX, 
+                                "Total torsion energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getTorsionEnergy() << " != " << en_calc.getTorsionEnergy());
+        
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getVanDerWaalsEnergy() - en_calc.getVanDerWaalsEnergy()) <= E_DELTA_MAX, 
+                                "Total van der Waals energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getVanDerWaalsEnergy() << " != " << en_calc.getVanDerWaalsEnergy());
+    
+            BOOST_CHECK_MESSAGE(std::abs(gr_calc.getElectrostaticEnergy() - en_calc.getElectrostaticEnergy()) <= E_DELTA_MAX, 
+                                "Total electrostatic energy mismatch for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): grad. calculator energy " << gr_calc.getElectrostaticEnergy() << " != " << en_calc.getElectrostaticEnergy());
 
-			BOOST_CHECK_MESSAGE((max_diff <= GRAD_DELTA_MAX), 
-								"Gradient deviation too large for molecule #" << mol_idx << " (" << getName(mol) <<
-								"): max. numerical/analytical grad. element deviation of " << max_diff << " > " << GRAD_DELTA_MAX);
-		}
+            double max_diff = 0.0;
+
+            for (std::size_t i = 0; i < coords.getSize(); i++) {
+                Math::Vector3D& atom_pos = coords[i];
+
+                for (std::size_t j = 0; j < 3; j++) {
+                    double c = atom_pos[j];
+
+                    atom_pos[j] = c + EPSILON;
+                    double e1 = en_calc(coords);
+
+                    atom_pos[j] = c - EPSILON;
+                    double e2 = en_calc(coords);
+
+                    atom_pos[j] = c;
+                    num_atom_grad[j] = (e1 - e2) / (2 * EPSILON);
+                }
+
+                max_diff = std::max(max_diff, normInf(grad[i] - num_atom_grad));
+            }
+
+            BOOST_CHECK_MESSAGE((max_diff <= GRAD_DELTA_MAX), 
+                                "Gradient deviation too large for molecule #" << mol_idx << " (" << getName(mol) <<
+                                "): max. numerical/analytical grad. element deviation of " << max_diff << " > " << GRAD_DELTA_MAX);
+        }
     }
 }

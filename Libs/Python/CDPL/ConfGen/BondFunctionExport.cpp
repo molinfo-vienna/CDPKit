@@ -34,23 +34,23 @@
 namespace
 {
 
-	bool isFragmentLinkBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph)
-	{
-		return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
-	}
+    bool isFragmentLinkBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph)
+    {
+        return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
+    }
 
-	bool isRotatableBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph, bool het_h_rotors)
-	{
-		return CDPL::ConfGen::isRotatableBond(bond, molgraph, het_h_rotors);
-	}
+    bool isRotatableBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph, bool het_h_rotors)
+    {
+        return CDPL::ConfGen::isRotatableBond(bond, molgraph, het_h_rotors);
+    }
 }
 
 
 void CDPLPythonConfGen::exportBondFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
-	python::def("isRotatableBond", &isRotatableBond, (python::arg("bond"), python::arg("molgraph"), python::arg("het_h_rotors"))); 
+    python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
+    python::def("isRotatableBond", &isRotatableBond, (python::arg("bond"), python::arg("molgraph"), python::arg("het_h_rotors"))); 
 }

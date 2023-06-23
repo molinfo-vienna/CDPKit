@@ -33,15 +33,15 @@
 namespace 
 {
 
-	struct DataFormat {};
+    struct DataFormat {};
 }
 
 
 void CDPLPythonConfGen::exportDataFormats()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("CFL", &ConfGen::DataFormat::CFL);
+    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
+        .def_readonly("CFL", &ConfGen::DataFormat::CFL);
 }

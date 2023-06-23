@@ -36,31 +36,31 @@
 namespace
 {
 
-	double callOperator(CDPL::GRAIL::GeneralizedBellAtomDensity& func, const CDPL::Math::Vector3D& pos, const CDPL::Math::Vector3D& atom_pos,
-						CDPL::Chem::Atom& atom)
-	{
-		return func(pos, atom_pos, atom);
-	}
+    double callOperator(CDPL::GRAIL::GeneralizedBellAtomDensity& func, const CDPL::Math::Vector3D& pos, const CDPL::Math::Vector3D& atom_pos,
+                        CDPL::Chem::Atom& atom)
+    {
+        return func(pos, atom_pos, atom);
+    }
 }
 
 
 void CDPLPythonGRAIL::exportGeneralizedBellAtomDensity()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<GRAIL::GeneralizedBellAtomDensity, boost::noncopyable>("GeneralizedBellAtomDensity", python::no_init)
-		.def(python::init<const GRAIL::GeneralizedBellAtomDensity&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<double, double>((python::arg("self"), python::arg("probe_radius") = GRAIL::GeneralizedBellAtomDensity::DEF_PROBE_RADIUS,
-								   python::arg("rad_scaling_factor") = GRAIL::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GeneralizedBellAtomDensity>())
-		.def("getProbeRadius", &GRAIL::GeneralizedBellAtomDensity::getProbeRadius, python::arg("self"))
-		.def("getRadiusScalingFactor", &GRAIL::GeneralizedBellAtomDensity::getRadiusScalingFactor, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GeneralizedBellAtomDensity::operator=), 
-			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("pos"), python::arg("atom_pos"), python::arg("atom")))
-		.add_property("probeRadius", &GRAIL::GeneralizedBellAtomDensity::getProbeRadius)
-		.add_property("radiusScalingFactor", &GRAIL::GeneralizedBellAtomDensity::getRadiusScalingFactor)
-		.def_readonly("DEF_RADIUS_SCALING_FACTOR", GRAIL::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR)
-		.def_readonly("DEF_PROBE_RADIUS", GRAIL::GeneralizedBellAtomDensity::DEF_PROBE_RADIUS);
+    python::class_<GRAIL::GeneralizedBellAtomDensity, boost::noncopyable>("GeneralizedBellAtomDensity", python::no_init)
+        .def(python::init<const GRAIL::GeneralizedBellAtomDensity&>((python::arg("self"), python::arg("func"))))
+        .def(python::init<double, double>((python::arg("self"), python::arg("probe_radius") = GRAIL::GeneralizedBellAtomDensity::DEF_PROBE_RADIUS,
+                                   python::arg("rad_scaling_factor") = GRAIL::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR)))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GeneralizedBellAtomDensity>())
+        .def("getProbeRadius", &GRAIL::GeneralizedBellAtomDensity::getProbeRadius, python::arg("self"))
+        .def("getRadiusScalingFactor", &GRAIL::GeneralizedBellAtomDensity::getRadiusScalingFactor, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GeneralizedBellAtomDensity::operator=), 
+             (python::arg("self"), python::arg("func")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("pos"), python::arg("atom_pos"), python::arg("atom")))
+        .add_property("probeRadius", &GRAIL::GeneralizedBellAtomDensity::getProbeRadius)
+        .add_property("radiusScalingFactor", &GRAIL::GeneralizedBellAtomDensity::getRadiusScalingFactor)
+        .def_readonly("DEF_RADIUS_SCALING_FACTOR", GRAIL::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR)
+        .def_readonly("DEF_PROBE_RADIUS", GRAIL::GeneralizedBellAtomDensity::DEF_PROBE_RADIUS);
 }

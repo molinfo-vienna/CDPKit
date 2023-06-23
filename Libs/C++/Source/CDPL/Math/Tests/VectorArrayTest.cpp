@@ -29,7 +29,7 @@
 
 BOOST_AUTO_TEST_CASE(VectorArrayTest)
 {
-	using namespace CDPL;
-	using namespace Math;
+    using namespace CDPL;
+    using namespace Math;
 
 }

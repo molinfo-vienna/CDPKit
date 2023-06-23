@@ -34,56 +34,56 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
-	class CTabVersionEditWidget;
+    class Settings;
+    class CTabVersionEditWidget;
 
-	class RDFileIOSettingsEditWidget : public SettingsEditWidget
-	{
+    class RDFileIOSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		RDFileIOSettingsEditWidget(QWidget*, Settings&);
+    public:
+        RDFileIOSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleRXNFileVersionChange();
+    private slots:
+        void handleRXNFileVersionChange();
 
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&              settings;
-		QCheckBox*             iptStrictErrorCheckingCheckBox;
-		QCheckBox*             iptIgnoreParityCheckBox;
-		QCheckBox*             iptTrimStringsCheckBox;
-		QCheckBox*             iptTrimLinesCheckBox;
-		QCheckBox*             iptCheckLineLengthCheckBox;
-		QCheckBox*             optStrictErrorCheckingCheckBox;
-		QCheckBox*             optUpdateTimeStampCheckBox;
-		QCheckBox*             optTrimStringsCheckBox;
-		QCheckBox*             optTrimLinesCheckBox;
-		QCheckBox*             optTruncateStringsCheckBox;
-		QCheckBox*             optTruncateLinesCheckBox;
-		QCheckBox*             optCheckLineLengthCheckBox;
-		QCheckBox*             optIgnoreParityCheckBox;
-		QCheckBox*             optSplitRecordsCheckBox;
-		CTabVersionEditWidget* optCTabVersionEditWidget;
-		unsigned int           optCTabVersion;
-		unsigned int           optRXNFileVersion;
-		bool                   haveChanges;
-	};
+        Settings&              settings;
+        QCheckBox*             iptStrictErrorCheckingCheckBox;
+        QCheckBox*             iptIgnoreParityCheckBox;
+        QCheckBox*             iptTrimStringsCheckBox;
+        QCheckBox*             iptTrimLinesCheckBox;
+        QCheckBox*             iptCheckLineLengthCheckBox;
+        QCheckBox*             optStrictErrorCheckingCheckBox;
+        QCheckBox*             optUpdateTimeStampCheckBox;
+        QCheckBox*             optTrimStringsCheckBox;
+        QCheckBox*             optTrimLinesCheckBox;
+        QCheckBox*             optTruncateStringsCheckBox;
+        QCheckBox*             optTruncateLinesCheckBox;
+        QCheckBox*             optCheckLineLengthCheckBox;
+        QCheckBox*             optIgnoreParityCheckBox;
+        QCheckBox*             optSplitRecordsCheckBox;
+        CTabVersionEditWidget* optCTabVersionEditWidget;
+        unsigned int           optCTabVersion;
+        unsigned int           optRXNFileVersion;
+        bool                   haveChanges;
+    };
 }
 
 #endif // CHOX_RDFILEIOSETTINGSEDITWIDGET_HPP

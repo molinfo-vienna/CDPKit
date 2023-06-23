@@ -42,53 +42,53 @@ class QPaintDevice;
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Implements the FontMetrics interface for the \e Qt rendering backend.
-		 *
-		 * \c %QtFontMetrics is implemented by wrapping a corresponding \c QFontMetrics instance created for the
-		 * font specified by setFont(). For more information about \c QFontMetrics and the <em>Qt Toolkit</em> see
-		 * [\ref QTDOC].
-		 */
-		class CDPL_VIS_API QtFontMetrics : public FontMetrics
-		{
+        /**
+         * \brief Implements the FontMetrics interface for the \e Qt rendering backend.
+         *
+         * \c %QtFontMetrics is implemented by wrapping a corresponding \c QFontMetrics instance created for the
+         * font specified by setFont(). For more information about \c QFontMetrics and the <em>Qt Toolkit</em> see
+         * [\ref QTDOC].
+         */
+        class CDPL_VIS_API QtFontMetrics : public FontMetrics
+        {
 
-		public:
-			/**
-			 * \brief Constructs a font metrics object for \e Qt's default font and the given paint device.
-			 * \param paint_dev A pointer to the \e Qt paint device, or \e null if unspecified.
-			 */
-			QtFontMetrics(QPaintDevice* paint_dev = 0);
+        public:
+            /**
+             * \brief Constructs a font metrics object for \e Qt's default font and the given paint device.
+             * \param paint_dev A pointer to the \e Qt paint device, or \e null if unspecified.
+             */
+            QtFontMetrics(QPaintDevice* paint_dev = 0);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~QtFontMetrics();
+            /**
+             * \brief Destructor.
+             */
+            ~QtFontMetrics();
 
-			void setFont(const Font& font);
+            void setFont(const Font& font);
 
-			double getAscent() const; 
-			double getDescent() const; 
-			double getHeight() const; 
-			double getLeading() const; 
+            double getAscent() const; 
+            double getDescent() const; 
+            double getHeight() const; 
+            double getLeading() const; 
 
-			double getWidth(const std::string& str) const; 
-			double getWidth(char ch) const; 
+            double getWidth(const std::string& str) const; 
+            double getWidth(char ch) const; 
 
-			void getBounds(const std::string& str, Rectangle2D& bounds) const; 
-			void getBounds(char ch, Rectangle2D& bounds) const; 
+            void getBounds(const std::string& str, Rectangle2D& bounds) const; 
+            void getBounds(char ch, Rectangle2D& bounds) const; 
 
-		private:
-			QtFontMetrics(const QtFontMetrics&);
+        private:
+            QtFontMetrics(const QtFontMetrics&);
 
-			QtFontMetrics& operator=(const QtFontMetrics&);
+            QtFontMetrics& operator=(const QtFontMetrics&);
 
-			QPaintDevice*                qPaintDevice;
-			std::auto_ptr<QFontMetricsF> qFontMetrics;
-		};
-	}
+            QPaintDevice*                qPaintDevice;
+            std::auto_ptr<QFontMetricsF> qFontMetrics;
+        };
+    }
 }
 
 #endif // CDPL_VIS_QTFONTMETRICS_HPP

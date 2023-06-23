@@ -41,55 +41,55 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief DefaultPharmacophoreGenerator.
-		 */
-		class CDPL_PHARM_API DefaultPharmacophoreGenerator : public PharmacophoreGenerator
-		{
+        /**
+         * \brief DefaultPharmacophoreGenerator.
+         */
+        class CDPL_PHARM_API DefaultPharmacophoreGenerator : public PharmacophoreGenerator
+        {
 
-		  public:
-			/**
-			 * \brief Flags controlling feature generation.
-			 */
-			enum Configuration
-			{
-			
-			  /**
-			   * \brief If set, ionic features are only generated for explicitely charged atoms/groups.
-			   */
-			  PI_NI_ON_CHARGED_GROUPS_ONLY = 0x1,
+          public:
+            /**
+             * \brief Flags controlling feature generation.
+             */
+            enum Configuration
+            {
+            
+              /**
+               * \brief If set, ionic features are only generated for explicitely charged atoms/groups.
+               */
+              PI_NI_ON_CHARGED_GROUPS_ONLY = 0x1,
 
-			  /**
-			   * \brief If set, the HBD feature representation will always be a defined vector
-			   *        from the hydrogen donor heavy atom to the hydrogen atom.
-			   */
-			  STATIC_H_DONORS = 0x2,
+              /**
+               * \brief If set, the HBD feature representation will always be a defined vector
+               *        from the hydrogen donor heavy atom to the hydrogen atom.
+               */
+              STATIC_H_DONORS = 0x2,
 
-			  /**
-			   * \brief Default configuration.
-			   */
-			  DEFAULT_CONFIG = 0
-			};
+              /**
+               * \brief Default configuration.
+               */
+              DEFAULT_CONFIG = 0
+            };
 
-			/**
-			 * \brief Constructs the \c %DefaultPharmacophoreGenerator instance.
-			 */
-			DefaultPharmacophoreGenerator(int config = DEFAULT_CONFIG);
+            /**
+             * \brief Constructs the \c %DefaultPharmacophoreGenerator instance.
+             */
+            DefaultPharmacophoreGenerator(int config = DEFAULT_CONFIG);
 
-			/**
-			 * \brief Perceives all pharmacophore features of the molecular graph a\ molgraph
-			 *        and adds them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param config Feature generation configuration.
-			 */
-			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, int config = DEFAULT_CONFIG);
+            /**
+             * \brief Perceives all pharmacophore features of the molecular graph a\ molgraph
+             *        and adds them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             * \param config Feature generation configuration.
+             */
+            DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, int config = DEFAULT_CONFIG);
 
-			void applyConfiguration(int config);
-			
-		  private:
-			void init(int config);
-		};
+            void applyConfiguration(int config);
+            
+          private:
+            void init(int config);
+        };
     }
 }
 

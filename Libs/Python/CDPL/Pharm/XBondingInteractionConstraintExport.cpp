@@ -37,9 +37,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::XBondingInteractionConstraint& constr, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+                      CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return constr(ftr1, ftr2);
+        return constr(ftr1, ftr2);
     }
 }
 
@@ -50,26 +50,26 @@ void CDPLPythonPharm::exportXBondingInteractionConstraint()
     using namespace CDPL;
 
     python::class_<Pharm::XBondingInteractionConstraint, boost::noncopyable>("XBondingInteractionConstraint", python::no_init)
-		.def(python::init<const Pharm::XBondingInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
-		.def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
-																 python::arg("min_ax_dist") = Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE, 
-																 python::arg("max_ax_dist") = Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE,
-																 python::arg("min_axb_ang") = Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE,
-																 python::arg("max_acc_ang") = Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::XBondingInteractionConstraint>())
-		.def("getMinAXDistance", &Pharm::XBondingInteractionConstraint::getMinAXDistance, python::arg("self"))
-		.def("getMaxAXDistance", &Pharm::XBondingInteractionConstraint::getMaxAXDistance, python::arg("self"))
-		.def("getMinAXBAngle", &Pharm::XBondingInteractionConstraint::getMinAXBAngle, python::arg("self"))
-		.def("getMaxAcceptorAngle", &Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondingInteractionConstraint::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.add_property("minAXDistance", &Pharm::XBondingInteractionConstraint::getMinAXDistance)
-		.add_property("maxAXDistance", &Pharm::XBondingInteractionConstraint::getMaxAXDistance)
-		.add_property("minAXBAngle", &Pharm::XBondingInteractionConstraint::getMinAXBAngle)
-		.add_property("maxAcceptorAngle", &Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle)
-		.def_readonly("DEF_MIN_AX_DISTANCE", Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE)
-		.def_readonly("DEF_MAX_AX_DISTANCE", Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE)
-		.def_readonly("DEF_MIN_AXB_ANGLE", Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE)
-		.def_readonly("DEF_MAX_ACC_ANGLE", Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE);
+        .def(python::init<const Pharm::XBondingInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
+        .def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
+                                                                 python::arg("min_ax_dist") = Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE, 
+                                                                 python::arg("max_ax_dist") = Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE,
+                                                                 python::arg("min_axb_ang") = Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE,
+                                                                 python::arg("max_acc_ang") = Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE)))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::XBondingInteractionConstraint>())
+        .def("getMinAXDistance", &Pharm::XBondingInteractionConstraint::getMinAXDistance, python::arg("self"))
+        .def("getMaxAXDistance", &Pharm::XBondingInteractionConstraint::getMaxAXDistance, python::arg("self"))
+        .def("getMinAXBAngle", &Pharm::XBondingInteractionConstraint::getMinAXBAngle, python::arg("self"))
+        .def("getMaxAcceptorAngle", &Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondingInteractionConstraint::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+        .add_property("minAXDistance", &Pharm::XBondingInteractionConstraint::getMinAXDistance)
+        .add_property("maxAXDistance", &Pharm::XBondingInteractionConstraint::getMaxAXDistance)
+        .add_property("minAXBAngle", &Pharm::XBondingInteractionConstraint::getMinAXBAngle)
+        .add_property("maxAcceptorAngle", &Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle)
+        .def_readonly("DEF_MIN_AX_DISTANCE", Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE)
+        .def_readonly("DEF_MAX_AX_DISTANCE", Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE)
+        .def_readonly("DEF_MIN_AXB_ANGLE", Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE)
+        .def_readonly("DEF_MAX_ACC_ANGLE", Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE);
 }

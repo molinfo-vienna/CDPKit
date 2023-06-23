@@ -40,34 +40,34 @@ using namespace CDPL;
 namespace
 {
 
- 	struct AtomPairWeightFunc
-	{
+     struct AtomPairWeightFunc
+    {
 
-		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_atom_type) const {
-			unsigned int atom_type1 = getType(atom1);
-			unsigned int atom_type2 = getType(atom2);
+        double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_atom_type) const {
+            unsigned int atom_type1 = getType(atom1);
+            unsigned int atom_type2 = getType(atom2);
 
-			if (atom_type1 == slot_atom_type && atom_type2 == slot_atom_type)
-				return 2;
+            if (atom_type1 == slot_atom_type && atom_type2 == slot_atom_type)
+                return 2;
 
-			if (atom_type1 == slot_atom_type || atom_type2 == slot_atom_type)
-				return 1;
+            if (atom_type1 == slot_atom_type || atom_type2 == slot_atom_type)
+                return 1;
 
-			return 0;
-		}
-	};
+            return 0;
+        }
+    };
 
     unsigned int ATOM_TYPES[] = {
-	    Chem::AtomType::H,
-		Chem::AtomType::C,
-		Chem::AtomType::N,
-		Chem::AtomType::O,
-		Chem::AtomType::S,
-		Chem::AtomType::P,
-		Chem::AtomType::F,
-		Chem::AtomType::Cl,
-		Chem::AtomType::Br,
-		Chem::AtomType::I
+        Chem::AtomType::H,
+        Chem::AtomType::C,
+        Chem::AtomType::N,
+        Chem::AtomType::O,
+        Chem::AtomType::S,
+        Chem::AtomType::P,
+        Chem::AtomType::F,
+        Chem::AtomType::Cl,
+        Chem::AtomType::Br,
+        Chem::AtomType::I
     };
 }
 
@@ -87,7 +87,7 @@ void CDPL::Descr::MoleculeRDFDescriptorCalculator::setSmoothingFactor(double fac
 {
     rdfCalculator.setSmoothingFactor(factor);
 }
-		
+        
 double CDPL::Descr::MoleculeRDFDescriptorCalculator::getSmoothingFactor() const
 {
     return rdfCalculator.getSmoothingFactor();
@@ -145,31 +145,31 @@ void CDPL::Descr::MoleculeRDFDescriptorCalculator::setAtomPairWeightFunction(con
 
 void CDPL::Descr::MoleculeRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding(bool enable)
 {
-	rdfCalculator.enableDistanceToIntervalCenterRounding(enable);
+    rdfCalculator.enableDistanceToIntervalCenterRounding(enable);
 }
 
 bool CDPL::Descr::MoleculeRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled() const
 {
-	return rdfCalculator.distanceToIntervalsCenterRoundingEnabled();
+    return rdfCalculator.distanceToIntervalsCenterRoundingEnabled();
 }
 
 void CDPL::Descr::MoleculeRDFDescriptorCalculator::calculate(const Chem::AtomContainer& cntnr, Math::DVector& descr)
 {
-	using namespace std::placeholders;
-	
+    using namespace std::placeholders;
+    
     std::size_t sub_descr_size = rdfCalculator.getNumSteps() + 1;
     std::size_t num_atom_types = sizeof(ATOM_TYPES) / sizeof(unsigned int);
 
     descr.resize(sub_descr_size * num_atom_types, false);
 
     for (std::size_t i = 0; i < num_atom_types; i++) {
-		if (weightFunc)
-			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i]));
-		else
-			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(AtomPairWeightFunc(), _1, _2, ATOM_TYPES[i]));
+        if (weightFunc)
+            rdfCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i]));
+        else
+            rdfCalculator.setEntityPairWeightFunction(std::bind<double>(AtomPairWeightFunc(), _1, _2, ATOM_TYPES[i]));
 
-		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
+        Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 
-		rdfCalculator.calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), sub_descr);
+        rdfCalculator.calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), sub_descr);
     }
 }

@@ -31,5 +31,5 @@
 
 void CDPLPythonPharm::exportFeatureContainerOutputHandler()
 {
-	CDPLPythonBase::DataOutputHandlerExport<CDPL::Pharm::FeatureContainer>("FeatureContainerOutputHandler");
+    CDPLPythonBase::DataOutputHandlerExport<CDPL::Pharm::FeatureContainer>("FeatureContainerOutputHandler");
 }

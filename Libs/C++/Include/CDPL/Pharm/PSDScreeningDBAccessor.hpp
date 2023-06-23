@@ -40,67 +40,67 @@ namespace CDPL
 
     namespace Pharm
     {
-	
-	    class PSDScreeningDBAccessorImpl;
+    
+        class PSDScreeningDBAccessorImpl;
 
-		/**
-		 * \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
-		 */
-		class CDPL_PHARM_API PSDScreeningDBAccessor : public ScreeningDBAccessor
-		{
+        /**
+         * \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
+         */
+        class CDPL_PHARM_API PSDScreeningDBAccessor : public ScreeningDBAccessor
+        {
 
-		  public:
-			typedef std::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
+          public:
+            typedef std::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
 
-			PSDScreeningDBAccessor();
+            PSDScreeningDBAccessor();
 
-			/**
-			 * \brief Constructs a \c %ScreeningDBAccessor instance that will read data from the 
-			 *        database-file specified by \a name.
-			 * \param name The name of the database-file.
-			 */
-			PSDScreeningDBAccessor(const std::string& name);
+            /**
+             * \brief Constructs a \c %ScreeningDBAccessor instance that will read data from the 
+             *        database-file specified by \a name.
+             * \param name The name of the database-file.
+             */
+            PSDScreeningDBAccessor(const std::string& name);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~PSDScreeningDBAccessor();
+            /**
+             * \brief Destructor.
+             */
+            ~PSDScreeningDBAccessor();
 
-			void open(const std::string& name);
+            void open(const std::string& name);
 
-			void close();
+            void close();
 
-			const std::string& getDatabaseName() const;
+            const std::string& getDatabaseName() const;
 
-			std::size_t getNumMolecules() const;
+            std::size_t getNumMolecules() const;
 
-			std::size_t getNumPharmacophores() const;
+            std::size_t getNumPharmacophores() const;
 
-			std::size_t getNumPharmacophores(std::size_t mol_idx) const;
+            std::size_t getNumPharmacophores(std::size_t mol_idx) const;
 
-			void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const; 
+            void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const; 
 
-			void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const; 
+            void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const; 
 
-			void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const; 
+            void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const; 
 
-			std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
+            std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
 
-			std::size_t getConformationIndex(std::size_t pharm_idx) const;
+            std::size_t getConformationIndex(std::size_t pharm_idx) const;
 
-			const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
+            const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
 
-			const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const; 
+            const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const; 
 
-		  private:
-			typedef std::auto_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
+          private:
+            typedef std::auto_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
 
-			PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
+            PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
 
-			PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
-		
-			ImplementationPointer impl;
-		};
+            PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
+        
+            ImplementationPointer impl;
+        };
     }
 }
 

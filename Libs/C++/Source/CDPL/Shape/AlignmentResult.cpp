@@ -31,117 +31,117 @@ using namespace CDPL;
 
 
 Shape::AlignmentResult::AlignmentResult():
-	transform(), score(0.0), refShapeSetIdx(0), refShapeIdx(0), algdShapeIdx(0), refSelfOverlap(0.0),
-	refColSelfOverlap(0.0), algdSelfOverlap(0.0), algdColSelfOverlap(0.0), overlap(0.0),
-	colOverlap(0.0)
+    transform(), score(0.0), refShapeSetIdx(0), refShapeIdx(0), algdShapeIdx(0), refSelfOverlap(0.0),
+    refColSelfOverlap(0.0), algdSelfOverlap(0.0), algdColSelfOverlap(0.0), overlap(0.0),
+    colOverlap(0.0)
 {}
 
 const Math::Matrix4D& Shape::AlignmentResult::getTransform() const
 {
-	return transform;
+    return transform;
 }
 
 void Shape::AlignmentResult::setTransform(const Math::Matrix4D& xform)
 {
-	transform = xform;
+    transform = xform;
 }
 
 double Shape::AlignmentResult::getScore() const
 {
-	return score;
+    return score;
 }
 
 void Shape::AlignmentResult::setScore(double score)
 {
-	this->score = score;
+    this->score = score;
 }
 
 std::size_t Shape::AlignmentResult::getReferenceShapeSetIndex() const 
 {
-	return refShapeSetIdx;
+    return refShapeSetIdx;
 }
 
 void Shape::AlignmentResult::setReferenceShapeSetIndex(std::size_t idx)
 {
-	refShapeSetIdx = idx;
+    refShapeSetIdx = idx;
 }
 
 std::size_t Shape::AlignmentResult::getReferenceShapeIndex() const 
 {
-	return refShapeIdx;
+    return refShapeIdx;
 }
 
 void Shape::AlignmentResult::setReferenceShapeIndex(std::size_t idx)
 {
-	refShapeIdx = idx;
+    refShapeIdx = idx;
 }
 
 std::size_t Shape::AlignmentResult::getAlignedShapeIndex() const 
 {
-	return algdShapeIdx;
+    return algdShapeIdx;
 }
 
 void Shape::AlignmentResult::setAlignedShapeIndex(std::size_t idx)
 {
-	algdShapeIdx = idx;
+    algdShapeIdx = idx;
 }
 
 double Shape::AlignmentResult::getReferenceSelfOverlap() const 
 {
-	return refSelfOverlap;
+    return refSelfOverlap;
 }
 
 void Shape::AlignmentResult::setReferenceSelfOverlap(double overlap)
 {
-	refSelfOverlap = overlap;
+    refSelfOverlap = overlap;
 }
 
 double Shape::AlignmentResult::getReferenceColorSelfOverlap() const 
 {
-	return refColSelfOverlap;
+    return refColSelfOverlap;
 }
 
 void Shape::AlignmentResult::setReferenceColorSelfOverlap(double overlap)
 {
-	refColSelfOverlap = overlap;
+    refColSelfOverlap = overlap;
 }
 
 double Shape::AlignmentResult::getAlignedSelfOverlap() const 
 {
-	return algdSelfOverlap;
+    return algdSelfOverlap;
 }
 
 void Shape::AlignmentResult::setAlignedSelfOverlap(double overlap)
 {
-	algdSelfOverlap = overlap;
+    algdSelfOverlap = overlap;
 }
 
 double Shape::AlignmentResult::getAlignedColorSelfOverlap() const 
 {
-	return algdColSelfOverlap;
+    return algdColSelfOverlap;
 }
 
 void Shape::AlignmentResult::setAlignedColorSelfOverlap(double overlap)
 {
-	algdColSelfOverlap = overlap;
+    algdColSelfOverlap = overlap;
 }
 
 double Shape::AlignmentResult::getOverlap() const 
 {
-	return overlap;
+    return overlap;
 }
 
 void Shape::AlignmentResult::setOverlap(double overlap)
 {
-	this->overlap = overlap;
+    this->overlap = overlap;
 }
 
 double Shape::AlignmentResult::getColorOverlap() const 
 {
-	return colOverlap;
+    return colOverlap;
 }
-				
+                
 void Shape::AlignmentResult::setColorOverlap(double overlap)
 {
-	colOverlap = overlap;
+    colOverlap = overlap;
 }

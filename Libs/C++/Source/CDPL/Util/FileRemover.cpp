@@ -54,7 +54,7 @@ void Util::FileRemover::release()
 Util::FileRemover& Util::FileRemover::operator=(FileRemover& rhs)
 {
     if (this == &rhs)
-	return *this;
+    return *this;
 
     removeFile();
     path.swap(rhs.path);
@@ -65,7 +65,7 @@ Util::FileRemover& Util::FileRemover::operator=(FileRemover& rhs)
 void Util::FileRemover::removeFile()
 {
     if (!path.empty()) {
-	boost::filesystem::remove(path);
-	path.clear();
+    boost::filesystem::remove(path);
+    path.clear();
     }
 }

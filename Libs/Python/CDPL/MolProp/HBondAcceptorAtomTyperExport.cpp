@@ -38,12 +38,12 @@ void CDPLPythonMolProp::exportHBondAcceptorAtomTyper()
     using namespace CDPL;
 
     python::class_<MolProp::HBondAcceptorAtomTyper, MolProp::HBondAcceptorAtomTyper::SharedPointer>("HBondAcceptorAtomTyper", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const MolProp::HBondAcceptorAtomTyper&>((python::arg("self"), python::arg("typer"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("types"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::HBondAcceptorAtomTyper>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::HBondAcceptorAtomTyper::operator=),
-			 (python::arg("self"), python::arg("typer")), python::return_self<>())
-		.def("perceiveTypes", &MolProp::HBondAcceptorAtomTyper::perceiveTypes, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("types")));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const MolProp::HBondAcceptorAtomTyper&>((python::arg("self"), python::arg("typer"))))
+        .def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("types"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::HBondAcceptorAtomTyper>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::HBondAcceptorAtomTyper::operator=),
+             (python::arg("self"), python::arg("typer")), python::return_self<>())
+        .def("perceiveTypes", &MolProp::HBondAcceptorAtomTyper::perceiveTypes, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("types")));
 }

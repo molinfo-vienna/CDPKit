@@ -45,113 +45,113 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-	}
+        class MolecularGraph;
+        class Atom;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94ChargeCalculator
-		{
+        class CDPL_FORCEFIELD_API MMFF94ChargeCalculator
+        {
 
-		  public:
-			typedef std::shared_ptr<MMFF94ChargeCalculator> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94ChargeCalculator> SharedPointer;
 
-			MMFF94ChargeCalculator();
+            MMFF94ChargeCalculator();
 
-			MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
+            MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
-			void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
+            void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
 
-			void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
+            void setPartialBondChargeIncrementTable(const MMFF94PartialBondChargeIncrementTable::SharedPointer& table);
 
-			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
+            void setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
 
-			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
+            void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
-			void setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
+            void setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
-			void setSymbolicAtomTypeFunction(const MMFF94SymbolicAtomTypeFunction& func);
+            void setSymbolicAtomTypeFunction(const MMFF94SymbolicAtomTypeFunction& func);
 
-			void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
+            void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
-			/**
-			 * \brief Calculates MMFF94 partial charges for the atoms of a molecular graph.
-			 *
-			 * The partial atomic charges are constructed from initial full or fractional
-			 * formal atomic charges \f$ q_I^0 \f$ (usually zero, but, e.g., \e +1/3 for guanidinium nitrogens) by
-			 * adding contributions from bond charge increments \f$ w_{KI} \f$ which describe the
-			 * polarity of the bonds to atom \e i from attached atoms \e k. Thus, \f$ w_{KI} \f$ is the
-			 * contribution to the total charge on atom \e i of atom type \e I accumulated from,
-			 * and at the expense of, its bonded neighbor \e k of atom type \e K. Specifically,
-			 * MMFF computes \f$ q_i \f$ as
-			 * 
-			 * \f$ q_i = (1 - M_I \: u_I) \:q_I^0 + \sum (u_K \: q_K^0) + \sum w_{KI} \f$
-			 * 
-			 * where \f$ w_{KI} = -w_{IK} \f$  and where the sums on the right hand side run over the \f$ M_I = crd(I) \f$
-			 * atoms \e k of MMFF atom type \e K directly attached to atom \e i (\f$ crd(I) \f$
-			 * comes from "MMFFPROP.PAR"). In this equation, \f$ q_I^0 \f$ and \f$ q_K^0 \f$ are the formal
-			 * charges assigned in the atom typing procedure (usually, by subroutine
-			 * XTYPE), and the sum of the first two terms gives the "effective" fractional
-			 * formal atomic charge residing on atom \e i. This approach allows a formal
-			 * atomic charge initially affixed by the atom-typing procedure (e.g., \f$ q_I^0 \f$) to
-			 * be shared in a prescribed manner with the neighbors bonded to the atom in
-			 * question. For example, for the series \e PO4(-3), \e HPO4(-2), \e H2PO4-, \e H3P04, it
-			 * allows allows the partial charges on the terminal oxygens (each represented
-			 * by the same numerical atom type, \e "32") to vary in a way which properly
-			 * reflects the partial charges obtained from fits to the \e 6-31G* electrostatic
-			 * potential. In particular, the difference between the resultant charges \f$ q_i \f$
-			 * calculated for the single terminal oxygen in \e H3PO4 and for the four
-			 * equivalent terminal oxygens in \e PO4(-3) comes to \e -0.375, half (because \f$ u_{32} = -0.5 \f$)
-			 * the difference of \e -0.75 in the \f$ q_K^0 \f$ charges (i.e., \e 0.00 and \e -0.75,
-			 * respectively) and reasonably in accord with the difference of \e -0.42 found
-			 * by fitting the electrostatic potential.
-			 * 
-			 * \param molgraph The molecular graph for which to calculate partial atomic charges.
-			 * \param charges The output array storing the calculated partial charges.
-			 * \param strict If \c true, strict parameterization will be peformed that might fail.
-			 */
-			void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
+            /**
+             * \brief Calculates MMFF94 partial charges for the atoms of a molecular graph.
+             *
+             * The partial atomic charges are constructed from initial full or fractional
+             * formal atomic charges \f$ q_I^0 \f$ (usually zero, but, e.g., \e +1/3 for guanidinium nitrogens) by
+             * adding contributions from bond charge increments \f$ w_{KI} \f$ which describe the
+             * polarity of the bonds to atom \e i from attached atoms \e k. Thus, \f$ w_{KI} \f$ is the
+             * contribution to the total charge on atom \e i of atom type \e I accumulated from,
+             * and at the expense of, its bonded neighbor \e k of atom type \e K. Specifically,
+             * MMFF computes \f$ q_i \f$ as
+             * 
+             * \f$ q_i = (1 - M_I \: u_I) \:q_I^0 + \sum (u_K \: q_K^0) + \sum w_{KI} \f$
+             * 
+             * where \f$ w_{KI} = -w_{IK} \f$  and where the sums on the right hand side run over the \f$ M_I = crd(I) \f$
+             * atoms \e k of MMFF atom type \e K directly attached to atom \e i (\f$ crd(I) \f$
+             * comes from "MMFFPROP.PAR"). In this equation, \f$ q_I^0 \f$ and \f$ q_K^0 \f$ are the formal
+             * charges assigned in the atom typing procedure (usually, by subroutine
+             * XTYPE), and the sum of the first two terms gives the "effective" fractional
+             * formal atomic charge residing on atom \e i. This approach allows a formal
+             * atomic charge initially affixed by the atom-typing procedure (e.g., \f$ q_I^0 \f$) to
+             * be shared in a prescribed manner with the neighbors bonded to the atom in
+             * question. For example, for the series \e PO4(-3), \e HPO4(-2), \e H2PO4-, \e H3P04, it
+             * allows allows the partial charges on the terminal oxygens (each represented
+             * by the same numerical atom type, \e "32") to vary in a way which properly
+             * reflects the partial charges obtained from fits to the \e 6-31G* electrostatic
+             * potential. In particular, the difference between the resultant charges \f$ q_i \f$
+             * calculated for the single terminal oxygen in \e H3PO4 and for the four
+             * equivalent terminal oxygens in \e PO4(-3) comes to \e -0.375, half (because \f$ u_{32} = -0.5 \f$)
+             * the difference of \e -0.75 in the \f$ q_K^0 \f$ charges (i.e., \e 0.00 and \e -0.75,
+             * respectively) and reasonably in accord with the difference of \e -0.42 found
+             * by fitting the electrostatic potential.
+             * 
+             * \param molgraph The molecular graph for which to calculate partial atomic charges.
+             * \param charges The output array storing the calculated partial charges.
+             * \param strict If \c true, strict parameterization will be peformed that might fail.
+             */
+            void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
-			const Util::DArray& getFormalCharges() const;
+            const Util::DArray& getFormalCharges() const;
 
-		  private:
-			typedef MMFF94BondChargeIncrementTable::Entry BCIEntry;
-			typedef MMFF94PartialBondChargeIncrementTable::Entry PBCIEntry;
-			typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
-			typedef MMFF94FormalAtomChargeDefinitionTable::Entry FormChargeDefEntry;
+          private:
+            typedef MMFF94BondChargeIncrementTable::Entry BCIEntry;
+            typedef MMFF94PartialBondChargeIncrementTable::Entry PBCIEntry;
+            typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
+            typedef MMFF94FormalAtomChargeDefinitionTable::Entry FormChargeDefEntry;
 
-			typedef std::vector<std::size_t> AtomIndexList;
+            typedef std::vector<std::size_t> AtomIndexList;
 
-			void init(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
+            void init(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
 
-			void assignFormalCharges();
-			void distFormalNeighborCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
-			void distFormalAromAtomCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
+            void assignFormalCharges();
+            void distFormalNeighborCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
+            void distFormalAromAtomCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
 
-			void calcPartialCharges(Util::DArray& charges, bool strict) const;
-			double getBondChargeIncrement(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2, 
-										  const PBCIEntry& pbci_entry1, const PBCIEntry& pbci_entry2) const;
+            void calcPartialCharges(Util::DArray& charges, bool strict) const;
+            double getBondChargeIncrement(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2, 
+                                          const PBCIEntry& pbci_entry1, const PBCIEntry& pbci_entry2) const;
 
-			MMFF94BondChargeIncrementTable::SharedPointer        bondChargeIncTable;
-			MMFF94PartialBondChargeIncrementTable::SharedPointer partBondChargeIncTable;
-			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
-			MMFF94FormalAtomChargeDefinitionTable::SharedPointer formChargeDefTable;
-			MMFF94RingSetFunction                                aromRingSetFunc;
-			MMFF94NumericAtomTypeFunction                        numAtomTypeFunc;
-			MMFF94SymbolicAtomTypeFunction                       symAtomTypeFunc;
-			MMFF94BondTypeIndexFunction                          bondTypeIdxFunc;
-			Util::DArray                                         formCharges;
-			Util::BitSet                                         assFormChargeMask;
-			AtomIndexList                                        atomList;
-			const Chem::MolecularGraph*                          molGraph;
-		};
+            MMFF94BondChargeIncrementTable::SharedPointer        bondChargeIncTable;
+            MMFF94PartialBondChargeIncrementTable::SharedPointer partBondChargeIncTable;
+            MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
+            MMFF94FormalAtomChargeDefinitionTable::SharedPointer formChargeDefTable;
+            MMFF94RingSetFunction                                aromRingSetFunc;
+            MMFF94NumericAtomTypeFunction                        numAtomTypeFunc;
+            MMFF94SymbolicAtomTypeFunction                       symAtomTypeFunc;
+            MMFF94BondTypeIndexFunction                          bondTypeIdxFunc;
+            Util::DArray                                         formCharges;
+            Util::BitSet                                         assFormChargeMask;
+            AtomIndexList                                        atomList;
+            const Chem::MolecularGraph*                          molGraph;
+        };
     }
 }
 

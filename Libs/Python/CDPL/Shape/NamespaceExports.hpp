@@ -29,8 +29,8 @@
 namespace CDPLPythonShape
 {
 
-	void exportSymmetryClasses();
-	void exportAlignmentResultSelectionModes();
+    void exportSymmetryClasses();
+    void exportAlignmentResultSelectionModes();
 }
 
 #endif // CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP

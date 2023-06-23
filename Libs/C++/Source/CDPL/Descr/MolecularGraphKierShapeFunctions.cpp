@@ -40,132 +40,132 @@ using namespace CDPL;
 
 double Descr::calcKierShape1(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-		
-	Util::BitSet h_mask(molgraph.getNumAtoms());
-	std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    using namespace Chem;
+        
+    Util::BitSet h_mask(molgraph.getNumAtoms());
+    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
-	std::size_t num_hvy_bonds = 0;
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    std::size_t num_hvy_bonds = 0;
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom& atom1 = bond.getBegin();
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom& atom1 = bond.getBegin();
 
-		if (!molgraph.containsAtom(atom1))
-			continue;
+        if (!molgraph.containsAtom(atom1))
+            continue;
 
-		const Atom& atom2 = bond.getEnd();
+        const Atom& atom2 = bond.getEnd();
 
-		if (!molgraph.containsAtom(atom2))
-			continue;
+        if (!molgraph.containsAtom(atom2))
+            continue;
 
-		if (h_mask.test(molgraph.getAtomIndex(atom1)) || h_mask.test(molgraph.getAtomIndex(atom2)))
-			continue;
+        if (h_mask.test(molgraph.getAtomIndex(atom1)) || h_mask.test(molgraph.getAtomIndex(atom2)))
+            continue;
 
-		num_hvy_bonds++;
-	}
+        num_hvy_bonds++;
+    }
 
-	double shape1 = (num_hvy_bonds > 0 && num_hvy_atoms > 0 ?
-					 double((num_hvy_atoms - 1) * (num_hvy_atoms - 1) * num_hvy_atoms) / (num_hvy_bonds * num_hvy_bonds)
-					 : 0.0);
+    double shape1 = (num_hvy_bonds > 0 && num_hvy_atoms > 0 ?
+                     double((num_hvy_atoms - 1) * (num_hvy_atoms - 1) * num_hvy_atoms) / (num_hvy_bonds * num_hvy_bonds)
+                     : 0.0);
 
-	return shape1;
+    return shape1;
 }
 
 double Descr::calcKierShape2(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	Util::BitSet h_mask(molgraph.getNumAtoms());
-	std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
-	std::size_t num_2_bond_paths = 0;
-	
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    using namespace Chem;
+    
+    Util::BitSet h_mask(molgraph.getNumAtoms());
+    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    std::size_t num_2_bond_paths = 0;
+    
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
 
-		if (h_mask.test(molgraph.getAtomIndex(atom)))
-			continue;
+        if (h_mask.test(molgraph.getAtomIndex(atom)))
+            continue;
 
-		std::size_t hvy_bond_count = 0;
+        std::size_t hvy_bond_count = 0;
 
-		Atom::ConstBondIterator nbr_bonds_end = atom.getBondsEnd();
-		Atom::ConstAtomIterator nbr_a_it = atom.getAtomsBegin();
+        Atom::ConstBondIterator nbr_bonds_end = atom.getBondsEnd();
+        Atom::ConstAtomIterator nbr_a_it = atom.getAtomsBegin();
 
-		for (Atom::ConstBondIterator nbr_b_it = atom.getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
-			const Atom& nbr_atom= *nbr_a_it;
+        for (Atom::ConstBondIterator nbr_b_it = atom.getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
+            const Atom& nbr_atom= *nbr_a_it;
 
-			if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
+                continue;
 
-			if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
-				hvy_bond_count++;
-		}
+            if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
+                hvy_bond_count++;
+        }
 
-		num_2_bond_paths += hvy_bond_count * (hvy_bond_count - 1) / 2;
-	}
+        num_2_bond_paths += hvy_bond_count * (hvy_bond_count - 1) / 2;
+    }
 
-	double shape2 = (num_2_bond_paths > 0 && num_hvy_atoms >= 2 ?
-					 double((num_hvy_atoms - 1) * (num_hvy_atoms - 2) * (num_hvy_atoms - 2)) / (num_2_bond_paths * num_2_bond_paths)
-					 : 0.0);
+    double shape2 = (num_2_bond_paths > 0 && num_hvy_atoms >= 2 ?
+                     double((num_hvy_atoms - 1) * (num_hvy_atoms - 2) * (num_hvy_atoms - 2)) / (num_2_bond_paths * num_2_bond_paths)
+                     : 0.0);
 
-	return shape2;
+    return shape2;
 }
 
 double Descr::calcKierShape3(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	Util::BitSet h_mask(molgraph.getNumAtoms());
-	std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    using namespace Chem;
+    
+    Util::BitSet h_mask(molgraph.getNumAtoms());
+    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
-	std::size_t num_3_bond_paths = 0;
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    std::size_t num_3_bond_paths = 0;
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		const Atom* atoms[2] = { &bond.getBegin(), &bond.getEnd() };
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        const Atom* atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
-		if (!molgraph.containsAtom(*atoms[0]) || !molgraph.containsAtom(*atoms[1]))
-			continue;
+        if (!molgraph.containsAtom(*atoms[0]) || !molgraph.containsAtom(*atoms[1]))
+            continue;
 
-		if (h_mask.test(molgraph.getAtomIndex(*atoms[0])) || h_mask.test(molgraph.getAtomIndex(*atoms[1])))
-			continue;
+        if (h_mask.test(molgraph.getAtomIndex(*atoms[0])) || h_mask.test(molgraph.getAtomIndex(*atoms[1])))
+            continue;
 
-		std::size_t bond_counts[2] = { 0, 0 };
+        std::size_t bond_counts[2] = { 0, 0 };
 
-		for (std::size_t i = 0; i < 2; i++) {
-			Atom::ConstBondIterator nbr_bonds_end = atoms[i]->getBondsEnd();
-			Atom::ConstAtomIterator nbr_a_it = atoms[i]->getAtomsBegin();
+        for (std::size_t i = 0; i < 2; i++) {
+            Atom::ConstBondIterator nbr_bonds_end = atoms[i]->getBondsEnd();
+            Atom::ConstAtomIterator nbr_a_it = atoms[i]->getAtomsBegin();
 
-			for (Atom::ConstBondIterator nbr_b_it = atoms[i]->getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
-				const Atom& nbr_atom= *nbr_a_it;
+            for (Atom::ConstBondIterator nbr_b_it = atoms[i]->getBondsBegin(); nbr_b_it != nbr_bonds_end; ++nbr_b_it, ++nbr_a_it) {
+                const Atom& nbr_atom= *nbr_a_it;
 
-				if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
-					continue;
+                if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*nbr_b_it))
+                    continue;
 
-				if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
-					bond_counts[i]++;
-			}
-		}
+                if (!h_mask.test(molgraph.getAtomIndex(nbr_atom)))
+                    bond_counts[i]++;
+            }
+        }
 
-		assert(bond_counts[0] >= 1 && bond_counts[1] >= 1);
+        assert(bond_counts[0] >= 1 && bond_counts[1] >= 1);
 
-		num_3_bond_paths += (bond_counts[0] - 1) * (bond_counts[1] - 1);
-	}
+        num_3_bond_paths += (bond_counts[0] - 1) * (bond_counts[1] - 1);
+    }
 
-	double shape3 = 0.0;
+    double shape3 = 0.0;
 
-	if (num_hvy_atoms >= 3 && num_3_bond_paths > 0) {
-		if (num_hvy_atoms % 2 == 0) 
-			shape3 = double((num_hvy_atoms - 3) * (num_hvy_atoms - 2) * (num_hvy_atoms - 2)) 
-				/ (num_3_bond_paths * num_3_bond_paths);
-		else
-			shape3 = double((num_hvy_atoms - 1) * (num_hvy_atoms - 3) * (num_hvy_atoms - 3)) 
-				/ (num_3_bond_paths * num_3_bond_paths);
-	}
+    if (num_hvy_atoms >= 3 && num_3_bond_paths > 0) {
+        if (num_hvy_atoms % 2 == 0) 
+            shape3 = double((num_hvy_atoms - 3) * (num_hvy_atoms - 2) * (num_hvy_atoms - 2)) 
+                / (num_3_bond_paths * num_3_bond_paths);
+        else
+            shape3 = double((num_hvy_atoms - 1) * (num_hvy_atoms - 3) * (num_hvy_atoms - 3)) 
+                / (num_3_bond_paths * num_3_bond_paths);
+    }
 
-	return shape3;
+    return shape3;
 }

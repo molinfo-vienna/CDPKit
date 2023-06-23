@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of molecular graph data in the native I/O format of the <em>JME Molecular Editor</em>
-		 *        [\ref JME] java applet.
-		 */
-		typedef Util::DefaultDataOutputHandler<JMEMolecularGraphWriter, DataFormat::JME> JMEMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of molecular graph data in the native I/O format of the <em>JME Molecular Editor</em>
+         *        [\ref JME] java applet.
+         */
+        typedef Util::DefaultDataOutputHandler<JMEMolecularGraphWriter, DataFormat::JME> JMEMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_JMEMOLECULARGRAPHOUTPUTHANDLER_HPP

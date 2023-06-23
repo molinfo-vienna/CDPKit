@@ -29,66 +29,66 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 }
 
 
 namespace ChOX
 {
 
-	namespace ControlParameter
-	{
+    namespace ControlParameter
+    {
 
-		extern const CDPL::Base::LookupKey VIEW_BACKGROUND_COLOR;
-		extern const CDPL::Base::LookupKey VIEW_SELECTION_COLOR;
-		extern const CDPL::Base::LookupKey VIEWPORT_MARGIN;
-		extern const CDPL::Base::LookupKey SHOW_GRID;
-		extern const CDPL::Base::LookupKey SHOW_RECORD_NUMBERS;
-		extern const CDPL::Base::LookupKey SHOW_RECORD_NAMES;
-		extern const CDPL::Base::LookupKey GRID_COLUMN_COUNT;
-		extern const CDPL::Base::LookupKey GRID_ROW_COUNT;
-		extern const CDPL::Base::LookupKey GRID_LINE_STYLE;
-		extern const CDPL::Base::LookupKey GRID_LINE_COLOR;
-		extern const CDPL::Base::LookupKey GRID_LINE_WIDTH;
-		extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_FONT;
-		extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_SIZE;
-		extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_ALIGNMENT;
-		extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_COLOR;
-		extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_FONT;
-		extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_SIZE;
-		extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_ALIGNMENT;
-		extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_COLOR;
+        extern const CDPL::Base::LookupKey VIEW_BACKGROUND_COLOR;
+        extern const CDPL::Base::LookupKey VIEW_SELECTION_COLOR;
+        extern const CDPL::Base::LookupKey VIEWPORT_MARGIN;
+        extern const CDPL::Base::LookupKey SHOW_GRID;
+        extern const CDPL::Base::LookupKey SHOW_RECORD_NUMBERS;
+        extern const CDPL::Base::LookupKey SHOW_RECORD_NAMES;
+        extern const CDPL::Base::LookupKey GRID_COLUMN_COUNT;
+        extern const CDPL::Base::LookupKey GRID_ROW_COUNT;
+        extern const CDPL::Base::LookupKey GRID_LINE_STYLE;
+        extern const CDPL::Base::LookupKey GRID_LINE_COLOR;
+        extern const CDPL::Base::LookupKey GRID_LINE_WIDTH;
+        extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_FONT;
+        extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_SIZE;
+        extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_ALIGNMENT;
+        extern const CDPL::Base::LookupKey RECORD_NUMBER_LABEL_COLOR;
+        extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_FONT;
+        extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_SIZE;
+        extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_ALIGNMENT;
+        extern const CDPL::Base::LookupKey RECORD_NAME_LABEL_COLOR;
 
-		extern const CDPL::Base::LookupKey PRINT_FRAME;
-		extern const CDPL::Base::LookupKey PRINT_DATE;
-		extern const CDPL::Base::LookupKey PRINT_PAGE_NUMBER;
-		extern const CDPL::Base::LookupKey PRINT_FILE_NAME;
-		extern const CDPL::Base::LookupKey FRAME_LINE_STYLE;
-		extern const CDPL::Base::LookupKey FRAME_LINE_COLOR;
-		extern const CDPL::Base::LookupKey FRAME_LINE_WIDTH;
-		extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_FONT;
-		extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_SIZE;
-		extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_SPACING;
-		extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_COLOR;
-		extern const CDPL::Base::LookupKey PAGE_NUMBER_LABEL_ALIGNMENT;
-		extern const CDPL::Base::LookupKey DATE_LABEL_ALIGNMENT;
-		extern const CDPL::Base::LookupKey FILE_NAME_LABEL_ALIGNMENT;
+        extern const CDPL::Base::LookupKey PRINT_FRAME;
+        extern const CDPL::Base::LookupKey PRINT_DATE;
+        extern const CDPL::Base::LookupKey PRINT_PAGE_NUMBER;
+        extern const CDPL::Base::LookupKey PRINT_FILE_NAME;
+        extern const CDPL::Base::LookupKey FRAME_LINE_STYLE;
+        extern const CDPL::Base::LookupKey FRAME_LINE_COLOR;
+        extern const CDPL::Base::LookupKey FRAME_LINE_WIDTH;
+        extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_FONT;
+        extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_SIZE;
+        extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_SPACING;
+        extern const CDPL::Base::LookupKey PRINTING_TEXT_LABEL_COLOR;
+        extern const CDPL::Base::LookupKey PAGE_NUMBER_LABEL_ALIGNMENT;
+        extern const CDPL::Base::LookupKey DATE_LABEL_ALIGNMENT;
+        extern const CDPL::Base::LookupKey FILE_NAME_LABEL_ALIGNMENT;
 
-		extern const CDPL::Base::LookupKey DEFAULT_MOL_OUTPUT_FORMAT;
-		extern const CDPL::Base::LookupKey DEFAULT_RXN_OUTPUT_FORMAT;
+        extern const CDPL::Base::LookupKey DEFAULT_MOL_OUTPUT_FORMAT;
+        extern const CDPL::Base::LookupKey DEFAULT_RXN_OUTPUT_FORMAT;
 
-		extern const CDPL::Base::LookupKey WRITE_SINGLE_RECORD_FILES;
+        extern const CDPL::Base::LookupKey WRITE_SINGLE_RECORD_FILES;
 
-		extern const CDPL::Base::LookupKey IMG_OUTPUT_ERASE_BACKGROUND;
-		extern const CDPL::Base::LookupKey IMG_OUTPUT_BACKGROUND_COLOR;
+        extern const CDPL::Base::LookupKey IMG_OUTPUT_ERASE_BACKGROUND;
+        extern const CDPL::Base::LookupKey IMG_OUTPUT_BACKGROUND_COLOR;
 
-		extern const CDPL::Base::LookupKey USE_ATOM_COLOR_TABLE;
-		extern const CDPL::Base::LookupKey ATOM_COLOR_TABLE;
-	}
+        extern const CDPL::Base::LookupKey USE_ATOM_COLOR_TABLE;
+        extern const CDPL::Base::LookupKey ATOM_COLOR_TABLE;
+    }
 }
 
 #endif // CHOX_CONTROLPARAMETER_HPP

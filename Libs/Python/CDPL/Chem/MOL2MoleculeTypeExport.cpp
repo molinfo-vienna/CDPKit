@@ -32,20 +32,20 @@
 namespace 
 {
 
-	struct MOL2MoleculeType {};
+    struct MOL2MoleculeType {};
 }
 
 
 void CDPLPythonChem::exportMOL2MoleculeTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MOL2MoleculeType, boost::noncopyable>("MOL2MoleculeType", python::no_init)
-		.def_readonly("UNKNOWN", &Chem::MOL2MoleculeType::UNKNOWN)
-		.def_readonly("SMALL", &Chem::MOL2MoleculeType::SMALL)
-		.def_readonly("BIOPOLYMER", &Chem::MOL2MoleculeType::BIOPOLYMER)
-		.def_readonly("PROTEIN", &Chem::MOL2MoleculeType::PROTEIN)
-		.def_readonly("NUCLEIC_ACID", &Chem::MOL2MoleculeType::NUCLEIC_ACID)
-		.def_readonly("SACCHARIDE", &Chem::MOL2MoleculeType::SACCHARIDE);
+    python::class_<MOL2MoleculeType, boost::noncopyable>("MOL2MoleculeType", python::no_init)
+        .def_readonly("UNKNOWN", &Chem::MOL2MoleculeType::UNKNOWN)
+        .def_readonly("SMALL", &Chem::MOL2MoleculeType::SMALL)
+        .def_readonly("BIOPOLYMER", &Chem::MOL2MoleculeType::BIOPOLYMER)
+        .def_readonly("PROTEIN", &Chem::MOL2MoleculeType::PROTEIN)
+        .def_readonly("NUCLEIC_ACID", &Chem::MOL2MoleculeType::NUCLEIC_ACID)
+        .def_readonly("SACCHARIDE", &Chem::MOL2MoleculeType::SACCHARIDE);
 }

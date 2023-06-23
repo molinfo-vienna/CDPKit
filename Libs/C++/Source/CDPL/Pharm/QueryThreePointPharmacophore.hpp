@@ -34,29 +34,29 @@ namespace CDPL
     namespace Pharm
     {
 
-		class QueryThreePointPharmacophore : public ThreePointPharmacophore
-		{
+        class QueryThreePointPharmacophore : public ThreePointPharmacophore
+        {
 
-		public:
-			QueryThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3);
+        public:
+            QueryThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3);
 
-			double getFeature1Tolerance() const {
-				return ftr1Tol;
-			}
+            double getFeature1Tolerance() const {
+                return ftr1Tol;
+            }
 
-			double getFeature2Tolerance() const {
-				return ftr2Tol;
-			}
+            double getFeature2Tolerance() const {
+                return ftr2Tol;
+            }
   
-			double getFeature3Tolerance() const {
-				return ftr3Tol;
-			}
+            double getFeature3Tolerance() const {
+                return ftr3Tol;
+            }
 
-		private:
-			double ftr1Tol;
-			double ftr2Tol;
-			double ftr3Tol;
-		};
+        private:
+            double ftr1Tol;
+            double ftr2Tol;
+            double ftr3Tol;
+        };
     }
 }
 

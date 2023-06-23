@@ -36,19 +36,19 @@ namespace CDPL
     namespace Chem 
     {
 
-	/**
-	 * \brief Provides constants for the specification of the molecule type in <em>Tripos MOL2</em> files.
-	 */
-	namespace MOL2MoleculeType 
-	{
+    /**
+     * \brief Provides constants for the specification of the molecule type in <em>Tripos MOL2</em> files.
+     */
+    namespace MOL2MoleculeType 
+    {
 
-	    const unsigned int UNKNOWN      = 0;
-	    const unsigned int SMALL        = 1;
-	    const unsigned int BIOPOLYMER   = 2;
-	    const unsigned int PROTEIN      = 3;
-	    const unsigned int NUCLEIC_ACID = 4;
-	    const unsigned int SACCHARIDE   = 5;
-	}
+        const unsigned int UNKNOWN      = 0;
+        const unsigned int SMALL        = 1;
+        const unsigned int BIOPOLYMER   = 2;
+        const unsigned int PROTEIN      = 3;
+        const unsigned int NUCLEIC_ACID = 4;
+        const unsigned int SACCHARIDE   = 5;
+    }
     }
 }
 

@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportMoleculeWriter()
 {
-	CDPLPythonBase::DataWriterExport<CDPL::Chem::Molecule>("MoleculeWriter", "mol");
+    CDPLPythonBase::DataWriterExport<CDPL::Chem::Molecule>("MoleculeWriter", "mol");
 }

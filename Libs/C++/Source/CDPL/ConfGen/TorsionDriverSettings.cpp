@@ -33,98 +33,98 @@ using namespace CDPL;
 
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
-	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0), maxPoolSize(10000),
-	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true),
-	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
-	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
+    sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0), maxPoolSize(10000),
+    forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true),
+    dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
+    distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
 {}
 
 void ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens(bool sample)
 {
-	sampleHetAtomHs = sample;
+    sampleHetAtomHs = sample;
 }
-				
+                
 bool ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens() const
 {
-	return sampleHetAtomHs;
+    return sampleHetAtomHs;
 }
 
 void ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges(bool sample)
 {
-	sampleTolRanges = sample;
+    sampleTolRanges = sample;
 }
-				
+                
 bool ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges() const
 {
-	return sampleTolRanges;
+    return sampleTolRanges;
 }
 
 void ConfGen::TorsionDriverSettings::orderByEnergy(bool order)
 {
-	energyOrdered = order;
+    energyOrdered = order;
 }
-				
+                
 bool ConfGen::TorsionDriverSettings::orderByEnergy() const
 {
-	return energyOrdered;
+    return energyOrdered;
 }
 
 void ConfGen::TorsionDriverSettings::setEnergyWindow(double win_size)
 {
-	eWindow = win_size;
+    eWindow = win_size;
 }
 
 double ConfGen::TorsionDriverSettings::getEnergyWindow() const
 {
-	return eWindow;
+    return eWindow;
 }
 
 void ConfGen::TorsionDriverSettings::setMaxPoolSize(std::size_t max_size)
 {
-	maxPoolSize = max_size;
+    maxPoolSize = max_size;
 }
 
 std::size_t ConfGen::TorsionDriverSettings::getMaxPoolSize() const
 {
-	return maxPoolSize;
+    return maxPoolSize;
 }
 
 void ConfGen::TorsionDriverSettings::setForceFieldType(unsigned int type)
 {
-	forceFieldType = type;
+    forceFieldType = type;
 }
-	    
+        
 unsigned int ConfGen::TorsionDriverSettings::getForceFieldType() const
 {
-	return forceFieldType;
+    return forceFieldType;
 }
-			
+            
 void ConfGen::TorsionDriverSettings::strictForceFieldParameterization(bool strict)
 {
-	strictParam = strict;
+    strictParam = strict;
 }
 
 bool ConfGen::TorsionDriverSettings::strictForceFieldParameterization() const
 {
-	return strictParam;
+    return strictParam;
 }
 
 void ConfGen::TorsionDriverSettings::setDielectricConstant(double de_const)
 {
-	dielectricConst = de_const;
+    dielectricConst = de_const;
 }
 
 double ConfGen::TorsionDriverSettings::getDielectricConstant() const
 {
-	return dielectricConst;
+    return dielectricConst;
 }
 
 void ConfGen::TorsionDriverSettings::setDistanceExponent(double exponent)
 {
-	distExponent = exponent;
+    distExponent = exponent;
 }
 
 double ConfGen::TorsionDriverSettings::getDistanceExponent() const
 {
-	return distExponent;
+    return distExponent;
 }

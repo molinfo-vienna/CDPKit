@@ -44,98 +44,98 @@ using namespace CDPL;
 
 bool Pharm::CDFPharmacophoreDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
 {
-	writeFeatureContainer(cntnr, dataBuffer);
+    writeFeatureContainer(cntnr, dataBuffer);
 
-	return writeRecordData(os);
+    return writeRecordData(os);
 }
 
 void Pharm::CDFPharmacophoreDataWriter::writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf)
 {
-	init();
+    init();
 
-	bbuf.setIOPointer(CDF::HEADER_SIZE);
+    bbuf.setIOPointer(CDF::HEADER_SIZE);
 
-	outputFeatures(cntnr, bbuf);
-	outputFtrContainerProperties(cntnr, bbuf);
+    outputFeatures(cntnr, bbuf);
+    outputFtrContainerProperties(cntnr, bbuf);
 
-	bbuf.resize(bbuf.getIOPointer());
+    bbuf.resize(bbuf.getIOPointer());
 
-	outputFtrContainerHeader(cntnr, bbuf);
+    outputFtrContainerHeader(cntnr, bbuf);
 }
 
 void Pharm::CDFPharmacophoreDataWriter::init()
 {
-	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
-	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
+    strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
+    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
 }
 
 void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
-	CDF::Header cdf_header;
+    CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(bbuf.getSize() - CDF::HEADER_SIZE);
-	cdf_header.recordTypeID = CDF::PHARMACOPHORE_RECORD_ID;
-	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+    cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(bbuf.getSize() - CDF::HEADER_SIZE);
+    cdf_header.recordTypeID = CDF::PHARMACOPHORE_RECORD_ID;
+    cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
-	bbuf.setIOPointer(0);
+    bbuf.setIOPointer(0);
 
-	putHeader(cdf_header, bbuf);
+    putHeader(cdf_header, bbuf);
 }
 
 void Pharm::CDFPharmacophoreDataWriter::outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
-	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(cntnr.getNumFeatures()), false);
+    bbuf.putInt(boost::numeric_cast<CDF::SizeType>(cntnr.getNumFeatures()), false);
 
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); 
-		 it != end; ++it) {
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); 
+         it != end; ++it) {
 
-		const Feature& feature = *it;
-	
-		if (hasType(feature))
-			putIntProperty(CDF::FeatureProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(feature)), bbuf);
+        const Feature& feature = *it;
+    
+        if (hasType(feature))
+            putIntProperty(CDF::FeatureProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(feature)), bbuf);
 
-		if (has3DCoordinates(feature))
-			putCVectorProperty(CDF::FeatureProperty::COORDINATES_3D, get3DCoordinates(feature), bbuf);
+        if (has3DCoordinates(feature))
+            putCVectorProperty(CDF::FeatureProperty::COORDINATES_3D, get3DCoordinates(feature), bbuf);
 
-		if (hasOrientation(feature))
-			putCVectorProperty(CDF::FeatureProperty::ORIENTATION, getOrientation(feature), bbuf);
+        if (hasOrientation(feature))
+            putCVectorProperty(CDF::FeatureProperty::ORIENTATION, getOrientation(feature), bbuf);
 
-		if (hasGeometry(feature))
-			putIntProperty(CDF::FeatureProperty::GEOMETRY, boost::numeric_cast<CDF::UIntType>(getGeometry(feature)), bbuf);
+        if (hasGeometry(feature))
+            putIntProperty(CDF::FeatureProperty::GEOMETRY, boost::numeric_cast<CDF::UIntType>(getGeometry(feature)), bbuf);
 
-		if (hasLength(feature))
-			putFloatProperty(CDF::FeatureProperty::LENGTH, getLength(feature), bbuf);
+        if (hasLength(feature))
+            putFloatProperty(CDF::FeatureProperty::LENGTH, getLength(feature), bbuf);
 
-		if (hasTolerance(feature))
-			putFloatProperty(CDF::FeatureProperty::TOLERANCE, getTolerance(feature), bbuf);
+        if (hasTolerance(feature))
+            putFloatProperty(CDF::FeatureProperty::TOLERANCE, getTolerance(feature), bbuf);
 
-		if (hasWeight(feature))
-			putFloatProperty(CDF::FeatureProperty::WEIGHT, getWeight(feature), bbuf);
+        if (hasWeight(feature))
+            putFloatProperty(CDF::FeatureProperty::WEIGHT, getWeight(feature), bbuf);
 
-		if (hasDisabledFlag(feature))
-			putIntProperty(CDF::FeatureProperty::DISABLED_FLAG, CDF::BoolType(getDisabledFlag(feature)), bbuf);
+        if (hasDisabledFlag(feature))
+            putIntProperty(CDF::FeatureProperty::DISABLED_FLAG, CDF::BoolType(getDisabledFlag(feature)), bbuf);
 
-		if (hasOptionalFlag(feature))
-			putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), bbuf);
+        if (hasOptionalFlag(feature))
+            putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), bbuf);
 
-		if (hasHydrophobicity(feature))
-			putFloatProperty(CDF::FeatureProperty::HYDROPHOBICITY, getHydrophobicity(feature), bbuf);
+        if (hasHydrophobicity(feature))
+            putFloatProperty(CDF::FeatureProperty::HYDROPHOBICITY, getHydrophobicity(feature), bbuf);
 
-		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
-	}
+        putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
+    }
 }
 
 void Pharm::CDFPharmacophoreDataWriter::outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
-	if (hasName(cntnr))
-		putStringProperty(CDF::PharmacophoreProperty::NAME, getName(cntnr), bbuf);
+    if (hasName(cntnr))
+        putStringProperty(CDF::PharmacophoreProperty::NAME, getName(cntnr), bbuf);
 
-	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
+    putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
 
 bool Pharm::CDFPharmacophoreDataWriter::writeRecordData(std::ostream& os) const
 {
-	dataBuffer.writeBuffer(os);
+    dataBuffer.writeBuffer(os);
 
-	return os.good();
+    return os.good();
 }

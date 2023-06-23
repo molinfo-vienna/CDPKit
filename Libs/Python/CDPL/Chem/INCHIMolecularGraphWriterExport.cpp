@@ -32,29 +32,29 @@
 
 void CDPLPythonChem::exportINCHIMolecularGraphWriter()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::INCHIMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("INCHIMolecularGraphWriter", python::no_init)
-		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("getReturnCode", &Chem::INCHIMolecularGraphWriter::getReturnCode, python::arg("self"))
-		.def("getMessage", &Chem::INCHIMolecularGraphWriter::getMessage, python::arg("self"), 
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("getLogOutput", &Chem::INCHIMolecularGraphWriter::getLogOutput, python::arg("self"), 
-			 python::return_value_policy<python::copy_const_reference>())
-		.add_property("returnCode", &Chem::INCHIMolecularGraphWriter::getReturnCode)
-		.add_property("message", 
-					  python::make_function(&Chem::INCHIMolecularGraphWriter::getMessage, 
-											python::return_value_policy<python::copy_const_reference>()))
-		.add_property("logOutput", 
-					  python::make_function(&Chem::INCHIMolecularGraphWriter::getLogOutput, 
-											python::return_value_policy<python::copy_const_reference>()));
+    python::class_<Chem::INCHIMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("INCHIMolecularGraphWriter", python::no_init)
+        .def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("getReturnCode", &Chem::INCHIMolecularGraphWriter::getReturnCode, python::arg("self"))
+        .def("getMessage", &Chem::INCHIMolecularGraphWriter::getMessage, python::arg("self"), 
+             python::return_value_policy<python::copy_const_reference>())
+        .def("getLogOutput", &Chem::INCHIMolecularGraphWriter::getLogOutput, python::arg("self"), 
+             python::return_value_policy<python::copy_const_reference>())
+        .add_property("returnCode", &Chem::INCHIMolecularGraphWriter::getReturnCode)
+        .add_property("message", 
+                      python::make_function(&Chem::INCHIMolecularGraphWriter::getMessage, 
+                                            python::return_value_policy<python::copy_const_reference>()))
+        .add_property("logOutput", 
+                      python::make_function(&Chem::INCHIMolecularGraphWriter::getLogOutput, 
+                                            python::return_value_policy<python::copy_const_reference>()));
 
-	python::class_<Util::FileDataWriter<Chem::INCHIMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
-		boost::noncopyable>("FileINCHIMolecularGraphWriter", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
-				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+    python::class_<Util::FileDataWriter<Chem::INCHIMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+        boost::noncopyable>("FileINCHIMolecularGraphWriter", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+                  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

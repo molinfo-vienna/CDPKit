@@ -39,24 +39,24 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A data type for the storage of Chem::ElectronSystem objects.
-		 */
-		class CDPL_CHEM_API ElectronSystemList : public Util::IndirectArray<ElectronSystem>
-		{
+        /**
+         * \brief A data type for the storage of Chem::ElectronSystem objects.
+         */
+        class CDPL_CHEM_API ElectronSystemList : public Util::IndirectArray<ElectronSystem>
+        {
 
-		  public:
-			typedef std::shared_ptr<ElectronSystemList> SharedPointer;
+          public:
+            typedef std::shared_ptr<ElectronSystemList> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "ElectronSystemList";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "ElectronSystemList";
+            }
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ELECTRONSYSTEMLIST_HPP

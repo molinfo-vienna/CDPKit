@@ -34,12 +34,12 @@ namespace
 
     CDPL::Pharm::BasicFeature& assignBasicFeature(CDPL::Pharm::BasicFeature& self, CDPL::Pharm::BasicFeature& ftr)
     {
-		return self.operator=(ftr);
+        return self.operator=(ftr);
     }
 
     CDPL::Pharm::Feature& assignFeature(CDPL::Pharm::Feature& self, CDPL::Pharm::Feature& ftr)
     {
-		return self.operator=(ftr);
+        return self.operator=(ftr);
     }
 }
 
@@ -50,7 +50,7 @@ void CDPLPythonPharm::exportBasicFeature()
     using namespace CDPL;
 
     python::class_<Pharm::BasicFeature, python::bases<Pharm::Feature>, 
-				   boost::noncopyable>("BasicFeature", python::no_init)
-		.def("assign", &assignFeature, (python::arg("self"), python::arg("ftr")), python::return_self<>())
-		.def("assign", &assignBasicFeature, (python::arg("self"), python::arg("ftr")), python::return_self<>());
+                   boost::noncopyable>("BasicFeature", python::no_init)
+        .def("assign", &assignFeature, (python::arg("self"), python::arg("ftr")), python::return_self<>())
+        .def("assign", &assignBasicFeature, (python::arg("self"), python::arg("ftr")), python::return_self<>());
 }

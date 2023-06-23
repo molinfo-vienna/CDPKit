@@ -46,43 +46,43 @@ namespace CDPL
     namespace Biomol
     {
 
-		class HierarchyViewModel;
+        class HierarchyViewModel;
 
-		/**
-		 * \brief HierarchyViewChain.
-		 */
-		class CDPL_BIOMOL_API HierarchyViewChain : public HierarchyViewNode
-		{
+        /**
+         * \brief HierarchyViewChain.
+         */
+        class CDPL_BIOMOL_API HierarchyViewChain : public HierarchyViewNode
+        {
 
-			friend class HierarchyViewModel;
+            friend class HierarchyViewModel;
 
-			typedef std::shared_ptr<HierarchyViewFragment> FragmentPtr;
-			typedef std::vector<FragmentPtr> FragmentList;
+            typedef std::shared_ptr<HierarchyViewFragment> FragmentPtr;
+            typedef std::vector<FragmentPtr> FragmentList;
 
-		  public:
-			typedef boost::indirect_iterator<FragmentList::const_iterator, const HierarchyViewFragment> ConstFragmentIterator;
+          public:
+            typedef boost::indirect_iterator<FragmentList::const_iterator, const HierarchyViewFragment> ConstFragmentIterator;
 
-			std::size_t getNumFragments() const;
+            std::size_t getNumFragments() const;
 
-			const HierarchyViewFragment& getFragment(std::size_t idx) const;
+            const HierarchyViewFragment& getFragment(std::size_t idx) const;
 
-			ConstFragmentIterator getFragmentsBegin() const;
+            ConstFragmentIterator getFragmentsBegin() const;
 
-			ConstFragmentIterator getFragmentsEnd() const;
+            ConstFragmentIterator getFragmentsEnd() const;
 
-			ConstFragmentIterator begin() const;
+            ConstFragmentIterator begin() const;
 
-			ConstFragmentIterator end() const;
+            ConstFragmentIterator end() const;
 
-		  private:
-			HierarchyViewChain(): initFragments(true) {}
+          private:
+            HierarchyViewChain(): initFragments(true) {}
 
-			void initFragmentList() const;
-			void visitAtom(const Chem::Atom& atom, HierarchyViewFragment& frag, Util::BitSet& vis_atoms) const;
+            void initFragmentList() const;
+            void visitAtom(const Chem::Atom& atom, HierarchyViewFragment& frag, Util::BitSet& vis_atoms) const;
 
-			mutable FragmentList fragments;
-			mutable bool         initFragments;
-		};
+            mutable FragmentList fragments;
+            mutable bool         initFragments;
+        };
     }
 }
 

@@ -40,48 +40,48 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A graphics primitive representing a set of connected line segments.
-		 */
-		class CDPL_VIS_API PolylinePrimitive2D : public PointArray2D, public GraphicsPrimitive2D
-		{
+        /**
+         * \brief A graphics primitive representing a set of connected line segments.
+         */
+        class CDPL_VIS_API PolylinePrimitive2D : public PointArray2D, public GraphicsPrimitive2D
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolylinePrimitive2D instances.
-			 */
-			typedef std::shared_ptr<PolylinePrimitive2D> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolylinePrimitive2D instances.
+             */
+            typedef std::shared_ptr<PolylinePrimitive2D> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty polyline primitive.
-			 */
-			PolylinePrimitive2D() {}
+            /**
+             * \brief Constructs an empty polyline primitive.
+             */
+            PolylinePrimitive2D() {}
 
-			void render(Renderer2D& renderer) const;
-	
-			/**
-			 * \brief Sets the pen defining the color, width, line style, join style and cap style of the line segments.
-			 * \param pen The pen defining the color, width, line style, join style and cap style of the line segments.
-			 */
-			void setPen(const Pen& pen);
+            void render(Renderer2D& renderer) const;
+    
+            /**
+             * \brief Sets the pen defining the color, width, line style, join style and cap style of the line segments.
+             * \param pen The pen defining the color, width, line style, join style and cap style of the line segments.
+             */
+            void setPen(const Pen& pen);
 
-			/**
-			 * \brief Returns the pen defining the color, width, line style, join style and cap style of the line segments.
-			 * \return The pen defining the color, width, line style, join style and cap style of the line segments.
-			 */
-			const Pen& getPen() const;
+            /**
+             * \brief Returns the pen defining the color, width, line style, join style and cap style of the line segments.
+             * \return The pen defining the color, width, line style, join style and cap style of the line segments.
+             */
+            const Pen& getPen() const;
 
-			GraphicsPrimitive2D::SharedPointer clone() const;
+            GraphicsPrimitive2D::SharedPointer clone() const;
 
-			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
+            void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-		private:
-			Pen   pen;
-		};
-	}
+        private:
+            Pen   pen;
+        };
+    }
 }
 
 #endif // CDPL_VIS_POLYLINEPRIMITIVE2D_HPP

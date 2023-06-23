@@ -41,63 +41,63 @@
 namespace CDPL 
 {
 
-	namespace Chem
+    namespace Chem
     {
 
-		class AtomContainer;
-	}
-	
+        class AtomContainer;
+    }
+    
     namespace GRAIL
     {
 
-		/**
-		 * \brief BuriednessScore.
-		 */
-		class CDPL_GRAIL_API BuriednessScore
-		{
+        /**
+         * \brief BuriednessScore.
+         */
+        class CDPL_GRAIL_API BuriednessScore
+        {
 
-		  public:
-			static constexpr double DEF_PROBE_RADIUS             = 8.0;
-			static constexpr double DEF_MIN_VDW_SURFACE_DISTANCE = 1.0;
-			static constexpr std::size_t DEF_NUM_TEST_RAYS       = 200;
+          public:
+            static constexpr double DEF_PROBE_RADIUS             = 8.0;
+            static constexpr double DEF_MIN_VDW_SURFACE_DISTANCE = 1.0;
+            static constexpr std::size_t DEF_NUM_TEST_RAYS       = 200;
 
-			BuriednessScore(double probe_radius = DEF_PROBE_RADIUS, double min_vdw_surf_dist = DEF_MIN_VDW_SURFACE_DISTANCE,
-							std::size_t num_test_rays = DEF_NUM_TEST_RAYS);
+            BuriednessScore(double probe_radius = DEF_PROBE_RADIUS, double min_vdw_surf_dist = DEF_MIN_VDW_SURFACE_DISTANCE,
+                            std::size_t num_test_rays = DEF_NUM_TEST_RAYS);
 
-			void setProbeRadius(double radius);
+            void setProbeRadius(double radius);
 
-			double getProbeRadius() const;
+            double getProbeRadius() const;
 
-			void setMinVdWSurfaceDistance(double dist);
+            void setMinVdWSurfaceDistance(double dist);
 
-			double getMinVdWSurfaceDistance() const;
+            double getMinVdWSurfaceDistance() const;
 
-			void setNumTestRays(std::size_t num_rays);
+            void setNumTestRays(std::size_t num_rays);
 
-			std::size_t getNumTestRays() const;
+            std::size_t getNumTestRays() const;
 
-			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for buriedness calculation.
-			 * \param func The atom 3D-coordinates function.
-			 */
-			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+            /**
+             * \brief Specifies a function for the retrieval of atom 3D-coordinates for buriedness calculation.
+             * \param func The atom 3D-coordinates function.
+             */
+            void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
-			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
-	
-			double operator()(const Math::Vector3D& pos, const Chem::AtomContainer& atoms);
+            const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+    
+            double operator()(const Math::Vector3D& pos, const Chem::AtomContainer& atoms);
 
-		  private:
-			void genSphereSurfacePoints();
+          private:
+            void genSphereSurfacePoints();
 
-			typedef std::vector<Math::Vector3D> PointList;
+            typedef std::vector<Math::Vector3D> PointList;
 
-			double                          probeRadius;
-			double                          minVdWSurfaceDist;
-			std::size_t                     numTestRays;
-			Chem::Atom3DCoordinatesFunction coordsFunc;
-			PointList                       probeSurfPoints;
-			Util::BitSet                    rayHitsMask;
-		};
+            double                          probeRadius;
+            double                          minVdWSurfaceDist;
+            std::size_t                     numTestRays;
+            Chem::Atom3DCoordinatesFunction coordsFunc;
+            PointList                       probeSurfPoints;
+            Util::BitSet                    rayHitsMask;
+        };
     }
 }
 

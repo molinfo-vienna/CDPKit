@@ -31,20 +31,20 @@
 
 BOOST_PYTHON_MODULE(_base)
 {
-	using namespace CDPLPythonBase;
+    using namespace CDPLPythonBase;
 
-	exportLookupKey();
-	exportPropertyContainer();
-	exportControlParameterContainer();
-	exportControlParameterList();
-	exportDataFormat();
-	exportDataIOBase();
-	exportIOStreams();
+    exportLookupKey();
+    exportPropertyContainer();
+    exportControlParameterContainer();
+    exportControlParameterList();
+    exportDataFormat();
+    exportDataIOBase();
+    exportIOStreams();
 
-	exportFunctionWrappers();
+    exportFunctionWrappers();
 
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    registerToPythonConverters();
+    registerFromPythonConverters();
 
-	registerExceptionTranslators();
+    registerExceptionTranslators();
 }

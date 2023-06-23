@@ -60,183 +60,183 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class ConformerGeneratorImpl 
-		{
+        class ConformerGeneratorImpl 
+        {
 
-		public:
-			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+        public:
+            typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
-			ConformerGeneratorImpl();
+            ConformerGeneratorImpl();
 
-			~ConformerGeneratorImpl();
+            ~ConformerGeneratorImpl();
 
-			ConformerGeneratorSettings& getSettings();
+            ConformerGeneratorSettings& getSettings();
 
-			void clearFragmentLibraries();
+            void clearFragmentLibraries();
 
-			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+            void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void clearTorsionLibraries();
+            void clearTorsionLibraries();
 
-			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+            void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
+            unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
 
-			void setConformers(Chem::MolecularGraph& molgraph) const;
+            void setConformers(Chem::MolecularGraph& molgraph) const;
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-		private:
-			struct FragmentConfData;
-			struct ConfCombinationData;
+        private:
+            struct FragmentConfData;
+            struct ConfCombinationData;
 
-			typedef Util::ObjectPool<FragmentConfData> FragmentConfDataCache;
-			typedef FragmentConfDataCache::SharedObjectPointer FragmentConfDataPtr;
-		
-			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
+            typedef Util::ObjectPool<FragmentConfData> FragmentConfDataCache;
+            typedef FragmentConfDataCache::SharedObjectPointer FragmentConfDataPtr;
+        
+            ConformerGeneratorImpl(const ConformerGeneratorImpl&);
 
-			ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
+            ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
 
-			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps, bool struct_gen_only);
-	
-			void combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
+            unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps, bool struct_gen_only);
+    
+            void combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
 
-			void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
+            void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
 
-			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only, bool start_timer);
+            unsigned int generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only, bool start_timer);
 
-			unsigned int generateConformersSystematic(bool struct_gen_only);
+            unsigned int generateConformersSystematic(bool struct_gen_only);
 
-			unsigned int generateConformersStochastic(bool struct_gen_only);
+            unsigned int generateConformersStochastic(bool struct_gen_only);
 
-			void removeWorkingConfDuplicates();
-			
-			bool determineSamplingMode();
+            void removeWorkingConfDuplicates();
+            
+            bool determineSamplingMode();
 
-			void init(const Chem::MolecularGraph& molgraph, bool start_timer);
+            void init(const Chem::MolecularGraph& molgraph, bool start_timer);
 
-			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
+            bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
-			ConformerData::SharedPointer getInputCoordinates();
+            ConformerData::SharedPointer getInputCoordinates();
 
-			void splitIntoTorsionFragments();
-			
-			bool setupMMFF94Parameters(unsigned int ff_type);
-			
-			unsigned int generateFragmentConformers(bool struct_gen_only);
-			
-			unsigned int generateFragmentConformerCombinations();
-		
-			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
+            void splitIntoTorsionFragments();
+            
+            bool setupMMFF94Parameters(unsigned int ff_type);
+            
+            unsigned int generateFragmentConformers(bool struct_gen_only);
+            
+            unsigned int generateFragmentConformerCombinations();
+        
+            void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 
-			unsigned int generateOutputConformers(bool struct_gen_only);
+            unsigned int generateOutputConformers(bool struct_gen_only);
 
-			unsigned int selectOutputConformers(bool struct_gen_only, bool& );
+            unsigned int selectOutputConformers(bool struct_gen_only, bool& );
 
-			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
+            double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-			bool has3DCoordinates(const Chem::Atom& atom) const;
+            bool has3DCoordinates(const Chem::Atom& atom) const;
 
-			static bool compareConfCombinationEnergy(const ConfCombinationData* comb1, 
-													 const ConfCombinationData* comb2);
-			static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1, 
-												 const FragmentConfDataPtr& conf_data2);
+            static bool compareConfCombinationEnergy(const ConfCombinationData* comb1, 
+                                                     const ConfCombinationData* comb2);
+            static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1, 
+                                                 const FragmentConfDataPtr& conf_data2);
 
-			void orderConformersByEnergy(ConformerDataArray& confs) const;
+            void orderConformersByEnergy(ConformerDataArray& confs) const;
 
-			unsigned int invokeCallbacks() const;
-			bool timedout() const;
+            unsigned int invokeCallbacks() const;
+            bool timedout() const;
 
-			bool rmsdConfSelectorAbortCallback() const;
-			
-			typedef std::vector<std::size_t> UIntArray;
+            bool rmsdConfSelectorAbortCallback() const;
+            
+            typedef std::vector<std::size_t> UIntArray;
 
-			struct FragmentConfData
-			{
+            struct FragmentConfData
+            {
 
-				Chem::Fragment::SharedPointer fragment;
-				ConformerDataArray            conformers;
-				std::size_t                   lastConfIdx;
-				bool                          haveInputCoords;
+                Chem::Fragment::SharedPointer fragment;
+                ConformerDataArray            conformers;
+                std::size_t                   lastConfIdx;
+                bool                          haveInputCoords;
 
-				void clear() {
-					conformers.clear();
-					fragment.reset();
-				}
-			};
+                void clear() {
+                    conformers.clear();
+                    fragment.reset();
+                }
+            };
 
-			struct ConfCombinationData
-			{
+            struct ConfCombinationData
+            {
 
-				UIntArray   confIndices;
-				double      energy;
-			};
+                UIntArray   confIndices;
+                double      energy;
+            };
 
-			typedef Util::ObjectStack<ConfCombinationData> ConfCombinationDataCache;
-			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-			typedef std::vector<FragmentConfDataPtr> FragmentConfDataList;
-			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
-			typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
-			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
-			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
-			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
+            typedef Util::ObjectStack<ConfCombinationData> ConfCombinationDataCache;
+            typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+            typedef std::vector<FragmentConfDataPtr> FragmentConfDataList;
+            typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+            typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
+            typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
+            typedef std::vector<const Chem::Bond*> BondList;
+            typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
+            typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 
-			ConformerDataCache                    confDataCache;
-			FragmentConfDataCache                 fragConfDataCache;
-			ConfCombinationDataCache              confCombDataCache;
-			ConformerGeneratorSettings            settings;
-			const Chem::MolecularGraph*           molGraph;
-			ConformerDataArray                    workingConfs;
-			ConformerDataArray                    tmpWorkingConfs;
-			ConformerDataArray                    outputConfs;
-			CallbackFunction                      abortCallback;
-			CallbackFunction                      timeoutCallback;
-			LogMessageCallbackFunction            logCallback;
-			Internal::Timer                       timer;
-			RMSDConformerSelector                 confSelector;
-			TorsionDriverImpl                     torDriver;
-			FragmentAssemblerImpl                 fragAssembler;
-			DGStructureGenerator                  dgStructureGen;
-			MMFF94Parameterizer                   mmff94Parameterizer;
-			MMFF94InteractionData                 mmff94Data;
-			ForceFieldInteractionMask             mmff94InteractionMask;
-			MMFF94GradientCalculator              mmff94GradientCalc;
-			BFGSMinimizer                         energyMinimizer;
-			Chem::Hydrogen3DCoordinatesCalculator hCoordsCalc;
-			BondList                              torDriveBonds;
-			BondList                              fragSplitBonds;
-			Chem::FragmentList                    fragments;
-			Util::BitSet                          tmpBitSet;
-			Util::BitSet                          coreAtomMask;
-			Util::BitSet                          invertibleNMask;
-			Util::BitSet                          fixedAtomConfigMask;
-			FragmentConfDataList                  compConfData;
-			FragmentConfDataList                  torFragConfData;
-			ConfCombinationDataList               torFragConfCombData;
-			UIntArray                             currConfComb;
-			UIntArray                             parentAtomInds; 
-			Math::Vector3DArray::StorageType      energyGradient;
-			bool                                  inStochasticMode;
-		};
+            ConformerDataCache                    confDataCache;
+            FragmentConfDataCache                 fragConfDataCache;
+            ConfCombinationDataCache              confCombDataCache;
+            ConformerGeneratorSettings            settings;
+            const Chem::MolecularGraph*           molGraph;
+            ConformerDataArray                    workingConfs;
+            ConformerDataArray                    tmpWorkingConfs;
+            ConformerDataArray                    outputConfs;
+            CallbackFunction                      abortCallback;
+            CallbackFunction                      timeoutCallback;
+            LogMessageCallbackFunction            logCallback;
+            Internal::Timer                       timer;
+            RMSDConformerSelector                 confSelector;
+            TorsionDriverImpl                     torDriver;
+            FragmentAssemblerImpl                 fragAssembler;
+            DGStructureGenerator                  dgStructureGen;
+            MMFF94Parameterizer                   mmff94Parameterizer;
+            MMFF94InteractionData                 mmff94Data;
+            ForceFieldInteractionMask             mmff94InteractionMask;
+            MMFF94GradientCalculator              mmff94GradientCalc;
+            BFGSMinimizer                         energyMinimizer;
+            Chem::Hydrogen3DCoordinatesCalculator hCoordsCalc;
+            BondList                              torDriveBonds;
+            BondList                              fragSplitBonds;
+            Chem::FragmentList                    fragments;
+            Util::BitSet                          tmpBitSet;
+            Util::BitSet                          coreAtomMask;
+            Util::BitSet                          invertibleNMask;
+            Util::BitSet                          fixedAtomConfigMask;
+            FragmentConfDataList                  compConfData;
+            FragmentConfDataList                  torFragConfData;
+            ConfCombinationDataList               torFragConfCombData;
+            UIntArray                             currConfComb;
+            UIntArray                             parentAtomInds; 
+            Math::Vector3DArray::StorageType      energyGradient;
+            bool                                  inStochasticMode;
+        };
     }
 }
 

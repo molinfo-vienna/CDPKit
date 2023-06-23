@@ -35,26 +35,26 @@
 
 void CDPLPythonPharm::exportFunctionWrappers()
 {
-	using namespace boost;
+    using namespace boost;
     using namespace CDPL;
     using namespace Pharm;
 
-	CDPLPythonBase::Function1Export<const Math::Vector3D&(const Feature&), Feature&, python::return_internal_reference<> >("Feature3DCoordinatesFunction");
-   	CDPLPythonBase::Function1Export<double(const ScreeningProcessor::SearchHit&) >("DoubleSearchHitFunctor");
+    CDPLPythonBase::Function1Export<const Math::Vector3D&(const Feature&), Feature&, python::return_internal_reference<> >("Feature3DCoordinatesFunction");
+       CDPLPythonBase::Function1Export<double(const ScreeningProcessor::SearchHit&) >("DoubleSearchHitFunctor");
     CDPLPythonBase::Function1Export<double(const Feature&), Feature&>("DoubleFeatureFunctor");
-	CDPLPythonBase::Function1Export<bool(double), double, python::return_value_policy<python::return_by_value> >("BoolDoubleFunctor"); 
-	CDPLPythonBase::Function1Export<double(double), double,	python::return_value_policy<python::return_by_value> >("DoubleDoubleFunctor"); 
+    CDPLPythonBase::Function1Export<bool(double), double, python::return_value_policy<python::return_by_value> >("BoolDoubleFunctor"); 
+    CDPLPythonBase::Function1Export<double(double), double,    python::return_value_policy<python::return_by_value> >("DoubleDoubleFunctor"); 
     CDPLPythonBase::Function1Export<bool(const Feature&), Feature&>("BoolFeatureFunctor");
 
     CDPLPythonBase::Function2Export<bool(const Feature&, const Feature&), Feature&, Feature&>("BoolFeature2Functor");
     CDPLPythonBase::Function2Export<double(const Feature&, const Feature&), Feature&, Feature&>("DoubleFeature2Functor");
-	CDPLPythonBase::Function2Export<bool(const ScreeningProcessor::SearchHit&, double),	const ScreeningProcessor::SearchHit&, double, python::return_value_policy<python::return_by_value> >("BoolSearchHitDoubleFunctor");
-	CDPLPythonBase::Function2Export<bool(std::size_t, std::size_t), std::size_t, std::size_t, python::return_value_policy<python::return_by_value> >("BoolSizeType2Functor");
-	CDPLPythonBase::Function2Export<double(double, double), double, double, python::return_value_policy<python::return_by_value> >("DoubleDouble2Functor");
+    CDPLPythonBase::Function2Export<bool(const ScreeningProcessor::SearchHit&, double),    const ScreeningProcessor::SearchHit&, double, python::return_value_policy<python::return_by_value> >("BoolSearchHitDoubleFunctor");
+    CDPLPythonBase::Function2Export<bool(std::size_t, std::size_t), std::size_t, std::size_t, python::return_value_policy<python::return_by_value> >("BoolSizeType2Functor");
+    CDPLPythonBase::Function2Export<double(double, double), double, double, python::return_value_policy<python::return_by_value> >("DoubleDouble2Functor");
 
     CDPLPythonBase::Function3Export<bool(const Feature&, const Feature&, const Math::Matrix4D&), Feature&, Feature&>("BoolFeature2Matrix4DFunctor");
     CDPLPythonBase::Function3Export<double(const Feature&, const Feature&, const Math::Matrix4D&), Feature&, Feature&>("DoubleFeature2Matrix4DFunctor");
-    CDPLPythonBase::Function3Export<double(const Feature&, const Feature&, unsigned int), Feature&, Feature&>("DoubleFeature2UIntFunctor"); 	
+    CDPLPythonBase::Function3Export<double(const Feature&, const Feature&, unsigned int), Feature&, Feature&>("DoubleFeature2UIntFunctor");     
 
     CDPLPythonBase::Function4Export<bool(const Feature&, const Feature&, const Feature&, const Feature&),Feature&, Feature&, Feature&, Feature&>("BoolFeature4Functor");
 }

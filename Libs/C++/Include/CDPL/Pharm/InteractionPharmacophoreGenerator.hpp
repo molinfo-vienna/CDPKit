@@ -44,64 +44,64 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief InteractionPharmacophoreGenerator.
-		 */
-		class CDPL_PHARM_API InteractionPharmacophoreGenerator
-		{
+        /**
+         * \brief InteractionPharmacophoreGenerator.
+         */
+        class CDPL_PHARM_API InteractionPharmacophoreGenerator
+        {
 
-		  public:
-			/**
-			 * \brief Constructs the \c %InteractionPharmacophoreGenerator instance.
-			 */
-			InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
-											  DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
+          public:
+            /**
+             * \brief Constructs the \c %InteractionPharmacophoreGenerator instance.
+             */
+            InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
+                                              DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
 
-			void setCoreEnvironmentRadius(double radius);
+            void setCoreEnvironmentRadius(double radius);
 
-			double getCoreEnvironmentRadius() const;
+            double getCoreEnvironmentRadius() const;
 
-			void addExclusionVolumes(bool add);
+            void addExclusionVolumes(bool add);
 
-			bool exclusionVolumesAdded() const;
+            bool exclusionVolumesAdded() const;
 
-			PharmacophoreGenerator& getCorePharmacophoreGenerator();
+            PharmacophoreGenerator& getCorePharmacophoreGenerator();
 
-			const PharmacophoreGenerator& getCorePharmacophoreGenerator() const;
+            const PharmacophoreGenerator& getCorePharmacophoreGenerator() const;
 
-			PharmacophoreGenerator& getEnvironmentPharmacophoreGenerator();
+            PharmacophoreGenerator& getEnvironmentPharmacophoreGenerator();
 
-			const PharmacophoreGenerator& getEnvironmentPharmacophoreGenerator() const;
+            const PharmacophoreGenerator& getEnvironmentPharmacophoreGenerator() const;
 
-			InteractionAnalyzer& getInteractionAnalyzer();
+            InteractionAnalyzer& getInteractionAnalyzer();
 
-			const InteractionAnalyzer& getInteractionAnalyzer() const;
+            const InteractionAnalyzer& getInteractionAnalyzer() const;
 
-			const Pharmacophore& getCorePharmacophore() const;
+            const Pharmacophore& getCorePharmacophore() const;
 
-			const Pharmacophore& getEnvironmentPharmacophore() const;
+            const Pharmacophore& getEnvironmentPharmacophore() const;
 
-			const FeatureMapping& getInteractionMapping() const;
+            const FeatureMapping& getInteractionMapping() const;
 
-			const Chem::Fragment& getCoreEnvironment() const;
+            const Chem::Fragment& getCoreEnvironment() const;
 
-			void generate(const Chem::MolecularGraph& core, const Chem::MolecularGraph& tgt, Pharmacophore& ia_pharm, 
-						  bool extract_core_env, bool append = false);
+            void generate(const Chem::MolecularGraph& core, const Chem::MolecularGraph& tgt, Pharmacophore& ia_pharm, 
+                          bool extract_core_env, bool append = false);
 
-		  private:
-			DefaultPharmacophoreGenerator corePharmGen;
-			DefaultPharmacophoreGenerator envPharmGen;
-			BasicPharmacophore            corePharm;
-			BasicPharmacophore            envPharm;
-			DefaultInteractionAnalyzer    iaAnalyzer;
-			FeatureMapping                iaMapping;
-			Chem::Fragment                coreEnv;
-			Chem::Fragment                iaEnvFeatureResAtoms;
-			Chem::Fragment                iaEnvFeatureAtoms;
-			FeatureSet                    iaEnvFeatures;
-			double                        coreEnvRadius;
-			bool                          addXVolumes;
-		};
+          private:
+            DefaultPharmacophoreGenerator corePharmGen;
+            DefaultPharmacophoreGenerator envPharmGen;
+            BasicPharmacophore            corePharm;
+            BasicPharmacophore            envPharm;
+            DefaultInteractionAnalyzer    iaAnalyzer;
+            FeatureMapping                iaMapping;
+            Chem::Fragment                coreEnv;
+            Chem::Fragment                iaEnvFeatureResAtoms;
+            Chem::Fragment                iaEnvFeatureAtoms;
+            FeatureSet                    iaEnvFeatures;
+            double                        coreEnvRadius;
+            bool                          addXVolumes;
+        };
     }
 }
 

@@ -35,52 +35,52 @@
 
 BOOST_AUTO_TEST_CASE(AtomTypeTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
    
-	Molecule mol;
-	Atom& atom = mol.addAtom();
+    Molecule mol;
+    Atom& atom = mol.addAtom();
 
-	BOOST_CHECK(atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+    BOOST_CHECK(atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
 
-	BOOST_CHECK(atom.getProperty<unsigned int>(AtomProperty::TYPE) == AtomType::UNKNOWN);
+    BOOST_CHECK(atom.getProperty<unsigned int>(AtomProperty::TYPE) == AtomType::UNKNOWN);
 
-	BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+    BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
 
-	BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+    BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
 
-	BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == "");
-
-//-----
-
-	atom.setProperty(AtomProperty::SYMBOL, std::string("C"));
-	atom.setProperty(AtomProperty::TYPE, AtomType::N);
-
-	BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
-	BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
-
-	BOOST_CHECK(atom.getProperty<unsigned int>(AtomProperty::TYPE) == AtomType::N);
-
-	BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
-	BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
-
-	BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == "C");
-
-	BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
-	BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
-
-	atom.removeProperty(AtomProperty::TYPE);
+    BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == "");
 
 //-----
 
-	for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
-		atom.setProperty(AtomProperty::SYMBOL, AtomTypeDB::getSymbol(atom_type));
+    atom.setProperty(AtomProperty::SYMBOL, std::string("C"));
+    atom.setProperty(AtomProperty::TYPE, AtomType::N);
 
-		BOOST_CHECK(atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
-	
-		BOOST_CHECK(atom.getProperty<unsigned int>(AtomProperty::TYPE) == (atom_type > AtomType::MAX_TYPE ? AtomType::UNKNOWN : atom_type));
+    BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+    BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
 
-		BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
-	}
+    BOOST_CHECK(atom.getProperty<unsigned int>(AtomProperty::TYPE) == AtomType::N);
+
+    BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+    BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+
+    BOOST_CHECK(atom.getProperty<std::string>(AtomProperty::SYMBOL) == "C");
+
+    BOOST_CHECK(!atom.getProperty(AtomProperty::SYMBOL, false, false).isEmpty());
+    BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+
+    atom.removeProperty(AtomProperty::TYPE);
+
+//-----
+
+    for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
+        atom.setProperty(AtomProperty::SYMBOL, AtomTypeDB::getSymbol(atom_type));
+
+        BOOST_CHECK(atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+    
+        BOOST_CHECK(atom.getProperty<unsigned int>(AtomProperty::TYPE) == (atom_type > AtomType::MAX_TYPE ? AtomType::UNKNOWN : atom_type));
+
+        BOOST_CHECK(!atom.getProperty(AtomProperty::TYPE, false, false).isEmpty());
+    }
 }
 

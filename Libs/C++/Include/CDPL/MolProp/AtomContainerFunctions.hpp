@@ -40,46 +40,46 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
-	
-		class AtomContainer;
-	}
+    namespace Chem 
+    {
+    
+        class AtomContainer;
+    }
 
-	namespace MolProp
-	{
-		
-		CDPL_MOLPROP_API double calcExplicitMass(const Chem::AtomContainer& cntnr);
+    namespace MolProp
+    {
+        
+        CDPL_MOLPROP_API double calcExplicitMass(const Chem::AtomContainer& cntnr);
 
-		CDPL_MOLPROP_API void calcExplicitMassComposition(const Chem::AtomContainer& cntnr, MassComposition& mass_comp);
+        CDPL_MOLPROP_API void calcExplicitMassComposition(const Chem::AtomContainer& cntnr, MassComposition& mass_comp);
 
-		CDPL_MOLPROP_API void buildExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str);
+        CDPL_MOLPROP_API void buildExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str);
 
-		CDPL_MOLPROP_API void buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula);
+        CDPL_MOLPROP_API void buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula);
 
-		CDPL_MOLPROP_API void buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
-
-
-		CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr);
-
-		CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
-
-		CDPL_MOLPROP_API std::size_t getExplicitChainAtomCount(const Chem::AtomContainer& cntnr);
-
-		CDPL_MOLPROP_API std::size_t getRingAtomCount(const Chem::AtomContainer& cntnr);
-
-		CDPL_MOLPROP_API std::size_t getAromaticAtomCount(const Chem::AtomContainer& cntnr);
-
-		CDPL_MOLPROP_API std::size_t getHeavyAtomCount(const Chem::AtomContainer& cntnr);
+        CDPL_MOLPROP_API void buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
 
 
-		CDPL_MOLPROP_API long getNetFormalCharge(const Chem::AtomContainer& cntnr);
+        CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr);
+
+        CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
+
+        CDPL_MOLPROP_API std::size_t getExplicitChainAtomCount(const Chem::AtomContainer& cntnr);
+
+        CDPL_MOLPROP_API std::size_t getRingAtomCount(const Chem::AtomContainer& cntnr);
+
+        CDPL_MOLPROP_API std::size_t getAromaticAtomCount(const Chem::AtomContainer& cntnr);
+
+        CDPL_MOLPROP_API std::size_t getHeavyAtomCount(const Chem::AtomContainer& cntnr);
 
 
-		CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment);
+        CDPL_MOLPROP_API long getNetFormalCharge(const Chem::AtomContainer& cntnr);
 
-		CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, Math::Vector3D& moment);
-	}
+
+        CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment);
+
+        CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, Math::Vector3D& moment);
+    }
 }
 
 #endif // CDPL_MOLPROP_ATOMCONTAINERFUNCTIONS_HPP

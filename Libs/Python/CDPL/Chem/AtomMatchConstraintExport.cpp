@@ -32,18 +32,18 @@
 namespace 
 {
 
-	struct AtomMatchConstraint {};
+    struct AtomMatchConstraint {};
 }
 
 
 void CDPLPythonChem::exportAtomMatchConstraints()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomMatchConstraint, boost::noncopyable>("AtomMatchConstraint", python::no_init)
-		.def_readonly("CONSTRAINT_LIST", &Chem::AtomMatchConstraint::CONSTRAINT_LIST)    
-		.def_readonly("AROMATICITY", &Chem::AtomMatchConstraint::AROMATICITY)    
+    python::class_<AtomMatchConstraint, boost::noncopyable>("AtomMatchConstraint", python::no_init)
+        .def_readonly("CONSTRAINT_LIST", &Chem::AtomMatchConstraint::CONSTRAINT_LIST)    
+        .def_readonly("AROMATICITY", &Chem::AtomMatchConstraint::AROMATICITY)    
         .def_readonly("BOND_COUNT", &Chem::AtomMatchConstraint::BOND_COUNT)    
         .def_readonly("CHARGE", &Chem::AtomMatchConstraint::CHARGE)    
         .def_readonly("ENVIRONMENT", &Chem::AtomMatchConstraint::ENVIRONMENT)    

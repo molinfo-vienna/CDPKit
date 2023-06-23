@@ -35,50 +35,50 @@ using namespace CDPL;
 // SearchHit
 
 Pharm::ScreeningProcessor::SearchHit::SearchHit(const ScreeningProcessor& hit_prov, const FeatureContainer& qry_pharm,
-												const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
-												const Math::Matrix4D& xform, std::size_t pharm_idx, 
-												std::size_t mol_idx, std::size_t conf_idx):
-	provider(&hit_prov), qryPharm(&qry_pharm), hitPharm(&hit_pharm), molecule(&mol),
-	almntTransform(&xform), pharmIndex(pharm_idx), molIndex(mol_idx), confIndex(conf_idx) {}
+                                                const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
+                                                const Math::Matrix4D& xform, std::size_t pharm_idx, 
+                                                std::size_t mol_idx, std::size_t conf_idx):
+    provider(&hit_prov), qryPharm(&qry_pharm), hitPharm(&hit_pharm), molecule(&mol),
+    almntTransform(&xform), pharmIndex(pharm_idx), molIndex(mol_idx), confIndex(conf_idx) {}
 
 const Pharm::ScreeningProcessor& Pharm::ScreeningProcessor::SearchHit::getHitProvider() const
 {
-	return *provider;
+    return *provider;
 }
 
 const Pharm::FeatureContainer& Pharm::ScreeningProcessor::SearchHit::getQueryPharmacophore() const
 {
-	return *qryPharm;
+    return *qryPharm;
 }
 
 const Pharm::FeatureContainer& Pharm::ScreeningProcessor::SearchHit::getHitPharmacophore() const
 {
-	return *hitPharm;
+    return *hitPharm;
 }
-				
+                
 const Chem::Molecule& Pharm::ScreeningProcessor::SearchHit::getHitMolecule() const
 {
-	return *molecule;
+    return *molecule;
 }
-				
+                
 const Math::Matrix4D& Pharm::ScreeningProcessor::SearchHit::getHitAlignmentTransform() const
 {
-	return *almntTransform;
+    return *almntTransform;
 } 
 
 std::size_t Pharm::ScreeningProcessor::SearchHit::getHitPharmacophoreIndex() const
 {
-	return pharmIndex;
+    return pharmIndex;
 }
 
 std::size_t Pharm::ScreeningProcessor::SearchHit::getHitMoleculeIndex() const
 {
-	return molIndex;
+    return molIndex;
 }
 
 std::size_t Pharm::ScreeningProcessor::SearchHit::getHitConformationIndex() const
 {
-	return confIndex;
+    return confIndex;
 }
 
 
@@ -87,90 +87,90 @@ std::size_t Pharm::ScreeningProcessor::SearchHit::getHitConformationIndex() cons
 Pharm::ScreeningProcessor::ScreeningProcessor(ScreeningDBAccessor& db_acc): 
     impl(new ScreeningProcessorImpl(*this, db_acc))
 {}
-	
+    
 Pharm::ScreeningProcessor::~ScreeningProcessor() {}
 
 void Pharm::ScreeningProcessor::setDBAccessor(ScreeningDBAccessor& db_acc)
 {
-	impl->setDBAccessor(db_acc);
+    impl->setDBAccessor(db_acc);
 }
 
 Pharm::ScreeningDBAccessor& Pharm::ScreeningProcessor::getDBAccessor() const
 {
-	return impl->getDBAccessor();
+    return impl->getDBAccessor();
 }
 
 void Pharm::ScreeningProcessor::setHitReportMode(HitReportMode mode)
 {
-	impl->setHitReportMode(mode);
+    impl->setHitReportMode(mode);
 }
 
 Pharm::ScreeningProcessor::HitReportMode Pharm::ScreeningProcessor::getHitReportMode() const
 {
-	return impl->getHitReportMode();
+    return impl->getHitReportMode();
 }
 
 void Pharm::ScreeningProcessor::setMaxNumOmittedFeatures(std::size_t max_num)
 {
-	impl->setMaxNumOmittedFeatures(max_num);
+    impl->setMaxNumOmittedFeatures(max_num);
 }
 
 std::size_t Pharm::ScreeningProcessor::getMaxNumOmittedFeatures() const
 {
-	return impl->getMaxNumOmittedFeatures();
+    return impl->getMaxNumOmittedFeatures();
 }
 
 void Pharm::ScreeningProcessor::checkXVolumeClashes(bool check)
 {
-	impl->checkXVolumeClashes(check);
+    impl->checkXVolumeClashes(check);
 }
 
 bool Pharm::ScreeningProcessor::xVolumeClashesChecked() const
 {
-	return impl->xVolumeClashesChecked();
+    return impl->xVolumeClashesChecked();
 }
 
 void Pharm::ScreeningProcessor::seekBestAlignments(bool seek_best)
 {
-	impl->seekBestAlignments(seek_best);
+    impl->seekBestAlignments(seek_best);
 }
 
 bool Pharm::ScreeningProcessor::bestAlignmentsSeeked() const
 {
-	return impl->bestAlignmentsSeeked();
+    return impl->bestAlignmentsSeeked();
 }
 
 void Pharm::ScreeningProcessor::setHitCallback(const HitCallbackFunction& func)
 {
-	impl->setHitCallback(func);
+    impl->setHitCallback(func);
 }
 
 const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcessor::getHitCallback() const
 {
-	return impl->getHitCallback();
+    return impl->getHitCallback();
 }
 
 void Pharm::ScreeningProcessor::setProgressCallback(const ProgressCallbackFunction& func)
 {
-	impl->setProgressCallback(func);
+    impl->setProgressCallback(func);
 }
 
 const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcessor::getProgressCallback() const
 {
-	return impl->getProgressCallback();
+    return impl->getProgressCallback();
 }
 
 void Pharm::ScreeningProcessor::setScoringFunction(const ScoringFunction& func)
 {
-	impl->setScoringFunction(func);
+    impl->setScoringFunction(func);
 }
 
 const Pharm::ScreeningProcessor::ScoringFunction& Pharm::ScreeningProcessor::getScoringFunction() const
 {
-	return impl->getScoringFunction();
+    return impl->getScoringFunction();
 }
 
 std::size_t Pharm::ScreeningProcessor::searchDB(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx)
 {
-	return impl->searchDB(query, mol_start_idx, mol_end_idx);
+    return impl->searchDB(query, mol_start_idx, mol_end_idx);
 }

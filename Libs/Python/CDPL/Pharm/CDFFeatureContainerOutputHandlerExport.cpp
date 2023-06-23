@@ -33,18 +33,18 @@
 
 void CDPLPythonPharm::exportCDFFeatureContainerOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::CDFFeatureContainerOutputHandler, 
-		python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFFeatureContainerOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::CDFFeatureContainerOutputHandler, 
+        python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFFeatureContainerOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Pharm::CDFGZFeatureContainerOutputHandler, 
-		python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFGZFeatureContainerOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::CDFGZFeatureContainerOutputHandler, 
+        python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFGZFeatureContainerOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Pharm::CDFBZ2FeatureContainerOutputHandler, 
-		python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFBZ2FeatureContainerOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::CDFBZ2FeatureContainerOutputHandler, 
+        python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFBZ2FeatureContainerOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

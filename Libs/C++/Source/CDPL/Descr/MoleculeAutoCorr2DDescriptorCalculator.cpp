@@ -38,63 +38,63 @@ using namespace CDPL;
 namespace
 {
 
-	struct AtomPairWeightFuncFS
-	{
+    struct AtomPairWeightFuncFS
+    {
 
-		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type1, unsigned int slot_type2) const {
-			unsigned int atom_type1 = getType(atom1);
-			unsigned int atom_type2 = getType(atom2);
+        double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type1, unsigned int slot_type2) const {
+            unsigned int atom_type1 = getType(atom1);
+            unsigned int atom_type2 = getType(atom2);
 
-			if ((atom_type1 == slot_type1 && atom_type2 == slot_type2) ||
-				(atom_type2 == slot_type1 && atom_type1 == slot_type2))
-				return 1;
+            if ((atom_type1 == slot_type1 && atom_type2 == slot_type2) ||
+                (atom_type2 == slot_type1 && atom_type1 == slot_type2))
+                return 1;
 
-			return 0;
-		}
-	};
+            return 0;
+        }
+    };
 
-	struct AtomPairWeightFuncSS
-	{
+    struct AtomPairWeightFuncSS
+    {
 
-		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type, unsigned int) const {
-			unsigned int atom_type1 = getType(atom1);
-			unsigned int atom_type2 = getType(atom2);
-	
-			if (atom_type1 == slot_type && atom_type2 == slot_type)
-				return 2;
+        double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type, unsigned int) const {
+            unsigned int atom_type1 = getType(atom1);
+            unsigned int atom_type2 = getType(atom2);
+    
+            if (atom_type1 == slot_type && atom_type2 == slot_type)
+                return 2;
 
-			if (atom_type1 == slot_type || atom_type2 == slot_type)
-				return 1;
+            if (atom_type1 == slot_type || atom_type2 == slot_type)
+                return 1;
 
-			return 0;
-		}
-	};
+            return 0;
+        }
+    };
 
     unsigned int ATOM_TYPES[] = {
-	    Chem::AtomType::H,
-		Chem::AtomType::C,
-		Chem::AtomType::N,
-		Chem::AtomType::O,
-		Chem::AtomType::S,
-		Chem::AtomType::P,
-		Chem::AtomType::F,
-		Chem::AtomType::Cl,
-		Chem::AtomType::Br,
-		Chem::AtomType::I
+        Chem::AtomType::H,
+        Chem::AtomType::C,
+        Chem::AtomType::N,
+        Chem::AtomType::O,
+        Chem::AtomType::S,
+        Chem::AtomType::P,
+        Chem::AtomType::F,
+        Chem::AtomType::Cl,
+        Chem::AtomType::Br,
+        Chem::AtomType::I
     };
 }
 
 
 CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::MoleculeAutoCorr2DDescriptorCalculator(): 
-	weightFunc(), mode(FULL_SPLIT)
+    weightFunc(), mode(FULL_SPLIT)
 {
-	setMaxDistance(15);
+    setMaxDistance(15);
 } 
 
 CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::MoleculeAutoCorr2DDescriptorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& descr): 
-	weightFunc(), mode(FULL_SPLIT)
+    weightFunc(), mode(FULL_SPLIT)
 {
-	setMaxDistance(15);
+    setMaxDistance(15);
     calculate(molgraph, descr);
 }
 
@@ -110,12 +110,12 @@ std::size_t CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance(
 
 void CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::setMode(Mode mode)
 {
-	this->mode = mode;
+    this->mode = mode;
 }
 
 CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::Mode CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::getMode() const
 {
-	return mode;
+    return mode;
 }
 
 void CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)
@@ -125,41 +125,41 @@ void CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::setAtomPairWeightFunct
 
 void CDPL::Descr::MoleculeAutoCorr2DDescriptorCalculator::calculate(const Chem::MolecularGraph& molgraph, Math::DVector& descr)
 {
-	using namespace std::placeholders;
-	
-	std::size_t sub_descr_size = autoCorrCalculator.getMaxDistance() + 1;
-	std::size_t num_atom_types = sizeof(ATOM_TYPES) / sizeof(unsigned int);
-	Math::DVector sub_descr(sub_descr_size);
+    using namespace std::placeholders;
+    
+    std::size_t sub_descr_size = autoCorrCalculator.getMaxDistance() + 1;
+    std::size_t num_atom_types = sizeof(ATOM_TYPES) / sizeof(unsigned int);
+    Math::DVector sub_descr(sub_descr_size);
 
-	if (mode == FULL_SPLIT) {
-		descr.resize((sub_descr_size * (num_atom_types + 1) * num_atom_types) / 2, false);
+    if (mode == FULL_SPLIT) {
+        descr.resize((sub_descr_size * (num_atom_types + 1) * num_atom_types) / 2, false);
 
-		for (std::size_t i = 0, offs = 0; i < num_atom_types; i++) {
-			for (std::size_t j = i; j < num_atom_types; j++, offs += sub_descr_size) {
-				if (weightFunc)
-					autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
-				else
-					autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(AtomPairWeightFuncFS(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
+        for (std::size_t i = 0, offs = 0; i < num_atom_types; i++) {
+            for (std::size_t j = i; j < num_atom_types; j++, offs += sub_descr_size) {
+                if (weightFunc)
+                    autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
+                else
+                    autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(AtomPairWeightFuncFS(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
 
-				autoCorrCalculator.calculate(molgraph, sub_descr);
-		
-				Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
-			}
-		}
+                autoCorrCalculator.calculate(molgraph, sub_descr);
+        
+                Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
+            }
+        }
 
-		return;
-	}
+        return;
+    }
 
-	descr.resize(sub_descr_size * num_atom_types, false);
+    descr.resize(sub_descr_size * num_atom_types, false);
 
-	for (std::size_t i = 0, offs = 0; i < num_atom_types; i++, offs += sub_descr_size) {
-		if (weightFunc)
-			autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[i]));
-		else
-			autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(AtomPairWeightFuncSS(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[i]));
+    for (std::size_t i = 0, offs = 0; i < num_atom_types; i++, offs += sub_descr_size) {
+        if (weightFunc)
+            autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[i]));
+        else
+            autoCorrCalculator.setAtomPairWeightFunction(std::bind<double>(AtomPairWeightFuncSS(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[i]));
 
-		autoCorrCalculator.calculate(molgraph, sub_descr);
+        autoCorrCalculator.calculate(molgraph, sub_descr);
 
-		Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
-	}
+        Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
+    }
 }

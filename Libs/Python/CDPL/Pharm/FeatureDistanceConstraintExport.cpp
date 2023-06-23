@@ -37,9 +37,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::FeatureDistanceConstraint& constr, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+                      CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return constr(ftr1, ftr2);
+        return constr(ftr1, ftr2);
     }
 }
 
@@ -50,14 +50,14 @@ void CDPLPythonPharm::exportFeatureDistanceConstraint()
     using namespace CDPL;
 
     python::class_<Pharm::FeatureDistanceConstraint, boost::noncopyable>("FeatureDistanceConstraint", python::no_init)
-		.def(python::init<const Pharm::FeatureDistanceConstraint&>((python::arg("self"), python::arg("constr"))))
-		.def(python::init<double, double>((python::arg("self"), python::arg("min_dist"), python::arg("max_dist"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureDistanceConstraint>())
-		.def("getMinDistance", &Pharm::FeatureDistanceConstraint::getMinDistance, python::arg("self"))
-		.def("getMaxDistance", &Pharm::FeatureDistanceConstraint::getMaxDistance, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceConstraint::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.add_property("minDistance", &Pharm::FeatureDistanceConstraint::getMinDistance)
-		.add_property("maxDistance", &Pharm::FeatureDistanceConstraint::getMaxDistance);
+        .def(python::init<const Pharm::FeatureDistanceConstraint&>((python::arg("self"), python::arg("constr"))))
+        .def(python::init<double, double>((python::arg("self"), python::arg("min_dist"), python::arg("max_dist"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureDistanceConstraint>())
+        .def("getMinDistance", &Pharm::FeatureDistanceConstraint::getMinDistance, python::arg("self"))
+        .def("getMaxDistance", &Pharm::FeatureDistanceConstraint::getMaxDistance, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceConstraint::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+        .add_property("minDistance", &Pharm::FeatureDistanceConstraint::getMinDistance)
+        .add_property("maxDistance", &Pharm::FeatureDistanceConstraint::getMaxDistance);
 }

@@ -37,25 +37,25 @@ using namespace CDPL;
 
 void Chem::extractReactionCenter(const MolecularGraph& molgraph, Fragment& rxn_center)
 {
-	using namespace ReactionCenterStatus;
+    using namespace ReactionCenterStatus;
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+    MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
 
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-		unsigned int rxn_ctr_info = getReactionCenterStatus(bond);
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+        const Bond& bond = *it;
+        unsigned int rxn_ctr_info = getReactionCenterStatus(bond);
 
-		if (rxn_ctr_info != NO_CENTER && (rxn_ctr_info & (IS_CENTER | BOND_MADE | BOND_BROKEN | BOND_ORDER_CHANGE)) != 0)
-			rxn_center.addBond(bond);
-	}
+        if (rxn_ctr_info != NO_CENTER && (rxn_ctr_info & (IS_CENTER | BOND_MADE | BOND_BROKEN | BOND_ORDER_CHANGE)) != 0)
+            rxn_center.addBond(bond);
+    }
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		unsigned int rxn_ctr_info = getReactionCenterStatus(atom);
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
+        const Atom& atom = *it;
+        unsigned int rxn_ctr_info = getReactionCenterStatus(atom);
 
-		if (rxn_ctr_info != NO_CENTER && (rxn_ctr_info & (EXACT_CHANGE | STEREO_INVERSION | STEREO_RETENTION)) != 0) 
-			rxn_center.addAtom(atom);
-	}
+        if (rxn_ctr_info != NO_CENTER && (rxn_ctr_info & (EXACT_CHANGE | STEREO_INVERSION | STEREO_RETENTION)) != 0) 
+            rxn_center.addAtom(atom);
+    }
 }

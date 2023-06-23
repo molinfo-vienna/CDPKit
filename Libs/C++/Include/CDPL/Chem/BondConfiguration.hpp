@@ -33,52 +33,52 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the <em>E/Z</em> configuration of double bonds.
-		 */
-		namespace BondConfiguration
-		{
+        /**
+         * \brief Provides constants that are used to specify the <em>E/Z</em> configuration of double bonds.
+         */
+        namespace BondConfiguration
+        {
 
-			/**
-			 * \brief Specifies that the configuration of the bond is undefined.
-			 */
-			const unsigned int UNDEF  = 0;
+            /**
+             * \brief Specifies that the configuration of the bond is undefined.
+             */
+            const unsigned int UNDEF  = 0;
 
-			/**
-			 * \brief Specifies that a bond does not meet the requirements (e.g. not a double bond or symmetric)
-			 *        to be assigned a configuration.
-			 */
-			const unsigned int NONE   = 0x1;
+            /**
+             * \brief Specifies that a bond does not meet the requirements (e.g. not a double bond or symmetric)
+             *        to be assigned a configuration.
+             */
+            const unsigned int NONE   = 0x1;
 
-			/**
-			 * \brief Specifies that the bond has \e E configuration.
-			 */
-			const unsigned int E      = 0x2;
-		
-			/**
-			 * \brief Specifies that the bond has \e TRANS configuration.
-			 */
-			const unsigned int TRANS  = E;
-	
-			/**
-			 * \brief Specifies that the bond has \e Z configuration.
-			 */
-			const unsigned int Z      = 0x4;
+            /**
+             * \brief Specifies that the bond has \e E configuration.
+             */
+            const unsigned int E      = 0x2;
+        
+            /**
+             * \brief Specifies that the bond has \e TRANS configuration.
+             */
+            const unsigned int TRANS  = E;
+    
+            /**
+             * \brief Specifies that the bond has \e Z configuration.
+             */
+            const unsigned int Z      = 0x4;
 
-			/**
-			 * \brief Specifies that the bond has \e CIS configuration.
-			 */
-			const unsigned int CIS      = Z;
+            /**
+             * \brief Specifies that the bond has \e CIS configuration.
+             */
+            const unsigned int CIS      = Z;
 
-			/**
-			 * \brief Specifies that the bond meets all requirements but has no defined configuration.
-			 */
-			const unsigned int EITHER = 0x8;
-		}
-	}
+            /**
+             * \brief Specifies that the bond meets all requirements but has no defined configuration.
+             */
+            const unsigned int EITHER = 0x8;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_BONDCONFIGURATION_HPP

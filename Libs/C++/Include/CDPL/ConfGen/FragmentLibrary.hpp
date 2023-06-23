@@ -45,75 +45,75 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API FragmentLibrary
-		{
+        class CDPL_CONFGEN_API FragmentLibrary
+        {
 
-			typedef std::unordered_map<std::uint64_t, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
+            typedef std::unordered_map<std::uint64_t, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
 
-		  public:
-			typedef std::shared_ptr<FragmentLibrary> SharedPointer;
-	
-			typedef HashToEntryMap::value_type Entry;
-			typedef HashToEntryMap::const_iterator ConstEntryIterator;
-			typedef HashToEntryMap::iterator EntryIterator;
+          public:
+            typedef std::shared_ptr<FragmentLibrary> SharedPointer;
+    
+            typedef HashToEntryMap::value_type Entry;
+            typedef HashToEntryMap::const_iterator ConstEntryIterator;
+            typedef HashToEntryMap::iterator EntryIterator;
 
-			FragmentLibrary();
+            FragmentLibrary();
 
-			FragmentLibrary(const FragmentLibrary& lib);
+            FragmentLibrary(const FragmentLibrary& lib);
 
-			~FragmentLibrary();
+            ~FragmentLibrary();
 
-			FragmentLibrary& operator=(const FragmentLibrary& lib);
+            FragmentLibrary& operator=(const FragmentLibrary& lib);
 
-			void addEntries(const FragmentLibrary& lib);
+            void addEntries(const FragmentLibrary& lib);
 
-			bool addEntry(const FragmentLibraryEntry::SharedPointer& entry);
+            bool addEntry(const FragmentLibraryEntry::SharedPointer& entry);
 
-			const FragmentLibraryEntry::SharedPointer& getEntry(std::uint64_t hash_code) const;
+            const FragmentLibraryEntry::SharedPointer& getEntry(std::uint64_t hash_code) const;
 
-			bool containsEntry(std::uint64_t hash_code) const;
+            bool containsEntry(std::uint64_t hash_code) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(std::uint64_t hash_code);
+            bool removeEntry(std::uint64_t hash_code);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void save(std::ostream& os) const;
+            void save(std::ostream& os) const;
 
-			void loadDefaults();
+            void loadDefaults();
 
-			std::mutex& getMutex();
+            std::mutex& getMutex();
 
-			static void set(const SharedPointer& lib);
+            static void set(const SharedPointer& lib);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer   defaultLib;
-			mutable HashToEntryMap hashToEntryMap;
-			mutable std::mutex     mutex;
-		};
+          private:
+            static SharedPointer   defaultLib;
+            mutable HashToEntryMap hashToEntryMap;
+            mutable std::mutex     mutex;
+        };
     }
 }
 

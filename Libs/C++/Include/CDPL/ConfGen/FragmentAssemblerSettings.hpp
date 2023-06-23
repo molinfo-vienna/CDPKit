@@ -39,36 +39,36 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API FragmentAssemblerSettings
-		{
+        class CDPL_CONFGEN_API FragmentAssemblerSettings
+        {
 
-		  public:
-			static const FragmentAssemblerSettings DEFAULT;
+          public:
+            static const FragmentAssemblerSettings DEFAULT;
 
-			FragmentAssemblerSettings();
-	
-			void enumerateRings(bool enumerate);
+            FragmentAssemblerSettings();
+    
+            void enumerateRings(bool enumerate);
 
-			bool enumerateRings() const;
+            bool enumerateRings() const;
 
-			void setNitrogenEnumerationMode(unsigned int mode);
+            void setNitrogenEnumerationMode(unsigned int mode);
 
-			unsigned int getNitrogenEnumerationMode() const;
+            unsigned int getNitrogenEnumerationMode() const;
 
-			void generateCoordinatesFromScratch(bool generate);
-	
-			bool generateCoordinatesFromScratch() const;
+            void generateCoordinatesFromScratch(bool generate);
+    
+            bool generateCoordinatesFromScratch() const;
 
-			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
+            FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
-			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
+            const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
-		  private:
-			bool                               enumRings;
-			unsigned int                       nitrogenEnumMode;
-			bool                               fromScratch;
-			FragmentConformerGeneratorSettings fragBuildSettings;
-		};
+          private:
+            bool                               enumRings;
+            unsigned int                       nitrogenEnumMode;
+            bool                               fromScratch;
+            FragmentConformerGeneratorSettings fragBuildSettings;
+        };
     }
 }
 

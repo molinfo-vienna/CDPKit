@@ -39,45 +39,45 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Implements the perception of molecular graph components.
-		 */
-		class CDPL_CHEM_API ComponentSet : public FragmentList
-		{
+        /**
+         * \brief Implements the perception of molecular graph components.
+         */
+        class CDPL_CHEM_API ComponentSet : public FragmentList
+        {
 
-		public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ComponentSet instances.
-			 */
-			typedef std::shared_ptr<ComponentSet> SharedPointer;
+        public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ComponentSet instances.
+             */
+            typedef std::shared_ptr<ComponentSet> SharedPointer;
 
-			/**
-			 * \brief Constructs an empty \c %ComponentSet instance.
-			 */
-			ComponentSet() {}
+            /**
+             * \brief Constructs an empty \c %ComponentSet instance.
+             */
+            ComponentSet() {}
 
-			/**
-			 * \brief Constructs a \c %ComponentSet instance that contains the componenents of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive the components.
-			 */
-			ComponentSet(const MolecularGraph& molgraph);
+            /**
+             * \brief Constructs a \c %ComponentSet instance that contains the componenents of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the components.
+             */
+            ComponentSet(const MolecularGraph& molgraph);
 
-			/**
-			 * \brief Replaces the current set of components by the components of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perceive the components.
-			 */
-			void perceive(const MolecularGraph& molgraph);
+            /**
+             * \brief Replaces the current set of components by the components of the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perceive the components.
+             */
+            void perceive(const MolecularGraph& molgraph);
 
-		private:
-			void visitAtom(const Atom&, Fragment&);
+        private:
+            void visitAtom(const Atom&, Fragment&);
 
-			const MolecularGraph*    molGraph;
-			Util::BitSet             visAtomMask;
-		};
-	}
+            const MolecularGraph*    molGraph;
+            Util::BitSet             visAtomMask;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_COMPONENTSET_HPP

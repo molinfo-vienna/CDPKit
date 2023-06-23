@@ -37,9 +37,9 @@ namespace
 {
 
     double callOperator(CDPL::Pharm::InteractionScoreCombiner& comb, 
-						CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
+                        CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
     {
-		return comb(ftr1_pos, ftr2);
+        return comb(ftr1_pos, ftr2);
     }
 }
 
@@ -50,17 +50,17 @@ void CDPLPythonPharm::exportInteractionScoreCombiner()
     using namespace CDPL;
 
     python::class_<Pharm::InteractionScoreCombiner, 
-				   boost::noncopyable>("InteractionScoreCombiner", python::no_init)
-		.def(python::init<const Pharm::InteractionScoreCombiner&>(
-				 (python::arg("self"), python::arg("comb"))))
-		.def(python::init<const Pharm::InteractionScoreCombiner::ScoringFunction&, 
-			 const Pharm::InteractionScoreCombiner::ScoringFunction&, const Pharm::InteractionScoreCombiner::CombinationFunction&>(
-				 (python::arg("self"), python::arg("func1"), python::arg("func2"), python::arg("comb_func"))))
-		.def(python::init<const Pharm::InteractionScoreCombiner::ScoringFunction&, const Pharm::InteractionScoreCombiner::ScoringFunction&>(
-				 (python::arg("self"), python::arg("func1"), python::arg("func2"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionScoreCombiner>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionScoreCombiner::operator=), 
-			 (python::arg("self"), python::arg("con")), python::return_self<>())
-		.def("__call__", &callOperator, 
-			 (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")));
+                   boost::noncopyable>("InteractionScoreCombiner", python::no_init)
+        .def(python::init<const Pharm::InteractionScoreCombiner&>(
+                 (python::arg("self"), python::arg("comb"))))
+        .def(python::init<const Pharm::InteractionScoreCombiner::ScoringFunction&, 
+             const Pharm::InteractionScoreCombiner::ScoringFunction&, const Pharm::InteractionScoreCombiner::CombinationFunction&>(
+                 (python::arg("self"), python::arg("func1"), python::arg("func2"), python::arg("comb_func"))))
+        .def(python::init<const Pharm::InteractionScoreCombiner::ScoringFunction&, const Pharm::InteractionScoreCombiner::ScoringFunction&>(
+                 (python::arg("self"), python::arg("func1"), python::arg("func2"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionScoreCombiner>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionScoreCombiner::operator=), 
+             (python::arg("self"), python::arg("con")), python::return_self<>())
+        .def("__call__", &callOperator, 
+             (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")));
 }

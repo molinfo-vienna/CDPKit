@@ -45,79 +45,79 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ConfGen 
     {
 
-		class FragmentAssemblerImpl;
+        class FragmentAssemblerImpl;
 
-		class CDPL_CONFGEN_API FragmentAssembler
-		{
+        class CDPL_CONFGEN_API FragmentAssembler
+        {
 
-		  public:
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+          public:
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
 
-			FragmentAssembler();
-	
-			const FragmentAssemblerSettings& getSettings() const;
+            FragmentAssembler();
+    
+            const FragmentAssemblerSettings& getSettings() const;
 
-			FragmentAssemblerSettings& getSettings();
+            FragmentAssemblerSettings& getSettings();
 
-			void clearFragmentLibraries();
+            void clearFragmentLibraries();
 
-			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+            void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int assemble(const Chem::MolecularGraph& molgraph);
-		
-			std::size_t getNumConformers() const;
+            unsigned int assemble(const Chem::MolecularGraph& molgraph);
+        
+            std::size_t getNumConformers() const;
 
-			const ConformerData& getConformer(std::size_t idx) const;
+            const ConformerData& getConformer(std::size_t idx) const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			ConformerIterator getConformersBegin();
+            ConformerIterator getConformersBegin();
 
-			ConformerIterator getConformersEnd();
+            ConformerIterator getConformersEnd();
 
-			ConstConformerIterator begin() const;
+            ConstConformerIterator begin() const;
 
-			ConstConformerIterator end() const;
+            ConstConformerIterator end() const;
 
-			ConformerIterator begin();
+            ConformerIterator begin();
 
-			ConformerIterator end();
+            ConformerIterator end();
 
-		  private:
-			FragmentAssembler(const FragmentAssembler&);
+          private:
+            FragmentAssembler(const FragmentAssembler&);
 
-			FragmentAssembler& operator=(const FragmentAssembler&);
+            FragmentAssembler& operator=(const FragmentAssembler&);
 
-			typedef std::auto_ptr<FragmentAssemblerImpl> ImplementationPointer;
+            typedef std::auto_ptr<FragmentAssemblerImpl> ImplementationPointer;
 
-			ImplementationPointer impl;
-		};
+            ImplementationPointer impl;
+        };
     }
 }
 

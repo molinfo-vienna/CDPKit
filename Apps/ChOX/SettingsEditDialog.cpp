@@ -48,227 +48,227 @@ using namespace ChOX;
 
 
 SettingsEditDialog::SettingsEditDialog(QWidget* parent, Settings& settings, Qt::WindowFlags f):
-	QDialog(parent, f), settings(settings)
+    QDialog(parent, f), settings(settings)
 {
-	init();
+    init();
 }
 
 int SettingsEditDialog::exec()
 {
-	std::for_each(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
-				  std::bind(&SettingsEditWidget::reset, std::placeholders::_1));
+    std::for_each(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
+                  std::bind(&SettingsEditWidget::reset, std::placeholders::_1));
 
-	applyChangesButton->setEnabled(false);
+    applyChangesButton->setEnabled(false);
 
-	return QDialog::exec();
+    return QDialog::exec();
 }
 
 void SettingsEditDialog::acceptChanges()
 {
-	std::for_each(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
-				  std::bind(&SettingsEditWidget::apply, std::placeholders::_1));
-	accept();
+    std::for_each(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
+                  std::bind(&SettingsEditWidget::apply, std::placeholders::_1));
+    accept();
 }
 
 void SettingsEditDialog::resetChanges()
 {
-	categoryEditWidgetList.at(categoryEditWidgetStack->currentIndex())->reset();	
+    categoryEditWidgetList.at(categoryEditWidgetStack->currentIndex())->reset();    
 
-	applyChangesButton->setEnabled(std::find_if(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
-												std::bind(&SettingsEditWidget::haveChangedSettings, std::placeholders::_1)) != 
-								   categoryEditWidgetList.end());
+    applyChangesButton->setEnabled(std::find_if(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
+                                                std::bind(&SettingsEditWidget::haveChangedSettings, std::placeholders::_1)) != 
+                                   categoryEditWidgetList.end());
 }
 
 void SettingsEditDialog::applyChanges()
 {
-	applyChangesButton->setEnabled(false);
+    applyChangesButton->setEnabled(false);
 }
 
 void SettingsEditDialog::setDefaults()
 {
-	categoryEditWidgetList.at(categoryEditWidgetStack->currentIndex())->setDefaults();	
+    categoryEditWidgetList.at(categoryEditWidgetStack->currentIndex())->setDefaults();    
 
-	applyChangesButton->setEnabled(true);
+    applyChangesButton->setEnabled(true);
 }
 
 void SettingsEditDialog::handleCategorySelection(QListWidgetItem* item)
 {
-	item->setSelected(true);
+    item->setSelected(true);
 
-	categoryEditWidgetStack->setCurrentIndex(categoryMenu->row(item));
-	categoryDescrLabel->setText(categoryDescriptions.at(categoryMenu->row(item)));
+    categoryEditWidgetStack->setCurrentIndex(categoryMenu->row(item));
+    categoryDescrLabel->setText(categoryDescriptions.at(categoryMenu->row(item)));
 }
 
 void SettingsEditDialog::handleSettingsChange()
 {
-	applyChangesButton->setEnabled(true);
+    applyChangesButton->setEnabled(true);
 }
 
 void SettingsEditDialog::addCategoryEditWidget(SettingsEditWidget* widget, const QString& menu_text, const QString& description)
 {
-	categoryEditWidgetStack->addWidget(widget);
+    categoryEditWidgetStack->addWidget(widget);
 
-	connect(widget, SIGNAL(settingsChanged()), this, SLOT(handleSettingsChange()));
+    connect(widget, SIGNAL(settingsChanged()), this, SLOT(handleSettingsChange()));
 
-	new QListWidgetItem(menu_text, categoryMenu);
+    new QListWidgetItem(menu_text, categoryMenu);
 
-	connect(applyChangesButton, SIGNAL(clicked()), widget, SLOT(apply()));
+    connect(applyChangesButton, SIGNAL(clicked()), widget, SLOT(apply()));
 
-	categoryDescriptions.append(description);
+    categoryDescriptions.append(description);
 
-	categoryEditWidgetList.push_back(widget);
+    categoryEditWidgetList.push_back(widget);
 
-	categoryMenu->setMinimumWidth(categoryMenu->sizeHint().width());
+    categoryMenu->setMinimumWidth(categoryMenu->sizeHint().width());
 }
 
 void SettingsEditDialog::init()
 {
-	setWindowTitle(tr("ChOX - Settings"));
+    setWindowTitle(tr("ChOX - Settings"));
 
 // --------
 
-	QVBoxLayout* main_layout = new QVBoxLayout(this);
-	QHBoxLayout* h_box_layout = new QHBoxLayout();
-	
-	main_layout->addLayout(h_box_layout);
+    QVBoxLayout* main_layout = new QVBoxLayout(this);
+    QHBoxLayout* h_box_layout = new QHBoxLayout();
+    
+    main_layout->addLayout(h_box_layout);
 
 // --------
 
-	categoryMenu = new QListWidget(this);
+    categoryMenu = new QListWidget(this);
 
-	QFont font = categoryMenu->font();
+    QFont font = categoryMenu->font();
 
-	font.setBold(true);
-	font.setPointSize(font.pointSize() + 1);
+    font.setBold(true);
+    font.setPointSize(font.pointSize() + 1);
 
-	categoryMenu->setFont(font);
-	categoryMenu->setSelectionMode(QAbstractItemView::SingleSelection);
+    categoryMenu->setFont(font);
+    categoryMenu->setSelectionMode(QAbstractItemView::SingleSelection);
 
-	connect(categoryMenu, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), 
-			this, SLOT(handleCategorySelection(QListWidgetItem*))); 
+    connect(categoryMenu, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), 
+            this, SLOT(handleCategorySelection(QListWidgetItem*))); 
 
-	h_box_layout->addWidget(categoryMenu);
+    h_box_layout->addWidget(categoryMenu);
 
 // +++
 
-	QVBoxLayout* v_box_layout = new QVBoxLayout();
+    QVBoxLayout* v_box_layout = new QVBoxLayout();
 
-	h_box_layout->addLayout(v_box_layout);
-	h_box_layout->setStretchFactor(v_box_layout, 1);
+    h_box_layout->addLayout(v_box_layout);
+    h_box_layout->setStretchFactor(v_box_layout, 1);
 
 // --------
 
-	categoryDescrLabel = new QLabel(this);
-	
-	font = categoryDescrLabel->font();
+    categoryDescrLabel = new QLabel(this);
+    
+    font = categoryDescrLabel->font();
 
-	font.setBold(true);
+    font.setBold(true);
 
-	categoryDescrLabel->setFont(font);
+    categoryDescrLabel->setFont(font);
 
-	v_box_layout->addWidget(categoryDescrLabel);
-
-// +++
-
-	QFrame* frame = new QFrame(this);
-
-	frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
-
-	v_box_layout->addWidget(frame);
+    v_box_layout->addWidget(categoryDescrLabel);
 
 // +++
 
-	QScrollArea* scroll_area = new QScrollArea(this);
+    QFrame* frame = new QFrame(this);
 
-	scroll_area->setWidgetResizable(true);
-	scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	scroll_area->setFrameStyle(QFrame::StyledPanel);
+    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
 
-	categoryEditWidgetStack = new QStackedWidget(this);
-
-	v_box_layout->addWidget(scroll_area, 1);
+    v_box_layout->addWidget(frame);
 
 // +++
 
-	frame = new QFrame(this);
+    QScrollArea* scroll_area = new QScrollArea(this);
 
-	frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+    scroll_area->setWidgetResizable(true);
+    scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scroll_area->setFrameStyle(QFrame::StyledPanel);
 
-	main_layout->addWidget(frame);
+    categoryEditWidgetStack = new QStackedWidget(this);
+
+    v_box_layout->addWidget(scroll_area, 1);
+
+// +++
+
+    frame = new QFrame(this);
+
+    frame->setFrameStyle(QFrame::HLine | QFrame::Sunken);
+
+    main_layout->addWidget(frame);
 
 // --------
 
-	h_box_layout = new QHBoxLayout();
-	
-	main_layout->addLayout(h_box_layout);
+    h_box_layout = new QHBoxLayout();
+    
+    main_layout->addLayout(h_box_layout);
 
-	h_box_layout->setSpacing(5);
-
-// +++
-
-	QPushButton* button = new QPushButton(tr("&Defaults"), this);
-
-	connect(button, SIGNAL(clicked()), this, SLOT(setDefaults()));
-	
-	h_box_layout->addWidget(button);
-	h_box_layout->addStretch();
-	/*
-// +++
-
-	button = new QPushButton(tr("Sa&ve"), this);
-
-	connect(button, SIGNAL(clicked()), &settings, SLOT(save()));
-
-	h_box_layout->addWidget(button);
-	*/
-// +++
-
-	button = new QPushButton(tr("&Reset"), this);
-
-	connect(button, SIGNAL(clicked()), this, SLOT(resetChanges()));
-	
-	h_box_layout->addWidget(button);
+    h_box_layout->setSpacing(5);
 
 // +++
 
-	button = new QPushButton(tr("&OK"), this);
+    QPushButton* button = new QPushButton(tr("&Defaults"), this);
 
-	button->setDefault(true);
-	
-	connect(button, SIGNAL(clicked()), this, SLOT(acceptChanges()));
+    connect(button, SIGNAL(clicked()), this, SLOT(setDefaults()));
+    
+    h_box_layout->addWidget(button);
+    h_box_layout->addStretch();
+    /*
+// +++
 
-	h_box_layout->addWidget(button);
+    button = new QPushButton(tr("Sa&ve"), this);
+
+    connect(button, SIGNAL(clicked()), &settings, SLOT(save()));
+
+    h_box_layout->addWidget(button);
+    */
+// +++
+
+    button = new QPushButton(tr("&Reset"), this);
+
+    connect(button, SIGNAL(clicked()), this, SLOT(resetChanges()));
+    
+    h_box_layout->addWidget(button);
 
 // +++
 
-	applyChangesButton = new QPushButton(tr("&Apply"), this);
+    button = new QPushButton(tr("&OK"), this);
 
-	connect(applyChangesButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
+    button->setDefault(true);
+    
+    connect(button, SIGNAL(clicked()), this, SLOT(acceptChanges()));
 
-	h_box_layout->addWidget(applyChangesButton);
+    h_box_layout->addWidget(button);
 
 // +++
 
-	button = new QPushButton(tr("&Cancel"), this);
-	
-	connect(button, SIGNAL(clicked()), this, SLOT(reject()));
+    applyChangesButton = new QPushButton(tr("&Apply"), this);
 
-	h_box_layout->addWidget(button);
+    connect(applyChangesButton, SIGNAL(clicked()), this, SLOT(applyChanges()));
+
+    h_box_layout->addWidget(applyChangesButton);
+
+// +++
+
+    button = new QPushButton(tr("&Cancel"), this);
+    
+    connect(button, SIGNAL(clicked()), this, SLOT(reject()));
+
+    h_box_layout->addWidget(button);
 
 // ------------
 
-	addCategoryEditWidget(new ViewSettingsEditWidget(this, settings), tr("View"), tr("General View Settings"));
-	addCategoryEditWidget(new AtomSettingsEditWidget(this, settings), tr("Atoms"), tr("Atom Appearance Settings"));
-	addCategoryEditWidget(new BondSettingsEditWidget(this, settings), tr("Bonds"), tr("Bond Appearance Settings"));
-	addCategoryEditWidget(new ReactionSettingsEditWidget(this, settings), tr("Reactions"), tr("Reaction Appearance Settings"));
-	addCategoryEditWidget(new PrintSettingsEditWidget(this, settings), tr("Printing"), tr("Printer Output Settings"));
-	addCategoryEditWidget(new IOSettingsEditWidget(this, settings), tr("File I/O"), tr("File I/O Settings"));
+    addCategoryEditWidget(new ViewSettingsEditWidget(this, settings), tr("View"), tr("General View Settings"));
+    addCategoryEditWidget(new AtomSettingsEditWidget(this, settings), tr("Atoms"), tr("Atom Appearance Settings"));
+    addCategoryEditWidget(new BondSettingsEditWidget(this, settings), tr("Bonds"), tr("Bond Appearance Settings"));
+    addCategoryEditWidget(new ReactionSettingsEditWidget(this, settings), tr("Reactions"), tr("Reaction Appearance Settings"));
+    addCategoryEditWidget(new PrintSettingsEditWidget(this, settings), tr("Printing"), tr("Printer Output Settings"));
+    addCategoryEditWidget(new IOSettingsEditWidget(this, settings), tr("File I/O"), tr("File I/O Settings"));
 
 // ------------
 
-	handleCategorySelection(categoryMenu->item(0));
+    handleCategorySelection(categoryMenu->item(0));
 
-	scroll_area->setWidget(categoryEditWidgetStack);
-	scroll_area->setMinimumWidth(categoryEditWidgetStack->width() + 20);
-	scroll_area->setMinimumHeight(600);
+    scroll_area->setWidget(categoryEditWidgetStack);
+    scroll_area->setMinimumWidth(categoryEditWidgetStack->width() + 20);
+    scroll_area->setMinimumHeight(600);
 }

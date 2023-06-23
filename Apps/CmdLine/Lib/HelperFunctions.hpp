@@ -37,103 +37,103 @@
 namespace CmdLineLib
 {
 
-	template <typename T, typename OutIter>
-	void getSupportedInputFormats(OutIter out)
-	{
-		using namespace CDPL;
+    template <typename T, typename OutIter>
+    void getSupportedInputFormats(OutIter out)
+    {
+        using namespace CDPL;
 
-		std::string format_str;
+        std::string format_str;
 
-		for (typename Base::DataIOManager<T>::InputHandlerIterator it = Base::DataIOManager<T>::getInputHandlersBegin(),
-				 end = Base::DataIOManager<T>::getInputHandlersEnd(); it != end; ++it, ++out) {
+        for (typename Base::DataIOManager<T>::InputHandlerIterator it = Base::DataIOManager<T>::getInputHandlersBegin(),
+                 end = Base::DataIOManager<T>::getInputHandlersEnd(); it != end; ++it, ++out) {
 
-			const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
+            const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
 
-			format_str.clear();
-			format_str.append(fmt_desc.getDescription());
-			format_str.append(" (");
+            format_str.clear();
+            format_str.append(fmt_desc.getDescription());
+            format_str.append(" (");
 
-			for (std::size_t i = 0; i < fmt_desc.getNumFileExtensions(); i++) {
-				if (i > 0)
-					format_str.append(", ");
+            for (std::size_t i = 0; i < fmt_desc.getNumFileExtensions(); i++) {
+                if (i > 0)
+                    format_str.append(", ");
 
-				format_str.append("*.").append(fmt_desc.getFileExtension(i));
-			}
+                format_str.append("*.").append(fmt_desc.getFileExtension(i));
+            }
 
-			format_str.push_back(')');
+            format_str.push_back(')');
 
-			*out = format_str;
-		}
-	}
+            *out = format_str;
+        }
+    }
 
-	template <typename T, typename OutIter>
-	void getSupportedOutputFormats(OutIter out)
-	{
-		using namespace CDPL;
+    template <typename T, typename OutIter>
+    void getSupportedOutputFormats(OutIter out)
+    {
+        using namespace CDPL;
 
-		std::string format_str;
+        std::string format_str;
 
-		for (typename Base::DataIOManager<T>::OutputHandlerIterator it = Base::DataIOManager<T>::getOutputHandlersBegin(),
-				 end = Base::DataIOManager<T>::getOutputHandlersEnd(); it != end; ++it, ++out) {
+        for (typename Base::DataIOManager<T>::OutputHandlerIterator it = Base::DataIOManager<T>::getOutputHandlersBegin(),
+                 end = Base::DataIOManager<T>::getOutputHandlersEnd(); it != end; ++it, ++out) {
 
-			const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
+            const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
 
-			format_str.clear();
-			format_str.append(fmt_desc.getDescription());
-			format_str.append(" (");
+            format_str.clear();
+            format_str.append(fmt_desc.getDescription());
+            format_str.append(" (");
 
-			for (std::size_t i = 0; i < fmt_desc.getNumFileExtensions(); i++) {
-				if (i > 0)
-					format_str.append(", ");
+            for (std::size_t i = 0; i < fmt_desc.getNumFileExtensions(); i++) {
+                if (i > 0)
+                    format_str.append(", ");
 
-				format_str.append("*.").append(fmt_desc.getFileExtension(i));
-			}
+                format_str.append("*.").append(fmt_desc.getFileExtension(i));
+            }
 
-			format_str.push_back(')');
+            format_str.push_back(')');
 
-			*out = format_str;
-		}
-	}
+            *out = format_str;
+        }
+    }
 
-	template <typename T>
-	typename CDPL::Base::DataInputHandler<T>::SharedPointer getInputHandler(const std::string& path)
-	{
-		using namespace CDPL;
+    template <typename T>
+    typename CDPL::Base::DataInputHandler<T>::SharedPointer getInputHandler(const std::string& path)
+    {
+        using namespace CDPL;
 
-		std::string file_name = boost::filesystem::path(path).filename().string();
+        std::string file_name = boost::filesystem::path(path).filename().string();
 
-		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
-			std::string file_ext = file_name.substr(pos + 1);
-			
-			typename Base::DataInputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getInputHandlerByFileExtension(file_ext);
+        for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
+            std::string file_ext = file_name.substr(pos + 1);
+            
+            typename Base::DataInputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getInputHandlerByFileExtension(file_ext);
 
-			if (handler)
-				return handler;
-		}
+            if (handler)
+                return handler;
+        }
 
-		return typename CDPL::Base::DataInputHandler<T>::SharedPointer();
-	}
+        return typename CDPL::Base::DataInputHandler<T>::SharedPointer();
+    }
 
-	template <typename T>
-	typename CDPL::Base::DataOutputHandler<T>::SharedPointer getOutputHandler(const std::string& path)
-	{
-		using namespace CDPL;
+    template <typename T>
+    typename CDPL::Base::DataOutputHandler<T>::SharedPointer getOutputHandler(const std::string& path)
+    {
+        using namespace CDPL;
 
-		std::string file_name = boost::filesystem::path(path).filename().string();
+        std::string file_name = boost::filesystem::path(path).filename().string();
 
-		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
-			std::string file_ext = file_name.substr(pos + 1);
-			
-			typename Base::DataOutputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getOutputHandlerByFileExtension(file_ext);
+        for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
+            std::string file_ext = file_name.substr(pos + 1);
+            
+            typename Base::DataOutputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getOutputHandlerByFileExtension(file_ext);
 
-			if (handler)
-				return handler;
-		}
+            if (handler)
+                return handler;
+        }
 
-		return typename CDPL::Base::DataOutputHandler<T>::SharedPointer();
-	}
+        return typename CDPL::Base::DataOutputHandler<T>::SharedPointer();
+    }
 
-	std::string formatTimeDuration(std::size_t secs);
+    std::string formatTimeDuration(std::size_t secs);
 }
 
 #endif // CMDLINE_LIB_HELPERFUNCTIONS_HPP

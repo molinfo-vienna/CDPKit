@@ -35,18 +35,18 @@ using namespace CDPL;
 
 CDPL::Descr::AtomRDFCodeCalculator::AtomRDFCodeCalculator()
 {
-	setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
+    setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
 } 
 
 CDPL::Descr::AtomRDFCodeCalculator::AtomRDFCodeCalculator(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code)
 {
-	setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
-	calculate(cntnr, rdf_code);
+    setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
+    calculate(cntnr, rdf_code);
 }
 
 void CDPL::Descr::AtomRDFCodeCalculator::calculate(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code)
 {
-	rdf_code.resize(getNumSteps() + 1, false);
+    rdf_code.resize(getNumSteps() + 1, false);
 
-	RDFCodeCalculator<Chem::Atom>::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), rdf_code);
+    RDFCodeCalculator<Chem::Atom>::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), rdf_code);
 }

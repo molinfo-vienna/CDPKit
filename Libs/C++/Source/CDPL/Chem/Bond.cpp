@@ -32,11 +32,11 @@ using namespace CDPL;
 
 Chem::Bond& Chem::Bond::operator=(const Bond& bond) 
 {
-	if (this == &bond)
-		return *this;
+    if (this == &bond)
+        return *this;
 
-	AtomContainer::operator=(bond);
-	PropertyContainer::operator=(bond);
+    AtomContainer::operator=(bond);
+    PropertyContainer::operator=(bond);
 
-	return *this;
+    return *this;
 }

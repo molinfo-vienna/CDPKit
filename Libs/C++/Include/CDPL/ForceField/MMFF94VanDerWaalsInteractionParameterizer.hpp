@@ -42,43 +42,43 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
-		{
+        class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
+        {
 
-		  public:
-			typedef std::shared_ptr<MMFF94VanDerWaalsInteractionParameterizer> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94VanDerWaalsInteractionParameterizer> SharedPointer;
 
-			MMFF94VanDerWaalsInteractionParameterizer();
+            MMFF94VanDerWaalsInteractionParameterizer();
 
-			MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-													  MMFF94VanDerWaalsInteractionData& ia_data,
-													  bool strict);
+            MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+                                                      MMFF94VanDerWaalsInteractionData& ia_data,
+                                                      bool strict);
 
-			void setFilterFunction(const InteractionFilterFunction2& func); 
+            void setFilterFunction(const InteractionFilterFunction2& func); 
 
-			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
 
-			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
+            void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
 
-			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
+            void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionData& ia_data, bool strict);
 
-		  private:
-			InteractionFilterFunction2                     filterFunc;
-			MMFF94NumericAtomTypeFunction                  typeFunc;
-			TopologicalAtomDistanceFunction                distFunc;
-			MMFF94VanDerWaalsParameterTable::SharedPointer paramTable;
-		};			
+          private:
+            InteractionFilterFunction2                     filterFunc;
+            MMFF94NumericAtomTypeFunction                  typeFunc;
+            TopologicalAtomDistanceFunction                distFunc;
+            MMFF94VanDerWaalsParameterTable::SharedPointer paramTable;
+        };            
     }
 }
 

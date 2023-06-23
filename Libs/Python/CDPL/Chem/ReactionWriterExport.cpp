@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportReactionWriter()
 {
-	CDPLPythonBase::DataWriterExport<CDPL::Chem::Reaction>("ReactionWriter", "rxn");
+    CDPLPythonBase::DataWriterExport<CDPL::Chem::Reaction>("ReactionWriter", "rxn");
 }

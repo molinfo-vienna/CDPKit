@@ -51,151 +51,151 @@ namespace CDPL
 
     namespace Pharm
     {
-	
-		class ScreeningDBAccessor;
-		class FeatureMapping;
+    
+        class ScreeningDBAccessor;
+        class FeatureMapping;
 
-		class ScreeningProcessorImpl
-		{
+        class ScreeningProcessorImpl
+        {
 
-			typedef ScreeningProcessor::HitCallbackFunction HitCallbackFunction;
-			typedef ScreeningProcessor::ProgressCallbackFunction ProgressCallbackFunction;
-			typedef ScreeningProcessor::ScoringFunction ScoringFunction;
-			typedef ScreeningProcessor::SearchHit SearchHit;
+            typedef ScreeningProcessor::HitCallbackFunction HitCallbackFunction;
+            typedef ScreeningProcessor::ProgressCallbackFunction ProgressCallbackFunction;
+            typedef ScreeningProcessor::ScoringFunction ScoringFunction;
+            typedef ScreeningProcessor::SearchHit SearchHit;
 
-		public:
-			ScreeningProcessorImpl(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc);
+        public:
+            ScreeningProcessorImpl(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc);
 
-			void setDBAccessor(ScreeningDBAccessor& db_acc);
+            void setDBAccessor(ScreeningDBAccessor& db_acc);
 
-			ScreeningDBAccessor& getDBAccessor() const;
+            ScreeningDBAccessor& getDBAccessor() const;
 
-			void setHitReportMode(ScreeningProcessor::HitReportMode mode);
+            void setHitReportMode(ScreeningProcessor::HitReportMode mode);
 
-			ScreeningProcessor::HitReportMode getHitReportMode() const;
+            ScreeningProcessor::HitReportMode getHitReportMode() const;
 
-			void setMaxNumOmittedFeatures(std::size_t max_num);
+            void setMaxNumOmittedFeatures(std::size_t max_num);
 
-			std::size_t getMaxNumOmittedFeatures() const;
+            std::size_t getMaxNumOmittedFeatures() const;
 
-			void checkXVolumeClashes(bool check);
+            void checkXVolumeClashes(bool check);
 
-			bool xVolumeClashesChecked() const;
+            bool xVolumeClashesChecked() const;
 
-			void seekBestAlignments(bool seek_best);
+            void seekBestAlignments(bool seek_best);
 
-			bool bestAlignmentsSeeked() const;
+            bool bestAlignmentsSeeked() const;
 
-			void setHitCallback(const HitCallbackFunction& func);
+            void setHitCallback(const HitCallbackFunction& func);
 
-			const HitCallbackFunction& getHitCallback() const;
+            const HitCallbackFunction& getHitCallback() const;
 
-			void setProgressCallback(const ProgressCallbackFunction& func);
+            void setProgressCallback(const ProgressCallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallback() const;
+            const ProgressCallbackFunction& getProgressCallback() const;
 
-			void setScoringFunction(const ScoringFunction& func);
+            void setScoringFunction(const ScoringFunction& func);
 
-			const ScoringFunction& getScoringFunction() const;
+            const ScoringFunction& getScoringFunction() const;
 
-			std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
+            std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
 
-		private:
-			typedef std::vector<QueryTwoPointPharmacophore> TwoPointPharmacophoreList;
-			typedef std::vector<const Feature*> FeatureList;
-			typedef std::vector<FeatureList> FeatureMatrix;
-			typedef std::pair<std::size_t, std::size_t> IndexPair;
-			typedef std::vector<IndexPair> IndexPairList;
-			typedef std::vector<unsigned int> FeatureTypeTable;
-			typedef std::vector<std::size_t> IndexList;
-			typedef std::vector<double> RadiusTable;
-			typedef std::unordered_map<unsigned int, FeatureList> TypeToFeatureListMap;
+        private:
+            typedef std::vector<QueryTwoPointPharmacophore> TwoPointPharmacophoreList;
+            typedef std::vector<const Feature*> FeatureList;
+            typedef std::vector<FeatureList> FeatureMatrix;
+            typedef std::pair<std::size_t, std::size_t> IndexPair;
+            typedef std::vector<IndexPair> IndexPairList;
+            typedef std::vector<unsigned int> FeatureTypeTable;
+            typedef std::vector<std::size_t> IndexList;
+            typedef std::vector<double> RadiusTable;
+            typedef std::unordered_map<unsigned int, FeatureList> TypeToFeatureListMap;
 
-			typedef TwoPointPharmacophoreGenerator<TwoPointPharmacophore> DB2PointPharmGenerator;
-			typedef TwoPointPharmacophoreGenerator<QueryTwoPointPharmacophore> Query2PointPharmGenerator;
+            typedef TwoPointPharmacophoreGenerator<TwoPointPharmacophore> DB2PointPharmGenerator;
+            typedef TwoPointPharmacophoreGenerator<QueryTwoPointPharmacophore> Query2PointPharmGenerator;
 
-			typedef boost::indirect_iterator<FeatureList::const_iterator, const Feature> FeatureListIterator;
+            typedef boost::indirect_iterator<FeatureList::const_iterator, const Feature> FeatureListIterator;
 
-			struct IndexPair2ndCmpFunc
-			{
+            struct IndexPair2ndCmpFunc
+            {
 
-				bool operator()(const IndexPair& p1, const IndexPair& p2) const {
-					return (p1.second < p2.second);
-				}
-			};
-		
-			void prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
+                bool operator()(const IndexPair& p1, const IndexPair& p2) const {
+                    return (p1.second < p2.second);
+                }
+            };
+        
+            void prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
 
-			void initQueryData(const FeatureContainer& query);
-			void initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx);
+            void initQueryData(const FeatureContainer& query);
+            void initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx);
 
-			void insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const;
+            void insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const;
 
-			bool checkFeatureCounts(std::size_t pharm_idx) const;
-			bool check2PointPharmacophores(std::size_t pharm_idx);
-			bool performAlignment(std::size_t pharm_idx, std::size_t mol_idx);
+            bool checkFeatureCounts(std::size_t pharm_idx) const;
+            bool check2PointPharmacophores(std::size_t pharm_idx);
+            bool performAlignment(std::size_t pharm_idx, std::size_t mol_idx);
 
-			bool checkGeomAlignment();
-			bool checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx);
+            bool checkGeomAlignment();
+            bool checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx);
 
-			bool checkTopologicalMapping(const Util::STPairArray& mapping) const;
+            bool checkTopologicalMapping(const Util::STPairArray& mapping) const;
 
-			double calcScore(const SearchHit& hit);
+            double calcScore(const SearchHit& hit);
 
-			void loadPharmacophore(std::size_t pharm_idx);
-			void loadMolecule(std::size_t mol_idx);
+            void loadPharmacophore(std::size_t pharm_idx);
+            void loadMolecule(std::size_t mol_idx);
 
-			const Math::Vector3D& getFeatureCoordinates(const Feature& ftr);
+            const Math::Vector3D& getFeatureCoordinates(const Feature& ftr);
 
-			bool processHit(const SearchHit& hit, double score);
-			bool reportHit(const SearchHit& hit, double score);
+            bool processHit(const SearchHit& hit, double score);
+            bool reportHit(const SearchHit& hit, double score);
 
-			ScreeningProcessor*                   parent;
-			ScreeningDBAccessor*                  dbAccessor;
-			ScreeningProcessor::HitReportMode     reportMode;
-			std::size_t                           maxOmittedFeatures;
-			bool                                  checkXVolumes;
-			bool                                  bestAlignments;
-			HitCallbackFunction                   hitCallback;
-			ProgressCallbackFunction              progressCallback;
-			ScoringFunction                       scoringFunction;
-			FeatureGeometryMatchFunctor           featureGeomMatchFunction;
-			const FeatureContainer*               queryPharmacophore;
-			BasicPharmacophore                    dbPharmacophore;
-			Chem::BasicMolecule                   dbMolecule;
-			PharmacophoreAlignment                pharmAlignment;
-			Query2PointPharmGenerator             query2PointPharmGen;
-			DB2PointPharmGenerator                db2PointPharmGen;
-			FeatureTypeHistogram                  queryFeatureCounts; 
-			TwoPointPharmacophoreList             query2PointPharmList;
-			TwoPointPharmacophoreSet              db2PointPharmSet;
-			std::size_t                           minNum2PointPharmMatches;
-			FeatureMatrix                         queryMandFeatures;
-			FeatureMatrix                         queryOptFeatures;
-			FeatureList                           alignedQueryMandFeatures;
-			FeatureList                           alignedQueryOptFeatures;
-			FeatureTypeTable                      queryMandFeatureTypes;
-			IndexList                             xVolumeIndices;
-			Math::Vector3DArray                   atomCoordinates;
-			RadiusTable                           atomVdWRadii;
-			RadiusTable                           queryFeatureTolerances;
-			Math::Vector3DArray                   queryFeaturePositions;
-			Math::Vector3DArray                   dbFeaturePositions;
-			Math::Vector3DArray                   alignedDBFeaturePositions;
-			TypeToFeatureListMap                  dbFeaturesByType;
-			bool                                  initDBFeaturesByType;
-			IndexPairList                         pharmIndices;  
-			Util::BitSet                          molHitSet;
-			std::size_t                           numHits;
-			std::size_t                           loadedPharmIndex;
-			std::size_t                           loadedMolIndex;
-			Math::Matrix4D                        bestAlmntTransform;
-			Math::Matrix4D                        bestConfAlmntTransform;
-			std::size_t                           bestConfAlmntMolIdx;
-			std::size_t                           bestConfAlmntConfIdx;
-			std::size_t                           bestConfAlmntPharmIdx;
-			double                                bestConfAlmntScore;
-		};
+            ScreeningProcessor*                   parent;
+            ScreeningDBAccessor*                  dbAccessor;
+            ScreeningProcessor::HitReportMode     reportMode;
+            std::size_t                           maxOmittedFeatures;
+            bool                                  checkXVolumes;
+            bool                                  bestAlignments;
+            HitCallbackFunction                   hitCallback;
+            ProgressCallbackFunction              progressCallback;
+            ScoringFunction                       scoringFunction;
+            FeatureGeometryMatchFunctor           featureGeomMatchFunction;
+            const FeatureContainer*               queryPharmacophore;
+            BasicPharmacophore                    dbPharmacophore;
+            Chem::BasicMolecule                   dbMolecule;
+            PharmacophoreAlignment                pharmAlignment;
+            Query2PointPharmGenerator             query2PointPharmGen;
+            DB2PointPharmGenerator                db2PointPharmGen;
+            FeatureTypeHistogram                  queryFeatureCounts; 
+            TwoPointPharmacophoreList             query2PointPharmList;
+            TwoPointPharmacophoreSet              db2PointPharmSet;
+            std::size_t                           minNum2PointPharmMatches;
+            FeatureMatrix                         queryMandFeatures;
+            FeatureMatrix                         queryOptFeatures;
+            FeatureList                           alignedQueryMandFeatures;
+            FeatureList                           alignedQueryOptFeatures;
+            FeatureTypeTable                      queryMandFeatureTypes;
+            IndexList                             xVolumeIndices;
+            Math::Vector3DArray                   atomCoordinates;
+            RadiusTable                           atomVdWRadii;
+            RadiusTable                           queryFeatureTolerances;
+            Math::Vector3DArray                   queryFeaturePositions;
+            Math::Vector3DArray                   dbFeaturePositions;
+            Math::Vector3DArray                   alignedDBFeaturePositions;
+            TypeToFeatureListMap                  dbFeaturesByType;
+            bool                                  initDBFeaturesByType;
+            IndexPairList                         pharmIndices;  
+            Util::BitSet                          molHitSet;
+            std::size_t                           numHits;
+            std::size_t                           loadedPharmIndex;
+            std::size_t                           loadedMolIndex;
+            Math::Matrix4D                        bestAlmntTransform;
+            Math::Matrix4D                        bestConfAlmntTransform;
+            std::size_t                           bestConfAlmntMolIdx;
+            std::size_t                           bestConfAlmntConfIdx;
+            std::size_t                           bestConfAlmntPharmIdx;
+            double                                bestConfAlmntScore;
+        };
     }
 }
 

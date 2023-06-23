@@ -35,7 +35,7 @@ void CDPLPythonChem::exportImineEnamineTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::ImineEnamineTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("ImineEnamineTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::ImineEnamineTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("ImineEnamineTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::ImineEnamineTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

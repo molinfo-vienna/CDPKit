@@ -39,47 +39,47 @@
 namespace
 {
 
-	template <typename GridType>
-	struct GridExport
-	{
+    template <typename GridType>
+    struct GridExport
+    {
 
-		GridExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        GridExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename GridType::SizeType SizeType;
-			typedef typename GridType::ValueType ValueType;
+            typedef typename GridType::SizeType SizeType;
+            typedef typename GridType::ValueType ValueType;
 
-			python::class_<GridType, typename GridType::SharedPointer>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const GridType&>((python::arg("self"), python::arg("g"))))
-				.def(python::init<SizeType, SizeType, SizeType>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"))))
-				.def(python::init<SizeType, SizeType, SizeType, const ValueType&>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("v"))))
-				.def("resize", &GridType::resize, 
-					 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("preserve") = true,
-					  python::arg("v") = ValueType()))
-				.def("clear", &GridType::clear, (python::arg("self"), python::arg("v") = ValueType()))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
-				.def(InitFunctionGeneratorVisitor<GridType, ConstGridExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<GridType, ConstGridExpression>("e"))
-				.def(ConstGridVisitor<GridType>())
-				.def(ConstGridContainerVisitor<GridType>())
-				.def(GridAssignAndSwapVisitor<GridType>())
-				.def(GridVisitor<GridType>())
-				.def(GridNDArrayInitVisitor<GridType>())
-				.def(GridNDArrayAssignVisitor<GridType, true>())
-				.def(GridContainerVisitor<GridType>());
-		}
-	};
+            python::class_<GridType, typename GridType::SharedPointer>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const GridType&>((python::arg("self"), python::arg("g"))))
+                .def(python::init<SizeType, SizeType, SizeType>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"))))
+                .def(python::init<SizeType, SizeType, SizeType, const ValueType&>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("v"))))
+                .def("resize", &GridType::resize, 
+                     (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o"), python::arg("preserve") = true,
+                      python::arg("v") = ValueType()))
+                .def("clear", &GridType::clear, (python::arg("self"), python::arg("v") = ValueType()))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
+                .def(InitFunctionGeneratorVisitor<GridType, ConstGridExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<GridType, ConstGridExpression>("e"))
+                .def(ConstGridVisitor<GridType>())
+                .def(ConstGridContainerVisitor<GridType>())
+                .def(GridAssignAndSwapVisitor<GridType>())
+                .def(GridVisitor<GridType>())
+                .def(GridNDArrayInitVisitor<GridType>())
+                .def(GridNDArrayAssignVisitor<GridType, true>())
+                .def(GridContainerVisitor<GridType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportGridTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	GridExport<Math::FGrid>("FGrid");
-	GridExport<Math::DGrid>("DGrid");
+    GridExport<Math::FGrid>("FGrid");
+    GridExport<Math::DGrid>("DGrid");
 }

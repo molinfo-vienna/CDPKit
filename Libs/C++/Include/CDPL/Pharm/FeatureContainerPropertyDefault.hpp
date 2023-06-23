@@ -40,14 +40,14 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief Provides default values for built-in Pharm::FeatureContainer properties.
-		 */
-		namespace FeatureContainerPropertyDefault
-		{
+        /**
+         * \brief Provides default values for built-in Pharm::FeatureContainer properties.
+         */
+        namespace FeatureContainerPropertyDefault
+        {
 
-			extern CDPL_PHARM_API const std::string NAME;
-		}
+            extern CDPL_PHARM_API const std::string NAME;
+        }
     }
 }
 

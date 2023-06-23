@@ -39,48 +39,48 @@ using namespace CDPL;
 
 bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_cip_sym, bool check_acyclic_subst_sym_only)
 {
-	if (getAromaticityFlag(atom))
-		return false;
+    if (getAromaticityFlag(atom))
+        return false;
 
     if (getHybridizationState(atom) != HybridizationState::SP3) 
-		return false;
-	
-	std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
+        return false;
+    
+    std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
-		return false;
+        return false;
 
-	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
-		return false;
+    if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
+        return false;
 
-	if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
-	    return false;
+    if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+        return false;
 
-	if (Internal::isPlanarNitrogen(atom, molgraph))
-		return false;
+    if (Internal::isPlanarNitrogen(atom, molgraph))
+        return false;
 
-	if (!check_cip_sym)
-		return true;
+    if (!check_cip_sym)
+        return true;
 
     std::size_t cip_priorities[4];
 
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-	num_bonds = 0;
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    num_bonds = 0;
 
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
-			if (check_acyclic_subst_sym_only && getRingFlag(*b_it))
-				continue;
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+        if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
+            if (check_acyclic_subst_sym_only && getRingFlag(*b_it))
+                continue;
 
-			cip_priorities[num_bonds] = getCIPPriority(*a_it);
+            cip_priorities[num_bonds] = getCIPPriority(*a_it);
 
-			for (std::size_t j = 0; j < num_bonds; j++)
-				if (cip_priorities[j] == cip_priorities[num_bonds])
-					return false;
+            for (std::size_t j = 0; j < num_bonds; j++)
+                if (cip_priorities[j] == cip_priorities[num_bonds])
+                    return false;
 
-			num_bonds++;
-		}
+            num_bonds++;
+        }
     }
 
     return true;

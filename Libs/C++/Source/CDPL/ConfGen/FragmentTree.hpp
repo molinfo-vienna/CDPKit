@@ -42,86 +42,86 @@
 
 namespace CDPL 
 {
-	
-	namespace Chem
-	{
+    
+    namespace Chem
+    {
 
-		class FragmentList;
-	}
+        class FragmentList;
+    }
 
     namespace ConfGen 
     {
 
-		class FragmentTreeNode;
+        class FragmentTreeNode;
 
-		class FragmentTree
-		{
+        class FragmentTree
+        {
 
-			friend class FragmentTreeNode;
+            friend class FragmentTreeNode;
 
-		public:
-			FragmentTree(std::size_t max_conf_data_cache_size);
+        public:
+            FragmentTree(std::size_t max_conf_data_cache_size);
 
-			~FragmentTree();
-				
-			template <typename BondIter>
-			void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
-					   const BondIter& bonds_beg, const BondIter& bonds_end);
+            ~FragmentTree();
+                
+            template <typename BondIter>
+            void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
+                       const BondIter& bonds_beg, const BondIter& bonds_end);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			const Chem::MolecularGraph* getMolecularGraph() const;
+            const Chem::MolecularGraph* getMolecularGraph() const;
 
-			FragmentTreeNode* getRoot() const;
+            FragmentTreeNode* getRoot() const;
 
-			std::size_t getNumFragments() const;
+            std::size_t getNumFragments() const;
 
-			const Chem::Fragment* getFragment(std::size_t idx) const;
+            const Chem::Fragment* getFragment(std::size_t idx) const;
 
-			FragmentTreeNode* getFragmentNode(std::size_t idx) const;
+            FragmentTreeNode* getFragmentNode(std::size_t idx) const;
 
-		private:
-			FragmentTree(const FragmentTree&);
+        private:
+            FragmentTree(const FragmentTree&);
 
-			FragmentTree& operator=(const FragmentTree&);
+            FragmentTree& operator=(const FragmentTree&);
 
-			void buildTree(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
+            void buildTree(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
 
-			FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
-											   const Chem::Bond* bond);
+            FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
+                                               const Chem::Bond* bond);
 
-			const Chem::Bond* findConnectingBond(FragmentTreeNode* node1, FragmentTreeNode* node2);
+            const Chem::Bond* findConnectingBond(FragmentTreeNode* node1, FragmentTreeNode* node2);
 
-			ConformerData::SharedPointer allocConformerData();
+            ConformerData::SharedPointer allocConformerData();
 
-			FragmentTreeNode* allocTreeNode();
-			FragmentTreeNode* createTreeNode();
+            FragmentTreeNode* allocTreeNode();
+            FragmentTreeNode* createTreeNode();
 
-			bool aborted() const;
-			bool timedout() const;
+            bool aborted() const;
+            bool timedout() const;
 
-			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-			typedef std::vector<const Chem::Bond*> BondList;
-			typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
-			typedef std::vector<FragmentTreeNode*> TreeNodeList;
-			typedef std::vector<std::pair<Chem::Fragment::SharedPointer, FragmentTreeNode*> > FragmentToNodeMap;
+            typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+            typedef std::vector<const Chem::Bond*> BondList;
+            typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
+            typedef std::vector<FragmentTreeNode*> TreeNodeList;
+            typedef std::vector<std::pair<Chem::Fragment::SharedPointer, FragmentTreeNode*> > FragmentToNodeMap;
 
-			ConformerDataCache          confDataCache;
-			TreeNodeCache               nodeCache;
-			const Chem::MolecularGraph* molGraph;
-			FragmentTreeNode*           rootNode;
-			BondList                    splitBonds;
-			TreeNodeList                leafNodes;
-			FragmentToNodeMap           fragToNodeMap;
-			CallbackFunction            abortCallback;
-			CallbackFunction            timeoutCallback;
-		};
+            ConformerDataCache          confDataCache;
+            TreeNodeCache               nodeCache;
+            const Chem::MolecularGraph* molGraph;
+            FragmentTreeNode*           rootNode;
+            BondList                    splitBonds;
+            TreeNodeList                leafNodes;
+            FragmentToNodeMap           fragToNodeMap;
+            CallbackFunction            abortCallback;
+            CallbackFunction            timeoutCallback;
+        };
     }
 }
 
@@ -130,12 +130,12 @@ namespace CDPL
 
 template <typename BondIter>
 void CDPL::ConfGen::FragmentTree::build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
-										const BondIter& bonds_beg, const BondIter& bonds_end)
+                                        const BondIter& bonds_beg, const BondIter& bonds_end)
 {
-	splitBonds.clear();
-	splitBonds.insert(splitBonds.end(), bonds_beg, bonds_end);
+    splitBonds.clear();
+    splitBonds.insert(splitBonds.end(), bonds_beg, bonds_end);
 
-	buildTree(frags, molgraph);
+    buildTree(frags, molgraph);
 }
 
 #endif // CDPL_CONFGEN_FRAGMENTTREE_HPP

@@ -37,32 +37,32 @@ void CDPLPythonConfGen::exportDGConstraintGeneratorSettings()
     using namespace boost;
     using namespace CDPL;
 
-	typedef void (ConfGen::DGConstraintGeneratorSettings::*SetBoolFunc)(bool);
-	typedef bool (ConfGen::DGConstraintGeneratorSettings::*GetBoolFunc)() const;
+    typedef void (ConfGen::DGConstraintGeneratorSettings::*SetBoolFunc)(bool);
+    typedef bool (ConfGen::DGConstraintGeneratorSettings::*GetBoolFunc)() const;
 
-	python::class_<ConfGen::DGConstraintGeneratorSettings>("DGConstraintGeneratorSettings", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::DGConstraintGeneratorSettings&>((python::arg("self"), python::arg("settings"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGConstraintGeneratorSettings>())
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGConstraintGeneratorSettings::operator=), 
-			 (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("excludeHydrogens", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
-			 (python::arg("self"), python::arg("exclude")))
-		.def("excludeHydrogens", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
-			 python::arg("self"))
-		.def("regardAtomConfiguration", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
-			 (python::arg("self"), python::arg("regard")))
-		.def("regardAtomConfiguration", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
-			 python::arg("self"))
-		.def("regardBondConfiguration", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
-			 (python::arg("self"), python::arg("regard")))
-		.def("regardBondConfiguration", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
-			 python::arg("self"))
-		.def_readonly("DEFAULT", ConfGen::DGConstraintGeneratorSettings::DEFAULT)
-		.add_property("exclHydrogens", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
-					  SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens))
-		.add_property("regardAtomConfig", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
-					  SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration))
-		.add_property("regardBondConfig", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
-					  SetBoolFunc( &ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration));
+    python::class_<ConfGen::DGConstraintGeneratorSettings>("DGConstraintGeneratorSettings", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ConfGen::DGConstraintGeneratorSettings&>((python::arg("self"), python::arg("settings"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGConstraintGeneratorSettings>())
+        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGConstraintGeneratorSettings::operator=), 
+             (python::arg("self"), python::arg("settings")), python::return_self<>())
+        .def("excludeHydrogens", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
+             (python::arg("self"), python::arg("exclude")))
+        .def("excludeHydrogens", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
+             python::arg("self"))
+        .def("regardAtomConfiguration", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
+             (python::arg("self"), python::arg("regard")))
+        .def("regardAtomConfiguration", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
+             python::arg("self"))
+        .def("regardBondConfiguration", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
+             (python::arg("self"), python::arg("regard")))
+        .def("regardBondConfiguration", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
+             python::arg("self"))
+        .def_readonly("DEFAULT", ConfGen::DGConstraintGeneratorSettings::DEFAULT)
+        .add_property("exclHydrogens", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
+                      SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens))
+        .add_property("regardAtomConfig", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
+                      SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration))
+        .add_property("regardBondConfig", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
+                      SetBoolFunc( &ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration));
 }

@@ -41,88 +41,88 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeatureGeometryMatchFunctor.
-		 */
-		class CDPL_PHARM_API FeatureGeometryMatchFunctor
-		{
+        /**
+         * \brief FeatureGeometryMatchFunctor.
+         */
+        class CDPL_PHARM_API FeatureGeometryMatchFunctor
+        {
 
-		  public:
-		    static constexpr double DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
-		    static constexpr double DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
-		    static constexpr double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
-			static constexpr double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
-			static constexpr double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
-		    static constexpr double DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
+          public:
+            static constexpr double DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
+            static constexpr double DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
+            static constexpr double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
+            static constexpr double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
+            static constexpr double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
+            static constexpr double DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
 
-			FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
-										double max_hba_orient_dev = DEF_MAX_HBA_ORIENTATION_DEVIATION,
-										double max_hbd_int_dir_dev = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
-										double max_xba_int_dir_dev = DEF_MAX_XBA_INTERACTION_DIR_DEVIATION,
-										double max_xbd_int_dir_dev = DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
-										double max_ar_orient_dev = DEF_MAX_AR_ORIENTATION_DEVIATION);
-		  
-		    double getMaxHBAInteractionDirAngle() const;
+            FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
+                                        double max_hba_orient_dev = DEF_MAX_HBA_ORIENTATION_DEVIATION,
+                                        double max_hbd_int_dir_dev = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
+                                        double max_xba_int_dir_dev = DEF_MAX_XBA_INTERACTION_DIR_DEVIATION,
+                                        double max_xbd_int_dir_dev = DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
+                                        double max_ar_orient_dev = DEF_MAX_AR_ORIENTATION_DEVIATION);
+          
+            double getMaxHBAInteractionDirAngle() const;
 
-			void setMaxHBAInteractionDirAngle(double angle);
+            void setMaxHBAInteractionDirAngle(double angle);
 
-			double getMaxHBAOrientationDeviation() const;
+            double getMaxHBAOrientationDeviation() const;
 
-			void setMaxHBAOrientationDeviation(double angle);
+            void setMaxHBAOrientationDeviation(double angle);
 
-			double getMaxHBDInteractionDirDeviation() const;
+            double getMaxHBDInteractionDirDeviation() const;
 
-			void setMaxHBDInteractionDirDeviation(double angle);
+            void setMaxHBDInteractionDirDeviation(double angle);
 
-			double getMaxXBDInteractionDirDeviation() const;
+            double getMaxXBDInteractionDirDeviation() const;
 
-			void setMaxXBDInteractionDirDeviation(double angle);
+            void setMaxXBDInteractionDirDeviation(double angle);
 
-			double getMaxXBAInteractionDirDeviation() const;
+            double getMaxXBAInteractionDirDeviation() const;
 
-			void setMaxXBAInteractionDirDeviation(double angle);
-			
-			double getMaxAROrientationDeviation() const;
+            void setMaxXBAInteractionDirDeviation(double angle);
+            
+            double getMaxAROrientationDeviation() const;
 
-			void setMaxAROrientationDeviation(double angle);
-		  
-			/**
-			 * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
-			 * \param ftr1 The first feature.
-			 * \param ftr2 The second feature.
-			 * \return A score from \e 0 (=spatial deviation outside the allowed range) and \e 1 (optimum match) describing the 
-			 *         goodness of the spatial orientation match of the two features.
-			 */
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            void setMaxAROrientationDeviation(double angle);
+          
+            /**
+             * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return A score from \e 0 (=spatial deviation outside the allowed range) and \e 1 (optimum match) describing the 
+             *         goodness of the spatial orientation match of the two features.
+             */
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-			/**
-			 * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
-			 * \param ftr1 The first feature.
-			 * \param ftr2 The second feature.
-			 * \param xform The transformation to apply to the spatial orientation of the second feature.
-			 * \return A score from \e 0 (=spatial deviation outside the allowed range) and \e 1 (optimum match) describing the 
-			 *         goodness of the spatial orientation match of the two features.
-			 */
-			double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+            /**
+             * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \param xform The transformation to apply to the spatial orientation of the second feature.
+             * \return A score from \e 0 (=spatial deviation outside the allowed range) and \e 1 (optimum match) describing the 
+             *         goodness of the spatial orientation match of the two features.
+             */
+            double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
-		  private:
-		    double calcHBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
-		    double calcHBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
-			double calcXBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
-		    double calcXBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
-		    double calcARFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+          private:
+            double calcHBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+            double calcHBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+            double calcXBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+            double calcXBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+            double calcARFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
-		    void transformOrientation(const Feature& ftr, const Math::Matrix4D& xform, Math::Vector3D& trans_orient) const;
+            void transformOrientation(const Feature& ftr, const Math::Matrix4D& xform, Math::Vector3D& trans_orient) const;
 
-		    double maxHBAInteractionDirAngle;
-		    double maxHBAOrientationDeviation;
-		    double maxHBDInteractionDirDeviation;
-			double maxXBAInteractionDirDeviation;
-			double maxXBDInteractionDirDeviation;
-		    double maxAROrientationDeviation;
-		};
+            double maxHBAInteractionDirAngle;
+            double maxHBAOrientationDeviation;
+            double maxHBDInteractionDirDeviation;
+            double maxXBAInteractionDirDeviation;
+            double maxXBDInteractionDirDeviation;
+            double maxAROrientationDeviation;
+        };
     }
 }
 

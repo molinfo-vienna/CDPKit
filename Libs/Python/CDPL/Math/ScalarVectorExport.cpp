@@ -37,36 +37,36 @@
 namespace
 {
 
-	template <typename VectorType>
-	struct ScalarVectorExport
-	{
+    template <typename VectorType>
+    struct ScalarVectorExport
+    {
 
-		ScalarVectorExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ScalarVectorExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename VectorType::ValueType ValueType;
-			typedef typename VectorType::SizeType SizeType;
-		
-			python::class_<VectorType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<SizeType, const ValueType&>((python::arg("self"), python::arg("n"), python::arg("v") = ValueType())))
-				.def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
-				.def(ConstVectorVisitor<VectorType>())
-				.def(VectorAssignAndSwapVisitor<VectorType>());
-		}
-	};
+            typedef typename VectorType::ValueType ValueType;
+            typedef typename VectorType::SizeType SizeType;
+        
+            python::class_<VectorType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<SizeType, const ValueType&>((python::arg("self"), python::arg("n"), python::arg("v") = ValueType())))
+                .def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
+                .def(ConstVectorVisitor<VectorType>())
+                .def(VectorAssignAndSwapVisitor<VectorType>());
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportScalarVectorTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ScalarVectorExport<Math::FScalarVector>("FScalarVector");
-	ScalarVectorExport<Math::DScalarVector>("DScalarVector");
-	ScalarVectorExport<Math::LScalarVector>("LScalarVector");
-	ScalarVectorExport<Math::ULScalarVector>("ULScalarVector");
+    ScalarVectorExport<Math::FScalarVector>("FScalarVector");
+    ScalarVectorExport<Math::DScalarVector>("DScalarVector");
+    ScalarVectorExport<Math::LScalarVector>("LScalarVector");
+    ScalarVectorExport<Math::ULScalarVector>("ULScalarVector");
 }

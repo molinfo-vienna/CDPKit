@@ -31,20 +31,20 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		namespace ControlParameter
-		{
+        namespace ControlParameter
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
-		
-			CDPL_DEFINE_LOOKUP_KEY(CDF_WRITE_SINGLE_PRECISION_FLOATS);
+            CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
+        
+            CDPL_DEFINE_LOOKUP_KEY(CDF_WRITE_SINGLE_PRECISION_FLOATS);
 
-			CDPL_DEFINE_LOOKUP_KEY(PSD_CREATION_MODE);
-			CDPL_DEFINE_LOOKUP_KEY(PSD_ALLOW_DUPLICATES);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(PSD_CREATION_MODE);
+            CDPL_DEFINE_LOOKUP_KEY(PSD_ALLOW_DUPLICATES);
+        }
 
-		void initControlParameters() {}
-	}
+        void initControlParameters() {}
+    }
 }

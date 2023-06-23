@@ -33,22 +33,22 @@ using namespace CDPL;
 
 
 Chem::PhosphinicAcidTautomerization::PhosphinicAcidTautomerization(): 
-	PatternBasedTautomerizationRule(TautomerizationType::PHOSPHINIC_ACID)
+    PatternBasedTautomerizationRule(TautomerizationType::PHOSPHINIC_ACID)
 {
-	BondOrderChange bond_changes1[]= {
-		{ 1, 2, -1 },
-		{ 2, 3, -1 },
-		{ 1, 3, 1 }
-	};
+    BondOrderChange bond_changes1[]= {
+        { 1, 2, -1 },
+        { 2, 3, -1 },
+        { 1, 3, 1 }
+    };
 
-	BondOrderChange bond_changes2[]= {
-		{ 1, 2, -1 },
-		{ 2, 3, 1 },
-		{ 1, 3, 1 }
-	};
+    BondOrderChange bond_changes2[]= {
+        { 1, 2, -1 },
+        { 2, 3, 1 },
+        { 1, 3, 1 }
+    };
 
-	addTransformationPattern(parseSMARTS("[#8,#16,#34:1]=[#15;X4:2]-[#1:3]"), 
-							 &bond_changes1[0], &bond_changes1[sizeof(bond_changes1) / sizeof(BondOrderChange)]);
-	addTransformationPattern(parseSMARTS("[#1:1]-[#8,#16,#34:2]-[#15;X3:3]"), 
-							 &bond_changes2[0], &bond_changes2[sizeof(bond_changes2) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#8,#16,#34:1]=[#15;X4:2]-[#1:3]"), 
+                             &bond_changes1[0], &bond_changes1[sizeof(bond_changes1) / sizeof(BondOrderChange)]);
+    addTransformationPattern(parseSMARTS("[#1:1]-[#8,#16,#34:2]-[#15;X3:3]"), 
+                             &bond_changes2[0], &bond_changes2[sizeof(bond_changes2) / sizeof(BondOrderChange)]);
 }

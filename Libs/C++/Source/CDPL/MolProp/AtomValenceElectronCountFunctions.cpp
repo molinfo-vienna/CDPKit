@@ -33,10 +33,10 @@ using namespace CDPL;
 
 std::size_t MolProp::calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::calcFreeValenceElectronCount(atom, molgraph);
+    return Internal::calcFreeValenceElectronCount(atom, molgraph);
 }
 
 std::size_t MolProp::calcValenceElectronCount(const Chem::Atom& atom)
 {
-	return Internal::calcValenceElectronCount(atom);
+    return Internal::calcValenceElectronCount(atom);
 }

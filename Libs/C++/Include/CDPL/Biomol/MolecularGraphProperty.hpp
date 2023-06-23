@@ -35,30 +35,30 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief Provides keys for built-in Biomol::MolecularGraph properties.
-		 */
-		namespace MolecularGraphProperty
-		{
+        /**
+         * \brief Provides keys for built-in Biomol::MolecularGraph properties.
+         */
+        namespace MolecularGraphProperty
+        {
 
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
-			extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
-			extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
-			extern CDPL_BIOMOL_API const Base::LookupKey PDB_DATA;
-		}
-	}
+            extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
+            extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
+            extern CDPL_BIOMOL_API const Base::LookupKey PDB_DATA;
+        }
+    }
 }
 
 #endif // CDPL_BIOMOL_MOLECULARGRAPHPROPERTY_HPP

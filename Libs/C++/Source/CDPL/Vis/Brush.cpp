@@ -38,30 +38,30 @@ Vis::Brush::Brush(const Color& color, Style style): style(style), color(color) {
 
 void Vis::Brush::setStyle(Style style)
 {
-	this->style = style;
+    this->style = style;
 }
 
 Vis::Brush::Style Vis::Brush::getStyle() const
 {
-	return style;
+    return style;
 } 
 
 void Vis::Brush::setColor(const Color& color)
 {
-	this->color = color;
+    this->color = color;
 } 
 
 const Vis::Color& Vis::Brush::getColor() const
 {
-	return color;
+    return color;
 } 
 
 bool Vis::Brush::operator==(const Brush& brush) const
 {
-	return (color == brush.color && style == brush.style);
+    return (color == brush.color && style == brush.style);
 }
 
 bool Vis::Brush::operator!=(const Brush& brush) const
 {
-	return !operator==(brush);
+    return !operator==(brush);
 }

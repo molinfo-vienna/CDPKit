@@ -31,29 +31,29 @@ namespace CDPL
     namespace Internal
     {
 
-		class ByteBuffer;
+        class ByteBuffer;
     }
 
     namespace Grid
     {
 
-		class CDFDataReader;
-		class AttributedGrid;
+        class CDFDataReader;
+        class AttributedGrid;
     }
-	
+    
     namespace GRAIL
     {
 
-		class CDFAttributedGridPropertyReader
-		{
+        class CDFAttributedGridPropertyReader
+        {
 
-		  public:
-			static void registerExternalPropertyHandlers();
+          public:
+            static void registerExternalPropertyHandlers();
 
-		  private:
-			static bool readProperties(unsigned int handler_id, const Grid::CDFDataReader& reader, 
-									   Grid::AttributedGrid& grid, Internal::ByteBuffer& data);
-		};
+          private:
+            static bool readProperties(unsigned int handler_id, const Grid::CDFDataReader& reader, 
+                                       Grid::AttributedGrid& grid, Internal::ByteBuffer& data);
+        };
     }
 }
 

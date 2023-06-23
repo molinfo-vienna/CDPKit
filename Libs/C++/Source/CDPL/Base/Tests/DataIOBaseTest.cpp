@@ -30,80 +30,80 @@
 namespace
 {
 
-	class TestDataIOBase : public CDPL::Base::DataIOBase 
-	{
+    class TestDataIOBase : public CDPL::Base::DataIOBase 
+    {
 
-	public:
-		using CDPL::Base::DataIOBase::invokeIOCallbacks;
-	};
+    public:
+        using CDPL::Base::DataIOBase::invokeIOCallbacks;
+    };
 
-	struct TestCallback
-	{
+    struct TestCallback
+    {
 
-		TestCallback(const CDPL::Base::DataIOBase& iob): ioBase(iob), calls(0) {}
+        TestCallback(const CDPL::Base::DataIOBase& iob): ioBase(iob), calls(0) {}
  
-		void operator()(const CDPL::Base::DataIOBase& iob, double) {
-			if (&ioBase == &iob)
-				calls++;
-		}
+        void operator()(const CDPL::Base::DataIOBase& iob, double) {
+            if (&ioBase == &iob)
+                calls++;
+        }
 
-		const CDPL::Base::DataIOBase& ioBase;
-		std::size_t                   calls;
-	};
+        const CDPL::Base::DataIOBase& ioBase;
+        std::size_t                   calls;
+    };
 }
 
 
 BOOST_AUTO_TEST_CASE(DataIOBaseTest)
 {
-	using namespace CDPL;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Base;
 
-	TestDataIOBase test_iob;
+    TestDataIOBase test_iob;
 
-	BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 0);
-	BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 1);
-	BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 2);
+    BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 0);
+    BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 1);
+    BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 2);
 
-	test_iob.unregisterIOCallback(1);
+    test_iob.unregisterIOCallback(1);
 
-	BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 1);
+    BOOST_CHECK(test_iob.registerIOCallback(TestCallback(test_iob)) == 1);
 
-	TestCallback test_cb1(test_iob);
-	TestCallback test_cb2(test_iob);
+    TestCallback test_cb1(test_iob);
+    TestCallback test_cb2(test_iob);
 
-	test_iob.unregisterIOCallback(0);
+    test_iob.unregisterIOCallback(0);
 
-	BOOST_CHECK(test_iob.registerIOCallback(std::ref(test_cb1)) == 0);
+    BOOST_CHECK(test_iob.registerIOCallback(std::ref(test_cb1)) == 0);
 
-	test_iob.invokeIOCallbacks(1.0);
+    test_iob.invokeIOCallbacks(1.0);
 
-	BOOST_CHECK(test_cb1.calls == 1);
-	BOOST_CHECK(test_cb2.calls == 0);
+    BOOST_CHECK(test_cb1.calls == 1);
+    BOOST_CHECK(test_cb2.calls == 0);
 
-	test_iob.invokeIOCallbacks(1.0);
+    test_iob.invokeIOCallbacks(1.0);
 
-	BOOST_CHECK(test_cb1.calls == 2);
-	BOOST_CHECK(test_cb2.calls == 0);
+    BOOST_CHECK(test_cb1.calls == 2);
+    BOOST_CHECK(test_cb2.calls == 0);
 
-	BOOST_CHECK(test_iob.registerIOCallback(std::ref(test_cb2)) == 3);
+    BOOST_CHECK(test_iob.registerIOCallback(std::ref(test_cb2)) == 3);
 
-	BOOST_CHECK(test_cb1.calls == 2);
-	BOOST_CHECK(test_cb2.calls == 0);
+    BOOST_CHECK(test_cb1.calls == 2);
+    BOOST_CHECK(test_cb2.calls == 0);
 
-	test_iob.invokeIOCallbacks(1.0);
+    test_iob.invokeIOCallbacks(1.0);
 
-	BOOST_CHECK(test_cb1.calls == 3);
-	BOOST_CHECK(test_cb2.calls == 1);
+    BOOST_CHECK(test_cb1.calls == 3);
+    BOOST_CHECK(test_cb2.calls == 1);
 
-	test_iob.invokeIOCallbacks(1.0);
+    test_iob.invokeIOCallbacks(1.0);
 
-	BOOST_CHECK(test_cb1.calls == 4);
-	BOOST_CHECK(test_cb2.calls == 2);
+    BOOST_CHECK(test_cb1.calls == 4);
+    BOOST_CHECK(test_cb2.calls == 2);
 
-	test_iob.unregisterIOCallback(0);	
-	test_iob.invokeIOCallbacks(1.0);
+    test_iob.unregisterIOCallback(0);    
+    test_iob.invokeIOCallbacks(1.0);
 
-	BOOST_CHECK(test_cb1.calls == 4);
-	BOOST_CHECK(test_cb2.calls == 3);
+    BOOST_CHECK(test_cb1.calls == 4);
+    BOOST_CHECK(test_cb2.calls == 3);
 }
 

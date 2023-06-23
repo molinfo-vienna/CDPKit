@@ -41,85 +41,85 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerMassCompositionStringTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	std::locale::global(std::locale::classic());
+    std::locale::global(std::locale::classic());
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == "");
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == "");
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
-				"H: 0.752% C: 76.130% N: 5.222% O: 17.896%");
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
-				"H: 0.746% C: 71.122% N: 10.368% O: 17.764%");
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
 
-//-----
+    BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
+                "H: 0.752% C: 76.130% N: 5.222% O: 17.896%");
 
-	mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
-				"?: 0.000% H: 0.781% C: 69.779% N: 10.850% O: 18.590%");
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+    mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
 
-	BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
-				"?: 0.000% H: 0.819% C: 68.304% N: 11.379% O: 19.497%");
+    BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
+                "H: 0.746% C: 71.122% N: 10.368% O: 17.764%");
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-//-----
-
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		it->setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
-				"?: nan%" ||
-				mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
-				"?: -nan%" );
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION_STRING, mol,
-							   AtomContainerProperty::MASS_COMPOSITION);
+    mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
+                "?: 0.000% H: 0.781% C: 69.779% N: 10.850% O: 18.590%");
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+//-----
+
+    mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
+                "?: 0.000% H: 0.819% C: 68.304% N: 11.379% O: 19.497%");
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        it->setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
+                "?: nan%" ||
+                mol.getProperty<std::string>(AtomContainerProperty::MASS_COMPOSITION_STRING) == 
+                "?: -nan%" );
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::MASS_COMPOSITION_STRING, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, AtomContainerProperty::MASS_COMPOSITION_STRING, mol,
+                               AtomContainerProperty::MASS_COMPOSITION);
 }

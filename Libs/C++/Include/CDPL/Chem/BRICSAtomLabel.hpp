@@ -36,31 +36,31 @@ namespace CDPL
     namespace Chem 
     {
 
-	/**
-	 * \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
-	 * \see [\ref BRICS]
-	 */
-	namespace BRICSAtomLabel 
-	{
+    /**
+     * \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
+     * \see [\ref BRICS]
+     */
+    namespace BRICSAtomLabel 
+    {
 
-	    const unsigned int NONE = 0;
-		const unsigned int L1   = 1;
-		const unsigned int L2   = 2;
-		const unsigned int L3   = 3;
-		const unsigned int L4   = 4;
-		const unsigned int L5   = 5;
-		const unsigned int L6   = 6;
-		const unsigned int L7   = 7;
-		const unsigned int L8   = 8;
-		const unsigned int L9   = 9;
-		const unsigned int L10  = 10;
-		const unsigned int L11  = 11;
-		const unsigned int L12  = 12;
-		const unsigned int L13  = 13;
-		const unsigned int L14  = 14;
-		const unsigned int L15  = 15;
-		const unsigned int L16  = 16;
-	}
+        const unsigned int NONE = 0;
+        const unsigned int L1   = 1;
+        const unsigned int L2   = 2;
+        const unsigned int L3   = 3;
+        const unsigned int L4   = 4;
+        const unsigned int L5   = 5;
+        const unsigned int L6   = 6;
+        const unsigned int L7   = 7;
+        const unsigned int L8   = 8;
+        const unsigned int L9   = 9;
+        const unsigned int L10  = 10;
+        const unsigned int L11  = 11;
+        const unsigned int L12  = 12;
+        const unsigned int L13  = 13;
+        const unsigned int L14  = 14;
+        const unsigned int L15  = 15;
+        const unsigned int L16  = 16;
+    }
     }
 }
 

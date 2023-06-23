@@ -36,4 +36,4 @@ SET_TARGET_PROPERTIES(cmdline-static PROPERTIES
                      )
 
 TARGET_LINK_LIBRARIES(cmdline-static ${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-		   
+           

@@ -36,18 +36,18 @@ namespace CDPL
     namespace ForceField
     {
 
-		/**
-		 * \brief Provides flags for the specification of the MMFF94 parameter set to use.
-		 */
-		namespace MMFF94ParameterSet
-		{
+        /**
+         * \brief Provides flags for the specification of the MMFF94 parameter set to use.
+         */
+        namespace MMFF94ParameterSet
+        {
 
-			const unsigned int DYNAMIC          = 0;
-			const unsigned int STATIC           = 1;
-			const unsigned int STATIC_XOOP      = 2;
-			const unsigned int STATIC_RTOR      = 3;
-			const unsigned int STATIC_RTOR_XOOP = 4;
-		}
+            const unsigned int DYNAMIC          = 0;
+            const unsigned int STATIC           = 1;
+            const unsigned int STATIC_XOOP      = 2;
+            const unsigned int STATIC_RTOR      = 3;
+            const unsigned int STATIC_RTOR_XOOP = 4;
+        }
     }
 }
 

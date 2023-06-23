@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of bzip2-compressed molecule data in the <em>Sybyl MOL2</em> format.
-		 */
-		typedef Util::DefaultDataInputHandler<MOL2BZ2MoleculeReader, DataFormat::MOL2_BZ2> MOL2BZ2MoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of bzip2-compressed molecule data in the <em>Sybyl MOL2</em> format.
+         */
+        typedef Util::DefaultDataInputHandler<MOL2BZ2MoleculeReader, DataFormat::MOL2_BZ2> MOL2BZ2MoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_MOL2BZ2MOLECULEINPUTHANDLER_HPP

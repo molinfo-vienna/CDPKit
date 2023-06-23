@@ -37,63 +37,63 @@
 namespace
 {
 
-	template <typename T>
-	struct ConstQuaternionExpressionExport
-	{
+    template <typename T>
+    struct ConstQuaternionExpressionExport
+    {
 
-		typedef CDPLPythonMath::ConstQuaternionExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef CDPLPythonMath::ConstQuaternionExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
 
-		ConstQuaternionExpressionExport(const char* name) {
-			using namespace boost;
+        ConstQuaternionExpressionExport(const char* name) {
+            using namespace boost;
 
-			python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
-				.def(CDPLPythonMath::ConstQuaternionVisitor<ExpressionType>("e"));
-		}
-	};
+            python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
+                .def(CDPLPythonMath::ConstQuaternionVisitor<ExpressionType>("e"));
+        }
+    };
 
-	template <typename T>
-	struct QuaternionExpressionExport
-	{
+    template <typename T>
+    struct QuaternionExpressionExport
+    {
 
-		typedef CDPLPythonMath::QuaternionExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
-		typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
+        typedef CDPLPythonMath::QuaternionExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
-		QuaternionExpressionExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        QuaternionExpressionExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<ExpressionType, ExpressionPointer, 
-				python::bases<ConstQuaternionExpression<T> >, boost::noncopyable>(name, python::no_init)
-				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
-				.def(QuaternionAssignAndSwapVisitor<ExpressionType>("e"))
-				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstQuaternionExpression>("e"))
-				.def(QuaternionNDArrayAssignVisitor<ExpressionType>())
-				.def(QuaternionVisitor<ExpressionType>("e"));
+            python::class_<ExpressionType, ExpressionPointer, 
+                python::bases<ConstQuaternionExpression<T> >, boost::noncopyable>(name, python::no_init)
+                .def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
+                .def(QuaternionAssignAndSwapVisitor<ExpressionType>("e"))
+                .def(AssignFunctionGeneratorVisitor<ExpressionType, ConstQuaternionExpression>("e"))
+                .def(QuaternionNDArrayAssignVisitor<ExpressionType>())
+                .def(QuaternionVisitor<ExpressionType>("e"));
 
-			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
-		}
+            python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
+        }
 
-		static void swapExpr(ExpressionType& quat1, const ExpressionPointer& quat2_expr) {
-			quat1.swap(*quat2_expr);
-		}
-	};
+        static void swapExpr(ExpressionType& quat1, const ExpressionPointer& quat2_expr) {
+            quat1.swap(*quat2_expr);
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportQuaternionExpressionTypes()
 {
-	ConstQuaternionExpressionExport<float>("ConstFQuaternionExpression");
-	QuaternionExpressionExport<float>("FQuaternionExpression");
+    ConstQuaternionExpressionExport<float>("ConstFQuaternionExpression");
+    QuaternionExpressionExport<float>("FQuaternionExpression");
 
-	ConstQuaternionExpressionExport<double>("ConstDQuaternionExpression");
-	QuaternionExpressionExport<double>("DQuaternionExpression");
+    ConstQuaternionExpressionExport<double>("ConstDQuaternionExpression");
+    QuaternionExpressionExport<double>("DQuaternionExpression");
 
-	ConstQuaternionExpressionExport<long>("ConstLQuaternionExpression");
-	QuaternionExpressionExport<long>("LQuaternionExpression");
+    ConstQuaternionExpressionExport<long>("ConstLQuaternionExpression");
+    QuaternionExpressionExport<long>("LQuaternionExpression");
 
-	ConstQuaternionExpressionExport<unsigned long>("ConstULQuaternionExpression");
-	QuaternionExpressionExport<unsigned long>("ULQuaternionExpression");
+    ConstQuaternionExpressionExport<unsigned long>("ConstULQuaternionExpression");
+    QuaternionExpressionExport<unsigned long>("ULQuaternionExpression");
 }

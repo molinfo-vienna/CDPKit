@@ -38,48 +38,48 @@ void CDPLPythonChem::exportTautomerGenerator()
     using namespace CDPL;
 
     python::class_<Chem::TautomerGenerator, Chem::TautomerGenerator::SharedPointer,
-				   boost::noncopyable> cl("TautomerGenerator", python::no_init);
+                   boost::noncopyable> cl("TautomerGenerator", python::no_init);
 
     python::scope scope = cl;
   
     python::enum_<Chem::TautomerGenerator::Mode>("Mode")
-		.value("TOPOLOGICALLY_UNIQUE", Chem::TautomerGenerator::TOPOLOGICALLY_UNIQUE)
-		.value("GEOMETRICALLY_UNIQUE", Chem::TautomerGenerator::GEOMETRICALLY_UNIQUE)
-		.value("EXHAUSTIVE", Chem::TautomerGenerator::EXHAUSTIVE)
-		.export_values();
+        .value("TOPOLOGICALLY_UNIQUE", Chem::TautomerGenerator::TOPOLOGICALLY_UNIQUE)
+        .value("GEOMETRICALLY_UNIQUE", Chem::TautomerGenerator::GEOMETRICALLY_UNIQUE)
+        .value("EXHAUSTIVE", Chem::TautomerGenerator::EXHAUSTIVE)
+        .export_values();
 
     cl
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<Chem::TautomerGenerator>((python::arg("self"), python::arg("gen"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TautomerGenerator>())	
-		.def("addTautomerizationRule", &Chem::TautomerGenerator::addTautomerizationRule, 
-			 (python::arg("self"), python::arg("rule")))
-		.def("removeTautomerizationRule", &Chem::TautomerGenerator::removeTautomerizationRule, 
-			 (python::arg("self"), python::arg("idx")))
-		.def("getTautomerizationRule", &Chem::TautomerGenerator::getTautomerizationRule, 
-			 (python::arg("self"), python::arg("idx")), python::return_value_policy<python::copy_const_reference>())
-		.def("getNumTautomerizationRules", &Chem::TautomerGenerator::getNumTautomerizationRules, 
-			 python::arg("self"))
-		.def("setCallbackFunction", &Chem::TautomerGenerator::setCallbackFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getCallbackFunction", &Chem::TautomerGenerator::getCallbackFunction, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setMode", &Chem::TautomerGenerator::setMode, (python::arg("self"), python::arg("mode")))
-		.def("getMode", &Chem::TautomerGenerator::getMode, python::arg("self"))
-		.def("regardStereochemistry", &Chem::TautomerGenerator::regardStereochemistry, (python::arg("self"), python::arg("regard")))
-		.def("stereochemistryRegarded", &Chem::TautomerGenerator::stereochemistryRegarded, python::arg("self"))
-		.def("regardIsotopes", &Chem::TautomerGenerator::regardIsotopes, (python::arg("self"), python::arg("regard")))
-		.def("isotopesRegarded", &Chem::TautomerGenerator::isotopesRegarded, python::arg("self"))
-		.def("setCustomSetupFunction", &Chem::TautomerGenerator::setCustomSetupFunction, (python::arg("self"), python::arg("func")))
-		.def("generate", &Chem::TautomerGenerator::generate, 
-			 (python::arg("self"), python::arg("molgraph")))
-		.def("assign", &Chem::TautomerGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.add_property("callbackFunction", python::make_function(&Chem::TautomerGenerator::getCallbackFunction,
-																python::return_internal_reference<>()),
-					  &Chem::TautomerGenerator::setCallbackFunction)
-		.add_property("mode", &Chem::TautomerGenerator::getMode, &Chem::TautomerGenerator::setMode)
-		.add_property("regStereo", &Chem::TautomerGenerator::stereochemistryRegarded, &Chem::TautomerGenerator::regardStereochemistry)
-		.add_property("regIsotopes", &Chem::TautomerGenerator::isotopesRegarded, &Chem::TautomerGenerator::regardIsotopes)
-		.add_property("numTautomerizationRules", &Chem::TautomerGenerator::getNumTautomerizationRules);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<Chem::TautomerGenerator>((python::arg("self"), python::arg("gen"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TautomerGenerator>())    
+        .def("addTautomerizationRule", &Chem::TautomerGenerator::addTautomerizationRule, 
+             (python::arg("self"), python::arg("rule")))
+        .def("removeTautomerizationRule", &Chem::TautomerGenerator::removeTautomerizationRule, 
+             (python::arg("self"), python::arg("idx")))
+        .def("getTautomerizationRule", &Chem::TautomerGenerator::getTautomerizationRule, 
+             (python::arg("self"), python::arg("idx")), python::return_value_policy<python::copy_const_reference>())
+        .def("getNumTautomerizationRules", &Chem::TautomerGenerator::getNumTautomerizationRules, 
+             python::arg("self"))
+        .def("setCallbackFunction", &Chem::TautomerGenerator::setCallbackFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("getCallbackFunction", &Chem::TautomerGenerator::getCallbackFunction, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setMode", &Chem::TautomerGenerator::setMode, (python::arg("self"), python::arg("mode")))
+        .def("getMode", &Chem::TautomerGenerator::getMode, python::arg("self"))
+        .def("regardStereochemistry", &Chem::TautomerGenerator::regardStereochemistry, (python::arg("self"), python::arg("regard")))
+        .def("stereochemistryRegarded", &Chem::TautomerGenerator::stereochemistryRegarded, python::arg("self"))
+        .def("regardIsotopes", &Chem::TautomerGenerator::regardIsotopes, (python::arg("self"), python::arg("regard")))
+        .def("isotopesRegarded", &Chem::TautomerGenerator::isotopesRegarded, python::arg("self"))
+        .def("setCustomSetupFunction", &Chem::TautomerGenerator::setCustomSetupFunction, (python::arg("self"), python::arg("func")))
+        .def("generate", &Chem::TautomerGenerator::generate, 
+             (python::arg("self"), python::arg("molgraph")))
+        .def("assign", &Chem::TautomerGenerator::operator=, 
+             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .add_property("callbackFunction", python::make_function(&Chem::TautomerGenerator::getCallbackFunction,
+                                                                python::return_internal_reference<>()),
+                      &Chem::TautomerGenerator::setCallbackFunction)
+        .add_property("mode", &Chem::TautomerGenerator::getMode, &Chem::TautomerGenerator::setMode)
+        .add_property("regStereo", &Chem::TautomerGenerator::stereochemistryRegarded, &Chem::TautomerGenerator::regardStereochemistry)
+        .add_property("regIsotopes", &Chem::TautomerGenerator::isotopesRegarded, &Chem::TautomerGenerator::regardIsotopes)
+        .add_property("numTautomerizationRules", &Chem::TautomerGenerator::getNumTautomerizationRules);
 }

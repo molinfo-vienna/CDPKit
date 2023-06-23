@@ -34,17 +34,17 @@ using namespace CDPL;
 
 double Pharm::FeatureDistanceConstraint::getMinDistance() const
 {
-	return minDist;
+    return minDist;
 }
 
 double Pharm::FeatureDistanceConstraint::getMaxDistance() const
 {
-	return maxDist;
+    return maxDist;
 }
 
 bool Pharm::FeatureDistanceConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	double dist = length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
+    double dist = length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
 
-	return (dist >= minDist && dist <= maxDist);
+    return (dist >= minDist && dist <= maxDist);
 }

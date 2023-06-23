@@ -34,41 +34,41 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Pharmacophore;
+        class Pharmacophore;
 
-		class CDFPharmacophoreDataReader : private Internal::CDFDataReaderBase
-		{
+        class CDFPharmacophoreDataReader : private Internal::CDFDataReaderBase
+        {
 
-		public:
-			CDFPharmacophoreDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+        public:
+            CDFPharmacophoreDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
+            bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
 
-			bool readPharmacophore(Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
+            bool readPharmacophore(Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
 
-			bool skipPharmacophore(std::istream& is);
+            bool skipPharmacophore(std::istream& is);
 
-			bool hasMoreData(std::istream& is);
+            bool hasMoreData(std::istream& is);
 
-		private:
-			void init(); 
+        private:
+            void init(); 
 
-			void readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
-			void readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
+            void readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
+            void readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
 
-			const Base::ControlParameterContainer& ctrlParams;	
-			Internal::ByteBuffer                   dataBuffer;
-		};
-	}
+            const Base::ControlParameterContainer& ctrlParams;    
+            Internal::ByteBuffer                   dataBuffer;
+        };
+    }
 }
 
 #endif // CDPL_PHARM_CDFPHARMACOPHOREDATAREADER_HPP

@@ -47,92 +47,92 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94BondStretchingRuleParameterTable> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<MMFF94BondStretchingRuleParameterTable> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
+                Entry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
-				unsigned int getAtomicNumber1() const;
+                unsigned int getAtomicNumber1() const;
 
-				unsigned int getAtomicNumber2() const;
+                unsigned int getAtomicNumber2() const;
 
-				double getForceConstant() const;
+                double getForceConstant() const;
 
-				double getReferenceLength() const;
+                double getReferenceLength() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int atomicNo1;
-				unsigned int atomicNo2;
-				double       forceConst;
-				double       refLength;
-				bool         initialized;
-			};			
+              private:
+                unsigned int atomicNo1;
+                unsigned int atomicNo2;
+                double       forceConst;
+                double       refLength;
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94BondStretchingRuleParameterTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94BondStretchingRuleParameterTable();
 
-			void addEntry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
+            void addEntry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
-			const Entry& getEntry(unsigned int atomic_no1, unsigned int atomic_no2) const;
+            const Entry& getEntry(unsigned int atomic_no1, unsigned int atomic_no2) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int atomic_no1, unsigned int atomic_no2);
+            bool removeEntry(unsigned int atomic_no1, unsigned int atomic_no2);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
     }
 }
 

@@ -37,37 +37,37 @@
 namespace
 {
 
-	template <typename VectorType>
-	struct UnitVectorExport
-	{
+    template <typename VectorType>
+    struct UnitVectorExport
+    {
 
-		UnitVectorExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        UnitVectorExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename VectorType::SizeType SizeType;
-		
-			python::class_<VectorType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("n"), python::arg("i"))))
-				.def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
-				.def("getIndex", &VectorType::getIndex)
-				.add_property("index", &VectorType::getIndex)
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
-				.def(ConstVectorVisitor<VectorType>())
-				.def(VectorAssignAndSwapVisitor<VectorType>());
-		}
-	};
+            typedef typename VectorType::SizeType SizeType;
+        
+            python::class_<VectorType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("n"), python::arg("i"))))
+                .def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
+                .def("getIndex", &VectorType::getIndex)
+                .add_property("index", &VectorType::getIndex)
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
+                .def(ConstVectorVisitor<VectorType>())
+                .def(VectorAssignAndSwapVisitor<VectorType>());
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportUnitVectorTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	UnitVectorExport<Math::FUnitVector>("FUnitVector");
-	UnitVectorExport<Math::DUnitVector>("DUnitVector");
-	UnitVectorExport<Math::LUnitVector>("LUnitVector");
-	UnitVectorExport<Math::ULUnitVector>("ULUnitVector");
+    UnitVectorExport<Math::FUnitVector>("FUnitVector");
+    UnitVectorExport<Math::DUnitVector>("DUnitVector");
+    UnitVectorExport<Math::LUnitVector>("LUnitVector");
+    UnitVectorExport<Math::ULUnitVector>("ULUnitVector");
 }

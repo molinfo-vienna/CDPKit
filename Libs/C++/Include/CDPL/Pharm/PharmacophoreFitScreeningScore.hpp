@@ -40,19 +40,19 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief PharmacophoreFitScreeningScore.
-		 */
+        /**
+         * \brief PharmacophoreFitScreeningScore.
+         */
         class CDPL_PHARM_API PharmacophoreFitScreeningScore : public PharmacophoreFitScore
-		{
+        {
 
-		  public:
-			PharmacophoreFitScreeningScore(double ftr_match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
-										   double ftr_pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
-										   double ftr_geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
+          public:
+            PharmacophoreFitScreeningScore(double ftr_match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
+                                           double ftr_pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
+                                           double ftr_geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
-			double operator()(const ScreeningProcessor::SearchHit& hit);
-		};
+            double operator()(const ScreeningProcessor::SearchHit& hit);
+        };
     }
 }
 

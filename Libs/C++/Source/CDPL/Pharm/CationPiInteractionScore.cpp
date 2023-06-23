@@ -44,10 +44,10 @@ constexpr double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE;
 
 
 Pharm::CationPiInteractionScore::CationPiInteractionScore(bool aro_cat, double min_dist, double max_dist,
-														  double max_ang):
-	aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang), 
-	distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)),
-	angleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 2.5, 0.0))
+                                                          double max_ang):
+    aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang), 
+    distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)),
+    angleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 2.5, 0.0))
 {}
 
 double Pharm::CationPiInteractionScore::getMinDistance() const
@@ -77,7 +77,7 @@ void Pharm::CationPiInteractionScore::setAngleScoringFunction(const AngleScoring
 
 double Pharm::CationPiInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);
+    const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);
     const Feature& cat_ftr = (aroCatOrder ? ftr2 : ftr1);
     const Math::Vector3D& aro_pos = get3DCoordinates(aro_ftr);
     const Math::Vector3D& cat_pos = get3DCoordinates(cat_ftr);
@@ -86,16 +86,16 @@ double Pharm::CationPiInteractionScore::operator()(const Feature& ftr1, const Fe
     double ctr_dist = length(aro_cat_vec);
 
     if (hasOrientation(aro_ftr)) {
-		const Math::Vector3D& orient = getOrientation(aro_ftr);
-		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
-		double angle = std::acos(ang_cos) * 180.0 / M_PI;
-		double plane_dist = ang_cos * ctr_dist;
-		double score = distScoringFunc((plane_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
+        const Math::Vector3D& orient = getOrientation(aro_ftr);
+        double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
+        double angle = std::acos(ang_cos) * 180.0 / M_PI;
+        double plane_dist = ang_cos * ctr_dist;
+        double score = distScoringFunc((plane_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
 
-		return (score * angleScoringFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
+        return (score * angleScoringFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
     }
 
-	return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
+    return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
 }
 
 double Pharm::CationPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
@@ -103,17 +103,17 @@ double Pharm::CationPiInteractionScore::operator()(const Math::Vector3D& ftr1_po
     Math::Vector3D aro_cat_vec(get3DCoordinates(ftr2) - ftr1_pos);
     double ctr_dist = length(aro_cat_vec);
 
-	if (aroCatOrder)
-		return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
+    if (aroCatOrder)
+        return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
 
     if (hasOrientation(ftr2)) {
-		const Math::Vector3D& orient = getOrientation(ftr2);
-		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
-		double angle = std::acos(ang_cos) * 180.0 / M_PI;
-		double plane_dist = ang_cos * ctr_dist;
-		double score = distScoringFunc((plane_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
-		
-		return (score * angleScoringFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
+        const Math::Vector3D& orient = getOrientation(ftr2);
+        double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
+        double angle = std::acos(ang_cos) * 180.0 / M_PI;
+        double plane_dist = ang_cos * ctr_dist;
+        double score = distScoringFunc((plane_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
+        
+        return (score * angleScoringFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
     }
 
     return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);

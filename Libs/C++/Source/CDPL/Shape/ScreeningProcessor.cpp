@@ -37,25 +37,25 @@ using namespace CDPL;
 namespace
 {
 
-	const double CARBON_RADIUS = 1.7;
+    const double CARBON_RADIUS = 1.7;
 }
 
 
 Shape::ScreeningProcessor::ScreeningProcessor():
-	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
-	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
+    colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
+    allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
     expChgPharmGen()
 {
-	init();
+    init();
 }
 
 Shape::ScreeningProcessor::ScreeningProcessor(const Chem::MolecularGraph& query):
-	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
-	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
+    colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
+    allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
     expChgPharmGen()
 {
-	init();
-	addQuery(query);
+    init();
+    addQuery(query);
 }
 
 Shape::ScreeningProcessor::~ScreeningProcessor()
@@ -63,205 +63,205 @@ Shape::ScreeningProcessor::~ScreeningProcessor()
 
 void Shape::ScreeningProcessor::setHitCallback(const HitCallbackFunction& func)
 {
-	hitCallback = func;
+    hitCallback = func;
 }
 
 const Shape::ScreeningProcessor::HitCallbackFunction& Shape::ScreeningProcessor::getHitCallback() const
 {
-	return hitCallback;
+    return hitCallback;
 }
 
 const Shape::ScreeningSettings& Shape::ScreeningProcessor::getSettings() const
 {
-	return settings;
+    return settings;
 }
 
 Shape::ScreeningSettings& Shape::ScreeningProcessor::getSettings()
 {
-	return settings;
+    return settings;
 }
 
 void Shape::ScreeningProcessor::clearQuerySet()
 {
-	alignment.clearReferenceShapes();
-	queryList.clear();
+    alignment.clearReferenceShapes();
+    queryList.clear();
 }
 
 void Shape::ScreeningProcessor::addQuery(const Chem::MolecularGraph& molgraph)
 {
-	applyShapeGenSettings(true);
+    applyShapeGenSettings(true);
 
-	alignment.addReferenceShapes(shapeGen.generate(molgraph), true);
-	queryList.push_back(&molgraph);
+    alignment.addReferenceShapes(shapeGen.generate(molgraph), true);
+    queryList.push_back(&molgraph);
 }
 
 std::size_t Shape::ScreeningProcessor::getQuerySetSize() const
 {
-	return queryList.size();
+    return queryList.size();
 }
 
 const Chem::MolecularGraph& Shape::ScreeningProcessor::getQuery(std::size_t idx) const
 {
     if (idx >= queryList.size())
-		throw Base::IndexError("ScreeningProcessor: query index out of bounds");
+        throw Base::IndexError("ScreeningProcessor: query index out of bounds");
 
-	return *queryList[idx];
+    return *queryList[idx];
 }
 
 Shape::ScreeningProcessor::ConstMolecularGraphIterator Shape::ScreeningProcessor::getQuerySetBegin() const
 {
-	return queryList.begin();
+    return queryList.begin();
 }
 
 Shape::ScreeningProcessor::ConstMolecularGraphIterator Shape::ScreeningProcessor::getQuerySetEnd() const
 {
-	return queryList.end();
+    return queryList.end();
 }
 
 bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 {
-	applyShapeGenSettings(false);
-	applyAlignmentSettings();
-	
-	const GaussianShapeSet& shapes = shapeGen.generate(molgraph);
-	
-	if (shapes.isEmpty())
-		return false;
+    applyShapeGenSettings(false);
+    applyAlignmentSettings();
+    
+    const GaussianShapeSet& shapes = shapeGen.generate(molgraph);
+    
+    if (shapes.isEmpty())
+        return false;
 
-	bool have_cutoff = std::isfinite(settings.getScoreCutoff());
+    bool have_cutoff = std::isfinite(settings.getScoreCutoff());
 
-	if (settings.singleConformerSearch()) {
-		bool success = false;
-		
-		for (std::size_t i = 0, num_confs = shapes.getSize(); i < num_confs; i++) {
-			const GaussianShape& shape = shapes[i];
+    if (settings.singleConformerSearch()) {
+        bool success = false;
+        
+        for (std::size_t i = 0, num_confs = shapes.getSize(); i < num_confs; i++) {
+            const GaussianShape& shape = shapes[i];
 
-			if (!alignment.align(shape))
-				continue;
+            if (!alignment.align(shape))
+                continue;
 
-			if (hitCallback) {
-				for (FastGaussianShapeAlignment::ResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
-					AlignmentResult& res = *it;
+            if (hitCallback) {
+                for (FastGaussianShapeAlignment::ResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
+                    AlignmentResult& res = *it;
 
-					if (have_cutoff && res.getScore() < settings.getScoreCutoff())
-						continue;
+                    if (have_cutoff && res.getScore() < settings.getScoreCutoff())
+                        continue;
 
-					res.setAlignedShapeIndex(i);
-					
-					hitCallback(*queryList[res.getReferenceShapeSetIndex()], molgraph, res);
-				}
-			}
-	
-			success = true;
-		}
-		
-		return success;
-	}
-	
-	if (!alignment.align(shapes)) 
-		return false;
+                    res.setAlignedShapeIndex(i);
+                    
+                    hitCallback(*queryList[res.getReferenceShapeSetIndex()], molgraph, res);
+                }
+            }
+    
+            success = true;
+        }
+        
+        return success;
+    }
+    
+    if (!alignment.align(shapes)) 
+        return false;
 
-	if (hitCallback) {
-		for (FastGaussianShapeAlignment::ConstResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
-			const AlignmentResult& res = *it;
+    if (hitCallback) {
+        for (FastGaussianShapeAlignment::ConstResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
+            const AlignmentResult& res = *it;
 
-			if (have_cutoff && res.getScore() < settings.getScoreCutoff())
-				continue;
+            if (have_cutoff && res.getScore() < settings.getScoreCutoff())
+                continue;
 
-			hitCallback(*queryList[res.getReferenceShapeSetIndex()], molgraph, res);
-		}
-	}
+            hitCallback(*queryList[res.getReferenceShapeSetIndex()], molgraph, res);
+        }
+    }
 
-	return true;
+    return true;
 }
 
 void Shape::ScreeningProcessor::init()
 {
-	alignment.genForAlignedShapeCenters(false);
-	alignment.genForReferenceShapeCenters(false);
-	alignment.genForLargerShapeCenters(true);
-	
-	shapeGen.includeHydrogens(false);
-	shapeGen.multiConformerMode(true);
+    alignment.genForAlignedShapeCenters(false);
+    alignment.genForReferenceShapeCenters(false);
+    alignment.genForLargerShapeCenters(true);
+    
+    shapeGen.includeHydrogens(false);
+    shapeGen.multiConformerMode(true);
 }
 
 void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
 {
-	using namespace Pharm;
+    using namespace Pharm;
 
-	bool query_changed = false;
+    bool query_changed = false;
 
-	if (allCarbon != settings.allCarbonMode()) {
-		query_changed = true;
-		allCarbon = settings.allCarbonMode();
-	}
+    if (allCarbon != settings.allCarbonMode()) {
+        query_changed = true;
+        allCarbon = settings.allCarbonMode();
+    }
 
-	shapeGen.setAtomRadius(allCarbon ? CARBON_RADIUS : -1.0);
+    shapeGen.setAtomRadius(allCarbon ? CARBON_RADIUS : -1.0);
 
-	if (colorFtrType != settings.getColorFeatureType()) {
-		query_changed = true;
-		colorFtrType = settings.getColorFeatureType();
-	}
+    if (colorFtrType != settings.getColorFeatureType()) {
+        query_changed = true;
+        colorFtrType = settings.getColorFeatureType();
+    }
 
-	switch (colorFtrType) {
+    switch (colorFtrType) {
 
-		case ScreeningSettings::PHARMACOPHORE_EXP_CHARGES:
-			shapeGen.setPharmacophoreGenerator(expChgPharmGen);
-			shapeGen.generatePharmacophoreShape(true);
-			break;
+        case ScreeningSettings::PHARMACOPHORE_EXP_CHARGES:
+            shapeGen.setPharmacophoreGenerator(expChgPharmGen);
+            shapeGen.generatePharmacophoreShape(true);
+            break;
 
-		case ScreeningSettings::PHARMACOPHORE_IMP_CHARGES:
-			shapeGen.setPharmacophoreGenerator(shapeGen.getDefaultPharmacophoreGenerator());
-			shapeGen.generatePharmacophoreShape(true);
-			break;
-				
-		default:
-			shapeGen.generatePharmacophoreShape(false);
-			break;
-	}
+        case ScreeningSettings::PHARMACOPHORE_IMP_CHARGES:
+            shapeGen.setPharmacophoreGenerator(shapeGen.getDefaultPharmacophoreGenerator());
+            shapeGen.generatePharmacophoreShape(true);
+            break;
+                
+        default:
+            shapeGen.generatePharmacophoreShape(false);
+            break;
+    }
 
-	if (query_changed) {
-		alignment.clearReferenceShapes();
-		
-		for (MolecularGraphList::const_iterator it = queryList.begin(), end = queryList.end(); it != end; ++it)
-			alignment.addReferenceShapes(shapeGen.generate(**it), true);
-	}
+    if (query_changed) {
+        alignment.clearReferenceShapes();
+        
+        for (MolecularGraphList::const_iterator it = queryList.begin(), end = queryList.end(); it != end; ++it)
+            alignment.addReferenceShapes(shapeGen.generate(**it), true);
+    }
 }
 
 void Shape::ScreeningProcessor::applyAlignmentSettings()
 {
-	alignment.setScoringFunction(settings.getScoringFunction());
-	alignment.optimizeOverlap(settings.optimizeOverlap());
-	alignment.greedyOptimization(settings.greedyOptimization());
-	alignment.setMaxNumOptimizationIterations(settings.getMaxNumOptimizationIterations());
-	alignment.setOptimizationStopGradient(settings.getOptimizationStopGradient());
-	alignment.setNumRandomStarts(settings.getNumRandomStarts());
+    alignment.setScoringFunction(settings.getScoringFunction());
+    alignment.optimizeOverlap(settings.optimizeOverlap());
+    alignment.greedyOptimization(settings.greedyOptimization());
+    alignment.setMaxNumOptimizationIterations(settings.getMaxNumOptimizationIterations());
+    alignment.setOptimizationStopGradient(settings.getOptimizationStopGradient());
+    alignment.setNumRandomStarts(settings.getNumRandomStarts());
 
-	if (settings.getAlignmentMode() == ScreeningSettings::NO_ALIGNMENT)
-		alignment.performAlignment(false);
+    if (settings.getAlignmentMode() == ScreeningSettings::NO_ALIGNMENT)
+        alignment.performAlignment(false);
 
-	else {
-		alignment.genShapeCenterStarts(settings.getAlignmentMode() & ScreeningSettings::SHAPE_CENTROID);
-		alignment.genNonColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::ATOM_CENTERS);
-		alignment.genColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::COLOR_FEATURE_CENTERS);
-		alignment.genRandomStarts(settings.getAlignmentMode() & ScreeningSettings::RANDOM);
+    else {
+        alignment.genShapeCenterStarts(settings.getAlignmentMode() & ScreeningSettings::SHAPE_CENTROID);
+        alignment.genNonColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::ATOM_CENTERS);
+        alignment.genColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::COLOR_FEATURE_CENTERS);
+        alignment.genRandomStarts(settings.getAlignmentMode() & ScreeningSettings::RANDOM);
 
-		alignment.performAlignment(alignment.genShapeCenterStarts() || alignment.genNonColorCenterStarts() ||
-								   alignment.genColorCenterStarts() || alignment.genRandomStarts());
-	}
-	
-	switch (settings.getScreeningMode()) {
+        alignment.performAlignment(alignment.genShapeCenterStarts() || alignment.genNonColorCenterStarts() ||
+                                   alignment.genColorCenterStarts() || alignment.genRandomStarts());
+    }
+    
+    switch (settings.getScreeningMode()) {
 
-		case ScreeningSettings::BEST_OVERALL_MATCH:
-			alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_OVERALL);
-			break;
+        case ScreeningSettings::BEST_OVERALL_MATCH:
+            alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_OVERALL);
+            break;
 
-		case ScreeningSettings::BEST_MATCH_PER_QUERY_CONF:
-			alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_PER_REFERENCE_SHAPE);
-			break;
+        case ScreeningSettings::BEST_MATCH_PER_QUERY_CONF:
+            alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_PER_REFERENCE_SHAPE);
+            break;
 
-		default:
-			alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET);
-			break;
-	}
+        default:
+            alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET);
+            break;
+    }
 }

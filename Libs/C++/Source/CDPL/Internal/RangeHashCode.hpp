@@ -29,20 +29,20 @@
 namespace CDPL
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-	    template <typename T, typename Iterator>
-	    T calcHashCode(Iterator it, Iterator end)
-	    {
-			T hash = T();
+        template <typename T, typename Iterator>
+        T calcHashCode(Iterator it, Iterator end)
+        {
+            T hash = T();
 
-			for ( ; it != end; ++it)
-				hash ^= T(*it + 0x9e3779b9 + (hash << 6) + (hash >> 2));
-			
-			return hash;
-	    }
-	}
+            for ( ; it != end; ++it)
+                hash ^= T(*it + 0x9e3779b9 + (hash << 6) + (hash >> 2));
+            
+            return hash;
+        }
+    }
 }
 
 #endif // CDPL_INTERNAL_RANGEHASHCODE_HPP

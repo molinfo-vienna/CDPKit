@@ -32,18 +32,18 @@
 namespace 
 {
 
-	struct ControlParameterDefault {};
+    struct ControlParameterDefault {};
 }
 
 
 void CDPLPythonPharm::exportControlParameterDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
-		.def_readonly("STRICT_ERROR_CHECKING", &Pharm::ControlParameterDefault::STRICT_ERROR_CHECKING)
-		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Pharm::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS)
-		.def_readonly("PSD_CREATION_MODE", &Pharm::ControlParameterDefault::PSD_CREATION_MODE)
-		.def_readonly("PSD_ALLOW_DUPLICATES", &Pharm::ControlParameterDefault::PSD_ALLOW_DUPLICATES);
+    python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
+        .def_readonly("STRICT_ERROR_CHECKING", &Pharm::ControlParameterDefault::STRICT_ERROR_CHECKING)
+        .def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Pharm::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS)
+        .def_readonly("PSD_CREATION_MODE", &Pharm::ControlParameterDefault::PSD_CREATION_MODE)
+        .def_readonly("PSD_ALLOW_DUPLICATES", &Pharm::ControlParameterDefault::PSD_ALLOW_DUPLICATES);
 }

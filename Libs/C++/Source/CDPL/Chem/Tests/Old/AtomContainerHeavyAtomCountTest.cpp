@@ -40,51 +40,51 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerHeavyAtomCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::HEAVY_ATOM_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::HEAVY_ATOM_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::HEAVY_ATOM_COUNT) == 21);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(mol, AtomContainerProperty::HEAVY_ATOM_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
 
 //-----
 
-	Fragment frag(mol);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(frag.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(AtomContainerProperty::HEAVY_ATOM_COUNT) == 21);
-
-	BOOST_CHECK(!frag.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
-
-	TestUtils::checkDependency(frag, AtomContainerProperty::HEAVY_ATOM_COUNT, frag, AtomContainerProperty::ATOM_COUNT);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, AtomContainerProperty::HEAVY_ATOM_COUNT, *it, AtomProperty::TYPE);
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(AtomContainerProperty::HEAVY_ATOM_COUNT) == 21);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(mol, AtomContainerProperty::HEAVY_ATOM_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(AtomContainerProperty::HEAVY_ATOM_COUNT) == 21);
+
+    BOOST_CHECK(!frag.getProperty(AtomContainerProperty::HEAVY_ATOM_COUNT, false, false).isEmpty());
+
+    TestUtils::checkDependency(frag, AtomContainerProperty::HEAVY_ATOM_COUNT, frag, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, AtomContainerProperty::HEAVY_ATOM_COUNT, *it, AtomProperty::TYPE);
 }

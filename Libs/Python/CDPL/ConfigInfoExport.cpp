@@ -31,9 +31,9 @@
 
 void CDPLPython::exportConfigInfo()
 {
-	using namespace boost;
+    using namespace boost;
 
-	python::scope module;
+    python::scope module;
 
 #ifdef HAVE_QT
     module.attr("HAVE_QT") = true;
@@ -42,33 +42,33 @@ void CDPLPython::exportConfigInfo()
 #endif
 
 #ifdef HAVE_CAIRO
-	module.attr("HAVE_CAIRO") = true;
+    module.attr("HAVE_CAIRO") = true;
 #else
-	module.attr("HAVE_CAIRO") = true;
+    module.attr("HAVE_CAIRO") = true;
 #endif
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
-	module.attr("HAVE_CAIRO_PNG_SUPPORT") = true;
+    module.attr("HAVE_CAIRO_PNG_SUPPORT") = true;
 #else
-	module.attr("HAVE_CAIRO_PNG_SUPPORT") = false;
+    module.attr("HAVE_CAIRO_PNG_SUPPORT") = false;
 #endif
 
 #ifdef HAVE_CAIRO_PDF_SUPPORT
-	module.attr("HAVE_CAIRO_PDF_SUPPORT") = true;
+    module.attr("HAVE_CAIRO_PDF_SUPPORT") = true;
 #else
-	module.attr("HAVE_CAIRO_PDF_SUPPORT") = false;
+    module.attr("HAVE_CAIRO_PDF_SUPPORT") = false;
 #endif
 
 #ifdef HAVE_CAIRO_PS_SUPPORT
-	module.attr("HAVE_CAIRO_PS_SUPPORT") = true;
+    module.attr("HAVE_CAIRO_PS_SUPPORT") = true;
 #else
-	module.attr("HAVE_CAIRO_PS_SUPPORT") = false;
+    module.attr("HAVE_CAIRO_PS_SUPPORT") = false;
 #endif
 
 #ifdef HAVE_CAIRO_SVG_SUPPORT
-	module.attr("HAVE_CAIRO_SVG_SUPPORT") = true;
+    module.attr("HAVE_CAIRO_SVG_SUPPORT") = true;
 #else
-	module.attr("HAVE_CAIRO_SVG_SUPPORT") = false;
+    module.attr("HAVE_CAIRO_SVG_SUPPORT") = false;
 #endif
 
 #ifdef HAVE_SQLITE3

@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of molecular graph data in the <em>Sybyl MOL2</em> format.
-		 */
-		typedef Util::DefaultDataOutputHandler<MOL2MolecularGraphWriter, DataFormat::MOL2> MOL2MolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of molecular graph data in the <em>Sybyl MOL2</em> format.
+         */
+        typedef Util::DefaultDataOutputHandler<MOL2MolecularGraphWriter, DataFormat::MOL2> MOL2MolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_MOL2MOLECULARGRAPHOUTPUTHANDLER_HPP

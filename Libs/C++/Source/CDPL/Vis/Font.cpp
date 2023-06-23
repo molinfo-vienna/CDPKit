@@ -31,102 +31,102 @@ using namespace CDPL;
 
 
 Vis::Font::Font(): 
-	family(), size(12.0), bold(false), italic(false), underlined(false), 
-	overlined(false), strikedOut(false), fixedPitch(false) {}
+    family(), size(12.0), bold(false), italic(false), underlined(false), 
+    overlined(false), strikedOut(false), fixedPitch(false) {}
 
 Vis::Font::Font(const std::string& family, double size):
-	family(family), size(size < 0.0 ? 0.0 : size), bold(false), italic(false), underlined(false), 
-	overlined(false), strikedOut(false), fixedPitch(false) {}
+    family(family), size(size < 0.0 ? 0.0 : size), bold(false), italic(false), underlined(false), 
+    overlined(false), strikedOut(false), fixedPitch(false) {}
 
 void Vis::Font::setFamily(const std::string& family)
 {
-	this->family = family;
+    this->family = family;
 } 
 
 const std::string& Vis::Font::getFamily() const
 {
-	return family;
+    return family;
 } 
 
 void Vis::Font::setSize(double size)
 {
-	this->size = (size < 0.0 ? 0.0 : size);
+    this->size = (size < 0.0 ? 0.0 : size);
 } 
 
 double Vis::Font::getSize() const
 {
-	return size;
+    return size;
 } 
 
 void Vis::Font::setBold(bool flag)
 {
-	bold = flag;
+    bold = flag;
 } 
 
 bool Vis::Font::isBold() const
 {
-	return bold;
+    return bold;
 } 
 
 void Vis::Font::setItalic(bool flag)
 {
-	italic = flag;
+    italic = flag;
 } 
 
 bool Vis::Font::isItalic() const
 {
-	return italic;
+    return italic;
 }
 
 void Vis::Font::setUnderlined(bool flag)
 {
-	underlined = flag;
+    underlined = flag;
 } 
 
 bool Vis::Font::isUnderlined() const
 {
-	return underlined;
+    return underlined;
 } 
 
 void Vis::Font::setOverlined(bool flag)
 {
-	overlined = flag;
+    overlined = flag;
 } 
 
 bool Vis::Font::isOverlined() const
 {
-	return overlined;
+    return overlined;
 } 
 
 void Vis::Font::setStrikedOut(bool flag)
 {
-	strikedOut = flag;
+    strikedOut = flag;
 } 
 
 bool Vis::Font::isStrikedOut() const
 {
-	return strikedOut;
+    return strikedOut;
 } 
 
 void Vis::Font::setFixedPitch(bool flag)
 {
-	fixedPitch = flag;
+    fixedPitch = flag;
 } 
 
 bool Vis::Font::hasFixedPitch() const
 {
-	return fixedPitch;
+    return fixedPitch;
 } 
 
 bool Vis::Font::operator==(const Font& font) const
 {
-	return (family == font.family && size == font.size
-			&& bold == font.bold && italic == font.italic
-			&& underlined == font.underlined && overlined == font.overlined
-			&& strikedOut == font.strikedOut && fixedPitch == font.fixedPitch);
+    return (family == font.family && size == font.size
+            && bold == font.bold && italic == font.italic
+            && underlined == font.underlined && overlined == font.overlined
+            && strikedOut == font.strikedOut && fixedPitch == font.fixedPitch);
 }
 
 bool Vis::Font::operator!=(const Font& font) const
 {
-	return !operator==(font);
+    return !operator==(font);
 }

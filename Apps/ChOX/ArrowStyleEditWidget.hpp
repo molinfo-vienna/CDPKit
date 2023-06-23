@@ -34,29 +34,29 @@ class QComboBox;
 namespace ChOX
 {
 
-	class ArrowStyleEditWidget : public QWidget
-	{
+    class ArrowStyleEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		ArrowStyleEditWidget(QWidget*, unsigned int&);
+    public:
+        ArrowStyleEditWidget(QWidget*, unsigned int&);
 
-	signals:
-		void arrowStyleChanged();
+    signals:
+        void arrowStyleChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleArrowStyleSelection(int);
+    private slots:
+        void handleArrowStyleSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		unsigned int& arrowStyle;
-		QComboBox*    arrowStyleComboBox;
-	};
+        unsigned int& arrowStyle;
+        QComboBox*    arrowStyleComboBox;
+    };
 }
 
 #endif // CHOX_ARROWSTYLEEDITWIDGET_HPP

@@ -37,105 +37,105 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		/**
-		 * \brief An interface for writing data objects of a given type to an arbitrary data sink.
-		 *
-		 * \c %DataWriter is the common interface of classes which write objects of a given type 
-		 * (specified by the template parameter \a T) to some data sink (e.g. a file) that expects
-		 * the data to be encoded in a particular storage format.
-		 *
-		 * From the \c %DataWriter interface point of view, the data sink is continuous output stream
-		 * in which the data objects are written as data records. For the output of a given data object
-		 * the method write() has to be called with the object passed as an argument. 
-		 *		 
-		 * If the write() operation fails, the writer instance is set into an error state that can be
-		 * queried by the operators operator const void*() and bool operator!(). Additionally, a 
-		 * \c %DataWriter implementation may decide to throw an exception of type Base::IOError to
-		 * report the error condition.
-		 * 
-		 * \tparam T The type of the written data objects.
-		 */
-		template <typename T>
-		class DataWriter : virtual public DataIOBase
-		{
+        /**
+         * \brief An interface for writing data objects of a given type to an arbitrary data sink.
+         *
+         * \c %DataWriter is the common interface of classes which write objects of a given type 
+         * (specified by the template parameter \a T) to some data sink (e.g. a file) that expects
+         * the data to be encoded in a particular storage format.
+         *
+         * From the \c %DataWriter interface point of view, the data sink is continuous output stream
+         * in which the data objects are written as data records. For the output of a given data object
+         * the method write() has to be called with the object passed as an argument. 
+         *         
+         * If the write() operation fails, the writer instance is set into an error state that can be
+         * queried by the operators operator const void*() and bool operator!(). Additionally, a 
+         * \c %DataWriter implementation may decide to throw an exception of type Base::IOError to
+         * report the error condition.
+         * 
+         * \tparam T The type of the written data objects.
+         */
+        template <typename T>
+        class DataWriter : virtual public DataIOBase
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataWriter instances.
-			 */
-			typedef std::shared_ptr<DataWriter> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataWriter instances.
+             */
+            typedef std::shared_ptr<DataWriter> SharedPointer;
 
-			/**
-			 * \brief The type of the written data objects.
-			 */
-			typedef T DataType;
+            /**
+             * \brief The type of the written data objects.
+             */
+            typedef T DataType;
 
-			/**
-			 * \brief Writes the data object \a obj.
-			 * \param obj The data object to write.
-			 * \return A reference to itself.
-			 * \throw Base::IOError if an I/O error occurred.
-			 */
-			virtual DataWriter& write(const DataType& obj) = 0;
+            /**
+             * \brief Writes the data object \a obj.
+             * \param obj The data object to write.
+             * \return A reference to itself.
+             * \throw Base::IOError if an I/O error occurred.
+             */
+            virtual DataWriter& write(const DataType& obj) = 0;
 
-			/**
-			 * \brief Writes format dependent data (if required) to mark the end of output.
-			 * \throw Base::IOError if an I/O error occurred.
-			 */
-			virtual void close() {}
+            /**
+             * \brief Writes format dependent data (if required) to mark the end of output.
+             * \throw Base::IOError if an I/O error occurred.
+             */
+            virtual void close() {}
 
-			/**
-			 * \brief Returns a pointer whose value indicates the error state of the writer.
-			 *
-			 * The operator allows to write expressions like:
-			 * \code
-			 * if (writer) { ... 
-			 * if (writer.write(...)) { ...
-			 * \endcode
-			 *
-			 * \return A non-\e null pointer if the writer is in a good state, a \e null pointer otherwise.
-			 * \note The returned pointer is not meant to be dereferenced, it is just a state indicator.
-			 * \see operator!()
-			 */
-			virtual operator const void*() const = 0;
+            /**
+             * \brief Returns a pointer whose value indicates the error state of the writer.
+             *
+             * The operator allows to write expressions like:
+             * \code
+             * if (writer) { ... 
+             * if (writer.write(...)) { ...
+             * \endcode
+             *
+             * \return A non-\e null pointer if the writer is in a good state, a \e null pointer otherwise.
+             * \note The returned pointer is not meant to be dereferenced, it is just a state indicator.
+             * \see operator!()
+             */
+            virtual operator const void*() const = 0;
 
-			/**
-			 * \brief Tells whether the writer is in a bad state.
-			 *
-			 * The operator allows to write expressions like:
-			 * \code
-			 * if (!writer) { ... 
-			 * if (!writer.write(...)) { ...
-			 * \endcode
-			 *
-			 * \return \c false if the writer is in a good state, and \c true otherwise.
-			 * \see operator const void*()
-			 */
-			virtual bool operator!() const = 0;
+            /**
+             * \brief Tells whether the writer is in a bad state.
+             *
+             * The operator allows to write expressions like:
+             * \code
+             * if (!writer) { ... 
+             * if (!writer.write(...)) { ...
+             * \endcode
+             *
+             * \return \c false if the writer is in a good state, and \c true otherwise.
+             * \see operator const void*()
+             */
+            virtual bool operator!() const = 0;
 
-		protected:
-			/**
-			 * \brief Assignment operator.
-			 * \param writer The \c %DataWriter instance to copy.
-			 * \return A reference to itself.
-			 */
-			DataWriter& operator=(const DataWriter& writer);
-		};
+        protected:
+            /**
+             * \brief Assignment operator.
+             * \param writer The \c %DataWriter instance to copy.
+             * \return A reference to itself.
+             */
+            DataWriter& operator=(const DataWriter& writer);
+        };
 
-		/**
-		 * \brief An output operator that outputs the data object \a obj by means of the Base::DataWriter instance 
-		 *        \a writer.
-		 * \param writer The Base::DataWriter instance to use for data output.
-		 * \param obj The object storing the data to write.
-		 * \return A reference to \a writer.
-		 * \throw Base::IOError if an I/O error occurred.
-		 */
-		template <typename T>
-		DataWriter<T>& operator<<(DataWriter<T>& writer, const T& obj);
-	}
+        /**
+         * \brief An output operator that outputs the data object \a obj by means of the Base::DataWriter instance 
+         *        \a writer.
+         * \param writer The Base::DataWriter instance to use for data output.
+         * \param obj The object storing the data to write.
+         * \return A reference to \a writer.
+         * \throw Base::IOError if an I/O error occurred.
+         */
+        template <typename T>
+        DataWriter<T>& operator<<(DataWriter<T>& writer, const T& obj);
+    }
 }
 
 
@@ -144,12 +144,12 @@ namespace CDPL
 template <typename T>
 CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const DataWriter& writer)
 {
-	if (this == &writer)
-		return *this;
+    if (this == &writer)
+        return *this;
 
-	DataIOBase::operator=(writer);
+    DataIOBase::operator=(writer);
 
-	return *this;
+    return *this;
 }
 
 // \cond DOC_IMPL_DETAILS
@@ -157,7 +157,7 @@ CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const DataWriter
 template <typename T>
 CDPL::Base::DataWriter<T>& CDPL::Base::operator<<(DataWriter<T>& writer, const T& obj)
 {
-	return writer.write(obj);
+    return writer.write(obj);
 }
 
 // \endcond

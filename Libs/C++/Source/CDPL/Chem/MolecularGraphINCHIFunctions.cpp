@@ -39,39 +39,39 @@ using namespace CDPL;
 
 int Chem::generateINCHI(const MolecularGraph& molgraph, std::string& inchi, const std::string& options, std::size_t dim)
 {
-	std::ostringstream oss;
-	INCHIMolecularGraphWriter inchi_writer(oss);
+    std::ostringstream oss;
+    INCHIMolecularGraphWriter inchi_writer(oss);
 
-	setINCHIOutputOptionsParameter(inchi_writer, options);
-	setCoordinatesDimensionParameter(inchi_writer, dim);
-	setRecordSeparatorParameter(inchi_writer, "");
+    setINCHIOutputOptionsParameter(inchi_writer, options);
+    setCoordinatesDimensionParameter(inchi_writer, dim);
+    setRecordSeparatorParameter(inchi_writer, "");
 
-	if (!inchi_writer.write(molgraph))
-		return inchi_writer.getReturnCode();
+    if (!inchi_writer.write(molgraph))
+        return inchi_writer.getReturnCode();
 
-	inchi = oss.str();
+    inchi = oss.str();
 
-	return inchi_writer.getReturnCode();
+    return inchi_writer.getReturnCode();
 }
 
 int Chem::generateINCHIKey(const MolecularGraph& molgraph, std::string& inchi_key)
 {
-	std::ostringstream oss;
-	INCHIMolecularGraphWriter inchi_writer(oss);
+    std::ostringstream oss;
+    INCHIMolecularGraphWriter inchi_writer(oss);
 
-	setCoordinatesDimensionParameter(inchi_writer, 0);
-	setRecordSeparatorParameter(inchi_writer, "");
+    setCoordinatesDimensionParameter(inchi_writer, 0);
+    setRecordSeparatorParameter(inchi_writer, "");
 
-	if (!inchi_writer.write(molgraph))
-		return inchi_writer.getReturnCode();
+    if (!inchi_writer.write(molgraph))
+        return inchi_writer.getReturnCode();
 
-	char inchi_key_cstr[29];
-	int ret_code = GetINCHIKeyFromINCHI(oss.str().c_str(), 0, 0, inchi_key_cstr, 0, 0);
+    char inchi_key_cstr[29];
+    int ret_code = GetINCHIKeyFromINCHI(oss.str().c_str(), 0, 0, inchi_key_cstr, 0, 0);
 
-	if (ret_code != INCHIKEY_OK)
-		return INCHIReturnCode::ERROR;
+    if (ret_code != INCHIKEY_OK)
+        return INCHIReturnCode::ERROR;
 
-	inchi_key = inchi_key_cstr;
+    inchi_key = inchi_key_cstr;
 
-	return INCHIReturnCode::OKAY;
+    return INCHIReturnCode::OKAY;
 }

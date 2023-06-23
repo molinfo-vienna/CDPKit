@@ -38,100 +38,100 @@ using namespace CDPL;
 
 
 Pharm::PSDMoleculeReader::PSDMoleculeReader(std::istream& is): 
-	recordIndex(0), state(false)
+    recordIndex(0), state(false)
 {
-	Util::FileRemover tmp_file_rem(Util::genCheckedTempFilePath());
+    Util::FileRemover tmp_file_rem(Util::genCheckedTempFilePath());
 
-	try {
-		std::ofstream tmp_fs(tmp_file_rem.getPath().c_str());
+    try {
+        std::ofstream tmp_fs(tmp_file_rem.getPath().c_str());
 
-		boost::iostreams::copy(is, tmp_fs);
+        boost::iostreams::copy(is, tmp_fs);
 
-		if (!is.good() || !tmp_fs.good())
-			throw Base::IOError("copying input data failed");
+        if (!is.good() || !tmp_fs.good())
+            throw Base::IOError("copying input data failed");
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMoleculeReader: could not create temporary database file: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMoleculeReader: could not create temporary database file: ") + e.what());
+    }
 
-	try {
+    try {
         accessor.open(tmp_file_rem.getPath());
 
-		numRecords = accessor.getNumMolecules();
-		state = true;
+        numRecords = accessor.getNumMolecules();
+        state = true;
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMoleculeReader: could not open database: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMoleculeReader: could not open database: ") + e.what());
+    }
 }
 
 Pharm::PSDMoleculeReader::PSDMoleculeReader(const std::string& file_name):
-	recordIndex(0), state(false)
+    recordIndex(0), state(false)
 {
-	try {
-		accessor.open(file_name);
+    try {
+        accessor.open(file_name);
 
-		numRecords = accessor.getNumMolecules();
-		state = true;
+        numRecords = accessor.getNumMolecules();
+        state = true;
 
-	} catch (const std::exception& e) {
-		throw Base::IOError(std::string("PSDMoleculeReader: could not open database: ") + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError(std::string("PSDMoleculeReader: could not open database: ") + e.what());
+    }
 }
 
 Pharm::PSDMoleculeReader::~PSDMoleculeReader() 
 {
-	try { accessor.close(); } catch (...) {}
+    try { accessor.close(); } catch (...) {}
 }
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol, bool overwrite)
 {
-	state = false;
+    state = false;
 
-	if (recordIndex >= numRecords)
-		return *this;
+    if (recordIndex >= numRecords)
+        return *this;
 
-	try {
-		accessor.getMolecule(recordIndex, mol, overwrite);
+    try {
+        accessor.getMolecule(recordIndex, mol, overwrite);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PSDMoleculeReader: while reading record " + std::to_string(recordIndex) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PSDMoleculeReader: while reading record " + std::to_string(recordIndex) + 
+                            ": " + e.what());
+    }
 
-	recordIndex++;
-	state = true;
+    recordIndex++;
+    state = true;
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
     return *this;
 }
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(std::size_t idx, Chem::Molecule& mol, bool overwrite)
 {
-	setRecordIndex(idx);
+    setRecordIndex(idx);
 
-	return read(mol, overwrite);
+    return read(mol, overwrite);
 }
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::skip()
 {
- 	state = false;
+     state = false;
 
-	if (recordIndex >= numRecords)
-		return *this;
+    if (recordIndex >= numRecords)
+        return *this;
 
-	recordIndex++;
-	state = true;
+    recordIndex++;
+    state = true;
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 bool Pharm::PSDMoleculeReader::hasMoreData()
 {
-	return (recordIndex < numRecords);
+    return (recordIndex < numRecords);
 }
 
 std::size_t Pharm::PSDMoleculeReader::getRecordIndex() const
@@ -141,15 +141,15 @@ std::size_t Pharm::PSDMoleculeReader::getRecordIndex() const
 
 void Pharm::PSDMoleculeReader::setRecordIndex(std::size_t idx)
 {
-	if (idx >= numRecords)
-		throw Base::IndexError("StreamDataReader: record index out of bounds");
+    if (idx >= numRecords)
+        throw Base::IndexError("StreamDataReader: record index out of bounds");
 
-	recordIndex = idx;
+    recordIndex = idx;
 }
 
 std::size_t Pharm::PSDMoleculeReader::getNumRecords()
 {
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
     return numRecords;
 }
 

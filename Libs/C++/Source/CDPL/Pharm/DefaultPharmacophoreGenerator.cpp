@@ -52,14 +52,14 @@ Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::
 
 void Pharm::DefaultPharmacophoreGenerator::init(int config)
 {
-	setFeatureGenerator(FeatureType::HYDROPHOBIC, FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator()));
-	setFeatureGenerator(FeatureType::AROMATIC, FeatureGenerator::SharedPointer(new AromaticFeatureGenerator()));
+    setFeatureGenerator(FeatureType::HYDROPHOBIC, FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator()));
+    setFeatureGenerator(FeatureType::AROMATIC, FeatureGenerator::SharedPointer(new AromaticFeatureGenerator()));
     setFeatureGenerator(FeatureType::H_BOND_ACCEPTOR, FeatureGenerator::SharedPointer(new HBondAcceptorFeatureGenerator()));
-	setFeatureGenerator(FeatureType::HALOGEN_BOND_DONOR, FeatureGenerator::SharedPointer(new XBondDonorFeatureGenerator()));
+    setFeatureGenerator(FeatureType::HALOGEN_BOND_DONOR, FeatureGenerator::SharedPointer(new XBondDonorFeatureGenerator()));
     setFeatureGenerator(FeatureType::HALOGEN_BOND_ACCEPTOR, FeatureGenerator::SharedPointer(new XBondAcceptorFeatureGenerator()));
 
-	applyConfiguration(config);
-	
+    applyConfiguration(config);
+    
     enableFeature(FeatureType::HYDROPHOBIC, true);
     enableFeature(FeatureType::AROMATIC, true);
     enableFeature(FeatureType::NEGATIVE_IONIZABLE, true);
@@ -71,7 +71,7 @@ void Pharm::DefaultPharmacophoreGenerator::init(int config)
 
 void Pharm::DefaultPharmacophoreGenerator::applyConfiguration(int config)
 {
-	setFeatureGenerator(FeatureType::NEGATIVE_IONIZABLE, FeatureGenerator::SharedPointer(new NegIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
-	setFeatureGenerator(FeatureType::POSITIVE_IONIZABLE, FeatureGenerator::SharedPointer(new PosIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
-	setFeatureGenerator(FeatureType::H_BOND_DONOR, FeatureGenerator::SharedPointer(new HBondDonorFeatureGenerator(config & STATIC_H_DONORS)));
+    setFeatureGenerator(FeatureType::NEGATIVE_IONIZABLE, FeatureGenerator::SharedPointer(new NegIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
+    setFeatureGenerator(FeatureType::POSITIVE_IONIZABLE, FeatureGenerator::SharedPointer(new PosIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
+    setFeatureGenerator(FeatureType::H_BOND_DONOR, FeatureGenerator::SharedPointer(new HBondDonorFeatureGenerator(config & STATIC_H_DONORS)));
 }

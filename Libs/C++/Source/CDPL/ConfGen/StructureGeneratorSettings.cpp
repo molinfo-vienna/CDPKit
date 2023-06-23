@@ -34,161 +34,161 @@ using namespace CDPL;
 
 
 ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
-	generationMode(StructureGenerationMode::AUTO), fromScratch(true), sampleTolRanges(true), 
-	timeout(20 * 60 * 1000), fragModeForceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), 
-	dgModeForceFieldType(ForceFieldType::MMFF94S), strictParam(true), 
-	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
-	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(50), convCheckCycleSize(10), 
-	mcRotorBondCountThresh(10)
+    generationMode(StructureGenerationMode::AUTO), fromScratch(true), sampleTolRanges(true), 
+    timeout(20 * 60 * 1000), fragModeForceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), 
+    dgModeForceFieldType(ForceFieldType::MMFF94S), strictParam(true), 
+    dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
+    distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
+    maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(50), convCheckCycleSize(10), 
+    mcRotorBondCountThresh(10)
 {}
 
 void ConfGen::StructureGeneratorSettings::setGenerationMode(unsigned int mode)
 {
-	generationMode = mode;
+    generationMode = mode;
 }
 
 unsigned int ConfGen::StructureGeneratorSettings::getGenerationMode() const
 {
-	return generationMode;
+    return generationMode;
 }
 
 void ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch(bool generate)
 {
-	fromScratch = generate;
+    fromScratch = generate;
 }
-	
+    
 bool ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch() const
 {
-	return fromScratch;
+    return fromScratch;
 }
 
 void ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges(bool sample)
 {
-	sampleTolRanges = sample;
+    sampleTolRanges = sample;
 }
-				
+                
 bool ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges() const
 {
-	return sampleTolRanges;
+    return sampleTolRanges;
 }
 
 void ConfGen::StructureGeneratorSettings::setTimeout(std::size_t mil_secs)
 {
-	timeout = mil_secs;
+    timeout = mil_secs;
 }
 
 std::size_t ConfGen::StructureGeneratorSettings::getTimeout() const
 {
-	return timeout;
+    return timeout;
 }
-		
+        
 void ConfGen::StructureGeneratorSettings::setFragmentModeForceFieldType(unsigned int type)
 {
-	fragModeForceFieldType = type;
+    fragModeForceFieldType = type;
 }
-	    
+        
 unsigned int ConfGen::StructureGeneratorSettings::getFragmentModeForceFieldType() const
 {
-	return fragModeForceFieldType;
+    return fragModeForceFieldType;
 }
 
 void ConfGen::StructureGeneratorSettings::setDGModeForceFieldType(unsigned int type)
 {
-	dgModeForceFieldType = type;
+    dgModeForceFieldType = type;
 }
-		    
+            
 unsigned int ConfGen::StructureGeneratorSettings::getDGModeForceFieldType() const
 {
-	return dgModeForceFieldType;
+    return dgModeForceFieldType;
 }
     
 void ConfGen::StructureGeneratorSettings::strictForceFieldParameterization(bool strict)
 {
-	strictParam = strict;
+    strictParam = strict;
 }
 
 bool ConfGen::StructureGeneratorSettings::strictForceFieldParameterization() const
 {
-	return strictParam;
+    return strictParam;
 }
 
 void ConfGen::StructureGeneratorSettings::setDielectricConstant(double de_const)
 {
-	dielectricConst = de_const;
+    dielectricConst = de_const;
 }
 
 double ConfGen::StructureGeneratorSettings::getDielectricConstant() const
 {
-	return dielectricConst;
+    return dielectricConst;
 }
 
 void ConfGen::StructureGeneratorSettings::setDistanceExponent(double exponent)
 {
-	distExponent = exponent;
+    distExponent = exponent;
 }
 
 double ConfGen::StructureGeneratorSettings::getDistanceExponent() const
 {
-	return distExponent;
+    return distExponent;
 }
 
 void ConfGen::StructureGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)
 {
-	maxNumRefIters = max_iter;
+    maxNumRefIters = max_iter;
 }
 
 std::size_t ConfGen::StructureGeneratorSettings::getMaxNumRefinementIterations() const
 {
-	return maxNumRefIters;
+    return maxNumRefIters;
 }
 
 void ConfGen::StructureGeneratorSettings::setRefinementTolerance(double tol)
 {
-	refTolerance = tol;
+    refTolerance = tol;
 }
 
 double ConfGen::StructureGeneratorSettings::getRefinementTolerance() const
 {
-	return refTolerance;
+    return refTolerance;
 }
 
 void ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers(std::size_t max_num)
 {
-	maxNumSampledConfs = max_num;
+    maxNumSampledConfs = max_num;
 }
 
 std::size_t ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers() const
 {
-	return maxNumSampledConfs;
+    return maxNumSampledConfs;
 }
 
 void ConfGen::StructureGeneratorSettings::setConvergenceCheckCycleSize(std::size_t size)
 {
-	convCheckCycleSize = size;
+    convCheckCycleSize = size;
 }
 
 std::size_t ConfGen::StructureGeneratorSettings::getConvergenceCheckCycleSize() const
 {
-	return convCheckCycleSize;
+    return convCheckCycleSize;
 }
 
 void ConfGen::StructureGeneratorSettings::setMacrocycleRotorBondCountThreshold(std::size_t min_count)
 {
-	mcRotorBondCountThresh = min_count;
+    mcRotorBondCountThresh = min_count;
 }
 
 std::size_t ConfGen::StructureGeneratorSettings::getMacrocycleRotorBondCountThreshold() const
 {
-	return mcRotorBondCountThresh;
+    return mcRotorBondCountThresh;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::StructureGeneratorSettings::getFragmentBuildSettings()
 {
-	return fragBuildSettings;
+    return fragBuildSettings;
 }
 
 const ConfGen::FragmentConformerGeneratorSettings& ConfGen::StructureGeneratorSettings::getFragmentBuildSettings() const
 {
-	return fragBuildSettings;
+    return fragBuildSettings;
 }

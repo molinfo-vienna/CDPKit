@@ -36,37 +36,37 @@ namespace ChOX { class MainWindow; }
 namespace ChOX
 {
 
-	class MainWindowList : public QObject
-	{
+    class MainWindowList : public QObject
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-		typedef std::vector<MainWindow*> WindowList;
+        typedef std::vector<MainWindow*> WindowList;
 
-	public:
-		typedef WindowList::const_iterator ConstIterator;
+    public:
+        typedef WindowList::const_iterator ConstIterator;
 
-		static MainWindowList& instance();
+        static MainWindowList& instance();
 
-		void addWindow(MainWindow*);
+        void addWindow(MainWindow*);
 
-		ConstIterator getBegin() const;
-		ConstIterator getEnd() const;
+        ConstIterator getBegin() const;
+        ConstIterator getEnd() const;
 
-		MainWindow* getWindow(int) const;
+        MainWindow* getWindow(int) const;
 
-		int getNumWindows() const;
+        int getNumWindows() const;
 
-	private slots:
-		void removeWindow(QObject*);
+    private slots:
+        void removeWindow(QObject*);
 
-	private:
-		MainWindowList();
+    private:
+        MainWindowList();
 
-		~MainWindowList();
+        ~MainWindowList();
 
-		WindowList windows;
-	};
+        WindowList windows;
+    };
 }
 
 #endif // CHOX_MAINWINDOWLIST_HPP

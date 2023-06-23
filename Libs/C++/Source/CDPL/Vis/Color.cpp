@@ -54,66 +54,66 @@ Vis::Color::Color(): red(0.0), green(0.0), blue(0.0), alpha(0.0) {}
 
 Vis::Color::Color(double red, double green, double blue, double alpha)
 {
-	setRed(red);
-	setGreen(green);
-	setBlue(blue);
-	setAlpha(alpha);
+    setRed(red);
+    setGreen(green);
+    setBlue(blue);
+    setAlpha(alpha);
 } 
 
 void Vis::Color::setRed(double red)
 {
-	this->red = (red < 0.0 ? 0.0 : red > 1.0 ? 1.0 : red);
+    this->red = (red < 0.0 ? 0.0 : red > 1.0 ? 1.0 : red);
 }
 
 double Vis::Color::getRed() const
 {
-	return red;
+    return red;
 }
 
 void Vis::Color::setGreen(double green)
 {
-	this->green = (green < 0.0 ? 0.0 : green > 1.0 ? 1.0 : green);
+    this->green = (green < 0.0 ? 0.0 : green > 1.0 ? 1.0 : green);
 }
 
 double Vis::Color::getGreen() const
 {
-	return green;
+    return green;
 }
 
 void Vis::Color::setBlue(double blue)
 {
-	this->blue = (blue < 0.0 ? 0.0 : blue > 1.0 ? 1.0 : blue);
+    this->blue = (blue < 0.0 ? 0.0 : blue > 1.0 ? 1.0 : blue);
 }
 
 double Vis::Color::getBlue() const
 {
-	return blue;
+    return blue;
 }
 
 void Vis::Color::setAlpha(double alpha)
 {
-	this->alpha = (alpha < 0.0 ? 0.0 : alpha > 1.0 ? 1.0 : alpha);
+    this->alpha = (alpha < 0.0 ? 0.0 : alpha > 1.0 ? 1.0 : alpha);
 }
 
 double Vis::Color::getAlpha() const
 {
-	return alpha;
+    return alpha;
 }
 
 void Vis::Color::setRGBA(double red, double green, double blue, double alpha)
 {
-	this->red = (red < 0.0 ? 0.0 : red > 1.0 ? 1.0 : red);
-	this->green = (green < 0.0 ? 0.0 : green > 1.0 ? 1.0 : green);
-	this->blue = (blue < 0.0 ? 0.0 : blue > 1.0 ? 1.0 : blue);
-	this->alpha = (alpha < 0.0 ? 0.0 : alpha > 1.0 ? 1.0 : alpha);
+    this->red = (red < 0.0 ? 0.0 : red > 1.0 ? 1.0 : red);
+    this->green = (green < 0.0 ? 0.0 : green > 1.0 ? 1.0 : green);
+    this->blue = (blue < 0.0 ? 0.0 : blue > 1.0 ? 1.0 : blue);
+    this->alpha = (alpha < 0.0 ? 0.0 : alpha > 1.0 ? 1.0 : alpha);
 }
 
 bool Vis::Color::operator==(const Color& color) const
 {
-	return (red == color.red && blue == color.blue && green == color.green && alpha == color.alpha);
+    return (red == color.red && blue == color.blue && green == color.green && alpha == color.alpha);
 }
 
 bool Vis::Color::operator!=(const Color& color) const
 {
-	return !operator==(color);
+    return !operator==(color);
 }

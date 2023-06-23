@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief SulfenicAcidTautomerizationRule.
-		 */
-		class CDPL_CHEM_API SulfenicAcidTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief SulfenicAcidTautomerizationRule.
+         */
+        class CDPL_CHEM_API SulfenicAcidTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			SulfenicAcidTautomerization();
-		};
+          public:
+            SulfenicAcidTautomerization();
+        };
     }
 }
 

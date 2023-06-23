@@ -32,14 +32,14 @@ namespace CDPL
 
     namespace Chem 
     {
-	
-		class AtomContainer;
+    
+        class AtomContainer;
     }
     
     namespace Internal
     {
 
-		inline std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
+        inline std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
     }
 }
 

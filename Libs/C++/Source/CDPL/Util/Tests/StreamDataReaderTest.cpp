@@ -35,165 +35,165 @@ class TestStringReader : public CDPL::Util::StreamDataReader<std::string, TestSt
 {
 
 public:
-	typedef std::string DataType;
+    typedef std::string DataType;
 
-	TestStringReader(std::istream& is): CDPL::Util::StreamDataReader<std::string, TestStringReader>(is) {}
+    TestStringReader(std::istream& is): CDPL::Util::StreamDataReader<std::string, TestStringReader>(is) {}
 
 private:
-	friend class CDPL::Util::StreamDataReader<std::string, TestStringReader>;
+    friend class CDPL::Util::StreamDataReader<std::string, TestStringReader>;
 
-	bool readData(std::istream& is, std::string& str, bool) {
-		if (moreData(is))
-			return bool(is >> str);
+    bool readData(std::istream& is, std::string& str, bool) {
+        if (moreData(is))
+            return bool(is >> str);
 
-		return false;
-	}
+        return false;
+    }
 
-	bool skipData(std::istream& is) {
-		if (!moreData(is))
-			return false;
+    bool skipData(std::istream& is) {
+        if (!moreData(is))
+            return false;
 
-		std::string sink;
+        std::string sink;
 
-		return bool(is >> sink);
-	}
+        return bool(is >> sink);
+    }
 
-	bool moreData(std::istream& is) {
-		return bool(std::istream::sentry(is, false));
-	}
+    bool moreData(std::istream& is) {
+        return bool(std::istream::sentry(is, false));
+    }
 };
 
 struct TestProgressCallback
 {
 
-	TestProgressCallback(): calls(0) {}
+    TestProgressCallback(): calls(0) {}
 
-	void operator()(const CDPL::Base::DataIOBase&, double) {
-		calls++;
-	}
+    void operator()(const CDPL::Base::DataIOBase&, double) {
+        calls++;
+    }
 
-	std::size_t calls;
+    std::size_t calls;
 };
 
 
 BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
 {
-	using namespace CDPL;
-	using namespace Util;
+    using namespace CDPL;
+    using namespace Util;
 
-	std::string record;
-	std::istringstream is1("Record#1 Record#2 \nRecord#3 Record#4   ");
+    std::string record;
+    std::istringstream is1("Record#1 Record#2 \nRecord#3 Record#4   ");
 
-	TestStringReader reader1(is1);
-	TestProgressCallback callback;
+    TestStringReader reader1(is1);
+    TestProgressCallback callback;
 
-	reader1.registerIOCallback(std::ref(callback));
+    reader1.registerIOCallback(std::ref(callback));
 
-	BOOST_CHECK(reader1.getNumRecords() == 4);
-	
-	BOOST_CHECK(callback.calls == 5);
+    BOOST_CHECK(reader1.getNumRecords() == 4);
+    
+    BOOST_CHECK(callback.calls == 5);
 
-	BOOST_CHECK(reader1.read(record));
-	BOOST_CHECK(record == "Record#1");
+    BOOST_CHECK(reader1.read(record));
+    BOOST_CHECK(record == "Record#1");
 
-	BOOST_CHECK(callback.calls == 6);
+    BOOST_CHECK(callback.calls == 6);
 
-	BOOST_CHECK(reader1.read(record));
-	BOOST_CHECK(record == "Record#2");
+    BOOST_CHECK(reader1.read(record));
+    BOOST_CHECK(record == "Record#2");
 
-	BOOST_CHECK(callback.calls == 7);
+    BOOST_CHECK(callback.calls == 7);
 
-	BOOST_CHECK(reader1.getRecordIndex() == 2);
+    BOOST_CHECK(reader1.getRecordIndex() == 2);
 
-	BOOST_CHECK(reader1.skip());
+    BOOST_CHECK(reader1.skip());
 
-	BOOST_CHECK(callback.calls == 8);
+    BOOST_CHECK(callback.calls == 8);
 
-	BOOST_CHECK(reader1.getRecordIndex() == 3);
+    BOOST_CHECK(reader1.getRecordIndex() == 3);
 
-	BOOST_CHECK(reader1.hasMoreData());
+    BOOST_CHECK(reader1.hasMoreData());
 
-	BOOST_CHECK(reader1.read(record));
-	BOOST_CHECK(record == "Record#4");
+    BOOST_CHECK(reader1.read(record));
+    BOOST_CHECK(record == "Record#4");
 
-	BOOST_CHECK(callback.calls == 9);
+    BOOST_CHECK(callback.calls == 9);
 
-	BOOST_CHECK(reader1.getRecordIndex() == 4);
+    BOOST_CHECK(reader1.getRecordIndex() == 4);
 
-	BOOST_CHECK(!reader1.hasMoreData());
-	BOOST_CHECK(!reader1.read(record));
-	BOOST_CHECK(!reader1.skip());
+    BOOST_CHECK(!reader1.hasMoreData());
+    BOOST_CHECK(!reader1.read(record));
+    BOOST_CHECK(!reader1.skip());
 
-	BOOST_CHECK(reader1.getRecordIndex() == 4);
+    BOOST_CHECK(reader1.getRecordIndex() == 4);
 
-	reader1.setRecordIndex(2);
+    reader1.setRecordIndex(2);
 
-	BOOST_CHECK(reader1.getRecordIndex() == 2);
+    BOOST_CHECK(reader1.getRecordIndex() == 2);
 
-	BOOST_CHECK(reader1.read(record));
-	BOOST_CHECK(record == "Record#3");
+    BOOST_CHECK(reader1.read(record));
+    BOOST_CHECK(record == "Record#3");
 
-	BOOST_CHECK(reader1.getRecordIndex() == 3);
+    BOOST_CHECK(reader1.getRecordIndex() == 3);
 
-	BOOST_CHECK(reader1.read(1, record));
+    BOOST_CHECK(reader1.read(1, record));
 
-	BOOST_CHECK(record == "Record#2");
+    BOOST_CHECK(record == "Record#2");
 
-	BOOST_CHECK(reader1.getRecordIndex() == 2);
+    BOOST_CHECK(reader1.getRecordIndex() == 2);
 
-	BOOST_CHECK(reader1.read(record));
-	BOOST_CHECK(record == "Record#3");
+    BOOST_CHECK(reader1.read(record));
+    BOOST_CHECK(record == "Record#3");
 
-	BOOST_CHECK(reader1.getRecordIndex() == 3);
+    BOOST_CHECK(reader1.getRecordIndex() == 3);
 
-	BOOST_CHECK_THROW(reader1.read(5, record), Base::IndexError);
+    BOOST_CHECK_THROW(reader1.read(5, record), Base::IndexError);
 
-	BOOST_CHECK(reader1.getRecordIndex() == 3);
+    BOOST_CHECK(reader1.getRecordIndex() == 3);
 
-	BOOST_CHECK(reader1.hasMoreData());
+    BOOST_CHECK(reader1.hasMoreData());
 
-	BOOST_CHECK(reader1.read(record));
-	BOOST_CHECK(record == "Record#4");
+    BOOST_CHECK(reader1.read(record));
+    BOOST_CHECK(record == "Record#4");
 
-	BOOST_CHECK(!reader1.hasMoreData());
-	BOOST_CHECK(!reader1.read(record));
-	BOOST_CHECK(!reader1);
-
-// -------------
-
-	std::istringstream is2("\n  Record#1");
-
-	TestStringReader reader2(is2);
-
-	BOOST_CHECK(reader2.read(record));
-	BOOST_CHECK(record == "Record#1");
-
-	BOOST_CHECK(!reader2.hasMoreData());
-	BOOST_CHECK(!reader2.read(record));
-	BOOST_CHECK(!reader2);
-
-	BOOST_CHECK(reader2.getRecordIndex() == 1);
-	
-	BOOST_CHECK(reader2.read(0, record));
-	BOOST_CHECK(record == "Record#1");
-
-	BOOST_CHECK(reader2.getRecordIndex() == 1);
-
-	BOOST_CHECK(reader2.getNumRecords() == 1);
+    BOOST_CHECK(!reader1.hasMoreData());
+    BOOST_CHECK(!reader1.read(record));
+    BOOST_CHECK(!reader1);
 
 // -------------
 
-	std::istringstream is3("");
+    std::istringstream is2("\n  Record#1");
 
-	TestStringReader reader3(is3);
+    TestStringReader reader2(is2);
 
-	BOOST_CHECK(reader3.getRecordIndex() == 0);
+    BOOST_CHECK(reader2.read(record));
+    BOOST_CHECK(record == "Record#1");
 
-	BOOST_CHECK(!reader3.skip());
-	BOOST_CHECK(!reader3.read(record));
-	BOOST_CHECK(!reader3.hasMoreData());
-	BOOST_CHECK(!reader3);
+    BOOST_CHECK(!reader2.hasMoreData());
+    BOOST_CHECK(!reader2.read(record));
+    BOOST_CHECK(!reader2);
 
-	BOOST_CHECK(reader3.getNumRecords() == 0);
+    BOOST_CHECK(reader2.getRecordIndex() == 1);
+    
+    BOOST_CHECK(reader2.read(0, record));
+    BOOST_CHECK(record == "Record#1");
+
+    BOOST_CHECK(reader2.getRecordIndex() == 1);
+
+    BOOST_CHECK(reader2.getNumRecords() == 1);
+
+// -------------
+
+    std::istringstream is3("");
+
+    TestStringReader reader3(is3);
+
+    BOOST_CHECK(reader3.getRecordIndex() == 0);
+
+    BOOST_CHECK(!reader3.skip());
+    BOOST_CHECK(!reader3.read(record));
+    BOOST_CHECK(!reader3.hasMoreData());
+    BOOST_CHECK(!reader3);
+
+    BOOST_CHECK(reader3.getNumRecords() == 0);
 }
 

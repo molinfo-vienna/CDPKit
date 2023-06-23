@@ -36,78 +36,78 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
+    namespace Chem 
+    {
 
-		class BasicMolecule;
-		class BasicAtom;
+        class BasicMolecule;
+        class BasicAtom;
 
-		/**
-		 * \brief BasicBond.
-		 */
-		class CDPL_CHEM_API BasicBond : public Bond
-		{
+        /**
+         * \brief BasicBond.
+         */
+        class CDPL_CHEM_API BasicBond : public Bond
+        {
 
-			friend class BasicMolecule;
-			friend class BasicAtom;
+            friend class BasicMolecule;
+            friend class BasicAtom;
 
-		public:
-			std::size_t getNumAtoms() const;
+        public:
+            std::size_t getNumAtoms() const;
 
-			const Molecule& getMolecule() const;
+            const Molecule& getMolecule() const;
 
-			Molecule& getMolecule();
+            Molecule& getMolecule();
 
-			const Atom& getBegin() const;
+            const Atom& getBegin() const;
 
-			Atom& getBegin();
+            Atom& getBegin();
 
-			const Atom& getEnd() const;
+            const Atom& getEnd() const;
 
-			Atom& getEnd();
+            Atom& getEnd();
 
-			const Atom& getAtom(std::size_t idx) const;
+            const Atom& getAtom(std::size_t idx) const;
 
-			Atom& getAtom(std::size_t idx);
+            Atom& getAtom(std::size_t idx);
 
-			bool containsAtom(const Atom& atom) const;
-		
-			std::size_t getAtomIndex(const Atom& atom) const;
-		
-			const Atom& getNeighbor(const Atom& atom) const;
-	
-			Atom& getNeighbor(const Atom& atom);
+            bool containsAtom(const Atom& atom) const;
+        
+            std::size_t getAtomIndex(const Atom& atom) const;
+        
+            const Atom& getNeighbor(const Atom& atom) const;
+    
+            Atom& getNeighbor(const Atom& atom);
 
-			std::size_t getIndex() const;
+            std::size_t getIndex() const;
 
-			void orderAtoms(const AtomCompareFunction& func);
+            void orderAtoms(const AtomCompareFunction& func);
 
-			/**
-			 * \brief Assignment operator that replaces the current set of properties with the properties of \a bond;
-			 * \param bond The bond whose properties get copied.
-			 * \return A reference to itself.
-			 */
-			BasicBond& operator=(const BasicBond& bond);
+            /**
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a bond;
+             * \param bond The bond whose properties get copied.
+             * \return A reference to itself.
+             */
+            BasicBond& operator=(const BasicBond& bond);
 
-			using Bond::operator=;
+            using Bond::operator=;
 
-		private:
-			BasicBond(BasicMolecule* mol);
+        private:
+            BasicBond(BasicMolecule* mol);
 
-			BasicBond(const BasicBond& bond);
+            BasicBond(const BasicBond& bond);
 
-			~BasicBond();
+            ~BasicBond();
 
-			void setIndex(std::size_t idx);
+            void setIndex(std::size_t idx);
 
-			void setBegin(BasicAtom& atom);
-			void setEnd(BasicAtom& atom);
+            void setBegin(BasicAtom& atom);
+            void setEnd(BasicAtom& atom);
 
-			BasicMolecule* molecule;
-			std::size_t    index;
-			BasicAtom*     atoms[2];
-		};
-	}
+            BasicMolecule* molecule;
+            std::size_t    index;
+            BasicAtom*     atoms[2];
+        };
+    }
 }
 
 #endif // CDPL_CHEM_BASICBOND_HPP

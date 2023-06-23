@@ -32,22 +32,22 @@ class QPainter;
 namespace ChOX
 {
 
-	class Settings;
-	class DataRecordPainter;
+    class Settings;
+    class DataRecordPainter;
 
-	class DataSetPagePainter
-	{
+    class DataSetPagePainter
+    {
 
-	public:
-		DataSetPagePainter(QPainter& painter, const Settings& settings);
+    public:
+        DataSetPagePainter(QPainter& painter, const Settings& settings);
 
-		void drawGrid(double vp_width, double vp_height, int num_rows, int num_cols) const;
-		void drawRecord(int row, int column, double vp_width, double vp_height, int rec_no, DataRecordPainter&) const;
-	
-	private:
-		QPainter&       painter;
-		const Settings& settings;
-	};
+        void drawGrid(double vp_width, double vp_height, int num_rows, int num_cols) const;
+        void drawRecord(int row, int column, double vp_width, double vp_height, int rec_no, DataRecordPainter&) const;
+    
+    private:
+        QPainter&       painter;
+        const Settings& settings;
+    };
 }
 
 #endif // CHOX_DATASETPAGEPAINTER_HPP

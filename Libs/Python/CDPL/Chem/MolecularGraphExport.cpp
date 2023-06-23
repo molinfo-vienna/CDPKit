@@ -42,47 +42,47 @@
 namespace
 {
 
-	struct MolecularGraphWrapper : CDPL::Chem::MolecularGraph, boost::python::wrapper<CDPL::Chem::MolecularGraph> 
-	{
-	
-		typedef std::shared_ptr<MolecularGraphWrapper> SharedPointer;
+    struct MolecularGraphWrapper : CDPL::Chem::MolecularGraph, boost::python::wrapper<CDPL::Chem::MolecularGraph> 
+    {
+    
+        typedef std::shared_ptr<MolecularGraphWrapper> SharedPointer;
 
-		ATOMCONTAINER_IMPL()
-		BONDCONTAINER_IMPL()
+        ATOMCONTAINER_IMPL()
+        BONDCONTAINER_IMPL()
 
-		MolecularGraph::SharedPointer clone() const {
-			return this->get_override("clone")();
-		}
-	};
+        MolecularGraph::SharedPointer clone() const {
+            return this->get_override("clone")();
+        }
+    };
 }
 
 
 void CDPLPythonChem::exportMolecularGraph()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::scope scope = python::class_<MolecularGraphWrapper, MolecularGraphWrapper::SharedPointer,
-										 python::bases<Chem::AtomContainer, Chem::BondContainer, Base::PropertyContainer>,
-										 boost::noncopyable>("MolecularGraph", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def("getAtoms", &createAtomSequence<Chem::MolecularGraph>, python::arg("self"),
-			 python::with_custodian_and_ward_postcall<0, 1>())
-		.def("getBonds", &createBondSequence<Chem::MolecularGraph>, python::arg("self"),
-			 python::with_custodian_and_ward_postcall<0, 1>())
-		.def("clone", python::pure_virtual(&Chem::MolecularGraph::clone), python::arg("self"))
-		.def(AtomContainerVirtualFunctionsVisitor<MolecularGraphWrapper>())
-		.def(BondContainerVirtualFunctionsVisitor())
-		.def(AtomContainerSpecialFunctionsVisitor(true))
-		.def(BondContainerSpecialFunctionsVisitor(true))
-		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
-		.add_property("atoms", python::make_function(&createAtomSequence<Chem::MolecularGraph>,
-													 python::with_custodian_and_ward_postcall<0, 1>()))
-		.add_property("bonds", python::make_function(&createBondSequence<Chem::MolecularGraph>,
-													 python::with_custodian_and_ward_postcall<0, 1>()));
+    python::scope scope = python::class_<MolecularGraphWrapper, MolecularGraphWrapper::SharedPointer,
+                                         python::bases<Chem::AtomContainer, Chem::BondContainer, Base::PropertyContainer>,
+                                         boost::noncopyable>("MolecularGraph", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def("getAtoms", &createAtomSequence<Chem::MolecularGraph>, python::arg("self"),
+             python::with_custodian_and_ward_postcall<0, 1>())
+        .def("getBonds", &createBondSequence<Chem::MolecularGraph>, python::arg("self"),
+             python::with_custodian_and_ward_postcall<0, 1>())
+        .def("clone", python::pure_virtual(&Chem::MolecularGraph::clone), python::arg("self"))
+        .def(AtomContainerVirtualFunctionsVisitor<MolecularGraphWrapper>())
+        .def(BondContainerVirtualFunctionsVisitor())
+        .def(AtomContainerSpecialFunctionsVisitor(true))
+        .def(BondContainerSpecialFunctionsVisitor(true))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .add_property("atoms", python::make_function(&createAtomSequence<Chem::MolecularGraph>,
+                                                     python::with_custodian_and_ward_postcall<0, 1>()))
+        .add_property("bonds", python::make_function(&createBondSequence<Chem::MolecularGraph>,
+                                                     python::with_custodian_and_ward_postcall<0, 1>()));
 
-	AtomSequenceExport<Chem::MolecularGraph>("AtomSequence");
-	BondSequenceExport<Chem::MolecularGraph>("BondSequence");
+    AtomSequenceExport<Chem::MolecularGraph>("AtomSequence");
+    BondSequenceExport<Chem::MolecularGraph>("BondSequence");
 
-	python::register_ptr_to_python<Chem::MolecularGraph::SharedPointer>();
+    python::register_ptr_to_python<Chem::MolecularGraph::SharedPointer>();
 }

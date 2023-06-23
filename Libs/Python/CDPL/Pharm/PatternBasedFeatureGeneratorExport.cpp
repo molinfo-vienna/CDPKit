@@ -37,32 +37,32 @@ void CDPLPythonPharm::exportPatternBasedFeatureGenerator()
     using namespace CDPL;
 
     python::scope scope = python::class_<Pharm::PatternBasedFeatureGenerator,
-										 Pharm::PatternBasedFeatureGenerator::SharedPointer,
-										 python::bases<Pharm::FeatureGenerator>, 
-										 boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Pharm::PatternBasedFeatureGenerator&>(
-		 (python::arg("self"), python::arg("gen"))))
-	.def("addIncludePattern", &Pharm::PatternBasedFeatureGenerator::addIncludePattern, 
-	     (python::arg("self"), python::arg("pattern"), python::arg("type"), python::arg("tol"),
-	      python::arg("geom"), python::arg("length") = 1.0))
-	.def("addExcludePattern", &Pharm::PatternBasedFeatureGenerator::addExcludePattern, 
-	     (python::arg("self"), python::arg("pattern")))
-	.def("clearIncludePatterns", &Pharm::PatternBasedFeatureGenerator::clearIncludePatterns, 
-	     python::arg("self"))
-	.def("clearExcludePatterns", &Pharm::PatternBasedFeatureGenerator::clearExcludePatterns, 
-	     python::arg("self"))
-	.def("assign", &Pharm::PatternBasedFeatureGenerator::operator=, 
-	     (python::arg("self"), python::arg("gen")), python::return_self<>())
-	.def("generate", &Pharm::PatternBasedFeatureGenerator::generate,
-	     (python::arg("self"), python::arg("molgraph"), python::arg("pharm")))
-	.def("__call__", &Pharm::PatternBasedFeatureGenerator::generate,
-	     (python::arg("self"), python::arg("molgraph"), python::arg("pharm")));
+                                         Pharm::PatternBasedFeatureGenerator::SharedPointer,
+                                         python::bases<Pharm::FeatureGenerator>, 
+                                         boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Pharm::PatternBasedFeatureGenerator&>(
+         (python::arg("self"), python::arg("gen"))))
+    .def("addIncludePattern", &Pharm::PatternBasedFeatureGenerator::addIncludePattern, 
+         (python::arg("self"), python::arg("pattern"), python::arg("type"), python::arg("tol"),
+          python::arg("geom"), python::arg("length") = 1.0))
+    .def("addExcludePattern", &Pharm::PatternBasedFeatureGenerator::addExcludePattern, 
+         (python::arg("self"), python::arg("pattern")))
+    .def("clearIncludePatterns", &Pharm::PatternBasedFeatureGenerator::clearIncludePatterns, 
+         python::arg("self"))
+    .def("clearExcludePatterns", &Pharm::PatternBasedFeatureGenerator::clearExcludePatterns, 
+         python::arg("self"))
+    .def("assign", &Pharm::PatternBasedFeatureGenerator::operator=, 
+         (python::arg("self"), python::arg("gen")), python::return_self<>())
+    .def("generate", &Pharm::PatternBasedFeatureGenerator::generate,
+         (python::arg("self"), python::arg("molgraph"), python::arg("pharm")))
+    .def("__call__", &Pharm::PatternBasedFeatureGenerator::generate,
+         (python::arg("self"), python::arg("molgraph"), python::arg("pharm")));
 
-	python::enum_<Pharm::PatternBasedFeatureGenerator::PatternAtomLabelFlag>("PatternAtomLabelFlag")
-		.value("FEATURE_ATOM_FLAG", Pharm::PatternBasedFeatureGenerator::FEATURE_ATOM_FLAG)
-		.value("POS_REF_ATOM_FLAG", Pharm::PatternBasedFeatureGenerator::POS_REF_ATOM_FLAG)
-		.value("GEOM_REF_ATOM1_FLAG", Pharm::PatternBasedFeatureGenerator::GEOM_REF_ATOM1_FLAG)
-		.value("GEOM_REF_ATOM2_FLAG", Pharm::PatternBasedFeatureGenerator::GEOM_REF_ATOM2_FLAG)
-		.export_values();
+    python::enum_<Pharm::PatternBasedFeatureGenerator::PatternAtomLabelFlag>("PatternAtomLabelFlag")
+        .value("FEATURE_ATOM_FLAG", Pharm::PatternBasedFeatureGenerator::FEATURE_ATOM_FLAG)
+        .value("POS_REF_ATOM_FLAG", Pharm::PatternBasedFeatureGenerator::POS_REF_ATOM_FLAG)
+        .value("GEOM_REF_ATOM1_FLAG", Pharm::PatternBasedFeatureGenerator::GEOM_REF_ATOM1_FLAG)
+        .value("GEOM_REF_ATOM2_FLAG", Pharm::PatternBasedFeatureGenerator::GEOM_REF_ATOM2_FLAG)
+        .export_values();
 }

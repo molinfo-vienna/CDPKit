@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SMILESMolecularGraphWriter, DataFormat::SMILES> SMILESMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SMILESMolecularGraphWriter, DataFormat::SMILES> SMILESMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_SMILESMOLECULARGRAPHOUTPUTHANDLER_HPP

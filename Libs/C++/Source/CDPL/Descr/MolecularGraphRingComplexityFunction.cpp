@@ -37,17 +37,17 @@ using namespace CDPL;
 
 double Descr::calcRingComplexity(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	using namespace std::placeholders;
-	
-	const FragmentList& sssr = *getSSSR(molgraph);
+    using namespace Chem;
+    using namespace std::placeholders;
+    
+    const FragmentList& sssr = *getSSSR(molgraph);
 
-	std::size_t sum_ring_sizes = std::accumulate(sssr.getElementsBegin(), sssr.getElementsEnd(), 0, 
-												 std::bind(std::plus<std::size_t>(), _1, 
-														   std::bind(&Fragment::getNumBonds, _2)));
+    std::size_t sum_ring_sizes = std::accumulate(sssr.getElementsBegin(), sssr.getElementsEnd(), 0, 
+                                                 std::bind(std::plus<std::size_t>(), _1, 
+                                                           std::bind(&Fragment::getNumBonds, _2)));
 
-	std::size_t num_ring_atoms = MolProp::getRingAtomCount(molgraph);
-	double complexity = (num_ring_atoms == 0 ? 0.0 : double(sum_ring_sizes) / num_ring_atoms);
+    std::size_t num_ring_atoms = MolProp::getRingAtomCount(molgraph);
+    double complexity = (num_ring_atoms == 0 ? 0.0 : double(sum_ring_sizes) / num_ring_atoms);
 
-	return complexity;
+    return complexity;
 }

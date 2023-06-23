@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SMARTSReactionWriter, DataFormat::SMARTS> SMARTSReactionOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SMARTSReactionWriter, DataFormat::SMARTS> SMARTSReactionOutputHandler;    
+    }
 }
 
 #endif // CDPL_CHEM_SMARTSREACTIONOUTPUTHANDLER_HPP

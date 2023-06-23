@@ -36,7 +36,7 @@ using namespace CDPL;
 
 std::size_t MolProp::getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
 {
-	return Internal::getExplicitAtomCount(atom, molgraph, type, strict);
+    return Internal::getExplicitAtomCount(atom, molgraph, type, strict);
 }
 
 std::size_t MolProp::getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
@@ -47,63 +47,63 @@ std::size_t MolProp::getAtomCount(const Chem::Atom& atom, const Chem::MolecularG
 
 std::size_t MolProp::getExplicitChainAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
+    using namespace Chem;
+    
     std::size_t count = 0;
 
- 	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && !getRingFlag(*a_it))
-			count++;
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
+        if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && !getRingFlag(*a_it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getChainAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return (getExplicitChainAtomCount(atom, molgraph) + getImplicitHydrogenCount(atom));
+    return (getExplicitChainAtomCount(atom, molgraph) + getImplicitHydrogenCount(atom));
 }
 
 std::size_t MolProp::getRingAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	std::size_t count = 0;
+    using namespace Chem;
+    
+    std::size_t count = 0;
 
- 	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getRingFlag(*a_it))
-			count++;
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
+        if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getRingFlag(*a_it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getAromaticAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	std::size_t count = 0;
+    using namespace Chem;
+    
+    std::size_t count = 0;
 
- 	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getAromaticityFlag(*a_it))
-			count++;
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
+        if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getAromaticityFlag(*a_it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
-	return Internal::getHeavyAtomCount(atom, molgraph);
+    return Internal::getHeavyAtomCount(atom, molgraph);
 }
 
 std::size_t MolProp::getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
-	return Internal::getOrdinaryHydrogenCount(atom, molgraph, flags);
+    return Internal::getOrdinaryHydrogenCount(atom, molgraph, flags);
 }

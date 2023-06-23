@@ -37,59 +37,59 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<ConfGen::FragmentLibraryGenerator, boost::noncopyable>("FragmentLibraryGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::FragmentLibrary::SharedPointer&>((python::arg("self"), python::arg("lib"))))
-//		.def(python::init<const ConfGen::FragmentLibraryGenerator&>((python::arg("self"), python::arg("gen"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryGenerator>())
-//		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibraryGenerator::operator=), 
-//			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("setFragmentLibrary", &ConfGen::FragmentLibraryGenerator::setFragmentLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("getFragmentLibrary", &ConfGen::FragmentLibraryGenerator::getFragmentLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setAbortCallback", &ConfGen::FragmentLibraryGenerator::setAbortCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getAbortCallback", &ConfGen::FragmentLibraryGenerator::getAbortCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setTimeoutCallback", &ConfGen::FragmentLibraryGenerator::setTimeoutCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getTimeoutCallback", &ConfGen::FragmentLibraryGenerator::getTimeoutCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setLogMessageCallback", &ConfGen::FragmentLibraryGenerator::setLogMessageCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getLogMessageCallback", &ConfGen::FragmentLibraryGenerator::getLogMessageCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("process", &ConfGen::FragmentLibraryGenerator::process, 
-			 (python::arg("self"), python::arg("frag")))
-		.def("getNumGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers,
-			 python::arg("self"))
-		.def("getLibraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode,
-			 python::arg("self"))
-		.def("getSettings", 
-			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentLibraryGenerator::*)()>
-			 (&ConfGen::FragmentLibraryGenerator::getSettings), 
-			 python::arg("self"), python::return_internal_reference<>())
-		.add_property("settings", 
-					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentLibraryGenerator::*)()>
-											(&ConfGen::FragmentLibraryGenerator::getSettings),
-											python::return_internal_reference<>()))
-		.add_property("abortCallback", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getAbortCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::FragmentLibraryGenerator::setAbortCallback)
-		.add_property("timeoutCallback", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getTimeoutCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::FragmentLibraryGenerator::setTimeoutCallback)
-		.add_property("fragmentLibrary", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getFragmentLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::FragmentLibraryGenerator::setFragmentLibrary)
-		.add_property("numGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers)
-		.add_property("libraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode)
-		.add_property("logMessageCallback", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getLogMessageCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::FragmentLibraryGenerator::setLogMessageCallback);
+    python::class_<ConfGen::FragmentLibraryGenerator, boost::noncopyable>("FragmentLibraryGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ConfGen::FragmentLibrary::SharedPointer&>((python::arg("self"), python::arg("lib"))))
+//        .def(python::init<const ConfGen::FragmentLibraryGenerator&>((python::arg("self"), python::arg("gen"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryGenerator>())
+//        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibraryGenerator::operator=), 
+//             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .def("setFragmentLibrary", &ConfGen::FragmentLibraryGenerator::setFragmentLibrary, 
+             (python::arg("self"), python::arg("lib")))
+        .def("getFragmentLibrary", &ConfGen::FragmentLibraryGenerator::getFragmentLibrary, 
+             python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+        .def("setAbortCallback", &ConfGen::FragmentLibraryGenerator::setAbortCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getAbortCallback", &ConfGen::FragmentLibraryGenerator::getAbortCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setTimeoutCallback", &ConfGen::FragmentLibraryGenerator::setTimeoutCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getTimeoutCallback", &ConfGen::FragmentLibraryGenerator::getTimeoutCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setLogMessageCallback", &ConfGen::FragmentLibraryGenerator::setLogMessageCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getLogMessageCallback", &ConfGen::FragmentLibraryGenerator::getLogMessageCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("process", &ConfGen::FragmentLibraryGenerator::process, 
+             (python::arg("self"), python::arg("frag")))
+        .def("getNumGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers,
+             python::arg("self"))
+        .def("getLibraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode,
+             python::arg("self"))
+        .def("getSettings", 
+             static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentLibraryGenerator::*)()>
+             (&ConfGen::FragmentLibraryGenerator::getSettings), 
+             python::arg("self"), python::return_internal_reference<>())
+        .add_property("settings", 
+                      python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentLibraryGenerator::*)()>
+                                            (&ConfGen::FragmentLibraryGenerator::getSettings),
+                                            python::return_internal_reference<>()))
+        .add_property("abortCallback", 
+                      python::make_function(&ConfGen::FragmentLibraryGenerator::getAbortCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::FragmentLibraryGenerator::setAbortCallback)
+        .add_property("timeoutCallback", 
+                      python::make_function(&ConfGen::FragmentLibraryGenerator::getTimeoutCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::FragmentLibraryGenerator::setTimeoutCallback)
+        .add_property("fragmentLibrary", 
+                      python::make_function(&ConfGen::FragmentLibraryGenerator::getFragmentLibrary,
+                                            python::return_value_policy<python::copy_const_reference>()),
+                      &ConfGen::FragmentLibraryGenerator::setFragmentLibrary)
+        .add_property("numGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers)
+        .add_property("libraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode)
+        .add_property("logMessageCallback", 
+                      python::make_function(&ConfGen::FragmentLibraryGenerator::getLogMessageCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::FragmentLibraryGenerator::setLogMessageCallback);
 }

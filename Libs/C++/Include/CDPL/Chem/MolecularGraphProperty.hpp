@@ -35,62 +35,62 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides keys for built-in Chem::MolecularGraph properties.
-		 */
-		namespace MolecularGraphProperty
-		{
+        /**
+         * \brief Provides keys for built-in Chem::MolecularGraph properties.
+         */
+        namespace MolecularGraphProperty
+        {
 
-			extern CDPL_CHEM_API const Base::LookupKey NAME; 
+            extern CDPL_CHEM_API const Base::LookupKey NAME; 
 
-			extern CDPL_CHEM_API const Base::LookupKey COMPONENTS;
-			extern CDPL_CHEM_API const Base::LookupKey RINGS;
-			extern CDPL_CHEM_API const Base::LookupKey SSSR;
-			extern CDPL_CHEM_API const Base::LookupKey CYCLIC_SUBSTRUCTURE;
-			extern CDPL_CHEM_API const Base::LookupKey AROMATIC_SUBSTRUCTURE;
-			extern CDPL_CHEM_API const Base::LookupKey PI_ELECTRON_SYSTEMS;
-			
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
-			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
-			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
+            extern CDPL_CHEM_API const Base::LookupKey COMPONENTS;
+            extern CDPL_CHEM_API const Base::LookupKey RINGS;
+            extern CDPL_CHEM_API const Base::LookupKey SSSR;
+            extern CDPL_CHEM_API const Base::LookupKey CYCLIC_SUBSTRUCTURE;
+            extern CDPL_CHEM_API const Base::LookupKey AROMATIC_SUBSTRUCTURE;
+            extern CDPL_CHEM_API const Base::LookupKey PI_ELECTRON_SYSTEMS;
+            
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
+            extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
+            extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
 
-			extern CDPL_CHEM_API const Base::LookupKey TOPOLOGICAL_DISTANCE_MATRIX;
-			extern CDPL_CHEM_API const Base::LookupKey GEOMETRICAL_DISTANCE_MATRIX;
+            extern CDPL_CHEM_API const Base::LookupKey TOPOLOGICAL_DISTANCE_MATRIX;
+            extern CDPL_CHEM_API const Base::LookupKey GEOMETRICAL_DISTANCE_MATRIX;
 
-			extern CDPL_CHEM_API const Base::LookupKey STOICHIOMETRIC_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey STOICHIOMETRIC_NUMBER;
 
-			extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_INDEX;
-			extern CDPL_CHEM_API const Base::LookupKey CONFORMER_ENERGIES;
+            extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_INDEX;
+            extern CDPL_CHEM_API const Base::LookupKey CONFORMER_ENERGIES;
 
-			extern CDPL_CHEM_API const Base::LookupKey STRUCTURE_DATA;
+            extern CDPL_CHEM_API const Base::LookupKey STRUCTURE_DATA;
 
-			extern CDPL_CHEM_API const Base::LookupKey HASH_CODE;
+            extern CDPL_CHEM_API const Base::LookupKey HASH_CODE;
 
-			extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY; 
-			extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR1;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_ENERGY;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_CHIRAL_FLAG;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY; 
+            extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR1;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_ENERGY;
+            extern CDPL_CHEM_API const Base::LookupKey MDL_CHIRAL_FLAG;
 
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
-			extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
-		}
-	}
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
+            extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_MOLECULARGRAPHPROPERTY_HPP

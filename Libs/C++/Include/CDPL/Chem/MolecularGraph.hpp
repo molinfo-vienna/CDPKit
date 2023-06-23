@@ -40,42 +40,42 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief MolecularGraph.
-		 */
-		class CDPL_CHEM_API MolecularGraph : public AtomContainer, public BondContainer, public Base::PropertyContainer
-		{
+        /**
+         * \brief MolecularGraph.
+         */
+        class CDPL_CHEM_API MolecularGraph : public AtomContainer, public BondContainer, public Base::PropertyContainer
+        {
 
 
-		public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MolecularGraph instances.
-			 */
-			typedef std::shared_ptr<MolecularGraph> SharedPointer;
+        public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MolecularGraph instances.
+             */
+            typedef std::shared_ptr<MolecularGraph> SharedPointer;
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~MolecularGraph() {}
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~MolecularGraph() {}
 
-			/**
-			 * \brief Creates a copy of the molecular graph.
-			 * \return A smart pointer to the copy of the molecular graph.
-			 */
-			virtual SharedPointer clone() const = 0;
+            /**
+             * \brief Creates a copy of the molecular graph.
+             * \return A smart pointer to the copy of the molecular graph.
+             */
+            virtual SharedPointer clone() const = 0;
 
-		protected:	
-			/**
-			 * \brief Assignment operator.
-			 * \param molgraph The other \c MolecularGraph instance to copy.
-			 * \return A reference to itself.
-			 */
-			MolecularGraph& operator=(const MolecularGraph& molgraph);
-		};
-	}
+        protected:    
+            /**
+             * \brief Assignment operator.
+             * \param molgraph The other \c MolecularGraph instance to copy.
+             * \return A reference to itself.
+             */
+            MolecularGraph& operator=(const MolecularGraph& molgraph);
+        };
+    }
 }
 
 #endif // CDPL_CHEM_MOLECULARGRAPH_HPP

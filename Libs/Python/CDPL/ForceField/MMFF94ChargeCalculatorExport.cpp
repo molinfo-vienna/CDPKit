@@ -38,33 +38,33 @@ void CDPLPythonForceField::exportMMFF94ChargeCalculator()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94ChargeCalculator, ForceField::MMFF94ChargeCalculator::SharedPointer>("MMFF94ChargeCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94ChargeCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::DArray&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ChargeCalculator>())	
-		.def("setAromaticRingSetFunction", &ForceField::MMFF94ChargeCalculator::setAromaticRingSetFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setNumericAtomTypeFunction", &ForceField::MMFF94ChargeCalculator::setNumericAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setSymbolicAtomTypeFunction", &ForceField::MMFF94ChargeCalculator::setSymbolicAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setBondTypeIndexFunction", &ForceField::MMFF94ChargeCalculator::setBondTypeIndexFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94ChargeCalculator::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setFormalChargeDefinitionTable", &ForceField::MMFF94ChargeCalculator::setFormalChargeDefinitionTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondChargeIncrementTable", &ForceField::MMFF94ChargeCalculator::setBondChargeIncrementTable,
-			 (python::arg("self"), python::arg("table")))
-		.def("setPartialBondChargeIncrementTable", &ForceField::MMFF94ChargeCalculator::setPartialBondChargeIncrementTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ChargeCalculator::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("calculate", &ForceField::MMFF94ChargeCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict")))
-		.def("getFormalCharges", &ForceField::MMFF94ChargeCalculator::getFormalCharges, python::arg("self"),
-			 python::return_internal_reference<>())
-		.def("formalCharges", python::make_function(&ForceField::MMFF94ChargeCalculator::getFormalCharges,
-													python::return_internal_reference<>()));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94ChargeCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<const Chem::MolecularGraph&, Util::DArray&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ChargeCalculator>())    
+        .def("setAromaticRingSetFunction", &ForceField::MMFF94ChargeCalculator::setAromaticRingSetFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setNumericAtomTypeFunction", &ForceField::MMFF94ChargeCalculator::setNumericAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setSymbolicAtomTypeFunction", &ForceField::MMFF94ChargeCalculator::setSymbolicAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setBondTypeIndexFunction", &ForceField::MMFF94ChargeCalculator::setBondTypeIndexFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94ChargeCalculator::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setFormalChargeDefinitionTable", &ForceField::MMFF94ChargeCalculator::setFormalChargeDefinitionTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondChargeIncrementTable", &ForceField::MMFF94ChargeCalculator::setBondChargeIncrementTable,
+             (python::arg("self"), python::arg("table")))
+        .def("setPartialBondChargeIncrementTable", &ForceField::MMFF94ChargeCalculator::setPartialBondChargeIncrementTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ChargeCalculator::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("calculate", &ForceField::MMFF94ChargeCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict")))
+        .def("getFormalCharges", &ForceField::MMFF94ChargeCalculator::getFormalCharges, python::arg("self"),
+             python::return_internal_reference<>())
+        .def("formalCharges", python::make_function(&ForceField::MMFF94ChargeCalculator::getFormalCharges,
+                                                    python::return_internal_reference<>()));
 }

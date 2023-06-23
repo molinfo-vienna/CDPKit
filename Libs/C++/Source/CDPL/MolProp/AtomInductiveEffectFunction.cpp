@@ -42,46 +42,46 @@ namespace
     const double REF_ENEGATIVITY = 7.41;
 
     double calcInductiveEffect(std::size_t atom_idx, const Chem::MolecularGraph& molgraph, std::size_t num_bonds,
-							   std::size_t path_len, Util::BitSet& vis_atoms, double damping_fact)
+                               std::size_t path_len, Util::BitSet& vis_atoms, double damping_fact)
     {
-		using namespace Chem;
-		using namespace MolProp;
-	
-		if (path_len >= num_bonds)
-			return 0.0;
-	
-		double result = 0.0;
+        using namespace Chem;
+        using namespace MolProp;
+    
+        if (path_len >= num_bonds)
+            return 0.0;
+    
+        double result = 0.0;
 
-		vis_atoms.set(atom_idx);
+        vis_atoms.set(atom_idx);
 
-		const Atom& atom = molgraph.getAtom(atom_idx);
-		MolecularGraph::ConstBondIterator b_it = atom.getBondsBegin();
+        const Atom& atom = molgraph.getAtom(atom_idx);
+        MolecularGraph::ConstBondIterator b_it = atom.getBondsBegin();
 
-		for (MolecularGraph::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-			const Atom& nbr_atom = *a_it;
+        for (MolecularGraph::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+            const Atom& nbr_atom = *a_it;
 
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
 
-			std::size_t nbr_atom_idx = molgraph.getAtomIndex(nbr_atom);
+            std::size_t nbr_atom_idx = molgraph.getAtomIndex(nbr_atom);
 
-			if (vis_atoms.test(nbr_atom_idx))
-				continue;
-			
-			const Bond& nbr_bond = *b_it;
+            if (vis_atoms.test(nbr_atom_idx))
+                continue;
+            
+            const Bond& nbr_bond = *b_it;
 
-			if (!molgraph.containsBond(nbr_bond))
-				continue;
+            if (!molgraph.containsBond(nbr_bond))
+                continue;
 
-			double next_dmpg_fact = damping_fact * ((1.0 + getMHMOPiOrder(nbr_bond)) / REF_BOND_ORDER);
-			
-			result += next_dmpg_fact * (getPEOESigmaElectronegativity(nbr_atom) - REF_ENEGATIVITY) +
-				calcInductiveEffect(nbr_atom_idx, molgraph, num_bonds, path_len + 1, vis_atoms, next_dmpg_fact);
-		}
-	
-		vis_atoms.reset(atom_idx);
+            double next_dmpg_fact = damping_fact * ((1.0 + getMHMOPiOrder(nbr_bond)) / REF_BOND_ORDER);
+            
+            result += next_dmpg_fact * (getPEOESigmaElectronegativity(nbr_atom) - REF_ENEGATIVITY) +
+                calcInductiveEffect(nbr_atom_idx, molgraph, num_bonds, path_len + 1, vis_atoms, next_dmpg_fact);
+        }
+    
+        vis_atoms.reset(atom_idx);
 
-		return result;
+        return result;
     }
 }
 
@@ -90,7 +90,7 @@ double MolProp::calcInductiveEffect(const Chem::Atom& atom, const Chem::Molecula
 {
     Util::BitSet vis_atoms;
 
-	vis_atoms.resize(molgraph.getNumAtoms());
+    vis_atoms.resize(molgraph.getNumAtoms());
     
     return ::calcInductiveEffect(molgraph.getAtomIndex(atom), molgraph, num_bonds, 0, vis_atoms, 1.0);
 }

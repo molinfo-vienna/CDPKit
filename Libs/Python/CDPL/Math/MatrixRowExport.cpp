@@ -40,47 +40,47 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct MatrixRowExport
-	{
+    template <typename ExpressionType>
+    struct MatrixRowExport
+    {
 
-		typedef CDPL::Math::MatrixRow<ExpressionType> MatrixRowType;
-		typedef typename MatrixRowType::SizeType SizeType;
-		typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixRowType> MatrixRowWrapper;
-		typedef typename MatrixRowWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixRowWrapper::SharedPointer WrapperPointerType;
+        typedef CDPL::Math::MatrixRow<ExpressionType> MatrixRowType;
+        typedef typename MatrixRowType::SizeType SizeType;
+        typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixRowType> MatrixRowWrapper;
+        typedef typename MatrixRowWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixRowWrapper::SharedPointer WrapperPointerType;
 
-		MatrixRowExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        MatrixRowExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<MatrixRowWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixRowWrapper&>((python::arg("self"), python::arg("mr"))))
-				.def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
-				.def("getIndex", &MatrixRowType::getIndex, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRowType>())
-				.def(AssignFunctionGeneratorVisitor<MatrixRowType, ConstVectorExpression>("e"))
-				.def(ConstVectorVisitor<MatrixRowType>("r"))
-				.def(VectorAssignAndSwapVisitor<MatrixRowType>("r"))
-				.def(VectorVisitor<MatrixRowType>("r"))
-				.def(VectorNDArrayAssignVisitor<MatrixRowType>())
-				.def(WrappedDataVisitor<MatrixRowWrapper>())
-				.add_property("index", &MatrixRowType::getIndex);
+            python::class_<MatrixRowWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixRowWrapper&>((python::arg("self"), python::arg("mr"))))
+                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
+                .def("getIndex", &MatrixRowType::getIndex, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixRowType>())
+                .def(AssignFunctionGeneratorVisitor<MatrixRowType, ConstVectorExpression>("e"))
+                .def(ConstVectorVisitor<MatrixRowType>("r"))
+                .def(VectorAssignAndSwapVisitor<MatrixRowType>("r"))
+                .def(VectorVisitor<MatrixRowType>("r"))
+                .def(VectorNDArrayAssignVisitor<MatrixRowType>())
+                .def(WrappedDataVisitor<MatrixRowWrapper>())
+                .add_property("index", &MatrixRowType::getIndex);
 
-			python::def("row", &row, (python::arg("e"), python::arg("i")));
-		}
+            python::def("row", &row, (python::arg("e"), python::arg("i")));
+        }
 
-		static WrapperPointerType row(const ExpressionPointerType& e, SizeType i) {
-			return WrapperPointerType(new MatrixRowWrapper(e, i));
-		}
-	};
+        static WrapperPointerType row(const ExpressionPointerType& e, SizeType i) {
+            return WrapperPointerType(new MatrixRowWrapper(e, i));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportMatrixRowTypes()
 {
-	MatrixRowExport<MatrixExpression<float> >("FMatrixRow");
-	MatrixRowExport<MatrixExpression<double> >("DMatrixRow");
-	MatrixRowExport<MatrixExpression<long> >("LMatrixRow");
-	MatrixRowExport<MatrixExpression<unsigned long> >("ULMatrixRow");
+    MatrixRowExport<MatrixExpression<float> >("FMatrixRow");
+    MatrixRowExport<MatrixExpression<double> >("DMatrixRow");
+    MatrixRowExport<MatrixExpression<long> >("LMatrixRow");
+    MatrixRowExport<MatrixExpression<unsigned long> >("ULMatrixRow");
 }

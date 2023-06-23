@@ -31,19 +31,19 @@
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class AtomSettingsEditWidget : public TabSettingsEditWidget
-	{
+    class AtomSettingsEditWidget : public TabSettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		AtomSettingsEditWidget(QWidget*, Settings&);
+    public:
+        AtomSettingsEditWidget(QWidget*, Settings&);
 
-	private:
-		void init(Settings&);
-	};
+    private:
+        void init(Settings&);
+    };
 }
 
 #endif // CHOX_ATOMSETTINGSEDITWIDGET_HPP

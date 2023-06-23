@@ -38,37 +38,37 @@
 namespace
 {
 
-	struct AtomArray
-	{
+    struct AtomArray
+    {
 
-		AtomArray(const CDPL::ConfGen::TorsionRuleMatch& match): match(match) {}
+        AtomArray(const CDPL::ConfGen::TorsionRuleMatch& match): match(match) {}
 
-		std::size_t getNumAtoms() const {
-			return 4;
-		}
+        std::size_t getNumAtoms() const {
+            return 4;
+        }
 
-		const CDPL::Chem::Atom* getAtom(std::size_t idx) const {
-			if (idx >= 4)
-				throw CDPL::Base::IndexError("TorsionRuleMatch: atom index out of bounds");
+        const CDPL::Chem::Atom* getAtom(std::size_t idx) const {
+            if (idx >= 4)
+                throw CDPL::Base::IndexError("TorsionRuleMatch: atom index out of bounds");
 
-			return match.getAtoms()[idx];
-		}
+            return match.getAtoms()[idx];
+        }
 
-		bool containsAtom(CDPL::Chem::Atom& atom) const {
-			for (std::size_t i = 0; i < 4; i++)
-				if (match.getAtoms()[i] == &atom)
-					return true;
+        bool containsAtom(CDPL::Chem::Atom& atom) const {
+            for (std::size_t i = 0; i < 4; i++)
+                if (match.getAtoms()[i] == &atom)
+                    return true;
 
-			return false;
-		}
+            return false;
+        }
 
-		const CDPL::ConfGen::TorsionRuleMatch& match;
-	};
+        const CDPL::ConfGen::TorsionRuleMatch& match;
+    };
 
-	AtomArray createAtomArray(CDPL::ConfGen::TorsionRuleMatch& match)
-	{
-		return AtomArray(match);
-	}
+    AtomArray createAtomArray(CDPL::ConfGen::TorsionRuleMatch& match)
+    {
+        return AtomArray(match);
+    }
 }
 
 
@@ -77,32 +77,32 @@ void CDPLPythonConfGen::exportTorsionRuleMatch()
     using namespace boost;
     using namespace CDPL;
 
-   	python::scope scope = python::class_<ConfGen::TorsionRuleMatch>("TorsionRuleMatch", python::no_init)
-		.def(python::init<const ConfGen::TorsionRuleMatch&>((python::arg("self"), python::arg("match")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const ConfGen::TorsionRule&, Chem::Bond&, Chem::Atom*, Chem::Atom*, Chem::Atom*, Chem::Atom*>((python::arg("self"), python::arg("rule"), 
-																														 python::arg("bond"), python::arg("atom1"), 
-																														 python::arg("atom2"), python::arg("atom3"),
-																														 python::arg("atom4")))
-			 [python::with_custodian_and_ward<1, 3, python::with_custodian_and_ward<1, 4, python::with_custodian_and_ward<1, 5, 
-			  python::with_custodian_and_ward<1, 6, python::with_custodian_and_ward<1, 7> > > > >()])
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
-		.def("getAtoms", &createAtomArray, python::arg("self"), 
-			 python::with_custodian_and_ward_postcall<0, 1>())
-		.def("getBond", &ConfGen::TorsionRuleMatch::getBond, python::arg("self"), 
-			 python::return_internal_reference<>())
-		.def("getRule", &ConfGen::TorsionRuleMatch::getRule, python::arg("self"), 
-			 python::return_internal_reference<>())
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRuleMatch::operator=), 
-			 (python::arg("self"), python::arg("match")), python::return_self<python::with_custodian_and_ward<1, 2> >())
-			.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
-		.add_property("rule", python::make_function(&ConfGen::TorsionRuleMatch::getRule, python::return_internal_reference<>()))
-		.add_property("bond", python::make_function(&ConfGen::TorsionRuleMatch::getBond, python::return_internal_reference<>()))
-		.add_property("atoms", python::make_function(&createAtomArray, python::with_custodian_and_ward_postcall<0, 1>()));
+       python::scope scope = python::class_<ConfGen::TorsionRuleMatch>("TorsionRuleMatch", python::no_init)
+        .def(python::init<const ConfGen::TorsionRuleMatch&>((python::arg("self"), python::arg("match")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const ConfGen::TorsionRule&, Chem::Bond&, Chem::Atom*, Chem::Atom*, Chem::Atom*, Chem::Atom*>((python::arg("self"), python::arg("rule"), 
+                                                                                                                         python::arg("bond"), python::arg("atom1"), 
+                                                                                                                         python::arg("atom2"), python::arg("atom3"),
+                                                                                                                         python::arg("atom4")))
+             [python::with_custodian_and_ward<1, 3, python::with_custodian_and_ward<1, 4, python::with_custodian_and_ward<1, 5, 
+              python::with_custodian_and_ward<1, 6, python::with_custodian_and_ward<1, 7> > > > >()])
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
+        .def("getAtoms", &createAtomArray, python::arg("self"), 
+             python::with_custodian_and_ward_postcall<0, 1>())
+        .def("getBond", &ConfGen::TorsionRuleMatch::getBond, python::arg("self"), 
+             python::return_internal_reference<>())
+        .def("getRule", &ConfGen::TorsionRuleMatch::getRule, python::arg("self"), 
+             python::return_internal_reference<>())
+        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRuleMatch::operator=), 
+             (python::arg("self"), python::arg("match")), python::return_self<python::with_custodian_and_ward<1, 2> >())
+            .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
+        .add_property("rule", python::make_function(&ConfGen::TorsionRuleMatch::getRule, python::return_internal_reference<>()))
+        .add_property("bond", python::make_function(&ConfGen::TorsionRuleMatch::getBond, python::return_internal_reference<>()))
+        .add_property("atoms", python::make_function(&createAtomArray, python::with_custodian_and_ward_postcall<0, 1>()));
 
-	python::class_<AtomArray>("AtomArray", python::no_init)
-		.def("__len__", &AtomArray::getNumAtoms, python::arg("self"))
-		.def("__contains__", &AtomArray::containsAtom, (python::arg("self"), python::arg("atom")))
-		.def("__getitem__", &AtomArray::getAtom, 
-			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>());
+    python::class_<AtomArray>("AtomArray", python::no_init)
+        .def("__len__", &AtomArray::getNumAtoms, python::arg("self"))
+        .def("__contains__", &AtomArray::containsAtom, (python::arg("self"), python::arg("atom")))
+        .def("__getitem__", &AtomArray::getAtom, 
+             (python::arg("self"), python::arg("idx")), python::return_internal_reference<>());
 }

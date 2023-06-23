@@ -45,192 +45,192 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief HydrophobicFeatureGenerator.
-		 * \see [\ref CATA] 
-		 */
-		class CDPL_PHARM_API HydrophobicFeatureGenerator : public PatternBasedFeatureGenerator
-		{
+        /**
+         * \brief HydrophobicFeatureGenerator.
+         * \see [\ref CATA] 
+         */
+        class CDPL_PHARM_API HydrophobicFeatureGenerator : public PatternBasedFeatureGenerator
+        {
 
-		  public:
+          public:
             static constexpr double       DEF_HYD_THRESHOLD_RING  = 2.0;
-			static constexpr double       DEF_HYD_THRESHOLD_CHAIN = 0.8;
-			static constexpr double       DEF_HYD_THRESHOLD_GROUP = 0.8;
-		
+            static constexpr double       DEF_HYD_THRESHOLD_CHAIN = 0.8;
+            static constexpr double       DEF_HYD_THRESHOLD_GROUP = 0.8;
+        
             static constexpr double       DEF_FEATURE_TOL  = 1.5;
-			static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::HYDROPHOBIC;
-			static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::SPHERE;
+            static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::HYDROPHOBIC;
+            static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::SPHERE;
 
-			typedef std::shared_ptr<HydrophobicFeatureGenerator> SharedPointer;
+            typedef std::shared_ptr<HydrophobicFeatureGenerator> SharedPointer;
 
-			/**
-			 * \brief Constructs the \c %HydrophobicFeatureGenerator instance.
-			 */
-			HydrophobicFeatureGenerator();
-		
-			/**
-			 * \brief Constructs a copy of the \c %HydrophobicFeatureGenerator instance \a gen.
-			 * \param gen The \c %HydrophobicFeatureGenerator to copy.
-			 */
-			HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen);
-		
-			/**
-			 * \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 */
-			HydrophobicFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
+            /**
+             * \brief Constructs the \c %HydrophobicFeatureGenerator instance.
+             */
+            HydrophobicFeatureGenerator();
+        
+            /**
+             * \brief Constructs a copy of the \c %HydrophobicFeatureGenerator instance \a gen.
+             * \param gen The \c %HydrophobicFeatureGenerator to copy.
+             */
+            HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen);
+        
+            /**
+             * \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds 
+             *        them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             */
+            HydrophobicFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
-			/**
-			 * Destructor.
-			 */
-			~HydrophobicFeatureGenerator();
+            /**
+             * Destructor.
+             */
+            ~HydrophobicFeatureGenerator();
 
-			/**
-			 * \brief Specifies the value of the feature type property that has to be set on newly generated features.
-			 * \param type The value of the feature type property.
-			 * \note The default type is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_TYPE.
-			 * \see FeatureProperty::TYPE
-			 */
-			void setFeatureType(unsigned int type);
+            /**
+             * \brief Specifies the value of the feature type property that has to be set on newly generated features.
+             * \param type The value of the feature type property.
+             * \note The default type is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_TYPE.
+             * \see FeatureProperty::TYPE
+             */
+            void setFeatureType(unsigned int type);
 
-			/**
-			 * \brief Returns the value of the feature type property that gets set on newly generated features.
-			 * \return The used value of the feature type property.
-			 * \see FeatureProperty::TYPE
-			 */
-			unsigned int getFeatureType() const;
+            /**
+             * \brief Returns the value of the feature type property that gets set on newly generated features.
+             * \return The used value of the feature type property.
+             * \see FeatureProperty::TYPE
+             */
+            unsigned int getFeatureType() const;
 
-			/**
-			 * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
-			 * \param tol The value of the feature tolerance property.
-			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_TOL.
-			 * \see FeatureProperty::TOLERANCE
-			 */
-			void setFeatureTolerance(double tol);
+            /**
+             * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
+             * \param tol The value of the feature tolerance property.
+             * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_TOL.
+             * \see FeatureProperty::TOLERANCE
+             */
+            void setFeatureTolerance(double tol);
 
-			/**
-			 * \brief Returns the value of the feature tolerance property that gets set on newly generated features.
-			 * \return The value of the feature tolerance property.
-			 * \see FeatureProperty::TOLERANCE
-			 */
-			double getFeatureTolerance() const;
+            /**
+             * \brief Returns the value of the feature tolerance property that gets set on newly generated features.
+             * \return The value of the feature tolerance property.
+             * \see FeatureProperty::TOLERANCE
+             */
+            double getFeatureTolerance() const;
 
-			/**
-			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
-			 * \param geom The value of the feature geometry property.
-			 * \note The default type is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_GEOM.
-			 * \see FeatureProperty::GEOMETRY
-			 */
-			void setFeatureGeometry(unsigned int geom);
+            /**
+             * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
+             * \param geom The value of the feature geometry property.
+             * \note The default type is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_GEOM.
+             * \see FeatureProperty::GEOMETRY
+             */
+            void setFeatureGeometry(unsigned int geom);
 
-			/**
-			 * \brief Returns the value of the feature geometry property that gets set on newly generated features.
-			 * \return The used value of the feature geometry property.
-			 * \see FeatureProperty::GEOMETRY
-			 */
-			unsigned int getFeatureGeometry() const;
+            /**
+             * \brief Returns the value of the feature geometry property that gets set on newly generated features.
+             * \return The used value of the feature geometry property.
+             * \see FeatureProperty::GEOMETRY
+             */
+            unsigned int getFeatureGeometry() const;
 
-			/**
-			 * \brief Specifies the minimum summed hydrophobicity of the atoms in small rings that is required for the
-			 *        generation of a new feature.
-			 * \param thresh The minimum total atom hydrophobicity.
-			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING.
-			 */
-			void setRingHydrophobicityThreshold(double thresh);
+            /**
+             * \brief Specifies the minimum summed hydrophobicity of the atoms in small rings that is required for the
+             *        generation of a new feature.
+             * \param thresh The minimum total atom hydrophobicity.
+             * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING.
+             */
+            void setRingHydrophobicityThreshold(double thresh);
 
-			/**
-			 * \brief Returns the minimum summed hydrophobicity of the atoms in small rings that is required for the
-			 *        generation of a new feature.
-			 * \return The specified minimum total atom hydrophobicity.
-			 */
-			double getRingHydrophobicityThreshold() const;
+            /**
+             * \brief Returns the minimum summed hydrophobicity of the atoms in small rings that is required for the
+             *        generation of a new feature.
+             * \return The specified minimum total atom hydrophobicity.
+             */
+            double getRingHydrophobicityThreshold() const;
 
-			/**
-			 * \brief Specifies the minimum summed hydrophobicity of the atoms in chain fragments that is required for the
-			 *        generation of a new feature.
-			 * \param thresh The minimum total atom hydrophobicity.
-			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN.
-			 */
-			void setChainHydrophobicityThreshold(double thresh);
+            /**
+             * \brief Specifies the minimum summed hydrophobicity of the atoms in chain fragments that is required for the
+             *        generation of a new feature.
+             * \param thresh The minimum total atom hydrophobicity.
+             * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN.
+             */
+            void setChainHydrophobicityThreshold(double thresh);
 
-			/**
-			 * \brief Returns the minimum summed hydrophobicity of the atoms in chain fragments that is required for the
-			 *        generation of a new feature.
-			 * \return The specified minimum total atom hydrophobicity.
-			 */
-			double getChainHydrophobicityThreshold() const;
+            /**
+             * \brief Returns the minimum summed hydrophobicity of the atoms in chain fragments that is required for the
+             *        generation of a new feature.
+             * \return The specified minimum total atom hydrophobicity.
+             */
+            double getChainHydrophobicityThreshold() const;
 
-			/**
-			 * \brief Specifies the minimum summed hydrophobicity of the atoms in group fragments that is required for the
-			 *        generation of a new feature.
-			 * \param thresh The minimum total atom hydrophobicity.
-			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP.
-			 */
-			void setGroupHydrophobicityThreshold(double thresh);
+            /**
+             * \brief Specifies the minimum summed hydrophobicity of the atoms in group fragments that is required for the
+             *        generation of a new feature.
+             * \param thresh The minimum total atom hydrophobicity.
+             * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP.
+             */
+            void setGroupHydrophobicityThreshold(double thresh);
 
-			/**
-			 * \brief Returns the minimum summed hydrophobicity of the atoms in group fragments that is required for the
-			 *        generation of a new feature.
-			 * \return The specified minimum total atom hydrophobicity.
-			 */
-			double getGroupHydrophobicityThreshold() const;
+            /**
+             * \brief Returns the minimum summed hydrophobicity of the atoms in group fragments that is required for the
+             *        generation of a new feature.
+             * \return The specified minimum total atom hydrophobicity.
+             */
+            double getGroupHydrophobicityThreshold() const;
 
-			/**
-			 * \brief Copies the \c %HydrophobicFeatureGenerator instance \a gen.
-			 * \param gen The \c %HydrophobicFeatureGenerator to copy.
-			 * \return A reference to itself.
-			 */
-			HydrophobicFeatureGenerator& operator=(const HydrophobicFeatureGenerator& gen);
+            /**
+             * \brief Copies the \c %HydrophobicFeatureGenerator instance \a gen.
+             * \param gen The \c %HydrophobicFeatureGenerator to copy.
+             * \return A reference to itself.
+             */
+            HydrophobicFeatureGenerator& operator=(const HydrophobicFeatureGenerator& gen);
 
-			FeatureGenerator::SharedPointer clone() const;
+            FeatureGenerator::SharedPointer clone() const;
 
-		  private:
-			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
+          private:
+            void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 
-			void init(const Chem::MolecularGraph&);
+            void init(const Chem::MolecularGraph&);
 
-			void genRingFeatures(Pharmacophore&);
-			void genGroupFeatures(Pharmacophore&);
-			void genChainFeatures(Pharmacophore&);
+            void genRingFeatures(Pharmacophore&);
+            void genGroupFeatures(Pharmacophore&);
+            void genChainFeatures(Pharmacophore&);
 
-			void extractChain(const Chem::Atom&);
-			void processChain(Pharmacophore&);
+            void extractChain(const Chem::Atom&);
+            void processChain(Pharmacophore&);
 
-			Feature& emitFeature(const AtomList&, Pharmacophore&, const Chem::Fragment::SharedPointer&, 
-								 bool = true) const;
+            Feature& emitFeature(const AtomList&, Pharmacophore&, const Chem::Fragment::SharedPointer&, 
+                                 bool = true) const;
 
-			bool isHydrophobicRing(const Chem::Fragment&);
-			bool hasSubstWithMoreThan2Atoms(const Chem::Atom&, const Chem::Fragment&, bool) const;
+            bool isHydrophobicRing(const Chem::Fragment&);
+            bool hasSubstWithMoreThan2Atoms(const Chem::Atom&, const Chem::Fragment&, bool) const;
 
-			double calcHydWeightedCentroid(const AtomList&, Math::Vector3D&) const;
+            double calcHydWeightedCentroid(const AtomList&, Math::Vector3D&) const;
 
-			void getAtomHydrophobicities();
+            void getAtomHydrophobicities();
 
-			void buildAtomMask(const AtomList&, Util::BitSet&) const;
-			double calcSummedHydrophobicity(const AtomList& alist) const;
+            void buildAtomMask(const AtomList&, Util::BitSet&) const;
+            double calcSummedHydrophobicity(const AtomList& alist) const;
 
-			Chem::Fragment::SharedPointer makeFragment(const AtomList&) const;
+            Chem::Fragment::SharedPointer makeFragment(const AtomList&) const;
 
-			bool isChainEndAtom(const Chem::Atom&) const;
+            bool isChainEndAtom(const Chem::Atom&) const;
 
-			const Chem::MolecularGraph*  molGraph;
-			Util::BitSet                 procAtomMask;
-			Util::BitSet                 hAtomMask;
-			Util::BitSet                 tmpAtomMask;
-			unsigned int                 featureType;
-			double                       featureTol;
-			unsigned int                 featureGeom;
-			double                       hydThreshRing;  
-			double                       hydThreshChain; 
-			double                       hydThreshGroup;
-			Util::DArray                 atomHydTable;
-			AtomList                     featureAtoms;
-			AtomList                     chainAtoms;
-		};
+            const Chem::MolecularGraph*  molGraph;
+            Util::BitSet                 procAtomMask;
+            Util::BitSet                 hAtomMask;
+            Util::BitSet                 tmpAtomMask;
+            unsigned int                 featureType;
+            double                       featureTol;
+            unsigned int                 featureGeom;
+            double                       hydThreshRing;  
+            double                       hydThreshChain; 
+            double                       hydThreshGroup;
+            Util::DArray                 atomHydTable;
+            AtomList                     featureAtoms;
+            AtomList                     chainAtoms;
+        };
     }
 }
 

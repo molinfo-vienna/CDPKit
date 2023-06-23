@@ -33,44 +33,44 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the degeneracy of the electronic state of radical atoms.
-		 */
-		namespace RadicalType
-		{
-			
-			/**
-			 * \brief Specifies that the atom is not a radical.
-			 */
-			const unsigned int NOT_RADICALIC = 0;
+        /**
+         * \brief Provides constants that are used to specify the degeneracy of the electronic state of radical atoms.
+         */
+        namespace RadicalType
+        {
+            
+            /**
+             * \brief Specifies that the atom is not a radical.
+             */
+            const unsigned int NOT_RADICALIC = 0;
 
-			/**
-			 * \brief Specifies that the atom is a singlet diradical.
-			 *
-			 * Singlet diradicals have two electrons with antiparallel spin (\e +1/2 and \e –1/2) 
-			 * in one orbital. The other adjacent, degenerate (equal energy) orbital is empty.
-			 */
-			const unsigned int SINGLET       = 1;
+            /**
+             * \brief Specifies that the atom is a singlet diradical.
+             *
+             * Singlet diradicals have two electrons with antiparallel spin (\e +1/2 and \e –1/2) 
+             * in one orbital. The other adjacent, degenerate (equal energy) orbital is empty.
+             */
+            const unsigned int SINGLET       = 1;
 
-			/**
-			 * \brief Specifies that the atom is a doublet radical.
-			 *
-			 * Doublet radicals are simple free radicals with one unpaired electron.
-			 */
-			const unsigned int DOUBLET       = 2;
-	
-			/**
-			 * \brief Specifies that the atom is a triplet diradical.
-			 *
-			 * Triplet diradicals have two spin-up electrons in adjacent, degenerate (equal energy)
-			 * orbitals.
-			 */
-			const unsigned int TRIPLET       = 3;
-		}
-	}
+            /**
+             * \brief Specifies that the atom is a doublet radical.
+             *
+             * Doublet radicals are simple free radicals with one unpaired electron.
+             */
+            const unsigned int DOUBLET       = 2;
+    
+            /**
+             * \brief Specifies that the atom is a triplet diradical.
+             *
+             * Triplet diradicals have two spin-up electrons in adjacent, degenerate (equal energy)
+             * orbitals.
+             */
+            const unsigned int TRIPLET       = 3;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_RADICALTYPE_HPP

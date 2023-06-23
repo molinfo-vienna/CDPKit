@@ -33,65 +33,65 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataIOBase;
-	}
+        class DataIOBase;
+    }
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class FeatureContainer;
-		class Feature;
+        class FeatureContainer;
+        class Feature;
 
-		class PMLDataWriter
-		{
+        class PMLDataWriter
+        {
 
-		public:
-			PMLDataWriter(const Base::DataIOBase& io_base);
+        public:
+            PMLDataWriter(const Base::DataIOBase& io_base);
 
-			bool writeFeatureContainer(std::ostream& os, const FeatureContainer& pharm);
+            bool writeFeatureContainer(std::ostream& os, const FeatureContainer& pharm);
 
-			void close(std::ostream& os);
+            void close(std::ostream& os);
 
-		private:
-			void init(std::ostream& os);
+        private:
+            void init(std::ostream& os);
 
-			void writeElemContainerHeader(std::ostream& os) const;
-			void writeElemContainerFooter(std::ostream& os) const;
+            void writeElemContainerHeader(std::ostream& os) const;
+            void writeElemContainerFooter(std::ostream& os) const;
 
-			void startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr);
-			void endAlignmentElement(std::ostream& os) const;
+            void startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr);
+            void endAlignmentElement(std::ostream& os) const;
 
-			void startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const;
-			void endPharmacophore(std::ostream& os) const;
+            void startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const;
+            void endPharmacophore(std::ostream& os) const;
 
-			void writeFeatures(std::ostream& os, const FeatureContainer& cntnr);
+            void writeFeatures(std::ostream& os, const FeatureContainer& cntnr);
 
-			void writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id);
-			void writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);
-			void writeVectorFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool points_to_lig);
-			void writePlaneFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);
+            void writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id);
+            void writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);
+            void writeVectorFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool points_to_lig);
+            void writePlaneFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);
 
-			void writeDefaultFeatureAttributes(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool close);
+            void writeDefaultFeatureAttributes(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool close);
 
-			template <typename VE>
-			void writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const;
+            template <typename VE>
+            void writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const;
 
-			void writeStartTag(std::ostream& os, const std::string& tag, bool close) const;
-			void writeEndTag(std::ostream& os, const std::string& tag) const;
+            void writeStartTag(std::ostream& os, const std::string& tag, bool close) const;
+            void writeEndTag(std::ostream& os, const std::string& tag) const;
 
-			template <typename T>
-			void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty = false) const;
+            template <typename T>
+            void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty = false) const;
 
-			const Base::DataIOBase& ioBase;
-			bool                    writeHeader;
-			bool                    strictErrorChecking;
-			std::size_t             alignElemID;
-			std::size_t             featureID;
-		};
-	}
+            const Base::DataIOBase& ioBase;
+            bool                    writeHeader;
+            bool                    strictErrorChecking;
+            std::size_t             alignElemID;
+            std::size_t             featureID;
+        };
+    }
 }
 
 #endif // CDPL_PHARM_PMLDATAWRITER_HPP

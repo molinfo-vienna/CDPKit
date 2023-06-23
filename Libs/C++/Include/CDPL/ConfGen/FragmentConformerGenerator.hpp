@@ -43,81 +43,81 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ConfGen 
     {
 
-		class FragmentConformerGeneratorImpl;
+        class FragmentConformerGeneratorImpl;
 
-		class CDPL_CONFGEN_API FragmentConformerGenerator
-		{
+        class CDPL_CONFGEN_API FragmentConformerGenerator
+        {
 
-		  public:
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+          public:
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
 
-			FragmentConformerGenerator();			
+            FragmentConformerGenerator();            
 
-			~FragmentConformerGenerator();
-	
-			FragmentConformerGeneratorSettings& getSettings();
+            ~FragmentConformerGenerator();
+    
+            FragmentConformerGeneratorSettings& getSettings();
 
-			const FragmentConformerGeneratorSettings& getSettings() const;
+            const FragmentConformerGeneratorSettings& getSettings() const;
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph);
+            unsigned int generate(const Chem::MolecularGraph& molgraph);
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
+            unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
-			void setConformers(Chem::MolecularGraph& molgraph) const;
+            void setConformers(Chem::MolecularGraph& molgraph) const;
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			const ConformerData& getConformer(std::size_t idx) const;
+            const ConformerData& getConformer(std::size_t idx) const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			ConformerIterator getConformersBegin();
+            ConformerIterator getConformersBegin();
 
-			ConformerIterator getConformersEnd();
+            ConformerIterator getConformersEnd();
 
-			ConstConformerIterator begin() const;
+            ConstConformerIterator begin() const;
 
-			ConstConformerIterator end() const;
+            ConstConformerIterator end() const;
 
-			ConformerIterator begin();
+            ConformerIterator begin();
 
-			ConformerIterator end();
+            ConformerIterator end();
 
-		  private:
-			FragmentConformerGenerator(const FragmentConformerGenerator&);
+          private:
+            FragmentConformerGenerator(const FragmentConformerGenerator&);
 
-			FragmentConformerGenerator& operator=(const FragmentConformerGenerator&);
+            FragmentConformerGenerator& operator=(const FragmentConformerGenerator&);
 
-			typedef std::auto_ptr<FragmentConformerGeneratorImpl> ImplementationPointer;
+            typedef std::auto_ptr<FragmentConformerGeneratorImpl> ImplementationPointer;
 
-			ImplementationPointer impl;
-		};
+            ImplementationPointer impl;
+        };
     }
 }
 

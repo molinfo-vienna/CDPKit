@@ -38,35 +38,35 @@
 namespace
 {
 
-	template <typename ObjType1, typename ObjType2 = void>
-	struct ORMatchExprListExport
-	{
+    template <typename ObjType1, typename ObjType2 = void>
+    struct ORMatchExprListExport
+    {
 
-		ORMatchExprListExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        ORMatchExprListExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			python::class_<Chem::ORMatchExpressionList<ObjType1, ObjType2>, 
-				typename Chem::ORMatchExpressionList<ObjType1, ObjType2>::SharedPointer, 
-				python::bases<Chem::MatchExpressionList<ObjType1, ObjType2> > >(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const Chem::ORMatchExpressionList<ObjType1, ObjType2>&>((python::arg("self"), python::arg("expr")))
-					 [python::with_custodian_and_ward<1, 2>()])
-				.def("assign", CDPLPythonBase::copyAssOp(&Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator=),
-					 (python::arg("self"), python::arg("expr")), 
-					 python::return_self<python::with_custodian_and_ward<1, 2> >());
-		}
-	};
+            python::class_<Chem::ORMatchExpressionList<ObjType1, ObjType2>, 
+                typename Chem::ORMatchExpressionList<ObjType1, ObjType2>::SharedPointer, 
+                python::bases<Chem::MatchExpressionList<ObjType1, ObjType2> > >(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const Chem::ORMatchExpressionList<ObjType1, ObjType2>&>((python::arg("self"), python::arg("expr")))
+                     [python::with_custodian_and_ward<1, 2>()])
+                .def("assign", CDPLPythonBase::copyAssOp(&Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator=),
+                     (python::arg("self"), python::arg("expr")), 
+                     python::return_self<python::with_custodian_and_ward<1, 2> >());
+        }
+    };
 }
 
 
 void CDPLPythonChem::exportORMatchExpressionLists()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	ORMatchExprListExport<Chem::Atom, Chem::MolecularGraph>("ORAtomMatchExpressionList");
-	ORMatchExprListExport<Chem::Bond, Chem::MolecularGraph>("ORBondMatchExpressionList");
-	ORMatchExprListExport<Chem::MolecularGraph>("ORMolecularGraphMatchExpressionList");
-	ORMatchExprListExport<Chem::Reaction>("ORReactionMatchExpressionList");
+    ORMatchExprListExport<Chem::Atom, Chem::MolecularGraph>("ORAtomMatchExpressionList");
+    ORMatchExprListExport<Chem::Bond, Chem::MolecularGraph>("ORBondMatchExpressionList");
+    ORMatchExprListExport<Chem::MolecularGraph>("ORMolecularGraphMatchExpressionList");
+    ORMatchExprListExport<Chem::Reaction>("ORReactionMatchExpressionList");
 }

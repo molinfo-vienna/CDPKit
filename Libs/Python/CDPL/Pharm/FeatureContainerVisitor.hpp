@@ -29,54 +29,54 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define FEATURECONTAINER_IMPL()											\
+#define FEATURECONTAINER_IMPL()                                            \
     std::size_t getNumFeatures() const {                                \
-		return this->get_override("getNumFeatures")();                  \
-    }																	\
-																		\
-    const CDPL::Pharm::Feature& getFeature(std::size_t idx) const {		\
-		return this->get_override("getFeature")(idx);                   \
-    }																	\
-																		\
-    bool containsFeature(const CDPL::Pharm::Feature& ftr) const {		\
-		return this->get_override("containsFeature")(boost::ref(ftr));	\
-    }																	\
-																		\
+        return this->get_override("getNumFeatures")();                  \
+    }                                                                    \
+                                                                        \
+    const CDPL::Pharm::Feature& getFeature(std::size_t idx) const {        \
+        return this->get_override("getFeature")(idx);                   \
+    }                                                                    \
+                                                                        \
+    bool containsFeature(const CDPL::Pharm::Feature& ftr) const {        \
+        return this->get_override("containsFeature")(boost::ref(ftr));    \
+    }                                                                    \
+                                                                        \
     std::size_t getFeatureIndex(const CDPL::Pharm::Feature& ftr) const {\
-		return this->get_override("getFeatureIndex")(boost::ref(ftr));	\
-    }																	\
-																		\
-    CDPL::Pharm::Feature& getFeature(std::size_t idx)  {				\
-		return this->get_override("getFeature")(idx);                   \
-    }																	\
-																		\
-    std::size_t getNumEntities() const {								\
-		if (boost::python::override f = this->get_override("getNumEntities")) \
-            return f();													\
-																		\
-		return CDPL::Pharm::FeatureContainer::getNumEntities();			\
-    }																	\
-																		\
-    std::size_t getNumEntitiesDef() const {								\
-		return CDPL::Pharm::FeatureContainer::getNumEntities();			\
-    }																	\
-																		\
-    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const {		\
-		if (boost::python::override f = this->get_override("getEntity"))\
-            return f(idx);												\
-																		\
-		return CDPL::Pharm::FeatureContainer::getEntity(idx);			\
-    }																	\
-																		\
-    CDPL::Chem::Entity3D& getEntity(std::size_t idx) {					\
-		if (boost::python::override f = this->get_override("getEntity")) \
-            return f(idx);												\
-																		\
-		return CDPL::Pharm::FeatureContainer::getEntity(idx);			\
-    }																	\
-																		\
-    CDPL::Chem::Entity3D& getEntityDef(std::size_t idx) {				\
-		return CDPL::Pharm::FeatureContainer::getEntity(idx);			\
+        return this->get_override("getFeatureIndex")(boost::ref(ftr));    \
+    }                                                                    \
+                                                                        \
+    CDPL::Pharm::Feature& getFeature(std::size_t idx)  {                \
+        return this->get_override("getFeature")(idx);                   \
+    }                                                                    \
+                                                                        \
+    std::size_t getNumEntities() const {                                \
+        if (boost::python::override f = this->get_override("getNumEntities")) \
+            return f();                                                    \
+                                                                        \
+        return CDPL::Pharm::FeatureContainer::getNumEntities();            \
+    }                                                                    \
+                                                                        \
+    std::size_t getNumEntitiesDef() const {                                \
+        return CDPL::Pharm::FeatureContainer::getNumEntities();            \
+    }                                                                    \
+                                                                        \
+    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const {        \
+        if (boost::python::override f = this->get_override("getEntity"))\
+            return f(idx);                                                \
+                                                                        \
+        return CDPL::Pharm::FeatureContainer::getEntity(idx);            \
+    }                                                                    \
+                                                                        \
+    CDPL::Chem::Entity3D& getEntity(std::size_t idx) {                    \
+        if (boost::python::override f = this->get_override("getEntity")) \
+            return f(idx);                                                \
+                                                                        \
+        return CDPL::Pharm::FeatureContainer::getEntity(idx);            \
+    }                                                                    \
+                                                                        \
+    CDPL::Chem::Entity3D& getEntityDef(std::size_t idx) {                \
+        return CDPL::Pharm::FeatureContainer::getEntity(idx);            \
     }
 
 
@@ -87,68 +87,68 @@ namespace CDPLPythonPharm
     {
 
     protected:
-		static bool containsFeature(CDPL::Pharm::FeatureContainer& cntnr, CDPL::Pharm::Feature& ftr) {
-			return cntnr.containsFeature(ftr);
-		}
+        static bool containsFeature(CDPL::Pharm::FeatureContainer& cntnr, CDPL::Pharm::Feature& ftr) {
+            return cntnr.containsFeature(ftr);
+        }
     };
 
     template <typename Wrapper>
     class FeatureContainerVirtualFunctionsVisitor : private FeatureContainerVisitorBase, 
-													public boost::python::def_visitor<FeatureContainerVirtualFunctionsVisitor<Wrapper> >
+                                                    public boost::python::def_visitor<FeatureContainerVirtualFunctionsVisitor<Wrapper> >
     {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			cl	
-				.def("getFeature", python::pure_virtual(static_cast<Pharm::Feature& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getFeature)), 
-					 (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
-				.def("containsFeature", python::pure_virtual(&this->containsFeature), (python::arg("self"), python::arg("ftr")))
-				.def("getFeatureIndex", python::pure_virtual(&getFeatureIndex), (python::arg("self"), python::arg("ftr")))
-				.def("getNumFeatures", python::pure_virtual(&Pharm::FeatureContainer::getNumFeatures), python::arg("self"))
-				.def("getEntity", static_cast<Chem::Entity3D& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getEntity), 
-					 &Wrapper::getEntityDef, (python::arg("self"), python::arg("idx")),
-					 python::return_internal_reference<1>())
-				.def("getNumEntities", &Pharm::FeatureContainer::getNumEntities, &Wrapper::getNumEntitiesDef, python::arg("self"));
-		}
+            cl    
+                .def("getFeature", python::pure_virtual(static_cast<Pharm::Feature& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getFeature)), 
+                     (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
+                .def("containsFeature", python::pure_virtual(&this->containsFeature), (python::arg("self"), python::arg("ftr")))
+                .def("getFeatureIndex", python::pure_virtual(&getFeatureIndex), (python::arg("self"), python::arg("ftr")))
+                .def("getNumFeatures", python::pure_virtual(&Pharm::FeatureContainer::getNumFeatures), python::arg("self"))
+                .def("getEntity", static_cast<Chem::Entity3D& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getEntity), 
+                     &Wrapper::getEntityDef, (python::arg("self"), python::arg("idx")),
+                     python::return_internal_reference<1>())
+                .def("getNumEntities", &Pharm::FeatureContainer::getNumEntities, &Wrapper::getNumEntitiesDef, python::arg("self"));
+        }
 
-		static std::size_t getFeatureIndex(CDPL::Pharm::FeatureContainer& cntnr, CDPL::Pharm::Feature& ftr) {
-			return cntnr.getFeatureIndex(ftr);
-		}
+        static std::size_t getFeatureIndex(CDPL::Pharm::FeatureContainer& cntnr, CDPL::Pharm::Feature& ftr) {
+            return cntnr.getFeatureIndex(ftr);
+        }
     };
 
     class FeatureContainerSpecialFunctionsVisitor : private FeatureContainerVisitorBase, 
-													public boost::python::def_visitor<FeatureContainerSpecialFunctionsVisitor>
+                                                    public boost::python::def_visitor<FeatureContainerSpecialFunctionsVisitor>
     {
 
-		friend class boost::python::def_visitor_access;
+        friend class boost::python::def_visitor_access;
 
     public:
-		FeatureContainerSpecialFunctionsVisitor(bool contains_only): containsOnly(contains_only) {}
+        FeatureContainerSpecialFunctionsVisitor(bool contains_only): containsOnly(contains_only) {}
 
     private:
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			using namespace CDPL;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
+            using namespace CDPL;
 
-			cl.def("__contains__", &this->containsFeature, (python::arg("self"), python::arg("ftr")));
+            cl.def("__contains__", &this->containsFeature, (python::arg("self"), python::arg("ftr")));
 
-			if (containsOnly)
-				return;
+            if (containsOnly)
+                return;
 
-			cl
-				.def("__getitem__", static_cast<Pharm::Feature& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getFeature),
-					 (python::arg("self"), python::arg("idx")),
-					 python::return_internal_reference<1>())
-				.def("__len__", &Pharm::FeatureContainer::getNumFeatures, python::arg("self"));
-		}
+            cl
+                .def("__getitem__", static_cast<Pharm::Feature& (Pharm::FeatureContainer::*)(std::size_t)>(&Pharm::FeatureContainer::getFeature),
+                     (python::arg("self"), python::arg("idx")),
+                     python::return_internal_reference<1>())
+                .def("__len__", &Pharm::FeatureContainer::getNumFeatures, python::arg("self"));
+        }
 
-		bool containsOnly;
+        bool containsOnly;
     };
 }
 

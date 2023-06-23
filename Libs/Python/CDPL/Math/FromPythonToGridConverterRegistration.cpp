@@ -38,163 +38,163 @@
 namespace
 {
 
-	template <typename GridType>
-	struct GridFromPySequenceConverter 
-	{
+    template <typename GridType>
+    struct GridFromPySequenceConverter 
+    {
 
-		GridFromPySequenceConverter() {
-			using namespace boost;
+        GridFromPySequenceConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<GridType>());
-		}
+            python::converter::registry::insert(&convertible, &construct, python::type_id<GridType>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
+        static void* convertible(PyObject* obj_ptr) {
+            using namespace boost;
 
-			if (!obj_ptr)
-				return 0;
+            if (!obj_ptr)
+                return 0;
 
-			if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
-				return 0;
+            if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
+                return 0;
 
-			python::ssize_t num_xelems = PySequence_Size(obj_ptr);
-			python::ssize_t num_yelems = 0;
-			python::ssize_t num_zelems = 0;
+            python::ssize_t num_xelems = PySequence_Size(obj_ptr);
+            python::ssize_t num_yelems = 0;
+            python::ssize_t num_zelems = 0;
 
-			for (python::ssize_t i = 0; i < num_xelems; i++) {
-				PyObject* yseq_ptr = PySequence_GetItem(obj_ptr, i);
+            for (python::ssize_t i = 0; i < num_xelems; i++) {
+                PyObject* yseq_ptr = PySequence_GetItem(obj_ptr, i);
 
-				if (!PySequence_Check(yseq_ptr))
-					return 0;
+                if (!PySequence_Check(yseq_ptr))
+                    return 0;
 
-				if (i == 0) 
-					num_yelems = PySequence_Size(yseq_ptr);
+                if (i == 0) 
+                    num_yelems = PySequence_Size(yseq_ptr);
 
-				else if (num_yelems != PySequence_Size(yseq_ptr))
-					return 0;
+                else if (num_yelems != PySequence_Size(yseq_ptr))
+                    return 0;
 
-				for (python::ssize_t j = 0; j < num_yelems; j++) {
-					PyObject* zseq_ptr = PySequence_GetItem(yseq_ptr, j);
+                for (python::ssize_t j = 0; j < num_yelems; j++) {
+                    PyObject* zseq_ptr = PySequence_GetItem(yseq_ptr, j);
 
-					if (!PySequence_Check(zseq_ptr))
-						return 0;
+                    if (!PySequence_Check(zseq_ptr))
+                        return 0;
 
-					if (i == 0 && j == 0) 
-						num_zelems = PySequence_Size(zseq_ptr);
+                    if (i == 0 && j == 0) 
+                        num_zelems = PySequence_Size(zseq_ptr);
 
-					else if (num_zelems != PySequence_Size(zseq_ptr))
-						return 0;
+                    else if (num_zelems != PySequence_Size(zseq_ptr))
+                        return 0;
 
-					for (python::ssize_t k = 0; k < num_zelems; k++)
-						if (!python::extract<typename GridType::ValueType>(PySequence_GetItem(zseq_ptr, k)).check())
-							return 0;
-				}
+                    for (python::ssize_t k = 0; k < num_zelems; k++)
+                        if (!python::extract<typename GridType::ValueType>(PySequence_GetItem(zseq_ptr, k)).check())
+                            return 0;
+                }
 
-			}
+            }
 
-			return obj_ptr;
-		}
+            return obj_ptr;
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
 
-			GridType grd;
+            GridType grd;
 
-			python::ssize_t num_xelems = PySequence_Size(obj_ptr);
-			python::ssize_t num_yelems = 0;
-			python::ssize_t num_zelems = 0;
+            python::ssize_t num_xelems = PySequence_Size(obj_ptr);
+            python::ssize_t num_yelems = 0;
+            python::ssize_t num_zelems = 0;
 
-			for (python::ssize_t i = 0; i < num_xelems; i++) {
-				PyObject* yseq_ptr = PySequence_GetItem(obj_ptr, i);
+            for (python::ssize_t i = 0; i < num_xelems; i++) {
+                PyObject* yseq_ptr = PySequence_GetItem(obj_ptr, i);
 
-				if (i == 0) 
-					num_yelems = PySequence_Size(yseq_ptr);
+                if (i == 0) 
+                    num_yelems = PySequence_Size(yseq_ptr);
 
-				for (python::ssize_t j = 0; j < num_yelems; j++) {
-					PyObject* zseq_ptr = PySequence_GetItem(yseq_ptr, j);
+                for (python::ssize_t j = 0; j < num_yelems; j++) {
+                    PyObject* zseq_ptr = PySequence_GetItem(yseq_ptr, j);
 
-					if (i == 0 && j == 0) { 
-						num_zelems = PySequence_Size(zseq_ptr);
-						grd.resize(num_xelems, num_yelems, num_zelems);
-					}
+                    if (i == 0 && j == 0) { 
+                        num_zelems = PySequence_Size(zseq_ptr);
+                        grd.resize(num_xelems, num_yelems, num_zelems);
+                    }
 
-					for (python::ssize_t k = 0; k < num_zelems; k++)
-						grd(i, j, k) = python::extract<typename GridType::ValueType>(PySequence_GetItem(zseq_ptr, k));
-				}
-			}
+                    for (python::ssize_t k = 0; k < num_zelems; k++)
+                        grd(i, j, k) = python::extract<typename GridType::ValueType>(PySequence_GetItem(zseq_ptr, k));
+                }
+            }
 
-			void* storage = ((python::converter::rvalue_from_python_storage<GridType>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<GridType>*)data)->storage.bytes;
 
-			new (storage) GridType();
+            new (storage) GridType();
 
-			static_cast<GridType*>(storage)->swap(grd);
+            static_cast<GridType*>(storage)->swap(grd);
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 
 #ifdef HAVE_NUMPY
-	template <typename GridType>
-	struct GridFromNDArrayConverter 
-	{
+    template <typename GridType>
+    struct GridFromNDArrayConverter 
+    {
 
-		GridFromNDArrayConverter() {
-			using namespace boost;
+        GridFromNDArrayConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<GridType>());
-		}
+            python::converter::registry::insert(&convertible, &construct, python::type_id<GridType>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        static void* convertible(PyObject* obj_ptr) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			if (!obj_ptr)
-				return 0;
+            if (!obj_ptr)
+                return 0;
 
-			PyArrayObject* arr = NumPy::castToNDArray(obj_ptr);
+            PyArrayObject* arr = NumPy::castToNDArray(obj_ptr);
 
-			if (!arr)
-				return 0;
+            if (!arr)
+                return 0;
 
-			if (!NumPy::checkDim(arr, 3))
-				return 0;
+            if (!NumPy::checkDim(arr, 3))
+                return 0;
 
-			if (!NumPy::checkDataType<typename GridType::ValueType>(arr))
-				return 0;
-			
-			return obj_ptr;
-		}
+            if (!NumPy::checkDataType<typename GridType::ValueType>(arr))
+                return 0;
+            
+            return obj_ptr;
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<GridType>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<GridType>*)data)->storage.bytes;
 
-			new (storage) GridType();
+            new (storage) GridType();
 
-			GridType& grd = *static_cast<GridType*>(storage);
-			PyArrayObject* arr = reinterpret_cast<PyArrayObject*>(obj_ptr);
+            GridType& grd = *static_cast<GridType*>(storage);
+            PyArrayObject* arr = reinterpret_cast<PyArrayObject*>(obj_ptr);
 
-			NumPy::resizeTarget3(grd, arr);
-			NumPy::copyArray3(grd, arr);
+            NumPy::resizeTarget3(grd, arr);
+            NumPy::copyArray3(grd, arr);
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 #endif
 }
 
 
 void CDPLPythonMath::registerFromPythonToGridConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	GridFromPySequenceConverter<Math::FGrid>();
-	GridFromPySequenceConverter<Math::DGrid>();
+    GridFromPySequenceConverter<Math::FGrid>();
+    GridFromPySequenceConverter<Math::DGrid>();
 
-#ifdef HAVE_NUMPY	
-	GridFromNDArrayConverter<Math::FGrid>();
-	GridFromNDArrayConverter<Math::DGrid>();
+#ifdef HAVE_NUMPY    
+    GridFromNDArrayConverter<Math::FGrid>();
+    GridFromNDArrayConverter<Math::DGrid>();
 #endif
 }

@@ -39,41 +39,41 @@ using namespace CDPL;
 
 
 Vis::PNGReactionWriter::PNGReactionWriter(std::ostream& os): 
-	ImageWriter(static_cast<const DataIOBase&>(*this)), output(os), state(os.good()) {}
+    ImageWriter(static_cast<const DataIOBase&>(*this)), output(os), state(os.good()) {}
 
 Base::DataWriter<Chem::Reaction>& Vis::PNGReactionWriter::write(const Chem::Reaction& rxn)
 {
-	state = false;
+    state = false;
 
-	CairoPointer<cairo_surface_t> surf(renderReactionImage(rxn));
+    CairoPointer<cairo_surface_t> surf(renderReactionImage(rxn));
 
-	if (surf.get()) { 
-		cairo_surface_write_to_png_stream(surf.get(), &streamWriteFunc, &output);
-	
-		state = (cairo_surface_status(surf.get()) == CAIRO_STATUS_SUCCESS); 
-	}
+    if (surf.get()) { 
+        cairo_surface_write_to_png_stream(surf.get(), &streamWriteFunc, &output);
+    
+        state = (cairo_surface_status(surf.get()) == CAIRO_STATUS_SUCCESS); 
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Vis::PNGReactionWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Vis::PNGReactionWriter::operator!() const
 {
-	return !state;
+    return !state;
 }
 
 cairo_surface_t* Vis::PNGReactionWriter::createCairoSurface(double w, double h) const
 {
-	return cairo_image_surface_create(CAIRO_FORMAT_ARGB32, int(std::ceil(w)), int(std::ceil(h)));
+    return cairo_image_surface_create(CAIRO_FORMAT_ARGB32, int(std::ceil(w)), int(std::ceil(h)));
 }
 
 cairo_surface_t* Vis::PNGReactionWriter::createCairoSurface() const
 {
-	return cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 0, 0);
+    return cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 0, 0);
 }

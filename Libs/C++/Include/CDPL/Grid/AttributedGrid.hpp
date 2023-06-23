@@ -36,31 +36,31 @@
 namespace CDPL
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		/**
-		 * \brief AttributedGrid.
-		 */
-		class AttributedGrid : public Base::PropertyContainer
-		{
+        /**
+         * \brief AttributedGrid.
+         */
+        class AttributedGrid : public Base::PropertyContainer
+        {
 
-		public:
-			typedef std::shared_ptr<AttributedGrid> SharedPointer;
-		
-			virtual ~AttributedGrid() {}
+        public:
+            typedef std::shared_ptr<AttributedGrid> SharedPointer;
+        
+            virtual ~AttributedGrid() {}
 
-			virtual std::size_t getNumElements() const = 0;
+            virtual std::size_t getNumElements() const = 0;
 
-			virtual bool isEmpty() const = 0;
+            virtual bool isEmpty() const = 0;
 
-		protected:
-			AttributedGrid& operator=(const AttributedGrid& grid) {
-				Base::PropertyContainer::operator=(grid);
-				return *this;
-			}
-		};
-	}
+        protected:
+            AttributedGrid& operator=(const AttributedGrid& grid) {
+                Base::PropertyContainer::operator=(grid);
+                return *this;
+            }
+        };
+    }
 }
 
 #endif // CDPL_GRID_ATTRIBUTEDGRID_HPP

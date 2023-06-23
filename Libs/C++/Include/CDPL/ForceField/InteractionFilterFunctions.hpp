@@ -39,17 +39,17 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
-	}
+        class Atom;
+    }
 
     namespace ForceField 
     {
 
-		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction2;
+        typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction2;
 
-		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction3;
+        typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction3;
 
-		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction4;
+        typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction4;
     }
 }
 

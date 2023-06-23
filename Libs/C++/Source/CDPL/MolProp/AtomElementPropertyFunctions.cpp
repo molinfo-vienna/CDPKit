@@ -65,7 +65,7 @@ double MolProp::getAllredRochowElectronegativity(const Chem::Atom& atom)
 
 std::size_t MolProp::getElementValenceElectronCount(const Chem::Atom& atom)
 {
-	return Chem::AtomDictionary::getNumValenceElectrons(getType(atom));
+    return Chem::AtomDictionary::getNumValenceElectrons(getType(atom));
 }
 
 const std::string& MolProp::getElementName(const Chem::Atom& atom)

@@ -36,81 +36,81 @@ void CDPLPythonConfGen::exportTorsionDriver()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<ConfGen::TorsionDriver, boost::noncopyable>("TorsionDriver", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriver>())
-		.def("getSettings", 
-			 static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
-			 (&ConfGen::TorsionDriver::getSettings), 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("clearTorsionLibraries", &ConfGen::TorsionDriver::clearTorsionLibraries, 
-			 python::arg("self"))
-		.def("addTorsionLibrary", &ConfGen::TorsionDriver::addTorsionLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&)>(
-				 &ConfGen::TorsionDriver::setup), 
-			 (python::arg("self"), python::arg("molgraph")))
-		.def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&, const Util::BitSet&)>(
-				 &ConfGen::TorsionDriver::setup), 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("bond_mask")), 
-			 python::arg("molgraph"), python::with_custodian_and_ward<1, 2>())
-		.def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&)>(
-				 &ConfGen::TorsionDriver::setup), 
-			 (python::arg("self"), python::arg("molgraph")), python::with_custodian_and_ward<1, 2>())
-		.def ("clearInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)()>(
-				  &ConfGen::TorsionDriver::clearInputCoordinates), 
-			  python::arg("self"))
-		.def ("clearInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(std::size_t)>(
-				  &ConfGen::TorsionDriver::clearInputCoordinates), 
-			  (python::arg("self"), python::arg("frag_idx")))
-		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&)>(
-				  &ConfGen::TorsionDriver::addInputCoordinates), 
-			  (python::arg("self"), python::arg("coords")))
-		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&, std::size_t)>(
-				  &ConfGen::TorsionDriver::addInputCoordinates), 
-			  (python::arg("self"), python::arg("coords"), python::arg("frag_idx")))
-		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData&, std::size_t)>(
-				  &ConfGen::TorsionDriver::addInputCoordinates), 
-			  (python::arg("self"), python::arg("conf_data"), python::arg("frag_idx")))
-		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData::SharedPointer&, std::size_t)>(
-				  &ConfGen::TorsionDriver::addInputCoordinates), 
-			  (python::arg("self"), python::arg("conf_data"), python::arg("frag_idx")))
-		.def("setAbortCallback", &ConfGen::TorsionDriver::setAbortCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getAbortCallback", &ConfGen::TorsionDriver::getAbortCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setTimeoutCallback", &ConfGen::TorsionDriver::setTimeoutCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getTimeoutCallback", &ConfGen::TorsionDriver::getTimeoutCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setLogMessageCallback", &ConfGen::TorsionDriver::setLogMessageCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getLogMessageCallback", &ConfGen::TorsionDriver::getLogMessageCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("generateConformers", &ConfGen::TorsionDriver::generateConformers, python::arg("self"))
-		.def("getNumConformers", &ConfGen::TorsionDriver::getNumConformers, python::arg("self"))
-		.def("getConformer", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::TorsionDriver::*)(std::size_t)>(&ConfGen::TorsionDriver::getConformer),
-			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.def("__getitem__", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::TorsionDriver::*)(std::size_t)>(&ConfGen::TorsionDriver::getConformer),
-			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.add_property("numConformers", &ConfGen::TorsionDriver::getNumConformers)
-		.add_property("settings", 
-					  python::make_function(static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
-											(&ConfGen::TorsionDriver::getSettings),
-											python::return_internal_reference<>()))	
-		.add_property("abortCallback", 
-					  python::make_function(&ConfGen::TorsionDriver::getAbortCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::TorsionDriver::setAbortCallback)
-	
-		.add_property("timeoutCallback", 
-					  python::make_function(&ConfGen::TorsionDriver::getTimeoutCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::TorsionDriver::setTimeoutCallback)
-		.add_property("logMessageCallback", 
-					  python::make_function(&ConfGen::TorsionDriver::getLogMessageCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::TorsionDriver::setLogMessageCallback);
+    python::class_<ConfGen::TorsionDriver, boost::noncopyable>("TorsionDriver", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriver>())
+        .def("getSettings", 
+             static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
+             (&ConfGen::TorsionDriver::getSettings), 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("clearTorsionLibraries", &ConfGen::TorsionDriver::clearTorsionLibraries, 
+             python::arg("self"))
+        .def("addTorsionLibrary", &ConfGen::TorsionDriver::addTorsionLibrary, 
+             (python::arg("self"), python::arg("lib")))
+        .def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&)>(
+                 &ConfGen::TorsionDriver::setup), 
+             (python::arg("self"), python::arg("molgraph")))
+        .def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&, const Util::BitSet&)>(
+                 &ConfGen::TorsionDriver::setup), 
+             (python::arg("self"), python::arg("molgraph"), python::arg("bond_mask")), 
+             python::arg("molgraph"), python::with_custodian_and_ward<1, 2>())
+        .def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&)>(
+                 &ConfGen::TorsionDriver::setup), 
+             (python::arg("self"), python::arg("molgraph")), python::with_custodian_and_ward<1, 2>())
+        .def ("clearInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)()>(
+                  &ConfGen::TorsionDriver::clearInputCoordinates), 
+              python::arg("self"))
+        .def ("clearInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(std::size_t)>(
+                  &ConfGen::TorsionDriver::clearInputCoordinates), 
+              (python::arg("self"), python::arg("frag_idx")))
+        .def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&)>(
+                  &ConfGen::TorsionDriver::addInputCoordinates), 
+              (python::arg("self"), python::arg("coords")))
+        .def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&, std::size_t)>(
+                  &ConfGen::TorsionDriver::addInputCoordinates), 
+              (python::arg("self"), python::arg("coords"), python::arg("frag_idx")))
+        .def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData&, std::size_t)>(
+                  &ConfGen::TorsionDriver::addInputCoordinates), 
+              (python::arg("self"), python::arg("conf_data"), python::arg("frag_idx")))
+        .def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData::SharedPointer&, std::size_t)>(
+                  &ConfGen::TorsionDriver::addInputCoordinates), 
+              (python::arg("self"), python::arg("conf_data"), python::arg("frag_idx")))
+        .def("setAbortCallback", &ConfGen::TorsionDriver::setAbortCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getAbortCallback", &ConfGen::TorsionDriver::getAbortCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setTimeoutCallback", &ConfGen::TorsionDriver::setTimeoutCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getTimeoutCallback", &ConfGen::TorsionDriver::getTimeoutCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setLogMessageCallback", &ConfGen::TorsionDriver::setLogMessageCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getLogMessageCallback", &ConfGen::TorsionDriver::getLogMessageCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("generateConformers", &ConfGen::TorsionDriver::generateConformers, python::arg("self"))
+        .def("getNumConformers", &ConfGen::TorsionDriver::getNumConformers, python::arg("self"))
+        .def("getConformer", 
+             static_cast<ConfGen::ConformerData& (ConfGen::TorsionDriver::*)(std::size_t)>(&ConfGen::TorsionDriver::getConformer),
+             (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+        .def("__getitem__", 
+             static_cast<ConfGen::ConformerData& (ConfGen::TorsionDriver::*)(std::size_t)>(&ConfGen::TorsionDriver::getConformer),
+             (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+        .add_property("numConformers", &ConfGen::TorsionDriver::getNumConformers)
+        .add_property("settings", 
+                      python::make_function(static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
+                                            (&ConfGen::TorsionDriver::getSettings),
+                                            python::return_internal_reference<>()))    
+        .add_property("abortCallback", 
+                      python::make_function(&ConfGen::TorsionDriver::getAbortCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::TorsionDriver::setAbortCallback)
+    
+        .add_property("timeoutCallback", 
+                      python::make_function(&ConfGen::TorsionDriver::getTimeoutCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::TorsionDriver::setTimeoutCallback)
+        .add_property("logMessageCallback", 
+                      python::make_function(&ConfGen::TorsionDriver::getLogMessageCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::TorsionDriver::setLogMessageCallback);
 }

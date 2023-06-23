@@ -45,126 +45,126 @@ using namespace CDPL;
 namespace
 {
 
-	const std::string SCORE_PROPERTY_NAME      = "<Score>";
-	const std::string DB_NAME_PROPERTY_NAME    = "<Source Database>";
-	const std::string MOL_INDEX_PROPERTY_NAME  = "<Molecule Index>";
-	const std::string CONF_INDEX_PROPERTY_NAME = "<Conformation Index>";
+    const std::string SCORE_PROPERTY_NAME      = "<Score>";
+    const std::string DB_NAME_PROPERTY_NAME    = "<Source Database>";
+    const std::string MOL_INDEX_PROPERTY_NAME  = "<Molecule Index>";
+    const std::string CONF_INDEX_PROPERTY_NAME = "<Conformation Index>";
 }
 
 
 Pharm::FileScreeningHitCollector::FileScreeningHitCollector(MolecularGraphWriter& writer):
     dataWriter(&writer), alignMolecule(true), outputScore(true), outputDBName(true), 
-	outputMolIndex(true), outputConfIndex(false)
+    outputMolIndex(true), outputConfIndex(false)
 {}
 
 void Pharm::FileScreeningHitCollector::setDataWriter(MolecularGraphWriter& writer)
 {
-	dataWriter = &writer;
+    dataWriter = &writer;
 }
 
 Pharm::FileScreeningHitCollector::MolecularGraphWriter& Pharm::FileScreeningHitCollector::getDataWriter() const
 {
-	return *dataWriter;
+    return *dataWriter;
 }
 
 void Pharm::FileScreeningHitCollector::alignHitMolecule(bool align)
 {
-	alignMolecule = align;
+    alignMolecule = align;
 }
 
 bool Pharm::FileScreeningHitCollector::isHitMoleculeAligned() const
 {
-	return alignMolecule;
+    return alignMolecule;
 }
 
 void Pharm::FileScreeningHitCollector::writeScoreProperty(bool write)
 {
-	outputScore = write;
+    outputScore = write;
 }
 
 bool Pharm::FileScreeningHitCollector::isScorePropertyWritten() const
 {
-	return outputScore;
+    return outputScore;
 }
 
 void Pharm::FileScreeningHitCollector::writeDBNameProperty(bool write)
 {
-	outputDBName = write;
+    outputDBName = write;
 }
 
 bool Pharm::FileScreeningHitCollector::isDBNamePropertyWritten() const
 {
-	return outputDBName;
+    return outputDBName;
 }
 
 void Pharm::FileScreeningHitCollector::writeDBMoleculeIndexProperty(bool write)
 {
-	outputMolIndex = write;
+    outputMolIndex = write;
 }
 
 bool Pharm::FileScreeningHitCollector::isDBMoleculeIndexPropertyWritten() const
 {
-	return outputMolIndex;
+    return outputMolIndex;
 }
-	
+    
 void Pharm::FileScreeningHitCollector::writeMoleculeConfIndexProperty(bool write)
 {
-	outputConfIndex = write;
+    outputConfIndex = write;
 }
 
 bool Pharm::FileScreeningHitCollector::isMoleculeConfIndexPropertyWritten() const
 {
-	return outputConfIndex;
+    return outputConfIndex;
 }
 
 bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::SearchHit& hit, double score)
 {
-	molecule.copy(hit.getHitMolecule());
+    molecule.copy(hit.getHitMolecule());
 
-	if (alignMolecule) {
-		alignedCoords.clear();
+    if (alignMolecule) {
+        alignedCoords.clear();
 
-		getConformation(molecule, hit.getHitConformationIndex(), alignedCoords);
+        getConformation(molecule, hit.getHitConformationIndex(), alignedCoords);
 
-		transform(alignedCoords, hit.getHitAlignmentTransform());
+        transform(alignedCoords, hit.getHitAlignmentTransform());
 
-		set3DCoordinates(molecule, alignedCoords);
-	
-	} else
-		applyConformation(molecule, hit.getHitConformationIndex());
+        set3DCoordinates(molecule, alignedCoords);
+    
+    } else
+        applyConformation(molecule, hit.getHitConformationIndex());
 
-	std::for_each(molecule.getAtomsBegin(), molecule.getAtomsEnd(), &Chem::clear3DCoordinatesArray);
-	
-	perceiveSSSR(molecule, true);
-	calcAtomStereoDescriptors(molecule, true, 3);
-	calcBondStereoDescriptors(molecule, true, 3);
+    std::for_each(molecule.getAtomsBegin(), molecule.getAtomsEnd(), &Chem::clear3DCoordinatesArray);
+    
+    perceiveSSSR(molecule, true);
+    calcAtomStereoDescriptors(molecule, true, 3);
+    calcBondStereoDescriptors(molecule, true, 3);
 
-	Chem::StringDataBlock::SharedPointer struc_data;
+    Chem::StringDataBlock::SharedPointer struc_data;
 
-	if (hasStructureData(molecule))  
-		struc_data.reset(new Chem::StringDataBlock(*getStructureData(molecule)));
-	else
-		struc_data.reset(new Chem::StringDataBlock());
+    if (hasStructureData(molecule))  
+        struc_data.reset(new Chem::StringDataBlock(*getStructureData(molecule)));
+    else
+        struc_data.reset(new Chem::StringDataBlock());
 
-	if (outputScore)
-		struc_data->addEntry(SCORE_PROPERTY_NAME, 
-							 std::to_string(score));
+    if (outputScore)
+        struc_data->addEntry(SCORE_PROPERTY_NAME, 
+                             std::to_string(score));
 
-	if (outputDBName)
-		struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
-							 boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().string());
+    if (outputDBName)
+        struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
+                             boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().string());
 
-	if (outputMolIndex) {
-		struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
-							 std::to_string(hit.getHitMoleculeIndex()));
-	}
+    if (outputMolIndex) {
+        struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
+                             std::to_string(hit.getHitMoleculeIndex()));
+    }
 
-	if (outputConfIndex)
-		struc_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
-							 std::to_string(hit.getHitConformationIndex()));
+    if (outputConfIndex)
+        struc_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
+                             std::to_string(hit.getHitConformationIndex()));
 
-	setStructureData(molecule, struc_data);
-	dataWriter->write(molecule);
+    setStructureData(molecule, struc_data);
+    dataWriter->write(molecule);
 
     return true;
 }

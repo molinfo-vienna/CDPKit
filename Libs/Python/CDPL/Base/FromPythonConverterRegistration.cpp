@@ -39,214 +39,214 @@
 namespace
 {
 
-	struct AnyFromPyObjectConverter 
-	{
+    struct AnyFromPyObjectConverter 
+    {
 
-		AnyFromPyObjectConverter() {
-			using namespace boost;
+        AnyFromPyObjectConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
-		}
+            python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			return obj_ptr;
-		}
+        static void* convertible(PyObject* obj_ptr) {
+            return obj_ptr;
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-			using namespace CDPL;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
+            using namespace CDPL;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
 
-			if (obj_ptr == Py_None) 
-				new (storage) Base::Any();
+            if (obj_ptr == Py_None) 
+                new (storage) Base::Any();
 
-			else {
-				python::handle<> obj_handle(python::borrowed(obj_ptr));
+            else {
+                python::handle<> obj_handle(python::borrowed(obj_ptr));
 
-				new (storage) Base::Any(obj_handle);
-			}
+                new (storage) Base::Any(obj_handle);
+            }
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 
-	template <typename T> struct DefaultConversionPolicy;
+    template <typename T> struct DefaultConversionPolicy;
 
-	template <typename T, typename ConversionPolicy = DefaultConversionPolicy<T> >
-	struct AnyFromPythonConverter 
-	{
+    template <typename T, typename ConversionPolicy = DefaultConversionPolicy<T> >
+    struct AnyFromPythonConverter 
+    {
 
-		AnyFromPythonConverter() {
-			using namespace boost;
+        AnyFromPythonConverter() {
+            using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
-		}
+            python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
+        }
 
-		static void* convertible(PyObject* obj_ptr) {
-			if (!obj_ptr)
-				return 0;
+        static void* convertible(PyObject* obj_ptr) {
+            if (!obj_ptr)
+                return 0;
 
-			return ConversionPolicy::convertible(obj_ptr);
-		}
+            return ConversionPolicy::convertible(obj_ptr);
+        }
 
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-			using namespace CDPL;
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+            using namespace boost;
+            using namespace CDPL;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
+            void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
 
-			new (storage) Base::Any(python::extract<T>(obj_ptr)());
+            new (storage) Base::Any(python::extract<T>(obj_ptr)());
 
-			data->convertible = storage;
-		}
-	};
+            data->convertible = storage;
+        }
+    };
 
-	template <typename T>
-	struct DefaultConversionPolicy
-	{
+    template <typename T>
+    struct DefaultConversionPolicy
+    {
 
-		static void* convertible(PyObject* obj_ptr) {
-			return (boost::python::extract<T>(obj_ptr).check() ? obj_ptr : 0);
-		}
-	};
+        static void* convertible(PyObject* obj_ptr) {
+            return (boost::python::extract<T>(obj_ptr).check() ? obj_ptr : 0);
+        }
+    };
 
-	template <typename T>
-	struct PyIntToIntConversionPolicy
-	{
-		static void* convertible(PyObject* obj_ptr) {
-			if (!PyLong_Check(obj_ptr))
-				return 0;
+    template <typename T>
+    struct PyIntToIntConversionPolicy
+    {
+        static void* convertible(PyObject* obj_ptr) {
+            if (!PyLong_Check(obj_ptr))
+                return 0;
 
-			long value = PyLong_AS_LONG(obj_ptr);
+            long value = PyLong_AS_LONG(obj_ptr);
 
-			if (std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value)
-				return 0;
+            if (std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value)
+                return 0;
 
-			return obj_ptr;
-		}
-	};
+            return obj_ptr;
+        }
+    };
 
-	template <typename T>
-	struct PyIntToUIntConversionPolicy
-	{
-		static void* convertible(PyObject* obj_ptr) {
-			if (!PyLong_Check(obj_ptr))
-				return 0;
+    template <typename T>
+    struct PyIntToUIntConversionPolicy
+    {
+        static void* convertible(PyObject* obj_ptr) {
+            if (!PyLong_Check(obj_ptr))
+                return 0;
 
-			long value = PyLong_AS_LONG(obj_ptr);
+            long value = PyLong_AS_LONG(obj_ptr);
 
-			if (value < 0 || static_cast<unsigned long>(std::numeric_limits<T>::max()) < static_cast<unsigned long>(value))
-				return 0;
+            if (value < 0 || static_cast<unsigned long>(std::numeric_limits<T>::max()) < static_cast<unsigned long>(value))
+                return 0;
 
-			return obj_ptr;
-		}
-	};
+            return obj_ptr;
+        }
+    };
 
-	template <typename T>
-	struct PyFloatConversionPolicy
-	{
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
+    template <typename T>
+    struct PyFloatConversionPolicy
+    {
+        static void* convertible(PyObject* obj_ptr) {
+            using namespace boost;
 
-			if (!PyFloat_Check(obj_ptr))
-				return 0;
+            if (!PyFloat_Check(obj_ptr))
+                return 0;
 
-			double value = PyFloat_AS_DOUBLE(obj_ptr);
+            double value = PyFloat_AS_DOUBLE(obj_ptr);
 
-			if (double(numeric::bounds<T>::highest()) < value)
-				return 0;
-			
-			if (double(numeric::bounds<T>::lowest()) > value)
-				return 0;
-			
-			if (double(numeric::bounds<T>::smallest()) > std::abs(value))
-				return 0;
+            if (double(numeric::bounds<T>::highest()) < value)
+                return 0;
+            
+            if (double(numeric::bounds<T>::lowest()) > value)
+                return 0;
+            
+            if (double(numeric::bounds<T>::smallest()) > std::abs(value))
+                return 0;
 
-			return obj_ptr;
-		}
-	};
+            return obj_ptr;
+        }
+    };
 
-	template <typename T>
-	struct PyLongToIntConversionPolicy
-	{
-		static void* convertible(PyObject* obj_ptr) {
-			if (!PyLong_Check(obj_ptr))
-				return 0;
+    template <typename T>
+    struct PyLongToIntConversionPolicy
+    {
+        static void* convertible(PyObject* obj_ptr) {
+            if (!PyLong_Check(obj_ptr))
+                return 0;
 
-			PY_LONG_LONG value = PyLong_AsLongLong(obj_ptr);
+            PY_LONG_LONG value = PyLong_AsLongLong(obj_ptr);
 
-			if (PyErr_Occurred()) {
-				PyErr_Clear();
-				return 0;
-			}
+            if (PyErr_Occurred()) {
+                PyErr_Clear();
+                return 0;
+            }
 
-			if (std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value)
-				return 0;
+            if (std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value)
+                return 0;
 
-			return obj_ptr;
-		}
-	};
+            return obj_ptr;
+        }
+    };
 
-	template <typename T>
-	struct PyLongToUIntConversionPolicy
-	{
-		static void* convertible(PyObject* obj_ptr) {
-			if (!PyLong_Check(obj_ptr))
-				return 0;
+    template <typename T>
+    struct PyLongToUIntConversionPolicy
+    {
+        static void* convertible(PyObject* obj_ptr) {
+            if (!PyLong_Check(obj_ptr))
+                return 0;
 
-			unsigned PY_LONG_LONG value = PyLong_AsUnsignedLongLong(obj_ptr);
+            unsigned PY_LONG_LONG value = PyLong_AsUnsignedLongLong(obj_ptr);
 
-			if (PyErr_Occurred()) {
-				PyErr_Clear();
-				return 0;
-			}
+            if (PyErr_Occurred()) {
+                PyErr_Clear();
+                return 0;
+            }
 
-			if (std::numeric_limits<T>::max() < value)
-				return 0;
+            if (std::numeric_limits<T>::max() < value)
+                return 0;
 
-			return obj_ptr;
-		}
-	};
+            return obj_ptr;
+        }
+    };
 }
 
 
 void CDPLPythonBase::registerFromPythonConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	AnyFromPyObjectConverter();
+    AnyFromPyObjectConverter();
 
-	AnyFromPythonConverter<std::string>();
+    AnyFromPythonConverter<std::string>();
 
-	AnyFromPythonConverter<double>();
-//	AnyFromPythonConverter<double, PyFloatConversionPolicy<double> >();
-//	AnyFromPythonConverter<float, PyFloatConversionPolicy<float> >();
+    AnyFromPythonConverter<double>();
+//    AnyFromPythonConverter<double, PyFloatConversionPolicy<double> >();
+//    AnyFromPythonConverter<float, PyFloatConversionPolicy<float> >();
 
-	AnyFromPythonConverter<std::uint64_t, PyLongToUIntConversionPolicy<std::uint64_t> >();
-	AnyFromPythonConverter<std::int64_t, PyLongToIntConversionPolicy<std::int64_t> >();
+    AnyFromPythonConverter<std::uint64_t, PyLongToUIntConversionPolicy<std::uint64_t> >();
+    AnyFromPythonConverter<std::int64_t, PyLongToIntConversionPolicy<std::int64_t> >();
 
-	AnyFromPythonConverter<unsigned long, PyLongToUIntConversionPolicy<unsigned long> >();
-	AnyFromPythonConverter<signed long, PyLongToIntConversionPolicy<signed long> >();
+    AnyFromPythonConverter<unsigned long, PyLongToUIntConversionPolicy<unsigned long> >();
+    AnyFromPythonConverter<signed long, PyLongToIntConversionPolicy<signed long> >();
 
-	AnyFromPythonConverter<unsigned int, PyLongToUIntConversionPolicy<unsigned int> >();
-	AnyFromPythonConverter<signed int, PyLongToIntConversionPolicy<signed int> >();
+    AnyFromPythonConverter<unsigned int, PyLongToUIntConversionPolicy<unsigned int> >();
+    AnyFromPythonConverter<signed int, PyLongToIntConversionPolicy<signed int> >();
 
-	AnyFromPythonConverter<unsigned short, PyLongToUIntConversionPolicy<unsigned short> >();
-	AnyFromPythonConverter<signed short, PyLongToIntConversionPolicy<signed short> >();
+    AnyFromPythonConverter<unsigned short, PyLongToUIntConversionPolicy<unsigned short> >();
+    AnyFromPythonConverter<signed short, PyLongToIntConversionPolicy<signed short> >();
 
-	AnyFromPythonConverter<unsigned char, PyLongToUIntConversionPolicy<unsigned char> >();
-	AnyFromPythonConverter<signed char, PyLongToIntConversionPolicy<signed char> >();
+    AnyFromPythonConverter<unsigned char, PyLongToUIntConversionPolicy<unsigned char> >();
+    AnyFromPythonConverter<signed char, PyLongToIntConversionPolicy<signed char> >();
 
-//	AnyFromPythonConverter<unsigned long, PyIntToUIntConversionPolicy<unsigned long> >();
-	AnyFromPythonConverter<signed long, PyIntToIntConversionPolicy<signed long> >();
+//    AnyFromPythonConverter<unsigned long, PyIntToUIntConversionPolicy<unsigned long> >();
+    AnyFromPythonConverter<signed long, PyIntToIntConversionPolicy<signed long> >();
 
-	AnyFromPythonConverter<unsigned int, PyIntToUIntConversionPolicy<unsigned int> >();
-	AnyFromPythonConverter<signed int, PyIntToIntConversionPolicy<signed int> >();
+    AnyFromPythonConverter<unsigned int, PyIntToUIntConversionPolicy<unsigned int> >();
+    AnyFromPythonConverter<signed int, PyIntToIntConversionPolicy<signed int> >();
 
-	AnyFromPythonConverter<unsigned short, PyIntToUIntConversionPolicy<unsigned short> >();
-	AnyFromPythonConverter<signed short, PyIntToIntConversionPolicy<signed short> >();
+    AnyFromPythonConverter<unsigned short, PyIntToUIntConversionPolicy<unsigned short> >();
+    AnyFromPythonConverter<signed short, PyIntToIntConversionPolicy<signed short> >();
 
-	AnyFromPythonConverter<unsigned char, PyIntToUIntConversionPolicy<unsigned char> >();
-	AnyFromPythonConverter<signed char, PyIntToIntConversionPolicy<signed char> >();
+    AnyFromPythonConverter<unsigned char, PyIntToUIntConversionPolicy<unsigned char> >();
+    AnyFromPythonConverter<signed char, PyIntToIntConversionPolicy<signed char> >();
 }

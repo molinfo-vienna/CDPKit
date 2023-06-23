@@ -38,7 +38,7 @@ namespace CDPL
     namespace Shape
     {
 
-		typedef Math::CVector<double, 7> QuaternionTransformation;
+        typedef Math::CVector<double, 7> QuaternionTransformation;
     }
 }
 

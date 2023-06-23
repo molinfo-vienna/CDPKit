@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		/**
-		 * \brief A handler for the output of feature container data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<CDFFeatureContainerWriter, DataFormat::CDF> CDFFeatureContainerOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of feature container data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<CDFFeatureContainerWriter, DataFormat::CDF> CDFFeatureContainerOutputHandler;
+    }
 }
 
 #endif // CDPL_PHARM_CDFFEATURECONTAINEROUTPUTHANDLER_HPP

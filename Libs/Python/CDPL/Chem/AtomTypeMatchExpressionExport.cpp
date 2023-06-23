@@ -33,14 +33,14 @@
 
 void CDPLPythonChem::exportAtomTypeMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
-	
-	python::class_<Chem::AtomTypeMatchExpression, Chem::AtomTypeMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> > >("AtomTypeMatchExpression", python::no_init)
-		.def(python::init<const Chem::AtomTypeMatchExpression&>((python::arg("self"), python::arg("expr"))))
-		.def(python::init<unsigned int, bool>((python::arg("self"), python::arg("atom_type"), python::arg("not_match"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomTypeMatchExpression::operator=),
-			 (python::arg("self"), python::arg("expr")), 
-			 python::return_self<>());
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::class_<Chem::AtomTypeMatchExpression, Chem::AtomTypeMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> > >("AtomTypeMatchExpression", python::no_init)
+        .def(python::init<const Chem::AtomTypeMatchExpression&>((python::arg("self"), python::arg("expr"))))
+        .def(python::init<unsigned int, bool>((python::arg("self"), python::arg("atom_type"), python::arg("not_match"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomTypeMatchExpression::operator=),
+             (python::arg("self"), python::arg("expr")), 
+             python::return_self<>());
 }

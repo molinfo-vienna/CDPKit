@@ -38,11 +38,11 @@ namespace CDPL
 
     namespace Pharm 
     {
-	
-		class FeatureSet;
-		class FeatureMapping;
-	
-		CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
+    
+        class FeatureSet;
+        class FeatureMapping;
+    
+        CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
     }
 }
 

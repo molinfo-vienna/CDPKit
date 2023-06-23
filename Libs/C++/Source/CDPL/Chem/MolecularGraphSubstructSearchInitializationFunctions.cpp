@@ -32,23 +32,23 @@ using namespace CDPL;
 
 void Chem::initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite)
 {
-	initSubstructureSearchTarget(molgraph, overwrite);
+    initSubstructureSearchTarget(molgraph, overwrite);
 
-	perceiveComponentGroups(molgraph, overwrite);
-	buildMatchExpressions(molgraph, overwrite);
+    perceiveComponentGroups(molgraph, overwrite);
+    buildMatchExpressions(molgraph, overwrite);
 }
 
 void Chem::initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite)
 {
-	perceiveComponents(molgraph, overwrite);
-	perceiveSSSR(molgraph, overwrite);
-	setRingFlags(molgraph, overwrite);
+    perceiveComponents(molgraph, overwrite);
+    perceiveSSSR(molgraph, overwrite);
+    setRingFlags(molgraph, overwrite);
 
-	calcImplicitHydrogenCounts(molgraph, overwrite);
-	perceiveHybridizationStates(molgraph, overwrite);
+    calcImplicitHydrogenCounts(molgraph, overwrite);
+    perceiveHybridizationStates(molgraph, overwrite);
 
-	setAromaticityFlags(molgraph, overwrite);
+    setAromaticityFlags(molgraph, overwrite);
 
-	calcAtomStereoDescriptors(molgraph, overwrite);
-	calcBondStereoDescriptors(molgraph, overwrite);
+    calcAtomStereoDescriptors(molgraph, overwrite);
+    calcBondStereoDescriptors(molgraph, overwrite);
 }

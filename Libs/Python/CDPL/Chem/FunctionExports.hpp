@@ -29,17 +29,17 @@
 namespace CDPLPythonChem
 {
 
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportEntity3DContainerFunctions();
-	void exportEntity3DFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
+    void exportUtilityFunctions();
+    void exportControlParameterFunctions();
+    void exportAtomContainerFunctions();
+    void exportEntity3DContainerFunctions();
+    void exportEntity3DFunctions();
+    void exportAtomFunctions();
+    void exportBondFunctions();
+    void exportMolecularGraphFunctions();
+    void exportMoleculeFunctions();
+    void exportFragmentFunctions();
+    void exportReactionFunctions();
 }
 
 #endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP

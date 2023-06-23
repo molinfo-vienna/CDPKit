@@ -39,7 +39,7 @@ namespace CDPL
     namespace ForceField 
     {
 
-	typedef Util::Array<MMFF94OutOfPlaneBendingInteraction> MMFF94OutOfPlaneBendingInteractionData;
+    typedef Util::Array<MMFF94OutOfPlaneBendingInteraction> MMFF94OutOfPlaneBendingInteractionData;
     }
 }
 

@@ -28,9 +28,9 @@
 
 namespace CDPLPythonVis
 {
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
+    
+    void registerFromPythonConverters();
+    void registerToPythonConverters();
 }
 
 #endif // CDPL_PYTHON_VIS_CONVERTERREGISTRATION_HPP

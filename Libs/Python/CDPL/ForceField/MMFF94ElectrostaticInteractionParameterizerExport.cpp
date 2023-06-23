@@ -38,27 +38,27 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionParameterizer()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94ElectrostaticInteractionParameterizer, 
-				   ForceField::MMFF94ElectrostaticInteractionParameterizer::SharedPointer>("MMFF94ElectrostaticInteractionParameterizer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94ElectrostaticInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94ElectrostaticInteractionData&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ElectrostaticInteractionParameterizer>())	
-		.def("setFilterFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomChargeFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setAtomChargeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setTopologicalDistanceFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setTopologicalDistanceFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setDielectricConstant", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setDielectricConstant, 
-			 (python::arg("self"), python::arg("de_const")))
-		.def("setDistanceExponent", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponent, 
-			 (python::arg("self"), python::arg("dist_expo")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteractionParameterizer::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("parameterize", &ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")))
-		.def_readonly("DEF_DISTANCE_EXPONENT", ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
-		.def_readonly("DEF_DIELECTRIC_CONSTANT", ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT)
-		.def_readonly("DIELECTRIC_CONSTANT_WATER", ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER);
+                   ForceField::MMFF94ElectrostaticInteractionParameterizer::SharedPointer>("MMFF94ElectrostaticInteractionParameterizer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94ElectrostaticInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94ElectrostaticInteractionData&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ElectrostaticInteractionParameterizer>())    
+        .def("setFilterFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomChargeFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setAtomChargeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setTopologicalDistanceFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setTopologicalDistanceFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setDielectricConstant", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setDielectricConstant, 
+             (python::arg("self"), python::arg("de_const")))
+        .def("setDistanceExponent", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponent, 
+             (python::arg("self"), python::arg("dist_expo")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteractionParameterizer::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("parameterize", &ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")))
+        .def_readonly("DEF_DISTANCE_EXPONENT", ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
+        .def_readonly("DEF_DIELECTRIC_CONSTANT", ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT)
+        .def_readonly("DIELECTRIC_CONSTANT_WATER", ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER);
 }

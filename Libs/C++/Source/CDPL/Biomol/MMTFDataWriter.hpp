@@ -41,46 +41,46 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
-		class MolecularGraph;
-	}
+        class Atom;
+        class MolecularGraph;
+    }
 
     namespace Biomol
     {
 
-		class MMTFDataWriter
-		{
+        class MMTFDataWriter
+        {
 
-		public:
-			MMTFDataWriter() {}
-		
-			bool writeRecord(std::ostream& os, const Chem::MolecularGraph& molgraph);
-		
-		private:
-			void init(const Chem::MolecularGraph& molgraph);
+        public:
+            MMTFDataWriter() {}
+        
+            bool writeRecord(std::ostream& os, const Chem::MolecularGraph& molgraph);
+        
+        private:
+            void init(const Chem::MolecularGraph& molgraph);
 
-			void clearStructureData();
-			void clearResidueData();
-			
-			bool outputStructureData(std::ostream& os, const Chem::MolecularGraph& molgraph);
+            void clearStructureData();
+            void clearResidueData();
+            
+            bool outputStructureData(std::ostream& os, const Chem::MolecularGraph& molgraph);
 
-			std::size_t createStructureData(const Chem::MolecularGraph& molgraph);
+            std::size_t createStructureData(const Chem::MolecularGraph& molgraph);
 
-			void addAtomData(const Chem::Atom& atom, const Math::Vector3D& coords, long& atom_serial);
-			void createResidueBondData(std::size_t start_atom_idx, std::size_t end_atom_idx, const Chem::MolecularGraph& molgraph);
-			void addResidueTypeIndex();
-			void createGlobalBondData(const Chem::MolecularGraph& molgraph);
-			void setStructureMetaData(const Chem::MolecularGraph& molgraph);
+            void addAtomData(const Chem::Atom& atom, const Math::Vector3D& coords, long& atom_serial);
+            void createResidueBondData(std::size_t start_atom_idx, std::size_t end_atom_idx, const Chem::MolecularGraph& molgraph);
+            void addResidueTypeIndex();
+            void createGlobalBondData(const Chem::MolecularGraph& molgraph);
+            void setStructureMetaData(const Chem::MolecularGraph& molgraph);
 
-			typedef std::vector<const Chem::Atom*> AtomArray;
-			typedef std::vector<std::size_t> AtomIndexArray;
+            typedef std::vector<const Chem::Atom*> AtomArray;
+            typedef std::vector<std::size_t> AtomIndexArray;
 
-			AtomArray               atoms;
-			AtomIndexArray          atomIndices;
-			mmtf::StructureData     structData;
-			mmtf::GroupType         residueData;
-			Util::BitSet            resBondMask;
-		};
+            AtomArray               atoms;
+            AtomIndexArray          atomIndices;
+            mmtf::StructureData     structData;
+            mmtf::GroupType         residueData;
+            Util::BitSet            resBondMask;
+        };
     }
 }
 

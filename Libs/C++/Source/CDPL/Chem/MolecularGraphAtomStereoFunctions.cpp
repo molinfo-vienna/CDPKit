@@ -35,70 +35,70 @@ using namespace CDPL;
 
 void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym, bool check_acyclic_subst_sym_only)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasStereoCenterFlag(atom))
-			continue;
+        if (!overwrite && hasStereoCenterFlag(atom))
+            continue;
 
-		setStereoCenterFlag(atom, isStereoCenter(atom, molgraph, check_cip_sym, check_acyclic_subst_sym_only));
-	}
+        setStereoCenterFlag(atom, isStereoCenter(atom, molgraph, check_cip_sym, check_acyclic_subst_sym_only));
+    }
 }
 
 void Chem::calcMDLParities(MolecularGraph& molgraph, bool overwrite)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasMDLParity(atom))
-			continue;
+        if (!overwrite && hasMDLParity(atom))
+            continue;
 
-		setMDLParity(atom, calcMDLParity(atom, molgraph));
-	}
+        setMDLParity(atom, calcMDLParity(atom, molgraph));
+    }
 }
 
 void Chem::calcAtomStereoDescriptors(MolecularGraph& molgraph, bool overwrite, std::size_t dim)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasStereoDescriptor(atom))
-			continue;
+        if (!overwrite && hasStereoDescriptor(atom))
+            continue;
 
-		setStereoDescriptor(atom, calcStereoDescriptor(atom, molgraph, dim));
-	}
+        setStereoDescriptor(atom, calcStereoDescriptor(atom, molgraph, dim));
+    }
 }
 
 void Chem::calcAtomStereoDescriptorsFromMDLParities(MolecularGraph& molgraph, bool overwrite)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasStereoDescriptor(atom))
-			continue;
+        if (!overwrite && hasStereoDescriptor(atom))
+            continue;
 
-		setStereoDescriptor(atom, calcStereoDescriptorFromMDLParity(atom, molgraph));
-	}
+        setStereoDescriptor(atom, calcStereoDescriptorFromMDLParity(atom, molgraph));
+    }
 }
 
 void Chem::calcAtomCIPConfigurations(MolecularGraph& molgraph, bool overwrite)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-		Atom& atom = *a_it;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+        Atom& atom = *a_it;
  
-		if (!overwrite && hasCIPConfiguration(atom))
-			continue;
+        if (!overwrite && hasCIPConfiguration(atom))
+            continue;
 
-		setCIPConfiguration(atom, calcCIPConfiguration(atom, molgraph));
-	}
+        setCIPConfiguration(atom, calcCIPConfiguration(atom, molgraph));
+    }
 }

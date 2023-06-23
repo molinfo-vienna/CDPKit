@@ -29,15 +29,15 @@
 namespace CDPLPythonGRAIL
 {
 
-	void exportGeneralizedBellAtomDensity();
-	void exportAtomDensityGridCalculator();
-	void exportBuriednessScore();
-	void exportBuriednessGridCalculator();
-	void exportFeatureInteractionScoreGridCalculator();
-	void exportGRAILDataSetGenerator();
-	void exportGRAILDescriptorCalculator();
-	void exportBindingAffinityCalculator();
-	void exportFunctionWrappers();
+    void exportGeneralizedBellAtomDensity();
+    void exportAtomDensityGridCalculator();
+    void exportBuriednessScore();
+    void exportBuriednessGridCalculator();
+    void exportFeatureInteractionScoreGridCalculator();
+    void exportGRAILDataSetGenerator();
+    void exportGRAILDescriptorCalculator();
+    void exportBindingAffinityCalculator();
+    void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_GRAIL_CLASSEXPORTS_HPP

@@ -48,71 +48,71 @@ namespace CDPL
     namespace Biomol
     {
 
-		/**
-		 * \brief A datastructure allowing a hierarchical view on biological macromolecules.
-		 */
-		class CDPL_BIOMOL_API HierarchyView
-		{
+        /**
+         * \brief A datastructure allowing a hierarchical view on biological macromolecules.
+         */
+        class CDPL_BIOMOL_API HierarchyView
+        {
 
-			typedef std::shared_ptr<HierarchyViewModel> ModelPtr;
-			typedef std::vector<ModelPtr> ModelList;
+            typedef std::shared_ptr<HierarchyViewModel> ModelPtr;
+            typedef std::vector<ModelPtr> ModelList;
 
-		  public:
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HierarchyView instances.
-			 */
-			typedef std::shared_ptr<HierarchyView> SharedPointer;
+          public:
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HierarchyView instances.
+             */
+            typedef std::shared_ptr<HierarchyView> SharedPointer;
 
-			typedef boost::indirect_iterator<ModelList::const_iterator, const HierarchyViewModel> ConstModelIterator;
+            typedef boost::indirect_iterator<ModelList::const_iterator, const HierarchyViewModel> ConstModelIterator;
 
-			/**
-			 * \brief Constructs an empty \c %HierarchyView instance.
-			 */
-			HierarchyView();
+            /**
+             * \brief Constructs an empty \c %HierarchyView instance.
+             */
+            HierarchyView();
 
-			/**
-			 * \brief Constructs a \c %HierarchyView instance for the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to build the hierarchy view.
-			 */
-			HierarchyView(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Constructs a \c %HierarchyView instance for the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to build the hierarchy view.
+             */
+            HierarchyView(const Chem::MolecularGraph& molgraph);
 
-			const ResidueList& getResidues() const;
+            const ResidueList& getResidues() const;
 
-			std::size_t getNumModels() const;
+            std::size_t getNumModels() const;
 
-			const HierarchyViewModel& getModel(std::size_t idx) const;
+            const HierarchyViewModel& getModel(std::size_t idx) const;
 
-			bool hasModelWithNumber(std::size_t num) const;
+            bool hasModelWithNumber(std::size_t num) const;
 
-			const HierarchyViewModel& getModelByNumber(std::size_t num) const;
+            const HierarchyViewModel& getModelByNumber(std::size_t num) const;
 
-			ConstModelIterator getModelsBegin() const;
+            ConstModelIterator getModelsBegin() const;
 
-			ConstModelIterator getModelsEnd() const;
+            ConstModelIterator getModelsEnd() const;
 
-			ConstModelIterator begin() const;
+            ConstModelIterator begin() const;
 
-			ConstModelIterator end() const;
+            ConstModelIterator end() const;
 
-			/**
-			 * \brief Build the hierarchy view for the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to build the hierarchy view.
-			 */
-			void build(const Chem::MolecularGraph& molgraph);
+            /**
+             * \brief Build the hierarchy view for the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to build the hierarchy view.
+             */
+            void build(const Chem::MolecularGraph& molgraph);
 
-		  private:
-			void initModelList() const;
-		
-			typedef std::unordered_map<std::size_t, ModelPtr> IDToModelMap;
+          private:
+            void initModelList() const;
+        
+            typedef std::unordered_map<std::size_t, ModelPtr> IDToModelMap;
 
-			const Chem::MolecularGraph* molGraph;
-			mutable ResidueList         residues;
-			mutable ModelList           models;
-			mutable IDToModelMap        idToModelMap;
-			mutable bool                initResidues;
-			mutable bool                initModels;
-			mutable std::mutex          initMutex;
-		};
+            const Chem::MolecularGraph* molGraph;
+            mutable ResidueList         residues;
+            mutable ModelList           models;
+            mutable IDToModelMap        idToModelMap;
+            mutable bool                initResidues;
+            mutable bool                initModels;
+            mutable std::mutex          initMutex;
+        };
     }
 }
 

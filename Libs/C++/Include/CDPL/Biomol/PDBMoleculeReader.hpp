@@ -39,53 +39,53 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		class PDBDataReader;
+        class PDBDataReader;
 
-		/**
-		 * \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
-		 *        [\ref PDB] format.
-		 */
-		class CDPL_BIOMOL_API PDBMoleculeReader : public Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>
-		{
+        /**
+         * \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
+         *        [\ref PDB] format.
+         */
+        class CDPL_BIOMOL_API PDBMoleculeReader : public Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %PDBMoleculeReader instance that will read the molecule data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			PDBMoleculeReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %PDBMoleculeReader instance that will read the molecule data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            PDBMoleculeReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~PDBMoleculeReader();
+            /**
+             * \brief Destructor.
+             */
+            ~PDBMoleculeReader();
 
-		private:
-			friend class Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>;
+        private:
+            friend class Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>;
 
-			PDBMoleculeReader(const PDBMoleculeReader&);
+            PDBMoleculeReader(const PDBMoleculeReader&);
 
-			PDBMoleculeReader& operator=(const PDBMoleculeReader&);
+            PDBMoleculeReader& operator=(const PDBMoleculeReader&);
 
-			bool readData(std::istream&, Chem::Molecule&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Chem::Molecule&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<PDBDataReader> PDBDataReaderPtr;
+            typedef std::auto_ptr<PDBDataReader> PDBDataReaderPtr;
 
-			PDBDataReaderPtr reader;
-		};
-	}
+            PDBDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBMOLECULEREADER_HPP

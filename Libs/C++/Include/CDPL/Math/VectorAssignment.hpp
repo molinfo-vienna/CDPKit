@@ -37,47 +37,47 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename E> class VectorExpression;
+        template <typename E> class VectorExpression;
 
-		template <template <typename T1, typename T2> class F, typename V, typename E>
-		void vectorAssignVector(V& v, const VectorExpression<E>& e)
-		{
-			typedef typename CommonType<typename V::SizeType, typename E::SizeType>::Type SizeType;
+        template <template <typename T1, typename T2> class F, typename V, typename E>
+        void vectorAssignVector(V& v, const VectorExpression<E>& e)
+        {
+            typedef typename CommonType<typename V::SizeType, typename E::SizeType>::Type SizeType;
 
-			SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(v.getSize()), SizeType(e().getSize()), Base::SizeError);
+            SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(v.getSize()), SizeType(e().getSize()), Base::SizeError);
 
-			typedef F<typename V::Reference, typename E::ValueType> FunctorType;
+            typedef F<typename V::Reference, typename E::ValueType> FunctorType;
 
-			for (SizeType i = 0; i < size; i++)
-				FunctorType::apply(v(i), e()(i));
-		}
+            for (SizeType i = 0; i < size; i++)
+                FunctorType::apply(v(i), e()(i));
+        }
 
-		template <template <typename T1, typename T2> class F, typename V, typename T>
-		void vectorAssignScalar(V& v, const T& t)
-		{
-			typedef F<typename V::Reference, T> FunctorType;
-			typedef typename V::SizeType SizeType;
+        template <template <typename T1, typename T2> class F, typename V, typename T>
+        void vectorAssignScalar(V& v, const T& t)
+        {
+            typedef F<typename V::Reference, T> FunctorType;
+            typedef typename V::SizeType SizeType;
 
-			SizeType size = v.getSize();
+            SizeType size = v.getSize();
 
-			for (SizeType i = 0; i < size; i++)
-				FunctorType::apply(v(i), t);
-		}
-	
-		template <typename V, typename E>
-		void vectorSwap(V& v, VectorExpression<E>& e)
-		{
-			typedef typename CommonType<typename V::SizeType, typename E::SizeType>::Type SizeType;
+            for (SizeType i = 0; i < size; i++)
+                FunctorType::apply(v(i), t);
+        }
+    
+        template <typename V, typename E>
+        void vectorSwap(V& v, VectorExpression<E>& e)
+        {
+            typedef typename CommonType<typename V::SizeType, typename E::SizeType>::Type SizeType;
 
-			SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(v.getSize()), SizeType(e().getSize()), Base::SizeError);
+            SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(v.getSize()), SizeType(e().getSize()), Base::SizeError);
 
-			for (SizeType i = 0; i < size; i++)
-				std::swap(v(i), e()(i));
-		}
-	}
+            for (SizeType i = 0; i < size; i++)
+                std::swap(v(i), e()(i));
+        }
+    }
 }
 
 #endif // CDPL_MATH_VECTORASSIGNMENT_HPP

@@ -37,26 +37,26 @@ using namespace CDPL;
 
 void Chem::setAtomMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite) 
 {
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
-												 bool)>(&setAtomMatchConstraints), std::placeholders::_1, std::ref(constr), overwrite));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
+                                                 bool)>(&setAtomMatchConstraints), std::placeholders::_1, std::ref(constr), overwrite));
 }
 
 void Chem::setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite)
 {
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
-												 bool)>(&setAtomMatchConstraints), std::placeholders::_1, std::ref(constr), overwrite));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
+                                                 bool)>(&setAtomMatchConstraints), std::placeholders::_1, std::ref(constr), overwrite));
 }
 
 void Chem::setComponentMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite)
 {
-	for (Reaction::ComponentIterator it = rxn.getComponentsBegin(), end = rxn.getComponentsEnd(); it != end; ++it) {
-		MolecularGraph& molgraph = *it;
+    for (Reaction::ComponentIterator it = rxn.getComponentsBegin(), end = rxn.getComponentsEnd(); it != end; ++it) {
+        MolecularGraph& molgraph = *it;
 
-		if (!overwrite && hasMatchConstraints(molgraph))
-			continue;
+        if (!overwrite && hasMatchConstraints(molgraph))
+            continue;
 
-		setMatchConstraints(molgraph, constr);
-	}
+        setMatchConstraints(molgraph, constr);
+    }
 }

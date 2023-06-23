@@ -42,107 +42,107 @@ namespace CDPL
     namespace Shape
     {
 
-		class AlignmentResult;
+        class AlignmentResult;
 
-		class CDPL_SHAPE_API ScreeningSettings
-		{
+        class CDPL_SHAPE_API ScreeningSettings
+        {
 
-		  public:
-			static const ScreeningSettings DEFAULT;
-			static constexpr double        NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
+          public:
+            static const ScreeningSettings DEFAULT;
+            static constexpr double        NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
 
-			typedef std::function<double(const AlignmentResult&)> ScoringFunction;
+            typedef std::function<double(const AlignmentResult&)> ScoringFunction;
 
-			enum ScreeningMode
-			{
+            enum ScreeningMode
+            {
 
-			    BEST_OVERALL_MATCH,
-				BEST_MATCH_PER_QUERY,
-				BEST_MATCH_PER_QUERY_CONF
-			};
+                BEST_OVERALL_MATCH,
+                BEST_MATCH_PER_QUERY,
+                BEST_MATCH_PER_QUERY_CONF
+            };
 
-			enum ColorFeatureType
-			{
+            enum ColorFeatureType
+            {
 
-			    NO_FEATURES,
-				PHARMACOPHORE_EXP_CHARGES,
-				PHARMACOPHORE_IMP_CHARGES
-			};
+                NO_FEATURES,
+                PHARMACOPHORE_EXP_CHARGES,
+                PHARMACOPHORE_IMP_CHARGES
+            };
 
-			enum AlignmentMode
-			{
-			
-	    		NO_ALIGNMENT          = 0x0,
-			    SHAPE_CENTROID        = 0x1,
-				ATOM_CENTERS          = 0x2,
-				COLOR_FEATURE_CENTERS = 0x4,
-				RANDOM                = 0x8
-			};
+            enum AlignmentMode
+            {
+            
+                NO_ALIGNMENT          = 0x0,
+                SHAPE_CENTROID        = 0x1,
+                ATOM_CENTERS          = 0x2,
+                COLOR_FEATURE_CENTERS = 0x4,
+                RANDOM                = 0x8
+            };
 
-			ScreeningSettings();
-		
-			void setScoringFunction(const ScoringFunction& func);
+            ScreeningSettings();
+        
+            void setScoringFunction(const ScoringFunction& func);
 
-			const ScoringFunction& getScoringFunction() const;
+            const ScoringFunction& getScoringFunction() const;
 
-			void setColorFeatureType(ColorFeatureType type);
+            void setColorFeatureType(ColorFeatureType type);
 
-			ColorFeatureType getColorFeatureType() const;
+            ColorFeatureType getColorFeatureType() const;
 
-			void setScreeningMode(ScreeningMode mode);
+            void setScreeningMode(ScreeningMode mode);
 
-			ScreeningMode getScreeningMode() const;
+            ScreeningMode getScreeningMode() const;
 
-			void setAlignmentMode(AlignmentMode mode);
+            void setAlignmentMode(AlignmentMode mode);
 
-			AlignmentMode getAlignmentMode() const;
+            AlignmentMode getAlignmentMode() const;
 
-			void setNumRandomStarts(std::size_t num_starts);
+            void setNumRandomStarts(std::size_t num_starts);
 
-			std::size_t getNumRandomStarts() const;
+            std::size_t getNumRandomStarts() const;
 
-			void allCarbonMode(bool all_c);
+            void allCarbonMode(bool all_c);
 
-			bool allCarbonMode() const;
+            bool allCarbonMode() const;
 
-			void singleConformerSearch(bool single_conf);
+            void singleConformerSearch(bool single_conf);
 
-			bool singleConformerSearch() const;
+            bool singleConformerSearch() const;
 
-			void optimizeOverlap(bool optimize);
+            void optimizeOverlap(bool optimize);
 
-			bool optimizeOverlap() const;
+            bool optimizeOverlap() const;
 
-			void greedyOptimization(bool greedy);
+            void greedyOptimization(bool greedy);
 
-			bool greedyOptimization() const;
+            bool greedyOptimization() const;
 
-			void setMaxNumOptimizationIterations(std::size_t max_iter);
+            void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumOptimizationIterations() const;
+            std::size_t getMaxNumOptimizationIterations() const;
 
-			void setOptimizationStopGradient(double grad_norm);
+            void setOptimizationStopGradient(double grad_norm);
 
-			double getOptimizationStopGradient() const;
-		
-			void setScoreCutoff(double cutoff);
+            double getOptimizationStopGradient() const;
+        
+            void setScoreCutoff(double cutoff);
 
-			double getScoreCutoff() const;
+            double getScoreCutoff() const;
 
-		  private:
-			ScoringFunction   scoringFunc;
-			ColorFeatureType  colorFtrType;
-			ScreeningMode     screeningMode;
-			AlignmentMode     almntMode;
-			std::size_t       numRandomStarts;
-			bool              allCarbon;
-			bool              singleConfSearch;
-			bool              optOverlap;
-			bool              greedyOpt;
-			std::size_t       numOptIter;
-			double            optStopGrad;
-			double            scoreCutoff;
-		};
+          private:
+            ScoringFunction   scoringFunc;
+            ColorFeatureType  colorFtrType;
+            ScreeningMode     screeningMode;
+            AlignmentMode     almntMode;
+            std::size_t       numRandomStarts;
+            bool              allCarbon;
+            bool              singleConfSearch;
+            bool              optOverlap;
+            bool              greedyOpt;
+            std::size_t       numOptIter;
+            double            optStopGrad;
+            double            scoreCutoff;
+        };
     }
 }
 

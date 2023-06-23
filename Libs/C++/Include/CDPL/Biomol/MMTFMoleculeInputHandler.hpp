@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)y</em>
-		 *        [\ref MMTF].
-		 */
-		typedef Util::DefaultDataInputHandler<MMTFMoleculeReader, DataFormat::MMTF> MMTFMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)y</em>
+         *        [\ref MMTF].
+         */
+        typedef Util::DefaultDataInputHandler<MMTFMoleculeReader, DataFormat::MMTF> MMTFMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_BIOMOL_MMTFMOLECULEINPUTHANDLER_HPP

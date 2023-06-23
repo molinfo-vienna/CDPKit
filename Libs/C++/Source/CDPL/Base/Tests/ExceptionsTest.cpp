@@ -31,37 +31,37 @@
 
 BOOST_AUTO_TEST_CASE(ExceptionTest)
 {
-	using namespace CDPL;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Base;
 
-	BOOST_CHECK(Exception().what() == std::string(""));
-	BOOST_CHECK(Exception("Exception").what() == std::string("Exception"));
+    BOOST_CHECK(Exception().what() == std::string(""));
+    BOOST_CHECK(Exception("Exception").what() == std::string("Exception"));
 
-	BOOST_CHECK(NullPointerException().what() == std::string(""));
-	BOOST_CHECK(NullPointerException("NullPointerException").what() == std::string("NullPointerException"));
+    BOOST_CHECK(NullPointerException().what() == std::string(""));
+    BOOST_CHECK(NullPointerException("NullPointerException").what() == std::string("NullPointerException"));
 
-	BOOST_CHECK(ValueError().what() == std::string(""));
-	BOOST_CHECK(ValueError("ValueError").what() == std::string("ValueError"));
+    BOOST_CHECK(ValueError().what() == std::string(""));
+    BOOST_CHECK(ValueError("ValueError").what() == std::string("ValueError"));
 
-	BOOST_CHECK(RangeError().what() == std::string(""));
-	BOOST_CHECK(RangeError("RangeError").what() == std::string("RangeError"));
+    BOOST_CHECK(RangeError().what() == std::string(""));
+    BOOST_CHECK(RangeError("RangeError").what() == std::string("RangeError"));
 
-	BOOST_CHECK(IndexError().what() == std::string(""));
-	BOOST_CHECK(IndexError("IndexError").what() == std::string("IndexError"));
+    BOOST_CHECK(IndexError().what() == std::string(""));
+    BOOST_CHECK(IndexError("IndexError").what() == std::string("IndexError"));
 
-	BOOST_CHECK(ItemNotFound().what() == std::string(""));
-	BOOST_CHECK(ItemNotFound("ItemNotFound").what() == std::string("ItemNotFound"));
+    BOOST_CHECK(ItemNotFound().what() == std::string(""));
+    BOOST_CHECK(ItemNotFound("ItemNotFound").what() == std::string("ItemNotFound"));
 
-	BOOST_CHECK(BadCast().what() == std::string(""));
-	BOOST_CHECK(BadCast("BadCast").what() == std::string("BadCast"));
+    BOOST_CHECK(BadCast().what() == std::string(""));
+    BOOST_CHECK(BadCast("BadCast").what() == std::string("BadCast"));
 
-	BOOST_CHECK(OperationFailed().what() == std::string(""));
-	BOOST_CHECK(OperationFailed("OperationFailed").what() == std::string("OperationFailed"));
+    BOOST_CHECK(OperationFailed().what() == std::string(""));
+    BOOST_CHECK(OperationFailed("OperationFailed").what() == std::string("OperationFailed"));
 
-	BOOST_CHECK(CalculationFailed().what() == std::string(""));
-	BOOST_CHECK(CalculationFailed("CalculationFailed").what() == std::string("CalculationFailed"));
+    BOOST_CHECK(CalculationFailed().what() == std::string(""));
+    BOOST_CHECK(CalculationFailed("CalculationFailed").what() == std::string("CalculationFailed"));
 
-	BOOST_CHECK(IOError().what() == std::string(""));
-	BOOST_CHECK(IOError("IOError").what() == std::string("IOError"));
+    BOOST_CHECK(IOError().what() == std::string(""));
+    BOOST_CHECK(IOError("IOError").what() == std::string("IOError"));
 }
 

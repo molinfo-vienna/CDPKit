@@ -36,38 +36,38 @@
 namespace
 {
 
-	std::string toString(const CDPL::Base::LookupKey& key)
-	{
-		std::ostringstream oss;
+    std::string toString(const CDPL::Base::LookupKey& key)
+    {
+        std::ostringstream oss;
 
-		oss << "CDPL.Base.LookupKey(id=" << key.getID() << ", name='" << key.getName() << "')";
+        oss << "CDPL.Base.LookupKey(id=" << key.getID() << ", name='" << key.getName() << "')";
 
-		return oss.str();
-	}
+        return oss.str();
+    }
 }
 
 
 void CDPLPythonBase::exportLookupKey()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
     python::class_<Base::LookupKey>("LookupKey", python::no_init)
-		.def(python::init<const Base::LookupKey&>((python::arg("self"), python::arg("key"))))
-		.def("create", &Base::LookupKey::create, python::arg("name"))
-		.staticmethod("create")
-		.def("getID", &Base::LookupKey::getID, python::arg("self"))    
-		.def("assign", copyAssOp(&Base::LookupKey::operator=), (python::arg("self"), python::arg("key")), python::return_self<>())
-		.def("getName", &Base::LookupKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setName", &Base::LookupKey::setName, (python::arg("self"), python::arg("name")))
-		.def(ObjectIdentityCheckVisitor<Base::LookupKey>())
+        .def(python::init<const Base::LookupKey&>((python::arg("self"), python::arg("key"))))
+        .def("create", &Base::LookupKey::create, python::arg("name"))
+        .staticmethod("create")
+        .def("getID", &Base::LookupKey::getID, python::arg("self"))    
+        .def("assign", copyAssOp(&Base::LookupKey::operator=), (python::arg("self"), python::arg("key")), python::return_self<>())
+        .def("getName", &Base::LookupKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+        .def("setName", &Base::LookupKey::setName, (python::arg("self"), python::arg("name")))
+        .def(ObjectIdentityCheckVisitor<Base::LookupKey>())
         .add_property("numericID", &Base::LookupKey::getID)    
         .add_property("name", python::make_function(&Base::LookupKey::getName, 
-													python::return_value_policy<python::copy_const_reference>()),
-					  &Base::LookupKey::setName)    
+                                                    python::return_value_policy<python::copy_const_reference>()),
+                      &Base::LookupKey::setName)    
         .def_readonly("NONE", &Base::LookupKey::NONE)    
-		.def("__lt__", &Base::LookupKey::operator<, (python::arg("self"), python::arg("key")))    
+        .def("__lt__", &Base::LookupKey::operator<, (python::arg("self"), python::arg("key")))    
         .def("__eq__", &Base::LookupKey::operator==, (python::arg("self"), python::arg("key")))
         .def("__ne__", &Base::LookupKey::operator!=, (python::arg("self"), python::arg("key")))
-		.def("__str__", &toString, python::arg("self"));
+        .def("__str__", &toString, python::arg("self"));
 }

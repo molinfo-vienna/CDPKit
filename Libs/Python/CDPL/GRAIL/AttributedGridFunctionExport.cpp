@@ -33,12 +33,12 @@
 #define MAKE_ATTRGRID_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)              \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Grid::AttributedGrid& grid)    \
 {                                                                   \
-	return CDPL::GRAIL::get##FUNC_SUFFIX(grid);						\
+    return CDPL::GRAIL::get##FUNC_SUFFIX(grid);                        \
 }                                                                   \
                                                                     \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Grid::AttributedGrid& grid)    \
 {                                                                   \
-	return CDPL::GRAIL::has##FUNC_SUFFIX(grid);						\
+    return CDPL::GRAIL::has##FUNC_SUFFIX(grid);                        \
 }
 
 #define EXPORT_ATTRGRID_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                             \
@@ -58,8 +58,8 @@ python::def("set"#FUNC_SUFFIX, &GRAIL::set##FUNC_SUFFIX, (python::arg("grid"), p
 namespace
 {
 
-	MAKE_ATTRGRID_FUNC_WRAPPERS(unsigned int, FeatureType)
-	MAKE_ATTRGRID_FUNC_WRAPPERS(unsigned int, TargetFeatureType)
+    MAKE_ATTRGRID_FUNC_WRAPPERS(unsigned int, FeatureType)
+    MAKE_ATTRGRID_FUNC_WRAPPERS(unsigned int, TargetFeatureType)
 }
 
 
@@ -68,6 +68,6 @@ void CDPLPythonGRAIL::exportAttributedGridFunctions()
     using namespace boost;
     using namespace CDPL;
 
-	EXPORT_ATTRGRID_FUNCS(FeatureType, type)
-	EXPORT_ATTRGRID_FUNCS(TargetFeatureType, type)
+    EXPORT_ATTRGRID_FUNCS(FeatureType, type)
+    EXPORT_ATTRGRID_FUNCS(TargetFeatureType, type)
 }

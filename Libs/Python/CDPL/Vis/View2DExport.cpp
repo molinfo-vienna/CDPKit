@@ -35,35 +35,35 @@
 namespace
 {
 
-	struct View2DWrapper : CDPL::Vis::View2D, boost::python::wrapper<CDPL::Vis::View2D>
-	{
+    struct View2DWrapper : CDPL::Vis::View2D, boost::python::wrapper<CDPL::Vis::View2D>
+    {
 
-		void render(CDPL::Vis::Renderer2D& renderer) {
-			this->get_override("render")(boost::ref(renderer));
-		}
+        void render(CDPL::Vis::Renderer2D& renderer) {
+            this->get_override("render")(boost::ref(renderer));
+        }
 
-		void setFontMetrics(CDPL::Vis::FontMetrics* font_metrics) {
-			this->get_override("setFontMetrics")(boost::python::ptr(font_metrics));
-		}
+        void setFontMetrics(CDPL::Vis::FontMetrics* font_metrics) {
+            this->get_override("setFontMetrics")(boost::python::ptr(font_metrics));
+        }
 
-		void getModelBounds(CDPL::Vis::Rectangle2D& bounds) {
-			this->get_override("getModelBounds")(boost::ref(bounds));
-		}
-	};
+        void getModelBounds(CDPL::Vis::Rectangle2D& bounds) {
+            this->get_override("getModelBounds")(boost::ref(bounds));
+        }
+    };
 }
 
 
 void CDPLPythonVis::exportView2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<View2DWrapper, python::bases<Base::ControlParameterContainer>, boost::noncopyable>("View2D", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def("render", python::pure_virtual(&Vis::View2D::render), (python::arg("self"), python::arg("renderer")))
-		.def("setFontMetrics", python::pure_virtual(&Vis::View2D::setFontMetrics), 
-			 (python::arg("self"), python::arg("font_metrics")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("getModelBounds", python::pure_virtual(&Vis::View2D::getModelBounds), 
-			 (python::arg("self"), python::arg("bounds")));
+    python::class_<View2DWrapper, python::bases<Base::ControlParameterContainer>, boost::noncopyable>("View2D", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def("render", python::pure_virtual(&Vis::View2D::render), (python::arg("self"), python::arg("renderer")))
+        .def("setFontMetrics", python::pure_virtual(&Vis::View2D::setFontMetrics), 
+             (python::arg("self"), python::arg("font_metrics")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("getModelBounds", python::pure_virtual(&Vis::View2D::getModelBounds), 
+             (python::arg("self"), python::arg("bounds")));
 }

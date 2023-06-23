@@ -47,151 +47,151 @@
 namespace
 {
 
-	void checkClone(const CDPL::Vis::PolylinePrimitive2D& prim)
-	{
-		using namespace CDPL;
-		using namespace Vis;
+    void checkClone(const CDPL::Vis::PolylinePrimitive2D& prim)
+    {
+        using namespace CDPL;
+        using namespace Vis;
 
-		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
-		const PolylinePrimitive2D* prim_clone_ptr = static_cast<const PolylinePrimitive2D*>(gp_clone_ptr.get());
+        GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
+        const PolylinePrimitive2D* prim_clone_ptr = static_cast<const PolylinePrimitive2D*>(gp_clone_ptr.get());
 
-		BOOST_CHECK_EQUAL(prim_clone_ptr->getSize(), prim.getSize());
-		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
+        BOOST_CHECK_EQUAL(prim_clone_ptr->getSize(), prim.getSize());
+        BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
 
-		for (std::size_t i = 0; i < prim.getSize(); i++)
-			BOOST_CHECK((*prim_clone_ptr)[i] == prim[i]);
-	}
+        for (std::size_t i = 0; i < prim.getSize(); i++)
+            BOOST_CHECK((*prim_clone_ptr)[i] == prim[i]);
+    }
 }
 
 
 BOOST_AUTO_TEST_CASE(PolylinePrimitive2DTest)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	PolylinePrimitive2D plp;
+    PolylinePrimitive2D plp;
 
-	BOOST_CHECK(plp.getPen() == Pen());
+    BOOST_CHECK(plp.getPen() == Pen());
 
-	checkClone(plp);
+    checkClone(plp);
 
-	plp.setPen(Pen(Color::GREEN, Pen::DASH_LINE));
+    plp.setPen(Pen(Color::GREEN, Pen::DASH_LINE));
 
-	BOOST_CHECK(plp.getPen() == Pen(Color::GREEN, Pen::DASH_LINE));
+    BOOST_CHECK(plp.getPen() == Pen(Color::GREEN, Pen::DASH_LINE));
 
-	checkClone(plp);
+    checkClone(plp);
 
 //-----
 
 #ifdef HAVE_CAIRO 
 # ifdef HAVE_CAIRO_PNG_SUPPORT
 
-	CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 310, 1300));
+    CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 310, 1300));
 
-	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	CairoPointer<cairo_t> ctxt_ptr(cairo_create(surf_ptr.get()));
+    CairoPointer<cairo_t> ctxt_ptr(cairo_create(surf_ptr.get()));
 
-	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
-	CairoRenderer2D renderer(ctxt_ptr);
+    CairoRenderer2D renderer(ctxt_ptr);
 
-	Pen test_pens[] = {
-		Pen(Color::BLACK, 0.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::BLACK, 0.5, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::BLACK, 0.5, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
-		Pen(Color::BLACK, 0.5, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::BLACK, 0.5, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::BLACK, 0.5, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
-		
-		Pen(Color::RED, 1.0, Pen::NO_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::RED, 1.0, Pen::SOLID_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
-		Pen(Color::RED, 1.0, Pen::DASH_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
-		Pen(Color::RED, 1.0, Pen::DOT_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::RED, 1.0, Pen::DASH_DOT_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
-		Pen(Color::RED, 1.0, Pen::DASH_DOT_DOT_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
-		
-		Pen(Color::GREEN, 1.5, Pen::NO_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
-		Pen(Color::GREEN, 1.5, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
-		Pen(Color::GREEN, 1.5, Pen::DASH_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::GREEN, 1.5, Pen::DOT_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
-		Pen(Color::GREEN, 1.5, Pen::DASH_DOT_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
-		Pen(Color::GREEN, 1.5, Pen::DASH_DOT_DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
-		
-		Pen(Color::BLUE, 2.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::BLUE, 2.0, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::BLUE, 2.0, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
-		Pen(Color::BLUE, 2.0, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::BLUE, 2.0, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::BLUE, 2.0, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
-	
-		Pen(Color::MAGENTA, 3.0, Pen::NO_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::MAGENTA, 3.0, Pen::SOLID_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
-		Pen(Color::MAGENTA, 3.0, Pen::DASH_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
-		Pen(Color::MAGENTA, 3.0, Pen::DOT_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::MAGENTA, 3.0, Pen::DASH_DOT_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
-		Pen(Color::MAGENTA, 3.0, Pen::DASH_DOT_DOT_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
-		
-		Pen(Color::CYAN, 5.0, Pen::NO_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
-		Pen(Color::CYAN, 5.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
-		Pen(Color::CYAN, 5.0, Pen::DASH_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::CYAN, 5.0, Pen::DOT_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
-		Pen(Color::CYAN, 5.0, Pen::DASH_DOT_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
-		Pen(Color::CYAN, 5.0, Pen::DASH_DOT_DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
-		
-		Pen(Color::YELLOW, 10.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN)
-	};
+    Pen test_pens[] = {
+        Pen(Color::BLACK, 0.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+        Pen(Color::BLACK, 0.5, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::BLACK, 0.5, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
+        Pen(Color::BLACK, 0.5, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+        Pen(Color::BLACK, 0.5, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::BLACK, 0.5, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
+        
+        Pen(Color::RED, 1.0, Pen::NO_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::RED, 1.0, Pen::SOLID_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
+        Pen(Color::RED, 1.0, Pen::DASH_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
+        Pen(Color::RED, 1.0, Pen::DOT_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::RED, 1.0, Pen::DASH_DOT_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
+        Pen(Color::RED, 1.0, Pen::DASH_DOT_DOT_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
+        
+        Pen(Color::GREEN, 1.5, Pen::NO_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
+        Pen(Color::GREEN, 1.5, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
+        Pen(Color::GREEN, 1.5, Pen::DASH_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::GREEN, 1.5, Pen::DOT_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
+        Pen(Color::GREEN, 1.5, Pen::DASH_DOT_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
+        Pen(Color::GREEN, 1.5, Pen::DASH_DOT_DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
+        
+        Pen(Color::BLUE, 2.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+        Pen(Color::BLUE, 2.0, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::BLUE, 2.0, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
+        Pen(Color::BLUE, 2.0, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+        Pen(Color::BLUE, 2.0, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::BLUE, 2.0, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
+    
+        Pen(Color::MAGENTA, 3.0, Pen::NO_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::MAGENTA, 3.0, Pen::SOLID_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
+        Pen(Color::MAGENTA, 3.0, Pen::DASH_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
+        Pen(Color::MAGENTA, 3.0, Pen::DOT_LINE, Pen::FLAT_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::MAGENTA, 3.0, Pen::DASH_DOT_LINE, Pen::FLAT_CAP, Pen::ROUND_JOIN),
+        Pen(Color::MAGENTA, 3.0, Pen::DASH_DOT_DOT_LINE, Pen::FLAT_CAP, Pen::MITER_JOIN),
+        
+        Pen(Color::CYAN, 5.0, Pen::NO_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
+        Pen(Color::CYAN, 5.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
+        Pen(Color::CYAN, 5.0, Pen::DASH_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::CYAN, 5.0, Pen::DOT_LINE, Pen::SQUARE_CAP, Pen::ROUND_JOIN),
+        Pen(Color::CYAN, 5.0, Pen::DASH_DOT_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
+        Pen(Color::CYAN, 5.0, Pen::DASH_DOT_DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
+        
+        Pen(Color::YELLOW, 10.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+        Pen(Color::YELLOW, 10.0, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::YELLOW, 10.0, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
+        Pen(Color::YELLOW, 10.0, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+        Pen(Color::YELLOW, 10.0, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+        Pen(Color::YELLOW, 10.0, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN)
+    };
 
-	plp.resize(5);
+    plp.resize(5);
 
-	double y = 140.0;
+    double y = 140.0;
 
-	for (std::size_t i = 0; i < 7; y += 170.0, i++) {
-		for (std::size_t j = 0; j < 6; j++) {
-			plp.setPen(test_pens[i * 6 + j]);
+    for (std::size_t i = 0; i < 7; y += 170.0, i++) {
+        for (std::size_t j = 0; j < 6; j++) {
+            plp.setPen(test_pens[i * 6 + j]);
 
-			plp[0](0) = -1.0 * 20.0 * j;
-			plp[0](1) = 1.0 * 20.0 * j;
+            plp[0](0) = -1.0 * 20.0 * j;
+            plp[0](1) = 1.0 * 20.0 * j;
 
-			plp[1](0) = 1.0 * 20.0 * j;
-			plp[1](1) = 1.0 * 20.0 * j;
+            plp[1](0) = 1.0 * 20.0 * j;
+            plp[1](1) = 1.0 * 20.0 * j;
 
-			plp[2](0) = 0.5 * 20.0 * j;
-			plp[2](1) = -1.0 * 20.0 * j;
-			
-			plp[3](0) = -1.5 * 20.0 * j;
-			plp[3](1) = -0.5 * 20.0 * j;
+            plp[2](0) = 0.5 * 20.0 * j;
+            plp[2](1) = -1.0 * 20.0 * j;
+            
+            plp[3](0) = -1.5 * 20.0 * j;
+            plp[3](1) = -0.5 * 20.0 * j;
 
-			plp[4](0) = -1.8 * 20.0 * j;
-			plp[4](1) = 0.5 * 20.0 * j;
+            plp[4](0) = -1.8 * 20.0 * j;
+            plp[4](1) = 0.5 * 20.0 * j;
 
-			plp.translate(Math::vec(195.0, y));
+            plp.translate(Math::vec(195.0, y));
 
-			checkClone(plp);
+            checkClone(plp);
 
-			plp.render(renderer);
+            plp.render(renderer);
 
-			Rectangle2D bbox;
-			plp.getBounds(bbox, 0);
+            Rectangle2D bbox;
+            plp.getBounds(bbox, 0);
 
-			renderer.setPen(Color::RED);
-			renderer.setBrush(Brush());
-			renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+            renderer.setPen(Color::RED);
+            renderer.setBrush(Brush());
+            renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
 
-			BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
-			BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
-		}
-	}
+            BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
+            BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
+        }
+    }
 
-	BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "PolylinePrimitive2DTest.png") == CAIRO_STATUS_SUCCESS);
+    BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "PolylinePrimitive2DTest.png") == CAIRO_STATUS_SUCCESS);
 
-//	BOOST_MESSAGE(cairo_status_to_string(cairo_surface_status(surf_ptr.get())));
-//	BOOST_MESSAGE(cairo_status_to_string(cairo_status(ctxt_ptr.get())));
+//    BOOST_MESSAGE(cairo_status_to_string(cairo_surface_status(surf_ptr.get())));
+//    BOOST_MESSAGE(cairo_status_to_string(cairo_status(ctxt_ptr.get())));
 
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO

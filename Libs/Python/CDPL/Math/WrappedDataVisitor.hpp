@@ -33,19 +33,19 @@ namespace CDPLPythonMath
 
     template <typename WrapperType> 
     struct WrappedDataVisitor : 
-		public boost::python::def_visitor<WrappedDataVisitor<WrapperType> >
+        public boost::python::def_visitor<WrappedDataVisitor<WrapperType> >
     {
-	
-		friend class boost::python::def_visitor_access;
+    
+        friend class boost::python::def_visitor_access;
 
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
+        template <typename ClassType>
+        void visit(ClassType& cl) const {
+            using namespace boost;
 
-			cl
-				.def("getData", &WrapperType::getData, python::arg("self"))
-				.add_property("data", &WrapperType::getData);
-		}
+            cl
+                .def("getData", &WrapperType::getData, python::arg("self"))
+                .add_property("data", &WrapperType::getData);
+        }
     };
 }
 

@@ -35,19 +35,19 @@
 namespace CDPL 
 {
 
-	namespace Chem 
-	{
-	
-		class Entity3DContainer;
-	}
+    namespace Chem 
+    {
+    
+        class Entity3DContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		CDPL_DESCR_API double calcGeometricalRadius(const Chem::Entity3DContainer& cntnr);
+        CDPL_DESCR_API double calcGeometricalRadius(const Chem::Entity3DContainer& cntnr);
 
-		CDPL_DESCR_API double calcGeometricalDiameter(const Chem::Entity3DContainer& cntnr);
-	}
+        CDPL_DESCR_API double calcGeometricalDiameter(const Chem::Entity3DContainer& cntnr);
+    }
 }
 
 #endif // CDPL_DESCR_ENTITY3DCONTAINERFUNCTIONS_HPP

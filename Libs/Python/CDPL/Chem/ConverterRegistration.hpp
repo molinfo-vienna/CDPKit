@@ -28,9 +28,9 @@
 
 namespace CDPLPythonChem
 {
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
+    
+    void registerFromPythonConverters();
+    void registerToPythonConverters();
 }
 
 #endif // CDPL_PYTHON_CHEM_CONVERTERREGISTRATION_HPP

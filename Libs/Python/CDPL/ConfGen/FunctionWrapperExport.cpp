@@ -31,7 +31,7 @@
 
 void CDPLPythonConfGen::exportFunctionWrappers()
 {
-	CDPLPythonBase::Function0Export<bool()>("CallbackFunction");
+    CDPLPythonBase::Function0Export<bool()>("CallbackFunction");
 
-	CDPLPythonBase::Function1Export<void(const std::string&)>("LogMessageCallbackFunction");
+    CDPLPythonBase::Function1Export<void(const std::string&)>("LogMessageCallbackFunction");
 }

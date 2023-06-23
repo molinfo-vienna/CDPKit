@@ -35,34 +35,34 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		/**
-		 * \brief Provides keys for built-in control-parameters.
-		 */
-		namespace ControlParameter
-		{
+        /**
+         * \brief Provides keys for built-in control-parameters.
+         */
+        namespace ControlParameter
+        {
 
-			/**
-			 * \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
-			 *
-			 * If the control-parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
-			 * non-fatal errors from which a recovery would be possible. 
-			 * If the control-parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
-			 * detected.
-			 *
-			 * \valuetype \c bool
-			 */
-			extern CDPL_CONFGEN_API const Base::LookupKey STRICT_ERROR_CHECKING;
-		}
-	}
+            /**
+             * \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
+             *
+             * If the control-parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
+             * non-fatal errors from which a recovery would be possible. 
+             * If the control-parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
+             * detected.
+             *
+             * \valuetype \c bool
+             */
+            extern CDPL_CONFGEN_API const Base::LookupKey STRICT_ERROR_CHECKING;
+        }
+    }
 }
 
 #endif // CDPL_CONFGEN_CONTROLPARAMETER_HPP

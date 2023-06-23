@@ -38,16 +38,16 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		/**
-		 * \brief KetoEnolTautomerizationRule.
-		 */
-		class CDPL_CHEM_API KetoEnolTautomerization : public PatternBasedTautomerizationRule
-		{
+    
+        /**
+         * \brief KetoEnolTautomerizationRule.
+         */
+        class CDPL_CHEM_API KetoEnolTautomerization : public PatternBasedTautomerizationRule
+        {
 
-		  public:
-			KetoEnolTautomerization();
-		};
+          public:
+            KetoEnolTautomerization();
+        };
     }
 }
 

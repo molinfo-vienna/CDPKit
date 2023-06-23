@@ -32,21 +32,21 @@
 namespace 
 {
 
-	struct BondStereoFlag {};
+    struct BondStereoFlag {};
 }
 
 
 void CDPLPythonChem::exportBondStereoFlags()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondStereoFlag, boost::noncopyable>("BondStereoFlag", python::no_init)
-		.def_readonly("PLAIN", &Chem::BondStereoFlag::PLAIN)
-		.def_readonly("UP", &Chem::BondStereoFlag::UP)
-		.def_readonly("REVERSE_UP", &Chem::BondStereoFlag::REVERSE_UP)
-		.def_readonly("DOWN", &Chem::BondStereoFlag::DOWN)
-		.def_readonly("REVERSE_DOWN", &Chem::BondStereoFlag::REVERSE_DOWN)
-		.def_readonly("EITHER", &Chem::BondStereoFlag::EITHER)
-		.def_readonly("REVERSE_EITHER", &Chem::BondStereoFlag::REVERSE_EITHER);
+    python::class_<BondStereoFlag, boost::noncopyable>("BondStereoFlag", python::no_init)
+        .def_readonly("PLAIN", &Chem::BondStereoFlag::PLAIN)
+        .def_readonly("UP", &Chem::BondStereoFlag::UP)
+        .def_readonly("REVERSE_UP", &Chem::BondStereoFlag::REVERSE_UP)
+        .def_readonly("DOWN", &Chem::BondStereoFlag::DOWN)
+        .def_readonly("REVERSE_DOWN", &Chem::BondStereoFlag::REVERSE_DOWN)
+        .def_readonly("EITHER", &Chem::BondStereoFlag::EITHER)
+        .def_readonly("REVERSE_EITHER", &Chem::BondStereoFlag::REVERSE_EITHER);
 }

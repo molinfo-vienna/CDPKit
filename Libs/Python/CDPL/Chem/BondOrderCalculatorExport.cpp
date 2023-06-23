@@ -41,13 +41,13 @@ void CDPLPythonChem::exportBondOrderCalculator()
     void (Chem::BondOrderCalculator::*undefOnlySetterFunc)(bool) = &Chem::BondOrderCalculator::undefinedOnly;
 
     python::class_<Chem::BondOrderCalculator, boost::noncopyable>("BondOrderCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::STArray&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("orders"), python::arg("undef_only") = true)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondOrderCalculator>())	
-		.def("undefinedOnly", undefOnlySetterFunc, (python::arg("self"), python::arg("undef_only")))
-		.def("undefinedOnly", undefOnlyGetterFunc, python::arg("self"))
-		.def("calculate", &Chem::BondOrderCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("orders")))
-		.add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::STArray&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("orders"), python::arg("undef_only") = true)))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondOrderCalculator>())    
+        .def("undefinedOnly", undefOnlySetterFunc, (python::arg("self"), python::arg("undef_only")))
+        .def("undefinedOnly", undefOnlyGetterFunc, python::arg("self"))
+        .def("calculate", &Chem::BondOrderCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("orders")))
+        .add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc);
 }

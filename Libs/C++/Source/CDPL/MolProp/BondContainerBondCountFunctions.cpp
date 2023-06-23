@@ -36,7 +36,7 @@ using namespace CDPL;
 
 std::size_t MolProp::getExplicitBondCount(const Chem::BondContainer& cntnr)
 {
-	return cntnr.getNumBonds();
+    return cntnr.getNumBonds();
 }
 
 std::size_t MolProp::getExplicitBondCount(const Chem::BondContainer& cntnr, std::size_t order, bool inc_aro)
@@ -44,69 +44,69 @@ std::size_t MolProp::getExplicitBondCount(const Chem::BondContainer& cntnr, std:
     std::size_t count = 0;
 
     for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it) {
-		const Chem::Bond& bond = *it;
-		
-		if (!inc_aro && getAromaticityFlag(bond))
-			continue;
-		
-		if (getOrder(bond) == order)
-			count++;
-	}
-	
+        const Chem::Bond& bond = *it;
+        
+        if (!inc_aro && getAromaticityFlag(bond))
+            continue;
+        
+        if (getOrder(bond) == order)
+            count++;
+    }
+    
     return count;
 }
 
 std::size_t MolProp::getExplicitHydrogenBondCount(const Chem::BondContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
-		if (isHydrogenBond(*it))
-			count++;
+    for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
+        if (isHydrogenBond(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getExplicitChainBondCount(const Chem::BondContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
-		if (!getRingFlag(*it))
-			count++;
+    for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
+        if (!getRingFlag(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getRingBondCount(const Chem::BondContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
-		if (getRingFlag(*it))
-			count++;
+    for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
+        if (getRingFlag(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getAromaticBondCount(const Chem::BondContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
-		if (getAromaticityFlag(*it))
-			count++;
+    for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
+        if (getAromaticityFlag(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getHeavyBondCount(const Chem::BondContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
-		if (!isHydrogenBond(*it))
-			count++;
+    for (Chem::BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
+        if (!isHydrogenBond(*it))
+            count++;
 
-	return count;
+    return count;
 }

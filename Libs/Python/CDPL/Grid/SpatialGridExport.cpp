@@ -41,41 +41,41 @@ namespace
     template <typename GridType>
     struct SpatialGridWrapper : GridType, boost::python::wrapper<GridType> 
     {
-	
-		typedef std::shared_ptr<SpatialGridWrapper> SharedPointer;
-		typedef typename GridType::ValueType ValueType;
-		typedef typename GridType::CoordinatesType CoordinatesType;
+    
+        typedef std::shared_ptr<SpatialGridWrapper> SharedPointer;
+        typedef typename GridType::ValueType ValueType;
+        typedef typename GridType::CoordinatesType CoordinatesType;
 
-		ATTRIBUTEDGRID_IMPL()
-		SPATIALGRID_IMPL()
+        ATTRIBUTEDGRID_IMPL()
+        SPATIALGRID_IMPL()
     };
 
     template <typename GridType>
     struct SpatialGridExport
     {
-		SpatialGridExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        SpatialGridExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			python::scope scope = python::class_<SpatialGridWrapper<GridType>, typename SpatialGridWrapper<GridType>::SharedPointer,
-												 python::bases<Grid::AttributedGrid>,
-												 boost::noncopyable>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(CDPLPythonGrid::AttributedGridVirtualFunctionsVisitor())
-				.def(CDPLPythonGrid::SpatialGridVirtualFunctionsVisitor<GridType>())
-				.def(CDPLPythonGrid::AttributedGridSpecialFunctionsVisitor())
-				.def(CDPLPythonGrid::SpatialGridSpecialFunctionsVisitor<GridType>())
-				.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
+            python::scope scope = python::class_<SpatialGridWrapper<GridType>, typename SpatialGridWrapper<GridType>::SharedPointer,
+                                                 python::bases<Grid::AttributedGrid>,
+                                                 boost::noncopyable>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(CDPLPythonGrid::AttributedGridVirtualFunctionsVisitor())
+                .def(CDPLPythonGrid::SpatialGridVirtualFunctionsVisitor<GridType>())
+                .def(CDPLPythonGrid::AttributedGridSpecialFunctionsVisitor())
+                .def(CDPLPythonGrid::SpatialGridSpecialFunctionsVisitor<GridType>())
+                .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
 
-			python::register_ptr_to_python<typename GridType::SharedPointer>();
-		}
+            python::register_ptr_to_python<typename GridType::SharedPointer>();
+        }
     };
 }
 
 
 void CDPLPythonGrid::exportSpatialGrid()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
     SpatialGridExport<Grid::FSpatialGrid>("FSpatialGrid");
     SpatialGridExport<Grid::DSpatialGrid>("DSpatialGrid");

@@ -24,12 +24,12 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}/MessagePack" "${CDPKIT_EXTERNAL_DIR}/MMTF")
 
 ADD_CUSTOM_COMMAND(OUTPUT "ResidueDictionaryStructureData.cdf.str"
-		   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-		   "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-		   "ResidueDictionaryStructureData.cdf.str"
-		   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-		   COMMENT "-- Processing residue dictionary structure data, please wait..."
-		   )
+           COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+           "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+           "ResidueDictionaryStructureData.cdf.str"
+           DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+           COMMENT "-- Processing residue dictionary structure data, please wait..."
+           )
 
 SET(cdpl-biomol_LIB_SRCS
     ResidueDictionaryStructureData.cdf.str
@@ -74,7 +74,7 @@ SET(cdpl-biomol_LIB_SRCS
 
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-IF(WIN32 AND MINGW)		     
+IF(WIN32 AND MINGW)             
    LINK_LIBRARIES(libwsock32.a)
 ENDIF(WIN32 AND MINGW)
 
@@ -98,28 +98,28 @@ TARGET_LINK_LIBRARIES(cdpl-biomol-shared cdpl-chem-shared cdpl-molprop-shared cd
 
 SET_TARGET_PROPERTIES(cdpl-biomol-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-biomol
-		      CLEAN_DIRECT_OUTPUT 1
-		      INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-		      )
+              CLEAN_DIRECT_OUTPUT 1
+              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
+              )
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-biomol.dll")
 ELSEIF(APPLE)
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-biomol.dylib")
-ELSE()			
+ELSE()            
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-biomol.so")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(TARGETS cdpl-biomol-shared
         RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-	)
+    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
+    )
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

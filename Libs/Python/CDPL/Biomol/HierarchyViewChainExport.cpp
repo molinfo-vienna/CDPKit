@@ -35,11 +35,11 @@ void CDPLPythonBiomol::exportHierarchyViewChain()
     using namespace CDPL;
 
     python::class_<Biomol::HierarchyViewChain, python::bases<Biomol::HierarchyViewNode>, boost::noncopyable>("HierarchyViewChain", python::no_init)
-		.def("getNumFragments", &Biomol::HierarchyViewChain::getNumFragments, python::arg("self"))
-		.def("getFragment", &Biomol::HierarchyViewChain::getFragment, (python::arg("self"), python::arg("idx")),
-			 python::return_internal_reference<>())
-		.def("__len__", &Biomol::HierarchyViewChain::getNumFragments, python::arg("self"))
-		.def("__getitem__", &Biomol::HierarchyViewChain::getFragment, (python::arg("self"), python::arg("idx")),
-			 python::return_internal_reference<>())
-		.add_property("numFragments", &Biomol::HierarchyViewChain::getNumFragments);
+        .def("getNumFragments", &Biomol::HierarchyViewChain::getNumFragments, python::arg("self"))
+        .def("getFragment", &Biomol::HierarchyViewChain::getFragment, (python::arg("self"), python::arg("idx")),
+             python::return_internal_reference<>())
+        .def("__len__", &Biomol::HierarchyViewChain::getNumFragments, python::arg("self"))
+        .def("__getitem__", &Biomol::HierarchyViewChain::getFragment, (python::arg("self"), python::arg("idx")),
+             python::return_internal_reference<>())
+        .add_property("numFragments", &Biomol::HierarchyViewChain::getNumFragments);
 }

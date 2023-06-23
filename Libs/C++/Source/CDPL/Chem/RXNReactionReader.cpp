@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Chem::RXNReactionReader::RXNReactionReader(std::istream& is): 
-	Util::StreamDataReader<Reaction, RXNReactionReader>(is), reader(new MDLDataReader(*this)) {}
+    Util::StreamDataReader<Reaction, RXNReactionReader>(is), reader(new MDLDataReader(*this)) {}
 
 Chem::RXNReactionReader::~RXNReactionReader() {}
 
 bool Chem::RXNReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
-	try {
-		if (overwrite)
-			rxn.clear();
+    try {
+        if (overwrite)
+            rxn.clear();
 
-		return reader->readRXNFile(is, rxn);
+        return reader->readRXNFile(is, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("RXNReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("RXNReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::RXNReactionReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipRXNFile(is);
+    try {
+        return reader->skipRXNFile(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("RXNReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("RXNReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Chem::RXNReactionReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

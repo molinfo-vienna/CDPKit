@@ -37,34 +37,34 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Feature;
-		class FeatureContainer;
-	}
+        class Feature;
+        class FeatureContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief FeatureRDFCodeCalculator.
-		 * \see [\ref CITB, \ref HBMD]
-		 */
-		class CDPL_DESCR_API FeatureRDFCodeCalculator : public RDFCodeCalculator<Pharm::Feature>
-		{
+        /**
+         * \brief FeatureRDFCodeCalculator.
+         * \see [\ref CITB, \ref HBMD]
+         */
+        class CDPL_DESCR_API FeatureRDFCodeCalculator : public RDFCodeCalculator<Pharm::Feature>
+        {
 
-		public:
-			/**
-			 * \brief Constructs the \c %FeatureRDFCodeCalculator instance.
-			 */
-			FeatureRDFCodeCalculator();
-			
-			FeatureRDFCodeCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
+        public:
+            /**
+             * \brief Constructs the \c %FeatureRDFCodeCalculator instance.
+             */
+            FeatureRDFCodeCalculator();
+            
+            FeatureRDFCodeCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
 
-			void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
-		}; 
-	}
+            void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_FEATURERDFCODECALCULATOR_HPP

@@ -35,66 +35,66 @@ using namespace CDPL;
 
 bool Chem::isInFragmentOfSize(const Bond& bond, const FragmentList& frag_list, std::size_t size)
 {
-	for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
-			 end = frag_list.getElementsEnd(); it != end; ++it) {
-	
-		const Fragment& frag = *it;
+    for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
+             end = frag_list.getElementsEnd(); it != end; ++it) {
+    
+        const Fragment& frag = *it;
 
-		if (frag.containsBond(bond) && frag.getNumAtoms() == size)
-			return true;
-	}
+        if (frag.containsBond(bond) && frag.getNumAtoms() == size)
+            return true;
+    }
 
-	return false;
+    return false;
 }
 
 std::size_t Chem::getSizeOfSmallestContainingFragment(const Bond& bond, const FragmentList& frag_list)
 {
-	std::size_t smallest_rsize = 0;
+    std::size_t smallest_rsize = 0;
 
-	for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
-			 end = frag_list.getElementsEnd(); it != end; ++it) {
-	
-		const Fragment& frag = *it;
+    for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
+             end = frag_list.getElementsEnd(); it != end; ++it) {
+    
+        const Fragment& frag = *it;
 
-		if (frag.containsBond(bond) && (smallest_rsize == 0 || frag.getNumAtoms() < smallest_rsize))
-			smallest_rsize = frag.getNumAtoms();
-	}
+        if (frag.containsBond(bond) && (smallest_rsize == 0 || frag.getNumAtoms() < smallest_rsize))
+            smallest_rsize = frag.getNumAtoms();
+    }
 
-	return smallest_rsize;
+    return smallest_rsize;
 }
 
 std::size_t Chem::getSizeOfLargestContainingFragment(const Bond& bond, const FragmentList& frag_list)
 {
-	std::size_t largest_rsize = 0;
+    std::size_t largest_rsize = 0;
 
-	for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
-			 end = frag_list.getElementsEnd(); it != end; ++it) {
-	
-		const Fragment& frag = *it;
+    for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
+             end = frag_list.getElementsEnd(); it != end; ++it) {
+    
+        const Fragment& frag = *it;
 
-		if (frag.containsBond(bond) && frag.getNumAtoms() > largest_rsize)
-			largest_rsize = frag.getNumAtoms();
-	}
+        if (frag.containsBond(bond) && frag.getNumAtoms() > largest_rsize)
+            largest_rsize = frag.getNumAtoms();
+    }
 
-	return largest_rsize;
+    return largest_rsize;
 }
 
 std::size_t Chem::getNumContainingFragments(const Bond& bond, const FragmentList& frag_list)
 {
-	std::size_t count = std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
-									  std::bind(&Fragment::containsBond, std::placeholders::_1,
-												std::ref(bond)));
+    std::size_t count = std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
+                                      std::bind(&Fragment::containsBond, std::placeholders::_1,
+                                                std::ref(bond)));
 
-	return count;
+    return count;
 }
 
 void Chem::getContainingFragments(const Bond& bond, const FragmentList& frag_list, FragmentList& cont_frag_list, bool append)
 {
-	if (!append)
-		cont_frag_list.clear();
+    if (!append)
+        cont_frag_list.clear();
 
-	for (FragmentList::BaseType::ConstElementIterator it = frag_list.getBase().getElementsBegin(), 
-			 end = frag_list.getBase().getElementsEnd(); it != end; ++it)
-		if ((*it)->containsBond(bond))
-			cont_frag_list.addElement(*it);
+    for (FragmentList::BaseType::ConstElementIterator it = frag_list.getBase().getElementsBegin(), 
+             end = frag_list.getBase().getElementsEnd(); it != end; ++it)
+        if ((*it)->containsBond(bond))
+            cont_frag_list.addElement(*it);
 }

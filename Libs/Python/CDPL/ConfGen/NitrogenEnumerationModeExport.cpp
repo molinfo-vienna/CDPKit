@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct NitrogenEnumerationMode {};
+    struct NitrogenEnumerationMode {};
 }
 
 
 void CDPLPythonConfGen::exportNitrogenEnumerationModes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<NitrogenEnumerationMode, boost::noncopyable>("NitrogenEnumerationMode", python::no_init)
-		.def_readonly("NONE", &ConfGen::NitrogenEnumerationMode::NONE)
-		.def_readonly("ALL", &ConfGen::NitrogenEnumerationMode::ALL)
-		.def_readonly("UNSPECIFIED_STEREO", &ConfGen::NitrogenEnumerationMode::UNSPECIFIED_STEREO);
+    python::class_<NitrogenEnumerationMode, boost::noncopyable>("NitrogenEnumerationMode", python::no_init)
+        .def_readonly("NONE", &ConfGen::NitrogenEnumerationMode::NONE)
+        .def_readonly("ALL", &ConfGen::NitrogenEnumerationMode::ALL)
+        .def_readonly("UNSPECIFIED_STEREO", &ConfGen::NitrogenEnumerationMode::UNSPECIFIED_STEREO);
 }

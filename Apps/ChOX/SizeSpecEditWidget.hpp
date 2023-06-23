@@ -38,36 +38,36 @@ class QDoubleSpinBox;
 namespace ChOX
 {
 
-	class FloatSpinBox;
+    class FloatSpinBox;
 
-	class SizeSpecEditWidget : public QWidget
-	{
+    class SizeSpecEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		SizeSpecEditWidget(QWidget*, CDPL::Vis::SizeSpecification&, bool = true, bool = true, bool = true);
+    public:
+        SizeSpecEditWidget(QWidget*, CDPL::Vis::SizeSpecification&, bool = true, bool = true, bool = true);
 
-	signals:
-		void sizeSpecChanged();
+    signals:
+        void sizeSpecChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleValueChange(double);
-		void handleTypeChange(int);
-		void handlePolicyChange(bool);
+    private slots:
+        void handleValueChange(double);
+        void handleTypeChange(int);
+        void handlePolicyChange(bool);
 
-	private:
-		void init(bool, bool, bool);
+    private:
+        void init(bool, bool, bool);
 
-		CDPL::Vis::SizeSpecification& sizeSpec;
-		QDoubleSpinBox*               valueSpinBox;
-		QComboBox*                    typeComboBox;
-		QCheckBox*                    inputScalingCheckBox;
-		QCheckBox*                    outputScalingCheckBox;
-	};
+        CDPL::Vis::SizeSpecification& sizeSpec;
+        QDoubleSpinBox*               valueSpinBox;
+        QComboBox*                    typeComboBox;
+        QCheckBox*                    inputScalingCheckBox;
+        QCheckBox*                    outputScalingCheckBox;
+    };
 }
 
 #endif // CHOX_SIZESPECEDITWIDGET_HPP

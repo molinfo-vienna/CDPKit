@@ -32,31 +32,31 @@
 namespace 
 {
 
-	struct BRICSAtomLabel {};
+    struct BRICSAtomLabel {};
 }
 
 
 void CDPLPythonChem::exportBRICSAtomLabels()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BRICSAtomLabel, boost::noncopyable>("BRICSAtomLabel", python::no_init)
-		.def_readonly("NONE", &Chem::BRICSAtomLabel::NONE)
-		.def_readonly("L1", &Chem::BRICSAtomLabel::L1)
-		.def_readonly("L2", &Chem::BRICSAtomLabel::L2)
-		.def_readonly("L3", &Chem::BRICSAtomLabel::L3)
-		.def_readonly("L4", &Chem::BRICSAtomLabel::L4)
-		.def_readonly("L5", &Chem::BRICSAtomLabel::L5)
-		.def_readonly("L6", &Chem::BRICSAtomLabel::L6)
-		.def_readonly("L7", &Chem::BRICSAtomLabel::L7)
-		.def_readonly("L8", &Chem::BRICSAtomLabel::L8)
-		.def_readonly("L9", &Chem::BRICSAtomLabel::L9)
-		.def_readonly("L10", &Chem::BRICSAtomLabel::L10)
-		.def_readonly("L11", &Chem::BRICSAtomLabel::L11)
-		.def_readonly("L12", &Chem::BRICSAtomLabel::L12)
-		.def_readonly("L13", &Chem::BRICSAtomLabel::L13)
-		.def_readonly("L14", &Chem::BRICSAtomLabel::L14)
-		.def_readonly("L15", &Chem::BRICSAtomLabel::L15)
-		.def_readonly("L16", &Chem::BRICSAtomLabel::L16);
+    python::class_<BRICSAtomLabel, boost::noncopyable>("BRICSAtomLabel", python::no_init)
+        .def_readonly("NONE", &Chem::BRICSAtomLabel::NONE)
+        .def_readonly("L1", &Chem::BRICSAtomLabel::L1)
+        .def_readonly("L2", &Chem::BRICSAtomLabel::L2)
+        .def_readonly("L3", &Chem::BRICSAtomLabel::L3)
+        .def_readonly("L4", &Chem::BRICSAtomLabel::L4)
+        .def_readonly("L5", &Chem::BRICSAtomLabel::L5)
+        .def_readonly("L6", &Chem::BRICSAtomLabel::L6)
+        .def_readonly("L7", &Chem::BRICSAtomLabel::L7)
+        .def_readonly("L8", &Chem::BRICSAtomLabel::L8)
+        .def_readonly("L9", &Chem::BRICSAtomLabel::L9)
+        .def_readonly("L10", &Chem::BRICSAtomLabel::L10)
+        .def_readonly("L11", &Chem::BRICSAtomLabel::L11)
+        .def_readonly("L12", &Chem::BRICSAtomLabel::L12)
+        .def_readonly("L13", &Chem::BRICSAtomLabel::L13)
+        .def_readonly("L14", &Chem::BRICSAtomLabel::L14)
+        .def_readonly("L15", &Chem::BRICSAtomLabel::L15)
+        .def_readonly("L16", &Chem::BRICSAtomLabel::L16);
 }

@@ -37,40 +37,40 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct ScalingExport
-	{
+    template <typename MatrixType>
+    struct ScalingExport
+    {
 
-		ScalingExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ScalingExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::ValueType ValueType;
-			typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::ValueType ValueType;
+            typedef typename MatrixType::SizeType SizeType;
 
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, const ValueType&, const ValueType&, const ValueType&>(
-						 (python::arg("self"), python::arg("n"), python::arg("sx") = ValueType(1), python::arg("sy") = ValueType(1), 
-						  python::arg("sz") = ValueType(1))))
-				.def("set", &MatrixType::set,
-					 (python::arg("self"), python::arg("sx") = ValueType(1), python::arg("sy") = ValueType(1), 
-					  python::arg("sz") = ValueType(1)))
-				.def("resize", &MatrixType::resize, python::arg("n"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, const ValueType&, const ValueType&, const ValueType&>(
+                         (python::arg("self"), python::arg("n"), python::arg("sx") = ValueType(1), python::arg("sy") = ValueType(1), 
+                          python::arg("sz") = ValueType(1))))
+                .def("set", &MatrixType::set,
+                     (python::arg("self"), python::arg("sx") = ValueType(1), python::arg("sy") = ValueType(1), 
+                      python::arg("sz") = ValueType(1)))
+                .def("resize", &MatrixType::resize, python::arg("n"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportScalingMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ScalingExport<Math::FScalingMatrix>("FScalingMatrix");
-	ScalingExport<Math::DScalingMatrix>("DScalingMatrix");
-	ScalingExport<Math::LScalingMatrix>("LScalingMatrix");
-	ScalingExport<Math::ULScalingMatrix>("ULScalingMatrix");
+    ScalingExport<Math::FScalingMatrix>("FScalingMatrix");
+    ScalingExport<Math::DScalingMatrix>("DScalingMatrix");
+    ScalingExport<Math::LScalingMatrix>("LScalingMatrix");
+    ScalingExport<Math::ULScalingMatrix>("ULScalingMatrix");
 }

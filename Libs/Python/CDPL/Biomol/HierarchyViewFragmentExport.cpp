@@ -35,5 +35,5 @@ void CDPLPythonBiomol::exportHierarchyViewFragment()
     using namespace CDPL;
 
     python::class_<Biomol::HierarchyViewFragment, python::bases<Biomol::HierarchyViewNode>, boost::noncopyable>("HierarchyViewFragment", python::no_init)
-	;
+    ;
 }

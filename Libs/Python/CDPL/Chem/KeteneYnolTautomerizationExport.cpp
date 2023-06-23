@@ -35,7 +35,7 @@ void CDPLPythonChem::exportKeteneYnolTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::KeteneYnolTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("KeteneYnolTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::KeteneYnolTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("KeteneYnolTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::KeteneYnolTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

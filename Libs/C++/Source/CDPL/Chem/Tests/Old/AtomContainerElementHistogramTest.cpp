@@ -41,105 +41,105 @@
 
 BOOST_AUTO_TEST_CASE(AtomContainerElementHistogramTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
-
-	const ElementHistogram* histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
-
-	BOOST_CHECK(histogram->getSize() == 0);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    const ElementHistogram* histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+    BOOST_CHECK(histogram->getSize() == 0);
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
-
-	histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
-
-	BOOST_CHECK((*histogram)[AtomType::H] == 2);
-	BOOST_CHECK((*histogram)[AtomType::C] == 17);
-	BOOST_CHECK((*histogram)[AtomType::N] == 1);
-	BOOST_CHECK((*histogram)[AtomType::O] == 3);
-	BOOST_CHECK((*histogram)[AtomType::P] == 0);
-
-	BOOST_CHECK(histogram->getSize() == 4);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
-	BOOST_CHECK((*histogram)[AtomType::H] == 2);
-	BOOST_CHECK((*histogram)[AtomType::C] == 16);
-	BOOST_CHECK((*histogram)[AtomType::N] == 2);
-	BOOST_CHECK((*histogram)[AtomType::O] == 3);
-	BOOST_CHECK((*histogram)[AtomType::P] == 0);
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
 
-	BOOST_CHECK(histogram->getSize() == 4);
+    histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+    BOOST_CHECK((*histogram)[AtomType::H] == 2);
+    BOOST_CHECK((*histogram)[AtomType::C] == 17);
+    BOOST_CHECK((*histogram)[AtomType::N] == 1);
+    BOOST_CHECK((*histogram)[AtomType::O] == 3);
+    BOOST_CHECK((*histogram)[AtomType::P] == 0);
 
-//-----
+    BOOST_CHECK(histogram->getSize() == 4);
 
-	mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
-
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
-
-	histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
-
-	BOOST_CHECK((*histogram)[AtomType::UNKNOWN] == 1);
-	BOOST_CHECK((*histogram)[AtomType::H] == 2);
-	BOOST_CHECK((*histogram)[AtomType::C] == 15);
-	BOOST_CHECK((*histogram)[AtomType::N] == 2);
-	BOOST_CHECK((*histogram)[AtomType::O] == 3);
-	BOOST_CHECK((*histogram)[AtomType::P] == 0);
-
-	BOOST_CHECK(histogram->getSize() == 5);
-
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
 
 //-----
 
-	mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+    mol.getAtom(0).setProperty(AtomProperty::TYPE, AtomType::N);
 
-	BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
 
-	histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
+    histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
 
-	BOOST_CHECK((*histogram)[AtomType::UNKNOWN] == 2);
-	BOOST_CHECK((*histogram)[AtomType::H] == 2);
-	BOOST_CHECK((*histogram)[AtomType::C] == 14);
-	BOOST_CHECK((*histogram)[AtomType::N] == 2);
-	BOOST_CHECK((*histogram)[AtomType::O] == 3);
-	BOOST_CHECK((*histogram)[AtomType::P] == 0);
+    BOOST_CHECK((*histogram)[AtomType::H] == 2);
+    BOOST_CHECK((*histogram)[AtomType::C] == 16);
+    BOOST_CHECK((*histogram)[AtomType::N] == 2);
+    BOOST_CHECK((*histogram)[AtomType::O] == 3);
+    BOOST_CHECK((*histogram)[AtomType::P] == 0);
 
-	BOOST_CHECK(histogram->getSize() == 5);
+    BOOST_CHECK(histogram->getSize() == 4);
 
-	BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
-
-//-----
-
-	TestUtils::checkDependency(mol, AtomContainerProperty::ELEMENT_HISTOGRAM, mol, AtomContainerProperty::ATOM_COUNT);
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, AtomContainerProperty::ELEMENT_HISTOGRAM, *it, AtomProperty::TYPE);
+    mol.getAtom(1).setProperty(AtomProperty::TYPE, AtomType::MAX_ATOMIC_NO + 1);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+
+    histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
+
+    BOOST_CHECK((*histogram)[AtomType::UNKNOWN] == 1);
+    BOOST_CHECK((*histogram)[AtomType::H] == 2);
+    BOOST_CHECK((*histogram)[AtomType::C] == 15);
+    BOOST_CHECK((*histogram)[AtomType::N] == 2);
+    BOOST_CHECK((*histogram)[AtomType::O] == 3);
+    BOOST_CHECK((*histogram)[AtomType::P] == 0);
+
+    BOOST_CHECK(histogram->getSize() == 5);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+
+//-----
+
+    mol.getAtom(2).setProperty(AtomProperty::TYPE, AtomType::UNKNOWN);
+
+    BOOST_CHECK(mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+
+    histogram = &mol.getProperty<ElementHistogram>(AtomContainerProperty::ELEMENT_HISTOGRAM);
+
+    BOOST_CHECK((*histogram)[AtomType::UNKNOWN] == 2);
+    BOOST_CHECK((*histogram)[AtomType::H] == 2);
+    BOOST_CHECK((*histogram)[AtomType::C] == 14);
+    BOOST_CHECK((*histogram)[AtomType::N] == 2);
+    BOOST_CHECK((*histogram)[AtomType::O] == 3);
+    BOOST_CHECK((*histogram)[AtomType::P] == 0);
+
+    BOOST_CHECK(histogram->getSize() == 5);
+
+    BOOST_CHECK(!mol.getProperty(AtomContainerProperty::ELEMENT_HISTOGRAM, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, AtomContainerProperty::ELEMENT_HISTOGRAM, mol, AtomContainerProperty::ATOM_COUNT);
+
+//-----
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, AtomContainerProperty::ELEMENT_HISTOGRAM, *it, AtomProperty::TYPE);
 }

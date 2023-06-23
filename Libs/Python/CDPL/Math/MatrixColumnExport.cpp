@@ -40,47 +40,47 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct MatrixColumnExport
-	{
-	
-		typedef CDPL::Math::MatrixColumn<ExpressionType> MatrixColumnType;
-		typedef typename MatrixColumnType::SizeType SizeType;
-		typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixColumnType> MatrixColumnWrapper;
-		typedef typename MatrixColumnWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename MatrixColumnWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct MatrixColumnExport
+    {
+    
+        typedef CDPL::Math::MatrixColumn<ExpressionType> MatrixColumnType;
+        typedef typename MatrixColumnType::SizeType SizeType;
+        typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SizeType, MatrixColumnType> MatrixColumnWrapper;
+        typedef typename MatrixColumnWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename MatrixColumnWrapper::SharedPointer WrapperPointerType;
 
-		MatrixColumnExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        MatrixColumnExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<MatrixColumnWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const MatrixColumnWrapper&>((python::arg("self"), python::arg("mc"))))
-				.def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
-				.def("getIndex", &MatrixColumnType::getIndex, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixColumnType>())
-				.def(AssignFunctionGeneratorVisitor<MatrixColumnType, ConstVectorExpression>("e"))
-				.def(ConstVectorVisitor<MatrixColumnType>("c"))
-				.def(VectorAssignAndSwapVisitor<MatrixColumnType>("c"))
-				.def(VectorVisitor<MatrixColumnType>("c"))
-				.def(VectorNDArrayAssignVisitor<MatrixColumnType>())
-				.def(WrappedDataVisitor<MatrixColumnWrapper>())
-				.add_property("index", &MatrixColumnType::getIndex);
+            python::class_<MatrixColumnWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const MatrixColumnWrapper&>((python::arg("self"), python::arg("mc"))))
+                .def(python::init<const ExpressionPointerType&, SizeType>((python::arg("self"), python::arg("e"), python::arg("i"))))
+                .def("getIndex", &MatrixColumnType::getIndex, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixColumnType>())
+                .def(AssignFunctionGeneratorVisitor<MatrixColumnType, ConstVectorExpression>("e"))
+                .def(ConstVectorVisitor<MatrixColumnType>("c"))
+                .def(VectorAssignAndSwapVisitor<MatrixColumnType>("c"))
+                .def(VectorVisitor<MatrixColumnType>("c"))
+                .def(VectorNDArrayAssignVisitor<MatrixColumnType>())
+                .def(WrappedDataVisitor<MatrixColumnWrapper>())
+                .add_property("index", &MatrixColumnType::getIndex);
 
-			python::def("column", &column, (python::arg("e"), python::arg("i")));
-		}
+            python::def("column", &column, (python::arg("e"), python::arg("i")));
+        }
 
-		static WrapperPointerType column(const ExpressionPointerType& e, SizeType i) {
-			return WrapperPointerType(new MatrixColumnWrapper(e, i));
-		}
-	};
+        static WrapperPointerType column(const ExpressionPointerType& e, SizeType i) {
+            return WrapperPointerType(new MatrixColumnWrapper(e, i));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportMatrixColumnTypes()
 {
-	MatrixColumnExport<MatrixExpression<float> >("FMatrixColumn");
-	MatrixColumnExport<MatrixExpression<double> >("DMatrixColumn");
-	MatrixColumnExport<MatrixExpression<long> >("LMatrixColumn");
-	MatrixColumnExport<MatrixExpression<unsigned long> >("ULMatrixColumn");
+    MatrixColumnExport<MatrixExpression<float> >("FMatrixColumn");
+    MatrixColumnExport<MatrixExpression<double> >("DMatrixColumn");
+    MatrixColumnExport<MatrixExpression<long> >("LMatrixColumn");
+    MatrixColumnExport<MatrixExpression<unsigned long> >("ULMatrixColumn");
 }

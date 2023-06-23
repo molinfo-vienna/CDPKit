@@ -42,37 +42,37 @@ namespace PSDMerge
     {
 
     public:
-		PSDMergeImpl();
+        PSDMergeImpl();
 
     private:
-		const char* getProgName() const;
-		const char* getProgCopyright() const;
-		const char* getProgAboutText() const;
+        const char* getProgName() const;
+        const char* getProgCopyright() const;
+        const char* getProgAboutText() const;
 
-		void setCreationMode(const std::string& mode);
-	
-		int process();
-		int mergeDatabases();
-	
-		void checkInputFiles() const;
-		void printOptionSummary();
-		
-		void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
-							 std::size_t num_ins);
+        void setCreationMode(const std::string& mode);
+    
+        int process();
+        int mergeDatabases();
+    
+        void checkInputFiles() const;
+        void printOptionSummary();
+        
+        void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
+                             std::size_t num_ins);
 
-		std::string getModeString() const;
+        std::string getModeString() const;
 
-		struct MergeDBsProgressCallback;
+        struct MergeDBsProgressCallback;
 
-		typedef std::vector<std::string> StringList;
-		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
-		typedef CDPL::Internal::Timer Timer;
+        typedef std::vector<std::string> StringList;
+        typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
+        typedef CDPL::Internal::Timer Timer;
 
-		StringList         inputDatabases;
-		std::string        outputDatabase;
-		bool               dropDuplicates;
-		CreationMode       creationMode;
-		Timer              timer;
+        StringList         inputDatabases;
+        std::string        outputDatabase;
+        bool               dropDuplicates;
+        CreationMode       creationMode;
+        Timer              timer;
     };
 }
 

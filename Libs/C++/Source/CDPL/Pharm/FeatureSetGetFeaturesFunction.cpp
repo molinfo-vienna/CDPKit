@@ -35,5 +35,5 @@ using namespace CDPL;
 void Pharm::getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first)
 {
     for (FeatureMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it)
-		ftr_set.addFeature(first ? *it->first : *it->second);
+        ftr_set.addFeature(first ? *it->first : *it->second);
 }

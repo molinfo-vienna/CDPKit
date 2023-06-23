@@ -36,12 +36,12 @@ void CDPLPythonShape::exportExactGaussianShapeOverlapFunction()
     using namespace CDPL;
 
     python::class_<Shape::ExactGaussianShapeOverlapFunction, Shape::ExactGaussianShapeOverlapFunction::SharedPointer,
-				   python::bases<Shape::GaussianShapeOverlapFunction> >("ExactGaussianShapeOverlapFunction", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Shape::GaussianShapeFunction&, const Shape::GaussianShapeFunction&>
-			 ((python::arg("self"), python::arg("ref_shape_func"), python::arg("ovl_shape_func")))
-			 [python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >()])
-		.def(python::init<const Shape::ExactGaussianShapeOverlapFunction&>((python::arg("self"), python::arg("func")))[python::with_custodian_and_ward<1, 2>()])
-		.def("assign", &Shape::ExactGaussianShapeOverlapFunction::operator=, (python::arg("self"), python::arg("func")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >());
+                   python::bases<Shape::GaussianShapeOverlapFunction> >("ExactGaussianShapeOverlapFunction", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Shape::GaussianShapeFunction&, const Shape::GaussianShapeFunction&>
+             ((python::arg("self"), python::arg("ref_shape_func"), python::arg("ovl_shape_func")))
+             [python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >()])
+        .def(python::init<const Shape::ExactGaussianShapeOverlapFunction&>((python::arg("self"), python::arg("func")))[python::with_custodian_and_ward<1, 2>()])
+        .def("assign", &Shape::ExactGaussianShapeOverlapFunction::operator=, (python::arg("self"), python::arg("func")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

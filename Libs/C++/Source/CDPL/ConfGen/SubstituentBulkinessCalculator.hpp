@@ -41,29 +41,29 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
+        class MolecularGraph;
     }
-	
+    
     namespace ConfGen 
     {
-	
-		class SubstituentBulkinessCalculator 
-		{
+    
+        class SubstituentBulkinessCalculator 
+        {
 
-		public:
-			void calculate(const Chem::MolecularGraph& molgraph);
+        public:
+            void calculate(const Chem::MolecularGraph& molgraph);
 
-			std::size_t operator[](std::size_t i) const {
-				return ecArray[i];
-			}
+            std::size_t operator[](std::size_t i) const {
+                return ecArray[i];
+            }
 
-		private:
-			typedef std::vector<std::size_t> ECArray;
+        private:
+            typedef std::vector<std::size_t> ECArray;
 
-			ECArray      ecArray;	
-			ECArray      tmpECArray;	
-			Util::BitSet hAtomMask;
-		};
+            ECArray      ecArray;    
+            ECArray      tmpECArray;    
+            Util::BitSet hAtomMask;
+        };
     }
 }
 

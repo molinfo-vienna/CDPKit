@@ -47,100 +47,100 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
+        class MolecularGraph;
     }
 
     namespace Pharm
     {
-	
-		class ScreeningDBAccessor;
+    
+        class ScreeningDBAccessor;
 
-		class PSDScreeningDBCreatorImpl : private SQLiteDataIOBase
-		{
+        class PSDScreeningDBCreatorImpl : private SQLiteDataIOBase
+        {
 
-		public:
-			PSDScreeningDBCreatorImpl();
+        public:
+            PSDScreeningDBCreatorImpl();
 
             void open(const std::string& name, ScreeningDBCreator::Mode mode = ScreeningDBCreator::CREATE, bool allow_dup_entries = true);
 
-			void close();
+            void close();
 
-			const std::string& getDatabaseName() const;
+            const std::string& getDatabaseName() const;
 
-			ScreeningDBCreator::Mode getMode() const;
+            ScreeningDBCreator::Mode getMode() const;
 
-			bool allowDuplicateEntries() const;
+            bool allowDuplicateEntries() const;
 
-			bool process(const Chem::MolecularGraph& molgraph);
+            bool process(const Chem::MolecularGraph& molgraph);
 
-			bool merge(const ScreeningDBAccessor& db_acc, const ScreeningDBCreator::ProgressCallbackFunction& func);
+            bool merge(const ScreeningDBAccessor& db_acc, const ScreeningDBCreator::ProgressCallbackFunction& func);
 
-			std::size_t getNumProcessed() const;
+            std::size_t getNumProcessed() const;
 
-			std::size_t getNumRejected() const;
+            std::size_t getNumRejected() const;
 
-			std::size_t getNumDeleted() const;
+            std::size_t getNumDeleted() const;
 
-			std::size_t getNumInserted() const;
+            std::size_t getNumInserted() const;
 
-		private:
-			void initControlParams();
+        private:
+            void initControlParams();
 
-			void closeDBConnection();
+            void closeDBConnection();
 
-			void setupTables();
+            void setupTables();
 
-			void loadMolHashToIDMap();
+            void loadMolHashToIDMap();
 
-			std::size_t deleteEntries(std::uint64_t mol_hash);
+            std::size_t deleteEntries(std::uint64_t mol_hash);
 
-			std::int64_t insertMolecule(const Chem::MolecularGraph& molgraph, std::uint64_t mol_hash);
+            std::int64_t insertMolecule(const Chem::MolecularGraph& molgraph, std::uint64_t mol_hash);
 
-			void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id);
-			void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id, std::size_t conf_idx);
+            void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id);
+            void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id, std::size_t conf_idx);
 
-			void insertPharmacophore(std::int64_t mol_id, std::size_t conf_idx);
+            void insertPharmacophore(std::int64_t mol_id, std::size_t conf_idx);
 
-			void genFtrCounts();
-			void insertFtrCounts(std::int64_t mol_id, std::size_t conf_idx);
-			void insertFtrCount(std::int64_t mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count);
+            void genFtrCounts();
+            void insertFtrCounts(std::int64_t mol_id, std::size_t conf_idx);
+            void insertFtrCount(std::int64_t mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count);
 
-			void deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, std::int64_t mol_id) const;
+            void deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, std::int64_t mol_id) const;
 
-			void beginTransaction();
-			void commitTransaction();
+            void beginTransaction();
+            void commitTransaction();
 
-			typedef std::unordered_multimap<std::uint64_t, std::int64_t> MolHashToIDMap;
-			typedef std::unordered_set<std::uint64_t> MolHashSet;
+            typedef std::unordered_multimap<std::uint64_t, std::int64_t> MolHashToIDMap;
+            typedef std::unordered_set<std::uint64_t> MolHashSet;
 
-			SQLite3StmtPointer               beginTransStmt;
-			SQLite3StmtPointer               commitTransStmt;
-			SQLite3StmtPointer               insMoleculeStmt;
-			SQLite3StmtPointer               insPharmStmt;
-			SQLite3StmtPointer               insFtrCountStmt;
-			SQLite3StmtPointer               delMolWithMolIDStmt;
-			SQLite3StmtPointer               delPharmsWithMolIDStmt;
-			SQLite3StmtPointer               delFeatureCountsWithMolIDStmt;
-			SQLite3StmtPointer               delTwoPointPharmsWithMolIDStmt;
-			SQLite3StmtPointer               delThreePointPharmsWithMolIDStmt;
-			MolHashToIDMap                   molHashToIDMap;
-			MolHashSet                       procMolecules;
-			Chem::HashCodeCalculator         hashCalculator;
-			Internal::ByteBuffer             byteBuffer;
-			Base::ControlParameterList       controlParams;
-			CDFPharmacophoreDataWriter       pharmWriter;
-			Chem::CDFDataWriter              molWriter;
-			BasicPharmacophore               pharmacophore;
-			DefaultPharmacophoreGenerator    pharmGenerator;
-			FeatureTypeHistogram             featureCounts;
-			Math::Vector3DArray              coordinates;
-			ScreeningDBCreator::Mode         mode;
-			bool                             allowDupEntries;
-			std::size_t                      numProcessed;
-			std::size_t                      numRejected;
-			std::size_t                      numDeleted;
-			std::size_t                      numInserted;
-		};
+            SQLite3StmtPointer               beginTransStmt;
+            SQLite3StmtPointer               commitTransStmt;
+            SQLite3StmtPointer               insMoleculeStmt;
+            SQLite3StmtPointer               insPharmStmt;
+            SQLite3StmtPointer               insFtrCountStmt;
+            SQLite3StmtPointer               delMolWithMolIDStmt;
+            SQLite3StmtPointer               delPharmsWithMolIDStmt;
+            SQLite3StmtPointer               delFeatureCountsWithMolIDStmt;
+            SQLite3StmtPointer               delTwoPointPharmsWithMolIDStmt;
+            SQLite3StmtPointer               delThreePointPharmsWithMolIDStmt;
+            MolHashToIDMap                   molHashToIDMap;
+            MolHashSet                       procMolecules;
+            Chem::HashCodeCalculator         hashCalculator;
+            Internal::ByteBuffer             byteBuffer;
+            Base::ControlParameterList       controlParams;
+            CDFPharmacophoreDataWriter       pharmWriter;
+            Chem::CDFDataWriter              molWriter;
+            BasicPharmacophore               pharmacophore;
+            DefaultPharmacophoreGenerator    pharmGenerator;
+            FeatureTypeHistogram             featureCounts;
+            Math::Vector3DArray              coordinates;
+            ScreeningDBCreator::Mode         mode;
+            bool                             allowDupEntries;
+            std::size_t                      numProcessed;
+            std::size_t                      numRejected;
+            std::size_t                      numDeleted;
+            std::size_t                      numInserted;
+        };
     }
 }
 

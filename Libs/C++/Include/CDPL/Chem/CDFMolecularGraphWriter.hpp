@@ -39,53 +39,53 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class CDFDataWriter;
-		class MolecularGraph;
+        class CDFDataWriter;
+        class MolecularGraph;
 
-		/**
-		 * \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
-		 */
-		class CDPL_CHEM_API CDFMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
-		{
+        /**
+         * \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+         */
+        class CDPL_CHEM_API CDFMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %CDFMolecularGraphWriter instance that will write data of molecular graphs to the output
-			 *        stream \a os.
-			 * \param os The output stream to write to.
-			 */
-			CDFMolecularGraphWriter(std::ostream& os);
+        public:
+            /**
+             * \brief Constructs a \c %CDFMolecularGraphWriter instance that will write data of molecular graphs to the output
+             *        stream \a os.
+             * \param os The output stream to write to.
+             */
+            CDFMolecularGraphWriter(std::ostream& os);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~CDFMolecularGraphWriter();
+            /**
+             * \brief Destructor.
+             */
+            ~CDFMolecularGraphWriter();
 
-			/**
-			 * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
-			 * \param molgraph The molecular graph to write.
-			 * \return A reference to itself.
-			 */
-			Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
+            /**
+             * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
+             * \param molgraph The molecular graph to write.
+             * \return A reference to itself.
+             */
+            Base::DataWriter<MolecularGraph>& write(const MolecularGraph& molgraph);
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		private:
-			typedef std::auto_ptr<CDFDataWriter> CDFDataWriterPtr;
+        private:
+            typedef std::auto_ptr<CDFDataWriter> CDFDataWriterPtr;
 
-			CDFMolecularGraphWriter(const CDFMolecularGraphWriter&);
+            CDFMolecularGraphWriter(const CDFMolecularGraphWriter&);
 
-			CDFMolecularGraphWriter& operator=(const CDFMolecularGraphWriter&);
+            CDFMolecularGraphWriter& operator=(const CDFMolecularGraphWriter&);
 
-			std::ostream&    output;
-			bool             state;
-			CDFDataWriterPtr writer;
-		};
-	}
+            std::ostream&    output;
+            bool             state;
+            CDFDataWriterPtr writer;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_CDFMOLECULARGRAPHWRITER_HPP

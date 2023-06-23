@@ -35,7 +35,7 @@ void CDPLPythonChem::exportNitroAciTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::NitroAciTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("NitroAciTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::NitroAciTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("NitroAciTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::NitroAciTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

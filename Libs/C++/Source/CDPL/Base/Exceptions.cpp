@@ -36,7 +36,7 @@ Base::Exception::~Exception() throw() {}
 
 const char* CDPL::Base::Exception::what() const throw()
 {
-	return message.c_str();
+    return message.c_str();
 }
 
 

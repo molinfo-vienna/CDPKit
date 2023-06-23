@@ -38,96 +38,96 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Represents a data item in the structure or reaction data block of a
-		 *        <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
-		 */
-		class CDPL_CHEM_API StringDataBlockEntry
-		{
+        /**
+         * \brief Represents a data item in the structure or reaction data block of a
+         *        <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
+         */
+        class CDPL_CHEM_API StringDataBlockEntry
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %StringDataBlockEntry object with an empty data header and content.
-			 */
-			StringDataBlockEntry() {}
+        public:
+            /**
+             * \brief Constructs a \c %StringDataBlockEntry object with an empty data header and content.
+             */
+            StringDataBlockEntry() {}
 
-			/**
-			 * \brief Constructs a \c %StringDataBlockEntry object with the specified data header and content.
-			 * \param header The data header.
-			 * \param data The data content.
-			 */
-			StringDataBlockEntry(const std::string& header, const std::string& data): header(header), data(data) {}
+            /**
+             * \brief Constructs a \c %StringDataBlockEntry object with the specified data header and content.
+             * \param header The data header.
+             * \param data The data content.
+             */
+            StringDataBlockEntry(const std::string& header, const std::string& data): header(header), data(data) {}
 
-			/**
-			 * \brief Returns the data header.
-			 * \returns The data header.
-			 */
-			const std::string& getHeader() const;
-	
-			/**
-			 * \brief Sets the data header.
-			 * \param header The new data header.
-			 */
-			void setHeader(const std::string& header);
-	
-			/**
-			 * \brief Returns the stored data content.
-			 * \returns The stored data content.
-			 */
-			const std::string& getData() const;
+            /**
+             * \brief Returns the data header.
+             * \returns The data header.
+             */
+            const std::string& getHeader() const;
+    
+            /**
+             * \brief Sets the data header.
+             * \param header The new data header.
+             */
+            void setHeader(const std::string& header);
+    
+            /**
+             * \brief Returns the stored data content.
+             * \returns The stored data content.
+             */
+            const std::string& getData() const;
 
-			/**
-			 * \brief Sets the data content.
-			 * \param data The new data content.
-			 */
-			void setData(const std::string& data);
-		
-			/**
-			 * \brief Equality comparison operator.
-			 * \param entry The other \c %StringDataBlockEntry object to be compared with.
-			 * \return \c true if the data entry headers and values compare equal, and \c false otherwise. 
-			 */
-			bool operator==(const StringDataBlockEntry& entry) const;
+            /**
+             * \brief Sets the data content.
+             * \param data The new data content.
+             */
+            void setData(const std::string& data);
+        
+            /**
+             * \brief Equality comparison operator.
+             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \return \c true if the data entry headers and values compare equal, and \c false otherwise. 
+             */
+            bool operator==(const StringDataBlockEntry& entry) const;
 
-			/**
-			 * \brief Inequality comparison operator.
-			 *
-			 * The result is equivalent to <tt>!(*this == entry)</tt>.
-			 *
-			 * \param entry The other \c %StringDataBlockEntry object to be compared with.
-			 * \return \c true if the data headers and/or values compare non-equal, and \c false otherwise. 
-			 * \see operator==()
-			 */
-			bool operator!=(const StringDataBlockEntry& entry) const;
+            /**
+             * \brief Inequality comparison operator.
+             *
+             * The result is equivalent to <tt>!(*this == entry)</tt>.
+             *
+             * \param entry The other \c %StringDataBlockEntry object to be compared with.
+             * \return \c true if the data headers and/or values compare non-equal, and \c false otherwise. 
+             * \see operator==()
+             */
+            bool operator!=(const StringDataBlockEntry& entry) const;
 
-		private:
-			std::string header;
-			std::string data;
-		};
+        private:
+            std::string header;
+            std::string data;
+        };
 
-		/**
-		 * \brief An array of Chem::StringDataBlockEntry objects used to store the structure or reaction
-		 *        data block of a <em>STRING SD-</em> or \e RD-File data record (see [\ref CTFILE]).
-		 */
-		class CDPL_CHEM_API StringDataBlock : public Util::Array<StringDataBlockEntry>
-		{
+        /**
+         * \brief An array of Chem::StringDataBlockEntry objects used to store the structure or reaction
+         *        data block of a <em>STRING SD-</em> or \e RD-File data record (see [\ref CTFILE]).
+         */
+        class CDPL_CHEM_API StringDataBlock : public Util::Array<StringDataBlockEntry>
+        {
 
-		  public:
-			typedef std::shared_ptr<StringDataBlock> SharedPointer;
+          public:
+            typedef std::shared_ptr<StringDataBlock> SharedPointer;
 
-			void addEntry(const std::string& header, const std::string& data) {
-				addElement(StringDataBlockEntry(header, data));
-			}
+            void addEntry(const std::string& header, const std::string& data) {
+                addElement(StringDataBlockEntry(header, data));
+            }
 
-		  private:
-			const char* getClassName() const {
-				return "StringDataBlock";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "StringDataBlock";
+            }
+        };
+    }
 }
 
 #endif // CDPL_CHEM_STRINGDATABLOCK_HPP

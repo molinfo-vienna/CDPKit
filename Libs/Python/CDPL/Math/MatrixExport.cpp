@@ -39,47 +39,47 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct MatrixExport
-	{
+    template <typename MatrixType>
+    struct MatrixExport
+    {
 
-		MatrixExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        MatrixExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::SizeType SizeType;
-			typedef typename MatrixType::ValueType ValueType;
+            typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::ValueType ValueType;
 
-			python::class_<MatrixType, typename MatrixType::SharedPointer>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, SizeType>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"))))
-				.def(python::init<SizeType, SizeType, const ValueType&>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("v"))))
-				.def("resize", &MatrixType::resize, 
-					 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("preserve") = true,
-					  python::arg("v") = ValueType()))
-				.def("clear", &MatrixType::clear, (python::arg("self"), python::arg("v") = ValueType()))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>())
-				.def(MatrixNDArrayInitVisitor<MatrixType, true>())
-				.def(MatrixNDArrayAssignVisitor<MatrixType, true>())
-				.def(MatrixVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType, typename MatrixType::SharedPointer>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, SizeType>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"))))
+                .def(python::init<SizeType, SizeType, const ValueType&>(
+                         (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("v"))))
+                .def("resize", &MatrixType::resize, 
+                     (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("preserve") = true,
+                      python::arg("v") = ValueType()))
+                .def("clear", &MatrixType::clear, (python::arg("self"), python::arg("v") = ValueType()))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>())
+                .def(MatrixNDArrayInitVisitor<MatrixType, true>())
+                .def(MatrixNDArrayAssignVisitor<MatrixType, true>())
+                .def(MatrixVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	MatrixExport<Math::FMatrix>("FMatrix");
-	MatrixExport<Math::DMatrix>("DMatrix");
-	MatrixExport<Math::LMatrix>("LMatrix");
-	MatrixExport<Math::ULMatrix>("ULMatrix");
+    MatrixExport<Math::FMatrix>("FMatrix");
+    MatrixExport<Math::DMatrix>("DMatrix");
+    MatrixExport<Math::LMatrix>("LMatrix");
+    MatrixExport<Math::ULMatrix>("ULMatrix");
 }

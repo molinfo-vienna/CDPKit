@@ -39,122 +39,122 @@ namespace Testing
     {
 
     public:
-		struct BondStretchingInteraction
-		{
+        struct BondStretchingInteraction
+        {
 
-			std::size_t  atom1Idx;
-			std::size_t  atom2Idx;
-			unsigned int ffClass;
-			double       forceConst;
-			double       refLength;
-			double       energy;
-		};
+            std::size_t  atom1Idx;
+            std::size_t  atom2Idx;
+            unsigned int ffClass;
+            double       forceConst;
+            double       refLength;
+            double       energy;
+        };
 
-		struct AngleBendingInteraction
-		{
+        struct AngleBendingInteraction
+        {
 
-			std::string  termAtom1Name;
-			std::size_t  ctrAtomIdx;
-			std::string  termAtom2Name;
-			unsigned int ffClass;
-			double       forceConst;
-			double       refAngle;
-			double       energy;
-		};
+            std::string  termAtom1Name;
+            std::size_t  ctrAtomIdx;
+            std::string  termAtom2Name;
+            unsigned int ffClass;
+            double       forceConst;
+            double       refAngle;
+            double       energy;
+        };
 
-		struct StretchBendInteraction
-		{
+        struct StretchBendInteraction
+        {
 
-			std::string  termAtom1Name;
-			std::size_t  ctrAtomIdx;
-			std::string  termAtom2Name;
-			unsigned int ffClass;
-			double       forceConst;
-			double       energy;
-		};
-	
-		struct OutOfPlaneBendingInteraction
-		{
+            std::string  termAtom1Name;
+            std::size_t  ctrAtomIdx;
+            std::string  termAtom2Name;
+            unsigned int ffClass;
+            double       forceConst;
+            double       energy;
+        };
+    
+        struct OutOfPlaneBendingInteraction
+        {
 
-			std::string  termAtom1Name;
-			std::string  ctrAtomName;
-			std::string  termAtom2Name;
-			std::size_t  oopAtomIdx;
-			double       forceConst;
-			double       energy;
-		};
+            std::string  termAtom1Name;
+            std::string  ctrAtomName;
+            std::string  termAtom2Name;
+            std::size_t  oopAtomIdx;
+            double       forceConst;
+            double       energy;
+        };
 
-		struct TorsionInteraction
-		{
+        struct TorsionInteraction
+        {
 
-			std::string  termAtom1Name;
-			std::size_t  ctrAtom1Idx;
-			std::size_t  ctrAtom2Idx;
-			std::string  termAtom2Name;
-			unsigned int ffClass;
-			double       torParams[3];
-			double       energy;
-		};
+            std::string  termAtom1Name;
+            std::size_t  ctrAtom1Idx;
+            std::size_t  ctrAtom2Idx;
+            std::string  termAtom2Name;
+            unsigned int ffClass;
+            double       torParams[3];
+            double       energy;
+        };
 
-		struct VanDerWaalsInteraction
-		{
+        struct VanDerWaalsInteraction
+        {
 
-			std::size_t  atom1Idx;
-			std::size_t  atom2Idx;
-			double       energy;
-		};
+            std::size_t  atom1Idx;
+            std::size_t  atom2Idx;
+            double       energy;
+        };
 
-		struct EnergyData
-		{
+        struct EnergyData
+        {
 
-			double total;
-			double bondStretching;
-			double angleBending;
-			double stretchBend;
-			double outOfPlaneBending;
-			double torsion;
-			double electrostatic;
-			double vanDerWaals;
-		};
+            double total;
+            double bondStretching;
+            double angleBending;
+            double stretchBend;
+            double outOfPlaneBending;
+            double torsion;
+            double electrostatic;
+            double vanDerWaals;
+        };
 
-		typedef std::vector<std::string> SymbolicAtomTypeArray;
-		typedef std::vector<unsigned int> NumericAtomTypeArray;
-		typedef std::vector<double> AtomChargeArray;
-		typedef std::vector<BondStretchingInteraction> BondStretchingInteractionData;
-		typedef std::vector<AngleBendingInteraction> AngleBendingInteractionData;
-		typedef std::vector<StretchBendInteraction> StretchBendInteractionData;
-		typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionData;
-		typedef std::vector<TorsionInteraction> TorsionInteractionData;
-		typedef std::vector<VanDerWaalsInteraction> VanDerWaalsInteractionData;
+        typedef std::vector<std::string> SymbolicAtomTypeArray;
+        typedef std::vector<unsigned int> NumericAtomTypeArray;
+        typedef std::vector<double> AtomChargeArray;
+        typedef std::vector<BondStretchingInteraction> BondStretchingInteractionData;
+        typedef std::vector<AngleBendingInteraction> AngleBendingInteractionData;
+        typedef std::vector<StretchBendInteraction> StretchBendInteractionData;
+        typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionData;
+        typedef std::vector<TorsionInteraction> TorsionInteractionData;
+        typedef std::vector<VanDerWaalsInteraction> VanDerWaalsInteractionData;
 
-		OptimolLogReader(const std::string& log_file);
+        OptimolLogReader(const std::string& log_file);
 
-		bool getSymbolicAtomTypes(const std::string& mol_name, SymbolicAtomTypeArray& sym_types);
-		bool getNumericAtomTypes(const std::string& mol_name, NumericAtomTypeArray& num_types);
-		bool getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
-		bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
-		bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionData& ia_data);
-		bool getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionData& ia_data);
-		bool getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionData& ia_data);
-		bool getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionData& ia_data);
-		bool getTorsionInteractions(const std::string& mol_name, TorsionInteractionData& ia_data);
-		bool getVanDerWaalsInteractions(const std::string& mol_name, VanDerWaalsInteractionData& ia_data);
+        bool getSymbolicAtomTypes(const std::string& mol_name, SymbolicAtomTypeArray& sym_types);
+        bool getNumericAtomTypes(const std::string& mol_name, NumericAtomTypeArray& num_types);
+        bool getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
+        bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
+        bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionData& ia_data);
+        bool getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionData& ia_data);
+        bool getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionData& ia_data);
+        bool getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionData& ia_data);
+        bool getTorsionInteractions(const std::string& mol_name, TorsionInteractionData& ia_data);
+        bool getVanDerWaalsInteractions(const std::string& mol_name, VanDerWaalsInteractionData& ia_data);
 
-		bool getEnergies(const std::string& mol_name, EnergyData& energies);
+        bool getEnergies(const std::string& mol_name, EnergyData& energies);
 
     private:
-		void buildIndex();
+        void buildIndex();
 
-		bool skipLines(std::size_t n);
-		bool skipTokens(std::istream& is, std::size_t n) const;
-		bool readLine(std::string& line);
-		bool skipToLine(std::string& line, const char* srch_str);
-		bool seekToRecord(const std::string& mol_name);
+        bool skipLines(std::size_t n);
+        bool skipTokens(std::istream& is, std::size_t n) const;
+        bool readLine(std::string& line);
+        bool skipToLine(std::string& line, const char* srch_str);
+        bool seekToRecord(const std::string& mol_name);
 
-		typedef std::unordered_map<std::string, std::istream::pos_type> RecordFileOffsetMap;
+        typedef std::unordered_map<std::string, std::istream::pos_type> RecordFileOffsetMap;
 
-		std::ifstream       logIStream;
-		RecordFileOffsetMap recordOffsets;
+        std::ifstream       logIStream;
+        RecordFileOffsetMap recordOffsets;
     };
 }
 

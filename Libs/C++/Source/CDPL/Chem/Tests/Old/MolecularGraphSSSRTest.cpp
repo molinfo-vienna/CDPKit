@@ -44,58 +44,58 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphSSSRTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace std::placeholders;
-	
-	Molecule mol;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace std::placeholders;
+    
+    Molecule mol;
 
 //-----
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
 
-	BOOST_CHECK(mol.getProperty<FragmentList>(MolecularGraphProperty::SSSR).getSize() == 0);
+    BOOST_CHECK(mol.getProperty<FragmentList>(MolecularGraphProperty::SSSR).getSize() == 0);
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
-
-//-----
-
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Fullerene2.jme").c_str());
-
-	BOOST_CHECK(ifs);
-
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
-
-	const FragmentList& sssr = mol.getProperty<FragmentList>(MolecularGraphProperty::SSSR);
-
-	BOOST_CHECK(sssr.getSize() == 31);
-
-	BOOST_CHECK(std::count_if(sssr.getElementsBegin(), sssr.getElementsEnd(), 
-							  std::bind(std::equal_to<std::size_t>(), 5, std::bind(&Fragment::getNumBonds, _1))) == 12);
-	BOOST_CHECK(std::count_if(sssr.getElementsBegin(), sssr.getElementsEnd(), 
-							  std::bind(std::equal_to<std::size_t>(), 6, std::bind(&Fragment::getNumBonds, _1))) == 19);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::SSSR, mol, AtomContainerProperty::ATOM_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::SSSR, mol, BondContainerProperty::BOND_COUNT);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Fullerene2.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
+
+    const FragmentList& sssr = mol.getProperty<FragmentList>(MolecularGraphProperty::SSSR);
+
+    BOOST_CHECK(sssr.getSize() == 31);
+
+    BOOST_CHECK(std::count_if(sssr.getElementsBegin(), sssr.getElementsEnd(), 
+                              std::bind(std::equal_to<std::size_t>(), 5, std::bind(&Fragment::getNumBonds, _1))) == 12);
+    BOOST_CHECK(std::count_if(sssr.getElementsBegin(), sssr.getElementsEnd(), 
+                              std::bind(std::equal_to<std::size_t>(), 6, std::bind(&Fragment::getNumBonds, _1))) == 19);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
-		TestUtils::checkDependency(mol, MolecularGraphProperty::SSSR, *it, BondContainerProperty::BOND_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::SSSR, mol, AtomContainerProperty::ATOM_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::SSSR, mol, BondContainerProperty::BOND_COUNT);
 
 //-----
 
-	mol.getProperty<FragmentList>(MolecularGraphProperty::SSSR);
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it)
+        TestUtils::checkDependency(mol, MolecularGraphProperty::SSSR, *it, BondContainerProperty::BOND_COUNT);
 
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
+//-----
 
-	mol.addAtom();
+    mol.getProperty<FragmentList>(MolecularGraphProperty::SSSR);
 
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
+
+    mol.addAtom();
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
 }

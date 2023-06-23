@@ -38,63 +38,63 @@ void CDPLPythonConfGen::exportConformerGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<ConfGen::ConformerGenerator, boost::noncopyable>("ConformerGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-//		.def(python::init<const ConfGen::ConformerGenerator&>((python::arg("self"), python::arg("gen"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGenerator>())
-//		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGenerator::operator=), 
-//			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("generate", &ConfGen::ConformerGenerator::generate, 
-			 (python::arg("self"), python::arg("molgraph")))
-		.def("getSettings", 
-			 static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
-			 (&ConfGen::ConformerGenerator::getSettings), 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("clearFragmentLibraries", &ConfGen::ConformerGenerator::clearFragmentLibraries, 
-			 python::arg("self"))
-		.def("addFragmentLibrary", &ConfGen::ConformerGenerator::addFragmentLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("clearTorsionLibraries", &ConfGen::ConformerGenerator::clearTorsionLibraries, 
-			 python::arg("self"))
-		.def("addTorsionLibrary", &ConfGen::ConformerGenerator::addTorsionLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("setAbortCallback", &ConfGen::ConformerGenerator::setAbortCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getAbortCallback", &ConfGen::ConformerGenerator::getAbortCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setTimeoutCallback", &ConfGen::ConformerGenerator::setTimeoutCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getTimeoutCallback", &ConfGen::ConformerGenerator::getTimeoutCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setLogMessageCallback", &ConfGen::ConformerGenerator::setLogMessageCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getLogMessageCallback", &ConfGen::ConformerGenerator::getLogMessageCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("generate", &ConfGen::ConformerGenerator::generate, (python::arg("self"), python::arg("molgraph")))
-		.def("setConformers", &ConfGen::ConformerGenerator::setConformers,
-			 (python::arg("self"), python::arg("molgraph")))
-		.def("getNumConformers", &ConfGen::ConformerGenerator::getNumConformers, python::arg("self"))
-		.def("getConformer", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::ConformerGenerator::*)(std::size_t)>(&ConfGen::ConformerGenerator::getConformer),
-			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.def("__getitem__", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::ConformerGenerator::*)(std::size_t)>(&ConfGen::ConformerGenerator::getConformer),
-			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.add_property("numConformers", &ConfGen::ConformerGenerator::getNumConformers)
-		.add_property("settings", 
-					  python::make_function(static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
-											(&ConfGen::ConformerGenerator::getSettings),
-											python::return_internal_reference<>()))
-		.add_property("abortCallback", 
-					  python::make_function(&ConfGen::ConformerGenerator::getAbortCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::ConformerGenerator::setAbortCallback)
-		.add_property("timeoutCallback", 
-					  python::make_function(&ConfGen::ConformerGenerator::getTimeoutCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::ConformerGenerator::setTimeoutCallback)
-		.add_property("logMessageCallback", 
-					  python::make_function(&ConfGen::ConformerGenerator::getLogMessageCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::ConformerGenerator::setLogMessageCallback);
+    python::class_<ConfGen::ConformerGenerator, boost::noncopyable>("ConformerGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+//        .def(python::init<const ConfGen::ConformerGenerator&>((python::arg("self"), python::arg("gen"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGenerator>())
+//        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGenerator::operator=), 
+//             (python::arg("self"), python::arg("gen")), python::return_self<>())
+        .def("generate", &ConfGen::ConformerGenerator::generate, 
+             (python::arg("self"), python::arg("molgraph")))
+        .def("getSettings", 
+             static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
+             (&ConfGen::ConformerGenerator::getSettings), 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("clearFragmentLibraries", &ConfGen::ConformerGenerator::clearFragmentLibraries, 
+             python::arg("self"))
+        .def("addFragmentLibrary", &ConfGen::ConformerGenerator::addFragmentLibrary, 
+             (python::arg("self"), python::arg("lib")))
+        .def("clearTorsionLibraries", &ConfGen::ConformerGenerator::clearTorsionLibraries, 
+             python::arg("self"))
+        .def("addTorsionLibrary", &ConfGen::ConformerGenerator::addTorsionLibrary, 
+             (python::arg("self"), python::arg("lib")))
+        .def("setAbortCallback", &ConfGen::ConformerGenerator::setAbortCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getAbortCallback", &ConfGen::ConformerGenerator::getAbortCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setTimeoutCallback", &ConfGen::ConformerGenerator::setTimeoutCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getTimeoutCallback", &ConfGen::ConformerGenerator::getTimeoutCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setLogMessageCallback", &ConfGen::ConformerGenerator::setLogMessageCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("getLogMessageCallback", &ConfGen::ConformerGenerator::getLogMessageCallback, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("generate", &ConfGen::ConformerGenerator::generate, (python::arg("self"), python::arg("molgraph")))
+        .def("setConformers", &ConfGen::ConformerGenerator::setConformers,
+             (python::arg("self"), python::arg("molgraph")))
+        .def("getNumConformers", &ConfGen::ConformerGenerator::getNumConformers, python::arg("self"))
+        .def("getConformer", 
+             static_cast<ConfGen::ConformerData& (ConfGen::ConformerGenerator::*)(std::size_t)>(&ConfGen::ConformerGenerator::getConformer),
+             (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+        .def("__getitem__", 
+             static_cast<ConfGen::ConformerData& (ConfGen::ConformerGenerator::*)(std::size_t)>(&ConfGen::ConformerGenerator::getConformer),
+             (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+        .add_property("numConformers", &ConfGen::ConformerGenerator::getNumConformers)
+        .add_property("settings", 
+                      python::make_function(static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
+                                            (&ConfGen::ConformerGenerator::getSettings),
+                                            python::return_internal_reference<>()))
+        .add_property("abortCallback", 
+                      python::make_function(&ConfGen::ConformerGenerator::getAbortCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::ConformerGenerator::setAbortCallback)
+        .add_property("timeoutCallback", 
+                      python::make_function(&ConfGen::ConformerGenerator::getTimeoutCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::ConformerGenerator::setTimeoutCallback)
+        .add_property("logMessageCallback", 
+                      python::make_function(&ConfGen::ConformerGenerator::getLogMessageCallback,
+                                            python::return_internal_reference<>()),
+                      &ConfGen::ConformerGenerator::setLogMessageCallback);
 }

@@ -34,29 +34,29 @@ class QComboBox;
 namespace ChOX
 {
 
-	class CTabVersionEditWidget : public QWidget
-	{
+    class CTabVersionEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		CTabVersionEditWidget(QWidget*, unsigned int&);
+    public:
+        CTabVersionEditWidget(QWidget*, unsigned int&);
 
-	signals:
-		void versionChanged();
+    signals:
+        void versionChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleVersionSelection(int);
+    private slots:
+        void handleVersionSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		unsigned int& ctabVersion;
-		QComboBox*    ctabVersionComboBox;
-	};
+        unsigned int& ctabVersion;
+        QComboBox*    ctabVersionComboBox;
+    };
 }
 
 #endif // CHOX_CTABVERSIONEDITWIDGET_HPP

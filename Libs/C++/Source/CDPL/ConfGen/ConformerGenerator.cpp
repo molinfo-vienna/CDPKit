@@ -33,7 +33,7 @@ using namespace CDPL;
 
 
 ConfGen::ConformerGenerator::ConformerGenerator(): 
-	impl(new ConformerGeneratorImpl())
+    impl(new ConformerGeneratorImpl())
 {}
 
 ConfGen::ConformerGenerator::~ConformerGenerator() 
@@ -42,94 +42,94 @@ ConfGen::ConformerGenerator::~ConformerGenerator()
 const ConfGen::ConformerGeneratorSettings& 
 ConfGen::ConformerGenerator::getSettings() const
 {
-	return impl->getSettings();
+    return impl->getSettings();
 }
 
 ConfGen::ConformerGeneratorSettings& 
 ConfGen::ConformerGenerator::getSettings()
 {
-	return impl->getSettings();
+    return impl->getSettings();
 }
 
 void ConfGen::ConformerGenerator::clearFragmentLibraries()
 {
-	impl->clearFragmentLibraries();
+    impl->clearFragmentLibraries();
 }
 
 void ConfGen::ConformerGenerator::addFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
 {
-	impl->addFragmentLibrary(lib);
+    impl->addFragmentLibrary(lib);
 }
 
 void ConfGen::ConformerGenerator::clearTorsionLibraries()
 {
-	impl->clearTorsionLibraries();
+    impl->clearTorsionLibraries();
 }
 
 void ConfGen::ConformerGenerator::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	impl->addTorsionLibrary(lib);
+    impl->addTorsionLibrary(lib);
 }
 
 void ConfGen::ConformerGenerator::setAbortCallback(const CallbackFunction& func)
 {
-	impl->setAbortCallback(func);
+    impl->setAbortCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::ConformerGenerator::getAbortCallback() const
 {
-	return impl->getAbortCallback();
+    return impl->getAbortCallback();
 }
 
 void ConfGen::ConformerGenerator::setTimeoutCallback(const CallbackFunction& func)
 {
-	impl->setTimeoutCallback(func);
+    impl->setTimeoutCallback(func);
 }
 
 const ConfGen::CallbackFunction& ConfGen::ConformerGenerator::getTimeoutCallback() const
 {
-	return impl->getTimeoutCallback();
+    return impl->getTimeoutCallback();
 }
 
 void ConfGen::ConformerGenerator::setLogMessageCallback(const LogMessageCallbackFunction& func)
 {
-	impl->setLogMessageCallback(func);
+    impl->setLogMessageCallback(func);
 }
 
 const ConfGen::LogMessageCallbackFunction& ConfGen::ConformerGenerator::getLogMessageCallback() const
 {
-	return impl->getLogMessageCallback();
+    return impl->getLogMessageCallback();
 }
 
 unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
-	return impl->generate(molgraph, false);
+    return impl->generate(molgraph, false);
 }
 
 void ConfGen::ConformerGenerator::setConformers(Chem::MolecularGraph& molgraph) const
 {
-	impl->setConformers(molgraph);
+    impl->setConformers(molgraph);
 }
 
 std::size_t ConfGen::ConformerGenerator::getNumConformers() const
 {
-	return impl->getNumConformers();
+    return impl->getNumConformers();
 }
 
 const ConfGen::ConformerData& ConfGen::ConformerGenerator::getConformer(std::size_t idx) const
 {
-	if (idx >= impl->getNumConformers())
-		throw Base::IndexError("ConformerGenerator: conformer index out of bounds");
+    if (idx >= impl->getNumConformers())
+        throw Base::IndexError("ConformerGenerator: conformer index out of bounds");
 
-	return impl->getConformer(idx);
+    return impl->getConformer(idx);
 }
 
 ConfGen::ConformerData& ConfGen::ConformerGenerator::getConformer(std::size_t idx)
 {
-	if (idx >= impl->getNumConformers())
-		throw Base::IndexError("ConformerGenerator: conformer index out of bounds");
+    if (idx >= impl->getNumConformers())
+        throw Base::IndexError("ConformerGenerator: conformer index out of bounds");
 
-	return impl->getConformer(idx);
+    return impl->getConformer(idx);
 }
 
 ConfGen::ConformerGenerator::ConstConformerIterator ConfGen::ConformerGenerator::getConformersBegin() const

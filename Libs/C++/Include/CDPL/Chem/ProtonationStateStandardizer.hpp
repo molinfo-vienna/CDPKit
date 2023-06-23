@@ -47,79 +47,79 @@ namespace CDPL
     namespace Chem
     {
 
-		class Molecule;
-		class ChEMBLStandardizer;
-		
-		/**
-		 * \brief Sets the protation state of molecules according to desired objectives.
-		 */
-		class CDPL_CHEM_API ProtonationStateStandardizer 
-		{
+        class Molecule;
+        class ChEMBLStandardizer;
+        
+        /**
+         * \brief Sets the protation state of molecules according to desired objectives.
+         */
+        class CDPL_CHEM_API ProtonationStateStandardizer 
+        {
 
-		  public:
-			typedef std::shared_ptr<ProtonationStateStandardizer> SharedPointer;
+          public:
+            typedef std::shared_ptr<ProtonationStateStandardizer> SharedPointer;
 
-			enum Flavor {
-			
-			    MIN_CHARGED_ATOM_COUNT,
-			    PHYSIOLOGICAL_CONDITION_STATE,
-				MAX_CHARGE_COMPENSATION
-			};
+            enum Flavor {
+            
+                MIN_CHARGED_ATOM_COUNT,
+                PHYSIOLOGICAL_CONDITION_STATE,
+                MAX_CHARGE_COMPENSATION
+            };
 
-			ProtonationStateStandardizer();
+            ProtonationStateStandardizer();
 
-			ProtonationStateStandardizer(const ProtonationStateStandardizer& standardizer);
-		
-			bool standardize(Molecule& mol, Flavor flavor);
+            ProtonationStateStandardizer(const ProtonationStateStandardizer& standardizer);
+        
+            bool standardize(Molecule& mol, Flavor flavor);
 
-			bool standardize(const Molecule& mol, Molecule& std_mol, Flavor flavor);
+            bool standardize(const Molecule& mol, Molecule& std_mol, Flavor flavor);
 
-			ProtonationStateStandardizer& operator=(const ProtonationStateStandardizer& standardizer);
-	    
-		  private:
-			friend class ChEMBLStandardizer;
-			
-			typedef std::vector<Chem::Atom*> AtomList;
+            ProtonationStateStandardizer& operator=(const ProtonationStateStandardizer& standardizer);
+        
+          private:
+            friend class ChEMBLStandardizer;
+            
+            typedef std::vector<Chem::Atom*> AtomList;
 
-			void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
+            void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
 
-			bool minChargedAtomCount(Molecule& mol);
-			bool protForPhysCond(Molecule& mol);
-			bool maxChargeComp(Molecule& mol);
-			
-			const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
+            bool minChargedAtomCount(Molecule& mol);
+            bool protForPhysCond(Molecule& mol);
+            bool maxChargeComp(Molecule& mol);
+            
+            const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
 
-			std::size_t adaptHydrogenCount(Atom& atom, Molecule& mol, long h_delta) const;
+            std::size_t adaptHydrogenCount(Atom& atom, Molecule& mol, long h_delta) const;
 
-			std::size_t calcFreeValence(const Atom& atom) const;
+            std::size_t calcFreeValence(const Atom& atom) const;
 
-			long calcNetCharge(const Atom& atom) const;
+            long calcNetCharge(const Atom& atom) const;
 
-			std::size_t calcValenceExcess(const Atom& atom) const;
+            std::size_t calcValenceExcess(const Atom& atom) const;
 
-			std::size_t getMatches(const Molecule& ptn, const Molecule& mol, AtomList& matches);
+            std::size_t getMatches(const Molecule& ptn, const Molecule& mol, AtomList& matches);
 
-			bool incrementCharge(Atom& atom, bool checked) const;
+            bool incrementCharge(Atom& atom, bool checked) const;
 
-			bool isRemovableHydrogen(const Atom& atom) const;
-			
-			bool cmpCanonicalNumber(const Atom* atom1, const Atom* atom2) const;
+            bool isRemovableHydrogen(const Atom& atom) const;
+            
+            bool cmpCanonicalNumber(const Atom* atom1, const Atom* atom2) const;
 
-			bool removeConnectedHydrogens(const AtomList& atoms, Molecule& mol) const;
-			
-			typedef std::unordered_set<const Atom*> AtomSet;
-			
-			SubstructureSearch           substructSearch;
-			CanonicalNumberingCalculator canonNumberingCalc;
-			AtomList                     atomList;
-			AtomList                     posChargedAtoms;
-			AtomList                     posChargedNoHAtoms;
-			AtomList                     negChargedAtoms;
-			AtomList                     negChargedAcidAtoms;
-			Util::STArray                canonAtomNumbering;
-			Util::BitSet                 atomMask;
-			AtomSet                      atomSet;
-		};
+            bool removeConnectedHydrogens(const AtomList& atoms, Molecule& mol) const;
+            
+            typedef std::unordered_set<const Atom*> AtomSet;
+            
+            SubstructureSearch           substructSearch;
+            CanonicalNumberingCalculator canonNumberingCalc;
+            AtomList                     atomList;
+            AtomList                     posChargedAtoms;
+            AtomList                     posChargedNoHAtoms;
+            AtomList                     negChargedAtoms;
+            AtomList                     negChargedAcidAtoms;
+            Util::STArray                canonAtomNumbering;
+            Util::BitSet                 atomMask;
+            AtomSet                      atomSet;
+        };
     }
 }
 

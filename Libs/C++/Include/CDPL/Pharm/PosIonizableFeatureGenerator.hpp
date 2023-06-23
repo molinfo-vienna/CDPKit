@@ -39,30 +39,30 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief PosIonizableFeatureGenerator.
-		 */
-		class CDPL_PHARM_API PosIonizableFeatureGenerator : public PatternBasedFeatureGenerator
-		{
+        /**
+         * \brief PosIonizableFeatureGenerator.
+         */
+        class CDPL_PHARM_API PosIonizableFeatureGenerator : public PatternBasedFeatureGenerator
+        {
 
-		  public:
-			/**
-			 * \brief Constructs the \c %PosIonizableFeatureGenerator instance.
-			 */
-			PosIonizableFeatureGenerator(bool chgd_groups_only);
-				
-			/**
-			 * \brief Perceives the positive ionizable group features of the molecular graph a\ molgraph and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param chgd_groups_only \c true if features shall be generated only for charged groups.
-			 */
-			PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only);
-	    
-		  private:
-			void init(bool chgd_groups_only);
-		};
+          public:
+            /**
+             * \brief Constructs the \c %PosIonizableFeatureGenerator instance.
+             */
+            PosIonizableFeatureGenerator(bool chgd_groups_only);
+                
+            /**
+             * \brief Perceives the positive ionizable group features of the molecular graph a\ molgraph and adds 
+             *        them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             * \param chgd_groups_only \c true if features shall be generated only for charged groups.
+             */
+            PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only);
+        
+          private:
+            void init(bool chgd_groups_only);
+        };
     }
 }
 

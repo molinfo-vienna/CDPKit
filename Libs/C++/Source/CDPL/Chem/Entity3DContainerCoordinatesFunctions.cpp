@@ -36,41 +36,41 @@ using namespace CDPL;
 
 void Chem::get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords, bool append)
 {
-	if (!append)
-		coords.clear();
+    if (!append)
+        coords.clear();
 
-	for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it)
-		coords.addElement(get3DCoordinates(*it));
+    for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it)
+        coords.addElement(get3DCoordinates(*it));
 }
 
 void Chem::set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray& coords)
 {
-	Util::forEachPair(cntnr.getEntitiesBegin(), cntnr.getEntitiesEnd(), coords.getElementsBegin(), coords.getElementsEnd(),
-				  static_cast<void (*)(Entity3D&, const Math::Vector3D&)>(&set3DCoordinates));
+    Util::forEachPair(cntnr.getEntitiesBegin(), cntnr.getEntitiesEnd(), coords.getElementsBegin(), coords.getElementsEnd(),
+                  static_cast<void (*)(Entity3D&, const Math::Vector3D&)>(&set3DCoordinates));
 }
 
 void Chem::transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D& mtx)
 {
-	Math::Vector4D tmp1;
-	Math::Vector4D tmp2;
-	Math::Vector3D tmp3;
+    Math::Vector4D tmp1;
+    Math::Vector4D tmp2;
+    Math::Vector3D tmp3;
 
-	tmp1[3] = 1.0;
+    tmp1[3] = 1.0;
 
-	for (Entity3DContainer::EntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
-		Entity3D& ent = *it;
-		const Math::Vector3D& coords = get3DCoordinates(ent);
+    for (Entity3DContainer::EntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
+        Entity3D& ent = *it;
+        const Math::Vector3D& coords = get3DCoordinates(ent);
 
-		tmp1[0] = coords[0];
-		tmp1[1] = coords[1];
-		tmp1[2] = coords[2];
+        tmp1[0] = coords[0];
+        tmp1[1] = coords[1];
+        tmp1[2] = coords[2];
 
-		prod(mtx, tmp1, tmp2);
+        prod(mtx, tmp1, tmp2);
 
-		tmp3[0] = tmp2[0];
-		tmp3[1] = tmp2[1];
-		tmp3[2] = tmp2[2];
+        tmp3[0] = tmp2[0];
+        tmp3[1] = tmp2[1];
+        tmp3[2] = tmp2[2];
 
-		set3DCoordinates(ent, tmp3);
-	}
+        set3DCoordinates(ent, tmp3);
+    }
 }

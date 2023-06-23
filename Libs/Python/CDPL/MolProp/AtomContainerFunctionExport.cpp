@@ -34,59 +34,59 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitChainAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getRingAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(long, getNetFormalCharge, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(double, calcExplicitMass, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitChainAtomCount, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getRingAtomCount, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticAtomCount, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyAtomCount, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(long, getNetFormalCharge, CDPL::Chem::AtomContainer&)
+    MAKE_FUNCTION_WRAPPER1(double, calcExplicitMass, CDPL::Chem::AtomContainer&)
 
-	MAKE_FUNCTION_WRAPPER2(void, calcExplicitMassComposition, CDPL::Chem::AtomContainer&, CDPL::MolProp::MassComposition&)
-	MAKE_FUNCTION_WRAPPER2(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3D&);
-	
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&, unsigned int, bool)
-	MAKE_FUNCTION_WRAPPER3(void, buildExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::MolProp::ElementHistogram&, bool);
-	MAKE_FUNCTION_WRAPPER3(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
+    MAKE_FUNCTION_WRAPPER2(void, calcExplicitMassComposition, CDPL::Chem::AtomContainer&, CDPL::MolProp::MassComposition&)
+    MAKE_FUNCTION_WRAPPER2(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3D&);
+    
+    MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&, unsigned int, bool)
+    MAKE_FUNCTION_WRAPPER3(void, buildExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::MolProp::ElementHistogram&, bool);
+    MAKE_FUNCTION_WRAPPER3(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
 
-	std::string buildExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
-	{
-		std::string str;
+    std::string buildExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
+    {
+        std::string str;
 
-		CDPL::MolProp::	buildExplicitMassCompositionString(cntnr, str);
-		return str;
-	}
+        CDPL::MolProp::    buildExplicitMassCompositionString(cntnr, str);
+        return str;
+    }
 
-	std::string buildExplicitMolecularFormulaWrapper(CDPL::Chem::AtomContainer& cntnr)
-	{
-		std::string str;
+    std::string buildExplicitMolecularFormulaWrapper(CDPL::Chem::AtomContainer& cntnr)
+    {
+        std::string str;
 
-		CDPL::MolProp::buildExplicitMolecularFormula(cntnr, str);
-		return str;
-	}
+        CDPL::MolProp::buildExplicitMolecularFormula(cntnr, str);
+        return str;
+    }
 }
 
 
 void CDPLPythonMolProp::exportAtomContainerFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper3, (python::arg("cntnr"), python::arg("type"), python::arg("strict") = true));
-	python::def("getExplicitChainAtomCount", &getExplicitChainAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getRingAtomCount", &getRingAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getHeavyAtomCount", &getHeavyAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getNetFormalCharge", &getNetFormalChargeWrapper1, python::arg("cntnr"));
-	python::def("calcExplicitMass", &calcExplicitMassWrapper1, python::arg("cntnr"));
+    python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper1, python::arg("cntnr"));
+    python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper3, (python::arg("cntnr"), python::arg("type"), python::arg("strict") = true));
+    python::def("getExplicitChainAtomCount", &getExplicitChainAtomCountWrapper1, python::arg("cntnr"));
+    python::def("getRingAtomCount", &getRingAtomCountWrapper1, python::arg("cntnr"));
+    python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper1, python::arg("cntnr"));
+    python::def("getHeavyAtomCount", &getHeavyAtomCountWrapper1, python::arg("cntnr"));
+    python::def("getNetFormalCharge", &getNetFormalChargeWrapper1, python::arg("cntnr"));
+    python::def("calcExplicitMass", &calcExplicitMassWrapper1, python::arg("cntnr"));
 
-	python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2, (python::arg("cntnr"), python::arg("mass_comp")));
-	python::def("buildExplicitMassCompositionString", &buildExplicitMassCompositionStringWrapper, python::arg("cntnr"));
+    python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2, (python::arg("cntnr"), python::arg("mass_comp")));
+    python::def("buildExplicitMassCompositionString", &buildExplicitMassCompositionStringWrapper, python::arg("cntnr"));
 
-	python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
-	python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
+    python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
+    python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
 
-	python::def("calcDipoleMoment", &calcDipoleMomentWrapper2, (python::arg("cntnr"), python::arg("moment")));
-	python::def("calcDipoleMoment", &calcDipoleMomentWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("moment")));
+    python::def("calcDipoleMoment", &calcDipoleMomentWrapper2, (python::arg("cntnr"), python::arg("moment")));
+    python::def("calcDipoleMoment", &calcDipoleMomentWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("moment")));
 }

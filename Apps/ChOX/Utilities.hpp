@@ -35,16 +35,16 @@ class QString;
 namespace ChOX
 {
 
-	void drawText(QPainter& painter, const QString& text, unsigned int alignment, 
-				  double width, double height, double margin);
+    void drawText(QPainter& painter, const QString& text, unsigned int alignment, 
+                  double width, double height, double margin);
 
-	void initData(CDPL::Chem::Reaction& rxn);
-	void initData(CDPL::Chem::Molecule& mol);
+    void initData(CDPL::Chem::Reaction& rxn);
+    void initData(CDPL::Chem::Molecule& mol);
 
-	void prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFormat& opt_fmt, 
-						   const CDPL::Base::ControlParameterContainer& params);
-	void prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt, 
-						   const CDPL::Base::ControlParameterContainer& params);
+    void prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFormat& opt_fmt, 
+                           const CDPL::Base::ControlParameterContainer& params);
+    void prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt, 
+                           const CDPL::Base::ControlParameterContainer& params);
 }
 
 #endif // CHOX_UTILITIES_HPP

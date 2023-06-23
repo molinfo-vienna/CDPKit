@@ -33,24 +33,24 @@ using namespace CDPL;
 
 std::size_t Chem::buildAtomTypeMask(const Chem::AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset)
 {
-	std::size_t num_atoms = cntnr.getNumAtoms();
+    std::size_t num_atoms = cntnr.getNumAtoms();
 
-	if (mask.size() < num_atoms)
-		mask.resize(num_atoms);
+    if (mask.size() < num_atoms)
+        mask.resize(num_atoms);
 
-	if (reset)
-		mask.reset();
+    if (reset)
+        mask.reset();
 
-	std::size_t num_bits = 0;
+    std::size_t num_bits = 0;
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		const Atom& atom = cntnr.getAtom(i);
-		
-		if (getType(atom) == type) {
-			mask.set(i);
-			num_bits++;
-		}
-	}
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        const Atom& atom = cntnr.getAtom(i);
+        
+        if (getType(atom) == type) {
+            mask.set(i);
+            num_bits++;
+        }
+    }
 
-	return num_bits;
+    return num_bits;
 }

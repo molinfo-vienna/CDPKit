@@ -35,10 +35,10 @@ using namespace CDPL;
 
 long MolProp::getNetFormalCharge(const Chem::AtomContainer& cntnr)
 {
-	long charge = 0;
+    long charge = 0;
 
-	for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		charge += getFormalCharge(*it);
+    for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        charge += getFormalCharge(*it);
 
-	return charge;
+    return charge;
 }

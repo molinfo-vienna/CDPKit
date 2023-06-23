@@ -29,20 +29,20 @@
 namespace CDPLPythonDescr
 {
 
-	void exportAutoCorrelation2DVectorCalculator();
-	void exportAtomRDFCodeCalculator();
-	void exportMoleculeRDFDescriptorCalculator();
-	void exportAtomAutoCorrelation3DVectorCalculator();
-	void exportMoleculeAutoCorr3DDescriptorCalculator();
-	void exportMoleculeAutoCorr2DDescriptorCalculator();
-	void exportBurdenMatrixGenerator();
-	void exportBCUTDescriptorCalculator();
-	void exportMolecularComplexityCalculator();
-	void exportPathFingerprintGenerator();
-	void exportCircularFingerprintGenerator();
-	void exportFeatureRDFCodeCalculator();
-	void exportPharmacophoreRDFDescriptorCalculator();
-	void exportFeatureAutoCorrelation3DVectorCalculator();
+    void exportAutoCorrelation2DVectorCalculator();
+    void exportAtomRDFCodeCalculator();
+    void exportMoleculeRDFDescriptorCalculator();
+    void exportAtomAutoCorrelation3DVectorCalculator();
+    void exportMoleculeAutoCorr3DDescriptorCalculator();
+    void exportMoleculeAutoCorr2DDescriptorCalculator();
+    void exportBurdenMatrixGenerator();
+    void exportBCUTDescriptorCalculator();
+    void exportMolecularComplexityCalculator();
+    void exportPathFingerprintGenerator();
+    void exportCircularFingerprintGenerator();
+    void exportFeatureRDFCodeCalculator();
+    void exportPharmacophoreRDFDescriptorCalculator();
+    void exportFeatureAutoCorrelation3DVectorCalculator();
     void exportPharmacophoreAutoCorr3DDescriptorCalculator();
 }
 

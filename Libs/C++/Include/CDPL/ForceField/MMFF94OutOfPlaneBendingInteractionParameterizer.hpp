@@ -43,57 +43,57 @@
 
 namespace CDPL 
 {
-	
-	namespace Chem
-	{
+    
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-	}
+        class MolecularGraph;
+        class Atom;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionParameterizer
-		{
+        class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionParameterizer
+        {
 
-		  public:
-			typedef std::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
 
-			MMFF94OutOfPlaneBendingInteractionParameterizer();
+            MMFF94OutOfPlaneBendingInteractionParameterizer();
 
-			MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-															MMFF94OutOfPlaneBendingInteractionData& ia_data,
-															bool strict);
+            MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+                                                            MMFF94OutOfPlaneBendingInteractionData& ia_data,
+                                                            bool strict);
 
-			void setFilterFunction(const InteractionFilterFunction4& func); 
+            void setFilterFunction(const InteractionFilterFunction4& func); 
 
-			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
 
-			void setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table);
+            void setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table);
 
-			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
+            void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data, bool strict);
 
-		  private:
-			typedef std::vector<const Chem::Atom*> AtomList;
-			
-			double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
-									std::size_t ctr_atom_idx, const AtomList& nbr_atoms, bool strict) const;
+          private:
+            typedef std::vector<const Chem::Atom*> AtomList;
+            
+            double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+                                    std::size_t ctr_atom_idx, const AtomList& nbr_atoms, bool strict) const;
 
-			double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
-									std::size_t ctr_atom_idx, unsigned int nbr_atom_types[3], const AtomList& nbr_atoms) const;
+            double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+                                    std::size_t ctr_atom_idx, unsigned int nbr_atom_types[3], const AtomList& nbr_atoms) const;
 
-			InteractionFilterFunction4                            filterFunc;
-			MMFF94NumericAtomTypeFunction                         atomTypeFunc;	
-			MMFF94OutOfPlaneBendingParameterTable::SharedPointer  paramTable;
-			MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
-			MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
-			AtomList                                              nbrAtoms;
-		};			
+            InteractionFilterFunction4                            filterFunc;
+            MMFF94NumericAtomTypeFunction                         atomTypeFunc;    
+            MMFF94OutOfPlaneBendingParameterTable::SharedPointer  paramTable;
+            MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
+            MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
+            AtomList                                              nbrAtoms;
+        };            
     }
 }
 

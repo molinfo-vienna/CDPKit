@@ -37,56 +37,56 @@ using namespace CDPL;
 
 std::size_t MolProp::getExplicitAtomCount(const Chem::AtomContainer& cntnr)
 {
-	return cntnr.getNumAtoms();
+    return cntnr.getNumAtoms();
 }
 
 std::size_t MolProp::getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict)
 {
-	return Internal::getExplicitAtomCount(cntnr, type, strict);
+    return Internal::getExplicitAtomCount(cntnr, type, strict);
 }
 
 std::size_t MolProp::getExplicitChainAtomCount(const Chem::AtomContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		if (!getRingFlag(*it))
-			count++;
+    for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        if (!getRingFlag(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getRingAtomCount(const Chem::AtomContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		if (getRingFlag(*it))
-			count++;
+    for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        if (getRingFlag(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getAromaticAtomCount(const Chem::AtomContainer& cntnr)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		if (getAromaticityFlag(*it))
-			count++;
+    for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        if (getAromaticityFlag(*it))
+            count++;
 
-	return count;
+    return count;
 }
 
 std::size_t MolProp::getHeavyAtomCount(const Chem::AtomContainer& cntnr)
 {
-	using namespace Chem;
-	
-	std::size_t count = 0;
+    using namespace Chem;
+    
+    std::size_t count = 0;
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		if (getType(*it) != AtomType::H)
-			count++;
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+        if (getType(*it) != AtomType::H)
+            count++;
 
-	return count;
+    return count;
 }

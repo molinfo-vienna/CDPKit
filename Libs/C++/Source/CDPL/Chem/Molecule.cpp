@@ -35,61 +35,61 @@ using namespace CDPL;
 
 Chem::Molecule::AtomIterator Chem::Molecule::removeAtom(const AtomIterator& it)
 {
-	if (it.getIndex() >= getNumAtoms())
-		throw Base::RangeError("Molecule: atom iterator out of valid range");
+    if (it.getIndex() >= getNumAtoms())
+        throw Base::RangeError("Molecule: atom iterator out of valid range");
 
-	removeAtom(it.getIndex());
+    removeAtom(it.getIndex());
 
-	return it;
+    return it;
 }
 
 Chem::Molecule::BondIterator Chem::Molecule::removeBond(const BondIterator& it)
 {
-	if (it.getIndex() >= getNumBonds())
-		throw Base::RangeError("Molecule: bond iterator out of valid range");
+    if (it.getIndex() >= getNumBonds())
+        throw Base::RangeError("Molecule: bond iterator out of valid range");
 
-	removeBond(it.getIndex());
+    removeBond(it.getIndex());
 
-	return it;
+    return it;
 }
 
 Chem::Molecule& Chem::Molecule::operator=(const Molecule& mol) 
 {
-	if (this == &mol)
-		return *this;
+    if (this == &mol)
+        return *this;
 
-	copy(mol);
+    copy(mol);
 
-	return *this;
+    return *this;
 }
 
 Chem::Molecule& Chem::Molecule::operator+=(const Molecule& mol) 
 {
-	append(mol);
+    append(mol);
 
-	return *this;
+    return *this;
 }
 
 Chem::Molecule& Chem::Molecule::operator=(const MolecularGraph& molgraph)
 {   
-	if (this == &molgraph)
-		return *this;
+    if (this == &molgraph)
+        return *this;
 
-	copy(molgraph);
+    copy(molgraph);
 
-	return *this;
+    return *this;
 }
 
 Chem::Molecule& Chem::Molecule::operator+=(const MolecularGraph& molgraph)
 {   
-	append(molgraph);
+    append(molgraph);
 
-	return *this;
+    return *this;
 }
 
 Chem::Molecule& Chem::Molecule::operator-=(const MolecularGraph& molgraph)
 {
-	remove(molgraph);
+    remove(molgraph);
 
-	return *this;
+    return *this;
 }

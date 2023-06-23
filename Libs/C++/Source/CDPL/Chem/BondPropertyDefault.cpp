@@ -35,21 +35,21 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		namespace BondPropertyDefault
-		{
+        namespace BondPropertyDefault
+        {
 
-			const std::size_t ORDER                                      = 0;
-			const unsigned int SYBYL_TYPE                                = SybylBondType::UNKNOWN;
-			const unsigned int DIRECTION                                 = BondDirection::NONE;
+            const std::size_t ORDER                                      = 0;
+            const unsigned int SYBYL_TYPE                                = SybylBondType::UNKNOWN;
+            const unsigned int DIRECTION                                 = BondDirection::NONE;
             const unsigned int STEREO_2D_FLAG                            = BondStereoFlag::PLAIN;
-			const StereoDescriptor STEREO_DESCRIPTOR                     = StereoDescriptor(BondConfiguration::UNDEF);
-			const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS   = MatchConstraintList::SharedPointer(new MatchConstraintList());
+            const StereoDescriptor STEREO_DESCRIPTOR                     = StereoDescriptor(BondConfiguration::UNDEF);
+            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS   = MatchConstraintList::SharedPointer(new MatchConstraintList());
             const unsigned int REACTION_CENTER_STATUS                    = ReactionCenterStatus::NONE;
-		}
+        }
 
-		void initBondPropertyDefaults() {}
-	}
+        void initBondPropertyDefaults() {}
+    }
 }

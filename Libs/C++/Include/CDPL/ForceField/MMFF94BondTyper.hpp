@@ -38,52 +38,52 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94BondTyper
-		{
+        class CDPL_FORCEFIELD_API MMFF94BondTyper
+        {
 
-		  public:
-			MMFF94BondTyper();
+          public:
+            MMFF94BondTyper();
 
-			MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
+            MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
-			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
+            void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
-			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
-	
-			/**
-			 * \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.
-			 *
-			 * Specifically, an nonstandard bond type index of \e "1" is assigned
-			 * whenever a single bond (formal bond order 1) is found a) between
-			 * non-aromatic atoms \e i and \e j of types \e I and \e J for which \e "sbmb" entries in
-			 * of \e "1" appear in the "MMFFPROP.PAR" file or b) between aromatic atoms
-			 * belonging to different aromatic rings (as in the case of the central
-			 * C-C bond in biphenyl).
-			 * 
-			 * \param molgraph The molecular graph for which to assign bond type indices
-			 * \param types The output array storing the determined bond type indices.
-			 * \param strict If \c true, strict parameterization will be peformed that might fail.
-			 */
-			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
+    
+            /**
+             * \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.
+             *
+             * Specifically, an nonstandard bond type index of \e "1" is assigned
+             * whenever a single bond (formal bond order 1) is found a) between
+             * non-aromatic atoms \e i and \e j of types \e I and \e J for which \e "sbmb" entries in
+             * of \e "1" appear in the "MMFFPROP.PAR" file or b) between aromatic atoms
+             * belonging to different aromatic rings (as in the case of the central
+             * C-C bond in biphenyl).
+             * 
+             * \param molgraph The molecular graph for which to assign bond type indices
+             * \param types The output array storing the determined bond type indices.
+             * \param strict If \c true, strict parameterization will be peformed that might fail.
+             */
+            void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
-		  private:
-			typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
+          private:
+            typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
 
-			MMFF94AtomTypePropertyTable::SharedPointer atomTypePropTable;
-			MMFF94RingSetFunction                      aromRingSetFunc;
-			MMFF94NumericAtomTypeFunction              atomTypeFunc;
-		};
+            MMFF94AtomTypePropertyTable::SharedPointer atomTypePropTable;
+            MMFF94RingSetFunction                      aromRingSetFunc;
+            MMFF94NumericAtomTypeFunction              atomTypeFunc;
+        };
     }
 }
 

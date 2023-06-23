@@ -31,10 +31,10 @@
 
 void CDPLPythonPharm::exportPSDMoleculeInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::PSDMoleculeInputHandler, 
-				   python::bases<Base::DataInputHandler<Chem::Molecule> > >("PSDMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::PSDMoleculeInputHandler, 
+                   python::bases<Base::DataInputHandler<Chem::Molecule> > >("PSDMoleculeInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

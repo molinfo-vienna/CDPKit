@@ -42,37 +42,37 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \brief CompressedDataReader.
-		 */
-		template <typename ReaderImpl, typename DecompStream, typename DataType = typename ReaderImpl::DataType>
-		class CompressedDataReader : public Base::DataReader<DataType>
-		{
+        /**
+         * \brief CompressedDataReader.
+         */
+        template <typename ReaderImpl, typename DecompStream, typename DataType = typename ReaderImpl::DataType>
+        class CompressedDataReader : public Base::DataReader<DataType>
+        {
 
-		public:
-			CompressedDataReader(std::istream& is); 
+        public:
+            CompressedDataReader(std::istream& is); 
 
-			CompressedDataReader& read(DataType& obj, bool overwrite = true);
-			CompressedDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
+            CompressedDataReader& read(DataType& obj, bool overwrite = true);
+            CompressedDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
-			CompressedDataReader& skip();
+            CompressedDataReader& skip();
 
-			bool hasMoreData();
+            bool hasMoreData();
 
-			std::size_t getRecordIndex() const;
-			void setRecordIndex(std::size_t idx);
+            std::size_t getRecordIndex() const;
+            void setRecordIndex(std::size_t idx);
 
-			std::size_t getNumRecords();
+            std::size_t getNumRecords();
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-			void close();
-		
-		private:
-			DecompStream  stream;
-			ReaderImpl    reader;
-		};
+            void close();
+        
+        private:
+            DecompStream  stream;
+            ReaderImpl    reader;
+        };
     }
 }
 
@@ -84,7 +84,7 @@ CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::Compressed
     stream(is), reader(stream) 
 {
     reader.setParent(this);
-	reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
+    reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>
@@ -122,7 +122,7 @@ bool CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::hasMo
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>
 std::size_t CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::getRecordIndex() const
-{	
+{    
     return reader.getRecordIndex();
 }
 
@@ -154,7 +154,7 @@ template <typename ReaderImpl, typename DecompStream, typename DataType>
 void CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::close()
 {
     reader.close();
-	stream.close();
+    stream.close();
 }
 
 #endif // CDPL_UTIL_COMPRESSEDDATAREADER_HPP

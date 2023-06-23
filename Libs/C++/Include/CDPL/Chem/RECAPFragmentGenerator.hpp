@@ -41,21 +41,21 @@ namespace CDPL
     namespace Chem
     {
 
-	/**
-	 * \brief RECAPFragmentGenerator.
-	 * \see [\ref RECAP]
-	 */
-	class CDPL_CHEM_API RECAPFragmentGenerator : public FragmentGenerator 
-	{
+    /**
+     * \brief RECAPFragmentGenerator.
+     * \see [\ref RECAP]
+     */
+    class CDPL_CHEM_API RECAPFragmentGenerator : public FragmentGenerator 
+    {
 
-	  public:
-	    typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
-		
-	    /**
-	     * \brief Constructs the \c %RECAPFragmentGenerator instance.
-	     */
-	    RECAPFragmentGenerator();
-	};
+      public:
+        typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
+        
+        /**
+         * \brief Constructs the \c %RECAPFragmentGenerator instance.
+         */
+        RECAPFragmentGenerator();
+    };
     }
 }
 

@@ -43,12 +43,12 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-		class MolecularGraph;
-	}
+        class Molecule;
+        class MolecularGraph;
+    }
 }
 
 
@@ -59,104 +59,104 @@ namespace TautGen
     {
 
     public:
-		TautGenImpl();
+        TautGenImpl();
 
     private:
-		enum Mode 
-		{
+        enum Mode 
+        {
 
-		  STANDARDIZE,
-		  TOPOLOGICALLY_UNIQUE,
-		  GEOMETRICALLY_UNIQUE,
-		  EXHAUSTIVE
-		};
+          STANDARDIZE,
+          TOPOLOGICALLY_UNIQUE,
+          GEOMETRICALLY_UNIQUE,
+          EXHAUSTIVE
+        };
 
-		typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
-		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-		typedef InputHandler::SharedPointer InputHandlerPtr;
-		typedef OutputHandler::SharedPointer OutputHandlerPtr;
+        typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
+        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
+        typedef InputHandler::SharedPointer InputHandlerPtr;
+        typedef OutputHandler::SharedPointer OutputHandlerPtr;
 
-		const char* getProgName() const;
-		const char* getProgCopyright() const;
-		const char* getProgAboutText() const;
+        const char* getProgName() const;
+        const char* getProgCopyright() const;
+        const char* getProgAboutText() const;
 
-		void setMode(const std::string& mode_str);
-		void setInputFormat(const std::string& file_ext);
-		void setOutputFormat(const std::string& file_ext);
+        void setMode(const std::string& mode_str);
+        void setInputFormat(const std::string& file_ext);
+        void setOutputFormat(const std::string& file_ext);
 
-		int process();
+        int process();
 
-		void processSingleThreaded();
-		void processMultiThreaded();
+        void processSingleThreaded();
+        void processMultiThreaded();
 
-		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
-		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
+        std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
+        std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
-		void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
-		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
+        void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
+        void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
 
-		void setErrorMessage(const std::string& msg);
-		bool haveErrorMessage();
+        void setErrorMessage(const std::string& msg);
+        bool haveErrorMessage();
 
-		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
+        void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-		void printStatistics(std::size_t num_proc_mols, std::size_t num_gen_taut);
+        void printStatistics(std::size_t num_proc_mols, std::size_t num_gen_taut);
 
-		void checkInputFiles() const;
-		void printOptionSummary();
-		void initInputReader();
-		void initOutputWriter();
+        void checkInputFiles() const;
+        void printOptionSummary();
+        void initInputReader();
+        void initOutputWriter();
 
-		std::string getModeString() const;
+        std::string getModeString() const;
 
-		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
-		std::string createMoleculeIdentifier(std::size_t rec_idx);
+        std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
+        std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-		InputHandlerPtr getInputHandler(const std::string& file_path) const;
-		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
+        InputHandlerPtr getInputHandler(const std::string& file_path) const;
+        OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
 
-		void addOptionLongDescriptions();
+        void addOptionLongDescriptions();
 
-		class InputScanProgressCallback;
-		class TautGenerationWorker;
+        class InputScanProgressCallback;
+        class TautGenerationWorker;
 
-		typedef std::vector<std::string> StringList;
-		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
-		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-		typedef CDPL::Chem::ProtonationStateStandardizer ChargeNeutralizer;
-		typedef CDPL::Internal::Timer Timer;
-		
-		StringList         inputFiles;
-		std::string        outputFile;
-		bool               regardStereo;
-		bool               regardIsotopes;
-		bool               neutralize;
-		bool               ketoEnol;
-		bool               imineEnamine;
-		bool               nitrosoOxime;
-		bool               amideImidicAcid;
-		bool               lactamLactim;
-		bool               keteneYnol;
-		bool               nitroAci;
-		bool               phosphinicAcid;
-		bool               sulfenicAcid;
-		bool               genericH13Shift;
-		bool               genericH15Shift;
-		std::size_t        numThreads;
-		std::size_t        maxNumTautomers;
-		Mode               mode;
-		InputHandlerPtr    inputHandler;
-		CompMoleculeReader inputReader;
-		OutputHandlerPtr   outputHandler;
-		MoleculeWriterPtr  outputWriter;
-		std::mutex         mutex;
-		std::mutex         readMolMutex;
-		std::mutex         writeMolMutex;
-		std::string        errorMessage;
-		Timer              timer;
-		std::size_t        numOutTautomers;
-		ChargeNeutralizer  neutralizer;
+        typedef std::vector<std::string> StringList;
+        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
+        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+        typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
+        typedef CDPL::Chem::ProtonationStateStandardizer ChargeNeutralizer;
+        typedef CDPL::Internal::Timer Timer;
+        
+        StringList         inputFiles;
+        std::string        outputFile;
+        bool               regardStereo;
+        bool               regardIsotopes;
+        bool               neutralize;
+        bool               ketoEnol;
+        bool               imineEnamine;
+        bool               nitrosoOxime;
+        bool               amideImidicAcid;
+        bool               lactamLactim;
+        bool               keteneYnol;
+        bool               nitroAci;
+        bool               phosphinicAcid;
+        bool               sulfenicAcid;
+        bool               genericH13Shift;
+        bool               genericH15Shift;
+        std::size_t        numThreads;
+        std::size_t        maxNumTautomers;
+        Mode               mode;
+        InputHandlerPtr    inputHandler;
+        CompMoleculeReader inputReader;
+        OutputHandlerPtr   outputHandler;
+        MoleculeWriterPtr  outputWriter;
+        std::mutex         mutex;
+        std::mutex         readMolMutex;
+        std::mutex         writeMolMutex;
+        std::string        errorMessage;
+        Timer              timer;
+        std::size_t        numOutTautomers;
+        ChargeNeutralizer  neutralizer;
     };
 }
 

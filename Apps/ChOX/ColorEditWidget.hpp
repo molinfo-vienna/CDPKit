@@ -36,29 +36,29 @@ class QFrame;
 namespace ChOX
 {
 
-	class ColorEditWidget : public QWidget
-	{
+    class ColorEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		ColorEditWidget(QWidget*, CDPL::Vis::Color&, bool = false);
+    public:
+        ColorEditWidget(QWidget*, CDPL::Vis::Color&, bool = false);
 
-	signals:
-		void colorChanged();
+    signals:
+        void colorChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void editColor();
+    private slots:
+        void editColor();
 
-	private:
-		void init(bool);
+    private:
+        void init(bool);
 
-		CDPL::Vis::Color& color;
-		QFrame*           colorLabel;
-	};
+        CDPL::Vis::Color& color;
+        QFrame*           colorLabel;
+    };
 }
 
 #endif // CHOX_COLOREDITWIDGET_HPP

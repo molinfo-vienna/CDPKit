@@ -33,25 +33,25 @@
 
 void CDPLPythonVis::exportReactionView2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::ReactionView2D, 
-		python::bases<Vis::View2D>, boost::noncopyable>("ReactionView2D", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Reaction*>((python::arg("self"), python::arg("rxn")))[python::with_custodian_and_ward<1, 2>()])
-		.def("setReaction", &Vis::ReactionView2D::setReaction, (python::arg("self"), python::arg("rxn")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("getReaction", &Vis::ReactionView2D::getReaction, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.def("getFontMetrics", &Vis::ReactionView2D::getFontMetrics, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.add_property("reaction", python::make_function(&Vis::ReactionView2D::getReaction,
-														python::return_internal_reference<1>()),
-					 python::make_function(&Vis::ReactionView2D::setReaction, 
-										   python::with_custodian_and_ward<1, 2>()))
-		.add_property("fontMetrics", python::make_function(&Vis::ReactionView2D::getFontMetrics,
-														   python::return_internal_reference<1>()),
-					 python::make_function(&Vis::ReactionView2D::setFontMetrics,	 
-										   python::with_custodian_and_ward<1, 2>()));
+    python::class_<Vis::ReactionView2D, 
+        python::bases<Vis::View2D>, boost::noncopyable>("ReactionView2D", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::Reaction*>((python::arg("self"), python::arg("rxn")))[python::with_custodian_and_ward<1, 2>()])
+        .def("setReaction", &Vis::ReactionView2D::setReaction, (python::arg("self"), python::arg("rxn")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("getReaction", &Vis::ReactionView2D::getReaction, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .def("getFontMetrics", &Vis::ReactionView2D::getFontMetrics, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .add_property("reaction", python::make_function(&Vis::ReactionView2D::getReaction,
+                                                        python::return_internal_reference<1>()),
+                     python::make_function(&Vis::ReactionView2D::setReaction, 
+                                           python::with_custodian_and_ward<1, 2>()))
+        .add_property("fontMetrics", python::make_function(&Vis::ReactionView2D::getFontMetrics,
+                                                           python::return_internal_reference<1>()),
+                     python::make_function(&Vis::ReactionView2D::setFontMetrics,     
+                                           python::with_custodian_and_ward<1, 2>()));
 }

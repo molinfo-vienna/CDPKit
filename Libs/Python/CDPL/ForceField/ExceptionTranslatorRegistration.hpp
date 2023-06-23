@@ -29,7 +29,7 @@
 namespace CDPLPythonForceField
 {
 
-	void registerExceptionTranslators();
+    void registerExceptionTranslators();
 }
 
 #endif // CDPL_PYTHON_FORCEFIELD_EXCEPTIONTRANSLATORREGISTRATION_HPP

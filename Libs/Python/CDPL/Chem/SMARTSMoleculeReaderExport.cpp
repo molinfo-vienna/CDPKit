@@ -32,16 +32,16 @@
 
 void CDPLPythonChem::exportSMARTSMoleculeReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SMARTSMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("SMARTSMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SMARTSMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("SMARTSMoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::SMARTSMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileSMARTSMoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::SMARTSMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileSMARTSMoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

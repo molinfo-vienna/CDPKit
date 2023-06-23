@@ -35,60 +35,60 @@ using namespace CDPL;
 
 Chem::ComponentSet::ComponentSet(const MolecularGraph& molgraph)
 {
-	perceive(molgraph);
+    perceive(molgraph);
 }
 
 void Chem::ComponentSet::perceive(const MolecularGraph& molgraph)
 {
-	clear();
+    clear();
 
-	if (molgraph.getNumAtoms() == 0)
-		return;
+    if (molgraph.getNumAtoms() == 0)
+        return;
 
-	visAtomMask.resize(molgraph.getNumAtoms());
-	visAtomMask.reset();
+    visAtomMask.resize(molgraph.getNumAtoms());
+    visAtomMask.reset();
 
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 
-	std::size_t i = 0;
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    std::size_t i = 0;
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++)
-		if (!visAtomMask.test(i)) {
-			Fragment::SharedPointer comp_ptr(new Fragment());
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++)
+        if (!visAtomMask.test(i)) {
+            Fragment::SharedPointer comp_ptr(new Fragment());
 
-			const Atom& atom = *it;
+            const Atom& atom = *it;
 
-			comp_ptr->addAtom(atom);
+            comp_ptr->addAtom(atom);
 
-			visitAtom(atom, *comp_ptr);
-			
-			addElement(comp_ptr);
-		}
+            visitAtom(atom, *comp_ptr);
+            
+            addElement(comp_ptr);
+        }
 }
 
 void Chem::ComponentSet::visitAtom(const Atom& atom, Fragment& comp)
 {
-	visAtomMask.set(molGraph->getAtomIndex(atom));
+    visAtomMask.set(molGraph->getAtomIndex(atom));
 
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-		
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		const Bond& bond = *b_it;
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+        
+    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+        const Bond& bond = *b_it;
 
-		if (!molGraph->containsBond(bond))
-			continue;
+        if (!molGraph->containsBond(bond))
+            continue;
 
-		const Atom& nbr_atom = *a_it;
+        const Atom& nbr_atom = *a_it;
 
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
+        if (!molGraph->containsAtom(nbr_atom))
+            continue;
 
-		if (!comp.containsBond(bond))
-			comp.addBond(bond);
+        if (!comp.containsBond(bond))
+            comp.addBond(bond);
 
-		if (!visAtomMask.test(molGraph->getAtomIndex(nbr_atom))) 
-			visitAtom(nbr_atom, comp);
-	}
+        if (!visAtomMask.test(molGraph->getAtomIndex(nbr_atom))) 
+            visitAtom(nbr_atom, comp);
+    }
 }

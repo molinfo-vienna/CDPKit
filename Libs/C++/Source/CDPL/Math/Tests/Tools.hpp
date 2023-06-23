@@ -29,20 +29,20 @@
 namespace
 {
 
-	template <typename M, typename Array>
-	void initMatrix(M& mtx, const Array& data)
-	{
-		for (typename M::SizeType i = 0, k = 0; i < mtx.getSize1(); i++)
-			for (typename M::SizeType j = 0; j < mtx.getSize2(); j++)
-				mtx(i, j) = data[k++];
-	} 
+    template <typename M, typename Array>
+    void initMatrix(M& mtx, const Array& data)
+    {
+        for (typename M::SizeType i = 0, k = 0; i < mtx.getSize1(); i++)
+            for (typename M::SizeType j = 0; j < mtx.getSize2(); j++)
+                mtx(i, j) = data[k++];
+    } 
 
-	template <typename V, typename Array>
-	void initVector(V& vec, const Array& data)
-	{
-		for (typename V::SizeType i = 0; i < vec.getSize(); i++)
-			vec(i) = data[i];
-	} 
+    template <typename V, typename Array>
+    void initVector(V& vec, const Array& data)
+    {
+        for (typename V::SizeType i = 0; i < vec.getSize(); i++)
+            vec(i) = data[i];
+    } 
 }
 
 #endif // CDPL_MATH_TEST_TOOLS_HPP

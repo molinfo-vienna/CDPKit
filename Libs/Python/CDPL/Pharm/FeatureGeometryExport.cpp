@@ -42,8 +42,8 @@ void CDPLPythonPharm::exportFeatureGeometries()
     using namespace CDPL;
 
     python::class_<FeatureGeometry, boost::noncopyable>("FeatureGeometry", python::no_init)
-	.def_readonly("UNDEF", &Pharm::FeatureGeometry::UNDEF)
-	.def_readonly("SPHERE", &Pharm::FeatureGeometry::SPHERE)
-	.def_readonly("VECTOR", &Pharm::FeatureGeometry::VECTOR)
-	.def_readonly("PLANE", &Pharm::FeatureGeometry::PLANE);
+    .def_readonly("UNDEF", &Pharm::FeatureGeometry::UNDEF)
+    .def_readonly("SPHERE", &Pharm::FeatureGeometry::SPHERE)
+    .def_readonly("VECTOR", &Pharm::FeatureGeometry::VECTOR)
+    .def_readonly("PLANE", &Pharm::FeatureGeometry::PLANE);
 }

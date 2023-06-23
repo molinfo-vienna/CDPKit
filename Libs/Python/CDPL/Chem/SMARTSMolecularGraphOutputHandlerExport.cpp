@@ -31,10 +31,10 @@
 
 void CDPLPythonChem::exportSMARTSMolecularGraphOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SMARTSMolecularGraphOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SMARTSMolecularGraphOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::SMARTSMolecularGraphOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SMARTSMolecularGraphOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

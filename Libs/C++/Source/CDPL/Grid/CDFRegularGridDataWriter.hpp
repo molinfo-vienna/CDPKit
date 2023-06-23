@@ -35,40 +35,40 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class CDFRegularGridDataWriter : protected CDFDataWriter
-		{
+        class CDFRegularGridDataWriter : protected CDFDataWriter
+        {
 
-		public:
-			CDFRegularGridDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+        public:
+            CDFRegularGridDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool writeGrid(std::ostream& os, const DRegularGrid& grid);
+            bool writeGrid(std::ostream& os, const DRegularGrid& grid);
 
-			void writeGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
+            void writeGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
 
-		protected:
-			void appendGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
+        protected:
+            void appendGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
 
-			void outputGridData(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
+            void outputGridData(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
 
-			void init();
+            void init();
 
-			void outputGridHeader(const DRegularGrid& grid, Internal::ByteBuffer& bbuf, std::size_t) const;
-		
-			bool writeRecordData(std::ostream& os) const;
+            void outputGridHeader(const DRegularGrid& grid, Internal::ByteBuffer& bbuf, std::size_t) const;
+        
+            bool writeRecordData(std::ostream& os) const;
 
-			const Base::ControlParameterContainer& ctrlParams;	
-			Internal::ByteBuffer                   dataBuffer;
-		};
-	}
+            const Base::ControlParameterContainer& ctrlParams;    
+            Internal::ByteBuffer                   dataBuffer;
+        };
+    }
 }
 
 #endif // CDPL_GRID_CDFREGULARGRIDDATAWRITER_HPP

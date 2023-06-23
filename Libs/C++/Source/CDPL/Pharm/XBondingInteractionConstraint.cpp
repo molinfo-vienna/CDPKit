@@ -39,7 +39,7 @@ using namespace CDPL;
 namespace
 {
 
-	const double DEF_LP_TO_AXIS_ANGLE = 65.0;
+    const double DEF_LP_TO_AXIS_ANGLE = 65.0;
 }
 
 
@@ -51,55 +51,55 @@ constexpr double Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE;
 
 double Pharm::XBondingInteractionConstraint::getMinAXDistance() const
 {
-	return minAXDist;
+    return minAXDist;
 }
 
 double Pharm::XBondingInteractionConstraint::getMaxAXDistance() const
 {
-	return maxAXDist;
+    return maxAXDist;
 }
 
 double Pharm::XBondingInteractionConstraint::getMinAXBAngle() const
 {
-	return minAXBAngle;
+    return minAXBAngle;
 }
 
 double Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle() const
 {
-	return maxAccAngle;
+    return maxAccAngle;
 }
 
 bool Pharm::XBondingInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	const Feature& don_ftr = (donAccOrder ? ftr1 : ftr2);
-	const Feature& acc_ftr = (donAccOrder ? ftr2 : ftr1);
+    const Feature& don_ftr = (donAccOrder ? ftr1 : ftr2);
+    const Feature& acc_ftr = (donAccOrder ? ftr2 : ftr1);
 
-	const Math::Vector3D& don_pos = get3DCoordinates(don_ftr);
-	const Math::Vector3D& acc_pos = get3DCoordinates(acc_ftr);
-	Math::Vector3D x_acc_vec(acc_pos - don_pos);
+    const Math::Vector3D& don_pos = get3DCoordinates(don_ftr);
+    const Math::Vector3D& acc_pos = get3DCoordinates(acc_ftr);
+    Math::Vector3D x_acc_vec(acc_pos - don_pos);
 
-	double ax_dist = length(x_acc_vec);
+    double ax_dist = length(x_acc_vec);
 
-	if (ax_dist < minAXDist || ax_dist > maxAXDist)
-		return false;
-	
-	if (hasOrientation(don_ftr)) {
-		double axb_ang = 180.0 - std::acos(angleCos(x_acc_vec, getOrientation(don_ftr), ax_dist)) * 180.0 / M_PI;
-		
-		if (axb_ang < minAXBAngle)
-			return false;
-	}
-	
-	if (hasOrientation(acc_ftr)) {
-		const Math::Vector3D& acc_orient = getOrientation(acc_ftr);
-		double acc_ang_dev = std::acos(angleCos(x_acc_vec, acc_orient, ax_dist)) * 180.0 / M_PI;
-			
-		if (getGeometry(acc_ftr) != FeatureGeometry::VECTOR) 
-			acc_ang_dev = std::abs(acc_ang_dev - DEF_LP_TO_AXIS_ANGLE);
-		
-		if (acc_ang_dev > maxAccAngle)
-			return false;
-	}
+    if (ax_dist < minAXDist || ax_dist > maxAXDist)
+        return false;
+    
+    if (hasOrientation(don_ftr)) {
+        double axb_ang = 180.0 - std::acos(angleCos(x_acc_vec, getOrientation(don_ftr), ax_dist)) * 180.0 / M_PI;
+        
+        if (axb_ang < minAXBAngle)
+            return false;
+    }
+    
+    if (hasOrientation(acc_ftr)) {
+        const Math::Vector3D& acc_orient = getOrientation(acc_ftr);
+        double acc_ang_dev = std::acos(angleCos(x_acc_vec, acc_orient, ax_dist)) * 180.0 / M_PI;
+            
+        if (getGeometry(acc_ftr) != FeatureGeometry::VECTOR) 
+            acc_ang_dev = std::abs(acc_ang_dev - DEF_LP_TO_AXIS_ANGLE);
+        
+        if (acc_ang_dev > maxAccAngle)
+            return false;
+    }
 
-	return true;
+    return true;
 }

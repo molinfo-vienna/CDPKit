@@ -36,32 +36,32 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
+        class Atom;
 
-		/**
-		 * \brief A data type for the storage and lookup of arbitrary atom to atom mappings.
-		 *
-		 * Atoms mappings are stored as pairs of pointers to the mapped \c const Chem::Atom objects.
-		 * Mappings do not have to be unique and multiple mappings of a given atom to other atoms are possible.
-		 * If a mapping entry for a particular atom does not exist, the methods AtomMapping::getValue()
-		 * and AtomMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
-		 * mapped atom has failed.
-		 */
-		class CDPL_CHEM_API AtomMapping : public Util::MultiMap<const Atom*, const Atom*, true>
-		{
+        /**
+         * \brief A data type for the storage and lookup of arbitrary atom to atom mappings.
+         *
+         * Atoms mappings are stored as pairs of pointers to the mapped \c const Chem::Atom objects.
+         * Mappings do not have to be unique and multiple mappings of a given atom to other atoms are possible.
+         * If a mapping entry for a particular atom does not exist, the methods AtomMapping::getValue()
+         * and AtomMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
+         * mapped atom has failed.
+         */
+        class CDPL_CHEM_API AtomMapping : public Util::MultiMap<const Atom*, const Atom*, true>
+        {
 
-		  public:
-			typedef std::shared_ptr<AtomMapping> SharedPointer;
+          public:
+            typedef std::shared_ptr<AtomMapping> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "AtomMapping";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "AtomMapping";
+            }
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ATOMMAPPING_HPP

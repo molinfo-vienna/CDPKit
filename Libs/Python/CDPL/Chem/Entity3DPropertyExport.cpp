@@ -33,16 +33,16 @@
 namespace 
 {
 
-	struct Entity3DProperty {};
+    struct Entity3DProperty {};
 }
 
 
 void CDPLPythonChem::exportEntity3DProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Entity3DProperty, boost::noncopyable>("Entity3DProperty", python::no_init)
-		.def_readonly("COORDINATES_3D", &Chem::Entity3DProperty::COORDINATES_3D)
-		;
+    python::class_<Entity3DProperty, boost::noncopyable>("Entity3DProperty", python::no_init)
+        .def_readonly("COORDINATES_3D", &Chem::Entity3DProperty::COORDINATES_3D)
+        ;
 }

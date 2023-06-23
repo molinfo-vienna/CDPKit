@@ -47,110 +47,110 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94TorsionParameterTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94TorsionParameterTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<std::uint64_t, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<std::uint64_t, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94TorsionParameterTable> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<MMFF94TorsionParameterTable> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-					  unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
+                Entry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+                      unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
-				unsigned int getTorsionTypeIndex() const;
+                unsigned int getTorsionTypeIndex() const;
 
-				unsigned int getTerminalAtom1Type() const;
+                unsigned int getTerminalAtom1Type() const;
 
-				unsigned int getCenterAtom1Type() const;
+                unsigned int getCenterAtom1Type() const;
 
-				unsigned int getCenterAtom2Type() const;
+                unsigned int getCenterAtom2Type() const;
 
-				unsigned int getTerminalAtom2Type() const;
+                unsigned int getTerminalAtom2Type() const;
 
-				double getTorsionParameter1() const;
+                double getTorsionParameter1() const;
 
-				double getTorsionParameter2() const;
+                double getTorsionParameter2() const;
 
-				double getTorsionParameter3() const;
+                double getTorsionParameter3() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int torTypeIdx;
-				unsigned int termAtom1Type;
-				unsigned int ctrAtom1Type;
-				unsigned int ctrAtom2Type;
-				unsigned int termAtom2Type;
-				double       torParam1;
-				double       torParam2;
-				double       torParam3;
-				bool         initialized;
-			};			
+              private:
+                unsigned int torTypeIdx;
+                unsigned int termAtom1Type;
+                unsigned int ctrAtom1Type;
+                unsigned int ctrAtom2Type;
+                unsigned int termAtom2Type;
+                double       torParam1;
+                double       torParam2;
+                double       torParam3;
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94TorsionParameterTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94TorsionParameterTable();
 
-			void addEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-						  unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
+            void addEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+                          unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
-			const Entry& getEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-								  unsigned int term_atom2_type) const;
+            const Entry& getEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+                                  unsigned int term_atom2_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-							 unsigned int term_atom2_type);
+            bool removeEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+                             unsigned int term_atom2_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults(unsigned int param_set);
+            void loadDefaults(unsigned int param_set);
 
-			static void set(const SharedPointer& table, unsigned int param_set);
+            static void set(const SharedPointer& table, unsigned int param_set);
 
-			static const SharedPointer& get(unsigned int param_set);
+            static const SharedPointer& get(unsigned int param_set);
 
-		  private:
-			static SharedPointer defaultDynTable;
-			static SharedPointer defaultStatTable;
-			static SharedPointer defaultStatRefTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultDynTable;
+            static SharedPointer defaultStatTable;
+            static SharedPointer defaultStatRefTable;
+            DataStorage          entries;
+        };
     }
 }
 

@@ -33,32 +33,32 @@
 #define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
 python::def("get"#FUNC_SUFFIX, &ForceField::get##FUNC_SUFFIX, python::arg("molgraph"),                           \
             python::return_value_policy<python::copy_const_reference,                                            \
-			python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
+            python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
 python::def("has"#FUNC_SUFFIX, &ForceField::has##FUNC_SUFFIX, python::arg("molgraph"));                          \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("molgraph"));                      \
 python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)), \
-			python::with_custodian_and_ward<1, 2>());                                                            
+            python::with_custodian_and_ward<1, 2>());                                                            
 
 
 void CDPLPythonForceField::exportMolecularGraphFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
-	
-	python::def("perceiveMMFF94AromaticRings", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&ForceField::perceiveMMFF94AromaticRings),
-				python::arg("molgraph"));
-	python::def("perceiveMMFF94AromaticRings", static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&ForceField::perceiveMMFF94AromaticRings),
-				(python::arg("molgraph"), python::arg("overwrite")));
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::def("perceiveMMFF94AromaticRings", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&ForceField::perceiveMMFF94AromaticRings),
+                python::arg("molgraph"));
+    python::def("perceiveMMFF94AromaticRings", static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&ForceField::perceiveMMFF94AromaticRings),
+                (python::arg("molgraph"), python::arg("overwrite")));
 
-	python::def("assignMMFF94AtomTypes", &ForceField::assignMMFF94AtomTypes, 
-				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
-	python::def("assignMMFF94BondTypeIndices", &ForceField::assignMMFF94BondTypeIndices, 
-				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
-	python::def("calcMMFF94AtomCharges", &ForceField::calcMMFF94AtomCharges, 
-				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
+    python::def("assignMMFF94AtomTypes", &ForceField::assignMMFF94AtomTypes, 
+                (python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
+    python::def("assignMMFF94BondTypeIndices", &ForceField::assignMMFF94BondTypeIndices, 
+                (python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
+    python::def("calcMMFF94AtomCharges", &ForceField::calcMMFF94AtomCharges, 
+                (python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
 
-	python::def("assignUFFAtomTypes", &ForceField::assignUFFAtomTypes, 
-				(python::arg("molgraph"), python::arg("overwrite")));
-	
-	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MMFF94AromaticRings, rings)
+    python::def("assignUFFAtomTypes", &ForceField::assignUFFAtomTypes, 
+                (python::arg("molgraph"), python::arg("overwrite")));
+    
+    EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MMFF94AromaticRings, rings)
 }

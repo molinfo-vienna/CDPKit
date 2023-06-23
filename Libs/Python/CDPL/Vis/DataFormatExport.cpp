@@ -33,19 +33,19 @@
 namespace 
 {
 
-	struct DataFormat {};
+    struct DataFormat {};
 }
 
 
 void CDPLPythonVis::exportDataFormats()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("PNG", &Vis::DataFormat::PNG)
-		.def_readonly("PDF", &Vis::DataFormat::PDF)
-		.def_readonly("PS", &Vis::DataFormat::PS)
-		.def_readonly("SVG", &Vis::DataFormat::SVG);
+    python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
+        .def_readonly("PNG", &Vis::DataFormat::PNG)
+        .def_readonly("PDF", &Vis::DataFormat::PDF)
+        .def_readonly("PS", &Vis::DataFormat::PS)
+        .def_readonly("SVG", &Vis::DataFormat::SVG);
 }
 

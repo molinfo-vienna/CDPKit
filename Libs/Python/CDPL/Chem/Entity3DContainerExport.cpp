@@ -36,23 +36,23 @@
 namespace
 {
 
-	struct Entity3DContainerWrapper : CDPL::Chem::Entity3DContainer, boost::python::wrapper<CDPL::Chem::Entity3DContainer> 
-	{
+    struct Entity3DContainerWrapper : CDPL::Chem::Entity3DContainer, boost::python::wrapper<CDPL::Chem::Entity3DContainer> 
+    {
 
-		ENTITY3DCONTAINER_IMPL()
-	};
+        ENTITY3DCONTAINER_IMPL()
+    };
 }
 
 
 void CDPLPythonChem::exportEntity3DContainer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Entity3DContainerWrapper, boost::noncopyable>("Entity3DContainer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(Entity3DContainerVirtualFunctionsVisitor())
-		.def(Entity3DContainerSpecialFunctionsVisitor())
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Entity3DContainer>())
-		.add_property("numEntities", &Chem::Entity3DContainer::getNumEntities);
+    python::class_<Entity3DContainerWrapper, boost::noncopyable>("Entity3DContainer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(Entity3DContainerVirtualFunctionsVisitor())
+        .def(Entity3DContainerSpecialFunctionsVisitor())
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Entity3DContainer>())
+        .add_property("numEntities", &Chem::Entity3DContainer::getNumEntities);
 }

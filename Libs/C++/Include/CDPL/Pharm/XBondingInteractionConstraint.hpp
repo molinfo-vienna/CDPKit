@@ -38,50 +38,50 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief XBondingInteractionConstraint.
-		 */
-		class CDPL_PHARM_API XBondingInteractionConstraint
-		{
+        /**
+         * \brief XBondingInteractionConstraint.
+         */
+        class CDPL_PHARM_API XBondingInteractionConstraint
+        {
 
-		  public:
-			static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
-			static constexpr double DEF_MAX_AX_DISTANCE = 3.75;
-			static constexpr double DEF_MIN_AXB_ANGLE   = 135.0;
-			static constexpr double DEF_MAX_ACC_ANGLE   = 45.0;
+          public:
+            static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
+            static constexpr double DEF_MAX_AX_DISTANCE = 3.75;
+            static constexpr double DEF_MIN_AXB_ANGLE   = 135.0;
+            static constexpr double DEF_MAX_ACC_ANGLE   = 45.0;
 
-			/**
-			 * \brief Constructs a \c %XBondingInteractionConstraint functor with the specified constraints.
-			 * \param don_acc \c true if the first feature argument represents the donor- and the second one
-			 *                the acceptor-feature, and \c false otherwise.
-			 * \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
-			 * \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
-			 * \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
-			 * \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
-			 */
-			XBondingInteractionConstraint(bool don_acc, double min_ax_dist = DEF_MIN_AX_DISTANCE, double max_ax_dist = DEF_MAX_AX_DISTANCE,
-										  double min_axb_ang = DEF_MIN_AXB_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE): 
-				donAccOrder(don_acc), minAXDist(min_ax_dist), maxAXDist(max_ax_dist), minAXBAngle(min_axb_ang), maxAccAngle(max_acc_ang) {}
+            /**
+             * \brief Constructs a \c %XBondingInteractionConstraint functor with the specified constraints.
+             * \param don_acc \c true if the first feature argument represents the donor- and the second one
+             *                the acceptor-feature, and \c false otherwise.
+             * \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
+             * \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
+             * \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
+             * \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
+             */
+            XBondingInteractionConstraint(bool don_acc, double min_ax_dist = DEF_MIN_AX_DISTANCE, double max_ax_dist = DEF_MAX_AX_DISTANCE,
+                                          double min_axb_ang = DEF_MIN_AXB_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE): 
+                donAccOrder(don_acc), minAXDist(min_ax_dist), maxAXDist(max_ax_dist), minAXBAngle(min_axb_ang), maxAccAngle(max_acc_ang) {}
 
-			double getMinAXDistance() const;
+            double getMinAXDistance() const;
 
-			double getMaxAXDistance() const;
+            double getMaxAXDistance() const;
 
-			double getMinAXBAngle() const;
+            double getMinAXBAngle() const;
 
-			double getMaxAcceptorAngle() const;
+            double getMaxAcceptorAngle() const;
 
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		  private:
-			bool   donAccOrder;
-			double minAXDist;
-			double maxAXDist;
-			double minAXBAngle;
-			double maxAccAngle;
-		};
+          private:
+            bool   donAccOrder;
+            double minAXDist;
+            double maxAXDist;
+            double minAXBAngle;
+            double maxAccAngle;
+        };
     }
 }
 

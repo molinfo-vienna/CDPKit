@@ -32,25 +32,25 @@
 
 BOOST_PYTHON_MODULE(_grail)
 {
-	using namespace CDPLPythonGRAIL;
+    using namespace CDPLPythonGRAIL;
 
-	exportAttributedGridProperties();
-	exportAttributedGridPropertyDefaults();
-	exportFeatureTypes();
-	
-	exportGeneralizedBellAtomDensity();
-	exportAtomDensityGridCalculator();
-	exportBuriednessScore();
-	exportBuriednessGridCalculator();
-	exportFeatureInteractionScoreGridCalculator();
-	exportGRAILDataSetGenerator();
-	exportGRAILDescriptorCalculator();
-	exportBindingAffinityCalculator();
-			
-	exportAttributedGridFunctions();
-	exportFeatureFunctions();
-	exportMoleculeFunctions();
-	
-	exportFunctionWrappers();
-	registerFromPythonConverters();
+    exportAttributedGridProperties();
+    exportAttributedGridPropertyDefaults();
+    exportFeatureTypes();
+    
+    exportGeneralizedBellAtomDensity();
+    exportAtomDensityGridCalculator();
+    exportBuriednessScore();
+    exportBuriednessGridCalculator();
+    exportFeatureInteractionScoreGridCalculator();
+    exportGRAILDataSetGenerator();
+    exportGRAILDescriptorCalculator();
+    exportBindingAffinityCalculator();
+            
+    exportAttributedGridFunctions();
+    exportFeatureFunctions();
+    exportMoleculeFunctions();
+    
+    exportFunctionWrappers();
+    registerFromPythonConverters();
 }

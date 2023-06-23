@@ -36,23 +36,23 @@ namespace
     struct VectorArrayFunctionExport
     {
 
-		VectorArrayFunctionExport() {
-			using namespace boost;
-			using namespace CDPL;
+        VectorArrayFunctionExport() {
+            using namespace boost;
+            using namespace CDPL;
 
-			typedef typename ArrayType::ValueType::ValueType VectorValueType;
-	  
-			python::def("transform", static_cast<void (*)(ArrayType&, const Math::CMatrix<VectorValueType, Dim, Dim>&)>(&Math::transform<VectorValueType, Dim, VectorValueType>),
-						(python::arg("va"), python::arg("xform")));
-			python::def("transform", static_cast<void (*)(ArrayType&, const Math::CMatrix<VectorValueType, Dim + 1, Dim + 1>&)>(&Math::transform<VectorValueType, Dim, VectorValueType>),
-						(python::arg("va"), python::arg("xform")));
-			python::def("calcCentroid", &Math::calcCentroid<VectorValueType, Dim, VectorValueType>,
-						(python::arg("va"), python::arg("ctr")));
-			python::def("calcRMSD", &Math::calcRMSD<VectorValueType, Dim>,
-						(python::arg("va1"), python::arg("va2")));
-			python::def("calcRMSD", &Math::calcRMSD<VectorValueType, Dim, VectorValueType>,
-						(python::arg("va1"), python::arg("va2"), python::arg("va1_xform")));
-		}
+            typedef typename ArrayType::ValueType::ValueType VectorValueType;
+      
+            python::def("transform", static_cast<void (*)(ArrayType&, const Math::CMatrix<VectorValueType, Dim, Dim>&)>(&Math::transform<VectorValueType, Dim, VectorValueType>),
+                        (python::arg("va"), python::arg("xform")));
+            python::def("transform", static_cast<void (*)(ArrayType&, const Math::CMatrix<VectorValueType, Dim + 1, Dim + 1>&)>(&Math::transform<VectorValueType, Dim, VectorValueType>),
+                        (python::arg("va"), python::arg("xform")));
+            python::def("calcCentroid", &Math::calcCentroid<VectorValueType, Dim, VectorValueType>,
+                        (python::arg("va"), python::arg("ctr")));
+            python::def("calcRMSD", &Math::calcRMSD<VectorValueType, Dim>,
+                        (python::arg("va1"), python::arg("va2")));
+            python::def("calcRMSD", &Math::calcRMSD<VectorValueType, Dim, VectorValueType>,
+                        (python::arg("va1"), python::arg("va2"), python::arg("va1_xform")));
+        }
     };
 }
 
@@ -60,7 +60,7 @@ namespace
 void CDPLPythonMath::exportVectorArrayFunctions()
 {
     using namespace CDPL;
-	
+    
     VectorArrayFunctionExport<Math::Vector2FArray, 2>();
     VectorArrayFunctionExport<Math::Vector3FArray, 3>();
 

@@ -32,15 +32,15 @@
 
 void CDPLPythonChem::exportMolecularGraphComponentGroupingMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::MolecularGraphComponentGroupingMatchExpression, Chem::MolecularGraphComponentGroupingMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::MolecularGraph> > >("MolecularGraphComponentGroupingMatchExpression", python::no_init)
-		.def(python::init<const Chem::MolecularGraphComponentGroupingMatchExpression&>((python::arg("self"), python::arg("expr")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const Chem::FragmentList::SharedPointer&>((python::arg("self"), python::arg("comp_grouping")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("assign", &Chem::MolecularGraphComponentGroupingMatchExpression::operator=, (python::arg("self"), python::arg("expr")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >());
+    python::class_<Chem::MolecularGraphComponentGroupingMatchExpression, Chem::MolecularGraphComponentGroupingMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::MolecularGraph> > >("MolecularGraphComponentGroupingMatchExpression", python::no_init)
+        .def(python::init<const Chem::MolecularGraphComponentGroupingMatchExpression&>((python::arg("self"), python::arg("expr")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const Chem::FragmentList::SharedPointer&>((python::arg("self"), python::arg("comp_grouping")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("assign", &Chem::MolecularGraphComponentGroupingMatchExpression::operator=, (python::arg("self"), python::arg("expr")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

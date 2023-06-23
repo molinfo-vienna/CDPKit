@@ -34,14 +34,14 @@ using namespace CDPL;
 
 Chem::FragmentList::SharedPointer Chem::getAromaticRings(const MolecularGraph& molgraph)
 {
-	FragmentList::SharedPointer rings_ptr(new AromaticRingSet(molgraph));
+    FragmentList::SharedPointer rings_ptr(new AromaticRingSet(molgraph));
 
-	return rings_ptr;
+    return rings_ptr;
 }
 
 Chem::FragmentList::SharedPointer Chem::getAromaticSSSRSubset(const MolecularGraph& molgraph)
 {
-	FragmentList::SharedPointer rings_ptr(new AromaticSSSRSubset(molgraph));
+    FragmentList::SharedPointer rings_ptr(new AromaticSSSRSubset(molgraph));
 
-	return rings_ptr;
+    return rings_ptr;
 }

@@ -33,31 +33,31 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
-		
-		/**
-		 * \brief Provides constants that are used to specify the layout of a set of graphical objects.
-		 */
-		namespace LayoutStyle
-		{
+    namespace Vis
+    {
+        
+        /**
+         * \brief Provides constants that are used to specify the layout of a set of graphical objects.
+         */
+        namespace LayoutStyle
+        {
 
-			/**
-			 * \brief Specifies that the objects have no special layout.
-			 */
-			const unsigned int NONE    = 0;
+            /**
+             * \brief Specifies that the objects have no special layout.
+             */
+            const unsigned int NONE    = 0;
 
-			/**
-			 * \brief Specifies that the objects have to be arranged along a line.
-			 */
-			const unsigned int LINEAR  = 1;
+            /**
+             * \brief Specifies that the objects have to be arranged along a line.
+             */
+            const unsigned int LINEAR  = 1;
 
-			/**
-			 * \brief Specifies that the objects have to be arranged in multiple rows within a rectangle.
-			 */
-			const unsigned int PACKED  = 2;
-		}
-	}
+            /**
+             * \brief Specifies that the objects have to be arranged in multiple rows within a rectangle.
+             */
+            const unsigned int PACKED  = 2;
+        }
+    }
 }
 
 #endif // CDPL_VIS_LAYOUTSTYLE_HPP

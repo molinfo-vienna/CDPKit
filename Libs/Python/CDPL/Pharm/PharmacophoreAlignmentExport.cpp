@@ -39,15 +39,15 @@ void CDPLPythonPharm::exportPharmacophoreAlignment()
     using namespace boost;
     using namespace CDPL;
 
-	CDPLPythonChem::SpatialEntityAlignmentExport<Pharm::Feature>("SpatialFeatureAlignment");
+    CDPLPythonChem::SpatialEntityAlignmentExport<Pharm::Feature>("SpatialFeatureAlignment");
 
     python::class_<Pharm::PharmacophoreAlignment, python::bases<Chem::SpatialEntityAlignment<Pharm::Feature> >,
-				   boost::noncopyable>("PharmacophoreAlignment", python::no_init)
-		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
-		.def(python::init<const Pharm::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment")))[python::with_custodian_and_ward<1, 2>()])
-		.def("addFeatures", &Pharm::PharmacophoreAlignment::addFeatures, 
-			 (python::arg("self"), python::arg("cntnr"), python::arg("first_set")), python::with_custodian_and_ward<1, 2>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreAlignment::operator=), 
-			 (python::arg("self"), python::arg("alignment")), python::return_self<python::with_custodian_and_ward<1, 2> >());
+                   boost::noncopyable>("PharmacophoreAlignment", python::no_init)
+        .def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
+        .def(python::init<const Pharm::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment")))[python::with_custodian_and_ward<1, 2>()])
+        .def("addFeatures", &Pharm::PharmacophoreAlignment::addFeatures, 
+             (python::arg("self"), python::arg("cntnr"), python::arg("first_set")), python::with_custodian_and_ward<1, 2>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreAlignment::operator=), 
+             (python::arg("self"), python::arg("alignment")), python::return_self<python::with_custodian_and_ward<1, 2> >());
 }
 

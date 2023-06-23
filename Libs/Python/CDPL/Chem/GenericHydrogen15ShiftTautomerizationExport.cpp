@@ -35,7 +35,7 @@ void CDPLPythonChem::exportGenericHydrogen15ShiftTautomerization()
     using namespace CDPL;
 
     python::class_<Chem::GenericHydrogen15ShiftTautomerization, 
-		   python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("GenericHydrogen15ShiftTautomerization", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::GenericHydrogen15ShiftTautomerization&>((python::arg("self"), python::arg("rule"))));
+           python::bases<Chem::PatternBasedTautomerizationRule>, boost::noncopyable>("GenericHydrogen15ShiftTautomerization", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Chem::GenericHydrogen15ShiftTautomerization&>((python::arg("self"), python::arg("rule"))));
 }

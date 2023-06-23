@@ -38,46 +38,46 @@
 
 BOOST_PYTHON_MODULE(_grid)
 {
-	using namespace CDPLPythonGrid;
+    using namespace CDPLPythonGrid;
 
 #ifdef HAVE_NUMPY
-	CDPLPythonMath::NumPy::init();
+    CDPLPythonMath::NumPy::init();
 #endif // HAVE_NUMPY
 
-	exportAttributedGrid();
-	exportSpatialGrid();
-	exportRegularGrid();
-	exportRegularGridSet();
+    exportAttributedGrid();
+    exportSpatialGrid();
+    exportRegularGrid();
+    exportRegularGridSet();
 
-	exportAttributedGridProperties();
-	exportAttributedGridPropertyDefaults();
-	exportControlParameters();
-	exportControlParameterDefaults();
-	exportDataFormats();
+    exportAttributedGridProperties();
+    exportAttributedGridPropertyDefaults();
+    exportControlParameters();
+    exportControlParameterDefaults();
+    exportDataFormats();
 
-	exportRegularGridReader();
-	exportRegularGridSetReader();
-	exportRegularGridWriter();
-	exportRegularGridSetWriter();
-	exportRegularGridInputHandler();
-	exportRegularGridSetInputHandler();
-	exportRegularGridOutputHandler();
-	exportRegularGridSetOutputHandler();
-	exportRegularGridIOManager();
-	exportRegularGridSetIOManager();
+    exportRegularGridReader();
+    exportRegularGridSetReader();
+    exportRegularGridWriter();
+    exportRegularGridSetWriter();
+    exportRegularGridInputHandler();
+    exportRegularGridSetInputHandler();
+    exportRegularGridOutputHandler();
+    exportRegularGridSetOutputHandler();
+    exportRegularGridIOManager();
+    exportRegularGridSetIOManager();
 
-	exportCDFRegularGridInputHandler();
-	exportCDFRegularGridOutputHandler();
-	exportCDFRegularGridSetInputHandler();
-	exportCDFRegularGridSetOutputHandler();
-	exportCDFRegularGridReader();
-	exportCDFRegularGridWriter();
-	exportCDFRegularGridSetReader();
-	exportCDFRegularGridSetWriter();
+    exportCDFRegularGridInputHandler();
+    exportCDFRegularGridOutputHandler();
+    exportCDFRegularGridSetInputHandler();
+    exportCDFRegularGridSetOutputHandler();
+    exportCDFRegularGridReader();
+    exportCDFRegularGridWriter();
+    exportCDFRegularGridSetReader();
+    exportCDFRegularGridSetWriter();
 
-	exportAttributedGridFunctions();
-	exportControlParameterFunctions();
+    exportAttributedGridFunctions();
+    exportControlParameterFunctions();
 
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    registerToPythonConverters();
+    registerFromPythonConverters();
 }

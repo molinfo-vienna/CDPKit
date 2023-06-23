@@ -38,20 +38,20 @@ namespace CDPL
     namespace Base
     {
 
-		class LookupKey;
+        class LookupKey;
     }
 
     namespace Pharm
     {
 
-		/**
-		 * \brief Provides keys for built-in Pharm::FeatureContainer properties.
-		 */
-		namespace FeatureContainerProperty
-		{
+        /**
+         * \brief Provides keys for built-in Pharm::FeatureContainer properties.
+         */
+        namespace FeatureContainerProperty
+        {
 
-			extern CDPL_PHARM_API const Base::LookupKey NAME; 
-		}
+            extern CDPL_PHARM_API const Base::LookupKey NAME; 
+        }
     }
 }
 

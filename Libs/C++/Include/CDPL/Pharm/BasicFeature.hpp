@@ -39,44 +39,44 @@ namespace CDPL
     namespace Pharm 
     {
 
-		class BasicPharmacophore;
+        class BasicPharmacophore;
 
-		/**
-		 * \brief BasicFeature.
-		 */
-		class CDPL_PHARM_API BasicFeature : public Feature
-		{
+        /**
+         * \brief BasicFeature.
+         */
+        class CDPL_PHARM_API BasicFeature : public Feature
+        {
 
-			friend class BasicPharmacophore;
+            friend class BasicPharmacophore;
 
-		  public:
-			const Pharmacophore& getPharmacophore() const;
+          public:
+            const Pharmacophore& getPharmacophore() const;
 
-			Pharmacophore& getPharmacophore();
-	
-			std::size_t getIndex() const;
-		
-			/**
-			 * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
-			 * \param feature The feature whose properties get copied.
-			 * \return A reference to itself.
-			 */
-			BasicFeature& operator=(const BasicFeature& feature);
+            Pharmacophore& getPharmacophore();
+    
+            std::size_t getIndex() const;
+        
+            /**
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
+             * \param feature The feature whose properties get copied.
+             * \return A reference to itself.
+             */
+            BasicFeature& operator=(const BasicFeature& feature);
 
-			using Feature::operator=;
+            using Feature::operator=;
 
-		  private:
-			BasicFeature(BasicPharmacophore* pharm);
-	    
-			BasicFeature(const BasicFeature& feature);
+          private:
+            BasicFeature(BasicPharmacophore* pharm);
+        
+            BasicFeature(const BasicFeature& feature);
 
-			~BasicFeature();
+            ~BasicFeature();
 
-			void setIndex(std::size_t idx);
+            void setIndex(std::size_t idx);
 
-			BasicPharmacophore* pharm;
-			std::size_t         index;
-		};
+            BasicPharmacophore* pharm;
+            std::size_t         index;
+        };
     }
 }
 

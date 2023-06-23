@@ -38,37 +38,37 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphSingleCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT) == 40);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, mol, BondContainerProperty::SINGLE_BOND_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, mol, MolecularGraphProperty::IMPLICIT_H_COUNT);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+
+//-----
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT) == 40);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, mol, BondContainerProperty::SINGLE_BOND_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_SINGLE_BOND_COUNT, mol, MolecularGraphProperty::IMPLICIT_H_COUNT);
 }

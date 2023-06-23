@@ -32,28 +32,28 @@
 namespace 
 {
 
-	struct MolecularGraphPropertyDefault {};
+    struct MolecularGraphPropertyDefault {};
 }
 
 
 void CDPLPythonChem::exportMolecularGraphPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolecularGraphPropertyDefault, boost::noncopyable>("MolecularGraphPropertyDefault", python::no_init)
-		.def_readonly("NAME", &Chem::MolecularGraphPropertyDefault::NAME)
-		.def_readonly("STOICHIOMETRIC_NUMBER", &Chem::MolecularGraphPropertyDefault::STOICHIOMETRIC_NUMBER)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::MolecularGraphPropertyDefault::MATCH_CONSTRAINTS)
-		.def_readonly("MDL_CTAB_VERSION", &Chem::MolecularGraphPropertyDefault::MDL_CTAB_VERSION)
-		.def_readonly("MDL_COMMENT", &Chem::MolecularGraphPropertyDefault::MDL_COMMENT)
-		.def_readonly("MDL_PROGRAM_NAME", &Chem::MolecularGraphPropertyDefault::MDL_PROGRAM_NAME)
-		.def_readonly("MDL_USER_INITIALS", &Chem::MolecularGraphPropertyDefault::MDL_USER_INITIALS)
-		.def_readonly("MDL_DIMENSIONALITY", &Chem::MolecularGraphPropertyDefault::MDL_DIMENSIONALITY)
-		.def_readonly("MDL_ENERGY", &Chem::MolecularGraphPropertyDefault::MDL_ENERGY)
-		.def_readonly("MDL_CHIRAL_FLAG", &Chem::MolecularGraphPropertyDefault::MDL_CHIRAL_FLAG)
-		.def_readonly("MDL_SCALING_FACTOR1", &Chem::MolecularGraphPropertyDefault::MDL_SCALING_FACTOR1)
-		.def_readonly("MDL_SCALING_FACTOR2", &Chem::MolecularGraphPropertyDefault::MDL_SCALING_FACTOR2)
-		.def_readonly("MOL2_MOLECULE_TYPE", &Chem::MolecularGraphPropertyDefault::MOL2_MOLECULE_TYPE)
-		.def_readonly("MOL2_CHARGE_TYPE", &Chem::MolecularGraphPropertyDefault::MOL2_CHARGE_TYPE);
+    python::class_<MolecularGraphPropertyDefault, boost::noncopyable>("MolecularGraphPropertyDefault", python::no_init)
+        .def_readonly("NAME", &Chem::MolecularGraphPropertyDefault::NAME)
+        .def_readonly("STOICHIOMETRIC_NUMBER", &Chem::MolecularGraphPropertyDefault::STOICHIOMETRIC_NUMBER)
+        .def_readonly("MATCH_CONSTRAINTS", &Chem::MolecularGraphPropertyDefault::MATCH_CONSTRAINTS)
+        .def_readonly("MDL_CTAB_VERSION", &Chem::MolecularGraphPropertyDefault::MDL_CTAB_VERSION)
+        .def_readonly("MDL_COMMENT", &Chem::MolecularGraphPropertyDefault::MDL_COMMENT)
+        .def_readonly("MDL_PROGRAM_NAME", &Chem::MolecularGraphPropertyDefault::MDL_PROGRAM_NAME)
+        .def_readonly("MDL_USER_INITIALS", &Chem::MolecularGraphPropertyDefault::MDL_USER_INITIALS)
+        .def_readonly("MDL_DIMENSIONALITY", &Chem::MolecularGraphPropertyDefault::MDL_DIMENSIONALITY)
+        .def_readonly("MDL_ENERGY", &Chem::MolecularGraphPropertyDefault::MDL_ENERGY)
+        .def_readonly("MDL_CHIRAL_FLAG", &Chem::MolecularGraphPropertyDefault::MDL_CHIRAL_FLAG)
+        .def_readonly("MDL_SCALING_FACTOR1", &Chem::MolecularGraphPropertyDefault::MDL_SCALING_FACTOR1)
+        .def_readonly("MDL_SCALING_FACTOR2", &Chem::MolecularGraphPropertyDefault::MDL_SCALING_FACTOR2)
+        .def_readonly("MOL2_MOLECULE_TYPE", &Chem::MolecularGraphPropertyDefault::MOL2_MOLECULE_TYPE)
+        .def_readonly("MOL2_CHARGE_TYPE", &Chem::MolecularGraphPropertyDefault::MOL2_CHARGE_TYPE);
 }

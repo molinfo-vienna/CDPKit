@@ -34,21 +34,21 @@
 
 void CDPLPythonConfGen::exportMolecularGraphFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("buildFragmentLinkBondMask", &ConfGen::buildFragmentLinkBondMask, 
-				(python::arg("molgraph"), python::arg("bond_mask"), python::arg("reset") = true));
-	python::def("buildRotatableBondMask", 
-				static_cast<std::size_t (*)(const Chem::MolecularGraph&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
-				(python::arg("molgraph"), python::arg("bond_mask"), python::arg("het_h_rotors"), python::arg("reset") = true));
-	python::def("buildRotatableBondMask", 
-				static_cast<std::size_t (*)(const Chem::MolecularGraph&, const Util::BitSet&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
-				(python::arg("molgraph"), python::arg("excl_bond_mask"), python::arg("bond_mask"), python::arg("het_h_rotors"), 
-				 python::arg("reset") = true));
-	python::def("getRotatableBondCount", &ConfGen::getRotatableBondCount, (python::arg("molgraph"), python::arg("het_h_rotors")));
-	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
-	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
-				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type"), 
-				 python::arg("strict"), python::arg("estat_de_const"), python::arg("estat_dist_expo")));
+    python::def("buildFragmentLinkBondMask", &ConfGen::buildFragmentLinkBondMask, 
+                (python::arg("molgraph"), python::arg("bond_mask"), python::arg("reset") = true));
+    python::def("buildRotatableBondMask", 
+                static_cast<std::size_t (*)(const Chem::MolecularGraph&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
+                (python::arg("molgraph"), python::arg("bond_mask"), python::arg("het_h_rotors"), python::arg("reset") = true));
+    python::def("buildRotatableBondMask", 
+                static_cast<std::size_t (*)(const Chem::MolecularGraph&, const Util::BitSet&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
+                (python::arg("molgraph"), python::arg("excl_bond_mask"), python::arg("bond_mask"), python::arg("het_h_rotors"), 
+                 python::arg("reset") = true));
+    python::def("getRotatableBondCount", &ConfGen::getRotatableBondCount, (python::arg("molgraph"), python::arg("het_h_rotors")));
+    python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
+    python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
+                (python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type"), 
+                 python::arg("strict"), python::arg("estat_de_const"), python::arg("estat_dist_expo")));
 }

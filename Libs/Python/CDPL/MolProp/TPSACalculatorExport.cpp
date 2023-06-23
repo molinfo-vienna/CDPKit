@@ -35,17 +35,17 @@
 
 void CDPLPythonMolProp::exportTPSACalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolProp::TPSACalculator, boost::noncopyable>("TPSACalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const MolProp::TPSACalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::TPSACalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::TPSACalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("calculate", &MolProp::TPSACalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &MolProp::TPSACalculator::getResult, python::arg("self"))
-		.add_property("result", &MolProp::TPSACalculator::getResult);
+    python::class_<MolProp::TPSACalculator, boost::noncopyable>("TPSACalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const MolProp::TPSACalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::TPSACalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::TPSACalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("calculate", &MolProp::TPSACalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+        .def("getResult", &MolProp::TPSACalculator::getResult, python::arg("self"))
+        .add_property("result", &MolProp::TPSACalculator::getResult);
 }

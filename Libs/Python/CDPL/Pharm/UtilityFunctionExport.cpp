@@ -35,5 +35,5 @@ void CDPLPythonPharm::exportUtilityFunctions()
     using namespace CDPL;
 
     python::def("getFeatureTypeString", &Pharm::getFeatureTypeString,  python::arg("ftr_type"),
-		python::return_value_policy<python::copy_const_reference>());
+        python::return_value_policy<python::copy_const_reference>());
 }

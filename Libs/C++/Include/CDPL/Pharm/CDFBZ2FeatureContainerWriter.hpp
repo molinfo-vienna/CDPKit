@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::BZip2OStream> CDFBZ2FeatureContainerWriter;
-	}
+        typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::BZip2OStream> CDFBZ2FeatureContainerWriter;
+    }
 }
 
 #endif // CDPL_PHARM_CDFBZ2FEATURECONTAINERWRITER_HPP

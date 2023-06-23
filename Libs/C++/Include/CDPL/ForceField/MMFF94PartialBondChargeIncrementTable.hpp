@@ -46,89 +46,89 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94PartialBondChargeIncrementTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94PartialBondChargeIncrementTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<unsigned int, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94PartialBondChargeIncrementTable> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94PartialBondChargeIncrementTable> SharedPointer;
 
-			class CDPL_FORCEFIELD_API Entry
-			{
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
+                Entry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
 
-				unsigned int getAtomType() const;
+                unsigned int getAtomType() const;
 
-				double getPartialChargeIncrement() const;
+                double getPartialChargeIncrement() const;
 
-				double getFormalChargeAdjustmentFactor() const;
+                double getFormalChargeAdjustmentFactor() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int atomType;
-				double       partChargeIncr;
-				double       formChargeAdjFactor;
-				bool         initialized;
-			};			
-	
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+              private:
+                unsigned int atomType;
+                double       partChargeIncr;
+                double       formChargeAdjFactor;
+                bool         initialized;
+            };            
+    
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94PartialBondChargeIncrementTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94PartialBondChargeIncrementTable();
 
-			void addEntry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
+            void addEntry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
 
-			const Entry& getEntry(unsigned int atom_type) const;
+            const Entry& getEntry(unsigned int atom_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int atom_type);
+            bool removeEntry(unsigned int atom_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
     }
 }
 

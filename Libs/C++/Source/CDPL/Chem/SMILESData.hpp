@@ -31,57 +31,57 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		namespace SMILES
-		{
+        namespace SMILES
+        {
 
-			const char REACTION_ROLE_SEPARATOR = '>';
-			const char COMPONENT_SEPARATOR     = '.';
+            const char REACTION_ROLE_SEPARATOR = '>';
+            const char COMPONENT_SEPARATOR     = '.';
 
-			const char BRANCH_PREFIX           = '(';
-			const char BRANCH_SUFFIX           = ')';
+            const char BRANCH_PREFIX           = '(';
+            const char BRANCH_SUFFIX           = ')';
 
-			const char CLOSURE_NO_PREFIX       = '%';	
+            const char CLOSURE_NO_PREFIX       = '%';    
 
-			namespace AtomString
-			{
+            namespace AtomString
+            {
 
-				const char SPECIAL_ATOM_PREFIX    = '['; 
-				const char SPECIAL_ATOM_SUFFIX    = ']'; 
+                const char SPECIAL_ATOM_PREFIX    = '['; 
+                const char SPECIAL_ATOM_SUFFIX    = ']'; 
 
-				const char UNDEF_ELEMENT_SYMBOL   = '*';
+                const char UNDEF_ELEMENT_SYMBOL   = '*';
 
-				const char H_COUNT_PREFIX         = 'H';
+                const char H_COUNT_PREFIX         = 'H';
 
-				const char POSITIVE_CHARGE_PREFIX = '+';
-				const char NEGATIVE_CHARGE_PREFIX = '-';
+                const char POSITIVE_CHARGE_PREFIX = '+';
+                const char NEGATIVE_CHARGE_PREFIX = '-';
 
-				const char ATOM_MAPPING_ID_PREFIX = ':';
+                const char ATOM_MAPPING_ID_PREFIX = ':';
 
-				const char CHIRAL_CLASS_PREFIX    = '@';
+                const char CHIRAL_CLASS_PREFIX    = '@';
 
-				const std::string TETRAHEDRAL_CHIRALITY   = "TH";
-				const std::string ALLENE_TYPE_CHIRALITY   = "AL";
-				const std::string SQUARE_PLANAR_CHIRALITY = "SP";
-				const std::string TRIG_BIPYR_CHIRALITY    = "TB";
-				const std::string OCTAHEDRAL_CHIRALITY    = "OH";
-			}
+                const std::string TETRAHEDRAL_CHIRALITY   = "TH";
+                const std::string ALLENE_TYPE_CHIRALITY   = "AL";
+                const std::string SQUARE_PLANAR_CHIRALITY = "SP";
+                const std::string TRIG_BIPYR_CHIRALITY    = "TB";
+                const std::string OCTAHEDRAL_CHIRALITY    = "OH";
+            }
 
-			namespace BondSymbol
-			{
+            namespace BondSymbol
+            {
 
-				const char SINGLE_BOND   = '-';
-				const char DOUBLE_BOND   = '=';
-				const char TRIPLE_BOND   = '#';
-				const char AROMATIC_BOND = ':';
+                const char SINGLE_BOND   = '-';
+                const char DOUBLE_BOND   = '=';
+                const char TRIPLE_BOND   = '#';
+                const char AROMATIC_BOND = ':';
 
-				const char UP_DIR_FLAG   = '/';
-				const char DOWN_DIR_FLAG = '\\';
-			}
-		}
-	}
+                const char UP_DIR_FLAG   = '/';
+                const char DOWN_DIR_FLAG = '\\';
+            }
+        }
+    }
 }
 
 #endif // CDPL_CHEM_SMILESDATA_HPP

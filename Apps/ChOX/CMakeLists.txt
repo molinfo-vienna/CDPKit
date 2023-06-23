@@ -152,11 +152,11 @@ IF(APPLE)
   SET_SOURCE_FILES_PROPERTIES(Icons/chox.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 
   CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/MacDeployQt.cmake.in"
-  	         "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" 
+               "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" 
                  @ONLY
                 )
   CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/MacCodeSigning.cmake.in"
-  	         "${CMAKE_CURRENT_BINARY_DIR}/MacCodeSigning.cmake" 
+               "${CMAKE_CURRENT_BINARY_DIR}/MacCodeSigning.cmake" 
                  @ONLY
                 )
   TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-molprop-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
@@ -198,7 +198,7 @@ ELSE(APPLE)
   ENDIF(WIN32)
 
   CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
-  	         "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
                  @ONLY
                 )
   TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)

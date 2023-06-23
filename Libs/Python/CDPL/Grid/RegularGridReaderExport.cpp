@@ -32,6 +32,6 @@
 
 void CDPLPythonGrid::exportRegularGridReader()
 {
-	CDPLPythonBase::DataReaderExport<CDPL::Grid::DRegularGrid>("DRegularGridReader", "grid");
-	CDPLPythonUtil::CompoundDataReaderExport<CDPL::Grid::DRegularGrid>("CompoundDRegularGridReader");
+    CDPLPythonBase::DataReaderExport<CDPL::Grid::DRegularGrid>("DRegularGridReader", "grid");
+    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Grid::DRegularGrid>("CompoundDRegularGridReader");
 }

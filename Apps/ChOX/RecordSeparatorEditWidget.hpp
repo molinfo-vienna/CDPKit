@@ -36,29 +36,29 @@ class QComboBox;
 namespace ChOX
 {
 
-	class RecordSeparatorEditWidget : public QWidget
-	{
+    class RecordSeparatorEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		RecordSeparatorEditWidget(QWidget*, std::string&);
+    public:
+        RecordSeparatorEditWidget(QWidget*, std::string&);
 
-	signals:
-		void recordSeparatorChanged();
+    signals:
+        void recordSeparatorChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleSeparatorSelection(int);
+    private slots:
+        void handleSeparatorSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		std::string& recordSeparator;
-		QComboBox*   recordSeparatorComboBox;
-	};
+        std::string& recordSeparator;
+        QComboBox*   recordSeparatorComboBox;
+    };
 }
 
 #endif // CHOX_RECORDSEPARATOREDITWIDGET_HPP

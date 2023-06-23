@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportReactionInputHandler()
 {
-	CDPLPythonBase::DataInputHandlerExport<CDPL::Chem::Reaction>("ReactionInputHandler");
+    CDPLPythonBase::DataInputHandlerExport<CDPL::Chem::Reaction>("ReactionInputHandler");
 }

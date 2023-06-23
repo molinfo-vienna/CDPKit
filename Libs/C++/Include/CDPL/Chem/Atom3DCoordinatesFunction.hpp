@@ -40,12 +40,12 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
+        class Atom;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined atom 3D-coordinates function.
-		 */
-		typedef std::function<const Math::Vector3D&(const Chem::Atom&)> Atom3DCoordinatesFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined atom 3D-coordinates function.
+         */
+        typedef std::function<const Math::Vector3D&(const Chem::Atom&)> Atom3DCoordinatesFunction;
     }
 }
 

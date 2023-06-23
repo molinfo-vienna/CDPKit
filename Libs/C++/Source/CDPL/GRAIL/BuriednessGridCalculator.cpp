@@ -52,12 +52,12 @@ double GRAIL::BuriednessGridCalculator::getProbeRadius() const
 
 void GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance(double dist)
 {
-	buriednessScore.setMinVdWSurfaceDistance(dist);
+    buriednessScore.setMinVdWSurfaceDistance(dist);
 }
 
 double GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance() const
 {
-	return buriednessScore.getMinVdWSurfaceDistance();
+    return buriednessScore.getMinVdWSurfaceDistance();
 }
 
 void GRAIL::BuriednessGridCalculator::setNumTestRays(std::size_t num_rays)
@@ -82,41 +82,41 @@ const Chem::Atom3DCoordinatesFunction& GRAIL::BuriednessGridCalculator::getAtom3
 
 GRAIL::BuriednessGridCalculator& GRAIL::BuriednessGridCalculator::operator=(const BuriednessGridCalculator& calc)
 {
-	if (this == &calc)
-		return *this;
+    if (this == &calc)
+        return *this;
 
-	buriednessScore = calc.buriednessScore;
+    buriednessScore = calc.buriednessScore;
 
-	return *this;
+    return *this;
 }
 
 void GRAIL::BuriednessGridCalculator::calculate(const Chem::AtomContainer& atoms, Grid::DSpatialGrid& grid)
 {
- 	atomCoords.clear();
-	get3DCoordinates(atoms, atomCoords, buriednessScore.getAtom3DCoordinatesFunction());
+     atomCoords.clear();
+    get3DCoordinates(atoms, atomCoords, buriednessScore.getAtom3DCoordinatesFunction());
 
-	if (!octree)
-		octree.reset(new Octree());
+    if (!octree)
+        octree.reset(new Octree());
 
-	octree->initialize(atomCoords, 16);
+    octree->initialize(atomCoords, 16);
 
-	std::size_t num_pts = grid.getNumElements();
+    std::size_t num_pts = grid.getNumElements();
     Math::Vector3D grid_pos;
 
     for (std::size_t i = 0; i < num_pts; i++) {
-		grid.getCoordinates(i, grid_pos);
+        grid.getCoordinates(i, grid_pos);
 
-		atomIndices.clear();
+        atomIndices.clear();
 
-		octree->radiusNeighbors<Octree::L2Distance>(grid_pos, buriednessScore.getProbeRadius(), std::back_inserter(atomIndices));
+        octree->radiusNeighbors<Octree::L2Distance>(grid_pos, buriednessScore.getProbeRadius(), std::back_inserter(atomIndices));
 
-		std::size_t num_inc_atoms = atomIndices.size();
+        std::size_t num_inc_atoms = atomIndices.size();
 
-		atomSubset.clear();
+        atomSubset.clear();
 
-		for (std::size_t j = 0; j < num_inc_atoms; j++)
-			atomSubset.addAtom(atoms.getAtom(atomIndices[j]));
+        for (std::size_t j = 0; j < num_inc_atoms; j++)
+            atomSubset.addAtom(atoms.getAtom(atomIndices[j]));
 
-		grid(i) = buriednessScore(grid_pos, atomSubset);
+        grid(i) = buriednessScore(grid_pos, atomSubset);
     }
 }

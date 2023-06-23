@@ -44,72 +44,72 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphRotableBondCountTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::ROTABLE_BOND_COUNT) == 0);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Diacetylmorphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::ROTABLE_BOND_COUNT) == 0);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
-
-	BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::ROTABLE_BOND_COUNT) == 4);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	Fragment frag(mol);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Diacetylmorphine.jme").c_str());
 
-	BOOST_CHECK(frag.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::ROTABLE_BOND_COUNT) == 4);
-
-	BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
 
 //-----
 
-	TestUtils::checkDependency(frag, MolecularGraphProperty::ROTABLE_BOND_COUNT, frag, AtomContainerProperty::ATOM_COUNT);
-	TestUtils::checkDependency(frag, MolecularGraphProperty::ROTABLE_BOND_COUNT, frag, BondContainerProperty::BOND_COUNT);
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(mol.getProperty<std::size_t>(MolecularGraphProperty::ROTABLE_BOND_COUNT) == 4);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, mol, MolecularGraphProperty::SSSR);
+    Fragment frag(mol);
+
+    BOOST_CHECK(frag.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
+
+    BOOST_CHECK(frag.getProperty<std::size_t>(MolecularGraphProperty::ROTABLE_BOND_COUNT) == 4);
+
+    BOOST_CHECK(!frag.getProperty(MolecularGraphProperty::ROTABLE_BOND_COUNT, false, false).isEmpty());
 
 //-----
 
-	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
-		Bond& bond = *it;
+    TestUtils::checkDependency(frag, MolecularGraphProperty::ROTABLE_BOND_COUNT, frag, AtomContainerProperty::ATOM_COUNT);
+    TestUtils::checkDependency(frag, MolecularGraphProperty::ROTABLE_BOND_COUNT, frag, BondContainerProperty::BOND_COUNT);
 
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::IS_ROTABLE);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::ORDER);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::IN_RING);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::IS_HEAVY);
-	}
+//-----
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
+    TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, mol, AtomContainerProperty::ATOM_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, mol, BondContainerProperty::BOND_COUNT);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, mol, MolecularGraphProperty::SSSR);
 
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, atom, AtomProperty::TYPE);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, atom, BondContainerProperty::BOND_COUNT);
-		TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, atom, BondContainerProperty::HEAVY_BOND_COUNT);
-	}
+//-----
+
+    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
+        Bond& bond = *it;
+
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::IS_ROTABLE);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::ORDER);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::IN_RING);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, bond, BondProperty::IS_HEAVY);
+    }
+
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
+
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, atom, AtomProperty::TYPE);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, atom, BondContainerProperty::BOND_COUNT);
+        TestUtils::checkDependency(mol, MolecularGraphProperty::ROTABLE_BOND_COUNT, atom, BondContainerProperty::HEAVY_BOND_COUNT);
+    }
 }

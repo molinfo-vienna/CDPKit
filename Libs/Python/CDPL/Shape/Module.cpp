@@ -31,38 +31,38 @@
 
 BOOST_PYTHON_MODULE(_shape)
 {
-	using namespace CDPLPythonShape;
+    using namespace CDPLPythonShape;
 
-	exportGaussianShape();
-	exportGaussianShapeSet();
+    exportGaussianShape();
+    exportGaussianShapeSet();
 
-	exportGaussianShapeGenerator();
+    exportGaussianShapeGenerator();
 
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
+    exportGaussianShapeFunction();
+    exportGaussianShapeOverlapFunction();
 
-	exportExactGaussianShapeOverlapFunction();
-	exportFastGaussianShapeOverlapFunction();
+    exportExactGaussianShapeOverlapFunction();
+    exportFastGaussianShapeOverlapFunction();
 
-	exportGaussianShapeAlignmentStartGenerator();
-	exportPrincipalAxesAlignmentStartGenerator();
+    exportGaussianShapeAlignmentStartGenerator();
+    exportPrincipalAxesAlignmentStartGenerator();
 
-	exportAlignmentResult();
-	exportScoringFunctors();
+    exportAlignmentResult();
+    exportScoringFunctors();
 
-	exportGaussianShapeFunctionAlignment();
-	exportGaussianShapeAlignment();
-	exportFastGaussianShapeAlignment();
+    exportGaussianShapeFunctionAlignment();
+    exportGaussianShapeAlignment();
+    exportFastGaussianShapeAlignment();
 
-	exportScreeningSettings();
-	exportScreeningProcessor();
+    exportScreeningSettings();
+    exportScreeningProcessor();
 
-	exportSymmetryClasses();
-	exportAlignmentResultSelectionModes();
+    exportSymmetryClasses();
+    exportAlignmentResultSelectionModes();
 
-	exportScoringFunctions();
-	exportUtilityFunctions();
-	exportGaussianShapeFunctions();
+    exportScoringFunctions();
+    exportUtilityFunctions();
+    exportGaussianShapeFunctions();
 
-	exportFunctionWrappers();
+    exportFunctionWrappers();
 }

@@ -32,16 +32,16 @@
 namespace 
 {
 
-	struct LayoutDirection {};
+    struct LayoutDirection {};
 }
 
 
 void CDPLPythonVis::exportLayoutDirections()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<LayoutDirection, boost::noncopyable>("LayoutDirection", python::no_init)
-		.def_readonly("HORIZONTAL", &Vis::LayoutDirection::HORIZONTAL)
-		.def_readonly("VERTICAL", &Vis::LayoutDirection::VERTICAL);
+    python::class_<LayoutDirection, boost::noncopyable>("LayoutDirection", python::no_init)
+        .def_readonly("HORIZONTAL", &Vis::LayoutDirection::HORIZONTAL)
+        .def_readonly("VERTICAL", &Vis::LayoutDirection::VERTICAL);
 }

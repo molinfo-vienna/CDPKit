@@ -31,15 +31,15 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		namespace Entity3DProperty
-		{
+        namespace Entity3DProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(COORDINATES_3D);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(COORDINATES_3D);
+        }
 
-		void initEntity3DProperties() {}
-	}
+        void initEntity3DProperties() {}
+    }
 }

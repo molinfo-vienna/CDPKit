@@ -38,47 +38,47 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class CDFDataReader;
-		class Molecule;
+        class CDFDataReader;
+        class Molecule;
 
-		/**
-		 * \brief A reader for molecule data in the native I/O format of the <em>CDPL</em>.
-		 */
-		class CDPL_CHEM_API CDFMoleculeReader : public Util::StreamDataReader<Molecule, CDFMoleculeReader>
-		{
+        /**
+         * \brief A reader for molecule data in the native I/O format of the <em>CDPL</em>.
+         */
+        class CDPL_CHEM_API CDFMoleculeReader : public Util::StreamDataReader<Molecule, CDFMoleculeReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %CDFMoleculeReader instance that will read the molecule data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			CDFMoleculeReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %CDFMoleculeReader instance that will read the molecule data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            CDFMoleculeReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~CDFMoleculeReader();
+            /**
+             * \brief Destructor.
+             */
+            ~CDFMoleculeReader();
 
-		private:
-			friend class Util::StreamDataReader<Molecule, CDFMoleculeReader>;
+        private:
+            friend class Util::StreamDataReader<Molecule, CDFMoleculeReader>;
 
-			CDFMoleculeReader(const CDFMoleculeReader&);
+            CDFMoleculeReader(const CDFMoleculeReader&);
 
-			CDFMoleculeReader& operator=(const CDFMoleculeReader&);
+            CDFMoleculeReader& operator=(const CDFMoleculeReader&);
 
-			bool readData(std::istream&, Molecule&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Molecule&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<CDFDataReader> CDFDataReaderPtr;
+            typedef std::auto_ptr<CDFDataReader> CDFDataReaderPtr;
 
-			CDFDataReaderPtr reader;
-		};
-	}
+            CDFDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_CDFMOLECULEREADER_HPP

@@ -40,61 +40,61 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A graphics primitive representing a single line.
-		 */
-		class CDPL_VIS_API LinePrimitive2D : public Line2D, public GraphicsPrimitive2D
-		{
+        /**
+         * \brief A graphics primitive representing a single line.
+         */
+        class CDPL_VIS_API LinePrimitive2D : public Line2D, public GraphicsPrimitive2D
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %LinePrimitive2D instances.
-			 */
-			typedef std::shared_ptr<LinePrimitive2D> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %LinePrimitive2D instances.
+             */
+            typedef std::shared_ptr<LinePrimitive2D> SharedPointer;
 
-			/**
-			 * \brief Constructs a line primitive whose starting and end point is set to <em>(0, 0)</em>.
-			 */
-			LinePrimitive2D() {}
+            /**
+             * \brief Constructs a line primitive whose starting and end point is set to <em>(0, 0)</em>.
+             */
+            LinePrimitive2D() {}
 
-			/**
-			 * \brief Constructs a line primitive with the starting point set to \a beg and the end point set to \a end.
-			 * \param beg The starting point.
-			 * \param end The end point.
-			 */
-			LinePrimitive2D(const Math::Vector2D& beg, const Math::Vector2D& end): Line2D(beg, end) {}
-		
-			/**
-			 * \brief Constructs a line primitive with the same starting and end point as \a line.
-			 * \param line The line defining the starting and end point.
-			 */
-			explicit LinePrimitive2D(const Line2D& line): Line2D(line) {}
+            /**
+             * \brief Constructs a line primitive with the starting point set to \a beg and the end point set to \a end.
+             * \param beg The starting point.
+             * \param end The end point.
+             */
+            LinePrimitive2D(const Math::Vector2D& beg, const Math::Vector2D& end): Line2D(beg, end) {}
+        
+            /**
+             * \brief Constructs a line primitive with the same starting and end point as \a line.
+             * \param line The line defining the starting and end point.
+             */
+            explicit LinePrimitive2D(const Line2D& line): Line2D(line) {}
 
-			void render(Renderer2D& renderer) const;
+            void render(Renderer2D& renderer) const;
 
-			/**
-			 * \brief Sets the pen defining the color, width, line style and cap style of the line.
-			 * \param pen The pen defining the color, width, line style and cap style.
-			 */
-			void setPen(const Pen& pen);
+            /**
+             * \brief Sets the pen defining the color, width, line style and cap style of the line.
+             * \param pen The pen defining the color, width, line style and cap style.
+             */
+            void setPen(const Pen& pen);
 
-			/**
-			 * \brief Returns the pen defining the color, width, line style and cap style of the line.
-			 * \return The pen defining the color, width, line style and cap style of the line.
-			 */
-			const Pen& getPen() const;
+            /**
+             * \brief Returns the pen defining the color, width, line style and cap style of the line.
+             * \return The pen defining the color, width, line style and cap style of the line.
+             */
+            const Pen& getPen() const;
 
-			GraphicsPrimitive2D::SharedPointer clone() const;
+            GraphicsPrimitive2D::SharedPointer clone() const;
 
-			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
+            void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-		private:
-			Pen   pen;
-		};
-	}
+        private:
+            Pen   pen;
+        };
+    }
 }
 
 #endif // CDPL_VIS_LINEPRIMITIVE2D_HPP

@@ -35,41 +35,41 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-		
-		class MolecularGraph;
-	}
+    namespace Chem
+    {
+        
+        class MolecularGraph;
+    }
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		class TorsionLibrary;
-		class TorsionCategory;
+        class TorsionLibrary;
+        class TorsionCategory;
 
-		class TorsionLibraryDataWriter
-		{
+        class TorsionLibraryDataWriter
+        {
 
-		public:
-			bool write(std::ostream& os, const TorsionLibrary& lib);
+        public:
+            bool write(std::ostream& os, const TorsionLibrary& lib);
 
-		private:
-			void writeCategory(std::ostream& os, std::size_t ident, const TorsionCategory& cat, bool contents_only) const;
-			void writeRule(std::ostream& os, std::size_t ident, const TorsionRule& rule) const;
-			void writeAngleList(std::ostream& os, std::size_t ident, const TorsionRule& rule) const;
-			void writeAngleEntry(std::ostream& os, std::size_t ident, const TorsionRule::AngleEntry& angle_entry) const;
+        private:
+            void writeCategory(std::ostream& os, std::size_t ident, const TorsionCategory& cat, bool contents_only) const;
+            void writeRule(std::ostream& os, std::size_t ident, const TorsionRule& rule) const;
+            void writeAngleList(std::ostream& os, std::size_t ident, const TorsionRule& rule) const;
+            void writeAngleEntry(std::ostream& os, std::size_t ident, const TorsionRule::AngleEntry& angle_entry) const;
 
-			void writeStartTag(std::ostream& os, std::size_t ident, const std::string& tag, bool close) const;
-			void writeEndTag(std::ostream& os, std::size_t ident, const std::string& tag) const;
+            void writeStartTag(std::ostream& os, std::size_t ident, const std::string& tag, bool close) const;
+            void writeEndTag(std::ostream& os, std::size_t ident, const std::string& tag) const;
 
-			template <typename T>
-			void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty) const;
+            template <typename T>
+            void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty) const;
 
-			void closeTag(std::ostream& os) const;
+            void closeTag(std::ostream& os) const;
 
-			std::string getSMARTSPattern(const Chem::MolecularGraph& molgraph) const;
-		};
-	}
+            std::string getSMARTSPattern(const Chem::MolecularGraph& molgraph) const;
+        };
+    }
 }
 
 #endif // CDPL_CONFGEN_TORSIONLIBRARYDATAWRITER_HPP

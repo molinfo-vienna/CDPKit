@@ -37,56 +37,56 @@
 namespace
 {
 
-	void calculate(CDPL::GRAIL::AtomDensityGridCalculator& calculator, CDPL::Chem::AtomContainer& atoms, CDPL::Grid::DSpatialGrid& grid)
-	{
-		calculator.calculate(atoms, grid);
-	}
+    void calculate(CDPL::GRAIL::AtomDensityGridCalculator& calculator, CDPL::Chem::AtomContainer& atoms, CDPL::Grid::DSpatialGrid& grid)
+    {
+        calculator.calculate(atoms, grid);
+    }
 }
 
 
 void CDPLPythonGRAIL::exportAtomDensityGridCalculator()
 {
     using namespace boost;
-	using namespace CDPL;
+    using namespace CDPL;
 
-	python::class_<GRAIL::AtomDensityGridCalculator, GRAIL::AtomDensityGridCalculator::SharedPointer, boost::noncopyable>("AtomDensityGridCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const GRAIL::AtomDensityGridCalculator::DensityFunction&>(
-				 (python::arg("self"), python::arg("func"))))
-		.def(python::init<const GRAIL::AtomDensityGridCalculator::DensityFunction&, const GRAIL::AtomDensityGridCalculator::DensityCombinationFunction&>(
-				 (python::arg("self"), python::arg("density_func"), python::arg("comb_func"))))
-		.def(python::init<const GRAIL::AtomDensityGridCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::AtomDensityGridCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::AtomDensityGridCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setDistanceCutoff", &GRAIL::AtomDensityGridCalculator::setDistanceCutoff,
-			 (python::arg("self"), python::arg("dist")))
-		.def("getDistanceCutoff", &GRAIL::AtomDensityGridCalculator::getDistanceCutoff,
-			 python::arg("self"))
-		.def("getDensityFunction", &GRAIL::AtomDensityGridCalculator::getDensityFunction,
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setDensityFunction", &GRAIL::AtomDensityGridCalculator::setDensityFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("getDensityFunction", &GRAIL::AtomDensityGridCalculator::getDensityFunction,
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setDensityCombinationFunction", &GRAIL::AtomDensityGridCalculator::setDensityCombinationFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("getDensityCombinationFunction", &GRAIL::AtomDensityGridCalculator::getDensityCombinationFunction,
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setAtom3DCoordinatesFunction", &GRAIL::AtomDensityGridCalculator::setAtom3DCoordinatesFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("getAtom3DCoordinatesFunction", &GRAIL::AtomDensityGridCalculator::getAtom3DCoordinatesFunction,
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("calculate", &calculate, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
-		.add_property("distanceCutoff", &GRAIL::AtomDensityGridCalculator::getDistanceCutoff, &GRAIL::AtomDensityGridCalculator::setDistanceCutoff)
-		.add_property("densityFunction", 
-					  python::make_function(&GRAIL::AtomDensityGridCalculator::getDensityFunction, python::return_internal_reference<>()),
-					  &GRAIL::AtomDensityGridCalculator::setDensityFunction)
-		.add_property("densityCombinationFunction", 
-					  python::make_function(&GRAIL::AtomDensityGridCalculator::getDensityCombinationFunction, python::return_internal_reference<>()),
-					  &GRAIL::AtomDensityGridCalculator::setDensityCombinationFunction)	
-		.add_property("atomCoordinatesFunction", 
-					  python::make_function(&GRAIL::AtomDensityGridCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
-					  &GRAIL::AtomDensityGridCalculator::setAtom3DCoordinatesFunction);
+    python::class_<GRAIL::AtomDensityGridCalculator, GRAIL::AtomDensityGridCalculator::SharedPointer, boost::noncopyable>("AtomDensityGridCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const GRAIL::AtomDensityGridCalculator::DensityFunction&>(
+                 (python::arg("self"), python::arg("func"))))
+        .def(python::init<const GRAIL::AtomDensityGridCalculator::DensityFunction&, const GRAIL::AtomDensityGridCalculator::DensityCombinationFunction&>(
+                 (python::arg("self"), python::arg("density_func"), python::arg("comb_func"))))
+        .def(python::init<const GRAIL::AtomDensityGridCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::AtomDensityGridCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::AtomDensityGridCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setDistanceCutoff", &GRAIL::AtomDensityGridCalculator::setDistanceCutoff,
+             (python::arg("self"), python::arg("dist")))
+        .def("getDistanceCutoff", &GRAIL::AtomDensityGridCalculator::getDistanceCutoff,
+             python::arg("self"))
+        .def("getDensityFunction", &GRAIL::AtomDensityGridCalculator::getDensityFunction,
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setDensityFunction", &GRAIL::AtomDensityGridCalculator::setDensityFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("getDensityFunction", &GRAIL::AtomDensityGridCalculator::getDensityFunction,
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setDensityCombinationFunction", &GRAIL::AtomDensityGridCalculator::setDensityCombinationFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("getDensityCombinationFunction", &GRAIL::AtomDensityGridCalculator::getDensityCombinationFunction,
+             python::arg("self"), python::return_internal_reference<>())
+        .def("setAtom3DCoordinatesFunction", &GRAIL::AtomDensityGridCalculator::setAtom3DCoordinatesFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("getAtom3DCoordinatesFunction", &GRAIL::AtomDensityGridCalculator::getAtom3DCoordinatesFunction,
+             python::arg("self"), python::return_internal_reference<>())
+        .def("calculate", &calculate, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
+        .add_property("distanceCutoff", &GRAIL::AtomDensityGridCalculator::getDistanceCutoff, &GRAIL::AtomDensityGridCalculator::setDistanceCutoff)
+        .add_property("densityFunction", 
+                      python::make_function(&GRAIL::AtomDensityGridCalculator::getDensityFunction, python::return_internal_reference<>()),
+                      &GRAIL::AtomDensityGridCalculator::setDensityFunction)
+        .add_property("densityCombinationFunction", 
+                      python::make_function(&GRAIL::AtomDensityGridCalculator::getDensityCombinationFunction, python::return_internal_reference<>()),
+                      &GRAIL::AtomDensityGridCalculator::setDensityCombinationFunction)    
+        .add_property("atomCoordinatesFunction", 
+                      python::make_function(&GRAIL::AtomDensityGridCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
+                      &GRAIL::AtomDensityGridCalculator::setAtom3DCoordinatesFunction);
 
 }

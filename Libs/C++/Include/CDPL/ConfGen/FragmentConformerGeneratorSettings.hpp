@@ -40,119 +40,119 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API FragmentConformerGeneratorSettings
-		{
+        class CDPL_CONFGEN_API FragmentConformerGeneratorSettings
+        {
 
-		  public:
-			static const FragmentConformerGeneratorSettings DEFAULT;
-			static const FragmentConformerGeneratorSettings FAST;
-			static const FragmentConformerGeneratorSettings THOROUGH;
+          public:
+            static const FragmentConformerGeneratorSettings DEFAULT;
+            static const FragmentConformerGeneratorSettings FAST;
+            static const FragmentConformerGeneratorSettings THOROUGH;
 
-			class CDPL_CONFGEN_API FragmentSettings
-			{
-		
-			public:
-				FragmentSettings();
+            class CDPL_CONFGEN_API FragmentSettings
+            {
+        
+            public:
+                FragmentSettings();
 
-				void setMaxNumSampledConformers(std::size_t max_num);
+                void setMaxNumSampledConformers(std::size_t max_num);
 
-				std::size_t getMaxNumSampledConformers() const;
+                std::size_t getMaxNumSampledConformers() const;
 
-				void setMinNumSampledConformers(std::size_t min_num);
+                void setMinNumSampledConformers(std::size_t min_num);
 
-				std::size_t getMinNumSampledConformers() const;
+                std::size_t getMinNumSampledConformers() const;
 
-				void setTimeout(std::size_t mil_secs);
+                void setTimeout(std::size_t mil_secs);
 
-				std::size_t getTimeout() const;
+                std::size_t getTimeout() const;
 
-				void setEnergyWindow(double win_size);
+                void setEnergyWindow(double win_size);
 
-				double getEnergyWindow() const;
+                double getEnergyWindow() const;
 
-				void setMaxNumOutputConformers(std::size_t max_num);
+                void setMaxNumOutputConformers(std::size_t max_num);
 
-				std::size_t getMaxNumOutputConformers() const;
+                std::size_t getMaxNumOutputConformers() const;
 
-				void setMinRMSD(double min_rmsd);
+                void setMinRMSD(double min_rmsd);
 
-				double getMinRMSD() const;
+                double getMinRMSD() const;
 
-			private:
-				std::size_t maxNumSampledConfs;
-				std::size_t minNumSampledConfs;
-				std::size_t maxNumOutputConfs;
-				std::size_t timeout;				
-				double      eWindow;
-				double      minRMSD;
-			};
+            private:
+                std::size_t maxNumSampledConfs;
+                std::size_t minNumSampledConfs;
+                std::size_t maxNumOutputConfs;
+                std::size_t timeout;                
+                double      eWindow;
+                double      minRMSD;
+            };
 
-			FragmentConformerGeneratorSettings();
-	
-			virtual ~FragmentConformerGeneratorSettings() {}
+            FragmentConformerGeneratorSettings();
+    
+            virtual ~FragmentConformerGeneratorSettings() {}
 
-			void preserveInputBondingGeometries(bool preserve);
+            void preserveInputBondingGeometries(bool preserve);
 
-			bool preserveInputBondingGeometries() const;
+            bool preserveInputBondingGeometries() const;
 
-			void setForceFieldType(unsigned int type);
-	    
-			unsigned int getForceFieldType() const;
+            void setForceFieldType(unsigned int type);
+        
+            unsigned int getForceFieldType() const;
 
-			void strictForceFieldParameterization(bool strict);
+            void strictForceFieldParameterization(bool strict);
 
-			bool strictForceFieldParameterization() const;
+            bool strictForceFieldParameterization() const;
 
-			void setDielectricConstant(double de_const);
+            void setDielectricConstant(double de_const);
 
-			double getDielectricConstant() const;
+            double getDielectricConstant() const;
 
-			void setDistanceExponent(double exponent);
+            void setDistanceExponent(double exponent);
 
-			double getDistanceExponent() const;
+            double getDistanceExponent() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_iter);
+            void setMaxNumRefinementIterations(std::size_t max_iter);
 
-			std::size_t getMaxNumRefinementIterations() const;
+            std::size_t getMaxNumRefinementIterations() const;
 
-			void setRefinementStopGradient(double grad_norm);
+            void setRefinementStopGradient(double grad_norm);
 
-			double getRefinementStopGradient() const;
+            double getRefinementStopGradient() const;
 
-			void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
+            void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
-			std::size_t getMacrocycleRotorBondCountThreshold() const;
+            std::size_t getMacrocycleRotorBondCountThreshold() const;
 
-			FragmentSettings& getChainSettings();
+            FragmentSettings& getChainSettings();
 
-			const FragmentSettings& getChainSettings() const;
+            const FragmentSettings& getChainSettings() const;
 
-			FragmentSettings& getMacrocycleSettings();
+            FragmentSettings& getMacrocycleSettings();
 
-			const FragmentSettings& getMacrocycleSettings() const;
+            const FragmentSettings& getMacrocycleSettings() const;
 
-			FragmentSettings& getSmallRingSystemSettings();
+            FragmentSettings& getSmallRingSystemSettings();
 
-			const FragmentSettings& getSmallRingSystemSettings() const;
+            const FragmentSettings& getSmallRingSystemSettings() const;
 
-			void setSmallRingSystemSamplingFactor(std::size_t factor);
+            void setSmallRingSystemSamplingFactor(std::size_t factor);
 
-			std::size_t getSmallRingSystemSamplingFactor() const;
+            std::size_t getSmallRingSystemSamplingFactor() const;
 
-		  private:
-			bool                 preserveBondGeom;
-			unsigned int         forceFieldType;
-			bool                 strictParam;
-			double               dielectricConst;
-			double               distExponent;
-			std::size_t          maxNumRefIters;
-			double               refStopGrad;
-			std::size_t          mcRotorBondCountThresh;
-			std::size_t          srSamplingFactor;
-			FragmentSettings     chainSettings;
-			FragmentSettings     mcSettings;
-			FragmentSettings     srSettings;
-		};
+          private:
+            bool                 preserveBondGeom;
+            unsigned int         forceFieldType;
+            bool                 strictParam;
+            double               dielectricConst;
+            double               distExponent;
+            std::size_t          maxNumRefIters;
+            double               refStopGrad;
+            std::size_t          mcRotorBondCountThresh;
+            std::size_t          srSamplingFactor;
+            FragmentSettings     chainSettings;
+            FragmentSettings     mcSettings;
+            FragmentSettings     srSettings;
+        };
     }
 }
 

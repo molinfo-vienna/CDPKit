@@ -30,20 +30,20 @@
 namespace CDPL
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		namespace AtomPropertyDefault
-		{
+        namespace AtomPropertyDefault
+        {
 
-			const std::size_t MODEL_NUMBER        = 0;
-			const double B_FACTOR                 = 0.0;
-			const double OCCUPANCY                = 1.0;
-			const bool RESIDUE_LEAVING_ATOM_FLAG  = false;
-			const bool RESIDUE_LINKING_ATOM_FLAG  = false;
-			const char RESIDUE_INSERTION_CODE     = ' ';
-		}
+            const std::size_t MODEL_NUMBER        = 0;
+            const double B_FACTOR                 = 0.0;
+            const double OCCUPANCY                = 1.0;
+            const bool RESIDUE_LEAVING_ATOM_FLAG  = false;
+            const bool RESIDUE_LINKING_ATOM_FLAG  = false;
+            const char RESIDUE_INSERTION_CODE     = ' ';
+        }
 
-		void initAtomPropertyDefaults() {}
-	}
+        void initAtomPropertyDefaults() {}
+    }
 }

@@ -34,11 +34,11 @@ using namespace CDPL;
 
 void Chem::calc2DCoordinates(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite && hasCoordinates(molgraph, 2))
-		return;
+    if (!overwrite && hasCoordinates(molgraph, 2))
+        return;
 
-	Math::Vector2DArray coords;
-	Atom2DCoordinatesCalculator calculator(molgraph, coords);
+    Math::Vector2DArray coords;
+    Atom2DCoordinatesCalculator calculator(molgraph, coords);
 
-	set2DCoordinates(molgraph, coords);
+    set2DCoordinates(molgraph, coords);
 }

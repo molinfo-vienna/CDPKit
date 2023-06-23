@@ -33,37 +33,37 @@ using namespace CDPL;
 
 
 #define MAKE_BOND_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	void MolProp::set##FUNC_SUFFIX(Chem::Bond& bond, TYPE arg)			\
-	{																	\
-		bond.setProperty(BondProperty::PROP_NAME, arg);					\
-	}																	\
-																		\
-	bool MolProp::has##FUNC_SUFFIX(const Chem::Bond& bond)				\
-	{																	\
-		return bond.isPropertySet(BondProperty::PROP_NAME);				\
-	}																	\
-																		\
-	void MolProp::clear##FUNC_SUFFIX(Chem::Bond& bond)					\
-	{																	\
-		bond.removeProperty(BondProperty::PROP_NAME);					\
-	}
+    void MolProp::set##FUNC_SUFFIX(Chem::Bond& bond, TYPE arg)            \
+    {                                                                    \
+        bond.setProperty(BondProperty::PROP_NAME, arg);                    \
+    }                                                                    \
+                                                                        \
+    bool MolProp::has##FUNC_SUFFIX(const Chem::Bond& bond)                \
+    {                                                                    \
+        return bond.isPropertySet(BondProperty::PROP_NAME);                \
+    }                                                                    \
+                                                                        \
+    void MolProp::clear##FUNC_SUFFIX(Chem::Bond& bond)                    \
+    {                                                                    \
+        bond.removeProperty(BondProperty::PROP_NAME);                    \
+    }
 
-#define MAKE_BOND_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)		\
-	TYPE MolProp::get##FUNC_SUFFIX(const Chem::Bond& bond)				\
-	{																	\
-		return bond.getProperty<TYPE>(BondProperty::PROP_NAME);			\
-	}																	\
-																		\
-	MAKE_BOND_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_BOND_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)        \
+    TYPE MolProp::get##FUNC_SUFFIX(const Chem::Bond& bond)                \
+    {                                                                    \
+        return bond.getProperty<TYPE>(BondProperty::PROP_NAME);            \
+    }                                                                    \
+                                                                        \
+    MAKE_BOND_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 #define MAKE_BOND_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	TYPE MolProp::get##FUNC_SUFFIX(const Chem::Bond& bond)				\
-	{																	\
-		return bond.getPropertyOrDefault<TYPE>(BondProperty::PROP_NAME,	\
-											   BondPropertyDefault::PROP_NAME); \
-	}																	\
-																		\
-	MAKE_BOND_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+    TYPE MolProp::get##FUNC_SUFFIX(const Chem::Bond& bond)                \
+    {                                                                    \
+        return bond.getPropertyOrDefault<TYPE>(BondProperty::PROP_NAME,    \
+                                               BondPropertyDefault::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    MAKE_BOND_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
 MAKE_BOND_PROPERTY_FUNCTIONS(MHMO_PI_ORDER, double, MHMOPiOrder) 

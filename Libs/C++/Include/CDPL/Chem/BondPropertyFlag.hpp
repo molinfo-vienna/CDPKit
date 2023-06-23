@@ -33,51 +33,51 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides flags for the specification of basic Chem::Bond properties.
-		 */
-		namespace BondPropertyFlag
-		{
+        /**
+         * \brief Provides flags for the specification of basic Chem::Bond properties.
+         */
+        namespace BondPropertyFlag
+        {
  
-			/**
-			 * \brief Represents an empty set of bond properties.
-			 */
-			const unsigned int NONE              = 0x0;
+            /**
+             * \brief Represents an empty set of bond properties.
+             */
+            const unsigned int NONE              = 0x0;
 
-			/**
-			 * \brief Represents the default set of bond properties.
-			 */
-			const unsigned int DEFAULT           = 0x80000000;
+            /**
+             * \brief Represents the default set of bond properties.
+             */
+            const unsigned int DEFAULT           = 0x80000000;
 
-			/**
-			 * \brief Specifies the <em>CIP</em>-configuration of a double bond.
-			 */
-			const unsigned int CIP_CONFIGURATION = 0x1;
+            /**
+             * \brief Specifies the <em>CIP</em>-configuration of a double bond.
+             */
+            const unsigned int CIP_CONFIGURATION = 0x1;
 
-			/**
-			 * \brief Specifies the order of a bond.
-			 */
-			const unsigned int ORDER             = 0x2;
+            /**
+             * \brief Specifies the order of a bond.
+             */
+            const unsigned int ORDER             = 0x2;
 
-			/**
-			 * \brief Specifies the ring/chain topology of a bond.
-			 */
-			const unsigned int TOPOLOGY          = 0x4;
+            /**
+             * \brief Specifies the ring/chain topology of a bond.
+             */
+            const unsigned int TOPOLOGY          = 0x4;
 
-			/**
-			 * \brief Specifies the membership of a bond in aromatic rings.
-			 */
-			const unsigned int AROMATICITY       = 0x8;
+            /**
+             * \brief Specifies the membership of a bond in aromatic rings.
+             */
+            const unsigned int AROMATICITY       = 0x8;
 
-			/**
-			 * \brief Specifies the steric configuration of a double bond.
-			 */
-			const unsigned int CONFIGURATION     = 0x10;
-		}
-	}
+            /**
+             * \brief Specifies the steric configuration of a double bond.
+             */
+            const unsigned int CONFIGURATION     = 0x10;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_BONDPROPERTYFLAG_HPP

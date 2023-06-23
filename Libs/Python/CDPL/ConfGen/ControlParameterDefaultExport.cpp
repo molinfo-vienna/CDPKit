@@ -32,15 +32,15 @@
 namespace 
 {
 
-	struct ControlParameterDefault {};
+    struct ControlParameterDefault {};
 }
 
 
 void CDPLPythonConfGen::exportControlParameterDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
-		.def_readonly("STRICT_ERROR_CHECKING", &ConfGen::ControlParameterDefault::STRICT_ERROR_CHECKING);
+    python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
+        .def_readonly("STRICT_ERROR_CHECKING", &ConfGen::ControlParameterDefault::STRICT_ERROR_CHECKING);
 }

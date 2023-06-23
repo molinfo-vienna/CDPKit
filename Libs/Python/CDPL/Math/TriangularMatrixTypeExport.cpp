@@ -32,28 +32,28 @@
 namespace
 {
 
-	template <typename TriangType>
-	struct TriangularityTypeExport
-	{
+    template <typename TriangType>
+    struct TriangularityTypeExport
+    {
 
-		TriangularityTypeExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        TriangularityTypeExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<TriangType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const TriangType&>((python::arg("self"), python::arg("t"))));
-		}
-	};
+            python::class_<TriangType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const TriangType&>((python::arg("self"), python::arg("t"))));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportTriangularMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	TriangularityTypeExport<Math::Upper>("Upper");
-	TriangularityTypeExport<Math::Lower>("Lower");
-	TriangularityTypeExport<Math::UnitUpper>("UnitUpper");
-	TriangularityTypeExport<Math::UnitLower>("UnitLower");
+    TriangularityTypeExport<Math::Upper>("Upper");
+    TriangularityTypeExport<Math::Lower>("Lower");
+    TriangularityTypeExport<Math::UnitUpper>("UnitUpper");
+    TriangularityTypeExport<Math::UnitLower>("UnitLower");
 }

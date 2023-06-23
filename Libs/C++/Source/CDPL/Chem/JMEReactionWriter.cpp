@@ -36,32 +36,32 @@ using namespace CDPL;
 
 
 Chem::JMEReactionWriter::JMEReactionWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new JMEDataWriter(*this)) {}
+    output(os), state(os.good()), writer(new JMEDataWriter(*this)) {}
 
 Chem::JMEReactionWriter::~JMEReactionWriter() {}
 
 Base::DataWriter<Chem::Reaction>& Chem::JMEReactionWriter::write(const Reaction& rxn)
 {
-	state = false;
+    state = false;
 
-	try {
-		state = writer->writeReaction(output, rxn);
+    try {
+        state = writer->writeReaction(output, rxn);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("JMEReactionWriter: " + std::string(e.what()));
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("JMEReactionWriter: " + std::string(e.what()));
+    }
 
-	invokeIOCallbacks(1.0);
+    invokeIOCallbacks(1.0);
 
-	return *this;
+    return *this;
 }
 
 Chem::JMEReactionWriter::operator const void*() const
 {
-	return (state ? this : 0);
+    return (state ? this : 0);
 }
 
 bool Chem::JMEReactionWriter::operator!() const
 {
-	return !state;
+    return !state;
 }

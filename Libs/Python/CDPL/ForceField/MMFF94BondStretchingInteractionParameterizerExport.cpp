@@ -38,28 +38,28 @@ void CDPLPythonForceField::exportMMFF94BondStretchingInteractionParameterizer()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94BondStretchingInteractionParameterizer, 
-				   ForceField::MMFF94BondStretchingInteractionParameterizer::SharedPointer>("MMFF94BondStretchingInteractionParameterizer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94BondStretchingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94BondStretchingInteractionData&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingInteractionParameterizer>())	
-		.def("setFilterFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypeFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setBondTypeIndexFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setBondTypeIndexFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAromaticRingSetFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setAromaticRingSetFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setBondStretchingParameterTable", &ForceField::MMFF94BondStretchingInteractionParameterizer::setBondStretchingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setBondStretchingRuleParameterTable", &ForceField::MMFF94BondStretchingInteractionParameterizer::setBondStretchingRuleParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingInteractionParameterizer::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("parameterize", &ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+                   ForceField::MMFF94BondStretchingInteractionParameterizer::SharedPointer>("MMFF94BondStretchingInteractionParameterizer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94BondStretchingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94BondStretchingInteractionData&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingInteractionParameterizer>())    
+        .def("setFilterFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomTypeFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setBondTypeIndexFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setBondTypeIndexFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAromaticRingSetFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setAromaticRingSetFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setBondStretchingParameterTable", &ForceField::MMFF94BondStretchingInteractionParameterizer::setBondStretchingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setBondStretchingRuleParameterTable", &ForceField::MMFF94BondStretchingInteractionParameterizer::setBondStretchingRuleParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingInteractionParameterizer::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("parameterize", &ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
 }

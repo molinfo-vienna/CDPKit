@@ -32,24 +32,24 @@
 namespace 
 {
 
-	struct Alignment {};
+    struct Alignment {};
 }
 
 
 void CDPLPythonVis::exportAlignments()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Alignment, boost::noncopyable>("Alignment", python::no_init)
-		.def_readonly("BOTTOM", &Vis::Alignment::BOTTOM)
-		.def_readonly("CENTER", &Vis::Alignment::CENTER)
-		.def_readonly("H_ALIGNMENT_MASK", &Vis::Alignment::H_ALIGNMENT_MASK)
-		.def_readonly("H_CENTER", &Vis::Alignment::H_CENTER)
-		.def_readonly("LEFT", &Vis::Alignment::LEFT)
-		.def_readonly("NONE", &Vis::Alignment::NONE)
-		.def_readonly("RIGHT", &Vis::Alignment::RIGHT)
-		.def_readonly("TOP", &Vis::Alignment::TOP)
-		.def_readonly("V_ALIGNMENT_MASK", &Vis::Alignment::V_ALIGNMENT_MASK)
-		.def_readonly("V_CENTER", &Vis::Alignment::V_CENTER);
+    python::class_<Alignment, boost::noncopyable>("Alignment", python::no_init)
+        .def_readonly("BOTTOM", &Vis::Alignment::BOTTOM)
+        .def_readonly("CENTER", &Vis::Alignment::CENTER)
+        .def_readonly("H_ALIGNMENT_MASK", &Vis::Alignment::H_ALIGNMENT_MASK)
+        .def_readonly("H_CENTER", &Vis::Alignment::H_CENTER)
+        .def_readonly("LEFT", &Vis::Alignment::LEFT)
+        .def_readonly("NONE", &Vis::Alignment::NONE)
+        .def_readonly("RIGHT", &Vis::Alignment::RIGHT)
+        .def_readonly("TOP", &Vis::Alignment::TOP)
+        .def_readonly("V_ALIGNMENT_MASK", &Vis::Alignment::V_ALIGNMENT_MASK)
+        .def_readonly("V_CENTER", &Vis::Alignment::V_CENTER);
 }

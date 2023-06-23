@@ -34,39 +34,39 @@ using namespace CDPL;
 
 void Vis::PolygonPrimitive2D::render(Renderer2D& renderer) const
 {
-	renderer.setPen(pen);
-	renderer.setBrush(brush);
+    renderer.setPen(pen);
+    renderer.setBrush(brush);
 
-	renderer.drawPolygon(*this);
+    renderer.drawPolygon(*this);
 }
 
 void Vis::PolygonPrimitive2D::setPen(const Pen& pen)
 {
-	this->pen = pen;
+    this->pen = pen;
 }
 
 const Vis::Pen& Vis::PolygonPrimitive2D::getPen() const
 {
-	return pen;
+    return pen;
 }
 
 void Vis::PolygonPrimitive2D::setBrush(const Brush& brush)
 {
-	this->brush = brush;
+    this->brush = brush;
 }
 
 const Vis::Brush& Vis::PolygonPrimitive2D::getBrush() const
 {
-	return brush;
+    return brush;
 }
 
 Vis::GraphicsPrimitive2D::SharedPointer Vis::PolygonPrimitive2D::clone() const
 {
-	return SharedPointer(new PolygonPrimitive2D(*this));
+    return SharedPointer(new PolygonPrimitive2D(*this));
 }
 
 void Vis::PolygonPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
 {
-	PointArray2D::getBounds(bounds);
-	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
+    PointArray2D::getBounds(bounds);
+    bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

@@ -35,11 +35,11 @@ void CDPLPythonChem::exportDefaultMultiConfMoleculeInputProcessor()
     using namespace CDPL;
 
     python::class_<Chem::DefaultMultiConfMoleculeInputProcessor, Chem::DefaultMultiConfMoleculeInputProcessor::SharedPointer,
-				   python::bases<Chem::MultiConfMoleculeInputProcessor> >("DefaultMultiConfMoleculeInputProcessor", python::no_init)
-		.def(python::init<bool, unsigned int, unsigned int>(
-				 (python::arg("self"), python::arg("comp_names") = false, 
-				  python::arg("atom_flags") = Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS, 
-				  python::arg("bond_flags") = Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS)))
-		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS)
-		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS);
+                   python::bases<Chem::MultiConfMoleculeInputProcessor> >("DefaultMultiConfMoleculeInputProcessor", python::no_init)
+        .def(python::init<bool, unsigned int, unsigned int>(
+                 (python::arg("self"), python::arg("comp_names") = false, 
+                  python::arg("atom_flags") = Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS, 
+                  python::arg("bond_flags") = Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS)))
+        .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS)
+        .def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS);
 }

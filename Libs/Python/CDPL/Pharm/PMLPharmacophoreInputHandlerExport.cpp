@@ -31,10 +31,10 @@
 
 void CDPLPythonPharm::exportPMLPharmacophoreInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::PMLPharmacophoreInputHandler, 
-				   python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("PMLPharmacophoreInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::PMLPharmacophoreInputHandler, 
+                   python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("PMLPharmacophoreInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

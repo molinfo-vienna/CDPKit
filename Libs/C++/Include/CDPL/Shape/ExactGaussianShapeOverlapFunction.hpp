@@ -41,67 +41,67 @@ namespace CDPL
     namespace Shape
     {
 
-		class GaussianProductList;
-		
-		class CDPL_SHAPE_API ExactGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
-		{
-			
-		  public:
-			typedef std::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
+        class GaussianProductList;
+        
+        class CDPL_SHAPE_API ExactGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
+        {
+            
+          public:
+            typedef std::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
 
-			ExactGaussianShapeOverlapFunction();
+            ExactGaussianShapeOverlapFunction();
 
-			ExactGaussianShapeOverlapFunction(const ExactGaussianShapeOverlapFunction& func);
-			
-			ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
-											  const GaussianShapeFunction& ovl_shape_func);
+            ExactGaussianShapeOverlapFunction(const ExactGaussianShapeOverlapFunction& func);
+            
+            ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
+                                              const GaussianShapeFunction& ovl_shape_func);
 
-			~ExactGaussianShapeOverlapFunction();
+            ~ExactGaussianShapeOverlapFunction();
 
-			void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
+            void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
 
-			const GaussianShapeFunction* getShapeFunction(bool ref) const;
+            const GaussianShapeFunction* getShapeFunction(bool ref) const;
 
-			void setColorMatchFunction(const ColorMatchFunction& func);
+            void setColorMatchFunction(const ColorMatchFunction& func);
 
-			const ColorMatchFunction& getColorMatchFunction() const;
+            const ColorMatchFunction& getColorMatchFunction() const;
 
-			void setColorFilterFunction(const ColorFilterFunction& func);
+            void setColorFilterFunction(const ColorFilterFunction& func);
 
-			const ColorFilterFunction& getColorFilterFunction() const;
+            const ColorFilterFunction& getColorFilterFunction() const;
 
-			double calcSelfOverlap(bool ref) const;
+            double calcSelfOverlap(bool ref) const;
 
-			double calcColorSelfOverlap(bool ref) const;
-			
-			double calcOverlap() const;
+            double calcColorSelfOverlap(bool ref) const;
+            
+            double calcOverlap() const;
 
-			double calcColorOverlap() const;
+            double calcColorOverlap() const;
 
-			double calcOverlap(const Math::Vector3DArray& coords) const;
+            double calcOverlap(const Math::Vector3DArray& coords) const;
 
-			double calcColorOverlap(const Math::Vector3DArray& coords) const;
+            double calcColorOverlap(const Math::Vector3DArray& coords) const;
 
-			double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+            double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
-			ExactGaussianShapeOverlapFunction& operator=(const ExactGaussianShapeOverlapFunction& func);
-				
-		  private:
-			bool checkShapeFuncsNotNull() const;
+            ExactGaussianShapeOverlapFunction& operator=(const ExactGaussianShapeOverlapFunction& func);
+                
+          private:
+            bool checkShapeFuncsNotNull() const;
 
-			double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
-							   bool color) const;
-			double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-							   const Math::Vector3DArray& coords, 
-							   bool color) const;
-			double calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-									   const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+            double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+                               bool color) const;
+            double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+                               const Math::Vector3DArray& coords, 
+                               bool color) const;
+            double calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+                                       const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
-			const GaussianShapeFunction* refShapeFunc;
-			const GaussianShapeFunction* ovlShapeFunc;
-			ColorMatchFunction           colorMatchFunc;
-			ColorFilterFunction          colorFilterFunc;
-		};
+            const GaussianShapeFunction* refShapeFunc;
+            const GaussianShapeFunction* ovlShapeFunc;
+            ColorMatchFunction           colorMatchFunc;
+            ColorFilterFunction          colorFilterFunc;
+        };
     }
 }
 

@@ -38,44 +38,44 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MOL2DataReader;
-		class Molecule;
+        class MOL2DataReader;
+        class Molecule;
 
-		class CDPL_CHEM_API MOL2MoleculeReader : public Util::StreamDataReader<Molecule, MOL2MoleculeReader>
-		{
+        class CDPL_CHEM_API MOL2MoleculeReader : public Util::StreamDataReader<Molecule, MOL2MoleculeReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %MOL2MoleculeReader instance that will read the molecule data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			MOL2MoleculeReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %MOL2MoleculeReader instance that will read the molecule data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            MOL2MoleculeReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~MOL2MoleculeReader();
+            /**
+             * \brief Destructor.
+             */
+            ~MOL2MoleculeReader();
 
-		private:
-			friend class Util::StreamDataReader<Molecule, MOL2MoleculeReader>;
+        private:
+            friend class Util::StreamDataReader<Molecule, MOL2MoleculeReader>;
 
-			MOL2MoleculeReader(const MOL2MoleculeReader&);
+            MOL2MoleculeReader(const MOL2MoleculeReader&);
 
-			MOL2MoleculeReader& operator=(const MOL2MoleculeReader&);
+            MOL2MoleculeReader& operator=(const MOL2MoleculeReader&);
 
-			bool readData(std::istream&, Molecule&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Molecule&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<MOL2DataReader> MOL2DataReaderPtr;
+            typedef std::auto_ptr<MOL2DataReader> MOL2DataReaderPtr;
 
-			MOL2DataReaderPtr reader;
-		};
-	}
+            MOL2DataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_MOL2MOLECULEREADER_HPP

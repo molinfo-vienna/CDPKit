@@ -33,68 +33,68 @@ using namespace CDPL;
 
 
 Pharm::PSDScreeningDBCreator::PSDScreeningDBCreator():
-	impl(new PSDScreeningDBCreatorImpl())
+    impl(new PSDScreeningDBCreatorImpl())
 {}
 
 Pharm::PSDScreeningDBCreator::PSDScreeningDBCreator(const std::string& name, Mode mode, bool allow_dup_entries):
-	impl(new PSDScreeningDBCreatorImpl())
+    impl(new PSDScreeningDBCreatorImpl())
 {
     impl->open(name, mode, allow_dup_entries);
 }
-	
+    
 Pharm::PSDScreeningDBCreator::~PSDScreeningDBCreator() {}
 
 void Pharm::PSDScreeningDBCreator::open(const std::string& name, Mode mode, bool allow_dup_entries)
 {
-	impl->open(name, mode, allow_dup_entries);
+    impl->open(name, mode, allow_dup_entries);
 }
 
 void Pharm::PSDScreeningDBCreator::close()
 {
-	impl->close();
+    impl->close();
 }
 
 Pharm::PSDScreeningDBCreator::Mode Pharm::PSDScreeningDBCreator::getMode() const
 {
-	return impl->getMode();
+    return impl->getMode();
 }
 
 bool Pharm::PSDScreeningDBCreator::allowDuplicateEntries() const
 {
-	return impl->allowDuplicateEntries();
+    return impl->allowDuplicateEntries();
 }
 
 bool Pharm::PSDScreeningDBCreator::process(const Chem::MolecularGraph& molgraph)
 {
-	return impl->process(molgraph);
+    return impl->process(molgraph);
 }
 
 bool Pharm::PSDScreeningDBCreator::merge(const ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func)
 {
-	return impl->merge(db_acc, func);
+    return impl->merge(db_acc, func);
 }
 
 const std::string& Pharm::PSDScreeningDBCreator::getDatabaseName() const
 {
-	return impl->getDatabaseName();
+    return impl->getDatabaseName();
 }
 
 std::size_t Pharm::PSDScreeningDBCreator::getNumProcessed() const
 {
-	return impl->getNumProcessed();
+    return impl->getNumProcessed();
 }
 
 std::size_t Pharm::PSDScreeningDBCreator::getNumRejected() const
 {
-	return impl->getNumRejected();
+    return impl->getNumRejected();
 }
 
 std::size_t Pharm::PSDScreeningDBCreator::getNumDeleted() const
 {
-	return impl->getNumDeleted();
+    return impl->getNumDeleted();
 }
 
 std::size_t Pharm::PSDScreeningDBCreator::getNumInserted() const
 {
-	return impl->getNumInserted();
+    return impl->getNumInserted();
 }

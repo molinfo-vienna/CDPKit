@@ -49,118 +49,118 @@
 namespace CDPL 
 {
 
-	namespace ForceField
-	{
+    namespace ForceField
+    {
 
-		class MMFF94InteractionData;
-		class MMFF94InteractionParameterizer;
-	}
+        class MMFF94InteractionData;
+        class MMFF94InteractionParameterizer;
+    }
 
     namespace ConfGen 
     {
-	
-		class TorsionDriverImpl 
-		{
+    
+        class TorsionDriverImpl 
+        {
 
-		public:
-			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+        public:
+            typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
-			TorsionDriverImpl();
+            TorsionDriverImpl();
 
-			~TorsionDriverImpl();
+            ~TorsionDriverImpl();
 
-			TorsionDriverSettings& getSettings();
+            TorsionDriverSettings& getSettings();
 
-			void clearTorsionLibraries();
+            void clearTorsionLibraries();
 
-			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+            void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-			void setup(const Chem::MolecularGraph& molgraph);
-			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
+            void setup(const Chem::MolecularGraph& molgraph);
+            void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
 
-			template <typename BondIter>
-			void setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
-					   const BondIter& bonds_beg, const BondIter& bonds_end);
+            template <typename BondIter>
+            void setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
+                       const BondIter& bonds_beg, const BondIter& bonds_end);
 
-			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMask& ia_mask);
-			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
-			bool setMMFF94Parameters();
+            void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMask& ia_mask);
+            void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
+            bool setMMFF94Parameters();
 
-			void clearInputCoordinates();
-			void clearInputCoordinates(std::size_t frag_idx);
+            void clearInputCoordinates();
+            void clearInputCoordinates(std::size_t frag_idx);
 
-			void addInputCoordinates(const Math::Vector3DArray& coords);
-			void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
-			void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
-			void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
+            void addInputCoordinates(const Math::Vector3DArray& coords);
+            void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+            void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+            void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
-			void setInputCoordinates(const Math::Vector3DArray& coords);
-			void setInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
-			void setInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
-			void setInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
+            void setInputCoordinates(const Math::Vector3DArray& coords);
+            void setInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+            void setInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+            void setInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
-			std::size_t getNumFragments() const;
+            std::size_t getNumFragments() const;
 
-			const Chem::Fragment& getFragment(std::size_t idx) const;
+            const Chem::Fragment& getFragment(std::size_t idx) const;
 
-			FragmentTreeNode& getFragmentNode(std::size_t idx) const;
+            FragmentTreeNode& getFragmentNode(std::size_t idx) const;
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int generateConformers();
+            unsigned int generateConformers();
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
-			ConstConformerIterator getConformersEnd() const;
-	
-		private:
-			TorsionDriverImpl(const TorsionDriverImpl&);
+            ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersEnd() const;
+    
+        private:
+            TorsionDriverImpl(const TorsionDriverImpl&);
 
-			TorsionDriverImpl& operator=(const TorsionDriverImpl&);
+            TorsionDriverImpl& operator=(const TorsionDriverImpl&);
 
-			template <typename ConfData>
-			void doAddInputCoordinates(const ConfData& conf_data, std::size_t frag_idx) const;
+            template <typename ConfData>
+            void doAddInputCoordinates(const ConfData& conf_data, std::size_t frag_idx) const;
 
-			void assignTorsionAngles(FragmentTreeNode* node);
+            void assignTorsionAngles(FragmentTreeNode* node);
 
-			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node, std::size_t rot_sym);
+            const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node, std::size_t rot_sym);
 
-			std::size_t getRotationalSymmetry(const Chem::Bond& bond);
+            std::size_t getRotationalSymmetry(const Chem::Bond& bond);
 
-			const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
-												   const FragmentTreeNode* node) const;
-	
-			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
-			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
-			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::vector<TorsionLibrary::SharedPointer> TorsionLibraryList;
+            const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
+                                                   const FragmentTreeNode* node) const;
+    
+            typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
+            typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
+            typedef std::vector<const Chem::Bond*> BondList;
+            typedef std::vector<TorsionLibrary::SharedPointer> TorsionLibraryList;
 
-			TorsionDriverSettings         settings;
-			TorsionLibraryList            torLibs;
-			FragmentTree                  fragTree;
-			TorsionRuleMatcher            torRuleMatcher;
-			Chem::SubstructureSearch      subSearch;
-			Chem::FragmentList            fragments;
-			MMFF94ParameterizerPtr        mmff94Parameterizer;
-			MMFF94InteractionDataPtr      mmff94Data;
-			Util::BitSet                  rotBondMask;
-			BondList                      rotBonds;
-			ForceFieldInteractionMask     mmff94InteractionMask;
-			LogMessageCallbackFunction    logCallback;
-		};
+            TorsionDriverSettings         settings;
+            TorsionLibraryList            torLibs;
+            FragmentTree                  fragTree;
+            TorsionRuleMatcher            torRuleMatcher;
+            Chem::SubstructureSearch      subSearch;
+            Chem::FragmentList            fragments;
+            MMFF94ParameterizerPtr        mmff94Parameterizer;
+            MMFF94InteractionDataPtr      mmff94Data;
+            Util::BitSet                  rotBondMask;
+            BondList                      rotBonds;
+            ForceFieldInteractionMask     mmff94InteractionMask;
+            LogMessageCallbackFunction    logCallback;
+        };
     }
 }
 
@@ -169,11 +169,11 @@ namespace CDPL
 
 template <typename BondIter>
 void CDPL::ConfGen::TorsionDriverImpl::setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
-											 const BondIter& bonds_beg, const BondIter& bonds_end)
+                                             const BondIter& bonds_beg, const BondIter& bonds_end)
 {
-	fragTree.build(frags, molgraph, bonds_beg, bonds_end);
+    fragTree.build(frags, molgraph, bonds_beg, bonds_end);
 
-	assignTorsionAngles(fragTree.getRoot());
+    assignTorsionAngles(fragTree.getRoot());
 }
 
 #endif // CDPL_CONFGEN_TORSIONDRIVERIMPL_HPP

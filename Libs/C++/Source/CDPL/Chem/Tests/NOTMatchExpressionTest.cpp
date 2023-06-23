@@ -32,62 +32,62 @@
 namespace
 {
 
-	class TestExpression : public CDPL::Chem::MatchExpression<int>
-	{
+    class TestExpression : public CDPL::Chem::MatchExpression<int>
+    {
 
-	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
-		{
-			return false;
-		}
+    public:
+        bool operator()(const int&, const int&, const CDPL::Base::Any&) const
+        {
+            return false;
+        }
 
-		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
-		{
-			return true;
-		}
+        bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
+        {
+            return true;
+        }
 
-		bool requiresAtomBondMapping() const
-		{
-			return true;
-		}
-	};
+        bool requiresAtomBondMapping() const
+        {
+            return true;
+        }
+    };
 }
 
 
 BOOST_AUTO_TEST_CASE(NOTMatchExpressionTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	MatchExpression<int>::SharedPointer expr1_ptr(new TestExpression());
+    MatchExpression<int>::SharedPointer expr1_ptr(new TestExpression());
 
-	BOOST_CHECK((*expr1_ptr)(1, 2, 3) == false);
-	BOOST_CHECK((*expr1_ptr)(3, 4, AtomBondMapping(), 0) == true);
-	BOOST_CHECK(expr1_ptr->requiresAtomBondMapping() == true);
+    BOOST_CHECK((*expr1_ptr)(1, 2, 3) == false);
+    BOOST_CHECK((*expr1_ptr)(3, 4, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(expr1_ptr->requiresAtomBondMapping() == true);
 
-	MatchExpression<int>::SharedPointer not_expr1_ptr(new NOTMatchExpression<int>(expr1_ptr));
+    MatchExpression<int>::SharedPointer not_expr1_ptr(new NOTMatchExpression<int>(expr1_ptr));
 
-	BOOST_CHECK((*not_expr1_ptr)(0, 0, 3) == true);
-	BOOST_CHECK((*not_expr1_ptr)(12, 0, AtomBondMapping(), 3) == false);
-	BOOST_CHECK(not_expr1_ptr->requiresAtomBondMapping() == true);
+    BOOST_CHECK((*not_expr1_ptr)(0, 0, 3) == true);
+    BOOST_CHECK((*not_expr1_ptr)(12, 0, AtomBondMapping(), 3) == false);
+    BOOST_CHECK(not_expr1_ptr->requiresAtomBondMapping() == true);
 
-	NOTMatchExpression<int> not_expr2(not_expr1_ptr);
+    NOTMatchExpression<int> not_expr2(not_expr1_ptr);
 
-	BOOST_CHECK(not_expr2(4, 3, 0) == false);
-	BOOST_CHECK(not_expr2(10, 2, AtomBondMapping(), 13) == true);
-	BOOST_CHECK(not_expr2.requiresAtomBondMapping() == true);
+    BOOST_CHECK(not_expr2(4, 3, 0) == false);
+    BOOST_CHECK(not_expr2(10, 2, AtomBondMapping(), 13) == true);
+    BOOST_CHECK(not_expr2.requiresAtomBondMapping() == true);
 
 //-----
 
-	MatchExpression<int>::SharedPointer expr2_ptr(new MatchExpression<int>());
+    MatchExpression<int>::SharedPointer expr2_ptr(new MatchExpression<int>());
 
-	BOOST_CHECK((*expr2_ptr)(0, 0, 0) == true);
-	BOOST_CHECK((*expr2_ptr)(0, 0, AtomBondMapping(), 0) == true);
-	BOOST_CHECK(expr2_ptr->requiresAtomBondMapping() == false);
+    BOOST_CHECK((*expr2_ptr)(0, 0, 0) == true);
+    BOOST_CHECK((*expr2_ptr)(0, 0, AtomBondMapping(), 0) == true);
+    BOOST_CHECK(expr2_ptr->requiresAtomBondMapping() == false);
 
-	NOTMatchExpression<int> not_expr3(expr2_ptr);
+    NOTMatchExpression<int> not_expr3(expr2_ptr);
 
-	BOOST_CHECK(not_expr3(7, 6, 5) == false);
-	BOOST_CHECK(not_expr3(10, 9, AtomBondMapping(), 8) == false);
-	BOOST_CHECK(not_expr3.requiresAtomBondMapping() == false);
+    BOOST_CHECK(not_expr3(7, 6, 5) == false);
+    BOOST_CHECK(not_expr3(10, 9, AtomBondMapping(), 8) == false);
+    BOOST_CHECK(not_expr3.requiresAtomBondMapping() == false);
 }

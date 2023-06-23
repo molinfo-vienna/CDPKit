@@ -33,96 +33,96 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides flags for the specification of basic Chem::Atom properties.
-		 */
-		namespace AtomPropertyFlag
-		{
+        /**
+         * \brief Provides flags for the specification of basic Chem::Atom properties.
+         */
+        namespace AtomPropertyFlag
+        {
 
-			/**
-			 * \brief Represents an empty set of atom properties.
-			 */
-			const unsigned int NONE              = 0x0;
+            /**
+             * \brief Represents an empty set of atom properties.
+             */
+            const unsigned int NONE              = 0x0;
 
-			/**
-			 * \brief Represents the default set of atom properties.
-			 */
-			const unsigned int DEFAULT           = 0x80000000;
+            /**
+             * \brief Represents the default set of atom properties.
+             */
+            const unsigned int DEFAULT           = 0x80000000;
 
-			/**
-			 * \brief Specifies the <em>CIP</em>-configuration of a chiral atom.
-			 */
-			const unsigned int CIP_CONFIGURATION = 0x1;
+            /**
+             * \brief Specifies the <em>CIP</em>-configuration of a chiral atom.
+             */
+            const unsigned int CIP_CONFIGURATION = 0x1;
 
-			/**
-			 * \brief Specifies the generic type or element of an atom.
-			 */
-			const unsigned int TYPE              = 0x2;
+            /**
+             * \brief Specifies the generic type or element of an atom.
+             */
+            const unsigned int TYPE              = 0x2;
 
-			/**
-			 * \brief Specifies the isotopic mass of an atom.
-			 */
-			const unsigned int ISOTOPE           = 0x4;
+            /**
+             * \brief Specifies the isotopic mass of an atom.
+             */
+            const unsigned int ISOTOPE           = 0x4;
 
-			/**
-			 * \brief Specifies the formal charge of an atom.
-			 */
-			const unsigned int FORMAL_CHARGE     = 0x8;
+            /**
+             * \brief Specifies the formal charge of an atom.
+             */
+            const unsigned int FORMAL_CHARGE     = 0x8;
 
-			/**
-			 * \brief Specifies the hydrogen count of an atom.
-			 */
-			const unsigned int H_COUNT           = 0x10;
+            /**
+             * \brief Specifies the hydrogen count of an atom.
+             */
+            const unsigned int H_COUNT           = 0x10;
 
-			/**
-			 * \brief Specifies the symbol of an atom's element.
-			 */
-			const unsigned int SYMBOL            = 0x20;
+            /**
+             * \brief Specifies the symbol of an atom's element.
+             */
+            const unsigned int SYMBOL            = 0x20;
 
-			/**
-			 * \brief Specifies the ring/chain topology of an atom.
-			 */
-			const unsigned int TOPOLOGY          = 0x40;
+            /**
+             * \brief Specifies the ring/chain topology of an atom.
+             */
+            const unsigned int TOPOLOGY          = 0x40;
 
-			/**
-			 * \brief Specifies the membership of an atom in aromatic rings.
-			 */
-			const unsigned int AROMATICITY       = 0x80;
+            /**
+             * \brief Specifies the membership of an atom in aromatic rings.
+             */
+            const unsigned int AROMATICITY       = 0x80;
 
-			/**
-			 * \brief Specifies the configuration of a stereogenic atom.
-			 */
-			const unsigned int CONFIGURATION     = 0x100;
+            /**
+             * \brief Specifies the configuration of a stereogenic atom.
+             */
+            const unsigned int CONFIGURATION     = 0x100;
 
-			/**
-			 * \brief Specifies the atom-mapping ID an atom in a reaction.
-			 */
-			const unsigned int ATOM_MAPPING_ID   = 0x200;
+            /**
+             * \brief Specifies the atom-mapping ID an atom in a reaction.
+             */
+            const unsigned int ATOM_MAPPING_ID   = 0x200;
 
-			/**
-			 * \brief Specifies the heavy bond count of an atom.
-			 */
-			const unsigned int HEAVY_BOND_COUNT  = 0x400;
+            /**
+             * \brief Specifies the heavy bond count of an atom.
+             */
+            const unsigned int HEAVY_BOND_COUNT  = 0x400;
 
-			/**
-			 * \brief Specifies the valence of an atom.
-			 */
-			const unsigned int VALENCE           = 0x800;
-			
-			/**
-			 * \brief Specifies the explicit bond count of an atom.
-			 */
-			const unsigned int EXPLICIT_BOND_COUNT  = 0x1000;
+            /**
+             * \brief Specifies the valence of an atom.
+             */
+            const unsigned int VALENCE           = 0x800;
+            
+            /**
+             * \brief Specifies the explicit bond count of an atom.
+             */
+            const unsigned int EXPLICIT_BOND_COUNT  = 0x1000;
 
-			/**
-			 * \brief Specifies the hybridization state an atom.
-			 */
-			const unsigned int HYBRIDIZATION_STATE  = 0x2000;
-		}
-	}
+            /**
+             * \brief Specifies the hybridization state an atom.
+             */
+            const unsigned int HYBRIDIZATION_STATE  = 0x2000;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_ATOMPROPERTYFLAG_HPP

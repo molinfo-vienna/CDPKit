@@ -32,19 +32,19 @@
 namespace 
 {
 
-	struct MDLParity {};
+    struct MDLParity {};
 }
 
 
 void CDPLPythonChem::exportMDLParities()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MDLParity, boost::noncopyable>("MDLParity", python::no_init)
-		.def_readonly("UNDEF", &Chem::MDLParity::UNDEF)
-		.def_readonly("NONE", &Chem::MDLParity::NONE)
-		.def_readonly("ODD", &Chem::MDLParity::ODD)
-		.def_readonly("EVEN", &Chem::MDLParity::EVEN)
-		.def_readonly("EITHER", &Chem::MDLParity::EITHER);
+    python::class_<MDLParity, boost::noncopyable>("MDLParity", python::no_init)
+        .def_readonly("UNDEF", &Chem::MDLParity::UNDEF)
+        .def_readonly("NONE", &Chem::MDLParity::NONE)
+        .def_readonly("ODD", &Chem::MDLParity::ODD)
+        .def_readonly("EVEN", &Chem::MDLParity::EVEN)
+        .def_readonly("EITHER", &Chem::MDLParity::EITHER);
 }

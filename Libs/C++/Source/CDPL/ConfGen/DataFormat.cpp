@@ -33,7 +33,7 @@
 namespace
 {
 
-	const char* cflFileExtensions[] = { "cfl", "cdf" };
+    const char* cflFileExtensions[] = { "cfl", "cdf" };
 }
 
 
@@ -41,32 +41,32 @@ using namespace CDPL;
 
 
 const Base::DataFormat ConfGen::DataFormat::CFL("CFL", "CDPL Conformer Generator Fragment Library Format", "", 
-												cflFileExtensions, cflFileExtensions + 2, true);
+                                                cflFileExtensions, cflFileExtensions + 2, true);
 
 
 namespace CDPL
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		void initDataFormats() {}
-	}
+        void initDataFormats() {}
+    }
 }
 
 
 namespace
 {
 
-	struct Init 
-	{
+    struct Init 
+    {
 
-		Init() {
-			using namespace Base;
-			using namespace ConfGen;
+        Init() {
+            using namespace Base;
+            using namespace ConfGen;
 
-			DataIOManager<Chem::Molecule>::registerInputHandler(DataIOManager<Chem::Molecule>::InputHandlerPointer(new CFLMoleculeInputHandler()));
-		}
+            DataIOManager<Chem::Molecule>::registerInputHandler(DataIOManager<Chem::Molecule>::InputHandlerPointer(new CFLMoleculeInputHandler()));
+        }
 
-	} init;
+    } init;
 }

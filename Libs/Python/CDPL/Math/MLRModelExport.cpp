@@ -36,105 +36,105 @@
 namespace
 {
 
-	template <typename T>
-	struct MLRModelExport
-	{
+    template <typename T>
+    struct MLRModelExport
+    {
 
-		typedef CDPL::Math::MLRModel<T> ModelType;
-		typedef typename CDPL::Math::MLRModel<T>::SizeType SizeType;
-		typedef typename CDPL::Math::MLRModel<T>::ValueType ValueType;
-		typedef typename CDPL::Math::MLRModel<T>::VectorType VectorType;
-		typedef typename CDPL::Math::MLRModel<T>::MatrixType MatrixType;
+        typedef CDPL::Math::MLRModel<T> ModelType;
+        typedef typename CDPL::Math::MLRModel<T>::SizeType SizeType;
+        typedef typename CDPL::Math::MLRModel<T>::ValueType ValueType;
+        typedef typename CDPL::Math::MLRModel<T>::VectorType VectorType;
+        typedef typename CDPL::Math::MLRModel<T>::MatrixType MatrixType;
 
-		MLRModelExport(const char* name) {
-			using namespace boost;
+        MLRModelExport(const char* name) {
+            using namespace boost;
 
-			const MatrixType& (ModelType::*getXMatrixFunc)() const = &ModelType::getXMatrix;
-			const VectorType& (ModelType::*getYValuesFunc)() const = &ModelType::getYValues;
+            const MatrixType& (ModelType::*getXMatrixFunc)() const = &ModelType::getXMatrix;
+            const VectorType& (ModelType::*getYValuesFunc)() const = &ModelType::getYValues;
 
-			python::class_<ModelType >(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const ModelType&>((python::arg("self"), python::arg("model"))))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ModelType >())
-				.def("assign", CDPLPythonBase::copyAssOp(&ModelType::operator=), (python::arg("self"), python::arg("model")),
-					 python::return_self<>())
-				.def("resizeDataSet", &ModelType::resizeDataSet, 
-					 (python::arg("self"), python::arg("num_points"), python::arg("num_vars")))
-				.def("clearDataSet", &ModelType::clearDataSet, python::arg("self"))
-				.def("setXYData", &setXYData<float>, 
-					 (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
-				.def("setXYData", &setXYData<double>, 
-					 (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
-				.def("setXYData", &setXYData<long>, 
-					 (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
-				.def("setXYData", &setXYData<unsigned long>, 
-					 (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
-				.def("addXYData", &addXYData<float>, 
-					 (python::arg("self"), python::arg("x_vars"), python::arg("y")))
-				.def("addXYData", &addXYData<double>, 
-					 (python::arg("self"), python::arg("x_vars"), python::arg("y")))
-				.def("addXYData", &addXYData<long>, 
-					 (python::arg("self"), python::arg("x_vars"), python::arg("y")))
-				.def("addXYData", &addXYData<unsigned long>, 
-					 (python::arg("self"), python::arg("x_vars"), python::arg("y")))
-				.def("getXMatrix", getXMatrixFunc, python::arg("self"), 
-					 python::return_internal_reference<>())
-				.def("getYValues", getYValuesFunc, python::arg("self"), 
-					 python::return_internal_reference<>())
-				.def("buildModel", &ModelType::buildModel, python::arg("self"))
-				.def("calcStatistics", &ModelType::calcStatistics, python::arg("self"))
-				.def("calcYValue", &calcYValue<float>, (python::arg("self"), python::arg("x_vars")))
-				.def("calcYValue", &calcYValue<double>, (python::arg("self"), python::arg("x_vars")))
-				.def("calcYValue", &calcYValue<long>, (python::arg("self"), python::arg("x_vars")))
-				.def("calcYValue", &calcYValue<unsigned long>, (python::arg("self"), python::arg("x_vars")))
-				.def("getCoefficients", &ModelType::getCoefficients, python::arg("self"),
-					 python::return_internal_reference<>())
-				.def("getChiSquare", &ModelType::getChiSquare, python::arg("self"))
-				.def("getGoodnessOfFit", &ModelType::getGoodnessOfFit, python::arg("self"))
-				.def("getCorrelationCoefficient", &ModelType::getCorrelationCoefficient, python::arg("self"))
-				.def("getStandardDeviation", &ModelType::getStandardDeviation, python::arg("self"))
-				.def("__call__", &calcYValue<float>, (python::arg("self"), python::arg("x_vars")))
-				.def("__call__", &calcYValue<double>, (python::arg("self"), python::arg("x_vars")))
-				.def("__call__", &calcYValue<long>, (python::arg("self"), python::arg("x_vars")))
-				.def("__call__", &calcYValue<unsigned long>, (python::arg("self"), python::arg("x_vars")))
-				.add_property("xMatrix", python::make_function(getXMatrixFunc, python::return_internal_reference<>()))
-				.add_property("yValues", python::make_function(getYValuesFunc, python::return_internal_reference<>()))
-				.add_property("coefficients", python::make_function(&ModelType::getCoefficients,
-																	python::return_internal_reference<>()))
-				.add_property("chiSquare", &ModelType::getChiSquare)
-				.add_property("goodnessOfFit", &ModelType::getGoodnessOfFit)
-				.add_property("correlationCoefficient", &ModelType::getCorrelationCoefficient)
-				.add_property("standardDeviation", &ModelType::getStandardDeviation);
-		}
+            python::class_<ModelType >(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const ModelType&>((python::arg("self"), python::arg("model"))))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ModelType >())
+                .def("assign", CDPLPythonBase::copyAssOp(&ModelType::operator=), (python::arg("self"), python::arg("model")),
+                     python::return_self<>())
+                .def("resizeDataSet", &ModelType::resizeDataSet, 
+                     (python::arg("self"), python::arg("num_points"), python::arg("num_vars")))
+                .def("clearDataSet", &ModelType::clearDataSet, python::arg("self"))
+                .def("setXYData", &setXYData<float>, 
+                     (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
+                .def("setXYData", &setXYData<double>, 
+                     (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
+                .def("setXYData", &setXYData<long>, 
+                     (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
+                .def("setXYData", &setXYData<unsigned long>, 
+                     (python::arg("self"), python::arg("i"), python::arg("x_vars"), python::arg("y")))
+                .def("addXYData", &addXYData<float>, 
+                     (python::arg("self"), python::arg("x_vars"), python::arg("y")))
+                .def("addXYData", &addXYData<double>, 
+                     (python::arg("self"), python::arg("x_vars"), python::arg("y")))
+                .def("addXYData", &addXYData<long>, 
+                     (python::arg("self"), python::arg("x_vars"), python::arg("y")))
+                .def("addXYData", &addXYData<unsigned long>, 
+                     (python::arg("self"), python::arg("x_vars"), python::arg("y")))
+                .def("getXMatrix", getXMatrixFunc, python::arg("self"), 
+                     python::return_internal_reference<>())
+                .def("getYValues", getYValuesFunc, python::arg("self"), 
+                     python::return_internal_reference<>())
+                .def("buildModel", &ModelType::buildModel, python::arg("self"))
+                .def("calcStatistics", &ModelType::calcStatistics, python::arg("self"))
+                .def("calcYValue", &calcYValue<float>, (python::arg("self"), python::arg("x_vars")))
+                .def("calcYValue", &calcYValue<double>, (python::arg("self"), python::arg("x_vars")))
+                .def("calcYValue", &calcYValue<long>, (python::arg("self"), python::arg("x_vars")))
+                .def("calcYValue", &calcYValue<unsigned long>, (python::arg("self"), python::arg("x_vars")))
+                .def("getCoefficients", &ModelType::getCoefficients, python::arg("self"),
+                     python::return_internal_reference<>())
+                .def("getChiSquare", &ModelType::getChiSquare, python::arg("self"))
+                .def("getGoodnessOfFit", &ModelType::getGoodnessOfFit, python::arg("self"))
+                .def("getCorrelationCoefficient", &ModelType::getCorrelationCoefficient, python::arg("self"))
+                .def("getStandardDeviation", &ModelType::getStandardDeviation, python::arg("self"))
+                .def("__call__", &calcYValue<float>, (python::arg("self"), python::arg("x_vars")))
+                .def("__call__", &calcYValue<double>, (python::arg("self"), python::arg("x_vars")))
+                .def("__call__", &calcYValue<long>, (python::arg("self"), python::arg("x_vars")))
+                .def("__call__", &calcYValue<unsigned long>, (python::arg("self"), python::arg("x_vars")))
+                .add_property("xMatrix", python::make_function(getXMatrixFunc, python::return_internal_reference<>()))
+                .add_property("yValues", python::make_function(getYValuesFunc, python::return_internal_reference<>()))
+                .add_property("coefficients", python::make_function(&ModelType::getCoefficients,
+                                                                    python::return_internal_reference<>()))
+                .add_property("chiSquare", &ModelType::getChiSquare)
+                .add_property("goodnessOfFit", &ModelType::getGoodnessOfFit)
+                .add_property("correlationCoefficient", &ModelType::getCorrelationCoefficient)
+                .add_property("standardDeviation", &ModelType::getStandardDeviation);
+        }
 
-		template <typename T1>
-		static void setXYData(ModelType& model, SizeType i, 
-							  const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& x,
-							  ValueType y) {
+        template <typename T1>
+        static void setXYData(ModelType& model, SizeType i, 
+                              const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& x,
+                              ValueType y) {
 
-			model.setXYData(i, *x, y);
-		}
+            model.setXYData(i, *x, y);
+        }
 
-		template <typename T1>
-		static void addXYData(ModelType& model, 
-							  const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& x,
-							  ValueType y) {
+        template <typename T1>
+        static void addXYData(ModelType& model, 
+                              const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& x,
+                              ValueType y) {
 
-			model.addXYData(*x, y);
-		}
-	
-		template <typename T1>
-		static ValueType calcYValue(ModelType& model,
-									const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& x) {
+            model.addXYData(*x, y);
+        }
+    
+        template <typename T1>
+        static ValueType calcYValue(ModelType& model,
+                                    const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& x) {
 
-			return model.calcYValue(*x);
-		}
-	};
+            return model.calcYValue(*x);
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportMLRModelTypes()
 {
-	MLRModelExport<float>("FMLRModel");
-	MLRModelExport<double>("DMLRModel");
+    MLRModelExport<float>("FMLRModel");
+    MLRModelExport<double>("DMLRModel");
 }

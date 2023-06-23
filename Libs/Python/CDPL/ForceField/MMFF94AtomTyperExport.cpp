@@ -38,27 +38,27 @@ void CDPLPythonForceField::exportMMFF94AtomTyper()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94AtomTyper, ForceField::MMFF94AtomTyper::SharedPointer>("MMFF94AtomTyper", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94AtomTyper&>((python::arg("self"), python::arg("typer"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::SArray&, Util::UIArray&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 
-				  python::arg("num_types"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AtomTyper>())	
-		.def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94AtomTyper::setSymbolicAtomTypePatternTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setAromaticAtomTypeDefinitionTable", &ForceField::MMFF94AtomTyper::setAromaticAtomTypeDefinitionTable,
-			 (python::arg("self"), python::arg("table")))
-		.def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94AtomTyper::setHeavyToHydrogenAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("setSymbolicToNumericAtomTypeMap", &ForceField::MMFF94AtomTyper::setSymbolicToNumericAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94AtomTyper::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setAromaticRingSetFunction", &ForceField::MMFF94AtomTyper::setAromaticRingSetFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AtomTyper::operator=),
-			 (python::arg("self"), python::arg("typer")), python::return_self<>())
-		.def("perceiveTypes", &ForceField::MMFF94AtomTyper::perceiveTypes, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 
-			  python::arg("num_types"), python::arg("strict")));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94AtomTyper&>((python::arg("self"), python::arg("typer"))))
+        .def(python::init<const Chem::MolecularGraph&, Util::SArray&, Util::UIArray&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 
+                  python::arg("num_types"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AtomTyper>())    
+        .def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94AtomTyper::setSymbolicAtomTypePatternTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setAromaticAtomTypeDefinitionTable", &ForceField::MMFF94AtomTyper::setAromaticAtomTypeDefinitionTable,
+             (python::arg("self"), python::arg("table")))
+        .def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94AtomTyper::setHeavyToHydrogenAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("setSymbolicToNumericAtomTypeMap", &ForceField::MMFF94AtomTyper::setSymbolicToNumericAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94AtomTyper::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setAromaticRingSetFunction", &ForceField::MMFF94AtomTyper::setAromaticRingSetFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AtomTyper::operator=),
+             (python::arg("self"), python::arg("typer")), python::return_self<>())
+        .def("perceiveTypes", &ForceField::MMFF94AtomTyper::perceiveTypes, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 
+              python::arg("num_types"), python::arg("strict")));
 }

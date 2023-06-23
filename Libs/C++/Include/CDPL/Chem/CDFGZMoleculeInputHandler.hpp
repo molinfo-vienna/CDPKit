@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of gzip-compressed molecule data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataInputHandler<CDFGZMoleculeReader, DataFormat::CDF_GZ> CDFGZMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of gzip-compressed molecule data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataInputHandler<CDFGZMoleculeReader, DataFormat::CDF_GZ> CDFGZMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_CDFGZMOLECULEINPUTHANDLER_HPP

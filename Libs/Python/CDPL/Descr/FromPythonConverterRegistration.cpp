@@ -32,14 +32,14 @@
 
 void CDPLPythonDescr::registerFromPythonConverters()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<const Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor&,
-											   Descr::PathFingerprintGenerator::AtomDescriptorFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Descr::PathFingerprintGenerator::DefBondDescriptorFunctor&,
-											   Descr::PathFingerprintGenerator::BondDescriptorFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor&,
-											   Descr::CircularFingerprintGenerator::AtomIdentifierFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor&,
-											   Descr::CircularFingerprintGenerator::BondIdentifierFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor&,
+                                               Descr::PathFingerprintGenerator::AtomDescriptorFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::PathFingerprintGenerator::DefBondDescriptorFunctor&,
+                                               Descr::PathFingerprintGenerator::BondDescriptorFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor&,
+                                               Descr::CircularFingerprintGenerator::AtomIdentifierFunction>();
+    CDPLPythonBase::GenericFromPythonConverter<const Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor&,
+                                               Descr::CircularFingerprintGenerator::BondIdentifierFunction>();
 }

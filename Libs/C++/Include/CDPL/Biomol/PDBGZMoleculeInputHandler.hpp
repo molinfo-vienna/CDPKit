@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief A handler for the input of gzip-compressed molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
-		 *        [\ref PDB] format.
-		 */
-		typedef Util::DefaultDataInputHandler<PDBGZMoleculeReader, DataFormat::PDB_GZ> PDBGZMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of gzip-compressed molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
+         *        [\ref PDB] format.
+         */
+        typedef Util::DefaultDataInputHandler<PDBGZMoleculeReader, DataFormat::PDB_GZ> PDBGZMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_BIOMOL_PDBGZMOLECULEINPUTHANDLER_HPP

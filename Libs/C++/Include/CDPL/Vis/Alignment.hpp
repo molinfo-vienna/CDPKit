@@ -33,70 +33,70 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief Provides flags that are used to specify the 2D alignment of graphical objects within a bounded rectangular
-		 *        area.
-		 *
-		 * The flags may be combined by a bitwise OR operation to specify a composite alignment for both directions. 
-		 * For example: <tt>(Alignment::RIGHT | Alignment::BOTTOM)</tt> specifies an alignment to the bottom-right corner. 
-		 */
-		namespace Alignment
-		{
+        /**
+         * \brief Provides flags that are used to specify the 2D alignment of graphical objects within a bounded rectangular
+         *        area.
+         *
+         * The flags may be combined by a bitwise OR operation to specify a composite alignment for both directions. 
+         * For example: <tt>(Alignment::RIGHT | Alignment::BOTTOM)</tt> specifies an alignment to the bottom-right corner. 
+         */
+        namespace Alignment
+        {
 
-			/**
-			 * \brief Specifies that an object has no special alignment.
-			 */
-			const unsigned int NONE             = 0;
+            /**
+             * \brief Specifies that an object has no special alignment.
+             */
+            const unsigned int NONE             = 0;
 
-			/**
-			 * \brief Specifies an alignment to the left.
-			 */
-			const unsigned int LEFT             = 0x1;
+            /**
+             * \brief Specifies an alignment to the left.
+             */
+            const unsigned int LEFT             = 0x1;
 
-			/**
-			 * \brief Specifies an alignment to the right.
-			 */
-			const unsigned int RIGHT            = 0x2;
+            /**
+             * \brief Specifies an alignment to the right.
+             */
+            const unsigned int RIGHT            = 0x2;
 
-			/**
-			 * \brief Specifies that an object has to be centered horizontally.
-			 */
-			const unsigned int H_CENTER         = LEFT | RIGHT;
+            /**
+             * \brief Specifies that an object has to be centered horizontally.
+             */
+            const unsigned int H_CENTER         = LEFT | RIGHT;
 
-			/**
-			 * \brief A bitmask for all horizontal alignment flags.
-			 */
-			const unsigned int H_ALIGNMENT_MASK = H_CENTER;
+            /**
+             * \brief A bitmask for all horizontal alignment flags.
+             */
+            const unsigned int H_ALIGNMENT_MASK = H_CENTER;
 
-			/**
-			 * \brief Specifies an alignment to the top.
-			 */
-			const unsigned int TOP              = 0x4;
+            /**
+             * \brief Specifies an alignment to the top.
+             */
+            const unsigned int TOP              = 0x4;
 
-			/**
-			 * \brief Specifies an alignment to the bottom.
-			 */
-			const unsigned int BOTTOM           = 0x8;
+            /**
+             * \brief Specifies an alignment to the bottom.
+             */
+            const unsigned int BOTTOM           = 0x8;
 
-			/**
-			 * \brief Specifies that an object has to be centered vertically.
-			 */
-			const unsigned int V_CENTER         = TOP | BOTTOM;
-			
-			/**
-			 * \brief A bitmask for all vertical alignment flags.
-			 */
-			const unsigned int V_ALIGNMENT_MASK = V_CENTER;
+            /**
+             * \brief Specifies that an object has to be centered vertically.
+             */
+            const unsigned int V_CENTER         = TOP | BOTTOM;
+            
+            /**
+             * \brief A bitmask for all vertical alignment flags.
+             */
+            const unsigned int V_ALIGNMENT_MASK = V_CENTER;
 
-			/**
-			 * \brief Specifies that an object has to be centered horizontally and vertically.
-			 */
-			const unsigned int CENTER           = H_CENTER | V_CENTER;
-		}
-	}
+            /**
+             * \brief Specifies that an object has to be centered horizontally and vertically.
+             */
+            const unsigned int CENTER           = H_CENTER | V_CENTER;
+        }
+    }
 }
 
 #endif // CDPL_VIS_ALIGNMENT_HPP

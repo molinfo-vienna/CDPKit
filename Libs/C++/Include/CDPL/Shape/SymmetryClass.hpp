@@ -36,20 +36,20 @@ namespace CDPL
     namespace Shape
     {
 
-	namespace SymmetryClass
-	{
-			
+    namespace SymmetryClass
+    {
+            
 
-	    const unsigned int UNDEF       = 0;
+        const unsigned int UNDEF       = 0;
 
-	    const unsigned int ASYMMETRIC  = 1;
+        const unsigned int ASYMMETRIC  = 1;
 
-	    const unsigned int OBLATE      = 2;
+        const unsigned int OBLATE      = 2;
 
-	    const unsigned int PROLATE     = 3;
+        const unsigned int PROLATE     = 3;
 
-	    const unsigned int SPHERICAL   = 4;
-	}
+        const unsigned int SPHERICAL   = 4;
+    }
     }
 }
 

@@ -32,7 +32,7 @@
 
 void CDPLPythonBase::exportFunctionWrappers()
 {
-	using namespace boost;
+    using namespace boost;
     using namespace CDPL;
     using namespace Base;
 

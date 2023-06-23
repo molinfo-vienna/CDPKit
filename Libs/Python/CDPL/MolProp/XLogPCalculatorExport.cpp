@@ -35,22 +35,22 @@
 
 void CDPLPythonMolProp::exportXLogPCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolProp::XLogPCalculator, boost::noncopyable>("XLogPCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const MolProp::XLogPCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::XLogPCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::XLogPCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("calculate", &MolProp::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &MolProp::XLogPCalculator::getResult, python::arg("self"))
-		.def("getFeatureVector", &MolProp::XLogPCalculator::getFeatureVector, python::arg("self"),
-			 python::return_internal_reference<>())
-		.def("getAtomContributions", &MolProp::XLogPCalculator::getAtomContributions, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", &MolProp::XLogPCalculator::getResult)
-		.def_readonly("FEATURE_VECTOR_SIZE", &MolProp::XLogPCalculator::FEATURE_VECTOR_SIZE);
+    python::class_<MolProp::XLogPCalculator, boost::noncopyable>("XLogPCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const MolProp::XLogPCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::XLogPCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::XLogPCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("calculate", &MolProp::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+        .def("getResult", &MolProp::XLogPCalculator::getResult, python::arg("self"))
+        .def("getFeatureVector", &MolProp::XLogPCalculator::getFeatureVector, python::arg("self"),
+             python::return_internal_reference<>())
+        .def("getAtomContributions", &MolProp::XLogPCalculator::getAtomContributions, python::arg("self"),
+             python::return_internal_reference<>())
+        .add_property("result", &MolProp::XLogPCalculator::getResult)
+        .def_readonly("FEATURE_VECTOR_SIZE", &MolProp::XLogPCalculator::FEATURE_VECTOR_SIZE);
 }

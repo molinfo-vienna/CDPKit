@@ -41,43 +41,43 @@ class QPushButton;
 namespace ChOX
 {
 
-	class Settings;
-	class SettingsEditWidget;
+    class Settings;
+    class SettingsEditWidget;
 
-	class SettingsEditDialog : public QDialog
-	{
+    class SettingsEditDialog : public QDialog
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		SettingsEditDialog(QWidget*, Settings&, Qt::WindowFlags = 0);
+    public:
+        SettingsEditDialog(QWidget*, Settings&, Qt::WindowFlags = 0);
 
-		int exec();
+        int exec();
 
-	private slots:
-		void acceptChanges();
-		void resetChanges();
-		void applyChanges();
-		void setDefaults();
+    private slots:
+        void acceptChanges();
+        void resetChanges();
+        void applyChanges();
+        void setDefaults();
 
-		void handleCategorySelection(QListWidgetItem*);
-		void handleSettingsChange();
+        void handleCategorySelection(QListWidgetItem*);
+        void handleSettingsChange();
 
-	private:
-		void addCategoryEditWidget(SettingsEditWidget*, const QString&, const QString&);
+    private:
+        void addCategoryEditWidget(SettingsEditWidget*, const QString&, const QString&);
 
-		void init();
+        void init();
 
-		typedef std::vector<SettingsEditWidget*> EditWidgetList;
+        typedef std::vector<SettingsEditWidget*> EditWidgetList;
 
-		Settings&        settings;
-		QListWidget*     categoryMenu;
-		QLabel*          categoryDescrLabel;
-		QStringList      categoryDescriptions;
-		QStackedWidget*  categoryEditWidgetStack;
-		QPushButton*     applyChangesButton;
-		EditWidgetList   categoryEditWidgetList;
-	};
+        Settings&        settings;
+        QListWidget*     categoryMenu;
+        QLabel*          categoryDescrLabel;
+        QStringList      categoryDescriptions;
+        QStackedWidget*  categoryEditWidgetStack;
+        QPushButton*     applyChangesButton;
+        EditWidgetList   categoryEditWidgetList;
+    };
 }
 
 #endif // CHOX_SETTINGSEDITDIALOG_HPP

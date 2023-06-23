@@ -33,30 +33,30 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class CDFRegularGridSetDataWriter : private CDFRegularGridDataWriter
-		{
+        class CDFRegularGridSetDataWriter : private CDFRegularGridDataWriter
+        {
 
-		public:
-			CDFRegularGridSetDataWriter(const Base::ControlParameterContainer& ctrl_params): 
-				CDFRegularGridDataWriter(ctrl_params) {}
+        public:
+            CDFRegularGridSetDataWriter(const Base::ControlParameterContainer& ctrl_params): 
+                CDFRegularGridDataWriter(ctrl_params) {}
 
-			bool writeGridSet(std::ostream& os, const DRegularGridSet& grid_set);
+            bool writeGridSet(std::ostream& os, const DRegularGridSet& grid_set);
 
-			void writeGridSet(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf);
+            void writeGridSet(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf);
 
-		private:
-			void appendGridSet(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf);
+        private:
+            void appendGridSet(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf);
 
-			void outputGridSetData(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf) const;
+            void outputGridSetData(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf) const;
 
-			void outputGridSetHeader(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf, std::size_t rec_size) const;
-		
-			bool writeRecordData(std::ostream& os) const;
-		};
-	}
+            void outputGridSetHeader(const DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf, std::size_t rec_size) const;
+        
+            bool writeRecordData(std::ostream& os) const;
+        };
+    }
 }
 
 #endif // CDPL_GRID_CDFREGULARGRIDSETDATAWRITER_HPP

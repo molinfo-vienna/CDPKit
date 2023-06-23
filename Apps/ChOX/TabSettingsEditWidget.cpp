@@ -35,53 +35,53 @@ using namespace ChOX;
 
 
 TabSettingsEditWidget::TabSettingsEditWidget(QWidget* parent): 
-	SettingsEditWidget(parent)
+    SettingsEditWidget(parent)
 {
-	init();
+    init();
 }
 
 bool TabSettingsEditWidget::haveChangedSettings() const
 {
-	return (std::find_if(editWidgetList.begin(), editWidgetList.end(), 
-						 std::bind(&SettingsEditWidget::haveChangedSettings, std::placeholders::_1)) != editWidgetList.end());
+    return (std::find_if(editWidgetList.begin(), editWidgetList.end(), 
+                         std::bind(&SettingsEditWidget::haveChangedSettings, std::placeholders::_1)) != editWidgetList.end());
 }
 
 void TabSettingsEditWidget::addEditWidget(SettingsEditWidget* widget, const QString& label)
 {
-	editWidgetList.push_back(widget);
+    editWidgetList.push_back(widget);
 
-	connect(widget, SIGNAL(settingsChanged()), this, SIGNAL(settingsChanged()));
+    connect(widget, SIGNAL(settingsChanged()), this, SIGNAL(settingsChanged()));
 
-	tabWidget->addTab(widget, label);
+    tabWidget->addTab(widget, label);
 }
 
 void TabSettingsEditWidget::apply()
 {
-	std::for_each(editWidgetList.begin(), editWidgetList.end(), 
-				  std::bind(&SettingsEditWidget::apply, std::placeholders::_1));
+    std::for_each(editWidgetList.begin(), editWidgetList.end(), 
+                  std::bind(&SettingsEditWidget::apply, std::placeholders::_1));
 }
 
 void TabSettingsEditWidget::reset()
 {
-	if (!editWidgetList.empty())
-		editWidgetList.at(tabWidget->currentIndex())->reset();
+    if (!editWidgetList.empty())
+        editWidgetList.at(tabWidget->currentIndex())->reset();
 }
 
 void TabSettingsEditWidget::setDefaults()
 {
-	if (!editWidgetList.empty())
-		editWidgetList.at(tabWidget->currentIndex())->setDefaults();
+    if (!editWidgetList.empty())
+        editWidgetList.at(tabWidget->currentIndex())->setDefaults();
 }
 
 void TabSettingsEditWidget::init()
 {
-	QBoxLayout* main_layout = new QVBoxLayout(this);
+    QBoxLayout* main_layout = new QVBoxLayout(this);
 
-	main_layout->setMargin(0);
+    main_layout->setMargin(0);
 
-	tabWidget = new QTabWidget(this);
+    tabWidget = new QTabWidget(this);
 
-	tabWidget->setContentsMargins(5, 5, 5, 5);
+    tabWidget->setContentsMargins(5, 5, 5, 5);
 
-	main_layout->addWidget(tabWidget);
+    main_layout->addWidget(tabWidget);
 }

@@ -34,23 +34,23 @@ using namespace CDPL;
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponents(const MolecularGraph& molgraph)
 {
-	FragmentList::SharedPointer comps_ptr(new ComponentSet(molgraph));
+    FragmentList::SharedPointer comps_ptr(new ComponentSet(molgraph));
 
-	return comps_ptr;
+    return comps_ptr;
 }
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponents(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any prev_comps = molgraph.getProperty(MolecularGraphProperty::COMPONENTS, false);
-	
-		if (!prev_comps.isEmpty())
-			return prev_comps.getData<FragmentList::SharedPointer>();
-	}
+    if (!overwrite) {
+        Base::Any prev_comps = molgraph.getProperty(MolecularGraphProperty::COMPONENTS, false);
+    
+        if (!prev_comps.isEmpty())
+            return prev_comps.getData<FragmentList::SharedPointer>();
+    }
 
-	FragmentList::SharedPointer comps_ptr(new ComponentSet(molgraph));
+    FragmentList::SharedPointer comps_ptr(new ComponentSet(molgraph));
 
-	molgraph.setProperty(MolecularGraphProperty::COMPONENTS, comps_ptr);
+    molgraph.setProperty(MolecularGraphProperty::COMPONENTS, comps_ptr);
 
-	return comps_ptr;
+    return comps_ptr;
 }

@@ -44,58 +44,58 @@ namespace
 
     bool isSplitHeteroAtom(unsigned int type)
     {
-		using namespace Chem;
+        using namespace Chem;
 
-		switch (type) {
+        switch (type) {
 
-			case AtomType::N:
-			case AtomType::O:
-			case AtomType::S:
-			case AtomType::Se:
-			case AtomType::P:
-				return true;
+            case AtomType::N:
+            case AtomType::O:
+            case AtomType::S:
+            case AtomType::Se:
+            case AtomType::P:
+                return true;
 
-			default: 
-				break;
-		}
+            default: 
+                break;
+        }
 
-		return false;
+        return false;
     }
 
-	bool isLonePairAcceptorGroupCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::Bond& x_bond)
-	{
-		using namespace Chem;
+    bool isLonePairAcceptorGroupCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::Bond& x_bond)
+    {
+        using namespace Chem;
 
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+        Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-			const Bond& nbr_bond = *b_it;
+        for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+            const Bond& nbr_bond = *b_it;
 
-			if (&nbr_bond == &x_bond)
-				continue;
+            if (&nbr_bond == &x_bond)
+                continue;
 
-			if (!molgraph.containsBond(nbr_bond))
-				continue;
+            if (!molgraph.containsBond(nbr_bond))
+                continue;
 
-			const Atom& nbr_atom = *a_it;
+            const Atom& nbr_atom = *a_it;
 
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
+            if (!molgraph.containsAtom(nbr_atom))
+                continue;
  
-			if (getOrder(nbr_bond) <= 1)
-				continue;
+            if (getOrder(nbr_bond) <= 1)
+                continue;
 
-			switch (getType(nbr_atom)) {
+            switch (getType(nbr_atom)) {
 
-				case AtomType::N:
-				case AtomType::O:
-				case AtomType::S:
-					return true;
-			}
-		}
+                case AtomType::N:
+                case AtomType::O:
+                case AtomType::S:
+                    return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 }
 
 bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
@@ -103,78 +103,78 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
     using namespace Chem;
 
     if (getRingFlag(bond))
-		return false;
+        return false;
 
     const Atom& atom1 = bond.getBegin();
-	unsigned int atom1_type = getType(atom1);
+    unsigned int atom1_type = getType(atom1);
 
-	if (atom1_type == AtomType::H)
-		return false;
+    if (atom1_type == AtomType::H)
+        return false;
 
     const Atom& atom2 = bond.getEnd();
     unsigned int atom2_type = getType(atom2);
  
-	if (atom2_type == AtomType::H)
-		return false;
+    if (atom2_type == AtomType::H)
+        return false;
 
-	if (MolProp::getExplicitBondCount(atom1, molgraph) <= 1 || MolProp::getExplicitBondCount(atom2, molgraph) <= 1)
-		return false;
-	
-	std::size_t order = getOrder(bond);
+    if (MolProp::getExplicitBondCount(atom1, molgraph) <= 1 || MolProp::getExplicitBondCount(atom2, molgraph) <= 1)
+        return false;
+    
+    std::size_t order = getOrder(bond);
 
     if (getRingFlag(atom1) || getRingFlag(atom2))
-		return true;
+        return true;
 
-	if (order != 1)
-		return false;
+    if (order != 1)
+        return false;
 
     if (atom1_type == AtomType::C) {
-		if (!isSplitHeteroAtom(atom2_type))
-			return false;
+        if (!isSplitHeteroAtom(atom2_type))
+            return false;
 
-		return (!isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
+        return (!isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
     }
 
-	if (atom2_type != AtomType::C)  
-		return false;
+    if (atom2_type != AtomType::C)  
+        return false;
 
-	if (!isSplitHeteroAtom(atom1_type))
-		return false;
+    if (!isSplitHeteroAtom(atom1_type))
+        return false;
 
-	return (!isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
+    return (!isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
 }
 
 bool ConfGen::isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors)
 {
-	using namespace Chem;
-	using namespace MolProp;
+    using namespace Chem;
+    using namespace MolProp;
 
     if (getOrder(bond) != 1)
-		return false;
+        return false;
 
-	if (getRingFlag(bond))
-		return false;
+    if (getRingFlag(bond))
+        return false;
 
     const Atom& atom1 = bond.getBegin();
-	const Atom& atom2 = bond.getEnd();
+    const Atom& atom2 = bond.getEnd();
 
-	if (getHybridizationState(atom1) == HybridizationState::SP && getHybridizationState(atom2) == HybridizationState::SP)
-		return false;
+    if (getHybridizationState(atom1) == HybridizationState::SP && getHybridizationState(atom2) == HybridizationState::SP)
+        return false;
 
-	if (getExplicitBondCount(atom1, molgraph) < 2 ) 
-		return false;
+    if (getExplicitBondCount(atom1, molgraph) < 2 ) 
+        return false;
 
-	if (getExplicitBondCount(atom2, molgraph) < 2)
-		return false;
+    if (getExplicitBondCount(atom2, molgraph) < 2)
+        return false;
 
-	bool atom1_is_h_rot = (getHeavyBondCount(atom1, molgraph) < 2);
-	bool atom2_is_h_rot = (getHeavyBondCount(atom2, molgraph) < 2);
-		
-	if (!atom1_is_h_rot && !atom2_is_h_rot)
-		return true;
+    bool atom1_is_h_rot = (getHeavyBondCount(atom1, molgraph) < 2);
+    bool atom2_is_h_rot = (getHeavyBondCount(atom2, molgraph) < 2);
+        
+    if (!atom1_is_h_rot && !atom2_is_h_rot)
+        return true;
 
-	if (!het_h_rotors)
-		return false;
+    if (!het_h_rotors)
+        return false;
 
- 	return ((atom1_is_h_rot && getType(atom1) != AtomType::C) || (atom2_is_h_rot && getType(atom2) != AtomType::C));
+     return ((atom1_is_h_rot && getType(atom1) != AtomType::C) || (atom2_is_h_rot && getType(atom2) != AtomType::C));
 }

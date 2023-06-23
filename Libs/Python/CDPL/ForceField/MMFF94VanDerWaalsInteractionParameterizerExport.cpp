@@ -38,22 +38,22 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionParameterizer()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94VanDerWaalsInteractionParameterizer, 
-				   ForceField::MMFF94VanDerWaalsInteractionParameterizer::SharedPointer>("MMFF94VanDerWaalsInteractionParameterizer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94VanDerWaalsInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94VanDerWaalsInteractionData&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94VanDerWaalsInteractionParameterizer>())	
-		.def("setFilterFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypeFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setTopologicalDistanceFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setTopologicalDistanceFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setVanDerWaalsParameterTable", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setVanDerWaalsParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsInteractionParameterizer::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("parameterize", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+                   ForceField::MMFF94VanDerWaalsInteractionParameterizer::SharedPointer>("MMFF94VanDerWaalsInteractionParameterizer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94VanDerWaalsInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94VanDerWaalsInteractionData&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94VanDerWaalsInteractionParameterizer>())    
+        .def("setFilterFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomTypeFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setTopologicalDistanceFunction", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setTopologicalDistanceFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setVanDerWaalsParameterTable", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setVanDerWaalsParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsInteractionParameterizer::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("parameterize", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
 }

@@ -35,12 +35,12 @@
 #define MAKE_ATOM_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Atom& atom)             \
 {                                                                  \
-	return CDPL::ForceField::get##FUNC_SUFFIX(atom);			   \
+    return CDPL::ForceField::get##FUNC_SUFFIX(atom);               \
 }                                                                  \
                                                                    \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Atom& atom)             \
 {                                                                  \
-	return CDPL::ForceField::has##FUNC_SUFFIX(atom);               \
+    return CDPL::ForceField::has##FUNC_SUFFIX(atom);               \
 }
 
 #define EXPORT_ATOM_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
@@ -59,11 +59,11 @@ python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("atom
 #define EXPORT_ATOM_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("atom"),                              \
             python::return_value_policy<python::copy_const_reference,                                        \
-			python::with_custodian_and_ward_postcall<0, 1> >());                                             \
+            python::with_custodian_and_ward_postcall<0, 1> >());                                             \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("atom"));                             \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("atom"));                      \
 python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("atom"), python::arg(#ARG_NAME)), \
-			python::with_custodian_and_ward<1, 2>());                                                            
+            python::with_custodian_and_ward<1, 2>());                                                            
 
 #define EXPORT_ATOM_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                     \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("atom"),                              \
@@ -78,30 +78,30 @@ python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("atom"), 
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("atom"));                             \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("atom"));                      \
 python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("atom"), python::arg(#ARG_NAME)), \
-			python::with_custodian_and_ward<1, 2>());  
+            python::with_custodian_and_ward<1, 2>());  
 
 
 namespace
 {
 
-	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MMFF94SymbolicType)
-	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, MMFF94NumericType)
-	MAKE_ATOM_FUNC_WRAPPERS(double, MMFF94Charge)
-	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, UFFType)
+    MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MMFF94SymbolicType)
+    MAKE_ATOM_FUNC_WRAPPERS(unsigned int, MMFF94NumericType)
+    MAKE_ATOM_FUNC_WRAPPERS(double, MMFF94Charge)
+    MAKE_ATOM_FUNC_WRAPPERS(unsigned int, UFFType)
 
-	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveUFFType, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveUFFType, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 }
 
 
 void CDPLPythonForceField::exportAtomFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("perceiveUFFType", &perceiveUFFTypeWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	
-	EXPORT_ATOM_FUNCS_COPY_REF(MMFF94SymbolicType, type)
-	EXPORT_ATOM_FUNCS(MMFF94NumericType, type)
-	EXPORT_ATOM_FUNCS(MMFF94Charge, charge)
-	EXPORT_ATOM_FUNCS(UFFType, type)
+    python::def("perceiveUFFType", &perceiveUFFTypeWrapper2, (python::arg("atom"), python::arg("molgraph")));
+    
+    EXPORT_ATOM_FUNCS_COPY_REF(MMFF94SymbolicType, type)
+    EXPORT_ATOM_FUNCS(MMFF94NumericType, type)
+    EXPORT_ATOM_FUNCS(MMFF94Charge, charge)
+    EXPORT_ATOM_FUNCS(UFFType, type)
 }

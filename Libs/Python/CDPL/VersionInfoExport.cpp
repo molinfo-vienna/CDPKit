@@ -32,9 +32,9 @@
 
 void CDPLPython::exportVersionInfo()
 {
-	using namespace boost;
+    using namespace boost;
 
-	python::scope module;
+    python::scope module;
 
     module.attr("MAJOR_VERSION") = CDPL_MAJOR_VERSION;
     module.attr("MINOR_VERSION") = CDPL_MINOR_VERSION;

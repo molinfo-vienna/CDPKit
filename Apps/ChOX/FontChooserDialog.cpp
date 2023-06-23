@@ -35,62 +35,62 @@ using namespace ChOX;
 
 
 FontChooserDialog::FontChooserDialog(QWidget* parent, CDPL::Vis::Font& font, CDPL::Vis::SizeSpecification& size_spec, 
-									 const CDPL::Vis::SizeSpecification* parent_size_spec,
-									 bool size_type_editable, bool policy_editable, 
-									 Qt::WindowFlags f):
-	QDialog(parent, f), font(font), tmpFont(font), sizeSpec(size_spec), 
-	tmpSizeSpec(size_spec), parentSizeSpec(parent_size_spec)
+                                     const CDPL::Vis::SizeSpecification* parent_size_spec,
+                                     bool size_type_editable, bool policy_editable, 
+                                     Qt::WindowFlags f):
+    QDialog(parent, f), font(font), tmpFont(font), sizeSpec(size_spec), 
+    tmpSizeSpec(size_spec), parentSizeSpec(parent_size_spec)
 {
-	init(size_type_editable, policy_editable);
+    init(size_type_editable, policy_editable);
 }
 
 void FontChooserDialog::applyChanges()
 {
-	font = tmpFont;
-	sizeSpec = tmpSizeSpec;
+    font = tmpFont;
+    sizeSpec = tmpSizeSpec;
 
-	accept();
+    accept();
 }
 
 void FontChooserDialog::init(bool size_type_editable, bool policy_editable)
 {
-	setWindowTitle(tr("ChOX - Choose Font"));
+    setWindowTitle(tr("ChOX - Choose Font"));
 
 // ---------
 
-	QBoxLayout* main_layout = new QVBoxLayout(this);
+    QBoxLayout* main_layout = new QVBoxLayout(this);
 
 // ---------
 
-	QGroupBox* group_box = new QGroupBox(tr("Select Font"), this);
-	QVBoxLayout* v_box_layout = new QVBoxLayout(group_box);
-	
-	v_box_layout->addWidget(new FontChooserWidget(group_box, tmpFont, tmpSizeSpec, parentSizeSpec, size_type_editable, policy_editable));
+    QGroupBox* group_box = new QGroupBox(tr("Select Font"), this);
+    QVBoxLayout* v_box_layout = new QVBoxLayout(group_box);
+    
+    v_box_layout->addWidget(new FontChooserWidget(group_box, tmpFont, tmpSizeSpec, parentSizeSpec, size_type_editable, policy_editable));
 
-	main_layout->addWidget(group_box);
+    main_layout->addWidget(group_box);
 
 // ---------
 
-	QBoxLayout* h_box_layout = new QHBoxLayout();
+    QBoxLayout* h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
+    main_layout->addLayout(h_box_layout);
 
-	h_box_layout->addStretch();
+    h_box_layout->addStretch();
 
 // +++
 
-	QPushButton* button = new QPushButton(tr("&OK"), this);
+    QPushButton* button = new QPushButton(tr("&OK"), this);
 
-	button->setDefault(true);
+    button->setDefault(true);
 
-	connect(button, SIGNAL(clicked()), this, SLOT(applyChanges()));
+    connect(button, SIGNAL(clicked()), this, SLOT(applyChanges()));
 
-	h_box_layout->addWidget(button);
+    h_box_layout->addWidget(button);
 
-	button = new QPushButton(tr("&Cancel"), this);
+    button = new QPushButton(tr("&Cancel"), this);
 
-	connect(button, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(button, SIGNAL(clicked()), this, SLOT(reject()));
 
-	h_box_layout->addWidget(button);
+    h_box_layout->addWidget(button);
 }
 

@@ -38,117 +38,117 @@ using namespace CDPL;
 
 bool Grid::CDFRegularGridDataReader::hasMoreData(std::istream& is)
 {
-	init();
+    init();
 
-	CDF::Header header;
+    CDF::Header header;
 
-	return CDFDataReaderBase::skipToRecord(is, header, CDF::DREGULAR_GRID_RECORD_ID, true, dataBuffer);
+    return CDFDataReaderBase::skipToRecord(is, header, CDF::DREGULAR_GRID_RECORD_ID, true, dataBuffer);
 }
 
 bool Grid::CDFRegularGridDataReader::readGrid(std::istream& is, DRegularGrid& grid)
 {
-	init();
+    init();
 
-	CDF::Header header;
+    CDF::Header header;
 
-	if (!skipToRecord(is, header, CDF::DREGULAR_GRID_RECORD_ID, false, dataBuffer))
-		return false;
+    if (!skipToRecord(is, header, CDF::DREGULAR_GRID_RECORD_ID, false, dataBuffer))
+        return false;
 
-	readData(is, header.recordDataLength, dataBuffer);
+    readData(is, header.recordDataLength, dataBuffer);
 
-	dataBuffer.setIOPointer(0);
+    dataBuffer.setIOPointer(0);
 
     readGridData(grid, dataBuffer);
 
-	return true;
+    return true;
 }
 
 bool Grid::CDFRegularGridDataReader::skipGrid(std::istream& is)
 {
-	init();
+    init();
 
-	return skipNextRecord(is, CDF::DREGULAR_GRID_RECORD_ID, dataBuffer);
+    return skipNextRecord(is, CDF::DREGULAR_GRID_RECORD_ID, dataBuffer);
 }
 
 void Grid::CDFRegularGridDataReader::init()
 {
-	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
+    strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
 }
 
 bool Grid::CDFRegularGridDataReader::readGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf)
 {
-	init();
+    init();
 
-	bbuf.setIOPointer(0);
+    bbuf.setIOPointer(0);
 
     return doReadGrid(grid, bbuf);
 }
 
 bool Grid::CDFRegularGridDataReader::doReadGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const
 {
-	CDF::Header header;
+    CDF::Header header;
 
-	if (!getHeader(header, bbuf))
-		return false;
+    if (!getHeader(header, bbuf))
+        return false;
 
-	if (header.recordTypeID != CDF::DREGULAR_GRID_RECORD_ID) {
-		if (strictErrorChecking())
-			throw Base::IOError("CDFRegularGridDataReader: trying to read a non-interaction score grid record");
+    if (header.recordTypeID != CDF::DREGULAR_GRID_RECORD_ID) {
+        if (strictErrorChecking())
+            throw Base::IOError("CDFRegularGridDataReader: trying to read a non-interaction score grid record");
 
-		return false;
-	}
+        return false;
+    }
 
     readGridData(grid, bbuf);
 
-	return true;
+    return true;
 }
 
 void Grid::CDFRegularGridDataReader::readGridData(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const
 {
-	CDF::BoolType cell_data_mode;
-	std::uint8_t fp_len;
+    CDF::BoolType cell_data_mode;
+    std::uint8_t fp_len;
 
-	bbuf.getInt(cell_data_mode);
-	grid.setDataMode(cell_data_mode ? DRegularGrid::CELL : DRegularGrid::POINT);
+    bbuf.getInt(cell_data_mode);
+    grid.setDataMode(cell_data_mode ? DRegularGrid::CELL : DRegularGrid::POINT);
 
-	bbuf.getInt(fp_len);
+    bbuf.getInt(fp_len);
 
-	if (fp_len != sizeof(DRegularGrid::CoordinatesValueType)) {
-		if (fp_len == sizeof(float)) {
-			float fp_val;
+    if (fp_len != sizeof(DRegularGrid::CoordinatesValueType)) {
+        if (fp_len == sizeof(float)) {
+            float fp_val;
 
-			bbuf.getFloat(fp_val);
-			grid.setXStepSize(fp_val);
+            bbuf.getFloat(fp_val);
+            grid.setXStepSize(fp_val);
 
-			bbuf.getFloat(fp_val);
-			grid.setYStepSize(fp_val);
+            bbuf.getFloat(fp_val);
+            grid.setYStepSize(fp_val);
 
-			bbuf.getFloat(fp_val);
-			grid.setZStepSize(fp_val);
-		
-		} else
-			throw Base::IOError("CDFRegularGridDataReader: value type size mismatch");
+            bbuf.getFloat(fp_val);
+            grid.setZStepSize(fp_val);
+        
+        } else
+            throw Base::IOError("CDFRegularGridDataReader: value type size mismatch");
 
-	} else {
-		DRegularGrid::CoordinatesValueType fp_val;
+    } else {
+        DRegularGrid::CoordinatesValueType fp_val;
 
-		bbuf.getFloat(fp_val);
-		grid.setXStepSize(fp_val);
-		
-		bbuf.getFloat(fp_val);
-		grid.setYStepSize(fp_val);
-		
-		bbuf.getFloat(fp_val);
-		grid.setZStepSize(fp_val);
-	}
+        bbuf.getFloat(fp_val);
+        grid.setXStepSize(fp_val);
+        
+        bbuf.getFloat(fp_val);
+        grid.setYStepSize(fp_val);
+        
+        bbuf.getFloat(fp_val);
+        grid.setZStepSize(fp_val);
+    }
 
-	getGrid(grid, bbuf, fp_len);
+    getGrid(grid, bbuf, fp_len);
 
-	DRegularGrid::CoordinatesTransformType xform;
+    DRegularGrid::CoordinatesTransformType xform;
 
-	getCMatrix(xform, bbuf, fp_len);
+    getCMatrix(xform, bbuf, fp_len);
 
-	grid.setCoordinatesTransform(xform);
+    grid.setCoordinatesTransform(xform);
 
     readProperties(grid, bbuf);
 }

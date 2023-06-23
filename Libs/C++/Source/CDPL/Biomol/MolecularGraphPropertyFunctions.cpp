@@ -34,37 +34,37 @@ using namespace CDPL;
 
 
 #define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-	void Biomol::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg)	\
-	{																	\
-		molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);	\
-	}																	\
-																		\
-	bool Biomol::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
-	{																	\
-		return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
-	}																	\
-																		\
-	void Biomol::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)		\
-	{																	\
-		molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);		\
-	}
+    void Biomol::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg)    \
+    {                                                                    \
+        molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);    \
+    }                                                                    \
+                                                                        \
+    bool Biomol::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
+    {                                                                    \
+        return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    void Biomol::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)        \
+    {                                                                    \
+        molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);        \
+    }
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
-	TYPE Biomol::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
-	{																	\
-		return molgraph.getProperty<TYPE>(MolecularGraphProperty::PROP_NAME); \
-	}																	\
-																		\
-	MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)    \
+    TYPE Biomol::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
+    {                                                                    \
+        return molgraph.getProperty<TYPE>(MolecularGraphProperty::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)	\
-	TYPE Biomol::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
-	{																	\
-		return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
-												   MolecularGraphPropertyDefault::PROP_NAME); \
-	}																	\
-																		\
-	MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)    \
+    TYPE Biomol::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)    \
+    {                                                                    \
+        return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
+                                                   MolecularGraphPropertyDefault::PROP_NAME); \
+    }                                                                    \
+                                                                        \
+    MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(RESIDUE_CODE, const std::string&, ResidueCode)

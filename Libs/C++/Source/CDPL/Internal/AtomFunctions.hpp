@@ -34,45 +34,45 @@ namespace CDPL
 
     namespace Chem 
     {
-	
-		class Atom;
-		class MolecularGraph;
+    
+        class Atom;
+        class MolecularGraph;
     }
     
     namespace Internal
     {
-		
-		inline double getVdWRadius(const Chem::Atom& atom);
+        
+        inline double getVdWRadius(const Chem::Atom& atom);
 
-		inline std::size_t getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
-		inline std::size_t getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
-		inline std::size_t getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline std::size_t getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
-											 unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
-		
-		inline std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order);
-		inline std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
-		inline std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order);
-		inline std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
-		inline std::size_t getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline std::size_t getRingBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		
-		inline std::size_t calcExplicitValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline std::size_t calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline std::size_t calcValenceElectronCount(const Chem::Atom& atom);
-		inline std::size_t calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		
-		inline bool isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline bool isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
-									   unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
-		inline bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
-		inline bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-		inline bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only);
-		
-		inline std::size_t getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
+        inline std::size_t getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
+        inline std::size_t getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
+                                             unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
+        
+        inline std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order);
+        inline std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
+        inline std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order);
+        inline std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
+        inline std::size_t getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t getRingBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        
+        inline std::size_t calcExplicitValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline std::size_t calcValenceElectronCount(const Chem::Atom& atom);
+        inline std::size_t calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        
+        inline bool isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline bool isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
+                                       unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
+        inline bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+        inline bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+        inline bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only);
+        
+        inline std::size_t getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
     }
 }
 

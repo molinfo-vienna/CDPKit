@@ -50,95 +50,95 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-	}
+        class MolecularGraph;
+        class Atom;
+    }
 
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94StretchBendInteractionParameterizer
-		{
+        class CDPL_FORCEFIELD_API MMFF94StretchBendInteractionParameterizer
+        {
 
-		  public:
-			typedef std::shared_ptr<MMFF94StretchBendInteractionParameterizer> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94StretchBendInteractionParameterizer> SharedPointer;
 
-			MMFF94StretchBendInteractionParameterizer();
+            MMFF94StretchBendInteractionParameterizer();
 
-			MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-													  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
-													  bool strict);
+            MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
+                                                      const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
+                                                      bool strict);
 
-			void setFilterFunction(const InteractionFilterFunction3& func); 
+            void setFilterFunction(const InteractionFilterFunction3& func); 
 
-			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
 
-			void setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table);
+            void setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table);
 
-			void setDefaultStretchBendParameterTable(const MMFF94DefaultStretchBendParameterTable::SharedPointer& table);
+            void setDefaultStretchBendParameterTable(const MMFF94DefaultStretchBendParameterTable::SharedPointer& table);
 
-			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-							  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
+                              const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, bool strict);
 
-		  private:
-			void initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data);
+          private:
+            void initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data);
 
-			void getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int& bond_type_idx, double& ref_length) const;
+            void getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int& bond_type_idx, double& ref_length) const;
 
-			void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, unsigned int ctr_atom_type, 
-										  const Chem::Atom& term_atom2, unsigned int term_atom2_type, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
-										  unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const;
+            void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, unsigned int ctr_atom_type, 
+                                          const Chem::Atom& term_atom2, unsigned int term_atom2_type, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
+                                          unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const;
 
-			void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
-										  const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
-										  unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const, bool strict) const; 
+            void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
+                                          const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
+                                          unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const, bool strict) const; 
 
- 			/**
-			 * \brief Returns the stretch bend type index SBT[IJK].
-			 *
-			 * SBT[IJK] is derived from the bond type indices BT[IJ] and BT[JK] and the angle type index AT[IJK] as follows:
-			 * 
-			 * SBT[IJK] AT[IJK] BT[IJ] BT[JK]
-			 * -------------------------------------------------------------
-			 * 0        0       0      0
-			 * 1        1       1      0
-			 * 2        1       0      1
-			 * 3        2       1      1
-			 * 4        4       0      0
-			 * 5        3       0      0
-			 * 6        5       1      0
-			 * 7        5       0      1
-			 * 8        6       1      1
-			 * 9        7       1      0
-			 * 10       7       0      1
-			 * 11       8       1      1
-			 * 
-			 * If \a symmetric is \c true, then the lower SBT[IJK] value for a given AT[IJK] is returned when there are two possibilities.
-			 *
-			 * \param symmetric Tells whether the terminal atom types are identical.
-			 * \param bond_type_idx1 The bond type index of the bond IJ.
-			 * \param bond_type_idx2 The bond type index of the bond JK.
-			 * \param angle_type_idx The angle type index.
-			 * \return The stretch bend type index.
-			 */
-			unsigned int getStretchBendTypeIndex(bool symmetric, unsigned int bond_type_idx1, unsigned int bond_type_idx2, unsigned int angle_type_idx) const;
+             /**
+             * \brief Returns the stretch bend type index SBT[IJK].
+             *
+             * SBT[IJK] is derived from the bond type indices BT[IJ] and BT[JK] and the angle type index AT[IJK] as follows:
+             * 
+             * SBT[IJK] AT[IJK] BT[IJ] BT[JK]
+             * -------------------------------------------------------------
+             * 0        0       0      0
+             * 1        1       1      0
+             * 2        1       0      1
+             * 3        2       1      1
+             * 4        4       0      0
+             * 5        3       0      0
+             * 6        5       1      0
+             * 7        5       0      1
+             * 8        6       1      1
+             * 9        7       1      0
+             * 10       7       0      1
+             * 11       8       1      1
+             * 
+             * If \a symmetric is \c true, then the lower SBT[IJK] value for a given AT[IJK] is returned when there are two possibilities.
+             *
+             * \param symmetric Tells whether the terminal atom types are identical.
+             * \param bond_type_idx1 The bond type index of the bond IJ.
+             * \param bond_type_idx2 The bond type index of the bond JK.
+             * \param angle_type_idx The angle type index.
+             * \return The stretch bend type index.
+             */
+            unsigned int getStretchBendTypeIndex(bool symmetric, unsigned int bond_type_idx1, unsigned int bond_type_idx2, unsigned int angle_type_idx) const;
 
-			unsigned int getPTERow(const Chem::MolecularGraph& molgraph, const Chem::Atom& atom, unsigned int atom_type) const;
+            unsigned int getPTERow(const Chem::MolecularGraph& molgraph, const Chem::Atom& atom, unsigned int atom_type) const;
 
-			typedef std::unordered_map<std::pair<std::size_t, std::size_t>, const MMFF94BondStretchingInteraction*, boost::hash<std::pair<std::size_t, std::size_t> > > BondStretchingParamLookupTable;
+            typedef std::unordered_map<std::pair<std::size_t, std::size_t>, const MMFF94BondStretchingInteraction*, boost::hash<std::pair<std::size_t, std::size_t> > > BondStretchingParamLookupTable;
 
-			InteractionFilterFunction3                            filterFunc;
-			MMFF94NumericAtomTypeFunction                         atomTypeFunc;	
-			MMFF94StretchBendParameterTable::SharedPointer        paramTable;
-			MMFF94DefaultStretchBendParameterTable::SharedPointer defParamTable;
-			MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
-			BondStretchingParamLookupTable                        bsParamTable;
-		};			
+            InteractionFilterFunction3                            filterFunc;
+            MMFF94NumericAtomTypeFunction                         atomTypeFunc;    
+            MMFF94StretchBendParameterTable::SharedPointer        paramTable;
+            MMFF94DefaultStretchBendParameterTable::SharedPointer defParamTable;
+            MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
+            BondStretchingParamLookupTable                        bsParamTable;
+        };            
     }
 }
 

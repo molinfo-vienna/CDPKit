@@ -40,51 +40,51 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeaturePositionMatchFunctor.
-		 */
-		class CDPL_PHARM_API FeaturePositionMatchFunctor
-		{
+        /**
+         * \brief FeaturePositionMatchFunctor.
+         */
+        class CDPL_PHARM_API FeaturePositionMatchFunctor
+        {
 
-		  public:
-			FeaturePositionMatchFunctor(bool query_mode): qryMode(query_mode) {}
+          public:
+            FeaturePositionMatchFunctor(bool query_mode): qryMode(query_mode) {}
 
-			bool queryMode() const;
+            bool queryMode() const;
 
-		    /**
-			 * \brief Checks if the distance between \a ftr1 and \a ftr2 is below the allowed maximum and calculates a score reflecting their proximity.
-			 *
-			 * If in 'query mode', the tolerance of \a ftr1 specifies the allowed maximum distance. Otherwise, the maximum tolerance of the features
-			 * takes effect.
-			 *
-			 * \param ftr1 The first feature.
-			 * \param ftr2 The second feature.
-			 * \return A score from \e 0 (=outside effective tolerance) and \e 1 (exact position match) that specifies the
-			 *         proximity of the features.
-			 * \see Pharm::getPosition(const Feature&), Pharm::getTolerance(const Feature&)
-			 */
-		    double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            /**
+             * \brief Checks if the distance between \a ftr1 and \a ftr2 is below the allowed maximum and calculates a score reflecting their proximity.
+             *
+             * If in 'query mode', the tolerance of \a ftr1 specifies the allowed maximum distance. Otherwise, the maximum tolerance of the features
+             * takes effect.
+             *
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return A score from \e 0 (=outside effective tolerance) and \e 1 (exact position match) that specifies the
+             *         proximity of the features.
+             * \see Pharm::getPosition(const Feature&), Pharm::getTolerance(const Feature&)
+             */
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-		    /**
-			 * \brief Checks if the distance between \a ftr1 and \a ftr2 is below the allowed maximum and calculates a score reflecting their proximity.
-			 *
-			 * If in 'query mode', the tolerance of \a ftr1 specifies the allowed maximum distance. Otherwise, the maximum tolerance of the features
-			 * takes effect.
-			 *
-			 * \param ftr1 The first feature.
-			 * \param ftr2 The second feature.
-			 * \param xform The transformation to apply to the position of the second feature.
-			 * \return A score from \e 0 (=outside effective tolerance) and \e 1 (exact position match) that specifies the
-			 *         proximity of the features.
-			 * \see Pharm::getPosition(const Feature&), Pharm::getTolerance(const Feature&)
-			 */
-		    double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+            /**
+             * \brief Checks if the distance between \a ftr1 and \a ftr2 is below the allowed maximum and calculates a score reflecting their proximity.
+             *
+             * If in 'query mode', the tolerance of \a ftr1 specifies the allowed maximum distance. Otherwise, the maximum tolerance of the features
+             * takes effect.
+             *
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \param xform The transformation to apply to the position of the second feature.
+             * \return A score from \e 0 (=outside effective tolerance) and \e 1 (exact position match) that specifies the
+             *         proximity of the features.
+             * \see Pharm::getPosition(const Feature&), Pharm::getTolerance(const Feature&)
+             */
+            double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
-		  private:
-		    bool qryMode;
-		};
+          private:
+            bool qryMode;
+        };
     }
 }
 

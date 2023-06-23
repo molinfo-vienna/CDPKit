@@ -38,34 +38,34 @@ using namespace CDPL;
 
 void Pharm::transform3DCoordinates(FeatureContainer& cntnr, const Math::Matrix4D& mtx)
 {
-	Math::Vector4D tmp1;
-	Math::Vector4D tmp2;
-	Math::Vector3D tmp3;
+    Math::Vector4D tmp1;
+    Math::Vector4D tmp2;
+    Math::Vector3D tmp3;
 
-	tmp1[3] = 1.0;
+    tmp1[3] = 1.0;
 
-	for (FeatureContainer::FeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
-		Feature& ftr = *it;
-		const Math::Vector3D& coords = get3DCoordinates(ftr);
+    for (FeatureContainer::FeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
+        Feature& ftr = *it;
+        const Math::Vector3D& coords = get3DCoordinates(ftr);
 
-		tmp1[0] = coords[0];
-		tmp1[1] = coords[1];
-		tmp1[2] = coords[2];
+        tmp1[0] = coords[0];
+        tmp1[1] = coords[1];
+        tmp1[2] = coords[2];
 
-		prod(mtx, tmp1, tmp2);
+        prod(mtx, tmp1, tmp2);
 
-		tmp3[0] = tmp2[0];
-		tmp3[1] = tmp2[1];
-		tmp3[2] = tmp2[2];
+        tmp3[0] = tmp2[0];
+        tmp3[1] = tmp2[1];
+        tmp3[2] = tmp2[2];
 
-		set3DCoordinates(ftr, tmp3);
+        set3DCoordinates(ftr, tmp3);
 
-		if (!hasOrientation(ftr))
-			continue;
+        if (!hasOrientation(ftr))
+            continue;
 
-		const Math::Vector3D& orient = getOrientation(ftr);
+        const Math::Vector3D& orient = getOrientation(ftr);
 
-		prod(range(mtx, 0, 3, 0, 3), orient, tmp3);
-		setOrientation(ftr, tmp3);
-	}
+        prod(range(mtx, 0, 3, 0, 3), orient, tmp3);
+        setOrientation(ftr, tmp3);
+    }
 }

@@ -33,42 +33,42 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants that are used to specify the <em>R/S</em> configuration of atoms.
-		 */
-		namespace AtomConfiguration
-		{
-			
-			/**
-			 * \brief Specifies that the configuration of the atom is undefined.
-			 */
-			const unsigned int UNDEF  = 0;
+        /**
+         * \brief Provides constants that are used to specify the <em>R/S</em> configuration of atoms.
+         */
+        namespace AtomConfiguration
+        {
+            
+            /**
+             * \brief Specifies that the configuration of the atom is undefined.
+             */
+            const unsigned int UNDEF  = 0;
 
-			/**
-			 * \brief Specifies that the atom is not a stereogenic center and thus cannot be assigned a 
-			 *        configuration.
-			 */
-			const unsigned int NONE   = 0x1;
+            /**
+             * \brief Specifies that the atom is not a stereogenic center and thus cannot be assigned a 
+             *        configuration.
+             */
+            const unsigned int NONE   = 0x1;
 
-			/**
-			 * \brief Specifies that the atom has \e R configuration.
-			 */
-			const unsigned int R      = 0x2;
+            /**
+             * \brief Specifies that the atom has \e R configuration.
+             */
+            const unsigned int R      = 0x2;
 
-			/**
-			 * \brief Specifies that the atom has \e S configuration.
-			 */
-			const unsigned int S      = 0x4;
+            /**
+             * \brief Specifies that the atom has \e S configuration.
+             */
+            const unsigned int S      = 0x4;
 
-			/**
-			 * \brief Specifies that the atom is a stereogenic center but has no defined configuration.
-			 */
-			const unsigned int EITHER = 0x8;
-		}
-	}
+            /**
+             * \brief Specifies that the atom is a stereogenic center but has no defined configuration.
+             */
+            const unsigned int EITHER = 0x8;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_ATOMCONFIGURATION_HPP

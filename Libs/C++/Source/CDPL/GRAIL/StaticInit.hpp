@@ -31,28 +31,28 @@
 namespace CDPL
 {
 
-	namespace GRAIL
-	{
+    namespace GRAIL
+    {
 
-		void initAttributedGridProperties();
-		void initAttributedGridPropertyDefaults();
-		void initDataFormats();
-	}
+        void initAttributedGridProperties();
+        void initAttributedGridPropertyDefaults();
+        void initDataFormats();
+    }
 }
 
 namespace
 {
 
-	struct CDPLGRAILInit
-	{
+    struct CDPLGRAILInit
+    {
 
-		CDPLGRAILInit() {
-			CDPL::GRAIL::initAttributedGridProperties();
-			CDPL::GRAIL::initAttributedGridPropertyDefaults();
-			CDPL::GRAIL::initDataFormats();
-		}
+        CDPLGRAILInit() {
+            CDPL::GRAIL::initAttributedGridProperties();
+            CDPL::GRAIL::initAttributedGridPropertyDefaults();
+            CDPL::GRAIL::initDataFormats();
+        }
 
-	} cdplGRAILInit;
+    } cdplGRAILInit;
 }
 
 #endif // CDPL_GRAIL_STATIC_LINK

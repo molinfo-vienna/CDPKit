@@ -29,15 +29,15 @@
 namespace CDPLPythonConfGen
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
-	void exportNitrogenEnumerationModes();
-	void exportConformerSamplingModes();
-	void exportStructureGenerationModes();
-	void exportDataFormats();
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+    void exportFragmentTypes();
+    void exportForceFieldTypes();
+    void exportReturnCodes();
+    void exportNitrogenEnumerationModes();
+    void exportConformerSamplingModes();
+    void exportStructureGenerationModes();
+    void exportDataFormats();
+    void exportControlParameters();
+    void exportControlParameterDefaults();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP

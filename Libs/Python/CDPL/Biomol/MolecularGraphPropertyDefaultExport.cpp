@@ -32,16 +32,16 @@
 namespace 
 {
 
-	struct MolecularGraphPropertyDefault {};
+    struct MolecularGraphPropertyDefault {};
 }
 
 
 void CDPLPythonBiomol::exportMolecularGraphPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MolecularGraphPropertyDefault, boost::noncopyable>("MolecularGraphPropertyDefault", python::no_init)
-		.def_readonly("MODEL_NUMBER", &Biomol::MolecularGraphPropertyDefault::MODEL_NUMBER)
-		.def_readonly("RESIDUE_INSERTION_CODE", &Biomol::MolecularGraphPropertyDefault::RESIDUE_INSERTION_CODE);
+    python::class_<MolecularGraphPropertyDefault, boost::noncopyable>("MolecularGraphPropertyDefault", python::no_init)
+        .def_readonly("MODEL_NUMBER", &Biomol::MolecularGraphPropertyDefault::MODEL_NUMBER)
+        .def_readonly("RESIDUE_INSERTION_CODE", &Biomol::MolecularGraphPropertyDefault::RESIDUE_INSERTION_CODE);
 }

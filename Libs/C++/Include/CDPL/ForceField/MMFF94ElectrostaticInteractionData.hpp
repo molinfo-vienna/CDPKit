@@ -39,7 +39,7 @@ namespace CDPL
     namespace ForceField 
     {
 
-	typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionData;
+    typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionData;
     }
 }
 

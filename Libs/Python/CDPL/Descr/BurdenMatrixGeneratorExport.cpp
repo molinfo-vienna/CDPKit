@@ -35,16 +35,16 @@
 
 void CDPLPythonDescr::exportBurdenMatrixGenerator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Descr::BurdenMatrixGenerator, boost::noncopyable>("BurdenMatrixGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Math::DMatrix&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("mtx"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::BurdenMatrixGenerator>())	
-		.def("setAtomWeightFunction", &Descr::BurdenMatrixGenerator::setAtomWeightFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("generate", &Descr::BurdenMatrixGenerator::generate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("mtx")));
+    python::class_<Descr::BurdenMatrixGenerator, boost::noncopyable>("BurdenMatrixGenerator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Math::DMatrix&>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("mtx"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::BurdenMatrixGenerator>())    
+        .def("setAtomWeightFunction", &Descr::BurdenMatrixGenerator::setAtomWeightFunction,
+             (python::arg("self"), python::arg("func")))
+        .def("generate", &Descr::BurdenMatrixGenerator::generate, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("mtx")));
 }

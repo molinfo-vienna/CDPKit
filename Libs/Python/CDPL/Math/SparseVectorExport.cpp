@@ -39,43 +39,43 @@
 namespace
 {
 
-	template <typename VectorType>
-	struct SparseVectorExport
-	{
+    template <typename VectorType>
+    struct SparseVectorExport
+    {
 
-		SparseVectorExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        SparseVectorExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename VectorType::SizeType SizeType;
-		
-			python::class_<VectorType, typename VectorType::SharedPointer>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
-				.def(python::init<SizeType>((python::arg("self"), python::arg("n"))))
-				.def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
-				.def("clear", &VectorType::clear, python::arg("self"))
-				.def("getNumElements", &VectorType::getNumElements, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
-				.def(InitFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
-				.def(ConstVectorVisitor<VectorType>())
-				.def(VectorAssignAndSwapVisitor<VectorType>())
-				.def(VectorVisitor<VectorType>())
-				.def(VectorNDArrayInitVisitor<VectorType, true>())
-				.def(VectorNDArrayAssignVisitor<VectorType, true>())
-				.add_property("numElements", &VectorType::getNumElements);
-		}
-	};
+            typedef typename VectorType::SizeType SizeType;
+        
+            python::class_<VectorType, typename VectorType::SharedPointer>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
+                .def(python::init<SizeType>((python::arg("self"), python::arg("n"))))
+                .def("resize", &VectorType::resize, (python::arg("self"), python::arg("n")))
+                .def("clear", &VectorType::clear, python::arg("self"))
+                .def("getNumElements", &VectorType::getNumElements, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorType>())
+                .def(InitFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
+                .def(ConstVectorVisitor<VectorType>())
+                .def(VectorAssignAndSwapVisitor<VectorType>())
+                .def(VectorVisitor<VectorType>())
+                .def(VectorNDArrayInitVisitor<VectorType, true>())
+                .def(VectorNDArrayAssignVisitor<VectorType, true>())
+                .add_property("numElements", &VectorType::getNumElements);
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportSparseVectorTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	SparseVectorExport<Math::SparseFVector>("SparseFVector");
-	SparseVectorExport<Math::SparseDVector>("SparseDVector");
-	SparseVectorExport<Math::SparseLVector>("SparseLVector");
-	SparseVectorExport<Math::SparseULVector>("SparseULVector");
+    SparseVectorExport<Math::SparseFVector>("SparseFVector");
+    SparseVectorExport<Math::SparseDVector>("SparseDVector");
+    SparseVectorExport<Math::SparseLVector>("SparseLVector");
+    SparseVectorExport<Math::SparseULVector>("SparseULVector");
 }

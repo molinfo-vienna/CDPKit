@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct FragmentType {};
+    struct FragmentType {};
 }
 
 
 void CDPLPythonConfGen::exportFragmentTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<FragmentType, boost::noncopyable>("FragmentType", python::no_init)
-		.def_readonly("CHAIN", &ConfGen::FragmentType::CHAIN)
-		.def_readonly("FLEXIBLE_RING_SYSTEM", &ConfGen::FragmentType::FLEXIBLE_RING_SYSTEM)
-		.def_readonly("RIGID_RING_SYSTEM", &ConfGen::FragmentType::RIGID_RING_SYSTEM);
+    python::class_<FragmentType, boost::noncopyable>("FragmentType", python::no_init)
+        .def_readonly("CHAIN", &ConfGen::FragmentType::CHAIN)
+        .def_readonly("FLEXIBLE_RING_SYSTEM", &ConfGen::FragmentType::FLEXIBLE_RING_SYSTEM)
+        .def_readonly("RIGID_RING_SYSTEM", &ConfGen::FragmentType::RIGID_RING_SYSTEM);
 }

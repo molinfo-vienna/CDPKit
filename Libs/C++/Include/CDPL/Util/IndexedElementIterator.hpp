@@ -37,139 +37,139 @@
 namespace CDPL
 {
 
-	namespace Util
-	{
+    namespace Util
+    {
 
-		/**
-		 * \brief A STL compatible random access iterator for container elements accessible by index.
-		 *
-		 * The rationale for \c %IndexedElementIterator is to allow STL-style iteration over
-		 * the elements of container classes which do not provide suitable iterators on their
-		 * own, but allow element access by some sort of consecutive index. \c %IndexedElementIterator
-		 * is a random access iterator and therefore provides both increment and decrement operations
-		 * and constant-time methods for moving forward and backward in arbitrary-sized steps.
-		 * Random access iterators essentially provide all of the operations of ordinary C/C++ pointer
-		 * arithmetic (see [\ref STLRAI] for details).
-		 *	
-		 * As an example consider the class \c StringContainer which provides access to stored
-		 * C++ strings via a method \c getString(std::size_t idx):
-		 * \code 
-		 * class StringContainer
-		 * {
-		 *
-		 * public:
-		 *
-		 *    .....
-		 *
-		 *    std::string getString(std::size_t idx); // retrieves a reference to a stored string by its index
-		 *    std::size_t getNumStrings() const;      // returns the total number of stored strings
-		 *
-		 *    .....
-		 *
-		 * };
-		 * \endcode
-		 *
-		 * To implement an iterator for string traversal using \c %IndexedElementIterator, one
-		 * first has to define a \c StringContainer access functor that returns a reference
-		 * to the string stored at a particular index. 
-		 *
-		 * A possible implementation of this functor may look like this:
-		 * \code
-		 * class StringAccessFunc
-		 * {
-		 *	
-		 * public:
-		 *    StringAccessFunc(StringContainer* cntnr): container(ctnr) {}
-		 *
-		 *    std::string& operator()(std::size_t idx) const {
-		 *       return container->getString(idx);
-		 *    }
-		 *
-		 *    bool operator==(const StringAccessFunc& func) const {
-		 *       return (func.container == container);
-		 *    }
-		 *
-		 * private:
-		 *    StringContainer* cntnr;
-		 * };
-		 * \endcode
-		 *
-		 * With \c StringAccessFunc in hands, the type of the string traversal iterator
-		 * for \c StringContainer is defined as:
-		 * \code
-		 * typedef IndexedElementIterator<std::string, StringAccessFunc> StringIterator;
-		 * \endcode
-		 *
-		 * \c StringIterator can then easily be used with STL-algorithms, e.g. to find a particular
-		 * string in a \c StringContainer instance:
-		 * \code
-		 * StringContainer str_molGraph;
-		 *
-		 *    ..... // do something with 'str_container'
-		 *
-		 * // does 'str_container' contain the string "foobar"?
-		 *
-		 * bool contains_foobar = (std::find(StringIterator(&str_container, 0),        
-		 *                                   StringIterator(&str_container, str_container.getNumStrings()),
-		 *                                   std::string("foobar")) 
-		 *                         != StringIterator(&str_container, str_container.getNumStrings())); 
-		 * \endcode
-		 *
-		 * \tparam ValueType The type of the elements accessed by the iterator.
-		 * \tparam AccessFunc The type of the functor object used to access the elements by index.
-		 * \tparam IndexType The type of the indices used to access the elements. 
-		 */
-		template <typename ValueType, typename AccessFunc, typename IndexType = std::size_t>
-		class IndexedElementIterator : 
-			public boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>, 
-										  ValueType, boost::random_access_traversal_tag>
-		{
+        /**
+         * \brief A STL compatible random access iterator for container elements accessible by index.
+         *
+         * The rationale for \c %IndexedElementIterator is to allow STL-style iteration over
+         * the elements of container classes which do not provide suitable iterators on their
+         * own, but allow element access by some sort of consecutive index. \c %IndexedElementIterator
+         * is a random access iterator and therefore provides both increment and decrement operations
+         * and constant-time methods for moving forward and backward in arbitrary-sized steps.
+         * Random access iterators essentially provide all of the operations of ordinary C/C++ pointer
+         * arithmetic (see [\ref STLRAI] for details).
+         *    
+         * As an example consider the class \c StringContainer which provides access to stored
+         * C++ strings via a method \c getString(std::size_t idx):
+         * \code 
+         * class StringContainer
+         * {
+         *
+         * public:
+         *
+         *    .....
+         *
+         *    std::string getString(std::size_t idx); // retrieves a reference to a stored string by its index
+         *    std::size_t getNumStrings() const;      // returns the total number of stored strings
+         *
+         *    .....
+         *
+         * };
+         * \endcode
+         *
+         * To implement an iterator for string traversal using \c %IndexedElementIterator, one
+         * first has to define a \c StringContainer access functor that returns a reference
+         * to the string stored at a particular index. 
+         *
+         * A possible implementation of this functor may look like this:
+         * \code
+         * class StringAccessFunc
+         * {
+         *    
+         * public:
+         *    StringAccessFunc(StringContainer* cntnr): container(ctnr) {}
+         *
+         *    std::string& operator()(std::size_t idx) const {
+         *       return container->getString(idx);
+         *    }
+         *
+         *    bool operator==(const StringAccessFunc& func) const {
+         *       return (func.container == container);
+         *    }
+         *
+         * private:
+         *    StringContainer* cntnr;
+         * };
+         * \endcode
+         *
+         * With \c StringAccessFunc in hands, the type of the string traversal iterator
+         * for \c StringContainer is defined as:
+         * \code
+         * typedef IndexedElementIterator<std::string, StringAccessFunc> StringIterator;
+         * \endcode
+         *
+         * \c StringIterator can then easily be used with STL-algorithms, e.g. to find a particular
+         * string in a \c StringContainer instance:
+         * \code
+         * StringContainer str_molGraph;
+         *
+         *    ..... // do something with 'str_container'
+         *
+         * // does 'str_container' contain the string "foobar"?
+         *
+         * bool contains_foobar = (std::find(StringIterator(&str_container, 0),        
+         *                                   StringIterator(&str_container, str_container.getNumStrings()),
+         *                                   std::string("foobar")) 
+         *                         != StringIterator(&str_container, str_container.getNumStrings())); 
+         * \endcode
+         *
+         * \tparam ValueType The type of the elements accessed by the iterator.
+         * \tparam AccessFunc The type of the functor object used to access the elements by index.
+         * \tparam IndexType The type of the indices used to access the elements. 
+         */
+        template <typename ValueType, typename AccessFunc, typename IndexType = std::size_t>
+        class IndexedElementIterator : 
+            public boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>, 
+                                          ValueType, boost::random_access_traversal_tag>
+        {
 
-			typedef typename boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>, 
-													ValueType, 
-													boost::random_access_traversal_tag>::difference_type DifferenceType;
+            typedef typename boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>, 
+                                                    ValueType, 
+                                                    boost::random_access_traversal_tag>::difference_type DifferenceType;
 
-		public:
-			/**
-			 * \brief Constructs and initializes the iterator with another iterator object.
-			 * \param it The other iterator.
-			 */
-			template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
-			IndexedElementIterator(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it): 
-				accessFunc(it.getAccessFunc()), index(it.getIndex()) {}
+        public:
+            /**
+             * \brief Constructs and initializes the iterator with another iterator object.
+             * \param it The other iterator.
+             */
+            template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+            IndexedElementIterator(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it): 
+                accessFunc(it.getAccessFunc()), index(it.getIndex()) {}
 
-			/**
-			 * \brief Constructs and initializes the iterator with the access function \a access_func
-			 *        and the start element index \a start_idx.
-			 * \param access_func The element access function to use.
-			 * \param start_idx The index of the first element the iterator will point to.
-			 */
-			IndexedElementIterator(const AccessFunc& access_func, IndexType start_idx): 
-				accessFunc(access_func), index(start_idx) {}
+            /**
+             * \brief Constructs and initializes the iterator with the access function \a access_func
+             *        and the start element index \a start_idx.
+             * \param access_func The element access function to use.
+             * \param start_idx The index of the first element the iterator will point to.
+             */
+            IndexedElementIterator(const AccessFunc& access_func, IndexType start_idx): 
+                accessFunc(access_func), index(start_idx) {}
 
-			const AccessFunc& getAccessFunc() const;
+            const AccessFunc& getAccessFunc() const;
 
-			IndexType getIndex() const;
+            IndexType getIndex() const;
 
-		private:   
-			friend class boost::iterator_core_access;
+        private:   
+            friend class boost::iterator_core_access;
 
-			void increment();
-			void decrement();
-			void advance(DifferenceType); 
+            void increment();
+            void decrement();
+            void advance(DifferenceType); 
 
-			template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
-			DifferenceType distance_to(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>&) const;
+            template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+            DifferenceType distance_to(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>&) const;
 
-			template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
-			bool equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>&) const;
+            template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+            bool equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>&) const;
 
-			ValueType& dereference() const;
+            ValueType& dereference() const;
 
-			AccessFunc accessFunc;
-			IndexType  index;
-		};
-	}
+            AccessFunc accessFunc;
+            IndexType  index;
+        };
+    }
 }
 
 
@@ -178,31 +178,31 @@ namespace CDPL
 template <typename ValueType, typename AccessFunc, typename IndexType>
 IndexType CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::getIndex() const
 {
-	return index;
+    return index;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 const AccessFunc& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::getAccessFunc() const
 {
-	return accessFunc;
+    return accessFunc;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::increment()
 {
-	index++;
+    index++;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::decrement()
 {
-	index--;
+    index--;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::advance(DifferenceType diff)
 {
-	index += diff;
+    index += diff;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
@@ -210,20 +210,20 @@ template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
 typename CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::DifferenceType
 CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::distance_to(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
 {
-	return (DifferenceType(it.index) - DifferenceType(index));
+    return (DifferenceType(it.index) - DifferenceType(index));
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
 bool CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
 {
-	return (index == it.index && accessFunc == it.accessFunc);
+    return (index == it.index && accessFunc == it.accessFunc);
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 ValueType& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::dereference() const
 {
-	return accessFunc(index);
+    return accessFunc(index);
 }
 
 #endif // CDPL_UTIL_INDEXEDELEMENTITERATOR_HPP

@@ -36,23 +36,23 @@
 namespace
 {
 
-	struct BondContainerWrapper : CDPL::Chem::BondContainer, boost::python::wrapper<CDPL::Chem::BondContainer> 
-	{
+    struct BondContainerWrapper : CDPL::Chem::BondContainer, boost::python::wrapper<CDPL::Chem::BondContainer> 
+    {
 
-		BONDCONTAINER_IMPL()
-	};
+        BONDCONTAINER_IMPL()
+    };
 }
 
 
 void CDPLPythonChem::exportBondContainer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondContainerWrapper, boost::noncopyable>("BondContainer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(BondContainerVirtualFunctionsVisitor())
-		.def(BondContainerSpecialFunctionsVisitor(false))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondContainer>())
-		.add_property("numBonds", &Chem::BondContainer::getNumBonds);
+    python::class_<BondContainerWrapper, boost::noncopyable>("BondContainer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(BondContainerVirtualFunctionsVisitor())
+        .def(BondContainerSpecialFunctionsVisitor(false))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondContainer>())
+        .add_property("numBonds", &Chem::BondContainer::getNumBonds);
 }

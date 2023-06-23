@@ -51,51 +51,51 @@ OptimolLogReader MMFF94TestData::STAT_LOG_READER(std::getenv("CDPKIT_TEST_DATA_D
 namespace
 {
 
-	void setupTestMolecule(Chem::Molecule& mol)
-	{
-		using namespace Chem;
-		using namespace ForceField;
+    void setupTestMolecule(Chem::Molecule& mol)
+    {
+        using namespace Chem;
+        using namespace ForceField;
 
-		for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-			Atom& atom = *it;
+        for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+            Atom& atom = *it;
 
-			if (MolProp::isMetal(atom) && !MolProp::isNonMetal(atom))
-				setFormalCharge(atom, getMOL2Charge(atom));
-		}
+            if (MolProp::isMetal(atom) && !MolProp::isNonMetal(atom))
+                setFormalCharge(atom, getMOL2Charge(atom));
+        }
 
-		perceiveSSSR(mol, false);
-		setRingFlags(mol, false);
-		setAromaticityFlags(mol, false);
-		calcTopologicalDistanceMatrix(mol, false);
-		perceiveMMFF94AromaticRings(mol, false);
-		assignMMFF94AtomTypes(mol, true, false);
-		assignMMFF94BondTypeIndices(mol, true, false);
-	}
+        perceiveSSSR(mol, false);
+        setRingFlags(mol, false);
+        setAromaticityFlags(mol, false);
+        calcTopologicalDistanceMatrix(mol, false);
+        perceiveMMFF94AromaticRings(mol, false);
+        assignMMFF94AtomTypes(mol, true, false);
+        assignMMFF94BondTypeIndices(mol, true, false);
+    }
 
-	void readTestMolecules(const std::string& fname, MMFF94TestData::MoleculeList& mol_list)
-	{
-		using namespace Chem;
+    void readTestMolecules(const std::string& fname, MMFF94TestData::MoleculeList& mol_list)
+    {
+        using namespace Chem;
 
-		Util::FileDataReader<MOL2MoleculeReader> mol_reader(fname);
+        Util::FileDataReader<MOL2MoleculeReader> mol_reader(fname);
 
-		while (true) {
-			BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
+        while (true) {
+            BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
 
-			if (!mol_reader.read(*mol_ptr))
-				return;
+            if (!mol_reader.read(*mol_ptr))
+                return;
 
-			setupTestMolecule(*mol_ptr);
-			mol_list.push_back(mol_ptr);
-		}
-	}
+            setupTestMolecule(*mol_ptr);
+            mol_list.push_back(mol_ptr);
+        }
+    }
 
-	struct Init
-	{
+    struct Init
+    {
 
-		Init() {
-			readTestMolecules(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"), MMFF94TestData::DYN_TEST_MOLECULES);
-			readTestMolecules(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94s_hypervalent.mol2"), MMFF94TestData::STAT_TEST_MOLECULES);
-		}
+        Init() {
+            readTestMolecules(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"), MMFF94TestData::DYN_TEST_MOLECULES);
+            readTestMolecules(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94s_hypervalent.mol2"), MMFF94TestData::STAT_TEST_MOLECULES);
+        }
 
-	} init;
+    } init;
 }

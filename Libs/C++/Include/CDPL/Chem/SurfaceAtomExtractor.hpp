@@ -45,162 +45,162 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
-		class AtomContainer;
-		class Fragment;
+        class MolecularGraph;
+        class AtomContainer;
+        class Fragment;
 
-		/**
-		 * \brief SurfaceAtomExtractor.
-		 */
-		class CDPL_CHEM_API SurfaceAtomExtractor
-		{
+        /**
+         * \brief SurfaceAtomExtractor.
+         */
+        class CDPL_CHEM_API SurfaceAtomExtractor
+        {
 
-		  public:
-			static constexpr double       DEF_PROBE_RADIUS    = 1.2;
-			static constexpr double       DEF_GRID_OVERSIZE   = 5.0;
-			static constexpr double       DEF_GRID_STEP_SIZE  = 0.75;
-			static constexpr double       DEF_MIN_SURFACE_ACC = 0.01;
-			static constexpr std::size_t  DEF_NUM_TEST_POINTS = 250;
+          public:
+            static constexpr double       DEF_PROBE_RADIUS    = 1.2;
+            static constexpr double       DEF_GRID_OVERSIZE   = 5.0;
+            static constexpr double       DEF_GRID_STEP_SIZE  = 0.75;
+            static constexpr double       DEF_MIN_SURFACE_ACC = 0.01;
+            static constexpr std::size_t  DEF_NUM_TEST_POINTS = 250;
 
-			/**
-			 * \brief Constructs the \c %SurfaceAtomExtractor instance.
-			 */
-			SurfaceAtomExtractor();
+            /**
+             * \brief Constructs the \c %SurfaceAtomExtractor instance.
+             */
+            SurfaceAtomExtractor();
 
-			/**
-			 * \brief Perceives the surface accessible atoms of \a cntnr and adds them to the fragment \a frag.
-			 * \param cntnr The set of atoms for which to perceive the surface accessibility.
-			 * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
-			 * \param frag The output fragment where to store the perceived surface atoms.
-			 */
-			SurfaceAtomExtractor(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
+            /**
+             * \brief Perceives the surface accessible atoms of \a cntnr and adds them to the fragment \a frag.
+             * \param cntnr The set of atoms for which to perceive the surface accessibility.
+             * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
+             * \param frag The output fragment where to store the perceived surface atoms.
+             */
+            SurfaceAtomExtractor(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
 
-			/**
-			 * \brief Specifies the radius of the probe sphere that determines the accessibility of the surface atoms.
-			 * \param radius The radius of the probe sphere.
-			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_PROBE_RADIUS.
-			 */
-			void setProbeRadius(double radius);
+            /**
+             * \brief Specifies the radius of the probe sphere that determines the accessibility of the surface atoms.
+             * \param radius The radius of the probe sphere.
+             * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_PROBE_RADIUS.
+             */
+            void setProbeRadius(double radius);
 
-			/*
-			 * \brief Returns the radius of the probe sphere that determines the accessibility of the surface atoms.
-			 * \return The used probe sphere radius.
-			 */
-			double getProbeRadius() const;
+            /*
+             * \brief Returns the radius of the probe sphere that determines the accessibility of the surface atoms.
+             * \return The used probe sphere radius.
+             */
+            double getProbeRadius() const;
 
-			/**
-			 * \brief Specifies the distance between the grid-points in space which store lists of atoms with proximal positions.
-			 * \param size The distance between the grid-points along each axis.
-			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_STEP_SIZE.
-			 */
-			void setGridStepSize(double size);
+            /**
+             * \brief Specifies the distance between the grid-points in space which store lists of atoms with proximal positions.
+             * \param size The distance between the grid-points along each axis.
+             * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_STEP_SIZE.
+             */
+            void setGridStepSize(double size);
 
-			/**
-			 * \brief Return the distance between the grid-points for proximal atom lookup.
-			 * \return The used distance between the grid-points along each axis.
-			 */
-			double getGridStepSize() const;
+            /**
+             * \brief Return the distance between the grid-points for proximal atom lookup.
+             * \return The used distance between the grid-points along each axis.
+             */
+            double getGridStepSize() const;
 
-			/**
-			 * \brief Specifies the margin that gets added to each side of the molecular graph's bounding-box for the calculation
-			 *        of the final atom-lookup grid dimensions.
-			 * \param size The margin that gets added to the molecular graph's bounding-box.
-			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_OVERSIZE.
-			 */
-			void setGridOversize(double size);
+            /**
+             * \brief Specifies the margin that gets added to each side of the molecular graph's bounding-box for the calculation
+             *        of the final atom-lookup grid dimensions.
+             * \param size The margin that gets added to the molecular graph's bounding-box.
+             * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_OVERSIZE.
+             */
+            void setGridOversize(double size);
 
-			/**
-			 * \brief Returns the margin that gets added to each side of the molecular graph's bounding-box for the calculation
-			 *        of the final atom-lookup grid dimensions.
-			 * \return The margin that gets added to the molecular graph's bounding-box.
-			 */
-			double getGridOversize() const;
+            /**
+             * \brief Returns the margin that gets added to each side of the molecular graph's bounding-box for the calculation
+             *        of the final atom-lookup grid dimensions.
+             * \return The margin that gets added to the molecular graph's bounding-box.
+             */
+            double getGridOversize() const;
 
-			/**
-			 * \brief Specifies the minimum fraction of test points that have to be accessible by the probe sphere 
-			 *        to consider an atom as a surface atom.
-			 * \param min_acc The minimum required fraction of accessible test points.
-			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_MIN_SURFACE_ACC.
-			 */
-			void setMinSurfaceAccessibility(double min_acc);
+            /**
+             * \brief Specifies the minimum fraction of test points that have to be accessible by the probe sphere 
+             *        to consider an atom as a surface atom.
+             * \param min_acc The minimum required fraction of accessible test points.
+             * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_MIN_SURFACE_ACC.
+             */
+            void setMinSurfaceAccessibility(double min_acc);
 
-			/**
-			 * \brief Returns the minimum fraction of test points that have to be accessible by the probe sphere 
-			 *        to consider an atom as a surface atom.
-			 * \return The minimum required fraction of accessible test points.
-			 */
-			double getMinSurfaceAccessibility() const;
+            /**
+             * \brief Returns the minimum fraction of test points that have to be accessible by the probe sphere 
+             *        to consider an atom as a surface atom.
+             * \return The minimum required fraction of accessible test points.
+             */
+            double getMinSurfaceAccessibility() const;
 
-			/**
-			 * \brief Specifies the number of points on the atom surface at which a test for surface accessibility is carried out.
-			 * \param num_points The number of test points.
-			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_NUM_TEST_POINTS.
-			 */
-			void setNumTestPoints(std::size_t num_points);
+            /**
+             * \brief Specifies the number of points on the atom surface at which a test for surface accessibility is carried out.
+             * \param num_points The number of test points.
+             * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_NUM_TEST_POINTS.
+             */
+            void setNumTestPoints(std::size_t num_points);
 
-			/**
-			 * \brief Returns the number of points on the atom surface at which a test for surface accessibility is carried out.
-			 * \return The number of test points.
-			 */
-			std::size_t getNumTestPoints() const;
+            /**
+             * \brief Returns the number of points on the atom surface at which a test for surface accessibility is carried out.
+             * \return The number of test points.
+             */
+            std::size_t getNumTestPoints() const;
 
-			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
-			 * \param func The atom 3D-coordinates function.
-			 */
-			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+            /**
+             * \brief Specifies a function for the retrieval of atom 3D-coordinates.
+             * \param func The atom 3D-coordinates function.
+             */
+            void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
-			/**
-			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
-			 * \return The registered atom 3D-coordinates function.
-			 */
-			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+            /**
+             * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+             * \return The registered atom 3D-coordinates function.
+             */
+            const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
-			/**
-			 * \brief Perceives the surface accessible atoms of \a cntnr that are part of \a molgraph and adds 
-			 *        them to the fragment \a frag.
-			 * \param cntnr The set of atoms for which to perceive the surface accessibility.
-			 * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
-			 * \param frag The output fragment where to store the perceived surface atoms.
-			 */
-			void extract(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
+            /**
+             * \brief Perceives the surface accessible atoms of \a cntnr that are part of \a molgraph and adds 
+             *        them to the fragment \a frag.
+             * \param cntnr The set of atoms for which to perceive the surface accessibility.
+             * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
+             * \param frag The output fragment where to store the perceived surface atoms.
+             */
+            void extract(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
 
-		  private:
-			typedef std::vector<double> AtomRadiusTable;
-			typedef std::vector<std::size_t> AtomIndexList;
-			typedef std::shared_ptr<AtomIndexList> AtomIndexListPtr;
-			typedef std::vector<AtomIndexListPtr> GridAtomLookupTable;
-			typedef std::vector<Math::Vector3D> Vector3DArray;
+          private:
+            typedef std::vector<double> AtomRadiusTable;
+            typedef std::vector<std::size_t> AtomIndexList;
+            typedef std::shared_ptr<AtomIndexList> AtomIndexListPtr;
+            typedef std::vector<AtomIndexListPtr> GridAtomLookupTable;
+            typedef std::vector<Math::Vector3D> Vector3DArray;
 
-			bool init(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph);
+            bool init(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph);
 
-			void transformCoordinates();
-			void calcBoundingBox();
-			void initGridAtomLookupTable();
-			void extractSurfaceAtoms(Fragment& frag);
+            void transformCoordinates();
+            void calcBoundingBox();
+            void initGridAtomLookupTable();
+            void extractSurfaceAtoms(Fragment& frag);
 
-			void initTestPoints();
+            void initTestPoints();
 
-			double                          probeRadius;
-			double                          gridOversize;
-			double                          gridStepSize;
-			double                          minSurfAcc;
-			std::size_t                     numTestPoints;
-			Atom3DCoordinatesFunction       coordsFunc;
-			const AtomContainer*            atomContainer;
-			const MolecularGraph*           parentMolGraph;
-			AtomRadiusTable                 atomRadii; 
-			AtomIndexList                   atomIndices; 
-			Math::Matrix<double>            svdU;
-			Vector3DArray                   atomCoords;
-			Vector3DArray                   testPoints;
-			Math::Vector3D                  bBoxMin;
-			Math::Vector3D                  bBoxMax;
-			std::size_t                     gridXSize;
-			std::size_t                     gridYSize;
-			std::size_t                     gridZSize;
-			GridAtomLookupTable             gridAtomLookup;
-		};
+            double                          probeRadius;
+            double                          gridOversize;
+            double                          gridStepSize;
+            double                          minSurfAcc;
+            std::size_t                     numTestPoints;
+            Atom3DCoordinatesFunction       coordsFunc;
+            const AtomContainer*            atomContainer;
+            const MolecularGraph*           parentMolGraph;
+            AtomRadiusTable                 atomRadii; 
+            AtomIndexList                   atomIndices; 
+            Math::Matrix<double>            svdU;
+            Vector3DArray                   atomCoords;
+            Vector3DArray                   testPoints;
+            Math::Vector3D                  bBoxMin;
+            Math::Vector3D                  bBoxMax;
+            std::size_t                     gridXSize;
+            std::size_t                     gridYSize;
+            std::size_t                     gridZSize;
+            GridAtomLookupTable             gridAtomLookup;
+        };
     }
 }
 

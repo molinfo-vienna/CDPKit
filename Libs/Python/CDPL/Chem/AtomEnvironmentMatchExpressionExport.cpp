@@ -31,14 +31,14 @@
 
 void CDPLPythonChem::exportAtomEnvironmentMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::AtomEnvironmentMatchExpression, Chem::AtomEnvironmentMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> >, 
-		boost::noncopyable>("AtomEnvironmentMatchExpression", python::no_init)
-		.def(python::init<const Chem::MolecularGraph::SharedPointer&, bool>((python::arg("self"), 
-																			 python::arg("env_pattern"), 
-																			 python::arg("not_match")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::AtomEnvironmentMatchExpression, Chem::AtomEnvironmentMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> >, 
+        boost::noncopyable>("AtomEnvironmentMatchExpression", python::no_init)
+        .def(python::init<const Chem::MolecularGraph::SharedPointer&, bool>((python::arg("self"), 
+                                                                             python::arg("env_pattern"), 
+                                                                             python::arg("not_match")))
+             [python::with_custodian_and_ward<1, 2>()]);
 }

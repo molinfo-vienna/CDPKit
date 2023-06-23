@@ -42,38 +42,38 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
-		class Bond;
-		class MolecularGraph;
+        class Atom;
+        class Bond;
+        class MolecularGraph;
     }
 
     namespace ForceField 
     {
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
-		 */
-		typedef std::function<unsigned int(const Chem::Atom&)> MMFF94NumericAtomTypeFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
+         */
+        typedef std::function<unsigned int(const Chem::Atom&)> MMFF94NumericAtomTypeFunction;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined symbolic MMFF94 atom type function.
-		 */
-		typedef std::function<const std::string&(const Chem::Atom&)> MMFF94SymbolicAtomTypeFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined symbolic MMFF94 atom type function.
+         */
+        typedef std::function<const std::string&(const Chem::Atom&)> MMFF94SymbolicAtomTypeFunction;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
-		 */
-		typedef std::function<double(const Chem::Atom&)> MMFF94AtomChargeFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
+         */
+        typedef std::function<double(const Chem::Atom&)> MMFF94AtomChargeFunction;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
-		 */
-		typedef std::function<unsigned int(const Chem::Bond&)> MMFF94BondTypeIndexFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
+         */
+        typedef std::function<unsigned int(const Chem::Bond&)> MMFF94BondTypeIndexFunction;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
-		 */
-		typedef std::function<const Chem::FragmentList::SharedPointer&(const Chem::MolecularGraph&)> MMFF94RingSetFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
+         */
+        typedef std::function<const Chem::FragmentList::SharedPointer&(const Chem::MolecularGraph&)> MMFF94RingSetFunction;
     }
 }
 

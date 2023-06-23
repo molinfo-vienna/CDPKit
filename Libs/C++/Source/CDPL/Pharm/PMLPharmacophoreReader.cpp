@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Pharm::PMLPharmacophoreReader::PMLPharmacophoreReader(std::istream& is): 
-	Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>(is), reader(new PMLDataReader(*this)) {}
+    Util::StreamDataReader<Pharmacophore, PMLPharmacophoreReader>(is), reader(new PMLDataReader(*this)) {}
 
 Pharm::PMLPharmacophoreReader::~PMLPharmacophoreReader() {}
 
 bool Pharm::PMLPharmacophoreReader::readData(std::istream& is, Pharmacophore& pharm, bool overwrite)
 {
-	try {
-		if (overwrite)
-			pharm.clear();
+    try {
+        if (overwrite)
+            pharm.clear();
 
-		return reader->readPharmacophore(is, pharm);
+        return reader->readPharmacophore(is, pharm);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PMLPharmacophoreReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PMLPharmacophoreReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Pharm::PMLPharmacophoreReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipPharmacophore(is);
+    try {
+        return reader->skipPharmacophore(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("PMLPharmacophoreReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("PMLPharmacophoreReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Pharm::PMLPharmacophoreReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

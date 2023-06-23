@@ -37,43 +37,43 @@
 namespace
 {
 
-	struct FeatureInteractionScoreWrapper : CDPL::Pharm::FeatureInteractionScore, boost::python::wrapper<CDPL::Pharm::FeatureInteractionScore> 
-	{
-	
-		typedef std::shared_ptr<FeatureInteractionScoreWrapper> SharedPointer;
+    struct FeatureInteractionScoreWrapper : CDPL::Pharm::FeatureInteractionScore, boost::python::wrapper<CDPL::Pharm::FeatureInteractionScore> 
+    {
+    
+        typedef std::shared_ptr<FeatureInteractionScoreWrapper> SharedPointer;
 
-		double operator()(const CDPL::Pharm::Feature& ftr1, const CDPL::Pharm::Feature& ftr2) const {
-			return this->get_override("__call__")(boost::ref(ftr1), boost::ref(ftr2));
-		}
+        double operator()(const CDPL::Pharm::Feature& ftr1, const CDPL::Pharm::Feature& ftr2) const {
+            return this->get_override("__call__")(boost::ref(ftr1), boost::ref(ftr2));
+        }
 
-		double operator()(const CDPL::Math::Vector3D& ftr1_pos, const CDPL::Pharm::Feature& ftr2) const {
-			return this->get_override("__call__")(boost::ref(ftr1_pos), boost::ref(ftr2));
-		}
-	};
+        double operator()(const CDPL::Math::Vector3D& ftr1_pos, const CDPL::Pharm::Feature& ftr2) const {
+            return this->get_override("__call__")(boost::ref(ftr1_pos), boost::ref(ftr2));
+        }
+    };
 
-	double callOperator1(CDPL::Pharm::FeatureInteractionScore& score, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
-	{
-		return score(ftr1, ftr2);
-	}
+    double callOperator1(CDPL::Pharm::FeatureInteractionScore& score, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+    {
+        return score(ftr1, ftr2);
+    }
 
-	double callOperator2(CDPL::Pharm::FeatureInteractionScore& score, const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
-	{
-		return score(ftr1_pos, ftr2);
-	}
+    double callOperator2(CDPL::Pharm::FeatureInteractionScore& score, const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
+    {
+        return score(ftr1_pos, ftr2);
+    }
 }
 
 
 void CDPLPythonPharm::exportFeatureInteractionScore()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::scope scope = python::class_<FeatureInteractionScoreWrapper, FeatureInteractionScoreWrapper::SharedPointer,
-										 boost::noncopyable>("FeatureInteractionScore", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureInteractionScore>())
-		.def("__call__", python::pure_virtual(&callOperator1), python::arg("self"), python::arg("ftr1"), python::arg("ftr2"))
-		.def("__call__", python::pure_virtual(&callOperator2), python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2"));
+    python::scope scope = python::class_<FeatureInteractionScoreWrapper, FeatureInteractionScoreWrapper::SharedPointer,
+                                         boost::noncopyable>("FeatureInteractionScore", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureInteractionScore>())
+        .def("__call__", python::pure_virtual(&callOperator1), python::arg("self"), python::arg("ftr1"), python::arg("ftr2"))
+        .def("__call__", python::pure_virtual(&callOperator2), python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2"));
 
-	python::register_ptr_to_python<Pharm::FeatureInteractionScore::SharedPointer>();
+    python::register_ptr_to_python<Pharm::FeatureInteractionScore::SharedPointer>();
 }

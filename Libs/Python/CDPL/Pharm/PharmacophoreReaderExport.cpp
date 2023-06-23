@@ -32,6 +32,6 @@
 
 void CDPLPythonPharm::exportPharmacophoreReader()
 {
-	CDPLPythonBase::DataReaderExport<CDPL::Pharm::Pharmacophore>("PharmacophoreReader", "pharm");
-	CDPLPythonUtil::CompoundDataReaderExport<CDPL::Pharm::Pharmacophore>("CompoundPharmacophoreReader");
+    CDPLPythonBase::DataReaderExport<CDPL::Pharm::Pharmacophore>("PharmacophoreReader", "pharm");
+    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Pharm::Pharmacophore>("CompoundPharmacophoreReader");
 }

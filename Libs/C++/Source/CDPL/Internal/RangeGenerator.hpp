@@ -33,55 +33,55 @@
 namespace CDPL
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		/**
-		 * \brief A function object for the generation of arithmetic progressions.
-		 * 
-		 * The generator object is initialized with the desired start value and value
-		 * difference of successive sequence members. To generate the actual sequence,
-		 * the function call operator has to be invoked repeatedly.
-		 *
-		 * Example:
-		 * \code
-		 *
-		 * std::vector<int> values; // storage for the generated sequence
-		 *
-		 * // generates the sequence 2, 5, 8, 11, 14, 17, 20, 23, 26, 29 and stores it in 'values'
-		 * std::generate_n(std::back_inserter(values), 10, RangeGenerator<int>(2, 3));
-		 * \endcode
-		 * \tparam T The type of the generated range values.
-		 */
-		template <typename T>
-		class RangeGenerator
-		{
+        /**
+         * \brief A function object for the generation of arithmetic progressions.
+         * 
+         * The generator object is initialized with the desired start value and value
+         * difference of successive sequence members. To generate the actual sequence,
+         * the function call operator has to be invoked repeatedly.
+         *
+         * Example:
+         * \code
+         *
+         * std::vector<int> values; // storage for the generated sequence
+         *
+         * // generates the sequence 2, 5, 8, 11, 14, 17, 20, 23, 26, 29 and stores it in 'values'
+         * std::generate_n(std::back_inserter(values), 10, RangeGenerator<int>(2, 3));
+         * \endcode
+         * \tparam T The type of the generated range values.
+         */
+        template <typename T>
+        class RangeGenerator
+        {
 
-		public:
-		   /**
-			* \brief Constructor initializing the generator object.
-			* \param start The start value of the sequence.
-			* \param inc The arithmetic difference of successive values.
-			*/
-			RangeGenerator(T start = T(), T inc = T(1)): 
-				startValue(start), increment(inc), currentValue(start) {}
+        public:
+           /**
+            * \brief Constructor initializing the generator object.
+            * \param start The start value of the sequence.
+            * \param inc The arithmetic difference of successive values.
+            */
+            RangeGenerator(T start = T(), T inc = T(1)): 
+                startValue(start), increment(inc), currentValue(start) {}
 
-		   /**
-			* \brief Returns the next value in the sequence.
-			* 
-			* The returned value is either the start value (on the first call) or the
-			* previously returned value incremented by the specified step-size.
-			*
-			* \return The next value in the sequence.
-			*/
-			T operator()();
+           /**
+            * \brief Returns the next value in the sequence.
+            * 
+            * The returned value is either the start value (on the first call) or the
+            * previously returned value incremented by the specified step-size.
+            *
+            * \return The next value in the sequence.
+            */
+            T operator()();
 
-		private:
-			T startValue;
-			T increment;
-			T currentValue;
-		};
-	}
+        private:
+            T startValue;
+            T increment;
+            T currentValue;
+        };
+    }
 }
 
 
@@ -90,10 +90,10 @@ namespace CDPL
 template <typename T>
 T CDPL::Internal::RangeGenerator<T>::operator()()
 {
-	T tmp = currentValue;
-	currentValue += increment;
+    T tmp = currentValue;
+    currentValue += increment;
 
-	return tmp;
+    return tmp;
 }
 
 #endif // CDPL_INTERNAL_RANGEGENERATOR_HPP

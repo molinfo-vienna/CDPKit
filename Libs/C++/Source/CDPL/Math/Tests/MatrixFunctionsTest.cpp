@@ -30,117 +30,117 @@
 
 BOOST_AUTO_TEST_CASE(MatrixFunctionsTest)
 {
-	using namespace CDPL;
-	using namespace Math;
+    using namespace CDPL;
+    using namespace Math;
 
-	BOOST_CHECK(AffineTransform4D() == AffineTransform4D());
-	BOOST_CHECK(!(AffineTransform4D() != AffineTransform4D()));
+    BOOST_CHECK(AffineTransform4D() == AffineTransform4D());
+    BOOST_CHECK(!(AffineTransform4D() != AffineTransform4D()));
 
-	BOOST_CHECK(AffineTransform4D() == IdentityMatrix<double>(4));
-	BOOST_CHECK(!(AffineTransform4D() != IdentityMatrix<double>(4)));
+    BOOST_CHECK(AffineTransform4D() == IdentityMatrix<double>(4));
+    BOOST_CHECK(!(AffineTransform4D() != IdentityMatrix<double>(4)));
 
-	BOOST_CHECK(AffineTransform4D() != AffineTransform3D());
-	BOOST_CHECK(!(AffineTransform4D() == AffineTransform3D()));
+    BOOST_CHECK(AffineTransform4D() != AffineTransform3D());
+    BOOST_CHECK(!(AffineTransform4D() == AffineTransform3D()));
 
-	BOOST_CHECK(ZeroMatrix<double>(4, 4) == ZeroMatrix<double>(4, 4));
-	BOOST_CHECK(ZeroMatrix<double>(4, 3) == ZeroMatrix<double>(4, 3));
-	BOOST_CHECK(ZeroMatrix<double>(3, 4) == ZeroMatrix<double>(3, 4));
+    BOOST_CHECK(ZeroMatrix<double>(4, 4) == ZeroMatrix<double>(4, 4));
+    BOOST_CHECK(ZeroMatrix<double>(4, 3) == ZeroMatrix<double>(4, 3));
+    BOOST_CHECK(ZeroMatrix<double>(3, 4) == ZeroMatrix<double>(3, 4));
 
-	BOOST_CHECK(ZeroMatrix<double>(3, 4) != ZeroMatrix<double>(4, 4));
-	BOOST_CHECK(ZeroMatrix<double>(4, 3) != ZeroMatrix<double>(4, 4));
+    BOOST_CHECK(ZeroMatrix<double>(3, 4) != ZeroMatrix<double>(4, 4));
+    BOOST_CHECK(ZeroMatrix<double>(4, 3) != ZeroMatrix<double>(4, 4));
 
-	BOOST_CHECK(ZeroMatrix<double>(5, 4) != ZeroMatrix<double>(4, 4));
-	BOOST_CHECK(ZeroMatrix<double>(4, 5) != ZeroMatrix<double>(4, 4));
+    BOOST_CHECK(ZeroMatrix<double>(5, 4) != ZeroMatrix<double>(4, 4));
+    BOOST_CHECK(ZeroMatrix<double>(4, 5) != ZeroMatrix<double>(4, 4));
 
-	BOOST_CHECK(ZeroMatrix<double>(5, 3) != ZeroMatrix<double>(4, 4));
-	BOOST_CHECK(ZeroMatrix<double>(3, 5) != ZeroMatrix<double>(4, 4));
-
-//-----
-
-	BOOST_CHECK(DMatrix() == DMatrix());
-	BOOST_CHECK(!(DMatrix() != DMatrix()));
+    BOOST_CHECK(ZeroMatrix<double>(5, 3) != ZeroMatrix<double>(4, 4));
+    BOOST_CHECK(ZeroMatrix<double>(3, 5) != ZeroMatrix<double>(4, 4));
 
 //-----
 
-	DMatrix m1 = ZeroMatrix<double>(3, 4);
-	DMatrix m2 = ZeroMatrix<double>(3, 4);
+    BOOST_CHECK(DMatrix() == DMatrix());
+    BOOST_CHECK(!(DMatrix() != DMatrix()));
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+//-----
 
-	m1(0, 0) = 2.2;
+    DMatrix m1 = ZeroMatrix<double>(3, 4);
+    DMatrix m2 = ZeroMatrix<double>(3, 4);
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(0, 0) = 2.2;
+    m1(0, 0) = 2.2;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m1(0, 2) = 0.2;
+    m2(0, 0) = 2.2;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(0, 2) = 0.2;
+    m1(0, 2) = 0.2;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m1(0, 1) = 3.3;
+    m2(0, 2) = 0.2;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(0, 1) = 3.3;
+    m1(0, 1) = 3.3;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m1(0, 3) = 5.0;
+    m2(0, 1) = 3.3;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(0, 3) = 5.0;
+    m1(0, 3) = 5.0;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m1(2, 0) = -0.2;
+    m2(0, 3) = 5.0;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(2, 0) = -0.2;
+    m1(2, 0) = -0.2;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m1(1, 0) = 0.29;
+    m2(2, 0) = -0.2;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(1, 0) = 0.29;
+    m1(1, 0) = 0.29;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m1(2, 2) = -5.29;
+    m2(1, 0) = 0.29;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 
-	m2(2, 2) = 5.29;
+    m1(2, 2) = -5.29;
 
-	BOOST_CHECK(m1 != m2);
-	BOOST_CHECK(!(m1 == m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
 
-	m2(2, 2) = -5.29;
+    m2(2, 2) = 5.29;
 
-	BOOST_CHECK(m1 == m2);
-	BOOST_CHECK(!(m1 != m2));
+    BOOST_CHECK(m1 != m2);
+    BOOST_CHECK(!(m1 == m2));
+
+    m2(2, 2) = -5.29;
+
+    BOOST_CHECK(m1 == m2);
+    BOOST_CHECK(!(m1 != m2));
 }
 

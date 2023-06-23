@@ -48,5 +48,5 @@ void CDPL::Descr::FeatureAutoCorrelation3DVectorCalculator::calculate(const Phar
 {
     vec.resize(getNumSteps() + 1, false);
 
-	AutoCorrelation3DVectorCalculator<Pharm::Feature>::calculate(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), vec);
+    AutoCorrelation3DVectorCalculator<Pharm::Feature>::calculate(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), vec);
 }

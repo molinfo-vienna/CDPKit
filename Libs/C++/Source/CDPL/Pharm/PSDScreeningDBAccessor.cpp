@@ -35,87 +35,87 @@ using namespace CDPL;
 
 
 Pharm::PSDScreeningDBAccessor::PSDScreeningDBAccessor():
-	impl(new PSDScreeningDBAccessorImpl())
+    impl(new PSDScreeningDBAccessorImpl())
 {}
 
 Pharm::PSDScreeningDBAccessor::PSDScreeningDBAccessor(const std::string& name):
-	impl(new PSDScreeningDBAccessorImpl())
+    impl(new PSDScreeningDBAccessorImpl())
 {
-	impl->open(name);
+    impl->open(name);
 }
-	
+    
 Pharm::PSDScreeningDBAccessor::~PSDScreeningDBAccessor() {}
 
 void Pharm::PSDScreeningDBAccessor::open(const std::string& name)
 {
-	impl->open(name);
+    impl->open(name);
 }
 
 void Pharm::PSDScreeningDBAccessor::close()
 {
-	impl->close();
+    impl->close();
 }
 
 const std::string& Pharm::PSDScreeningDBAccessor::getDatabaseName() const
 {
-	return impl->getDatabaseName();
+    return impl->getDatabaseName();
 }
 
 std::size_t Pharm::PSDScreeningDBAccessor::getNumMolecules() const
 {
-	return impl->getNumMolecules();
+    return impl->getNumMolecules();
 }
 
 std::size_t Pharm::PSDScreeningDBAccessor::getNumPharmacophores() const
 {
-	return impl->getNumPharmacophores();
+    return impl->getNumPharmacophores();
 }
 
 std::size_t Pharm::PSDScreeningDBAccessor::getNumPharmacophores(std::size_t mol_idx) const
 {
-	return impl->getNumPharmacophores(mol_idx);
+    return impl->getNumPharmacophores(mol_idx);
 }
 
 void Pharm::PSDScreeningDBAccessor::getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite) const
 {
-	if (overwrite)
-		mol.clear();
+    if (overwrite)
+        mol.clear();
 
-	impl->getMolecule(mol_idx, mol);
+    impl->getMolecule(mol_idx, mol);
 }
 
 void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite) const
 {
-	if (overwrite)
-		pharm.clear();
+    if (overwrite)
+        pharm.clear();
 
-	impl->getPharmacophore(pharm_idx, pharm);
+    impl->getPharmacophore(pharm_idx, pharm);
 }
 
 void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite) const
 {
-	if (overwrite)
-		pharm.clear();
+    if (overwrite)
+        pharm.clear();
 
-	impl->getPharmacophore(mol_idx, mol_conf_idx, pharm);
+    impl->getPharmacophore(mol_idx, mol_conf_idx, pharm);
 }
 
 std::size_t Pharm::PSDScreeningDBAccessor::getMoleculeIndex(std::size_t pharm_idx) const
 {
-	return impl->getMoleculeIndex(pharm_idx);
+    return impl->getMoleculeIndex(pharm_idx);
 }
 
 std::size_t Pharm::PSDScreeningDBAccessor::getConformationIndex(std::size_t pharm_idx) const
 {
-	return impl->getConformationIndex(pharm_idx);
+    return impl->getConformationIndex(pharm_idx);
 }
 
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessor::getFeatureCounts(std::size_t pharm_idx) const
 {
-	return impl->getFeatureCounts(pharm_idx);
+    return impl->getFeatureCounts(pharm_idx);
 }
 
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessor::getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const
 {
-	return impl->getFeatureCounts(mol_idx, mol_conf_idx);
+    return impl->getFeatureCounts(mol_idx, mol_conf_idx);
 }

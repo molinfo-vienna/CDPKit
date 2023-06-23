@@ -36,12 +36,12 @@
 #define MAKE_BOND_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)     \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Bond& bond) \
 {                                                      \
-	return CDPL::Vis::get##FUNC_SUFFIX(bond);          \
+    return CDPL::Vis::get##FUNC_SUFFIX(bond);          \
 }                                                      \
                                                        \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Bond& bond) \
 {                                                      \
-	return CDPL::Vis::has##FUNC_SUFFIX(bond);          \
+    return CDPL::Vis::has##FUNC_SUFFIX(bond);          \
 }
 
 #define EXPORT_BOND_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                     \
@@ -55,36 +55,36 @@ python::def("set"#FUNC_SUFFIX, &Vis::set##FUNC_SUFFIX, (python::arg("bond"), pyt
 namespace
 {
 
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Color&, Color)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LineWidth)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LineSpacing)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, StereoBondWedgeWidth)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, StereoBondHashSpacing)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ReactionCenterLineLength)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ReactionCenterLineSpacing)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, DoubleBondTrimLength)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, TripleBondTrimLength)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Font&, LabelFont)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelSize)
-	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelMargin)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Color&, Color)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LineWidth)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LineSpacing)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, StereoBondWedgeWidth)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, StereoBondHashSpacing)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ReactionCenterLineLength)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, ReactionCenterLineSpacing)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, DoubleBondTrimLength)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, TripleBondTrimLength)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::Font&, LabelFont)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelSize)
+    MAKE_BOND_FUNC_WRAPPERS(const CDPL::Vis::SizeSpecification&, LabelMargin)
 }
 
 
 void CDPLPythonVis::exportBondFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	EXPORT_BOND_FUNCS_INT_REF(Color, color)
-	EXPORT_BOND_FUNCS_INT_REF(LineWidth, width)
-	EXPORT_BOND_FUNCS_INT_REF(LineSpacing, spacing)
-	EXPORT_BOND_FUNCS_INT_REF(StereoBondWedgeWidth, width)
-	EXPORT_BOND_FUNCS_INT_REF(StereoBondHashSpacing, spacing)
-	EXPORT_BOND_FUNCS_INT_REF(ReactionCenterLineLength, length)
-	EXPORT_BOND_FUNCS_INT_REF(ReactionCenterLineSpacing, spacing)
-	EXPORT_BOND_FUNCS_INT_REF(DoubleBondTrimLength, length)
-	EXPORT_BOND_FUNCS_INT_REF(TripleBondTrimLength, length)
-	EXPORT_BOND_FUNCS_INT_REF(LabelFont, font)
-	EXPORT_BOND_FUNCS_INT_REF(LabelSize, size)
-	EXPORT_BOND_FUNCS_INT_REF(LabelMargin, margin)
+    EXPORT_BOND_FUNCS_INT_REF(Color, color)
+    EXPORT_BOND_FUNCS_INT_REF(LineWidth, width)
+    EXPORT_BOND_FUNCS_INT_REF(LineSpacing, spacing)
+    EXPORT_BOND_FUNCS_INT_REF(StereoBondWedgeWidth, width)
+    EXPORT_BOND_FUNCS_INT_REF(StereoBondHashSpacing, spacing)
+    EXPORT_BOND_FUNCS_INT_REF(ReactionCenterLineLength, length)
+    EXPORT_BOND_FUNCS_INT_REF(ReactionCenterLineSpacing, spacing)
+    EXPORT_BOND_FUNCS_INT_REF(DoubleBondTrimLength, length)
+    EXPORT_BOND_FUNCS_INT_REF(TripleBondTrimLength, length)
+    EXPORT_BOND_FUNCS_INT_REF(LabelFont, font)
+    EXPORT_BOND_FUNCS_INT_REF(LabelSize, size)
+    EXPORT_BOND_FUNCS_INT_REF(LabelMargin, margin)
 }

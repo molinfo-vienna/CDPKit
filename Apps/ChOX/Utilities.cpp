@@ -51,125 +51,125 @@
 
 
 void ChOX::drawText(QPainter& painter, const QString& text, unsigned int alignment, 
-					double width, double height, double margin)
+                    double width, double height, double margin)
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	QRect brect = painter.fontMetrics().boundingRect(text);
+    QRect brect = painter.fontMetrics().boundingRect(text);
 
-	double text_y_pos = 0.0;
+    double text_y_pos = 0.0;
 
-	switch (alignment & Alignment::V_ALIGNMENT_MASK) {
+    switch (alignment & Alignment::V_ALIGNMENT_MASK) {
 
-		case Alignment::TOP:
-			text_y_pos = margin - brect.top();
-			break;
+        case Alignment::TOP:
+            text_y_pos = margin - brect.top();
+            break;
 
-		default:
-			text_y_pos = height - brect.bottom() - margin;
-	}
+        default:
+            text_y_pos = height - brect.bottom() - margin;
+    }
 
-	double text_x_pos = 0.0;
+    double text_x_pos = 0.0;
 
-	switch (alignment & Alignment::H_ALIGNMENT_MASK) {
+    switch (alignment & Alignment::H_ALIGNMENT_MASK) {
 
-		case Alignment::RIGHT:
-			text_x_pos = width - brect.right() - margin;
-			break;
+        case Alignment::RIGHT:
+            text_x_pos = width - brect.right() - margin;
+            break;
 
-		case Alignment::LEFT:
-			text_x_pos = -brect.left() + margin;
-			break;
+        case Alignment::LEFT:
+            text_x_pos = -brect.left() + margin;
+            break;
 
-		default:
-			text_x_pos = width * 0.5 - brect.center().x();
+        default:
+            text_x_pos = width * 0.5 - brect.center().x();
 
-	}
+    }
 
-	painter.drawText(QPointF(text_x_pos, text_y_pos), text);
+    painter.drawText(QPointF(text_x_pos, text_y_pos), text);
 }
 
 void ChOX::initData(CDPL::Chem::Reaction& rxn)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(Molecule&)>(&initData), std::placeholders::_1));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(Molecule&)>(&initData), std::placeholders::_1));
 
-	perceiveComponentGroups(rxn, false);
+    perceiveComponentGroups(rxn, false);
 }
 
 void ChOX::initData(CDPL::Chem::Molecule& mol)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace MolProp;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace MolProp;
 
-	perceiveComponents(mol, false);
-	perceiveComponentGroups(mol, false);
-	perceiveSSSR(mol, false);
-	setRingFlags(mol, false);
-	calcTopologicalDistanceMatrix(mol, false);
+    perceiveComponents(mol, false);
+    perceiveComponentGroups(mol, false);
+    perceiveSSSR(mol, false);
+    setRingFlags(mol, false);
+    calcTopologicalDistanceMatrix(mol, false);
 
-	calcImplicitHydrogenCounts(mol, false);
-	perceiveHybridizationStates(mol, false);
-	setAromaticityFlags(mol, false);
-	calcCIPPriorities(mol, false);
+    calcImplicitHydrogenCounts(mol, false);
+    perceiveHybridizationStates(mol, false);
+    setAromaticityFlags(mol, false);
+    calcCIPPriorities(mol, false);
 
-	perceiveAtomStereoCenters(mol, false, true, false);
-	perceiveBondStereoCenters(mol, false);
+    perceiveAtomStereoCenters(mol, false, true, false);
+    perceiveBondStereoCenters(mol, false);
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
 
-		if (!getStereoCenterFlag(atom)) 
-			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
-		
-		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
-				 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
-			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+        if (!getStereoCenterFlag(atom)) 
+            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+        
+        else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
+                 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
+            setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
 
-	}
+    }
 
-	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
-		Bond& bond = *it;
+    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
+        Bond& bond = *it;
 
-		if (getStereoCenterFlag(bond) && (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF))
-			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
-	}
+        if (getStereoCenterFlag(bond) && (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF))
+            setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
+    }
 
-	setAtomSymbolsFromTypes(mol, false);
+    setAtomSymbolsFromTypes(mol, false);
 
-	buildMatchExpressionStrings(mol, false);
+    buildMatchExpressionStrings(mol, false);
 }
 
 void ChOX::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt, 
-							 const CDPL::Base::ControlParameterContainer& params)
+                             const CDPL::Base::ControlParameterContainer& params)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	if (opt_fmt == DataFormat::JME || ((opt_fmt == DataFormat::SDF || opt_fmt == DataFormat::MOL ||
-										opt_fmt == DataFormat::RDF || opt_fmt == DataFormat::RXN) &&
-									   (getCoordinatesDimensionParameter(params) == 2 || getMDLDimensionality(mol) == 2))) {
+    if (opt_fmt == DataFormat::JME || ((opt_fmt == DataFormat::SDF || opt_fmt == DataFormat::MOL ||
+                                        opt_fmt == DataFormat::RDF || opt_fmt == DataFormat::RXN) &&
+                                       (getCoordinatesDimensionParameter(params) == 2 || getMDLDimensionality(mol) == 2))) {
 
-		if (!hasCoordinates(mol, 2)) {
-			calc2DCoordinates(mol, true);
-			calcBond2DStereoFlags(mol, true);
-		}
-	}
+        if (!hasCoordinates(mol, 2)) {
+            calc2DCoordinates(mol, true);
+            calcBond2DStereoFlags(mol, true);
+        }
+    }
 }
 
 void ChOX::prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFormat& opt_fmt, 
-							 const CDPL::Base::ControlParameterContainer& params)
+                             const CDPL::Base::ControlParameterContainer& params)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  std::bind(static_cast<void (*)(Molecule&, const Base::DataFormat&,
-												 const Base::ControlParameterContainer&)>
-							(&prepareOutputData), std::placeholders::_1, std::ref(opt_fmt), std::ref(params)));
+    std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
+                  std::bind(static_cast<void (*)(Molecule&, const Base::DataFormat&,
+                                                 const Base::ControlParameterContainer&)>
+                            (&prepareOutputData), std::placeholders::_1, std::ref(opt_fmt), std::ref(params)));
 }

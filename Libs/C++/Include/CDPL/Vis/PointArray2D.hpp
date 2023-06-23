@@ -36,30 +36,30 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		class Rectangle2D;
+        class Rectangle2D;
 
-		/**
-		 * \brief Stores a set of points in 2D space.
-		 */
-		class CDPL_VIS_API PointArray2D : public Math::Vector2DArray
-		{
+        /**
+         * \brief Stores a set of points in 2D space.
+         */
+        class CDPL_VIS_API PointArray2D : public Math::Vector2DArray
+        {
 
-		public:
-			/**
-			 * \brief Translates all points by \a vec.
-			 * \param vec The translation vector.
-			 */
-			void translate(const Math::Vector2D& vec);
+        public:
+            /**
+             * \brief Translates all points by \a vec.
+             * \param vec The translation vector.
+             */
+            void translate(const Math::Vector2D& vec);
 
-			void getBounds(Rectangle2D& bounds) const;
+            void getBounds(Rectangle2D& bounds) const;
 
-		private:
-			const char* getClassName() const;
-		};
-	}
+        private:
+            const char* getClassName() const;
+        };
+    }
 }
 
 #endif // CDPL_VIS_POINTARRAY2D_HPP

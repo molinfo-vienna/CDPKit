@@ -28,9 +28,9 @@
 
 namespace CDPLPythonPharm
 {
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
+    
+    void registerFromPythonConverters();
+    void registerToPythonConverters();
 }
 
 #endif // CDPL_PYTHON_PHARM_CONVERTERREGISTRATION_HPP

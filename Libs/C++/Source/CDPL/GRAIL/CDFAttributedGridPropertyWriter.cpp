@@ -38,16 +38,16 @@ using namespace CDPL;
 
 void GRAIL::CDFAttributedGridPropertyWriter::registerExternalPropertyHandlers()
 {
-	Grid::CDFDataWriter::registerExternalPropertyHandler(&outputProperties);
+    Grid::CDFDataWriter::registerExternalPropertyHandler(&outputProperties);
 }
 
 unsigned int GRAIL::CDFAttributedGridPropertyWriter::outputProperties(const Grid::CDFDataWriter& writer, const Grid::AttributedGrid& grid, Internal::ByteBuffer& data) 
 {
-	if (hasFeatureType(grid))
-		writer.putIntProperty(CDF::AttributedGridProperty::FEATURE_TYPE, boost::numeric_cast<CDF::UIntType>(getFeatureType(grid)), data);
+    if (hasFeatureType(grid))
+        writer.putIntProperty(CDF::AttributedGridProperty::FEATURE_TYPE, boost::numeric_cast<CDF::UIntType>(getFeatureType(grid)), data);
 
-	if (hasTargetFeatureType(grid))
-		writer.putIntProperty(CDF::AttributedGridProperty::TARGET_FEATURE_TYPE, boost::numeric_cast<CDF::UIntType>(getTargetFeatureType(grid)), data);
+    if (hasTargetFeatureType(grid))
+        writer.putIntProperty(CDF::AttributedGridProperty::TARGET_FEATURE_TYPE, boost::numeric_cast<CDF::UIntType>(getTargetFeatureType(grid)), data);
 
-	return CDF::AttributedGridProperty::PROPERTY_HANDLER_ID;
+    return CDF::AttributedGridProperty::PROPERTY_HANDLER_ID;
 }

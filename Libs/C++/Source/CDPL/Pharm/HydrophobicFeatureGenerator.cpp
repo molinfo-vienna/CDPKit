@@ -49,7 +49,7 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t RING_SIZE_LIMIT = 7;
+    const std::size_t RING_SIZE_LIMIT = 7;
 }
 
 
@@ -62,21 +62,21 @@ constexpr unsigned int Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_GEOM;
 
 
 Pharm::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator():
-	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
-	hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
-	hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
+    featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
+    hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
+    hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
 {}
 
 Pharm::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen):
-	PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureTol(gen.featureTol), 
-	featureGeom(gen.featureGeom), hydThreshRing(gen.hydThreshRing), hydThreshChain(gen.hydThreshChain), 
-	hydThreshGroup(gen.hydThreshGroup)
+    PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureTol(gen.featureTol), 
+    featureGeom(gen.featureGeom), hydThreshRing(gen.hydThreshRing), hydThreshChain(gen.hydThreshChain), 
+    hydThreshGroup(gen.hydThreshGroup)
 {}
 
 Pharm::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm):
-	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
-	hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
-	hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
+    featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
+    hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
+    hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
 {
     generate(molgraph, pharm);
 }
@@ -85,632 +85,632 @@ Pharm::HydrophobicFeatureGenerator::~HydrophobicFeatureGenerator() {}
 
 void Pharm::HydrophobicFeatureGenerator::setFeatureType(unsigned int type)
 {
-	featureType = type;
+    featureType = type;
 }
 
 unsigned int Pharm::HydrophobicFeatureGenerator::getFeatureType() const
 {
-	return featureType;
+    return featureType;
 }
 
 void Pharm::HydrophobicFeatureGenerator::setFeatureTolerance(double tol)
 {
-	featureTol = tol;
+    featureTol = tol;
 }
 
 double Pharm::HydrophobicFeatureGenerator::getFeatureTolerance() const
 {
-	return featureTol;
+    return featureTol;
 }
 
 void Pharm::HydrophobicFeatureGenerator::setFeatureGeometry(unsigned int geom)
 {
-	featureGeom = geom;
+    featureGeom = geom;
 }
 
 unsigned int Pharm::HydrophobicFeatureGenerator::getFeatureGeometry() const
 {
-	return featureGeom;
+    return featureGeom;
 }
 
 void Pharm::HydrophobicFeatureGenerator::setRingHydrophobicityThreshold(double thresh)
 {
-	hydThreshRing = thresh;
+    hydThreshRing = thresh;
 }
 
 double Pharm::HydrophobicFeatureGenerator::getRingHydrophobicityThreshold() const
 {
-	return hydThreshRing;
+    return hydThreshRing;
 }
 
 void Pharm::HydrophobicFeatureGenerator::setChainHydrophobicityThreshold(double thresh)
 {
-	hydThreshChain = thresh;
+    hydThreshChain = thresh;
 }
 
 double Pharm::HydrophobicFeatureGenerator::getChainHydrophobicityThreshold() const
 {
-	return hydThreshChain;
+    return hydThreshChain;
 }
 
 void Pharm::HydrophobicFeatureGenerator::setGroupHydrophobicityThreshold(double thresh)
 {
-	hydThreshGroup = thresh;
+    hydThreshGroup = thresh;
 }
 
 double Pharm::HydrophobicFeatureGenerator::getGroupHydrophobicityThreshold() const
 {
-	return hydThreshGroup;
+    return hydThreshGroup;
 }
 
 Pharm::HydrophobicFeatureGenerator& Pharm::HydrophobicFeatureGenerator::operator=(const HydrophobicFeatureGenerator& gen)
 {
-	if (this == &gen)
-		return *this;
+    if (this == &gen)
+        return *this;
 
-	PatternBasedFeatureGenerator::operator=(gen);
+    PatternBasedFeatureGenerator::operator=(gen);
 
-	featureType = gen.featureType; 
-	featureTol = gen.featureTol; 
-	featureGeom = gen.featureGeom;
-	hydThreshRing = gen.hydThreshRing;
-	hydThreshChain = gen.hydThreshChain; 
-	hydThreshGroup = gen.hydThreshGroup;
+    featureType = gen.featureType; 
+    featureTol = gen.featureTol; 
+    featureGeom = gen.featureGeom;
+    hydThreshRing = gen.hydThreshRing;
+    hydThreshChain = gen.hydThreshChain; 
+    hydThreshGroup = gen.hydThreshGroup;
 
-	return *this;
+    return *this;
 }
 
 Pharm::FeatureGenerator::SharedPointer Pharm::HydrophobicFeatureGenerator::clone() const
 {
-	return FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator(*this));
+    return FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator(*this));
 }
 
 void Pharm::HydrophobicFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
-	init(molgraph);
+    init(molgraph);
 
-	genRingFeatures(pharm);
-	genGroupFeatures(pharm);
-	genChainFeatures(pharm);
+    genRingFeatures(pharm);
+    genGroupFeatures(pharm);
+    genChainFeatures(pharm);
 }
 
 void Pharm::HydrophobicFeatureGenerator::init(const Chem::MolecularGraph& molgraph)
 {
-	molGraph = &molgraph;
+    molGraph = &molgraph;
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
+    std::size_t num_atoms = molgraph.getNumAtoms();
 
-	procAtomMask.resize(num_atoms);
-	procAtomMask.reset();
+    procAtomMask.resize(num_atoms);
+    procAtomMask.reset();
 
-	hAtomMask.resize(num_atoms);
-	hAtomMask.reset();
+    hAtomMask.resize(num_atoms);
+    hAtomMask.reset();
 
-	tmpAtomMask.resize(num_atoms);
+    tmpAtomMask.resize(num_atoms);
 
-	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+    buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
 
-	getAtomHydrophobicities();
+    getAtomHydrophobicities();
 }
 
 void Pharm::HydrophobicFeatureGenerator::genRingFeatures(Pharmacophore& pharm)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	const FragmentList::BaseType& sssr = *getSSSR(*molGraph);
+    const FragmentList::BaseType& sssr = *getSSSR(*molGraph);
 
-	for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
-		const Fragment& ring = **it;
-	
-		if (!isHydrophobicRing(ring))
-			continue;
-	
-		emitFeature(featureAtoms, pharm, *it);
-	} 
+    for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
+        const Fragment& ring = **it;
+    
+        if (!isHydrophobicRing(ring))
+            continue;
+    
+        emitFeature(featureAtoms, pharm, *it);
+    } 
 }
-	
+    
 void Pharm::HydrophobicFeatureGenerator::genGroupFeatures(Pharmacophore& pharm)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t idx = 0;
+    std::size_t idx = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it, idx++) {
-		const Atom& atom = *it;
+    for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it, idx++) {
+        const Atom& atom = *it;
 
-		if (hAtomMask.test(idx))
-			continue;
+        if (hAtomMask.test(idx))
+            continue;
 
-		featureAtoms.clear();
+        featureAtoms.clear();
 
-		if (procAtomMask.test(idx))
-			continue; // Ignore already processed ring atoms?
+        if (procAtomMask.test(idx))
+            continue; // Ignore already processed ring atoms?
 
-		featureAtoms.push_back(&atom);
+        featureAtoms.push_back(&atom);
 
-		std::size_t num_hvy_bonds = 0;
-		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+        std::size_t num_hvy_bonds = 0;
+        Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-			const Atom& nbr_atom = *a_it;
+        for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+            const Atom& nbr_atom = *a_it;
 
-			if (!molGraph->containsBond(*b_it))
-				continue;
+            if (!molGraph->containsBond(*b_it))
+                continue;
 
-			if (!molGraph->containsAtom(nbr_atom))
-				continue;
+            if (!molGraph->containsAtom(nbr_atom))
+                continue;
 
-			std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
+            std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
 
-			if (hAtomMask.test(nbr_atom_idx))
-				continue;
+            if (hAtomMask.test(nbr_atom_idx))
+                continue;
 
-			num_hvy_bonds++;
+            num_hvy_bonds++;
 
-			if (procAtomMask.test(nbr_atom_idx))
-				continue;
+            if (procAtomMask.test(nbr_atom_idx))
+                continue;
 
-			if (MolProp::getHeavyAtomCount(nbr_atom, *molGraph) == 1)
-				featureAtoms.push_back(&nbr_atom);
-		}
+            if (MolProp::getHeavyAtomCount(nbr_atom, *molGraph) == 1)
+                featureAtoms.push_back(&nbr_atom);
+        }
 
-		// check if valid group
-		
-		if (num_hvy_bonds < 3 || featureAtoms.empty()) 
-			continue;
+        // check if valid group
+        
+        if (num_hvy_bonds < 3 || featureAtoms.empty()) 
+            continue;
 
-		buildAtomMask(featureAtoms, tmpAtomMask);
+        buildAtomMask(featureAtoms, tmpAtomMask);
 
-		procAtomMask |= tmpAtomMask;
+        procAtomMask |= tmpAtomMask;
 
-		if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
-			continue;
+        if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
+            continue;
 
-		// check min. summed hydrophobicity
+        // check min. summed hydrophobicity
 
-		if (calcSummedHydrophobicity(featureAtoms) < hydThreshGroup) 
-			continue;
+        if (calcSummedHydrophobicity(featureAtoms) < hydThreshGroup) 
+            continue;
 
-		emitFeature(featureAtoms, pharm, makeFragment(featureAtoms));
-	}
+        emitFeature(featureAtoms, pharm, makeFragment(featureAtoms));
+    }
 }
-	
+    
 void Pharm::HydrophobicFeatureGenerator::genChainFeatures(Pharmacophore& pharm)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_atoms = molGraph->getNumAtoms();
+    std::size_t num_atoms = molGraph->getNumAtoms();
 
-	for (std::size_t i = 0; i < num_atoms; i++)
-		if (atomHydTable[i] == 0.0)
-			procAtomMask.set(i);
-	
-	const FragmentList& sssr = *getSSSR(*molGraph);
-	
-	for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
-		const Fragment& ring = *it;
-	
-		if (ring.getNumAtoms() <= RING_SIZE_LIMIT) // check size
-			continue;
-	
-		// check if all atoms have not yet been processed 
+    for (std::size_t i = 0; i < num_atoms; i++)
+        if (atomHydTable[i] == 0.0)
+            procAtomMask.set(i);
+    
+    const FragmentList& sssr = *getSSSR(*molGraph);
+    
+    for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
+        const Fragment& ring = *it;
+    
+        if (ring.getNumAtoms() <= RING_SIZE_LIMIT) // check size
+            continue;
+    
+        // check if all atoms have not yet been processed 
 
-		tmpAtomMask.reset();
+        tmpAtomMask.reset();
 
-		for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it)
-			tmpAtomMask.set(molGraph->getAtomIndex(*it));
+        for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it)
+            tmpAtomMask.set(molGraph->getAtomIndex(*it));
 
-		if (tmpAtomMask.intersects(procAtomMask))
-			continue;
+        if (tmpAtomMask.intersects(procAtomMask))
+            continue;
 
-		procAtomMask |= tmpAtomMask;
+        procAtomMask |= tmpAtomMask;
 
-		// process ring as a chain
+        // process ring as a chain
 
-		chainAtoms.clear();
+        chainAtoms.clear();
 
-		std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
-					   std::back_inserter(chainAtoms), [](const Atom& atom) { return &atom; });
+        std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
+                       std::back_inserter(chainAtoms), [](const Atom& atom) { return &atom; });
 
-		processChain(pharm);
-	} 
+        processChain(pharm);
+    } 
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		if (procAtomMask.test(i))
-			continue;
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        if (procAtomMask.test(i))
+            continue;
 
-		const Atom& atom = molGraph->getAtom(i);
-			
-		if (!isChainEndAtom(atom))
-			continue;
+        const Atom& atom = molGraph->getAtom(i);
+            
+        if (!isChainEndAtom(atom))
+            continue;
 
-		chainAtoms.clear();
+        chainAtoms.clear();
 
-		extractChain(atom);
-		processChain(pharm);
-	}
+        extractChain(atom);
+        processChain(pharm);
+    }
 }
 
 void Pharm::HydrophobicFeatureGenerator::extractChain(const Chem::Atom& atom)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	chainAtoms.push_back(&atom);
-	procAtomMask.set(molGraph->getAtomIndex(atom));
+    chainAtoms.push_back(&atom);
+    procAtomMask.set(molGraph->getAtomIndex(atom));
 
-	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-		const Atom& nbr_atom = *a_it;
+    for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+        const Atom& nbr_atom = *a_it;
 
-		if (!molGraph->containsBond(*b_it))
-			continue;
+        if (!molGraph->containsBond(*b_it))
+            continue;
 
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
+        if (!molGraph->containsAtom(nbr_atom))
+            continue;
 
-		if (procAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
-			continue;
+        if (procAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
+            continue;
 
-		extractChain(nbr_atom);
-		return;
-	}
+        extractChain(nbr_atom);
+        return;
+    }
 }
 
 void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 {
-	if (chainAtoms.size() > 1 && (atomHydTable[molGraph->getAtomIndex(*chainAtoms.front())] > atomHydTable[molGraph->getAtomIndex(*chainAtoms.back())]))
-		std::reverse(chainAtoms.begin(), chainAtoms.end());
+    if (chainAtoms.size() > 1 && (atomHydTable[molGraph->getAtomIndex(*chainAtoms.front())] > atomHydTable[molGraph->getAtomIndex(*chainAtoms.back())]))
+        std::reverse(chainAtoms.begin(), chainAtoms.end());
 
-	while (!chainAtoms.empty()) {
-		double hyd_sum = 0.0;
+    while (!chainAtoms.empty()) {
+        double hyd_sum = 0.0;
 
-		featureAtoms.clear();
-		tmpAtomMask.reset();
+        featureAtoms.clear();
+        tmpAtomMask.reset();
 
-		while (!chainAtoms.empty() && hyd_sum < hydThreshChain) {
-			const Chem::Atom* atom = chainAtoms.back();
-			std::size_t atom_idx = molGraph->getAtomIndex(*atom);
-	
-			featureAtoms.push_back(atom);
-			chainAtoms.pop_back();
-			tmpAtomMask.set(atom_idx);
+        while (!chainAtoms.empty() && hyd_sum < hydThreshChain) {
+            const Chem::Atom* atom = chainAtoms.back();
+            std::size_t atom_idx = molGraph->getAtomIndex(*atom);
+    
+            featureAtoms.push_back(atom);
+            chainAtoms.pop_back();
+            tmpAtomMask.set(atom_idx);
 
-			hyd_sum += atomHydTable[atom_idx];
-		} 
+            hyd_sum += atomHydTable[atom_idx];
+        } 
 
-		if (hyd_sum < hydThreshChain)
-			break;
+        if (hyd_sum < hydThreshChain)
+            break;
 
-		if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
-			continue;
+        if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
+            continue;
 
-		Feature& feature = emitFeature(featureAtoms, pharm, makeFragment(featureAtoms), false);
-		const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+        Feature& feature = emitFeature(featureAtoms, pharm, makeFragment(featureAtoms), false);
+        const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-		if (!coords_func)
-			return;
+        if (!coords_func)
+            return;
 
-		try {
-			if (featureAtoms.size() == 1) {
-				set3DCoordinates(feature, coords_func(*featureAtoms[0]));
+        try {
+            if (featureAtoms.size() == 1) {
+                set3DCoordinates(feature, coords_func(*featureAtoms[0]));
 
-			} else {
-				bool term_atom1 = (MolProp::getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
-				bool term_atom2 = (MolProp::getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
+            } else {
+                bool term_atom1 = (MolProp::getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
+                bool term_atom2 = (MolProp::getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
 
-				if (term_atom1 && !term_atom2) {
-					set3DCoordinates(feature, coords_func(*featureAtoms.front()));
+                if (term_atom1 && !term_atom2) {
+                    set3DCoordinates(feature, coords_func(*featureAtoms.front()));
 
-				} else if (term_atom2 && !term_atom1) { 
-					set3DCoordinates(feature, coords_func(*featureAtoms.back()));
+                } else if (term_atom2 && !term_atom1) { 
+                    set3DCoordinates(feature, coords_func(*featureAtoms.back()));
 
-				} else {
-					Math::Vector3D pos;
+                } else {
+                    Math::Vector3D pos;
 
-					if (calcHydWeightedCentroid(featureAtoms, pos) > 0.0)
-						set3DCoordinates(feature, pos);
-				}
-			}
+                    if (calcHydWeightedCentroid(featureAtoms, pos) > 0.0)
+                        set3DCoordinates(feature, pos);
+                }
+            }
 
-		} catch (const Base::ItemNotFound& e) {
-		} catch (...) {
-			throw;
-		}
-	}
+        } catch (const Base::ItemNotFound& e) {
+        } catch (...) {
+            throw;
+        }
+    }
 }
 
 Pharm::Feature& Pharm::HydrophobicFeatureGenerator::emitFeature(const AtomList& alist, Pharmacophore& pharm, 
-																const Chem::Fragment::SharedPointer& substruct, 
-																bool set_pos) const
+                                                                const Chem::Fragment::SharedPointer& substruct, 
+                                                                bool set_pos) const
 {
-	Feature& feature = pharm.addFeature();
-	Math::Vector3D pos;
-	double tot_hyd = (set_pos ? calcHydWeightedCentroid(alist, pos) : calcSummedHydrophobicity(alist));
+    Feature& feature = pharm.addFeature();
+    Math::Vector3D pos;
+    double tot_hyd = (set_pos ? calcHydWeightedCentroid(alist, pos) : calcSummedHydrophobicity(alist));
 
-	setType(feature, featureType);
-	setTolerance(feature, featureTol);
-	setGeometry(feature, featureGeom);
-	setSubstructure(feature, substruct);
-	setHydrophobicity(feature, std::abs(tot_hyd));
+    setType(feature, featureType);
+    setTolerance(feature, featureTol);
+    setGeometry(feature, featureGeom);
+    setSubstructure(feature, substruct);
+    setHydrophobicity(feature, std::abs(tot_hyd));
 
-	if (set_pos && tot_hyd > 0.0)
-		set3DCoordinates(feature, pos);
+    if (set_pos && tot_hyd > 0.0)
+        set3DCoordinates(feature, pos);
 
-	return feature;
+    return feature;
 }
 
 bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment& ring)
 { 
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_atoms = ring.getNumAtoms();
+    std::size_t num_atoms = ring.getNumAtoms();
 
-	if (num_atoms > RING_SIZE_LIMIT)
-		return false;
+    if (num_atoms > RING_SIZE_LIMIT)
+        return false;
 
-	featureAtoms.clear();
+    featureAtoms.clear();
 
-	std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
-				   std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
+    std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
+                   std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
 
-	buildAtomMask(featureAtoms, tmpAtomMask);
+    buildAtomMask(featureAtoms, tmpAtomMask);
 
-	procAtomMask |= tmpAtomMask;
+    procAtomMask |= tmpAtomMask;
 
-	if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
-		return false;
+    if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
+        return false;
 
-	// check min. summed hydrophobicity
+    // check min. summed hydrophobicity
 
-	if (calcSummedHydrophobicity(featureAtoms) < hydThreshRing) 
-		return false;
+    if (calcSummedHydrophobicity(featureAtoms) < hydThreshRing) 
+        return false;
 
-	// check at least 2 neighboring atoms with h>0 and no substituent of more than 2 atoms 
+    // check at least 2 neighboring atoms with h>0 and no substituent of more than 2 atoms 
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		const Atom& atom1 = *featureAtoms[i];
+    for (std::size_t i = 0; i < num_atoms; i++) {
+        const Atom& atom1 = *featureAtoms[i];
 
-		if (atomHydTable[molGraph->getAtomIndex(atom1)] <= 0.0)
-			continue;
+        if (atomHydTable[molGraph->getAtomIndex(atom1)] <= 0.0)
+            continue;
 
-		const Atom& atom2 = *featureAtoms[(i + 1) % num_atoms];
+        const Atom& atom2 = *featureAtoms[(i + 1) % num_atoms];
 
-		if (atomHydTable[molGraph->getAtomIndex(atom2)] <= 0.0) {
-			i++;
-			continue;
-		}
+        if (atomHydTable[molGraph->getAtomIndex(atom2)] <= 0.0) {
+            i++;
+            continue;
+        }
 
-		if (hasSubstWithMoreThan2Atoms(atom1, ring, true))
-			continue;
+        if (hasSubstWithMoreThan2Atoms(atom1, ring, true))
+            continue;
 
-		if (hasSubstWithMoreThan2Atoms(atom2, ring, true)) {
-			i++;
-			continue;
-		}
+        if (hasSubstWithMoreThan2Atoms(atom2, ring, true)) {
+            i++;
+            continue;
+        }
 
-	    return true;
-	}
+        return true;
+    }
 
-	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+    const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (!coords_func)
-		return true;
+    if (!coords_func)
+        return true;
 
-	// check if all substituents are on one side of the plane of the ring
+    // check if all substituents are on one side of the plane of the ring
 
-	Math::Vector3D plane_dir, tmp;
+    Math::Vector3D plane_dir, tmp;
 
-	if (!calcPlaneFeatureOrientation(featureAtoms, plane_dir, tmp))
-		return true;
+    if (!calcPlaneFeatureOrientation(featureAtoms, plane_dir, tmp))
+        return true;
 
-	int subst_side = 0;
-	const double subst_ang_thresh = std::cos(82.5 / 180.0 * M_PI); // plane angle threshold for substituents lying in the ring plane
+    int subst_side = 0;
+    const double subst_ang_thresh = std::cos(82.5 / 180.0 * M_PI); // plane angle threshold for substituents lying in the ring plane
 
-	for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		const Math::Vector3D& atom_pos = coords_func(atom);
-		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        const Math::Vector3D& atom_pos = coords_func(atom);
+        Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-			const Atom& nbr_atom = *a_it;
+        for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+            const Atom& nbr_atom = *a_it;
 
-			if (ring.containsAtom(nbr_atom))
-				continue;
+            if (ring.containsAtom(nbr_atom))
+                continue;
 
-			if (!molGraph->containsBond(*b_it))
-				continue;
+            if (!molGraph->containsBond(*b_it))
+                continue;
 
-			if (!molGraph->containsAtom(nbr_atom))
-				continue;
+            if (!molGraph->containsAtom(nbr_atom))
+                continue;
 
-			if (hAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
-				continue;
+            if (hAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
+                continue;
 
-			tmp.assign(coords_func(nbr_atom) - atom_pos);
-			tmp /= length(tmp);
+            tmp.assign(coords_func(nbr_atom) - atom_pos);
+            tmp /= length(tmp);
 
-			double inner_prod = innerProd(tmp, plane_dir);
+            double inner_prod = innerProd(tmp, plane_dir);
 
-			if (std::abs(inner_prod) <= subst_ang_thresh)
-				continue;
+            if (std::abs(inner_prod) <= subst_ang_thresh)
+                continue;
 
-			int sign = (inner_prod < 0.0 ? -1 : 1);
+            int sign = (inner_prod < 0.0 ? -1 : 1);
 
-			if (subst_side == 0)
-				subst_side = sign;
+            if (subst_side == 0)
+                subst_side = sign;
 
-			else if (subst_side != sign) 
-				return false;
-		}
-	}
+            else if (subst_side != sign) 
+                return false;
+        }
+    }
 
-	return true;
+    return true;
 }
 
 bool Pharm::HydrophobicFeatureGenerator::hasSubstWithMoreThan2Atoms(const Chem::Atom& atom, const Chem::Fragment& ring, bool first_level) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-		const Atom& nbr_atom = *a_it;
+    for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+        const Atom& nbr_atom = *a_it;
 
-		if (ring.containsAtom(nbr_atom))
-			continue;
+        if (ring.containsAtom(nbr_atom))
+            continue;
 
-		if (!molGraph->containsBond(*b_it))
-			continue;
+        if (!molGraph->containsBond(*b_it))
+            continue;
 
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
+        if (!molGraph->containsAtom(nbr_atom))
+            continue;
 
-		if (hAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
-			continue;
+        if (hAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
+            continue;
 
-		std::size_t hvy_cnt = MolProp::getHeavyAtomCount(nbr_atom, *molGraph);
+        std::size_t hvy_cnt = MolProp::getHeavyAtomCount(nbr_atom, *molGraph);
 
-		if (!first_level) 
-			return (hvy_cnt > 1);
+        if (!first_level) 
+            return (hvy_cnt > 1);
 
-		if (hvy_cnt > 2)
-			return true;
-		
-		if (hvy_cnt < 2)
-			continue;
+        if (hvy_cnt > 2)
+            return true;
+        
+        if (hvy_cnt < 2)
+            continue;
 
-		if (hasSubstWithMoreThan2Atoms(nbr_atom, ring, false))
-			return true;
-	}
+        if (hasSubstWithMoreThan2Atoms(nbr_atom, ring, false))
+            return true;
+    }
 
-	return false;
+    return false;
 }
 
 double Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomList& alist, Math::Vector3D& centroid) const
 {
-	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+    const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (!coords_func)
-		return false;
+    if (!coords_func)
+        return false;
 
-	double total_hyd = 0.0;
-	bool no_coords = false;
-	
-	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
-		const Chem::Atom& atom = **it;
-		double atom_hyd = atomHydTable[molGraph->getAtomIndex(atom)];
+    double total_hyd = 0.0;
+    bool no_coords = false;
+    
+    for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
+        const Chem::Atom& atom = **it;
+        double atom_hyd = atomHydTable[molGraph->getAtomIndex(atom)];
 
-		if (!no_coords && coords_func) {
-			try {
-				centroid.plusAssign(coords_func(atom) * atom_hyd);
-			} catch (const Base::ItemNotFound& e) {
-				no_coords = true;
-			} catch (...) {
-				throw;
-			}
-		}
-		
-		total_hyd += atom_hyd;
-	}
+        if (!no_coords && coords_func) {
+            try {
+                centroid.plusAssign(coords_func(atom) * atom_hyd);
+            } catch (const Base::ItemNotFound& e) {
+                no_coords = true;
+            } catch (...) {
+                throw;
+            }
+        }
+        
+        total_hyd += atom_hyd;
+    }
 
-	if (total_hyd == 0.0)
-		return 0.0;
+    if (total_hyd == 0.0)
+        return 0.0;
 
-	if (no_coords)
-		return -total_hyd;
-	
-	centroid /= total_hyd;
+    if (no_coords)
+        return -total_hyd;
+    
+    centroid /= total_hyd;
 
-	return total_hyd;
+    return total_hyd;
 }
 
 void Pharm::HydrophobicFeatureGenerator::getAtomHydrophobicities()
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::size_t num_atoms = molGraph->getNumAtoms();
+    std::size_t num_atoms = molGraph->getNumAtoms();
 
-	atomHydTable.resize(num_atoms);
+    atomHydTable.resize(num_atoms);
 
-	for (std::size_t i = 0; i < num_atoms; i++)
-		atomHydTable[i] = MolProp::getHydrophobicity(molGraph->getAtom(i));
+    for (std::size_t i = 0; i < num_atoms; i++)
+        atomHydTable[i] = MolProp::getHydrophobicity(molGraph->getAtom(i));
 }
 
 void Pharm::HydrophobicFeatureGenerator::buildAtomMask(const AtomList& alist, Util::BitSet& mask) const
 {
-	mask.reset();
+    mask.reset();
 
-	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it)
-		mask.set(molGraph->getAtomIndex(**it));
+    for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it)
+        mask.set(molGraph->getAtomIndex(**it));
 }
 
 double Pharm::HydrophobicFeatureGenerator::calcSummedHydrophobicity(const AtomList& alist) const
 {
-	double total_hyd = 0.0;
+    double total_hyd = 0.0;
 
-	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) 
-		total_hyd += atomHydTable[molGraph->getAtomIndex(**it)];
+    for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) 
+        total_hyd += atomHydTable[molGraph->getAtomIndex(**it)];
 
-	return total_hyd;
+    return total_hyd;
 }
 
 Chem::Fragment::SharedPointer Pharm::HydrophobicFeatureGenerator::makeFragment(const AtomList& alist) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	Fragment::SharedPointer frag(new Fragment());
+    Fragment::SharedPointer frag(new Fragment());
 
-	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) 
-		frag->addAtom(**it);
+    for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) 
+        frag->addAtom(**it);
 
-	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
-		const Atom& atom = **it;
-		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
+        const Atom& atom = **it;
+        Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-			const Atom& nbr_atom = *a_it;
+        for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+            const Atom& nbr_atom = *a_it;
 
-			if (!frag->containsAtom(nbr_atom))
-				continue;
+            if (!frag->containsAtom(nbr_atom))
+                continue;
 
-			const Bond& nbr_bond = *b_it;
+            const Bond& nbr_bond = *b_it;
 
-			if (!molGraph->containsBond(nbr_bond))
-				continue;
-			
-			frag->addBond(nbr_bond);
-		}
-	}
+            if (!molGraph->containsBond(nbr_bond))
+                continue;
+            
+            frag->addBond(nbr_bond);
+        }
+    }
 
-	return frag;
+    return frag;
 }
 
 bool Pharm::HydrophobicFeatureGenerator::isChainEndAtom(const Chem::Atom& atom) const
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	bool found_unproc_nbr = false;
-	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+    bool found_unproc_nbr = false;
+    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
-	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-		const Atom& nbr_atom = *a_it;
+    for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+        const Atom& nbr_atom = *a_it;
 
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
+        if (!molGraph->containsAtom(nbr_atom))
+            continue;
 
-		const Bond& nbr_bond = *b_it;
+        const Bond& nbr_bond = *b_it;
 
-		if (!molGraph->containsBond(nbr_bond))
-			continue;
-			
-		if (!procAtomMask.test(molGraph->getAtomIndex(nbr_atom))) {
-			if (found_unproc_nbr)
-				return false;
+        if (!molGraph->containsBond(nbr_bond))
+            continue;
+            
+        if (!procAtomMask.test(molGraph->getAtomIndex(nbr_atom))) {
+            if (found_unproc_nbr)
+                return false;
 
-			found_unproc_nbr = true;
-		}
-	}
+            found_unproc_nbr = true;
+        }
+    }
 
-	return true;
+    return true;
 }

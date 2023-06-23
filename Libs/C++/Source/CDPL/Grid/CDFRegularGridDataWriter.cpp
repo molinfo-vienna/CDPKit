@@ -40,82 +40,82 @@ using namespace CDPL;
 
 bool Grid::CDFRegularGridDataWriter::writeGrid(std::ostream& os, const DRegularGrid& grid)
 {
-	writeGrid(grid, dataBuffer);
+    writeGrid(grid, dataBuffer);
 
-	return writeRecordData(os);
+    return writeRecordData(os);
 }
 
 void Grid::CDFRegularGridDataWriter::writeGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf)
 {
-	init();
+    init();
 
-	bbuf.setIOPointer(0);
+    bbuf.setIOPointer(0);
 
-	appendGrid(grid, bbuf);
+    appendGrid(grid, bbuf);
 
-	bbuf.resize(bbuf.getIOPointer());
+    bbuf.resize(bbuf.getIOPointer());
 }
 
 void Grid::CDFRegularGridDataWriter::appendGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf)
 {
-	std::size_t init_pos = bbuf.getIOPointer();
+    std::size_t init_pos = bbuf.getIOPointer();
 
-	bbuf.setIOPointer(init_pos + CDF::HEADER_SIZE);
+    bbuf.setIOPointer(init_pos + CDF::HEADER_SIZE);
 
-	outputGridData(grid, bbuf);
+    outputGridData(grid, bbuf);
 
-	std::size_t saved_pos = bbuf.getIOPointer();
+    std::size_t saved_pos = bbuf.getIOPointer();
 
-	bbuf.setIOPointer(init_pos);
+    bbuf.setIOPointer(init_pos);
 
-	outputGridHeader(grid, bbuf, saved_pos - init_pos - CDF::HEADER_SIZE);
+    outputGridHeader(grid, bbuf, saved_pos - init_pos - CDF::HEADER_SIZE);
 
-	bbuf.setIOPointer(saved_pos);
+    bbuf.setIOPointer(saved_pos);
 }
 
 void Grid::CDFRegularGridDataWriter::init()
 {
-	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
-	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
+    strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
+    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
 }
 
 void Grid::CDFRegularGridDataWriter::outputGridHeader(const DRegularGrid& grid, Internal::ByteBuffer& bbuf, std::size_t rec_size) const
 {
-	CDF::Header cdf_header;
+    CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(rec_size);
-	cdf_header.recordTypeID = CDF::DREGULAR_GRID_RECORD_ID;
-	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+    cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(rec_size);
+    cdf_header.recordTypeID = CDF::DREGULAR_GRID_RECORD_ID;
+    cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
-	putHeader(cdf_header, bbuf);
+    putHeader(cdf_header, bbuf);
 }
 
 void Grid::CDFRegularGridDataWriter::outputGridData(const DRegularGrid& grid, Internal::ByteBuffer& bbuf)
-{	
-	bbuf.putInt(CDF::BoolType(grid.getDataMode() == DRegularGrid::CELL), false);
+{    
+    bbuf.putInt(CDF::BoolType(grid.getDataMode() == DRegularGrid::CELL), false);
 
-	if (singlePrecisionFloats()) {
-		bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(float)), false);				
-		bbuf.putFloat(float(grid.getXStepSize()));
-		bbuf.putFloat(float(grid.getYStepSize()));
-		bbuf.putFloat(float(grid.getZStepSize()));
+    if (singlePrecisionFloats()) {
+        bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(float)), false);                
+        bbuf.putFloat(float(grid.getXStepSize()));
+        bbuf.putFloat(float(grid.getYStepSize()));
+        bbuf.putFloat(float(grid.getZStepSize()));
 
-	} else {
-		bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(typename DRegularGrid::CoordinatesValueType)), false);	
-		bbuf.putFloat(grid.getXStepSize());
-		bbuf.putFloat(grid.getYStepSize());
-		bbuf.putFloat(grid.getZStepSize());
-	}
+    } else {
+        bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(typename DRegularGrid::CoordinatesValueType)), false);    
+        bbuf.putFloat(grid.getXStepSize());
+        bbuf.putFloat(grid.getYStepSize());
+        bbuf.putFloat(grid.getZStepSize());
+    }
 
-	putGrid(grid, bbuf, false);
-	putCMatrix(grid.getCoordinatesTransform(), bbuf, false);
+    putGrid(grid, bbuf, false);
+    putCMatrix(grid.getCoordinatesTransform(), bbuf, false);
 
-	outputProperties(grid, bbuf);
+    outputProperties(grid, bbuf);
 }
 
 bool Grid::CDFRegularGridDataWriter::writeRecordData(std::ostream& os) const
 {
-	dataBuffer.writeBuffer(os);
+    dataBuffer.writeBuffer(os);
 
-	return os.good();
+    return os.good();
 }

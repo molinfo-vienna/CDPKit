@@ -32,17 +32,17 @@
 namespace 
 {
 
-	struct ConformerSamplingMode {};
+    struct ConformerSamplingMode {};
 }
 
 
 void CDPLPythonConfGen::exportConformerSamplingModes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ConformerSamplingMode, boost::noncopyable>("ConformerSamplingMode", python::no_init)
-		.def_readonly("AUTO", &ConfGen::ConformerSamplingMode::AUTO)
-		.def_readonly("SYSTEMATIC", &ConfGen::ConformerSamplingMode::SYSTEMATIC)
-		.def_readonly("STOCHASTIC", &ConfGen::ConformerSamplingMode::STOCHASTIC);
+    python::class_<ConformerSamplingMode, boost::noncopyable>("ConformerSamplingMode", python::no_init)
+        .def_readonly("AUTO", &ConfGen::ConformerSamplingMode::AUTO)
+        .def_readonly("SYSTEMATIC", &ConfGen::ConformerSamplingMode::SYSTEMATIC)
+        .def_readonly("STOCHASTIC", &ConfGen::ConformerSamplingMode::STOCHASTIC);
 }

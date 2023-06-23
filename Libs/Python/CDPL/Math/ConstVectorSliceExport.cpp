@@ -40,50 +40,50 @@
 namespace
 {
 
-	template <typename ExpressionType>
-	struct ConstVectorSliceExport
-	{
-	
-		typedef CDPL::Math::Slice<std::size_t, std::ptrdiff_t> SliceType;
-		typedef CDPL::Math::VectorSlice<const ExpressionType> VectorSliceType;
-		typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SliceType, VectorSliceType> VectorSliceWrapper;
-		typedef typename VectorSliceWrapper::ExpressionPointerType ExpressionPointerType;
-		typedef typename VectorSliceWrapper::SharedPointer WrapperPointerType;
+    template <typename ExpressionType>
+    struct ConstVectorSliceExport
+    {
+    
+        typedef CDPL::Math::Slice<std::size_t, std::ptrdiff_t> SliceType;
+        typedef CDPL::Math::VectorSlice<const ExpressionType> VectorSliceType;
+        typedef CDPLPythonMath::VectorExpressionProxyWrapper<ExpressionType, SliceType, VectorSliceType> VectorSliceWrapper;
+        typedef typename VectorSliceWrapper::ExpressionPointerType ExpressionPointerType;
+        typedef typename VectorSliceWrapper::SharedPointer WrapperPointerType;
 
-		ConstVectorSliceExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ConstVectorSliceExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<VectorSliceWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
-				.def(python::init<const VectorSliceWrapper&>((python::arg("self"), python::arg("s"))))
-				.def(python::init<const ExpressionPointerType&, const SliceType&>((python::arg("self"), python::arg("e"), python::arg("s"))))
-				.def("getStart", &VectorSliceType::getStart, python::arg("self"))
-				.def("getStride", &VectorSliceType::getStride, python::arg("self"))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorSliceType>())
-				.def(ConstVectorVisitor<VectorSliceType>("s"))
-				.def(WrappedDataVisitor<VectorSliceWrapper>())
-				.add_property("start", &VectorSliceType::getStart)
-				.add_property("stride", &VectorSliceType::getStride);
+            python::class_<VectorSliceWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+                .def(python::init<const VectorSliceWrapper&>((python::arg("self"), python::arg("s"))))
+                .def(python::init<const ExpressionPointerType&, const SliceType&>((python::arg("self"), python::arg("e"), python::arg("s"))))
+                .def("getStart", &VectorSliceType::getStart, python::arg("self"))
+                .def("getStride", &VectorSliceType::getStride, python::arg("self"))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VectorSliceType>())
+                .def(ConstVectorVisitor<VectorSliceType>("s"))
+                .def(WrappedDataVisitor<VectorSliceWrapper>())
+                .add_property("start", &VectorSliceType::getStart)
+                .add_property("stride", &VectorSliceType::getStride);
 
-			python::def("slice", &slice1, (python::arg("e"), python::arg("s")));
-			python::def("slice", &slice2, (python::arg("e"), python::arg("start"), python::arg("stride"), python::arg("size")));
-		}
+            python::def("slice", &slice1, (python::arg("e"), python::arg("s")));
+            python::def("slice", &slice2, (python::arg("e"), python::arg("start"), python::arg("stride"), python::arg("size")));
+        }
 
-		static WrapperPointerType slice1(const ExpressionPointerType& e, const SliceType& s) {
-			return WrapperPointerType(new VectorSliceWrapper(e, s));
-		}
+        static WrapperPointerType slice1(const ExpressionPointerType& e, const SliceType& s) {
+            return WrapperPointerType(new VectorSliceWrapper(e, s));
+        }
 
-		static WrapperPointerType slice2(const ExpressionPointerType& e, std::size_t start, std::ptrdiff_t stride, std::size_t size) {
-			return WrapperPointerType(new VectorSliceWrapper(e, SliceType(start, stride, size)));
-		}
-	};
+        static WrapperPointerType slice2(const ExpressionPointerType& e, std::size_t start, std::ptrdiff_t stride, std::size_t size) {
+            return WrapperPointerType(new VectorSliceWrapper(e, SliceType(start, stride, size)));
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportConstVectorSliceTypes()
 {
-	ConstVectorSliceExport<ConstVectorExpression<float> >("ConstFVectorSlice");
-	ConstVectorSliceExport<ConstVectorExpression<double> >("ConstDVectorSlice");
-	ConstVectorSliceExport<ConstVectorExpression<long> >("ConstLVectorSlice");
-	ConstVectorSliceExport<ConstVectorExpression<unsigned long> >("ConstULVectorSlice");
+    ConstVectorSliceExport<ConstVectorExpression<float> >("ConstFVectorSlice");
+    ConstVectorSliceExport<ConstVectorExpression<double> >("ConstDVectorSlice");
+    ConstVectorSliceExport<ConstVectorExpression<long> >("ConstLVectorSlice");
+    ConstVectorSliceExport<ConstVectorExpression<unsigned long> >("ConstULVectorSlice");
 }

@@ -35,16 +35,16 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Feature;
-	};
+        class Feature;
+    };
 
     namespace GRAIL 
     {
-		
-		CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool lig_side);
+        
+        CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool lig_side);
     }
 }
 

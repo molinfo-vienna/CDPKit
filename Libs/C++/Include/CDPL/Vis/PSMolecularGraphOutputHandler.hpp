@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS]
-		 *        format.
-		 */
-		typedef Util::DefaultDataOutputHandler<PSMolecularGraphWriter, DataFormat::PS> PSMolecularGraphOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS]
+         *        format.
+         */
+        typedef Util::DefaultDataOutputHandler<PSMolecularGraphWriter, DataFormat::PS> PSMolecularGraphOutputHandler;    
+    }
 }
 
 #endif // CDPL_VIS_PSMOLECULARGRAPHOUTPUTHANDLER_HPP

@@ -42,12 +42,12 @@ using namespace CDPL;
 void ForceField::calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool strict, bool overwrite)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasMMFF94Charge, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasMMFF94Charge, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
     Util::DArray charges;
     MMFF94ChargeCalculator charge_calc(molgraph, charges, strict);
 
-	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), charges.getElementsBegin(), &setMMFF94Charge);
+    Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), charges.getElementsBegin(), &setMMFF94Charge);
 }

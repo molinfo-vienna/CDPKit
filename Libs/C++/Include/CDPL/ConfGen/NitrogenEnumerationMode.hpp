@@ -36,18 +36,18 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief Provides constants that are used to specify the mode of invertible nitrogen enumeration.
-		 */
-		namespace NitrogenEnumerationMode
-		{
-			
-			const int NONE               = 0; 
+        /**
+         * \brief Provides constants that are used to specify the mode of invertible nitrogen enumeration.
+         */
+        namespace NitrogenEnumerationMode
+        {
+            
+            const int NONE               = 0; 
 
-			const int ALL                = 1; 
+            const int ALL                = 1; 
 
-			const int UNSPECIFIED_STEREO = 2;
-		}
+            const int UNSPECIFIED_STEREO = 2;
+        }
     }
 }
 

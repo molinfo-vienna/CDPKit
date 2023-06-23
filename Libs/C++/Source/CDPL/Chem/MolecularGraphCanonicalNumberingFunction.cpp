@@ -38,25 +38,25 @@ using namespace CDPL;
 
 
 void Chem::calcCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
-								  unsigned int atom_flags, unsigned int bond_flags)
+                                  unsigned int atom_flags, unsigned int bond_flags)
 {
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   std::bind(std::equal_to<bool>(), false,
-											 std::bind(&hasCanonicalNumber, std::placeholders::_1))) == molgraph.getAtomsEnd())
-		return;
+    if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+                                   std::bind(std::equal_to<bool>(), false,
+                                             std::bind(&hasCanonicalNumber, std::placeholders::_1))) == molgraph.getAtomsEnd())
+        return;
 
-	Util::STArray numbering;
-	CanonicalNumberingCalculator calculator;
+    Util::STArray numbering;
+    CanonicalNumberingCalculator calculator;
 
-	if (atom_flags == AtomPropertyFlag::DEFAULT)
-		atom_flags = CanonicalNumberingCalculator::DEF_ATOM_PROPERTY_FLAGS;
+    if (atom_flags == AtomPropertyFlag::DEFAULT)
+        atom_flags = CanonicalNumberingCalculator::DEF_ATOM_PROPERTY_FLAGS;
 
-	if (bond_flags == BondPropertyFlag::DEFAULT)
-		bond_flags = CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLAGS;
+    if (bond_flags == BondPropertyFlag::DEFAULT)
+        bond_flags = CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLAGS;
 
-	calculator.setAtomPropertyFlags(atom_flags);
-	calculator.setBondPropertyFlags(bond_flags);
-	calculator.calculate(molgraph, numbering);
+    calculator.setAtomPropertyFlags(atom_flags);
+    calculator.setBondPropertyFlags(bond_flags);
+    calculator.calculate(molgraph, numbering);
 
-	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), numbering.getElementsBegin(), &setCanonicalNumber);
+    Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), numbering.getElementsBegin(), &setCanonicalNumber);
 }

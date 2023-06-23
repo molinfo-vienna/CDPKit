@@ -32,51 +32,51 @@ namespace
 
     void forEach(PyObject* seq, boost::python::object func)
     {
-	using namespace boost;
-	
-	PyObject *iter = PyObject_GetIter(seq);
+    using namespace boost;
+    
+    PyObject *iter = PyObject_GetIter(seq);
 
-	if (!iter) {
-	    PyErr_SetString(PyExc_TypeError, "forEach(): Iterable object expected as 1st argument");
+    if (!iter) {
+        PyErr_SetString(PyExc_TypeError, "forEach(): Iterable object expected as 1st argument");
 
-	    python::throw_error_already_set();
-	}
+        python::throw_error_already_set();
+    }
 
-	python::handle<> iter_handle(iter);
-	PyObject *item;
+    python::handle<> iter_handle(iter);
+    PyObject *item;
 
-	while ((item = PyIter_Next(iter)))
-	    func(python::handle<>(item));
+    while ((item = PyIter_Next(iter)))
+        func(python::handle<>(item));
     }
 
     void forEachPair(PyObject* seq1, PyObject* seq2, boost::python::object func)
     {
-	using namespace boost;
-	
-	PyObject *iter1 = PyObject_GetIter(seq1);
+    using namespace boost;
+    
+    PyObject *iter1 = PyObject_GetIter(seq1);
 
-	if (!iter1) {
-	    PyErr_SetString(PyExc_TypeError, "forEach(): Iterable object expected as 1st argument");
+    if (!iter1) {
+        PyErr_SetString(PyExc_TypeError, "forEach(): Iterable object expected as 1st argument");
 
-	    python::throw_error_already_set();
-	}
+        python::throw_error_already_set();
+    }
 
-	python::handle<> iter_handle1(iter1);
+    python::handle<> iter_handle1(iter1);
 
-	PyObject *iter2 = PyObject_GetIter(seq2);
+    PyObject *iter2 = PyObject_GetIter(seq2);
 
-	if (!iter2) {
-	    PyErr_SetString(PyExc_TypeError, "forEach(): Iterable object expected as 2nd argument");
+    if (!iter2) {
+        PyErr_SetString(PyExc_TypeError, "forEach(): Iterable object expected as 2nd argument");
 
-	    python::throw_error_already_set();
-	}
+        python::throw_error_already_set();
+    }
 
-	python::handle<> iter_handle2(iter2);
-	PyObject *item1;
-	PyObject *item2;
+    python::handle<> iter_handle2(iter2);
+    PyObject *item1;
+    PyObject *item2;
 
-	while ((item1 = PyIter_Next(iter1)) && (item2 = PyIter_Next(iter2)))
-	    func(python::handle<>(item1), python::handle<>(item2));
+    while ((item1 = PyIter_Next(iter1)) && (item2 = PyIter_Next(iter2)))
+        func(python::handle<>(item1), python::handle<>(item2));
     }
 }
 

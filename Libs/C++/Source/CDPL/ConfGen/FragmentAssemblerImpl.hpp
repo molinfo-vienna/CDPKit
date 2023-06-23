@@ -55,140 +55,140 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class FragmentAssemblerImpl 
-		{
+        class FragmentAssemblerImpl 
+        {
 
-			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+            typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
 
-		public:
-			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+        public:
+            typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
-			typedef std::function<double(std::size_t, std::size_t)> BondLengthFunction;
+            typedef std::function<double(std::size_t, std::size_t)> BondLengthFunction;
 
-			FragmentAssemblerImpl();
+            FragmentAssemblerImpl();
 
-			~FragmentAssemblerImpl();
+            ~FragmentAssemblerImpl();
 
-			FragmentAssemblerSettings& getSettings();
+            FragmentAssemblerSettings& getSettings();
 
-			void clearFragmentLibraries();
+            void clearFragmentLibraries();
 
-			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+            void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			void setBondLengthFunction(const BondLengthFunction& func);
+            void setBondLengthFunction(const BondLengthFunction& func);
 
-			const BondLengthFunction& getBondLengthFunction() const;
+            const BondLengthFunction& getBondLengthFunction() const;
 
-			unsigned int assemble(const Chem::MolecularGraph& molgraph, 
-								  const Chem::MolecularGraph& parent_molgraph);
+            unsigned int assemble(const Chem::MolecularGraph& molgraph, 
+                                  const Chem::MolecularGraph& parent_molgraph);
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			const Util::BitSet& getInvertibleNitrogenMask() const;
+            const Util::BitSet& getInvertibleNitrogenMask() const;
 
-		private:
-			FragmentAssemblerImpl(const FragmentAssemblerImpl&);
+        private:
+            FragmentAssemblerImpl(const FragmentAssemblerImpl&);
 
-			FragmentAssemblerImpl& operator=(const FragmentAssemblerImpl&);
-	
-			void init(const Chem::MolecularGraph& parent_molgraph);
+            FragmentAssemblerImpl& operator=(const FragmentAssemblerImpl&);
+    
+            void init(const Chem::MolecularGraph& parent_molgraph);
 
-			void buildFragmentTree(const Chem::MolecularGraph& molgraph, 
-								   const Chem::MolecularGraph& parent_molgraph);
+            void buildFragmentTree(const Chem::MolecularGraph& molgraph, 
+                                   const Chem::MolecularGraph& parent_molgraph);
 
-			unsigned int getFragmentConformers();
+            unsigned int getFragmentConformers();
 
-			bool copyInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag, 
-									  FragmentTreeNode* node);
-			bool fetchConformersFromFragmentLibrary(unsigned int frag_type, const Chem::Fragment& frag, 
-													FragmentTreeNode* node);
-			bool fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag,
-												  FragmentTreeNode* node);
-			unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
-													FragmentTreeNode* node);
+            bool copyInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag, 
+                                      FragmentTreeNode* node);
+            bool fetchConformersFromFragmentLibrary(unsigned int frag_type, const Chem::Fragment& frag, 
+                                                    FragmentTreeNode* node);
+            bool fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag,
+                                                  FragmentTreeNode* node);
+            unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
+                                                    FragmentTreeNode* node);
 
-			bool setNodeConformers(unsigned int frag_type, const Chem::Fragment& frag, 
-								   FragmentTreeNode* node, const ConformerDataArray& confs);
+            bool setNodeConformers(unsigned int frag_type, const Chem::Fragment& frag, 
+                                   FragmentTreeNode* node, const ConformerDataArray& confs);
 
-			void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node);
+            void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node);
 
-			void buildCanonicalFragmentAtomIndexMap(const Chem::Fragment& frag, 
-													   const FragmentTreeNode* frag_node);
+            void buildCanonicalFragmentAtomIndexMap(const Chem::Fragment& frag, 
+                                                       const FragmentTreeNode* frag_node);
 
-			void postprocChainFragment(bool fix_stereo, const Chem::Fragment& frag, FragmentTreeNode* node);
+            void postprocChainFragment(bool fix_stereo, const Chem::Fragment& frag, FragmentTreeNode* node);
 
-			void fixChainAtomConfigurations(bool have_inv_n, const Chem::Fragment& frag, 
-											FragmentTreeNode* node);
-			void fixChainBondConfigurations(const Chem::Fragment& frag, FragmentTreeNode* node);
-	
-			void enumChainFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
-	
-			void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
+            void fixChainAtomConfigurations(bool have_inv_n, const Chem::Fragment& frag, 
+                                            FragmentTreeNode* node);
+            void fixChainBondConfigurations(const Chem::Fragment& frag, FragmentTreeNode* node);
+    
+            void enumChainFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
+    
+            void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
 
-			void enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
+            void enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
 
-			void invertConfiguration(const Chem::Atom& ctr_atom, const Chem::Atom& fixed_atom1, const Chem::Atom& fixed_atom2, 
-									 const Chem::Atom& inv_atom, const Chem::Fragment& frag, FragmentTreeNode* node, bool inplace);
-			void invertConfiguration(const Chem::Bond& bond, const Chem::Fragment& frag, FragmentTreeNode* node);
+            void invertConfiguration(const Chem::Atom& ctr_atom, const Chem::Atom& fixed_atom1, const Chem::Atom& fixed_atom2, 
+                                     const Chem::Atom& inv_atom, const Chem::Fragment& frag, FragmentTreeNode* node, bool inplace);
+            void invertConfiguration(const Chem::Bond& bond, const Chem::Fragment& frag, FragmentTreeNode* node);
 
-			std::size_t getInvertibleNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
-	
-			void assignLinkBondTorsions(FragmentTreeNode* node);
+            std::size_t getInvertibleNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
+    
+            void assignLinkBondTorsions(FragmentTreeNode* node);
 
-			const TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
+            const TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
 
-			double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx);
+            double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx);
 
-			const Chem::Atom* getNeighborAtom(const Chem::Atom& atom, const Chem::Atom& excl_atom,
-											  FragmentTreeNode* node) const;
+            const Chem::Atom* getNeighborAtom(const Chem::Atom& atom, const Chem::Atom& excl_atom,
+                                              FragmentTreeNode* node) const;
 
-			ConformerData::SharedPointer allocConformerData();
+            ConformerData::SharedPointer allocConformerData();
 
-			unsigned int invokeCallbacks() const;
+            unsigned int invokeCallbacks() const;
 
-			typedef Util::ObjectStack<ConformerData> ConformerDataCache;
-			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::pair<std::size_t, std::size_t> IndexPair;
-			typedef std::vector<IndexPair> IndexPairList;
-			typedef std::vector<FragmentLibrary::SharedPointer> FragmentLibraryList;
-			typedef std::auto_ptr<MMFF94BondLengthTable> BondLengthTablePtr;
+            typedef Util::ObjectStack<ConformerData> ConformerDataCache;
+            typedef std::vector<const Chem::Bond*> BondList;
+            typedef std::pair<std::size_t, std::size_t> IndexPair;
+            typedef std::vector<IndexPair> IndexPairList;
+            typedef std::vector<FragmentLibrary::SharedPointer> FragmentLibraryList;
+            typedef std::auto_ptr<MMFF94BondLengthTable> BondLengthTablePtr;
 
-			ConformerDataCache                confDataCache;
-			FragmentAssemblerSettings         settings;
-			FragmentLibraryList               fragLibs;
-			CallbackFunction                  abortCallback;
-			CallbackFunction                  timeoutCallback;
-			LogMessageCallbackFunction        logCallback;
-			BondLengthFunction                bondLengthFunc;
-			BondList                          fragSplitBonds;
-			Chem::FragmentList                fragments;
-			FragmentTree                      fragTree;
-			TorsionRuleMatcher                torRuleMatcher;
-			FragmentConformerGeneratorImpl    fragConfGen;
-			CanonicalFragment                 canonFrag;
-			IndexPairList                     canonFragAtomIdxMap;
-			BondLengthTablePtr                bondLengthTable;
-			Util::BitSet                      invertibleNMask;
-			Util::BitSet                      invertedNMask;
-			Util::BitSet                      tmpBitSet;
-		};
+            ConformerDataCache                confDataCache;
+            FragmentAssemblerSettings         settings;
+            FragmentLibraryList               fragLibs;
+            CallbackFunction                  abortCallback;
+            CallbackFunction                  timeoutCallback;
+            LogMessageCallbackFunction        logCallback;
+            BondLengthFunction                bondLengthFunc;
+            BondList                          fragSplitBonds;
+            Chem::FragmentList                fragments;
+            FragmentTree                      fragTree;
+            TorsionRuleMatcher                torRuleMatcher;
+            FragmentConformerGeneratorImpl    fragConfGen;
+            CanonicalFragment                 canonFrag;
+            IndexPairList                     canonFragAtomIdxMap;
+            BondLengthTablePtr                bondLengthTable;
+            Util::BitSet                      invertibleNMask;
+            Util::BitSet                      invertedNMask;
+            Util::BitSet                      tmpBitSet;
+        };
     }
 }
 

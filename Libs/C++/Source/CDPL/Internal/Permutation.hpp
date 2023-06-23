@@ -36,25 +36,25 @@
 namespace CDPL
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		/**
-		 * \brief Permutes the range of elements [\a first, \a last) into the 
-		 *        lexicographically next greater sequence of the elements.
-		 *
-		 * The function treats all permutations of the range as a set of "dictionary"
-		 * sorted sequences and permutes the current sequence into the next one of this
-		 * set. If the current sequence is already the largest of the set, the smallest
-		 * is generated. 
-		 *
-		 * \param first The start of the range.
-		 * \param last The end of the range.
-		 * \return The number of performed pairwise element swaps.
-		 */
-		template<typename BidirIter>
-		typename std::iterator_traits<BidirIter>::difference_type nextPermutation(BidirIter first, BidirIter last);
-	}
+        /**
+         * \brief Permutes the range of elements [\a first, \a last) into the 
+         *        lexicographically next greater sequence of the elements.
+         *
+         * The function treats all permutations of the range as a set of "dictionary"
+         * sorted sequences and permutes the current sequence into the next one of this
+         * set. If the current sequence is already the largest of the set, the smallest
+         * is generated. 
+         *
+         * \param first The start of the range.
+         * \param last The end of the range.
+         * \return The number of performed pairwise element swaps.
+         */
+        template<typename BidirIter>
+        typename std::iterator_traits<BidirIter>::difference_type nextPermutation(BidirIter first, BidirIter last);
+    }
 }
 
 
@@ -63,37 +63,37 @@ namespace CDPL
 template<typename BidirIter>
 typename std::iterator_traits<BidirIter>::difference_type CDPL::Internal::nextPermutation(BidirIter first, BidirIter last)
 {
-	if (first == last)
-		return 0;
+    if (first == last)
+        return 0;
 
-	BidirIter i = first; ++i;
+    BidirIter i = first; ++i;
 
-	if (i == last)
-		return 0;
+    if (i == last)
+        return 0;
 
-	i = last; --i;
+    i = last; --i;
 
-	while (true) {
-		BidirIter k = i;
-		--i;
+    while (true) {
+        BidirIter k = i;
+        --i;
 
-		if (*i < *k) {
-			BidirIter j = last;
+        if (*i < *k) {
+            BidirIter j = last;
 
-			while (!(*i < *--j));
+            while (!(*i < *--j));
 
-			std::iter_swap(i, j);
-			std::reverse(k, last);
-			
-			return ((std::distance(k, last) / 2) + 1);
-	    }
+            std::iter_swap(i, j);
+            std::reverse(k, last);
+            
+            return ((std::distance(k, last) / 2) + 1);
+        }
 
-		if (i == first) {
-			std::reverse(first, last);
+        if (i == first) {
+            std::reverse(first, last);
 
-			return (std::distance(first, last) / 2);
-	    }
-	}
+            return (std::distance(first, last) / 2);
+        }
+    }
 }
 
 #endif // CDPL_INTERNAL_PERMUTATION_HPP

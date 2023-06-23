@@ -37,53 +37,53 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename E> class MatrixExpression;
+        template <typename E> class MatrixExpression;
 
-		template <template <typename T1, typename T2> class F, typename M, typename E>
-		void matrixAssignMatrix(M& m, const MatrixExpression<E>& e)
-		{
-			typedef typename CommonType<typename M::SizeType, typename E::SizeType>::Type SizeType;
+        template <template <typename T1, typename T2> class F, typename M, typename E>
+        void matrixAssignMatrix(M& m, const MatrixExpression<E>& e)
+        {
+            typedef typename CommonType<typename M::SizeType, typename E::SizeType>::Type SizeType;
 
-			SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize1()), SizeType(e().getSize1()), Base::SizeError);
-			SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize2()), SizeType(e().getSize2()), Base::SizeError);
+            SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize1()), SizeType(e().getSize1()), Base::SizeError);
+            SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize2()), SizeType(e().getSize2()), Base::SizeError);
 
-			typedef F<typename M::Reference, typename E::ValueType> FunctorType;
+            typedef F<typename M::Reference, typename E::ValueType> FunctorType;
 
-			for (SizeType i = 0; i < size1; i++)
-				for (SizeType j = 0; j < size2; j++)
-					FunctorType::apply(m(i, j), e()(i, j));
-		}
+            for (SizeType i = 0; i < size1; i++)
+                for (SizeType j = 0; j < size2; j++)
+                    FunctorType::apply(m(i, j), e()(i, j));
+        }
 
-		template <template <typename T1, typename T2> class F, typename M, typename T>
-		void matrixAssignScalar(M& m, const T& t)
-		{
-			typedef F<typename M::Reference, T> FunctorType;
-			typedef typename M::SizeType SizeType;
+        template <template <typename T1, typename T2> class F, typename M, typename T>
+        void matrixAssignScalar(M& m, const T& t)
+        {
+            typedef F<typename M::Reference, T> FunctorType;
+            typedef typename M::SizeType SizeType;
 
-			SizeType size1 = m.getSize1();
-			SizeType size2 = m.getSize2();
+            SizeType size1 = m.getSize1();
+            SizeType size2 = m.getSize2();
 
-			for (SizeType i = 0; i < size1; i++)
-				for (SizeType j = 0; j < size2; j++)
-					FunctorType::apply(m(i, j), t);
-		}
-	
-		template <typename M, typename E>
-		void matrixSwap(M& m, MatrixExpression<E>& e)
-		{
-			typedef typename CommonType<typename M::SizeType, typename E::SizeType>::Type SizeType;
+            for (SizeType i = 0; i < size1; i++)
+                for (SizeType j = 0; j < size2; j++)
+                    FunctorType::apply(m(i, j), t);
+        }
+    
+        template <typename M, typename E>
+        void matrixSwap(M& m, MatrixExpression<E>& e)
+        {
+            typedef typename CommonType<typename M::SizeType, typename E::SizeType>::Type SizeType;
 
-			SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize1()), SizeType(e().getSize1()), Base::SizeError);
-			SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize2()), SizeType(e().getSize2()), Base::SizeError);
+            SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize1()), SizeType(e().getSize1()), Base::SizeError);
+            SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize2()), SizeType(e().getSize2()), Base::SizeError);
 
-			for (SizeType i = 0; i < size1; i++)
-				for (SizeType j = 0; j < size2; j++)
-					std::swap(m(i, j), e()(i, j));
-		}
-	}
+            for (SizeType i = 0; i < size1; i++)
+                for (SizeType j = 0; j < size2; j++)
+                    std::swap(m(i, j), e()(i, j));
+        }
+    }
 }
 
 #endif // CDPL_MATH_MATRIXASSIGNMENT_HPP

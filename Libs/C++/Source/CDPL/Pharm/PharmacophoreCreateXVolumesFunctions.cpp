@@ -43,134 +43,134 @@ using namespace CDPL;
 
 
 void Pharm::createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
-								   const Chem::Atom3DCoordinatesFunction& coords_func, 
-								   double tol, double min_dist, bool rel_dist, bool append)
+                                   const Chem::Atom3DCoordinatesFunction& coords_func, 
+                                   double tol, double min_dist, bool rel_dist, bool append)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (!append)
-		pharm.clear();
+    if (!append)
+        pharm.clear();
 
-	typedef std::vector<Math::Vector3D> PositionArray;
-	typedef std::vector<double> ToleranceArray;
+    typedef std::vector<Math::Vector3D> PositionArray;
+    typedef std::vector<double> ToleranceArray;
 
-	PositionArray xvol_positions;
-	ToleranceArray xvol_tolerances;
+    PositionArray xvol_positions;
+    ToleranceArray xvol_tolerances;
 
-	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ftr = *it;
+    for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
+        const Feature& ftr = *it;
 
-		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
-			continue;
+        if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
+            continue;
 
-		xvol_positions.push_back(get3DCoordinates(ftr));
+        xvol_positions.push_back(get3DCoordinates(ftr));
 
-		if (rel_dist)
-			xvol_tolerances.push_back(getTolerance(ftr));
-	}
+        if (rel_dist)
+            xvol_tolerances.push_back(getTolerance(ftr));
+    }
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		const Math::Vector3D& atom_pos = coords_func(atom);
-		double xvol_tol = (tol > 0.0 ? tol : MolProp::getVdWRadius(atom)); 
-		bool invalid = false;
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        const Math::Vector3D& atom_pos = coords_func(atom);
+        double xvol_tol = (tol > 0.0 ? tol : MolProp::getVdWRadius(atom)); 
+        bool invalid = false;
 
-		for (std::size_t i = 0, num_xvols = xvol_positions.size(); i < num_xvols; i++) {
-			Math::Vector3D tmp = xvol_positions[i] - atom_pos;
-			double dist = length(tmp);
+        for (std::size_t i = 0, num_xvols = xvol_positions.size(); i < num_xvols; i++) {
+            Math::Vector3D tmp = xvol_positions[i] - atom_pos;
+            double dist = length(tmp);
 
-			if (rel_dist) 
-				dist -= xvol_tol + xvol_tolerances[i];
+            if (rel_dist) 
+                dist -= xvol_tol + xvol_tolerances[i];
 
-			if (dist < min_dist) {
-				invalid = true;
-				break;
-			}
-		}
+            if (dist < min_dist) {
+                invalid = true;
+                break;
+            }
+        }
 
-		if (invalid)
-			continue;
+        if (invalid)
+            continue;
 
-		Feature& xvol = pharm.addFeature();
+        Feature& xvol = pharm.addFeature();
 
-		set3DCoordinates(xvol, atom_pos);
-		setTolerance(xvol, xvol_tol);
-		setType(xvol, FeatureType::EXCLUSION_VOLUME);
-		setGeometry(xvol, FeatureGeometry::SPHERE);
+        set3DCoordinates(xvol, atom_pos);
+        setTolerance(xvol, xvol_tol);
+        setType(xvol, FeatureType::EXCLUSION_VOLUME);
+        setGeometry(xvol, FeatureGeometry::SPHERE);
 
-		Fragment::SharedPointer substruct(new Fragment());
+        Fragment::SharedPointer substruct(new Fragment());
 
-		substruct->addAtom(atom);
-		setSubstructure(xvol, substruct);
+        substruct->addAtom(atom);
+        setSubstructure(xvol, substruct);
 
-		xvol_positions.push_back(atom_pos);
+        xvol_positions.push_back(atom_pos);
 
-		if (rel_dist)
-			xvol_tolerances.push_back(xvol_tol);
-	}
+        if (rel_dist)
+            xvol_tolerances.push_back(xvol_tol);
+    }
 }
 
 void Pharm::createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr, 
-								   double tol, double min_dist, bool rel_dist, bool append)
+                                   double tol, double min_dist, bool rel_dist, bool append)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (!append)
-		pharm.clear();
+    if (!append)
+        pharm.clear();
 
-	typedef std::vector<Math::Vector3D> PositionArray;
-	typedef std::vector<double> ToleranceArray;
+    typedef std::vector<Math::Vector3D> PositionArray;
+    typedef std::vector<double> ToleranceArray;
 
-	PositionArray xvol_positions;
-	ToleranceArray xvol_tolerances;
+    PositionArray xvol_positions;
+    ToleranceArray xvol_tolerances;
 
-	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ftr = *it;
+    for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
+        const Feature& ftr = *it;
 
-		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
-			continue;
+        if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
+            continue;
 
-		xvol_positions.push_back(get3DCoordinates(ftr));
+        xvol_positions.push_back(get3DCoordinates(ftr));
 
-		if (rel_dist)
-			xvol_tolerances.push_back(getTolerance(ftr));
-	}
+        if (rel_dist)
+            xvol_tolerances.push_back(getTolerance(ftr));
+    }
 
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ftr = *it;
-		const Math::Vector3D& ftr_pos = get3DCoordinates(ftr);
-		double xvol_tol = (tol > 0.0 ? tol : getTolerance(ftr)); 
-		bool invalid = false;
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
+        const Feature& ftr = *it;
+        const Math::Vector3D& ftr_pos = get3DCoordinates(ftr);
+        double xvol_tol = (tol > 0.0 ? tol : getTolerance(ftr)); 
+        bool invalid = false;
 
-		for (std::size_t i = 0, num_xvols = xvol_positions.size(); i < num_xvols; i++) {
-			Math::Vector3D tmp = xvol_positions[i] - ftr_pos;
-			double dist = length(tmp);
+        for (std::size_t i = 0, num_xvols = xvol_positions.size(); i < num_xvols; i++) {
+            Math::Vector3D tmp = xvol_positions[i] - ftr_pos;
+            double dist = length(tmp);
 
-			if (rel_dist) 
-				dist -= xvol_tol + xvol_tolerances[i];
+            if (rel_dist) 
+                dist -= xvol_tol + xvol_tolerances[i];
 
-			if (dist < min_dist) {
-				invalid = true;
-				break;
-			}
-		}
+            if (dist < min_dist) {
+                invalid = true;
+                break;
+            }
+        }
 
-		if (invalid)
-			continue;
+        if (invalid)
+            continue;
 
-		Feature& xvol = pharm.addFeature();
+        Feature& xvol = pharm.addFeature();
 
-		set3DCoordinates(xvol, ftr_pos);
-		setTolerance(xvol, xvol_tol);
-		setType(xvol, FeatureType::EXCLUSION_VOLUME);
-		setGeometry(xvol, FeatureGeometry::SPHERE);
+        set3DCoordinates(xvol, ftr_pos);
+        setTolerance(xvol, xvol_tol);
+        setType(xvol, FeatureType::EXCLUSION_VOLUME);
+        setGeometry(xvol, FeatureGeometry::SPHERE);
 
-		if (hasSubstructure(ftr))
-			setSubstructure(xvol, getSubstructure(ftr));
+        if (hasSubstructure(ftr))
+            setSubstructure(xvol, getSubstructure(ftr));
 
-		xvol_positions.push_back(ftr_pos);
+        xvol_positions.push_back(ftr_pos);
 
-		if (rel_dist)
-			xvol_tolerances.push_back(xvol_tol);
-	}
+        if (rel_dist)
+            xvol_tolerances.push_back(xvol_tol);
+    }
 }

@@ -40,22 +40,22 @@ def outputProperties(molgraph: Chem.MolecularGraph) -> None:
     Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
 
     vsepr_geom_str = { MolProp.CoordinationGeometry.UNDEF                  : 'UNDEF',
-	               MolProp.CoordinationGeometry.NONE                   : 'NONE',
-	               MolProp.CoordinationGeometry.LINEAR                 : 'LINEAR',
-	               MolProp.CoordinationGeometry.TRIGONAL_PLANAR        : 'TRIGONAL_PLANAR',
-	               MolProp.CoordinationGeometry.TETRAHEDRAL            : 'TETRAHEDRAL',
-	               MolProp.CoordinationGeometry.TRIGONAL_BIPYRAMIDAL   : 'TRIGONAL_BIPYRAMIDAL',
-	               MolProp.CoordinationGeometry.OCTAHEDRAL             : 'OCTAHEDRAL',
-	               MolProp.CoordinationGeometry.PENTAGONAL_BIPYRAMIDAL : 'PENTAGONAL_BIPYRAMIDAL',
-	               MolProp.CoordinationGeometry.SQUARE_ANTIPRISMATIC   : 'SQUARE_ANTIPRISMATIC',
-	               MolProp.CoordinationGeometry.BENT                   : 'BENT',
-	               MolProp.CoordinationGeometry.TRIGONAL_PYRAMIDAL     : 'TRIGONAL_PYRAMIDAL',
-	               MolProp.CoordinationGeometry.SQUARE_PLANAR          : 'SQUARE_PLANAR',
-	               MolProp.CoordinationGeometry.SQUARE_PYRAMIDAL       : 'SQUARE_PYRAMIDAL',
-	               MolProp.CoordinationGeometry.T_SHAPED               : 'T_SHAPED',
-	               MolProp.CoordinationGeometry.SEESAW                 : 'SEESAW',
-	               MolProp.CoordinationGeometry.PENTAGONAL_PYRAMIDAL   : 'PENTAGONAL_PYRAMIDAL',
-	               MolProp.CoordinationGeometry.PENTAGONAL_PLANAR      : 'PENTAGONAL_PLANAR' }
+                   MolProp.CoordinationGeometry.NONE                   : 'NONE',
+                   MolProp.CoordinationGeometry.LINEAR                 : 'LINEAR',
+                   MolProp.CoordinationGeometry.TRIGONAL_PLANAR        : 'TRIGONAL_PLANAR',
+                   MolProp.CoordinationGeometry.TETRAHEDRAL            : 'TETRAHEDRAL',
+                   MolProp.CoordinationGeometry.TRIGONAL_BIPYRAMIDAL   : 'TRIGONAL_BIPYRAMIDAL',
+                   MolProp.CoordinationGeometry.OCTAHEDRAL             : 'OCTAHEDRAL',
+                   MolProp.CoordinationGeometry.PENTAGONAL_BIPYRAMIDAL : 'PENTAGONAL_BIPYRAMIDAL',
+                   MolProp.CoordinationGeometry.SQUARE_ANTIPRISMATIC   : 'SQUARE_ANTIPRISMATIC',
+                   MolProp.CoordinationGeometry.BENT                   : 'BENT',
+                   MolProp.CoordinationGeometry.TRIGONAL_PYRAMIDAL     : 'TRIGONAL_PYRAMIDAL',
+                   MolProp.CoordinationGeometry.SQUARE_PLANAR          : 'SQUARE_PLANAR',
+                   MolProp.CoordinationGeometry.SQUARE_PYRAMIDAL       : 'SQUARE_PYRAMIDAL',
+                   MolProp.CoordinationGeometry.T_SHAPED               : 'T_SHAPED',
+                   MolProp.CoordinationGeometry.SEESAW                 : 'SEESAW',
+                   MolProp.CoordinationGeometry.PENTAGONAL_PYRAMIDAL   : 'PENTAGONAL_PYRAMIDAL',
+                   MolProp.CoordinationGeometry.PENTAGONAL_PLANAR      : 'PENTAGONAL_PLANAR' }
     
     for atom in molgraph.atoms:
         print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))

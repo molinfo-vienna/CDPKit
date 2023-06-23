@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportMolecularGraphInputHandler()
 {
-	CDPLPythonBase::DataInputHandlerExport<CDPL::Chem::MolecularGraph>("MolecularGraphInputHandler");
+    CDPLPythonBase::DataInputHandlerExport<CDPL::Chem::MolecularGraph>("MolecularGraphInputHandler");
 }

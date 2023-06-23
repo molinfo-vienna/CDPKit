@@ -43,102 +43,102 @@
 namespace CDPL 
 {
 
-	namespace Internal 
-	{
-
-		template <typename PT, typename CT, typename ST> class Octree;
-	}
-
-	namespace Pharm
+    namespace Internal 
     {
 
-		class FeatureContainer;
-		class Feature;
-	}
-	
+        template <typename PT, typename CT, typename ST> class Octree;
+    }
+
+    namespace Pharm
+    {
+
+        class FeatureContainer;
+        class Feature;
+    }
+    
     namespace GRAIL
     {
 
-		/**
-		 * \brief FeatureInteractionScoreGridCalculator.
-		 */
-		class CDPL_GRAIL_API FeatureInteractionScoreGridCalculator
-		{
+        /**
+         * \brief FeatureInteractionScoreGridCalculator.
+         */
+        class CDPL_GRAIL_API FeatureInteractionScoreGridCalculator
+        {
 
-		  public:
-			static constexpr double DEF_DISTANCE_CUTOFF = 10.0;
-			
-			typedef std::shared_ptr<FeatureInteractionScoreGridCalculator> SharedPointer;
+          public:
+            static constexpr double DEF_DISTANCE_CUTOFF = 10.0;
+            
+            typedef std::shared_ptr<FeatureInteractionScoreGridCalculator> SharedPointer;
 
-			typedef std::function<bool(const Pharm::Feature&)> FeaturePredicate;
-			typedef std::function<double(const Math::Vector3D&, const Pharm::Feature&)> ScoringFunction;
-			typedef std::function<double(const Math::DVector&)> ScoreCombinationFunction;
+            typedef std::function<bool(const Pharm::Feature&)> FeaturePredicate;
+            typedef std::function<double(const Math::Vector3D&, const Pharm::Feature&)> ScoringFunction;
+            typedef std::function<double(const Math::DVector&)> ScoreCombinationFunction;
 
-			struct MaxScoreFunctor {
+            struct MaxScoreFunctor {
 
-				double operator()(const Math::DVector& scores) const {
-					return normInf(scores);
-				}
-			};
+                double operator()(const Math::DVector& scores) const {
+                    return normInf(scores);
+                }
+            };
 
-			struct ScoreSumFunctor {
+            struct ScoreSumFunctor {
 
-				double operator()(const Math::DVector& scores) const {
-					return sum(scores);
-				}
-			};
+                double operator()(const Math::DVector& scores) const {
+                    return sum(scores);
+                }
+            };
 
-			FeatureInteractionScoreGridCalculator();
+            FeatureInteractionScoreGridCalculator();
 
-			FeatureInteractionScoreGridCalculator(const ScoringFunction& func);
+            FeatureInteractionScoreGridCalculator(const ScoringFunction& func);
 
-			FeatureInteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func); 
+            FeatureInteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func); 
 
-			FeatureInteractionScoreGridCalculator(const FeatureInteractionScoreGridCalculator& calc);
+            FeatureInteractionScoreGridCalculator(const FeatureInteractionScoreGridCalculator& calc);
 
-			~FeatureInteractionScoreGridCalculator();
+            ~FeatureInteractionScoreGridCalculator();
 
-			void normalizeScores(bool normalize);
+            void normalizeScores(bool normalize);
 
-			bool scoresNormalized() const;
+            bool scoresNormalized() const;
 
-			void setScoringFunction(const ScoringFunction& func);
+            void setScoringFunction(const ScoringFunction& func);
 
-			const ScoringFunction& getScoringFunction() const;
+            const ScoringFunction& getScoringFunction() const;
 
-			void setScoreCombinationFunction(const ScoreCombinationFunction& func);
+            void setScoreCombinationFunction(const ScoreCombinationFunction& func);
 
-			const ScoreCombinationFunction& getScoreCombinationFunction() const;
+            const ScoreCombinationFunction& getScoreCombinationFunction() const;
 
-			void setFeatureSelectionPredicate(const FeaturePredicate& pred);
+            void setFeatureSelectionPredicate(const FeaturePredicate& pred);
 
-			const FeaturePredicate& getFeatureSelectionPredicate() const;
+            const FeaturePredicate& getFeatureSelectionPredicate() const;
 
-			void setDistanceCutoff(double dist);
+            void setDistanceCutoff(double dist);
 
-			double getDistanceCutoff() const;
+            double getDistanceCutoff() const;
 
-			void calculate(const Pharm::FeatureContainer& tgt_ftrs, Grid::DSpatialGrid& grid);
+            void calculate(const Pharm::FeatureContainer& tgt_ftrs, Grid::DSpatialGrid& grid);
 
-			FeatureInteractionScoreGridCalculator& operator=(const FeatureInteractionScoreGridCalculator& calc);
+            FeatureInteractionScoreGridCalculator& operator=(const FeatureInteractionScoreGridCalculator& calc);
 
-		  private:
-			typedef std::vector<const Pharm::Feature*> FeatureList;
-			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-			typedef std::shared_ptr<Octree> OctreePtr;
-			typedef std::vector<std::size_t> FeatureIndexList;
+          private:
+            typedef std::vector<const Pharm::Feature*> FeatureList;
+            typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+            typedef std::shared_ptr<Octree> OctreePtr;
+            typedef std::vector<std::size_t> FeatureIndexList;
 
-			FeatureList              tgtFeatures;
-			Math::DVector            partialScores;
-			ScoringFunction          scoringFunc;
-			ScoreCombinationFunction scoreCombinationFunc;
-			FeaturePredicate         ftrSelectionPred;
-			double                   distCutoff;
-			OctreePtr                octree;
-			Math::Vector3DArray      featureCoords;
-			FeatureIndexList         featureIndices;
-			bool                     normScores;
-		};
+            FeatureList              tgtFeatures;
+            Math::DVector            partialScores;
+            ScoringFunction          scoringFunc;
+            ScoreCombinationFunction scoreCombinationFunc;
+            FeaturePredicate         ftrSelectionPred;
+            double                   distCutoff;
+            OctreePtr                octree;
+            Math::Vector3DArray      featureCoords;
+            FeatureIndexList         featureIndices;
+            bool                     normScores;
+        };
     }
 }
 

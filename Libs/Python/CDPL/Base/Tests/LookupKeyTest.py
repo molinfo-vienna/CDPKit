@@ -90,7 +90,7 @@ class TestCase(unittest.TestCase):
 
         self.assert_(key1.getName() == 'keyZ')
         self.assert_(key2.getName() == 'keyX')
-        self.assert_(key3.getName() == 'keyX')	
+        self.assert_(key3.getName() == 'keyX')    
 
         key4 = LookupKey.create('')
 

@@ -31,7 +31,7 @@ using namespace CDPL;
 
 
 ConfGen::DGStructureGeneratorSettings::DGStructureGeneratorSettings(): 
-	boxSize(50.0), planarConstr(true)
+    boxSize(50.0), planarConstr(true)
 {}
 
 void ConfGen::DGStructureGeneratorSettings::setBoxSize(double size)
@@ -46,10 +46,10 @@ double ConfGen::DGStructureGeneratorSettings::getBoxSize() const
 
 void ConfGen::DGStructureGeneratorSettings::enablePlanarityConstraints(bool enable)
 {
-	planarConstr = enable;
+    planarConstr = enable;
 }
 
 bool ConfGen::DGStructureGeneratorSettings::enablePlanarityConstraints() const
 {
-	return planarConstr;
+    return planarConstr;
 }

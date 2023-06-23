@@ -32,21 +32,21 @@
 namespace 
 {
 
-	struct AtomPropertyDefault {};
+    struct AtomPropertyDefault {};
 }
 
 
 void CDPLPythonVis::exportAtomPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
-		.def_readonly("COLOR", &Vis::AtomPropertyDefault::COLOR)
-		.def_readonly("LABEL_FONT", &Vis::AtomPropertyDefault::LABEL_FONT)
-		.def_readonly("LABEL_SIZE", &Vis::AtomPropertyDefault::LABEL_SIZE)
-		.def_readonly("SECONDARY_LABEL_FONT", &Vis::AtomPropertyDefault::SECONDARY_LABEL_FONT)
-		.def_readonly("SECONDARY_LABEL_SIZE", &Vis::AtomPropertyDefault::SECONDARY_LABEL_SIZE)
-		.def_readonly("LABEL_MARGIN", &Vis::AtomPropertyDefault::LABEL_MARGIN)
-		.def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::AtomPropertyDefault::RADICAL_ELECTRON_DOT_SIZE);
+    python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
+        .def_readonly("COLOR", &Vis::AtomPropertyDefault::COLOR)
+        .def_readonly("LABEL_FONT", &Vis::AtomPropertyDefault::LABEL_FONT)
+        .def_readonly("LABEL_SIZE", &Vis::AtomPropertyDefault::LABEL_SIZE)
+        .def_readonly("SECONDARY_LABEL_FONT", &Vis::AtomPropertyDefault::SECONDARY_LABEL_FONT)
+        .def_readonly("SECONDARY_LABEL_SIZE", &Vis::AtomPropertyDefault::SECONDARY_LABEL_SIZE)
+        .def_readonly("LABEL_MARGIN", &Vis::AtomPropertyDefault::LABEL_MARGIN)
+        .def_readonly("RADICAL_ELECTRON_DOT_SIZE", &Vis::AtomPropertyDefault::RADICAL_ELECTRON_DOT_SIZE);
 }

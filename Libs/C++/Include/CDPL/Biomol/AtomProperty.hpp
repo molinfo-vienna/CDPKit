@@ -35,38 +35,38 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		/**
-		 * \brief Provides keys for built-in Biomol::Atom properties.
-		 */
-		namespace AtomProperty
-		{
+        /**
+         * \brief Provides keys for built-in Biomol::Atom properties.
+         */
+        namespace AtomProperty
+        {
 
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ATOM_NAME;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ALT_ATOM_NAME;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LEAVING_ATOM_FLAG;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LINKING_ATOM_FLAG;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
-			extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ATOM_NAME;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_ALT_ATOM_NAME;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LEAVING_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_LINKING_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_CODE;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
+            extern CDPL_BIOMOL_API const Base::LookupKey RESIDUE_INSERTION_CODE;
 
-			extern CDPL_BIOMOL_API const Base::LookupKey HETERO_ATOM_FLAG;
-			extern CDPL_BIOMOL_API const Base::LookupKey SERIAL_NUMBER;
-			extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
-			extern CDPL_BIOMOL_API const Base::LookupKey ALT_LOCATION_ID;
-			extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
-			extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
-			extern CDPL_BIOMOL_API const Base::LookupKey B_FACTOR;
-		}
-	}
+            extern CDPL_BIOMOL_API const Base::LookupKey HETERO_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const Base::LookupKey SERIAL_NUMBER;
+            extern CDPL_BIOMOL_API const Base::LookupKey CHAIN_ID;
+            extern CDPL_BIOMOL_API const Base::LookupKey ALT_LOCATION_ID;
+            extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
+            extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
+            extern CDPL_BIOMOL_API const Base::LookupKey B_FACTOR;
+        }
+    }
 }
 
 #endif // CDPL_BIOMOL_ATOMPROPERTY_HPP

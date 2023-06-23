@@ -36,15 +36,15 @@
 namespace
 {
 
-	bool callOperator1(CDPL::Pharm::FeaturePositionMatchFunctor& func, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+    bool callOperator1(CDPL::Pharm::FeaturePositionMatchFunctor& func, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return func(ftr1, ftr2);
+        return func(ftr1, ftr2);
     }
-	
+    
     bool callOperator2(CDPL::Pharm::FeaturePositionMatchFunctor& func, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2,
-					   const CDPL::Math::Matrix4D& xform)
+                       const CDPL::Math::Matrix4D& xform)
     {
-		return func(ftr1, ftr2, xform);
+        return func(ftr1, ftr2, xform);
     }
 }
 
@@ -55,12 +55,12 @@ void CDPLPythonPharm::exportFeaturePositionMatchFunctor()
     using namespace CDPL;
 
     python::class_<Pharm::FeaturePositionMatchFunctor, boost::noncopyable>("FeaturePositionMatchFunctor", python::no_init)
-		.def(python::init<const Pharm::FeaturePositionMatchFunctor&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePositionMatchFunctor>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePositionMatchFunctor::operator=), 
-			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
-		.add_property("qryMode", &Pharm::FeaturePositionMatchFunctor::queryMode);
+        .def(python::init<const Pharm::FeaturePositionMatchFunctor&>((python::arg("self"), python::arg("func"))))
+        .def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePositionMatchFunctor>())
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePositionMatchFunctor::operator=), 
+             (python::arg("self"), python::arg("func")), python::return_self<>())
+        .def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+        .def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
+        .add_property("qryMode", &Pharm::FeaturePositionMatchFunctor::queryMode);
 }

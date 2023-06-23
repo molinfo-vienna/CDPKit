@@ -28,11 +28,11 @@
 
 namespace CDPLPythonDescr
 {
-	
-	void exportEntity3DContainerFunctions();
-	void exportAtomContainerFunctions();
-	void exportMolecularGraphFunctions();
-	void exportSimilarityFunctions();
+    
+    void exportEntity3DContainerFunctions();
+    void exportAtomContainerFunctions();
+    void exportMolecularGraphFunctions();
+    void exportSimilarityFunctions();
 }
 
 #endif // CDPL_PYTHON_DESCR_FUNCTIONEXPORTS_HPP

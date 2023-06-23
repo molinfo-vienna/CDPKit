@@ -32,38 +32,38 @@ using namespace CDPL;
 
 std::string& Internal::trimString(std::string& str, bool left, bool right)
 {
-	if (str.empty())
-		return str;
-		
-	if (left && right) {
-		boost::trim_if(str, IsWhitespace());
-		return str;
-	}
+    if (str.empty())
+        return str;
+        
+    if (left && right) {
+        boost::trim_if(str, IsWhitespace());
+        return str;
+    }
 
-	if (right)  {
-		boost::trim_right_if(str, IsWhitespace());
-		return str;
-	}
+    if (right)  {
+        boost::trim_right_if(str, IsWhitespace());
+        return str;
+    }
 
-	if (left)
-		boost::trim_left_if(str, IsWhitespace());
-	
-	return str;
+    if (left)
+        boost::trim_left_if(str, IsWhitespace());
+    
+    return str;
 }
 
 std::string Internal::trimStringCopy(const std::string& str, bool left, bool right)
 {
-	if (str.empty())
-		return str;
-		
-	if (left && right)
-		return boost::trim_copy_if(str, IsWhitespace());
+    if (str.empty())
+        return str;
+        
+    if (left && right)
+        return boost::trim_copy_if(str, IsWhitespace());
 
-	if (right)
-		return boost::trim_right_copy_if(str, IsWhitespace());
-		
-	if (left)
-		return boost::trim_left_copy_if(str, IsWhitespace());
-	
-	return str;
+    if (right)
+        return boost::trim_right_copy_if(str, IsWhitespace());
+        
+    if (left)
+        return boost::trim_left_copy_if(str, IsWhitespace());
+    
+    return str;
 }

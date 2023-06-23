@@ -37,44 +37,44 @@ class QIntValidator;
 namespace ChOX
 {
 
-	class DataSetView;
+    class DataSetView;
 
-	class DataSetViewControl : public QToolBar
-	{
+    class DataSetViewControl : public QToolBar
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		DataSetViewControl(QMainWindow*, DataSetView&);
+    public:
+        DataSetViewControl(QMainWindow*, DataSetView&);
 
-	signals:
-		void numRowsChanged(int);
-		void numColumnsChanged(int);
-		void pageOffsetChanged(int);
+    signals:
+        void numRowsChanged(int);
+        void numColumnsChanged(int);
+        void pageOffsetChanged(int);
 
-	private slots:
-		void handlePageOffsetInput();
+    private slots:
+        void handlePageOffsetInput();
 
-		void handleNextPageButtonClick();
-		void handlePrevPageButtonClick();
-		void handleNextLineButtonClick();
-		void handlePrevLineButtonClick();
+        void handleNextPageButtonClick();
+        void handlePrevPageButtonClick();
+        void handleNextLineButtonClick();
+        void handlePrevLineButtonClick();
 
-		void updateGUI(int);
+        void updateGUI(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		DataSetView&   dataSetView;
-		QSpinBox*      rowCountSpinBox;
-		QSpinBox*      columnCountSpinBox;
-		QLineEdit*     pageOffsetLineEdit;
-		QIntValidator* pageOffsetValidator;
-		QToolButton*   nextLineButton;
-		QToolButton*   nextPageButton;
-		QToolButton*   prevLineButton;
-		QToolButton*   prevPageButton;
-	};
+        DataSetView&   dataSetView;
+        QSpinBox*      rowCountSpinBox;
+        QSpinBox*      columnCountSpinBox;
+        QLineEdit*     pageOffsetLineEdit;
+        QIntValidator* pageOffsetValidator;
+        QToolButton*   nextLineButton;
+        QToolButton*   nextPageButton;
+        QToolButton*   prevLineButton;
+        QToolButton*   prevPageButton;
+    };
 }
 
 #endif // CHOX_DATASETVIEWCONTROL_HPP

@@ -36,52 +36,52 @@ namespace CDPL
     namespace Chem 
     {
 
-		/**
-		 * \brief Provides constants for the specification of the <em>Tripos Sybyl</em> bond type.
-		 */
-		namespace SybylBondType 
-		{
+        /**
+         * \brief Provides constants for the specification of the <em>Tripos Sybyl</em> bond type.
+         */
+        namespace SybylBondType 
+        {
 
-			/**
-			 * \brief Specifies an unknown bond (cannot be determined from the parameter tables).
-			 */
-			const unsigned int UNKNOWN          = 0;
+            /**
+             * \brief Specifies an unknown bond (cannot be determined from the parameter tables).
+             */
+            const unsigned int UNKNOWN          = 0;
 
-			/**
-			 * \brief Specifies a single bond.
-			 */
-			const unsigned int SINGLE           = 1;
+            /**
+             * \brief Specifies a single bond.
+             */
+            const unsigned int SINGLE           = 1;
 
-			/**
-			 * \brief Specifies a double bond.
-			 */
-			const unsigned int DOUBLE           = 2;
+            /**
+             * \brief Specifies a double bond.
+             */
+            const unsigned int DOUBLE           = 2;
 
-			/**
-			 * \brief Specifies a triple bond.
-			 */
-			const unsigned int TRIPLE           = 3;
+            /**
+             * \brief Specifies a triple bond.
+             */
+            const unsigned int TRIPLE           = 3;
 
-			/**
-			 * \brief Specifies an aromatic bond.
-			 */
-			const unsigned int AROMATIC         = 4;
+            /**
+             * \brief Specifies an aromatic bond.
+             */
+            const unsigned int AROMATIC         = 4;
  
-			/**
-			 * \brief Specifies an amide bond.
-			 */
-			const unsigned int AMIDE            = 5;
+            /**
+             * \brief Specifies an amide bond.
+             */
+            const unsigned int AMIDE            = 5;
 
-			/**
-			 * \brief Specifies a dummy bond.
-			 */
-			const unsigned int DUMMY            = 6;
+            /**
+             * \brief Specifies a dummy bond.
+             */
+            const unsigned int DUMMY            = 6;
 
-			/**
-			 * \brief Specifies a pseudo bond.
-			 */
-			const unsigned int NOT_CONNECTED    = 7;
-		}
+            /**
+             * \brief Specifies a pseudo bond.
+             */
+            const unsigned int NOT_CONNECTED    = 7;
+        }
     }
 }
 

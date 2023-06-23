@@ -32,14 +32,14 @@
 
 void CDPLPythonChem::exportAromaticSSSRSubset()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::AromaticSSSRSubset, Chem::AromaticSSSRSubset::SharedPointer,
-				   python::bases<Chem::FragmentList>, boost::noncopyable>("AromaticSSSRSubset", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("extract", &Chem::AromaticSSSRSubset::extract, (python::arg("self"), python::arg("molgraph")), 
-			 python::with_custodian_and_ward<1, 2>());
+    python::class_<Chem::AromaticSSSRSubset, Chem::AromaticSSSRSubset::SharedPointer,
+                   python::bases<Chem::FragmentList>, boost::noncopyable>("AromaticSSSRSubset", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("extract", &Chem::AromaticSSSRSubset::extract, (python::arg("self"), python::arg("molgraph")), 
+             python::with_custodian_and_ward<1, 2>());
 }

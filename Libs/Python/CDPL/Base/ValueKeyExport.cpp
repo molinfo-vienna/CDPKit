@@ -32,25 +32,25 @@
 
 void CDPLPythonBase::exportValueKey()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
     python::class_<Base::ValueKey>("ValueKey", python::no_init)
-		.def(python::init<const Base::ValueKey&>((python::arg("self"), python::arg("key"))))
-		.def("create", &Base::ValueKey::create, python::arg("name"))
-		.staticmethod("create")
-		.def("getID", &Base::ValueKey::getID, python::arg("self"))    
-		.def("assign", &Base::ValueKey::operator=, (python::arg("self"), python::arg("key")), python::return_self<>())
-		.def("getName", &Base::ValueKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setName", &Base::ValueKey::setName, (python::arg("self"), python::arg("name")))
-		.def(ObjectIdentityCheckVisitor<Base::ValueKey>())
+        .def(python::init<const Base::ValueKey&>((python::arg("self"), python::arg("key"))))
+        .def("create", &Base::ValueKey::create, python::arg("name"))
+        .staticmethod("create")
+        .def("getID", &Base::ValueKey::getID, python::arg("self"))    
+        .def("assign", &Base::ValueKey::operator=, (python::arg("self"), python::arg("key")), python::return_self<>())
+        .def("getName", &Base::ValueKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+        .def("setName", &Base::ValueKey::setName, (python::arg("self"), python::arg("name")))
+        .def(ObjectIdentityCheckVisitor<Base::ValueKey>())
         .add_property("numericID", &Base::ValueKey::getID)    
         .add_property("name", python::make_function(&Base::ValueKey::getName, 
-													python::return_value_policy<python::copy_const_reference>()),
-					  &Base::ValueKey::setName)    
+                                                    python::return_value_policy<python::copy_const_reference>()),
+                      &Base::ValueKey::setName)    
         .def_readonly("NONE", Base::ValueKey::NONE)    
-		.def("__lt__", &Base::ValueKey::operator<, (python::arg("self"), python::arg("key")))    
+        .def("__lt__", &Base::ValueKey::operator<, (python::arg("self"), python::arg("key")))    
         .def("__eq__", &Base::ValueKey::operator==, (python::arg("self"), python::arg("key")))
         .def("__ne__", &Base::ValueKey::operator!=, (python::arg("self"), python::arg("key")))
-		.def("__str__", &Base::ValueKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>());
+        .def("__str__", &Base::ValueKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>());
 }

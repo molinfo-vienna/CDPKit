@@ -31,7 +31,7 @@
 namespace ChOX
 {
 
-	class SettingsContainer : public CDPL::Base::ControlParameterContainer {};
+    class SettingsContainer : public CDPL::Base::ControlParameterContainer {};
 }
 
 #endif // CHOX_SETTINGSCONTAINER_HPP

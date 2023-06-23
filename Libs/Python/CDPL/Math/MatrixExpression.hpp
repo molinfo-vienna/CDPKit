@@ -37,132 +37,132 @@
 namespace CDPLPythonMath
 {
 
-	template <typename T>
-	class ConstMatrixExpression : public CDPL::Math::MatrixExpression<ConstMatrixExpression<T> >
-	{
+    template <typename T>
+    class ConstMatrixExpression : public CDPL::Math::MatrixExpression<ConstMatrixExpression<T> >
+    {
 
-	public:
-		typedef ConstMatrixExpression SelfType;
-		typedef T ValueType;
-		typedef const T Reference;
-		typedef const T ConstReference;
-		typedef typename std::size_t SizeType;
-		typedef typename std::ptrdiff_t DifferenceType;
-		typedef const SelfType& ClosureType;
-		typedef const SelfType& ConstClosureType;
-		typedef CDPL::Math::Matrix<ValueType> MatrixTemporaryType;
-		typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-		typedef std::shared_ptr<SelfType> SharedPointer;
+    public:
+        typedef ConstMatrixExpression SelfType;
+        typedef T ValueType;
+        typedef const T Reference;
+        typedef const T ConstReference;
+        typedef typename std::size_t SizeType;
+        typedef typename std::ptrdiff_t DifferenceType;
+        typedef const SelfType& ClosureType;
+        typedef const SelfType& ConstClosureType;
+        typedef CDPL::Math::Matrix<ValueType> MatrixTemporaryType;
+        typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
+        typedef std::shared_ptr<SelfType> SharedPointer;
 
-		virtual ~ConstMatrixExpression() {} 
+        virtual ~ConstMatrixExpression() {} 
 
-		virtual ConstReference operator()(SizeType i, SizeType j) const = 0;
+        virtual ConstReference operator()(SizeType i, SizeType j) const = 0;
 
-		virtual SizeType getSize1() const = 0;
-		virtual SizeType getSize2() const = 0;
+        virtual SizeType getSize1() const = 0;
+        virtual SizeType getSize2() const = 0;
 
-		virtual bool isEmpty() const {
-			return (getSize1() == 0 || getSize2() == 0);
-		}
+        virtual bool isEmpty() const {
+            return (getSize1() == 0 || getSize2() == 0);
+        }
 
-	protected:
-		ConstMatrixExpression() {} 
-	};
+    protected:
+        ConstMatrixExpression() {} 
+    };
 
-	template <typename T>
-	class MatrixExpression : 
-		public ConstMatrixExpression<T>, public CDPL::Math::MatrixContainer<MatrixExpression<T> >
-	{
+    template <typename T>
+    class MatrixExpression : 
+        public ConstMatrixExpression<T>, public CDPL::Math::MatrixContainer<MatrixExpression<T> >
+    {
 
-	public:
-		typedef MatrixExpression SelfType;
-		typedef ConstMatrixExpression<T> ConstExpressionType;
-		typedef T ValueType;
-		typedef T& Reference;
-		typedef const T ConstReference;
-		typedef typename ConstExpressionType::SizeType SizeType;
-		typedef typename ConstExpressionType::DifferenceType DifferenceType;
-		typedef SelfType& ClosureType;
-		typedef const SelfType& ConstClosureType;
-		typedef CDPL::Math::Matrix<ValueType> MatrixTemporaryType;
-		typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-		typedef std::shared_ptr<SelfType> SharedPointer;
-		typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
+    public:
+        typedef MatrixExpression SelfType;
+        typedef ConstMatrixExpression<T> ConstExpressionType;
+        typedef T ValueType;
+        typedef T& Reference;
+        typedef const T ConstReference;
+        typedef typename ConstExpressionType::SizeType SizeType;
+        typedef typename ConstExpressionType::DifferenceType DifferenceType;
+        typedef SelfType& ClosureType;
+        typedef const SelfType& ConstClosureType;
+        typedef CDPL::Math::Matrix<ValueType> MatrixTemporaryType;
+        typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
+        typedef std::shared_ptr<SelfType> SharedPointer;
+        typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
 
-		virtual ~MatrixExpression() {} 
+        virtual ~MatrixExpression() {} 
 
-		virtual Reference operator()(SizeType i, SizeType j) = 0;
+        virtual Reference operator()(SizeType i, SizeType j) = 0;
 
-		virtual MatrixExpression& operator=(const ConstExpressionType& e) = 0;
+        virtual MatrixExpression& operator=(const ConstExpressionType& e) = 0;
 
-		virtual MatrixExpression& operator+=(const ConstExpressionType& e) = 0;
-		virtual MatrixExpression& operator-=(const ConstExpressionType& e) = 0;
+        virtual MatrixExpression& operator+=(const ConstExpressionType& e) = 0;
+        virtual MatrixExpression& operator-=(const ConstExpressionType& e) = 0;
 
-		virtual MatrixExpression& operator*=(const ValueType& t) = 0;
-		virtual MatrixExpression& operator/=(const ValueType& t) = 0;
+        virtual MatrixExpression& operator*=(const ValueType& t) = 0;
+        virtual MatrixExpression& operator/=(const ValueType& t) = 0;
 
-		void swap(MatrixExpression& e) {
-			CDPL::Math::matrixSwap<MatrixExpression, MatrixExpression>(*this, e);
-		}
+        void swap(MatrixExpression& e) {
+            CDPL::Math::matrixSwap<MatrixExpression, MatrixExpression>(*this, e);
+        }
 
-		MatrixExpression& operator=(const MatrixExpression& e) {
-			return operator=(static_cast<const ConstExpressionType&>(e));
-		}
+        MatrixExpression& operator=(const MatrixExpression& e) {
+            return operator=(static_cast<const ConstExpressionType&>(e));
+        }
 
-		template <typename T1>
-		MatrixExpression& operator=(ConstMatrixExpression<T1>& e) {
-			using namespace CDPL;
-			using namespace Math;
+        template <typename T1>
+        MatrixExpression& operator=(ConstMatrixExpression<T1>& e) {
+            using namespace CDPL;
+            using namespace Math;
 
-			matrixAssignMatrix<ScalarAssignment>(*this, e);
-			return *this;
-		}
+            matrixAssignMatrix<ScalarAssignment>(*this, e);
+            return *this;
+        }
 
-		template <typename E>
-		MatrixExpression& operator=(const CDPL::Math::MatrixExpression<E>& e) {
-			using namespace CDPL;
-			using namespace Math;
+        template <typename E>
+        MatrixExpression& operator=(const CDPL::Math::MatrixExpression<E>& e) {
+            using namespace CDPL;
+            using namespace Math;
 
-			MatrixTemporaryType tmp(e);
-			matrixAssignMatrix<ScalarAssignment>(*this, tmp);
+            MatrixTemporaryType tmp(e);
+            matrixAssignMatrix<ScalarAssignment>(*this, tmp);
 
-			return *this;
-		}
+            return *this;
+        }
 
-		template <typename E>
-		MatrixExpression& assign(const CDPL::Math::MatrixExpression<E>& e) {
-			using namespace CDPL;
-			using namespace Math;
+        template <typename E>
+        MatrixExpression& assign(const CDPL::Math::MatrixExpression<E>& e) {
+            using namespace CDPL;
+            using namespace Math;
 
-			matrixAssignMatrix<ScalarAssignment>(*this, e);
-			return *this;
-		}
+            matrixAssignMatrix<ScalarAssignment>(*this, e);
+            return *this;
+        }
 
-		template <typename E>
-		MatrixExpression& operator+=(const CDPL::Math::MatrixExpression<E>& e) {
-			using namespace CDPL;
-			using namespace Math;
+        template <typename E>
+        MatrixExpression& operator+=(const CDPL::Math::MatrixExpression<E>& e) {
+            using namespace CDPL;
+            using namespace Math;
 
-			MatrixTemporaryType tmp(static_cast<const Math::MatrixExpression<ConstExpressionType>&>(*this) + e);
-			matrixAssignMatrix<ScalarAssignment>(*this, tmp);
+            MatrixTemporaryType tmp(static_cast<const Math::MatrixExpression<ConstExpressionType>&>(*this) + e);
+            matrixAssignMatrix<ScalarAssignment>(*this, tmp);
 
-			return *this;
-		}
+            return *this;
+        }
 
-		template <typename E>
-		MatrixExpression& operator-=(const CDPL::Math::MatrixExpression<E>& e) {
-			using namespace CDPL;
-			using namespace Math;
+        template <typename E>
+        MatrixExpression& operator-=(const CDPL::Math::MatrixExpression<E>& e) {
+            using namespace CDPL;
+            using namespace Math;
 
-			MatrixTemporaryType tmp(static_cast<const Math::MatrixExpression<ConstExpressionType>&>(*this) - e);
-			matrixAssignMatrix<ScalarAssignment>(*this, tmp);
+            MatrixTemporaryType tmp(static_cast<const Math::MatrixExpression<ConstExpressionType>&>(*this) - e);
+            matrixAssignMatrix<ScalarAssignment>(*this, tmp);
 
-			return *this;
-		}
+            return *this;
+        }
 
-	protected:
-		MatrixExpression() {} 
-	};
+    protected:
+        MatrixExpression() {} 
+    };
 }
 
 #endif // CDPL_PYTHON_MATH_MATRIXEXPRESSION_HPP

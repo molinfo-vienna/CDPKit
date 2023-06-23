@@ -35,21 +35,21 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		/**
-		 * \brief Provides default values for built-in control-parameters.
-		 */
-		namespace ControlParameterDefault
-		{
+        /**
+         * \brief Provides default values for built-in control-parameters.
+         */
+        namespace ControlParameterDefault
+        {
 
-			/**
-			 * \brief Default setting (= \c false) for the control-parameter ConfGen::ControlParameter::STRICT_ERROR_CHECKING.
-			 */
-			extern CDPL_CONFGEN_API const bool STRICT_ERROR_CHECKING;
-		}
-	}
+            /**
+             * \brief Default setting (= \c false) for the control-parameter ConfGen::ControlParameter::STRICT_ERROR_CHECKING.
+             */
+            extern CDPL_CONFGEN_API const bool STRICT_ERROR_CHECKING;
+        }
+    }
 }
 
 #endif // CDPL_CONFGEN_CONTROLPARAMETERDEFAULT_HPP

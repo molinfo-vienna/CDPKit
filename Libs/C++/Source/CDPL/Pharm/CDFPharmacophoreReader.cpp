@@ -35,36 +35,36 @@ using namespace CDPL;
 
 
 Pharm::CDFPharmacophoreReader::CDFPharmacophoreReader(std::istream& is): 
-	Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>(is), reader(new CDFPharmacophoreDataReader(*this)) {}
+    Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>(is), reader(new CDFPharmacophoreDataReader(*this)) {}
 
 Pharm::CDFPharmacophoreReader::~CDFPharmacophoreReader() {}
 
 bool Pharm::CDFPharmacophoreReader::readData(std::istream& is, Pharmacophore& pharm, bool overwrite)
 {
-	try {
-		if (overwrite)
-			pharm.clear();
+    try {
+        if (overwrite)
+            pharm.clear();
 
-		return reader->readPharmacophore(is, pharm);
+        return reader->readPharmacophore(is, pharm);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFPharmacophoreReader: while reading record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFPharmacophoreReader: while reading record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Pharm::CDFPharmacophoreReader::skipData(std::istream& is)
 {
-	try {
-		return reader->skipPharmacophore(is);
+    try {
+        return reader->skipPharmacophore(is);
 
-	} catch (const std::exception& e) {
-		throw Base::IOError("CDFPharmacophoreReader: while skipping record " + std::to_string(getRecordIndex()) + 
-							": " + e.what());
-	}
+    } catch (const std::exception& e) {
+        throw Base::IOError("CDFPharmacophoreReader: while skipping record " + std::to_string(getRecordIndex()) + 
+                            ": " + e.what());
+    }
 }
 
 bool Pharm::CDFPharmacophoreReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+    return reader->hasMoreData(is);
 }

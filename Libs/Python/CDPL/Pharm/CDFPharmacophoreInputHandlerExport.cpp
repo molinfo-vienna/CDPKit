@@ -33,18 +33,18 @@
 
 void CDPLPythonPharm::exportCDFPharmacophoreInputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Pharm::CDFPharmacophoreInputHandler, 
-		python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFPharmacophoreInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::CDFPharmacophoreInputHandler, 
+        python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFPharmacophoreInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Pharm::CDFGZPharmacophoreInputHandler, 
-		python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFGZPharmacophoreInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::CDFGZPharmacophoreInputHandler, 
+        python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFGZPharmacophoreInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Pharm::CDFBZ2PharmacophoreInputHandler, 
-		python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFBZ2PharmacophoreInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::CDFBZ2PharmacophoreInputHandler, 
+        python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFBZ2PharmacophoreInputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

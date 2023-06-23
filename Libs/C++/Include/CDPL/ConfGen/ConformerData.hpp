@@ -41,37 +41,37 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API ConformerData : public Math::Vector3DArray
-		{
+        class CDPL_CONFGEN_API ConformerData : public Math::Vector3DArray
+        {
 
-		  public:
-			typedef std::shared_ptr<ConformerData> SharedPointer;
+          public:
+            typedef std::shared_ptr<ConformerData> SharedPointer;
 
-			ConformerData(): energy(0.0) {}
+            ConformerData(): energy(0.0) {}
 
-			ConformerData(const Math::Vector3DArray& coords, double energy = 0.0):
-				Math::Vector3DArray(coords), energy(energy) {}
+            ConformerData(const Math::Vector3DArray& coords, double energy = 0.0):
+                Math::Vector3DArray(coords), energy(energy) {}
 
-			void setEnergy(double energy) {
-				this->energy = energy;
-			}
+            void setEnergy(double energy) {
+                this->energy = energy;
+            }
 
-			double getEnergy() const {
-				return energy;
-			}
+            double getEnergy() const {
+                return energy;
+            }
 
-			void swap(ConformerData& data) {
-				Math::Vector3DArray::swap(data);
-				std::swap(energy, data.energy);
-			}
+            void swap(ConformerData& data) {
+                Math::Vector3DArray::swap(data);
+                std::swap(energy, data.energy);
+            }
 
-		  private:
-			const char* getClassName() const {
-				return "ConformerData";
-			}
+          private:
+            const char* getClassName() const {
+                return "ConformerData";
+            }
 
-			double energy;
-		};
+            double energy;
+        };
     }
 }
 

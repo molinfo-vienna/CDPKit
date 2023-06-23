@@ -30,15 +30,15 @@
 namespace CDPL
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		namespace ControlParameterDefault
-		{
+        namespace ControlParameterDefault
+        {
 
-			const bool STRICT_ERROR_CHECKING = false;
-		}
+            const bool STRICT_ERROR_CHECKING = false;
+        }
 
-		void initControlParameterDefaults() {}
-	}
+        void initControlParameterDefaults() {}
+    }
 }

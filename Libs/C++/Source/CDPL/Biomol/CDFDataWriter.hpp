@@ -29,37 +29,37 @@
 namespace CDPL 
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		class ByteBuffer;
-	}
+        class ByteBuffer;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class CDFDataWriter;
-		class Atom;
-		class MolecularGraph;
-	}
-	
-	namespace Biomol
-	{
+        class CDFDataWriter;
+        class Atom;
+        class MolecularGraph;
+    }
+    
+    namespace Biomol
+    {
 
-		class CDFDataWriter
-		{
+        class CDFDataWriter
+        {
 
-		public:
-			static void registerExternalPropertyHandlers();
+        public:
+            static void registerExternalPropertyHandlers();
 
-		private:
-			static unsigned int outputAtomProperties(const Chem::CDFDataWriter& writer, const Chem::Atom& atom, 
-													 Internal::ByteBuffer& data);
+        private:
+            static unsigned int outputAtomProperties(const Chem::CDFDataWriter& writer, const Chem::Atom& atom, 
+                                                     Internal::ByteBuffer& data);
 
-			static unsigned int outputMolGraphProperties(const Chem::CDFDataWriter& writer, const Chem::MolecularGraph& molgraph, 
-														 Internal::ByteBuffer& data);
-		};
-	}
+            static unsigned int outputMolGraphProperties(const Chem::CDFDataWriter& writer, const Chem::MolecularGraph& molgraph, 
+                                                         Internal::ByteBuffer& data);
+        };
+    }
 }
 
 #endif // CDPL_BIOMOL_CDFDATAWRITER_HPP

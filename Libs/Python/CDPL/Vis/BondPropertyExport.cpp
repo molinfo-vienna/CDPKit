@@ -33,26 +33,26 @@
 namespace 
 {
 
-	struct BondProperty {};
+    struct BondProperty {};
 }
 
 
 void CDPLPythonVis::exportBondProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
-		.def_readonly("COLOR", &Vis::BondProperty::COLOR)
-		.def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::BondProperty::DOUBLE_BOND_TRIM_LENGTH)
-		.def_readonly("LABEL_FONT", &Vis::BondProperty::LABEL_FONT)
-		.def_readonly("LABEL_MARGIN", &Vis::BondProperty::LABEL_MARGIN)
-		.def_readonly("LABEL_SIZE", &Vis::BondProperty::LABEL_SIZE)
-		.def_readonly("LINE_SPACING", &Vis::BondProperty::LINE_SPACING)
-		.def_readonly("LINE_WIDTH", &Vis::BondProperty::LINE_WIDTH)
-		.def_readonly("REACTION_CENTER_LINE_LENGTH", &Vis::BondProperty::REACTION_CENTER_LINE_LENGTH)
-		.def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::BondProperty::REACTION_CENTER_LINE_SPACING)
-		.def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::BondProperty::TRIPLE_BOND_TRIM_LENGTH)
-		.def_readonly("STEREO_BOND_HASH_SPACING", &Vis::BondProperty::STEREO_BOND_HASH_SPACING)
-		.def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondProperty::STEREO_BOND_WEDGE_WIDTH);
+    python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
+        .def_readonly("COLOR", &Vis::BondProperty::COLOR)
+        .def_readonly("DOUBLE_BOND_TRIM_LENGTH", &Vis::BondProperty::DOUBLE_BOND_TRIM_LENGTH)
+        .def_readonly("LABEL_FONT", &Vis::BondProperty::LABEL_FONT)
+        .def_readonly("LABEL_MARGIN", &Vis::BondProperty::LABEL_MARGIN)
+        .def_readonly("LABEL_SIZE", &Vis::BondProperty::LABEL_SIZE)
+        .def_readonly("LINE_SPACING", &Vis::BondProperty::LINE_SPACING)
+        .def_readonly("LINE_WIDTH", &Vis::BondProperty::LINE_WIDTH)
+        .def_readonly("REACTION_CENTER_LINE_LENGTH", &Vis::BondProperty::REACTION_CENTER_LINE_LENGTH)
+        .def_readonly("REACTION_CENTER_LINE_SPACING", &Vis::BondProperty::REACTION_CENTER_LINE_SPACING)
+        .def_readonly("TRIPLE_BOND_TRIM_LENGTH", &Vis::BondProperty::TRIPLE_BOND_TRIM_LENGTH)
+        .def_readonly("STEREO_BOND_HASH_SPACING", &Vis::BondProperty::STEREO_BOND_HASH_SPACING)
+        .def_readonly("STEREO_BOND_WEDGE_WIDTH", &Vis::BondProperty::STEREO_BOND_WEDGE_WIDTH);
 }

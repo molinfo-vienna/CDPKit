@@ -41,20 +41,20 @@ namespace CDPL
     namespace Vis
     {
 
-		/**
-		 * \brief Provides default values for built-in Vis::Atom properties.
-		 */
-		namespace AtomPropertyDefault
-		{
-		
-			extern CDPL_VIS_API const Color COLOR;
-			extern CDPL_VIS_API const Font LABEL_FONT;
-			extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
-			extern CDPL_VIS_API const Font SECONDARY_LABEL_FONT;
-			extern CDPL_VIS_API const SizeSpecification SECONDARY_LABEL_SIZE;
-			extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
-			extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
-		}
+        /**
+         * \brief Provides default values for built-in Vis::Atom properties.
+         */
+        namespace AtomPropertyDefault
+        {
+        
+            extern CDPL_VIS_API const Color COLOR;
+            extern CDPL_VIS_API const Font LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
+            extern CDPL_VIS_API const Font SECONDARY_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification SECONDARY_LABEL_SIZE;
+            extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
+            extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
+        }
     }
 }
 

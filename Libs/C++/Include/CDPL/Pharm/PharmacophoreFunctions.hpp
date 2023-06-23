@@ -36,33 +36,33 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class AtomContainer;
-	}
+        class AtomContainer;
+    }
 
     namespace Pharm 
     {
-	
-		class Pharmacophore;
-		class FeatureMapping;
-		class FeatureContainer;
-	
-		CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
-			
-		CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
-												   const Chem::Atom3DCoordinatesFunction& coords_func, 
-												   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
+    
+        class Pharmacophore;
+        class FeatureMapping;
+        class FeatureContainer;
+    
+        CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
+            
+        CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+                                                   const Chem::Atom3DCoordinatesFunction& coords_func, 
+                                                   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
 
-		CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr, 
-												   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
+        CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr, 
+                                                   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
 
-		CDPL_PHARM_API bool removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
-															  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact = 1.0);
+        CDPL_PHARM_API bool removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+                                                              const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact = 1.0);
 
-		CDPL_PHARM_API bool resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
-															  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact = 1.0);
+        CDPL_PHARM_API bool resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+                                                              const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact = 1.0);
 
     }
 }

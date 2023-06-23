@@ -40,131 +40,131 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 
     namespace Pharm
     {
 
-		class FeatureContainer;
-		class ScreeningDBAccessor;
-		class ScreeningProcessorImpl;
+        class FeatureContainer;
+        class ScreeningDBAccessor;
+        class ScreeningProcessorImpl;
 
-		/**
-		 * \brief ScreeningProcessor.
-		 */
-		class CDPL_PHARM_API ScreeningProcessor
-		{
+        /**
+         * \brief ScreeningProcessor.
+         */
+        class CDPL_PHARM_API ScreeningProcessor
+        {
 
-		  public:
-			enum HitReportMode
-			{
+          public:
+            enum HitReportMode
+            {
 
-			  FIRST_MATCHING_CONF,
-			  BEST_MATCHING_CONF,
-			  ALL_MATCHING_CONFS
-			};
+              FIRST_MATCHING_CONF,
+              BEST_MATCHING_CONF,
+              ALL_MATCHING_CONFS
+            };
 
-			class CDPL_PHARM_API SearchHit
-			{
+            class CDPL_PHARM_API SearchHit
+            {
 
-			public:
-				SearchHit(const ScreeningProcessor& hit_prov, const FeatureContainer& qry_pharm,
-						  const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
-						  const Math::Matrix4D& xform, std::size_t pharm_idx, 
-						  std::size_t mol_idx, std::size_t conf_idx);
+            public:
+                SearchHit(const ScreeningProcessor& hit_prov, const FeatureContainer& qry_pharm,
+                          const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
+                          const Math::Matrix4D& xform, std::size_t pharm_idx, 
+                          std::size_t mol_idx, std::size_t conf_idx);
 
-				const ScreeningProcessor& getHitProvider() const;
+                const ScreeningProcessor& getHitProvider() const;
 
-				const FeatureContainer& getQueryPharmacophore() const;
+                const FeatureContainer& getQueryPharmacophore() const;
 
-				const FeatureContainer& getHitPharmacophore() const;
-				
-				const Chem::Molecule& getHitMolecule() const;
-				
-				const Math::Matrix4D& getHitAlignmentTransform() const; 
+                const FeatureContainer& getHitPharmacophore() const;
+                
+                const Chem::Molecule& getHitMolecule() const;
+                
+                const Math::Matrix4D& getHitAlignmentTransform() const; 
 
-				std::size_t getHitPharmacophoreIndex() const;
+                std::size_t getHitPharmacophoreIndex() const;
 
-				std::size_t getHitMoleculeIndex() const;
+                std::size_t getHitMoleculeIndex() const;
 
-				std::size_t getHitConformationIndex() const;
+                std::size_t getHitConformationIndex() const;
 
-			private:
-				const ScreeningProcessor*     provider;
-				const FeatureContainer*       qryPharm;
-				const FeatureContainer*       hitPharm;
-				const Chem::Molecule*         molecule;
-				const Math::Matrix4D*         almntTransform;
-				std::size_t                   pharmIndex;
-				std::size_t                   molIndex;
-				std::size_t                   confIndex;
-			};
+            private:
+                const ScreeningProcessor*     provider;
+                const FeatureContainer*       qryPharm;
+                const FeatureContainer*       hitPharm;
+                const Chem::Molecule*         molecule;
+                const Math::Matrix4D*         almntTransform;
+                std::size_t                   pharmIndex;
+                std::size_t                   molIndex;
+                std::size_t                   confIndex;
+            };
 
-			typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
+            typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 
-			typedef std::function<bool(const SearchHit&, double)> HitCallbackFunction;
-			typedef std::function<double(const SearchHit&)> ScoringFunction;
-			typedef std::function<bool(std::size_t, std::size_t)> ProgressCallbackFunction;
+            typedef std::function<bool(const SearchHit&, double)> HitCallbackFunction;
+            typedef std::function<double(const SearchHit&)> ScoringFunction;
+            typedef std::function<bool(std::size_t, std::size_t)> ProgressCallbackFunction;
 
-			/**
-			 * \brief Constructs the \c %ScreeningProcessor instance for the given
-			 *        screening database accessor \a db_acc.
-			 * \param db_acc An accessor for the database to screen.
-			 */
-			ScreeningProcessor(ScreeningDBAccessor& db_acc);
+            /**
+             * \brief Constructs the \c %ScreeningProcessor instance for the given
+             *        screening database accessor \a db_acc.
+             * \param db_acc An accessor for the database to screen.
+             */
+            ScreeningProcessor(ScreeningDBAccessor& db_acc);
 
-			/**
-			 * Destructor.
-			 */
-			~ScreeningProcessor();
+            /**
+             * Destructor.
+             */
+            ~ScreeningProcessor();
 
-			void setDBAccessor(ScreeningDBAccessor& db_acc);
+            void setDBAccessor(ScreeningDBAccessor& db_acc);
 
-			ScreeningDBAccessor& getDBAccessor() const;
+            ScreeningDBAccessor& getDBAccessor() const;
 
-			void setHitReportMode(HitReportMode mode);
+            void setHitReportMode(HitReportMode mode);
 
-			HitReportMode getHitReportMode() const;
+            HitReportMode getHitReportMode() const;
 
-			void setMaxNumOmittedFeatures(std::size_t max_num);
+            void setMaxNumOmittedFeatures(std::size_t max_num);
 
-			std::size_t getMaxNumOmittedFeatures() const;
+            std::size_t getMaxNumOmittedFeatures() const;
 
-			void checkXVolumeClashes(bool check);
+            void checkXVolumeClashes(bool check);
 
-			bool xVolumeClashesChecked() const;
+            bool xVolumeClashesChecked() const;
 
-			void seekBestAlignments(bool seek_best);
+            void seekBestAlignments(bool seek_best);
 
-			bool bestAlignmentsSeeked() const;
+            bool bestAlignmentsSeeked() const;
 
-			void setHitCallback(const HitCallbackFunction& func);
+            void setHitCallback(const HitCallbackFunction& func);
 
-			const HitCallbackFunction& getHitCallback() const;
+            const HitCallbackFunction& getHitCallback() const;
 
-			void setProgressCallback(const ProgressCallbackFunction& func);
+            void setProgressCallback(const ProgressCallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallback() const;
+            const ProgressCallbackFunction& getProgressCallback() const;
 
-			void setScoringFunction(const ScoringFunction& func);
+            void setScoringFunction(const ScoringFunction& func);
 
-			const ScoringFunction& getScoringFunction() const;
+            const ScoringFunction& getScoringFunction() const;
 
-			std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);
+            std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);
 
-		  private:
-			typedef std::auto_ptr<ScreeningProcessorImpl> ImplementationPointer;
+          private:
+            typedef std::auto_ptr<ScreeningProcessorImpl> ImplementationPointer;
 
-			ScreeningProcessor(const ScreeningProcessor& proc);
-	
-			ScreeningProcessor& operator=(const ScreeningProcessor& proc);
+            ScreeningProcessor(const ScreeningProcessor& proc);
+    
+            ScreeningProcessor& operator=(const ScreeningProcessor& proc);
 
-			ImplementationPointer impl;
-		};
+            ImplementationPointer impl;
+        };
     }
 }
 

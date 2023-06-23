@@ -35,32 +35,32 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Grid 
-	{
-	
-		CDPL_GRID_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
+    namespace Grid 
+    {
+    
+        CDPL_GRID_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_GRID_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
+        CDPL_GRID_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
 
-		CDPL_GRID_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_GRID_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_GRID_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_GRID_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
 
-		CDPL_GRID_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_GRID_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_GRID_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
+        CDPL_GRID_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
-		CDPL_GRID_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-	
-		CDPL_GRID_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
-	}
+        CDPL_GRID_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+    
+        CDPL_GRID_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+    }
 }
 
 #endif // CDPL_GRID_CONTROLPARAMETERFUNCTIONS_HPP

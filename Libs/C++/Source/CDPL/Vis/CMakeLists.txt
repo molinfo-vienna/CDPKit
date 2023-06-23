@@ -53,7 +53,7 @@ SET(cdpl-vis_LIB_SRCS
     Pen.cpp
     Brush.cpp
     Color.cpp
-    ColorTable.cpp	
+    ColorTable.cpp    
     Font.cpp
     Rectangle2D.cpp
     Line2D.cpp
@@ -73,7 +73,7 @@ IF(Qt5Gui_FOUND)
       QtRenderer2D.cpp
       QtFontMetrics.cpp
       QtObjectFactory.cpp
-     )	
+     )    
 
   LINK_LIBRARIES(Qt5::Gui)
 ENDIF(Qt5Gui_FOUND)
@@ -86,14 +86,14 @@ IF(CAIRO_FOUND)
       ImageWriter.cpp
       CairoPointer.cpp
       StreamWriteFunc.cpp
-     )	
+     )    
 
   IF(HAVE_CAIRO_PNG_SUPPORT)
     SET(cdpl-vis_LIB_SRCS
         ${cdpl-vis_LIB_SRCS}
         PNGMolecularGraphWriter.cpp
         PNGReactionWriter.cpp
-       )	
+       )    
   ENDIF(HAVE_CAIRO_PNG_SUPPORT)
 
   IF(HAVE_CAIRO_PDF_SUPPORT)
@@ -101,7 +101,7 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         PDFMolecularGraphWriter.cpp
         PDFReactionWriter.cpp
-       )	
+       )    
   ENDIF(HAVE_CAIRO_PDF_SUPPORT)
 
   IF(HAVE_CAIRO_PS_SUPPORT)
@@ -109,7 +109,7 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         PSMolecularGraphWriter.cpp
         PSReactionWriter.cpp
-       )	
+       )    
   ENDIF(HAVE_CAIRO_PS_SUPPORT)
 
   IF(HAVE_CAIRO_SVG_SUPPORT)
@@ -117,7 +117,7 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         SVGMolecularGraphWriter.cpp
         SVGReactionWriter.cpp
-       )	
+       )    
   ENDIF(HAVE_CAIRO_SVG_SUPPORT)
 
   LINK_LIBRARIES(${CAIRO_LIBRARIES})
@@ -144,28 +144,28 @@ TARGET_LINK_LIBRARIES(cdpl-vis-shared cdpl-chem-shared cdpl-molprop-shared cdpl-
 
 SET_TARGET_PROPERTIES(cdpl-vis-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-vis
-		      CLEAN_DIRECT_OUTPUT 1
-		      INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-		      )
+              CLEAN_DIRECT_OUTPUT 1
+              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
+              )
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-vis.dll")
 ELSEIF(APPLE)
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-vis.dylib")
-ELSE()			
+ELSE()            
   SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/libcdpl-vis.so")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(TARGETS cdpl-vis-shared
         RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-	ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-	)
+    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
+    )
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

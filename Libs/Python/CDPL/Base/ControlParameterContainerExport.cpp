@@ -36,134 +36,134 @@
 namespace
 {
 
-	const CDPL::Base::Any& getParameterOrDef(CDPL::Base::ControlParameterContainer& cntnr, 
-												 const CDPL::Base::LookupKey& key, 
-												 const CDPL::Base::Any& def_val, bool local = false)
-	{
-		const CDPL::Base::Any& val = cntnr.getParameter(key, false, local);
+    const CDPL::Base::Any& getParameterOrDef(CDPL::Base::ControlParameterContainer& cntnr, 
+                                                 const CDPL::Base::LookupKey& key, 
+                                                 const CDPL::Base::Any& def_val, bool local = false)
+    {
+        const CDPL::Base::Any& val = cntnr.getParameter(key, false, local);
 
-		if (val.isEmpty())
-			return def_val;
+        if (val.isEmpty())
+            return def_val;
 
-		return val;
-	}
+        return val;
+    }
 
-	const CDPL::Base::Any& getItem(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Base::LookupKey& key)
-	{
-		return cntnr.getParameter(key, true);
-	}
+    const CDPL::Base::Any& getItem(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Base::LookupKey& key)
+    {
+        return cntnr.getParameter(key, true);
+    }
 
-	boost::python::list getParameterKeys(CDPL::Base::ControlParameterContainer& cntnr)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    boost::python::list getParameterKeys(CDPL::Base::ControlParameterContainer& cntnr)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::list keys;
+        python::list keys;
 
-		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
-					  std::bind(&python::list::append<Base::LookupKey>, std::ref(keys),
-								std::bind(&Base::ControlParameterContainer::ParameterEntry::first, std::placeholders::_1)));
-		return keys;
-	}
+        std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
+                      std::bind(&python::list::append<Base::LookupKey>, std::ref(keys),
+                                std::bind(&Base::ControlParameterContainer::ParameterEntry::first, std::placeholders::_1)));
+        return keys;
+    }
 
-	boost::python::list getParameterValues(CDPL::Base::ControlParameterContainer& cntnr)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    boost::python::list getParameterValues(CDPL::Base::ControlParameterContainer& cntnr)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::list values;
+        python::list values;
 
-		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
-					  std::bind(&python::list::append<Base::Any>, std::ref(values),
-								std::bind(&Base::ControlParameterContainer::ParameterEntry::second, std::placeholders::_1)));
-		return values;
-	}
+        std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
+                      std::bind(&python::list::append<Base::Any>, std::ref(values),
+                                std::bind(&Base::ControlParameterContainer::ParameterEntry::second, std::placeholders::_1)));
+        return values;
+    }
 
-	boost::python::list getParameters(CDPL::Base::ControlParameterContainer& cntnr)
-	{
-		using namespace boost;
-		using namespace CDPL;
+    boost::python::list getParameters(CDPL::Base::ControlParameterContainer& cntnr)
+    {
+        using namespace boost;
+        using namespace CDPL;
 
-		python::list params;
+        python::list params;
 
-		Base::ControlParameterContainer::ConstParameterIterator params_end = cntnr.getParametersEnd();
+        Base::ControlParameterContainer::ConstParameterIterator params_end = cntnr.getParametersEnd();
 
-		for (Base::ControlParameterContainer::ConstParameterIterator it = cntnr.getParametersBegin(); it!= params_end; ++it)  
-			params.append(python::make_tuple(it->first, it->second));
+        for (Base::ControlParameterContainer::ConstParameterIterator it = cntnr.getParametersBegin(); it!= params_end; ++it)  
+            params.append(python::make_tuple(it->first, it->second));
 
-		return params;
-	}
+        return params;
+    }
 
-	void addParameters(CDPL::Base::ControlParameterContainer& cntnr, CDPL::Base::ControlParameterContainer& other)
-	{
-		cntnr.addParameters(other);
-	}
+    void addParameters(CDPL::Base::ControlParameterContainer& cntnr, CDPL::Base::ControlParameterContainer& other)
+    {
+        cntnr.addParameters(other);
+    }
 
-	void copyParameters(CDPL::Base::ControlParameterContainer& cntnr, CDPL::Base::ControlParameterContainer& other)
-	{
-		cntnr.copyParameters(other);
-	}
+    void copyParameters(CDPL::Base::ControlParameterContainer& cntnr, CDPL::Base::ControlParameterContainer& other)
+    {
+        cntnr.copyParameters(other);
+    }
 
-	struct ControlParameterContainerWrapper : CDPL::Base::ControlParameterContainer, boost::python::wrapper<CDPL::Base::ControlParameterContainer>
-	{
-	};
+    struct ControlParameterContainerWrapper : CDPL::Base::ControlParameterContainer, boost::python::wrapper<CDPL::Base::ControlParameterContainer>
+    {
+    };
 }
 
 
 void CDPLPythonBase::exportControlParameterContainer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	void (Base::ControlParameterContainer::*setParameterFunc)(const Base::LookupKey&, const Base::Any&) = 
-		&Base::ControlParameterContainer::setParameter;
+    void (Base::ControlParameterContainer::*setParameterFunc)(const Base::LookupKey&, const Base::Any&) = 
+        &Base::ControlParameterContainer::setParameter;
 
-	typedef const Base::Any& (Base::ControlParameterContainer::*GetParameterFuncType)(const Base::LookupKey&, bool, bool) const;
+    typedef const Base::Any& (Base::ControlParameterContainer::*GetParameterFuncType)(const Base::LookupKey&, bool, bool) const;
 
-	python::class_<ControlParameterContainerWrapper, boost::noncopyable>("ControlParameterContainer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def("setParameter", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
-		.def("removeParameter", &Base::ControlParameterContainer::removeParameter, (python::arg("self"), python::arg("key")))
-		.def("getParameter", GetParameterFuncType(&Base::ControlParameterContainer::getParameter), 
-			 ((python::arg("self"), python::arg("key"), python::arg("throw_") = false, python::arg("local") = false)),
-			 python::return_value_policy<python::copy_const_reference>())
-		.def("getParameterOrDefault", &getParameterOrDef, 
-			 ((python::arg("self"), python::arg("key"), python::arg("def_value"), python::arg("local") = false)),
-			 python::return_value_policy<python::copy_const_reference>()) 
-		.def("isParameterSet", &Base::ControlParameterContainer::isParameterSet,
-			 ((python::arg("self"), python::arg("key"), python::arg("local") = false)))
-		.def("clearParameters", &Base::ControlParameterContainer::clearParameters, python::arg("self"))
-		.def("addParameters", &addParameters, (python::arg("self"), python::arg("cntnr")))
-		.def("copyParameters", &copyParameters, (python::arg("self"), python::arg("cntnr")))
-		.def("getNumParameters", &Base::ControlParameterContainer::getNumParameters, python::arg("self"))
-		.def("registerParameterChangedCallback", &Base::ControlParameterContainer::registerParameterChangedCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("unregisterParameterChangedCallback", &Base::ControlParameterContainer::unregisterParameterChangedCallback, 
-			 (python::arg("self"), python::arg("id")))
-		.def("registerParameterRemovedCallback", &Base::ControlParameterContainer::registerParameterRemovedCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("unregisterParameterRemovedCallback", &Base::ControlParameterContainer::unregisterParameterRemovedCallback, 
-			 (python::arg("self"), python::arg("id")))
-		.def("registerParentChangedCallback", &Base::ControlParameterContainer::registerParentChangedCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("unregisterParentChangedCallback", &Base::ControlParameterContainer::unregisterParentChangedCallback, 
-			 (python::arg("self"), python::arg("id")))
-		.def("getParent", &Base::ControlParameterContainer::getParent, python::arg("self"), python::return_internal_reference<1>())
-		.def("setParent", &Base::ControlParameterContainer::setParent, (python::arg("self"), python::arg("cntnr")), 
-			 python::with_custodian_and_ward<1, 2>())
-		.def("getParameterKeys", &getParameterKeys, python::arg("self"))
-		.def("getParameterValues", &getParameterValues, python::arg("self"))
-		.def("getParameters", &getParameters, python::arg("self"))
-		.def(ObjectIdentityCheckVisitor<Base::ControlParameterContainer>())
-		.add_property("parent", python::make_function(&Base::ControlParameterContainer::getParent, python::return_internal_reference<1>()),
-					  python::make_function(&Base::ControlParameterContainer::setParent, python::with_custodian_and_ward<1, 2>()))
-		.add_property("parameterKeys", &getParameterKeys)
-		.add_property("parameterValues", &getParameterValues)
-		.add_property("parameters", &getParameters)
-		.add_property("numParameters", &Base::ControlParameterContainer::getNumParameters)
-		.def("__getitem__", &getItem, python::return_value_policy<python::copy_const_reference>(), (python::arg("self"), python::arg("key")))
-		.def("__setitem__", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
-		.def("__delitem__", &Base::ControlParameterContainer::removeParameter, python::arg("self"))
-		.def("__contains__", &Base::ControlParameterContainer::isParameterSet, (python::arg("self"), python::arg("key")))
-		.def("__len__", &Base::ControlParameterContainer::getNumParameters, python::arg("self"));
+    python::class_<ControlParameterContainerWrapper, boost::noncopyable>("ControlParameterContainer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def("setParameter", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
+        .def("removeParameter", &Base::ControlParameterContainer::removeParameter, (python::arg("self"), python::arg("key")))
+        .def("getParameter", GetParameterFuncType(&Base::ControlParameterContainer::getParameter), 
+             ((python::arg("self"), python::arg("key"), python::arg("throw_") = false, python::arg("local") = false)),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("getParameterOrDefault", &getParameterOrDef, 
+             ((python::arg("self"), python::arg("key"), python::arg("def_value"), python::arg("local") = false)),
+             python::return_value_policy<python::copy_const_reference>()) 
+        .def("isParameterSet", &Base::ControlParameterContainer::isParameterSet,
+             ((python::arg("self"), python::arg("key"), python::arg("local") = false)))
+        .def("clearParameters", &Base::ControlParameterContainer::clearParameters, python::arg("self"))
+        .def("addParameters", &addParameters, (python::arg("self"), python::arg("cntnr")))
+        .def("copyParameters", &copyParameters, (python::arg("self"), python::arg("cntnr")))
+        .def("getNumParameters", &Base::ControlParameterContainer::getNumParameters, python::arg("self"))
+        .def("registerParameterChangedCallback", &Base::ControlParameterContainer::registerParameterChangedCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("unregisterParameterChangedCallback", &Base::ControlParameterContainer::unregisterParameterChangedCallback, 
+             (python::arg("self"), python::arg("id")))
+        .def("registerParameterRemovedCallback", &Base::ControlParameterContainer::registerParameterRemovedCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("unregisterParameterRemovedCallback", &Base::ControlParameterContainer::unregisterParameterRemovedCallback, 
+             (python::arg("self"), python::arg("id")))
+        .def("registerParentChangedCallback", &Base::ControlParameterContainer::registerParentChangedCallback, 
+             (python::arg("self"), python::arg("func")))
+        .def("unregisterParentChangedCallback", &Base::ControlParameterContainer::unregisterParentChangedCallback, 
+             (python::arg("self"), python::arg("id")))
+        .def("getParent", &Base::ControlParameterContainer::getParent, python::arg("self"), python::return_internal_reference<1>())
+        .def("setParent", &Base::ControlParameterContainer::setParent, (python::arg("self"), python::arg("cntnr")), 
+             python::with_custodian_and_ward<1, 2>())
+        .def("getParameterKeys", &getParameterKeys, python::arg("self"))
+        .def("getParameterValues", &getParameterValues, python::arg("self"))
+        .def("getParameters", &getParameters, python::arg("self"))
+        .def(ObjectIdentityCheckVisitor<Base::ControlParameterContainer>())
+        .add_property("parent", python::make_function(&Base::ControlParameterContainer::getParent, python::return_internal_reference<1>()),
+                      python::make_function(&Base::ControlParameterContainer::setParent, python::with_custodian_and_ward<1, 2>()))
+        .add_property("parameterKeys", &getParameterKeys)
+        .add_property("parameterValues", &getParameterValues)
+        .add_property("parameters", &getParameters)
+        .add_property("numParameters", &Base::ControlParameterContainer::getNumParameters)
+        .def("__getitem__", &getItem, python::return_value_policy<python::copy_const_reference>(), (python::arg("self"), python::arg("key")))
+        .def("__setitem__", setParameterFunc, (python::arg("self"), python::arg("key"), python::arg("value")))
+        .def("__delitem__", &Base::ControlParameterContainer::removeParameter, python::arg("self"))
+        .def("__contains__", &Base::ControlParameterContainer::isParameterSet, (python::arg("self"), python::arg("key")))
+        .def("__len__", &Base::ControlParameterContainer::getNumParameters, python::arg("self"));
 }

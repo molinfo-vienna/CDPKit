@@ -37,23 +37,23 @@ using namespace CDPL;
 bool Chem::calcCenterOfMass(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr)
 {
     if (cntnr.getNumAtoms() == 0)
-		return false;
+        return false;
 
     ctr.clear();
 
-	double tot_mass = 0.0;
-	
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		double wt = AtomDictionary::getAtomicWeight(getType(atom), getIsotope(atom));
-		
-		ctr.plusAssign(coords_func(atom) * wt);
-		tot_mass += wt;
-	}
+    double tot_mass = 0.0;
+    
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        double wt = AtomDictionary::getAtomicWeight(getType(atom), getIsotope(atom));
+        
+        ctr.plusAssign(coords_func(atom) * wt);
+        tot_mass += wt;
+    }
 
-	if (tot_mass <= 0.0)
-		return false;
-	
+    if (tot_mass <= 0.0)
+        return false;
+    
     ctr /= tot_mass;
 
     return true;

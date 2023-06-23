@@ -38,29 +38,29 @@
 namespace
 {
 
-	struct FeatureContainerWrapper : CDPL::Pharm::FeatureContainer, boost::python::wrapper<CDPL::Pharm::FeatureContainer> 
-	{
-	
-		typedef std::shared_ptr<FeatureContainerWrapper> SharedPointer;
+    struct FeatureContainerWrapper : CDPL::Pharm::FeatureContainer, boost::python::wrapper<CDPL::Pharm::FeatureContainer> 
+    {
+    
+        typedef std::shared_ptr<FeatureContainerWrapper> SharedPointer;
 
-		FEATURECONTAINER_IMPL()
-	};
+        FEATURECONTAINER_IMPL()
+    };
 }
 
 
 void CDPLPythonPharm::exportFeatureContainer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::scope scope = python::class_<FeatureContainerWrapper, FeatureContainerWrapper::SharedPointer,
-										 python::bases<Chem::Entity3DContainer, Base::PropertyContainer>,
-										 boost::noncopyable>("FeatureContainer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(FeatureContainerVirtualFunctionsVisitor<FeatureContainerWrapper>())
-		.def(FeatureContainerSpecialFunctionsVisitor(false))
-		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
-		.add_property("numFeatures", &Pharm::FeatureContainer::getNumFeatures);
+    python::scope scope = python::class_<FeatureContainerWrapper, FeatureContainerWrapper::SharedPointer,
+                                         python::bases<Chem::Entity3DContainer, Base::PropertyContainer>,
+                                         boost::noncopyable>("FeatureContainer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(FeatureContainerVirtualFunctionsVisitor<FeatureContainerWrapper>())
+        .def(FeatureContainerSpecialFunctionsVisitor(false))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .add_property("numFeatures", &Pharm::FeatureContainer::getNumFeatures);
 
-	python::register_ptr_to_python<Pharm::FeatureContainer::SharedPointer>();
+    python::register_ptr_to_python<Pharm::FeatureContainer::SharedPointer>();
 }

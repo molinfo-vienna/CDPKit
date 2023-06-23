@@ -31,31 +31,31 @@
 namespace CDPL
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		namespace ResidueDictionaryData
-		{
+        namespace ResidueDictionaryData
+        {
 
-			struct ResidueDataEntry
-			{
+            struct ResidueDataEntry
+            {
 
-				const char*  code;
-				const char*  replacesCode;
-				const char*  replacedByCode;
-				unsigned int type;
-				bool         obsolete;
-				const char*  name;
-				std::size_t  molIndex;
-			};
+                const char*  code;
+                const char*  replacesCode;
+                const char*  replacedByCode;
+                unsigned int type;
+                bool         obsolete;
+                const char*  name;
+                std::size_t  molIndex;
+            };
 
-			extern const ResidueDataEntry residueData[];
-			extern const std::size_t NUM_RESIDUE_ENTRIES;
+            extern const ResidueDataEntry residueData[];
+            extern const std::size_t NUM_RESIDUE_ENTRIES;
 
-			extern const char* residueStructureData;
-			extern const std::size_t RESIDUE_STRUCTURE_DATA_LEN;
-		}
-	}
+            extern const char* residueStructureData;
+            extern const std::size_t RESIDUE_STRUCTURE_DATA_LEN;
+        }
+    }
 }
 
 #endif // CDPL_BIOMOL_RESIDUEDICTIONARYDATA_HPP

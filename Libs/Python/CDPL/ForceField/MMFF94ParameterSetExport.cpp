@@ -32,19 +32,19 @@
 namespace 
 {
 
-	struct MMFF94ParameterSet {};
+    struct MMFF94ParameterSet {};
 }
 
 
 void CDPLPythonForceField::exportMMFF94ParameterSets()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MMFF94ParameterSet, boost::noncopyable>("MMFF94ParameterSet", python::no_init)
-		.def_readonly("DYNAMIC", &ForceField::MMFF94ParameterSet::DYNAMIC)
-		.def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC)
-		.def_readonly("STATIC_XOOP", &ForceField::MMFF94ParameterSet::STATIC_XOOP)
-		.def_readonly("STATIC_RTOR", &ForceField::MMFF94ParameterSet::STATIC_RTOR)
-		.def_readonly("STATIC_RTOR_XOOP", &ForceField::MMFF94ParameterSet::STATIC_RTOR_XOOP);
+    python::class_<MMFF94ParameterSet, boost::noncopyable>("MMFF94ParameterSet", python::no_init)
+        .def_readonly("DYNAMIC", &ForceField::MMFF94ParameterSet::DYNAMIC)
+        .def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC)
+        .def_readonly("STATIC_XOOP", &ForceField::MMFF94ParameterSet::STATIC_XOOP)
+        .def_readonly("STATIC_RTOR", &ForceField::MMFF94ParameterSet::STATIC_RTOR)
+        .def_readonly("STATIC_RTOR_XOOP", &ForceField::MMFF94ParameterSet::STATIC_RTOR_XOOP);
 }

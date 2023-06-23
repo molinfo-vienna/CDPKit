@@ -41,35 +41,35 @@ namespace CDPL
 
     namespace Chem
     {
-	
-		class Atom;
-		class Bond;
+    
+        class Atom;
+        class Bond;
     }
 
     namespace ConfGen 
     {
 
-		class TorsionRule;
+        class TorsionRule;
 
-		class CDPL_CONFGEN_API TorsionRuleMatch
-		{
+        class CDPL_CONFGEN_API TorsionRuleMatch
+        {
 
-		  public:
-			TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond, 
-							 const Chem::Atom* atom1, const Chem::Atom* atom2, 
-							 const Chem::Atom* atom3, const Chem::Atom* atom4);
+          public:
+            TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond, 
+                             const Chem::Atom* atom1, const Chem::Atom* atom2, 
+                             const Chem::Atom* atom3, const Chem::Atom* atom4);
 
-			const Chem::Atom* const* getAtoms() const;
+            const Chem::Atom* const* getAtoms() const;
 
-			const TorsionRule& getRule() const;
+            const TorsionRule& getRule() const;
 
-			const Chem::Bond& getBond() const;
+            const Chem::Bond& getBond() const;
 
-		  private:
-			const TorsionRule* rule;
-			const Chem::Bond*  bond;
-			const Chem::Atom*  atoms[4];
-		};
+          private:
+            const TorsionRule* rule;
+            const Chem::Bond*  bond;
+            const Chem::Atom*  atoms[4];
+        };
     }
 }
 

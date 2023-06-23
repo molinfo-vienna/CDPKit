@@ -33,29 +33,29 @@
 namespace 
 {
 
-	struct ReactionProperty {};
+    struct ReactionProperty {};
 }
 
 
 void CDPLPythonChem::exportReactionProperties()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ReactionProperty, boost::noncopyable>("ReactionProperty", python::no_init)
-		.def_readonly("NAME", &Chem::ReactionProperty::NAME)
-		.def_readonly("MATCH_EXPRESSION", &Chem::ReactionProperty::MATCH_EXPRESSION)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::ReactionProperty::MATCH_CONSTRAINTS)
-		.def_readonly("COMPONENT_GROUPS", &Chem::ReactionProperty::COMPONENT_GROUPS)
-		.def_readonly("ATOM_MAPPING", &Chem::ReactionProperty::ATOM_MAPPING)
-		.def_readonly("REACTION_DATA", &Chem::ReactionProperty::REACTION_DATA)
-		.def_readonly("MDL_USER_INITIALS", &Chem::ReactionProperty::MDL_USER_INITIALS)
-		.def_readonly("MDL_PROGRAM_NAME", &Chem::ReactionProperty::MDL_PROGRAM_NAME)
-		.def_readonly("MDL_TIMESTAMP", &Chem::ReactionProperty::MDL_TIMESTAMP)
-		.def_readonly("MDL_REGISTRY_NUMBER", &Chem::ReactionProperty::MDL_REGISTRY_NUMBER)
-		.def_readonly("MDL_COMMENT", &Chem::ReactionProperty::MDL_COMMENT)
-		.def_readonly("MDL_MOLECULE_RECORD", &Chem::ReactionProperty::MDL_MOLECULE_RECORD)
-		.def_readonly("MDL_INTERNAL_REGISTRY_NUMBER", &Chem::ReactionProperty::MDL_INTERNAL_REGISTRY_NUMBER)
-		.def_readonly("MDL_EXTERNAL_REGISTRY_NUMBER", &Chem::ReactionProperty::MDL_EXTERNAL_REGISTRY_NUMBER)
-		.def_readonly("MDL_RXN_FILE_VERSION", &Chem::ReactionProperty::MDL_RXN_FILE_VERSION);
+    python::class_<ReactionProperty, boost::noncopyable>("ReactionProperty", python::no_init)
+        .def_readonly("NAME", &Chem::ReactionProperty::NAME)
+        .def_readonly("MATCH_EXPRESSION", &Chem::ReactionProperty::MATCH_EXPRESSION)
+        .def_readonly("MATCH_CONSTRAINTS", &Chem::ReactionProperty::MATCH_CONSTRAINTS)
+        .def_readonly("COMPONENT_GROUPS", &Chem::ReactionProperty::COMPONENT_GROUPS)
+        .def_readonly("ATOM_MAPPING", &Chem::ReactionProperty::ATOM_MAPPING)
+        .def_readonly("REACTION_DATA", &Chem::ReactionProperty::REACTION_DATA)
+        .def_readonly("MDL_USER_INITIALS", &Chem::ReactionProperty::MDL_USER_INITIALS)
+        .def_readonly("MDL_PROGRAM_NAME", &Chem::ReactionProperty::MDL_PROGRAM_NAME)
+        .def_readonly("MDL_TIMESTAMP", &Chem::ReactionProperty::MDL_TIMESTAMP)
+        .def_readonly("MDL_REGISTRY_NUMBER", &Chem::ReactionProperty::MDL_REGISTRY_NUMBER)
+        .def_readonly("MDL_COMMENT", &Chem::ReactionProperty::MDL_COMMENT)
+        .def_readonly("MDL_MOLECULE_RECORD", &Chem::ReactionProperty::MDL_MOLECULE_RECORD)
+        .def_readonly("MDL_INTERNAL_REGISTRY_NUMBER", &Chem::ReactionProperty::MDL_INTERNAL_REGISTRY_NUMBER)
+        .def_readonly("MDL_EXTERNAL_REGISTRY_NUMBER", &Chem::ReactionProperty::MDL_EXTERNAL_REGISTRY_NUMBER)
+        .def_readonly("MDL_RXN_FILE_VERSION", &Chem::ReactionProperty::MDL_RXN_FILE_VERSION);
 }

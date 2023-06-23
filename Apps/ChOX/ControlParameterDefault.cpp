@@ -34,235 +34,235 @@
 
 namespace
 {
-	
-	const CDPL::Vis::ColorTable::Entry ELEM_COLORS_2D[] = {
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::C , CDPL::Vis::Color( 40.0 / 255.0,  40.0 / 255.0,  40.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::O , CDPL::Vis::Color(240.0 / 255.0,   0.0        ,   0.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::H , CDPL::Vis::Color(100.0 / 255.0, 100.0 / 255.0, 100.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::N , CDPL::Vis::Color(143.0 / 255.0, 143.0 / 255.0, 255.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::S , CDPL::Vis::Color(255.0 / 255.0, 200.0 / 255.0,  50.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cl, CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::B , CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::P , CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Fe, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ba, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Na, CDPL::Vis::Color(  0.0        ,   0.0        ,   1.0        )),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mg, CDPL::Vis::Color( 34.0 / 255.0, 139.0 / 255.0,  34.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Zn, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cu, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ni, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Br, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ca, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mn, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Al, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ti, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cr, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ag, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::F , CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Si, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Au, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::I , CDPL::Vis::Color(160.0 / 255.0,  32.0 / 255.0, 240.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Li, CDPL::Vis::Color(178.0 / 255.0,  34.0 / 255.0,  34.0 / 255.0)),
-		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::He, CDPL::Vis::Color(255.0 / 255.0, 192.0 / 255.0, 203.0 / 255.0))
-	};
+    
+    const CDPL::Vis::ColorTable::Entry ELEM_COLORS_2D[] = {
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::C , CDPL::Vis::Color( 40.0 / 255.0,  40.0 / 255.0,  40.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::O , CDPL::Vis::Color(240.0 / 255.0,   0.0        ,   0.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::H , CDPL::Vis::Color(100.0 / 255.0, 100.0 / 255.0, 100.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::N , CDPL::Vis::Color(143.0 / 255.0, 143.0 / 255.0, 255.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::S , CDPL::Vis::Color(255.0 / 255.0, 200.0 / 255.0,  50.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cl, CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::B , CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::P , CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Fe, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ba, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Na, CDPL::Vis::Color(  0.0        ,   0.0        ,   1.0        )),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mg, CDPL::Vis::Color( 34.0 / 255.0, 139.0 / 255.0,  34.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Zn, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cu, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ni, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Br, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ca, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mn, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Al, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ti, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cr, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ag, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::F , CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Si, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Au, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::I , CDPL::Vis::Color(160.0 / 255.0,  32.0 / 255.0, 240.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Li, CDPL::Vis::Color(178.0 / 255.0,  34.0 / 255.0,  34.0 / 255.0)),
+        CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::He, CDPL::Vis::Color(255.0 / 255.0, 192.0 / 255.0, 203.0 / 255.0))
+    };
 }
 
 
 namespace ChOX
 {
 
-	namespace ControlParameterDefault
-	{
+    namespace ControlParameterDefault
+    {
 
-		const CDPL::Vis::Color                     VIEW_BACKGROUND_COLOR                   = CDPL::Vis::Color(1.0, 1.0, 1.0);
-		const CDPL::Vis::Color                     VIEW_SELECTION_COLOR                    = CDPL::Vis::Color(0.8, 0.8, 1.0);
-		const CDPL::Vis::SizeSpecification         VIEWPORT_MARGIN                         = CDPL::Vis::SizeSpecification(10.0);
-		const std::size_t                          GRID_ROW_COUNT                          = 1;
-		const std::size_t                          GRID_COLUMN_COUNT                       = 1;
-		const bool                                 SHOW_GRID                               = true;
-		const bool                                 SHOW_RECORD_NUMBERS                     = true;
-		const bool                                 SHOW_RECORD_NAMES                       = true;
-		const CDPL::Vis::Pen::LineStyle            GRID_LINE_STYLE                         = CDPL::Vis::Pen::DOT_LINE;
-		const CDPL::Vis::Color                     GRID_LINE_COLOR                         = CDPL::Vis::Color(0.7, 0.7, 0.7);
-		const CDPL::Vis::SizeSpecification         GRID_LINE_WIDTH                         = CDPL::Vis::SizeSpecification(1.0);
-		const CDPL::Vis::Font                      RECORD_NUMBER_LABEL_FONT                = CDPL::Vis::Font();
-		const CDPL::Vis::SizeSpecification         RECORD_NUMBER_LABEL_SIZE                = CDPL::Vis::SizeSpecification(10.0);
-		const unsigned int                         RECORD_NUMBER_LABEL_ALIGNMENT           = CDPL::Vis::Alignment::BOTTOM | 
+        const CDPL::Vis::Color                     VIEW_BACKGROUND_COLOR                   = CDPL::Vis::Color(1.0, 1.0, 1.0);
+        const CDPL::Vis::Color                     VIEW_SELECTION_COLOR                    = CDPL::Vis::Color(0.8, 0.8, 1.0);
+        const CDPL::Vis::SizeSpecification         VIEWPORT_MARGIN                         = CDPL::Vis::SizeSpecification(10.0);
+        const std::size_t                          GRID_ROW_COUNT                          = 1;
+        const std::size_t                          GRID_COLUMN_COUNT                       = 1;
+        const bool                                 SHOW_GRID                               = true;
+        const bool                                 SHOW_RECORD_NUMBERS                     = true;
+        const bool                                 SHOW_RECORD_NAMES                       = true;
+        const CDPL::Vis::Pen::LineStyle            GRID_LINE_STYLE                         = CDPL::Vis::Pen::DOT_LINE;
+        const CDPL::Vis::Color                     GRID_LINE_COLOR                         = CDPL::Vis::Color(0.7, 0.7, 0.7);
+        const CDPL::Vis::SizeSpecification         GRID_LINE_WIDTH                         = CDPL::Vis::SizeSpecification(1.0);
+        const CDPL::Vis::Font                      RECORD_NUMBER_LABEL_FONT                = CDPL::Vis::Font();
+        const CDPL::Vis::SizeSpecification         RECORD_NUMBER_LABEL_SIZE                = CDPL::Vis::SizeSpecification(10.0);
+        const unsigned int                         RECORD_NUMBER_LABEL_ALIGNMENT           = CDPL::Vis::Alignment::BOTTOM | 
                                                                                              CDPL::Vis::Alignment::LEFT;
-		const CDPL::Vis::Color                     RECORD_NUMBER_LABEL_COLOR               = CDPL::Vis::Color(0.0, 0.0, 0.0);
-		const CDPL::Vis::Font                      RECORD_NAME_LABEL_FONT                  = CDPL::Vis::Font();
-		const CDPL::Vis::SizeSpecification         RECORD_NAME_LABEL_SIZE                  = CDPL::Vis::SizeSpecification(10.0);
-		const unsigned int                         RECORD_NAME_LABEL_ALIGNMENT             = CDPL::Vis::Alignment::TOP | 
+        const CDPL::Vis::Color                     RECORD_NUMBER_LABEL_COLOR               = CDPL::Vis::Color(0.0, 0.0, 0.0);
+        const CDPL::Vis::Font                      RECORD_NAME_LABEL_FONT                  = CDPL::Vis::Font();
+        const CDPL::Vis::SizeSpecification         RECORD_NAME_LABEL_SIZE                  = CDPL::Vis::SizeSpecification(10.0);
+        const unsigned int                         RECORD_NAME_LABEL_ALIGNMENT             = CDPL::Vis::Alignment::TOP | 
                                                                                              CDPL::Vis::Alignment::H_CENTER;
-		const CDPL::Vis::Color                     RECORD_NAME_LABEL_COLOR                 = CDPL::Vis::Color(0.0, 0.0, 0.0);
+        const CDPL::Vis::Color                     RECORD_NAME_LABEL_COLOR                 = CDPL::Vis::Color(0.0, 0.0, 0.0);
 
-		const bool                                 PRINT_FRAME                             = true;
-		const bool                                 PRINT_DATE                              = true;
-		const bool                                 PRINT_PAGE_NUMBER                       = true;
-		const bool                                 PRINT_FILE_NAME                         = true;
-		const CDPL::Vis::Pen::LineStyle            FRAME_LINE_STYLE                        = CDPL::Vis::Pen::SOLID_LINE;
-		const CDPL::Vis::Color                     FRAME_LINE_COLOR                        = CDPL::Vis::Color(0.0, 0.0, 0.0);
-		const CDPL::Vis::SizeSpecification         FRAME_LINE_WIDTH                        = CDPL::Vis::SizeSpecification(0.5);
-		const CDPL::Vis::Font                      PRINTING_TEXT_LABEL_FONT                = CDPL::Vis::Font();
-		const CDPL::Vis::SizeSpecification         PRINTING_TEXT_LABEL_SIZE                = CDPL::Vis::SizeSpecification(10.0);
-		const CDPL::Vis::SizeSpecification         PRINTING_TEXT_LABEL_SPACING             = CDPL::Vis::SizeSpecification(10.0);
-		const CDPL::Vis::Color                     PRINTING_TEXT_LABEL_COLOR               = CDPL::Vis::Color(0.0, 0.0, 0.0);
-		const unsigned int                         PAGE_NUMBER_LABEL_ALIGNMENT             = CDPL::Vis::Alignment::BOTTOM |
-		                                                                                     CDPL::Vis::Alignment::H_CENTER;
-		const unsigned int                         DATE_LABEL_ALIGNMENT                    = CDPL::Vis::Alignment::TOP | 
+        const bool                                 PRINT_FRAME                             = true;
+        const bool                                 PRINT_DATE                              = true;
+        const bool                                 PRINT_PAGE_NUMBER                       = true;
+        const bool                                 PRINT_FILE_NAME                         = true;
+        const CDPL::Vis::Pen::LineStyle            FRAME_LINE_STYLE                        = CDPL::Vis::Pen::SOLID_LINE;
+        const CDPL::Vis::Color                     FRAME_LINE_COLOR                        = CDPL::Vis::Color(0.0, 0.0, 0.0);
+        const CDPL::Vis::SizeSpecification         FRAME_LINE_WIDTH                        = CDPL::Vis::SizeSpecification(0.5);
+        const CDPL::Vis::Font                      PRINTING_TEXT_LABEL_FONT                = CDPL::Vis::Font();
+        const CDPL::Vis::SizeSpecification         PRINTING_TEXT_LABEL_SIZE                = CDPL::Vis::SizeSpecification(10.0);
+        const CDPL::Vis::SizeSpecification         PRINTING_TEXT_LABEL_SPACING             = CDPL::Vis::SizeSpecification(10.0);
+        const CDPL::Vis::Color                     PRINTING_TEXT_LABEL_COLOR               = CDPL::Vis::Color(0.0, 0.0, 0.0);
+        const unsigned int                         PAGE_NUMBER_LABEL_ALIGNMENT             = CDPL::Vis::Alignment::BOTTOM |
+                                                                                             CDPL::Vis::Alignment::H_CENTER;
+        const unsigned int                         DATE_LABEL_ALIGNMENT                    = CDPL::Vis::Alignment::TOP | 
                                                                                              CDPL::Vis::Alignment::RIGHT;
-		const unsigned int                         FILE_NAME_LABEL_ALIGNMENT               = CDPL::Vis::Alignment::TOP | 
+        const unsigned int                         FILE_NAME_LABEL_ALIGNMENT               = CDPL::Vis::Alignment::TOP | 
                                                                                              CDPL::Vis::Alignment::LEFT;
 
-		const bool                                 USE_ATOM_COLOR_TABLE                    = true;
-		const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable(&ELEM_COLORS_2D[0],
-																																							&ELEM_COLORS_2D[0] +
-																																							sizeof(ELEM_COLORS_2D) / sizeof(CDPL::Vis::ColorTable::Entry)));
+        const bool                                 USE_ATOM_COLOR_TABLE                    = true;
+        const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable(&ELEM_COLORS_2D[0],
+                                                                                                                                                            &ELEM_COLORS_2D[0] +
+                                                                                                                                                            sizeof(ELEM_COLORS_2D) / sizeof(CDPL::Vis::ColorTable::Entry)));
 
-		const std::string                          DEFAULT_MOL_OUTPUT_FORMAT               = "SDF";
-		const std::string                          DEFAULT_RXN_OUTPUT_FORMAT               = "RDF";
+        const std::string                          DEFAULT_MOL_OUTPUT_FORMAT               = "SDF";
+        const std::string                          DEFAULT_RXN_OUTPUT_FORMAT               = "RDF";
 
-		const bool                                 WRITE_SINGLE_RECORD_FILES               = true;
+        const bool                                 WRITE_SINGLE_RECORD_FILES               = true;
 
-		const std::string                          RECORD_SEPARATOR                        = "";
+        const std::string                          RECORD_SEPARATOR                        = "";
 
-		const bool                                 MOL2_INPUT_STRICT_ERROR_CHECKING        = false;
-		const bool                                 MOL2_INPUT_MULTI_CONF_IMPORT            = true;
+        const bool                                 MOL2_INPUT_STRICT_ERROR_CHECKING        = false;
+        const bool                                 MOL2_INPUT_MULTI_CONF_IMPORT            = true;
 
-		const bool                                 MOL2_OUTPUT_STRICT_ERROR_CHECKING       = false;
-		const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES   = false;
-		const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT           = true;
+        const bool                                 MOL2_OUTPUT_STRICT_ERROR_CHECKING       = false;
+        const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES   = false;
+        const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT           = true;
 
-		const bool                                 MOL_INPUT_STRICT_ERROR_CHECKING         = false;
-		const bool                                 MOL_INPUT_IGNORE_PARITY                 = true;
-		const bool                                 MOL_INPUT_TRIM_STRINGS                  = true;
-		const bool                                 MOL_INPUT_TRIM_LINES                    = false;
-		const bool                                 MOL_INPUT_CHECK_LINE_LENGTH             = false;
-		const bool                                 MOL_INPUT_MULTI_CONF_IMPORT             = false;
+        const bool                                 MOL_INPUT_STRICT_ERROR_CHECKING         = false;
+        const bool                                 MOL_INPUT_IGNORE_PARITY                 = true;
+        const bool                                 MOL_INPUT_TRIM_STRINGS                  = true;
+        const bool                                 MOL_INPUT_TRIM_LINES                    = false;
+        const bool                                 MOL_INPUT_CHECK_LINE_LENGTH             = false;
+        const bool                                 MOL_INPUT_MULTI_CONF_IMPORT             = false;
 
-		const bool                                 MOL_OUTPUT_STRICT_ERROR_CHECKING        = false;
-		const unsigned int                         MOL_OUTPUT_CTAB_VERSION                 = 0;
-		const bool                                 MOL_OUTPUT_UPDATE_TIMESTAMP             = true;
-		const bool                                 MOL_OUTPUT_TRIM_STRINGS                 = true;
-		const bool                                 MOL_OUTPUT_TRIM_LINES                   = false;
-		const bool                                 MOL_OUTPUT_TRUNCATE_STRINGS             = true;
-		const bool                                 MOL_OUTPUT_TRUNCATE_LINES               = false;
-		const bool                                 MOL_OUTPUT_CHECK_LINE_LENGTH            = false;
-		const bool                                 MOL_OUTPUT_IGNORE_PARITY                = true;
-		const bool                                 MOL_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
-		const bool                                 MOL_OUTPUT_MULTI_CONF_EXPORT            = false;
+        const bool                                 MOL_OUTPUT_STRICT_ERROR_CHECKING        = false;
+        const unsigned int                         MOL_OUTPUT_CTAB_VERSION                 = 0;
+        const bool                                 MOL_OUTPUT_UPDATE_TIMESTAMP             = true;
+        const bool                                 MOL_OUTPUT_TRIM_STRINGS                 = true;
+        const bool                                 MOL_OUTPUT_TRIM_LINES                   = false;
+        const bool                                 MOL_OUTPUT_TRUNCATE_STRINGS             = true;
+        const bool                                 MOL_OUTPUT_TRUNCATE_LINES               = false;
+        const bool                                 MOL_OUTPUT_CHECK_LINE_LENGTH            = false;
+        const bool                                 MOL_OUTPUT_IGNORE_PARITY                = true;
+        const bool                                 MOL_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
+        const bool                                 MOL_OUTPUT_MULTI_CONF_EXPORT            = false;
 
-		const bool                                 SDF_INPUT_STRICT_ERROR_CHECKING         = false;
-		const bool                                 SDF_INPUT_IGNORE_PARITY                 = true;
-		const bool                                 SDF_INPUT_TRIM_STRINGS                  = true;
-		const bool                                 SDF_INPUT_TRIM_LINES                    = false;
-		const bool                                 SDF_INPUT_CHECK_LINE_LENGTH             = false;
-		const bool                                 SDF_INPUT_MULTI_CONF_IMPORT             = true;
+        const bool                                 SDF_INPUT_STRICT_ERROR_CHECKING         = false;
+        const bool                                 SDF_INPUT_IGNORE_PARITY                 = true;
+        const bool                                 SDF_INPUT_TRIM_STRINGS                  = true;
+        const bool                                 SDF_INPUT_TRIM_LINES                    = false;
+        const bool                                 SDF_INPUT_CHECK_LINE_LENGTH             = false;
+        const bool                                 SDF_INPUT_MULTI_CONF_IMPORT             = true;
 
-		const bool                                 SDF_OUTPUT_STRICT_ERROR_CHECKING        = false;
-		const unsigned int                         SDF_OUTPUT_CTAB_VERSION                 = 0;
-		const bool                                 SDF_OUTPUT_UPDATE_TIMESTAMP             = true;
-		const bool                                 SDF_OUTPUT_TRIM_STRINGS                 = true;
-		const bool                                 SDF_OUTPUT_TRIM_LINES                   = false;
-		const bool                                 SDF_OUTPUT_TRUNCATE_STRINGS             = true;
-		const bool                                 SDF_OUTPUT_TRUNCATE_LINES               = false;
-		const bool                                 SDF_OUTPUT_CHECK_LINE_LENGTH            = false;
-		const bool                                 SDF_OUTPUT_IGNORE_PARITY                = true;
-		const bool                                 SDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
-		const bool                                 SDF_OUTPUT_MULTI_CONF_EXPORT            = true;
+        const bool                                 SDF_OUTPUT_STRICT_ERROR_CHECKING        = false;
+        const unsigned int                         SDF_OUTPUT_CTAB_VERSION                 = 0;
+        const bool                                 SDF_OUTPUT_UPDATE_TIMESTAMP             = true;
+        const bool                                 SDF_OUTPUT_TRIM_STRINGS                 = true;
+        const bool                                 SDF_OUTPUT_TRIM_LINES                   = false;
+        const bool                                 SDF_OUTPUT_TRUNCATE_STRINGS             = true;
+        const bool                                 SDF_OUTPUT_TRUNCATE_LINES               = false;
+        const bool                                 SDF_OUTPUT_CHECK_LINE_LENGTH            = false;
+        const bool                                 SDF_OUTPUT_IGNORE_PARITY                = true;
+        const bool                                 SDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 SDF_OUTPUT_MULTI_CONF_EXPORT            = true;
 
-		const bool                                 RXN_INPUT_STRICT_ERROR_CHECKING         = false;
-		const bool                                 RXN_INPUT_IGNORE_PARITY                 = true;
-		const bool                                 RXN_INPUT_TRIM_STRINGS                  = true;
-		const bool                                 RXN_INPUT_TRIM_LINES                    = false;
-		const bool                                 RXN_INPUT_CHECK_LINE_LENGTH             = false;
+        const bool                                 RXN_INPUT_STRICT_ERROR_CHECKING         = false;
+        const bool                                 RXN_INPUT_IGNORE_PARITY                 = true;
+        const bool                                 RXN_INPUT_TRIM_STRINGS                  = true;
+        const bool                                 RXN_INPUT_TRIM_LINES                    = false;
+        const bool                                 RXN_INPUT_CHECK_LINE_LENGTH             = false;
 
-		const bool                                 RXN_OUTPUT_STRICT_ERROR_CHECKING        = false;
-		const unsigned int                         RXN_OUTPUT_CTAB_VERSION                 = 0;
-		const unsigned int                         RXN_OUTPUT_RXN_FILE_VERSION             = 0;
-		const bool                                 RXN_OUTPUT_UPDATE_TIMESTAMP             = true;
-		const bool                                 RXN_OUTPUT_TRIM_STRINGS                 = true;
-		const bool                                 RXN_OUTPUT_TRIM_LINES                   = false;
-		const bool                                 RXN_OUTPUT_TRUNCATE_STRINGS             = true;
-		const bool                                 RXN_OUTPUT_TRUNCATE_LINES               = false;
-		const bool                                 RXN_OUTPUT_CHECK_LINE_LENGTH            = false;
-		const bool                                 RXN_OUTPUT_IGNORE_PARITY                = true;
-		const bool                                 RXN_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
+        const bool                                 RXN_OUTPUT_STRICT_ERROR_CHECKING        = false;
+        const unsigned int                         RXN_OUTPUT_CTAB_VERSION                 = 0;
+        const unsigned int                         RXN_OUTPUT_RXN_FILE_VERSION             = 0;
+        const bool                                 RXN_OUTPUT_UPDATE_TIMESTAMP             = true;
+        const bool                                 RXN_OUTPUT_TRIM_STRINGS                 = true;
+        const bool                                 RXN_OUTPUT_TRIM_LINES                   = false;
+        const bool                                 RXN_OUTPUT_TRUNCATE_STRINGS             = true;
+        const bool                                 RXN_OUTPUT_TRUNCATE_LINES               = false;
+        const bool                                 RXN_OUTPUT_CHECK_LINE_LENGTH            = false;
+        const bool                                 RXN_OUTPUT_IGNORE_PARITY                = true;
+        const bool                                 RXN_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
 
-		const bool                                 RDF_INPUT_STRICT_ERROR_CHECKING         = false;
-		const bool                                 RDF_INPUT_IGNORE_PARITY                 = true;
-		const bool                                 RDF_INPUT_TRIM_STRINGS                  = true;
-		const bool                                 RDF_INPUT_TRIM_LINES                    = false;
-		const bool                                 RDF_INPUT_CHECK_LINE_LENGTH             = false;
+        const bool                                 RDF_INPUT_STRICT_ERROR_CHECKING         = false;
+        const bool                                 RDF_INPUT_IGNORE_PARITY                 = true;
+        const bool                                 RDF_INPUT_TRIM_STRINGS                  = true;
+        const bool                                 RDF_INPUT_TRIM_LINES                    = false;
+        const bool                                 RDF_INPUT_CHECK_LINE_LENGTH             = false;
 
-		const bool                                 RDF_OUTPUT_STRICT_ERROR_CHECKING        = false;
-		const unsigned int                         RDF_OUTPUT_CTAB_VERSION                 = 0;
-		const unsigned int                         RDF_OUTPUT_RXN_FILE_VERSION             = 0;
-		const bool                                 RDF_OUTPUT_UPDATE_TIMESTAMP             = true;
-		const bool                                 RDF_OUTPUT_TRIM_STRINGS                 = true;
-		const bool                                 RDF_OUTPUT_TRIM_LINES                   = false;
-		const bool                                 RDF_OUTPUT_TRUNCATE_STRINGS             = true;
-		const bool                                 RDF_OUTPUT_TRUNCATE_LINES               = false;
-		const bool                                 RDF_OUTPUT_CHECK_LINE_LENGTH            = false;
-		const bool                                 RDF_OUTPUT_IGNORE_PARITY                = true;
-		const bool                                 RDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+        const bool                                 RDF_OUTPUT_STRICT_ERROR_CHECKING        = false;
+        const unsigned int                         RDF_OUTPUT_CTAB_VERSION                 = 0;
+        const unsigned int                         RDF_OUTPUT_RXN_FILE_VERSION             = 0;
+        const bool                                 RDF_OUTPUT_UPDATE_TIMESTAMP             = true;
+        const bool                                 RDF_OUTPUT_TRIM_STRINGS                 = true;
+        const bool                                 RDF_OUTPUT_TRIM_LINES                   = false;
+        const bool                                 RDF_OUTPUT_TRUNCATE_STRINGS             = true;
+        const bool                                 RDF_OUTPUT_TRUNCATE_LINES               = false;
+        const bool                                 RDF_OUTPUT_CHECK_LINE_LENGTH            = false;
+        const bool                                 RDF_OUTPUT_IGNORE_PARITY                = true;
+        const bool                                 RDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
 
-		const bool                                 JME_INPUT_STRICT_ERROR_CHECKING         = false;
+        const bool                                 JME_INPUT_STRICT_ERROR_CHECKING         = false;
 
-		const bool                                 JME_OUTPUT_STRICT_ERROR_CHECKING        = false;
-		const bool                                 JME_OUTPUT_SEPARATE_COMPONENTS          = true;
-		const bool                                 JME_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
-		const std::string                          JME_OUTPUT_RECORD_SEPARATOR             = "\n";
+        const bool                                 JME_OUTPUT_STRICT_ERROR_CHECKING        = false;
+        const bool                                 JME_OUTPUT_SEPARATE_COMPONENTS          = true;
+        const bool                                 JME_OUTPUT_WRITE_SINGLE_RECORD_FILES    = true;
+        const std::string                          JME_OUTPUT_RECORD_SEPARATOR             = "\n";
 
-		const bool                                 SMILES_INPUT_STRICT_ERROR_CHECKING      = false;
-		const std::string                          SMILES_INPUT_RECORD_FORMAT              = "SN";
+        const bool                                 SMILES_INPUT_STRICT_ERROR_CHECKING      = false;
+        const std::string                          SMILES_INPUT_RECORD_FORMAT              = "SN";
 
-		const bool                                 SMILES_OUTPUT_STRICT_ERROR_CHECKING     = false;
-		const bool                                 SMILES_OUTPUT_ORDINARY_H_DEPLETE        = true;
-		const bool                                 SMILES_OUTPUT_WRITE_CANONICAL_FORM      = false;
-		const bool                                 SMILES_OUTPUT_WRITE_KEKULE_FORM         = false;
-		const bool                                 SMILES_OUTPUT_WRITE_ATOM_STEREO         = true;
-		const bool                                 SMILES_OUTPUT_WRITE_BOND_STEREO         = true;
-		const bool                                 SMILES_OUTPUT_WRITE_RING_BOND_STEREO    = false;
-		const bool                                 SMILES_OUTPUT_WRITE_ATOM_MAPPING_ID     = true;
-		const bool                                 SMILES_OUTPUT_WRITE_SINGLE_BONDS        = false;
-		const bool                                 SMILES_OUTPUT_WRITE_AROMATIC_BONDS      = false;
-		const bool                                 SMILES_OUTPUT_WRITE_ISOTOPE             = true;
-		const bool                                 SMILES_OUTPUT_NO_ORGANIC_SUBSET         = false;
-		const std::size_t                          SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE = 8;
-		const bool                                 SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
-		const std::string                          SMILES_OUTPUT_RECORD_FORMAT             = "SN";
+        const bool                                 SMILES_OUTPUT_STRICT_ERROR_CHECKING     = false;
+        const bool                                 SMILES_OUTPUT_ORDINARY_H_DEPLETE        = true;
+        const bool                                 SMILES_OUTPUT_WRITE_CANONICAL_FORM      = false;
+        const bool                                 SMILES_OUTPUT_WRITE_KEKULE_FORM         = false;
+        const bool                                 SMILES_OUTPUT_WRITE_ATOM_STEREO         = true;
+        const bool                                 SMILES_OUTPUT_WRITE_BOND_STEREO         = true;
+        const bool                                 SMILES_OUTPUT_WRITE_RING_BOND_STEREO    = false;
+        const bool                                 SMILES_OUTPUT_WRITE_ATOM_MAPPING_ID     = true;
+        const bool                                 SMILES_OUTPUT_WRITE_SINGLE_BONDS        = false;
+        const bool                                 SMILES_OUTPUT_WRITE_AROMATIC_BONDS      = false;
+        const bool                                 SMILES_OUTPUT_WRITE_ISOTOPE             = true;
+        const bool                                 SMILES_OUTPUT_NO_ORGANIC_SUBSET         = false;
+        const std::size_t                          SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE = 8;
+        const bool                                 SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
+        const std::string                          SMILES_OUTPUT_RECORD_FORMAT             = "SN";
 
-		const bool                                 SMARTS_INPUT_STRICT_ERROR_CHECKING      = false;
+        const bool                                 SMARTS_INPUT_STRICT_ERROR_CHECKING      = false;
 
-		const bool                                 SMARTS_OUTPUT_STRICT_ERROR_CHECKING     = false;
-		const bool                                 SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
-		const std::string                          SMARTS_OUTPUT_RECORD_SEPARATOR          = "\n";
+        const bool                                 SMARTS_OUTPUT_STRICT_ERROR_CHECKING     = false;
+        const bool                                 SMARTS_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
+        const std::string                          SMARTS_OUTPUT_RECORD_SEPARATOR          = "\n";
 
-		const bool                                 INCHI_INPUT_STRICT_ERROR_CHECKING       = false;
-		const std::string                          INCHI_INPUT_OPTIONS                     = "";
+        const bool                                 INCHI_INPUT_STRICT_ERROR_CHECKING       = false;
+        const std::string                          INCHI_INPUT_OPTIONS                     = "";
 
-		const bool                                 INCHI_OUTPUT_STRICT_ERROR_CHECKING      = false;
-		const std::string                          INCHI_OUTPUT_OPTIONS                    = "-WarnOnEmptyStructure -AuxNone -NEWPSOFF";
-		const std::string                          INCHI_OUTPUT_RECORD_SEPARATOR           = "\n";
-		const bool                                 INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES  = true;
+        const bool                                 INCHI_OUTPUT_STRICT_ERROR_CHECKING      = false;
+        const std::string                          INCHI_OUTPUT_OPTIONS                    = "-WarnOnEmptyStructure -AuxNone -NEWPSOFF";
+        const std::string                          INCHI_OUTPUT_RECORD_SEPARATOR           = "\n";
+        const bool                                 INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES  = true;
 
-		const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = true;
-		const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = false;
+        const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = true;
+        const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = false;
 
-		const bool                                 MMTF_INPUT_STRICT_ERROR_CHECKING        = true;
+        const bool                                 MMTF_INPUT_STRICT_ERROR_CHECKING        = true;
 
-		const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
-		const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
+        const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
+        const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
 
-		const bool                                 CFL_INPUT_STRICT_ERROR_CHECKING         = true;
+        const bool                                 CFL_INPUT_STRICT_ERROR_CHECKING         = true;
 
-		const bool                                  PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
-		const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
-		const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;
-		const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
+        const bool                                  PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
+        const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
+        const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;
+        const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
 
-		const bool                                 IMG_OUTPUT_ERASE_BACKGROUND             = false;
-		const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR             = CDPL::Vis::Color(1.0, 1.0, 1.0);
-	}
+        const bool                                 IMG_OUTPUT_ERASE_BACKGROUND             = false;
+        const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR             = CDPL::Vis::Color(1.0, 1.0, 1.0);
+    }
 }

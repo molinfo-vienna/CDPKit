@@ -36,107 +36,107 @@ using namespace CDPL;
 
 
 Pharm::SpatialFeatureMapping::SpatialFeatureMapping(bool query_mode):
-	typeMatchFunc(FeatureTypeMatchFunctor()), posMatchFunc(FeaturePositionMatchFunctor(query_mode)),
-	geomMatchFunc(FeatureGeometryMatchFunctor())
+    typeMatchFunc(FeatureTypeMatchFunctor()), posMatchFunc(FeaturePositionMatchFunctor(query_mode)),
+    geomMatchFunc(FeatureGeometryMatchFunctor())
 {}
-	
+    
 void Pharm::SpatialFeatureMapping::setTypeMatchFunction(const TypeMatchFunction& func)
 {
-	typeMatchFunc = func;
+    typeMatchFunc = func;
 }
 
 const Pharm::SpatialFeatureMapping::TypeMatchFunction& 
 Pharm::SpatialFeatureMapping::getTypeMatchFunction() const
 {
-	return typeMatchFunc;
+    return typeMatchFunc;
 }
 
 void Pharm::SpatialFeatureMapping::setPositionMatchFunction(const PositionMatchFunction& func)
 {
-	posMatchFunc = func;
+    posMatchFunc = func;
 }
 
 const Pharm::SpatialFeatureMapping::PositionMatchFunction& 
 Pharm::SpatialFeatureMapping::getPositionMatchFunction() const
 {
-	return posMatchFunc;
+    return posMatchFunc;
 }
 
 void Pharm::SpatialFeatureMapping::setGeometryMatchFunction(const GeometryMatchFunction& func)
 {
-	geomMatchFunc = func;
+    geomMatchFunc = func;
 }
 
 const Pharm::SpatialFeatureMapping::GeometryMatchFunction& 
 Pharm::SpatialFeatureMapping::getGeometryMatchFunction() const
 {
-	return geomMatchFunc;
+    return geomMatchFunc;
 }
 
 double Pharm::SpatialFeatureMapping::getPositionMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const
 {
-	FeaturePairToScoreMap::const_iterator it = posMatchScores.find(FeaturePair(&ref_ftr, &aligned_ftr));
+    FeaturePairToScoreMap::const_iterator it = posMatchScores.find(FeaturePair(&ref_ftr, &aligned_ftr));
 
-	if (it == posMatchScores.end())
-		return 0.0;
+    if (it == posMatchScores.end())
+        return 0.0;
 
-	return it->second;
+    return it->second;
 }
 
 double Pharm::SpatialFeatureMapping::getGeometryMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const
 {
-	FeaturePairToScoreMap::const_iterator it = geomMatchScores.find(FeaturePair(&ref_ftr, &aligned_ftr));
+    FeaturePairToScoreMap::const_iterator it = geomMatchScores.find(FeaturePair(&ref_ftr, &aligned_ftr));
 
-	if (it == geomMatchScores.end())
-		return 0.0;
+    if (it == geomMatchScores.end())
+        return 0.0;
 
-	return it->second;
+    return it->second;
 }
 
 void Pharm::SpatialFeatureMapping::perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform)
 {
-	clear();
+    clear();
 
-	posMatchScores.clear();
-	geomMatchScores.clear();
+    posMatchScores.clear();
+    geomMatchScores.clear();
 
     FeatureContainer::ConstFeatureIterator aligned_ftrs_beg = aligned_ftrs.getFeaturesBegin(); 
     FeatureContainer::ConstFeatureIterator aligned_ftrs_end = aligned_ftrs.getFeaturesEnd();
 
     for (FeatureContainer::ConstFeatureIterator it1 = ref_ftrs.getFeaturesBegin(), ref_end = ref_ftrs.getFeaturesEnd(); it1 != ref_end; ++it1) {
-		const Feature& ref_ftr = *it1;
+        const Feature& ref_ftr = *it1;
 
-		for (FeatureContainer::ConstFeatureIterator it2 = aligned_ftrs_beg, mpd_end = aligned_ftrs_end; it2 != mpd_end; ++it2) {
-			const Feature& aligned_ftr = *it2;
+        for (FeatureContainer::ConstFeatureIterator it2 = aligned_ftrs_beg, mpd_end = aligned_ftrs_end; it2 != mpd_end; ++it2) {
+            const Feature& aligned_ftr = *it2;
 
-			if (typeMatchFunc && !typeMatchFunc(ref_ftr, aligned_ftr))
-				continue;
+            if (typeMatchFunc && !typeMatchFunc(ref_ftr, aligned_ftr))
+                continue;
 
-			double pos_score = 0.0;
+            double pos_score = 0.0;
 
-			if (posMatchFunc) {
-				pos_score = posMatchFunc(ref_ftr, aligned_ftr, xform);
+            if (posMatchFunc) {
+                pos_score = posMatchFunc(ref_ftr, aligned_ftr, xform);
 
-				if (pos_score <= 0.0)
-					continue;
-			}
+                if (pos_score <= 0.0)
+                    continue;
+            }
 
-			double geom_score = 0.0;
+            double geom_score = 0.0;
 
-			if (geomMatchFunc) {
-				geom_score = geomMatchFunc(ref_ftr, aligned_ftr, xform);
+            if (geomMatchFunc) {
+                geom_score = geomMatchFunc(ref_ftr, aligned_ftr, xform);
 
-				if (geom_score <= 0.0) 
-					continue;
-			}
+                if (geom_score <= 0.0) 
+                    continue;
+            }
 
-			if (pos_score > 0.0)
-				posMatchScores[FeaturePair(&ref_ftr, &aligned_ftr)] = pos_score;				
+            if (pos_score > 0.0)
+                posMatchScores[FeaturePair(&ref_ftr, &aligned_ftr)] = pos_score;                
 
-			if (geom_score > 0.0)
-				geomMatchScores[FeaturePair(&ref_ftr, &aligned_ftr)] = geom_score;		
+            if (geom_score > 0.0)
+                geomMatchScores[FeaturePair(&ref_ftr, &aligned_ftr)] = geom_score;        
 
-			insertEntry(&ref_ftr, &aligned_ftr);
-		}
-	}
+            insertEntry(&ref_ftr, &aligned_ftr);
+        }
+    }
 }

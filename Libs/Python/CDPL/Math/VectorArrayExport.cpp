@@ -41,197 +41,197 @@
 namespace
 {
 
-	template <typename ArrayType, std::size_t Dim>
-	struct VectorArrayExport
-	{
+    template <typename ArrayType, std::size_t Dim>
+    struct VectorArrayExport
+    {
 
-		VectorArrayExport(const char* name) {
-			using namespace boost;
-			using namespace CDPL;
+        VectorArrayExport(const char* name) {
+            using namespace boost;
+            using namespace CDPL;
 
-			python::class_<ArrayType, typename ArrayType::SharedPointer>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const ArrayType&>((python::arg("self"), python::arg("array"))))
-				.def(CDPLPythonUtil::ArrayVisitor<ArrayType, 
-					 python::return_internal_reference<>, python::default_call_policies, 
-					 python::default_call_policies, python::default_call_policies>())
-				.def("__eq__", &ArrayType::operator==, (python::arg("self"), python::arg("array")))
-				.def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")))
+            python::class_<ArrayType, typename ArrayType::SharedPointer>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const ArrayType&>((python::arg("self"), python::arg("array"))))
+                .def(CDPLPythonUtil::ArrayVisitor<ArrayType, 
+                     python::return_internal_reference<>, python::default_call_policies, 
+                     python::default_call_policies, python::default_call_policies>())
+                .def("__eq__", &ArrayType::operator==, (python::arg("self"), python::arg("array")))
+                .def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")))
 #ifdef HAVE_NUMPY
-				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), (python::arg("a"))))
-				.def("toArray", &toArray, (python::arg("self"), python::arg("as_vec")))
-				.def("assign", &assign, (python::arg("self"), python::arg("a")))
+                .def("__init__", python::make_constructor(&construct, python::default_call_policies(), (python::arg("a"))))
+                .def("toArray", &toArray, (python::arg("self"), python::arg("as_vec")))
+                .def("assign", &assign, (python::arg("self"), python::arg("a")))
 #endif
-				;
-		}
+                ;
+        }
 #ifdef HAVE_NUMPY
-		static boost::python::object toArray(const ArrayType& va, bool as_vec) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        static boost::python::object toArray(const ArrayType& va, bool as_vec) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			if (!NumPy::available())
-				python::object();			
+            if (!NumPy::available())
+                python::object();            
 
-			typedef typename ArrayType::ValueType::ValueType ValueType;
+            typedef typename ArrayType::ValueType::ValueType ValueType;
 
-			if (as_vec) {
-				npy_intp shape[] = { npy_intp(va.getSize() * Dim) };
-				PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<ValueType>::Value);
+            if (as_vec) {
+                npy_intp shape[] = { npy_intp(va.getSize() * Dim) };
+                PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<ValueType>::Value);
 
-				if (array) {
-					ValueType* data = static_cast<ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
+                if (array) {
+                    ValueType* data = static_cast<ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
 
-					for (std::size_t i = 0, size = va.getSize(); i < size; i++) 
-						for (std::size_t j = 0; j < Dim; j++, data++) 
-						*data = va[i][j];
+                    for (std::size_t i = 0, size = va.getSize(); i < size; i++) 
+                        for (std::size_t j = 0; j < Dim; j++, data++) 
+                        *data = va[i][j];
 
-					return python::object(python::handle<>(array));
-				}
+                    return python::object(python::handle<>(array));
+                }
 
-			} else {
-				npy_intp shape[] = { npy_intp(va.getSize()), npy_intp(Dim) };
-				PyObject* py_obj = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<ValueType>::Value);
-				PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
+            } else {
+                npy_intp shape[] = { npy_intp(va.getSize()), npy_intp(Dim) };
+                PyObject* py_obj = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<ValueType>::Value);
+                PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
 
-				if (array) {
-					for (std::size_t i = 0, size = va.getSize(); i < size; i++)
-						for (std::size_t j = 0; j < Dim; j++)
-							*static_cast<ValueType*>(PyArray_GETPTR2(array, i, j)) = va[i][j];
+                if (array) {
+                    for (std::size_t i = 0, size = va.getSize(); i < size; i++)
+                        for (std::size_t j = 0; j < Dim; j++)
+                            *static_cast<ValueType*>(PyArray_GETPTR2(array, i, j)) = va[i][j];
 
-					return python::object(python::handle<>(py_obj));
-				}
-			}
+                    return python::object(python::handle<>(py_obj));
+                }
+            }
 
-			return python::object();			
-		}
+            return python::object();            
+        }
 
-		static void assign(ArrayType& va, PyArrayObject* arr) {
-			using namespace CDPL;
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        static void assign(ArrayType& va, PyArrayObject* arr) {
+            using namespace CDPL;
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename ArrayType::ValueType::ValueType ElemValueType;
+            typedef typename ArrayType::ValueType::ValueType ElemValueType;
 
-			if (!NumPy::checkDataType<ElemValueType>(arr)) {
-				PyErr_SetString(PyExc_TypeError, "VectorArray: NumPy.NDArray of incompatible type");
+            if (!NumPy::checkDataType<ElemValueType>(arr)) {
+                PyErr_SetString(PyExc_TypeError, "VectorArray: NumPy.NDArray of incompatible type");
 
-				python::throw_error_already_set();
-			}
+                python::throw_error_already_set();
+            }
 
-			if (NumPy::checkDim(arr, 2)) {
-				npy_intp* dims = PyArray_DIMS(arr);
+            if (NumPy::checkDim(arr, 2)) {
+                npy_intp* dims = PyArray_DIMS(arr);
 
-				if (std::size_t(dims[1]) != ArrayType::ValueType::Size) {
-					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+                if (std::size_t(dims[1]) != ArrayType::ValueType::Size) {
+                    PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
 
-					python::throw_error_already_set();
-				}
+                    python::throw_error_already_set();
+                }
 
-				va.resize(dims[0]);
+                va.resize(dims[0]);
 
-				for (npy_intp i = 0; i < dims[0]; i++)
-					for (std::size_t j = 0; j < ArrayType::ValueType::Size; j++)
-						va[i][j] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR2(arr, i, j));
+                for (npy_intp i = 0; i < dims[0]; i++)
+                    for (std::size_t j = 0; j < ArrayType::ValueType::Size; j++)
+                        va[i][j] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR2(arr, i, j));
 
-			} else if (NumPy::checkDim(arr, 1)) {
-				npy_intp* dims = PyArray_DIMS(arr);
-	
-				if ((std::size_t(dims[0]) % ArrayType::ValueType::Size) != 0) {
-					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+            } else if (NumPy::checkDim(arr, 1)) {
+                npy_intp* dims = PyArray_DIMS(arr);
+    
+                if ((std::size_t(dims[0]) % ArrayType::ValueType::Size) != 0) {
+                    PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
 
-					python::throw_error_already_set();
-				}
+                    python::throw_error_already_set();
+                }
 
-				va.resize(dims[0] / ArrayType::ValueType::Size);
+                va.resize(dims[0] / ArrayType::ValueType::Size);
 
-				for (npy_intp i = 0; i < dims[0]; i++)
-					va[i / ArrayType::ValueType::Size][i % ArrayType::ValueType::Size] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR1(arr, i));
+                for (npy_intp i = 0; i < dims[0]; i++)
+                    va[i / ArrayType::ValueType::Size][i % ArrayType::ValueType::Size] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR1(arr, i));
 
-			} else {
-				PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
-				
-				python::throw_error_already_set();
-			}
-		}
+            } else {
+                PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+                
+                python::throw_error_already_set();
+            }
+        }
 
-		static ArrayType* construct(PyArrayObject* arr) {
-			using namespace CDPL;
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        static ArrayType* construct(PyArrayObject* arr) {
+            using namespace CDPL;
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename ArrayType::ValueType::ValueType ElemValueType;
+            typedef typename ArrayType::ValueType::ValueType ElemValueType;
 
-			if (!NumPy::checkDataType<ElemValueType>(arr)) {
-				PyErr_SetString(PyExc_TypeError, "VectorArray: NumPy.NDArray of incompatible type");
+            if (!NumPy::checkDataType<ElemValueType>(arr)) {
+                PyErr_SetString(PyExc_TypeError, "VectorArray: NumPy.NDArray of incompatible type");
 
-				python::throw_error_already_set();
-			}
+                python::throw_error_already_set();
+            }
 
-			if (NumPy::checkDim(arr, 2)) {
-				npy_intp* dims = PyArray_DIMS(arr);
+            if (NumPy::checkDim(arr, 2)) {
+                npy_intp* dims = PyArray_DIMS(arr);
 
-				if (std::size_t(dims[1]) != ArrayType::ValueType::Size) {
-					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+                if (std::size_t(dims[1]) != ArrayType::ValueType::Size) {
+                    PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
 
-					python::throw_error_already_set();
-				}
+                    python::throw_error_already_set();
+                }
 
-				std::auto_ptr<ArrayType> va_ptr(new ArrayType());
-				ArrayType& va = *va_ptr;
+                std::auto_ptr<ArrayType> va_ptr(new ArrayType());
+                ArrayType& va = *va_ptr;
 
-				va.resize(dims[0]);
+                va.resize(dims[0]);
 
-				for (npy_intp i = 0; i < dims[0]; i++)
-					for (std::size_t j = 0; j < ArrayType::ValueType::Size; j++)
-						va[i][j] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR2(arr, i, j));
+                for (npy_intp i = 0; i < dims[0]; i++)
+                    for (std::size_t j = 0; j < ArrayType::ValueType::Size; j++)
+                        va[i][j] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR2(arr, i, j));
 
-				return va_ptr.release();
-			} 
+                return va_ptr.release();
+            } 
 
-			if (NumPy::checkDim(arr, 1)) {
-				npy_intp* dims = PyArray_DIMS(arr);
-	
-				if ((std::size_t(dims[0]) % ArrayType::ValueType::Size) != 0) {
-					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+            if (NumPy::checkDim(arr, 1)) {
+                npy_intp* dims = PyArray_DIMS(arr);
+    
+                if ((std::size_t(dims[0]) % ArrayType::ValueType::Size) != 0) {
+                    PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
 
-					python::throw_error_already_set();
-				}
+                    python::throw_error_already_set();
+                }
 
-				std::auto_ptr<ArrayType> va_ptr(new ArrayType());
-				ArrayType& va = *va_ptr;
+                std::auto_ptr<ArrayType> va_ptr(new ArrayType());
+                ArrayType& va = *va_ptr;
 
-				va.resize(dims[0] / ArrayType::ValueType::Size);
+                va.resize(dims[0] / ArrayType::ValueType::Size);
 
-				for (npy_intp i = 0; i < dims[0]; i++)
-					va[i / ArrayType::ValueType::Size][i % ArrayType::ValueType::Size] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR1(arr, i));
+                for (npy_intp i = 0; i < dims[0]; i++)
+                    va[i / ArrayType::ValueType::Size][i % ArrayType::ValueType::Size] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR1(arr, i));
 
-				return va_ptr.release();
-			} 
+                return va_ptr.release();
+            } 
 
-			PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+            PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
 
-			python::throw_error_already_set();
+            python::throw_error_already_set();
 
-			return 0;
-		}
+            return 0;
+        }
 #endif
-	};
+    };
 }
 
 
 void CDPLPythonMath::exportVectorArrayTypes()
 {
-	using namespace CDPL;
-	
-	VectorArrayExport<Math::Vector2FArray, 2>("Vector2FArray");
-	VectorArrayExport<Math::Vector3FArray, 3>("Vector3FArray");
+    using namespace CDPL;
+    
+    VectorArrayExport<Math::Vector2FArray, 2>("Vector2FArray");
+    VectorArrayExport<Math::Vector3FArray, 3>("Vector3FArray");
 
-	VectorArrayExport<Math::Vector2DArray, 2>("Vector2DArray");
-	VectorArrayExport<Math::Vector3DArray, 3>("Vector3DArray");
+    VectorArrayExport<Math::Vector2DArray, 2>("Vector2DArray");
+    VectorArrayExport<Math::Vector3DArray, 3>("Vector3DArray");
 
-	VectorArrayExport<Math::Vector2LArray, 2>("Vector2LArray");
-	VectorArrayExport<Math::Vector3LArray, 3>("Vector3LArray");
+    VectorArrayExport<Math::Vector2LArray, 2>("Vector2LArray");
+    VectorArrayExport<Math::Vector3LArray, 3>("Vector3LArray");
 
-	VectorArrayExport<Math::Vector2ULArray, 2>("Vector2ULArray");
-	VectorArrayExport<Math::Vector3ULArray, 3>("Vector3ULArray");
+    VectorArrayExport<Math::Vector2ULArray, 2>("Vector2ULArray");
+    VectorArrayExport<Math::Vector3ULArray, 3>("Vector3ULArray");
 }

@@ -33,31 +33,31 @@ using namespace CDPL;
 
 const std::string& Chem::StringDataBlockEntry::getHeader() const
 {
-	return header;
+    return header;
 }
 
 void Chem::StringDataBlockEntry::setHeader(const std::string& header)
 {
-	this->header = header;
+    this->header = header;
 }
 
 const std::string& Chem::StringDataBlockEntry::getData() const
 {
-	return data;
+    return data;
 }
 
 void Chem::StringDataBlockEntry::setData(const std::string& data)
 {
-	this->data = data;
+    this->data = data;
 }
 
 bool Chem::StringDataBlockEntry::operator==(const StringDataBlockEntry& entry) const
 {
-	return (data == entry.data && header == entry.header);
+    return (data == entry.data && header == entry.header);
 }
 
 bool Chem::StringDataBlockEntry::operator!=(const StringDataBlockEntry& entry) const
 {
-	return !this->operator==(entry);
+    return !this->operator==(entry);
 }
 

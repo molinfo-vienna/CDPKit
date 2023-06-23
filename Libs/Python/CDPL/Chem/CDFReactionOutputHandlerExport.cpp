@@ -33,18 +33,18 @@
 
 void CDPLPythonChem::exportCDFReactionOutputHandler()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::CDFReactionOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("CDFReactionOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::CDFReactionOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::Reaction> > >("CDFReactionOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::CDFGZReactionOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("CDFGZReactionOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::CDFGZReactionOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::Reaction> > >("CDFGZReactionOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 
-	python::class_<Chem::CDFBZ2ReactionOutputHandler, 
-		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("CDFBZ2ReactionOutputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Chem::CDFBZ2ReactionOutputHandler, 
+        python::bases<Base::DataOutputHandler<Chem::Reaction> > >("CDFBZ2ReactionOutputHandler", python::no_init)
+        .def(python::init<>(python::arg("self")));
 }

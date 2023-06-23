@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SMILESReactionWriter, DataFormat::SMILES> SMILESReactionOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SMILESReactionWriter, DataFormat::SMILES> SMILESReactionOutputHandler;    
+    }
 }
 
 #endif // CDPL_CHEM_SMILESREACTIONOUTPUTHANDLER_HPP

@@ -31,23 +31,23 @@
 namespace CDPL
 {
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-	}
+    }
 }
 
 namespace
 {
 
-	struct CDPLDescrInit
-	{
+    struct CDPLDescrInit
+    {
 
-		CDPLDescrInit() {
+        CDPLDescrInit() {
 
-		}
+        }
 
-	} cdplDescrInit;
+    } cdplDescrInit;
 }
 
 #endif // CDPL_DESCR_STATIC_LINK

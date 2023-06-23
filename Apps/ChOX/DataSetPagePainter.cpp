@@ -44,48 +44,48 @@ DataSetPagePainter::DataSetPagePainter(QPainter& painter, const Settings& settin
 
 void DataSetPagePainter::drawGrid(double vp_width, double vp_height, int num_rows, int num_cols) const
 {
-	using namespace CDPL;
-	using namespace Vis;
+    using namespace CDPL;
+    using namespace Vis;
 
-	if (num_rows < 2 && num_cols < 2)
-		return;
+    if (num_rows < 2 && num_cols < 2)
+        return;
 
-	Pen::LineStyle line_style = getGridLineStyleParameter(settings);
-	double line_width = getGridLineWidthParameter(settings).getValue();
-	const Color& line_color = getGridLineColorParameter(settings);
+    Pen::LineStyle line_style = getGridLineStyleParameter(settings);
+    double line_width = getGridLineWidthParameter(settings).getValue();
+    const Color& line_color = getGridLineColorParameter(settings);
 
-	painter.setPen(QtObjectFactory::createQPen(Pen(line_color, line_width, line_style)));
+    painter.setPen(QtObjectFactory::createQPen(Pen(line_color, line_width, line_style)));
 
-	if (num_cols >= 2) {
-		for (int i = 1; i < num_cols; i++) {
-			double x_pos = i * vp_width;
+    if (num_cols >= 2) {
+        for (int i = 1; i < num_cols; i++) {
+            double x_pos = i * vp_width;
 
-			painter.drawLine(QPointF(x_pos, 0.0), QPointF(x_pos, vp_height * num_rows));
-		}
-	} 	
+            painter.drawLine(QPointF(x_pos, 0.0), QPointF(x_pos, vp_height * num_rows));
+        }
+    }     
 
-	if (num_rows >= 2) {
-		for (int i = 1; i < num_rows; i++) {
-			double y_pos = i * vp_height;
+    if (num_rows >= 2) {
+        for (int i = 1; i < num_rows; i++) {
+            double y_pos = i * vp_height;
 
-			painter.drawLine(QPointF(0.0, y_pos), QPointF(vp_width * num_cols, y_pos));
-		}
-	} 	
+            painter.drawLine(QPointF(0.0, y_pos), QPointF(vp_width * num_cols, y_pos));
+        }
+    }     
 }
 
 void DataSetPagePainter::drawRecord(int row, int col, double vp_width, double vp_height, int rec_no, DataRecordPainter& rec_painter) const
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	double y_pos = vp_height * row;
-	double x_pos = vp_width * col;
+    double y_pos = vp_height * row;
+    double x_pos = vp_width * col;
 
-	painter.save();
+    painter.save();
 
-	painter.translate(x_pos, y_pos);
-	painter.setClipRect(QRectF(0.0, 0.0, vp_width, vp_height));
+    painter.translate(x_pos, y_pos);
+    painter.setClipRect(QRectF(0.0, 0.0, vp_width, vp_height));
 
-	rec_painter.drawRecord(rec_no, vp_width, vp_height);
+    rec_painter.drawRecord(rec_no, vp_width, vp_height);
 
-	painter.restore();
+    painter.restore();
 }

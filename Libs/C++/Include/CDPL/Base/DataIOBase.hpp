@@ -41,92 +41,92 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		/**
-		 * \brief Provides infrastructure for the registration of I/O callback functions.
-		 *
-		 * The purpose of \c %DataIOBase is to provide methods for the registration of I/O callback functions
-		 * to subclasses implementing the input and output of data objects (see Base::DataReader and Base::DataWriter).
-		 * I/O callbacks allow client code to be notified whenever a data object was read, written or skipped. I/O callbacks are
-		 * registered by calling the method registerIOCallback() with an argument of type DataIOBase::IOCallbackFunction.
-		 * DataIOBase::IOCallbackFunction is a generic functor implementation that is able to wrap any compatible (in terms
-		 * of return and argument type) function pointer or function object. Therefore, no special requirements beside return and
-		 * argument types are imposed on the type of the used I/O callback target function.
-		 */
-		class CDPL_BASE_API DataIOBase : public ControlParameterContainer
-		{
+        /**
+         * \brief Provides infrastructure for the registration of I/O callback functions.
+         *
+         * The purpose of \c %DataIOBase is to provide methods for the registration of I/O callback functions
+         * to subclasses implementing the input and output of data objects (see Base::DataReader and Base::DataWriter).
+         * I/O callbacks allow client code to be notified whenever a data object was read, written or skipped. I/O callbacks are
+         * registered by calling the method registerIOCallback() with an argument of type DataIOBase::IOCallbackFunction.
+         * DataIOBase::IOCallbackFunction is a generic functor implementation that is able to wrap any compatible (in terms
+         * of return and argument type) function pointer or function object. Therefore, no special requirements beside return and
+         * argument types are imposed on the type of the used I/O callback target function.
+         */
+        class CDPL_BASE_API DataIOBase : public ControlParameterContainer
+        {
 
-		public:
-			/**
-			 * \brief A functor class used to wrap I/O callback target functions.
-			 *
-			 * \c %IOCallbackFunction allows to wrap any function pointer or function object compatible with a return type
-			 * of \c void and two arguments of type <tt>const %DataIOBase&</tt> and <tt>double</tt> (see [\ref FUNWRP]).
-			 */
-			typedef std::function<void(const DataIOBase&, double)> IOCallbackFunction;
-	
-			/**
-			 * \brief Registers an I/O callback target function.
-			 * \param func A DataIOBase::IOCallbackFunction instance wrapping the target function.
-			 * \return An identifier for the registered callback.
-			 */
-			std::size_t registerIOCallback(const IOCallbackFunction& func);
+        public:
+            /**
+             * \brief A functor class used to wrap I/O callback target functions.
+             *
+             * \c %IOCallbackFunction allows to wrap any function pointer or function object compatible with a return type
+             * of \c void and two arguments of type <tt>const %DataIOBase&</tt> and <tt>double</tt> (see [\ref FUNWRP]).
+             */
+            typedef std::function<void(const DataIOBase&, double)> IOCallbackFunction;
+    
+            /**
+             * \brief Registers an I/O callback target function.
+             * \param func A DataIOBase::IOCallbackFunction instance wrapping the target function.
+             * \return An identifier for the registered callback.
+             */
+            std::size_t registerIOCallback(const IOCallbackFunction& func);
 
-			/**
-			 * \brief Unregisters the I/O callback function specified by \a id.
-			 *
-			 * If a registered callback with the identifier \a id does not exist, the method has no effect.
-			 *
-			 * \param id The identifier of the callback function to unregister.
-			 */
-			void unregisterIOCallback(std::size_t id);
+            /**
+             * \brief Unregisters the I/O callback function specified by \a id.
+             *
+             * If a registered callback with the identifier \a id does not exist, the method has no effect.
+             *
+             * \param id The identifier of the callback function to unregister.
+             */
+            void unregisterIOCallback(std::size_t id);
 
-			/**
-			 * \brief Invokes all registered I/O callback functions with the argument \c *this.
-			 * \param progress An indicator for the progress of the current I/O operation in the range [0, 1].
-			 */
-			void invokeIOCallbacks(double progress) const;
+            /**
+             * \brief Invokes all registered I/O callback functions with the argument \c *this.
+             * \param progress An indicator for the progress of the current I/O operation in the range [0, 1].
+             */
+            void invokeIOCallbacks(double progress) const;
 
-			/**
-			 * \brief Clears all registered I/O callback functions.
-			 */
-			void clearIOCallbacks();
+            /**
+             * \brief Clears all registered I/O callback functions.
+             */
+            void clearIOCallbacks();
 
-		protected:
-			/**
-			 * \brief Default constructor.
-			 */
-			DataIOBase() {}
+        protected:
+            /**
+             * \brief Default constructor.
+             */
+            DataIOBase() {}
 
-			/**
-			 * \brief Copy constructor.
-			 * \param io_base The \c %DataIOBase instance to copy.
-			 * \note I/O callbacks registered on \a io_base are not copied.
-			 */
-			DataIOBase(const DataIOBase& io_base): ControlParameterContainer(io_base) {}
+            /**
+             * \brief Copy constructor.
+             * \param io_base The \c %DataIOBase instance to copy.
+             * \note I/O callbacks registered on \a io_base are not copied.
+             */
+            DataIOBase(const DataIOBase& io_base): ControlParameterContainer(io_base) {}
 
-			/**
-			 * \brief Destructor.
-			 */
-			~DataIOBase() {}
+            /**
+             * \brief Destructor.
+             */
+            ~DataIOBase() {}
 
-			/**
-			 * \brief Assignment operator.
-			 * \param io_base The \c %DataIOBase instance to copy.
-			 * \return A reference to itself.
-			 * \note I/O callbacks registered on \a io_base are not copied.
-			 */
-			DataIOBase& operator=(const DataIOBase& io_base);
+            /**
+             * \brief Assignment operator.
+             * \param io_base The \c %DataIOBase instance to copy.
+             * \return A reference to itself.
+             * \note I/O callbacks registered on \a io_base are not copied.
+             */
+            DataIOBase& operator=(const DataIOBase& io_base);
 
-		private:
-			typedef std::pair<std::size_t, IOCallbackFunction> CallbackListEntry;
-			typedef std::vector<CallbackListEntry> CallbackList;
+        private:
+            typedef std::pair<std::size_t, IOCallbackFunction> CallbackListEntry;
+            typedef std::vector<CallbackListEntry> CallbackList;
 
-			CallbackList callbacks;
-		};
-	}
+            CallbackList callbacks;
+        };
+    }
 }
 
 #endif // CDPL_BASE_DATAIOBASE_HPP

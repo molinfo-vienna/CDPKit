@@ -36,50 +36,50 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Pharm 
-	{
-	
-		CDPL_PHARM_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
+    namespace Pharm 
+    {
+    
+        CDPL_PHARM_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_PHARM_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
+        CDPL_PHARM_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
 
-		CDPL_PHARM_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API bool hasStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_PHARM_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
-
-
-		CDPL_PHARM_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-
-		CDPL_PHARM_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
-
-		CDPL_PHARM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-	
-		CDPL_PHARM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
 
-		CDPL_PHARM_API ScreeningDBCreator::Mode getPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_PHARM_API void setPSDCreationModeParameter(Base::ControlParameterContainer& cntnr, ScreeningDBCreator::Mode mode);
+        CDPL_PHARM_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
-		CDPL_PHARM_API bool hasPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
-	
-		CDPL_PHARM_API void clearPSDCreationModeParameter(Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+    
+        CDPL_PHARM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
 
 
-		CDPL_PHARM_API bool getPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
+        CDPL_PHARM_API ScreeningDBCreator::Mode getPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_PHARM_API void setPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr, bool allow);
+        CDPL_PHARM_API void setPSDCreationModeParameter(Base::ControlParameterContainer& cntnr, ScreeningDBCreator::Mode mode);
 
-		CDPL_PHARM_API bool hasPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
-	
-		CDPL_PHARM_API void clearPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr);
-	}
+        CDPL_PHARM_API bool hasPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
+    
+        CDPL_PHARM_API void clearPSDCreationModeParameter(Base::ControlParameterContainer& cntnr);
+
+
+        CDPL_PHARM_API bool getPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
+
+        CDPL_PHARM_API void setPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr, bool allow);
+
+        CDPL_PHARM_API bool hasPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
+    
+        CDPL_PHARM_API void clearPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr);
+    }
 }
 
 #endif // CDPL_PHARM_CONTROLPARAMETERFUNCTIONS_HPP

@@ -33,24 +33,24 @@
 
 void CDPLPythonVis::exportLinePrimitive2D()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Vis::LinePrimitive2D, 
-		python::bases<Vis::Line2D, Vis::GraphicsPrimitive2D> >("LinePrimitive2D", python::no_init)
-		.def(python::init<>(python::arg("self"))) 
-		.def(python::init<const Vis::LinePrimitive2D&>((python::arg("self"), python::arg("prim")))) 
-		.def(python::init<const Vis::Line2D&>((python::arg("self"), python::arg("line"))))
-		.def(python::init<const Math::Vector2D&, const Math::Vector2D&>((python::arg("self"), 
-																		 python::arg("beg"), 
-																		 python::arg("end"))))    
-		.def("assign", CDPLPythonBase::copyAssOp(&Vis::LinePrimitive2D::operator=),
-			 (python::arg("self"), python::arg("prim")), 
-			 python::return_self<>())
-		.def("setPen", &Vis::LinePrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
-		.def("getPen", &Vis::LinePrimitive2D::getPen, python::arg("self"), 
-			 python::return_internal_reference<1>())
-		.add_property("pen", python::make_function(&Vis::LinePrimitive2D::getPen, 
-												   python::return_internal_reference<1>()),
-					  &Vis::LinePrimitive2D::setPen);
+    python::class_<Vis::LinePrimitive2D, 
+        python::bases<Vis::Line2D, Vis::GraphicsPrimitive2D> >("LinePrimitive2D", python::no_init)
+        .def(python::init<>(python::arg("self"))) 
+        .def(python::init<const Vis::LinePrimitive2D&>((python::arg("self"), python::arg("prim")))) 
+        .def(python::init<const Vis::Line2D&>((python::arg("self"), python::arg("line"))))
+        .def(python::init<const Math::Vector2D&, const Math::Vector2D&>((python::arg("self"), 
+                                                                         python::arg("beg"), 
+                                                                         python::arg("end"))))    
+        .def("assign", CDPLPythonBase::copyAssOp(&Vis::LinePrimitive2D::operator=),
+             (python::arg("self"), python::arg("prim")), 
+             python::return_self<>())
+        .def("setPen", &Vis::LinePrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
+        .def("getPen", &Vis::LinePrimitive2D::getPen, python::arg("self"), 
+             python::return_internal_reference<1>())
+        .add_property("pen", python::make_function(&Vis::LinePrimitive2D::getPen, 
+                                                   python::return_internal_reference<1>()),
+                      &Vis::LinePrimitive2D::setPen);
 }

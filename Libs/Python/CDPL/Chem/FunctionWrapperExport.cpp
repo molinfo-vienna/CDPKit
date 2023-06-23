@@ -40,7 +40,7 @@
 
 void CDPLPythonChem::exportFunctionWrappers()
 {
-	using namespace boost;
+    using namespace boost;
     using namespace CDPL;
     using namespace Chem;
 
@@ -51,19 +51,19 @@ void CDPLPythonChem::exportFunctionWrappers()
     CDPLPythonBase::Function1Export<std::uint64_t(const Bond&), Bond&>("UInt64BondFunctor");
     CDPLPythonBase::Function1Export<bool(const Entity3DMapping&)>("BoolEntity3DMappingFunctor");
     CDPLPythonBase::Function1Export<bool(const AtomMapping&)>("BoolAtomMappingFunctor");
-	CDPLPythonBase::Function1Export<bool(const Util::STPairArray&)>("BoolSTPairArrayFunctor");
-	CDPLPythonBase::Function1Export<const Math::Vector2D&(const Atom&), Atom&, python::return_internal_reference<> >("Vector2DAtomFunctor");
+    CDPLPythonBase::Function1Export<bool(const Util::STPairArray&)>("BoolSTPairArrayFunctor");
+    CDPLPythonBase::Function1Export<const Math::Vector2D&(const Atom&), Atom&, python::return_internal_reference<> >("Vector2DAtomFunctor");
     CDPLPythonBase::Function1Export<const Math::Vector3D&(const Entity3D&), Entity3D&, python::return_internal_reference<> >("Vector3DEntity3DFunctor");
     CDPLPythonBase::Function1Export<const Math::Vector3D&(const Chem::Atom&), Atom&, python::return_internal_reference<> >("Atom3DCoordinatesFunction");
     CDPLPythonBase::Function1Export<double(const Atom&), Atom&>("DoubleAtomFunctor");
-	CDPLPythonBase::Function1Export<double(const Entity3D&), Entity3D&>("DoubleEntity3DFunctor");
-	CDPLPythonBase::Function1Export<std::size_t(const Atom&), Atom&>("SizeTypeAtomFunctor");
-	CDPLPythonBase::Function1Export<bool(const Chem::Atom&), Atom&>("AtomPredicate");
-	CDPLPythonBase::Function1Export<bool(const Chem::Bond&), Bond&>("BondPredicate");
-	CDPLPythonBase::Function1Export<double(const Math::DVector&)>("DoubleDVectorFunctor"); 
-	CDPLPythonBase::Function1Export<bool(const MolecularGraph&)>("BoolConstMolecularGraphFunctor");
-	CDPLPythonBase::Function1Export<bool(MolecularGraph&)>("BoolMolecularGraphFunctor");
-	CDPLPythonBase::Function1Export<void(MolecularGraph&)>("VoidMolecularGraphFunctor");
+    CDPLPythonBase::Function1Export<double(const Entity3D&), Entity3D&>("DoubleEntity3DFunctor");
+    CDPLPythonBase::Function1Export<std::size_t(const Atom&), Atom&>("SizeTypeAtomFunctor");
+    CDPLPythonBase::Function1Export<bool(const Chem::Atom&), Atom&>("AtomPredicate");
+    CDPLPythonBase::Function1Export<bool(const Chem::Bond&), Bond&>("BondPredicate");
+    CDPLPythonBase::Function1Export<double(const Math::DVector&)>("DoubleDVectorFunctor"); 
+    CDPLPythonBase::Function1Export<bool(const MolecularGraph&)>("BoolConstMolecularGraphFunctor");
+    CDPLPythonBase::Function1Export<bool(MolecularGraph&)>("BoolMolecularGraphFunctor");
+    CDPLPythonBase::Function1Export<void(MolecularGraph&)>("VoidMolecularGraphFunctor");
 
     CDPLPythonBase::Function2Export<bool(const Entity3D&, const Entity3D&), Entity3D&, Entity3D&>("BoolEntity3D2Functor");
     CDPLPythonBase::Function2Export<double(const Entity3D&, const Entity3D&), Entity3D&, Entity3D&>("DoubleEntity3D2Functor");
@@ -72,12 +72,12 @@ void CDPLPythonChem::exportFunctionWrappers()
     CDPLPythonBase::Function2Export<double(const Atom&, const Atom&), Atom&, Atom&>("DoubleAtom2Functor");
     CDPLPythonBase::Function2Export<std::uint64_t(const Atom&, const MolecularGraph&), Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
     CDPLPythonBase::Function2Export<std::size_t(const Atom&, const MolecularGraph&), Atom&, MolecularGraph&>("SizeTypeAtomMolecularGraphFunctor");
-	CDPLPythonBase::Function2Export<bool(const MolecularGraph&, const AtomBondMapping&)>("BoolMolecularGraphAtomBondMappingFunctor");
+    CDPLPythonBase::Function2Export<bool(const MolecularGraph&, const AtomBondMapping&)>("BoolMolecularGraphAtomBondMappingFunctor");
 
-	CDPLPythonBase::Function3Export<double(const Math::Vector3D&, const Math::Vector3D&, const Atom&), const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");
-    CDPLPythonBase::Function3Export<double(const Atom&, const Atom&, unsigned int), Atom&, Atom&>("DoubleAtom2UIntFunctor"); 	
+    CDPLPythonBase::Function3Export<double(const Math::Vector3D&, const Math::Vector3D&, const Atom&), const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");
+    CDPLPythonBase::Function3Export<double(const Atom&, const Atom&, unsigned int), Atom&, Atom&>("DoubleAtom2UIntFunctor");     
 
-    CDPLPythonBase::Function4Export<double(const Atom&, const Atom&, unsigned int, unsigned int), Atom&, Atom&>("DoubleAtom2UInt2Functor"); 	
+    CDPLPythonBase::Function4Export<double(const Atom&, const Atom&, unsigned int, unsigned int), Atom&, Atom&>("DoubleAtom2UInt2Functor");     
     CDPLPythonBase::Function4Export<bool(const Entity3D&, const Entity3D&, const Entity3D&, const Entity3D&), Entity3D&, Entity3D&, Entity3D&, Entity3D&>("BoolEntity3D4Functor");
     CDPLPythonBase::Function4Export<bool(const Atom&, const Atom&, const Atom&, const Atom&), Atom&, Atom&, Atom&, Atom&>("BoolAtom4Functor");
 }

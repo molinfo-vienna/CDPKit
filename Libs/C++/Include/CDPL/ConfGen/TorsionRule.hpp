@@ -43,96 +43,96 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class CDPL_CONFGEN_API TorsionRule
-		{
+        class CDPL_CONFGEN_API TorsionRule
+        {
 
-		  public:
-			class AngleEntry;
+          public:
+            class AngleEntry;
 
-		  private:
-			typedef std::vector<AngleEntry> AngleEntryList;
+          private:
+            typedef std::vector<AngleEntry> AngleEntryList;
 
-		  public:
-			class AngleEntry
-			{
-		
-			public:
-				AngleEntry(double ang, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0):
-					angle(ang), tolerance1(tol1), tolerance2(tol2), score(score) {} 
+          public:
+            class AngleEntry
+            {
+        
+            public:
+                AngleEntry(double ang, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0):
+                    angle(ang), tolerance1(tol1), tolerance2(tol2), score(score) {} 
 
-				double getAngle() const {
-					return angle;
-				}
+                double getAngle() const {
+                    return angle;
+                }
 
-				double getTolerance1() const {
-					return tolerance1;
-				}
+                double getTolerance1() const {
+                    return tolerance1;
+                }
 
-				double getTolerance2() const {
-					return tolerance2;
-				}
+                double getTolerance2() const {
+                    return tolerance2;
+                }
 
-				double getScore() const {
-					return score;
-				}
+                double getScore() const {
+                    return score;
+                }
 
-			private:
-				double angle;
-				double tolerance1;
-				double tolerance2;
-				double score;
-			};
+            private:
+                double angle;
+                double tolerance1;
+                double tolerance2;
+                double score;
+            };
 
-			typedef AngleEntryList::iterator AngleEntryIterator;
-			typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
+            typedef AngleEntryList::iterator AngleEntryIterator;
+            typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
 
-			const std::string& getMatchPatternString() const;
+            const std::string& getMatchPatternString() const;
 
-			void setMatchPatternString(const std::string& ptn_str);
+            void setMatchPatternString(const std::string& ptn_str);
 
-			const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
+            const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
-			void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
+            void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
 
-			void addAngle(const AngleEntry& ang_entry);
+            void addAngle(const AngleEntry& ang_entry);
 
-			void addAngle(double angle, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0);
+            void addAngle(double angle, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0);
 
-			std::size_t getNumAngles() const;
+            std::size_t getNumAngles() const;
 
-			const AngleEntry& getAngle(std::size_t idx) const;
+            const AngleEntry& getAngle(std::size_t idx) const;
 
-			void removeAngle(std::size_t idx);
+            void removeAngle(std::size_t idx);
 
-			void removeAngle(const AngleEntryIterator& it);
+            void removeAngle(const AngleEntryIterator& it);
 
-			AngleEntryIterator getAnglesBegin();
+            AngleEntryIterator getAnglesBegin();
 
-			AngleEntryIterator getAnglesEnd();
+            AngleEntryIterator getAnglesEnd();
 
-			ConstAngleEntryIterator getAnglesBegin() const;
+            ConstAngleEntryIterator getAnglesBegin() const;
 
-			ConstAngleEntryIterator getAnglesEnd() const;
+            ConstAngleEntryIterator getAnglesEnd() const;
 
-			AngleEntryIterator begin();
+            AngleEntryIterator begin();
 
-			AngleEntryIterator end();
+            AngleEntryIterator end();
 
-			ConstAngleEntryIterator begin() const;
+            ConstAngleEntryIterator begin() const;
 
-			ConstAngleEntryIterator end() const;
+            ConstAngleEntryIterator end() const;
 
-			void swap(TorsionRule& rule);
+            void swap(TorsionRule& rule);
 
-			void clear();
+            void clear();
 
-		  private:
-			void checkAngleIndex(std::size_t idx, bool it) const;
+          private:
+            void checkAngleIndex(std::size_t idx, bool it) const;
 
-			std::string                         matchPatternStr;
-			Chem::MolecularGraph::SharedPointer matchPattern;
-			AngleEntryList                      angles;
-		};
+            std::string                         matchPatternStr;
+            Chem::MolecularGraph::SharedPointer matchPattern;
+            AngleEntryList                      angles;
+        };
     }
 }
 

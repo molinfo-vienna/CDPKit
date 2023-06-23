@@ -41,28 +41,28 @@ namespace
     struct IsotopeData
     {
 
-		std::size_t isotope;
-		double      weight;
+        std::size_t isotope;
+        double      weight;
     };
 
     struct AtomDictData
     {
 
-		unsigned int       type;
-		std::size_t        isotope;
-		std::string        symbol;
-		std::string        name;
-		std::size_t        mostAbundantIso;
-		double             averageWeight;
-		std::size_t        iupacGroup;
-		std::size_t        period;
-		bool               isMetal;
-		bool               isNonMetal;
-		const int          valenceStates[8];
-		double             vdwRadius;
-		const double       covalentRadii[3];
-		double             allredRochowEneg;
-		const IsotopeData* isotopeData;
+        unsigned int       type;
+        std::size_t        isotope;
+        std::string        symbol;
+        std::string        name;
+        std::size_t        mostAbundantIso;
+        double             averageWeight;
+        std::size_t        iupacGroup;
+        std::size_t        period;
+        bool               isMetal;
+        bool               isNonMetal;
+        const int          valenceStates[8];
+        double             vdwRadius;
+        const double       covalentRadii[3];
+        double             allredRochowEneg;
+        const IsotopeData* isotopeData;
     };
 
     const IsotopeData H_IsoData[] = { 
@@ -297,7 +297,7 @@ namespace
     const IsotopeData Cs_IsoData[] = { 
     { 133, 132.90544 }, { 0, 0.0 } 
     };
-	
+    
     const IsotopeData Ba_IsoData[] = { 
     { 130, 129.90629 }, { 132, 131.90504 }, { 134, 133.90449 }, { 135, 134.90567 }, 
     { 136, 135.90456 }, { 137, 136.90582 }, { 138, 137.90524 }, { 0, 0.0 } 
@@ -551,16 +551,16 @@ namespace
     };
 
     Chem::AtomDictionary::SharedPointer builtinDictionary(new Chem::AtomDictionary());
-	const Chem::AtomDictionary::Entry   DEF_ENTRY;
+    const Chem::AtomDictionary::Entry   DEF_ENTRY;
 
-	struct Init
-	{
+    struct Init
+    {
 
-		Init() {
-			builtinDictionary->loadDefaults();
-		}
+        Init() {
+            builtinDictionary->loadDefaults();
+        }
 
-	} init;
+    } init;
 }
 
 
@@ -568,229 +568,229 @@ Chem::AtomDictionary::SharedPointer Chem::AtomDictionary::defaultDict = builtinD
 
 
 Chem::AtomDictionary::Entry::Entry():
-	atomType(AtomType::UNKNOWN),
-	isotope(0),
-	symbol(),
-	name(),
-	mostAbundantIso(0),
-	avgWeight(0.0),
-	iupacGroup(0),
-	isMet(false),
-	isNonMet(false),
-	valenceStates(),
-	vdwRadius(0.0),
-	allredRochowEneg(0.0),
-	isoMassMap()	
+    atomType(AtomType::UNKNOWN),
+    isotope(0),
+    symbol(),
+    name(),
+    mostAbundantIso(0),
+    avgWeight(0.0),
+    iupacGroup(0),
+    isMet(false),
+    isNonMet(false),
+    valenceStates(),
+    vdwRadius(0.0),
+    allredRochowEneg(0.0),
+    isoMassMap()    
 {
-	covalentRadii[0] = 0.0;
-	covalentRadii[1] = 0.0;
-	covalentRadii[2] = 0.0;
+    covalentRadii[0] = 0.0;
+    covalentRadii[1] = 0.0;
+    covalentRadii[2] = 0.0;
 }
 
 Chem::AtomDictionary::Entry::Entry(unsigned int atom_type, std::size_t iso, const std::string& sym,
-								   const std::string& name, std::size_t most_abdt_iso, double avg_weight,
-								   std::size_t iupac_grp, std::size_t period, bool metal, bool non_metal, const Util::STArray& val_states,
-								   double vdw_rad, const double cov_radii[3], double ar_eneg, const IsotopeMassMap& iso_masses):
-	atomType(atom_type),
-	isotope(iso),
-	symbol(sym),
-	name(name),
-	mostAbundantIso(most_abdt_iso),
-	avgWeight(avg_weight),
-	iupacGroup(iupac_grp),
-	period(period),
-	isMet(metal),
-	isNonMet(non_metal),
-	valenceStates(val_states),
-	vdwRadius(vdw_rad),
-	allredRochowEneg(ar_eneg),
-	isoMassMap(iso_masses)	
+                                   const std::string& name, std::size_t most_abdt_iso, double avg_weight,
+                                   std::size_t iupac_grp, std::size_t period, bool metal, bool non_metal, const Util::STArray& val_states,
+                                   double vdw_rad, const double cov_radii[3], double ar_eneg, const IsotopeMassMap& iso_masses):
+    atomType(atom_type),
+    isotope(iso),
+    symbol(sym),
+    name(name),
+    mostAbundantIso(most_abdt_iso),
+    avgWeight(avg_weight),
+    iupacGroup(iupac_grp),
+    period(period),
+    isMet(metal),
+    isNonMet(non_metal),
+    valenceStates(val_states),
+    vdwRadius(vdw_rad),
+    allredRochowEneg(ar_eneg),
+    isoMassMap(iso_masses)    
 {
-	covalentRadii[0] = cov_radii[0];
-	covalentRadii[1] = cov_radii[1];
-	covalentRadii[2] = cov_radii[2];
+    covalentRadii[0] = cov_radii[0];
+    covalentRadii[1] = cov_radii[1];
+    covalentRadii[2] = cov_radii[2];
 }
 
 unsigned int Chem::AtomDictionary::Entry::getType() const
 {
-	return atomType;
+    return atomType;
 }
 
 std::size_t Chem::AtomDictionary::Entry::getIsotope() const
 {
-	return isotope;
+    return isotope;
 }
 
 const std::string& Chem::AtomDictionary::Entry::getSymbol() const
 {
-	return symbol;
+    return symbol;
 }
 
 const std::string& Chem::AtomDictionary::Entry::getName() const
 {
-	return name;
+    return name;
 }
 
 std::size_t Chem::AtomDictionary::Entry::getMostAbundantIsotope() const
 {
-	return mostAbundantIso;
+    return mostAbundantIso;
 }
 
 double Chem::AtomDictionary::Entry::getAverageWeight() const
 {
-	return avgWeight;
+    return avgWeight;
 }
 
 std::size_t Chem::AtomDictionary::Entry::getIUPACGroup() const
 {
-	return iupacGroup;
+    return iupacGroup;
 }
 
 std::size_t Chem::AtomDictionary::Entry::getPeriod() const
 {
-	return period;
+    return period;
 }
 
 bool Chem::AtomDictionary::Entry::isMetal() const
 {
-	return isMet;
+    return isMet;
 }
 
 bool Chem::AtomDictionary::Entry::isNonMetal() const
 {
-	return isNonMet;
+    return isNonMet;
 }
 
 const Util::STArray& Chem::AtomDictionary::Entry::getValenceStates() const
 {
-	return valenceStates;
+    return valenceStates;
 }
 
 double Chem::AtomDictionary::Entry::getVdWRadius() const
 {
-	return vdwRadius;
+    return vdwRadius;
 }
 
 double Chem::AtomDictionary::Entry::getCovalentRadius(std::size_t order) const
 {
-	if (order > 3 || order < 1)
-		return 0.0;
+    if (order > 3 || order < 1)
+        return 0.0;
 
-	return covalentRadii[order - 1];
+    return covalentRadii[order - 1];
 }
 
 double Chem::AtomDictionary::Entry::getAllredRochowElectronegativity() const
 {
-	return allredRochowEneg;
+    return allredRochowEneg;
 }
 
 const Chem::AtomDictionary::Entry::IsotopeMassMap& Chem::AtomDictionary::Entry::getIsotopeMasses() const
 {
-	return isoMassMap;
+    return isoMassMap;
 }
 
 
 void Chem::AtomDictionary::addEntry(const Entry& entry)
 {
-	EntryLookupTable::key_type key(entry.getType(), entry.getIsotope());
+    EntryLookupTable::key_type key(entry.getType(), entry.getIsotope());
 
-	entries.insert(EntryLookupTable::value_type(key, entry));
-	strictSymToTypeTable.insert(SymbolToTypeLookupTable::value_type(entry.getSymbol(), entry.getType()));
-	nonstrictSymToTypeTable.insert(SymbolToTypeLookupTable::value_type(boost::to_upper_copy(entry.getSymbol()), entry.getType()));
+    entries.insert(EntryLookupTable::value_type(key, entry));
+    strictSymToTypeTable.insert(SymbolToTypeLookupTable::value_type(entry.getSymbol(), entry.getType()));
+    nonstrictSymToTypeTable.insert(SymbolToTypeLookupTable::value_type(boost::to_upper_copy(entry.getSymbol()), entry.getType()));
 }
 
 bool Chem::AtomDictionary::containsEntry(unsigned int type, std::size_t isotope) const
 {
-	EntryLookupTable::key_type key(type, isotope);
-	EntryLookupTable::const_iterator it = entries.find(key);
+    EntryLookupTable::key_type key(type, isotope);
+    EntryLookupTable::const_iterator it = entries.find(key);
 
-	return (it != entries.end());
+    return (it != entries.end());
 }
 
 void Chem::AtomDictionary::removeEntry(unsigned int type, std::size_t isotope)
 {
-	EntryLookupTable::iterator it = entries.find(EntryLookupTable::key_type(type, isotope));
+    EntryLookupTable::iterator it = entries.find(EntryLookupTable::key_type(type, isotope));
 
-	if (it == entries.end())
-		return;
+    if (it == entries.end())
+        return;
 
-	strictSymToTypeTable.erase(it->second.getSymbol());
-	nonstrictSymToTypeTable.erase(boost::to_upper_copy(it->second.getSymbol()));
-	entries.erase(it);
+    strictSymToTypeTable.erase(it->second.getSymbol());
+    nonstrictSymToTypeTable.erase(boost::to_upper_copy(it->second.getSymbol()));
+    entries.erase(it);
 }
-			
+            
 const Chem::AtomDictionary::Entry& Chem::AtomDictionary::getEntry(unsigned int type, std::size_t isotope) const
 {
-	EntryLookupTable::key_type key(type, isotope);
-	EntryLookupTable::const_iterator it = entries.find(key);
+    EntryLookupTable::key_type key(type, isotope);
+    EntryLookupTable::const_iterator it = entries.find(key);
 
-	if (it != entries.end())
-		return it->second;
+    if (it != entries.end())
+        return it->second;
 
-	return DEF_ENTRY;
+    return DEF_ENTRY;
 }
 
 void Chem::AtomDictionary::clear()
 {
-	entries.clear();
-	strictSymToTypeTable.clear();
-	nonstrictSymToTypeTable.clear();
+    entries.clear();
+    strictSymToTypeTable.clear();
+    nonstrictSymToTypeTable.clear();
 }
 
 std::size_t Chem::AtomDictionary::getNumEntries() const
 {
-	return entries.size();
+    return entries.size();
 }
-			
+            
 Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 void Chem::AtomDictionary::loadDefaults()
 {
-	Util::STArray val_states;
-	Entry::IsotopeMassMap iso_masses;
+    Util::STArray val_states;
+    Entry::IsotopeMassMap iso_masses;
 
-	for (std::size_t i = 0; i < sizeof(builtinDictData) / sizeof(AtomDictData); i++) {
-		const AtomDictData& data = builtinDictData[i];
+    for (std::size_t i = 0; i < sizeof(builtinDictData) / sizeof(AtomDictData); i++) {
+        const AtomDictData& data = builtinDictData[i];
 
-		val_states.clear();
-		iso_masses.clear();
+        val_states.clear();
+        iso_masses.clear();
 
-		for (std::size_t j = 0; data.valenceStates[j] != -1; j++)
-			val_states.addElement(data.valenceStates[j]);
-	
-		if (data.isotopeData) {
-			for (std::size_t j = 0; data.isotopeData[j].isotope != 0; j++)
-				iso_masses.insertEntry(data.isotopeData[j].isotope, data.isotopeData[j].weight);
-		}
+        for (std::size_t j = 0; data.valenceStates[j] != -1; j++)
+            val_states.addElement(data.valenceStates[j]);
+    
+        if (data.isotopeData) {
+            for (std::size_t j = 0; data.isotopeData[j].isotope != 0; j++)
+                iso_masses.insertEntry(data.isotopeData[j].isotope, data.isotopeData[j].weight);
+        }
 
-		addEntry(Entry(data.type, data.isotope, data.symbol, data.name,
-					   data.mostAbundantIso, data.averageWeight, data.iupacGroup, data.period,
-					   data.isMetal, data.isNonMetal, val_states, data.vdwRadius,
-					   data.covalentRadii, data.allredRochowEneg, iso_masses));
-	}
+        addEntry(Entry(data.type, data.isotope, data.symbol, data.name,
+                       data.mostAbundantIso, data.averageWeight, data.iupacGroup, data.period,
+                       data.isMetal, data.isNonMetal, val_states, data.vdwRadius,
+                       data.covalentRadii, data.allredRochowEneg, iso_masses));
+    }
 }
 
 void Chem::AtomDictionary::set(const SharedPointer& dict)
 {
-	defaultDict = (!dict ? builtinDictionary : dict);
+    defaultDict = (!dict ? builtinDictionary : dict);
 }
 
 const Chem::AtomDictionary::SharedPointer& Chem::AtomDictionary::get()
@@ -810,21 +810,21 @@ const std::string& Chem::AtomDictionary::getName(unsigned int type, std::size_t 
 
 unsigned int Chem::AtomDictionary::getType(const std::string& sym, bool strict) 
 {
-	if (strict) {
-		SymbolToTypeLookupTable::const_iterator it = defaultDict->strictSymToTypeTable.find(sym);
+    if (strict) {
+        SymbolToTypeLookupTable::const_iterator it = defaultDict->strictSymToTypeTable.find(sym);
 
-		if (it == defaultDict->strictSymToTypeTable.end())
-			return AtomType::UNKNOWN;
+        if (it == defaultDict->strictSymToTypeTable.end())
+            return AtomType::UNKNOWN;
 
-		return it->second;
-	}
+        return it->second;
+    }
 
-	SymbolToTypeLookupTable::const_iterator it = defaultDict->nonstrictSymToTypeTable.find(boost::to_upper_copy(sym));
+    SymbolToTypeLookupTable::const_iterator it = defaultDict->nonstrictSymToTypeTable.find(boost::to_upper_copy(sym));
 
-	if (it == defaultDict->nonstrictSymToTypeTable.end())
-		return AtomType::UNKNOWN;
+    if (it == defaultDict->nonstrictSymToTypeTable.end())
+        return AtomType::UNKNOWN;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t Chem::AtomDictionary::getMostAbundantIsotope(unsigned int type) 
@@ -847,13 +847,13 @@ double Chem::AtomDictionary::getAtomicWeight(unsigned int type, std::size_t iso)
     const Entry& entry = defaultDict->getEntry(type, 0);
 
     if (iso == 0)
-		return entry.getAverageWeight();
+        return entry.getAverageWeight();
 
     const Entry::IsotopeMassMap& iso_masses = entry.getIsotopeMasses();
     Entry::IsotopeMassMap::ConstEntryIterator it = iso_masses.getEntry(iso);
 
     if (it != iso_masses.getEntriesEnd())
-		return it->second;
+        return it->second;
 
     return iso;
 }
@@ -864,7 +864,7 @@ const Util::STArray& Chem::AtomDictionary::getValenceStates(unsigned int type)
 }
 
 std::size_t Chem::AtomDictionary::getNumValenceElectrons(unsigned int type)
-{	
+{    
     std::size_t iupac_group = defaultDict->getEntry(type, 0).getIUPACGroup();
 
     return (iupac_group < 3 ? iupac_group : iupac_group > 12 ? iupac_group - 10 : iupac_group);

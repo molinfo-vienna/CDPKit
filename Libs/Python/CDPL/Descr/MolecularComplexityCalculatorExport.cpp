@@ -34,16 +34,16 @@
 
 void CDPLPythonDescr::exportMolecularComplexityCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Descr::MolecularComplexityCalculator, 
-		boost::noncopyable>("MolecularComplexityCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MolecularComplexityCalculator>())	
-		.def("calculate", &Descr::MolecularComplexityCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &Descr::MolecularComplexityCalculator::getResult, python::arg("self"))
-		.add_property("result", &Descr::MolecularComplexityCalculator::getResult);
+    python::class_<Descr::MolecularComplexityCalculator, 
+        boost::noncopyable>("MolecularComplexityCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MolecularComplexityCalculator>())    
+        .def("calculate", &Descr::MolecularComplexityCalculator::calculate, 
+             (python::arg("self"), python::arg("molgraph")))
+        .def("getResult", &Descr::MolecularComplexityCalculator::getResult, python::arg("self"))
+        .add_property("result", &Descr::MolecularComplexityCalculator::getResult);
 }

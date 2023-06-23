@@ -43,49 +43,49 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
+        class MolecularGraph;
     }
 
     namespace Pharm
     {
 
-		/**
-		 * \brief A writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
-		 */
-		class CDPL_PHARM_API PSDMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
-		{
+        /**
+         * \brief A writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
+         */
+        class CDPL_PHARM_API PSDMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
+        {
 
-		  public:
-			/**
-			 * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the 
-			 *        I/O stream \a ios.
-			 * \param ios The I/O stream to write to.
-			 */
-			PSDMolecularGraphWriter(std::iostream& ios);
+          public:
+            /**
+             * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the 
+             *        I/O stream \a ios.
+             * \param ios The I/O stream to write to.
+             */
+            PSDMolecularGraphWriter(std::iostream& ios);
 
-			/**
-			 * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the output
-			 *        file \a file_name.
-			 * \param file_name The output file to write to.
-			 */
-			PSDMolecularGraphWriter(const std::string& file_name);
+            /**
+             * \brief Constructs a \c %PSDMolecularGraphWriter instance that will write the molecular graph data to the output
+             *        file \a file_name.
+             * \param file_name The output file to write to.
+             */
+            PSDMolecularGraphWriter(const std::string& file_name);
 
-			~PSDMolecularGraphWriter();
+            ~PSDMolecularGraphWriter();
 
-			PSDMolecularGraphWriter& write(const Chem::MolecularGraph& molgraph);
+            PSDMolecularGraphWriter& write(const Chem::MolecularGraph& molgraph);
 
-			void close();
+            void close();
 
-			operator const void*() const;
-			bool operator!() const;
+            operator const void*() const;
+            bool operator!() const;
 
-		  private:
-			PSDScreeningDBCreator  creator;
-			std::iostream*         output;
-			std::streampos         outputPos;
-			bool                   state;
-			bool                   closed;
-		};
+          private:
+            PSDScreeningDBCreator  creator;
+            std::iostream*         output;
+            std::streampos         outputPos;
+            bool                   state;
+            bool                   closed;
+        };
     }
 }
 

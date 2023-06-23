@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
-		 */
-		typedef Util::DefaultDataInputHandler<SDFMoleculeReader, DataFormat::SDF> SDFMoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+         */
+        typedef Util::DefaultDataInputHandler<SDFMoleculeReader, DataFormat::SDF> SDFMoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_SDFMOLECULEINPUTHANDLER_HPP

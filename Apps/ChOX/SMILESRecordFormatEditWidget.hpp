@@ -36,29 +36,29 @@ class QComboBox;
 namespace ChOX
 {
 
-	class SMILESRecordFormatEditWidget : public QWidget
-	{
+    class SMILESRecordFormatEditWidget : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		SMILESRecordFormatEditWidget(QWidget*, std::string&);
+    public:
+        SMILESRecordFormatEditWidget(QWidget*, std::string&);
 
-	signals:
-		void recordFormatChanged();
+    signals:
+        void recordFormatChanged();
 
-	public slots:
-		void updateGUI();
+    public slots:
+        void updateGUI();
 
-	private slots:
-		void handleFormatSelection(int);
+    private slots:
+        void handleFormatSelection(int);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		std::string& recordFormat;
-		QComboBox*   recordFormatComboBox;
-	};
+        std::string& recordFormat;
+        QComboBox*   recordFormatComboBox;
+    };
 }
 
 #endif // CHOX_SMILESRECORDFORMATEDITWIDGET_HPP

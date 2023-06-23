@@ -48,5 +48,5 @@ void Pharm::XBondDonorFeatureGenerator::init()
 {
     using namespace Chem;
 
-	addIncludePattern(parseSMARTS("[Cl,Br,I:11][*:4]"), FeatureType::HALOGEN_BOND_DONOR, 1.5, FeatureGeometry::VECTOR);
+    addIncludePattern(parseSMARTS("[Cl,Br,I:11][*:4]"), FeatureType::HALOGEN_BOND_DONOR, 1.5, FeatureGeometry::VECTOR);
 }

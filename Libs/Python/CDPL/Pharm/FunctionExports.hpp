@@ -29,13 +29,13 @@
 namespace CDPLPythonPharm
 {
 
-	void exportPharmacophoreFunctions();
-	void exportFeatureFunctions();
-	void exportFeatureContainerFunctions();
-	void exportFeatureSetFunctions();
-	void exportControlParameterFunctions();
-	void exportMoleculeFunctions();
-	void exportUtilityFunctions();
+    void exportPharmacophoreFunctions();
+    void exportFeatureFunctions();
+    void exportFeatureContainerFunctions();
+    void exportFeatureSetFunctions();
+    void exportControlParameterFunctions();
+    void exportMoleculeFunctions();
+    void exportUtilityFunctions();
 }
 
 #endif // CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP

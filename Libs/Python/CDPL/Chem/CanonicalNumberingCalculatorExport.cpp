@@ -34,32 +34,32 @@
 
 void CDPLPythonChem::exportCanonicalNumberingCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::CanonicalNumberingCalculator, boost::noncopyable>("CanonicalNumberingCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("numbering"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CanonicalNumberingCalculator>())	
-		.def("setAtomPropertyFlags", &Chem::CanonicalNumberingCalculator::setAtomPropertyFlags, 
-			 (python::arg("self"), python::arg("flags")))
-		.def("getAtomPropertyFlags", &Chem::CanonicalNumberingCalculator::getAtomPropertyFlags, python::arg("self"))
-		.def("setBondPropertyFlags", &Chem::CanonicalNumberingCalculator::setBondPropertyFlags, 
-			 (python::arg("self"), python::arg("flags")))
-		.def("getBondPropertyFlags", &Chem::CanonicalNumberingCalculator::getBondPropertyFlags, python::arg("self"))
-		.def("setHydrogenCountFunction", &Chem::CanonicalNumberingCalculator::setHydrogenCountFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getHydrogenCountFunction", &Chem::CanonicalNumberingCalculator::getHydrogenCountFunction, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("calculate", &Chem::CanonicalNumberingCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("numbering")))
-		.add_property("atomPropertyFlags", &Chem::CanonicalNumberingCalculator::getAtomPropertyFlags, 
-					  &Chem::CanonicalNumberingCalculator::setAtomPropertyFlags)
-		.add_property("bondPropertyFlags", &Chem::CanonicalNumberingCalculator::getBondPropertyFlags, 
-					  &Chem::CanonicalNumberingCalculator::setBondPropertyFlags)
-		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::CanonicalNumberingCalculator::DEF_ATOM_PROPERTY_FLAGS)
-		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLAGS)
-		.add_property("hydrogenCountFunc", 
-					  python::make_function(&Chem::CanonicalNumberingCalculator::getHydrogenCountFunction, 
-											python::return_internal_reference<>()),
-					  &Chem::CanonicalNumberingCalculator::setHydrogenCountFunction);
+    python::class_<Chem::CanonicalNumberingCalculator, boost::noncopyable>("CanonicalNumberingCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("numbering"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CanonicalNumberingCalculator>())    
+        .def("setAtomPropertyFlags", &Chem::CanonicalNumberingCalculator::setAtomPropertyFlags, 
+             (python::arg("self"), python::arg("flags")))
+        .def("getAtomPropertyFlags", &Chem::CanonicalNumberingCalculator::getAtomPropertyFlags, python::arg("self"))
+        .def("setBondPropertyFlags", &Chem::CanonicalNumberingCalculator::setBondPropertyFlags, 
+             (python::arg("self"), python::arg("flags")))
+        .def("getBondPropertyFlags", &Chem::CanonicalNumberingCalculator::getBondPropertyFlags, python::arg("self"))
+        .def("setHydrogenCountFunction", &Chem::CanonicalNumberingCalculator::setHydrogenCountFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("getHydrogenCountFunction", &Chem::CanonicalNumberingCalculator::getHydrogenCountFunction, 
+             python::arg("self"), python::return_internal_reference<>())
+        .def("calculate", &Chem::CanonicalNumberingCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("numbering")))
+        .add_property("atomPropertyFlags", &Chem::CanonicalNumberingCalculator::getAtomPropertyFlags, 
+                      &Chem::CanonicalNumberingCalculator::setAtomPropertyFlags)
+        .add_property("bondPropertyFlags", &Chem::CanonicalNumberingCalculator::getBondPropertyFlags, 
+                      &Chem::CanonicalNumberingCalculator::setBondPropertyFlags)
+        .def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::CanonicalNumberingCalculator::DEF_ATOM_PROPERTY_FLAGS)
+        .def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLAGS)
+        .add_property("hydrogenCountFunc", 
+                      python::make_function(&Chem::CanonicalNumberingCalculator::getHydrogenCountFunction, 
+                                            python::return_internal_reference<>()),
+                      &Chem::CanonicalNumberingCalculator::setHydrogenCountFunction);
 }

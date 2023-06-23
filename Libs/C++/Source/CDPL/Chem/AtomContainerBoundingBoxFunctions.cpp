@@ -35,37 +35,37 @@ using namespace CDPL;
 
 void Chem::calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func, bool reset)
 {
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Math::Vector3D& coords = coords_func(*it);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Math::Vector3D& coords = coords_func(*it);
 
-		extendBoundingBox(min, max, coords, reset);
-		reset = false;
-	}
-}	
+        extendBoundingBox(min, max, coords, reset);
+        reset = false;
+    }
+}    
 
 bool Chem::insideBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func)
 {
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Math::Vector3D& coords = coords_func(*it);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Math::Vector3D& coords = coords_func(*it);
 
-		if (insideBoundingBox(min, max, coords))
-			continue;
+        if (insideBoundingBox(min, max, coords))
+            continue;
 
-		return false;
-	}
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool Chem::intersectsBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func)
 {
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Math::Vector3D& coords = coords_func(*it);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Math::Vector3D& coords = coords_func(*it);
 
-		if (insideBoundingBox(min, max, coords))
-			return true;
-	}
+        if (insideBoundingBox(min, max, coords))
+            return true;
+    }
 
-	return false;
+    return false;
 }
 

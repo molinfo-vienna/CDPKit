@@ -32,27 +32,27 @@
 namespace 
 {
 
-	struct MOL2ChargeType {};
+    struct MOL2ChargeType {};
 }
 
 
 void CDPLPythonChem::exportMOL2ChargeTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<MOL2ChargeType, boost::noncopyable>("MOL2ChargeType", python::no_init)
-		.def_readonly("UNKNOWN", &Chem::MOL2ChargeType::UNKNOWN)
-	    .def_readonly("NO_CHARGES", &Chem::MOL2ChargeType::NO_CHARGES)
-	    .def_readonly("DEL_RE", &Chem::MOL2ChargeType::DEL_RE)
-	    .def_readonly("GASTEIGER", &Chem::MOL2ChargeType::GASTEIGER)
-	    .def_readonly("GAST_HUCK", &Chem::MOL2ChargeType::GAST_HUCK)
-	    .def_readonly("HUCKEL", &Chem::MOL2ChargeType::HUCKEL)
-	    .def_readonly("PULLMAN", &Chem::MOL2ChargeType::PULLMAN)
-	    .def_readonly("GAUSS80", &Chem::MOL2ChargeType::GAUSS80)
-	    .def_readonly("AMPAC", &Chem::MOL2ChargeType::AMPAC)
-	    .def_readonly("MULLIKEN", &Chem::MOL2ChargeType::MULLIKEN)
-	    .def_readonly("DICT", &Chem::MOL2ChargeType::DICT)
-	    .def_readonly("MMFF94", &Chem::MOL2ChargeType::MMFF94)
-	    .def_readonly("USER", &Chem::MOL2ChargeType::USER);
+    python::class_<MOL2ChargeType, boost::noncopyable>("MOL2ChargeType", python::no_init)
+        .def_readonly("UNKNOWN", &Chem::MOL2ChargeType::UNKNOWN)
+        .def_readonly("NO_CHARGES", &Chem::MOL2ChargeType::NO_CHARGES)
+        .def_readonly("DEL_RE", &Chem::MOL2ChargeType::DEL_RE)
+        .def_readonly("GASTEIGER", &Chem::MOL2ChargeType::GASTEIGER)
+        .def_readonly("GAST_HUCK", &Chem::MOL2ChargeType::GAST_HUCK)
+        .def_readonly("HUCKEL", &Chem::MOL2ChargeType::HUCKEL)
+        .def_readonly("PULLMAN", &Chem::MOL2ChargeType::PULLMAN)
+        .def_readonly("GAUSS80", &Chem::MOL2ChargeType::GAUSS80)
+        .def_readonly("AMPAC", &Chem::MOL2ChargeType::AMPAC)
+        .def_readonly("MULLIKEN", &Chem::MOL2ChargeType::MULLIKEN)
+        .def_readonly("DICT", &Chem::MOL2ChargeType::DICT)
+        .def_readonly("MMFF94", &Chem::MOL2ChargeType::MMFF94)
+        .def_readonly("USER", &Chem::MOL2ChargeType::USER);
 }

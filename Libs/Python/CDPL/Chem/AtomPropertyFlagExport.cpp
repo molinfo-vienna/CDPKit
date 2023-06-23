@@ -32,30 +32,30 @@
 namespace 
 {
 
-	struct AtomPropertyFlag {};
+    struct AtomPropertyFlag {};
 }
 
 
 void CDPLPythonChem::exportAtomPropertyFlags()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AtomPropertyFlag, boost::noncopyable>("AtomPropertyFlag", python::no_init)
-		.def_readonly("NONE", &Chem::AtomPropertyFlag::NONE)
-		.def_readonly("DEFAULT", &Chem::AtomPropertyFlag::DEFAULT)
-		.def_readonly("AROMATICITY", &Chem::AtomPropertyFlag::AROMATICITY)
-		.def_readonly("TYPE", &Chem::AtomPropertyFlag::TYPE)
-		.def_readonly("CIP_CONFIGURATION", &Chem::AtomPropertyFlag::CIP_CONFIGURATION)
-		.def_readonly("CONFIGURATION", &Chem::AtomPropertyFlag::CONFIGURATION)
-		.def_readonly("FORMAL_CHARGE", &Chem::AtomPropertyFlag::FORMAL_CHARGE)
-		.def_readonly("H_COUNT", &Chem::AtomPropertyFlag::H_COUNT)
-		.def_readonly("HEAVY_BOND_COUNT", &Chem::AtomPropertyFlag::HEAVY_BOND_COUNT)
-		.def_readonly("EXPLICIT_BOND_COUNT", &Chem::AtomPropertyFlag::EXPLICIT_BOND_COUNT)
-		.def_readonly("VALENCE", &Chem::AtomPropertyFlag::VALENCE)
-		.def_readonly("ISOTOPE", &Chem::AtomPropertyFlag::ISOTOPE)
-		.def_readonly("SYMBOL", &Chem::AtomPropertyFlag::SYMBOL)
-		.def_readonly("TOPOLOGY", &Chem::AtomPropertyFlag::TOPOLOGY)
-		.def_readonly("HYBRIDIZATION_STATE", &Chem::AtomPropertyFlag::HYBRIDIZATION_STATE)
-		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::ATOM_MAPPING_ID);
+    python::class_<AtomPropertyFlag, boost::noncopyable>("AtomPropertyFlag", python::no_init)
+        .def_readonly("NONE", &Chem::AtomPropertyFlag::NONE)
+        .def_readonly("DEFAULT", &Chem::AtomPropertyFlag::DEFAULT)
+        .def_readonly("AROMATICITY", &Chem::AtomPropertyFlag::AROMATICITY)
+        .def_readonly("TYPE", &Chem::AtomPropertyFlag::TYPE)
+        .def_readonly("CIP_CONFIGURATION", &Chem::AtomPropertyFlag::CIP_CONFIGURATION)
+        .def_readonly("CONFIGURATION", &Chem::AtomPropertyFlag::CONFIGURATION)
+        .def_readonly("FORMAL_CHARGE", &Chem::AtomPropertyFlag::FORMAL_CHARGE)
+        .def_readonly("H_COUNT", &Chem::AtomPropertyFlag::H_COUNT)
+        .def_readonly("HEAVY_BOND_COUNT", &Chem::AtomPropertyFlag::HEAVY_BOND_COUNT)
+        .def_readonly("EXPLICIT_BOND_COUNT", &Chem::AtomPropertyFlag::EXPLICIT_BOND_COUNT)
+        .def_readonly("VALENCE", &Chem::AtomPropertyFlag::VALENCE)
+        .def_readonly("ISOTOPE", &Chem::AtomPropertyFlag::ISOTOPE)
+        .def_readonly("SYMBOL", &Chem::AtomPropertyFlag::SYMBOL)
+        .def_readonly("TOPOLOGY", &Chem::AtomPropertyFlag::TOPOLOGY)
+        .def_readonly("HYBRIDIZATION_STATE", &Chem::AtomPropertyFlag::HYBRIDIZATION_STATE)
+        .def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::ATOM_MAPPING_ID);
 }

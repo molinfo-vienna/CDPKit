@@ -44,18 +44,18 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-	}
+        class MolecularGraph;
+    }
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Pharmacophore;
-		class FileScreeningHitCollector;
-	}
+        class Pharmacophore;
+        class FileScreeningHitCollector;
+    }
 }
 
 
@@ -66,97 +66,97 @@ namespace PSDScreen
     {
 
     public:
-		PSDScreenImpl();
+        PSDScreenImpl();
 
     private:
-		struct ScreeningWorker;
+        struct ScreeningWorker;
 
-		typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> HitOutputHandler;
-		typedef CDPL::Base::DataInputHandler<CDPL::Pharm::Pharmacophore> QueryInputHandler;
-		typedef HitOutputHandler::SharedPointer HitOutputHandlerPtr;
-		typedef QueryInputHandler::SharedPointer QueryInputHandlerPtr;
-		typedef CDPL::Pharm::ScreeningProcessor::SearchHit SearchHit;
+        typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> HitOutputHandler;
+        typedef CDPL::Base::DataInputHandler<CDPL::Pharm::Pharmacophore> QueryInputHandler;
+        typedef HitOutputHandler::SharedPointer HitOutputHandlerPtr;
+        typedef QueryInputHandler::SharedPointer QueryInputHandlerPtr;
+        typedef CDPL::Pharm::ScreeningProcessor::SearchHit SearchHit;
 
-		const char* getProgName() const;
-		const char* getProgCopyright() const;
-		const char* getProgAboutText() const;
+        const char* getProgName() const;
+        const char* getProgCopyright() const;
+        const char* getProgAboutText() const;
 
-		void setHitOutputFormat(const std::string& file_ext);
-		void setQueryInputFormat(const std::string& file_ext);
-		void setMatchingMode(const std::string& mode);
+        void setHitOutputFormat(const std::string& file_ext);
+        void setQueryInputFormat(const std::string& file_ext);
+        void setMatchingMode(const std::string& mode);
 
-		int process();
+        int process();
 
-		void processSingleThreaded();
-		void processMultiThreaded();
+        void processSingleThreaded();
+        void processMultiThreaded();
 
-		void setErrorMessage(const std::string& msg);
-		bool haveErrorMessage();
+        void setErrorMessage(const std::string& msg);
+        bool haveErrorMessage();
 
-		void printStatistics();
-		void printOptionSummary();
+        void printStatistics();
+        void printOptionSummary();
 
-		void checkInputFiles() const;
-		void initQueryPharmReader();
-		void initHitCollector();
-		void analyzeInputFiles();
+        void checkInputFiles() const;
+        void initQueryPharmReader();
+        void initHitCollector();
+        void analyzeInputFiles();
 
-		bool getQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm);
-		bool doGetQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm);
+        bool getQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm);
+        bool doGetQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm);
 
-		bool collectHit(const SearchHit& hit, double score);
-		bool doCollectHit(const SearchHit& hit, double score);
+        bool collectHit(const SearchHit& hit, double score);
+        bool doCollectHit(const SearchHit& hit, double score);
 
-		bool printProgress(std::size_t worker_idx, double progress);
-		bool doPrintProgress(std::size_t worker_idx, double progress);
+        bool printProgress(std::size_t worker_idx, double progress);
+        bool doPrintProgress(std::size_t worker_idx, double progress);
 
-		std::string getMatchingModeString() const;
+        std::string getMatchingModeString() const;
 
-		HitOutputHandlerPtr getHitOutputHandler(const std::string& file_path) const;
-		QueryInputHandlerPtr getQueryInputHandler(const std::string& file_path) const;
+        HitOutputHandlerPtr getHitOutputHandler(const std::string& file_path) const;
+        QueryInputHandlerPtr getQueryInputHandler(const std::string& file_path) const;
 
-		void addOptionLongDescriptions();
-	
-		typedef CDPL::Pharm::ScreeningProcessor::HitReportMode MatchingMode;
-		typedef std::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
-		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer HitWriterPtr;
-		typedef CDPL::Base::DataReader<CDPL::Pharm::Pharmacophore>::SharedPointer QueryReaderPtr;
-		typedef CDPL::Internal::Timer Timer;
-		typedef std::vector<double> WorkerProgressArray;
+        void addOptionLongDescriptions();
+    
+        typedef CDPL::Pharm::ScreeningProcessor::HitReportMode MatchingMode;
+        typedef std::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
+        typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer HitWriterPtr;
+        typedef CDPL::Base::DataReader<CDPL::Pharm::Pharmacophore>::SharedPointer QueryReaderPtr;
+        typedef CDPL::Internal::Timer Timer;
+        typedef std::vector<double> WorkerProgressArray;
 
-		std::string              queryPharmFile;
-		std::string              screeningDB;
-		std::string              hitOutputFile;
-		bool                     checkXVols;
-		bool                     alignConfs;
-		bool                     bestAlignments;
-		bool                     outputScore;
-		bool                     outputMolIndex;
-		bool                     outputConfIndex;
-		bool                     outputDBName;
-		bool                     outputPharmName;
-		bool                     outputPharmIndex;
-		std::size_t              numThreads;
-		std::size_t              startMolIndex;
-		std::size_t              endMolIndex;
-		std::size_t              maxOmittedFtrs;
-		MatchingMode             matchingMode;
-		HitOutputHandlerPtr      hitOutputHandler;
-		QueryInputHandlerPtr     queryInputHandler;
-		HitWriterPtr             hitMolWriter;
-		QueryReaderPtr           queryPharmReader;
-		HitCollectorPtr          hitCollector;
-		std::mutex               mutex;
-		std::mutex               collHitMutex;
-		std::string              errorMessage;
-		Timer                    timer;
-		std::size_t              numQueryPharms;
-		std::size_t              numDBMolecules;
-		std::size_t              numDBPharms;
-		std::size_t              numHits;
-		std::size_t              maxNumHits;
-		int                      lastProgValue;
-		WorkerProgressArray      workerProgArray;
+        std::string              queryPharmFile;
+        std::string              screeningDB;
+        std::string              hitOutputFile;
+        bool                     checkXVols;
+        bool                     alignConfs;
+        bool                     bestAlignments;
+        bool                     outputScore;
+        bool                     outputMolIndex;
+        bool                     outputConfIndex;
+        bool                     outputDBName;
+        bool                     outputPharmName;
+        bool                     outputPharmIndex;
+        std::size_t              numThreads;
+        std::size_t              startMolIndex;
+        std::size_t              endMolIndex;
+        std::size_t              maxOmittedFtrs;
+        MatchingMode             matchingMode;
+        HitOutputHandlerPtr      hitOutputHandler;
+        QueryInputHandlerPtr     queryInputHandler;
+        HitWriterPtr             hitMolWriter;
+        QueryReaderPtr           queryPharmReader;
+        HitCollectorPtr          hitCollector;
+        std::mutex               mutex;
+        std::mutex               collHitMutex;
+        std::string              errorMessage;
+        Timer                    timer;
+        std::size_t              numQueryPharms;
+        std::size_t              numDBMolecules;
+        std::size_t              numDBPharms;
+        std::size_t              numHits;
+        std::size_t              maxNumHits;
+        int                      lastProgValue;
+        WorkerProgressArray      workerProgArray;
     };
 }
 

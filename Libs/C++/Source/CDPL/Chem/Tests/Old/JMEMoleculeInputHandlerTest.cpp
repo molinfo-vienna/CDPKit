@@ -42,47 +42,47 @@
 
 BOOST_AUTO_TEST_CASE(JMEMoleculeInputHandlerTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
-	using namespace Base;
+    using namespace CDPL;
+    using namespace Chem;
+    using namespace Base;
 
-	Molecule mol1;
-	Molecule mol2;
+    Molecule mol1;
+    Molecule mol2;
 
-	const DataInputHandler<Molecule>* handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::JME);
+    const DataInputHandler<Molecule>* handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::JME);
 
-	BOOST_CHECK(handler);
+    BOOST_CHECK(handler);
 
-	BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::JME);
+    BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::JME);
 
-	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByName("jme") == handler);
-	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("jme") == handler);
+    BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByName("jme") == handler);
+    BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("jme") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK(ifs);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol1));
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol1));
 
-	std::ostringstream oss;
+    std::ostringstream oss;
 
-	BOOST_CHECK(oss);
+    BOOST_CHECK(oss);
 
-	BOOST_CHECK(JMEMolecularGraphWriter(oss).write(mol1));
+    BOOST_CHECK(JMEMolecularGraphWriter(oss).write(mol1));
 
-	std::istringstream iss(oss.str());
+    std::istringstream iss(oss.str());
 
-	BOOST_CHECK(iss);
+    BOOST_CHECK(iss);
 
-	DataReader<Molecule>::SharedPointer reader_ptr(handler->createReader(iss));
+    DataReader<Molecule>::SharedPointer reader_ptr(handler->createReader(iss));
 
-	BOOST_CHECK(reader_ptr);
-	BOOST_CHECK(reader_ptr->read(mol2));
+    BOOST_CHECK(reader_ptr);
+    BOOST_CHECK(reader_ptr->read(mol2));
 
-	BOOST_CHECK(mol1.getNumAtoms() == mol2.getNumAtoms());
-	BOOST_CHECK(mol1.getNumBonds() == mol2.getNumBonds());
+    BOOST_CHECK(mol1.getNumAtoms() == mol2.getNumAtoms());
+    BOOST_CHECK(mol1.getNumBonds() == mol2.getNumBonds());
 
-	BOOST_CHECK(mol1.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE) == 
-				mol2.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE));
+    BOOST_CHECK(mol1.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE) == 
+                mol2.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE));
 }
 

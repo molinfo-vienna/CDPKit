@@ -34,28 +34,28 @@
 
 void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingInteractionParameterizer()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer, 
-				   ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::SharedPointer>("MMFF94OutOfPlaneBendingInteractionParameterizer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94OutOfPlaneBendingInteractionData&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer>())	
-		.def("setFilterFunction", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setFilterFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypeFunction", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setOutOfPlaneBendingParameterTable", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setOutOfPlaneBendingParameterTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("setParameterAtomTypeMap", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setParameterAtomTypeMap, 
-			 (python::arg("self"), python::arg("map")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::operator=),
-			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
-		.def("parameterize", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+    python::class_<ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer, 
+                   ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::SharedPointer>("MMFF94OutOfPlaneBendingInteractionParameterizer", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
+        .def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94OutOfPlaneBendingInteractionData&, bool>(
+                 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer>())    
+        .def("setFilterFunction", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setFilterFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setAtomTypeFunction", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypeFunction, 
+             (python::arg("self"), python::arg("func"))) 
+        .def("setOutOfPlaneBendingParameterTable", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setOutOfPlaneBendingParameterTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setAtomTypePropertyTable", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypePropertyTable, 
+             (python::arg("self"), python::arg("table")))
+        .def("setParameterAtomTypeMap", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setParameterAtomTypeMap, 
+             (python::arg("self"), python::arg("map")))
+        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::operator=),
+             (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
+        .def("parameterize", &ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize, 
+             (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
 }

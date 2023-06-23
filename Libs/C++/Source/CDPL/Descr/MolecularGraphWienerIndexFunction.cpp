@@ -38,31 +38,31 @@ using namespace CDPL;
 
 std::size_t Descr::calcWienerIndex(const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
-	
-	Util::BitSet h_mask(molgraph.getNumAtoms());
-	buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    using namespace Chem;
+    
+    Util::BitSet h_mask(molgraph.getNumAtoms());
+    buildAtomTypeMask(molgraph, h_mask, AtomType::H);
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+    MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
-	std::size_t index = 0;
+    const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
+    std::size_t index = 0;
 
-	for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != atoms_end; ) {
-		std::size_t atom1_idx = molgraph.getAtomIndex(*it1);
+    for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != atoms_end; ) {
+        std::size_t atom1_idx = molgraph.getAtomIndex(*it1);
 
-		if (h_mask.test(atom1_idx))
-			continue;
+        if (h_mask.test(atom1_idx))
+            continue;
 
-		for (MolecularGraph::ConstAtomIterator it2 = ++it1; it2 != atoms_end; ++it2) {
-			std::size_t atom2_idx = molgraph.getAtomIndex(*it2);
+        for (MolecularGraph::ConstAtomIterator it2 = ++it1; it2 != atoms_end; ++it2) {
+            std::size_t atom2_idx = molgraph.getAtomIndex(*it2);
 
-			if (h_mask.test(atom2_idx))
-				continue;
+            if (h_mask.test(atom2_idx))
+                continue;
 
-			index += dist_mtx(atom1_idx, atom2_idx);
-		}
-	}
+            index += dist_mtx(atom1_idx, atom2_idx);
+        }
+    }
 
-	return index;
+    return index;
 }

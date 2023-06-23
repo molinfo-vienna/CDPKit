@@ -33,78 +33,78 @@
 namespace CDPL 
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		/**
-		 * \brief Implementation of the Secure Hashing Algorithm 1 [\ref WSHA]
-		 *        as defined in FIPS PUB 180-1 published on April 17, 1995.
-		 *
-		 * The typical procedure to calculate and retrieve a message digest
-		 * is as follows:
-		 * \code
-		 * SHA1 sha1;
-		 * std::string str1("The quick brown fox "); // portion 1 of the message
-		 * std::string str2("jumps over the ...");   // portion 2 of the message
-		 *
-		 * sha1.input(str1.begin(), str1.end()); // input portion 1 of the message
-		 * sha1.input(str2.begin(), str2.end()); // input portion 2 of the message
-		 *
-		 * std::vector<unsigned char> digest;    // the final message digest will be stored here
-		 *
-		 * sha1.getResult(std::back_inserter(digest)); // copies the 160-bit hash into 'digest'
-		 * \endcode
-		 */
-		class SHA1
-		{
+        /**
+         * \brief Implementation of the Secure Hashing Algorithm 1 [\ref WSHA]
+         *        as defined in FIPS PUB 180-1 published on April 17, 1995.
+         *
+         * The typical procedure to calculate and retrieve a message digest
+         * is as follows:
+         * \code
+         * SHA1 sha1;
+         * std::string str1("The quick brown fox "); // portion 1 of the message
+         * std::string str2("jumps over the ...");   // portion 2 of the message
+         *
+         * sha1.input(str1.begin(), str1.end()); // input portion 1 of the message
+         * sha1.input(str2.begin(), str2.end()); // input portion 2 of the message
+         *
+         * std::vector<unsigned char> digest;    // the final message digest will be stored here
+         *
+         * sha1.getResult(std::back_inserter(digest)); // copies the 160-bit hash into 'digest'
+         * \endcode
+         */
+        class SHA1
+        {
 
-		public:
-			static const std::size_t HASH_SIZE = 20; /**< The size of the SHA-1 message digest in bytes. */ 
+        public:
+            static const std::size_t HASH_SIZE = 20; /**< The size of the SHA-1 message digest in bytes. */ 
 
-			/**
-			 * \brief Default constructor. 
-			 */
-			SHA1();
+            /**
+             * \brief Default constructor. 
+             */
+            SHA1();
 
-			/**
-			 * \brief Resets the internal state and prepares for a new message digest 
-			 *        calculation cycle.
-			 */
-			void reset();
+            /**
+             * \brief Resets the internal state and prepares for a new message digest 
+             *        calculation cycle.
+             */
+            void reset();
 
-			/**
-			 * \brief Accepts arbitrary data as the next portion of the message.
-			 *
-			 * The value type of the data elements is limited to one of the built-in integral
-			 * C++ types (char, int, long, ...). Furthermore, the data elements are copied bytewise
-			 * with the least significant byte of a data element coming first. If input() is 
-			 * called after getResult(), reset() is called automatically.
-			 *
-			 * \param start An iterator pointing to the beginning of the data.
-			 * \param end An iterator pointing one past the last element of the data.
-			 */
-			template <typename InputIter>
-			void input(InputIter start, InputIter end);
+            /**
+             * \brief Accepts arbitrary data as the next portion of the message.
+             *
+             * The value type of the data elements is limited to one of the built-in integral
+             * C++ types (char, int, long, ...). Furthermore, the data elements are copied bytewise
+             * with the least significant byte of a data element coming first. If input() is 
+             * called after getResult(), reset() is called automatically.
+             *
+             * \param start An iterator pointing to the beginning of the data.
+             * \param end An iterator pointing one past the last element of the data.
+             */
+            template <typename InputIter>
+            void input(InputIter start, InputIter end);
 
-			/**
-			 * \brief Copies the 160 bit message digest in octet chunks to a
-			 *        destination specified by the output iterator \a out. 
-			 * \param out An output iterator specifying the destination.
-			 */
-			template <typename OutputIter>
-			void getResult(OutputIter out);
+            /**
+             * \brief Copies the 160 bit message digest in octet chunks to a
+             *        destination specified by the output iterator \a out. 
+             * \param out An output iterator specifying the destination.
+             */
+            template <typename OutputIter>
+            void getResult(OutputIter out);
 
-		private:
-			void padMessage();
-			void processMessageBlock();
+        private:
+            void padMessage();
+            void processMessageBlock();
 
-			std::uint32_t  intermediateHash[HASH_SIZE / 4]; // Message Digest
-			std::uint64_t  length;                          // Message length in b_its 
-			std::uint32_t  messageBlockIndex;               // Index into message block array 
-			std::uint8_t   messageBlock[64];                // 512-b_it message blocks
-			bool           digestComputed;                  // Tells whether the message digest has been computed
-		};
-	}
+            std::uint32_t  intermediateHash[HASH_SIZE / 4]; // Message Digest
+            std::uint64_t  length;                          // Message length in b_its 
+            std::uint32_t  messageBlockIndex;               // Index into message block array 
+            std::uint8_t   messageBlock[64];                // 512-b_it message blocks
+            bool           digestComputed;                  // Tells whether the message digest has been computed
+        };
+    }
 }
 
 
@@ -113,37 +113,37 @@ namespace CDPL
 template <typename InputIter>
 void CDPL::Internal::SHA1::input(InputIter in, InputIter end)
 {
-	if (digestComputed)
-		reset();
+    if (digestComputed)
+        reset();
 
-	for ( ; in != end; ++in) {
-		typename InputIter::value_type v = *in;
+    for ( ; in != end; ++in) {
+        typename InputIter::value_type v = *in;
 
-		for (std::size_t i = 0; i < sizeof(typename InputIter::value_type); i++) {
-			messageBlock[messageBlockIndex++] = std::uint8_t((v >> (i * 8)) & 0xff);
-			length += 8;
+        for (std::size_t i = 0; i < sizeof(typename InputIter::value_type); i++) {
+            messageBlock[messageBlockIndex++] = std::uint8_t((v >> (i * 8)) & 0xff);
+            length += 8;
 
-			if (messageBlockIndex == 64)
-				processMessageBlock();
-		}
-	}
+            if (messageBlockIndex == 64)
+                processMessageBlock();
+        }
+    }
 }
 
 template <typename OutputIter>
 void CDPL::Internal::SHA1::getResult(OutputIter out)
 {
-	if (!digestComputed) {
-		padMessage();
+    if (!digestComputed) {
+        padMessage();
 
-		for(std::size_t i = 0; i < 64; ++i)	// message may be sensitive, clear it out 
-			messageBlock[i] = 0; 
+        for(std::size_t i = 0; i < 64; ++i)    // message may be sensitive, clear it out 
+            messageBlock[i] = 0; 
 
-		length   = 0;						// and clear length 
-		digestComputed = true;
-	}
+        length   = 0;                        // and clear length 
+        digestComputed = true;
+    }
 
-	for (std::size_t i = 0; i < HASH_SIZE; i++, ++out)
-		*out = (intermediateHash[i >> 2] >> (8 * (3 - (i & 0x03)))) & 0xff;
+    for (std::size_t i = 0; i < HASH_SIZE; i++, ++out)
+        *out = (intermediateHash[i >> 2] >> (8 * (3 - (i & 0x03)))) & 0xff;
 }
 
 #endif // CDPL_INTERNAL_SHA1_HPP

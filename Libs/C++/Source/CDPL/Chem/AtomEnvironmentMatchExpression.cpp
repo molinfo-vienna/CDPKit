@@ -31,29 +31,29 @@ using namespace CDPL;
 
 
 Chem::AtomEnvironmentMatchExpression::AtomEnvironmentMatchExpression(const MolecularGraph::SharedPointer& env_pattern, 
-																	 bool not_match): 
-	envPattern(env_pattern), notMatch(not_match) 
+                                                                     bool not_match): 
+    envPattern(env_pattern), notMatch(not_match) 
 {
-	if (env_pattern.get())
-		substructSearch.setQuery(*env_pattern); 
+    if (env_pattern.get())
+        substructSearch.setQuery(*env_pattern); 
 } 
 
 bool Chem::AtomEnvironmentMatchExpression::operator()(const Atom&, const MolecularGraph&, 
-													  const Atom& target_atom, const MolecularGraph& target_molgraph, 
-													  const Base::Any&) const
+                                                      const Atom& target_atom, const MolecularGraph& target_molgraph, 
+                                                      const Base::Any&) const
 {
-	if (!envPattern || envPattern->getNumAtoms() == 0)
-		return true;
+    if (!envPattern || envPattern->getNumAtoms() == 0)
+        return true;
 
-	std::lock_guard<std::mutex> lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
 
-	substructSearch.clearAtomMappingConstraints();
-	substructSearch.addAtomMappingConstraint(0, target_molgraph.getAtomIndex(target_atom));
+    substructSearch.clearAtomMappingConstraints();
+    substructSearch.addAtomMappingConstraint(0, target_molgraph.getAtomIndex(target_atom));
 
-	bool match = substructSearch.mappingExists(target_molgraph);
+    bool match = substructSearch.mappingExists(target_molgraph);
 
-	if (notMatch)
-		return !match;
+    if (notMatch)
+        return !match;
 
-	return match;
+    return match;
 }

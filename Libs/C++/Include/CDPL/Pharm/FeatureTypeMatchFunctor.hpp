@@ -38,24 +38,24 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+        class Feature;
 
-		/**
-		 * \brief FeatureTypeMatchFunctor.
-		 */
-		class CDPL_PHARM_API FeatureTypeMatchFunctor
-		{
+        /**
+         * \brief FeatureTypeMatchFunctor.
+         */
+        class CDPL_PHARM_API FeatureTypeMatchFunctor
+        {
 
-		  public:
-			/**
-			 * \brief Checks if \a ftr1 and \a ftr2 have the same feature type.
-			 * \param ftr1 The first feature.
-			 * \param ftr2 The second feature.
-			 * \return \c true if the feature types are equal, and \c false otherwise.
-			 * \see Pharm::getType(const Feature&)
-			 */
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
-		};
+          public:
+            /**
+             * \brief Checks if \a ftr1 and \a ftr2 have the same feature type.
+             * \param ftr1 The first feature.
+             * \param ftr2 The second feature.
+             * \return \c true if the feature types are equal, and \c false otherwise.
+             * \see Pharm::getType(const Feature&)
+             */
+            bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+        };
     }
 }
 

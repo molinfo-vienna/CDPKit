@@ -48,130 +48,130 @@ using namespace CDPL;
 namespace
 {
 
-	const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
-													   const ConfGen::SubstituentBulkinessCalculator& subst_blks)
-	{
-		using namespace Chem;
+    const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
+                                                       const ConfGen::SubstituentBulkinessCalculator& subst_blks)
+    {
+        using namespace Chem;
 
-		const Atom* bkst_subst = 0;
-		std::size_t bkst_subst_bks = 0;
-		std::size_t bond_cnt = 0;
+        const Atom* bkst_subst = 0;
+        std::size_t bkst_subst_bks = 0;
+        std::size_t bond_cnt = 0;
 
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), atoms_end = atom.getAtomsEnd(); a_it != atoms_end; ++a_it) {
-			const Atom& nbr_atom = *a_it;
+        for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), atoms_end = atom.getAtomsEnd(); a_it != atoms_end; ++a_it) {
+            const Atom& nbr_atom = *a_it;
 
-			if (&nbr_atom == &db_nbr_atom)
-				continue;
+            if (&nbr_atom == &db_nbr_atom)
+                continue;
 
-			if (++bond_cnt > 2)
-				return 0;
+            if (++bond_cnt > 2)
+                return 0;
 
-			std::size_t nbr_bks = subst_blks[nbr_atom.getIndex()];
+            std::size_t nbr_bks = subst_blks[nbr_atom.getIndex()];
 
-			if (!bkst_subst || nbr_bks > bkst_subst_bks) {
-				bkst_subst = &nbr_atom;
-				bkst_subst_bks = nbr_bks;
+            if (!bkst_subst || nbr_bks > bkst_subst_bks) {
+                bkst_subst = &nbr_atom;
+                bkst_subst_bks = nbr_bks;
 
-			} else if (bkst_subst_bks == nbr_bks)
-				return 0;
-		}
+            } else if (bkst_subst_bks == nbr_bks)
+                return 0;
+        }
 
-		return bkst_subst;
-	}
+        return bkst_subst;
+    }
 }
 
 
 void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 {
-	using namespace Chem;
-	using namespace MolProp;
+    using namespace Chem;
+    using namespace MolProp;
 
-	bool added_hs = makeHydrogenComplete(mol, true);
+    bool added_hs = makeHydrogenComplete(mol, true);
 
-	perceiveComponents(mol, added_hs);
-	perceiveHybridizationStates(mol, false);
-	perceiveSSSR(mol, false);
-	setRingFlags(mol, false);
-	setAromaticityFlags(mol, false);
-	calcCIPPriorities(mol, added_hs);
+    perceiveComponents(mol, added_hs);
+    perceiveHybridizationStates(mol, false);
+    perceiveSSSR(mol, false);
+    setRingFlags(mol, false);
+    setAromaticityFlags(mol, false);
+    calcCIPPriorities(mol, added_hs);
 
-	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
+    for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
 
-		if (!isStereoCenter(atom, mol, true, false)) 
-			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
-		
-		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
-				 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
-			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
-	}
+        if (!isStereoCenter(atom, mol, true, false)) 
+            setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+        
+        else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
+                 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
+            setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+    }
 
-	std::auto_ptr<SubstituentBulkinessCalculator> blks_calc;
+    std::auto_ptr<SubstituentBulkinessCalculator> blks_calc;
 
-	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
-		Bond& bond = *it;
+    for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
+        Bond& bond = *it;
 
-		if (!isStereoCenter(bond, mol, true)) 
-			setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
-		
-		else if (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == BondConfiguration::UNDEF) {
-			StereoDescriptor descr = calcStereoDescriptor(bond, mol, 1);
+        if (!isStereoCenter(bond, mol, true)) 
+            setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
+        
+        else if (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == BondConfiguration::UNDEF) {
+            StereoDescriptor descr = calcStereoDescriptor(bond, mol, 1);
 
-			if (descr.getConfiguration() != BondConfiguration::UNDEF )
-				setStereoDescriptor(bond, descr);
+            if (descr.getConfiguration() != BondConfiguration::UNDEF )
+                setStereoDescriptor(bond, descr);
 
-			else {
-				if (!blks_calc.get()) {
-					blks_calc.reset(new SubstituentBulkinessCalculator());
-					blks_calc->calculate(mol);
-				}
+            else {
+                if (!blks_calc.get()) {
+                    blks_calc.reset(new SubstituentBulkinessCalculator());
+                    blks_calc->calculate(mol);
+                }
 
-				const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *blks_calc);
+                const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *blks_calc);
 
-				if (!ref_atom1)
-					continue;
+                if (!ref_atom1)
+                    continue;
 
-				const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *blks_calc);
+                const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *blks_calc);
 
-				if (!ref_atom2)
-					continue;
+                if (!ref_atom2)
+                    continue;
 
-				setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::TRANS, *ref_atom1, bond.getBegin(), 
-														   bond.getEnd(), *ref_atom2));
-			}
-		}
-	}
+                setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::TRANS, *ref_atom1, bond.getBegin(), 
+                                                           bond.getEnd(), *ref_atom2));
+            }
+        }
+    }
 
-	if (canon) {
-		if (added_hs) {
-			for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-				Atom& atom = *it;
-				const StereoDescriptor& descr = getStereoDescriptor(atom);
+    if (canon) {
+        if (added_hs) {
+            for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+                Atom& atom = *it;
+                const StereoDescriptor& descr = getStereoDescriptor(atom);
 
-				if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
-					continue;
+                if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
+                    continue;
 
-				if (descr.getNumReferenceAtoms() == atom.getNumBonds())
-					continue;
+                if (descr.getNumReferenceAtoms() == atom.getNumBonds())
+                    continue;
 
-				setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
-			}
-		}
-		
-		calcCanonicalNumbering(mol, false);
-		canonicalize(mol, true, true, true, true);
-		perceiveSSSR(mol, true);
-		perceiveComponents(mol, true);
-	}
+                setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
+            }
+        }
+        
+        calcCanonicalNumbering(mol, false);
+        canonicalize(mol, true, true, true, true);
+        perceiveSSSR(mol, true);
+        perceiveComponents(mol, true);
+    }
 
-	calcTopologicalDistanceMatrix(mol, canon || added_hs);
+    calcTopologicalDistanceMatrix(mol, canon || added_hs);
 
-	FragmentList& comps = *getComponents(mol);
+    FragmentList& comps = *getComponents(mol);
 
-	for (FragmentList::ElementIterator it = comps.getElementsBegin(), end = comps.getElementsEnd(); it != end; ++it) {
-		Fragment& comp = *it;
+    for (FragmentList::ElementIterator it = comps.getElementsBegin(), end = comps.getElementsEnd(); it != end; ++it) {
+        Fragment& comp = *it;
 
-		extractTopologicalDistanceSubMatrix(mol, comp, true);
-		extractSSSRSubset(mol, comp, true);
-	}
+        extractTopologicalDistanceSubMatrix(mol, comp, true);
+        extractSSSRSubset(mol, comp, true);
+    }
 }

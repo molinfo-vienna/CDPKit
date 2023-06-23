@@ -46,390 +46,390 @@ using namespace ChOX;
 
 
 PrintSettingsEditWidget::PrintSettingsEditWidget(QWidget* parent, Settings& settings): 
-	SettingsEditWidget(parent), settings(settings)
+    SettingsEditWidget(parent), settings(settings)
 {
-	init();
+    init();
 }
 
 bool PrintSettingsEditWidget::haveChangedSettings() const
 {
-	return haveChanges;
+    return haveChanges;
 }
 
 void PrintSettingsEditWidget::apply()
 {
-	setPrintingTextLabelFontParameter(settings, textLabelFont);
-	setPrintingTextLabelSizeParameter(settings, textLabelSize);
-	setPrintingTextLabelSpacingParameter(settings, textLabelSpacing);
-	setPrintingTextLabelColorParameter(settings, textLabelColor);
+    setPrintingTextLabelFontParameter(settings, textLabelFont);
+    setPrintingTextLabelSizeParameter(settings, textLabelSize);
+    setPrintingTextLabelSpacingParameter(settings, textLabelSpacing);
+    setPrintingTextLabelColorParameter(settings, textLabelColor);
 
-	setFrameLineWidthParameter(settings, frameLineWidth);
-	setFrameLineColorParameter(settings, frameColor);
-	setFrameLineStyleParameter(settings, frameLineStyle);
+    setFrameLineWidthParameter(settings, frameLineWidth);
+    setFrameLineColorParameter(settings, frameColor);
+    setFrameLineStyleParameter(settings, frameLineStyle);
 
-	setPageNumberLabelAlignmentParameter(settings, pageNumberAlignment);
-	setDateLabelAlignmentParameter(settings, dateAlignment);
-	setFileNameLabelAlignmentParameter(settings, fileNameAlignment);
+    setPageNumberLabelAlignmentParameter(settings, pageNumberAlignment);
+    setDateLabelAlignmentParameter(settings, dateAlignment);
+    setFileNameLabelAlignmentParameter(settings, fileNameAlignment);
 
-	setPrintFrameParameter(settings, printFrameCheckBox->isChecked());
-	setPrintDateParameter(settings, printDateCheckBox->isChecked());
-	setPrintPageNumberParameter(settings, printPageNumberCheckBox->isChecked());
-	setPrintFileNameParameter(settings, printFileNameCheckBox->isChecked());
+    setPrintFrameParameter(settings, printFrameCheckBox->isChecked());
+    setPrintDateParameter(settings, printDateCheckBox->isChecked());
+    setPrintPageNumberParameter(settings, printPageNumberCheckBox->isChecked());
+    setPrintFileNameParameter(settings, printFileNameCheckBox->isChecked());
 }
 
 void PrintSettingsEditWidget::reset()
 {
-	blockSignals(true);
+    blockSignals(true);
 
-	textLabelFont = getPrintingTextLabelFontParameter(settings); 
-	textLabelSize = getPrintingTextLabelSizeParameter(settings); 
-	textLabelSpacing = getPrintingTextLabelSpacingParameter(settings); 
-	textLabelColor = getPrintingTextLabelColorParameter(settings); 
+    textLabelFont = getPrintingTextLabelFontParameter(settings); 
+    textLabelSize = getPrintingTextLabelSizeParameter(settings); 
+    textLabelSpacing = getPrintingTextLabelSpacingParameter(settings); 
+    textLabelColor = getPrintingTextLabelColorParameter(settings); 
 
-	frameLineWidth = getFrameLineWidthParameter(settings); 
-	frameColor = getFrameLineColorParameter(settings); 
-	frameLineStyle = getFrameLineStyleParameter(settings); 
+    frameLineWidth = getFrameLineWidthParameter(settings); 
+    frameColor = getFrameLineColorParameter(settings); 
+    frameLineStyle = getFrameLineStyleParameter(settings); 
 
-	pageNumberAlignment = getPageNumberLabelAlignmentParameter(settings); 
-	dateAlignment = getDateLabelAlignmentParameter(settings); 
-	fileNameAlignment = getFileNameLabelAlignmentParameter(settings); 
+    pageNumberAlignment = getPageNumberLabelAlignmentParameter(settings); 
+    dateAlignment = getDateLabelAlignmentParameter(settings); 
+    fileNameAlignment = getFileNameLabelAlignmentParameter(settings); 
 
-	printFrameCheckBox->setChecked(getPrintFrameParameter(settings)); 
-	printDateCheckBox->setChecked(getPrintDateParameter(settings)); 
-	printPageNumberCheckBox->setChecked(getPrintPageNumberParameter(settings)); 
-	printFileNameCheckBox->setChecked(getPrintFileNameParameter(settings)); 
+    printFrameCheckBox->setChecked(getPrintFrameParameter(settings)); 
+    printDateCheckBox->setChecked(getPrintDateParameter(settings)); 
+    printPageNumberCheckBox->setChecked(getPrintPageNumberParameter(settings)); 
+    printFileNameCheckBox->setChecked(getPrintFileNameParameter(settings)); 
 
-	blockSignals(false);
+    blockSignals(false);
 
-	haveChanges = false;
+    haveChanges = false;
 
-	emit updateGUI();
+    emit updateGUI();
 }
 
 void PrintSettingsEditWidget::setDefaults()
 {
-	textLabelSize = ControlParameterDefault::PRINTING_TEXT_LABEL_SIZE;
-	textLabelSpacing = ControlParameterDefault::PRINTING_TEXT_LABEL_SPACING;
-	textLabelColor = ControlParameterDefault::PRINTING_TEXT_LABEL_COLOR;
+    textLabelSize = ControlParameterDefault::PRINTING_TEXT_LABEL_SIZE;
+    textLabelSpacing = ControlParameterDefault::PRINTING_TEXT_LABEL_SPACING;
+    textLabelColor = ControlParameterDefault::PRINTING_TEXT_LABEL_COLOR;
 
-	frameLineWidth = ControlParameterDefault::FRAME_LINE_WIDTH;
-	frameColor = ControlParameterDefault::FRAME_LINE_COLOR;
-	frameLineStyle = ControlParameterDefault::FRAME_LINE_STYLE;
+    frameLineWidth = ControlParameterDefault::FRAME_LINE_WIDTH;
+    frameColor = ControlParameterDefault::FRAME_LINE_COLOR;
+    frameLineStyle = ControlParameterDefault::FRAME_LINE_STYLE;
 
-	pageNumberAlignment = ControlParameterDefault::PAGE_NUMBER_LABEL_ALIGNMENT;
-	dateAlignment = ControlParameterDefault::DATE_LABEL_ALIGNMENT;
-	fileNameAlignment = ControlParameterDefault::FILE_NAME_LABEL_ALIGNMENT;
+    pageNumberAlignment = ControlParameterDefault::PAGE_NUMBER_LABEL_ALIGNMENT;
+    dateAlignment = ControlParameterDefault::DATE_LABEL_ALIGNMENT;
+    fileNameAlignment = ControlParameterDefault::FILE_NAME_LABEL_ALIGNMENT;
 
-	printFrameCheckBox->setChecked(ControlParameterDefault::PRINT_FRAME);
-	printDateCheckBox->setChecked(ControlParameterDefault::PRINT_DATE);
-	printPageNumberCheckBox->setChecked(ControlParameterDefault::PRINT_PAGE_NUMBER);
-	printFileNameCheckBox->setChecked(ControlParameterDefault::PRINT_FILE_NAME);
+    printFrameCheckBox->setChecked(ControlParameterDefault::PRINT_FRAME);
+    printDateCheckBox->setChecked(ControlParameterDefault::PRINT_DATE);
+    printPageNumberCheckBox->setChecked(ControlParameterDefault::PRINT_PAGE_NUMBER);
+    printFileNameCheckBox->setChecked(ControlParameterDefault::PRINT_FILE_NAME);
 
-	haveChanges = true;
+    haveChanges = true;
 
-	emit updateGUI();
-	emit settingsChanged();
+    emit updateGUI();
+    emit settingsChanged();
 }
 
 void PrintSettingsEditWidget::handleSettingsChange()
 {
-	haveChanges = true;
+    haveChanges = true;
 
-	emit SettingsEditWidget::settingsChanged();
+    emit SettingsEditWidget::settingsChanged();
 }
 
 void PrintSettingsEditWidget::handleSettingsChange(bool)
 {
-	haveChanges = true;
+    haveChanges = true;
 
-	emit SettingsEditWidget::settingsChanged();
+    emit SettingsEditWidget::settingsChanged();
 }
 
 void PrintSettingsEditWidget::init()
 {
-	QBoxLayout* main_layout= new QVBoxLayout(this);
+    QBoxLayout* main_layout= new QVBoxLayout(this);
 
-	// --------
+    // --------
 
-	QGroupBox* group_box = new QGroupBox(tr("Print"), this);
-	QGridLayout* grid_layout = new QGridLayout(group_box);
+    QGroupBox* group_box = new QGroupBox(tr("Print"), this);
+    QGridLayout* grid_layout = new QGridLayout(group_box);
 
-	// +++
+    // +++
 
-	printFrameCheckBox = new QCheckBox(tr("Fra&me"), group_box);
+    printFrameCheckBox = new QCheckBox(tr("Fra&me"), group_box);
 
-	grid_layout->addWidget(printFrameCheckBox, 0, 0);
+    grid_layout->addWidget(printFrameCheckBox, 0, 0);
 
-	connect(printFrameCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(printFrameCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
-	// +++
+    // +++
 
-	printDateCheckBox = new QCheckBox(tr("C&urrent Date"), group_box);
+    printDateCheckBox = new QCheckBox(tr("C&urrent Date"), group_box);
 
-	grid_layout->addWidget(printDateCheckBox, 0, 1);
+    grid_layout->addWidget(printDateCheckBox, 0, 1);
 
-	connect(printDateCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(printDateCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
-	// +++
+    // +++
 
-	printFileNameCheckBox = new QCheckBox(tr("File Name&(s)"), group_box);
+    printFileNameCheckBox = new QCheckBox(tr("File Name&(s)"), group_box);
 
-	grid_layout->addWidget(printFileNameCheckBox, 1, 0);
+    grid_layout->addWidget(printFileNameCheckBox, 1, 0);
 
-	connect(printFileNameCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(printFileNameCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
-	// +++
+    // +++
 
-	printPageNumberCheckBox = new QCheckBox(tr("Pa&ge Number"), group_box);
+    printPageNumberCheckBox = new QCheckBox(tr("Pa&ge Number"), group_box);
 
-	grid_layout->addWidget(printPageNumberCheckBox, 1, 1);
+    grid_layout->addWidget(printPageNumberCheckBox, 1, 1);
 
-	connect(printPageNumberCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
+    connect(printPageNumberCheckBox, SIGNAL(toggled(bool)), this, SLOT(handleSettingsChange(bool)));
 
-	// +++
+    // +++
 
-	main_layout->addWidget(group_box);
+    main_layout->addWidget(group_box);
 
-	// --------
+    // --------
 
-	group_box = new QGroupBox(tr("Colors"), this);
+    group_box = new QGroupBox(tr("Colors"), this);
 
-	grid_layout = new QGridLayout(group_box);
+    grid_layout = new QGridLayout(group_box);
 
-	// +++
+    // +++
 
-	QLabel* label = new QLabel(tr("&Frame Color:"), group_box);
+    QLabel* label = new QLabel(tr("&Frame Color:"), group_box);
 
-	ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, frameColor);
+    ColorEditWidget* color_edit_widget = new ColorEditWidget(group_box, frameColor);
 
-	label->setBuddy(color_edit_widget);
+    label->setBuddy(color_edit_widget);
 
-	grid_layout->addWidget(label, 0, 0);
-	grid_layout->addWidget(color_edit_widget, 0, 1);
+    grid_layout->addWidget(label, 0, 0);
+    grid_layout->addWidget(color_edit_widget, 0, 1);
 
-	connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
-	connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
+    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("Te&xt Color:"), group_box);
+    label = new QLabel(tr("Te&xt Color:"), group_box);
 
-	color_edit_widget = new ColorEditWidget(group_box, textLabelColor);
+    color_edit_widget = new ColorEditWidget(group_box, textLabelColor);
 
-	label->setBuddy(color_edit_widget);
+    label->setBuddy(color_edit_widget);
 
-	grid_layout->addWidget(label, 1, 0);
-	grid_layout->addWidget(color_edit_widget, 1, 1);
+    grid_layout->addWidget(label, 1, 0);
+    grid_layout->addWidget(color_edit_widget, 1, 1);
 
-	connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
-	connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), color_edit_widget, SLOT(updateGUI()));
+    connect(color_edit_widget, SIGNAL(colorChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	main_layout->addWidget(group_box);
+    main_layout->addWidget(group_box);
 
-	// --------
+    // --------
 
-	QFrame* frame = new QFrame(this);
+    QFrame* frame = new QFrame(this);
 
-	frame->setFrameStyle(QFrame::StyledPanel);
+    frame->setFrameStyle(QFrame::StyledPanel);
 
-	QBoxLayout* h_box_layout = new QHBoxLayout(frame);
+    QBoxLayout* h_box_layout = new QHBoxLayout(frame);
 
-	// +++
+    // +++
 
-	FontEditWidget* font_edit_widget = new FontEditWidget(frame, textLabelFont, textLabelSize, 0, false, false);
+    FontEditWidget* font_edit_widget = new FontEditWidget(frame, textLabelFont, textLabelSize, 0, false, false);
 
-	QLabel* font_label = new QLabel(tr("T&ext Font:"), frame);
+    QLabel* font_label = new QLabel(tr("T&ext Font:"), frame);
 
-	font_label->setBuddy(font_edit_widget);
+    font_label->setBuddy(font_edit_widget);
 
-	h_box_layout->addWidget(font_label);
+    h_box_layout->addWidget(font_label);
 
-	connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
-	connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), font_edit_widget, SLOT(updateGUI()));
+    connect(font_edit_widget, SIGNAL(fontChanged()), this, SLOT(handleSettingsChange()));
 
-	h_box_layout->addWidget(font_edit_widget);
+    h_box_layout->addWidget(font_edit_widget);
 
-	// +++
+    // +++
 
-	main_layout->addWidget(frame);
+    main_layout->addWidget(frame);
 
-	// --------
+    // --------
 
-	h_box_layout = new QHBoxLayout();
+    h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
+    main_layout->addLayout(h_box_layout);
 
-	// +++
+    // +++
 
-	group_box = new QGroupBox(tr("Text/Frame Spacing"), this);
+    group_box = new QGroupBox(tr("Text/Frame Spacing"), this);
 
-	QBoxLayout* h_box_layout2 = new QHBoxLayout(group_box);
+    QBoxLayout* h_box_layout2 = new QHBoxLayout(group_box);
 
-	SizeSpecEditWidget* size_edit_widget = new SizeSpecEditWidget(group_box, textLabelSpacing, false, false, false);
+    SizeSpecEditWidget* size_edit_widget = new SizeSpecEditWidget(group_box, textLabelSpacing, false, false, false);
 
-	h_box_layout2->addWidget(size_edit_widget);
+    h_box_layout2->addWidget(size_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), size_edit_widget, SLOT(updateGUI()));
-	connect(size_edit_widget, SIGNAL(sizeSpecChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), size_edit_widget, SLOT(updateGUI()));
+    connect(size_edit_widget, SIGNAL(sizeSpecChanged()), this, SLOT(handleSettingsChange()));
 
-	h_box_layout->addWidget(group_box, 1);
+    h_box_layout->addWidget(group_box, 1);
 
-	// +++
+    // +++
 
-	group_box = new QGroupBox(tr("Frame Line Thickness"), this);
+    group_box = new QGroupBox(tr("Frame Line Thickness"), this);
 
-	h_box_layout2 = new QHBoxLayout(group_box);
+    h_box_layout2 = new QHBoxLayout(group_box);
 
-	size_edit_widget = new SizeSpecEditWidget(group_box, frameLineWidth, false, false, false);
+    size_edit_widget = new SizeSpecEditWidget(group_box, frameLineWidth, false, false, false);
 
-	h_box_layout2->addWidget(size_edit_widget);
+    h_box_layout2->addWidget(size_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), size_edit_widget, SLOT(updateGUI()));
-	connect(size_edit_widget, SIGNAL(sizeSpecChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), size_edit_widget, SLOT(updateGUI()));
+    connect(size_edit_widget, SIGNAL(sizeSpecChanged()), this, SLOT(handleSettingsChange()));
 
-	h_box_layout->addWidget(group_box, 1);
+    h_box_layout->addWidget(group_box, 1);
 
-	// +++
+    // +++
 
-	group_box = new QGroupBox(tr("Frame Line Style"), this);
+    group_box = new QGroupBox(tr("Frame Line Style"), this);
 
-	h_box_layout2 = new QHBoxLayout(group_box);
+    h_box_layout2 = new QHBoxLayout(group_box);
 
-	LineStyleEditWidget* style_edit_widget = new LineStyleEditWidget(group_box, frameLineStyle);
+    LineStyleEditWidget* style_edit_widget = new LineStyleEditWidget(group_box, frameLineStyle);
 
-	h_box_layout2->addWidget(style_edit_widget);
+    h_box_layout2->addWidget(style_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), style_edit_widget, SLOT(updateGUI()));
-	connect(style_edit_widget, SIGNAL(lineStyleChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), style_edit_widget, SLOT(updateGUI()));
+    connect(style_edit_widget, SIGNAL(lineStyleChanged()), this, SLOT(handleSettingsChange()));
 
-	h_box_layout->addWidget(group_box, 1);
+    h_box_layout->addWidget(group_box, 1);
 
-	// --------
+    // --------
 
-	h_box_layout = new QHBoxLayout();
+    h_box_layout = new QHBoxLayout();
 
-	main_layout->addLayout(h_box_layout);
+    main_layout->addLayout(h_box_layout);
 
-	// +++
+    // +++
 
-	group_box = new QGroupBox(tr("Date Alignment"), this);
+    group_box = new QGroupBox(tr("Date Alignment"), this);
 
-	QVBoxLayout* v_box_layout = new QVBoxLayout(group_box);
+    QVBoxLayout* v_box_layout = new QVBoxLayout(group_box);
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("&Horizontal:"), group_box);
+    label = new QLabel(tr("&Horizontal:"), group_box);
 
-	AlignmentEditWidget* alignment_edit_widget = new AlignmentEditWidget(group_box, dateAlignment, true);
+    AlignmentEditWidget* alignment_edit_widget = new AlignmentEditWidget(group_box, dateAlignment, true);
 
-	label->setBuddy(alignment_edit_widget);
+    label->setBuddy(alignment_edit_widget);
 
-	v_box_layout->addWidget(label);
-	v_box_layout->addWidget(alignment_edit_widget);
+    v_box_layout->addWidget(label);
+    v_box_layout->addWidget(alignment_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
-	connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
+    connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("&Vertical:"), group_box);
+    label = new QLabel(tr("&Vertical:"), group_box);
 
-	alignment_edit_widget = new AlignmentEditWidget(group_box, dateAlignment, false, false);
+    alignment_edit_widget = new AlignmentEditWidget(group_box, dateAlignment, false, false);
 
-	label->setBuddy(alignment_edit_widget);
+    label->setBuddy(alignment_edit_widget);
 
-	v_box_layout->addWidget(label);
-	v_box_layout->addWidget(alignment_edit_widget);
+    v_box_layout->addWidget(label);
+    v_box_layout->addWidget(alignment_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
-	connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
+    connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	h_box_layout->addWidget(group_box);
+    h_box_layout->addWidget(group_box);
 
-	// +++
+    // +++
 
-	group_box = new QGroupBox(tr("Page Number Alignment"), this);
+    group_box = new QGroupBox(tr("Page Number Alignment"), this);
 
-	v_box_layout = new QVBoxLayout(group_box);
+    v_box_layout = new QVBoxLayout(group_box);
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("Hori&zontal:"), group_box);
+    label = new QLabel(tr("Hori&zontal:"), group_box);
 
-	alignment_edit_widget = new AlignmentEditWidget(group_box, pageNumberAlignment, true);
+    alignment_edit_widget = new AlignmentEditWidget(group_box, pageNumberAlignment, true);
 
-	label->setBuddy(alignment_edit_widget);
+    label->setBuddy(alignment_edit_widget);
 
-	v_box_layout->addWidget(label);
-	v_box_layout->addWidget(alignment_edit_widget);
+    v_box_layout->addWidget(label);
+    v_box_layout->addWidget(alignment_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
-	connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
+    connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("Ver&tical:"), group_box);
+    label = new QLabel(tr("Ver&tical:"), group_box);
 
-	alignment_edit_widget = new AlignmentEditWidget(group_box, pageNumberAlignment, false, false);
+    alignment_edit_widget = new AlignmentEditWidget(group_box, pageNumberAlignment, false, false);
 
-	label->setBuddy(alignment_edit_widget);
+    label->setBuddy(alignment_edit_widget);
 
-	v_box_layout->addWidget(label);
-	v_box_layout->addWidget(alignment_edit_widget);
+    v_box_layout->addWidget(label);
+    v_box_layout->addWidget(alignment_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
-	connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
+    connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	h_box_layout->addWidget(group_box);
+    h_box_layout->addWidget(group_box);
 
-	// +++
+    // +++
 
-	group_box = new QGroupBox(tr("File Name Alignment"), this);
+    group_box = new QGroupBox(tr("File Name Alignment"), this);
 
-	v_box_layout = new QVBoxLayout(group_box);
+    v_box_layout = new QVBoxLayout(group_box);
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("Horizo&ntal:"), group_box);
+    label = new QLabel(tr("Horizo&ntal:"), group_box);
 
-	alignment_edit_widget = new AlignmentEditWidget(group_box, fileNameAlignment, true);
+    alignment_edit_widget = new AlignmentEditWidget(group_box, fileNameAlignment, true);
 
-	label->setBuddy(alignment_edit_widget);
+    label->setBuddy(alignment_edit_widget);
 
-	v_box_layout->addWidget(label);
-	v_box_layout->addWidget(alignment_edit_widget);
+    v_box_layout->addWidget(label);
+    v_box_layout->addWidget(alignment_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
-	connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
+    connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	label = new QLabel(tr("Vertica&l:"), group_box);
+    label = new QLabel(tr("Vertica&l:"), group_box);
 
-	alignment_edit_widget = new AlignmentEditWidget(group_box, fileNameAlignment, false, false);
+    alignment_edit_widget = new AlignmentEditWidget(group_box, fileNameAlignment, false, false);
 
-	label->setBuddy(alignment_edit_widget);
+    label->setBuddy(alignment_edit_widget);
 
-	v_box_layout->addWidget(label);
-	v_box_layout->addWidget(alignment_edit_widget);
+    v_box_layout->addWidget(label);
+    v_box_layout->addWidget(alignment_edit_widget);
 
-	connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
-	connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
+    connect(this, SIGNAL(updateGUI()), alignment_edit_widget, SLOT(updateGUI()));
+    connect(alignment_edit_widget, SIGNAL(alignmentChanged()), this, SLOT(handleSettingsChange()));
 
-	// +++
+    // +++
 
-	h_box_layout->addWidget(group_box);
+    h_box_layout->addWidget(group_box);
 
-	// --------
+    // --------
 
-	main_layout->addStretch();
+    main_layout->addStretch();
 
-	reset();
+    reset();
 }
 

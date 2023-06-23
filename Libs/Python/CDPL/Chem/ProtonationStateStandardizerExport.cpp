@@ -38,22 +38,22 @@ void CDPLPythonChem::exportProtonationStateStandardizer()
     using namespace CDPL;
 
     python::class_<Chem::ProtonationStateStandardizer, Chem::ProtonationStateStandardizer::SharedPointer> cl("ProtonationStateStandardizer", python::no_init);
-	python::scope scope = cl;
+    python::scope scope = cl;
 
-	python::enum_<Chem::ProtonationStateStandardizer::Flavor>("Flavor")
-		.value("MIN_CHARGED_ATOM_COUNT", Chem::ProtonationStateStandardizer::MIN_CHARGED_ATOM_COUNT)
-		.value("PHYSIOLOGICAL_CONDITION_STATE", Chem::ProtonationStateStandardizer::PHYSIOLOGICAL_CONDITION_STATE)
-		.value("MAX_CHARGE_COMPENSATION", Chem::ProtonationStateStandardizer::MAX_CHARGE_COMPENSATION)
-		.export_values();
+    python::enum_<Chem::ProtonationStateStandardizer::Flavor>("Flavor")
+        .value("MIN_CHARGED_ATOM_COUNT", Chem::ProtonationStateStandardizer::MIN_CHARGED_ATOM_COUNT)
+        .value("PHYSIOLOGICAL_CONDITION_STATE", Chem::ProtonationStateStandardizer::PHYSIOLOGICAL_CONDITION_STATE)
+        .value("MAX_CHARGE_COMPENSATION", Chem::ProtonationStateStandardizer::MAX_CHARGE_COMPENSATION)
+        .export_values();
 
-  	cl
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<Chem::ProtonationStateStandardizer>((python::arg("self"), python::arg("standardizer"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ProtonationStateStandardizer>())	
-		.def("assign", &Chem::ProtonationStateStandardizer::operator=, 
-			 (python::arg("self"), python::arg("standardizer")), python::return_self<>())
-		.def("standardize", static_cast<bool (Chem::ProtonationStateStandardizer::*)(Chem::Molecule&, Chem::ProtonationStateStandardizer::Flavor)>
-			 (&Chem::ProtonationStateStandardizer::standardize), (python::arg("self"), python::arg("mol"), python::arg("flavor")))
-		.def("standardize", static_cast<bool (Chem::ProtonationStateStandardizer::*)(const Chem::Molecule&, Chem::Molecule&, Chem::ProtonationStateStandardizer::Flavor)>
-			 (&Chem::ProtonationStateStandardizer::standardize), (python::arg("self"), python::arg("mol"), python::arg("std_mol"), python::arg("flavor")));
+      cl
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<Chem::ProtonationStateStandardizer>((python::arg("self"), python::arg("standardizer"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ProtonationStateStandardizer>())    
+        .def("assign", &Chem::ProtonationStateStandardizer::operator=, 
+             (python::arg("self"), python::arg("standardizer")), python::return_self<>())
+        .def("standardize", static_cast<bool (Chem::ProtonationStateStandardizer::*)(Chem::Molecule&, Chem::ProtonationStateStandardizer::Flavor)>
+             (&Chem::ProtonationStateStandardizer::standardize), (python::arg("self"), python::arg("mol"), python::arg("flavor")))
+        .def("standardize", static_cast<bool (Chem::ProtonationStateStandardizer::*)(const Chem::Molecule&, Chem::Molecule&, Chem::ProtonationStateStandardizer::Flavor)>
+             (&Chem::ProtonationStateStandardizer::standardize), (python::arg("self"), python::arg("mol"), python::arg("std_mol"), python::arg("flavor")));
 }

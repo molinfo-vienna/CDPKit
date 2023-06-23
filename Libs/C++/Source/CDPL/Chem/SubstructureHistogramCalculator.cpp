@@ -35,7 +35,7 @@ using namespace CDPL;
 
 
 Chem::SubstructureHistogramCalculator::Pattern::Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id,
-													   std::size_t priority, bool all_matches, bool unique_matches):
+                                                       std::size_t priority, bool all_matches, bool unique_matches):
     structure(structure), id(id), priority(priority), allMatches(all_matches), uniqueMatches(unique_matches)
 {}
 
@@ -74,7 +74,7 @@ Chem::SubstructureHistogramCalculator::SubstructureHistogramCalculator(const Sub
 {}
 
 void Chem::SubstructureHistogramCalculator::addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, 
-													  std::size_t priority, bool all_matches, bool unique_matches)
+                                                      std::size_t priority, bool all_matches, bool unique_matches)
 {
     addPattern(Pattern(structure, id, priority, all_matches, unique_matches));
 }
@@ -84,7 +84,7 @@ void Chem::SubstructureHistogramCalculator::addPattern(const Pattern& ptn)
     PriorityToAtomBondMaskMap::const_iterator it = matchedSubstructMasks.find(ptn.getPriority());
 
     if (it == matchedSubstructMasks.end())
-		matchedSubstructMasks.insert(PriorityToAtomBondMaskMap::value_type(ptn.getPriority(), AtomBondMask()));
+        matchedSubstructMasks.insert(PriorityToAtomBondMaskMap::value_type(ptn.getPriority(), AtomBondMask()));
 
     patterns.push_back(ptn);
 }
@@ -92,7 +92,7 @@ void Chem::SubstructureHistogramCalculator::addPattern(const Pattern& ptn)
 const Chem::SubstructureHistogramCalculator::Pattern& Chem::SubstructureHistogramCalculator::getPattern(std::size_t idx) const
 {
     if (idx >= patterns.size())
-		throw Base::IndexError("SubstructureHistogramCalculator: pattern index out of bounds");
+        throw Base::IndexError("SubstructureHistogramCalculator: pattern index out of bounds");
 
     return patterns[idx];
 }
@@ -100,16 +100,16 @@ const Chem::SubstructureHistogramCalculator::Pattern& Chem::SubstructureHistogra
 void Chem::SubstructureHistogramCalculator::removePattern(std::size_t idx)
 {
     if (idx >= patterns.size())
-		throw Base::IndexError("SubstructureHistogramCalculator: pattern index out of bounds");
+        throw Base::IndexError("SubstructureHistogramCalculator: pattern index out of bounds");
 
     std::size_t priority = patterns[idx].getPriority();
 
     patterns.erase(patterns.begin() + idx);
 
     if (std::find_if(patterns.begin(), patterns.end(),
-					 std::bind(std::equal_to<std::size_t>(), priority,
-							   std::bind(&Pattern::getPriority, std::placeholders::_1))) == patterns.end())
-		matchedSubstructMasks.erase(priority);
+                     std::bind(std::equal_to<std::size_t>(), priority,
+                               std::bind(&Pattern::getPriority, std::placeholders::_1))) == patterns.end())
+        matchedSubstructMasks.erase(priority);
 }
 
 void Chem::SubstructureHistogramCalculator::clear()
@@ -128,16 +128,16 @@ void Chem::SubstructureHistogramCalculator::removePattern(const PatternIterator&
     std::size_t idx = ptn_it - patterns.begin();
 
     if (idx >= patterns.size())
-		throw Base::IndexError("SubstructureHistogramCalculator: pattern iterator out of bounds");
+        throw Base::IndexError("SubstructureHistogramCalculator: pattern iterator out of bounds");
 
     std::size_t priority = ptn_it->getPriority();
 
     patterns.erase(ptn_it);
 
     if (std::find_if(patterns.begin(), patterns.end(),
-					 std::bind(std::equal_to<std::size_t>(), priority,
-							   std::bind(&Pattern::getPriority, std::placeholders::_1))) == patterns.end())
-		matchedSubstructMasks.erase(priority);
+                     std::bind(std::equal_to<std::size_t>(), priority,
+                               std::bind(&Pattern::getPriority, std::placeholders::_1))) == patterns.end())
+        matchedSubstructMasks.erase(priority);
 }
 
 Chem::SubstructureHistogramCalculator::ConstPatternIterator Chem::SubstructureHistogramCalculator::getPatternsBegin() const
@@ -183,7 +183,7 @@ Chem::SubstructureHistogramCalculator::PatternIterator Chem::SubstructureHistogr
 Chem::SubstructureHistogramCalculator& Chem::SubstructureHistogramCalculator::operator=(const SubstructureHistogramCalculator& calculator)
 {
     if (this == &calculator)
-		return *this;
+        return *this;
 
     patterns = calculator.patterns;
     matchedSubstructMasks = calculator.matchedSubstructMasks;
@@ -198,7 +198,7 @@ void Chem::SubstructureHistogramCalculator::doCalculate(const MolecularGraph& mo
     std::size_t num_ptns = patterns.size();
 
     for (std::size_t i = 0; i < num_ptns; i++)
-		processPattern(patterns[i], func);
+        processPattern(patterns[i], func);
 }
 
 void Chem::SubstructureHistogramCalculator::init(const MolecularGraph& molgraph)
@@ -206,7 +206,7 @@ void Chem::SubstructureHistogramCalculator::init(const MolecularGraph& molgraph)
     molGraph = &molgraph;
 
     if (matchedSubstructMasks.size() <= 1)
-		return;
+        return;
 
     std::size_t num_atoms = molgraph.getNumAtoms();
     std::size_t num_bonds = molgraph.getNumBonds();
@@ -215,82 +215,82 @@ void Chem::SubstructureHistogramCalculator::init(const MolecularGraph& molgraph)
     testingAtomBondMask.second.resize(num_bonds);
 
     for (PriorityToAtomBondMaskMap::iterator it = matchedSubstructMasks.begin(), end = matchedSubstructMasks.end(); it != end; ++it) {
-		AtomBondMask& masks = it->second;
+        AtomBondMask& masks = it->second;
 
-		masks.first.resize(num_atoms);
-		masks.second.resize(num_bonds);
+        masks.first.resize(num_atoms);
+        masks.second.resize(num_bonds);
 
-		masks.first.reset();
-		masks.second.reset();
+        masks.first.reset();
+        masks.second.reset();
     }
 }
 
 void Chem::SubstructureHistogramCalculator::processPattern(const Pattern& ptn, const HistoUpdateFunction& func)
 {
     if (!ptn.getStructure())
-		return;
+        return;
 
     substructSearch.uniqueMappingsOnly(ptn.processUniqueMatchesOnly());
     substructSearch.setQuery(*ptn.getStructure());
     substructSearch.findMappings(*molGraph);
 
     for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(), end = substructSearch.getMappingsEnd(); it != end; ++it) {
-		if (processMatch(*it, ptn, func) && !ptn.processAllMatches())
-			return;
+        if (processMatch(*it, ptn, func) && !ptn.processAllMatches())
+            return;
     }
 }
 
 bool Chem::SubstructureHistogramCalculator::processMatch(const AtomBondMapping& mapping, const Pattern& ptn, const HistoUpdateFunction& func)
 {
     if (matchedSubstructMasks.size() <= 1) {
-		func(ptn.getID());
-		return true;
+        func(ptn.getID());
+        return true;
     }
 
     testingAtomBondMask.first.reset();
     testingAtomBondMask.second.reset();
 
     for (AtomMapping::ConstEntryIterator it = mapping.getAtomMapping().getEntriesBegin(), end = mapping.getAtomMapping().getEntriesEnd(); it != end; ++it) {
-		const Atom* mpd_atom = it->second;
+        const Atom* mpd_atom = it->second;
 
-		if (mpd_atom != 0)
-			testingAtomBondMask.first.set(molGraph->getAtomIndex(*mpd_atom));
+        if (mpd_atom != 0)
+            testingAtomBondMask.first.set(molGraph->getAtomIndex(*mpd_atom));
     }
  
     for (BondMapping::ConstEntryIterator it = mapping.getBondMapping().getEntriesBegin(), end = mapping.getBondMapping().getEntriesEnd(); it != end; ++it) {
-		const Bond* mpd_bond = it->second;
-	
-		if (mpd_bond != 0)
-			testingAtomBondMask.second.set(molGraph->getBondIndex(*mpd_bond));
+        const Bond* mpd_bond = it->second;
+    
+        if (mpd_bond != 0)
+            testingAtomBondMask.second.set(molGraph->getBondIndex(*mpd_bond));
     }
 
     PriorityToAtomBondMaskMap::iterator it = matchedSubstructMasks.find(ptn.getPriority());
     PriorityToAtomBondMaskMap::iterator end = matchedSubstructMasks.end();
 
     if (it != end) {
-		PriorityToAtomBondMaskMap::iterator it_copy = it;
+        PriorityToAtomBondMaskMap::iterator it_copy = it;
 
-		for (++it; it != end; ++it) {
-			const AtomBondMask& masks = it_copy->second;
+        for (++it; it != end; ++it) {
+            const AtomBondMask& masks = it_copy->second;
 
-			tmpMask = testingAtomBondMask.first;
-			tmpMask &= masks.first;
+            tmpMask = testingAtomBondMask.first;
+            tmpMask &= masks.first;
 
-			bool atom_match = (tmpMask == testingAtomBondMask.first);
+            bool atom_match = (tmpMask == testingAtomBondMask.first);
 
-			tmpMask = testingAtomBondMask.second;
-			tmpMask &= masks.second;
+            tmpMask = testingAtomBondMask.second;
+            tmpMask &= masks.second;
 
-			bool bond_match = (tmpMask == testingAtomBondMask.second);
+            bool bond_match = (tmpMask == testingAtomBondMask.second);
 
-			if (atom_match && bond_match)
-				return false;
-		} 
+            if (atom_match && bond_match)
+                return false;
+        } 
 
-		AtomBondMask& masks = it_copy->second;
+        AtomBondMask& masks = it_copy->second;
 
-		masks.first |= testingAtomBondMask.first;
-		masks.second |= testingAtomBondMask.second;
+        masks.first |= testingAtomBondMask.first;
+        masks.second |= testingAtomBondMask.second;
     }
 
     func(ptn.getID());

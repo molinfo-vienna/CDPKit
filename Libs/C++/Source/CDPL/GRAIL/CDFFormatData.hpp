@@ -36,27 +36,27 @@ namespace CDPL
     namespace GRAIL
     {
 
-		namespace CDF
-		{
-			
-			using namespace Internal::CDF;
+        namespace CDF
+        {
+            
+            using namespace Internal::CDF;
 
-			typedef std::uint32_t UIntType;
+            typedef std::uint32_t UIntType;
 
-			const std::uint8_t INTERACTION_SCORE_GRID_RECORD_ID     = 4;
-			const std::uint8_t INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
+            const std::uint8_t INTERACTION_SCORE_GRID_RECORD_ID     = 4;
+            const std::uint8_t INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
 
-			const std::uint8_t CURR_FORMAT_VERSION  = 1;
+            const std::uint8_t CURR_FORMAT_VERSION  = 1;
 
-			namespace AttributedGridProperty
-			{
+            namespace AttributedGridProperty
+            {
 
-				const unsigned int PROPERTY_HANDLER_ID = 1;
+                const unsigned int PROPERTY_HANDLER_ID = 1;
 
-				const unsigned int FEATURE_TYPE        = 1;
-				const unsigned int TARGET_FEATURE_TYPE = 2;
-			}
-		}
+                const unsigned int FEATURE_TYPE        = 1;
+                const unsigned int TARGET_FEATURE_TYPE = 2;
+            }
+        }
     }
 }
 

@@ -32,16 +32,16 @@
 namespace 
 {
 
-	struct AttributedGridPropertyDefault {};
+    struct AttributedGridPropertyDefault {};
 }
 
 
 void CDPLPythonGRAIL::exportAttributedGridPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<AttributedGridPropertyDefault, boost::noncopyable>("AttributedGridPropertyDefault", python::no_init)
-		.def_readonly("FEATURE_TYPE", &GRAIL::AttributedGridPropertyDefault::FEATURE_TYPE)
-		.def_readonly("TARGET_FEATURE_TYPE", &GRAIL::AttributedGridPropertyDefault::TARGET_FEATURE_TYPE);
+    python::class_<AttributedGridPropertyDefault, boost::noncopyable>("AttributedGridPropertyDefault", python::no_init)
+        .def_readonly("FEATURE_TYPE", &GRAIL::AttributedGridPropertyDefault::FEATURE_TYPE)
+        .def_readonly("TARGET_FEATURE_TYPE", &GRAIL::AttributedGridPropertyDefault::TARGET_FEATURE_TYPE);
 }

@@ -50,115 +50,115 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
-		class Bond;
+        class MolecularGraph;
+        class Bond;
     }
 
     namespace MolProp
     {
 
-		class PEOESigmaChargeCalculator;
+        class PEOESigmaChargeCalculator;
 
-		/**
-		 * \brief MHMOPiChargeCalculator.
-		 * \see [\ref MHMO]
-		 */
-		class CDPL_MOLPROP_API MHMOPiChargeCalculator
-		{
+        /**
+         * \brief MHMOPiChargeCalculator.
+         * \see [\ref MHMO]
+         */
+        class CDPL_MOLPROP_API MHMOPiChargeCalculator
+        {
 
-		  public:
-			typedef std::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
+          public:
+            typedef std::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
 
-			MHMOPiChargeCalculator();
+            MHMOPiChargeCalculator();
 
-			MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph);
+            MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph);
 
-			MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+            MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
-			void localizedPiBonds(bool localized);
+            void localizedPiBonds(bool localized);
 
-			bool localizedPiBonds() const;
-			
-			void calculate(const Chem::MolecularGraph& molgraph);
+            bool localizedPiBonds() const;
+            
+            void calculate(const Chem::MolecularGraph& molgraph);
 
-			void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+            void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
-			double getElectronDensity(std::size_t atom_idx) const;
+            double getElectronDensity(std::size_t atom_idx) const;
 
-			double getCharge(std::size_t atom_idx) const;
+            double getCharge(std::size_t atom_idx) const;
 
-			double getBondOrder(std::size_t bond_idx) const;
+            double getBondOrder(std::size_t bond_idx) const;
 
-			double getEnergy() const;
-			
-		  private:
-			MHMOPiChargeCalculator(const MHMOPiChargeCalculator&);
+            double getEnergy() const;
+            
+          private:
+            MHMOPiChargeCalculator(const MHMOPiChargeCalculator&);
 
-			MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&);
+            MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&);
 
-			void initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
-			void initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+            void initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+            void initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
-			void calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-			
-			void initAtomPiElecCounts(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+            void calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+            
+            void initAtomPiElecCounts(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
-			std::size_t getNumBonds(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
-									const Chem::MolecularGraph& molgraph) const;
+            std::size_t getNumBonds(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+                                    const Chem::MolecularGraph& molgraph) const;
 
-			void getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-			void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+            void getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+            void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
-			void calcSigmaCharges(const Chem::MolecularGraph& molgraph);
-			double getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
-			double getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
-			double getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+            void calcSigmaCharges(const Chem::MolecularGraph& molgraph);
+            double getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+            double getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+            double getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 
-			std::uint64_t getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
-			std::uint64_t getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+            std::uint64_t getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+            std::uint64_t getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 
-			bool diagHueckelMatrix();
-			void distElectrons(const Chem::ElectronSystem& pi_sys);
-			void updateEnergy();
-			void updateAtomElecDensitiesAndCharges(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-			void updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+            bool diagHueckelMatrix();
+            void distElectrons(const Chem::ElectronSystem& pi_sys);
+            void updateEnergy();
+            void updateAtomElecDensitiesAndCharges(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+            void updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
-			double calcElecDensity(std::size_t i, std::size_t j) const;
-			
-			struct MODescr
-		    {
+            double calcElecDensity(std::size_t i, std::size_t j) const;
+            
+            struct MODescr
+            {
 
-				double energy;
-				double coeffVecIndex;
-				double elecCount;
-			};
-			
-			typedef Math::Matrix<double> Matrix;
-			typedef Math::Vector<double> Vector;
-			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::vector<std::size_t> CountsArray;
-			typedef std::vector<double> DoubleArray;
-			typedef std::vector<MODescr> MODescrArray;
-			typedef std::vector<MODescr*> MODescrPtrArray;
-			typedef std::auto_ptr<PEOESigmaChargeCalculator> PEOECalculatorPtr;
-			
-			Matrix            hueckelMatrix;
-			Matrix            hmEigenVectors;
-			Vector            hmEigenValues;
-			BondList          piSysBonds;
-			CountsArray       atomPiSysCounts;
-			CountsArray       atomFreeElecCounts;
-			CountsArray       atomPiElecCounts;
-			Util::BitSet      specialAtomTypes;
-			MODescrArray      moDescriptors;
-			MODescrPtrArray   moDescriptorPtrs;
-			bool              locPiBonds;
-			DoubleArray       atomElecDensities;
-			DoubleArray       bondElecDensities;
-			DoubleArray       atomPiCharges;
-			double            energy;
-			PEOECalculatorPtr peoeCalculatorPtr;
-		};
+                double energy;
+                double coeffVecIndex;
+                double elecCount;
+            };
+            
+            typedef Math::Matrix<double> Matrix;
+            typedef Math::Vector<double> Vector;
+            typedef std::vector<const Chem::Bond*> BondList;
+            typedef std::vector<std::size_t> CountsArray;
+            typedef std::vector<double> DoubleArray;
+            typedef std::vector<MODescr> MODescrArray;
+            typedef std::vector<MODescr*> MODescrPtrArray;
+            typedef std::auto_ptr<PEOESigmaChargeCalculator> PEOECalculatorPtr;
+            
+            Matrix            hueckelMatrix;
+            Matrix            hmEigenVectors;
+            Vector            hmEigenValues;
+            BondList          piSysBonds;
+            CountsArray       atomPiSysCounts;
+            CountsArray       atomFreeElecCounts;
+            CountsArray       atomPiElecCounts;
+            Util::BitSet      specialAtomTypes;
+            MODescrArray      moDescriptors;
+            MODescrPtrArray   moDescriptorPtrs;
+            bool              locPiBonds;
+            DoubleArray       atomElecDensities;
+            DoubleArray       bondElecDensities;
+            DoubleArray       atomPiCharges;
+            double            energy;
+            PEOECalculatorPtr peoeCalculatorPtr;
+        };
     }
 }
 

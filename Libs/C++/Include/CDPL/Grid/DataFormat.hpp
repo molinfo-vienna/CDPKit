@@ -35,37 +35,37 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	}
+        class DataFormat;
+    }
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
-		 */
-		namespace DataFormat
-		{
-	
-			/**
-			 * \brief Provides meta-information about the native binary <em>CDPL</em> format.
-			 */
-			extern CDPL_GRID_API const Base::DataFormat CDF;
+        /**
+         * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
+         */
+        namespace DataFormat
+        {
+    
+            /**
+             * \brief Provides meta-information about the native binary <em>CDPL</em> format.
+             */
+            extern CDPL_GRID_API const Base::DataFormat CDF;
 
-			/**
-			 * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
-			 */
-			extern CDPL_GRID_API const Base::DataFormat CDF_GZ;
+            /**
+             * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+             */
+            extern CDPL_GRID_API const Base::DataFormat CDF_GZ;
 
-			/**
-			 * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
-			 */
-			extern CDPL_GRID_API const Base::DataFormat CDF_BZ2;
-		}
-	}
+            /**
+             * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+             */
+            extern CDPL_GRID_API const Base::DataFormat CDF_BZ2;
+        }
+    }
 }
 
 #endif // CDPL_GRID_DATAFORMAT_HPP

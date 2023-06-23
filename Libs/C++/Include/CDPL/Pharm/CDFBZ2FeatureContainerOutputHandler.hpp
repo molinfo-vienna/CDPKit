@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		/**
-		 * \brief A handler for the output of bzip2-compressed feature container data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<CDFBZ2FeatureContainerWriter, DataFormat::CDF_BZ2> CDFBZ2FeatureContainerOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of bzip2-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<CDFBZ2FeatureContainerWriter, DataFormat::CDF_BZ2> CDFBZ2FeatureContainerOutputHandler;
+    }
 }
 
 #endif // CDPL_PHARM_CDFBZ2FEATURECONTAINEROUTPUTHANDLER_HPP

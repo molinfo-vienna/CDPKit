@@ -34,21 +34,21 @@
 namespace CDPL 
 {
 
-	namespace ConfGen
-	{
+    namespace ConfGen
+    {
 
-		class FragmentLibraryEntry;
+        class FragmentLibraryEntry;
 
-		class CFLFragmentLibraryEntryWriter : private Internal::CDFDataWriterBase
-		{
+        class CFLFragmentLibraryEntryWriter : private Internal::CDFDataWriterBase
+        {
 
-		public:
-			bool write(std::ostream& os, const FragmentLibraryEntry& entry);
+        public:
+            bool write(std::ostream& os, const FragmentLibraryEntry& entry);
 
-		private:
-			Internal::ByteBuffer entryBuffer;
-		};
-	}
+        private:
+            Internal::ByteBuffer entryBuffer;
+        };
+    }
 }
 
 #endif // CDPL_CONFGEN_CDFFRAGMENTLIBRARYENTRYWRITER_HPP

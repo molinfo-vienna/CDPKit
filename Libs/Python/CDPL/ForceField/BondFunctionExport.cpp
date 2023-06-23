@@ -33,12 +33,12 @@
 #define MAKE_BOND_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Bond& bond)             \
 {                                                                  \
-	return CDPL::ForceField::get##FUNC_SUFFIX(bond);               \
+    return CDPL::ForceField::get##FUNC_SUFFIX(bond);               \
 }                                                                  \
                                                                    \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Bond& bond)             \
 {                                                                  \
-	return CDPL::ForceField::has##FUNC_SUFFIX(bond);               \
+    return CDPL::ForceField::has##FUNC_SUFFIX(bond);               \
 }
 
 #define EXPORT_BOND_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
@@ -57,11 +57,11 @@ python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("bond
 #define EXPORT_BOND_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
             python::return_value_policy<python::copy_const_reference,                                        \
-			python::with_custodian_and_ward_postcall<0, 1> >());                                             \
+            python::with_custodian_and_ward_postcall<0, 1> >());                                             \
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("bond"));                      \
 python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)), \
-			python::with_custodian_and_ward<1, 2>());                                                            
+            python::with_custodian_and_ward<1, 2>());                                                            
 
 #define EXPORT_BOND_FUNCS_INT_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                  \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"),                              \
@@ -69,20 +69,20 @@ python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("bond"), 
 python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("bond"));                             \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("bond"));                      \
 python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("bond"), python::arg(#ARG_NAME)), \
-			python::with_custodian_and_ward<1, 2>());  
+            python::with_custodian_and_ward<1, 2>());  
 
 
 namespace
 {
 
-	MAKE_BOND_FUNC_WRAPPERS(unsigned int, MMFF94TypeIndex)
+    MAKE_BOND_FUNC_WRAPPERS(unsigned int, MMFF94TypeIndex)
 }
 
 
 void CDPLPythonForceField::exportBondFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	EXPORT_BOND_FUNCS(MMFF94TypeIndex, type_idx)
+    EXPORT_BOND_FUNCS(MMFF94TypeIndex, type_idx)
 }

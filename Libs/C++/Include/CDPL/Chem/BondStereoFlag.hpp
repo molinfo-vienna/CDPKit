@@ -33,81 +33,81 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides constants for the specification of stereo bonds in 2D depictions of chemical structures.
-		 */
-		namespace BondStereoFlag
-		{
+        /**
+         * \brief Provides constants for the specification of stereo bonds in 2D depictions of chemical structures.
+         */
+        namespace BondStereoFlag
+        {
 
-			/**
-			 * \brief Specifies a bond whose member atoms are located in the plane of the paper.
-			 *
-			 * Plain bonds are drawn as simple lines.
-			 */
-			const unsigned int PLAIN          = 0;
-			
-			/**
-			 * \brief Specifies a bond where the end atom is above and the start atom is
-			 *        in the plane of the paper.
-			 *
-			 * Bonds of this type are drawn as filled wedges with the narrow end at the start atom
-			 * and the broad end at the end atom of the bond.
-			 */
-			const unsigned int UP             = 1; 
+            /**
+             * \brief Specifies a bond whose member atoms are located in the plane of the paper.
+             *
+             * Plain bonds are drawn as simple lines.
+             */
+            const unsigned int PLAIN          = 0;
+            
+            /**
+             * \brief Specifies a bond where the end atom is above and the start atom is
+             *        in the plane of the paper.
+             *
+             * Bonds of this type are drawn as filled wedges with the narrow end at the start atom
+             * and the broad end at the end atom of the bond.
+             */
+            const unsigned int UP             = 1; 
 
-			/**
-			 * \brief Specifies a bond where the start atom is above and the end atom is
-			 *        in the plane of the paper.
-			 *
-			 * Bonds of this type are drawn as filled wedges with the broad end at the start atom and
-			 * the narrow end at the end atom of the bond.
-			 */
-			const unsigned int REVERSE_UP     = 2; 
+            /**
+             * \brief Specifies a bond where the start atom is above and the end atom is
+             *        in the plane of the paper.
+             *
+             * Bonds of this type are drawn as filled wedges with the broad end at the start atom and
+             * the narrow end at the end atom of the bond.
+             */
+            const unsigned int REVERSE_UP     = 2; 
 
-			/**
-			 * \brief Specifies a bond where the end atom is below and the start atom is
-			 *        in the plane of the paper.
-			 *
-			 * Bonds of this type are drawn as hashed wedges with the narrow end at the start atom and the broad
-			 * end at the end atom of the bond.
-			 */
-			const unsigned int DOWN           = 3; 
+            /**
+             * \brief Specifies a bond where the end atom is below and the start atom is
+             *        in the plane of the paper.
+             *
+             * Bonds of this type are drawn as hashed wedges with the narrow end at the start atom and the broad
+             * end at the end atom of the bond.
+             */
+            const unsigned int DOWN           = 3; 
 
-			/**
-			 * \brief Specifies a bond where the start atom is below and the end atom is
-			 *        in the plane of the paper.
-			 *
-			 * Bonds of this type are drawn as hashed wedges with the broad end at the start atom and the
-			 * narrow end at the end atom of the bond.
-			 */
-			const unsigned int REVERSE_DOWN   = 4; 
-			
-			/**
-			 * \brief Specifies that stereogenic member atoms of the bond or any double bonds (including the bond
-			 *        itself) that are incident to a member atom have an undefined stereochemistry.
-			 *
-			 * Bonds of this type are drawn as zig-zag wedges with the narrow end at the start atom and the broad
-			 * end at the end atom of the bond. Double bonds are drawn with crossed lines.
-			 *
-			 * \note The flag is logically equivalent to BondStereoFlag::REVERSE_EITHER;
-			 */
-			const unsigned int EITHER         = 5;
+            /**
+             * \brief Specifies a bond where the start atom is below and the end atom is
+             *        in the plane of the paper.
+             *
+             * Bonds of this type are drawn as hashed wedges with the broad end at the start atom and the
+             * narrow end at the end atom of the bond.
+             */
+            const unsigned int REVERSE_DOWN   = 4; 
+            
+            /**
+             * \brief Specifies that stereogenic member atoms of the bond or any double bonds (including the bond
+             *        itself) that are incident to a member atom have an undefined stereochemistry.
+             *
+             * Bonds of this type are drawn as zig-zag wedges with the narrow end at the start atom and the broad
+             * end at the end atom of the bond. Double bonds are drawn with crossed lines.
+             *
+             * \note The flag is logically equivalent to BondStereoFlag::REVERSE_EITHER;
+             */
+            const unsigned int EITHER         = 5;
 
-			/**
-			 * \brief Specifies that stereogenic member atoms of the bond or any double bonds (including the bond
-			 *        itself) that are incident to a member atom have an undefined stereochemistry.
-			 *
-			 * Bonds of this type are drawn as zig-zag wedges with the broad end at the start atom and the narrow
-			 * end at the end atom of the bond. Double bonds are drawn with crossed lines.
-			 *
-			 * \note The flag is logically equivalent to BondStereoFlag::EITHER;
-			 */
-			const unsigned int REVERSE_EITHER = 6;
-		}
-	}
+            /**
+             * \brief Specifies that stereogenic member atoms of the bond or any double bonds (including the bond
+             *        itself) that are incident to a member atom have an undefined stereochemistry.
+             *
+             * Bonds of this type are drawn as zig-zag wedges with the broad end at the start atom and the narrow
+             * end at the end atom of the bond. Double bonds are drawn with crossed lines.
+             *
+             * \note The flag is logically equivalent to BondStereoFlag::EITHER;
+             */
+            const unsigned int REVERSE_EITHER = 6;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_BONDSTEREOFLAG_HPP

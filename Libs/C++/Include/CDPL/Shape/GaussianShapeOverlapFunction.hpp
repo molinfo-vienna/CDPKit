@@ -43,54 +43,54 @@ namespace CDPL
     namespace Shape
     {
 
-		class GaussianShapeFunction;
-		
-		class CDPL_SHAPE_API GaussianShapeOverlapFunction
-		{
-			
-		  public:
-			typedef std::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
+        class GaussianShapeFunction;
+        
+        class CDPL_SHAPE_API GaussianShapeOverlapFunction
+        {
+            
+          public:
+            typedef std::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
 
-			typedef std::function<bool(std::size_t)> ColorFilterFunction;
-			typedef std::function<bool(std::size_t, std::size_t)> ColorMatchFunction;
+            typedef std::function<bool(std::size_t)> ColorFilterFunction;
+            typedef std::function<bool(std::size_t, std::size_t)> ColorMatchFunction;
 
-			virtual ~GaussianShapeOverlapFunction() {}
+            virtual ~GaussianShapeOverlapFunction() {}
 
-			virtual void setShapeFunction(const GaussianShapeFunction& func, bool is_ref) = 0;
+            virtual void setShapeFunction(const GaussianShapeFunction& func, bool is_ref) = 0;
 
-			virtual const GaussianShapeFunction* getShapeFunction(bool ref) const = 0;
+            virtual const GaussianShapeFunction* getShapeFunction(bool ref) const = 0;
 
-			virtual void setColorMatchFunction(const ColorMatchFunction& func) = 0;
+            virtual void setColorMatchFunction(const ColorMatchFunction& func) = 0;
 
-			virtual const ColorMatchFunction& getColorMatchFunction() const = 0;
+            virtual const ColorMatchFunction& getColorMatchFunction() const = 0;
 
-			virtual void setColorFilterFunction(const ColorFilterFunction& func) = 0;
+            virtual void setColorFilterFunction(const ColorFilterFunction& func) = 0;
 
-			virtual const ColorFilterFunction& getColorFilterFunction() const = 0;
+            virtual const ColorFilterFunction& getColorFilterFunction() const = 0;
 
-			virtual double calcSelfOverlap(bool ref) const = 0;
+            virtual double calcSelfOverlap(bool ref) const = 0;
 
-			virtual double calcColorSelfOverlap(bool ref) const = 0;
-			
-			virtual double calcOverlap() const = 0;
+            virtual double calcColorSelfOverlap(bool ref) const = 0;
+            
+            virtual double calcOverlap() const = 0;
 
-			virtual double calcColorOverlap() const = 0;
+            virtual double calcColorOverlap() const = 0;
 
-			virtual double calcOverlap(const Math::Vector3DArray& coords) const = 0;
+            virtual double calcOverlap(const Math::Vector3DArray& coords) const = 0;
 
-			virtual double calcColorOverlap(const Math::Vector3DArray& coords) const = 0;
+            virtual double calcColorOverlap(const Math::Vector3DArray& coords) const = 0;
 
-			virtual double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const = 0;
+            virtual double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const = 0;
 
-		  protected:
-			GaussianShapeOverlapFunction() {}
+          protected:
+            GaussianShapeOverlapFunction() {}
 
-			GaussianShapeOverlapFunction(const GaussianShapeOverlapFunction& func) {}
+            GaussianShapeOverlapFunction(const GaussianShapeOverlapFunction& func) {}
 
-			GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func) {
-				return *this;
-			}
-		};
+            GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func) {
+                return *this;
+            }
+        };
     }
 }
 

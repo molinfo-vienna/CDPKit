@@ -32,22 +32,22 @@
 namespace 
 {
 
-	struct SybylBondType {};
+    struct SybylBondType {};
 }
 
 
 void CDPLPythonChem::exportSybylBondTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<SybylBondType, boost::noncopyable>("SybylBondType", python::no_init)
-		.def_readonly("UNKNOWN", &Chem::SybylBondType::UNKNOWN)
-		.def_readonly("SINGLE", &Chem::SybylBondType::SINGLE)
-		.def_readonly("DOUBLE", &Chem::SybylBondType::DOUBLE)
-		.def_readonly("TRIPLE", &Chem::SybylBondType::TRIPLE)
-		.def_readonly("AROMATIC", &Chem::SybylBondType::AROMATIC)
-		.def_readonly("AMIDE", &Chem::SybylBondType::AMIDE)
-		.def_readonly("DUMMY", &Chem::SybylBondType::DUMMY)
-		.def_readonly("NOT_CONNECTED", &Chem::SybylBondType::NOT_CONNECTED);
+    python::class_<SybylBondType, boost::noncopyable>("SybylBondType", python::no_init)
+        .def_readonly("UNKNOWN", &Chem::SybylBondType::UNKNOWN)
+        .def_readonly("SINGLE", &Chem::SybylBondType::SINGLE)
+        .def_readonly("DOUBLE", &Chem::SybylBondType::DOUBLE)
+        .def_readonly("TRIPLE", &Chem::SybylBondType::TRIPLE)
+        .def_readonly("AROMATIC", &Chem::SybylBondType::AROMATIC)
+        .def_readonly("AMIDE", &Chem::SybylBondType::AMIDE)
+        .def_readonly("DUMMY", &Chem::SybylBondType::DUMMY)
+        .def_readonly("NOT_CONNECTED", &Chem::SybylBondType::NOT_CONNECTED);
 }

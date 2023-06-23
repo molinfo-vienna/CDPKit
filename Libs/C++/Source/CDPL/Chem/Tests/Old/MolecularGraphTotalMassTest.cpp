@@ -39,37 +39,37 @@
 
 BOOST_AUTO_TEST_CASE(MolecularGraphTotalMassTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Molecule mol;
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
-
-	BOOST_CHECK_SMALL(mol.getProperty<double>(MolecularGraphProperty::TOTAL_MASS), 0.000001);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
+    Molecule mol;
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
 
-	BOOST_CHECK(ifs);
+    BOOST_CHECK_SMALL(mol.getProperty<double>(MolecularGraphProperty::TOTAL_MASS), 0.000001);
 
-	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
-
-//-----
-
-	BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
-
-	BOOST_CHECK_CLOSE(mol.getProperty<double>(MolecularGraphProperty::TOTAL_MASS), 285.349, 0.01);
-
-	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
 
 //-----
 
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MASS, mol, AtomContainerProperty::MASS);
-	TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MASS, mol, MolecularGraphProperty::IMPLICIT_H_COUNT);
+    std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+
+    BOOST_CHECK(ifs);
+
+    BOOST_CHECK(JMEMoleculeReader(ifs).read(mol));
+
+//-----
+
+    BOOST_CHECK(mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
+
+    BOOST_CHECK_CLOSE(mol.getProperty<double>(MolecularGraphProperty::TOTAL_MASS), 285.349, 0.01);
+
+    BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::TOTAL_MASS, false, false).isEmpty());
+
+//-----
+
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MASS, mol, AtomContainerProperty::MASS);
+    TestUtils::checkDependency(mol, MolecularGraphProperty::TOTAL_MASS, mol, MolecularGraphProperty::IMPLICIT_H_COUNT);
 }

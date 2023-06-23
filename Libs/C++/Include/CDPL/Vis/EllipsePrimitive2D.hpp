@@ -41,106 +41,106 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A graphics primitive representing a ellipse.
-		 */
-		class CDPL_VIS_API EllipsePrimitive2D : public GraphicsPrimitive2D
-		{
+        /**
+         * \brief A graphics primitive representing a ellipse.
+         */
+        class CDPL_VIS_API EllipsePrimitive2D : public GraphicsPrimitive2D
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %EllipsePrimitive2D instances.
-			 */
-			typedef std::shared_ptr<EllipsePrimitive2D> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %EllipsePrimitive2D instances.
+             */
+            typedef std::shared_ptr<EllipsePrimitive2D> SharedPointer;
 
-			/**
-			 * \brief Constructs an undefined ellipse primitive.
-			 */
-			EllipsePrimitive2D(): width(0.0), height(0.0) {}
+            /**
+             * \brief Constructs an undefined ellipse primitive.
+             */
+            EllipsePrimitive2D(): width(0.0), height(0.0) {}
 
-			/**
-			 * \brief Constructs an undefined ellipse primitive.
-			 */
-			EllipsePrimitive2D(const Math::Vector2D& pos, double width, double height): 
-				position(pos), width(width), height(height) {}
+            /**
+             * \brief Constructs an undefined ellipse primitive.
+             */
+            EllipsePrimitive2D(const Math::Vector2D& pos, double width, double height): 
+                position(pos), width(width), height(height) {}
 
-			void render(Renderer2D& renderer) const;
-		
-			/**
-			 * \brief Sets the pen defining the color, width, line style, cap style and join style of the ellipse outline.
-			 * \param pen The pen defining the color, width, line style, cap style and join style of the ellipse's outline.
-			 */
-			void setPen(const Pen& pen);
+            void render(Renderer2D& renderer) const;
+        
+            /**
+             * \brief Sets the pen defining the color, width, line style, cap style and join style of the ellipse outline.
+             * \param pen The pen defining the color, width, line style, cap style and join style of the ellipse's outline.
+             */
+            void setPen(const Pen& pen);
 
-			/**
-			 * \brief Returns the pen defining the color, width, line style, cap style and join style of the ellipse outline.
-			 * \return The pen defining the color, width, line style, cap style and join style of the ellipse outline.
-			 */
-			const Pen& getPen() const;
+            /**
+             * \brief Returns the pen defining the color, width, line style, cap style and join style of the ellipse outline.
+             * \return The pen defining the color, width, line style, cap style and join style of the ellipse outline.
+             */
+            const Pen& getPen() const;
 
-			/**
-			 * \brief Sets the brush defining the fill color and fill pattern.
-			 * \param brush The brush defining the fill color and fill pattern.
-			 */
-			void setBrush(const Brush& brush);
+            /**
+             * \brief Sets the brush defining the fill color and fill pattern.
+             * \param brush The brush defining the fill color and fill pattern.
+             */
+            void setBrush(const Brush& brush);
 
-			/**
-			 * \brief Returns the brush defining the fill color and fill pattern.
-			 * \return The brush defining the fill color and fill pattern.
-			 */
-			const Brush& getBrush() const;
+            /**
+             * \brief Returns the brush defining the fill color and fill pattern.
+             * \return The brush defining the fill color and fill pattern.
+             */
+            const Brush& getBrush() const;
 
-			/**
-			 * \brief Sets the position of the ellipse center.
-			 * \param pos The center position of the ellipse.
-			 */
-			void setPosition(const Math::Vector2D& pos);
+            /**
+             * \brief Sets the position of the ellipse center.
+             * \param pos The center position of the ellipse.
+             */
+            void setPosition(const Math::Vector2D& pos);
 
-			/**
-			 * \brief Returns the position of the ellipse center.
-			 * \return The center position of the ellipse.
-			 */
-			const Math::Vector2D& getPosition() const;
+            /**
+             * \brief Returns the position of the ellipse center.
+             * \return The center position of the ellipse.
+             */
+            const Math::Vector2D& getPosition() const;
 
-			/**
-			 * \brief Sets the diameter of the ellipse in x-direction.
-			 * \param width The width of the ellipse.
-			 */
-			void setWidth(double width);
+            /**
+             * \brief Sets the diameter of the ellipse in x-direction.
+             * \param width The width of the ellipse.
+             */
+            void setWidth(double width);
 
-			/**
-			 * \brief Returns the diameter of the ellipse in x-direction.
-			 * \return The width of the ellipse.
-			 */
-			double getWidth() const;
+            /**
+             * \brief Returns the diameter of the ellipse in x-direction.
+             * \return The width of the ellipse.
+             */
+            double getWidth() const;
 
-			/**
-			 * \brief Sets the diameter of the ellipse in y-direction.
-			 * \param height The height of the ellipse.
-			 */
-			void setHeight(double height);
+            /**
+             * \brief Sets the diameter of the ellipse in y-direction.
+             * \param height The height of the ellipse.
+             */
+            void setHeight(double height);
 
-			/**
-			 * \brief Returns the diameter of the ellipse in y-direction.
-			 * \return The height of the ellipse.
-			 */
-			double getHeight() const;
+            /**
+             * \brief Returns the diameter of the ellipse in y-direction.
+             * \return The height of the ellipse.
+             */
+            double getHeight() const;
 
-			GraphicsPrimitive2D::SharedPointer clone() const;
+            GraphicsPrimitive2D::SharedPointer clone() const;
 
-			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
+            void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-		private:
-			Math::Vector2D position;
-			double         width;
-			double         height;
-			Pen            pen;
-			Brush          brush;
-		};
-	}
+        private:
+            Math::Vector2D position;
+            double         width;
+            double         height;
+            Pen            pen;
+            Brush          brush;
+        };
+    }
 }
 
 #endif // CDPL_VIS_ELLIPSEPRIMITIVE2D_HPP

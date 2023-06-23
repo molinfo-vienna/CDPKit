@@ -49,17 +49,17 @@ void Pharm::XBondAcceptorFeatureGenerator::init()
 {
     using namespace Chem;
 
-	addIncludePattern(parseSMARTS("[*:8]~[#8,S;X2:7]~[*:8]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[*:8]~[#7;X2:7]~[*:8]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR);
-	addIncludePattern(parseSMARTS("[*:8]=[N;X2:7]-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[*:8]#[N;X1:7]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR);
-	addIncludePattern(parseSMARTS("[*:8]-[N;X3:7](-[#1])-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[*:8]-[#7;X3:7](-[*:8])-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[*:8]-[N;X3:7](-[*:8])-[*:8]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR);
-	addIncludePattern(parseSMARTS("[*:8]-[O,S;X2:7]-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[*:8]-,=[O,S;X1:7]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[O,S;X2:3]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-	addIncludePattern(parseSMARTS("[#7;X3:3]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[*:8]~[#8,S;X2:7]~[*:8]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[*:8]~[#7;X2:7]~[*:8]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR);
+    addIncludePattern(parseSMARTS("[*:8]=[N;X2:7]-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[*:8]#[N;X1:7]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR);
+    addIncludePattern(parseSMARTS("[*:8]-[N;X3:7](-[#1])-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[*:8]-[#7;X3:7](-[*:8])-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[*:8]-[N;X3:7](-[*:8])-[*:8]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR);
+    addIncludePattern(parseSMARTS("[*:8]-[O,S;X2:7]-[#1]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[*:8]-,=[O,S;X1:7]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[O,S;X2:3]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[#7;X3:3]"), FeatureType::HALOGEN_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
 
-	addExcludePattern(parseSMARTS("[+1:1]"));
+    addExcludePattern(parseSMARTS("[+1:1]"));
 }

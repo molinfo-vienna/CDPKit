@@ -37,13 +37,13 @@ void CDPLPythonUtil::exportBronKerboschAlgorithm()
     using namespace CDPL;
 
     python::class_<Util::BronKerboschAlgorithm>("BronKerboschAlgorithm", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Util::BronKerboschAlgorithm&>((python::arg("self"), python::arg("bka"))))
-	.def(python::init<const Util::BitSetArray&>((python::arg("self"), python::arg("adj_mtx"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Util::BronKerboschAlgorithm>())	
-	.def("init", &Util::BronKerboschAlgorithm::init, (python::arg("self"), python::arg("adj_mtx")))
-	.def("nextClique", &Util::BronKerboschAlgorithm::nextClique, 
-	     (python::arg("self"), python::arg("clique")))
-	.def("assign", &Util::BronKerboschAlgorithm::operator=, 
-	     (python::arg("self"), python::arg("bka")), python::return_self<>());
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Util::BronKerboschAlgorithm&>((python::arg("self"), python::arg("bka"))))
+    .def(python::init<const Util::BitSetArray&>((python::arg("self"), python::arg("adj_mtx"))))
+    .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Util::BronKerboschAlgorithm>())    
+    .def("init", &Util::BronKerboschAlgorithm::init, (python::arg("self"), python::arg("adj_mtx")))
+    .def("nextClique", &Util::BronKerboschAlgorithm::nextClique, 
+         (python::arg("self"), python::arg("clique")))
+    .def("assign", &Util::BronKerboschAlgorithm::operator=, 
+         (python::arg("self"), python::arg("bka")), python::return_self<>());
 }

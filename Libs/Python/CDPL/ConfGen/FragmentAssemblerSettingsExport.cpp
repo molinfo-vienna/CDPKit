@@ -41,36 +41,36 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
     typedef bool (ConfGen::FragmentAssemblerSettings::*GetBoolFunc)() const;
 
     python::class_<ConfGen::FragmentAssemblerSettings>("FragmentAssemblerSettings", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::FragmentAssemblerSettings&>((python::arg("self"), python::arg("settings"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentAssemblerSettings>())
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentAssemblerSettings::operator=), 
-	     (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("enumerateRings", SetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings), 
-			 (python::arg("self"), python::arg("enumerate")))
-		.def("enumerateRings", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings), 
-			 python::arg("self"))
-		.def("setNitrogenEnumerationMode", &ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode, 
-			 (python::arg("self"), python::arg("mode")))
-		.def("getNitrogenEnumerationMode", &ConfGen::FragmentAssemblerSettings::getNitrogenEnumerationMode, 
-			 python::arg("self"))
-		.def("generateCoordinatesFromScratch", SetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch), 
-			 (python::arg("self"), python::arg("reuse")))
-		.def("generateCoordinatesFromScratch", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch), 
-			 python::arg("self"))
-		.def("getFragmentBuildSettings", 
-			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
-			 (&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),
-			 python::arg("self"), python::return_internal_reference<>())
-		.def_readonly("DEFAULT", ConfGen::FragmentAssemblerSettings::DEFAULT)
-		.add_property("enumRings", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings),
-					  SetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings))
-		.add_property("nitrogenEnumMode", &ConfGen::FragmentAssemblerSettings::getNitrogenEnumerationMode,
-					  &ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode)
-		.add_property("genCoordsFromScratch", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch),
-					  SetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch))
-		.add_property("fragmentBuildSettings", 
-					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
-											(&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),
-											python::return_internal_reference<>()));
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const ConfGen::FragmentAssemblerSettings&>((python::arg("self"), python::arg("settings"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentAssemblerSettings>())
+        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentAssemblerSettings::operator=), 
+         (python::arg("self"), python::arg("settings")), python::return_self<>())
+        .def("enumerateRings", SetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings), 
+             (python::arg("self"), python::arg("enumerate")))
+        .def("enumerateRings", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings), 
+             python::arg("self"))
+        .def("setNitrogenEnumerationMode", &ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode, 
+             (python::arg("self"), python::arg("mode")))
+        .def("getNitrogenEnumerationMode", &ConfGen::FragmentAssemblerSettings::getNitrogenEnumerationMode, 
+             python::arg("self"))
+        .def("generateCoordinatesFromScratch", SetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch), 
+             (python::arg("self"), python::arg("reuse")))
+        .def("generateCoordinatesFromScratch", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch), 
+             python::arg("self"))
+        .def("getFragmentBuildSettings", 
+             static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
+             (&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),
+             python::arg("self"), python::return_internal_reference<>())
+        .def_readonly("DEFAULT", ConfGen::FragmentAssemblerSettings::DEFAULT)
+        .add_property("enumRings", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings),
+                      SetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings))
+        .add_property("nitrogenEnumMode", &ConfGen::FragmentAssemblerSettings::getNitrogenEnumerationMode,
+                      &ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode)
+        .add_property("genCoordsFromScratch", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch),
+                      SetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch))
+        .add_property("fragmentBuildSettings", 
+                      python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
+                                            (&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),
+                                            python::return_internal_reference<>()));
 }

@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportMolecularGraphIOManager()
 {
-	CDPLPythonBase::DataIOManagerExport<CDPL::Chem::MolecularGraph>("MolecularGraphIOManager");
+    CDPLPythonBase::DataIOManagerExport<CDPL::Chem::MolecularGraph>("MolecularGraphIOManager");
 }

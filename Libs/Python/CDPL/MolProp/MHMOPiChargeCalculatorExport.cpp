@@ -38,25 +38,25 @@ void CDPLPythonMolProp::exportMHMOPiChargeCalculator()
     using namespace CDPL;
 
     python::class_<MolProp::MHMOPiChargeCalculator, boost::noncopyable>("MHMOPiChargeCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(python::init<const Chem::ElectronSystemList&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("pi_sys_list"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::MHMOPiChargeCalculator>())
-		.def("localizedPiBonds", static_cast<void (MolProp::MHMOPiChargeCalculator::*)(bool)>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds),
-			 (python::arg("self"), python::arg("localized")))
-		.def("localizedPiBonds", static_cast<bool (MolProp::MHMOPiChargeCalculator::*)() const>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds),
-			 python::arg("localized"))
-		.def("calculate", static_cast<void (MolProp::MHMOPiChargeCalculator::*)(
-				 const Chem::MolecularGraph&)>(&MolProp::MHMOPiChargeCalculator::calculate),
-			 (python::arg("self"), python::arg("molgraph")))
-		.def("calculate", static_cast<void (MolProp::MHMOPiChargeCalculator::*)(
-				 const Chem::ElectronSystemList&, const Chem::MolecularGraph&)>(&MolProp::MHMOPiChargeCalculator::calculate),
-			 (python::arg("self"), python::arg("pi_sys_list"), python::arg("molgraph")))
-		.def("getElectronDensity", &MolProp::MHMOPiChargeCalculator::getElectronDensity, (python::arg("self"), python::arg("atom_idx")))
-		.def("getCharge", &MolProp::MHMOPiChargeCalculator::getCharge, (python::arg("self"), python::arg("atom_idx")))
-		.def("getBondOrder", &MolProp::MHMOPiChargeCalculator::getBondOrder, (python::arg("self"), python::arg("bond_idx")))
-		.def("getEnergy", &MolProp::MHMOPiChargeCalculator::getEnergy, python::arg("self"))
-		.add_property("locPiBonds", static_cast<bool (MolProp::MHMOPiChargeCalculator::*)() const>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds),
-					  static_cast<void (MolProp::MHMOPiChargeCalculator::*)(bool)>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds))
-		.add_property("energy", &MolProp::MHMOPiChargeCalculator::getEnergy);
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+        .def(python::init<const Chem::ElectronSystemList&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("pi_sys_list"), python::arg("molgraph"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::MHMOPiChargeCalculator>())
+        .def("localizedPiBonds", static_cast<void (MolProp::MHMOPiChargeCalculator::*)(bool)>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds),
+             (python::arg("self"), python::arg("localized")))
+        .def("localizedPiBonds", static_cast<bool (MolProp::MHMOPiChargeCalculator::*)() const>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds),
+             python::arg("localized"))
+        .def("calculate", static_cast<void (MolProp::MHMOPiChargeCalculator::*)(
+                 const Chem::MolecularGraph&)>(&MolProp::MHMOPiChargeCalculator::calculate),
+             (python::arg("self"), python::arg("molgraph")))
+        .def("calculate", static_cast<void (MolProp::MHMOPiChargeCalculator::*)(
+                 const Chem::ElectronSystemList&, const Chem::MolecularGraph&)>(&MolProp::MHMOPiChargeCalculator::calculate),
+             (python::arg("self"), python::arg("pi_sys_list"), python::arg("molgraph")))
+        .def("getElectronDensity", &MolProp::MHMOPiChargeCalculator::getElectronDensity, (python::arg("self"), python::arg("atom_idx")))
+        .def("getCharge", &MolProp::MHMOPiChargeCalculator::getCharge, (python::arg("self"), python::arg("atom_idx")))
+        .def("getBondOrder", &MolProp::MHMOPiChargeCalculator::getBondOrder, (python::arg("self"), python::arg("bond_idx")))
+        .def("getEnergy", &MolProp::MHMOPiChargeCalculator::getEnergy, python::arg("self"))
+        .add_property("locPiBonds", static_cast<bool (MolProp::MHMOPiChargeCalculator::*)() const>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds),
+                      static_cast<void (MolProp::MHMOPiChargeCalculator::*)(bool)>(&MolProp::MHMOPiChargeCalculator::localizedPiBonds))
+        .add_property("energy", &MolProp::MHMOPiChargeCalculator::getEnergy);
 }

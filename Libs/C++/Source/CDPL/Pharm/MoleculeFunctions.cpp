@@ -47,22 +47,22 @@ void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol, bool calc_hyd
     perceiveHybridizationStates(mol, false);
     setAromaticityFlags(mol, false);
 
-	if (makeHydrogenComplete(mol)) {
-		try {
-			calcHydrogen3DCoordinates(mol);
-		} catch (const Base::ItemNotFound& e) {
-		} catch (...) {
-			throw;
-		}
-		
-		try {
-			Biomol::setHydrogenResidueSequenceInfo(mol, false);
-		} catch (const Base::ItemNotFound& e) {
-		} catch (...) {
-			throw;
-		}
-	}
+    if (makeHydrogenComplete(mol)) {
+        try {
+            calcHydrogen3DCoordinates(mol);
+        } catch (const Base::ItemNotFound& e) {
+        } catch (...) {
+            throw;
+        }
+        
+        try {
+            Biomol::setHydrogenResidueSequenceInfo(mol, false);
+        } catch (const Base::ItemNotFound& e) {
+        } catch (...) {
+            throw;
+        }
+    }
 
-	if (calc_hyd)
-		MolProp::calcAtomHydrophobicities(mol, false, from_logp);
+    if (calc_hyd)
+        MolProp::calcAtomHydrophobicities(mol, false, from_logp);
 }

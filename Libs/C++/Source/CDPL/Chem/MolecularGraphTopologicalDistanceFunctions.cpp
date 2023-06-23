@@ -42,135 +42,135 @@ using namespace CDPL;
 namespace
 {
 
-	template <typename Mtx>
-	void calcTopologicalDistances(const Chem::MolecularGraph& molgraph, Mtx& mtx)
-	{
-		using namespace Chem;
+    template <typename Mtx>
+    void calcTopologicalDistances(const Chem::MolecularGraph& molgraph, Mtx& mtx)
+    {
+        using namespace Chem;
 
-		std::size_t num_atoms = molgraph.getNumAtoms();
-
-        mtx.resize(num_atoms, num_atoms);
-        mtx.clear();
-
-		Util::BitSet vis_atoms(molgraph.getNumAtoms());
-
-		typedef std::vector<const Atom*> AtomList;
-		typedef AtomList::const_iterator AtomListIterator;
-
-		AtomList atoms;
-		AtomList next_atoms;
-
-		std::size_t i = 0;
-
-		MolecularGraph::ConstAtomIterator molgraph_atoms_end = molgraph.getAtomsEnd();
-
-		for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != molgraph_atoms_end; ++it1, i++) {
-			atoms.push_back(&*it1);
-			vis_atoms.set(i);
-
-			for (std::size_t path_len = 1; !atoms.empty(); path_len++) {
-				AtomListIterator atoms_end = atoms.end(); 
-
-				for (AtomListIterator it2 = atoms.begin(); it2 != atoms_end; ++it2) {
-					const Atom* atom = *it2;
-
-					Atom::ConstAtomIterator nbr_atoms_end = atom->getAtomsEnd();
-					Atom::ConstBondIterator b_it = atom->getBondsBegin();
-		
-					for (Atom::ConstAtomIterator it3 = atom->getAtomsBegin(); it3 != nbr_atoms_end; ++it3, ++b_it) {
-						const Atom* nbr_atom = &*it3;
-
-						if (!molgraph.containsAtom(*nbr_atom))
-							continue;
-	
-						if (!molgraph.containsBond(*b_it))
-							continue;
-
-						std::size_t nbr_atom_idx = molgraph.getAtomIndex(*nbr_atom);
-
-						if (!vis_atoms.test(nbr_atom_idx)) {
-							next_atoms.push_back(nbr_atom);
-							vis_atoms.set(nbr_atom_idx);
-
-							mtx(i, nbr_atom_idx) = path_len;
-						}
-					}		
-				}
-
-				atoms.swap(next_atoms);
-				next_atoms.clear();
-			}
-
-			atoms.clear();
-			vis_atoms.reset();
-		}
-	}
-
-	template <typename Mtx>
-	void extractTopologicalDistances(const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& tgt_molgraph, Mtx& mtx)
-	{
-		using namespace Chem;
-
-		const Math::ULMatrix& src_mtx = *getTopologicalDistanceMatrix(src_molgraph);
-		std::size_t num_atoms = tgt_molgraph.getNumAtoms();
+        std::size_t num_atoms = molgraph.getNumAtoms();
 
         mtx.resize(num_atoms, num_atoms);
         mtx.clear();
 
-		for (std::size_t i = 0; i < num_atoms; i++) {
-			std::size_t src_idx1 = src_molgraph.getAtomIndex(tgt_molgraph.getAtom(i));
+        Util::BitSet vis_atoms(molgraph.getNumAtoms());
 
-			for (std::size_t j = i + 1; j < num_atoms; j++) {
-				std::size_t dist = src_mtx(src_idx1, src_molgraph.getAtomIndex(tgt_molgraph.getAtom(j)));
+        typedef std::vector<const Atom*> AtomList;
+        typedef AtomList::const_iterator AtomListIterator;
 
-				mtx(i, j) = dist;
-				mtx(j, i) = dist;
-			}
-		}
-	}
+        AtomList atoms;
+        AtomList next_atoms;
+
+        std::size_t i = 0;
+
+        MolecularGraph::ConstAtomIterator molgraph_atoms_end = molgraph.getAtomsEnd();
+
+        for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != molgraph_atoms_end; ++it1, i++) {
+            atoms.push_back(&*it1);
+            vis_atoms.set(i);
+
+            for (std::size_t path_len = 1; !atoms.empty(); path_len++) {
+                AtomListIterator atoms_end = atoms.end(); 
+
+                for (AtomListIterator it2 = atoms.begin(); it2 != atoms_end; ++it2) {
+                    const Atom* atom = *it2;
+
+                    Atom::ConstAtomIterator nbr_atoms_end = atom->getAtomsEnd();
+                    Atom::ConstBondIterator b_it = atom->getBondsBegin();
+        
+                    for (Atom::ConstAtomIterator it3 = atom->getAtomsBegin(); it3 != nbr_atoms_end; ++it3, ++b_it) {
+                        const Atom* nbr_atom = &*it3;
+
+                        if (!molgraph.containsAtom(*nbr_atom))
+                            continue;
+    
+                        if (!molgraph.containsBond(*b_it))
+                            continue;
+
+                        std::size_t nbr_atom_idx = molgraph.getAtomIndex(*nbr_atom);
+
+                        if (!vis_atoms.test(nbr_atom_idx)) {
+                            next_atoms.push_back(nbr_atom);
+                            vis_atoms.set(nbr_atom_idx);
+
+                            mtx(i, nbr_atom_idx) = path_len;
+                        }
+                    }        
+                }
+
+                atoms.swap(next_atoms);
+                next_atoms.clear();
+            }
+
+            atoms.clear();
+            vis_atoms.reset();
+        }
+    }
+
+    template <typename Mtx>
+    void extractTopologicalDistances(const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& tgt_molgraph, Mtx& mtx)
+    {
+        using namespace Chem;
+
+        const Math::ULMatrix& src_mtx = *getTopologicalDistanceMatrix(src_molgraph);
+        std::size_t num_atoms = tgt_molgraph.getNumAtoms();
+
+        mtx.resize(num_atoms, num_atoms);
+        mtx.clear();
+
+        for (std::size_t i = 0; i < num_atoms; i++) {
+            std::size_t src_idx1 = src_molgraph.getAtomIndex(tgt_molgraph.getAtom(i));
+
+            for (std::size_t j = i + 1; j < num_atoms; j++) {
+                std::size_t dist = src_mtx(src_idx1, src_molgraph.getAtomIndex(tgt_molgraph.getAtom(j)));
+
+                mtx(i, j) = dist;
+                mtx(j, i) = dist;
+            }
+        }
+    }
 }
 
 
 Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph& molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any mtx_prop = molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
+    if (!overwrite) {
+        Base::Any mtx_prop = molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
 
-		if (!mtx_prop.isEmpty())
-			return mtx_prop.getData<Math::ULMatrix::SharedPointer>();
-	}
+        if (!mtx_prop.isEmpty())
+            return mtx_prop.getData<Math::ULMatrix::SharedPointer>();
+    }
 
-	Math::ULMatrix::SharedPointer mtx_ptr(new Math::ULMatrix());
+    Math::ULMatrix::SharedPointer mtx_ptr(new Math::ULMatrix());
 
-	calcTopologicalDistances(molgraph, *mtx_ptr);
-	setTopologicalDistanceMatrix(molgraph, mtx_ptr);
+    calcTopologicalDistances(molgraph, *mtx_ptr);
+    setTopologicalDistanceMatrix(molgraph, mtx_ptr);
 
-	return mtx_ptr;
+    return mtx_ptr;
 }
 
 Math::ULMatrix::SharedPointer Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
 {
-	if (!overwrite) {
-		Base::Any mtx_prop = tgt_molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
+    if (!overwrite) {
+        Base::Any mtx_prop = tgt_molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
 
-		if (!mtx_prop.isEmpty())
-			return mtx_prop.getData<Math::ULMatrix::SharedPointer>();
-	}
+        if (!mtx_prop.isEmpty())
+            return mtx_prop.getData<Math::ULMatrix::SharedPointer>();
+    }
 
-	Math::ULMatrix::SharedPointer mtx_ptr(new Math::ULMatrix());
+    Math::ULMatrix::SharedPointer mtx_ptr(new Math::ULMatrix());
 
-	extractTopologicalDistances(src_molgraph, tgt_molgraph, *mtx_ptr);
-	setTopologicalDistanceMatrix(tgt_molgraph, mtx_ptr);
+    extractTopologicalDistances(src_molgraph, tgt_molgraph, *mtx_ptr);
+    setTopologicalDistanceMatrix(tgt_molgraph, mtx_ptr);
 
-	return mtx_ptr;
+    return mtx_ptr;
 }
 
 void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx)
 {
-	calcTopologicalDistances(molgraph, mtx);
+    calcTopologicalDistances(molgraph, mtx);
 }
 
 void Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx)
 {
-	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
+    extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
 }

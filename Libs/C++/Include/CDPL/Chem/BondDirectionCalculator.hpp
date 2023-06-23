@@ -40,157 +40,157 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Atom;
-		class Bond;
+        class MolecularGraph;
+        class Atom;
+        class Bond;
 
-		/**
-		 * \brief BondDirectionCalculator.
-		 * \see [\ref SMILES]
-		 */
-		class CDPL_CHEM_API BondDirectionCalculator 
-		{
+        /**
+         * \brief BondDirectionCalculator.
+         * \see [\ref SMILES]
+         */
+        class CDPL_CHEM_API BondDirectionCalculator 
+        {
 
-		public:
-			/**
-			 * \brief Construcst the \c %BondDirectionCalculator instance.
-			 */
-			BondDirectionCalculator();
+        public:
+            /**
+             * \brief Construcst the \c %BondDirectionCalculator instance.
+             */
+            BondDirectionCalculator();
 
-			/**
-			 * \brief Constructs the \c %BondDirectionCalculator instance and calculates direction flags for a minimum set of
-			 *        directional bonds that unambiguously define the configuration of double bonds in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the bond direction flags.
-			 * \param dirs An array containing the calculated bond direction flags (possible
-			 *         values are defined as constants in namespace Chem::BondDirection). The
-			 *         directions are stored in the same order as the bonds appear in the bond list of
-			 *         the molecular graph (i.e. the direction flag of a bond is accessible via
-			 *         its index).
-			 */
-			BondDirectionCalculator(const MolecularGraph& molgraph, Util::UIArray& dirs);
+            /**
+             * \brief Constructs the \c %BondDirectionCalculator instance and calculates direction flags for a minimum set of
+             *        directional bonds that unambiguously define the configuration of double bonds in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the bond direction flags.
+             * \param dirs An array containing the calculated bond direction flags (possible
+             *         values are defined as constants in namespace Chem::BondDirection). The
+             *         directions are stored in the same order as the bonds appear in the bond list of
+             *         the molecular graph (i.e. the direction flag of a bond is accessible via
+             *         its index).
+             */
+            BondDirectionCalculator(const MolecularGraph& molgraph, Util::UIArray& dirs);
 
-			/**
-			 * \brief Allows to specify whether or not the configuration of ring double bonds shall also be regarded in the
-			 *        performed bond direction calculations.
-			 * \param include If \c true, ring double bond geometries will be taken into consideration and get ignored otherwise.
-			 * \note By default, the configuration of ring double bonds is taken into consideration.
-			 * \see setRingSizeLimit()
-			 */
-			void includeRingBonds(bool include);
+            /**
+             * \brief Allows to specify whether or not the configuration of ring double bonds shall also be regarded in the
+             *        performed bond direction calculations.
+             * \param include If \c true, ring double bond geometries will be taken into consideration and get ignored otherwise.
+             * \note By default, the configuration of ring double bonds is taken into consideration.
+             * \see setRingSizeLimit()
+             */
+            void includeRingBonds(bool include);
 
-			/**
-			 * \brief Tells whether the configuration of ring double bonds is also regarded in the performed
-			 *        bond direction calculations.
-			 * \return \c true if ring double bond geometries are taken into consideration, and \a false otherwise.
-			 * \see setRingSizeLimit()
-			 */
-			bool ringBondsIncluded() const;
+            /**
+             * \brief Tells whether the configuration of ring double bonds is also regarded in the performed
+             *        bond direction calculations.
+             * \return \c true if ring double bond geometries are taken into consideration, and \a false otherwise.
+             * \see setRingSizeLimit()
+             */
+            bool ringBondsIncluded() const;
 
-			/**
-			 * \brief Sets the minimum ring size that is required for ring double bonds to be considered in
-			 *        the performed bond direction calculations.
-			 * \param min_size The minimum required ring size.
-			 * \note The default minimum ring size is set to \e 8. This settings is only effective when the general
-			 *       inclusion of ring double bonds is not disabled (see includeRingBonds()).
-			 */
-			void setRingSizeLimit(std::size_t min_size);
+            /**
+             * \brief Sets the minimum ring size that is required for ring double bonds to be considered in
+             *        the performed bond direction calculations.
+             * \param min_size The minimum required ring size.
+             * \note The default minimum ring size is set to \e 8. This settings is only effective when the general
+             *       inclusion of ring double bonds is not disabled (see includeRingBonds()).
+             */
+            void setRingSizeLimit(std::size_t min_size);
 
-			/**
-			 * \brief Returns the minimum ring size that is required for ring double bonds to be considered in
-			 *        the performed bond direction calculations.
-			 * \return The minimum required ring size.
-			 */			
-			std::size_t getRingSizeLimit() const;
+            /**
+             * \brief Returns the minimum ring size that is required for ring double bonds to be considered in
+             *        the performed bond direction calculations.
+             * \return The minimum required ring size.
+             */            
+            std::size_t getRingSizeLimit() const;
 
-			/**
-			 * \brief Calculates direction flags for a minimum set of directional bonds that unambiguously define the configuration
-			 *        of double bonds in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the bond direction flags.
-			 * \param dirs An array containing the calculated bond direction flags (possible
-			 *         values are defined as constants in namespace Chem::BondDirection). The
-			 *         directions are stored in the same order as the bonds appear in the bond list of
-			 *         the molecular graph (i.e. the direction flag of a bond is accessible via
-			 *         its index).
-			 */
-			void calculate(const MolecularGraph& molgraph, Util::UIArray& dirs);
+            /**
+             * \brief Calculates direction flags for a minimum set of directional bonds that unambiguously define the configuration
+             *        of double bonds in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to calculate the bond direction flags.
+             * \param dirs An array containing the calculated bond direction flags (possible
+             *         values are defined as constants in namespace Chem::BondDirection). The
+             *         directions are stored in the same order as the bonds appear in the bond list of
+             *         the molecular graph (i.e. the direction flag of a bond is accessible via
+             *         its index).
+             */
+            void calculate(const MolecularGraph& molgraph, Util::UIArray& dirs);
 
-		private:
-			class StereoBond;
+        private:
+            class StereoBond;
 
-			class StereoBondOrderingFunction
-			{
+            class StereoBondOrderingFunction
+            {
 
-			public:
-				StereoBondOrderingFunction(const BondDirectionCalculator& gen): calculator(gen) {}
+            public:
+                StereoBondOrderingFunction(const BondDirectionCalculator& gen): calculator(gen) {}
 
-				bool operator()(const StereoBond*, const StereoBond*) const;
+                bool operator()(const StereoBond*, const StereoBond*) const;
 
-			private:
-				const BondDirectionCalculator& calculator;
-			};
+            private:
+                const BondDirectionCalculator& calculator;
+            };
 
-			BondDirectionCalculator(const BondDirectionCalculator&);
+            BondDirectionCalculator(const BondDirectionCalculator&);
 
-			BondDirectionCalculator& operator=(const BondDirectionCalculator&);
+            BondDirectionCalculator& operator=(const BondDirectionCalculator&);
 
-			void init(const MolecularGraph&, Util::UIArray&);
+            void init(const MolecularGraph&, Util::UIArray&);
 
-			bool assignDirections(std::size_t, Util::UIArray&);
+            bool assignDirections(std::size_t, Util::UIArray&);
 
-			void switchDirection(unsigned int&);
+            void switchDirection(unsigned int&);
 
-			class StereoBond
-			{
+            class StereoBond
+            {
 
-			public:
-				StereoBond(const Bond&);
+            public:
+                StereoBond(const Bond&);
 
-				const Bond& getBond() const;
+                const Bond& getBond() const;
 
-				unsigned int getConfiguration() const;
-				void setConfiguration(unsigned int);
+                unsigned int getConfiguration() const;
+                void setConfiguration(unsigned int);
 
-				void setConfigRefBondIndex(std::size_t, std::size_t);
+                void setConfigRefBondIndex(std::size_t, std::size_t);
 
-				std::size_t getNumNeighbors(std::size_t) const;
+                std::size_t getNumNeighbors(std::size_t) const;
 
-				std::size_t getNeighborBondIndex(std::size_t, std::size_t) const;
-				std::size_t getNeighborAtomIndex(std::size_t, std::size_t) const;
+                std::size_t getNeighborBondIndex(std::size_t, std::size_t) const;
+                std::size_t getNeighborAtomIndex(std::size_t, std::size_t) const;
 
-				void addNeighborIndices(std::size_t, std::size_t, std::size_t);
+                void addNeighborIndices(std::size_t, std::size_t, std::size_t);
 
-				bool hasDirBonds(const Util::UIArray&, std::size_t) const;
+                bool hasDirBonds(const Util::UIArray&, std::size_t) const;
 
-				bool configMatches(const Util::UIArray&) const;
+                bool configMatches(const Util::UIArray&) const;
 
-			private:
-				const Bond*  bond;
-				std::size_t  nbrBondCounts[2];
-				std::size_t  nbrAtomIndices[2][2];
-				std::size_t  nbrBondIndices[2][2];
-				unsigned int configuration;
-			};
+            private:
+                const Bond*  bond;
+                std::size_t  nbrBondCounts[2];
+                std::size_t  nbrAtomIndices[2][2];
+                std::size_t  nbrBondIndices[2][2];
+                unsigned int configuration;
+            };
 
-			typedef std::vector<StereoBond> StereoBondArray;
-			typedef std::vector<StereoBond*> StereoBondPtrArray;
+            typedef std::vector<StereoBond> StereoBondArray;
+            typedef std::vector<StereoBond*> StereoBondPtrArray;
 
-			const MolecularGraph*  molGraph;
-			bool                   incRingBonds;
-			std::size_t            minRingSize;
-			StereoBondArray        stereoBonds;
-			StereoBondPtrArray     orderedStereoBonds;
-			StereoBondPtrArray     atomStereoBondTable;
-			Util::UIArray          workingDirs;
-			Util::BitSet           configMatchMask;
-			std::size_t            numMismatches;
-			std::size_t            minNumMismatches;
-			std::size_t            numDirBonds;
-			std::size_t            minNumDirBonds;
-		};
-	}
+            const MolecularGraph*  molGraph;
+            bool                   incRingBonds;
+            std::size_t            minRingSize;
+            StereoBondArray        stereoBonds;
+            StereoBondPtrArray     orderedStereoBonds;
+            StereoBondPtrArray     atomStereoBondTable;
+            Util::UIArray          workingDirs;
+            Util::BitSet           configMatchMask;
+            std::size_t            numMismatches;
+            std::size_t            minNumMismatches;
+            std::size_t            numDirBonds;
+            std::size_t            minNumDirBonds;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_BONDDIRECTIONCALCULATOR_HPP

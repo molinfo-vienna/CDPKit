@@ -45,111 +45,111 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
+        class MolecularGraph;
 
-		/**
-		 * \brief MorganNumberingCalculator.
-		 * \see [\ref MOCAN]
-		 */
-		class CDPL_CHEM_API MorganNumberingCalculator 
-		{
+        /**
+         * \brief MorganNumberingCalculator.
+         * \see [\ref MOCAN]
+         */
+        class CDPL_CHEM_API MorganNumberingCalculator 
+        {
 
-		public:
-			/**
-			 * \brief Constructs the \c %MorganNumberingCalculator instance.
-			 */
-			MorganNumberingCalculator();
+        public:
+            /**
+             * \brief Constructs the \c %MorganNumberingCalculator instance.
+             */
+            MorganNumberingCalculator();
 
-			/**
-			 * \brief Constructs the \c %MorganNumberingCalculator instance and performs a canonical numbering
-			 *        of the atoms in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perform the canonical numbering.
-			 * \param numbering An array that contains the calculated canonical atom numbering. The numbers
-			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-			 *         (i.e. the canonical number of an atom is accessible via its index).
-			 */
-			MorganNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
+            /**
+             * \brief Constructs the \c %MorganNumberingCalculator instance and performs a canonical numbering
+             *        of the atoms in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perform the canonical numbering.
+             * \param numbering An array that contains the calculated canonical atom numbering. The numbers
+             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+             *         (i.e. the canonical number of an atom is accessible via its index).
+             */
+            MorganNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
 
-			/**
-			 * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to perform the canonical numbering.
-			 * \param numbering An array that contains the calculated canonical atom numbering. The numbers
-			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
-			 *         (i.e. the canonical number of an atom is accessible via its index).
-			 */
-			void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
+            /**
+             * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
+             * \param molgraph The molecular graph for which to perform the canonical numbering.
+             * \param numbering An array that contains the calculated canonical atom numbering. The numbers
+             *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+             *         (i.e. the canonical number of an atom is accessible via its index).
+             */
+            void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
-		private:
-			MorganNumberingCalculator(const MorganNumberingCalculator&);
+        private:
+            MorganNumberingCalculator(const MorganNumberingCalculator&);
 
-			MorganNumberingCalculator& operator=(const MorganNumberingCalculator&);
+            MorganNumberingCalculator& operator=(const MorganNumberingCalculator&);
 
-			typedef std::pair<std::size_t, std::size_t> STPair;		 
+            typedef std::pair<std::size_t, std::size_t> STPair;         
 
-			typedef std::vector<STPair> STPairArray;
-			typedef std::vector<std::size_t> STArray;
-			typedef std::vector<long> LArray;
-			typedef std::vector<std::string> SArray;
+            typedef std::vector<STPair> STPairArray;
+            typedef std::vector<std::size_t> STArray;
+            typedef std::vector<long> LArray;
+            typedef std::vector<std::string> SArray;
 
-			class NumberingState
-			{
+            class NumberingState
+            {
 
-			public:
-				NumberingState(STPairArray* sym_class_ids, SArray* symbols, 
-							   LArray* charges, STArray* isotopes, Math::SparseULMatrix* bond_mtx): 
-					symClassIDs(sym_class_ids), atomSymbols(symbols), 
-					atomCharges(charges), atomIsotopes(isotopes), bondMatrix(bond_mtx) {}
+            public:
+                NumberingState(STPairArray* sym_class_ids, SArray* symbols, 
+                               LArray* charges, STArray* isotopes, Math::SparseULMatrix* bond_mtx): 
+                    symClassIDs(sym_class_ids), atomSymbols(symbols), 
+                    atomCharges(charges), atomIsotopes(isotopes), bondMatrix(bond_mtx) {}
 
-				void calculate(const MolecularGraph&, Util::STArray&);	
+                void calculate(const MolecularGraph&, Util::STArray&);    
 
-			private:
-				NumberingState() {}
+            private:
+                NumberingState() {}
 
-				void init(const MolecularGraph&);
+                void init(const MolecularGraph&);
 
-				void perceiveSymClasses();
+                void perceiveSymClasses();
 
-				void distributeNumbers(Util::STArray&);
-				void distributeNumbers(std::size_t);
+                void distributeNumbers(Util::STArray&);
+                void distributeNumbers(std::size_t);
 
-				void getNextAtomIndices(STArray&);
+                void getNextAtomIndices(STArray&);
 
-				void addListEntriesForAtom(std::size_t, std::size_t);
+                void addListEntriesForAtom(std::size_t, std::size_t);
 
-				void copy(NumberingState&);
+                void copy(NumberingState&);
 
-				typedef STPairArray::const_iterator STPairArrayIterator;
+                typedef STPairArray::const_iterator STPairArrayIterator;
 
-				STPairArray*             symClassIDs;
-				SArray*                  atomSymbols;
-				LArray*                  atomCharges;
-				STArray*                 atomIsotopes;
-				Math::SparseULMatrix*    bondMatrix;
-				const MolecularGraph*    molGraph;
-				STPairArray              atomNumbering;
-				STArray                  indexLookupTable;
-				STArray                  fromList;
-				STArray                  ringClosures;
-				std::string              nodeValues;
-				STArray                  lineValues;
-				LArray                   modifications;
-				STPairArrayIterator      lastSymClass;
-				std::size_t              centerAtomNumber;
-				std::size_t              nextAtomNumber;
-				bool                     sortRCList;
-			};	
+                STPairArray*             symClassIDs;
+                SArray*                  atomSymbols;
+                LArray*                  atomCharges;
+                STArray*                 atomIsotopes;
+                Math::SparseULMatrix*    bondMatrix;
+                const MolecularGraph*    molGraph;
+                STPairArray              atomNumbering;
+                STArray                  indexLookupTable;
+                STArray                  fromList;
+                STArray                  ringClosures;
+                std::string              nodeValues;
+                STArray                  lineValues;
+                LArray                   modifications;
+                STPairArrayIterator      lastSymClass;
+                std::size_t              centerAtomNumber;
+                std::size_t              nextAtomNumber;
+                bool                     sortRCList;
+            };    
 
-			STPairArray          symClassIDs;
-			SArray               atomSymbols;
-			LArray               atomCharges;
-			STArray              atomIsotopes;
-			Math::SparseULMatrix bondMatrix;
-			NumberingState       numbering;
-		};
-	}
+            STPairArray          symClassIDs;
+            SArray               atomSymbols;
+            LArray               atomCharges;
+            STArray              atomIsotopes;
+            Math::SparseULMatrix bondMatrix;
+            NumberingState       numbering;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_MORGANNUMBERINGCALCULATOR_HPP

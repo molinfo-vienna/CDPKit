@@ -40,23 +40,23 @@ namespace
 
     FeatureTypeToStringMap featureTypeToStringMap;
     const std::string      EMPTY_STRING;
-	
+    
     struct Init {
 
-	Init() {
-	    using namespace Pharm;
+    Init() {
+        using namespace Pharm;
 
-	    featureTypeToStringMap.emplace(FeatureType::UNKNOWN, "UNK");
-	    featureTypeToStringMap.emplace(FeatureType::HYDROPHOBIC, "H");
-	    featureTypeToStringMap.emplace(FeatureType::AROMATIC, "AR");
-	    featureTypeToStringMap.emplace(FeatureType::NEGATIVE_IONIZABLE, "NI");
-	    featureTypeToStringMap.emplace(FeatureType::POSITIVE_IONIZABLE, "PI");
-	    featureTypeToStringMap.emplace(FeatureType::H_BOND_DONOR, "HBD");
-	    featureTypeToStringMap.emplace(FeatureType::H_BOND_ACCEPTOR, "HBA");
-	    featureTypeToStringMap.emplace(FeatureType::HALOGEN_BOND_DONOR, "XBD");
-	    featureTypeToStringMap.emplace(FeatureType::HALOGEN_BOND_ACCEPTOR, "XBA");
-	    featureTypeToStringMap.emplace(FeatureType::EXCLUSION_VOLUME, "XV");
-	}
+        featureTypeToStringMap.emplace(FeatureType::UNKNOWN, "UNK");
+        featureTypeToStringMap.emplace(FeatureType::HYDROPHOBIC, "H");
+        featureTypeToStringMap.emplace(FeatureType::AROMATIC, "AR");
+        featureTypeToStringMap.emplace(FeatureType::NEGATIVE_IONIZABLE, "NI");
+        featureTypeToStringMap.emplace(FeatureType::POSITIVE_IONIZABLE, "PI");
+        featureTypeToStringMap.emplace(FeatureType::H_BOND_DONOR, "HBD");
+        featureTypeToStringMap.emplace(FeatureType::H_BOND_ACCEPTOR, "HBA");
+        featureTypeToStringMap.emplace(FeatureType::HALOGEN_BOND_DONOR, "XBD");
+        featureTypeToStringMap.emplace(FeatureType::HALOGEN_BOND_ACCEPTOR, "XBA");
+        featureTypeToStringMap.emplace(FeatureType::EXCLUSION_VOLUME, "XV");
+    }
 
     } init;
 }
@@ -67,7 +67,7 @@ const std::string& Pharm::getFeatureTypeString(unsigned int ftr_type)
     FeatureTypeToStringMap::const_iterator it = featureTypeToStringMap.find(ftr_type);
 
     if (it != featureTypeToStringMap.end())
-	return it->second;
+    return it->second;
 
     return EMPTY_STRING;
 }

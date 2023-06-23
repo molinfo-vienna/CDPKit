@@ -45,10 +45,10 @@ Base::DataWriter<Chem::Reaction>& Chem::CDFReactionWriter::write(const Reaction&
     state = false;
 
     try {
-	state = writer->writeReaction(output, rxn);
+    state = writer->writeReaction(output, rxn);
 
     } catch (const std::exception& e) {
-	throw Base::IOError("CDFReactionWriter: " + std::string(e.what()));
+    throw Base::IOError("CDFReactionWriter: " + std::string(e.what()));
     }
 
     invokeIOCallbacks(1.0);

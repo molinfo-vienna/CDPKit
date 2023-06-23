@@ -39,12 +39,12 @@ void CDPLPythonPharm::exportXBondAcceptorFeatureGenerator()
     using namespace CDPL;
 
     python::class_<Pharm::XBondAcceptorFeatureGenerator, python::bases<Pharm::PatternBasedFeatureGenerator>,
-		   boost::noncopyable>("XBondAcceptorFeatureGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Pharm::XBondAcceptorFeatureGenerator&>(
-		 (python::arg("self"), python::arg("gen"))))
-	.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondAcceptorFeatureGenerator::operator=), 
-	     (python::arg("self"), python::arg("gen")), python::return_self<>());
+           boost::noncopyable>("XBondAcceptorFeatureGenerator", python::no_init)
+    .def(python::init<>(python::arg("self")))
+    .def(python::init<const Pharm::XBondAcceptorFeatureGenerator&>(
+         (python::arg("self"), python::arg("gen"))))
+    .def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(
+         (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondAcceptorFeatureGenerator::operator=), 
+         (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

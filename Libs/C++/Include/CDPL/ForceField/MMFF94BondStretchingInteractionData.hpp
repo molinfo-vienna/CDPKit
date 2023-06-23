@@ -39,7 +39,7 @@ namespace CDPL
     namespace ForceField 
     {
 
-		typedef Util::Array<MMFF94BondStretchingInteraction> MMFF94BondStretchingInteractionData;
+        typedef Util::Array<MMFF94BondStretchingInteraction> MMFF94BondStretchingInteractionData;
     }
 }
 

@@ -41,58 +41,58 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief CationPiInteractionScore.
-		 */
-		class CDPL_PHARM_API CationPiInteractionScore : public FeatureInteractionScore
-		{
+        /**
+         * \brief CationPiInteractionScore.
+         */
+        class CDPL_PHARM_API CationPiInteractionScore : public FeatureInteractionScore
+        {
 
-		  public:
-			static constexpr double DEF_MIN_DISTANCE = 3.5;
-			static constexpr double DEF_MAX_DISTANCE = 5.5;
-			static constexpr double DEF_MAX_ANGLE    = 30.0;
+          public:
+            static constexpr double DEF_MIN_DISTANCE = 3.5;
+            static constexpr double DEF_MAX_DISTANCE = 5.5;
+            static constexpr double DEF_MAX_ANGLE    = 30.0;
 
-			/**	
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CationPiInteractionScore instances.
-			 */
-			typedef std::shared_ptr<CationPiInteractionScore> SharedPointer;
+            /**    
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CationPiInteractionScore instances.
+             */
+            typedef std::shared_ptr<CationPiInteractionScore> SharedPointer;
 
-			typedef std::function<double(double)> DistanceScoringFunction;
-			typedef std::function<double(double)> AngleScoringFunction;
+            typedef std::function<double(double)> DistanceScoringFunction;
+            typedef std::function<double(double)> AngleScoringFunction;
 
-			/**
-			 * \brief Constructs a \c %CationPiInteractionScore functor with the specified constraints.
-			 * \param aro_cat \c true if the first feature argument represents the aromatic- and the second one
-			 *                the cationic-feature, and \c false otherwise.
-			 * \param min_dist The minimum allowed distance between the cationic- and aromatic-feature centers.
-			 * \param max_dist The maximum allowed distance between the cationic- and aromatic-feature centers.
-			 * \param max_ang The maximum allowed angle between the cationic- and aromatic-feature plane normal.
-			 */
-			CationPiInteractionScore(bool aro_cat, double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE,
-									 double max_ang = DEF_MAX_ANGLE);
+            /**
+             * \brief Constructs a \c %CationPiInteractionScore functor with the specified constraints.
+             * \param aro_cat \c true if the first feature argument represents the aromatic- and the second one
+             *                the cationic-feature, and \c false otherwise.
+             * \param min_dist The minimum allowed distance between the cationic- and aromatic-feature centers.
+             * \param max_dist The maximum allowed distance between the cationic- and aromatic-feature centers.
+             * \param max_ang The maximum allowed angle between the cationic- and aromatic-feature plane normal.
+             */
+            CationPiInteractionScore(bool aro_cat, double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE,
+                                     double max_ang = DEF_MAX_ANGLE);
 
-			double getMinDistance() const;
+            double getMinDistance() const;
 
-			double getMaxDistance() const;
+            double getMaxDistance() const;
 
-			double getMaxAngle() const;
+            double getMaxAngle() const;
 
-			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+            void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
-			void setAngleScoringFunction(const AngleScoringFunction& func);
+            void setAngleScoringFunction(const AngleScoringFunction& func);
 
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+            double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
-			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
+            double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
-		  private:
-			bool                    aroCatOrder;
-			double                  minDist;
-			double                  maxDist;
-			double                  maxAngle;
-			DistanceScoringFunction distScoringFunc;
-			AngleScoringFunction    angleScoringFunc;
-		};
+          private:
+            bool                    aroCatOrder;
+            double                  minDist;
+            double                  maxDist;
+            double                  maxAngle;
+            DistanceScoringFunction distScoringFunc;
+            AngleScoringFunction    angleScoringFunc;
+        };
     }
 }
 

@@ -44,65 +44,65 @@ namespace CDPL
     namespace Base
     {
 
-		class DataIOBase;
+        class DataIOBase;
     }
 
     namespace Chem
     {
 
-		class MOL2DataReader
-		{
+        class MOL2DataReader
+        {
 
-		public:
-			MOL2DataReader(const Base::DataIOBase& io_base): 
-				ioBase(io_base), lineTokenizer(dataLine, boost::char_separator<char>(" \t")) {}
+        public:
+            MOL2DataReader(const Base::DataIOBase& io_base): 
+                ioBase(io_base), lineTokenizer(dataLine, boost::char_separator<char>(" \t")) {}
 
-			bool hasMoreData(std::istream& is);
-			bool readMolecule(std::istream& is, Molecule& mol);
-			bool skipMolecule(std::istream& is);
+            bool hasMoreData(std::istream& is);
+            bool readMolecule(std::istream& is, Molecule& mol);
+            bool skipMolecule(std::istream& is);
 
-		private:
-			void init(std::istream& is);
+        private:
+            void init(std::istream& is);
 
-			void doReadMolecule(std::istream& is, Molecule& mol);
-			void readMoleculeRecord(std::istream& is, Molecule& mol);
-			void readAtomSection(std::istream& is, Molecule& mol);
-			void readBondSection(std::istream& is, Molecule& mol);
-			void readSubstructSection(std::istream& is, Molecule& mol);
+            void doReadMolecule(std::istream& is, Molecule& mol);
+            void readMoleculeRecord(std::istream& is, Molecule& mol);
+            void readAtomSection(std::istream& is, Molecule& mol);
+            void readBondSection(std::istream& is, Molecule& mol);
+            void readSubstructSection(std::istream& is, Molecule& mol);
 
-			bool addConformer(std::istream& is, MolecularGraph& molgraph);
-			bool readNextConformer(std::istream& is, const MolecularGraph& molgraph, bool save_coords);
+            bool addConformer(std::istream& is, MolecularGraph& molgraph);
+            bool readNextConformer(std::istream& is, const MolecularGraph& molgraph, bool save_coords);
 
-			void extractStereoAtoms(MolecularGraph& molgraph);
+            void extractStereoAtoms(MolecularGraph& molgraph);
 
-			bool readInputLine(std::istream& is);
-			bool readDataLine(std::istream& is);
+            bool readInputLine(std::istream& is);
+            bool readDataLine(std::istream& is);
 
-			bool skipInputToRTI(std::istream& is, const std::string& rti, bool skip_rti);
+            bool skipInputToRTI(std::istream& is, const std::string& rti, bool skip_rti);
 
-			typedef std::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
-			typedef std::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
+            typedef std::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
+            typedef std::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
             typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
-			typedef std::vector<const Atom*> StereoAtomList;
+            typedef std::vector<const Atom*> StereoAtomList;
 
-			const Base::DataIOBase& ioBase;
-			bool                    strictErrorChecking;
-			bool                    multiConfImport;
-			bool                    calcFormalCharges;
-			std::size_t             molAtomCount;
-			std::size_t             molBondCount;
-			std::size_t             molSubstructCount;
-			std::string             inputLine;
-			std::string             dataLine;
-			Tokenizer               lineTokenizer;
-			AtomIDToIndexMap        atomIDsToIndex;
-			SubstructIDToAtomMap    substructIDsToAtoms;
-			Fragment::SharedPointer confTargetFragment;
-			Molecule::SharedPointer confTargetMolecule;
-			Molecule::SharedPointer confTestMolecule;
-			Math::Vector3DArray     confCoords;
-			StereoAtomList          stereoAtoms;
-		};
+            const Base::DataIOBase& ioBase;
+            bool                    strictErrorChecking;
+            bool                    multiConfImport;
+            bool                    calcFormalCharges;
+            std::size_t             molAtomCount;
+            std::size_t             molBondCount;
+            std::size_t             molSubstructCount;
+            std::string             inputLine;
+            std::string             dataLine;
+            Tokenizer               lineTokenizer;
+            AtomIDToIndexMap        atomIDsToIndex;
+            SubstructIDToAtomMap    substructIDsToAtoms;
+            Fragment::SharedPointer confTargetFragment;
+            Molecule::SharedPointer confTargetMolecule;
+            Molecule::SharedPointer confTestMolecule;
+            Math::Vector3DArray     confCoords;
+            StereoAtomList          stereoAtoms;
+        };
     }
 }
 

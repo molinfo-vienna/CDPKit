@@ -39,141 +39,141 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Feature;
-		class FeatureContainer;
-	}
+        class Feature;
+        class FeatureContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief PharmacophoreRDFDescriptorCalculator.
-		 * \see [\ref CITB, \ref HBMD]
-		 */
-		class CDPL_DESCR_API PharmacophoreRDFDescriptorCalculator
-		{
+        /**
+         * \brief PharmacophoreRDFDescriptorCalculator.
+         * \see [\ref CITB, \ref HBMD]
+         */
+        class CDPL_DESCR_API PharmacophoreRDFDescriptorCalculator
+        {
 
-			typedef RDFCodeCalculator<Pharm::Feature> RDFCodeCalc;
+            typedef RDFCodeCalculator<Pharm::Feature> RDFCodeCalc;
 
-		public:
-			typedef RDFCodeCalc::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
-			typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
-				
-			/**
-			 * \brief Constructs the \c %PharmacophoreRDFDescriptorCalculator instance.
-			 */
-			PharmacophoreRDFDescriptorCalculator();
-			
-			PharmacophoreRDFDescriptorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
+        public:
+            typedef RDFCodeCalc::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
+            typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
+                
+            /**
+             * \brief Constructs the \c %PharmacophoreRDFDescriptorCalculator instance.
+             */
+            PharmacophoreRDFDescriptorCalculator();
+            
+            PharmacophoreRDFDescriptorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
-			/**
-			 * \brief Allows to specify the smoothing factor used in the calculation of
-			 *        feature pair \e RDF contributions.
-			 * \param factor The smoothing factor.
-			 * \note The default value of the smoothing factor is <em>1.0</em>.
-			 */
-			void setSmoothingFactor(double factor);
+            /**
+             * \brief Allows to specify the smoothing factor used in the calculation of
+             *        feature pair \e RDF contributions.
+             * \param factor The smoothing factor.
+             * \note The default value of the smoothing factor is <em>1.0</em>.
+             */
+            void setSmoothingFactor(double factor);
 
-			/**
-			 * \brief Returns the smoothing factor used in the calculation of
-			 *        feature pair \e RDF contributions.
-			 * \return The applied smoothing factor.
-			 */
-			double getSmoothingFactor() const;
+            /**
+             * \brief Returns the smoothing factor used in the calculation of
+             *        feature pair \e RDF contributions.
+             * \return The applied smoothing factor.
+             */
+            double getSmoothingFactor() const;
 
-			/**
-			 * \brief Allows to specify the scaling factor for the \e RDF code elements.
-			 * \param factor The scaling factor.
-			 * \note The default scaling factor is <em>100.0</em>.
-			 */
-			void setScalingFactor(double factor);
+            /**
+             * \brief Allows to specify the scaling factor for the \e RDF code elements.
+             * \param factor The scaling factor.
+             * \note The default scaling factor is <em>100.0</em>.
+             */
+            void setScalingFactor(double factor);
 
-			/**
-			 * \brief Returns the scaling factor applied to the \e RDF code elements.
-			 * \return The applied scaling factor.
-			 */
-			double getScalingFactor() const;
+            /**
+             * \brief Returns the scaling factor applied to the \e RDF code elements.
+             * \return The applied scaling factor.
+             */
+            double getScalingFactor() const;
 
-			/**
-			 * \brief Sets the starting value of the radius.
-			 * \param start_radius The starting value of the radius.
-			 * \note The default starting radius is <em>0.0</em>&Aring;.
-			 */
-			void setStartRadius(double start_radius);
+            /**
+             * \brief Sets the starting value of the radius.
+             * \param start_radius The starting value of the radius.
+             * \note The default starting radius is <em>0.0</em>&Aring;.
+             */
+            void setStartRadius(double start_radius);
 
-			/**
-			 * \brief Returns the starting value of the radius.
-			 * \return The current radius starting value.
-			 */
-			double getStartRadius() const;
+            /**
+             * \brief Returns the starting value of the radius.
+             * \return The current radius starting value.
+             */
+            double getStartRadius() const;
 
-			/**
-			 * \brief Sets the radius step size between successive \e RDF code elements.
-			 * \param radius_inc The radius step size.
-			 * \note The default radius step size is <em>0.1</em>&Aring;.
-			 */
-			void setRadiusIncrement(double radius_inc);
+            /**
+             * \brief Sets the radius step size between successive \e RDF code elements.
+             * \param radius_inc The radius step size.
+             * \note The default radius step size is <em>0.1</em>&Aring;.
+             */
+            void setRadiusIncrement(double radius_inc);
 
-			/**
-			 * \brief Returns the radius step size between successive \e RDF code elements.
-			 * \return The applied radius step size.
-			 */
-			double getRadiusIncrement() const;
+            /**
+             * \brief Returns the radius step size between successive \e RDF code elements.
+             * \return The applied radius step size.
+             */
+            double getRadiusIncrement() const;
 
-			/**
-			 * \brief Sets the number of desired radius incrementation steps.
-			 *
-			 * The number of performed radius incrementation steps defines the size of the calculated \e RDF code vector
-			 * which is equal to the number of steps plus \e 1.
-			 *
-			 * \param num_steps The number of radius incrementation steps.
-			 * \note The default number of steps is \e 99.
-			 */
-			void setNumSteps(std::size_t num_steps);
+            /**
+             * \brief Sets the number of desired radius incrementation steps.
+             *
+             * The number of performed radius incrementation steps defines the size of the calculated \e RDF code vector
+             * which is equal to the number of steps plus \e 1.
+             *
+             * \param num_steps The number of radius incrementation steps.
+             * \note The default number of steps is \e 99.
+             */
+            void setNumSteps(std::size_t num_steps);
 
-			/**
-			 * \brief Returns the number of performed radius incrementation steps.
-			 * \return The number of performed radius incrementation steps.
-			 */
-			std::size_t getNumSteps() const;
+            /**
+             * \brief Returns the number of performed radius incrementation steps.
+             * \return The number of performed radius incrementation steps.
+             */
+            std::size_t getNumSteps() const;
 
-			/**
-			 * \brief Allows to specify the feature coordinates function.
-			 * \param func A Feature3DCoordinatesFunction instance that wraps the target function.
-			 * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
-			 *       for each feature pair will be used for the calculation.
-			 */
-			void setFeature3DCoordinatesFunction(const Feature3DCoordinatesFunction& func);
+            /**
+             * \brief Allows to specify the feature coordinates function.
+             * \param func A Feature3DCoordinatesFunction instance that wraps the target function.
+             * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
+             *       for each feature pair will be used for the calculation.
+             */
+            void setFeature3DCoordinatesFunction(const Feature3DCoordinatesFunction& func);
 
-			/**
-			 * \brief Allows to specify a custom feature pair weight function.
-			 * \param func A FeaturePairWeightFunction instance that wraps the target function.
-			 */
-			void setFeaturePairWeightFunction(const FeaturePairWeightFunction& func);
+            /**
+             * \brief Allows to specify a custom feature pair weight function.
+             * \param func A FeaturePairWeightFunction instance that wraps the target function.
+             */
+            void setFeaturePairWeightFunction(const FeaturePairWeightFunction& func);
 
-			/**
-			 * \brief Allows to specify whether feature pair distances should be rounded to the nearest radius interval center.
-			 * \param enable \c true if pair distances should be rounded, and \c false otherwise.
-			 * \note The default setting is not to round the feature pair distances.
-			 */
-			void enableDistanceToIntervalCenterRounding(bool enable);
+            /**
+             * \brief Allows to specify whether feature pair distances should be rounded to the nearest radius interval center.
+             * \param enable \c true if pair distances should be rounded, and \c false otherwise.
+             * \note The default setting is not to round the feature pair distances.
+             */
+            void enableDistanceToIntervalCenterRounding(bool enable);
 
-			/**
-			 * \brief Tells whether feature pair distances get rounded to the nearest radius interval centers.
-			 * \return \c true if pair distances get rounded, and \c false otherwise.
-			 */
-			bool distanceToIntervalsCenterRoundingEnabled() const;
+            /**
+             * \brief Tells whether feature pair distances get rounded to the nearest radius interval centers.
+             * \return \c true if pair distances get rounded, and \c false otherwise.
+             */
+            bool distanceToIntervalsCenterRoundingEnabled() const;
 
-			void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
+            void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
-		  private:
-			RDFCodeCalc               rdfCalculator;
-			FeaturePairWeightFunction weightFunc;
-		}; 
-	}
+          private:
+            RDFCodeCalc               rdfCalculator;
+            FeaturePairWeightFunction weightFunc;
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_PHARMACOPHORERDFDESCRIPTORCALCULATOR_HPP

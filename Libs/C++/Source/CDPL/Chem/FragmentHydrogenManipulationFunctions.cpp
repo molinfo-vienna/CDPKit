@@ -37,44 +37,44 @@ using namespace CDPL;
 
 bool Chem::makeHydrogenDeplete(Fragment& frag)
 {
- 	std::size_t num_atoms = frag.getNumAtoms();
-	bool changes = false;
+     std::size_t num_atoms = frag.getNumAtoms();
+    bool changes = false;
 
-	for (std::size_t i = 0; i < num_atoms; ) {
-		const Atom& atom = frag.getAtom(i);
+    for (std::size_t i = 0; i < num_atoms; ) {
+        const Atom& atom = frag.getAtom(i);
 
-		if (getType(atom) != AtomType::H) {
-			i++;
-			continue;
-		}
+        if (getType(atom) != AtomType::H) {
+            i++;
+            continue;
+        }
 
-		frag.removeAtom(i);
+        frag.removeAtom(i);
 
-		num_atoms--;
-		changes = true;
-	}
+        num_atoms--;
+        changes = true;
+    }
 
-	return changes;
+    return changes;
 }
 
 bool Chem::makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags)
 {
- 	std::size_t num_atoms = frag.getNumAtoms();
-	bool changes = false;
+     std::size_t num_atoms = frag.getNumAtoms();
+    bool changes = false;
 
-	for (std::size_t i = 0; i < num_atoms; ) {
-		const Atom& atom = frag.getAtom(i);
+    for (std::size_t i = 0; i < num_atoms; ) {
+        const Atom& atom = frag.getAtom(i);
 
-		if (!Internal::isOrdinaryHydrogen(atom, frag, flags)) {
-			i++;
-			continue;
-		}
+        if (!Internal::isOrdinaryHydrogen(atom, frag, flags)) {
+            i++;
+            continue;
+        }
 
-		frag.removeAtom(i);
+        frag.removeAtom(i);
 
-		num_atoms--;
-		changes = true;
-	}
+        num_atoms--;
+        changes = true;
+    }
 
-	return changes;
+    return changes;
 }

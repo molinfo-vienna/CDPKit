@@ -34,26 +34,26 @@ class QLabel;
 namespace ChOX
 {
 
-	class DataSet;
+    class DataSet;
 
-	class PrintProgressDialog : public QDialog
-	{
+    class PrintProgressDialog : public QDialog
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		PrintProgressDialog(QWidget*, const DataSet&, int);
+    public:
+        PrintProgressDialog(QWidget*, const DataSet&, int);
 
-		void setProgress(int);
+        void setProgress(int);
 
-		bool aborted() const;
+        bool aborted() const;
 
-	private:
-		void init(const DataSet&);
+    private:
+        void init(const DataSet&);
 
-		int     numPages;
-		QLabel* progressLabel;
-	};
+        int     numPages;
+        QLabel* progressLabel;
+    };
 }
 
 #endif // CHOX_PRINTPROGRESSDIALOG_HPP

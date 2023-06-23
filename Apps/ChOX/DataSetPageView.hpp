@@ -42,101 +42,101 @@ class QMenu;
 namespace ChOX
 {
 
-	class DataSet;
-	class Settings;
+    class DataSet;
+    class Settings;
 
-	class DataSetPageView : public QWidget
-	{
+    class DataSetPageView : public QWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		DataSetPageView(QWidget*, Settings&, DataSet&);
+    public:
+        DataSetPageView(QWidget*, Settings&, DataSet&);
 
-		~DataSetPageView();
+        ~DataSetPageView();
 
-		int getNumRows() const;
-		int getNumColumns() const;
-		int getPageOffset() const;
+        int getNumRows() const;
+        int getNumColumns() const;
+        int getPageOffset() const;
 
-		DataSet& getDataSet() const;
+        DataSet& getDataSet() const;
 
-		void setContextMenu(QMenu*);
+        void setContextMenu(QMenu*);
 
-	signals:
-		void numRowsChanged(int);
-		void numColumnsChanged(int);
-		void pageOffsetChanged(int);
+    signals:
+        void numRowsChanged(int);
+        void numColumnsChanged(int);
+        void pageOffsetChanged(int);
 
-		void gridVisibilityChanged(bool);
-		void recordNoVisibilityChanged(bool);
-		void recordNameVisibilityChanged(bool);
+        void gridVisibilityChanged(bool);
+        void recordNoVisibilityChanged(bool);
+        void recordNameVisibilityChanged(bool);
 
-	public slots:
-		void addRow();
-		void deleteRow();
+    public slots:
+        void addRow();
+        void deleteRow();
 
-		void addColumn();
-		void deleteColumn();
+        void addColumn();
+        void deleteColumn();
 
-		void toNextPage();
-		void toPrevPage();
+        void toNextPage();
+        void toPrevPage();
 
-		void toNextRow();
-		void toPrevRow();
+        void toNextRow();
+        void toPrevRow();
 
-		void toFirstRecord();
-		void toLastRecord();
+        void toFirstRecord();
+        void toLastRecord();
 
-		void setNumRows(int);
-		void setNumColumns(int);
-		void setPageOffset(int);
+        void setNumRows(int);
+        void setNumColumns(int);
+        void setPageOffset(int);
 
-		void showGrid(bool);
-		void showRecordNumbers(bool);
-		void showRecordNames(bool);
+        void showGrid(bool);
+        void showRecordNumbers(bool);
+        void showRecordNames(bool);
 
-	private slots:
-		void handleDataSetSizeChange(int);
-		void handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
-		void handleSelectionStatusChange(bool);
+    private slots:
+        void handleDataSetSizeChange(int);
+        void handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
+        void handleSelectionStatusChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		void paintEvent(QPaintEvent*);
+        void paintEvent(QPaintEvent*);
 
-		void mousePressEvent(QMouseEvent*); 
-		void mouseReleaseEvent(QMouseEvent*); 
-		void mouseDoubleClickEvent(QMouseEvent*); 
-		void mouseMoveEvent(QMouseEvent*); 
+        void mousePressEvent(QMouseEvent*); 
+        void mouseReleaseEvent(QMouseEvent*); 
+        void mouseDoubleClickEvent(QMouseEvent*); 
+        void mouseMoveEvent(QMouseEvent*); 
 
-		void contextMenuEvent(QContextMenuEvent*);
+        void contextMenuEvent(QContextMenuEvent*);
 
-		void updateDataRecordPainters(int);
+        void updateDataRecordPainters(int);
 
-		int getRecordIndexAt(const QPoint&) const;
+        int getRecordIndexAt(const QPoint&) const;
 
-		typedef std::vector<DataRecordPainter::SharedPointer> DataRecordPainterList;
+        typedef std::vector<DataRecordPainter::SharedPointer> DataRecordPainterList;
 
-		QMenu*                   contextMenu;
-		QPainter                 painter;
-		QPoint                   selectionStartPos;
-		bool                     xorSelection;
-		int                      selectionStartIdx;
-		int                      selectionEndIdx;
-		int                      numRows;
-		int                      numColumns;
-		int                      pageOffset;
-		bool                     gridVisible;
-		bool                     recordNosVisible;
-		bool                     recordNamesVisible;
-		DataSet&                 dataSet;
-		Settings&                settings;
-		DataRecordPainterList    dataRecordPainters;
-		DataRecordPainterList    tmpDataRecordPainters;
-		CDPL::Vis::QtFontMetrics fontMetrics;
-	};
+        QMenu*                   contextMenu;
+        QPainter                 painter;
+        QPoint                   selectionStartPos;
+        bool                     xorSelection;
+        int                      selectionStartIdx;
+        int                      selectionEndIdx;
+        int                      numRows;
+        int                      numColumns;
+        int                      pageOffset;
+        bool                     gridVisible;
+        bool                     recordNosVisible;
+        bool                     recordNamesVisible;
+        DataSet&                 dataSet;
+        Settings&                settings;
+        DataRecordPainterList    dataRecordPainters;
+        DataRecordPainterList    tmpDataRecordPainters;
+        CDPL::Vis::QtFontMetrics fontMetrics;
+    };
 }
 
 #endif // CHOX_DATASETPAGEVIEW_HPP

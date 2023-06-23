@@ -40,25 +40,25 @@ namespace CDPL
     namespace Vis
     {
 
-		/**
-		 * \brief Provides default values for built-in Vis::Bond properties.
-		 */
-		namespace BondPropertyDefault
-		{
-		
-			extern CDPL_VIS_API const Color COLOR;
-			extern CDPL_VIS_API const SizeSpecification LINE_WIDTH;
-			extern CDPL_VIS_API const SizeSpecification LINE_SPACING;
-			extern CDPL_VIS_API const SizeSpecification STEREO_BOND_WEDGE_WIDTH;
-			extern CDPL_VIS_API const SizeSpecification STEREO_BOND_HASH_SPACING;
-			extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_LENGTH;
-			extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_SPACING;
-			extern CDPL_VIS_API const SizeSpecification DOUBLE_BOND_TRIM_LENGTH;
-			extern CDPL_VIS_API const SizeSpecification TRIPLE_BOND_TRIM_LENGTH;
-			extern CDPL_VIS_API const Font LABEL_FONT;
-			extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
-			extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
-		}
+        /**
+         * \brief Provides default values for built-in Vis::Bond properties.
+         */
+        namespace BondPropertyDefault
+        {
+        
+            extern CDPL_VIS_API const Color COLOR;
+            extern CDPL_VIS_API const SizeSpecification LINE_WIDTH;
+            extern CDPL_VIS_API const SizeSpecification LINE_SPACING;
+            extern CDPL_VIS_API const SizeSpecification STEREO_BOND_WEDGE_WIDTH;
+            extern CDPL_VIS_API const SizeSpecification STEREO_BOND_HASH_SPACING;
+            extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_LENGTH;
+            extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_SPACING;
+            extern CDPL_VIS_API const SizeSpecification DOUBLE_BOND_TRIM_LENGTH;
+            extern CDPL_VIS_API const SizeSpecification TRIPLE_BOND_TRIM_LENGTH;
+            extern CDPL_VIS_API const Font LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
+            extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
+        }
     }
 }
 

@@ -44,5 +44,5 @@ void CDPLPythonGRAIL::exportFeatureFunctions()
     using namespace CDPL;
     
     python::def("perceiveExtendedType", &perceiveExtendedTypeWrapper2,
-		(python::arg("feature"), python::arg("ligand")));
+        (python::arg("feature"), python::arg("ligand")));
 }

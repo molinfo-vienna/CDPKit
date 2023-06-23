@@ -38,65 +38,65 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class SMILESDataReader;
-		class Reaction;
+        class SMILESDataReader;
+        class Reaction;
 
-		/**
-		 * \brief A reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
-		 *
-		 * \c %SMILESReactionReader supports the following control-parameters:
-		 *
-		 * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
-		 *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
-		 *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
-		 *   <td align="center">\c false</td>
-		 *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
-		 *  </tr>
-		 *  <tr>
-		 *   <td>Chem::ControlParameter::SMILES_RECORD_FORMAT</td>
-		 *   <td align="center">\c "S"</td>
-		 *   <td>Specifies the data record format</td>
-		 *  </tr>
-		 * </table>
-		 */
-		class CDPL_CHEM_API SMILESReactionReader : public Util::StreamDataReader<Reaction, SMILESReactionReader>
-		{
+        /**
+         * \brief A reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+         *
+         * \c %SMILESReactionReader supports the following control-parameters:
+         *
+         * <table bgcolor="#FAFAFA" border="1" align="center" rules="all" cellpadding="3">
+         *  <tr bgcolor="#DDDDDD" align="center" valign="middle">
+         *   <th>Control-Parameter</th> <th>Default Value (see Chem::ControlParameterDefault)</th> <th>Description</th>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::STRICT_ERROR_CHECKING</td>
+         *   <td align="center">\c false</td>
+         *   <td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td>
+         *  </tr>
+         *  <tr>
+         *   <td>Chem::ControlParameter::SMILES_RECORD_FORMAT</td>
+         *   <td align="center">\c "S"</td>
+         *   <td>Specifies the data record format</td>
+         *  </tr>
+         * </table>
+         */
+        class CDPL_CHEM_API SMILESReactionReader : public Util::StreamDataReader<Reaction, SMILESReactionReader>
+        {
 
-		public:
-			/**
-			 * \brief Constructs a \c %SMILESReactionReader instance that will read the reaction data from the input
-			 *        stream \a is.
-			 * \param is The input stream to read from.
-			 */
-			SMILESReactionReader(std::istream& is);
+        public:
+            /**
+             * \brief Constructs a \c %SMILESReactionReader instance that will read the reaction data from the input
+             *        stream \a is.
+             * \param is The input stream to read from.
+             */
+            SMILESReactionReader(std::istream& is);
 
-			/**
-			 * \brief Destructor.
-			 */
-			~SMILESReactionReader();
+            /**
+             * \brief Destructor.
+             */
+            ~SMILESReactionReader();
 
-		private:
-			friend class Util::StreamDataReader<Reaction, SMILESReactionReader>;
+        private:
+            friend class Util::StreamDataReader<Reaction, SMILESReactionReader>;
 
-			SMILESReactionReader(const SMILESReactionReader&);
+            SMILESReactionReader(const SMILESReactionReader&);
 
-			SMILESReactionReader& operator=(const SMILESReactionReader&);
+            SMILESReactionReader& operator=(const SMILESReactionReader&);
 
-			bool readData(std::istream&, Reaction&, bool overwrite);
-			bool skipData(std::istream&);
-			bool moreData(std::istream&);
+            bool readData(std::istream&, Reaction&, bool overwrite);
+            bool skipData(std::istream&);
+            bool moreData(std::istream&);
 
-			typedef std::auto_ptr<SMILESDataReader> SMILESDataReaderPtr;
+            typedef std::auto_ptr<SMILESDataReader> SMILESDataReaderPtr;
 
-			SMILESDataReaderPtr reader;
-		};
-	}
+            SMILESDataReaderPtr reader;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_SMILESREACTIONREADER_HPP

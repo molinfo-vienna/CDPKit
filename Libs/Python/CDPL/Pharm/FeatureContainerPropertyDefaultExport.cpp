@@ -32,15 +32,15 @@
 namespace 
 {
 
-	struct FeatureContainerPropertyDefault {};
+    struct FeatureContainerPropertyDefault {};
 }
 
 
 void CDPLPythonPharm::exportFeatureContainerPropertyDefaults()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<FeatureContainerPropertyDefault, boost::noncopyable>("FeatureContainerPropertyDefault", python::no_init)
-		.def_readonly("NAME", &Pharm::FeatureContainerPropertyDefault::NAME);
+    python::class_<FeatureContainerPropertyDefault, boost::noncopyable>("FeatureContainerPropertyDefault", python::no_init)
+        .def_readonly("NAME", &Pharm::FeatureContainerPropertyDefault::NAME);
 }

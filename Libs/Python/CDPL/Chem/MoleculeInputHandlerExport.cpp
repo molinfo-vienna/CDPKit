@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportMoleculeInputHandler()
 {
-	CDPLPythonBase::DataInputHandlerExport<CDPL::Chem::Molecule>("MoleculeInputHandler");
+    CDPLPythonBase::DataInputHandlerExport<CDPL::Chem::Molecule>("MoleculeInputHandler");
 }

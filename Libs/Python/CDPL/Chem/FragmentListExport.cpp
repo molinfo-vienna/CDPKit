@@ -33,16 +33,16 @@
 
 void CDPLPythonChem::exportFragmentList()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::FragmentList, Chem::FragmentList::SharedPointer>("FragmentList", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::FragmentList&>((python::arg("self"), python::arg("list")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonUtil::ArrayVisitor<Chem::FragmentList, 
-			 python::return_value_policy<python::copy_non_const_reference, python::with_custodian_and_ward_postcall<0, 1> >, 
-			 python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >())
-		.def("__eq__", &Chem::FragmentList::operator==, (python::arg("self"), python::arg("list")))
-		.def("__ne__", &Chem::FragmentList::operator!=, (python::arg("self"), python::arg("list")));
+    python::class_<Chem::FragmentList, Chem::FragmentList::SharedPointer>("FragmentList", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::FragmentList&>((python::arg("self"), python::arg("list")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonUtil::ArrayVisitor<Chem::FragmentList, 
+             python::return_value_policy<python::copy_non_const_reference, python::with_custodian_and_ward_postcall<0, 1> >, 
+             python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >())
+        .def("__eq__", &Chem::FragmentList::operator==, (python::arg("self"), python::arg("list")))
+        .def("__ne__", &Chem::FragmentList::operator!=, (python::arg("self"), python::arg("list")));
 }

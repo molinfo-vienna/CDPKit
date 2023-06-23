@@ -35,17 +35,17 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 
-	namespace ConfGen 
-	{
+    namespace ConfGen 
+    {
 
-		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
-	}
+        CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
+    }
 }
 
 #endif // CDPL_CONFGEN_MOLECULEFUNCTIONS_HPP

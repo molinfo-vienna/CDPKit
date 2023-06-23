@@ -35,28 +35,28 @@
 namespace CDPL
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class LookupKey;
-	}
+        class LookupKey;
+    }
 
-	namespace ForceField
-	{
+    namespace ForceField
+    {
 
-		/**
-		 * \brief Provides keys for built-in Chem::Atom properties.
-		 */
-		namespace AtomProperty
-		{
+        /**
+         * \brief Provides keys for built-in Chem::Atom properties.
+         */
+        namespace AtomProperty
+        {
 
-			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_SYMBOLIC_TYPE;
-			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_NUMERIC_TYPE;
-			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
+            extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_SYMBOLIC_TYPE;
+            extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_NUMERIC_TYPE;
+            extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
 
-			extern CDPL_FORCEFIELD_API const Base::LookupKey UFF_TYPE;
-		}
-	}
+            extern CDPL_FORCEFIELD_API const Base::LookupKey UFF_TYPE;
+        }
+    }
 }
 
 #endif // CDPL_FORCEFIELD_ATOMPROPERTY_HPP

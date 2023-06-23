@@ -39,10 +39,10 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined callback functions.
-		 */
-		typedef std::function<void(const std::string&)> LogMessageCallbackFunction;
+        /**
+         * \brief A generic wrapper class used to store a user-defined callback functions.
+         */
+        typedef std::function<void(const std::string&)> LogMessageCallbackFunction;
     }
 }
 

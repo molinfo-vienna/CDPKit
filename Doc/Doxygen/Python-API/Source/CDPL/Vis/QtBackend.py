@@ -27,68 +27,68 @@
 #
 class QtObjectFactory:
 
-	def createQFont(font):
+    def createQFont(font):
 
-	def createQColor(color):
+    def createQColor(color):
 
-	def createQPen(pen):
+    def createQPen(pen):
 
-	def createQBrush(brush):
+    def createQBrush(brush):
 
 ##
 # \brief class QtFontMetrics.
 #
 class QtFontMetrics(CDPL.Vis.FontMetrics):
 
-	def __init__(self, paint_dev = None):
+    def __init__(self, paint_dev = None):
 
-	def setFont(self, font):
-			
-	def getAscent(self):
-	
-	def getDescent(self):
-	
-	def getHeight(self):
-	
-	def getLeading(self):
-	
-	def getWidth(self, string):
+    def setFont(self, font):
+            
+    def getAscent(self):
+    
+    def getDescent(self):
+    
+    def getHeight(self):
+    
+    def getLeading(self):
+    
+    def getWidth(self, string):
 
-	def getBounds(self, string, bounds):
+    def getBounds(self, string, bounds):
 
 ##
 # \brief class QtRenderer2D.
-#	
+#    
 class QtRenderer2D(CDPL.Vis.Renderer2D):
 
-	def __init__(self, painter):
+    def __init__(self, painter):
 
-	def saveState(self):
-	
-	def restoreState(self):
-	
-	def setTransform(self, xform):
-	
-	def transform(self, xform):
+    def saveState(self):
+    
+    def restoreState(self):
+    
+    def setTransform(self, xform):
+    
+    def transform(self, xform):
 
-	def setPen(self, pen):
-	
-	def setBrush(self, brush):
-	
-	def setFont(self, font):
-	
-	def drawRectangle(self, x, y, width, height):
-	
-	def drawPolygon(self, points):
-			
-	def drawLine(self, x1, y1, x2, y2):
-	
-	def drawPolyline(self, points):
-	
-	def drawLineSegments(self, points):
-	
-	def drawPoint(self, x, y):
+    def setPen(self, pen):
+    
+    def setBrush(self, brush):
+    
+    def setFont(self, font):
+    
+    def drawRectangle(self, x, y, width, height):
+    
+    def drawPolygon(self, points):
+            
+    def drawLine(self, x1, y1, x2, y2):
+    
+    def drawPolyline(self, points):
+    
+    def drawLineSegments(self, points):
+    
+    def drawPoint(self, x, y):
         
-	def drawEllipse(self, x, y, width, height):
+    def drawEllipse(self, x, y, width, height):
 
-	def drawText(self, x, y, txt):
+    def drawText(self, x, y, txt):

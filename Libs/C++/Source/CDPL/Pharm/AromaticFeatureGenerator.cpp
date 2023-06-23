@@ -47,16 +47,16 @@ constexpr unsigned int Pharm::AromaticFeatureGenerator::DEF_FEATURE_GEOM;
 
 
 Pharm::AromaticFeatureGenerator::AromaticFeatureGenerator(): 
-	featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), featureTol(DEF_FEATURE_TOL) 
+    featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), featureTol(DEF_FEATURE_TOL) 
 {}
 
 Pharm::AromaticFeatureGenerator::AromaticFeatureGenerator(const AromaticFeatureGenerator& gen):
-	PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureGeom(gen.featureGeom),
-	featureTol(gen.featureTol)
+    PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureGeom(gen.featureGeom),
+    featureTol(gen.featureTol)
 {}
 
 Pharm::AromaticFeatureGenerator::AromaticFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm):
-	featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), featureTol(DEF_FEATURE_TOL) 
+    featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), featureTol(DEF_FEATURE_TOL) 
 {
     generate(molgraph, pharm);
 }
@@ -65,91 +65,91 @@ Pharm::AromaticFeatureGenerator::~AromaticFeatureGenerator() {}
 
 void Pharm::AromaticFeatureGenerator::setFeatureType(unsigned int type)
 {
-	featureType = type;
+    featureType = type;
 }
 
 unsigned int Pharm::AromaticFeatureGenerator::getFeatureType() const
 {
-	return featureType;
+    return featureType;
 }
 
 void Pharm::AromaticFeatureGenerator::setFeatureGeometry(unsigned int geom)
 {
-	featureGeom = geom;
+    featureGeom = geom;
 }
 
 unsigned int Pharm::AromaticFeatureGenerator::getFeatureGeometry() const
 {
-	return featureGeom;
+    return featureGeom;
 }
 
 void Pharm::AromaticFeatureGenerator::setFeatureTolerance(double tol)
 {
-	featureTol = tol;
+    featureTol = tol;
 }
 
 double Pharm::AromaticFeatureGenerator::getFeatureTolerance() const
 {
-	return featureTol;
+    return featureTol;
 }
 
 Pharm::AromaticFeatureGenerator& Pharm::AromaticFeatureGenerator::operator=(const AromaticFeatureGenerator& gen)
 {
-	if (this == &gen)
-		return *this;
+    if (this == &gen)
+        return *this;
 
-	PatternBasedFeatureGenerator::operator=(gen);
-	featureType = gen.featureType;
-	featureGeom = gen.featureGeom;
-	featureTol = gen.featureTol; 
+    PatternBasedFeatureGenerator::operator=(gen);
+    featureType = gen.featureType;
+    featureGeom = gen.featureGeom;
+    featureTol = gen.featureTol; 
 
-	return *this;
+    return *this;
 }
 
 Pharm::FeatureGenerator::SharedPointer Pharm::AromaticFeatureGenerator::clone() const
 {
-	return FeatureGenerator::SharedPointer(new AromaticFeatureGenerator(*this));
+    return FeatureGenerator::SharedPointer(new AromaticFeatureGenerator(*this));
 }
 
 void Pharm::AromaticFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	aromSSSRSubset.extract(molgraph);
-	ringAtomMask.resize(molgraph.getNumAtoms());
+    aromSSSRSubset.extract(molgraph);
+    ringAtomMask.resize(molgraph.getNumAtoms());
 
-	const FragmentList::BaseType& sssr_subset = aromSSSRSubset;
+    const FragmentList::BaseType& sssr_subset = aromSSSRSubset;
 
-	for (FragmentList::BaseType::ConstElementIterator it = sssr_subset.getElementsBegin(), end = sssr_subset.getElementsEnd(); it != end; ++it) {
-		const Fragment& ring = **it;
+    for (FragmentList::BaseType::ConstElementIterator it = sssr_subset.getElementsBegin(), end = sssr_subset.getElementsEnd(); it != end; ++it) {
+        const Fragment& ring = **it;
 
-		ringAtomMask.reset();
+        ringAtomMask.reset();
 
-		std::for_each(ring.getAtomsBegin(), ring.getAtomsEnd(),
-					  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>
-								(&Util::BitSet::set), std::ref(ringAtomMask), 
-								std::bind(&AtomContainer::getAtomIndex, &molgraph, std::placeholders::_1), true));
+        std::for_each(ring.getAtomsBegin(), ring.getAtomsEnd(),
+                      std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>
+                                (&Util::BitSet::set), std::ref(ringAtomMask), 
+                                std::bind(&AtomContainer::getAtomIndex, &molgraph, std::placeholders::_1), true));
 
-		if (isContainedInExMatchList(ringAtomMask) || isContainedInIncMatchList(ringAtomMask))
-			continue;
+        if (isContainedInExMatchList(ringAtomMask) || isContainedInIncMatchList(ringAtomMask))
+            continue;
 
-		featureAtoms.clear();
+        featureAtoms.clear();
 
-		std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
-					   std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
+        std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
+                       std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
 
-		Feature& feature = pharm.addFeature();
+        Feature& feature = pharm.addFeature();
 
-		setType(feature, featureType);
-		setTolerance(feature, featureTol);
-		setGeometry(feature, featureGeom);
-		setSubstructure(feature, *it);
+        setType(feature, featureType);
+        setTolerance(feature, featureTol);
+        setGeometry(feature, featureGeom);
+        setSubstructure(feature, *it);
 
-		Math::Vector3D pos, orient;
+        Math::Vector3D pos, orient;
 
-		if (calcPlaneFeatureOrientation(featureAtoms, orient, pos)) {
-			set3DCoordinates(feature, pos);
-			setOrientation(feature, orient);
-		}
-	} 
+        if (calcPlaneFeatureOrientation(featureAtoms, orient, pos)) {
+            set3DCoordinates(feature, pos);
+            setOrientation(feature, orient);
+        }
+    } 
 }

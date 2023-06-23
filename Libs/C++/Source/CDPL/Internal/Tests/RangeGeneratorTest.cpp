@@ -31,35 +31,35 @@
 
 BOOST_AUTO_TEST_CASE(RangeGeneratorTest)
 {
-	using namespace CDPL;
-	using namespace Internal;
+    using namespace CDPL;
+    using namespace Internal;
 
-	int data[4];
+    int data[4];
 
-	std::generate_n(data, 4, RangeGenerator<int>()); // range_start = 0, inc = 1
+    std::generate_n(data, 4, RangeGenerator<int>()); // range_start = 0, inc = 1
 
-	BOOST_CHECK(data[0] == 0 && data[1] == 1 && data[2] == 2 && data[3] == 3);
+    BOOST_CHECK(data[0] == 0 && data[1] == 1 && data[2] == 2 && data[3] == 3);
 
-	std::generate_n(data, 4, RangeGenerator<int>(3)); // range_start = 3, inc = 1
+    std::generate_n(data, 4, RangeGenerator<int>(3)); // range_start = 3, inc = 1
 
-	BOOST_CHECK(data[0] == 3 && data[1] == 4 && data[2] == 5 && data[3] == 6);
+    BOOST_CHECK(data[0] == 3 && data[1] == 4 && data[2] == 5 && data[3] == 6);
 
-	std::generate_n(data, 4, RangeGenerator<int>(2, 2)); // range_start = 2, inc = 2
+    std::generate_n(data, 4, RangeGenerator<int>(2, 2)); // range_start = 2, inc = 2
 
-	BOOST_CHECK(data[0] == 2 && data[1] == 4 && data[2] == 6 && data[3] == 8);
+    BOOST_CHECK(data[0] == 2 && data[1] == 4 && data[2] == 6 && data[3] == 8);
 
-	RangeGenerator<int> rg1(2, 2);
+    RangeGenerator<int> rg1(2, 2);
 
-	rg1(), rg1(), rg1(), rg1();
+    rg1(), rg1(), rg1(), rg1();
 
-	std::generate_n(data, 4, RangeGenerator<int>(rg1)); // range_start = 8, inc = 2 
+    std::generate_n(data, 4, RangeGenerator<int>(rg1)); // range_start = 8, inc = 2 
 
-	BOOST_CHECK(data[0] == 10 && data[1] == 12 && data[2] == 14 && data[3] == 16);
+    BOOST_CHECK(data[0] == 10 && data[1] == 12 && data[2] == 14 && data[3] == 16);
 
-	RangeGenerator<int> rg2 = rg1;
+    RangeGenerator<int> rg2 = rg1;
 
-	std::generate_n(data, 4, rg2); // range_start = 8, inc = 2 
+    std::generate_n(data, 4, rg2); // range_start = 8, inc = 2 
 
-	BOOST_CHECK(data[0] == 10 && data[1] == 12 && data[2] == 14 && data[3] == 16);
+    BOOST_CHECK(data[0] == 10 && data[1] == 12 && data[2] == 14 && data[3] == 16);
 }
 

@@ -36,11 +36,11 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-	
-		typedef Util::CompressedDataReader<CDFMoleculeReader, Util::BZip2IStream> CDFBZ2MoleculeReader;
-	}
+    namespace Chem
+    {
+    
+        typedef Util::CompressedDataReader<CDFMoleculeReader, Util::BZip2IStream> CDFBZ2MoleculeReader;
+    }
 }
 
 #endif // CDPL_CHEM_CDFBZ2MOLECULEREADER_HPP

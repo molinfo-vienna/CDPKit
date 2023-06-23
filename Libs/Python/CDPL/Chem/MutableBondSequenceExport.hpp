@@ -31,38 +31,38 @@
 namespace
 {
 
-	template <typename T>
-	struct MutableBondSequence : public BondSequence<T>
-	{
+    template <typename T>
+    struct MutableBondSequence : public BondSequence<T>
+    {
 
-		MutableBondSequence(T& cntnr): BondSequence<T>(cntnr) {}
+        MutableBondSequence(T& cntnr): BondSequence<T>(cntnr) {}
 
-		void removeBond(std::size_t idx) {
-			BondSequence<T>::container.removeBond(idx);
-		}
-	};
+        void removeBond(std::size_t idx) {
+            BondSequence<T>::container.removeBond(idx);
+        }
+    };
 
-	template <typename T>
-	MutableBondSequence<T> createMutableBondSequence(T& molgraph)
-	{
-		return MutableBondSequence<T>(molgraph);
-	}
+    template <typename T>
+    MutableBondSequence<T> createMutableBondSequence(T& molgraph)
+    {
+        return MutableBondSequence<T>(molgraph);
+    }
 
-	template <typename T>
-	struct MutableBondSequenceExport
-	{
+    template <typename T>
+    struct MutableBondSequenceExport
+    {
 
-		MutableBondSequenceExport(const char* name) {
-			using namespace boost;
+        MutableBondSequenceExport(const char* name) {
+            using namespace boost;
 
-			python::class_<MutableBondSequence<T> >(name, python::no_init)
-				.def("__len__", &BondSequence<T>::getNumBonds, python::arg("self"))
-				.def("__getitem__", &BondSequence<T>::getBond, (python::arg("self"), python::arg("idx")), 
-					 python::return_internal_reference<1>())
-				.def("__delitem__", &MutableBondSequence<T>::removeBond, (python::arg("self"), python::arg("idx")))
-				.def("__contains__", &BondSequence<T>::containsBond, (python::arg("self"), python::arg("bond")));
-		}
-	};
+            python::class_<MutableBondSequence<T> >(name, python::no_init)
+                .def("__len__", &BondSequence<T>::getNumBonds, python::arg("self"))
+                .def("__getitem__", &BondSequence<T>::getBond, (python::arg("self"), python::arg("idx")), 
+                     python::return_internal_reference<1>())
+                .def("__delitem__", &MutableBondSequence<T>::removeBond, (python::arg("self"), python::arg("idx")))
+                .def("__contains__", &BondSequence<T>::containsBond, (python::arg("self"), python::arg("bond")));
+        }
+    };
 }
 
 #endif // CDPL_PYTHON_CHEM_MUTABLEBONDSEQUENCEEXPORT_HPP

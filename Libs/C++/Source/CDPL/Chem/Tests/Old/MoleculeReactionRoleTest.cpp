@@ -32,110 +32,110 @@
 
 BOOST_AUTO_TEST_CASE(MoleculeReactionRoleTest)
 {
-	using namespace CDPL;
-	using namespace Chem;
+    using namespace CDPL;
+    using namespace Chem;
 
-	Reaction rxn;
+    Reaction rxn;
 
-	Molecule& reactant = rxn.addReactant();
-	Molecule& agent = rxn.addAgent();
-	Molecule& product = rxn.addProduct();
+    Molecule& reactant = rxn.addReactant();
+    Molecule& agent = rxn.addAgent();
+    Molecule& product = rxn.addProduct();
 
-	rxn.addReactant();
+    rxn.addReactant();
 
-	BOOST_CHECK(reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(reactant.getReactionRole() == ReactionRole::REACTANT);
-	BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
+    BOOST_CHECK(reactant.getReactionRole() == ReactionRole::REACTANT);
+    BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
 
-	BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(agent.getReactionRole() == ReactionRole::AGENT);
-	BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
+    BOOST_CHECK(agent.getReactionRole() == ReactionRole::AGENT);
+    BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
 
-	BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(product.getReactionRole() == ReactionRole::PRODUCT);
-	BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
+    BOOST_CHECK(product.getReactionRole() == ReactionRole::PRODUCT);
+    BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
 
-	BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
-
-//-----
-
-	rxn.swapRoles(ReactionRole::REACTANT, ReactionRole::AGENT);
-	
-	BOOST_CHECK(reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
-
-	BOOST_CHECK(reactant.getReactionRole() == ReactionRole::AGENT);
-	BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
-
-	BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
-
-	BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
-
-	BOOST_CHECK(agent.getReactionRole() == ReactionRole::REACTANT);
-	BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
-
-	BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
-
-	BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
-
-	BOOST_CHECK(product.getReactionRole() == ReactionRole::PRODUCT);
-	BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
-
-	BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
 //-----
 
-	rxn.swapRoles(ReactionRole::REACTANT, ReactionRole::PRODUCT);
-	
-	BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    rxn.swapRoles(ReactionRole::REACTANT, ReactionRole::AGENT);
+    
+    BOOST_CHECK(reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(reactant.getReactionRole() == ReactionRole::AGENT);
-	BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
+    BOOST_CHECK(reactant.getReactionRole() == ReactionRole::AGENT);
+    BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
 
-	BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(agent.getReactionRole() == ReactionRole::PRODUCT);
-	BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
+    BOOST_CHECK(agent.getReactionRole() == ReactionRole::REACTANT);
+    BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
 
-	BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(product.getReactionRole() == ReactionRole::REACTANT);
-	BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
+    BOOST_CHECK(product.getReactionRole() == ReactionRole::PRODUCT);
+    BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
 
-	BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
 //-----
 
-	rxn.swapRoles(ReactionRole::AGENT, ReactionRole::PRODUCT);
-	
-	BOOST_CHECK(reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    rxn.swapRoles(ReactionRole::REACTANT, ReactionRole::PRODUCT);
+    
+    BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(reactant.getReactionRole() == ReactionRole::PRODUCT);
-	BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
+    BOOST_CHECK(reactant.getReactionRole() == ReactionRole::AGENT);
+    BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
 
-	BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(agent.getReactionRole() == ReactionRole::AGENT);
-	BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
+    BOOST_CHECK(agent.getReactionRole() == ReactionRole::PRODUCT);
+    BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
 
-	BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 
-	BOOST_CHECK(product.getReactionRole() == ReactionRole::REACTANT);
-	BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
+    BOOST_CHECK(product.getReactionRole() == ReactionRole::REACTANT);
+    BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
 
-	BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+    BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+
+//-----
+
+    rxn.swapRoles(ReactionRole::AGENT, ReactionRole::PRODUCT);
+    
+    BOOST_CHECK(reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+
+    BOOST_CHECK(reactant.getReactionRole() == ReactionRole::PRODUCT);
+    BOOST_CHECK(reactant.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::PRODUCT);
+
+    BOOST_CHECK(!reactant.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+
+    BOOST_CHECK(agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+
+    BOOST_CHECK(agent.getReactionRole() == ReactionRole::AGENT);
+    BOOST_CHECK(agent.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::AGENT);
+
+    BOOST_CHECK(!agent.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+
+    BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
+
+    BOOST_CHECK(product.getReactionRole() == ReactionRole::REACTANT);
+    BOOST_CHECK(product.getProperty<unsigned int>(MoleculeProperty::REACTION_ROLE) == ReactionRole::REACTANT);
+
+    BOOST_CHECK(!product.getProperty(MoleculeProperty::REACTION_ROLE, false, false).isEmpty());
 }

@@ -36,10 +36,10 @@ Chem::Entity3D::Entity3D(const Entity3D& entity): Base::PropertyContainer(entity
 
 Chem::Entity3D& Chem::Entity3D::operator=(const Entity3D& entity) 
 {
-	if (this == &entity)
-		return *this;
+    if (this == &entity)
+        return *this;
 
-	PropertyContainer::operator=(entity);
+    PropertyContainer::operator=(entity);
 
-	return *this;
+    return *this;
 }

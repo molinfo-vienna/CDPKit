@@ -37,35 +37,35 @@
 namespace
 {
 
-	template <typename MatrixType>
-	struct ZeroMatrixExport
-	{
+    template <typename MatrixType>
+    struct ZeroMatrixExport
+    {
 
-		ZeroMatrixExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        ZeroMatrixExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename MatrixType::SizeType SizeType;
+            typedef typename MatrixType::SizeType SizeType;
 
-			python::class_<MatrixType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
-				.def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("m"), python::arg("n"))))
-				.def("resize", &MatrixType::resize, (python::arg("self"), python::arg("m"), python::arg("n")))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
-				.def(ConstMatrixVisitor<MatrixType>())
-				.def(MatrixAssignAndSwapVisitor<MatrixType>());
-		}
-	};
+            python::class_<MatrixType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
+                .def(python::init<SizeType, SizeType>((python::arg("self"), python::arg("m"), python::arg("n"))))
+                .def("resize", &MatrixType::resize, (python::arg("self"), python::arg("m"), python::arg("n")))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
+                .def(ConstMatrixVisitor<MatrixType>())
+                .def(MatrixAssignAndSwapVisitor<MatrixType>());
+        }
+    };
 }       
 
 
 void CDPLPythonMath::exportZeroMatrixTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	ZeroMatrixExport<Math::FZeroMatrix>("FZeroMatrix");
-	ZeroMatrixExport<Math::DZeroMatrix>("DZeroMatrix");
-	ZeroMatrixExport<Math::LZeroMatrix>("LZeroMatrix");
-	ZeroMatrixExport<Math::ULZeroMatrix>("ULZeroMatrix");
+    ZeroMatrixExport<Math::FZeroMatrix>("FZeroMatrix");
+    ZeroMatrixExport<Math::DZeroMatrix>("DZeroMatrix");
+    ZeroMatrixExport<Math::LZeroMatrix>("LZeroMatrix");
+    ZeroMatrixExport<Math::ULZeroMatrix>("ULZeroMatrix");
 }

@@ -43,9 +43,9 @@ constexpr std::size_t GRAIL::BuriednessScore::DEF_NUM_TEST_RAYS;
 
 GRAIL::BuriednessScore::BuriednessScore(double probe_radius, double min_vdw_surf_dist, std::size_t num_test_rays): 
     probeRadius(probe_radius), minVdWSurfaceDist(min_vdw_surf_dist), numTestRays(num_test_rays), 
-	coordsFunc(&Chem::get3DCoordinates), probeSurfPoints(num_test_rays), rayHitsMask(num_test_rays)
+    coordsFunc(&Chem::get3DCoordinates), probeSurfPoints(num_test_rays), rayHitsMask(num_test_rays)
 {
-	genSphereSurfacePoints();
+    genSphereSurfacePoints();
 }
 
 void GRAIL::BuriednessScore::setProbeRadius(double radius)
@@ -60,22 +60,22 @@ double GRAIL::BuriednessScore::getProbeRadius() const
 
 void GRAIL::BuriednessScore::setMinVdWSurfaceDistance(double dist)
 {
-	minVdWSurfaceDist = dist;
+    minVdWSurfaceDist = dist;
 }
 
 double GRAIL::BuriednessScore::getMinVdWSurfaceDistance() const
 {
-	return minVdWSurfaceDist;
+    return minVdWSurfaceDist;
 }
 
 void GRAIL::BuriednessScore::setNumTestRays(std::size_t num_rays)
 {
     numTestRays = num_rays;
 
-	probeSurfPoints.resize(num_rays);
-	rayHitsMask.resize(num_rays);
+    probeSurfPoints.resize(num_rays);
+    rayHitsMask.resize(num_rays);
 
-	genSphereSurfacePoints();
+    genSphereSurfacePoints();
 }
 
 std::size_t GRAIL::BuriednessScore::getNumTestRays() const
@@ -85,73 +85,73 @@ std::size_t GRAIL::BuriednessScore::getNumTestRays() const
 
 void GRAIL::BuriednessScore::setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func)
 {
-	coordsFunc = func;
+    coordsFunc = func;
 }
 
 const Chem::Atom3DCoordinatesFunction& GRAIL::BuriednessScore::getAtom3DCoordinatesFunction() const
 {
-	return coordsFunc;
+    return coordsFunc;
 }
-	
+    
 double GRAIL::BuriednessScore::operator()(const Math::Vector3D& pos, const Chem::AtomContainer& atoms)
 {
-	using namespace Chem;
-	
+    using namespace Chem;
+    
     if (numTestRays == 0)
-		return 0.0;
+        return 0.0;
 
-	Math::Vector3D tmp;
+    Math::Vector3D tmp;
 
     rayHitsMask.reset();
-	
+    
     for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		const Math::Vector3D& atom_pos = coordsFunc(atom);
-		double vdw_radius = Internal::getVdWRadius(atom);
-		
-		tmp.assign(atom_pos - pos);
+        const Atom& atom = *it;
+        const Math::Vector3D& atom_pos = coordsFunc(atom);
+        double vdw_radius = Internal::getVdWRadius(atom);
+        
+        tmp.assign(atom_pos - pos);
 
-		double atom_dist = length(tmp);
+        double atom_dist = length(tmp);
 
-		if (atom_dist < (vdw_radius + minVdWSurfaceDist))
-			return 0.0;
+        if (atom_dist < (vdw_radius + minVdWSurfaceDist))
+            return 0.0;
 
-		if (atom_dist > probeRadius)
-			continue;
+        if (atom_dist > probeRadius)
+            continue;
 
-		for (std::size_t i = 0; i < numTestRays; i++) {
-			if (rayHitsMask.test(i))
-				continue;
+        for (std::size_t i = 0; i < numTestRays; i++) {
+            if (rayHitsMask.test(i))
+                continue;
 
-			double ang_cos = angleCos(probeSurfPoints[i], tmp, atom_dist);
+            double ang_cos = angleCos(probeSurfPoints[i], tmp, atom_dist);
 
-			if (ang_cos < 0.0)
-				continue;
+            if (ang_cos < 0.0)
+                continue;
 
-			double ray_atom_dist = std::sqrt(1 - ang_cos * ang_cos) * atom_dist;
+            double ray_atom_dist = std::sqrt(1 - ang_cos * ang_cos) * atom_dist;
 
-			if (ray_atom_dist <= vdw_radius)
-				rayHitsMask.set(i);
-		}
-	}
+            if (ray_atom_dist <= vdw_radius)
+                rayHitsMask.set(i);
+        }
+    }
     
     return (double(rayHitsMask.count()) / numTestRays);
 }
 
 void GRAIL::BuriednessScore::genSphereSurfacePoints()
 {
-	// Golden section spiral point distribution
+    // Golden section spiral point distribution
 
     double inc = M_PI * (3.0 - std::sqrt(5.0));
     double off = 2.0 / numTestRays;
 
-	for (std::size_t i = 0; i < numTestRays; i++) {
-		double y = i * off - 1.0 + off * 0.5;
-		double r = std::sqrt(1.0 - y * y);
-		double phi = i * inc;
-		
-		probeSurfPoints[i](0) = std::cos(phi) * r;
-		probeSurfPoints[i](1) = y;
-		probeSurfPoints[i](2) = std::sin(phi) * r;
-	}
+    for (std::size_t i = 0; i < numTestRays; i++) {
+        double y = i * off - 1.0 + off * 0.5;
+        double r = std::sqrt(1.0 - y * y);
+        double phi = i * inc;
+        
+        probeSurfPoints[i](0) = std::cos(phi) * r;
+        probeSurfPoints[i](1) = y;
+        probeSurfPoints[i](2) = std::sin(phi) * r;
+    }
 }

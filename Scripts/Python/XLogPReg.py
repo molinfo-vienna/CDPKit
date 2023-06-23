@@ -34,57 +34,57 @@ import CDPL.Math as Math
 
 def process():
     if len(sys.argv) < 4:
-	    print('Usage:', sys.argv[0], 'training-set.sdf logP-data regression-coeff-file', file=sys.stderr)
+        print('Usage:', sys.argv[0], 'training-set.sdf logP-data regression-coeff-file', file=sys.stderr)
         sys.exit(2)
 
-	struct_is = Base.FileIOStream(sys.argv[1], 'r')
-	exp_logp_is = Base.FileIOStream(sys.argv[2], 'r')
-	coeff_os = Base.FileIOStream(sys.argv[3], 'w')
+    struct_is = Base.FileIOStream(sys.argv[1], 'r')
+    exp_logp_is = Base.FileIOStream(sys.argv[2], 'r')
+    coeff_os = Base.FileIOStream(sys.argv[3], 'w')
 
     mlr_model = Math.DMLRModel()
-	sdf_reader = Chem.SDFMoleculeReader(struct_is)
-	mol = Chem.BasicMolecule()
-	xlogp_calc = MolProp.XLogPCalculator()
+    sdf_reader = Chem.SDFMoleculeReader(struct_is)
+    mol = Chem.BasicMolecule()
+    xlogp_calc = MolProp.XLogPCalculator()
 
     histo = Math.DVector()
     histo.resize(MolProp.XLogPCalculator.FEATURE_VECTOR_SIZE)
 
     Chem.setMultiConfImportParameter(sdf_reader, False)
 
-	while sdf_reader.read(mol):
-		exp_logp = float(exp_logp_is.readline())
+    while sdf_reader.read(mol):
+        exp_logp = float(exp_logp_is.readline())
 
-		Chem.perceiveComponents(mol, False)
-		Chem.perceiveSSSR(mol, False)
-		Chem.setRingFlags(mol, False)
-		Chem.calcImplicitHydrogenCounts(mol, False)
-		Chem.perceiveHybridizationStates(mol, False)
-		Chem.setAromaticityFlags(mol, False)
-		Chem.calcTopologicalDistanceMatrix(mol, False)
+        Chem.perceiveComponents(mol, False)
+        Chem.perceiveSSSR(mol, False)
+        Chem.setRingFlags(mol, False)
+        Chem.calcImplicitHydrogenCounts(mol, False)
+        Chem.perceiveHybridizationStates(mol, False)
+        Chem.setAromaticityFlags(mol, False)
+        Chem.calcTopologicalDistanceMatrix(mol, False)
 
-		xlogp_calc.calculate(mol)
+        xlogp_calc.calculate(mol)
 
         histo += xlogp_calc.getFeatureVector()
 
-		mlr_model.addXYData(xlogp_calc.getFeatureVector(), exp_logp)
+        mlr_model.addXYData(xlogp_calc.getFeatureVector(), exp_logp)
 
-	mlr_model.buildModel()
-	mlr_model.calcStatistics()
+    mlr_model.buildModel()
+    mlr_model.calcStatistics()
 
-	print('Model Statistics:', file=sys.stderr)
-	print('----------------------------------', file=sys.stderr)
-	print(' Correlation Coeff.: ', mlr_model.getCorrelationCoefficient(), file=sys.stderr)
-	print(' Goodness of Fit:    ', mlr_model.getGoodnessOfFit(), file=sys.stderr)
-	print(' Standard Deviation: ', mlr_model.getStandardDeviation(), file=sys.stderr)
-	print(' Chi Square:         ', mlr_model.getChiSquare(), file=sys.stderr)
+    print('Model Statistics:', file=sys.stderr)
+    print('----------------------------------', file=sys.stderr)
+    print(' Correlation Coeff.: ', mlr_model.getCorrelationCoefficient(), file=sys.stderr)
+    print(' Goodness of Fit:    ', mlr_model.getGoodnessOfFit(), file=sys.stderr)
+    print(' Standard Deviation: ', mlr_model.getStandardDeviation(), file=sys.stderr)
+    print(' Chi Square:         ', mlr_model.getChiSquare(), file=sys.stderr)
 
 #    i = 0
 #    for v in histo:
 #        print (str(i) + ':'), v
 #        i = i + 1
 
-	for coeff in mlr_model.getCoefficients():
-		coeff_os.write(str(coeff) + ',\n')
+    for coeff in mlr_model.getCoefficients():
+        coeff_os.write(str(coeff) + ',\n')
 
 if __name__ == '__main__':
     process()

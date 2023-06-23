@@ -34,12 +34,12 @@ namespace CDPL
     namespace Grid
     {
 
-		namespace AttributedGridProperty
-		{
+        namespace AttributedGridProperty
+        {
 
-			CDPL_DEFINE_LOOKUP_KEY(NAME);
-		}
+            CDPL_DEFINE_LOOKUP_KEY(NAME);
+        }
 
-		void initAttributedGridProperties() {}
+        void initAttributedGridProperties() {}
     }
 }

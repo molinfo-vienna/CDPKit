@@ -42,102 +42,102 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class ControlParameterContainer;
-	}
+        class ControlParameterContainer;
+    }
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Reaction;
-		class Molecule;
-		class Atom;
-		class Bond;
+        class Reaction;
+        class Molecule;
+        class Atom;
+        class Bond;
 
-		class CDPL_CHEM_API CDFDataReader : public Internal::CDFDataReaderBase
-		{
+        class CDPL_CHEM_API CDFDataReader : public Internal::CDFDataReaderBase
+        {
 
-		public:
-			typedef std::function<bool(unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&)> AtomPropertyHandler;
-			typedef std::function<bool(unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&)> BondPropertyHandler;
-			typedef std::function<bool(unsigned int, CDFDataReader&, Molecule&, Internal::ByteBuffer&)> MoleculePropertyHandler;
+        public:
+            typedef std::function<bool(unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&)> AtomPropertyHandler;
+            typedef std::function<bool(unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&)> BondPropertyHandler;
+            typedef std::function<bool(unsigned int, CDFDataReader&, Molecule&, Internal::ByteBuffer&)> MoleculePropertyHandler;
 
-			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+            CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool readMolecule(std::istream& is, Molecule& mol);
-			bool readReaction(std::istream& is, Reaction& rxn);
+            bool readMolecule(std::istream& is, Molecule& mol);
+            bool readReaction(std::istream& is, Reaction& rxn);
 
-			bool readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf);
-			bool readReaction(Reaction& rxn, Internal::ByteBuffer& bbuf);
+            bool readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf);
+            bool readReaction(Reaction& rxn, Internal::ByteBuffer& bbuf);
 
-			bool skipMolecule(std::istream& is);
-			bool skipReaction(std::istream& is);
+            bool skipMolecule(std::istream& is);
+            bool skipReaction(std::istream& is);
 
-			bool hasMoreMoleculeData(std::istream& is);
-			bool hasMoreReactionData(std::istream& is);
+            bool hasMoreMoleculeData(std::istream& is);
+            bool hasMoreReactionData(std::istream& is);
 
-			static void registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler);
-			static void registerExternalBondPropertyHandler(const BondPropertyHandler& handler);
-			static void registerExternalMoleculePropertyHandler(const MoleculePropertyHandler& handler);
+            static void registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler);
+            static void registerExternalBondPropertyHandler(const BondPropertyHandler& handler);
+            static void registerExternalMoleculePropertyHandler(const MoleculePropertyHandler& handler);
 
-			const Base::ControlParameterContainer& getCtrlParameters() const;
+            const Base::ControlParameterContainer& getCtrlParameters() const;
 
-		private:
-			struct CDFStereoDescr
-			{
+        private:
+            struct CDFStereoDescr
+            {
 
-				CDFStereoDescr(std::size_t obj_idx): objIndex(obj_idx) {}
+                CDFStereoDescr(std::size_t obj_idx): objIndex(obj_idx) {}
 
-				std::size_t  objIndex;
-				unsigned int config;
-				std::size_t  numRefAtoms;
-				std::size_t  refAtomInds[4];
-			};
+                std::size_t  objIndex;
+                unsigned int config;
+                std::size_t  numRefAtoms;
+                std::size_t  refAtomInds[4];
+            };
 
-			void init();
+            void init();
 
-			void readReactionComponents(Reaction& rxn, Internal::ByteBuffer& bbuf);
-			void readConnectionTable(Molecule& mol, Internal::ByteBuffer& bbuf);
+            void readReactionComponents(Reaction& rxn, Internal::ByteBuffer& bbuf);
+            void readConnectionTable(Molecule& mol, Internal::ByteBuffer& bbuf);
 
-			std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
-			void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
-			void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
+            std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
+            void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
+            void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
 
-			void readReactionProperties(Reaction& rxn, Internal::ByteBuffer& bbuf);
+            void readReactionProperties(Reaction& rxn, Internal::ByteBuffer& bbuf);
 
-			template <typename T>
-			void readExternalProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& data);
+            template <typename T>
+            void readExternalProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& data);
 
-			bool readExternalProperties(unsigned int handler_id, Atom& atom, Internal::ByteBuffer& data);
-			bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
-			bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
+            bool readExternalProperties(unsigned int handler_id, Atom& atom, Internal::ByteBuffer& data);
+            bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
+            bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
 
-			FragmentList::SharedPointer readFragmentList(const Molecule& mol, CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
-			StringDataBlock::SharedPointer readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
+            FragmentList::SharedPointer readFragmentList(const Molecule& mol, CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
+            StringDataBlock::SharedPointer readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
 
-			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
-			void setStereoDescriptors(Molecule& mol) const;
+            void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
+            void setStereoDescriptors(Molecule& mol) const;
 
-			template <typename T>
-			void setStereoDescriptor(T& obj, const Molecule& mol, const CDFStereoDescr& descr) const;
+            template <typename T>
+            void setStereoDescriptor(T& obj, const Molecule& mol, const CDFStereoDescr& descr) const;
 
-			typedef std::vector<CDFStereoDescr> StereoDescrList;
-			typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;
-			typedef std::vector<BondPropertyHandler> BondPropertyHandlerList;
-			typedef std::vector<MoleculePropertyHandler> MoleculePropertyHandlerList;
+            typedef std::vector<CDFStereoDescr> StereoDescrList;
+            typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;
+            typedef std::vector<BondPropertyHandler> BondPropertyHandlerList;
+            typedef std::vector<MoleculePropertyHandler> MoleculePropertyHandlerList;
 
-			const Base::ControlParameterContainer& ctrlParams;	
-			Internal::ByteBuffer                   dataBuffer;		
-			std::size_t                            startAtomIdx;
-			StereoDescrList                        atomStereoDescrs;
-			StereoDescrList                        bondStereoDescrs;
-			static AtomPropertyHandlerList         extAtomPropertyHandlers;
-			static BondPropertyHandlerList         extBondPropertyHandlers;
-			static MoleculePropertyHandlerList     extMoleculePropertyHandlers;
-		};
-	}
+            const Base::ControlParameterContainer& ctrlParams;    
+            Internal::ByteBuffer                   dataBuffer;        
+            std::size_t                            startAtomIdx;
+            StereoDescrList                        atomStereoDescrs;
+            StereoDescrList                        bondStereoDescrs;
+            static AtomPropertyHandlerList         extAtomPropertyHandlers;
+            static BondPropertyHandlerList         extBondPropertyHandlers;
+            static MoleculePropertyHandlerList     extMoleculePropertyHandlers;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_CDFDATAREADER_HPP

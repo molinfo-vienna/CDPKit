@@ -42,13 +42,13 @@ namespace
 const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const Atom& atom)
 {
     return atom.getPropertyOrDefault<MatchConstraintList::SharedPointer>(AtomProperty::MATCH_CONSTRAINTS,
-																		 DEF_CONSTRAINTS);
+                                                                         DEF_CONSTRAINTS);
 }
 
 void Chem::setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr)
 {
-	if (!overwrite && hasMatchConstraints(atom))
-		return;
+    if (!overwrite && hasMatchConstraints(atom))
+        return;
 
     atom.setProperty(AtomProperty::MATCH_CONSTRAINTS, constr);
 }

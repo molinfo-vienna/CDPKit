@@ -46,107 +46,107 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API UFFAtomTypePropertyTable
-		{
+        class CDPL_FORCEFIELD_API UFFAtomTypePropertyTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<unsigned int, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<UFFAtomTypePropertyTable> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<UFFAtomTypePropertyTable> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad, 
-					  double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
+                Entry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad, 
+                      double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
 
-				unsigned int getAtomType() const;
+                unsigned int getAtomType() const;
 
-				const std::string& getAtomTypeSymbol() const;
+                const std::string& getAtomTypeSymbol() const;
 
-				unsigned int getAtomicNumber() const;
+                unsigned int getAtomicNumber() const;
 
-				double getBondRadius() const;
+                double getBondRadius() const;
 
-				double getBondAngle() const;
+                double getBondAngle() const;
 
-				double getVdWDistance() const;
+                double getVdWDistance() const;
 
-				double getVdWEnergy() const;
+                double getVdWEnergy() const;
 
-				double getVdWScale() const;
+                double getVdWScale() const;
 
-				double getEffectiveCharge() const;
+                double getEffectiveCharge() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int atomType;
-				std::string  atomTypeSym;
-				unsigned int atomicNo;
-				double       bondRadius;
-				double       bondAngle;
-				double       vdwDistance;
-				double       vdwEnergy;
-				double       vdwScale;
-				double       effCharge;
-				bool         initialized;
-			};			
+              private:
+                unsigned int atomType;
+                std::string  atomTypeSym;
+                unsigned int atomicNo;
+                double       bondRadius;
+                double       bondAngle;
+                double       vdwDistance;
+                double       vdwEnergy;
+                double       vdwScale;
+                double       effCharge;
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			UFFAtomTypePropertyTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            UFFAtomTypePropertyTable();
 
-			void addEntry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad, 
-						  double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
+            void addEntry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad, 
+                          double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
 
-			const Entry& getEntry(unsigned int atom_type) const;
+            const Entry& getEntry(unsigned int atom_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int atom_type);
+            bool removeEntry(unsigned int atom_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
     }
 }
 

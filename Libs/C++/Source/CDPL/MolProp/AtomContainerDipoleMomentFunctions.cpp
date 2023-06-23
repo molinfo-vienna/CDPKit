@@ -37,29 +37,29 @@ using namespace CDPL;
 
 bool MolProp::calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment)
 {
-	using namespace Chem;
-	
-	const double UNIT_CONV_FACTOR = 4.8032066;
-	Math::Vector3D mass_ctr;
+    using namespace Chem;
+    
+    const double UNIT_CONV_FACTOR = 4.8032066;
+    Math::Vector3D mass_ctr;
 
-	if (!calcCenterOfMass(cntnr, coords_func, mass_ctr))
-		return false;
+    if (!calcCenterOfMass(cntnr, coords_func, mass_ctr))
+        return false;
 
-	moment.clear();
+    moment.clear();
 
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-		
-		moment.plusAssign((coords_func(atom) - mass_ctr) * calcTotalPartialCharge(atom));
-	}
-	
-	moment *= UNIT_CONV_FACTOR;
-	
-	return true;
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+        
+        moment.plusAssign((coords_func(atom) - mass_ctr) * calcTotalPartialCharge(atom));
+    }
+    
+    moment *= UNIT_CONV_FACTOR;
+    
+    return true;
 }
 
 bool MolProp::calcDipoleMoment(const Chem::AtomContainer& cntnr, Math::Vector3D& moment)
 {
-	return calcDipoleMoment(cntnr, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), moment);
+    return calcDipoleMoment(cntnr, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), moment);
 }
 

@@ -38,8 +38,8 @@ namespace CDPL
     namespace Biomol 
     {
 
-		const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
-		const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
+        const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
+        const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
     }
 }
 

@@ -33,24 +33,24 @@
 namespace
 {
 
-	std::size_t prime(std::size_t i)
-	{
-		return boost::math::prime(i);
-	}
+    std::size_t prime(std::size_t i)
+    {
+        return boost::math::prime(i);
+    }
 }
 
 
 void CDPLPythonMath::exportSpecialFunctions()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::def("prime", &prime, python::arg("i"));
-	python::def("factorial", &Math::factorial<std::uint64_t>, python::arg("n"));
-	python::def("pythag", &Math::pythag<double>, (python::arg("a"), python::arg("b")));
-	python::def("sign", &Math::sign<double, double>, (python::arg("a"), python::arg("b")));
-	python::def("lnGamma", &Math::lnGamma<double>, python::arg("z"));
-	python::def("gammaQ", &Math::gammaQ<double>, (python::arg("a"), python::arg("x")));
-	python::def("generalizedBell", &Math::generalizedBell<double>, (python::arg("x"), python::arg("a"), 
-																	python::arg("b"), python::arg("c")));
+    python::def("prime", &prime, python::arg("i"));
+    python::def("factorial", &Math::factorial<std::uint64_t>, python::arg("n"));
+    python::def("pythag", &Math::pythag<double>, (python::arg("a"), python::arg("b")));
+    python::def("sign", &Math::sign<double, double>, (python::arg("a"), python::arg("b")));
+    python::def("lnGamma", &Math::lnGamma<double>, python::arg("z"));
+    python::def("gammaQ", &Math::gammaQ<double>, (python::arg("a"), python::arg("x")));
+    python::def("generalizedBell", &Math::generalizedBell<double>, (python::arg("x"), python::arg("a"), 
+                                                                    python::arg("b"), python::arg("c")));
 }

@@ -33,44 +33,44 @@ using namespace CDPL;
 
 
 Chem::BondReactionCenterStatusMatchExpression::BondReactionCenterStatusMatchExpression(unsigned int status): 
-	rxnCtrStatus(status & (ReactionCenterStatus::NO_CENTER | ReactionCenterStatus::IS_CENTER | 
-						   ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
-						   ReactionCenterStatus::BOND_ORDER_CHANGE | ReactionCenterStatus::NO_CHANGE)) {}
+    rxnCtrStatus(status & (ReactionCenterStatus::NO_CENTER | ReactionCenterStatus::IS_CENTER | 
+                           ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
+                           ReactionCenterStatus::BOND_ORDER_CHANGE | ReactionCenterStatus::NO_CHANGE)) {}
 
 bool Chem::BondReactionCenterStatusMatchExpression::operator()(const Bond&, const MolecularGraph&, 
-															   const Bond& target_bond, const MolecularGraph&, 
-															   const Base::Any&) const
+                                                               const Bond& target_bond, const MolecularGraph&, 
+                                                               const Base::Any&) const
 {
-	unsigned int target_rxn_ctr_status = getReactionCenterStatus(target_bond);
+    unsigned int target_rxn_ctr_status = getReactionCenterStatus(target_bond);
 
-	target_rxn_ctr_status &= (ReactionCenterStatus::NO_CENTER | ReactionCenterStatus::IS_CENTER | 
-							  ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
-							  ReactionCenterStatus::BOND_ORDER_CHANGE | ReactionCenterStatus::NO_CHANGE);
+    target_rxn_ctr_status &= (ReactionCenterStatus::NO_CENTER | ReactionCenterStatus::IS_CENTER | 
+                              ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
+                              ReactionCenterStatus::BOND_ORDER_CHANGE | ReactionCenterStatus::NO_CHANGE);
 
-	switch (rxnCtrStatus) {
+    switch (rxnCtrStatus) {
 
-		case ReactionCenterStatus::NO_CENTER:
-			return (target_rxn_ctr_status == ReactionCenterStatus::NO_CENTER || target_rxn_ctr_status == 0);
+        case ReactionCenterStatus::NO_CENTER:
+            return (target_rxn_ctr_status == ReactionCenterStatus::NO_CENTER || target_rxn_ctr_status == 0);
 
-		case ReactionCenterStatus::IS_CENTER:
-			return ((target_rxn_ctr_status & (ReactionCenterStatus::IS_CENTER | ReactionCenterStatus::BOND_MADE | 
-											  ReactionCenterStatus::BOND_BROKEN | ReactionCenterStatus::BOND_ORDER_CHANGE)) != 0);
-	
-		case ReactionCenterStatus::NO_CHANGE:
-			return ((target_rxn_ctr_status & (ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
-											  ReactionCenterStatus::BOND_ORDER_CHANGE)) == 0); 
-		
-		case ReactionCenterStatus::BOND_MADE:
-		case ReactionCenterStatus::BOND_BROKEN:
-		case ReactionCenterStatus::BOND_ORDER_CHANGE:
-		case ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN:
-		case ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_ORDER_CHANGE:
-		case ReactionCenterStatus::BOND_BROKEN | ReactionCenterStatus::BOND_ORDER_CHANGE:
-		case ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | ReactionCenterStatus::BOND_ORDER_CHANGE:
-			return (rxnCtrStatus == 
-					(target_rxn_ctr_status & (ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
-											  ReactionCenterStatus::BOND_ORDER_CHANGE)));
-		default:
-			return true;
-	}
+        case ReactionCenterStatus::IS_CENTER:
+            return ((target_rxn_ctr_status & (ReactionCenterStatus::IS_CENTER | ReactionCenterStatus::BOND_MADE | 
+                                              ReactionCenterStatus::BOND_BROKEN | ReactionCenterStatus::BOND_ORDER_CHANGE)) != 0);
+    
+        case ReactionCenterStatus::NO_CHANGE:
+            return ((target_rxn_ctr_status & (ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
+                                              ReactionCenterStatus::BOND_ORDER_CHANGE)) == 0); 
+        
+        case ReactionCenterStatus::BOND_MADE:
+        case ReactionCenterStatus::BOND_BROKEN:
+        case ReactionCenterStatus::BOND_ORDER_CHANGE:
+        case ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN:
+        case ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_ORDER_CHANGE:
+        case ReactionCenterStatus::BOND_BROKEN | ReactionCenterStatus::BOND_ORDER_CHANGE:
+        case ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | ReactionCenterStatus::BOND_ORDER_CHANGE:
+            return (rxnCtrStatus == 
+                    (target_rxn_ctr_status & (ReactionCenterStatus::BOND_MADE | ReactionCenterStatus::BOND_BROKEN | 
+                                              ReactionCenterStatus::BOND_ORDER_CHANGE)));
+        default:
+            return true;
+    }
 }

@@ -29,33 +29,33 @@
 namespace CDPL 
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		class ByteBuffer;
-	}
+        class ByteBuffer;
+    }
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class CDFDataWriter;
-		class AttributedGrid;
-	}
-	
-	namespace GRAIL
-	{
+        class CDFDataWriter;
+        class AttributedGrid;
+    }
+    
+    namespace GRAIL
+    {
 
-		class CDFAttributedGridPropertyWriter
-		{
+        class CDFAttributedGridPropertyWriter
+        {
 
-		public:
-			static void registerExternalPropertyHandlers();
+        public:
+            static void registerExternalPropertyHandlers();
 
-		private:
-			static unsigned int outputProperties(const Grid::CDFDataWriter& writer, const Grid::AttributedGrid& grid, 
-												 Internal::ByteBuffer& data);
-		};
-	}
+        private:
+            static unsigned int outputProperties(const Grid::CDFDataWriter& writer, const Grid::AttributedGrid& grid, 
+                                                 Internal::ByteBuffer& data);
+        };
+    }
 }
 
 #endif // CDPL_GRAIL_CDFATTRIBUTEDGRIDPROPERTYWRITER_HPP

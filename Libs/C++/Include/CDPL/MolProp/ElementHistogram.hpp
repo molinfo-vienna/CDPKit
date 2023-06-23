@@ -36,28 +36,28 @@
 namespace CDPL 
 {
 
-	namespace MolProp
-	{
+    namespace MolProp
+    {
 
-		/**
-		 * \brief A data type for the storage of element histograms of chemical compounds.
-		 *
-		 * \c %ElementHistogram is an unique associative map where the keys specify the atom type
-		 * (defined in namespace Chem::AtomType) of the chemical elements and the mapped integer values
-		 * correspond to the element frequencies.
-		 */
-		class CDPL_MOLPROP_API ElementHistogram : public Util::Map<unsigned int, std::size_t, true>
-		{
+        /**
+         * \brief A data type for the storage of element histograms of chemical compounds.
+         *
+         * \c %ElementHistogram is an unique associative map where the keys specify the atom type
+         * (defined in namespace Chem::AtomType) of the chemical elements and the mapped integer values
+         * correspond to the element frequencies.
+         */
+        class CDPL_MOLPROP_API ElementHistogram : public Util::Map<unsigned int, std::size_t, true>
+        {
 
-		  public:
-			typedef std::shared_ptr<ElementHistogram> SharedPointer;
+          public:
+            typedef std::shared_ptr<ElementHistogram> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "ElementHistogram";
-			}
-		};
-	}
+          private:
+            const char* getClassName() const {
+                return "ElementHistogram";
+            }
+        };
+    }
 }
 
 #endif // CDPL_MOLPROP_ELEMENTHISTOGRAM_HPP

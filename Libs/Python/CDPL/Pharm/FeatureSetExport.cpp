@@ -38,12 +38,12 @@ namespace
 
     bool addFeature(CDPL::Pharm::FeatureSet& ftr_set, CDPL::Pharm::Feature& ftr)
     {
-		return ftr_set.addFeature(ftr);
+        return ftr_set.addFeature(ftr);
     }
 
     bool removeFeature(CDPL::Pharm::FeatureSet& ftr_set, CDPL::Pharm::Feature& ftr)
     {
-		return ftr_set.removeFeature(ftr);
+        return ftr_set.removeFeature(ftr);
     }
 }
 
@@ -59,26 +59,26 @@ void CDPLPythonPharm::exportFeatureSet()
     Pharm::FeatureSet& (Pharm::FeatureSet::*copyFtrSetFunc)(const Pharm::FeatureSet&) = &Pharm::FeatureSet::operator=;
 
     python::scope scope = python::class_<Pharm::FeatureSet, Pharm::FeatureSet::SharedPointer, 
-										 python::bases<Pharm::FeatureContainer> >("FeatureSet", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Pharm::FeatureSet&>((python::arg("self"), python::arg("ftr_set")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const Pharm::FeatureContainer&>((python::arg("self"), python::arg("cntnr")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("assign", copyFtrSetFunc, (python::arg("self"), python::arg("ftr_set")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("assign", copyFtrContainerFunc, (python::arg("self"), python::arg("cntnr")),
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("addFeature", &addFeature, (python::arg("self"), python::arg("ftr")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("removeFeature", removeFeatureFunc, (python::arg("self"), python::arg("idx")))
-		.def("removeFeature", &removeFeature, (python::arg("self"), python::arg("ftr")))
-		.def("clear", &Pharm::FeatureSet::clear, python::arg("self"))
-		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
-		.def(FeatureContainerSpecialFunctionsVisitor(false))
-		.def("__iadd__", &Pharm::FeatureSet::operator+=, (python::arg("self"), python::arg("cntnr")), 
-			 python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("__isub__", &Pharm::FeatureSet::operator-=, (python::arg("self"), python::arg("cntnr")), 
-			 python::return_self<>());
+                                         python::bases<Pharm::FeatureContainer> >("FeatureSet", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Pharm::FeatureSet&>((python::arg("self"), python::arg("ftr_set")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const Pharm::FeatureContainer&>((python::arg("self"), python::arg("cntnr")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("assign", copyFtrSetFunc, (python::arg("self"), python::arg("ftr_set")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("assign", copyFtrContainerFunc, (python::arg("self"), python::arg("cntnr")),
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("addFeature", &addFeature, (python::arg("self"), python::arg("ftr")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("removeFeature", removeFeatureFunc, (python::arg("self"), python::arg("idx")))
+        .def("removeFeature", &removeFeature, (python::arg("self"), python::arg("ftr")))
+        .def("clear", &Pharm::FeatureSet::clear, python::arg("self"))
+        .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
+        .def(FeatureContainerSpecialFunctionsVisitor(false))
+        .def("__iadd__", &Pharm::FeatureSet::operator+=, (python::arg("self"), python::arg("cntnr")), 
+             python::return_self<python::with_custodian_and_ward<1, 2> >())
+        .def("__isub__", &Pharm::FeatureSet::operator-=, (python::arg("self"), python::arg("cntnr")), 
+             python::return_self<>());
 }
 

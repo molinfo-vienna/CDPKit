@@ -36,22 +36,22 @@ using namespace CDPL;
 
 cairo_status_t Vis::streamWriteFunc(void* closure, const unsigned char* data, unsigned int length)
 {
-	if (!closure)
-		return CAIRO_STATUS_SUCCESS;
+    if (!closure)
+        return CAIRO_STATUS_SUCCESS;
 
-	try {
-		std::ostream* os = static_cast<std::ostream*>(closure);
+    try {
+        std::ostream* os = static_cast<std::ostream*>(closure);
 
-		if (!os->good())
-			return CAIRO_STATUS_WRITE_ERROR;
+        if (!os->good())
+            return CAIRO_STATUS_WRITE_ERROR;
 
-		os->write(reinterpret_cast<const char*>(data), length);
+        os->write(reinterpret_cast<const char*>(data), length);
 
-		return (os->good() ? CAIRO_STATUS_SUCCESS : CAIRO_STATUS_WRITE_ERROR);
+        return (os->good() ? CAIRO_STATUS_SUCCESS : CAIRO_STATUS_WRITE_ERROR);
 
-	} catch (...) {
-		return CAIRO_STATUS_WRITE_ERROR;
-	}
+    } catch (...) {
+        return CAIRO_STATUS_WRITE_ERROR;
+    }
 }
 
 

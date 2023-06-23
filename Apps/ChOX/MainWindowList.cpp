@@ -37,39 +37,39 @@ MainWindowList::~MainWindowList() {}
 
 MainWindowList& MainWindowList::instance()
 {
-	static MainWindowList inst;
+    static MainWindowList inst;
 
-	return inst;
+    return inst;
 }
 
 void MainWindowList::addWindow(MainWindow* win)
 {
-	connect(win, SIGNAL(destroyed(QObject*)), this, SLOT(removeWindow(QObject*)));
+    connect(win, SIGNAL(destroyed(QObject*)), this, SLOT(removeWindow(QObject*)));
 
-	windows.push_back(win);
+    windows.push_back(win);
 }
 
 MainWindowList::ConstIterator MainWindowList::getBegin() const
 {
-	return windows.begin();
+    return windows.begin();
 }
 
 MainWindowList::ConstIterator MainWindowList::getEnd() const
 {
-	return windows.end();
+    return windows.end();
 }
 
 MainWindow* MainWindowList::getWindow(int idx) const
 {
-	return windows.at(idx);
+    return windows.at(idx);
 }
 
 void MainWindowList::removeWindow(QObject* win)
 {
-	windows.erase(std::remove(windows.begin(), windows.end(), win), windows.end());
+    windows.erase(std::remove(windows.begin(), windows.end(), win), windows.end());
 }
 
 int MainWindowList::getNumWindows() const
 {
-	return int(windows.size());
+    return int(windows.size());
 }

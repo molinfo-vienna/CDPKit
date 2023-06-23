@@ -41,76 +41,76 @@
 namespace
 {
 
-	const char* pngFileExtensions[] = { "png" };
-	const char* pdfFileExtensions[] = { "pdf" };
-	const char* psFileExtensions[]  = { "ps", "eps" };
-	const char* svgFileExtensions[] = { "svg" };
+    const char* pngFileExtensions[] = { "png" };
+    const char* pdfFileExtensions[] = { "pdf" };
+    const char* psFileExtensions[]  = { "ps", "eps" };
+    const char* svgFileExtensions[] = { "svg" };
 }
 
 
 using namespace CDPL;
 
-		
+        
 const Base::DataFormat Vis::DataFormat::PNG("PNG", "Portable Network Graphics", "image/png", 
-											pngFileExtensions, pngFileExtensions + 1, false);
+                                            pngFileExtensions, pngFileExtensions + 1, false);
 const Base::DataFormat Vis::DataFormat::PDF("PDF", "Adobe Portable Document Format", "application/pdf", 
-											pdfFileExtensions, pdfFileExtensions + 1, false);
+                                            pdfFileExtensions, pdfFileExtensions + 1, false);
 const Base::DataFormat Vis::DataFormat::PS("PS", "Adobe PostScript", "application/postscript", 
-										   psFileExtensions, psFileExtensions + 2, false);
+                                           psFileExtensions, psFileExtensions + 2, false);
 const Base::DataFormat Vis::DataFormat::SVG("SVG", "Scalable Vector Graphics", "image/svg+xml", 
-											svgFileExtensions, svgFileExtensions + 1, false);
+                                            svgFileExtensions, svgFileExtensions + 1, false);
 
 namespace CDPL
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		void initDataFormats() {}
-	}
+        void initDataFormats() {}
+    }
 }
 
 
 namespace
 {
 
-	struct Init 
-	{
+    struct Init 
+    {
 
-		Init() {
-			using namespace Base;
-			using namespace Chem;
-			using namespace Vis;
+        Init() {
+            using namespace Base;
+            using namespace Chem;
+            using namespace Vis;
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PNGMolecularGraphOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PNGReactionOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PNGMolecularGraphOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PNGReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_PNG_SUPPORT
 
 #ifdef HAVE_CAIRO_PDF_SUPPORT
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDFMolecularGraphOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PDFReactionOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDFMolecularGraphOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PDFReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_PDF_SUPPORT
 
 #ifdef HAVE_CAIRO_PS_SUPPORT
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSMolecularGraphOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PSReactionOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSMolecularGraphOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PSReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_PS_SUPPORT
 
 #ifdef HAVE_CAIRO_SVG_SUPPORT
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SVGMolecularGraphOutputHandler()));
-			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SVGReactionOutputHandler()));
+            DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SVGMolecularGraphOutputHandler()));
+            DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SVGReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_SVG_SUPPORT
 
-		}
+        }
 
-	} init;
+    } init;
 }

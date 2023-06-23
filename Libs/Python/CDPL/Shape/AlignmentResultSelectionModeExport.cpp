@@ -42,9 +42,9 @@ void CDPLPythonShape::exportAlignmentResultSelectionModes()
     using namespace CDPL;
 
     python::class_<AlignmentResultSelectionMode, boost::noncopyable>("AlignmentResultSelectionMode", python::no_init)
-		.def_readonly("ALL", Shape::AlignmentResultSelectionMode::ALL)
-		.def_readonly("BEST_PER_SHAPE_COMBINATION", Shape::AlignmentResultSelectionMode::BEST_PER_SHAPE_COMBINATION)
-		.def_readonly("BEST_PER_REFERENCE_SHAPE", Shape::AlignmentResultSelectionMode::BEST_PER_REFERENCE_SHAPE)
-		.def_readonly("BEST_PER_REFERENCE_SET", Shape::AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET)
-		.def_readonly("BEST_OVERALL", Shape::AlignmentResultSelectionMode::BEST_OVERALL);
+        .def_readonly("ALL", Shape::AlignmentResultSelectionMode::ALL)
+        .def_readonly("BEST_PER_SHAPE_COMBINATION", Shape::AlignmentResultSelectionMode::BEST_PER_SHAPE_COMBINATION)
+        .def_readonly("BEST_PER_REFERENCE_SHAPE", Shape::AlignmentResultSelectionMode::BEST_PER_REFERENCE_SHAPE)
+        .def_readonly("BEST_PER_REFERENCE_SET", Shape::AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET)
+        .def_readonly("BEST_OVERALL", Shape::AlignmentResultSelectionMode::BEST_OVERALL);
 }

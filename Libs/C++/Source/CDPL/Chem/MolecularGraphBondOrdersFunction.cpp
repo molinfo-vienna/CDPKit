@@ -36,8 +36,8 @@ using namespace CDPL;
 
 void Chem::perceiveBondOrders(MolecularGraph& molgraph, bool overwrite)
 {
-	Util::STArray orders;
-	BondOrderCalculator calculator(molgraph, orders, !overwrite);
+    Util::STArray orders;
+    BondOrderCalculator calculator(molgraph, orders, !overwrite);
 
-	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), orders.getElementsBegin(), &setOrder);
+    Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), orders.getElementsBegin(), &setOrder);
 }

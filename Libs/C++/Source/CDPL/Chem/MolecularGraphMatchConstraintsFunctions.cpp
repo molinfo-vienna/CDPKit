@@ -36,27 +36,27 @@ using namespace CDPL;
 
 
 void Chem::setAtomMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr, 
-								   bool overwrite)
+                                   bool overwrite)
 {
-	for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-		Atom& atom = *it;
+    for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
 
-		if (!overwrite && hasMatchConstraints(atom))
-			continue;
+        if (!overwrite && hasMatchConstraints(atom))
+            continue;
 
-		setMatchConstraints(atom, constr);
-	}
+        setMatchConstraints(atom, constr);
+    }
 }
 
 void Chem::setBondMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr, 
-								   bool overwrite)
+                                   bool overwrite)
 {
-	for (MolecularGraph::BondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
-		Bond& bond = *it;
+    for (MolecularGraph::BondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+        Bond& bond = *it;
 
-		if (!overwrite && hasMatchConstraints(bond))
-			continue;
+        if (!overwrite && hasMatchConstraints(bond))
+            continue;
 
-		setMatchConstraints(bond, constr);
-	}
+        setMatchConstraints(bond, constr);
+    }
 }

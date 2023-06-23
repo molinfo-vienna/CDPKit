@@ -35,28 +35,28 @@ using namespace CDPL;
 
 bool Pharm::FeaturePairDistanceMatchFunctor::queryMode() const
 {
-	return qryMode;
+    return qryMode;
 }
 
 bool Pharm::FeaturePairDistanceMatchFunctor::operator()(const Feature& p1_ftr1, const Feature& p1_ftr2,
-														const Feature& p2_ftr1, const Feature& p2_ftr2) const
+                                                        const Feature& p2_ftr1, const Feature& p2_ftr2) const
 {
-	double dist1 = length(get3DCoordinates(p1_ftr2) - get3DCoordinates(p1_ftr1));
+    double dist1 = length(get3DCoordinates(p1_ftr2) - get3DCoordinates(p1_ftr1));
     double dist2 = length(get3DCoordinates(p2_ftr2) - get3DCoordinates(p2_ftr1));
 
     double p1_tol1 = getTolerance(p1_ftr1);
     double p1_tol2 = getTolerance(p1_ftr2);
 
     if (dist2 >= (dist1 - p1_tol1 - p1_tol2) &&
-		dist2 <= (dist1 + p1_tol1 + p1_tol2))
-		return true;
+        dist2 <= (dist1 + p1_tol1 + p1_tol2))
+        return true;
 
     if (qryMode)
-		return false;
+        return false;
 
     double p2_tol1 = getTolerance(p2_ftr1);
     double p2_tol2 = getTolerance(p2_ftr2);
 
     return (dist1 >= (dist2 - p2_tol1 - p2_tol2) &&
-			dist1 <= (dist2 + p2_tol1 + p2_tol2));
+            dist1 <= (dist2 + p2_tol1 + p2_tol2));
 }

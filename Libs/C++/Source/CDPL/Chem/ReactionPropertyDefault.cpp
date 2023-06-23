@@ -31,20 +31,20 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		namespace ReactionPropertyDefault
-		{
+        namespace ReactionPropertyDefault
+        {
 
-			const std::string NAME                                     = "";
-			const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
-			const unsigned int MDL_RXN_FILE_VERSION                    = MDLDataFormatVersion::UNDEF;
-			const std::string MDL_COMMENT                              = "";
-			const std::string MDL_PROGRAM_NAME                         = "CDPL";
-			const std::string MDL_USER_INITIALS                        = "";
-		}
+            const std::string NAME                                     = "";
+            const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
+            const unsigned int MDL_RXN_FILE_VERSION                    = MDLDataFormatVersion::UNDEF;
+            const std::string MDL_COMMENT                              = "";
+            const std::string MDL_PROGRAM_NAME                         = "CDPL";
+            const std::string MDL_USER_INITIALS                        = "";
+        }
 
-		void initReactionPropertyDefaults() {}
-	}
+        void initReactionPropertyDefaults() {}
+    }
 }

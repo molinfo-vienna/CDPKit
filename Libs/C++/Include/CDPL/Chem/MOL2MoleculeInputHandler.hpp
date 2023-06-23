@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the input of molecule data in the <em>Sybyl MOL2</em> format.
-		 */
-		typedef Util::DefaultDataInputHandler<MOL2MoleculeReader, DataFormat::MOL2> MOL2MoleculeInputHandler;
-	}
+        /**
+         * \brief A handler for the input of molecule data in the <em>Sybyl MOL2</em> format.
+         */
+        typedef Util::DefaultDataInputHandler<MOL2MoleculeReader, DataFormat::MOL2> MOL2MoleculeInputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_MOL2MOLECULEINPUTHANDLER_HPP

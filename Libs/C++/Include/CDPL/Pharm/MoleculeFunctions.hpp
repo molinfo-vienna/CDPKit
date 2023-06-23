@@ -38,13 +38,13 @@ namespace CDPL
     namespace Chem
     {
 
-		class Molecule;
+        class Molecule;
     }
 
     namespace Pharm 
     {
-	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol, bool calc_hyd = true, bool from_logp = false);
+    
+        CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol, bool calc_hyd = true, bool from_logp = false);
     }
 }
 

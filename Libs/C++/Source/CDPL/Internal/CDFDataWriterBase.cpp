@@ -30,66 +30,66 @@ using namespace CDPL;
 
 void Internal::CDFDataWriterBase::putHeader(const CDF::Header& header, ByteBuffer& bbuf) const
 {
-	bbuf.putInt(CDF::FORMAT_ID, false);
-	bbuf.putInt(header.recordTypeID, false);
-	bbuf.putInt(header.recordFormatVersion, false);
-	bbuf.putInt(header.recordDataLength, false);
+    bbuf.putInt(CDF::FORMAT_ID, false);
+    bbuf.putInt(header.recordTypeID, false);
+    bbuf.putInt(header.recordFormatVersion, false);
+    bbuf.putInt(header.recordDataLength, false);
 }
 
 void Internal::CDFDataWriterBase::putStringProperty(unsigned int prop_id, const std::string& str, ByteBuffer& bbuf) const
 {
-	std::size_t last_pos = bbuf.getIOPointer();
+    std::size_t last_pos = bbuf.getIOPointer();
 
-	bbuf.setIOPointer(last_pos + 1);
+    bbuf.setIOPointer(last_pos + 1);
 
-	std::size_t num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
+    std::size_t num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
 
-	bbuf.setIOPointer(last_pos);
-	bbuf.putInt(composePropertySpec(prop_id, num_bytes), false);
-	bbuf.setIOPointer(last_pos + 1 + num_bytes);
-	bbuf.putBytes(str.c_str(), str.length());
+    bbuf.setIOPointer(last_pos);
+    bbuf.putInt(composePropertySpec(prop_id, num_bytes), false);
+    bbuf.setIOPointer(last_pos + 1 + num_bytes);
+    bbuf.putBytes(str.c_str(), str.length());
 }
 
 void Internal::CDFDataWriterBase::putString(const std::string& str, ByteBuffer& bbuf) const
 {
-	std::size_t last_pos = bbuf.getIOPointer();
+    std::size_t last_pos = bbuf.getIOPointer();
 
-	bbuf.setIOPointer(last_pos + 1);
+    bbuf.setIOPointer(last_pos + 1);
 
-	std::uint8_t num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
+    std::uint8_t num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
 
-	bbuf.setIOPointer(last_pos);
-	bbuf.putInt(num_bytes, false);
-	bbuf.setIOPointer(last_pos + 1 + num_bytes);
-	bbuf.putBytes(str.c_str(), str.length());
+    bbuf.setIOPointer(last_pos);
+    bbuf.putInt(num_bytes, false);
+    bbuf.setIOPointer(last_pos + 1 + num_bytes);
+    bbuf.putBytes(str.c_str(), str.length());
 }
 
 void Internal::CDFDataWriterBase::putPropertyListMarker(unsigned int prop_id, ByteBuffer& bbuf) const
 {
-	bbuf.putInt(composePropertySpec(prop_id, 1), false);
+    bbuf.putInt(composePropertySpec(prop_id, 1), false);
 }
 
 Internal::CDF::PropertySpec Internal::CDFDataWriterBase::composePropertySpec(unsigned int prop_id, std::size_t length) const
 {
-	return ((prop_id << CDF::NUM_PROP_VALUE_LENGTH_BITS) + length - 1);
+    return ((prop_id << CDF::NUM_PROP_VALUE_LENGTH_BITS) + length - 1);
 }
 
 bool Internal::CDFDataWriterBase::strictErrorChecking() const
 {
-	return strictErrorChecks;
+    return strictErrorChecks;
 }
 
 void Internal::CDFDataWriterBase::strictErrorChecking(bool strict)
 {
-	strictErrorChecks = strict;
+    strictErrorChecks = strict;
 }
 
 bool Internal::CDFDataWriterBase::singlePrecisionFloats() const
 {
-	return singlePrecFloats;
+    return singlePrecFloats;
 }
 
 void Internal::CDFDataWriterBase::singlePrecisionFloats(bool spf)
 {
-	singlePrecFloats = spf;
+    singlePrecFloats = spf;
 }

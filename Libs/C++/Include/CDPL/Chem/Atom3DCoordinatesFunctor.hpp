@@ -36,27 +36,27 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
+        class Atom;
 
-		/**
-		 * \brief Atom3DCoordinatesFunctor.
-		 */
-		struct CDPL_CHEM_API Atom3DCoordinatesFunctor
-		{
+        /**
+         * \brief Atom3DCoordinatesFunctor.
+         */
+        struct CDPL_CHEM_API Atom3DCoordinatesFunctor
+        {
 
-		  public:
-			/**
-			 * \brief Returns the 3D-coordinates of the argument atom.
-			 * \param atom The atom.
-			 * \return The 3D-coordinates of the atom.
-			 * \see Chem::get3DCoordinates(const Atom&)
-			 */
-			const Math::Vector3D& operator()(const Atom& atom) const;
-		};
-	}
+          public:
+            /**
+             * \brief Returns the 3D-coordinates of the argument atom.
+             * \param atom The atom.
+             * \return The 3D-coordinates of the atom.
+             * \see Chem::get3DCoordinates(const Atom&)
+             */
+            const Math::Vector3D& operator()(const Atom& atom) const;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ATOM3DCOORDINATESFUNCTOR_HPP

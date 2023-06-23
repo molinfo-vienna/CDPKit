@@ -32,116 +32,116 @@
 namespace
 {
 
-	struct AccessFunc
-	{
+    struct AccessFunc
+    {
 
-		AccessFunc(int* data): data(data) {}
+        AccessFunc(int* data): data(data) {}
 
-		int& operator()(std::size_t idx) const {
-			return data[idx];
-		}
+        int& operator()(std::size_t idx) const {
+            return data[idx];
+        }
 
-		bool operator==(const AccessFunc& func) const {
-			return (data == func.data);
-		}
+        bool operator==(const AccessFunc& func) const {
+            return (data == func.data);
+        }
 
-		int* data;
-	};
+        int* data;
+    };
 }
 
 
 BOOST_AUTO_TEST_CASE(IndexedElementIteratorTest)
 {
-	using namespace CDPL;
-	using namespace Util;
+    using namespace CDPL;
+    using namespace Util;
 
-	int data[] = { 0, 1, 2, 3, 4 };
+    int data[] = { 0, 1, 2, 3, 4 };
 
-	IndexedElementIterator<int, AccessFunc> it1(data, 0);
+    IndexedElementIterator<int, AccessFunc> it1(data, 0);
 
-	BOOST_CHECK(*it1 == 0);
-	BOOST_CHECK((IndexedElementIterator<int, AccessFunc>(data, 2) - it1 == 2));
-	BOOST_CHECK(it1.getIndex() == 0);
-	BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
+    BOOST_CHECK(*it1 == 0);
+    BOOST_CHECK((IndexedElementIterator<int, AccessFunc>(data, 2) - it1 == 2));
+    BOOST_CHECK(it1.getIndex() == 0);
+    BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
 
-	++it1;
+    ++it1;
 
-	BOOST_CHECK(*it1 == 1);
-	BOOST_CHECK((IndexedElementIterator<int, AccessFunc>(data, 2) != it1));
-	BOOST_CHECK(it1.getIndex() == 1);
-	BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
+    BOOST_CHECK(*it1 == 1);
+    BOOST_CHECK((IndexedElementIterator<int, AccessFunc>(data, 2) != it1));
+    BOOST_CHECK(it1.getIndex() == 1);
+    BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
 
-	it1++;
+    it1++;
 
-	BOOST_CHECK(*it1 == 2);
-	BOOST_CHECK((IndexedElementIterator<int, AccessFunc>(data, 2) == it1));
-	BOOST_CHECK(it1.getIndex() == 2);
-	BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
+    BOOST_CHECK(*it1 == 2);
+    BOOST_CHECK((IndexedElementIterator<int, AccessFunc>(data, 2) == it1));
+    BOOST_CHECK(it1.getIndex() == 2);
+    BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
 
-	--it1;
+    --it1;
 
-	BOOST_CHECK(*it1 == 1);
-	BOOST_CHECK(it1.getIndex() == 1);
-	BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
+    BOOST_CHECK(*it1 == 1);
+    BOOST_CHECK(it1.getIndex() == 1);
+    BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
 
-	it1--;
+    it1--;
 
-	BOOST_CHECK(*it1 == 0);
-	BOOST_CHECK(it1.getIndex() == 0);
-	BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
+    BOOST_CHECK(*it1 == 0);
+    BOOST_CHECK(it1.getIndex() == 0);
+    BOOST_CHECK(it1.getAccessFunc().data == &data[0]);
 
-	IndexedElementIterator<int, AccessFunc> it2(it1);
+    IndexedElementIterator<int, AccessFunc> it2(it1);
 
-	BOOST_CHECK(it1 == it2);
-	BOOST_CHECK(*it2 == 0);
-	BOOST_CHECK(*it1 == *it2);
-	BOOST_CHECK(&*it1 == &*it2);
-	BOOST_CHECK(it2.getIndex() == it1.getIndex());
-	BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
+    BOOST_CHECK(it1 == it2);
+    BOOST_CHECK(*it2 == 0);
+    BOOST_CHECK(*it1 == *it2);
+    BOOST_CHECK(&*it1 == &*it2);
+    BOOST_CHECK(it2.getIndex() == it1.getIndex());
+    BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
 
-	it2 = it1;
+    it2 = it1;
 
-	BOOST_CHECK(it1 == it2);
-	BOOST_CHECK(*it2 == 0);
-	BOOST_CHECK(*it1 == *it2);
-	BOOST_CHECK(&*it1 == &*it2);
-	BOOST_CHECK(it2.getIndex() == it1.getIndex());
-	BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
+    BOOST_CHECK(it1 == it2);
+    BOOST_CHECK(*it2 == 0);
+    BOOST_CHECK(*it1 == *it2);
+    BOOST_CHECK(&*it1 == &*it2);
+    BOOST_CHECK(it2.getIndex() == it1.getIndex());
+    BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
 
-	it2 += 3;
+    it2 += 3;
 
-	BOOST_CHECK(*it2 == 3);
-	BOOST_CHECK(it2 - it1 == 3);
-	BOOST_CHECK(it1 - it2 == -3);
-	BOOST_CHECK(*it2 != *it1);
-	BOOST_CHECK(it2 != it1);
-	BOOST_CHECK(&*it1 != &*it2);
-	BOOST_CHECK(it2.getIndex() == it1.getIndex() + 3);
-	BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
+    BOOST_CHECK(*it2 == 3);
+    BOOST_CHECK(it2 - it1 == 3);
+    BOOST_CHECK(it1 - it2 == -3);
+    BOOST_CHECK(*it2 != *it1);
+    BOOST_CHECK(it2 != it1);
+    BOOST_CHECK(&*it1 != &*it2);
+    BOOST_CHECK(it2.getIndex() == it1.getIndex() + 3);
+    BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
 
-	it2 -= 3;
+    it2 -= 3;
 
-	BOOST_CHECK(it1 == it2);
-	BOOST_CHECK(*it2 == 0);
-	BOOST_CHECK(*it1 == *it2);
-	BOOST_CHECK(&*it1 == &*it2);
-	BOOST_CHECK(it2 - it1 == 0);
-	BOOST_CHECK(it1 - it2 == 0);
-	BOOST_CHECK(it2.getIndex() == it1.getIndex());
-	BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
+    BOOST_CHECK(it1 == it2);
+    BOOST_CHECK(*it2 == 0);
+    BOOST_CHECK(*it1 == *it2);
+    BOOST_CHECK(&*it1 == &*it2);
+    BOOST_CHECK(it2 - it1 == 0);
+    BOOST_CHECK(it1 - it2 == 0);
+    BOOST_CHECK(it2.getIndex() == it1.getIndex());
+    BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
 
-	it2 = it1 + 3;
+    it2 = it1 + 3;
 
-	BOOST_CHECK(*it2 == 3);
-	BOOST_CHECK(it2 - it1 == 3);
-	BOOST_CHECK(it1 - it2 == -3);
-	BOOST_CHECK(*it2 != *it1);
-	BOOST_CHECK(&*it1 != &*it2);
-	BOOST_CHECK(it2 != it1);
-	BOOST_CHECK(*(it2 - 3) == 0);
-	BOOST_CHECK(*(it2 - 3) == *it1);
-	BOOST_CHECK(it2 - 3 == it1);
-	BOOST_CHECK(it2.getIndex() == it1.getIndex() + 3);
-	BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
+    BOOST_CHECK(*it2 == 3);
+    BOOST_CHECK(it2 - it1 == 3);
+    BOOST_CHECK(it1 - it2 == -3);
+    BOOST_CHECK(*it2 != *it1);
+    BOOST_CHECK(&*it1 != &*it2);
+    BOOST_CHECK(it2 != it1);
+    BOOST_CHECK(*(it2 - 3) == 0);
+    BOOST_CHECK(*(it2 - 3) == *it1);
+    BOOST_CHECK(it2 - 3 == it1);
+    BOOST_CHECK(it2.getIndex() == it1.getIndex() + 3);
+    BOOST_CHECK(it2.getAccessFunc().data == it1.getAccessFunc().data);
 }
 

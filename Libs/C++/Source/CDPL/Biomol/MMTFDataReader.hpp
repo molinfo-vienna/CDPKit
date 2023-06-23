@@ -39,44 +39,44 @@ namespace CDPL
     namespace Base
     {
 
-		class DataIOBase;
+        class DataIOBase;
     }
 
     namespace Chem
     {
 
-		class Molecule;
-		class Atom;
+        class Molecule;
+        class Atom;
     }
 
     namespace Biomol
     {
 
-		class MMTFDataReader
-		{
+        class MMTFDataReader
+        {
 
-		public:
-			MMTFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+        public:
+            MMTFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool readRecord(std::istream& is, Chem::Molecule& mol);
+            bool readRecord(std::istream& is, Chem::Molecule& mol);
 
-			bool skipRecord(std::istream& is);
-		
-			bool hasMoreData(std::istream& is) const;
+            bool skipRecord(std::istream& is);
+        
+            bool hasMoreData(std::istream& is) const;
 
-		private:
-			bool readRecordData(std::istream& is, msgpack::object_handle& handle);
+        private:
+            bool readRecordData(std::istream& is, msgpack::object_handle& handle);
 
-			void buildMolecule(Chem::Molecule& mol);
-			
-			void addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
+            void buildMolecule(Chem::Molecule& mol);
+            
+            void addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
 
-			typedef std::vector<Chem::Atom*> AtomArray;
+            typedef std::vector<Chem::Atom*> AtomArray;
 
-			const Base::DataIOBase& ioBase;
-			AtomArray               atoms;
-			mmtf::StructureData     structData;
-		};
+            const Base::DataIOBase& ioBase;
+            AtomArray               atoms;
+            mmtf::StructureData     structData;
+        };
     }
 }
 

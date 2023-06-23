@@ -31,5 +31,5 @@
 
 void CDPLPythonChem::exportReactionIOManager()
 {
-	CDPLPythonBase::DataIOManagerExport<CDPL::Chem::Reaction>("ReactionIOManager");
+    CDPLPythonBase::DataIOManagerExport<CDPL::Chem::Reaction>("ReactionIOManager");
 }

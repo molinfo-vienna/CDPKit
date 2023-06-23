@@ -47,171 +47,171 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94VanDerWaalsParameterTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94VanDerWaalsParameterTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<unsigned int, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94VanDerWaalsParameterTable> SharedPointer;
-			typedef MMFF94VanDerWaalsInteraction::HDonorAcceptorType HDonorAcceptorType;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
-
-			  public:
-				Entry();
-
-				Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
-					  HDonorAcceptorType don_acc_type);
- 
-				unsigned int getAtomType() const;
-
-				/**
-				 * \brief Returns the atomic polarizability parameter.
-				 * \return The atomic polarizability.
-				 */
-				double getAtomicPolarizability() const;
-
-				/**
-				 * \brief Returns the Slater-Kirkwood effective number of valence electrons parameter.
-				 * \return The Slater-Kirkwood effective number of valence electrons.
-				 */
-				double getEffectiveElectronNumber() const;
- 
-				/**
-				 * \brief Returns the scaling factor A parameter.
-				 * \return The scaling factor A.
-				 */
-				double getFactorA() const;
-  
-				/**
-				 * \brief Returns the scaling factor G parameter.
-				 * \return The scaling factor G
-				 */
-				double getFactorG() const;
-  
-				/**
-				 * Returns the H-donor/-acceptor property associated with the numeric MMFF94 atom type.
-				 * \return The H-donor/-acceptor property specifier.
-				 */
-				HDonorAcceptorType getHDonorAcceptorType() const;
-
-				operator bool() const;
-
-			  private:
-				unsigned int       atomType;
-				double             polarizability;
-				double             effElNumber;
-				double             factA;
-				double             factG;
-				HDonorAcceptorType donAccType;
-				bool               initialized;
-			};			
-
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
-
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94VanDerWaalsParameterTable();
-
-			void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
-						  HDonorAcceptorType don_acc_type);
-
-			const Entry& getEntry(unsigned int atom_type) const;
-
-			std::size_t getNumEntries() const;
-
-			void clear();
-
-			bool removeEntry(unsigned int atom_type);
-
-			EntryIterator removeEntry(const EntryIterator& it);
-
-			ConstEntryIterator getEntriesBegin() const;
-
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
-
-			EntryIterator getEntriesEnd();
-
-			ConstEntryIterator begin() const;
-
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
-
-			EntryIterator end();
-
-			void setExponent(double value);
-
-			void setBeta(double value);
-
-			void setFactorB(double value);
-
-			void setFactorDARAD(double value);
-
-			void setFactorDAEPS(double value);
-
-			/**
-			 * \brief Returns the exponent used in the calculation of van der Waals
-			 *        interaction energies.
-			 * \return The exponent.
-			 */
-			double getExponent() const;
+          public:
+            typedef std::shared_ptr<MMFF94VanDerWaalsParameterTable> SharedPointer;
+            typedef MMFF94VanDerWaalsInteraction::HDonorAcceptorType HDonorAcceptorType;
     
-			/**
-			 * \brief Returns the value of the \e B factor used in the calculation of van der Waals
-			 *        interaction energies.
-			 * \return The value of the \e B factor.
-			 */
-			double getFactorB() const;
+            class CDPL_FORCEFIELD_API Entry
+            {
+
+              public:
+                Entry();
+
+                Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
+                      HDonorAcceptorType don_acc_type);
+ 
+                unsigned int getAtomType() const;
+
+                /**
+                 * \brief Returns the atomic polarizability parameter.
+                 * \return The atomic polarizability.
+                 */
+                double getAtomicPolarizability() const;
+
+                /**
+                 * \brief Returns the Slater-Kirkwood effective number of valence electrons parameter.
+                 * \return The Slater-Kirkwood effective number of valence electrons.
+                 */
+                double getEffectiveElectronNumber() const;
+ 
+                /**
+                 * \brief Returns the scaling factor A parameter.
+                 * \return The scaling factor A.
+                 */
+                double getFactorA() const;
   
-			/**
-			 * \brief Returns the value of \e beta used in the calculation of van der Waals
-			 *        interaction energies.
-			 * \return The value of \e beta.
-			 */
-			double getBeta() const;
+                /**
+                 * \brief Returns the scaling factor G parameter.
+                 * \return The scaling factor G
+                 */
+                double getFactorG() const;
+  
+                /**
+                 * Returns the H-donor/-acceptor property associated with the numeric MMFF94 atom type.
+                 * \return The H-donor/-acceptor property specifier.
+                 */
+                HDonorAcceptorType getHDonorAcceptorType() const;
+
+                operator bool() const;
+
+              private:
+                unsigned int       atomType;
+                double             polarizability;
+                double             effElNumber;
+                double             factA;
+                double             factG;
+                HDonorAcceptorType donAccType;
+                bool               initialized;
+            };            
+
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
+
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94VanDerWaalsParameterTable();
+
+            void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
+                          HDonorAcceptorType don_acc_type);
+
+            const Entry& getEntry(unsigned int atom_type) const;
+
+            std::size_t getNumEntries() const;
+
+            void clear();
+
+            bool removeEntry(unsigned int atom_type);
+
+            EntryIterator removeEntry(const EntryIterator& it);
+
+            ConstEntryIterator getEntriesBegin() const;
+
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
+
+            EntryIterator getEntriesEnd();
+
+            ConstEntryIterator begin() const;
+
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
+
+            EntryIterator end();
+
+            void setExponent(double value);
+
+            void setBeta(double value);
+
+            void setFactorB(double value);
+
+            void setFactorDARAD(double value);
+
+            void setFactorDAEPS(double value);
+
+            /**
+             * \brief Returns the exponent used in the calculation of van der Waals
+             *        interaction energies.
+             * \return The exponent.
+             */
+            double getExponent() const;
+    
+            /**
+             * \brief Returns the value of the \e B factor used in the calculation of van der Waals
+             *        interaction energies.
+             * \return The value of the \e B factor.
+             */
+            double getFactorB() const;
+  
+            /**
+             * \brief Returns the value of \e beta used in the calculation of van der Waals
+             *        interaction energies.
+             * \return The value of \e beta.
+             */
+            double getBeta() const;
    
-			/**
-			 * \brief Returns the value of the \e DARAD factor used in the calculation of van der Waals
-			 *        interaction energies.
-			 * \return The value of the \e DARAD factor.
-			 */
-			double getFactorDARAD() const;
+            /**
+             * \brief Returns the value of the \e DARAD factor used in the calculation of van der Waals
+             *        interaction energies.
+             * \return The value of the \e DARAD factor.
+             */
+            double getFactorDARAD() const;
    
-			/**
-			 * \brief Returns the value of the \e DAEPS factor used in the calculation of van der Waals
-			 *        interaction energies.
-			 * \return The value of the \e DAEPS factor.
-			 */
-			double getFactorDAEPS() const;
+            /**
+             * \brief Returns the value of the \e DAEPS factor used in the calculation of van der Waals
+             *        interaction energies.
+             * \return The value of the \e DAEPS factor.
+             */
+            double getFactorDAEPS() const;
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-			double               exponent;
-			double               factB;
-			double               beta;
-			double               factDARAD;
-			double               factDAEPS;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+            double               exponent;
+            double               factB;
+            double               beta;
+            double               factDARAD;
+            double               factDAEPS;
+        };
     }
 }
 

@@ -40,15 +40,15 @@ namespace CDPL
     namespace Biomol
     {
 
-		/**
-		 * \brief Provides default values for built-in Chem::MolecularGraph properties.
-		 */
-		namespace MolecularGraphPropertyDefault
-		{
+        /**
+         * \brief Provides default values for built-in Chem::MolecularGraph properties.
+         */
+        namespace MolecularGraphPropertyDefault
+        {
 
-			extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
-			extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;	
-		}
+            extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
+            extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;    
+        }
     }
 }
 

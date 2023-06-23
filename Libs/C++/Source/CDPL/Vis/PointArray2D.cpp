@@ -33,22 +33,22 @@ using namespace CDPL;
 
 void Vis::PointArray2D::translate(const Math::Vector2D& vec)
 {
-	for (ElementIterator it = getElementsBegin(), end = getElementsEnd(); it != end; ++it) {
-		Math::Vector2D& pt = *it;
+    for (ElementIterator it = getElementsBegin(), end = getElementsEnd(); it != end; ++it) {
+        Math::Vector2D& pt = *it;
 
-		pt += vec;
-	}
+        pt += vec;
+    }
 }
 
 void Vis::PointArray2D::getBounds(Rectangle2D& bounds) const
 {
-	bounds.reset();
+    bounds.reset();
 
-	for (ConstElementIterator it = getElementsBegin(), end = getElementsEnd(); it != end; ++it)
-		bounds.addPoint(*it);
+    for (ConstElementIterator it = getElementsBegin(), end = getElementsEnd(); it != end; ++it)
+        bounds.addPoint(*it);
 }
 
 const char* Vis::PointArray2D::getClassName() const 
 {
-	return "PointArray2D";
+    return "PointArray2D";
 }

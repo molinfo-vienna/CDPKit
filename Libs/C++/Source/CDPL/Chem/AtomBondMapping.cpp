@@ -32,37 +32,37 @@ using namespace CDPL;
 
 const Chem::AtomMapping& Chem::AtomBondMapping::getAtomMapping() const
 {
-	return atomMapping;
+    return atomMapping;
 }
 
 const Chem::BondMapping& Chem::AtomBondMapping::getBondMapping() const
 {
-	return bondMapping;
+    return bondMapping;
 }
 
 Chem::AtomMapping& Chem::AtomBondMapping::getAtomMapping()
 {
-	return atomMapping;
+    return atomMapping;
 }
 
 Chem::BondMapping& Chem::AtomBondMapping::getBondMapping()
 {
-	return bondMapping;
+    return bondMapping;
 }
 
 bool Chem::AtomBondMapping::operator==(const AtomBondMapping& mapping) const
 {
-	return (atomMapping == mapping.atomMapping && bondMapping == mapping.bondMapping);
+    return (atomMapping == mapping.atomMapping && bondMapping == mapping.bondMapping);
 }
 
 bool Chem::AtomBondMapping::operator!=(const AtomBondMapping& mapping) const
 {
-	return !(this->operator==(mapping));
+    return !(this->operator==(mapping));
 }
 
 void Chem::AtomBondMapping::clear()
 {
-	atomMapping.clear();
-	bondMapping.clear();
+    atomMapping.clear();
+    bondMapping.clear();
 }
 

@@ -39,24 +39,24 @@ namespace CDPL
     namespace Grid
     {
 
-		/**
-		 * \brief RegularGridSet.
-		 */
-		template <typename T, typename CVT = T>
-		class RegularGridSet : public Util::IndirectArray<RegularGrid<T, CVT> >
-		{
+        /**
+         * \brief RegularGridSet.
+         */
+        template <typename T, typename CVT = T>
+        class RegularGridSet : public Util::IndirectArray<RegularGrid<T, CVT> >
+        {
 
-		  public:
-			typedef std::shared_ptr<RegularGridSet> SharedPointer;
+          public:
+            typedef std::shared_ptr<RegularGridSet> SharedPointer;
 
-		  private:
-			const char* getClassName() const {
-				return "RegularGridSet";
-			}
-		};
+          private:
+            const char* getClassName() const {
+                return "RegularGridSet";
+            }
+        };
 
-		typedef RegularGridSet<double> DRegularGridSet;
-		typedef RegularGridSet<float> FRegularGridSet;
+        typedef RegularGridSet<double> DRegularGridSet;
+        typedef RegularGridSet<float> FRegularGridSet;
     }
 }
 

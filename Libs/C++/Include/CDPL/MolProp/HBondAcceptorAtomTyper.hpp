@@ -42,21 +42,21 @@ namespace CDPL
     namespace MolProp 
     {
 
-		class CDPL_MOLPROP_API HBondAcceptorAtomTyper
-		{
+        class CDPL_MOLPROP_API HBondAcceptorAtomTyper
+        {
 
-		  public:
-			typedef std::shared_ptr<HBondAcceptorAtomTyper> SharedPointer;
+          public:
+            typedef std::shared_ptr<HBondAcceptorAtomTyper> SharedPointer;
 
-			HBondAcceptorAtomTyper();
+            HBondAcceptorAtomTyper();
 
-			HBondAcceptorAtomTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
+            HBondAcceptorAtomTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
 
-			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
+            void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
 
-		  private:
-			Chem::PatternAtomTyper atomTyper;
-		};
+          private:
+            Chem::PatternAtomTyper atomTyper;
+        };
     }
 }
 

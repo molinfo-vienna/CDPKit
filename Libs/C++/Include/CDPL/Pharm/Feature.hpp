@@ -39,46 +39,46 @@ namespace CDPL
     namespace Pharm 
     {
 
-		class Pharmacophore;
+        class Pharmacophore;
 
-		/**
-		 * \brief Feature.
-		 */
-		class CDPL_PHARM_API Feature : public Chem::Entity3D
-		{
+        /**
+         * \brief Feature.
+         */
+        class CDPL_PHARM_API Feature : public Chem::Entity3D
+        {
 
-		  public:
-			/**
-			 * \brief Returns a \c const reference to the parent pharmacophore.
-			 * \return A \c const reference to the parent pharmacophore.
-			 */
-			virtual const Pharmacophore& getPharmacophore() const = 0;
+          public:
+            /**
+             * \brief Returns a \c const reference to the parent pharmacophore.
+             * \return A \c const reference to the parent pharmacophore.
+             */
+            virtual const Pharmacophore& getPharmacophore() const = 0;
 
-			/**
-			 * \brief Returns a non-\c const reference to the parent pharmacophore.
-			 * \return A non-\c const reference to the parent pharmacophore.
-			 */
-			virtual Pharmacophore& getPharmacophore() = 0;
-	
-			/**
-			 * \brief Returns the index of the feature in its parent pharmacophore.
-			 * \return The zero-based index of the feature.
-			 */
-			virtual std::size_t getIndex() const = 0;
-		
-			/**
-			 * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
-			 * \param feature The feature whose properties get copied.
-			 * \return A reference to itself.
-			 */
-			Feature& operator=(const Feature& feature);
+            /**
+             * \brief Returns a non-\c const reference to the parent pharmacophore.
+             * \return A non-\c const reference to the parent pharmacophore.
+             */
+            virtual Pharmacophore& getPharmacophore() = 0;
+    
+            /**
+             * \brief Returns the index of the feature in its parent pharmacophore.
+             * \return The zero-based index of the feature.
+             */
+            virtual std::size_t getIndex() const = 0;
+        
+            /**
+             * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
+             * \param feature The feature whose properties get copied.
+             * \return A reference to itself.
+             */
+            Feature& operator=(const Feature& feature);
 
-		  protected:
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~Feature() {}
-		};
+          protected:
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~Feature() {}
+        };
     }
 }
 

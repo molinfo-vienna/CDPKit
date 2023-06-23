@@ -37,33 +37,33 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-		class AtomContainer;
-	}
+        class Atom;
+        class AtomContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief AtomAutoCorrelation3DVectorCalculator.
-		 */
-		class CDPL_DESCR_API AtomAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Chem::Atom>
-		{
+        /**
+         * \brief AtomAutoCorrelation3DVectorCalculator.
+         */
+        class CDPL_DESCR_API AtomAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Chem::Atom>
+        {
 
-		public:
-			/**
-			 * \brief Constructs the \c %AtomAutoCorrelation3DVectorCalculator instance.
-			 */
-			AtomAutoCorrelation3DVectorCalculator();
-			
-			AtomAutoCorrelation3DVectorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& vec);
+        public:
+            /**
+             * \brief Constructs the \c %AtomAutoCorrelation3DVectorCalculator instance.
+             */
+            AtomAutoCorrelation3DVectorCalculator();
+            
+            AtomAutoCorrelation3DVectorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& vec);
 
-			void calculate(const Chem::AtomContainer& cntnr, Math::DVector& vec);
-		}; 
-	}
+            void calculate(const Chem::AtomContainer& cntnr, Math::DVector& vec);
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_ATOMAUTOCORRELATION3DVECTORCALCULATOR_HPP

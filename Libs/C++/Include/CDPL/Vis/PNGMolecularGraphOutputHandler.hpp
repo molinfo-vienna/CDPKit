@@ -37,15 +37,15 @@
 namespace CDPL 
 {
 
-	namespace Vis
-	{
+    namespace Vis
+    {
 
-		/**
-		 * \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable
-		 *        Network Graphics (PNG)</em> [\ref WPNG] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<PNGMolecularGraphWriter, DataFormat::PNG> PNGMolecularGraphOutputHandler;	
-	}
+        /**
+         * \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable
+         *        Network Graphics (PNG)</em> [\ref WPNG] format.
+         */
+        typedef Util::DefaultDataOutputHandler<PNGMolecularGraphWriter, DataFormat::PNG> PNGMolecularGraphOutputHandler;    
+    }
 }
 
 #endif // CDPL_VIS_PNGMOLECULARGRAPHOUTPUTHANDLER_HPP

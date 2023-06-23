@@ -33,8 +33,8 @@ std::size_t CDPL::Internal::getExplicitAtomCount(const Chem::AtomContainer& cntn
     std::size_t count = 0;
 
     for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		if (strict ? type == getType(*it) : Chem::atomTypesMatch(type, getType(*it)))
-			count++;
+        if (strict ? type == getType(*it) : Chem::atomTypesMatch(type, getType(*it)))
+            count++;
 
     return count;
 }

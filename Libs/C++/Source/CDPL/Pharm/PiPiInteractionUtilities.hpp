@@ -34,8 +34,8 @@ namespace CDPL
     namespace Pharm
     {
 
-		double calcVPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec);
-		double calcHPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec);
+        double calcVPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec);
+        double calcHPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec);
     }
 }
 

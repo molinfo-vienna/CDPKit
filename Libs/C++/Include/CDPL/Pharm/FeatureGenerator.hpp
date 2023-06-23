@@ -42,66 +42,66 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
+        class MolecularGraph;
     };
 
     namespace Pharm
     {
 
-		class Pharmacophore;
+        class Pharmacophore;
 
-		/**
-		 * \brief FeatureGenerator.
-		 */
-		class CDPL_PHARM_API FeatureGenerator
-		{
+        /**
+         * \brief FeatureGenerator.
+         */
+        class CDPL_PHARM_API FeatureGenerator
+        {
 
-		  public:
-			typedef std::shared_ptr<FeatureGenerator> SharedPointer;
+          public:
+            typedef std::shared_ptr<FeatureGenerator> SharedPointer;
 
-			/**
-			 * \brief Constructs the \c %FeatureGenerator instance.
-			 */
-			FeatureGenerator();
+            /**
+             * \brief Constructs the \c %FeatureGenerator instance.
+             */
+            FeatureGenerator();
 
-			/**
-			 * Virtual destructor.
-			 */
-			virtual ~FeatureGenerator() {}
+            /**
+             * Virtual destructor.
+             */
+            virtual ~FeatureGenerator() {}
 
-			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
-			 * \param func The atom 3D-coordinates function.
-			 */
-			virtual void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+            /**
+             * \brief Specifies a function for the retrieval of atom 3D-coordinates.
+             * \param func The atom 3D-coordinates function.
+             */
+            virtual void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
-			/**
-			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
-			 * \return The registered atom 3D-coordinates function.
-			 */
-			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+            /**
+             * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+             * \return The registered atom 3D-coordinates function.
+             */
+            const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
-			/**
-			 * \brief Perceives pharmacophore features and adds them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 */
-			virtual void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) = 0;
+            /**
+             * \brief Perceives pharmacophore features and adds them to the pharmacophore \a pharm.
+             * \param molgraph The molecular graph for which to perceive the features.
+             * \param pharm The output pharmacophore where to add the generated features.
+             */
+            virtual void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) = 0;
 
-			virtual SharedPointer clone() const = 0;
+            virtual SharedPointer clone() const = 0;
 
-		  protected:
-			/**
-			 * \brief Constructs a copy of the \c %FeatureGenerator instance \a gen.
-			 * \param gen The \c %FeatureGenerator instance to copy.
-			 */
-			FeatureGenerator(const FeatureGenerator& gen);
-	
-			FeatureGenerator& operator=(const FeatureGenerator& gen);
+          protected:
+            /**
+             * \brief Constructs a copy of the \c %FeatureGenerator instance \a gen.
+             * \param gen The \c %FeatureGenerator instance to copy.
+             */
+            FeatureGenerator(const FeatureGenerator& gen);
+    
+            FeatureGenerator& operator=(const FeatureGenerator& gen);
 
-		  private:
-			Chem::Atom3DCoordinatesFunction coordsFunc;
-		};
+          private:
+            Chem::Atom3DCoordinatesFunction coordsFunc;
+        };
     }
 }
 

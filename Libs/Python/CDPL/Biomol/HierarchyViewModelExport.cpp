@@ -35,14 +35,14 @@ void CDPLPythonBiomol::exportHierarchyViewModel()
     using namespace CDPL;
 
     python::class_<Biomol::HierarchyViewModel, python::bases<Biomol::HierarchyViewNode>, boost::noncopyable>("HierarchyViewModel", python::no_init)
-		.def("getNumChains", &Biomol::HierarchyViewModel::getNumChains, python::arg("self"))
-		.def("getChain", &Biomol::HierarchyViewModel::getChain, (python::arg("self"), python::arg("idx")),
-			 python::return_internal_reference<>())
-		.def("hasChainWithID", &Biomol::HierarchyViewModel::hasChainWithID, (python::arg("self"), python::arg("id")))
-		.def("getChainByID", &Biomol::HierarchyViewModel::getChainByID, (python::arg("self"), python::arg("id")),
-			 python::return_internal_reference<>())
-		.def("__len__", &Biomol::HierarchyViewModel::getNumChains, python::arg("self"))
-		.def("__getitem__", &Biomol::HierarchyViewModel::getChain, (python::arg("self"), python::arg("idx")),
-			 python::return_internal_reference<>())
-		.add_property("numChains", &Biomol::HierarchyViewModel::getNumChains);
+        .def("getNumChains", &Biomol::HierarchyViewModel::getNumChains, python::arg("self"))
+        .def("getChain", &Biomol::HierarchyViewModel::getChain, (python::arg("self"), python::arg("idx")),
+             python::return_internal_reference<>())
+        .def("hasChainWithID", &Biomol::HierarchyViewModel::hasChainWithID, (python::arg("self"), python::arg("id")))
+        .def("getChainByID", &Biomol::HierarchyViewModel::getChainByID, (python::arg("self"), python::arg("id")),
+             python::return_internal_reference<>())
+        .def("__len__", &Biomol::HierarchyViewModel::getNumChains, python::arg("self"))
+        .def("__getitem__", &Biomol::HierarchyViewModel::getChain, (python::arg("self"), python::arg("idx")),
+             python::return_internal_reference<>())
+        .add_property("numChains", &Biomol::HierarchyViewModel::getNumChains);
 }

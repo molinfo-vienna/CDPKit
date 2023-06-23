@@ -46,139 +46,139 @@ using namespace CDPL;
 
 
 void Biomol::extractResidueSubstructures(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent_molgraph, 
-					 Chem::Fragment& res_substructs, bool cnctd_only, unsigned int flags, bool append)
+                     Chem::Fragment& res_substructs, bool cnctd_only, unsigned int flags, bool append)
 {
     if (!append)
-	res_substructs.clear();
+    res_substructs.clear();
 
     std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
-		  std::bind(&extractResidueSubstructure, std::placeholders::_1, std::ref(parent_molgraph), std::ref(res_substructs),
-			      cnctd_only, flags, true));
+          std::bind(&extractResidueSubstructure, std::placeholders::_1, std::ref(parent_molgraph), std::ref(res_substructs),
+                  cnctd_only, flags, true));
 }
 
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-				  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms, bool append)
+                  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms, bool append)
 {
     extractProximalAtoms(core, macromol, env_atoms, 
-			 static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, inc_core_atoms, append);
+             static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, inc_core_atoms, append);
 }
 
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-				  Chem::Fragment& env_atoms, const Chem::Atom3DCoordinatesFunction& coords_func,
-				  double max_dist, bool inc_core_atoms, bool append)
+                  Chem::Fragment& env_atoms, const Chem::Atom3DCoordinatesFunction& coords_func,
+                  double max_dist, bool inc_core_atoms, bool append)
 {
     using namespace Chem;
 
     if (!append)
-	env_atoms.clear();
+    env_atoms.clear();
 
     if (core.getNumAtoms() == 0)
-	return;
+    return;
 
     Math::Vector3DArray core_coords; 
     get3DCoordinates(core, core_coords, coords_func);
-	
+    
     Math::Vector3D core_ctr; 
     calcCentroid(core_coords, core_ctr);
-	
+    
     double bsphere_rad = 0.0;
 
     for (Math::Vector3DArray::ConstElementIterator it = core_coords.getElementsBegin(), end = core_coords.getElementsEnd(); it != end; ++it) 
-	bsphere_rad = std::max(bsphere_rad, length(*it - core_ctr));
+    bsphere_rad = std::max(bsphere_rad, length(*it - core_ctr));
 
     bsphere_rad += max_dist;
-	
+    
     for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
-	const Atom& atom = *it;
-	const Math::Vector3D& atom_pos = coords_func(atom);
+    const Atom& atom = *it;
+    const Math::Vector3D& atom_pos = coords_func(atom);
 
-	if (length(atom_pos - core_ctr) > bsphere_rad)
-	    continue;
+    if (length(atom_pos - core_ctr) > bsphere_rad)
+        continue;
 
-	if (!inc_core_atoms && core.containsAtom(atom))
-	    continue;
+    if (!inc_core_atoms && core.containsAtom(atom))
+        continue;
 
-	if (env_atoms.containsAtom(atom))
-	    continue;
+    if (env_atoms.containsAtom(atom))
+        continue;
 
-	for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
-	    if (length(atom_pos - *c_it) <= max_dist) {
-		env_atoms.addAtom(atom);
-		break;
-	    }
-	}
+    for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
+        if (length(atom_pos - *c_it) <= max_dist) {
+        env_atoms.addAtom(atom);
+        break;
+        }
+    }
     } 
 }
 
 void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-					Chem::Fragment& env_residues, double max_dist, bool append)
+                    Chem::Fragment& env_residues, double max_dist, bool append)
 {
     extractEnvironmentResidues(core, macromol, env_residues, 
-			       static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, append);
+                   static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, append);
 }
 
 void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-					Chem::Fragment& env_residues, const Chem::Atom3DCoordinatesFunction& coords_func, 
-					double max_dist, bool append)
+                    Chem::Fragment& env_residues, const Chem::Atom3DCoordinatesFunction& coords_func, 
+                    double max_dist, bool append)
 {
     using namespace Chem;
 
     if (!append)
-	env_residues.clear();
+    env_residues.clear();
 
     if (core.getNumAtoms() == 0)
-	return;
+    return;
 
     Math::Vector3DArray core_coords; 
     get3DCoordinates(core, core_coords, coords_func);
-	
+    
     Math::Vector3D core_ctr; 
     calcCentroid(core_coords, core_ctr);
-	
+    
     double bsphere_rad = 0.0;
 
     for (Math::Vector3DArray::ConstElementIterator it = core_coords.getElementsBegin(), end = core_coords.getElementsEnd(); it != end; ++it) 
-	bsphere_rad = std::max(bsphere_rad, length(*it - core_ctr));
+    bsphere_rad = std::max(bsphere_rad, length(*it - core_ctr));
 
     bsphere_rad += max_dist;
 
     for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
-	const Atom& atom = *it;
-	const Math::Vector3D& atom_pos = coords_func(atom);
+    const Atom& atom = *it;
+    const Math::Vector3D& atom_pos = coords_func(atom);
 
-	if (length(atom_pos - core_ctr) > bsphere_rad)
-	    continue;
+    if (length(atom_pos - core_ctr) > bsphere_rad)
+        continue;
 
-	if (core.containsAtom(atom) || env_residues.containsAtom(atom))
-	    continue;
+    if (core.containsAtom(atom) || env_residues.containsAtom(atom))
+        continue;
 
-	for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
-	    if (length(atom_pos - *c_it) <= max_dist) {
-		extractResidueSubstructure(atom, macromol, env_residues, true, Chem::AtomPropertyFlag::DEFAULT, true);
-		break;
-	    }
-	}
+    for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
+        if (length(atom_pos - *c_it) <= max_dist) {
+        extractResidueSubstructure(atom, macromol, env_residues, true, Chem::AtomPropertyFlag::DEFAULT, true);
+        break;
+        }
+    }
     } 
 
     std::size_t num_atoms = env_residues.getNumAtoms();
 
     for (std::size_t i = 0; i < num_atoms; i++) {
-	const Atom& env_atom = env_residues.getAtom(i);
-	Atom::ConstBondIterator b_it = env_atom.getBondsBegin();
+    const Atom& env_atom = env_residues.getAtom(i);
+    Atom::ConstBondIterator b_it = env_atom.getBondsBegin();
 
-	for (Atom::ConstAtomIterator a_it = env_atom.getAtomsBegin(), a_end = env_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-	    const Atom& nbr_atom = *a_it;
+    for (Atom::ConstAtomIterator a_it = env_atom.getAtomsBegin(), a_end = env_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+        const Atom& nbr_atom = *a_it;
 
-	    if (!env_residues.containsAtom(nbr_atom))
-		continue;
+        if (!env_residues.containsAtom(nbr_atom))
+        continue;
 
-	    const Bond& nbr_bond = *b_it;
+        const Bond& nbr_bond = *b_it;
 
-	    if (!macromol.containsBond(nbr_bond))
-		continue;
+        if (!macromol.containsBond(nbr_bond))
+        continue;
 
-	    env_residues.addBond(nbr_bond);
-	}
+        env_residues.addBond(nbr_bond);
+    }
     }
 }
 
@@ -187,78 +187,78 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
     using namespace Chem;
 
     if (flags == AtomPropertyFlag::DEFAULT)
-	flags = AtomPropertyFlag::RESIDUE_CODE |
-	    AtomPropertyFlag::RESIDUE_SEQ_NO |
-	    AtomPropertyFlag::RESIDUE_INS_CODE |
-	    AtomPropertyFlag::CHAIN_ID |
-	    AtomPropertyFlag::MODEL_NUMBER;
+    flags = AtomPropertyFlag::RESIDUE_CODE |
+        AtomPropertyFlag::RESIDUE_SEQ_NO |
+        AtomPropertyFlag::RESIDUE_INS_CODE |
+        AtomPropertyFlag::CHAIN_ID |
+        AtomPropertyFlag::MODEL_NUMBER;
 
     for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-	Atom& atom = *it;
+    Atom& atom = *it;
 
-	if (getType(atom) != AtomType::H) 
-	    continue;
-	
-	if (atom.getNumAtoms() != 1 && MolProp::getHeavyAtomCount(atom, molgraph) != 1) 
-	    continue;
+    if (getType(atom) != AtomType::H) 
+        continue;
+    
+    if (atom.getNumAtoms() != 1 && MolProp::getHeavyAtomCount(atom, molgraph) != 1) 
+        continue;
 
-	const Atom& prnt_atom = atom.getAtom(0);
+    const Atom& prnt_atom = atom.getAtom(0);
 
-	if (getType(prnt_atom) == AtomType::H) 
-	    overwrite = false;
+    if (getType(prnt_atom) == AtomType::H) 
+        overwrite = false;
 
-	if (overwrite) {
-	    if (flags & AtomPropertyFlag::RESIDUE_CODE)
-		setResidueCode(atom, getResidueCode(prnt_atom));
+    if (overwrite) {
+        if (flags & AtomPropertyFlag::RESIDUE_CODE)
+        setResidueCode(atom, getResidueCode(prnt_atom));
 
-	    if (flags & AtomPropertyFlag::MODEL_NUMBER)
-		setModelNumber(atom, getModelNumber(prnt_atom));
+        if (flags & AtomPropertyFlag::MODEL_NUMBER)
+        setModelNumber(atom, getModelNumber(prnt_atom));
 
-	    if (flags & AtomPropertyFlag::RESIDUE_SEQ_NO)
-		setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
+        if (flags & AtomPropertyFlag::RESIDUE_SEQ_NO)
+        setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
 
-	    if (flags & AtomPropertyFlag::CHAIN_ID)
-		setChainID(atom, getChainID(prnt_atom));
+        if (flags & AtomPropertyFlag::CHAIN_ID)
+        setChainID(atom, getChainID(prnt_atom));
 
-	    if (flags & AtomPropertyFlag::RESIDUE_INS_CODE)
-		setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
+        if (flags & AtomPropertyFlag::RESIDUE_INS_CODE)
+        setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
 
-	} else {
-	    if ((flags & AtomPropertyFlag::RESIDUE_CODE) && !hasResidueCode(atom))
-		setResidueCode(atom, getResidueCode(prnt_atom));
+    } else {
+        if ((flags & AtomPropertyFlag::RESIDUE_CODE) && !hasResidueCode(atom))
+        setResidueCode(atom, getResidueCode(prnt_atom));
 
-	    if ((flags & AtomPropertyFlag::MODEL_NUMBER) && !hasModelNumber(atom))
-		setModelNumber(atom, getModelNumber(prnt_atom));
+        if ((flags & AtomPropertyFlag::MODEL_NUMBER) && !hasModelNumber(atom))
+        setModelNumber(atom, getModelNumber(prnt_atom));
 
-	    if ((flags & AtomPropertyFlag::RESIDUE_SEQ_NO) && !hasResidueSequenceNumber(atom))
-		setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
+        if ((flags & AtomPropertyFlag::RESIDUE_SEQ_NO) && !hasResidueSequenceNumber(atom))
+        setResidueSequenceNumber(atom, getResidueSequenceNumber(prnt_atom));
 
-	    if ((flags & AtomPropertyFlag::CHAIN_ID) && !hasChainID(atom))
-		setChainID(atom, getChainID(prnt_atom));
+        if ((flags & AtomPropertyFlag::CHAIN_ID) && !hasChainID(atom))
+        setChainID(atom, getChainID(prnt_atom));
 
-	    if ((flags & AtomPropertyFlag::RESIDUE_INS_CODE) && !hasResidueInsertionCode(atom))
-		setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
-	}
+        if ((flags & AtomPropertyFlag::RESIDUE_INS_CODE) && !hasResidueInsertionCode(atom))
+        setResidueInsertionCode(atom, getResidueInsertionCode(prnt_atom));
+    }
     }
 }
 
 bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code, const char* chain_id, long res_seq_no,
-				char ins_code, std::size_t model_no)
+                char ins_code, std::size_t model_no)
 {
     if (res_code != 0 && (getResidueCode(molgraph) != res_code))
-	return false;
+    return false;
 
     if (chain_id != 0 && (getChainID(molgraph) != chain_id))
-	return false;
+    return false;
 
     if (res_seq_no != IGNORE_SEQUENCE_NO && (getResidueSequenceNumber(molgraph) != res_seq_no))
-	return false;
+    return false;
 
     if (ins_code != 0 && (getResidueInsertionCode(molgraph) != ins_code))
-	return false;
-			
+    return false;
+            
     if (model_no != 0 && (getModelNumber(molgraph) != model_no))
-	return false;
+    return false;
 
     return true;
 }
@@ -268,62 +268,62 @@ void Biomol::convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool ov
     using namespace Chem;
 
     if (overwrite) {
-	long atom_serial = 1;
+    long atom_serial = 1;
 
-	for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-	    Atom& atom = *it;
+    for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        Atom& atom = *it;
 
-	    if (hasMOL2SubstructureName(atom)) {
-		const std::string& ss_name = getMOL2SubstructureName(atom);
+        if (hasMOL2SubstructureName(atom)) {
+        const std::string& ss_name = getMOL2SubstructureName(atom);
 
-		setResidueCode(atom, ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name);
-		setHeteroAtomFlag(atom, !ResidueDictionary::isStdResidue(ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name));
-	    }
+        setResidueCode(atom, ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name);
+        setHeteroAtomFlag(atom, !ResidueDictionary::isStdResidue(ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name));
+        }
 
-	    if (hasMOL2SubstructureID(atom))
-		setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
+        if (hasMOL2SubstructureID(atom))
+        setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
   
-	    if (hasMOL2SubstructureChain(atom))
-		setChainID(atom, getMOL2SubstructureChain(atom));
+        if (hasMOL2SubstructureChain(atom))
+        setChainID(atom, getMOL2SubstructureChain(atom));
   
-	    if (hasMOL2Name(atom))
-		setResidueAtomName(atom, getMOL2Name(atom));
+        if (hasMOL2Name(atom))
+        setResidueAtomName(atom, getMOL2Name(atom));
 
-	    setSerialNumber(atom, atom_serial++);
-	}
+        setSerialNumber(atom, atom_serial++);
+    }
 
-	return;
+    return;
     }
 
     bool have_atom_serials = true;
 
     for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-	Atom& atom = *it;
+    Atom& atom = *it;
 
-	if (hasMOL2SubstructureName(atom)) {
-	    const std::string& ss_name = getMOL2SubstructureName(atom);
+    if (hasMOL2SubstructureName(atom)) {
+        const std::string& ss_name = getMOL2SubstructureName(atom);
 
-	    if (!hasResidueCode(atom))
-		setResidueCode(atom, ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name);
+        if (!hasResidueCode(atom))
+        setResidueCode(atom, ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name);
 
-	    if (!hasHeteroAtomFlag(atom))
-		setHeteroAtomFlag(atom, !ResidueDictionary::isStdResidue(ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name));
-	}
+        if (!hasHeteroAtomFlag(atom))
+        setHeteroAtomFlag(atom, !ResidueDictionary::isStdResidue(ss_name.size() > 3 ? ss_name.substr(0, 3) : ss_name));
+    }
     
-	if (!hasResidueSequenceNumber(atom) && hasMOL2SubstructureID(atom))
-	    setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
+    if (!hasResidueSequenceNumber(atom) && hasMOL2SubstructureID(atom))
+        setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
   
-	if (!hasChainID(atom) && hasMOL2SubstructureChain(atom))
-	    setChainID(atom, getMOL2SubstructureChain(atom));
+    if (!hasChainID(atom) && hasMOL2SubstructureChain(atom))
+        setChainID(atom, getMOL2SubstructureChain(atom));
 
-	if (!hasResidueAtomName(atom) && hasMOL2Name(atom))
-	    setResidueAtomName(atom, getMOL2Name(atom));
+    if (!hasResidueAtomName(atom) && hasMOL2Name(atom))
+        setResidueAtomName(atom, getMOL2Name(atom));
 
-	if (!hasSerialNumber(atom))
-	    have_atom_serials = false;
+    if (!hasSerialNumber(atom))
+        have_atom_serials = false;
     }
 
     if (!have_atom_serials)
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
-	    setSerialNumber(molgraph.getAtom(i), i + 1);
+    for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
+        setSerialNumber(molgraph.getAtom(i), i + 1);
 }

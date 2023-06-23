@@ -32,14 +32,14 @@
 
 void CDPLPythonChem::exportCompleteRingSet()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::CompleteRingSet, Chem::CompleteRingSet::SharedPointer,
-		python::bases<Chem::FragmentList>, boost::noncopyable>("CompleteRingSet", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("perceive", &Chem::CompleteRingSet::perceive, (python::arg("self"), python::arg("molgraph")), 
-			 python::with_custodian_and_ward<1, 2>());
+    python::class_<Chem::CompleteRingSet, Chem::CompleteRingSet::SharedPointer,
+        python::bases<Chem::FragmentList>, boost::noncopyable>("CompleteRingSet", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("perceive", &Chem::CompleteRingSet::perceive, (python::arg("self"), python::arg("molgraph")), 
+             python::with_custodian_and_ward<1, 2>());
 }

@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		/**
-		 * \brief A handler for the input of bzip2-compressed spatial regular grid data in the native I/O format of the <em>CDPL</em>.
-		 */
-		typedef Util::DefaultDataInputHandler<CDFBZ2DRegularGridReader, DataFormat::CDF_BZ2> CDFBZ2DRegularGridInputHandler;
-	}
+        /**
+         * \brief A handler for the input of bzip2-compressed spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+         */
+        typedef Util::DefaultDataInputHandler<CDFBZ2DRegularGridReader, DataFormat::CDF_BZ2> CDFBZ2DRegularGridInputHandler;
+    }
 }
 
 #endif // CDPL_GRID_CDFBZ2DREGULARGRIDINPUTHANDLER_HPP

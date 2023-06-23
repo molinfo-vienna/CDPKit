@@ -37,34 +37,34 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		class Feature;
-		class FeatureContainer;
-	}
+        class Feature;
+        class FeatureContainer;
+    }
 
-	namespace Descr
-	{
+    namespace Descr
+    {
 
-		/**
-		 * \brief FeatureAutoCorrelation3DVectorCalculator.
-		 * \see [\ref CITB, \ref HBMD]
-		 */
-		class CDPL_DESCR_API FeatureAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Pharm::Feature>
-		{
+        /**
+         * \brief FeatureAutoCorrelation3DVectorCalculator.
+         * \see [\ref CITB, \ref HBMD]
+         */
+        class CDPL_DESCR_API FeatureAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Pharm::Feature>
+        {
 
-		public:
-			/**
-			 * \brief Constructs the \c %FeatureAutoCorrelation3DVectorCalculator instance.
-			 */
-			FeatureAutoCorrelation3DVectorCalculator();
-			
-			FeatureAutoCorrelation3DVectorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
+        public:
+            /**
+             * \brief Constructs the \c %FeatureAutoCorrelation3DVectorCalculator instance.
+             */
+            FeatureAutoCorrelation3DVectorCalculator();
+            
+            FeatureAutoCorrelation3DVectorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
 
-			void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
-		}; 
-	}
+            void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
+        }; 
+    }
 }
 
 #endif // CDPL_DESCR_AUTOCORRELATION3DVECTORCODECALCULATOR_HPP

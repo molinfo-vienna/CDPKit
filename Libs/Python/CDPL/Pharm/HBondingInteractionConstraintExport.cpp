@@ -37,9 +37,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::HBondingInteractionConstraint& constr, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+                      CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
-		return constr(ftr1, ftr2);
+        return constr(ftr1, ftr2);
     }
 }
 
@@ -50,26 +50,26 @@ void CDPLPythonPharm::exportHBondingInteractionConstraint()
     using namespace CDPL;
 
     python::class_<Pharm::HBondingInteractionConstraint, boost::noncopyable>("HBondingInteractionConstraint", python::no_init)
-		.def(python::init<const Pharm::HBondingInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
-		.def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
-																 python::arg("min_len") = Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH, 
-																 python::arg("max_len") = Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH,
-																 python::arg("min_ahd_ang") = Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE,
-																 python::arg("max_acc_ang") = Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::HBondingInteractionConstraint>())
-		.def("getMinLength", &Pharm::HBondingInteractionConstraint::getMinLength, python::arg("self"))
-		.def("getMaxLength", &Pharm::HBondingInteractionConstraint::getMaxLength, python::arg("self"))
-		.def("getMinAHDAngle", &Pharm::HBondingInteractionConstraint::getMinAHDAngle, python::arg("self"))
-		.def("getMaxAcceptorAngle", &Pharm::HBondingInteractionConstraint::getMaxAcceptorAngle, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::HBondingInteractionConstraint::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.add_property("minLength", &Pharm::HBondingInteractionConstraint::getMinLength)
-		.add_property("maxLength", &Pharm::HBondingInteractionConstraint::getMaxLength)
-		.add_property("minAHDAngle", &Pharm::HBondingInteractionConstraint::getMinAHDAngle)
-		.add_property("maxAcceptorAngle", &Pharm::HBondingInteractionConstraint::getMaxAcceptorAngle)
-		.def_readonly("DEF_MIN_HB_LENGTH", Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH)
-		.def_readonly("DEF_MAX_HB_LENGTH", Pharm::HBondingInteractionConstraint::DEF_MAX_HB_LENGTH)
-		.def_readonly("DEF_MIN_AHD_ANGLE", Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE)
-		.def_readonly("DEF_MAX_ACC_ANGLE", Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE);
+        .def(python::init<const Pharm::HBondingInteractionConstraint&>((python::arg("self"), python::arg("constr"))))
+        .def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
+                                                                 python::arg("min_len") = Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH, 
+                                                                 python::arg("max_len") = Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH,
+                                                                 python::arg("min_ahd_ang") = Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE,
+                                                                 python::arg("max_acc_ang") = Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE)))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::HBondingInteractionConstraint>())
+        .def("getMinLength", &Pharm::HBondingInteractionConstraint::getMinLength, python::arg("self"))
+        .def("getMaxLength", &Pharm::HBondingInteractionConstraint::getMaxLength, python::arg("self"))
+        .def("getMinAHDAngle", &Pharm::HBondingInteractionConstraint::getMinAHDAngle, python::arg("self"))
+        .def("getMaxAcceptorAngle", &Pharm::HBondingInteractionConstraint::getMaxAcceptorAngle, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::HBondingInteractionConstraint::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+        .add_property("minLength", &Pharm::HBondingInteractionConstraint::getMinLength)
+        .add_property("maxLength", &Pharm::HBondingInteractionConstraint::getMaxLength)
+        .add_property("minAHDAngle", &Pharm::HBondingInteractionConstraint::getMinAHDAngle)
+        .add_property("maxAcceptorAngle", &Pharm::HBondingInteractionConstraint::getMaxAcceptorAngle)
+        .def_readonly("DEF_MIN_HB_LENGTH", Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH)
+        .def_readonly("DEF_MAX_HB_LENGTH", Pharm::HBondingInteractionConstraint::DEF_MAX_HB_LENGTH)
+        .def_readonly("DEF_MIN_AHD_ANGLE", Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE)
+        .def_readonly("DEF_MAX_ACC_ANGLE", Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE);
 }

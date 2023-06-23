@@ -35,16 +35,16 @@ using namespace CDPL;
 
 std::size_t Pharm::getFeatureCount(const FeatureContainer& cntnr)
 {
-	return cntnr.getNumFeatures();
+    return cntnr.getNumFeatures();
 }
 
 std::size_t Pharm::getFeatureCount(const FeatureContainer& cntnr, unsigned int type)
 {
-	std::size_t count = 0;
+    std::size_t count = 0;
 
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it)
-		if (getType(*it) == type)
-			count++;
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it)
+        if (getType(*it) == type)
+            count++;
 
-	return count;
+    return count;
 }

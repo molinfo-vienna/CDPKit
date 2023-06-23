@@ -46,97 +46,97 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class MolecularGraph;
-		class Fragment;
-	}
+        class MolecularGraph;
+        class Fragment;
+    }
 
     namespace ConfGen 
     {
 
-		class TorsionDriverImpl;
+        class TorsionDriverImpl;
 
-		class CDPL_CONFGEN_API TorsionDriver
-		{
+        class CDPL_CONFGEN_API TorsionDriver
+        {
 
-		  public:
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+          public:
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
 
-			TorsionDriver();
+            TorsionDriver();
 
-			~TorsionDriver();
-	
-			const TorsionDriverSettings& getSettings() const;
+            ~TorsionDriver();
+    
+            const TorsionDriverSettings& getSettings() const;
 
-			TorsionDriverSettings& getSettings();
+            TorsionDriverSettings& getSettings();
 
-			void clearTorsionLibraries();
+            void clearTorsionLibraries();
 
-			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+            void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-			void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getAbortCallback() const;
+            const CallbackFunction& getAbortCallback() const;
 
-			void setTimeoutCallback(const CallbackFunction& func);
+            void setTimeoutCallback(const CallbackFunction& func);
 
-			const CallbackFunction& getTimeoutCallback() const;
+            const CallbackFunction& getTimeoutCallback() const;
 
-			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+            void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
-			const LogMessageCallbackFunction& getLogMessageCallback() const;
+            const LogMessageCallbackFunction& getLogMessageCallback() const;
 
-			unsigned int setup(const Chem::MolecularGraph& molgraph);
-			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
+            unsigned int setup(const Chem::MolecularGraph& molgraph);
+            unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
 
-			void clearInputCoordinates();
-			void clearInputCoordinates(std::size_t frag_idx);
+            void clearInputCoordinates();
+            void clearInputCoordinates(std::size_t frag_idx);
 
-			void addInputCoordinates(const Math::Vector3DArray& coords);
-			void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
-			void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
-			void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
+            void addInputCoordinates(const Math::Vector3DArray& coords);
+            void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+            void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+            void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
-			std::size_t getNumFragments() const;
+            std::size_t getNumFragments() const;
 
-			const Chem::Fragment& getFragment(std::size_t idx) const;
+            const Chem::Fragment& getFragment(std::size_t idx) const;
 
-			unsigned int generateConformers();
+            unsigned int generateConformers();
 
-			std::size_t getNumConformers() const;
+            std::size_t getNumConformers() const;
 
-			const ConformerData& getConformer(std::size_t idx) const;
+            const ConformerData& getConformer(std::size_t idx) const;
 
-			ConformerData& getConformer(std::size_t idx);
+            ConformerData& getConformer(std::size_t idx);
 
-			ConstConformerIterator getConformersBegin() const;
+            ConstConformerIterator getConformersBegin() const;
 
-			ConstConformerIterator getConformersEnd() const;
+            ConstConformerIterator getConformersEnd() const;
 
-			ConformerIterator getConformersBegin();
+            ConformerIterator getConformersBegin();
 
-			ConformerIterator getConformersEnd();
+            ConformerIterator getConformersEnd();
 
-			ConstConformerIterator begin() const;
+            ConstConformerIterator begin() const;
 
-			ConstConformerIterator end() const;
+            ConstConformerIterator end() const;
 
-			ConformerIterator begin();
+            ConformerIterator begin();
 
-			ConformerIterator end();
+            ConformerIterator end();
 
-		  private:
-			TorsionDriver(const TorsionDriver&);
+          private:
+            TorsionDriver(const TorsionDriver&);
 
-			TorsionDriver& operator=(const TorsionDriver&);
+            TorsionDriver& operator=(const TorsionDriver&);
 
-			typedef std::auto_ptr<TorsionDriverImpl> ImplementationPointer;
+            typedef std::auto_ptr<TorsionDriverImpl> ImplementationPointer;
 
-			ImplementationPointer impl;
-		};
+            ImplementationPointer impl;
+        };
     }
 }
 

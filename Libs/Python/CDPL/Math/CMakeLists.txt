@@ -46,8 +46,8 @@ SET(math_impl_MOD_SRCS
     VectorExport.cpp
     SparseVectorExport.cpp
     CVectorExport1.cpp
-    CVectorExport2.cpp	
-    CVectorExport3.cpp	
+    CVectorExport2.cpp    
+    CVectorExport3.cpp    
     ScalarVectorExport.cpp
     ZeroVectorExport.cpp
     UnitVectorExport.cpp
@@ -80,7 +80,7 @@ SET(math_impl_MOD_SRCS
     MatrixRangeExport.cpp
     ConstMatrixRangeExport.cpp
     MatrixSliceExport.cpp
-    ConstMatrixSliceExport.cpp	
+    ConstMatrixSliceExport.cpp    
     MatrixRowExport.cpp
     ConstMatrixRowExport.cpp
     MatrixColumnExport.cpp
@@ -97,7 +97,7 @@ SET(math_impl_MOD_SRCS
     TriangularMatrixAdapterExport3.cpp
     TriangularMatrixAdapterExport4.cpp 
     MatrixTransposeExport.cpp
-    ConstMatrixTransposeExport.cpp	
+    ConstMatrixTransposeExport.cpp    
 
     QuaternionAdapterExport.cpp
     
@@ -122,10 +122,10 @@ SET(math_impl_MOD_SRCS
     FromPythonToAnyConverterRegistration.cpp
     FromPythonToVectorConverterRegistration.cpp
     FromPythonToCVectorConverterRegistration.cpp
-    FromPythonToMatrixConverterRegistration.cpp	
-    FromPythonToCMatrixConverterRegistration.cpp	
-    FromPythonToQuaternionConverterRegistration.cpp	
-    FromPythonToVectorArrayConverterRegistration.cpp	
+    FromPythonToMatrixConverterRegistration.cpp    
+    FromPythonToCMatrixConverterRegistration.cpp    
+    FromPythonToQuaternionConverterRegistration.cpp    
+    FromPythonToVectorArrayConverterRegistration.cpp    
     FromPythonToGridConverterRegistration.cpp
    )
 
@@ -158,8 +158,8 @@ ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
                "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-	       @ONLY
-	       )
+           @ONLY
+           )
 
 INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math" COMPONENT CDPLPythonModules)
 INSTALL(TARGETS _math DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Math" COMPONENT CDPLPythonModules)

@@ -30,16 +30,16 @@
 namespace CDPL
 {
 
-	namespace Biomol
-	{
+    namespace Biomol
+    {
 
-		namespace MolecularGraphPropertyDefault
-		{
+        namespace MolecularGraphPropertyDefault
+        {
 
-			const std::size_t MODEL_NUMBER     = 0;
-			const char RESIDUE_INSERTION_CODE  = ' ';	
-		}
+            const std::size_t MODEL_NUMBER     = 0;
+            const char RESIDUE_INSERTION_CODE  = ' ';    
+        }
 
-		void initMolecularGraphPropertyDefaults() {}
-	}
+        void initMolecularGraphPropertyDefaults() {}
+    }
 }

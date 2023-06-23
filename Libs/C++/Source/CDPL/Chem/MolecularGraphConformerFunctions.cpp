@@ -34,45 +34,45 @@ using namespace CDPL;
 
 void Chem::setConformation(MolecularGraph& molgraph, std::size_t conf_idx, const Math::Vector3DArray& coords, double energy)
 {
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
-		(*get3DCoordinatesArray(molgraph.getAtom(i)))[conf_idx] = coords[i];
+    for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
+        (*get3DCoordinatesArray(molgraph.getAtom(i)))[conf_idx] = coords[i];
 
-	(*getConformerEnergies(molgraph))[conf_idx] = energy;
+    (*getConformerEnergies(molgraph))[conf_idx] = energy;
 }
 
 void Chem::addConformation(MolecularGraph& molgraph, const Math::Vector3DArray& coords, double energy)
 {
-	std::size_t i = 0;
-	
-	for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it, i++) {
-		Atom& atom = *it;
-		Math::Vector3DArray::SharedPointer coords_array;
+    std::size_t i = 0;
+    
+    for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it, i++) {
+        Atom& atom = *it;
+        Math::Vector3DArray::SharedPointer coords_array;
 
-		if (!has3DCoordinatesArray(atom)) {
-			coords_array.reset(new Math::Vector3DArray());
+        if (!has3DCoordinatesArray(atom)) {
+            coords_array.reset(new Math::Vector3DArray());
 
-			set3DCoordinatesArray(atom, coords_array);
+            set3DCoordinatesArray(atom, coords_array);
 
-		} else
-			coords_array = get3DCoordinatesArray(atom);
-		
-		coords_array->addElement(coords[i]);
-	}
+        } else
+            coords_array = get3DCoordinatesArray(atom);
+        
+        coords_array->addElement(coords[i]);
+    }
 
-	Util::DArray::SharedPointer energy_array;
+    Util::DArray::SharedPointer energy_array;
 
-	if (!hasConformerEnergies(molgraph)) {
-		energy_array.reset(new Util::DArray());
+    if (!hasConformerEnergies(molgraph)) {
+        energy_array.reset(new Util::DArray());
 
-		setConformerEnergies(molgraph, energy_array);
+        setConformerEnergies(molgraph, energy_array);
 
-	} else
-		energy_array = getConformerEnergies(molgraph);
+    } else
+        energy_array = getConformerEnergies(molgraph);
 
-	energy_array->addElement(energy);
+    energy_array->addElement(energy);
 }
 
 double Chem::getConformationEnergy(const MolecularGraph& molgraph, std::size_t conf_idx)
 {
-	return (*getConformerEnergies(molgraph))[conf_idx];
+    return (*getConformerEnergies(molgraph))[conf_idx];
 }

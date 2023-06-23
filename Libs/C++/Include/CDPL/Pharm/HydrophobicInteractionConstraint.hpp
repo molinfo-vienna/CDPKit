@@ -39,25 +39,25 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief HydrophobicInteractionConstraint.
-		 */
-		class CDPL_PHARM_API HydrophobicInteractionConstraint : public FeatureDistanceConstraint
-		{
+        /**
+         * \brief HydrophobicInteractionConstraint.
+         */
+        class CDPL_PHARM_API HydrophobicInteractionConstraint : public FeatureDistanceConstraint
+        {
 
-		  public:
-			static constexpr double DEF_MIN_DISTANCE = 2.0;
-			static constexpr double DEF_MAX_DISTANCE = 6.0;
+          public:
+            static constexpr double DEF_MIN_DISTANCE = 2.0;
+            static constexpr double DEF_MAX_DISTANCE = 6.0;
 
-			/**
-			 * \brief Constructs a \c %HydrophobicInteractionConstraint functor with a 
-			 *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
-			 * \param min_dist The minimum allowed feature pair distance.
-			 * \param max_dist The maximum allowed feature pair distance.
-			 */
-			HydrophobicInteractionConstraint(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
-				FeatureDistanceConstraint(min_dist, max_dist) {}
-		};
+            /**
+             * \brief Constructs a \c %HydrophobicInteractionConstraint functor with a 
+             *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.
+             * \param min_dist The minimum allowed feature pair distance.
+             * \param max_dist The maximum allowed feature pair distance.
+             */
+            HydrophobicInteractionConstraint(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
+                FeatureDistanceConstraint(min_dist, max_dist) {}
+        };
     }
 }
 

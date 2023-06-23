@@ -36,13 +36,13 @@
 #define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)                            \
 TYPE ChOX::get##FUNC_INFIX##Parameter(const CDPL::Base::ControlParameterContainer& cntnr)     \
 {                                                                                             \
-	return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME,                    \
-											 ControlParameterDefault::PARAM_NAME);            \
+    return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME,                    \
+                                             ControlParameterDefault::PARAM_NAME);            \
 }                                                                                             \
                                                                                               \
 void ChOX::set##FUNC_INFIX##Parameter(CDPL::Base::ControlParameterContainer& cntnr, TYPE arg) \
 {                                                                                             \
-	cntnr.setParameter(ControlParameter::PARAM_NAME, arg);                                    \
+    cntnr.setParameter(ControlParameter::PARAM_NAME, arg);                                    \
 }
 
 

@@ -39,41 +39,41 @@
 namespace
 {
 
-	template <typename QuaternionType>
-	struct QuaternionExport
-	{
+    template <typename QuaternionType>
+    struct QuaternionExport
+    {
 
-		QuaternionExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        QuaternionExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			typedef typename QuaternionType::ValueType ValueType;
-		
-			python::class_<QuaternionType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const QuaternionType&>((python::arg("self"), python::arg("q"))))
-				.def(python::init<const ValueType&, const ValueType&, const ValueType&, const ValueType&>(
-						 (python::arg("self"), python::arg("c1"), python::arg("c2") = ValueType(), 
-						  python::arg("c3") = ValueType(), python::arg("c4") = ValueType())))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<QuaternionType>())
-				.def(InitFunctionGeneratorVisitor<QuaternionType, ConstQuaternionExpression>("e"))
-				.def(AssignFunctionGeneratorVisitor<QuaternionType, ConstQuaternionExpression>("e"))
-				.def(ConstQuaternionVisitor<QuaternionType>())
-				.def(QuaternionAssignAndSwapVisitor<QuaternionType>())
-				.def(QuaternionNDArrayInitVisitor<QuaternionType>())
-				.def(QuaternionNDArrayAssignVisitor<QuaternionType>())
-				.def(QuaternionVisitor<QuaternionType>());
-		}
-	};
+            typedef typename QuaternionType::ValueType ValueType;
+        
+            python::class_<QuaternionType>(name, python::no_init)
+                .def(python::init<>(python::arg("self")))
+                .def(python::init<const QuaternionType&>((python::arg("self"), python::arg("q"))))
+                .def(python::init<const ValueType&, const ValueType&, const ValueType&, const ValueType&>(
+                         (python::arg("self"), python::arg("c1"), python::arg("c2") = ValueType(), 
+                          python::arg("c3") = ValueType(), python::arg("c4") = ValueType())))
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<QuaternionType>())
+                .def(InitFunctionGeneratorVisitor<QuaternionType, ConstQuaternionExpression>("e"))
+                .def(AssignFunctionGeneratorVisitor<QuaternionType, ConstQuaternionExpression>("e"))
+                .def(ConstQuaternionVisitor<QuaternionType>())
+                .def(QuaternionAssignAndSwapVisitor<QuaternionType>())
+                .def(QuaternionNDArrayInitVisitor<QuaternionType>())
+                .def(QuaternionNDArrayAssignVisitor<QuaternionType>())
+                .def(QuaternionVisitor<QuaternionType>());
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportQuaternionTypes()
 {
-	using namespace CDPL;
+    using namespace CDPL;
 
-	QuaternionExport<Math::FQuaternion>("FQuaternion");
-	QuaternionExport<Math::DQuaternion>("DQuaternion");
-	QuaternionExport<Math::LQuaternion>("LQuaternion");
-	QuaternionExport<Math::ULQuaternion>("ULQuaternion");
+    QuaternionExport<Math::FQuaternion>("FQuaternion");
+    QuaternionExport<Math::DQuaternion>("DQuaternion");
+    QuaternionExport<Math::LQuaternion>("LQuaternion");
+    QuaternionExport<Math::ULQuaternion>("ULQuaternion");
 }

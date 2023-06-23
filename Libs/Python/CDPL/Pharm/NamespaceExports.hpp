@@ -29,18 +29,18 @@
 namespace CDPLPythonPharm
 {
 
-	void exportFeatureTypes();
-	void exportFeatureGeometries();
+    void exportFeatureTypes();
+    void exportFeatureGeometries();
 
-	void exportFeatureContainerProperties();
-	void exportFeatureProperties();
-	void exportFeatureContainerPropertyDefaults();
-	void exportFeaturePropertyDefaults();
+    void exportFeatureContainerProperties();
+    void exportFeatureProperties();
+    void exportFeatureContainerPropertyDefaults();
+    void exportFeaturePropertyDefaults();
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+    void exportControlParameters();
+    void exportControlParameterDefaults();
 
-	void exportDataFormats();
+    void exportDataFormats();
 }
 
 #endif // CDPL_PYTHON_PHARM_NAMESPACEEXPORTS_HPP

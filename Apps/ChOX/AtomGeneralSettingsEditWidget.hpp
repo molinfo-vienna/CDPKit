@@ -37,54 +37,54 @@ class QCheckBox;
 namespace ChOX
 {
 
-	class Settings;
+    class Settings;
 
-	class AtomGeneralSettingsEditWidget : public SettingsEditWidget
-	{
+    class AtomGeneralSettingsEditWidget : public SettingsEditWidget
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		AtomGeneralSettingsEditWidget(QWidget*, Settings&);
+    public:
+        AtomGeneralSettingsEditWidget(QWidget*, Settings&);
 
-		bool haveChangedSettings() const;
+        bool haveChangedSettings() const;
 
-	signals:
-		void updateGUI();
+    signals:
+        void updateGUI();
 
-	public slots:
-		void apply();
-		void reset();
-		void setDefaults();
+    public slots:
+        void apply();
+        void reset();
+        void setDefaults();
 
-	private slots:
-		void handleSettingsChange();
-		void handleSettingsChange(bool);
+    private slots:
+        void handleSettingsChange();
+        void handleSettingsChange(bool);
 
-		void handleHCountVisibilityChange(bool);
+        void handleHCountVisibilityChange(bool);
 
-	private:
-		void init();
+    private:
+        void init();
 
-		Settings&                    settings;
-		CDPL::Vis::Font              labelFont;
-		CDPL::Vis::Font              secondaryLabelFont;
-		CDPL::Vis::SizeSpecification labelSize;
-		CDPL::Vis::SizeSpecification secondaryLabelSize;
-		CDPL::Vis::SizeSpecification labelMargin;
-		CDPL::Vis::SizeSpecification electronDotSize;
-		QCheckBox*                   showCarbonsCheckBox;
-		QCheckBox*                   showChargesCheckBox;
-		QCheckBox*                   showIsotopesCheckBox;
-		QCheckBox*                   showExplicitHsCheckBox;
-		QCheckBox*                   showHCountsCheckBox;
-		QCheckBox*                   showNonCarbonHCountsCheckBox;
-		QCheckBox*                   showQueryInfosCheckBox;
-		QCheckBox*                   showReactionInfosCheckBox;
-		QCheckBox*                   showRadicalElectronsCheckBox;
-		QCheckBox*                   useCalcAtomCoordsCheckBox;
-		bool                         haveChanges;
-	};
+        Settings&                    settings;
+        CDPL::Vis::Font              labelFont;
+        CDPL::Vis::Font              secondaryLabelFont;
+        CDPL::Vis::SizeSpecification labelSize;
+        CDPL::Vis::SizeSpecification secondaryLabelSize;
+        CDPL::Vis::SizeSpecification labelMargin;
+        CDPL::Vis::SizeSpecification electronDotSize;
+        QCheckBox*                   showCarbonsCheckBox;
+        QCheckBox*                   showChargesCheckBox;
+        QCheckBox*                   showIsotopesCheckBox;
+        QCheckBox*                   showExplicitHsCheckBox;
+        QCheckBox*                   showHCountsCheckBox;
+        QCheckBox*                   showNonCarbonHCountsCheckBox;
+        QCheckBox*                   showQueryInfosCheckBox;
+        QCheckBox*                   showReactionInfosCheckBox;
+        QCheckBox*                   showRadicalElectronsCheckBox;
+        QCheckBox*                   useCalcAtomCoordsCheckBox;
+        bool                         haveChanges;
+    };
 }
 
 #endif // CHOX_ATOMGENERALSETTINGSEDITWIDGET_HPP

@@ -39,7 +39,7 @@ namespace CDPL
     namespace ForceField 
     {
 
-		typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionData;
+        typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionData;
     }
 }
 

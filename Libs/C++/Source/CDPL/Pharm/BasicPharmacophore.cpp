@@ -34,7 +34,7 @@
 namespace
 {
 
-	const std::size_t MAX_FEATURE_CACHE_SIZE = 1000;
+    const std::size_t MAX_FEATURE_CACHE_SIZE = 1000;
 }
 
 
@@ -42,36 +42,36 @@ using namespace CDPL;
 
 
 Pharm::BasicPharmacophore::BasicPharmacophore(): 
-	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+    featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
-	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+    featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 }
 
 Pharm::BasicPharmacophore::BasicPharmacophore(const BasicPharmacophore& pharm): 
-	Pharmacophore(pharm), 
-	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+    Pharmacophore(pharm), 
+    featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
-	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+    featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 
     append(pharm);
 }
 
 Pharm::BasicPharmacophore::BasicPharmacophore(const Pharmacophore& pharm): 
-	Pharmacophore(pharm),
-	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+    Pharmacophore(pharm),
+    featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
-	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+    featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 
     append(pharm);
 }
 
 Pharm::BasicPharmacophore::BasicPharmacophore(const FeatureContainer& cntnr):
-	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+    featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
-	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+    featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 
     append(cntnr);
-	copyProperties(cntnr);
+    copyProperties(cntnr);
 }
 
 Pharm::BasicPharmacophore::~BasicPharmacophore() {}
@@ -110,7 +110,7 @@ Pharm::BasicPharmacophore::FeatureIterator Pharm::BasicPharmacophore::getFeature
 const Pharm::BasicFeature& Pharm::BasicPharmacophore::getFeature(std::size_t idx) const
 {
     if (idx >= features.size())
-		throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
+        throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
 
     return *features[idx];
 }
@@ -118,14 +118,14 @@ const Pharm::BasicFeature& Pharm::BasicPharmacophore::getFeature(std::size_t idx
 Pharm::BasicFeature& Pharm::BasicPharmacophore::getFeature(std::size_t idx)
 {
     if (idx >= features.size())
-		throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
+        throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
 
     return *features[idx];
 }
 
 Pharm::BasicFeature& Pharm::BasicPharmacophore::addFeature()
 {
-	FeaturePointer feature = featureCache.get();
+    FeaturePointer feature = featureCache.get();
 
     feature->setIndex(features.size());
 
@@ -137,7 +137,7 @@ Pharm::BasicFeature& Pharm::BasicPharmacophore::addFeature()
 void Pharm::BasicPharmacophore::removeFeature(std::size_t idx)
 {
     if (idx >= features.size())
-		throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
+        throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
 
     features.erase(features.begin() + idx);
 
@@ -149,7 +149,7 @@ Pharm::BasicPharmacophore::FeatureIterator Pharm::BasicPharmacophore::removeFeat
     const FeatureList::iterator& base = it.base();
 
     if (base < features.begin() || base >= features.end())
-		throw Base::RangeError("BasicPharmacophore: feature iterator out of valid range");
+        throw Base::RangeError("BasicPharmacophore: feature iterator out of valid range");
 
     FeatureList::iterator rit = features.erase(base);
 
@@ -161,7 +161,7 @@ Pharm::BasicPharmacophore::FeatureIterator Pharm::BasicPharmacophore::removeFeat
 bool Pharm::BasicPharmacophore::containsFeature(const Feature& feature) const
 {
     if (this != &feature.getPharmacophore())
-		return false;
+        return false;
 
     return (feature.getIndex() < features.size());
 }
@@ -169,7 +169,7 @@ bool Pharm::BasicPharmacophore::containsFeature(const Feature& feature) const
 std::size_t Pharm::BasicPharmacophore::getFeatureIndex(const Feature& feature) const
 {
     if (this != &feature.getPharmacophore() || feature.getIndex() >= features.size())
-		throw Base::ItemNotFound("BasicPharmacophore: argument feature not part of the pharmacophore");
+        throw Base::ItemNotFound("BasicPharmacophore: argument feature not part of the pharmacophore");
 
     return feature.getIndex();
 }
@@ -182,7 +182,7 @@ Pharm::Pharmacophore::SharedPointer Pharm::BasicPharmacophore::clone() const
 Pharm::BasicPharmacophore& Pharm::BasicPharmacophore::operator=(const BasicPharmacophore& pharm)
 {
     if (this == &pharm)
-		return *this;
+        return *this;
 
     copy(pharm);
 
@@ -199,26 +199,26 @@ Pharm::BasicPharmacophore& Pharm::BasicPharmacophore::operator+=(const BasicPhar
 void Pharm::BasicPharmacophore::copy(const BasicPharmacophore& pharm)
 {
     if (this == &pharm)
-		return;
+        return;
 
     clearFeatures();
     copyProperties(pharm);
 
     if (pharm.features.size() == 0)
-		return;
+        return;
 
     features.reserve(pharm.features.size());
-	
+    
     FeatureList::const_iterator pharm_features_end = pharm.features.end();
 
     for (FeatureList::const_iterator it = pharm.features.begin(); it != pharm_features_end; ++it) 
-		addFeature().copyProperties(**it); 
+        addFeature().copyProperties(**it); 
 }
 
 void Pharm::BasicPharmacophore::copy(const Pharmacophore& pharm)
 {   
     if (this == &pharm)
-		return;
+        return;
 
     doCopy(pharm);
     copyProperties(pharm);
@@ -227,7 +227,7 @@ void Pharm::BasicPharmacophore::copy(const Pharmacophore& pharm)
 void Pharm::BasicPharmacophore::copy(const FeatureContainer& cntnr)
 {   
     if (this == &cntnr)
-		return;
+        return;
 
     doCopy(cntnr);
     copyProperties(cntnr);
@@ -239,14 +239,14 @@ void Pharm::BasicPharmacophore::doCopy(const T& pharm)
     clearFeatures();
 
     if (pharm.getNumFeatures() == 0)
-		return;
+        return;
 
     features.reserve(pharm.getNumFeatures());
  
     typename T::ConstFeatureIterator pharm_features_end = pharm.getFeaturesEnd();
 
     for (typename T::ConstFeatureIterator it = pharm.getFeaturesBegin(); it != pharm_features_end; ++it)  
-		addFeature().copyProperties(*it);
+        addFeature().copyProperties(*it);
 }
 
 void Pharm::BasicPharmacophore::append(const BasicPharmacophore& pharm)
@@ -254,14 +254,14 @@ void Pharm::BasicPharmacophore::append(const BasicPharmacophore& pharm)
     std::size_t pharm_num_features = pharm.features.size();
 
     if (pharm_num_features == 0)
-		return;
+        return;
 
     features.reserve(features.size() + pharm_num_features);
  
     FeatureList::const_iterator pharm_features_end = pharm.features.end();
 
     for (FeatureList::const_iterator it = pharm.features.begin(); it != pharm_features_end; ++it) 
-		addFeature().copyProperties(**it); 
+        addFeature().copyProperties(**it); 
 }
 
 void Pharm::BasicPharmacophore::append(const Pharmacophore& pharm)
@@ -276,19 +276,19 @@ void Pharm::BasicPharmacophore::append(const FeatureContainer& cntnr)
 
 void Pharm::BasicPharmacophore::remove(const FeatureContainer& cntnr)
 {   
-	if (this == &cntnr) {
-		clear();
-		return;
-	}
+    if (this == &cntnr) {
+        clear();
+        return;
+    }
 
-	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
-		const Feature& feature = *it;
+    for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
+        const Feature& feature = *it;
 
-		if (!containsFeature(feature))
-			continue;
+        if (!containsFeature(feature))
+            continue;
 
-		removeFeature(feature.getIndex());
-	}
+        removeFeature(feature.getIndex());
+    }
 }
 
 template <typename T>
@@ -297,21 +297,21 @@ void Pharm::BasicPharmacophore::doAppend(const T& pharm)
     std::size_t pharm_num_features = pharm.getNumFeatures();
 
     if (pharm_num_features == 0)
-		return;
+        return;
 
     features.reserve(features.size() + pharm_num_features);
  
     typename T::ConstFeatureIterator pharm_features_end = pharm.getFeaturesEnd();
 
     for (typename T::ConstFeatureIterator it = pharm.getFeaturesBegin(); it != pharm_features_end; ++it) 
-		addFeature().copyProperties(*it);
+        addFeature().copyProperties(*it);
 }
 
 void Pharm::BasicPharmacophore::clearFeatures()
 {
     features.clear();
 }
-		
+        
 void Pharm::BasicPharmacophore::renumberFeatures(std::size_t idx)
 {
     assert(idx <= features.size());
@@ -319,7 +319,7 @@ void Pharm::BasicPharmacophore::renumberFeatures(std::size_t idx)
     FeatureList::iterator features_end = features.end();
 
     for (FeatureList::iterator it = features.begin() + idx; it != features_end; ++it, idx++)
-		(*it)->setIndex(idx);
+        (*it)->setIndex(idx);
 }
 
 Pharm::BasicFeature* Pharm::BasicPharmacophore::createFeature()
@@ -334,6 +334,6 @@ void Pharm::BasicPharmacophore::destroyFeature(BasicFeature* feature)
 
 void Pharm::BasicPharmacophore::clearFeature(BasicFeature& feature)
 {
-	feature.clearProperties();
-	feature.setIndex(~std::size_t(0));
+    feature.clearProperties();
+    feature.setIndex(~std::size_t(0));
 }

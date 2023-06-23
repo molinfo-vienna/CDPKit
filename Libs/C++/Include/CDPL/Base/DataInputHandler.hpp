@@ -39,53 +39,53 @@
 namespace CDPL 
 {
 
-	namespace Base
-	{
+    namespace Base
+    {
 
-		class DataFormat;
-	
-		/**
-		 * \brief A factory interface providing methods for the creation of Base::DataReader instances handling a particular
-		 *        object type and storage format.
-		 * \tparam T The type of objects handled by the created Base::DataReader instances.
-		 */
-		template <typename T>
-		class DataInputHandler 
-		{
+        class DataFormat;
+    
+        /**
+         * \brief A factory interface providing methods for the creation of Base::DataReader instances handling a particular
+         *        object type and storage format.
+         * \tparam T The type of objects handled by the created Base::DataReader instances.
+         */
+        template <typename T>
+        class DataInputHandler 
+        {
 
-		public:
-			typedef DataReader<T> ReaderType;
+        public:
+            typedef DataReader<T> ReaderType;
 
-			typedef std::shared_ptr<DataInputHandler> SharedPointer;
+            typedef std::shared_ptr<DataInputHandler> SharedPointer;
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~DataInputHandler() {}
+            /**
+             * \brief Virtual destructor.
+             */
+            virtual ~DataInputHandler() {}
 
-			/**
-			 * \brief Returns a Base::DataFormat object that provides information about the handled input data format.
-			 * \return A Base::DataFormat object that provides information about the handled data format.
-			 */
-			virtual const DataFormat& getDataFormat() const = 0;
+            /**
+             * \brief Returns a Base::DataFormat object that provides information about the handled input data format.
+             * \return A Base::DataFormat object that provides information about the handled data format.
+             */
+            virtual const DataFormat& getDataFormat() const = 0;
 
-			/**
-			 * \brief Creates a Base::DataReader instance that will read the data from the input stream \a is.
-			 * \param is The input stream to read from.
-			 * \return A shared pointer to the created Base::DataReader instance.
-			 */
-			virtual typename ReaderType::SharedPointer createReader(std::istream& is) const = 0;
+            /**
+             * \brief Creates a Base::DataReader instance that will read the data from the input stream \a is.
+             * \param is The input stream to read from.
+             * \return A shared pointer to the created Base::DataReader instance.
+             */
+            virtual typename ReaderType::SharedPointer createReader(std::istream& is) const = 0;
 
-			/**
-			 * \brief Creates a Base::DataReader instance that will read the data from the file \a file_name.
-			 * \param file_name The name of the file to read from.
-			 * \param mode Flags specifying the file open-mode.
-			 * \return A shared pointer to the created Base::DataReader instance.
-			 */
-			virtual typename ReaderType::SharedPointer createReader(const std::string& file_name, 
-																	std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary) const = 0;
-		};
-	}
+            /**
+             * \brief Creates a Base::DataReader instance that will read the data from the file \a file_name.
+             * \param file_name The name of the file to read from.
+             * \param mode Flags specifying the file open-mode.
+             * \return A shared pointer to the created Base::DataReader instance.
+             */
+            virtual typename ReaderType::SharedPointer createReader(const std::string& file_name, 
+                                                                    std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary) const = 0;
+        };
+    }
 }
 
 #endif // CDPL_BASE_DATAINPUTHANDLER_HPP

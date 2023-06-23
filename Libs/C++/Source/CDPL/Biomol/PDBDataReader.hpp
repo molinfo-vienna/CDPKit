@@ -43,105 +43,105 @@ namespace CDPL
     namespace Base
     {
 
-		class DataIOBase;
+        class DataIOBase;
     }
 
     namespace Chem
     {
 
-		class Molecule;
-	}
+        class Molecule;
+    }
 
-	namespace Biomol
+    namespace Biomol
     {
 
-		class PDBDataReader
-		{
+        class PDBDataReader
+        {
 
-		public:
-			PDBDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+        public:
+            PDBDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool readPDBFile(std::istream&, Chem::Molecule&);
+            bool readPDBFile(std::istream&, Chem::Molecule&);
 
-			bool skipPDBFile(std::istream&);
-		
-			bool hasMoreData(std::istream&) const;
+            bool skipPDBFile(std::istream&);
+        
+            bool hasMoreData(std::istream&) const;
 
-		private:
-			void init(std::istream&);
-			void init(std::istream&, Chem::Molecule&);
+        private:
+            void init(std::istream&);
+            void init(std::istream&, Chem::Molecule&);
 
-			std::size_t readGenericDataRecord(std::istream&, std::size_t, PDBData::RecordType, const std::string&);
-			void appendRecordData(PDBData::RecordType, const std::string&) const;
+            std::size_t readGenericDataRecord(std::istream&, std::size_t, PDBData::RecordType, const std::string&);
+            void appendRecordData(PDBData::RecordType, const std::string&) const;
 
-			std::size_t skipRecordData(std::istream&, std::size_t, const std::string&) const;
+            std::size_t skipRecordData(std::istream&, std::size_t, const std::string&) const;
 
-			std::size_t readMODELRecord(std::istream&);
-			std::size_t readATOMRecord(std::istream&, Chem::Molecule&);
-			std::size_t readTERRecord(std::istream&, Chem::Molecule&);
-			std::size_t readHETATMRecord(std::istream&, Chem::Molecule&);
-			std::size_t readENDMDLRecord(Chem::Molecule&);
-			std::size_t readCONECTRecord(std::istream&, Chem::Molecule&);
-			std::size_t readMASTERRecord(std::istream&);
+            std::size_t readMODELRecord(std::istream&);
+            std::size_t readATOMRecord(std::istream&, Chem::Molecule&);
+            std::size_t readTERRecord(std::istream&, Chem::Molecule&);
+            std::size_t readHETATMRecord(std::istream&, Chem::Molecule&);
+            std::size_t readENDMDLRecord(Chem::Molecule&);
+            std::size_t readCONECTRecord(std::istream&, Chem::Molecule&);
+            std::size_t readMASTERRecord(std::istream&);
 
-			void readATOMRecord(std::istream&, Chem::Molecule&, const std::string&, bool);
+            void readATOMRecord(std::istream&, Chem::Molecule&, const std::string&, bool);
 
-			std::size_t startNextRecord(std::istream&, std::string&, std::string&);
-			
-			void skipInputToNextLine(std::istream&, std::size_t, const std::string&);
-			void checkRecordOrder(const std::string&, const std::string&) const;
-			void checkMandatoryRecords() const;
+            std::size_t startNextRecord(std::istream&, std::string&, std::string&);
+            
+            void skipInputToNextLine(std::istream&, std::size_t, const std::string&);
+            void checkRecordOrder(const std::string&, const std::string&) const;
+            void checkMandatoryRecords() const;
 
-			void processAtomSequence(Chem::Molecule&, bool);
+            void processAtomSequence(Chem::Molecule&, bool);
 
-			void setBondOrdersFromResTemplates(Chem::Molecule&);
-			void perceiveBondOrders(Chem::Molecule&);
-			void calcAtomCharges(Chem::Molecule&);
+            void setBondOrdersFromResTemplates(Chem::Molecule&);
+            void perceiveBondOrders(Chem::Molecule&);
+            void calcAtomCharges(Chem::Molecule&);
 
-			const Chem::Atom* getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
-			const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
+            const Chem::Atom* getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
+            const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
-			typedef std::vector<Chem::Atom*> AtomList;
-			typedef std::unordered_map<std::string, std::size_t> RecordHistogram;
-			typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
-			typedef std::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
-			typedef std::unordered_map<std::string, std::size_t> BondOrderCache;
+            typedef std::vector<Chem::Atom*> AtomList;
+            typedef std::unordered_map<std::string, std::size_t> RecordHistogram;
+            typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
+            typedef std::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
+            typedef std::unordered_map<std::string, std::size_t> BondOrderCache;
 
-			typedef ResidueDictionary::SharedPointer ResDictPointer;
+            typedef ResidueDictionary::SharedPointer ResDictPointer;
 
-			const Base::DataIOBase& ioBase;
-			std::string             stringData;
-			bool                    strictErrorChecking;
-			bool                    checkLineLength;
-			ResDictPointer          resDictionary;
-			bool                    applyDictAtomBondingToStdResidues;
-			bool                    applyDictOrderToStdResidues;
-			bool                    applyDictAtomBondingToNonStdResidues;
-			bool                    applyDictOrderToNonStdResidues;
-			bool                    ignoreConectRecords;
-			bool                    setOrdersFromCONECTRecords;
-			bool                    ignoreChargeField;
-			bool                    applyDictAtomCharges;
-			bool                    applyDictAtomTypes;
-			bool                    calcCharges;
-			bool                    perceiveOrders;
-			bool                    evalMASTERRecord;
-			unsigned int            formatVersion;
-			PDBData::SharedPointer  pdbData;
-			RecordHistogram         recordHistogram;
-			std::size_t             currModelID;
-			std::size_t             lastModelID;
-			std::size_t             startAtomCount;
-			std::size_t             startBondCount;
-			std::size_t             numCoordRecords;
-			SerialToAtomMap         serialToAtomMap;
-			AtomList                atomSequence;
-			NameToAtomMap           currResidueAtoms;
-			AtomList                currResidueLinkAtoms;
-			AtomList                prevResidueLinkAtoms;
-			BondOrderCache          bondOrderCache;
-			Chem::Fragment          readMolGraph;
-		};
+            const Base::DataIOBase& ioBase;
+            std::string             stringData;
+            bool                    strictErrorChecking;
+            bool                    checkLineLength;
+            ResDictPointer          resDictionary;
+            bool                    applyDictAtomBondingToStdResidues;
+            bool                    applyDictOrderToStdResidues;
+            bool                    applyDictAtomBondingToNonStdResidues;
+            bool                    applyDictOrderToNonStdResidues;
+            bool                    ignoreConectRecords;
+            bool                    setOrdersFromCONECTRecords;
+            bool                    ignoreChargeField;
+            bool                    applyDictAtomCharges;
+            bool                    applyDictAtomTypes;
+            bool                    calcCharges;
+            bool                    perceiveOrders;
+            bool                    evalMASTERRecord;
+            unsigned int            formatVersion;
+            PDBData::SharedPointer  pdbData;
+            RecordHistogram         recordHistogram;
+            std::size_t             currModelID;
+            std::size_t             lastModelID;
+            std::size_t             startAtomCount;
+            std::size_t             startBondCount;
+            std::size_t             numCoordRecords;
+            SerialToAtomMap         serialToAtomMap;
+            AtomList                atomSequence;
+            NameToAtomMap           currResidueAtoms;
+            AtomList                currResidueLinkAtoms;
+            AtomList                prevResidueLinkAtoms;
+            BondOrderCache          bondOrderCache;
+            Chem::Fragment          readMolGraph;
+        };
     }
 }
 

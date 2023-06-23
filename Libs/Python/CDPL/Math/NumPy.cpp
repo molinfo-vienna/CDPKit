@@ -35,18 +35,18 @@ namespace
 
     PyObject* importArrayWrapper()
     {
-		import_array();
+        import_array();
 
-		Py_RETURN_NONE;
+        Py_RETURN_NONE;
     }
 
-	void* checkNDArrayObject(PyObject* obj) 
-	{
-		if (PyArray_Check(obj))
-			return obj;
+    void* checkNDArrayObject(PyObject* obj) 
+    {
+        if (PyArray_Check(obj))
+            return obj;
 
-		return 0;
-	}
+        return 0;
+    }
 
     bool MODULE_IMPORTED = false;
 }
@@ -58,73 +58,73 @@ namespace CDPLPythonMath
     namespace NumPy
     {
 
-		bool init() 
-		{
-			if (MODULE_IMPORTED)
-				return true;
+        bool init() 
+        {
+            if (MODULE_IMPORTED)
+                return true;
 
-			if (PyErr_Occurred())
-				return false;
+            if (PyErr_Occurred())
+                return false;
 
-			PyObject* r = importArrayWrapper();
+            PyObject* r = importArrayWrapper();
 
-			if (!r) {
-				PyErr_Clear();
-				return false;
-			}
+            if (!r) {
+                PyErr_Clear();
+                return false;
+            }
 
-			Py_DECREF(r);
+            Py_DECREF(r);
 
-			boost::python::converter::registry::insert(&checkNDArrayObject, boost::python::type_id<PyArrayObject>());
-			MODULE_IMPORTED = true;
+            boost::python::converter::registry::insert(&checkNDArrayObject, boost::python::type_id<PyArrayObject>());
+            MODULE_IMPORTED = true;
 
-			return true;
-		}
+            return true;
+        }
 
-		bool available()
-		{
-			return MODULE_IMPORTED;
-		}
+        bool available()
+        {
+            return MODULE_IMPORTED;
+        }
 
-		PyArrayObject* castToNDArray(PyObject* obj) 
-		{
-			if (PyArray_Check(obj))
-				return reinterpret_cast<PyArrayObject*>(obj);
+        PyArrayObject* castToNDArray(PyObject* obj) 
+        {
+            if (PyArray_Check(obj))
+                return reinterpret_cast<PyArrayObject*>(obj);
 
-			return 0;
-		}
+            return 0;
+        }
 
-		bool checkDim(PyArrayObject* arr, std::size_t dim) 
-		{
-			return (std::size_t(PyArray_NDIM(arr)) == dim);
-		}
+        bool checkDim(PyArrayObject* arr, std::size_t dim) 
+        {
+            return (std::size_t(PyArray_NDIM(arr)) == dim);
+        }
 
-		bool checkSize(PyArrayObject* arr, std::size_t size1) 
-		{
-			if (!checkDim(arr, 1))
-				return false;
+        bool checkSize(PyArrayObject* arr, std::size_t size1) 
+        {
+            if (!checkDim(arr, 1))
+                return false;
 
-			return (std::size_t(PyArray_DIMS(arr)[0]) == size1);
-		}
+            return (std::size_t(PyArray_DIMS(arr)[0]) == size1);
+        }
 
-		bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2) 
-		{
-			if (!checkDim(arr, 2))
-				return false;
+        bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2) 
+        {
+            if (!checkDim(arr, 2))
+                return false;
 
-			npy_intp* dims = PyArray_DIMS(arr);
+            npy_intp* dims = PyArray_DIMS(arr);
 
-			return (std::size_t(dims[0]) == size1 && std::size_t(dims[1]) == size2);
-		}
+            return (std::size_t(dims[0]) == size1 && std::size_t(dims[1]) == size2);
+        }
 
-		bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2, std::size_t size3) 
-		{
-			if (!checkDim(arr, 3))
-				return false;
+        bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2, std::size_t size3) 
+        {
+            if (!checkDim(arr, 3))
+                return false;
 
-			npy_intp* dims = PyArray_DIMS(arr);
+            npy_intp* dims = PyArray_DIMS(arr);
 
-			return (std::size_t(dims[0]) == size1 && std::size_t(dims[1]) == size2 && std::size_t(dims[2]) == size3);
-		}
+            return (std::size_t(dims[0]) == size1 && std::size_t(dims[1]) == size2 && std::size_t(dims[2]) == size3);
+        }
     }
 }

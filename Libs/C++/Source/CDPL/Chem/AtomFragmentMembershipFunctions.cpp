@@ -33,12 +33,12 @@ using namespace CDPL;
 bool Chem::isInFragmentOfSize(const Atom& atom, const FragmentList& frag_list, std::size_t size)
 {
     for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(),
-			 end = frag_list.getElementsEnd(); it != end; ++it) {
-	
-		const Fragment& frag = *it;
+             end = frag_list.getElementsEnd(); it != end; ++it) {
+    
+        const Fragment& frag = *it;
 
-		if (frag.containsAtom(atom) && frag.getNumAtoms() == size)
-			return true;
+        if (frag.containsAtom(atom) && frag.getNumAtoms() == size)
+            return true;
     }
 
     return false;
@@ -49,12 +49,12 @@ std::size_t Chem::getSizeOfSmallestContainingFragment(const Atom& atom, const Fr
     std::size_t smallest_rsize = 0;
 
     for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
-			 end = frag_list.getElementsEnd(); it != end; ++it) {
-	
-		const Fragment& frag = *it;
+             end = frag_list.getElementsEnd(); it != end; ++it) {
+    
+        const Fragment& frag = *it;
 
-		if (frag.containsAtom(atom) && (smallest_rsize == 0 || frag.getNumAtoms() < smallest_rsize))
-			smallest_rsize = frag.getNumAtoms();
+        if (frag.containsAtom(atom) && (smallest_rsize == 0 || frag.getNumAtoms() < smallest_rsize))
+            smallest_rsize = frag.getNumAtoms();
     }
 
     return smallest_rsize;
@@ -65,12 +65,12 @@ std::size_t Chem::getSizeOfLargestContainingFragment(const Atom& atom, const Fra
     std::size_t largest_rsize = 0;
 
     for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), 
-			 end = frag_list.getElementsEnd(); it != end; ++it) {
-	
-		const Fragment& frag = *it;
+             end = frag_list.getElementsEnd(); it != end; ++it) {
+    
+        const Fragment& frag = *it;
 
-		if (frag.containsAtom(atom) && frag.getNumAtoms() > largest_rsize)
-			largest_rsize = frag.getNumAtoms();
+        if (frag.containsAtom(atom) && frag.getNumAtoms() > largest_rsize)
+            largest_rsize = frag.getNumAtoms();
     }
 
     return largest_rsize;
@@ -79,19 +79,19 @@ std::size_t Chem::getSizeOfLargestContainingFragment(const Atom& atom, const Fra
 std::size_t Chem::getNumContainingFragments(const Atom& atom, const FragmentList& frag_list)
 {
     std::size_t count = std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
-									  std::bind(&Fragment::containsAtom, std::placeholders::_1,
-												std::ref(atom)));
+                                      std::bind(&Fragment::containsAtom, std::placeholders::_1,
+                                                std::ref(atom)));
 
     return count;
 }
 
 void Chem::getContainingFragments(const Atom& atom, const FragmentList& frag_list, FragmentList& cont_frag_list, bool append)
 {
-	if (!append)
-		cont_frag_list.clear();
+    if (!append)
+        cont_frag_list.clear();
 
     for (FragmentList::BaseType::ConstElementIterator it = frag_list.getBase().getElementsBegin(), 
-			 end = frag_list.getBase().getElementsEnd(); it != end; ++it)
-		if ((*it)->containsAtom(atom))
-			cont_frag_list.addElement(*it);
+             end = frag_list.getBase().getElementsEnd(); it != end; ++it)
+        if ((*it)->containsAtom(atom))
+            cont_frag_list.addElement(*it);
 }

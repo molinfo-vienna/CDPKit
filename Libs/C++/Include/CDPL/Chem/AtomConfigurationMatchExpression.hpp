@@ -39,76 +39,76 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		class Atom;
-		class MolecularGraph;
+        class Atom;
+        class MolecularGraph;
 
-		/**
-		 * \brief AtomConfigurationMatchExpression.
-		 */
-		class CDPL_CHEM_API AtomConfigurationMatchExpression : public MatchExpression<Atom, MolecularGraph>
-		{
+        /**
+         * \brief AtomConfigurationMatchExpression.
+         */
+        class CDPL_CHEM_API AtomConfigurationMatchExpression : public MatchExpression<Atom, MolecularGraph>
+        {
 
-		public:
-			/**
-			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomConfigurationMatchExpression instances.
-			 */
-			typedef std::shared_ptr<AtomConfigurationMatchExpression> SharedPointer;
+        public:
+            /**
+             * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomConfigurationMatchExpression instances.
+             */
+            typedef std::shared_ptr<AtomConfigurationMatchExpression> SharedPointer;
 
-			/**
-			 * \brief Constructs an \c %AtomConfigurationMatchExpression instance for the specified matching mode and stereo configuration constraints.
-			 * \param query_stereo_descr The descriptor object specifying the query atom's stereo configuration reference atoms and associated configuration constraints
-			 *                           on matching target atoms.
-			 * \param query_atom The atom for which this \c %AtomConfigurationMatchExpression instance gets constructed.
-			 * \param not_match Specifies whether the stereo configuration of a target atom actually has to match (\c true) or \e not match (\c false)
-			 *                  the query configuration constraints.
-			 * \param allow_part_maps Specifies whether or not a target atom that has an incomplete query to target neighbor atom/bond mapping
-			 *                        shall be considered to match the query configuration constraints. This is important for maximum common substructure
-			 *                        searches where the provided query to target atom mapping may not be complete.
-			 */
-			AtomConfigurationMatchExpression(const StereoDescriptor& query_stereo_descr, const Atom& query_atom, bool not_match, bool allow_part_maps);
+            /**
+             * \brief Constructs an \c %AtomConfigurationMatchExpression instance for the specified matching mode and stereo configuration constraints.
+             * \param query_stereo_descr The descriptor object specifying the query atom's stereo configuration reference atoms and associated configuration constraints
+             *                           on matching target atoms.
+             * \param query_atom The atom for which this \c %AtomConfigurationMatchExpression instance gets constructed.
+             * \param not_match Specifies whether the stereo configuration of a target atom actually has to match (\c true) or \e not match (\c false)
+             *                  the query configuration constraints.
+             * \param allow_part_maps Specifies whether or not a target atom that has an incomplete query to target neighbor atom/bond mapping
+             *                        shall be considered to match the query configuration constraints. This is important for maximum common substructure
+             *                        searches where the provided query to target atom mapping may not be complete.
+             */
+            AtomConfigurationMatchExpression(const StereoDescriptor& query_stereo_descr, const Atom& query_atom, bool not_match, bool allow_part_maps);
 
-			/**
-			 * \brief Checks whether the stereo configuration of \a target_atom satisfies (or does not satisfy) the configuration constraints specified in the
-			 *        constructor.
-			 *
-			 * The specified configuration constraint flags are interpreted in a 'logical OR' manner. That is, the stereo configuration of the checked target atom
-			 * only has to match (or not match) one of the specified query configurations to satisfy the overall configuration constraints.
-			 * Note that only the flags defined in namespace Chem::AtomConfiguration are supported - any other flags will be ignored.
-			 *
-			 * \param query_atom The query atom.
-			 * \param query_molgraph The molecular graph containing the query atom (ignored).
-			 * \param target_atom The checked target atom.
-			 * \param target_molgraph The molecular graph containing the target atom (ignored).
-			 * \param mapping The current query to target atom/bond mapping candidate.
-			 * \param aux_data Auxiliary information for expression evaluation (ignored).
-			 * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the stereo configuration of the
-			 *         target atom matches one of the specified query configurations, and \c true if not. 
-			 *         Otherwise, the method will return \c true if the target configuration does match one of the specified configurations, and \c false
-			 *         if all allowed configurations remain unmatched.
-			 * \note If no valid query stereo descriptor was specified or \a query_atom is not identical to the query atom specified in the constrctor,
-			 *       the method will return \c true - irrespective of matching mode and actual target atom configuration!
-			 */
-			bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
-							const MolecularGraph& target_molgraph, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
+            /**
+             * \brief Checks whether the stereo configuration of \a target_atom satisfies (or does not satisfy) the configuration constraints specified in the
+             *        constructor.
+             *
+             * The specified configuration constraint flags are interpreted in a 'logical OR' manner. That is, the stereo configuration of the checked target atom
+             * only has to match (or not match) one of the specified query configurations to satisfy the overall configuration constraints.
+             * Note that only the flags defined in namespace Chem::AtomConfiguration are supported - any other flags will be ignored.
+             *
+             * \param query_atom The query atom.
+             * \param query_molgraph The molecular graph containing the query atom (ignored).
+             * \param target_atom The checked target atom.
+             * \param target_molgraph The molecular graph containing the target atom (ignored).
+             * \param mapping The current query to target atom/bond mapping candidate.
+             * \param aux_data Auxiliary information for expression evaluation (ignored).
+             * \return If the matching mode is 'not match' (see constructor), the method returns \c false if the stereo configuration of the
+             *         target atom matches one of the specified query configurations, and \c true if not. 
+             *         Otherwise, the method will return \c true if the target configuration does match one of the specified configurations, and \c false
+             *         if all allowed configurations remain unmatched.
+             * \note If no valid query stereo descriptor was specified or \a query_atom is not identical to the query atom specified in the constrctor,
+             *       the method will return \c true - irrespective of matching mode and actual target atom configuration!
+             */
+            bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
+                            const MolecularGraph& target_molgraph, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
-			/**
-			 * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
-			 * \return \c true.
-			 */
-			bool requiresAtomBondMapping() const;
+            /**
+             * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
+             * \return \c true.
+             */
+            bool requiresAtomBondMapping() const;
 
-		private:
-			StereoDescriptor queryStereoDescr;
-			const Atom*      queryAtom;
-			bool             queryDescrValid;
-			unsigned int     configFlags;
-			bool             notMatch;
-			bool             allowPartMaps;
-		};
-	}
+        private:
+            StereoDescriptor queryStereoDescr;
+            const Atom*      queryAtom;
+            bool             queryDescrValid;
+            unsigned int     configFlags;
+            bool             notMatch;
+            bool             allowPartMaps;
+        };
+    }
 }
 
 #endif // CDPL_CHEM_ATOMCONFIGURATIONMATCHEXPRESSION_HPP

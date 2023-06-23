@@ -40,7 +40,7 @@ namespace CDPL
     namespace Pharm 
     {
 
-	CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);
+    CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);
     }
 }
 

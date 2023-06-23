@@ -34,36 +34,36 @@
 
 void CDPLPythonChem::exportSMILESMoleculeReader()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::SMILESMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("SMILESMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SMILESMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("SMILESMoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::SMILESMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileSMILESMoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::SMILESMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileSMILESMoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-	python::class_<Chem::SMILESGZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("SMILESGZMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SMILESGZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("SMILESGZMoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::SMILESGZMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileSMILESGZMoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::SMILESGZMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileSMILESGZMoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-	python::class_<Chem::SMILESBZ2MoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("SMILESBZ2MoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Chem::SMILESBZ2MoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("SMILESBZ2MoleculeReader", python::no_init)
+        .def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+             [python::with_custodian_and_ward<1, 2>()]);
 
-	python::class_<Util::FileDataReader<Chem::SMILESBZ2MoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("FileSMILESBZ2MoleculeReader", python::no_init)
-		.def(python::init<const std::string&, std::ios_base::openmode>(
-				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+    python::class_<Util::FileDataReader<Chem::SMILESBZ2MoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+        boost::noncopyable>("FileSMILESBZ2MoleculeReader", python::no_init)
+        .def(python::init<const std::string&, std::ios_base::openmode>(
+                 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

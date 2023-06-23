@@ -34,24 +34,24 @@ namespace CDPL
     namespace Pharm
     {
 
-		class QueryTwoPointPharmacophore : public TwoPointPharmacophore
-		{
+        class QueryTwoPointPharmacophore : public TwoPointPharmacophore
+        {
 
-		public:
-			QueryTwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
+        public:
+            QueryTwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
 
-			double getFeature1Tolerance() const {
-				return ftr1Tol;
-			}
+            double getFeature1Tolerance() const {
+                return ftr1Tol;
+            }
 
-			double getFeature2Tolerance() const {
-				return ftr2Tol;
-			}
+            double getFeature2Tolerance() const {
+                return ftr2Tol;
+            }
 
-		private:
-			double ftr1Tol;
-			double ftr2Tol;
-		};
+        private:
+            double ftr1Tol;
+            double ftr2Tol;
+        };
     }
 }
 

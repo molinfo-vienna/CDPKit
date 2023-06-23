@@ -28,9 +28,9 @@
 
 namespace CDPLPythonUtil
 {
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
+    
+    void registerFromPythonConverters();
+    void registerToPythonConverters();
 }
 
 #endif // CDPL_PYTHON_UTIL_CONVERTERREGISTRATION_HPP

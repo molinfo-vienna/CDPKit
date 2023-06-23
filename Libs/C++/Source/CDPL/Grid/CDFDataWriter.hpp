@@ -37,32 +37,32 @@
 namespace CDPL 
 {
 
-	namespace Grid
-	{
+    namespace Grid
+    {
 
-		class AttributedGrid;
+        class AttributedGrid;
 
-		class CDPL_GRID_API CDFDataWriter : public Internal::CDFDataWriterBase
-		{
+        class CDPL_GRID_API CDFDataWriter : public Internal::CDFDataWriterBase
+        {
 
-		  public:
-			typedef std::function<unsigned int(const CDFDataWriter&, const AttributedGrid&, Internal::ByteBuffer&)> PropertyHandler;
+          public:
+            typedef std::function<unsigned int(const CDFDataWriter&, const AttributedGrid&, Internal::ByteBuffer&)> PropertyHandler;
 
-			static void registerExternalPropertyHandler(const PropertyHandler& handler);
+            static void registerExternalPropertyHandler(const PropertyHandler& handler);
 
-		  protected:
-			void outputProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf);
+          protected:
+            void outputProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf);
 
-		  private:
-			void outputExternalProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf);
-			void outputExternalProperties(const PropertyHandler& handler, const AttributedGrid& grid, Internal::ByteBuffer& bbuf);
+          private:
+            void outputExternalProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf);
+            void outputExternalProperties(const PropertyHandler& handler, const AttributedGrid& grid, Internal::ByteBuffer& bbuf);
 
-			typedef std::vector<PropertyHandler> PropertyHandlerList;
+            typedef std::vector<PropertyHandler> PropertyHandlerList;
 
-			static PropertyHandlerList extPropertyHandlers;
-			Internal::ByteBuffer       extDataBuffer;
-		};
-	}
+            static PropertyHandlerList extPropertyHandlers;
+            Internal::ByteBuffer       extDataBuffer;
+        };
+    }
 }
 
 #endif // CDPL_GRID_CDFDATAWRITER_HPP

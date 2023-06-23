@@ -36,16 +36,16 @@ namespace CDPL
     namespace ConfGen
     {
 
-		/**
-		 * \brief Provides constants used to specify the employed conformer sampling method.
-		 */
-		namespace ConformerSamplingMode
-		{
-					
-			const unsigned int AUTO       = 0;
-			const unsigned int SYSTEMATIC = 1;
-			const unsigned int STOCHASTIC = 2;
-		}
+        /**
+         * \brief Provides constants used to specify the employed conformer sampling method.
+         */
+        namespace ConformerSamplingMode
+        {
+                    
+            const unsigned int AUTO       = 0;
+            const unsigned int SYSTEMATIC = 1;
+            const unsigned int STOCHASTIC = 2;
+        }
     }
 }
 

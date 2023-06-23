@@ -31,9 +31,9 @@ using namespace CDPL;
 
 
 ConfGen::TorsionRuleMatch::TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond, 
-											const Chem::Atom* atom1, const Chem::Atom* atom2, 
-											const Chem::Atom* atom3, const Chem::Atom* atom4): 
-	rule(&rule), bond(&bond)
+                                            const Chem::Atom* atom1, const Chem::Atom* atom2, 
+                                            const Chem::Atom* atom3, const Chem::Atom* atom4): 
+    rule(&rule), bond(&bond)
 {
     atoms[0] = atom1;
     atoms[1] = atom2;

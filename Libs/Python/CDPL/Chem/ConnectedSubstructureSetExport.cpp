@@ -32,21 +32,21 @@
 
 void CDPLPythonChem::exportConnectedSubstructureSet()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	void (Chem::ConnectedSubstructureSet::* resetFunc)(const Chem::MolecularGraph&) = &Chem::ConnectedSubstructureSet::reset;
+    void (Chem::ConnectedSubstructureSet::* resetFunc)(const Chem::MolecularGraph&) = &Chem::ConnectedSubstructureSet::reset;
 
-	python::class_<Chem::ConnectedSubstructureSet, Chem::ConnectedSubstructureSet::SharedPointer,
-		python::bases<Chem::FragmentList>, boost::noncopyable>("ConnectedSubstructureSet", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("reset", resetFunc, (python::arg("self"), python::arg("molgraph")),
-			 python::with_custodian_and_ward<1, 2>())
-		.def("getSubstructureSize", &Chem::ConnectedSubstructureSet::getSubstructureSize, python::arg("self"))
-		.def("findSubstructures", &Chem::ConnectedSubstructureSet::findSubstructures, 
-			 (python::arg("self"), python::arg("size")))
-		.add_property("substructureSize", &Chem::ConnectedSubstructureSet::getSubstructureSize,
-					  &Chem::ConnectedSubstructureSet::findSubstructures);
+    python::class_<Chem::ConnectedSubstructureSet, Chem::ConnectedSubstructureSet::SharedPointer,
+        python::bases<Chem::FragmentList>, boost::noncopyable>("ConnectedSubstructureSet", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("reset", resetFunc, (python::arg("self"), python::arg("molgraph")),
+             python::with_custodian_and_ward<1, 2>())
+        .def("getSubstructureSize", &Chem::ConnectedSubstructureSet::getSubstructureSize, python::arg("self"))
+        .def("findSubstructures", &Chem::ConnectedSubstructureSet::findSubstructures, 
+             (python::arg("self"), python::arg("size")))
+        .add_property("substructureSize", &Chem::ConnectedSubstructureSet::getSubstructureSize,
+                      &Chem::ConnectedSubstructureSet::findSubstructures);
 }

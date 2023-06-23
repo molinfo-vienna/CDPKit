@@ -36,59 +36,59 @@
 namespace
 {
 
-	void calculate(CDPL::Descr::AtomRDFCodeCalculator& calculator, CDPL::Chem::AtomContainer& cntnr, CDPL::Math::DVector& rdf_code)
-	{
-		calculator.calculate(cntnr, rdf_code);
-	}
+    void calculate(CDPL::Descr::AtomRDFCodeCalculator& calculator, CDPL::Chem::AtomContainer& cntnr, CDPL::Math::DVector& rdf_code)
+    {
+        calculator.calculate(cntnr, rdf_code);
+    }
 }
 
 
 void CDPLPythonDescr::exportAtomRDFCodeCalculator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Descr::AtomRDFCodeCalculator, boost::noncopyable>("AtomRDFCodeCalculator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::AtomRDFCodeCalculator&>((python::arg("self"), python::arg("calc"))))
-		.def(python::init<Chem::AtomContainer&, Math::DVector&>(
-				 (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AtomRDFCodeCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Descr::AtomRDFCodeCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setEntityPairWeightFunction", &Descr::AtomRDFCodeCalculator::setEntityPairWeightFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setEntity3DCoordinatesFunction", &Descr::AtomRDFCodeCalculator::setEntity3DCoordinatesFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("setNumSteps", &Descr::AtomRDFCodeCalculator::setNumSteps, 
-			 (python::arg("self"), python::arg("num_steps")))
-		.def("getNumSteps", &Descr::AtomRDFCodeCalculator::getNumSteps, python::arg("self"))
-		.def("setRadiusIncrement", &Descr::AtomRDFCodeCalculator::setRadiusIncrement, 
-			 (python::arg("self"), python::arg("radius_inc")))
-		.def("getRadiusIncrement", &Descr::AtomRDFCodeCalculator::getRadiusIncrement, python::arg("self"))
-		.def("setStartRadius", &Descr::AtomRDFCodeCalculator::setStartRadius, 
-			 (python::arg("self"), python::arg("start_radius")))
-		.def("getStartRadius", &Descr::AtomRDFCodeCalculator::getStartRadius, python::arg("self"))
-		.def("setSmoothingFactor", &Descr::AtomRDFCodeCalculator::setSmoothingFactor, 
-			 (python::arg("self"), python::arg("factor")))
-		.def("getSmoothingFactor", &Descr::AtomRDFCodeCalculator::getSmoothingFactor, python::arg("self"))
-		.def("setScalingFactor", &Descr::AtomRDFCodeCalculator::setScalingFactor, 
-			 (python::arg("self"), python::arg("factor")))
-		.def("getScalingFactor", &Descr::AtomRDFCodeCalculator::getScalingFactor, python::arg("self"))
-		.def("enableDistanceToIntervalCenterRounding", &Descr::AtomRDFCodeCalculator::enableDistanceToIntervalCenterRounding, 
-			 (python::arg("self"), python::arg("enable")))
-		.def("distanceToIntervalsCenterRoundingEnabled", &Descr::AtomRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
-		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code")))
-		.add_property("distanceToIntervalCenterRounding", &Descr::AtomRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled,
-					  &Descr::AtomRDFCodeCalculator::enableDistanceToIntervalCenterRounding)
-		.add_property("smoothingFactor", &Descr::AtomRDFCodeCalculator::getSmoothingFactor,
-					  &Descr::AtomRDFCodeCalculator::setSmoothingFactor)
-		.add_property("scalingFactor", &Descr::AtomRDFCodeCalculator::getScalingFactor,
-					  &Descr::AtomRDFCodeCalculator::setScalingFactor)
-		.add_property("startRadius", &Descr::AtomRDFCodeCalculator::getStartRadius,
-					  &Descr::AtomRDFCodeCalculator::setStartRadius)
-		.add_property("radiusIncrement", &Descr::AtomRDFCodeCalculator::getRadiusIncrement,
-					  &Descr::AtomRDFCodeCalculator::setRadiusIncrement)
-		.add_property("numSteps", &Descr::AtomRDFCodeCalculator::getNumSteps,
-					  &Descr::AtomRDFCodeCalculator::setNumSteps);
+    python::class_<Descr::AtomRDFCodeCalculator, boost::noncopyable>("AtomRDFCodeCalculator", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Descr::AtomRDFCodeCalculator&>((python::arg("self"), python::arg("calc"))))
+        .def(python::init<Chem::AtomContainer&, Math::DVector&>(
+                 (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AtomRDFCodeCalculator>())    
+        .def("assign", CDPLPythonBase::copyAssOp(&Descr::AtomRDFCodeCalculator::operator=), 
+             (python::arg("self"), python::arg("calc")), python::return_self<>())
+        .def("setEntityPairWeightFunction", &Descr::AtomRDFCodeCalculator::setEntityPairWeightFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setEntity3DCoordinatesFunction", &Descr::AtomRDFCodeCalculator::setEntity3DCoordinatesFunction, 
+             (python::arg("self"), python::arg("func")))
+        .def("setNumSteps", &Descr::AtomRDFCodeCalculator::setNumSteps, 
+             (python::arg("self"), python::arg("num_steps")))
+        .def("getNumSteps", &Descr::AtomRDFCodeCalculator::getNumSteps, python::arg("self"))
+        .def("setRadiusIncrement", &Descr::AtomRDFCodeCalculator::setRadiusIncrement, 
+             (python::arg("self"), python::arg("radius_inc")))
+        .def("getRadiusIncrement", &Descr::AtomRDFCodeCalculator::getRadiusIncrement, python::arg("self"))
+        .def("setStartRadius", &Descr::AtomRDFCodeCalculator::setStartRadius, 
+             (python::arg("self"), python::arg("start_radius")))
+        .def("getStartRadius", &Descr::AtomRDFCodeCalculator::getStartRadius, python::arg("self"))
+        .def("setSmoothingFactor", &Descr::AtomRDFCodeCalculator::setSmoothingFactor, 
+             (python::arg("self"), python::arg("factor")))
+        .def("getSmoothingFactor", &Descr::AtomRDFCodeCalculator::getSmoothingFactor, python::arg("self"))
+        .def("setScalingFactor", &Descr::AtomRDFCodeCalculator::setScalingFactor, 
+             (python::arg("self"), python::arg("factor")))
+        .def("getScalingFactor", &Descr::AtomRDFCodeCalculator::getScalingFactor, python::arg("self"))
+        .def("enableDistanceToIntervalCenterRounding", &Descr::AtomRDFCodeCalculator::enableDistanceToIntervalCenterRounding, 
+             (python::arg("self"), python::arg("enable")))
+        .def("distanceToIntervalsCenterRoundingEnabled", &Descr::AtomRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
+        .def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code")))
+        .add_property("distanceToIntervalCenterRounding", &Descr::AtomRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled,
+                      &Descr::AtomRDFCodeCalculator::enableDistanceToIntervalCenterRounding)
+        .add_property("smoothingFactor", &Descr::AtomRDFCodeCalculator::getSmoothingFactor,
+                      &Descr::AtomRDFCodeCalculator::setSmoothingFactor)
+        .add_property("scalingFactor", &Descr::AtomRDFCodeCalculator::getScalingFactor,
+                      &Descr::AtomRDFCodeCalculator::setScalingFactor)
+        .add_property("startRadius", &Descr::AtomRDFCodeCalculator::getStartRadius,
+                      &Descr::AtomRDFCodeCalculator::setStartRadius)
+        .add_property("radiusIncrement", &Descr::AtomRDFCodeCalculator::getRadiusIncrement,
+                      &Descr::AtomRDFCodeCalculator::setRadiusIncrement)
+        .add_property("numSteps", &Descr::AtomRDFCodeCalculator::getNumSteps,
+                      &Descr::AtomRDFCodeCalculator::setNumSteps);
 }

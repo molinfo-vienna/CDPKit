@@ -46,109 +46,109 @@ namespace CDPL
     namespace ForceField 
     {
 
-		class CDPL_FORCEFIELD_API MMFF94AtomTypePropertyTable
-		{
+        class CDPL_FORCEFIELD_API MMFF94AtomTypePropertyTable
+        {
 
-		  public:
-			class Entry;
+          public:
+            class Entry;
 
-		  private:
-			typedef std::unordered_map<unsigned int, Entry> DataStorage;
+          private:
+            typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
-		  public:
-			typedef std::shared_ptr<MMFF94AtomTypePropertyTable> SharedPointer;
-	
-			class CDPL_FORCEFIELD_API Entry
-			{
+          public:
+            typedef std::shared_ptr<MMFF94AtomTypePropertyTable> SharedPointer;
+    
+            class CDPL_FORCEFIELD_API Entry
+            {
 
-			  public:
-				Entry();
+              public:
+                Entry();
  
-				Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
-					  bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
+                Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
+                      bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
-				unsigned int getAtomType() const;
+                unsigned int getAtomType() const;
 
-				unsigned int getAtomicNumber() const;
+                unsigned int getAtomicNumber() const;
 
-				std::size_t getNumNeighbors() const;
+                std::size_t getNumNeighbors() const;
 
-				std::size_t getValence() const;
+                std::size_t getValence() const;
 
-				bool hasPiLonePair() const;
+                bool hasPiLonePair() const;
 
-				unsigned int getMultiBondDesignator() const;
+                unsigned int getMultiBondDesignator() const;
 
-				bool isAromaticAtomType() const;
+                bool isAromaticAtomType() const;
 
-				bool formsLinearBondAngle() const;
+                bool formsLinearBondAngle() const;
 
-				bool formsMultiOrSingleBonds() const;
+                bool formsMultiOrSingleBonds() const;
 
-				operator bool() const;
+                operator bool() const;
 
-			  private:
-				unsigned int atomType;
-				unsigned int atomicNo;
-				std::size_t  numNeighbors;
-				std::size_t  valence;
-				bool         hasPiLonePr;
-				unsigned int mltbDesig;
-				bool         isAroType;
-				bool         hasLinBondAng;
-				bool         hasMultiOrSingleBonds;
-				bool         initialized;
-			};			
+              private:
+                unsigned int atomType;
+                unsigned int atomicNo;
+                std::size_t  numNeighbors;
+                std::size_t  valence;
+                bool         hasPiLonePr;
+                unsigned int mltbDesig;
+                bool         isAroType;
+                bool         hasLinBondAng;
+                bool         hasMultiOrSingleBonds;
+                bool         initialized;
+            };            
 
-			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-											  DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
+                                              DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-											  DataStorage::iterator> EntryIterator;
-	
-			MMFF94AtomTypePropertyTable();
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
+                                              DataStorage::iterator> EntryIterator;
+    
+            MMFF94AtomTypePropertyTable();
 
-			void addEntry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
-						  bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
+            void addEntry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
+                          bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
-			const Entry& getEntry(unsigned int atom_type) const;
+            const Entry& getEntry(unsigned int atom_type) const;
 
-			std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-			void clear();
+            void clear();
 
-			bool removeEntry(unsigned int atom_type);
+            bool removeEntry(unsigned int atom_type);
 
-			EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-			ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-			ConstEntryIterator getEntriesEnd() const;
-	
-			EntryIterator getEntriesBegin();
+            ConstEntryIterator getEntriesEnd() const;
+    
+            EntryIterator getEntriesBegin();
 
-			EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-			ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-			ConstEntryIterator end() const;
-	
-			EntryIterator begin();
+            ConstEntryIterator end() const;
+    
+            EntryIterator begin();
 
-			EntryIterator end();
+            EntryIterator end();
 
-			void load(std::istream& is);
+            void load(std::istream& is);
 
-			void loadDefaults();
+            void loadDefaults();
 
-			static void set(const SharedPointer& table);
+            static void set(const SharedPointer& table);
 
-			static const SharedPointer& get();
+            static const SharedPointer& get();
 
-		  private:
-			static SharedPointer defaultTable;
-			DataStorage          entries;
-		};
+          private:
+            static SharedPointer defaultTable;
+            DataStorage          entries;
+        };
     }
 }
 

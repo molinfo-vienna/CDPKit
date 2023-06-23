@@ -37,10 +37,10 @@ using namespace CDPL;
 
 std::size_t Chem::getMaxComponentGroupID(const Reaction& rxn)
 {
-	std::size_t max_id = 0;
+    std::size_t max_id = 0;
 
-	for (Reaction::ConstComponentIterator it = rxn.getComponentsBegin(), end = rxn.getComponentsEnd(); it != end; ++it)
-		max_id = std::max(getMaxComponentGroupID(*it), max_id);
+    for (Reaction::ConstComponentIterator it = rxn.getComponentsBegin(), end = rxn.getComponentsEnd(); it != end; ++it)
+        max_id = std::max(getMaxComponentGroupID(*it), max_id);
 
-	return max_id;
+    return max_id;
 }

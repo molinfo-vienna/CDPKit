@@ -32,33 +32,33 @@
 namespace CDPL
 {
 
-	namespace Internal
-	{
+    namespace Internal
+    {
 
-		struct IsNonWhitespace
-		{
+        struct IsNonWhitespace
+        {
 
-			typedef bool result_type;
-			
-			bool operator()(char c) const {
-				return !std::isspace(c, std::locale::classic());
-			}
-		};
+            typedef bool result_type;
+            
+            bool operator()(char c) const {
+                return !std::isspace(c, std::locale::classic());
+            }
+        };
 
-		struct IsWhitespace
-		{
+        struct IsWhitespace
+        {
 
-			typedef bool result_type;
-			
-			bool operator()(char c) const {
-				return std::isspace(c, std::locale::classic());
-			}
-		};
+            typedef bool result_type;
+            
+            bool operator()(char c) const {
+                return std::isspace(c, std::locale::classic());
+            }
+        };
 
-		std::string& trimString(std::string& str, bool left = true, bool right = true);
+        std::string& trimString(std::string& str, bool left = true, bool right = true);
 
-		std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
-	}
+        std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
+    }
 }
 
 #endif // CDPL_INTERNAL_STRINGUTILITIES_HPP

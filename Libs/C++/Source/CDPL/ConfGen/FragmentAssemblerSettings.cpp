@@ -33,46 +33,46 @@ using namespace CDPL;
 
 
 ConfGen::FragmentAssemblerSettings::FragmentAssemblerSettings():
-	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	fromScratch(true)
+    enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
+    fromScratch(true)
 {}
 
 void ConfGen::FragmentAssemblerSettings::enumerateRings(bool enumerate)
 {
-	enumRings = enumerate;
+    enumRings = enumerate;
 }
 
 bool ConfGen::FragmentAssemblerSettings::enumerateRings() const
 {
-	return enumRings;
+    return enumRings;
 }
 
 void ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode(unsigned int mode)
 {
-	nitrogenEnumMode = mode;
+    nitrogenEnumMode = mode;
 }
 
 unsigned int ConfGen::FragmentAssemblerSettings::getNitrogenEnumerationMode() const
 {
-	return nitrogenEnumMode;
+    return nitrogenEnumMode;
 }
 
 void ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch(bool generate)
 {
-	fromScratch = generate;
+    fromScratch = generate;
 }
-	
+    
 bool ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch() const
 {
-	return fromScratch;
+    return fromScratch;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings()
 {
-	return fragBuildSettings;
+    return fragBuildSettings;
 }
 
 const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings() const
 {
-	return fragBuildSettings;
+    return fragBuildSettings;
 }

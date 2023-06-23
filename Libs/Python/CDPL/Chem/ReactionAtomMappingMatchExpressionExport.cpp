@@ -34,15 +34,15 @@
 
 void CDPLPythonChem::exportReactionAtomMappingMatchExpression()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::ReactionAtomMappingMatchExpression, Chem::ReactionAtomMappingMatchExpression::SharedPointer, 
-		python::bases<Chem::MatchExpression<Chem::Reaction> > >("ReactionAtomMappingMatchExpression", python::no_init)
-		.def(python::init<const Chem::ReactionAtomMappingMatchExpression&>((python::arg("self"), python::arg("expr")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const Chem::AtomMapping::SharedPointer&>((python::arg("self"), python::arg("atom_mapping")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::ReactionAtomMappingMatchExpression::operator=), (python::arg("self"), python::arg("expr")), 
-			 python::return_self<python::with_custodian_and_ward<1, 2> >());
+    python::class_<Chem::ReactionAtomMappingMatchExpression, Chem::ReactionAtomMappingMatchExpression::SharedPointer, 
+        python::bases<Chem::MatchExpression<Chem::Reaction> > >("ReactionAtomMappingMatchExpression", python::no_init)
+        .def(python::init<const Chem::ReactionAtomMappingMatchExpression&>((python::arg("self"), python::arg("expr")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(python::init<const Chem::AtomMapping::SharedPointer&>((python::arg("self"), python::arg("atom_mapping")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def("assign", CDPLPythonBase::copyAssOp(&Chem::ReactionAtomMappingMatchExpression::operator=), (python::arg("self"), python::arg("expr")), 
+             python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

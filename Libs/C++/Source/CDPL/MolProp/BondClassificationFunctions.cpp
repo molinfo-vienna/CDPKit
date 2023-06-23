@@ -39,99 +39,99 @@ using namespace CDPL;
 
 bool MolProp::isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (getOrder(bond) != 1)
-		return false;
+    if (getOrder(bond) != 1)
+        return false;
 
-	const Atom& atom1 = bond.getBegin();
-	const Atom& atom2 = bond.getEnd();
+    const Atom& atom1 = bond.getBegin();
+    const Atom& atom2 = bond.getEnd();
 
-	if (getType(atom1) == AtomType::N)
-		return isCarbonylLikeAtom(atom2, molgraph, c_only, db_o_only);
+    if (getType(atom1) == AtomType::N)
+        return isCarbonylLikeAtom(atom2, molgraph, c_only, db_o_only);
 
-	if (getType(atom2) == AtomType::N)
-		return isCarbonylLikeAtom(atom1, molgraph, c_only, db_o_only);
+    if (getType(atom2) == AtomType::N)
+        return isCarbonylLikeAtom(atom1, molgraph, c_only, db_o_only);
 
-	return false;
+    return false;
 }
 
 bool MolProp::isHydrogenRotor(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (getOrder(bond) != 1)
-		return false;
+    if (getOrder(bond) != 1)
+        return false;
 
-	const Atom& atom1 = bond.getBegin();
-	const Atom& atom2 = bond.getEnd();
+    const Atom& atom1 = bond.getBegin();
+    const Atom& atom2 = bond.getEnd();
 
-	if (getBondCount(atom1, molgraph) < 2 ) 
-		return false;
+    if (getBondCount(atom1, molgraph) < 2 ) 
+        return false;
 
-	if (getBondCount(atom2, molgraph) < 2)
-		return false;
+    if (getBondCount(atom2, molgraph) < 2)
+        return false;
 
-	return (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2);
+    return (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2);
 }
 
 bool MolProp::isHeteroAtomHydrogenRotor(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	if (getOrder(bond) != 1)
-		return false;
+    if (getOrder(bond) != 1)
+        return false;
 
-	const Atom& atom1 = bond.getBegin();
-	const Atom& atom2 = bond.getEnd();
+    const Atom& atom1 = bond.getBegin();
+    const Atom& atom2 = bond.getEnd();
 
-	if (getBondCount(atom1, molgraph) < 2 ) 
-		return false;
+    if (getBondCount(atom1, molgraph) < 2 ) 
+        return false;
 
-	if (getBondCount(atom2, molgraph) < 2)
-		return false;
+    if (getBondCount(atom2, molgraph) < 2)
+        return false;
 
-	return ((getHeavyBondCount(atom1, molgraph) < 2 && getType(atom1) != AtomType::C) || 
-			(getHeavyBondCount(atom2, molgraph) < 2 && getType(atom2) != AtomType::C));
+    return ((getHeavyBondCount(atom1, molgraph) < 2 && getType(atom1) != AtomType::C) || 
+            (getHeavyBondCount(atom2, molgraph) < 2 && getType(atom2) != AtomType::C));
 }
 
 bool MolProp::isRotatable(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool h_rotors, bool ring_bonds, bool amide_bonds)
 {
-	using namespace Chem;
+    using namespace Chem;
 
     if (getOrder(bond) != 1)
-		return false;
+        return false;
 
-	if (ring_bonds) {
-		if (getAromaticityFlag(bond))
-			return false;
+    if (ring_bonds) {
+        if (getAromaticityFlag(bond))
+            return false;
 
-	} else if (getRingFlag(bond))
-		return false;
+    } else if (getRingFlag(bond))
+        return false;
 
     const Atom& atom1 = bond.getBegin();
-	const Atom& atom2 = bond.getEnd();
+    const Atom& atom2 = bond.getEnd();
 
-	if (getHybridizationState(atom1) == HybridizationState::SP && getHybridizationState(atom2) == HybridizationState::SP)
-		return false;
+    if (getHybridizationState(atom1) == HybridizationState::SP && getHybridizationState(atom2) == HybridizationState::SP)
+        return false;
 
-	if (getBondCount(atom1, molgraph) < 2 ) 
-		return false;
+    if (getBondCount(atom1, molgraph) < 2 ) 
+        return false;
 
-	if (getBondCount(atom2, molgraph) < 2)
-		return false;
+    if (getBondCount(atom2, molgraph) < 2)
+        return false;
 
-	if (!h_rotors && (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2))
-		return false;
+    if (!h_rotors && (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2))
+        return false;
 
-	if (amide_bonds)
-		return true;
+    if (amide_bonds)
+        return true;
 
-	return !isAmideBond(bond, molgraph, true, true); 
+    return !isAmideBond(bond, molgraph, true, true); 
 }
  
 bool MolProp::isHydrogenBond(const Chem::Bond& bond)
 {
-	return Internal::isHydrogenBond(bond);
+    return Internal::isHydrogenBond(bond);
 }
  

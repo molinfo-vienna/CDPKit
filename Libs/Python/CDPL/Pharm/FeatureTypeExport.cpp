@@ -42,15 +42,15 @@ void CDPLPythonPharm::exportFeatureTypes()
     using namespace CDPL;
 
     python::class_<FeatureType, boost::noncopyable>("FeatureType", python::no_init)
-	.def_readonly("UNKNOWN", &Pharm::FeatureType::UNKNOWN)
-	.def_readonly("HYDROPHOBIC", &Pharm::FeatureType::HYDROPHOBIC)
-	.def_readonly("AROMATIC", &Pharm::FeatureType::AROMATIC)
-	.def_readonly("NEGATIVE_IONIZABLE", &Pharm::FeatureType::NEGATIVE_IONIZABLE)
-	.def_readonly("POSITIVE_IONIZABLE", &Pharm::FeatureType::POSITIVE_IONIZABLE)
-	.def_readonly("H_BOND_DONOR", &Pharm::FeatureType::H_BOND_DONOR)
-	.def_readonly("H_BOND_ACCEPTOR", &Pharm::FeatureType::H_BOND_ACCEPTOR)
-	.def_readonly("HALOGEN_BOND_DONOR", &Pharm::FeatureType::HALOGEN_BOND_DONOR)
-	.def_readonly("HALOGEN_BOND_ACCEPTOR", &Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR)
-	.def_readonly("EXCLUSION_VOLUME", &Pharm::FeatureType::EXCLUSION_VOLUME)
-	.def_readonly("MAX_TYPE", &Pharm::FeatureType::MAX_TYPE);
+    .def_readonly("UNKNOWN", &Pharm::FeatureType::UNKNOWN)
+    .def_readonly("HYDROPHOBIC", &Pharm::FeatureType::HYDROPHOBIC)
+    .def_readonly("AROMATIC", &Pharm::FeatureType::AROMATIC)
+    .def_readonly("NEGATIVE_IONIZABLE", &Pharm::FeatureType::NEGATIVE_IONIZABLE)
+    .def_readonly("POSITIVE_IONIZABLE", &Pharm::FeatureType::POSITIVE_IONIZABLE)
+    .def_readonly("H_BOND_DONOR", &Pharm::FeatureType::H_BOND_DONOR)
+    .def_readonly("H_BOND_ACCEPTOR", &Pharm::FeatureType::H_BOND_ACCEPTOR)
+    .def_readonly("HALOGEN_BOND_DONOR", &Pharm::FeatureType::HALOGEN_BOND_DONOR)
+    .def_readonly("HALOGEN_BOND_ACCEPTOR", &Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR)
+    .def_readonly("EXCLUSION_VOLUME", &Pharm::FeatureType::EXCLUSION_VOLUME)
+    .def_readonly("MAX_TYPE", &Pharm::FeatureType::MAX_TYPE);
 }

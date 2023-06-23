@@ -38,15 +38,15 @@ namespace CDPL
     namespace GRAIL
     {
 
-		/**
-		 * \brief Provides default values for built-in Grid::AttributedGrid properties.
-		 */
-		namespace AttributedGridPropertyDefault
-		{
+        /**
+         * \brief Provides default values for built-in Grid::AttributedGrid properties.
+         */
+        namespace AttributedGridPropertyDefault
+        {
 
-			extern CDPL_GRAIL_API const unsigned int FEATURE_TYPE;
-			extern CDPL_GRAIL_API const unsigned int TARGET_FEATURE_TYPE;
-		}
+            extern CDPL_GRAIL_API const unsigned int FEATURE_TYPE;
+            extern CDPL_GRAIL_API const unsigned int TARGET_FEATURE_TYPE;
+        }
     }
 }
 

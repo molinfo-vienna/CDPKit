@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief A handler for the output of molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
-		 */
-		typedef Util::DefaultDataOutputHandler<SMARTSMolecularGraphWriter, DataFormat::SMARTS> SMARTSMolecularGraphOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+         */
+        typedef Util::DefaultDataOutputHandler<SMARTSMolecularGraphWriter, DataFormat::SMARTS> SMARTSMolecularGraphOutputHandler;
+    }
 }
 
 #endif // CDPL_CHEM_SMARTSMOLECULARGRAPHOUTPUTHANDLER_HPP

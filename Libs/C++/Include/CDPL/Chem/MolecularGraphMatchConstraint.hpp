@@ -33,33 +33,33 @@
 namespace CDPL
 {
 
-	namespace Chem
-	{
+    namespace Chem
+    {
 
-		/**
-		 * \brief Provides numerical identifiers for built-in Chem::MolecularGraph matching constraints.
-		 */
-		namespace MolecularGraphMatchConstraint
-		{
+        /**
+         * \brief Provides numerical identifiers for built-in Chem::MolecularGraph matching constraints.
+         */
+        namespace MolecularGraphMatchConstraint
+        {
 
-			/**
-			 * \brief Specifies a constraint which requires the target olecular graph to fulfill additional contraints
-			 *        specified by a Chem::MatchConstraintList object.
-			 */
-			const unsigned int CONSTRAINT_LIST    = 0;
+            /**
+             * \brief Specifies a constraint which requires the target olecular graph to fulfill additional contraints
+             *        specified by a Chem::MatchConstraintList object.
+             */
+            const unsigned int CONSTRAINT_LIST    = 0;
 
-			/**
-			 * \brief Specifies a constraint which requires the target molecular graph to match any component level groupings
-			 *        defined by the query.
-			 * 
-			 * Component level groupings specify whether the components of a query molecular graph have to be matched by a single
-			 * target molecular graph component or by different components of the target.
-			 * <em>Daylight SMARTS</em> patterns [\ref SMARTS] allow to specify component groupings by parentheses that
-			 * enclose those components of the query which have to be part of the same target molecular graph component.
-			 */
-			const unsigned int COMPONENT_GROUPING = 1;
-		}
-	}
+            /**
+             * \brief Specifies a constraint which requires the target molecular graph to match any component level groupings
+             *        defined by the query.
+             * 
+             * Component level groupings specify whether the components of a query molecular graph have to be matched by a single
+             * target molecular graph component or by different components of the target.
+             * <em>Daylight SMARTS</em> patterns [\ref SMARTS] allow to specify component groupings by parentheses that
+             * enclose those components of the query which have to be part of the same target molecular graph component.
+             */
+            const unsigned int COMPONENT_GROUPING = 1;
+        }
+    }
 }
 
 #endif // CDPL_CHEM_MOLECULARGRAPHMATCHCONSTRAINT_HPP

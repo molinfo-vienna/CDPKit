@@ -37,27 +37,27 @@ void CDPLPythonPharm::exportParallelPiPiInteractionScore()
     using namespace CDPL;
 
     python::class_<Pharm::ParallelPiPiInteractionScore, Pharm::ParallelPiPiInteractionScore::SharedPointer,
-				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("ParallelPiPiInteractionScore", python::no_init)
-		.def(python::init<const Pharm::ParallelPiPiInteractionScore&>((python::arg("self"), python::arg("score"))))
-		.def(python::init<double, double, double, double>((python::arg("self"),
-														 python::arg("min_v_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE, 
-														 python::arg("max_v_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE,
-														 python::arg("max_h_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE,
-														 python::arg("max_ang") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE)))
-		.def("setDistanceScoringFunction", &Pharm::ParallelPiPiInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("setAngleScoringFunction", &Pharm::ParallelPiPiInteractionScore::setAngleScoringFunction, (python::arg("self"), python::arg("func")))
-		.def("getMinVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance, python::arg("self"))
-		.def("getMaxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance, python::arg("self"))
-		.def("getMaxHDistance", &Pharm::ParallelPiPiInteractionScore::getMaxHDistance, python::arg("self"))
-		.def("getMaxAngle", &Pharm::ParallelPiPiInteractionScore::getMaxAngle, python::arg("self"))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::ParallelPiPiInteractionScore::operator=), 
-			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.add_property("minVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance)
-		.add_property("maxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance)
-		.add_property("maxHDistance", &Pharm::ParallelPiPiInteractionScore::getMaxHDistance)
-		.add_property("maxAngle", &Pharm::ParallelPiPiInteractionScore::getMaxAngle)
-		.def_readonly("DEF_MIN_V_DISTANCE", Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE)
-		.def_readonly("DEF_MAX_V_DISTANCE", Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE)
-		.def_readonly("DEF_MAX_H_DISTANCE", Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE)
-		.def_readonly("DEF_MAX_ANGLE", Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE);
+                   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("ParallelPiPiInteractionScore", python::no_init)
+        .def(python::init<const Pharm::ParallelPiPiInteractionScore&>((python::arg("self"), python::arg("score"))))
+        .def(python::init<double, double, double, double>((python::arg("self"),
+                                                         python::arg("min_v_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE, 
+                                                         python::arg("max_v_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE,
+                                                         python::arg("max_h_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE,
+                                                         python::arg("max_ang") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE)))
+        .def("setDistanceScoringFunction", &Pharm::ParallelPiPiInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("setAngleScoringFunction", &Pharm::ParallelPiPiInteractionScore::setAngleScoringFunction, (python::arg("self"), python::arg("func")))
+        .def("getMinVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance, python::arg("self"))
+        .def("getMaxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance, python::arg("self"))
+        .def("getMaxHDistance", &Pharm::ParallelPiPiInteractionScore::getMaxHDistance, python::arg("self"))
+        .def("getMaxAngle", &Pharm::ParallelPiPiInteractionScore::getMaxAngle, python::arg("self"))
+        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::ParallelPiPiInteractionScore::operator=), 
+             (python::arg("self"), python::arg("constr")), python::return_self<>())
+        .add_property("minVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance)
+        .add_property("maxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance)
+        .add_property("maxHDistance", &Pharm::ParallelPiPiInteractionScore::getMaxHDistance)
+        .add_property("maxAngle", &Pharm::ParallelPiPiInteractionScore::getMaxAngle)
+        .def_readonly("DEF_MIN_V_DISTANCE", Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE)
+        .def_readonly("DEF_MAX_V_DISTANCE", Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE)
+        .def_readonly("DEF_MAX_H_DISTANCE", Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE)
+        .def_readonly("DEF_MAX_ANGLE", Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE);
 }

@@ -37,14 +37,14 @@
 namespace CDPL 
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		/**
-		 * \brief A handler for the output of pharmacophore data in the native I/O format of <em>LigandScout</em>.
-		 */
-		typedef Util::DefaultDataOutputHandler<PMLFeatureContainerWriter, DataFormat::PML> PMLFeatureContainerOutputHandler;
-	}
+        /**
+         * \brief A handler for the output of pharmacophore data in the native I/O format of <em>LigandScout</em>.
+         */
+        typedef Util::DefaultDataOutputHandler<PMLFeatureContainerWriter, DataFormat::PML> PMLFeatureContainerOutputHandler;
+    }
 }
 
 #endif // CDPL_PHARM_PMLFEATURECONTAINEROUTPUTHANDLER_HPP

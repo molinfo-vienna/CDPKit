@@ -37,63 +37,63 @@
 namespace
 {
 
-	template <typename T>
-	struct ConstMatrixExpressionExport
-	{
+    template <typename T>
+    struct ConstMatrixExpressionExport
+    {
 
-		typedef CDPLPythonMath::ConstMatrixExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef CDPLPythonMath::ConstMatrixExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
 
-		ConstMatrixExpressionExport(const char* name) {
-			using namespace boost;
+        ConstMatrixExpressionExport(const char* name) {
+            using namespace boost;
 
-			python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
-				.def(CDPLPythonMath::ConstMatrixVisitor<ExpressionType>("e"));
-		}
-	};
+            python::class_<ExpressionType, ExpressionPointer, boost::noncopyable>(name, python::no_init)
+                .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ExpressionType>())
+                .def(CDPLPythonMath::ConstMatrixVisitor<ExpressionType>("e"));
+        }
+    };
 
-	template <typename T>
-	struct MatrixExpressionExport
-	{
+    template <typename T>
+    struct MatrixExpressionExport
+    {
 
-		typedef CDPLPythonMath::MatrixExpression<T> ExpressionType;
-		typedef typename ExpressionType::SharedPointer ExpressionPointer;
-		typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
+        typedef CDPLPythonMath::MatrixExpression<T> ExpressionType;
+        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+        typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
-		MatrixExpressionExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
+        MatrixExpressionExport(const char* name) {
+            using namespace boost;
+            using namespace CDPLPythonMath;
 
-			python::class_<ExpressionType, ExpressionPointer, 
-				python::bases<ConstMatrixExpression<T> >, boost::noncopyable>(name, python::no_init)
-				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
-				.def(MatrixAssignAndSwapVisitor<ExpressionType>("e"))
-				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstMatrixExpression>("e"))
-				.def(MatrixNDArrayAssignVisitor<ExpressionType>())
-				.def(MatrixVisitor<ExpressionType>("e"));
+            python::class_<ExpressionType, ExpressionPointer, 
+                python::bases<ConstMatrixExpression<T> >, boost::noncopyable>(name, python::no_init)
+                .def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
+                .def(MatrixAssignAndSwapVisitor<ExpressionType>("e"))
+                .def(AssignFunctionGeneratorVisitor<ExpressionType, ConstMatrixExpression>("e"))
+                .def(MatrixNDArrayAssignVisitor<ExpressionType>())
+                .def(MatrixVisitor<ExpressionType>("e"));
 
-			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
-		}
+            python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();
+        }
 
-		static void swapExpr(ExpressionType& mtx1, const ExpressionPointer& mtx2_expr) {
-			mtx1.swap(*mtx2_expr);
-		}
-	};
+        static void swapExpr(ExpressionType& mtx1, const ExpressionPointer& mtx2_expr) {
+            mtx1.swap(*mtx2_expr);
+        }
+    };
 }
 
 
 void CDPLPythonMath::exportMatrixExpressionTypes()
 {
-	ConstMatrixExpressionExport<float>("ConstFMatrixExpression");
-	MatrixExpressionExport<float>("FMatrixExpression");
+    ConstMatrixExpressionExport<float>("ConstFMatrixExpression");
+    MatrixExpressionExport<float>("FMatrixExpression");
 
-	ConstMatrixExpressionExport<double>("ConstDMatrixExpression");
-	MatrixExpressionExport<double>("DMatrixExpression");
+    ConstMatrixExpressionExport<double>("ConstDMatrixExpression");
+    MatrixExpressionExport<double>("DMatrixExpression");
 
-	ConstMatrixExpressionExport<long>("ConstLMatrixExpression");
-	MatrixExpressionExport<long>("LMatrixExpression");
+    ConstMatrixExpressionExport<long>("ConstLMatrixExpression");
+    MatrixExpressionExport<long>("LMatrixExpression");
 
-	ConstMatrixExpressionExport<unsigned long>("ConstULMatrixExpression");
-	MatrixExpressionExport<unsigned long>("ULMatrixExpression");
+    ConstMatrixExpressionExport<unsigned long>("ConstULMatrixExpression");
+    MatrixExpressionExport<unsigned long>("ULMatrixExpression");
 }

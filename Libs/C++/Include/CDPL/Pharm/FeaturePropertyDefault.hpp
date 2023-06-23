@@ -38,23 +38,23 @@ namespace CDPL
     namespace Pharm
     {
 
-		/**
-		 * \brief Provides default values for built-in Pharm::Feature properties.
-		 */
-		namespace FeaturePropertyDefault
-		{
+        /**
+         * \brief Provides default values for built-in Pharm::Feature properties.
+         */
+        namespace FeaturePropertyDefault
+        {
 
-			extern CDPL_PHARM_API const bool OPTIONAL_FLAG;
-			extern CDPL_PHARM_API const bool DISABLED_FLAG;
+            extern CDPL_PHARM_API const bool OPTIONAL_FLAG;
+            extern CDPL_PHARM_API const bool DISABLED_FLAG;
 
-			extern CDPL_PHARM_API const double LENGTH;
-			extern CDPL_PHARM_API const double TOLERANCE;
-			extern CDPL_PHARM_API const double WEIGHT;
-			extern CDPL_PHARM_API const double HYDROPHOBICITY;
+            extern CDPL_PHARM_API const double LENGTH;
+            extern CDPL_PHARM_API const double TOLERANCE;
+            extern CDPL_PHARM_API const double WEIGHT;
+            extern CDPL_PHARM_API const double HYDROPHOBICITY;
 
-			extern CDPL_PHARM_API const unsigned int TYPE;
-			extern CDPL_PHARM_API const unsigned int GEOMETRY;
-		}
+            extern CDPL_PHARM_API const unsigned int TYPE;
+            extern CDPL_PHARM_API const unsigned int GEOMETRY;
+        }
     }
 }
 

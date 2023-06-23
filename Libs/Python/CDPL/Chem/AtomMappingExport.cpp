@@ -34,15 +34,15 @@
 
 void CDPLPythonChem::exportAtomMapping()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Chem::AtomMapping, Chem::AtomMapping::SharedPointer>("AtomMapping", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::AtomMapping&>((python::arg("self"), python::arg("mapping")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def(CDPLPythonUtil::MultiMapVisitor<Chem::AtomMapping,
-			 python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
-			 python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
-			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
+    python::class_<Chem::AtomMapping, Chem::AtomMapping::SharedPointer>("AtomMapping", python::no_init)
+        .def(python::init<>(python::arg("self")))
+        .def(python::init<const Chem::AtomMapping&>((python::arg("self"), python::arg("mapping")))
+             [python::with_custodian_and_ward<1, 2>()])
+        .def(CDPLPythonUtil::MultiMapVisitor<Chem::AtomMapping,
+             python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
+             python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
+             python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
 }

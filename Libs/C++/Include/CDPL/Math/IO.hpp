@@ -34,218 +34,218 @@
 namespace CDPL
 {
 
-	namespace Math
-	{
+    namespace Math
+    {
 
-		template <typename E> class VectorExpression;
-		template <typename E> class MatrixExpression;
-		template <typename E> class QuaternionExpression;
-		template <typename E> class GridExpression;
+        template <typename E> class VectorExpression;
+        template <typename E> class MatrixExpression;
+        template <typename E> class QuaternionExpression;
+        template <typename E> class GridExpression;
 
-		template <typename C, typename T, typename E>
-		std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const VectorExpression<E>& e)
-		{
-			typename std::basic_ostream<C, T>::sentry se(os);
-			std::ios_base::iostate state(std::ios_base::goodbit);
+        template <typename C, typename T, typename E>
+        std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const VectorExpression<E>& e)
+        {
+            typename std::basic_ostream<C, T>::sentry se(os);
+            std::ios_base::iostate state(std::ios_base::goodbit);
 
-			if (se) {
-				try {
-					std::basic_ostringstream<C, T, std::allocator<C> > oss;
+            if (se) {
+                try {
+                    std::basic_ostringstream<C, T, std::allocator<C> > oss;
 
-					oss.flags(os.flags());
-					oss.imbue(os.getloc());
-					oss.precision(os.precision());
-			
-					typedef typename E::SizeType SizeType;
+                    oss.flags(os.flags());
+                    oss.imbue(os.getloc());
+                    oss.precision(os.precision());
+            
+                    typedef typename E::SizeType SizeType;
 
-					SizeType size = e().getSize();
+                    SizeType size = e().getSize();
 
-					oss << '[' << size << "](";
+                    oss << '[' << size << "](";
 
-					if (size > 0)
-						oss << e()(0);
+                    if (size > 0)
+                        oss << e()(0);
 
-					for (SizeType i = 1; i < size; i++)
-						oss << ',' << e()(i);
+                    for (SizeType i = 1; i < size; i++)
+                        oss << ',' << e()(i);
 
-					oss << ')';
-				
-					if (!oss.good())
-						state |= std::ios_base::failbit;
-					else 
-						os << oss.str().c_str();
-				
-				} catch (...) {
-					os.setstate(std::ios_base::failbit); 
-					throw;
-				}
-			}
+                    oss << ')';
+                
+                    if (!oss.good())
+                        state |= std::ios_base::failbit;
+                    else 
+                        os << oss.str().c_str();
+                
+                } catch (...) {
+                    os.setstate(std::ios_base::failbit); 
+                    throw;
+                }
+            }
 
-			if (state != std::ios_base::goodbit)
-				os.setstate(state);
+            if (state != std::ios_base::goodbit)
+                os.setstate(state);
 
-			return os;
-		}
+            return os;
+        }
 
-		template <typename C, typename T, typename E>
-		std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const MatrixExpression<E>& e)
-		{
-			typename std::basic_ostream<C, T>::sentry se(os);
-			std::ios_base::iostate state(std::ios_base::goodbit);
+        template <typename C, typename T, typename E>
+        std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const MatrixExpression<E>& e)
+        {
+            typename std::basic_ostream<C, T>::sentry se(os);
+            std::ios_base::iostate state(std::ios_base::goodbit);
 
-			if (se) {
-				try {
-					std::basic_ostringstream<C, T, std::allocator<C> > oss;
+            if (se) {
+                try {
+                    std::basic_ostringstream<C, T, std::allocator<C> > oss;
 
-					oss.flags(os.flags());
-					oss.imbue(os.getloc());
-					oss.precision(os.precision());
-			
-					typedef typename E::SizeType SizeType;
+                    oss.flags(os.flags());
+                    oss.imbue(os.getloc());
+                    oss.precision(os.precision());
+            
+                    typedef typename E::SizeType SizeType;
 
-					SizeType size1 = e().getSize1();
-					SizeType size2 = e().getSize2();
+                    SizeType size1 = e().getSize1();
+                    SizeType size2 = e().getSize2();
 
-					oss << '[' << size1 << ',' << size2 << "](";
+                    oss << '[' << size1 << ',' << size2 << "](";
 
-					if (size1 > 0 && size2 > 0) {
-						for (SizeType i = 0; i < size1; i++) {
-							if (i > 0)
-								oss << ',';
+                    if (size1 > 0 && size2 > 0) {
+                        for (SizeType i = 0; i < size1; i++) {
+                            if (i > 0)
+                                oss << ',';
 
-							oss << '(';
+                            oss << '(';
 
-							for (SizeType j = 0; j < size2; j++) {
-								if (j > 0)
-									oss << ',';
+                            for (SizeType j = 0; j < size2; j++) {
+                                if (j > 0)
+                                    oss << ',';
 
-								oss << e()(i, j);
-							}
+                                oss << e()(i, j);
+                            }
 
-							oss << ')';
-						}
-					}
+                            oss << ')';
+                        }
+                    }
 
-					oss << ')';
+                    oss << ')';
 
-					if (!oss.good())
-						state |= std::ios_base::failbit;
-					else 
-						os << oss.str().c_str();
-				
-				} catch (...) {
-					os.setstate(std::ios_base::failbit); 
-					throw;
-				}
-			}
+                    if (!oss.good())
+                        state |= std::ios_base::failbit;
+                    else 
+                        os << oss.str().c_str();
+                
+                } catch (...) {
+                    os.setstate(std::ios_base::failbit); 
+                    throw;
+                }
+            }
 
-			if (state != std::ios_base::goodbit)
-				os.setstate(state);
+            if (state != std::ios_base::goodbit)
+                os.setstate(state);
 
-			return os;
-		}
+            return os;
+        }
 
-		template <typename C, typename T, typename E>
-		std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const QuaternionExpression<E>& e)
-		{
-			typename std::basic_ostream<C, T>::sentry se(os);
-			std::ios_base::iostate state(std::ios_base::goodbit);
+        template <typename C, typename T, typename E>
+        std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const QuaternionExpression<E>& e)
+        {
+            typename std::basic_ostream<C, T>::sentry se(os);
+            std::ios_base::iostate state(std::ios_base::goodbit);
 
-			if (se) {
-				try {
-					std::basic_ostringstream<C, T, std::allocator<C> > oss;
+            if (se) {
+                try {
+                    std::basic_ostringstream<C, T, std::allocator<C> > oss;
 
-					oss.flags(os.flags());
-					oss.imbue(os.getloc());
-					oss.precision(os.precision());
-			
-					oss << '(' << e().getC1() << ',' << e().getC2() << ',' << e().getC3() << ',' << e().getC4() << ')';
-				
-					if (!oss.good())
-						state |= std::ios_base::failbit;
-					else 
-						os << oss.str().c_str();
-				
-				} catch (...) {
-					os.setstate(std::ios_base::failbit); 
-					throw;
-				}
-			}
+                    oss.flags(os.flags());
+                    oss.imbue(os.getloc());
+                    oss.precision(os.precision());
+            
+                    oss << '(' << e().getC1() << ',' << e().getC2() << ',' << e().getC3() << ',' << e().getC4() << ')';
+                
+                    if (!oss.good())
+                        state |= std::ios_base::failbit;
+                    else 
+                        os << oss.str().c_str();
+                
+                } catch (...) {
+                    os.setstate(std::ios_base::failbit); 
+                    throw;
+                }
+            }
 
-			if (state != std::ios_base::goodbit)
-				os.setstate(state);
+            if (state != std::ios_base::goodbit)
+                os.setstate(state);
 
-			return os;
-		}
+            return os;
+        }
 
-		template <typename C, typename T, typename E>
-		std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const GridExpression<E>& e)
-		{
-			typename std::basic_ostream<C, T>::sentry se(os);
-			std::ios_base::iostate state(std::ios_base::goodbit);
+        template <typename C, typename T, typename E>
+        std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const GridExpression<E>& e)
+        {
+            typename std::basic_ostream<C, T>::sentry se(os);
+            std::ios_base::iostate state(std::ios_base::goodbit);
 
-			if (se) {
-				try {
-					std::basic_ostringstream<C, T, std::allocator<C> > oss;
+            if (se) {
+                try {
+                    std::basic_ostringstream<C, T, std::allocator<C> > oss;
 
-					oss.flags(os.flags());
-					oss.imbue(os.getloc());
-					oss.precision(os.precision());
-			
-					typedef typename E::SizeType SizeType;
+                    oss.flags(os.flags());
+                    oss.imbue(os.getloc());
+                    oss.precision(os.precision());
+            
+                    typedef typename E::SizeType SizeType;
 
-					SizeType size1 = e().getSize1();
-					SizeType size2 = e().getSize2();
-					SizeType size3 = e().getSize3();
+                    SizeType size1 = e().getSize1();
+                    SizeType size2 = e().getSize2();
+                    SizeType size3 = e().getSize3();
 
-					oss << '[' << size1 << ',' << size2 << ',' << size3 << "](";
+                    oss << '[' << size1 << ',' << size2 << ',' << size3 << "](";
 
-					if (size1 > 0 && size2 > 0 && size3 > 0) {
-						for (SizeType i = 0; i < size1; i++) {
-							if (i > 0)
-								oss << ',';
+                    if (size1 > 0 && size2 > 0 && size3 > 0) {
+                        for (SizeType i = 0; i < size1; i++) {
+                            if (i > 0)
+                                oss << ',';
 
-							oss << '(';
+                            oss << '(';
 
-							for (SizeType j = 0; j < size2; j++) {
-								if (j > 0)
-									oss << ',';
+                            for (SizeType j = 0; j < size2; j++) {
+                                if (j > 0)
+                                    oss << ',';
 
-								oss << '(';
+                                oss << '(';
 
-								for (SizeType k = 0; k < size3; k++) {
-									if (k > 0)
-										oss << ',';
-									
-									oss << e()(i, j, k);
-								}
+                                for (SizeType k = 0; k < size3; k++) {
+                                    if (k > 0)
+                                        oss << ',';
+                                    
+                                    oss << e()(i, j, k);
+                                }
 
-								oss << ')';
-							}
+                                oss << ')';
+                            }
 
-							oss << ')';
-						}
-					}
+                            oss << ')';
+                        }
+                    }
 
-					oss << ')';
+                    oss << ')';
 
-					if (!oss.good())
-						state |= std::ios_base::failbit;
-					else 
-						os << oss.str().c_str();
-				
-				} catch (...) {
-					os.setstate(std::ios_base::failbit); 
-					throw;
-				}
-			}
+                    if (!oss.good())
+                        state |= std::ios_base::failbit;
+                    else 
+                        os << oss.str().c_str();
+                
+                } catch (...) {
+                    os.setstate(std::ios_base::failbit); 
+                    throw;
+                }
+            }
 
-			if (state != std::ios_base::goodbit)
-				os.setstate(state);
+            if (state != std::ios_base::goodbit)
+                os.setstate(state);
 
-			return os;
-		}
-	}
+            return os;
+        }
+    }
 }
 
 #endif // CDPL_MATH_IO_HPP

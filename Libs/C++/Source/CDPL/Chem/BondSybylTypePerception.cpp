@@ -40,74 +40,74 @@ namespace
 
     bool isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
     {
-		using namespace Chem;
-		using namespace Internal;
-		
-		const Atom* c_atom = 0;
-		const Atom* n_atom = 0;
+        using namespace Chem;
+        using namespace Internal;
+        
+        const Atom* c_atom = 0;
+        const Atom* n_atom = 0;
 
-		for (std::size_t i = 0; i < 2; i++) {
+        for (std::size_t i = 0; i < 2; i++) {
 
-			switch (getType(bond.getAtom(i))) {
+            switch (getType(bond.getAtom(i))) {
 
-				case AtomType::C:
-					c_atom = &bond.getAtom(i);
-					break;
+                case AtomType::C:
+                    c_atom = &bond.getAtom(i);
+                    break;
 
-				case AtomType::N:
-					n_atom = &bond.getAtom(i);
-					break;
+                case AtomType::N:
+                    n_atom = &bond.getAtom(i);
+                    break;
 
-				default:
-					return false;
-			}
-		}
+                default:
+                    return false;
+            }
+        }
 
-		if (!c_atom || !n_atom)
-			return false;
+        if (!c_atom || !n_atom)
+            return false;
 
-		if (getBondCount(*n_atom, molgraph) != 3)
-			return false;
+        if (getBondCount(*n_atom, molgraph) != 3)
+            return false;
 
-		if ((getBondCount(*n_atom, molgraph, 1, AtomType::C) + getBondCount(*n_atom, molgraph, 1, AtomType::H)) != 3)
-			return false;
+        if ((getBondCount(*n_atom, molgraph, 1, AtomType::C) + getBondCount(*n_atom, molgraph, 1, AtomType::H)) != 3)
+            return false;
 
-		if (getBondCount(*c_atom, molgraph) != 3)
-			return false;
+        if (getBondCount(*c_atom, molgraph) != 3)
+            return false;
 
-		if (getBondCount(*c_atom, molgraph, 1, AtomType::N) != 1)
-			return false;
+        if (getBondCount(*c_atom, molgraph, 1, AtomType::N) != 1)
+            return false;
 
-		if (getBondCount(*c_atom, molgraph, 2, AtomType::O) != 1)
-			return false;
+        if (getBondCount(*c_atom, molgraph, 2, AtomType::O) != 1)
+            return false;
 
-		if (getBondCount(*c_atom, molgraph, 1, AtomType::H) == 1 ||
-			getBondCount(*c_atom, molgraph, 1, AtomType::C) == 1)
-			return true;
+        if (getBondCount(*c_atom, molgraph, 1, AtomType::H) == 1 ||
+            getBondCount(*c_atom, molgraph, 1, AtomType::C) == 1)
+            return true;
 
-		return false;
+        return false;
     }
 }
 
-	
+    
 unsigned int Chem::perceiveSybylType(const Bond& bond, const MolecularGraph& molgraph)
 {
     if (getAromaticityFlag(bond))
-		return SybylBondType::AROMATIC;
+        return SybylBondType::AROMATIC;
 
     switch (getOrder(bond)) {
 
-		case 1:
-			if (::isAmideBond(bond, molgraph))
-				return SybylBondType::AMIDE;
+        case 1:
+            if (::isAmideBond(bond, molgraph))
+                return SybylBondType::AMIDE;
 
-			return SybylBondType::SINGLE;
+            return SybylBondType::SINGLE;
 
-		case 2:
-			return SybylBondType::DOUBLE;
+        case 2:
+            return SybylBondType::DOUBLE;
 
-		case 3:
-			return SybylBondType::TRIPLE;
+        case 3:
+            return SybylBondType::TRIPLE;
 
     }
 

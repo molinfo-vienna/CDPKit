@@ -34,27 +34,27 @@
 namespace ChOX
 {
 
-	class FontChooserDialog : public QDialog
-	{
+    class FontChooserDialog : public QDialog
+    {
 
-		Q_OBJECT
+        Q_OBJECT
 
-	public:
-		FontChooserDialog(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, const CDPL::Vis::SizeSpecification* = 0, 
-						  bool = true, bool = true, Qt::WindowFlags = 0);
+    public:
+        FontChooserDialog(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, const CDPL::Vis::SizeSpecification* = 0, 
+                          bool = true, bool = true, Qt::WindowFlags = 0);
 
-	private slots:
-		void applyChanges();
+    private slots:
+        void applyChanges();
 
-	private:
-		void init(bool, bool);
+    private:
+        void init(bool, bool);
 
-		CDPL::Vis::Font&                    font;
-		CDPL::Vis::Font                     tmpFont;
-		CDPL::Vis::SizeSpecification&       sizeSpec;
-		CDPL::Vis::SizeSpecification        tmpSizeSpec;
-		const CDPL::Vis::SizeSpecification* parentSizeSpec;
-	};
+        CDPL::Vis::Font&                    font;
+        CDPL::Vis::Font                     tmpFont;
+        CDPL::Vis::SizeSpecification&       sizeSpec;
+        CDPL::Vis::SizeSpecification        tmpSizeSpec;
+        const CDPL::Vis::SizeSpecification* parentSizeSpec;
+    };
 }
 
 #endif // CHOX_FONTCHOOSERDIALOG_HPP
