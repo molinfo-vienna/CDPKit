@@ -34,16 +34,16 @@ namespace
 {
 
     const char* ABOUT_TEXT =
-    "<h2 align=center><b>- ChOX -</b></h2>"
-    "<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer</b></h2>"
-    "<p align=center><i>An Application for the Visualization and Manipulation of Chemical Datasets</i></p>"
-    "<p align=center>&copy; 2003 Thomas Seidel (thomas.seidel@univie.ac.at)</p>"
-    "<p align=justify>This program is free software; you can redistribute it and/or modify it under "
-    "the terms<br>of the GNU Lesser General Public License as published by the Free Software "
-    "Foundation;<br>either version 2 of the License, or (at your option) any later version.</p>"
-    "<p align=justify>This program is distributed in the hope that it will be useful, but WITHOUT "
-    "ANY WARRANTY;<br>without even the implied warranty of MERCHANTABILITY or FITNESS FOR A "
-    "PARTICULAR<br>PURPOSE. See the GNU Lesser General Public License for more details.</p>";
+        "<h2 align=center><b>- ChOX -</b></h2>"
+        "<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer</b></h2>"
+        "<p align=center><i>An Application for the Visualization and Manipulation of Chemical Datasets</i></p>"
+        "<p align=center>&copy; 2003 Thomas Seidel (thomas.seidel@univie.ac.at)</p>"
+        "<p align=justify>This program is free software; you can redistribute it and/or modify it under "
+        "the terms<br>of the GNU Lesser General Public License as published by the Free Software "
+        "Foundation;<br>either version 2 of the License, or (at your option) any later version.</p>"
+        "<p align=justify>This program is distributed in the hope that it will be useful, but WITHOUT "
+        "ANY WARRANTY;<br>without even the implied warranty of MERCHANTABILITY or FITNESS FOR A "
+        "PARTICULAR<br>PURPOSE. See the GNU Lesser General Public License for more details.</p>";
 }
 
 
