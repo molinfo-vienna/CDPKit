@@ -216,7 +216,6 @@ void ConfGen::FragmentLibrary::loadDefaults()
 {
     boost::iostreams::stream<boost::iostreams::array_source> is(FragmentLibraryData::BUILTIN_FRAG_LIB_DATA,
                                                                 FragmentLibraryData::BUILTIN_FRAG_LIB_DATA_LEN);
-
     load(is);
 }
 
