@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -54,8 +54,8 @@ namespace CDPL
 
             extern CDPL_PHARM_API const unsigned int TYPE;
             extern CDPL_PHARM_API const unsigned int GEOMETRY;
-        }
-    }
-}
+        } // namespace FeaturePropertyDefault
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREPROPERTYDEFAULT_HPP

@@ -39,7 +39,7 @@
 #include "CDPL/Math/QuaternionExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -47,22 +47,22 @@ namespace CDPL
 
         class CDPL_SHAPE_API PrincipalAxesAlignmentStartGenerator : public GaussianShapeAlignmentStartGenerator
         {
-            
+
           public:
-            static constexpr double      DEF_SYMMETRY_THRESHOLD     = 0.15;
+            static constexpr double DEF_SYMMETRY_THRESHOLD          = 0.15;
             static constexpr std::size_t DEF_NUM_RANDOM_STARTS      = 4;
             static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
-            
-            PrincipalAxesAlignmentStartGenerator();
-                
-            unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-            unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+            PrincipalAxesAlignmentStartGenerator();
+
+            unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
+
+            unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
             void genShapeCenterStarts(bool generate);
 
             bool genShapeCenterStarts() const;
-            
+
             void genColorCenterStarts(bool generate);
 
             bool genColorCenterStarts() const;
@@ -70,7 +70,7 @@ namespace CDPL
             void genNonColorCenterStarts(bool generate);
 
             bool genNonColorCenterStarts() const;
-            
+
             void genRandomStarts(bool generate);
 
             bool genRandomStarts() const;
@@ -86,7 +86,7 @@ namespace CDPL
             void genForLargerShapeCenters(bool generate);
 
             bool genForLargerShapeCenters() const;
-            
+
             void setSymmetryThreshold(double thresh);
 
             double getSymmetryThreshold();
@@ -100,11 +100,11 @@ namespace CDPL
             std::size_t getNumRandomStarts() const;
 
             void setRandomSeed(unsigned int seed);
-            
+
             void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
             bool generate(const GaussianShapeFunction& func, unsigned int sym_class);
-            
+
             std::size_t getNumStartTransforms() const;
 
             std::size_t getNumStartSubTransforms() const;
@@ -119,7 +119,7 @@ namespace CDPL
             void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
 
             typedef std::vector<QuaternionTransformation> StartTransformList;
-            typedef boost::random::mt11213b RandomEngine;
+            typedef boost::random::mt11213b               RandomEngine;
 
             bool                         shapeCtrStarts;
             bool                         colCtrStarts;
@@ -137,7 +137,7 @@ namespace CDPL
             std::size_t                  numSubTransforms;
             RandomEngine                 randomEngine;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_PRINCIPALAXESALIGNMENTSTARTGENERATOR_HPP

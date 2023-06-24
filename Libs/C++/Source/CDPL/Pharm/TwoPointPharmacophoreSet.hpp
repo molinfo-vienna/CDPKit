@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/TwoPointPharmacophore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -41,7 +41,8 @@ namespace CDPL
         struct TwoPointPharmHashFunc
         {
 
-            inline std::size_t operator()(const TwoPointPharmacophore& pharm) const {
+            inline std::size_t operator()(const TwoPointPharmacophore& pharm) const
+            {
                 std::size_t hv = 0;
 
                 boost::hash_combine(hv, pharm.getFeature1Type());
@@ -54,14 +55,15 @@ namespace CDPL
         struct TwoPointPharmEqCmpFunc
         {
 
-            inline bool operator()(const TwoPointPharmacophore& pharm1, const TwoPointPharmacophore& pharm2) const {
+            inline bool operator()(const TwoPointPharmacophore& pharm1, const TwoPointPharmacophore& pharm2) const
+            {
                 return (pharm1.getFeature1Type() == pharm2.getFeature1Type() &&
                         pharm1.getFeature2Type() == pharm2.getFeature2Type());
             }
         };
 
         typedef std::unordered_multiset<TwoPointPharmacophore, TwoPointPharmHashFunc, TwoPointPharmEqCmpFunc> TwoPointPharmacophoreSet;
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_TWOPOINTPHARMACOPHORESET_HPP

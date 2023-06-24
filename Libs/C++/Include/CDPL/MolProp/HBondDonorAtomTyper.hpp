@@ -36,10 +36,10 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace MolProp 
+    namespace MolProp
     {
 
         class CDPL_MOLPROP_API HBondDonorAtomTyper
@@ -57,7 +57,7 @@ namespace CDPL
           private:
             Chem::PatternAtomTyper atomTyper;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_HBONDDONORATOMTYPER_HPP

@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -50,7 +50,7 @@ namespace CDPL
             static constexpr double DEF_MIN_DISTANCE = 3.5;
             static constexpr double DEF_MAX_DISTANCE = 5.5;
             static constexpr double DEF_MAX_ANGLE    = 45.0;
-    
+
             /**
              * \brief Constructs a \c %CationPiInteractionConstraint functor with the specified constraints.
              * \param aro_cat \c true if the first feature argument represents the aromatic- and the second one
@@ -61,7 +61,8 @@ namespace CDPL
              */
             CationPiInteractionConstraint(bool aro_cat, double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE,
                                           double max_ang = DEF_MAX_ANGLE):
-                aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang) {}
+                aroCatOrder(aro_cat),
+                minDist(min_dist), maxDist(max_dist), maxAngle(max_ang) {}
 
             double getMinDistance() const;
 
@@ -77,7 +78,7 @@ namespace CDPL
             double maxDist;
             double maxAngle;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CATIONPIINTERACTIONCONSTRAINT_HPP

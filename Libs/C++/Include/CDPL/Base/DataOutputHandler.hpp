@@ -35,7 +35,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -49,10 +49,10 @@ namespace CDPL
          * \tparam T The type of objects handled by the created Base::DataWriter instances.
          */
         template <typename T>
-        class DataOutputHandler 
+        class DataOutputHandler
         {
 
-        public:
+          public:
             typedef DataWriter<T> WriterType;
 
             typedef std::shared_ptr<DataOutputHandler> SharedPointer;
@@ -81,11 +81,11 @@ namespace CDPL
              * \param mode Flags specifying the file open-mode.
              * \return A shared pointer to the created Base::DataWriter instance.
              */
-            virtual typename WriterType::SharedPointer createWriter(const std::string& file_name, 
-                                                                    std::ios_base::openmode mode = 
-                                                                    std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
+            virtual typename WriterType::SharedPointer createWriter(const std::string&      file_name,
+                                                                    std::ios_base::openmode mode =
+                                                                        std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 #endif // CDPL_BASE_DATAOUTPUTHANDLER_HPP

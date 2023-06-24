@@ -38,7 +38,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -48,14 +48,14 @@ namespace CDPL
         class GaussianProductList;
         class ExactGaussianShapeOverlapFunction;
         class FastGaussianShapeOverlapFunction;
-        
+
         class CDPL_SHAPE_API GaussianShapeFunction
         {
-            
+
           public:
             static constexpr std::size_t DEF_MAX_PRODUCT_ORDER = 6;
             static constexpr double      DEF_DISTANCE_CUTOFF   = 0.0;
-            
+
             typedef std::shared_ptr<GaussianShapeFunction> SharedPointer;
 
             GaussianShapeFunction();
@@ -73,13 +73,13 @@ namespace CDPL
             void setDistanceCutoff(double cutoff);
 
             double getDistanceCutoff() const;
-            
+
             void setShape(const GaussianShape& shape);
 
             const GaussianShape* getShape() const;
 
             void reset();
-            
+
             void transform(const Math::Matrix4D& xform);
 
             const Math::Vector3D& getElementPosition(std::size_t idx) const;
@@ -87,7 +87,7 @@ namespace CDPL
             void getElementPositions(Math::Vector3DArray& coords) const;
 
             double calcDensity(const Math::Vector3D& pos) const;
-            
+
             double calcVolume() const;
 
             double calcSurfaceArea() const;
@@ -97,22 +97,22 @@ namespace CDPL
             void calcCentroid(Math::Vector3D& ctr) const;
 
             void calcQuadrupoleTensor(const Math::Vector3D& ctr, Math::Matrix3D& quad_tensor) const;
-            
+
             GaussianShapeFunction& operator=(const GaussianShapeFunction& func);
-            
+
           private:
             friend class FastGaussianShapeOverlapFunction;
             friend class ExactGaussianShapeOverlapFunction;
-            
+
             const GaussianProductList* getProductList() const;
-            
+
             typedef std::auto_ptr<GaussianProductList> ProductListPtr;
 
             const GaussianShape* shape;
             double               volume;
             ProductListPtr       prodList;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPEFUNCTION_HPP

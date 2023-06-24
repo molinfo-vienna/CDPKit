@@ -28,7 +28,7 @@
 
 namespace CDPLPythonDescr
 {
-    
+
     void registerFromPythonConverters();
 }
 

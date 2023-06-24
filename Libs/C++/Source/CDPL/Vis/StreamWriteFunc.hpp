@@ -26,14 +26,14 @@
 #define CDPL_VIS_STREAMWRITEFUNC_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
     {
-        
+
         cairo_status_t streamWriteFunc(void*, const unsigned char*, unsigned int);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_VIS_STREAMWRITEFUNC_HPP

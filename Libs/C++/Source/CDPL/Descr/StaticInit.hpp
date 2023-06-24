@@ -35,7 +35,7 @@ namespace CDPL
     {
 
     }
-}
+} // namespace CDPL
 
 namespace
 {
@@ -43,12 +43,12 @@ namespace
     struct CDPLDescrInit
     {
 
-        CDPLDescrInit() {
-
+        CDPLDescrInit()
+        {
         }
 
     } cdplDescrInit;
-}
+} // namespace
 
 #endif // CDPL_DESCR_STATIC_LINK
 

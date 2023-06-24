@@ -34,7 +34,7 @@
 #include "CDPL/Chem/MatchExpressionList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class ANDMatchExpressionList : public MatchExpressionList<ObjType1, ObjType2>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
              */
@@ -86,8 +86,9 @@ namespace CDPL
             bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
                             const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
-        private:
-            const char* getClassName() const {
+          private:
+            const char* getClassName() const
+            {
                 return "ANDMatchExpressionList";
             }
         };
@@ -100,7 +101,7 @@ namespace CDPL
         class ANDMatchExpressionList<ObjType, void> : public MatchExpressionList<ObjType, void>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
              */
@@ -131,21 +132,22 @@ namespace CDPL
             bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping,
                             const Base::Any& aux_data) const;
 
-        private:
-            const char* getClassName() const {
+          private:
+            const char* getClassName() const
+            {
                 return "ANDMatchExpressionList";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                               const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                               const Base::Any& data) const
+bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                        const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                        const Base::Any& data) const
 {
     typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
 
@@ -157,9 +159,9 @@ bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const Ob
 }
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                              const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                              const AtomBondMapping& mapping, const Base::Any& data) const
+bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                        const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                        const AtomBondMapping& mapping, const Base::Any& data) const
 {
     typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
 
@@ -172,8 +174,8 @@ bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const Ob
 
 
 template <typename ObjType>
-bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                          const Base::Any& data) const
+bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                                   const Base::Any& data) const
 {
     typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
 
@@ -185,8 +187,8 @@ bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType
 }
 
 template <typename ObjType>
-bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                          const AtomBondMapping& mapping, const Base::Any& data) const
+bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                                   const AtomBondMapping& mapping, const Base::Any& data) const
 {
     typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
 

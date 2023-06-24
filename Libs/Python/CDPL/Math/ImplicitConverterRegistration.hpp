@@ -33,16 +33,17 @@
 namespace CDPLPythonMath
 {
 
-    template <typename TargetType, typename SourceTypeList, typename Empty> 
+    template <typename TargetType, typename SourceTypeList, typename Empty>
     struct ImplicitConverterRegistrationHelper
     {
 
-        static void apply() {
+        static void apply()
+        {
             using namespace boost;
 
-            typedef typename mpl::front<SourceTypeList>::type SourceType;
+            typedef typename mpl::front<SourceTypeList>::type     SourceType;
             typedef typename mpl::pop_front<SourceTypeList>::type NewSourceTypeList;
-            typedef typename mpl::empty<NewSourceTypeList>::type IsEmpty;
+            typedef typename mpl::empty<NewSourceTypeList>::type  IsEmpty;
 
             if (!boost::is_same<SourceType, TargetType>::value)
                 python::implicitly_convertible<SourceType, TargetType>();
@@ -51,23 +52,24 @@ namespace CDPLPythonMath
         }
     };
 
-    template <typename TargetType, typename SourceTypeList> 
+    template <typename TargetType, typename SourceTypeList>
     struct ImplicitConverterRegistrationHelper<TargetType, SourceTypeList, boost::mpl::true_>
     {
 
         static void apply() {}
     };
 
-    template <typename TargetType, typename SourceTypeList> 
+    template <typename TargetType, typename SourceTypeList>
     struct ImplicitConverterRegistration
     {
 
-        ImplicitConverterRegistration() {
+        ImplicitConverterRegistration()
+        {
             typedef typename boost::mpl::empty<SourceTypeList>::type IsEmpty;
 
             ImplicitConverterRegistrationHelper<TargetType, SourceTypeList, IsEmpty>::apply();
         }
     };
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_IMPLICITCONVERTERREGISTRATION_HPP

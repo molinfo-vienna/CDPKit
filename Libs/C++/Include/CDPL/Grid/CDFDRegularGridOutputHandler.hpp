@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the output of spatial regular grid data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataOutputHandler<CDFDRegularGridWriter, DataFormat::CDF> CDFDRegularGridOutputHandler;
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFDREGULARGRIDOUTPUTHANDLER_HPP

@@ -37,7 +37,7 @@
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -58,21 +58,22 @@ namespace CDPL
         class PDBDataReader
         {
 
-        public:
-            PDBDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            PDBDataReader(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool readPDBFile(std::istream&, Chem::Molecule&);
 
             bool skipPDBFile(std::istream&);
-        
+
             bool hasMoreData(std::istream&) const;
 
-        private:
+          private:
             void init(std::istream&);
             void init(std::istream&, Chem::Molecule&);
 
             std::size_t readGenericDataRecord(std::istream&, std::size_t, PDBData::RecordType, const std::string&);
-            void appendRecordData(PDBData::RecordType, const std::string&) const;
+            void        appendRecordData(PDBData::RecordType, const std::string&) const;
 
             std::size_t skipRecordData(std::istream&, std::size_t, const std::string&) const;
 
@@ -87,7 +88,7 @@ namespace CDPL
             void readATOMRecord(std::istream&, Chem::Molecule&, const std::string&, bool);
 
             std::size_t startNextRecord(std::istream&, std::string&, std::string&);
-            
+
             void skipInputToNextLine(std::istream&, std::size_t, const std::string&);
             void checkRecordOrder(const std::string&, const std::string&) const;
             void checkMandatoryRecords() const;
@@ -98,14 +99,14 @@ namespace CDPL
             void perceiveBondOrders(Chem::Molecule&);
             void calcAtomCharges(Chem::Molecule&);
 
-            const Chem::Atom* getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
+            const Chem::Atom*  getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
             const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
-            typedef std::vector<Chem::Atom*> AtomList;
-            typedef std::unordered_map<std::string, std::size_t> RecordHistogram;
+            typedef std::vector<Chem::Atom*>                                                AtomList;
+            typedef std::unordered_map<std::string, std::size_t>                            RecordHistogram;
             typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
-            typedef std::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
-            typedef std::unordered_map<std::string, std::size_t> BondOrderCache;
+            typedef std::unordered_map<std::string, Chem::Atom*>                            NameToAtomMap;
+            typedef std::unordered_map<std::string, std::size_t>                            BondOrderCache;
 
             typedef ResidueDictionary::SharedPointer ResDictPointer;
 
@@ -142,7 +143,7 @@ namespace CDPL
             BondOrderCache          bondOrderCache;
             Chem::Fragment          readMolGraph;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBDATAREADER_HPP

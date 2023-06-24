@@ -64,13 +64,13 @@ namespace CDPL
              * \brief Provides meta-information about the <em>PostScript</em> [\ref WPS] format.
              */
             extern CDPL_VIS_API const Base::DataFormat PS;
-            
+
             /**
              * \brief Provides meta-information about the <em>Scalable Vector Graphics</em> [\ref WSVG] format.
              */
             extern CDPL_VIS_API const Base::DataFormat SVG;
-        }
-    }
-}
+        } // namespace DataFormat
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_DATAFORMAT_HPP

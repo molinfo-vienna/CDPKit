@@ -34,6 +34,6 @@ namespace CDPLPythonMolProp
     void exportAtomFunctions();
     void exportBondFunctions();
     void exportMolecularGraphFunctions();
-}
+} // namespace CDPLPythonMolProp
 
 #endif // CDPL_PYTHON_MOLPROP_FUNCTIONEXPORTS_HPP

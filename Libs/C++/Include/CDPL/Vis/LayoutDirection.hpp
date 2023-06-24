@@ -30,7 +30,7 @@
 #define CDPL_VIS_LAYOUTDIRECTION_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -50,9 +50,9 @@ namespace CDPL
             /**
              * \brief Specifies a vertical layout (parallel to the y-axis).
              */
-            const unsigned int VERTICAL   = 1;
-        }
-    }
-}
+            const unsigned int VERTICAL = 1;
+        } // namespace LayoutDirection
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_LAYOUTDIRECTION_HPP

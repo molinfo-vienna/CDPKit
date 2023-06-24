@@ -37,18 +37,18 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-        
+
         class MolecularGraph;
     }
 
     namespace Pharm
     {
-    
+
         class ScreeningDBAccessor;
 
         /**
@@ -65,9 +65,9 @@ namespace CDPL
             enum Mode
             {
 
-              CREATE,
-              UPDATE,
-              APPEND
+                CREATE,
+                UPDATE,
+                APPEND
             };
 
             /**
@@ -98,11 +98,12 @@ namespace CDPL
             virtual std::size_t getNumInserted() const = 0;
 
           protected:
-            ScreeningDBCreator& operator=(const ScreeningDBCreator&) {
+            ScreeningDBCreator& operator=(const ScreeningDBCreator&)
+            {
                 return *this;
             }
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_SCREENINGDBCREATOR_HPP

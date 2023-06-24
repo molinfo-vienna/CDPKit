@@ -37,10 +37,10 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API TorsionRule
@@ -55,35 +55,39 @@ namespace CDPL
           public:
             class AngleEntry
             {
-        
-            public:
-                AngleEntry(double ang, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0):
-                    angle(ang), tolerance1(tol1), tolerance2(tol2), score(score) {} 
 
-                double getAngle() const {
+              public:
+                AngleEntry(double ang, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0):
+                    angle(ang), tolerance1(tol1), tolerance2(tol2), score(score) {}
+
+                double getAngle() const
+                {
                     return angle;
                 }
 
-                double getTolerance1() const {
+                double getTolerance1() const
+                {
                     return tolerance1;
                 }
 
-                double getTolerance2() const {
+                double getTolerance2() const
+                {
                     return tolerance2;
                 }
 
-                double getScore() const {
+                double getScore() const
+                {
                     return score;
                 }
 
-            private:
+              private:
                 double angle;
                 double tolerance1;
                 double tolerance2;
                 double score;
             };
 
-            typedef AngleEntryList::iterator AngleEntryIterator;
+            typedef AngleEntryList::iterator       AngleEntryIterator;
             typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
 
             const std::string& getMatchPatternString() const;
@@ -133,7 +137,7 @@ namespace CDPL
             Chem::MolecularGraph::SharedPointer matchPattern;
             AngleEntryList                      angles;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONRULE_HPP

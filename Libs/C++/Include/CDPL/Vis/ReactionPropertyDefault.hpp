@@ -35,7 +35,7 @@
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -46,29 +46,29 @@ namespace CDPL
          */
         namespace ReactionPropertyDefault
         {
-        
-            extern CDPL_VIS_API const unsigned int ARROW_STYLE;
-            extern CDPL_VIS_API const Color ARROW_COLOR;
+
+            extern CDPL_VIS_API const unsigned int      ARROW_STYLE;
+            extern CDPL_VIS_API const Color             ARROW_COLOR;
             extern CDPL_VIS_API const SizeSpecification ARROW_LENGTH;
             extern CDPL_VIS_API const SizeSpecification ARROW_HEAD_LENGTH;
             extern CDPL_VIS_API const SizeSpecification ARROW_HEAD_WIDTH;
             extern CDPL_VIS_API const SizeSpecification ARROW_SHAFT_WIDTH;
             extern CDPL_VIS_API const SizeSpecification ARROW_LINE_WIDTH;
-            extern CDPL_VIS_API const unsigned int COMPONENT_LAYOUT;
-            extern CDPL_VIS_API const unsigned int COMPONENT_LAYOUT_DIRECTION;
+            extern CDPL_VIS_API const unsigned int      COMPONENT_LAYOUT;
+            extern CDPL_VIS_API const unsigned int      COMPONENT_LAYOUT_DIRECTION;
             extern CDPL_VIS_API const SizeSpecification COMPONENT_MARGIN;
-            extern CDPL_VIS_API const bool SHOW_REACTANTS;
-            extern CDPL_VIS_API const bool SHOW_AGENTS;
-            extern CDPL_VIS_API const bool SHOW_PRODUCTS;
-            extern CDPL_VIS_API const unsigned int AGENT_ALIGNMENT;
-            extern CDPL_VIS_API const unsigned int AGENT_LAYOUT;
-            extern CDPL_VIS_API const unsigned int AGENT_LAYOUT_DIRECTION;
-            extern CDPL_VIS_API const Color PLUS_SIGN_COLOR;
+            extern CDPL_VIS_API const bool              SHOW_REACTANTS;
+            extern CDPL_VIS_API const bool              SHOW_AGENTS;
+            extern CDPL_VIS_API const bool              SHOW_PRODUCTS;
+            extern CDPL_VIS_API const unsigned int      AGENT_ALIGNMENT;
+            extern CDPL_VIS_API const unsigned int      AGENT_LAYOUT;
+            extern CDPL_VIS_API const unsigned int      AGENT_LAYOUT_DIRECTION;
+            extern CDPL_VIS_API const Color             PLUS_SIGN_COLOR;
             extern CDPL_VIS_API const SizeSpecification PLUS_SIGN_SIZE;
             extern CDPL_VIS_API const SizeSpecification PLUS_SIGN_LINE_WIDTH;
-            extern CDPL_VIS_API const bool SHOW_PLUS_SIGNS;
-        }
-    }
-}
+            extern CDPL_VIS_API const bool              SHOW_PLUS_SIGNS;
+        } // namespace ReactionPropertyDefault
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_REACTIONPROPERTYDEFAULT_HPP

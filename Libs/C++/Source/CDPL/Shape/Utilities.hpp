@@ -31,19 +31,19 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         inline void getCoordinates(const GaussianShape& shape, Math::Vector3DArray& coords)
         {
             Math::Vector3DArray::StorageType& coords_data = coords.getData();
-            std::size_t num_elem = shape.getNumElements();
+            std::size_t                       num_elem    = shape.getNumElements();
 
             coords.resize(num_elem);
-            
+
             for (std::size_t i = 0; i < num_elem; i++)
                 coords_data[i].assign(shape.getElement(i).getPosition());
         }
@@ -56,19 +56,19 @@ namespace CDPL
 
             return (dx * dx + dy * dy + dz * dz);
         }
-    
+
         inline void transform(Math::Vector3D::Pointer tgt_vec, Math::Matrix4D::ConstArrayPointer xform, Math::Vector3D::ConstPointer src_vec)
         {
             tgt_vec[0] = xform[0][0] * src_vec[0] + xform[0][1] * src_vec[1] + xform[0][2] * src_vec[2] + xform[0][3];
             tgt_vec[1] = xform[1][0] * src_vec[0] + xform[1][1] * src_vec[1] + xform[1][2] * src_vec[2] + xform[1][3];
             tgt_vec[2] = xform[2][0] * src_vec[0] + xform[2][1] * src_vec[1] + xform[2][2] * src_vec[2] + xform[2][3];
         }
-        
+
         inline void transform(Math::Vector3DArray& tgt_coords, const Math::Matrix4D& xform, const Math::Vector3DArray& src_coords)
         {
-            Math::Vector3DArray::StorageType& tgt_coords_data = tgt_coords.getData();
+            Math::Vector3DArray::StorageType&       tgt_coords_data = tgt_coords.getData();
             const Math::Vector3DArray::StorageType& src_coords_data = src_coords.getData();
-            Math::Matrix4D::ConstArrayPointer xform_data = xform.getData();
+            Math::Matrix4D::ConstArrayPointer       xform_data      = xform.getData();
 
             for (std::size_t i = 0, num_elem = src_coords.getSize(); i < num_elem; i++)
                 transform(tgt_coords_data[i].getData(), xform_data, src_coords_data[i].getData());
@@ -77,13 +77,13 @@ namespace CDPL
         inline bool normalize(QuaternionTransformation& xform)
         {
             QuaternionTransformation::Pointer xform_data = xform.getData();
-            
+
             double len = std::sqrt(xform_data[0] * xform_data[0] + xform_data[1] * xform_data[1] +
                                    xform_data[2] * xform_data[2] + xform_data[3] * xform_data[3]);
 
             if (len == 0.0)
                 return false;
-            
+
             xform_data[0] /= len;
             xform_data[1] /= len;
             xform_data[2] /= len;
@@ -91,7 +91,7 @@ namespace CDPL
 
             return true;
         }
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_UTILITIES_HPP

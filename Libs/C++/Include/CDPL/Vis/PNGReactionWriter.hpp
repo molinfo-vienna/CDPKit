@@ -36,7 +36,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -48,17 +48,18 @@ namespace CDPL
          * \c %PNGReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
          * properties provided for the customization of Vis::ReactionView2D are also supported by \c %PNGReactionWriter.
          */
-        class CDPL_VIS_API PNGReactionWriter : public Base::DataWriter<Chem::Reaction>, private ImageWriter
+        class CDPL_VIS_API PNGReactionWriter : public Base::DataWriter<Chem::Reaction>,
+                                               private ImageWriter
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PNGReactionWriter instance that will write the image data to the output stream \a os.
              * \param os The output stream to write to.
              * \note PNG is a binary format. To avoid data corruption, the output stream has to be opened in binary mode.
              */
             PNGReactionWriter(std::ostream& os);
-    
+
             /**
              * \brief Creates and outputs a 2D depiction of the reaction \a rxn.
              * \param rxn The reaction for which to output the 2D depiction.
@@ -66,10 +67,10 @@ namespace CDPL
              */
             Base::DataWriter<Chem::Reaction>& write(const Chem::Reaction& rxn);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             PNGReactionWriter(const PNGReactionWriter&);
 
             cairo_surface_t* createCairoSurface(double, double) const;
@@ -78,7 +79,7 @@ namespace CDPL
             std::ostream& output;
             bool          state;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_PNGREACTIONWRITER_HPP

@@ -32,7 +32,7 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -51,8 +51,9 @@ namespace CDPL
         class JMEDataReader
         {
 
-        public:
-            JMEDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            JMEDataReader(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool readReaction(std::istream&, Reaction&);
             bool readMolecule(std::istream&, Molecule&);
@@ -62,7 +63,7 @@ namespace CDPL
 
             bool hasMoreData(std::istream&) const;
 
-        private:
+          private:
             void init();
 
             void readComponent(std::istream&, Molecule&) const;
@@ -71,7 +72,7 @@ namespace CDPL
             void readAtom(std::istream&, Molecule&) const;
 
             MatchConstraintList::SharedPointer readAtomList(std::string::const_iterator, std::string::const_iterator) const;
-            MatchConstraintList::SharedPointer readAtomSymbol(Atom*, std::string::const_iterator, 
+            MatchConstraintList::SharedPointer readAtomSymbol(Atom*, std::string::const_iterator,
                                                               std::string::const_iterator, bool) const;
             MatchConstraintList::SharedPointer readQueryFlags(std::string::const_iterator, std::string::const_iterator) const;
 
@@ -80,12 +81,12 @@ namespace CDPL
 
             void readBond(std::istream&, Molecule&, std::size_t, std::size_t) const;
 
-            const Base::DataIOBase& ioBase;            
+            const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
             std::size_t             coordsDim;
             std::size_t             atomMappingIDOffset;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_JMEDATAREADER_HPP

@@ -37,18 +37,18 @@
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class AtomContainer;
     }
 
     namespace MolProp
     {
-        
+
         CDPL_MOLPROP_API double calcExplicitMass(const Chem::AtomContainer& cntnr);
 
         CDPL_MOLPROP_API void calcExplicitMassComposition(const Chem::AtomContainer& cntnr, MassComposition& mass_comp);
@@ -79,8 +79,7 @@ namespace CDPL
         CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment);
 
         CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, Math::Vector3D& moment);
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_ATOMCONTAINERFUNCTIONS_HPP
- 

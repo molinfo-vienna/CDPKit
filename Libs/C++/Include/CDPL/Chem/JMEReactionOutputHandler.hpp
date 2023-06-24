@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,8 +44,8 @@ namespace CDPL
          * \brief A handler for the output of reaction data in the native I/O format of the <em>JME Molecular Editor</em>
          *        [\ref JME] java applet.
          */
-        typedef Util::DefaultDataOutputHandler<JMEReactionWriter, DataFormat::JME> JMEReactionOutputHandler;    
-    }
-}
+        typedef Util::DefaultDataOutputHandler<JMEReactionWriter, DataFormat::JME> JMEReactionOutputHandler;
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_JMEREACTIONOUTPUTHANDLER_HPP

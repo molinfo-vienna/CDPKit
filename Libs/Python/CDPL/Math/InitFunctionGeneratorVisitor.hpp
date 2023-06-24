@@ -34,19 +34,20 @@
 namespace CDPLPythonMath
 {
 
-    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList, typename Empty> 
+    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList, typename Empty>
     struct InitFunctionGeneratorHelper
     {
 
         template <typename ClassType>
-        static void apply(ClassType& cl, const char* var_name) {
+        static void apply(ClassType& cl, const char* var_name)
+        {
             using namespace boost;
 
-            typedef typename mpl::front<ValueTypeList>::type ValueType;
+            typedef typename mpl::front<ValueTypeList>::type     ValueType;
             typedef typename mpl::pop_front<ValueTypeList>::type NewValueTypeList;
-            typedef typename mpl::empty<NewValueTypeList>::type IsEmpty;
+            typedef typename mpl::empty<NewValueTypeList>::type  IsEmpty;
 
-            cl.def("__init__", python::make_constructor(&construct<ValueType>, 
+            cl.def("__init__", python::make_constructor(&construct<ValueType>,
                                                         python::default_call_policies(),
                                                         (python::arg(var_name))));
 
@@ -54,31 +55,34 @@ namespace CDPLPythonMath
         }
 
         template <typename ValueType>
-        static ObjectType* construct(const typename ExpressionType<ValueType>::SharedPointer& expr_ptr) {
+        static ObjectType* construct(const typename ExpressionType<ValueType>::SharedPointer& expr_ptr)
+        {
             return new ObjectType(*expr_ptr);
         }
     };
 
-    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList> 
+    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList>
     struct InitFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, boost::mpl::true_>
     {
 
         template <typename ClassType>
-        static void apply(ClassType& cl, const char* var_name) {}
+        static void apply(ClassType& cl, const char* var_name)
+        {}
     };
 
-    template <typename ObjectType, template <typename T> class ExpressionType, 
-              typename ValueTypeList = SupportedValueTypes> 
-    struct InitFunctionGeneratorVisitor : 
-        public boost::python::def_visitor<InitFunctionGeneratorVisitor<ObjectType, ExpressionType, ValueTypeList> >
+    template <typename ObjectType, template <typename T> class ExpressionType,
+              typename ValueTypeList = SupportedValueTypes>
+    struct InitFunctionGeneratorVisitor : public boost::python::def_visitor<InitFunctionGeneratorVisitor<ObjectType, ExpressionType, ValueTypeList> >
     {
-    
+
         friend class boost::python::def_visitor_access;
 
-        InitFunctionGeneratorVisitor(const char* var_name): variableName(var_name) {}
+        InitFunctionGeneratorVisitor(const char* var_name):
+            variableName(var_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             typedef typename boost::mpl::empty<ValueTypeList>::type IsEmpty;
 
             InitFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, IsEmpty>::apply(cl, variableName);
@@ -86,6 +90,6 @@ namespace CDPLPythonMath
 
         const char* variableName;
     };
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_INITFUNCTIONGENERATORVISITOR_HPP

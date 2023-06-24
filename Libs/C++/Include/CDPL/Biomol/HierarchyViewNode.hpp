@@ -35,7 +35,7 @@
 #include "CDPL/Biomol/ResidueList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -51,18 +51,19 @@ namespace CDPL
             const ResidueList& getResidues() const;
 
           protected:
-            HierarchyViewNode(): initResidues(true) {}
+            HierarchyViewNode():
+                initResidues(true) {}
 
             ~HierarchyViewNode() {}
 
             std::mutex& getMutex() const;
 
           private:
-            mutable ResidueList  residues;
-            mutable bool         initResidues;
-            mutable std::mutex   initMutex;
+            mutable ResidueList residues;
+            mutable bool        initResidues;
+            mutable std::mutex  initMutex;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_HIERARCHYVIEWNODE_HPP

@@ -39,25 +39,28 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename T> class Range;
+        template <typename T>
+        class Range;
 
         struct Lower
         {
 
             template <typename M>
-            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
+            {
                 if (i >= j)
                     return m.getData()(i, j);
 
                 return m.zero;
             }
         };
-    
+
         struct UnitLower
         {
 
             template <typename M>
-            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
+            {
                 if (i == j)
                     return m.one;
 
@@ -72,7 +75,8 @@ namespace CDPL
         {
 
             template <typename M>
-            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
+            {
                 if (i <= j)
                     return m.getData()(i, j);
 
@@ -84,7 +88,8 @@ namespace CDPL
         {
 
             template <typename M>
-            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+            static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j)
+            {
                 if (i == j)
                     return m.one;
 
@@ -106,50 +111,57 @@ namespace CDPL
             friend struct Upper;
             friend struct UnitUpper;
 
-        public:
-            typedef M MatrixType;
-            typedef Tri TriangularType;
-            typedef typename M::SizeType SizeType;
-            typedef typename M::DifferenceType DifferenceType;
-            typedef typename M::ValueType ValueType;
-            typedef typename M::ConstReference ConstReference;
+          public:
+            typedef M                                                        MatrixType;
+            typedef Tri                                                      TriangularType;
+            typedef typename M::SizeType                                     SizeType;
+            typedef typename M::DifferenceType                               DifferenceType;
+            typedef typename M::ValueType                                    ValueType;
+            typedef typename M::ConstReference                               ConstReference;
             typedef typename std::conditional<std::is_const<M>::value,
-                                             typename M::ConstReference,
-                                             typename M::Reference>::type Reference;
+                                              typename M::ConstReference,
+                                              typename M::Reference>::type   Reference;
             typedef typename std::conditional<std::is_const<M>::value,
-                                             typename M::ConstClosureType,
-                                             typename M::ClosureType>::type MatrixClosureType;
-            typedef const SelfType ConstClosureType;
-            typedef SelfType ClosureType;
-            typedef Range<SizeType> RangeType;
-            
-            explicit TriangularAdapter(MatrixType& m): data(m) {}
+                                              typename M::ConstClosureType,
+                                              typename M::ClosureType>::type MatrixClosureType;
+            typedef const SelfType                                           ConstClosureType;
+            typedef SelfType                                                 ClosureType;
+            typedef Range<SizeType>                                          RangeType;
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            explicit TriangularAdapter(MatrixType& m):
+                data(m) {}
+
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 return TriangularType::template get<SelfType>(*this, i, j);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return data.getSize1();
             }
 
-            SizeType getSize2() const {
+            SizeType getSize2() const
+            {
                 return data.getSize2();
             }
 
-            MatrixClosureType& getData() {
+            MatrixClosureType& getData()
+            {
                 return data;
             }
 
-            const MatrixClosureType& getData() const {
+            const MatrixClosureType& getData() const
+            {
                 return data;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (data.getSize1() == 0 || data.getSize2() == 0);
             }
 
-        private:
+          private:
             MatrixClosureType      data;
             static const ValueType zero;
             static const ValueType one;
@@ -157,36 +169,40 @@ namespace CDPL
 
         template <typename M, typename Tri>
         const typename TriangularAdapter<M, Tri>::ValueType TriangularAdapter<M, Tri>::zero = TriangularAdapter<M, Tri>::ValueType();
-        
-        template <typename M, typename Tri>
-        const typename TriangularAdapter<M, Tri>::ValueType TriangularAdapter<M, Tri>::one  = TriangularAdapter<M, Tri>::ValueType(1);
 
         template <typename M, typename Tri>
-        struct VectorTemporaryTraits<TriangularAdapter<M, Tri> > : public VectorTemporaryTraits<M> {};
+        const typename TriangularAdapter<M, Tri>::ValueType TriangularAdapter<M, Tri>::one = TriangularAdapter<M, Tri>::ValueType(1);
 
         template <typename M, typename Tri>
-        struct VectorTemporaryTraits<const TriangularAdapter<M, Tri> > : public VectorTemporaryTraits<M> {};
+        struct VectorTemporaryTraits<TriangularAdapter<M, Tri> > : public VectorTemporaryTraits<M>
+        {};
 
         template <typename M, typename Tri>
-        struct MatrixTemporaryTraits<TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M> {};
+        struct VectorTemporaryTraits<const TriangularAdapter<M, Tri> > : public VectorTemporaryTraits<M>
+        {};
 
         template <typename M, typename Tri>
-        struct MatrixTemporaryTraits<const TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M> {};
+        struct MatrixTemporaryTraits<TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M>
+        {};
+
+        template <typename M, typename Tri>
+        struct MatrixTemporaryTraits<const TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M>
+        {};
 
         template <typename Tri, typename E>
-        TriangularAdapter<E, Tri> 
+        TriangularAdapter<E, Tri>
         triang(MatrixExpression<E>& e)
         {
             return TriangularAdapter<E, Tri>(e());
         }
 
         template <typename Tri, typename E>
-        TriangularAdapter<const E, Tri> 
+        TriangularAdapter<const E, Tri>
         triang(const MatrixExpression<E>& e)
         {
             return TriangularAdapter<const E, Tri>(e());
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_MATRIXADAPTER_HPP

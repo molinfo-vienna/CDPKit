@@ -35,6 +35,6 @@ namespace CDPLPythonForceField
     void exportAtomFunctions();
     void exportBondFunctions();
     void exportMolecularGraphFunctions();
-}
+} // namespace CDPLPythonForceField
 
 #endif // CDPL_PYTHON_FORCEFIELD_FUNCTIONEXPORTS_HPP

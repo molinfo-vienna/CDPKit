@@ -54,16 +54,16 @@
 #include "ForceFieldInteractionMask.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
-        class ConformerGeneratorImpl 
+        class ConformerGeneratorImpl
         {
 
-        public:
+          public:
             typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
             ConformerGeneratorImpl();
@@ -104,19 +104,19 @@ namespace CDPL
 
             ConstConformerIterator getConformersEnd() const;
 
-        private:
+          private:
             struct FragmentConfData;
             struct ConfCombinationData;
 
-            typedef Util::ObjectPool<FragmentConfData> FragmentConfDataCache;
+            typedef Util::ObjectPool<FragmentConfData>         FragmentConfDataCache;
             typedef FragmentConfDataCache::SharedObjectPointer FragmentConfDataPtr;
-        
+
             ConformerGeneratorImpl(const ConformerGeneratorImpl&);
 
             ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
 
             unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps, bool struct_gen_only);
-    
+
             void combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
 
             void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
@@ -128,7 +128,7 @@ namespace CDPL
             unsigned int generateConformersStochastic(bool struct_gen_only);
 
             void removeWorkingConfDuplicates();
-            
+
             bool determineSamplingMode();
 
             void init(const Chem::MolecularGraph& molgraph, bool start_timer);
@@ -138,35 +138,35 @@ namespace CDPL
             ConformerData::SharedPointer getInputCoordinates();
 
             void splitIntoTorsionFragments();
-            
+
             bool setupMMFF94Parameters(unsigned int ff_type);
-            
+
             unsigned int generateFragmentConformers(bool struct_gen_only);
-            
+
             unsigned int generateFragmentConformerCombinations();
-        
+
             void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 
             unsigned int generateOutputConformers(bool struct_gen_only);
 
-            unsigned int selectOutputConformers(bool struct_gen_only, bool& );
+            unsigned int selectOutputConformers(bool struct_gen_only, bool&);
 
             double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
             bool has3DCoordinates(const Chem::Atom& atom) const;
 
-            static bool compareConfCombinationEnergy(const ConfCombinationData* comb1, 
+            static bool compareConfCombinationEnergy(const ConfCombinationData* comb1,
                                                      const ConfCombinationData* comb2);
-            static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1, 
+            static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1,
                                                  const FragmentConfDataPtr& conf_data2);
 
             void orderConformersByEnergy(ConformerDataArray& confs) const;
 
             unsigned int invokeCallbacks() const;
-            bool timedout() const;
+            bool         timedout() const;
 
             bool rmsdConfSelectorAbortCallback() const;
-            
+
             typedef std::vector<std::size_t> UIntArray;
 
             struct FragmentConfData
@@ -177,7 +177,8 @@ namespace CDPL
                 std::size_t                   lastConfIdx;
                 bool                          haveInputCoords;
 
-                void clear() {
+                void clear()
+                {
                     conformers.clear();
                     fragment.reset();
                 }
@@ -186,19 +187,19 @@ namespace CDPL
             struct ConfCombinationData
             {
 
-                UIntArray   confIndices;
-                double      energy;
+                UIntArray confIndices;
+                double    energy;
             };
 
-            typedef Util::ObjectStack<ConfCombinationData> ConfCombinationDataCache;
-            typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-            typedef std::vector<FragmentConfDataPtr> FragmentConfDataList;
-            typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
-            typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
-            typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
-            typedef std::vector<const Chem::Bond*> BondList;
-            typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
-            typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
+            typedef Util::ObjectStack<ConfCombinationData>                        ConfCombinationDataCache;
+            typedef Util::ObjectPool<ConformerData>                               ConformerDataCache;
+            typedef std::vector<FragmentConfDataPtr>                              FragmentConfDataList;
+            typedef ForceField::MMFF94InteractionData                             MMFF94InteractionData;
+            typedef ForceField::MMFF94InteractionParameterizer                    MMFF94Parameterizer;
+            typedef ForceField::MMFF94GradientCalculator<double>                  MMFF94GradientCalculator;
+            typedef std::vector<const Chem::Bond*>                                BondList;
+            typedef std::vector<ConfCombinationData*>                             ConfCombinationDataList;
+            typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer;
 
             ConformerDataCache                    confDataCache;
             FragmentConfDataCache                 fragConfDataCache;
@@ -233,11 +234,11 @@ namespace CDPL
             FragmentConfDataList                  torFragConfData;
             ConfCombinationDataList               torFragConfCombData;
             UIntArray                             currConfComb;
-            UIntArray                             parentAtomInds; 
+            UIntArray                             parentAtomInds;
             Math::Vector3DArray::StorageType      energyGradient;
             bool                                  inStochasticMode;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP

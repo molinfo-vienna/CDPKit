@@ -43,20 +43,20 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         AtomColorButton(QWidget*, CDPL::Vis::ColorTable&, const CDPL::Vis::Color&, std::size_t);
 
-    signals:
+      signals:
         void colorChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void editColor();
         void useDefaultColor();
 
-    private:
+      private:
         void init();
 
         void mousePressEvent(QMouseEvent*);
@@ -67,6 +67,6 @@ namespace ChOX
         const CDPL::Vis::Color& defaultColor;
         QMenu*                  contextMenu;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_ATOMCOLORBUTTON_HPP

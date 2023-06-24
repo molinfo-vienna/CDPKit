@@ -35,24 +35,24 @@
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
 
         class GaussianProductList;
-        
+
         class CDPL_SHAPE_API ExactGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
         {
-            
+
           public:
             typedef std::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
 
             ExactGaussianShapeOverlapFunction();
 
             ExactGaussianShapeOverlapFunction(const ExactGaussianShapeOverlapFunction& func);
-            
+
             ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
                                               const GaussianShapeFunction& ovl_shape_func);
 
@@ -73,7 +73,7 @@ namespace CDPL
             double calcSelfOverlap(bool ref) const;
 
             double calcColorSelfOverlap(bool ref) const;
-            
+
             double calcOverlap() const;
 
             double calcColorOverlap() const;
@@ -85,15 +85,15 @@ namespace CDPL
             double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
             ExactGaussianShapeOverlapFunction& operator=(const ExactGaussianShapeOverlapFunction& func);
-                
+
           private:
             bool checkShapeFuncsNotNull() const;
 
-            double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+            double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                bool color) const;
             double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-                               const Math::Vector3DArray& coords, 
-                               bool color) const;
+                               const Math::Vector3DArray& coords,
+                               bool                       color) const;
             double calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                        const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
@@ -102,7 +102,7 @@ namespace CDPL
             ColorMatchFunction           colorMatchFunc;
             ColorFilterFunction          colorFilterFunc;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_EXACTGAUSSIANSHAPEOVERLAPFUNCTION_HPP

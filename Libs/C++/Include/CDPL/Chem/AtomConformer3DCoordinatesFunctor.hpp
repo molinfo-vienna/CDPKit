@@ -35,7 +35,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,8 @@ namespace CDPL
         {
 
           public:
-            AtomConformer3DCoordinatesFunctor(std::size_t conf_idx): confIndex(conf_idx) {}
+            AtomConformer3DCoordinatesFunctor(std::size_t conf_idx):
+                confIndex(conf_idx) {}
 
             /**
              * \brief Returns the 3D-coordinates of the argument atom.
@@ -63,7 +64,7 @@ namespace CDPL
           private:
             std::size_t confIndex;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMCONFORMER3DCOORDINATESFUNCTOR_HPP

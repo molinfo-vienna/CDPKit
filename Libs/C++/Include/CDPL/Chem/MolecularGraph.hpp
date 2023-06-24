@@ -37,7 +37,7 @@
 #include "CDPL/Base/PropertyContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -46,11 +46,13 @@ namespace CDPL
         /**
          * \brief MolecularGraph.
          */
-        class CDPL_CHEM_API MolecularGraph : public AtomContainer, public BondContainer, public Base::PropertyContainer
+        class CDPL_CHEM_API MolecularGraph : public AtomContainer,
+                                             public BondContainer,
+                                             public Base::PropertyContainer
         {
 
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MolecularGraph instances.
              */
@@ -67,7 +69,7 @@ namespace CDPL
              */
             virtual SharedPointer clone() const = 0;
 
-        protected:    
+          protected:
             /**
              * \brief Assignment operator.
              * \param molgraph The other \c MolecularGraph instance to copy.
@@ -75,7 +77,7 @@ namespace CDPL
              */
             MolecularGraph& operator=(const MolecularGraph& molgraph);
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLECULARGRAPH_HPP

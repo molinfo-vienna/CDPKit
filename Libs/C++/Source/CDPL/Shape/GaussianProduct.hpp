@@ -39,7 +39,7 @@
 #include "Utilities.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -49,13 +49,13 @@ namespace CDPL
         {
 
             typedef std::vector<const GaussianProduct*> FactorList;
-                
+
           public:
             typedef std::shared_ptr<GaussianProduct> SharedPointer;
-            typedef FactorList::const_iterator ConstFactorIterator;
+            typedef FactorList::const_iterator       ConstFactorIterator;
 
             GaussianProduct();
-    
+
             void init(const GaussianShape::Element& elem);
 
             void init();
@@ -63,25 +63,25 @@ namespace CDPL
             void copyData(const GaussianProduct& prod);
 
             void copyFactors(const GaussianProduct& prod);
-            
+
             void setIndex(std::size_t idx);
-                        
+
             std::size_t getIndex() const;
 
             void setColor(std::size_t color);
-                        
+
             std::size_t getColor() const;
 
             bool hasOddOrder() const;
-            
+
             bool hasFactors() const;
-            
+
             void clearFactors();
 
             void addFactor(const GaussianProduct* factor);
 
             void removeLastFactor();
-            
+
             ConstFactorIterator getFactorsBegin() const;
 
             ConstFactorIterator getFactorsEnd() const;
@@ -91,11 +91,11 @@ namespace CDPL
             double getRadius() const;
 
             double getKappa() const;
-            
+
             double getDelta() const;
 
             double getWeightFactor() const;
-            
+
             const Math::Vector3D& getCenter() const;
 
             Math::Vector3D& getCenter();
@@ -121,8 +121,8 @@ namespace CDPL
             bool           oddOrder;
             FactorList     factors;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 
 // Implementation
@@ -136,41 +136,41 @@ inline void CDPL::Shape::GaussianProduct::init(const GaussianShape::Element& ele
 {
     factors.clear();
     factors.push_back(this);
-    
+
     center.assign(elem.getPosition());
-    color = elem.getColor();
+    color         = elem.getColor();
     prodFactorExp = 0.0;
-    prodFactor = 1.0;
-    weightFactor = elem.getHardness();
+    prodFactor    = 1.0;
+    weightFactor  = elem.getHardness();
 
     double lambda = 4.0 * M_PI / (3.0 * weightFactor);
 
-    kappa = M_PI / std::pow(lambda, 2.0 / 3.0);
-    radius = elem.getRadius();
-    delta = kappa / (radius * radius);
+    kappa        = M_PI / std::pow(lambda, 2.0 / 3.0);
+    radius       = elem.getRadius();
+    delta        = kappa / (radius * radius);
     volumeFactor = M_PI / delta;
     volumeFactor *= std::sqrt(volumeFactor);
-    volume = weightFactor * volumeFactor;
+    volume   = weightFactor * volumeFactor;
     oddOrder = true;
 }
 
 inline void CDPL::Shape::GaussianProduct::init()
 {
-    weightFactor = 1.0;
+    weightFactor  = 1.0;
     prodFactorExp = 0.0;
-    delta = 0.0;
-    kappa = 0.0;
+    delta         = 0.0;
+    kappa         = 0.0;
     //radius = 0.0;
     color = (factors.empty() ? std::size_t(0) : factors.front()->color);
-    
+
     Math::Vector3D::Pointer ctr_data = center.getData();
 
     center.clear();
-    
-    for (FactorList::const_iterator it1 = factors.begin(), end = factors.end(); it1 != end; ) {
-        const GaussianProduct* factor1 = *it1;
-        double fact1_delta = factor1->delta;
-        
+
+    for (FactorList::const_iterator it1 = factors.begin(), end = factors.end(); it1 != end;) {
+        const GaussianProduct* factor1     = *it1;
+        double                 fact1_delta = factor1->delta;
+
         delta += fact1_delta;
         weightFactor *= factor1->weightFactor;
 
@@ -181,42 +181,42 @@ inline void CDPL::Shape::GaussianProduct::init()
         ctr_data[2] += fact1_delta * fact1_ctr_data[2];
 
         ++it1;
-        
+
         for (FactorList::const_iterator it2 = it1; it2 != end; ++it2)
             prodFactorExp += calcSquaredDistance((*it2)->center.getData(), fact1_ctr_data) * fact1_delta * (*it2)->delta;
     }
 
     center /= delta;
     prodFactorExp /= delta;
-    prodFactor = std::exp(-prodFactorExp);
+    prodFactor   = std::exp(-prodFactorExp);
     volumeFactor = M_PI / delta;
     volumeFactor *= std::sqrt(volumeFactor);
-    volume = weightFactor * prodFactor * volumeFactor;
-    radius = std::pow(3.0 * volume / (4.0 * M_PI), 1.0 / 3.0);
+    volume   = weightFactor * prodFactor * volumeFactor;
+    radius   = std::pow(3.0 * volume / (4.0 * M_PI), 1.0 / 3.0);
     oddOrder = (factors.size() % 2);
 }
 
 inline void CDPL::Shape::GaussianProduct::copyData(const GaussianProduct& prod)
 {
-    index = prod.index;
-    color = prod.color;
-    center = prod.center;
-    radius = prod.radius;
-    kappa = prod.kappa;
-    prodFactor = prod.prodFactor;
+    index         = prod.index;
+    color         = prod.color;
+    center        = prod.center;
+    radius        = prod.radius;
+    kappa         = prod.kappa;
+    prodFactor    = prod.prodFactor;
     prodFactorExp = prod.prodFactorExp;
-    delta = prod.delta;
-    weightFactor = prod.weightFactor;
-    volumeFactor = prod.volumeFactor;
-    volume = prod.volume;
-    oddOrder = prod.oddOrder;
+    delta         = prod.delta;
+    weightFactor  = prod.weightFactor;
+    volumeFactor  = prod.volumeFactor;
+    volume        = prod.volume;
+    oddOrder      = prod.oddOrder;
 }
 
 inline void CDPL::Shape::GaussianProduct::copyFactors(const GaussianProduct& prod)
 {
     factors = prod.factors;
 }
-        
+
 inline void CDPL::Shape::GaussianProduct::setIndex(std::size_t idx)
 {
     index = idx;
@@ -251,7 +251,7 @@ inline void CDPL::Shape::GaussianProduct::clearFactors()
 {
     factors.clear();
 }
-            
+
 inline void CDPL::Shape::GaussianProduct::addFactor(const GaussianProduct* factor)
 {
     factors.push_back(factor);

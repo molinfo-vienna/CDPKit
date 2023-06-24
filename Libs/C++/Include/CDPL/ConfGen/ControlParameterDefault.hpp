@@ -32,7 +32,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -48,8 +48,8 @@ namespace CDPL
              * \brief Default setting (= \c false) for the control-parameter ConfGen::ControlParameter::STRICT_ERROR_CHECKING.
              */
             extern CDPL_CONFGEN_API const bool STRICT_ERROR_CHECKING;
-        }
-    }
-}
+        } // namespace ControlParameterDefault
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONTROLPARAMETERDEFAULT_HPP

@@ -36,56 +36,56 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
 
-    class MolecularGraph;
+        class MolecularGraph;
 
-    /**
+        /**
      * \brief Implements the extraction of the aromatic rings in the SSSR of a molecular graph.
      */
-    class CDPL_CHEM_API AromaticSSSRSubset : public FragmentList 
-    {
+        class CDPL_CHEM_API AromaticSSSRSubset : public FragmentList
+        {
 
-      public:
-        /**    
+          public:
+            /**    
          * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticSSSRSubset instances.
          */
-        typedef std::shared_ptr<AromaticSSSRSubset> SharedPointer;
+            typedef std::shared_ptr<AromaticSSSRSubset> SharedPointer;
 
-        /**
+            /**
          * \brief Constructs an empty \c %AromaticSSSRSubset instance.
          */
-        AromaticSSSRSubset() {}
+            AromaticSSSRSubset() {}
 
-        /**
+            /**
          * \brief Construct a \c %AromaticSSSRSubset instance that contains all aromatic rings of the
          *        SSSR of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to extract the aromatic rings.
          */
-        AromaticSSSRSubset(const MolecularGraph& molgraph);
+            AromaticSSSRSubset(const MolecularGraph& molgraph);
 
-        /**
+            /**
          * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
          * \param molgraph The molecular graph for which to extract the aromatic rings.
          */
-        void extract(const MolecularGraph& molgraph);
+            void extract(const MolecularGraph& molgraph);
 
-      private:
-        AromaticSSSRSubset(const AromaticSSSRSubset&);
+          private:
+            AromaticSSSRSubset(const AromaticSSSRSubset&);
 
-        AromaticSSSRSubset& operator=(const AromaticSSSRSubset&);
+            AromaticSSSRSubset& operator=(const AromaticSSSRSubset&);
 
-        void init(const MolecularGraph&);
-        void findAromaticRings();
-        
-        Util::BitSet          aromBondMask;
-        const MolecularGraph* molGraph;
-    };
-    }
-}
+            void init(const MolecularGraph&);
+            void findAromaticRings();
+
+            Util::BitSet          aromBondMask;
+            const MolecularGraph* molGraph;
+        };
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_AROMATICSSSRSUBSET_HPP

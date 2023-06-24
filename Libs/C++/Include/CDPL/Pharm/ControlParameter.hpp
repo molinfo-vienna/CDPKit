@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -67,8 +67,8 @@ namespace CDPL
             extern CDPL_PHARM_API const Base::LookupKey PSD_CREATION_MODE;
 
             extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
-        }
-    }
-}
+        } // namespace ControlParameter
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CONTROLPARAMETER_HPP

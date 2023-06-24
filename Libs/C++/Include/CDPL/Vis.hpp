@@ -77,53 +77,53 @@
 
 #ifdef HAVE_QT
 
-#include "CDPL/Vis/QtRenderer2D.hpp"
-#include "CDPL/Vis/QtFontMetrics.hpp"
-#include "CDPL/Vis/QtObjectFactory.hpp"
+# include "CDPL/Vis/QtRenderer2D.hpp"
+# include "CDPL/Vis/QtFontMetrics.hpp"
+# include "CDPL/Vis/QtObjectFactory.hpp"
 
 #endif // HAVE_QT
 
 #ifdef HAVE_CAIRO
 
-#include "CDPL/Vis/CairoRenderer2D.hpp"
-#include "CDPL/Vis/CairoFontMetrics.hpp"
-#include "CDPL/Vis/ImageWriter.hpp"
-#include "CDPL/Vis/CairoPointer.hpp"
+# include "CDPL/Vis/CairoRenderer2D.hpp"
+# include "CDPL/Vis/CairoFontMetrics.hpp"
+# include "CDPL/Vis/ImageWriter.hpp"
+# include "CDPL/Vis/CairoPointer.hpp"
 
-#ifdef HAVE_CAIRO_PNG_SUPPORT
+# ifdef HAVE_CAIRO_PNG_SUPPORT
 
-#include "CDPL/Vis/PNGMolecularGraphWriter.hpp"
-#include "CDPL/Vis/PNGReactionWriter.hpp"
-#include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/PNGReactionOutputHandler.hpp"
+#  include "CDPL/Vis/PNGMolecularGraphWriter.hpp"
+#  include "CDPL/Vis/PNGReactionWriter.hpp"
+#  include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
+#  include "CDPL/Vis/PNGReactionOutputHandler.hpp"
 
-#endif // HAVE_CAIRO_PNG_SUPPORT
+# endif // HAVE_CAIRO_PNG_SUPPORT
 
-#ifdef HAVE_CAIRO_PDF_SUPPORT
+# ifdef HAVE_CAIRO_PDF_SUPPORT
 
-#include "CDPL/Vis/PDFMolecularGraphWriter.hpp"
-#include "CDPL/Vis/PDFReactionWriter.hpp"
-#include "CDPL/Vis/PDFMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/PDFReactionOutputHandler.hpp"
+#  include "CDPL/Vis/PDFMolecularGraphWriter.hpp"
+#  include "CDPL/Vis/PDFReactionWriter.hpp"
+#  include "CDPL/Vis/PDFMolecularGraphOutputHandler.hpp"
+#  include "CDPL/Vis/PDFReactionOutputHandler.hpp"
 
-#endif // HAVE_CAIRO_PDF_SUPPORT
+# endif // HAVE_CAIRO_PDF_SUPPORT
 
-#ifdef HAVE_CAIRO_PS_SUPPORT
+# ifdef HAVE_CAIRO_PS_SUPPORT
 
-#include "CDPL/Vis/PSMolecularGraphWriter.hpp"
-#include "CDPL/Vis/PSReactionWriter.hpp"
-#include "CDPL/Vis/PSMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/PSReactionOutputHandler.hpp"
+#  include "CDPL/Vis/PSMolecularGraphWriter.hpp"
+#  include "CDPL/Vis/PSReactionWriter.hpp"
+#  include "CDPL/Vis/PSMolecularGraphOutputHandler.hpp"
+#  include "CDPL/Vis/PSReactionOutputHandler.hpp"
 
-#endif // HAVE_CAIRO_PS_SUPPORT
+# endif // HAVE_CAIRO_PS_SUPPORT
 
-#ifdef HAVE_CAIRO_SVG_SUPPORT
+# ifdef HAVE_CAIRO_SVG_SUPPORT
 
-#include "CDPL/Vis/SVGMolecularGraphWriter.hpp"
-#include "CDPL/Vis/SVGReactionWriter.hpp"
-#include "CDPL/Vis/SVGMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/SVGReactionOutputHandler.hpp"
+#  include "CDPL/Vis/SVGMolecularGraphWriter.hpp"
+#  include "CDPL/Vis/SVGReactionWriter.hpp"
+#  include "CDPL/Vis/SVGMolecularGraphOutputHandler.hpp"
+#  include "CDPL/Vis/SVGReactionOutputHandler.hpp"
 
-#endif // HAVE_CAIRO_SVG_SUPPORT
+# endif // HAVE_CAIRO_SVG_SUPPORT
 #endif // HAVE_CAIRO
 #endif // CDPL_VIS_HPP

@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
 
         class Atom;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -58,18 +58,18 @@ namespace CDPL
           public:
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int, unsigned int)> AtomPairWeightFunction;
 
-            enum Mode 
+            enum Mode
             {
 
-              SEMI_SPLIT,
-              FULL_SPLIT
+                SEMI_SPLIT,
+                FULL_SPLIT
             };
-        
+
             /**
              * \brief Constructs the \c %MoleculeAutoCorr2DDescriptorCalculator instance.
              */
             MoleculeAutoCorr2DDescriptorCalculator();
-            
+
             MoleculeAutoCorr2DDescriptorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
             /**
@@ -101,8 +101,8 @@ namespace CDPL
             AutoCorrelation2DVectorCalculator autoCorrCalculator;
             AtomPairWeightFunction            weightFunc;
             Mode                              mode;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_MOLECULEAUTOCORR2DDESCRIPTORCALCULATOR_HPP

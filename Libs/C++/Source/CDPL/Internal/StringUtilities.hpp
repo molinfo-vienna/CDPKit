@@ -39,8 +39,9 @@ namespace CDPL
         {
 
             typedef bool result_type;
-            
-            bool operator()(char c) const {
+
+            bool operator()(char c) const
+            {
                 return !std::isspace(c, std::locale::classic());
             }
         };
@@ -49,8 +50,9 @@ namespace CDPL
         {
 
             typedef bool result_type;
-            
-            bool operator()(char c) const {
+
+            bool operator()(char c) const
+            {
                 return std::isspace(c, std::locale::classic());
             }
         };
@@ -58,7 +60,7 @@ namespace CDPL
         std::string& trimString(std::string& str, bool left = true, bool right = true);
 
         std::string trimStringCopy(const std::string& str, bool left = true, bool right = true);
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 #endif // CDPL_INTERNAL_STRINGUTILITIES_HPP

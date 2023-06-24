@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -56,7 +56,7 @@ namespace CDPL
             typedef std::function<double(double, double)> CombinationFunction;
 
             typedef FeatureInteractionScore::SharedPointer InteractionScore;
-            
+
             /**
              * \brief Constructs a \c %FeatureInteractionScoreCombiner that combines the score values calculated by two feature 
              *        interaction scoring functions.
@@ -65,7 +65,7 @@ namespace CDPL
              * \param comb_func The function calculating the final score value.
              */
             FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2,
-                                     const CombinationFunction& comb_func);
+                                            const CombinationFunction& comb_func);
 
             FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2);
 
@@ -78,7 +78,7 @@ namespace CDPL
             InteractionScore    scoringFunc2;
             CombinationFunction combFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREINTERACTIONSCORECOMBINER_HPP

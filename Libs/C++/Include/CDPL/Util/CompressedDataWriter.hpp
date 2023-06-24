@@ -36,7 +36,7 @@
 #include "CDPL/Util/CompressionStreams.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -49,30 +49,30 @@ namespace CDPL
         class CompressedDataWriter : public Base::DataWriter<DataType>
         {
 
-        public:
-            CompressedDataWriter(std::iostream& ios); 
+          public:
+            CompressedDataWriter(std::iostream& ios);
 
             CompressedDataWriter& write(const DataType& obj);
-        
+
             void close();
-        
+
             operator const void*() const;
-        
+
             bool operator!() const;
 
-        private:
-            CompStream  stream;
-            WriterImpl  writer;
+          private:
+            CompStream stream;
+            WriterImpl writer;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename WriterImpl, typename DecompStream, typename DataType>
-CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::CompressedDataWriter(std::iostream& ios): 
-    stream(ios), writer(stream) 
+CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::CompressedDataWriter(std::iostream& ios):
+    stream(ios), writer(stream)
 {
     writer.setParent(this);
     writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));

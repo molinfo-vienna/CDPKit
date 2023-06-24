@@ -35,12 +35,12 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         class CDPL_SHAPE_API AlignmentResult
         {
 
@@ -66,7 +66,7 @@ namespace CDPL
             std::size_t getAlignedShapeIndex() const;
 
             void setAlignedShapeIndex(std::size_t idx);
-        
+
             double getReferenceSelfOverlap() const;
 
             void setReferenceSelfOverlap(double overlap);
@@ -90,7 +90,7 @@ namespace CDPL
             double getColorOverlap() const;
 
             void setColorOverlap(double overlap);
-                
+
           private:
             Math::Matrix4D transform;
             double         score;
@@ -104,7 +104,7 @@ namespace CDPL
             double         overlap;
             double         colOverlap;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_ALIGNMENTRESULT_HPP

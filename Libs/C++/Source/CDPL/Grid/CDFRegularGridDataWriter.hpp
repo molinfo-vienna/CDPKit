@@ -32,7 +32,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -47,14 +47,15 @@ namespace CDPL
         class CDFRegularGridDataWriter : protected CDFDataWriter
         {
 
-        public:
-            CDFRegularGridDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+          public:
+            CDFRegularGridDataWriter(const Base::ControlParameterContainer& ctrl_params):
+                ctrlParams(ctrl_params) {}
 
             bool writeGrid(std::ostream& os, const DRegularGrid& grid);
 
             void writeGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
 
-        protected:
+          protected:
             void appendGrid(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
 
             void outputGridData(const DRegularGrid& grid, Internal::ByteBuffer& bbuf);
@@ -62,13 +63,13 @@ namespace CDPL
             void init();
 
             void outputGridHeader(const DRegularGrid& grid, Internal::ByteBuffer& bbuf, std::size_t) const;
-        
+
             bool writeRecordData(std::ostream& os) const;
 
-            const Base::ControlParameterContainer& ctrlParams;    
+            const Base::ControlParameterContainer& ctrlParams;
             Internal::ByteBuffer                   dataBuffer;
         };
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFREGULARGRIDDATAWRITER_HPP

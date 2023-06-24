@@ -34,7 +34,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,7 +42,7 @@ namespace CDPL
 
         class Atom;
         class AtomContainer;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -54,17 +54,17 @@ namespace CDPL
         class CDPL_DESCR_API AtomRDFCodeCalculator : public RDFCodeCalculator<Chem::Atom>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %AtomRDFCodeCalculator instance.
              */
             AtomRDFCodeCalculator();
-            
+
             AtomRDFCodeCalculator(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
 
             void calculate(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_ATOMRDFCODECALCULATOR_HPP

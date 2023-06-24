@@ -39,24 +39,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         SizeAdjustmentEditWidget(QWidget*, unsigned int&);
 
-    signals:
+      signals:
         void sizeAdjustmentChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleAdjustmentSelection(int);
 
-    private:
+      private:
         void init();
 
         unsigned int& sizeAdjustment;
         QComboBox*    sizeAdjustmentComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SIZEADJUSTMENTEDITWIDGET_HPP

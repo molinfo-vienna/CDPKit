@@ -39,7 +39,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,10 +50,10 @@ namespace CDPL
 
     namespace Shape
     {
-        
+
         class CDPL_SHAPE_API GaussianShapeGenerator
         {
-            
+
           public:
             typedef std::shared_ptr<GaussianShapeGenerator> SharedPointer;
 
@@ -86,7 +86,7 @@ namespace CDPL
             void setFeatureRadius(double radius);
 
             double getFeatureRadius() const;
-    
+
             void setFeatureHardness(double hardness);
 
             double getFeatureHardness();
@@ -102,12 +102,12 @@ namespace CDPL
             const GaussianShapeSet& generate(const Chem::MolecularGraph& molgraph);
 
             const GaussianShapeSet& getShapes() const;
-          
+
           private:
             typedef std::vector<const Chem::Atom*> AtomList;
 
             template <typename CoordsFunc>
-            void createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, 
+            void createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func,
                              GaussianShape& shape);
 
             template <typename CoordsFunc>
@@ -130,7 +130,7 @@ namespace CDPL
             Pharm::BasicPharmacophore            pharm;
             AtomList                             shapeAtoms;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPEGENERATOR_HPP

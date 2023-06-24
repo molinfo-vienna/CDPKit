@@ -40,7 +40,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,7 +56,7 @@ namespace CDPL
          * \brief XLogPCalculator.
          * \see [\ref XLOGP]
          */
-        class CDPL_MOLPROP_API XLogPCalculator 
+        class CDPL_MOLPROP_API XLogPCalculator
         {
 
           public:
@@ -115,23 +115,23 @@ namespace CDPL
              */
             const Math::DVector& getAtomContributions() const;
 
-        private:
+          private:
             void init(const Chem::MolecularGraph& molgraph);
 
             void countHydrophicCarbons(const Chem::MolecularGraph& molgraph);
-    
+
             bool hasTopDistanceBelow4(const Chem::Atom& curr_atom, const Chem::Atom& tgt_atom, const Chem::MolecularGraph& molgraph,
                                       const Chem::Atom& prev_atom, std::size_t curr_dist);
-        
+
             void calcLogP(const Chem::MolecularGraph& molgraph);
-    
+
             Math::DVector                         featureVector;
             Math::DVector                         atomContribs;
             double                                logP;
             Chem::PatternAtomTyper                atomTyper;
             Chem::SubstructureHistogramCalculator corrSubstructHistoCalc;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_XLOGPCALCULATOR_HPP

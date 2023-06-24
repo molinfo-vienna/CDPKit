@@ -37,7 +37,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -59,18 +59,18 @@ namespace CDPL
             static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::SPHERE;
 
             typedef std::shared_ptr<HydrophobicAtomFeatureGenerator> SharedPointer;
-                        
+
             /**
              * \brief Constructs the \c %HydrophobicAtomFeatureGenerator instance.
              */
             HydrophobicAtomFeatureGenerator();
-        
+
             /**
              * \brief Constructs a copy of the \c %HydrophobicAtomFeatureGenerator instance \a gen.
              * \param gen The \c %HydrophobicAtomFeatureGenerator to copy.
              */
             HydrophobicAtomFeatureGenerator(const HydrophobicAtomFeatureGenerator& gen);
-        
+
             /**
              * \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds 
              *        them to the pharmacophore \a pharm.
@@ -163,10 +163,10 @@ namespace CDPL
             unsigned int featureType;
             double       featureTol;
             unsigned int featureGeom;
-            double       hydThreshold;  
+            double       hydThreshold;
             Util::DArray atomHydTable;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_HYDROPHOBICATOMFEATUREGENERATOR_HPP

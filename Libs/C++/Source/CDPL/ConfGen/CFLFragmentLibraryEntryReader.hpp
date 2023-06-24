@@ -31,7 +31,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -42,7 +42,7 @@ namespace CDPL
         class CFLFragmentLibraryEntryReader : public Internal::CDFDataReaderBase
         {
 
-        public:
+          public:
             CFLFragmentLibraryEntryReader();
 
             bool hasMoreData(std::istream& is);
@@ -51,10 +51,10 @@ namespace CDPL
 
             bool read(std::istream& is, FragmentLibraryEntry& entry);
 
-        private:
+          private:
             Internal::ByteBuffer entryBuffer;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CFLFRAGMENTLIBRARYENTRYREADER_HPP

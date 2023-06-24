@@ -45,43 +45,53 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename V> class MatrixReference;
-        template <typename T, typename A> class Vector;
-        template <typename T, typename A> class Matrix;
+        template <typename V>
+        class MatrixReference;
+        template <typename T, typename A>
+        class Vector;
+        template <typename T, typename A>
+        class Matrix;
 
-        template <typename T> 
+        template <typename T>
         class RotationMatrix : public MatrixContainer<RotationMatrix<T> >
         {
 
             typedef RotationMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T Reference;
-            typedef const T ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef MatrixReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T                               Reference;
+            typedef const T                               ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef MatrixReference<SelfType>             ClosureType;
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef Matrix<T, std::vector<T> > MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-    
+            typedef Matrix<T, std::vector<T> >            MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >            VectorTemporaryType;
+
             template <typename E>
-            RotationMatrix(SizeType n, const QuaternionExpression<E>& q): size(n) {
+            RotationMatrix(SizeType n, const QuaternionExpression<E>& q):
+                size(n)
+            {
                 set(q);
             }
 
             template <typename T1, typename T2, typename T3, typename T4>
-            RotationMatrix(SizeType n, const T1& w, const T2& ux, const T3& uy, const T4& uz): size(n) {
+            RotationMatrix(SizeType n, const T1& w, const T2& ux, const T3& uy, const T4& uz):
+                size(n)
+            {
                 set(w, ux, uy, uz);
             }
 
-            RotationMatrix(const RotationMatrix& m): size(m.size) {
+            RotationMatrix(const RotationMatrix& m):
+                size(m.size)
+            {
                 std::copy(m.data, m.data + 4, data);
             }
 
             template <typename E>
-            void set(const QuaternionExpression<E>& q) {
+            void set(const QuaternionExpression<E>& q)
+            {
                 data[0] = q().getC1();
                 data[1] = q().getC2();
                 data[2] = q().getC3();
@@ -89,16 +99,18 @@ namespace CDPL
             }
 
             template <typename T1, typename T2, typename T3, typename T4>
-            void set(const T1& w, const T2& ux, const T3& uy, const T4& uz) {
+            void set(const T1& w, const T2& ux, const T3& uy, const T4& uz)
+            {
                 data[0] = std::cos(w / 2.0);
                 data[1] = std::sin(w / 2.0) * ux;
                 data[2] = std::sin(w / 2.0) * uy;
                 data[3] = std::sin(w / 2.0) * uz;
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
-                
+
                 if (i >= 3 || i >= size || j >= 3 || j >= size)
                     return (i == j ? ValueType(1) : ValueType());
 
@@ -106,7 +118,7 @@ namespace CDPL
 
                     case 0:
                         switch (j) {
-                
+
                             case 0:
                                 // a2 + b2 - c2 - d2
                                 return (data[0] * data[0] + data[1] * data[1] - data[2] * data[2] - data[3] * data[3]);
@@ -125,7 +137,7 @@ namespace CDPL
 
                     case 1:
                         switch (j) {
-                
+
                             case 0:
                                 // 2(bc + ad)
                                 return 2 * (data[1] * data[2] + data[0] * data[3]);
@@ -144,7 +156,7 @@ namespace CDPL
 
                     case 2:
                         switch (j) {
-                
+
                             case 0:
                                 // 2(bd - ac)
                                 return 2 * (data[1] * data[3] - data[0] * data[2]);
@@ -166,27 +178,33 @@ namespace CDPL
                 }
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize1() const {
-                return size;
-            }
-    
-            SizeType getSize2() const {
+            SizeType getSize1() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize1() const {
+            SizeType getSize2() const
+            {
+                return size;
+            }
+
+            SizeType getMaxSize1() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize2() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            RotationMatrix& operator=(const RotationMatrix& m) {
+            RotationMatrix& operator=(const RotationMatrix& m)
+            {
                 if (this != &m) {
                     std::copy(m.data, m.data + 4, data);
                     size = m.size;
@@ -195,94 +213,109 @@ namespace CDPL
                 return *this;
             }
 
-            void swap(RotationMatrix& m) {
+            void swap(RotationMatrix& m)
+            {
                 if (this != &m) {
                     std::swap_ranges(data, data + 4, m.data);
                     std::swap(size, m.size);
                 }
             }
-    
-            friend void swap(RotationMatrix& m1, RotationMatrix& m2) {
+
+            friend void swap(RotationMatrix& m1, RotationMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = n;
             }
 
-        private:
+          private:
             typedef ValueType ArrayType[4];
 
             SizeType  size;
             ArrayType data;
         };
 
-        template <typename T> 
+        template <typename T>
         class ScalingMatrix : public MatrixContainer<ScalingMatrix<T> >
         {
 
             typedef ScalingMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T Reference;
-            typedef const T ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef MatrixReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T                               Reference;
+            typedef const T                               ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef MatrixReference<SelfType>             ClosureType;
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef Matrix<T, std::vector<T> > MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-    
-            explicit ScalingMatrix(SizeType n, const ValueType& sx = ValueType(1), 
-                                                   const ValueType& sy = ValueType(1), const ValueType& sz = ValueType(1)): size(n) {
+            typedef Matrix<T, std::vector<T> >            MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >            VectorTemporaryType;
+
+            explicit ScalingMatrix(SizeType n, const ValueType& sx = ValueType(1),
+                                   const ValueType& sy = ValueType(1), const ValueType& sz = ValueType(1)):
+                size(n)
+            {
                 set(sx, sy, sz);
             }
 
-            ScalingMatrix(const ScalingMatrix& m): size(m.size) {
+            ScalingMatrix(const ScalingMatrix& m):
+                size(m.size)
+            {
                 std::copy(m.data, m.data + 3, data);
             }
 
-            void set(const ValueType& sx = ValueType(1), const ValueType& sy = ValueType(1), 
-                                     const ValueType& sz = ValueType(1)) {
+            void set(const ValueType& sx = ValueType(1), const ValueType& sy = ValueType(1),
+                     const ValueType& sz = ValueType(1))
+            {
                 data[0] = sx;
                 data[1] = sy;
                 data[2] = sz;
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
                 if (i != j)
                     return ValueType();
-                
+
                 if (i < size && i < 3)
                     return data[i];
 
                 return ValueType(1);
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize1() const {
-                return size;
-            }
-    
-            SizeType getSize2() const {
+            SizeType getSize1() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize1() const {
+            SizeType getSize2() const
+            {
+                return size;
+            }
+
+            SizeType getMaxSize1() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize2() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            ScalingMatrix& operator=(const ScalingMatrix& m) {
+            ScalingMatrix& operator=(const ScalingMatrix& m)
+            {
                 if (this != &m) {
                     std::copy(m.data, m.data + 3, data);
                     size = m.size;
@@ -291,62 +324,71 @@ namespace CDPL
                 return *this;
             }
 
-            void swap(ScalingMatrix& m) {
+            void swap(ScalingMatrix& m)
+            {
                 if (this != &m) {
                     std::swap_ranges(data, data + 3, m.data);
                     std::swap(size, m.size);
                 }
             }
-    
-            friend void swap(ScalingMatrix& m1, ScalingMatrix& m2) {
+
+            friend void swap(ScalingMatrix& m1, ScalingMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = n;
             }
 
-        private:
+          private:
             typedef ValueType ArrayType[3];
 
             SizeType  size;
             ArrayType data;
         };
-    
-        template <typename T> 
+
+        template <typename T>
         class TranslationMatrix : public MatrixContainer<TranslationMatrix<T> >
         {
 
             typedef TranslationMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T Reference;
-            typedef const T ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef MatrixReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T                               Reference;
+            typedef const T                               ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef MatrixReference<SelfType>             ClosureType;
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef Matrix<T, std::vector<T> > MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-    
-            explicit TranslationMatrix(SizeType n, const ValueType& tx = ValueType(), 
-                                       const ValueType& ty = ValueType(), const ValueType& tz = ValueType()): size(n) {
+            typedef Matrix<T, std::vector<T> >            MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >            VectorTemporaryType;
+
+            explicit TranslationMatrix(SizeType n, const ValueType& tx = ValueType(),
+                                       const ValueType& ty = ValueType(), const ValueType& tz = ValueType()):
+                size(n)
+            {
                 set(tx, ty, tz);
             }
 
-            TranslationMatrix(const TranslationMatrix& m): size(m.size) {
+            TranslationMatrix(const TranslationMatrix& m):
+                size(m.size)
+            {
                 std::copy(m.data, m.data + 3, data);
             }
 
-            void set(const ValueType& tx = ValueType(), const ValueType& ty = ValueType(), 
-                     const ValueType& tz = ValueType()) {
+            void set(const ValueType& tx = ValueType(), const ValueType& ty = ValueType(),
+                     const ValueType& tz = ValueType())
+            {
                 data[0] = tx;
                 data[1] = ty;
                 data[2] = tz;
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
                 if (i == j)
@@ -358,27 +400,33 @@ namespace CDPL
                 return ValueType();
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize1() const {
-                return size;
-            }
-    
-            SizeType getSize2() const {
+            SizeType getSize1() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize1() const {
+            SizeType getSize2() const
+            {
+                return size;
+            }
+
+            SizeType getMaxSize1() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize2() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            TranslationMatrix& operator=(const TranslationMatrix& m) {
+            TranslationMatrix& operator=(const TranslationMatrix& m)
+            {
                 if (this != &m) {
                     std::copy(m.data, m.data + 3, data);
                     size = m.size;
@@ -387,43 +435,46 @@ namespace CDPL
                 return *this;
             }
 
-            void swap(TranslationMatrix& m) {
+            void swap(TranslationMatrix& m)
+            {
                 if (this != &m) {
                     std::swap_ranges(data, data + 3, m.data);
                     std::swap(size, m.size);
                 }
             }
-    
-            friend void swap(TranslationMatrix& m1, TranslationMatrix& m2) {
+
+            friend void swap(TranslationMatrix& m1, TranslationMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = n;
             }
 
-        private:
+          private:
             typedef ValueType ArrayType[3];
 
             SizeType  size;
             ArrayType data;
         };
 
-        typedef ScalingMatrix<float> FScalingMatrix;
-        typedef ScalingMatrix<double> DScalingMatrix;
-        typedef ScalingMatrix<long> LScalingMatrix;
+        typedef ScalingMatrix<float>         FScalingMatrix;
+        typedef ScalingMatrix<double>        DScalingMatrix;
+        typedef ScalingMatrix<long>          LScalingMatrix;
         typedef ScalingMatrix<unsigned long> ULScalingMatrix;
 
-        typedef RotationMatrix<float> FRotationMatrix;
-        typedef RotationMatrix<double> DRotationMatrix;
-        typedef RotationMatrix<long> LRotationMatrix;
+        typedef RotationMatrix<float>         FRotationMatrix;
+        typedef RotationMatrix<double>        DRotationMatrix;
+        typedef RotationMatrix<long>          LRotationMatrix;
         typedef RotationMatrix<unsigned long> ULRotationMatrix;
 
-        typedef TranslationMatrix<float> FTranslationMatrix;
-        typedef TranslationMatrix<double> DTranslationMatrix;
-        typedef TranslationMatrix<long> LTranslationMatrix;
+        typedef TranslationMatrix<float>         FTranslationMatrix;
+        typedef TranslationMatrix<double>        DTranslationMatrix;
+        typedef TranslationMatrix<long>          LTranslationMatrix;
         typedef TranslationMatrix<unsigned long> ULTranslationMatrix;
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_AFFINETRANSFORM_HPP

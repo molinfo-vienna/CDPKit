@@ -42,7 +42,7 @@
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class ConformerGeneratorImpl;
@@ -59,12 +59,12 @@ namespace CDPL
         class CDPL_CONFGEN_API ConformerGenerator
         {
 
-        public:
+          public:
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData>       ConformerIterator;
 
             ConformerGenerator();
-        
+
             ~ConformerGenerator();
 
             const ConformerGeneratorSettings& getSettings() const;
@@ -90,7 +90,7 @@ namespace CDPL
             void setLogMessageCallback(const LogMessageCallbackFunction& func);
 
             const LogMessageCallbackFunction& getLogMessageCallback() const;
-            
+
             unsigned int generate(const Chem::MolecularGraph& molgraph);
 
             void setConformers(Chem::MolecularGraph& molgraph) const;
@@ -117,7 +117,7 @@ namespace CDPL
 
             ConformerIterator end();
 
-        private:
+          private:
             ConformerGenerator(const ConformerGenerator&);
 
             ConformerGenerator& operator=(const ConformerGenerator&);
@@ -126,7 +126,7 @@ namespace CDPL
 
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONFORMERGENERATOR_HPP

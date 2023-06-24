@@ -40,10 +40,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94PartialBondChargeIncrementTable
@@ -63,7 +63,7 @@ namespace CDPL
 
               public:
                 Entry();
- 
+
                 Entry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
 
                 unsigned int getAtomType() const;
@@ -79,14 +79,16 @@ namespace CDPL
                 double       partChargeIncr;
                 double       formChargeAdjFactor;
                 bool         initialized;
-            };            
-    
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            };
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
+
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94PartialBondChargeIncrementTable();
 
             void addEntry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
@@ -104,7 +106,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -112,7 +114,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -129,7 +131,7 @@ namespace CDPL
             static SharedPointer defaultTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94PARTIALBONDCHARGEINCREMENTTABLE_HPP

@@ -33,7 +33,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,7 +56,7 @@ namespace CDPL
              */
             const Math::Vector3D& operator()(const Entity3D& entity) const;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ENTITY3DCOORDINATESFUNCTOR_HPP

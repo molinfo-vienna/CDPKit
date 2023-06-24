@@ -33,7 +33,7 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -58,12 +58,12 @@ namespace CDPL
         class CDPL_VIS_API View2D : public Base::ControlParameterContainer
         {
 
-        public:
+          public:
             /**
              * \brief Virtual destructor.
              */
             virtual ~View2D() {}
-            
+
             /**
              * \brief Renders the visual representation of the model using the specified Vis::Renderer2D instance.
              * \param renderer The Renderer2D instance.
@@ -82,7 +82,7 @@ namespace CDPL
              */
             virtual void getModelBounds(Rectangle2D& bounds) = 0;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_VIEW2D_HPP

@@ -33,12 +33,12 @@
 typedef struct _cairo_surface cairo_surface_t;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
     {
-        
+
         class DataIOBase;
     }
 
@@ -47,7 +47,7 @@ namespace CDPL
 
         class Reaction;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
     namespace Vis
     {
@@ -60,7 +60,7 @@ namespace CDPL
         class CDPL_VIS_API ImageWriter
         {
 
-        protected:
+          protected:
             ImageWriter(const Base::DataIOBase& io_base);
 
             virtual ~ImageWriter();
@@ -69,9 +69,9 @@ namespace CDPL
             cairo_surface_t* renderReactionImage(const Chem::Reaction&);
 
             virtual cairo_surface_t* createCairoSurface(double, double) const = 0;
-            virtual cairo_surface_t* createCairoSurface() const = 0;
+            virtual cairo_surface_t* createCairoSurface() const               = 0;
 
-        private:
+          private:
             ImageWriter(const ImageWriter&);
 
             cairo_surface_t* renderImage(View2D&) const;
@@ -81,13 +81,13 @@ namespace CDPL
             ImageWriter& operator=(const ImageWriter&);
 
             typedef std::auto_ptr<StructureView2D> StructureViewPtr;
-            typedef std::auto_ptr<ReactionView2D> ReactionViewPtr;
+            typedef std::auto_ptr<ReactionView2D>  ReactionViewPtr;
 
             const Base::DataIOBase& ioBase;
             StructureViewPtr        structureView;
             ReactionViewPtr         reactionView;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_IMAGEWRITER_HPP

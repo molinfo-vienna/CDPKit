@@ -30,17 +30,17 @@
 #define CDPL_CHEM_RECAPRULEID_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         /**
          * \brief Provides constants for the identification of RECAP fragmentation rules.
          * \see [\ref RECAP]
          */
-        namespace RECAPRuleID 
+        namespace RECAPRuleID
         {
 
             const unsigned int NONE                   = 0;
@@ -55,8 +55,8 @@ namespace CDPL
             const unsigned int LACTAM_N_ALIPHATIC_C   = 9;
             const unsigned int AROMATIC_C_AROMATIC_C  = 10;
             const unsigned int SULFONAMIDE            = 11;
-        }
-    }
-}
+        } // namespace RECAPRuleID
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RECAPRULEID_HPP

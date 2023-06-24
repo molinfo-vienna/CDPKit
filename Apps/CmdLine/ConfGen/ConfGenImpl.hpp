@@ -50,8 +50,8 @@ namespace CDPL
 
         class Molecule;
         class MolecularGraph;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 namespace ConfGen
@@ -60,14 +60,14 @@ namespace ConfGen
     class ConfGenImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         ConfGenImpl();
 
-    private:
+      private:
         typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-        typedef InputHandler::SharedPointer InputHandlerPtr;
-        typedef OutputHandler::SharedPointer OutputHandlerPtr;
+        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule>        InputHandler;
+        typedef InputHandler::SharedPointer                               InputHandlerPtr;
+        typedef OutputHandler::SharedPointer                              OutputHandlerPtr;
 
         const char* getProgName() const;
         const char* getProgCopyright() const;
@@ -137,7 +137,7 @@ namespace ConfGen
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-        InputHandlerPtr getInputHandler(const std::string& file_path) const;
+        InputHandlerPtr  getInputHandler(const std::string& file_path) const;
         OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
         OutputHandlerPtr getFailedOutputHandler(const std::string& file_path) const;
 
@@ -146,46 +146,46 @@ namespace ConfGen
         class InputScanProgressCallback;
         class ConformerGenerationWorker;
 
-        typedef std::vector<std::string> StringList;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
-        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+        typedef std::vector<std::string>                                          StringList;
+        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>                      MoleculeReader;
+        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule>              CompMoleculeReader;
         typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-        typedef CDPL::Internal::Timer Timer;
-        typedef CDPL::ConfGen::ConformerGeneratorSettings ConformerGeneratorSettings;
-        typedef CDPL::ConfGen::FragmentConformerGeneratorSettings FragmentConformerGeneratorSettings;
-        typedef CDPL::ConfGen::TorsionLibrary::SharedPointer TorsionLibraryPtr;
-        typedef CDPL::ConfGen::FragmentLibrary::SharedPointer FragmentLibraryPtr;
+        typedef CDPL::Internal::Timer                                             Timer;
+        typedef CDPL::ConfGen::ConformerGeneratorSettings                         ConformerGeneratorSettings;
+        typedef CDPL::ConfGen::FragmentConformerGeneratorSettings                 FragmentConformerGeneratorSettings;
+        typedef CDPL::ConfGen::TorsionLibrary::SharedPointer                      TorsionLibraryPtr;
+        typedef CDPL::ConfGen::FragmentLibrary::SharedPointer                     FragmentLibraryPtr;
 
-        StringList                     inputFiles;
-        std::string                    outputFile;
-        std::string                    failedFile;
-        std::size_t                    numThreads;
-        ConformerGeneratorSettings     settings;
-        std::string                    confGenPreset;              
-        std::string                    fragBuildPreset;              
-        bool                           canonicalize;
-        bool                           energySDEntry;
-        bool                           energyComment;
-        bool                           confIndexSuffix;
-        long                           maxNumRotorBonds;
-        std::string                    torsionLibName;
-        TorsionLibraryPtr              torsionLib;
-        bool                           replaceBuiltinTorLib;
-        std::string                    fragmentLibName;
-        FragmentLibraryPtr             fragmentLib;
-        bool                           replaceBuiltinFragLib;
-        InputHandlerPtr                inputHandler;
-        CompMoleculeReader             inputReader;
-        OutputHandlerPtr               outputHandler;
-        MoleculeWriterPtr              outputWriter;
-        OutputHandlerPtr               failedOutputHandler;
-        MoleculeWriterPtr              failedOutputWriter;
-        std::mutex                     mutex;
-        std::mutex                     readMolMutex;
-        std::mutex                     writeMolMutex;
-        std::string                    errorMessage;
-        Timer                          timer;
+        StringList                 inputFiles;
+        std::string                outputFile;
+        std::string                failedFile;
+        std::size_t                numThreads;
+        ConformerGeneratorSettings settings;
+        std::string                confGenPreset;
+        std::string                fragBuildPreset;
+        bool                       canonicalize;
+        bool                       energySDEntry;
+        bool                       energyComment;
+        bool                       confIndexSuffix;
+        long                       maxNumRotorBonds;
+        std::string                torsionLibName;
+        TorsionLibraryPtr          torsionLib;
+        bool                       replaceBuiltinTorLib;
+        std::string                fragmentLibName;
+        FragmentLibraryPtr         fragmentLib;
+        bool                       replaceBuiltinFragLib;
+        InputHandlerPtr            inputHandler;
+        CompMoleculeReader         inputReader;
+        OutputHandlerPtr           outputHandler;
+        MoleculeWriterPtr          outputWriter;
+        OutputHandlerPtr           failedOutputHandler;
+        MoleculeWriterPtr          failedOutputWriter;
+        std::mutex                 mutex;
+        std::mutex                 readMolMutex;
+        std::mutex                 writeMolMutex;
+        std::string                errorMessage;
+        Timer                      timer;
     };
-}
+} // namespace ConfGen
 
 #endif // CONFGEN_CONFGENIMPL_HPP

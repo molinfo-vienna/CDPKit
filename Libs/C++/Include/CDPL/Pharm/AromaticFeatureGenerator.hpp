@@ -37,7 +37,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -50,9 +50,9 @@ namespace CDPL
         {
 
           public:
-            static constexpr double       DEF_FEATURE_TOL   = 0.9;
-            static constexpr unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
-            static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
+            static constexpr double       DEF_FEATURE_TOL  = 0.9;
+            static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::AROMATIC;
+            static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::PLANE;
 
             /**
              * \brief Constructs the \c %AromaticFeatureGenerator instance.
@@ -64,7 +64,7 @@ namespace CDPL
              * \param gen The \c %AromaticFeatureGenerator instance to copy.
              */
             AromaticFeatureGenerator(const AromaticFeatureGenerator& gen);
-    
+
             /**
              * \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds 
              *        them to the pharmacophore \a pharm.
@@ -83,7 +83,7 @@ namespace CDPL
              * \param type The value of the feature type property.
              * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TYPE.
              * \see FeatureProperty::TYPE
-             */            
+             */
             void setFeatureType(unsigned int type);
 
             /**
@@ -122,7 +122,7 @@ namespace CDPL
              * \see FeatureProperty::TOLERANCE
              */
             double getFeatureTolerance() const;
-            
+
             /**
              * \brief Replaces the current set include/exclude patterns and attributes by a copy of the
              *        \c %AromaticFeatureGenerator instance \a gen.
@@ -143,7 +143,7 @@ namespace CDPL
             double                   featureTol;
             AtomList                 featureAtoms;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_AROMATICFEATUREGENERATOR_HPP

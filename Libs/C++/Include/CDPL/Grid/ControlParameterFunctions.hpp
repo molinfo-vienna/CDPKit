@@ -32,7 +32,7 @@
 #include "CDPL/Grid/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -41,9 +41,9 @@ namespace CDPL
         class ControlParameterContainer;
     }
 
-    namespace Grid 
+    namespace Grid
     {
-    
+
         CDPL_GRID_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_GRID_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
@@ -58,10 +58,9 @@ namespace CDPL
         CDPL_GRID_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
         CDPL_GRID_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_GRID_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CONTROLPARAMETERFUNCTIONS_HPP
- 

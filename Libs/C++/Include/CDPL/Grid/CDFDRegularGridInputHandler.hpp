@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of spatial regular grid data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataInputHandler<CDFDRegularGridReader, DataFormat::CDF> CDFDRegularGridInputHandler;
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFDREGULARGRIDINPUTHANDLER_HPP

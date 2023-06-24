@@ -53,439 +53,522 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename V> 
+        template <typename V>
         class VectorReference : public VectorExpression<VectorReference<V> >
         {
 
             typedef VectorReference<V> SelfType;
 
-        public:
-            typedef V VectorType;
-            typedef typename V::ValueType ValueType;
+          public:
+            typedef V                                                      VectorType;
+            typedef typename V::ValueType                                  ValueType;
             typedef typename std::conditional<std::is_const<V>::value,
-                                             typename V::ConstReference,
-                                             typename V::Reference>::type Reference;
-            typedef typename V::ConstReference ConstReference;
-            typedef typename V::SizeType SizeType;
-            typedef typename V::DifferenceType DifferenceType;
-            typedef SelfType ClosureType;
-            typedef const SelfType ConstClosureType;
-            
-            explicit VectorReference(VectorType& v): data(v) {}
+                                              typename V::ConstReference,
+                                              typename V::Reference>::type Reference;
+            typedef typename V::ConstReference                             ConstReference;
+            typedef typename V::SizeType                                   SizeType;
+            typedef typename V::DifferenceType                             DifferenceType;
+            typedef SelfType                                               ClosureType;
+            typedef const SelfType                                         ConstClosureType;
 
-            Reference operator[](SizeType i) {
+            explicit VectorReference(VectorType& v):
+                data(v) {}
+
+            Reference operator[](SizeType i)
+            {
                 return data[i];
             }
 
-            ConstReference operator[](SizeType i) const {
+            ConstReference operator[](SizeType i) const
+            {
                 return data[i];
             }
 
-            Reference operator()(SizeType i) {
+            Reference operator()(SizeType i)
+            {
                 return data(i);
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 return data(i);
             }
-    
-            SizeType getSize() const {
+
+            SizeType getSize() const
+            {
                 return data.getSize();
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return data.getMaxSize();
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return data.isEmpty();
             }
 
-            const VectorType& getData() const {
+            const VectorType& getData() const
+            {
                 return data;
             }
 
-            VectorType& getData() {
+            VectorType& getData()
+            {
                 return data;
             }
 
-            VectorReference& operator=(const VectorReference& r) {
+            VectorReference& operator=(const VectorReference& r)
+            {
                 data.operator=(r.data);
                 return *this;
             }
 
             template <typename E>
-            VectorReference& operator=(const VectorExpression<E>& e) {
+            VectorReference& operator=(const VectorExpression<E>& e)
+            {
                 data.operator=(e);
                 return *this;
             }
 
             template <typename E>
-            VectorReference& operator+=(const VectorExpression<E>& e) {
+            VectorReference& operator+=(const VectorExpression<E>& e)
+            {
                 data.operator+=(e);
                 return *this;
-            }    
+            }
 
             template <typename E>
-            VectorReference& operator-=(const VectorExpression<E>& e) {
+            VectorReference& operator-=(const VectorExpression<E>& e)
+            {
                 data.operator-=(e);
                 return *this;
             }
 
             template <typename T>
-            typename std::enable_if<IsScalar<T>::value, VectorReference>::type& operator*=(const T& t) {
+            typename std::enable_if<IsScalar<T>::value, VectorReference>::type& operator*=(const T& t)
+            {
                 data.operator*=(t);
                 return *this;
             }
-    
+
             template <typename T>
-            typename std::enable_if<IsScalar<T>::value, VectorReference>::type& operator/=(const T& t) {
+            typename std::enable_if<IsScalar<T>::value, VectorReference>::type& operator/=(const T& t)
+            {
                 data.operator/=(t);
                 return *this;
             }
-            
+
             template <typename E>
-            VectorReference& assign(const VectorExpression<E>& e) {
+            VectorReference& assign(const VectorExpression<E>& e)
+            {
                 data.assign(e);
                 return *this;
             }
 
             template <typename E>
-            VectorReference& plusAssign(const VectorExpression<E>& e) {
+            VectorReference& plusAssign(const VectorExpression<E>& e)
+            {
                 data.plusAssign(e);
                 return *this;
             }
 
             template <typename E>
-            VectorReference& minusAssign(const VectorExpression<E>& e) {
+            VectorReference& minusAssign(const VectorExpression<E>& e)
+            {
                 data.minusAssign(e);
                 return *this;
             }
 
-            void swap(VectorReference& r) {
+            void swap(VectorReference& r)
+            {
                 data.swap(r.data);
             }
-    
-            friend void swap(VectorReference& r1, VectorReference& r2) {
+
+            friend void swap(VectorReference& r1, VectorReference& r2)
+            {
                 r1.swap(r2);
             }
 
-        private:
+          private:
             VectorType& data;
         };
 
-        template <typename T, typename A> class Vector;
-    
+        template <typename T, typename A>
+        class Vector;
+
         template <typename T>
         class InitListVector : public VectorContainer<InitListVector<T> >
         {
 
-        public:
-            typedef InitListVector SelfType;
-            typedef std::initializer_list<T> InitializerListType;
-            typedef typename InitializerListType::value_type ValueType;
+          public:
+            typedef InitListVector                                SelfType;
+            typedef std::initializer_list<T>                      InitializerListType;
+            typedef typename InitializerListType::value_type      ValueType;
             typedef typename InitializerListType::const_reference ConstReference;
-            typedef typename InitializerListType::reference Reference;
-            typedef typename InitializerListType::size_type SizeType;
-            typedef typename std::ptrdiff_t DifferenceType;
-            typedef SelfType ClosureType;
-            typedef const SelfType ConstClosureType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-                
-            InitListVector(InitializerListType l): list(l) {}
+            typedef typename InitializerListType::reference       Reference;
+            typedef typename InitializerListType::size_type       SizeType;
+            typedef typename std::ptrdiff_t                       DifferenceType;
+            typedef SelfType                                      ClosureType;
+            typedef const SelfType                                ConstClosureType;
+            typedef Vector<T, std::vector<T> >                    VectorTemporaryType;
 
-            Reference operator[](SizeType i) {
+            InitListVector(InitializerListType l):
+                list(l) {}
+
+            Reference operator[](SizeType i)
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator[](SizeType i) const {
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            Reference operator()(SizeType i) {
+            Reference operator()(SizeType i)
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return *(list.begin() + i);
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return *(list.begin() + i);
             }
-    
-            SizeType getSize() const {
+
+            SizeType getSize() const
+            {
                 return list.size();
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (list.size() == 0);
             }
-            
-        private:
+
+          private:
             InitializerListType list;
         };
-        
-        template <typename T, typename A = std::vector<T> > 
+
+        template <typename T, typename A = std::vector<T> >
         class Vector : public VectorContainer<Vector<T, A> >
         {
 
             typedef Vector<T, A> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef T& Reference;
-            typedef const T& ConstReference;
-            typedef typename A::size_type SizeType;
-            typedef typename A::difference_type DifferenceType;
-            typedef A ArrayType;
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef VectorReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef T&                                    Reference;
+            typedef const T&                              ConstReference;
+            typedef typename A::size_type                 SizeType;
+            typedef typename A::difference_type           DifferenceType;
+            typedef A                                     ArrayType;
+            typedef T*                                    Pointer;
+            typedef const T*                              ConstPointer;
+            typedef VectorReference<SelfType>             ClosureType;
             typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef SelfType VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
-            typedef std::initializer_list<T> InitializerListType;
-            
-            Vector(): data() {}
+            typedef SelfType                              VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>             SharedPointer;
+            typedef std::initializer_list<T>              InitializerListType;
 
-            explicit Vector(SizeType n): data(storageSize(n)) {}
+            Vector():
+                data() {}
 
-            Vector(SizeType n, const ValueType& v): data(storageSize(n), v) {}
+            explicit Vector(SizeType n):
+                data(storageSize(n)) {}
 
-            Vector(const ArrayType& data): data(data) {}
+            Vector(SizeType n, const ValueType& v):
+                data(storageSize(n), v) {}
 
-            Vector(const Vector& v): data(v.data) {}
+            Vector(const ArrayType& data):
+                data(data) {}
 
-            Vector(Vector&& v): data(std::move(v.data)) {}
+            Vector(const Vector& v):
+                data(v.data) {}
 
-            Vector(InitializerListType l): data(l) {}
-            
+            Vector(Vector&& v):
+                data(std::move(v.data)) {}
+
+            Vector(InitializerListType l):
+                data(l) {}
+
             template <typename E>
-            Vector(const VectorExpression<E>& e): data(storageSize(e().getSize())) {
+            Vector(const VectorExpression<E>& e):
+                data(storageSize(e().getSize()))
+            {
                 vectorAssignVector<ScalarAssignment>(*this, e);
             }
 
-            Reference operator[](SizeType i) {
+            Reference operator[](SizeType i)
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator[](SizeType i) const {
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            Reference operator()(SizeType i) {
+            Reference operator()(SizeType i)
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return data[i];
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return data[i];
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return data.empty();
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return data.size();
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return data.max_size();
             }
 
-            ArrayType& getData() {
-                return data;
-            }
-            
-            const ArrayType& getData() const {
+            ArrayType& getData()
+            {
                 return data;
             }
 
-            Vector& operator=(const Vector& v) {
+            const ArrayType& getData() const
+            {
+                return data;
+            }
+
+            Vector& operator=(const Vector& v)
+            {
                 data = v.data;
                 return *this;
             }
-            
-            Vector& operator=(Vector&& v) {
+
+            Vector& operator=(Vector&& v)
+            {
                 data = std::move(v.data);
                 return *this;
             }
 
-            Vector& operator=(InitializerListType l) {
+            Vector& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename C>
-            Vector& operator=(const VectorContainer<C>& c) {
+            Vector& operator=(const VectorContainer<C>& c)
+            {
                 return assign(c);
             }
 
             template <typename E>
-            Vector& operator=(const VectorExpression<E>& e) {
+            Vector& operator=(const VectorExpression<E>& e)
+            {
                 Vector tmp(e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename C>
-            Vector& operator+=(const VectorContainer<C>& c) {
+            Vector& operator+=(const VectorContainer<C>& c)
+            {
                 return plusAssign(c);
             }
 
-            Vector& operator+=(InitializerListType l) {
+            Vector& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
 
             template <typename E>
-            Vector& operator+=(const VectorExpression<E>& e) {
+            Vector& operator+=(const VectorExpression<E>& e)
+            {
                 Vector tmp(*this + e);
                 swap(tmp);
                 return *this;
-            }    
+            }
 
             template <typename C>
-            Vector& operator-=(const VectorContainer<C>& c) {
+            Vector& operator-=(const VectorContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            Vector& operator-=(InitializerListType l) {
+            Vector& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            Vector& operator-=(const VectorExpression<E>& e) {
+            Vector& operator-=(const VectorExpression<E>& e)
+            {
                 Vector tmp(*this - e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, Vector>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, Vector>::type& operator*=(const T1& t)
+            {
                 vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, Vector>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, Vector>::type& operator/=(const T1& t)
+            {
                 vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            Vector& assign(const VectorExpression<E>& e) {
+            Vector& assign(const VectorExpression<E>& e)
+            {
                 resize(e().getSize());
                 vectorAssignVector<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            Vector& assign(InitializerListType l) {
+            Vector& assign(InitializerListType l)
+            {
                 data = l;
                 return *this;
             }
 
             template <typename E>
-            Vector& plusAssign(const VectorExpression<E>& e) {
+            Vector& plusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            Vector& plusAssign(InitializerListType l) {
+            Vector& plusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
-            
+
             template <typename E>
-            Vector& minusAssign(const VectorExpression<E>& e) {
+            Vector& minusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            Vector& minusAssign(InitializerListType l) {
+            Vector& minusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
 
-            void swap(Vector& v) {
+            void swap(Vector& v)
+            {
                 if (this != &v)
                     std::swap(data, v.data);
             }
-    
-            friend void swap(Vector& v1, Vector& v2) {
+
+            friend void swap(Vector& v1, Vector& v2)
+            {
                 v1.swap(v2);
             }
 
-            void clear(const ValueType& v = ValueType()) {
+            void clear(const ValueType& v = ValueType())
+            {
                 std::fill(data.begin(), data.end(), v);
             }
 
-            void resize(SizeType n, const ValueType& v = ValueType()) {
+            void resize(SizeType n, const ValueType& v = ValueType())
+            {
                 data.resize(storageSize(n), v);
             }
 
-        private:
-            SizeType storageSize(SizeType n) {
+          private:
+            SizeType storageSize(SizeType n)
+            {
                 return CDPL_MATH_CHECK_MAX_SIZE(n, data.max_size(), Base::SizeError);
             }
 
             ArrayType data;
         };
- 
-        template <typename T, typename A = std::unordered_map<std::size_t, T> > 
+
+        template <typename T, typename A = std::unordered_map<std::size_t, T> >
         class SparseVector : public VectorContainer<SparseVector<T, A> >
         {
 
             typedef SparseVector<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef typename A::key_type KeyType;
-            typedef const T& ConstReference;
+          public:
+            typedef T                                         ValueType;
+            typedef std::size_t                               SizeType;
+            typedef std::ptrdiff_t                            DifferenceType;
+            typedef typename A::key_type                      KeyType;
+            typedef const T&                                  ConstReference;
             typedef SparseContainerElement<SelfType, KeyType> Reference;
-            typedef A ArrayType;
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef VectorReference<SelfType> ClosureType;
-            typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef SelfType VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
-            typedef std::initializer_list<T> InitializerListType;
-            
-            SparseVector(): data(), size(0) {}
+            typedef A                                         ArrayType;
+            typedef T*                                        Pointer;
+            typedef const T*                                  ConstPointer;
+            typedef VectorReference<SelfType>                 ClosureType;
+            typedef const VectorReference<const SelfType>     ConstClosureType;
+            typedef SelfType                                  VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>                 SharedPointer;
+            typedef std::initializer_list<T>                  InitializerListType;
 
-            explicit SparseVector(SizeType n): data(), size(storageSize(n)) {}
-    
-            SparseVector(const SparseVector& v): data(v.data), size(v.size) {}
+            SparseVector():
+                data(), size(0) {}
 
-            SparseVector(SparseVector&& v): data(), size(0) {
+            explicit SparseVector(SizeType n):
+                data(), size(storageSize(n)) {}
+
+            SparseVector(const SparseVector& v):
+                data(v.data), size(v.size) {}
+
+            SparseVector(SparseVector&& v):
+                data(), size(0)
+            {
                 swap(v);
             }
 
-            SparseVector(InitializerListType l) {
+            SparseVector(InitializerListType l)
+            {
                 assign(l);
             }
 
             template <typename E>
-            SparseVector(const VectorExpression<E>& e): data(), size(0) {
+            SparseVector(const VectorExpression<E>& e):
+                data(), size(0)
+            {
                 assign(e);
             }
 
-            Reference operator[](SizeType i) {
+            Reference operator[](SizeType i)
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator[](SizeType i) const {
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            Reference operator()(SizeType i) {
+            Reference operator()(SizeType i)
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return Reference(*this, i);
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 
                 typename ArrayType::const_iterator it = data.find(i);
@@ -496,155 +579,184 @@ namespace CDPL
                 return it->second;
             }
 
-            SizeType getNumElements() const {
+            SizeType getNumElements() const
+            {
                 return data.size();
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return std::min(SizeType(data.max_size()), std::numeric_limits<SizeType>::max());
             }
 
-            ArrayType& getData() {
-                return data;
-            }
-            
-            const ArrayType& getData() const {
+            ArrayType& getData()
+            {
                 return data;
             }
 
-            SparseVector& operator=(const SparseVector& v) {
+            const ArrayType& getData() const
+            {
+                return data;
+            }
+
+            SparseVector& operator=(const SparseVector& v)
+            {
                 data = v.data;
                 size = v.size;
                 return *this;
             }
 
-            SparseVector& operator=(SparseVector&& v) {
+            SparseVector& operator=(SparseVector&& v)
+            {
                 swap(v);
                 return *this;
             }
 
-            SparseVector& operator=(InitializerListType l) {
+            SparseVector& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename C>
-            SparseVector& operator=(const VectorContainer<C>& c) {
+            SparseVector& operator=(const VectorContainer<C>& c)
+            {
                 return assign(c);
             }
 
             template <typename E>
-            SparseVector& operator=(const VectorExpression<E>& e) {
+            SparseVector& operator=(const VectorExpression<E>& e)
+            {
                 SparseVector tmp(e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename C>
-            SparseVector& operator+=(const VectorContainer<C>& c) {
+            SparseVector& operator+=(const VectorContainer<C>& c)
+            {
                 return plusAssign(c);
             }
 
-            SparseVector& operator+=(InitializerListType l) {
+            SparseVector& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-            
+
             template <typename E>
-            SparseVector& operator+=(const VectorExpression<E>& e) {
+            SparseVector& operator+=(const VectorExpression<E>& e)
+            {
                 SparseVector tmp(*this + e);
                 swap(tmp);
                 return *this;
-            }    
+            }
 
             template <typename C>
-            SparseVector& operator-=(const VectorContainer<C>& c) {
+            SparseVector& operator-=(const VectorContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            SparseVector& operator-=(InitializerListType l) {
+            SparseVector& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
-            
+
             template <typename E>
-            SparseVector& operator-=(const VectorExpression<E>& e) {
+            SparseVector& operator-=(const VectorExpression<E>& e)
+            {
                 SparseVector tmp(*this - e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, SparseVector>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, SparseVector>::type& operator*=(const T1& t)
+            {
                 vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, SparseVector>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, SparseVector>::type& operator/=(const T1& t)
+            {
                 vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            SparseVector& assign(const VectorExpression<E>& e) {
+            SparseVector& assign(const VectorExpression<E>& e)
+            {
                 resize(e().getSize());
                 vectorAssignVector<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            SparseVector& assign(InitializerListType l) {
+            SparseVector& assign(InitializerListType l)
+            {
                 resize(l.size());
                 vectorAssignVector<ScalarAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
 
             template <typename E>
-            SparseVector& plusAssign(const VectorExpression<E>& e) {
+            SparseVector& plusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            SparseVector& plusAssign(InitializerListType l) {
+            SparseVector& plusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
-            
+
             template <typename E>
-            SparseVector& minusAssign(const VectorExpression<E>& e) {
+            SparseVector& minusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            SparseVector& minusAssign(InitializerListType l) {
+            SparseVector& minusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
 
-            void swap(SparseVector& v) {
+            void swap(SparseVector& v)
+            {
                 if (this != &v) {
                     std::swap(data, v.data);
                     std::swap(size, v.size);
                 }
             }
-    
-            friend void swap(SparseVector& v1, SparseVector& v2) {
+
+            friend void swap(SparseVector& v1, SparseVector& v2)
+            {
                 v1.swap(v2);
             }
 
-            void clear() {
+            void clear()
+            {
                 data.clear();
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 n = storageSize(n);
 
-                for (typename ArrayType::iterator it = data.begin(); it != data.end(); ) {
+                for (typename ArrayType::iterator it = data.begin(); it != data.end();) {
                     if (it->first >= n)
                         it = data.erase(it);
                     else
@@ -654,8 +766,9 @@ namespace CDPL
                 size = n;
             }
 
-        private:
-            SizeType storageSize(SizeType n) {
+          private:
+            SizeType storageSize(SizeType n)
+            {
                 return CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize(), Base::SizeError);
             }
 
@@ -664,93 +777,114 @@ namespace CDPL
             static const ValueType zero;
         };
 
-        template <typename T, typename A> const typename SparseVector<T, A>::ValueType SparseVector<T, A>::zero = SparseVector<T, A>::ValueType();
+        template <typename T, typename A>
+        const typename SparseVector<T, A>::ValueType SparseVector<T, A>::zero = SparseVector<T, A>::ValueType();
 
-        template <typename T, std::size_t N> 
+        template <typename T, std::size_t N>
         class BoundedVector : public VectorContainer<BoundedVector<T, N> >
         {
 
             typedef BoundedVector<T, N> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef ValueType ArrayType[N];
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef VectorReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef T&                                    Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef ValueType                             ArrayType[N];
+            typedef T*                                    Pointer;
+            typedef const T*                              ConstPointer;
+            typedef VectorReference<SelfType>             ClosureType;
             typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef BoundedVector<T, N + 1> VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
-            typedef std::initializer_list<T> InitializerListType;
-            
+            typedef BoundedVector<T, N + 1>               VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>             SharedPointer;
+            typedef std::initializer_list<T>              InitializerListType;
+
             static const SizeType MaxSize = N;
 
-            BoundedVector(): size(0) {}
+            BoundedVector():
+                size(0) {}
 
-            explicit BoundedVector(SizeType n): size(0) {
+            explicit BoundedVector(SizeType n):
+                size(0)
+            {
                 resize(n);
             }
 
-            BoundedVector(SizeType n, const ValueType& v): size(0) {
+            BoundedVector(SizeType n, const ValueType& v):
+                size(0)
+            {
                 resize(n, v);
             }
 
-            BoundedVector(const BoundedVector& v): size(v.size) {
+            BoundedVector(const BoundedVector& v):
+                size(v.size)
+            {
                 std::copy(v.data, v.data + v.size, data);
             }
 
-            BoundedVector(InitializerListType l) {
+            BoundedVector(InitializerListType l)
+            {
                 assign(l);
             }
 
             template <typename E>
-            BoundedVector(const VectorExpression<E>& e): size(0) {
+            BoundedVector(const VectorExpression<E>& e):
+                size(0)
+            {
                 assign(e);
             }
 
-            Reference operator[](SizeType i) {
+            Reference operator[](SizeType i)
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator[](SizeType i) const {
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            Reference operator()(SizeType i) {
+            Reference operator()(SizeType i)
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return data[i];
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return data[i];
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return N;
             }
 
-            Pointer getData() {
-                return data;
-            }
-            
-            ConstPointer getData() const {
+            Pointer getData()
+            {
                 return data;
             }
 
-            BoundedVector& operator=(const BoundedVector& v) {
+            ConstPointer getData() const
+            {
+                return data;
+            }
+
+            BoundedVector& operator=(const BoundedVector& v)
+            {
                 if (this != &v) {
                     std::copy(v.data, v.data + v.size, data);
                     size = v.size;
@@ -759,118 +893,140 @@ namespace CDPL
                 return *this;
             }
 
-            BoundedVector& operator=(InitializerListType l) {
+            BoundedVector& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename C>
-            BoundedVector& operator=(const VectorContainer<C>& c) {
+            BoundedVector& operator=(const VectorContainer<C>& c)
+            {
                 return assign(c);
             }
 
             template <typename E>
-            BoundedVector& operator=(const VectorExpression<E>& e) {
+            BoundedVector& operator=(const VectorExpression<E>& e)
+            {
                 BoundedVector tmp(e);
-                return this->operator=(tmp);
+                return this-> operator=(tmp);
             }
 
             template <typename C>
-            BoundedVector& operator+=(const VectorContainer<C>& c) {
+            BoundedVector& operator+=(const VectorContainer<C>& c)
+            {
                 return plusAssign(c);
             }
-            
-            BoundedVector& operator+=(InitializerListType l) {
+
+            BoundedVector& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-            
+
             template <typename E>
-            BoundedVector& operator+=(const VectorExpression<E>& e) {
+            BoundedVector& operator+=(const VectorExpression<E>& e)
+            {
                 BoundedVector tmp(*this + e);
-                return this->operator=(tmp);
-            }    
+                return this-> operator=(tmp);
+            }
 
             template <typename C>
-            BoundedVector& operator-=(const VectorContainer<C>& c) {
+            BoundedVector& operator-=(const VectorContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            BoundedVector& operator-=(InitializerListType l) {
+            BoundedVector& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            BoundedVector& operator-=(const VectorExpression<E>& e) {
+            BoundedVector& operator-=(const VectorExpression<E>& e)
+            {
                 BoundedVector tmp(*this - e);
-                return this->operator=(tmp);
+                return this-> operator=(tmp);
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, BoundedVector>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, BoundedVector>::type& operator*=(const T1& t)
+            {
                 vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, BoundedVector>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, BoundedVector>::type& operator/=(const T1& t)
+            {
                 vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            BoundedVector& assign(const VectorExpression<E>& e) {
+            BoundedVector& assign(const VectorExpression<E>& e)
+            {
                 resize(e().getSize());
                 vectorAssignVector<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            BoundedVector& assign(InitializerListType l) {
+            BoundedVector& assign(InitializerListType l)
+            {
                 resize(l.size());
                 std::copy(l.begin(), l.begin() + size, data);
                 return *this;
             }
 
             template <typename E>
-            BoundedVector& plusAssign(const VectorExpression<E>& e) {
+            BoundedVector& plusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            BoundedVector& plusAssign(InitializerListType l) {
+            BoundedVector& plusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
-            
+
             template <typename E>
-            BoundedVector& minusAssign(const VectorExpression<E>& e) {
+            BoundedVector& minusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            BoundedVector& minusAssign(InitializerListType l) {
+            BoundedVector& minusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
 
-            void swap(BoundedVector& v) {
+            void swap(BoundedVector& v)
+            {
                 if (this != &v) {
                     std::swap_ranges(data, data + std::max(size, v.size), v.data);
                     std::swap(size, v.size);
                 }
             }
-    
-            friend void swap(BoundedVector& v1, BoundedVector& v2) {
+
+            friend void swap(BoundedVector& v1, BoundedVector& v2)
+            {
                 v1.swap(v2);
             }
 
-            void clear(const ValueType& v = ValueType()) {
+            void clear(const ValueType& v = ValueType())
+            {
                 std::fill(data, data + size, v);
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = storageSize(n);
             }
 
-            void resize(SizeType n, const ValueType& v) {
+            void resize(SizeType n, const ValueType& v)
+            {
                 n = storageSize(n);
 
                 if (n > size)
@@ -879,8 +1035,9 @@ namespace CDPL
                 size = n;
             }
 
-        private:
-            SizeType storageSize(SizeType n) {
+          private:
+            SizeType storageSize(SizeType n)
+            {
                 return CDPL_MATH_CHECK_MAX_SIZE(n, N, Base::SizeError);
             }
 
@@ -888,441 +1045,520 @@ namespace CDPL
             SizeType  size;
         };
 
-        template <typename T, std::size_t N> const typename BoundedVector<T, N>::SizeType BoundedVector<T, N>::MaxSize;
+        template <typename T, std::size_t N>
+        const typename BoundedVector<T, N>::SizeType BoundedVector<T, N>::MaxSize;
 
-        template <typename T, std::size_t N> 
+        template <typename T, std::size_t N>
         class CVector : public VectorContainer<CVector<T, N> >
         {
 
             typedef CVector<T, N> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef ValueType ArrayType[N];
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef VectorReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef T&                                    Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef ValueType                             ArrayType[N];
+            typedef T*                                    Pointer;
+            typedef const T*                              ConstPointer;
+            typedef VectorReference<SelfType>             ClosureType;
             typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef BoundedVector<T, N + 1> VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
-            typedef std::initializer_list<T> InitializerListType;
-            
+            typedef BoundedVector<T, N + 1>               VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>             SharedPointer;
+            typedef std::initializer_list<T>              InitializerListType;
+
             static const SizeType Size = N;
 
-            CVector() {
+            CVector()
+            {
                 clear();
             }
 
-            explicit CVector(const ValueType& v) {
+            explicit CVector(const ValueType& v)
+            {
                 clear(v);
             }
 
-            CVector(const CVector& v) {
+            CVector(const CVector& v)
+            {
                 std::copy(v.data, v.data + N, data);
             }
 
-            CVector(InitializerListType l) {
+            CVector(InitializerListType l)
+            {
                 assign(l);
             }
 
             template <typename E>
-            CVector(const VectorExpression<E>& e) {
+            CVector(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarAssignment>(*this, e);
             }
 
-            Reference operator[](SizeType i) {
+            Reference operator[](SizeType i)
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator[](SizeType i) const {
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            Reference operator()(SizeType i) {
+            Reference operator()(SizeType i)
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return data[i];
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return data[i];
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (N == 0);
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return N;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return N;
             }
 
-            Pointer getData() {
-                return data;
-            }
-            
-            ConstPointer getData() const {
+            Pointer getData()
+            {
                 return data;
             }
 
-            CVector& operator=(const CVector& v) {
+            ConstPointer getData() const
+            {
+                return data;
+            }
+
+            CVector& operator=(const CVector& v)
+            {
                 if (this != &v)
                     std::copy(v.data, v.data + N, data);
 
                 return *this;
             }
-            
-            CVector& operator=(InitializerListType l) {
+
+            CVector& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename C>
-            CVector& operator=(const VectorContainer<C>& c) {
+            CVector& operator=(const VectorContainer<C>& c)
+            {
                 return assign(c);
             }
 
             template <typename E>
-            CVector& operator=(const VectorExpression<E>& e) {
-                CVector tmp(e);
+            CVector& operator=(const VectorExpression<E>& e)
+            {
+                CVector      tmp(e);
                 return this->operator=(tmp);
             }
 
             template <typename C>
-            CVector& operator+=(const VectorContainer<C>& c) {
+            CVector& operator+=(const VectorContainer<C>& c)
+            {
                 return plusAssign(c);
             }
-            
-            CVector& operator+=(InitializerListType l) {
+
+            CVector& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-    
+
             template <typename E>
-            CVector& operator+=(const VectorExpression<E>& e) {
-                CVector tmp(*this + e);
+            CVector& operator+=(const VectorExpression<E>& e)
+            {
+                CVector      tmp(*this + e);
                 return this->operator=(tmp);
-            }    
+            }
 
             template <typename C>
-            CVector& operator-=(const VectorContainer<C>& c) {
+            CVector& operator-=(const VectorContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            CVector& operator-=(InitializerListType l) {
+            CVector& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            CVector& operator-=(const VectorExpression<E>& e) {
-                CVector tmp(*this - e);
+            CVector& operator-=(const VectorExpression<E>& e)
+            {
+                CVector      tmp(*this - e);
                 return this->operator=(tmp);
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, CVector>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, CVector>::type& operator*=(const T1& t)
+            {
                 vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, CVector>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, CVector>::type& operator/=(const T1& t)
+            {
                 vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            CVector& assign(const VectorExpression<E>& e) {
+            CVector& assign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            CVector& assign(InitializerListType l) {
+            CVector& assign(InitializerListType l)
+            {
                 SizeType n = CDPL_MATH_CHECK_MAX_SIZE(l.size(), N, Base::SizeError);
                 std::copy(l.begin(), l.begin() + n, data);
 
                 if (n < N)
                     std::fill(data + n, data + N, ValueType());
-                
+
                 return *this;
             }
 
             template <typename E>
-            CVector& plusAssign(const VectorExpression<E>& e) {
+            CVector& plusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            CVector& plusAssign(InitializerListType l) {
+            CVector& plusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
-            
+
             template <typename E>
-            CVector& minusAssign(const VectorExpression<E>& e) {
+            CVector& minusAssign(const VectorExpression<E>& e)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            CVector& minusAssign(InitializerListType l) {
+            CVector& minusAssign(InitializerListType l)
+            {
                 vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
                 return *this;
             }
 
-            void swap(CVector& v) {
+            void swap(CVector& v)
+            {
                 if (this != &v)
                     std::swap_ranges(data, data + N, v.data);
             }
-    
-            friend void swap(CVector& v1, CVector& v2) {
+
+            friend void swap(CVector& v1, CVector& v2)
+            {
                 v1.swap(v2);
             }
 
-            void clear(const ValueType& v = ValueType()) {
+            void clear(const ValueType& v = ValueType())
+            {
                 std::fill(data, data + N, v);
             }
 
-        private:
+          private:
             ArrayType data;
         };
 
-        template <typename T, std::size_t N> const typename CVector<T, N>::SizeType CVector<T, N>::Size;
+        template <typename T, std::size_t N>
+        const typename CVector<T, N>::SizeType CVector<T, N>::Size;
 
-        template <typename T> 
+        template <typename T>
         class ZeroVector : public VectorContainer<ZeroVector<T> >
         {
 
             typedef ZeroVector<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef VectorReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T&                              Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef VectorReference<SelfType>             ClosureType;
             typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef Vector<T> VectorTemporaryType;
+            typedef Vector<T>                             VectorTemporaryType;
 
-            ZeroVector(): size(0) {}
+            ZeroVector():
+                size(0) {}
 
-            explicit ZeroVector(SizeType n): size(n) {}
+            explicit ZeroVector(SizeType n):
+                size(n) {}
 
-            ZeroVector(const ZeroVector& v): size(v.size) {}
-    
-            ConstReference operator[](SizeType i) const {
+            ZeroVector(const ZeroVector& v):
+                size(v.size) {}
+
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return zero;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
-        
-            ZeroVector& operator=(const ZeroVector& v) {
+
+            ZeroVector& operator=(const ZeroVector& v)
+            {
                 size = v.size;
                 return *this;
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = n;
             }
 
-            void swap(ZeroVector& v) {
+            void swap(ZeroVector& v)
+            {
                 if (this != &v)
                     std::swap(size, v.size);
             }
-    
-            friend void swap(ZeroVector& v1, ZeroVector& v2) {
+
+            friend void swap(ZeroVector& v1, ZeroVector& v2)
+            {
                 v1.swap(v2);
             }
 
-        private:
+          private:
             SizeType               size;
             static const ValueType zero;
         };
 
-        template <typename T> const typename ZeroVector<T>::ValueType ZeroVector<T>::zero = ZeroVector<T>::ValueType();
+        template <typename T>
+        const typename ZeroVector<T>::ValueType ZeroVector<T>::zero = ZeroVector<T>::ValueType();
 
-        template <typename T> 
+        template <typename T>
         class UnitVector : public VectorContainer<UnitVector<T> >
         {
 
             typedef UnitVector<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef VectorReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T&                              Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef VectorReference<SelfType>             ClosureType;
             typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef Vector<T> VectorTemporaryType;
+            typedef Vector<T>                             VectorTemporaryType;
 
-            UnitVector(): size(0), index(0) {}
+            UnitVector():
+                size(0), index(0) {}
 
-            UnitVector(SizeType n, SizeType i): size(n), index(i) {}
+            UnitVector(SizeType n, SizeType i):
+                size(n), index(i) {}
 
-            UnitVector(const UnitVector& v): size(v.size), index(v.index) {}
-    
-            ConstReference operator[](SizeType i) const {
+            UnitVector(const UnitVector& v):
+                size(v.size), index(v.index) {}
+
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 
                 return (i == index ? one : zero);
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return size;
             }
 
-            SizeType getIndex() const {
+            SizeType getIndex() const
+            {
                 return index;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
-        
-            UnitVector& operator=(const UnitVector& v) {
+
+            UnitVector& operator=(const UnitVector& v)
+            {
                 if (this != &v) {
-                    size = v.size;
+                    size  = v.size;
                     index = v.index;
                 }
 
                 return *this;
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = n;
             }
 
-            void swap(UnitVector& v) {
+            void swap(UnitVector& v)
+            {
                 if (this != &v) {
                     std::swap(size, v.size);
                     std::swap(index, v.index);
                 }
             }
-    
-            friend void swap(UnitVector& v1, UnitVector& v2) {
+
+            friend void swap(UnitVector& v1, UnitVector& v2)
+            {
                 v1.swap(v2);
             }
 
-        private:
+          private:
             SizeType               size;
             SizeType               index;
             static const ValueType zero;
             static const ValueType one;
         };
 
-        template <typename T> const typename UnitVector<T>::ValueType UnitVector<T>::zero = UnitVector<T>::ValueType();
-        template <typename T> const typename UnitVector<T>::ValueType UnitVector<T>::one  = UnitVector<T>::ValueType(1);
+        template <typename T>
+        const typename UnitVector<T>::ValueType UnitVector<T>::zero = UnitVector<T>::ValueType();
+        template <typename T>
+        const typename UnitVector<T>::ValueType UnitVector<T>::one = UnitVector<T>::ValueType(1);
 
-        template <typename T> 
+        template <typename T>
         class ScalarVector : public VectorContainer<ScalarVector<T> >
         {
 
             typedef ScalarVector<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef VectorReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T&                              Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef VectorReference<SelfType>             ClosureType;
             typedef const VectorReference<const SelfType> ConstClosureType;
-            typedef Vector<T> VectorTemporaryType;
+            typedef Vector<T>                             VectorTemporaryType;
 
-            ScalarVector(): size(0) {}
+            ScalarVector():
+                size(0) {}
 
-            ScalarVector(SizeType n, const ValueType& v = ValueType()): size(n), value(v) {}
+            ScalarVector(SizeType n, const ValueType& v = ValueType()):
+                size(n), value(v) {}
 
-            ScalarVector(const ScalarVector& v): size(v.size), value(v.value) {}
-    
-            ConstReference operator[](SizeType i) const {
+            ScalarVector(const ScalarVector& v):
+                size(v.size), value(v.value) {}
+
+            ConstReference operator[](SizeType i) const
+            {
                 return this->operator()(i);
             }
 
-            ConstReference operator()(SizeType i) const {
+            ConstReference operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return value;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return size;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
-        
-            ScalarVector& operator=(const ScalarVector& v) {
+
+            ScalarVector& operator=(const ScalarVector& v)
+            {
                 if (this != &v) {
-                    size = v.size;
+                    size  = v.size;
                     value = v.value;
                 }
 
                 return *this;
             }
 
-            void resize(SizeType n) {
+            void resize(SizeType n)
+            {
                 size = n;
             }
 
-            void swap(ScalarVector& v) {
+            void swap(ScalarVector& v)
+            {
                 if (this != &v) {
                     std::swap(size, v.size);
                     std::swap(value, v.value);
                 }
             }
-    
-            friend void swap(ScalarVector& v1, ScalarVector& v2) {
+
+            friend void swap(ScalarVector& v1, ScalarVector& v2)
+            {
                 v1.swap(v2);
             }
 
-        private:
+          private:
             SizeType  size;
             ValueType value;
         };
 
         template <typename V>
-        struct VectorTemporaryTraits<const VectorReference<V> > : public VectorTemporaryTraits<V> {};
+        struct VectorTemporaryTraits<const VectorReference<V> > : public VectorTemporaryTraits<V>
+        {};
 
         template <typename V>
-        struct VectorTemporaryTraits<VectorReference<V> > : public VectorTemporaryTraits<V> {};
+        struct VectorTemporaryTraits<VectorReference<V> > : public VectorTemporaryTraits<V>
+        {};
 
         template <typename T1, typename T2>
-        CVector<typename CommonType<T1, T2>::Type, 2> 
+        CVector<typename CommonType<T1, T2>::Type, 2>
         vec(const T1& t1, const T2& t2)
         {
             CVector<typename CommonType<T1, T2>::Type, 2> v;
@@ -1332,9 +1568,9 @@ namespace CDPL
 
             return v;
         }
-        
+
         template <typename T1, typename T2, typename T3>
-        CVector<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, 3> 
+        CVector<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, 3>
         vec(const T1& t1, const T2& t2, const T3& t3)
         {
             CVector<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, 3> v;
@@ -1347,7 +1583,7 @@ namespace CDPL
         }
 
         template <typename T1, typename T2, typename T3, typename T4>
-        CVector<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type, 4> 
+        CVector<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type, 4>
         vec(const T1& t1, const T2& t2, const T3& t3, const T4& t4)
         {
             CVector<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type, 4> v;
@@ -1360,19 +1596,19 @@ namespace CDPL
             return v;
         }
 
-        typedef ScalarVector<float> FScalarVector;
-        typedef ScalarVector<double> DScalarVector;
-        typedef ScalarVector<long> LScalarVector;
+        typedef ScalarVector<float>         FScalarVector;
+        typedef ScalarVector<double>        DScalarVector;
+        typedef ScalarVector<long>          LScalarVector;
         typedef ScalarVector<unsigned long> ULScalarVector;
 
-        typedef ZeroVector<float> FZeroVector;
-        typedef ZeroVector<double> DZeroVector;
-        typedef ZeroVector<long> LZeroVector;
+        typedef ZeroVector<float>         FZeroVector;
+        typedef ZeroVector<double>        DZeroVector;
+        typedef ZeroVector<long>          LZeroVector;
         typedef ZeroVector<unsigned long> ULZeroVector;
 
-        typedef UnitVector<float> FUnitVector;
-        typedef UnitVector<double> DUnitVector;
-        typedef UnitVector<long> LUnitVector;
+        typedef UnitVector<float>         FUnitVector;
+        typedef UnitVector<double>        DUnitVector;
+        typedef UnitVector<long>          LUnitVector;
         typedef UnitVector<unsigned long> ULUnitVector;
 
         /**
@@ -1474,7 +1710,7 @@ namespace CDPL
          * \brief An unbounded sparse vector holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef SparseVector<unsigned long> SparseULVector;
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_VECTOR_HPP

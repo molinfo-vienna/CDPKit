@@ -49,7 +49,7 @@ namespace CDPL
 
         class Molecule;
     }
-}
+} // namespace CDPL
 
 
 namespace GenFragLib
@@ -58,22 +58,22 @@ namespace GenFragLib
     class GenFragLibImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         GenFragLibImpl();
 
-    private:
+      private:
         typedef CDPL::ConfGen::FragmentLibrary FragmentLibrary;
 
-        enum Mode 
+        enum Mode
         {
 
-          CREATE,
-          UPDATE,
-          MERGE
+            CREATE,
+            UPDATE,
+            MERGE
         };
 
         typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-        typedef InputHandler::SharedPointer InputHandlerPtr;
+        typedef InputHandler::SharedPointer                        InputHandlerPtr;
 
         const char* getProgName() const;
         const char* getProgCopyright() const;
@@ -99,7 +99,7 @@ namespace GenFragLib
         void processMultiThreaded();
 
         void loadFragmentLibrary(const std::string& fname, FragmentLibrary& lib);
-        int saveFragmentLibrary();
+        int  saveFragmentLibrary();
 
         std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
         std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
@@ -111,7 +111,7 @@ namespace GenFragLib
 
         void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-        void printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, std::size_t num_error_frags, 
+        void printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, std::size_t num_error_frags,
                              std::size_t num_added_frags, std::size_t num_gen_confs);
 
         void checkInputFiles() const;
@@ -130,12 +130,12 @@ namespace GenFragLib
         class InputScanProgressCallback;
         class FragLibGenerationWorker;
 
-        typedef std::vector<std::string> StringList;
-        typedef std::unordered_map<std::uint64_t, std::size_t> FragmentFrequencyMap;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
+        typedef std::vector<std::string>                             StringList;
+        typedef std::unordered_map<std::uint64_t, std::size_t>       FragmentFrequencyMap;
+        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>         MoleculeReader;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-        typedef CDPL::Internal::Timer Timer;
-        typedef CDPL::ConfGen::FragmentConformerGeneratorSettings ConformerGeneratorSettings;
+        typedef CDPL::Internal::Timer                                Timer;
+        typedef CDPL::ConfGen::FragmentConformerGeneratorSettings    ConformerGeneratorSettings;
 
         StringList                     inputFiles;
         std::string                    outputFile;
@@ -153,6 +153,6 @@ namespace GenFragLib
         std::string                    errorMessage;
         Timer                          timer;
     };
-}
+} // namespace GenFragLib
 
 #endif // GENFRAGLIB_GENFRAGLIBIMPL_HPP

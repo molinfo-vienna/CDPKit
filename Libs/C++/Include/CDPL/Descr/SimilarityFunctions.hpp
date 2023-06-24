@@ -35,10 +35,10 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Descr 
+    namespace Descr
     {
 
         /**
@@ -194,7 +194,7 @@ namespace CDPL
          * \return The calculated distance.
          */
         CDPL_DESCR_API std::size_t calcHammingDistance(const Util::BitSet& bs1, const Util::BitSet& bs2);
-    
+
         /**
          * \brief Calculates the <em>Euclidean Distance</em> [\ref CITB] between the bitsets \a bs1 and \a bs2.
          *
@@ -215,7 +215,7 @@ namespace CDPL
          * \return The calculated distance.
          */
         CDPL_DESCR_API double calcEuclideanDistance(const Util::BitSet& bs1, const Util::BitSet& bs2);
-    }
-}
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_SIMILARITYFUNCTIONS_HPP

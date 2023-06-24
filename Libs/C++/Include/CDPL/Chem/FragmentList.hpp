@@ -36,7 +36,7 @@
 #include "CDPL/Util/IndirectArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -52,11 +52,12 @@ namespace CDPL
             typedef std::shared_ptr<FragmentList> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "FragmentList";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_FRAGMENTLIST_HPP

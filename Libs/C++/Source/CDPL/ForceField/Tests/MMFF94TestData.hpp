@@ -40,12 +40,12 @@ namespace Testing
 
         typedef std::vector<CDPL::Chem::Molecule::SharedPointer> MoleculeList;
 
-        extern MoleculeList     DYN_TEST_MOLECULES;
-        extern MoleculeList     STAT_TEST_MOLECULES;
+        extern MoleculeList DYN_TEST_MOLECULES;
+        extern MoleculeList STAT_TEST_MOLECULES;
 
         extern OptimolLogReader DYN_LOG_READER;
         extern OptimolLogReader STAT_LOG_READER;
-    }
-}
+    } // namespace MMFF94TestData
+} // namespace Testing
 
 #endif // CDPL_FORCEFIELD_TEST_MMFF94TESTDATA_HPP

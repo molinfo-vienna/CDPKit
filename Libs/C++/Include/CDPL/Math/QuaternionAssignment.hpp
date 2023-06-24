@@ -36,7 +36,8 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class QuaternionExpression;
+        template <typename E>
+        class QuaternionExpression;
 
         template <template <typename T1, typename T2> class F, typename Q, typename E>
         void quaternionAssignQuaternion(Q& q, const QuaternionExpression<E>& e)
@@ -53,7 +54,7 @@ namespace CDPL
         void quaternionAssignScalar(Q& q, const T& t)
         {
             typedef F<typename Q::Reference, T> FunctorType;
-        
+
             FunctorType::apply(q.getC1(), t);
             FunctorType::apply(q.getC2(), t);
             FunctorType::apply(q.getC3(), t);
@@ -68,7 +69,7 @@ namespace CDPL
             std::swap(q.getC3(), e().getC3());
             std::swap(q.getC4(), e().getC4());
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_QUATERNIONASSIGNMENT_HPP

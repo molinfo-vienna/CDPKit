@@ -39,7 +39,7 @@ class QFontMetricsF;
 class QPaintDevice;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -55,7 +55,7 @@ namespace CDPL
         class CDPL_VIS_API QtFontMetrics : public FontMetrics
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a font metrics object for \e Qt's default font and the given paint device.
              * \param paint_dev A pointer to the \e Qt paint device, or \e null if unspecified.
@@ -69,18 +69,18 @@ namespace CDPL
 
             void setFont(const Font& font);
 
-            double getAscent() const; 
-            double getDescent() const; 
-            double getHeight() const; 
-            double getLeading() const; 
+            double getAscent() const;
+            double getDescent() const;
+            double getHeight() const;
+            double getLeading() const;
 
-            double getWidth(const std::string& str) const; 
-            double getWidth(char ch) const; 
+            double getWidth(const std::string& str) const;
+            double getWidth(char ch) const;
 
-            void getBounds(const std::string& str, Rectangle2D& bounds) const; 
-            void getBounds(char ch, Rectangle2D& bounds) const; 
+            void getBounds(const std::string& str, Rectangle2D& bounds) const;
+            void getBounds(char ch, Rectangle2D& bounds) const;
 
-        private:
+          private:
             QtFontMetrics(const QtFontMetrics&);
 
             QtFontMetrics& operator=(const QtFontMetrics&);
@@ -88,7 +88,7 @@ namespace CDPL
             QPaintDevice*                qPaintDevice;
             std::auto_ptr<QFontMetricsF> qFontMetrics;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_QTFONTMETRICS_HPP

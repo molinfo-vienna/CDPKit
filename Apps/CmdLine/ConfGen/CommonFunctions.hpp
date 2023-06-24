@@ -76,7 +76,7 @@ namespace ConfGen
 
         throw po::validation_error(po::validation_error::invalid_option_value, opt);
     }
-    
+
     std::string getForceFieldTypeString(unsigned int ff_type)
     {
         using namespace CDPL::ConfGen;
@@ -85,7 +85,7 @@ namespace ConfGen
 
             case ForceFieldType::MMFF94:
                 return "MMFF94";
-    
+
             case ForceFieldType::MMFF94_NO_ESTAT:
                 return "MMFF94_NO_ESTAT";
 
@@ -117,8 +117,8 @@ namespace ConfGen
                 break;
         }
 
-        return "UNKNOWN";    
+        return "UNKNOWN";
     }
-}
+} // namespace ConfGen
 
 #endif // CONFGEN_COMMONFUNCTIONS_HPP

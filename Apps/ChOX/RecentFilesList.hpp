@@ -37,26 +37,26 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         static RecentFilesList& instance();
 
         void addEntry(const QString&);
 
         const QStringList& getEntries() const;
 
-    public slots:
+      public slots:
         void clear();
 
-    signals:
+      signals:
         void entriesChanged();
 
-    private:
+      private:
         RecentFilesList();
 
         ~RecentFilesList();
 
         QStringList fileNames;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_RECENTFILESLIST_HPP

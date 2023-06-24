@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -52,7 +52,7 @@ namespace CDPL
              *                       considered static and emitted features modeled as defined vectors, and \c false otherwise.
              */
             HBondDonorFeatureGenerator(bool static_h_bonds);
-                
+
             /**
              * \brief Perceives the hydrogen bond donor features of the molecular graph a\ molgraph and adds 
              *        them to the pharmacophore \a pharm.
@@ -62,11 +62,11 @@ namespace CDPL
              *                       considered static and emitted features modeled as defined vectors, and \c false otherwise.
              */
             HBondDonorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool static_h_bonds);
-        
+
           private:
             void init(bool static_h_bonds);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_HBONDDONORFEATUREGENERATOR_HPP

@@ -34,14 +34,14 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Pharm 
+    namespace Pharm
     {
 
         class Feature;
-    
+
         CDPL_PHARM_API unsigned int getType(const Feature& feature);
 
         CDPL_PHARM_API void setType(Feature& feature, unsigned int type);
@@ -59,13 +59,13 @@ namespace CDPL
 
         CDPL_PHARM_API bool hasGeometry(const Feature& feature);
 
-        
+
         CDPL_PHARM_API const Math::Vector3D& getOrientation(const Feature& feature);
 
         CDPL_PHARM_API void setOrientation(Feature& feature, const Math::Vector3D& orient);
 
         CDPL_PHARM_API void clearOrientation(Feature& feature);
-    
+
         CDPL_PHARM_API bool hasOrientation(const Feature& feature);
 
 
@@ -122,7 +122,7 @@ namespace CDPL
 
         CDPL_PHARM_API bool hasOptionalFlag(const Feature& feature);
 
-    
+
         CDPL_PHARM_API double getHydrophobicity(const Feature& feature);
 
         CDPL_PHARM_API void setHydrophobicity(Feature& feature, double hyd);
@@ -130,8 +130,7 @@ namespace CDPL
         CDPL_PHARM_API void clearHydrophobicity(Feature& feature);
 
         CDPL_PHARM_API bool hasHydrophobicity(const Feature& feature);
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREFUNCTIONS_HPP
- 

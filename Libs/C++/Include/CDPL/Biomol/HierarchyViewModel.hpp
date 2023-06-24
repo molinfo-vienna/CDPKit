@@ -41,7 +41,7 @@
 #include "CDPL/Biomol/HierarchyViewChain.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -58,7 +58,7 @@ namespace CDPL
             friend class HierarchyView;
 
             typedef std::shared_ptr<HierarchyViewChain> ChainPtr;
-            typedef std::vector<ChainPtr> ChainList;
+            typedef std::vector<ChainPtr>               ChainList;
 
           public:
             typedef boost::indirect_iterator<ChainList::const_iterator, const HierarchyViewChain> ConstChainIterator;
@@ -80,7 +80,8 @@ namespace CDPL
             ConstChainIterator end() const;
 
           private:
-            HierarchyViewModel(): initChains(true) {}
+            HierarchyViewModel():
+                initChains(true) {}
 
             void initChainList() const;
 
@@ -90,7 +91,7 @@ namespace CDPL
             mutable IDToChainMap idToChainMap;
             mutable bool         initChains;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_HIERARCHYVIEWMODEL_HPP

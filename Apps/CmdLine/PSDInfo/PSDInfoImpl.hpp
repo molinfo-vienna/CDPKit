@@ -38,32 +38,32 @@ namespace PSDInfo
     class PSDInfoImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         PSDInfoImpl();
 
-    private:
+      private:
         const char* getProgName() const;
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         int process();
 
-        int printStatistics();
+        int  printStatistics();
         void printStatistics(const std::string& db_name);
-    
+
         void checkInputFiles() const;
         void printOptionSummary();
 
-        void printTableRow(std::ostream& os, const std::string& stat_type, 
+        void printTableRow(std::ostream& os, const std::string& stat_type,
                            std::size_t min, double avg, std::size_t max) const;
 
         typedef std::vector<std::string> StringList;
 
-        StringList  inputDatabases;
-        bool        printConfStats;
-        bool        printPharmStats;
-        bool        printFeatureStats;
+        StringList inputDatabases;
+        bool       printConfStats;
+        bool       printPharmStats;
+        bool       printFeatureStats;
     };
-}
+} // namespace PSDInfo
 
 #endif // PSDINFO_PSDINFOIMPL_HPP

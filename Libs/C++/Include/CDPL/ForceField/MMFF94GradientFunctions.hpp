@@ -41,10 +41,10 @@
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
@@ -92,8 +92,7 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94BondStretchingGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, 
-                                                   GradVec& atom1_grad, GradVec& atom2_grad, 
+        ValueType calcMMFF94BondStretchingGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
                                                    const ValueType& force_const, const ValueType& ref_length);
 
 
@@ -153,9 +152,9 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94AngleBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                 GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, 
-                                                 bool linear, const ValueType& force_const, const ValueType& ref_angle);
+        ValueType calcMMFF94AngleBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                 GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, bool linear,
+                                                 const ValueType& force_const, const ValueType& ref_angle);
 
 
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
@@ -164,7 +163,7 @@ namespace CDPL
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94StretchBendGradient(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
-         /**
+        /**
          * \brief Calculates the stretch-bend interaction energy gradient \f$ \nabla EBA_{ijk} \f$ for two bonds \e i-j and \e j-k.
          * 
          * Energy function:<br>
@@ -214,10 +213,10 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94StretchBendGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, 
-                                                const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
-                                                const ValueType& ref_length1, const ValueType& ref_length2);
+        ValueType
+        calcMMFF94StretchBendGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad,
+                                      GradVec& ctr_atom_grad, GradVec& term_atom2_grad, const ValueType& ijk_force_const, const ValueType& kji_force_const,
+                                      const ValueType& ref_angle, const ValueType& ref_length1, const ValueType& ref_length2);
 
 
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
@@ -225,7 +224,7 @@ namespace CDPL
 
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94OutOfPlaneBendingGradient(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
-  
+
         /**
          * \brief Calculates the out-of-plane bending interaction energy gradient \f$ \nabla EOOP_{ijk;l} \f$ for the bond \e j-l and the plane \e i-j-k.
          * 
@@ -264,9 +263,9 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94OutOfPlaneBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                      const CoordsVec& oop_atom_pos, GradVec& term_atom1_grad, GradVec& ctr_atom_grad, 
-                                                      GradVec& term_atom2_grad, GradVec& oop_atom_grad, const ValueType& force_const);
+        ValueType calcMMFF94OutOfPlaneBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                      const CoordsVec& oop_atom_pos, GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad,
+                                                      GradVec& oop_atom_grad, const ValueType& force_const);
 
 
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
@@ -274,7 +273,7 @@ namespace CDPL
 
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94TorsionGradient(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords, GradVector& grad);
- 
+
         /**
          * \brief Calculates the torsion interaction energy gradient \f$ \nabla ET_{ijkl} \f$ for the central bond \e j-k 
          *        and the connected bonds \e i-j and \e k-l.
@@ -315,18 +314,17 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94TorsionGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos, 
-                                            const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad, GradVec& ctr_atom1_grad, 
-                                            GradVec& ctr_atom2_grad, GradVec& term_atom2_grad, const ValueType& tor_param1,
-                                            const ValueType& tor_param2, const ValueType& tor_param3);
+        ValueType calcMMFF94TorsionGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos,
+                                            const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad, GradVec& ctr_atom1_grad, GradVec& ctr_atom2_grad,
+                                            GradVec& term_atom2_grad, const ValueType& tor_param1, const ValueType& tor_param2, const ValueType& tor_param3);
 
-        
+
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94ElectrostaticGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
         template <typename ValueType, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94ElectrostaticGradient(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords, GradVector& grad);
- 
+
         /**
          * \brief Calculates the electrostatic interaction energy gradient \f$ \nabla EQ_{ij} \f$ for the atom pair \e i-j.
          * 
@@ -369,11 +367,11 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94ElectrostaticGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
-                                                  GradVec& atom2_grad, const ValueType& atom1_chg, const ValueType& atom2_chg,
-                                                  const ValueType& scale_fact, const ValueType& de_const, const ValueType& dist_expo);
+        ValueType calcMMFF94ElectrostaticGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
+                                                  const ValueType& atom1_chg, const ValueType& atom2_chg, const ValueType& scale_fact,
+                                                  const ValueType& de_const, const ValueType& dist_expo);
 
-    
+
         template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
         ValueType calcMMFF94VanDerWaalsGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 
@@ -436,11 +434,10 @@ namespace CDPL
          *       corresponding output variable!
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
-                                                GradVec& atom2_grad, const ValueType& e_IJ, const ValueType& r_IJ, 
-                                                const ValueType& r_IJ_7);
-    }
-}
+        ValueType calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
+                                                const ValueType& e_IJ, const ValueType& r_IJ, const ValueType& r_IJ_7);
+    } // namespace ForceField
+} // namespace CDPL
 
 
 // Implementation
@@ -456,25 +453,24 @@ namespace CDPL
         {
 
             template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector, typename FuncType>
-            ValueType calcMMFF94InteractionGradient(Iter& beg, const Iter& end, const CoordsArray& coords, GradVector& grad, 
-                                                    const FuncType& func)
+            ValueType calcMMFF94InteractionGradient(Iter& beg, const Iter& end, const CoordsArray& coords, GradVector& grad, const FuncType& func)
             {
                 ValueType e = ValueType();
 
-                for ( ; beg != end; ++beg)
+                for (; beg != end; ++beg)
                     e += func(*beg, coords, grad);
 
                 return e;
-            }    
-        }
-    }
-}
+            }
+        } // namespace Detail
+    } // namespace ForceField
+} // namespace CDPL
 
 
 template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
-    return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad, 
+    return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
                                                             static_cast<ValueType (*)(const MMFF94BondStretchingInteraction&, const CoordsArray&, GradVector&)>(
                                                                 &calcMMFF94BondStretchingGradient<ValueType, CoordsArray, GradVector>));
 }
@@ -482,24 +478,21 @@ ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(Iter beg, const Ite
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(const MMFF94BondStretchingInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94BondStretchingGradient<ValueType>(coords[iaction.getAtom1Index()], coords[iaction.getAtom2Index()],
-                                                       grad[iaction.getAtom1Index()], grad[iaction.getAtom2Index()],
-                                                       iaction.getForceConstant(), iaction.getReferenceLength());
+    return calcMMFF94BondStretchingGradient<ValueType>(coords[iaction.getAtom1Index()], coords[iaction.getAtom2Index()], grad[iaction.getAtom1Index()],
+                                                       grad[iaction.getAtom2Index()], iaction.getForceConstant(), iaction.getReferenceLength());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
-                                                             GradVec& atom1_grad, GradVec& atom2_grad,
+ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
                                                              const ValueType& force_const, const ValueType& ref_length)
 {
     ValueType dist_atom1_grad[3];
     ValueType dist_atom2_grad[3];
 
-    ValueType dr_ij = calcDistanceDerivatives<ValueType>(atom1_pos, atom2_pos, dist_atom1_grad, dist_atom2_grad) - ref_length;
+    ValueType dr_ij   = calcDistanceDerivatives<ValueType>(atom1_pos, atom2_pos, dist_atom1_grad, dist_atom2_grad) - ref_length;
     ValueType dr_ij_2 = dr_ij * dr_ij;
 
-    ValueType grad_fact = (ValueType(167.92125 * 4) * dr_ij_2 * dr_ij - ValueType(215.89875 * 2) * dr_ij_2 + 
-                           ValueType(143.9325) * dr_ij) * force_const;
+    ValueType grad_fact = (ValueType(167.92125 * 4) * dr_ij_2 * dr_ij - ValueType(215.89875 * 2) * dr_ij_2 + ValueType(143.9325) * dr_ij) * force_const;
 
     Detail::scaleAddVector(dist_atom1_grad, grad_fact, atom1_grad);
     Detail::scaleAddVector(dist_atom2_grad, grad_fact, atom2_grad);
@@ -513,7 +506,7 @@ ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(const CoordsVec& at
 template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
-    return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad, 
+    return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
                                                             static_cast<ValueType (*)(const MMFF94AngleBendingInteraction&, const CoordsArray&, GradVector&)>(
                                                                 &calcMMFF94AngleBendingGradient<ValueType, CoordsArray, GradVector>));
 }
@@ -521,50 +514,49 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(Iter beg, const Iter&
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94AngleBendingGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()], 
+    return calcMMFF94AngleBendingGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()],
                                                      coords[iaction.getTerminalAtom2Index()], grad[iaction.getTerminalAtom1Index()],
-                                                     grad[iaction.getCenterAtomIndex()], grad[iaction.getTerminalAtom2Index()],
-                                                     iaction.isLinearAngle(), iaction.getForceConstant(), iaction.getReferenceAngle());
+                                                     grad[iaction.getCenterAtomIndex()], grad[iaction.getTerminalAtom2Index()], iaction.isLinearAngle(),
+                                                     iaction.getForceConstant(), iaction.getReferenceAngle());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                           GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, 
-                                                           bool linear, const ValueType& force_const, const ValueType& ref_angle)
+ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                           GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, bool linear,
+                                                           const ValueType& force_const, const ValueType& ref_angle)
 {
     ValueType ac_term1_grad[3];
     ValueType ac_ctr_grad[3];
     ValueType ac_term2_grad[3];
 
-    ValueType a_ijk_cos = calcBondAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos,
-                                                                 ac_term1_grad, ac_ctr_grad, ac_term2_grad);
+    ValueType a_ijk_cos = calcBondAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, ac_term1_grad, ac_ctr_grad, ac_term2_grad);
     ValueType grad_fact = ValueType(1);
-    ValueType e_a = ValueType(0);
-    
+    ValueType e_a       = ValueType(0);
+
     if (linear) {
         grad_fact = ValueType(143.9325) * force_const;
-        e_a = ValueType(143.9325) * force_const * (1 + a_ijk_cos);
+        e_a       = ValueType(143.9325) * force_const * (1 + a_ijk_cos);
 
     } else {
         ValueType a_ijk_cos_2 = a_ijk_cos * a_ijk_cos;
-        ValueType a_ijk = std::acos(a_ijk_cos);
-        ValueType div = std::sqrt(1 - a_ijk_cos_2);
+        ValueType a_ijk       = std::acos(a_ijk_cos);
+        ValueType div         = std::sqrt(1 - a_ijk_cos_2);
 
         if (div < ValueType(0.0000001))
             div = ValueType(0.0000001);
 
-        grad_fact = force_const / div * 
-            (a_ijk * (ValueType(86.58992538) * a_ijk - ValueType(143.9313616)) - 
-             ref_angle * (ValueType(3.022558594) * a_ijk - ValueType(0.02637679965) * ref_angle - ValueType(2.512076157)));
+        grad_fact = force_const / div *
+                    (a_ijk * (ValueType(86.58992538) * a_ijk - ValueType(143.9313616)) -
+                     ref_angle * (ValueType(3.022558594) * a_ijk - ValueType(0.02637679965) * ref_angle - ValueType(2.512076157)));
 
-        ValueType da_ijk = a_ijk  * ValueType(180 / M_PI) - ref_angle;
-      
+        ValueType da_ijk = a_ijk * ValueType(180 / M_PI) - ref_angle;
+
         e_a = ValueType(0.043844 * 0.5) * force_const * da_ijk * da_ijk * (1 - ValueType(0.007) * da_ijk);
     }
 
-       Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
-       Detail::scaleAddVector(ac_ctr_grad, grad_fact, ctr_atom_grad);
-       Detail::scaleAddVector(ac_term2_grad, grad_fact, term_atom2_grad);
+    Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
+    Detail::scaleAddVector(ac_ctr_grad, grad_fact, ctr_atom_grad);
+    Detail::scaleAddVector(ac_term2_grad, grad_fact, term_atom2_grad);
 
     return e_a;
 }
@@ -581,17 +573,17 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(Iter beg, const Iter& 
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94StretchBendGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()], 
+    return calcMMFF94StretchBendGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()],
                                                     coords[iaction.getTerminalAtom2Index()], grad[iaction.getTerminalAtom1Index()],
-                                                    grad[iaction.getCenterAtomIndex()], grad[iaction.getTerminalAtom2Index()],
-                                                    iaction.getIJKForceConstant(), iaction.getKJIForceConstant(), iaction.getReferenceAngle(),
-                                                    iaction.getReferenceLength1(), iaction.getReferenceLength2());
+                                                    grad[iaction.getCenterAtomIndex()], grad[iaction.getTerminalAtom2Index()], iaction.getIJKForceConstant(),
+                                                    iaction.getKJIForceConstant(), iaction.getReferenceAngle(), iaction.getReferenceLength1(),
+                                                    iaction.getReferenceLength2());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                          GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad, 
-                                                          const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
+ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                          GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad,
+                                                          const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
                                                           const ValueType& ref_length1, const ValueType& ref_length2)
 {
     ValueType ac_term1_grad[3];
@@ -603,16 +595,16 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_
     ValueType dist_ctr_grad2[3];
     ValueType dist_term2_grad[3];
 
-    ValueType r_ij = calcDistanceDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, dist_term1_grad, dist_ctr_grad1);
-    ValueType r_kj = calcDistanceDerivatives<ValueType>(term_atom2_pos, ctr_atom_pos, dist_term2_grad, dist_ctr_grad2);
-    ValueType a_ijk_cos = calcBondAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, ac_term1_grad, ac_ctr_grad, ac_term2_grad);
+    ValueType r_ij        = calcDistanceDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, dist_term1_grad, dist_ctr_grad1);
+    ValueType r_kj        = calcDistanceDerivatives<ValueType>(term_atom2_pos, ctr_atom_pos, dist_term2_grad, dist_ctr_grad2);
+    ValueType a_ijk_cos   = calcBondAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, ac_term1_grad, ac_ctr_grad, ac_term2_grad);
     ValueType a_ijk_cos_2 = a_ijk_cos * a_ijk_cos;
-    ValueType a_ijk = std::acos(a_ijk_cos);
+    ValueType a_ijk       = std::acos(a_ijk_cos);
 
-    ValueType dr_ij = r_ij - ref_length1;
-    ValueType dr_kj = r_kj - ref_length2;
+    ValueType dr_ij  = r_ij - ref_length1;
+    ValueType dr_kj  = r_kj - ref_length2;
     ValueType da_ijk = a_ijk * ValueType(180 / M_PI) - ref_angle;
-    ValueType div = std::sqrt(1 - a_ijk_cos_2);
+    ValueType div    = std::sqrt(1 - a_ijk_cos_2);
 
     if (div < ValueType(0.0000001))
         div = ValueType(0.0000001);
@@ -621,7 +613,7 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_
 
     ValueType r_ij_grad_fact = ValueType(2.5121) * da_ijk * ijk_force_const;
     ValueType r_kj_grad_fact = ValueType(2.5121) * da_ijk * kji_force_const;
-  
+
     Detail::scaleAddVector(dist_term1_grad, r_ij_grad_fact, term_atom1_grad);
     Detail::scaleAddVector(ac_term1_grad, a_ijk_grad_fact, term_atom1_grad);
 
@@ -631,8 +623,8 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_
     Detail::scaleAddVector(dist_ctr_grad1, r_ij_grad_fact, ctr_atom_grad);
     Detail::scaleAddVector(dist_ctr_grad2, r_kj_grad_fact, ctr_atom_grad);
     Detail::scaleAddVector(ac_ctr_grad, a_ijk_grad_fact, ctr_atom_grad);
-    
-    ValueType e_ab = r_ij_grad_fact * dr_ij + r_kj_grad_fact * dr_kj; 
+
+    ValueType e_ab = r_ij_grad_fact * dr_ij + r_kj_grad_fact * dr_kj;
 
     return e_ab;
 }
@@ -642,22 +634,23 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
     return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
-                                                            static_cast<ValueType (*)(const MMFF94OutOfPlaneBendingInteraction&, const CoordsArray&, GradVector&)>(
+                                                            static_cast<ValueType (*)(const MMFF94OutOfPlaneBendingInteraction&, const CoordsArray&,
+                                                                                      GradVector&)>(
                                                                 &calcMMFF94OutOfPlaneBendingGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94OutOfPlaneBendingGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()], 
+    return calcMMFF94OutOfPlaneBendingGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()],
                                                           coords[iaction.getTerminalAtom2Index()], coords[iaction.getOutOfPlaneAtomIndex()],
-                                                          grad[iaction.getTerminalAtom1Index()], grad[iaction.getCenterAtomIndex()], 
+                                                          grad[iaction.getTerminalAtom1Index()], grad[iaction.getCenterAtomIndex()],
                                                           grad[iaction.getTerminalAtom2Index()], grad[iaction.getOutOfPlaneAtomIndex()],
                                                           iaction.getForceConstant());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                                 const CoordsVec& oop_atom_pos, GradVec& term_atom1_grad, GradVec& ctr_atom_grad,
                                                                 GradVec& term_atom2_grad, GradVec& oop_atom_grad, const ValueType& force_const)
 {
@@ -666,16 +659,16 @@ ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(const CoordsVec&
     ValueType ac_ctr_grad[3];
     ValueType ac_oop_grad[3];
 
-    ValueType chi_ijkl_cos = calcOutOfPlaneAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, 
-                                                                          ac_term1_grad, ac_ctr_grad, ac_term2_grad, ac_oop_grad);
-    ValueType chi_ijkl = ValueType(M_PI * 0.5) - std::acos(chi_ijkl_cos);
-    ValueType div = std::sqrt(1 - chi_ijkl_cos * chi_ijkl_cos);
+    ValueType chi_ijkl_cos = calcOutOfPlaneAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, ac_term1_grad,
+                                                                          ac_ctr_grad, ac_term2_grad, ac_oop_grad);
+    ValueType chi_ijkl     = ValueType(M_PI * 0.5) - std::acos(chi_ijkl_cos);
+    ValueType div          = std::sqrt(1 - chi_ijkl_cos * chi_ijkl_cos);
 
     if (div < ValueType(0.0000001))
         div = ValueType(0.0000001);
 
     ValueType grad_fact = ValueType(0.043844 * 180 * 180) / div * ValueType(1 / (M_PI * M_PI)) * force_const * chi_ijkl;
-    
+
     Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
     Detail::scaleAddVector(ac_ctr_grad, grad_fact, ctr_atom_grad);
     Detail::scaleAddVector(ac_term2_grad, grad_fact, term_atom2_grad);
@@ -700,49 +693,47 @@ ValueType CDPL::ForceField::calcMMFF94TorsionGradient(Iter beg, const Iter& end,
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94TorsionGradient(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94TorsionGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtom1Index()], 
+    return calcMMFF94TorsionGradient<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtom1Index()],
                                                 coords[iaction.getCenterAtom2Index()], coords[iaction.getTerminalAtom2Index()],
-                                                grad[iaction.getTerminalAtom1Index()], grad[iaction.getCenterAtom1Index()], 
-                                                grad[iaction.getCenterAtom2Index()], grad[iaction.getTerminalAtom2Index()],
-                                                iaction.getTorsionParameter1(), iaction.getTorsionParameter2(), iaction.getTorsionParameter3());
+                                                grad[iaction.getTerminalAtom1Index()], grad[iaction.getCenterAtom1Index()], grad[iaction.getCenterAtom2Index()],
+                                                grad[iaction.getTerminalAtom2Index()], iaction.getTorsionParameter1(), iaction.getTorsionParameter2(),
+                                                iaction.getTorsionParameter3());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94TorsionGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos, 
-                                                      const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad, GradVec& ctr_atom1_grad,
-                                                      GradVec& ctr_atom2_grad, GradVec& term_atom2_grad, const ValueType& tor_param1,
-                                                      const ValueType& tor_param2, const ValueType& tor_param3)
+ValueType
+CDPL::ForceField::calcMMFF94TorsionGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos,
+                                            const CoordsVec& term_atom2_pos, GradVec& term_atom1_grad, GradVec& ctr_atom1_grad, GradVec& ctr_atom2_grad,
+                                            GradVec& term_atom2_grad, const ValueType& tor_param1, const ValueType& tor_param2, const ValueType& tor_param3)
 {
     ValueType ac_term1_grad[3];
     ValueType ac_ctr1_grad[3];
     ValueType ac_ctr2_grad[3];
     ValueType ac_term2_grad[3];
 
-    ValueType phi_cos = calcDihedralAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom1_pos, ctr_atom2_pos, term_atom2_pos,
-                                                                   ac_term1_grad, ac_ctr1_grad, ac_ctr2_grad, ac_term2_grad); 
-    ValueType phi = std::acos(phi_cos);
+    ValueType phi_cos   = calcDihedralAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom1_pos, ctr_atom2_pos, term_atom2_pos, ac_term1_grad, ac_ctr1_grad,
+                                                                   ac_ctr2_grad, ac_term2_grad);
+    ValueType phi       = std::acos(phi_cos);
     ValueType phi_cos_2 = phi_cos * phi_cos;
-    ValueType div = std::sqrt(1 - phi_cos_2);
+    ValueType div       = std::sqrt(1 - phi_cos_2);
 
     if (div < ValueType(0.0000001))
         div = ValueType(0.0000001);
 
-    ValueType grad_fact = ValueType(-1) / div *
-        (tor_param2 * std::sin(2 * phi)  - 
-         ValueType(0.5) * tor_param1 * std::sin(phi) - 
-         ValueType(1.5) * tor_param3 * std::sin(3 * phi));
-    
-       Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
+    ValueType grad_fact =
+        ValueType(-1) / div * (tor_param2 * std::sin(2 * phi) - ValueType(0.5) * tor_param1 * std::sin(phi) - ValueType(1.5) * tor_param3 * std::sin(3 * phi));
+
+    Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
     Detail::scaleAddVector(ac_ctr1_grad, grad_fact, ctr_atom1_grad);
     Detail::scaleAddVector(ac_ctr2_grad, grad_fact, ctr_atom2_grad);
     Detail::scaleAddVector(ac_term2_grad, grad_fact, term_atom2_grad);
-    
+
     ValueType e_t = ValueType(0.5) * (tor_param1 * (1 + phi_cos) + tor_param2 * (1 - std::cos(2 * phi)) + tor_param3 * (1 + std::cos(3 * phi)));
 
     return e_t;
 }
 
-        
+
 template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
@@ -754,16 +745,15 @@ ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(Iter beg, const Iter
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94ElectrostaticGradient<ValueType>(coords[iaction.getAtom1Index()], coords[iaction.getAtom2Index()],
-                                                      grad[iaction.getAtom1Index()], grad[iaction.getAtom2Index()],
-                                                      iaction.getAtom1Charge(), iaction.getAtom2Charge(), iaction.getScalingFactor(),
-                                                      iaction.getDielectricConstant(), iaction.getDistanceExponent());
+    return calcMMFF94ElectrostaticGradient<ValueType>(coords[iaction.getAtom1Index()], coords[iaction.getAtom2Index()], grad[iaction.getAtom1Index()],
+                                                      grad[iaction.getAtom2Index()], iaction.getAtom1Charge(), iaction.getAtom2Charge(),
+                                                      iaction.getScalingFactor(), iaction.getDielectricConstant(), iaction.getDistanceExponent());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
-                                                            GradVec& atom2_grad, const ValueType& atom1_chg, const ValueType& atom2_chg,
-                                                            const ValueType& scale_fact, const ValueType& de_const, const ValueType& dist_expo)
+ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
+                                                            const ValueType& atom1_chg, const ValueType& atom2_chg, const ValueType& scale_fact,
+                                                            const ValueType& de_const, const ValueType& dist_expo)
 {
     ValueType dist_atom1_grad[3];
     ValueType dist_atom2_grad[3];
@@ -775,20 +765,20 @@ ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(const CoordsVec& ato
     ValueType tmp3 = scale_fact * atom1_chg * atom2_chg / (de_const * tmp2);
 
     ValueType grad_fact = ValueType(-332.0716) * dist_expo * tmp3 / tmp1;
-  
-      Detail::scaleAddVector(dist_atom1_grad, grad_fact, atom1_grad);
+
+    Detail::scaleAddVector(dist_atom1_grad, grad_fact, atom1_grad);
     Detail::scaleAddVector(dist_atom2_grad, grad_fact, atom2_grad);
-      
+
     double e_q = ValueType(332.0716) * tmp3;
 
     return e_q;
 }
 
-    
+
 template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
-    return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad, 
+    return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
                                                             static_cast<ValueType (*)(const MMFF94VanDerWaalsInteraction&, const CoordsArray&, GradVector&)>(
                                                                 &calcMMFF94VanDerWaalsGradient<ValueType, CoordsArray, GradVector>));
 }
@@ -796,36 +786,35 @@ ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(Iter beg, const Iter& 
 template <typename ValueType, typename CoordsArray, typename GradVector>
 ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords, GradVector& grad)
 {
-    return calcMMFF94VanDerWaalsGradient<ValueType>(coords[iaction.getAtom1Index()], coords[iaction.getAtom2Index()],
-                                                    grad[iaction.getAtom1Index()], grad[iaction.getAtom2Index()],
-                                                    iaction.getEIJ(), iaction.getRIJ(), iaction.getRIJPow7());
+    return calcMMFF94VanDerWaalsGradient<ValueType>(coords[iaction.getAtom1Index()], coords[iaction.getAtom2Index()], grad[iaction.getAtom1Index()],
+                                                    grad[iaction.getAtom2Index()], iaction.getEIJ(), iaction.getRIJ(), iaction.getRIJPow7());
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
-                                                          GradVec& atom2_grad, const ValueType& e_IJ, const ValueType& r_IJ, const ValueType& r_IJ_7)
+ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, GradVec& atom2_grad,
+                                                          const ValueType& e_IJ, const ValueType& r_IJ, const ValueType& r_IJ_7)
 {
     ValueType dist_atom1_grad[3];
     ValueType dist_atom2_grad[3];
 
-    ValueType r_ij = calcDistanceDerivatives<ValueType>(atom1_pos, atom2_pos, dist_atom1_grad, dist_atom2_grad);
+    ValueType r_ij   = calcDistanceDerivatives<ValueType>(atom1_pos, atom2_pos, dist_atom1_grad, dist_atom2_grad);
     ValueType r_ij_2 = r_ij * r_ij;
     ValueType r_ij_6 = r_ij_2 * r_ij_2 * r_ij_2;
     ValueType r_ij_7 = r_ij_6 * r_ij;
-    
-    ValueType tmp1 = r_ij + ValueType(0.07) * r_IJ;
+
+    ValueType tmp1   = r_ij + ValueType(0.07) * r_IJ;
     ValueType tmp1_2 = tmp1 * tmp1;
     ValueType tmp1_4 = tmp1_2 * tmp1_2;
 
-    ValueType tmp2 =  r_ij_7 + ValueType(0.12) * r_IJ_7;
+    ValueType tmp2 = r_ij_7 + ValueType(0.12) * r_IJ_7;
 
-    ValueType tmp3 = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
+    ValueType tmp3   = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
     ValueType tmp3_2 = tmp3 * tmp3;
     ValueType tmp3_7 = tmp3_2 * tmp3_2 * tmp3_2 * tmp3;
 
     ValueType grad_fact = -r_IJ_7 * e_IJ / (tmp1_4 * tmp1_4 * tmp2 * tmp2) *
-        (ValueType(-22.48094067) * r_ij_7 * r_ij_7 + ValueType(19.78322779) * r_ij_7 * r_IJ_7 + 
-         ValueType(0.8812528743) * r_ij_6 * r_IJ_7 * r_IJ + ValueType(1.186993667) * r_IJ_7 * r_IJ_7);
+                          (ValueType(-22.48094067) * r_ij_7 * r_ij_7 + ValueType(19.78322779) * r_ij_7 * r_IJ_7 +
+                           ValueType(0.8812528743) * r_ij_6 * r_IJ_7 * r_IJ + ValueType(1.186993667) * r_IJ_7 * r_IJ_7);
 
     Detail::scaleAddVector(dist_atom1_grad, grad_fact, atom1_grad);
     Detail::scaleAddVector(dist_atom2_grad, grad_fact, atom2_grad);

@@ -36,7 +36,7 @@
 #include "CDPL/Util/IndirectArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -52,11 +52,12 @@ namespace CDPL
             typedef std::shared_ptr<ElectronSystemList> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "ElectronSystemList";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ELECTRONSYSTEMLIST_HPP

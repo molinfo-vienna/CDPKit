@@ -34,7 +34,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -53,12 +53,13 @@ namespace CDPL
         class MOL2DataWriter
         {
 
-        public:
-            MOL2DataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            MOL2DataWriter(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph);
-        
-        private:
+
+          private:
             void init(std::ostream& os);
 
             void getAtomCoordsDim(const MolecularGraph& molgraph);
@@ -70,8 +71,8 @@ namespace CDPL
             void writeBondSection(std::ostream& os, const MolecularGraph& molgraph) const;
             void writeSubstructSection(std::ostream& os) const;
 
-            const std::string& getMoleculeTypeString(const MolecularGraph& molgraph) const; 
-            const std::string& getChargeTypeString(const MolecularGraph& molgraph); 
+            const std::string& getMoleculeTypeString(const MolecularGraph& molgraph) const;
+            const std::string& getChargeTypeString(const MolecularGraph& molgraph);
 
             std::string getAtomName(const Atom& atom);
 
@@ -90,7 +91,7 @@ namespace CDPL
 
             typedef std::unordered_map<std::string, std::size_t> StringToSizeMap;
             typedef std::unordered_map<const Atom*, std::size_t> AtomToIDMap;
-            typedef std::vector<SubstructData> SubstructDataArray;
+            typedef std::vector<SubstructData>                   SubstructDataArray;
 
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
@@ -109,7 +110,7 @@ namespace CDPL
             AtomToIDMap             atomsToSubstructIDs;
             SubstructDataArray      substructData;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOL2DATAWRITER_HPP

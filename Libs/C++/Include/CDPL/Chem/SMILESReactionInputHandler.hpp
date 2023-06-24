@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
          */
         typedef Util::DefaultDataInputHandler<SMILESReactionReader, DataFormat::SMILES> SMILESReactionInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMILESREACTIONINPUTHANDLER_HPP

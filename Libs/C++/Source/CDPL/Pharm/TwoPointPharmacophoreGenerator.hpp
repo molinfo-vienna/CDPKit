@@ -30,7 +30,7 @@
 #include <CDPL/Pharm/NPointPharmacophoreGeneratorBase.hpp>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -40,29 +40,29 @@ namespace CDPL
         class TwoPointPharmacophoreGenerator : private NPointPharmacophoreGeneratorBase
         {
 
-        public:
-            
-            template <typename Iter, typename OutIter> 
+          public:
+            template <typename Iter, typename OutIter>
             void generate(const Iter& beg, const Iter& end, OutIter out);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename PharmType>
-template <typename Iter, typename OutIter> 
+template <typename Iter, typename OutIter>
 void CDPL::Pharm::TwoPointPharmacophoreGenerator<PharmType>::generate(const Iter& beg, const Iter& end, OutIter out)
 {
     const FeatureAndTypeArray& canon_ftrs = getCanonOrderedFeatures(beg, end);
-    std::size_t num_ftrs = canon_ftrs.size();
+    std::size_t                num_ftrs   = canon_ftrs.size();
 
     for (std::size_t i = 0; i < num_ftrs; i++) {
         const Feature& ftr1 = *canon_ftrs[i].first;
 
         for (std::size_t j = i + 1; j < num_ftrs; j++) {
-            *out = PharmType(ftr1, *canon_ftrs[j].first); ++out;
+            *out = PharmType(ftr1, *canon_ftrs[j].first);
+            ++out;
         }
     }
 }

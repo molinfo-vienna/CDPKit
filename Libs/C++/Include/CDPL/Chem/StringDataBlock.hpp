@@ -35,7 +35,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,7 +48,7 @@ namespace CDPL
         class CDPL_CHEM_API StringDataBlockEntry
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %StringDataBlockEntry object with an empty data header and content.
              */
@@ -59,20 +59,21 @@ namespace CDPL
              * \param header The data header.
              * \param data The data content.
              */
-            StringDataBlockEntry(const std::string& header, const std::string& data): header(header), data(data) {}
+            StringDataBlockEntry(const std::string& header, const std::string& data):
+                header(header), data(data) {}
 
             /**
              * \brief Returns the data header.
              * \returns The data header.
              */
             const std::string& getHeader() const;
-    
+
             /**
              * \brief Sets the data header.
              * \param header The new data header.
              */
             void setHeader(const std::string& header);
-    
+
             /**
              * \brief Returns the stored data content.
              * \returns The stored data content.
@@ -84,7 +85,7 @@ namespace CDPL
              * \param data The new data content.
              */
             void setData(const std::string& data);
-        
+
             /**
              * \brief Equality comparison operator.
              * \param entry The other \c %StringDataBlockEntry object to be compared with.
@@ -103,7 +104,7 @@ namespace CDPL
              */
             bool operator!=(const StringDataBlockEntry& entry) const;
 
-        private:
+          private:
             std::string header;
             std::string data;
         };
@@ -118,16 +119,18 @@ namespace CDPL
           public:
             typedef std::shared_ptr<StringDataBlock> SharedPointer;
 
-            void addEntry(const std::string& header, const std::string& data) {
+            void addEntry(const std::string& header, const std::string& data)
+            {
                 addElement(StringDataBlockEntry(header, data));
             }
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "StringDataBlock";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_STRINGDATABLOCK_HPP

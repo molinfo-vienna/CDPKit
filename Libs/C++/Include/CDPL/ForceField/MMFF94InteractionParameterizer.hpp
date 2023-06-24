@@ -69,7 +69,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -77,9 +77,9 @@ namespace CDPL
 
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class MMFF94InteractionData;
@@ -94,19 +94,19 @@ namespace CDPL
 
             MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer);
 
-            void setBondStretchingFilterFunction(const InteractionFilterFunction2& func); 
+            void setBondStretchingFilterFunction(const InteractionFilterFunction2& func);
 
-            void setAngleBendingFilterFunction(const InteractionFilterFunction3& func); 
+            void setAngleBendingFilterFunction(const InteractionFilterFunction3& func);
 
-            void setStretchBendFilterFunction(const InteractionFilterFunction3& func); 
+            void setStretchBendFilterFunction(const InteractionFilterFunction3& func);
 
-            void setOutOfPlaneBendingFilterFunction(const InteractionFilterFunction4& func); 
+            void setOutOfPlaneBendingFilterFunction(const InteractionFilterFunction4& func);
 
-            void setTorsionFilterFunction(const InteractionFilterFunction4& func); 
+            void setTorsionFilterFunction(const InteractionFilterFunction4& func);
 
-            void setElectrostaticFilterFunction(const InteractionFilterFunction2& func); 
+            void setElectrostaticFilterFunction(const InteractionFilterFunction2& func);
 
-            void setVanDerWaalsFilterFunction(const InteractionFilterFunction2& func); 
+            void setVanDerWaalsFilterFunction(const InteractionFilterFunction2& func);
 
             void clearFilterFunctions();
 
@@ -168,7 +168,7 @@ namespace CDPL
 
             const Chem::FragmentList::SharedPointer& getAromaticRings(const Chem::MolecularGraph& molgraph) const;
 
-            std::size_t getTopologicalDistance(const Chem::Atom& atom1, const Chem::Atom& atom2, 
+            std::size_t getTopologicalDistance(const Chem::Atom& atom1, const Chem::Atom& atom2,
                                                const Chem::MolecularGraph& molgraph) const;
 
             void setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types, bool strict);
@@ -193,13 +193,13 @@ namespace CDPL
             Chem::FragmentList::SharedPointer               usedAromRings;
             Math::ULMatrix::SharedPointer                   topDistMatrix;
             Math::ULMatrix::SharedPointer                   usedTopDistMatrix;
-            Util::UIArray                                   numAtomTypes;   
-            Util::SArray                                    symAtomTypes;   
-            Util::UIArray                                   bondTypeIndices;   
+            Util::UIArray                                   numAtomTypes;
+            Util::SArray                                    symAtomTypes;
+            Util::UIArray                                   bondTypeIndices;
             Util::DArray                                    atomCharges;
             const Chem::MolecularGraph*                     molGraph;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94INTERACTIONPARAMETERIZER_HPP

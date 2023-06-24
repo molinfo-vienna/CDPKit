@@ -41,7 +41,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -49,18 +49,19 @@ namespace CDPL
 
         class Molecule;
         class ChEMBLStandardizer;
-        
+
         /**
          * \brief Sets the protation state of molecules according to desired objectives.
          */
-        class CDPL_CHEM_API ProtonationStateStandardizer 
+        class CDPL_CHEM_API ProtonationStateStandardizer
         {
 
           public:
             typedef std::shared_ptr<ProtonationStateStandardizer> SharedPointer;
 
-            enum Flavor {
-            
+            enum Flavor
+            {
+
                 MIN_CHARGED_ATOM_COUNT,
                 PHYSIOLOGICAL_CONDITION_STATE,
                 MAX_CHARGE_COMPENSATION
@@ -69,16 +70,16 @@ namespace CDPL
             ProtonationStateStandardizer();
 
             ProtonationStateStandardizer(const ProtonationStateStandardizer& standardizer);
-        
+
             bool standardize(Molecule& mol, Flavor flavor);
 
             bool standardize(const Molecule& mol, Molecule& std_mol, Flavor flavor);
 
             ProtonationStateStandardizer& operator=(const ProtonationStateStandardizer& standardizer);
-        
+
           private:
             friend class ChEMBLStandardizer;
-            
+
             typedef std::vector<Chem::Atom*> AtomList;
 
             void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
@@ -86,7 +87,7 @@ namespace CDPL
             bool minChargedAtomCount(Molecule& mol);
             bool protForPhysCond(Molecule& mol);
             bool maxChargeComp(Molecule& mol);
-            
+
             const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
 
             std::size_t adaptHydrogenCount(Atom& atom, Molecule& mol, long h_delta) const;
@@ -102,13 +103,13 @@ namespace CDPL
             bool incrementCharge(Atom& atom, bool checked) const;
 
             bool isRemovableHydrogen(const Atom& atom) const;
-            
+
             bool cmpCanonicalNumber(const Atom* atom1, const Atom* atom2) const;
 
             bool removeConnectedHydrogens(const AtomList& atoms, Molecule& mol) const;
-            
+
             typedef std::unordered_set<const Atom*> AtomSet;
-            
+
             SubstructureSearch           substructSearch;
             CanonicalNumberingCalculator canonNumberingCalc;
             AtomList                     atomList;
@@ -120,7 +121,7 @@ namespace CDPL
             Util::BitSet                 atomMask;
             AtomSet                      atomSet;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_PROTONATIONSTATESTANDARDIZER_HPP

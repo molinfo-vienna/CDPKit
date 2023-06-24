@@ -32,12 +32,12 @@
 #include "CDPL/Shape/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         class AlignmentResult;
 
         CDPL_SHAPE_API double calcTotalOverlapTanimotoScore(const AlignmentResult& res);
@@ -74,7 +74,7 @@ namespace CDPL
         CDPL_SHAPE_API double calcAlignedColorTverskyScore(const AlignmentResult& res, double beta = 0.95);
 
         CDPL_SHAPE_API double calcAlignedTverskyComboScore(const AlignmentResult& res, double beta = 0.95);
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_SCORINGFUNCTIONS_HPP

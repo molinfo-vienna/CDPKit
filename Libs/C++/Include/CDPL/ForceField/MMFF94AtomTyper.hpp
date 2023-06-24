@@ -45,7 +45,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,7 +54,7 @@ namespace CDPL
         class Fragment;
     }
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94AtomTyper
@@ -78,7 +78,7 @@ namespace CDPL
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
-        
+
             void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict);
 
           private:
@@ -99,10 +99,10 @@ namespace CDPL
             bool isN5Anion(const Chem::Fragment& ring) const;
             bool isImidazoliumCation(const Chem::Fragment& ring) const;
 
-            bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, 
+            bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no,
                                          std::size_t r_size, std::size_t het_dist, bool im_cat, bool n5_anion,
                                          const AromTypeDefEntry& entry) const;
-    
+
             typedef std::vector<const Chem::Fragment*> RingList;
 
             MMFF94SymbolicAtomTypePatternTable::SharedPointer    symTypePatternTable;
@@ -116,7 +116,7 @@ namespace CDPL
             RingList                                             aromRings;
             Chem::PatternAtomTyper                               atomTyper;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94ATOMTYPER_HPP

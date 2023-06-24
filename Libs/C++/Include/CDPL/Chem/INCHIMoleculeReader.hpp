@@ -37,11 +37,11 @@
 #include "CDPL/Util/StreamDataReader.hpp"
 
 
-typedef struct tagInchiAtom inchi_Atom;
+typedef struct tagInchiAtom     inchi_Atom;
 typedef struct tagINCHIStereo0D inchi_Stereo0D;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -150,7 +150,7 @@ namespace CDPL
         class CDPL_CHEM_API INCHIMoleculeReader : public Util::StreamDataReader<Molecule, INCHIMoleculeReader>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %INCHIMoleculeReader instance that will read the molecule data from the input
              *        stream \a is.
@@ -179,7 +179,7 @@ namespace CDPL
              */
             const std::string& getLogOutput() const;
 
-        private:
+          private:
             friend class Util::StreamDataReader<Molecule, INCHIMoleculeReader>;
 
             INCHIMoleculeReader(const INCHIMoleculeReader&);
@@ -212,15 +212,15 @@ namespace CDPL
 
             typedef std::vector<char> StringData;
 
-            std::string  inputToken;
-            StringData   inputData;
-            StringData   inchiOptions;
-            bool         strictErrorChecking;
-            int          returnCode;
-            std::string  message;
-            std::string  logOutput;
+            std::string inputToken;
+            StringData  inputData;
+            StringData  inchiOptions;
+            bool        strictErrorChecking;
+            int         returnCode;
+            std::string message;
+            std::string logOutput;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_INCHIMOLECULEREADER_HPP

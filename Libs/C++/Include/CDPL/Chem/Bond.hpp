@@ -34,10 +34,10 @@
 #include "CDPL/Base/PropertyContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class Molecule;
@@ -45,10 +45,11 @@ namespace CDPL
         /**
          * \brief Bond.
          */
-        class CDPL_CHEM_API Bond : public AtomContainer, public Base::PropertyContainer
+        class CDPL_CHEM_API Bond : public AtomContainer,
+                                   public Base::PropertyContainer
         {
 
-        public:
+          public:
             /**            
              * \brief A mutable random access iterator used to iterate over the connected atoms.
              */
@@ -171,7 +172,7 @@ namespace CDPL
              * \throw Base::ItemNotFound if the bond is not incident to the specified atom.
              */
             virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
-        
+
             /**
              * \brief Assignment operator that replaces the current set of properties with the properties of \a bond;
              * \param bond The bond whose properties get copied.
@@ -179,13 +180,13 @@ namespace CDPL
              */
             Bond& operator=(const Bond& bond);
 
-        protected:
+          protected:
             /**
              * \brief Virtual destructor.
              */
             virtual ~Bond() {}
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BOND_HPP

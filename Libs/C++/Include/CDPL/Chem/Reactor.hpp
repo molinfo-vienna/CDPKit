@@ -40,7 +40,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -52,7 +52,7 @@ namespace CDPL
         class CDPL_CHEM_API Reactor
         {
 
-        public:
+          public:
             /**
              * \brief Stores information about perceived reaction-sites.
              */
@@ -72,7 +72,7 @@ namespace CDPL
              * \brief Constructs and initializes a \c %Reactor instance.
              */
             Reactor();
-        
+
             /**
              * \brief Constructs and initializes a \c %Reactor instance for the specified reaction pattern.
              * \param rxn_pattern The reaction pattern describing the transformation of reactants to products. 
@@ -195,8 +195,8 @@ namespace CDPL
              * \see setReactionPattern(), findReactionSites()
              */
             void performReaction(const ReactionSite& rxn_site);
-    
-        private:
+
+          private:
             Reactor(const Reactor&);
 
             Reactor& operator=(const Reactor&);
@@ -236,14 +236,14 @@ namespace CDPL
                 bool operator()(const IDPair&, const IDPair&) const;
             };
 
-            typedef std::pair<const Atom*, const Atom*> AtomPair;
-            typedef std::pair<const Bond*, const Bond*> BondPair;
-            typedef std::map<std::size_t, const Atom*> IDAtomMap;
+            typedef std::pair<const Atom*, const Atom*>              AtomPair;
+            typedef std::pair<const Bond*, const Bond*>              BondPair;
+            typedef std::map<std::size_t, const Atom*>               IDAtomMap;
             typedef std::map<IDPair, const Bond*, IDPairLessCmpFunc> IDPairBondMap;
-            typedef std::map<const Atom*, Atom*> AtomMap;
-            typedef std::map<const Bond*, Bond*> BondMap;
-            typedef std::vector<AtomPair> AtomPairList;
-            typedef std::vector<BondPair> BondPairList;
+            typedef std::map<const Atom*, Atom*>                     AtomMap;
+            typedef std::map<const Bond*, Bond*>                     BondMap;
+            typedef std::vector<AtomPair>                            AtomPairList;
+            typedef std::vector<BondPair>                            BondPairList;
 
             const Reaction*            rxnPattern;
             Reaction*                  rxnTarget;
@@ -258,7 +258,7 @@ namespace CDPL
             BondMap                    tgtBondMapping;
             Util::BitSet               mappedAtomMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTOR_HPP

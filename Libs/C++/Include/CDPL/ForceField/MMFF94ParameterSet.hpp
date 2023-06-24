@@ -47,8 +47,8 @@ namespace CDPL
             const unsigned int STATIC_XOOP      = 2;
             const unsigned int STATIC_RTOR      = 3;
             const unsigned int STATIC_RTOR_XOOP = 4;
-        }
-    }
-}
+        } // namespace MMFF94ParameterSet
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94PARAMETERSET_HPP

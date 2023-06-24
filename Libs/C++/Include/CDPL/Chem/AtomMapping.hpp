@@ -33,7 +33,7 @@
 #include "CDPL/Util/MultiMap.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -57,11 +57,12 @@ namespace CDPL
             typedef std::shared_ptr<AtomMapping> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "AtomMapping";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMMAPPING_HPP

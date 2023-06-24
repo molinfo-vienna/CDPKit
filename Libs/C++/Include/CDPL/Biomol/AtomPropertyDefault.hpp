@@ -34,7 +34,7 @@
 #include "CDPL/Biomol/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -47,13 +47,13 @@ namespace CDPL
         {
 
             extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
-            extern CDPL_BIOMOL_API const double B_FACTOR;
-            extern CDPL_BIOMOL_API const double OCCUPANCY;
-            extern CDPL_BIOMOL_API const bool RESIDUE_LEAVING_ATOM_FLAG;
-            extern CDPL_BIOMOL_API const bool RESIDUE_LINKING_ATOM_FLAG;
-            extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;
-        }
-    }
-}
+            extern CDPL_BIOMOL_API const double      B_FACTOR;
+            extern CDPL_BIOMOL_API const double      OCCUPANCY;
+            extern CDPL_BIOMOL_API const bool        RESIDUE_LEAVING_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const bool        RESIDUE_LINKING_ATOM_FLAG;
+            extern CDPL_BIOMOL_API const char        RESIDUE_INSERTION_CODE;
+        } // namespace AtomPropertyDefault
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_ATOMPROPERTYDEFAULT_HPP

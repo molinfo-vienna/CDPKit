@@ -35,7 +35,7 @@
 #include "CDPL/Base/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -47,7 +47,7 @@ namespace CDPL
         class CDPL_BASE_API Exception : public std::exception
         {
 
-        public:
+          public:
             /**
              * \brief Constructs an \c %Exception object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -65,7 +65,7 @@ namespace CDPL
              */
             const char* what() const throw();
 
-        private:
+          private:
             std::string message;
         };
 
@@ -75,7 +75,7 @@ namespace CDPL
         class CDPL_BASE_API ValueError : public Exception
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %ValueError object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -94,7 +94,7 @@ namespace CDPL
         class CDPL_BASE_API NullPointerException : public ValueError
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %NullPointerException object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -113,7 +113,7 @@ namespace CDPL
         class CDPL_BASE_API RangeError : public ValueError
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %RangeError object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -125,14 +125,14 @@ namespace CDPL
              */
             virtual ~RangeError() throw();
         };
-    
+
         /**
          * \brief Thrown to indicate that the size of a (multidimensional) array is not correct.
          */
         class CDPL_BASE_API SizeError : public ValueError
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %SizeError object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -144,14 +144,14 @@ namespace CDPL
              */
             virtual ~SizeError() throw();
         };
-    
+
         /**
          * \brief Thrown to indicate that an index is out of range.
          */
         class CDPL_BASE_API IndexError : public RangeError
         {
 
-        public:
+          public:
             /**
              * \brief Constructs an \c %IndexError object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -170,7 +170,7 @@ namespace CDPL
         class CDPL_BASE_API ItemNotFound : public Exception
         {
 
-        public:
+          public:
             /**
              * \brief Constructs an \c %ItemNotFound object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -190,7 +190,7 @@ namespace CDPL
         class CDPL_BASE_API BadCast : public Exception
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %BadCast object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -210,7 +210,7 @@ namespace CDPL
         class CDPL_BASE_API OperationFailed : public Exception
         {
 
-        public:
+          public:
             /**
              * \brief Constructs an \c %OperationFailed object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -222,14 +222,14 @@ namespace CDPL
              */
             virtual ~OperationFailed() throw();
         };
-    
+
         /**
          * \brief Thrown to indicate that some requested calculation has failed.
          */
         class CDPL_BASE_API CalculationFailed : public OperationFailed
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %CalaculationFailed object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -249,7 +249,7 @@ namespace CDPL
         class CDPL_BASE_API IOError : public OperationFailed
         {
 
-        public:
+          public:
             /**
              * \brief Constructs an \c %IOError object with the error message set to \a msg.
              * \param msg A message describing the cause of the exception and/or the location where the error occurred.
@@ -261,7 +261,7 @@ namespace CDPL
              */
             virtual ~IOError() throw();
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 #endif // CDPL_BASE_EXCEPTIONS_HPP

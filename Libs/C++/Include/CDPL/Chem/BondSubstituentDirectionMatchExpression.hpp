@@ -35,7 +35,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -53,7 +53,7 @@ namespace CDPL
         class CDPL_CHEM_API BondSubstituentDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondSubstituentDirectionMatchExpression instances.
              */
@@ -84,7 +84,7 @@ namespace CDPL
              *       is incomplete, the expression evaluates to \c true.
              * \see Chem::BondDirectionMatchExpression, Chem::BondDirection
              */
-            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
+            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph,
                             const Bond& target_bond, const MolecularGraph& target_molgraph,
                             const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
@@ -94,7 +94,7 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDSUBSTITUENTDIRECTIONMATCHEXPRESSION_HPP

@@ -32,12 +32,12 @@
 #include "CDPL/ConfGen/TorsionRule.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-        
+
         class MolecularGraph;
     }
 
@@ -50,10 +50,10 @@ namespace CDPL
         class TorsionLibraryDataWriter
         {
 
-        public:
+          public:
             bool write(std::ostream& os, const TorsionLibrary& lib);
 
-        private:
+          private:
             void writeCategory(std::ostream& os, std::size_t ident, const TorsionCategory& cat, bool contents_only) const;
             void writeRule(std::ostream& os, std::size_t ident, const TorsionRule& rule) const;
             void writeAngleList(std::ostream& os, std::size_t ident, const TorsionRule& rule) const;
@@ -69,7 +69,7 @@ namespace CDPL
 
             std::string getSMARTSPattern(const Chem::MolecularGraph& molgraph) const;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONLIBRARYDATAWRITER_HPP

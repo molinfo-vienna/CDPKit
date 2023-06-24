@@ -53,6 +53,6 @@ namespace CDPLPythonGrid
     void exportCDFRegularGridWriter();
     void exportCDFRegularGridSetReader();
     void exportCDFRegularGridSetWriter();
-}
+} // namespace CDPLPythonGrid
 
 #endif // CDPL_PYTHON_GRID_CLASSEXPORTS_HPP

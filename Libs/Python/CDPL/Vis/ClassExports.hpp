@@ -90,6 +90,6 @@ namespace CDPLPythonVis
 
 #endif // HAVE_CAIRO_SVG_SUPPORT
 
-}
+} // namespace CDPLPythonVis
 
 #endif // CDPL_PYTHON_VIS_CLASSEXPORTS_HPP

@@ -44,15 +44,15 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         DataSetViewControl(QMainWindow*, DataSetView&);
 
-    signals:
+      signals:
         void numRowsChanged(int);
         void numColumnsChanged(int);
         void pageOffsetChanged(int);
 
-    private slots:
+      private slots:
         void handlePageOffsetInput();
 
         void handleNextPageButtonClick();
@@ -62,7 +62,7 @@ namespace ChOX
 
         void updateGUI(int);
 
-    private:
+      private:
         void init();
 
         DataSetView&   dataSetView;
@@ -75,6 +75,6 @@ namespace ChOX
         QToolButton*   prevLineButton;
         QToolButton*   prevPageButton;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASETVIEWCONTROL_HPP

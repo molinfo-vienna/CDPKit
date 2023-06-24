@@ -32,7 +32,7 @@
 #include "CDPL/GRAIL/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace GRAIL
@@ -46,8 +46,8 @@ namespace CDPL
 
             extern CDPL_GRAIL_API const unsigned int FEATURE_TYPE;
             extern CDPL_GRAIL_API const unsigned int TARGET_FEATURE_TYPE;
-        }
-    }
-}
+        } // namespace AttributedGridPropertyDefault
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_ATTRIBUTEDGRIDPROPERTYDEFAULT_HPP

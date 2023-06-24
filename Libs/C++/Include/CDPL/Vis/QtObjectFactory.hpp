@@ -38,7 +38,7 @@ class QPen;
 class QColor;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -58,7 +58,7 @@ namespace CDPL
         class CDPL_VIS_API QtObjectFactory
         {
 
-        public:
+          public:
             /**
              * \brief Creates a \c QFont object that corresponds to the specified font \a f.
              * \param f The font object.
@@ -80,7 +80,7 @@ namespace CDPL
              * \return A \c QPen object equivalent to \a p.
              */
             static QPen createQPen(const Pen& p);
-        
+
             /**
              * \brief Creates a \c QBrush object that corresponds to the specified brush \a b.
              * \param b The brush object.
@@ -88,10 +88,10 @@ namespace CDPL
              */
             static QBrush createQBrush(const Brush& b);
 
-        private:
+          private:
             QtObjectFactory() {}
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_QTOBJECTFACTORY_HPP

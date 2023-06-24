@@ -35,7 +35,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -53,7 +53,7 @@ namespace CDPL
         class AtomSSSRRingSizeMatchExpression : public MatchExpression<Atom, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomSSSRRingSizeMatchExpression instances.
              */
@@ -64,8 +64,9 @@ namespace CDPL
              * \param ring_size The query ring size that has to be matched (according to the result returned by the
              *                  specified matching functor) by rings containing the checked target atoms. 
              */
-            AtomSSSRRingSizeMatchExpression(std::size_t ring_size): ringSize(ring_size) {} 
-    
+            AtomSSSRRingSizeMatchExpression(std::size_t ring_size):
+                ringSize(ring_size) {}
+
             /**
              * \brief Checks whether a ring in the SSSR of \a target_molgraph that contains \a target_atom matches the query
              *        ring size specified in the constructor.
@@ -82,22 +83,22 @@ namespace CDPL
              *         the query ring size (see constructor) under the conditions defined by \a MatchFunc, and \c false otherwise.
              * \note The SSSR of \a target_molgraph is retrieved by a call to Chem::getSSSR().
              */
-            bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom, 
+            bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
                             const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
-        private:
+          private:
             std::size_t ringSize;
             MatchFunc   matchFunc;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename MatchFunc>
-bool CDPL::Chem::AtomSSSRRingSizeMatchExpression<MatchFunc>::operator()(const Atom&, const MolecularGraph&, 
-                                                                        const Atom& target_atom, const MolecularGraph& target_molgraph, 
+bool CDPL::Chem::AtomSSSRRingSizeMatchExpression<MatchFunc>::operator()(const Atom&, const MolecularGraph&,
+                                                                        const Atom& target_atom, const MolecularGraph& target_molgraph,
                                                                         const Base::Any&) const
 {
     const FragmentList& sssr = *getSSSR(target_molgraph);

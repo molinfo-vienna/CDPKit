@@ -30,7 +30,7 @@
 #define CDPL_CONFGEN_NITROGENENUMERATIONMODE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -41,14 +41,14 @@ namespace CDPL
          */
         namespace NitrogenEnumerationMode
         {
-            
-            const int NONE               = 0; 
 
-            const int ALL                = 1; 
+            const int NONE = 0;
+
+            const int ALL = 1;
 
             const int UNSPECIFIED_STEREO = 2;
-        }
-    }
-}
+        } // namespace NitrogenEnumerationMode
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_NITROGENENUMERATIONMODE_HPP

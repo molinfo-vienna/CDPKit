@@ -35,17 +35,21 @@ namespace
     struct AtomSequence
     {
 
-        AtomSequence(T& cntnr): container(cntnr) {}
+        AtomSequence(T& cntnr):
+            container(cntnr) {}
 
-        std::size_t getNumAtoms() const {
+        std::size_t getNumAtoms() const
+        {
             return container.getNumAtoms();
         }
 
-        const CDPL::Chem::Atom& getAtom(std::size_t idx) const {
+        const CDPL::Chem::Atom& getAtom(std::size_t idx) const
+        {
             return container.getAtom(idx);
         }
 
-        bool containsAtom(CDPL::Chem::Atom& atom) const {
+        bool containsAtom(CDPL::Chem::Atom& atom) const
+        {
             return container.containsAtom(atom);
         }
 
@@ -62,16 +66,17 @@ namespace
     struct AtomSequenceExport
     {
 
-        AtomSequenceExport(const char* name) {
+        AtomSequenceExport(const char* name)
+        {
             using namespace boost;
 
             python::class_<AtomSequence<T> >(name, python::no_init)
                 .def("__len__", &AtomSequence<T>::getNumAtoms, python::arg("self"))
-                .def("__getitem__", &AtomSequence<T>::getAtom, (python::arg("self"), python::arg("idx")), 
+                .def("__getitem__", &AtomSequence<T>::getAtom, (python::arg("self"), python::arg("idx")),
                      python::return_internal_reference<1>())
                 .def("__contains__", &AtomSequence<T>::containsAtom, (python::arg("self"), python::arg("atom")));
         }
     };
-}
+} // namespace
 
 #endif // CDPL_PYTHON_CHEM_ATOMSEQUENCEEXPORT_HPP

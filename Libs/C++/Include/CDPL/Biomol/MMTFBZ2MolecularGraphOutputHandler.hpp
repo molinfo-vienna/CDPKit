@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref MMTF].
          */
         typedef Util::DefaultDataOutputHandler<MMTFBZ2MolecularGraphWriter, DataFormat::MMTF_BZ2> MMTFBZ2MolecularGraphOutputHandler;
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHOUTPUTHANDLER_HPP

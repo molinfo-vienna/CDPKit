@@ -36,24 +36,24 @@
 #include "CDPL/Base/DataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
     {
 
         class DataFormat;
-    
+
         /**
          * \brief A factory interface providing methods for the creation of Base::DataReader instances handling a particular
          *        object type and storage format.
          * \tparam T The type of objects handled by the created Base::DataReader instances.
          */
         template <typename T>
-        class DataInputHandler 
+        class DataInputHandler
         {
 
-        public:
+          public:
             typedef DataReader<T> ReaderType;
 
             typedef std::shared_ptr<DataInputHandler> SharedPointer;
@@ -82,10 +82,10 @@ namespace CDPL
              * \param mode Flags specifying the file open-mode.
              * \return A shared pointer to the created Base::DataReader instance.
              */
-            virtual typename ReaderType::SharedPointer createReader(const std::string& file_name, 
+            virtual typename ReaderType::SharedPointer createReader(const std::string&      file_name,
                                                                     std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary) const = 0;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 #endif // CDPL_BASE_DATAINPUTHANDLER_HPP

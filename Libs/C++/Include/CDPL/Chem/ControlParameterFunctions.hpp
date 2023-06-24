@@ -37,7 +37,7 @@
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -46,9 +46,9 @@ namespace CDPL
         class ControlParameterContainer;
     }
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         CDPL_CHEM_API bool getOrdinaryHydrogenDepleteParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_CHEM_API void setOrdinaryHydrogenDepleteParameter(Base::ControlParameterContainer& cntnr, bool deplete);
@@ -205,7 +205,7 @@ namespace CDPL
         CDPL_CHEM_API bool getJMESeparateComponentsParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_CHEM_API void setJMESeparateComponentsParameter(Base::ControlParameterContainer& cntnr, bool separate);
-    
+
         CDPL_CHEM_API bool hasJMESeparateComponentsParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_CHEM_API void clearJMESeparateComponentsParameter(Base::ControlParameterContainer& cntnr);
@@ -315,7 +315,7 @@ namespace CDPL
         CDPL_CHEM_API void setSMILESWriteAromaticBondsParameter(Base::ControlParameterContainer& cntnr, bool write);
 
         CDPL_CHEM_API bool hasSMILESWriteAromaticBondsParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearSMILESWriteAromaticBondsParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -396,7 +396,7 @@ namespace CDPL
         CDPL_CHEM_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
 
         CDPL_CHEM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -405,7 +405,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2EnableExtendedAtomTypesParameter(Base::ControlParameterContainer& cntnr, bool enable);
 
         CDPL_CHEM_API bool hasMOL2EnableExtendedAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearMOL2EnableExtendedAtomTypesParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -414,7 +414,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2EnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr, bool enable);
 
         CDPL_CHEM_API bool hasMOL2EnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearMOL2EnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -423,7 +423,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2CalcFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
 
         CDPL_CHEM_API bool hasMOL2CalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearMOL2CalcFormalChargesParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -432,7 +432,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2ChargeTypeParameter(Base::ControlParameterContainer& cntnr, unsigned int type);
 
         CDPL_CHEM_API bool hasMOL2ChargeTypeParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearMOL2ChargeTypeParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -441,7 +441,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2MoleculeTypeParameter(Base::ControlParameterContainer& cntnr, unsigned int type);
 
         CDPL_CHEM_API bool hasMOL2MoleculeTypeParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearMOL2MoleculeTypeParameter(Base::ControlParameterContainer& cntnr);
 
 
@@ -450,10 +450,9 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr, bool output);
 
         CDPL_CHEM_API bool hasMOL2OutputSubstructuresParameter(const Base::ControlParameterContainer& cntnr);
-    
+
         CDPL_CHEM_API void clearMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr);
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CONTROLPARAMETERFUNCTIONS_HPP
- 

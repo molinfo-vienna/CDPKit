@@ -44,15 +44,15 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class StereoDescriptor;
-        
-    
+
+
         CDPL_CHEM_API const std::string& getName(const Atom& atom);
 
         CDPL_CHEM_API void setName(Atom& atom, const std::string& name);
@@ -82,8 +82,8 @@ namespace CDPL
         CDPL_CHEM_API bool hasType(const Atom& atom);
 
         CDPL_CHEM_API unsigned int getTypeForSymbol(const Atom& atom);
-        
-        CDPL_CHEM_API unsigned int getGenericType(const Atom& atom);//move
+
+        CDPL_CHEM_API unsigned int getGenericType(const Atom& atom); //move
 
 
         CDPL_CHEM_API long getFormalCharge(const Atom& atom);
@@ -131,7 +131,7 @@ namespace CDPL
         CDPL_CHEM_API void setRingFlag(Atom& atom, bool in_ring);
 
         CDPL_CHEM_API void clearRingFlag(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasRingFlag(const Atom& atom);
 
 
@@ -151,7 +151,7 @@ namespace CDPL
         CDPL_CHEM_API void setAromaticityFlag(Atom& atom, bool aromatic);
 
         CDPL_CHEM_API void clearAromaticityFlag(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasAromaticityFlag(const Atom& atom);
 
 
@@ -180,19 +180,19 @@ namespace CDPL
         CDPL_CHEM_API void set2DCoordinates(Atom& atom, const Math::Vector2D& coords);
 
         CDPL_CHEM_API void clear2DCoordinates(Atom& atom);
-    
+
         CDPL_CHEM_API bool has2DCoordinates(const Atom& atom);
 
 
         CDPL_CHEM_API const Math::Vector3D& getConformer3DCoordinates(const Atom& atom, std::size_t conf_idx);
-    
+
 
         CDPL_CHEM_API const Math::Vector3DArray::SharedPointer& get3DCoordinatesArray(const Atom& atom);
 
         CDPL_CHEM_API void set3DCoordinatesArray(Atom& atom, const Math::Vector3DArray::SharedPointer& coords_array);
 
         CDPL_CHEM_API void clear3DCoordinatesArray(Atom& atom);
-    
+
         CDPL_CHEM_API bool has3DCoordinatesArray(const Atom& atom);
 
 
@@ -201,7 +201,7 @@ namespace CDPL
         CDPL_CHEM_API void setMorganNumber(Atom& atom, std::size_t num);
 
         CDPL_CHEM_API void clearMorganNumber(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMorganNumber(const Atom& atom);
 
 
@@ -210,7 +210,7 @@ namespace CDPL
         CDPL_CHEM_API void setCanonicalNumber(Atom& atom, std::size_t num);
 
         CDPL_CHEM_API void clearCanonicalNumber(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasCanonicalNumber(const Atom& atom);
 
 
@@ -219,7 +219,7 @@ namespace CDPL
         CDPL_CHEM_API void setCIPPriority(Atom& atom, std::size_t priority);
 
         CDPL_CHEM_API void clearCIPPriority(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasCIPPriority(const Atom& atom);
 
 
@@ -228,7 +228,7 @@ namespace CDPL
         CDPL_CHEM_API void setSymmetryClass(Atom& atom, std::size_t class_id);
 
         CDPL_CHEM_API void clearSymmetryClass(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasSymmetryClass(const Atom& atom);
 
 
@@ -237,20 +237,20 @@ namespace CDPL
         CDPL_CHEM_API void setCIPConfiguration(Atom& atom, unsigned int config);
 
         CDPL_CHEM_API void clearCIPConfiguration(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasCIPConfiguration(const Atom& atom);
 
         CDPL_CHEM_API unsigned int calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph);
 
         CDPL_CHEM_API unsigned int calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func);
-    
+
 
         CDPL_CHEM_API const StereoDescriptor& getStereoDescriptor(const Atom& atom);
 
         CDPL_CHEM_API void setStereoDescriptor(Atom& atom, const StereoDescriptor& descr);
 
         CDPL_CHEM_API void clearStereoDescriptor(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasStereoDescriptor(const Atom& atom);
 
         CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Atom& atom, const MolecularGraph& molgraph, std::size_t dim = 1);
@@ -266,30 +266,30 @@ namespace CDPL
         CDPL_CHEM_API void setStereoCenterFlag(Atom& atom, bool is_center);
 
         CDPL_CHEM_API void clearStereoCenterFlag(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasStereoCenterFlag(const Atom& atom);
 
-        CDPL_CHEM_API bool isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, 
+        CDPL_CHEM_API bool isStereoCenter(const Atom& atom, const MolecularGraph& molgraph,
                                           bool check_cip_sym = true, bool check_acyclic_subst_sym_only = false);
-    
+
 
         CDPL_CHEM_API unsigned int getSybylType(const Atom& atom);
 
         CDPL_CHEM_API void setSybylType(Atom& atom, unsigned int type);
 
         CDPL_CHEM_API void clearSybylType(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasSybylType(const Atom& atom);
 
         CDPL_CHEM_API unsigned int perceiveSybylType(const Atom& atom, const MolecularGraph& molgraph);
-    
+
 
         CDPL_CHEM_API const std::string& getMOL2Name(const Atom& atom);
 
         CDPL_CHEM_API void setMOL2Name(Atom& atom, const std::string& name);
 
         CDPL_CHEM_API void clearMOL2Name(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMOL2Name(const Atom& atom);
 
 
@@ -297,7 +297,7 @@ namespace CDPL
 
         CDPL_CHEM_API void setMOL2Charge(Atom& atom, double charge);
 
-        CDPL_CHEM_API void clearMOL2Charge(Atom& atom);    
+        CDPL_CHEM_API void clearMOL2Charge(Atom& atom);
 
         CDPL_CHEM_API bool hasMOL2Charge(const Atom& atom);
 
@@ -307,16 +307,16 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2SubstructureID(Atom& atom, std::size_t id);
 
         CDPL_CHEM_API void clearMOL2SubstructureID(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMOL2SubstructureID(const Atom& atom);
-    
+
 
         CDPL_CHEM_API const std::string& getMOL2SubstructureName(const Atom& atom);
 
         CDPL_CHEM_API void setMOL2SubstructureName(Atom& atom, const std::string& id);
 
         CDPL_CHEM_API void clearMOL2SubstructureName(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMOL2SubstructureName(const Atom& atom);
 
 
@@ -325,7 +325,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2SubstructureSubtype(Atom& atom, const std::string& subtype);
 
         CDPL_CHEM_API void clearMOL2SubstructureSubtype(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMOL2SubstructureSubtype(const Atom& atom);
 
 
@@ -334,7 +334,7 @@ namespace CDPL
         CDPL_CHEM_API void setMOL2SubstructureChain(Atom& atom, const std::string& chain);
 
         CDPL_CHEM_API void clearMOL2SubstructureChain(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMOL2SubstructureChain(const Atom& atom);
 
 
@@ -343,18 +343,18 @@ namespace CDPL
         CDPL_CHEM_API void setMDLParity(Atom& atom, unsigned int parity);
 
         CDPL_CHEM_API void clearMDLParity(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMDLParity(const Atom& atom);
 
         CDPL_CHEM_API unsigned int calcMDLParity(const Atom& atom, const MolecularGraph& molgraph);
-    
+
 
         CDPL_CHEM_API bool getMDLStereoCareFlag(const Atom& atom);
 
         CDPL_CHEM_API void setMDLStereoCareFlag(Atom& atom, bool flag);
 
         CDPL_CHEM_API void clearMDLStereoCareFlag(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasMDLStereoCareFlag(const Atom& atom);
 
 
@@ -363,7 +363,7 @@ namespace CDPL
         CDPL_CHEM_API void setReactionCenterStatus(Atom& atom, unsigned int status);
 
         CDPL_CHEM_API void clearReactionCenterStatus(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasReactionCenterStatus(const Atom& atom);
 
 
@@ -372,7 +372,7 @@ namespace CDPL
         CDPL_CHEM_API void setAtomMappingID(Atom& atom, std::size_t id);
 
         CDPL_CHEM_API void clearAtomMappingID(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasAtomMappingID(const Atom& atom);
 
 
@@ -381,12 +381,12 @@ namespace CDPL
         CDPL_CHEM_API void setComponentGroupID(Atom& atom, std::size_t id);
 
         CDPL_CHEM_API void clearComponentGroupID(Atom& atom);
-    
+
         CDPL_CHEM_API bool hasComponentGroupID(const Atom& atom);
 
 
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Atom& atom);
-    
+
         CDPL_CHEM_API void setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr);
 
         CDPL_CHEM_API void clearMatchConstraints(Atom& atom);
@@ -416,7 +416,7 @@ namespace CDPL
         CDPL_CHEM_API void buildMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
 
 
-        CDPL_CHEM_API void markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph, 
+        CDPL_CHEM_API void markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph,
                                               Util::BitSet& atom_mask, bool reset = true);
 
         CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
@@ -429,9 +429,9 @@ namespace CDPL
         {
             typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
 
-            AtomIterator atoms_end = atom.getAtomsEnd();
-            typename AtomType::ConstBondIterator b_it = atom.getBondsBegin();
-            std::size_t count = 0;
+            AtomIterator                         atoms_end = atom.getAtomsEnd();
+            typename AtomType::ConstBondIterator b_it      = atom.getBondsBegin();
+            std::size_t                          count     = 0;
 
             for (AtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
                 if (&(*a_it) == excl_atom)
@@ -452,14 +452,14 @@ namespace CDPL
         {
             typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
 
-            BondIterator bonds_end = atom.getBondsEnd();
-            typename AtomType::ConstAtomIterator a_it = atom.getAtomsBegin();
-            std::size_t count = 0;
+            BondIterator                         bonds_end = atom.getBondsEnd();
+            typename AtomType::ConstAtomIterator a_it      = atom.getAtomsBegin();
+            std::size_t                          count     = 0;
 
             for (BondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++a_it, ++b_it) {
                 if (&(*a_it) == excl_atom)
                     continue;
-                
+
                 if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
                     *it = &(*b_it);
                     ++it;
@@ -477,8 +477,8 @@ namespace CDPL
             typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
 
             BondIterator bonds_end = atom.getBondsEnd();
-            AtomIterator a_it = atom.getAtomsBegin();
-            std::size_t count = 0;
+            AtomIterator a_it      = atom.getAtomsBegin();
+            std::size_t  count     = 0;
 
             for (BondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++a_it, ++b_it) {
                 if (&(*a_it) == excl_atom)
@@ -495,8 +495,7 @@ namespace CDPL
 
             return count;
         }
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMFUNCTIONS_HPP
- 

@@ -40,16 +40,16 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Biomol 
+    namespace Biomol
     {
 
         /**
          * \brief A global dictionary for the lookup of meta-data associated with the residues
          *        in biological macromolecules.
-         */ 
+         */
         class CDPL_BIOMOL_API ResidueDictionary
         {
 
@@ -78,7 +78,7 @@ namespace CDPL
                 unsigned int getType() const;
 
                 Chem::MolecularGraph::SharedPointer getStructure() const;
-                
+
               private:
                 std::string                code;
                 std::string                replacesCode;
@@ -95,21 +95,22 @@ namespace CDPL
           public:
             typedef std::shared_ptr<ResidueDictionary> SharedPointer;
 
-            typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>, 
-                                              EntryLookupTable::const_iterator> ConstEntryIterator;
-            
+            typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>,
+                                              EntryLookupTable::const_iterator>
+                ConstEntryIterator;
+
             void addEntry(const Entry& entry);
 
             bool containsEntry(const std::string& code) const;
 
             void removeEntry(const std::string& code);
-            
+
             const Entry& getEntry(const std::string& code) const;
 
             void clear();
 
             std::size_t getNumEntries() const;
-            
+
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
@@ -117,7 +118,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-            
+
             void loadDefaults();
 
             static void set(const SharedPointer& dict);
@@ -142,7 +143,7 @@ namespace CDPL
             static SharedPointer defaultDict;
             EntryLookupTable     entries;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_RESIDUEDICTIONARY_HPP

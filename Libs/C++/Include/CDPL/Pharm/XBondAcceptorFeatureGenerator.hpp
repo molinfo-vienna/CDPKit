@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -50,7 +50,7 @@ namespace CDPL
              * \brief Constructs the \c %XBondAcceptorFeatureGenerator instance.
              */
             XBondAcceptorFeatureGenerator();
-                
+
             /**
              * \brief Perceives the halogen bond acceptor features of the molecular graph a\ molgraph and adds 
              *        them to the pharmacophore \a pharm.
@@ -58,11 +58,11 @@ namespace CDPL
              * \param pharm The output pharmacophore where to add the generated features.
              */
             XBondAcceptorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
-        
+
           private:
             void init();
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_XBONDACCEPTORFEATUREGENERATOR_HPP

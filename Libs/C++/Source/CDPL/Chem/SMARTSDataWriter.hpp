@@ -34,7 +34,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -57,13 +57,13 @@ namespace CDPL
         class SMARTSDataWriter
         {
 
-        public:
+          public:
             SMARTSDataWriter(const Base::DataIOBase& io_base);
 
             bool writeReaction(std::ostream&, const Reaction&);
             bool writeMolGraph(std::ostream&, const MolecularGraph&, bool = false);
 
-        private:
+          private:
             class DFSTreeNode;
             class DFSTreeEdge;
 
@@ -80,7 +80,7 @@ namespace CDPL
             void generateSMARTS(std::ostream&) const;
 
             std::size_t getRingClosureNumber();
-            void putRingClosureNumber(std::size_t);
+            void        putRingClosureNumber(std::size_t);
 
             DFSTreeNode* createNode();
             DFSTreeEdge* createEdge();
@@ -95,12 +95,12 @@ namespace CDPL
             class DFSTreeEdge
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<DFSTreeEdge> SharedPointer;
 
                 DFSTreeEdge(SMARTSDataWriter&);
 
-                void setBond(const Bond*);
+                void        setBond(const Bond*);
                 const Bond* getBond() const;
 
                 void setMolGraph(const MolecularGraph*);
@@ -110,14 +110,14 @@ namespace CDPL
                 const DFSTreeNode* getBegin() const;
                 const DFSTreeNode* getEnd() const;
 
-                void setRingClosureNumber(std::size_t);
+                void        setRingClosureNumber(std::size_t);
                 std::size_t getRingClosureNumber() const;
 
                 std::size_t getBondOrder() const;
 
                 void writeBondExpression(std::ostream&) const;
 
-            private:
+              private:
                 bool isImplicitExpression(const MatchConstraintList&) const;
 
                 void writeBondExpression(const MatchConstraintList&, std::string&, std::size_t) const;
@@ -128,35 +128,35 @@ namespace CDPL
                 void writeRingTopologyExpression(const MatchConstraint&, std::string&) const;
                 void writeDirectionExpression(const MatchConstraint&, std::string&) const;
 
-                SMARTSDataWriter&       writer;
-                const MolecularGraph*   molGraph;
-                const Bond*             bond;
-                DFSTreeNode*            nodes[2];
-                std::size_t             ringClosureNumber;
+                SMARTSDataWriter&     writer;
+                const MolecularGraph* molGraph;
+                const Bond*           bond;
+                DFSTreeNode*          nodes[2];
+                std::size_t           ringClosureNumber;
             };
 
             typedef std::vector<DFSTreeEdge*> EdgeList;
-            typedef EdgeList::iterator EdgeIterator;
+            typedef EdgeList::iterator        EdgeIterator;
 
             class DFSTreeNode
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<DFSTreeNode> SharedPointer;
 
                 DFSTreeNode(SMARTSDataWriter&);
 
                 void clear();
-                
-                void setAtom(const Atom*);
+
+                void        setAtom(const Atom*);
                 const Atom* getAtom() const;
 
                 void setMolGraph(const MolecularGraph*);
 
-                void setLexicalOrder(std::size_t);
+                void        setLexicalOrder(std::size_t);
                 std::size_t getLexicalOrder() const;
 
-                void setParentEdge(DFSTreeEdge*);
+                void               setParentEdge(DFSTreeEdge*);
                 const DFSTreeEdge* getParentEdge() const;
 
                 void addChildEdge(DFSTreeEdge*);
@@ -171,9 +171,9 @@ namespace CDPL
 
                 void generateSMARTS(std::ostream&) const;
 
-            private:
-                void writeAtomExpression(std::ostream&) const;    
-                bool writeSimpleAtomExpression(std::ostream&, const MatchConstraintList&) const;    
+              private:
+                void writeAtomExpression(std::ostream&) const;
+                bool writeSimpleAtomExpression(std::ostream&, const MatchConstraintList&) const;
                 void writeComplexAtomExpression(const MatchConstraintList&, std::string&, std::size_t) const;
 
                 void writeEnvironmentExpression(const MatchConstraint&, std::string&) const;
@@ -209,25 +209,25 @@ namespace CDPL
 
                 typedef std::vector<std::size_t> NeighborIndexList;
 
-                SMARTSDataWriter&          writer;
-                const MolecularGraph*      molGraph;
-                const Atom*                atom;
-                DFSTreeEdge*               parentEdge;
-                EdgeList                   childEdges;
-                EdgeList                   ringClosureInEdges;
-                EdgeList                   ringClosureOutEdges;
-                mutable NeighborIndexList  nbrAtomIndices;
-                std::size_t                lexicalOrder;
+                SMARTSDataWriter&         writer;
+                const MolecularGraph*     molGraph;
+                const Atom*               atom;
+                DFSTreeEdge*              parentEdge;
+                EdgeList                  childEdges;
+                EdgeList                  ringClosureInEdges;
+                EdgeList                  ringClosureOutEdges;
+                mutable NeighborIndexList nbrAtomIndices;
+                std::size_t               lexicalOrder;
             };
 
             typedef std::shared_ptr<SMARTSDataWriter> SharedPointer;
 
-            typedef std::vector<DFSTreeNode*> NodeList;
-            typedef std::vector<std::size_t> RingClosureNumberStack;
+            typedef std::vector<DFSTreeNode*>      NodeList;
+            typedef std::vector<std::size_t>       RingClosureNumberStack;
             typedef Util::ObjectStack<DFSTreeNode> NodeCache;
             typedef Util::ObjectStack<DFSTreeEdge> EdgeCache;
 
-            const Base::DataIOBase& ioBase;    
+            const Base::DataIOBase& ioBase;
             NodeCache               nodeCache;
             EdgeCache               edgeCache;
             NodeList                componentNodes;
@@ -237,8 +237,7 @@ namespace CDPL
             SharedPointer           smartsWriter;
             bool                    strictErrorChecking;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMARTSDATAWRITER_HPP
- 

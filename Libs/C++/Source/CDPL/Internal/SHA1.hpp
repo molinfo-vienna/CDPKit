@@ -30,7 +30,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Internal
@@ -58,8 +58,8 @@ namespace CDPL
         class SHA1
         {
 
-        public:
-            static const std::size_t HASH_SIZE = 20; /**< The size of the SHA-1 message digest in bytes. */ 
+          public:
+            static const std::size_t HASH_SIZE = 20; /**< The size of the SHA-1 message digest in bytes. */
 
             /**
              * \brief Default constructor. 
@@ -94,18 +94,18 @@ namespace CDPL
             template <typename OutputIter>
             void getResult(OutputIter out);
 
-        private:
+          private:
             void padMessage();
             void processMessageBlock();
 
-            std::uint32_t  intermediateHash[HASH_SIZE / 4]; // Message Digest
-            std::uint64_t  length;                          // Message length in b_its 
-            std::uint32_t  messageBlockIndex;               // Index into message block array 
-            std::uint8_t   messageBlock[64];                // 512-b_it message blocks
-            bool           digestComputed;                  // Tells whether the message digest has been computed
+            std::uint32_t intermediateHash[HASH_SIZE / 4]; // Message Digest
+            std::uint64_t length; // Message length in b_its
+            std::uint32_t messageBlockIndex; // Index into message block array
+            std::uint8_t  messageBlock[64]; // 512-b_it message blocks
+            bool          digestComputed; // Tells whether the message digest has been computed
         };
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 
 // Implementation of template members
@@ -116,7 +116,7 @@ void CDPL::Internal::SHA1::input(InputIter in, InputIter end)
     if (digestComputed)
         reset();
 
-    for ( ; in != end; ++in) {
+    for (; in != end; ++in) {
         typename InputIter::value_type v = *in;
 
         for (std::size_t i = 0; i < sizeof(typename InputIter::value_type); i++) {
@@ -135,10 +135,10 @@ void CDPL::Internal::SHA1::getResult(OutputIter out)
     if (!digestComputed) {
         padMessage();
 
-        for(std::size_t i = 0; i < 64; ++i)    // message may be sensitive, clear it out 
-            messageBlock[i] = 0; 
+        for (std::size_t i = 0; i < 64; ++i) // message may be sensitive, clear it out
+            messageBlock[i] = 0;
 
-        length   = 0;                        // and clear length 
+        length         = 0; // and clear length
         digestComputed = true;
     }
 

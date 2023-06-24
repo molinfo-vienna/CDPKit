@@ -47,10 +47,10 @@
 #ifndef CDPL_MATH_CHECKS_DISABLE
 # define CHECK_VECTOR_INDEX(v, i)
 #else
-# define CHECK_VECTOR_INDEX(v, i) \
-    if (i >= v.getSize()) {                        \
-        throw CDPL::Base::IndexError("Vector: element index out of bounds"); \
-    }
+# define CHECK_VECTOR_INDEX(v, i)                                       \
+  if (i >= v.getSize()) {                                               \
+   throw CDPL::Base::IndexError("Vector: element index out of bounds"); \
+  }
 #endif
 
 
@@ -58,21 +58,22 @@ namespace CDPLPythonMath
 {
 
     template <typename VectorType>
-    struct ConstVectorVisitor : 
-        public boost::python::def_visitor<ConstVectorVisitor<VectorType> >
+    struct ConstVectorVisitor : public boost::python::def_visitor<ConstVectorVisitor<VectorType> >
     {
 
         friend class boost::python::def_visitor_access;
 
-        typedef typename VectorType::ValueType ValueType;
-        typedef typename VectorType::SizeType SizeType;
+        typedef typename VectorType::ValueType                           ValueType;
+        typedef typename VectorType::SizeType                            SizeType;
         typedef typename ConstVectorExpression<ValueType>::SharedPointer ExpressionPointer;
         typedef typename ConstMatrixExpression<ValueType>::SharedPointer MatrixExpressionPointer;
 
-        ConstVectorVisitor(const char* arg_name = "v"): argName(arg_name) {}
+        ConstVectorVisitor(const char* arg_name = "v"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -102,27 +103,29 @@ namespace CDPLPythonMath
                 .add_property("size", &VectorType::getSize);
         }
 #ifdef HAVE_NUMPY
-        static boost::python::object toArray(const VectorType& vec) {
+        static boost::python::object toArray(const VectorType& vec)
+        {
             using namespace boost;
 
             if (NumPy::available()) {
-                npy_intp shape[] = { npy_intp(vec.getSize()) };
-                PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename VectorType::ValueType>::Value);
+                npy_intp  shape[] = {npy_intp(vec.getSize())};
+                PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename VectorType::ValueType>::Value);
 
                 if (array) {
                     typename VectorType::ValueType* data = static_cast<typename VectorType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
 
-                    for (std::size_t i = 0, size = vec.getSize(); i < size; i++, data++) 
+                    for (std::size_t i = 0, size = vec.getSize(); i < size; i++, data++)
                         *data = vec[i];
 
                     return python::object(python::handle<>(array));
                 }
             }
 
-            return python::object();            
+            return python::object();
         }
 #endif
-        static std::string toString(const VectorType& vec) {
+        static std::string toString(const VectorType& vec)
+        {
             std::ostringstream oss;
 
             oss << vec;
@@ -130,23 +133,28 @@ namespace CDPLPythonMath
             return oss.str();
         }
 
-        static bool eqOperator(const VectorType& vec1, const VectorType& vec2) {
+        static bool eqOperator(const VectorType& vec1, const VectorType& vec2)
+        {
             return (vec1 == vec2);
         }
 
-        static bool neOperator(const VectorType& vec1, const VectorType& vec2) {
+        static bool neOperator(const VectorType& vec1, const VectorType& vec2)
+        {
             return (vec1 != vec2);
         }
 
-        static bool eqOperatorExpr(const VectorType& vec1, const ExpressionPointer& vec2_expr) {
+        static bool eqOperatorExpr(const VectorType& vec1, const ExpressionPointer& vec2_expr)
+        {
             return (vec1 == *vec2_expr);
         }
 
-        static bool neOperatorExpr(const VectorType& vec1, const ExpressionPointer& vec2_expr) {
+        static bool neOperatorExpr(const VectorType& vec1, const ExpressionPointer& vec2_expr)
+        {
             return (vec1 != *vec2_expr);
         }
 
-        static ValueType getElement(const VectorType& vec, SizeType i) {
+        static ValueType getElement(const VectorType& vec, SizeType i)
+        {
             CHECK_VECTOR_INDEX(vec, i);
 
             return vec(i);
@@ -154,34 +162,41 @@ namespace CDPLPythonMath
 
         static void posOperator(const VectorType& vec) {}
 
-        static ExpressionPointer negOperator(const boost::python::object& vec) {
+        static ExpressionPointer negOperator(const boost::python::object& vec)
+        {
             return makeConstVectorExpressionAdapter(-boost::python::extract<const VectorType&>(vec)(), vec);
         }
-    
-        static ExpressionPointer addOperator(const boost::python::object& vec1, const ExpressionPointer& vec2_expr) {
+
+        static ExpressionPointer addOperator(const boost::python::object& vec1, const ExpressionPointer& vec2_expr)
+        {
             return makeConstVectorExpressionAdapter(boost::python::extract<const VectorType&>(vec1)() + *vec2_expr,
                                                     std::make_pair(vec1, vec2_expr));
         }
 
-        static ExpressionPointer subOperator(const boost::python::object& vec1, const ExpressionPointer& vec2_expr) {
+        static ExpressionPointer subOperator(const boost::python::object& vec1, const ExpressionPointer& vec2_expr)
+        {
             return makeConstVectorExpressionAdapter(boost::python::extract<const VectorType&>(vec1)() - *vec2_expr,
                                                     std::make_pair(vec1, vec2_expr));
         }
 
-        static ExpressionPointer mulOperator(const boost::python::object& vec, const ValueType& value) {
+        static ExpressionPointer mulOperator(const boost::python::object& vec, const ValueType& value)
+        {
             return makeConstVectorExpressionAdapter(boost::python::extract<const VectorType&>(vec)() * value, vec);
         }
 
-        static ExpressionPointer mulOperatorMtxExpr(const boost::python::object& vec, const MatrixExpressionPointer& mtx_expr) {
-            return makeConstVectorExpressionAdapter(boost::python::extract<const VectorType&>(vec)() * *mtx_expr, 
+        static ExpressionPointer mulOperatorMtxExpr(const boost::python::object& vec, const MatrixExpressionPointer& mtx_expr)
+        {
+            return makeConstVectorExpressionAdapter(boost::python::extract<const VectorType&>(vec)() * *mtx_expr,
                                                     std::make_pair(vec, mtx_expr));
         }
 
-        static ExpressionPointer divOperator(const boost::python::object& vec, const ValueType& value) {
+        static ExpressionPointer divOperator(const boost::python::object& vec, const ValueType& value)
+        {
             return makeConstVectorExpressionAdapter(boost::python::extract<const VectorType&>(vec)() / value, vec);
         }
-                
-        static ExpressionPointer rmulOperator(const boost::python::object& vec, const ValueType& value) {
+
+        static ExpressionPointer rmulOperator(const boost::python::object& vec, const ValueType& value)
+        {
             return makeConstVectorExpressionAdapter(value * boost::python::extract<const VectorType&>(vec)(), vec);
         }
 
@@ -189,16 +204,17 @@ namespace CDPLPythonMath
     };
 
     template <typename VectorType>
-    struct VectorAssignAndSwapVisitor : 
-        public boost::python::def_visitor<VectorAssignAndSwapVisitor<VectorType> >
+    struct VectorAssignAndSwapVisitor : public boost::python::def_visitor<VectorAssignAndSwapVisitor<VectorType> >
     {
 
         friend class boost::python::def_visitor_access;
 
-        VectorAssignAndSwapVisitor(const char* arg_name = "v"): argName(arg_name) {}
+        VectorAssignAndSwapVisitor(const char* arg_name = "v"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -206,11 +222,13 @@ namespace CDPLPythonMath
                 .def("swap", &swap, (python::arg("self"), python::arg(argName)));
         }
 
-        static void assign(VectorType& vec1, const VectorType& vec2) {
+        static void assign(VectorType& vec1, const VectorType& vec2)
+        {
             vec1 = vec2;
         }
 
-        static void swap(VectorType& vec1, VectorType& vec2) {
+        static void swap(VectorType& vec1, VectorType& vec2)
+        {
             vec1.swap(vec2);
         }
 
@@ -223,24 +241,26 @@ namespace CDPLPythonMath
 
         friend class boost::python::def_visitor_access;
 
-        typedef typename VectorType::ValueType ValueType;
-        typedef typename VectorType::SizeType SizeType;
+        typedef typename VectorType::ValueType                           ValueType;
+        typedef typename VectorType::SizeType                            SizeType;
         typedef typename ConstVectorExpression<ValueType>::SharedPointer ExpressionPointer;
 
-        VectorVisitor(const char* arg_name = "v"): argName(arg_name) {}
+        VectorVisitor(const char* arg_name = "v"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
                 .def("setElement", &setElement, (python::arg("self"), python::arg("i"), python::arg("v")))
                 .def("__setitem__", &setElement, (python::arg("self"), python::arg("i"), python::arg("v")))
-                .def("__iadd__", &iaddOperator, (python::arg("self"), python::arg(argName)), 
+                .def("__iadd__", &iaddOperator, (python::arg("self"), python::arg(argName)),
                      python::return_self<>())
                 .def("__iadd__", &iaddOperatorExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
-                .def("__isub__", &isubOperator, (python::arg("self"), python::arg(argName)), 
+                .def("__isub__", &isubOperator, (python::arg("self"), python::arg(argName)),
                      python::return_self<>())
                 .def("__isub__", &isubOperatorExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
@@ -252,33 +272,40 @@ namespace CDPLPythonMath
                      python::return_self<>());
         }
 
-        static void setElement(VectorType& vec, SizeType i, const ValueType& value) {
+        static void setElement(VectorType& vec, SizeType i, const ValueType& value)
+        {
             CHECK_VECTOR_INDEX(vec, i);
 
             vec(i) = value;
         }
 
-        static void iaddOperator(VectorType& vec1, const VectorType& vec2) {
+        static void iaddOperator(VectorType& vec1, const VectorType& vec2)
+        {
             vec1 += vec2;
         }
 
-        static void isubOperator(VectorType& vec1, const VectorType& vec2) {
+        static void isubOperator(VectorType& vec1, const VectorType& vec2)
+        {
             vec1 -= vec2;
         }
 
-        static void iaddOperatorExpr(VectorType& vec1, const ExpressionPointer& vec2_expr) {
+        static void iaddOperatorExpr(VectorType& vec1, const ExpressionPointer& vec2_expr)
+        {
             vec1 += *vec2_expr;
         }
 
-        static void isubOperatorExpr(VectorType& vec1, const ExpressionPointer& vec2_expr) {
+        static void isubOperatorExpr(VectorType& vec1, const ExpressionPointer& vec2_expr)
+        {
             vec1 -= *vec2_expr;
         }
 
-        static void imulOperator(VectorType& vec, const ValueType& value) {
+        static void imulOperator(VectorType& vec, const ValueType& value)
+        {
             vec *= value;
         }
 
-        static void idivOperator(VectorType& vec, const ValueType& value) {
+        static void idivOperator(VectorType& vec, const ValueType& value)
+        {
             vec /= value;
         }
 
@@ -293,15 +320,17 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename VectorType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
         }
 
-        static void assign(VectorType& vec, PyArrayObject* arr) {
+        static void assign(VectorType& vec, PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -328,15 +357,17 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename VectorType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
         }
 
-        static void assign(VectorType& vec, PyArrayObject* arr) {
+        static void assign(VectorType& vec, PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -364,17 +395,19 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename VectorType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl.def("__init__", python::make_constructor(&construct, 
+            cl.def("__init__", python::make_constructor(&construct,
                                                         python::default_call_policies(),
                                                         (python::arg("a"))));
         }
 
-        static VectorType* construct(PyArrayObject* arr) {
+        static VectorType* construct(PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -405,17 +438,19 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename VectorType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl.def("__init__", python::make_constructor(&construct, 
+            cl.def("__init__", python::make_constructor(&construct,
                                                         python::default_call_policies(),
                                                         (python::arg("a"))));
         }
 
-        static VectorType* construct(PyArrayObject* arr) {
+        static VectorType* construct(PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -448,9 +483,10 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename VectorType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {}
+        void visit(ClassType& cl) const
+        {}
     };
 
     template <typename VectorType, bool RESIZE = false>
@@ -460,11 +496,12 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename VectorType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {}
+        void visit(ClassType& cl) const
+        {}
     };
 #endif // HAVE_NUMPY
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_VECTORVISITOR_HPP

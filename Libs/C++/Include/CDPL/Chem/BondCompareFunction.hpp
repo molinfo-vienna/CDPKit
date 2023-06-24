@@ -32,7 +32,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined bond compare function.
          */
         typedef std::function<bool(const Chem::Bond&, const Chem::Bond&)> BondCompareFunction;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDCOMPAREFUNCTION_HPP

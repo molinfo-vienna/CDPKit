@@ -44,16 +44,16 @@
 #include "CDPL/Util/Map.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         /**
          * \brief A global dictionary for the lookup of meta-data associated with the atom
          *        types defined in namespace Chem::AtomType
-         */ 
+         */
         class CDPL_CHEM_API AtomDictionary
         {
 
@@ -100,47 +100,48 @@ namespace CDPL
                 double getAllredRochowElectronegativity() const;
 
                 const IsotopeMassMap& getIsotopeMasses() const;
-                
+
               private:
-                unsigned int       atomType;
-                std::size_t        isotope;
-                std::string        symbol;
-                std::string        name;
-                std::size_t        mostAbundantIso;
-                double             avgWeight;
-                std::size_t        iupacGroup;
-                std::size_t        period;
-                bool               isMet;
-                bool               isNonMet;
-                Util::STArray      valenceStates;
-                double             vdwRadius;
-                double             covalentRadii[3];
-                double             allredRochowEneg;
-                IsotopeMassMap     isoMassMap;
+                unsigned int   atomType;
+                std::size_t    isotope;
+                std::string    symbol;
+                std::string    name;
+                std::size_t    mostAbundantIso;
+                double         avgWeight;
+                std::size_t    iupacGroup;
+                std::size_t    period;
+                bool           isMet;
+                bool           isNonMet;
+                Util::STArray  valenceStates;
+                double         vdwRadius;
+                double         covalentRadii[3];
+                double         allredRochowEneg;
+                IsotopeMassMap isoMassMap;
             };
 
           private:
             typedef std::unordered_map<std::pair<unsigned int, std::size_t>, Entry, boost::hash<std::pair<unsigned int, std::size_t> > > EntryLookupTable;
-            typedef std::unordered_map<std::string, unsigned int> SymbolToTypeLookupTable;
+            typedef std::unordered_map<std::string, unsigned int>                                                                        SymbolToTypeLookupTable;
 
           public:
             typedef std::shared_ptr<AtomDictionary> SharedPointer;
 
-            typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>, 
-                                              EntryLookupTable::const_iterator> ConstEntryIterator;
-            
+            typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>,
+                                              EntryLookupTable::const_iterator>
+                ConstEntryIterator;
+
             void addEntry(const Entry& entry);
 
             bool containsEntry(unsigned int type, std::size_t isotope) const;
 
             void removeEntry(unsigned int type, std::size_t isotope);
-            
+
             const Entry& getEntry(unsigned int type, std::size_t isotope) const;
 
             void clear();
 
             std::size_t getNumEntries() const;
-            
+
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
@@ -148,7 +149,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-            
+
             void loadDefaults();
 
             static void set(const SharedPointer& dict);
@@ -273,7 +274,7 @@ namespace CDPL
              * \return An array with the valence states of the specified chemical element.
              */
             static const Util::STArray& getValenceStates(unsigned int type);
-            
+
             /**
              * \brief Tells whether the specified atom type represents a chemical element.
              * \param type The atom type.
@@ -331,12 +332,12 @@ namespace CDPL
             static bool isNobleGas(unsigned int type);
 
           private:
-            static SharedPointer     defaultDict;
-            EntryLookupTable         entries;
-            SymbolToTypeLookupTable  strictSymToTypeTable;
-            SymbolToTypeLookupTable  nonstrictSymToTypeTable;
+            static SharedPointer    defaultDict;
+            EntryLookupTable        entries;
+            SymbolToTypeLookupTable strictSymToTypeTable;
+            SymbolToTypeLookupTable nonstrictSymToTypeTable;
         };
-    };
-}
+    }; // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMDICTIONARY_HPP

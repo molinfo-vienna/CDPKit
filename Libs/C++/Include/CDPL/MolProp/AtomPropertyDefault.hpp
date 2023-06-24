@@ -32,7 +32,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace MolProp
@@ -43,11 +43,11 @@ namespace CDPL
          */
         namespace AtomPropertyDefault
         {
-        
+
             extern CDPL_MOLPROP_API const unsigned int H_BOND_DONOR_TYPE;
             extern CDPL_MOLPROP_API const unsigned int H_BOND_ACCEPTOR_TYPE;
-        }
-    }
-}
+        } // namespace AtomPropertyDefault
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_ATOMPROPERTYDEFAULT_HPP

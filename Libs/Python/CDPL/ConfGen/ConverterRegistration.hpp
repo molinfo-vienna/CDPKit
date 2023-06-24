@@ -28,9 +28,9 @@
 
 namespace CDPLPythonConfGen
 {
-    
+
     void registerFromPythonConverters();
     void registerToPythonConverters();
-}
+} // namespace CDPLPythonConfGen
 
 #endif // CDPL_PYTHON_CONFGEN_CONVERTERREGISTRATION_HPP

@@ -44,7 +44,7 @@ namespace CDPL
 {
 
     namespace Math
-    {    
+    {
 
         /**
          * \brief Performs <em>Multiple Linear Regression</em> [\ref WLIREG] on a set of data points
@@ -79,16 +79,17 @@ namespace CDPL
         class MLRModel
         {
 
-        public:
+          public:
             typedef typename CommonType<typename Vector<T>::SizeType, typename Matrix<T>::SizeType>::Type SizeType;
-            typedef T ValueType;
-            typedef Matrix<T> MatrixType;
-            typedef Vector<T> VectorType;
+            typedef T                                                                                     ValueType;
+            typedef Matrix<T>                                                                             MatrixType;
+            typedef Vector<T>                                                                             VectorType;
 
             /**
              * \brief Constructs and initializes a regression model with an empty data set.
              */
-            MLRModel(): chiSquare(0), Q(0), r(0), stdDeviation(0) {}
+            MLRModel():
+                chiSquare(0), Q(0), r(0), stdDeviation(0) {}
 
             /**
              * \brief Resizes the data set to hold \a num_points data points with \a num_vars independent variables.
@@ -143,7 +144,7 @@ namespace CDPL
              * \return A non-\c const reference to the matrix with the independent variables \f$ \vec{X}_i \f$.
              */
             MatrixType& getXMatrix();
-            
+
             /**
              * \brief Returns a read-only matrix where each row represents the vector \f$ \vec{X}_i \f$ with independent variables
              *        of the currently stored data points \f$ (y_i, \vec{X}_i), \, i = 1, 2, \ldots, N \f$.
@@ -218,7 +219,7 @@ namespace CDPL
              * \note The returned value is only valid if calcStatistics() has been called before.
              */
             ValueType getChiSquare() const;
-            
+
             /**
              * \brief Returns the goodness of fit \f$ Q \f$.
              *
@@ -283,21 +284,21 @@ namespace CDPL
              */
             void calcStatistics();
 
-        private:
-            MatrixType  xMatrix;
-            VectorType  yValues;
-            VectorType  calcYValues;
-            VectorType  coefficients;
-            MatrixType  svdU;
-            MatrixType  svdV;
-            VectorType  svdW;
-            ValueType   chiSquare;
-            ValueType   Q;
-            ValueType   r;
-            ValueType   stdDeviation;
+          private:
+            MatrixType xMatrix;
+            VectorType yValues;
+            VectorType calcYValues;
+            VectorType coefficients;
+            MatrixType svdU;
+            MatrixType svdV;
+            VectorType svdW;
+            ValueType  chiSquare;
+            ValueType  Q;
+            ValueType  r;
+            ValueType  stdDeviation;
         };
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 
 // Implementation
@@ -308,7 +309,7 @@ void CDPL::Math::MLRModel<T>::resizeDataSet(SizeType num_points, SizeType num_va
     if (num_points == xMatrix.getSize1() && num_vars == xMatrix.getSize2())
         return;
 
-    xMatrix.resize(num_points, num_vars, true, ValueType());    
+    xMatrix.resize(num_points, num_vars, true, ValueType());
     yValues.resize(num_points, ValueType());
 }
 
@@ -344,15 +345,15 @@ template <typename T>
 template <typename V>
 void CDPL::Math::MLRModel<T>::addXYData(const VectorExpression<V>& x_vars, ValueType y)
 {
-    SizeType i = xMatrix.getSize1();
+    SizeType i           = xMatrix.getSize1();
     SizeType x_mtx_size2 = xMatrix.getSize2();
     SizeType x_vars_size = x_vars().getSize();
 
-    resizeDataSet(i + 1, std::max(x_mtx_size2, x_vars_size)); 
+    resizeDataSet(i + 1, std::max(x_mtx_size2, x_vars_size));
 
     for (SizeType j = 0; j < x_vars_size; j++)
         xMatrix(i, j) = x_vars()(j);
-    
+
     if (x_vars_size < x_mtx_size2)
         for (SizeType j = x_vars_size; j < x_mtx_size2; j++)
             xMatrix(i, j) = ValueType();
@@ -396,18 +397,18 @@ void CDPL::Math::MLRModel<T>::buildModel()
     SizeType n = xMatrix.getSize1();
     SizeType m = xMatrix.getSize2();
 
-    if (m == 0 || n == 0) 
+    if (m == 0 || n == 0)
         throw Base::CalculationFailed("MLRModel: empty data set");
 
     if (n != SizeType(yValues.getSize()))
-        resizeDataSet(std::max(SizeType(yValues.getSize()), n), m); 
+        resizeDataSet(std::max(SizeType(yValues.getSize()), n), m);
 
     svdU.resize(n, m, false);
     svdV.resize(m, m, false);
     svdW.resize(m, false);
 
     svdU = xMatrix;
-    
+
     if (!svDecompose(svdU, svdW, svdV))
         throw Base::CalculationFailed("MLRModel: singular value decomposition failed");
 
@@ -432,7 +433,7 @@ template <typename T>
 template <typename V>
 typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::calcYValue(const VectorExpression<V>& x) const
-{    
+{
     if (SizeType(x().getSize()) != SizeType(coefficients.getSize()))
         throw Base::CalculationFailed("MLRModel: number of regression coefficients does not match number of independent variables");
 
@@ -443,7 +444,7 @@ template <typename T>
 template <typename V>
 typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::operator()(const VectorExpression<V>& x) const
-{    
+{
     return calcYValue(x);
 }
 
@@ -487,7 +488,7 @@ void CDPL::Math::MLRModel<T>::calcStatistics()
 {
     ValueType mean_data_y = 0;
     ValueType mean_calc_y = 0;
-    
+
     chiSquare = ValueType();
 
     SizeType m = xMatrix.getSize2();
@@ -515,7 +516,7 @@ void CDPL::Math::MLRModel<T>::calcStatistics()
 
     mean_data_y /= n;
     mean_calc_y /= n;
-    
+
     ValueType sxx = ValueType();
     ValueType syy = ValueType();
     ValueType sxy = ValueType();
@@ -533,9 +534,7 @@ void CDPL::Math::MLRModel<T>::calcStatistics()
 
     stdDeviation = TypeTraits<ValueType>::sqrt(chiSquare / (n - m));
 
-    Q = gammaQ(ValueType(n - 2) / 2, chiSquare / 2); 
+    Q = gammaQ(ValueType(n - 2) / 2, chiSquare / 2);
 }
 
 #endif // CDPL_MATH_MLRMODEL_HPP
-
-

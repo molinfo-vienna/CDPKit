@@ -35,7 +35,7 @@
 #include "CDPL/Base/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,10 +50,10 @@ namespace CDPL
          * \c std::size_t does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal
          * to any instance created before or afterwards.         
          */
-        class CDPL_BASE_API LookupKey 
+        class CDPL_BASE_API LookupKey
         {
 
-        public:
+          public:
             /**
              * \brief A functor class implementing the generation of hash codes for \c %LookupKey instances.
              */
@@ -109,7 +109,7 @@ namespace CDPL
              * \param key The other \c %LookupKey instance to be compared with.
              * \return \c true if the numeric identifier of this instance is smaller than the identifier of \a key,
              *         and \c false otherwise.
-             */ 
+             */
             bool operator<(const LookupKey& key) const;
 
             /**
@@ -126,13 +126,14 @@ namespace CDPL
              */
             bool operator!=(const LookupKey& key) const;
 
-        private:
-            LookupKey(std::size_t id): numericID(id) {}
+          private:
+            LookupKey(std::size_t id):
+                numericID(id) {}
 
             std::size_t numericID;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 
 // Implementation
@@ -158,7 +159,7 @@ inline bool CDPL::Base::LookupKey::operator!=(const LookupKey& key) const
 }
 
 
-inline std::size_t CDPL::Base::LookupKey::HashFunc::operator()(const LookupKey& key) const 
+inline std::size_t CDPL::Base::LookupKey::HashFunc::operator()(const LookupKey& key) const
 {
     return key.numericID;
 }

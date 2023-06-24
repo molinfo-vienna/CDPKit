@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,22 +50,22 @@ namespace CDPL
         namespace FeatureProperty
         {
 
-            extern CDPL_PHARM_API const Base::LookupKey TYPE; 
+            extern CDPL_PHARM_API const Base::LookupKey TYPE;
 
-            extern CDPL_PHARM_API const Base::LookupKey GEOMETRY; 
+            extern CDPL_PHARM_API const Base::LookupKey GEOMETRY;
             extern CDPL_PHARM_API const Base::LookupKey LENGTH;
-            extern CDPL_PHARM_API const Base::LookupKey ORIENTATION; 
-            extern CDPL_PHARM_API const Base::LookupKey TOLERANCE; 
-            extern CDPL_PHARM_API const Base::LookupKey WEIGHT; 
+            extern CDPL_PHARM_API const Base::LookupKey ORIENTATION;
+            extern CDPL_PHARM_API const Base::LookupKey TOLERANCE;
+            extern CDPL_PHARM_API const Base::LookupKey WEIGHT;
 
-            extern CDPL_PHARM_API const Base::LookupKey SUBSTRUCTURE; 
+            extern CDPL_PHARM_API const Base::LookupKey SUBSTRUCTURE;
 
-            extern CDPL_PHARM_API const Base::LookupKey DISABLED_FLAG; 
+            extern CDPL_PHARM_API const Base::LookupKey DISABLED_FLAG;
             extern CDPL_PHARM_API const Base::LookupKey OPTIONAL_FLAG;
 
             extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
-        }
-    }
-}
+        } // namespace FeatureProperty
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREPROPERTY_HPP

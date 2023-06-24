@@ -71,6 +71,6 @@ namespace CDPLPythonChem
     void exportControlParameterDefaults();
 
     void exportDataFormats();
-}
+} // namespace CDPLPythonChem
 
 #endif // CDPL_PYTHON_CHEM_NAMESPACEEXPORTS_HPP

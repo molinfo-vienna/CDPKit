@@ -40,28 +40,29 @@ namespace CDPL
     namespace Util
     {
 
-    class CDPL_UTIL_API FileRemover
-    {
+        class CDPL_UTIL_API FileRemover
+        {
 
-    public:
-        FileRemover(const std::string& path): path(path) {}
+          public:
+            FileRemover(const std::string& path):
+                path(path) {}
 
-        ~FileRemover();
+            ~FileRemover();
 
-        const std::string& getPath() const;
+            const std::string& getPath() const;
 
-        void reset(const std::string& new_path);
+            void reset(const std::string& new_path);
 
-        void release();
+            void release();
 
-        FileRemover& operator=(FileRemover& rhs);
+            FileRemover& operator=(FileRemover& rhs);
 
-    private:
-        void removeFile();
+          private:
+            void removeFile();
 
-        std::string path;
-    };
-    }
-}
+            std::string path;
+        };
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_FILEREMOVER_HPP

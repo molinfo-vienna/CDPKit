@@ -59,8 +59,8 @@ namespace CDPL
 
             extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_DONOR_TYPE;
             extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_ACCEPTOR_TYPE;
-        }
-    }
-}
+        } // namespace AtomProperty
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_ATOMPROPERTY_HPP

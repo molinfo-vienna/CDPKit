@@ -28,7 +28,7 @@
 #include "CDPL/Pharm/TwoPointPharmacophore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -37,22 +37,24 @@ namespace CDPL
         class QueryTwoPointPharmacophore : public TwoPointPharmacophore
         {
 
-        public:
+          public:
             QueryTwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
 
-            double getFeature1Tolerance() const {
+            double getFeature1Tolerance() const
+            {
                 return ftr1Tol;
             }
 
-            double getFeature2Tolerance() const {
+            double getFeature2Tolerance() const
+            {
                 return ftr2Tol;
             }
 
-        private:
+          private:
             double ftr1Tol;
             double ftr2Tol;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_QUERYTWOPOINTPHARMACOPHORE_HPP

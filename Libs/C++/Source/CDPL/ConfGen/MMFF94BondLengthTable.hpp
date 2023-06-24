@@ -39,23 +39,23 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
-    
-        class MMFF94BondLengthTable 
+
+        class MMFF94BondLengthTable
         {
 
-        public:
+          public:
             MMFF94BondLengthTable();
 
             void setup(const Chem::MolecularGraph& molgraph, bool strict_param);
 
             double get(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-        private:
+          private:
             unsigned int getBondTypeIndex(const Chem::Bond& bond) const;
 
             unsigned int getNumericAtomType(const Chem::Atom& atom) const;
@@ -69,11 +69,11 @@ namespace CDPL
             ForceField::MMFF94AromaticSSSRSubset::SharedPointer      aromRings;
             Chem::FragmentList::SharedPointer                        usedAromRings;
             ForceField::MMFF94BondStretchingInteractionData          bondStretchingParams;
-            Util::UIArray                                            numAtomTypes;   
-            Util::SArray                                             symAtomTypes;   
-            Util::UIArray                                            bondTypeIndices;   
+            Util::UIArray                                            numAtomTypes;
+            Util::SArray                                             symAtomTypes;
+            Util::UIArray                                            bondTypeIndices;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_MMFF94BONDLENGTHTABLE_HPP

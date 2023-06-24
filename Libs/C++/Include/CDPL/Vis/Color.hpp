@@ -32,7 +32,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_VIS_API Color
         {
 
-        public:
+          public:
             /**
              * \brief A preinitialized \c %Color instance for the color \e black.
              */
@@ -76,7 +76,7 @@ namespace CDPL
              * \brief A preinitialized \c %Color instance for the color \e green.
              */
             static const Color GREEN;
-            
+
             /**
              * \brief A preinitialized \c %Color instance for the color <em>dark green</em>.
              */
@@ -146,7 +146,7 @@ namespace CDPL
              * \brief Constructs and initializes a \c %Color object with all RGBA components set to zero.
              */
             Color();
-            
+
             /**
              * \brief Constructs and initializes a \c %Color object with the RGBA components set to 
              *        the specified values.
@@ -176,7 +176,7 @@ namespace CDPL
              * \return The value of the red color component.
              */
             double getRed() const;
-        
+
             /**
              * \brief Sets the the value of green color component to \a green.
              *
@@ -224,7 +224,7 @@ namespace CDPL
              * \return The value of the alpha component.
              */
             double getAlpha() const;
-        
+
             /**
              * \brief Sets the values of the RGBA components to specified values.
              *
@@ -255,13 +255,13 @@ namespace CDPL
              */
             bool operator!=(const Color& color) const;
 
-        private:
+          private:
             double red;
             double green;
             double blue;
             double alpha;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_COLOR_HPP

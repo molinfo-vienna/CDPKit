@@ -36,7 +36,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -44,12 +44,12 @@ namespace CDPL
 
         class GaussianShape;
         class GaussianProduct;
-        
+
         class GaussianProductList
         {
 
             typedef std::vector<GaussianProduct*> ProductList;
-                
+
           public:
             typedef ProductList::const_iterator ConstProductIterator;
 
@@ -60,7 +60,7 @@ namespace CDPL
             GaussianProductList(const GaussianShape& shape);
 
             ~GaussianProductList();
-            
+
             void setMaxOrder(std::size_t max_order);
 
             std::size_t getMaxOrder() const;
@@ -70,7 +70,7 @@ namespace CDPL
             double getDistanceCutoff() const;
 
             GaussianProductList& operator=(const GaussianProductList& prod_list);
-            
+
             void setup(const GaussianShape& shape);
 
             const GaussianProduct* getProduct(std::size_t idx) const;
@@ -82,19 +82,19 @@ namespace CDPL
             std::size_t getNumProducts() const;
 
             std::size_t getNumShapeElements() const;
-            
+
             double getVolume() const;
-            
+
           private:
             void generateProducts(std::size_t elem_idx);
 
             bool checkNeighborhood(std::size_t elem_idx) const;
 
             void copy(const GaussianProductList& prod_list);
-            
-            typedef std::vector<std::size_t> NeighborList;
-            typedef std::vector<NeighborList> NeighborListArray;
-            typedef std::vector<Util::BitSet> AdjacencyMatrix;
+
+            typedef std::vector<std::size_t>           NeighborList;
+            typedef std::vector<NeighborList>          NeighborListArray;
+            typedef std::vector<Util::BitSet>          AdjacencyMatrix;
             typedef Util::ObjectStack<GaussianProduct> GaussianProductCache;
 
             GaussianProductCache prodCache;
@@ -107,13 +107,13 @@ namespace CDPL
             double               volume;
             std::size_t          numElements;
         };
-    }
-    
+    } // namespace Shape
+
     inline const Shape::GaussianProduct* Shape::GaussianProductList::getProduct(std::size_t idx) const
     {
         return products[idx];
     }
-    
+
     inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsBegin() const
     {
         return products.begin();
@@ -123,6 +123,6 @@ namespace CDPL
     {
         return products.end();
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANPRODUCTLIST_HPP

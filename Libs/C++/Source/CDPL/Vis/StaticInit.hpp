@@ -46,8 +46,8 @@ namespace CDPL
         void initControlParameterDefaults();
         void initDataFormats();
         void initAtomColors();
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 namespace
 {
@@ -55,7 +55,8 @@ namespace
     struct CDPLVisInit
     {
 
-        CDPLVisInit() {
+        CDPLVisInit()
+        {
             CDPL::Vis::initAtomProperties();
             CDPL::Vis::initBondProperties();
             CDPL::Vis::initMolecularGraphProperties();
@@ -71,7 +72,7 @@ namespace
         }
 
     } cdplVisInit;
-}
+} // namespace
 
 #endif // CDPL_VIS_STATIC_LINK
 

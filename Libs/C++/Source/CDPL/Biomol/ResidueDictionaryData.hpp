@@ -55,7 +55,7 @@ namespace CDPL
             extern const char        RESIDUE_STRUCTURE_DATA[];
             extern const std::size_t RESIDUE_STRUCTURE_DATA_LEN;
         } // namespace ResidueDictionaryData
-    }     // namespace Biomol
+    } // namespace Biomol
 } // namespace CDPL
 
 #endif // CDPL_BIOMOL_RESIDUEDICTIONARYDATA_HPP

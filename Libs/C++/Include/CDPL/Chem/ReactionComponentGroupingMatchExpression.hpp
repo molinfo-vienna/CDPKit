@@ -38,7 +38,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -53,7 +53,7 @@ namespace CDPL
         class CDPL_CHEM_API ReactionComponentGroupingMatchExpression : public MatchExpression<Reaction>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionComponentGroupingMatchExpression
              *        instances.
@@ -89,7 +89,7 @@ namespace CDPL
              * \note If invalid component-level grouping constraints have been specified (\e null pointer or empty fragment list), the expression will always
              *       evaluate to \c true.
              */
-            bool operator()(const Reaction& query_rxn, const Reaction& target_rxn, const AtomBondMapping& mapping, 
+            bool operator()(const Reaction& query_rxn, const Reaction& target_rxn, const AtomBondMapping& mapping,
                             const Base::Any& aux_data) const;
 
             /**
@@ -100,14 +100,14 @@ namespace CDPL
 
             ReactionComponentGroupingMatchExpression& operator=(const ReactionComponentGroupingMatchExpression& rhs);
 
-        private:
+          private:
             typedef std::vector<const Fragment*> ComponentList;
 
             FragmentList::SharedPointer compGrouping;
             mutable ComponentList       compList;
             mutable std::mutex          mutex;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONCOMPONENTGROUPINGMATCHEXPRESSION_HPP

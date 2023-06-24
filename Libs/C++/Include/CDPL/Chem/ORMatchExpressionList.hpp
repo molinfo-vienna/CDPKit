@@ -34,7 +34,7 @@
 #include "CDPL/Chem/MatchExpressionList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class ORMatchExpressionList : public MatchExpressionList<ObjType1, ObjType2>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ORMatchExpressionList instances.
              */
@@ -86,8 +86,9 @@ namespace CDPL
             bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
                             const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
-        private:
-            const char* getClassName() const {
+          private:
+            const char* getClassName() const
+            {
                 return "ORMatchExpressionList";
             }
         };
@@ -100,7 +101,7 @@ namespace CDPL
         class ORMatchExpressionList<ObjType, void> : public MatchExpressionList<ObjType, void>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ORMatchExpressionList instances.
              */
@@ -131,21 +132,22 @@ namespace CDPL
             bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping,
                             const Base::Any& aux_data) const;
 
-        private:
-            const char* getClassName() const {
+          private:
+            const char* getClassName() const
+            {
                 return "ORMatchExpressionList";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                              const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                              const Base::Any& data) const
+bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                       const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                       const Base::Any& data) const
 {
     if (this->isEmpty())
         return true;
@@ -160,9 +162,9 @@ bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const Obj
 }
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                              const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                              const AtomBondMapping& mapping, const Base::Any& data) const
+bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                       const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                       const AtomBondMapping& mapping, const Base::Any& data) const
 {
     if (this->isEmpty())
         return true;
@@ -178,8 +180,8 @@ bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const Obj
 
 
 template <typename ObjType>
-bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                         const Base::Any& data) const
+bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                                  const Base::Any& data) const
 {
     if (this->isEmpty())
         return true;
@@ -194,8 +196,8 @@ bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType&
 }
 
 template <typename ObjType>
-bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                         const AtomBondMapping& mapping, const Base::Any& data) const
+bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                                  const AtomBondMapping& mapping, const Base::Any& data) const
 {
     if (this->isEmpty())
         return true;

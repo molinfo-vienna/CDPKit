@@ -34,7 +34,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ForceField
@@ -42,19 +42,19 @@ namespace CDPL
 
         class MMFF94InteractionData;
     }
-    
-    namespace ConfGen 
+
+    namespace ConfGen
     {
-    
-        struct ForceFieldInteractionMask 
+
+        struct ForceFieldInteractionMask
         {
 
             void setup(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
-                      std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
-                      std::size_t num_els_ia);
+                       std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
+                       std::size_t num_els_ia);
 
-            void setup(const ForceField::MMFF94InteractionData& ia_data); 
-            
+            void setup(const ForceField::MMFF94InteractionData& ia_data);
+
             Util::BitSet bondStretching;
             Util::BitSet angleBending;
             Util::BitSet stretchBend;
@@ -63,7 +63,7 @@ namespace CDPL
             Util::BitSet vanDerWaals;
             Util::BitSet electrostatic;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FORCEFIELDINTERACTIONMASK_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref MMTF] format.
          */
         typedef Util::DefaultDataInputHandler<MMTFGZMoleculeReader, DataFormat::MMTF_GZ> MMTFGZMoleculeInputHandler;
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MMTFGZMOLECULEINPUTHANDLER_HPP

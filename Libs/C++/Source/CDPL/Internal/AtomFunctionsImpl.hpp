@@ -46,13 +46,13 @@ std::size_t CDPL::Internal::getNumContainingSSSRRings(const Chem::Atom& atom, co
 bool CDPL::Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
     using namespace Chem;
-    
+
     if (getType(atom) != AtomType::H)
         return false;
- 
+
     if (flags == AtomPropertyFlag::DEFAULT)
         flags = AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT |
-            AtomPropertyFlag::ATOM_MAPPING_ID | AtomPropertyFlag::CONFIGURATION;
+                AtomPropertyFlag::ATOM_MAPPING_ID | AtomPropertyFlag::CONFIGURATION;
 
     if ((flags & AtomPropertyFlag::ISOTOPE) && getIsotope(atom) > 0)
         return false;
@@ -65,19 +65,19 @@ bool CDPL::Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::Mole
 
     if ((flags & AtomPropertyFlag::ATOM_MAPPING_ID) && getAtomMappingID(atom) != 0)
         return false;
-    
+
     bool first_bond = true;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-        const Bond& bond = *b_it;
+        const Bond& bond     = *b_it;
         const Atom& nbr_atom = *a_it;
 
         if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
             continue;
-        
+
         if (!first_bond)
             return false;
 
@@ -85,13 +85,13 @@ bool CDPL::Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::Mole
             return false;
 
         first_bond = false;
-                
+
         if (flags & AtomPropertyFlag::CONFIGURATION) {
             if (get2DStereoFlag(bond) != BondStereoFlag::PLAIN)
                 return false;
 
             const StereoDescriptor& sto_descr = getStereoDescriptor(nbr_atom);
-            unsigned int config = sto_descr.getConfiguration();
+            unsigned int            config    = sto_descr.getConfiguration();
 
             if (config != AtomConfiguration::R && config != AtomConfiguration::S)
                 continue;
@@ -116,9 +116,9 @@ bool CDPL::Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::Mole
 bool CDPL::Internal::isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
-     Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
-    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+
+    Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
+    Atom::ConstAtomIterator a_it      = atom.getAtomsBegin();
 
     for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
         const Bond& bond = *b_it;
@@ -126,7 +126,7 @@ bool CDPL::Internal::isUnsaturated(const Chem::Atom& atom, const Chem::Molecular
         if (!molgraph.containsAtom(*a_it) || !molgraph.containsBond(bond))
             continue;
 
-        if (getOrder(bond) > 1) 
+        if (getOrder(bond) > 1)
             return true;
     }
 
@@ -136,15 +136,15 @@ bool CDPL::Internal::isUnsaturated(const Chem::Atom& atom, const Chem::Molecular
 bool CDPL::Internal::isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
     using namespace Chem;
-    
+
     if (getType(atom) != AtomType::N)
         return false;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-        const Bond& bond = *b_it;
+        const Bond& bond     = *b_it;
         const Atom& nbr_atom = *a_it;
 
         if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
@@ -163,7 +163,7 @@ bool CDPL::Internal::isAmideNitrogen(const Chem::Atom& atom, const Chem::Molecul
 bool CDPL::Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
+
     if (getType(atom) != AtomType::N)
         return false;
 
@@ -173,15 +173,15 @@ bool CDPL::Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::Mo
     if (getHybridizationState(atom) != HybridizationState::SP3)
         return false;
 
-    std::size_t bond_count = 0;
+    std::size_t bond_count      = 0;
     std::size_t ring_bond_count = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
         const Atom& nbr_atom = *a_it;
-        const Bond& bond = *b_it;
+        const Bond& bond     = *b_it;
 
         if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
             continue;
@@ -192,7 +192,7 @@ bool CDPL::Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::Mo
         if (getRingFlag(bond) && (++ring_bond_count > 2))
             return false;
 
-        if (getAromaticityFlag(nbr_atom)/* || isUnsaturated(nbr_atom, molgraph)*/)
+        if (getAromaticityFlag(nbr_atom) /* || isUnsaturated(nbr_atom, molgraph)*/)
             return false;
 
         switch (getHybridizationState(nbr_atom)) {
@@ -203,7 +203,7 @@ bool CDPL::Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::Mo
 
             default:
                 break;
-        } 
+        }
 
         bond_count++;
     }
@@ -214,24 +214,24 @@ bool CDPL::Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::Mo
 bool CDPL::Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
+
     if (getType(atom) != AtomType::N)
         return false;
 
     std::size_t bond_count = 0;
-    bool unsat_nbrs = false;
+    bool        unsat_nbrs = false;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
         const Atom& nbr_atom = *a_it;
-        const Bond& bond = *b_it;
+        const Bond& bond     = *b_it;
 
         if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
             continue;
 
-        if (getOrder(bond) != 1 || getAromaticityFlag(nbr_atom)/* || isUnsaturated(nbr_atom, molgraph)*/) {
+        if (getOrder(bond) != 1 || getAromaticityFlag(nbr_atom) /* || isUnsaturated(nbr_atom, molgraph)*/) {
             unsat_nbrs = true;
 
         } else {
@@ -245,7 +245,7 @@ bool CDPL::Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::Molecu
                     break;
             }
         }
-        
+
         bond_count++;
     }
 
@@ -258,7 +258,7 @@ bool CDPL::Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::Molecu
 bool CDPL::Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
     using namespace Chem;
-    
+
     unsigned int type = getType(atom);
 
     switch (type) {
@@ -278,7 +278,7 @@ bool CDPL::Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::Mole
     if (type == AtomType::C) {
         if (getExplicitBondCount(atom, molgraph, 2, AtomType::O, true) == 1)
             return true;
-        
+
         if (db_o_only)
             return false;
 
@@ -306,7 +306,7 @@ std::size_t CDPL::Internal::calcExplicitValence(const Chem::Atom& atom, const Ch
     std::size_t exp_val = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it))
@@ -314,7 +314,7 @@ std::size_t CDPL::Internal::calcExplicitValence(const Chem::Atom& atom, const Ch
 
     return exp_val;
 }
-    
+
 std::size_t CDPL::Internal::calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     return (calcExplicitValence(atom, molgraph) + getImplicitHydrogenCount(atom));
@@ -324,24 +324,24 @@ std::size_t CDPL::Internal::calcFreeValenceElectronCount(const Chem::Atom& atom,
 {
     long free_el_count = calcValenceElectronCount(atom) - calcValence(atom, molgraph);
 
-    return std::size_t(free_el_count < 0 ? 0 : free_el_count); 
+    return std::size_t(free_el_count < 0 ? 0 : free_el_count);
 }
 
 std::size_t CDPL::Internal::calcValenceElectronCount(const Chem::Atom& atom)
 {
     long el_count = Chem::AtomDictionary::getNumValenceElectrons(getType(atom)) - getFormalCharge(atom);
 
-    return std::size_t(el_count < 0 ? 0 : el_count); 
+    return std::size_t(el_count < 0 ? 0 : el_count);
 }
 
 std::size_t CDPL::Internal::getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && (strict ? type == getType(*a_it) : atomTypesMatch(type, getType(*a_it))))
@@ -353,7 +353,7 @@ std::size_t CDPL::Internal::getExplicitAtomCount(const Chem::Atom& atom, const C
 std::size_t CDPL::Internal::getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
 {
     using namespace Chem;
-    
+
     std::size_t count = getExplicitAtomCount(atom, molgraph, type, strict);
 
     if (strict ? type == AtomType::H : atomTypesMatch(type, AtomType::H))
@@ -365,11 +365,11 @@ std::size_t CDPL::Internal::getAtomCount(const Chem::Atom& atom, const Chem::Mol
 std::size_t CDPL::Internal::getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
-     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && (getType(*a_it) != Chem::AtomType::H))
@@ -381,11 +381,11 @@ std::size_t CDPL::Internal::getHeavyAtomCount(const Chem::Atom& atom, const Chem
 std::size_t CDPL::Internal::getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && isOrdinaryHydrogen(*a_it, molgraph, flags))
@@ -397,14 +397,14 @@ std::size_t CDPL::Internal::getOrdinaryHydrogenCount(const Chem::Atom& atom, con
 std::size_t CDPL::Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
+
     if (&atom.getMolecule() == &molgraph)
         return atom.getNumAtoms();
 
     std::size_t count = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it))
@@ -421,11 +421,11 @@ std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::Mol
 std::size_t CDPL::Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getOrder(*b_it) == order)
@@ -447,11 +447,11 @@ std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::Mol
 std::size_t CDPL::Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) &&
@@ -466,7 +466,7 @@ std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::Mol
     using namespace Chem;
 
     std::size_t count = getExplicitBondCount(atom, molgraph, order, type, strict);
- 
+
     if (order == 1 && (strict ? type == AtomType::H : atomTypesMatch(type, AtomType::H)))
         count += getImplicitHydrogenCount(atom);
 
@@ -476,11 +476,11 @@ std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::Mol
 std::size_t CDPL::Internal::getRingBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
-     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getRingFlag(*b_it))
@@ -492,11 +492,11 @@ std::size_t CDPL::Internal::getRingBondCount(const Chem::Atom& atom, const Chem:
 std::size_t CDPL::Internal::getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
-    
+
     std::size_t count = 0;
 
-     Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+    Atom::ConstBondIterator b_it      = atom.getBondsBegin();
 
     for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
         if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && !isHydrogenBond(*b_it))

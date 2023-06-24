@@ -34,41 +34,48 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94BondStretchingInteraction
         {
 
           public:
-            MMFF94BondStretchingInteraction(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int bond_type_idx, 
+            MMFF94BondStretchingInteraction(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int bond_type_idx,
                                             double force_const, double ref_length):
-                atom1Idx(atom1_idx), atom2Idx(atom2_idx), bondTypeIdx(bond_type_idx), forceConst(force_const), refLength(ref_length) {}
+                atom1Idx(atom1_idx),
+                atom2Idx(atom2_idx), bondTypeIdx(bond_type_idx), forceConst(force_const), refLength(ref_length) {}
 
-            std::size_t getAtom1Index() const {
+            std::size_t getAtom1Index() const
+            {
                 return atom1Idx;
             }
 
-            std::size_t getAtom2Index() const {
+            std::size_t getAtom2Index() const
+            {
                 return atom2Idx;
             }
 
-            unsigned int getBondTypeIndex() const {
+            unsigned int getBondTypeIndex() const
+            {
                 return bondTypeIdx;
             }
 
-            double getForceConstant() const {
+            double getForceConstant() const
+            {
                 return forceConst;
             }
 
-            double getReferenceLength() const {
+            double getReferenceLength() const
+            {
                 return refLength;
             }
-    
-            void setReferenceLength(double length) {
+
+            void setReferenceLength(double length)
+            {
                 refLength = length;
             }
 
@@ -78,8 +85,8 @@ namespace CDPL
             unsigned int bondTypeIdx;
             double       forceConst;
             double       refLength;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTION_HPP

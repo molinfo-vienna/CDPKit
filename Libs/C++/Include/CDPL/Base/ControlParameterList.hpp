@@ -35,20 +35,20 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
-    
+
     namespace Base
     {
-        
+
         /**
          * \brief A data structure for the storage and lookup of control-parameter values.
          * \see Base::ControlParameterContainer for a description of the available methods.
          */
         class CDPL_BASE_API ControlParameterList : public ControlParameterContainer
         {
-        
-        public:
+
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ControlParameterList instances.
              */
@@ -57,7 +57,8 @@ namespace CDPL
             /**
              * \brief Constructs an empty \c %ControlParameterList instance.
              */
-            ControlParameterList(): ControlParameterContainer() {}
+            ControlParameterList():
+                ControlParameterContainer() {}
 
             /**
              * \brief Constructs a copy of the \c %ControlParameterContainer instance \a cntnr.
@@ -65,7 +66,8 @@ namespace CDPL
              * \note Only the control-parameter entries of \a cntnr are copied. Entries in the parent container
              *       of \a cntnr (if set) will be ignored (see setParent()).
              */
-            ControlParameterList(const ControlParameterContainer& cntnr): ControlParameterContainer(cntnr) {}
+            ControlParameterList(const ControlParameterContainer& cntnr):
+                ControlParameterContainer(cntnr) {}
 
             /**
              * \brief Assignment operator.
@@ -74,7 +76,7 @@ namespace CDPL
              */
             ControlParameterList& operator=(const ControlParameterContainer& cntnr);
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 #endif // CDPL_BASE_CONTROLPARAMETERLIST_HPP

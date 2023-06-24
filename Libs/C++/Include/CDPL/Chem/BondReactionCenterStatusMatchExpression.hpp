@@ -35,7 +35,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_CHEM_API BondReactionCenterStatusMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondReactionCenterStatusMatchExpression
              *        instances.
@@ -111,13 +111,13 @@ namespace CDPL
              *         and \c false otherwise.
              * \note The reaction center status of \a target_bond is retrieved from the Chem::Bond property Chem::BondProperty::REACTION_CENTER_STATUS.
              */
-            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, const Bond& target_bond, 
+            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, const Bond& target_bond,
                             const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
-        private:
+          private:
             unsigned int rxnCtrStatus;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDREACTIONCENTERSTATUSMATCHEXPRESSION_HPP

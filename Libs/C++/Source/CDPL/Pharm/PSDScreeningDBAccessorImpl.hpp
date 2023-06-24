@@ -41,7 +41,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -52,11 +52,11 @@ namespace CDPL
 
     namespace Pharm
     {
-    
+
         class PSDScreeningDBAccessorImpl : private SQLiteDataIOBase
         {
 
-        public:
+          public:
             PSDScreeningDBAccessorImpl();
 
             void open(const std::string& name);
@@ -83,9 +83,9 @@ namespace CDPL
 
             const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx);
 
-            const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx); 
+            const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx);
 
-        private:
+          private:
             void initControlParams();
 
             void closeDBConnection();
@@ -95,31 +95,31 @@ namespace CDPL
             void initMolIdxIDMappings();
             void initPharmIdxMolIDConfIdxMappings();
             void loadFeatureCounts();
-    
-            typedef std::vector<FeatureTypeHistogram> FeatureCountsArray;
-            typedef std::pair<std::int64_t, std::size_t> MolIDConfIdxPair;
-            typedef std::vector<std::int64_t> MolIDArray;
-            typedef std::vector<MolIDConfIdxPair> MolIDConfIdxPairArray;
-            typedef std::unordered_map<std::int64_t, std::size_t> MolIDToUIntMap;
+
+            typedef std::vector<FeatureTypeHistogram>                                                 FeatureCountsArray;
+            typedef std::pair<std::int64_t, std::size_t>                                              MolIDConfIdxPair;
+            typedef std::vector<std::int64_t>                                                         MolIDArray;
+            typedef std::vector<MolIDConfIdxPair>                                                     MolIDConfIdxPairArray;
+            typedef std::unordered_map<std::int64_t, std::size_t>                                     MolIDToUIntMap;
             typedef std::unordered_map<MolIDConfIdxPair, std::size_t, boost::hash<MolIDConfIdxPair> > MolIDConfIdxToPharmIdxMap;
 
-            SQLite3StmtPointer               selMolDataStmt;
-            SQLite3StmtPointer               selPharmDataStmt;
-            SQLite3StmtPointer               selMolIDStmt;
-            SQLite3StmtPointer               selMolIDConfIdxStmt;
-            SQLite3StmtPointer               selFtrCountsStmt;
-            FeatureCountsArray               featureCounts;
-            MolIDArray                       molIdxToIDMap;
-            MolIDToUIntMap                   molIDToIdxMap;
-            MolIDToUIntMap                   molIDConfCountMap;
-            MolIDConfIdxPairArray            pharmIdxToMolIDConfIdxMap;
-            MolIDConfIdxToPharmIdxMap        molIDConfIdxToPharmIdxMap;
-            Internal::ByteBuffer             byteBuffer;
-            CDFPharmacophoreDataReader       pharmReader;
-            Chem::CDFDataReader              molReader;
-            Base::ControlParameterList       controlParams;
+            SQLite3StmtPointer         selMolDataStmt;
+            SQLite3StmtPointer         selPharmDataStmt;
+            SQLite3StmtPointer         selMolIDStmt;
+            SQLite3StmtPointer         selMolIDConfIdxStmt;
+            SQLite3StmtPointer         selFtrCountsStmt;
+            FeatureCountsArray         featureCounts;
+            MolIDArray                 molIdxToIDMap;
+            MolIDToUIntMap             molIDToIdxMap;
+            MolIDToUIntMap             molIDConfCountMap;
+            MolIDConfIdxPairArray      pharmIdxToMolIDConfIdxMap;
+            MolIDConfIdxToPharmIdxMap  molIDConfIdxToPharmIdxMap;
+            Internal::ByteBuffer       byteBuffer;
+            CDFPharmacophoreDataReader pharmReader;
+            Chem::CDFDataReader        molReader;
+            Base::ControlParameterList controlParams;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDSCREENINGDBACCESSORIMPL_HPP

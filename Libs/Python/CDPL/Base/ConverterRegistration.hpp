@@ -28,9 +28,9 @@
 
 namespace CDPLPythonBase
 {
-    
+
     void registerFromPythonConverters();
     void registerToPythonConverters();
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_CONVERTERREGISTRATION_HPP

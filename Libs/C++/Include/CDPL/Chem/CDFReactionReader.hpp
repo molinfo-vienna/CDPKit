@@ -35,7 +35,7 @@
 #include "CDPL/Util/StreamDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_CHEM_API CDFReactionReader : public Util::StreamDataReader<Reaction, CDFReactionReader>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %CDFReactionReader instance that will read the reaction data from the input
              *        stream \a is.
@@ -63,7 +63,7 @@ namespace CDPL
              */
             ~CDFReactionReader();
 
-        private:
+          private:
             friend class Util::StreamDataReader<Reaction, CDFReactionReader>;
 
             CDFReactionReader(const CDFReactionReader&);
@@ -78,7 +78,7 @@ namespace CDPL
 
             CDFDataReaderPtr reader;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CDFREACTIONREADER_HPP

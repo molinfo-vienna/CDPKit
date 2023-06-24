@@ -35,7 +35,7 @@
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -55,7 +55,7 @@ namespace CDPL
             class ConstEntityAccessor;
             class EntityAccessor;
 
-        public:
+          public:
             /**
              * \brief A constant random access iterator used to iterate over the stored \c const Chem::Entity3D objects.
              */
@@ -135,13 +135,13 @@ namespace CDPL
              * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
              */
             EntityIterator end();
-    
-        protected:
+
+          protected:
             /**
              * \brief Virtual destructor.
              */
             virtual ~Entity3DContainer() {}
-        
+
             /**
              * \brief Assignment operator.
              * \param cntnr The other container to copy.
@@ -152,50 +152,58 @@ namespace CDPL
           private:
             class CDPL_CHEM_API ConstEntityAccessor
             {
-            
-            public:
-                ConstEntityAccessor(const EntityAccessor& accessor): container(accessor.container) {}
 
-                ConstEntityAccessor(const Entity3DContainer* cntnr): container(cntnr) {}
+              public:
+                ConstEntityAccessor(const EntityAccessor& accessor):
+                    container(accessor.container) {}
 
-                const Entity3D& operator()(std::size_t idx) const {
+                ConstEntityAccessor(const Entity3DContainer* cntnr):
+                    container(cntnr) {}
+
+                const Entity3D& operator()(std::size_t idx) const
+                {
                     return container->getEntity(idx);
                 }
 
-                bool operator==(const ConstEntityAccessor& accessor) const {
+                bool operator==(const ConstEntityAccessor& accessor) const
+                {
                     return (container == accessor.container);
-                } 
+                }
 
-                ConstEntityAccessor& operator=(const EntityAccessor& accessor) {
+                ConstEntityAccessor& operator=(const EntityAccessor& accessor)
+                {
                     container = accessor.container;
                     return *this;
                 }
 
-            private:
+              private:
                 const Entity3DContainer* container;
             };
 
             class CDPL_CHEM_API EntityAccessor
             {
-            
+
                 friend class ConstEntityAccessor;
 
-            public:
-                EntityAccessor(Entity3DContainer* cntnr): container(cntnr) {}
+              public:
+                EntityAccessor(Entity3DContainer* cntnr):
+                    container(cntnr) {}
 
-                Entity3D& operator()(std::size_t idx) const {
+                Entity3D& operator()(std::size_t idx) const
+                {
                     return container->getEntity(idx);
                 }
 
-                bool operator==(const EntityAccessor& accessor) const {
+                bool operator==(const EntityAccessor& accessor) const
+                {
                     return (container == accessor.container);
                 }
 
-            private:
+              private:
                 Entity3DContainer* container;
             };
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ENTITYCONTAINER_HPP

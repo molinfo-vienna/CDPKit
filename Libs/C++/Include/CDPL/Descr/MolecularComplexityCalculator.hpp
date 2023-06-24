@@ -39,7 +39,7 @@
 #include "CDPL/Descr/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,8 +48,8 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-    }
-    
+    } // namespace Chem
+
     namespace Descr
     {
 
@@ -60,11 +60,12 @@ namespace CDPL
         class CDPL_DESCR_API MolecularComplexityCalculator
         {
 
-          public:    
+          public:
             /**
              * \brief Constructs the \c %MolecularComplexityCalculator instance.
              */
-            MolecularComplexityCalculator(): complexity(0.0) {} 
+            MolecularComplexityCalculator():
+                complexity(0.0) {}
 
             /**
              * \brief Constructs the \c %MolecularComplexityCalculator instance and calculates the complexity
@@ -90,7 +91,7 @@ namespace CDPL
              */
             double getResult() const;
 
-        private:
+          private:
             MolecularComplexityCalculator(const MolecularComplexityCalculator&);
 
             MolecularComplexityCalculator& operator=(const MolecularComplexityCalculator&);
@@ -104,7 +105,7 @@ namespace CDPL
             class SymmetryTerm
             {
 
-            public:
+              public:
                 SymmetryTerm(const Chem::MolecularGraph&, const Chem::Atom&);
 
                 void incNumEquivAtoms();
@@ -114,35 +115,35 @@ namespace CDPL
                 double getNumEquivAtoms() const;
 
                 std::size_t getID() const;
-                
-            private:
+
+              private:
                 double      numEquivAtoms;
                 std::size_t id;
                 std::size_t hCount;
             };
 
-            typedef std::map<std::size_t, SymmetryTerm> SymmetryTermMap; 
+            typedef std::map<std::size_t, SymmetryTerm> SymmetryTermMap;
 
             class PiBondTerm
             {
 
-            public:
+              public:
                 PiBondTerm(std::size_t, std::size_t, std::size_t);
 
                 double getCorrection(const SymmetryTermMap&) const;
-        
+
                 bool isRelevant(const SymmetryTermMap&) const;
 
                 bool operator<(const PiBondTerm&) const;
 
-            private:
+              private:
                 std::size_t symClassID1;
                 std::size_t symClassID2;
                 std::size_t order;
             };
 
-            typedef std::map<std::size_t, std::size_t> AtomTypeCountMap; 
-            typedef std::set<PiBondTerm> PiBondTermSet;
+            typedef std::map<std::size_t, std::size_t> AtomTypeCountMap;
+            typedef std::set<PiBondTerm>               PiBondTermSet;
 
             const Chem::MolecularGraph* molGraph;
             SymmetryTermMap             symmetryTerms;
@@ -156,7 +157,7 @@ namespace CDPL
             double                      structComplexity;
             double                      complexity;
         };
-    }
-}
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_MOLECULARCOMPLEXITYCALCULATOR_HPP

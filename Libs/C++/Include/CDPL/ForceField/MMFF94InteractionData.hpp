@@ -41,16 +41,16 @@
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94InteractionData
         {
 
-        public:
+          public:
             typedef std::shared_ptr<MMFF94InteractionData> SharedPointer;
 
             const MMFF94BondStretchingInteractionData& getBondStretchingInteractions() const;
@@ -85,7 +85,7 @@ namespace CDPL
 
             void swap(MMFF94InteractionData& ia_data);
 
-        private:
+          private:
             MMFF94BondStretchingInteractionData    bondStretchingData;
             MMFF94AngleBendingInteractionData      angleBendingData;
             MMFF94StretchBendInteractionData       stretchBendData;
@@ -94,7 +94,7 @@ namespace CDPL
             MMFF94ElectrostaticInteractionData     electrostaticData;
             MMFF94VanDerWaalsInteractionData       vanDerWaalsData;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94INTERACTIONDATA_HPP

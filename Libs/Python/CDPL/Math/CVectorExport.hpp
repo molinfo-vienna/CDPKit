@@ -46,12 +46,13 @@ namespace CDPLPythonMath
     struct CVectorExport
     {
 
-        CVectorExport(const char* name) {
+        CVectorExport(const char* name)
+        {
             using namespace boost;
             using namespace CDPLPythonMath;
 
             typedef typename VectorType::ValueType ValueType;
-            
+
             python::class_<VectorType>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const VectorType&>((python::arg("self"), python::arg("v"))))
@@ -67,6 +68,6 @@ namespace CDPLPythonMath
                 .def(VectorVisitor<VectorType>());
         }
     };
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_CVECTOREXPORT_HPP

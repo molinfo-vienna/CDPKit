@@ -39,12 +39,30 @@ class QMenu;
 class QActionGroup;
 class QAction;
 
-namespace ChOX { class DataSetView; }
-namespace ChOX { class DataSet; }
-namespace ChOX { class DataSetViewControl; }
-namespace ChOX { class Settings; }
-namespace ChOX { class SettingsEditDialog; }
-namespace ChOX { class RangeSelectionDialog; }
+namespace ChOX
+{
+    class DataSetView;
+}
+namespace ChOX
+{
+    class DataSet;
+}
+namespace ChOX
+{
+    class DataSetViewControl;
+}
+namespace ChOX
+{
+    class Settings;
+}
+namespace ChOX
+{
+    class SettingsEditDialog;
+}
+namespace ChOX
+{
+    class RangeSelectionDialog;
+}
 
 
 namespace ChOX
@@ -54,13 +72,13 @@ namespace ChOX
     {
         Q_OBJECT
 
-    public:
+      public:
         MainWindow(QWidget* parent = 0, Qt::WindowFlags f = 0);
         ~MainWindow();
 
-        bool openFiles(const QStringList & file_names);
+        bool openFiles(const QStringList& file_names);
 
-    public slots:
+      public slots:
         void init();
 
         void fileNew();
@@ -72,7 +90,7 @@ namespace ChOX
         void fileQuit();
         void helpAbout();
 
-    private slots:
+      private slots:
         void destroy();
         void selectRecordRange();
         void editSettings();
@@ -104,7 +122,7 @@ namespace ChOX
         void viewAtomSettingsChanged(bool checked);
         void saveSettings();
 
-    private:
+      private:
         void setupContextMenu();
 
         void setupNewWindow(MainWindow* window);
@@ -141,6 +159,6 @@ namespace ChOX
         Ui::MainWindow              uiMainWindow;
         std::vector<QAction*>       recentFilesMenuActions;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_MAINWINDOW_HPP

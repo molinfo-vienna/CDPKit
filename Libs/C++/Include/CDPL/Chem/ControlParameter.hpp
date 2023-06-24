@@ -32,7 +32,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -450,7 +450,7 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_EXPORT;
-        
+
             extern CDPL_CHEM_API const Base::LookupKey OUTPUT_CONF_ENERGY_AS_COMMENT;
 
             extern CDPL_CHEM_API const Base::LookupKey CONF_INDEX_NAME_SUFFIX_PATTERN;
@@ -475,8 +475,8 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 
             extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_SUBSTRUCTURES;
-        }
-    }
-}
+        } // namespace ControlParameter
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CONTROLPARAMETER_HPP

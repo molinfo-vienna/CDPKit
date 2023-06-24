@@ -33,4 +33,3 @@ bool CDPL::Internal::isHydrogenBond(const Chem::Bond& bond)
 
     return (getType(bond.getBegin()) == AtomType::H || getType(bond.getEnd()) == AtomType::H);
 }
-

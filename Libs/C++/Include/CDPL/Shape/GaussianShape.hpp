@@ -38,7 +38,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -54,49 +54,57 @@ namespace CDPL
             class Element
             {
 
-            public:
+              public:
                 Element(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7):
                     position(pos), radius(radius), hardness(hardness), color(color) {}
 
-                const Math::Vector3D& getPosition() const {
+                const Math::Vector3D& getPosition() const
+                {
                     return position;
                 }
 
-                void setPosition(const Math::Vector3D& pos) {
+                void setPosition(const Math::Vector3D& pos)
+                {
                     position = pos;
                 }
-        
-                double getRadius() const {
+
+                double getRadius() const
+                {
                     return radius;
                 }
 
-                void setRadius(double radius) {
+                void setRadius(double radius)
+                {
                     this->radius = radius;
                 }
-        
-                std::size_t getColor() const {
+
+                std::size_t getColor() const
+                {
                     return color;
                 }
 
-                void setColor(std::size_t color) {
+                void setColor(std::size_t color)
+                {
                     this->color = color;
                 }
-        
-                double getHardness() const {
+
+                double getHardness() const
+                {
                     return hardness;
                 }
 
-                void setHardness(double hardness) {
+                void setHardness(double hardness)
+                {
                     this->hardness = hardness;
                 }
-        
-            private:
+
+              private:
                 Math::Vector3D position;
                 double         radius;
                 double         hardness;
                 std::size_t    color;
             };
-        
+
           private:
             typedef std::vector<Element> ElementList;
 
@@ -104,18 +112,18 @@ namespace CDPL
             typedef std::shared_ptr<GaussianShape> SharedPointer;
 
             typedef ElementList::const_iterator ConstElementIterator;
-            typedef ElementList::iterator ElementIterator;
-            
+            typedef ElementList::iterator       ElementIterator;
+
             void clear();
 
             std::size_t getNumElements() const;
-        
+
             void addElement(const Math::Vector3D& pos, double radius, std::size_t color = 0, double hardness = 2.7);
 
             void addElement(const Element& elem);
 
             void removeElement(std::size_t idx);
-        
+
             const Element& getElement(std::size_t idx) const;
 
             Element& getElement(std::size_t idx);
@@ -135,11 +143,11 @@ namespace CDPL
             ElementIterator begin();
 
             ElementIterator end();
-        
+
           private:
             ElementList elements;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPE_HPP

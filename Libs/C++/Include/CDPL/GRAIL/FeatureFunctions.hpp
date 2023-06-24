@@ -32,7 +32,7 @@
 #include "CDPL/GRAIL/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -41,11 +41,11 @@ namespace CDPL
         class Feature;
     };
 
-    namespace GRAIL 
+    namespace GRAIL
     {
-        
+
         CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool lig_side);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_FEATUREFUNCTIONS_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -101,7 +101,7 @@ namespace CDPL
         class CDPL_CHEM_API StereoDescriptor
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %StereoDescriptor instance that specifies the configuration \a config
              *        but stores no reference atoms.
@@ -114,7 +114,7 @@ namespace CDPL
              * \param descr The \c %StereoDescriptor instance to copy.
              */
             StereoDescriptor(const StereoDescriptor& descr);
-    
+
             /**
              * \brief Constructs a \c %StereoDescriptor instance that specifies a configuration of \a config
              *        for three reference atoms.
@@ -123,7 +123,7 @@ namespace CDPL
              * \param atom2 The second reference atom.
              * \param atom3 The third reference atom.
              */
-            StereoDescriptor(unsigned int config, const Atom& atom1, 
+            StereoDescriptor(unsigned int config, const Atom& atom1,
                              const Atom& atom2, const Atom& atom3);
 
             /**
@@ -135,7 +135,7 @@ namespace CDPL
              * \param atom3 The third reference atom.
              * \param atom4 The fourth reference atom.
              */
-            StereoDescriptor(unsigned int config, const Atom& atom1, const Atom& atom2, 
+            StereoDescriptor(unsigned int config, const Atom& atom1, const Atom& atom2,
                              const Atom& atom3, const Atom& atom4);
 
             /**
@@ -143,13 +143,13 @@ namespace CDPL
              * \return The number of specified reference atoms.
              */
             std::size_t getNumReferenceAtoms() const;
-    
+
             /**
              * \brief Returns the configuration of the reference atoms.
              * \return A constant specifying the configuration of the reference atoms.
              */
             unsigned int getConfiguration() const;
-    
+
             /**
              * \brief Sets the configuration of the reference atoms to \a config.
              * \param config A constant specifying the configuration of the reference atoms.
@@ -201,7 +201,7 @@ namespace CDPL
              * \return \c 1 if an \e odd number of transpositions is required, \c 2 if an \e even number of transpositions is required and
              *         \c 0 if the argument atoms do not match the stored reference atoms.
              */
-            unsigned int getPermutationParity(const Atom& atom1, const Atom& atom2, 
+            unsigned int getPermutationParity(const Atom& atom1, const Atom& atom2,
                                               const Atom& atom3) const;
 
             /**
@@ -214,15 +214,15 @@ namespace CDPL
              * \return \c 1 if an \e odd number of transpositions is required, \c 2 if an \e even number of transpositions is required and
              *         \c 0 if the argument atoms do not match the stored reference atoms.
              */
-            unsigned int getPermutationParity(const Atom& atom1, const Atom& atom2, 
+            unsigned int getPermutationParity(const Atom& atom1, const Atom& atom2,
                                               const Atom& atom3, const Atom& atom4) const;
 
-        private:
+          private:
             const Atom*  refAtoms[4];
             std::size_t  numRefAtoms;
             unsigned int config;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_STEREODESCRIPTOR_HPP

@@ -28,7 +28,7 @@
 #include "CDPL/Pharm/ThreePointPharmacophore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -37,27 +37,30 @@ namespace CDPL
         class QueryThreePointPharmacophore : public ThreePointPharmacophore
         {
 
-        public:
+          public:
             QueryThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3);
 
-            double getFeature1Tolerance() const {
+            double getFeature1Tolerance() const
+            {
                 return ftr1Tol;
             }
 
-            double getFeature2Tolerance() const {
+            double getFeature2Tolerance() const
+            {
                 return ftr2Tol;
             }
-  
-            double getFeature3Tolerance() const {
+
+            double getFeature3Tolerance() const
+            {
                 return ftr3Tol;
             }
 
-        private:
+          private:
             double ftr1Tol;
             double ftr2Tol;
             double ftr3Tol;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORE_HPP

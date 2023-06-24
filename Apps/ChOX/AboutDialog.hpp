@@ -36,12 +36,12 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         AboutDialog(QWidget* = 0, Qt::WindowFlags = 0);
 
-    private:
+      private:
         void init();
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_ABOUTDIALOG_HPP

@@ -36,6 +36,6 @@ namespace CDPLPythonMath
     void exportRegularSpatialGridFunctions();
     void exportSpecialFunctions();
     void exportVectorArrayFunctions();
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_FUNCTIONEXPORTS_HPP

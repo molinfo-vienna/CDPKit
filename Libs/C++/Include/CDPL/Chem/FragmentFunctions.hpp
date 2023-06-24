@@ -33,12 +33,12 @@
 #include "CDPL/Chem/AtomPredicate.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class Fragment;
 
         /**
@@ -60,8 +60,7 @@ namespace CDPL
         CDPL_CHEM_API void removeAtomsIf(Fragment& frag, const AtomPredicate& pred);
 
         CDPL_CHEM_API void removeAtomsIfNot(Fragment& frag, const AtomPredicate& pred);
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_FRAGMENTFUNCTIONS_HPP
- 

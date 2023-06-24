@@ -36,7 +36,7 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -49,21 +49,21 @@ namespace CDPL
         {
 
             extern CDPL_CHEM_API const std::string NAME;
-            extern CDPL_CHEM_API const double STOICHIOMETRIC_NUMBER;
+            extern CDPL_CHEM_API const double      STOICHIOMETRIC_NUMBER;
             extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
-            extern CDPL_CHEM_API const unsigned int MDL_CTAB_VERSION;
+            extern CDPL_CHEM_API const unsigned int                       MDL_CTAB_VERSION;
             extern CDPL_CHEM_API const std::string MDL_COMMENT;
             extern CDPL_CHEM_API const std::string MDL_PROGRAM_NAME;
             extern CDPL_CHEM_API const std::string MDL_USER_INITIALS;
-            extern CDPL_CHEM_API const std::size_t MDL_DIMENSIONALITY;
-            extern CDPL_CHEM_API const double MDL_ENERGY;
-            extern CDPL_CHEM_API const bool MDL_CHIRAL_FLAG;
-            extern CDPL_CHEM_API const long MDL_SCALING_FACTOR1;
-            extern CDPL_CHEM_API const double MDL_SCALING_FACTOR2;
+            extern CDPL_CHEM_API const std::size_t  MDL_DIMENSIONALITY;
+            extern CDPL_CHEM_API const double       MDL_ENERGY;
+            extern CDPL_CHEM_API const bool         MDL_CHIRAL_FLAG;
+            extern CDPL_CHEM_API const long         MDL_SCALING_FACTOR1;
+            extern CDPL_CHEM_API const double       MDL_SCALING_FACTOR2;
             extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
             extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
-        }
-    }
-}
+        } // namespace MolecularGraphPropertyDefault
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLECULARGRAPHPROPERTYDEFAULT_HPP

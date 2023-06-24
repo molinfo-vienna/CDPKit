@@ -41,13 +41,14 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-     namespace Internal 
+    namespace Internal
     {
 
-        template <typename PT, typename CT, typename ST> class Octree;
+        template <typename PT, typename CT, typename ST>
+        class Octree;
     }
 
     namespace GRAIL
@@ -92,16 +93,16 @@ namespace CDPL
 
           private:
             typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-            typedef std::shared_ptr<Octree> OctreePtr;
-            typedef std::vector<std::size_t> AtomIndexList;
+            typedef std::shared_ptr<Octree>                                       OctreePtr;
+            typedef std::vector<std::size_t>                                      AtomIndexList;
 
-            BuriednessScore      buriednessScore; 
-            OctreePtr            octree;
-            Math::Vector3DArray  atomCoords;
-            AtomIndexList        atomIndices;
-            Chem::Fragment       atomSubset;
+            BuriednessScore     buriednessScore;
+            OctreePtr           octree;
+            Math::Vector3DArray atomCoords;
+            AtomIndexList       atomIndices;
+            Chem::Fragment      atomSubset;
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_BURIEDNESSGRIDCALCULATOR_HPP

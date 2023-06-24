@@ -29,14 +29,16 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define ATTRIBUTEDGRID_IMPL()                                            \
-    std::size_t getNumElements() const {                                \
-        return this->get_override("getNumElements")();                  \
-    }                                                                    \
-                                                                        \
-    bool isEmpty() const {                                                \
-        return this->get_override("isEmpty")();                            \
-    }
+#define ATTRIBUTEDGRID_IMPL()                    \
+ std::size_t getNumElements() const              \
+ {                                               \
+  return this->get_override("getNumElements")(); \
+ }                                               \
+                                                 \
+ bool isEmpty() const                            \
+ {                                               \
+  return this->get_override("isEmpty")();        \
+ }
 
 
 namespace CDPLPythonGrid
@@ -48,11 +50,12 @@ namespace CDPLPythonGrid
         friend class boost::python::def_visitor_access;
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
             using namespace CDPL;
 
-            cl    
+            cl
                 .def("isEmpty", python::pure_virtual(&Grid::AttributedGrid::isEmpty), python::arg("self"))
                 .def("getNumElements", python::pure_virtual(&Grid::AttributedGrid::getNumElements), python::arg("self"));
         }
@@ -64,7 +67,8 @@ namespace CDPLPythonGrid
         friend class boost::python::def_visitor_access;
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
             using namespace CDPL;
 
@@ -72,6 +76,6 @@ namespace CDPLPythonGrid
                 .def("__len__", &Grid::AttributedGrid::getNumElements, python::arg("self"));
         }
     };
-}
+} // namespace CDPLPythonGrid
 
 #endif // CDPL_PYTHON_GRID_ATTRIBUTEDGRIDVISITOR_HPP

@@ -35,17 +35,21 @@ namespace
     struct BondSequence
     {
 
-        BondSequence(T& cntnr): container(cntnr) {}
+        BondSequence(T& cntnr):
+            container(cntnr) {}
 
-        std::size_t getNumBonds() const {
+        std::size_t getNumBonds() const
+        {
             return container.getNumBonds();
         }
 
-        const CDPL::Chem::Bond& getBond(std::size_t idx) const {
+        const CDPL::Chem::Bond& getBond(std::size_t idx) const
+        {
             return container.getBond(idx);
         }
 
-        bool containsBond(CDPL::Chem::Bond& bond) const {
+        bool containsBond(CDPL::Chem::Bond& bond) const
+        {
             return container.containsBond(bond);
         }
 
@@ -62,16 +66,17 @@ namespace
     struct BondSequenceExport
     {
 
-        BondSequenceExport(const char* name) {
+        BondSequenceExport(const char* name)
+        {
             using namespace boost;
 
             python::class_<BondSequence<T> >(name, python::no_init)
                 .def("__len__", &BondSequence<T>::getNumBonds, python::arg("self"))
-                .def("__getitem__", &BondSequence<T>::getBond, (python::arg("self"), python::arg("idx")), 
+                .def("__getitem__", &BondSequence<T>::getBond, (python::arg("self"), python::arg("idx")),
                      python::return_internal_reference<1>())
                 .def("__contains__", &BondSequence<T>::containsBond, (python::arg("self"), python::arg("bond")));
         }
     };
-}
+} // namespace
 
 #endif // CDPL_PYTHON_CHEM_BONDSEQUENCEEXPORT_HPP

@@ -30,12 +30,12 @@
 #define CDPL_VIS_ARROWSTYLE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
     {
-    
+
         /**
          * \brief Provides constants for the specification of reaction arrow styles in 2D depictions of
          *        chemical reactions.
@@ -46,19 +46,19 @@ namespace CDPL
             /**
              * \brief Specifies that no reaction arrow shall be drawn.
              */
-            const unsigned int NONE            = 0;
+            const unsigned int NONE = 0;
 
             /**
              * \brief Specifies a solid reaction arrow (interior will be filled).
              */
-            const unsigned int REACTION_SOLID  = 1;
-            
+            const unsigned int REACTION_SOLID = 1;
+
             /**
              * \brief Specifies a hollow reaction arrow (interior will be not filled).
              */
             const unsigned int REACTION_HOLLOW = 2;
-        }
-    }
-}
+        } // namespace ArrowStyle
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_ARROWSTYLE_HPP

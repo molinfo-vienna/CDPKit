@@ -34,10 +34,10 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API FragmentConformerGeneratorSettings
@@ -50,8 +50,8 @@ namespace CDPL
 
             class CDPL_CONFGEN_API FragmentSettings
             {
-        
-            public:
+
+              public:
                 FragmentSettings();
 
                 void setMaxNumSampledConformers(std::size_t max_num);
@@ -78,17 +78,17 @@ namespace CDPL
 
                 double getMinRMSD() const;
 
-            private:
+              private:
                 std::size_t maxNumSampledConfs;
                 std::size_t minNumSampledConfs;
                 std::size_t maxNumOutputConfs;
-                std::size_t timeout;                
+                std::size_t timeout;
                 double      eWindow;
                 double      minRMSD;
             };
 
             FragmentConformerGeneratorSettings();
-    
+
             virtual ~FragmentConformerGeneratorSettings() {}
 
             void preserveInputBondingGeometries(bool preserve);
@@ -96,7 +96,7 @@ namespace CDPL
             bool preserveInputBondingGeometries() const;
 
             void setForceFieldType(unsigned int type);
-        
+
             unsigned int getForceFieldType() const;
 
             void strictForceFieldParameterization(bool strict);
@@ -140,20 +140,20 @@ namespace CDPL
             std::size_t getSmallRingSystemSamplingFactor() const;
 
           private:
-            bool                 preserveBondGeom;
-            unsigned int         forceFieldType;
-            bool                 strictParam;
-            double               dielectricConst;
-            double               distExponent;
-            std::size_t          maxNumRefIters;
-            double               refStopGrad;
-            std::size_t          mcRotorBondCountThresh;
-            std::size_t          srSamplingFactor;
-            FragmentSettings     chainSettings;
-            FragmentSettings     mcSettings;
-            FragmentSettings     srSettings;
+            bool             preserveBondGeom;
+            unsigned int     forceFieldType;
+            bool             strictParam;
+            double           dielectricConst;
+            double           distExponent;
+            std::size_t      maxNumRefIters;
+            double           refStopGrad;
+            std::size_t      mcRotorBondCountThresh;
+            std::size_t      srSamplingFactor;
+            FragmentSettings chainSettings;
+            FragmentSettings mcSettings;
+            FragmentSettings srSettings;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTCONFORMERGENERATORSETTINGS_HPP

@@ -33,7 +33,7 @@
 #include "CDPL/Base/PropertyContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -48,12 +48,13 @@ namespace CDPL
         class PropertyValue
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PropertyValue instance for the property specified by \a key.
              * \param key The key of the property.
              */
-            PropertyValue(const Base::LookupKey& key): propKey(key) {}
+            PropertyValue(const Base::LookupKey& key):
+                propKey(key) {}
 
             /**
              * \brief Retrievs the value of the property specified in the constructor from the
@@ -61,16 +62,15 @@ namespace CDPL
              * \param cntnr The Base::PropertyContainer instance storing the property value.
              * \return The value of the property.
              */
-            const T& operator()(const Base::PropertyContainer& cntnr) const {
+            const T& operator()(const Base::PropertyContainer& cntnr) const
+            {
                 return cntnr.getProperty<T>(propKey);
             }
 
-        private:
+          private:
             Base::LookupKey propKey;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_PROPERTYVALUE_HPP
-
- 

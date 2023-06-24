@@ -34,10 +34,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94StretchBendInteraction
@@ -45,69 +45,85 @@ namespace CDPL
 
           public:
             MMFF94StretchBendInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx,
-                                         unsigned int sb_type_idx, double ref_angle, double ref_length1, double ref_length2, 
+                                         unsigned int sb_type_idx, double ref_angle, double ref_length1, double ref_length2,
                                          double ijk_force_const, double kji_force_const):
-                termAtom1Idx(term_atom1_idx), ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx),
-                sbTypeIdx(sb_type_idx), refAngle(ref_angle), refLength1(ref_length1), refLength2(ref_length2), 
-                ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const)  {}
+                termAtom1Idx(term_atom1_idx),
+                ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx),
+                sbTypeIdx(sb_type_idx), refAngle(ref_angle), refLength1(ref_length1), refLength2(ref_length2),
+                ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const) {}
 
-            std::size_t getTerminalAtom1Index() const {
+            std::size_t getTerminalAtom1Index() const
+            {
                 return termAtom1Idx;
             }
 
-            std::size_t getCenterAtomIndex() const {
+            std::size_t getCenterAtomIndex() const
+            {
                 return ctrAtomIdx;
             }
 
-            std::size_t getTerminalAtom2Index() const {
+            std::size_t getTerminalAtom2Index() const
+            {
                 return termAtom2Idx;
             }
 
-            std::size_t getAtom1Index() const {
+            std::size_t getAtom1Index() const
+            {
                 return termAtom1Idx;
             }
 
-            std::size_t getAtom2Index() const {
+            std::size_t getAtom2Index() const
+            {
                 return ctrAtomIdx;
             }
 
-            std::size_t getAtom3Index() const {
+            std::size_t getAtom3Index() const
+            {
                 return termAtom2Idx;
             }
 
-            unsigned int getStretchBendTypeIndex() const {
+            unsigned int getStretchBendTypeIndex() const
+            {
                 return sbTypeIdx;
             }
 
-            double getIJKForceConstant() const {
+            double getIJKForceConstant() const
+            {
                 return ijkForceConst;
             }
 
-            double getKJIForceConstant() const {
+            double getKJIForceConstant() const
+            {
                 return kjiForceConst;
             }
 
-            double getReferenceAngle() const {
+            double getReferenceAngle() const
+            {
                 return refAngle;
             }
 
-            void setReferenceAngle(double angle) {
+            void setReferenceAngle(double angle)
+            {
                 refAngle = angle;
             }
 
-            double getReferenceLength1() const {
+            double getReferenceLength1() const
+            {
                 return refLength1;
             }
 
-            void setReferenceLength1(double length) {
+            void setReferenceLength1(double length)
+            {
                 refLength1 = length;
             }
 
-            double getReferenceLength2() const {
+            double getReferenceLength2() const
+            {
                 return refLength2;
             }
 
-            void setReferenceLength2(double length) {
+            void setReferenceLength2(double length)
+            {
                 refLength2 = length;
             }
 
@@ -121,8 +137,8 @@ namespace CDPL
             double       refLength2;
             double       ijkForceConst;
             double       kjiForceConst;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTION_HPP

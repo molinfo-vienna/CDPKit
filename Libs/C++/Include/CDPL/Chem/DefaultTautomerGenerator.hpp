@@ -33,25 +33,25 @@
 #include "CDPL/Chem/TautomerGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
 
-    /**
+        /**
      * \brief DefaultTautomerGenerator.
      */
-    class CDPL_CHEM_API DefaultTautomerGenerator : public TautomerGenerator 
-    {
+        class CDPL_CHEM_API DefaultTautomerGenerator : public TautomerGenerator
+        {
 
-      public:
-        /**
+          public:
+            /**
          * \brief Constructs the \c %DefaultTautomerGenerator instance.
          */
-        DefaultTautomerGenerator();
-    };
-    }
-}
+            DefaultTautomerGenerator();
+        };
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_DEFAULTTAUTOMERGENERATOR_HPP

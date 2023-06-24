@@ -35,7 +35,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         {
 
           public:
-            AtomArray3DCoordinatesFunctor(const Math::Vector3DArray& coords, const MolecularGraph& molgraph): 
+            AtomArray3DCoordinatesFunctor(const Math::Vector3DArray& coords, const MolecularGraph& molgraph):
                 coordinates(&coords), molGraph(&molgraph) {}
 
             /**
@@ -65,7 +65,7 @@ namespace CDPL
             const Math::Vector3DArray* coordinates;
             const MolecularGraph*      molGraph;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMARRAY3DCOORDINATESFUNCTOR_HPP

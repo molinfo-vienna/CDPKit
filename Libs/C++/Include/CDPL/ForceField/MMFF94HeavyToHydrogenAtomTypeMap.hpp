@@ -38,67 +38,67 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
-    class CDPL_FORCEFIELD_API MMFF94HeavyToHydrogenAtomTypeMap
-    {
+        class CDPL_FORCEFIELD_API MMFF94HeavyToHydrogenAtomTypeMap
+        {
 
-        typedef std::unordered_map<std::string, std::string> DataStorage;
+            typedef std::unordered_map<std::string, std::string> DataStorage;
 
-      public:
-        typedef std::shared_ptr<MMFF94HeavyToHydrogenAtomTypeMap> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94HeavyToHydrogenAtomTypeMap> SharedPointer;
 
-        typedef DataStorage::const_iterator ConstEntryIterator;
-        typedef DataStorage::iterator EntryIterator;
-        typedef DataStorage::value_type Entry;
+            typedef DataStorage::const_iterator ConstEntryIterator;
+            typedef DataStorage::iterator       EntryIterator;
+            typedef DataStorage::value_type     Entry;
 
-        MMFF94HeavyToHydrogenAtomTypeMap();
+            MMFF94HeavyToHydrogenAtomTypeMap();
 
-        void addEntry(const std::string& parent_type, const std::string& hyd_type);
+            void addEntry(const std::string& parent_type, const std::string& hyd_type);
 
-        const std::string& getEntry(const std::string& parent_type) const;
+            const std::string& getEntry(const std::string& parent_type) const;
 
-        std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-        void clear();
+            void clear();
 
-        bool removeEntry(const std::string& parent_type);
+            bool removeEntry(const std::string& parent_type);
 
-        EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-        ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-        ConstEntryIterator getEntriesEnd() const;
+            ConstEntryIterator getEntriesEnd() const;
 
-        EntryIterator getEntriesBegin();
+            EntryIterator getEntriesBegin();
 
-        EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-        ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-        ConstEntryIterator end() const;
+            ConstEntryIterator end() const;
 
-        EntryIterator begin();
+            EntryIterator begin();
 
-        EntryIterator end();
+            EntryIterator end();
 
-        void load(std::istream& is);
+            void load(std::istream& is);
 
-        void loadDefaults();
+            void loadDefaults();
 
-        static void set(const SharedPointer& map);
+            static void set(const SharedPointer& map);
 
-        static const SharedPointer& get();
+            static const SharedPointer& get();
 
-      private:
-        static SharedPointer defaultMap;
-        DataStorage          entries;
-    };
-    }
-}
+          private:
+            static SharedPointer defaultMap;
+            DataStorage          entries;
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94HEAVYTOHYDROGENATOMTYPEMAP_HPP

@@ -39,7 +39,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,11 +56,11 @@ namespace CDPL
         {
 
           public:
-            static constexpr double       DEF_PROBE_RADIUS    = 1.2;
-            static constexpr double       DEF_GRID_OVERSIZE   = 5.0;
-            static constexpr double       DEF_GRID_STEP_SIZE  = 0.75;
-            static constexpr double       DEF_MIN_SURFACE_ACC = 0.01;
-            static constexpr std::size_t  DEF_NUM_TEST_POINTS = 250;
+            static constexpr double DEF_PROBE_RADIUS         = 1.2;
+            static constexpr double DEF_GRID_OVERSIZE        = 5.0;
+            static constexpr double DEF_GRID_STEP_SIZE       = 0.75;
+            static constexpr double DEF_MIN_SURFACE_ACC      = 0.01;
+            static constexpr std::size_t DEF_NUM_TEST_POINTS = 250;
 
             /**
              * \brief Constructs the \c %SurfaceAtomExtractor instance.
@@ -166,11 +166,11 @@ namespace CDPL
             void extract(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
 
           private:
-            typedef std::vector<double> AtomRadiusTable;
-            typedef std::vector<std::size_t> AtomIndexList;
+            typedef std::vector<double>            AtomRadiusTable;
+            typedef std::vector<std::size_t>       AtomIndexList;
             typedef std::shared_ptr<AtomIndexList> AtomIndexListPtr;
-            typedef std::vector<AtomIndexListPtr> GridAtomLookupTable;
-            typedef std::vector<Math::Vector3D> Vector3DArray;
+            typedef std::vector<AtomIndexListPtr>  GridAtomLookupTable;
+            typedef std::vector<Math::Vector3D>    Vector3DArray;
 
             bool init(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph);
 
@@ -181,27 +181,27 @@ namespace CDPL
 
             void initTestPoints();
 
-            double                          probeRadius;
-            double                          gridOversize;
-            double                          gridStepSize;
-            double                          minSurfAcc;
-            std::size_t                     numTestPoints;
-            Atom3DCoordinatesFunction       coordsFunc;
-            const AtomContainer*            atomContainer;
-            const MolecularGraph*           parentMolGraph;
-            AtomRadiusTable                 atomRadii; 
-            AtomIndexList                   atomIndices; 
-            Math::Matrix<double>            svdU;
-            Vector3DArray                   atomCoords;
-            Vector3DArray                   testPoints;
-            Math::Vector3D                  bBoxMin;
-            Math::Vector3D                  bBoxMax;
-            std::size_t                     gridXSize;
-            std::size_t                     gridYSize;
-            std::size_t                     gridZSize;
-            GridAtomLookupTable             gridAtomLookup;
+            double                    probeRadius;
+            double                    gridOversize;
+            double                    gridStepSize;
+            double                    minSurfAcc;
+            std::size_t               numTestPoints;
+            Atom3DCoordinatesFunction coordsFunc;
+            const AtomContainer*      atomContainer;
+            const MolecularGraph*     parentMolGraph;
+            AtomRadiusTable           atomRadii;
+            AtomIndexList             atomIndices;
+            Math::Matrix<double>      svdU;
+            Vector3DArray             atomCoords;
+            Vector3DArray             testPoints;
+            Math::Vector3D            bBoxMin;
+            Math::Vector3D            bBoxMax;
+            std::size_t               gridXSize;
+            std::size_t               gridYSize;
+            std::size_t               gridZSize;
+            GridAtomLookupTable       gridAtomLookup;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SURFACEATOMEXTRACTOR_HPP

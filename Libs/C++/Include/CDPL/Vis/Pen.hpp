@@ -33,12 +33,12 @@
 #include "CDPL/Vis/Color.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
     {
-    
+
         /**
          * \brief Specifies how to draw lines and outlines of shapes.
          *
@@ -59,34 +59,34 @@ namespace CDPL
             enum LineStyle
             {
 
-                  /**
+                /**
                  * \brief Tells the renderer not to draw lines or shape outlines.
-                 */    
+                 */
                 NO_LINE,
 
                 /**
                  * \brief Specifies a solid line without gaps.
-                 */    
+                 */
                 SOLID_LINE,
 
                 /**
                  * \brief Specifies a dashed line.
-                 */    
-                DASH_LINE, 
+                 */
+                DASH_LINE,
 
                 /**
                  * \brief Specifies a dotted line.
-                 */    
+                 */
                 DOT_LINE,
 
                 /**
                  * \brief Specifies a line with alternating dots and dashes.
-                 */    
+                 */
                 DASH_DOT_LINE,
 
                 /**
                  * \brief Specifies a line with dashes that are followed by two dots.
-                 */    
+                 */
                 DASH_DOT_DOT_LINE
             };
 
@@ -108,7 +108,7 @@ namespace CDPL
 
                 /**
                  * \brief Specifies a rounded line end. 
-                 */    
+                 */
                 ROUND_CAP
             };
 
@@ -120,17 +120,17 @@ namespace CDPL
 
                 /**
                  * \brief Specifies a join style where the outer edges of the lines are extended to meet at an angle, and this area is filled.
-                 */    
+                 */
                 MITER_JOIN,
 
                 /**
                  * \brief Specifies a join style where the triangular notch between the two lines is filled.
-                 */    
+                 */
                 BEVEL_JOIN,
 
                 /**
                  * \brief Specifies a join style where the circular arc between the two lines is filled.
-                 */    
+                 */
                 ROUND_JOIN
             };
 
@@ -139,14 +139,14 @@ namespace CDPL
              *        join style Pen::ROUND_JOIN and color Color::BLACK.
              */
             Pen();
-        
+
             /**
              * \brief Constructs a pen with the specified line style, line width \e 1.0, cap style Pen::ROUND_CAP, 
              *        join style Pen::ROUND_JOIN and color Color::BLACK.
              * \param line_style The line style.
              */
-            Pen(LineStyle line_style); 
-        
+            Pen(LineStyle line_style);
+
             /**
              * \brief Constructs a pen with the specified color, line width, line style, cap style and join style.
              *
@@ -158,20 +158,20 @@ namespace CDPL
              * \param cap_style The line cap style.
              * \param join_style The line join style.
              */
-            Pen(const Color& color, double width = 1.0, LineStyle line_style = SOLID_LINE, 
-                CapStyle cap_style = ROUND_CAP, JoinStyle join_style = ROUND_JOIN); 
+            Pen(const Color& color, double width = 1.0, LineStyle line_style = SOLID_LINE,
+                CapStyle cap_style = ROUND_CAP, JoinStyle join_style = ROUND_JOIN);
 
             /**
              * \brief Sets the line style to \a line_style.
              * \param line_style The line style.
              */
-            void setLineStyle(LineStyle line_style); 
+            void setLineStyle(LineStyle line_style);
 
             /**
              * \brief Returns the line style.
              * \return The line style.
              */
-            LineStyle getLineStyle() const; 
+            LineStyle getLineStyle() const;
 
             /**
              * \brief Sets the line width to the specified value.
@@ -180,57 +180,57 @@ namespace CDPL
              *
              * \param width The line width.
              */
-            void setWidth(double width); 
+            void setWidth(double width);
 
             /**
              * \brief Returns the line width.
              * \return The line width.
              */
-            double getWidth() const; 
-    
+            double getWidth() const;
+
             /**
              * \brief Sets the pen's color to the specified value.
              * \param color The color of the pen.
              */
-            void setColor(const Color& color); 
+            void setColor(const Color& color);
 
             /**
              * \brief Returns the color of the pen.
              * \return The color of the pen.
              */
-            const Color& getColor() const; 
+            const Color& getColor() const;
 
             /**
              * \brief Sets the line cap style to \a cap_style.
              * \param cap_style The line cap style.
              */
-            void setCapStyle(CapStyle cap_style); 
+            void setCapStyle(CapStyle cap_style);
 
             /**
              * \brief Returns the line cap style.
              * \return The line cap style.
              */
-            CapStyle getCapStyle() const; 
-    
+            CapStyle getCapStyle() const;
+
             /**
              * \brief Sets the line join style to \a join_style.
              * \param join_style The line join style.
              */
-            void setJoinStyle(JoinStyle join_style); 
+            void setJoinStyle(JoinStyle join_style);
 
             /**
              * \brief Returns the line join style.
              * \return The line join style.
-             */    
-            JoinStyle getJoinStyle() const; 
-        
+             */
+            JoinStyle getJoinStyle() const;
+
             /**
              * \brief Equality comparison operator.
              * \param pen The other \c %Pen object to be compared with.
              * \return \c true if all pen attributes compare equal, and \c false otherwise.
              */
             bool operator==(const Pen& pen) const;
-    
+
             /**
              * \brief Inequality comparison operator.
              *
@@ -238,7 +238,7 @@ namespace CDPL
              *
              * \param pen The other \c %Pen object to be compared with.
              * \return \c true if the pen attributes compare non-equal, and \c false otherwise.
-             */            
+             */
             bool operator!=(const Pen& pen) const;
 
           private:
@@ -248,7 +248,7 @@ namespace CDPL
             JoinStyle joinStyle;
             double    width;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_PEN_HPP

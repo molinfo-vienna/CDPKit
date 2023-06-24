@@ -42,7 +42,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,23 +50,23 @@ namespace CDPL
 
         class MolecularGraph;
         class Atom;
-        
+
         /**
          * \brief ResonanceStructureGenerator.
          */
-        class CDPL_CHEM_API ResonanceStructureGenerator 
+        class CDPL_CHEM_API ResonanceStructureGenerator
         {
 
           public:
             class StructureData;
 
           private:
-            typedef Util::ObjectPool<StructureData> StructureDataCache;
+            typedef Util::ObjectPool<StructureData>         StructureDataCache;
             typedef StructureDataCache::SharedObjectPointer StructureDataPtr;
-            typedef std::vector<StructureDataPtr> StructureDataList;
+            typedef std::vector<StructureDataPtr>           StructureDataList;
 
           public:
-            typedef std::shared_ptr<ResonanceStructureGenerator> SharedPointer;
+            typedef std::shared_ptr<ResonanceStructureGenerator>                                     SharedPointer;
             typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
 
             class CDPL_CHEM_API StructureData
@@ -99,7 +99,7 @@ namespace CDPL
             Util::BitSet& getOctetRuleCheckAtomTypes();
 
             const Util::BitSet& getOctetRuleCheckAtomTypes() const;
-            
+
             void minimizeOctetRuleViolations(bool minimize);
 
             bool octetRuleViolationsMinimized() const;
@@ -119,7 +119,7 @@ namespace CDPL
             void setMaxNumGeneratedStructures(std::size_t max_num);
 
             std::size_t getMaxNumGeneratedStructures() const;
-            
+
             /**
              * \brief Generates all unique resonanceStructures of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to generate the resonanceStructures.
@@ -138,7 +138,7 @@ namespace CDPL
 
             ConstStructureDataIterator end() const;
 
-          private:            
+          private:
             struct BondData
             {
 
@@ -146,10 +146,10 @@ namespace CDPL
                 std::size_t atom2Index;
                 std::size_t bondIndex;
             };
-            
+
             class AtomData
             {
-                
+
               public:
                 long init(const Atom& atom, const MolecularGraph& molgraph, std::size_t idx);
 
@@ -164,15 +164,15 @@ namespace CDPL
                 std::size_t getIndex() const;
 
                 unsigned int getType() const;
-                
+
                 double getElectronegativity() const;
 
                 bool isSP1Hybridized(const StructureData& res_struct) const;
-                
+
                 bool checkValenceState(const StructureData& res_struct, long val_diff, long charge_diff) const;
 
                 bool octetRuleFulfilled(const StructureData& res_struct) const;
-                
+
                 std::size_t countRepChargePairs(const Util::LArray& charges) const;
 
                 bool getVisitedFlag() const;
@@ -182,7 +182,7 @@ namespace CDPL
                 bool getInSmallRingFlag() const;
 
                 void setInSmallRingFlag();
-                
+
               private:
                 typedef std::vector<std::size_t> IndexArray;
 
@@ -208,17 +208,18 @@ namespace CDPL
             struct StructureDataPtrCmpFunc
             {
 
-                bool operator()(const StructureDataPtr& rs_ptr1, const StructureDataPtr& rs_ptr2) const {
+                bool operator()(const StructureDataPtr& rs_ptr1, const StructureDataPtr& rs_ptr2) const
+                {
                     return (rs_ptr1->getBondOrders() == rs_ptr2->getBondOrders() &&
                             rs_ptr1->getAtomCharges() == rs_ptr2->getAtomCharges());
                 }
             };
-            
-            typedef std::vector<AtomData> AtomDataArray;
-            typedef std::vector<const AtomData*> AtomDataPtrArray;
-            typedef std::vector<BondData> BondDataList;
+
+            typedef std::vector<AtomData>                                                                   AtomDataArray;
+            typedef std::vector<const AtomData*>                                                            AtomDataPtrArray;
+            typedef std::vector<BondData>                                                                   BondDataList;
             typedef std::unordered_set<StructureDataPtr, StructureDataPtrHashFunc, StructureDataPtrCmpFunc> StructureDataSet;
-            
+
             void init(const MolecularGraph& molgraph);
 
             void createInputResStructData();
@@ -230,25 +231,25 @@ namespace CDPL
             void genStartResStructs(std::size_t depth, std::size_t num_rep_chg_pairs);
 
             std::size_t countRepChargePairs() const;
-            
+
             void genOutputResStructs();
             void genOutputResStructs(StructureData& res_struct, std::size_t depth, std::size_t con_idx,
                                      std::size_t num_charges);
 
             void postprocOutputResStructs();
 
-            void minimzeResStructProperty(std::size_t (ResonanceStructureGenerator::* prop_func)(const StructureData&) const);
-                
+            void minimzeResStructProperty(std::size_t (ResonanceStructureGenerator::*prop_func)(const StructureData&) const);
+
             std::size_t countOctetRuleViolations(const StructureData& res_struct) const;
             std::size_t countSP1GeometryViolations(const StructureData& res_struct) const;
             std::size_t count12ChargedCBonds(const StructureData& res_struct) const;
-            
+
             void modifyResStruct(StructureData& res_struct, std::size_t bond_idx, std::size_t atom1_idx, std::size_t atom2_idx,
                                  long bond_order_diff, long atom1_chg_diff, long atom2_chg_diff) const;
-            
+
             StructureDataPtr copyResStructPtr(const StructureDataPtr& res_struct_ptr);
             StructureDataPtr copyResStruct(const StructureData& res_struct);
-            
+
             StructureDataCache    resStructDataCache;
             bool                  minOctRuleViolations;
             bool                  minSP1GeomViolations;
@@ -270,7 +271,7 @@ namespace CDPL
             std::size_t           minNumRepChargePairs;
             std::size_t           minNumCharges;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RESONANCESTRUCTUREGENERATOR_HPP

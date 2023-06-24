@@ -41,22 +41,22 @@ namespace PSDMerge
     class PSDMergeImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         PSDMergeImpl();
 
-    private:
+      private:
         const char* getProgName() const;
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         void setCreationMode(const std::string& mode);
-    
+
         int process();
         int mergeDatabases();
-    
+
         void checkInputFiles() const;
         void printOptionSummary();
-        
+
         void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
                              std::size_t num_ins);
 
@@ -64,16 +64,16 @@ namespace PSDMerge
 
         struct MergeDBsProgressCallback;
 
-        typedef std::vector<std::string> StringList;
+        typedef std::vector<std::string>              StringList;
         typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
-        typedef CDPL::Internal::Timer Timer;
+        typedef CDPL::Internal::Timer                 Timer;
 
-        StringList         inputDatabases;
-        std::string        outputDatabase;
-        bool               dropDuplicates;
-        CreationMode       creationMode;
-        Timer              timer;
+        StringList   inputDatabases;
+        std::string  outputDatabase;
+        bool         dropDuplicates;
+        CreationMode creationMode;
+        Timer        timer;
     };
-}
+} // namespace PSDMerge
 
 #endif // PSDMERGE_PSDMERGEIMPL_HPP

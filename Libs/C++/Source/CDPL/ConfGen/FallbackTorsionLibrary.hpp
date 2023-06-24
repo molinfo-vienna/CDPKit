@@ -27,14 +27,14 @@
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
-    
+
         const TorsionLibrary::SharedPointer& getFallbackTorsionLibrary();
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FALLBACKTORSIONLIBRARY_HPP

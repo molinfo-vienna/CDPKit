@@ -38,16 +38,16 @@ namespace ChOX
     class DataSetPagePainter
     {
 
-    public:
+      public:
         DataSetPagePainter(QPainter& painter, const Settings& settings);
 
         void drawGrid(double vp_width, double vp_height, int num_rows, int num_cols) const;
         void drawRecord(int row, int column, double vp_width, double vp_height, int rec_no, DataRecordPainter&) const;
-    
-    private:
+
+      private:
         QPainter&       painter;
         const Settings& settings;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASETPAGEPAINTER_HPP

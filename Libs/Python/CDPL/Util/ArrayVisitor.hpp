@@ -33,41 +33,41 @@
 
 
 #if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
-#define CHECK_ARRAY_INDEX(a, i, end_ok)
+# define CHECK_ARRAY_INDEX(a, i, end_ok)
 #else
-#define CHECK_ARRAY_INDEX(a, i, end_ok)                                    \
-    if (end_ok) {                                                        \
-        if (i > a.getSize())                                            \
-            throw CDPL::Base::IndexError("Array: element index out of bounds"); \
-    } else if (i >= a.getSize())                                        \
-        throw CDPL::Base::IndexError("Array: element index out of bounds"); 
+# define CHECK_ARRAY_INDEX(a, i, end_ok)                                \
+  if (end_ok) {                                                         \
+   if (i > a.getSize())                                                 \
+    throw CDPL::Base::IndexError("Array: element index out of bounds"); \
+  } else if (i >= a.getSize())                                          \
+   throw CDPL::Base::IndexError("Array: element index out of bounds");
 #endif
 
 
 namespace CDPLPythonUtil
 {
 
-    template <typename ArrayType, typename ElementReturnPolicy, 
+    template <typename ArrayType, typename ElementReturnPolicy,
               typename ElementAdditionPolicy1, typename ElementAdditionPolicy2, typename ElementAdditionPolicy3>
-    class ArrayVisitor : 
-        public boost::python::def_visitor<ArrayVisitor<ArrayType, ElementReturnPolicy, 
-                                                       ElementAdditionPolicy1, ElementAdditionPolicy2, ElementAdditionPolicy3> >
+    class ArrayVisitor : public boost::python::def_visitor<ArrayVisitor<ArrayType, ElementReturnPolicy,
+                                                                        ElementAdditionPolicy1, ElementAdditionPolicy2, ElementAdditionPolicy3> >
     {
         friend class boost::python::def_visitor_access;
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             void (ArrayType::*assignFunc)(std::size_t, const typename ArrayType::BaseType::ElementType&) = &ArrayType::assign;
-            void (ArrayType::*removeElementFunc)(std::size_t) = &ArrayType::removeElement;
-            void (ArrayType::*insertElementFunc)(std::size_t, const typename ArrayType::BaseType::ElementType&) = 
+            void (ArrayType::*removeElementFunc)(std::size_t)                                            = &ArrayType::removeElement;
+            void (ArrayType::*insertElementFunc)(std::size_t, const typename ArrayType::BaseType::ElementType&) =
                 &ArrayType::insertElement;
-            void (ArrayType::*insertElementsFunc)(std::size_t, std::size_t, const typename ArrayType::BaseType::ElementType&) = 
+            void (ArrayType::*insertElementsFunc)(std::size_t, std::size_t, const typename ArrayType::BaseType::ElementType&) =
                 &ArrayType::insertElements;
 
-            typename ArrayType::BaseType::ElementType& (ArrayType::*getFirstElementFunc)() = &ArrayType::BaseType::getFirstElement;
-            typename ArrayType::BaseType::ElementType& (ArrayType::*getLastElementFunc)() = &ArrayType::BaseType::getLastElement;
+            typename ArrayType::BaseType::ElementType& (ArrayType::*getFirstElementFunc)()       = &ArrayType::BaseType::getFirstElement;
+            typename ArrayType::BaseType::ElementType& (ArrayType::*getLastElementFunc)()        = &ArrayType::BaseType::getLastElement;
             typename ArrayType::BaseType::ElementType& (ArrayType::*getElementFunc)(std::size_t) = &ArrayType::BaseType::getElement;
 
             void (ArrayType::*addElementFunc)(const typename ArrayType::BaseType::ElementType&) = &ArrayType::addElement;
@@ -76,7 +76,7 @@ namespace CDPLPythonUtil
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ArrayType>())
                 .def("getSize", &ArrayType::getSize, python::arg("self"))
                 .def("isEmpty", &ArrayType::isEmpty, python::arg("self"))
-                .def("resize", &ArrayType::resize, (python::arg("self"), python::arg("num_elem"), python::arg("value")), 
+                .def("resize", &ArrayType::resize, (python::arg("self"), python::arg("num_elem"), python::arg("value")),
                      ElementAdditionPolicy2())
                 .def("reserve", &ArrayType::reserve, (python::arg("self"), python::arg("num_elem")))
                 .def("getCapacity", &ArrayType::getCapacity, python::arg("self"))
@@ -85,11 +85,11 @@ namespace CDPLPythonUtil
                      python::return_self<ElementAdditionPolicy1>())
                 .def("assign", assignFunc, (python::arg("self"), python::arg("num_elem"), python::arg("value")),
                      ElementAdditionPolicy2())
-                .def("addElement", addElementFunc, (python::arg("self"), python::arg("value")), 
+                .def("addElement", addElementFunc, (python::arg("self"), python::arg("value")),
                      ElementAdditionPolicy1())
-                .def("addElements", &addElements, (python::arg("self"), python::arg("values")), 
+                .def("addElements", &addElements, (python::arg("self"), python::arg("values")),
                      ElementAdditionPolicy1())
-                .def("insertElement", insertElementFunc, (python::arg("self"), python::arg("idx"), python::arg("value")), 
+                .def("insertElement", insertElementFunc, (python::arg("self"), python::arg("idx"), python::arg("value")),
                      ElementAdditionPolicy2())
                 .def("insertElements", insertElementsFunc, (python::arg("self"), python::arg("idx"), python::arg("num_elem"), python::arg("value")),
                      ElementAdditionPolicy3())
@@ -100,62 +100,69 @@ namespace CDPLPythonUtil
                 .def("removeElements", &removeElements, (python::arg("self"), python::arg("begin_idx"), python::arg("end_idx")))
                 .def("getFirstElement", getFirstElementFunc, python::arg("self"), ElementReturnPolicy())
                 .def("getLastElement", getLastElementFunc, python::arg("self"), ElementReturnPolicy())
-                .def("getElement", getElementFunc, (python::arg("self"), python::arg("idx")), 
+                .def("getElement", getElementFunc, (python::arg("self"), python::arg("idx")),
                      ElementReturnPolicy())
-                .def("setElement", &setItem, (python::arg("self"), python::arg("idx"), python::arg("value")), 
+                .def("setElement", &setItem, (python::arg("self"), python::arg("idx"), python::arg("value")),
                      ElementAdditionPolicy2())
                 .def("__delitem__", &delItem, (python::arg("self"), python::arg("idx")))
                 .def("__getitem__", &getItem, (python::arg("self"), python::arg("idx")), ElementReturnPolicy())
                 .def("__len__", &ArrayType::getSize, python::arg("self"))
-                .def("__setitem__", &setItem, (python::arg("self"), python::arg("index"), python::arg("value")), 
+                .def("__setitem__", &setItem, (python::arg("self"), python::arg("index"), python::arg("value")),
                      ElementAdditionPolicy2())
                 .add_property("size", &ArrayType::getSize);
         }
 
-        static void popElement(ArrayType& array) {
+        static void popElement(ArrayType& array)
+        {
 #if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
 #else
-        if (array.isEmpty())
-            throw CDPL::Base::OperationFailed("Array: operation requires non-empty array");
+            if (array.isEmpty())
+                throw CDPL::Base::OperationFailed("Array: operation requires non-empty array");
 #endif
             array.popLastElement();
         }
 
-        static void insertElements(ArrayType& array, std::size_t index, const ArrayType& values) {
+        static void insertElements(ArrayType& array, std::size_t index, const ArrayType& values)
+        {
             CHECK_ARRAY_INDEX(array, index, true);
 
             array.insertElements(index, values.getBase().getElementsBegin(), values.getBase().getElementsEnd());
         }
 
-        static void addElements(ArrayType& array, const ArrayType& values) {
+        static void addElements(ArrayType& array, const ArrayType& values)
+        {
             array.insertElements(array.getElementsEnd(), values.getBase().getElementsBegin(), values.getBase().getElementsEnd());
         }
-        
-        static void removeElements(ArrayType& array, std::size_t begin, std::size_t end) {
+
+        static void removeElements(ArrayType& array, std::size_t begin, std::size_t end)
+        {
             CHECK_ARRAY_INDEX(array, begin, true);
             CHECK_ARRAY_INDEX(array, end, true);
 
             array.removeElements(array.getElementsBegin() + begin, array.getElementsBegin() + end);
         }
 
-        static typename ArrayType::BaseType::ElementType& getItem(ArrayType& array, std::size_t idx) {
+        static typename ArrayType::BaseType::ElementType& getItem(ArrayType& array, std::size_t idx)
+        {
             CHECK_ARRAY_INDEX(array, idx, false);
 
             return array.ArrayType::BaseType::getElement(idx);
-        }     
+        }
 
-        static void delItem(ArrayType& array, std::size_t idx) {
+        static void delItem(ArrayType& array, std::size_t idx)
+        {
             CHECK_ARRAY_INDEX(array, idx, false);
 
             array.removeElement(idx);
-        } 
+        }
 
-        static void setItem(ArrayType& array, std::size_t idx, const typename ArrayType::BaseType::ElementType& value) {
+        static void setItem(ArrayType& array, std::size_t idx, const typename ArrayType::BaseType::ElementType& value)
+        {
             CHECK_ARRAY_INDEX(array, idx, false);
 
             array.setElement(idx, value);
-        } 
+        }
     };
-}
+} // namespace CDPLPythonUtil
 
 #endif // CDPL_PYTHON_UTIL_ARRAYVISITOR_HPP

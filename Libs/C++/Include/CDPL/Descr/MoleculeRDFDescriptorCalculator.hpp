@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
 
         class Atom;
         class AtomContainer;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -58,15 +58,15 @@ namespace CDPL
 
             typedef Descr::RDFCodeCalculator<Chem::Atom> RDFCodeCalculator;
 
-        public:
-            typedef RDFCodeCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
+          public:
+            typedef RDFCodeCalculator::Entity3DCoordinatesFunction                            Atom3DCoordinatesFunction;
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
-            
+
             /**
              * \brief Constructs the \c %MoleculeRDFDescriptorCalculator instance.
              */
             MoleculeRDFDescriptorCalculator();
-            
+
             MoleculeRDFDescriptorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -172,8 +172,8 @@ namespace CDPL
           private:
             RDFCodeCalculator      rdfCalculator;
             AtomPairWeightFunction weightFunc;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_MOLECULERDFDESCRIPTORCALCULATOR_HPP

@@ -44,108 +44,125 @@ namespace CDPL
         class VectorArrayAlignmentCalculator
         {
 
-        public:
-            typedef VA VectorArrayType;
-            typedef V VectorType;
-            typedef T ValueType;
+          public:
+            typedef VA                                              VectorArrayType;
+            typedef V                                               VectorType;
+            typedef T                                               ValueType;
             typedef typename KabschAlgorithm<ValueType>::MatrixType MatrixType;
 
             template <typename VE>
-            bool calculate(const VectorArrayType& points, const VectorArrayType& ref_points, const VectorExpression<VE>& weights, 
-                           bool do_center = true, std::size_t max_svd_iter = 0) {
+            bool calculate(const VectorArrayType& points, const VectorArrayType& ref_points, const VectorExpression<VE>& weights,
+                           bool do_center = true, std::size_t max_svd_iter = 0)
+            {
 
-                return kabschAlgo.align(MatrixVectorArrayAdapter(points), MatrixVectorArrayAdapter(ref_points), 
+                return kabschAlgo.align(MatrixVectorArrayAdapter(points), MatrixVectorArrayAdapter(ref_points),
                                         weights, do_center, max_svd_iter);
             }
 
-            bool calculate(const VectorArrayType& points, const VectorArrayType& ref_points, 
-                           bool do_center = true, std::size_t max_svd_iter = 0) {
+            bool calculate(const VectorArrayType& points, const VectorArrayType& ref_points,
+                           bool do_center = true, std::size_t max_svd_iter = 0)
+            {
 
-                return kabschAlgo.align(MatrixVectorArrayAdapter(points), MatrixVectorArrayAdapter(ref_points), 
+                return kabschAlgo.align(MatrixVectorArrayAdapter(points), MatrixVectorArrayAdapter(ref_points),
                                         do_center, max_svd_iter);
             }
 
-            const MatrixType& getTransform() const {
+            const MatrixType& getTransform() const
+            {
                 return kabschAlgo.getTransform();
             }
 
-        private:
+          private:
             class MatrixVectorArrayAdapter : public MatrixExpression<MatrixVectorArrayAdapter>
             {
 
                 typedef MatrixVectorArrayAdapter SelfType;
 
-            public:
+              public:
                 typedef VectorArrayAlignmentCalculator::ValueType ValueType;
-                typedef const ValueType Reference;
-                typedef const ValueType ConstReference;
-                typedef typename VectorArrayType::SizeType SizeType;
-                typedef std::ptrdiff_t DifferenceType;
-                typedef SelfType ClosureType;
-                typedef const SelfType ConstClosureType;
+                typedef const ValueType                           Reference;
+                typedef const ValueType                           ConstReference;
+                typedef typename VectorArrayType::SizeType        SizeType;
+                typedef std::ptrdiff_t                            DifferenceType;
+                typedef SelfType                                  ClosureType;
+                typedef const SelfType                            ConstClosureType;
 
-                explicit MatrixVectorArrayAdapter(const VectorArrayType& va): data(va) {}
+                explicit MatrixVectorArrayAdapter(const VectorArrayType& va):
+                    data(va) {}
 
-                Reference operator()(SizeType i, SizeType j) {
+                Reference operator()(SizeType i, SizeType j)
+                {
                     return data.getData()[j].getData()[i];
                 }
 
-                ConstReference operator()(SizeType i, SizeType j) const {
+                ConstReference operator()(SizeType i, SizeType j) const
+                {
                     return data[j][i];
                 }
-    
-                SizeType getSize1() const {
+
+                SizeType getSize1() const
+                {
                     return VectorType::Size;
                 }
 
-                SizeType getSize2() const {
+                SizeType getSize2() const
+                {
                     return data.getSize();
                 }
 
-                SizeType getMaxSize() const {
+                SizeType getMaxSize() const
+                {
                     return data.getMaxSize();
                 }
-    
-                SizeType getMaxSize1() const {
+
+                SizeType getMaxSize1() const
+                {
                     return VectorType::Size;
                 }
 
-                SizeType getMaxSize2() const {
+                SizeType getMaxSize2() const
+                {
                     return data.getMaxSize();
                 }
-        
-                bool isEmpty() const {
+
+                bool isEmpty() const
+                {
                     return data.isEmpty();
                 }
-    
-                const VectorArrayType& getData() const {
+
+                const VectorArrayType& getData() const
+                {
                     return data;
                 }
 
-                VectorArrayType& getData() {
+                VectorArrayType& getData()
+                {
                     return data;
                 }
 
-                MatrixVectorArrayAdapter& operator=(const MatrixVectorArrayAdapter& a) {
+                MatrixVectorArrayAdapter& operator=(const MatrixVectorArrayAdapter& a)
+                {
                     data.operator=(a.data);
                     return *this;
                 }
 
-                void swap(MatrixVectorArrayAdapter& a) {
+                void swap(MatrixVectorArrayAdapter& a)
+                {
                     data.swap(a.data);
                 }
-    
-                friend void swap(MatrixVectorArrayAdapter& a1, MatrixVectorArrayAdapter& a2) {
+
+                friend void swap(MatrixVectorArrayAdapter& a1, MatrixVectorArrayAdapter& a2)
+                {
                     a1.swap(a2);
                 }
 
-            private:
+              private:
                 const VectorArrayType& data;
             };
 
             KabschAlgorithm<ValueType> kabschAlgo;
         };
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_VECTORARRAYALIGNMENTCALCULATOR_HPP

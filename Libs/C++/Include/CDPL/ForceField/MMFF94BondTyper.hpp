@@ -35,7 +35,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94BondTyper
@@ -60,7 +60,7 @@ namespace CDPL
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
-    
+
             /**
              * \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.
              *
@@ -84,7 +84,7 @@ namespace CDPL
             MMFF94RingSetFunction                      aromRingSetFunc;
             MMFF94NumericAtomTypeFunction              atomTypeFunc;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94BONDTYPER_HPP

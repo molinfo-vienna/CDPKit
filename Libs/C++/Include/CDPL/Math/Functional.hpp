@@ -41,16 +41,20 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class VectorExpression;
-        template <typename E> class MatrixExpression;
-        template <typename E> class QuaternionExpression;
-        template <typename E> class GridExpression;
+        template <typename E>
+        class VectorExpression;
+        template <typename E>
+        class MatrixExpression;
+        template <typename E>
+        class QuaternionExpression;
+        template <typename E>
+        class GridExpression;
 
         template <typename T1, typename T2>
         struct ScalarBinaryAssignmentFunctor
         {
 
-            typedef T1 Argument1Type;
+            typedef T1        Argument1Type;
             typedef const T2& Argument2Type;
         };
 
@@ -61,7 +65,8 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-            static void apply(Argument1Type t1, Argument2Type t2) {
+            static void apply(Argument1Type t1, Argument2Type t2)
+            {
                 t1 = t2;
             }
         };
@@ -73,7 +78,8 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-            static void apply(Argument1Type t1, Argument2Type t2) {
+            static void apply(Argument1Type t1, Argument2Type t2)
+            {
                 t1 += t2;
             }
         };
@@ -85,7 +91,8 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-            static void apply(Argument1Type t1, Argument2Type t2) {
+            static void apply(Argument1Type t1, Argument2Type t2)
+            {
                 t1 -= t2;
             }
         };
@@ -97,7 +104,8 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-            static void apply(Argument1Type t1, Argument2Type t2) {
+            static void apply(Argument1Type t1, Argument2Type t2)
+            {
                 t1 *= t2;
             }
         };
@@ -109,7 +117,8 @@ namespace CDPL
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-            static void apply(Argument1Type t1, Argument2Type t2) {
+            static void apply(Argument1Type t1, Argument2Type t2)
+            {
                 t1 /= t2;
             }
         };
@@ -118,8 +127,8 @@ namespace CDPL
         struct ScalarUnaryFunctor
         {
 
-            typedef T ValueType;
-            typedef const T& ArgumentType;
+            typedef T         ValueType;
+            typedef const T&  ArgumentType;
             typedef ValueType ResultType;
         };
 
@@ -127,11 +136,12 @@ namespace CDPL
         struct ScalarNegation : public ScalarUnaryFunctor<T>
         {
 
-            typedef typename ScalarUnaryFunctor<T>::ValueType ValueType;
+            typedef typename ScalarUnaryFunctor<T>::ValueType    ValueType;
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
-            typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
+            typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
-            static ResultType apply(ArgumentType v) {
+            static ResultType apply(ArgumentType v)
+            {
                 return -v;
             }
         };
@@ -140,11 +150,12 @@ namespace CDPL
         struct ScalarConjugation : public ScalarUnaryFunctor<T>
         {
 
-            typedef typename ScalarUnaryFunctor<T>::ValueType ValueType;
+            typedef typename ScalarUnaryFunctor<T>::ValueType    ValueType;
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
-            typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
+            typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
-            static ResultType apply(ArgumentType v) {
+            static ResultType apply(ArgumentType v)
+            {
                 return TypeTraits<ValueType>::conj(v);
             }
         };
@@ -153,8 +164,8 @@ namespace CDPL
         struct ScalarRealUnaryFunctor
         {
 
-            typedef T ValueType;
-            typedef const T& ArgumentType;
+            typedef T                                ValueType;
+            typedef const T&                         ArgumentType;
             typedef typename TypeTraits<T>::RealType ResultType;
         };
 
@@ -162,11 +173,12 @@ namespace CDPL
         struct ScalarReal : public ScalarRealUnaryFunctor<T>
         {
 
-            typedef typename ScalarUnaryFunctor<T>::ValueType ValueType;
+            typedef typename ScalarUnaryFunctor<T>::ValueType    ValueType;
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
-            typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
+            typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
-            static ResultType apply(ArgumentType v) {
+            static ResultType apply(ArgumentType v)
+            {
                 return TypeTraits<ValueType>::real(v);
             }
         };
@@ -175,11 +187,12 @@ namespace CDPL
         struct ScalarImaginary : public ScalarRealUnaryFunctor<T>
         {
 
-            typedef typename ScalarUnaryFunctor<T>::ValueType ValueType;
+            typedef typename ScalarUnaryFunctor<T>::ValueType    ValueType;
             typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
-            typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
+            typedef typename ScalarUnaryFunctor<T>::ResultType   ResultType;
 
-            static ResultType apply(ArgumentType v) {
+            static ResultType apply(ArgumentType v)
+            {
                 return TypeTraits<ValueType>::imag(v);
             }
         };
@@ -188,8 +201,8 @@ namespace CDPL
         struct ScalarBinaryFunctor
         {
 
-            typedef const T1& Argument1Type;
-            typedef const T2& Argument2Type;
+            typedef const T1&                         Argument1Type;
+            typedef const T2&                         Argument2Type;
             typedef typename CommonType<T1, T2>::Type ResultType;
         };
 
@@ -199,9 +212,10 @@ namespace CDPL
 
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
-            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
+            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
-            static ResultType apply(Argument1Type t1, Argument2Type t2) {
+            static ResultType apply(Argument1Type t1, Argument2Type t2)
+            {
                 return (t1 + t2);
             }
         };
@@ -212,9 +226,10 @@ namespace CDPL
 
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
-            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
+            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
-            static ResultType apply(Argument1Type t1, Argument2Type t2) {
+            static ResultType apply(Argument1Type t1, Argument2Type t2)
+            {
                 return (t1 - t2);
             }
         };
@@ -225,9 +240,10 @@ namespace CDPL
 
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
-            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
+            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
-            static ResultType apply(Argument1Type t1, Argument2Type t2) {
+            static ResultType apply(Argument1Type t1, Argument2Type t2)
+            {
                 return (t1 * t2);
             }
         };
@@ -238,9 +254,10 @@ namespace CDPL
 
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument1Type Argument1Type;
             typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
-            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
+            typedef typename ScalarBinaryFunctor<T1, T2>::ResultType    ResultType;
 
-            static ResultType apply(Argument1Type t1, Argument2Type t2) {
+            static ResultType apply(Argument1Type t1, Argument2Type t2)
+            {
                 return (t1 / t2);
             }
         };
@@ -258,13 +275,14 @@ namespace CDPL
 
             typedef typename VectorScalarBinaryFunctor<V1, V2>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2) {
+            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2)
+            {
                 typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type SizeType;
 
-                SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize()), SizeType(e2().getSize()), Base::SizeError);
-                ResultType res = ResultType();
+                SizeType   size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize()), SizeType(e2().getSize()), Base::SizeError);
+                ResultType res  = ResultType();
 
-                for (SizeType i = 0; i < size; i++) 
+                for (SizeType i = 0; i < size; i++)
                     res += e1()(i) * e2()(i);
 
                 return res;
@@ -277,9 +295,10 @@ namespace CDPL
 
             typedef typename CommonType<typename VectorInnerProduct<V1, V2>::ResultType, T>::Type ResultType;
 
-            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, const T& sd, bool clamp) {
+            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, const T& sd, bool clamp)
+            {
                 ResultType res = VectorInnerProduct<V1, V2>::apply(e1, e2) / sd;
-                
+
                 if (!clamp)
                     return res;
 
@@ -291,8 +310,8 @@ namespace CDPL
         struct VectorBooleanBinaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type SizeType;
+            typedef bool                                                                      ResultType;
+            typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ValueType;
         };
 
@@ -300,11 +319,12 @@ namespace CDPL
         struct VectorEquality : public VectorBooleanBinaryFunctor<V1, V2>
         {
 
-            typedef typename VectorBooleanBinaryFunctor<V1, V2>::SizeType SizeType;
-            typedef typename VectorBooleanBinaryFunctor<V1, V2>::ValueType ValueType;
+            typedef typename VectorBooleanBinaryFunctor<V1, V2>::SizeType   SizeType;
+            typedef typename VectorBooleanBinaryFunctor<V1, V2>::ValueType  ValueType;
             typedef typename VectorBooleanBinaryFunctor<V1, V2>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2) {
+            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2)
+            {
                 if (SizeType(e1().getSize()) != SizeType(e2().getSize()))
                     return false;
 
@@ -315,14 +335,14 @@ namespace CDPL
                 return true;
             }
         };
-    
+
         template <typename V1, typename V2, typename T>
         struct Scalar3VectorBooleanTernaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef const T& Argument3Type;
-            typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type SizeType;
+            typedef bool                                                                      ResultType;
+            typedef const T&                                                                  Argument3Type;
+            typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename V1::ValueType, typename V2::ValueType>::Type ValueType;
         };
 
@@ -330,12 +350,13 @@ namespace CDPL
         struct VectorToleranceEquality : public Scalar3VectorBooleanTernaryFunctor<V1, V2, T>
         {
 
-            typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::SizeType SizeType;
-            typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::ValueType ValueType;
-            typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::ResultType ResultType;
+            typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::SizeType      SizeType;
+            typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::ValueType     ValueType;
+            typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::ResultType    ResultType;
             typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::Argument3Type Argument3Type;
 
-            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, Argument3Type epsilon) {
+            static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, Argument3Type epsilon)
+            {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
                 if (SizeType(e1().getSize()) != SizeType(e2().getSize()))
@@ -365,20 +386,21 @@ namespace CDPL
             typedef typename VectorScalarBinaryFunctor<V1, V2>::ResultType ResultType;
 
             template <typename E1, typename E2, typename SizeType>
-            static ResultType apply(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
-                CDPL_MATH_CHECK(e1().getSize() == 3, "Invalid vector size", Base::SizeError); 
-                CDPL_MATH_CHECK(e2().getSize() == 3, "Invalid vector size", Base::SizeError); 
+            static ResultType apply(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)
+            {
+                CDPL_MATH_CHECK(e1().getSize() == 3, "Invalid vector size", Base::SizeError);
+                CDPL_MATH_CHECK(e2().getSize() == 3, "Invalid vector size", Base::SizeError);
 
                 switch (i) {
-            
+
                     case 0:
-                        return (e1()(1) * e2()(2) - e1()(2) * e2()(1)); // c1 = a2 * b3 - a3 * b2; 
-                
+                        return (e1()(1) * e2()(2) - e1()(2) * e2()(1)); // c1 = a2 * b3 - a3 * b2;
+
                     case 1:
-                        return (e1()(2) * e2()(0) - e1()(0) * e2()(2)); // c2 = a3 * b1 - a1 * b3; 
+                        return (e1()(2) * e2()(0) - e1()(0) * e2()(2)); // c2 = a3 * b1 - a1 * b3;
 
                     case 2:
-                        return (e1()(0) * e2()(1) - e1()(1) * e2()(0)); // c3 = a1 * b2 - a2 * b1; 
+                        return (e1()(0) * e2()(1) - e1()(1) * e2()(0)); // c3 = a1 * b2 - a2 * b1;
 
                     default:
                         return ResultType();
@@ -391,21 +413,22 @@ namespace CDPL
         {
 
             typedef typename V::ValueType ResultType;
-            typedef typename V::SizeType SizeType;
+            typedef typename V::SizeType  SizeType;
         };
 
         template <typename V>
         struct VectorElementSum : public VectorScalarUnaryFunctor<V>
         {
-            
+
             typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V>& e) {
+            static ResultType apply(const VectorExpression<V>& e)
+            {
                 typedef typename V::SizeType SizeType;
 
                 ResultType res = ResultType();
 
-                for (SizeType i = 0, size = e().getSize(); i < size; i++) 
+                for (SizeType i = 0, size = e().getSize(); i < size; i++)
                     res += e()(i);
 
                 return res;
@@ -416,20 +439,21 @@ namespace CDPL
         struct VectorScalarRealUnaryFunctor
         {
 
-            typedef typename V::ValueType ValueType;
+            typedef typename V::ValueType                    ValueType;
             typedef typename TypeTraits<ValueType>::RealType RealType;
-            typedef RealType ResultType;
+            typedef RealType                                 ResultType;
         };
 
         template <typename V>
         struct VectorNorm1 : public VectorScalarRealUnaryFunctor<V>
         {
-            
-            typedef typename VectorScalarRealUnaryFunctor<V>::ValueType ValueType;
-            typedef typename VectorScalarRealUnaryFunctor<V>::RealType RealType;
+
+            typedef typename VectorScalarRealUnaryFunctor<V>::ValueType  ValueType;
+            typedef typename VectorScalarRealUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V>& e) {
+            static ResultType apply(const VectorExpression<V>& e)
+            {
                 typedef typename V::SizeType SizeType;
 
                 RealType res = RealType();
@@ -444,17 +468,18 @@ namespace CDPL
         template <typename V>
         struct VectorNorm2 : public VectorScalarRealUnaryFunctor<V>
         {
-            
-            typedef typename VectorScalarRealUnaryFunctor<V>::ValueType ValueType;
-            typedef typename VectorScalarRealUnaryFunctor<V>::RealType RealType;
+
+            typedef typename VectorScalarRealUnaryFunctor<V>::ValueType  ValueType;
+            typedef typename VectorScalarRealUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V>& e) {
+            static ResultType apply(const VectorExpression<V>& e)
+            {
                 typedef typename V::SizeType SizeType;
 
                 RealType res2 = RealType();
 
-                for (SizeType i = 0, size = e().getSize(); i < size; i++) { 
+                for (SizeType i = 0, size = e().getSize(); i < size; i++) {
                     RealType t = TypeTraits<ValueType>::norm2(e()(i));
 
                     res2 += t * t;
@@ -467,17 +492,18 @@ namespace CDPL
         template <typename V>
         struct VectorNormInfinity : public VectorScalarRealUnaryFunctor<V>
         {
-            
-            typedef typename VectorScalarRealUnaryFunctor<V>::ValueType ValueType;
-            typedef typename VectorScalarRealUnaryFunctor<V>::RealType RealType;
+
+            typedef typename VectorScalarRealUnaryFunctor<V>::ValueType  ValueType;
+            typedef typename VectorScalarRealUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V>& e) {
+            static ResultType apply(const VectorExpression<V>& e)
+            {
                 typedef typename V::SizeType SizeType;
 
                 RealType res = RealType();
 
-                for (SizeType i = 0, size = e().getSize(); i < size; i++) { 
+                for (SizeType i = 0, size = e().getSize(); i < size; i++) {
                     RealType t = TypeTraits<ValueType>::normInf(e()(i));
 
                     if (t > res)
@@ -492,31 +518,32 @@ namespace CDPL
         struct VectorScalarIndexUnaryFunctor
         {
 
-            typedef typename V::ValueType ValueType;
+            typedef typename V::ValueType                    ValueType;
             typedef typename TypeTraits<ValueType>::RealType RealType;
-            typedef typename V::SizeType ResultType;
+            typedef typename V::SizeType                     ResultType;
         };
 
         template <typename V>
         struct VectorNormInfinityIndex : public VectorScalarIndexUnaryFunctor<V>
         {
-            
-            typedef typename VectorScalarIndexUnaryFunctor<V>::ValueType ValueType;
-            typedef typename VectorScalarIndexUnaryFunctor<V>::RealType RealType;
+
+            typedef typename VectorScalarIndexUnaryFunctor<V>::ValueType  ValueType;
+            typedef typename VectorScalarIndexUnaryFunctor<V>::RealType   RealType;
             typedef typename VectorScalarIndexUnaryFunctor<V>::ResultType ResultType;
 
-            static ResultType apply(const VectorExpression<V>& e) {
+            static ResultType apply(const VectorExpression<V>& e)
+            {
                 typedef typename V::SizeType SizeType;
 
-                RealType norm = RealType();
-                ResultType res = ResultType(0);
+                RealType   norm = RealType();
+                ResultType res  = ResultType(0);
 
-                for (SizeType i = 0, size = e().getSize(); i < size; i++) { 
+                for (SizeType i = 0, size = e().getSize(); i < size; i++) {
                     RealType t = TypeTraits<ValueType>::normInf(e()(i));
 
                     if (t > norm) {
                         norm = t;
-                        res = ResultType(i);
+                        res  = ResultType(i);
                     }
                 }
 
@@ -528,8 +555,8 @@ namespace CDPL
         struct MatrixBooleanBinaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
+            typedef bool                                                                      ResultType;
+            typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
         };
 
@@ -537,11 +564,12 @@ namespace CDPL
         struct MatrixEquality : public MatrixBooleanBinaryFunctor<M1, M2>
         {
 
-            typedef typename MatrixBooleanBinaryFunctor<M1, M2>::SizeType SizeType;
-            typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ValueType ValueType;
+            typedef typename MatrixBooleanBinaryFunctor<M1, M2>::SizeType   SizeType;
+            typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ValueType  ValueType;
             typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ResultType ResultType;
 
-            static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2) {
+            static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2)
+            {
                 if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
                     return false;
 
@@ -561,9 +589,9 @@ namespace CDPL
         struct Scalar3MatrixBooleanTernaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef const T& Argument3Type;
-            typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
+            typedef bool                                                                      ResultType;
+            typedef const T&                                                                  Argument3Type;
+            typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
         };
 
@@ -571,12 +599,13 @@ namespace CDPL
         struct MatrixToleranceEquality : public Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>
         {
 
-            typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::SizeType SizeType;
-            typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::ValueType ValueType;
-            typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::ResultType ResultType;
+            typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::SizeType      SizeType;
+            typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::ValueType     ValueType;
+            typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::ResultType    ResultType;
             typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::Argument3Type Argument3Type;
 
-            static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2, Argument3Type epsilon) {
+            static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2, Argument3Type epsilon)
+            {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
                 if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
@@ -589,8 +618,8 @@ namespace CDPL
 
                 for (SizeType i = 0, size1 = e1().getSize1(); i < size1; i++)
                     for (SizeType j = 0, size2 = e1().getSize2(); j < size2; j++)
-                    if (ComparisonType(TypeTraits<ValueType>::normInf(e2()(i, j) - e1()(i, j))) > norm_inf_max)
-                        return false;
+                        if (ComparisonType(TypeTraits<ValueType>::normInf(e2()(i, j) - e1()(i, j))) > norm_inf_max)
+                            return false;
 
                 return true;
             }
@@ -606,18 +635,19 @@ namespace CDPL
         template <typename M>
         struct MatrixElementSum : public MatrixScalarUnaryFunctor<M>
         {
-            
+
             typedef typename MatrixScalarUnaryFunctor<M>::ResultType ResultType;
 
-            static ResultType apply(const MatrixExpression<M>& e) {
+            static ResultType apply(const MatrixExpression<M>& e)
+            {
                 typedef typename M::SizeType SizeType;
 
-                ResultType res = ResultType();
-                SizeType size1 = e().getSize1();
-                SizeType size2 = e().getSize2();
+                ResultType res   = ResultType();
+                SizeType   size1 = e().getSize1();
+                SizeType   size2 = e().getSize2();
 
-                for (SizeType i = 0; i < size1; i++) 
-                    for (SizeType j = 0; j < size2; j++) 
+                for (SizeType i = 0; i < size1; i++)
+                    for (SizeType j = 0; j < size2; j++)
                         res += e()(i, j);
 
                 return res;
@@ -627,16 +657,17 @@ namespace CDPL
         template <typename M>
         struct MatrixTrace : public MatrixScalarUnaryFunctor<M>
         {
-            
+
             typedef typename MatrixScalarUnaryFunctor<M>::ResultType ResultType;
 
-            static ResultType apply(const MatrixExpression<M>& e) {
+            static ResultType apply(const MatrixExpression<M>& e)
+            {
                 typedef typename M::SizeType SizeType;
 
-                SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(e().getSize1(), e().getSize2(), Base::SizeError);
-                ResultType res = ResultType();
+                SizeType   size = CDPL_MATH_CHECK_SIZE_EQUALITY(e().getSize1(), e().getSize2(), Base::SizeError);
+                ResultType res  = ResultType();
 
-                for (SizeType i = 0; i < size; i++) 
+                for (SizeType i = 0; i < size; i++)
                     res += e()(i, i);
 
                 return res;
@@ -647,30 +678,31 @@ namespace CDPL
         struct MatrixScalarRealUnaryFunctor
         {
 
-            typedef typename M::ValueType ValueType;
+            typedef typename M::ValueType                    ValueType;
             typedef typename TypeTraits<ValueType>::RealType RealType;
-            typedef RealType ResultType;
+            typedef RealType                                 ResultType;
         };
 
         template <typename M>
         struct MatrixNorm1 : public MatrixScalarRealUnaryFunctor<M>
         {
-            
-            typedef typename MatrixScalarRealUnaryFunctor<M>::ValueType ValueType;
-            typedef typename MatrixScalarRealUnaryFunctor<M>::RealType RealType;
+
+            typedef typename MatrixScalarRealUnaryFunctor<M>::ValueType  ValueType;
+            typedef typename MatrixScalarRealUnaryFunctor<M>::RealType   RealType;
             typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
-            static ResultType apply(const MatrixExpression<M>& e) {
+            static ResultType apply(const MatrixExpression<M>& e)
+            {
                 typedef typename M::SizeType SizeType;
 
-                RealType res = RealType();
+                RealType res   = RealType();
                 SizeType size1 = e().getSize1();
                 SizeType size2 = e().getSize2();
 
-                for (SizeType j = 0; j < size2; j++) { 
+                for (SizeType j = 0; j < size2; j++) {
                     RealType t = RealType();
 
-                    for (SizeType i = 0; i < size1; i++)  
+                    for (SizeType i = 0; i < size1; i++)
                         t += TypeTraits<ValueType>::norm1(e()(i, j));
 
                     if (t > res)
@@ -684,20 +716,21 @@ namespace CDPL
         template <typename M>
         struct MatrixNormFrobenius : public MatrixScalarRealUnaryFunctor<M>
         {
-            
-            typedef typename MatrixScalarRealUnaryFunctor<M>::ValueType ValueType;
-            typedef typename MatrixScalarRealUnaryFunctor<M>::RealType RealType;
+
+            typedef typename MatrixScalarRealUnaryFunctor<M>::ValueType  ValueType;
+            typedef typename MatrixScalarRealUnaryFunctor<M>::RealType   RealType;
             typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
-            static ResultType apply(const MatrixExpression<M>& e) {
+            static ResultType apply(const MatrixExpression<M>& e)
+            {
                 typedef typename M::SizeType SizeType;
 
-                RealType res2 = RealType();
+                RealType res2  = RealType();
                 SizeType size1 = e().getSize1();
                 SizeType size2 = e().getSize2();
 
                 for (SizeType i = 0; i < size1; i++) {
-                    for (SizeType j = 0; j < size2; j++) { 
+                    for (SizeType j = 0; j < size2; j++) {
                         RealType t = TypeTraits<ValueType>::norm2(e()(i, j));
 
                         res2 += t * t;
@@ -711,22 +744,23 @@ namespace CDPL
         template <typename M>
         struct MatrixNormInfinity : public MatrixScalarRealUnaryFunctor<M>
         {
-            
-            typedef typename MatrixScalarRealUnaryFunctor<M>::ValueType ValueType;
-            typedef typename MatrixScalarRealUnaryFunctor<M>::RealType RealType;
+
+            typedef typename MatrixScalarRealUnaryFunctor<M>::ValueType  ValueType;
+            typedef typename MatrixScalarRealUnaryFunctor<M>::RealType   RealType;
             typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
-            static ResultType apply(const MatrixExpression<M>& e) {
+            static ResultType apply(const MatrixExpression<M>& e)
+            {
                 typedef typename M::SizeType SizeType;
 
-                RealType res = RealType();
+                RealType res   = RealType();
                 SizeType size1 = e().getSize1();
                 SizeType size2 = e().getSize2();
 
                 for (SizeType i = 0; i < size1; i++) {
                     RealType t = RealType();
 
-                    for (SizeType j = 0; j < size2; j++) 
+                    for (SizeType j = 0; j < size2; j++)
                         t += TypeTraits<ValueType>::normInf(e()(i, j));
 
                     if (t > res)
@@ -742,18 +776,19 @@ namespace CDPL
         {
 
             typedef typename V::ValueType ResultType;
-            typedef typename V::SizeType SizeType;
+            typedef typename V::SizeType  SizeType;
         };
 
         template <typename V>
         struct DiagonalMatrixFromVector : public VectorMatrixUnaryFunctor<V>
         {
-            
+
             typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
-            typedef typename VectorScalarUnaryFunctor<V>::SizeType SizeType;
+            typedef typename VectorScalarUnaryFunctor<V>::SizeType   SizeType;
 
             template <typename E>
-            static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j) {
+            static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j)
+            {
                 if (i == j)
                     return e()(i);
 
@@ -764,12 +799,13 @@ namespace CDPL
         template <typename V>
         struct CrossProductMatrixFromVector : public VectorMatrixUnaryFunctor<V>
         {
-            
+
             typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
-            typedef typename VectorScalarUnaryFunctor<V>::SizeType SizeType;
+            typedef typename VectorScalarUnaryFunctor<V>::SizeType   SizeType;
 
             template <typename E>
-            static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j) {
+            static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j)
+            {
                 CDPL_MATH_CHECK(e().getSize() == 3, "Invalid vector size", Base::SizeError);
 
                 //                       |  0  -a3  a2 |
@@ -789,7 +825,7 @@ namespace CDPL
                             default:
                                 return ResultType();
                         }
-                    
+
                     case 1:
                         switch (j) {
 
@@ -827,22 +863,23 @@ namespace CDPL
         {
 
             typedef typename CommonType<typename M::ValueType, typename V::ValueType>::Type ValueType;
-            typedef typename CommonType<typename M::SizeType, typename V::SizeType>::Type SizeType;
-            typedef ValueType ResultType;
+            typedef typename CommonType<typename M::SizeType, typename V::SizeType>::Type   SizeType;
+            typedef ValueType                                                               ResultType;
         };
 
         template <typename M, typename V>
         struct MatrixVectorProduct : public MatrixVectorBinaryFunctor<M, V>
         {
 
-            typedef typename MatrixVectorBinaryFunctor<M, V>::ValueType ValueType;
-            typedef typename MatrixVectorBinaryFunctor<M, V>::SizeType SizeType;
+            typedef typename MatrixVectorBinaryFunctor<M, V>::ValueType  ValueType;
+            typedef typename MatrixVectorBinaryFunctor<M, V>::SizeType   SizeType;
             typedef typename MatrixVectorBinaryFunctor<M, V>::ResultType ResultType;
 
             template <typename E1, typename E2>
-            static ResultType apply(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
-                SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize2()), SizeType(e2().getSize()), Base::SizeError);
-                ResultType res = ResultType();
+            static ResultType apply(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)
+            {
+                SizeType   size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize2()), SizeType(e2().getSize()), Base::SizeError);
+                ResultType res  = ResultType();
 
                 for (SizeType j = 0; j < size; j++)
                     res += e1()(i, j) * e2()(j);
@@ -855,14 +892,15 @@ namespace CDPL
         struct VectorMatrixProduct : public MatrixVectorBinaryFunctor<M, V>
         {
 
-            typedef typename MatrixVectorBinaryFunctor<M, V>::ValueType ValueType;
-            typedef typename MatrixVectorBinaryFunctor<M, V>::SizeType SizeType;
+            typedef typename MatrixVectorBinaryFunctor<M, V>::ValueType  ValueType;
+            typedef typename MatrixVectorBinaryFunctor<M, V>::SizeType   SizeType;
             typedef typename MatrixVectorBinaryFunctor<M, V>::ResultType ResultType;
 
             template <typename E1, typename E2>
-            static ResultType apply(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i) {
-                SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize()), SizeType(e2().getSize1()), Base::SizeError);
-                ResultType res = ResultType();
+            static ResultType apply(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i)
+            {
+                SizeType   size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize()), SizeType(e2().getSize1()), Base::SizeError);
+                ResultType res  = ResultType();
 
                 for (SizeType j = 0; j < size; j++)
                     res += e1()(j) * e2()(j, i);
@@ -876,22 +914,23 @@ namespace CDPL
         {
 
             typedef typename CommonType<typename M1::ValueType, typename M2::ValueType>::Type ValueType;
-            typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
-            typedef ValueType ResultType;
+            typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type   SizeType;
+            typedef ValueType                                                                 ResultType;
         };
 
         template <typename M1, typename M2>
         struct MatrixProduct : public MatrixBinaryFunctor<M1, M2>
         {
 
-            typedef typename MatrixVectorBinaryFunctor<M1, M2>::ValueType ValueType;
-            typedef typename MatrixVectorBinaryFunctor<M1, M2>::SizeType SizeType;
+            typedef typename MatrixVectorBinaryFunctor<M1, M2>::ValueType  ValueType;
+            typedef typename MatrixVectorBinaryFunctor<M1, M2>::SizeType   SizeType;
             typedef typename MatrixVectorBinaryFunctor<M1, M2>::ResultType ResultType;
 
             template <typename E1, typename E2>
-            static ResultType apply(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i, SizeType j) {
-                SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize2()), SizeType(e2().getSize1()), Base::SizeError);
-                ResultType res = ResultType();
+            static ResultType apply(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i, SizeType j)
+            {
+                SizeType   size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize2()), SizeType(e2().getSize1()), Base::SizeError);
+                ResultType res  = ResultType();
 
                 for (SizeType k = 0; k < size; k++)
                     res += e1()(i, k) * e2()(k, j);
@@ -904,7 +943,7 @@ namespace CDPL
         struct QuaternionBooleanBinaryFunctor
         {
 
-            typedef bool ResultType;
+            typedef bool                                                                      ResultType;
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ValueType;
         };
 
@@ -912,14 +951,12 @@ namespace CDPL
         struct QuaternionEquality : public QuaternionBooleanBinaryFunctor<Q1, Q2>
         {
 
-            typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ValueType ValueType;
+            typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ValueType  ValueType;
             typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
-            static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2) {
-                return (ValueType(e1().getC1()) == ValueType(e2().getC1())
-                        && ValueType(e1().getC2()) == ValueType(e2().getC2())
-                        && ValueType(e1().getC3()) == ValueType(e2().getC3())
-                        && ValueType(e1().getC4()) == ValueType(e2().getC4()));
+            static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2)
+            {
+                return (ValueType(e1().getC1()) == ValueType(e2().getC1()) && ValueType(e1().getC2()) == ValueType(e2().getC2()) && ValueType(e1().getC3()) == ValueType(e2().getC3()) && ValueType(e1().getC4()) == ValueType(e2().getC4()));
             }
         };
 
@@ -927,8 +964,8 @@ namespace CDPL
         struct Scalar3QuaternionBooleanTernaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef const T& Argument3Type;
+            typedef bool                                                                      ResultType;
+            typedef const T&                                                                  Argument3Type;
             typedef typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type ValueType;
         };
 
@@ -936,19 +973,17 @@ namespace CDPL
         struct QuaternionToleranceEquality : public Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>
         {
 
-            typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::ValueType ValueType;
-            typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::ResultType ResultType;
+            typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::ValueType     ValueType;
+            typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::ResultType    ResultType;
             typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::Argument3Type Argument3Type;
 
-            static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2, Argument3Type epsilon) {
+            static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2, Argument3Type epsilon)
+            {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
                 ComparisonType norm_inf_max(epsilon);
 
-                return (ComparisonType(TypeTraits<ValueType>::normInf(e2().getC1() - e1().getC1())) <= norm_inf_max
-                        && ComparisonType(TypeTraits<ValueType>::normInf(e2().getC2() - e1().getC2())) <= norm_inf_max
-                        && ComparisonType(TypeTraits<ValueType>::normInf(e2().getC3() - e1().getC3())) <= norm_inf_max
-                        && ComparisonType(TypeTraits<ValueType>::normInf(e2().getC4() - e1().getC4())) <= norm_inf_max);
+                return (ComparisonType(TypeTraits<ValueType>::normInf(e2().getC1() - e1().getC1())) <= norm_inf_max && ComparisonType(TypeTraits<ValueType>::normInf(e2().getC2() - e1().getC2())) <= norm_inf_max && ComparisonType(TypeTraits<ValueType>::normInf(e2().getC3() - e1().getC3())) <= norm_inf_max && ComparisonType(TypeTraits<ValueType>::normInf(e2().getC4() - e1().getC4())) <= norm_inf_max);
             }
         };
 
@@ -962,10 +997,11 @@ namespace CDPL
         template <typename Q>
         struct QuaternionElementSum : public QuaternionScalarUnaryFunctor<Q>
         {
-            
+
             typedef typename QuaternionScalarUnaryFunctor<Q>::ResultType ResultType;
 
-            static ResultType apply(const QuaternionExpression<Q>& e) {
+            static ResultType apply(const QuaternionExpression<Q>& e)
+            {
                 return (e().getC1() + e().getC2() + e().getC3() + e().getC4());
             }
         };
@@ -975,23 +1011,24 @@ namespace CDPL
         {
 
             typedef typename Q::ValueType ValueType;
-            typedef ValueType RealType;
-            typedef RealType ResultType;
+            typedef ValueType             RealType;
+            typedef RealType              ResultType;
         };
 
         template <typename Q>
         struct QuaternionNorm : public QuaternionScalarRealUnaryFunctor<Q>
         {
-            
-            typedef typename QuaternionScalarRealUnaryFunctor<Q>::ValueType ValueType;
-            typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType RealType;
+
+            typedef typename QuaternionScalarRealUnaryFunctor<Q>::ValueType  ValueType;
+            typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType   RealType;
             typedef typename QuaternionScalarRealUnaryFunctor<Q>::ResultType ResultType;
 
-            static ResultType apply(const QuaternionExpression<Q>& e) {
+            static ResultType apply(const QuaternionExpression<Q>& e)
+            {
                 RealType t = e().getC1() * e().getC1() +
-                    e().getC2() * e().getC2() +
-                    e().getC3() * e().getC3() +
-                    e().getC4() * e().getC4();
+                             e().getC2() * e().getC2() +
+                             e().getC3() * e().getC3() +
+                             e().getC4() * e().getC4();
 
                 return TypeTraits<RealType>::sqrt(t);
             }
@@ -1000,16 +1037,17 @@ namespace CDPL
         template <typename Q>
         struct QuaternionNorm2 : public QuaternionScalarRealUnaryFunctor<Q>
         {
-            
-            typedef typename QuaternionScalarRealUnaryFunctor<Q>::ValueType ValueType;
-            typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType RealType;
+
+            typedef typename QuaternionScalarRealUnaryFunctor<Q>::ValueType  ValueType;
+            typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType   RealType;
             typedef typename QuaternionScalarRealUnaryFunctor<Q>::ResultType ResultType;
 
-            static ResultType apply(const QuaternionExpression<Q>& e) {
+            static ResultType apply(const QuaternionExpression<Q>& e)
+            {
                 RealType t = e().getC1() * e().getC1() +
-                    e().getC2() * e().getC2() +
-                    e().getC3() * e().getC3() +
-                    e().getC4() * e().getC4();
+                             e().getC2() * e().getC2() +
+                             e().getC3() * e().getC3() +
+                             e().getC4() * e().getC4();
 
                 return t;
             }
@@ -1089,7 +1127,7 @@ namespace CDPL
         {
 
             typedef typename CommonType<T, typename Q::ValueType>::Type ResultType;
-            typedef const T& Argument1Type;
+            typedef const T&                                            Argument1Type;
         };
 
         template <typename T, typename Q>
@@ -1097,7 +1135,7 @@ namespace CDPL
         {
 
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::Argument1Type Argument1Type;
-            typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType ResultType;
+            typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
@@ -1129,7 +1167,7 @@ namespace CDPL
         {
 
             typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::Argument1Type Argument1Type;
-            typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType ResultType;
+            typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType    ResultType;
 
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
@@ -1161,7 +1199,7 @@ namespace CDPL
         {
 
             typedef typename CommonType<typename Q::ValueType, T>::Type ResultType;
-            typedef const T& Argument2Type;
+            typedef const T&                                            Argument2Type;
         };
 
         template <typename Q, typename T>
@@ -1169,7 +1207,7 @@ namespace CDPL
         {
 
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
-            typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType ResultType;
+            typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
@@ -1201,7 +1239,7 @@ namespace CDPL
         {
 
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
-            typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType ResultType;
+            typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
@@ -1233,7 +1271,7 @@ namespace CDPL
         {
 
             typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::Argument2Type Argument2Type;
-            typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType ResultType;
+            typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType    ResultType;
 
             template <typename E>
             static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type n2)
@@ -1277,32 +1315,28 @@ namespace CDPL
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
                 // a = a1 * a2 - b1 * b2 - c1 * c2 - d1 * d2
-                return (e1().getC1() * e2().getC1() - e1().getC2() * e2().getC2() 
-                        - e1().getC3() * e2().getC3() - e1().getC4() * e2().getC4());
+                return (e1().getC1() * e2().getC1() - e1().getC2() * e2().getC2() - e1().getC3() * e2().getC3() - e1().getC4() * e2().getC4());
             }
-        
+
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
-                // b = a1 * b2 + b1 * a2 + c1 * d2 - d1 * c2 
-                return (e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() 
-                        + e1().getC3() * e2().getC4() - e1().getC4() * e2().getC3());
+                // b = a1 * b2 + b1 * a2 + c1 * d2 - d1 * c2
+                return (e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() + e1().getC3() * e2().getC4() - e1().getC4() * e2().getC3());
             }
 
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
                 // c = a1 * c2 - b1 * d2 + c1 * a2 + d1 * b2
-                return (e1().getC1() * e2().getC3() - e1().getC2() * e2().getC4() 
-                        + e1().getC3() * e2().getC1() + e1().getC4() * e2().getC2());
+                return (e1().getC1() * e2().getC3() - e1().getC2() * e2().getC4() + e1().getC3() * e2().getC1() + e1().getC4() * e2().getC2());
             }
 
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
             {
                 // d = a1 * d2 + b1 * c2 - c1 * b2 + d1 * a2
-                return (e1().getC1() * e2().getC4() + e1().getC2() * e2().getC3() 
-                        - e1().getC3() * e2().getC2() + e1().getC4() * e2().getC1());
+                return (e1().getC1() * e2().getC4() + e1().getC2() * e2().getC3() - e1().getC3() * e2().getC2() + e1().getC4() * e2().getC1());
             }
         };
 
@@ -1311,7 +1345,7 @@ namespace CDPL
         {
 
             typedef typename CommonType<typename CommonType<typename Q1::ValueType, typename Q2::ValueType>::Type, T>::Type ResultType;
-            typedef const T& Argument3Type;
+            typedef const T&                                                                                                Argument3Type;
         };
 
         template <typename Q1, typename Q2, typename T>
@@ -1319,38 +1353,34 @@ namespace CDPL
         {
 
             typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::Argument3Type Argument3Type;
-            typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::ResultType ResultType;
+            typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::ResultType    ResultType;
 
             template <typename E1, typename E2>
             static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
                 // a = (a1 * a2 + b1 * b2 + c1 * c2 + d1 * d2) / n2
-                return ((e1().getC1() * e2().getC1() + e1().getC2() * e2().getC2() 
-                         + e1().getC3() * e2().getC3() + e1().getC4() * e2().getC4()) / n2);
+                return ((e1().getC1() * e2().getC1() + e1().getC2() * e2().getC2() + e1().getC3() * e2().getC3() + e1().getC4() * e2().getC4()) / n2);
             }
 
             template <typename E1, typename E2>
             static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
-                // b = (-a1 * b2 + b1 * a2 - c1 * d2 + d1 * c2) / n2 
-                return ((-e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() 
-                         - e1().getC3() * e2().getC4() + e1().getC4() * e2().getC3()) / n2);
+                // b = (-a1 * b2 + b1 * a2 - c1 * d2 + d1 * c2) / n2
+                return ((-e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() - e1().getC3() * e2().getC4() + e1().getC4() * e2().getC3()) / n2);
             }
 
             template <typename E1, typename E2>
             static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
                 // c = (-a1 * c2 + b1 * d2 + c1 * a2 - d1 * b2) / n2
-                return ((-e1().getC1() * e2().getC3() + e1().getC2() * e2().getC4() 
-                         + e1().getC3() * e2().getC1() - e1().getC4() * e2().getC2()) / n2);
+                return ((-e1().getC1() * e2().getC3() + e1().getC2() * e2().getC4() + e1().getC3() * e2().getC1() - e1().getC4() * e2().getC2()) / n2);
             }
 
             template <typename E1, typename E2>
             static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
             {
                 // d = (-a1 * d2 - b1 * c2 + c1 * b2 + d1 * a2) / n2
-                return ((-e1().getC1() * e2().getC4() - e1().getC2() * e2().getC3() 
-                         + e1().getC3() * e2().getC2() + e1().getC4() * e2().getC1()) / n2);
+                return ((-e1().getC1() * e2().getC4() - e1().getC2() * e2().getC3() + e1().getC3() * e2().getC2() + e1().getC4() * e2().getC1()) / n2);
             }
         };
 
@@ -1359,8 +1389,8 @@ namespace CDPL
         {
 
             typedef typename CommonType<typename CommonType<T1, typename Q::ValueType>::Type, T2>::Type ResultType;
-            typedef const T1& Argument1Type;
-            typedef const T2& Argument3Type;
+            typedef const T1&                                                                           Argument1Type;
+            typedef const T2&                                                                           Argument3Type;
         };
 
         template <typename T1, typename Q, typename T2>
@@ -1369,7 +1399,7 @@ namespace CDPL
 
             typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::Argument1Type Argument1Type;
             typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::Argument3Type Argument3Type;
-            typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::ResultType ResultType;
+            typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::ResultType    ResultType;
 
             template <typename E>
             static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
@@ -1401,63 +1431,64 @@ namespace CDPL
         {
 
             typedef typename CommonType<typename Q::ValueType, typename V::ValueType>::Type ValueType;
-            typedef typename V::SizeType SizeType;
-            typedef ValueType ResultType;
+            typedef typename V::SizeType                                                    SizeType;
+            typedef ValueType                                                               ResultType;
         };
 
         template <typename Q, typename V>
         struct QuaternionVectorRotation : public QuaternionVectorBinaryFunctor<Q, V>
         {
 
-            typedef typename QuaternionVectorBinaryFunctor<Q, V>::ValueType ValueType;
-            typedef typename QuaternionVectorBinaryFunctor<Q, V>::SizeType SizeType;
+            typedef typename QuaternionVectorBinaryFunctor<Q, V>::ValueType  ValueType;
+            typedef typename QuaternionVectorBinaryFunctor<Q, V>::SizeType   SizeType;
             typedef typename QuaternionVectorBinaryFunctor<Q, V>::ResultType ResultType;
 
             template <typename E1, typename E2>
-            static ResultType apply(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
+            static ResultType apply(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i)
+            {
                 CDPL_MATH_CHECK(e2().getSize() >= 3, "Invalid vector size", Base::SizeError);
 
                 switch (i) {
 
-                case 0: {
-                    // vr1 = (a2 + b2 - c2 - d2) * v1 + (2bc - 2ad) * v2 + (2bd + 2ac) * v3
-                    ValueType t1 = e1().getC1() * e1().getC1() + e1().getC2() * e1().getC2() - e1().getC3() * e1().getC3() - e1().getC4() * e1().getC4();
-                    ValueType t2 = ValueType(2) * (e1().getC2() * e1().getC3() - e1().getC1() * e1().getC4());
-                    ValueType t3 = ValueType(2) * (e1().getC2() * e1().getC4() + e1().getC1() * e1().getC3());
+                    case 0: {
+                        // vr1 = (a2 + b2 - c2 - d2) * v1 + (2bc - 2ad) * v2 + (2bd + 2ac) * v3
+                        ValueType t1 = e1().getC1() * e1().getC1() + e1().getC2() * e1().getC2() - e1().getC3() * e1().getC3() - e1().getC4() * e1().getC4();
+                        ValueType t2 = ValueType(2) * (e1().getC2() * e1().getC3() - e1().getC1() * e1().getC4());
+                        ValueType t3 = ValueType(2) * (e1().getC2() * e1().getC4() + e1().getC1() * e1().getC3());
 
-                    return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
-                }
+                        return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
+                    }
 
-                case 1: {
-                    // vr2 = (2bc + 2ad) * v1 + (a2 - b2 + c2 - d2) * v2 + (2cd - 2ab) * v3
-                    ValueType t1 = ValueType(2) * (e1().getC2() * e1().getC3() + e1().getC1() * e1().getC4());
-                    ValueType t2 = e1().getC1() * e1().getC1() - e1().getC2() * e1().getC2() + e1().getC3() * e1().getC3() - e1().getC4() * e1().getC4();
-                    ValueType t3 = ValueType(2) * (e1().getC3() * e1().getC4() - e1().getC1() * e1().getC2());
+                    case 1: {
+                        // vr2 = (2bc + 2ad) * v1 + (a2 - b2 + c2 - d2) * v2 + (2cd - 2ab) * v3
+                        ValueType t1 = ValueType(2) * (e1().getC2() * e1().getC3() + e1().getC1() * e1().getC4());
+                        ValueType t2 = e1().getC1() * e1().getC1() - e1().getC2() * e1().getC2() + e1().getC3() * e1().getC3() - e1().getC4() * e1().getC4();
+                        ValueType t3 = ValueType(2) * (e1().getC3() * e1().getC4() - e1().getC1() * e1().getC2());
 
-                    return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
-                }
+                        return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
+                    }
 
-                case 2: {
-                    // vr3 = (2bd - 2ac) * v1 + (2cd + 2ab) * v2 + (a2 - b2 - c2 + d2) * v3
-                    ValueType t1 = ValueType(2) * (e1().getC2() * e1().getC4() - e1().getC1() * e1().getC3());
-                    ValueType t2 = ValueType(2) * (e1().getC3() * e1().getC4() + e1().getC1() * e1().getC2());
-                    ValueType t3 = e1().getC1() * e1().getC1() - e1().getC2() * e1().getC2() - e1().getC3() * e1().getC3() + e1().getC4() * e1().getC4();
+                    case 2: {
+                        // vr3 = (2bd - 2ac) * v1 + (2cd + 2ab) * v2 + (a2 - b2 - c2 + d2) * v3
+                        ValueType t1 = ValueType(2) * (e1().getC2() * e1().getC4() - e1().getC1() * e1().getC3());
+                        ValueType t2 = ValueType(2) * (e1().getC3() * e1().getC4() + e1().getC1() * e1().getC2());
+                        ValueType t3 = e1().getC1() * e1().getC1() - e1().getC2() * e1().getC2() - e1().getC3() * e1().getC3() + e1().getC4() * e1().getC4();
 
-                    return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
-                }
+                        return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
+                    }
 
-                default:
-                    return ResultType();
+                    default:
+                        return ResultType();
                 }
             }
         };
-       
+
         template <typename G1, typename G2>
         struct GridBooleanBinaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type SizeType;
+            typedef bool                                                                      ResultType;
+            typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
@@ -1465,11 +1496,12 @@ namespace CDPL
         struct GridEquality : public GridBooleanBinaryFunctor<G1, G2>
         {
 
-            typedef typename GridBooleanBinaryFunctor<G1, G2>::SizeType SizeType;
-            typedef typename GridBooleanBinaryFunctor<G1, G2>::ValueType ValueType;
+            typedef typename GridBooleanBinaryFunctor<G1, G2>::SizeType   SizeType;
+            typedef typename GridBooleanBinaryFunctor<G1, G2>::ValueType  ValueType;
             typedef typename GridBooleanBinaryFunctor<G1, G2>::ResultType ResultType;
 
-            static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2) {
+            static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2)
+            {
                 if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
                     return false;
 
@@ -1493,9 +1525,9 @@ namespace CDPL
         struct Scalar3GridBooleanTernaryFunctor
         {
 
-            typedef bool ResultType;
-            typedef const T& Argument3Type;
-            typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type SizeType;
+            typedef bool                                                                      ResultType;
+            typedef const T&                                                                  Argument3Type;
+            typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
         };
 
@@ -1503,12 +1535,13 @@ namespace CDPL
         struct GridToleranceEquality : public Scalar3GridBooleanTernaryFunctor<G1, G2, T>
         {
 
-            typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::SizeType SizeType;
-            typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ValueType ValueType;
-            typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ResultType ResultType;
+            typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::SizeType      SizeType;
+            typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ValueType     ValueType;
+            typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ResultType    ResultType;
             typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::Argument3Type Argument3Type;
 
-            static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon) {
+            static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon)
+            {
                 typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
                 if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
@@ -1542,26 +1575,27 @@ namespace CDPL
         template <typename G>
         struct GridElementSum : public GridScalarUnaryFunctor<G>
         {
-            
+
             typedef typename GridScalarUnaryFunctor<G>::ResultType ResultType;
 
-            static ResultType apply(const GridExpression<G>& e) {
+            static ResultType apply(const GridExpression<G>& e)
+            {
                 typedef typename G::SizeType SizeType;
 
-                ResultType res = ResultType();
-                SizeType size1 = e().getSize1();
-                SizeType size2 = e().getSize2();
-                SizeType size3 = e().getSize3();
+                ResultType res   = ResultType();
+                SizeType   size1 = e().getSize1();
+                SizeType   size2 = e().getSize2();
+                SizeType   size3 = e().getSize3();
 
-                for (SizeType i = 0; i < size1; i++) 
-                    for (SizeType j = 0; j < size2; j++) 
-                        for (SizeType k = 0; k < size3; k++) 
+                for (SizeType i = 0; i < size1; i++)
+                    for (SizeType j = 0; j < size2; j++)
+                        for (SizeType k = 0; k < size3; k++)
                             res += e()(i, j, k);
 
                 return res;
             }
         };
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_FUNCTIONAL_HPP

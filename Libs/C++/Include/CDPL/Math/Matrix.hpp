@@ -55,187 +55,218 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename M> 
+        template <typename M>
         class MatrixReference : public MatrixExpression<MatrixReference<M> >
         {
 
             typedef MatrixReference<M> SelfType;
 
-        public:
-            typedef M MatrixType;
-            typedef typename M::ValueType ValueType;
+          public:
+            typedef M                                                      MatrixType;
+            typedef typename M::ValueType                                  ValueType;
             typedef typename std::conditional<std::is_const<M>::value,
-                                             typename M::ConstReference,
-                                             typename M::Reference>::type Reference;
-            typedef typename M::ConstReference ConstReference;
-            typedef typename M::SizeType SizeType;
-            typedef typename M::DifferenceType DifferenceType;
-            typedef SelfType ClosureType;
-            typedef const SelfType ConstClosureType;
+                                              typename M::ConstReference,
+                                              typename M::Reference>::type Reference;
+            typedef typename M::ConstReference                             ConstReference;
+            typedef typename M::SizeType                                   SizeType;
+            typedef typename M::DifferenceType                             DifferenceType;
+            typedef SelfType                                               ClosureType;
+            typedef const SelfType                                         ConstClosureType;
 
-            explicit MatrixReference(MatrixType& m): data(m) {}
+            explicit MatrixReference(MatrixType& m):
+                data(m) {}
 
-            Reference operator()(SizeType i, SizeType j) {
+            Reference operator()(SizeType i, SizeType j)
+            {
                 return data(i, j);
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 return data(i, j);
             }
-    
-            SizeType getSize1() const {
+
+            SizeType getSize1() const
+            {
                 return data.getSize1();
             }
 
-            SizeType getSize2() const {
+            SizeType getSize2() const
+            {
                 return data.getSize2();
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return data.getMaxSize();
             }
-    
-            SizeType getMaxSize1() const {
+
+            SizeType getMaxSize1() const
+            {
                 return data.getMaxSize1();
             }
 
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize2() const
+            {
                 return data.getMaxSize2();
             }
-        
-            bool isEmpty() const {
+
+            bool isEmpty() const
+            {
                 return data.isEmpty();
             }
-    
-            const MatrixType& getData() const {
+
+            const MatrixType& getData() const
+            {
                 return data;
             }
 
-            MatrixType& getData() {
+            MatrixType& getData()
+            {
                 return data;
             }
 
-            MatrixReference& operator=(const MatrixReference& r) {
+            MatrixReference& operator=(const MatrixReference& r)
+            {
                 data.operator=(r.data);
                 return *this;
             }
 
             template <typename E>
-            MatrixReference& operator=(const MatrixExpression<E>& e) {
+            MatrixReference& operator=(const MatrixExpression<E>& e)
+            {
                 data.operator=(e);
                 return *this;
             }
 
             template <typename E>
-            MatrixReference& operator+=(const MatrixExpression<E>& e) {
+            MatrixReference& operator+=(const MatrixExpression<E>& e)
+            {
                 data.operator+=(e);
                 return *this;
-            }    
+            }
 
             template <typename E>
-            MatrixReference& operator-=(const MatrixExpression<E>& e) {
+            MatrixReference& operator-=(const MatrixExpression<E>& e)
+            {
                 data.operator-=(e);
                 return *this;
             }
 
             template <typename T>
-            typename std::enable_if<IsScalar<T>::value, MatrixReference>::type& operator*=(const T& t) {
+            typename std::enable_if<IsScalar<T>::value, MatrixReference>::type& operator*=(const T& t)
+            {
                 data.operator*=(t);
                 return *this;
             }
-    
+
             template <typename T>
-            typename std::enable_if<IsScalar<T>::value, MatrixReference>::type& operator/=(const T& t) {
+            typename std::enable_if<IsScalar<T>::value, MatrixReference>::type& operator/=(const T& t)
+            {
                 data.operator/=(t);
                 return *this;
             }
-            
+
             template <typename E>
-            MatrixReference& assign(const MatrixExpression<E>& e) {
+            MatrixReference& assign(const MatrixExpression<E>& e)
+            {
                 data.assign(e);
                 return *this;
             }
 
             template <typename E>
-            MatrixReference& plusAssign(const MatrixExpression<E>& e) {
+            MatrixReference& plusAssign(const MatrixExpression<E>& e)
+            {
                 data.plusAssign(e);
                 return *this;
             }
 
             template <typename E>
-            MatrixReference& minusAssign(const MatrixExpression<E>& e) {
+            MatrixReference& minusAssign(const MatrixExpression<E>& e)
+            {
                 data.minusAssign(e);
                 return *this;
             }
 
-            void swap(MatrixReference& r) {
+            void swap(MatrixReference& r)
+            {
                 data.swap(r.data);
             }
-    
-            friend void swap(MatrixReference& r1, MatrixReference& r2) {
+
+            friend void swap(MatrixReference& r1, MatrixReference& r2)
+            {
                 r1.swap(r2);
             }
 
-        private:
+          private:
             MatrixType& data;
         };
 
-        template <typename T, typename A> class Matrix;
-        template <typename T, typename A> class Vector;
+        template <typename T, typename A>
+        class Matrix;
+        template <typename T, typename A>
+        class Vector;
 
         template <typename T>
         class InitListMatrix : public MatrixContainer<InitListMatrix<T> >
         {
 
-        public:
-            typedef InitListMatrix SelfType;
-            typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
-            typedef typename InitializerListType::value_type::value_type ValueType;
+          public:
+            typedef InitListMatrix                                            SelfType;
+            typedef std::initializer_list<std::initializer_list<T> >          InitializerListType;
+            typedef typename InitializerListType::value_type::value_type      ValueType;
             typedef typename InitializerListType::value_type::const_reference ConstReference;
-            typedef typename InitializerListType::value_type::reference Reference;
-            typedef typename InitializerListType::size_type SizeType;
-            typedef typename std::ptrdiff_t DifferenceType;
-            typedef SelfType ClosureType;
-            typedef const SelfType ConstClosureType;
-            typedef Matrix<T, std::vector<T> > MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-            
-            InitListMatrix(InitializerListType l): list(l), size2(0) {
+            typedef typename InitializerListType::value_type::reference       Reference;
+            typedef typename InitializerListType::size_type                   SizeType;
+            typedef typename std::ptrdiff_t                                   DifferenceType;
+            typedef SelfType                                                  ClosureType;
+            typedef const SelfType                                            ConstClosureType;
+            typedef Matrix<T, std::vector<T> >                                MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >                                VectorTemporaryType;
+
+            InitListMatrix(InitializerListType l):
+                list(l), size2(0)
+            {
                 for (const auto& r : l)
                     size2 = std::max(size2, r.size());
             }
 
-            Reference operator()(SizeType i, SizeType j) {
+            Reference operator()(SizeType i, SizeType j)
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
                 if (j >= (list.begin() + i)->size())
                     return zero;
-                
+
                 return *((list.begin() + i)->begin() + j);
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
                 if (j >= (list.begin() + i)->size())
                     return zero;
-                
+
                 return *((list.begin() + i)->begin() + j);
             }
-    
-            SizeType getSize1() const {
+
+            SizeType getSize1() const
+            {
                 return list.size();
             }
 
-            SizeType getSize2() const {
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size2 == 0 || list.size() == 0);
             }
-            
-        private:
+
+          private:
             InitializerListType    list;
             SizeType               size2;
             static const ValueType zero;
@@ -243,167 +274,197 @@ namespace CDPL
 
         template <typename T>
         const typename InitListMatrix<T>::ValueType InitListMatrix<T>::zero = InitListMatrix<T>::ValueType();
-        
-        template <typename T, typename A = std::vector<T> > 
+
+        template <typename T, typename A = std::vector<T> >
         class Matrix : public MatrixContainer<Matrix<T, A> >
         {
 
             typedef Matrix<T, A> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef T& Reference;
-            typedef const T& ConstReference;
-            typedef typename A::size_type SizeType;
-            typedef typename A::difference_type DifferenceType;
-            typedef A ArrayType;
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef MatrixReference<SelfType> ClosureType;
-            typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef SelfType MatrixTemporaryType;
-            typedef Vector<T, A> VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
+          public:
+            typedef T                                                ValueType;
+            typedef T&                                               Reference;
+            typedef const T&                                         ConstReference;
+            typedef typename A::size_type                            SizeType;
+            typedef typename A::difference_type                      DifferenceType;
+            typedef A                                                ArrayType;
+            typedef T*                                               Pointer;
+            typedef const T*                                         ConstPointer;
+            typedef MatrixReference<SelfType>                        ClosureType;
+            typedef const MatrixReference<const SelfType>            ConstClosureType;
+            typedef SelfType                                         MatrixTemporaryType;
+            typedef Vector<T, A>                                     VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>                        SharedPointer;
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
-            
-            Matrix(): size1(0), size2(0), data() {}
 
-            Matrix(SizeType m, SizeType n): 
+            Matrix():
+                size1(0), size2(0), data() {}
+
+            Matrix(SizeType m, SizeType n):
                 size1(m), size2(n), data(storageSize(m, n)) {}
 
-            Matrix(SizeType m, SizeType n, const ValueType& v):  
+            Matrix(SizeType m, SizeType n, const ValueType& v):
                 size1(m), size2(n), data(storageSize(m, n), v) {}
 
-            Matrix(const Matrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
+            Matrix(const Matrix& m):
+                size1(m.size1), size2(m.size2), data(m.data) {}
 
-            Matrix(Matrix&& m): size1(0), size2(0), data() {
+            Matrix(Matrix&& m):
+                size1(0), size2(0), data()
+            {
                 swap(m);
             }
 
-            Matrix(InitializerListType l): size1(0), size2(0), data() {
+            Matrix(InitializerListType l):
+                size1(0), size2(0), data()
+            {
                 assign(l);
             }
-            
+
             template <typename E>
-            Matrix(const MatrixExpression<E>& e): 
-                size1(e().getSize1()), size2(e().getSize2()), data(storageSize(e().getSize1(), e().getSize2())) {
+            Matrix(const MatrixExpression<E>& e):
+                size1(e().getSize1()), size2(e().getSize2()), data(storageSize(e().getSize1(), e().getSize2()))
+            {
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
             }
 
-            Reference operator()(SizeType i, SizeType j) {
+            Reference operator()(SizeType i, SizeType j)
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return data[i * getSize2() + j];
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return data[i * getSize2() + j];
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return data.empty();
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return size1;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            SizeType getMaxSize() const {
+            SizeType getMaxSize() const
+            {
                 return data.max_size();
             }
 
-            ArrayType& getData() {
-                return data;
-            }
-            
-            const ArrayType& getData() const {
+            ArrayType& getData()
+            {
                 return data;
             }
 
-            Matrix& operator=(const Matrix& m) {
-                data = m.data;
+            const ArrayType& getData() const
+            {
+                return data;
+            }
+
+            Matrix& operator=(const Matrix& m)
+            {
+                data  = m.data;
                 size1 = m.size1;
                 size2 = m.size2;
                 return *this;
             }
 
-            Matrix& operator=(Matrix&& m) {
+            Matrix& operator=(Matrix&& m)
+            {
                 swap(m);
                 return *this;
             }
 
             template <typename C>
-            Matrix& operator=(const MatrixContainer<C>& c) {
+            Matrix& operator=(const MatrixContainer<C>& c)
+            {
                 return assign(c);
             }
 
-            Matrix& operator=(InitializerListType l) {
+            Matrix& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename E>
-            Matrix& operator=(const MatrixExpression<E>& e) {
+            Matrix& operator=(const MatrixExpression<E>& e)
+            {
                 Matrix tmp(e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename C>
-            Matrix& operator+=(const MatrixContainer<C>& c) {
+            Matrix& operator+=(const MatrixContainer<C>& c)
+            {
                 return plusAssign(c);
             }
 
-            Matrix& operator+=(InitializerListType l) {
+            Matrix& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-            
+
             template <typename E>
-            Matrix& operator+=(const MatrixExpression<E>& e) {
+            Matrix& operator+=(const MatrixExpression<E>& e)
+            {
                 Matrix tmp(*this + e);
                 swap(tmp);
                 return *this;
-            }    
+            }
 
             template <typename C>
-            Matrix& operator-=(const MatrixContainer<C>& c) {
+            Matrix& operator-=(const MatrixContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            Matrix& operator-=(InitializerListType l) {
+            Matrix& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            Matrix& operator-=(const MatrixExpression<E>& e) {
+            Matrix& operator-=(const MatrixExpression<E>& e)
+            {
                 Matrix tmp(*this - e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, Matrix>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, Matrix>::type& operator*=(const T1& t)
+            {
                 matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, Matrix>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, Matrix>::type& operator/=(const T1& t)
+            {
                 matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            Matrix& assign(const MatrixExpression<E>& e) {
+            Matrix& assign(const MatrixExpression<E>& e)
+            {
                 resize(e().getSize1(), e().getSize2(), false);
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            Matrix& assign(InitializerListType l) {
+            Matrix& assign(InitializerListType l)
+            {
                 InitListMatrix<ValueType> ilm(l);
                 resize(ilm.getSize1(), ilm.getSize2(), false);
                 matrixAssignMatrix<ScalarAssignment>(*this, ilm);
@@ -411,44 +472,52 @@ namespace CDPL
             }
 
             template <typename E>
-            Matrix& plusAssign(const MatrixExpression<E>& e) {
+            Matrix& plusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            Matrix& plusAssign(InitializerListType l) {
+            Matrix& plusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
             template <typename E>
-            Matrix& minusAssign(const MatrixExpression<E>& e) {
+            Matrix& minusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            Matrix& minusAssign(InitializerListType l) {
+            Matrix& minusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
-            void swap(Matrix& m) {
+            void swap(Matrix& m)
+            {
                 if (this != &m) {
                     std::swap(data, m.data);
                     std::swap(size1, m.size1);
                     std::swap(size2, m.size2);
                 }
             }
-    
-            friend void swap(Matrix& m1, Matrix& m2) {
+
+            friend void swap(Matrix& m1, Matrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void clear(const ValueType& v = ValueType()) {
+            void clear(const ValueType& v = ValueType())
+            {
                 std::fill(data.begin(), data.end(), v);
             }
 
-            void resize(SizeType m, SizeType n, bool preserve = true, const ValueType& v = ValueType()) {
+            void resize(SizeType m, SizeType n, bool preserve = true, const ValueType& v = ValueType())
+            {
                 if (size1 == m && size2 == n)
                     return;
 
@@ -468,8 +537,9 @@ namespace CDPL
                 }
             }
 
-        private:
-            SizeType storageSize(SizeType m, SizeType n) {
+          private:
+            SizeType storageSize(SizeType m, SizeType n)
+            {
                 CDPL_MATH_CHECK(n == 0 || m <= data.max_size() / n, "Maximum size exceeded", Base::SizeError);
                 return (m * n);
             }
@@ -479,60 +549,70 @@ namespace CDPL
             ArrayType data;
         };
 
-        template <typename T, typename A = std::unordered_map<std::uint64_t, T> > 
+        template <typename T, typename A = std::unordered_map<std::uint64_t, T> >
         class SparseMatrix : public MatrixContainer<SparseMatrix<T, A> >
         {
 
             typedef SparseMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef typename A::key_type KeyType;
-            typedef SparseContainerElement<SelfType> Reference;
-            typedef const T& ConstReference;
-            typedef std::uint32_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef A ArrayType;
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef MatrixReference<SelfType> ClosureType;
-            typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef SelfType MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
+          public:
+            typedef T                                                ValueType;
+            typedef typename A::key_type                             KeyType;
+            typedef SparseContainerElement<SelfType>                 Reference;
+            typedef const T&                                         ConstReference;
+            typedef std::uint32_t                                    SizeType;
+            typedef std::ptrdiff_t                                   DifferenceType;
+            typedef A                                                ArrayType;
+            typedef T*                                               Pointer;
+            typedef const T*                                         ConstPointer;
+            typedef MatrixReference<SelfType>                        ClosureType;
+            typedef const MatrixReference<const SelfType>            ConstClosureType;
+            typedef SelfType                                         MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >                       VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>                        SharedPointer;
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
-            
-            SparseMatrix(): size1(0), size2(0), data() {}
 
-            SparseMatrix(SizeType m, SizeType n): 
-                size1(m), size2(n), data() {
+            SparseMatrix():
+                size1(0), size2(0), data() {}
+
+            SparseMatrix(SizeType m, SizeType n):
+                size1(m), size2(n), data()
+            {
                 CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n), "Maximum size exceeded", Base::SizeError);
             }
 
-            SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
+            SparseMatrix(const SparseMatrix& m):
+                size1(m.size1), size2(m.size2), data(m.data) {}
 
-            SparseMatrix(SparseMatrix&& m): size1(0), size2(0), data() {
+            SparseMatrix(SparseMatrix&& m):
+                size1(0), size2(0), data()
+            {
                 swap(m);
             }
 
-            SparseMatrix(InitializerListType l): size1(0), size2(0), data() {
+            SparseMatrix(InitializerListType l):
+                size1(0), size2(0), data()
+            {
                 assign(l);
             }
-            
+
             template <typename E>
-            SparseMatrix(const MatrixExpression<E>& e): 
-                size1(e().getSize1()), size2(e().getSize2()), data() {
+            SparseMatrix(const MatrixExpression<E>& e):
+                size1(e().getSize1()), size2(e().getSize2()), data()
+            {
                 CDPL_MATH_CHECK((size1 == 0 || size2 <= data.max_size() / size1), "Maximum size exceeded", Base::SizeError);
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
             }
 
-            Reference operator()(SizeType i, SizeType j) {
+            Reference operator()(SizeType i, SizeType j)
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
                 return Reference(*this, makeKey(i, j));
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
                 typename ArrayType::const_iterator it = data.find(makeKey(i, j));
@@ -543,114 +623,136 @@ namespace CDPL
                 return it->second;
             }
 
-            SizeType getNumElements() const {
+            SizeType getNumElements() const
+            {
                 return data.size();
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size1 == 0 || size2 == 0);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return size1;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            typename ArrayType::size_type getMaxSize() const {
+            typename ArrayType::size_type getMaxSize() const
+            {
                 return data.max_size();
             }
 
-            ArrayType& getData() {
-                return data;
-            }
-            
-            const ArrayType& getData() const {
+            ArrayType& getData()
+            {
                 return data;
             }
 
-            SparseMatrix& operator=(const SparseMatrix& m) {
-                data = m.data;
+            const ArrayType& getData() const
+            {
+                return data;
+            }
+
+            SparseMatrix& operator=(const SparseMatrix& m)
+            {
+                data  = m.data;
                 size1 = m.size1;
                 size2 = m.size2;
                 return *this;
             }
 
-            SparseMatrix& operator=(SparseMatrix&& m) {
+            SparseMatrix& operator=(SparseMatrix&& m)
+            {
                 swap(m);
                 return *this;
             }
 
             template <typename C>
-            SparseMatrix& operator=(const MatrixContainer<C>& c) {
+            SparseMatrix& operator=(const MatrixContainer<C>& c)
+            {
                 return assign(c);
             }
 
-            SparseMatrix& operator=(InitializerListType l) {
+            SparseMatrix& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename E>
-            SparseMatrix& operator=(const MatrixExpression<E>& e) {
+            SparseMatrix& operator=(const MatrixExpression<E>& e)
+            {
                 SparseMatrix tmp(e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename C>
-            SparseMatrix& operator+=(const MatrixContainer<C>& c) {
+            SparseMatrix& operator+=(const MatrixContainer<C>& c)
+            {
                 return plusAssign(c);
             }
 
-            SparseMatrix& operator+=(InitializerListType l) {
+            SparseMatrix& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-            
+
             template <typename E>
-            SparseMatrix& operator+=(const MatrixExpression<E>& e) {
+            SparseMatrix& operator+=(const MatrixExpression<E>& e)
+            {
                 SparseMatrix tmp(*this + e);
                 swap(tmp);
                 return *this;
-            }    
+            }
 
             template <typename C>
-            SparseMatrix& operator-=(const MatrixContainer<C>& c) {
+            SparseMatrix& operator-=(const MatrixContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            SparseMatrix& operator-=(InitializerListType l) {
+            SparseMatrix& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            SparseMatrix& operator-=(const MatrixExpression<E>& e) {
+            SparseMatrix& operator-=(const MatrixExpression<E>& e)
+            {
                 SparseMatrix tmp(*this - e);
                 swap(tmp);
                 return *this;
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, SparseMatrix>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, SparseMatrix>::type& operator*=(const T1& t)
+            {
                 matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, SparseMatrix>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, SparseMatrix>::type& operator/=(const T1& t)
+            {
                 matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            SparseMatrix& assign(const MatrixExpression<E>& e) {
+            SparseMatrix& assign(const MatrixExpression<E>& e)
+            {
                 resize(e().getSize1(), e().getSize2());
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            SparseMatrix& assign(InitializerListType l) {
+            SparseMatrix& assign(InitializerListType l)
+            {
                 InitListMatrix<ValueType> ilm(l);
                 resize(ilm.getSize1(), ilm.getSize2());
                 matrixAssignMatrix<ScalarAssignment>(*this, ilm);
@@ -658,49 +760,57 @@ namespace CDPL
             }
 
             template <typename E>
-            SparseMatrix& plusAssign(const MatrixExpression<E>& e) {
+            SparseMatrix& plusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            SparseMatrix& plusAssign(InitializerListType l) {
+            SparseMatrix& plusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
             template <typename E>
-            SparseMatrix& minusAssign(const MatrixExpression<E>& e) {
+            SparseMatrix& minusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            SparseMatrix& minusAssign(InitializerListType l) {
+            SparseMatrix& minusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
-            void swap(SparseMatrix& m) {
+            void swap(SparseMatrix& m)
+            {
                 if (this != &m) {
                     std::swap(data, m.data);
                     std::swap(size1, m.size1);
                     std::swap(size2, m.size2);
                 }
             }
-    
-            friend void swap(SparseMatrix& m1, SparseMatrix& m2) {
+
+            friend void swap(SparseMatrix& m1, SparseMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void clear() {
+            void clear()
+            {
                 data.clear();
             }
 
-            void resize(SizeType m, SizeType n) {
+            void resize(SizeType m, SizeType n)
+            {
                 CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n), "Maximum size exceeded", Base::SizeError);
 
-                for (typename ArrayType::iterator it = data.begin(); it != data.end(); ) {
+                for (typename ArrayType::iterator it = data.begin(); it != data.end();) {
                     const KeyType& key = it->first;
-                    
+
                     if (getRowIdx(key) >= m || getColIdx(key) >= n)
                         it = data.erase(it);
                     else
@@ -711,16 +821,19 @@ namespace CDPL
                 size2 = n;
             }
 
-        private:
-            static KeyType makeKey(SizeType i, SizeType j) {
+          private:
+            static KeyType makeKey(SizeType i, SizeType j)
+            {
                 return ((KeyType(i) << (sizeof(SizeType) * 8)) + j);
             }
 
-            static SizeType getRowIdx(const KeyType& key) {
+            static SizeType getRowIdx(const KeyType& key)
+            {
                 return (key >> (sizeof(SizeType) * 8));
             }
-    
-            static SizeType getColIdx(const KeyType& key) {
+
+            static SizeType getColIdx(const KeyType& key)
+            {
                 return (key & KeyType(~SizeType()));
             }
 
@@ -730,101 +843,124 @@ namespace CDPL
             static const ValueType zero;
         };
 
-        template <typename T, typename A> const typename SparseMatrix<T, A>::ValueType SparseMatrix<T, A>::zero = SparseMatrix<T, A>::ValueType();
+        template <typename T, typename A>
+        const typename SparseMatrix<T, A>::ValueType SparseMatrix<T, A>::zero = SparseMatrix<T, A>::ValueType();
 
-        template <typename T, std::size_t N> class BoundedVector;
+        template <typename T, std::size_t N>
+        class BoundedVector;
 
-        template <typename T, std::size_t M, std::size_t N> 
+        template <typename T, std::size_t M, std::size_t N>
         class BoundedMatrix : public MatrixContainer<BoundedMatrix<T, M, N> >
         {
 
             typedef BoundedMatrix<T, M, N> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
+          public:
+            typedef T              ValueType;
+            typedef T&             Reference;
+            typedef const T&       ConstReference;
+            typedef std::size_t    SizeType;
             typedef std::ptrdiff_t DifferenceType;
-            typedef ValueType ArrayType[M][N];
+            typedef ValueType      ArrayType[M][N];
             typedef T (*ArrayPointer)[N];
             typedef const T (*ConstArrayPointer)[N];
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef MatrixReference<SelfType> ClosureType;
-            typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef SelfType MatrixTemporaryType;
-            typedef BoundedVector<T, M * N> VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
+            typedef T*                                               Pointer;
+            typedef const T*                                         ConstPointer;
+            typedef MatrixReference<SelfType>                        ClosureType;
+            typedef const MatrixReference<const SelfType>            ConstClosureType;
+            typedef SelfType                                         MatrixTemporaryType;
+            typedef BoundedVector<T, M * N>                          VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>                        SharedPointer;
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
-            
+
             static const SizeType MaxSize1 = M;
             static const SizeType MaxSize2 = N;
 
-            BoundedMatrix(): size1(0), size2(0) {}
+            BoundedMatrix():
+                size1(0), size2(0) {}
 
-            BoundedMatrix(SizeType m, SizeType n): size1(0), size2(0) {
+            BoundedMatrix(SizeType m, SizeType n):
+                size1(0), size2(0)
+            {
                 resize(m, n);
             }
 
-            BoundedMatrix(SizeType m, SizeType n, const ValueType& v): size1(0), size2(0) {
+            BoundedMatrix(SizeType m, SizeType n, const ValueType& v):
+                size1(0), size2(0)
+            {
                 resize(m, n, v);
             }
 
-            BoundedMatrix(const BoundedMatrix& m): size1(m.size1), size2(m.size2) {
+            BoundedMatrix(const BoundedMatrix& m):
+                size1(m.size1), size2(m.size2)
+            {
                 for (SizeType i = 0; i < size1; i++)
                     std::copy(m.data[i], m.data[i] + size2, data[i]);
             }
 
-            BoundedMatrix(InitializerListType l): size1(0), size2(0) {
+            BoundedMatrix(InitializerListType l):
+                size1(0), size2(0)
+            {
                 assign(l);
             }
-            
+
             template <typename E>
-            BoundedMatrix(const MatrixExpression<E>& e): size1(0), size2(0) {
+            BoundedMatrix(const MatrixExpression<E>& e):
+                size1(0), size2(0)
+            {
                 resize(e().getSize1(), e().getSize2());
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
             }
 
-            Reference operator()(SizeType i, SizeType j) {
+            Reference operator()(SizeType i, SizeType j)
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return data[i][j];
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return data[i][j];
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size1 == 0 || size2 == 0);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return size1;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            SizeType getMaxSize1() const {
+            SizeType getMaxSize1() const
+            {
                 return M;
             }
-    
-            SizeType getMaxSize2() const {
+
+            SizeType getMaxSize2() const
+            {
                 return N;
             }
 
-            ArrayPointer getData() {
-                return data;
-            }
-            
-            ConstArrayPointer getData() const {
+            ArrayPointer getData()
+            {
                 return data;
             }
 
-            BoundedMatrix& operator=(const BoundedMatrix& m) {
+            ConstArrayPointer getData() const
+            {
+                return data;
+            }
+
+            BoundedMatrix& operator=(const BoundedMatrix& m)
+            {
                 if (this != &m) {
                     for (SizeType i = 0; i < m.size1; i++)
                         std::copy(m.data[i], m.data[i] + m.size2, data[i]);
@@ -837,70 +973,83 @@ namespace CDPL
             }
 
             template <typename C>
-            BoundedMatrix& operator=(const MatrixContainer<C>& c) {
+            BoundedMatrix& operator=(const MatrixContainer<C>& c)
+            {
                 return assign(c);
             }
 
-            BoundedMatrix& operator=(InitializerListType l) {
+            BoundedMatrix& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename E>
-            BoundedMatrix& operator=(const MatrixExpression<E>& e) {
+            BoundedMatrix& operator=(const MatrixExpression<E>& e)
+            {
                 BoundedMatrix tmp(e);
-                return this->operator=(tmp);
+                return this-> operator=(tmp);
             }
 
             template <typename C>
-            BoundedMatrix& operator+=(const MatrixContainer<C>& c) {
+            BoundedMatrix& operator+=(const MatrixContainer<C>& c)
+            {
                 return plusAssign(c);
             }
 
-            BoundedMatrix& operator+=(InitializerListType l) {
+            BoundedMatrix& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-            
+
             template <typename E>
-            BoundedMatrix& operator+=(const MatrixExpression<E>& e) {
+            BoundedMatrix& operator+=(const MatrixExpression<E>& e)
+            {
                 BoundedMatrix tmp(*this + e);
-                return this->operator=(tmp);
-            }    
+                return this-> operator=(tmp);
+            }
 
             template <typename C>
-            BoundedMatrix& operator-=(const MatrixContainer<C>& c) {
+            BoundedMatrix& operator-=(const MatrixContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            BoundedMatrix& operator-=(InitializerListType l) {
+            BoundedMatrix& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            BoundedMatrix& operator-=(const MatrixExpression<E>& e) {
+            BoundedMatrix& operator-=(const MatrixExpression<E>& e)
+            {
                 BoundedMatrix tmp(*this - e);
-                return this->operator=(tmp);
+                return this-> operator=(tmp);
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, BoundedMatrix>::type& operator*=(const T1& v) {
+            typename std::enable_if<IsScalar<T1>::value, BoundedMatrix>::type& operator*=(const T1& v)
+            {
                 matrixAssignScalar<ScalarMultiplicationAssignment>(*this, v);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, BoundedMatrix>::type& operator/=(const T1& v) {
+            typename std::enable_if<IsScalar<T1>::value, BoundedMatrix>::type& operator/=(const T1& v)
+            {
                 matrixAssignScalar<ScalarDivisionAssignment>(*this, v);
                 return *this;
             }
-            
+
             template <typename E>
-            BoundedMatrix& assign(const MatrixExpression<E>& e) {
+            BoundedMatrix& assign(const MatrixExpression<E>& e)
+            {
                 resize(e().getSize1(), e().getSize2());
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            BoundedMatrix& assign(InitializerListType l) {
+            BoundedMatrix& assign(InitializerListType l)
+            {
                 InitListMatrix<ValueType> ilm(l);
                 resize(ilm.getSize1(), ilm.getSize2());
                 matrixAssignMatrix<ScalarAssignment>(*this, ilm);
@@ -908,28 +1057,33 @@ namespace CDPL
             }
 
             template <typename E>
-            BoundedMatrix& plusAssign(const MatrixExpression<E>& e) {
+            BoundedMatrix& plusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            BoundedMatrix& plusAssign(InitializerListType l) {
+            BoundedMatrix& plusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
             template <typename E>
-            BoundedMatrix& minusAssign(const MatrixExpression<E>& e) {
+            BoundedMatrix& minusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            BoundedMatrix& minusAssign(InitializerListType l) {
+            BoundedMatrix& minusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
-            void swap(BoundedMatrix& m) {
+            void swap(BoundedMatrix& m)
+            {
                 if (this != &m) {
                     SizeType max_size1 = std::max(size1, m.size1);
                     SizeType max_size2 = std::max(size2, m.size2);
@@ -941,17 +1095,20 @@ namespace CDPL
                     std::swap(size2, m.size2);
                 }
             }
-    
-            friend void swap(BoundedMatrix& m1, BoundedMatrix& m2) {
+
+            friend void swap(BoundedMatrix& m1, BoundedMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void clear(const ValueType& v = ValueType()) {
+            void clear(const ValueType& v = ValueType())
+            {
                 for (SizeType i = 0; i < size1; i++)
                     std::fill(data[i], data[i] + size2, v);
             }
 
-            void resize(SizeType m, SizeType n) {
+            void resize(SizeType m, SizeType n)
+            {
                 m = CDPL_MATH_CHECK_MAX_SIZE(m, M, Base::SizeError);
                 n = CDPL_MATH_CHECK_MAX_SIZE(n, N, Base::SizeError);
 
@@ -959,10 +1116,11 @@ namespace CDPL
                 size2 = n;
             }
 
-            void resize(SizeType m, SizeType n, const ValueType& v) {
+            void resize(SizeType m, SizeType n, const ValueType& v)
+            {
                 m = CDPL_MATH_CHECK_MAX_SIZE(m, M, Base::SizeError);
                 n = CDPL_MATH_CHECK_MAX_SIZE(n, N, Base::SizeError);
-                
+
                 if (n > size2) {
                     SizeType min_size1 = std::min(size1, m);
 
@@ -978,105 +1136,122 @@ namespace CDPL
                 size2 = n;
             }
 
-        private:
+          private:
             SizeType  size1;
             SizeType  size2;
             ArrayType data;
         };
 
-        template <typename T, std::size_t M, std::size_t N> const typename BoundedMatrix<T, M, N>::SizeType BoundedMatrix<T, M, N>::MaxSize1;
-        template <typename T, std::size_t M, std::size_t N> const typename BoundedMatrix<T, M, N>::SizeType BoundedMatrix<T, M, N>::MaxSize2;
+        template <typename T, std::size_t M, std::size_t N>
+        const typename BoundedMatrix<T, M, N>::SizeType BoundedMatrix<T, M, N>::MaxSize1;
+        template <typename T, std::size_t M, std::size_t N>
+        const typename BoundedMatrix<T, M, N>::SizeType BoundedMatrix<T, M, N>::MaxSize2;
 
-        template <typename T, std::size_t M, std::size_t N> 
+        template <typename T, std::size_t M, std::size_t N>
         class CMatrix : public MatrixContainer<CMatrix<T, M, N> >
         {
 
             typedef CMatrix<T, M, N> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
+          public:
+            typedef T              ValueType;
+            typedef T&             Reference;
+            typedef const T&       ConstReference;
+            typedef std::size_t    SizeType;
             typedef std::ptrdiff_t DifferenceType;
-            typedef ValueType ArrayType[M][N];
+            typedef ValueType      ArrayType[M][N];
             typedef T (*ArrayPointer)[N];
             typedef const T (*ConstArrayPointer)[N];
-            typedef T* Pointer;
-            typedef const T* ConstPointer;
-            typedef MatrixReference<SelfType> ClosureType;
-            typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef BoundedMatrix<T, M, N> MatrixTemporaryType;
-            typedef BoundedVector<T, M * N> VectorTemporaryType;
-            typedef std::shared_ptr<SelfType> SharedPointer;
+            typedef T*                                               Pointer;
+            typedef const T*                                         ConstPointer;
+            typedef MatrixReference<SelfType>                        ClosureType;
+            typedef const MatrixReference<const SelfType>            ConstClosureType;
+            typedef BoundedMatrix<T, M, N>                           MatrixTemporaryType;
+            typedef BoundedVector<T, M * N>                          VectorTemporaryType;
+            typedef std::shared_ptr<SelfType>                        SharedPointer;
             typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
-            
+
             static const SizeType Size1 = M;
             static const SizeType Size2 = N;
 
-            CMatrix() {
+            CMatrix()
+            {
                 for (SizeType i = 0; i < M; i++)
                     std::fill(data[i], data[i] + N, ValueType());
             }
 
-            explicit CMatrix(const ValueType& v) {
+            explicit CMatrix(const ValueType& v)
+            {
                 for (SizeType i = 0; i < M; i++)
                     std::fill(data[i], data[i] + N, v);
             }
 
-            CMatrix(const CMatrix& m) {
+            CMatrix(const CMatrix& m)
+            {
                 for (SizeType i = 0; i < M; i++)
                     std::copy(m.data[i], m.data[i] + N, data[i]);
             }
 
-            CMatrix(InitializerListType l) {
+            CMatrix(InitializerListType l)
+            {
                 assign(l);
             }
-            
+
             template <typename E>
-            CMatrix(const MatrixExpression<E>& e) {
+            CMatrix(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
             }
 
-            Reference operator()(SizeType i, SizeType j) {
+            Reference operator()(SizeType i, SizeType j)
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return data[i][j];
             }
 
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return data[i][j];
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (M == 0 || N == 0);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return M;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return N;
             }
 
-            SizeType getMaxSize1() const {
+            SizeType getMaxSize1() const
+            {
                 return M;
             }
-    
-            SizeType getMaxSize2() const {
+
+            SizeType getMaxSize2() const
+            {
                 return N;
             }
 
-            ArrayPointer getData() {
-                return data;
-            }
-            
-            ConstArrayPointer getData() const {
+            ArrayPointer getData()
+            {
                 return data;
             }
 
-            CMatrix& operator=(const CMatrix& m) {
+            ConstArrayPointer getData() const
+            {
+                return data;
+            }
+
+            CMatrix& operator=(const CMatrix& m)
+            {
                 if (this != &m) {
                     for (SizeType i = 0; i < M; i++)
                         std::copy(m.data[i], m.data[i] + N, data[i]);
@@ -1086,75 +1261,88 @@ namespace CDPL
             }
 
             template <typename C>
-            CMatrix& operator=(const MatrixContainer<C>& c) {
+            CMatrix& operator=(const MatrixContainer<C>& c)
+            {
                 return assign(c);
             }
 
             template <typename T1>
-            CMatrix& operator=(InitializerListType l) {
+            CMatrix& operator=(InitializerListType l)
+            {
                 return assign(l);
             }
 
             template <typename E>
-            CMatrix& operator=(const MatrixExpression<E>& e) {
-                CMatrix tmp(e);
+            CMatrix& operator=(const MatrixExpression<E>& e)
+            {
+                CMatrix      tmp(e);
                 return this->operator=(tmp);
             }
 
             template <typename C>
-            CMatrix& operator+=(const MatrixContainer<C>& c) {
+            CMatrix& operator+=(const MatrixContainer<C>& c)
+            {
                 return plusAssign(c);
             }
 
-            CMatrix& operator+=(InitializerListType l) {
+            CMatrix& operator+=(InitializerListType l)
+            {
                 return plusAssign(l);
             }
-            
+
             template <typename E>
-            CMatrix& operator+=(const MatrixExpression<E>& e) {
-                CMatrix tmp(*this + e);
+            CMatrix& operator+=(const MatrixExpression<E>& e)
+            {
+                CMatrix      tmp(*this + e);
                 return this->operator=(tmp);
-            }    
+            }
 
             template <typename C>
-            CMatrix& operator-=(const MatrixContainer<C>& c) {
+            CMatrix& operator-=(const MatrixContainer<C>& c)
+            {
                 return minusAssign(c);
             }
 
-            CMatrix& operator-=(InitializerListType l) {
+            CMatrix& operator-=(InitializerListType l)
+            {
                 return minusAssign(l);
             }
 
             template <typename E>
-            CMatrix& operator-=(const MatrixExpression<E>& e) {
-                CMatrix tmp(*this - e);
+            CMatrix& operator-=(const MatrixExpression<E>& e)
+            {
+                CMatrix      tmp(*this - e);
                 return this->operator=(tmp);
             }
 
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, CMatrix>::type& operator*=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, CMatrix>::type& operator*=(const T1& t)
+            {
                 matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
                 return *this;
             }
-    
+
             template <typename T1>
-            typename std::enable_if<IsScalar<T1>::value, CMatrix>::type& operator/=(const T1& t) {
+            typename std::enable_if<IsScalar<T1>::value, CMatrix>::type& operator/=(const T1& t)
+            {
                 matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
                 return *this;
             }
-            
+
             template <typename E>
-            CMatrix& assign(const MatrixExpression<E>& e) {
+            CMatrix& assign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarAssignment>(*this, e);
                 return *this;
             }
 
-            CMatrix& assign(InitializerListType l) {
+            CMatrix& assign(InitializerListType l)
+            {
                 SizeType n_rows = CDPL_MATH_CHECK_MAX_SIZE(SizeType(l.size()), M, Base::SizeError);
-                
+
                 for (SizeType i = 0; i < n_rows; i++) {
                     const auto& row = *(l.begin() + i);
-                    
+
                     if (row.size() < N) {
                         std::copy(row.begin(), row.end(), data[i]);
                         std::fill(data[i] + row.size(), data[i] + N, ValueType());
@@ -1164,7 +1352,7 @@ namespace CDPL
                         std::copy(row.begin(), row.begin() + N, data[i]);
                     }
                 }
-                
+
                 for (SizeType i = n_rows; i < M; i++)
                     std::fill(data[i], data[i] + N, ValueType());
 
@@ -1172,99 +1360,118 @@ namespace CDPL
             }
 
             template <typename E>
-            CMatrix& plusAssign(const MatrixExpression<E>& e) {
+            CMatrix& plusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, e);
                 return *this;
             }
 
-            CMatrix& plusAssign(InitializerListType l) {
+            CMatrix& plusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
-            
+
             template <typename E>
-            CMatrix& minusAssign(const MatrixExpression<E>& e) {
+            CMatrix& minusAssign(const MatrixExpression<E>& e)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, e);
                 return *this;
             }
 
-            CMatrix& minusAssign(InitializerListType l) {
+            CMatrix& minusAssign(InitializerListType l)
+            {
                 matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
                 return *this;
             }
 
-            void swap(CMatrix& m) {
+            void swap(CMatrix& m)
+            {
                 if (this != &m) {
                     for (SizeType i = 0; i < M; i++)
                         std::swap_ranges(data[i], data[i] + N, m.data[i]);
                 }
             }
-    
-            friend void swap(CMatrix& m1, CMatrix& m2) {
+
+            friend void swap(CMatrix& m1, CMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void clear(const ValueType& v = ValueType()) {
+            void clear(const ValueType& v = ValueType())
+            {
                 for (SizeType i = 0; i < M; i++)
                     std::fill(data[i], data[i] + N, v);
             }
 
-        private:
+          private:
             ArrayType data;
         };
 
-        template <typename T, std::size_t M, std::size_t N> const typename CMatrix<T, M, N>::SizeType CMatrix<T, M, N>::Size1;
-        template <typename T, std::size_t M, std::size_t N> const typename CMatrix<T, M, N>::SizeType CMatrix<T, M, N>::Size2;
+        template <typename T, std::size_t M, std::size_t N>
+        const typename CMatrix<T, M, N>::SizeType CMatrix<T, M, N>::Size1;
+        template <typename T, std::size_t M, std::size_t N>
+        const typename CMatrix<T, M, N>::SizeType CMatrix<T, M, N>::Size2;
 
-        template <typename T> 
+        template <typename T>
         class ZeroMatrix : public MatrixContainer<ZeroMatrix<T> >
         {
 
             typedef ZeroMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef MatrixReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T&                              Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef MatrixReference<SelfType>             ClosureType;
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef Matrix<T> MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
+            typedef Matrix<T>                             MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
-            ZeroMatrix(): size1(0), size2(0) {}
+            ZeroMatrix():
+                size1(0), size2(0) {}
 
-            ZeroMatrix(SizeType m, SizeType n): size1(m), size2(n) {}
+            ZeroMatrix(SizeType m, SizeType n):
+                size1(m), size2(n) {}
 
-            ZeroMatrix(const ZeroMatrix& m): size1(m.size1), size2(m.size2) {}
-        
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ZeroMatrix(const ZeroMatrix& m):
+                size1(m.size1), size2(m.size2) {}
+
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return zero;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size1 == 0 || size2 == 0);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return size1;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            SizeType getMaxSize1() const {
-                return std::numeric_limits<SizeType>::max();
-            }
-    
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize1() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            ZeroMatrix& operator=(const ZeroMatrix& m) {
+            SizeType getMaxSize2() const
+            {
+                return std::numeric_limits<SizeType>::max();
+            }
+
+            ZeroMatrix& operator=(const ZeroMatrix& m)
+            {
                 if (this != &m) {
                     size1 = m.size1;
                     size2 = m.size2;
@@ -1273,79 +1480,93 @@ namespace CDPL
                 return *this;
             }
 
-            void swap(ZeroMatrix& m) {
+            void swap(ZeroMatrix& m)
+            {
                 if (this != &m) {
                     std::swap(size1, m.size1);
                     std::swap(size2, m.size2);
                 }
             }
-    
-            friend void swap(ZeroMatrix& m1, ZeroMatrix& m2) {
+
+            friend void swap(ZeroMatrix& m1, ZeroMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void resize(SizeType m, SizeType n) {
+            void resize(SizeType m, SizeType n)
+            {
                 size1 = m;
                 size2 = n;
             }
 
-        private:
+          private:
             SizeType               size1;
             SizeType               size2;
             static const ValueType zero;
         };
 
-        template <typename T> const typename ZeroMatrix<T>::ValueType ZeroMatrix<T>::zero = ZeroMatrix<T>::ValueType();
+        template <typename T>
+        const typename ZeroMatrix<T>::ValueType ZeroMatrix<T>::zero = ZeroMatrix<T>::ValueType();
 
-        template <typename T> 
+        template <typename T>
         class ScalarMatrix : public MatrixContainer<ScalarMatrix<T> >
         {
 
             typedef ScalarMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef MatrixReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T&                              Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef MatrixReference<SelfType>             ClosureType;
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef Matrix<T> MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
+            typedef Matrix<T>                             MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
-            ScalarMatrix(): size1(0), size2(0), value() {}
+            ScalarMatrix():
+                size1(0), size2(0), value() {}
 
-            ScalarMatrix(SizeType m, SizeType n, const ValueType& v = ValueType()): size1(m), size2(n), value(v) {}
+            ScalarMatrix(SizeType m, SizeType n, const ValueType& v = ValueType()):
+                size1(m), size2(n), value(v) {}
 
-            ScalarMatrix(const ScalarMatrix& m): size1(m.size1), size2(m.size2), value(m.value) {}
-        
-            ConstReference operator()(SizeType i, SizeType j) const {
+            ScalarMatrix(const ScalarMatrix& m):
+                size1(m.size1), size2(m.size2), value(m.value) {}
+
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return value;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size1 == 0 || size2 == 0);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return size1;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            SizeType getMaxSize1() const {
-                return std::numeric_limits<SizeType>::max();
-            }
-    
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize1() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            ScalarMatrix& operator=(const ScalarMatrix& m) {
+            SizeType getMaxSize2() const
+            {
+                return std::numeric_limits<SizeType>::max();
+            }
+
+            ScalarMatrix& operator=(const ScalarMatrix& m)
+            {
                 if (this != &m) {
                     size1 = m.size1;
                     size2 = m.size2;
@@ -1355,78 +1576,91 @@ namespace CDPL
                 return *this;
             }
 
-            void swap(ScalarMatrix& m) {
+            void swap(ScalarMatrix& m)
+            {
                 if (this != &m) {
                     std::swap(size1, m.size1);
                     std::swap(size2, m.size2);
                     std::swap(value, m.value);
                 }
             }
-    
-            friend void swap(ScalarMatrix& m1, ScalarMatrix& m2) {
+
+            friend void swap(ScalarMatrix& m1, ScalarMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void resize(SizeType m, SizeType n) {
+            void resize(SizeType m, SizeType n)
+            {
                 size1 = m;
                 size2 = n;
             }
 
-        private:
+          private:
             SizeType  size1;
             SizeType  size2;
             ValueType value;
         };
 
-        template <typename T> 
+        template <typename T>
         class IdentityMatrix : public MatrixContainer<IdentityMatrix<T> >
         {
 
             typedef IdentityMatrix<T> SelfType;
 
-        public:
-            typedef T ValueType;
-            typedef const T& Reference;
-            typedef const T& ConstReference;
-            typedef std::size_t SizeType;
-            typedef std::ptrdiff_t DifferenceType;
-            typedef MatrixReference<SelfType> ClosureType;
+          public:
+            typedef T                                     ValueType;
+            typedef const T&                              Reference;
+            typedef const T&                              ConstReference;
+            typedef std::size_t                           SizeType;
+            typedef std::ptrdiff_t                        DifferenceType;
+            typedef MatrixReference<SelfType>             ClosureType;
             typedef const MatrixReference<const SelfType> ConstClosureType;
-            typedef Matrix<T> MatrixTemporaryType;
-            typedef Vector<T, std::vector<T> > VectorTemporaryType;
-    
-            IdentityMatrix(): size1(0), size2(0) {}
+            typedef Matrix<T>                             MatrixTemporaryType;
+            typedef Vector<T, std::vector<T> >            VectorTemporaryType;
 
-            IdentityMatrix(SizeType m, SizeType n): size1(m), size2(n) {}
+            IdentityMatrix():
+                size1(0), size2(0) {}
 
-            IdentityMatrix(const IdentityMatrix& m): size1(m.size1), size2(m.size2) {}
-        
-            ConstReference operator()(SizeType i, SizeType j) const {
+            IdentityMatrix(SizeType m, SizeType n):
+                size1(m), size2(n) {}
+
+            IdentityMatrix(const IdentityMatrix& m):
+                size1(m.size1), size2(m.size2) {}
+
+            ConstReference operator()(SizeType i, SizeType j) const
+            {
                 CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
                 return (i == j ? one : zero);
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size1 == 0 || size2 == 0);
             }
 
-            SizeType getSize1() const {
+            SizeType getSize1() const
+            {
                 return size1;
             }
-    
-            SizeType getSize2() const {
+
+            SizeType getSize2() const
+            {
                 return size2;
             }
 
-            SizeType getMaxSize1() const {
-                return std::numeric_limits<SizeType>::max();
-            }
-    
-            SizeType getMaxSize2() const {
+            SizeType getMaxSize1() const
+            {
                 return std::numeric_limits<SizeType>::max();
             }
 
-            IdentityMatrix& operator=(const IdentityMatrix& m) {
+            SizeType getMaxSize2() const
+            {
+                return std::numeric_limits<SizeType>::max();
+            }
+
+            IdentityMatrix& operator=(const IdentityMatrix& m)
+            {
                 if (this != &m) {
                     size1 = m.size1;
                     size2 = m.size2;
@@ -1435,59 +1669,68 @@ namespace CDPL
                 return *this;
             }
 
-            void swap(IdentityMatrix& m) {
+            void swap(IdentityMatrix& m)
+            {
                 if (this != &m) {
                     std::swap(size1, m.size1);
                     std::swap(size2, m.size2);
                 }
             }
-    
-            friend void swap(IdentityMatrix& m1, IdentityMatrix& m2) {
+
+            friend void swap(IdentityMatrix& m1, IdentityMatrix& m2)
+            {
                 m1.swap(m2);
             }
 
-            void resize(SizeType m, SizeType n) {
+            void resize(SizeType m, SizeType n)
+            {
                 size1 = m;
                 size2 = n;
             }
 
-        private:
+          private:
             SizeType               size1;
             SizeType               size2;
             static const ValueType zero;
             static const ValueType one;
         };
 
-        template <typename T> const typename IdentityMatrix<T>::ValueType IdentityMatrix<T>::zero = IdentityMatrix<T>::ValueType();
-        template <typename T> const typename IdentityMatrix<T>::ValueType IdentityMatrix<T>::one  = IdentityMatrix<T>::ValueType(1);
+        template <typename T>
+        const typename IdentityMatrix<T>::ValueType IdentityMatrix<T>::zero = IdentityMatrix<T>::ValueType();
+        template <typename T>
+        const typename IdentityMatrix<T>::ValueType IdentityMatrix<T>::one = IdentityMatrix<T>::ValueType(1);
 
         template <typename M>
-        struct VectorTemporaryTraits<MatrixReference<M> > : public VectorTemporaryTraits<M> {};
+        struct VectorTemporaryTraits<MatrixReference<M> > : public VectorTemporaryTraits<M>
+        {};
 
         template <typename M>
-        struct VectorTemporaryTraits<const MatrixReference<M> > : public VectorTemporaryTraits<M> {};
+        struct VectorTemporaryTraits<const MatrixReference<M> > : public VectorTemporaryTraits<M>
+        {};
 
         template <typename M>
-        struct MatrixTemporaryTraits<MatrixReference<M> > : public MatrixTemporaryTraits<M> {};
+        struct MatrixTemporaryTraits<MatrixReference<M> > : public MatrixTemporaryTraits<M>
+        {};
 
         template <typename M>
-        struct MatrixTemporaryTraits<const MatrixReference<M> > : public MatrixTemporaryTraits<M> {};
+        struct MatrixTemporaryTraits<const MatrixReference<M> > : public MatrixTemporaryTraits<M>
+        {};
 
         template <typename E>
         typename E::ValueType
         det(const MatrixExpression<E>& e)
         {
-            typedef typename E::ValueType ValueType;
+            typedef typename E::ValueType                ValueType;
             typedef typename Matrix<ValueType>::SizeType SizeType;
 
-            Matrix<ValueType> lu(e);
+            Matrix<ValueType>     lu(e);
             std::vector<SizeType> pv(lu.getSize1());
-            std::size_t num_row_swaps;
-        
+            std::size_t           num_row_swaps;
+
             luDecompose(lu, pv, num_row_swaps);
 
             ValueType res(1);
-            SizeType size = std::min(lu.getSize1(), lu.getSize2());
+            SizeType  size = std::min(lu.getSize1(), lu.getSize2());
 
             for (SizeType i = 0; i < size; i++)
                 res *= lu(i, i);
@@ -1499,22 +1742,22 @@ namespace CDPL
         typename C::ValueType
         det(const MatrixContainer<C>& c)
         {
-            typedef typename C::ValueType ValueType;
+            typedef typename C::ValueType                   ValueType;
             typedef typename MatrixTemporaryTraits<C>::Type CTemporaryType;
-            typedef typename CTemporaryType::SizeType SizeType;
+            typedef typename CTemporaryType::SizeType       SizeType;
 
-            CTemporaryType lu(c);
+            CTemporaryType        lu(c);
             std::vector<SizeType> pv(lu.getSize1());
-            std::size_t num_row_swaps;
-        
+            std::size_t           num_row_swaps;
+
             luDecompose(lu, pv, num_row_swaps);
 
             ValueType res(1);
-            SizeType size = std::min(lu.getSize1(), lu.getSize2());
+            SizeType  size = std::min(lu.getSize1(), lu.getSize2());
 
             for (SizeType i = 0; i < size; i++)
                 res *= lu(i, i);
-            
+
             return (num_row_swaps % 2 == 0 ? res : -res);
         }
 
@@ -1522,14 +1765,14 @@ namespace CDPL
         bool
         invert(const MatrixExpression<E>& e, MatrixContainer<C>& c)
         {
-            typedef typename C::ValueType ValueType;
+            typedef typename C::ValueType                   ValueType;
             typedef typename MatrixTemporaryTraits<C>::Type CTemporaryType;
-            typedef typename CTemporaryType::SizeType SizeType;
+            typedef typename CTemporaryType::SizeType       SizeType;
 
-            CTemporaryType lu(e);
+            CTemporaryType        lu(e);
             std::vector<SizeType> pv(lu.getSize1());
-            std::size_t num_row_swaps;
-        
+            std::size_t           num_row_swaps;
+
             if (luDecompose(lu, pv, num_row_swaps) > 0)
                 return false;
 
@@ -1545,19 +1788,19 @@ namespace CDPL
             return invert(c, c);
         }
 
-        typedef ZeroMatrix<float> FZeroMatrix;
-        typedef ZeroMatrix<double> DZeroMatrix;
-        typedef ZeroMatrix<long> LZeroMatrix;
+        typedef ZeroMatrix<float>         FZeroMatrix;
+        typedef ZeroMatrix<double>        DZeroMatrix;
+        typedef ZeroMatrix<long>          LZeroMatrix;
         typedef ZeroMatrix<unsigned long> ULZeroMatrix;
 
-        typedef ScalarMatrix<float> FScalarMatrix;
-        typedef ScalarMatrix<double> DScalarMatrix;
-        typedef ScalarMatrix<long> LScalarMatrix;
+        typedef ScalarMatrix<float>         FScalarMatrix;
+        typedef ScalarMatrix<double>        DScalarMatrix;
+        typedef ScalarMatrix<long>          LScalarMatrix;
         typedef ScalarMatrix<unsigned long> ULScalarMatrix;
 
-        typedef IdentityMatrix<float> FIdentityMatrix;
-        typedef IdentityMatrix<double> DIdentityMatrix;
-        typedef IdentityMatrix<long> LIdentityMatrix;
+        typedef IdentityMatrix<float>         FIdentityMatrix;
+        typedef IdentityMatrix<double>        DIdentityMatrix;
+        typedef IdentityMatrix<long>          LIdentityMatrix;
         typedef IdentityMatrix<unsigned long> ULIdentityMatrix;
 
         /**
@@ -1594,7 +1837,7 @@ namespace CDPL
          * \brief A bounded 4x4 matrix holding floating point values of type <tt>float</tt>.
          */
         typedef CMatrix<float, 4, 4> Matrix4F;
-        
+
         /**
          * \brief A bounded 2x2 matrix holding floating point values of type <tt>double</tt>.
          */
@@ -1609,7 +1852,7 @@ namespace CDPL
          * \brief A bounded 4x4 matrix holding floating point values of type <tt>double</tt>.
          */
         typedef CMatrix<double, 4, 4> Matrix4D;
-    
+
         /**
          * \brief A bounded 2x2 matrix holding signed integers of type <tt>long</tt>.
          */
@@ -1659,7 +1902,7 @@ namespace CDPL
          * \brief An unbounded sparse matrix holding unsigned integers of type <tt>unsigned long</tt>.
          */
         typedef SparseMatrix<unsigned long> SparseULMatrix;
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_MATRIX_HPP

@@ -41,13 +41,14 @@
 #include "CDPL/Grid/SpatialGrid.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Internal 
+    namespace Internal
     {
 
-        template <typename PT, typename CT, typename ST> class Octree;
+        template <typename PT, typename CT, typename ST>
+        class Octree;
     }
 
     namespace Chem
@@ -55,7 +56,7 @@ namespace CDPL
 
         class AtomContainer;
     }
-    
+
     namespace GRAIL
     {
 
@@ -71,7 +72,7 @@ namespace CDPL
             typedef std::shared_ptr<AtomDensityGridCalculator> SharedPointer;
 
             typedef std::function<double(const Math::Vector3D&, const Math::Vector3D&, const Chem::Atom&)> DensityFunction;
-            typedef std::function<double(const Math::DVector&)> DensityCombinationFunction;
+            typedef std::function<double(const Math::DVector&)>                                            DensityCombinationFunction;
 
             AtomDensityGridCalculator();
 
@@ -79,7 +80,7 @@ namespace CDPL
 
             AtomDensityGridCalculator(const DensityFunction& func);
 
-            AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func); 
+            AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func);
 
             void setDistanceCutoff(double dist);
 
@@ -107,19 +108,19 @@ namespace CDPL
 
           private:
             typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-            typedef std::shared_ptr<Octree> OctreePtr;
-            typedef std::vector<std::size_t> AtomIndexList;
+            typedef std::shared_ptr<Octree>                                       OctreePtr;
+            typedef std::vector<std::size_t>                                      AtomIndexList;
 
-            Math::DVector                    partialDensities;
-            DensityFunction                  densityFunc;
-            DensityCombinationFunction       densityCombinationFunc;
-            Chem::Atom3DCoordinatesFunction  coordsFunc;
-            double                           distCutoff;
-            OctreePtr                        octree;
-            Math::Vector3DArray              atomCoords;
-            AtomIndexList                    atomIndices;
+            Math::DVector                   partialDensities;
+            DensityFunction                 densityFunc;
+            DensityCombinationFunction      densityCombinationFunc;
+            Chem::Atom3DCoordinatesFunction coordsFunc;
+            double                          distCutoff;
+            OctreePtr                       octree;
+            Math::Vector3DArray             atomCoords;
+            AtomIndexList                   atomIndices;
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_ATOMDENSITYGRIDCALCULATOR_HPP

@@ -37,7 +37,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -76,17 +76,17 @@ namespace CDPL
 
             void close();
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
           private:
-            PSDScreeningDBCreator  creator;
-            std::iostream*         output;
-            std::streampos         outputPos;
-            bool                   state;
-            bool                   closed;
+            PSDScreeningDBCreator creator;
+            std::iostream*        output;
+            std::streampos        outputPos;
+            bool                  state;
+            bool                  closed;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDMOLECULARGRAPHWRITER_HPP

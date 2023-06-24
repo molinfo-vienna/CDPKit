@@ -25,21 +25,21 @@
 #define CDPL_INTERNAL_BONDFUNCTIONS_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class Bond;
     }
-    
+
     namespace Internal
     {
 
         inline bool isHydrogenBond(const Chem::Bond& bond);
     }
-}
+} // namespace CDPL
 
 #include "BondFunctionsImpl.hpp"
 

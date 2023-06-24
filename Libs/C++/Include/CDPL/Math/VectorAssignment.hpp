@@ -40,7 +40,8 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class VectorExpression;
+        template <typename E>
+        class VectorExpression;
 
         template <template <typename T1, typename T2> class F, typename V, typename E>
         void vectorAssignVector(V& v, const VectorExpression<E>& e)
@@ -59,14 +60,14 @@ namespace CDPL
         void vectorAssignScalar(V& v, const T& t)
         {
             typedef F<typename V::Reference, T> FunctorType;
-            typedef typename V::SizeType SizeType;
+            typedef typename V::SizeType        SizeType;
 
             SizeType size = v.getSize();
 
             for (SizeType i = 0; i < size; i++)
                 FunctorType::apply(v(i), t);
         }
-    
+
         template <typename V, typename E>
         void vectorSwap(V& v, VectorExpression<E>& e)
         {
@@ -77,7 +78,7 @@ namespace CDPL
             for (SizeType i = 0; i < size; i++)
                 std::swap(v(i), e()(i));
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_VECTORASSIGNMENT_HPP

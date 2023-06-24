@@ -45,23 +45,23 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
-        FontChooserWidget(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, 
+      public:
+        FontChooserWidget(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&,
                           const CDPL::Vis::SizeSpecification* = 0, bool = true, bool = true);
 
-    signals:
+      signals:
         void fontChanged();
         void sizeSpecChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleFamilyChange(QListWidgetItem*);
         void handleStyleChange(QListWidgetItem*);
         void handleSizeChange();
 
-    private:
+      private:
         void updateStyles(const QFont&) const;
         void setPointSize(QFont&) const;
 
@@ -73,8 +73,8 @@ namespace ChOX
         QListWidget*                        familyListWidget;
         QListWidget*                        styleListWidget;
         QLineEdit*                          sampleLineEdit;
-        SizeSpecEditWidget*                 sizeEditWidget; 
+        SizeSpecEditWidget*                 sizeEditWidget;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_FONTCHOOSERWIDGET_HPP

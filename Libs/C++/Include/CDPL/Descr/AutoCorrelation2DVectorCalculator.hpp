@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,7 +45,7 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
 
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -57,7 +57,7 @@ namespace CDPL
         class CDPL_DESCR_API AutoCorrelation2DVectorCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Type of the generic functor class used to store user-defined atom pair weight functions.
              *
@@ -117,11 +117,11 @@ namespace CDPL
              */
             void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec);
 
-        private:
+          private:
             AtomPairWeightFunction weightFunc;
             std::size_t            maxDist;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_AUTOCORRELATION2DVECTORCALCULATOR_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -70,7 +70,7 @@ namespace CDPL
         class CDPL_VIS_API FontMetrics
         {
 
-        public:
+          public:
             /**Ren
              * \brief Virtual destructor.
              */
@@ -93,7 +93,7 @@ namespace CDPL
              * \return The ascent of the font.
              * \see getDescent()
              */
-            virtual double getAscent() const = 0; 
+            virtual double getAscent() const = 0;
 
             /**
              * \brief Returns the descent of the font.
@@ -105,7 +105,7 @@ namespace CDPL
              * \return The descent of the font.
              * \see getAscent()
              */
-            virtual double getDescent() const = 0; 
+            virtual double getDescent() const = 0;
 
             /**
              * \brief Returns the height of the font.
@@ -115,7 +115,7 @@ namespace CDPL
              *
              * \return The height of the font.
              */
-            virtual double getHeight() const = 0; 
+            virtual double getHeight() const = 0;
 
             /**
              * \brief Returns the leading of the font.
@@ -125,7 +125,7 @@ namespace CDPL
              *
              * \return The leading of the font.
              */
-            virtual double getLeading() const = 0; 
+            virtual double getLeading() const = 0;
 
             /**
              * \brief Returns the total advance width for the characters in the string \a str.
@@ -136,7 +136,7 @@ namespace CDPL
              * \param str The string to be measured.
              * \return The total advance width for the characters in \a str.
              */
-            virtual double getWidth(const std::string& str) const = 0; 
+            virtual double getWidth(const std::string& str) const = 0;
 
             /**
              * \brief Returns the advance width for the character \a ch.
@@ -146,7 +146,7 @@ namespace CDPL
              * \param ch The character to be measured.
              * \return The advance width for \a ch.
              */
-            virtual double getWidth(char ch) const = 0; 
+            virtual double getWidth(char ch) const = 0;
 
             /**
              * \brief Returns the total bounding rectangle for the characters in the string \a str.
@@ -160,7 +160,7 @@ namespace CDPL
              * \param bounds A rectangle holding the calculated bounds.
              * \note Newline characters are processed as normal characters, not as linebreaks.
              */
-            virtual void getBounds(const std::string& str, Rectangle2D& bounds) const = 0; 
+            virtual void getBounds(const std::string& str, Rectangle2D& bounds) const = 0;
 
             /**
              * \brief Returns the bounding rectangle of the character \a ch relative to the left-most point on the baseline.
@@ -172,9 +172,9 @@ namespace CDPL
              * \param ch The character for which to calculate the bounding rectangle.
              * \param bounds A rectangle holding the calculated bounds.
              */
-            virtual void getBounds(char ch, Rectangle2D& bounds) const = 0; 
+            virtual void getBounds(char ch, Rectangle2D& bounds) const = 0;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_FONTMETRICS_HPP

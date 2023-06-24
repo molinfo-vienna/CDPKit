@@ -32,12 +32,12 @@
 #include "CDPL/Descr/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class Entity3DContainer;
     }
 
@@ -47,8 +47,7 @@ namespace CDPL
         CDPL_DESCR_API double calcGeometricalRadius(const Chem::Entity3DContainer& cntnr);
 
         CDPL_DESCR_API double calcGeometricalDiameter(const Chem::Entity3DContainer& cntnr);
-    }
-}
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_ENTITY3DCONTAINERFUNCTIONS_HPP
- 

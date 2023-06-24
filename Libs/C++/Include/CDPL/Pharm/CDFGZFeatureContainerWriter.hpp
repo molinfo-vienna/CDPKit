@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::GZipOStream> CDFGZFeatureContainerWriter;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFGZFEATURECONTAINERWRITER_HPP

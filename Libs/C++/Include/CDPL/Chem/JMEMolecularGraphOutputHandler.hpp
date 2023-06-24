@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref JME] java applet.
          */
         typedef Util::DefaultDataOutputHandler<JMEMolecularGraphWriter, DataFormat::JME> JMEMolecularGraphOutputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_JMEMOLECULARGRAPHOUTPUTHANDLER_HPP

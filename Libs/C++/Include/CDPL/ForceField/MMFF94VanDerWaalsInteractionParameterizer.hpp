@@ -39,7 +39,7 @@
 #include "CDPL/ForceField/MMFF94VanDerWaalsParameterTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,7 +48,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
@@ -59,15 +59,15 @@ namespace CDPL
 
             MMFF94VanDerWaalsInteractionParameterizer();
 
-            MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+            MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph&       molgraph,
                                                       MMFF94VanDerWaalsInteractionData& ia_data,
-                                                      bool strict);
+                                                      bool                              strict);
 
-            void setFilterFunction(const InteractionFilterFunction2& func); 
+            void setFilterFunction(const InteractionFilterFunction2& func);
 
-            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
-            void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
+            void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func);
 
             void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
@@ -78,8 +78,8 @@ namespace CDPL
             MMFF94NumericAtomTypeFunction                  typeFunc;
             TopologicalAtomDistanceFunction                distFunc;
             MMFF94VanDerWaalsParameterTable::SharedPointer paramTable;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP

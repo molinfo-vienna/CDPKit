@@ -33,7 +33,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace GRAIL
@@ -49,16 +49,16 @@ namespace CDPL
             enum AffinityMeasure
             {
 
-              PKD,
-              PKI,
-              PKD_PKI
+                PKD,
+                PKI,
+                PKD_PKI
             };
-        
+
             BindingAffinityCalculator() {}
 
             double operator()(const Math::DVector& grail_descr, AffinityMeasure measure) const;
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_BINDINGAFFINITYCALCULATOR_HPP

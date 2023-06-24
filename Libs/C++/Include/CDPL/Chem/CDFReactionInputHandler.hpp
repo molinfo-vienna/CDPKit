@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of reaction data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataInputHandler<CDFReactionReader, DataFormat::CDF> CDFReactionInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CDFREACTIONINPUTHANDLER_HPP

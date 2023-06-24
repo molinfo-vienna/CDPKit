@@ -32,21 +32,20 @@
 #include "CDPL/Biomol/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         class Molecule;
     }
 
-    namespace Biomol 
+    namespace Biomol
     {
 
         CDPL_BIOMOL_API bool combineInterferingResidueCoordinates(Chem::Molecule& mol, double max_ctr_dist = 1.0);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MOLECULEFUNCTIONS_HPP
- 

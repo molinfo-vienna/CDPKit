@@ -36,9 +36,9 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
-    
+
     namespace Vis
     {
 
@@ -48,17 +48,18 @@ namespace CDPL
          * \c %PNGMolecularGraphWriter uses Vis::StructureView2D for the creation of 2D structure diagrams. All control-parameters and
          * properties provided for the customization of Vis::StructureView2D are also supported by \c %PNGMolecularGraphWriter.
          */
-        class CDPL_VIS_API PNGMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>, private ImageWriter
+        class CDPL_VIS_API PNGMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>,
+                                                     private ImageWriter
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PNGMolecularGraphWriter instance that will write the image data to the output stream \a os.
              * \param os The output stream to write to.
              * \note PNG is a binary format. To avoid data corruption, the output stream has to be opened in binary mode.
              */
             PNGMolecularGraphWriter(std::ostream& os);
-        
+
             /**
              * \brief Creates and outputs the 2D structure diagram of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to output the 2D structure diagram.
@@ -66,10 +67,10 @@ namespace CDPL
              */
             Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             PNGMolecularGraphWriter(const PNGMolecularGraphWriter&);
 
             cairo_surface_t* createCairoSurface(double, double) const;
@@ -78,7 +79,7 @@ namespace CDPL
             std::ostream& output;
             bool          state;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_PNGMOLECULARGRAPHWRITER_HPP

@@ -44,7 +44,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,10 +54,10 @@ namespace CDPL
          * \brief Implements the perception of the <em>Smallest Set of Smallest Rings (SSSR)</em> of a molecular graphs.
          * \see [\ref BALD] 
          */
-        class CDPL_CHEM_API SmallestSetOfSmallestRings : public FragmentList 
+        class CDPL_CHEM_API SmallestSetOfSmallestRings : public FragmentList
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %SmallestSetOfSmallestRings instances.
              */
@@ -80,13 +80,13 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
+          private:
             class PathMessage;
 
-            typedef SmallestSetOfSmallestRings Controller;
-            typedef Util::ObjectPool<PathMessage> MessageCache;
+            typedef SmallestSetOfSmallestRings        Controller;
+            typedef Util::ObjectPool<PathMessage>     MessageCache;
             typedef MessageCache::SharedObjectPointer MessagePtr;
-            typedef std::vector<MessagePtr> MessageList;
+            typedef std::vector<MessagePtr>           MessageList;
 
             SmallestSetOfSmallestRings(const SmallestSetOfSmallestRings&);
 
@@ -104,7 +104,7 @@ namespace CDPL
 
             MessagePtr allocMessage();
             MessagePtr allocMessage(std::size_t, std::size_t, std::size_t, std::size_t);
-        
+
             bool processCollision(const MessagePtr&, const MessagePtr&, std::size_t, bool);
             void processRing(const MessagePtr&);
             void processEvenRings();
@@ -112,8 +112,9 @@ namespace CDPL
             class TNode
             {
 
-            public:
-                TNode(std::size_t idx): index(idx) {}
+              public:
+                TNode(std::size_t idx):
+                    index(idx) {}
 
                 bool send(Controller*);
                 bool receive(Controller*);
@@ -125,8 +126,8 @@ namespace CDPL
 
                 static void connect(TNode*, TNode*, std::size_t);
 
-            private:
-                typedef std::vector<TNode*> NodeList;
+              private:
+                typedef std::vector<TNode*>      NodeList;
                 typedef std::vector<std::size_t> BondIndexList;
 
                 NodeList      nbrNodes;
@@ -139,13 +140,13 @@ namespace CDPL
             class PathMessage
             {
 
-            public:
+              public:
                 struct LessCmpFunc
                 {
 
                     bool operator()(const MessagePtr&, const MessagePtr&) const;
                 };
-            
+
                 void init(std::size_t, std::size_t, std::size_t, std::size_t);
 
                 void copy(const MessagePtr&);
@@ -159,7 +160,7 @@ namespace CDPL
 
                 std::size_t getFirstAtomIndex() const;
                 std::size_t getFirstBondIndex() const;
-                
+
                 std::size_t getMaxBondIndex() const;
 
                 const Util::BitSet& getAtomMask() const;
@@ -175,7 +176,7 @@ namespace CDPL
 
                 PathMessage& operator^=(const PathMessage&);
 
-            private:
+              private:
                 Util::BitSet atomPath;
                 Util::BitSet bondPath;
                 std::size_t  firstAtomIdx;
@@ -191,23 +192,23 @@ namespace CDPL
                 bool operator()(const MessagePtr&, const MessagePtr&) const;
             };
 
-            typedef std::vector<TNode> NodeArray;
+            typedef std::vector<TNode>                             NodeArray;
             typedef std::set<MessagePtr, PathMessage::LessCmpFunc> ProcRingSet;
 
-            MessageCache             msgCache;
-            CyclicSubstructure       cyclicSubstruct;
-            Fragment                 component;
-            Util::BitSet             visAtomMask;
-            NodeArray                nodes;
-            ProcRingSet              procRings;
-            MessageList              evenRings;
-            MessagePtr               testRing;
-            MessagePtr               linDepTestRing;
-            MessageList              linDepTestMtx;
-            MessageList              sssr;
-            std::size_t              sssrSize;
+            MessageCache       msgCache;
+            CyclicSubstructure cyclicSubstruct;
+            Fragment           component;
+            Util::BitSet       visAtomMask;
+            NodeArray          nodes;
+            ProcRingSet        procRings;
+            MessageList        evenRings;
+            MessagePtr         testRing;
+            MessagePtr         linDepTestRing;
+            MessageList        linDepTestMtx;
+            MessageList        sssr;
+            std::size_t        sssrSize;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMALLESTSETOFSMALLESTRINGS_HPP

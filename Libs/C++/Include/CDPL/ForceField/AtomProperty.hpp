@@ -55,8 +55,8 @@ namespace CDPL
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
 
             extern CDPL_FORCEFIELD_API const Base::LookupKey UFF_TYPE;
-        }
-    }
-}
+        } // namespace AtomProperty
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_ATOMPROPERTY_HPP

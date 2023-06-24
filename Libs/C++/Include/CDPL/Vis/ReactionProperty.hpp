@@ -49,7 +49,7 @@ namespace CDPL
          */
         namespace ReactionProperty
         {
-    
+
             /**
              * \brief Specifies the style of the reaction arrow.
              *
@@ -102,7 +102,7 @@ namespace CDPL
              * Vis::ControlParameter::REACTION_ARROW_HEAD_WIDTH. 
              *
              * \valuetype Vis::SizeSpecification
-             */        
+             */
             extern CDPL_VIS_API const Base::LookupKey ARROW_HEAD_WIDTH;
 
             /**
@@ -114,7 +114,7 @@ namespace CDPL
              * Vis::ControlParameter::REACTION_ARROW_SHAFT_WIDTH. 
              *
              * \valuetype Vis::SizeSpecification
-             */        
+             */
             extern CDPL_VIS_API const Base::LookupKey ARROW_SHAFT_WIDTH;
 
             /**
@@ -126,7 +126,7 @@ namespace CDPL
              * Vis::ControlParameter::REACTION_ARROW_LINE_WIDTH. 
              *
              * \valuetype Vis::SizeSpecification
-             */        
+             */
             extern CDPL_VIS_API const Base::LookupKey ARROW_LINE_WIDTH;
 
             /**
@@ -168,7 +168,7 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_REACTANTS;
-    
+
             /**
              * \brief Specifies whether or not to show the agents of the reaction.
              *
@@ -178,7 +178,7 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_AGENTS;
-    
+
             /**
              * \brief Specifies whether or not to show the products of the reaction.
              *
@@ -188,7 +188,7 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_PRODUCTS;
-    
+
             /**
              * \brief Specifies the vertical alignment of the reaction agents relative to the reaction arrow.
              *
@@ -247,7 +247,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey PLUS_SIGN_LINE_WIDTH;
-    
+
             /**
              * \brief Specifies whether or not to draw '+' signs between the components of the reaction.
              *
@@ -257,8 +257,8 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_PLUS_SIGNS;
-        }
-    }
-}
+        } // namespace ReactionProperty
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_REACTIONPROPERTY_HPP

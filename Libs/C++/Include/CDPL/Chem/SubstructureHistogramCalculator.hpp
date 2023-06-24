@@ -42,7 +42,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -64,15 +64,15 @@ namespace CDPL
             typedef std::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
 
             typedef PatternList::const_iterator ConstPatternIterator;
-            typedef PatternList::iterator PatternIterator;
+            typedef PatternList::iterator       PatternIterator;
 
             class CDPL_CHEM_API Pattern
             {
 
-            public:
-                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0, 
+              public:
+                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = true);
-            
+
                 const MolecularGraph::SharedPointer& getStructure() const;
 
                 std::size_t getID() const;
@@ -83,8 +83,7 @@ namespace CDPL
 
                 bool processUniqueMatchesOnly() const;
 
-            private:
-
+              private:
                 MolecularGraph::SharedPointer structure;
                 std::size_t                   id;
                 std::size_t                   priority;
@@ -96,7 +95,7 @@ namespace CDPL
 
             SubstructureHistogramCalculator(const SubstructureHistogramCalculator& gen);
 
-            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0, 
+            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t id, std::size_t priority = 0,
                             bool all_matches = true, bool unique_matches = true);
 
             void addPattern(const Pattern& ptn);
@@ -134,15 +133,17 @@ namespace CDPL
             template <typename T>
             class HistoUpdateFunctor
             {
-                
-            public:
-                HistoUpdateFunctor(T& histo): histo(histo) {}
 
-                void operator()(std::size_t id) {
+              public:
+                HistoUpdateFunctor(T& histo):
+                    histo(histo) {}
+
+                void operator()(std::size_t id)
+                {
                     histo[id] += 1;
                 }
 
-            private:
+              private:
                 T& histo;
             };
 
@@ -154,21 +155,21 @@ namespace CDPL
             bool processMatch(const AtomBondMapping& mapping, const Pattern& ptn, const HistoUpdateFunction& func);
 
             typedef std::pair<Util::BitSet, Util::BitSet> AtomBondMask;
-            typedef std::map<std::size_t, AtomBondMask> PriorityToAtomBondMaskMap;
+            typedef std::map<std::size_t, AtomBondMask>   PriorityToAtomBondMaskMap;
 
             const MolecularGraph*     molGraph;
             PatternList               patterns;
             SubstructureSearch        substructSearch;
             PriorityToAtomBondMaskMap matchedSubstructMasks;
-            AtomBondMask              testingAtomBondMask;   
-            Util::BitSet              tmpMask;   
+            AtomBondMask              testingAtomBondMask;
+            Util::BitSet              tmpMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 template <typename T>
-void CDPL::Chem::SubstructureHistogramCalculator::calculate(const MolecularGraph& molgraph, T& histo) 
+void CDPL::Chem::SubstructureHistogramCalculator::calculate(const MolecularGraph& molgraph, T& histo)
 {
     doCalculate(molgraph, HistoUpdateFunctor<T>(histo));
 }

@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -88,7 +88,7 @@ namespace CDPL
             void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
 
             void setAXBAngleScoringFunction(const AngleScoringFunction& func);
-            
+
             double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
             double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
@@ -103,7 +103,7 @@ namespace CDPL
             AngleScoringFunction    accAngleScoringFunc;
             AngleScoringFunction    axbAngleScoringFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_XBONDINGINTERACTIONSCORE_HPP

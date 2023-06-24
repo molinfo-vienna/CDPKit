@@ -49,13 +49,13 @@ namespace CDPL
          */
         namespace DataFormat
         {
-    
+
             /**
              * \brief Provides meta-information about the conformer generator fragment library format.
              */
             extern CDPL_CONFGEN_API const Base::DataFormat CFL;
-        }
-    }
-}
+        } // namespace DataFormat
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_DATAFORMAT_HPP

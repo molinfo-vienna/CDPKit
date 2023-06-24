@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,11 +41,11 @@ namespace CDPL
         class Molecule;
     }
 
-    namespace Pharm 
+    namespace Pharm
     {
-    
+
         CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol, bool calc_hyd = true, bool from_logp = false);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_PHARM_MOLECULEFUNCTIONS_HPP

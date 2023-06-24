@@ -49,7 +49,7 @@ namespace CDPL
          */
         namespace DataFormat
         {
-    
+
             /**
              * \brief Provides meta-information about the native I/O format of the <em>JME Molecular Editor</em>
              *        [\ref JME] java applet.
@@ -121,7 +121,7 @@ namespace CDPL
              *        [\ref INCHI] format.
              */
             extern CDPL_CHEM_API const Base::DataFormat INCHI;
-    
+
             /**
              * \brief Provides meta-information about the native <em>CDPL</em> format.
              */
@@ -151,8 +151,8 @@ namespace CDPL
              * \brief Provides meta-information about the bzip2-compressed <em>Sybyl MOL2</em> format.
              */
             extern CDPL_CHEM_API const Base::DataFormat MOL2_BZ2;
-        }
-    }
-}
+        } // namespace DataFormat
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_DATAFORMAT_HPP

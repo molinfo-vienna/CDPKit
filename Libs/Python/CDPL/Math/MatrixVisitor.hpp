@@ -47,10 +47,10 @@
 #ifndef CDPL_MATH_CHECKS_DISABLE
 # define CHECK_MATRIX_INDICES(m, i, j)
 #else
-# define CHECK_MATRIX_INDICES(m, i, j) \
-    if (i >= m.getSize1() || j >= m.getSize2()) {                        \
-        throw CDPL::Base::IndexError("Matrix: element index out of bounds"); \
-    }
+# define CHECK_MATRIX_INDICES(m, i, j)                                  \
+  if (i >= m.getSize1() || j >= m.getSize2()) {                         \
+   throw CDPL::Base::IndexError("Matrix: element index out of bounds"); \
+  }
 #endif
 
 
@@ -63,15 +63,17 @@ namespace CDPLPythonMath
 
         friend class boost::python::def_visitor_access;
 
-        typedef typename MatrixType::ValueType ValueType;
-        typedef typename MatrixType::SizeType SizeType;
+        typedef typename MatrixType::ValueType                           ValueType;
+        typedef typename MatrixType::SizeType                            SizeType;
         typedef typename ConstMatrixExpression<ValueType>::SharedPointer ExpressionPointer;
         typedef typename ConstVectorExpression<ValueType>::SharedPointer VectorExpressionPointer;
 
-        ConstMatrixVisitor(const char* arg_name = "m"): argName(arg_name) {}
+        ConstMatrixVisitor(const char* arg_name = "m"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -104,13 +106,14 @@ namespace CDPLPythonMath
                 .add_property("size2", &MatrixType::getSize2);
         }
 #ifdef HAVE_NUMPY
-        static boost::python::object toArray(const MatrixType& mtx) {
+        static boost::python::object toArray(const MatrixType& mtx)
+        {
             using namespace boost;
 
             if (NumPy::available()) {
-                npy_intp shape[] = { npy_intp(mtx.getSize1()), npy_intp(mtx.getSize2()) };
-                PyObject* py_obj = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<typename MatrixType::ValueType>::Value);
-                PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
+                npy_intp       shape[] = {npy_intp(mtx.getSize1()), npy_intp(mtx.getSize2())};
+                PyObject*      py_obj  = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<typename MatrixType::ValueType>::Value);
+                PyArrayObject* array   = reinterpret_cast<PyArrayObject*>(py_obj);
 
                 if (array) {
                     for (std::size_t i = 0, size1 = mtx.getSize1(), size2 = mtx.getSize2(); i < size1; i++)
@@ -121,26 +124,31 @@ namespace CDPLPythonMath
                 }
             }
 
-            return python::object();            
+            return python::object();
         }
 #endif
-        static bool eqOperator(const MatrixType& mtx1, const MatrixType& mtx2) {
+        static bool eqOperator(const MatrixType& mtx1, const MatrixType& mtx2)
+        {
             return (mtx1 == mtx2);
         }
 
-        static bool neOperator(const MatrixType& mtx1, const MatrixType& mtx2) {
+        static bool neOperator(const MatrixType& mtx1, const MatrixType& mtx2)
+        {
             return (mtx1 != mtx2);
         }
 
-        static bool eqOperatorExpr(const MatrixType& mtx1, const ExpressionPointer& mtx2_expr) {
+        static bool eqOperatorExpr(const MatrixType& mtx1, const ExpressionPointer& mtx2_expr)
+        {
             return (mtx1 == *mtx2_expr);
         }
 
-        static bool neOperatorExpr(const MatrixType& mtx1, const ExpressionPointer& mtx2_expr) {
+        static bool neOperatorExpr(const MatrixType& mtx1, const ExpressionPointer& mtx2_expr)
+        {
             return (mtx1 != *mtx2_expr);
         }
 
-        static std::string toString(const MatrixType& mtx) {
+        static std::string toString(const MatrixType& mtx)
+        {
             std::ostringstream oss;
 
             oss << mtx;
@@ -148,73 +156,84 @@ namespace CDPLPythonMath
             return oss.str();
         }
 
-        static ValueType getElement(const MatrixType& mtx, SizeType i, SizeType j) {
+        static ValueType getElement(const MatrixType& mtx, SizeType i, SizeType j)
+        {
             CHECK_MATRIX_INDICES(mtx, i, j);
 
             return mtx(i, j);
         }
 
-        static ValueType getElementByTuple(const MatrixType& mtx, const boost::python::tuple& indices) {
+        static ValueType getElementByTuple(const MatrixType& mtx, const boost::python::tuple& indices)
+        {
             using namespace boost;
 
             SizeType i = python::extract<SizeType>(indices[0]);
             SizeType j = python::extract<SizeType>(indices[1]);
-            
+
             return getElement(mtx, i, j);
         }
 
         static void posOperator(const MatrixType& mtx) {}
 
-        static ExpressionPointer negOperator(const boost::python::object& mtx) {
+        static ExpressionPointer negOperator(const boost::python::object& mtx)
+        {
             return makeConstMatrixExpressionAdapter(-boost::python::extract<const MatrixType&>(mtx)(), mtx);
         }
-    
-        static ExpressionPointer addOperator(const boost::python::object& mtx1, const ExpressionPointer& mtx2_expr) {
+
+        static ExpressionPointer addOperator(const boost::python::object& mtx1, const ExpressionPointer& mtx2_expr)
+        {
             return makeConstMatrixExpressionAdapter(boost::python::extract<const MatrixType&>(mtx1)() + *mtx2_expr,
                                                     std::make_pair(mtx1, mtx2_expr));
         }
 
-        static ExpressionPointer subOperator(const boost::python::object& mtx1, const ExpressionPointer& mtx2_expr) {
+        static ExpressionPointer subOperator(const boost::python::object& mtx1, const ExpressionPointer& mtx2_expr)
+        {
             return makeConstMatrixExpressionAdapter(boost::python::extract<const MatrixType&>(mtx1)() - *mtx2_expr,
                                                     std::make_pair(mtx1, mtx2_expr));
         }
 
-        static ExpressionPointer mulOperator(const boost::python::object& mtx, const ValueType& value) {
+        static ExpressionPointer mulOperator(const boost::python::object& mtx, const ValueType& value)
+        {
             return makeConstMatrixExpressionAdapter(boost::python::extract<const MatrixType&>(mtx)() * value, mtx);
         }
 
-        static VectorExpressionPointer mulOperatorVecExpr(const boost::python::object& mtx, const VectorExpressionPointer& vec_expr) {
+        static VectorExpressionPointer mulOperatorVecExpr(const boost::python::object& mtx, const VectorExpressionPointer& vec_expr)
+        {
             return makeConstVectorExpressionAdapter(boost::python::extract<const MatrixType&>(mtx)() * *vec_expr,
                                                     std::make_pair(mtx, vec_expr));
         }
 
-        static ExpressionPointer mulOperatorMtxExpr(const boost::python::object& mtx1, const ExpressionPointer& mtx2_expr) {
-            return makeConstMatrixExpressionAdapter(boost::python::extract<const MatrixType&>(mtx1)() * *mtx2_expr, 
+        static ExpressionPointer mulOperatorMtxExpr(const boost::python::object& mtx1, const ExpressionPointer& mtx2_expr)
+        {
+            return makeConstMatrixExpressionAdapter(boost::python::extract<const MatrixType&>(mtx1)() * *mtx2_expr,
                                                     std::make_pair(mtx1, mtx2_expr));
         }
 
-        static ExpressionPointer divOperator(const boost::python::object& mtx, const ValueType& value) {
+        static ExpressionPointer divOperator(const boost::python::object& mtx, const ValueType& value)
+        {
             return makeConstMatrixExpressionAdapter(boost::python::extract<const MatrixType&>(mtx)() / value, mtx);
         }
-                
-        static ExpressionPointer rmulOperator(const boost::python::object& mtx, const ValueType& value) {
+
+        static ExpressionPointer rmulOperator(const boost::python::object& mtx, const ValueType& value)
+        {
             return makeConstMatrixExpressionAdapter(value * boost::python::extract<const MatrixType&>(mtx)(), mtx);
         }
-        
+
         const char* argName;
     };
 
     template <typename MatrixType>
-    struct MatrixAssignAndSwapVisitor : 
-        public boost::python::def_visitor<MatrixAssignAndSwapVisitor<MatrixType> >
+    struct MatrixAssignAndSwapVisitor : public boost::python::def_visitor<MatrixAssignAndSwapVisitor<MatrixType> >
     {
 
         friend class boost::python::def_visitor_access;
 
-        MatrixAssignAndSwapVisitor(const char* arg_name = "m"): argName(arg_name) {}
+        MatrixAssignAndSwapVisitor(const char* arg_name = "m"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -222,11 +241,13 @@ namespace CDPLPythonMath
                 .def("swap", &swap, (python::arg("self"), python::arg(argName)));
         }
 
-        static void assign(MatrixType& mtx1, const MatrixType& mtx2) {
+        static void assign(MatrixType& mtx1, const MatrixType& mtx2)
+        {
             mtx1 = mtx2;
         }
 
-        static void swap(MatrixType& mtx1, MatrixType& mtx2) {
+        static void swap(MatrixType& mtx1, MatrixType& mtx2)
+        {
             mtx1.swap(mtx2);
         }
 
@@ -239,14 +260,16 @@ namespace CDPLPythonMath
 
         friend class boost::python::def_visitor_access;
 
-        typedef typename MatrixType::ValueType ValueType;
-        typedef typename MatrixType::SizeType SizeType;
+        typedef typename MatrixType::ValueType                           ValueType;
+        typedef typename MatrixType::SizeType                            SizeType;
         typedef typename ConstMatrixExpression<ValueType>::SharedPointer ExpressionPointer;
 
-        MatrixVisitor(const char* arg_name = "m"): argName(arg_name) {}
+        MatrixVisitor(const char* arg_name = "m"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -256,7 +279,7 @@ namespace CDPLPythonMath
                      python::return_self<>())
                 .def("__iadd__", &iaddOperatorExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
-                .def("__isub__", &isubOperator, (python::arg("self"), python::arg(argName)), 
+                .def("__isub__", &isubOperator, (python::arg("self"), python::arg(argName)),
                      python::return_self<>())
                 .def("__isub__", &isubOperatorExpr, (python::arg("self"), python::arg("e")),
                      python::return_self<>())
@@ -268,13 +291,15 @@ namespace CDPLPythonMath
                      python::return_self<>());
         }
 
-        static void setElement(MatrixType& mtx, SizeType i, SizeType j, const ValueType& value) {
+        static void setElement(MatrixType& mtx, SizeType i, SizeType j, const ValueType& value)
+        {
             CHECK_MATRIX_INDICES(mtx, i, j);
 
             mtx(i, j) = value;
         }
-    
-        static void setElementByTuple(MatrixType& mtx, const boost::python::tuple& indices, const ValueType& value) {
+
+        static void setElementByTuple(MatrixType& mtx, const boost::python::tuple& indices, const ValueType& value)
+        {
             using namespace boost;
 
             SizeType i = python::extract<SizeType>(indices[0]);
@@ -283,27 +308,33 @@ namespace CDPLPythonMath
             setElement(mtx, i, j, value);
         }
 
-        static void iaddOperator(MatrixType& mtx1, const MatrixType& mtx2) {
+        static void iaddOperator(MatrixType& mtx1, const MatrixType& mtx2)
+        {
             mtx1 += mtx2;
         }
 
-        static void isubOperator(MatrixType& mtx1, const MatrixType& mtx2) {
+        static void isubOperator(MatrixType& mtx1, const MatrixType& mtx2)
+        {
             mtx1 -= mtx2;
         }
 
-        static void iaddOperatorExpr(MatrixType& mtx1, const ExpressionPointer& mtx2_expr) {
+        static void iaddOperatorExpr(MatrixType& mtx1, const ExpressionPointer& mtx2_expr)
+        {
             mtx1 += *mtx2_expr;
         }
 
-        static void isubOperatorExpr(MatrixType& mtx1, const ExpressionPointer& mtx2_expr) {
+        static void isubOperatorExpr(MatrixType& mtx1, const ExpressionPointer& mtx2_expr)
+        {
             mtx1 -= *mtx2_expr;
         }
 
-        static void imulOperator(MatrixType& mtx, const ValueType& value) {
+        static void imulOperator(MatrixType& mtx, const ValueType& value)
+        {
             mtx *= value;
         }
 
-        static void idivOperator(MatrixType& mtx, const ValueType& value) {
+        static void idivOperator(MatrixType& mtx, const ValueType& value)
+        {
             mtx /= value;
         }
 
@@ -318,15 +349,17 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename MatrixType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
         }
 
-        static void assign(MatrixType& mtx, PyArrayObject* arr) {
+        static void assign(MatrixType& mtx, PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -353,15 +386,17 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename MatrixType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
         }
 
-        static void assign(MatrixType& mtx, PyArrayObject* arr) {
+        static void assign(MatrixType& mtx, PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -389,17 +424,19 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename MatrixType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl.def("__init__", python::make_constructor(&construct, 
+            cl.def("__init__", python::make_constructor(&construct,
                                                         python::default_call_policies(),
                                                         (python::arg("a"))));
         }
 
-        static MatrixType* construct(PyArrayObject* arr) {
+        static MatrixType* construct(PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -430,17 +467,19 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename MatrixType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl.def("__init__", python::make_constructor(&construct, 
+            cl.def("__init__", python::make_constructor(&construct,
                                                         python::default_call_policies(),
                                                         (python::arg("a"))));
         }
 
-        static MatrixType* construct(PyArrayObject* arr) {
+        static MatrixType* construct(PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -473,9 +512,10 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename MatrixType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {}
+        void visit(ClassType& cl) const
+        {}
     };
 
     template <typename MatrixType, bool RESIZE = false>
@@ -485,11 +525,12 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename MatrixType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {}
+        void visit(ClassType& cl) const
+        {}
     };
 #endif // HAVE_NUMPY
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_MATRIXVISITOR_HPP

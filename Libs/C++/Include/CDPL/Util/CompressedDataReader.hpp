@@ -36,7 +36,7 @@
 #include "CDPL/Util/CompressionStreams.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -49,8 +49,8 @@ namespace CDPL
         class CompressedDataReader : public Base::DataReader<DataType>
         {
 
-        public:
-            CompressedDataReader(std::istream& is); 
+          public:
+            CompressedDataReader(std::istream& is);
 
             CompressedDataReader& read(DataType& obj, bool overwrite = true);
             CompressedDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
@@ -60,28 +60,28 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void setRecordIndex(std::size_t idx);
+            void        setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
             void close();
-        
-        private:
-            DecompStream  stream;
-            ReaderImpl    reader;
+
+          private:
+            DecompStream stream;
+            ReaderImpl   reader;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>
-CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::CompressedDataReader(std::istream& is): 
-    stream(is), reader(stream) 
+CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::CompressedDataReader(std::istream& is):
+    stream(is), reader(stream)
 {
     reader.setParent(this);
     reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
@@ -122,7 +122,7 @@ bool CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::hasMo
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>
 std::size_t CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::getRecordIndex() const
-{    
+{
     return reader.getRecordIndex();
 }
 

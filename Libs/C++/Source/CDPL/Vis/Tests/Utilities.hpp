@@ -29,7 +29,7 @@
 #include <cstddef>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -37,7 +37,7 @@ namespace CDPL
 
         class Molecule;
         class Reaction;
-    }
+    } // namespace Chem
 
     namespace Vis
     {
@@ -49,7 +49,7 @@ namespace CDPL
         void initMolecule(Chem::Molecule& mol);
 
         void initReaction(Chem::Reaction& rxn);
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_TEST_UTILITIES_HPP

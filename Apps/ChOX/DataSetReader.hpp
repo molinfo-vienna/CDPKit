@@ -41,36 +41,37 @@ namespace ChOX
     class Settings;
     class DataSet;
 
-    class DataSetReader : public QObject, private DataRecordVisitor
+    class DataSetReader : public QObject,
+                          private DataRecordVisitor
     {
 
         Q_OBJECT
 
-    public:
-        DataSetReader(DataSet& data_set, QWidget* parent, const QString& file_name, 
+      public:
+        DataSetReader(DataSet& data_set, QWidget* parent, const QString& file_name,
                       const Settings& settings);
 
         ~DataSetReader();
 
         bool read();
 
-    signals:    
+      signals:
         void errorMessage(const QString&);
         void statusMessage(const QString&);
 
-    private:
+      private:
         void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
         template <typename T, typename ImplT>
         bool appendRecords(bool use_file_ext);
-        
+
         DataSet&        dataSet;
         const Settings& settings;
         QWidget*        parent;
         QString         fileName;
         bool            isMoleculeDataSet;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASETREADER_HPP

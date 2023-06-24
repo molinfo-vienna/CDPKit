@@ -38,7 +38,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Descr
@@ -51,9 +51,9 @@ namespace CDPL
         class AutoCorrelation3DVectorCalculator
         {
 
-        public:
+          public:
             typedef T EntityType;
-            
+
             /**
              * \brief Type of the generic functor class used to store a user-defined entity pair weight function.
              *
@@ -76,7 +76,7 @@ namespace CDPL
              * \brief Constructs the \c %AutoCorrelation3DVectorCalculator instance.
              */
             AutoCorrelation3DVectorCalculator();
-        
+
             /**
              * \brief Sets the starting value of the radius.
              * \param start_radius The starting value of the radius.
@@ -149,7 +149,7 @@ namespace CDPL
             template <typename Iter, typename Vec>
             void calculate(Iter beg, Iter end, Vec& vec);
 
-        private:
+          private:
             template <typename Iter>
             void init(Iter beg, Iter end);
 
@@ -161,16 +161,17 @@ namespace CDPL
             Entity3DCoordinatesFunction coordsFunc;
             Math::DMatrix               weightMatrix;
             Math::Vector3DArray         entityPositions;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename T>
-CDPL::Descr::AutoCorrelation3DVectorCalculator<T>::AutoCorrelation3DVectorCalculator(): 
-    startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
+CDPL::Descr::AutoCorrelation3DVectorCalculator<T>::AutoCorrelation3DVectorCalculator():
+    startRadius(0.0), radiusIncrement(0.1), numSteps(99)
+{}
 
 template <typename T>
 void CDPL::Descr::AutoCorrelation3DVectorCalculator<T>::setStartRadius(double start_radius)
@@ -230,7 +231,7 @@ void CDPL::Descr::AutoCorrelation3DVectorCalculator<T>::calculate(Iter beg, Iter
         vec[i] = 0.0;
 
     Math::Vector3D tmp;
-    const double max_radius = startRadius + (numSteps + 1) * radiusIncrement;
+    const double   max_radius = startRadius + (numSteps + 1) * radiusIncrement;
 
     for (std::size_t i = 0; i < numEntities; i++) {
         for (std::size_t j = i; j < numEntities; j++) {
@@ -262,7 +263,7 @@ void CDPL::Descr::AutoCorrelation3DVectorCalculator<T>::init(Iter beg, Iter end)
 
     for (std::size_t i = 0; beg != end; i++, ++beg) {
         const EntityType& entity1 = *beg;
-        
+
         if (coordsFunc)
             entityPositions[i] = coordsFunc(entity1);
         else

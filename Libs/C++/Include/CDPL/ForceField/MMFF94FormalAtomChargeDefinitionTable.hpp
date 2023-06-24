@@ -42,10 +42,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94FormalAtomChargeDefinitionTable
@@ -65,7 +65,7 @@ namespace CDPL
 
               public:
                 Entry();
- 
+
                 Entry(const std::string& atom_type, std::size_t ass_mode, double charge, const std::string& type_list);
 
                 const std::string& getAtomType() const;
@@ -79,19 +79,21 @@ namespace CDPL
                 operator bool() const;
 
               private:
-                std::string  atomType;
-                std::size_t  assMode;
-                double       charge;
-                std::string  typeList;
-                bool         initialized;
-            };            
-    
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+                std::string atomType;
+                std::size_t assMode;
+                double      charge;
+                std::string typeList;
+                bool        initialized;
+            };
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
+
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94FormalAtomChargeDefinitionTable();
 
             void addEntry(const std::string& atom_type, std::size_t ass_mode, double charge, const std::string& nbr_types);
@@ -109,7 +111,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -117,7 +119,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -134,7 +136,7 @@ namespace CDPL
             static SharedPointer defaultTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94FORMALATOMCHARGEDEFINITIONTABLE_HPP

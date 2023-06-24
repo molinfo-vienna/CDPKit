@@ -36,7 +36,7 @@
 #include "CDPL/Util/StreamDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_GRID_API CDFDRegularGridReader : public Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %CDFDRegularGridReader instance that will read the pharmacophore data from the input
              *        stream \a is.
@@ -63,7 +63,7 @@ namespace CDPL
              */
             ~CDFDRegularGridReader();
 
-        private:
+          private:
             friend class Util::StreamDataReader<DRegularGrid, CDFDRegularGridReader>;
 
             CDFDRegularGridReader(const CDFDRegularGridReader&);
@@ -78,7 +78,7 @@ namespace CDPL
 
             CDFDataReaderPtr reader;
         };
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFDREGULARGRIDREADER_HPP

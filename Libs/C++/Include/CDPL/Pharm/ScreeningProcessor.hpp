@@ -37,7 +37,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -63,18 +63,18 @@ namespace CDPL
             enum HitReportMode
             {
 
-              FIRST_MATCHING_CONF,
-              BEST_MATCHING_CONF,
-              ALL_MATCHING_CONFS
+                FIRST_MATCHING_CONF,
+                BEST_MATCHING_CONF,
+                ALL_MATCHING_CONFS
             };
 
             class CDPL_PHARM_API SearchHit
             {
 
-            public:
+              public:
                 SearchHit(const ScreeningProcessor& hit_prov, const FeatureContainer& qry_pharm,
-                          const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
-                          const Math::Matrix4D& xform, std::size_t pharm_idx, 
+                          const FeatureContainer& hit_pharm, const Chem::Molecule& mol,
+                          const Math::Matrix4D& xform, std::size_t pharm_idx,
                           std::size_t mol_idx, std::size_t conf_idx);
 
                 const ScreeningProcessor& getHitProvider() const;
@@ -82,10 +82,10 @@ namespace CDPL
                 const FeatureContainer& getQueryPharmacophore() const;
 
                 const FeatureContainer& getHitPharmacophore() const;
-                
+
                 const Chem::Molecule& getHitMolecule() const;
-                
-                const Math::Matrix4D& getHitAlignmentTransform() const; 
+
+                const Math::Matrix4D& getHitAlignmentTransform() const;
 
                 std::size_t getHitPharmacophoreIndex() const;
 
@@ -93,21 +93,21 @@ namespace CDPL
 
                 std::size_t getHitConformationIndex() const;
 
-            private:
-                const ScreeningProcessor*     provider;
-                const FeatureContainer*       qryPharm;
-                const FeatureContainer*       hitPharm;
-                const Chem::Molecule*         molecule;
-                const Math::Matrix4D*         almntTransform;
-                std::size_t                   pharmIndex;
-                std::size_t                   molIndex;
-                std::size_t                   confIndex;
+              private:
+                const ScreeningProcessor* provider;
+                const FeatureContainer*   qryPharm;
+                const FeatureContainer*   hitPharm;
+                const Chem::Molecule*     molecule;
+                const Math::Matrix4D*     almntTransform;
+                std::size_t               pharmIndex;
+                std::size_t               molIndex;
+                std::size_t               confIndex;
             };
 
             typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 
             typedef std::function<bool(const SearchHit&, double)> HitCallbackFunction;
-            typedef std::function<double(const SearchHit&)> ScoringFunction;
+            typedef std::function<double(const SearchHit&)>       ScoringFunction;
             typedef std::function<bool(std::size_t, std::size_t)> ProgressCallbackFunction;
 
             /**
@@ -160,12 +160,12 @@ namespace CDPL
             typedef std::auto_ptr<ScreeningProcessorImpl> ImplementationPointer;
 
             ScreeningProcessor(const ScreeningProcessor& proc);
-    
+
             ScreeningProcessor& operator=(const ScreeningProcessor& proc);
 
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_SCREENINGPROCESSOR_HPP

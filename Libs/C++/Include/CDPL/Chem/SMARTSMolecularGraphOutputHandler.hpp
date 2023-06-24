@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the output of molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
          */
         typedef Util::DefaultDataOutputHandler<SMARTSMolecularGraphWriter, DataFormat::SMARTS> SMARTSMolecularGraphOutputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMARTSMOLECULARGRAPHOUTPUTHANDLER_HPP

@@ -37,7 +37,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace MolProp
@@ -55,13 +55,13 @@ namespace CDPL
              * \brief Constructs the \c %AtomHydrophobicityCalculator instance.
              */
             AtomHydrophobicityCalculator();
-        
+
             /**
              * \brief Constructs a copy of the \c %AtomHydrophobicityCalculator instance \a calculator.
              * \param calculator The \c %AtomHydrophobicityCalculator to copy.
              */
             AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calculator);
-        
+
             /**
              * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
              * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
@@ -90,16 +90,16 @@ namespace CDPL
 
           private:
             typedef std::vector<std::string> StringList;
-            
+
             void calcHydrophobicities(const Chem::MolecularGraph& molgraph, Util::DArray& atom_hyds);
-            
+
             double calcAccessibleSurfaceFactor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
             Chem::SubstructureSearch substructSearch;
             std::string              atomDescr;
             StringList               atomEnvData;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_ATOMHYDROPHOBICITYCALCULATOR_HPP

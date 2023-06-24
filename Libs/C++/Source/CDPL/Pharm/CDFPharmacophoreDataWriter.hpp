@@ -31,7 +31,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -48,14 +48,15 @@ namespace CDPL
         class CDFPharmacophoreDataWriter : private Internal::CDFDataWriterBase
         {
 
-        public:
-            CDFPharmacophoreDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+          public:
+            CDFPharmacophoreDataWriter(const Base::ControlParameterContainer& ctrl_params):
+                ctrlParams(ctrl_params) {}
 
             bool writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr);
 
             void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
 
-        private:
+          private:
             void init();
 
             void outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
@@ -64,10 +65,10 @@ namespace CDPL
 
             bool writeRecordData(std::ostream& os) const;
 
-            const Base::ControlParameterContainer& ctrlParams;    
+            const Base::ControlParameterContainer& ctrlParams;
             Internal::ByteBuffer                   dataBuffer;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFPHARMACOPHOREDATAWRITER_HPP

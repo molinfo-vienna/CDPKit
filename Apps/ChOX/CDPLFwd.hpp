@@ -34,7 +34,7 @@ namespace CDPL
 
         class Molecule;
         class Reaction;
-    }
+    } // namespace Chem
 
     namespace Base
     {
@@ -45,7 +45,7 @@ namespace CDPL
         class Any;
         class Exception;
         class DataFormat;
-    }
+    } // namespace Base
 
     namespace Vis
     {
@@ -58,7 +58,7 @@ namespace CDPL
         class Color;
         class SizeSpecification;
         class QtFontMetrics;
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CHOX_CDPLFWD_HPP

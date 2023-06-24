@@ -33,7 +33,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -43,7 +43,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined callback functions.
          */
         typedef std::function<void(const std::string&)> LogMessageCallbackFunction;
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_LOGMESSAGECALLBACKFUNCTION_HPP

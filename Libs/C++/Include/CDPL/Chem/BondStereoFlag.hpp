@@ -47,8 +47,8 @@ namespace CDPL
              *
              * Plain bonds are drawn as simple lines.
              */
-            const unsigned int PLAIN          = 0;
-            
+            const unsigned int PLAIN = 0;
+
             /**
              * \brief Specifies a bond where the end atom is above and the start atom is
              *        in the plane of the paper.
@@ -56,7 +56,7 @@ namespace CDPL
              * Bonds of this type are drawn as filled wedges with the narrow end at the start atom
              * and the broad end at the end atom of the bond.
              */
-            const unsigned int UP             = 1; 
+            const unsigned int UP = 1;
 
             /**
              * \brief Specifies a bond where the start atom is above and the end atom is
@@ -65,7 +65,7 @@ namespace CDPL
              * Bonds of this type are drawn as filled wedges with the broad end at the start atom and
              * the narrow end at the end atom of the bond.
              */
-            const unsigned int REVERSE_UP     = 2; 
+            const unsigned int REVERSE_UP = 2;
 
             /**
              * \brief Specifies a bond where the end atom is below and the start atom is
@@ -74,7 +74,7 @@ namespace CDPL
              * Bonds of this type are drawn as hashed wedges with the narrow end at the start atom and the broad
              * end at the end atom of the bond.
              */
-            const unsigned int DOWN           = 3; 
+            const unsigned int DOWN = 3;
 
             /**
              * \brief Specifies a bond where the start atom is below and the end atom is
@@ -83,8 +83,8 @@ namespace CDPL
              * Bonds of this type are drawn as hashed wedges with the broad end at the start atom and the
              * narrow end at the end atom of the bond.
              */
-            const unsigned int REVERSE_DOWN   = 4; 
-            
+            const unsigned int REVERSE_DOWN = 4;
+
             /**
              * \brief Specifies that stereogenic member atoms of the bond or any double bonds (including the bond
              *        itself) that are incident to a member atom have an undefined stereochemistry.
@@ -94,7 +94,7 @@ namespace CDPL
              *
              * \note The flag is logically equivalent to BondStereoFlag::REVERSE_EITHER;
              */
-            const unsigned int EITHER         = 5;
+            const unsigned int EITHER = 5;
 
             /**
              * \brief Specifies that stereogenic member atoms of the bond or any double bonds (including the bond
@@ -106,8 +106,8 @@ namespace CDPL
              * \note The flag is logically equivalent to BondStereoFlag::EITHER;
              */
             const unsigned int REVERSE_EITHER = 6;
-        }
-    }
-}
+        } // namespace BondStereoFlag
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDSTEREOFLAG_HPP

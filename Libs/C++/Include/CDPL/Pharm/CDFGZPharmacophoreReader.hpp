@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataReader<CDFPharmacophoreReader, Util::GZipIStream> CDFGZPharmacophoreReader;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFGZPHARMACOPHOREREADER_HPP

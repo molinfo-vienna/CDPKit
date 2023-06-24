@@ -37,7 +37,7 @@
 #include "CDPL/Base/DataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -81,11 +81,11 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void setRecordIndex(std::size_t idx);
+            void        setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
           private:
@@ -94,7 +94,7 @@ namespace CDPL
             std::size_t            numRecords;
             bool                   state;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDMOLECULEREADER_HPP

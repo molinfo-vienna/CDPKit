@@ -36,7 +36,7 @@
 #include "CDPL/Chem/PatternAtomTyper.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
 
         class MolecularGraph;
     }
-    
+
     namespace MolProp
     {
 
@@ -90,7 +90,7 @@ namespace CDPL
             Chem::PatternAtomTyper atomTyper;
             double                 area;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_TPSACALCULATOR_HPP

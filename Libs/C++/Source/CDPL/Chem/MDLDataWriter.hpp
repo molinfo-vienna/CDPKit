@@ -32,7 +32,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -53,16 +53,17 @@ namespace CDPL
         class MDLDataWriter
         {
 
-        public:
-            MDLDataWriter(const Base::DataIOBase& io_base): ioBase(io_base), rdfHeaderWritten(false) {}
-        
+          public:
+            MDLDataWriter(const Base::DataIOBase& io_base):
+                ioBase(io_base), rdfHeaderWritten(false) {}
+
             bool writeMOLFile(std::ostream&, const MolecularGraph&);
             bool writeSDFileRecord(std::ostream&, const MolecularGraph&);
 
             bool writeRXNFile(std::ostream&, const Reaction&);
             bool writeRDFileRecord(std::ostream&, const Reaction&);
 
-        private:
+          private:
             bool writeMolecularGraph(std::ostream&, const MolecularGraph&, bool);
 
             void init(std::ostream&, bool);
@@ -97,7 +98,7 @@ namespace CDPL
             void writeCTabV2000BondAtomIndices(std::ostream&, const MolecularGraph&, const Bond&, bool) const;
             void writeCTabV2000BondType(std::ostream&, std::size_t, const MatchConstraintList&) const;
             void writeCTabV2000BondStereo(std::ostream&, unsigned int, std::size_t) const;
-            void writeCTabV2000BondQueryTopology(std::ostream&, const MolecularGraph&, const Bond&, 
+            void writeCTabV2000BondQueryTopology(std::ostream&, const MolecularGraph&, const Bond&,
                                                  const MatchConstraintList&) const;
             void writeCTabV2000BondRxnCenterStatus(std::ostream&, const Bond&) const;
 
@@ -108,7 +109,7 @@ namespace CDPL
             void writeCTabV2000SubstCountProperties(std::ostream&, const MolecularGraph&) const;
             void writeCTabV2000UnsaturationProperties(std::ostream&, const MolecularGraph&) const;
             void writeCTabV2000AtomListProperties(std::ostream&, const MolecularGraph&) const;
-            void writeCTabV2000AtomList(std::ostream&, const MolecularGraph&, const Atom&, 
+            void writeCTabV2000AtomList(std::ostream&, const MolecularGraph&, const Atom&,
                                         const MatchConstraintList&, bool) const;
             void writeCTabV2000RegistryNumberProperty(std::ostream&, const MolecularGraph&) const;
 
@@ -147,14 +148,14 @@ namespace CDPL
             void writeCTabV3000AtomStereoParity(std::ostream&, const MolecularGraph&, const Atom&) const;
             void writeCTabV3000AtomMass(std::ostream&, const Atom&) const;
             void writeCTabV3000AtomValence(std::ostream&, const MolecularGraph&, const Atom&) const;
-            void writeCTabV3000AtomQueryHCount(std::ostream&, const MolecularGraph&, const Atom&, 
+            void writeCTabV3000AtomQueryHCount(std::ostream&, const MolecularGraph&, const Atom&,
                                                const MatchConstraintList&) const;
             void writeCTabV3000AtomRxnInfo(std::ostream&, const Atom&) const;
-            void writeCTabV3000AtomQuerySubstCount(std::ostream&, const MolecularGraph&, const Atom&, 
+            void writeCTabV3000AtomQuerySubstCount(std::ostream&, const MolecularGraph&, const Atom&,
                                                    const MatchConstraintList&) const;
-            void writeCTabV3000AtomQueryUnsaturationFlag(std::ostream&, const MolecularGraph&, const Atom&, 
+            void writeCTabV3000AtomQueryUnsaturationFlag(std::ostream&, const MolecularGraph&, const Atom&,
                                                          const MatchConstraintList&) const;
-            void writeCTabV3000AtomQueryRingBondCount(std::ostream&, const MolecularGraph&, const Atom&, 
+            void writeCTabV3000AtomQueryRingBondCount(std::ostream&, const MolecularGraph&, const Atom&,
                                                       const MatchConstraintList&) const;
 
             void writeCTabV3000Bond(std::ostream&, const MolecularGraph&, const Bond&) const;
@@ -162,7 +163,7 @@ namespace CDPL
             void writeCTabV3000BondType(std::ostream&, std::size_t, const MatchConstraintList&) const;
             void writeCTabV3000BondAtomIndices(std::ostream&, const MolecularGraph&, const Bond&, bool) const;
             void writeCTabV3000BondStereo(std::ostream&, unsigned int) const;
-            void writeCTabV3000BondQueryTopology(std::ostream&, const MolecularGraph&, const Bond&, 
+            void writeCTabV3000BondQueryTopology(std::ostream&, const MolecularGraph&, const Bond&,
                                                  const MatchConstraintList&) const;
             void writeCTabV3000BondRxnCenterStatus(std::ostream&, const Bond&) const;
             void writeCTabV3000BondQueryStereoBoxFlag(std::ostream&, std::size_t, const MatchConstraintList&) const;
@@ -179,7 +180,7 @@ namespace CDPL
             void writeV3000DataLine(std::ostream&, const std::string&) const;
 
             unsigned int getBondStereo(const Bond&) const;
-            bool isReverseStereo(unsigned int) const;
+            bool         isReverseStereo(unsigned int) const;
 
             const Base::DataIOBase& ioBase;
             std::size_t             coordsDim;
@@ -209,7 +210,7 @@ namespace CDPL
             double                  confEnergy;
             Math::Vector3DArray     confCoordinates;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MDLDATAWRITER_HPP

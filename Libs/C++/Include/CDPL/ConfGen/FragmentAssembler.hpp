@@ -42,7 +42,7 @@
 #include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class FragmentAssemblerImpl;
@@ -61,10 +61,10 @@ namespace CDPL
 
           public:
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData>       ConformerIterator;
 
             FragmentAssembler();
-    
+
             const FragmentAssemblerSettings& getSettings() const;
 
             FragmentAssemblerSettings& getSettings();
@@ -86,7 +86,7 @@ namespace CDPL
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
             unsigned int assemble(const Chem::MolecularGraph& molgraph);
-        
+
             std::size_t getNumConformers() const;
 
             const ConformerData& getConformer(std::size_t idx) const;
@@ -118,7 +118,7 @@ namespace CDPL
 
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTASSEMBLER_HPP

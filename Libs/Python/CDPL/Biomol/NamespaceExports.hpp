@@ -43,6 +43,6 @@ namespace CDPLPythonBiomol
     void exportControlParameterDefaults();
 
     void exportDataFormats();
-}
+} // namespace CDPLPythonBiomol
 
 #endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP

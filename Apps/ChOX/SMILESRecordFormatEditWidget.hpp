@@ -41,24 +41,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         SMILESRecordFormatEditWidget(QWidget*, std::string&);
 
-    signals:
+      signals:
         void recordFormatChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleFormatSelection(int);
 
-    private:
+      private:
         void init();
 
         std::string& recordFormat;
         QComboBox*   recordFormatComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SMILESRECORDFORMATEDITWIDGET_HPP

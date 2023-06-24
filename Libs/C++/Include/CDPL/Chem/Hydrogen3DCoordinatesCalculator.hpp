@@ -41,22 +41,22 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-         
+
         class MolecularGraph;
         class Atom;
 
         /**
          * \brief Hydrogen3DCoordinatesCalculator.
          */
-        class CDPL_CHEM_API Hydrogen3DCoordinatesCalculator 
+        class CDPL_CHEM_API Hydrogen3DCoordinatesCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %Hydrogen3DCoordinatesCalculator instance.
              */
@@ -83,7 +83,7 @@ namespace CDPL
              * \note The default setting is to calculate coordinates only for hydrogens with not yet defined positions.
              */
             void undefinedOnly(bool undef_only);
-            
+
             /**
              * \brief Tells whether already defined hydrogen atom coordinates are recalculated or left unchanged.
              * \return \c true if already defined hydrogen atom coordinates are left unchanged, and \c false otherwise.
@@ -129,9 +129,9 @@ namespace CDPL
 
             void calculate(Math::Vector3DArray& coords, bool init_coords = true);
 
-        private:
+          private:
             typedef std::vector<std::size_t> AtomIndexList;
-        
+
             void assignCoordinates(Math::Vector3DArray&, bool init_coords);
             void assignDiatomicMolCoords(const Atom&, std::size_t, Math::Vector3DArray&);
             void assignLinearCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
@@ -143,40 +143,40 @@ namespace CDPL
             void assignPentagonalBipyramidalCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
             void assignEvenlyDistributedCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
 
-            void assignTemplateCoords(const Atom&, std::size_t, std::size_t, 
-                                      std::size_t, const Math::Vector3D[], const std::size_t*, 
+            void assignTemplateCoords(const Atom&, std::size_t, std::size_t,
+                                      std::size_t, const Math::Vector3D[], const std::size_t*,
                                       Math::Vector3DArray&);
 
             std::size_t getConnectedAtoms(const Atom&, AtomIndexList&);
-            bool getConnectedAtomWithCoords(std::size_t, const Atom&, std::size_t&) const;
+            bool        getConnectedAtomWithCoords(std::size_t, const Atom&, std::size_t&) const;
 
             double getHydrogenBondLength(const Atom&) const;
 
             unsigned int getHybridizationState(const Atom&, std::size_t) const;
 
-            void buildOrthogonalBasis(const Math::Vector3D&, const Math::Vector3D&, 
+            void buildOrthogonalBasis(const Math::Vector3D&, const Math::Vector3D&,
                                       Math::Matrix3D&, bool) const;
-            void getRotationReferenceVector(const Atom&, std::size_t, std::size_t, std::size_t, 
+            void getRotationReferenceVector(const Atom&, std::size_t, std::size_t, std::size_t,
                                             Math::Vector3D&, Math::Vector3DArray&) const;
             void getPerpendicularVector(const Math::Vector3D&, Math::Vector3D&) const;
-            
+
             typedef std::vector<Math::Vector3D> DynamicPointArray;
-            
-            const MolecularGraph*          molGraph;
-            bool                           undefOnly;
-            Atom3DCoordinatesFunction      coordsFunc;
-            AtomPredicate                  hasCoordsFunc;
-            Util::BitSet                   defCoordsMask;
-            Util::BitSet                   savedCoordsMask;
-            AtomIndexList                  centerAtoms;
-            AtomIndexList                  conctdAtoms;
-            Math::DMatrix                  refPoints;
-            Math::DMatrix                  tmpltPoints;
-            DynamicPointArray              genPoints;
-            Math::KabschAlgorithm<double>  kabschAlgo;
-            Util::BitSet                   usedPosMask;
+
+            const MolecularGraph*         molGraph;
+            bool                          undefOnly;
+            Atom3DCoordinatesFunction     coordsFunc;
+            AtomPredicate                 hasCoordsFunc;
+            Util::BitSet                  defCoordsMask;
+            Util::BitSet                  savedCoordsMask;
+            AtomIndexList                 centerAtoms;
+            AtomIndexList                 conctdAtoms;
+            Math::DMatrix                 refPoints;
+            Math::DMatrix                 tmpltPoints;
+            DynamicPointArray             genPoints;
+            Math::KabschAlgorithm<double> kabschAlgo;
+            Util::BitSet                  usedPosMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_HYDROGEN3DCOORDINATESCALCULATOR_HPP

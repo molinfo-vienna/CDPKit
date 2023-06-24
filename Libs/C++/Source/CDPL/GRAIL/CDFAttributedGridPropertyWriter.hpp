@@ -26,7 +26,7 @@
 #define CDPL_GRAIL_CDFATTRIBUTEDGRIDPROPERTYWRITER_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Internal
@@ -40,22 +40,22 @@ namespace CDPL
 
         class CDFDataWriter;
         class AttributedGrid;
-    }
-    
+    } // namespace Grid
+
     namespace GRAIL
     {
 
         class CDFAttributedGridPropertyWriter
         {
 
-        public:
+          public:
             static void registerExternalPropertyHandlers();
 
-        private:
-            static unsigned int outputProperties(const Grid::CDFDataWriter& writer, const Grid::AttributedGrid& grid, 
+          private:
+            static unsigned int outputProperties(const Grid::CDFDataWriter& writer, const Grid::AttributedGrid& grid,
                                                  Internal::ByteBuffer& data);
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_CDFATTRIBUTEDGRIDPROPERTYWRITER_HPP

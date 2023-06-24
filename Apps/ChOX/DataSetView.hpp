@@ -43,16 +43,16 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         DataSetView(QWidget*, Settings&, DataSet&);
 
         DataSetPageView& getPageView() const;
-        DataSet& getDataSet() const;
+        DataSet&         getDataSet() const;
 
-    private slots:
+      private slots:
         void adjustScrollBar(int);
 
-    private:
+      private:
         void wheelEvent(QWheelEvent*);
 
         void init();
@@ -62,6 +62,6 @@ namespace ChOX
         DataSet&         dataSet;
         Settings&        settings;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASETVIEW_HPP

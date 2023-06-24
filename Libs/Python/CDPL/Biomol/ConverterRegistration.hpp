@@ -28,9 +28,9 @@
 
 namespace CDPLPythonBiomol
 {
-    
+
     void registerFromPythonConverters();
     void registerToPythonConverters();
-}
+} // namespace CDPLPythonBiomol
 
 #endif // CDPL_PYTHON_BIOMOL_CONVERTERREGISTRATION_HPP

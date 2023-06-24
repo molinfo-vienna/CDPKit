@@ -44,8 +44,9 @@ namespace CmdLineLib
 
         std::string format_str;
 
-        for (typename Base::DataIOManager<T>::InputHandlerIterator it = Base::DataIOManager<T>::getInputHandlersBegin(),
-                 end = Base::DataIOManager<T>::getInputHandlersEnd(); it != end; ++it, ++out) {
+        for (typename Base::DataIOManager<T>::InputHandlerIterator it  = Base::DataIOManager<T>::getInputHandlersBegin(),
+                                                                   end = Base::DataIOManager<T>::getInputHandlersEnd();
+             it != end; ++it, ++out) {
 
             const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
 
@@ -73,8 +74,9 @@ namespace CmdLineLib
 
         std::string format_str;
 
-        for (typename Base::DataIOManager<T>::OutputHandlerIterator it = Base::DataIOManager<T>::getOutputHandlersBegin(),
-                 end = Base::DataIOManager<T>::getOutputHandlersEnd(); it != end; ++it, ++out) {
+        for (typename Base::DataIOManager<T>::OutputHandlerIterator it  = Base::DataIOManager<T>::getOutputHandlersBegin(),
+                                                                    end = Base::DataIOManager<T>::getOutputHandlersEnd();
+             it != end; ++it, ++out) {
 
             const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
 
@@ -104,7 +106,7 @@ namespace CmdLineLib
 
         for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
             std::string file_ext = file_name.substr(pos + 1);
-            
+
             typename Base::DataInputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getInputHandlerByFileExtension(file_ext);
 
             if (handler)
@@ -123,7 +125,7 @@ namespace CmdLineLib
 
         for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
             std::string file_ext = file_name.substr(pos + 1);
-            
+
             typename Base::DataOutputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getOutputHandlerByFileExtension(file_ext);
 
             if (handler)
@@ -134,6 +136,6 @@ namespace CmdLineLib
     }
 
     std::string formatTimeDuration(std::size_t secs);
-}
+} // namespace CmdLineLib
 
 #endif // CMDLINE_LIB_HELPERFUNCTIONS_HPP

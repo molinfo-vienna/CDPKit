@@ -32,7 +32,7 @@
 #include "CDPL/GRAIL/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,10 +50,10 @@ namespace CDPL
         namespace AttributedGridProperty
         {
 
-            extern CDPL_GRAIL_API const Base::LookupKey FEATURE_TYPE; 
-            extern CDPL_GRAIL_API const Base::LookupKey TARGET_FEATURE_TYPE; 
-        }
-    }
-}
+            extern CDPL_GRAIL_API const Base::LookupKey FEATURE_TYPE;
+            extern CDPL_GRAIL_API const Base::LookupKey TARGET_FEATURE_TYPE;
+        } // namespace AttributedGridProperty
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_ATTRIBUTEDGRIDPROPERTY_HPP

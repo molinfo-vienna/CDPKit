@@ -40,7 +40,7 @@
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -49,7 +49,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class FragmentConformerGeneratorImpl;
@@ -59,12 +59,12 @@ namespace CDPL
 
           public:
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData>       ConformerIterator;
 
-            FragmentConformerGenerator();            
+            FragmentConformerGenerator();
 
             ~FragmentConformerGenerator();
-    
+
             FragmentConformerGeneratorSettings& getSettings();
 
             const FragmentConformerGeneratorSettings& getSettings() const;
@@ -118,7 +118,7 @@ namespace CDPL
 
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTCONFORMERGENERATOR_HPP

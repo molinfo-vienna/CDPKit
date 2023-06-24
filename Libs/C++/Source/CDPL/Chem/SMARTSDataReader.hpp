@@ -38,7 +38,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -57,8 +57,9 @@ namespace CDPL
         class SMARTSDataReader
         {
 
-        public:
-            SMARTSDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            SMARTSDataReader(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool readReaction(std::istream&, Reaction&);
             bool readMolecule(std::istream&, Molecule&);
@@ -70,7 +71,7 @@ namespace CDPL
 
             typedef std::vector<std::size_t> BondList;
 
-        private:
+          private:
             void init(const Molecule&);
 
             void setMoleculeMatchConstraints(Molecule&) const;
@@ -81,11 +82,11 @@ namespace CDPL
 
             void createBond(Molecule&, const Atom*, const Atom*, MatchConstraintList::SharedPointer&, std::size_t);
 
-            MatchConstraintList::SharedPointer combineBondMatchConstraints(const MatchConstraintList::SharedPointer&, 
+            MatchConstraintList::SharedPointer combineBondMatchConstraints(const MatchConstraintList::SharedPointer&,
                                                                            const MatchConstraintList::SharedPointer&) const;
             MatchConstraintList::SharedPointer parseBondExpression();
             MatchConstraintList::SharedPointer parseBondExpression(std::size_t);
-            bool parseBondExpressionPrimitive(MatchConstraintList&);
+            bool                               parseBondExpressionPrimitive(MatchConstraintList&);
 
             const Chem::Atom* parseAtom(Molecule&);
 
@@ -133,7 +134,7 @@ namespace CDPL
 
             void setBondTableEntry(std::size_t, const Bond*);
 
-            void addToBondList(std::size_t, std::size_t, bool = true);
+            void            addToBondList(std::size_t, std::size_t, bool = true);
             const BondList& getBondList(std::size_t) const;
 
             void setAtomStereoDescriptors(const Molecule&) const;
@@ -149,7 +150,7 @@ namespace CDPL
             {
 
                 ClosureBond(std::size_t lex_bond_no, const Atom* start_atom, const MatchConstraintList::SharedPointer& match_constr):
-                    lexBondNumber(lex_bond_no), startAtom(start_atom), matchConstraints(match_constr) {} 
+                    lexBondNumber(lex_bond_no), startAtom(start_atom), matchConstraints(match_constr) {}
 
                 std::size_t                        lexBondNumber;
                 const Atom*                        startAtom;
@@ -159,8 +160,8 @@ namespace CDPL
             typedef std::shared_ptr<SMARTSDataReader> SharedPointer;
 
             typedef std::map<std::size_t, ClosureBond> ClosureBondMap;
-            typedef std::vector<const Bond*> BondTable;
-            typedef std::vector<BondList> BondListTable;
+            typedef std::vector<const Bond*>           BondTable;
+            typedef std::vector<BondList>              BondListTable;
 
             const Base::DataIOBase& ioBase;
             std::string             molSMARTSString;
@@ -180,8 +181,7 @@ namespace CDPL
             bool                    haveComponentGroups;
             bool                    strictErrorChecking;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMARTSDATAREADER_HPP
- 

@@ -40,7 +40,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -76,7 +76,7 @@ namespace CDPL
              *                   set default functions will operate in a special query mode.
              */
             SpatialFeatureMapping(bool query_mode = false);
-            
+
             /**
              * \brief Specifies a function for testing the type compatibility of features.
              * \param func The type compatibility test function.
@@ -120,7 +120,7 @@ namespace CDPL
             void perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform);
 
           private:
-            typedef std::pair<const Feature*, const Feature*> FeaturePair;
+            typedef std::pair<const Feature*, const Feature*>                          FeaturePair;
             typedef std::unordered_map<FeaturePair, double, boost::hash<FeaturePair> > FeaturePairToScoreMap;
 
             TypeMatchFunction     typeMatchFunc;
@@ -129,7 +129,7 @@ namespace CDPL
             FeaturePairToScoreMap posMatchScores;
             FeaturePairToScoreMap geomMatchScores;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_SPATIALFEATUREMAPPING_HPP

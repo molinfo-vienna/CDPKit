@@ -36,7 +36,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,14 +50,14 @@ namespace CDPL
 
         class MMFF94InteractionData;
         class MMFF94InteractionParameterizer;
-    }
+    } // namespace ForceField
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         CDPL_CONFGEN_API std::size_t buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset = true);
 
-        CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 
+        CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask,
                                                             bool het_h_rotors, bool reset = true);
 
         CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask,
@@ -65,16 +65,15 @@ namespace CDPL
 
         CDPL_CONFGEN_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool het_h_rotors);
 
-        CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph); 
+        CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph);
 
-        CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, 
+        CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph&                 molgraph,
                                                                      ForceField::MMFF94InteractionParameterizer& parameterizer,
                                                                      ForceField::MMFF94InteractionData& param_data, unsigned int ff_type,
-                                                                     bool strict, double estat_de_const, double estat_dist_expo); 
+                                                                     bool strict, double estat_de_const, double estat_dist_expo);
 
         CDPL_CONFGEN_API void setConformers(Chem::MolecularGraph& molgraph, const ConformerDataArray& conf_array);
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_MOLECULARGRAPHFUNCTIONS_HPP
- 

@@ -57,16 +57,16 @@ namespace CDPL
         class RangeGenerator
         {
 
-        public:
-           /**
+          public:
+            /**
             * \brief Constructor initializing the generator object.
             * \param start The start value of the sequence.
             * \param inc The arithmetic difference of successive values.
             */
-            RangeGenerator(T start = T(), T inc = T(1)): 
+            RangeGenerator(T start = T(), T inc = T(1)):
                 startValue(start), increment(inc), currentValue(start) {}
 
-           /**
+            /**
             * \brief Returns the next value in the sequence.
             * 
             * The returned value is either the start value (on the first call) or the
@@ -76,13 +76,13 @@ namespace CDPL
             */
             T operator()();
 
-        private:
+          private:
             T startValue;
             T increment;
             T currentValue;
         };
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 
 // Implementation

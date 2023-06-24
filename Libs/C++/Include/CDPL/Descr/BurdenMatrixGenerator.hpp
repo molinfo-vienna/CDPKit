@@ -35,7 +35,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -43,7 +43,7 @@ namespace CDPL
 
         class MolecularGraph;
         class Atom;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -55,7 +55,7 @@ namespace CDPL
         class CDPL_DESCR_API BurdenMatrixGenerator
         {
 
-        public:
+          public:
             /**
              * \brief Type of the generic functor class used to store user-defined atom weight functions.
              *
@@ -93,14 +93,14 @@ namespace CDPL
              */
             void generate(const Chem::MolecularGraph& molgraph, Math::DMatrix& mtx);
 
-        private:
+          private:
             BurdenMatrixGenerator(const BurdenMatrixGenerator&);
 
             BurdenMatrixGenerator& operator=(const BurdenMatrixGenerator&);
 
             AtomWeightFunction atomWeightFunc;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_BURDENMATRIXGENERATOR_HPP

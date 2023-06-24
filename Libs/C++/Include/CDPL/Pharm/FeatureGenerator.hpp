@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -96,13 +96,13 @@ namespace CDPL
              * \param gen The \c %FeatureGenerator instance to copy.
              */
             FeatureGenerator(const FeatureGenerator& gen);
-    
+
             FeatureGenerator& operator=(const FeatureGenerator& gen);
 
           private:
             Chem::Atom3DCoordinatesFunction coordsFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREGENERATOR_HPP

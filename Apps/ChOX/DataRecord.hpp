@@ -36,13 +36,13 @@ namespace ChOX
     class DataRecord
     {
 
-    public:
+      public:
         typedef std::shared_ptr<DataRecord> SharedPointer;
 
         virtual ~DataRecord() {}
 
         virtual void accept(DataRecordVisitor&) const = 0;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATARECORD_HPP

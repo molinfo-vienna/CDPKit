@@ -39,7 +39,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,7 +54,7 @@ namespace CDPL
             /**
              * \brief Specifies the default set of atomic properties considered for atom matching.
              */
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
                 AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
                 AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
@@ -63,7 +63,7 @@ namespace CDPL
             /**
              * \brief Specifies the default set of bond properties considered for bond matching.
              */
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
                 BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
@@ -84,15 +84,15 @@ namespace CDPL
             /**
              * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.
              */
-            AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, 
+            AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS,
                                     unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
-          
+
             void setAtomPropertyFlags(unsigned int flags);
 
             unsigned int getAtomPropertyFlags() const;
 
             void setBondPropertyFlags(unsigned int flags);
-    
+
             unsigned int getBondPropertyFlags() const;
 
             void includeIdentityMapping(bool include);
@@ -114,7 +114,7 @@ namespace CDPL
             bool findMappings(const MolecularGraph& molgraph);
 
             void stopSearch();
-          
+
             /**
              * \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
              * \return The number of atom/bond mappings that were recorded in the last call to findMappings().
@@ -212,7 +212,7 @@ namespace CDPL
             AutomorphismGroupSearch(const AutomorphismGroupSearch&);
 
             AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&);
-    
+
             const MatchExpression<Atom, MolecularGraph>::SharedPointer&
             getAtomMatchExpression(const Atom& atom) const;
 
@@ -221,91 +221,96 @@ namespace CDPL
 
             const MatchExpression<MolecularGraph>::SharedPointer&
             getMolGraphMatchExpression(const MolecularGraph& molgraph) const;
-    
+
             class AtomMatchExpression : public MatchExpression<Atom, MolecularGraph>
             {
 
-            public:
-                AtomMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
+              public:
+                AtomMatchExpression(AutomorphismGroupSearch* parent):
+                    parent(parent) {}
 
                 bool requiresAtomBondMapping() const;
 
-                bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
+                bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph,
                                 const Atom& target_atom, const MolecularGraph& target_molgraph,
                                 const Base::Any& aux_data) const;
 
-                bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
-                                const Atom& target_atom, const MolecularGraph& target_molgraph, 
+                bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph,
+                                const Atom& target_atom, const MolecularGraph& target_molgraph,
                                 const AtomBondMapping& mapping, const Base::Any& aux_data) const;
-            private:
-                AutomorphismGroupSearch*       parent;
-                mutable unsigned int           type;
-                mutable unsigned int           hybState;
-                mutable std::size_t            isotope;
-                mutable std::size_t            hCount;
-                mutable long                   charge;
-                mutable bool                   aromatic;
-                mutable std::size_t            expBondCount;
+
+              private:
+                AutomorphismGroupSearch* parent;
+                mutable unsigned int     type;
+                mutable unsigned int     hybState;
+                mutable std::size_t      isotope;
+                mutable std::size_t      hCount;
+                mutable long             charge;
+                mutable bool             aromatic;
+                mutable std::size_t      expBondCount;
             };
-     
+
             class BondMatchExpression : public MatchExpression<Bond, MolecularGraph>
             {
-            
-            public:
-                BondMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
-            
+
+              public:
+                BondMatchExpression(AutomorphismGroupSearch* parent):
+                    parent(parent) {}
+
                 bool requiresAtomBondMapping() const;
 
-                bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
-                                const Bond& target_bond, const MolecularGraph& target_molgraph, 
+                bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph,
+                                const Bond& target_bond, const MolecularGraph& target_molgraph,
                                 const Base::Any& aux_data) const;
 
-                bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
-                                const Bond& target_bond, const MolecularGraph& target_molgraph, 
+                bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph,
+                                const Bond& target_bond, const MolecularGraph& target_molgraph,
                                 const AtomBondMapping& mapping, const Base::Any& aux_data) const;
-            private:
-                AutomorphismGroupSearch*       parent;
-                mutable std::size_t            order;
-                mutable bool                   inRing;
-                mutable bool                   aromatic;
+
+              private:
+                AutomorphismGroupSearch* parent;
+                mutable std::size_t      order;
+                mutable bool             inRing;
+                mutable bool             aromatic;
             };
 
             class MolGraphMatchExpression : public MatchExpression<MolecularGraph>
             {
-            
-            public:
-                MolGraphMatchExpression(const AutomorphismGroupSearch* parent): parent(parent) {}
+
+              public:
+                MolGraphMatchExpression(const AutomorphismGroupSearch* parent):
+                    parent(parent) {}
 
                 bool requiresAtomBondMapping() const;
 
-                bool operator()(const MolecularGraph& query_molgraph, 
-                                const MolecularGraph& target_molgraph, 
-                                const Base::Any& aux_data) const;
+                bool operator()(const MolecularGraph& query_molgraph,
+                                const MolecularGraph& target_molgraph,
+                                const Base::Any&      aux_data) const;
 
-                bool operator()(const MolecularGraph& query_molgraph, 
-                                const MolecularGraph& target_molgraph, 
+                bool operator()(const MolecularGraph&  query_molgraph,
+                                const MolecularGraph&  target_molgraph,
                                 const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
-            private:
+              private:
                 const AutomorphismGroupSearch* parent;
             };
 
             typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
             typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
-            typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
+            typedef MatchExpression<MolecularGraph>::SharedPointer       MolGraphMatchExprPtr;
 
-            SubstructureSearch           substructSearch;
-            bool                         incIdentityMapping;
-            unsigned int                 atomPropFlags;
-            unsigned int                 bondPropFlags;
-            AtomMatchExprPtr             atomMatchExpr;
-            BondMatchExprPtr             bondMatchExpr;
-            MolGraphMatchExprPtr         molGraphMatchExpr;
-            MappingCallbackFunction      mappingCallbackFunc;
-            const Atom*                  lastQueryAtom;
-            const Bond*                  lastQueryBond;
+            SubstructureSearch      substructSearch;
+            bool                    incIdentityMapping;
+            unsigned int            atomPropFlags;
+            unsigned int            bondPropFlags;
+            AtomMatchExprPtr        atomMatchExpr;
+            BondMatchExprPtr        bondMatchExpr;
+            MolGraphMatchExprPtr    molGraphMatchExpr;
+            MappingCallbackFunction mappingCallbackFunc;
+            const Atom*             lastQueryAtom;
+            const Bond*             lastQueryBond;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_AUTOMORPHISMGROUPSEARCH_HPP

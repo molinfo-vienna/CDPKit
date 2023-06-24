@@ -39,24 +39,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         CTabVersionEditWidget(QWidget*, unsigned int&);
 
-    signals:
+      signals:
         void versionChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleVersionSelection(int);
 
-    private:
+      private:
         void init();
 
         unsigned int& ctabVersion;
         QComboBox*    ctabVersionComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_CTABVERSIONEDITWIDGET_HPP

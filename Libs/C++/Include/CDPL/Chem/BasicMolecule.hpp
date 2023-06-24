@@ -41,53 +41,53 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         /**
          * \brief BasicMolecule.
          */
         class CDPL_CHEM_API BasicMolecule : public Molecule
         {
 
-            typedef Util::ObjectPool<BasicAtom> AtomCache;
-            typedef Util::ObjectPool<BasicBond> BondCache;
+            typedef Util::ObjectPool<BasicAtom>    AtomCache;
+            typedef Util::ObjectPool<BasicBond>    BondCache;
             typedef AtomCache::SharedObjectPointer AtomPtr;
             typedef BondCache::SharedObjectPointer BondPtr;
-            typedef std::vector<AtomPtr> AtomList;
-            typedef std::vector<BondPtr> BondList;
+            typedef std::vector<AtomPtr>           AtomList;
+            typedef std::vector<BondPtr>           BondList;
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BasicMolecule instances.
              */
             typedef std::shared_ptr<BasicMolecule> SharedPointer;
-        
-            typedef boost::indirect_iterator<AtomList::iterator, BasicAtom> AtomIterator;
+
+            typedef boost::indirect_iterator<AtomList::iterator, BasicAtom>             AtomIterator;
             typedef boost::indirect_iterator<AtomList::const_iterator, const BasicAtom> ConstAtomIterator;
-            typedef boost::indirect_iterator<BondList::iterator, BasicBond> BondIterator;
+            typedef boost::indirect_iterator<BondList::iterator, BasicBond>             BondIterator;
             typedef boost::indirect_iterator<BondList::const_iterator, const BasicBond> ConstBondIterator;
 
             /**
              * \brief Constructs an empty \c %BasicMolecule instance.
              */
             BasicMolecule();
-    
+
             /**
              * \brief Constructs a copy of the \c %BasicMolecule instance \a mol.
              * \param mol The other \c %BasicMolecule instance to copy.
              */
             BasicMolecule(const BasicMolecule& mol);
-    
+
             /**
              * \brief Constructs a copy of the Chem::Molecule instance \a mol.
              * \param mol The other Chem::Molecule instance to copy.
              */
             BasicMolecule(const Molecule& mol);
-        
+
             /**
              * \brief Constructs a \c %BasicMolecule instance with copies of the atoms and bonds 
              *        of the Chem::MolecularGraph instance \a molgraph.
@@ -101,11 +101,11 @@ namespace CDPL
              * Destroys the \c %BasicMolecule instance and frees all allocated resources.
              */
             ~BasicMolecule();
-        
+
             void clear();
-        
+
             std::size_t getNumAtoms() const;
-        
+
             std::size_t getNumBonds() const;
 
             /**
@@ -161,9 +161,9 @@ namespace CDPL
             BasicAtom& getAtom(std::size_t idx);
 
             BasicAtom& addAtom();
-        
+
             void removeAtom(std::size_t idx);
-        
+
             /**
              * \brief Removes the atom specified by the iterator \a it.
              *
@@ -176,15 +176,15 @@ namespace CDPL
              *        [getAtomsBegin(), getAtomsEnd() - 1].
              */
             AtomIterator removeAtom(const AtomIterator& it);
-        
+
             const BasicBond& getBond(std::size_t idx) const;
 
             BasicBond& getBond(std::size_t idx);
 
             BasicBond& addBond(std::size_t atom1_idx, std::size_t atom2_idx);
-        
+
             void removeBond(std::size_t idx);
-        
+
             /**
              * \brief Removes the bond specified by the iterator \a it.
              * \param it An iterator that specifies the bond to remove.
@@ -193,11 +193,11 @@ namespace CDPL
              *        [getBondsBegin(), getBondsEnd() - 1].
              */
             BondIterator removeBond(const BondIterator& it);
-        
+
             bool containsAtom(const Atom& atom) const;
-        
+
             bool containsBond(const Bond& bond) const;
-        
+
             std::size_t getAtomIndex(const Atom& atom) const;
 
             std::size_t getBondIndex(const Bond& bond) const;
@@ -216,7 +216,7 @@ namespace CDPL
              * \return A reference to itself.
              */
             BasicMolecule& operator=(const BasicMolecule& mol);
-    
+
             using Molecule::operator=;
 
             /**
@@ -240,11 +240,11 @@ namespace CDPL
              * \param mol The molecule to copy.
              */
             void copy(const BasicMolecule& mol);
-    
+
             void copy(const Molecule& mol);
-        
+
             void copy(const MolecularGraph& molgraph);
-        
+
             /**
              * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
              *        molecule \a mol.
@@ -254,7 +254,7 @@ namespace CDPL
             void append(const BasicMolecule& mol);
 
             void append(const Molecule& mol);
-    
+
             void append(const MolecularGraph& molgraph);
 
             void remove(const MolecularGraph& molgraph);
@@ -263,13 +263,13 @@ namespace CDPL
 
             void reserveMemoryForBonds(std::size_t num_bonds);
 
-        private:
+          private:
             template <typename T>
             void doCopy(const T& mol);
 
             template <typename T>
             void doAppend(const T& mol);
-            
+
             void clearAtomsAndBonds();
 
             void renumberAtoms(std::size_t idx);
@@ -280,7 +280,7 @@ namespace CDPL
 
             static void destroyAtom(BasicAtom* atom);
             static void destroyBond(BasicBond* bond);
-        
+
             static void clearAtom(BasicAtom& atom);
             static void clearBond(BasicBond& bond);
 
@@ -289,7 +289,7 @@ namespace CDPL
             AtomList  atoms;
             BondList  bonds;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BASICMOLECULE_HPP

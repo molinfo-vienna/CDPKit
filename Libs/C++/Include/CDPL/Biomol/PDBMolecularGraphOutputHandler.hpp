@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref PDB] format.
          */
         typedef Util::DefaultDataOutputHandler<PDBMolecularGraphWriter, DataFormat::PDB> PDBMolecularGraphOutputHandler;
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBMOLECULARGRAPHOUTPUTHANDLER_HPP

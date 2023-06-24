@@ -33,6 +33,6 @@ namespace CDPLPythonConfGen
     void exportMolecularGraphFunctions();
     void exportMoleculeFunctions();
     void exportControlParameterFunctions();
-}
+} // namespace CDPLPythonConfGen
 
 #endif // CDPL_PYTHON_CONFGEN_FUNCTIONEXPORTS_HPP

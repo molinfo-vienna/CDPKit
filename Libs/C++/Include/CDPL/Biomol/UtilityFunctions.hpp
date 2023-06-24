@@ -39,10 +39,10 @@
 #include "CDPL/Chem/Atom.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Biomol 
+    namespace Biomol
     {
 
         template <typename Iter>
@@ -50,8 +50,7 @@ namespace CDPL
                              char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO)
         {
             return std::find_if(it, end,
-                                std::bind(static_cast<bool (*)(const Chem::Atom&, const char*, const char*, long , char, std::size_t, const char*, long)>
-                                          (&matchesResidueInfo), std::placeholders::_1, res_code, chain_id, res_seq_no,
+                                std::bind(static_cast<bool (*)(const Chem::Atom&, const char*, const char*, long, char, std::size_t, const char*, long)>(&matchesResidueInfo), std::placeholders::_1, res_code, chain_id, res_seq_no,
                                           ins_code, model_no, atom_name, serial_no));
         }
 
@@ -59,26 +58,24 @@ namespace CDPL
         Iter findResidue(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
                          char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO)
         {
-            for ( ; it != end; ++it) {
+            for (; it != end; ++it) {
                 const Chem::MolecularGraph& res = *it;
-                
+
                 if (!matchesResidueInfo(res, res_code, chain_id, res_seq_no, ins_code, model_no))
                     continue;
 
                 if (atom_name == 0 && serial_no == IGNORE_SERIAL_NO)
                     return it;
 
-                if (std::find_if(res.getAtomsBegin(), res.getAtomsEnd(), 
-                                 std::bind(static_cast<bool (*)(const Chem::Atom&, const char*, const char*, long , char, std::size_t, const char*, long)>
-                                           (&matchesResidueInfo), std::placeholders::_1, res_code, chain_id, res_seq_no,
+                if (std::find_if(res.getAtomsBegin(), res.getAtomsEnd(),
+                                 std::bind(static_cast<bool (*)(const Chem::Atom&, const char*, const char*, long, char, std::size_t, const char*, long)>(&matchesResidueInfo), std::placeholders::_1, res_code, chain_id, res_seq_no,
                                            ins_code, model_no, atom_name, serial_no)) != res.getAtomsEnd())
                     return it;
             }
 
             return end;
         }
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_UTILITYFUNCTIONS_HPP
- 

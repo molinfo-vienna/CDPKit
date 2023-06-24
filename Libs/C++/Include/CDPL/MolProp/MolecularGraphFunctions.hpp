@@ -32,29 +32,28 @@
 #include <string>
 #include <cstddef>
 
-#include "CDPL/MolProp/APIPrefix.hpp" 
+#include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 
 
-
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class MolecularGraph;
     }
 
-    namespace MolProp 
+    namespace MolProp
     {
 
         CDPL_MOLPROP_API double calcMass(const Chem::MolecularGraph& molgraph);
 
         CDPL_MOLPROP_API void calcMassComposition(const Chem::MolecularGraph& molgraph, MassComposition& comp);
-    
+
         CDPL_MOLPROP_API void buildMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp);
 
         CDPL_MOLPROP_API void buildMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula);
@@ -91,9 +90,9 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getChainBondCount(const Chem::MolecularGraph& molgraph);
 
         CDPL_MOLPROP_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);
-        
+
         CDPL_MOLPROP_API std::size_t getComponentCount(const Chem::MolecularGraph& molgraph);
-        
+
 
         CDPL_MOLPROP_API double calcXLogP(const Chem::MolecularGraph& molgraph);
 
@@ -103,11 +102,11 @@ namespace CDPL
 
 
         CDPL_MOLPROP_API std::size_t getRuleOfFiveScore(const Chem::MolecularGraph& molgraph);
-        
+
 
         CDPL_MOLPROP_API double calcMeanPolarizability(const Chem::MolecularGraph& molgraph);
 
-        CDPL_MOLPROP_API void calcPEOEProperties(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 20, 
+        CDPL_MOLPROP_API void calcPEOEProperties(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 20,
                                                  double damping = 0.48);
 
         CDPL_MOLPROP_API void calcMHMOProperties(Chem::MolecularGraph& molgraph, bool overwrite);
@@ -117,8 +116,7 @@ namespace CDPL
         CDPL_MOLPROP_API void perceiveHBondDonorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
 
         CDPL_MOLPROP_API void perceiveHBondAcceptorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_MOLECULARGRAPHFUNCTIONS_HPP
- 

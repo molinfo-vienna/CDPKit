@@ -45,7 +45,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,8 +56,8 @@ namespace CDPL
         class Bond;
         class Fragment;
         class FragmentList;
-    }
-    
+    } // namespace Chem
+
     namespace Descr
     {
 
@@ -73,17 +73,17 @@ namespace CDPL
              * \brief Specifies the default set of atomic properties considered in the generation
              *        of atom identifiers by CircularFingerprintGenerator::DefAtomIdentifierFunction.
              */
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
-              Chem::AtomPropertyFlag::HEAVY_BOND_COUNT | Chem::AtomPropertyFlag::VALENCE | Chem::AtomPropertyFlag::TYPE |
-              Chem::AtomPropertyFlag::FORMAL_CHARGE |Chem::AtomPropertyFlag::H_COUNT | Chem::AtomPropertyFlag::TOPOLOGY |
-              Chem::AtomPropertyFlag::ISOTOPE;
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
+                Chem::AtomPropertyFlag::HEAVY_BOND_COUNT | Chem::AtomPropertyFlag::VALENCE | Chem::AtomPropertyFlag::TYPE |
+                Chem::AtomPropertyFlag::FORMAL_CHARGE | Chem::AtomPropertyFlag::H_COUNT | Chem::AtomPropertyFlag::TOPOLOGY |
+                Chem::AtomPropertyFlag::ISOTOPE;
 
             /**
              * \brief Specifies the default set of bond properties considered in the generation
              *        of bond identifiers by CircularFingerprintGenerator::DefBondIdentifierFunction.
              */
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
-              Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY;
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
+                Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY;
 
             /**
              * \brief The functor for the generation of ECFP atom identifiers.
@@ -110,8 +110,9 @@ namespace CDPL
                  *
                  * \param flags Specifies the set of considered atomic properties.
                  */
-                DefAtomIdentifierFunctor(unsigned int flags = DEF_ATOM_PROPERTY_FLAGS): flags(flags) {}
- 
+                DefAtomIdentifierFunctor(unsigned int flags = DEF_ATOM_PROPERTY_FLAGS):
+                    flags(flags) {}
+
                 /**
                  * \brief Generates an identifier for the argument atom.
                  *
@@ -149,7 +150,8 @@ namespace CDPL
                  *
                  * \param flags Specifies the set of considered bond properties.
                  */
-                DefBondIdentifierFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS): flags(flags) {}
+                DefBondIdentifierFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS):
+                    flags(flags) {}
 
                 /**
                  * \brief Generates an identifier for the argument bond.
@@ -236,13 +238,13 @@ namespace CDPL
             void includeChirality(bool include);
 
             bool chiralityIncluded() const;
-        
+
             /**
              * \brief Generates the atom-centered circular substructure fingerprint of the molecular graph \a molgraph.
              * \param molgraph The molecular graph to process.
              */
             void generate(const Chem::MolecularGraph& molgraph);
-            
+
             /**
              * \brief Maps previously generated feature identifiers to bit indices and sets the correponding bits of \a bs.
              * \param bs The target bitset.
@@ -281,32 +283,32 @@ namespace CDPL
             void performIteration(std::size_t iter_num);
 
             unsigned int getStereoFlag(const Chem::Atom& ctr_atom) const;
-            
+
             void bitSetToFragment(const Util::BitSet& ab_mask, Chem::Fragment& frag) const;
 
             static bool compareNeighborData(const NeighborData& nbr1, const NeighborData& nbr2);
-            
+
             typedef std::pair<std::uint64_t, Util::BitSet> Feature;
-            typedef std::vector<Feature> FeatureArray;
-            typedef std::vector<const Feature*> FeaturePtrList;
-            typedef std::vector<std::uint64_t> UInt64Array;
-            typedef std::vector<NeighborData> NeighborDataList;
-    
-            const Chem::MolecularGraph*  molGraph;
-            std::size_t                  numIterations;
-            AtomIdentifierFunction       atomIdentifierFunc;
-            BondIdentifierFunction       bondIdentifierFunc;
-            bool                         incHydrogens;
-            bool                         incChirality;
-            boost::rand48                randGenerator;
-            UInt64Array                  bondIdentifiers;
-            FeatureArray                 features;
-            FeaturePtrList               outputFeatures;
-            UInt64Array                  idCalculationData;
-            NeighborDataList             neighborData;
-            Util::BitSet                 duplicateMask;
-        }; 
-    }
-}
+            typedef std::vector<Feature>                   FeatureArray;
+            typedef std::vector<const Feature*>            FeaturePtrList;
+            typedef std::vector<std::uint64_t>             UInt64Array;
+            typedef std::vector<NeighborData>              NeighborDataList;
+
+            const Chem::MolecularGraph* molGraph;
+            std::size_t                 numIterations;
+            AtomIdentifierFunction      atomIdentifierFunc;
+            BondIdentifierFunction      bondIdentifierFunc;
+            bool                        incHydrogens;
+            bool                        incChirality;
+            boost::rand48               randGenerator;
+            UInt64Array                 bondIdentifiers;
+            FeatureArray                features;
+            FeaturePtrList              outputFeatures;
+            UInt64Array                 idCalculationData;
+            NeighborDataList            neighborData;
+            Util::BitSet                duplicateMask;
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_CIRCULARFINGERPRINTGENERATOR_HPP

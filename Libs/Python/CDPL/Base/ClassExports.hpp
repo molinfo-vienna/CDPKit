@@ -37,6 +37,6 @@ namespace CDPLPythonBase
     void exportDataIOBase();
     void exportIOStreams();
     void exportFunctionWrappers();
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_CLASSEXPORTS_HPP

@@ -37,7 +37,7 @@
 #include "CDPL/Vis/Pen.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -46,10 +46,11 @@ namespace CDPL
         /**
          * \brief A graphics primitive representing a single line.
          */
-        class CDPL_VIS_API LinePrimitive2D : public Line2D, public GraphicsPrimitive2D
+        class CDPL_VIS_API LinePrimitive2D : public Line2D,
+                                             public GraphicsPrimitive2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %LinePrimitive2D instances.
              */
@@ -65,13 +66,15 @@ namespace CDPL
              * \param beg The starting point.
              * \param end The end point.
              */
-            LinePrimitive2D(const Math::Vector2D& beg, const Math::Vector2D& end): Line2D(beg, end) {}
-        
+            LinePrimitive2D(const Math::Vector2D& beg, const Math::Vector2D& end):
+                Line2D(beg, end) {}
+
             /**
              * \brief Constructs a line primitive with the same starting and end point as \a line.
              * \param line The line defining the starting and end point.
              */
-            explicit LinePrimitive2D(const Line2D& line): Line2D(line) {}
+            explicit LinePrimitive2D(const Line2D& line):
+                Line2D(line) {}
 
             void render(Renderer2D& renderer) const;
 
@@ -91,10 +94,10 @@ namespace CDPL
 
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-        private:
-            Pen   pen;
+          private:
+            Pen pen;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_LINEPRIMITIVE2D_HPP

@@ -33,7 +33,7 @@
 #include "CDPL/Vis/ColorTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -41,8 +41,8 @@ namespace CDPL
 
         class ControlParameterContainer;
     }
-    
-    namespace Vis 
+
+    namespace Vis
     {
 
         class Rectangle2D;
@@ -570,8 +570,7 @@ namespace CDPL
         CDPL_VIS_API bool hasShowStereoBondsParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_VIS_API void clearShowStereoBondsParameter(Base::ControlParameterContainer& cntnr);
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_CONTROLPARAMETERFUNCTIONS_HPP
- 

@@ -31,17 +31,18 @@
 namespace ChOX
 {
 
-    template <typename T> class ConcreteDataRecord;
+    template <typename T>
+    class ConcreteDataRecord;
 
     class DataRecordVisitor
     {
 
-    public:
+      public:
         virtual ~DataRecordVisitor() {}
 
         virtual void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&) {}
         virtual void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&) {}
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATARECORDVISITOR_HPP

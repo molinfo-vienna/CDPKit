@@ -35,7 +35,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -43,7 +43,7 @@ namespace CDPL
 
         class Atom;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
     namespace Biomol
     {
@@ -51,17 +51,17 @@ namespace CDPL
         class MMTFDataWriter
         {
 
-        public:
+          public:
             MMTFDataWriter() {}
-        
+
             bool writeRecord(std::ostream& os, const Chem::MolecularGraph& molgraph);
-        
-        private:
+
+          private:
             void init(const Chem::MolecularGraph& molgraph);
 
             void clearStructureData();
             void clearResidueData();
-            
+
             bool outputStructureData(std::ostream& os, const Chem::MolecularGraph& molgraph);
 
             std::size_t createStructureData(const Chem::MolecularGraph& molgraph);
@@ -73,15 +73,15 @@ namespace CDPL
             void setStructureMetaData(const Chem::MolecularGraph& molgraph);
 
             typedef std::vector<const Chem::Atom*> AtomArray;
-            typedef std::vector<std::size_t> AtomIndexArray;
+            typedef std::vector<std::size_t>       AtomIndexArray;
 
-            AtomArray               atoms;
-            AtomIndexArray          atomIndices;
-            mmtf::StructureData     structData;
-            mmtf::GroupType         residueData;
-            Util::BitSet            resBondMask;
+            AtomArray           atoms;
+            AtomIndexArray      atomIndices;
+            mmtf::StructureData structData;
+            mmtf::GroupType     residueData;
+            Util::BitSet        resBondMask;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MMTFDATAWRITER_HPP

@@ -35,9 +35,11 @@ namespace
     struct MutableAtomSequence : public AtomSequence<T>
     {
 
-        MutableAtomSequence(T& cntnr): AtomSequence<T>(cntnr) {}
+        MutableAtomSequence(T& cntnr):
+            AtomSequence<T>(cntnr) {}
 
-        void removeAtom(std::size_t idx) {
+        void removeAtom(std::size_t idx)
+        {
             AtomSequence<T>::container.removeAtom(idx);
         }
     };
@@ -52,7 +54,8 @@ namespace
     struct MutableAtomSequenceExport
     {
 
-        MutableAtomSequenceExport(const char* name) {
+        MutableAtomSequenceExport(const char* name)
+        {
             using namespace boost;
 
             python::class_<MutableAtomSequence<T> >(name, python::no_init)
@@ -63,6 +66,6 @@ namespace
                 .def("__contains__", &AtomSequence<T>::containsAtom, (python::arg("self"), python::arg("atom")));
         }
     };
-}
+} // namespace
 
 #endif // CDPL_PYTHON_CHEM_MUTABLEATOMSEQUENCEEXPORT_HPP

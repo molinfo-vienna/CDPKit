@@ -34,62 +34,74 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94AngleBendingInteraction
         {
 
           public:
-            MMFF94AngleBendingInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx, 
+            MMFF94AngleBendingInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx,
                                           unsigned int angle_type_idx, bool linear, double force_const, double ref_angle):
-                termAtom1Idx(term_atom1_idx), ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx),
+                termAtom1Idx(term_atom1_idx),
+                ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx),
                 angleTypeIdx(angle_type_idx), linear(linear), forceConst(force_const), refAngle(ref_angle) {}
 
-            std::size_t getTerminalAtom1Index() const {
+            std::size_t getTerminalAtom1Index() const
+            {
                 return termAtom1Idx;
             }
 
-            std::size_t getCenterAtomIndex() const {
+            std::size_t getCenterAtomIndex() const
+            {
                 return ctrAtomIdx;
             }
 
-            std::size_t getTerminalAtom2Index() const {
+            std::size_t getTerminalAtom2Index() const
+            {
                 return termAtom2Idx;
             }
 
-            std::size_t getAtom1Index() const {
+            std::size_t getAtom1Index() const
+            {
                 return termAtom1Idx;
             }
 
-            std::size_t getAtom2Index() const {
+            std::size_t getAtom2Index() const
+            {
                 return ctrAtomIdx;
             }
 
-            std::size_t getAtom3Index() const {
+            std::size_t getAtom3Index() const
+            {
                 return termAtom2Idx;
             }
 
-            unsigned int getAngleTypeIndex() const {
+            unsigned int getAngleTypeIndex() const
+            {
                 return angleTypeIdx;
             }
 
-            bool isLinearAngle() const {
+            bool isLinearAngle() const
+            {
                 return linear;
             }
 
-            double getForceConstant() const {
+            double getForceConstant() const
+            {
                 return forceConst;
             }
 
-            double getReferenceAngle() const {
+            double getReferenceAngle() const
+            {
                 return refAngle;
             }
 
-            void setReferenceAngle(double angle) {
+            void setReferenceAngle(double angle)
+            {
                 refAngle = angle;
             }
 
@@ -101,8 +113,8 @@ namespace CDPL
             bool         linear;
             double       forceConst;
             double       refAngle;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTION_HPP

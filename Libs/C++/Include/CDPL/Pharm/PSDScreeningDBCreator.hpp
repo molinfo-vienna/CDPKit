@@ -35,12 +35,12 @@
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
     {
-    
+
         class PSDScreeningDBCreatorImpl;
 
         /**
@@ -97,10 +97,10 @@ namespace CDPL
             PSDScreeningDBCreator(const PSDScreeningDBCreator&);
 
             PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&);
-        
+
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDSCREENINGDBCREATOR_HPP

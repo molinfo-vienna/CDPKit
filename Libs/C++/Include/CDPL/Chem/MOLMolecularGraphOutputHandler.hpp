@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the output of molecular graph data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataOutputHandler<MOLMolecularGraphWriter, DataFormat::MOL> MOLMolecularGraphOutputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLMOLECULARGRAPHOUTPUTHANDLER_HPP

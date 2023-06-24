@@ -42,7 +42,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,9 +50,9 @@ namespace CDPL
 
         class MolecularGraph;
         class Atom;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94ChargeCalculator
@@ -122,9 +122,9 @@ namespace CDPL
             const Util::DArray& getFormalCharges() const;
 
           private:
-            typedef MMFF94BondChargeIncrementTable::Entry BCIEntry;
+            typedef MMFF94BondChargeIncrementTable::Entry        BCIEntry;
             typedef MMFF94PartialBondChargeIncrementTable::Entry PBCIEntry;
-            typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
+            typedef MMFF94AtomTypePropertyTable::Entry           TypePropertyEntry;
             typedef MMFF94FormalAtomChargeDefinitionTable::Entry FormChargeDefEntry;
 
             typedef std::vector<std::size_t> AtomIndexList;
@@ -135,8 +135,8 @@ namespace CDPL
             void distFormalNeighborCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
             void distFormalAromAtomCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
 
-            void calcPartialCharges(Util::DArray& charges, bool strict) const;
-            double getBondChargeIncrement(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2, 
+            void   calcPartialCharges(Util::DArray& charges, bool strict) const;
+            double getBondChargeIncrement(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2,
                                           const PBCIEntry& pbci_entry1, const PBCIEntry& pbci_entry2) const;
 
             MMFF94BondChargeIncrementTable::SharedPointer        bondChargeIncTable;
@@ -152,7 +152,7 @@ namespace CDPL
             AtomIndexList                                        atomList;
             const Chem::MolecularGraph*                          molGraph;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94CHARGECALCULATOR_HPP

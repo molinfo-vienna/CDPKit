@@ -35,13 +35,14 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
     {
 
-        template <typename T> class DataWriter;
+        template <typename T>
+        class DataWriter;
     }
 
     namespace Pharm
@@ -77,7 +78,7 @@ namespace CDPL
             void writeDBMoleculeIndexProperty(bool write);
 
             bool isDBMoleculeIndexPropertyWritten() const;
-    
+
             void writeMoleculeConfIndexProperty(bool write);
 
             bool isMoleculeConfIndexPropertyWritten() const;
@@ -94,7 +95,7 @@ namespace CDPL
             Math::Vector3DArray   alignedCoords;
             Chem::BasicMolecule   molecule;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FILESCREENINGHITCOLLECTOR_HPP

@@ -39,7 +39,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_CHEM_API ConnectedSubstructureSet : public FragmentList
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ConnectedSubstructureSet instances.
              */
@@ -99,10 +99,10 @@ namespace CDPL
              */
             std::size_t getSubstructureSize() const;
 
-        private:
+          private:
             class SubstructDescriptor;
-        
-            typedef Util::ObjectPool<SubstructDescriptor> SubstructDescriptorCache;
+
+            typedef Util::ObjectPool<SubstructDescriptor>         SubstructDescriptorCache;
             typedef SubstructDescriptorCache::SharedObjectPointer SubstructDescriptorPtr;
 
             ConnectedSubstructureSet(const ConnectedSubstructureSet&);
@@ -119,7 +119,7 @@ namespace CDPL
             class SubstructDescriptor
             {
 
-            public:
+              public:
                 void init(const MolecularGraph*, const Bond&);
 
                 bool grow(const Util::BitSet&);
@@ -131,7 +131,7 @@ namespace CDPL
 
                 bool operator<(const SubstructDescriptor&) const;
 
-            private:
+              private:
                 typedef std::vector<const Atom*> AtomList;
                 typedef std::vector<std::size_t> BondCountList;
 
@@ -160,8 +160,7 @@ namespace CDPL
             std::size_t              currSubstructSize;
             const MolecularGraph*    molGraph;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CONNECTEDSUBSTRUCTURESET_HPP
- 

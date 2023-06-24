@@ -34,7 +34,7 @@ namespace CDPL
 
         class LookupKey;
     }
-}
+} // namespace CDPL
 
 
 namespace ChOX
@@ -88,7 +88,7 @@ namespace ChOX
 
         extern const CDPL::Base::LookupKey USE_ATOM_COLOR_TABLE;
         extern const CDPL::Base::LookupKey ATOM_COLOR_TABLE;
-    }
-}
+    } // namespace ControlParameter
+} // namespace ChOX
 
 #endif // CHOX_CONTROLPARAMETER_HPP

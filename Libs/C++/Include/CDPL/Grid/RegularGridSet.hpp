@@ -33,7 +33,7 @@
 #include "CDPL/Util/IndirectArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -50,14 +50,15 @@ namespace CDPL
             typedef std::shared_ptr<RegularGridSet> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "RegularGridSet";
             }
         };
 
         typedef RegularGridSet<double> DRegularGridSet;
-        typedef RegularGridSet<float> FRegularGridSet;
-    }
-}
+        typedef RegularGridSet<float>  FRegularGridSet;
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_REGULARGRIDSET_HPP

@@ -34,14 +34,14 @@
 #include "CDPL/Grid/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Grid 
+    namespace Grid
     {
 
         class AttributedGrid;
-    
+
         CDPL_GRID_API const std::string& getName(const AttributedGrid& grid);
 
         CDPL_GRID_API void setName(AttributedGrid& grid, const std::string& name);
@@ -49,7 +49,7 @@ namespace CDPL
         CDPL_GRID_API void clearName(AttributedGrid& grid);
 
         CDPL_GRID_API bool hasName(const AttributedGrid& grid);
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_ATTRIBUTEDGRIDFUNCTIONS_HPP

@@ -30,7 +30,7 @@
 #define CDPL_CHEM_BONDCONFIGURATION_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,40 +45,40 @@ namespace CDPL
             /**
              * \brief Specifies that the configuration of the bond is undefined.
              */
-            const unsigned int UNDEF  = 0;
+            const unsigned int UNDEF = 0;
 
             /**
              * \brief Specifies that a bond does not meet the requirements (e.g. not a double bond or symmetric)
              *        to be assigned a configuration.
              */
-            const unsigned int NONE   = 0x1;
+            const unsigned int NONE = 0x1;
 
             /**
              * \brief Specifies that the bond has \e E configuration.
              */
-            const unsigned int E      = 0x2;
-        
+            const unsigned int E = 0x2;
+
             /**
              * \brief Specifies that the bond has \e TRANS configuration.
              */
-            const unsigned int TRANS  = E;
-    
+            const unsigned int TRANS = E;
+
             /**
              * \brief Specifies that the bond has \e Z configuration.
              */
-            const unsigned int Z      = 0x4;
+            const unsigned int Z = 0x4;
 
             /**
              * \brief Specifies that the bond has \e CIS configuration.
              */
-            const unsigned int CIS      = Z;
+            const unsigned int CIS = Z;
 
             /**
              * \brief Specifies that the bond meets all requirements but has no defined configuration.
              */
             const unsigned int EITHER = 0x8;
-        }
-    }
-}
+        } // namespace BondConfiguration
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDCONFIGURATION_HPP

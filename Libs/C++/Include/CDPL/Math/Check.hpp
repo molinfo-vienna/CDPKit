@@ -30,14 +30,14 @@
 #include <algorithm>
 
 #ifndef CDPL_MATH_CHECK
-#  ifdef CDPL_MATH_CHECKS_DISABLE
-#    define CDPL_MATH_CHECK(expr, msg, e)
-#  else // !CDPL_MATH_CHECKS_DISABLE
-#    define CDPL_MATH_CHECK(expr, msg, e)     \
-       if (!(expr)) {                         \
-           throw e(msg);                     \
-       }
-#  endif // CDPL_MATH_CHECKS_DISABLE
+# ifdef CDPL_MATH_CHECKS_DISABLE
+#  define CDPL_MATH_CHECK(expr, msg, e)
+# else // !CDPL_MATH_CHECKS_DISABLE
+#  define CDPL_MATH_CHECK(expr, msg, e) \
+   if (!(expr)) {                       \
+    throw e(msg);                       \
+   }
+# endif // CDPL_MATH_CHECKS_DISABLE
 #endif // !CDPL_MATH_CHECK
 
 
@@ -57,7 +57,7 @@ namespace
         CDPL_MATH_CHECK(size <= max_size, "Max. size exceeded", E);
         return std::min(size, max_size);
     }
-}
+} // namespace
 
 #define CDPL_MATH_CHECK_SIZE_EQUALITY(size1, size2, e) checkSizeEquality<e>(size1, size2)
 

@@ -57,18 +57,18 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey FORMAL_CHARGE;
             extern CDPL_CHEM_API const Base::LookupKey ISOTOPE;
             extern CDPL_CHEM_API const Base::LookupKey RADICAL_TYPE;
-            extern CDPL_CHEM_API const Base::LookupKey HYBRIDIZATION; 
+            extern CDPL_CHEM_API const Base::LookupKey HYBRIDIZATION;
 
             extern CDPL_CHEM_API const Base::LookupKey RING_FLAG;
             extern CDPL_CHEM_API const Base::LookupKey AROMATICITY_FLAG;
 
             extern CDPL_CHEM_API const Base::LookupKey UNPAIRED_ELECTRON_COUNT;
-    
+
             extern CDPL_CHEM_API const Base::LookupKey IMPLICIT_HYDROGEN_COUNT;
-    
+
             extern CDPL_CHEM_API const Base::LookupKey COORDINATES_2D;
             extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D_ARRAY;
-        
+
             extern CDPL_CHEM_API const Base::LookupKey MORGAN_NUMBER;
             extern CDPL_CHEM_API const Base::LookupKey CANONICAL_NUMBER;
             extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
@@ -90,14 +90,14 @@ namespace CDPL
 
             extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
             extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING_ID;
-            
+
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
-        
+
             extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUP_ID;
-        }
-    }
-}
+        } // namespace AtomProperty
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMPROPERTY_HPP

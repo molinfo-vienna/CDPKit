@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,9 +50,9 @@ namespace CDPL
         namespace FeatureContainerProperty
         {
 
-            extern CDPL_PHARM_API const Base::LookupKey NAME; 
+            extern CDPL_PHARM_API const Base::LookupKey NAME;
         }
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURECONTAINERPROPERTY_HPP

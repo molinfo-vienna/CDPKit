@@ -47,7 +47,7 @@
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -55,9 +55,9 @@ namespace CDPL
 
         class MolecularGraph;
         class Atom;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94StretchBendInteractionParameterizer
@@ -68,13 +68,13 @@ namespace CDPL
 
             MMFF94StretchBendInteractionParameterizer();
 
-            MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
+            MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data,
                                                       const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
                                                       bool strict);
 
-            void setFilterFunction(const InteractionFilterFunction3& func); 
+            void setFilterFunction(const InteractionFilterFunction3& func);
 
-            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
             void setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table);
 
@@ -82,7 +82,7 @@ namespace CDPL
 
             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-            void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
+            void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data,
                               const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, bool strict);
 
           private:
@@ -90,15 +90,15 @@ namespace CDPL
 
             void getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int& bond_type_idx, double& ref_length) const;
 
-            void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, unsigned int ctr_atom_type, 
+            void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, unsigned int ctr_atom_type,
                                           const Chem::Atom& term_atom2, unsigned int term_atom2_type, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
                                           unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const;
 
-            void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
+            void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom,
                                           const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
-                                          unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const, bool strict) const; 
+                                          unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const, bool strict) const;
 
-             /**
+            /**
              * \brief Returns the stretch bend type index SBT[IJK].
              *
              * SBT[IJK] is derived from the bond type indices BT[IJ] and BT[JK] and the angle type index AT[IJK] as follows:
@@ -133,13 +133,13 @@ namespace CDPL
             typedef std::unordered_map<std::pair<std::size_t, std::size_t>, const MMFF94BondStretchingInteraction*, boost::hash<std::pair<std::size_t, std::size_t> > > BondStretchingParamLookupTable;
 
             InteractionFilterFunction3                            filterFunc;
-            MMFF94NumericAtomTypeFunction                         atomTypeFunc;    
+            MMFF94NumericAtomTypeFunction                         atomTypeFunc;
             MMFF94StretchBendParameterTable::SharedPointer        paramTable;
             MMFF94DefaultStretchBendParameterTable::SharedPointer defParamTable;
             MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
             BondStretchingParamLookupTable                        bsParamTable;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONPARAMETERIZER_HPP

@@ -88,7 +88,7 @@ namespace CDPL
 
             static const std::size_t MAX_OCTANT_CACHE_SIZE = 1000;
 
-        public:
+          public:
             /**
              * Some generic distances: Manhattan, (squared) Euclidean, and Maximum distance.
              *
@@ -101,7 +101,8 @@ namespace CDPL
             struct L1Distance
             {
 
-                static ScalarT compute(const PointT& p, const PointT& q) {
+                static ScalarT compute(const PointT& p, const PointT& q)
+                {
                     ScalarT diff1 = p[0] - q[0];
                     ScalarT diff2 = p[1] - q[1];
                     ScalarT diff3 = p[2] - q[2];
@@ -109,15 +110,18 @@ namespace CDPL
                     return std::abs(diff1) + std::abs(diff2) + std::abs(diff3);
                 }
 
-                static ScalarT norm(ScalarT x, ScalarT y, ScalarT z) {
+                static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)
+                {
                     return std::abs(x) + std::abs(y) + std::abs(z);
                 }
 
-                static ScalarT sqr(ScalarT r) {
+                static ScalarT sqr(ScalarT r)
+                {
                     return r;
                 }
 
-                static ScalarT sqrt(ScalarT r) {
+                static ScalarT sqrt(ScalarT r)
+                {
                     return r;
                 }
             };
@@ -125,7 +129,8 @@ namespace CDPL
             struct L2Distance
             {
 
-                static ScalarT compute(const PointT& p, const PointT& q) {
+                static ScalarT compute(const PointT& p, const PointT& q)
+                {
                     ScalarT diff1 = p[0] - q[0];
                     ScalarT diff2 = p[1] - q[1];
                     ScalarT diff3 = p[2] - q[2];
@@ -133,15 +138,18 @@ namespace CDPL
                     return diff1 * diff1 + diff2 * diff2 + diff3 * diff3;
                 }
 
-                static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)    {
+                static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)
+                {
                     return x * x + y * y + z * z;
                 }
 
-                static ScalarT sqr(ScalarT r) {
+                static ScalarT sqr(ScalarT r)
+                {
                     return r * r;
                 }
 
-                static ScalarT sqrt(ScalarT r) {
+                static ScalarT sqrt(ScalarT r)
+                {
                     return std::sqrt(r);
                 }
             };
@@ -149,36 +157,40 @@ namespace CDPL
             struct MaxDistance
             {
 
-                static ScalarT compute(const PointT& p, const PointT& q) {
-                    ScalarT diff1 = std::abs(p[0] - q[0]);
-                    ScalarT diff2 = std::abs(p[1] - q[1]);
-                    ScalarT diff3 = std::abs(p[2] - q[2]);
+                static ScalarT compute(const PointT& p, const PointT& q)
+                {
+                    ScalarT diff1   = std::abs(p[0] - q[0]);
+                    ScalarT diff2   = std::abs(p[1] - q[1]);
+                    ScalarT diff3   = std::abs(p[2] - q[2]);
                     ScalarT maximum = diff1;
 
-                    if (diff2 > maximum) 
+                    if (diff2 > maximum)
                         maximum = diff2;
-                    if (diff3 > maximum) 
+                    if (diff3 > maximum)
                         maximum = diff3;
 
                     return maximum;
                 }
 
-                static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)    {
+                static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)
+                {
                     ScalarT maximum = x;
 
-                    if (y > maximum) 
+                    if (y > maximum)
                         maximum = y;
-                    if (z > maximum) 
+                    if (z > maximum)
                         maximum = z;
 
                     return maximum;
                 }
 
-                static ScalarT sqr(ScalarT r) {
+                static ScalarT sqr(ScalarT r)
+                {
                     return r;
                 }
 
-                static ScalarT sqrt(ScalarT r) {
+                static ScalarT sqrt(ScalarT r)
+                {
                     return r;
                 }
             };
@@ -206,15 +218,15 @@ namespace CDPL
             template <typename Distance>
             long findNeighbor(const PointT& query, ScalarT min_distance = ScalarT(-1)) const;
 
-        private:
+          private:
             struct Octant
             {
 
                 // bounding box of the octant needed for overlap and contains tests...
-                ScalarT     x, y, z;     // center
-                ScalarT     extent;      // half of side-length
-                std::size_t start, end;  // start and end in succ_
-                std::size_t size;        // number of points
+                ScalarT     x, y, z; // center
+                ScalarT     extent; // half of side-length
+                std::size_t start, end; // start and end in succ_
+                std::size_t size; // number of points
                 bool        isLeaf;
                 Octant*     child[8];
             };
@@ -295,7 +307,7 @@ namespace CDPL
             ScalarT                  minExtent;
             Octant*                  rootNode;
             const ContainerT*        pointData;
-            std::vector<std::size_t> succIndices;  // single connected list of next point indices...
+            std::vector<std::size_t> succIndices; // single connected list of next point indices...
         };
 
 
@@ -305,7 +317,8 @@ namespace CDPL
         const std::size_t Octree<PointT, ContainerT, ScalarT>::MAX_OCTANT_CACHE_SIZE;
 
         template <typename PointT, typename ContainerT, typename ScalarT>
-        Octree<PointT, ContainerT, ScalarT>::Octree() : octantCache(MAX_OCTANT_CACHE_SIZE), rootNode(0), pointData(0) 
+        Octree<PointT, ContainerT, ScalarT>::Octree():
+            octantCache(MAX_OCTANT_CACHE_SIZE), rootNode(0), pointData(0)
         {}
 
         template <typename PointT, typename ContainerT, typename ScalarT>
@@ -319,11 +332,11 @@ namespace CDPL
                 rootNode = 0;
                 return;
             }
-            
-            pointData = &pts;
+
+            pointData  = &pts;
             bucketSize = bucket_size;
-            minExtent = min_extent;
-            
+            minExtent  = min_extent;
+
             succIndices.resize(num_pts);
 
             // determine axis-aligned bounding box.
@@ -342,21 +355,21 @@ namespace CDPL
 
                 const PointT& p = pts[i];
 
-                if (p[0] < min[0]) 
+                if (p[0] < min[0])
                     min[0] = p[0];
-                if (p[1] < min[1]) 
+                if (p[1] < min[1])
                     min[1] = p[1];
-                if (p[2] < min[2]) 
+                if (p[2] < min[2])
                     min[2] = p[2];
-                if (p[0] > max[0]) 
+                if (p[0] > max[0])
                     max[0] = p[0];
-                if (p[1] > max[1]) 
+                if (p[1] > max[1])
                     max[1] = p[1];
-                if (p[2] > max[2]) 
+                if (p[2] > max[2])
                     max[2] = p[2];
             }
 
-            ScalarT ctr[3] = { min[0], min[1], min[2] };
+            ScalarT ctr[3]     = {min[0], min[1], min[2]};
             ScalarT max_extent = (max[0] - min[0]) / 2;
 
             ctr[0] += max_extent;
@@ -365,7 +378,7 @@ namespace CDPL
                 ScalarT extent = (max[i] - min[i]) / 2;
                 ctr[i] += extent;
 
-                if (extent > max_extent) 
+                if (extent > max_extent)
                     max_extent = extent;
             }
 
@@ -375,7 +388,8 @@ namespace CDPL
         template <typename PointT, typename ContainerT, typename ScalarT>
         typename Octree<PointT, ContainerT, ScalarT>::Octant* Octree<PointT, ContainerT, ScalarT>::createOctant(ScalarT x, ScalarT y, ScalarT z,
                                                                                                                 ScalarT extent, std::size_t start_idx,
-                                                                                                                std::size_t end_idx, std::size_t size) {
+                                                                                                                std::size_t end_idx, std::size_t size)
+        {
             Octant* octant = octantCache.getRaw();
 
             for (std::size_t i = 0; i < 8; i++)
@@ -384,24 +398,24 @@ namespace CDPL
             // For a leaf we don't have to change anything; points are already correctly linked or correctly reordered.
             octant->isLeaf = true;
 
-            octant->x = x;
-            octant->y = y;
-            octant->z = z;
+            octant->x      = x;
+            octant->y      = y;
+            octant->z      = z;
             octant->extent = extent;
 
             octant->start = start_idx;
-            octant->end = end_idx;
-            octant->size = size;
+            octant->end   = end_idx;
+            octant->size  = size;
 
-            const ScalarT factor[] =  { ScalarT(-0.5), ScalarT(0.5) };
+            const ScalarT factor[] = {ScalarT(-0.5), ScalarT(0.5)};
 
             // subdivide subset of points and re-link points according to Morton codes
             if (size > bucketSize && extent > 2 * minExtent) {
                 octant->isLeaf = false;
 
                 std::size_t child_starts[8] = {};
-                std::size_t child_ends[8] = {};
-                std::size_t child_sizes[8] = {};
+                std::size_t child_ends[8]   = {};
+                std::size_t child_sizes[8]  = {};
 
                 // re-link disjoint child subsets...
                 std::size_t idx = start_idx;
@@ -412,11 +426,11 @@ namespace CDPL
                     // determine Morton code for each point...
                     std::size_t morton_code = 0;
 
-                    if (p[0] > x) 
+                    if (p[0] > x)
                         morton_code |= 1;
-                    if (p[1] > y) 
+                    if (p[1] > y)
                         morton_code |= 2;
-                    if (p[2] > z) 
+                    if (p[2] > z)
                         morton_code |= 4;
 
                     // set child starts and update successors...
@@ -424,16 +438,16 @@ namespace CDPL
                         child_starts[morton_code] = idx;
                     else
                         succIndices[child_ends[morton_code]] = idx;
-            
+
                     child_sizes[morton_code] += 1;
 
                     child_ends[morton_code] = idx;
-                    idx = succIndices[idx];
+                    idx                     = succIndices[idx];
                 }
 
                 // now, we can create the child nodes...
-                ScalarT child_extent = extent / 2;
-                bool first_time = true;
+                ScalarT     child_extent   = extent / 2;
+                bool        first_time     = true;
                 std::size_t last_child_idx = 0;
 
                 for (std::size_t i = 0; i < 8; ++i) {
@@ -450,11 +464,11 @@ namespace CDPL
                         octant->start = octant->child[i]->start;
                     else
                         succIndices[octant->child[last_child_idx]->end] =
-                            octant->child[i]->start;  // we have to ensure that also the child ends link to the next child start.
+                            octant->child[i]->start; // we have to ensure that also the child ends link to the next child start.
 
                     last_child_idx = i;
-                    octant->end = octant->child[i]->end;
-                    first_time = false;
+                    octant->end    = octant->child[i]->end;
+                    first_time     = false;
                 }
             }
 
@@ -469,23 +483,23 @@ namespace CDPL
             // if search ball S(q,r) contains octant, simply add point indexes.
             if (contains<Distance>(query, sqr_radius, octant)) {
                 std::size_t idx = octant->start;
-        
+
                 for (std::size_t i = 0; i < octant->size; ++i, ++result_indices) {
                     *result_indices = idx;
-                    idx = succIndices[idx];
+                    idx             = succIndices[idx];
                 }
 
-                return;  // early pruning.
+                return; // early pruning.
             }
 
             if (octant->isLeaf) {
                 std::size_t idx = octant->start;
-            
+
                 for (std::size_t i = 0; i < octant->size; ++i) {
-                    const PointT& p = (*pointData)[idx];
-                    ScalarT dist = Distance::compute(query, p);
-    
-                    if (dist < sqr_radius)  {
+                    const PointT& p    = (*pointData)[idx];
+                    ScalarT       dist = Distance::compute(query, p);
+
+                    if (dist < sqr_radius) {
                         *result_indices = idx;
                         ++result_indices;
                     }
@@ -498,12 +512,12 @@ namespace CDPL
 
             // check whether child nodes are in range.
             for (std::size_t c = 0; c < 8; ++c) {
-                if (octant->child[c] == 0) 
+                if (octant->child[c] == 0)
                     continue;
-            
-                if (!overlaps<Distance>(query, radius, sqr_radius, octant->child[c])) 
+
+                if (!overlaps<Distance>(query, radius, sqr_radius, octant->child[c]))
                     continue;
-            
+
                 radiusNeighbors<Distance>(octant->child[c], query, radius, sqr_radius, result_indices);
             }
         }
@@ -520,27 +534,27 @@ namespace CDPL
 
                 for (std::size_t i = 0; i < octant->size; ++i, ++result_indices, ++distances) {
                     *result_indices = idx;
-                    *distances = Distance::compute(query, (*pointData)[idx]);
-                    idx = succIndices[idx];
+                    *distances      = Distance::compute(query, (*pointData)[idx]);
+                    idx             = succIndices[idx];
                 }
 
-                return;  // early pruning.
+                return; // early pruning.
             }
 
             if (octant->isLeaf) {
                 std::size_t idx = octant->start;
 
                 for (std::size_t i = 0; i < octant->size; ++i) {
-                    const PointT& p = (*pointData)[idx];
-                    ScalarT dist = Distance::compute(query, p);
-        
+                    const PointT& p    = (*pointData)[idx];
+                    ScalarT       dist = Distance::compute(query, p);
+
                     if (dist < sqr_radius) {
                         *result_indices = idx;
-                        *distances = dist;
+                        *distances      = dist;
                         ++result_indices;
                         ++distances;
                     }
-            
+
                     idx = succIndices[idx];
                 }
 
@@ -549,12 +563,12 @@ namespace CDPL
 
             // check whether child nodes are in range.
             for (std::size_t c = 0; c < 8; ++c) {
-                if (octant->child[c] == 0) 
+                if (octant->child[c] == 0)
                     continue;
-            
-                if (!overlaps<Distance>(query, radius, sqr_radius, octant->child[c])) 
+
+                if (!overlaps<Distance>(query, radius, sqr_radius, octant->child[c]))
                     continue;
-            
+
                 radiusNeighbors<Distance>(octant->child[c], query, radius, sqr_radius, result_indices, distances);
             }
         }
@@ -564,23 +578,23 @@ namespace CDPL
         void Octree<PointT, ContainerT, ScalarT>::radiusNeighbors(const PointT& query, ScalarT radius,
                                                                   IdxOutputIter result_indices) const
         {
-            if (!rootNode) 
+            if (!rootNode)
                 return;
 
-            ScalarT sqr_radius = Distance::sqr(radius);  // "squared" radius
+            ScalarT sqr_radius = Distance::sqr(radius); // "squared" radius
             radiusNeighbors<Distance>(rootNode, query, radius, sqr_radius, result_indices);
         }
 
         template <typename PointT, typename ContainerT, typename ScalarT>
         template <typename Distance, typename IdxOutputIter, typename DistOutputIter>
         void Octree<PointT, ContainerT, ScalarT>::radiusNeighbors(const PointT& query, ScalarT radius,
-                                                                  IdxOutputIter result_indices,
+                                                                  IdxOutputIter  result_indices,
                                                                   DistOutputIter distances) const
         {
-            if (!rootNode) 
+            if (!rootNode)
                 return;
 
-            ScalarT sqr_radius = Distance::sqr(radius);  // "squared" radius
+            ScalarT sqr_radius = Distance::sqr(radius); // "squared" radius
             radiusNeighbors<Distance>(rootNode, query, radius, sqr_radius, result_indices, distances);
         }
 
@@ -589,13 +603,13 @@ namespace CDPL
         bool Octree<PointT, ContainerT, ScalarT>::overlaps(const PointT& query, ScalarT radius, ScalarT sq_radius, const Octant* o)
         {
             // we exploit the symmetry to reduce the test to testing if its inside the Minkowski sum around the positive quadrant.
-            ScalarT x = std::abs(query[0] - o->x);
-            ScalarT y = std::abs(query[1] - o->y);
-            ScalarT z = std::abs(query[2] - o->z);
+            ScalarT x        = std::abs(query[0] - o->x);
+            ScalarT y        = std::abs(query[1] - o->y);
+            ScalarT z        = std::abs(query[2] - o->z);
             ScalarT max_dist = radius + o->extent;
 
             // Completely outside, since q' is outside the relevant area.
-            if (x > max_dist || y > max_dist || z > max_dist) 
+            if (x > max_dist || y > max_dist || z > max_dist)
                 return false;
 
             int num_less_extent = (x < o->extent) + (y < o->extent) + (z < o->extent);
@@ -603,7 +617,7 @@ namespace CDPL
             // Checking different cases:
 
             // a. inside the surface region of the octant.
-            if (num_less_extent > 1) 
+            if (num_less_extent > 1)
                 return true;
 
             // b. checking the corner region && edge region.
@@ -637,7 +651,7 @@ namespace CDPL
         long Octree<PointT, ContainerT, ScalarT>::findNeighbor(const PointT& query, ScalarT min_distance) const
         {
             ScalarT max_distance = std::numeric_limits<ScalarT>::infinity();
-            long result_index = -1;
+            long    result_index = -1;
 
             if (rootNode)
                 findNeighbor<Distance>(rootNode, query, min_distance, max_distance, result_index);
@@ -651,20 +665,20 @@ namespace CDPL
                                                                ScalarT& max_distance, long& result_index) const
         {
             // 1. first descend to leaf and check in leafs points.
-            if (octant->isLeaf)    {
-                std::size_t idx = octant->start;
-                ScalarT sqr_max_dist = Distance::sqr(max_distance);
-                ScalarT sqr_min_dist = (min_distance < 0) ? min_distance : Distance::sqr(min_distance);
+            if (octant->isLeaf) {
+                std::size_t idx          = octant->start;
+                ScalarT     sqr_max_dist = Distance::sqr(max_distance);
+                ScalarT     sqr_min_dist = (min_distance < 0) ? min_distance : Distance::sqr(min_distance);
 
                 for (std::size_t i = 0; i < octant->size; ++i) {
-                    const PointT& p = (*pointData)[idx];
-                    ScalarT dist = Distance::compute(query, p);
+                    const PointT& p    = (*pointData)[idx];
+                    ScalarT       dist = Distance::compute(query, p);
 
                     if (dist > sqr_min_dist && dist < sqr_max_dist) {
                         result_index = idx;
                         sqr_max_dist = dist;
                     }
-            
+
                     idx = succIndices[idx];
                 }
 
@@ -676,15 +690,15 @@ namespace CDPL
             // determine Morton code for each point...
             std::size_t morton_code = 0;
 
-            if (query[0] > octant->x) 
+            if (query[0] > octant->x)
                 morton_code |= 1;
-            if (query[1] > octant->y) 
+            if (query[1] > octant->y)
                 morton_code |= 2;
-            if (query[2] > octant->z) 
+            if (query[2] > octant->z)
                 morton_code |= 4;
 
-            if (octant->child[morton_code] != 0)    {
-                if (findNeighbor<Distance>(octant->child[morton_code], query, min_distance, max_distance, result_index)) 
+            if (octant->child[morton_code] != 0) {
+                if (findNeighbor<Distance>(octant->child[morton_code], query, min_distance, max_distance, result_index))
                     return true;
             }
 
@@ -692,18 +706,18 @@ namespace CDPL
             ScalarT sqr_max_dist = Distance::sqr(max_distance);
 
             // 3. check adjacent octants for overlap and check these if necessary.
-            for (std::size_t c = 0; c < 8; ++c)    {
-                if (c == morton_code) 
+            for (std::size_t c = 0; c < 8; ++c) {
+                if (c == morton_code)
                     continue;
-        
-                if (octant->child[c] == 0) 
+
+                if (octant->child[c] == 0)
                     continue;
-        
-                if (!overlaps<Distance>(query, max_distance, sqr_max_dist, octant->child[c])) 
+
+                if (!overlaps<Distance>(query, max_distance, sqr_max_dist, octant->child[c]))
                     continue;
-        
+
                 if (findNeighbor<Distance>(octant->child[c], query, min_distance, max_distance, result_index))
-                    return true;  // early pruning
+                    return true; // early pruning
             }
 
             // all children have been checked...check if point is inside the current octant...
@@ -720,16 +734,16 @@ namespace CDPL
             ScalarT y = std::abs(query[1] - octant->y) + radius;
             ScalarT z = std::abs(query[2] - octant->z) + radius;
 
-            if (x > octant->extent) 
+            if (x > octant->extent)
                 return false;
-            if (y > octant->extent) 
+            if (y > octant->extent)
                 return false;
-            if (z > octant->extent) 
+            if (z > octant->extent)
                 return false;
 
             return true;
         }
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 #endif // CDPL_INTERNAL_OCTREE_HPP

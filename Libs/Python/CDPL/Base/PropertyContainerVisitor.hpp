@@ -32,23 +32,24 @@
 namespace CDPLPythonBase
 {
 
-    class PropertyContainerSpecialFunctionsVisitor : 
-        public boost::python::def_visitor<PropertyContainerSpecialFunctionsVisitor>
+    class PropertyContainerSpecialFunctionsVisitor : public boost::python::def_visitor<PropertyContainerSpecialFunctionsVisitor>
     {
 
         friend class boost::python::def_visitor_access;
 
-    public:
-        PropertyContainerSpecialFunctionsVisitor(bool no_len = false): noLen(no_len) {}
-        
-    private:
+      public:
+        PropertyContainerSpecialFunctionsVisitor(bool no_len = false):
+            noLen(no_len) {}
+
+      private:
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
             using namespace CDPL;
 
-            cl    
-                .def("__getitem__", &getItem, (python::arg("self"), python::arg("key")), 
+            cl
+                .def("__getitem__", &getItem, (python::arg("self"), python::arg("key")),
                      python::return_value_policy<python::copy_const_reference>())
                 .def("__contains__", &Base::PropertyContainer::isPropertySet, (python::arg("self"), python::arg("key")))
                 .def("__setitem__", &Base::PropertyContainer::setProperty<const Base::Any&>, (python::arg("self"), python::arg("key"), python::arg("value")))
@@ -58,12 +59,13 @@ namespace CDPLPythonBase
                 cl.def("__len__", &Base::PropertyContainer::getNumProperties, python::arg("self"));
         }
 
-        static const CDPL::Base::Any& getItem(CDPL::Base::PropertyContainer& cntnr, const CDPL::Base::LookupKey& key) {
+        static const CDPL::Base::Any& getItem(CDPL::Base::PropertyContainer& cntnr, const CDPL::Base::LookupKey& key)
+        {
             return cntnr.getProperty(key, true);
         }
 
         bool noLen;
     };
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_PROPERTYCONTAINERVISITOR_HPP

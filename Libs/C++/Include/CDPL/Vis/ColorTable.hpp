@@ -34,7 +34,7 @@
 #include "CDPL/Util/Map.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -46,19 +46,22 @@ namespace CDPL
          */
         class CDPL_VIS_API ColorTable : public Util::Map<std::size_t, Color>
         {
-     
+
           public:
             typedef std::shared_ptr<ColorTable> SharedPointer;
 
-            ColorTable(): Map<std::size_t, Color>() {}
+            ColorTable():
+                Map<std::size_t, Color>() {}
 
             template <typename Iter>
-            ColorTable(const Iter& beg, const Iter& end): Map<std::size_t, Color>(beg, end) {}
+            ColorTable(const Iter& beg, const Iter& end):
+                Map<std::size_t, Color>(beg, end)
+            {}
 
           private:
             const char* getClassName() const;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_COLORTABLE_HPP

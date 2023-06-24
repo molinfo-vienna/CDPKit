@@ -32,7 +32,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -61,8 +61,8 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_CONFGEN_API const Base::LookupKey STRICT_ERROR_CHECKING;
-        }
-    }
-}
+        } // namespace ControlParameter
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONTROLPARAMETER_HPP

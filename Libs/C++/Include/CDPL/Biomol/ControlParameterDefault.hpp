@@ -35,7 +35,7 @@
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -62,7 +62,7 @@ namespace CDPL
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
-    
+
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
 
             extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES;
@@ -96,8 +96,8 @@ namespace CDPL
             extern CDPL_BIOMOL_API const unsigned int PDB_FORMAT_VERSION;
 
             extern CDPL_BIOMOL_API const bool COMBINE_INTERFERING_RESIDUE_COORDINATES;
-        }
-    }
-}
+        } // namespace ControlParameterDefault
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_CONTROLPARAMETERDEFAULT_HPP

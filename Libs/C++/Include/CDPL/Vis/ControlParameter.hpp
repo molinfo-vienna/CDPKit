@@ -32,7 +32,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -99,7 +99,7 @@ namespace CDPL
              * \valuetype Vis::Color
              */
             extern CDPL_VIS_API const Base::LookupKey BACKGROUND_COLOR;
-    
+
             /**
              * \brief Specifies the style of reaction arrows.
              *
@@ -163,7 +163,7 @@ namespace CDPL
              *
              * \valuetype Vis::SizeSpecification
              * \note The setting is overridden by the Chem::Reaction property Vis::ReactionProperty::ARROW_HEAD_WIDTH.
-             */        
+             */
             extern CDPL_VIS_API const Base::LookupKey REACTION_ARROW_HEAD_WIDTH;
 
             /**
@@ -177,7 +177,7 @@ namespace CDPL
              *
              * \valuetype Vis::SizeSpecification
              * \note The setting is overridden by the Chem::Reaction property Vis::ReactionProperty::ARROW_SHAFT_WIDTH.
-             */        
+             */
             extern CDPL_VIS_API const Base::LookupKey REACTION_ARROW_SHAFT_WIDTH;
 
             /**
@@ -191,7 +191,7 @@ namespace CDPL
              *
              * \valuetype Vis::SizeSpecification
              * \note The setting is overridden by the Chem::Reaction property Vis::ReactionProperty::ARROW_LINE_WIDTH.
-             */        
+             */
             extern CDPL_VIS_API const Base::LookupKey REACTION_ARROW_LINE_WIDTH;
 
             /**
@@ -242,7 +242,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Reaction property Vis::ReactionProperty::SHOW_REACTANTS.
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_REACTION_REACTANTS;
-    
+
             /**
              * \brief Specifies whether or not to show the agents of a reaction.
              *
@@ -290,7 +290,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Reaction property Vis::ReactionProperty::AGENT_LAYOUT.
              */
             extern CDPL_VIS_API const Base::LookupKey REACTION_AGENT_LAYOUT;
-    
+
             /**
              * \brief Specifies the reaction agent layout direction.
              *
@@ -326,7 +326,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Reaction property Vis::ReactionProperty::PLUS_SIGN_SIZE.
              */
             extern CDPL_VIS_API const Base::LookupKey REACTION_PLUS_SIGN_SIZE;
-        
+
             /**
              * \brief Specifies the line width of reaction component '+' signs.
              *
@@ -465,7 +465,7 @@ namespace CDPL
              *       Vis::MolecularGraphProperty::ATOM_LABEL_MARGIN or Vis::AtomProperty::LABEL_MARGIN.
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_LABEL_MARGIN;
-        
+
             /**
              * \brief Specifies the size of radical electron dots.
              *
@@ -547,7 +547,7 @@ namespace CDPL
              *       The hydrogen count of unbound atoms is always shown.
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_HYDROGEN_COUNTS;
-    
+
             /**
              * \brief Specifies whether or not to show the implicit hydrogen count of connected non-carbon atoms.
              *
@@ -579,7 +579,7 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_ATOM_REACTION_INFOS;
-    
+
             /**
              * \brief Specifies whether or not to draw radical electron dots.
              *
@@ -613,7 +613,7 @@ namespace CDPL
              *       Vis::BondProperty::COLOR.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_COLOR;
-        
+
             /**
              * \brief Specifies the width of bond lines.
              *
@@ -694,7 +694,7 @@ namespace CDPL
              * \see Vis::ControlParameter::SHOW_BOND_REACTION_INFOS
              */
             extern CDPL_VIS_API const Base::LookupKey REACTION_CENTER_LINE_LENGTH;
-    
+
             /**
              * \brief Specifies the distance between the lines in reaction center marks.
              *
@@ -744,7 +744,7 @@ namespace CDPL
              *       Vis::MolecularGraphProperty::TRIPLE_BOND_TRIM_LENGTH or Vis::BondProperty::TRIPLE_BOND_TRIM_LENGTH.
              */
             extern CDPL_VIS_API const Base::LookupKey TRIPLE_BOND_TRIM_LENGTH;
-    
+
             /**
              * \brief Specifies the font for bond labels.
              *
@@ -771,7 +771,7 @@ namespace CDPL
              *       Vis::BondProperty::LABEL_SIZE.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_SIZE;
-    
+
             /**
              * \brief Specifies the margin of free space around bond labels.
              *
@@ -844,8 +844,8 @@ namespace CDPL
              * \valuetype \c bool
              */
             extern CDPL_VIS_API const Base::LookupKey SHOW_STEREO_BONDS;
-        }
-    }
-}
+        } // namespace ControlParameter
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_CONTROLPARAMETER_HPP

@@ -38,7 +38,7 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -58,7 +58,7 @@ namespace CDPL
         class CDPL_BASE_API DataIOBase : public ControlParameterContainer
         {
 
-        public:
+          public:
             /**
              * \brief A functor class used to wrap I/O callback target functions.
              *
@@ -66,7 +66,7 @@ namespace CDPL
              * of \c void and two arguments of type <tt>const %DataIOBase&</tt> and <tt>double</tt> (see [\ref FUNWRP]).
              */
             typedef std::function<void(const DataIOBase&, double)> IOCallbackFunction;
-    
+
             /**
              * \brief Registers an I/O callback target function.
              * \param func A DataIOBase::IOCallbackFunction instance wrapping the target function.
@@ -94,7 +94,7 @@ namespace CDPL
              */
             void clearIOCallbacks();
 
-        protected:
+          protected:
             /**
              * \brief Default constructor.
              */
@@ -105,7 +105,8 @@ namespace CDPL
              * \param io_base The \c %DataIOBase instance to copy.
              * \note I/O callbacks registered on \a io_base are not copied.
              */
-            DataIOBase(const DataIOBase& io_base): ControlParameterContainer(io_base) {}
+            DataIOBase(const DataIOBase& io_base):
+                ControlParameterContainer(io_base) {}
 
             /**
              * \brief Destructor.
@@ -120,13 +121,13 @@ namespace CDPL
              */
             DataIOBase& operator=(const DataIOBase& io_base);
 
-        private:
+          private:
             typedef std::pair<std::size_t, IOCallbackFunction> CallbackListEntry;
-            typedef std::vector<CallbackListEntry> CallbackList;
+            typedef std::vector<CallbackListEntry>             CallbackList;
 
             CallbackList callbacks;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 #endif // CDPL_BASE_DATAIOBASE_HPP

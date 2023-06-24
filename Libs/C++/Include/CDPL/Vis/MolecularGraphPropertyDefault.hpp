@@ -36,7 +36,7 @@
 #include "CDPL/Vis/ColorTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -47,29 +47,29 @@ namespace CDPL
          */
         namespace MolecularGraphPropertyDefault
         {
-        
+
             extern CDPL_VIS_API const ColorTable::SharedPointer ATOM_COLOR_TABLE;
-            extern CDPL_VIS_API const Color ATOM_COLOR;
-            extern CDPL_VIS_API const Font ATOM_LABEL_FONT;
-            extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_SIZE;
-            extern CDPL_VIS_API const Font SECONDARY_ATOM_LABEL_FONT;
-            extern CDPL_VIS_API const SizeSpecification SECONDARY_ATOM_LABEL_SIZE;
-            extern CDPL_VIS_API const SizeSpecification ATOM_LABEL_MARGIN;
-            extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
-            extern CDPL_VIS_API const Color BOND_COLOR;
-            extern CDPL_VIS_API const SizeSpecification BOND_LINE_WIDTH;
-            extern CDPL_VIS_API const SizeSpecification BOND_LINE_SPACING;
-            extern CDPL_VIS_API const SizeSpecification STEREO_BOND_WEDGE_WIDTH;
-            extern CDPL_VIS_API const SizeSpecification STEREO_BOND_HASH_SPACING;
-            extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_LENGTH;
-            extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_SPACING;
-            extern CDPL_VIS_API const SizeSpecification DOUBLE_BOND_TRIM_LENGTH;
-            extern CDPL_VIS_API const SizeSpecification TRIPLE_BOND_TRIM_LENGTH;
-            extern CDPL_VIS_API const Font BOND_LABEL_FONT;
-            extern CDPL_VIS_API const SizeSpecification BOND_LABEL_SIZE;
-            extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
-        }
-    }
-}
+            extern CDPL_VIS_API const Color                     ATOM_COLOR;
+            extern CDPL_VIS_API const Font                      ATOM_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification         ATOM_LABEL_SIZE;
+            extern CDPL_VIS_API const Font                      SECONDARY_ATOM_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification         SECONDARY_ATOM_LABEL_SIZE;
+            extern CDPL_VIS_API const SizeSpecification         ATOM_LABEL_MARGIN;
+            extern CDPL_VIS_API const SizeSpecification         RADICAL_ELECTRON_DOT_SIZE;
+            extern CDPL_VIS_API const Color                     BOND_COLOR;
+            extern CDPL_VIS_API const SizeSpecification         BOND_LINE_WIDTH;
+            extern CDPL_VIS_API const SizeSpecification         BOND_LINE_SPACING;
+            extern CDPL_VIS_API const SizeSpecification         STEREO_BOND_WEDGE_WIDTH;
+            extern CDPL_VIS_API const SizeSpecification         STEREO_BOND_HASH_SPACING;
+            extern CDPL_VIS_API const SizeSpecification         REACTION_CENTER_LINE_LENGTH;
+            extern CDPL_VIS_API const SizeSpecification         REACTION_CENTER_LINE_SPACING;
+            extern CDPL_VIS_API const SizeSpecification         DOUBLE_BOND_TRIM_LENGTH;
+            extern CDPL_VIS_API const SizeSpecification         TRIPLE_BOND_TRIM_LENGTH;
+            extern CDPL_VIS_API const Font                      BOND_LABEL_FONT;
+            extern CDPL_VIS_API const SizeSpecification         BOND_LABEL_SIZE;
+            extern CDPL_VIS_API const SizeSpecification         BOND_LABEL_MARGIN;
+        } // namespace MolecularGraphPropertyDefault
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_MOLECULARGRAPHPROPERTYDEFAULT_HPP

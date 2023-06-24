@@ -36,7 +36,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -48,10 +48,11 @@ namespace CDPL
          * \c %SVGMolecularGraphWriter uses Vis::StructureView2D for the creation of 2D structure diagrams. All control-parameters and
          * properties provided for the customization of Vis::StructureView2D are also supported by \c %SVGMolecularGraphWriter.
          */
-        class CDPL_VIS_API SVGMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>, private ImageWriter
+        class CDPL_VIS_API SVGMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>,
+                                                     private ImageWriter
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %SVGMolecularGraphWriter instance that will write the image data to the output stream \a os.
              * \param os The output stream to write to.
@@ -65,10 +66,10 @@ namespace CDPL
              */
             Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             SVGMolecularGraphWriter(const SVGMolecularGraphWriter&);
 
             cairo_surface_t* createCairoSurface(double, double) const;
@@ -77,7 +78,7 @@ namespace CDPL
             std::ostream& output;
             bool          state;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_SVGMOLECULARGRAPHWRITER_HPP

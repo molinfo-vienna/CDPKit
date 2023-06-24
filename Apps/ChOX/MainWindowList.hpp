@@ -30,7 +30,10 @@
 #include <qobject.h>
 
 
-namespace ChOX { class MainWindow; }
+namespace ChOX
+{
+    class MainWindow;
+}
 
 
 namespace ChOX
@@ -43,7 +46,7 @@ namespace ChOX
 
         typedef std::vector<MainWindow*> WindowList;
 
-    public:
+      public:
         typedef WindowList::const_iterator ConstIterator;
 
         static MainWindowList& instance();
@@ -57,16 +60,16 @@ namespace ChOX
 
         int getNumWindows() const;
 
-    private slots:
+      private slots:
         void removeWindow(QObject*);
 
-    private:
+      private:
         MainWindowList();
 
         ~MainWindowList();
 
         WindowList windows;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_MAINWINDOWLIST_HPP

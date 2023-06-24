@@ -42,8 +42,8 @@ namespace CDPL
         void initDataFormats();
         void initControlParameters();
         void initControlParameterDefaults();
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 namespace
 {
@@ -51,7 +51,8 @@ namespace
     struct CDPLPharmInit
     {
 
-        CDPLPharmInit() {
+        CDPLPharmInit()
+        {
             CDPL::Pharm::initFeatureContainerProperties();
             CDPL::Pharm::initFeatureProperties();
             CDPL::Pharm::initFeatureContainerPropertyDefaults();
@@ -62,7 +63,7 @@ namespace
         }
 
     } cdplPharmInit;
-}
+} // namespace
 
 #endif // CDPL_PHARM_STATIC_LINK
 

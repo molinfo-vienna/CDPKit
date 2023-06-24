@@ -36,7 +36,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -120,7 +120,7 @@ namespace CDPL
         class CDPL_CHEM_API RDFReactionWriter : public Base::DataWriter<Reaction>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %RDFReactionWriter instance that will write the reaction data to the output
              *        stream \a os.
@@ -140,10 +140,10 @@ namespace CDPL
              */
             Base::DataWriter<Reaction>& write(const Reaction& rxn);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             RDFReactionWriter(const RDFReactionWriter&);
 
             RDFReactionWriter& operator=(const RDFReactionWriter&);
@@ -154,7 +154,7 @@ namespace CDPL
             bool             state;
             MDLDataWriterPtr writer;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RDFREACTIONWRITER_HPP

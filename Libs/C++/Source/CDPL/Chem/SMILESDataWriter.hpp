@@ -35,7 +35,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -58,7 +58,7 @@ namespace CDPL
         class SMILESDataWriter
         {
 
-        public:
+          public:
             SMILESDataWriter(const Base::DataIOBase& io_base);
 
             ~SMILESDataWriter();
@@ -66,7 +66,7 @@ namespace CDPL
             bool writeReaction(std::ostream&, const Reaction&);
             bool writeMolGraph(std::ostream&, const MolecularGraph&);
 
-        private:
+          private:
             class DFSTreeNode;
             class DFSTreeEdge;
 
@@ -81,7 +81,7 @@ namespace CDPL
 
             void generateCanonComponentSMILES(const MolecularGraph&);
             void outputCanonComponentSMILES(std::ostream&);
-            
+
             void buildHDepleteMolGraph(const MolecularGraph&);
             void buildCanonMolGraph(const MolecularGraph&);
 
@@ -94,14 +94,14 @@ namespace CDPL
             void generateSMILES(std::ostream&) const;
 
             std::size_t getRingClosureNumber();
-            void putRingClosureNumber(std::size_t);
+            void        putRingClosureNumber(std::size_t);
 
             DFSTreeNode* createNode();
             DFSTreeEdge* createEdge();
 
             DFSTreeNode* allocNode();
             DFSTreeEdge* allocEdge();
-            
+
             void freeNodes();
             void freeEdges();
 
@@ -127,29 +127,29 @@ namespace CDPL
             class CanonAtomCmpFunc
             {
 
-            public:
-                CanonAtomCmpFunc(const SMILESDataWriter& writer, const MolecularGraph& molgraph): 
+              public:
+                CanonAtomCmpFunc(const SMILESDataWriter& writer, const MolecularGraph& molgraph):
                     writer(writer), molGraph(molgraph) {}
 
                 bool operator()(const Atom*, const Atom*) const;
 
-            private:
+              private:
                 const SMILESDataWriter& writer;
                 const MolecularGraph&   molGraph;
             };
-    
+
             typedef std::vector<DFSTreeEdge*> EdgeList;
-            typedef EdgeList::iterator EdgeIterator;
+            typedef EdgeList::iterator        EdgeIterator;
 
             class DFSTreeEdge
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<DFSTreeEdge> SharedPointer;
 
                 DFSTreeEdge(SMILESDataWriter&);
 
-                void setBond(const Bond*);
+                void        setBond(const Bond*);
                 const Bond* getBond() const;
 
                 void setMolGraph(const MolecularGraph*);
@@ -159,12 +159,12 @@ namespace CDPL
                 const DFSTreeNode* getBegin() const;
                 const DFSTreeNode* getEnd() const;
 
-                void setRingClosureNumber(std::size_t);
+                void        setRingClosureNumber(std::size_t);
                 std::size_t getRingClosureNumber() const;
 
                 void writeBondSymbol(std::ostream&) const;
 
-            private:
+              private:
                 SMILESDataWriter&     writer;
                 const MolecularGraph* molGraph;
                 const Bond*           bond;
@@ -175,22 +175,22 @@ namespace CDPL
             class DFSTreeNode
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<DFSTreeNode> SharedPointer;
 
                 DFSTreeNode(SMILESDataWriter&);
 
                 void clear();
-                
+
                 void setAtom(const Atom*);
                 void setMolGraph(const MolecularGraph*);
 
                 const Atom* getAtom() const;
 
-                void setLexicalOrder(std::size_t);
+                void        setLexicalOrder(std::size_t);
                 std::size_t getLexicalOrder() const;
 
-                void setParentEdge(DFSTreeEdge*);
+                void               setParentEdge(DFSTreeEdge*);
                 const DFSTreeEdge* getParentEdge() const;
 
                 void addChildEdge(DFSTreeEdge*);
@@ -205,40 +205,40 @@ namespace CDPL
 
                 void generateSMILES(std::ostream&) const;
 
-            private:
-                void writeAtomString(std::ostream&) const;    
+              private:
+                void writeAtomString(std::ostream&) const;
                 void writeRingClosures(std::ostream&) const;
                 void writeChildNodes(std::ostream&) const;
 
-                void writeIsotope(std::ostream&, std::size_t) const;    
-                void writeAtomSymbol(std::ostream&, unsigned int) const;    
-                void writeAtomStereo(std::ostream&, int) const;    
-                void writeHCount(std::ostream&, std::size_t) const;    
-                void writeCharge(std::ostream&, long) const;    
-                void writeReactionAtomMappingID(std::ostream&, std::size_t) const;    
+                void writeIsotope(std::ostream&, std::size_t) const;
+                void writeAtomSymbol(std::ostream&, unsigned int) const;
+                void writeAtomStereo(std::ostream&, int) const;
+                void writeHCount(std::ostream&, std::size_t) const;
+                void writeCharge(std::ostream&, long) const;
+                void writeReactionAtomMappingID(std::ostream&, std::size_t) const;
                 void writeRingClosureNumber(std::ostream&, const DFSTreeEdge*) const;
 
                 int getStereoParity() const;
 
-                SMILESDataWriter&          writer;
-                const MolecularGraph*      molGraph;
-                const Atom*                atom;
-                DFSTreeEdge*               parentEdge;
-                EdgeList                   childEdges;
-                EdgeList                   ringClosureInEdges;
-                EdgeList                   ringClosureOutEdges;
-                std::size_t                lexicalOrder;
+                SMILESDataWriter&     writer;
+                const MolecularGraph* molGraph;
+                const Atom*           atom;
+                DFSTreeEdge*          parentEdge;
+                EdgeList              childEdges;
+                EdgeList              ringClosureInEdges;
+                EdgeList              ringClosureOutEdges;
+                std::size_t           lexicalOrder;
             };
 
-            typedef std::auto_ptr<BondDirectionCalculator> BondDirCalculatorPtr;
+            typedef std::auto_ptr<BondDirectionCalculator>      BondDirCalculatorPtr;
             typedef std::auto_ptr<CanonicalNumberingCalculator> CanonNumberingCalculatorPtr;
-            typedef std::auto_ptr<Fragment> FragmentPtr;
-            typedef std::vector<const Atom*> AtomList;
-            typedef std::vector<DFSTreeNode*> NodeList;
-            typedef std::vector<std::size_t> RingClosureNumberStack;
-            typedef std::vector<std::string> CanonSMILESList;
-            typedef Util::ObjectStack<DFSTreeNode> NodeCache;
-            typedef Util::ObjectStack<DFSTreeEdge> EdgeCache;
+            typedef std::auto_ptr<Fragment>                     FragmentPtr;
+            typedef std::vector<const Atom*>                    AtomList;
+            typedef std::vector<DFSTreeNode*>                   NodeList;
+            typedef std::vector<std::size_t>                    RingClosureNumberStack;
+            typedef std::vector<std::string>                    CanonSMILESList;
+            typedef Util::ObjectStack<DFSTreeNode>              NodeCache;
+            typedef Util::ObjectStack<DFSTreeEdge>              EdgeCache;
 
             const Base::DataIOBase&     ioBase;
             NodeCache                   nodeCache;
@@ -257,7 +257,7 @@ namespace CDPL
             RingClosureNumberStack      ringClosureNumberStack;
             std::size_t                 highestRingClosureNumber;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMILESDATAWRITER_HPP

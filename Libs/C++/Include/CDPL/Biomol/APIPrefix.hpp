@@ -30,14 +30,14 @@
 #define CDPL_BIOMOL_APIPREFIX_HPP
 
 #ifdef CDPL_BIOMOL_STATIC_LINK
-#  define CDPL_BIOMOL_API
+# define CDPL_BIOMOL_API
 #else // CDPL_BIOMOL_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_biomol_shared_EXPORTS
-#    define CDPL_BIOMOL_API CDPL_API_EXPORT
-#  else // cdpl_biomol_shared_EXPORTS
-#    define CDPL_BIOMOL_API CDPL_API_IMPORT
-#  endif // cdpl_biomol_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_biomol_shared_EXPORTS
+#  define CDPL_BIOMOL_API CDPL_API_EXPORT
+# else // cdpl_biomol_shared_EXPORTS
+#  define CDPL_BIOMOL_API CDPL_API_IMPORT
+# endif // cdpl_biomol_shared_EXPORTS
 #endif // CDPL_BIOMOL_STATIC_LINK
 
 /**

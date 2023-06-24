@@ -33,32 +33,32 @@
 #include "CDPL/Base/DataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
 
-    class MolecularGraph;
+        class MolecularGraph;
     }
 
     namespace Pharm
     {
 
-    /**
+        /**
      * \brief A handler for the output of molecular graph dara in the PSD-format of the <em>CDPL</em>.
      */
-    class CDPL_PHARM_API PSDMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
-    {
+        class CDPL_PHARM_API PSDMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
+        {
 
-      public:
-        const Base::DataFormat& getDataFormat() const;
+          public:
+            const Base::DataFormat& getDataFormat() const;
 
-        WriterType::SharedPointer createWriter(std::iostream& ios) const;
+            WriterType::SharedPointer createWriter(std::iostream& ios) const;
 
-        WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const;
-    };
-    }
-}
+            WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const;
+        };
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDMOLECULARGRAPHOUTPUTHANDLER_HPP

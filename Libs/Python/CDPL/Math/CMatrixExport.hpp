@@ -47,12 +47,13 @@ namespace CDPLPythonMath
     struct CMatrixExport
     {
 
-        CMatrixExport(const char* name) {
+        CMatrixExport(const char* name)
+        {
             using namespace boost;
             using namespace CDPLPythonMath;
 
             typedef typename MatrixType::ValueType ValueType;
-    
+
             python::class_<MatrixType>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const ValueType&>((python::arg("self"), python::arg("v"))))
@@ -68,6 +69,6 @@ namespace CDPLPythonMath
                 .def(MatrixVisitor<MatrixType>());
         }
     };
-}       
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_CMATRIXEXPORT_HPP

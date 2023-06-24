@@ -41,10 +41,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94TorsionParameterTable
@@ -58,13 +58,13 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<MMFF94TorsionParameterTable> SharedPointer;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 Entry();
- 
+
                 Entry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
                       unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
@@ -96,14 +96,16 @@ namespace CDPL
                 double       torParam2;
                 double       torParam3;
                 bool         initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94TorsionParameterTable();
 
             void addEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
@@ -124,7 +126,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -132,7 +134,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -151,7 +153,7 @@ namespace CDPL
             static SharedPointer defaultStatRefTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94TORSIONPARAMETERTABLE_HPP

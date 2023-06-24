@@ -46,7 +46,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -65,7 +65,7 @@ namespace CDPL
 
             typedef std::vector<AtomBondMapping*> ABMappingList;
 
-            typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
+            typedef MatchExpression<MolecularGraph>::SharedPointer       MolGraphMatchExprPtr;
             typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
             typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
 
@@ -82,8 +82,8 @@ namespace CDPL
              */
             typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
 
-            typedef std::function<const AtomMatchExprPtr&(const Atom&)> AtomMatchExpressionFunction;
-            typedef std::function<const BondMatchExprPtr&(const Bond&)> BondMatchExpressionFunction;
+            typedef std::function<const AtomMatchExprPtr&(const Atom&)>               AtomMatchExpressionFunction;
+            typedef std::function<const BondMatchExprPtr&(const Bond&)>               BondMatchExpressionFunction;
             typedef std::function<const MolGraphMatchExprPtr&(const MolecularGraph&)> MolecularGraphMatchExpressionFunction;
 
             /**
@@ -96,7 +96,7 @@ namespace CDPL
              * \param query A molecular graph that represents the query structure.
              */
             SubstructureSearch(const MolecularGraph& query);
-            
+
             /**
              * \brief Destructor.
              *
@@ -147,7 +147,7 @@ namespace CDPL
             bool findMappings(const MolecularGraph& target);
 
             void stopSearch();
-            
+
             /**
              * \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
              * \return The number of atom/bond mappings that were recorded in the last call to findMappings().
@@ -299,7 +299,7 @@ namespace CDPL
              */
             void clearBondMappingConstraints();
 
-        private:
+          private:
             SubstructureSearch(const SubstructureSearch&);
 
             SubstructureSearch& operator=(const SubstructureSearch&);
@@ -314,7 +314,7 @@ namespace CDPL
             bool mapAtoms();
 
             std::size_t nextQueryAtom() const;
-            bool nextTargetAtom(std::size_t, std::size_t&, std::size_t&) const;
+            bool        nextTargetAtom(std::size_t, std::size_t&, std::size_t&) const;
 
             bool atomMappingAllowed(std::size_t, std::size_t) const;
             bool checkAtomMappingConstraints(std::size_t, std::size_t) const;
@@ -335,10 +335,11 @@ namespace CDPL
             void freeAtomBondMapping();
 
             AtomBondMapping* createAtomBondMapping();
-        
-            class ABMappingMask {
 
-            public:
+            class ABMappingMask
+            {
+
+              public:
                 void initAtomMask(std::size_t);
                 void initBondMask(std::size_t);
 
@@ -353,22 +354,22 @@ namespace CDPL
                 bool operator<(const ABMappingMask&) const;
                 bool operator>(const ABMappingMask&) const;
 
-            private:
+              private:
                 Util::BitSet atomMask;
                 Util::BitSet bondMask;
             };
 
-            typedef std::vector<Util::BitSet> BitMatrix;
-            typedef std::vector<const Atom*> AtomMappingTable;
-            typedef std::vector<const Bond*> BondMappingTable;
-            typedef std::deque<std::size_t> AtomQueue;
-            typedef std::set<ABMappingMask> UniqueMappingList;
-            typedef std::vector<const Atom*> AtomList;
-            typedef std::vector<const Bond*> BondList;
-            typedef std::vector<AtomMatchExprPtr> AtomMatchExprTable;
-            typedef std::vector<BondMatchExprPtr> BondMatchExprTable;
+            typedef std::vector<Util::BitSet>                         BitMatrix;
+            typedef std::vector<const Atom*>                          AtomMappingTable;
+            typedef std::vector<const Bond*>                          BondMappingTable;
+            typedef std::deque<std::size_t>                           AtomQueue;
+            typedef std::set<ABMappingMask>                           UniqueMappingList;
+            typedef std::vector<const Atom*>                          AtomList;
+            typedef std::vector<const Bond*>                          BondList;
+            typedef std::vector<AtomMatchExprPtr>                     AtomMatchExprTable;
+            typedef std::vector<BondMatchExprPtr>                     BondMatchExprTable;
             typedef std::unordered_multimap<std::size_t, std::size_t> MappingConstraintMap;
-            typedef Util::ObjectStack<AtomBondMapping> MappingCache;
+            typedef Util::ObjectStack<AtomBondMapping>                MappingCache;
 
             const MolecularGraph*                 query;
             const MolecularGraph*                 target;
@@ -404,7 +405,7 @@ namespace CDPL
             std::size_t                           numMappedAtoms;
             std::size_t                           maxNumMappings;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SUBSTRUCTURESEARCH_HPP

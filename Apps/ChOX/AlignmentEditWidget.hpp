@@ -39,19 +39,19 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         AlignmentEditWidget(QWidget*, unsigned int&, bool, bool = true);
 
-    signals:
+      signals:
         void alignmentChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleAlignmentSelection(int);
 
-    private:
+      private:
         void init();
 
         unsigned int& alignment;
@@ -59,6 +59,6 @@ namespace ChOX
         bool          allowCenter;
         QComboBox*    alignmentComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_ALIGNMENTEDITWIDGET_HPP

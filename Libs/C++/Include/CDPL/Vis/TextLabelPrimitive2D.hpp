@@ -38,7 +38,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_VIS_API TextLabelPrimitive2D : public GraphicsPrimitive2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TextLabelPrimitive2D instances.
              */
@@ -93,7 +93,7 @@ namespace CDPL
              * \return The position of the text label.
              */
             const Math::Vector2D& getPosition() const;
-        
+
             /**
              * \brief Sets the pen defining the color of the text label.
              * \param pen The pen defining the color of the text label.
@@ -122,13 +122,13 @@ namespace CDPL
 
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics) const;
 
-        private:
+          private:
             Pen            pen;
             Font           font;
             Math::Vector2D position;
             std::string    text;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_TEXTLABELPRIMITIVE2D_HPP

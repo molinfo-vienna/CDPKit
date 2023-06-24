@@ -36,7 +36,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_CHEM_API BondConfigurationMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondConfigurationMatchExpression instances.
              */
@@ -91,8 +91,8 @@ namespace CDPL
              * \note If no valid query stereo descriptor was specified or \a query_bond is not identical to the query bond specified in the constrctor,
              *       the method will return \c true - irrespective of matching mode and actual target bond configuration!
              */
-            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
-                            const Bond& target_bond, const MolecularGraph& target_molgraph, 
+            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph,
+                            const Bond& target_bond, const MolecularGraph& target_molgraph,
                             const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
             /**
@@ -101,7 +101,7 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
-        private:
+          private:
             StereoDescriptor queryStereoDescr;
             const Bond*      queryBond;
             bool             queryDescrValid;
@@ -109,7 +109,7 @@ namespace CDPL
             bool             notMatch;
             bool             allowPartMaps;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDCONFIGURATIONMATCHEXPRESSION_HPP

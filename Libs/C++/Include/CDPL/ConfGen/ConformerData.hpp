@@ -35,10 +35,10 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API ConformerData : public Math::Vector3DArray
@@ -47,32 +47,37 @@ namespace CDPL
           public:
             typedef std::shared_ptr<ConformerData> SharedPointer;
 
-            ConformerData(): energy(0.0) {}
+            ConformerData():
+                energy(0.0) {}
 
             ConformerData(const Math::Vector3DArray& coords, double energy = 0.0):
                 Math::Vector3DArray(coords), energy(energy) {}
 
-            void setEnergy(double energy) {
+            void setEnergy(double energy)
+            {
                 this->energy = energy;
             }
 
-            double getEnergy() const {
+            double getEnergy() const
+            {
                 return energy;
             }
 
-            void swap(ConformerData& data) {
+            void swap(ConformerData& data)
+            {
                 Math::Vector3DArray::swap(data);
                 std::swap(energy, data.energy);
             }
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "ConformerData";
             }
 
             double energy;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONFORMERDATA_HPP

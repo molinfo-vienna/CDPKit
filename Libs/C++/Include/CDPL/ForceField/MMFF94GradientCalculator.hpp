@@ -39,17 +39,17 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         template <typename ValueType>
         class MMFF94GradientCalculator
         {
 
-        public:
+          public:
             MMFF94GradientCalculator();
 
             MMFF94GradientCalculator(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
@@ -88,7 +88,7 @@ namespace CDPL
 
             void resetFixedAtomMask();
 
-        private:
+          private:
             const MMFF94InteractionData* interactionData;
             std::size_t                  numAtoms;
             ValueType                    totalEnergy;
@@ -102,8 +102,8 @@ namespace CDPL
             unsigned int                 interactionTypes;
             Util::BitSet                 fixedAtomMask;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 
 // Implementation
@@ -112,14 +112,14 @@ namespace CDPL
 template <typename ValueType>
 CDPL::ForceField::MMFF94GradientCalculator<ValueType>::MMFF94GradientCalculator():
     interactionData(0), numAtoms(0), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
-    stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(), 
+    stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(),
     vanDerWaalsEnergy(), interactionTypes(InteractionType::ALL)
 {}
 
 template <typename ValueType>
 CDPL::ForceField::MMFF94GradientCalculator<ValueType>::MMFF94GradientCalculator(const MMFF94InteractionData& ia_data, std::size_t num_atoms):
     interactionData(&ia_data), numAtoms(num_atoms), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
-    stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(), 
+    stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(),
     vanDerWaalsEnergy(), interactionTypes(InteractionType::ALL)
 {}
 
@@ -139,7 +139,7 @@ template <typename ValueType>
 void CDPL::ForceField::MMFF94GradientCalculator<ValueType>::setup(const MMFF94InteractionData& ia_data, std::size_t num_atoms)
 {
     interactionData = &ia_data;
-    numAtoms = num_atoms;
+    numAtoms        = num_atoms;
 }
 
 template <typename ValueType>
@@ -147,14 +147,14 @@ template <typename CoordsArray>
 const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(const CoordsArray& coords)
 {
     if (!interactionData) {
-        totalEnergy = ValueType();
+        totalEnergy          = ValueType();
         bondStretchingEnergy = ValueType();
-        angleBendingEnergy = ValueType();
-        stretchBendEnergy = ValueType();
-        outOfPlaneEnergy = ValueType();
-        torsionEnergy = ValueType();
-        electrostaticEnergy = ValueType();
-        vanDerWaalsEnergy = ValueType();
+        angleBendingEnergy   = ValueType();
+        stretchBendEnergy    = ValueType();
+        outOfPlaneEnergy     = ValueType();
+        torsionEnergy        = ValueType();
+        electrostaticEnergy  = ValueType();
+        vanDerWaalsEnergy    = ValueType();
 
         return totalEnergy;
     }
@@ -163,66 +163,66 @@ const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator
 
     if (interactionTypes & InteractionType::BOND_STRETCHING) {
         bondStretchingEnergy = calcMMFF94BondStretchingEnergy<ValueType>(interactionData->getBondStretchingInteractions().getElementsBegin(),
-                                                                         interactionData->getBondStretchingInteractions().getElementsEnd(), 
+                                                                         interactionData->getBondStretchingInteractions().getElementsEnd(),
                                                                          coords);
         totalEnergy += bondStretchingEnergy;
 
-    } else 
+    } else
         bondStretchingEnergy = ValueType();
 
 
-    if (interactionTypes & InteractionType::ANGLE_BENDING){
+    if (interactionTypes & InteractionType::ANGLE_BENDING) {
         angleBendingEnergy = calcMMFF94AngleBendingEnergy<ValueType>(interactionData->getAngleBendingInteractions().getElementsBegin(),
-                                                                     interactionData->getAngleBendingInteractions().getElementsEnd(), 
+                                                                     interactionData->getAngleBendingInteractions().getElementsEnd(),
                                                                      coords);
         totalEnergy += angleBendingEnergy;
 
-    } else 
+    } else
         angleBendingEnergy = ValueType();
 
     if (interactionTypes & InteractionType::STRETCH_BEND) {
         stretchBendEnergy = calcMMFF94StretchBendEnergy<ValueType>(interactionData->getStretchBendInteractions().getElementsBegin(),
-                                                                   interactionData->getStretchBendInteractions().getElementsEnd(), 
+                                                                   interactionData->getStretchBendInteractions().getElementsEnd(),
                                                                    coords);
         totalEnergy += stretchBendEnergy;
 
-    } else 
+    } else
         stretchBendEnergy = ValueType();
 
     if (interactionTypes & InteractionType::OUT_OF_PLANE_BENDING) {
         outOfPlaneEnergy = calcMMFF94OutOfPlaneBendingEnergy<ValueType>(interactionData->getOutOfPlaneBendingInteractions().getElementsBegin(),
-                                                                        interactionData->getOutOfPlaneBendingInteractions().getElementsEnd(), 
+                                                                        interactionData->getOutOfPlaneBendingInteractions().getElementsEnd(),
                                                                         coords);
         totalEnergy += outOfPlaneEnergy;
 
-    } else 
+    } else
         outOfPlaneEnergy = ValueType();
 
     if (interactionTypes & InteractionType::TORSION) {
         torsionEnergy = calcMMFF94TorsionEnergy<ValueType>(interactionData->getTorsionInteractions().getElementsBegin(),
-                                                           interactionData->getTorsionInteractions().getElementsEnd(), 
+                                                           interactionData->getTorsionInteractions().getElementsEnd(),
                                                            coords);
         totalEnergy += torsionEnergy;
 
-    } else 
+    } else
         torsionEnergy = ValueType();
 
     if (interactionTypes & InteractionType::ELECTROSTATIC) {
         electrostaticEnergy = calcMMFF94ElectrostaticEnergy<ValueType>(interactionData->getElectrostaticInteractions().getElementsBegin(),
-                                                                       interactionData->getElectrostaticInteractions().getElementsEnd(), 
+                                                                       interactionData->getElectrostaticInteractions().getElementsEnd(),
                                                                        coords);
         totalEnergy += electrostaticEnergy;
 
-    } else 
+    } else
         electrostaticEnergy = ValueType();
 
     if (interactionTypes & InteractionType::VAN_DER_WAALS) {
         vanDerWaalsEnergy = calcMMFF94VanDerWaalsEnergy<ValueType>(interactionData->getVanDerWaalsInteractions().getElementsBegin(),
-                                                                   interactionData->getVanDerWaalsInteractions().getElementsEnd(), 
+                                                                   interactionData->getVanDerWaalsInteractions().getElementsEnd(),
                                                                    coords);
         totalEnergy += vanDerWaalsEnergy;
 
-    } else 
+    } else
         vanDerWaalsEnergy = ValueType();
 
     return totalEnergy;
@@ -235,14 +235,14 @@ const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator
     GradientVectorTraits<GradVector>::clear(grad, numAtoms);
 
     if (!interactionData) {
-        totalEnergy = ValueType();
+        totalEnergy          = ValueType();
         bondStretchingEnergy = ValueType();
-        angleBendingEnergy = ValueType();
-        stretchBendEnergy = ValueType();
-        outOfPlaneEnergy = ValueType();
-        torsionEnergy = ValueType();
-        electrostaticEnergy = ValueType();
-        vanDerWaalsEnergy = ValueType();
+        angleBendingEnergy   = ValueType();
+        stretchBendEnergy    = ValueType();
+        outOfPlaneEnergy     = ValueType();
+        torsionEnergy        = ValueType();
+        electrostaticEnergy  = ValueType();
+        vanDerWaalsEnergy    = ValueType();
 
         return totalEnergy;
     }
@@ -251,71 +251,71 @@ const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator
 
     if (interactionTypes & InteractionType::BOND_STRETCHING) {
         bondStretchingEnergy = calcMMFF94BondStretchingGradient<ValueType>(interactionData->getBondStretchingInteractions().getElementsBegin(),
-                                                                           interactionData->getBondStretchingInteractions().getElementsEnd(), 
+                                                                           interactionData->getBondStretchingInteractions().getElementsEnd(),
                                                                            coords, grad);
         totalEnergy += bondStretchingEnergy;
 
-    } else 
+    } else
         bondStretchingEnergy = ValueType();
 
-    if (interactionTypes & InteractionType::ANGLE_BENDING){
+    if (interactionTypes & InteractionType::ANGLE_BENDING) {
         angleBendingEnergy = calcMMFF94AngleBendingGradient<ValueType>(interactionData->getAngleBendingInteractions().getElementsBegin(),
-                                                                       interactionData->getAngleBendingInteractions().getElementsEnd(), 
+                                                                       interactionData->getAngleBendingInteractions().getElementsEnd(),
                                                                        coords, grad);
-         totalEnergy += angleBendingEnergy;
+        totalEnergy += angleBendingEnergy;
 
-    } else 
+    } else
         angleBendingEnergy = ValueType();
 
     if (interactionTypes & InteractionType::STRETCH_BEND) {
         stretchBendEnergy = calcMMFF94StretchBendGradient<ValueType>(interactionData->getStretchBendInteractions().getElementsBegin(),
-                                                                     interactionData->getStretchBendInteractions().getElementsEnd(), 
+                                                                     interactionData->getStretchBendInteractions().getElementsEnd(),
                                                                      coords, grad);
         totalEnergy += stretchBendEnergy;
 
-    } else 
+    } else
         stretchBendEnergy = ValueType();
 
     if (interactionTypes & InteractionType::OUT_OF_PLANE_BENDING) {
         outOfPlaneEnergy = calcMMFF94OutOfPlaneBendingGradient<ValueType>(interactionData->getOutOfPlaneBendingInteractions().getElementsBegin(),
-                                                                          interactionData->getOutOfPlaneBendingInteractions().getElementsEnd(), 
+                                                                          interactionData->getOutOfPlaneBendingInteractions().getElementsEnd(),
                                                                           coords, grad);
         totalEnergy += outOfPlaneEnergy;
 
-    } else 
+    } else
         outOfPlaneEnergy = ValueType();
 
     if (interactionTypes & InteractionType::TORSION) {
         torsionEnergy = calcMMFF94TorsionGradient<ValueType>(interactionData->getTorsionInteractions().getElementsBegin(),
-                                                             interactionData->getTorsionInteractions().getElementsEnd(), 
+                                                             interactionData->getTorsionInteractions().getElementsEnd(),
                                                              coords, grad);
         totalEnergy += torsionEnergy;
 
-    } else 
+    } else
         torsionEnergy = ValueType();
 
     if (interactionTypes & InteractionType::ELECTROSTATIC) {
         electrostaticEnergy = calcMMFF94ElectrostaticGradient<ValueType>(interactionData->getElectrostaticInteractions().getElementsBegin(),
-                                                                         interactionData->getElectrostaticInteractions().getElementsEnd(), 
+                                                                         interactionData->getElectrostaticInteractions().getElementsEnd(),
                                                                          coords, grad);
         totalEnergy += electrostaticEnergy;
 
-    } else 
+    } else
         electrostaticEnergy = ValueType();
 
     if (interactionTypes & InteractionType::VAN_DER_WAALS) {
         vanDerWaalsEnergy = calcMMFF94VanDerWaalsGradient<ValueType>(interactionData->getVanDerWaalsInteractions().getElementsBegin(),
-                                                                     interactionData->getVanDerWaalsInteractions().getElementsEnd(), 
+                                                                     interactionData->getVanDerWaalsInteractions().getElementsEnd(),
                                                                      coords, grad);
-           totalEnergy += vanDerWaalsEnergy;
+        totalEnergy += vanDerWaalsEnergy;
 
-    } else 
+    } else
         vanDerWaalsEnergy = ValueType();
 
-    if (!fixedAtomMask.empty()) 
+    if (!fixedAtomMask.empty())
         for (Util::BitSet::size_type i = fixedAtomMask.find_first(); i != Util::BitSet::npos; i = fixedAtomMask.find_next(i))
             grad[i].clear(ValueType());
-    
+
     return totalEnergy;
 }
 

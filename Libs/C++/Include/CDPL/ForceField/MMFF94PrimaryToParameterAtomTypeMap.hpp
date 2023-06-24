@@ -40,10 +40,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94PrimaryToParameterAtomTypeMap
@@ -57,7 +57,7 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
@@ -65,7 +65,7 @@ namespace CDPL
                 static constexpr std::size_t NUM_TYPES = 4;
 
                 Entry();
- 
+
                 Entry(unsigned int atom_type, unsigned int param_types[]);
 
                 unsigned int getAtomType() const;
@@ -78,14 +78,16 @@ namespace CDPL
                 unsigned int atomType;
                 unsigned int paramTypes[NUM_TYPES];
                 bool         initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94PrimaryToParameterAtomTypeMap();
 
             void addEntry(unsigned int atom_type, unsigned int param_types[]);
@@ -103,7 +105,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -111,7 +113,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -128,7 +130,7 @@ namespace CDPL
             static SharedPointer defaultMap;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94PRIMARYTOPARAMETERATOMTYPEMAP_HPP

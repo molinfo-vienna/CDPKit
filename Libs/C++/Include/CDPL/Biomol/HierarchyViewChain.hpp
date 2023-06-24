@@ -40,7 +40,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -57,7 +57,7 @@ namespace CDPL
             friend class HierarchyViewModel;
 
             typedef std::shared_ptr<HierarchyViewFragment> FragmentPtr;
-            typedef std::vector<FragmentPtr> FragmentList;
+            typedef std::vector<FragmentPtr>               FragmentList;
 
           public:
             typedef boost::indirect_iterator<FragmentList::const_iterator, const HierarchyViewFragment> ConstFragmentIterator;
@@ -75,7 +75,8 @@ namespace CDPL
             ConstFragmentIterator end() const;
 
           private:
-            HierarchyViewChain(): initFragments(true) {}
+            HierarchyViewChain():
+                initFragments(true) {}
 
             void initFragmentList() const;
             void visitAtom(const Chem::Atom& atom, HierarchyViewFragment& frag, Util::BitSet& vis_atoms) const;
@@ -83,7 +84,7 @@ namespace CDPL
             mutable FragmentList fragments;
             mutable bool         initFragments;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_HIERARCHYVIEWCHAIN_HPP

@@ -37,8 +37,8 @@ namespace CDPL
         void initAttributedGridProperties();
         void initAttributedGridPropertyDefaults();
         void initDataFormats();
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 namespace
 {
@@ -46,14 +46,15 @@ namespace
     struct CDPLGRAILInit
     {
 
-        CDPLGRAILInit() {
+        CDPLGRAILInit()
+        {
             CDPL::GRAIL::initAttributedGridProperties();
             CDPL::GRAIL::initAttributedGridPropertyDefaults();
             CDPL::GRAIL::initDataFormats();
         }
 
     } cdplGRAILInit;
-}
+} // namespace
 
 #endif // CDPL_GRAIL_STATIC_LINK
 

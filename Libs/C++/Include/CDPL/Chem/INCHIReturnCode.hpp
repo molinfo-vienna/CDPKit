@@ -32,7 +32,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -46,50 +46,50 @@ namespace CDPL
          */
         namespace INCHIReturnCode
         {
-            
+
             /**
              * \brief Not used by the \e %InChI C-library.
              */
-            extern CDPL_CHEM_API const int SKIP; 
+            extern CDPL_CHEM_API const int SKIP;
 
             /**
              * \brief Specifies that no structural data were provided for the \e %InChI generation (e.g. empty structure).
              */
-            extern CDPL_CHEM_API const int EOF_; 
+            extern CDPL_CHEM_API const int EOF_;
 
             /**
              * \brief Specifies that the operation was successful and no warnings have been issued.
              */
-            extern CDPL_CHEM_API const int OKAY;  
+            extern CDPL_CHEM_API const int OKAY;
 
             /**
              * \brief Specifies that the operation was successful but warnings have been issued.
              */
-            extern CDPL_CHEM_API const int WARNING;  
+            extern CDPL_CHEM_API const int WARNING;
 
             /**
              * \brief Specifies that the operation was not successful and no \e %InChI has been created.
              */
-            extern CDPL_CHEM_API const int ERROR; 
+            extern CDPL_CHEM_API const int ERROR;
 
             /**
              * \brief Specifies that the operation was not successful because some severe error occurred during processing
              *        (typically a memory allocation failure).
              */
-            extern CDPL_CHEM_API const int FATAL;  
+            extern CDPL_CHEM_API const int FATAL;
 
             /**
              * \brief Specifies that the operation was not successful because of an unknown program error.
              */
-            extern CDPL_CHEM_API const int UNKNOWN;  
+            extern CDPL_CHEM_API const int UNKNOWN;
 
             /**
              * \brief Specifies that a previous call to the \e %InChI generation function has not yet returned (should
              *        never happen).
              */
             extern CDPL_CHEM_API const int BUSY;
-          }
-    }
-}
+        } // namespace INCHIReturnCode
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_INCHIRETURNCODE_HPP

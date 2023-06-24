@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataWriter<CDFMolecularGraphWriter, Util::GZipOStream> CDFGZMolecularGraphWriter;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CDFGZMOLECULARGRAPHWRITER_HPP

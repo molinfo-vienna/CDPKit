@@ -41,24 +41,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         RecordSeparatorEditWidget(QWidget*, std::string&);
 
-    signals:
+      signals:
         void recordSeparatorChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleSeparatorSelection(int);
 
-    private:
+      private:
         void init();
 
         std::string& recordSeparator;
         QComboBox*   recordSeparatorComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_RECORDSEPARATOREDITWIDGET_HPP

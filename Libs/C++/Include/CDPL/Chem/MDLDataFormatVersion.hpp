@@ -46,19 +46,19 @@ namespace CDPL
             /**
              * \brief Specifies that the data format version is undefined.
              */
-            const unsigned int UNDEF    = 0;
+            const unsigned int UNDEF = 0;
 
             /**
              * \brief Specifies the data format version \e V2000.
              */
-            const unsigned int V2000    = 2000;
+            const unsigned int V2000 = 2000;
 
             /**
              * \brief Specifies the extended data format version \e V3000.
              */
-            const unsigned int V3000    = 3000;
-        }
-    }
-}
+            const unsigned int V3000 = 3000;
+        } // namespace MDLDataFormatVersion
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MDLDATAFORMATVERSION_HPP

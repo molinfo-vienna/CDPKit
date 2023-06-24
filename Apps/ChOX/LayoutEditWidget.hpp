@@ -39,20 +39,20 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         LayoutEditWidget(QWidget*, unsigned int&, unsigned int&);
 
-    signals:
+      signals:
         void layoutChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleStyleChange(int);
         void handleDirectionChange(int);
 
-    private:
+      private:
         void init();
 
         unsigned int& layoutStyle;
@@ -60,6 +60,6 @@ namespace ChOX
         QComboBox*    layoutStyleComboBox;
         QComboBox*    layoutDirComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_LAYOUTEDITWIDGET_HPP

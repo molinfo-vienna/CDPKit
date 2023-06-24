@@ -30,7 +30,7 @@
 #define CDPL_CONFGEN_FRAGMENTTYPE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -42,12 +42,12 @@ namespace CDPL
          */
         namespace FragmentType
         {
-                    
-            const unsigned int CHAIN                 = 0;
-            const unsigned int FLEXIBLE_RING_SYSTEM  = 1;
-            const unsigned int RIGID_RING_SYSTEM     = 2;
-        }
-    }
-}
+
+            const unsigned int CHAIN                = 0;
+            const unsigned int FLEXIBLE_RING_SYSTEM = 1;
+            const unsigned int RIGID_RING_SYSTEM    = 2;
+        } // namespace FragmentType
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTTYPE_HPP

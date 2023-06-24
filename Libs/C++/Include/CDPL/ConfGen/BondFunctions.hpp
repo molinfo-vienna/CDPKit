@@ -32,7 +32,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -40,16 +40,15 @@ namespace CDPL
 
         class Bond;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
-        CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
+        CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
 
         CDPL_CONFGEN_API bool isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_BONDFUNCTIONS_HPP
- 

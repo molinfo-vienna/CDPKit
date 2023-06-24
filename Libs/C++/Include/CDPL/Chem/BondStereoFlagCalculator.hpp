@@ -41,7 +41,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,10 +54,10 @@ namespace CDPL
         /**
          * \brief BondStereoFlagCalculator.
          */
-        class CDPL_CHEM_API BondStereoFlagCalculator 
+        class CDPL_CHEM_API BondStereoFlagCalculator
         {
 
-        public:
+          public:
             typedef std::function<const Math::Vector2D&(const Atom&)> Atom2DCoordinatesFunction;
 
             /**
@@ -100,7 +100,7 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::UIArray& flags);
 
-        private:
+          private:
             class StereoAtomInfo;
 
             BondStereoFlagCalculator(const BondStereoFlagCalculator&);
@@ -120,7 +120,7 @@ namespace CDPL
             class StereoAtomInfo
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<StereoAtomInfo> SharedPointer;
 
                 StereoAtomInfo(const MolecularGraph*, const Atom2DCoordinatesFunction& coords_func,
@@ -141,7 +141,7 @@ namespace CDPL
 
                 std::size_t getAtomIndex() const;
 
-            private:
+              private:
                 typedef std::pair<const Atom*, std::size_t> Ligand;
 
                 const MolecularGraph* molGraph;
@@ -149,32 +149,31 @@ namespace CDPL
                 unsigned int          configuration;
                 std::size_t           numBonds;
                 bool                  hasStereoNbrs;
-                double                configCalcTerms[4];         
-                bool                  bondEndFlags[4];         
+                double                configCalcTerms[4];
+                bool                  bondEndFlags[4];
                 Ligand                ligands[4];
                 Ligand                orderedLigands[4];
             };
 
-            typedef std::vector<StereoAtomInfo*> StereoAtomInfoList;
+            typedef std::vector<StereoAtomInfo*>               StereoAtomInfoList;
             typedef std::vector<StereoAtomInfo::SharedPointer> StereoAtomInfoPtrTable;
-            typedef std::vector<const Bond*> BondList;
+            typedef std::vector<const Bond*>                   BondList;
 
-            const MolecularGraph*      molGraph;
-            Atom2DCoordinatesFunction  coordsFunc;
-            Util::UIArray              currentStereoFlags;
-            StereoAtomInfoPtrTable     stereoAtomTable;
-            StereoAtomInfoList         stereoAtomList;
-            BondList                   eitherBondList;
-            Util::BitSet               stereoAtomMask;
-            Util::BitSet               configMatchMask;
-            Util::BitSet               stereoDBAtomMask;
-            Util::BitSet               ringBondMask;
-            Util::BitSet               singleBondMask;
-            std::size_t                numMismatchingCtrs;
-            std::size_t                minNumMismatchingCtrs;
+            const MolecularGraph*     molGraph;
+            Atom2DCoordinatesFunction coordsFunc;
+            Util::UIArray             currentStereoFlags;
+            StereoAtomInfoPtrTable    stereoAtomTable;
+            StereoAtomInfoList        stereoAtomList;
+            BondList                  eitherBondList;
+            Util::BitSet              stereoAtomMask;
+            Util::BitSet              configMatchMask;
+            Util::BitSet              stereoDBAtomMask;
+            Util::BitSet              ringBondMask;
+            Util::BitSet              singleBondMask;
+            std::size_t               numMismatchingCtrs;
+            std::size_t               minNumMismatchingCtrs;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDSTEREOFLAGCALCULATOR_HPP
- 

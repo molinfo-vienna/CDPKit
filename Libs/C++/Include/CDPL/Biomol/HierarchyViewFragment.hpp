@@ -33,26 +33,26 @@
 #include "CDPL/Biomol/HierarchyViewNode.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
     {
 
-    class HierarchyViewChain;
+        class HierarchyViewChain;
 
-    /**
+        /**
      * \brief HierarchyViewFragment.
      */
-    class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
-    {
+        class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
+        {
 
-        friend class HierarchyViewChain;
+            friend class HierarchyViewChain;
 
-      private:
-        HierarchyViewFragment() {}
-    };
-    }
-}
+          private:
+            HierarchyViewFragment() {}
+        };
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_HIERARCHYVIEWFRAGMENT_HPP

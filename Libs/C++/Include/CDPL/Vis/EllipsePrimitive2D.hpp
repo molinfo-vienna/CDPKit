@@ -38,7 +38,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_VIS_API EllipsePrimitive2D : public GraphicsPrimitive2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %EllipsePrimitive2D instances.
              */
@@ -59,16 +59,17 @@ namespace CDPL
             /**
              * \brief Constructs an undefined ellipse primitive.
              */
-            EllipsePrimitive2D(): width(0.0), height(0.0) {}
+            EllipsePrimitive2D():
+                width(0.0), height(0.0) {}
 
             /**
              * \brief Constructs an undefined ellipse primitive.
              */
-            EllipsePrimitive2D(const Math::Vector2D& pos, double width, double height): 
+            EllipsePrimitive2D(const Math::Vector2D& pos, double width, double height):
                 position(pos), width(width), height(height) {}
 
             void render(Renderer2D& renderer) const;
-        
+
             /**
              * \brief Sets the pen defining the color, width, line style, cap style and join style of the ellipse outline.
              * \param pen The pen defining the color, width, line style, cap style and join style of the ellipse's outline.
@@ -133,14 +134,14 @@ namespace CDPL
 
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-        private:
+          private:
             Math::Vector2D position;
             double         width;
             double         height;
             Pen            pen;
             Brush          brush;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_ELLIPSEPRIMITIVE2D_HPP

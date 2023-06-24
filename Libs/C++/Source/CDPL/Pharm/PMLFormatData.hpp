@@ -37,8 +37,8 @@ namespace CDPL
         namespace PML
         {
 
-            const std::string ELEM_CONTAINER_HEADER  = "<ElementContainer activeResult=\"-1\"><ContainerPharmacophores>";
-            const std::string ELEM_CONTAINER_FOOTER  = "</ContainerPharmacophores></ElementContainer>";
+            const std::string ELEM_CONTAINER_HEADER = "<ElementContainer activeResult=\"-1\"><ContainerPharmacophores>";
+            const std::string ELEM_CONTAINER_FOOTER = "</ContainerPharmacophores></ElementContainer>";
 
             const std::string ALIGNMENT_ELEM_TAG = "alignmentElement";
             const std::string PHARMACOPHORE_TAG  = "pharmacophore";
@@ -68,9 +68,9 @@ namespace CDPL
             const std::string COORDS_Z_ATTRIBUTE         = "z3";
             const std::string PHARM_TYPE_ATTRIBUTE       = "pharmacophoreType";
 
-            const std::string DEFAULT_FLAG_CODE          = "111000000";
-            const std::string PHARM_TYPE_LIGAND_SCOUT    = "LIGAND_SCOUT";
-            const std::string VOLUME_TYPE_EXCLUSION      = "exclusion";
+            const std::string DEFAULT_FLAG_CODE       = "111000000";
+            const std::string PHARM_TYPE_LIGAND_SCOUT = "LIGAND_SCOUT";
+            const std::string VOLUME_TYPE_EXCLUSION   = "exclusion";
 
             const std::string HYDROPHOBIC_FEATURE_NAME     = "H";
             const std::string AROMATIC_FEATURE_NAME        = "AR";
@@ -80,8 +80,8 @@ namespace CDPL
             const std::string H_BOND_ACCEPTOR_FEATURE_NAME = "HBA";
             const std::string X_BOND_DONOR_FEATURE_NAME    = "XBD";
             const std::string X_BOND_ACCEPTOR_FEATURE_NAME = "XBA";
-        }
-    }
-}
+        } // namespace PML
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PMLFORMATDATA_HPP

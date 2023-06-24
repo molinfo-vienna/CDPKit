@@ -34,16 +34,18 @@ namespace CDPLPythonBase
 {
 
     template <typename SourceType>
-    struct GenericAnyFromPythonConverter 
+    struct GenericAnyFromPythonConverter
     {
 
-        GenericAnyFromPythonConverter() {
+        GenericAnyFromPythonConverter()
+        {
             using namespace boost;
 
             python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
         }
 
-        static void* convertible(PyObject* obj_ptr) {
+        static void* convertible(PyObject* obj_ptr)
+        {
             using namespace boost;
 
             if (!obj_ptr)
@@ -55,7 +57,8 @@ namespace CDPLPythonBase
             return obj_ptr;
         }
 
-        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+        static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data)
+        {
             using namespace boost;
             using namespace CDPL;
 
@@ -66,6 +69,6 @@ namespace CDPLPythonBase
             data->convertible = storage;
         }
     };
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_GENERICANYFROMPYTHONCONVERTER_HPP

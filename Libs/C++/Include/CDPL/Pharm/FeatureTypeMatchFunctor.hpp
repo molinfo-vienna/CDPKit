@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -56,7 +56,7 @@ namespace CDPL
              */
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURETYPEMATCHFUNCTOR_HPP

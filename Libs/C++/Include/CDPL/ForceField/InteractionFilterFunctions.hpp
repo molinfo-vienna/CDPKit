@@ -33,7 +33,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,7 +42,7 @@ namespace CDPL
         class Atom;
     }
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction2;
@@ -50,7 +50,7 @@ namespace CDPL
         typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction3;
 
         typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction4;
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP

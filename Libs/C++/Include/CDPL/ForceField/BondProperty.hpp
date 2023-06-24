@@ -52,7 +52,7 @@ namespace CDPL
 
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE_INDEX;
         }
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_BONDPROPERTY_HPP

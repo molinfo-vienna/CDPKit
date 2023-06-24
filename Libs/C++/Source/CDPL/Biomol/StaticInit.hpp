@@ -41,8 +41,8 @@ namespace CDPL
         void initControlParameters();
         void initControlParameterDefaults();
         void initDataFormats();
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 namespace
 {
@@ -50,7 +50,8 @@ namespace
     struct CDPLBiomolInit
     {
 
-        CDPLBiomolInit() {
+        CDPLBiomolInit()
+        {
             CDPL::Biomol::initAtomProperties();
             CDPL::Biomol::initAtomPropertyDefaults();
             CDPL::Biomol::initMolecularGraphProperties();
@@ -61,7 +62,7 @@ namespace
         }
 
     } cdplBiomolInit;
-}
+} // namespace
 
 #endif // CDPL_BIOMOL_STATIC_LINK
 

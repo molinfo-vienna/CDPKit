@@ -29,7 +29,7 @@
 #include <cstddef>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,14 +50,15 @@ namespace CDPL
         class JMEDataWriter
         {
 
-        public:
-            JMEDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            JMEDataWriter(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool writeReaction(std::ostream&, const Reaction&);
 
             bool writeMolGraph(std::ostream&, const MolecularGraph&, bool = true);
 
-        private:
+          private:
             void init(std::ostream&);
 
             bool writeComponent(std::ostream&, const MolecularGraph&);
@@ -73,14 +74,14 @@ namespace CDPL
 
             void writeBond(std::ostream&, const MolecularGraph&, const Bond&) const;
 
-            const Base::DataIOBase&  ioBase;
-            bool                     strictErrorChecking;
-            bool                     separateComponents;
-            bool                     bondMemberSwapStereoFix;
-            std::size_t              coordsDim;
-            const void*              writtenAromConstraint;
+            const Base::DataIOBase& ioBase;
+            bool                    strictErrorChecking;
+            bool                    separateComponents;
+            bool                    bondMemberSwapStereoFix;
+            std::size_t             coordsDim;
+            const void*             writtenAromConstraint;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_JMEDATAWRITER_HPP

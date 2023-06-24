@@ -46,24 +46,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         ViewSettingsEditWidget(QWidget*, Settings&);
 
         bool haveChangedSettings() const;
 
-    signals:
+      signals:
         void updateGUI();
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    private slots:
+      private slots:
         void handleSettingsChange();
         void handleSettingsChange(bool);
 
-    private:
+      private:
         void init();
 
         Settings&                    settings;
@@ -88,6 +88,6 @@ namespace ChOX
         QCheckBox*                   showRecordNamesCheckBox;
         bool                         haveChanges;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_VIEWSETTINGSEDITWIDGET_HPP

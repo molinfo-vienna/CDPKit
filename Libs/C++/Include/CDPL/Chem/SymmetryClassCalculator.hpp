@@ -39,7 +39,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,15 +51,15 @@ namespace CDPL
          * \brief SymmetryClassCalculator.
          * \see [\ref TOPSY]
          */
-        class CDPL_CHEM_API SymmetryClassCalculator 
+        class CDPL_CHEM_API SymmetryClassCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Specifies the default set of atomic properties considered in the perception
              *        of topological symmetry classes.
              */
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT |
                 AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::FORMAL_CHARGE;
 
@@ -67,7 +67,7 @@ namespace CDPL
              * \brief Specifies the default set of bond properties considered in the perception
              *        of topological symmetry classes.
              */
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY;
 
             /**
@@ -156,7 +156,7 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& class_ids);
 
-        private:
+          private:
             SymmetryClassCalculator(const SymmetryClassCalculator&);
 
             SymmetryClassCalculator& operator=(const SymmetryClassCalculator&);
@@ -175,7 +175,7 @@ namespace CDPL
             class AtomNode
             {
 
-            public:
+              public:
                 void clear();
 
                 void addNbrNode(AtomNode*);
@@ -191,7 +191,7 @@ namespace CDPL
                 void update();
 
                 std::size_t getSymClassID() const;
-                void setSymClassID(std::uint64_t class_id);
+                void        setSymClassID(std::uint64_t class_id);
 
                 struct SymClassCmpFunc
                 {
@@ -205,9 +205,9 @@ namespace CDPL
                     bool operator()(const AtomNode*, const AtomNode*) const;
                 };
 
-            private:
+              private:
                 typedef std::vector<std::uint64_t> SVMNumberList;
- 
+
                 std::uint64_t symClassID;
                 std::uint64_t nextSymClassID;
                 std::uint64_t nbrSymClassIDProd;
@@ -219,16 +219,15 @@ namespace CDPL
 
             typedef Util::ObjectStack<AtomNode> NodeCache;
 
-            NodeCache      nodeCache;
-            unsigned int   atomPropertyFlags;
-            unsigned int   bondPropertyFlags;
-            bool           hComplete;
-            NodeList       hAtomNodes;
-            NodeList       atomNodes;
-            NodeList       sortedAtomNodes;
+            NodeCache    nodeCache;
+            unsigned int atomPropertyFlags;
+            unsigned int bondPropertyFlags;
+            bool         hComplete;
+            NodeList     hAtomNodes;
+            NodeList     atomNodes;
+            NodeList     sortedAtomNodes;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SYMMETRYCLASSCALCULATOR_HPP
- 

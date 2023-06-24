@@ -40,7 +40,7 @@
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,9 +48,9 @@ namespace CDPL
 
         class MolecularGraph;
         class Bond;
-    }
-    
-    namespace ForceField 
+    } // namespace Chem
+
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94BondStretchingInteractionParameterizer
@@ -59,51 +59,51 @@ namespace CDPL
           public:
             typedef std::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
 
-             MMFF94BondStretchingInteractionParameterizer();
+            MMFF94BondStretchingInteractionParameterizer();
 
-             MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-                                                          MMFF94BondStretchingInteractionData& ia_data, 
-                                                          bool strict);
+            MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph&          molgraph,
+                                                         MMFF94BondStretchingInteractionData& ia_data,
+                                                         bool                                 strict);
 
-             void setFilterFunction(const InteractionFilterFunction2& func); 
+            void setFilterFunction(const InteractionFilterFunction2& func);
 
-             void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
-             void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
+            void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
-             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
+            void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
-             void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
+            void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
-             void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
+            void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
 
-             void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+            void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionData& ia_data, bool strict);
+            void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionData& ia_data, bool strict);
 
-             void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-                                unsigned int& bond_type_idx, double& force_const, double& ref_length, bool strict) const;
+            void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond,
+                               unsigned int& bond_type_idx, double& force_const, double& ref_length, bool strict) const;
 
           private:
-             typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
+            typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
 
-             void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-                                unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, 
-                                double& force_const, double& ref_length) const;
+            void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond,
+                               unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type,
+                               double& force_const, double& ref_length) const;
 
-             double calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-                                            const AtomTypePropEntry& type1_prop_entry,
-                                            const AtomTypePropEntry& type2_prop_entry) const;
+            double calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond,
+                                           const AtomTypePropEntry& type1_prop_entry,
+                                           const AtomTypePropEntry& type2_prop_entry) const;
 
-             InteractionFilterFunction2                            filterFunc;
-             MMFF94NumericAtomTypeFunction                         atomTypeFunc;    
-             MMFF94BondTypeIndexFunction                           bondTypeIdxFunc;    
-             MMFF94RingSetFunction                                 aromRingSetFunc;
-             MMFF94BondStretchingParameterTable::SharedPointer     paramTable;
-             MMFF94BondStretchingRuleParameterTable::SharedPointer ruleParamTable;
-             MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
-        };            
-    }
-}
+            InteractionFilterFunction2                            filterFunc;
+            MMFF94NumericAtomTypeFunction                         atomTypeFunc;
+            MMFF94BondTypeIndexFunction                           bondTypeIdxFunc;
+            MMFF94RingSetFunction                                 aromRingSetFunc;
+            MMFF94BondStretchingParameterTable::SharedPointer     paramTable;
+            MMFF94BondStretchingRuleParameterTable::SharedPointer ruleParamTable;
+            MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP

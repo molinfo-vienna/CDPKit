@@ -30,14 +30,14 @@
 #define CDPL_CHEM_APIPREFIX_HPP
 
 #ifdef CDPL_CHEM_STATIC_LINK
-#  define CDPL_CHEM_API
+# define CDPL_CHEM_API
 #else // CDPL_CHEM_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_chem_shared_EXPORTS
-#    define CDPL_CHEM_API CDPL_API_EXPORT
-#  else // cdpl_chem_shared_EXPORTS
-#    define CDPL_CHEM_API CDPL_API_IMPORT
-#  endif // cdpl_chem_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_chem_shared_EXPORTS
+#  define CDPL_CHEM_API CDPL_API_EXPORT
+# else // cdpl_chem_shared_EXPORTS
+#  define CDPL_CHEM_API CDPL_API_IMPORT
+# endif // cdpl_chem_shared_EXPORTS
 #endif // CDPL_CHEM_STATIC_LINK
 
 /**

@@ -46,68 +46,79 @@ namespace CDPL
 
             typedef Range<S> SelfType;
 
-        public:
+          public:
             typedef S SizeType;
 
-            Range(): start(0), stop(0) {}
+            Range():
+                start(0), stop(0) {}
 
-            Range(SizeType start, SizeType stop): start(start), stop(stop) {
+            Range(SizeType start, SizeType stop):
+                start(start), stop(stop)
+            {
                 CDPL_MATH_CHECK(start <= stop, "Invalid range specification", Base::RangeError);
             }
 
-            SizeType operator()(SizeType i) const {
+            SizeType operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return (start + i);
             }
 
-            SizeType getStart() const {
+            SizeType getStart() const
+            {
                 return start;
             }
 
-            SizeType getStop() const {
+            SizeType getStop() const
+            {
                 return stop;
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return (stop - start);
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (stop == start);
             }
-            
-            bool operator==(const Range& r) const {
+
+            bool operator==(const Range& r) const
+            {
                 return (start == r.start && stop == r.stop);
             }
-            
-            bool operator!=(const Range& r) const {
+
+            bool operator!=(const Range& r) const
+            {
                 return !this->operator==(r);
             }
 
-            void swap(Range& r) {
+            void swap(Range& r)
+            {
                 if (this == &r)
                     return;
 
                 std::swap(start, r.start);
                 std::swap(stop, r.stop);
             }
-    
-            friend void swap(Range& r1, Range& r2) {
+
+            friend void swap(Range& r1, Range& r2)
+            {
                 r1.swap(r2);
             }
 
-        private:
+          private:
             SizeType start;
             SizeType stop;
         };
 
-        inline
-        Range<std::size_t> 
+        inline Range<std::size_t>
         range(std::size_t start, std::size_t stop)
         {
             return Range<std::size_t>(start, stop);
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_RANGE_HPP

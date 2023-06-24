@@ -39,7 +39,7 @@
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,12 +56,12 @@ namespace CDPL
         class CDPL_CHEM_API HashCodeCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Specifies the default set of atomic properties considered in the generation
              *        of initial atom hash codes by HashCodeCalculator::DefAtomHashSeedFunction.
              */
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
                 AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
                 AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY;
@@ -70,7 +70,7 @@ namespace CDPL
              * \brief Specifies the default set of bond properties considered in the generation
              *        of initial bond hash codes by HashCodeCalculator::DefBondHashSeedFunction.
              */
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
                 BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION;
 
@@ -80,7 +80,7 @@ namespace CDPL
             class CDPL_CHEM_API DefAtomHashSeedFunctor
             {
 
-            public:
+              public:
                 /**
                  * \brief Constructs the atom hash seed functor object for the specified set of atomic properties.
                  *
@@ -96,9 +96,9 @@ namespace CDPL
                  * \param calculator The \c %HashCodeCalculator instance that 'owns' the functor object.
                  * \param flags Specifies the set of considered atomic properties.
                  */
-                DefAtomHashSeedFunctor(const HashCodeCalculator& calculator, unsigned int flags = DEF_ATOM_PROPERTY_FLAGS): 
+                DefAtomHashSeedFunctor(const HashCodeCalculator& calculator, unsigned int flags = DEF_ATOM_PROPERTY_FLAGS):
                     calculator(calculator), flags(flags) {}
- 
+
                 /**
                  * \brief Generates an initial hash code value (seed) for the specified atom.
                  *
@@ -110,7 +110,7 @@ namespace CDPL
                  */
                 std::uint64_t operator()(const Atom& atom) const;
 
-            private:
+              private:
                 std::uint64_t getAtomTypeHashSeed(const Atom&) const;
                 std::uint64_t getAtomIsotopeHashSeed(const Atom&) const;
                 std::uint64_t getAtomChargeHashSeed(const Atom&) const;
@@ -128,7 +128,7 @@ namespace CDPL
             class CDPL_CHEM_API DefBondHashSeedFunctor
             {
 
-            public:
+              public:
                 /**
                  * \brief Constructs the bond hash seed functor object for the specified set of bond properties.
                  *
@@ -141,7 +141,8 @@ namespace CDPL
                  *
                  * \param flags Specifies the set of considered bond properties.
                  */
-                DefBondHashSeedFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS): flags(flags) {}
+                DefBondHashSeedFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS):
+                    flags(flags) {}
 
                 /**
                  * \brief Generates an initial hash code value (seed) for the specified bond.
@@ -154,7 +155,7 @@ namespace CDPL
                  */
                 std::uint64_t operator()(const Bond& bond) const;
 
-            private:
+              private:
                 std::uint64_t getBondTypeHashSeed(const Bond&) const;
                 std::uint64_t getBondConfigHashSeed(const Bond&) const;
                 std::uint64_t getBondTopologyHashSeed(const Bond&) const;
@@ -246,7 +247,7 @@ namespace CDPL
              */
             std::uint64_t getResult() const;
 
-        private:
+          private:
             HashCodeCalculator(const HashCodeCalculator&);
 
             HashCodeCalculator& operator=(const HashCodeCalculator&);
@@ -256,7 +257,7 @@ namespace CDPL
             void calcAtomHashCodes();
             void calcBondHashCodes();
             void calcSHAHashCode();
-    
+
             void perceiveGlobalStereoFeatures();
 
             void perceiveGlobalStereoReferenceAtoms();
@@ -266,24 +267,24 @@ namespace CDPL
             void perceiveGlobalStereoReferenceBond(const Bond&);
 
             typedef std::vector<std::uint64_t> UInt64Array;
-             typedef std::vector<std::size_t> IndexList;
+            typedef std::vector<std::size_t>   IndexList;
 
-            const MolecularGraph*    molGraph;
-            AtomHashSeedFunction     atomHashSeedFunc;
-            BondHashSeedFunction     bondHashSeedFunc;
-            UInt64Array              atomHashCodes;
-            UInt64Array              bondHashCodes;
-            UInt64Array              tmpHashCodes1;
-            UInt64Array              tmpHashCodes2;
-            UInt64Array              shaInput;
-            IndexList                globalStereoAtoms;
-            IndexList                globalStereoBonds;
-            IndexList                globalStereoReferenceAtoms;
-            IndexList                globalStereoReferenceBonds;
-            bool                     incGlobalStereoFeatures;
-            std::uint8_t             shaHashCode[20];
-        }; 
-    }
-}
+            const MolecularGraph* molGraph;
+            AtomHashSeedFunction  atomHashSeedFunc;
+            BondHashSeedFunction  bondHashSeedFunc;
+            UInt64Array           atomHashCodes;
+            UInt64Array           bondHashCodes;
+            UInt64Array           tmpHashCodes1;
+            UInt64Array           tmpHashCodes2;
+            UInt64Array           shaInput;
+            IndexList             globalStereoAtoms;
+            IndexList             globalStereoBonds;
+            IndexList             globalStereoReferenceAtoms;
+            IndexList             globalStereoReferenceBonds;
+            bool                  incGlobalStereoFeatures;
+            std::uint8_t          shaHashCode[20];
+        };
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_HASHCODECALCULATOR_HPP

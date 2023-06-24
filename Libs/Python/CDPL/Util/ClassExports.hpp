@@ -34,6 +34,6 @@ namespace CDPLPythonUtil
     void exportBronKerboschAlgorithm();
     void exportDGCoordinatesGenerator();
     void exportCompressionStreams();
-}
+} // namespace CDPLPythonUtil
 
 #endif // CDPL_PYTHON_UTIL_CLASSEXPORTS_HPP

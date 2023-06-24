@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataInputHandler<RXNReactionReader, DataFormat::RXN> RXNReactionInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RXNREACTIONINPUTHANDLER_HPP

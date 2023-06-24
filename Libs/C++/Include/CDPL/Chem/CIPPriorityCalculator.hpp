@@ -38,7 +38,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,10 +51,10 @@ namespace CDPL
          * \brief CIPPriorityCalculator.
          * \see [\ref TCIP]
          */
-        class CDPL_CHEM_API CIPPriorityCalculator 
+        class CDPL_CHEM_API CIPPriorityCalculator
         {
 
-        public:
+          public:
             typedef std::function<std::size_t(const Atom&)> ImplicitHydrogenCountFunction;
 
             /**
@@ -85,7 +85,7 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
 
-        private:
+          private:
             class AtomNode;
 
             CIPPriorityCalculator(const CIPPriorityCalculator&);
@@ -102,7 +102,7 @@ namespace CDPL
             class AtomNode
             {
 
-            public:
+              public:
                 void clear();
 
                 void addNbrNode(AtomNode*);
@@ -134,12 +134,12 @@ namespace CDPL
                     bool operator()(const AtomNode*, const AtomNode*) const;
                 };
 
-            private:
-                std::size_t    priority;
-                std::size_t    newPriority;
-                NodeList       nbrNodes;
+              private:
+                std::size_t priority;
+                std::size_t newPriority;
+                NodeList    nbrNodes;
             };
-         
+
             typedef Util::ObjectStack<AtomNode> NodeCache;
 
             NodeCache                     nodeCache;
@@ -147,8 +147,7 @@ namespace CDPL
             NodeList                      atomNodes;
             ImplicitHydrogenCountFunction implHCountFunc;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CIPPRIORITYCALCULATOR_HPP
- 

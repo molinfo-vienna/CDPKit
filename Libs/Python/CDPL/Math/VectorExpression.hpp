@@ -40,53 +40,54 @@ namespace CDPLPythonMath
     class ConstVectorExpression : public CDPL::Math::VectorExpression<ConstVectorExpression<T> >
     {
 
-    public:
-        typedef ConstVectorExpression SelfType;
-        typedef T ValueType;
-        typedef const T Reference;
-        typedef const T ConstReference;
-        typedef typename std::size_t SizeType;
-        typedef typename std::ptrdiff_t DifferenceType;
-        typedef const SelfType& ClosureType;
-        typedef const SelfType& ConstClosureType;
+      public:
+        typedef ConstVectorExpression         SelfType;
+        typedef T                             ValueType;
+        typedef const T                       Reference;
+        typedef const T                       ConstReference;
+        typedef typename std::size_t          SizeType;
+        typedef typename std::ptrdiff_t       DifferenceType;
+        typedef const SelfType&               ClosureType;
+        typedef const SelfType&               ConstClosureType;
         typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-        typedef std::shared_ptr<SelfType> SharedPointer;
+        typedef std::shared_ptr<SelfType>     SharedPointer;
 
-        virtual ~ConstVectorExpression() {} 
+        virtual ~ConstVectorExpression() {}
 
         virtual ConstReference operator[](SizeType i) const = 0;
         virtual ConstReference operator()(SizeType i) const = 0;
 
         virtual SizeType getSize() const = 0;
 
-        virtual bool isEmpty() const {
+        virtual bool isEmpty() const
+        {
             return (getSize() == 0);
         }
 
-    protected:
-        ConstVectorExpression() {} 
+      protected:
+        ConstVectorExpression() {}
     };
 
     template <typename T>
-    class VectorExpression : 
-        public ConstVectorExpression<T>, public CDPL::Math::VectorContainer<VectorExpression<T> >
+    class VectorExpression : public ConstVectorExpression<T>,
+                             public CDPL::Math::VectorContainer<VectorExpression<T> >
     {
 
-    public:
-        typedef VectorExpression SelfType;
-        typedef ConstVectorExpression<T> ConstExpressionType;
-        typedef T ValueType;
-        typedef T& Reference;
-        typedef const T ConstReference;
-        typedef typename ConstExpressionType::SizeType SizeType;
+      public:
+        typedef VectorExpression                             SelfType;
+        typedef ConstVectorExpression<T>                     ConstExpressionType;
+        typedef T                                            ValueType;
+        typedef T&                                           Reference;
+        typedef const T                                      ConstReference;
+        typedef typename ConstExpressionType::SizeType       SizeType;
         typedef typename ConstExpressionType::DifferenceType DifferenceType;
-        typedef SelfType& ClosureType;
-        typedef const SelfType& ConstClosureType;
-        typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-        typedef std::shared_ptr<SelfType> SharedPointer;
-        typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
+        typedef SelfType&                                    ClosureType;
+        typedef const SelfType&                              ConstClosureType;
+        typedef CDPL::Math::Vector<ValueType>                VectorTemporaryType;
+        typedef std::shared_ptr<SelfType>                    SharedPointer;
+        typedef typename ConstExpressionType::SharedPointer  ConstExpressionPointer;
 
-        virtual ~VectorExpression() {} 
+        virtual ~VectorExpression() {}
 
         virtual Reference operator[](SizeType i) = 0;
         virtual Reference operator()(SizeType i) = 0;
@@ -99,16 +100,19 @@ namespace CDPLPythonMath
         virtual VectorExpression& operator*=(const ValueType& t) = 0;
         virtual VectorExpression& operator/=(const ValueType& t) = 0;
 
-        void swap(VectorExpression& e) {
+        void swap(VectorExpression& e)
+        {
             CDPL::Math::vectorSwap<VectorExpression, VectorExpression>(*this, e);
         }
 
-        VectorExpression& operator=(const VectorExpression& e) {
+        VectorExpression& operator=(const VectorExpression& e)
+        {
             return operator=(static_cast<const ConstExpressionType&>(e));
         }
 
         template <typename T1>
-        VectorExpression& operator=(ConstVectorExpression<T1>& e) {
+        VectorExpression& operator=(ConstVectorExpression<T1>& e)
+        {
             using namespace CDPL;
             using namespace Math;
 
@@ -118,7 +122,8 @@ namespace CDPLPythonMath
         }
 
         template <typename E>
-        VectorExpression& assign(const CDPL::Math::VectorExpression<E>& e) {
+        VectorExpression& assign(const CDPL::Math::VectorExpression<E>& e)
+        {
             using namespace CDPL;
             using namespace Math;
 
@@ -126,9 +131,9 @@ namespace CDPLPythonMath
             return *this;
         }
 
-    protected:
-        VectorExpression() {} 
+      protected:
+        VectorExpression() {}
     };
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_VECTOREXPRESSION_HPP

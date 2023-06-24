@@ -37,7 +37,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,10 +51,10 @@ namespace CDPL
          * \brief BondDirectionCalculator.
          * \see [\ref SMILES]
          */
-        class CDPL_CHEM_API BondDirectionCalculator 
+        class CDPL_CHEM_API BondDirectionCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Construcst the \c %BondDirectionCalculator instance.
              */
@@ -102,7 +102,7 @@ namespace CDPL
              * \brief Returns the minimum ring size that is required for ring double bonds to be considered in
              *        the performed bond direction calculations.
              * \return The minimum required ring size.
-             */            
+             */
             std::size_t getRingSizeLimit() const;
 
             /**
@@ -117,18 +117,19 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::UIArray& dirs);
 
-        private:
+          private:
             class StereoBond;
 
             class StereoBondOrderingFunction
             {
 
-            public:
-                StereoBondOrderingFunction(const BondDirectionCalculator& gen): calculator(gen) {}
+              public:
+                StereoBondOrderingFunction(const BondDirectionCalculator& gen):
+                    calculator(gen) {}
 
                 bool operator()(const StereoBond*, const StereoBond*) const;
 
-            private:
+              private:
                 const BondDirectionCalculator& calculator;
             };
 
@@ -145,13 +146,13 @@ namespace CDPL
             class StereoBond
             {
 
-            public:
+              public:
                 StereoBond(const Bond&);
 
                 const Bond& getBond() const;
 
                 unsigned int getConfiguration() const;
-                void setConfiguration(unsigned int);
+                void         setConfiguration(unsigned int);
 
                 void setConfigRefBondIndex(std::size_t, std::size_t);
 
@@ -166,7 +167,7 @@ namespace CDPL
 
                 bool configMatches(const Util::UIArray&) const;
 
-            private:
+              private:
                 const Bond*  bond;
                 std::size_t  nbrBondCounts[2];
                 std::size_t  nbrAtomIndices[2][2];
@@ -174,24 +175,23 @@ namespace CDPL
                 unsigned int configuration;
             };
 
-            typedef std::vector<StereoBond> StereoBondArray;
+            typedef std::vector<StereoBond>  StereoBondArray;
             typedef std::vector<StereoBond*> StereoBondPtrArray;
 
-            const MolecularGraph*  molGraph;
-            bool                   incRingBonds;
-            std::size_t            minRingSize;
-            StereoBondArray        stereoBonds;
-            StereoBondPtrArray     orderedStereoBonds;
-            StereoBondPtrArray     atomStereoBondTable;
-            Util::UIArray          workingDirs;
-            Util::BitSet           configMatchMask;
-            std::size_t            numMismatches;
-            std::size_t            minNumMismatches;
-            std::size_t            numDirBonds;
-            std::size_t            minNumDirBonds;
+            const MolecularGraph* molGraph;
+            bool                  incRingBonds;
+            std::size_t           minRingSize;
+            StereoBondArray       stereoBonds;
+            StereoBondPtrArray    orderedStereoBonds;
+            StereoBondPtrArray    atomStereoBondTable;
+            Util::UIArray         workingDirs;
+            Util::BitSet          configMatchMask;
+            std::size_t           numMismatches;
+            std::size_t           minNumMismatches;
+            std::size_t           numDirBonds;
+            std::size_t           minNumDirBonds;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDDIRECTIONCALCULATOR_HPP
- 

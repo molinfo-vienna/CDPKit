@@ -34,7 +34,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -60,7 +60,7 @@ namespace CDPL
              * \param func1 The first interaction constraint function.
              * \param func2 The second interaction constraint function.
              */
-            InteractionConstraintConnector(bool and_expr, const ConstraintFunction& func1, const ConstraintFunction& func2): 
+            InteractionConstraintConnector(bool and_expr, const ConstraintFunction& func1, const ConstraintFunction& func2):
                 andExpr(and_expr), function1(func1), function2(func2) {}
 
             bool operator()(const Feature& ftr1, const Feature& ftr2) const;
@@ -70,7 +70,7 @@ namespace CDPL
             ConstraintFunction function1;
             ConstraintFunction function2;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP

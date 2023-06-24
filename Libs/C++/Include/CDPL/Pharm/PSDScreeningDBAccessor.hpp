@@ -35,12 +35,12 @@
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
     {
-    
+
         class PSDScreeningDBAccessorImpl;
 
         /**
@@ -78,11 +78,11 @@ namespace CDPL
 
             std::size_t getNumPharmacophores(std::size_t mol_idx) const;
 
-            void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const; 
+            void getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite = true) const;
 
-            void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const; 
+            void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite = true) const;
 
-            void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const; 
+            void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite = true) const;
 
             std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
 
@@ -90,7 +90,7 @@ namespace CDPL
 
             const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
 
-            const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const; 
+            const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const;
 
           private:
             typedef std::auto_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
@@ -98,10 +98,10 @@ namespace CDPL
             PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
 
             PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
-        
+
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDSCREENINGDBACCESSOR_HPP

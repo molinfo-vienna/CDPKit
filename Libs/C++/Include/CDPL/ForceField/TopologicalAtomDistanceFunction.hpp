@@ -34,7 +34,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,16 +42,16 @@ namespace CDPL
 
         class Atom;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         /**
          * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
          */
         typedef std::function<std::size_t(const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&)> TopologicalAtomDistanceFunction;
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTION_HPP

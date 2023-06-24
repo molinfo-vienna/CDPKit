@@ -31,7 +31,7 @@ namespace CDPLPythonShape
 
     void exportGaussianShape();
     void exportGaussianShapeSet();
-    
+
     void exportGaussianShapeGenerator();
 
     void exportGaussianShapeFunction();
@@ -53,6 +53,6 @@ namespace CDPLPythonShape
     void exportFastGaussianShapeAlignment();
 
     void exportFunctionWrappers();
-}
+} // namespace CDPLPythonShape
 
 #endif // CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP

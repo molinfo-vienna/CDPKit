@@ -33,10 +33,10 @@
 #include "CDPL/Chem/Entity3D.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Pharm 
+    namespace Pharm
     {
 
         class Pharmacophore;
@@ -59,13 +59,13 @@ namespace CDPL
              * \return A non-\c const reference to the parent pharmacophore.
              */
             virtual Pharmacophore& getPharmacophore() = 0;
-    
+
             /**
              * \brief Returns the index of the feature in its parent pharmacophore.
              * \return The zero-based index of the feature.
              */
             virtual std::size_t getIndex() const = 0;
-        
+
             /**
              * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
              * \param feature The feature whose properties get copied.
@@ -79,7 +79,7 @@ namespace CDPL
              */
             virtual ~Feature() {}
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURE_HPP

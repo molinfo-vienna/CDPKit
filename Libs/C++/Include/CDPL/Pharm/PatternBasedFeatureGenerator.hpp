@@ -43,7 +43,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -60,9 +60,9 @@ namespace CDPL
           public:
             typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
 
-            enum PatternAtomLabelFlag 
+            enum PatternAtomLabelFlag
             {
-            
+
                 FEATURE_ATOM_FLAG   = 0x01,
                 POS_REF_ATOM_FLAG   = 0x02,
                 GEOM_REF_ATOM1_FLAG = 0x04,
@@ -73,7 +73,7 @@ namespace CDPL
              * \brief Constructs the \c %PatternBasedFeatureGenerator instance.
              */
             PatternBasedFeatureGenerator();
-            
+
             /**
              * \brief Constructs a copy of the \c %PatternBasedFeatureGenerator instance \a gen.
              * \param gen The \c %PatternBasedFeatureGenerator instance to copy.
@@ -93,7 +93,7 @@ namespace CDPL
              * \param geom The value of the geometry property of the feature.
              * \param length The value of the length property of vector features.
              */
-            void addIncludePattern(const Chem::MolecularGraph::SharedPointer& pattern, unsigned int type, 
+            void addIncludePattern(const Chem::MolecularGraph::SharedPointer& pattern, unsigned int type,
                                    double tol, unsigned int geom, double length = 1.0);
 
             /**
@@ -101,12 +101,12 @@ namespace CDPL
              * \param pattern The substructure search pattern of the feature.
              */
             void addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern);
-        
+
             /**
              * \brief Clears the current set of include patterns.
              */
             void clearIncludePatterns();
-        
+
             /**
              * \brief Clears the current set of exclude patterns.
              */
@@ -134,8 +134,8 @@ namespace CDPL
             typedef std::vector<const Chem::Atom*> AtomList;
 
             double calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
-            bool calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
-            bool calcCentroid(const AtomList&, Math::Vector3D&) const;
+            bool   calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
+            bool   calcCentroid(const AtomList&, Math::Vector3D&) const;
 
             virtual void addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) {}
 
@@ -146,10 +146,12 @@ namespace CDPL
             struct IncludePattern
             {
 
-                IncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type, 
-                               double tol, unsigned int geom, double length): 
-                    subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)), featureType(type),
-                    featureTol(tol), featureGeom(geom), vectorLength(length) {
+                IncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type,
+                               double tol, unsigned int geom, double length):
+                    subQuery(substruct),
+                    subSearch(new Chem::SubstructureSearch(*substruct)), featureType(type),
+                    featureTol(tol), featureGeom(geom), vectorLength(length)
+                {
 
                     subSearch->uniqueMappingsOnly(false);
                 }
@@ -165,8 +167,9 @@ namespace CDPL
             struct ExcludePattern
             {
 
-                ExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct): 
-                    subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)) {
+                ExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct):
+                    subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct))
+                {
 
                     subSearch->uniqueMappingsOnly(true);
                 }
@@ -175,17 +178,17 @@ namespace CDPL
                 Chem::SubstructureSearch::SharedPointer subSearch;
             };
 
-            typedef std::vector<IncludePattern> IncludePatternList;
-            typedef std::vector<ExcludePattern> ExcludePatternList;
+            typedef std::vector<IncludePattern>     IncludePatternList;
+            typedef std::vector<ExcludePattern>     ExcludePatternList;
             typedef Util::ObjectStack<Util::BitSet> BitSetCache;
-            typedef std::vector<Util::BitSet*> BitSetList;
+            typedef std::vector<Util::BitSet*>      BitSetList;
 
             void init(const Chem::MolecularGraph& molgraph);
 
             void getExcludeMatches();
 
             void addFeature(const Chem::AtomBondMapping&, const IncludePattern&, Pharmacophore&);
-        
+
             void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
             bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
@@ -202,8 +205,7 @@ namespace CDPL
             Math::Vector3D              svdW;
             BitSetCache                 bitSetCache;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PATTERNBASEDFEATUREGENERATOR_HPP
- 

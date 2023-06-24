@@ -33,12 +33,12 @@
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         /**
          * \brief KeteneYnolTautomerizationRule.
          */
@@ -48,7 +48,7 @@ namespace CDPL
           public:
             KeteneYnolTautomerization();
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_KETENEYNOLTAUTOMERIZATION_HPP

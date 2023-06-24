@@ -28,7 +28,7 @@
 
 namespace CDPLPythonGRAIL
 {
-    
+
     void registerFromPythonConverters();
 }
 

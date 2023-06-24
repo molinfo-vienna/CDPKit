@@ -52,13 +52,15 @@ namespace CDPLPythonMath
 
         friend class boost::python::def_visitor_access;
 
-        typedef typename QuaternionType::ValueType ValueType;
+        typedef typename QuaternionType::ValueType                           ValueType;
         typedef typename ConstQuaternionExpression<ValueType>::SharedPointer ExpressionPointer;
 
-        ConstQuaternionVisitor(const char* arg_name = "q"): argName(arg_name) {}
+        ConstQuaternionVisitor(const char* arg_name = "q"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -92,12 +94,13 @@ namespace CDPLPythonMath
                 ;
         }
 #ifdef HAVE_NUMPY
-        static boost::python::object toArray(const QuaternionType& quat) {
+        static boost::python::object toArray(const QuaternionType& quat)
+        {
             using namespace boost;
 
             if (NumPy::available()) {
-                npy_intp shape[] = { 4 };
-                PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename QuaternionType::ValueType>::Value);
+                npy_intp  shape[] = {4};
+                PyObject* array   = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename QuaternionType::ValueType>::Value);
 
                 if (array) {
                     typename QuaternionType::ValueType* data = static_cast<typename QuaternionType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
@@ -111,26 +114,31 @@ namespace CDPLPythonMath
                 }
             }
 
-            return python::object();            
+            return python::object();
         }
-#endif    
-        static ValueType getC1(const QuaternionType& quat) {
+#endif
+        static ValueType getC1(const QuaternionType& quat)
+        {
             return quat.getC1();
         }
 
-        static ValueType getC2(const QuaternionType& quat) {
+        static ValueType getC2(const QuaternionType& quat)
+        {
             return quat.getC2();
         }
 
-        static ValueType getC3(const QuaternionType& quat) {
+        static ValueType getC3(const QuaternionType& quat)
+        {
             return quat.getC3();
         }
 
-        static ValueType getC4(const QuaternionType& quat) {
+        static ValueType getC4(const QuaternionType& quat)
+        {
             return quat.getC4();
         }
 
-        static std::string toString(const QuaternionType& quat) {
+        static std::string toString(const QuaternionType& quat)
+        {
             std::ostringstream oss;
 
             oss << quat;
@@ -138,76 +146,93 @@ namespace CDPLPythonMath
             return oss.str();
         }
 
-        static bool eqOperator(const QuaternionType& quat1, const QuaternionType& quat2) {
+        static bool eqOperator(const QuaternionType& quat1, const QuaternionType& quat2)
+        {
             return (quat1 == quat2);
         }
 
-        static bool neOperator(const QuaternionType& quat1, const QuaternionType& quat2) {
+        static bool neOperator(const QuaternionType& quat1, const QuaternionType& quat2)
+        {
             return (quat1 != quat2);
         }
 
-        static bool eqOperatorExpr(const QuaternionType& quat1, const ExpressionPointer& quat2_expr) {
+        static bool eqOperatorExpr(const QuaternionType& quat1, const ExpressionPointer& quat2_expr)
+        {
             return (quat1 == *quat2_expr);
         }
 
-        static bool neOperatorExpr(const QuaternionType& quat1, const ExpressionPointer& quat2_expr) {
+        static bool neOperatorExpr(const QuaternionType& quat1, const ExpressionPointer& quat2_expr)
+        {
             return (quat1 != *quat2_expr);
         }
 
         static void posOperator(const QuaternionType& quat) {}
 
-        static ExpressionPointer negOperator(const boost::python::object& quat) {
+        static ExpressionPointer negOperator(const boost::python::object& quat)
+        {
             return makeConstQuaternionExpressionAdapter(-boost::python::extract<const QuaternionType&>(quat)(), quat);
         }
-    
-        static ExpressionPointer addOperator(const boost::python::object& quat, const ValueType& value) {
+
+        static ExpressionPointer addOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat)() + value, quat);
         }
-    
-        static ExpressionPointer raddOperator(const boost::python::object& quat, const ValueType& value) {
+
+        static ExpressionPointer raddOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(value + boost::python::extract<const QuaternionType&>(quat)(), quat);
         }
 
-        static ExpressionPointer addOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr) {
+        static ExpressionPointer addOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat1)() + *quat2_expr,
                                                         std::make_pair(quat1, quat2_expr));
         }
 
-        static ExpressionPointer subOperator(const boost::python::object& quat, const ValueType& value) {
+        static ExpressionPointer subOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat)() - value, quat);
         }
-    
-        static ExpressionPointer rsubOperator(const boost::python::object& quat, const ValueType& value) {
+
+        static ExpressionPointer rsubOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(value - boost::python::extract<const QuaternionType&>(quat)(), quat);
         }
-    
-        static ExpressionPointer subOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr) {
+
+        static ExpressionPointer subOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat1)() - *quat2_expr,
                                                         std::make_pair(quat1, quat2_expr));
         }
 
-        static ExpressionPointer mulOperator(const boost::python::object& quat, const ValueType& value) {
+        static ExpressionPointer mulOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat)() * value, quat);
         }
-            
-        static ExpressionPointer rmulOperator(const boost::python::object& quat, const ValueType& value) {
+
+        static ExpressionPointer rmulOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(value * boost::python::extract<const QuaternionType&>(quat)(), quat);
         }
-        
-        static ExpressionPointer mulOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr) {
+
+        static ExpressionPointer mulOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat1)() * *quat2_expr,
                                                         std::make_pair(quat1, quat2_expr));
         }
 
-        static ExpressionPointer divOperator(const boost::python::object& quat, const ValueType& value) {
+        static ExpressionPointer divOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat)() / value, quat);
         }
 
-        static ExpressionPointer rdivOperator(const boost::python::object& quat, const ValueType& value) {
+        static ExpressionPointer rdivOperator(const boost::python::object& quat, const ValueType& value)
+        {
             return makeConstQuaternionExpressionAdapter(value / boost::python::extract<const QuaternionType&>(quat)(), quat);
         }
-        
-        static ExpressionPointer divOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr) {
+
+        static ExpressionPointer divOperatorExpr(const boost::python::object& quat1, const ExpressionPointer& quat2_expr)
+        {
             return makeConstQuaternionExpressionAdapter(boost::python::extract<const QuaternionType&>(quat1)() / *quat2_expr,
                                                         std::make_pair(quat1, quat2_expr));
         }
@@ -216,16 +241,17 @@ namespace CDPLPythonMath
     };
 
     template <typename QuaternionType>
-    struct QuaternionAssignAndSwapVisitor : 
-        public boost::python::def_visitor<QuaternionAssignAndSwapVisitor<QuaternionType> >
+    struct QuaternionAssignAndSwapVisitor : public boost::python::def_visitor<QuaternionAssignAndSwapVisitor<QuaternionType> >
     {
 
         friend class boost::python::def_visitor_access;
 
-        QuaternionAssignAndSwapVisitor(const char* arg_name = "q"): argName(arg_name) {}
+        QuaternionAssignAndSwapVisitor(const char* arg_name = "q"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -233,11 +259,13 @@ namespace CDPLPythonMath
                 .def("swap", &swap, (python::arg("self"), python::arg(argName)));
         }
 
-        static void assign(QuaternionType& quat1, const QuaternionType& quat2) {
+        static void assign(QuaternionType& quat1, const QuaternionType& quat2)
+        {
             quat1 = quat2;
         }
 
-        static void swap(QuaternionType& quat1, QuaternionType& quat2) {
+        static void swap(QuaternionType& quat1, QuaternionType& quat2)
+        {
             quat1.swap(quat2);
         }
 
@@ -250,13 +278,15 @@ namespace CDPLPythonMath
 
         friend class boost::python::def_visitor_access;
 
-        typedef typename QuaternionType::ValueType ValueType;
+        typedef typename QuaternionType::ValueType                           ValueType;
         typedef typename ConstQuaternionExpression<ValueType>::SharedPointer ExpressionPointer;
 
-        QuaternionVisitor(const char* arg_name = "q"): argName(arg_name) {}
+        QuaternionVisitor(const char* arg_name = "q"):
+            argName(arg_name) {}
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl
@@ -264,34 +294,32 @@ namespace CDPLPythonMath
                 .def("setC2", &setC2, (python::arg("self"), python::arg("v")))
                 .def("setC3", &setC3, (python::arg("self"), python::arg("v")))
                 .def("setC4", &setC4, (python::arg("self"), python::arg("v")))
-                .def("set", &QuaternionType::set, (python::arg("self"), python::arg("c1") = ValueType(),
-                                                   python::arg("c2") = ValueType(), python::arg("c3") = ValueType(),
-                                                   python::arg("c4") = ValueType()))
-                .def("__iadd__", &iaddOperator, (python::arg("self"), python::arg("t")), 
+                .def("set", &QuaternionType::set, (python::arg("self"), python::arg("c1") = ValueType(), python::arg("c2") = ValueType(), python::arg("c3") = ValueType(), python::arg("c4") = ValueType()))
+                .def("__iadd__", &iaddOperator, (python::arg("self"), python::arg("t")),
                      python::return_self<>())
-                .def("__isub__", &isubOperator, (python::arg("self"), python::arg("t")), 
+                .def("__isub__", &isubOperator, (python::arg("self"), python::arg("t")),
                      python::return_self<>())
-                .def("__imul__", &imulOperator, 
+                .def("__imul__", &imulOperator,
                      (python::arg("self"), python::arg("t")), python::return_self<>())
-                .def("__idiv__", &idivOperator, 
+                .def("__idiv__", &idivOperator,
                      (python::arg("self"), python::arg("t")), python::return_self<>())
-                .def("__itruediv__", &idivOperator, 
+                .def("__itruediv__", &idivOperator,
                      (python::arg("self"), python::arg("t")), python::return_self<>())
-                .def("__iadd__", &iaddOperatorQuat, (python::arg("self"), python::arg(argName)), 
+                .def("__iadd__", &iaddOperatorQuat, (python::arg("self"), python::arg(argName)),
                      python::return_self<>())
-                .def("__isub__", &isubOperatorQuat, (python::arg("self"), python::arg(argName)), 
+                .def("__isub__", &isubOperatorQuat, (python::arg("self"), python::arg(argName)),
                      python::return_self<>())
-                .def("__imul__", &imulOperatorQuat, 
+                .def("__imul__", &imulOperatorQuat,
                      (python::arg("self"), python::arg(argName)), python::return_self<>())
-                .def("__idiv__", &idivOperatorQuat, 
+                .def("__idiv__", &idivOperatorQuat,
                      (python::arg("self"), python::arg(argName)), python::return_self<>())
-                .def("__itruediv__", &idivOperatorQuat, 
+                .def("__itruediv__", &idivOperatorQuat,
                      (python::arg("self"), python::arg(argName)), python::return_self<>())
                 .def("__iadd__", &iaddOperatorQuatExpr, (python::arg("self"), python::arg("q")),
                      python::return_self<>())
                 .def("__isub__", &isubOperatorQuatExpr, (python::arg("self"), python::arg("q")),
                      python::return_self<>())
-                .def("__imul__", &imulOperatorQuatExpr, (python::arg("self"), python::arg("q")), 
+                .def("__imul__", &imulOperatorQuatExpr, (python::arg("self"), python::arg("q")),
                      python::return_self<>())
                 .def("__idiv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("q")),
                      python::return_self<>())
@@ -299,67 +327,83 @@ namespace CDPLPythonMath
                      python::return_self<>());
         }
 
-        static void setC1(QuaternionType& quat, const ValueType& value) {
+        static void setC1(QuaternionType& quat, const ValueType& value)
+        {
             quat.getC1() = value;
         }
 
-        static void setC2(QuaternionType& quat, const ValueType& value) {
+        static void setC2(QuaternionType& quat, const ValueType& value)
+        {
             quat.getC2() = value;
         }
 
-        static void setC3(QuaternionType& quat, const ValueType& value) {
+        static void setC3(QuaternionType& quat, const ValueType& value)
+        {
             quat.getC3() = value;
         }
 
-        static void setC4(QuaternionType& quat, const ValueType& value) {
+        static void setC4(QuaternionType& quat, const ValueType& value)
+        {
             quat.getC4() = value;
         }
 
-        static void iaddOperator(QuaternionType& quat1, const ValueType& value) {
+        static void iaddOperator(QuaternionType& quat1, const ValueType& value)
+        {
             quat1 += value;
         }
 
-        static void isubOperator(QuaternionType& quat1, const ValueType& value) {
+        static void isubOperator(QuaternionType& quat1, const ValueType& value)
+        {
             quat1 -= value;
         }
 
-        static void imulOperator(QuaternionType& quat1, const ValueType& value) {
+        static void imulOperator(QuaternionType& quat1, const ValueType& value)
+        {
             quat1 *= value;
         }
 
-        static void idivOperator(QuaternionType& quat1, const ValueType& value) {
+        static void idivOperator(QuaternionType& quat1, const ValueType& value)
+        {
             quat1 /= value;
         }
 
-        static void iaddOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2) {
+        static void iaddOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2)
+        {
             quat1 += quat2;
         }
 
-        static void isubOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2) {
+        static void isubOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2)
+        {
             quat1 -= quat2;
         }
 
-        static void imulOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2) {
+        static void imulOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2)
+        {
             quat1 *= quat2;
         }
 
-        static void idivOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2) {
+        static void idivOperatorQuat(QuaternionType& quat1, const QuaternionType& quat2)
+        {
             quat1 /= quat2;
         }
 
-        static void iaddOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr) {
+        static void iaddOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr)
+        {
             quat1 += *quat2_expr;
         }
 
-        static void isubOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr) {
+        static void isubOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr)
+        {
             quat1 -= *quat2_expr;
         }
 
-        static void imulOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr) {
+        static void imulOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr)
+        {
             quat1 *= *quat2_expr;
         }
 
-        static void idivOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr) {
+        static void idivOperatorQuatExpr(QuaternionType& quat1, const ExpressionPointer& quat2_expr)
+        {
             quat1 /= *quat2_expr;
         }
 
@@ -374,15 +418,17 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename QuaternionType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
             cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
         }
 
-        static void assign(QuaternionType& quat, PyArrayObject* arr) {
+        static void assign(QuaternionType& quat, PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
@@ -411,22 +457,24 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename QuaternionType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl.def("__init__", python::make_constructor(&construct, 
+            cl.def("__init__", python::make_constructor(&construct,
                                                         python::default_call_policies(),
                                                         (python::arg("a"))));
         }
 
-        static QuaternionType* construct(PyArrayObject* arr) {
+        static QuaternionType* construct(PyArrayObject* arr)
+        {
             using namespace CDPL;
             using namespace boost;
 
             std::auto_ptr<QuaternionType> quat_ptr(new QuaternionType());
-        
+
             if (!NumPy::checkSize(arr, 4)) {
                 PyErr_SetString(PyExc_ValueError, "Quaternion: NumPy.NDArray size error");
 
@@ -455,9 +503,10 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename QuaternionType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {}
+        void visit(ClassType& cl) const
+        {}
     };
 
     template <typename QuaternionType>
@@ -467,11 +516,12 @@ namespace CDPLPythonMath
         friend class boost::python::def_visitor_access;
 
         typedef typename QuaternionType::ValueType ValueType;
-    
+
         template <typename ClassType>
-        void visit(ClassType& cl) const {}
+        void visit(ClassType& cl) const
+        {}
     };
 #endif // HAVE_NUMPY
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_QUATERNIONVISITOR_HPP

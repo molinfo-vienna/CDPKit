@@ -30,7 +30,7 @@
 #include "CDFRegularGridDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -39,8 +39,8 @@ namespace CDPL
         class CDFRegularGridSetDataReader : private CDFRegularGridDataReader
         {
 
-        public:
-            CDFRegularGridSetDataReader(const Base::ControlParameterContainer& ctrl_params): 
+          public:
+            CDFRegularGridSetDataReader(const Base::ControlParameterContainer& ctrl_params):
                 CDFRegularGridDataReader(ctrl_params) {}
 
             bool readGridSet(std::istream& is, DRegularGridSet& grid_set);
@@ -51,10 +51,10 @@ namespace CDPL
 
             bool hasMoreData(std::istream& is);
 
-        private:
+          private:
             bool doReadGridSet(DRegularGridSet& grid_set, Internal::ByteBuffer& bbuf) const;
         };
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFREGULARGRIDSETDATAREADER_HPP

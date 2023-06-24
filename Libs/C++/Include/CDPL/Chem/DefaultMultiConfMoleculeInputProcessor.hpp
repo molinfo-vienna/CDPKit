@@ -35,7 +35,7 @@
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -47,30 +47,30 @@ namespace CDPL
         class CDPL_CHEM_API DefaultMultiConfMoleculeInputProcessor : public MultiConfMoleculeInputProcessor
         {
 
-        public:
+          public:
             typedef std::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
-            
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
                 AtomPropertyFlag::FORMAL_CHARGE;
 
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER;
 
             DefaultMultiConfMoleculeInputProcessor(bool comp_names = false, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
-            
+
             bool init(MolecularGraph& tgt_molgraph) const;
 
             bool isConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
 
             bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const;
 
-        private:
-            bool compareNames;
+          private:
+            bool         compareNames;
             unsigned int atomFlags;
             unsigned int bondFlags;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_DEFAULTMULTICONFMOLECULEINPUTPROCESSOR_HPP

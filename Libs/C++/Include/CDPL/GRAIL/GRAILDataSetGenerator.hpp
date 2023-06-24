@@ -47,12 +47,12 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace GRAIL
     {
-    
+
         /**
          * \brief GRAILDataSetGenerator.
          * \see [\ref GRAIL]
@@ -63,17 +63,17 @@ namespace CDPL
           public:
             typedef std::shared_ptr<GRAILDataSetGenerator> SharedPointer;
 
-            typedef FeatureInteractionScoreGridCalculator::ScoringFunction ScoringFunction;
+            typedef FeatureInteractionScoreGridCalculator::ScoringFunction          ScoringFunction;
             typedef FeatureInteractionScoreGridCalculator::ScoreCombinationFunction ScoreCombinationFunction;
 
             typedef std::function<void(CDPL::Pharm::Pharmacophore&)> PharmacophoreProcessingFunction;
-            
+
             static constexpr double DEF_GRID_STEP_SIZE = 0.5;
-            
+
             GRAILDataSetGenerator();
 
             virtual ~GRAILDataSetGenerator() {}
-        
+
             void enableInteraction(unsigned int ftr_type, unsigned int tgt_ftr_type, bool enable);
 
             bool isInteractionEnabled(unsigned int ftr_type, unsigned int tgt_ftr_type) const;
@@ -85,13 +85,13 @@ namespace CDPL
             const ScoringFunction& getScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type) const;
 
             void removeScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type);
-            
+
             void setGridName(unsigned int ftr_type, unsigned int tgt_ftr_type, const std::string& name);
 
             const std::string& getGridName(unsigned int ftr_type, unsigned int tgt_ftr_type) const;
 
             void removeGridName(unsigned int ftr_type, unsigned int tgt_ftr_type);
-            
+
             void setScoreCombinationFunction(const ScoreCombinationFunction& func);
 
             const ScoreCombinationFunction& getScoreCombinationFunction() const;
@@ -111,11 +111,12 @@ namespace CDPL
             void setEnvironmentAtomDensityGridName(const std::string& name);
 
             const std::string& getEnvironmentAtomDensityGridName() const;
-            
+
             const Math::Matrix4D& getGridTransform() const;
 
             template <typename T>
-            void setGridTransform(const T& xform) {
+            void setGridTransform(const T& xform)
+            {
                 gridTransform = xform;
             }
 
@@ -124,7 +125,7 @@ namespace CDPL
             void setGridStepSize(double size);
 
             std::size_t getGridXSize() const;
-            
+
             void setGridXSize(std::size_t size);
 
             std::size_t getGridYSize() const;
@@ -136,7 +137,7 @@ namespace CDPL
             void setGridZSize(std::size_t size);
 
             void setGridParamsForBoundingBox(const Math::Vector3D& bbox_min, const Math::Vector3D& bbox_max, double step_size = DEF_GRID_STEP_SIZE);
-            
+
             const Pharm::DefaultPharmacophoreGenerator& getPharmacophoreGenerator() const;
 
             Pharm::DefaultPharmacophoreGenerator& getPharmacophoreGenerator();
@@ -144,24 +145,24 @@ namespace CDPL
             void setPharmacophoreProcessingFunction(const PharmacophoreProcessingFunction& func);
 
             const PharmacophoreProcessingFunction& getPharmacophoreProcessingFunction() const;
-            
+
             void calcInteractionGrids(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
                                       Grid::DRegularGridSet& grid_set, bool append = false);
 
             Grid::DRegularGrid::SharedPointer
             calcAtomDensityGrid(const Chem::AtomContainer& atoms, const Chem::Atom3DCoordinatesFunction& coords_func,
                                 const std::string& grid_name);
-            
+
           private:
             Grid::DRegularGrid::SharedPointer createGrid() const;
 
             void init();
-            
-            typedef std::pair<unsigned int, unsigned int> FeatureTypePair;
+
+            typedef std::pair<unsigned int, unsigned int>      FeatureTypePair;
             typedef std::map<FeatureTypePair, ScoringFunction> ScoringFuncMap;
-            typedef std::map<FeatureTypePair, std::string> GridNameMap;
-            typedef std::set<FeatureTypePair> EnabledInteractionsSet;
-        
+            typedef std::map<FeatureTypePair, std::string>     GridNameMap;
+            typedef std::set<FeatureTypePair>                  EnabledInteractionsSet;
+
             ScoringFuncMap                        ftrInteractionScoringFuncMap;
             GridNameMap                           gridNameMap;
             EnabledInteractionsSet                enabledFtrInteractions;
@@ -170,7 +171,7 @@ namespace CDPL
             Pharm::DefaultPharmacophoreGenerator  pharmGenerator;
             PharmacophoreProcessingFunction       pharmProcessingFunc;
             Pharm::BasicPharmacophore             pharmacophore;
-            double                                gridStepSize;          
+            double                                gridStepSize;
             std::size_t                           gridXSize;
             std::size_t                           gridYSize;
             std::size_t                           gridZSize;
@@ -179,7 +180,7 @@ namespace CDPL
             bool                                  storeEnvAtomDensityGrid;
             std::string                           envAtomDensityGridName;
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_GRAILDATASETGENERATOR_HPP

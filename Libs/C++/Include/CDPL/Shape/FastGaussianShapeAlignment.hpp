@@ -50,31 +50,31 @@
 #include "CDPL/Math/BFGSMinimizer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         class CDPL_SHAPE_API FastGaussianShapeAlignment
         {
 
             typedef std::vector<AlignmentResult> ResultList;
 
           public:
-            static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+            static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT        = 1.0;
             static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
             static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
             static constexpr double       DEF_SYMMETRY_THRESHOLD          = 0.15;
-            static constexpr std::size_t  DEF_NUM_RANDOM_STARTS           = 4;
-            static constexpr double       DEF_MAX_RANDOM_TRANSLATION      = 2.0;
+            static constexpr std::size_t DEF_NUM_RANDOM_STARTS            = 4;
+            static constexpr double      DEF_MAX_RANDOM_TRANSLATION       = 2.0;
 
             typedef std::shared_ptr<FastGaussianShapeAlignment> SharedPointer;
 
             typedef ResultList::const_iterator ConstResultIterator;
-            typedef ResultList::iterator ResultIterator;
-        
-            typedef std::function<double(const AlignmentResult&)> ScoringFunction;
+            typedef ResultList::iterator       ResultIterator;
+
+            typedef std::function<double(const AlignmentResult&)>                       ScoringFunction;
             typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
             FastGaussianShapeAlignment();
@@ -84,7 +84,7 @@ namespace CDPL
             FastGaussianShapeAlignment(const GaussianShapeSet& ref_shapes);
 
             ~FastGaussianShapeAlignment();
-            
+
             void setResultCompareFunction(const ResultCompareFunction& func);
 
             const ResultCompareFunction& getResultCompareFunction() const;
@@ -128,7 +128,7 @@ namespace CDPL
             void genShapeCenterStarts(bool generate);
 
             bool genShapeCenterStarts() const;
-            
+
             void genColorCenterStarts(bool generate);
 
             bool genColorCenterStarts() const;
@@ -136,7 +136,7 @@ namespace CDPL
             void genNonColorCenterStarts(bool generate);
 
             bool genNonColorCenterStarts() const;
-            
+
             void genRandomStarts(bool generate);
 
             bool genRandomStarts() const;
@@ -152,7 +152,7 @@ namespace CDPL
             void genForLargerShapeCenters(bool generate);
 
             bool genForLargerShapeCenters() const;
-            
+
             void setSymmetryThreshold(double thresh);
 
             double getSymmetryThreshold();
@@ -192,7 +192,7 @@ namespace CDPL
             ResultIterator begin();
 
             ResultIterator end();
-                        
+
           private:
             struct ShapeData
             {
@@ -205,24 +205,24 @@ namespace CDPL
                     double         radius;
                     double         delta;
                     double         weightFactor;
-                    double         volume;                
+                    double         volume;
                 };
 
                 typedef std::vector<Element> ElementArray;
 
-                ElementArray     elements;
-                std::size_t      colElemOffs;
-                std::size_t      setIndex;
-                std::size_t      index;
-                unsigned int     symClass;
-                Math::Matrix4D   transform;
-                double           selfOverlap;
-                double           colSelfOverlap;
-                bool             equalNonColDelta;
+                ElementArray   elements;
+                std::size_t    colElemOffs;
+                std::size_t    setIndex;
+                std::size_t    index;
+                unsigned int   symClass;
+                Math::Matrix4D transform;
+                double         selfOverlap;
+                double         colSelfOverlap;
+                bool           equalNonColDelta;
             };
 
             typedef std::pair<std::size_t, std::size_t> ResultID;
-    
+
             FastGaussianShapeAlignment(const FastGaussianShapeAlignment& alignment);
 
             FastGaussianShapeAlignment& operator=(const FastGaussianShapeAlignment& alignment);
@@ -253,47 +253,47 @@ namespace CDPL
 
             bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
 
-            typedef std::vector<ShapeData> ShapeDataArray;
+            typedef std::vector<ShapeData>                                            ShapeDataArray;
             typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
-            typedef std::vector<QuaternionTransformation> StartTransformList;
-            typedef boost::random::mt11213b RandomEngine;
-            typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
+            typedef std::vector<QuaternionTransformation>                             StartTransformList;
+            typedef boost::random::mt11213b                                           RandomEngine;
+            typedef Math::BFGSMinimizer<QuaternionTransformation>                     BFGSMinimizer;
 
-            bool                           perfAlignment;
-            bool                           optOverlap;
-            bool                           greedyOpt;
-            std::size_t                    maxNumOptIters;
-            double                         optStopGrad;
-            unsigned int                   resultSelMode;
-            ResultCompareFunction          resultCmpFunc;
-            ScoringFunction                scoringFunc;
-            ShapeDataArray                 refShapeData;
-            ShapeData                      algdShapeData;
-            ResultIndexMap                 resIndexMap;
-            ResultList                     results;
-            std::size_t                    currSetIndex;
-            std::size_t                    currShapeIndex;
-            bool                           shapeCtrStarts;
-            bool                           colCtrStarts;
-            bool                           nonColCtrStarts;
-            bool                           randomStarts;
-            bool                           genForAlgdShape;
-            bool                           genForRefShape;
-            bool                           genForLargerShape;
-            double                         symThreshold;
-            double                         maxRandomTrans;
-            std::size_t                    numRandomStarts;
-            std::size_t                    numSubTransforms;
-            RandomEngine                   randomEngine;
-            StartTransformList             startTransforms;
-            Math::Vector3DArray            startPoseCoords;
-            Math::Vector3DArray            optPoseCoordsGrad;
-            BFGSMinimizer                  minimizer;
-            Math::Matrix4D                 xformMatrix;
-            QuaternionTransformation       normXformQuat;
-            std::size_t                    currRefShapeIdx;
+            bool                     perfAlignment;
+            bool                     optOverlap;
+            bool                     greedyOpt;
+            std::size_t              maxNumOptIters;
+            double                   optStopGrad;
+            unsigned int             resultSelMode;
+            ResultCompareFunction    resultCmpFunc;
+            ScoringFunction          scoringFunc;
+            ShapeDataArray           refShapeData;
+            ShapeData                algdShapeData;
+            ResultIndexMap           resIndexMap;
+            ResultList               results;
+            std::size_t              currSetIndex;
+            std::size_t              currShapeIndex;
+            bool                     shapeCtrStarts;
+            bool                     colCtrStarts;
+            bool                     nonColCtrStarts;
+            bool                     randomStarts;
+            bool                     genForAlgdShape;
+            bool                     genForRefShape;
+            bool                     genForLargerShape;
+            double                   symThreshold;
+            double                   maxRandomTrans;
+            std::size_t              numRandomStarts;
+            std::size_t              numSubTransforms;
+            RandomEngine             randomEngine;
+            StartTransformList       startTransforms;
+            Math::Vector3DArray      startPoseCoords;
+            Math::Vector3DArray      optPoseCoordsGrad;
+            BFGSMinimizer            minimizer;
+            Math::Matrix4D           xformMatrix;
+            QuaternionTransformation normXformQuat;
+            std::size_t              currRefShapeIdx;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_FASTGAUSSIANSHAPEALIGNMENT_HPP

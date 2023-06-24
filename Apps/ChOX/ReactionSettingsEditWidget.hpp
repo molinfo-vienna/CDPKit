@@ -44,25 +44,25 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         ReactionSettingsEditWidget(QWidget*, Settings&);
 
         bool haveChangedSettings() const;
 
-    signals:
+      signals:
         void updateGUI();
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    private slots:
+      private slots:
         void handleSettingsChange();
         void handleSettingsChange(int);
         void handleSettingsChange(bool);
 
-    private:
+      private:
         void init();
 
         Settings&                    settings;
@@ -88,6 +88,6 @@ namespace ChOX
         unsigned int                 arrowStyle;
         bool                         haveChanges;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_REACTIONSETTINGSEDITWIDGET_HPP

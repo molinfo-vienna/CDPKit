@@ -44,7 +44,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -52,7 +52,7 @@ namespace CDPL
 
         class MolecularGraph;
         class Bond;
-    }
+    } // namespace Chem
 
     namespace MolProp
     {
@@ -78,7 +78,7 @@ namespace CDPL
             void localizedPiBonds(bool localized);
 
             bool localizedPiBonds() const;
-            
+
             void calculate(const Chem::MolecularGraph& molgraph);
 
             void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
@@ -90,7 +90,7 @@ namespace CDPL
             double getBondOrder(std::size_t bond_idx) const;
 
             double getEnergy() const;
-            
+
           private:
             MHMOPiChargeCalculator(const MHMOPiChargeCalculator&);
 
@@ -100,7 +100,7 @@ namespace CDPL
             void initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
             void calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-            
+
             void initAtomPiElecCounts(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
             std::size_t getNumBonds(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
@@ -109,7 +109,7 @@ namespace CDPL
             void getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
             void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
-            void calcSigmaCharges(const Chem::MolecularGraph& molgraph);
+            void   calcSigmaCharges(const Chem::MolecularGraph& molgraph);
             double getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
             double getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
             double getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
@@ -124,7 +124,7 @@ namespace CDPL
             void updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
             double calcElecDensity(std::size_t i, std::size_t j) const;
-            
+
             struct MODescr
             {
 
@@ -132,16 +132,16 @@ namespace CDPL
                 double coeffVecIndex;
                 double elecCount;
             };
-            
-            typedef Math::Matrix<double> Matrix;
-            typedef Math::Vector<double> Vector;
-            typedef std::vector<const Chem::Bond*> BondList;
-            typedef std::vector<std::size_t> CountsArray;
-            typedef std::vector<double> DoubleArray;
-            typedef std::vector<MODescr> MODescrArray;
-            typedef std::vector<MODescr*> MODescrPtrArray;
+
+            typedef Math::Matrix<double>                     Matrix;
+            typedef Math::Vector<double>                     Vector;
+            typedef std::vector<const Chem::Bond*>           BondList;
+            typedef std::vector<std::size_t>                 CountsArray;
+            typedef std::vector<double>                      DoubleArray;
+            typedef std::vector<MODescr>                     MODescrArray;
+            typedef std::vector<MODescr*>                    MODescrPtrArray;
             typedef std::auto_ptr<PEOESigmaChargeCalculator> PEOECalculatorPtr;
-            
+
             Matrix            hueckelMatrix;
             Matrix            hmEigenVectors;
             Vector            hmEigenValues;
@@ -159,7 +159,7 @@ namespace CDPL
             double            energy;
             PEOECalculatorPtr peoeCalculatorPtr;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_MHMOPICHARGECALCULATOR_HPP

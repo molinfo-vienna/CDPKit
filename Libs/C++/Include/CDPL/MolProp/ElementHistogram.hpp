@@ -33,7 +33,7 @@
 #include "CDPL/Util/Map.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace MolProp
@@ -53,11 +53,12 @@ namespace CDPL
             typedef std::shared_ptr<ElementHistogram> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "ElementHistogram";
             }
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_ELEMENTHISTOGRAM_HPP

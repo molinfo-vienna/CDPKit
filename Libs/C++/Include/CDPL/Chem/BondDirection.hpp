@@ -50,21 +50,21 @@ namespace CDPL
             /**
              * \brief Specifies that the bond has no associated direction.
              */
-            const unsigned int NONE        = 0x0; 
+            const unsigned int NONE = 0x0;
 
             /**
              * \brief Specifies that the bond is directed upwards.
              *
              * In \e SMILES and \e SMARTS strings \e up bonds are specified by a slash '/'.
              */
-            const unsigned int UP          = 0x1; 
+            const unsigned int UP = 0x1;
 
             /**
              * \brief Specifies that the bond is directed downwards.
              *
              * In \e SMILES and \e SMARTS strings \e down bonds are specified by a backslash '\'.
              */
-            const unsigned int DOWN        = 0x2; 
+            const unsigned int DOWN = 0x2;
 
             /**
              * \brief In a substructure search query pattern this flag indicates that the specified query bond direction is not mandatory and
@@ -76,9 +76,9 @@ namespace CDPL
              * - and its combination with BondDirection::DOWN specifies that a target bond must have a
              *   <em>downward or unspecified</em> direction to be considered as a match.
              */
-            const unsigned int UNSPECIFIED = 0x4; 
-        }
-    }
-}
+            const unsigned int UNSPECIFIED = 0x4;
+        } // namespace BondDirection
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDDIRECTION_HPP

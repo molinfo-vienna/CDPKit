@@ -32,19 +32,19 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
     {
-        
+
         /**
          * \brief Specifies the value and type of a size attribute and defines how the value may change during processing steps.
          */
         class CDPL_VIS_API SizeSpecification
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %SizeSpecification object with the given attributes.
              * \param value The value of the specified size.
@@ -115,7 +115,7 @@ namespace CDPL
              * \param follow \c true if the specified size has to follow output scaling operations, and \c false otherwise.
              */
             void followOutputScaling(bool follow);
-            
+
             /**
              * \brief Tells if the specified size follows output scaling operations.
              * \return \c true if the specified size follows output scaling operations, and \c false otherwise.
@@ -137,16 +137,16 @@ namespace CDPL
              *
              * \param spec The other \c %SizeSpecification object to be compared with.
              * \return \c true if one of the attributes compares non-equal, and \c false otherwise.
-             */                    
+             */
             bool operator!=(const SizeSpecification& spec) const;
 
-        private:
-            double  value;
-            bool    relative;
-            bool    inputScaling;
-            bool    outputScaling;
+          private:
+            double value;
+            bool   relative;
+            bool   inputScaling;
+            bool   outputScaling;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_SIZESPECIFICATION_HPP

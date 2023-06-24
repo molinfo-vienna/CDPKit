@@ -41,6 +41,6 @@ namespace CDPLPythonPharm
     void exportControlParameterDefaults();
 
     void exportDataFormats();
-}
+} // namespace CDPLPythonPharm
 
 #endif // CDPL_PYTHON_PHARM_NAMESPACEEXPORTS_HPP

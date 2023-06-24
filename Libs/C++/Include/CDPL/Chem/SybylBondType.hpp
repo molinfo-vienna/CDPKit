@@ -30,59 +30,59 @@
 #define CDPL_CHEM_SYBYLBONDTYPE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         /**
          * \brief Provides constants for the specification of the <em>Tripos Sybyl</em> bond type.
          */
-        namespace SybylBondType 
+        namespace SybylBondType
         {
 
             /**
              * \brief Specifies an unknown bond (cannot be determined from the parameter tables).
              */
-            const unsigned int UNKNOWN          = 0;
+            const unsigned int UNKNOWN = 0;
 
             /**
              * \brief Specifies a single bond.
              */
-            const unsigned int SINGLE           = 1;
+            const unsigned int SINGLE = 1;
 
             /**
              * \brief Specifies a double bond.
              */
-            const unsigned int DOUBLE           = 2;
+            const unsigned int DOUBLE = 2;
 
             /**
              * \brief Specifies a triple bond.
              */
-            const unsigned int TRIPLE           = 3;
+            const unsigned int TRIPLE = 3;
 
             /**
              * \brief Specifies an aromatic bond.
              */
-            const unsigned int AROMATIC         = 4;
- 
+            const unsigned int AROMATIC = 4;
+
             /**
              * \brief Specifies an amide bond.
              */
-            const unsigned int AMIDE            = 5;
+            const unsigned int AMIDE = 5;
 
             /**
              * \brief Specifies a dummy bond.
              */
-            const unsigned int DUMMY            = 6;
+            const unsigned int DUMMY = 6;
 
             /**
              * \brief Specifies a pseudo bond.
              */
-            const unsigned int NOT_CONNECTED    = 7;
-        }
-    }
-}
+            const unsigned int NOT_CONNECTED = 7;
+        } // namespace SybylBondType
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SYBYLBONDTYPE_HPP

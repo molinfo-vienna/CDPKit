@@ -35,10 +35,10 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class MMFF94InteractionData;
@@ -105,7 +105,7 @@ namespace CDPL
          * \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcBondLengthsAndAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcBondLengthsAndAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                              ValueType& bond_length1, ValueType& bond_length2);
 
         /**
@@ -132,9 +132,9 @@ namespace CDPL
          * \return The calculated bond angle \f$ \vartheta_{ijk} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcBondLengthsAndAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcBondLengthsAndAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                           ValueType& bond_length1, ValueType& bond_length2);
-    
+
         /**
          * \brief Calculates the \e cosine of the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
          *
@@ -224,7 +224,7 @@ namespace CDPL
         template <typename ValueType, typename CoordsVec>
         ValueType calcBondAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                 const ValueType& r_ij, const ValueType& r_jk);
-    
+
         /**
          * \brief Calculates the out-of-plane angle \f$ \chi_{ijk;l} \f$ between the bond \e j-l and the plane defined by the atoms \e i-j-k.
          *
@@ -247,8 +247,8 @@ namespace CDPL
          * \param oop_atom_pos The position \f$ \vec{p_l} \f$ of the out-of-plane atom \e l.
          * \return The calculated out-of-plane angle \f$ \chi_{ijk;l} \f$.
          */
-        template <typename ValueType, typename CoordsVec>    
-        ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+        template <typename ValueType, typename CoordsVec>
+        ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos,
                                       const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos);
 
         /**
@@ -274,8 +274,8 @@ namespace CDPL
          * \param r_jl The length of the bond between atom \e j and atom \e l.
          * \return The calculated out-of-plane angle \f$ \chi_{ijk;l} \f$.
          */
-        template <typename ValueType, typename CoordsVec>    
-        ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+        template <typename ValueType, typename CoordsVec>
+        ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos,
                                       const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
                                       const ValueType& r_jl);
 
@@ -303,9 +303,9 @@ namespace CDPL
          * \return The calculated cosine of the dihedral angle \f$ \Phi_{ijkl} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcDihedralAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
+        ValueType calcDihedralAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos,
                                        const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos);
-    
+
         /**
          * \brief Calculates the partial derivatives \f$ \frac{\partial r_{ij}}{\partial \vec{p_x}} \f$ of the 
          *        distance \f$ r_{ij} \f$ between two atoms \e i and \e j.
@@ -408,9 +408,9 @@ namespace CDPL
          * \return The calculated cosine of the dihedral angle \f$ \Phi_{ijkl} \f$.
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcDihedralAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
+        ValueType calcDihedralAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos,
                                                   const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos,
-                                                  GradVec& term_atom1_deriv, GradVec& ctr_atom1_deriv, 
+                                                  GradVec& term_atom1_deriv, GradVec& ctr_atom1_deriv,
                                                   GradVec& ctr_atom2_deriv, GradVec& term_atom2_deriv);
 
         /**
@@ -475,12 +475,12 @@ namespace CDPL
          * \return The calculated cosine of the angle \f$ \omega_{ijk;l} \f$.
          */
         template <typename ValueType, typename CoordsVec, typename GradVec>
-        ValueType calcOutOfPlaneAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+        ValueType calcOutOfPlaneAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos,
                                                     const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
-                                                    GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, 
+                                                    GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv,
                                                     GradVec& term_atom2_deriv, GradVec& oop_atom_deriv);
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 
 // Implementation
@@ -514,17 +514,17 @@ namespace CDPL
             template <typename ValueType, typename VecType>
             ValueType calcDotProduct(const VecType& vec1, const VecType& vec2)
             {
-                return (vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2]); 
+                return (vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2]);
             }
 
             template <typename VecType, typename ResVecType>
             void calcCrossProduct(const VecType& vec1, const VecType& vec2, ResVecType& cross_prod)
             {
-                cross_prod[0] = vec1[1] * vec2[2] - vec1[2] * vec2[1]; 
-                cross_prod[1] = vec1[2] * vec2[0] - vec1[0] * vec2[2]; 
-                cross_prod[2] = vec1[0] * vec2[1] - vec1[1] * vec2[0]; 
+                cross_prod[0] = vec1[1] * vec2[2] - vec1[2] * vec2[1];
+                cross_prod[1] = vec1[2] * vec2[0] - vec1[0] * vec2[2];
+                cross_prod[2] = vec1[0] * vec2[1] - vec1[1] * vec2[0];
             }
-    
+
             template <typename VecType1, typename VecType2>
             void copyVector(const VecType1& vec1, VecType2& vec2)
             {
@@ -556,7 +556,7 @@ namespace CDPL
                 vec[1] *= factor;
                 vec[2] *= factor;
             }
-    
+
             template <typename VecType, typename T>
             void invScaleVector(VecType& vec, const T& factor)
             {
@@ -600,9 +600,9 @@ namespace CDPL
 
                 return v;
             }
-        }
-    }
-}
+        } // namespace Detail
+    } // namespace ForceField
+} // namespace CDPL
 
 
 template <typename ValueType, typename CoordsVec>
@@ -622,7 +622,7 @@ ValueType CDPL::ForceField::calcDistance(const CoordsVec& atom1_pos, const Coord
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcBondLengthsAndAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+ValueType CDPL::ForceField::calcBondLengthsAndAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                        ValueType& bond_length1, ValueType& bond_length2)
 {
     ValueType bond_vec1[3];
@@ -633,12 +633,12 @@ ValueType CDPL::ForceField::calcBondLengthsAndAngleCos(const CoordsVec& term_ato
 
     bond_length1 = std::sqrt(Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec1));
     bond_length2 = std::sqrt(Detail::calcDotProduct<ValueType>(bond_vec2, bond_vec2));
-    
+
     return Detail::clampCosine(Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec2) / (bond_length1 * bond_length2));
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcBondLengthsAndAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+ValueType CDPL::ForceField::calcBondLengthsAndAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                     ValueType& bond_length1, ValueType& bond_length2)
 {
     return std::acos(calcBondLengthsAndAngleCos(term_atom1_pos, ctr_atom_pos, term_atom2_pos, bond_length1, bond_length2));
@@ -648,7 +648,7 @@ template <typename ValueType, typename CoordsVec>
 ValueType CDPL::ForceField::calcBondAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos)
 {
     ValueType bl1, bl2;
-    
+
     return calcBondLengthsAndAngleCos(term_atom1_pos, ctr_atom_pos, term_atom2_pos, bl1, bl2);
 }
 
@@ -679,7 +679,7 @@ ValueType CDPL::ForceField::calcBondAngle(const CoordsVec& term_atom1_pos, const
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos,
                                                 const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos)
 {
     ValueType term_bond1_vec[3];
@@ -692,16 +692,16 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos,
     Detail::subVectors(ctr_atom_pos, oop_atom_pos, oop_bond_vec);
     Detail::calcCrossProduct(term_bond1_vec, term_bond2_vec, plane_normal);
 
-    ValueType pn_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
+    ValueType pn_len      = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
     ValueType oop_bnd_len = std::sqrt(Detail::calcDotProduct<ValueType>(oop_bond_vec, oop_bond_vec));
-    ValueType ang_cos = Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * oop_bnd_len));
+    ValueType ang_cos     = Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * oop_bnd_len));
 
     return (ValueType(M_PI * 0.5) - std::acos(ang_cos));
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
-                                                const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos, 
+ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos,
+                                                const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
                                                 const ValueType& r_jl)
 {
     ValueType term_bond1_vec[3];
@@ -714,14 +714,14 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos,
     Detail::subVectors(ctr_atom_pos, oop_atom_pos, oop_bond_vec);
     Detail::calcCrossProduct(term_bond1_vec, term_bond2_vec, plane_normal);
 
-    ValueType pn_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
+    ValueType pn_len  = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
     ValueType ang_cos = Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * r_jl));
 
     return (ValueType(M_PI * 0.5) - std::acos(ang_cos));
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcDihedralAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
+ValueType CDPL::ForceField::calcDihedralAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos,
                                                  const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos)
 {
     ValueType term_bond1_vec[3];
@@ -756,7 +756,7 @@ ValueType CDPL::ForceField::calcDistanceDerivatives(const CoordsVec& atom1_pos, 
 
     return dist;
 }
-    
+
 template <typename ValueType, typename CoordsVec, typename GradVec>
 ValueType CDPL::ForceField::calcBondAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                         GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, GradVec& term_atom2_deriv)
@@ -771,7 +771,7 @@ ValueType CDPL::ForceField::calcBondAngleCosDerivatives(const CoordsVec& term_at
     ValueType bond_length2 = std::sqrt(Detail::calcDotProduct<ValueType>(bond_vec2, bond_vec2));
 
     ValueType dot_prod = Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec2);
-    ValueType bl_prod = bond_length1 * bond_length2;
+    ValueType bl_prod  = bond_length1 * bond_length2;
 
     Detail::invScaleCopyVector(bond_vec2, bl_prod, term_atom1_deriv);
     Detail::scaleCopyVector(bond_vec1, dot_prod / (bond_length1 * bond_length1 * bl_prod), ctr_atom_deriv);
@@ -788,9 +788,9 @@ ValueType CDPL::ForceField::calcBondAngleCosDerivatives(const CoordsVec& term_at
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcDihedralAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
+ValueType CDPL::ForceField::calcDihedralAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos,
                                                             const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos,
-                                                            GradVec& term_atom1_deriv, GradVec& ctr_atom1_deriv, 
+                                                            GradVec& term_atom1_deriv, GradVec& ctr_atom1_deriv,
                                                             GradVec& ctr_atom2_deriv, GradVec& term_atom2_deriv)
 {
     ValueType term_bond1_vec[3];
@@ -843,9 +843,9 @@ ValueType CDPL::ForceField::calcDihedralAngleCosDerivatives(const CoordsVec& ter
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcOutOfPlaneAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+ValueType CDPL::ForceField::calcOutOfPlaneAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos,
                                                               const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
-                                                              GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, 
+                                                              GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv,
                                                               GradVec& term_atom2_deriv, GradVec& oop_atom_deriv)
 {
     ValueType term_bond1_vec[3];
@@ -863,12 +863,12 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngleCosDerivatives(const CoordsVec& t
 
     Detail::calcCrossProduct(term_bond1_vec, term_bond2_vec, ijk_pn);
 
-    ValueType ijk_pn_len_2 = Detail::calcDotProduct<ValueType>(ijk_pn, ijk_pn);
-    ValueType ijk_pn_len = std::sqrt(ijk_pn_len_2);
-    ValueType oop_bnd_len = std::sqrt(Detail::calcDotProduct<ValueType>(oop_bond_vec, oop_bond_vec));
+    ValueType ijk_pn_len_2        = Detail::calcDotProduct<ValueType>(ijk_pn, ijk_pn);
+    ValueType ijk_pn_len          = std::sqrt(ijk_pn_len_2);
+    ValueType oop_bnd_len         = std::sqrt(Detail::calcDotProduct<ValueType>(oop_bond_vec, oop_bond_vec));
     ValueType oop_ijk_pn_len_prod = ijk_pn_len * oop_bnd_len;
     ValueType oop_ijk_pn_dot_prod = Detail::calcDotProduct<ValueType>(ijk_pn, oop_bond_vec);
-    ValueType ang_cos = Detail::clampCosine(oop_ijk_pn_dot_prod / oop_ijk_pn_len_prod);
+    ValueType ang_cos             = Detail::clampCosine(oop_ijk_pn_dot_prod / oop_ijk_pn_len_prod);
 
     ValueType kjl_pn[3];
     ValueType lji_pn[3];
@@ -901,7 +901,7 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngleCosDerivatives(const CoordsVec& t
     Detail::addVectors(oop_atom_deriv, kjl_pn, oop_atom_deriv);
     Detail::addVectors(oop_atom_deriv, ctr_atom_deriv, oop_atom_deriv);
     Detail::invScaleVector(oop_atom_deriv, -oop_ijk_pn_len_prod);
-    
+
     Detail::copyVector(term_atom1_deriv, ctr_atom_deriv);
     Detail::addVectors(term_atom2_deriv, ctr_atom_deriv, ctr_atom_deriv);
     Detail::addVectors(oop_atom_deriv, ctr_atom_deriv, ctr_atom_deriv);

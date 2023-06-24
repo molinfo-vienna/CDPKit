@@ -33,7 +33,7 @@
 #include <cstddef>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,14 +42,14 @@ namespace CDPL
         class MolecularGraph;
         class BondContainer;
         class FragmentList;
-    }
+    } // namespace Chem
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
-        std::string fragmentTypeToString(unsigned int frag_type, bool human); 
+        std::string fragmentTypeToString(unsigned int frag_type, bool human);
 
-        std::string returnCodeToString(unsigned int ret_code); 
+        std::string returnCodeToString(unsigned int ret_code);
 
         std::string getSMILES(Chem::MolecularGraph& molgraph);
 
@@ -70,7 +70,7 @@ namespace CDPL
             for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
                 const typename InteractionData::ElementType& params = *it;
 
-                if (tgt_atom_mask.test(params.getAtom1Index()) && 
+                if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index())) {
 
                     tgt_ia_data.addElement(params);
@@ -85,7 +85,7 @@ namespace CDPL
             for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
                 const typename InteractionData::ElementType& params = src_ia_data[i];
 
-                if (tgt_atom_mask.test(params.getAtom1Index()) && 
+                if (tgt_atom_mask.test(params.getAtom1Index()) &&
                     tgt_atom_mask.test(params.getAtom2Index())) {
 
                     tgt_ia_data.addElement(params);
@@ -93,7 +93,7 @@ namespace CDPL
                 }
             }
         }
-        
+
         template <typename InteractionData>
         void extractFragmentMMFF94InteractionParams3(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
                                                      const Util::BitSet& tgt_atom_mask)
@@ -102,14 +102,14 @@ namespace CDPL
                 const typename InteractionData::ElementType& params = *it;
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
-                    tgt_atom_mask.test(params.getAtom2Index()) && 
+                    tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index())) {
 
                     tgt_ia_data.addElement(params);
                 }
             }
         }
-        
+
         template <typename InteractionData>
         void extractFragmentMMFF94InteractionParams3(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
                                                      Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
@@ -118,7 +118,7 @@ namespace CDPL
                 const typename InteractionData::ElementType& params = src_ia_data[i];
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
-                    tgt_atom_mask.test(params.getAtom2Index()) && 
+                    tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index())) {
 
                     tgt_ia_data.addElement(params);
@@ -135,7 +135,7 @@ namespace CDPL
                 const typename InteractionData::ElementType& params = *it;
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
-                    tgt_atom_mask.test(params.getAtom2Index()) && 
+                    tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index()) &&
                     tgt_atom_mask.test(params.getAtom4Index())) {
 
@@ -143,7 +143,7 @@ namespace CDPL
                 }
             }
         }
-        
+
         template <typename InteractionData>
         void extractFragmentMMFF94InteractionParams4(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
                                                      Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
@@ -152,7 +152,7 @@ namespace CDPL
                 const typename InteractionData::ElementType& params = src_ia_data[i];
 
                 if (tgt_atom_mask.test(params.getAtom1Index()) &&
-                    tgt_atom_mask.test(params.getAtom2Index()) && 
+                    tgt_atom_mask.test(params.getAtom2Index()) &&
                     tgt_atom_mask.test(params.getAtom3Index()) &&
                     tgt_atom_mask.test(params.getAtom4Index())) {
 
@@ -161,8 +161,7 @@ namespace CDPL
                 }
             }
         }
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
- 

@@ -37,17 +37,18 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
- 
+
     namespace Internal
     {
 
         class CDFDataReaderBase
         {
 
-        public:
-            CDFDataReaderBase(): strictErrorChecks(true)    {}
+          public:
+            CDFDataReaderBase():
+                strictErrorChecks(true) {}
 
             virtual ~CDFDataReaderBase() {}
 
@@ -57,7 +58,7 @@ namespace CDPL
 
             bool readHeader(std::istream& is, CDF::Header& header, ByteBuffer& bbuf) const;
 
-            void readData(std::istream& is,    std::size_t length, ByteBuffer& bbuf) const;
+            void readData(std::istream& is, std::size_t length, ByteBuffer& bbuf) const;
 
             unsigned int extractPropertyID(CDF::PropertySpec prop_spec) const;
 
@@ -104,12 +105,12 @@ namespace CDPL
             bool strictErrorChecking() const;
 
             void strictErrorChecking(bool strict);
-            
-        private:
-            bool       strictErrorChecks;
+
+          private:
+            bool strictErrorChecks;
         };
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 
 // Implementation
@@ -170,7 +171,7 @@ void CDPL::Internal::CDFDataReaderBase::getFloatArrayProperty(CDF::PropertySpec 
 template <typename Vec, typename ValueType>
 void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const
 {
-    std::size_t len = extractPropertyValueLength(prop_spec);
+    std::size_t   len = extractPropertyValueLength(prop_spec);
     CDF::SizeType vec_size;
 
     bbuf.getInt(vec_size);
@@ -222,7 +223,7 @@ void CDPL::Internal::CDFDataReaderBase::getCVectorProperty(CDF::PropertySpec pro
 template <typename Vec>
 void CDPL::Internal::CDFDataReaderBase::getCVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
 {
-    std::size_t len = extractPropertyValueLength(prop_spec);
+    std::size_t   len = extractPropertyValueLength(prop_spec);
     CDF::SizeType arr_size;
 
     bbuf.getInt(arr_size);
@@ -324,7 +325,7 @@ void CDPL::Internal::CDFDataReaderBase::getGrid(Grid& grid, ByteBuffer& bbuf, st
 
     for (CDF::SizeType i = 0; i < size1; i++)
         for (CDF::SizeType j = 0; j < size2; j++)
-            for (CDF::SizeType k = 0; k < size3; k++) 
+            for (CDF::SizeType k = 0; k < size3; k++)
                 bbuf.getFloat(grid(i, j, k));
 }
 

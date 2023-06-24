@@ -38,34 +38,39 @@ namespace CDPL
         class DirectAssignmentProxy
         {
 
-            typedef C LValueType;
+            typedef C                       LValueType;
             typedef typename C::ClosureType ClosureType;
 
-        public:
-            explicit DirectAssignmentProxy(LValueType& lval): lvalue(lval) {}
+          public:
+            explicit DirectAssignmentProxy(LValueType& lval):
+                lvalue(lval) {}
 
-            DirectAssignmentProxy(const DirectAssignmentProxy& proxy): lvalue(proxy.lvalue) {}
+            DirectAssignmentProxy(const DirectAssignmentProxy& proxy):
+                lvalue(proxy.lvalue) {}
 
             template <typename E>
-            ClosureType& operator=(const E& e) {
+            ClosureType& operator=(const E& e)
+            {
                 lvalue.assign(e);
                 return lvalue;
             }
 
             template <typename E>
-            ClosureType& operator+=(const E& e) {
+            ClosureType& operator+=(const E& e)
+            {
                 lvalue.plusAssign(e);
                 return lvalue;
             }
 
             template <typename E>
-            ClosureType& operator-=(const E& e) {
+            ClosureType& operator-=(const E& e)
+            {
                 lvalue.minusAssign(e);
                 return lvalue;
             }
 
-        private:
-            DirectAssignmentProxy() {};
+          private:
+            DirectAssignmentProxy(){};
 
             const DirectAssignmentProxy& operator=(const DirectAssignmentProxy&);
 
@@ -83,7 +88,7 @@ namespace CDPL
         {
             return DirectAssignmentProxy<C>(lvalue);
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_DIRECTASSIGNMENTPROXY_HPP

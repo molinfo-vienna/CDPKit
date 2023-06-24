@@ -33,43 +33,43 @@
 #include "CDPL/Base/PropertyContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
-    /**
+        /**
      * \brief Entity3D.
      */
-    class CDPL_CHEM_API Entity3D : public Base::PropertyContainer
-    {
+        class CDPL_CHEM_API Entity3D : public Base::PropertyContainer
+        {
 
-      protected:
-        /**
+          protected:
+            /**
          * \brief Default constructor.
          */
-        Entity3D();
-    
-        /**
+            Entity3D();
+
+            /**
          * \brief Constructs a copy of the \c %Entity3D instance \a entity.
          * \param entity The \c %Entity3D instance to copy.
          */
-        Entity3D(const Entity3D& entity);
+            Entity3D(const Entity3D& entity);
 
-        /**
+            /**
          * \brief Virtual destructor.
          */
-        virtual ~Entity3D() {}
+            virtual ~Entity3D() {}
 
-        /**
+            /**
          * \brief Assignment operator.
          * \param cntnr The \c %Entity3D instance to copy.
          * \return A reference to itself.
          */
-        Entity3D& operator=(const Entity3D& cntnr);
-    };
-    }
-}
+            Entity3D& operator=(const Entity3D& cntnr);
+        };
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ENTITY3D_HPP

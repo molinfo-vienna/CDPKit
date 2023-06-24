@@ -33,7 +33,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -51,7 +51,7 @@ namespace CDPL
         class PMLDataReader
         {
 
-        public:
+          public:
             PMLDataReader(const Base::DataIOBase& io_base);
 
             virtual ~PMLDataReader() {}
@@ -62,12 +62,12 @@ namespace CDPL
 
             bool hasMoreData(std::istream& is);
 
-        private:
-            typedef rapidxml::xml_document<char> XMLDocument;
-            typedef rapidxml::xml_node<char> XMLNode;
+          private:
+            typedef rapidxml::xml_document<char>  XMLDocument;
+            typedef rapidxml::xml_node<char>      XMLNode;
             typedef rapidxml::xml_attribute<char> XMLAttribute;
 
-            void init(); 
+            void init();
 
             void getPharmacophoreProperties(const XMLNode* pharm_node, Pharmacophore& pharm) const;
 
@@ -82,15 +82,15 @@ namespace CDPL
 
             void getDefaultFeatureProperties(const XMLNode* ftr_node, Feature& ftr) const;
 
-            bool getPosition(const XMLNode* ftr_node, const std::string& tag, Math::Vector3D& vec) const; 
-            bool getTolerance(const XMLNode* ftr_node, const std::string& tag, double& tol) const; 
+            bool getPosition(const XMLNode* ftr_node, const std::string& tag, Math::Vector3D& vec) const;
+            bool getTolerance(const XMLNode* ftr_node, const std::string& tag, double& tol) const;
 
-            const Base::DataIOBase& ioBase;    
+            const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
             std::string             pharmData;
             XMLDocument             pharmDocument;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PMLDATAREADER_HPP

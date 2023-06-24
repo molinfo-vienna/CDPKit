@@ -39,10 +39,10 @@
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         template <typename ValueType, typename Iter, typename CoordsArray>
@@ -75,7 +75,7 @@ namespace CDPL
          * \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94BondStretchingEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, 
+        ValueType calcMMFF94BondStretchingEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
                                                  const ValueType& force_const, const ValueType& ref_length);
 
         /**
@@ -139,7 +139,7 @@ namespace CDPL
          * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                bool linear, const ValueType& force_const, const ValueType& ref_angle);
 
         /**
@@ -173,10 +173,9 @@ namespace CDPL
          * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                const ValueType& r_ij, const ValueType& r_jk,
                                                bool linear, const ValueType& force_const, const ValueType& ref_angle);
-
 
 
         template <typename ValueType, typename Iter, typename CoordsArray>
@@ -216,8 +215,8 @@ namespace CDPL
          * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
           */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                              const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
+        ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                              const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
                                               const ValueType& ref_length1, const ValueType& ref_length2);
 
         /**
@@ -253,9 +252,9 @@ namespace CDPL
          * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
           */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                               const ValueType& r_ij, const ValueType& r_jk,
-                                              const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
+                                              const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
                                               const ValueType& ref_length1, const ValueType& ref_length2);
 
 
@@ -283,7 +282,7 @@ namespace CDPL
          * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                     const CoordsVec& oop_atom_pos, const ValueType& force_const);
 
         /**
@@ -305,7 +304,7 @@ namespace CDPL
          * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+        ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                     const CoordsVec& oop_atom_pos, const ValueType& r_jl, const ValueType& force_const);
 
 
@@ -337,11 +336,11 @@ namespace CDPL
          * \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94TorsionEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos, 
+        ValueType calcMMFF94TorsionEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos,
                                           const CoordsVec& term_atom2_pos, const ValueType& tor_param1, const ValueType& tor_param2,
                                           const ValueType& tor_param3);
 
-        
+
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94ElectrostaticEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
@@ -376,7 +375,7 @@ namespace CDPL
          */
         template <typename ValueType, typename CoordsVec>
         ValueType calcMMFF94ElectrostaticEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& atom1_chg,
-                                                const ValueType& atom2_chg, const ValueType& scale_fact, const ValueType& de_const, 
+                                                const ValueType& atom2_chg, const ValueType& scale_fact, const ValueType& de_const,
                                                 const ValueType& dist_expo);
 
         /**
@@ -405,10 +404,10 @@ namespace CDPL
          * \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
          */
         template <typename ValueType>
-        ValueType calcMMFF94ElectrostaticEnergy(const ValueType& r_ij, const ValueType& atom1_chg, const ValueType& atom2_chg, 
+        ValueType calcMMFF94ElectrostaticEnergy(const ValueType& r_ij, const ValueType& atom1_chg, const ValueType& atom2_chg,
                                                 const ValueType& scale_fact, const ValueType& de_const, const ValueType& dist_expo);
 
-    
+
         template <typename ValueType, typename Iter, typename CoordsArray>
         ValueType calcMMFF94VanDerWaalsEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
@@ -451,7 +450,7 @@ namespace CDPL
          * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
          */
         template <typename ValueType, typename CoordsVec>
-        ValueType calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& e_IJ, 
+        ValueType calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& e_IJ,
                                               const ValueType& r_IJ, const ValueType& r_IJ_7);
 
         /**
@@ -489,10 +488,10 @@ namespace CDPL
          * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
          */
         template <typename ValueType>
-        ValueType calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ, 
+        ValueType calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ,
                                               const ValueType& r_IJ, const ValueType& r_IJ_7);
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 
 // Implementation
@@ -512,20 +511,20 @@ namespace CDPL
             {
                 ValueType e = ValueType();
 
-                for ( ; beg != end; ++beg)
+                for (; beg != end; ++beg)
                     e += func(*beg, coords);
 
                 return e;
-            }    
-        }
-    }
-}
+            }
+        } // namespace Detail
+    } // namespace ForceField
+} // namespace CDPL
 
 
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94BondStretchingInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94BondStretchingEnergy<ValueType, CoordsArray>));
 }
@@ -541,9 +540,9 @@ template <typename ValueType, typename CoordsVec>
 ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
                                                            const ValueType& force_const, const ValueType& ref_length)
 {
-    ValueType dr_ij = calcDistance<ValueType>(atom1_pos, atom2_pos) - ref_length;
+    ValueType dr_ij   = calcDistance<ValueType>(atom1_pos, atom2_pos) - ref_length;
     ValueType dr_ij_2 = dr_ij * dr_ij;
-    ValueType e_b = ValueType(143.9325 * 0.5) * force_const * dr_ij_2 * (1 - 2 * dr_ij + 28 * dr_ij_2 / 12);
+    ValueType e_b     = ValueType(143.9325 * 0.5) * force_const * dr_ij_2 * (1 - 2 * dr_ij + 28 * dr_ij_2 / 12);
 
     return e_b;
 }
@@ -551,9 +550,9 @@ ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(const CoordsVec& atom
 template <typename ValueType>
 ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(const ValueType& r_ij, const ValueType& force_const, const ValueType& ref_length)
 {
-    ValueType dr_ij = r_ij - ref_length;
+    ValueType dr_ij   = r_ij - ref_length;
     ValueType dr_ij_2 = dr_ij * dr_ij;
-    ValueType e_b = ValueType(143.9325 * 0.5) * force_const * dr_ij_2 * (1 - 2 * dr_ij + 28 * dr_ij_2 / 12);
+    ValueType e_b     = ValueType(143.9325 * 0.5) * force_const * dr_ij_2 * (1 - 2 * dr_ij + 28 * dr_ij_2 / 12);
 
     return e_b;
 }
@@ -562,7 +561,7 @@ ValueType CDPL::ForceField::calcMMFF94BondStretchingEnergy(const ValueType& r_ij
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94AngleBendingInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94AngleBendingEnergy<ValueType, CoordsArray>));
 }
@@ -570,36 +569,36 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(Iter beg, const Iter& e
 template <typename ValueType, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords)
 {
-    return calcMMFF94AngleBendingEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()], 
-                                                   coords[iaction.getTerminalAtom2Index()], iaction.isLinearAngle(), iaction.getForceConstant(), 
+    return calcMMFF94AngleBendingEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()],
+                                                   coords[iaction.getTerminalAtom2Index()], iaction.isLinearAngle(), iaction.getForceConstant(),
                                                    iaction.getReferenceAngle());
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                          bool linear, const ValueType& force_const, const ValueType& ref_angle)
 {
     if (linear)
         return (ValueType(143.9325) * force_const * (1 + calcBondAngleCos<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos)));
-        
-    ValueType a_ijk = calcBondAngle<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos) * ValueType(180 / M_PI);
+
+    ValueType a_ijk  = calcBondAngle<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos) * ValueType(180 / M_PI);
     ValueType da_ijk = a_ijk - ref_angle;
-    ValueType e_a = ValueType(0.043844 * 0.5) * force_const * da_ijk * da_ijk * (1 - ValueType(0.007) * da_ijk);
+    ValueType e_a    = ValueType(0.043844 * 0.5) * force_const * da_ijk * da_ijk * (1 - ValueType(0.007) * da_ijk);
 
     return e_a;
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                         const ValueType& r_ij, const ValueType& r_jk, 
+ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                         const ValueType& r_ij, const ValueType& r_jk,
                                                          bool linear, const ValueType& force_const, const ValueType& ref_angle)
 {
     if (linear)
         return (ValueType(143.9325) * force_const * (1 + calcBondAngleCos<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk)));
-        
-    ValueType a_ijk = calcBondAngle<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk) * ValueType(180 / M_PI);
+
+    ValueType a_ijk  = calcBondAngle<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk) * ValueType(180 / M_PI);
     ValueType da_ijk = a_ijk - ref_angle;
-    ValueType e_a = ValueType(0.043844 * 0.5) * force_const * da_ijk * da_ijk * (1 - ValueType(0.007) * da_ijk);
+    ValueType e_a    = ValueType(0.043844 * 0.5) * force_const * da_ijk * da_ijk * (1 - ValueType(0.007) * da_ijk);
 
     return e_a;
 }
@@ -608,7 +607,7 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingEnergy(const CoordsVec& term_a
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94StretchBendInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94StretchBendEnergy<ValueType, CoordsArray>));
 }
@@ -616,44 +615,44 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(Iter beg, const Iter& en
 template <typename ValueType, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords)
 {
-    return calcMMFF94StretchBendEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()], 
+    return calcMMFF94StretchBendEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()],
                                                   coords[iaction.getTerminalAtom2Index()], iaction.getIJKForceConstant(),
                                                   iaction.getKJIForceConstant(), iaction.getReferenceAngle(), iaction.getReferenceLength1(),
                                                   iaction.getReferenceLength2());
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                        const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
+ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                        const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
                                                         const ValueType& ref_length1, const ValueType& ref_length2)
 {
-    ValueType r_ij = ValueType();
-    ValueType r_kj = ValueType();
+    ValueType r_ij  = ValueType();
+    ValueType r_kj  = ValueType();
     ValueType a_ijk = calcBondLengthsAndAngle(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_kj) * ValueType(180 / M_PI);
 
-    ValueType dr_ij = r_ij - ref_length1;
-    ValueType dr_kj = r_kj - ref_length2;
+    ValueType dr_ij  = r_ij - ref_length1;
+    ValueType dr_kj  = r_kj - ref_length2;
     ValueType da_ijk = a_ijk - ref_angle;
 
     ValueType e_ab = ValueType(2.51210) * (ijk_force_const * dr_ij + kji_force_const * dr_kj) * da_ijk;
-   
+
     return e_ab;
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
-                                                        const ValueType& r_ij, const ValueType& r_jk, 
-                                                        const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
+ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+                                                        const ValueType& r_ij, const ValueType& r_jk,
+                                                        const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle,
                                                         const ValueType& ref_length1, const ValueType& ref_length2)
 {
     ValueType a_ijk = calcBondAngle(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk) * ValueType(180 / M_PI);
 
-    ValueType dr_ij = r_ij - ref_length1;
-    ValueType dr_kj = r_jk - ref_length2;
+    ValueType dr_ij  = r_ij - ref_length1;
+    ValueType dr_kj  = r_jk - ref_length2;
     ValueType da_ijk = a_ijk - ref_angle;
 
     ValueType e_ab = ValueType(2.51210) * (ijk_force_const * dr_ij + kji_force_const * dr_kj) * da_ijk;
-   
+
     return e_ab;
 }
 
@@ -661,7 +660,7 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendEnergy(const CoordsVec& term_at
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94OutOfPlaneBendingInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94OutOfPlaneBendingEnergy<ValueType, CoordsArray>));
 }
@@ -669,28 +668,28 @@ ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(Iter beg, const It
 template <typename ValueType, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords)
 {
-    return calcMMFF94OutOfPlaneBendingEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()], 
+    return calcMMFF94OutOfPlaneBendingEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtomIndex()],
                                                         coords[iaction.getTerminalAtom2Index()], coords[iaction.getOutOfPlaneAtomIndex()],
                                                         iaction.getForceConstant());
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                               const CoordsVec& oop_atom_pos, const ValueType& force_const)
 {
     ValueType chi_ijkl = calcOutOfPlaneAngle<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos) * ValueType(180 / M_PI);
-    ValueType e_oop = ValueType(0.5 * 0.043844) * force_const * chi_ijkl * chi_ijkl;
-   
+    ValueType e_oop    = ValueType(0.5 * 0.043844) * force_const * chi_ijkl * chi_ijkl;
+
     return e_oop;
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
+ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
                                                               const CoordsVec& oop_atom_pos, const ValueType& r_jl, const ValueType& force_const)
 {
     ValueType chi_ijkl = calcOutOfPlaneAngle<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, r_jl) * ValueType(180 / M_PI);
-    ValueType e_oop = ValueType(0.5 * 0.043844) * force_const * chi_ijkl * chi_ijkl;
-   
+    ValueType e_oop    = ValueType(0.5 * 0.043844) * force_const * chi_ijkl * chi_ijkl;
+
     return e_oop;
 }
 
@@ -706,28 +705,28 @@ ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(Iter beg, const Iter& end, c
 template <typename ValueType, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords)
 {
-    return calcMMFF94TorsionEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtom1Index()], 
+    return calcMMFF94TorsionEnergy<ValueType>(coords[iaction.getTerminalAtom1Index()], coords[iaction.getCenterAtom1Index()],
                                               coords[iaction.getCenterAtom2Index()], coords[iaction.getTerminalAtom2Index()],
                                               iaction.getTorsionParameter1(), iaction.getTorsionParameter2(), iaction.getTorsionParameter3());
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos, 
+ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos,
                                                     const CoordsVec& term_atom2_pos, const ValueType& tor_param1, const ValueType& tor_param2,
                                                     const ValueType& tor_param3)
 {
-    ValueType phi_cos = calcDihedralAngleCos<ValueType>(term_atom1_pos, ctr_atom1_pos, ctr_atom2_pos, term_atom2_pos); 
-    ValueType phi = std::acos(phi_cos);
-    ValueType e_t = ValueType(0.5) * (tor_param1 * (1 + phi_cos) + tor_param2 * (1 - std::cos(2 * phi)) + tor_param3 * (1 + std::cos(3 * phi)));
+    ValueType phi_cos = calcDihedralAngleCos<ValueType>(term_atom1_pos, ctr_atom1_pos, ctr_atom2_pos, term_atom2_pos);
+    ValueType phi     = std::acos(phi_cos);
+    ValueType e_t     = ValueType(0.5) * (tor_param1 * (1 + phi_cos) + tor_param2 * (1 - std::cos(2 * phi)) + tor_param3 * (1 + std::cos(3 * phi)));
 
     return e_t;
 }
 
-        
+
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94ElectrostaticInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94ElectrostaticEnergy<ValueType, CoordsArray>));
 }
@@ -742,30 +741,30 @@ ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(const MMFF94Electrosta
 
 template <typename ValueType, typename CoordsVec>
 ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& atom1_chg,
-                                                          const ValueType& atom2_chg, const ValueType& scale_fact, const ValueType& de_const, 
+                                                          const ValueType& atom2_chg, const ValueType& scale_fact, const ValueType& de_const,
                                                           const ValueType& dist_expo)
 {
     ValueType tmp = std::pow(calcDistance<ValueType>(atom1_pos, atom2_pos) + ValueType(0.05), dist_expo);
     ValueType e_q = scale_fact * ValueType(332.0716) * atom1_chg * atom2_chg / (de_const * tmp);
-    
+
     return e_q;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(const ValueType& r_ij, const ValueType& atom1_chg, const ValueType& atom2_chg, 
+ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(const ValueType& r_ij, const ValueType& atom1_chg, const ValueType& atom2_chg,
                                                           const ValueType& scale_fact, const ValueType& de_const, const ValueType& dist_expo)
 {
     ValueType tmp = std::pow(r_ij + ValueType(0.05), dist_expo);
     ValueType e_q = scale_fact * ValueType(332.0716) * atom1_chg * atom2_chg / (de_const * tmp);
-    
+
     return e_q;
 }
 
-    
+
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+    return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
                                                              static_cast<ValueType (*)(const MMFF94VanDerWaalsInteraction&, const CoordsArray&)>(
                                                                  &calcMMFF94VanDerWaalsEnergy<ValueType, CoordsArray>));
 }
@@ -778,14 +777,14 @@ ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const MMFF94VanDerWaalsI
 }
 
 template <typename ValueType, typename CoordsVec>
-ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& e_IJ, 
+ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, const ValueType& e_IJ,
                                                         const ValueType& r_IJ, const ValueType& r_IJ_7)
 {
     ValueType r_ij_2 = calcSquaredDistance<ValueType>(atom1_pos, atom2_pos);
-    ValueType r_ij = std::sqrt(r_ij_2);
+    ValueType r_ij   = std::sqrt(r_ij_2);
     ValueType r_ij_7 = r_ij_2 * r_ij_2 * r_ij_2 * r_ij;
-    
-    ValueType tmp = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
+
+    ValueType tmp   = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
     ValueType tmp_2 = tmp * tmp;
     ValueType tmp_7 = tmp_2 * tmp_2 * tmp_2 * tmp;
 
@@ -795,13 +794,13 @@ ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_p
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ, 
+ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ,
                                                         const ValueType& r_IJ, const ValueType& r_IJ_7)
 {
     ValueType r_ij_2 = r_ij * r_ij;
     ValueType r_ij_7 = r_ij_2 * r_ij_2 * r_ij_2 * r_ij;
-    
-    ValueType tmp = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
+
+    ValueType tmp   = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
     ValueType tmp_2 = tmp * tmp;
     ValueType tmp_7 = tmp_2 * tmp_2 * tmp_2 * tmp;
 

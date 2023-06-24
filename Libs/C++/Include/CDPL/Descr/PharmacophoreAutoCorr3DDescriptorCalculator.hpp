@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -44,7 +44,7 @@ namespace CDPL
 
         class Feature;
         class FeatureContainer;
-    }
+    } // namespace Pharm
 
     namespace Descr
     {
@@ -57,15 +57,15 @@ namespace CDPL
 
             typedef AutoCorrelation3DVectorCalculator<Pharm::Feature> AutoCorr3DVectorCalculator;
 
-        public:
-            typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
+          public:
+            typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction                           Feature3DCoordinatesFunction;
             typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
-    
+
             /**
              * \brief Constructs the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance.
              */
             PharmacophoreAutoCorr3DDescriptorCalculator();
-            
+
             PharmacophoreAutoCorr3DDescriptorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -130,8 +130,8 @@ namespace CDPL
           private:
             AutoCorr3DVectorCalculator autoCorrCalculator;
             FeaturePairWeightFunction  weightFunc;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP

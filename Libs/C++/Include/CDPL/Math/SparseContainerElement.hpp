@@ -40,20 +40,22 @@ namespace CDPL
         template <typename C, typename K = typename C::KeyType>
         class SparseContainerElement
         {
-                
-        public:
-            typedef C ContainerType;
-            typedef K KeyType;
-            typedef typename ContainerType::ValueType ValueType;
-            typedef typename ContainerType::SizeType SizeType;
-            typedef ValueType& Reference;
-            typedef typename ContainerType::ConstReference ConstReference;
-            typedef typename ContainerType::ArrayType ArrayType;
 
-            SparseContainerElement(ContainerType& c, KeyType key): cntnr(c), key(key) {}
+          public:
+            typedef C                                      ContainerType;
+            typedef K                                      KeyType;
+            typedef typename ContainerType::ValueType      ValueType;
+            typedef typename ContainerType::SizeType       SizeType;
+            typedef ValueType&                             Reference;
+            typedef typename ContainerType::ConstReference ConstReference;
+            typedef typename ContainerType::ArrayType      ArrayType;
+
+            SparseContainerElement(ContainerType& c, KeyType key):
+                cntnr(c), key(key) {}
 
             // Assignment
-            SparseContainerElement& operator=(const SparseContainerElement &p) {
+            SparseContainerElement& operator=(const SparseContainerElement& p)
+            {
                 p.get();
                 set(p.value);
 
@@ -61,14 +63,16 @@ namespace CDPL
             }
 
             template <typename D>
-            SparseContainerElement& operator=(const D &d) {
+            SparseContainerElement& operator=(const D& d)
+            {
                 set(d);
 
                 return *this;
             }
 
             template <typename D>
-            SparseContainerElement& operator+=(const D &d) {
+            SparseContainerElement& operator+=(const D& d)
+            {
                 get();
                 value += d;
                 set(value);
@@ -77,7 +81,8 @@ namespace CDPL
             }
 
             template <typename D>
-            SparseContainerElement& operator-=(const D &d) {
+            SparseContainerElement& operator-=(const D& d)
+            {
                 get();
                 value -= d;
                 set(value);
@@ -86,7 +91,8 @@ namespace CDPL
             }
 
             template <typename D>
-            SparseContainerElement& operator*=(const D &d) {
+            SparseContainerElement& operator*=(const D& d)
+            {
                 get();
                 value *= d;
                 set(value);
@@ -95,7 +101,8 @@ namespace CDPL
             }
 
             template <typename D>
-            SparseContainerElement& operator/=(const D &d) {
+            SparseContainerElement& operator/=(const D& d)
+            {
                 get();
                 value /= d;
                 set(value);
@@ -105,27 +112,31 @@ namespace CDPL
 
             // Comparison
             template <typename D>
-            bool operator==(const D &d) const {
+            bool operator==(const D& d) const
+            {
                 get();
 
                 return (value == d);
             }
 
             template <typename D>
-            bool operator!=(const D &d) const {
+            bool operator!=(const D& d) const
+            {
                 get();
 
                 return (value != d);
             }
 
-            operator ConstReference() const {
+            operator ConstReference() const
+            {
                 get();
 
                 return value;
             }
 
-        private:
-            void set(const ValueType& v) {
+          private:
+            void set(const ValueType& v)
+            {
                 if (v == ValueType())
                     cntnr.getData().erase(key);
 
@@ -137,7 +148,8 @@ namespace CDPL
                 }
             }
 
-            void get() const {
+            void get() const
+            {
                 typename ArrayType::const_iterator it = cntnr.getData().find(key);
 
                 if (it == cntnr.getData().end())
@@ -152,8 +164,9 @@ namespace CDPL
         };
 
         template <typename C>
-        struct TypeTraits<SparseContainerElement<C> > : public TypeTraits<typename SparseContainerElement<C>::ValueType>  {};
-    }
-}
+        struct TypeTraits<SparseContainerElement<C> > : public TypeTraits<typename SparseContainerElement<C>::ValueType>
+        {};
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_SPARSECONTAINERELEMENT_HPP

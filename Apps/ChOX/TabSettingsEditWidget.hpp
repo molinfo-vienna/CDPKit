@@ -41,20 +41,20 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         TabSettingsEditWidget(QWidget* = 0);
 
         bool haveChangedSettings() const;
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    protected:
+      protected:
         void addEditWidget(SettingsEditWidget*, const QString&);
 
-    private:
+      private:
         void init();
 
         typedef std::vector<SettingsEditWidget*> EditWidgetList;
@@ -62,6 +62,6 @@ namespace ChOX
         QTabWidget*    tabWidget;
         EditWidgetList editWidgetList;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_TABSETTINGSEDITWIDGET_HPP

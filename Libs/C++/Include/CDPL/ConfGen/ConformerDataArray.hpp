@@ -34,17 +34,17 @@
 #include "CDPL/ConfGen/ConformerData.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         /**
          * \brief A data type for the storage of dyn. allocated ConfGen::ConformerData objects.
          */
         typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONFORMERDATAARRAY_HPP

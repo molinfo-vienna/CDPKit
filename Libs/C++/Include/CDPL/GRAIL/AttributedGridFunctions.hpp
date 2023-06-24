@@ -32,7 +32,7 @@
 #include "CDPL/GRAIL/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -41,9 +41,9 @@ namespace CDPL
         class AttributedGrid;
     }
 
-    namespace GRAIL 
+    namespace GRAIL
     {
-    
+
         CDPL_GRAIL_API unsigned int getFeatureType(const Grid::AttributedGrid& grid);
 
         CDPL_GRAIL_API void setFeatureType(Grid::AttributedGrid& grid, unsigned int type);
@@ -60,7 +60,7 @@ namespace CDPL
         CDPL_GRAIL_API void clearTargetFeatureType(Grid::AttributedGrid& grid);
 
         CDPL_GRAIL_API bool hasTargetFeatureType(const Grid::AttributedGrid& grid);
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_ATTRIBUTEDGRIDFUNCTIONS_HPP

@@ -31,7 +31,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -42,13 +42,13 @@ namespace CDPL
         class CFLFragmentLibraryEntryWriter : private Internal::CDFDataWriterBase
         {
 
-        public:
+          public:
             bool write(std::ostream& os, const FragmentLibraryEntry& entry);
 
-        private:
+          private:
             Internal::ByteBuffer entryBuffer;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CDFFRAGMENTLIBRARYENTRYWRITER_HPP

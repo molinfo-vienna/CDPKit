@@ -35,7 +35,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -62,7 +62,7 @@ namespace CDPL
              * \brief A mutable random access iterator used to iterate over the atoms of the molecule.
              */
             typedef AtomContainer::AtomIterator AtomIterator;
-        
+
             /**
              * \brief A constant random access iterator used to iterate over the bonds of the molecule.
              */
@@ -72,7 +72,7 @@ namespace CDPL
              * \brief A mutable random access iterator used to iterate over the bonds of the molecule.
              */
             typedef BondContainer::BondIterator BondIterator;
-        
+
             /**
              * \brief Virtual destructor.
              *
@@ -90,7 +90,7 @@ namespace CDPL
              * \brief Removes all atoms and bonds and clears all properties of the molecule.
              */
             virtual void clear() = 0;
-        
+
             /**
              * \brief Returns the number of explicit atoms.
              * \return The number of explicit atoms.
@@ -102,7 +102,7 @@ namespace CDPL
              * \return The number of explicit bonds.
              */
             virtual std::size_t getNumBonds() const = 0;
-        
+
             /**
              * \brief Returns a \c const reference to the atom at index \a idx.
              * \param idx The zero-based index of the atom to return.
@@ -127,7 +127,7 @@ namespace CDPL
              * \return A reference to the newly created atom.
              */
             virtual Atom& addAtom() = 0;
-            
+
             /**
              * \brief Removes the atom at the specified index.
              *
@@ -183,7 +183,7 @@ namespace CDPL
              *        range [0, getNumAtoms() - 1].
              */
             virtual Bond& addBond(std::size_t atom1_idx, std::size_t atom2_idx) = 0;
-        
+
             /**
              * \brief Removes the bond at the specified index.
              * \param idx The zero-based index of the bond to remove.
@@ -229,21 +229,21 @@ namespace CDPL
              * \throw Base::ItemNotFound if the specified bond is not part of the molecule.
              */
             virtual std::size_t getBondIndex(const Bond& bond) const = 0;
-        
+
             /**
              * \brief Replaces the current set of atoms, bonds and properties by a copy of the
              *        atoms, bonds and properties of the molecule \a mol.
              * \param mol The molecule to copy.
              */
             virtual void copy(const Molecule& mol) = 0;
-        
+
             /**
              * \brief Replaces the current set of atoms, bonds and properties by a copy of the
              *        atoms, bonds and properties of the molecular graph \a molgraph.
              * \param molgraph The Chem::MolecularGraph instance providing the atoms, bonds and properties to copy.
              */
             virtual void copy(const MolecularGraph& molgraph) = 0;
-        
+
             /**
              * \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the
              *        molecule \a mol.
@@ -266,7 +266,7 @@ namespace CDPL
              * \note Does not affect any properties if <tt>this != &molgraph</tt>.
              */
             virtual void remove(const MolecularGraph& molgraph) = 0;
-        
+
             /**
              * \brief Reserves memory for \a num_atoms atoms.
              *
@@ -339,7 +339,7 @@ namespace CDPL
              */
             Molecule& operator-=(const MolecularGraph& molgraph);
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLECULE_HPP

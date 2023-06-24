@@ -34,7 +34,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,17 +50,17 @@ namespace CDPL
         class NOTMatchExpression : public MatchExpression<ObjType1, ObjType2>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %NOTMatchExpression instances.
              */
             typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
-        
+
             /**
              * \brief Constructs a \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.
              * \param expr_ptr A pointer to the wrapped Chem::MatchExpression instance.
              */
-            NOTMatchExpression(const typename MatchExpression<ObjType1, ObjType2>::SharedPointer& expr_ptr): 
+            NOTMatchExpression(const typename MatchExpression<ObjType1, ObjType2>::SharedPointer& expr_ptr):
                 expression(expr_ptr) {}
 
             /**
@@ -73,7 +73,7 @@ namespace CDPL
              * \param aux_data Provides auxiliary information for the evaluation of the wrapped expression.
              * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
              */
-            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
+            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
                             const Base::Any& aux_data) const;
 
             /**
@@ -88,9 +88,9 @@ namespace CDPL
              * \param aux_data Provides auxiliary information for the evaluation of the wrapped expression.
              * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
              */
-            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
+            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
                             const AtomBondMapping& mapping, const Base::Any& aux_data) const;
-        
+
             /**
              * \brief Tells whether the wrapped match expression requires a reevaluation after a query to target atom/bond mapping
              *        candidate has been found.
@@ -99,7 +99,7 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
-        private:
+          private:
             typename MatchExpression<ObjType1, ObjType2>::SharedPointer expression;
         };
 
@@ -111,19 +111,19 @@ namespace CDPL
         class NOTMatchExpression<ObjType, void> : public MatchExpression<ObjType, void>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %NOTMatchExpression instances.
              */
             typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
-        
+
             /**
              * \brief Constructs a \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.
              * \param expr_ptr A pointer to the wrapped Chem::MatchExpression instance.
              */
-            NOTMatchExpression(const typename MatchExpression<ObjType, void>::SharedPointer& expr_ptr): 
+            NOTMatchExpression(const typename MatchExpression<ObjType, void>::SharedPointer& expr_ptr):
                 expression(expr_ptr) {}
-        
+
             /**
              * Performs an evaluation of the wrapped match expression for the given query and target objects and returns the inverted result.
              *
@@ -145,7 +145,7 @@ namespace CDPL
              * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
              */
             bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
-        
+
             /**
              * \brief Tells whether the wrapped match expression requires a reevaluation after a query to target atom/bond mapping
              *        candidate has been found.
@@ -154,27 +154,27 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
-        private:
+          private:
             typename MatchExpression<ObjType, void>::SharedPointer expression;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                           const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                           const Base::Any& data) const
+bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                    const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                    const Base::Any& data) const
 {
     return !this->expression->operator()(query_obj1, query_obj2, target_obj1, target_obj2, data);
 }
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                           const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                           const AtomBondMapping& mapping, const Base::Any& data) const
+bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                    const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                    const AtomBondMapping& mapping, const Base::Any& data) const
 {
     return !this->expression->operator()(query_obj1, query_obj2, target_obj1, target_obj2, mapping, data);
 }
@@ -187,15 +187,15 @@ bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping
 
 
 template <typename ObjType>
-bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                      const Base::Any& data) const
+bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                               const Base::Any& data) const
 {
     return !this->expression->operator()(query_obj, target_obj, data);
 }
 
 template <typename ObjType>
-bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                      const AtomBondMapping& mapping, const Base::Any& data) const
+bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                               const AtomBondMapping& mapping, const Base::Any& data) const
 {
     return !this->expression->operator()(query_obj, target_obj, mapping, data);
 }

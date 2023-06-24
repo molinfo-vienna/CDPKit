@@ -39,66 +39,66 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
     {
-    
+
         /**
          * \brief BasicPharmacophore.
          */
         class CDPL_PHARM_API BasicPharmacophore : public Pharmacophore
         {
 
-            typedef Util::ObjectPool<BasicFeature> FeatureCache;
+            typedef Util::ObjectPool<BasicFeature>    FeatureCache;
             typedef FeatureCache::SharedObjectPointer FeaturePointer;
-            typedef std::vector<FeaturePointer> FeatureList;
+            typedef std::vector<FeaturePointer>       FeatureList;
 
           public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BasicPharmacophore instances.
              */
             typedef std::shared_ptr<BasicPharmacophore> SharedPointer;
-        
-            typedef boost::indirect_iterator<FeatureList::iterator, BasicFeature> FeatureIterator;
+
+            typedef boost::indirect_iterator<FeatureList::iterator, BasicFeature>             FeatureIterator;
             typedef boost::indirect_iterator<FeatureList::const_iterator, const BasicFeature> ConstFeatureIterator;
-        
+
             /**
              * \brief Constructs an empty \c %BasicPharmacophore instance.
              */
             BasicPharmacophore();
-    
+
             /**
              * \brief Constructs a copy of the \c %BasicPharmacophore instance \a pharm.
              * \param pharm The other \c %BasicPharmacophore instance to copy.
              */
             BasicPharmacophore(const BasicPharmacophore& pharm);
-    
+
             /**
              * \brief Constructs a copy of the Pharm::Pharmacophore instance \a pharm.
              * \param pharm The other Pharm::Pharmacophore instance to copy.
              */
             BasicPharmacophore(const Pharmacophore& pharm);
- 
+
             /**
              * \brief Constructs a %BasicPharmacophore instance with copies of the features 
              *        in the Pharm::FeatureContainer instance \a cntnr.
              * \param cntnr The Pharm::FeatureContainer instance with the features to copy.
              */
             explicit BasicPharmacophore(const FeatureContainer& cntnr);
-        
+
             /**
              * \brief Destructor.
              *
              * Destroys the \c %BasicPharmacophore instance and frees all allocated resources.
              */
             ~BasicPharmacophore();
-        
+
             void clear();
-        
+
             std::size_t getNumFeatures() const;
-        
+
             /**
              * \brief Returns a constant iterator pointing to the beginning of the features.
              * \return A constant iterator pointing to the beginning of the features.
@@ -128,9 +128,9 @@ namespace CDPL
             BasicFeature& getFeature(std::size_t idx);
 
             BasicFeature& addFeature();
-        
+
             void removeFeature(std::size_t idx);
-        
+
             /**
              * \brief Removes the feature specified by the iterator \a it.
              * \param it An iterator that specifies the feature to remove.
@@ -139,9 +139,9 @@ namespace CDPL
              *        [getFeaturesBegin(), getFeaturesEnd() - 1].
              */
             FeatureIterator removeFeature(const FeatureIterator& it);
-                
+
             bool containsFeature(const Feature& feature) const;
-                
+
             std::size_t getFeatureIndex(const Feature& feature) const;
 
             /**
@@ -154,7 +154,7 @@ namespace CDPL
              * \return A reference to itself.
              */
             BasicPharmacophore& operator=(const BasicPharmacophore& pharm);
-    
+
             using Pharmacophore::operator=;
 
             /**
@@ -171,18 +171,18 @@ namespace CDPL
             using Pharmacophore::operator+=;
 
             Pharmacophore::SharedPointer clone() const;
-    
+
             /**
              * \brief Replaces the current set of features and properties by a copy of the
              *        features and properties of the pharmacophore \a pharm.
              * \param pharm The pharmacophore to copy.
              */
             void copy(const BasicPharmacophore& pharm);
-    
+
             void copy(const Pharmacophore& pharm);
 
             void copy(const FeatureContainer& cntnr);
-                
+
             /**
              * \brief Extends the current set of features by a copy of the features in the
              *        pharmacophore \a pharm.
@@ -196,14 +196,14 @@ namespace CDPL
             void append(const FeatureContainer& cntnr);
 
             void remove(const FeatureContainer& cntnr);
-    
+
           private:
             template <typename T>
-                void doCopy(const T& pharm);
+            void doCopy(const T& pharm);
 
             template <typename T>
-                void doAppend(const T& pharm);
-            
+            void doAppend(const T& pharm);
+
             void clearFeatures();
 
             void renumberFeatures(std::size_t idx);
@@ -212,11 +212,11 @@ namespace CDPL
 
             static void destroyFeature(BasicFeature* feature);
             static void clearFeature(BasicFeature& feature);
-        
+
             FeatureCache featureCache;
             FeatureList  features;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_BASICPHARMACOPHORE_HPP

@@ -46,8 +46,8 @@ namespace CDPL
         void initControlParameters();
         void initControlParameterDefaults();
         void initDataFormats();
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 namespace
 {
@@ -55,7 +55,8 @@ namespace
     struct CDPLChemInit
     {
 
-        CDPLChemInit() {
+        CDPLChemInit()
+        {
             CDPL::Chem::initAtomProperties();
             CDPL::Chem::initBondProperties();
             CDPL::Chem::initMolecularGraphProperties();
@@ -71,7 +72,7 @@ namespace
         }
 
     } cdplChemInit;
-}
+} // namespace
 
 #endif // CDPL_CHEM_STATIC_LINK
 

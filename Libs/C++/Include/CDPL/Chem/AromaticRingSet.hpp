@@ -36,7 +36,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -47,10 +47,10 @@ namespace CDPL
         /**
          * \brief Implements the perception of aromatic rings in a molecular graph.
          */
-        class CDPL_CHEM_API AromaticRingSet : public FragmentList 
+        class CDPL_CHEM_API AromaticRingSet : public FragmentList
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticRingSet instances.
              */
@@ -74,7 +74,7 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
+          private:
             AromaticRingSet(const AromaticRingSet&);
 
             AromaticRingSet& operator=(const AromaticRingSet&);
@@ -84,11 +84,11 @@ namespace CDPL
             void findAromaticRings();
 
             bool isAromatic(const Fragment::SharedPointer&);
-        
+
             Util::BitSet          aromBondMask;
             const MolecularGraph* molGraph;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_AROMATICRINGSET_HPP

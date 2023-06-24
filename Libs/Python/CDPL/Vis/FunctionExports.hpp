@@ -34,6 +34,6 @@ namespace CDPLPythonVis
     void exportMolecularGraphFunctions();
     void exportReactionFunctions();
     void exportControlParameterFunctions();
-}
+} // namespace CDPLPythonVis
 
 #endif // CDPL_PYTHON_VIS_FUNCTIONEXPORTS_HPP

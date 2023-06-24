@@ -34,7 +34,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -53,12 +53,12 @@ namespace CDPL
         class CDPL_VIS_API Font
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a font object with an unspecified family name and a font size of \e 12.0.
              */
             Font();
-        
+
             /**
              * \brief Constructs a font object with the specified font family name and font size.
              *
@@ -67,19 +67,19 @@ namespace CDPL
              * \param family The font family name.
              * \param size The font size.
              */
-            Font(const std::string& family, double size = 12.0); 
+            Font(const std::string& family, double size = 12.0);
 
             /**
              * \brief Sets the font family name.
              * \param family The font family name.
              */
             void setFamily(const std::string& family);
- 
+
             /**
              * \brief Returns the font family name.
              * \return The font family name.
              */
-            const std::string& getFamily() const; 
+            const std::string& getFamily() const;
 
             /**
              * \brief Sets the font size.
@@ -88,85 +88,85 @@ namespace CDPL
              *
              * \param size The font size.
              */
-            void setSize(double size); 
+            void setSize(double size);
 
             /**
              * \brief Returns the font size.
              * \return The font size.
              */
-            double getSize() const; 
+            double getSize() const;
 
             /**
              * \brief Sets or clears the flag specifying whether text should be rendered bold.
              * \param flag \c true if text should be rendered bold, and \c false otherwise.
              */
-            void setBold(bool flag); 
+            void setBold(bool flag);
 
             /**
              * \brief Returns the flag specifying whether text is rendered bold.
              * \return \c true if text is rendered bold, and \c false otherwise.
              */
-            bool isBold() const; 
-    
+            bool isBold() const;
+
             /**
              * \brief Sets or clears the flag specifying whether text should be rendered italicized.
              * \param flag \c true if text should be rendered italicized, and \c false otherwise.
              */
-            void setItalic(bool flag); 
+            void setItalic(bool flag);
 
             /**
              * \brief Returns the flag specifying whether text is rendered italicized.
              * \return \c true if text is rendered italicized, and \c false otherwise.
              */
-            bool isItalic() const; 
-        
+            bool isItalic() const;
+
             /**
              * \brief Sets or clears the flag specifying whether text should be rendered underlined.
              * \param flag \c true if text should be rendered underlined, and \c false otherwise.
              */
-            void setUnderlined(bool flag); 
+            void setUnderlined(bool flag);
 
             /**
              * \brief Returns the flag specifying whether text is rendered underlined.
              * \return \c true if text is rendered underlined, and \c false otherwise.
              */
-            bool isUnderlined() const; 
+            bool isUnderlined() const;
 
             /**
              * \brief Sets or clears the flag specifying whether text should be rendered overlined.
              * \param flag \c true if text should be rendered overlined, and \c false otherwise.
              */
-            void setOverlined(bool flag); 
+            void setOverlined(bool flag);
 
             /**
              * \brief Returns the flag specifying whether text is rendered overlined.
              * \return \c true if text is rendered overlined, and \c false otherwise.
              */
-            bool isOverlined() const; 
-    
+            bool isOverlined() const;
+
             /**
              * \brief Sets or clears the flag specifying whether text should be rendered striked-out.
              * \param flag \c true if text should be rendered striked-out, and \c false otherwise.
              */
-            void setStrikedOut(bool flag); 
+            void setStrikedOut(bool flag);
 
             /**
              * \brief Returns the flag specifying whether text is rendered striked-out.
              * \return \c true if text is rendered striked-out, and \c false otherwise.
              */
-            bool isStrikedOut() const; 
+            bool isStrikedOut() const;
 
             /**
              * \brief Sets or clears the fixed pitch flag.
              * \param flag \c true if the font has a fixed pitch, and \c false otherwise.
              */
-            void setFixedPitch(bool flag); 
+            void setFixedPitch(bool flag);
 
             /**
              * \brief Returns the fixed pitch flag.
              * \return \c true if the font has a fixed pitch, and \c false otherwise.
              */
-            bool hasFixedPitch() const; 
+            bool hasFixedPitch() const;
 
             /**
              * \brief Equality comparison operator.
@@ -182,10 +182,10 @@ namespace CDPL
              *
              * \param font The other \c %Font object to be compared with.
              * \return \c true if one of the font attributes compares non-equal, and \c false otherwise.
-             */                    
+             */
             bool operator!=(const Font& font) const;
 
-        private:
+          private:
             std::string family;
             double      size;
             bool        bold;
@@ -195,7 +195,7 @@ namespace CDPL
             bool        strikedOut;
             bool        fixedPitch;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_FONT_HPP

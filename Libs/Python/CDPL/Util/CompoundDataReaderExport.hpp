@@ -37,7 +37,8 @@ namespace CDPLPythonUtil
     struct CompoundDataReaderExport
     {
 
-        CompoundDataReaderExport(const char* name) {
+        CompoundDataReaderExport(const char* name)
+        {
             using namespace boost;
             using namespace CDPL;
 
@@ -58,6 +59,6 @@ namespace CDPLPythonUtil
                 .add_property("numReaders", &ReaderType::getNumReaders);
         }
     };
-}
+} // namespace CDPLPythonUtil
 
 #endif // CDPL_PYTHON_UTIL_COMPOUNDDATAREADEREXPORT_HPP

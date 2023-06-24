@@ -38,7 +38,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Descr
@@ -52,9 +52,9 @@ namespace CDPL
         class RDFCodeCalculator
         {
 
-        public:
+          public:
             typedef T EntityType;
-            
+
             /**
              * \brief Type of the generic functor class used to store a user-defined entity pair weight function.
              *
@@ -193,7 +193,7 @@ namespace CDPL
             template <typename Iter, typename Vec>
             void calculate(Iter beg, Iter end, Vec& rdf_code);
 
-        private:
+          private:
             template <typename Iter>
             void init(Iter beg, Iter end);
 
@@ -208,17 +208,17 @@ namespace CDPL
             bool                        distToIntervalCenterRounding;
             Math::DMatrix               weightMatrix;
             Math::DMatrix               distMatrix;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename T>
-CDPL::Descr::RDFCodeCalculator<T>::RDFCodeCalculator(): 
-    smoothingFactor(1.0), scalingFactor(1.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99), 
-    distToIntervalCenterRounding(false) 
+CDPL::Descr::RDFCodeCalculator<T>::RDFCodeCalculator():
+    smoothingFactor(1.0), scalingFactor(1.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99),
+    distToIntervalCenterRounding(false)
 {}
 
 template <typename T>
@@ -341,7 +341,7 @@ void CDPL::Descr::RDFCodeCalculator<T>::init(Iter beg, Iter end)
 
     for (std::size_t i = 0; beg != end; i++) {
         const EntityType& entity1 = *beg;
-        
+
         if (coordsFunc)
             entity1_pos = coordsFunc(entity1);
 
@@ -358,9 +358,9 @@ void CDPL::Descr::RDFCodeCalculator<T>::init(Iter beg, Iter end)
             if (coordsFunc) {
                 double dist = length(entity1_pos - coordsFunc(entity2));
 
-                if (distToIntervalCenterRounding) 
+                if (distToIntervalCenterRounding)
                     dist = std::round((dist - startRadius) / radiusIncrement) * radiusIncrement + startRadius;
-                
+
                 distMatrix(i, j) = dist;
 
             } else

@@ -27,21 +27,21 @@
 #include <cstddef>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class AtomContainer;
     }
-    
+
     namespace Internal
     {
 
         inline std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
     }
-}
+} // namespace CDPL
 
 #include "AtomContainerFunctionsImpl.hpp"
 

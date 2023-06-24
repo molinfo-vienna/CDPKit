@@ -34,7 +34,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,11 +42,11 @@ namespace CDPL
 
         class MolecularGraph;
         class Molecule;
-    
+
         /**
          * \brief TautomerizationRule.
          */
-        class CDPL_CHEM_API TautomerizationRule 
+        class CDPL_CHEM_API TautomerizationRule
         {
 
           public:
@@ -67,7 +67,7 @@ namespace CDPL
 
             virtual SharedPointer clone() const = 0;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_TAUTOMERIZATIONRULE_HPP

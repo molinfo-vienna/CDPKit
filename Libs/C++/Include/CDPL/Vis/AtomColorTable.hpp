@@ -33,7 +33,7 @@
 #include "CDPL/Vis/ColorTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -54,8 +54,8 @@ namespace CDPL
              * Cr, Ag, Si, Au</em> and <em>He</em>.
              */
             extern CDPL_VIS_API const ColorTable ELEMENT_COLORS_2D;
-        }
-    }
-}
+        } // namespace AtomColorTable
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_ATOMCOLORTABLE_HPP

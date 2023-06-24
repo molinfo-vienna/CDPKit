@@ -37,7 +37,7 @@
 #include "CDPL/Biomol/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -48,11 +48,11 @@ namespace CDPL
          */
         class CDPL_BIOMOL_API PDBData
         {
-        
-        public:
+
+          public:
             typedef std::shared_ptr<PDBData> SharedPointer;
 
-            enum RecordType 
+            enum RecordType
             {
 
                 HEADER,
@@ -101,19 +101,21 @@ namespace CDPL
                 RESOLUTION
             };
 
-        private:
+          private:
             typedef std::map<RecordType, std::string> TypeToDataMap;
-        
-        public:
+
+          public:
             typedef typename TypeToDataMap::value_type Record;
 
             typedef typename TypeToDataMap::const_iterator ConstRecordIterator;
 
             typedef typename TypeToDataMap::iterator RecordIterator;
-        
-            PDBData(): data() {}
 
-            PDBData(const PDBData& other): data(other.data) {}
+            PDBData():
+                data() {}
+
+            PDBData(const PDBData& other):
+                data(other.data) {}
 
             void clear();
 
@@ -132,7 +134,7 @@ namespace CDPL
             const std::string& getData(const RecordType& type) const;
 
             void removeRecord(const RecordIterator& it);
-        
+
             bool removeRecord(const RecordType& type);
 
             RecordIterator setRecord(const Record& rec);
@@ -155,10 +157,10 @@ namespace CDPL
 
             RecordIterator end();
 
-        private:
+          private:
             TypeToDataMap data;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBDATA_HPP

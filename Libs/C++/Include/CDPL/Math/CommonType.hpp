@@ -42,7 +42,7 @@ namespace CDPL
 
             typedef typename std::common_type<T1, T2>::type Type;
         };
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_COMMONTYPE_HPP

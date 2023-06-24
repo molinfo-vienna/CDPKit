@@ -42,26 +42,26 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         RDFileIOSettingsEditWidget(QWidget*, Settings&);
 
         bool haveChangedSettings() const;
 
-    signals:
+      signals:
         void updateGUI();
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    private slots:
+      private slots:
         void handleRXNFileVersionChange();
 
         void handleSettingsChange();
         void handleSettingsChange(bool);
 
-    private:
+      private:
         void init();
 
         Settings&              settings;
@@ -84,6 +84,6 @@ namespace ChOX
         unsigned int           optRXNFileVersion;
         bool                   haveChanges;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_RDFILEIOSETTINGSEDITWIDGET_HPP

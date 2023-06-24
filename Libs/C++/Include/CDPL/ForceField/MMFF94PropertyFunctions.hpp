@@ -36,7 +36,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,9 +45,9 @@ namespace CDPL
         class Atom;
         class Bond;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         /**
@@ -74,7 +74,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
          */
         typedef std::function<const Chem::FragmentList::SharedPointer&(const Chem::MolecularGraph&)> MMFF94RingSetFunction;
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP

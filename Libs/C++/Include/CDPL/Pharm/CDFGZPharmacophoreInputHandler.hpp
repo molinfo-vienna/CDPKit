@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of gzip-compressed pharmacophore data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataInputHandler<CDFGZPharmacophoreReader, DataFormat::CDF_GZ> CDFGZPharmacophoreInputHandler;
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFGZPHARMACOPHOREINPUTHANDLER_HPP

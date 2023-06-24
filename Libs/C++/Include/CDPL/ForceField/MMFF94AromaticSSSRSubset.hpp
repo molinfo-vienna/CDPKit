@@ -38,12 +38,12 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-        
+
         class MolecularGraph;
     }
 
@@ -54,7 +54,7 @@ namespace CDPL
          * \brief Implements the extraction of all rings in the SSSR of a molecular graph that 
          *        are aromatic according to MMFF94 conventions.
          */
-        class CDPL_FORCEFIELD_API MMFF94AromaticSSSRSubset : public Chem::FragmentList 
+        class CDPL_FORCEFIELD_API MMFF94AromaticSSSRSubset : public Chem::FragmentList
         {
 
           public:
@@ -80,7 +80,7 @@ namespace CDPL
              * \param molgraph The molecular graph for which to extract the aromatic rings.
              */
             void extract(const Chem::MolecularGraph& molgraph);
-    
+
             /**
              * \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph \a molgraph.
              * \param molgraph The molecular graph for which to extract the aromatic rings.
@@ -104,7 +104,7 @@ namespace CDPL
             RingList                    candidateRings;
             Util::BitSet                aromBondMask;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_AROMATICSSSRSUBSET_HPP

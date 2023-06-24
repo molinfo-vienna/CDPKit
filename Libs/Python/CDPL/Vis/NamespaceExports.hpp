@@ -49,6 +49,6 @@ namespace CDPLPythonVis
     void exportControlParameterDefaults();
 
     void exportDataFormats();
-}
+} // namespace CDPLPythonVis
 
 #endif // CDPL_PYTHON_VIS_NAMESPACEEXPORTS_HPP

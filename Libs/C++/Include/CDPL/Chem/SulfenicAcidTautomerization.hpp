@@ -33,12 +33,12 @@
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         /**
          * \brief SulfenicAcidTautomerizationRule.
          */
@@ -48,7 +48,7 @@ namespace CDPL
           public:
             SulfenicAcidTautomerization();
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SULFENICACIDTAUTOMERIZATION_HPP

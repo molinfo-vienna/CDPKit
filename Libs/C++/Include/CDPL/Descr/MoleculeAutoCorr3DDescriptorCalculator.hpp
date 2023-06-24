@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
 
         class Atom;
         class AtomContainer;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -57,15 +57,15 @@ namespace CDPL
 
             typedef AutoCorrelation3DVectorCalculator<Chem::Atom> AutoCorr3DVectorCalculator;
 
-        public:
-            typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
+          public:
+            typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction                   Atom3DCoordinatesFunction;
             typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int)> AtomPairWeightFunction;
-        
+
             /**
              * \brief Constructs the \c %MoleculeAutoCorr3DDescriptorCalculator instance.
              */
             MoleculeAutoCorr3DDescriptorCalculator();
-            
+
             MoleculeAutoCorr3DDescriptorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -130,8 +130,8 @@ namespace CDPL
           private:
             AutoCorr3DVectorCalculator autoCorrCalculator;
             AtomPairWeightFunction     weightFunc;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP

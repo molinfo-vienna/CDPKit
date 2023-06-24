@@ -29,52 +29,56 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define ENTITY3DCONTAINER_IMPL()                                     \
-    std::size_t getNumEntities() const {                             \
-        return this->get_override("getNumEntities")();               \
-    }                                                                \
-                                                                     \
-    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const {   \
-        return this->get_override("getEntity")(idx);                 \
-    }                                                                \
-                                                                     \
-    CDPL::Chem::Entity3D& getEntity(std::size_t idx)  {              \
-        return this->get_override("getEntity")(idx);                 \
-    }
+#define ENTITY3DCONTAINER_IMPL()                              \
+ std::size_t getNumEntities() const                           \
+ {                                                            \
+  return this->get_override("getNumEntities")();              \
+ }                                                            \
+                                                              \
+ const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const \
+ {                                                            \
+  return this->get_override("getEntity")(idx);                \
+ }                                                            \
+                                                              \
+ CDPL::Chem::Entity3D& getEntity(std::size_t idx)             \
+ {                                                            \
+  return this->get_override("getEntity")(idx);                \
+ }
 
 
 namespace CDPLPythonChem
 {
 
-    class Entity3DContainerVirtualFunctionsVisitor : 
-        public boost::python::def_visitor<Entity3DContainerVirtualFunctionsVisitor>
+    class Entity3DContainerVirtualFunctionsVisitor : public boost::python::def_visitor<Entity3DContainerVirtualFunctionsVisitor>
     {
 
         friend class boost::python::def_visitor_access;
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
             using namespace CDPL;
 
-            cl    
-                .def("getEntity", python::pure_virtual(static_cast<Chem::Entity3D& (Chem::Entity3DContainer::*)(std::size_t)>(&Chem::Entity3DContainer::getEntity)), 
+            cl
+                .def("getEntity", python::pure_virtual(static_cast<Chem::Entity3D& (Chem::Entity3DContainer::*)(std::size_t)>(&Chem::Entity3DContainer::getEntity)),
                      (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
                 .def("getNumEntities", python::pure_virtual(&Chem::Entity3DContainer::getNumEntities), python::arg("self"));
         }
     };
 
-    class Entity3DContainerSpecialFunctionsVisitor : 
-        public boost::python::def_visitor<Entity3DContainerSpecialFunctionsVisitor>
+    class Entity3DContainerSpecialFunctionsVisitor : public boost::python::def_visitor<Entity3DContainerSpecialFunctionsVisitor>
     {
 
         friend class boost::python::def_visitor_access;
-    private:
+
+      private:
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
             using namespace CDPL;
-        
+
             cl
                 .def("__getitem__", static_cast<Chem::Entity3D& (Chem::Entity3DContainer::*)(std::size_t)>(&Chem::Entity3DContainer::getEntity),
                      (python::arg("self"), python::arg("idx")),
@@ -82,6 +86,6 @@ namespace CDPLPythonChem
                 .def("__len__", &Chem::Entity3DContainer::getNumEntities, python::arg("self"));
         }
     };
-}
+} // namespace CDPLPythonChem
 
 #endif // CDPL_PYTHON_BASE_ENTITY3DCONTAINERVISITOR_HPP

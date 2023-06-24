@@ -36,7 +36,7 @@
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -53,7 +53,7 @@ namespace CDPL
             class ConstComponentAccessor;
             class ComponentAccessor;
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Reaction instances.
              */
@@ -63,12 +63,12 @@ namespace CDPL
              * \brief A constant random access iterator used to iterate over the components of the reaction.
              */
             typedef Util::IndexedElementIterator<const Molecule, ConstComponentAccessor> ConstComponentIterator;
-    
+
             /**
              * \brief A mutable random access iterator used to iterate over the components of the reaction.
              */
             typedef Util::IndexedElementIterator<Molecule, ComponentAccessor> ComponentIterator;
-    
+
             /**
              * \brief Virtual destructor.
              */
@@ -93,7 +93,7 @@ namespace CDPL
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             virtual std::size_t getNumComponents(unsigned int role) const = 0;
-    
+
             /**
              * \brief Returns the reaction role of the specified component.
              *
@@ -111,7 +111,7 @@ namespace CDPL
              * \throw Base::ItemNotFound if the specified molecule is not a component of this reaction.
              */
             virtual std::size_t getComponentIndex(const Molecule& mol) const = 0;
-    
+
             /**
              * \brief Tells whether the specified molecule is a component of this reaction.
              * \param mol The molecule to look for.
@@ -210,7 +210,7 @@ namespace CDPL
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             ComponentIterator getComponentsEnd(unsigned int role);
-        
+
             /**
              * \brief Returns a \c const reference to the reaction component at index \a idx.
              * \param idx The zero-based index of the reaction component to return.
@@ -252,7 +252,7 @@ namespace CDPL
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             virtual Molecule& getComponent(std::size_t idx, unsigned int role) = 0;
-        
+
             /**
              * \brief Creates a new reaction component with the specified role.
              * \param role A flag specifying the reaction role of the new component (see namespace Chem::ReactionRole).
@@ -261,7 +261,7 @@ namespace CDPL
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             virtual Molecule& addComponent(unsigned int role) = 0;
-    
+
             /**
              * \brief Swaps the reaction roles of the component sets specified by \a role1 and \a role2.
              *
@@ -308,7 +308,7 @@ namespace CDPL
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             virtual void removeComponents(unsigned int role) = 0;
-        
+
             /**
              * \brief Creates a copy of the current reaction state.
              * \return A smart pointer to the copy of the reaction.
@@ -333,21 +333,23 @@ namespace CDPL
              */
             Reaction& operator=(const Reaction& rxn);
 
-        private:
+          private:
             class CDPL_CHEM_API ConstComponentAccessor
             {
 
                 friend class Reaction;
-                
-            public:
-                ConstComponentAccessor(const ComponentAccessor& accessor): reaction(accessor.reaction), compRole(accessor.compRole) {}
-                ConstComponentAccessor(const Reaction* rxn, unsigned int role): reaction(rxn), compRole(role) {}
+
+              public:
+                ConstComponentAccessor(const ComponentAccessor& accessor):
+                    reaction(accessor.reaction), compRole(accessor.compRole) {}
+                ConstComponentAccessor(const Reaction* rxn, unsigned int role):
+                    reaction(rxn), compRole(role) {}
 
                 const Molecule& operator()(std::size_t idx) const;
 
                 bool operator==(const ConstComponentAccessor& accessor) const;
 
-            private:
+              private:
                 const Reaction* reaction;
                 unsigned int    compRole;
             };
@@ -355,22 +357,23 @@ namespace CDPL
             class CDPL_CHEM_API ComponentAccessor
             {
 
-                friend class Reaction;            
+                friend class Reaction;
                 friend class ConstComponentAccessor;
 
-            public:
-                ComponentAccessor(Reaction* rxn, unsigned int role): reaction(rxn), compRole(role) {}
+              public:
+                ComponentAccessor(Reaction* rxn, unsigned int role):
+                    reaction(rxn), compRole(role) {}
 
                 Molecule& operator()(std::size_t idx) const;
 
                 bool operator==(const ComponentAccessor& accessor) const;
 
-            private:
+              private:
                 Reaction*    reaction;
                 unsigned int compRole;
             };
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTION_HPP

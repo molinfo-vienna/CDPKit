@@ -36,8 +36,8 @@ namespace CDPL
 
         void initAttributedGridProperties();
         void initAttributedGridPropertyDefaults();
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 namespace
 {
@@ -45,13 +45,14 @@ namespace
     struct CDPLGridInit
     {
 
-        CDPLGridInit() {
+        CDPLGridInit()
+        {
             CDPL::Grid::initAttributedGridProperties();
             CDPL::Grid::initAttributedGridPropertyDefaults();
         }
 
     } cdplGridInit;
-}
+} // namespace
 
 #endif // CDPL_GRID_STATIC_LINK
 

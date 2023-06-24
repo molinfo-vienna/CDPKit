@@ -30,7 +30,7 @@
 #include <cstddef>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -48,14 +48,14 @@ namespace CDPL
         class PMLDataWriter
         {
 
-        public:
+          public:
             PMLDataWriter(const Base::DataIOBase& io_base);
 
             bool writeFeatureContainer(std::ostream& os, const FeatureContainer& pharm);
 
             void close(std::ostream& os);
 
-        private:
+          private:
             void init(std::ostream& os);
 
             void writeElemContainerHeader(std::ostream& os) const;
@@ -91,7 +91,7 @@ namespace CDPL
             std::size_t             alignElemID;
             std::size_t             featureID;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PMLDATAWRITER_HPP

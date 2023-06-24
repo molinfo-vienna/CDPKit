@@ -35,8 +35,7 @@
 #include "CDPL/Util/StreamDataReader.hpp"
 
 
-
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -57,7 +56,7 @@ namespace CDPL
         class CDPL_BIOMOL_API MMTFMoleculeReader : public Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %MMTFMoleculeReader instance that will read molecule data from the input
              *        stream \a is.
@@ -70,7 +69,7 @@ namespace CDPL
              */
             ~MMTFMoleculeReader();
 
-        private:
+          private:
             friend class Util::StreamDataReader<Chem::Molecule, MMTFMoleculeReader>;
 
             MMTFMoleculeReader(const MMTFMoleculeReader&);
@@ -85,7 +84,7 @@ namespace CDPL
 
             MMTFDataReaderPtr reader;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MMTFMOLECULEREADER_HPP

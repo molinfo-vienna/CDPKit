@@ -33,12 +33,12 @@
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class AtomContainer;
     }
 
@@ -48,8 +48,7 @@ namespace CDPL
         CDPL_DESCR_API double calcGeometricalRadius(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
 
         CDPL_DESCR_API double calcGeometricalDiameter(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func);
-    }
-}
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_ATOMCONTAINERFUNCTIONS_HPP
- 

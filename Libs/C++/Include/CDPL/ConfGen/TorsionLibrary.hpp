@@ -36,18 +36,18 @@
 #include "CDPL/ConfGen/TorsionCategory.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API TorsionLibrary : public TorsionCategory
         {
-            
+
           public:
             typedef std::shared_ptr<TorsionLibrary> SharedPointer;
-    
+
             void load(std::istream& is);
 
             void save(std::ostream& os) const;
@@ -61,7 +61,7 @@ namespace CDPL
           private:
             static SharedPointer defaultLib;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONLIBRARY_HPP

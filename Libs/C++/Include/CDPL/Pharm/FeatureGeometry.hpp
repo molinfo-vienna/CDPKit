@@ -30,27 +30,27 @@
 #define CDPL_PHARM_FEATUREGEOMETRY_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Pharm 
+    namespace Pharm
     {
 
         /**
          * \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
          */
-        namespace FeatureGeometry 
+        namespace FeatureGeometry
         {
-        
-            const unsigned int UNDEF    = 0;
 
-            const unsigned int SPHERE   = 1;
+            const unsigned int UNDEF = 0;
 
-            const unsigned int VECTOR   = 2;
+            const unsigned int SPHERE = 1;
 
-            const unsigned int PLANE    = 3;
-        }
-    }
-}
+            const unsigned int VECTOR = 2;
+
+            const unsigned int PLANE = 3;
+        } // namespace FeatureGeometry
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREGEOMETRY_HPP

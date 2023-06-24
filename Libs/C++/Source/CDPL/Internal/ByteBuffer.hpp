@@ -43,19 +43,19 @@ namespace CDPL
         class ByteBuffer
         {
 
-        public:
+          public:
             ByteBuffer(std::size_t size = 1024);
 
             std::size_t getIOPointer() const;
 
             void setIOPointer(std::size_t pos);
-        
+
             void reserve(std::size_t size);
 
             void resize(std::size_t size, char value = 0);
 
             std::size_t getSize() const;
-    
+
             template <typename T>
             std::size_t putInt(const T& value, bool compress);
 
@@ -72,9 +72,9 @@ namespace CDPL
             void getFloat(T& value);
 
             void putBytes(const char* bytes, std::size_t num_bytes);
-    
+
             void putBytes(const ByteBuffer& buffer);
-    
+
             void getBytes(char* bytes, std::size_t num_bytes);
 
             std::size_t readBuffer(std::istream& is, std::size_t num_bytes);
@@ -85,20 +85,20 @@ namespace CDPL
 
             char* getData();
 
-        private:
+          private:
             void reserveWriteSpace(std::size_t num_bytes);
             void checkReadSpace(std::size_t num_bytes) const;
 
             std::size_t putValueBytes(const char* bytes, std::size_t num_bytes, bool compress);
-            void getValueBytes(char* bytes, std::size_t type_size, std::size_t num_bytes);
+            void        getValueBytes(char* bytes, std::size_t type_size, std::size_t num_bytes);
 
             typedef std::vector<char> StorageType;
 
             StorageType data;
             std::size_t ioPointer;
         };
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 
 // Implementation
@@ -106,7 +106,7 @@ namespace CDPL
 template <typename T>
 std::size_t CDPL::Internal::ByteBuffer::putInt(const T& value, bool compress)
 {
-    BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, 
+    BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0,
                             "ByteBuffer: byte size of integer type is zero");
 
     return putValueBytes(reinterpret_cast<const char*>(&value), sizeof(T), compress);
@@ -121,7 +121,7 @@ void CDPL::Internal::ByteBuffer::getInt(T& value)
 template <typename T>
 void CDPL::Internal::ByteBuffer::getInt(T& value, std::size_t num_bytes)
 {
-    value = T();
+    value     = T();
     num_bytes = std::min(num_bytes, sizeof(T));
 
     getValueBytes(reinterpret_cast<char*>(&value), sizeof(T), num_bytes);
@@ -130,7 +130,7 @@ void CDPL::Internal::ByteBuffer::getInt(T& value, std::size_t num_bytes)
 template <typename T>
 void CDPL::Internal::ByteBuffer::putFloat(const T& value)
 {
-    BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_iec559, 
+    BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_iec559,
                             "ByteBuffer: floating-point types must adhere to the IEC-559 standard");
 
     putValueBytes(reinterpret_cast<const char*>(&value), sizeof(T), false);
@@ -139,7 +139,7 @@ void CDPL::Internal::ByteBuffer::putFloat(const T& value)
 template <typename T>
 void CDPL::Internal::ByteBuffer::getFloat(T& value)
 {
-    BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_iec559, 
+    BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_iec559,
                             "ByteBuffer: floating-point types must adhere to the IEC-559 standard");
 
     getValueBytes(reinterpret_cast<char*>(&value), sizeof(T), sizeof(T));

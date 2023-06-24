@@ -35,7 +35,7 @@
 #include "CDPL/Base/DataIOBase.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -72,7 +72,7 @@ namespace CDPL
         class DataReader : virtual public DataIOBase
         {
 
-        public:
+          public:
             /**
              * \brief The type of the read data objects.
              */
@@ -165,7 +165,7 @@ namespace CDPL
              * \see operator!()
              */
             virtual operator const void*() const = 0;
-            
+
             /**
              * \brief Tells whether the reader is in a bad state.
              *
@@ -186,7 +186,7 @@ namespace CDPL
              */
             virtual void close() {}
 
-        protected:
+          protected:
             /**
              * \brief Assignment operator.
              * \param reader The \c %DataReader instance to copy.
@@ -205,8 +205,8 @@ namespace CDPL
          */
         template <typename T>
         DataReader<T>& operator>>(DataReader<T>& reader, T& obj);
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 
 // Implementation

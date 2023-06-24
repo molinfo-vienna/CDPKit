@@ -43,7 +43,7 @@ namespace CDPL
 {
 
     namespace Math
-    {    
+    {
 
         /**
          * \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix \a an using Jacobi's
@@ -65,18 +65,18 @@ namespace CDPL
          */
         template <typename M1, typename V, typename M2>
         bool jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>& d, MatrixExpression<M2>& v, std::size_t max_iter = 50);
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 
-// Implementation 
+// Implementation
 
 namespace
 {
 
     template <typename M>
-    void jacobiRotate(M& a, typename M::SizeType i, typename M::SizeType j, 
-                      typename M::SizeType k, typename M::SizeType l, 
+    void jacobiRotate(M& a, typename M::SizeType i, typename M::SizeType j,
+                      typename M::SizeType k, typename M::SizeType l,
                       typename M::ValueType tau, typename M::ValueType s)
     {
         typedef typename M::ValueType ValueType;
@@ -87,40 +87,40 @@ namespace
         a(i, j) = g - s * (h + g * tau);
         a(k, l) = h + s * (g - h * tau);
     }
-}
+} // namespace
 
 
 template <typename M1, typename V, typename M2>
 bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>& d, MatrixExpression<M2>& v, std::size_t max_iter)
 {
-    typedef typename CommonType<typename CommonType<typename M1::ValueType, typename V::ValueType>::Type, 
-        typename M2::ValueType>::Type ValueType;
-            
+    typedef typename CommonType<typename CommonType<typename M1::ValueType, typename V::ValueType>::Type,
+                                typename M2::ValueType>::Type ValueType;
+
     typedef typename CommonType<typename CommonType<typename M1::SizeType, typename V::SizeType>::Type,
-        typename M2::SizeType>::Type SizeType;
+                                typename M2::SizeType>::Type SizeType;
 
     SizeType n = a().getSize1();
 
-    CDPL_MATH_CHECK(n == a().getSize2() && n > 0 && SizeType(d().getSize()) >= n, "Preconditions violated",  Base::SizeError);
+    CDPL_MATH_CHECK(n == a().getSize2() && n > 0 && SizeType(d().getSize()) >= n, "Preconditions violated", Base::SizeError);
 
     typename VectorTemporaryTraits<V>::Type b(n);
     typename VectorTemporaryTraits<V>::Type z(n);
 
     v().assign(IdentityMatrix<ValueType>(n, n));
 
-    for (SizeType ip = 0; ip < n; ip++) {     
-        b(ip) = d()(ip) = a()(ip, ip);  // Initialize b and d to the diagonal of a
-        z(ip) = ValueType();                  // This vector will accumulate terms of the form tapq as in equation (11.1.14).
+    for (SizeType ip = 0; ip < n; ip++) {
+        b(ip) = d()(ip) = a()(ip, ip); // Initialize b and d to the diagonal of a
+        z(ip)           = ValueType(); // This vector will accumulate terms of the form tapq as in equation (11.1.14).
     }
 
     for (std::size_t i = 0; i < max_iter; i++) {
-        ValueType sm = ValueType(); 
+        ValueType sm = ValueType();
 
-        for (SizeType ip = 0; ip < n - 1; ip++)  // Sum off-diagonal elements.
+        for (SizeType ip = 0; ip < n - 1; ip++) // Sum off-diagonal elements.
             for (SizeType iq = ip + 1; iq < n; iq++)
                 sm += TypeTraits<ValueType>::abs(a()(ip, iq));
 
-        if (sm == ValueType())            // The normal return, which relies on quadratic convergence to machine underflow.
+        if (sm == ValueType()) // The normal return, which relies on quadratic convergence to machine underflow.
             return true;
 
         ValueType tresh;
@@ -128,7 +128,7 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
         if (i < 3)
             tresh = ValueType(0.2) * sm / (n * n); // ...on the first three sweeps.
         else
-            tresh = ValueType();                  // ...thereafter.
+            tresh = ValueType(); // ...thereafter.
 
         for (SizeType ip = 0; ip < n - 1; ip++) {
             for (SizeType iq = ip + 1; iq < n; iq++) {
@@ -147,32 +147,32 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
 
                     else {
                         ValueType theta = 0.5 * h / a()(ip, iq);
-                        t = 1 / (TypeTraits<ValueType>::abs(theta) + TypeTraits<ValueType>::sqrt(1 + theta * theta));
+                        t               = 1 / (TypeTraits<ValueType>::abs(theta) + TypeTraits<ValueType>::sqrt(1 + theta * theta));
 
-                        if (theta < ValueType()) 
+                        if (theta < ValueType())
                             t = -t;
                     }
-                    
-                    ValueType c = 1 / TypeTraits<ValueType>::sqrt(1 + t * t);
-                    ValueType s = t * c;
+
+                    ValueType c   = 1 / TypeTraits<ValueType>::sqrt(1 + t * t);
+                    ValueType s   = t * c;
                     ValueType tau = s / (1 + c);
-                    h = t * a()(ip, iq);
+                    h             = t * a()(ip, iq);
                     z(ip) -= h;
                     z(iq) += h;
                     d()(ip) -= h;
                     d()(iq) += h;
                     a()(ip, iq) = ValueType();
 
-                    for (SizeType j = 0; j < ip; j++)        // Case of rotations 1 < j < p.
+                    for (SizeType j = 0; j < ip; j++) // Case of rotations 1 < j < p.
                         jacobiRotate(a(), j, ip, j, iq, tau, s);
 
-                    for (SizeType j = ip + 1; j < iq; j++)   // Case of rotations p < j < q.
+                    for (SizeType j = ip + 1; j < iq; j++) // Case of rotations p < j < q.
                         jacobiRotate(a(), ip, j, j, iq, tau, s);
 
-                    for (SizeType j = iq + 1; j < n; j++)    // Case of rotations q < j < n.
+                    for (SizeType j = iq + 1; j < n; j++) // Case of rotations q < j < n.
                         jacobiRotate(a(), ip, j, iq, j, tau, s);
-                    
-                    for (SizeType j = 0; j < n; j++) 
+
+                    for (SizeType j = 0; j < n; j++)
                         jacobiRotate(v(), j, ip, j, iq, tau, s);
                 }
             }
@@ -180,8 +180,8 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
 
         for (SizeType ip = 0; ip < n; ip++) {
             b(ip) += z(ip);
-            d()(ip) = b(ip);         // Update d with the sum of tapq,
-            z(ip) = ValueType();     // and reinitialize z.
+            d()(ip) = b(ip); // Update d with the sum of tapq,
+            z(ip)   = ValueType(); // and reinitialize z.
         }
     }
 
@@ -189,4 +189,3 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
 }
 
 #endif // CDPL_MATH_JACOBIDIAGONALIZATION_HPP
-

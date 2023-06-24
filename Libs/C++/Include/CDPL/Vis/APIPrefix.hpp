@@ -30,14 +30,14 @@
 #define CDPL_VIS_APIPREFIX_HPP
 
 #ifdef CDPL_VIS_STATIC_LINK
-#  define CDPL_VIS_API
+# define CDPL_VIS_API
 #else // CDPL_VIS_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_vis_shared_EXPORTS
-#    define CDPL_VIS_API CDPL_API_EXPORT
-#  else
-#    define CDPL_VIS_API CDPL_API_IMPORT
-#  endif // cdpl_vis_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_vis_shared_EXPORTS
+#  define CDPL_VIS_API CDPL_API_EXPORT
+# else
+#  define CDPL_VIS_API CDPL_API_IMPORT
+# endif // cdpl_vis_shared_EXPORTS
 #endif // CDPL_VIS_STATIC_LINK
 
 /**

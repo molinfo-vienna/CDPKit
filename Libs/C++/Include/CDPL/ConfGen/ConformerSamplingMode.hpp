@@ -30,7 +30,7 @@
 #define CDPL_CONFGEN_CONFORMERSAMPLINGMODE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -41,12 +41,12 @@ namespace CDPL
          */
         namespace ConformerSamplingMode
         {
-                    
+
             const unsigned int AUTO       = 0;
             const unsigned int SYSTEMATIC = 1;
             const unsigned int STOCHASTIC = 2;
-        }
-    }
-}
+        } // namespace ConformerSamplingMode
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONFORMERSAMPLINGMODE_HPP

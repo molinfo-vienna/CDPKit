@@ -38,7 +38,7 @@ namespace CDPL
 
         namespace CDF
         {
-            
+
             using namespace Internal::CDF;
 
             typedef std::uint32_t UIntType;
@@ -46,7 +46,7 @@ namespace CDPL
             const std::uint8_t INTERACTION_SCORE_GRID_RECORD_ID     = 4;
             const std::uint8_t INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
 
-            const std::uint8_t CURR_FORMAT_VERSION  = 1;
+            const std::uint8_t CURR_FORMAT_VERSION = 1;
 
             namespace AttributedGridProperty
             {
@@ -55,9 +55,9 @@ namespace CDPL
 
                 const unsigned int FEATURE_TYPE        = 1;
                 const unsigned int TARGET_FEATURE_TYPE = 2;
-            }
-        }
-    }
-}
+            } // namespace AttributedGridProperty
+        } // namespace CDF
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_CDFFORMATDATA_HPP

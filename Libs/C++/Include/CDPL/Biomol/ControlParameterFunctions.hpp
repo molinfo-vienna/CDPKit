@@ -33,7 +33,7 @@
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -42,9 +42,9 @@ namespace CDPL
         class ControlParameterContainer;
     }
 
-    namespace Biomol 
+    namespace Biomol
     {
-    
+
         CDPL_BIOMOL_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_BIOMOL_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
@@ -241,8 +241,7 @@ namespace CDPL
         CDPL_BIOMOL_API bool hasCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
 
         CDPL_BIOMOL_API void clearCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr);
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_CONTROLPARAMETERFUNCTIONS_HPP
- 

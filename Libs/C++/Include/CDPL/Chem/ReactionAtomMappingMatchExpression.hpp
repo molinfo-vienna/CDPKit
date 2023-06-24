@@ -36,7 +36,7 @@
 #include "CDPL/Chem/AtomMapping.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_CHEM_API ReactionAtomMappingMatchExpression : public MatchExpression<Reaction>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionAtomMappingMatchExpression
              *        instances.
@@ -96,10 +96,10 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
-        private:
+          private:
             AtomMapping::SharedPointer atomMapping;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONATOMMAPPINGMATCHEXPRESSION_HPP

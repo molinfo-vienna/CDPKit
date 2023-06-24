@@ -34,7 +34,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -48,7 +48,7 @@ namespace CDPL
 
             extern CDPL_PHARM_API const std::string NAME;
         }
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURECONTAINERPROPERTYDEFAULT_HPP

@@ -42,32 +42,33 @@ namespace CDPL
         /**
          * \brief SpatialGrid.
          */
-        template <typename T, typename CVT = T> 
+        template <typename T, typename CVT = T>
         class SpatialGrid : public AttributedGrid
         {
 
-        public:
+          public:
             typedef std::shared_ptr<SpatialGrid> SharedPointer;
-            typedef T ValueType;
-            typedef CVT CoordinatesValueType;
-            typedef Math::CVector<CVT, 3> CoordinatesType;
-            
+            typedef T                            ValueType;
+            typedef CVT                          CoordinatesValueType;
+            typedef Math::CVector<CVT, 3>        CoordinatesType;
+
             virtual ValueType& operator()(std::size_t i) = 0;
 
             virtual const ValueType& operator()(std::size_t i) const = 0;
-    
+
             virtual void getCoordinates(std::size_t i, CoordinatesType& coords) const = 0;
 
-        protected:
-            SpatialGrid& operator=(const SpatialGrid& grid) {
+          protected:
+            SpatialGrid& operator=(const SpatialGrid& grid)
+            {
                 AttributedGrid::operator=(grid);
                 return *this;
             }
         };
 
-        typedef SpatialGrid<float> FSpatialGrid;
+        typedef SpatialGrid<float>  FSpatialGrid;
         typedef SpatialGrid<double> DSpatialGrid;
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_SPATIALGRID_HPP

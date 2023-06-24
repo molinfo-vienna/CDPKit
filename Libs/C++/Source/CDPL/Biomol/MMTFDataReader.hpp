@@ -33,7 +33,7 @@
 #include <mmtf.hpp>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -47,7 +47,7 @@ namespace CDPL
 
         class Molecule;
         class Atom;
-    }
+    } // namespace Chem
 
     namespace Biomol
     {
@@ -55,20 +55,21 @@ namespace CDPL
         class MMTFDataReader
         {
 
-        public:
-            MMTFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            MMTFDataReader(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool readRecord(std::istream& is, Chem::Molecule& mol);
 
             bool skipRecord(std::istream& is);
-        
+
             bool hasMoreData(std::istream& is) const;
 
-        private:
+          private:
             bool readRecordData(std::istream& is, msgpack::object_handle& handle);
 
             void buildMolecule(Chem::Molecule& mol);
-            
+
             void addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
 
             typedef std::vector<Chem::Atom*> AtomArray;
@@ -77,7 +78,7 @@ namespace CDPL
             AtomArray               atoms;
             mmtf::StructureData     structData;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MMTFDATAREADER_HPP

@@ -51,9 +51,9 @@ namespace CDPL
         struct Dereferencer
         {
 
-        public:
+          public:
             typedef ResType result_type;
-            
+
             /**
              * \brief Returns a reference to or copy of the pointed-to argument object.
              * \param ptr A pointer of type \a ArgType to an object.
@@ -75,9 +75,9 @@ namespace CDPL
         struct NullCheckDereferencer
         {
 
-        public:
+          public:
             typedef ResType result_type;
-            
+
             /**
              * \brief Returns a reference to or copy of the pointed-to argument object.
              * \param ptr A pointer of type \a ArgType to an object.
@@ -86,8 +86,8 @@ namespace CDPL
              */
             ResType operator()(const ArgType& ptr) const;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation

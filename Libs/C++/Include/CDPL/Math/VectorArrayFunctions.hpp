@@ -36,7 +36,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Math
@@ -48,16 +48,16 @@ namespace CDPL
          * \param xform The transformation matrix.
          */
         template <typename T, std::size_t Dim, typename T1>
-        void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim, Dim>& xform) 
+        void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim, Dim>& xform)
         {
-            typedef CVector<T, Dim> VecType;
+            typedef CVector<T, Dim>       VecType;
             typedef CMatrix<T1, Dim, Dim> MtxType;
 
             typedef typename VectorArray<VecType>::ElementIterator Iterator;
-            typedef typename VecType::Pointer VecDataPointer;
-            typedef typename MtxType::ConstArrayPointer MtxDataPointer;
+            typedef typename VecType::Pointer                      VecDataPointer;
+            typedef typename MtxType::ConstArrayPointer            MtxDataPointer;
 
-            T tmp[Dim];
+            T              tmp[Dim];
             MtxDataPointer xform_data = xform.getData();
 
             for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) {
@@ -65,12 +65,12 @@ namespace CDPL
 
                 for (std::size_t i = 0; i < Dim; i++) {
                     tmp[i] = T();
-    
-                    for (std::size_t j = 0; j < Dim; j++) 
+
+                    for (std::size_t j = 0; j < Dim; j++)
                         tmp[i] += vec[j] * xform_data[i][j];
                 }
 
-                for (std::size_t i = 0; i < Dim; i++) 
+                for (std::size_t i = 0; i < Dim; i++)
                     vec[i] = tmp[i];
             }
         }
@@ -84,29 +84,29 @@ namespace CDPL
         template <typename T, std::size_t Dim, typename T1>
         void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim + 1, Dim + 1>& xform)
         {
-            typedef CVector<T, Dim> VecType;
+            typedef CVector<T, Dim>               VecType;
             typedef CMatrix<T1, Dim + 1, Dim + 1> MtxType;
 
             typedef typename VectorArray<VecType>::ElementIterator Iterator;
-            typedef typename VecType::Pointer VecDataPointer;
-            typedef typename MtxType::ConstArrayPointer MtxDataPointer;
+            typedef typename VecType::Pointer                      VecDataPointer;
+            typedef typename MtxType::ConstArrayPointer            MtxDataPointer;
 
-            T tmp[Dim];
+            T              tmp[Dim];
             MtxDataPointer xform_data = xform.getData();
 
             for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) {
                 VecDataPointer vec = it->getData();
-        
+
                 for (std::size_t i = 0; i < Dim; i++) {
                     tmp[i] = T();
-    
-                    for (std::size_t j = 0; j < Dim; j++) 
+
+                    for (std::size_t j = 0; j < Dim; j++)
                         tmp[i] += vec[j] * xform_data[i][j];
 
                     tmp[i] += xform_data[i][Dim];
                 }
 
-                for (std::size_t i = 0; i < Dim; i++) 
+                for (std::size_t i = 0; i < Dim; i++)
                     vec[i] = tmp[i];
             }
         }
@@ -127,7 +127,7 @@ namespace CDPL
 
             typedef typename VectorArray<CVector<T, Dim> >::ConstElementIterator Iterator;
 
-            for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) 
+            for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it)
                 ctr.plusAssign(*it);
 
             ctr /= va.getSize();
@@ -138,7 +138,7 @@ namespace CDPL
         template <typename T, std::size_t Dim>
         T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2)
         {
-            typedef CVector<T, Dim> VecType;
+            typedef CVector<T, Dim>                         VecType;
             typedef typename VectorArray<VecType>::SizeType ArraySizeType;
 
             ArraySizeType num_elem = std::min(va1.getSize(), va2.getSize());
@@ -147,7 +147,7 @@ namespace CDPL
                 return T();
 
             typedef typename VectorArray<VecType>::ConstElementIterator Iterator;
-            typedef typename VecType::ConstPointer VecDataPointer;
+            typedef typename VecType::ConstPointer                      VecDataPointer;
 
             T sd = T();
 
@@ -162,13 +162,13 @@ namespace CDPL
                 }
             }
 
-            return std::sqrt(sd / num_elem); 
+            return std::sqrt(sd / num_elem);
         }
 
         template <typename T, std::size_t Dim, typename T1>
         T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2, const CMatrix<T1, Dim + 1, Dim + 1>& va1_xform)
         {
-            typedef CVector<T, Dim> VecType;
+            typedef CVector<T, Dim>               VecType;
             typedef CMatrix<T1, Dim + 1, Dim + 1> MtxType;
 
             typedef typename VectorArray<VecType>::SizeType ArraySizeType;
@@ -179,10 +179,10 @@ namespace CDPL
                 return T();
 
             typedef typename VectorArray<VecType>::ConstElementIterator Iterator;
-            typedef typename VecType::ConstPointer VecDataPointer;
-            typedef typename MtxType::ConstArrayPointer MtxDataPointer;
+            typedef typename VecType::ConstPointer                      VecDataPointer;
+            typedef typename MtxType::ConstArrayPointer                 MtxDataPointer;
 
-            T sd = T();
+            T              sd         = T();
             MtxDataPointer xform_data = va1_xform.getData();
 
             for (Iterator it1 = va1.getElementsBegin(), it2 = va2.getElementsBegin(), end = it1 + num_elem; it1 != end; ++it1, ++it2) {
@@ -192,7 +192,7 @@ namespace CDPL
                 for (std::size_t i = 0; i < Dim; i++) {
                     T tmp = T();
 
-                    for (std::size_t j = 0; j < Dim; j++) 
+                    for (std::size_t j = 0; j < Dim; j++)
                         tmp += vec1[j] * xform_data[i][j];
 
                     tmp += xform_data[i][Dim] - vec2[i];
@@ -200,9 +200,9 @@ namespace CDPL
                 }
             }
 
-            return std::sqrt(sd / num_elem); 
+            return std::sqrt(sd / num_elem);
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_VECTORARRAYFUNCTIONS_HPP

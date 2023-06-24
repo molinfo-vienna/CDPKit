@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataReader<CDFDRegularGridReader, Util::BZip2IStream> CDFBZ2DRegularGridReader;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFBZ2DREGULARGRIDREADER_HPP

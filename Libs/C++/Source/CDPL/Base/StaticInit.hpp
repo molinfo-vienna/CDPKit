@@ -36,7 +36,7 @@ namespace CDPL
 
         void initLookupKey();
     }
-}
+} // namespace CDPL
 
 namespace
 {
@@ -44,12 +44,13 @@ namespace
     struct CDPLBaseInit
     {
 
-        CDPLBaseInit() {
+        CDPLBaseInit()
+        {
             CDPL::Base::initLookupKey();
         }
 
     } cdplBaseInit;
-}
+} // namespace
 
 #endif // CDPL_BASE_STATIC_LINK
 

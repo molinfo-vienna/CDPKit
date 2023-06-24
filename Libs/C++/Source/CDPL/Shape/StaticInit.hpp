@@ -34,7 +34,7 @@ namespace CDPL
     namespace Shape
     {
     }
-}
+} // namespace CDPL
 
 namespace
 {
@@ -42,11 +42,12 @@ namespace
     struct CDPLShapeInit
     {
 
-        CDPLShapeInit() {
+        CDPLShapeInit()
+        {
         }
 
     } cdplShapeInit;
-}
+} // namespace
 
 #endif // CDPL_SHAPE_STATIC_LINK
 

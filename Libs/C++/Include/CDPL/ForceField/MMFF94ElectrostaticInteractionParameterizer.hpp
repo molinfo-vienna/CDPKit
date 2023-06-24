@@ -38,7 +38,7 @@
 #include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -47,7 +47,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionParameterizer
@@ -62,15 +62,15 @@ namespace CDPL
 
             MMFF94ElectrostaticInteractionParameterizer();
 
-            MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+            MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph&         molgraph,
                                                         MMFF94ElectrostaticInteractionData& ia_data,
-                                                        bool strict);
+                                                        bool                                strict);
 
-            void setFilterFunction(const InteractionFilterFunction2& func); 
+            void setFilterFunction(const InteractionFilterFunction2& func);
 
-            void setAtomChargeFunction(const MMFF94AtomChargeFunction& func); 
+            void setAtomChargeFunction(const MMFF94AtomChargeFunction& func);
 
-            void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
+            void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func);
 
             void setDielectricConstant(double de_const);
 
@@ -84,8 +84,8 @@ namespace CDPL
             TopologicalAtomDistanceFunction distFunc;
             double                          deConst;
             double                          distExpo;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Base/DataIOBase.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -62,7 +62,7 @@ namespace CDPL
         class DataWriter : virtual public DataIOBase
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataWriter instances.
              */
@@ -116,7 +116,7 @@ namespace CDPL
              */
             virtual bool operator!() const = 0;
 
-        protected:
+          protected:
             /**
              * \brief Assignment operator.
              * \param writer The \c %DataWriter instance to copy.
@@ -135,8 +135,8 @@ namespace CDPL
          */
         template <typename T>
         DataWriter<T>& operator<<(DataWriter<T>& writer, const T& obj);
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 
 // Implementation

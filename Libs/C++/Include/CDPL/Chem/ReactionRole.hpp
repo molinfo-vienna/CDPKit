@@ -46,7 +46,7 @@ namespace CDPL
             /**
              * \brief Specifies that a molecule is not a reaction component.
              */
-            const unsigned int NONE     = 0x0;
+            const unsigned int NONE = 0x0;
 
             /**
              * \brief Specifies the reactants of a reaction.
@@ -56,7 +56,7 @@ namespace CDPL
             /**
              * \brief Specifies the agents of a reaction (e.g. solvent or catalyst).
              */
-            const unsigned int AGENT    = 0x2;
+            const unsigned int AGENT = 0x2;
 
             /**
              * \brief Equivalent to ReactionRole::AGENT.
@@ -66,14 +66,14 @@ namespace CDPL
             /**
              * \brief Specifies the products of a reaction.
              */
-            const unsigned int PRODUCT  = 0x4;
+            const unsigned int PRODUCT = 0x4;
 
             /**
              * \brief Specifies reactants, agents and products of a reaction.
              */
-            const unsigned int ALL      = REACTANT | AGENT | PRODUCT;
-        }
-    }
-}
+            const unsigned int ALL = REACTANT | AGENT | PRODUCT;
+        } // namespace ReactionRole
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONROLE_HPP

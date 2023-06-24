@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref PDB] format.
          */
         typedef Util::DefaultDataInputHandler<PDBGZMoleculeReader, DataFormat::PDB_GZ> PDBGZMoleculeInputHandler;
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBGZMOLECULEINPUTHANDLER_HPP

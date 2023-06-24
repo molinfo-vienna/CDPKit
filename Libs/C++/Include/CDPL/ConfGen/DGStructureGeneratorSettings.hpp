@@ -33,16 +33,16 @@
 #include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API DGStructureGeneratorSettings : public DGConstraintGeneratorSettings
         {
 
-        public:
+          public:
             static const DGStructureGeneratorSettings DEFAULT;
 
             DGStructureGeneratorSettings();
@@ -56,10 +56,10 @@ namespace CDPL
             bool enablePlanarityConstraints() const;
 
           private:
-            double  boxSize;
-            bool    planarConstr;
+            double boxSize;
+            bool   planarConstr;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_DGSTRUCTUREGENERATORSETTINGS_HPP

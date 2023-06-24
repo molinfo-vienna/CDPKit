@@ -37,7 +37,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,10 +50,10 @@ namespace CDPL
         /**
          * \brief KekuleStructureCalculator.
          */
-        class CDPL_CHEM_API KekuleStructureCalculator 
+        class CDPL_CHEM_API KekuleStructureCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %KekuleStructureCalculator instance.
              */
@@ -78,7 +78,7 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& orders);
 
-        private:
+          private:
             void init(const MolecularGraph& molgraph, Util::STArray& orders);
 
             void defineNbrBondOrders(const Atom& atom);
@@ -86,13 +86,12 @@ namespace CDPL
 
             typedef std::vector<const Bond*> BondList;
 
-            const MolecularGraph*  molGraph;
-            std::size_t            startAtomIdx;
-            Util::BitSet           defOrderMask;
-            BondList               conctdUndefBonds;
+            const MolecularGraph* molGraph;
+            std::size_t           startAtomIdx;
+            Util::BitSet          defOrderMask;
+            BondList              conctdUndefBonds;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_KEKULESTRUCTURECALCULATOR_HPP
- 

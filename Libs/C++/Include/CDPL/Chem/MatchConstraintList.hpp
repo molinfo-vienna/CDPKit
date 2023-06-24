@@ -48,50 +48,50 @@ namespace CDPL
          */
         class CDPL_CHEM_API MatchConstraint
         {
-            
-        public:
+
+          public:
             /**
              * \brief Defines constants for the specification of relational constraints on the values of query/target attribute
              *        pairs.
              */
-            enum Relation 
+            enum Relation
             {
 
                 /**
                  * \brief Specifies that the relation between the query and target attribute value is not constrained.
                  */
                 ANY,
- 
+
                 /**
                  * \brief Specifies that the value of the query attribute must be less than the corresponding value of the target
                  *        attribute to fulfill the constraint.
                  */
                 LESS,
- 
+
                 /**
                  * \brief Specifies that the value of the query attribute must be equal to the corresponding value of the target
                  *        attribute to fulfill the constraint.
                  */
                 EQUAL,
 
-                 /**
+                /**
                  * \brief Specifies that the value of the query attribute must be greater than the corresponding value of the target
                  *        attribute to fulfill the constraint.
                  */
                 GREATER,
- 
+
                 /**
                  * \brief Specifies that the value of the query attribute must be less than or equal to the corresponding value of
                  *        the target attribute to fulfill the constraint.
                  */
                 LESS_OR_EQUAL,
- 
+
                 /**
                  * \brief Specifies that the value of the query attribute must be greater than or equal to the corresponding value of
                  *        the target attribute to fulfill the constraint.
                  */
                 GREATER_OR_EQUAL,
- 
+
                 /**
                  * \brief Specifies that the value of the query attribute must not be equal to the corresponding value of the target
                  *        attribute to fulfill the constraint.
@@ -105,7 +105,7 @@ namespace CDPL
              * \param id The identifier of the match constraint.
              * \param relation The relational constraint on the values of matching query/target attribute pairs.
              */
-            MatchConstraint(unsigned int id, Relation relation): 
+            MatchConstraint(unsigned int id, Relation relation):
                 id(id), relation(relation) {}
 
             /**
@@ -116,9 +116,10 @@ namespace CDPL
              * \param val The value of the query attribute.
              */
             template <typename T>
-            MatchConstraint(unsigned int id, Relation rel, T&& val): 
-            id(id), relation(rel), value(std::forward<T>(val)) {}
-    
+            MatchConstraint(unsigned int id, Relation rel, T&& val):
+                id(id), relation(rel), value(std::forward<T>(val))
+            {}
+
             /**
              * \brief Returns the identifier of the match constraint.
              * \return The identifier of the match constraint.
@@ -156,7 +157,8 @@ namespace CDPL
              *        value is not of the specified type \a T.
              */
             template <typename T>
-            const T& getValue() const {
+            const T& getValue() const
+            {
                 return value.getData<T>();
             }
 
@@ -165,17 +167,18 @@ namespace CDPL
              * \param val The value of the query attribute.
              */
             template <typename T>
-            void setValue(T&& val) {
+            void setValue(T&& val)
+            {
                 value = std::forward<T>(val);
             }
-            
+
             /**
              * \brief Tells wether a query attribute value has been set.
              * \return \c true if the value of the query attribute has been set, \c false otherwise.
              */
             bool hasValue() const;
 
-        private:
+          private:
             unsigned int id;
             Relation     relation;
             Base::Any    value;
@@ -185,9 +188,9 @@ namespace CDPL
          * \brief MatchConstraintList.
          */
         class CDPL_CHEM_API MatchConstraintList : public Util::Array<MatchConstraint>
-        { 
+        {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchConstraintList instances.
              */
@@ -196,7 +199,7 @@ namespace CDPL
             /**
              * \brief Defines constants that describe the logical type of the match constraint list.
              */
-            enum Type 
+            enum Type
             {
 
                 /**
@@ -216,7 +219,7 @@ namespace CDPL
 
                 /**
                  * \brief Specifies that all of the match constraints must not be fulfilled.
-                 */                
+                 */
                 NOT_OR_LIST
             };
 
@@ -224,7 +227,8 @@ namespace CDPL
              * \brief Constructs a \c %MatchConstraintList object with the specified logical type.
              * \param type The logical type of the match constraint list.
              */
-            MatchConstraintList(Type type = AND_LIST): type(type) {}
+            MatchConstraintList(Type type = AND_LIST):
+                type(type) {}
 
             /**
              * \brief Returns the logical type of the match constraint list.
@@ -256,16 +260,17 @@ namespace CDPL
              * \param val The value of the query attribute.
              */
             template <typename T>
-            void addElement(unsigned int id, MatchConstraint::Relation rel, T&& val) {
+            void addElement(unsigned int id, MatchConstraint::Relation rel, T&& val)
+            {
                 addElement(MatchConstraint(id, rel, std::forward<T>(val)));
             }
 
-        private:
+          private:
             const char* getClassName() const;
 
             Type type;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MATCHCONSTRAINTLIST_HPP

@@ -41,10 +41,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingParameterTable
@@ -58,14 +58,14 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<MMFF94OutOfPlaneBendingParameterTable> SharedPointer;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 Entry();
- 
-                Entry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+
+                Entry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type,
                       unsigned int oop_atom_type, double force_const);
 
                 unsigned int getTerminalAtom1Type() const;
@@ -87,27 +87,29 @@ namespace CDPL
                 unsigned int oopAtomType;
                 double       forceConst;
                 bool         initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94OutOfPlaneBendingParameterTable();
 
-            void addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+            void addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type,
                           unsigned int oop_atom_type, double force_const);
 
-            const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+            const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type,
                                   unsigned int oop_atom_type) const;
 
             std::size_t getNumEntries() const;
 
             void clear();
 
-            bool removeEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
+            bool removeEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type,
                              unsigned int oop_atom_type);
 
             EntryIterator removeEntry(const EntryIterator& it);
@@ -115,7 +117,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -123,7 +125,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -142,7 +144,7 @@ namespace CDPL
             static SharedPointer defaultStatExtTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGPARAMETERTABLE_HPP

@@ -52,19 +52,20 @@ namespace CDPL
         class ObjectStack
         {
 
-        public:
+          public:
             typedef T ObjectType;
 
             typedef std::shared_ptr<ObjectType> SharedObjectPointer;
 
-            typedef std::function<ObjectType*()> ConstructorFunction;
+            typedef std::function<ObjectType*()>     ConstructorFunction;
             typedef std::function<void(ObjectType*)> DestructorFunction;
             typedef std::function<void(ObjectType&)> ObjectFunction;
 
             struct DefaultConstructor
             {
 
-                T* operator()() const {
+                T* operator()() const
+                {
                     return new T();
                 }
             };
@@ -72,29 +73,33 @@ namespace CDPL
             struct DefaultDestructor
             {
 
-                void operator()(T* obj) const {
+                void operator()(T* obj) const
+                {
                     delete obj;
                 }
             };
 
-            ObjectStack(const ObjectStack& stack): 
+            ObjectStack(const ObjectStack& stack):
                 maxSize(stack.maxSize), freeIndex(0), ctorFunc(stack.ctorFunc), dtorFunc(stack.dtorFunc),
                 initFunc(stack.initFunc), cleanFunc(stack.cleanFunc) {}
 
-            ObjectStack(std::size_t max_pool_size = 0): 
+            ObjectStack(std::size_t max_pool_size = 0):
                 maxSize(max_pool_size), freeIndex(0), ctorFunc(DefaultConstructor()), dtorFunc(DefaultDestructor()) {}
-        
+
             template <typename C, typename D>
-            ObjectStack(const C& ctor_func, const D& dtor_func, std::size_t max_pool_size = 0): 
-                maxSize(max_pool_size), freeIndex(0), ctorFunc(ctor_func), dtorFunc(dtor_func) {}
+            ObjectStack(const C& ctor_func, const D& dtor_func, std::size_t max_pool_size = 0):
+                maxSize(max_pool_size), freeIndex(0), ctorFunc(ctor_func), dtorFunc(dtor_func)
+            {}
 
             ~ObjectStack() {}
 
-            ObjectType* getRaw() {
+            ObjectType* getRaw()
+            {
                 return get().get();
             }
 
-            const SharedObjectPointer& get() {
+            const SharedObjectPointer& get()
+            {
                 if (freeIndex == allocObjects.size()) {
                     SharedObjectPointer obj_ptr(ctorFunc(), dtorFunc);
 
@@ -106,13 +111,14 @@ namespace CDPL
 
                 const SharedObjectPointer& obj_ptr = allocObjects[freeIndex++];
 
-                if (initFunc) 
+                if (initFunc)
                     initFunc(*obj_ptr);
 
                 return obj_ptr;
             }
 
-            void put() {
+            void put()
+            {
                 if (freeIndex > 0) {
                     freeIndex--;
 
@@ -124,9 +130,10 @@ namespace CDPL
                     allocObjects.resize(maxSize);
             }
 
-            void putAll() {
+            void putAll()
+            {
                 if (cleanFunc)
-                    std::for_each(allocObjects.begin(), allocObjects.begin() + freeIndex, 
+                    std::for_each(allocObjects.begin(), allocObjects.begin() + freeIndex,
                                   std::bind(cleanFunc, std::bind(Util::Dereferencer<SharedObjectPointer, ObjectType&>(),
                                                                  std::placeholders::_1)));
                 freeIndex = 0;
@@ -135,18 +142,21 @@ namespace CDPL
                     allocObjects.resize(maxSize);
             }
 
-            std::size_t getMaxPoolSize() const {
+            std::size_t getMaxPoolSize() const
+            {
                 return maxSize;
             }
 
-            void setMaxPoolSize(std::size_t max_size) {
+            void setMaxPoolSize(std::size_t max_size)
+            {
                 maxSize = max_size;
-    
+
                 if (maxSize > 0 && allocObjects.size() > maxSize)
                     allocObjects.resize(std::max(freeIndex, maxSize));
             }
 
-            void freeMemory(bool unused_only = true) {
+            void freeMemory(bool unused_only = true)
+            {
                 if (unused_only) {
                     allocObjects.resize(freeIndex);
                     return;
@@ -156,30 +166,33 @@ namespace CDPL
                 allocObjects.clear();
             }
 
-            void setInitFunction(const ObjectFunction& func) {
+            void setInitFunction(const ObjectFunction& func)
+            {
                 initFunc = func;
             }
 
-            void setCleanupFunction(const ObjectFunction& func) {
+            void setCleanupFunction(const ObjectFunction& func)
+            {
                 cleanFunc = func;
             }
 
-            ObjectStack& operator=(const ObjectStack& stack) {
+            ObjectStack& operator=(const ObjectStack& stack)
+            {
                 if (this == &stack)
                     return *this;
 
-                maxSize = stack.maxSize;
+                maxSize  = stack.maxSize;
                 ctorFunc = stack.ctorFunc;
                 dtorFunc = stack.dtorFunc;
                 initFunc = stack.initFunc;
 
-                if (maxSize > 0 && allocObjects.size() > maxSize) 
+                if (maxSize > 0 && allocObjects.size() > maxSize)
                     allocObjects.resize(std::max(freeIndex, maxSize));
 
                 return *this;
             }
 
-        private:
+          private:
             typedef std::vector<SharedObjectPointer> AllocObjectList;
 
             std::size_t         maxSize;
@@ -190,7 +203,7 @@ namespace CDPL
             ObjectFunction      initFunc;
             ObjectFunction      cleanFunc;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_OBJECTSTACK_HPP

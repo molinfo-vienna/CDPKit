@@ -32,7 +32,7 @@
 #include "CDPL/Grid/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -63,8 +63,8 @@ namespace CDPL
             extern CDPL_GRID_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
             extern CDPL_GRID_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
-        }
-    }
-}
+        } // namespace ControlParameter
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CONTROLPARAMETER_HPP

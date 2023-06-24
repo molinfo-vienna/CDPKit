@@ -45,24 +45,24 @@ namespace CDPL
             /**
              * \brief Represents an empty set of atom properties.
              */
-            const unsigned int NONE              = 0x0;
+            const unsigned int NONE = 0x0;
 
             /**
              * \brief Represents the default set of atom properties.
              */
-            const unsigned int DEFAULT           = 0x80000000;
+            const unsigned int DEFAULT = 0x80000000;
 
-            const unsigned int RESIDUE_CODE      = 0x400;
+            const unsigned int RESIDUE_CODE = 0x400;
 
-            const unsigned int RESIDUE_SEQ_NO    = 0x800;
+            const unsigned int RESIDUE_SEQ_NO = 0x800;
 
-            const unsigned int RESIDUE_INS_CODE  = 0x1000;
+            const unsigned int RESIDUE_INS_CODE = 0x1000;
 
-            const unsigned int CHAIN_ID          = 0x2000;
+            const unsigned int CHAIN_ID = 0x2000;
 
-            const unsigned int MODEL_NUMBER      = 0x4000;
-        }
-    }
-}
+            const unsigned int MODEL_NUMBER = 0x4000;
+        } // namespace AtomPropertyFlag
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_ATOMPROPERTYFLAG_HPP

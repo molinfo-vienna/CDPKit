@@ -40,7 +40,8 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class MatrixExpression;
+        template <typename E>
+        class MatrixExpression;
 
         template <template <typename T1, typename T2> class F, typename M, typename E>
         void matrixAssignMatrix(M& m, const MatrixExpression<E>& e)
@@ -61,7 +62,7 @@ namespace CDPL
         void matrixAssignScalar(M& m, const T& t)
         {
             typedef F<typename M::Reference, T> FunctorType;
-            typedef typename M::SizeType SizeType;
+            typedef typename M::SizeType        SizeType;
 
             SizeType size1 = m.getSize1();
             SizeType size2 = m.getSize2();
@@ -70,7 +71,7 @@ namespace CDPL
                 for (SizeType j = 0; j < size2; j++)
                     FunctorType::apply(m(i, j), t);
         }
-    
+
         template <typename M, typename E>
         void matrixSwap(M& m, MatrixExpression<E>& e)
         {
@@ -83,7 +84,7 @@ namespace CDPL
                 for (SizeType j = 0; j < size2; j++)
                     std::swap(m(i, j), e()(i, j));
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_MATRIXASSIGNMENT_HPP

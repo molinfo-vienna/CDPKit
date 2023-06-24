@@ -44,7 +44,7 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         DataSet(QObject*);
 
         ~DataSet();
@@ -61,10 +61,11 @@ namespace ChOX
         bool isRecordSelected(int) const;
 
         bool hasSelectedRecords() const;
-        int getNumSelectedRecords() const;
+        int  getNumSelectedRecords() const;
 
         template <typename InputIter>
-        void appendRecords(InputIter begin, InputIter end, const QString& file_name) {
+        void appendRecords(InputIter begin, InputIter end, const QString& file_name)
+        {
             workingState = states[currStateIdx];
 
             workingState.records.insert(workingState.records.end(), begin, end);
@@ -78,7 +79,7 @@ namespace ChOX
             emit fileListChanged();
         }
 
-    signals:    
+      signals:
         void sizeChanged(int);
         void selectionStatusChanged(bool);
         void fileListChanged();
@@ -86,7 +87,7 @@ namespace ChOX
         void undoStatusChanged(bool);
         void redoStatusChanged(bool);
 
-    public slots:
+      public slots:
         void clear();
 
         void undo();
@@ -97,10 +98,10 @@ namespace ChOX
         void invertSelection();
         void removeSelected();
 
-    private:
+      private:
         typedef std::vector<DataRecord::SharedPointer> DataRecordList;
 
-        struct DataSetState 
+        struct DataSetState
         {
 
             void swap(DataSetState&);
@@ -119,6 +120,6 @@ namespace ChOX
         std::size_t      currStateIdx;
         std::size_t      numSavedStates;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASET_HPP

@@ -41,7 +41,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ForceField
@@ -57,9 +57,9 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API DGConstraintGenerator
@@ -87,7 +87,7 @@ namespace CDPL
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
 
             const Util::BitSet& getExcludedHydrogenMask() const;
-    
+
             std::size_t getNumAtomStereoCenters() const;
             std::size_t getNumBondStereoCenters() const;
 
@@ -122,23 +122,23 @@ namespace CDPL
             void extractAtomStereoCenterData();
             void extractBondStereoCenterData();
 
-            void setBondLength(std::size_t atom1_idx, std::size_t atom2_idx, double length);
+            void   setBondLength(std::size_t atom1_idx, std::size_t atom2_idx, double length);
             double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-            void setBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx, double angle);
+            void   setBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx, double angle);
             double getBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx) const;
 
-            std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, const Chem::Bond& bond1, const Chem::Bond& bond2) const; 
-            std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, std::size_t atom1_idx, std::size_t atom2_idx) const; 
+            std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, const Chem::Bond& bond1, const Chem::Bond& bond2) const;
+            std::size_t getSmallestRingSize(const Chem::FragmentList& sssr, std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-            void markAtomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx); 
-            bool atomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx) const; 
+            void markAtomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx);
+            bool atomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
             double calc13AtomDistance(double bond1_len, double bond2_len, double angle) const;
 
-            double calcCis14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
+            double calcCis14AtomDistance(double bond1_len, double bond2_len, double bond3_len,
                                          double angle_12, double angle_23) const;
-            double calcTrans14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
+            double calcTrans14AtomDistance(double bond1_len, double bond2_len, double bond3_len,
                                            double angle_12, double angle_23) const;
 
             bool isPlanar(const Chem::Atom& atom) const;
@@ -149,7 +149,7 @@ namespace CDPL
             std::size_t getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list,
                                          const Chem::Atom* x_atom = 0) const;
 
-            typedef std::pair<std::size_t, std::size_t> BondLengthKey;
+            typedef std::pair<std::size_t, std::size_t>               BondLengthKey;
             typedef std::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
 
             struct CDPL_CONFGEN_API BondAngleKeyHash
@@ -165,7 +165,7 @@ namespace CDPL
             };
 
             typedef std::unordered_map<BondLengthKey, double, BondLengthKeyHash> BondLengthTable;
-            typedef std::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
+            typedef std::unordered_map<BondAngleKey, double, BondAngleKeyHash>   BondAngleTable;
 
             const Chem::MolecularGraph*   molGraph;
             Util::BitSet                  hAtomMask;
@@ -180,7 +180,7 @@ namespace CDPL
             AtomIndexList                 atomIndexList2;
             DGConstraintGeneratorSettings settings;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_DGCONSTRAINTGENERATOR_HPP

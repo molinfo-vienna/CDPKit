@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -52,14 +52,14 @@ namespace CDPL
             static constexpr double DEF_MIN_V_DISTANCE = 3.0;
             static constexpr double DEF_MAX_V_DISTANCE = 5.5;
             static constexpr double DEF_MAX_ANGLE      = 20.0;
-    
+
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ParallelPiPiInteractionScore instances.
              */
             typedef std::shared_ptr<ParallelPiPiInteractionScore> SharedPointer;
 
             typedef std::function<double(double)> DistanceScoringFunction;
-            typedef std::function<double(double)> AngleScoringFunction;            
+            typedef std::function<double(double)> AngleScoringFunction;
 
             /**
              * \brief Constructs a \c %ParallelPiPiInteractionScore functor with the specified constraints.
@@ -97,7 +97,7 @@ namespace CDPL
             DistanceScoringFunction distScoringFunc;
             AngleScoringFunction    angleScoringFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PARALLELPIPIINTERACTIONSCORE_HPP

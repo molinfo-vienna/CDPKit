@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -97,7 +97,7 @@ namespace CDPL
             DistanceScoringFunction distScoringFunc;
             AngleScoringFunction    angleScoringFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_ORTHOGONALPIPIINTERACTIONSCORE_HPP

@@ -33,7 +33,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -48,11 +48,11 @@ namespace CDPL
         {
 
           public:
-            static constexpr double DEF_MAX_V_DISTANCE  = 1.4;
-            static constexpr double DEF_MIN_H_DISTANCE  = 4.0;
-            static constexpr double DEF_MAX_H_DISTANCE  = 6.0;
-            static constexpr double DEF_MAX_ANGLE       = 30.0;
-    
+            static constexpr double DEF_MAX_V_DISTANCE = 1.4;
+            static constexpr double DEF_MIN_H_DISTANCE = 4.0;
+            static constexpr double DEF_MAX_H_DISTANCE = 6.0;
+            static constexpr double DEF_MAX_ANGLE      = 30.0;
+
             /**
              * \brief Constructs a \c %OrthogonalPiPiInteractionConstraint functor with the specified constraints.
              * \param min_h_dist The minimum allowed aromatic ring center distance in the plane of the vertically oriented ring.
@@ -61,8 +61,9 @@ namespace CDPL
              * \param max_ang The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
              */
             OrthogonalPiPiInteractionConstraint(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
-                                                double max_v_dist = DEF_MAX_V_DISTANCE,double max_ang = DEF_MAX_ANGLE):
-                minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), maxAngle(max_ang) {}
+                                                double max_v_dist = DEF_MAX_V_DISTANCE, double max_ang = DEF_MAX_ANGLE):
+                minHDist(min_h_dist),
+                maxHDist(max_h_dist), maxVDist(max_v_dist), maxAngle(max_ang) {}
 
             double getMinHDistance() const;
 
@@ -82,7 +83,7 @@ namespace CDPL
             double maxVDist;
             double maxAngle;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_ORTHOGONALPIPIINTERACTIONCONSTRAINT_HPP

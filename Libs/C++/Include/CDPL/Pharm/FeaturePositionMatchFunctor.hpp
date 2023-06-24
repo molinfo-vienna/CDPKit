@@ -34,7 +34,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -49,7 +49,8 @@ namespace CDPL
         {
 
           public:
-            FeaturePositionMatchFunctor(bool query_mode): qryMode(query_mode) {}
+            FeaturePositionMatchFunctor(bool query_mode):
+                qryMode(query_mode) {}
 
             bool queryMode() const;
 
@@ -85,7 +86,7 @@ namespace CDPL
           private:
             bool qryMode;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREPOSITIONMATCHFUNCTOR_HPP

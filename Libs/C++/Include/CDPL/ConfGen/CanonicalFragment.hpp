@@ -41,7 +41,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -58,10 +58,10 @@ namespace CDPL
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CanonicalFragment instances.
              */
             typedef std::shared_ptr<CanonicalFragment> SharedPointer;
-        
-            typedef Chem::BasicMolecule::AtomIterator AtomIterator;
+
+            typedef Chem::BasicMolecule::AtomIterator      AtomIterator;
             typedef Chem::BasicMolecule::ConstAtomIterator ConstAtomIterator;
-            typedef Chem::BasicMolecule::BondIterator BondIterator;
+            typedef Chem::BasicMolecule::BondIterator      BondIterator;
             typedef Chem::BasicMolecule::ConstBondIterator ConstBondIterator;
 
             typedef std::vector<const Chem::Atom*> AtomMapping;
@@ -77,15 +77,15 @@ namespace CDPL
              * \param parent The parent molecular graph the fragment is coming from.
              */
             CanonicalFragment(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
-        
+
             CanonicalFragment(const CanonicalFragment& frag);
 
             void clear();
-    
+
             std::size_t getNumAtoms() const;
 
             const Chem::Atom& getAtom(std::size_t idx) const;
-        
+
             Chem::Atom& getAtom(std::size_t idx);
 
             ConstAtomIterator getAtomsBegin() const;
@@ -107,7 +107,7 @@ namespace CDPL
             Chem::Entity3D& getEntity(std::size_t idx);
 
             std::size_t getNumBonds() const;
-        
+
             const Chem::Bond& getBond(std::size_t idx) const;
 
             Chem::Bond& getBond(std::size_t idx);
@@ -150,8 +150,8 @@ namespace CDPL
             void calcHashCode(bool stereo);
 
             bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
-        
-            typedef std::vector<std::uint32_t> HashInputData;
+
+            typedef std::vector<std::uint32_t>                      HashInputData;
             typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 
             Chem::BasicMolecule                molecule;
@@ -162,7 +162,7 @@ namespace CDPL
             HashInputData                      hashInputData;
             AtomMapping                        atomMapping;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CANONICALFRAGMENT_HPP

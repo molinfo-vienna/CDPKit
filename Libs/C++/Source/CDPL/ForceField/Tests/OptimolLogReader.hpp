@@ -38,7 +38,7 @@ namespace Testing
     class OptimolLogReader
     {
 
-    public:
+      public:
         struct BondStretchingInteraction
         {
 
@@ -72,16 +72,16 @@ namespace Testing
             double       forceConst;
             double       energy;
         };
-    
+
         struct OutOfPlaneBendingInteraction
         {
 
-            std::string  termAtom1Name;
-            std::string  ctrAtomName;
-            std::string  termAtom2Name;
-            std::size_t  oopAtomIdx;
-            double       forceConst;
-            double       energy;
+            std::string termAtom1Name;
+            std::string ctrAtomName;
+            std::string termAtom2Name;
+            std::size_t oopAtomIdx;
+            double      forceConst;
+            double      energy;
         };
 
         struct TorsionInteraction
@@ -99,9 +99,9 @@ namespace Testing
         struct VanDerWaalsInteraction
         {
 
-            std::size_t  atom1Idx;
-            std::size_t  atom2Idx;
-            double       energy;
+            std::size_t atom1Idx;
+            std::size_t atom2Idx;
+            double      energy;
         };
 
         struct EnergyData
@@ -117,15 +117,15 @@ namespace Testing
             double vanDerWaals;
         };
 
-        typedef std::vector<std::string> SymbolicAtomTypeArray;
-        typedef std::vector<unsigned int> NumericAtomTypeArray;
-        typedef std::vector<double> AtomChargeArray;
-        typedef std::vector<BondStretchingInteraction> BondStretchingInteractionData;
-        typedef std::vector<AngleBendingInteraction> AngleBendingInteractionData;
-        typedef std::vector<StretchBendInteraction> StretchBendInteractionData;
+        typedef std::vector<std::string>                  SymbolicAtomTypeArray;
+        typedef std::vector<unsigned int>                 NumericAtomTypeArray;
+        typedef std::vector<double>                       AtomChargeArray;
+        typedef std::vector<BondStretchingInteraction>    BondStretchingInteractionData;
+        typedef std::vector<AngleBendingInteraction>      AngleBendingInteractionData;
+        typedef std::vector<StretchBendInteraction>       StretchBendInteractionData;
         typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionData;
-        typedef std::vector<TorsionInteraction> TorsionInteractionData;
-        typedef std::vector<VanDerWaalsInteraction> VanDerWaalsInteractionData;
+        typedef std::vector<TorsionInteraction>           TorsionInteractionData;
+        typedef std::vector<VanDerWaalsInteraction>       VanDerWaalsInteractionData;
 
         OptimolLogReader(const std::string& log_file);
 
@@ -142,7 +142,7 @@ namespace Testing
 
         bool getEnergies(const std::string& mol_name, EnergyData& energies);
 
-    private:
+      private:
         void buildIndex();
 
         bool skipLines(std::size_t n);
@@ -156,6 +156,6 @@ namespace Testing
         std::ifstream       logIStream;
         RecordFileOffsetMap recordOffsets;
     };
-}
+} // namespace Testing
 
 #endif // CDPL_FORCEFIELD_TEST_OPTIMOLLOGREADER_HPP

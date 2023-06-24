@@ -38,67 +38,67 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
-    class CDPL_FORCEFIELD_API MMFF94SymbolicToNumericAtomTypeMap
-    {
+        class CDPL_FORCEFIELD_API MMFF94SymbolicToNumericAtomTypeMap
+        {
 
-        typedef std::unordered_map<std::string, unsigned int> DataStorage;
+            typedef std::unordered_map<std::string, unsigned int> DataStorage;
 
-      public:
-        typedef std::shared_ptr<MMFF94SymbolicToNumericAtomTypeMap> SharedPointer;
+          public:
+            typedef std::shared_ptr<MMFF94SymbolicToNumericAtomTypeMap> SharedPointer;
 
-        typedef DataStorage::const_iterator ConstEntryIterator;
-        typedef DataStorage::iterator EntryIterator;
-        typedef DataStorage::value_type Entry;
+            typedef DataStorage::const_iterator ConstEntryIterator;
+            typedef DataStorage::iterator       EntryIterator;
+            typedef DataStorage::value_type     Entry;
 
-        MMFF94SymbolicToNumericAtomTypeMap();
+            MMFF94SymbolicToNumericAtomTypeMap();
 
-        void addEntry(const std::string& sym_type, unsigned int num_type);
+            void addEntry(const std::string& sym_type, unsigned int num_type);
 
-        unsigned int getEntry(const std::string& sym_type) const;
+            unsigned int getEntry(const std::string& sym_type) const;
 
-        void clear();
+            void clear();
 
-        std::size_t getNumEntries() const;
+            std::size_t getNumEntries() const;
 
-        bool removeEntry(const std::string& sym_type);
+            bool removeEntry(const std::string& sym_type);
 
-        EntryIterator removeEntry(const EntryIterator& it);
+            EntryIterator removeEntry(const EntryIterator& it);
 
-        ConstEntryIterator getEntriesBegin() const;
+            ConstEntryIterator getEntriesBegin() const;
 
-        ConstEntryIterator getEntriesEnd() const;
+            ConstEntryIterator getEntriesEnd() const;
 
-        EntryIterator getEntriesBegin();
+            EntryIterator getEntriesBegin();
 
-        EntryIterator getEntriesEnd();
+            EntryIterator getEntriesEnd();
 
-        ConstEntryIterator begin() const;
+            ConstEntryIterator begin() const;
 
-        ConstEntryIterator end() const;
+            ConstEntryIterator end() const;
 
-        EntryIterator begin();
+            EntryIterator begin();
 
-        EntryIterator end();
-            
-        void load(std::istream& is);
+            EntryIterator end();
 
-        void loadDefaults();
+            void load(std::istream& is);
 
-        static void set(const SharedPointer& map);
+            void loadDefaults();
 
-        static const SharedPointer& get();
+            static void set(const SharedPointer& map);
 
-      private:
-        static SharedPointer defaultMap;
-        DataStorage          entries;
-    };
-    }
-}
+            static const SharedPointer& get();
+
+          private:
+            static SharedPointer defaultMap;
+            DataStorage          entries;
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94SYMBOLICTONUMERICATOMTYPEMAP_HPP

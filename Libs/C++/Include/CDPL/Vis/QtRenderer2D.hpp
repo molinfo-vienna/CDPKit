@@ -39,7 +39,7 @@ class QPainter;
 class QPolygonF;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -55,7 +55,7 @@ namespace CDPL
         class CDPL_VIS_API QtRenderer2D : public Renderer2D
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a renderer object which uses the \c QPainter instance \a painter for its drawing operations.
              * \param painter The wrapped \c QPainter instance.
@@ -86,7 +86,7 @@ namespace CDPL
             void drawText(double x, double y, const std::string& txt);
             void drawEllipse(double x, double y, double width, double height);
 
-        private:
+          private:
             QtRenderer2D(const QtRenderer2D&);
 
             QtRenderer2D& operator=(const QtRenderer2D&);
@@ -96,7 +96,7 @@ namespace CDPL
             QPainter&                qPainter;
             std::auto_ptr<QPolygonF> qPolygon;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_QTRENDERER2D_HPP

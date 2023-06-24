@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataWriter<SMILESMolecularGraphWriter, Util::BZip2OStream> SMILESBZ2MolecularGraphWriter;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMILESBZ2MOLECULARGRAPHWRITER_HPP

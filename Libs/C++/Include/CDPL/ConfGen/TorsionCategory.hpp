@@ -38,23 +38,23 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API TorsionCategory
         {
 
             typedef std::vector<TorsionCategory> CategoryList;
-            typedef std::vector<TorsionRule> RuleList;
+            typedef std::vector<TorsionRule>     RuleList;
 
           public:
-            typedef CategoryList::iterator CategoryIterator;
+            typedef CategoryList::iterator       CategoryIterator;
             typedef CategoryList::const_iterator ConstCategoryIterator;
-            typedef RuleList::iterator RuleIterator;
-            typedef RuleList::const_iterator ConstRuleIterator;
+            typedef RuleList::iterator           RuleIterator;
+            typedef RuleList::const_iterator     ConstRuleIterator;
 
             TorsionCategory();
 
@@ -63,7 +63,7 @@ namespace CDPL
             const std::string& getName() const;
 
             void setName(const std::string& name);
-    
+
             const std::string& getMatchPatternString() const;
 
             void setMatchPatternString(const std::string& ptn_str);
@@ -71,7 +71,7 @@ namespace CDPL
             const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
             void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
-            
+
             unsigned int getBondAtom1Type() const;
 
             void setBondAtom1Type(unsigned int type);
@@ -103,7 +103,7 @@ namespace CDPL
             void removeCategory(std::size_t idx);
 
             void removeRule(std::size_t idx);
-    
+
             void removeCategory(const CategoryIterator& it);
 
             void removeRule(const RuleIterator& it);
@@ -133,7 +133,7 @@ namespace CDPL
 
             void checkRuleIndex(std::size_t idx, bool it) const;
 
-            std::string                         name;      
+            std::string                         name;
             std::string                         matchPatternStr;
             Chem::MolecularGraph::SharedPointer matchPattern;
             unsigned int                        bondAtom1Type;
@@ -141,7 +141,7 @@ namespace CDPL
             RuleList                            rules;
             CategoryList                        categories;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONCATEGORY_HPP

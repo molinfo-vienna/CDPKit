@@ -36,7 +36,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -44,7 +44,7 @@ namespace CDPL
 
         class Feature;
         class FeatureContainer;
-    }
+    } // namespace Pharm
 
     namespace Descr
     {
@@ -58,15 +58,15 @@ namespace CDPL
 
             typedef RDFCodeCalculator<Pharm::Feature> RDFCodeCalc;
 
-        public:
-            typedef RDFCodeCalc::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
+          public:
+            typedef RDFCodeCalc::Entity3DCoordinatesFunction                                          Feature3DCoordinatesFunction;
             typedef std::function<double(const Pharm::Feature&, const Pharm::Feature&, unsigned int)> FeaturePairWeightFunction;
-                
+
             /**
              * \brief Constructs the \c %PharmacophoreRDFDescriptorCalculator instance.
              */
             PharmacophoreRDFDescriptorCalculator();
-            
+
             PharmacophoreRDFDescriptorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& descr);
 
             /**
@@ -172,8 +172,8 @@ namespace CDPL
           private:
             RDFCodeCalc               rdfCalculator;
             FeaturePairWeightFunction weightFunc;
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_PHARMACOPHORERDFDESCRIPTORCALCULATOR_HPP

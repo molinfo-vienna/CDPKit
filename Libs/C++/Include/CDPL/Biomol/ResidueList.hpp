@@ -39,7 +39,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -79,7 +79,7 @@ namespace CDPL
           private:
             struct ResidueID
             {
-        
+
                 std::size_t modelNumber;
                 std::string chainID;
                 char        insCode;
@@ -95,13 +95,13 @@ namespace CDPL
                 std::size_t operator()(const ResidueID& res_id) const;
             };
 
-            void initResidueID(const Chem::Atom& atom, ResidueID& res_id, unsigned int flags) const; 
+            void initResidueID(const Chem::Atom& atom, ResidueID& res_id, unsigned int flags) const;
 
             typedef std::unordered_map<ResidueID, Chem::Fragment::SharedPointer, ResidueIDHashFunc> ResidueIDToFragmentMap;
 
             ResidueIDToFragmentMap resIDsToFragments;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_RESIDUELIST_HPP

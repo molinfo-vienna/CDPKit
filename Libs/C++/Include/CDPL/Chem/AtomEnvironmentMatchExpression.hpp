@@ -38,7 +38,7 @@
 #include "CDPL/Chem/SubstructureSearch.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_CHEM_API AtomEnvironmentMatchExpression : public MatchExpression<Atom, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomEnvironmentMatchExpression instances.
              */
@@ -64,7 +64,7 @@ namespace CDPL
              * \param not_match Specifies whether the environment of a target atom actually has to match (\c true) or \e not match (\c false)
              *                  the given query environment pattern.
              */
-            AtomEnvironmentMatchExpression(const MolecularGraph::SharedPointer& env_pattern, bool not_match); 
+            AtomEnvironmentMatchExpression(const MolecularGraph::SharedPointer& env_pattern, bool not_match);
 
             /**
              * \brief Checks whether the structural environment of \a target_atom matches (or does not match) the query environment pattern specified
@@ -83,13 +83,13 @@ namespace CDPL
             bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
                             const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
-        private:
+          private:
             MolecularGraph::SharedPointer envPattern;
             mutable SubstructureSearch    substructSearch;
             mutable std::mutex            mutex;
             bool                          notMatch;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMENVIRONMENTMATCHEXPRESSION_HPP

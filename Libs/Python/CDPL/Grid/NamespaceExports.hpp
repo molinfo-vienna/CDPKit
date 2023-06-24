@@ -36,6 +36,6 @@ namespace CDPLPythonGrid
     void exportControlParameterDefaults();
 
     void exportDataFormats();
-}
+} // namespace CDPLPythonGrid
 
 #endif // CDPL_PYTHON_GRID_NAMESPACEEXPORTS_HPP

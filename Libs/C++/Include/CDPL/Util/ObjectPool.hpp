@@ -58,19 +58,20 @@ namespace CDPL
         class ObjectPool
         {
 
-        public:
+          public:
             typedef T ObjectType;
 
             typedef std::shared_ptr<ObjectType> SharedObjectPointer;
 
-            typedef std::function<ObjectType*()> ConstructorFunction;
+            typedef std::function<ObjectType*()>     ConstructorFunction;
             typedef std::function<void(ObjectType*)> DestructorFunction;
             typedef std::function<void(ObjectType&)> ObjectFunction;
 
             struct DefaultConstructor
             {
 
-                T* operator()() const {
+                T* operator()() const
+                {
                     return new T();
                 }
             };
@@ -78,27 +79,31 @@ namespace CDPL
             struct DefaultDestructor
             {
 
-                void operator()(T* obj) const {
+                void operator()(T* obj) const
+                {
                     delete obj;
                 }
             };
 
-            ObjectPool(const ObjectPool& pool): 
+            ObjectPool(const ObjectPool& pool):
                 maxSize(pool.maxSize), ctorFunc(pool.ctorFunc), dtorFunc(pool.dtorFunc),
                 initFunc(pool.initFunc), cleanFunc(pool.cleanFunc) {}
 
-            ObjectPool(std::size_t max_size = 0): 
+            ObjectPool(std::size_t max_size = 0):
                 maxSize(max_size), ctorFunc(DefaultConstructor()), dtorFunc(DefaultDestructor()) {}
-    
-            template <typename C, typename D>
-            ObjectPool(const C& ctor_func, const D& dtor_func, std::size_t max_size = 0): 
-                maxSize(max_size), ctorFunc(ctor_func), dtorFunc(dtor_func) {}
 
-            ~ObjectPool() {
+            template <typename C, typename D>
+            ObjectPool(const C& ctor_func, const D& dtor_func, std::size_t max_size = 0):
+                maxSize(max_size), ctorFunc(ctor_func), dtorFunc(dtor_func)
+            {}
+
+            ~ObjectPool()
+            {
                 std::for_each(pool.begin(), pool.end(), dtorFunc);
             }
 
-            SharedObjectPointer get() {
+            SharedObjectPointer get()
+            {
                 ObjectType* obj;
 
                 if (!pool.empty()) {
@@ -114,45 +119,52 @@ namespace CDPL
 
                 SharedObjectPointer obj_ptr(obj, PutObject(*this));
 
-                if (initFunc) 
+                if (initFunc)
                     initFunc(*obj);
 
                 return obj_ptr;
             }
 
-            std::size_t getSize() const {
+            std::size_t getSize() const
+            {
                 return pool.size();
             }
 
-            std::size_t getMaxSize() const {
+            std::size_t getMaxSize() const
+            {
                 return maxSize;
             }
 
-            void setMaxSize(std::size_t max_size) {
+            void setMaxSize(std::size_t max_size)
+            {
                 maxSize = max_size;
 
                 shrinkToMaxSize();
             }
 
-            void freeMemory() {
+            void freeMemory()
+            {
                 std::for_each(pool.begin(), pool.end(), dtorFunc);
 
                 pool.clear();
             }
 
-            void setInitFunction(const ObjectFunction& func) {
+            void setInitFunction(const ObjectFunction& func)
+            {
                 initFunc = func;
             }
 
-            void setCleanupFunction(const ObjectFunction& func) {
+            void setCleanupFunction(const ObjectFunction& func)
+            {
                 cleanFunc = func;
             }
 
-            ObjectPool& operator=(const ObjectPool& pool) {
+            ObjectPool& operator=(const ObjectPool& pool)
+            {
                 if (this == &pool)
                     return *this;
 
-                maxSize = pool.maxSize;
+                maxSize  = pool.maxSize;
                 ctorFunc = pool.ctorFunc;
                 dtorFunc = pool.dtorFunc;
                 initFunc = pool.initFunc;
@@ -162,30 +174,34 @@ namespace CDPL
                 return *this;
             }
 
-        private:
-            void shrinkToMaxSize() {
+          private:
+            void shrinkToMaxSize()
+            {
                 if (maxSize == 0)
                     return;
 
                 while (pool.size() > maxSize) {
                     dtorFunc(pool.back());
                     pool.pop_back();
-                } 
+                }
             }
 
             struct PutObject
             {
 
-                PutObject(ObjectPool& pool): pool(pool) {}
+                PutObject(ObjectPool& pool):
+                    pool(pool) {}
 
-                void operator()(ObjectType* obj) const {
+                void operator()(ObjectType* obj) const
+                {
                     pool.put(obj);
                 }
 
                 ObjectPool& pool;
             };
-        
-            void put(ObjectType* obj) {
+
+            void put(ObjectType* obj)
+            {
                 if (maxSize > 0 && pool.size() >= maxSize) {
                     dtorFunc(obj);
                     return;
@@ -211,7 +227,7 @@ namespace CDPL
             ObjectFunction      initFunc;
             ObjectFunction      cleanFunc;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_OBJECTPOOL_HPP

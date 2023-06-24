@@ -34,7 +34,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -42,7 +42,7 @@ namespace CDPL
 
         class Feature;
         class FeatureContainer;
-    }
+    } // namespace Pharm
 
     namespace Descr
     {
@@ -54,17 +54,17 @@ namespace CDPL
         class CDPL_DESCR_API FeatureAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Pharm::Feature>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %FeatureAutoCorrelation3DVectorCalculator instance.
              */
             FeatureAutoCorrelation3DVectorCalculator();
-            
+
             FeatureAutoCorrelation3DVectorCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
 
             void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_AUTOCORRELATION3DVECTORCODECALCULATOR_HPP

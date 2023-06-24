@@ -34,7 +34,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -62,7 +62,7 @@ namespace CDPL
             static PropertyHandlerList extPropertyHandlers;
             Internal::ByteBuffer       extDataBuffer;
         };
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFDATAWRITER_HPP

@@ -42,7 +42,7 @@
 typedef struct _cairo cairo_t;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -56,14 +56,14 @@ namespace CDPL
         class CDPL_VIS_API CairoRenderer2D : public Renderer2D
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a renderer object that operates on the \e Cairo cdrawing ontext specified by \a cairo_ctxt.
              * \param cairo_ctxt The \e Cairo drawing context.
              * \throw Base::NullPointerException if \a cairo_ctxt is \e null.
              */
             CairoRenderer2D(const CairoPointer<cairo_t>& cairo_ctxt);
-    
+
             /**
              * \brief Destructor.
              */
@@ -88,20 +88,20 @@ namespace CDPL
             void drawText(double x, double y, const std::string& txt);
             void drawEllipse(double x, double y, double width, double height);
 
-        private:
+          private:
             void fillPath() const;
             void strokePath() const;
 
-            typedef std::vector<Pen> PenStack;
+            typedef std::vector<Pen>   PenStack;
             typedef std::vector<Brush> BrushStack;
-            typedef std::vector<Font> FontStack;
+            typedef std::vector<Font>  FontStack;
 
             CairoPointer<cairo_t> cairoContext;
             PenStack              penStack;
             BrushStack            brushStack;
             FontStack             fontStack;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_CAIRORENDERER2D_HPP

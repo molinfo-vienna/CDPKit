@@ -39,7 +39,7 @@
 typedef struct _cairo _cairo_t;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -53,7 +53,7 @@ namespace CDPL
         class CDPL_VIS_API CairoFontMetrics : public FontMetrics
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a font metrics object that operates on the \e Cairo drawing context specified by
              *        \a cairo_ctxt.
@@ -69,18 +69,18 @@ namespace CDPL
 
             void setFont(const Font& font);
 
-            double getAscent() const; 
-            double getDescent() const; 
-            double getHeight() const; 
-            double getLeading() const; 
+            double getAscent() const;
+            double getDescent() const;
+            double getHeight() const;
+            double getLeading() const;
 
-            double getWidth(const std::string& str) const; 
-            double getWidth(char ch) const; 
+            double getWidth(const std::string& str) const;
+            double getWidth(char ch) const;
 
-            void getBounds(const std::string& str, Rectangle2D& bounds) const; 
-            void getBounds(char ch, Rectangle2D& bounds) const; 
+            void getBounds(const std::string& str, Rectangle2D& bounds) const;
+            void getBounds(char ch, Rectangle2D& bounds) const;
 
-        private:
+          private:
             struct CairoExtents;
 
             CairoFontMetrics(const CairoFontMetrics&);
@@ -90,7 +90,7 @@ namespace CDPL
             CairoPointer<cairo_t>       cairoContext;
             std::auto_ptr<CairoExtents> cairoExtents;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_CAIROFONTMETRICS_HPP

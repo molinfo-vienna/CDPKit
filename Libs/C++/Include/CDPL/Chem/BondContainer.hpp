@@ -36,7 +36,7 @@
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,7 +56,7 @@ namespace CDPL
             class ConstBondAccessor;
             class BondAccessor;
 
-        public:
+          public:
             /**
              * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond objects.
              */
@@ -150,20 +150,20 @@ namespace CDPL
              * \return The zero-based index of the specified Chem::Bond instance.
              * \throw Base::ItemNotFound if the specified Chem::Bond instance could not be found.
              */
-             virtual std::size_t getBondIndex(const Bond& bond) const = 0;
+            virtual std::size_t getBondIndex(const Bond& bond) const = 0;
 
             /**
               * \brief Orders the stored bonds according to criteria implemented by the provided bond comparison function.
               * \param func The bond comparison function implementing the applied ordering criteria.
               */
-             virtual void orderBonds(const BondCompareFunction& func) = 0;
+            virtual void orderBonds(const BondCompareFunction& func) = 0;
 
-        protected:
+          protected:
             /**
              * \brief Virtual destructor.
              */
             virtual ~BondContainer() {}
-        
+
             /**
              * \brief Assignment operator.
              * \param cntnr The other container to copy.
@@ -171,53 +171,61 @@ namespace CDPL
              */
             BondContainer& operator=(const BondContainer& cntnr);
 
-        private:
+          private:
             class CDPL_CHEM_API ConstBondAccessor
             {
-            
-            public:
-                ConstBondAccessor(const BondAccessor& accessor): container(accessor.container) {}
 
-                ConstBondAccessor(const BondContainer* cntnr): container(cntnr) {}
+              public:
+                ConstBondAccessor(const BondAccessor& accessor):
+                    container(accessor.container) {}
 
-                const Bond& operator()(std::size_t idx) const {
+                ConstBondAccessor(const BondContainer* cntnr):
+                    container(cntnr) {}
+
+                const Bond& operator()(std::size_t idx) const
+                {
                     return container->getBond(idx);
                 }
 
-                bool operator==(const ConstBondAccessor& accessor) const {
+                bool operator==(const ConstBondAccessor& accessor) const
+                {
                     return (container == accessor.container);
-                } 
+                }
 
-                ConstBondAccessor& operator=(const BondAccessor& accessor) {
+                ConstBondAccessor& operator=(const BondAccessor& accessor)
+                {
                     container = accessor.container;
                     return *this;
                 }
 
-            private:
+              private:
                 const BondContainer* container;
             };
 
             class CDPL_CHEM_API BondAccessor
             {
-            
+
                 friend class ConstBondAccessor;
 
-            public:
-                BondAccessor(BondContainer* cntnr): container(cntnr) {}
+              public:
+                BondAccessor(BondContainer* cntnr):
+                    container(cntnr) {}
 
-                Bond& operator()(std::size_t idx) const {
+                Bond& operator()(std::size_t idx) const
+                {
                     return container->getBond(idx);
                 }
 
-                bool operator==(const BondAccessor& accessor) const {
+                bool operator==(const BondAccessor& accessor) const
+                {
                     return (container == accessor.container);
                 }
 
-            private:
+              private:
                 BondContainer* container;
             };
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDCONTAINER_HPP

@@ -46,7 +46,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,14 +54,14 @@ namespace CDPL
 
         class Reaction;
         class Molecule;
-    }
+    } // namespace Chem
 
     namespace Vis
     {
 
         class ReactionView2DParameters;
         class FontMetrics;
-    
+
         /**
          * \brief Implements the 2D visualization of chemical reactions.
          *
@@ -589,7 +589,7 @@ namespace CDPL
         class CDPL_VIS_API ReactionView2D : public View2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionView2D instances.
              */
@@ -616,7 +616,7 @@ namespace CDPL
              * \return A pointer to the used font metrics object, or \e null if none was specified.
              */
             FontMetrics* getFontMetrics() const;
-        
+
             /**
              * \brief Specifies the chemical reaction to visualize.
              *
@@ -635,7 +635,7 @@ namespace CDPL
 
             void getModelBounds(Rectangle2D& bounds);
 
-        private:
+          private:
             ReactionView2D(const ReactionView2D&);
 
             ReactionView2D& operator=(const ReactionView2D&);
@@ -678,7 +678,7 @@ namespace CDPL
             void initArrowStyle();
             void initArrowLength();
 
-            const Color& getArrowColor() const;
+            const Color&             getArrowColor() const;
             const SizeSpecification& getArrowHeadLength() const;
             const SizeSpecification& getArrowHeadWidth() const;
             const SizeSpecification& getArrowShaftWidth() const;
@@ -692,65 +692,65 @@ namespace CDPL
             void initAgentLayout();
             void initAgentLayoutDirection();
 
-            const Color& getPlusSignColor() const;
+            const Color&             getPlusSignColor() const;
             const SizeSpecification& getPlusSignSize() const;
             const SizeSpecification& getPlusSignLineWidth() const;
 
             void initPlusSignVisibility();
 
-            StructureView2D* allocComponentView(const Chem::Molecule&);
-            PolygonPrimitive2D* allocPolygonPrimitive();
+            StructureView2D*            allocComponentView(const Chem::Molecule&);
+            PolygonPrimitive2D*         allocPolygonPrimitive();
             LineSegmentListPrimitive2D* allocLineSegListPrimitive();
 
-            typedef std::vector<StructureView2D*> ComponentViewList;
-            typedef std::vector<const GraphicsPrimitive2D*> GraphicsPrimitiveList;
+            typedef std::vector<StructureView2D*>                      ComponentViewList;
+            typedef std::vector<const GraphicsPrimitive2D*>            GraphicsPrimitiveList;
             typedef std::map<const Chem::MolecularGraph*, Rectangle2D> ComponentBoundsMap;
-            typedef std::vector<Math::Vector2D> Vector2DArray;
-            typedef Util::ObjectStack<StructureView2D> ComponentViewCache;
-            typedef Util::ObjectStack<PolygonPrimitive2D> PolygonPrimitiveCache;
-            typedef Util::ObjectStack<LineSegmentListPrimitive2D> LineSegListPrimitiveCache;
-            typedef std::auto_ptr<ReactionView2DParameters> ReactionView2DParametersPtr;
+            typedef std::vector<Math::Vector2D>                        Vector2DArray;
+            typedef Util::ObjectStack<StructureView2D>                 ComponentViewCache;
+            typedef Util::ObjectStack<PolygonPrimitive2D>              PolygonPrimitiveCache;
+            typedef Util::ObjectStack<LineSegmentListPrimitive2D>      LineSegListPrimitiveCache;
+            typedef std::auto_ptr<ReactionView2DParameters>            ReactionView2DParametersPtr;
 
-            const Chem::Reaction*          reaction;
-            ReactionView2DParametersPtr    parameters;
-            FontMetrics*                   fontMetrics;
-            ComponentViewList              componentViews;
-            GraphicsPrimitiveList          drawList;
-            Rectangle2D                    totalComponentBounds;
-            Rectangle2D                    totalReactionBounds;
-            ComponentBoundsMap             componentBounds;
-            Vector2DArray                  componentPositions;
-            Vector2DArray                  plusSignPositions;
-            Math::Vector2D                 arrowPosition;
-            double                         unscaledArrowLength;
-            double                         unscaledArrowHeadLength;
-            double                         unscaledArrowHeadWidth;
-            double                         unscaledArrowShaftWidth;
-            double                         unscaledArrowLineWidth;
-            double                         maxUnscaledArrowWidth;
-            double                         unscaledPlusSignSize;
-            double                         unscaledPlusSignLineWidth;
-            double                         outputScalingFactor;
-            Math::Vector2D                 outputTranslation;
-            unsigned int                   arrowStyle;
-            SizeSpecification              arrowLength;
-            unsigned int                   componentLayout;
-            unsigned int                   componentLayoutDirection;
-            SizeSpecification              componentMargin;
-            unsigned int                   agentAlignment;        
-            unsigned int                   agentLayout;
-            unsigned int                   agentLayoutDirection;
-            bool                           showReactants;
-            bool                           showAgents;
-            bool                           showProducts;
-            bool                           plusSignsVisible;
-            bool                           reactionChanged;
-            bool                           fontMetricsChanged;
-            ComponentViewCache             compViewCache;
-            PolygonPrimitiveCache          polygonCache;
-            LineSegListPrimitiveCache      lineSegListCache;
+            const Chem::Reaction*       reaction;
+            ReactionView2DParametersPtr parameters;
+            FontMetrics*                fontMetrics;
+            ComponentViewList           componentViews;
+            GraphicsPrimitiveList       drawList;
+            Rectangle2D                 totalComponentBounds;
+            Rectangle2D                 totalReactionBounds;
+            ComponentBoundsMap          componentBounds;
+            Vector2DArray               componentPositions;
+            Vector2DArray               plusSignPositions;
+            Math::Vector2D              arrowPosition;
+            double                      unscaledArrowLength;
+            double                      unscaledArrowHeadLength;
+            double                      unscaledArrowHeadWidth;
+            double                      unscaledArrowShaftWidth;
+            double                      unscaledArrowLineWidth;
+            double                      maxUnscaledArrowWidth;
+            double                      unscaledPlusSignSize;
+            double                      unscaledPlusSignLineWidth;
+            double                      outputScalingFactor;
+            Math::Vector2D              outputTranslation;
+            unsigned int                arrowStyle;
+            SizeSpecification           arrowLength;
+            unsigned int                componentLayout;
+            unsigned int                componentLayoutDirection;
+            SizeSpecification           componentMargin;
+            unsigned int                agentAlignment;
+            unsigned int                agentLayout;
+            unsigned int                agentLayoutDirection;
+            bool                        showReactants;
+            bool                        showAgents;
+            bool                        showProducts;
+            bool                        plusSignsVisible;
+            bool                        reactionChanged;
+            bool                        fontMetricsChanged;
+            ComponentViewCache          compViewCache;
+            PolygonPrimitiveCache       polygonCache;
+            LineSegListPrimitiveCache   lineSegListCache;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_REACTIONVIEW2D_HPP

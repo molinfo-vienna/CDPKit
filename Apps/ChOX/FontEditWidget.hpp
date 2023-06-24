@@ -41,20 +41,20 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
-        FontEditWidget(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, 
+      public:
+        FontEditWidget(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&,
                        const CDPL::Vis::SizeSpecification*, bool = true, bool = true);
 
-    signals:
+      signals:
         void fontChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void editFont();
 
-    private:
+      private:
         void init();
 
         CDPL::Vis::Font&                    font;
@@ -64,6 +64,6 @@ namespace ChOX
         bool                                sizeTypeEditable;
         bool                                policyEditable;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_FONTEDITWIDGET_HPP

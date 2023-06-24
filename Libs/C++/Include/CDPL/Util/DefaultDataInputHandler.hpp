@@ -33,7 +33,7 @@
 #include "CDPL/Util/FileDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -46,22 +46,25 @@ namespace CDPL
         class DefaultDataInputHandler : public Base::DataInputHandler<DataType>
         {
 
-        public:
+          public:
             typedef typename Base::DataInputHandler<DataType>::ReaderType ReaderType;
 
-            const Base::DataFormat& getDataFormat() const {
+            const Base::DataFormat& getDataFormat() const
+            {
                 return Format;
             }
-        
-            typename ReaderType::SharedPointer createReader(std::istream& is) const {
+
+            typename ReaderType::SharedPointer createReader(std::istream& is) const
+            {
                 return typename ReaderType::SharedPointer(new ReaderImpl(is));
             }
 
-            typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const {
+            typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const
+            {
                 return typename ReaderType::SharedPointer(new Util::FileDataReader<ReaderImpl>(file_name, mode));
             }
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_DEFAULTDATAINPUTHANDLER_HPP

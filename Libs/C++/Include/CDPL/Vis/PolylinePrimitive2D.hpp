@@ -37,7 +37,7 @@
 #include "CDPL/Vis/Pen.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -46,10 +46,11 @@ namespace CDPL
         /**
          * \brief A graphics primitive representing a set of connected line segments.
          */
-        class CDPL_VIS_API PolylinePrimitive2D : public PointArray2D, public GraphicsPrimitive2D
+        class CDPL_VIS_API PolylinePrimitive2D : public PointArray2D,
+                                                 public GraphicsPrimitive2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolylinePrimitive2D instances.
              */
@@ -61,7 +62,7 @@ namespace CDPL
             PolylinePrimitive2D() {}
 
             void render(Renderer2D& renderer) const;
-    
+
             /**
              * \brief Sets the pen defining the color, width, line style, join style and cap style of the line segments.
              * \param pen The pen defining the color, width, line style, join style and cap style of the line segments.
@@ -78,10 +79,10 @@ namespace CDPL
 
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-        private:
-            Pen   pen;
+          private:
+            Pen pen;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_POLYLINEPRIMITIVE2D_HPP

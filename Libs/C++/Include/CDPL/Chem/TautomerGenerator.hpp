@@ -44,7 +44,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -53,11 +53,11 @@ namespace CDPL
         /**
          * \brief TautomerGenerator.
          */
-        class CDPL_CHEM_API TautomerGenerator 
+        class CDPL_CHEM_API TautomerGenerator
         {
 
           public:
-            enum Mode 
+            enum Mode
             {
 
                 TOPOLOGICALLY_UNIQUE,
@@ -114,7 +114,7 @@ namespace CDPL
             void generate(const MolecularGraph& molgraph);
 
           private:
-            typedef Util::ObjectPool<BasicMolecule> MoleculeCache;
+            typedef Util::ObjectPool<BasicMolecule>    MoleculeCache;
             typedef MoleculeCache::SharedObjectPointer MoleculePtr;
 
             bool init(const MolecularGraph& molgraph);
@@ -129,33 +129,33 @@ namespace CDPL
             bool addNewTautomer(const MoleculePtr& mol);
 
             std::uint64_t calcTautomerHashCode(const BasicMolecule& tautomer);
-        
-            typedef std::array<std::size_t, 3> BondDescriptor;
-            typedef std::vector<MoleculePtr> MoleculeList;
-            typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
-            typedef std::vector<BondDescriptor> BondDescrArray;
-            typedef std::vector<std::size_t> SizeTArray;
-            typedef std::unordered_set<std::uint64_t> HashCodeSet;
-            typedef std::array<std::size_t, 6> StereoCenter;
-            typedef std::vector<StereoCenter> StereoCenterList;
 
-            MoleculeCache         molCache;
-            CallbackFunction      callbackFunc;
-            Mode                  mode;
-            bool                  regStereo;
-            bool                  regIsotopes;
-            CustomSetupFunction   customSetupFunc;
-            TautRuleList          tautRules;
-            MoleculeList          currGeneration;
-            MoleculeList          nextGeneration;
-            StereoCenterList      atomStereoCenters;
-            StereoCenterList      bondStereoCenters;
-            HashCodeSet           tautHashCodes;
-            HashCodeCalculator    hashCalculator;
-            BondDescrArray        tautomerBonds;
-            SizeTArray            shaInput;
+            typedef std::array<std::size_t, 3>                      BondDescriptor;
+            typedef std::vector<MoleculePtr>                        MoleculeList;
+            typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
+            typedef std::vector<BondDescriptor>                     BondDescrArray;
+            typedef std::vector<std::size_t>                        SizeTArray;
+            typedef std::unordered_set<std::uint64_t>               HashCodeSet;
+            typedef std::array<std::size_t, 6>                      StereoCenter;
+            typedef std::vector<StereoCenter>                       StereoCenterList;
+
+            MoleculeCache       molCache;
+            CallbackFunction    callbackFunc;
+            Mode                mode;
+            bool                regStereo;
+            bool                regIsotopes;
+            CustomSetupFunction customSetupFunc;
+            TautRuleList        tautRules;
+            MoleculeList        currGeneration;
+            MoleculeList        nextGeneration;
+            StereoCenterList    atomStereoCenters;
+            StereoCenterList    bondStereoCenters;
+            HashCodeSet         tautHashCodes;
+            HashCodeCalculator  hashCalculator;
+            BondDescrArray      tautomerBonds;
+            SizeTArray          shaInput;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_TAUTOMERGENERATOR_HPP

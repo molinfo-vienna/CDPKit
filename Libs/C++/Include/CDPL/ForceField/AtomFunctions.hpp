@@ -34,7 +34,7 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,9 +42,9 @@ namespace CDPL
 
         class Atom;
         class MolecularGraph;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         CDPL_FORCEFIELD_API const std::string& getMMFF94SymbolicType(const Chem::Atom& atom);
@@ -85,8 +85,7 @@ namespace CDPL
         CDPL_FORCEFIELD_API bool hasUFFType(const Chem::Atom& atom);
 
         CDPL_FORCEFIELD_API unsigned int perceiveUFFType(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_ATOMFUNCTIONS_HPP
- 

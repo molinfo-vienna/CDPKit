@@ -38,7 +38,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -53,15 +53,15 @@ namespace CDPL
         class MOL2DataReader
         {
 
-        public:
-            MOL2DataReader(const Base::DataIOBase& io_base): 
+          public:
+            MOL2DataReader(const Base::DataIOBase& io_base):
                 ioBase(io_base), lineTokenizer(dataLine, boost::char_separator<char>(" \t")) {}
 
             bool hasMoreData(std::istream& is);
             bool readMolecule(std::istream& is, Molecule& mol);
             bool skipMolecule(std::istream& is);
 
-        private:
+          private:
             void init(std::istream& is);
 
             void doReadMolecule(std::istream& is, Molecule& mol);
@@ -80,10 +80,10 @@ namespace CDPL
 
             bool skipInputToRTI(std::istream& is, const std::string& rti, bool skip_rti);
 
-            typedef std::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
-            typedef std::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
+            typedef std::unordered_map<std::size_t, std::size_t>   AtomIDToIndexMap;
+            typedef std::unordered_multimap<std::size_t, Atom*>    SubstructIDToAtomMap;
             typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
-            typedef std::vector<const Atom*> StereoAtomList;
+            typedef std::vector<const Atom*>                       StereoAtomList;
 
             const Base::DataIOBase& ioBase;
             bool                    strictErrorChecking;
@@ -103,7 +103,7 @@ namespace CDPL
             Math::Vector3DArray     confCoords;
             StereoAtomList          stereoAtoms;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOL2DATAREADER_HPP

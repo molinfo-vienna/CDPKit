@@ -50,10 +50,10 @@
 #include "CDPL/Internal/Timer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class FragmentConformerGeneratorImpl
@@ -63,7 +63,7 @@ namespace CDPL
             typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
             FragmentConformerGeneratorImpl();
-    
+
             FragmentConformerGeneratorSettings& getSettings();
 
             const FragmentConformerGeneratorSettings& getSettings() const;
@@ -96,7 +96,7 @@ namespace CDPL
 
           private:
             typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-            typedef std::vector<const Chem::Atom*> AtomList;
+            typedef std::vector<const Chem::Atom*>  AtomList;
 
             FragmentConformerGeneratorImpl(const FragmentConformerGeneratorImpl&);
 
@@ -122,7 +122,7 @@ namespace CDPL
             unsigned int generateRandomConformer(ConformerData& conf);
 
             bool checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd);
-            
+
             ConformerData::SharedPointer getRingAtomCoordinates(const Math::Vector3DArray& conf_coords);
 
             void getRingAtomIndices();
@@ -136,45 +136,45 @@ namespace CDPL
             ConformerData::SharedPointer allocConformerData();
 
             unsigned int invokeCallbacks() const;
-            bool timedout(std::size_t timeout) const;
+            bool         timedout(std::size_t timeout) const;
 
             bool has3DCoordinates(const Chem::Atom& atom) const;
 
-            typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
-            typedef ForceField::MMFF94InteractionParameterizer MMFF94InteractionParameterizer;
-            typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
-            typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
-            typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
-            typedef std::vector<std::size_t> IndexList;
+            typedef ForceField::MMFF94GradientCalculator<double>                  MMFF94GradientCalculator;
+            typedef ForceField::MMFF94InteractionParameterizer                    MMFF94InteractionParameterizer;
+            typedef ForceField::MMFF94InteractionData                             MMFF94InteractionData;
+            typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer;
+            typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray>     AlignmentCalculator;
+            typedef std::vector<std::size_t>                                      IndexList;
 
-            ConformerDataCache                     confDataCache;
-            CallbackFunction                       abortCallback;
-            CallbackFunction                       timeoutCallback;
-            LogMessageCallbackFunction             logCallback;
-            Internal::Timer                        timer;
-            const Chem::MolecularGraph*            molGraph;
-            std::size_t                            numAtoms;
-            MMFF94InteractionParameterizer         mmff94Parameterizer;
-            MMFF94InteractionData                  mmff94Data;
-            MMFF94GradientCalculator               mmff94GradientCalc;
-            BFGSMinimizer                          energyMinimizer;
-            DGStructureGenerator                   dgStructureGen;
-            Chem::Hydrogen3DCoordinatesCalculator  hCoordsCalc;
-            Chem::AutomorphismGroupSearch          symMappingSearch;
-            AlignmentCalculator                    alignmentCalc;
-            Math::Vector3DArray::StorageType       energyGradient;
-            IndexList                              ringAtomIndices;
-            IndexList                              symMappings;
-            AtomList                               nbrHydrogens1;
-            AtomList                               nbrHydrogens2;
-            Chem::Fragment                         symMappingSearchMolGraph;
-            Util::BitSet                           coreAtomMask;
-            ConformerDataArray                     ringAtomCoords;
-            ConformerDataArray                     outputConfs;
-            ConformerDataArray                     workingConfs;
-            FragmentConformerGeneratorSettings     settings;
+            ConformerDataCache                    confDataCache;
+            CallbackFunction                      abortCallback;
+            CallbackFunction                      timeoutCallback;
+            LogMessageCallbackFunction            logCallback;
+            Internal::Timer                       timer;
+            const Chem::MolecularGraph*           molGraph;
+            std::size_t                           numAtoms;
+            MMFF94InteractionParameterizer        mmff94Parameterizer;
+            MMFF94InteractionData                 mmff94Data;
+            MMFF94GradientCalculator              mmff94GradientCalc;
+            BFGSMinimizer                         energyMinimizer;
+            DGStructureGenerator                  dgStructureGen;
+            Chem::Hydrogen3DCoordinatesCalculator hCoordsCalc;
+            Chem::AutomorphismGroupSearch         symMappingSearch;
+            AlignmentCalculator                   alignmentCalc;
+            Math::Vector3DArray::StorageType      energyGradient;
+            IndexList                             ringAtomIndices;
+            IndexList                             symMappings;
+            AtomList                              nbrHydrogens1;
+            AtomList                              nbrHydrogens2;
+            Chem::Fragment                        symMappingSearchMolGraph;
+            Util::BitSet                          coreAtomMask;
+            ConformerDataArray                    ringAtomCoords;
+            ConformerDataArray                    outputConfs;
+            ConformerDataArray                    workingConfs;
+            FragmentConformerGeneratorSettings    settings;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTCONFORMERGENERATORIMPL_HPP

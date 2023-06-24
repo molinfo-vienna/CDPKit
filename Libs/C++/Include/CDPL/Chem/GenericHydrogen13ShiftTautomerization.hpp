@@ -33,12 +33,12 @@
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         /**
          * \brief GenericHydrogen13ShiftTautomerizationRule.
          */
@@ -48,7 +48,7 @@ namespace CDPL
           public:
             GenericHydrogen13ShiftTautomerization();
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_GENERICHYDROGEN13SHIFTTAUTOMERIZATION_HPP

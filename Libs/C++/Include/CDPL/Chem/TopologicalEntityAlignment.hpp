@@ -40,7 +40,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,10 +50,10 @@ namespace CDPL
          * \brief TopologicalEntityAlignment.
          */
         template <typename T>
-        class TopologicalEntityAlignment 
+        class TopologicalEntityAlignment
         {
 
-        public:
+          public:
             /**
              * \brief The actual entity type.
              */
@@ -82,7 +82,8 @@ namespace CDPL
             /**
              * \brief Constructs the \c %TopologicalEntityAlignment instance.
              */
-            TopologicalEntityAlignment(): changes(true) {}
+            TopologicalEntityAlignment():
+                changes(true) {}
 
             /**
              * \brief Virtual destructor.
@@ -100,7 +101,7 @@ namespace CDPL
              * \return The registered constraint check function.
              */
             const EntityMatchFunction& getEntityMatchFunction() const;
- 
+
             /**
              * \brief Specifies a function for checking the compatibility of entity-pairs in the search for alignment solutions.
              * \param func The constraint check function.
@@ -113,7 +114,7 @@ namespace CDPL
              * \return The registered constraint check function.
              */
             const EntityPairMatchFunction& getEntityPairMatchFunction() const;
-     
+
             /**
              * \brief Adds an entity to the specified alignment entity set.
              * \param entity The entity object to add.
@@ -156,7 +157,7 @@ namespace CDPL
              * \throw Base::IndexError if the number of entities in the specified set is zero or \a idx is not in the range [0, getNumEntities() - 1].
              */
             const EntityType& getEntity(std::size_t idx, bool first_set) const;
-            
+
             /**
              * \brief Searches for the next alignment solution and stores the corresponding mapping of the entities
              *        in the first set to the entities in the second set in the map provided as an argument.
@@ -167,9 +168,9 @@ namespace CDPL
 
             void reset();
 
-        private:
+          private:
             void init();
-            
+
             typedef std::vector<Util::STPair> CompatGraphNodeArray;
 
             EntityMatchFunction         entityMatchFunc;
@@ -182,8 +183,8 @@ namespace CDPL
             EntitySet                   secondEntities;
             bool                        changes;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
@@ -192,32 +193,32 @@ template <typename T>
 void CDPL::Chem::TopologicalEntityAlignment<T>::setEntityMatchFunction(const EntityMatchFunction& func)
 {
     entityMatchFunc = func;
-    changes = true;
+    changes         = true;
 }
 
 template <typename T>
-const typename CDPL::Chem::TopologicalEntityAlignment<T>::EntityMatchFunction& 
+const typename CDPL::Chem::TopologicalEntityAlignment<T>::EntityMatchFunction&
 CDPL::Chem::TopologicalEntityAlignment<T>::getEntityMatchFunction() const
 {
-    return entityMatchFunc; 
+    return entityMatchFunc;
 }
 
 template <typename T>
 void CDPL::Chem::TopologicalEntityAlignment<T>::setEntityPairMatchFunction(const EntityPairMatchFunction& func)
 {
     entityPairMatchFunc = func;
-    changes = true;
+    changes             = true;
 }
 
 template <typename T>
-const typename CDPL::Chem::TopologicalEntityAlignment<T>::EntityPairMatchFunction& 
+const typename CDPL::Chem::TopologicalEntityAlignment<T>::EntityPairMatchFunction&
 CDPL::Chem::TopologicalEntityAlignment<T>::getEntityPairMatchFunction() const
 {
-    return entityPairMatchFunc; 
+    return entityPairMatchFunc;
 }
 
 template <typename T>
-std::size_t CDPL::Chem::TopologicalEntityAlignment<T>::getNumEntities(bool first_set) const  
+std::size_t CDPL::Chem::TopologicalEntityAlignment<T>::getNumEntities(bool first_set) const
 {
     return (first_set ? firstEntities : secondEntities).size();
 }
@@ -230,21 +231,21 @@ void CDPL::Chem::TopologicalEntityAlignment<T>::addEntity(const EntityType& enti
 }
 
 template <typename T>
-void CDPL::Chem::TopologicalEntityAlignment<T>::clearEntities(bool first_set)  
+void CDPL::Chem::TopologicalEntityAlignment<T>::clearEntities(bool first_set)
 {
     (first_set ? firstEntities : secondEntities).clear();
     changes = true;
 }
 
 template <typename T>
-typename CDPL::Chem::TopologicalEntityAlignment<T>::ConstEntityIterator 
+typename CDPL::Chem::TopologicalEntityAlignment<T>::ConstEntityIterator
 CDPL::Chem::TopologicalEntityAlignment<T>::getEntitiesBegin(bool first_set) const
 {
     return (first_set ? firstEntities : secondEntities).begin();
 }
 
 template <typename T>
-typename CDPL::Chem::TopologicalEntityAlignment<T>::ConstEntityIterator 
+typename CDPL::Chem::TopologicalEntityAlignment<T>::ConstEntityIterator
 CDPL::Chem::TopologicalEntityAlignment<T>::getEntitiesEnd(bool first_set) const
 {
     return (first_set ? firstEntities : secondEntities).end();
@@ -269,11 +270,11 @@ void CDPL::Chem::TopologicalEntityAlignment<T>::init()
 
     if (entityMatchFunc) {
         std::size_t i = 0;
-        
+
         for (typename EntitySet::const_iterator it1 = firstEntities.begin(), end1 = firstEntities.end(); it1 != end1; ++it1, i++) {
             const EntityType* ent1 = *it1;
-            std::size_t j = 0;
-        
+            std::size_t       j    = 0;
+
             for (typename EntitySet::const_iterator it2 = secondEntities.begin(), end2 = secondEntities.end(); it2 != end2; ++it2, j++)
                 if (entityMatchFunc(*ent1, **it2))
                     compatGraphNodes.push_back(Util::STPair(i, j));
@@ -281,7 +282,7 @@ void CDPL::Chem::TopologicalEntityAlignment<T>::init()
 
     } else {
         for (std::size_t i = 0, num_ents1 = firstEntities.size(); i < num_ents1; i++)
-            for (std::size_t j = 0, num_ents2 = secondEntities.size(); j < num_ents2; j++) 
+            for (std::size_t j = 0, num_ents2 = secondEntities.size(); j < num_ents2; j++)
                 compatGraphNodes.push_back(Util::STPair(i, j));
     }
 
@@ -325,7 +326,7 @@ bool CDPL::Chem::TopologicalEntityAlignment<T>::nextAlignment(Util::STPairArray&
     if (changes)
         init();
 
-    if (!bkAlgorithm.nextClique(clique)) 
+    if (!bkAlgorithm.nextClique(clique))
         return false;
 
     mapping.clear();

@@ -36,7 +36,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -80,7 +80,7 @@ namespace CDPL
         class CDPL_VIS_API Renderer2D
         {
 
-        public:
+          public:
             /**
              * \brief Virtual destructor.
              */
@@ -113,7 +113,7 @@ namespace CDPL
              * \param xform The matrix by which the current affine transformation matrix is multiplied.
              */
             virtual void transform(const Math::Matrix3D& xform) = 0;
-        
+
             /**
              * \brief Sets the pen to be used in subsequent drawing operations.
              * \param pen The new pen for subsequent drawing operations.
@@ -127,7 +127,7 @@ namespace CDPL
              * \see Vis::Brush
              */
             virtual void setBrush(const Brush& brush) = 0;
-            
+
             /**
              * \brief Sets the font to be used in subsequent text drawing operations.
              * \param font The new font used in subsequent text drawing operations.
@@ -174,7 +174,7 @@ namespace CDPL
              * \see setPen()
              */
             virtual void drawLine(double x1, double y1, double x2, double y2) = 0;
-    
+
             /**
              * \brief Draws the polyline defined by \a points.
              *
@@ -186,7 +186,7 @@ namespace CDPL
              * \see setPen()
              */
             virtual void drawPolyline(const Math::Vector2DArray& points) = 0;
-    
+
             /**
              * \brief Draws the sequence of disjoint line segments defined by \a points.
              *
@@ -223,7 +223,7 @@ namespace CDPL
              * \see setPen(), setBrush()
              */
             virtual void drawEllipse(double x, double y, double width, double height) = 0;
-            
+
             /**
              * \brief Draws the specified text at the position <em>(x, y)</em>.
              *
@@ -237,7 +237,7 @@ namespace CDPL
              */
             virtual void drawText(double x, double y, const std::string& txt) = 0;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_RENDERER2D_HPP

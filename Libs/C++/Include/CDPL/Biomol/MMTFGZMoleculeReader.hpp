@@ -33,14 +33,14 @@
 #include "CDPL/Util/CompressedDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
     {
-    
+
         typedef Util::CompressedDataReader<MMTFMoleculeReader, Util::GZipIStream> MMTFGZMoleculeReader;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MMTFGZMOLECULEREADER_HPP

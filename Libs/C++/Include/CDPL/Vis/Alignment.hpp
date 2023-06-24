@@ -30,7 +30,7 @@
 #define CDPL_VIS_ALIGNMENT_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -49,22 +49,22 @@ namespace CDPL
             /**
              * \brief Specifies that an object has no special alignment.
              */
-            const unsigned int NONE             = 0;
+            const unsigned int NONE = 0;
 
             /**
              * \brief Specifies an alignment to the left.
              */
-            const unsigned int LEFT             = 0x1;
+            const unsigned int LEFT = 0x1;
 
             /**
              * \brief Specifies an alignment to the right.
              */
-            const unsigned int RIGHT            = 0x2;
+            const unsigned int RIGHT = 0x2;
 
             /**
              * \brief Specifies that an object has to be centered horizontally.
              */
-            const unsigned int H_CENTER         = LEFT | RIGHT;
+            const unsigned int H_CENTER = LEFT | RIGHT;
 
             /**
              * \brief A bitmask for all horizontal alignment flags.
@@ -74,18 +74,18 @@ namespace CDPL
             /**
              * \brief Specifies an alignment to the top.
              */
-            const unsigned int TOP              = 0x4;
+            const unsigned int TOP = 0x4;
 
             /**
              * \brief Specifies an alignment to the bottom.
              */
-            const unsigned int BOTTOM           = 0x8;
+            const unsigned int BOTTOM = 0x8;
 
             /**
              * \brief Specifies that an object has to be centered vertically.
              */
-            const unsigned int V_CENTER         = TOP | BOTTOM;
-            
+            const unsigned int V_CENTER = TOP | BOTTOM;
+
             /**
              * \brief A bitmask for all vertical alignment flags.
              */
@@ -94,9 +94,9 @@ namespace CDPL
             /**
              * \brief Specifies that an object has to be centered horizontally and vertically.
              */
-            const unsigned int CENTER           = H_CENTER | V_CENTER;
-        }
-    }
-}
+            const unsigned int CENTER = H_CENTER | V_CENTER;
+        } // namespace Alignment
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_ALIGNMENT_HPP

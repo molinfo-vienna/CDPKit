@@ -39,7 +39,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -55,9 +55,9 @@ namespace CDPL
          * \brief LogSCalculator.
          * \see [\ref LOGS]
          */
-        class CDPL_MOLPROP_API LogSCalculator 
+        class CDPL_MOLPROP_API LogSCalculator
         {
-            
+
           public:
             /**
              * \brief Specifies the number of different features used by the \f$ \log S \f$ model.
@@ -119,8 +119,7 @@ namespace CDPL
             Math::DVector          featureVector;
             double                 logS;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_LOGSCALCULATOR_HPP
- 

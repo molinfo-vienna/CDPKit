@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
          */
         typedef Util::DefaultDataInputHandler<SMARTSMoleculeReader, DataFormat::SMARTS> SMARTSMoleculeInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMARTSMOLECULEINPUTHANDLER_HPP

@@ -30,14 +30,14 @@
 #define CDPL_MOLPROP_APIPREFIX_HPP
 
 #ifdef CDPL_MOLPROP_STATIC_LINK
-#  define CDPL_MOLPROP_API
+# define CDPL_MOLPROP_API
 #else // CDPL_MOLPROP_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_molprop_shared_EXPORTS
-#    define CDPL_MOLPROP_API CDPL_API_EXPORT
-#  else // cdpl_molprop_shared_EXPORTS
-#    define CDPL_MOLPROP_API CDPL_API_IMPORT
-#  endif // cdpl_molprop_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_molprop_shared_EXPORTS
+#  define CDPL_MOLPROP_API CDPL_API_EXPORT
+# else // cdpl_molprop_shared_EXPORTS
+#  define CDPL_MOLPROP_API CDPL_API_IMPORT
+# endif // cdpl_molprop_shared_EXPORTS
 #endif // CDPL_MOLPROP_STATIC_LINK
 
 /**
@@ -46,4 +46,3 @@
  */
 
 #endif // CDPL_MOLPROP_APIPREFIX_HPP
-

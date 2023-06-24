@@ -33,7 +33,7 @@
 #include "RapidXML/rapidxml.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -46,15 +46,15 @@ namespace CDPL
         class TorsionLibraryDataReader
         {
 
-        public:
+          public:
             void read(std::istream& is, TorsionLibrary& lib);
             void read(const char* data, TorsionLibrary& lib);
 
-        private:
-            typedef rapidxml::xml_document<char> XMLDocument;
-            typedef rapidxml::xml_node<char> XMLNode;
+          private:
+            typedef rapidxml::xml_document<char>  XMLDocument;
+            typedef rapidxml::xml_node<char>      XMLNode;
             typedef rapidxml::xml_attribute<char> XMLAttribute;
-            typedef std::vector<char> CharBuffer;
+            typedef std::vector<char>             CharBuffer;
 
             void processData(char* data, TorsionLibrary& lib);
             void processCategory(const XMLNode* cat_node, TorsionCategory& cat) const;
@@ -66,7 +66,7 @@ namespace CDPL
             CharBuffer  charBuffer;
             XMLDocument torLibDocument;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONLIBRARYDATAREADER_HPP

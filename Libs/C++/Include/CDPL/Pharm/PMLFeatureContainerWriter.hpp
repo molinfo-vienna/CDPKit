@@ -36,7 +36,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_PHARM_API PMLFeatureContainerWriter : public Base::DataWriter<FeatureContainer>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PMLFeatureContainerWriter instance that will write data of feature containers to the output
              *        stream \a os.
@@ -77,18 +77,18 @@ namespace CDPL
 
             bool operator!() const;
 
-        private:
+          private:
             typedef std::auto_ptr<PMLDataWriter> PMLDataWriterPtr;
 
             PMLFeatureContainerWriter(const PMLFeatureContainerWriter&);
 
             PMLFeatureContainerWriter& operator=(const PMLFeatureContainerWriter&);
-            
+
             std::ostream&    output;
             bool             state;
             PMLDataWriterPtr writer;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PMLFEATURECONTAINERWRITER_HPP

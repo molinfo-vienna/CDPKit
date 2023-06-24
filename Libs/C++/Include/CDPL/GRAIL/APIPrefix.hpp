@@ -30,14 +30,14 @@
 #define CDPL_GRAIL_APIPREFIX_HPP
 
 #ifdef CDPL_GRAIL_STATIC_LINK
-#  define CDPL_GRAIL_API
+# define CDPL_GRAIL_API
 #else // CDPL_GRAIL_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_grail_shared_EXPORTS
-#    define CDPL_GRAIL_API CDPL_API_EXPORT
-#  else // cdpl_grail_shared_EXPORTS
-#    define CDPL_GRAIL_API CDPL_API_IMPORT
-#  endif // cdpl_grail_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_grail_shared_EXPORTS
+#  define CDPL_GRAIL_API CDPL_API_EXPORT
+# else // cdpl_grail_shared_EXPORTS
+#  define CDPL_GRAIL_API CDPL_API_IMPORT
+# endif // cdpl_grail_shared_EXPORTS
 #endif // CDPL_GRAIL_STATIC_LINK
 
 /**

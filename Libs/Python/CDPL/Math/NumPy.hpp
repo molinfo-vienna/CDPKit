@@ -25,7 +25,7 @@
 #ifndef CDPL_PYTHON_MATH_NUMPY_HPP
 #define CDPL_PYTHON_MATH_NUMPY_HPP
 
-#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#define NPY_NO_DEPRECATED_API  NPY_1_7_API_VERSION
 #define PY_ARRAY_UNIQUE_SYMBOL CDPL_NUMPY_ARRAY_API
 
 #ifndef ENABLE_IMPORT_ARRAY_FUNCTION
@@ -40,21 +40,22 @@
 namespace CDPLPythonMath
 {
 
-    namespace NumPy 
+    namespace NumPy
     {
 
         template <std::size_t Size>
-        struct FloatDataTypeNum {};
+        struct FloatDataTypeNum
+        {};
 
         template <>
-        struct FloatDataTypeNum<4> 
+        struct FloatDataTypeNum<4>
         {
 
             static const int Value = NPY_FLOAT32;
         };
 
         template <>
-        struct FloatDataTypeNum<8> 
+        struct FloatDataTypeNum<8>
         {
 
             static const int Value = NPY_FLOAT64;
@@ -62,7 +63,7 @@ namespace CDPLPythonMath
 
 #ifdef NPY_FLOAT128
         template <>
-        struct FloatDataTypeNum<16> 
+        struct FloatDataTypeNum<16>
         {
 
             static const int Value = NPY_FLOAT128;
@@ -70,17 +71,18 @@ namespace CDPLPythonMath
 #endif // NPY_FLOAT128
 
         template <std::size_t Size>
-        struct IntDataTypeNum {};
+        struct IntDataTypeNum
+        {};
 
         template <>
-        struct IntDataTypeNum<4> 
+        struct IntDataTypeNum<4>
         {
 
             static const int Value = NPY_INT32;
         };
 
         template <>
-        struct IntDataTypeNum<8> 
+        struct IntDataTypeNum<8>
         {
 
             static const int Value = NPY_INT64;
@@ -88,17 +90,18 @@ namespace CDPLPythonMath
 
 
         template <std::size_t Size>
-        struct UIntDataTypeNum {};
+        struct UIntDataTypeNum
+        {};
 
         template <>
-        struct UIntDataTypeNum<4> 
+        struct UIntDataTypeNum<4>
         {
 
             static const int Value = NPY_UINT32;
         };
 
         template <>
-        struct UIntDataTypeNum<8> 
+        struct UIntDataTypeNum<8>
         {
 
             static const int Value = NPY_UINT64;
@@ -106,39 +109,48 @@ namespace CDPLPythonMath
 
 
         template <typename T>
-        struct DataTypeNum {};
+        struct DataTypeNum
+        {};
 
         template <>
-        struct DataTypeNum<float> : public FloatDataTypeNum<sizeof(float)> {};
+        struct DataTypeNum<float> : public FloatDataTypeNum<sizeof(float)>
+        {};
 
         template <>
-        struct DataTypeNum<double> : public FloatDataTypeNum<sizeof(double)> {};
+        struct DataTypeNum<double> : public FloatDataTypeNum<sizeof(double)>
+        {};
 
         template <>
-        struct DataTypeNum<long double> : public FloatDataTypeNum<sizeof(long double)> {};
+        struct DataTypeNum<long double> : public FloatDataTypeNum<sizeof(long double)>
+        {};
 
-  
-        template <>
-        struct DataTypeNum<long int> : public IntDataTypeNum<sizeof(long int)> {}; 
 
         template <>
-        struct DataTypeNum<int> : public IntDataTypeNum<sizeof(int)> {}; 
-
-    
-        template <>
-        struct DataTypeNum<unsigned long int> : public UIntDataTypeNum<sizeof(unsigned long int)> {}; 
+        struct DataTypeNum<long int> : public IntDataTypeNum<sizeof(long int)>
+        {};
 
         template <>
-        struct DataTypeNum<unsigned int> : public UIntDataTypeNum<sizeof(unsigned int)> {}; 
+        struct DataTypeNum<int> : public IntDataTypeNum<sizeof(int)>
+        {};
 
 
-        bool init(); 
-        bool available(); 
+        template <>
+        struct DataTypeNum<unsigned long int> : public UIntDataTypeNum<sizeof(unsigned long int)>
+        {};
+
+        template <>
+        struct DataTypeNum<unsigned int> : public UIntDataTypeNum<sizeof(unsigned int)>
+        {};
+
+
+        bool init();
+        bool available();
 
         PyArrayObject* castToNDArray(PyObject* obj);
 
         template <typename T>
-        bool checkDataType(PyArrayObject* arr) {
+        bool checkDataType(PyArrayObject* arr)
+        {
             return (PyArray_EquivTypenums(PyArray_TYPE(arr), DataTypeNum<T>::Value) == NPY_TRUE);
         }
 
@@ -149,47 +161,53 @@ namespace CDPLPythonMath
         bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2, std::size_t size3);
 
         template <typename T>
-        void resizeTarget1(T& tgt, PyArrayObject* arr) {
+        void resizeTarget1(T& tgt, PyArrayObject* arr)
+        {
             npy_intp* dims = PyArray_DIMS(arr);
 
             tgt.resize(dims[0]);
-        } 
+        }
 
         template <typename T>
-        void resizeTarget2(T& tgt, PyArrayObject* arr) {
+        void resizeTarget2(T& tgt, PyArrayObject* arr)
+        {
             npy_intp* dims = PyArray_DIMS(arr);
 
             tgt.resize(dims[0], dims[1]);
-        } 
+        }
 
         template <typename T>
-        void resizeTarget3(T& tgt, PyArrayObject* arr) {
+        void resizeTarget3(T& tgt, PyArrayObject* arr)
+        {
             npy_intp* dims = PyArray_DIMS(arr);
 
             tgt.resize(dims[0], dims[1], dims[2]);
-        } 
+        }
 
         template <typename T, typename VT = typename T::ValueType>
-        void copyArray1(T& tgt, PyArrayObject* arr) {
+        void copyArray1(T& tgt, PyArrayObject* arr)
+        {
             for (std::size_t i = 0, size = tgt.getSize(); i < size; i++)
                 tgt(i) = *reinterpret_cast<VT*>(PyArray_GETPTR1(arr, i));
         }
 
         template <typename T, typename VT = typename T::ValueType>
-        void copyArray2(T& tgt, PyArrayObject* arr) {
+        void copyArray2(T& tgt, PyArrayObject* arr)
+        {
             for (std::size_t i = 0, size1 = tgt.getSize1(), size2 = tgt.getSize2(); i < size1; i++)
                 for (std::size_t j = 0; j < size2; j++)
                     tgt(i, j) = *reinterpret_cast<VT*>(PyArray_GETPTR2(arr, i, j));
         }
 
         template <typename T, typename VT = typename T::ValueType>
-        void copyArray3(T& tgt, PyArrayObject* arr) {
+        void copyArray3(T& tgt, PyArrayObject* arr)
+        {
             for (std::size_t i = 0, size1 = tgt.getSize1(), size2 = tgt.getSize2(), size3 = tgt.getSize3(); i < size1; i++)
                 for (std::size_t j = 0; j < size2; j++)
                     for (std::size_t k = 0; k < size3; k++)
                         tgt(i, j, k) = *reinterpret_cast<VT*>(PyArray_GETPTR3(arr, i, j, k));
         }
-    }
-}
+    } // namespace NumPy
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_NUMPY_HPP

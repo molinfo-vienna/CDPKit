@@ -39,7 +39,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -55,10 +55,10 @@ namespace CDPL
         {
 
           public:
-            static constexpr double       DEF_HYD_THRESHOLD_RING  = 2.0;
-            static constexpr double       DEF_HYD_THRESHOLD_CHAIN = 0.8;
-            static constexpr double       DEF_HYD_THRESHOLD_GROUP = 0.8;
-        
+            static constexpr double DEF_HYD_THRESHOLD_RING  = 2.0;
+            static constexpr double DEF_HYD_THRESHOLD_CHAIN = 0.8;
+            static constexpr double DEF_HYD_THRESHOLD_GROUP = 0.8;
+
             static constexpr double       DEF_FEATURE_TOL  = 1.5;
             static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::HYDROPHOBIC;
             static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::SPHERE;
@@ -69,13 +69,13 @@ namespace CDPL
              * \brief Constructs the \c %HydrophobicFeatureGenerator instance.
              */
             HydrophobicFeatureGenerator();
-        
+
             /**
              * \brief Constructs a copy of the \c %HydrophobicFeatureGenerator instance \a gen.
              * \param gen The \c %HydrophobicFeatureGenerator to copy.
              */
             HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen);
-        
+
             /**
              * \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds 
              *        them to the pharmacophore \a pharm.
@@ -200,7 +200,7 @@ namespace CDPL
             void extractChain(const Chem::Atom&);
             void processChain(Pharmacophore&);
 
-            Feature& emitFeature(const AtomList&, Pharmacophore&, const Chem::Fragment::SharedPointer&, 
+            Feature& emitFeature(const AtomList&, Pharmacophore&, const Chem::Fragment::SharedPointer&,
                                  bool = true) const;
 
             bool isHydrophobicRing(const Chem::Fragment&);
@@ -210,28 +210,28 @@ namespace CDPL
 
             void getAtomHydrophobicities();
 
-            void buildAtomMask(const AtomList&, Util::BitSet&) const;
+            void   buildAtomMask(const AtomList&, Util::BitSet&) const;
             double calcSummedHydrophobicity(const AtomList& alist) const;
 
             Chem::Fragment::SharedPointer makeFragment(const AtomList&) const;
 
             bool isChainEndAtom(const Chem::Atom&) const;
 
-            const Chem::MolecularGraph*  molGraph;
-            Util::BitSet                 procAtomMask;
-            Util::BitSet                 hAtomMask;
-            Util::BitSet                 tmpAtomMask;
-            unsigned int                 featureType;
-            double                       featureTol;
-            unsigned int                 featureGeom;
-            double                       hydThreshRing;  
-            double                       hydThreshChain; 
-            double                       hydThreshGroup;
-            Util::DArray                 atomHydTable;
-            AtomList                     featureAtoms;
-            AtomList                     chainAtoms;
+            const Chem::MolecularGraph* molGraph;
+            Util::BitSet                procAtomMask;
+            Util::BitSet                hAtomMask;
+            Util::BitSet                tmpAtomMask;
+            unsigned int                featureType;
+            double                      featureTol;
+            unsigned int                featureGeom;
+            double                      hydThreshRing;
+            double                      hydThreshChain;
+            double                      hydThreshGroup;
+            Util::DArray                atomHydTable;
+            AtomList                    featureAtoms;
+            AtomList                    chainAtoms;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_HYDROPHOBICFEATUREGENERATOR_HPP

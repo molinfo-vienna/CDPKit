@@ -33,30 +33,30 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ForceField
     {
 
-    class CDPL_FORCEFIELD_API Error : public Base::Exception
-    {
+        class CDPL_FORCEFIELD_API Error : public Base::Exception
+        {
 
-      public:
-        Error(const std::string& msg = "");
+          public:
+            Error(const std::string& msg = "");
 
-        virtual ~Error() throw();
-    };
+            virtual ~Error() throw();
+        };
 
-    class CDPL_FORCEFIELD_API ParameterizationFailed : public Error
-    {
+        class CDPL_FORCEFIELD_API ParameterizationFailed : public Error
+        {
 
-      public:
-        ParameterizationFailed(const std::string& msg = "");
+          public:
+            ParameterizationFailed(const std::string& msg = "");
 
-        virtual ~ParameterizationFailed() throw();
-    };
-    }
-}
+            virtual ~ParameterizationFailed() throw();
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_EXCEPTIONS_HPP

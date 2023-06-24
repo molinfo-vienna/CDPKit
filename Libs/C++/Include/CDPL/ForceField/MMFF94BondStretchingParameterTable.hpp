@@ -41,10 +41,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94BondStretchingParameterTable
@@ -58,14 +58,14 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<MMFF94BondStretchingParameterTable> SharedPointer;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 Entry();
- 
-                Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, 
+
+                Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type,
                       double force_const, double ref_length);
 
                 unsigned int getBondTypeIndex() const;
@@ -87,14 +87,16 @@ namespace CDPL
                 double       forceConst;
                 double       refLength;
                 bool         initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94BondStretchingParameterTable();
 
             void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type,
@@ -113,7 +115,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -121,7 +123,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -138,7 +140,7 @@ namespace CDPL
             static SharedPointer defaultTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGPARAMETERTABLE_HPP

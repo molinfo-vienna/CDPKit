@@ -32,7 +32,7 @@
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -40,7 +40,7 @@ namespace CDPL
 
         class LookupKey;
         class Any;
-    }
+    } // namespace Base
 
     namespace Vis
     {
@@ -50,26 +50,26 @@ namespace CDPL
         class StructureView2DParameters
         {
 
-        public:
+          public:
             StructureView2DParameters(View2D&);
 
             ~StructureView2DParameters();
 
             const Rectangle2D& getViewport() const;
-            unsigned int getAlignment() const;
-            double getStdBondLength() const;
-            unsigned int getSizeAdjustment() const;
+            unsigned int       getAlignment() const;
+            double             getStdBondLength() const;
+            unsigned int       getSizeAdjustment() const;
 
-            bool eraseBackground() const;
+            bool         eraseBackground() const;
             const Color& getBackgroundColor() const;
-            
+
             const ColorTable::SharedPointer& getAtomColorTable() const;
 
             bool useCalculatedAtomCoords() const;
 
-            const Color& getAtomColor() const;
-            const Font& getAtomLabelFont() const;
-            const Font& getSecondaryAtomLabelFont() const;
+            const Color&             getAtomColor() const;
+            const Font&              getAtomLabelFont() const;
+            const Font&              getSecondaryAtomLabelFont() const;
             const SizeSpecification& getAtomLabelSize() const;
             const SizeSpecification& getSecondaryAtomLabelSize() const;
             const SizeSpecification& getAtomLabelMargin() const;
@@ -85,8 +85,8 @@ namespace CDPL
             bool showAtomQueryInfos() const;
             bool showRadicalElectrons() const;
 
-            const Color& getBondColor() const;
-            const Font& getBondLabelFont() const;
+            const Color&             getBondColor() const;
+            const Font&              getBondLabelFont() const;
             const SizeSpecification& getBondLabelSize() const;
             const SizeSpecification& getBondLabelMargin() const;
             const SizeSpecification& getBondLineWidth() const;
@@ -113,7 +113,7 @@ namespace CDPL
 
             void clearChangeFlags();
 
-        private:
+          private:
             void parentChanged();
             void parameterChanged(const Base::LookupKey&, Base::Any);
             void parameterRemoved(const Base::LookupKey&);
@@ -125,7 +125,7 @@ namespace CDPL
 
             void eraseBackground(bool);
             void setBackgroundColor(const Color&);
-            
+
             void setAtomColorTable(const ColorTable::SharedPointer&);
 
             void useCalculatedAtomCoords(bool);
@@ -173,7 +173,7 @@ namespace CDPL
             bool                      eraseBackgroundFlag;
             Color                     backgroundColor;
             bool                      useCalcAtomCoordsFlag;
-            ColorTable::SharedPointer atomColorTable;      
+            ColorTable::SharedPointer atomColorTable;
             Color                     atomColor;
             Font                      atomLabelFont;
             Font                      secondaryAtomLabelFont;
@@ -214,7 +214,7 @@ namespace CDPL
             bool                      alignmentChangedFlag;
             bool                      sizeAdjustmentChangedFlag;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_STRUCTUREVIEW2DPARAMETERS_HPP

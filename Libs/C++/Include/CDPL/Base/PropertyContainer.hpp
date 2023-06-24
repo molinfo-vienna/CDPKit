@@ -38,9 +38,9 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
-    
+
     namespace Base
     {
 
@@ -76,7 +76,7 @@ namespace CDPL
 
             typedef std::unordered_map<LookupKey, Any, LookupKey::HashFunc> PropertyMap;
 
-        public:
+          public:
             /**    
              * \brief A Base::LookupKey / Base::Any pair that stores the property value for a given property key.
              */
@@ -86,13 +86,13 @@ namespace CDPL
              * \brief A constant iterator used to iterate over the property entries.
              */
             typedef PropertyMap::const_iterator ConstPropertyIterator;
-    
+
             /**
              * \brief Returns the number of property entries.
              * \return The number of property entries.
              */
             std::size_t getNumProperties() const;
-        
+
             /**
              * \brief Sets the value of the property specified by \a key to \a val.
              *
@@ -102,8 +102,8 @@ namespace CDPL
              * \param key The key of the property value to assign or remove.
              * \param val The value of the property.
              */
-             template <typename T>
-             void setProperty(const LookupKey& key, T&& val);
+            template <typename T>
+            void setProperty(const LookupKey& key, T&& val);
 
             /**
              * \brief Returns the value of the property specified by \a key as a \c const reference to an object of type \a T.
@@ -118,7 +118,7 @@ namespace CDPL
              */
             template <typename T>
             const T& getProperty(const LookupKey& key) const;
-    
+
             /**
              * \brief Returns the value of the property specified by \a key as a \c const reference
              *        to an object of type \a T, or the default value \a def_val if a stored value does not exist.
@@ -214,7 +214,7 @@ namespace CDPL
              */
             void swap(PropertyContainer& cntnr);
 
-        protected:
+          protected:
             /**
              * \brief Constructs an empty \c %PropertyContainer instance.
              */
@@ -240,8 +240,8 @@ namespace CDPL
              * \return A reference to itself.
              */
             PropertyContainer& operator=(const PropertyContainer& cntnr);
-          
-        private:
+
+          private:
             inline bool isEmptyAny(const Any& val) const;
 
             template <typename T>
@@ -249,19 +249,19 @@ namespace CDPL
 
             PropertyMap properties;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 
 // Implementation of template members
 
-template <typename T> 
+template <typename T>
 const T& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key) const
 {
     return getProperty(key, true).template getData<T>();
 }
 
-template <typename T> 
+template <typename T>
 const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& key, const T& def_val) const
 {
     const Any& val = getProperty(key, false);
@@ -272,15 +272,15 @@ const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& ke
 const CDPL::Base::Any& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key, bool throw_ex) const
 {
     static const Any NOT_FOUND;
-    
+
     ConstPropertyIterator it = properties.find(key);
-    
+
     if (it != properties.end())
         return it->second;
 
     if (throw_ex)
         throw ItemNotFound("PropertyContainer: property " + key.getName() + " not found");
-    
+
     return NOT_FOUND;
 }
 
@@ -291,7 +291,7 @@ void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, T&& val)
         properties.erase(key);
         return;
     }
-    
+
     properties[key] = std::forward<T>(val);
 }
 

@@ -33,14 +33,14 @@
 #include "CDPL/Util/CompressedDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         typedef Util::CompressedDataReader<MOL2MoleculeReader, Util::BZip2IStream> MOL2BZ2MoleculeReader;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOL2BZ2MOLECULEREADER_HPP

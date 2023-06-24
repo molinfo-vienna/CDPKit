@@ -45,10 +45,10 @@
 #include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API RMSDConformerSelector
@@ -56,14 +56,14 @@ namespace CDPL
 
           public:
             static constexpr std::size_t DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768;
-          
+
             RMSDConformerSelector();
-    
+
             void setMinRMSD(double min_rmsd);
 
             double getMinRMSD() const;
 
-          void setAbortCallback(const CallbackFunction& func);
+            void setAbortCallback(const CallbackFunction& func);
 
             const CallbackFunction& getAbortCallback() const;
 
@@ -72,16 +72,16 @@ namespace CDPL
             void setMaxNumSymmetryMappings(std::size_t max_num);
 
             std::size_t getMaxNumSymmetryMappings() const;
-          
+
             void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask);
 
-            void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
+            void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask,
                        const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords);
 
             bool selected(const Math::Vector3DArray& conf_coords);
 
           private:
-            typedef std::vector<std::size_t> IndexArray;
+            typedef std::vector<std::size_t>              IndexArray;
             typedef Util::ObjectPool<Math::Vector3DArray> VectorArrayCache;
             typedef VectorArrayCache::SharedObjectPointer VectorArrayPtr;
 
@@ -90,22 +90,22 @@ namespace CDPL
             RMSDConformerSelector& operator=(const RMSDConformerSelector&);
 
             void buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask);
-            void setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,
+            void setupSymMappingValidationData(const Util::BitSet&        stable_config_atom_mask,
                                                const Math::Vector3DArray& conf_coords);
-        
-            bool processSymMapping(const Chem::MolecularGraph& molgraph, 
+
+            bool processSymMapping(const Chem::MolecularGraph&  molgraph,
                                    const Chem::AtomBondMapping& mapping);
             bool isValidSymMapping(const Chem::AtomBondMapping& mapping) const;
 
-            VectorArrayPtr buildCoordsArrayForMapping(const IndexArray& mapping, 
+            VectorArrayPtr buildCoordsArrayForMapping(const IndexArray&          mapping,
                                                       const Math::Vector3DArray& conf_coords);
 
             typedef std::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;
-            typedef std::vector<const Chem::Atom*> AtomList;
-            typedef Util::ObjectStack<IndexArray> IndexArrayCache;
-            typedef std::vector<IndexArray*> IndexArrayList;
-            typedef std::vector<VectorArrayPtr> VectorArrayList;
-            typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
+            typedef std::vector<const Chem::Atom*>                                AtomList;
+            typedef Util::ObjectStack<IndexArray>                                 IndexArrayCache;
+            typedef std::vector<IndexArray*>                                      IndexArrayList;
+            typedef std::vector<VectorArrayPtr>                                   VectorArrayList;
+            typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray>     AlignmentCalculator;
 
             IndexArrayCache               idxArrayCache;
             VectorArrayCache              vecArrayCache;
@@ -120,9 +120,9 @@ namespace CDPL
             AtomList                      atomNeighbors;
             double                        minRMSD;
             std::size_t                   maxNumSymMappings;
-              CallbackFunction              abortCallback;
+            CallbackFunction              abortCallback;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_RMSDCONFORMERSELECTOR_HPP

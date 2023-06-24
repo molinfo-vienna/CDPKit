@@ -35,10 +35,10 @@
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API StructureGeneratorSettings
@@ -54,25 +54,25 @@ namespace CDPL
             unsigned int getGenerationMode() const;
 
             void generateCoordinatesFromScratch(bool generate);
-    
+
             bool generateCoordinatesFromScratch() const;
-        
+
             void sampleAngleToleranceRanges(bool sample);
-                
+
             bool sampleAngleToleranceRanges() const;
 
             void setTimeout(std::size_t mil_secs);
 
             std::size_t getTimeout() const;
-            
+
             void setFragmentModeForceFieldType(unsigned int type);
-        
+
             unsigned int getFragmentModeForceFieldType() const;
 
             void setDGModeForceFieldType(unsigned int type);
-        
+
             unsigned int getDGModeForceFieldType() const;
-            
+
             void strictForceFieldParameterization(bool strict);
 
             bool strictForceFieldParameterization() const;
@@ -104,7 +104,7 @@ namespace CDPL
             void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
             std::size_t getMacrocycleRotorBondCountThreshold() const;
-        
+
             FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
             const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
@@ -126,7 +126,7 @@ namespace CDPL
             std::size_t                        mcRotorBondCountThresh;
             FragmentConformerGeneratorSettings fragBuildSettings;
         };
-    };
-}
+    }; // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_STRUCTUREGENERATORSETTINGS_HPP

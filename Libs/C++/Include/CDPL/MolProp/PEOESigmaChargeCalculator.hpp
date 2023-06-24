@@ -39,7 +39,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -47,13 +47,13 @@ namespace CDPL
 
         class MolecularGraph;
         class Atom;
-    }
+    } // namespace Chem
 
     namespace MolProp
     {
 
         class MHMOPiChargeCalculator;
-        
+
         /**
          * \brief PEOESigmaChargeCalculator.
          * \see [\ref PEOE]
@@ -129,7 +129,7 @@ namespace CDPL
 
           private:
             friend class MHMOPiChargeCalculator;
-            
+
             PEOESigmaChargeCalculator(const PEOESigmaChargeCalculator&);
 
             PEOESigmaChargeCalculator& operator=(const PEOESigmaChargeCalculator&);
@@ -138,7 +138,7 @@ namespace CDPL
             void calcCharges();
 
             double getNbrElectronegativityAvg(std::size_t idx) const;
-            
+
             class AtomState
             {
 
@@ -157,27 +157,27 @@ namespace CDPL
                 void updateElectronegativity();
 
                 double getNbrElectronegativityAvg() const;
-                
-             private:
+
+              private:
                 typedef std::vector<AtomState*> AtomStateList;
 
-                AtomStateList  nbrAtomStates;
-                double         a;
-                double         b;
-                double         c;
-                double         enegativity;
-                double         enegativityP1;
-                double         charge;
+                AtomStateList nbrAtomStates;
+                double        a;
+                double        b;
+                double        c;
+                double        enegativity;
+                double        enegativityP1;
+                double        charge;
             };
 
             typedef std::vector<AtomState::SharedPointer> AtomStateList;
-        
-            std::size_t    numIterations;
-            double         dampingFactor;
-            AtomStateList  atomStates;
-            AtomStateList  implHStates;
+
+            std::size_t   numIterations;
+            double        dampingFactor;
+            AtomStateList atomStates;
+            AtomStateList implHStates;
         };
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP

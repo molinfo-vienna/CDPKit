@@ -33,7 +33,7 @@
 #include "CDPL/Base/DataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -58,7 +58,7 @@ namespace CDPL
 
             ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PSDMOLECULEINPUTHANDLER_HPP

@@ -50,7 +50,7 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         DataSetPageView(QWidget*, Settings&, DataSet&);
 
         ~DataSetPageView();
@@ -63,7 +63,7 @@ namespace ChOX
 
         void setContextMenu(QMenu*);
 
-    signals:
+      signals:
         void numRowsChanged(int);
         void numColumnsChanged(int);
         void pageOffsetChanged(int);
@@ -72,7 +72,7 @@ namespace ChOX
         void recordNoVisibilityChanged(bool);
         void recordNameVisibilityChanged(bool);
 
-    public slots:
+      public slots:
         void addRow();
         void deleteRow();
 
@@ -96,20 +96,20 @@ namespace ChOX
         void showRecordNumbers(bool);
         void showRecordNames(bool);
 
-    private slots:
+      private slots:
         void handleDataSetSizeChange(int);
         void handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
         void handleSelectionStatusChange(bool);
 
-    private:
+      private:
         void init();
 
         void paintEvent(QPaintEvent*);
 
-        void mousePressEvent(QMouseEvent*); 
-        void mouseReleaseEvent(QMouseEvent*); 
-        void mouseDoubleClickEvent(QMouseEvent*); 
-        void mouseMoveEvent(QMouseEvent*); 
+        void mousePressEvent(QMouseEvent*);
+        void mouseReleaseEvent(QMouseEvent*);
+        void mouseDoubleClickEvent(QMouseEvent*);
+        void mouseMoveEvent(QMouseEvent*);
 
         void contextMenuEvent(QContextMenuEvent*);
 
@@ -137,6 +137,6 @@ namespace ChOX
         DataRecordPainterList    tmpDataRecordPainters;
         CDPL::Vis::QtFontMetrics fontMetrics;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASETPAGEVIEW_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Grid/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -48,7 +48,7 @@ namespace CDPL
 
             extern CDPL_GRID_API const std::string NAME;
         }
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_ATTRIBUTEDGRIDPROPERTYDEFAULT_HPP

@@ -37,7 +37,7 @@ namespace CDPL
 {
 
     namespace Math
-    {    
+    {
 
         /**
          * \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$
@@ -64,8 +64,8 @@ namespace CDPL
          */
         template <typename M1, typename V1, typename M2, typename V2, typename V3>
         void svBackSubstitution(const M1& u, const V1& w, const M2& v, const V2& b, V3& x);
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 
 // Implementation
@@ -79,10 +79,10 @@ void CDPL::Math::svBackSubstitution(const M1& u, const V1& w, const M2& v, const
 
     Vector<T> tmp(n);
 
-    for (typename M1::size_type j = 0; j < n; j++) {      // Calculate trans(U) * B
+    for (typename M1::size_type j = 0; j < n; j++) { // Calculate trans(U) * B
         T s = 0;
 
-        if (w(j) != 0)                                    // Nonzero result only if w(j) is nonzero
+        if (w(j) != 0) // Nonzero result only if w(j) is nonzero
             s = inner_prod(column(u, j), b) / w(j);
 
         tmp(j) = s;
@@ -92,5 +92,3 @@ void CDPL::Math::svBackSubstitution(const M1& u, const V1& w, const M2& v, const
 }
 
 #endif // CDPL_MATH_SVBACKSUBSTITUTION_HPP
-
-

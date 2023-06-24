@@ -33,7 +33,7 @@
 #include "CDPL/Util/Map.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -53,11 +53,12 @@ namespace CDPL
             typedef std::shared_ptr<FeatureTypeHistogram> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "FeatureTypeHistogram";
             }
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURETYPEHISTOGRAM_HPP

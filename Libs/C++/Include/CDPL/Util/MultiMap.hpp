@@ -45,27 +45,29 @@ namespace CDPL
     namespace Util
     {
 
-        template <typename ValueType, bool Allow = true> 
+        template <typename ValueType, bool Allow = true>
         struct MultiMapDefaultValue
         {
 
-            static const ValueType& get() {
+            static const ValueType& get()
+            {
                 return defValue;
-            } 
+            }
 
             static const ValueType defValue;
         };
 
-        template <typename ValueType, bool Allow> 
+        template <typename ValueType, bool Allow>
         const ValueType MultiMapDefaultValue<ValueType, Allow>::defValue = ValueType();
 
-        template <typename ValueType> 
+        template <typename ValueType>
         struct MultiMapDefaultValue<ValueType, false>
         {
 
-            static const ValueType& get() {
+            static const ValueType& get()
+            {
                 throw Base::OperationFailed("MultiMap: default value not supported");
-            } 
+            }
         };
 
         /**
@@ -88,14 +90,14 @@ namespace CDPL
          *                    The functor has to return \c true if the first argument is less than the second one,
          *                    and \c false otherwise. 
          */
-        template <typename Key, typename Value, bool AllowDefValues = false, 
+        template <typename Key, typename Value, bool AllowDefValues = false,
                   typename KeyCompFunc = std::less<Key> >
         class MultiMap
         {
 
             typedef std::multimap<Key, Value, KeyCompFunc> StorageType;
-        
-        public:
+
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiMap instances.
              */
@@ -103,9 +105,9 @@ namespace CDPL
 
             /**
              * \brief The type of the map's keys.
-             */ 
+             */
             typedef Key KeyType;
-            
+
             /**
              * \brief The type of the mapped values.
              */
@@ -133,7 +135,7 @@ namespace CDPL
              * \brief A mutable iterator used to iterate over the entries of the map.
              */
             typedef typename StorageType::iterator EntryIterator;
-        
+
             /**
              * \brief A mutable iterator used to iterate backwards over the entries of the map.
              */
@@ -143,7 +145,7 @@ namespace CDPL
              * \brief A pair of mutable iterators used to specify the start and end of a range of entries. 
              */
             typedef typename std::pair<EntryIterator, EntryIterator> EntryIteratorRange;
-            
+
             /**
              * \brief A pair of constant iterators used to specify the start and end of a range of entries.
              */
@@ -152,22 +154,26 @@ namespace CDPL
             /**
              * \brief Creates an empty map.
              */
-            MultiMap(): data() {}
+            MultiMap():
+                data() {}
 
             /**
              * \brief Creates an empty map and uses \a func as key compare function.
              * \param func The key compare function to use.
-             */            
-            MultiMap(const KeyCompFunc& func): data(func) {}
+             */
+            MultiMap(const KeyCompFunc& func):
+                data(func) {}
 
             /**
              * \brief Creates and initializes the map with copies of the key value pairs in the range <em>[first, last)</em>. 
              * \param first The start of the range.
              * \param last The end of the range.
-             */            
+             */
             template <typename InputIter>
-            MultiMap(const InputIter& first, const InputIter& last): data(first, last) {}
-    
+            MultiMap(const InputIter& first, const InputIter& last):
+                data(first, last)
+            {}
+
             /**
              * \brief Creates and initializes the map with copies of the key value pairs in the range <em>[first, last)</em> 
              *        and uses \a func as key compare function. 
@@ -176,8 +182,10 @@ namespace CDPL
              * \param func The key compare function to use.
              */
             template <typename InputIter>
-            MultiMap(const InputIter& first, const InputIter& last, const KeyCompFunc& func): data(first, last, func) {}
-            
+            MultiMap(const InputIter& first, const InputIter& last, const KeyCompFunc& func):
+                data(first, last, func)
+            {}
+
             /**
              * \brief Virtual destructor.
              */
@@ -194,7 +202,7 @@ namespace CDPL
              * \return \c true if the map is empty, and \c false otherwise.
              */
             bool isEmpty() const;
-            
+
             /**
              * \brief Erases all entries.
              */
@@ -217,7 +225,7 @@ namespace CDPL
              * \param key The key of the entries to count.
              * \return The number of entries with the specified key.
              */
-             std::size_t getNumEntries(const Key& key) const;
+            std::size_t getNumEntries(const Key& key) const;
 
             /**
              * \brief Returns the bounds of a range that includes all entries with a key that compares equal to the specified key.
@@ -230,7 +238,7 @@ namespace CDPL
              * \return A pair of mutable iterators specifying the start and end of the sequence
              *         of entries with the specified key.
              */
-             EntryIteratorRange getEntries(const Key& key);
+            EntryIteratorRange getEntries(const Key& key);
 
             /**
              * \brief Returns the bounds of a range that includes all entries with a key that compares equal to the specified key.
@@ -331,7 +339,7 @@ namespace CDPL
              * \param def_value The value which is returned if the specified entry does
              *                  not exist.
              * \return A \c const reference to the requested or default value.
-             */    
+             */
             const Value& getValue(const Key& key, const Value& def_value) const;
 
             /**
@@ -440,7 +448,7 @@ namespace CDPL
              * \return An iterator that points to the entry with a key that is equivalent to that of \a item.
              */
             EntryIterator setEntry(const Entry& item);
-            
+
             /**
              * \brief Replaces all entries with a key equivalent to \a key with a single copy of
              *        the key/value pair (\a key, \a value).
@@ -465,7 +473,7 @@ namespace CDPL
              */
             template <typename InputIter>
             void insertEntries(const InputIter& first, const InputIter& last);
-    
+
             /**
              * \brief Inserts new entries or updates the value of existing entries using the key/value pairs 
              *        in the range <em>[first, last)</em>.
@@ -550,7 +558,7 @@ namespace CDPL
              * \return A mutable iterator pointing to the end of the map.
              */
             EntryIterator end();
-            
+
             /**
              * \brief Returns a constant iterator pointing to the beginning of the reversed map.
              * \return A constant iterator pointing to the beginning of the reversed map.
@@ -598,7 +606,7 @@ namespace CDPL
              * \return \c true if the sizes or entries of the maps are 
              *         non-equal, and \c false otherwise.
              * \see operator==()
-             */            
+             */
             bool operator!=(const MultiMap& map) const;
 
             /**
@@ -647,10 +655,10 @@ namespace CDPL
              * \return \c true if this map is lexicographically greater than \a map, and 
              *         \c false otherwise.
              * \see operator<()
-             */            
+             */
             bool operator>(const MultiMap& map) const;
 
-        protected:
+          protected:
             /**
              * \brief Returns the name of the (derived) Map class.
              *
@@ -680,13 +688,13 @@ namespace CDPL
              */
             virtual const char* getClassName() const;
 
-        private:
+          private:
             const Value& getDefaultValue() const;
 
             StorageType data;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
@@ -728,28 +736,28 @@ std::size_t CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getNu
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntry(const Key& key)
 {
     return data.find(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntry(const Key& key) const
 {
     return data.find(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIteratorRange 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIteratorRange
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntries(const Key& key)
 {
     return data.equal_range(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIteratorRange 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIteratorRange
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntries(const Key& key) const
 {
     return data.equal_range(key);
@@ -763,7 +771,7 @@ Value& CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getValue(c
     if (lb == data.end() || data.key_comp()(key, (*lb).first)) {
         if (!AllowDefValues)
             throw Base::ItemNotFound(std::string(getClassName()) + ": key not found");
-        
+
         return (*data.insert(lb, Entry(key, getDefaultValue()))).second;
     }
 
@@ -797,8 +805,8 @@ const Value& CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getV
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-const Value& CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getValue(const Key& key, 
-                                                                                            const Value& def_value) const
+const Value& CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getValue(const Key&   key,
+                                                                                     const Value& def_value) const
 {
     ConstEntryIterator it = data.find(key);
 
@@ -845,8 +853,8 @@ std::size_t CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::remov
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-void CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::removeEntries(const EntryIterator& first, 
-                                                                                         const EntryIterator& last)
+void CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::removeEntries(const EntryIterator& first,
+                                                                                  const EntryIterator& last)
 {
     data.erase(first, last);
 }
@@ -859,32 +867,32 @@ CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntry(const
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntry(const Key& key, const Value& value)
 {
     return data.insert(Entry(key, value));
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntry(const EntryIterator& it, const Entry& item)
 {
     return data.insert(it, item);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
-CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntry(const EntryIterator& it, const Key& key, 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
+CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntry(const EntryIterator& it, const Key& key,
                                                                            const Value& value)
 {
     return data.insert(it, Entry(key, value));
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::setEntry(const Entry& item)
 {
-    EntryIterator lb = data.lower_bound(item.first);
+    EntryIterator lb  = data.lower_bound(item.first);
     EntryIterator end = data.end();
 
     if (lb == end || data.key_comp()(item.first, (*lb).first))
@@ -901,7 +909,7 @@ CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::setEntry(const En
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::setEntry(const Key& key, const Value& value)
 {
     return setEntry(Entry(key, value));
@@ -909,128 +917,128 @@ CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::setEntry(const Ke
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 template <typename InputIter>
-void CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntries(const InputIter& first, 
-                                                                                         const InputIter& last)
+void CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::insertEntries(const InputIter& first,
+                                                                                  const InputIter& last)
 {
     data.insert(first, last);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 template <typename InputIter>
-void CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::setEntries(const InputIter& first, 
-                                                                                      const InputIter& last)
+void CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::setEntries(const InputIter& first,
+                                                                               const InputIter& last)
 {
     for (InputIter it = first; it != last; ++it)
         setEntry(*it);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getLowerBound(const Key& key)
 {
     return data.lower_bound(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getLowerBound(const Key& key) const
 {
     return data.lower_bound(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getUpperBound(const Key& key)
 {
     return data.upper_bound(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getUpperBound(const Key& key) const
 {
     return data.upper_bound(key);
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesBegin() const
 {
     return data.begin();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesBegin()
 {
     return data.begin();
 }
 
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>        
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesEnd() const
 {
     return data.end();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesEnd()
 {
     return data.end();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::begin() const
 {
     return data.begin();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::begin()
 {
     return data.begin();
 }
 
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>        
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::end() const
 {
     return data.end();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::end()
 {
     return data.end();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstReverseEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstReverseEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesReverseBegin() const
 {
     return data.rbegin();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ReverseEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ReverseEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesReverseBegin()
 {
     return data.rbegin();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstReverseEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstReverseEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesReverseEnd() const
 {
     return data.rend();
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ReverseEntryIterator 
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ReverseEntryIterator
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesReverseEnd()
 {
     return data.rend();

@@ -54,11 +54,11 @@ namespace CDPLPythonConfGen
     void exportFragmentConformerGenerator();
     void exportFragmentLibraryGenerator();
     void exportFragmentAssembler();
-    
+
     void exportCFLMoleculeReader();
     void exportCFLMoleculeInputHandler();
 
     void exportFunctionWrappers();
-}
+} // namespace CDPLPythonConfGen
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

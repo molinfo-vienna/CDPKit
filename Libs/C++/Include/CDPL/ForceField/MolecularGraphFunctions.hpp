@@ -29,14 +29,14 @@
 #ifndef CDPL_FORCEFIELD_MOLECULARGRAPHFUNCTIONS_HPP
 #define CDPL_FORCEFIELD_MOLECULARGRAPHFUNCTIONS_HPP
 
-#include "CDPL/ForceField/APIPrefix.hpp" 
-#include "CDPL/Chem/FragmentList.hpp" 
+#include "CDPL/ForceField/APIPrefix.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         CDPL_FORCEFIELD_API const Chem::FragmentList::SharedPointer& getMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
@@ -60,8 +60,7 @@ namespace CDPL
 
 
         CDPL_FORCEFIELD_API void assignUFFAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MOLECULARGRAPHFUNCTIONS_HPP
- 

@@ -39,14 +39,14 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
-        FontChooserDialog(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, const CDPL::Vis::SizeSpecification* = 0, 
+      public:
+        FontChooserDialog(QWidget*, CDPL::Vis::Font&, CDPL::Vis::SizeSpecification&, const CDPL::Vis::SizeSpecification* = 0,
                           bool = true, bool = true, Qt::WindowFlags = 0);
 
-    private slots:
+      private slots:
         void applyChanges();
 
-    private:
+      private:
         void init(bool, bool);
 
         CDPL::Vis::Font&                    font;
@@ -55,6 +55,6 @@ namespace ChOX
         CDPL::Vis::SizeSpecification        tmpSizeSpec;
         const CDPL::Vis::SizeSpecification* parentSizeSpec;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_FONTCHOOSERDIALOG_HPP

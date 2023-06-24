@@ -61,8 +61,8 @@ namespace CDPL
         class KabschAlgorithm
         {
 
-        public:
-            typedef T ValueType;
+          public:
+            typedef T         ValueType;
             typedef Matrix<T> MatrixType;
             typedef Vector<T> VectorType;
 
@@ -83,34 +83,35 @@ namespace CDPL
              * \throw Base::SizeError or Base::ValueError if preconditions got violated.
              */
             template <typename M1, typename M2, typename V>
-            bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, const VectorExpression<V>& weights, 
-                       bool do_center = true, std::size_t max_svd_iter = 0) {
+            bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, const VectorExpression<V>& weights,
+                       bool do_center = true, std::size_t max_svd_iter = 0)
+            {
 
                 typedef typename CommonType<typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type,
                                             typename V::SizeType>::Type SizeType;
 
-                SizeType dim = points().getSize1();
+                SizeType dim     = points().getSize1();
                 SizeType num_pts = points().getSize2();
 
-                CDPL_MATH_CHECK(dim == SizeType(ref_points().getSize1()) &&    num_pts == SizeType(ref_points().getSize2()),
-                                "KabschAlgorithm: Point-sets of different size", Base::SizeError); 
-            
+                CDPL_MATH_CHECK(dim == SizeType(ref_points().getSize1()) && num_pts == SizeType(ref_points().getSize2()),
+                                "KabschAlgorithm: Point-sets of different size", Base::SizeError);
+
                 CDPL_MATH_CHECK(num_pts == SizeType(weights().getSize()),
-                                "KabschAlgorithm: Number of points != number of weights", Base::SizeError); 
-            
+                                "KabschAlgorithm: Number of points != number of weights", Base::SizeError);
+
                 ValueType w_sum = ValueType();
 
                 for (SizeType i = 0; i < num_pts; i++) {
-                    CDPL_MATH_CHECK(ValueType(weights()(i)) >= ValueType(), "KabschAlgorithm: weights must be non-negative entries", Base::ValueError); 
+                    CDPL_MATH_CHECK(ValueType(weights()(i)) >= ValueType(), "KabschAlgorithm: weights must be non-negative entries", Base::ValueError);
                     w_sum += weights()(i);
                 }
 
-                CDPL_MATH_CHECK(w_sum > ValueType(), "KabschAlgorithm: weights must contain some positive entry", Base::ValueError); 
+                CDPL_MATH_CHECK(w_sum > ValueType(), "KabschAlgorithm: weights must contain some positive entry", Base::ValueError);
 
                 if (do_center) {
                     prod(points, weights, centroid1);
                     prod(ref_points, weights, centroid2);
-                
+
                     centroid1 /= w_sum;
                     centroid2 /= w_sum;
 
@@ -128,8 +129,8 @@ namespace CDPL
                 } else {
                     tmpPoints.resize(dim, num_pts, false);
                     tmpPoints.assign(points);
-        
-                    for (SizeType i = 0; i < num_pts; i++) 
+
+                    for (SizeType i = 0; i < num_pts; i++)
                         column(tmpPoints, i) *= weights()(i) / w_sum;
                 }
 
@@ -157,17 +158,18 @@ namespace CDPL
              * \throw Base::SizeError if preconditions got violated.
              */
             template <typename M1, typename M2>
-            bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, 
-                       bool do_center = true, std::size_t max_svd_iter = 0) {
+            bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points,
+                       bool do_center = true, std::size_t max_svd_iter = 0)
+            {
 
                 typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
 
-                SizeType dim = points().getSize1();
+                SizeType dim     = points().getSize1();
                 SizeType num_pts = points().getSize2();
 
-                CDPL_MATH_CHECK(dim == SizeType(ref_points().getSize1()) &&    num_pts == SizeType(ref_points().getSize2()),
-                                "KabschAlgorithm: Point-sets of different size", Base::SizeError); 
-            
+                CDPL_MATH_CHECK(dim == SizeType(ref_points().getSize1()) && num_pts == SizeType(ref_points().getSize2()),
+                                "KabschAlgorithm: Point-sets of different size", Base::SizeError);
+
                 if (do_center) {
                     prod(points, ScalarVector<ValueType>(num_pts, ValueType(1) / num_pts), centroid1);
                     prod(ref_points, ScalarVector<ValueType>(num_pts, ValueType(1) / num_pts), centroid2);
@@ -194,13 +196,15 @@ namespace CDPL
                 return align(dim, do_center, max_svd_iter);
             }
 
-            const MatrixType& getTransform() const {
+            const MatrixType& getTransform() const
+            {
                 return transform;
             }
 
-        private:
+          private:
             template <typename SizeType>
-            bool align(SizeType dim, bool do_center, std::size_t max_svd_iter) {
+            bool align(SizeType dim, bool do_center, std::size_t max_svd_iter)
+            {
                 svdW.resize(dim);
                 svdV.resize(dim, dim, false);
 
@@ -213,12 +217,12 @@ namespace CDPL
                 SizeType xform_dim = dim + 1;
 
                 transform.resize(xform_dim, xform_dim, false);
-                
+
                 range(transform, 0, dim, 0, dim).assign(prod(svdV, trans(covarMatrix)));
 
-                MatrixRow<MatrixType> last_row(transform, dim);
+                MatrixRow<MatrixType>    last_row(transform, dim);
                 MatrixColumn<MatrixType> last_col(transform, dim);
-            
+
                 range(last_row, 0, dim).assign(ZeroVector<ValueType>(dim));
 
                 if (do_center)
@@ -240,7 +244,7 @@ namespace CDPL
             VectorType centroid1;
             VectorType centroid2;
         };
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_KABSCHALGORITHM_HPP

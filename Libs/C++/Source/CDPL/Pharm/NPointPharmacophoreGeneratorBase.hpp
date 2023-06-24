@@ -32,7 +32,7 @@
 #include <CDPL/Pharm/FeatureFunctions.hpp>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -41,32 +41,33 @@ namespace CDPL
         class NPointPharmacophoreGeneratorBase
         {
 
-        public:
+          public:
             typedef std::pair<const Feature*, unsigned int> FeatureAndType;
-            typedef std::vector<FeatureAndType> FeatureAndTypeArray;
+            typedef std::vector<FeatureAndType>             FeatureAndTypeArray;
 
-            template <typename Iter> 
+            template <typename Iter>
             const FeatureAndTypeArray& getCanonOrderedFeatures(const Iter& beg, const Iter& end);
 
-        private:
+          private:
             struct FeatureAndTypeCmpFunc
             {
 
-                inline bool operator()(const FeatureAndType& ft1, const FeatureAndType& ft2) const {
+                inline bool operator()(const FeatureAndType& ft1, const FeatureAndType& ft2) const
+                {
                     return (ft1.second < ft2.second);
                 }
             };
 
             FeatureAndTypeArray features;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 
 // Implementation
 
-template <typename Iter> 
-const CDPL::Pharm::NPointPharmacophoreGeneratorBase::FeatureAndTypeArray& 
+template <typename Iter>
+const CDPL::Pharm::NPointPharmacophoreGeneratorBase::FeatureAndTypeArray&
 CDPL::Pharm::NPointPharmacophoreGeneratorBase::getCanonOrderedFeatures(const Iter& beg, const Iter& end)
 {
     features.clear();

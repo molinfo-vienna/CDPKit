@@ -49,7 +49,7 @@ namespace CDPL
          */
         namespace DataFormat
         {
-    
+
             /**
              * \brief Provides meta-information about the native binary <em>CDPL</em> format.
              */
@@ -64,8 +64,8 @@ namespace CDPL
              * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
              */
             extern CDPL_GRID_API const Base::DataFormat CDF_BZ2;
-        }
-    }
-}
+        } // namespace DataFormat
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_DATAFORMAT_HPP

@@ -37,7 +37,7 @@
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -46,9 +46,9 @@ namespace CDPL
         class Atom;
         class MolecularGraph;
         class Fragment;
-    }
+    } // namespace Chem
 
-    namespace Biomol 
+    namespace Biomol
     {
 
         CDPL_BIOMOL_API const std::string& getResidueAtomName(const Chem::Atom& atom);
@@ -76,7 +76,7 @@ namespace CDPL
         CDPL_BIOMOL_API void clearResidueLeavingAtomFlag(Chem::Atom& atom);
 
         CDPL_BIOMOL_API bool hasResidueLeavingAtomFlag(const Chem::Atom& atom);
-    
+
 
         CDPL_BIOMOL_API bool getResidueLinkingAtomFlag(const Chem::Atom& atom);
 
@@ -85,7 +85,7 @@ namespace CDPL
         CDPL_BIOMOL_API void clearResidueLinkingAtomFlag(Chem::Atom& atom);
 
         CDPL_BIOMOL_API bool hasResidueLinkingAtomFlag(const Chem::Atom& atom);
-        
+
 
         CDPL_BIOMOL_API const std::string& getResidueCode(const Chem::Atom& atom);
 
@@ -148,7 +148,7 @@ namespace CDPL
         CDPL_BIOMOL_API void clearModelNumber(Chem::Atom& atom);
 
         CDPL_BIOMOL_API bool hasModelNumber(const Chem::Atom& atom);
-    
+
 
         CDPL_BIOMOL_API long getSerialNumber(const Chem::Atom& atom);
 
@@ -184,10 +184,9 @@ namespace CDPL
 
         CDPL_BIOMOL_API bool areInSameResidue(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int flags = AtomPropertyFlag::DEFAULT);
 
-        CDPL_BIOMOL_API void extractResidueSubstructure(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& res_substruct, 
+        CDPL_BIOMOL_API void extractResidueSubstructure(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& res_substruct,
                                                         bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT, bool append = false);
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_ATOMFUNCTIONS_HPP
- 

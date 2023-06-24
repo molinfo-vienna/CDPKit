@@ -39,11 +39,11 @@ namespace ChOX
 
     class DataRecord;
     class Settings;
- 
+
     class DataRecordPainter : private DataRecordVisitor
     {
 
-    public:
+      public:
         typedef std::shared_ptr<DataRecordPainter> SharedPointer;
 
         DataRecordPainter(CDPL::Vis::QtFontMetrics&, QPainter&, const Settings&, const DataRecord&);
@@ -51,8 +51,8 @@ namespace ChOX
         ~DataRecordPainter();
 
         void drawRecord(int rec_no, double vp_width, double vp_height);
-    
-    private:
+
+      private:
         void drawRecordNumber(int rec_no, double vp_width, double vp_height) const;
         void drawRecordName(double vp_width, double vp_height) const;
 
@@ -61,7 +61,7 @@ namespace ChOX
         void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
-        typedef std::shared_ptr<CDPL::Vis::View2D> DataViewPointer;
+        typedef std::shared_ptr<CDPL::Vis::View2D>             DataViewPointer;
         typedef std::shared_ptr<CDPL::Base::PropertyContainer> PropertyContainerPointer;
 
         QPainter&                 painter;
@@ -74,6 +74,6 @@ namespace ChOX
         bool                      recordNosVisible;
         bool                      recordNamesVisible;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATARECORDPAINTER_HPP

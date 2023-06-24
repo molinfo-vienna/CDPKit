@@ -30,14 +30,14 @@
 #define CDPL_FORCEFIELD_APIPREFIX_HPP
 
 #ifdef CDPL_FORCEFIELD_STATIC_LINK
-#  define CDPL_FORCEFIELD_API
+# define CDPL_FORCEFIELD_API
 #else // CDPL_FORCEFIELD_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_forcefield_shared_EXPORTS
-#    define CDPL_FORCEFIELD_API CDPL_API_EXPORT
-#  else // cdpl_forcefield_shared_EXPORTS
-#    define CDPL_FORCEFIELD_API CDPL_API_IMPORT
-#  endif // cdpl_forcefield_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_forcefield_shared_EXPORTS
+#  define CDPL_FORCEFIELD_API CDPL_API_EXPORT
+# else // cdpl_forcefield_shared_EXPORTS
+#  define CDPL_FORCEFIELD_API CDPL_API_IMPORT
+# endif // cdpl_forcefield_shared_EXPORTS
 #endif // CDPL_FORCEFIELD_STATIC_LINK
 
 /**

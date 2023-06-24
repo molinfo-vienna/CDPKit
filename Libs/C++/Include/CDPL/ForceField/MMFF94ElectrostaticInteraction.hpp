@@ -34,46 +34,54 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteraction
         {
 
           public:
-            MMFF94ElectrostaticInteraction(std::size_t atom1_idx, std::size_t atom2_idx, double atom1_chg, 
+            MMFF94ElectrostaticInteraction(std::size_t atom1_idx, std::size_t atom2_idx, double atom1_chg,
                                            double atom2_chg, double scale_fact, double de_const, double dist_expo):
-                atom1Idx(atom1_idx), atom2Idx(atom2_idx), atom1Chg(atom1_chg), atom2Chg(atom2_chg),
+                atom1Idx(atom1_idx),
+                atom2Idx(atom2_idx), atom1Chg(atom1_chg), atom2Chg(atom2_chg),
                 scaleFact(scale_fact), deConst(de_const), distExpo(dist_expo) {}
 
-            std::size_t getAtom1Index() const {
+            std::size_t getAtom1Index() const
+            {
                 return atom1Idx;
             }
 
-            std::size_t getAtom2Index() const {
+            std::size_t getAtom2Index() const
+            {
                 return atom2Idx;
             }
 
-            double getAtom1Charge() const {
+            double getAtom1Charge() const
+            {
                 return atom1Chg;
             }
 
-            double getAtom2Charge() const {
+            double getAtom2Charge() const
+            {
                 return atom2Chg;
             }
 
-            double getScalingFactor() const {
+            double getScalingFactor() const
+            {
                 return scaleFact;
             }
 
-            double getDielectricConstant() const {
+            double getDielectricConstant() const
+            {
                 return deConst;
             }
 
-            double getDistanceExponent() const {
+            double getDistanceExponent() const
+            {
                 return distExpo;
             }
 
@@ -85,8 +93,8 @@ namespace CDPL
             double      scaleFact;
             double      deConst;
             double      distExpo;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTION_HPP

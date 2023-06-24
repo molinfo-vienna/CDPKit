@@ -42,7 +42,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -61,7 +61,7 @@ namespace CDPL
 
             typedef std::vector<AtomBondMapping*> ABMappingList;
 
-        public:
+          public:
             /**
              * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
              */
@@ -82,7 +82,7 @@ namespace CDPL
              * \param query A molecular graph that represents the query structure.
              */
             MaxCommonBondSubstructureSearch(const MolecularGraph& query);
-                        
+
             /**
              * \brief Destructor.
              *
@@ -108,7 +108,7 @@ namespace CDPL
              *         otherwise.
              * \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be
              *       discarded.
-             */        
+             */
             bool mappingExists(const MolecularGraph& target);
 
             /**
@@ -256,7 +256,7 @@ namespace CDPL
              */
             std::size_t getMinSubstructureSize() const;
 
-        private:
+          private:
             class AGNode;
 
             MaxCommonBondSubstructureSearch(const MaxCommonBondSubstructureSearch&);
@@ -268,11 +268,11 @@ namespace CDPL
             void initMatchExpressions();
 
             bool findEquivAtoms();
-            
+
             bool atomsCompatible(const Bond&, const Bond&) const;
-            
+
             const Atom* getCommonAtom(const Bond&, const Bond&) const;
-            
+
             bool buildAssocGraph();
 
             bool findAssocGraphCliques(std::size_t);
@@ -290,7 +290,7 @@ namespace CDPL
             void clearMappings();
 
             AtomBondMapping* createAtomBondMapping(bool);
-            void freeAtomBondMapping();
+            void             freeAtomBondMapping();
 
             void freeAssocGraph();
             void freeAtomBondMappings();
@@ -305,23 +305,23 @@ namespace CDPL
             class AGNode
             {
 
-            public:
-                void setQueryBond(const Bond*);
+              public:
+                void        setQueryBond(const Bond*);
                 const Bond* getQueryBond() const;
-                
-                void setAssocBond(const Bond*);
+
+                void        setAssocBond(const Bond*);
                 const Bond* getAssocBond() const;
-                
+
                 void addEdge(const AGEdge*);
 
-                bool isConnected(const AGNode*) const;
+                bool          isConnected(const AGNode*) const;
                 const AGEdge* findEdge(const AGNode*) const;
-                
+
                 void clear();
 
                 void setIndex(std::size_t idx);
 
-            private:
+              private:
                 std::size_t    index;
                 const Bond*    queryBond;
                 const Bond*    assocBond;
@@ -332,32 +332,32 @@ namespace CDPL
             class AGEdge
             {
 
-            public:
-                void setQueryAtom(const Atom*);
+              public:
+                void        setQueryAtom(const Atom*);
                 const Atom* getQueryAtom() const;
-                
-                void setAssocAtom(const Atom*);
+
+                void        setAssocAtom(const Atom*);
                 const Atom* getAssocAtom() const;
-                
+
                 void setNode1(const AGNode*);
                 void setNode2(const AGNode*);
-                
+
                 const AGNode* getNode1() const;
                 const AGNode* getNode2() const;
 
                 const AGNode* getOther(const AGNode*) const;
 
-            private:
+              private:
                 const Atom*   queryAtom;
                 const Atom*   assocAtom;
                 const AGNode* node1;
                 const AGNode* node2;
             };
 
-            class ABMappingMask 
+            class ABMappingMask
             {
 
-            public:
+              public:
                 void initQueryAtomMask(std::size_t);
                 void initTargetAtomMask(std::size_t);
 
@@ -384,7 +384,7 @@ namespace CDPL
                 bool operator<(const ABMappingMask&) const;
                 bool operator>(const ABMappingMask&) const;
 
-            private:
+              private:
                 Util::BitSet queryAtomMask;
                 Util::BitSet targetAtomMask;
                 Util::BitSet queryBondMask;
@@ -393,51 +393,51 @@ namespace CDPL
 
             typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
 
-            typedef std::vector<Util::BitSet> BitMatrix;
-            typedef std::vector<AGNode*> AGraphNodeList;
-            typedef std::vector<AGraphNodeList> AGraphNodeMatrix;
-            typedef std::set<ABMappingMask> UniqueMappingList;
-            typedef std::vector<const Atom*> AtomList;
-            typedef std::vector<const Bond*> BondList;
+            typedef std::vector<Util::BitSet>                                         BitMatrix;
+            typedef std::vector<AGNode*>                                              AGraphNodeList;
+            typedef std::vector<AGraphNodeList>                                       AGraphNodeMatrix;
+            typedef std::set<ABMappingMask>                                           UniqueMappingList;
+            typedef std::vector<const Atom*>                                          AtomList;
+            typedef std::vector<const Bond*>                                          BondList;
             typedef std::vector<MatchExpression<Atom, MolecularGraph>::SharedPointer> AtomMatchExprTable;
             typedef std::vector<MatchExpression<Bond, MolecularGraph>::SharedPointer> BondMatchExprTable;
-            typedef Util::ObjectStack<AGNode> NodeCache;
-            typedef Util::ObjectStack<AGEdge> EdgeCache;
-            typedef Util::ObjectStack<AtomBondMapping> MappingCache;
+            typedef Util::ObjectStack<AGNode>                                         NodeCache;
+            typedef Util::ObjectStack<AGEdge>                                         EdgeCache;
+            typedef Util::ObjectStack<AtomBondMapping>                                MappingCache;
 
-            const MolecularGraph*         query;
-            const MolecularGraph*         target;
-            BitMatrix                     atomEquivMatrix;
-            AGraphNodeMatrix              nodeMatrix;
-            ABMappingList                 foundMappings;
-            UniqueMappingList             uniqueMappings;
-            AGraphEdgeList                cliqueEdges;
-            AGraphNodeList                cliqueNodes;
-            ABMappingMask                 mappingMask;
-            AtomMatchExprTable            atomMatchExprTable;
-            BondMatchExprTable            bondMatchExprTable;
-            MolGraphMatchExprPtr          molGraphMatchExpr;
-            AtomList                      postMappingMatchAtoms;
-            BondList                      postMappingMatchBonds;
-            NodeCache                     nodeCache;
-            EdgeCache                     edgeCache;
-            MappingCache                  mappingCache;
-            bool                          queryChanged;
-            bool                          initQueryData;
-            bool                          uniqueMatches;
-            bool                          saveMappings;
-            std::size_t                   numQueryAtoms;
-            std::size_t                   numQueryBonds;
-            std::size_t                   numTargetAtoms;
-            std::size_t                   numTargetBonds;
-            std::size_t                   maxBondSubstructureSize;
-            std::size_t                   currNumNullNodes;
-            std::size_t                   minNumNullNodes;
-            std::size_t                   maxNumMappings;
-            std::size_t                   minSubstructureSize;
-            std::size_t                   currNodeIdx;
+            const MolecularGraph* query;
+            const MolecularGraph* target;
+            BitMatrix             atomEquivMatrix;
+            AGraphNodeMatrix      nodeMatrix;
+            ABMappingList         foundMappings;
+            UniqueMappingList     uniqueMappings;
+            AGraphEdgeList        cliqueEdges;
+            AGraphNodeList        cliqueNodes;
+            ABMappingMask         mappingMask;
+            AtomMatchExprTable    atomMatchExprTable;
+            BondMatchExprTable    bondMatchExprTable;
+            MolGraphMatchExprPtr  molGraphMatchExpr;
+            AtomList              postMappingMatchAtoms;
+            BondList              postMappingMatchBonds;
+            NodeCache             nodeCache;
+            EdgeCache             edgeCache;
+            MappingCache          mappingCache;
+            bool                  queryChanged;
+            bool                  initQueryData;
+            bool                  uniqueMatches;
+            bool                  saveMappings;
+            std::size_t           numQueryAtoms;
+            std::size_t           numQueryBonds;
+            std::size_t           numTargetAtoms;
+            std::size_t           numTargetBonds;
+            std::size_t           maxBondSubstructureSize;
+            std::size_t           currNumNullNodes;
+            std::size_t           minNumNullNodes;
+            std::size_t           maxNumMappings;
+            std::size_t           minSubstructureSize;
+            std::size_t           currNodeIdx;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MAXCOMMONBONDSUBSTRUCTURESEARCH_HPP

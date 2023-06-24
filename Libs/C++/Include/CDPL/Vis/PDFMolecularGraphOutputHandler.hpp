@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -44,8 +44,8 @@ namespace CDPL
          * \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable
          *        Document Format (PDF)</em> [\ref WPDF].
          */
-        typedef Util::DefaultDataOutputHandler<PDFMolecularGraphWriter, DataFormat::PDF> PDFMolecularGraphOutputHandler;    
-    }
-}
+        typedef Util::DefaultDataOutputHandler<PDFMolecularGraphWriter, DataFormat::PDF> PDFMolecularGraphOutputHandler;
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_PDFMOLECULARGRAPHOUTPUTHANDLER_HPP

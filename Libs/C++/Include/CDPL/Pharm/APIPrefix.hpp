@@ -30,14 +30,14 @@
 #define CDPL_PHARM_APIPREFIX_HPP
 
 #ifdef CDPL_PHARM_STATIC_LINK
-#  define CDPL_PHARM_API
+# define CDPL_PHARM_API
 #else // CDPL_PHARM_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_pharm_shared_EXPORTS
-#    define CDPL_PHARM_API CDPL_API_EXPORT
-#  else // cdpl_pharm_shared_EXPORTS
-#    define CDPL_PHARM_API CDPL_API_IMPORT
-#  endif // cdpl_pharm_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_pharm_shared_EXPORTS
+#  define CDPL_PHARM_API CDPL_API_EXPORT
+# else // cdpl_pharm_shared_EXPORTS
+#  define CDPL_PHARM_API CDPL_API_IMPORT
+# endif // cdpl_pharm_shared_EXPORTS
 #endif // CDPL_PHARM_STATIC_LINK
 
 /**

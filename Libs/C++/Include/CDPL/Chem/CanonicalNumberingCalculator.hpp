@@ -48,7 +48,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -63,15 +63,15 @@ namespace CDPL
          * \brief CanonicalNumberingCalculator.
          * \see [\ref MCKAY]
          */
-        class CDPL_CHEM_API CanonicalNumberingCalculator 
+        class CDPL_CHEM_API CanonicalNumberingCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Specifies the default set of atomic properties considered by the canonical
              *        numbering algorithm.
              */
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE |
                 AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::H_COUNT;
 
@@ -79,7 +79,7 @@ namespace CDPL
              * \brief Specifies the default set of bond properties considered by the canonical
              *        numbering algorithm.
              */
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
             typedef std::function<std::size_t(const Atom&, const MolecularGraph&)> HydrogenCountFunction;
@@ -98,7 +98,7 @@ namespace CDPL
              *         (i.e. the canonical number of an atom is accessible via its index).
              */
             CanonicalNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering);
-        
+
             /**
              * \brief Allows to specify the set of atomic properties that has to be considered by the
              *        canonical numering algorithm.
@@ -161,12 +161,12 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
-        private:
+          private:
             class AtomNode;
             class Edge;
 
             typedef CanonicalNumberingCalculator Calculator;
-            typedef std::vector<Edge*> EdgeList;
+            typedef std::vector<Edge*>           EdgeList;
 
             CanonicalNumberingCalculator(const CanonicalNumberingCalculator&);
 
@@ -177,7 +177,7 @@ namespace CDPL
             void init(const MolecularGraph&, Util::STArray&);
             void setup(const MolecularGraph&);
 
-            void canonicalize(const MolecularGraph&, Util::STArray&);            
+            void canonicalize(const MolecularGraph&, Util::STArray&);
             void canonicalize(std::size_t);
 
             void processNewSolution();
@@ -201,7 +201,7 @@ namespace CDPL
             class AtomNode
             {
 
-            public:
+              public:
                 typedef EdgeList::const_iterator EdgeIterator;
 
                 AtomNode();
@@ -248,31 +248,31 @@ namespace CDPL
                     bool operator()(const AtomNode*, const AtomNode*) const;
                 };
 
-            private:
+              private:
                 bool initConfigurationData();
 
-                Calculator*       calculator;
-                const Atom*       atom;
-                std::uint64_t     initialLabel;
-                std::uint64_t     label;
-                std::size_t       newLabel;
-                std::size_t       id;
-                Util::BitSet      equivNodeMask;
-                EdgeList          edges;
-                StereoDescriptor  stereoDescr;
-                bool              hasConfiguration;
-                bool              configDataValid;
-                bool              partOfStereocenter;
-                bool              partOfStereocenterValid;
+                Calculator*      calculator;
+                const Atom*      atom;
+                std::uint64_t    initialLabel;
+                std::uint64_t    label;
+                std::size_t      newLabel;
+                std::size_t      id;
+                Util::BitSet     equivNodeMask;
+                EdgeList         edges;
+                StereoDescriptor stereoDescr;
+                bool             hasConfiguration;
+                bool             configDataValid;
+                bool             partOfStereocenter;
+                bool             partOfStereocenterValid;
             };
-         
+
             class Edge
             {
 
-            public:
+              public:
                 Edge();
 
-                void init(const Calculator* calculator, const Bond* bond, std::uint64_t label, 
+                void init(const Calculator* calculator, const Bond* bond, std::uint64_t label,
                           AtomNode* nbr_node, std::size_t id);
 
                 void appendBondData(ConnectionTable&) const;
@@ -290,56 +290,56 @@ namespace CDPL
                     bool operator()(const Edge*, const Edge*) const;
                 };
 
-            private:
+              private:
                 bool initConfigurationData(const AtomNode* node);
 
-                const Calculator*  calculator;
-                const Bond*        bond;
-                AtomNode*          nbrNode;
-                std::uint64_t      label;
-                std::size_t        id;
-                StereoDescriptor   stereoDescr;
-                bool               hasConfiguration;
-                bool               configDataValid;
+                const Calculator* calculator;
+                const Bond*       bond;
+                AtomNode*         nbrNode;
+                std::uint64_t     label;
+                std::size_t       id;
+                StereoDescriptor  stereoDescr;
+                bool              hasConfiguration;
+                bool              configDataValid;
             };
 
             typedef std::pair<const Fragment*, const ConnectionTable*> CanonComponentInfo;
 
             struct ComponentCmpFunc
             {
-                    
+
                 bool operator()(const CanonComponentInfo&, const CanonComponentInfo&) const;
             };
 
             typedef std::pair<AtomNode*, std::uint64_t> NodeLabelingState;
-            typedef std::vector<NodeLabelingState> NodeLabelingStack;
-            typedef std::vector<AtomNode*> NodeList;
-            typedef std::vector<ConnectionTable> ConnectionTableList;
-            typedef std::vector<CanonComponentInfo> CanonComponentList;
-            typedef Util::ObjectStack<AtomNode> NodeCache;
-            typedef Util::ObjectStack<Edge> EdgeCache;
+            typedef std::vector<NodeLabelingState>      NodeLabelingStack;
+            typedef std::vector<AtomNode*>              NodeList;
+            typedef std::vector<ConnectionTable>        ConnectionTableList;
+            typedef std::vector<CanonComponentInfo>     CanonComponentList;
+            typedef Util::ObjectStack<AtomNode>         NodeCache;
+            typedef Util::ObjectStack<Edge>             EdgeCache;
 
-            NodeCache              nodeCache;
-            EdgeCache              edgeCache;
-            unsigned int           atomPropertyFlags;
-            unsigned int           bondPropertyFlags;
-            HydrogenCountFunction  hCountFunc;
-            bool                   foundStereogenicAtoms;
-            bool                   foundStereogenicBonds;
-            const MolecularGraph*  molGraph;
-            NodeList               allocNodes;
-            EdgeList               allocEdges;
-            NodeList               nodeList;
-            NodeList               equivNodeStack;
-            NodeLabelingStack      nodeLabelingStack;
-            ConnectionTableList    compConnectionTables;
-            ConnectionTableList    levelConnectionTables;
-            ConnectionTable        testConnectionTable;
-            NodeList               minNodeList;
-            CanonComponentList     canonComponentList;
-            Util::BitSet           visitedEdgeMask;
+            NodeCache             nodeCache;
+            EdgeCache             edgeCache;
+            unsigned int          atomPropertyFlags;
+            unsigned int          bondPropertyFlags;
+            HydrogenCountFunction hCountFunc;
+            bool                  foundStereogenicAtoms;
+            bool                  foundStereogenicBonds;
+            const MolecularGraph* molGraph;
+            NodeList              allocNodes;
+            EdgeList              allocEdges;
+            NodeList              nodeList;
+            NodeList              equivNodeStack;
+            NodeLabelingStack     nodeLabelingStack;
+            ConnectionTableList   compConnectionTables;
+            ConnectionTableList   levelConnectionTables;
+            ConnectionTable       testConnectionTable;
+            NodeList              minNodeList;
+            CanonComponentList    canonComponentList;
+            Util::BitSet          visitedEdgeMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CANONICALNUMBERINGCALCULATOR_HPP

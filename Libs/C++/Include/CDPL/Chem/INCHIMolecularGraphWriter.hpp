@@ -38,11 +38,11 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-typedef struct tagInchiAtom inchi_Atom;
+typedef struct tagInchiAtom     inchi_Atom;
 typedef struct tagINCHIStereo0D inchi_Stereo0D;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -160,7 +160,7 @@ namespace CDPL
         class CDPL_CHEM_API INCHIMolecularGraphWriter : public Base::DataWriter<MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %INCHIMolecularGraphWriter instance that will write data of molecular graphs to the output
              *        stream \a os.
@@ -201,10 +201,10 @@ namespace CDPL
              */
             const std::string& getLogOutput() const;
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             INCHIMolecularGraphWriter(const INCHIMolecularGraphWriter&);
 
             INCHIMolecularGraphWriter& operator=(const INCHIMolecularGraphWriter&);
@@ -228,21 +228,21 @@ namespace CDPL
             void setup0DAtomStereoInfo(const MolecularGraph&);
             void setup0DBondStereoInfo(const MolecularGraph&);
 
-            typedef std::vector<inchi_Atom> InChIAtomTable;
+            typedef std::vector<inchi_Atom>     InChIAtomTable;
             typedef std::vector<inchi_Stereo0D> InChIStereoInfoList;
-            typedef std::vector<char> StringData;
+            typedef std::vector<char>           StringData;
 
-            std::ostream&        output;
-            InChIAtomTable       inchiAtomTable;
-            InChIStereoInfoList  inchiStereoInfo;
-            StringData           inchiOptions;
-            bool                 strictErrorChecking;
-            int                  returnCode;
-            std::string          message;
-            std::string          logOutput;
-            bool                 state;
+            std::ostream&       output;
+            InChIAtomTable      inchiAtomTable;
+            InChIStereoInfoList inchiStereoInfo;
+            StringData          inchiOptions;
+            bool                strictErrorChecking;
+            int                 returnCode;
+            std::string         message;
+            std::string         logOutput;
+            bool                state;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_INCHIMOLECULARGRAPHWRITER_HPP

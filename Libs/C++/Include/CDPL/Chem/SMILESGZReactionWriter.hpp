@@ -33,14 +33,14 @@
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         typedef Util::CompressedDataWriter<SMILESReactionWriter, Util::GZipOStream> SMILESGZReactionWriter;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMILESGZREACTIONWRITER_HPP

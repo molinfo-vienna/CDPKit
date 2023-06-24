@@ -33,7 +33,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -47,7 +47,7 @@ namespace CDPL
         class CDPL_VIS_API PointArray2D : public Math::Vector2DArray
         {
 
-        public:
+          public:
             /**
              * \brief Translates all points by \a vec.
              * \param vec The translation vector.
@@ -56,10 +56,10 @@ namespace CDPL
 
             void getBounds(Rectangle2D& bounds) const;
 
-        private:
+          private:
             const char* getClassName() const;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_POINTARRAY2D_HPP

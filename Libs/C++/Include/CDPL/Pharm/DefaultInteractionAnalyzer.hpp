@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/InteractionAnalyzer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -56,7 +56,7 @@ namespace CDPL
           private:
             void init();
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_DEFAULTINTERACTIONANALYZER_HPP

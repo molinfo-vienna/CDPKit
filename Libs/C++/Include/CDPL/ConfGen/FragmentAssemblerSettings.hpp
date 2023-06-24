@@ -33,10 +33,10 @@
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API FragmentAssemblerSettings
@@ -46,7 +46,7 @@ namespace CDPL
             static const FragmentAssemblerSettings DEFAULT;
 
             FragmentAssemblerSettings();
-    
+
             void enumerateRings(bool enumerate);
 
             bool enumerateRings() const;
@@ -56,7 +56,7 @@ namespace CDPL
             unsigned int getNitrogenEnumerationMode() const;
 
             void generateCoordinatesFromScratch(bool generate);
-    
+
             bool generateCoordinatesFromScratch() const;
 
             FragmentConformerGeneratorSettings& getFragmentBuildSettings();
@@ -69,7 +69,7 @@ namespace CDPL
             bool                               fromScratch;
             FragmentConformerGeneratorSettings fragBuildSettings;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTASSEMBLERSETTINGS_HPP

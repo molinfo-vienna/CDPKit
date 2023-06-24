@@ -37,7 +37,7 @@
 #include "CDPL/Base/PropertyContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -48,7 +48,8 @@ namespace CDPL
         /**
          * \brief FeatureContainer.
          */
-        class CDPL_PHARM_API FeatureContainer : public Chem::Entity3DContainer, public Base::PropertyContainer
+        class CDPL_PHARM_API FeatureContainer : public Chem::Entity3DContainer,
+                                                public Base::PropertyContainer
         {
 
             class ConstFeatureAccessor;
@@ -178,11 +179,13 @@ namespace CDPL
           private:
             class CDPL_PHARM_API ConstFeatureAccessor
             {
-            
-              public:
-                ConstFeatureAccessor(const FeatureAccessor& accessor): container(accessor.container) {}
 
-                ConstFeatureAccessor(const FeatureContainer* cntnr): container(cntnr) {}
+              public:
+                ConstFeatureAccessor(const FeatureAccessor& accessor):
+                    container(accessor.container) {}
+
+                ConstFeatureAccessor(const FeatureContainer* cntnr):
+                    container(cntnr) {}
 
                 const Feature& operator()(std::size_t idx) const;
 
@@ -196,11 +199,12 @@ namespace CDPL
 
             class CDPL_PHARM_API FeatureAccessor
             {
-            
+
                 friend class ConstFeatureAccessor;
 
               public:
-                FeatureAccessor(FeatureContainer* cntnr): container(cntnr) {}
+                FeatureAccessor(FeatureContainer* cntnr):
+                    container(cntnr) {}
 
                 Feature& operator()(std::size_t idx) const;
 
@@ -210,7 +214,7 @@ namespace CDPL
                 FeatureContainer* container;
             };
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURECONTAINER_HPP

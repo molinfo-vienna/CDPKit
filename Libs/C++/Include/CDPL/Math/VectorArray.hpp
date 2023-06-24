@@ -35,7 +35,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Math
@@ -45,10 +45,10 @@ namespace CDPL
          * \brief An array for storing generic vector objects.
          */
         template <typename V>
-        class VectorArray : public Util::Array<V> 
+        class VectorArray : public Util::Array<V>
         {
 
-        public:
+          public:
             typedef V ValueType;
 
             /**
@@ -56,8 +56,9 @@ namespace CDPL
              */
             typedef std::shared_ptr<VectorArray> SharedPointer;
 
-        private:
-            const char* getClassName() const {
+          private:
+            const char* getClassName() const
+            {
                 return "VectorArray";
             }
         };
@@ -101,7 +102,7 @@ namespace CDPL
          * \brief An array of Math::Vector3UL objects.
          */
         typedef VectorArray<Vector3UL> Vector3ULArray;
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_VECTORARRAY_HPP

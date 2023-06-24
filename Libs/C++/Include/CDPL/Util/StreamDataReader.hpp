@@ -36,7 +36,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -72,7 +72,7 @@ namespace CDPL
         class StreamDataReader : public Base::DataReader<DataType>
         {
 
-        public:
+          public:
             Base::DataReader<DataType>& read(DataType& obj, bool overwrite = true);
             Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
@@ -81,23 +81,23 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void setRecordIndex(std::size_t idx);
+            void        setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        protected:
+          protected:
             /**
              * \brief Constructs a \c %StreamDataReader instance that will read from the input stream \a is.
              * \param is The input stream to read from.
              */
-            StreamDataReader(std::istream& is): 
-                input(is), recordIndex(0), initStreamPos(is.tellg()), state(is.good()), streamScanned(false) {} 
+            StreamDataReader(std::istream& is):
+                input(is), recordIndex(0), initStreamPos(is.tellg()), state(is.good()), streamScanned(false) {}
 
-        private:
-            StreamDataReader(const StreamDataReader& reader); 
+          private:
+            StreamDataReader(const StreamDataReader& reader);
 
             StreamDataReader& operator=(const StreamDataReader& reader);
 
@@ -112,8 +112,8 @@ namespace CDPL
             bool                   streamScanned;
             RecordStreamPosTable   recordPositions;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
@@ -163,7 +163,7 @@ bool CDPL::Util::StreamDataReader<DataType, ReaderImpl>::hasMoreData()
 
 template <typename DataType, typename ReaderImpl>
 std::size_t CDPL::Util::StreamDataReader<DataType, ReaderImpl>::getRecordIndex() const
-{    
+{
     return recordIndex;
 }
 
@@ -222,11 +222,11 @@ void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::scanDataStream()
 
     while (hasMoreData()) {
         std::istream::pos_type record_pos = input.tellg();
-        state = false;
+        state                             = false;
 
         if (!(state = static_cast<ReaderImpl*>(this)->skipData(input)))
             break;
- 
+
         recordPositions.push_back(record_pos);
         recordIndex++;
 

@@ -30,14 +30,14 @@
 #define CDPL_GRID_APIPREFIX_HPP
 
 #ifdef CDPL_GRID_STATIC_LINK
-#  define CDPL_GRID_API
+# define CDPL_GRID_API
 #else // CDPL_GRID_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_grid_shared_EXPORTS
-#    define CDPL_GRID_API CDPL_API_EXPORT
-#  else // cdpl_grid_shared_EXPORTS
-#    define CDPL_GRID_API CDPL_API_IMPORT
-#  endif // cdpl_grid_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_grid_shared_EXPORTS
+#  define CDPL_GRID_API CDPL_API_EXPORT
+# else // cdpl_grid_shared_EXPORTS
+#  define CDPL_GRID_API CDPL_API_IMPORT
+# endif // cdpl_grid_shared_EXPORTS
 #endif // CDPL_GRID_STATIC_LINK
 
 /**

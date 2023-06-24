@@ -49,36 +49,36 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         class CDPL_SHAPE_API GaussianShapeAlignment
         {
 
-            typedef std::vector<AlignmentResult> ResultList;
+            typedef std::vector<AlignmentResult>        ResultList;
             typedef std::vector<GaussianShapeFunction*> ShapeFunctionList;
 
             typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
           public:
-            static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
-            static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-            static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER           = 1;
-            static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
-            static constexpr double       DEF_DISTANCE_CUTOFF             = 0.0;
+            static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT       = 1.0;
+            static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+            static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER          = 1;
+            static constexpr unsigned int DEF_RESULT_SELECTION_MODE      = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
+            static constexpr double       DEF_DISTANCE_CUTOFF            = 0.0;
 
             typedef std::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
-            typedef ResultList::const_iterator ConstResultIterator;
-            typedef ResultList::iterator ResultIterator;
+            typedef ResultList::const_iterator                                                     ConstResultIterator;
+            typedef ResultList::iterator                                                           ResultIterator;
             typedef boost::transform_iterator<GetShapeFunction, ShapeFunctionList::const_iterator> ConstShapeIterator;
 
-            typedef GaussianShapeFunctionAlignment::ColorFilterFunction ColorFilterFunction;
-            typedef GaussianShapeFunctionAlignment::ColorMatchFunction ColorMatchFunction;
-            typedef std::function<double(const AlignmentResult&)> ScoringFunction;
+            typedef GaussianShapeFunctionAlignment::ColorFilterFunction                 ColorFilterFunction;
+            typedef GaussianShapeFunctionAlignment::ColorMatchFunction                  ColorMatchFunction;
+            typedef std::function<double(const AlignmentResult&)>                       ScoringFunction;
             typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
             GaussianShapeAlignment();
@@ -90,7 +90,7 @@ namespace CDPL
             ~GaussianShapeAlignment();
 
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
-            
+
             GaussianShapeOverlapFunction& getOverlapFunction() const;
 
             const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
@@ -98,7 +98,7 @@ namespace CDPL
             FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
 
             void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
-            
+
             GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 
             const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
@@ -108,7 +108,7 @@ namespace CDPL
             void setColorMatchFunction(const ColorMatchFunction& func);
 
             const ColorMatchFunction& getColorMatchFunction() const;
-    
+
             void setColorFilterFunction(const ColorFilterFunction& func);
 
             const ColorFilterFunction& getColorFilterFunction() const;
@@ -174,7 +174,7 @@ namespace CDPL
             std::size_t getNumReferenceShapes() const;
 
             const GaussianShape& getReferenceShape(std::size_t idx) const;
-        
+
             ConstShapeIterator getReferenceShapesBegin() const;
 
             ConstShapeIterator getReferenceShapesEnd() const;
@@ -196,11 +196,11 @@ namespace CDPL
             ResultIterator getResultsBegin();
 
             ResultIterator getResultsEnd();
-                        
+
           private:
             typedef GaussianShape::SharedPointer GaussianShapePtr;
 
-            struct ShapeMetaData 
+            struct ShapeMetaData
             {
 
                 std::size_t      setIndex;
@@ -213,7 +213,7 @@ namespace CDPL
             };
 
             typedef std::pair<std::size_t, std::size_t> ResultID;
-    
+
             GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
 
             GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
@@ -226,9 +226,9 @@ namespace CDPL
 
             GaussianShapeFunction* allocShapeFunction(const GaussianShape& shape);
 
-            typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
-            typedef std::vector<ShapeMetaData> ShapeMetaDataArray;
-             typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
+            typedef Util::ObjectStack<GaussianShapeFunction>                          ShapeFunctionCache;
+            typedef std::vector<ShapeMetaData>                                        ShapeMetaDataArray;
+            typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
 
             ShapeFunctionCache             shapeFuncCache;
             bool                           calcSlfOverlaps;
@@ -246,7 +246,7 @@ namespace CDPL
             std::size_t                    currSetIndex;
             std::size_t                    currShapeIndex;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPEALIGNMENT_HPP

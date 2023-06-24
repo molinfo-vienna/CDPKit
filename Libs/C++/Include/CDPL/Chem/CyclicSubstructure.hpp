@@ -37,7 +37,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -49,7 +49,7 @@ namespace CDPL
         class CDPL_CHEM_API CyclicSubstructure : public Fragment
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CyclicSubstructure instances.
              */
@@ -74,7 +74,7 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
+          private:
             CyclicSubstructure(const CyclicSubstructure&);
 
             CyclicSubstructure& operator=(const CyclicSubstructure&);
@@ -93,7 +93,7 @@ namespace CDPL
             BondStack             bondStack;
             const MolecularGraph* molGraph;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CYCLICSUBSTRUCTURE_HPP

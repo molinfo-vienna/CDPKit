@@ -33,7 +33,7 @@
 #include "CDPL/Util/FileDataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -46,22 +46,25 @@ namespace CDPL
         class DefaultDataOutputHandler : public Base::DataOutputHandler<DataType>
         {
 
-        public:
+          public:
             typedef typename Base::DataOutputHandler<DataType>::WriterType WriterType;
 
-            const Base::DataFormat& getDataFormat() const {
+            const Base::DataFormat& getDataFormat() const
+            {
                 return FORMAT;
             }
-        
-            typename WriterType::SharedPointer createWriter(std::iostream& ios) const {
+
+            typename WriterType::SharedPointer createWriter(std::iostream& ios) const
+            {
                 return typename WriterType::SharedPointer(new WriterImpl(ios));
             }
 
-            typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const {
+            typename WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const
+            {
                 return typename WriterType::SharedPointer(new Util::FileDataWriter<WriterImpl>(file_name, mode));
             }
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_DEFAULTDATAOUTPUTHANDLER_HPP

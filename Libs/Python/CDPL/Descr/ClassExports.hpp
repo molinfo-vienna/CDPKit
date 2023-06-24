@@ -44,6 +44,6 @@ namespace CDPLPythonDescr
     void exportPharmacophoreRDFDescriptorCalculator();
     void exportFeatureAutoCorrelation3DVectorCalculator();
     void exportPharmacophoreAutoCorr3DDescriptorCalculator();
-}
+} // namespace CDPLPythonDescr
 
 #endif // CDPL_PYTHON_DESCR_CLASSEXPORTS_HPP

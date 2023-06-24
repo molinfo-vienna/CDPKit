@@ -30,7 +30,7 @@
 #define CDPL_MOLPROP_COORDINATIONGEOMETRY_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace MolProp
@@ -41,41 +41,41 @@ namespace CDPL
          */
         namespace CoordinationGeometry
         {
-            
+
             /**
              * \brief Specifies undefined or unknown geometry.
              */
-            const unsigned int UNDEF                  = 0;
+            const unsigned int UNDEF = 0;
 
             /**
              * \brief Specifies that a geometry cannot be assigned due to the lack of enough (>1) defining entities.
              */
-            const unsigned int NONE                   = 1;
+            const unsigned int NONE = 1;
 
             /**
              * \brief Specifies <i>linear</i> geometry.
              */
-            const unsigned int LINEAR                 = 2;
+            const unsigned int LINEAR = 2;
 
             /**
              * \brief Specifies <i>trigonal planar</i> geometry.
              */
-            const unsigned int TRIGONAL_PLANAR        = 3;
+            const unsigned int TRIGONAL_PLANAR = 3;
 
             /**
              * \brief Specifies <i>tetrahedral</i> geometry.
              */
-            const unsigned int TETRAHEDRAL            = 4;
-        
+            const unsigned int TETRAHEDRAL = 4;
+
             /**
              * \brief Specifies <i>trigonal bipyramidal</i> geometry.
              */
-            const unsigned int TRIGONAL_BIPYRAMIDAL   = 5;
+            const unsigned int TRIGONAL_BIPYRAMIDAL = 5;
 
             /**
              * \brief Specifies <i>octahedral</i> geometry.
              */
-            const unsigned int OCTAHEDRAL             = 6;
+            const unsigned int OCTAHEDRAL = 6;
 
             /**
              * \brief Specifies <i>pentagonal bipyramidal</i> geometry.
@@ -85,49 +85,49 @@ namespace CDPL
             /**
              * \brief Specifies <i>square antiprismatic</i> geometry.
              */
-            const unsigned int SQUARE_ANTIPRISMATIC   = 8;
-        
+            const unsigned int SQUARE_ANTIPRISMATIC = 8;
+
             /**
              * \brief Specifies <i>bent</i> geometry.
              */
-            const unsigned int BENT                   = 9;
+            const unsigned int BENT = 9;
 
             /**
              * \brief Specifies <i>trigonal pyramidal</i> geometry.
              */
-            const unsigned int TRIGONAL_PYRAMIDAL     = 10;
+            const unsigned int TRIGONAL_PYRAMIDAL = 10;
 
             /**
              * \brief Specifies <i>square planar</i> geometry.
              */
-            const unsigned int SQUARE_PLANAR          = 11;
-        
+            const unsigned int SQUARE_PLANAR = 11;
+
             /**
              * \brief Specifies <i>square pyramidal</i> geometry.
              */
-            const unsigned int SQUARE_PYRAMIDAL       = 12;
+            const unsigned int SQUARE_PYRAMIDAL = 12;
 
             /**
              * \brief Specifies <i>T-shaped</i> geometry.
              */
-            const unsigned int T_SHAPED               = 13;
+            const unsigned int T_SHAPED = 13;
 
             /**
              * \brief Specifies <i>seesaw</i> geometry.
              */
-            const unsigned int SEESAW                 = 14;
-        
+            const unsigned int SEESAW = 14;
+
             /**
              * \brief Specifies <i>pentagonal pyramidal</i> geometry.
              */
-            const unsigned int PENTAGONAL_PYRAMIDAL   = 15;
+            const unsigned int PENTAGONAL_PYRAMIDAL = 15;
 
             /**
              * \brief Specifies <i>pentagonal planar</i> geometry.
              */
-            const unsigned int PENTAGONAL_PLANAR      = 16;
-        }
-    }
-}
+            const unsigned int PENTAGONAL_PLANAR = 16;
+        } // namespace CoordinationGeometry
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_COORDINATIONGEOMETRY_HPP

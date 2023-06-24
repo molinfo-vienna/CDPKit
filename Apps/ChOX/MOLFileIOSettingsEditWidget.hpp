@@ -41,24 +41,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         MOLFileIOSettingsEditWidget(QWidget*, Settings&);
 
         bool haveChangedSettings() const;
 
-    signals:
+      signals:
         void updateGUI();
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    private slots:
+      private slots:
         void handleSettingsChange();
         void handleSettingsChange(bool);
 
-    private:
+      private:
         void init();
 
         Settings&    settings;
@@ -81,6 +81,6 @@ namespace ChOX
         unsigned int optCTabVersion;
         bool         haveChanges;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_MOLFILEIOSETTINGSEDITWIDGET_HPP

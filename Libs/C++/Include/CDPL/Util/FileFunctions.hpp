@@ -34,19 +34,19 @@
 #include "CDPL/Util/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
     {
 
-        CDPL_UTIL_API std::string genCheckedTempFilePath(const std::string& dir = "", 
+        CDPL_UTIL_API std::string genCheckedTempFilePath(const std::string& dir = "",
                                                          const std::string& ptn = "%%%%-%%%%-%%%%-%%%%");
-    
-        CDPL_UTIL_API bool checkIfSameFile(const std::string& path1, const std::string& path2); 
 
-        CDPL_UTIL_API bool fileExists(const std::string& path); 
-    }
-}
+        CDPL_UTIL_API bool checkIfSameFile(const std::string& path1, const std::string& path2);
+
+        CDPL_UTIL_API bool fileExists(const std::string& path);
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_FILEFUNCTIONS_HPP

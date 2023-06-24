@@ -33,18 +33,18 @@
 #include "CDPL/Vis/ColorTable.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class MolecularGraph;
     }
-    
-    namespace Vis 
+
+    namespace Vis
     {
-        
+
         class Color;
         class Font;
         class SizeSpecification;
@@ -227,7 +227,7 @@ namespace CDPL
         CDPL_VIS_API bool hasBondLabelMargin(const Chem::MolecularGraph& molgraph);
 
         CDPL_VIS_API void clearBondLabelMargin(Chem::MolecularGraph& molgraph);
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_MOLECULARGRAPHFUNCTIONS_HPP

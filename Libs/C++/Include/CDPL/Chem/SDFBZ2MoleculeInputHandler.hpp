@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of bzip2-compressed molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
          */
         typedef Util::DefaultDataInputHandler<SDFBZ2MoleculeReader, DataFormat::SDF_BZ2> SDFBZ2MoleculeInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SDFBZ2MOLECULEINPUTHANDLER_HPP

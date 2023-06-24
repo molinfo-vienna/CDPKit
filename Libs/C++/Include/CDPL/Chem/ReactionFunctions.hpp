@@ -46,12 +46,12 @@
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class Reaction;
 
         CDPL_CHEM_API const std::string& getName(const Reaction& rxn);
@@ -103,7 +103,7 @@ namespace CDPL
         CDPL_CHEM_API void setAtomMapping(Reaction& rxn, const AtomMapping::SharedPointer& mapping);
 
         CDPL_CHEM_API void clearAtomMapping(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasAtomMapping(const Reaction& rxn);
 
         CDPL_CHEM_API AtomMapping::SharedPointer perceiveAtomMapping(const Reaction& rxn);
@@ -111,13 +111,13 @@ namespace CDPL
         CDPL_CHEM_API AtomMapping::SharedPointer perceiveAtomMapping(Reaction& rxn, bool overwrite);
 
 
-        CDPL_CHEM_API bool generateSMILES(const Reaction& rxn, std::string& smiles, bool canonical = false, 
-                                          bool ord_h_deplete = true, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
+        CDPL_CHEM_API bool generateSMILES(const Reaction& rxn, std::string& smiles, bool canonical = false,
+                                          bool ord_h_deplete = true, unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
                                           unsigned int bond_flags = BondPropertyFlag::DEFAULT);
-    
-        CDPL_CHEM_API std::uint64_t calcHashCode(const Reaction& rxn, unsigned int role_mask = ReactionRole::ALL, 
+
+        CDPL_CHEM_API std::uint64_t calcHashCode(const Reaction& rxn, unsigned int role_mask = ReactionRole::ALL,
                                                  unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
-                                                 unsigned int bond_flags = BondPropertyFlag::DEFAULT, 
+                                                 unsigned int bond_flags = BondPropertyFlag::DEFAULT,
                                                  bool global_stereo = true, bool ord_h_deplete = true);
 
 
@@ -126,7 +126,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLUserInitials(Reaction& rxn, const std::string& initials);
 
         CDPL_CHEM_API void clearMDLUserInitials(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLUserInitials(const Reaction& rxn);
 
 
@@ -135,7 +135,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLProgramName(Reaction& rxn, const std::string& name);
 
         CDPL_CHEM_API void clearMDLProgramName(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLProgramName(const Reaction& rxn);
 
 
@@ -144,7 +144,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLTimestamp(Reaction& rxn, std::time_t time);
 
         CDPL_CHEM_API void clearMDLTimestamp(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLTimestamp(const Reaction& rxn);
 
 
@@ -153,7 +153,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLRegistryNumber(Reaction& rxn, std::size_t reg_no);
 
         CDPL_CHEM_API void clearMDLRegistryNumber(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLRegistryNumber(const Reaction& rxn);
 
 
@@ -162,7 +162,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLComment(Reaction& rxn, const std::string& comment);
 
         CDPL_CHEM_API void clearMDLComment(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLComment(const Reaction& rxn);
 
 
@@ -171,7 +171,7 @@ namespace CDPL
         CDPL_CHEM_API void setReactionData(Reaction& rxn, const StringDataBlock::SharedPointer& data);
 
         CDPL_CHEM_API void clearReactionData(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasReactionData(const Reaction& rxn);
 
 
@@ -180,7 +180,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLMoleculeRecord(Reaction& rxn, const Molecule::SharedPointer& mol_rec);
 
         CDPL_CHEM_API void clearMDLMoleculeRecord(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLMoleculeRecord(const Reaction& rxn);
 
 
@@ -189,7 +189,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLInternalRegistryNumber(Reaction& rxn, const std::string& reg_no);
 
         CDPL_CHEM_API void clearMDLInternalRegistryNumber(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLInternalRegistryNumber(const Reaction& rxn);
 
 
@@ -198,7 +198,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLExternalRegistryNumber(Reaction& rxn, const std::string& reg_no);
 
         CDPL_CHEM_API void clearMDLExternalRegistryNumber(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLExternalRegistryNumber(const Reaction& rxn);
 
 
@@ -207,7 +207,7 @@ namespace CDPL
         CDPL_CHEM_API void setMDLRXNFileVersion(Reaction& rxn, unsigned int version);
 
         CDPL_CHEM_API void clearMDLRXNFileVersion(Reaction& rxn);
-    
+
         CDPL_CHEM_API bool hasMDLRXNFileVersion(const Reaction& rxn);
 
 
@@ -221,14 +221,13 @@ namespace CDPL
         CDPL_CHEM_API void setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
 
         CDPL_CHEM_API void setComponentMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
-    
+
         CDPL_CHEM_API void buildMatchExpressions(Reaction& rxn, bool overwrite);
 
         CDPL_CHEM_API void initSubstructureSearchQuery(Reaction& rxn, bool overwrite);
 
         CDPL_CHEM_API void initSubstructureSearchTarget(Reaction& rxn, bool overwrite);
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONFUNCTIONS_HPP
- 

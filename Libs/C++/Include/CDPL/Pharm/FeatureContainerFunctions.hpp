@@ -37,7 +37,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,14 +45,14 @@ namespace CDPL
 
         class AtomContainer;
         class Fragment;
-    }
+    } // namespace Chem
 
-    namespace Pharm 
+    namespace Pharm
     {
-    
+
         class FeatureContainer;
         class FeatureTypeHistogram;
-    
+
         CDPL_PHARM_API const std::string& getName(const FeatureContainer& cntnr);
 
         CDPL_PHARM_API void setName(FeatureContainer& cntnr, const std::string& name);
@@ -61,7 +61,7 @@ namespace CDPL
 
         CDPL_PHARM_API bool hasName(const FeatureContainer& cntnr);
 
-    
+
         CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr);
 
         CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr, unsigned int type);
@@ -73,12 +73,12 @@ namespace CDPL
 
         CDPL_PHARM_API void transform3DCoordinates(FeatureContainer& cntnr, const Math::Matrix4D& mtx);
 
-        CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
+        CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr,
                                                       const Chem::Atom3DCoordinatesFunction& coords_func,
                                                       const Math::Matrix4D& xform, double vdw_factor = 1.0);
 
         CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms, bool append = false);
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURECONTAINERFUNCTIONS_HPP

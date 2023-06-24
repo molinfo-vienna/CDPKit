@@ -38,7 +38,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -47,9 +47,9 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class FragmentTree;
@@ -60,16 +60,16 @@ namespace CDPL
 
             friend class FragmentTree;
 
-        public:
+          public:
             typedef std::vector<std::size_t> IndexArray;
-            typedef std::vector<double> DoubleArray;    
+            typedef std::vector<double>      DoubleArray;
 
             const FragmentTreeNode* getParent() const;
-            FragmentTreeNode* getParent();
+            FragmentTreeNode*       getParent();
 
-            const Chem::Bond* getSplitBond() const;
+            const Chem::Bond*        getSplitBond() const;
             const Chem::Atom* const* getSplitBondAtoms() const;
-        
+
             const Chem::Atom* const* getTorsionReferenceAtoms() const;
 
             void setTorsionReferenceAtoms(const Chem::Atom* left, const Chem::Atom* right);
@@ -83,7 +83,7 @@ namespace CDPL
 
             FragmentTreeNode* getLeftChild();
             FragmentTreeNode* getRightChild();
-        
+
             const IndexArray& getAtomIndices() const;
 
             const Util::BitSet& getAtomMask() const;
@@ -102,20 +102,20 @@ namespace CDPL
             const ForceField::MMFF94InteractionData& getMMFF94Parameters() const;
 
             void distMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
-                                      ForceFieldInteractionMask& ia_mask);
+                                      ForceFieldInteractionMask&               ia_mask);
 
             const ConformerDataArray& getConformers() const;
 
             std::size_t getNumConformers() const;
 
             ConformerData& getConformer(std::size_t idx) const;
-            
+
             void orderConformersByEnergy();
 
             void clearConformers();
             void clearConformersDownwards();
             void clearConformersUpwards();
-            
+
             void addConformer(const Math::Vector3DArray& src_coords);
             void addConformer(const ConformerData& conf_data);
             void addConformer(const ConformerData::SharedPointer& conf_data);
@@ -123,8 +123,8 @@ namespace CDPL
             unsigned int generateConformers(double e_window = 0.0, std::size_t max_pool_size = 0);
 
             double calcMMFF94Energy(const Math::Vector3DArray& coords);
-        
-        private:
+
+          private:
             FragmentTreeNode(FragmentTree& owner);
             FragmentTreeNode(const FragmentTreeNode&);
 
@@ -141,7 +141,7 @@ namespace CDPL
 
             void setSplitBond(const Chem::Bond* bond);
             void setSplitBondAtoms(const Chem::Atom* left, const Chem::Atom* right);
-        
+
             void initFragmentData();
             void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& molgraph);
 
@@ -150,52 +150,52 @@ namespace CDPL
             void calcConformerBounds(double min[3], double max[3], const IndexArray& atom_inds,
                                      const Math::Vector3DArray& coords) const;
 
-            void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
+            void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds,
                                  Math::Vector3DArray& tgt_coords) const;
 
-            void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
+            void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds,
                                  Math::Vector3DArray& tgt_coords, std::size_t excl_atom_idx) const;
 
-            void rotateCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
-                                   Math::Vector3DArray& tgt_coords, double ang_sin, double ang_cos, 
+            void rotateCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds,
+                                   Math::Vector3DArray& tgt_coords, double ang_sin, double ang_cos,
                                    std::size_t excl_atom_idx) const;
 
-            void alignCoordinates(const double almnt_mtx[3][3], Math::Vector3DArray& coords, const IndexArray& atom_inds, 
+            void alignCoordinates(const double almnt_mtx[3][3], Math::Vector3DArray& coords, const IndexArray& atom_inds,
                                   std::size_t ctr_atom_idx, double x_disp) const;
 
-            void calcAlignmentMatrix(const Math::Vector3D& bond_vec, const Math::Vector3D& tor_ref_vec, 
+            void calcAlignmentMatrix(const Math::Vector3D& bond_vec, const Math::Vector3D& tor_ref_vec,
                                      double almnt_mtx[3][3], bool check_ref_vec_angle) const;
 
             void calcOrthogonalVector(const Math::Vector3D& vec, Math::Vector3D& ortho_vec) const;
 
-            void calcVirtualTorsionReferenceAtomVector(const Math::Vector3DArray& coords, std::size_t atom_idx, 
+            void calcVirtualTorsionReferenceAtomVector(const Math::Vector3DArray& coords, std::size_t atom_idx,
                                                        Math::Vector3D& ref_vec) const;
 
             unsigned int invokeCallbacks() const;
 
-            typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+            typedef ForceField::MMFF94InteractionData          MMFF94InteractionData;
             typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 
-            FragmentTree&           owner;
-            FragmentTreeNode*       parent;
-            const Chem::Bond*       splitBond;
-            const Chem::Atom*       splitBondAtoms[2];
-            const Chem::Atom*       torsionRefAtoms[2];
-            FragmentTreeNode*       leftChild;
-            FragmentTreeNode*       rightChild;
-            IndexArray              atomIndices;
-            Util::BitSet            atomMask;
-            Util::BitSet            coreAtomMask;
-            ConformerDataArray      conformers;
-            ConformerDataArray      tmpConformers;
-            DoubleArray             torsionAngles;
-            DoubleArray             torsionAngleCosines;
-            DoubleArray             torsionAngleSines;
-            MMFF94InteractionData   mmff94Data;
-            MMFF94EnergyCalculator  mmff94EnergyCalc;
-            bool                    changed;
+            FragmentTree&          owner;
+            FragmentTreeNode*      parent;
+            const Chem::Bond*      splitBond;
+            const Chem::Atom*      splitBondAtoms[2];
+            const Chem::Atom*      torsionRefAtoms[2];
+            FragmentTreeNode*      leftChild;
+            FragmentTreeNode*      rightChild;
+            IndexArray             atomIndices;
+            Util::BitSet           atomMask;
+            Util::BitSet           coreAtomMask;
+            ConformerDataArray     conformers;
+            ConformerDataArray     tmpConformers;
+            DoubleArray            torsionAngles;
+            DoubleArray            torsionAngleCosines;
+            DoubleArray            torsionAngleSines;
+            MMFF94InteractionData  mmff94Data;
+            MMFF94EnergyCalculator mmff94EnergyCalc;
+            bool                   changed;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTTREENODE_HPP

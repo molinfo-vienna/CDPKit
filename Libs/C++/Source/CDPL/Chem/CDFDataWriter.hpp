@@ -37,7 +37,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -59,11 +59,12 @@ namespace CDPL
         {
 
           public:
-            typedef std::function<unsigned int(CDFDataWriter&, const Atom&, Internal::ByteBuffer&)> AtomPropertyHandler;
-            typedef std::function<unsigned int(CDFDataWriter&, const Bond&, Internal::ByteBuffer&)> BondPropertyHandler;
+            typedef std::function<unsigned int(CDFDataWriter&, const Atom&, Internal::ByteBuffer&)>           AtomPropertyHandler;
+            typedef std::function<unsigned int(CDFDataWriter&, const Bond&, Internal::ByteBuffer&)>           BondPropertyHandler;
             typedef std::function<unsigned int(CDFDataWriter&, const MolecularGraph&, Internal::ByteBuffer&)> MolGraphPropertyHandler;
 
-            CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+            CDFDataWriter(const Base::ControlParameterContainer& ctrl_params):
+                ctrlParams(ctrl_params) {}
 
             bool writeMolGraph(std::ostream& os, const MolecularGraph& molgraph);
             void writeMolGraph(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
@@ -96,28 +97,28 @@ namespace CDPL
             void outputExternalProperties(const Bond& bond, Internal::ByteBuffer& bbuf);
             void outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
-            void putStereoDescriptor(const MolecularGraph& molgraph, 
+            void putStereoDescriptor(const MolecularGraph& molgraph,
                                      unsigned int prop_id, const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const;
 
-            void putFragmentList(const MolecularGraph& molgraph, unsigned int prop_id, const FragmentList::SharedPointer& frag_list, 
+            void putFragmentList(const MolecularGraph& molgraph, unsigned int prop_id, const FragmentList::SharedPointer& frag_list,
                                  Internal::ByteBuffer& bbuf) const;
 
             void putStringData(unsigned int prop_id, const StringDataBlock::SharedPointer& sdata, Internal::ByteBuffer& bbuf) const;
 
             bool writeRecordData(std::ostream& os);
 
-            typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;
-            typedef std::vector<BondPropertyHandler> BondPropertyHandlerList;
+            typedef std::vector<AtomPropertyHandler>     AtomPropertyHandlerList;
+            typedef std::vector<BondPropertyHandler>     BondPropertyHandlerList;
             typedef std::vector<MolGraphPropertyHandler> MolGraphPropertyHandlerList;
 
-            const Base::ControlParameterContainer& ctrlParams;    
+            const Base::ControlParameterContainer& ctrlParams;
             Internal::ByteBuffer                   dataBuffer;
             Internal::ByteBuffer                   extDataBuffer;
             static AtomPropertyHandlerList         extAtomPropertyHandlers;
             static BondPropertyHandlerList         extBondPropertyHandlers;
             static MolGraphPropertyHandlerList     extMolGraphPropertyHandlers;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CDFDATAWRITER_HPP

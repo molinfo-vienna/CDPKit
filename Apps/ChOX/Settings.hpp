@@ -43,12 +43,13 @@ class QSettings;
 namespace ChOX
 {
 
-    class Settings : public QObject, public SettingsContainer
+    class Settings : public QObject,
+                     public SettingsContainer
     {
 
         Q_OBJECT
 
-    public:
+      public:
         Settings(QObject* parent = 0);
 
         const SettingsContainer& getReaderControlParameters(const std::string&) const;
@@ -57,14 +58,14 @@ namespace ChOX
         SettingsContainer& getReaderControlParameters(const std::string&);
         SettingsContainer& getWriterControlParameters(const std::string&);
 
-    public slots:
+      public slots:
         void load();
         void save() const;
 
-    signals:
+      signals:
         void controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
 
-    private:
+      private:
         void writeLineStyleParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
         void writeFontParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
         void writeColorParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
@@ -98,6 +99,6 @@ namespace ChOX
         IOControlParamMap readerControlParams;
         IOControlParamMap writerControlParams;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SETTINGS_HPP

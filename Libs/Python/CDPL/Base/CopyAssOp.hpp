@@ -29,18 +29,18 @@
 namespace CDPLPythonBase
 {
 
-  template <typename T>
-  struct CopyAssOp
-  {
+    template <typename T>
+    struct CopyAssOp
+    {
 
-    typedef T& (T::*Type)(const T&);
-  };
-    
-  template <typename T>
-  inline typename CopyAssOp<T>::Type copyAssOp(T& (T::*op)(const T&))
-  {
-    return op;
-  }
-}
+        typedef T& (T::*Type)(const T&);
+    };
+
+    template <typename T>
+    inline typename CopyAssOp<T>::Type copyAssOp(T& (T::*op)(const T&))
+    {
+        return op;
+    }
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_COPYASSOP_HPP

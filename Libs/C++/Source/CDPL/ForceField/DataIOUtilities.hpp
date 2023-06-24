@@ -37,6 +37,6 @@ namespace CDPL
 
         bool readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg = "Error while reading MMFF94 parameter data");
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_DATAIOUTILITIES_HPP

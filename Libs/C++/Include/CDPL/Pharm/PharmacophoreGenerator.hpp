@@ -36,7 +36,7 @@
 #include "CDPL/Pharm/FeatureGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -45,7 +45,7 @@ namespace CDPL
         /**
          * \brief PharmacophoreGenerator.
          */
-        class CDPL_PHARM_API PharmacophoreGenerator 
+        class CDPL_PHARM_API PharmacophoreGenerator
         {
 
           public:
@@ -129,14 +129,14 @@ namespace CDPL
             SharedPointer clone() const;
 
           private:
-            typedef std::set<unsigned int> EnabledFeatureSet;
+            typedef std::set<unsigned int>                                  EnabledFeatureSet;
             typedef std::map<unsigned int, FeatureGenerator::SharedPointer> FeatureGeneratorMap;
-        
+
             FeatureGeneratorMap             featureGeneratorMap;
             EnabledFeatureSet               enabledFeatures;
             Chem::Atom3DCoordinatesFunction coordsFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PHARMACOPHOREGENERATOR_HPP

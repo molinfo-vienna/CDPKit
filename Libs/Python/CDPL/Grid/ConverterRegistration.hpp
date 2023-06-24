@@ -28,9 +28,9 @@
 
 namespace CDPLPythonGrid
 {
-    
+
     void registerFromPythonConverters();
     void registerToPythonConverters();
-}
+} // namespace CDPLPythonGrid
 
 #endif // CDPL_PYTHON_GRID_CONVERTERREGISTRATION_HPP

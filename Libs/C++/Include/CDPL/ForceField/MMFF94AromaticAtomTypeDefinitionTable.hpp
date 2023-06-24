@@ -38,10 +38,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94AromaticAtomTypeDefinitionTable
@@ -57,19 +57,19 @@ namespace CDPL
             typedef std::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
 
             typedef DataStorage::const_iterator ConstEntryIterator;
-            typedef DataStorage::iterator EntryIterator;
-    
+            typedef DataStorage::iterator       EntryIterator;
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
-                Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
+                Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no,
                       std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
                 const std::string& getOldAtomType() const;
-                
+
                 const std::string& getAromAtomType() const;
-                
+
                 unsigned int getAtomicNumber() const;
 
                 std::size_t getRingSize() const;
@@ -81,20 +81,20 @@ namespace CDPL
                 bool isN5RingAnion() const;
 
               private:
-                std::string   oldType;
-                std::string   aroType;
-                unsigned int  atomicNumber; 
-                std::size_t   ringSize;
-                std::size_t   hetAtomDist;
-                bool          imCation;
-                bool          n5Anion;
-            };            
+                std::string  oldType;
+                std::string  aroType;
+                unsigned int atomicNumber;
+                std::size_t  ringSize;
+                std::size_t  hetAtomDist;
+                bool         imCation;
+                bool         n5Anion;
+            };
 
             MMFF94AromaticAtomTypeDefinitionTable();
 
             std::size_t getNumEntries() const;
 
-            void addEntry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
+            void addEntry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no,
                           std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
             const Entry& getEntry(std::size_t idx) const;
@@ -108,7 +108,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -116,11 +116,11 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
-            
+
             void load(std::istream& is);
 
             void loadDefaults();
@@ -133,7 +133,7 @@ namespace CDPL
             static SharedPointer defaultTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP

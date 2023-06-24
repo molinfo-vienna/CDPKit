@@ -33,12 +33,12 @@ namespace CDPL
 
     namespace MolProp
     {
-        
+
         void initAtomProperties();
         void initBondProperties();
         void initAtomPropertyDefaults();
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 namespace
 {
@@ -46,14 +46,15 @@ namespace
     struct CDPLMolPropInit
     {
 
-        CDPLMolPropInit() {
+        CDPLMolPropInit()
+        {
             CDPL::MolProp::initAtomProperties();
             CDPL::MolProp::initBondProperties();
             CDPL::MolProp::initAtomPropertyDefaults();
         }
 
     } cdplMolPropInit;
-}
+} // namespace
 
 #endif // CDPL_MOLPROP_STATIC_LINK
 

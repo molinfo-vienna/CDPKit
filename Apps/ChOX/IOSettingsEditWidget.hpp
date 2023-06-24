@@ -38,12 +38,12 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         IOSettingsEditWidget(QWidget*, Settings&);
 
-    private:
+      private:
         void init(Settings&);
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_IOSETTINGSEDITWIDGET_HPP

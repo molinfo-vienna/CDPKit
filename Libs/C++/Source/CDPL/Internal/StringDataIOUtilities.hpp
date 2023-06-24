@@ -52,27 +52,27 @@ namespace CDPL
         }
 
         void skipChars(std::istream& is, std::size_t count, const char* err_msg = "Error", char eol_char = '\n');
-        
+
         void skipLines(std::istream& is, std::size_t count = 1, const char* err_msg = "Error", char eol_char = '\n');
-            
-        std::string& readLine(std::istream& is, std::string& line, const char* err_msg = "Error", bool trim = false, 
+
+        std::string& readLine(std::istream& is, std::string& line, const char* err_msg = "Error", bool trim = false,
                               bool check_ll = false, std::size_t max_llen = 80, char eol_char = '\n');
 
         std::string& readString(std::istream& is, std::size_t field_size, std::string& str, bool clear = true,
                                 const char* err_msg = "Error", bool trim = true, char eol_char = '\n');
-    
-        bool skipToString(std::istream& is, const std::string& str, const char* err_msg = "Error", bool pos_after = false); 
 
-        bool readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg = "Error", bool inc_str = false); 
+        bool skipToString(std::istream& is, const std::string& str, const char* err_msg = "Error", bool pos_after = false);
+
+        bool readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg = "Error", bool inc_str = false);
 
         template <typename T>
-        T parseNumber(const char* str_beg, const char* str_end, const char* err_msg = "Error", bool throw_ex = true, 
-                     const T empty_def_val = T(0), const T err_def_val = T(0))
+        T parseNumber(const char* str_beg, const char* str_end, const char* err_msg = "Error", bool throw_ex = true,
+                      const T empty_def_val = T(0), const T err_def_val = T(0))
         {
             if (str_beg == str_end)
                 return empty_def_val;
-        
-            T val;
+
+            T     val;
             char* parse_end;
 
             if (std::numeric_limits<T>::is_integer) {
@@ -84,7 +84,7 @@ namespace CDPL
             } else {
                 const char* old_loc = std::setlocale(LC_NUMERIC, "C");
 
-                val = T(std::strtod(str_beg, &parse_end)); 
+                val = T(std::strtod(str_beg, &parse_end));
 
                 std::setlocale(LC_NUMERIC, old_loc);
             }
@@ -100,8 +100,8 @@ namespace CDPL
         }
 
         template <typename T>
-        T parseNumber(const std::string& str, const char* err_msg = "Error", bool throw_ex = true, 
-                             const T empty_def_val = T(0), const T err_def_val = T(0))
+        T parseNumber(const std::string& str, const char* err_msg = "Error", bool throw_ex = true,
+                      const T empty_def_val = T(0), const T err_def_val = T(0))
         {
             const char* c_str = str.c_str();
 
@@ -109,12 +109,12 @@ namespace CDPL
         }
 
         template <typename T, std::size_t FieldSize>
-        T readNumber(std::istream& is, const char* err_msg = "Error", bool throw_ex = true, 
+        T readNumber(std::istream& is, const char* err_msg = "Error", bool throw_ex = true,
                      const T empty_def_val = T(0), const T err_def_val = T(0), char eol_char = '\n')
         {
-            char buf[FieldSize + 1];
-            char *buf_end_ptr = buf;
-            char c = 0;
+            char  buf[FieldSize + 1];
+            char* buf_end_ptr = buf;
+            char  c           = 0;
 
             for (std::size_t i = 0; i < FieldSize && is.get(c) && c != eol_char; i++) {
                 if (std::isspace(c))
@@ -143,16 +143,16 @@ namespace CDPL
             os << eol_char;
         }
 
-        void writeLine(std::ostream& os, const std::string& line, const char* err_msg, 
+        void writeLine(std::ostream& os, const std::string& line, const char* err_msg,
                        bool check_llen, bool trim, bool trunc, std::size_t max_llen = 80, char eol_char = '\n');
-    
-        void writeString(std::ostream& os, std::size_t field_size, const std::string& str, 
+
+        void writeString(std::ostream& os, std::size_t field_size, const std::string& str,
                          const char* err_msg = "Error", bool trim = false, bool trunc = false, bool align_right = false);
 
         void writeSubstring(std::ostream& os, const std::string& str, std::size_t start, std::size_t end);
 
         template <typename T>
-        void writeIntegerNumber(std::ostream& os, std::size_t field_size, const T value, const char* err_msg = "Error", 
+        void writeIntegerNumber(std::ostream& os, std::size_t field_size, const T value, const char* err_msg = "Error",
                                 bool align_left = false, char fill = ' ')
         {
             std::ostringstream oss;
@@ -160,7 +160,7 @@ namespace CDPL
             oss.imbue(std::locale::classic());
 
             oss << std::setw(field_size) << std::setfill(fill);
-    
+
             if (align_left)
                 oss << std::left;
             else
@@ -174,14 +174,13 @@ namespace CDPL
             std::string val_str = oss.str();
 
             if (val_str.size() > field_size)
-                throw Base::IOError(std::string(err_msg )+ ": number exceeds limit of " 
-                                    + std::to_string(field_size) + " allowed digits"); 
+                throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " + std::to_string(field_size) + " allowed digits");
 
-            os << val_str; 
+            os << val_str;
         }
 
         template <typename T>
-        void writeFloatNumber(std::ostream& os, std::size_t field_size, std::size_t prec, 
+        void writeFloatNumber(std::ostream& os, std::size_t field_size, std::size_t prec,
                               const T value, const char* err_msg = "Error")
         {
             std::ostringstream oss;
@@ -196,11 +195,10 @@ namespace CDPL
             std::string val_str = oss.str();
 
             if (val_str.size() > field_size)
-                throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " 
-                                    + std::to_string(field_size) + " allowed characters"); 
-            os << val_str; 
+                throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " + std::to_string(field_size) + " allowed characters");
+            os << val_str;
         }
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 #endif // CDPL_INTERNAL_STRINGDATAIOUTILITIES_HPP

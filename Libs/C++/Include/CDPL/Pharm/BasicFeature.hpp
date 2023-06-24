@@ -33,10 +33,10 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Pharm 
+    namespace Pharm
     {
 
         class BasicPharmacophore;
@@ -53,9 +53,9 @@ namespace CDPL
             const Pharmacophore& getPharmacophore() const;
 
             Pharmacophore& getPharmacophore();
-    
+
             std::size_t getIndex() const;
-        
+
             /**
              * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
              * \param feature The feature whose properties get copied.
@@ -67,7 +67,7 @@ namespace CDPL
 
           private:
             BasicFeature(BasicPharmacophore* pharm);
-        
+
             BasicFeature(const BasicFeature& feature);
 
             ~BasicFeature();
@@ -77,7 +77,7 @@ namespace CDPL
             BasicPharmacophore* pharm;
             std::size_t         index;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_BASICFEATURE_HPP

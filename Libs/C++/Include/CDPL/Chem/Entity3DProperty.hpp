@@ -32,27 +32,27 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
     {
 
-    class LookupKey;
+        class LookupKey;
     }
 
     namespace Chem
     {
 
-    /**
+        /**
      * \brief Provides keys for built-in Chem::Entity3D properties.
      */
-    namespace Entity3DProperty
-    {
+        namespace Entity3DProperty
+        {
 
-        extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D;
-    }
-    }
-}
+            extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D;
+        }
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP

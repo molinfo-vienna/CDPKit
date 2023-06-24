@@ -33,7 +33,7 @@
 #include "CDPL/Util/MultiMap.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -57,13 +57,14 @@ namespace CDPL
             typedef std::shared_ptr<Entity3DMapping> SharedPointer;
 
             Entity3DMapping();
-            
+
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "Entity3DMapping";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ENTITY3DMAPPING_HPP

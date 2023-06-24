@@ -36,7 +36,7 @@
 #include "CFLFragmentLibraryEntryReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -45,18 +45,18 @@ namespace CDPL
         class CFLDataReader
         {
 
-        public:
+          public:
             CFLDataReader(const Base::ControlParameterContainer& ctrl_params);
 
             bool readMolecule(std::istream& is, Chem::Molecule& mol);
-        
+
             bool skipMolecule(std::istream& is);
 
             bool hasMoreData(std::istream& is);
 
-        private:
+          private:
             typedef std::vector<Chem::Atom*> AtomList;
-            
+
             const Base::ControlParameterContainer& ctrlParams;
             CFLFragmentLibraryEntryReader          entryReader;
             FragmentLibraryEntry                   entry;
@@ -66,7 +66,7 @@ namespace CDPL
             CanonicalFragment                      canonFragment;
             AtomList                               aromAtoms;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CDFDATAREADER_HPP

@@ -31,15 +31,15 @@ namespace CDPL
 
     namespace ForceField
     {
-        
-    namespace MMFF94DataFormat
-    {
-        
-        const char END_OF_LINE     = '\n';
-        const char END_OF_FILE     = '$';
-        const char COMMENT_PREFIX  = '*';
-    }
-    }
-}
+
+        namespace MMFF94DataFormat
+        {
+
+            const char END_OF_LINE    = '\n';
+            const char END_OF_FILE    = '$';
+            const char COMMENT_PREFIX = '*';
+        } // namespace MMFF94DataFormat
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94DATAFORMAT_HPP

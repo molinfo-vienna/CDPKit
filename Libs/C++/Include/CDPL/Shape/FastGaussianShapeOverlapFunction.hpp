@@ -35,31 +35,31 @@
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
 
         class GaussianProductList;
-        
+
         class CDPL_SHAPE_API FastGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
         {
-            
+
           public:
             static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.4;
-            
+
             typedef std::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
 
             FastGaussianShapeOverlapFunction();
 
             FastGaussianShapeOverlapFunction(const FastGaussianShapeOverlapFunction& func);
-            
+
             FastGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
                                              const GaussianShapeFunction& ovl_shape_func);
 
             ~FastGaussianShapeOverlapFunction();
-        
+
             void proximityOptimization(bool enable);
 
             bool proximityOptimization() const;
@@ -67,7 +67,7 @@ namespace CDPL
             void setRadiusScalingFactor(double factor);
 
             double getRadiusScalingFactor() const;
-            
+
             void fastExpFunction(bool enable);
 
             bool fastExpFunction() const;
@@ -85,9 +85,9 @@ namespace CDPL
             const ColorFilterFunction& getColorFilterFunction() const;
 
             double calcSelfOverlap(bool ref) const;
-                        
+
             double calcColorSelfOverlap(bool ref) const;
-            
+
             double calcOverlap() const;
 
             double calcColorOverlap() const;
@@ -99,21 +99,21 @@ namespace CDPL
             double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
             FastGaussianShapeOverlapFunction& operator=(const FastGaussianShapeOverlapFunction& func);
-            
+
           private:
             bool checkShapeFuncsNotNull() const;
-        
-            double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+
+            double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                bool color) const;
-            double calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+            double calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                     bool color) const;
-            double calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+            double calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                       bool color) const;
-            double calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+            double calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                         bool color) const;
-            double calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+            double calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                                bool color) const;
-            
+
             double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                const Math::Vector3DArray& coords, bool color) const;
             double calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
@@ -124,7 +124,7 @@ namespace CDPL
                                         const Math::Vector3DArray& coords, bool color) const;
             double calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                                const Math::Vector3DArray& coords, bool color) const;
-            
+
             double calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
                                        const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
             double calcOverlapGradientExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
@@ -144,7 +144,7 @@ namespace CDPL
             bool                         fastExpFunc;
             double                       radScalingFact;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_FASTGAUSSIANSHAPEOVERLAPFUNCTION_HPP

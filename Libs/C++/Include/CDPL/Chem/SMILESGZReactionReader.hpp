@@ -33,14 +33,14 @@
 #include "CDPL/Util/CompressedDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         typedef Util::CompressedDataReader<SMILESReactionReader, Util::GZipIStream> SMILESGZReactionReader;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMILESGZREACTIONREADER_HPP

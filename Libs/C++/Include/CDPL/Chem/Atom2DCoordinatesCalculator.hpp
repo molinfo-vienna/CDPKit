@@ -43,12 +43,12 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-     
+
         class Atom;
         class Bond;
         class MolecularGraph;
@@ -57,10 +57,10 @@ namespace CDPL
         /**
          * \brief Atom2DCoordinatesCalculator.
          */
-        class CDPL_CHEM_API Atom2DCoordinatesCalculator 
+        class CDPL_CHEM_API Atom2DCoordinatesCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %Atom2DCoordinatesCalculator instance.
              */
@@ -87,11 +87,11 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Math::Vector2DArray& coords);
 
-        private:
+          private:
             class RingInfo
             {
 
-            public:
+              public:
                 void init(const MolecularGraph*, const Fragment&, std::size_t, std::size_t);
 
                 const Fragment& getFragment() const;
@@ -100,23 +100,23 @@ namespace CDPL
                 const Util::BitSet& getBondMask() const;
 
                 double getPriority() const;
-                void setPriority(double);
+                void   setPriority(double);
 
                 std::size_t getSize() const;
 
-            private:
+              private:
                 const Fragment* fragment;
                 Util::BitSet    atomMask;
                 Util::BitSet    bondMask;
                 double          priority;
             };
-        
+
             class LGNode;
 
             class LGEdge
             {
 
-            public:
+              public:
                 enum Type
                 {
 
@@ -137,7 +137,7 @@ namespace CDPL
                 bool hasConfigConstraint() const;
                 bool configConstraintFulfilled(const Math::Vector2DArray&) const;
 
-            private:
+              private:
                 bool initConfigInfo();
 
                 const MolecularGraph* molGraph;
@@ -153,12 +153,12 @@ namespace CDPL
 
             typedef std::vector<std::size_t> AtomIndexList;
             typedef std::vector<const Bond*> BondList;
-            typedef std::vector<LGNode*> NodeList;
+            typedef std::vector<LGNode*>     NodeList;
 
             class LGNode
             {
 
-            public:
+              public:
                 enum Type
                 {
 
@@ -190,7 +190,7 @@ namespace CDPL
 
                 virtual std::size_t getChainID() const = 0;
 
-                virtual void layout() = 0;
+                virtual void layout()                                                               = 0;
                 virtual bool layout(double, const Math::Vector2D&, std::size_t&, std::size_t, bool) = 0;
 
                 virtual bool layoutChildNodes(std::size_t&, std::size_t, bool) = 0;
@@ -201,7 +201,7 @@ namespace CDPL
 
                 virtual bool setParentEdge(const LGEdge*, Direction) = 0;
 
-            protected:
+              protected:
                 std::size_t countAtomCollisions(const AtomIndexList&, const AtomIndexList&, const Math::Vector2DArray&);
                 std::size_t countAtomCollisionsForAtom(std::size_t, const AtomIndexList&, const Math::Vector2DArray&);
 
@@ -219,14 +219,15 @@ namespace CDPL
                 struct NodeLayoutInfo
                 {
 
-                    NodeLayoutInfo(const LGEdge* edge, double angle): edge(edge), angle(angle) {}
+                    NodeLayoutInfo(const LGEdge* edge, double angle):
+                        edge(edge), angle(angle) {}
 
                     const LGEdge* edge;
                     double        angle;
                 };
 
                 typedef std::vector<NodeLayoutInfo> NodeLayoutInfoList;
-                typedef std::pair<double, double> AngleRange;
+                typedef std::pair<double, double>   AngleRange;
 
                 class EdgePriorityGreaterCmpFunc;
 
@@ -238,14 +239,14 @@ namespace CDPL
                 const MolecularGraph* molGraph;
             };
 
-            typedef std::list<RingInfo*> RingInfoList;
+            typedef std::list<RingInfo*>       RingInfoList;
             typedef std::vector<const LGEdge*> EdgeList;
 
             class RingSysNode : public LGNode
             {
 
-            public:
-                void init(const MolecularGraph*, const RingInfo*, Math::Vector2DArray&, 
+              public:
+                void init(const MolecularGraph*, const RingInfo*, Math::Vector2DArray&,
                           AtomIndexList&, BondList&);
 
                 const Util::BitSet& getAtomMask() const;
@@ -276,7 +277,7 @@ namespace CDPL
 
                 bool setParentEdge(const LGEdge*, Direction);
 
-            private:
+              private:
                 bool layoutChildNodes(double, double, bool, double, std::size_t&, std::size_t, bool);
                 bool layoutChildNodes(std::size_t, std::size_t&, std::size_t, bool);
 
@@ -317,55 +318,55 @@ namespace CDPL
                 double calcCongestionFactor(const Math::Vector2D&) const;
                 double calcCongestionFactor(const Math::Vector2D&, const Util::BitSet&) const;
 
-                typedef std::vector<const RingInfo*> RingInfoList;
-                typedef std::list<const RingInfo*> RingLayoutQueue;
-                typedef std::map<const Atom*, EdgeList> EdgeListMap;
-                typedef std::map<const Atom*, AngleRange> AngleRangeMap;
-                typedef std::deque<std::size_t> RingSegment;
+                typedef std::vector<const RingInfo*>                  RingInfoList;
+                typedef std::list<const RingInfo*>                    RingLayoutQueue;
+                typedef std::map<const Atom*, EdgeList>               EdgeListMap;
+                typedef std::map<const Atom*, AngleRange>             AngleRangeMap;
+                typedef std::deque<std::size_t>                       RingSegment;
                 typedef std::vector<std::vector<NodeLayoutInfoList> > NodeLayoutInfoListTable;
-                typedef std::vector<std::size_t> LayoutIndexTable;
-                typedef std::vector<const Atom*> AtomTable;
-                typedef std::vector<Math::Vector2D> EnergyDerivativeTable;
-                typedef std::vector<double> WeightFactorTable;
+                typedef std::vector<std::size_t>                      LayoutIndexTable;
+                typedef std::vector<const Atom*>                      AtomTable;
+                typedef std::vector<Math::Vector2D>                   EnergyDerivativeTable;
+                typedef std::vector<double>                           WeightFactorTable;
 
-                Util::BitSet             atomMask;
-                Util::BitSet             bondMask;
-                Util::BitSet             procAtomMask;
-                Util::BitSet             tmpBitMask;
-                double                   priority;
-                RingInfoList             ringList;
-                RingLayoutQueue          ringLayoutQueue;
-                RingSegment              ringSegment;    
-                EdgeListMap              edgeListMap;
-                AngleRangeMap            freeSweepMap;
-                AtomIndexList            atomList;        
-                BondList                 bondList;
-                AtomIndexList*           procAtomList;
-                BondList*                procBondList;
-                Math::Vector2DArray      localCoords;
-                Math::Vector2DArray*     outputCoords;
-                const LGEdge*            parentEdge;
-                const Atom*              parentEdgeAtom;
-                EdgeList                 parentEdgeAtomEdges;
-                NodeLayoutInfoListTable  childLayouts;
-                LayoutIndexTable         childLayoutIndexTable;
-                AtomTable                edgeAtomTable;
-                Math::Vector2D           parentPos;
-                std::size_t              rsysLayoutIndex;
-                double                   parentEdgeAngle;
-                double                   rsysRotAngle;
-                double                   rsysAxisAngle;
-                bool                     flipped;
-                WeightFactorTable        layoutWeightFactors;
-                EnergyDerivativeTable    layoutEnergyDerivatives;
-                Math::DMatrix            layoutAtomDistances;
-                Math::DMatrix            layoutSpringStrengths;
+                Util::BitSet            atomMask;
+                Util::BitSet            bondMask;
+                Util::BitSet            procAtomMask;
+                Util::BitSet            tmpBitMask;
+                double                  priority;
+                RingInfoList            ringList;
+                RingLayoutQueue         ringLayoutQueue;
+                RingSegment             ringSegment;
+                EdgeListMap             edgeListMap;
+                AngleRangeMap           freeSweepMap;
+                AtomIndexList           atomList;
+                BondList                bondList;
+                AtomIndexList*          procAtomList;
+                BondList*               procBondList;
+                Math::Vector2DArray     localCoords;
+                Math::Vector2DArray*    outputCoords;
+                const LGEdge*           parentEdge;
+                const Atom*             parentEdgeAtom;
+                EdgeList                parentEdgeAtomEdges;
+                NodeLayoutInfoListTable childLayouts;
+                LayoutIndexTable        childLayoutIndexTable;
+                AtomTable               edgeAtomTable;
+                Math::Vector2D          parentPos;
+                std::size_t             rsysLayoutIndex;
+                double                  parentEdgeAngle;
+                double                  rsysRotAngle;
+                double                  rsysAxisAngle;
+                bool                    flipped;
+                WeightFactorTable       layoutWeightFactors;
+                EnergyDerivativeTable   layoutEnergyDerivatives;
+                Math::DMatrix           layoutAtomDistances;
+                Math::DMatrix           layoutSpringStrengths;
             };
 
             class AtomNode : public LGNode
             {
 
-            public:
+              public:
                 void init(const MolecularGraph*, const Atom*, double, Math::Vector2DArray&, AtomIndexList&, BondList&);
 
                 void addEdge(const Atom*, const LGEdge*);
@@ -392,15 +393,16 @@ namespace CDPL
 
                 bool setParentEdge(const LGEdge*, Direction);
 
-            private:
+              private:
                 struct LayoutParameters
                 {
 
-                    LayoutParameters(std::size_t num_colls): numCollisions(num_colls) {}
+                    LayoutParameters(std::size_t num_colls):
+                        numCollisions(num_colls) {}
 
                     std::size_t numCollisions;
-                    double      bondLength; 
-                    double      edgeAngle; 
+                    double      bondLength;
+                    double      edgeAngle;
                 };
 
                 void layout(double, double, const Math::Vector2D&, std::size_t, std::size_t, LayoutParameters&);
@@ -442,7 +444,7 @@ namespace CDPL
             };
 
             typedef std::pair<Math::Vector2D, Math::Vector2D> BoundingBox;
-            
+
             Atom2DCoordinatesCalculator(const Atom2DCoordinatesCalculator&);
 
             Atom2DCoordinatesCalculator& operator=(const Atom2DCoordinatesCalculator&);
@@ -482,23 +484,23 @@ namespace CDPL
             LGEdge* allocEdge(const Atom*, LGNode*, LGNode*);
             LGEdge* allocEdge(const Bond*, LGNode*, LGNode*);
 
-            RingInfo* allocRingInfo(const Fragment&);
+            RingInfo*    allocRingInfo(const Fragment&);
             RingSysNode* allocRingSysNode(const RingInfo*, Math::Vector2DArray&);
 
             AtomNode* allocAtomNode(const Atom*, Math::Vector2DArray&);
 
-              void freeAllocEdges();
-              void freeAllocRingInfos();
-              void freeAllocRingSysNodes();
-              void freeAllocAtomNodes();
+            void freeAllocEdges();
+            void freeAllocRingInfos();
+            void freeAllocRingSysNodes();
+            void freeAllocAtomNodes();
 
-            typedef std::vector<AtomNode*> AtomNodeList;
-            typedef std::vector<std::size_t> AtomPriorityTable;
-            typedef Util::ObjectStack<RingInfo> RingInfoCache;
+            typedef std::vector<AtomNode*>         AtomNodeList;
+            typedef std::vector<std::size_t>       AtomPriorityTable;
+            typedef Util::ObjectStack<RingInfo>    RingInfoCache;
             typedef Util::ObjectStack<RingSysNode> RingSysNodeCache;
-            typedef Util::ObjectStack<AtomNode> AtomNodeCache;
-            typedef Util::ObjectStack<LGEdge> EdgeCache;
-            typedef std::vector<RingSysNode*> RingSysNodeList;
+            typedef Util::ObjectStack<AtomNode>    AtomNodeCache;
+            typedef Util::ObjectStack<LGEdge>      EdgeCache;
+            typedef std::vector<RingSysNode*>      RingSysNodeList;
 
             const MolecularGraph* molGraph;
             RingInfoCache         ringInfoCache;
@@ -527,7 +529,7 @@ namespace CDPL
             std::size_t           maxNumLayoutCollisions;
             std::size_t           backtrackingCount;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOM2DCOORDINATESCALCULATOR_HPP

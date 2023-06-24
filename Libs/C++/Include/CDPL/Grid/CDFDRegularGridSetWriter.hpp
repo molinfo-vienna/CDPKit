@@ -37,7 +37,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_GRID_API CDFDRegularGridSetWriter : public Base::DataWriter<DRegularGridSet>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %CDFDRegularGridSetWriter instance that will write data of spatial regular grids to the output
              *        stream \a os.
@@ -71,10 +71,10 @@ namespace CDPL
              */
             Base::DataWriter<DRegularGridSet>& write(const DRegularGridSet& grid_set);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             typedef std::auto_ptr<CDFRegularGridSetDataWriter> CDFDataWriterPtr;
 
             CDFDRegularGridSetWriter(const CDFDRegularGridSetWriter&);
@@ -85,7 +85,7 @@ namespace CDPL
             bool             state;
             CDFDataWriterPtr writer;
         };
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFDREGULARGRIDSETWRITER_HPP

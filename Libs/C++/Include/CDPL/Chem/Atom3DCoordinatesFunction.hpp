@@ -34,7 +34,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -46,7 +46,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined atom 3D-coordinates function.
          */
         typedef std::function<const Math::Vector3D&(const Chem::Atom&)> Atom3DCoordinatesFunction;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOM3DCOORDINATESFUNCTION_HPP

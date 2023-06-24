@@ -33,7 +33,7 @@
 #include "CDPL/Vis/Color.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -49,7 +49,7 @@ namespace CDPL
         class CDPL_VIS_API Brush
         {
 
-        public:
+          public:
             /**
              *\brief Defines constants for supported fill pattern styles.
              */
@@ -100,12 +100,12 @@ namespace CDPL
                  * \brief Specifies a pattern with \e 93.75% uniformly distributed transparent pixels.  
                  */
                 DENSE7_PATTERN,
-                
+
                 /**
                  * \brief Specifies a pattern with equidistant horizontal lines. 
                  */
                 H_PATTERN,
-                
+
                 /**
                  * \brief Specifies a pattern with equidistant vertical lines. 
                  */
@@ -136,51 +136,51 @@ namespace CDPL
              * \brief Constructs a brush with fill pattern style Brush::NO_PATTERN and color Color::BLACK.
              */
             Brush();
-            
+
             /**
              * \brief Constructs a brush with the specified fill pattern style and the color Color::BLACK.
              * \param style The style of the fill pattern.
              */
-            Brush(Style style); 
+            Brush(Style style);
 
             /**
              * \brief Constructs a brush with the specified fill pattern style and color.
              * \param color The fill pattern color.
              * \param style The fill pattern style .
              */
-            Brush(const Color& color, Style style = SOLID_PATTERN); 
+            Brush(const Color& color, Style style = SOLID_PATTERN);
 
             /**
              * \brief Sets the fill pattern style.
              * \param style The the fill pattern style.
              */
-            void setStyle(Style style); 
+            void setStyle(Style style);
 
             /**
              * \brief Returns the fill pattern style.
              * \return The fill pattern style.
              */
-            Style getStyle() const; 
+            Style getStyle() const;
 
             /**
              * \brief Sets the fill pattern color.
              * \param color The fill pattern color.
              */
-            void setColor(const Color& color); 
+            void setColor(const Color& color);
 
             /**
              * \brief Returns the fill pattern color.
              * \return The fill pattern color.
              */
-            const Color& getColor() const; 
-    
+            const Color& getColor() const;
+
             /**
              * \brief Equality comparison operator.
              * \param brush The other \c %Brush object to be compared with.
              * \return \c true if the style and color attributes compare equal, and \c false otherwise.
              */
             bool operator==(const Brush& brush) const;
-        
+
             /**
              * \brief Inequality comparison operator.
              *
@@ -191,11 +191,11 @@ namespace CDPL
              */
             bool operator!=(const Brush& brush) const;
 
-        private:
+          private:
             Style style;
             Color color;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_BRUSH_HPP

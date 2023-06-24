@@ -35,7 +35,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_CHEM_API BondDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondDirectionMatchExpression instances.
              */
@@ -87,15 +87,15 @@ namespace CDPL
              * \note If no valid query direction flags were specified or \a target_bond_dir does not hold a value, the method will return \c true -
              *       irrespective of matching mode and actual target bond direction!
              */
-            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
+            bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph,
                             const Bond& target_bond, const MolecularGraph& target_molgraph,
                             const AtomBondMapping& mapping, const Base::Any& target_bond_dir) const;
 
-        private:
+          private:
             unsigned int dirFlags;
             bool         notMatch;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDDIRECTIONMATCHEXPRESSION_HPP

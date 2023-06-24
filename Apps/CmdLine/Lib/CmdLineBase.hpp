@@ -39,25 +39,25 @@
 namespace CmdLineLib
 {
 
-    class CmdLineBase 
+    class CmdLineBase
     {
 
-    public:
+      public:
         CmdLineBase();
 
         virtual ~CmdLineBase() {}
 
         int run(int argc, char* argv[]);
 
-    protected:
+      protected:
         enum VerbosityLevel
         {
-        
-           QUIET   = -1,
-           ERROR   = 0,
-           INFO    = 1,
-           VERBOSE = 2,
-           DEBUG   = 3,
+
+            QUIET   = -1,
+            ERROR   = 0,
+            INFO    = 1,
+            VERBOSE = 2,
+            DEBUG   = 3,
         };
 
         static bool termSignalCaught();
@@ -94,10 +94,10 @@ namespace CmdLineLib
 
         void throwValidationError(const std::string& opt_name) const;
 
-        template <typename T> 
+        template <typename T>
         static boost::program_options::typed_value<T>* value();
 
-        template <typename T> 
+        template <typename T>
         static boost::program_options::typed_value<T>* value(T* v);
 
         static boost::program_options::typed_value<bool>* boolSwitch();
@@ -108,10 +108,10 @@ namespace CmdLineLib
         virtual const char* getProgCopyright() const;
         virtual const char* getProgAboutText() const;
 
-        virtual void init() {};
-        virtual void processOptions() {};
-    
-    private:
+        virtual void init(){};
+        virtual void processOptions(){};
+
+      private:
         typedef boost::program_options::option_description OptionDescription;
 
         void setVerbosityLevel(const std::string& level);
@@ -132,9 +132,9 @@ namespace CmdLineLib
         const OptionDescription* getOptionDescriptor(const std::string& name) const;
 
         typedef boost::program_options::options_description OptionsDescription;
-        typedef boost::program_options::variables_map VariablesMap;
-        typedef std::map<std::string, std::string> StringMap;
-        typedef CDPL::Internal::Timer Timer;
+        typedef boost::program_options::variables_map       VariablesMap;
+        typedef std::map<std::string, std::string>          StringMap;
+        typedef CDPL::Internal::Timer                       Timer;
 
         OptionsDescription optOptions;
         OptionsDescription mandOptions;
@@ -163,17 +163,17 @@ namespace CmdLineLib
         return parsedOptions[name].as<T>();
     }
 
-    template <typename T> 
-    boost::program_options::typed_value<T>*    CmdLineBase::value()
+    template <typename T>
+    boost::program_options::typed_value<T>* CmdLineBase::value()
     {
         return boost::program_options::value<T>();
     }
 
-    template <typename T> 
-    boost::program_options::typed_value<T>*    CmdLineBase::value(T* v)
+    template <typename T>
+    boost::program_options::typed_value<T>* CmdLineBase::value(T* v)
     {
         return boost::program_options::value(v);
     }
-}
+} // namespace CmdLineLib
 
 #endif // CMDLINE_LIB_CMDLINEBASE_HPP

@@ -35,42 +35,45 @@ namespace CDPLPythonMath
 {
 
     template <typename EDT, typename WDT>
-    class ConstGridExpressionAdapter : 
-        public ConstGridExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
+    class ConstGridExpressionAdapter : public ConstGridExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
     {
 
-    public:
-        typedef EDT HeldExpressionDataType;
-        typedef WDT KeepAliveWardDataType;
+      public:
+        typedef EDT                                         HeldExpressionDataType;
+        typedef WDT                                         KeepAliveWardDataType;
         typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-        typedef typename HeldExpressionType::ValueType ValueType;
-        typedef ConstGridExpression<ValueType> ExpressionType;
-        typedef typename ExpressionType::ConstReference ConstReference;
-        typedef typename ExpressionType::SizeType SizeType;
-        typedef typename ExpressionType::SharedPointer ConstExpressionPointer;
+        typedef typename HeldExpressionType::ValueType      ValueType;
+        typedef ConstGridExpression<ValueType>              ExpressionType;
+        typedef typename ExpressionType::ConstReference     ConstReference;
+        typedef typename ExpressionType::SizeType           SizeType;
+        typedef typename ExpressionType::SharedPointer      ConstExpressionPointer;
 
         ConstGridExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-        
-        ~ConstGridExpressionAdapter() {} 
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {}
 
-        ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+        ~ConstGridExpressionAdapter() {}
+
+        ConstReference operator()(SizeType i, SizeType j, SizeType k) const
+        {
             return boost::unwrap_ref(exprData)(i, j, k);
         }
 
-        SizeType getSize1() const {
+        SizeType getSize1() const
+        {
             return boost::unwrap_ref(exprData).getSize1();
         }
 
-        SizeType getSize2() const {
+        SizeType getSize2() const
+        {
             return boost::unwrap_ref(exprData).getSize2();
         }
 
-        SizeType getSize3() const {
+        SizeType getSize3() const
+        {
             return boost::unwrap_ref(exprData).getSize3();
         }
 
-    private:
+      private:
         HeldExpressionDataType exprData;
         KeepAliveWardDataType  keepAliveWardData;
     };
@@ -79,45 +82,51 @@ namespace CDPLPythonMath
     class GridExpressionAdapter : public GridExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
     {
 
-    public:
-        typedef EDT HeldExpressionDataType;
-        typedef WDT KeepAliveWardDataType;
-        typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-        typedef typename HeldExpressionType::ValueType ValueType;
-        typedef GridExpression<ValueType> ExpressionType;
-        typedef typename ExpressionType::ConstExpressionType ConstExpressionType;
-        typedef typename ExpressionType::ConstReference ConstReference;
-        typedef typename ExpressionType::Reference Reference;
-        typedef typename ExpressionType::SizeType SizeType;
-        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+      public:
+        typedef EDT                                             HeldExpressionDataType;
+        typedef WDT                                             KeepAliveWardDataType;
+        typedef typename boost::unwrap_reference<EDT>::type     HeldExpressionType;
+        typedef typename HeldExpressionType::ValueType          ValueType;
+        typedef GridExpression<ValueType>                       ExpressionType;
+        typedef typename ExpressionType::ConstExpressionType    ConstExpressionType;
+        typedef typename ExpressionType::ConstReference         ConstReference;
+        typedef typename ExpressionType::Reference              Reference;
+        typedef typename ExpressionType::SizeType               SizeType;
+        typedef typename ExpressionType::SharedPointer          ExpressionPointer;
         typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
         GridExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-        
-        ~GridExpressionAdapter() {} 
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {}
 
-        ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+        ~GridExpressionAdapter() {}
+
+        ConstReference operator()(SizeType i, SizeType j, SizeType k) const
+        {
             return boost::unwrap_ref(exprData)(i, j, k);
         }
 
-        Reference operator()(SizeType i, SizeType j, SizeType k) {
+        Reference operator()(SizeType i, SizeType j, SizeType k)
+        {
             return boost::unwrap_ref(exprData)(i, j, k);
         }
 
-        SizeType getSize1() const {
+        SizeType getSize1() const
+        {
             return boost::unwrap_ref(exprData).getSize1();
         }
 
-        SizeType getSize2() const {
+        SizeType getSize2() const
+        {
             return boost::unwrap_ref(exprData).getSize2();
         }
 
-        SizeType getSize3() const {
+        SizeType getSize3() const
+        {
             return boost::unwrap_ref(exprData).getSize3();
         }
 
-        GridExpressionAdapter& operator=(const ConstExpressionType& e) {
+        GridExpressionAdapter& operator=(const ConstExpressionType& e)
+        {
             if (this == &e)
                 return *this;
 
@@ -125,27 +134,31 @@ namespace CDPLPythonMath
             return *this;
         }
 
-        GridExpressionAdapter& operator+=(const ConstExpressionType& e) {
+        GridExpressionAdapter& operator+=(const ConstExpressionType& e)
+        {
             boost::unwrap_ref(exprData) += e;
             return *this;
         }
-        
-        GridExpressionAdapter& operator-=(const ConstExpressionType& e) {
+
+        GridExpressionAdapter& operator-=(const ConstExpressionType& e)
+        {
             boost::unwrap_ref(exprData) -= e;
             return *this;
         }
-        
-        GridExpressionAdapter& operator*=(const ValueType& t) {
+
+        GridExpressionAdapter& operator*=(const ValueType& t)
+        {
             boost::unwrap_ref(exprData) *= t;
             return *this;
         }
-        
-        GridExpressionAdapter& operator/=(const ValueType& t) {
+
+        GridExpressionAdapter& operator/=(const ValueType& t)
+        {
             boost::unwrap_ref(exprData) /= t;
             return *this;
         }
 
-    private:
+      private:
         HeldExpressionDataType exprData;
         KeepAliveWardDataType  keepAliveWardData;
     };
@@ -153,8 +166,8 @@ namespace CDPLPythonMath
 
     template <typename EDT, typename WDT>
     inline
-    typename ConstGridExpressionAdapter<EDT, WDT>::ConstExpressionPointer 
-    makeConstGridExpressionAdapter(const EDT& e, const WDT& ward)
+        typename ConstGridExpressionAdapter<EDT, WDT>::ConstExpressionPointer
+        makeConstGridExpressionAdapter(const EDT& e, const WDT& ward)
     {
         typedef typename ConstGridExpressionAdapter<EDT, WDT>::ConstExpressionPointer ExpressionPointerType;
 
@@ -163,13 +176,13 @@ namespace CDPLPythonMath
 
     template <typename EDT, typename WDT>
     inline
-    typename GridExpressionAdapter<EDT, WDT>::ExpressionPointer 
-    makeGridExpressionAdapter(const EDT& e, const WDT& ward)
+        typename GridExpressionAdapter<EDT, WDT>::ExpressionPointer
+        makeGridExpressionAdapter(const EDT& e, const WDT& ward)
     {
         typedef typename GridExpressionAdapter<EDT, WDT>::ExpressionPointer ExpressionPointerType;
 
         return ExpressionPointerType(new GridExpressionAdapter<EDT, WDT>(e, ward));
     }
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_GRIDEXPRESSIONADAPTER_HPP

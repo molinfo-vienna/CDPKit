@@ -35,28 +35,28 @@
 #include "CDPL/Chem/FragmentGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
 
-    /**
+        /**
      * \brief RECAPFragmentGenerator.
      * \see [\ref RECAP]
      */
-    class CDPL_CHEM_API RECAPFragmentGenerator : public FragmentGenerator 
-    {
+        class CDPL_CHEM_API RECAPFragmentGenerator : public FragmentGenerator
+        {
 
-      public:
-        typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
-        
-        /**
+          public:
+            typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
+
+            /**
          * \brief Constructs the \c %RECAPFragmentGenerator instance.
          */
-        RECAPFragmentGenerator();
-    };
-    }
-}
+            RECAPFragmentGenerator();
+        };
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RECAPFRAGMENTGENERATOR_HPP

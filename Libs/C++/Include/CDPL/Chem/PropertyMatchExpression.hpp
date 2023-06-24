@@ -34,7 +34,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,7 +56,7 @@ namespace CDPL
         class PropertyMatchExpression : public MatchExpression<ObjType1, ObjType2>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
              */
@@ -69,13 +69,13 @@ namespace CDPL
              * two arguments of type <tt>const ObjType1&</tt> and <tt>const ObjType2&</tt> (see [\ref FUNWRP]).
              */
             typedef std::function<ValueType(const ObjType1&, const ObjType2&)> PropertyFunction;
-    
+
             /**
              * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
              *        property values returned by \a property_func.
              * \param property_func A PropertyMatchExpression::PropertyFunction2 instance that wraps the specified property value accessor function.
              */
-            PropertyMatchExpression(const PropertyFunction& property_func): 
+            PropertyMatchExpression(const PropertyFunction& property_func):
                 value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
 
             /**
@@ -86,7 +86,7 @@ namespace CDPL
              */
             PropertyMatchExpression(const ValueType& value, const PropertyFunction& property_func):
                 value(value), matchFunc(), propertyFunc(property_func), fixed(true) {}
-    
+
             /**
              * \brief Checks whether the value of the target object propery matches the query property value.
              *
@@ -101,14 +101,14 @@ namespace CDPL
              * \return \c true if the target property value matches the query property value under the conditions defined by \a MatchFunc,
              *         and \c false otherwise.
              */
-            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, 
+            bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1,
                             const ObjType2& target_obj2, const Base::Any& aux_data) const;
 
-        private:
-            ValueType         value;
-            MatchFunc         matchFunc;
-            PropertyFunction  propertyFunc;
-            bool              fixed;
+          private:
+            ValueType        value;
+            MatchFunc        matchFunc;
+            PropertyFunction propertyFunc;
+            bool             fixed;
         };
 
         /**
@@ -125,12 +125,12 @@ namespace CDPL
         class PropertyMatchExpression<ValueType, MatchFunc, ObjType, void> : public MatchExpression<ObjType, void>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
              */
             typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
-    
+
             /**
              * \brief Type of the generic functor class used to store user-defined property accessor functions.
              *
@@ -138,13 +138,13 @@ namespace CDPL
              * an argument of type <tt>const ObjType&</tt> (see [\ref FUNWRP]).
              */
             typedef std::function<ValueType(const ObjType&)> PropertyFunction;
-        
+
             /**
              * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
              *        property values returned by \a property_func.
              * \param property_func A PropertyMatchExpression::PropertyFunction instance that wraps the specified property value accessor function.
              */
-            PropertyMatchExpression(const PropertyFunction& property_func): 
+            PropertyMatchExpression(const PropertyFunction& property_func):
                 value(), matchFunc(), propertyFunc(property_func), fixed(false) {}
 
             /**
@@ -170,22 +170,22 @@ namespace CDPL
              */
             bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
-        private:
-            ValueType         value;
-            MatchFunc         matchFunc;
-            PropertyFunction  propertyFunc;
-            bool              fixed;
+          private:
+            ValueType        value;
+            MatchFunc        matchFunc;
+            PropertyFunction propertyFunc;
+            bool             fixed;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ValueType, typename MatchFunc, typename ObjType1, typename ObjType2>
 bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
-                                                                                                      const ObjType1& target_obj1, const ObjType2& target_obj2,
-                                                                                                      const Base::Any&) const
+                                                                                               const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                                               const Base::Any&) const
 {
     if (fixed)
         return matchFunc(propertyFunc(target_obj1, target_obj2), value);
@@ -196,7 +196,7 @@ bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType
 
 template <typename ValueType, typename MatchFunc, typename ObjType>
 bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
-                                                                                                 const Base::Any&) const
+                                                                                          const Base::Any&) const
 {
     if (fixed)
         return matchFunc(propertyFunc(target_obj), value);

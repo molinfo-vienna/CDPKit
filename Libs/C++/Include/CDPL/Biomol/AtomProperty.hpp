@@ -65,8 +65,8 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
             extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
             extern CDPL_BIOMOL_API const Base::LookupKey B_FACTOR;
-        }
-    }
-}
+        } // namespace AtomProperty
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_ATOMPROPERTY_HPP

@@ -37,7 +37,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -50,32 +50,32 @@ namespace CDPL
         class FileDataWriter : public Base::DataWriter<DataType>
         {
 
-        public:
-            FileDataWriter(const std::string& file_name, 
-                           std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary); 
+          public:
+            FileDataWriter(const std::string&      file_name,
+                           std::ios_base::openmode mode = std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary);
 
             FileDataWriter& write(const DataType& obj);
-        
+
             void close();
-        
+
             operator const void*() const;
-        
+
             bool operator!() const;
 
-        private:
-            std::fstream  stream;
-            std::string   fileName;
-            WriterImpl    writer;
+          private:
+            std::fstream stream;
+            std::string  fileName;
+            WriterImpl   writer;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename WriterImpl, typename DataType>
-CDPL::Util::FileDataWriter<WriterImpl, DataType>::FileDataWriter(const std::string& file_name, std::ios_base::openmode mode): 
-    stream(file_name.c_str(), mode), fileName(file_name), writer(stream) 
+CDPL::Util::FileDataWriter<WriterImpl, DataType>::FileDataWriter(const std::string& file_name, std::ios_base::openmode mode):
+    stream(file_name.c_str(), mode), fileName(file_name), writer(stream)
 {
     writer.setParent(this);
     writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));

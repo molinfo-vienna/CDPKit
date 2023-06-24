@@ -46,28 +46,28 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         DataSetPrinter(const Settings&, const DataSet&);
 
         void print(QWidget* caller, QPrinter& printer);
-        void printPage(QPainter& painter, int page_no, int num_pages, int page_offs, 
+        void printPage(QPainter& painter, int page_no, int num_pages, int page_offs,
                        double width, double height, int num_rows, int num_cols);
-        
-    signals:
+
+      signals:
         void errorMessage(const QString&);
         void statusMessage(const QString&);
 
-    private:
+      private:
         void drawFrame(QPainter& painter, double width, double height) const;
-        void drawTextLabels(QPainter& painter, int page_no, int num_pages, 
+        void drawTextLabels(QPainter& painter, int page_no, int num_pages,
                             double width, double& height) const;
 
         typedef std::vector<int> RecordIndexList;
 
-        const DataSet&   dataSet;
-        const Settings&  settings;
-        RecordIndexList  recordList;
+        const DataSet&  dataSet;
+        const Settings& settings;
+        RecordIndexList recordList;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_DATASETPRINTER_HPP

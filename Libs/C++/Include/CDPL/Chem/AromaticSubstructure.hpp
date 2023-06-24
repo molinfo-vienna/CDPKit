@@ -39,7 +39,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_CHEM_API AromaticSubstructure : public Fragment
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticSubstructure instances.
              */
@@ -76,11 +76,11 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
-            class RingDescriptor 
+          private:
+            class RingDescriptor
             {
 
-            public:
+              public:
                 typedef std::shared_ptr<RingDescriptor> SharedPointer;
 
                 RingDescriptor(const Fragment::SharedPointer&, const MolecularGraph&);
@@ -92,7 +92,7 @@ namespace CDPL
 
                 bool containsSubRing(const RingDescriptor&) const;
 
-            private:
+              private:
                 Fragment::SharedPointer ringPtr;
                 const RingDescriptor*   subRing1;
                 const RingDescriptor*   subRing2;
@@ -105,9 +105,9 @@ namespace CDPL
 
             void freeMemory();
 
-            typedef std::vector<RingDescriptor::SharedPointer> RingDescriptorList;
+            typedef std::vector<RingDescriptor::SharedPointer>               RingDescriptorList;
             typedef std::vector<std::pair<RingDescriptorList, std::size_t> > RingDescriptorListTable;
-            typedef std::set<Util::BitSet> BondMaskSet;
+            typedef std::set<Util::BitSet>                                   BondMaskSet;
 
             void init(const MolecularGraph&);
 
@@ -118,16 +118,16 @@ namespace CDPL
             void fuseRings(const RingDescriptor&, const RingDescriptor&, RingDescriptorList&);
 
             bool isAromatic(const RingDescriptor::SharedPointer&);
-    
-            Util::BitSet               aromBondMask;
-            Util::BitSet               ringBondMask;
-            Util::BitSet               tmpBondMask;
-            const MolecularGraph*      molGraph;
-            RingDescriptorListTable    ringDescrListTable;
-            BondMaskSet                uniqueRingSet;
-            bool                       finished;
+
+            Util::BitSet            aromBondMask;
+            Util::BitSet            ringBondMask;
+            Util::BitSet            tmpBondMask;
+            const MolecularGraph*   molGraph;
+            RingDescriptorListTable ringDescrListTable;
+            BondMaskSet             uniqueRingSet;
+            bool                    finished;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_AROMATICSUBSTRUCTURE_HPP

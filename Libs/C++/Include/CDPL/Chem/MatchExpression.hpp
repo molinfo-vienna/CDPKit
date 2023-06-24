@@ -32,7 +32,7 @@
 #include <memory>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -74,7 +74,7 @@ namespace CDPL
         class MatchExpression
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpression instances.
              */
@@ -96,7 +96,7 @@ namespace CDPL
              * \return The result of the expression evaluation for the specified query and target objects.
              * \note The default implementation returns \c true.
              */
-            virtual bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
+            virtual bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
                                     const Base::Any& aux_data) const;
 
             /**
@@ -111,7 +111,7 @@ namespace CDPL
              * \return The result of the expression evaluation for the specified query and target objects.
              * \note The default implementation returns the result of <tt>operator()(query_obj1, query_obj2, target_obj1, target_obj2, aux_data)</tt>.
              */
-            virtual bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
+            virtual bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
                                     const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
             /**
@@ -149,7 +149,7 @@ namespace CDPL
         class MatchExpression<ObjType, void>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpression instances.
              */
@@ -191,24 +191,24 @@ namespace CDPL
              */
             virtual bool requiresAtomBondMapping() const;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1&, const ObjType2&, 
-                                                                        const ObjType1&, const ObjType2&, 
-                                                                        const Base::Any&) const
+bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1&, const ObjType2&,
+                                                                 const ObjType1&, const ObjType2&,
+                                                                 const Base::Any&) const
 {
     return true;
 }
 
 template <typename ObjType1, typename ObjType2>
-bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
-                                                                        const ObjType1& target_obj1, const ObjType2& target_obj2, 
-                                                                        const AtomBondMapping&, const Base::Any& data) const
+bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+                                                                 const ObjType1& target_obj1, const ObjType2& target_obj2,
+                                                                 const AtomBondMapping&, const Base::Any&     data) const
 {
     return operator()(query_obj1, query_obj2, target_obj1, target_obj2, data);
 }
@@ -221,15 +221,15 @@ bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping() 
 
 
 template <typename ObjType>
-bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType&, const ObjType&, 
-                                                                   const Base::Any&) const
+bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType&, const ObjType&,
+                                                            const Base::Any&) const
 {
     return true;
 }
 
 template <typename ObjType>
-bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-                                                                   const AtomBondMapping&, const Base::Any& data) const
+bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+                                                            const AtomBondMapping&, const Base::Any& data) const
 {
     return operator()(query_obj, target_obj, data);
 }

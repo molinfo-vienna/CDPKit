@@ -39,13 +39,14 @@ namespace
     struct TestChangeListener
     {
 
-        TestChangeListener(): 
+        TestChangeListener():
             numParamChangedCalls(0), numParamRemovedCalls(0), numParentChangedCalls(0),
-            changedParamKey(RESET_KEY), removedParamKey(RESET_KEY)  {}
+            changedParamKey(RESET_KEY), removedParamKey(RESET_KEY) {}
 
-        void reset() {
-            numParamChangedCalls = 0;
-            numParamRemovedCalls = 0;
+        void reset()
+        {
+            numParamChangedCalls  = 0;
+            numParamRemovedCalls  = 0;
             numParentChangedCalls = 0;
 
             changedParamKey = RESET_KEY;
@@ -54,28 +55,31 @@ namespace
             changedParamValue = CDPL::Base::Any();
         }
 
-        void parameterChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& var) {
+        void parameterChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& var)
+        {
             numParamChangedCalls++;
-            changedParamKey = key;
-            changedParamValue = var; 
+            changedParamKey   = key;
+            changedParamValue = var;
         }
-        
-        void parameterRemoved(const CDPL::Base::LookupKey& key) {
+
+        void parameterRemoved(const CDPL::Base::LookupKey& key)
+        {
             numParamRemovedCalls++;
             removedParamKey = key;
         }
 
-        void parentChanged() {
+        void parentChanged()
+        {
             numParentChangedCalls++;
         }
-        
+
         std::size_t           numParamChangedCalls;
         std::size_t           numParamRemovedCalls;
         std::size_t           numParentChangedCalls;
         CDPL::Base::LookupKey changedParamKey;
         CDPL::Base::LookupKey removedParamKey;
-        CDPL::Base::Any   changedParamValue;
+        CDPL::Base::Any       changedParamValue;
     };
-}
+} // namespace
 
 #endif // CDPL_BASE_TEST_TESTCHANGELISTENER_HPP

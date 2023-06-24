@@ -40,16 +40,16 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API DGStructureGenerator
         {
 
-        public:
+          public:
             DGStructureGenerator();
 
             DGStructureGeneratorSettings& getSettings();
@@ -71,7 +71,7 @@ namespace CDPL
 
             const DGConstraintGenerator& getConstraintGenerator() const;
 
-        private:
+          private:
             void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
             typedef boost::random::mt11213b RandNumEngine;
@@ -83,7 +83,7 @@ namespace CDPL
             RandNumEngine                  randomEngine;
             DGStructureGeneratorSettings   settings;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_DGSTRUCTUREGENERATOR_HPP

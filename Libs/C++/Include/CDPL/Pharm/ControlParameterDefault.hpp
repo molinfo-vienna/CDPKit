@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -55,8 +55,8 @@ namespace CDPL
             extern CDPL_PHARM_API const ScreeningDBCreator::Mode PSD_CREATION_MODE;
 
             extern CDPL_PHARM_API const bool PSD_ALLOW_DUPLICATES;
-        }
-    }
-}
+        } // namespace ControlParameterDefault
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CONTROLPARAMETERDEFAULT_HPP

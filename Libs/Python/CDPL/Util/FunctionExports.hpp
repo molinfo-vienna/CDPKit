@@ -31,6 +31,6 @@ namespace CDPLPythonUtil
 
     void exportFileFunctions();
     void exportSequenceFunctions();
-}
+} // namespace CDPLPythonUtil
 
 #endif // CDPL_PYTHON_UTIL_FUNCTIONEXPORTS_HPP

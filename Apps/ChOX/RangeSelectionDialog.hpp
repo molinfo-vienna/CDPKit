@@ -41,25 +41,25 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         RangeSelectionDialog(QWidget*, DataSet&, Qt::WindowFlags = 0);
 
         int exec();
 
-    private slots:
+      private slots:
         void select();
         void unselect();
 
         void handleRangeStartChange(int);
         void handleRangeEndChange(int);
 
-    private:
+      private:
         void init();
 
         DataSet&  dataSet;
         QSpinBox* rangeStartSpinBox;
         QSpinBox* rangeEndSpinBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_RANGESELECTIONDIALOG_HPP

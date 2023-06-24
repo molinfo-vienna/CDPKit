@@ -35,12 +35,12 @@
 #include "CDPL/Chem/AtomPredicate.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class Molecule;
         class MolecularGraph;
 
@@ -76,8 +76,7 @@ namespace CDPL
         CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 
         CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLECULEFUNCTIONS_HPP
- 

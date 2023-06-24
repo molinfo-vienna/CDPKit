@@ -40,7 +40,7 @@
 #include "CDPL/Chem/AtomContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -55,7 +55,7 @@ namespace CDPL
         {
 
             typedef std::vector<Atom*> AtomList;
-            
+
           public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ElectronSystem instances.
@@ -82,7 +82,7 @@ namespace CDPL
              * \return The number of atoms.
              */
             std::size_t getNumAtoms() const;
-        
+
             /**
              * \brief Tells whether the specified atom is part of the electron system.
              * \param atom The atom to look for.
@@ -125,7 +125,7 @@ namespace CDPL
              * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
              */
             AtomIterator getAtomsBegin();
-            
+
             /**
              * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom objects.
              * \return A constant iterator pointing to the end of the stored \c const Chem::Atom objects.
@@ -137,7 +137,7 @@ namespace CDPL
              * \return A mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
              */
             AtomIterator getAtomsEnd();
-        
+
             /**
              * \brief Removes all atoms.
              */
@@ -167,7 +167,7 @@ namespace CDPL
              * \return \c true if the electron system was extended by atoms from \a elec_sys and \c false, otherwise.
              */
             bool addAtoms(const ElectronSystem& elec_sys);
-        
+
             /**
              * \brief Removes the atom at the specified index.
              * \param idx The zero-based index of the atom to remove.
@@ -190,7 +190,7 @@ namespace CDPL
              * \return \c true if the atom was part of the electron system and has been removed, and \c false otherwise.
              */
             bool removeAtom(const Atom& atom);
-        
+
             /**
              * \brief Returns the total number of electrons contributed by the involved atoms.
              * \return The total electron count of this system.
@@ -266,16 +266,16 @@ namespace CDPL
              * \param elec_sys The other \c %ElectronSystem instance.
              */
             void swap(ElectronSystem& elec_sys);
-        
+
           private:
-            typedef std::pair<std::size_t, std::size_t> UIPair;
+            typedef std::pair<std::size_t, std::size_t>     UIPair;
             typedef std::unordered_map<const Atom*, UIPair> AtomIdxAndElecContribMap;
 
             AtomList                 atoms;
             AtomIdxAndElecContribMap atomIndsAndElecContribs;
             std::size_t              numElectrons;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ELECTRONSYSTEM_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -56,7 +56,7 @@ namespace CDPL
         class CDPL_VIS_API GraphicsPrimitive2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %GraphicsPrimitive2D instances.
              */
@@ -86,7 +86,7 @@ namespace CDPL
              */
             virtual void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const = 0;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_GRAPHICSPRIMITIVE2D_HPP

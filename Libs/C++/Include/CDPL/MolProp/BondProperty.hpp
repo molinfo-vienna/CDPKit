@@ -32,7 +32,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -52,7 +52,7 @@ namespace CDPL
 
             extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_ORDER;
         }
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDPROPERTY_HPP

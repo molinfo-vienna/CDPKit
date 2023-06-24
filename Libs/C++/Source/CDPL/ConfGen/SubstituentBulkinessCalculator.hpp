@@ -35,7 +35,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -43,28 +43,29 @@ namespace CDPL
 
         class MolecularGraph;
     }
-    
-    namespace ConfGen 
+
+    namespace ConfGen
     {
-    
-        class SubstituentBulkinessCalculator 
+
+        class SubstituentBulkinessCalculator
         {
 
-        public:
+          public:
             void calculate(const Chem::MolecularGraph& molgraph);
 
-            std::size_t operator[](std::size_t i) const {
+            std::size_t operator[](std::size_t i) const
+            {
                 return ecArray[i];
             }
 
-        private:
+          private:
             typedef std::vector<std::size_t> ECArray;
 
-            ECArray      ecArray;    
-            ECArray      tmpECArray;    
+            ECArray      ecArray;
+            ECArray      tmpECArray;
             Util::BitSet hAtomMask;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP

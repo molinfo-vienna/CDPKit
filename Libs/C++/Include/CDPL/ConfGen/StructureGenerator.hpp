@@ -40,7 +40,7 @@
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -49,7 +49,7 @@ namespace CDPL
         class MolecularGraph;
     }
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class ConformerGeneratorImpl;
@@ -57,9 +57,9 @@ namespace CDPL
         class CDPL_CONFGEN_API StructureGenerator
         {
 
-        public:
+          public:
             StructureGenerator();
-        
+
             ~StructureGenerator();
 
             const StructureGeneratorSettings& getSettings() const;
@@ -92,7 +92,7 @@ namespace CDPL
 
             const ConformerData& getCoordinates() const;
 
-        private:
+          private:
             StructureGenerator(const StructureGenerator&);
 
             StructureGenerator& operator=(const StructureGenerator&);
@@ -103,7 +103,7 @@ namespace CDPL
             StructureGeneratorSettings settings;
             ConformerData              coordinates;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_STRUCTUREGENERATOR_HPP

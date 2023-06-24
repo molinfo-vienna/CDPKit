@@ -32,16 +32,16 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class Bond;
     }
-    
-    namespace Vis 
+
+    namespace Vis
     {
 
         class Color;
@@ -154,7 +154,7 @@ namespace CDPL
         CDPL_VIS_API bool hasLabelMargin(const Chem::Bond& bond);
 
         CDPL_VIS_API void clearLabelMargin(Chem::Bond& bond);
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_BONDFUNCTIONS_HPP

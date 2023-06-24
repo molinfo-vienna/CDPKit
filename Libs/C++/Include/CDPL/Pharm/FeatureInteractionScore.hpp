@@ -35,7 +35,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -59,7 +59,7 @@ namespace CDPL
              * \brief Virtual destructor.
              */
             virtual ~FeatureInteractionScore() {}
-        
+
             virtual double operator()(const Feature& ftr1, const Feature& ftr2) const = 0;
 
             virtual double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const = 0;
@@ -67,7 +67,7 @@ namespace CDPL
           protected:
             FeatureInteractionScore() {}
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREINTERACTIONSCORE_HPP

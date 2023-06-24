@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -53,7 +53,7 @@ namespace CDPL
              * \param min_dist The minimum feature pair distance.
              * \param max_dist The maximum feature pair distance.
              */
-            FeatureDistanceConstraint(double min_dist, double max_dist): 
+            FeatureDistanceConstraint(double min_dist, double max_dist):
                 minDist(min_dist), maxDist(max_dist) {}
 
             double getMinDistance() const;
@@ -66,7 +66,7 @@ namespace CDPL
             double minDist;
             double maxDist;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP

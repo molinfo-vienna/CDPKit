@@ -46,71 +46,82 @@ namespace CDPL
 
             typedef Slice<S, D> SelfType;
 
-        public:
+          public:
             typedef S SizeType;
             typedef D DifferenceType;
 
-            Slice(): start(0), stride(0), size(0) {}
+            Slice():
+                start(0), stride(0), size(0) {}
 
-            Slice(SizeType start, DifferenceType stride, SizeType size): start(start), stride(stride), size(size) {
+            Slice(SizeType start, DifferenceType stride, SizeType size):
+                start(start), stride(stride), size(size)
+            {
                 CDPL_MATH_CHECK(stride >= 0 || size == 0 || start >= -stride * (size - 1), "Invalid slice specification", Base::RangeError);
             }
 
-            SizeType operator()(SizeType i) const {
+            SizeType operator()(SizeType i) const
+            {
                 CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
                 return (start + i * stride);
             }
 
-            SizeType getStart() const {
+            SizeType getStart() const
+            {
                 return start;
             }
 
-            DifferenceType getStride() const {
+            DifferenceType getStride() const
+            {
                 return stride;
             }
 
-            SizeType getSize() const {
+            SizeType getSize() const
+            {
                 return size;
             }
 
-            bool isEmpty() const {
+            bool isEmpty() const
+            {
                 return (size == 0);
             }
 
-            bool operator==(const Slice& s) const {
+            bool operator==(const Slice& s) const
+            {
                 return (start == s.start && stride == s.stride && size == s.size);
             }
 
-            bool operator!=(const Slice& s) const {
+            bool operator!=(const Slice& s) const
+            {
                 return !this->operator==(s);
             }
 
-            void swap(Slice& s) {
+            void swap(Slice& s)
+            {
                 if (this == &s)
-                    return ;
+                    return;
 
                 std::swap(start, s.start);
                 std::swap(stride, s.stride);
                 std::swap(size, s.size);
             }
-    
-            friend void swap(Slice& s1, Slice& s2) {
+
+            friend void swap(Slice& s1, Slice& s2)
+            {
                 s1.swap(s2);
             }
 
-        private:
+          private:
             SizeType       start;
             DifferenceType stride;
             SizeType       size;
         };
 
-        inline
-        Slice<std::size_t, std::ptrdiff_t> 
+        inline Slice<std::size_t, std::ptrdiff_t>
         slice(std::size_t start, std::ptrdiff_t stride, std::size_t size)
         {
             return Slice<std::size_t, std::ptrdiff_t>(start, stride, size);
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_SLICE_HPP

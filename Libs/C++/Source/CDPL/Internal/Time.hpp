@@ -36,7 +36,7 @@ namespace CDPL
         bool localtime(std::time_t time, std::tm& cal_time);
 
         bool gmtime(std::time_t time, std::tm& cal_time);
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 #endif // CDPL_INTERNAL_TIME_HPP

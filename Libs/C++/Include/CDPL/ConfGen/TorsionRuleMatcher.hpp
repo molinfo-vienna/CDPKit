@@ -37,10 +37,10 @@
 #include "CDPL/Chem/SubstructureSearch.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API TorsionRuleMatcher
@@ -126,7 +126,7 @@ namespace CDPL
             bool                          stopAtFirstRule;
             RuleMatchList                 matches;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONRULEMATCHER_HPP

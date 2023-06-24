@@ -30,14 +30,14 @@
 #define CDPL_UTIL_APIPREFIX_HPP
 
 #ifdef CDPL_UTIL_STATIC_LINK
-#  define CDPL_UTIL_API
+# define CDPL_UTIL_API
 #else // CDPL_UTIL_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_util_shared_EXPORTS
-#    define CDPL_UTIL_API CDPL_API_EXPORT
-#  else // cdpl_util_shared_EXPORTS
-#    define CDPL_UTIL_API CDPL_API_IMPORT
-#  endif // cdpl_util_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_util_shared_EXPORTS
+#  define CDPL_UTIL_API CDPL_API_EXPORT
+# else // cdpl_util_shared_EXPORTS
+#  define CDPL_UTIL_API CDPL_API_IMPORT
+# endif // cdpl_util_shared_EXPORTS
 #endif // CDPL_UTIL_STATIC_LINK
 
 /**

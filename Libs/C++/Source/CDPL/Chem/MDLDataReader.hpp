@@ -37,7 +37,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -55,8 +55,9 @@ namespace CDPL
         class MDLDataReader
         {
 
-        public:
-            MDLDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            MDLDataReader(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool readMOLFile(std::istream&, Molecule&);
             bool readSDFileRecord(std::istream&, Molecule&);
@@ -72,7 +73,7 @@ namespace CDPL
 
             bool hasMoreData(std::istream&) const;
 
-        private:
+          private:
             bool readMolecule(std::istream&, Molecule&, bool);
             bool skipMolecule(std::istream&, bool);
 
@@ -112,12 +113,12 @@ namespace CDPL
             void readCTabV2000AtomValence(std::istream&, Atom&) const;
             void readCTabV2000AtomRxnInfo(std::istream&, Atom&) const;
 
-            bool readCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
-            Bond& createCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
+            bool        readCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
+            Bond&       createCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
             std::size_t readCTabV2000BondType(std::istream&, Bond&, MatchConstraintList&) const;
-            void readCTabV2000BondStereo(std::istream&, Bond&) const;
-            void readCTabV2000BondQueryTopology(std::istream&, MatchConstraintList&) const;
-            void readCTabV2000BondRxnCenterStatus(std::istream&, Bond&) const;
+            void        readCTabV2000BondStereo(std::istream&, Bond&) const;
+            void        readCTabV2000BondQueryTopology(std::istream&, MatchConstraintList&) const;
+            void        readCTabV2000BondRxnCenterStatus(std::istream&, Bond&) const;
 
             void readCTabV2000AList(std::istream&, Molecule&, std::size_t);
             void readCTabV2000ChargeProperties(std::istream&, Molecule&, std::size_t) const;
@@ -182,15 +183,15 @@ namespace CDPL
             void readCTabV3000AtomQueryUnsaturationFlag(std::istream&, MatchConstraintList&) const;
             void readCTabV3000AtomQueryRingBondCount(std::istream&, Atom&, MatchConstraintList&) const;
 
-            bool readCTabV3000Bond(std::istream&, Molecule&);
-            void readCTabV3000BondIndex(std::istream&) const;
+            bool         readCTabV3000Bond(std::istream&, Molecule&);
+            void         readCTabV3000BondIndex(std::istream&) const;
             unsigned int readCTabV3000BondType(std::istream&) const;
-            Bond& createCTabV3000Bond(std::istream&, Molecule&) const; 
-            std::size_t setCTabV3000BondType(unsigned int, Bond&, MatchConstraintList&) const;
-            void readCTabV3000BondStereo(std::istream&, Bond&) const;
-            void readCTabV3000BondQueryStereoBoxFlag(std::istream&, MatchConstraintList&) const;
-            void readCTabV3000BondQueryTopology(std::istream&, MatchConstraintList&) const;
-            void readCTabV3000BondRxnCenterStatus(std::istream&, Bond&) const;
+            Bond&        createCTabV3000Bond(std::istream&, Molecule&) const;
+            std::size_t  setCTabV3000BondType(unsigned int, Bond&, MatchConstraintList&) const;
+            void         readCTabV3000BondStereo(std::istream&, Bond&) const;
+            void         readCTabV3000BondQueryStereoBoxFlag(std::istream&, MatchConstraintList&) const;
+            void         readCTabV3000BondQueryTopology(std::istream&, MatchConstraintList&) const;
+            void         readCTabV3000BondRxnCenterStatus(std::istream&, Bond&) const;
 
             bool readCTabV3000PropertyKeyword(std::istream&, std::string&) const;
 
@@ -215,9 +216,9 @@ namespace CDPL
             void kekulizeUndefBonds(Molecule&) const;
             void convertParities(Molecule&) const;
 
-            typedef std::map<std::size_t, std::size_t> AtomIndexMap;
+            typedef std::map<std::size_t, std::size_t>          AtomIndexMap;
             typedef std::vector<std::pair<Atom*, std::size_t> > AtomQueryHCountList;
-            typedef std::vector<Atom*> StereoAtomList;
+            typedef std::vector<Atom*>                          StereoAtomList;
 
             const Base::DataIOBase& ioBase;
             std::size_t             coordsDim;
@@ -245,7 +246,7 @@ namespace CDPL
             Molecule::SharedPointer confTestMolecule;
             Math::Vector3DArray     confCoords;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MDLDATAREADER_HPP

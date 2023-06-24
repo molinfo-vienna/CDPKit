@@ -33,7 +33,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -47,7 +47,7 @@ namespace CDPL
         class CDPL_VIS_API Line2D
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a line whose starting and end point is set to <em>(0, 0)</em>.
              */
@@ -69,7 +69,7 @@ namespace CDPL
              * \param end_y The y-coordinate of the end point.
              */
             Line2D(double beg_x, double beg_y, double end_x, double end_y);
-    
+
             /**
              * \brief Virtual destructor.
              */
@@ -112,7 +112,7 @@ namespace CDPL
              * \return The end point of the line.
              */
             const Math::Vector2D& getEnd() const;
-            
+
             /**
              * \brief Sets the starting point of the line to <em>(beg_x, beg_y)</em> and the end point to <em>(end_x, end_y)</em>.
              * \param beg_x The x-coordinate of the new starting point.
@@ -145,7 +145,7 @@ namespace CDPL
             /**
              * \brief Calculates the normalized direction vector of the line.
              * \return The calculated direction vector.
-             */        
+             */
             Math::Vector2D getDirection() const;
 
             /**
@@ -154,7 +154,7 @@ namespace CDPL
              * \param dir Holds the calculated rotated direction vector.
              */
             void getCCWPerpDirection(Math::Vector2D& dir) const;
-            
+
             /**
              * \brief Calculates the normalized direction vector rotated by <em>90</em> degrees in counter-clockwise direction.
              * \return The calculated rotated direction vector.
@@ -179,7 +179,7 @@ namespace CDPL
              * \param ctr Holds the calculated center point of the line.
              */
             void getCenter(Math::Vector2D& ctr) const;
-            
+
             /**
              * \brief Calculates the center point of the line.
              * \return The calculated center point of the line.
@@ -257,7 +257,7 @@ namespace CDPL
              *         both line segments, and \c true otherwise.
              */
             bool clipEndAgainstLineSeg(const Line2D& line);
-            
+
             /**
              * \brief Sets the starting point of the line to the point of intersection with the specified line
              *        segment.
@@ -307,7 +307,7 @@ namespace CDPL
              *
              * \param rect The rectangle to clip againts.
              * \return \c true if the line segment was clipped against an edge of \a rect, and \c false otherwise.
-             */    
+             */
             bool clipEndAgainstRectangle(const Rectangle2D& rect);
 
             /** 
@@ -320,7 +320,7 @@ namespace CDPL
              * \return The shortest distance between \a pt and the infinitely extended line.
              */
             double getDistance(const Math::Vector2D& pt) const;
-        
+
             /**
              * \brief Equality comparison operator.
              * \param line The other \c %Line2D object to be compared with.
@@ -335,14 +335,14 @@ namespace CDPL
              *
              * \param line The other \c %Line2D object to be compared with.
              * \return \c true if either the starting or end points compare non-equal, and \c false otherwise.
-             */            
+             */
             bool operator!=(const Line2D& line) const;
 
-        private:
+          private:
             Math::Vector2D begin;
             Math::Vector2D end;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_LINE2D_HPP

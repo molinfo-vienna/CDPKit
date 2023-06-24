@@ -30,7 +30,7 @@
 #define CDPL_CONFGEN_STRUCTUREGENERATIONMODE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -41,12 +41,12 @@ namespace CDPL
          */
         namespace StructureGenerationMode
         {
-                    
+
             const unsigned int AUTO              = 0;
             const unsigned int FRAGMENT          = 1;
             const unsigned int DISTANCE_GEOMETRY = 2;
-        }
-    }
-}
+        } // namespace StructureGenerationMode
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_STRUCTUREGENERATIONMODE_HPP

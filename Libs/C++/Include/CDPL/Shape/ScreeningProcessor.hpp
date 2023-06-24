@@ -43,7 +43,7 @@
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,7 +54,7 @@ namespace CDPL
 
     namespace Shape
     {
-        
+
         class AlignmentResult;
 
         class CDPL_SHAPE_API ScreeningProcessor
@@ -63,8 +63,8 @@ namespace CDPL
             typedef std::vector<const Chem::MolecularGraph*> MolecularGraphList;
 
           public:
-            typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
-            typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph> ConstMolecularGraphIterator;
+            typedef std::shared_ptr<ScreeningProcessor>                                                                   SharedPointer;
+            typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph>              ConstMolecularGraphIterator;
             typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
 
             ScreeningProcessor();
@@ -94,7 +94,7 @@ namespace CDPL
             ConstMolecularGraphIterator getQuerySetEnd() const;
 
             bool process(const Chem::MolecularGraph& molgraph);
-                        
+
           private:
             ScreeningProcessor(const ScreeningProcessor& proc);
 
@@ -114,7 +114,7 @@ namespace CDPL
             MolecularGraphList                   queryList;
             HitCallbackFunction                  hitCallback;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_SCREENINGPROCESSOR_HPP

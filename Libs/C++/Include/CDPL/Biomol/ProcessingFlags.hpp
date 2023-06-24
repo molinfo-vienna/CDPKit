@@ -32,16 +32,15 @@
 #include <limits>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Biomol 
+    namespace Biomol
     {
 
         const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
         const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PROCESSINGFLAGS_HPP
- 

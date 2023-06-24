@@ -32,7 +32,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,7 +50,7 @@ namespace CDPL
         namespace MolecularGraphProperty
         {
 
-            extern CDPL_CHEM_API const Base::LookupKey NAME; 
+            extern CDPL_CHEM_API const Base::LookupKey NAME;
 
             extern CDPL_CHEM_API const Base::LookupKey COMPONENTS;
             extern CDPL_CHEM_API const Base::LookupKey RINGS;
@@ -58,7 +58,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey CYCLIC_SUBSTRUCTURE;
             extern CDPL_CHEM_API const Base::LookupKey AROMATIC_SUBSTRUCTURE;
             extern CDPL_CHEM_API const Base::LookupKey PI_ELECTRON_SYSTEMS;
-            
+
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
             extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
@@ -81,7 +81,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
             extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
             extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
-            extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY; 
+            extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY;
             extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR1;
             extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;
             extern CDPL_CHEM_API const Base::LookupKey MDL_ENERGY;
@@ -89,8 +89,8 @@ namespace CDPL
 
             extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
             extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
-        }
-    }
-}
+        } // namespace MolecularGraphProperty
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLECULARGRAPHPROPERTY_HPP

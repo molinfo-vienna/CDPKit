@@ -40,12 +40,12 @@
 #include "CDPL/Base/Any.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
-    
+
     namespace Base
     {
-        
+
         /**
          * \brief A class providing methods for the storage and lookup of control-parameter values.
          *
@@ -94,7 +94,7 @@ namespace CDPL
 
             typedef std::unordered_map<LookupKey, Any, LookupKey::HashFunc> ParameterMap;
 
-        public:
+          public:
             /**
              * \brief A Base::LookupKey / Base::Any pair used to store the control-parameter
              *        values and associated keys.
@@ -104,8 +104,8 @@ namespace CDPL
             /**
              * \brief A constant iterator used to iterate over the control-parameter entries.
              */
-            typedef ParameterMap::const_iterator ConstParameterIterator; 
-        
+            typedef ParameterMap::const_iterator ConstParameterIterator;
+
             /**
              * \brief A functor class that wraps callback target functions which get invoked when the value of a
              *        control-parameter has changed.
@@ -340,7 +340,7 @@ namespace CDPL
              * \param id The identifier of the callback to unregister.
              */
             void unregisterParameterChangedCallback(std::size_t id);
-    
+
             /**
              * \brief Registers a callback target function that gets invoked when a control-parameter entry
              *        has been removed. 
@@ -375,11 +375,12 @@ namespace CDPL
              */
             void unregisterParentChangedCallback(std::size_t id);
 
-        protected:
+          protected:
             /**
              * \brief Constructs an empty \c %ControlParameterContainer instance.
              */
-            ControlParameterContainer(): parent(0) {}
+            ControlParameterContainer():
+                parent(0) {}
 
             /**
              * \brief Constructs a copy of the \c %ControlParameterContainer instance \a cntnr.
@@ -387,7 +388,8 @@ namespace CDPL
              * \note Only the control-parameter entries of \a cntnr are copied. Entries in the parent container
              *       of \a cntnr (if set) will be ignored (see setParent()).
              */
-            ControlParameterContainer(const ControlParameterContainer& cntnr): parameters(cntnr.parameters), parent(0) {}
+            ControlParameterContainer(const ControlParameterContainer& cntnr):
+                parameters(cntnr.parameters), parent(0) {}
 
             /**
              * \brief Destructor.
@@ -407,7 +409,7 @@ namespace CDPL
              */
             ControlParameterContainer& operator=(const ControlParameterContainer& cntnr);
 
-        private:
+          private:
             void parameterRemoved(const LookupKey&) const;
             void parameterChanged(const LookupKey&, const Any&) const;
 
@@ -421,13 +423,13 @@ namespace CDPL
             template <typename T>
             bool isEmptyAny(const T& val) const;
 
-            typedef std::vector<ControlParameterContainer*> ChildContainer;
+            typedef std::vector<ControlParameterContainer*>                  ChildContainer;
             typedef std::pair<std::size_t, ParameterChangedCallbackFunction> ParamChangedCallbackContainerEntry;
-            typedef std::vector<ParamChangedCallbackContainerEntry> ParamChangedCallbackContainer;
+            typedef std::vector<ParamChangedCallbackContainerEntry>          ParamChangedCallbackContainer;
             typedef std::pair<std::size_t, ParameterRemovedCallbackFunction> ParamRemovedCallbackContainerEntry;
-            typedef std::vector<ParamRemovedCallbackContainerEntry> ParamRemovedCallbackContainer;
-            typedef std::pair<std::size_t, ParentChangedCallbackFunction> ParentChangedCallbackContainerEntry;
-            typedef std::vector<ParentChangedCallbackContainerEntry> ParentChangedCallbackContainer;
+            typedef std::vector<ParamRemovedCallbackContainerEntry>          ParamRemovedCallbackContainer;
+            typedef std::pair<std::size_t, ParentChangedCallbackFunction>    ParentChangedCallbackContainerEntry;
+            typedef std::vector<ParentChangedCallbackContainerEntry>         ParentChangedCallbackContainer;
 
             ParameterMap                     parameters;
             const ControlParameterContainer* parent;
@@ -436,19 +438,19 @@ namespace CDPL
             ParamRemovedCallbackContainer    paramRemovedCallbacks;
             ParentChangedCallbackContainer   parentChangedCallbacks;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 
 // Implementation of template members
 
-template <typename T> 
+template <typename T>
 const T& CDPL::Base::ControlParameterContainer::getParameter(const LookupKey& key, bool local) const
 {
     return getParameter(key, true, local).template getData<T>();
 }
 
-template <typename T> 
+template <typename T>
 const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const LookupKey& key, const T& def_val, bool local) const
 {
     const Any& val = getParameter(key, false, local);
@@ -456,7 +458,7 @@ const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const Look
     return (val.isEmpty() ? def_val : val.template getData<T>());
 }
 
-template <typename T> 
+template <typename T>
 void CDPL::Base::ControlParameterContainer::setParameter(const LookupKey& key, T&& val)
 {
     if (isEmptyAny(val)) {
@@ -465,7 +467,7 @@ void CDPL::Base::ControlParameterContainer::setParameter(const LookupKey& key, T
     }
 
     const Any& any_val = (parameters[key] = std::forward<T>(val));
-    
+
     parameterChanged(key, any_val);
 }
 

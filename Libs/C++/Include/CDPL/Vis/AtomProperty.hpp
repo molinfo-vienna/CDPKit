@@ -60,7 +60,7 @@ namespace CDPL
              * \valuetype Vis::Color
              */
             extern CDPL_VIS_API const Base::LookupKey COLOR;
-    
+
             /**
              * \brief Specifies the font for atom element and query match expression labels.
              *
@@ -82,7 +82,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey LABEL_SIZE;
-    
+
             /**
              * \brief Specifies the font for text labels that show the value of various atomic properties.
              *
@@ -106,7 +106,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey SECONDARY_LABEL_SIZE;
-    
+
             /**
              * \brief Specifies the margin of free space around atom labels.
              *
@@ -120,7 +120,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey LABEL_MARGIN;
-    
+
             /**
              * \brief Specifies the size of radical electron dots.
              *
@@ -134,8 +134,8 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey RADICAL_ELECTRON_DOT_SIZE;
-        }
-    }
-}
+        } // namespace AtomProperty
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_ATOMPROPERTY_HPP

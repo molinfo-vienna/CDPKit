@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -101,7 +101,7 @@ namespace CDPL
             AngleScoringFunction    accAngleScoringFunc;
             AngleScoringFunction    ahdAngleScoringFunc;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_HBONDINGINTERACTIONSCORE_HPP

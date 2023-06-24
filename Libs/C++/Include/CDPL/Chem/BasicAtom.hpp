@@ -38,10 +38,10 @@
 #include "CDPL/Chem/Atom.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class BasicMolecule;
@@ -56,7 +56,7 @@ namespace CDPL
             friend class BasicMolecule;
 
             typedef std::pair<BasicAtom*, BasicBond*> AtomBondPair;
-            typedef std::vector<AtomBondPair> NeighborList;
+            typedef std::vector<AtomBondPair>         NeighborList;
 
             template <typename AtomType>
             struct AtomAccessor
@@ -64,7 +64,8 @@ namespace CDPL
 
                 typedef AtomType& result_type;
 
-                AtomType& operator()(const AtomBondPair& ab_pair) const {
+                AtomType& operator()(const AtomBondPair& ab_pair) const
+                {
                     return *ab_pair.first;
                 }
             };
@@ -75,31 +76,32 @@ namespace CDPL
 
                 typedef BondType& result_type;
 
-                BondType& operator()(const AtomBondPair& ab_pair) const {
+                BondType& operator()(const AtomBondPair& ab_pair) const
+                {
                     return *ab_pair.second;
                 }
             };
 
-        public:
-            typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator> AtomIterator;
+          public:
+            typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator>             AtomIterator;
             typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
-            typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator> BondIterator;
+            typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator>             BondIterator;
             typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
-    
+
             const Molecule& getMolecule() const;
 
             Molecule& getMolecule();
-        
+
             std::size_t getNumAtoms() const;
-        
+
             std::size_t getNumBonds() const;
-    
+
             const Bond& getBond(std::size_t idx) const;
-        
+
             Bond& getBond(std::size_t idx);
-            
+
             const Bond& getBondToAtom(const Atom& atom) const;
-        
+
             Bond& getBondToAtom(const Atom& atom);
 
             const Bond* findBondToAtom(const Atom& atom) const;
@@ -109,7 +111,7 @@ namespace CDPL
             const Atom& getAtom(std::size_t idx) const;
 
             Atom& getAtom(std::size_t idx);
-        
+
             /*
              * \brief Returns a constant iterator pointing to the beginning of the connected atoms.
              * \return A constant iterator pointing to the beginning of the connected atoms.
@@ -138,13 +140,13 @@ namespace CDPL
              * \brief Returns a constant iterator pointing to the beginning of the incident bonds.
              * \return A constant iterator pointing to the beginning of the incident bonds.
              */
-            ConstBondIterator getBondsBegin() const; 
+            ConstBondIterator getBondsBegin() const;
 
             /**
              * \brief Returns a mutable iterator pointing to the beginning of the incident bonds.
              * \return A mutable iterator pointing to the beginning of the incident bonds.
              */
-            BondIterator getBondsBegin(); 
+            BondIterator getBondsBegin();
 
             /**
              * \brief Returns a constant iterator pointing to the end of the incident bonds.
@@ -181,7 +183,7 @@ namespace CDPL
 
             using Atom::operator=;
 
-        private:
+          private:
             BasicAtom(BasicMolecule* mol);
 
             BasicAtom(const BasicAtom& atom);
@@ -200,7 +202,7 @@ namespace CDPL
             std::size_t    index;
             NeighborList   neighbors;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BASICATOM_HPP

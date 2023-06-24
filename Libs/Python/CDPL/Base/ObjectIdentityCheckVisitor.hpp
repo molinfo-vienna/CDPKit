@@ -32,24 +32,26 @@
 
 namespace CDPLPythonBase
 {
-    
+
     template <typename T>
     class ObjectIdentityCheckVisitor : public boost::python::def_visitor<ObjectIdentityCheckVisitor<T> >
     {
 
         friend class boost::python::def_visitor_access;
 
-        static boost::uintmax_t getObjectID(const T* obj_ptr) {
+        static boost::uintmax_t getObjectID(const T* obj_ptr)
+        {
             return boost::uintmax_t(static_cast<const void*>(obj_ptr));
         }
 
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             cl
                 .def("getObjectID", &getObjectID, boost::python::arg("self"))
                 .add_property("objectID", &getObjectID);
         }
     };
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_OBJECTIDENTITYCHECKVISITOR_HPP

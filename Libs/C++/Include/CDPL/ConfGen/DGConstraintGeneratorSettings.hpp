@@ -32,10 +32,10 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API DGConstraintGeneratorSettings
@@ -61,11 +61,11 @@ namespace CDPL
             bool regardBondConfiguration() const;
 
           private:
-            bool  exclHydrogens;
-            bool  atomConfig;
-            bool  bondConfig;
+            bool exclHydrogens;
+            bool atomConfig;
+            bool bondConfig;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_DGCONSTRAINTGENERATORSETTINGS_HPP

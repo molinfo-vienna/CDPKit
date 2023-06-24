@@ -41,24 +41,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         ColorEditWidget(QWidget*, CDPL::Vis::Color&, bool = false);
 
-    signals:
+      signals:
         void colorChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void editColor();
 
-    private:
+      private:
         void init(bool);
 
         CDPL::Vis::Color& color;
         QFrame*           colorLabel;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_COLOREDITWIDGET_HPP

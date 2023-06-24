@@ -34,15 +34,15 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
-    
+
         class BondContainer;
     }
-    
+
     namespace MolProp
     {
 
@@ -59,8 +59,7 @@ namespace CDPL
         CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::BondContainer& cntnr);
 
         CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::BondContainer& cntnr);
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_BONDCONTAINERFUNCTIONS_HPP
- 

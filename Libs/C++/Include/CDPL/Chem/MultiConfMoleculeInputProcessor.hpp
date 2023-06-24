@@ -34,7 +34,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,7 +48,7 @@ namespace CDPL
         class CDPL_CHEM_API MultiConfMoleculeInputProcessor
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated 
              *        \c %MultiConfMoleculeInputProcessor implementations.
@@ -60,7 +60,7 @@ namespace CDPL
              *
              * Destroys the \c %MultiConfMoleculeInputProcessor instance and frees all allocated resources.
              */
-            virtual ~MultiConfMoleculeInputProcessor()  {}
+            virtual ~MultiConfMoleculeInputProcessor() {}
 
             /**
              * \brief Performs initial tests and necessary setup tasks for a newly read-in potential multi-conformer molecule. 
@@ -86,7 +86,7 @@ namespace CDPL
              */
             virtual bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const = 0;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MULTICONFMOLECULEINPUTPROCESSOR_HPP

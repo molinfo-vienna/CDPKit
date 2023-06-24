@@ -41,10 +41,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94DefaultStretchBendParameterTable
@@ -58,14 +58,14 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<MMFF94DefaultStretchBendParameterTable> SharedPointer;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 Entry();
- 
-                Entry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+
+                Entry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row,
                       unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const);
 
                 unsigned int getTerminalAtom1PTERow() const;
@@ -87,27 +87,29 @@ namespace CDPL
                 double       ijkForceConst;
                 double       kjiForceConst;
                 bool         initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94DefaultStretchBendParameterTable();
 
-            void addEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+            void addEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row,
                           unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const);
 
-            const Entry& getEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+            const Entry& getEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row,
                                   unsigned int term_atom2_pte_row) const;
 
             std::size_t getNumEntries() const;
 
             void clear();
 
-            bool removeEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+            bool removeEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row,
                              unsigned int term_atom2_pte_row);
 
             EntryIterator removeEntry(const EntryIterator& it);
@@ -115,7 +117,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -123,7 +125,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -140,7 +142,7 @@ namespace CDPL
             static SharedPointer defaultTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94DEFAULTSTRETCHBENDPARAMETERTABLE_HPP

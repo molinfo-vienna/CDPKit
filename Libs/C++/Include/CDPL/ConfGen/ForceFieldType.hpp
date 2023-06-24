@@ -30,7 +30,7 @@
 #define CDPL_CONFGEN_FORCEFIELDTYPE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -42,7 +42,7 @@ namespace CDPL
          */
         namespace ForceFieldType
         {
-                    
+
             const unsigned int MMFF94                     = 0;
             const unsigned int MMFF94_NO_ESTAT            = 1;
             const unsigned int MMFF94S                    = 2;
@@ -53,8 +53,8 @@ namespace CDPL
             const unsigned int MMFF94S_RTOR_NO_ESTAT      = 7;
             const unsigned int MMFF94S_RTOR_XOOP          = 8;
             const unsigned int MMFF94S_RTOR_XOOP_NO_ESTAT = 9;
-        }
-    }
-}
+        } // namespace ForceFieldType
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FORCEFIELDTYPE_HPP

@@ -53,7 +53,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -69,7 +69,7 @@ namespace CDPL
         class Fragment;
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
     namespace Vis
     {
@@ -436,12 +436,12 @@ namespace CDPL
         class CDPL_VIS_API StructureView2D : public View2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StructureView2D instances.
              */
             typedef std::shared_ptr<StructureView2D> SharedPointer;
-            
+
             /**
              * \brief Constructs and initializes a \c %StructureView2D instance for the visualization of the chemical
              *        structure specified by \a molgraph.
@@ -474,7 +474,7 @@ namespace CDPL
              * \param molgraph A pointer to the Chem::MolecularGraph object to visualize, or \e null.
              */
             void setStructure(const Chem::MolecularGraph* molgraph);
-            
+
             /**
              * \brief Returns a pointer to the visualized chemical structure.
              * \return A pointer to the visualized Chem::MolecularGraph object, or \e null if none was specified.
@@ -487,12 +487,12 @@ namespace CDPL
              */
             void getModelBounds(Rectangle2D& bounds);
 
-        private:
+          private:
             class CustomGraphicsData;
             friend class ReactionView2D;
 
             typedef std::shared_ptr<CustomGraphicsData> CustomGraphicsDataPtr;
-            typedef std::vector<CustomGraphicsDataPtr> CustomGraphicsDataList;
+            typedef std::vector<CustomGraphicsDataPtr>  CustomGraphicsDataList;
 
             StructureView2D(const StructureView2D&);
             StructureView2D(bool);
@@ -507,22 +507,22 @@ namespace CDPL
 
             void initTextLabelBounds();
 
-            void createAtomPrimitives();
-            void createAtomPrimitives(const Chem::Atom&);
+            void   createAtomPrimitives();
+            void   createAtomPrimitives(const Chem::Atom&);
             double createAtomQueryInfoLabelPrimitive(const Chem::Atom&, const std::string&, Rectangle2D&);
-            void createAtomQueryInfoLabelPrimitive(const Chem::Atom&, const std::string&, double, Rectangle2D&);
+            void   createAtomQueryInfoLabelPrimitive(const Chem::Atom&, const std::string&, double, Rectangle2D&);
             double createAtomSymbolLabelPrimitive(const Chem::Atom&, const std::string&, Rectangle2D&);
-            void createRadicalElectronPrimitives(const Chem::Atom&, std::size_t, Rectangle2D&);
-            void createAtomIsotopeLabelPrimitive(const Chem::Atom&, std::size_t, Rectangle2D&);
-            void createAtomChargeLabelPrimitive(const Chem::Atom&, long, std::size_t, Rectangle2D&);
-            void createAtomHCountLabelPrimitives(const Chem::Atom&, std::size_t, double, Rectangle2D&);
-            void createAtomMappingLabelPrimitive(const Chem::Atom&, std::size_t, const Rectangle2D&);
+            void   createRadicalElectronPrimitives(const Chem::Atom&, std::size_t, Rectangle2D&);
+            void   createAtomIsotopeLabelPrimitive(const Chem::Atom&, std::size_t, Rectangle2D&);
+            void   createAtomChargeLabelPrimitive(const Chem::Atom&, long, std::size_t, Rectangle2D&);
+            void   createAtomHCountLabelPrimitives(const Chem::Atom&, std::size_t, double, Rectangle2D&);
+            void   createAtomMappingLabelPrimitive(const Chem::Atom&, std::size_t, const Rectangle2D&);
 
             void createBondPrimitives();
 
-            void createBondLabelPrimitives(const Chem::Bond&, const Line2D&, int);
+            void   createBondLabelPrimitives(const Chem::Bond&, const Line2D&, int);
             double createBondRxnInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int);
-            void createBondQueryInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int, double);
+            void   createBondQueryInfoLabelPrimitive(const Chem::Bond&, const Line2D&, int, double);
 
             void createUndefOrderBondPrimitives(const Chem::Bond&, const Line2D&);
             void createSingleBondPrimitives(const Chem::Bond&, const Line2D&);
@@ -576,7 +576,7 @@ namespace CDPL
             void initOutputBondLineTable();
 
             unsigned int getBondStereoFlag(const Chem::Bond&, const Chem::MolecularGraph&) const;
-            std::size_t getBondOrder(const Chem::Bond& bond) const;
+            std::size_t  getBondOrder(const Chem::Bond& bond) const;
 
             void setHasAtomCoordsFlag();
 
@@ -590,8 +590,8 @@ namespace CDPL
             double getHashSpacing(const Chem::Bond&) const;
             double getLabelSize(const Chem::Bond&) const;
 
-            const Color& getColor(const Chem::Bond&) const;
-            const Font& getLabelFont(const Chem::Bond&) const;
+            const Color&             getColor(const Chem::Bond&) const;
+            const Font&              getLabelFont(const Chem::Bond&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Bond&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Bond&) const;
 
@@ -603,9 +603,9 @@ namespace CDPL
             double getSecondaryLabelSize(const Chem::Atom&) const;
             double getElectronDotSize(const Chem::Atom&) const;
 
-            const Color& getColor(const Chem::Atom&) const;
-            const Font& getLabelFont(const Chem::Atom&) const;
-            const Font& getSecondaryLabelFont(const Chem::Atom&) const;
+            const Color&             getColor(const Chem::Atom&) const;
+            const Font&              getLabelFont(const Chem::Atom&) const;
+            const Font&              getSecondaryLabelFont(const Chem::Atom&) const;
             const SizeSpecification& getLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getSecondaryLabelSizeSpec(const Chem::Atom&) const;
             const SizeSpecification& getLabelMarginSpec(const Chem::Atom&) const;
@@ -615,7 +615,7 @@ namespace CDPL
             void setupPen(const Chem::Atom&);
             void setupLabelFont(const Chem::Atom&);
             void setupSecondaryLabelFont(const Chem::Atom&);
-        
+
             double calcOutputSize(const Chem::Bond&, const SizeSpecification&) const;
             double calcOutputSize(const Chem::Atom&, const SizeSpecification&) const;
 
@@ -624,63 +624,63 @@ namespace CDPL
 
             void freeGraphicsPrimitives();
 
-            LinePrimitive2D* allocLinePrimitive(bool = true);
-            PolylinePrimitive2D* allocPolylinePrimitive();
-            PolygonPrimitive2D* allocPolygonPrimitive();
+            LinePrimitive2D*            allocLinePrimitive(bool = true);
+            PolylinePrimitive2D*        allocPolylinePrimitive();
+            PolygonPrimitive2D*         allocPolygonPrimitive();
             LineSegmentListPrimitive2D* allocLineSegListPrimitive();
-            PointListPrimitive2D* allocPointListPrimitive();
-            TextLabelPrimitive2D* allocTextLabelPrimitive();
+            PointListPrimitive2D*       allocPointListPrimitive();
+            TextLabelPrimitive2D*       allocTextLabelPrimitive();
 
-            typedef std::vector<const GraphicsPrimitive2D*> GraphicsPrimitiveList;
-            typedef std::vector<Rectangle2D> RectangleList;
-            typedef std::vector<RectangleList> RectangleListTable;
-            typedef std::vector<Line2D> BondLineTable;
-            typedef Util::ObjectStack<LinePrimitive2D> LinePrimitiveCache;
-            typedef Util::ObjectStack<PolylinePrimitive2D> PolylinePrimitiveCache;
-            typedef Util::ObjectStack<PolygonPrimitive2D> PolygonPrimitiveCache;
+            typedef std::vector<const GraphicsPrimitive2D*>       GraphicsPrimitiveList;
+            typedef std::vector<Rectangle2D>                      RectangleList;
+            typedef std::vector<RectangleList>                    RectangleListTable;
+            typedef std::vector<Line2D>                           BondLineTable;
+            typedef Util::ObjectStack<LinePrimitive2D>            LinePrimitiveCache;
+            typedef Util::ObjectStack<PolylinePrimitive2D>        PolylinePrimitiveCache;
+            typedef Util::ObjectStack<PolygonPrimitive2D>         PolygonPrimitiveCache;
             typedef Util::ObjectStack<LineSegmentListPrimitive2D> LineSegListPrimitiveCache;
-            typedef Util::ObjectStack<PointListPrimitive2D> PointListPrimitiveCache;
-            typedef Util::ObjectStack<TextLabelPrimitive2D> TextLabelPrimitiveCache;
+            typedef Util::ObjectStack<PointListPrimitive2D>       PointListPrimitiveCache;
+            typedef Util::ObjectStack<TextLabelPrimitive2D>       TextLabelPrimitiveCache;
 
             typedef std::auto_ptr<StructureView2DParameters> StructureView2DParametersPtr;
-            typedef std::auto_ptr<Chem::Fragment> FragmentPtr;
+            typedef std::auto_ptr<Chem::Fragment>            FragmentPtr;
 
-            StructureView2DParametersPtr       parameters;
-            const Chem::MolecularGraph*        structure;
-            const Chem::MolecularGraph*        origStructure;
-            FragmentPtr                        hDepleteStructure;
-            FontMetrics*                       fontMetrics;
-            Rectangle2D                        inputStructureBounds;
-            Rectangle2D                        outputStructureBounds;
-            Util::UIArray                      calcBondStereoFlags;
-            Math::Vector2DArray                calcInputAtomCoords;
-            Math::Vector2DArray                inputAtomCoords;
-            Math::Vector2DArray                outputAtomCoords;
-            BondLineTable                      outputBondLines;
-            RectangleListTable                 atomLabelBounds;
-            RectangleList                      bondLabelBounds;
-            GraphicsPrimitiveList              drawList;
-            double                             avgInputBondLength;
-            double                             stdBondLengthScalingFactor;
-            double                             viewportAdjustmentScalingFactor;
-            double                             viewScalingFactor;
-            Math::Vector2D                     viewTranslations[2];
-            bool                               structureChanged;
-            bool                               fontMetricsChanged;
-            Pen                                activePen;
-            Font                               activeLabelFont;
-            Font                               activeSecondaryLabelFont;
-            double                             activeLabelMargin;
-            bool                               reactionContext;
-            bool                               hasAtomCoords;
-            LinePrimitiveCache                 lineCache;
-            PolylinePrimitiveCache             polylineCache;
-            PolygonPrimitiveCache              polygonCache;
-            LineSegListPrimitiveCache          lineSegListCache;
-            PointListPrimitiveCache            pointListCache;
-            TextLabelPrimitiveCache            textLabelCache;
+            StructureView2DParametersPtr parameters;
+            const Chem::MolecularGraph*  structure;
+            const Chem::MolecularGraph*  origStructure;
+            FragmentPtr                  hDepleteStructure;
+            FontMetrics*                 fontMetrics;
+            Rectangle2D                  inputStructureBounds;
+            Rectangle2D                  outputStructureBounds;
+            Util::UIArray                calcBondStereoFlags;
+            Math::Vector2DArray          calcInputAtomCoords;
+            Math::Vector2DArray          inputAtomCoords;
+            Math::Vector2DArray          outputAtomCoords;
+            BondLineTable                outputBondLines;
+            RectangleListTable           atomLabelBounds;
+            RectangleList                bondLabelBounds;
+            GraphicsPrimitiveList        drawList;
+            double                       avgInputBondLength;
+            double                       stdBondLengthScalingFactor;
+            double                       viewportAdjustmentScalingFactor;
+            double                       viewScalingFactor;
+            Math::Vector2D               viewTranslations[2];
+            bool                         structureChanged;
+            bool                         fontMetricsChanged;
+            Pen                          activePen;
+            Font                         activeLabelFont;
+            Font                         activeSecondaryLabelFont;
+            double                       activeLabelMargin;
+            bool                         reactionContext;
+            bool                         hasAtomCoords;
+            LinePrimitiveCache           lineCache;
+            PolylinePrimitiveCache       polylineCache;
+            PolygonPrimitiveCache        polygonCache;
+            LineSegListPrimitiveCache    lineSegListCache;
+            PointListPrimitiveCache      pointListCache;
+            TextLabelPrimitiveCache      textLabelCache;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_STRUCTUREVIEW2D_HPP

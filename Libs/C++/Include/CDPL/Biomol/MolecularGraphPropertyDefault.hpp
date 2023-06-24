@@ -34,7 +34,7 @@
 #include "CDPL/Biomol/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -47,9 +47,9 @@ namespace CDPL
         {
 
             extern CDPL_BIOMOL_API const std::size_t MODEL_NUMBER;
-            extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;    
-        }
-    }
-}
+            extern CDPL_BIOMOL_API const char        RESIDUE_INSERTION_CODE;
+        } // namespace MolecularGraphPropertyDefault
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MOLECULARGRAPHPROPERTYDEFAULT_HPP

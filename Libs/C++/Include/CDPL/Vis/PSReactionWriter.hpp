@@ -36,7 +36,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -48,10 +48,11 @@ namespace CDPL
          * \c %PSReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
          * properties provided for the customization of Vis::ReactionView2D are also supported by \c %PSReactionWriter.
          */
-        class CDPL_VIS_API PSReactionWriter : public Base::DataWriter<Chem::Reaction>, private ImageWriter
+        class CDPL_VIS_API PSReactionWriter : public Base::DataWriter<Chem::Reaction>,
+                                              private ImageWriter
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PSReactionWriter instance that will write the image data to the output stream \a os.
              * \param os The output stream to write to.
@@ -66,10 +67,10 @@ namespace CDPL
              */
             Base::DataWriter<Chem::Reaction>& write(const Chem::Reaction& rxn);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             PSReactionWriter(const PSReactionWriter&);
 
             cairo_surface_t* createCairoSurface(double, double) const;
@@ -78,7 +79,7 @@ namespace CDPL
             std::ostream& output;
             bool          state;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_PSREACTIONWRITER_HPP

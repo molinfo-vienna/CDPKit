@@ -25,7 +25,7 @@
 #ifndef CDPL_GRAIL_CDFATTRIBUTEDGRIDPROPERTYREADER_HPP
 #define CDPL_GRAIL_CDFATTRIBUTEDGRIDPROPERTYREADER_HPP
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Internal
@@ -39,8 +39,8 @@ namespace CDPL
 
         class CDFDataReader;
         class AttributedGrid;
-    }
-    
+    } // namespace Grid
+
     namespace GRAIL
     {
 
@@ -51,10 +51,10 @@ namespace CDPL
             static void registerExternalPropertyHandlers();
 
           private:
-            static bool readProperties(unsigned int handler_id, const Grid::CDFDataReader& reader, 
+            static bool readProperties(unsigned int handler_id, const Grid::CDFDataReader& reader,
                                        Grid::AttributedGrid& grid, Internal::ByteBuffer& data);
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_CDFATTRIBUTEDGRIDPROPERTYREADER_HPP

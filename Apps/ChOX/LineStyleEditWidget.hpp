@@ -41,24 +41,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         LineStyleEditWidget(QWidget*, CDPL::Vis::Pen::LineStyle&);
 
-    signals:
+      signals:
         void lineStyleChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleLineStyleSelection(int);
 
-    private:
+      private:
         void init();
 
         CDPL::Vis::Pen::LineStyle& lineStyle;
         QComboBox*                 lineStyleComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_LINESTYLEEDITWIDGET_HPP

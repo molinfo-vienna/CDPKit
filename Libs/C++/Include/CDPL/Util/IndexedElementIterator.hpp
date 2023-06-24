@@ -120,23 +120,23 @@ namespace CDPL
          * \tparam IndexType The type of the indices used to access the elements. 
          */
         template <typename ValueType, typename AccessFunc, typename IndexType = std::size_t>
-        class IndexedElementIterator : 
-            public boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>, 
-                                          ValueType, boost::random_access_traversal_tag>
+        class IndexedElementIterator : public boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>,
+                                                                     ValueType, boost::random_access_traversal_tag>
         {
 
-            typedef typename boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>, 
-                                                    ValueType, 
+            typedef typename boost::iterator_facade<IndexedElementIterator<ValueType, AccessFunc, IndexType>,
+                                                    ValueType,
                                                     boost::random_access_traversal_tag>::difference_type DifferenceType;
 
-        public:
+          public:
             /**
              * \brief Constructs and initializes the iterator with another iterator object.
              * \param it The other iterator.
              */
-            template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
-            IndexedElementIterator(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it): 
-                accessFunc(it.getAccessFunc()), index(it.getIndex()) {}
+            template <typename ValueType2, typename AccessFunc2, typename IndexType2>
+            IndexedElementIterator(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it):
+                accessFunc(it.getAccessFunc()), index(it.getIndex())
+            {}
 
             /**
              * \brief Constructs and initializes the iterator with the access function \a access_func
@@ -144,24 +144,24 @@ namespace CDPL
              * \param access_func The element access function to use.
              * \param start_idx The index of the first element the iterator will point to.
              */
-            IndexedElementIterator(const AccessFunc& access_func, IndexType start_idx): 
+            IndexedElementIterator(const AccessFunc& access_func, IndexType start_idx):
                 accessFunc(access_func), index(start_idx) {}
 
             const AccessFunc& getAccessFunc() const;
 
             IndexType getIndex() const;
 
-        private:   
+          private:
             friend class boost::iterator_core_access;
 
             void increment();
             void decrement();
-            void advance(DifferenceType); 
+            void advance(DifferenceType);
 
-            template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+            template <typename ValueType2, typename AccessFunc2, typename IndexType2>
             DifferenceType distance_to(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>&) const;
 
-            template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+            template <typename ValueType2, typename AccessFunc2, typename IndexType2>
             bool equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>&) const;
 
             ValueType& dereference() const;
@@ -169,8 +169,8 @@ namespace CDPL
             AccessFunc accessFunc;
             IndexType  index;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
@@ -206,7 +206,7 @@ void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::advan
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+template <typename ValueType2, typename AccessFunc2, typename IndexType2>
 typename CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::DifferenceType
 CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::distance_to(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
 {
@@ -214,7 +214,7 @@ CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::distance_t
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
+template <typename ValueType2, typename AccessFunc2, typename IndexType2>
 bool CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
 {
     return (index == it.index && accessFunc == it.accessFunc);
@@ -227,4 +227,3 @@ ValueType& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>:
 }
 
 #endif // CDPL_UTIL_INDEXEDELEMENTITERATOR_HPP
- 

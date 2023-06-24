@@ -20,7 +20,7 @@
  * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
- 
+
 /**
  * \file
  * \brief Definition of the class CDPL::Pharm::PharmacophoreAlignment.
@@ -33,7 +33,7 @@
 #include "CDPL/Chem/SpatialEntityAlignment.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -65,7 +65,7 @@ namespace CDPL
              */
             void addFeatures(const FeatureContainer& cntnr, bool first_set);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PHARMACOPHOREALIGNMENT_HPP

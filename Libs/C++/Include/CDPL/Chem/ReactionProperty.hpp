@@ -32,7 +32,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -58,7 +58,7 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING;
 
             extern CDPL_CHEM_API const Base::LookupKey REACTION_DATA;
-        
+
             extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
             extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
             extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
@@ -68,8 +68,8 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MDL_INTERNAL_REGISTRY_NUMBER;
             extern CDPL_CHEM_API const Base::LookupKey MDL_EXTERNAL_REGISTRY_NUMBER;
             extern CDPL_CHEM_API const Base::LookupKey MDL_RXN_FILE_VERSION;
-        }
-    }
-}
+        } // namespace ReactionProperty
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONPROPERTY_HPP

@@ -39,7 +39,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -55,24 +55,24 @@ namespace CDPL
             class Pattern;
 
           private:
-            typedef std::vector<Pattern> PatternList;
+            typedef std::vector<Pattern>     PatternList;
             typedef std::vector<std::size_t> SizeTypeArray;
 
           public:
             typedef std::shared_ptr<PatternAtomTyper> SharedPointer;
 
             typedef PatternList::const_iterator ConstPatternIterator;
-            typedef PatternList::iterator PatternIterator;
+            typedef PatternList::iterator       PatternIterator;
 
             class CDPL_CHEM_API Pattern
             {
 
                 friend class PatternAtomTyper;
 
-            public:
-                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0, 
+              public:
+                Pattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0,
                         bool all_matches = true, bool unique_matches = false);
-            
+
                 const MolecularGraph::SharedPointer& getStructure() const;
 
                 std::size_t getPriority() const;
@@ -83,9 +83,9 @@ namespace CDPL
 
                 bool processUniqueMatchesOnly() const;
 
-            private:
+              private:
                 typedef std::pair<const Atom*, std::size_t> AtomLabelPair;
-                typedef std::vector<AtomLabelPair> LabeledAtomList;
+                typedef std::vector<AtomLabelPair>          LabeledAtomList;
 
                 const LabeledAtomList& getLabeledAtoms() const;
 
@@ -101,7 +101,7 @@ namespace CDPL
 
             PatternAtomTyper(const PatternAtomTyper& typer);
 
-            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0, 
+            void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0,
                             bool all_matches = true, bool unique_matches = false);
 
             void addPattern(const Pattern& ptn);
@@ -151,7 +151,7 @@ namespace CDPL
             SubstructureSearch    substructSearch;
             Util::BitSet          labeledAtomMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_PATTERNATOMTYPER_HPP

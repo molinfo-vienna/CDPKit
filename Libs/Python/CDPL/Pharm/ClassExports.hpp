@@ -105,7 +105,7 @@ namespace CDPLPythonPharm
     void exportParallelPiPiInteractionConstraint();
     void exportCationPiInteractionConstraint();
     void exportHBondingInteractionConstraint();
-    void exportXBondingInteractionConstraint();    
+    void exportXBondingInteractionConstraint();
     void exportInteractionPharmacophoreGenerator();
 
     void exportFeatureInteractionScore();
@@ -126,6 +126,6 @@ namespace CDPLPythonPharm
     void exportTopologicalEntityAlignment();
     void exportPharmacophoreAlignment();
     void exportSpatialFeatureMapping();
-}
+} // namespace CDPLPythonPharm
 
 #endif // CDPL_PYTHON_PHARM_CLASSEXPORTS_HPP

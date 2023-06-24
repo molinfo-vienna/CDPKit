@@ -40,58 +40,58 @@ namespace CDPL
          * \brief Provides numerical identifiers for built-in Chem::Atom matching constraints.
          */
         namespace AtomMatchConstraint
-        { 
+        {
 
             /**
              * \brief Specifies a constraint which requires the target atom to fulfill additional contraints
              *        specified by a Chem::MatchConstraintList object.
              */
-            const unsigned int CONSTRAINT_LIST     = 0;
+            const unsigned int CONSTRAINT_LIST = 0;
 
             /**
              * \brief Specifies a constraint on the type of the target atom.
              */
-            const unsigned int TYPE                = 1;
+            const unsigned int TYPE = 1;
 
             /**
              * \brief Specifies a constraint on the structural environment of the target atom.
              */
-            const unsigned int ENVIRONMENT         = 2;
+            const unsigned int ENVIRONMENT = 2;
 
             /**
              * \brief Specifies a constraint on the isotopic mass of the target atom.
              */
-            const unsigned int ISOTOPE             = 3;
+            const unsigned int ISOTOPE = 3;
 
             /**
              * \brief Specifies a constraint on the fromal charge of the target atom.
              */
-            const unsigned int CHARGE              = 4;
+            const unsigned int CHARGE = 4;
 
             /**
              * \brief Specifies a constraint on the ring bond count of the target atom.
              */
-            const unsigned int RING_BOND_COUNT     = 5;
+            const unsigned int RING_BOND_COUNT = 5;
 
             /**
              * \brief Specifies a constraint on the total hydrogen count of the target atom.
              */
-            const unsigned int H_COUNT             = 6;
+            const unsigned int H_COUNT = 6;
 
             /**
              * \brief Specifies a constraint on the implicit hydrogen count of the target atom.
              */
-            const unsigned int IMPLICIT_H_COUNT    = 7;
+            const unsigned int IMPLICIT_H_COUNT = 7;
 
             /**
              * \brief Specifies a constraint on the explicit hydrogen count of the target atom.
              */
-            const unsigned int EXPLICIT_H_COUNT    = 8;
+            const unsigned int EXPLICIT_H_COUNT = 8;
 
             /**
              * \brief Specifies a constraint on the total bond count of the target atom.
              */
-            const unsigned int BOND_COUNT          = 9;
+            const unsigned int BOND_COUNT = 9;
 
             /**
              * \brief Specifies a constraint on the explicit bond count of the target atom.
@@ -101,54 +101,54 @@ namespace CDPL
             /**
              * \brief Specifies a constraint on the heavy bond count of the target atom.
              */
-            const unsigned int HEAVY_BOND_COUNT    = 11;
-    
+            const unsigned int HEAVY_BOND_COUNT = 11;
+
             /**
              * \brief Specifies a constraint on the valence of the target atom.
              */
-            const unsigned int VALENCE             = 12;
+            const unsigned int VALENCE = 12;
 
             /**
              * \brief Specifies a constraint on the explicit valence of the target atom.
              */
-            const unsigned int EXPLICIT_VALENCE    = 13;
+            const unsigned int EXPLICIT_VALENCE = 13;
 
             /**
              * \brief Specifies a constraint on the aromaticity of the target atom.
              */
-            const unsigned int AROMATICITY         = 14;
+            const unsigned int AROMATICITY = 14;
 
             /**
              * \brief Specifies a constraint on the ring-membership of the target atom.
              */
-            const unsigned int RING_TOPOLOGY       = 15;
+            const unsigned int RING_TOPOLOGY = 15;
 
             /**
              * \brief Specifies a constraint on the steric configuration of the target atom.
              */
-            const unsigned int CONFIGURATION       = 16;
+            const unsigned int CONFIGURATION = 16;
 
             /**
              * \brief Specifies a constraint on the (non-)membership of the target atom in a double or triple bond.
              */
-            const unsigned int UNSATURATION        = 17;
-        
+            const unsigned int UNSATURATION = 17;
+
             /**
              * \brief Specifies a constraint on the number of rings (from the SSSR) the target atom is a member of.
              */
-            const unsigned int SSSR_RING_COUNT     = 18;
-    
+            const unsigned int SSSR_RING_COUNT = 18;
+
             /**
              * \brief Specifies a constraint on the size of the rings (from the SSSR) the target atom is a member of.
              */
-            const unsigned int SSSR_RING_SIZE      = 19;
+            const unsigned int SSSR_RING_SIZE = 19;
 
             /**
              * \brief Specifies a constraint on the hybridization state of the target atom.
              */
             const unsigned int HYBRIDIZATION_STATE = 20;
-        }
-    }
-}
+        } // namespace AtomMatchConstraint
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMMATCHCONSTRAINT_HPP

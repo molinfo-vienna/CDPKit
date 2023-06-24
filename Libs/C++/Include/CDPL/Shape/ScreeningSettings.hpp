@@ -36,7 +36,7 @@
 #include "CDPL/Shape/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -71,7 +71,7 @@ namespace CDPL
 
             enum AlignmentMode
             {
-            
+
                 NO_ALIGNMENT          = 0x0,
                 SHAPE_CENTROID        = 0x1,
                 ATOM_CENTERS          = 0x2,
@@ -80,7 +80,7 @@ namespace CDPL
             };
 
             ScreeningSettings();
-        
+
             void setScoringFunction(const ScoringFunction& func);
 
             const ScoringFunction& getScoringFunction() const;
@@ -124,26 +124,26 @@ namespace CDPL
             void setOptimizationStopGradient(double grad_norm);
 
             double getOptimizationStopGradient() const;
-        
+
             void setScoreCutoff(double cutoff);
 
             double getScoreCutoff() const;
 
           private:
-            ScoringFunction   scoringFunc;
-            ColorFeatureType  colorFtrType;
-            ScreeningMode     screeningMode;
-            AlignmentMode     almntMode;
-            std::size_t       numRandomStarts;
-            bool              allCarbon;
-            bool              singleConfSearch;
-            bool              optOverlap;
-            bool              greedyOpt;
-            std::size_t       numOptIter;
-            double            optStopGrad;
-            double            scoreCutoff;
+            ScoringFunction  scoringFunc;
+            ColorFeatureType colorFtrType;
+            ScreeningMode    screeningMode;
+            AlignmentMode    almntMode;
+            std::size_t      numRandomStarts;
+            bool             allCarbon;
+            bool             singleConfSearch;
+            bool             optOverlap;
+            bool             greedyOpt;
+            std::size_t      numOptIter;
+            double           optStopGrad;
+            double           scoreCutoff;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_SCREENINGSETTINGS_HPP

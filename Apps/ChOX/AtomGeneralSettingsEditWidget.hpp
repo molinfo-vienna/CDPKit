@@ -44,26 +44,26 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         AtomGeneralSettingsEditWidget(QWidget*, Settings&);
 
         bool haveChangedSettings() const;
 
-    signals:
+      signals:
         void updateGUI();
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    private slots:
+      private slots:
         void handleSettingsChange();
         void handleSettingsChange(bool);
 
         void handleHCountVisibilityChange(bool);
 
-    private:
+      private:
         void init();
 
         Settings&                    settings;
@@ -85,6 +85,6 @@ namespace ChOX
         QCheckBox*                   useCalcAtomCoordsCheckBox;
         bool                         haveChanges;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_ATOMGENERALSETTINGSEDITWIDGET_HPP

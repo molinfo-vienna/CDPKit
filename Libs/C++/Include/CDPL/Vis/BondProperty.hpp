@@ -32,7 +32,7 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -43,7 +43,7 @@ namespace CDPL
 
     namespace Vis
     {
-    
+
         /**
          * \brief Provides keys for built-in Chem::Bond properties.
          */
@@ -125,7 +125,7 @@ namespace CDPL
              * \see Vis::ControlParameter::SHOW_BOND_REACTION_INFOS
              */
             extern CDPL_VIS_API const Base::LookupKey REACTION_CENTER_LINE_LENGTH;
-    
+
             /**
              * \brief Specifies the distance between the lines in reaction center marks. 
              *
@@ -139,7 +139,7 @@ namespace CDPL
              * \see Vis::ControlParameter::SHOW_BOND_REACTION_INFOS
              */
             extern CDPL_VIS_API const Base::LookupKey REACTION_CENTER_LINE_SPACING;
-    
+
             /**
              * \brief Specifies the amount by which the non-central lines of asymmetric double bonds have to be trimmed at each
              *        line end.
@@ -188,7 +188,7 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey LABEL_SIZE;
-    
+
             /**
              * \brief Specifies the margin of free space around bond labels.
              *
@@ -202,8 +202,8 @@ namespace CDPL
              * \valuetype Vis::SizeSpecification
              */
             extern CDPL_VIS_API const Base::LookupKey LABEL_MARGIN;
-        }
-    }
-}
+        } // namespace BondProperty
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_BONDPROPERTY_HPP

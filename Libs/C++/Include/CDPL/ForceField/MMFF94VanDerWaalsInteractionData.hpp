@@ -33,14 +33,14 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
-    typedef Util::Array<MMFF94VanDerWaalsInteraction> MMFF94VanDerWaalsInteractionData;
+        typedef Util::Array<MMFF94VanDerWaalsInteraction> MMFF94VanDerWaalsInteractionData;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONDATA_HPP

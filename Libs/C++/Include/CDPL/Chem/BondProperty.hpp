@@ -32,7 +32,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -68,8 +68,8 @@ namespace CDPL
             extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
             extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
-        }
-    }
-}
+        } // namespace BondProperty
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDPROPERTY_HPP

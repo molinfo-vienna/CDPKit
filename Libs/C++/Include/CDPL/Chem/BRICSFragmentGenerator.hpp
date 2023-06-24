@@ -35,28 +35,28 @@
 #include "CDPL/Chem/FragmentGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
 
-    /**
+        /**
      * \brief BRICSFragmentGenerator.
      * \see [\ref BRICS]
      */
-    class CDPL_CHEM_API BRICSFragmentGenerator : public FragmentGenerator 
-    {
+        class CDPL_CHEM_API BRICSFragmentGenerator : public FragmentGenerator
+        {
 
-      public:
-        typedef std::shared_ptr<BRICSFragmentGenerator> SharedPointer;
-        
-        /**
+          public:
+            typedef std::shared_ptr<BRICSFragmentGenerator> SharedPointer;
+
+            /**
          * \brief Constructs the \c %BRICSFragmentGenerator instance.
          */
-        BRICSFragmentGenerator();
-    };
-    }
-}
+            BRICSFragmentGenerator();
+        };
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BRICSFRAGMENTGENERATOR_HPP

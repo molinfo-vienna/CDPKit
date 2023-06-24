@@ -27,24 +27,24 @@
  */
 
 #ifndef CDPL_APIPREFIX_HPP
-#define CDPL_APIPREFIX_HPP
+# define CDPL_APIPREFIX_HPP
 
-#if (defined(_WIN32) || defined(__CYGWIN__))
+# if (defined(_WIN32) || defined(__CYGWIN__))
 #  define CDPL_API_EXPORT __declspec(dllexport)
 #  define CDPL_API_IMPORT __declspec(dllimport)
-#else
+# else
 #  if __GNUC__ >= 4
-#    define CDPL_API_EXPORT __attribute__ ((visibility ("default")))
-#    define CDPL_API_IMPORT __attribute__ ((visibility ("default")))
+#   define CDPL_API_EXPORT __attribute__((visibility("default")))
+#   define CDPL_API_IMPORT __attribute__((visibility("default")))
 #  else
-#    define CDPL_API_EXPORT
-#    define CDPL_API_IMPORT
+#   define CDPL_API_EXPORT
+#   define CDPL_API_IMPORT
 #  endif // __GNUC__ >= 4
-#endif // (defined(_WIN32) || defined(__CYGWIN__))
+# endif // (defined(_WIN32) || defined(__CYGWIN__))
 
-#ifdef _MSC_VER
-#  pragma warning (disable : 4251) // disable exported dll function
-#endif // _MSC_VER
+# ifdef _MSC_VER
+#  pragma warning(disable : 4251) // disable exported dll function
+# endif // _MSC_VER
 
 #endif // CDPL_APIPREFIX_HPP
 

@@ -36,7 +36,7 @@
 #include "CDPL/Chem/BondMapping.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,7 +54,7 @@ namespace CDPL
         class CDPL_CHEM_API AtomBondMapping
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomBondMapping instances.
              */
@@ -113,11 +113,11 @@ namespace CDPL
              */
             bool operator!=(const AtomBondMapping& mapping) const;
 
-        private:
+          private:
             AtomMapping atomMapping;
             BondMapping bondMapping;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMBONDMAPPING_HPP

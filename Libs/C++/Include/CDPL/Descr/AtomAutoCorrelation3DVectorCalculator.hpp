@@ -34,7 +34,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,7 +42,7 @@ namespace CDPL
 
         class Atom;
         class AtomContainer;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -53,17 +53,17 @@ namespace CDPL
         class CDPL_DESCR_API AtomAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Chem::Atom>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %AtomAutoCorrelation3DVectorCalculator instance.
              */
             AtomAutoCorrelation3DVectorCalculator();
-            
+
             AtomAutoCorrelation3DVectorCalculator(const Chem::AtomContainer& cntnr, Math::DVector& vec);
 
             void calculate(const Chem::AtomContainer& cntnr, Math::DVector& vec);
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_ATOMAUTOCORRELATION3DVECTORCALCULATOR_HPP

@@ -33,14 +33,14 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
-    typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionData;
+        typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionData;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONDATA_HPP

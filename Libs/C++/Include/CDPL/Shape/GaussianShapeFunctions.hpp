@@ -34,7 +34,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,13 +48,13 @@ namespace CDPL
 
         class FeatureContainer;
     }
-    
+
     namespace Shape
     {
 
         class GaussianShape;
         class GaussianShapeFunction;
-        
+
         CDPL_SHAPE_API void generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape,
                                                   bool append = false, double radius = -1.0, bool inc_h = false, double p = 2.7);
 
@@ -65,10 +65,10 @@ namespace CDPL
                                                   bool append = false, double radius = -1.0, bool inc_xv = false, double p = 5.0);
 
         CDPL_SHAPE_API void transform(GaussianShape& shape, const Math::Matrix4D& xform);
-        
+
         CDPL_SHAPE_API unsigned int centerAndAlignPrincipalAxes(GaussianShape& shape, const GaussianShapeFunction& func, Math::Matrix4D& back_xform,
                                                                 double mom_eq_thresh = 0.15);
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONS_HPP

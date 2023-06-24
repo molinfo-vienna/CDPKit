@@ -32,7 +32,7 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -52,7 +52,7 @@ namespace CDPL
 
             extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_AROMATIC_RINGS;
         }
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MOLECULARGRAPHPROPERTY_HPP

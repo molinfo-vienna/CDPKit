@@ -38,7 +38,7 @@ namespace CDPL
 
         namespace CDF
         {
-            
+
             using namespace Internal::CDF;
 
             typedef std::uint32_t UIntType;
@@ -46,30 +46,30 @@ namespace CDPL
 
             const std::uint8_t PHARMACOPHORE_RECORD_ID = 3;
 
-            const std::uint8_t CURR_FORMAT_VERSION     = 1;
+            const std::uint8_t CURR_FORMAT_VERSION = 1;
 
             namespace FeatureProperty
             {
 
-                const unsigned int TYPE                    = 1; 
-                const unsigned int COORDINATES_3D          = 2;
-                const unsigned int GEOMETRY                = 3; 
-                const unsigned int LENGTH                  = 4; 
-                const unsigned int ORIENTATION             = 5; 
-                const unsigned int TOLERANCE               = 6; 
-                const unsigned int DISABLED_FLAG           = 7; 
-                const unsigned int OPTIONAL_FLAG           = 8; 
-                const unsigned int HYDROPHOBICITY          = 9;
-                const unsigned int WEIGHT                  = 10;
-            }
-        
+                const unsigned int TYPE           = 1;
+                const unsigned int COORDINATES_3D = 2;
+                const unsigned int GEOMETRY       = 3;
+                const unsigned int LENGTH         = 4;
+                const unsigned int ORIENTATION    = 5;
+                const unsigned int TOLERANCE      = 6;
+                const unsigned int DISABLED_FLAG  = 7;
+                const unsigned int OPTIONAL_FLAG  = 8;
+                const unsigned int HYDROPHOBICITY = 9;
+                const unsigned int WEIGHT         = 10;
+            } // namespace FeatureProperty
+
             namespace PharmacophoreProperty
             {
-                
-                const unsigned int NAME = 1; 
+
+                const unsigned int NAME = 1;
             }
-        }
-    }
-}
+        } // namespace CDF
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFFORMATDATA_HPP

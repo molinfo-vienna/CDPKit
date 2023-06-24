@@ -44,12 +44,12 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         /**
          * \brief PatternBasedTautomerizationRule.
          */
@@ -74,7 +74,8 @@ namespace CDPL
             PatternBasedTautomerizationRule& operator=(const PatternBasedTautomerizationRule& rule);
 
             template <typename Iter>
-            void addTransformationPattern(const MolecularGraph::SharedPointer& pattern, Iter bond_chgs_beg, Iter bond_chgs_end) {
+            void addTransformationPattern(const MolecularGraph::SharedPointer& pattern, Iter bond_chgs_beg, Iter bond_chgs_end)
+            {
                 structPatterns.push_back(pattern);
                 patternSubSearchList.push_back(SubstructureSearch::SharedPointer(new SubstructureSearch(*pattern)));
                 patternBondChangeLists.resize(patternBondChangeLists.size() + 1);
@@ -89,7 +90,7 @@ namespace CDPL
             void clearExcludePatterns();
 
             bool setup(MolecularGraph& parent_molgraph);
-        
+
             unsigned int getID() const;
 
             bool generate(Molecule& tautomer);
@@ -105,27 +106,27 @@ namespace CDPL
 
             void createMatchedBondMask(const BondMapping& mapping, Util::BitSet& bond_mask) const;
 
-            typedef std::vector<BondOrderChange> BondOrderChangeList;
-            typedef std::vector<BondOrderChangeList> BondOrderChangeListArray;
-            typedef std::vector<MolecularGraph::SharedPointer> StructPatternList;
+            typedef std::vector<BondOrderChange>                   BondOrderChangeList;
+            typedef std::vector<BondOrderChangeList>               BondOrderChangeListArray;
+            typedef std::vector<MolecularGraph::SharedPointer>     StructPatternList;
             typedef std::vector<SubstructureSearch::SharedPointer> SubstructureSearchList;
-            typedef std::vector<Util::BitSet*> BitSetList;
-            typedef Util::ObjectStack<Util::BitSet> BitSetCache;
+            typedef std::vector<Util::BitSet*>                     BitSetList;
+            typedef Util::ObjectStack<Util::BitSet>                BitSetCache;
 
-            unsigned int                ruleID;
-            StructPatternList           structPatterns;
-            StructPatternList           excludePatterns;
-            BondOrderChangeListArray    patternBondChangeLists;
-            SubstructureSearchList      patternSubSearchList;
-            SubstructureSearchList      excludeSubSearchList;
-            const MolecularGraph*       parentMolGraph;
-            std::size_t                 currPatternIdx;
-            std::size_t                 currMappingIdx;
-            Util::BitSet                bondMask;
-            BitSetList                  excludeMatches;
-            BitSetCache                 bitSetCache;
+            unsigned int             ruleID;
+            StructPatternList        structPatterns;
+            StructPatternList        excludePatterns;
+            BondOrderChangeListArray patternBondChangeLists;
+            SubstructureSearchList   patternSubSearchList;
+            SubstructureSearchList   excludeSubSearchList;
+            const MolecularGraph*    parentMolGraph;
+            std::size_t              currPatternIdx;
+            std::size_t              currMappingIdx;
+            Util::BitSet             bondMask;
+            BitSetList               excludeMatches;
+            BitSetCache              bitSetCache;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_PATTERNBASEDTAUTOMERIZATIONRULE_HPP

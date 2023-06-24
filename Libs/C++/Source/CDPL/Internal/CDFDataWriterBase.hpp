@@ -38,7 +38,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Internal
@@ -47,8 +47,9 @@ namespace CDPL
         class CDFDataWriterBase
         {
 
-        public:
-            CDFDataWriterBase(): strictErrorChecks(true), singlePrecFloats(false) {}
+          public:
+            CDFDataWriterBase():
+                strictErrorChecks(true), singlePrecFloats(false) {}
 
             virtual ~CDFDataWriterBase() {}
 
@@ -67,13 +68,13 @@ namespace CDPL
 
             template <typename Vec, typename ValueType = typename Vec::ValueType>
             void putVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const;
- 
+
             template <typename Vec>
             void putCVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const;
 
             template <typename Vec>
             void putCVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vey_array, ByteBuffer& bbuf) const;
- 
+
             template <typename Mtx>
             void putCMatrix(const Mtx& mtx, ByteBuffer& bbuf, bool write_fp_len) const;
 
@@ -92,23 +93,23 @@ namespace CDPL
 
             void putPropertyListMarker(unsigned int prop_id, ByteBuffer& bbuf) const;
 
-        private:
+          private:
             CDF::PropertySpec composePropertySpec(unsigned int prop_id, std::size_t length) const;
 
             bool strictErrorChecks;
             bool singlePrecFloats;
         };
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename T>
-void CDPL::Internal::CDFDataWriterBase::putIntProperty(unsigned int prop_id, const T& value, 
+void CDPL::Internal::CDFDataWriterBase::putIntProperty(unsigned int prop_id, const T& value,
                                                        ByteBuffer& bbuf, bool compress) const
 {
-    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                             "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
     std::size_t last_pos = bbuf.getIOPointer();
@@ -126,15 +127,15 @@ template <typename T>
 void CDPL::Internal::CDFDataWriterBase::putFloatProperty(unsigned int prop_id, const T& value, ByteBuffer& bbuf) const
 {
     if (singlePrecFloats) {
-        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                                 "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
         bbuf.putInt(composePropertySpec(prop_id, sizeof(float)), false);
         bbuf.putFloat(float(value));
         return;
     }
- 
-    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+
+    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                             "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
     bbuf.putInt(composePropertySpec(prop_id, sizeof(T)), false);
@@ -151,7 +152,7 @@ template <typename Vec, typename ValueType>
 void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const
 {
     if (singlePrecFloats) {
-        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                                 "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
         bbuf.putInt(composePropertySpec(prop_id, sizeof(float)), false);
@@ -162,8 +163,8 @@ void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, 
 
         return;
     }
- 
-    BOOST_STATIC_ASSERT_MSG((sizeof(ValueType) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+
+    BOOST_STATIC_ASSERT_MSG((sizeof(ValueType) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                             "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
     bbuf.putInt(composePropertySpec(prop_id, sizeof(ValueType)), false);
@@ -177,7 +178,7 @@ template <typename Vec>
 void CDPL::Internal::CDFDataWriterBase::putCVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const
 {
     if (singlePrecFloats) {
-        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                                 "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
         bbuf.putInt(composePropertySpec(prop_id, sizeof(float)), false);
@@ -187,10 +188,10 @@ void CDPL::Internal::CDFDataWriterBase::putCVectorProperty(unsigned int prop_id,
 
         return;
     }
- 
+
     typedef typename Vec::ValueType T;
 
-    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                             "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
     bbuf.putInt(composePropertySpec(prop_id, sizeof(T)), false);
@@ -203,7 +204,7 @@ template <typename Vec>
 void CDPL::Internal::CDFDataWriterBase::putCVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
 {
     if (singlePrecFloats) {
-        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+        BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                                 "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
         bbuf.putInt(composePropertySpec(prop_id, sizeof(float)), false);
@@ -215,10 +216,10 @@ void CDPL::Internal::CDFDataWriterBase::putCVectorArrayProperty(unsigned int pro
 
         return;
     }
- 
+
     typedef typename Vec::ValueType T;
 
-    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS),
                             "CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
     bbuf.putInt(composePropertySpec(prop_id, sizeof(T)), false);
@@ -234,14 +235,14 @@ void CDPL::Internal::CDFDataWriterBase::putCMatrix(const Mtx& mtx, ByteBuffer& b
 {
     if (write_fp_len)
         bbuf.putInt(boost::numeric_cast<std::uint8_t>(singlePrecFloats ? sizeof(float) : sizeof(typename Mtx::ValueType)), false);
-    
+
     if (singlePrecFloats) {
         for (std::size_t i = 0; i < Mtx::Size1; i++)
             for (std::size_t j = 0; j < Mtx::Size2; j++)
                 bbuf.putFloat(float(mtx(i, j)));
         return;
     }
-  
+
     for (std::size_t i = 0; i < Mtx::Size1; i++)
         for (std::size_t j = 0; j < Mtx::Size2; j++)
             bbuf.putFloat(mtx(i, j));

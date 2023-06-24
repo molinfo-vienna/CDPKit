@@ -90,7 +90,7 @@ namespace CDPLPythonChem
 
     void exportTopologicalEntityAlignments();
     void exportSpatialEntityAlignments();
-    
+
     void exportCompleteRingSet();
     void exportAromaticRingSet();
     void exportAromaticSSSRSubset();
@@ -100,7 +100,7 @@ namespace CDPLPythonChem
     void exportConnectedSubstructureSet();
     void exportComponentSet();
     void exportPiElectronSystemList();
-    
+
     void exportMorganNumberingCalculator();
     void exportCanonicalNumberingCalculator();
     void exportCIPPriorityCalculator();
@@ -121,24 +121,24 @@ namespace CDPLPythonChem
     void exportTautomerizationRule();
     void exportPatternBasedTautomerizationRule();
     void exportKetoEnolTautomerization();
-    void exportImineEnamineTautomerization();  
-    void exportNitrosoOximeTautomerization();  
-    void exportAmideImidicAcidTautomerization();  
-    void exportLactamLactimTautomerization();  
-    void exportKeteneYnolTautomerization();  
-    void exportNitroAciTautomerization();  
-    void exportPhosphinicAcidTautomerization();  
-    void exportSulfenicAcidTautomerization();  
-    void exportGenericHydrogen13ShiftTautomerization();  
-    void exportGenericHydrogen15ShiftTautomerization();  
+    void exportImineEnamineTautomerization();
+    void exportNitrosoOximeTautomerization();
+    void exportAmideImidicAcidTautomerization();
+    void exportLactamLactimTautomerization();
+    void exportKeteneYnolTautomerization();
+    void exportNitroAciTautomerization();
+    void exportPhosphinicAcidTautomerization();
+    void exportSulfenicAcidTautomerization();
+    void exportGenericHydrogen13ShiftTautomerization();
+    void exportGenericHydrogen15ShiftTautomerization();
     void exportResonanceStructureGenerator();
     void exportChEMBLStandardizer();
     void exportProtonationStateStandardizer();
-    
+
     void exportFragmentGenerator();
     void exportRECAPFragmentGenerator();
     void exportBRICSFragmentGenerator();
-    
+
     void exportMoleculeReader();
     void exportMoleculeWriter();
     void exportMolecularGraphReader();
@@ -212,6 +212,6 @@ namespace CDPLPythonChem
     void exportSMARTSReactionOutputHandler();
     void exportMOL2MoleculeInputHandler();
     void exportMOL2MolecularGraphOutputHandler();
-}
+} // namespace CDPLPythonChem
 
 #endif // CDPL_PYTHON_CHEM_CLASSEXPORTS_HPP

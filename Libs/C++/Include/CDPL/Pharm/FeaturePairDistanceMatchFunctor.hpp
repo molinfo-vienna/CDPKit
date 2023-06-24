@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -53,7 +53,8 @@ namespace CDPL
              *                   of the first pair for the compatibility check to succeed. If \c false, it is sufficient
              *                   that any one of the pairs matches the distance range of the other. 
              */
-            FeaturePairDistanceMatchFunctor(bool query_mode): qryMode(query_mode) {}
+            FeaturePairDistanceMatchFunctor(bool query_mode):
+                qryMode(query_mode) {}
 
             bool queryMode() const;
 
@@ -73,7 +74,7 @@ namespace CDPL
           private:
             bool qryMode;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREPAIRDISTANCEMATCHFUNCTOR_HPP

@@ -55,8 +55,8 @@ namespace CDPL
 
         class Pharmacophore;
         class FileScreeningHitCollector;
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 
 namespace PSDScreen
@@ -65,17 +65,17 @@ namespace PSDScreen
     class PSDScreenImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         PSDScreenImpl();
 
-    private:
+      private:
         struct ScreeningWorker;
 
         typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> HitOutputHandler;
-        typedef CDPL::Base::DataInputHandler<CDPL::Pharm::Pharmacophore> QueryInputHandler;
-        typedef HitOutputHandler::SharedPointer HitOutputHandlerPtr;
-        typedef QueryInputHandler::SharedPointer QueryInputHandlerPtr;
-        typedef CDPL::Pharm::ScreeningProcessor::SearchHit SearchHit;
+        typedef CDPL::Base::DataInputHandler<CDPL::Pharm::Pharmacophore>  QueryInputHandler;
+        typedef HitOutputHandler::SharedPointer                           HitOutputHandlerPtr;
+        typedef QueryInputHandler::SharedPointer                          QueryInputHandlerPtr;
+        typedef CDPL::Pharm::ScreeningProcessor::SearchHit                SearchHit;
 
         const char* getProgName() const;
         const char* getProgCopyright() const;
@@ -112,52 +112,52 @@ namespace PSDScreen
 
         std::string getMatchingModeString() const;
 
-        HitOutputHandlerPtr getHitOutputHandler(const std::string& file_path) const;
+        HitOutputHandlerPtr  getHitOutputHandler(const std::string& file_path) const;
         QueryInputHandlerPtr getQueryInputHandler(const std::string& file_path) const;
 
         void addOptionLongDescriptions();
-    
-        typedef CDPL::Pharm::ScreeningProcessor::HitReportMode MatchingMode;
-        typedef std::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
+
+        typedef CDPL::Pharm::ScreeningProcessor::HitReportMode                    MatchingMode;
+        typedef std::shared_ptr<CDPL::Pharm::FileScreeningHitCollector>           HitCollectorPtr;
         typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer HitWriterPtr;
         typedef CDPL::Base::DataReader<CDPL::Pharm::Pharmacophore>::SharedPointer QueryReaderPtr;
-        typedef CDPL::Internal::Timer Timer;
-        typedef std::vector<double> WorkerProgressArray;
+        typedef CDPL::Internal::Timer                                             Timer;
+        typedef std::vector<double>                                               WorkerProgressArray;
 
-        std::string              queryPharmFile;
-        std::string              screeningDB;
-        std::string              hitOutputFile;
-        bool                     checkXVols;
-        bool                     alignConfs;
-        bool                     bestAlignments;
-        bool                     outputScore;
-        bool                     outputMolIndex;
-        bool                     outputConfIndex;
-        bool                     outputDBName;
-        bool                     outputPharmName;
-        bool                     outputPharmIndex;
-        std::size_t              numThreads;
-        std::size_t              startMolIndex;
-        std::size_t              endMolIndex;
-        std::size_t              maxOmittedFtrs;
-        MatchingMode             matchingMode;
-        HitOutputHandlerPtr      hitOutputHandler;
-        QueryInputHandlerPtr     queryInputHandler;
-        HitWriterPtr             hitMolWriter;
-        QueryReaderPtr           queryPharmReader;
-        HitCollectorPtr          hitCollector;
-        std::mutex               mutex;
-        std::mutex               collHitMutex;
-        std::string              errorMessage;
-        Timer                    timer;
-        std::size_t              numQueryPharms;
-        std::size_t              numDBMolecules;
-        std::size_t              numDBPharms;
-        std::size_t              numHits;
-        std::size_t              maxNumHits;
-        int                      lastProgValue;
-        WorkerProgressArray      workerProgArray;
+        std::string          queryPharmFile;
+        std::string          screeningDB;
+        std::string          hitOutputFile;
+        bool                 checkXVols;
+        bool                 alignConfs;
+        bool                 bestAlignments;
+        bool                 outputScore;
+        bool                 outputMolIndex;
+        bool                 outputConfIndex;
+        bool                 outputDBName;
+        bool                 outputPharmName;
+        bool                 outputPharmIndex;
+        std::size_t          numThreads;
+        std::size_t          startMolIndex;
+        std::size_t          endMolIndex;
+        std::size_t          maxOmittedFtrs;
+        MatchingMode         matchingMode;
+        HitOutputHandlerPtr  hitOutputHandler;
+        QueryInputHandlerPtr queryInputHandler;
+        HitWriterPtr         hitMolWriter;
+        QueryReaderPtr       queryPharmReader;
+        HitCollectorPtr      hitCollector;
+        std::mutex           mutex;
+        std::mutex           collHitMutex;
+        std::string          errorMessage;
+        Timer                timer;
+        std::size_t          numQueryPharms;
+        std::size_t          numDBMolecules;
+        std::size_t          numDBPharms;
+        std::size_t          numHits;
+        std::size_t          maxNumHits;
+        int                  lastProgValue;
+        WorkerProgressArray  workerProgArray;
     };
-}
+} // namespace PSDScreen
 
 #endif // PSDSCREEN_PSDSCREENIMPL_HPP

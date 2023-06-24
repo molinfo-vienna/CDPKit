@@ -44,20 +44,20 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         SMILESIOSettingsEditWidget(QWidget*, Settings&);
 
         bool haveChangedSettings() const;
 
-    signals:
+      signals:
         void updateGUI();
 
-    public slots:
+      public slots:
         void apply();
         void reset();
         void setDefaults();
 
-    private slots:
+      private slots:
         void handleSettingsChange();
         void handleSettingsChange(bool);
         void handleSettingsChange(int);
@@ -65,29 +65,29 @@ namespace ChOX
         void handleBondStereoSettingsChange(bool);
         void handleKekuleFormSettingChange(bool);
 
-    private:
+      private:
         void init();
 
-        Settings&    settings;
-        QCheckBox*   iptStrictErrorCheckingCheckBox;
-        QCheckBox*   optStrictErrorCheckingCheckBox;
-        QCheckBox*   optOrdinaryHDepleteCheckBox;
-        QCheckBox*   optCanonicalFormCheckBox;
-        QCheckBox*   optKekuleFormCheckBox;
-        QCheckBox*   optIsotopeCheckBox;
-        QCheckBox*   optAtomStereoCheckBox;
-        QCheckBox*   optBondStereoCheckBox;
-        QCheckBox*   optRingBondStereoCheckBox;
-        QCheckBox*   optAtomAtomMappingsCheckBox;
-        QCheckBox*   optExplicitSingleBondsCheckBox;
-        QCheckBox*   optExplicitAromaticBondsCheckBox;
-        QCheckBox*   optNoOrganicSubsetCheckBox;
-        QCheckBox*   optConcatenateRecordsCheckBox;
-        QSpinBox*    optMinRingSizeSpinBox;
-        std::string  iptRecordFormat;
-        std::string  optRecordFormat;
-        bool         haveChanges;
+        Settings&   settings;
+        QCheckBox*  iptStrictErrorCheckingCheckBox;
+        QCheckBox*  optStrictErrorCheckingCheckBox;
+        QCheckBox*  optOrdinaryHDepleteCheckBox;
+        QCheckBox*  optCanonicalFormCheckBox;
+        QCheckBox*  optKekuleFormCheckBox;
+        QCheckBox*  optIsotopeCheckBox;
+        QCheckBox*  optAtomStereoCheckBox;
+        QCheckBox*  optBondStereoCheckBox;
+        QCheckBox*  optRingBondStereoCheckBox;
+        QCheckBox*  optAtomAtomMappingsCheckBox;
+        QCheckBox*  optExplicitSingleBondsCheckBox;
+        QCheckBox*  optExplicitAromaticBondsCheckBox;
+        QCheckBox*  optNoOrganicSubsetCheckBox;
+        QCheckBox*  optConcatenateRecordsCheckBox;
+        QSpinBox*   optMinRingSizeSpinBox;
+        std::string iptRecordFormat;
+        std::string optRecordFormat;
+        bool        haveChanges;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SMILESIOSETTINGSEDITWIDGET_HPP

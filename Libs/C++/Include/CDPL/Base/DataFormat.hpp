@@ -36,7 +36,7 @@
 #include "CDPL/Base/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -45,12 +45,12 @@ namespace CDPL
         /**
          * \brief Provides meta-information about a particular data storage format.
          */
-        class CDPL_BASE_API DataFormat 
+        class CDPL_BASE_API DataFormat
         {
 
             typedef std::vector<std::string> FileExtensionList;
 
-        public:
+          public:
             /**
              * \brief A constant random access iterator used to iterate over the
              *        list of file extensions.
@@ -74,17 +74,20 @@ namespace CDPL
              * \param multi_rec \c true if the data format supports the storage of multiple data records, and \c false otherwise.
              */
             template <typename Iter>
-            DataFormat(const std::string& name, const std::string& descr, const std::string& mime_type, 
-                       Iter file_ext_begin, Iter file_ext_end, bool multi_rec)
-                : name(name), description(descr), mimeType(mime_type), fileExtensions(file_ext_begin, file_ext_end),
-                  multiRecordFormat(multi_rec) {}
+            DataFormat(const std::string& name, const std::string& descr, const std::string& mime_type,
+                       Iter file_ext_begin, Iter file_ext_end, bool multi_rec):
+                name(name),
+                description(descr), mimeType(mime_type), fileExtensions(file_ext_begin, file_ext_end),
+                multiRecordFormat(multi_rec)
+            {}
 
             /**
              * \brief Default constructor.
              *
              * All string attributes are initialized to an empty string, and the multi record format flag is set to \c false.
              */
-            DataFormat(): multiRecordFormat(false) {}
+            DataFormat():
+                multiRecordFormat(false) {}
 
             /**
              * \brief Returns the description of the data format.
@@ -272,14 +275,14 @@ namespace CDPL
              */
             bool operator!=(const DataFormat& fmt) const;
 
-        private:
+          private:
             std::string       name;
             std::string       description;
             std::string       mimeType;
             FileExtensionList fileExtensions;
             bool              multiRecordFormat;
         };
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 #endif // CDPL_BASE_DATAFORMAT_HPP

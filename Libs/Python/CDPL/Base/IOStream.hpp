@@ -34,7 +34,6 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-
 namespace CDPLPythonBase
 {
 
@@ -42,15 +41,17 @@ namespace CDPLPythonBase
     class IOStream : virtual public IOStreamImpl
     {
 
-    public:
+      public:
         IOStream(const std::string& mode_str, std::ios_base::openmode mode):
             closed(false), softSpace(false), openModeString(mode_str), openModeFlags(mode) {}
 
-        IOStream& getIterator() {
+        IOStream& getIterator()
+        {
             return *this;
         }
 
-        const std::string& nextLine() {
+        const std::string& nextLine()
+        {
             checkIfClosed();
             checkIfReadOpAllowed();
 
@@ -68,14 +69,15 @@ namespace CDPLPythonBase
             return data;
         }
 
-        const std::string& readLine(long max_count = -1) {
+        const std::string& readLine(long max_count = -1)
+        {
             checkIfClosed();
             checkIfReadOpAllowed();
 
             IOStreamImpl::clear();
             IOStreamImpl::tellg();
 
-            if (max_count < 0) 
+            if (max_count < 0)
                 return getLine();
 
             data.clear();
@@ -94,7 +96,8 @@ namespace CDPLPythonBase
             return data;
         }
 
-        boost::python::list readLines(long max_count = -1) {
+        boost::python::list readLines(long max_count = -1)
+        {
             checkIfClosed();
             checkIfReadOpAllowed();
 
@@ -103,15 +106,18 @@ namespace CDPLPythonBase
             IOStreamImpl::clear();
             IOStreamImpl::tellg();
 
-            if (max_count < 0) 
-                for ( ; !getLine().empty(); lines.append(data));
+            if (max_count < 0)
+                for (; !getLine().empty(); lines.append(data))
+                    ;
             else
-                for (long count = 0; count < max_count && !getLine().empty(); lines.append(data), count += data.size());
+                for (long count = 0; count < max_count && !getLine().empty(); lines.append(data), count += data.size())
+                    ;
 
             return lines;
         }
 
-        const std::string& readChars(long max_count = -1) {
+        const std::string& readChars(long max_count = -1)
+        {
             checkIfClosed();
             checkIfReadOpAllowed();
 
@@ -123,22 +129,25 @@ namespace CDPLPythonBase
             char c;
 
             if (max_count < 0)
-                for ( ; IOStreamImpl::get(c); data.push_back(c));
+                for (; IOStreamImpl::get(c); data.push_back(c))
+                    ;
             else
-                for (long i = 0; i < max_count && IOStreamImpl::get(c); data.push_back(c), i++);
+                for (long i = 0; i < max_count && IOStreamImpl::get(c); data.push_back(c), i++)
+                    ;
 
             checkIfInBadState();
 
             return data;
         }
 
-        void writeChars(PyObject* str) {
+        void writeChars(PyObject* str)
+        {
             using namespace boost;
 
             checkIfClosed();
             checkIfWriteOpAllowed();
 
-            char* buf;
+            char*           buf;
             python::ssize_t length;
 
             if (PyBytes_AsStringAndSize(str, &buf, &length) != 0) {
@@ -155,13 +164,14 @@ namespace CDPLPythonBase
             checkIfInGoodState();
         }
 
-        void writeLines(PyObject* iterable) {
+        void writeLines(PyObject* iterable)
+        {
             using namespace boost;
 
             checkIfClosed();
             checkIfWriteOpAllowed();
 
-            PyObject *iter = PyObject_GetIter(iterable);
+            PyObject* iter = PyObject_GetIter(iterable);
 
             if (!iter) {
                 PyErr_SetString(PyExc_TypeError, "IOStream: writelines() requires an iterable argument");
@@ -169,17 +179,19 @@ namespace CDPLPythonBase
                 boost::python::throw_error_already_set();
             }
 
-            python::handle<> iter_handle(python::borrowed(iter)); Py_DECREF(iter);
+            python::handle<> iter_handle(python::borrowed(iter));
+            Py_DECREF(iter);
 
-            PyObject *item;
+            PyObject* item;
 
             IOStreamImpl::clear();
             IOStreamImpl::tellp();
 
             while ((item = PyIter_Next(iter))) {
-                python::handle<> item_handle(python::borrowed(item)); Py_DECREF(item);
+                python::handle<> item_handle(python::borrowed(item));
+                Py_DECREF(item);
 
-                char* buf;
+                char*           buf;
                 python::ssize_t length;
 
                 if (PyBytes_AsStringAndSize(item, &buf, &length) != 0) {
@@ -194,7 +206,8 @@ namespace CDPLPythonBase
             }
         }
 
-        void flushStream() {
+        void flushStream()
+        {
             checkIfClosed();
 
             IOStreamImpl::flush();
@@ -202,27 +215,33 @@ namespace CDPLPythonBase
             checkIfInBadState();
         }
 
-        bool isClosed() const {
+        bool isClosed() const
+        {
             return closed;
         }
 
-        const std::string& getOpenModeString() const {
+        const std::string& getOpenModeString() const
+        {
             return openModeString;
         }
 
-        std::ios_base::openmode getOpenModeFlags() const {
+        std::ios_base::openmode getOpenModeFlags() const
+        {
             return openModeFlags;
         }
 
-        bool getSoftSpace() const {
+        bool getSoftSpace() const
+        {
             return softSpace;
         }
 
-        void setSoftSpace(bool value) {
+        void setSoftSpace(bool value)
+        {
             softSpace = value;
         }
 
-        std::size_t tellReadPos() {
+        std::size_t tellReadPos()
+        {
             checkIfClosed();
 
             IOStreamImpl::clear();
@@ -237,7 +256,8 @@ namespace CDPLPythonBase
             return std::size_t(pos);
         }
 
-        std::size_t tellWritePos() {
+        std::size_t tellWritePos()
+        {
             checkIfClosed();
 
             IOStreamImpl::clear();
@@ -252,116 +272,128 @@ namespace CDPLPythonBase
             return std::size_t(pos);
         }
 
-        void seekReadPos(typename IOStreamImpl::off_type offs, unsigned int whence = 0) {
+        void seekReadPos(typename IOStreamImpl::off_type offs, unsigned int whence = 0)
+        {
             checkIfClosed();
-    
+
             IOStreamImpl::clear();
             IOStreamImpl::seekg(offs, getSeekDir(whence));
 
             checkIfInGoodState();
         }
 
-        void seekWritePos(typename IOStreamImpl::off_type offs, unsigned int whence = 0) {
+        void seekWritePos(typename IOStreamImpl::off_type offs, unsigned int whence = 0)
+        {
             checkIfClosed();
-    
+
             IOStreamImpl::clear();
             IOStreamImpl::seekp(offs, getSeekDir(whence));
 
             checkIfInGoodState();
         }
 
-    protected:
-        void closeStream() {
+      protected:
+        void closeStream()
+        {
             closed = true;
         }
 
-        void checkIfClosed() const {
+        void checkIfClosed() const
+        {
             if (!closed)
                 return;
- 
+
             throw CDPL::Base::ValueError("IOStream: operation on closed stream");
         }
- 
-        void checkIfWriteOpAllowed() const {
+
+        void checkIfWriteOpAllowed() const
+        {
             if (openModeFlags & std::ios_base::out)
                 return;
 
             throw CDPL::Base::IOError("IOStream: write operation not allowed");
         }
- 
-        void checkIfReadOpAllowed() const {
+
+        void checkIfReadOpAllowed() const
+        {
             if (openModeFlags & std::ios_base::in)
                 return;
 
             throw CDPL::Base::IOError("IOStream: read operation not allowed");
         }
- 
-        void checkIfInBadState() const {
+
+        void checkIfInBadState() const
+        {
             if (!IOStreamImpl::bad())
                 return;
 
             throw CDPL::Base::IOError("IOStream: stream in bad state");
         }
 
-        void checkIfInGoodState() const {
+        void checkIfInGoodState() const
+        {
             if (IOStreamImpl::good())
                 return;
 
             throw CDPL::Base::IOError("IOStream: I/O operation failed");
         }
 
-        static std::ios_base::openmode parseOpenModeFlags(const std::string& mode_str) {
+        static std::ios_base::openmode parseOpenModeFlags(const std::string& mode_str)
+        {
 
-            if (mode_str.find("r+b") == 0 || mode_str.find("rb+") == 0 || mode_str.find("br+") == 0) 
+            if (mode_str.find("r+b") == 0 || mode_str.find("rb+") == 0 || mode_str.find("br+") == 0)
                 return (std::ios_base::in | std::ios_base::out | std::ios_base::binary);
 
-            if (mode_str.find("w+b") == 0 || mode_str.find("wb+") == 0 || mode_str.find("bw+") == 0) 
+            if (mode_str.find("w+b") == 0 || mode_str.find("wb+") == 0 || mode_str.find("bw+") == 0)
                 return (std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary);
-        
-            if (mode_str.find("a+b") == 0 || mode_str.find("ab+") == 0 ||  mode_str.find("ba+") == 0) 
+
+            if (mode_str.find("a+b") == 0 || mode_str.find("ab+") == 0 || mode_str.find("ba+") == 0)
                 return (std::ios_base::in | std::ios_base::out | std::ios_base::app | std::ios_base::binary);
 
-            if (mode_str.find("rb") == 0 || mode_str.find("br") == 0) 
+            if (mode_str.find("rb") == 0 || mode_str.find("br") == 0)
                 return (std::ios_base::in | std::ios_base::binary);
 
-            if (mode_str.find("wb") == 0 || mode_str.find("bw") == 0) 
+            if (mode_str.find("wb") == 0 || mode_str.find("bw") == 0)
                 return (std::ios_base::out | std::ios_base::trunc | std::ios_base::binary);
-        
-            if (mode_str.find("ab") == 0 || mode_str.find("ba") == 0) 
+
+            if (mode_str.find("ab") == 0 || mode_str.find("ba") == 0)
                 return (std::ios_base::out | std::ios_base::app | std::ios_base::binary);
 
-            if (mode_str.find("r+") == 0) 
+            if (mode_str.find("r+") == 0)
                 return (std::ios_base::in | std::ios_base::out);
 
-            if (mode_str.find("w+") == 0) 
+            if (mode_str.find("w+") == 0)
                 return (std::ios_base::in | std::ios_base::out | std::ios_base::trunc);
-        
-            if (mode_str.find("a+") == 0) 
+
+            if (mode_str.find("a+") == 0)
                 return (std::ios_base::in | std::ios_base::out | std::ios_base::app);
 
-            if (mode_str.find("r") == 0) 
+            if (mode_str.find("r") == 0)
                 return (std::ios_base::in);
 
-            if (mode_str.find("w") == 0) 
+            if (mode_str.find("w") == 0)
                 return (std::ios_base::out | std::ios_base::trunc);
-        
-            if (mode_str.find("a") == 0) 
+
+            if (mode_str.find("a") == 0)
                 return (std::ios_base::out | std::ios_base::app);
 
             throw CDPL::Base::IOError("IOStream: invalid open mode " + mode_str);
 
             return std::ios_base::openmode(); // never reached, only to suppress compiler warnings
-        } 
+        }
 
-    private:
-        static std::ios_base::seekdir getSeekDir(unsigned int whence) {
+      private:
+        static std::ios_base::seekdir getSeekDir(unsigned int whence)
+        {
             if (whence > 2)
                 throw CDPL::Base::IOError("IOStream: invalid argument");
 
-            return (whence == 1 ? std::ios_base::cur : whence == 2 ? std::ios_base::end : std::ios_base::beg);
+            return (whence == 1 ? std::ios_base::cur : whence == 2 ? std::ios_base::end :
+                                                                     std::ios_base::beg);
         }
 
-        const std::string& getLine() {
+        const std::string& getLine()
+        {
             data.clear();
 
             std::getline(*this, data);
@@ -387,17 +419,18 @@ namespace CDPLPythonBase
 
         friend class boost::python::def_visitor_access;
 
-    private:
+      private:
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl    
-                .def("readline", &StreamType::readLine, (python::arg("self"), python::arg("size") = -1), 
+            cl
+                .def("readline", &StreamType::readLine, (python::arg("self"), python::arg("size") = -1),
                      python::return_value_policy<python::copy_const_reference>())
                 .def("readlines", &StreamType::readLines, (python::arg("self"), python::arg("size") = -1))
                 .def("xreadlines", &StreamType::getIterator, python::arg("self"), python::return_self<>())
-                .def("read", &StreamType::readChars, (python::arg("self"), python::arg("size") = -1), 
+                .def("read", &StreamType::readChars, (python::arg("self"), python::arg("size") = -1),
                      python::return_value_policy<python::copy_const_reference>())
                 .def("tell", &StreamType::tellReadPos, python::arg("self"))
                 .def("tellr", &StreamType::tellReadPos, python::arg("self"))
@@ -405,7 +438,7 @@ namespace CDPLPythonBase
                 .def("seekr", &StreamType::seekReadPos, (python::arg("self"), python::arg("offs"), python::arg("whence") = 0))
                 .def("next", &StreamType::nextLine, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
                 .add_property("closed", &StreamType::isClosed)
-                .add_property("mode", python::make_function(&StreamType::getOpenModeString, 
+                .add_property("mode", python::make_function(&StreamType::getOpenModeString,
                                                             python::return_value_policy<python::copy_const_reference>()))
                 .add_property("modeFlags", &StreamType::getOpenModeFlags)
                 .def("__iter__", &StreamType::getIterator, python::arg("self"), python::return_self<>());
@@ -418,28 +451,25 @@ namespace CDPLPythonBase
 
         friend class boost::python::def_visitor_access;
 
-    private:
+      private:
         template <typename ClassType>
-        void visit(ClassType& cl) const {
+        void visit(ClassType& cl) const
+        {
             using namespace boost;
 
-            cl    
+            cl
                 .def("flush", &StreamType::flushStream, python::arg("self"))
-            
                 .def("write", &StreamType::writeChars, (python::arg("self"), python::arg("string")))
                 .def("writelines", &StreamType::writeLines, (python::arg("self"), python::arg("iterable")))
-            
                 .def("tellw", &StreamType::tellWritePos, python::arg("self"))
-            
                 .def("seekw", &StreamType::seekWritePos, (python::arg("self"), python::arg("offs"), python::arg("whence") = 0))
                 .add_property("closed", &StreamType::isClosed)
                 .add_property("softspace", &StreamType::getSoftSpace, &StreamType::setSoftSpace)
-                .add_property("mode", python::make_function(&StreamType::getOpenModeString, 
+                .add_property("mode", python::make_function(&StreamType::getOpenModeString,
                                                             python::return_value_policy<python::copy_const_reference>()))
                 .add_property("modeFlags", &StreamType::getOpenModeFlags);
-            
         }
     };
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_IOSTREAM_HPP

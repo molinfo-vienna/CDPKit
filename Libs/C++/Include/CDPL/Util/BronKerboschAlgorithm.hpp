@@ -48,7 +48,7 @@ namespace CDPL
         class CDPL_UTIL_API BronKerboschAlgorithm
         {
 
-        public:
+          public:
             BronKerboschAlgorithm() {}
 
             BronKerboschAlgorithm(const BitSetArray& adj_mtx);
@@ -61,10 +61,10 @@ namespace CDPL
 
             BronKerboschAlgorithm& operator=(const BronKerboschAlgorithm& bka);
 
-        private:
+          private:
             struct State
             {
-                
+
                 BitSet      curr;
                 BitSet      pool;
                 BitSet      excl;
@@ -73,7 +73,7 @@ namespace CDPL
             };
 
             typedef std::vector<std::size_t> NodeDegreeTable;
-            typedef std::vector<State*> StateStack;
+            typedef std::vector<State*>      StateStack;
             typedef Util::ObjectStack<State> StateCache;
 
             const BitSetArray* adjMatrix;
@@ -82,7 +82,7 @@ namespace CDPL
             StateStack         states;
             BitSet             pivotCandSet;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_BRONKERBOSCHALGORITHM_HPP

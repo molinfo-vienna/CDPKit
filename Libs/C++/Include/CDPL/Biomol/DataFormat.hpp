@@ -49,7 +49,7 @@ namespace CDPL
          */
         namespace DataFormat
         {
-    
+
             /**
              * \brief Provides meta-information about the <em>Brookhaven Protein Data Bank Format</em>
              *        [\ref PDB] format.
@@ -85,8 +85,8 @@ namespace CDPL
              *        [\ref MMTF] format.
              */
             extern CDPL_BIOMOL_API const Base::DataFormat MMTF_BZ2;
-        }
-    }
-}
+        } // namespace DataFormat
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_DATAFORMAT_HPP

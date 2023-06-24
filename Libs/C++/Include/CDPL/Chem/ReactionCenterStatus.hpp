@@ -49,28 +49,28 @@ namespace CDPL
             /**
              * \brief Specifies that the atom or bond is not part of the reaction center.
              */
-            const unsigned int NONE              = 0;
+            const unsigned int NONE = 0;
 
             /**
              * \brief Specifies for bonds in a reaction substructure search query that matching target bonds must not
              *        be part of a reaction center.
              */
-            const unsigned int NO_CENTER         = 0x1;
+            const unsigned int NO_CENTER = 0x1;
 
             /**
              * \brief Specifies that the bond is part of the reaction center.
              */
-            const unsigned int IS_CENTER         = 0x2;
+            const unsigned int IS_CENTER = 0x2;
 
             /**
              * \brief Specifies that the bond is made by the reaction.
              */
-            const unsigned int BOND_MADE         = 0x4;
+            const unsigned int BOND_MADE = 0x4;
 
             /**
              * \brief Specifies that the bond is broken by the reaction.
              */
-            const unsigned int BOND_BROKEN       = 0x8;
+            const unsigned int BOND_BROKEN = 0x8;
 
             /**
              * \brief Specifies that the bond order is changed by the reaction.
@@ -80,24 +80,24 @@ namespace CDPL
             /**
              * \brief Specifies that the bond is left unaltered by the reaction.
              */
-            const unsigned int NO_CHANGE         = 0x20;
+            const unsigned int NO_CHANGE = 0x20;
 
             /**
              * \brief Specifies that the configuration of the atom is inverted by the reaction.
              */
-            const unsigned int STEREO_INVERSION  = 0x40;
+            const unsigned int STEREO_INVERSION = 0x40;
 
             /**
              * \brief Specifies that the configuration of the atom is retained in the reaction.
              */
-            const unsigned int STEREO_RETENTION  = 0x80;
+            const unsigned int STEREO_RETENTION = 0x80;
 
             /**
              * \brief Specifies that the change of the atom is exactly as specified.
              */
-            const unsigned int EXACT_CHANGE      = 0x80;
-        }
-    }
-}
+            const unsigned int EXACT_CHANGE = 0x80;
+        } // namespace ReactionCenterStatus
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONCENTERSTATUS_HPP

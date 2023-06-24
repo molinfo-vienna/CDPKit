@@ -46,7 +46,7 @@
 #include "ForceFieldInteractionMask.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ForceField
@@ -54,15 +54,15 @@ namespace CDPL
 
         class MMFF94InteractionData;
         class MMFF94InteractionParameterizer;
-    }
+    } // namespace ForceField
 
-    namespace ConfGen 
+    namespace ConfGen
     {
-    
-        class TorsionDriverImpl 
+
+        class TorsionDriverImpl
         {
 
-        public:
+          public:
             typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
             TorsionDriverImpl();
@@ -125,8 +125,8 @@ namespace CDPL
 
             ConstConformerIterator getConformersBegin() const;
             ConstConformerIterator getConformersEnd() const;
-    
-        private:
+
+          private:
             TorsionDriverImpl(const TorsionDriverImpl&);
 
             TorsionDriverImpl& operator=(const TorsionDriverImpl&);
@@ -142,27 +142,27 @@ namespace CDPL
 
             const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
                                                    const FragmentTreeNode* node) const;
-    
-            typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
-            typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
-            typedef std::vector<const Chem::Bond*> BondList;
-            typedef std::vector<TorsionLibrary::SharedPointer> TorsionLibraryList;
 
-            TorsionDriverSettings         settings;
-            TorsionLibraryList            torLibs;
-            FragmentTree                  fragTree;
-            TorsionRuleMatcher            torRuleMatcher;
-            Chem::SubstructureSearch      subSearch;
-            Chem::FragmentList            fragments;
-            MMFF94ParameterizerPtr        mmff94Parameterizer;
-            MMFF94InteractionDataPtr      mmff94Data;
-            Util::BitSet                  rotBondMask;
-            BondList                      rotBonds;
-            ForceFieldInteractionMask     mmff94InteractionMask;
-            LogMessageCallbackFunction    logCallback;
+            typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
+            typedef std::auto_ptr<ForceField::MMFF94InteractionData>          MMFF94InteractionDataPtr;
+            typedef std::vector<const Chem::Bond*>                            BondList;
+            typedef std::vector<TorsionLibrary::SharedPointer>                TorsionLibraryList;
+
+            TorsionDriverSettings      settings;
+            TorsionLibraryList         torLibs;
+            FragmentTree               fragTree;
+            TorsionRuleMatcher         torRuleMatcher;
+            Chem::SubstructureSearch   subSearch;
+            Chem::FragmentList         fragments;
+            MMFF94ParameterizerPtr     mmff94Parameterizer;
+            MMFF94InteractionDataPtr   mmff94Data;
+            Util::BitSet               rotBondMask;
+            BondList                   rotBonds;
+            ForceFieldInteractionMask  mmff94InteractionMask;
+            LogMessageCallbackFunction logCallback;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 
 // Implementation

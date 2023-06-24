@@ -34,68 +34,81 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94TorsionInteraction
         {
 
           public:
-            MMFF94TorsionInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom1_idx, std::size_t ctr_atom2_idx, 
-                                     std::size_t term_atom2_idx, unsigned int tor_type_idx, double tor_param1, 
+            MMFF94TorsionInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom1_idx, std::size_t ctr_atom2_idx,
+                                     std::size_t term_atom2_idx, unsigned int tor_type_idx, double tor_param1,
                                      double tor_param2, double tor_param3):
-                termAtom1Idx(term_atom1_idx), ctrAtom1Idx(ctr_atom1_idx), ctrAtom2Idx(ctr_atom2_idx), 
-                termAtom2Idx(term_atom2_idx), torTypeIdx(tor_type_idx), torParam1(tor_param1), torParam2(tor_param2), 
+                termAtom1Idx(term_atom1_idx),
+                ctrAtom1Idx(ctr_atom1_idx), ctrAtom2Idx(ctr_atom2_idx),
+                termAtom2Idx(term_atom2_idx), torTypeIdx(tor_type_idx), torParam1(tor_param1), torParam2(tor_param2),
                 torParam3(tor_param3) {}
 
-            std::size_t getTerminalAtom1Index() const {
+            std::size_t getTerminalAtom1Index() const
+            {
                 return termAtom1Idx;
             }
 
-            std::size_t getCenterAtom1Index() const {
+            std::size_t getCenterAtom1Index() const
+            {
                 return ctrAtom1Idx;
             }
-    
-            std::size_t getCenterAtom2Index() const {
+
+            std::size_t getCenterAtom2Index() const
+            {
                 return ctrAtom2Idx;
             }
 
-            std::size_t getTerminalAtom2Index() const {
+            std::size_t getTerminalAtom2Index() const
+            {
                 return termAtom2Idx;
             }
 
-            std::size_t getAtom1Index() const {
+            std::size_t getAtom1Index() const
+            {
                 return termAtom1Idx;
             }
 
-            std::size_t getAtom2Index() const {
+            std::size_t getAtom2Index() const
+            {
                 return ctrAtom1Idx;
             }
-    
-            std::size_t getAtom3Index() const {
+
+            std::size_t getAtom3Index() const
+            {
                 return ctrAtom2Idx;
             }
 
-            std::size_t getAtom4Index() const {
+            std::size_t getAtom4Index() const
+            {
                 return termAtom2Idx;
             }
 
-            unsigned int getTorsionTypeIndex() const {
+            unsigned int getTorsionTypeIndex() const
+            {
                 return torTypeIdx;
             }
 
-            double getTorsionParameter1() const {
+            double getTorsionParameter1() const
+            {
                 return torParam1;
             }
 
-            double getTorsionParameter2() const {
+            double getTorsionParameter2() const
+            {
                 return torParam2;
             }
 
-            double getTorsionParameter3() const {
+            double getTorsionParameter3() const
+            {
                 return torParam3;
             }
 
@@ -108,8 +121,8 @@ namespace CDPL
             double       torParam1;
             double       torParam2;
             double       torParam3;
-        };            
-    }
-}
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94TORSIONINTERACTION_HPP

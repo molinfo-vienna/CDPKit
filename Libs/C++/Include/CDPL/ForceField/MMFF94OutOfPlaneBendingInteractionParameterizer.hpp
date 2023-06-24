@@ -41,17 +41,17 @@
 #include "CDPL/ForceField/MMFF94PrimaryToParameterAtomTypeMap.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
-    
+
     namespace Chem
     {
 
         class MolecularGraph;
         class Atom;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionParameterizer
@@ -62,13 +62,13 @@ namespace CDPL
 
             MMFF94OutOfPlaneBendingInteractionParameterizer();
 
-            MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+            MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph&             molgraph,
                                                             MMFF94OutOfPlaneBendingInteractionData& ia_data,
-                                                            bool strict);
+                                                            bool                                    strict);
 
-            void setFilterFunction(const InteractionFilterFunction4& func); 
+            void setFilterFunction(const InteractionFilterFunction4& func);
 
-            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
             void setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table);
 
@@ -80,21 +80,21 @@ namespace CDPL
 
           private:
             typedef std::vector<const Chem::Atom*> AtomList;
-            
-            double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+
+            double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type,
                                     std::size_t ctr_atom_idx, const AtomList& nbr_atoms, bool strict) const;
 
-            double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+            double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type,
                                     std::size_t ctr_atom_idx, unsigned int nbr_atom_types[3], const AtomList& nbr_atoms) const;
 
-            InteractionFilterFunction4                            filterFunc;
-            MMFF94NumericAtomTypeFunction                         atomTypeFunc;    
-            MMFF94OutOfPlaneBendingParameterTable::SharedPointer  paramTable;
-            MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
-            MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
-            AtomList                                              nbrAtoms;
-        };            
-    }
-}
+            InteractionFilterFunction4                           filterFunc;
+            MMFF94NumericAtomTypeFunction                        atomTypeFunc;
+            MMFF94OutOfPlaneBendingParameterTable::SharedPointer paramTable;
+            MMFF94AtomTypePropertyTable::SharedPointer           typePropTable;
+            MMFF94PrimaryToParameterAtomTypeMap::SharedPointer   paramTypeMap;
+            AtomList                                             nbrAtoms;
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONPARAMETERIZER_HPP

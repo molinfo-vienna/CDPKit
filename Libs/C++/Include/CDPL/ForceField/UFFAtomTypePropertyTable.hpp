@@ -40,10 +40,10 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API UFFAtomTypePropertyTable
@@ -57,14 +57,14 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<UFFAtomTypePropertyTable> SharedPointer;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 Entry();
- 
-                Entry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad, 
+
+                Entry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad,
                       double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
 
                 unsigned int getAtomType() const;
@@ -98,17 +98,19 @@ namespace CDPL
                 double       vdwScale;
                 double       effCharge;
                 bool         initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             UFFAtomTypePropertyTable();
 
-            void addEntry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad, 
+            void addEntry(unsigned int atom_type, const std::string& atom_type_sym, unsigned int atomic_no, double bond_rad,
                           double bond_ang, double vdw_dist, double vdw_energy, double vdw_scale, double eff_charge);
 
             const Entry& getEntry(unsigned int atom_type) const;
@@ -124,7 +126,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -132,7 +134,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -147,7 +149,7 @@ namespace CDPL
             static SharedPointer defaultTable;
             DataStorage          entries;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_UFFATOMTYPEPROPERTYTABLE_HPP

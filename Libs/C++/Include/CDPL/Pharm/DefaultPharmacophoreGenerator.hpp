@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/PharmacophoreGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -53,22 +53,22 @@ namespace CDPL
              */
             enum Configuration
             {
-            
-              /**
+
+                /**
                * \brief If set, ionic features are only generated for explicitely charged atoms/groups.
                */
-              PI_NI_ON_CHARGED_GROUPS_ONLY = 0x1,
+                PI_NI_ON_CHARGED_GROUPS_ONLY = 0x1,
 
-              /**
+                /**
                * \brief If set, the HBD feature representation will always be a defined vector
                *        from the hydrogen donor heavy atom to the hydrogen atom.
                */
-              STATIC_H_DONORS = 0x2,
+                STATIC_H_DONORS = 0x2,
 
-              /**
+                /**
                * \brief Default configuration.
                */
-              DEFAULT_CONFIG = 0
+                DEFAULT_CONFIG = 0
             };
 
             /**
@@ -86,11 +86,11 @@ namespace CDPL
             DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, int config = DEFAULT_CONFIG);
 
             void applyConfiguration(int config);
-            
+
           private:
             void init(int config);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_DEFAULTPHARMACOPHOREGENERATOR_HPP

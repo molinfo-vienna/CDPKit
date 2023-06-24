@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -50,7 +50,7 @@ namespace CDPL
              * \brief Constructs the \c %PosIonizableFeatureGenerator instance.
              */
             PosIonizableFeatureGenerator(bool chgd_groups_only);
-                
+
             /**
              * \brief Perceives the positive ionizable group features of the molecular graph a\ molgraph and adds 
              *        them to the pharmacophore \a pharm.
@@ -59,11 +59,11 @@ namespace CDPL
              * \param chgd_groups_only \c true if features shall be generated only for charged groups.
              */
             PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only);
-        
+
           private:
             void init(bool chgd_groups_only);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_POSIONIZABLEFEATUREGENERATOR_HPP

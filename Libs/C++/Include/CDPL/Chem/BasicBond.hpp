@@ -33,10 +33,10 @@
 #include "CDPL/Chem/Bond.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class BasicMolecule;
@@ -51,7 +51,7 @@ namespace CDPL
             friend class BasicMolecule;
             friend class BasicAtom;
 
-        public:
+          public:
             std::size_t getNumAtoms() const;
 
             const Molecule& getMolecule() const;
@@ -71,11 +71,11 @@ namespace CDPL
             Atom& getAtom(std::size_t idx);
 
             bool containsAtom(const Atom& atom) const;
-        
+
             std::size_t getAtomIndex(const Atom& atom) const;
-        
+
             const Atom& getNeighbor(const Atom& atom) const;
-    
+
             Atom& getNeighbor(const Atom& atom);
 
             std::size_t getIndex() const;
@@ -91,7 +91,7 @@ namespace CDPL
 
             using Bond::operator=;
 
-        private:
+          private:
             BasicBond(BasicMolecule* mol);
 
             BasicBond(const BasicBond& bond);
@@ -107,7 +107,7 @@ namespace CDPL
             std::size_t    index;
             BasicAtom*     atoms[2];
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BASICBOND_HPP

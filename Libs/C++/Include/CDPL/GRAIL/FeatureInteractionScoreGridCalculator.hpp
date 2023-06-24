@@ -40,13 +40,14 @@
 #include "CDPL/Grid/SpatialGrid.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Internal 
+    namespace Internal
     {
 
-        template <typename PT, typename CT, typename ST> class Octree;
+        template <typename PT, typename CT, typename ST>
+        class Octree;
     }
 
     namespace Pharm
@@ -54,8 +55,8 @@ namespace CDPL
 
         class FeatureContainer;
         class Feature;
-    }
-    
+    } // namespace Pharm
+
     namespace GRAIL
     {
 
@@ -67,23 +68,27 @@ namespace CDPL
 
           public:
             static constexpr double DEF_DISTANCE_CUTOFF = 10.0;
-            
+
             typedef std::shared_ptr<FeatureInteractionScoreGridCalculator> SharedPointer;
 
-            typedef std::function<bool(const Pharm::Feature&)> FeaturePredicate;
+            typedef std::function<bool(const Pharm::Feature&)>                          FeaturePredicate;
             typedef std::function<double(const Math::Vector3D&, const Pharm::Feature&)> ScoringFunction;
-            typedef std::function<double(const Math::DVector&)> ScoreCombinationFunction;
+            typedef std::function<double(const Math::DVector&)>                         ScoreCombinationFunction;
 
-            struct MaxScoreFunctor {
+            struct MaxScoreFunctor
+            {
 
-                double operator()(const Math::DVector& scores) const {
+                double operator()(const Math::DVector& scores) const
+                {
                     return normInf(scores);
                 }
             };
 
-            struct ScoreSumFunctor {
+            struct ScoreSumFunctor
+            {
 
-                double operator()(const Math::DVector& scores) const {
+                double operator()(const Math::DVector& scores) const
+                {
                     return sum(scores);
                 }
             };
@@ -92,7 +97,7 @@ namespace CDPL
 
             FeatureInteractionScoreGridCalculator(const ScoringFunction& func);
 
-            FeatureInteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func); 
+            FeatureInteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func);
 
             FeatureInteractionScoreGridCalculator(const FeatureInteractionScoreGridCalculator& calc);
 
@@ -123,10 +128,10 @@ namespace CDPL
             FeatureInteractionScoreGridCalculator& operator=(const FeatureInteractionScoreGridCalculator& calc);
 
           private:
-            typedef std::vector<const Pharm::Feature*> FeatureList;
+            typedef std::vector<const Pharm::Feature*>                            FeatureList;
             typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-            typedef std::shared_ptr<Octree> OctreePtr;
-            typedef std::vector<std::size_t> FeatureIndexList;
+            typedef std::shared_ptr<Octree>                                       OctreePtr;
+            typedef std::vector<std::size_t>                                      FeatureIndexList;
 
             FeatureList              tgtFeatures;
             Math::DVector            partialScores;
@@ -139,7 +144,7 @@ namespace CDPL
             FeatureIndexList         featureIndices;
             bool                     normScores;
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_FEATUREINTERACTIONSCOREGRIDCALCULATOR_HPP

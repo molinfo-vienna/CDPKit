@@ -45,7 +45,7 @@
 #include "CDPL/ForceField/MMFF94PrimaryToParameterAtomTypeMap.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,9 +54,9 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94AngleBendingInteractionParameterizer
@@ -67,15 +67,15 @@ namespace CDPL
 
             MMFF94AngleBendingInteractionParameterizer();
 
-            MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+            MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph&        molgraph,
                                                        MMFF94AngleBendingInteractionData& ia_data,
-                                                       bool strict);
+                                                       bool                               strict);
 
-            void setFilterFunction(const InteractionFilterFunction3& func); 
+            void setFilterFunction(const InteractionFilterFunction3& func);
 
-            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+            void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
-            void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
+            void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
             void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
@@ -92,15 +92,15 @@ namespace CDPL
             void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionData& ia_data, bool strict);
 
           private:
-            void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
+            void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom,
                                const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
                                unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const;
 
-            void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, 
+            void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom,
                                unsigned int ctr_atom_type, const Chem::Atom& term_atom2, unsigned int term_atom2_type, const Chem::Bond& term_atom1_bnd,
                                const Chem::Bond& term_atom2_bnd, unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const;
 
-            std::size_t getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
+            std::size_t getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1,
                                                     const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const;
 
             /**
@@ -131,17 +131,17 @@ namespace CDPL
             typedef std::vector<const Chem::Atom*> AtomList;
             typedef std::vector<const Chem::Bond*> BondList;
 
-            InteractionFilterFunction3                            filterFunc;
-            MMFF94NumericAtomTypeFunction                         atomTypeFunc;    
-            MMFF94BondTypeIndexFunction                           bondTypeIdxFunc;    
-            MMFF94AngleBendingParameterTable::SharedPointer       paramTable;
-            MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
-            MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
-            MMFF94BondStretchingInteractionParameterizer          bsParameterizer;
-            AtomList                                              nbrAtoms;
-            BondList                                              nbrBonds;
-        };            
-    }
-}
+            InteractionFilterFunction3                         filterFunc;
+            MMFF94NumericAtomTypeFunction                      atomTypeFunc;
+            MMFF94BondTypeIndexFunction                        bondTypeIdxFunc;
+            MMFF94AngleBendingParameterTable::SharedPointer    paramTable;
+            MMFF94AtomTypePropertyTable::SharedPointer         typePropTable;
+            MMFF94PrimaryToParameterAtomTypeMap::SharedPointer paramTypeMap;
+            MMFF94BondStretchingInteractionParameterizer       bsParameterizer;
+            AtomList                                           nbrAtoms;
+            BondList                                           nbrBonds;
+        };
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONPARAMETERIZER_HPP

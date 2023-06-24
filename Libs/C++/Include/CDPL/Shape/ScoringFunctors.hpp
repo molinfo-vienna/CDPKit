@@ -33,17 +33,18 @@
 #include "CDPL/Shape/ScoringFunctions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         class CDPL_SHAPE_API TotalOverlapTanimotoScore
         {
 
           public:
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcTotalOverlapTanimotoScore(res);
             }
         };
@@ -52,7 +53,8 @@ namespace CDPL
         {
 
           public:
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcShapeTanimotoScore(res);
             }
         };
@@ -61,7 +63,8 @@ namespace CDPL
         {
 
           public:
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcColorTanimotoScore(res);
             }
         };
@@ -70,7 +73,8 @@ namespace CDPL
         {
 
           public:
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcTanimotoComboScore(res);
             }
         };
@@ -79,10 +83,11 @@ namespace CDPL
         {
 
           public:
-            TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05): 
+            TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcTotalOverlapTverskyScore(res, alpha, beta);
             }
 
@@ -95,10 +100,11 @@ namespace CDPL
         {
 
           public:
-            ShapeTverskyScore(double alpha = 0.95, double beta = 0.05): 
+            ShapeTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcShapeTverskyScore(res, alpha, beta);
             }
 
@@ -111,10 +117,11 @@ namespace CDPL
         {
 
           public:
-            ColorTverskyScore(double alpha = 0.95, double beta = 0.05): 
+            ColorTverskyScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcColorTverskyScore(res, alpha, beta);
             }
 
@@ -127,10 +134,11 @@ namespace CDPL
         {
 
           public:
-            TverskyComboScore(double alpha = 0.95, double beta = 0.05): 
+            TverskyComboScore(double alpha = 0.95, double beta = 0.05):
                 alpha(alpha), beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcTverskyComboScore(res, alpha, beta);
             }
 
@@ -143,10 +151,11 @@ namespace CDPL
         {
 
           public:
-            ReferenceTotalOverlapTverskyScore(double alpha = 0.95): 
+            ReferenceTotalOverlapTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcReferenceTotalOverlapTverskyScore(res, alpha);
             }
 
@@ -158,10 +167,11 @@ namespace CDPL
         {
 
           public:
-            ReferenceShapeTverskyScore(double alpha = 0.95): 
+            ReferenceShapeTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcReferenceShapeTverskyScore(res, alpha);
             }
 
@@ -173,10 +183,11 @@ namespace CDPL
         {
 
           public:
-            ReferenceColorTverskyScore(double alpha = 0.95): 
+            ReferenceColorTverskyScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcReferenceColorTverskyScore(res, alpha);
             }
 
@@ -188,10 +199,11 @@ namespace CDPL
         {
 
           public:
-            ReferenceTverskyComboScore(double alpha = 0.95): 
+            ReferenceTverskyComboScore(double alpha = 0.95):
                 alpha(alpha) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcReferenceTverskyComboScore(res, alpha);
             }
 
@@ -203,10 +215,11 @@ namespace CDPL
         {
 
           public:
-            AlignedTotalOverlapTverskyScore(double beta = 0.95): 
+            AlignedTotalOverlapTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcAlignedTotalOverlapTverskyScore(res, beta);
             }
 
@@ -218,10 +231,11 @@ namespace CDPL
         {
 
           public:
-            AlignedShapeTverskyScore(double beta = 0.95): 
+            AlignedShapeTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcAlignedShapeTverskyScore(res, beta);
             }
 
@@ -233,10 +247,11 @@ namespace CDPL
         {
 
           public:
-            AlignedColorTverskyScore(double beta = 0.95): 
+            AlignedColorTverskyScore(double beta = 0.95):
                 beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcAlignedColorTverskyScore(res, beta);
             }
 
@@ -248,17 +263,18 @@ namespace CDPL
         {
 
           public:
-            AlignedTverskyComboScore(double beta = 0.95): 
+            AlignedTverskyComboScore(double beta = 0.95):
                 beta(beta) {}
 
-            double operator()(const AlignmentResult& res) const {
+            double operator()(const AlignmentResult& res) const
+            {
                 return calcAlignedTverskyComboScore(res, beta);
             }
 
           private:
             double beta;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_SCORINGFUNCTORS_HPP

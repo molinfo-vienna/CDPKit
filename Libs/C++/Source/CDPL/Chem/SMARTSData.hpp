@@ -28,7 +28,7 @@
 #include <string>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -40,82 +40,80 @@ namespace CDPL
             const char REACTION_ROLE_SEPARATOR = '>';
             const char COMPONENT_SEPARATOR     = '.';
 
-            const char GROUPING_PREFIX         = '(';
-            const char GROUPING_SUFFIX         = ')';
+            const char GROUPING_PREFIX = '(';
+            const char GROUPING_SUFFIX = ')';
 
-            const char CLOSURE_NO_PREFIX       = '%';    
+            const char CLOSURE_NO_PREFIX = '%';
 
             const char NOT_OPERATOR            = '!';
             const char OR_OPERATOR             = ',';
             const char HI_PRECED_AND_OPERATOR  = '&';
             const char LOW_PRECED_AND_OPERATOR = ';';
 
-            const char UNSPEC_STEREO_SUFFIX    = '?';
+            const char UNSPEC_STEREO_SUFFIX = '?';
 
             namespace AtomExpression
             {
 
-                const char COMPLEX_EXPR_PREFIX      = '['; 
-                const char COMPLEX_EXPR_SUFFIX      = ']'; 
+                const char COMPLEX_EXPR_PREFIX = '[';
+                const char COMPLEX_EXPR_SUFFIX = ']';
 
-                const char RECURSIVE_SMARTS_PREFIX  = '$'; 
-                const char RECURSIVE_SMARTS_BEGIN   = '('; 
-                const char RECURSIVE_SMARTS_END     = ')'; 
+                const char RECURSIVE_SMARTS_PREFIX = '$';
+                const char RECURSIVE_SMARTS_BEGIN  = '(';
+                const char RECURSIVE_SMARTS_END    = ')';
 
-                const char ATOMIC_NUMBER_PREFIX     = '#'; 
+                const char ATOMIC_NUMBER_PREFIX = '#';
 
-                const char ANY_ATOM                 = '*';
-                const char ANY_AROMATIC_ATOM        = 'a';
-                const char ANY_NON_AROMATIC_ATOM    = 'A';
+                const char ANY_ATOM              = '*';
+                const char ANY_AROMATIC_ATOM     = 'a';
+                const char ANY_NON_AROMATIC_ATOM = 'A';
 
-                const char EXPLICIT_DEGREE_PREFIX   = 'D';
+                const char EXPLICIT_DEGREE_PREFIX = 'D';
 
-                const char TOTAL_H_COUNT_PREFIX     = 'H';
-                const char IMPLICIT_H_COUNT_PREFIX  = 'h';
+                const char TOTAL_H_COUNT_PREFIX    = 'H';
+                const char IMPLICIT_H_COUNT_PREFIX = 'h';
 
-                const char RING_MEMBERSHIP_PREFIX   = 'R';
-                const char RING_SIZE_PREFIX         = 'r';
+                const char RING_MEMBERSHIP_PREFIX = 'R';
+                const char RING_SIZE_PREFIX       = 'r';
 
-                const char VALENCE_PREFIX           = 'v';
+                const char VALENCE_PREFIX = 'v';
 
-                const char UNSATURATED_FLAG         = 'u';
+                const char UNSATURATED_FLAG = 'u';
 
                 const char CONNECTIVITY_PREFIX      = 'X';
                 const char RING_CONNECTIVITY_PREFIX = 'x';
 
-                const char POSITIVE_CHARGE_PREFIX   = '+';
-                const char NEGATIVE_CHARGE_PREFIX   = '-';
+                const char POSITIVE_CHARGE_PREFIX = '+';
+                const char NEGATIVE_CHARGE_PREFIX = '-';
 
-                const char ATOM_MAPPING_ID_PREFIX   = ':';
+                const char ATOM_MAPPING_ID_PREFIX = ':';
 
-                const char CHIRAL_CLASS_PREFIX      = '@';
+                const char CHIRAL_CLASS_PREFIX = '@';
 
-                const char HYBRIDIZATION_PREFIX     = '^';
+                const char HYBRIDIZATION_PREFIX = '^';
 
                 const std::string TETRAHEDRAL_CHIRALITY   = "TH";
                 const std::string ALLENE_TYPE_CHIRALITY   = "AL";
                 const std::string SQUARE_PLANAR_CHIRALITY = "SP";
                 const std::string TRIG_BIPYR_CHIRALITY    = "TB";
                 const std::string OCTAHEDRAL_CHIRALITY    = "OH";
-            }
+            } // namespace AtomExpression
 
             namespace BondExpression
             {
 
-                const char SINGLE_BOND     = '-';
-                const char DOUBLE_BOND     = '=';
-                const char TRIPLE_BOND     = '#';
-                const char AROMATIC_BOND   = ':';
-                const char RING_BOND       = '@';
-                const char ANY_BOND        = '~';
+                const char SINGLE_BOND   = '-';
+                const char DOUBLE_BOND   = '=';
+                const char TRIPLE_BOND   = '#';
+                const char AROMATIC_BOND = ':';
+                const char RING_BOND     = '@';
+                const char ANY_BOND      = '~';
 
-                const char UP_DIR_FLAG     = '/';
-                const char DOWN_DIR_FLAG   = '\\';
-            }
-        }
-    }
-}
+                const char UP_DIR_FLAG   = '/';
+                const char DOWN_DIR_FLAG = '\\';
+            } // namespace BondExpression
+        } // namespace SMARTS
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMARTSDATA_HPP
-
- 

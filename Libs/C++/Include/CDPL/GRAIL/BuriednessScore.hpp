@@ -38,7 +38,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -46,7 +46,7 @@ namespace CDPL
 
         class AtomContainer;
     }
-    
+
     namespace GRAIL
     {
 
@@ -83,7 +83,7 @@ namespace CDPL
             void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
             const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
-    
+
             double operator()(const Math::Vector3D& pos, const Chem::AtomContainer& atoms);
 
           private:
@@ -98,7 +98,7 @@ namespace CDPL
             PointList                       probeSurfPoints;
             Util::BitSet                    rayHitsMask;
         };
-    }
-}
+    } // namespace GRAIL
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_BURIEDNESSSCORE_HPP

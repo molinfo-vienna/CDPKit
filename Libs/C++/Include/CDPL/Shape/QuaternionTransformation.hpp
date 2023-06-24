@@ -32,7 +32,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -40,6 +40,6 @@ namespace CDPL
 
         typedef Math::CVector<double, 7> QuaternionTransformation;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP

@@ -35,38 +35,40 @@ namespace CDPLPythonMath
 {
 
     template <typename EDT, typename WDT>
-    class ConstVectorExpressionAdapter : 
-        public ConstVectorExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
+    class ConstVectorExpressionAdapter : public ConstVectorExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
     {
 
-    public:
-        typedef EDT HeldExpressionDataType;
-        typedef WDT KeepAliveWardDataType;
+      public:
+        typedef EDT                                         HeldExpressionDataType;
+        typedef WDT                                         KeepAliveWardDataType;
         typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-        typedef typename HeldExpressionType::ValueType ValueType;
-        typedef ConstVectorExpression<ValueType> ExpressionType;
-        typedef typename ExpressionType::ConstReference ConstReference;
-        typedef typename ExpressionType::SizeType SizeType;
-        typedef typename ExpressionType::SharedPointer ConstExpressionPointer;
+        typedef typename HeldExpressionType::ValueType      ValueType;
+        typedef ConstVectorExpression<ValueType>            ExpressionType;
+        typedef typename ExpressionType::ConstReference     ConstReference;
+        typedef typename ExpressionType::SizeType           SizeType;
+        typedef typename ExpressionType::SharedPointer      ConstExpressionPointer;
 
         ConstVectorExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-        
-        ~ConstVectorExpressionAdapter() {} 
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {}
 
-        ConstReference operator[](SizeType i) const {
+        ~ConstVectorExpressionAdapter() {}
+
+        ConstReference operator[](SizeType i) const
+        {
             return boost::unwrap_ref(exprData)[i];
         }
 
-        ConstReference operator()(SizeType i) const {
+        ConstReference operator()(SizeType i) const
+        {
             return boost::unwrap_ref(exprData)(i);
         }
 
-        SizeType getSize() const {
+        SizeType getSize() const
+        {
             return boost::unwrap_ref(exprData).getSize();
         }
 
-    protected:
+      protected:
         HeldExpressionDataType exprData;
         KeepAliveWardDataType  keepAliveWardData;
     };
@@ -75,45 +77,51 @@ namespace CDPLPythonMath
     class VectorExpressionAdapter : public VectorExpression<typename boost::unwrap_reference<EDT>::type::ValueType>
     {
 
-    public:
-        typedef EDT HeldExpressionDataType;
-        typedef WDT KeepAliveWardDataType;
-        typedef typename boost::unwrap_reference<EDT>::type HeldExpressionType;
-        typedef typename HeldExpressionType::ValueType ValueType;
-        typedef VectorExpression<ValueType> ExpressionType;
-        typedef typename ExpressionType::ConstExpressionType ConstExpressionType;
-        typedef typename ExpressionType::ConstReference ConstReference;
-        typedef typename ExpressionType::Reference Reference;
-        typedef typename ExpressionType::SizeType SizeType;
-        typedef typename ExpressionType::SharedPointer ExpressionPointer;
+      public:
+        typedef EDT                                             HeldExpressionDataType;
+        typedef WDT                                             KeepAliveWardDataType;
+        typedef typename boost::unwrap_reference<EDT>::type     HeldExpressionType;
+        typedef typename HeldExpressionType::ValueType          ValueType;
+        typedef VectorExpression<ValueType>                     ExpressionType;
+        typedef typename ExpressionType::ConstExpressionType    ConstExpressionType;
+        typedef typename ExpressionType::ConstReference         ConstReference;
+        typedef typename ExpressionType::Reference              Reference;
+        typedef typename ExpressionType::SizeType               SizeType;
+        typedef typename ExpressionType::SharedPointer          ExpressionPointer;
         typedef typename ExpressionType::ConstExpressionPointer ConstExpressionPointer;
 
         VectorExpressionAdapter(const HeldExpressionDataType& expr_data, const KeepAliveWardDataType& alive_ward_data):
-            exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
-        
-        ~VectorExpressionAdapter() {} 
+            exprData(expr_data), keepAliveWardData(alive_ward_data) {}
 
-        ConstReference operator[](SizeType i) const {
+        ~VectorExpressionAdapter() {}
+
+        ConstReference operator[](SizeType i) const
+        {
             return boost::unwrap_ref(exprData)[i];
         }
 
-        ConstReference operator()(SizeType i) const {
+        ConstReference operator()(SizeType i) const
+        {
             return boost::unwrap_ref(exprData)(i);
         }
 
-        Reference operator[](SizeType i) {
+        Reference operator[](SizeType i)
+        {
             return boost::unwrap_ref(exprData)[i];
         }
 
-        Reference operator()(SizeType i) {
+        Reference operator()(SizeType i)
+        {
             return boost::unwrap_ref(exprData)(i);
         }
 
-        SizeType getSize() const {
+        SizeType getSize() const
+        {
             return boost::unwrap_ref(exprData).getSize();
         }
 
-        VectorExpressionAdapter& operator=(const ConstExpressionType& e) {
+        VectorExpressionAdapter& operator=(const ConstExpressionType& e)
+        {
             if (this == &e)
                 return *this;
 
@@ -121,40 +129,45 @@ namespace CDPLPythonMath
             return *this;
         }
 
-        VectorExpressionAdapter& operator+=(const ConstExpressionType& e) {
+        VectorExpressionAdapter& operator+=(const ConstExpressionType& e)
+        {
             boost::unwrap_ref(exprData) += e;
             return *this;
         }
-        
-        VectorExpressionAdapter& operator-=(const ConstExpressionType& e) {
+
+        VectorExpressionAdapter& operator-=(const ConstExpressionType& e)
+        {
             boost::unwrap_ref(exprData) -= e;
             return *this;
         }
-        
-        VectorExpressionAdapter& operator*=(const ValueType& t) {
+
+        VectorExpressionAdapter& operator*=(const ValueType& t)
+        {
             boost::unwrap_ref(exprData) *= t;
             return *this;
         }
-        
-        VectorExpressionAdapter& operator/=(const ValueType& t) {
+
+        VectorExpressionAdapter& operator/=(const ValueType& t)
+        {
             boost::unwrap_ref(exprData) /= t;
             return *this;
         }
 
-        void swap(ExpressionType& e) {
-            CDPL::Math::vectorSwap<typename boost::unwrap_reference<EDT>::type, 
-                ExpressionType>(boost::unwrap_ref(exprData), e);
+        void swap(ExpressionType& e)
+        {
+            CDPL::Math::vectorSwap<typename boost::unwrap_reference<EDT>::type,
+                                   ExpressionType>(boost::unwrap_ref(exprData), e);
         }
 
-    protected:
+      protected:
         HeldExpressionDataType exprData;
         KeepAliveWardDataType  keepAliveWardData;
     };
 
     template <typename EDT, typename WDT>
     inline
-    typename ConstVectorExpressionAdapter<EDT, WDT>::ConstExpressionPointer 
-    makeConstVectorExpressionAdapter(const EDT& e, const WDT& ward)
+        typename ConstVectorExpressionAdapter<EDT, WDT>::ConstExpressionPointer
+        makeConstVectorExpressionAdapter(const EDT& e, const WDT& ward)
     {
         typedef typename ConstVectorExpressionAdapter<EDT, WDT>::ConstExpressionPointer ExpressionPointerType;
 
@@ -163,13 +176,13 @@ namespace CDPLPythonMath
 
     template <typename EDT, typename WDT>
     inline
-    typename VectorExpressionAdapter<EDT, WDT>::ExpressionPointer 
-    makeVectorExpressionAdapter(const EDT& e, const WDT& ward)
+        typename VectorExpressionAdapter<EDT, WDT>::ExpressionPointer
+        makeVectorExpressionAdapter(const EDT& e, const WDT& ward)
     {
         typedef typename VectorExpressionAdapter<EDT, WDT>::ExpressionPointer ExpressionPointerType;
 
         return ExpressionPointerType(new VectorExpressionAdapter<EDT, WDT>(e, ward));
     }
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_VECTOREXPRESSIONADAPTER_HPP

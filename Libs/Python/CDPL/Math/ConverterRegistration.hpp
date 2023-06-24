@@ -40,6 +40,6 @@ namespace CDPLPythonMath
     void registerFromPythonToAnyConverters();
 
     void registerToPythonConverters();
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_CONVERTERREGISTRATION_HPP

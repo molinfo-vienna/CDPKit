@@ -33,7 +33,7 @@
 #include "CDPL/Pharm/FeatureDistanceConstraint.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -55,10 +55,10 @@ namespace CDPL
              * \param min_dist The minimum allowed feature pair distance.
              * \param max_dist The maximum allowed feature pair distance.
              */
-            IonicInteractionConstraint(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
+            IonicInteractionConstraint(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE):
                 FeatureDistanceConstraint(min_dist, max_dist) {}
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_IONICINTERACTIONCONSTRAINT_HPP

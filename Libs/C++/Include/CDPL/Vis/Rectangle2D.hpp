@@ -33,7 +33,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_VIS_API Rectangle2D
         {
 
-        public:
+          public:
             /**
              * \brief Constructs an undefined rectangle.
              *
@@ -179,12 +179,12 @@ namespace CDPL
              * \param pt The new minimum point.
              */
             void setMin(const Math::Vector2D& pt);
-    
+
             /**
              * \brief Sets the minimum point of the rectangle to <em>(x, y)</em>.
              * \param x The x-coordinate of the new minimum point.
              * \param y The y-coordinate of the new minimum point.
-             */    
+             */
             void setMin(double x, double y);
 
             /**
@@ -197,9 +197,9 @@ namespace CDPL
              * \brief Sets the maximum point of the rectangle to <em>(x, y)</em>.
              * \param x The x-coordinate of the new maximum point.
              * \param y The y-coordinate of the new maximum point.
-             */    
+             */
             void setMax(double x, double y);
-        
+
             /**
              * \brief Sets the minimum point of the rectangle to <em>(min_x, min_y)</em> and the maximum point to <em>(max_x, max_y)</em>.
              * \param min_x The x-coordinate of the new minimum point.
@@ -208,7 +208,7 @@ namespace CDPL
              * \param max_y The y-coordinate of the new maximum point.
              */
             void setBounds(double min_x, double min_y, double max_x, double max_y);
-    
+
             /**
              * \brief Sets the minimum point of the rectangle to \a min and the maximum point to \a max.
              * \param min The new minimum point.
@@ -233,7 +233,7 @@ namespace CDPL
              * \return The center of the rectangle.
              */
             Math::Vector2D getCenter() const;
-        
+
             /**
              * \brief Calculates the center of the rectangle and stores the result in \a ctr.
              * \param ctr A vector storing the calculated center point.
@@ -257,7 +257,7 @@ namespace CDPL
              * maximum point \f$ y_{max} \f$ and the y-coordinate of the minimum point \f$ y_{min} \f$.
              *
              * \return The height of the rectangle.
-             */    
+             */
             double getHeight() const;
 
             /**
@@ -285,14 +285,14 @@ namespace CDPL
              * \param factor The scaling factor.
              */
             void scale(double factor);
-    
+
             /**
              * \brief Equality comparison operator.
              * \param rect The other \c %Rectangle2D object to be compared with.
              * \return \c true if the minimum and maximum points compare equal, and \c false otherwise.
              */
             bool operator==(const Rectangle2D& rect) const;
-        
+
             /**
              * \brief Inequality comparison operator.
              *
@@ -300,14 +300,14 @@ namespace CDPL
              *
              * \param rect The other \c %Rectangle2D object to be compared with.
              * \return \c true if either the minimum or maximum points compare non-equal, and \c false otherwise.
-             */            
+             */
             bool operator!=(const Rectangle2D& rect) const;
 
-        private:
+          private:
             Math::Vector2D min;
             Math::Vector2D max;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_RECTANGLE2D_HPP

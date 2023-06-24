@@ -39,10 +39,10 @@
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API FragmentLibrary
@@ -52,10 +52,10 @@ namespace CDPL
 
           public:
             typedef std::shared_ptr<FragmentLibrary> SharedPointer;
-    
-            typedef HashToEntryMap::value_type Entry;
+
+            typedef HashToEntryMap::value_type     Entry;
             typedef HashToEntryMap::const_iterator ConstEntryIterator;
-            typedef HashToEntryMap::iterator EntryIterator;
+            typedef HashToEntryMap::iterator       EntryIterator;
 
             FragmentLibrary();
 
@@ -84,7 +84,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -92,7 +92,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -114,7 +114,7 @@ namespace CDPL
             mutable HashToEntryMap hashToEntryMap;
             mutable std::mutex     mutex;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTLIBRARY_HPP

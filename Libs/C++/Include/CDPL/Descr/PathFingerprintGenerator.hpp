@@ -44,7 +44,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -53,7 +53,7 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
     namespace Descr
     {
@@ -65,12 +65,12 @@ namespace CDPL
         class CDPL_DESCR_API PathFingerprintGenerator
         {
 
-        public:
+          public:
             /**
              * \brief Specifies the default set of atomic properties considered in the generation
              *        of atom descriptors by PathFingerprintGenerator::DefAtomDescriptorFunction.
              */
-            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS =
                 Chem::AtomPropertyFlag::TYPE | Chem::AtomPropertyFlag::ISOTOPE | Chem::AtomPropertyFlag::FORMAL_CHARGE |
                 Chem::AtomPropertyFlag::AROMATICITY;
 
@@ -78,7 +78,7 @@ namespace CDPL
              * \brief Specifies the default set of bond properties considered in the generation
              *        of bond descriptors by PathFingerprintGenerator::DefBondDescriptorFunction.
              */
-            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY | Chem::BondPropertyFlag::TOPOLOGY;
 
             /**
@@ -87,7 +87,7 @@ namespace CDPL
             class CDPL_DESCR_API DefAtomDescriptorFunctor
             {
 
-            public:
+              public:
                 /**
                  * \brief Constructs the atom descriptor functor object for the specified set of atomic properties.
                  *
@@ -102,7 +102,7 @@ namespace CDPL
                  */
                 DefAtomDescriptorFunctor(unsigned int flags = DEF_ATOM_PROPERTY_FLAGS):
                     flags(flags) {}
- 
+
                 /**
                  * \brief Generates a descriptor for the argument atom.
                  *
@@ -114,7 +114,7 @@ namespace CDPL
                  */
                 std::uint64_t operator()(const Chem::Atom& atom) const;
 
-            private:
+              private:
                 unsigned int flags;
             };
 
@@ -124,7 +124,7 @@ namespace CDPL
             class CDPL_DESCR_API DefBondDescriptorFunctor
             {
 
-            public:
+              public:
                 /**
                  * \brief Constructs the bond descriptor functor object for the specified set of bond properties.
                  *
@@ -136,7 +136,7 @@ namespace CDPL
                  *
                  * \param flags Specifies the set of considered bond properties.
                  */
-                DefBondDescriptorFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS): 
+                DefBondDescriptorFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS):
                     flags(flags) {}
 
                 /**
@@ -150,7 +150,7 @@ namespace CDPL
                  */
                 std::uint64_t operator()(const Chem::Bond& bond) const;
 
-            private:
+              private:
                 unsigned int flags;
             };
 
@@ -257,32 +257,32 @@ namespace CDPL
              */
             void generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
 
-        private:
+          private:
             void calcFingerprint(const Chem::MolecularGraph&, Util::BitSet&);
 
             void growPath(const Chem::Atom&, Util::BitSet&);
 
             std::size_t calcBitIndex();
 
-            typedef std::vector<std::size_t> IndexList;
+            typedef std::vector<std::size_t>   IndexList;
             typedef std::vector<std::uint64_t> UInt64Array;
 
-            const Chem::MolecularGraph*  molGraph;
-            std::size_t                  numBits;
-            std::size_t                  minPathLength;
-            std::size_t                  maxPathLength;
-            AtomDescriptorFunction       atomDescriptorFunc;
-            BondDescriptorFunction       bondDescriptorFunc;
-            Util::BitSet                 visBondMask;
-            UInt64Array                  atomDescriptors;
-            UInt64Array                  bondDescriptors;
-            IndexList                    atomPath;
-            IndexList                    bondPath;
-            UInt64Array                  fwdPathDescriptor;
-            UInt64Array                  revPathDescriptor;
-            boost::rand48                randGenerator;
-        }; 
-    }
-}
+            const Chem::MolecularGraph* molGraph;
+            std::size_t                 numBits;
+            std::size_t                 minPathLength;
+            std::size_t                 maxPathLength;
+            AtomDescriptorFunction      atomDescriptorFunc;
+            BondDescriptorFunction      bondDescriptorFunc;
+            Util::BitSet                visBondMask;
+            UInt64Array                 atomDescriptors;
+            UInt64Array                 bondDescriptors;
+            IndexList                   atomPath;
+            IndexList                   bondPath;
+            UInt64Array                 fwdPathDescriptor;
+            UInt64Array                 revPathDescriptor;
+            boost::rand48               randGenerator;
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_PATHFINGERPRINTGENERATOR_HPP

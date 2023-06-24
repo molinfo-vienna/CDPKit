@@ -26,7 +26,7 @@
 #define CDPL_BIOMOL_CDFDATAREADER_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Internal
@@ -41,25 +41,25 @@ namespace CDPL
         class CDFDataReader;
         class Atom;
         class Molecule;
-    }
-    
+    } // namespace Chem
+
     namespace Biomol
     {
 
         class CDFDataReader
         {
 
-        public:
+          public:
             static void registerExternalPropertyHandlers();
 
-        private:
-            static bool readAtomProperties(unsigned int handler_id, const Chem::CDFDataReader& reader, 
+          private:
+            static bool readAtomProperties(unsigned int handler_id, const Chem::CDFDataReader& reader,
                                            Chem::Atom& atom, Internal::ByteBuffer& data);
 
-            static bool readMoleculeProperties(unsigned int handler_id, const Chem::CDFDataReader& reader, 
+            static bool readMoleculeProperties(unsigned int handler_id, const Chem::CDFDataReader& reader,
                                                Chem::Molecule& mol, Internal::ByteBuffer& data);
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_CDFDATAREADER_HPP

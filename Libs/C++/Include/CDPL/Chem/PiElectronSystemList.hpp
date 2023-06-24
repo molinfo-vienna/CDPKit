@@ -36,21 +36,21 @@
 #include "CDPL/Chem/ElectronSystemList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
 
         class MolecularGraph;
-        
+
         /**
          * \brief Implements the perception of all pi electron systems present in a molecule.
          */
-        class CDPL_CHEM_API PiElectronSystemList : public ElectronSystemList 
+        class CDPL_CHEM_API PiElectronSystemList : public ElectronSystemList
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PiElectronSystemList instances.
              */
@@ -73,7 +73,7 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
+          private:
             typedef std::list<ElectronSystem::SharedPointer> WorkingElecSysList;
 
             void initStartElecSystems(const MolecularGraph& molgraph);
@@ -83,16 +83,16 @@ namespace CDPL
             void mergeElecSystemsPass1(const MolecularGraph& molgraph);
             void mergeElecSystemsPass2(const MolecularGraph& molgraph);
 
-            bool isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys, 
+            bool isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys,
                                        const MolecularGraph& molgraph) const;
-            bool isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys, 
+            bool isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys,
                                                  const MolecularGraph& molgraph) const;
-            bool has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys, 
+            bool has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys,
                                         const MolecularGraph& molgraph) const;
 
             WorkingElecSysList workingElecSystems;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP

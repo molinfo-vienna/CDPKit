@@ -48,8 +48,8 @@ namespace CDPL
 
         class Molecule;
         class MolecularGraph;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 namespace TautGen
@@ -58,23 +58,23 @@ namespace TautGen
     class TautGenImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         TautGenImpl();
 
-    private:
-        enum Mode 
+      private:
+        enum Mode
         {
 
-          STANDARDIZE,
-          TOPOLOGICALLY_UNIQUE,
-          GEOMETRICALLY_UNIQUE,
-          EXHAUSTIVE
+            STANDARDIZE,
+            TOPOLOGICALLY_UNIQUE,
+            GEOMETRICALLY_UNIQUE,
+            EXHAUSTIVE
         };
 
         typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-        typedef InputHandler::SharedPointer InputHandlerPtr;
-        typedef OutputHandler::SharedPointer OutputHandlerPtr;
+        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule>        InputHandler;
+        typedef InputHandler::SharedPointer                               InputHandlerPtr;
+        typedef OutputHandler::SharedPointer                              OutputHandlerPtr;
 
         const char* getProgName() const;
         const char* getProgCopyright() const;
@@ -112,7 +112,7 @@ namespace TautGen
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-        InputHandlerPtr getInputHandler(const std::string& file_path) const;
+        InputHandlerPtr  getInputHandler(const std::string& file_path) const;
         OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
 
         void addOptionLongDescriptions();
@@ -120,13 +120,13 @@ namespace TautGen
         class InputScanProgressCallback;
         class TautGenerationWorker;
 
-        typedef std::vector<std::string> StringList;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
-        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+        typedef std::vector<std::string>                                          StringList;
+        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>                      MoleculeReader;
+        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule>              CompMoleculeReader;
         typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-        typedef CDPL::Chem::ProtonationStateStandardizer ChargeNeutralizer;
-        typedef CDPL::Internal::Timer Timer;
-        
+        typedef CDPL::Chem::ProtonationStateStandardizer                          ChargeNeutralizer;
+        typedef CDPL::Internal::Timer                                             Timer;
+
         StringList         inputFiles;
         std::string        outputFile;
         bool               regardStereo;
@@ -158,6 +158,6 @@ namespace TautGen
         std::size_t        numOutTautomers;
         ChargeNeutralizer  neutralizer;
     };
-}
+} // namespace TautGen
 
 #endif // TAUTGEN_TAUTGENIMPL_HPP

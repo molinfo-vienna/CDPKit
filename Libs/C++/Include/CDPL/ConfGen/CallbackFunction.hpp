@@ -32,7 +32,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -42,7 +42,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined callback functions (see [\ref FUNWRP]).
          */
         typedef std::function<bool()> CallbackFunction;
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CALLBACKFUNCTION_HPP

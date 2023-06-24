@@ -36,7 +36,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -54,8 +54,9 @@ namespace CDPL
         class SMILESDataReader
         {
 
-        public:
-            SMILESDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+          public:
+            SMILESDataReader(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
 
             bool readReaction(std::istream&, Reaction&);
             bool readMolecule(std::istream&, Molecule&);
@@ -67,7 +68,7 @@ namespace CDPL
 
             typedef std::vector<std::size_t> STArray;
 
-        private:
+          private:
             struct BondParameters
             {
 
@@ -84,9 +85,9 @@ namespace CDPL
             void skipRecord(std::istream&, std::string& str, const std::string& error_msg) const;
 
             void readRecord(std::istream&, std::string& smi_str, std::string& name, const std::string& error_msg) const;
-            
+
             void init(const Molecule&);
-        
+
             void parseSMILES(Molecule&, Atom*);
 
             void parseRingClosures(Molecule&, Atom&);
@@ -99,11 +100,11 @@ namespace CDPL
             Chem::Atom* parseOrgSubsetAtom(Molecule&);
             Chem::Atom* parseSpecialAtom(Molecule&);
 
-            bool parseElementSymbol(char[3], bool);
+            bool         parseElementSymbol(char[3], bool);
             unsigned int parseStereoSpec();
-            bool parseImplicitHCount(std::size_t&);
-            long parseCharge();
-            std::size_t parseReactionAtomMappingID();
+            bool         parseImplicitHCount(std::size_t&);
+            long         parseCharge();
+            std::size_t  parseReactionAtomMappingID();
 
             template <typename T>
             bool parseNumber(T&, std::size_t = 0);
@@ -121,33 +122,33 @@ namespace CDPL
 
             void setBondTableEntry(std::size_t, const Bond*);
 
-            void addToBondList(std::size_t, std::size_t, bool = true);
+            void           addToBondList(std::size_t, std::size_t, bool = true);
             const STArray& getBondList(std::size_t) const;
 
             void setAtomStereoDescriptors(const Molecule&) const;
             void setBondStereoDescriptors(Molecule&) const;
-                
+
             void kekulizeBonds(Molecule&);
 
             struct ClosureBond
             {
 
                 ClosureBond(std::size_t lex_bond_no, Atom* start_atom, const BondParameters& bond_params):
-                    lexBondNumber(lex_bond_no), startAtom(start_atom), bondParameters(bond_params) {} 
+                    lexBondNumber(lex_bond_no), startAtom(start_atom), bondParameters(bond_params) {}
 
                 std::size_t    lexBondNumber;
                 Atom*          startAtom;
                 BondParameters bondParameters;
             };
 
-            typedef std::map<std::size_t, ClosureBond> ClosureBondMap;
-            typedef std::vector<const Bond*> BondTable;
-            typedef std::vector<STArray> BondListTable;
+            typedef std::map<std::size_t, ClosureBond>  ClosureBondMap;
+            typedef std::vector<const Bond*>            BondTable;
+            typedef std::vector<STArray>                BondListTable;
             typedef std::pair<std::size_t, std::size_t> STPair;
-            typedef std::vector<STPair> STPairArray;
-            typedef std::pair<Atom*, unsigned int> StereoAtomDescr;
-            typedef std::vector<StereoAtomDescr> StereoAtomList;
-            typedef std::vector<char> BondDirectionTable;
+            typedef std::vector<STPair>                 STPairArray;
+            typedef std::pair<Atom*, unsigned int>      StereoAtomDescr;
+            typedef std::vector<StereoAtomDescr>        StereoAtomList;
+            typedef std::vector<char>                   BondDirectionTable;
 
             const Base::DataIOBase& ioBase;
             std::string             molSMILESString;
@@ -170,8 +171,7 @@ namespace CDPL
             std::string             recordSeparator;
             Fragment                readMolGraph;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_SMILESDATAREADER_HPP
- 

@@ -34,15 +34,14 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Pharm 
+    namespace Pharm
     {
 
-    CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);
+        CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP
- 

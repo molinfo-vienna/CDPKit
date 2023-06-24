@@ -31,17 +31,17 @@
 #include <sqlite3.h>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
     {
-    
+
         class SQLiteDataIOBase
         {
 
-        public:
-            typedef std::shared_ptr<sqlite3> SQLite3DBPointer;
+          public:
+            typedef std::shared_ptr<sqlite3>      SQLite3DBPointer;
             typedef std::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
 
             SQLiteDataIOBase() {}
@@ -57,8 +57,8 @@ namespace CDPL
             void setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const;
 
             sqlite3_stmt* prepareStatement(const std::string& sql_stmt) const;
-        
-            int evalStatement(const SQLite3StmtPointer& stmt_ptr) const;
+
+            int  evalStatement(const SQLite3StmtPointer& stmt_ptr) const;
             void execStatements(const std::string& sql_stmts) const;
 
             void resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const;
@@ -67,7 +67,7 @@ namespace CDPL
 
             const SQLite3DBPointer& getDBConnection() const;
 
-        private:
+          private:
             void composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const;
 
             SQLiteDataIOBase(const SQLiteDataIOBase&);
@@ -77,7 +77,7 @@ namespace CDPL
             SQLite3DBPointer database;
             std::string      databaseName;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_SQLiteDATAIOBASE_HPP

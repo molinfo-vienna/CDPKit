@@ -32,7 +32,7 @@
 #include "CDPL/Biomol/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -77,11 +77,11 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey CHECK_LINE_LENGTH;
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_RESIDUE_DICTIONARY;
-        
+
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
-    
+
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
 
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES;
@@ -115,8 +115,8 @@ namespace CDPL
             extern CDPL_BIOMOL_API const Base::LookupKey PDB_FORMAT_VERSION;
 
             extern CDPL_BIOMOL_API const Base::LookupKey COMBINE_INTERFERING_RESIDUE_COORDINATES;
-        }
-    }
-}
+        } // namespace ControlParameter
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_CONTROLPARAMETER_HPP

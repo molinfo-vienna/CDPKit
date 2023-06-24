@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -44,8 +44,8 @@ namespace CDPL
          * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em>
          *        [\ref WSVG] format.
          */
-        typedef Util::DefaultDataOutputHandler<SVGReactionWriter, DataFormat::SVG> SVGReactionOutputHandler;    
-    }
-}
+        typedef Util::DefaultDataOutputHandler<SVGReactionWriter, DataFormat::SVG> SVGReactionOutputHandler;
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_SVGREACTIONOUTPUTHANDLER_HPP

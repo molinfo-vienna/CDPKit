@@ -40,7 +40,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,10 +56,10 @@ namespace CDPL
         /**
          * \brief BondOrderCalculator.
          */
-        class CDPL_CHEM_API BondOrderCalculator 
+        class CDPL_CHEM_API BondOrderCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %BondOrderCalculator instance.
              */
@@ -82,7 +82,7 @@ namespace CDPL
              * \note The default setting is to perceive only the order of undefined bonds.
              */
             void undefinedOnly(bool undef_only);
-            
+
             /**
              * \brief Tells whether or not only undefined bond orders have to be perceived.
              * \return \c true if only undefined (= unset) bond orders are perceived, and  \c false otherwise.
@@ -99,23 +99,24 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& orders);
 
-        private:
-            enum Geometry {
-            
-              UNDEF,
-              TERMINAL,
-              LINEAR,
-              TRIG_PLANAR,
-              TETRAHEDRAL
+          private:
+            enum Geometry
+            {
+
+                UNDEF,
+                TERMINAL,
+                LINEAR,
+                TRIG_PLANAR,
+                TETRAHEDRAL
             };
 
-            typedef std::shared_ptr<MolecularGraph> MolecularGraphPtr;
-            typedef std::shared_ptr<SubstructureSearch> SubstructureSearchPtr;
-            typedef std::vector<const Bond*> BondList;
-            typedef std::vector<const Atom*> AtomList;
-            typedef std::vector<std::size_t> UIntTable;
-            typedef std::vector<Geometry> GeometryTable;
-            typedef std::vector<MolecularGraphPtr> MolecularGraphPtrList;
+            typedef std::shared_ptr<MolecularGraph>                         MolecularGraphPtr;
+            typedef std::shared_ptr<SubstructureSearch>                     SubstructureSearchPtr;
+            typedef std::vector<const Bond*>                                BondList;
+            typedef std::vector<const Atom*>                                AtomList;
+            typedef std::vector<std::size_t>                                UIntTable;
+            typedef std::vector<Geometry>                                   GeometryTable;
+            typedef std::vector<MolecularGraphPtr>                          MolecularGraphPtrList;
             typedef std::vector<std::pair<double, const AtomBondMapping*> > ABMappingList;
 
             class AtomMatchExpression;
@@ -142,12 +143,12 @@ namespace CDPL
             void markPlanarPiBonds(Util::STArray& orders);
 
             Geometry perceiveInitialGeometry(const Atom& atom);
-            void fixRingAtomGeometries(const Fragment& ring);
-            void postprocessGeometry(const Atom& atom, Util::STArray& orders);
-            
+            void     fixRingAtomGeometries(const Fragment& ring);
+            void     postprocessGeometry(const Atom& atom, Util::STArray& orders);
+
             void assignNbrBondOrders(const Atom& atom, Util::STArray& orders);
 
-            void getNeighborAtoms(const Atom& atom, AtomList& atom_list, const Atom* exclude_atom) const;
+            void        getNeighborAtoms(const Atom& atom, AtomList& atom_list, const Atom* exclude_atom) const;
             std::size_t countBondsWithOrder(const Atom& atom, std::size_t order, const UIntTable& order_table) const;
 
             template <typename Pred>
@@ -155,37 +156,36 @@ namespace CDPL
 
             double calcAvgBondAngle(const Atom& atom, const AtomList& nbr_atoms) const;
             double calcDihedralAngle(const Atom& atom1, const Atom& atom2, const Atom& atom3, const Atom& atom4) const;
-            double calcDihedralAngle(const Math::Vector3D& atom1_pos, const Math::Vector3D& atom2_pos, 
+            double calcDihedralAngle(const Math::Vector3D& atom1_pos, const Math::Vector3D& atom2_pos,
                                      const Math::Vector3D& atom3_pos, const Math::Vector3D& atom4_pos) const;
             double calcAvgTorsionAngle(const Fragment& ring) const;
 
             bool isPlanarPiBond(const Bond& bond) const;
-        
-            const MolecularGraph*  molGraph;
-            bool                   undefOnly;
-            Util::BitSet           defOrderMask;
-            Util::BitSet           multibondAtomMask;
-            UIntTable              freeAtomValences;
-            GeometryTable          atomGeometries;
-            BondList               undefBonds;
-            BondList               fragBondList;
-            AtomList               fragAtomList;
-            AtomList               nbrAtomList1;
-            AtomList               nbrAtomList2;
-            UIntTable              fragBondOrders;
-            UIntTable              workingBondOrders;
-            double                 currOrderAssmentScore;
-            double                 bestOrderAssmentScore;
-            SubstructureSearchPtr  substructSearch;
-            MolecularGraphPtrList  funcGroupPatterns;
-            ABMappingList          funcGroupMappings;
-            Util::BitSet           procMappingMask;
-            Util::BitSet           bondMappingMask1;
-            Util::BitSet           bondMappingMask2;
-            Util::BitSet           planarPiBondMask;
+
+            const MolecularGraph* molGraph;
+            bool                  undefOnly;
+            Util::BitSet          defOrderMask;
+            Util::BitSet          multibondAtomMask;
+            UIntTable             freeAtomValences;
+            GeometryTable         atomGeometries;
+            BondList              undefBonds;
+            BondList              fragBondList;
+            AtomList              fragAtomList;
+            AtomList              nbrAtomList1;
+            AtomList              nbrAtomList2;
+            UIntTable             fragBondOrders;
+            UIntTable             workingBondOrders;
+            double                currOrderAssmentScore;
+            double                bestOrderAssmentScore;
+            SubstructureSearchPtr substructSearch;
+            MolecularGraphPtrList funcGroupPatterns;
+            ABMappingList         funcGroupMappings;
+            Util::BitSet          procMappingMask;
+            Util::BitSet          bondMappingMask1;
+            Util::BitSet          bondMappingMask2;
+            Util::BitSet          planarPiBondMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDORDERCALCULATOR_HPP
- 

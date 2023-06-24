@@ -37,21 +37,21 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
 
         class GaussianShapeFunction;
-        
+
         class CDPL_SHAPE_API GaussianShapeOverlapFunction
         {
-            
+
           public:
             typedef std::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
 
-            typedef std::function<bool(std::size_t)> ColorFilterFunction;
+            typedef std::function<bool(std::size_t)>              ColorFilterFunction;
             typedef std::function<bool(std::size_t, std::size_t)> ColorMatchFunction;
 
             virtual ~GaussianShapeOverlapFunction() {}
@@ -71,7 +71,7 @@ namespace CDPL
             virtual double calcSelfOverlap(bool ref) const = 0;
 
             virtual double calcColorSelfOverlap(bool ref) const = 0;
-            
+
             virtual double calcOverlap() const = 0;
 
             virtual double calcColorOverlap() const = 0;
@@ -87,11 +87,12 @@ namespace CDPL
 
             GaussianShapeOverlapFunction(const GaussianShapeOverlapFunction& func) {}
 
-            GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func) {
+            GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func)
+            {
                 return *this;
             }
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPEOVERLAPFUNCTION_HPP

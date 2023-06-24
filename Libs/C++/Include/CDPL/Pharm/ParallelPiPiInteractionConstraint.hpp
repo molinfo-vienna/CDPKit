@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -51,7 +51,7 @@ namespace CDPL
             static constexpr double DEF_MIN_V_DISTANCE = 3.0;
             static constexpr double DEF_MAX_V_DISTANCE = 5.5;
             static constexpr double DEF_MAX_ANGLE      = 30.0;
-    
+
             /**
              * \brief Constructs a \c %ParallelPiPiInteractionConstraint functor with the specified constraints.
              * \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
@@ -61,7 +61,8 @@ namespace CDPL
              */
             ParallelPiPiInteractionConstraint(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
                                               double max_h_dist = DEF_MAX_H_DISTANCE, double max_ang = DEF_MAX_ANGLE):
-                minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), maxAngle(max_ang) {}
+                minVDist(min_v_dist),
+                maxVDist(max_v_dist), maxHDist(max_h_dist), maxAngle(max_ang) {}
 
             double getMinVDistance() const;
 
@@ -79,7 +80,7 @@ namespace CDPL
             double maxHDist;
             double maxAngle;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PARALLELPIPIINTERACTIONCONSTRAINT_HPP

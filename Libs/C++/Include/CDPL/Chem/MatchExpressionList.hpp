@@ -37,7 +37,7 @@
 #include "CDPL/Util/IndirectArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,11 +56,11 @@ namespace CDPL
          *                  expression list evaluation.
          */
         template <typename ObjType1, typename ObjType2 = void>
-        class MatchExpressionList : 
-            public MatchExpression<ObjType1, ObjType2>, public Util::IndirectArray<MatchExpression<ObjType1, ObjType2> >
+        class MatchExpressionList : public MatchExpression<ObjType1, ObjType2>,
+                                    public Util::IndirectArray<MatchExpression<ObjType1, ObjType2> >
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpressionList instances.
              */
@@ -74,13 +74,14 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
-        private:
-            const char* getClassName() const {
+          private:
+            const char* getClassName() const
+            {
                 return "MatchExpressionList";
             }
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 
 // Implementation

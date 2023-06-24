@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the input of molecule data in the <em>Sybyl MOL2</em> format.
          */
         typedef Util::DefaultDataInputHandler<MOL2MoleculeReader, DataFormat::MOL2> MOL2MoleculeInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOL2MOLECULEINPUTHANDLER_HPP

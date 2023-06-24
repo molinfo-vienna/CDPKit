@@ -37,16 +37,20 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class VectorExpression;
-        template <typename E> class MatrixExpression;
-        template <typename E> class QuaternionExpression;
-        template <typename E> class GridExpression;
+        template <typename E>
+        class VectorExpression;
+        template <typename E>
+        class MatrixExpression;
+        template <typename E>
+        class QuaternionExpression;
+        template <typename E>
+        class GridExpression;
 
         template <typename C, typename T, typename E>
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const VectorExpression<E>& e)
         {
             typename std::basic_ostream<C, T>::sentry se(os);
-            std::ios_base::iostate state(std::ios_base::goodbit);
+            std::ios_base::iostate                    state(std::ios_base::goodbit);
 
             if (se) {
                 try {
@@ -55,7 +59,7 @@ namespace CDPL
                     oss.flags(os.flags());
                     oss.imbue(os.getloc());
                     oss.precision(os.precision());
-            
+
                     typedef typename E::SizeType SizeType;
 
                     SizeType size = e().getSize();
@@ -69,14 +73,14 @@ namespace CDPL
                         oss << ',' << e()(i);
 
                     oss << ')';
-                
+
                     if (!oss.good())
                         state |= std::ios_base::failbit;
-                    else 
+                    else
                         os << oss.str().c_str();
-                
+
                 } catch (...) {
-                    os.setstate(std::ios_base::failbit); 
+                    os.setstate(std::ios_base::failbit);
                     throw;
                 }
             }
@@ -91,7 +95,7 @@ namespace CDPL
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const MatrixExpression<E>& e)
         {
             typename std::basic_ostream<C, T>::sentry se(os);
-            std::ios_base::iostate state(std::ios_base::goodbit);
+            std::ios_base::iostate                    state(std::ios_base::goodbit);
 
             if (se) {
                 try {
@@ -100,7 +104,7 @@ namespace CDPL
                     oss.flags(os.flags());
                     oss.imbue(os.getloc());
                     oss.precision(os.precision());
-            
+
                     typedef typename E::SizeType SizeType;
 
                     SizeType size1 = e().getSize1();
@@ -130,11 +134,11 @@ namespace CDPL
 
                     if (!oss.good())
                         state |= std::ios_base::failbit;
-                    else 
+                    else
                         os << oss.str().c_str();
-                
+
                 } catch (...) {
-                    os.setstate(std::ios_base::failbit); 
+                    os.setstate(std::ios_base::failbit);
                     throw;
                 }
             }
@@ -149,7 +153,7 @@ namespace CDPL
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const QuaternionExpression<E>& e)
         {
             typename std::basic_ostream<C, T>::sentry se(os);
-            std::ios_base::iostate state(std::ios_base::goodbit);
+            std::ios_base::iostate                    state(std::ios_base::goodbit);
 
             if (se) {
                 try {
@@ -158,16 +162,16 @@ namespace CDPL
                     oss.flags(os.flags());
                     oss.imbue(os.getloc());
                     oss.precision(os.precision());
-            
+
                     oss << '(' << e().getC1() << ',' << e().getC2() << ',' << e().getC3() << ',' << e().getC4() << ')';
-                
+
                     if (!oss.good())
                         state |= std::ios_base::failbit;
-                    else 
+                    else
                         os << oss.str().c_str();
-                
+
                 } catch (...) {
-                    os.setstate(std::ios_base::failbit); 
+                    os.setstate(std::ios_base::failbit);
                     throw;
                 }
             }
@@ -182,7 +186,7 @@ namespace CDPL
         std::basic_ostream<C, T>& operator<<(std::basic_ostream<C, T>& os, const GridExpression<E>& e)
         {
             typename std::basic_ostream<C, T>::sentry se(os);
-            std::ios_base::iostate state(std::ios_base::goodbit);
+            std::ios_base::iostate                    state(std::ios_base::goodbit);
 
             if (se) {
                 try {
@@ -191,7 +195,7 @@ namespace CDPL
                     oss.flags(os.flags());
                     oss.imbue(os.getloc());
                     oss.precision(os.precision());
-            
+
                     typedef typename E::SizeType SizeType;
 
                     SizeType size1 = e().getSize1();
@@ -216,7 +220,7 @@ namespace CDPL
                                 for (SizeType k = 0; k < size3; k++) {
                                     if (k > 0)
                                         oss << ',';
-                                    
+
                                     oss << e()(i, j, k);
                                 }
 
@@ -231,11 +235,11 @@ namespace CDPL
 
                     if (!oss.good())
                         state |= std::ios_base::failbit;
-                    else 
+                    else
                         os << oss.str().c_str();
-                
+
                 } catch (...) {
-                    os.setstate(std::ios_base::failbit); 
+                    os.setstate(std::ios_base::failbit);
                     throw;
                 }
             }
@@ -245,7 +249,7 @@ namespace CDPL
 
             return os;
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_IO_HPP

@@ -36,7 +36,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -48,7 +48,7 @@ namespace CDPL
         class CDPL_CHEM_API ComponentSet : public FragmentList
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ComponentSet instances.
              */
@@ -71,13 +71,13 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
+          private:
             void visitAtom(const Atom&, Fragment&);
 
-            const MolecularGraph*    molGraph;
-            Util::BitSet             visAtomMask;
+            const MolecularGraph* molGraph;
+            Util::BitSet          visAtomMask;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_COMPONENTSET_HPP

@@ -32,7 +32,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -47,8 +47,9 @@ namespace CDPL
         class CDFRegularGridDataReader : protected CDFDataReader
         {
 
-        public:
-            CDFRegularGridDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+          public:
+            CDFRegularGridDataReader(const Base::ControlParameterContainer& ctrl_params):
+                ctrlParams(ctrl_params) {}
 
             bool readGrid(std::istream& is, DRegularGrid& grid);
 
@@ -58,17 +59,17 @@ namespace CDPL
 
             bool hasMoreData(std::istream& is);
 
-        protected:
+          protected:
             bool doReadGrid(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const;
 
             void readGridData(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const;
 
-            void init(); 
+            void init();
 
-            const Base::ControlParameterContainer& ctrlParams;    
+            const Base::ControlParameterContainer& ctrlParams;
             Internal::ByteBuffer                   dataBuffer;
         };
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFREGULARGRIDDATAREADER_HPP

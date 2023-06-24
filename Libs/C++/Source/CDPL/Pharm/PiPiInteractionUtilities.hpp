@@ -36,7 +36,7 @@ namespace CDPL
 
         double calcVPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec);
         double calcHPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec);
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PIPIINTERACTIONUTILITIES_HPP

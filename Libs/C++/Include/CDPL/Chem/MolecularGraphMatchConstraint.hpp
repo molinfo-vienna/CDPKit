@@ -46,7 +46,7 @@ namespace CDPL
              * \brief Specifies a constraint which requires the target olecular graph to fulfill additional contraints
              *        specified by a Chem::MatchConstraintList object.
              */
-            const unsigned int CONSTRAINT_LIST    = 0;
+            const unsigned int CONSTRAINT_LIST = 0;
 
             /**
              * \brief Specifies a constraint which requires the target molecular graph to match any component level groupings
@@ -58,8 +58,8 @@ namespace CDPL
              * enclose those components of the query which have to be part of the same target molecular graph component.
              */
             const unsigned int COMPONENT_GROUPING = 1;
-        }
-    }
-}
+        } // namespace MolecularGraphMatchConstraint
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MOLECULARGRAPHMATCHCONSTRAINT_HPP

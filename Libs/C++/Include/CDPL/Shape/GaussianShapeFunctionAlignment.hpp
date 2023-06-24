@@ -42,12 +42,12 @@
 #include "CDPL/Math/BFGSMinimizer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
     {
-        
+
         class CDPL_SHAPE_API GaussianShapeFunctionAlignment
         {
 
@@ -56,9 +56,9 @@ namespace CDPL
 
           private:
             typedef std::vector<Result> ResultList;
-            
+
           public:
-            static constexpr double      DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+            static constexpr double DEF_OPTIMIZATION_STOP_GRADIENT       = 1.0;
             static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
             typedef std::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
@@ -66,31 +66,35 @@ namespace CDPL
             typedef ResultList::const_iterator ConstResultIterator;
 
             typedef GaussianShapeOverlapFunction::ColorFilterFunction ColorFilterFunction;
-            typedef GaussianShapeOverlapFunction::ColorMatchFunction ColorMatchFunction;
+            typedef GaussianShapeOverlapFunction::ColorMatchFunction  ColorMatchFunction;
 
             class Result
             {
 
-            public:
+              public:
                 Result(const Math::Matrix4D& xform, double overlap, double col_overlap):
                     transform(xform), overlap(overlap), colOverlap(col_overlap) {}
 
-                const Math::Matrix4D& getTransform() const {
+                const Math::Matrix4D& getTransform() const
+                {
                     return transform;
                 }
 
-                double getOverlap() const {
+                double getOverlap() const
+                {
                     return overlap;
                 }
 
-                double getColorOverlap() const {
+                double getColorOverlap() const
+                {
                     return colOverlap;
                 }
-                
-            private:
+
+              private:
                 friend class GaussianShapeFunctionAlignment;
 
-                Result(): transform(), overlap(0.0), colOverlap(0.0) {}
+                Result():
+                    transform(), overlap(0.0), colOverlap(0.0) {}
 
                 Math::Matrix4D transform;
                 double         overlap;
@@ -104,7 +108,7 @@ namespace CDPL
             ~GaussianShapeFunctionAlignment();
 
             void setOverlapFunction(GaussianShapeOverlapFunction& func);
-            
+
             GaussianShapeOverlapFunction& getOverlapFunction() const;
 
             const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
@@ -112,7 +116,7 @@ namespace CDPL
             FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
 
             void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
-            
+
             GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 
             const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
@@ -122,7 +126,7 @@ namespace CDPL
             void setColorMatchFunction(const ColorMatchFunction& func);
 
             const ColorMatchFunction& getColorMatchFunction() const;
-    
+
             void setColorFilterFunction(const ColorFilterFunction& func);
 
             const ColorFilterFunction& getColorFilterFunction() const;
@@ -149,12 +153,12 @@ namespace CDPL
 
             unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
-            unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
+            unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
             void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
             const GaussianShapeFunction* getReference() const;
-        
+
             double calcSelfOverlap(const GaussianShapeFunction& func);
 
             double calcColorSelfOverlap(const GaussianShapeFunction& func);
@@ -171,12 +175,12 @@ namespace CDPL
 
             ConstResultIterator getResultsBegin() const;
 
-            ConstResultIterator getResultsEnd() const;    
+            ConstResultIterator getResultsEnd() const;
 
             ConstResultIterator begin() const;
 
-            ConstResultIterator end() const;    
-        
+            ConstResultIterator end() const;
+
           private:
             GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);
 
@@ -186,7 +190,7 @@ namespace CDPL
 
             double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
             double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
-            
+
             typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
 
             FastGaussianShapeOverlapFunction      defOverlapFunc;
@@ -207,7 +211,7 @@ namespace CDPL
             BFGSMinimizer                         minimizer;
             ResultList                            results;
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONALIGNMENT_HPP

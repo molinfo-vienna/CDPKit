@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Grid
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A handler for the output of bzip2-compressed spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
          */
         typedef Util::DefaultDataOutputHandler<CDFBZ2DRegularGridSetWriter, DataFormat::CDF_BZ2> CDFBZ2DRegularGridSetOutputHandler;
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFBZ2DREGULARGRIDSETOUTPUTHANDLER_HPP

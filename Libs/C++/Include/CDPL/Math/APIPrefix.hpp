@@ -30,14 +30,14 @@
 #define CDPL_MATH_APIPREFIX_HPP
 
 #ifdef CDPL_MATH_STATIC_LINK
-#  define CDPL_MATH_API
+# define CDPL_MATH_API
 #else // CDPL_MATH_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_math_shared_EXPORTS
-#    define CDPL_MATH_API CDPL_API_EXPORT
-#  else // cdpl_math_shared_EXPORTS
-#    define CDPL_MATH_API CDPL_API_IMPORT
-#  endif // cdpl_math_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_math_shared_EXPORTS
+#  define CDPL_MATH_API CDPL_API_EXPORT
+# else // cdpl_math_shared_EXPORTS
+#  define CDPL_MATH_API CDPL_API_IMPORT
+# endif // cdpl_math_shared_EXPORTS
 #endif // CDPL_MATH_STATIC_LINK
 
 /**

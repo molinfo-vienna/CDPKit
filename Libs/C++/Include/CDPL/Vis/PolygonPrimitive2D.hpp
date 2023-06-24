@@ -38,7 +38,7 @@
 #include "CDPL/Vis/Brush.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -47,10 +47,11 @@ namespace CDPL
         /**
          * \brief A graphics primitive representing a polygon.
          */
-        class CDPL_VIS_API PolygonPrimitive2D : public PointArray2D, public GraphicsPrimitive2D
+        class CDPL_VIS_API PolygonPrimitive2D : public PointArray2D,
+                                                public GraphicsPrimitive2D
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolygonPrimitive2D instances.
              */
@@ -62,7 +63,7 @@ namespace CDPL
             PolygonPrimitive2D() {}
 
             void render(Renderer2D& renderer) const;
-        
+
             /**
              * \brief Sets the pen defining the color, width, line style, cap style and join style of the polygon outline.
              * \param pen The pen defining the color, width, line style, cap style and join style of the polygon's outline.
@@ -91,11 +92,11 @@ namespace CDPL
 
             void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
 
-        private:
+          private:
             Pen   pen;
             Brush brush;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_POLYGONPRIMITIVE2D_HPP

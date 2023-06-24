@@ -36,19 +36,20 @@ namespace ChOX
 
     class DataSet;
 
-    class OutputFileFilterList : public QStringList, private DataRecordVisitor
+    class OutputFileFilterList : public QStringList,
+                                 private DataRecordVisitor
     {
 
-    public:
+      public:
         OutputFileFilterList(const DataSet&);
         OutputFileFilterList();
 
-    private:
+      private:
         void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
         void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
         QString filterString;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_OUTPUTFILEFILTERLIST_HPP

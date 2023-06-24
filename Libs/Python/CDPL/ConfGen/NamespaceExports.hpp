@@ -38,6 +38,6 @@ namespace CDPLPythonConfGen
     void exportDataFormats();
     void exportControlParameters();
     void exportControlParameterDefaults();
-}
+} // namespace CDPLPythonConfGen
 
 #endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP

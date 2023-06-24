@@ -30,13 +30,13 @@
 #define CDPL_BIOMOL_RESIDUETYPE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Biomol 
+    namespace Biomol
     {
 
-        namespace ResidueType 
+        namespace ResidueType
         {
 
             const unsigned int UNKNOWN                  = 0;
@@ -54,8 +54,8 @@ namespace CDPL
             const unsigned int DNA_LINKING              = 12;
             const unsigned int SACCHARIDE_LINKING       = 13;
             const unsigned int SACCHARIDE               = 14;
-        }
-    }
-}
+        } // namespace ResidueType
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_RESIDUETYPE_HPP

@@ -35,7 +35,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -57,13 +57,13 @@ namespace CDPL
             static constexpr double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
             static constexpr double DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
 
-            FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
-                                        double max_hba_orient_dev = DEF_MAX_HBA_ORIENTATION_DEVIATION,
-                                        double max_hbd_int_dir_dev = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
-                                        double max_xba_int_dir_dev = DEF_MAX_XBA_INTERACTION_DIR_DEVIATION,
-                                        double max_xbd_int_dir_dev = DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
-                                        double max_ar_orient_dev = DEF_MAX_AR_ORIENTATION_DEVIATION);
-          
+            FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE,
+                                        double max_hba_orient_dev    = DEF_MAX_HBA_ORIENTATION_DEVIATION,
+                                        double max_hbd_int_dir_dev   = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
+                                        double max_xba_int_dir_dev   = DEF_MAX_XBA_INTERACTION_DIR_DEVIATION,
+                                        double max_xbd_int_dir_dev   = DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
+                                        double max_ar_orient_dev     = DEF_MAX_AR_ORIENTATION_DEVIATION);
+
             double getMaxHBAInteractionDirAngle() const;
 
             void setMaxHBAInteractionDirAngle(double angle);
@@ -83,11 +83,11 @@ namespace CDPL
             double getMaxXBAInteractionDirDeviation() const;
 
             void setMaxXBAInteractionDirDeviation(double angle);
-            
+
             double getMaxAROrientationDeviation() const;
 
             void setMaxAROrientationDeviation(double angle);
-          
+
             /**
              * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
              * \param ftr1 The first feature.
@@ -123,7 +123,7 @@ namespace CDPL
             double maxXBDInteractionDirDeviation;
             double maxAROrientationDeviation;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREGEOMETRYMATCHFUNCTOR_HPP

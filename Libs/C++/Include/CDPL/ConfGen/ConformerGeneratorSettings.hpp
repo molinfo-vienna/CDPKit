@@ -35,10 +35,10 @@
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API ConformerGeneratorSettings
@@ -62,11 +62,11 @@ namespace CDPL
             unsigned int getSamplingMode() const;
 
             void sampleHeteroAtomHydrogens(bool sample);
-                
+
             bool sampleHeteroAtomHydrogens() const;
 
             void sampleAngleToleranceRanges(bool sample);
-                
+
             bool sampleAngleToleranceRanges() const;
 
             void enumerateRings(bool enumerate);
@@ -78,11 +78,11 @@ namespace CDPL
             unsigned int getNitrogenEnumerationMode() const;
 
             void generateCoordinatesFromScratch(bool generate);
-    
+
             bool generateCoordinatesFromScratch() const;
 
             void includeInputCoordinates(bool include);
-    
+
             bool includeInputCoordinates() const;
 
             void setEnergyWindow(double win_size);
@@ -98,13 +98,13 @@ namespace CDPL
             std::size_t getTimeout() const;
 
             void setForceFieldTypeSystematic(unsigned int type);
-        
+
             unsigned int getForceFieldTypeSystematic() const;
 
             void setForceFieldTypeStochastic(unsigned int type);
-        
+
             unsigned int getForceFieldTypeStochastic() const;
-            
+
             void strictForceFieldParameterization(bool strict);
 
             bool strictForceFieldParameterization() const;
@@ -174,7 +174,7 @@ namespace CDPL
             std::size_t                        mcRotorBondCountThresh;
             FragmentConformerGeneratorSettings fragBuildSettings;
         };
-    };
-}
+    }; // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_CONFORMERGENERATORSETTINGS_HPP

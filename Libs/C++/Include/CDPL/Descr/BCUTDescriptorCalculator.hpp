@@ -35,7 +35,7 @@
 #include "CDPL/Math/Matrix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Descr
@@ -47,8 +47,8 @@ namespace CDPL
          */
         class CDPL_DESCR_API BCUTDescriptorCalculator
         {
-             
-        public:
+
+          public:
             /**
              * \brief Type of the generic functor class used to store user-defined atom weight functions for the initialization
              *        of the underlying \e Burden matrix [\ref BURMA].
@@ -97,17 +97,17 @@ namespace CDPL
              */
             void calculate(const Chem::MolecularGraph& molgraph, Math::DVector& descr);
 
-        private:
+          private:
             BCUTDescriptorCalculator(const BCUTDescriptorCalculator&);
 
             BCUTDescriptorCalculator& operator=(const BCUTDescriptorCalculator&);
 
-            BurdenMatrixGenerator  burdenMatrixGenerator;
-            Math::DVector          bcutDescriptor;
-            Math::DMatrix          tmpBurdenMatrix;
-            Math::DMatrix          eigenVectors;
-        }; 
-    }
-}
+            BurdenMatrixGenerator burdenMatrixGenerator;
+            Math::DVector         bcutDescriptor;
+            Math::DMatrix         tmpBurdenMatrix;
+            Math::DMatrix         eigenVectors;
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_BCUTDESCRIPTORCALCULATOR_HPP

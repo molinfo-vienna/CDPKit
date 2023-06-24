@@ -42,7 +42,7 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,10 +54,10 @@ namespace CDPL
          * \brief MorganNumberingCalculator.
          * \see [\ref MOCAN]
          */
-        class CDPL_CHEM_API MorganNumberingCalculator 
+        class CDPL_CHEM_API MorganNumberingCalculator
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %MorganNumberingCalculator instance.
              */
@@ -82,30 +82,31 @@ namespace CDPL
              */
             void calculate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
-        private:
+          private:
             MorganNumberingCalculator(const MorganNumberingCalculator&);
 
             MorganNumberingCalculator& operator=(const MorganNumberingCalculator&);
 
-            typedef std::pair<std::size_t, std::size_t> STPair;         
+            typedef std::pair<std::size_t, std::size_t> STPair;
 
-            typedef std::vector<STPair> STPairArray;
+            typedef std::vector<STPair>      STPairArray;
             typedef std::vector<std::size_t> STArray;
-            typedef std::vector<long> LArray;
+            typedef std::vector<long>        LArray;
             typedef std::vector<std::string> SArray;
 
             class NumberingState
             {
 
-            public:
-                NumberingState(STPairArray* sym_class_ids, SArray* symbols, 
-                               LArray* charges, STArray* isotopes, Math::SparseULMatrix* bond_mtx): 
-                    symClassIDs(sym_class_ids), atomSymbols(symbols), 
+              public:
+                NumberingState(STPairArray* sym_class_ids, SArray* symbols,
+                               LArray* charges, STArray* isotopes, Math::SparseULMatrix* bond_mtx):
+                    symClassIDs(sym_class_ids),
+                    atomSymbols(symbols),
                     atomCharges(charges), atomIsotopes(isotopes), bondMatrix(bond_mtx) {}
 
-                void calculate(const MolecularGraph&, Util::STArray&);    
+                void calculate(const MolecularGraph&, Util::STArray&);
 
-            private:
+              private:
                 NumberingState() {}
 
                 void init(const MolecularGraph&);
@@ -123,24 +124,24 @@ namespace CDPL
 
                 typedef STPairArray::const_iterator STPairArrayIterator;
 
-                STPairArray*             symClassIDs;
-                SArray*                  atomSymbols;
-                LArray*                  atomCharges;
-                STArray*                 atomIsotopes;
-                Math::SparseULMatrix*    bondMatrix;
-                const MolecularGraph*    molGraph;
-                STPairArray              atomNumbering;
-                STArray                  indexLookupTable;
-                STArray                  fromList;
-                STArray                  ringClosures;
-                std::string              nodeValues;
-                STArray                  lineValues;
-                LArray                   modifications;
-                STPairArrayIterator      lastSymClass;
-                std::size_t              centerAtomNumber;
-                std::size_t              nextAtomNumber;
-                bool                     sortRCList;
-            };    
+                STPairArray*          symClassIDs;
+                SArray*               atomSymbols;
+                LArray*               atomCharges;
+                STArray*              atomIsotopes;
+                Math::SparseULMatrix* bondMatrix;
+                const MolecularGraph* molGraph;
+                STPairArray           atomNumbering;
+                STArray               indexLookupTable;
+                STArray               fromList;
+                STArray               ringClosures;
+                std::string           nodeValues;
+                STArray               lineValues;
+                LArray                modifications;
+                STPairArrayIterator   lastSymClass;
+                std::size_t           centerAtomNumber;
+                std::size_t           nextAtomNumber;
+                bool                  sortRCList;
+            };
 
             STPairArray          symClassIDs;
             SArray               atomSymbols;
@@ -149,7 +150,7 @@ namespace CDPL
             Math::SparseULMatrix bondMatrix;
             NumberingState       numbering;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_MORGANNUMBERINGCALCULATOR_HPP

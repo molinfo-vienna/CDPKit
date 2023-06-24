@@ -34,7 +34,7 @@
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -47,13 +47,13 @@ namespace CDPL
         {
 
           public:
-            PharmacophoreFitScreeningScore(double ftr_match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
-                                           double ftr_pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
+            PharmacophoreFitScreeningScore(double ftr_match_cnt_weight  = DEF_FTR_MATCH_COUNT_WEIGHT,
+                                           double ftr_pos_match_weight  = DEF_FTR_POS_MATCH_WEIGHT,
                                            double ftr_geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
             double operator()(const ScreeningProcessor::SearchHit& hit);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PHARMACOPHOREFITSCREENINGSCORE_HPP

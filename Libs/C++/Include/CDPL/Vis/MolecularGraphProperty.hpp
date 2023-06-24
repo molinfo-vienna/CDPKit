@@ -61,7 +61,7 @@ namespace CDPL
              * \note The color table will only be considered if the Chem::Atom property Vis::AtomProperty::COLOR has not been set.
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_COLOR_TABLE;
-    
+
             /**
              * \brief Specifies the color of atom labels.
              *
@@ -71,7 +71,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::COLOR.
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_COLOR;
-    
+
             /**
              * \brief Specifies the font for atom element and query match expression labels.
              *
@@ -105,7 +105,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::SECONDARY_LABEL_FONT.
              */
             extern CDPL_VIS_API const Base::LookupKey SECONDARY_ATOM_LABEL_FONT;
-    
+
             /**
              * \brief Specifies the size of text labels that show the value of various atomic properties.
              *
@@ -120,7 +120,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::SECONDARY_LABEL_SIZE.
              */
             extern CDPL_VIS_API const Base::LookupKey SECONDARY_ATOM_LABEL_SIZE;
-        
+
             /**
              * \brief Specifies the margin of free space around atom labels.
              *
@@ -135,7 +135,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Atom property Vis::AtomProperty::LABEL_MARGIN.
              */
             extern CDPL_VIS_API const Base::LookupKey ATOM_LABEL_MARGIN;
-    
+
             /**
              * \brief Specifies the size of radical electron dots.
              *
@@ -268,7 +268,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::TRIPLE_BOND_TRIM_LENGTH.            
              */
             extern CDPL_VIS_API const Base::LookupKey TRIPLE_BOND_TRIM_LENGTH;
-    
+
             /**
              * \brief Specifies the font for bond labels.
              *
@@ -278,7 +278,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::LABEL_FONT.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_FONT;
-    
+
             /**
              * \brief Specifies the size of bond labels.
              *
@@ -291,7 +291,7 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::LABEL_SIZE.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_SIZE;
-    
+
             /**
              * \brief Specifies the margin of free space around bond labels.
              *
@@ -306,8 +306,8 @@ namespace CDPL
              * \note The setting is overridden by the Chem::Bond property Vis::BondProperty::LABEL_MARGIN.
              */
             extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_MARGIN;
-        }
-    }
-}
+        } // namespace MolecularGraphProperty
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_MOLECULARGRAPHPROPERTY_HPP

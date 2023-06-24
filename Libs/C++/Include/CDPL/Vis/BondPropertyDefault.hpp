@@ -34,7 +34,7 @@
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
@@ -45,8 +45,8 @@ namespace CDPL
          */
         namespace BondPropertyDefault
         {
-        
-            extern CDPL_VIS_API const Color COLOR;
+
+            extern CDPL_VIS_API const Color             COLOR;
             extern CDPL_VIS_API const SizeSpecification LINE_WIDTH;
             extern CDPL_VIS_API const SizeSpecification LINE_SPACING;
             extern CDPL_VIS_API const SizeSpecification STEREO_BOND_WEDGE_WIDTH;
@@ -55,11 +55,11 @@ namespace CDPL
             extern CDPL_VIS_API const SizeSpecification REACTION_CENTER_LINE_SPACING;
             extern CDPL_VIS_API const SizeSpecification DOUBLE_BOND_TRIM_LENGTH;
             extern CDPL_VIS_API const SizeSpecification TRIPLE_BOND_TRIM_LENGTH;
-            extern CDPL_VIS_API const Font LABEL_FONT;
+            extern CDPL_VIS_API const Font              LABEL_FONT;
             extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
             extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
-        }
-    }
-}
+        } // namespace BondPropertyDefault
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_BONDPROPERTYDEFAULT_HPP

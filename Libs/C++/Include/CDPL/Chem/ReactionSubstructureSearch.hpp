@@ -44,7 +44,7 @@
 #include "CDPL/Util/ObjectStack.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -63,7 +63,7 @@ namespace CDPL
 
             typedef std::vector<AtomBondMapping*> ABMappingList;
 
-        public:
+          public:
             /**
              * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
              */
@@ -97,7 +97,7 @@ namespace CDPL
              * \param query Specifies the reaction pattern to search for.
              */
             void setQuery(const Reaction& query);
-            
+
             /**
              * \brief Tells whether the query reaction pattern matches the specified target reaction.
              *
@@ -257,8 +257,8 @@ namespace CDPL
              * \see setEnabledReactionRoles(), Chem::ReactionRole
              */
             unsigned int getEnabledReactionRoles() const;
-        
-        private:
+
+          private:
             typedef std::pair<std::size_t, std::size_t> IndexOffsetPair;
 
             ReactionSubstructureSearch(const ReactionSubstructureSearch&);
@@ -266,7 +266,7 @@ namespace CDPL
             ReactionSubstructureSearch& operator=(const ReactionSubstructureSearch&);
 
             bool init(const Reaction&);
-            
+
             void initQueryData();
             void initTargetData();
 
@@ -276,7 +276,7 @@ namespace CDPL
             bool mapAtoms();
 
             std::size_t nextQueryAtom() const;
-            bool nextTargetAtom(std::size_t, unsigned int, std::size_t&, std::size_t&) const;
+            bool        nextTargetAtom(std::size_t, unsigned int, std::size_t&, std::size_t&) const;
 
             bool atomMappingAllowed(std::size_t, std::size_t) const;
 
@@ -296,9 +296,10 @@ namespace CDPL
 
             AtomBondMapping* createAtomBondMapping();
 
-            class ABMappingMask {
+            class ABMappingMask
+            {
 
-            public:
+              public:
                 void initAtomMask(std::size_t);
                 void initBondMask(std::size_t);
 
@@ -313,61 +314,61 @@ namespace CDPL
                 bool operator<(const ABMappingMask&) const;
                 bool operator>(const ABMappingMask&) const;
 
-            private:
+              private:
                 Util::BitSet atomMask;
                 Util::BitSet bondMask;
             };
 
             typedef MatchExpression<Reaction>::SharedPointer ReactionMatchExprPtr;
 
-            typedef std::vector<Util::BitSet> BitMatrix;
-            typedef std::vector<const Atom*> AtomMappingTable;
-            typedef std::vector<std::size_t> BondMappingTable;
-            typedef std::deque<std::size_t> AtomQueue;
-            typedef std::set<ABMappingMask> UniqueMappingList;
-            typedef std::vector<const Atom*> AtomList;
-            typedef std::vector<const Bond*> BondList;
-            typedef std::vector<std::size_t> IndexList;
+            typedef std::vector<Util::BitSet>                                         BitMatrix;
+            typedef std::vector<const Atom*>                                          AtomMappingTable;
+            typedef std::vector<std::size_t>                                          BondMappingTable;
+            typedef std::deque<std::size_t>                                           AtomQueue;
+            typedef std::set<ABMappingMask>                                           UniqueMappingList;
+            typedef std::vector<const Atom*>                                          AtomList;
+            typedef std::vector<const Bond*>                                          BondList;
+            typedef std::vector<std::size_t>                                          IndexList;
             typedef std::vector<MatchExpression<Atom, MolecularGraph>::SharedPointer> AtomMatchExprTable;
             typedef std::vector<MatchExpression<Bond, MolecularGraph>::SharedPointer> BondMatchExprTable;
-            typedef std::vector<IndexOffsetPair> IndexOffsetTable;
-            typedef Util::ObjectStack<AtomBondMapping> MappingCache;
+            typedef std::vector<IndexOffsetPair>                                      IndexOffsetTable;
+            typedef Util::ObjectStack<AtomBondMapping>                                MappingCache;
 
-            const Reaction*                query;
-            const Reaction*                target;
-            AtomList                       queryAtoms;
-            BondList                       queryBonds;
-            AtomList                       targetAtoms;
-            BondList                       targetBonds;
-            IndexOffsetTable               queryABIndexOffsets;
-            IndexOffsetTable               targetABIndexOffsets;
-            BitMatrix                      atomEquivMatrix;
-            BitMatrix                      bondEquivMatrix;
-            AtomQueue                      termQueryAtoms;
-            AtomMappingTable               queryAtomMapping;
-            BondMappingTable               queryBondMapping;
-            Util::BitSet                   queryMappingMask;
-            ABMappingMask                  targetMappingMask;
-            ABMappingList                  foundMappings;
-            UniqueMappingList              uniqueMappings;
-            AtomMatchExprTable             atomMatchExprTable;
-            BondMatchExprTable             bondMatchExprTable;
-            ReactionMatchExprPtr           rxnMatchExpression; 
-            IndexList                      postMappingMatchAtoms;
-            IndexList                      postMappingMatchBonds;
-            MappingCache                   mappingCache;
-            bool                           queryChanged;
-            bool                           initQueryMappingData;
-            bool                           uniqueMatches;
-            bool                           saveMappings;
-            unsigned int                   enabledRxnRoles;
-            std::size_t                    numQueryAtoms;
-            std::size_t                    numQueryBonds;
-            std::size_t                    numTargetAtoms;
-            std::size_t                    numTargetBonds;
-            std::size_t                    maxNumMappings;
+            const Reaction*      query;
+            const Reaction*      target;
+            AtomList             queryAtoms;
+            BondList             queryBonds;
+            AtomList             targetAtoms;
+            BondList             targetBonds;
+            IndexOffsetTable     queryABIndexOffsets;
+            IndexOffsetTable     targetABIndexOffsets;
+            BitMatrix            atomEquivMatrix;
+            BitMatrix            bondEquivMatrix;
+            AtomQueue            termQueryAtoms;
+            AtomMappingTable     queryAtomMapping;
+            BondMappingTable     queryBondMapping;
+            Util::BitSet         queryMappingMask;
+            ABMappingMask        targetMappingMask;
+            ABMappingList        foundMappings;
+            UniqueMappingList    uniqueMappings;
+            AtomMatchExprTable   atomMatchExprTable;
+            BondMatchExprTable   bondMatchExprTable;
+            ReactionMatchExprPtr rxnMatchExpression;
+            IndexList            postMappingMatchAtoms;
+            IndexList            postMappingMatchBonds;
+            MappingCache         mappingCache;
+            bool                 queryChanged;
+            bool                 initQueryMappingData;
+            bool                 uniqueMatches;
+            bool                 saveMappings;
+            unsigned int         enabledRxnRoles;
+            std::size_t          numQueryAtoms;
+            std::size_t          numQueryBonds;
+            std::size_t          numTargetAtoms;
+            std::size_t          numTargetBonds;
+            std::size_t          maxNumMappings;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_REACTIONSUBSTRUCTURESEARCH_HPP

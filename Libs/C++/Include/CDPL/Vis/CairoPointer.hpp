@@ -32,18 +32,19 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-typedef struct _cairo cairo_t;
+typedef struct _cairo         cairo_t;
 typedef struct _cairo_surface cairo_surface_t;
 typedef struct _cairo_pattern cairo_pattern_t;
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Vis
     {
-        
-        template <typename T> struct CairoPointerTraits;
+
+        template <typename T>
+        struct CairoPointerTraits;
 
         /**
          * \brief Specialization of \c %CairoPointerTraits for the object type \c cairo_t.
@@ -64,7 +65,7 @@ namespace CDPL
              */
             static void destroy(cairo_t* p) throw();
         };
-    
+
         /**
          * \brief Specialization of \c %CairoPointerTraits for the object type \c cairo_surface_t.
          * \see Vis::CairoPointer
@@ -72,13 +73,13 @@ namespace CDPL
         template <>
         struct CDPL_VIS_API CairoPointerTraits<cairo_surface_t>
         {
-    
+
             /**
              * \brief Increments the reference count of the object pointed to by \a p by \e 1.
              * \return The argument \a p.
              */
             static cairo_surface_t* reference(cairo_surface_t* p) throw();
-        
+
             /**
              * \brief Decrements the reference count of the object pointed to by \a p by \e 1.
              */
@@ -92,16 +93,16 @@ namespace CDPL
         template <>
         struct CDPL_VIS_API CairoPointerTraits<cairo_pattern_t>
         {
-    
+
             /**
              * \brief Increments the reference count of the object pointed to by \a p by \e 1.
              * \return The argument \a p.
              */
             static cairo_pattern_t* reference(cairo_pattern_t* p) throw();
-    
+
             /**
              * \brief Decrements the reference count of the object pointed to by \a p by \e 1.
-             */            
+             */
             static void destroy(cairo_pattern_t* p) throw();
         };
 
@@ -133,8 +134,8 @@ namespace CDPL
         template <typename T>
         class CairoPointer
         {
-      
-        public:
+
+          public:
             /**
              * \brief Constructs a \c %CairoPointer that manages the reference count of the object
              *        pointed to by \a ptr.
@@ -193,7 +194,7 @@ namespace CDPL
              * \see get()
              */
             T* operator->() const throw();
- 
+
             /**
              * \brief Returns a pointer to the referenced object.
              * \return A pointer to the referenced object, or \e null if no object is referenced.
@@ -219,30 +220,33 @@ namespace CDPL
              */
             void reset(T* ptr = 0) throw();
 
-        private:
+          private:
             T* pointer;
         };
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename T>
-CDPL::Vis::CairoPointer<T>::CairoPointer(T* p) throw() : pointer(p) {}
+CDPL::Vis::CairoPointer<T>::CairoPointer(T* p) throw():
+    pointer(p)
+{}
 
 template <typename T>
-CDPL::Vis::CairoPointer<T>::CairoPointer(const CairoPointer& other) throw() 
-    : pointer(CairoPointerTraits<T>::reference(other.pointer)) {}
+CDPL::Vis::CairoPointer<T>::CairoPointer(const CairoPointer& other) throw():
+    pointer(CairoPointerTraits<T>::reference(other.pointer))
+{}
 
 template <typename T>
-CDPL::Vis::CairoPointer<T>::~CairoPointer() 
-{ 
-    CairoPointerTraits<T>::destroy(pointer); 
+CDPL::Vis::CairoPointer<T>::~CairoPointer()
+{
+    CairoPointerTraits<T>::destroy(pointer);
 }
 
 template <typename T>
-CDPL::Vis::CairoPointer<T>& CDPL::Vis::CairoPointer<T>::operator=(const CairoPointer& other) throw() 
+CDPL::Vis::CairoPointer<T>& CDPL::Vis::CairoPointer<T>::operator=(const CairoPointer& other) throw()
 {
     if (this != &other) {
         CairoPointerTraits<T>::destroy(pointer);
@@ -253,33 +257,33 @@ CDPL::Vis::CairoPointer<T>& CDPL::Vis::CairoPointer<T>::operator=(const CairoPoi
 }
 
 template <typename T>
-bool CDPL::Vis::CairoPointer<T>::operator!() const throw() 
+bool CDPL::Vis::CairoPointer<T>::operator!() const throw()
 {
     return !pointer;
 }
 
 template <typename T>
-T& CDPL::Vis::CairoPointer<T>::operator*() const throw() 
-{ 
-    return *pointer; 
+T& CDPL::Vis::CairoPointer<T>::operator*() const throw()
+{
+    return *pointer;
 }
 
 template <typename T>
 T* CDPL::Vis::CairoPointer<T>::operator->() const throw()
-{ 
-    return pointer; 
+{
+    return pointer;
 }
 
 template <typename T>
 T* CDPL::Vis::CairoPointer<T>::get() const throw()
-{ 
-    return pointer; 
+{
+    return pointer;
 }
 
 template <typename T>
 T* CDPL::Vis::CairoPointer<T>::release() throw()
 {
-    T* tmp = pointer;
+    T* tmp  = pointer;
     pointer = 0;
     return tmp;
 }

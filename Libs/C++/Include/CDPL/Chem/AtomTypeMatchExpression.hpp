@@ -35,7 +35,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_CHEM_API AtomTypeMatchExpression : public MatchExpression<Atom, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomTypeMatchExpression instances.
              */
@@ -62,7 +62,7 @@ namespace CDPL
              * \param not_match Specifies whether the type of a target atom actually has to match (\c true) or \e not match (\c false)
              *                  the query atom type.
              */
-            AtomTypeMatchExpression(unsigned int atom_type, bool not_match); 
+            AtomTypeMatchExpression(unsigned int atom_type, bool not_match);
 
             /**
              * \brief Checks whether the atom type of \a target_atom matches (or does not match) the query atom type specified in the constructor.
@@ -128,14 +128,14 @@ namespace CDPL
              *         Otherwise, the method will return \c true if the atom types are equivalent, and \c false if they are not.
              * \note The atom type of \a target_atom is taken from the Chem::Atom property Chem::AtomProperty::TYPE.
              */
-            bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom, 
+            bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
                             const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
-        private:
+          private:
             unsigned int atomType;
             bool         notMatch;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMTYPEMATCHEXPRESSION_HPP

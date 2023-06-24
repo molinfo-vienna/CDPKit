@@ -40,22 +40,25 @@ namespace CDPLPythonBase
 {
 
     template <typename T>
-    struct DataInputHandlerWrapper : 
-        CDPL::Base::DataInputHandler<T>, boost::python::wrapper<CDPL::Base::DataInputHandler<T> >
+    struct DataInputHandlerWrapper : CDPL::Base::DataInputHandler<T>,
+                                     boost::python::wrapper<CDPL::Base::DataInputHandler<T> >
     {
 
         typedef typename CDPL::Base::DataInputHandler<T>::ReaderType ReaderType;
-        typedef std::shared_ptr<DataInputHandlerWrapper> SharedPointer;
+        typedef std::shared_ptr<DataInputHandlerWrapper>             SharedPointer;
 
-        const CDPL::Base::DataFormat& getDataFormat() const {
+        const CDPL::Base::DataFormat& getDataFormat() const
+        {
             return this->get_override("getDataFormat")();
         }
 
-        typename ReaderType::SharedPointer createReader(std::istream& is) const {
+        typename ReaderType::SharedPointer createReader(std::istream& is) const
+        {
             return this->get_override("createReader")(boost::ref(is));
         }
 
-        typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const {
+        typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const
+        {
             return this->get_override("createReader")(file_name, mode);
         }
     };
@@ -64,28 +67,29 @@ namespace CDPLPythonBase
     struct DataInputHandlerExport
     {
 
-        DataInputHandlerExport(const char* name) {
+        DataInputHandlerExport(const char* name)
+        {
             using namespace boost;
             using namespace CDPL;
 
             typedef Base::DataInputHandler<T> HandlerType;
 
-            typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc1)(std::istream&) const = &HandlerType::createReader;
+            typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc1)(std::istream&) const                               = &HandlerType::createReader;
             typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc2)(const std::string&, std::ios_base::openmode) const = &HandlerType::createReader;
 
             python::class_<DataInputHandlerWrapper<T>, typename DataInputHandlerWrapper<T>::SharedPointer, boost::noncopyable>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
                 .def(ObjectIdentityCheckVisitor<HandlerType>())
-                .def("getDataFormat", python::pure_virtual(&HandlerType::getDataFormat), 
+                .def("getDataFormat", python::pure_virtual(&HandlerType::getDataFormat),
                      python::arg("self"), python::return_internal_reference<1>())
-                .def("createReader", python::pure_virtual(createReaderFunc1), 
+                .def("createReader", python::pure_virtual(createReaderFunc1),
                      (python::arg("self"), python::arg("is")), python::with_custodian_and_ward_postcall<0, 2>())
-                .def("createReader", python::pure_virtual(createReaderFunc2), 
+                .def("createReader", python::pure_virtual(createReaderFunc2),
                      (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary));
 
             python::register_ptr_to_python<typename Base::DataInputHandler<T>::SharedPointer>();
         }
     };
-}
+} // namespace CDPLPythonBase
 
 #endif // CDPL_PYTHON_BASE_DATAINPUTHANDLEREXPORT_HPP

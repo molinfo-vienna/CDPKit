@@ -46,7 +46,7 @@ namespace CDPL
 
         class Molecule;
     }
-}
+} // namespace CDPL
 
 
 namespace PSDCreate
@@ -55,12 +55,12 @@ namespace PSDCreate
     class PSDCreateImpl : public CmdLineLib::CmdLineBase
     {
 
-    public:
+      public:
         PSDCreateImpl();
 
-    private:
+      private:
         typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-        typedef InputHandler::SharedPointer InputHandlerPtr;
+        typedef InputHandler::SharedPointer                        InputHandlerPtr;
 
         const char* getProgName() const;
         const char* getProgCopyright() const;
@@ -101,25 +101,25 @@ namespace PSDCreate
         struct MergeDBsProgressCallback;
         struct DBCreationWorker;
 
-        typedef std::vector<std::string> StringList;
-        typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
+        typedef std::vector<std::string>                             StringList;
+        typedef CDPL::Pharm::ScreeningDBCreator::Mode                CreationMode;
+        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>         MoleculeReader;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-        typedef CDPL::Internal::Timer Timer;
+        typedef CDPL::Internal::Timer                                Timer;
 
-        StringList             inputFiles;
-        std::string            outputDatabase;
-        bool                   dropDuplicates;
-        std::size_t            numThreads;
-        CreationMode           creationMode;
-        InputHandlerPtr        inputHandler;
-        CompMoleculeReader     inputReader;   
-        std::mutex             mutex;
-        std::mutex             molReadMutex;
-        std::string            errorMessage;
-        bool                   addSourceFileProp;
-        Timer                  timer;
+        StringList         inputFiles;
+        std::string        outputDatabase;
+        bool               dropDuplicates;
+        std::size_t        numThreads;
+        CreationMode       creationMode;
+        InputHandlerPtr    inputHandler;
+        CompMoleculeReader inputReader;
+        std::mutex         mutex;
+        std::mutex         molReadMutex;
+        std::string        errorMessage;
+        bool               addSourceFileProp;
+        Timer              timer;
     };
-}
+} // namespace PSDCreate
 
 #endif // PSDCREATE_PSDCREATEIMPL_HPP

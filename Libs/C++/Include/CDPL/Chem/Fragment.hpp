@@ -39,7 +39,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -54,7 +54,7 @@ namespace CDPL
             typedef std::vector<Atom*> AtomList;
             typedef std::vector<Bond*> BondList;
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Fragment instances.
              */
@@ -157,7 +157,7 @@ namespace CDPL
              * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
              */
             AtomIterator getAtomsBegin();
-            
+
             /**
              * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom objects.
              * \return A constant iterator pointing to the end of the stored \c const Chem::Atom objects.
@@ -174,13 +174,13 @@ namespace CDPL
              * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
              * \return A constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
              */
-            ConstBondIterator getBondsBegin() const; 
+            ConstBondIterator getBondsBegin() const;
 
             /**
              * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Chem::Bond objects.
              * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Bond objects.
              */
-            BondIterator getBondsBegin(); 
+            BondIterator getBondsBegin();
 
             /**
              * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Bond objects.
@@ -300,7 +300,7 @@ namespace CDPL
              * \param bond The bond to remove.
              * \return \c true if the bond was removed, and \c false otherwise.
              */
-            bool removeBond(const Bond& bond);        
+            bool removeBond(const Bond& bond);
 
             /**
              * \brief Removes all atoms and bonds.
@@ -308,7 +308,7 @@ namespace CDPL
             void clear();
 
             using Base::PropertyContainer::swap;
-            
+
             /**
              * \brief Exchanges the atoms, bonds and properties of this fragment with the atoms, bonds and
              *        properties of the fragment \a frag.
@@ -367,7 +367,7 @@ namespace CDPL
 
             void reserveMemoryForBonds(std::size_t num_bonds);
 
-        private:
+          private:
             typedef std::unordered_map<const Atom*, std::size_t> AtomIndexMap;
             typedef std::unordered_map<const Bond*, std::size_t> BondIndexMap;
 
@@ -376,7 +376,7 @@ namespace CDPL
             AtomIndexMap atomIndices;
             BondIndexMap bondIndices;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_FRAGMENT_HPP

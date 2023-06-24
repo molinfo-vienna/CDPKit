@@ -62,12 +62,12 @@ namespace CDPL
             for (std::size_t i = 0, new_num_bits = bs.size() >> 1; i < num_times; i++, new_num_bits >>= 1) {
                 tmp = bs;
                 tmp >>= new_num_bits;
-        
+
                 bs |= tmp;
                 bs.resize(new_num_bits);
             }
         }
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_BITSET_HPP

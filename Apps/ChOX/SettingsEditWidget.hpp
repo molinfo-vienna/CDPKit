@@ -36,21 +36,21 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         SettingsEditWidget(QWidget* = 0);
 
         virtual ~SettingsEditWidget() {}
 
         virtual bool haveChangedSettings() const = 0;
 
-    signals:
+      signals:
         void settingsChanged();
 
-    public slots:
-        virtual void apply() = 0;
-        virtual void reset() = 0;
+      public slots:
+        virtual void apply()       = 0;
+        virtual void reset()       = 0;
         virtual void setDefaults() = 0;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SETTINGSEDITWIDGET_HPP

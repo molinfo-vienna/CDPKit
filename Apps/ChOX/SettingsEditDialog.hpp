@@ -49,12 +49,12 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         SettingsEditDialog(QWidget*, Settings&, Qt::WindowFlags = 0);
 
         int exec();
 
-    private slots:
+      private slots:
         void acceptChanges();
         void resetChanges();
         void applyChanges();
@@ -63,21 +63,21 @@ namespace ChOX
         void handleCategorySelection(QListWidgetItem*);
         void handleSettingsChange();
 
-    private:
+      private:
         void addCategoryEditWidget(SettingsEditWidget*, const QString&, const QString&);
 
         void init();
 
         typedef std::vector<SettingsEditWidget*> EditWidgetList;
 
-        Settings&        settings;
-        QListWidget*     categoryMenu;
-        QLabel*          categoryDescrLabel;
-        QStringList      categoryDescriptions;
-        QStackedWidget*  categoryEditWidgetStack;
-        QPushButton*     applyChangesButton;
-        EditWidgetList   categoryEditWidgetList;
+        Settings&       settings;
+        QListWidget*    categoryMenu;
+        QLabel*         categoryDescrLabel;
+        QStringList     categoryDescriptions;
+        QStackedWidget* categoryEditWidgetStack;
+        QPushButton*    applyChangesButton;
+        EditWidgetList  categoryEditWidgetList;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SETTINGSEDITDIALOG_HPP

@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -43,8 +43,8 @@ namespace CDPL
         /**
          * \brief A handler for the output of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
          */
-        typedef Util::DefaultDataOutputHandler<RDFReactionWriter, DataFormat::RDF> RDFReactionOutputHandler;    
-    }
-}
+        typedef Util::DefaultDataOutputHandler<RDFReactionWriter, DataFormat::RDF> RDFReactionOutputHandler;
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RDFREACTIONOUTPUTHANDLER_HPP

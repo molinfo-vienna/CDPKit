@@ -36,7 +36,7 @@
 #include "CDPL/Pharm/SpatialFeatureMapping.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -54,9 +54,9 @@ namespace CDPL
             static constexpr double DEF_FTR_MATCH_COUNT_WEIGHT = 1.0;
             static constexpr double DEF_FTR_POS_MATCH_WEIGHT   = 0.5;
             static constexpr double DEF_FTR_GEOM_MATCH_WEIGHT  = 0.4;
-      
-            PharmacophoreFitScore(double match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
-                                  double pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
+
+            PharmacophoreFitScore(double match_cnt_weight  = DEF_FTR_MATCH_COUNT_WEIGHT,
+                                  double pos_match_weight  = DEF_FTR_POS_MATCH_WEIGHT,
                                   double geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
             double getFeatureMatchCountWeight() const;
@@ -71,7 +71,7 @@ namespace CDPL
 
             void setFeatureGeometryMatchWeight(double weight);
 
-            double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
+            double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs,
                               const Math::Matrix4D& xform);
 
             double operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping);
@@ -85,7 +85,7 @@ namespace CDPL
             double                ftrGeomMatchWeight;
             FeatureList           groupedRefFtrs;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PHARMACOPHOREFITSCORE_HPP

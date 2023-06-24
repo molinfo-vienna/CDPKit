@@ -36,7 +36,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -56,7 +56,7 @@ namespace CDPL
         class CDPL_BIOMOL_API PDBMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PDBMolecularGraphWriter instance that will write data of molecular graphs to the output
              *        stream \a os.
@@ -76,10 +76,10 @@ namespace CDPL
              */
             Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
-        private:
+          private:
             typedef std::auto_ptr<PDBDataWriter> PDBDataWriterPtr;
 
             PDBMolecularGraphWriter(const PDBMolecularGraphWriter&);
@@ -90,7 +90,7 @@ namespace CDPL
             bool             state;
             PDBDataWriterPtr writer;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBMOLECULARGRAPHWRITER_HPP

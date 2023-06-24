@@ -41,10 +41,10 @@
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteraction.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         class CDPL_FORCEFIELD_API MMFF94VanDerWaalsParameterTable
@@ -59,16 +59,16 @@ namespace CDPL
           public:
             typedef std::shared_ptr<MMFF94VanDerWaalsParameterTable> SharedPointer;
             typedef MMFF94VanDerWaalsInteraction::HDonorAcceptorType HDonorAcceptorType;
-    
+
             class CDPL_FORCEFIELD_API Entry
             {
 
               public:
                 Entry();
 
-                Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
+                Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g,
                       HDonorAcceptorType don_acc_type);
- 
+
                 unsigned int getAtomType() const;
 
                 /**
@@ -82,19 +82,19 @@ namespace CDPL
                  * \return The Slater-Kirkwood effective number of valence electrons.
                  */
                 double getEffectiveElectronNumber() const;
- 
+
                 /**
                  * \brief Returns the scaling factor A parameter.
                  * \return The scaling factor A.
                  */
                 double getFactorA() const;
-  
+
                 /**
                  * \brief Returns the scaling factor G parameter.
                  * \return The scaling factor G
                  */
                 double getFactorG() const;
-  
+
                 /**
                  * Returns the H-donor/-acceptor property associated with the numeric MMFF94 atom type.
                  * \return The H-donor/-acceptor property specifier.
@@ -111,17 +111,19 @@ namespace CDPL
                 double             factG;
                 HDonorAcceptorType donAccType;
                 bool               initialized;
-            };            
+            };
 
-            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
-                                              DataStorage::const_iterator> ConstEntryIterator;
+            typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>,
+                                              DataStorage::const_iterator>
+                ConstEntryIterator;
 
-            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
-                                              DataStorage::iterator> EntryIterator;
-    
+            typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>,
+                                              DataStorage::iterator>
+                EntryIterator;
+
             MMFF94VanDerWaalsParameterTable();
 
-            void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
+            void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g,
                           HDonorAcceptorType don_acc_type);
 
             const Entry& getEntry(unsigned int atom_type) const;
@@ -137,7 +139,7 @@ namespace CDPL
             ConstEntryIterator getEntriesBegin() const;
 
             ConstEntryIterator getEntriesEnd() const;
-    
+
             EntryIterator getEntriesBegin();
 
             EntryIterator getEntriesEnd();
@@ -145,7 +147,7 @@ namespace CDPL
             ConstEntryIterator begin() const;
 
             ConstEntryIterator end() const;
-    
+
             EntryIterator begin();
 
             EntryIterator end();
@@ -166,28 +168,28 @@ namespace CDPL
              * \return The exponent.
              */
             double getExponent() const;
-    
+
             /**
              * \brief Returns the value of the \e B factor used in the calculation of van der Waals
              *        interaction energies.
              * \return The value of the \e B factor.
              */
             double getFactorB() const;
-  
+
             /**
              * \brief Returns the value of \e beta used in the calculation of van der Waals
              *        interaction energies.
              * \return The value of \e beta.
              */
             double getBeta() const;
-   
+
             /**
              * \brief Returns the value of the \e DARAD factor used in the calculation of van der Waals
              *        interaction energies.
              * \return The value of the \e DARAD factor.
              */
             double getFactorDARAD() const;
-   
+
             /**
              * \brief Returns the value of the \e DAEPS factor used in the calculation of van der Waals
              *        interaction energies.
@@ -212,7 +214,7 @@ namespace CDPL
             double               factDARAD;
             double               factDAEPS;
         };
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94VANDERWAALSPARAMETERTABLE_HPP

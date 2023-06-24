@@ -32,7 +32,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -68,7 +68,7 @@ namespace CDPL
 
             bool hasExocyclicOH(const Atom& atom, const MolecularGraph& molgraph) const;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_TAUTOMERSCORE_HPP

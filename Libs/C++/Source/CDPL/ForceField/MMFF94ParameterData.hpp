@@ -100,7 +100,7 @@ namespace CDPL
             extern const char        FORMAL_ATOM_CHARGE_DEFINITIONS[];
             extern const std::size_t FORMAL_ATOM_CHARGE_DEFINITIONS_LEN;
         } // namespace MMFF94ParameterData
-    }     // namespace ForceField
+    } // namespace ForceField
 } // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP

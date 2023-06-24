@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataReader<RDFReactionReader, Util::GZipIStream> RDFGZReactionReader;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RDFGZREACTIONREADER_HPP

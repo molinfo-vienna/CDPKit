@@ -39,7 +39,7 @@
 #include "CDPL/Biomol/PDBData.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -54,7 +54,7 @@ namespace CDPL
         class MolecularGraph;
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
     namespace Biomol
     {
@@ -62,12 +62,13 @@ namespace CDPL
         class PDBDataWriter
         {
 
-        public:
-            PDBDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
-        
+          public:
+            PDBDataWriter(const Base::DataIOBase& io_base):
+                ioBase(io_base) {}
+
             bool writePDBFileRecord(std::ostream& os, const Chem::MolecularGraph& molgraph);
-        
-        private:
+
+          private:
             void init(std::ostream& os);
 
             void processAtomSequence(const Chem::MolecularGraph& molgraph);
@@ -84,7 +85,7 @@ namespace CDPL
             void writeConnectivitySection(std::ostream& os, const Chem::MolecularGraph& molgraph);
             void writeBookkeepingSection(std::ostream& os);
 
-            bool writeGenericDataRecord(std::ostream& os, PDBData::RecordType type, const Chem::MolecularGraph& molgraph, 
+            bool writeGenericDataRecord(std::ostream& os, PDBData::RecordType type, const Chem::MolecularGraph& molgraph,
                                         const std::string& prefix, std::size_t max_llen);
 
             long writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom, std::size_t conf_idx = 0);
@@ -101,9 +102,9 @@ namespace CDPL
 
             long checkSerialNumber(long serial_no) const;
             long checkResidueSequenceNumber(long seq_no) const;
-            
+
             bool atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
-/*
+            /*
             long getSerialNumber(const Chem::Atom& atom) const;
             long getResidueSequenceNumber(const Chem::Atom& atom) const;
             char getResidueInsertionCode(const Chem::Atom& atom) const;
@@ -112,13 +113,13 @@ namespace CDPL
             const std::string& getResidueCode(const Chem::Atom& atom) const;
             const std::string& getResidueAtomName(const Chem::Atom& atom) const;
 */
-            typedef std::vector<const Chem::Atom*> AtomList;
-            typedef std::vector<long> AtomSerialList;
-            typedef std::unordered_map<std::string, std::size_t> RecordHistogram;
-            typedef std::unordered_map<const Chem::Atom*, std::size_t> AtomToSerialMap;
-            typedef std::pair<long, long> SerialPair;
+            typedef std::vector<const Chem::Atom*>                           AtomList;
+            typedef std::vector<long>                                        AtomSerialList;
+            typedef std::unordered_map<std::string, std::size_t>             RecordHistogram;
+            typedef std::unordered_map<const Chem::Atom*, std::size_t>       AtomToSerialMap;
+            typedef std::pair<long, long>                                    SerialPair;
             typedef std::unordered_set<SerialPair, boost::hash<SerialPair> > SerialPairSet;
-            typedef std::unordered_set<const Chem::Bond*> BondSet;
+            typedef std::unordered_set<const Chem::Bond*>                    BondSet;
 
             typedef ResidueDictionary::SharedPointer ResDictPointer;
 
@@ -142,7 +143,7 @@ namespace CDPL
             std::size_t             numModels;
             //std::size_t             numWrittenModels;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBDATAWRITER_HPP

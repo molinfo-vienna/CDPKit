@@ -36,7 +36,7 @@
 #include "CDPL/Util/IndirectArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Shape
@@ -49,11 +49,12 @@ namespace CDPL
             typedef std::shared_ptr<GaussianShapeSet> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "GaussianShapeSet";
             }
         };
-    }
-}
+    } // namespace Shape
+} // namespace CDPL
 
 #endif // CDPL_SHAPE_GAUSSIANSHAPESET_HPP

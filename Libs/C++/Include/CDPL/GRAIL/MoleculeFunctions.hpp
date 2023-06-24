@@ -32,7 +32,7 @@
 #include "CDPL/GRAIL/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,11 +41,11 @@ namespace CDPL
         class Molecule;
     }
 
-    namespace GRAIL 
+    namespace GRAIL
     {
-    
+
         CDPL_GRAIL_API void prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_prot_state = false);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_GRAIL_MOLECULEFUNCTIONS_HPP

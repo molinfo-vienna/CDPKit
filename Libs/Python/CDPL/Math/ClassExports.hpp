@@ -42,7 +42,7 @@ namespace CDPLPythonMath
     void exportScalarVectorTypes();
     void exportZeroVectorTypes();
     void exportUnitVectorTypes();
-    
+
     void exportMatrixTypes();
     void exportSparseMatrixTypes();
     void exportTranslationMatrixTypes();
@@ -54,10 +54,10 @@ namespace CDPLPythonMath
     void exportZeroMatrixTypes();
     void exportScalarMatrixTypes();
     void exportIdentityMatrixTypes();
-    
+
     void exportQuaternionTypes();
     void exportRealQuaternionTypes();
-    
+
     void exportGridTypes();
     void exportZeroGridTypes();
     void exportScalarGridTypes();
@@ -65,7 +65,7 @@ namespace CDPLPythonMath
 
     void exportRange();
     void exportSlice();
-    
+
     void exportVectorSliceTypes();
     void exportConstVectorSliceTypes();
     void exportVectorRangeTypes();
@@ -84,7 +84,7 @@ namespace CDPLPythonMath
     void exportConstVectorQuaternionAdapterTypes();
     void exportHomogenousCoordsAdapterTypes();
     void exportConstHomogenousCoordsAdapterTypes();
-        
+
     void exportTriangularMatrixTypes();
     void exportTriangularMatrixAdapterTypes1();
     void exportTriangularMatrixAdapterTypes2();
@@ -92,7 +92,7 @@ namespace CDPLPythonMath
     void exportTriangularMatrixAdapterTypes4();
     void exportMatrixTransposeTypes();
     void exportConstMatrixTransposeTypes();
-    
+
     void exportQuaternionAdapterTypes();
 
     void exportMLRModelTypes();
@@ -103,6 +103,6 @@ namespace CDPLPythonMath
     void exportVectorArrayTypes();
 
     void exportFunctionWrappers();
-}
+} // namespace CDPLPythonMath
 
 #endif // CDPL_PYTHON_MATH_CLASSEXPORTS_HPP

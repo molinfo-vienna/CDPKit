@@ -34,7 +34,7 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -42,7 +42,7 @@ namespace CDPL
 
         class Feature;
         class FeatureContainer;
-    }
+    } // namespace Pharm
 
     namespace Descr
     {
@@ -54,17 +54,17 @@ namespace CDPL
         class CDPL_DESCR_API FeatureRDFCodeCalculator : public RDFCodeCalculator<Pharm::Feature>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs the \c %FeatureRDFCodeCalculator instance.
              */
             FeatureRDFCodeCalculator();
-            
+
             FeatureRDFCodeCalculator(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
 
             void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& rdf_code);
-        }; 
-    }
-}
+        };
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_FEATURERDFCODECALCULATOR_HPP

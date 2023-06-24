@@ -38,7 +38,7 @@
 #include "CDPL/Chem/Fragment.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -55,7 +55,7 @@ namespace CDPL
              * \brief Constructs the \c %InteractionPharmacophoreGenerator instance.
              */
             InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
-                                              DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
+                                              DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg  = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
 
             void setCoreEnvironmentRadius(double radius);
 
@@ -85,7 +85,7 @@ namespace CDPL
 
             const Chem::Fragment& getCoreEnvironment() const;
 
-            void generate(const Chem::MolecularGraph& core, const Chem::MolecularGraph& tgt, Pharmacophore& ia_pharm, 
+            void generate(const Chem::MolecularGraph& core, const Chem::MolecularGraph& tgt, Pharmacophore& ia_pharm,
                           bool extract_core_env, bool append = false);
 
           private:
@@ -102,7 +102,7 @@ namespace CDPL
             double                        coreEnvRadius;
             bool                          addXVolumes;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_INTERACTIONPHARMACOPHOREGENERATOR_HPP

@@ -40,7 +40,8 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class GridExpression;
+        template <typename E>
+        class GridExpression;
         template <template <typename T1, typename T2> class F, typename G, typename E>
         void gridAssignGrid(G& g, const GridExpression<E>& e)
         {
@@ -62,7 +63,7 @@ namespace CDPL
         void gridAssignScalar(G& g, const T& t)
         {
             typedef F<typename G::Reference, T> FunctorType;
-            typedef typename G::SizeType SizeType;
+            typedef typename G::SizeType        SizeType;
 
             SizeType size1 = g.getSize1();
             SizeType size2 = g.getSize2();
@@ -88,7 +89,7 @@ namespace CDPL
                     for (SizeType k = 0; k < size3; k++)
                         std::swap(g(i, j, k), e()(i, j, k));
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_GRIDASSIGNMENT_HPP

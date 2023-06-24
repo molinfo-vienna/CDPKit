@@ -33,7 +33,7 @@
 #include "CDPL/Util/MultiMap.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -57,11 +57,12 @@ namespace CDPL
             typedef std::shared_ptr<FeatureMapping> SharedPointer;
 
           private:
-            const char* getClassName() const {
+            const char* getClassName() const
+            {
                 return "FeatureMapping";
             }
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATUREMAPPING_HPP

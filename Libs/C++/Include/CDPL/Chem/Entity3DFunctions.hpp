@@ -33,23 +33,22 @@
 #include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class Entity3D;
-    
+
         CDPL_CHEM_API const Math::Vector3D& get3DCoordinates(const Entity3D& entity);
 
         CDPL_CHEM_API void set3DCoordinates(Entity3D& entity, const Math::Vector3D& coords);
 
         CDPL_CHEM_API void clear3DCoordinates(Entity3D& entity);
-    
+
         CDPL_CHEM_API bool has3DCoordinates(const Entity3D& entity);
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ENTITY3DFUNCTIONS_HPP
- 

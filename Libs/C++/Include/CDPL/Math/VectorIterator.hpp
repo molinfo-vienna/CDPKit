@@ -43,22 +43,25 @@ namespace CDPL
         class VectorElementAccessor
         {
 
-            typedef E VectorType;
-            typedef typename E::SizeType SizeType;
+            typedef E                     VectorType;
+            typedef typename E::SizeType  SizeType;
             typedef typename E::Reference Reference;
 
-        public:
-            VectorElementAccessor(VectorType& e): vec(e) {}
+          public:
+            VectorElementAccessor(VectorType& e):
+                vec(e) {}
 
-            Reference operator()(SizeType i) const {
+            Reference operator()(SizeType i) const
+            {
                 return vec.get()(i);
             }
 
-            bool operator==(const VectorElementAccessor& accessor) const {
+            bool operator==(const VectorElementAccessor& accessor) const
+            {
                 return (&vec.get() == &accessor.vec.get());
             }
 
-        private:
+          private:
             std::reference_wrapper<VectorType> vec;
         };
 
@@ -66,43 +69,49 @@ namespace CDPL
         class VectorElementAccessor<const E>
         {
 
-            typedef E VectorType;
-            typedef typename E::SizeType SizeType;
+            typedef E                          VectorType;
+            typedef typename E::SizeType       SizeType;
             typedef typename E::ConstReference Reference;
 
-        public:
-            VectorElementAccessor(const VectorElementAccessor<E>& accessor): vec(accessor.vec) {}
+          public:
+            VectorElementAccessor(const VectorElementAccessor<E>& accessor):
+                vec(accessor.vec) {}
 
-            VectorElementAccessor(const VectorType& e): vec(e) {}
+            VectorElementAccessor(const VectorType& e):
+                vec(e) {}
 
-            Reference operator()(SizeType i) const {
+            Reference operator()(SizeType i) const
+            {
                 return vec.get()(i);
             }
 
-            bool operator==(const VectorElementAccessor& accessor) const {
+            bool operator==(const VectorElementAccessor& accessor) const
+            {
                 return (&vec.get() == &accessor.vec.get());
             }
 
-            VectorElementAccessor& operator=(const VectorElementAccessor<E>& accessor) {
+            VectorElementAccessor& operator=(const VectorElementAccessor<E>& accessor)
+            {
                 vec = std::reference_wrapper<const VectorType>(accessor.vec);
                 return *this;
             }
 
-        private:
+          private:
             std::reference_wrapper<const VectorType> vec;
         };
-    
+
         template <typename E>
         struct VectorIteratorTraits
         {
 
-            typedef E VectorType;
-            typedef typename E::SizeType SizeType;
-            typedef typename E::ValueType ValueType;
-            typedef VectorElementAccessor<E> AccessorType;
+            typedef E                                                               VectorType;
+            typedef typename E::SizeType                                            SizeType;
+            typedef typename E::ValueType                                           ValueType;
+            typedef VectorElementAccessor<E>                                        AccessorType;
             typedef Util::IndexedElementIterator<ValueType, AccessorType, SizeType> IteratorType;
 
-            static IteratorType makeIterator(VectorType& e, SizeType idx) {
+            static IteratorType makeIterator(VectorType& e, SizeType idx)
+            {
                 return IteratorType(AccessorType(e), idx);
             }
         };
@@ -111,13 +120,14 @@ namespace CDPL
         struct VectorIteratorTraits<const E>
         {
 
-            typedef E VectorType;
-            typedef typename E::SizeType SizeType;
-            typedef typename E::ValueType ValueType;
-            typedef VectorElementAccessor<const E> AccessorType;
+            typedef E                                                                     VectorType;
+            typedef typename E::SizeType                                                  SizeType;
+            typedef typename E::ValueType                                                 ValueType;
+            typedef VectorElementAccessor<const E>                                        AccessorType;
             typedef Util::IndexedElementIterator<const ValueType, AccessorType, SizeType> IteratorType;
 
-            static IteratorType makeIterator(const VectorType& e, SizeType idx) {
+            static IteratorType makeIterator(const VectorType& e, SizeType idx)
+            {
                 return IteratorType(AccessorType(e), idx);
             }
         };
@@ -127,7 +137,7 @@ namespace CDPL
         {
             return VectorIteratorTraits<E>::makeIterator(e(), 0);
         }
-        
+
         template <typename E>
         typename VectorIteratorTraits<E>::IteratorType vectorEnd(VectorExpression<E>& e)
         {
@@ -139,13 +149,13 @@ namespace CDPL
         {
             return VectorIteratorTraits<const E>::makeIterator(e(), 0);
         }
-        
+
         template <typename E>
         typename VectorIteratorTraits<const E>::IteratorType vectorEnd(const VectorExpression<E>& e)
         {
             return VectorIteratorTraits<const E>::makeIterator(e(), e().getSize());
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_VECTORITERATOR_HPP

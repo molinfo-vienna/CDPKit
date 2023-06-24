@@ -49,7 +49,7 @@ namespace CDPL
          */
         namespace DataFormat
         {
-    
+
             /**
              * \brief Provides meta-information about the native binary <em>CDPL</em> format.
              */
@@ -74,8 +74,8 @@ namespace CDPL
              * \brief Provides meta-information about the pharmacophore screening database <em>PSD</em> format.
              */
             extern CDPL_PHARM_API const Base::DataFormat PSD;
-        }
-    }
-}
+        } // namespace DataFormat
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_DATAFORMAT_HPP

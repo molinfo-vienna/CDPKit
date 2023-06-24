@@ -36,7 +36,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,7 +51,7 @@ namespace CDPL
         class CDPL_CHEM_API AtomConfigurationMatchExpression : public MatchExpression<Atom, MolecularGraph>
         {
 
-        public:
+          public:
             /**
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomConfigurationMatchExpression instances.
              */
@@ -100,7 +100,7 @@ namespace CDPL
              */
             bool requiresAtomBondMapping() const;
 
-        private:
+          private:
             StereoDescriptor queryStereoDescr;
             const Atom*      queryAtom;
             bool             queryDescrValid;
@@ -108,7 +108,7 @@ namespace CDPL
             bool             notMatch;
             bool             allowPartMaps;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMCONFIGURATIONMATCHEXPRESSION_HPP

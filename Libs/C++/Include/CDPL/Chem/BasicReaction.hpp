@@ -40,7 +40,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -52,18 +52,18 @@ namespace CDPL
         class CDPL_CHEM_API BasicReaction : public Reaction
         {
 
-            typedef Util::ObjectPool<BasicMolecule> ComponentCache;
+            typedef Util::ObjectPool<BasicMolecule>     ComponentCache;
             typedef ComponentCache::SharedObjectPointer ComponentPtr;
-            typedef std::vector<ComponentPtr> ComponentList;
+            typedef std::vector<ComponentPtr>           ComponentList;
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BasicReaction instances.
              */
             typedef std::shared_ptr<BasicReaction> SharedPointer;
 
-    
-            typedef boost::indirect_iterator<ComponentList::iterator, BasicMolecule> ComponentIterator;
+
+            typedef boost::indirect_iterator<ComponentList::iterator, BasicMolecule>             ComponentIterator;
             typedef boost::indirect_iterator<ComponentList::const_iterator, const BasicMolecule> ConstComponentIterator;
 
             /**
@@ -89,19 +89,19 @@ namespace CDPL
              * Destroys the \c %BasicReaction instance and frees all allocated resources.
              */
             ~BasicReaction();
-        
+
             unsigned int getComponentRole(const Molecule& mol) const;
 
             std::size_t getComponentIndex(const Molecule& mol) const;
-    
+
             bool containsComponent(const Molecule& mol) const;
 
             void clear();
 
             std::size_t getNumComponents() const;
-        
+
             std::size_t getNumComponents(unsigned int role) const;
-                
+
             ConstComponentIterator getComponentsBegin() const;
 
             ComponentIterator getComponentsBegin();
@@ -117,17 +117,17 @@ namespace CDPL
             ConstComponentIterator getComponentsEnd(unsigned int role) const;
 
             ComponentIterator getComponentsEnd(unsigned int role);
-        
+
             const BasicMolecule& getComponent(std::size_t idx) const;
-        
+
             BasicMolecule& getComponent(std::size_t idx);
-        
+
             const BasicMolecule& getComponent(std::size_t idx, unsigned int role) const;
-        
+
             BasicMolecule& getComponent(std::size_t idx, unsigned int role);
-        
+
             BasicMolecule& addComponent(unsigned int role);
-        
+
             /**
              * \brief Creates a new reaction component with the specified role that is a copy of the molecule \a mol.
              * \param role A flag specifying the reaction role of the new component (see namespace Chem::ReactionRole).
@@ -138,19 +138,19 @@ namespace CDPL
              *        Chem::ReactionRole::AGENT or Chem::ReactionRole::PRODUCT.
              */
             BasicMolecule& addComponent(unsigned int role, const Molecule& mol);
-        
+
             void swapComponentRoles(unsigned int role1, unsigned int role2);
-        
+
             void removeComponent(std::size_t idx);
-        
+
             void removeComponent(std::size_t idx, unsigned int role);
 
             ComponentIterator removeComponent(const ComponentIterator& it);
-        
+
             void removeComponents(unsigned int role);
 
             Reaction::SharedPointer clone() const;
-    
+
             /**
              * \brief Replaces the current set of reaction components and properties by a copy of the 
              *        components and properties of the reaction \a rxn.
@@ -163,7 +163,7 @@ namespace CDPL
             BasicReaction& operator=(const BasicReaction& rxn);
 
             using Reaction::operator=;
-    
+
             /**
              * \brief Replaces the current set of reaction components and properties by a copy of the 
              *        components and properties of the reaction \a rxn.
@@ -173,33 +173,33 @@ namespace CDPL
 
             void copy(const Reaction& rxn);
 
-        private:
+          private:
             ConstComponentIterator getReactantsBegin() const;
-            ComponentIterator getReactantsBegin();
+            ComponentIterator      getReactantsBegin();
 
             ConstComponentIterator getReactantsEnd() const;
-            ComponentIterator getReactantsEnd();
+            ComponentIterator      getReactantsEnd();
 
             ConstComponentIterator getAgentsBegin() const;
-            ComponentIterator getAgentsBegin();
+            ComponentIterator      getAgentsBegin();
 
             ConstComponentIterator getAgentsEnd() const;
-            ComponentIterator getAgentsEnd();
+            ComponentIterator      getAgentsEnd();
 
             ConstComponentIterator getProductsBegin() const;
-            ComponentIterator getProductsBegin();
+            ComponentIterator      getProductsBegin();
 
             ConstComponentIterator getProductsEnd() const;
-            ComponentIterator getProductsEnd();
+            ComponentIterator      getProductsEnd();
 
             const BasicMolecule& getReactant(std::size_t idx) const;
-            BasicMolecule& getReactant(std::size_t idx);
+            BasicMolecule&       getReactant(std::size_t idx);
 
             const BasicMolecule& getAgent(std::size_t idx) const;
-            BasicMolecule& getAgent(std::size_t idx);
+            BasicMolecule&       getAgent(std::size_t idx);
 
             const BasicMolecule& getProduct(std::size_t idx) const;
-            BasicMolecule& getProduct(std::size_t idx);
+            BasicMolecule&       getProduct(std::size_t idx);
 
             void removeReactant(std::size_t idx);
             void removeAgent(std::size_t idx);
@@ -221,13 +221,13 @@ namespace CDPL
             void copyComponents(const Reaction& rxn);
 
             ComponentPtr allocComponent(const Molecule* mol);
-        
+
             ComponentCache compCache;
             ComponentList  components;
             std::size_t    agentsStartIdx;
             std::size_t    productsStartIdx;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BASICREACTION_HPP

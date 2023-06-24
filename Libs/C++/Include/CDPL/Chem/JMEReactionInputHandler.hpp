@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref JME] java applet.
          */
         typedef Util::DefaultDataInputHandler<JMEReactionReader, DataFormat::JME> JMEReactionInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_JMEREACTIONINPUTHANDLER_HPP

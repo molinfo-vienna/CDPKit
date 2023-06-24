@@ -37,12 +37,12 @@ namespace CDPL
         {
             T hash = T();
 
-            for ( ; it != end; ++it)
+            for (; it != end; ++it)
                 hash ^= T(*it + 0x9e3779b9 + (hash << 6) + (hash >> 2));
-            
+
             return hash;
         }
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 #endif // CDPL_INTERNAL_RANGEHASHCODE_HPP

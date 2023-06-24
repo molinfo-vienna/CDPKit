@@ -30,17 +30,17 @@
 #define CDPL_CHEM_BRICSRULEID_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         /**
          * \brief Provides constants for the identification of BRICS fragmentation rules.
          * \see [\ref BRICS]
          */
-        namespace BRICSRuleID 
+        namespace BRICSRuleID
         {
 
             const unsigned int NONE    = 0;
@@ -86,8 +86,8 @@ namespace CDPL
             const unsigned int L14_L15 = 40;
             const unsigned int L14_L16 = 41;
             const unsigned int L15_L16 = 42;
-        }
-    }
-}
+        } // namespace BRICSRuleID
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BRICSRULEID_HPP

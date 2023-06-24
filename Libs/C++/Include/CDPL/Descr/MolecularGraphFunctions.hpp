@@ -31,10 +31,10 @@
 
 #include <cstddef>
 
-#include "CDPL/Descr/APIPrefix.hpp" 
+#include "CDPL/Descr/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,8 +42,8 @@ namespace CDPL
 
         class MolecularGraph;
     }
-    
-    namespace Descr 
+
+    namespace Descr
     {
 
         CDPL_DESCR_API std::size_t calcTopologicalRadius(const Chem::MolecularGraph& molgraph);
@@ -53,7 +53,7 @@ namespace CDPL
         CDPL_DESCR_API double calcRingComplexity(const Chem::MolecularGraph& molgraph);
 
         CDPL_DESCR_API double calcMolecularComplexity(const Chem::MolecularGraph& molgraph);
-        
+
         CDPL_DESCR_API double calcKierShape1(const Chem::MolecularGraph& molgraph);
 
         CDPL_DESCR_API double calcKierShape2(const Chem::MolecularGraph& molgraph);
@@ -69,8 +69,7 @@ namespace CDPL
         CDPL_DESCR_API std::size_t calcZagrebIndex2(const Chem::MolecularGraph& molgraph);
 
         CDPL_DESCR_API std::size_t calcTotalWalkCount(const Chem::MolecularGraph& molgraph);
-    }
-}
+    } // namespace Descr
+} // namespace CDPL
 
 #endif // CDPL_DESCR_MOLECULARGRAPHFUNCTIONS_HPP
- 

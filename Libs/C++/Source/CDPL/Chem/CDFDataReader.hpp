@@ -39,7 +39,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -59,12 +59,13 @@ namespace CDPL
         class CDPL_CHEM_API CDFDataReader : public Internal::CDFDataReaderBase
         {
 
-        public:
-            typedef std::function<bool(unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&)> AtomPropertyHandler;
-            typedef std::function<bool(unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&)> BondPropertyHandler;
+          public:
+            typedef std::function<bool(unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&)>     AtomPropertyHandler;
+            typedef std::function<bool(unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&)>     BondPropertyHandler;
             typedef std::function<bool(unsigned int, CDFDataReader&, Molecule&, Internal::ByteBuffer&)> MoleculePropertyHandler;
 
-            CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+            CDFDataReader(const Base::ControlParameterContainer& ctrl_params):
+                ctrlParams(ctrl_params) {}
 
             bool readMolecule(std::istream& is, Molecule& mol);
             bool readReaction(std::istream& is, Reaction& rxn);
@@ -84,11 +85,12 @@ namespace CDPL
 
             const Base::ControlParameterContainer& getCtrlParameters() const;
 
-        private:
+          private:
             struct CDFStereoDescr
             {
 
-                CDFStereoDescr(std::size_t obj_idx): objIndex(obj_idx) {}
+                CDFStereoDescr(std::size_t obj_idx):
+                    objIndex(obj_idx) {}
 
                 std::size_t  objIndex;
                 unsigned int config;
@@ -102,8 +104,8 @@ namespace CDPL
             void readConnectionTable(Molecule& mol, Internal::ByteBuffer& bbuf);
 
             std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
-            void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
-            void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
+            void        readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
+            void        readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
 
             void readReactionProperties(Reaction& rxn, Internal::ByteBuffer& bbuf);
 
@@ -114,7 +116,7 @@ namespace CDPL
             bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
             bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
 
-            FragmentList::SharedPointer readFragmentList(const Molecule& mol, CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
+            FragmentList::SharedPointer    readFragmentList(const Molecule& mol, CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
             StringDataBlock::SharedPointer readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
 
             void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
@@ -123,13 +125,13 @@ namespace CDPL
             template <typename T>
             void setStereoDescriptor(T& obj, const Molecule& mol, const CDFStereoDescr& descr) const;
 
-            typedef std::vector<CDFStereoDescr> StereoDescrList;
-            typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;
-            typedef std::vector<BondPropertyHandler> BondPropertyHandlerList;
+            typedef std::vector<CDFStereoDescr>          StereoDescrList;
+            typedef std::vector<AtomPropertyHandler>     AtomPropertyHandlerList;
+            typedef std::vector<BondPropertyHandler>     BondPropertyHandlerList;
             typedef std::vector<MoleculePropertyHandler> MoleculePropertyHandlerList;
 
-            const Base::ControlParameterContainer& ctrlParams;    
-            Internal::ByteBuffer                   dataBuffer;        
+            const Base::ControlParameterContainer& ctrlParams;
+            Internal::ByteBuffer                   dataBuffer;
             std::size_t                            startAtomIdx;
             StereoDescrList                        atomStereoDescrs;
             StereoDescrList                        bondStereoDescrs;
@@ -137,7 +139,7 @@ namespace CDPL
             static BondPropertyHandlerList         extBondPropertyHandlers;
             static MoleculePropertyHandlerList     extMoleculePropertyHandlers;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CDFDATAREADER_HPP

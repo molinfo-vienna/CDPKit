@@ -33,14 +33,14 @@
 #include "CDPL/Util/Array.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         typedef Util::Array<MMFF94BondStretchingInteraction> MMFF94BondStretchingInteractionData;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONDATA_HPP

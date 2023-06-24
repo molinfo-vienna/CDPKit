@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref INCHI] format.
          */
         typedef Util::DefaultDataInputHandler<INCHIMoleculeReader, DataFormat::INCHI> INCHIMoleculeInputHandler;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_INCHIMOLECULEINPUTHANDLER_HPP

@@ -32,7 +32,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,12 +41,11 @@ namespace CDPL
         class Molecule;
     }
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
-        CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
+        CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false);
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_MOLECULEFUNCTIONS_HPP
- 

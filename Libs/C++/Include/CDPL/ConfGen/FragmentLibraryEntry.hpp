@@ -40,7 +40,7 @@
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -59,8 +59,8 @@ namespace CDPL
             typedef std::shared_ptr<FragmentLibraryEntry> SharedPointer;
 
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData> ConformerIterator;
-        
+            typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData>             ConformerIterator;
+
             /**
              * \brief Constructs an empty \c %FragmentLibraryEntry instance.
              */
@@ -75,7 +75,7 @@ namespace CDPL
             const std::string& getSMILES() const;
 
             void clearConformers();
-    
+
             std::size_t getNumAtoms() const;
 
             std::size_t getNumConformers() const;
@@ -101,7 +101,7 @@ namespace CDPL
             ConformerIterator begin();
 
             ConformerIterator end();
-    
+
             const ConformerDataArray& getData() const;
 
           private:
@@ -109,7 +109,7 @@ namespace CDPL
             std::string        smiles;
             ConformerDataArray conformers;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTLIBRARYENTRY_HPP

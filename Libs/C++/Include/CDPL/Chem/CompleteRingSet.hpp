@@ -44,7 +44,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -57,7 +57,7 @@ namespace CDPL
         class CDPL_CHEM_API CompleteRingSet : public FragmentList
         {
 
-        public:
+          public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CompleteRingSet instances.
              */
@@ -85,11 +85,11 @@ namespace CDPL
              */
             void perceive(const MolecularGraph& molgraph);
 
-        private:
+          private:
             class Edge;
             class Node;
 
-            typedef Util::ObjectPool<Edge> EdgeCache;
+            typedef Util::ObjectPool<Edge>         EdgeCache;
             typedef EdgeCache::SharedObjectPointer EdgePtr;
 
             CompleteRingSet(const CompleteRingSet&);
@@ -101,32 +101,33 @@ namespace CDPL
 
             EdgePtr allocEdge(const EdgePtr&, const EdgePtr&, Node*, Node*, bool);
             EdgePtr allocEdge(const Bond&, Node*, Node*);
-         
+
             class Node
             {
 
                 typedef std::list<EdgePtr> EdgeList;
 
-            public:
+              public:
                 typedef EdgeList::iterator EdgeIterator;
 
                 struct GreaterCmpFunc
                 {
-            
+
                     bool operator()(const Node*, const Node*) const;
                 };
 
-                Node(std::size_t idx): index(idx) {}
+                Node(std::size_t idx):
+                    index(idx) {}
 
                 EdgeIterator addEdge(const EdgePtr&);
-                void removeEdge(const EdgeIterator&);
+                void         removeEdge(const EdgeIterator&);
 
                 EdgeIterator getEdgesBegin();
                 EdgeIterator getEdgesEnd();
 
                 std::size_t getIndex() const;
 
-            private:
+              private:
                 std::size_t index;
                 EdgeList    edges;
             };
@@ -134,34 +135,34 @@ namespace CDPL
             class Edge
             {
 
-            public:
+              public:
                 void init(const EdgePtr& this_edge, const MolecularGraph*, const Bond&, Node*, Node*);
                 void init(const EdgePtr& this_edge, const EdgePtr&, const EdgePtr&, Node*, Node*, bool);
 
                 bool intersects(const EdgePtr&) const;
 
                 Fragment::SharedPointer createRing(const MolecularGraph*) const;
-        
-                Node* getNeighbor(const Node*) const;
+
+                Node*                     getNeighbor(const Node*) const;
                 const Node::EdgeIterator& getEdgeListIterator(const Node*) const;
 
-            private:
+              private:
                 Node*                nodes[2];
                 Node::EdgeIterator   edgeListIters[2];
                 Util::BitSet         bondPath;
                 Util::BitSet         nodePath;
                 mutable Util::BitSet tmpBitMask;
             };
-         
-            typedef std::vector<Node> NodeArray;
+
+            typedef std::vector<Node>                                                    NodeArray;
             typedef std::priority_queue<Node*, std::vector<Node*>, Node::GreaterCmpFunc> NodeQueue;
-        
-            EdgeCache                edgeCache;
-            const MolecularGraph*    molGraph;
-            NodeArray                nodes;
-            NodeQueue                nodeQueue;
+
+            EdgeCache             edgeCache;
+            const MolecularGraph* molGraph;
+            NodeArray             nodes;
+            NodeQueue             nodeQueue;
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_COMPLETERINGSET_HPP

@@ -38,7 +38,7 @@
 #include "CDPL/Chem/SMILESMolecularGraphWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace ConfGen
@@ -76,7 +76,7 @@ namespace CDPL
             const LogMessageCallbackFunction& getLogMessageCallback() const;
 
             unsigned int process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
-    
+
             std::size_t getNumGeneratedConformers() const;
 
             std::uint64_t getLibraryEntryHashCode() const;
@@ -99,7 +99,7 @@ namespace CDPL
             Chem::SMILESMolecularGraphWriter smilesGen;
             std::size_t                      numGenConfs;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_FRAGMENTLIBRARYGENERATOR_HPP

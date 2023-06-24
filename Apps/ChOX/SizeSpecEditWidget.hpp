@@ -45,21 +45,21 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         SizeSpecEditWidget(QWidget*, CDPL::Vis::SizeSpecification&, bool = true, bool = true, bool = true);
 
-    signals:
+      signals:
         void sizeSpecChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleValueChange(double);
         void handleTypeChange(int);
         void handlePolicyChange(bool);
 
-    private:
+      private:
         void init(bool, bool, bool);
 
         CDPL::Vis::SizeSpecification& sizeSpec;
@@ -68,6 +68,6 @@ namespace ChOX
         QCheckBox*                    inputScalingCheckBox;
         QCheckBox*                    outputScalingCheckBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_SIZESPECEDITWIDGET_HPP

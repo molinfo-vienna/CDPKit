@@ -35,10 +35,10 @@
 #include "CDPL/Chem/Entity3D.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class Molecule;
@@ -46,10 +46,12 @@ namespace CDPL
         /**
          * \brief Atom.
          */
-        class CDPL_CHEM_API Atom : public AtomContainer, public BondContainer, public Entity3D
+        class CDPL_CHEM_API Atom : public AtomContainer,
+                                   public BondContainer,
+                                   public Entity3D
         {
 
-        public:
+          public:
             /**
              * \brief A mutable random access iterator used to iterate over the connected atoms.
              */
@@ -87,7 +89,7 @@ namespace CDPL
              * \return A non-\c const reference to the parent molecule.
              */
             virtual Molecule& getMolecule() = 0;
-        
+
             /**
              * \brief Returns a \c const reference to the Chem::Bond object that connects this atom to the argument atom.
              * \param atom The adjacent atom for which to return the connecting bond.
@@ -125,7 +127,7 @@ namespace CDPL
              * \return The zero-based index of the atom.
              */
             virtual std::size_t getIndex() const = 0;
-    
+
             /**
              * \brief Returns the number of connected atoms.
              *
@@ -143,7 +145,7 @@ namespace CDPL
              * \return The number of incident bonds.
              */
             virtual std::size_t getNumBonds() const = 0;
-       
+
             /**
              * \brief Returns a \c const reference to the incident bond at index \a idx.
              * \param idx The index of the incident bond to return.
@@ -179,7 +181,7 @@ namespace CDPL
              * \note The order of connected atoms corresponds to the order of connecting bonds.
              */
             virtual Atom& getAtom(std::size_t idx) = 0;
-        
+
             /**
              * \brief Tells whether this atom and the argument atom are connected by a bond.
              * \param atom The atom to test for adjacency.
@@ -209,7 +211,7 @@ namespace CDPL
              * \throw Base::ItemNotFound if the specified bond is not incident to this atom.
              */
             virtual std::size_t getBondIndex(const Bond& bond) const = 0;
-    
+
             /**
              * \brief Assignment operator that replaces the current set of properties with the properties of \a atom;
              * \param atom The atom whose properties get copied.
@@ -217,13 +219,13 @@ namespace CDPL
              */
             Atom& operator=(const Atom& atom);
 
-        protected:
+          protected:
             /**
              * \brief Virtual destructor.
              */
             virtual ~Atom() {}
         };
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOM_HPP

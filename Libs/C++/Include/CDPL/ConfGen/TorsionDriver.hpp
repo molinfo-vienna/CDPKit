@@ -43,7 +43,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,9 +51,9 @@ namespace CDPL
 
         class MolecularGraph;
         class Fragment;
-    }
+    } // namespace Chem
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class TorsionDriverImpl;
@@ -63,12 +63,12 @@ namespace CDPL
 
           public:
             typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+            typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData>       ConformerIterator;
 
             TorsionDriver();
 
             ~TorsionDriver();
-    
+
             const TorsionDriverSettings& getSettings() const;
 
             TorsionDriverSettings& getSettings();
@@ -137,7 +137,7 @@ namespace CDPL
 
             ImplementationPointer impl;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONDRIVER_HPP

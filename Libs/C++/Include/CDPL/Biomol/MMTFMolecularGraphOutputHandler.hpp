@@ -34,7 +34,7 @@
 #include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -45,7 +45,7 @@ namespace CDPL
          *        [\ref MMTF] format.
          */
         typedef Util::DefaultDataOutputHandler<MMTFMolecularGraphWriter, DataFormat::MMTF> MMTFMolecularGraphOutputHandler;
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_MMTFMOLECULARGRAPHOUTPUTHANDLER_HPP

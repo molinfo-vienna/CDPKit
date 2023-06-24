@@ -36,27 +36,27 @@ namespace CDPL
 
         namespace TorsionLibraryFormatData
         {
-            
-            const std::string LIBRARY_TAG               = "library";
-            const std::string CATEGORY_TAG              = "category";
-            const std::string RULE_TAG                  = "rule";
-            const std::string ANGLE_LIST_TAG            = "torsions";
-            const std::string ANGLE_TAG                 = "angle";
-            const std::string NOTE_TAG                  = "note";
 
-            const std::string CATEGORY_NAME_ATTR        = "name";
-            const std::string CATEGORY_PATTERN_ATTR     = "pattern";
-            const std::string CATEGORY_ATOM_TYPE1_ATTR  = "atomType1";
-            const std::string CATEGORY_ATOM_TYPE2_ATTR  = "atomType2";
+            const std::string LIBRARY_TAG    = "library";
+            const std::string CATEGORY_TAG   = "category";
+            const std::string RULE_TAG       = "rule";
+            const std::string ANGLE_LIST_TAG = "torsions";
+            const std::string ANGLE_TAG      = "angle";
+            const std::string NOTE_TAG       = "note";
 
-            const std::string RULE_PATTERN_ATTR         = "pattern";
+            const std::string CATEGORY_NAME_ATTR       = "name";
+            const std::string CATEGORY_PATTERN_ATTR    = "pattern";
+            const std::string CATEGORY_ATOM_TYPE1_ATTR = "atomType1";
+            const std::string CATEGORY_ATOM_TYPE2_ATTR = "atomType2";
 
-            const std::string ANGLE_VALUE_ATTR          = "value";
-            const std::string ANGLE_TOLERANCE1_ATTR     = "tolerance1";
-            const std::string ANGLE_TOLERANCE2_ATTR     = "tolerance2";
-            const std::string ANGLE_SCORE_ATTR          = "score";
-        }
-    }
-}
+            const std::string RULE_PATTERN_ATTR = "pattern";
+
+            const std::string ANGLE_VALUE_ATTR      = "value";
+            const std::string ANGLE_TOLERANCE1_ATTR = "tolerance1";
+            const std::string ANGLE_TOLERANCE2_ATTR = "tolerance2";
+            const std::string ANGLE_SCORE_ATTR      = "score";
+        } // namespace TorsionLibraryFormatData
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONLIBRARYFORMATDATA_HPP

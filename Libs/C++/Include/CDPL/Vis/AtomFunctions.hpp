@@ -32,16 +32,16 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class Atom;
     }
-    
-    namespace Vis 
+
+    namespace Vis
     {
 
         class Color;
@@ -109,7 +109,7 @@ namespace CDPL
         CDPL_VIS_API bool hasRadicalElectronDotSize(const Chem::Atom& atom);
 
         CDPL_VIS_API void clearRadicalElectronDotSize(Chem::Atom& atom);
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_ATOMFUNCTIONS_HPP

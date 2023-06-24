@@ -34,7 +34,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -42,9 +42,9 @@ namespace CDPL
 
         class Bond;
         class MolecularGraph;
-    }
-    
-    namespace MolProp 
+    } // namespace Chem
+
+    namespace MolProp
     {
 
         CDPL_MOLPROP_API double getMHMOPiOrder(const Chem::Bond& bond);
@@ -52,10 +52,10 @@ namespace CDPL
         CDPL_MOLPROP_API void setMHMOPiOrder(Chem::Bond& bond, double order);
 
         CDPL_MOLPROP_API void clearMHMOPiOrder(Chem::Bond& bond);
-    
+
         CDPL_MOLPROP_API bool hasMHMOPiOrder(const Chem::Bond& atom);
 
-        
+
         CDPL_MOLPROP_API double calcPolarizability(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, double damping = 0.75);
 
 
@@ -69,14 +69,13 @@ namespace CDPL
         CDPL_MOLPROP_API bool isHydrogenRotor(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
 
         CDPL_MOLPROP_API bool isHeteroAtomHydrogenRotor(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
-        
+
         CDPL_MOLPROP_API bool isRotatable(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);
 
         CDPL_MOLPROP_API bool isHydrogenBond(const Chem::Bond& bond);
 
         CDPL_MOLPROP_API bool isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
-    }
-}
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_BONDFUNCTIONS_HPP
- 

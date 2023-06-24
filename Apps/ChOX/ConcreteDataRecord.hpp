@@ -36,15 +36,16 @@ namespace ChOX
     class ConcreteDataRecord : public DataRecord
     {
 
-    public:
+      public:
         virtual ~ConcreteDataRecord() {}
 
         virtual typename T::SharedPointer getData() const = 0;
 
-        void accept(DataRecordVisitor& visitor) const {
+        void accept(DataRecordVisitor& visitor) const
+        {
             visitor.visit(*this);
         }
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_CONCRETEDATARECORD_HPP

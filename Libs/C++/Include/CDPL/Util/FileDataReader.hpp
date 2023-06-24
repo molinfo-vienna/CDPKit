@@ -37,7 +37,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -50,9 +50,9 @@ namespace CDPL
         class FileDataReader : public Base::DataReader<DataType>
         {
 
-        public:
-            FileDataReader(const std::string& file_name, 
-                           std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary); 
+          public:
+            FileDataReader(const std::string&      file_name,
+                           std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
             FileDataReader& read(DataType& obj, bool overwrite = true);
             FileDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
@@ -62,29 +62,29 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void setRecordIndex(std::size_t idx);
+            void        setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-            operator const void*() const;
+                 operator const void*() const;
             bool operator!() const;
 
             void close();
 
-        private:
+          private:
             std::ifstream stream;
             std::string   fileName;
             ReaderImpl    reader;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename ReaderImpl, typename DataType>
-CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::string& file_name, std::ios_base::openmode mode): 
-    stream(file_name.c_str(), mode), fileName(file_name), reader(stream) 
+CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::string& file_name, std::ios_base::openmode mode):
+    stream(file_name.c_str(), mode), fileName(file_name), reader(stream)
 {
     reader.setParent(this);
     reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
@@ -140,7 +140,7 @@ bool CDPL::Util::FileDataReader<ReaderImpl, DataType>::hasMoreData()
 
 template <typename ReaderImpl, typename DataType>
 std::size_t CDPL::Util::FileDataReader<ReaderImpl, DataType>::getRecordIndex() const
-{    
+{
     return reader.getRecordIndex();
 }
 

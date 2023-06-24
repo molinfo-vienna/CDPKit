@@ -42,7 +42,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -51,21 +51,23 @@ namespace CDPL
         class Molecule;
         class MolecularGraph;
         class Reaction;
-    }
+    } // namespace Chem
 
     namespace Pharm
     {
 
         class Pharmacophore;
         class FeatureContainer;
-    }
+    } // namespace Pharm
 
     namespace Grid
     {
 
-        template <typename T, typename CVT> class RegularGrid;
-        template <typename T, typename CVT> class RegularGridSet;
-    }
+        template <typename T, typename CVT>
+        class RegularGrid;
+        template <typename T, typename CVT>
+        class RegularGridSet;
+    } // namespace Grid
 
     namespace Base
     {
@@ -101,18 +103,18 @@ namespace CDPL
         class DataIOManager
         {
 
-        public:
-            typedef DataInputHandler<T> InputHandlerType;
+          public:
+            typedef DataInputHandler<T>  InputHandlerType;
             typedef DataOutputHandler<T> OutputHandlerType;
-    
-            typedef typename InputHandlerType::SharedPointer InputHandlerPointer;
+
+            typedef typename InputHandlerType::SharedPointer  InputHandlerPointer;
             typedef typename OutputHandlerType::SharedPointer OutputHandlerPointer;
 
-        private:
-            typedef std::vector<InputHandlerPointer> InputHandlerList;
+          private:
+            typedef std::vector<InputHandlerPointer>  InputHandlerList;
             typedef std::vector<OutputHandlerPointer> OutputHandlerList;
 
-        public:
+          public:
             /**
              * \brief An iterator used to iterate over the list of registered input handlers.
              */
@@ -312,7 +314,7 @@ namespace CDPL
              * \return A pointer to an output handler for the data format with the specified file extension, or \e null if a
              *         suitable handler is not available.
              * \note The matching of the file extension is not case-sensitive.
-             */    
+             */
             static OutputHandlerPointer getOutputHandlerByFileExtension(const std::string& file_ext);
 
             /**
@@ -325,7 +327,7 @@ namespace CDPL
              */
             static OutputHandlerPointer getOutputHandlerByMimeType(const std::string& mime_type);
 
-        private:
+          private:
             DataIOManager() {}
             ~DataIOManager() {}
 
@@ -337,36 +339,29 @@ namespace CDPL
 
         // \cond DOC_IMPL_DETAILS
 
-        extern template
-        class CDPL_BASE_API DataIOManager<Chem::Molecule>;
-        
-        extern template
-        class CDPL_BASE_API DataIOManager<Chem::MolecularGraph>;
-        
-        extern template
-        class CDPL_BASE_API DataIOManager<Chem::Reaction>;
+        extern template class CDPL_BASE_API DataIOManager<Chem::Molecule>;
 
-        extern template
-        class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
+        extern template class CDPL_BASE_API DataIOManager<Chem::MolecularGraph>;
 
-        extern template
-        class CDPL_BASE_API DataIOManager<Pharm::FeatureContainer>;
+        extern template class CDPL_BASE_API DataIOManager<Chem::Reaction>;
 
-        extern template
-        class CDPL_BASE_API DataIOManager<Grid::RegularGrid<double, double> >;
+        extern template class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
 
-        extern template
-        class CDPL_BASE_API DataIOManager<Grid::RegularGridSet<double, double> >;
+        extern template class CDPL_BASE_API DataIOManager<Pharm::FeatureContainer>;
+
+        extern template class CDPL_BASE_API DataIOManager<Grid::RegularGrid<double, double> >;
+
+        extern template class CDPL_BASE_API DataIOManager<Grid::RegularGridSet<double, double> >;
 
         // \endcond
-    }
-}
+    } // namespace Base
+} // namespace CDPL
 
 
 // Implementation
 
 template <typename T>
-CDPL::Base::DataIOManager<T>& CDPL::Base::DataIOManager<T>::getInstance() 
+CDPL::Base::DataIOManager<T>& CDPL::Base::DataIOManager<T>::getInstance()
 {
     static DataIOManager<T> instance;
 
@@ -462,7 +457,7 @@ template <typename T>
 void CDPL::Base::DataIOManager<T>::unregisterOutputHandler(std::size_t idx)
 {
     using namespace std::placeholders;
-    
+
     OutputHandlerList& handlers = getInstance().outputHandlers;
 
     if (idx >= handlers.size())
@@ -472,9 +467,9 @@ void CDPL::Base::DataIOManager<T>::unregisterOutputHandler(std::size_t idx)
 }
 
 template <typename T>
-typename CDPL::Base::DataIOManager<T>::InputHandlerIterator 
+typename CDPL::Base::DataIOManager<T>::InputHandlerIterator
 CDPL::Base::DataIOManager<T>::unregisterInputHandler(const InputHandlerIterator& it)
-{    
+{
     InputHandlerList& handlers = getInstance().inputHandlers;
 
     if (it < handlers.begin() || it >= handlers.end())
@@ -570,7 +565,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
     const InputHandlerList& handlers = getInstance().inputHandlers;
 
     typename InputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
-                                                                std::bind(&DataFormat::matchesFileExtension, 
+                                                                std::bind(&DataFormat::matchesFileExtension,
                                                                           std::bind(&DataInputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                           std::ref(file_ext)));
     return (it == handlers.end() ? InputHandlerPointer() : *it);
@@ -582,7 +577,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
     const InputHandlerList& handlers = getInstance().inputHandlers;
 
     typename InputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
-                                                                std::bind(&DataFormat::matchesName, 
+                                                                std::bind(&DataFormat::matchesName,
                                                                           std::bind(&DataInputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                           std::ref(name)));
     return (it == handlers.end() ? InputHandlerPointer() : *it);
@@ -594,7 +589,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
     const InputHandlerList& handlers = getInstance().inputHandlers;
 
     typename InputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
-                                                                std::bind(&DataFormat::matchesMimeType, 
+                                                                std::bind(&DataFormat::matchesMimeType,
                                                                           std::bind(&DataInputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                           std::ref(mime_type)));
     return (it == handlers.end() ? InputHandlerPointer() : *it);
@@ -617,7 +612,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
     const OutputHandlerList& handlers = getInstance().outputHandlers;
 
     typename OutputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
-                                                                 std::bind(&DataFormat::matchesName, 
+                                                                 std::bind(&DataFormat::matchesName,
                                                                            std::bind(&DataOutputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                            std::ref(name)));
     return (it == handlers.end() ? OutputHandlerPointer() : *it);
@@ -629,7 +624,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
     const OutputHandlerList& handlers = getInstance().outputHandlers;
 
     typename OutputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
-                                                                 std::bind(&DataFormat::matchesFileExtension, 
+                                                                 std::bind(&DataFormat::matchesFileExtension,
                                                                            std::bind(&DataOutputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                            std::ref(file_ext)));
     return (it == handlers.end() ? OutputHandlerPointer() : *it);
@@ -641,7 +636,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
     const OutputHandlerList& handlers = getInstance().outputHandlers;
 
     typename OutputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
-                                                                 std::bind(&DataFormat::matchesMimeType, 
+                                                                 std::bind(&DataFormat::matchesMimeType,
                                                                            std::bind(&DataOutputHandler<T>::getDataFormat, std::placeholders::_1),
                                                                            std::ref(mime_type)));
     return (it == handlers.end() ? OutputHandlerPointer() : *it);

@@ -41,16 +41,16 @@ namespace CDPL
          */
         namespace BondPropertyFlag
         {
- 
+
             /**
              * \brief Represents an empty set of bond properties.
              */
-            const unsigned int NONE              = 0x0;
+            const unsigned int NONE = 0x0;
 
             /**
              * \brief Represents the default set of bond properties.
              */
-            const unsigned int DEFAULT           = 0x80000000;
+            const unsigned int DEFAULT = 0x80000000;
 
             /**
              * \brief Specifies the <em>CIP</em>-configuration of a double bond.
@@ -60,24 +60,24 @@ namespace CDPL
             /**
              * \brief Specifies the order of a bond.
              */
-            const unsigned int ORDER             = 0x2;
+            const unsigned int ORDER = 0x2;
 
             /**
              * \brief Specifies the ring/chain topology of a bond.
              */
-            const unsigned int TOPOLOGY          = 0x4;
+            const unsigned int TOPOLOGY = 0x4;
 
             /**
              * \brief Specifies the membership of a bond in aromatic rings.
              */
-            const unsigned int AROMATICITY       = 0x8;
+            const unsigned int AROMATICITY = 0x8;
 
             /**
              * \brief Specifies the steric configuration of a double bond.
              */
-            const unsigned int CONFIGURATION     = 0x10;
-        }
-    }
-}
+            const unsigned int CONFIGURATION = 0x10;
+        } // namespace BondPropertyFlag
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDPROPERTYFLAG_HPP

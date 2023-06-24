@@ -51,14 +51,14 @@ namespace CDPL
             /**
              * \brief Specifies the PDB format version \e V2.
              */
-            const unsigned int V2    = 2;
+            const unsigned int V2 = 2;
 
             /**
              * \brief Specifies the PDB format version \e V3.
              */
-            const unsigned int V3    = 3;
-        }
-    }
-}
+            const unsigned int V3 = 3;
+        } // namespace PDBFormatVersion
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBFORMATVERSION_HPP

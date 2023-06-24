@@ -33,7 +33,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -45,7 +45,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined atom priority function.
          */
         typedef std::function<std::size_t(const Chem::Atom&)> AtomPriorityFunction;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_ATOMPRIORITYFUNCTION_HPP

@@ -36,14 +36,16 @@ namespace CDPL
     namespace Math
     {
 
-        template <typename E> class VectorExpression;
-        template <typename E> class MatrixExpression;
+        template <typename E>
+        class VectorExpression;
+        template <typename E>
+        class MatrixExpression;
 
         template <typename E1, typename E2>
         bool
         solveLower(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
 
             if (e1().getSize1() != e1().getSize2())
@@ -51,7 +53,7 @@ namespace CDPL
 
             if (SizeType(e1().getSize2()) != SizeType(e2().getSize()))
                 return false;
-        
+
             SizeType size = e2().getSize();
 
             for (SizeType n = 0; n < size; n++) {
@@ -60,7 +62,7 @@ namespace CDPL
 
                 ValueType t = e2()(n) /= e1()(n, n);
 
-                if (t != ValueType(0)) 
+                if (t != ValueType(0))
                     for (SizeType m = n + 1; m < size; m++)
                         e2()(m) -= e1()(m, n) * t;
             }
@@ -72,7 +74,7 @@ namespace CDPL
         bool
         solveUnitLower(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
 
             if (e1().getSize1() != e1().getSize2())
@@ -80,13 +82,13 @@ namespace CDPL
 
             if (SizeType(e1().getSize2()) != SizeType(e2().getSize()))
                 return false;
-        
+
             SizeType size = e2().getSize();
 
             for (SizeType n = 0; n < size; n++) {
                 ValueType t = e2()(n);
 
-                if (t != ValueType(0)) 
+                if (t != ValueType(0))
                     for (SizeType m = n + 1; m < size; m++)
                         e2()(m) -= e1()(m, n) * t;
             }
@@ -94,11 +96,11 @@ namespace CDPL
             return true;
         }
 
-        template <typename E1, typename E2>        
+        template <typename E1, typename E2>
         bool
         solveLower(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
 
             if (e1().getSize1() != e1().getSize2())
@@ -106,7 +108,7 @@ namespace CDPL
 
             if (SizeType(e1().getSize2()) != SizeType(e2().getSize1()))
                 return false;
-        
+
             SizeType size1 = e2().getSize1();
             SizeType size2 = e2().getSize2();
 
@@ -126,11 +128,11 @@ namespace CDPL
             return true;
         }
 
-        template <typename E1, typename E2>        
+        template <typename E1, typename E2>
         bool
         solveUnitLower(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type   SizeType;
             typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
 
             if (e1().getSize1() != e1().getSize2())
@@ -138,7 +140,7 @@ namespace CDPL
 
             if (SizeType(e1().getSize2()) != SizeType(e2().getSize1()))
                 return false;
-        
+
             SizeType size1 = e2().getSize1();
             SizeType size2 = e2().getSize2();
 
@@ -155,13 +157,13 @@ namespace CDPL
             return true;
         }
 
-        template <typename E1, typename E2>        
+        template <typename E1, typename E2>
         bool
         solveUpper(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
-            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
+            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type           ValueType;
 
             if (e1().getSize1() != e1().getSize2())
                 return false;
@@ -184,14 +186,14 @@ namespace CDPL
 
             return true;
         }
-    
-        template <typename E1, typename E2>        
+
+        template <typename E1, typename E2>
         bool
         solveUnitUpper(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
-            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
+            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type           ValueType;
 
             if (e1().getSize1() != e1().getSize2())
                 return false;
@@ -212,20 +214,20 @@ namespace CDPL
             return true;
         }
 
-        template <typename E1, typename E2>        
+        template <typename E1, typename E2>
         bool
         solveUpper(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
-            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
+            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type           ValueType;
 
             if (e1().getSize1() != e1().getSize2())
                 return false;
 
             if (SizeType(e1().getSize2()) != SizeType(e2().getSize1()))
                 return false;
-        
+
             SizeType size1 = e2().getSize1();
             SizeType size2 = e2().getSize2();
 
@@ -245,20 +247,20 @@ namespace CDPL
             return true;
         }
 
-        template <typename E1, typename E2>        
+        template <typename E1, typename E2>
         bool
         solveUnitUpper(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
         {
-            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
+            typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type             SizeType;
             typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
-            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type ValueType;
+            typedef typename CommonType<typename E1::ValueType, typename E2::ValueType>::Type           ValueType;
 
             if (e1().getSize1() != e1().getSize2())
                 return false;
 
             if (SizeType(e1().getSize2()) != SizeType(e2().getSize1()))
                 return false;
-        
+
             SizeType size1 = e2().getSize1();
             SizeType size2 = e2().getSize2();
 
@@ -274,7 +276,7 @@ namespace CDPL
 
             return true;
         }
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_LINEARSOLVE_HPP

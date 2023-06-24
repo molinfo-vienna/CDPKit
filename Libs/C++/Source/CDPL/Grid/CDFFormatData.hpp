@@ -38,7 +38,7 @@ namespace CDPL
 
         namespace CDF
         {
-            
+
             using namespace Internal::CDF;
 
             typedef std::uint32_t UIntType;
@@ -47,17 +47,17 @@ namespace CDPL
             const std::uint8_t DREGULAR_GRID_RECORD_ID     = 4;
             const std::uint8_t DREGULAR_GRID_SET_RECORD_ID = 5;
 
-            const std::uint8_t CURR_FORMAT_VERSION  = 1;
+            const std::uint8_t CURR_FORMAT_VERSION = 1;
 
-            const unsigned int EXTENDED_PROP_LIST  = 31;
+            const unsigned int EXTENDED_PROP_LIST = 31;
 
             namespace AttributedGridProperty
             {
-                
-                const unsigned int NAME            = 1; 
+
+                const unsigned int NAME = 1;
             }
-        }
-    }
-}
+        } // namespace CDF
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_CDFFORMATDATA_HPP

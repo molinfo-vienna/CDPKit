@@ -33,17 +33,17 @@
 #include "CDPL/Pharm/FeatureMapping.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Pharm 
+    namespace Pharm
     {
-    
+
         class FeatureSet;
         class FeatureMapping;
-    
+
         CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_FEATURESETFUNCTIONS_HPP

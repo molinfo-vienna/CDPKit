@@ -36,17 +36,17 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
     {
-    
+
         class Atom;
         class Bond;
-    }
+    } // namespace Chem
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class TorsionRule;
@@ -55,8 +55,8 @@ namespace CDPL
         {
 
           public:
-            TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond, 
-                             const Chem::Atom* atom1, const Chem::Atom* atom2, 
+            TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond,
+                             const Chem::Atom* atom1, const Chem::Atom* atom2,
                              const Chem::Atom* atom3, const Chem::Atom* atom4);
 
             const Chem::Atom* const* getAtoms() const;
@@ -70,7 +70,7 @@ namespace CDPL
             const Chem::Bond*  bond;
             const Chem::Atom*  atoms[4];
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONRULEMATCH_HPP

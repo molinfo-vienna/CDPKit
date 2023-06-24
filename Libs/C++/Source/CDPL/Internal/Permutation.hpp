@@ -52,26 +52,28 @@ namespace CDPL
          * \param last The end of the range.
          * \return The number of performed pairwise element swaps.
          */
-        template<typename BidirIter>
+        template <typename BidirIter>
         typename std::iterator_traits<BidirIter>::difference_type nextPermutation(BidirIter first, BidirIter last);
-    }
-}
+    } // namespace Internal
+} // namespace CDPL
 
 
 // Implementation
 
-template<typename BidirIter>
+template <typename BidirIter>
 typename std::iterator_traits<BidirIter>::difference_type CDPL::Internal::nextPermutation(BidirIter first, BidirIter last)
 {
     if (first == last)
         return 0;
 
-    BidirIter i = first; ++i;
+    BidirIter i = first;
+    ++i;
 
     if (i == last)
         return 0;
 
-    i = last; --i;
+    i = last;
+    --i;
 
     while (true) {
         BidirIter k = i;
@@ -80,11 +82,12 @@ typename std::iterator_traits<BidirIter>::difference_type CDPL::Internal::nextPe
         if (*i < *k) {
             BidirIter j = last;
 
-            while (!(*i < *--j));
+            while (!(*i < *--j))
+                ;
 
             std::iter_swap(i, j);
             std::reverse(k, last);
-            
+
             return ((std::distance(k, last) / 2) + 1);
         }
 

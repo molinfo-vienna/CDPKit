@@ -46,80 +46,80 @@ namespace CDPL
             /**
              * \brief Specifies a single bond.
              */
-            const unsigned int SINGLE                 = 0x1;
+            const unsigned int SINGLE = 0x1;
 
             /**
              * \brief Specifies a double bond.
              */
-            const unsigned int DOUBLE                 = 0x2;
+            const unsigned int DOUBLE = 0x2;
 
             /**
              * \brief Specifies a triple bond.
              */
-            const unsigned int TRIPLE                 = 0x4;
+            const unsigned int TRIPLE = 0x4;
 
             /**
              * \brief Specifies an aromatic bond with delocalized electrons.
              */
-            const unsigned int AROMATIC               = 0x8;
+            const unsigned int AROMATIC = 0x8;
 
             /**
              * \brief Specifies that the target bond must have the specified order even if the bond
              *        is aromatic.
              */
-            const unsigned int IGNORE_AROMATICITY     = 0x10;
+            const unsigned int IGNORE_AROMATICITY = 0x10;
 
             /**
              * \brief Specifies a bond of any order.
              */
-            const unsigned int ANY_ORDER              = SINGLE | DOUBLE | TRIPLE | AROMATIC;
+            const unsigned int ANY_ORDER = SINGLE | DOUBLE | TRIPLE | AROMATIC;
 
             /**
              * \brief Specifies a constraint which requires the target bond to fulfill additional contraints
              *        specified by a Chem::MatchConstraintList object.
              */
-            const unsigned int CONSTRAINT_LIST        = 0;
+            const unsigned int CONSTRAINT_LIST = 0;
 
             /**
              * \brief Specifies a constraint on the order of the target bond.
              */
-            const unsigned int ORDER                  = 1;
+            const unsigned int ORDER = 1;
 
             /**
              * \brief Specifies a constraint on the aromaticity of the target bond.
              */
-            const unsigned int AROMATICITY            = 2;
+            const unsigned int AROMATICITY = 2;
 
             /**
              * \brief Specifies a constraint on the ring-membership of the target bond.
              */
-            const unsigned int RING_TOPOLOGY          = 3;
+            const unsigned int RING_TOPOLOGY = 3;
 
             /**
              * \brief Specifies a constraint on the steric configuration of the target bond.
              */
-            const unsigned int CONFIGURATION          = 4;
+            const unsigned int CONFIGURATION = 4;
 
             /**
              * \brief Specifies a constraint on the steric configuration of the target bond that is defined by
              *        the relative direction of attached bonds.
              * \see Chem::BondDirection
              */
-            const unsigned int DIRECTION_CONFIG       = 5;
+            const unsigned int DIRECTION_CONFIG = 5;
 
             /**
              * \brief Specifies a constraint on the relative direction of the target bond.
              * \see Chem::BondDirection
              */
-            const unsigned int DIRECTION              = 6;
+            const unsigned int DIRECTION = 6;
 
             /**
              * \brief Specifies a constraint on the reaction center status of the target bond.
              * \see Chem::ReactionCenterStatus
              */
             const unsigned int REACTION_CENTER_STATUS = 7;
-        }
-    }
-}
+        } // namespace BondMatchConstraint
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDMATCHCONSTRAINT_HPP

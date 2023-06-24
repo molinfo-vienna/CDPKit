@@ -30,42 +30,42 @@
 #define CDPL_CHEM_RECAPATOMLABEL_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
-    /**
+        /**
      * \brief Provides constants for the labeling of atoms in bonds matched by a RECAP fragmentation rule.
      * \see [\ref RECAP]
      */
-    namespace RECAPAtomLabel 
-    {
+        namespace RECAPAtomLabel
+        {
 
-        const unsigned int NONE                     = 0;
-        const unsigned int AMIDE_N                  = 1;
-        const unsigned int AMIDE_C                  = 2;
-        const unsigned int ESTER_O                  = 3;
-        const unsigned int ESTER_C                  = 4;
-        const unsigned int AMINE_N                  = 5;
-        const unsigned int AMINE_C                  = 6;
-        const unsigned int UREA_N                   = 7;
-        const unsigned int UREA_C                   = 8;
-        const unsigned int ETHER_O                  = 9;
-        const unsigned int ETHER_C                  = 10;
-        const unsigned int OLEFIN_C                 = 11;
-        const unsigned int QUARTERNARY_N_N          = 12;
-        const unsigned int QUARTERNARY_N_C          = 13;
-        const unsigned int AROMATIC_N_ALIPHATIC_C_N = 14;
-        const unsigned int AROMATIC_N_ALIPHATIC_C_C = 15;
-        const unsigned int LACTAM_N_ALIPHATIC_C_N   = 16;
-        const unsigned int LACTAM_N_ALIPHATIC_C_C   = 17;
-        const unsigned int AROMATIC_C_AROMATIC_C_C  = 18;
-        const unsigned int SULFONAMIDE_N            = 19;
-        const unsigned int SULFONAMIDE_S            = 20;
-    }
-    }
-}
+            const unsigned int NONE                     = 0;
+            const unsigned int AMIDE_N                  = 1;
+            const unsigned int AMIDE_C                  = 2;
+            const unsigned int ESTER_O                  = 3;
+            const unsigned int ESTER_C                  = 4;
+            const unsigned int AMINE_N                  = 5;
+            const unsigned int AMINE_C                  = 6;
+            const unsigned int UREA_N                   = 7;
+            const unsigned int UREA_C                   = 8;
+            const unsigned int ETHER_O                  = 9;
+            const unsigned int ETHER_C                  = 10;
+            const unsigned int OLEFIN_C                 = 11;
+            const unsigned int QUARTERNARY_N_N          = 12;
+            const unsigned int QUARTERNARY_N_C          = 13;
+            const unsigned int AROMATIC_N_ALIPHATIC_C_N = 14;
+            const unsigned int AROMATIC_N_ALIPHATIC_C_C = 15;
+            const unsigned int LACTAM_N_ALIPHATIC_C_N   = 16;
+            const unsigned int LACTAM_N_ALIPHATIC_C_C   = 17;
+            const unsigned int AROMATIC_C_AROMATIC_C_C  = 18;
+            const unsigned int SULFONAMIDE_N            = 19;
+            const unsigned int SULFONAMIDE_S            = 20;
+        } // namespace RECAPAtomLabel
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_RECAPATOMLABEL_HPP

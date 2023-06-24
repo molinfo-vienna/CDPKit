@@ -44,8 +44,9 @@ namespace CDPL
         struct ScalarAbsImpl
         {
 
-            template <typename T> 
-            static T abs(const T& t) {
+            template <typename T>
+            static T abs(const T& t)
+            {
                 return std::abs(t);
             }
         };
@@ -54,8 +55,9 @@ namespace CDPL
         struct ScalarAbsImpl<false>
         {
 
-            template <typename T> 
-            static const T& abs(const T& t) {
+            template <typename T>
+            static const T& abs(const T& t)
+            {
                 return t;
             }
         };
@@ -64,130 +66,150 @@ namespace CDPL
         struct ScalarTraits
         {
 
-            typedef T ValueType;
-            typedef T RealType;
-            typedef const T& ConstReference;
+            typedef T               ValueType;
+            typedef T               RealType;
+            typedef const T&        ConstReference;
             typedef ScalarTraits<T> SelfType;
 
-            static RealType real(ConstReference t) {
+            static RealType real(ConstReference t)
+            {
                 return t;
             }
 
-            static RealType imag(ConstReference) {
+            static RealType imag(ConstReference)
+            {
                 return RealType();
             }
 
-            static RealType conj(ConstReference t) {
+            static RealType conj(ConstReference t)
+            {
                 return t;
             }
 
-            static RealType abs(ConstReference t) {
+            static RealType abs(ConstReference t)
+            {
                 return ScalarAbsImpl<std::numeric_limits<ValueType>::is_signed>::abs(t);
             }
 
-            static ValueType sqrt(ConstReference t) {
+            static ValueType sqrt(ConstReference t)
+            {
                 return ValueType(std::sqrt(t));
             }
-    
-            static RealType norm1(ConstReference t) {
-                return SelfType::abs(t);
-            }
-    
-            static RealType norm2(ConstReference t) {
+
+            static RealType norm1(ConstReference t)
+            {
                 return SelfType::abs(t);
             }
 
-            static RealType normInf(ConstReference t) {
+            static RealType norm2(ConstReference t)
+            {
+                return SelfType::abs(t);
+            }
+
+            static RealType normInf(ConstReference t)
+            {
                 return SelfType::abs(t);
             }
         };
 
-        template <typename T> struct TypeTraits;
+        template <typename T>
+        struct TypeTraits;
         template <typename T>
         struct ComplexTraits
         {
 
-            typedef T ValueType;
+            typedef T                      ValueType;
             typedef typename T::value_type RealType;
-            typedef const T& ConstReference;
-            typedef ComplexTraits<T> SelfType;
+            typedef const T&               ConstReference;
+            typedef ComplexTraits<T>       SelfType;
 
-            static RealType real(ConstReference t) {
+            static RealType real(ConstReference t)
+            {
                 return std::real(t);
             }
 
-            static RealType imag(ConstReference t) {
+            static RealType imag(ConstReference t)
+            {
                 return std::imag(t);
             }
 
-            static ValueType conj(ConstReference t) {
+            static ValueType conj(ConstReference t)
+            {
                 return std::conj(t);
             }
 
-            static RealType abs(ConstReference t) {
+            static RealType abs(ConstReference t)
+            {
                 return std::abs(t);
             }
 
-            static ValueType sqrt(ConstReference t) {
+            static ValueType sqrt(ConstReference t)
+            {
                 return std::sqrt(t);
             }
 
-            static RealType norm1(ConstReference t) {
-                return TypeTraits<RealType>::abs(SelfType::real(t)) 
-                    + TypeTraits<RealType>::abs(SelfType::imag(t));
+            static RealType norm1(ConstReference t)
+            {
+                return TypeTraits<RealType>::abs(SelfType::real(t)) + TypeTraits<RealType>::abs(SelfType::imag(t));
             }
-    
-            static RealType norm2(ConstReference t) {
+
+            static RealType norm2(ConstReference t)
+            {
                 return SelfType::abs(t);
             }
 
-            static RealType normInf(ConstReference t) {
+            static RealType normInf(ConstReference t)
+            {
                 return std::max(TypeTraits<RealType>::abs(SelfType::real(t)),
                                 TypeTraits<RealType>::abs(SelfType::imag(t)));
             }
         };
 
         template <typename T>
-        struct TypeTraits : public ScalarTraits<T> {};
+        struct TypeTraits : public ScalarTraits<T>
+        {};
 
         template <typename T>
-        struct TypeTraits<std::complex<T> > : public ComplexTraits<std::complex<T> >  {};
+        struct TypeTraits<std::complex<T> > : public ComplexTraits<std::complex<T> >
+        {};
 
         template <typename V>
-        struct VectorTemporaryTraits 
+        struct VectorTemporaryTraits
         {
 
             typedef typename V::VectorTemporaryType Type;
         };
 
         template <typename M>
-        struct MatrixTemporaryTraits 
+        struct MatrixTemporaryTraits
         {
 
             typedef typename M::MatrixTemporaryType Type;
         };
 
         template <typename Q>
-        struct QuaternionTemporaryTraits 
+        struct QuaternionTemporaryTraits
         {
 
             typedef typename Q::QuaternionTemporaryType Type;
         };
 
         template <typename G>
-        struct GridTemporaryTraits 
+        struct GridTemporaryTraits
         {
 
             typedef typename G::GridTemporaryType Type;
         };
 
         template <typename T>
-        struct IsScalar : public std::is_arithmetic<T> {};
+        struct IsScalar : public std::is_arithmetic<T>
+        {};
 
         template <typename T>
-        struct IsScalar<std::complex<T> > : public std::is_arithmetic<T> {};
+        struct IsScalar<std::complex<T> > : public std::is_arithmetic<T>
+        {};
 
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 #endif // CDPL_MATH_TYPETRAITS_HPP

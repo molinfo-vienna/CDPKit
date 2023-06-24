@@ -33,7 +33,7 @@
 #include "CDPL/Base/PropertyContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Util
@@ -49,12 +49,13 @@ namespace CDPL
         class PropertyValueProduct
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %PropertyValueProduct instance for the property specified by \a key.
              * \param key The key of the property.
              */
-            PropertyValueProduct(const Base::LookupKey& key): propKey(key) {}
+            PropertyValueProduct(const Base::LookupKey& key):
+                propKey(key) {}
 
             /**
              * \brief Calculates the product of the property values stored in the Base::PropertyContainer instances
@@ -63,16 +64,15 @@ namespace CDPL
              * \param cntnr2 The Base::PropertyContainer instance storing the second property value.
              * \return The product of the property values.
              */
-            ResType operator()(const Base::PropertyContainer& cntnr1, const Base::PropertyContainer& cntnr2) const {
+            ResType operator()(const Base::PropertyContainer& cntnr1, const Base::PropertyContainer& cntnr2) const
+            {
                 return (cntnr1.getProperty<PropertyValueType>(propKey) * cntnr2.getProperty<PropertyValueType>(propKey));
             }
 
-        private:
+          private:
             Base::LookupKey propKey;
         };
-    }
-}
+    } // namespace Util
+} // namespace CDPL
 
 #endif // CDPL_UTIL_PROPERTYVALUEPRODUCT_HPP
-
- 

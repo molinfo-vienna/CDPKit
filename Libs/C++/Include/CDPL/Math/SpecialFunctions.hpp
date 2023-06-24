@@ -40,7 +40,7 @@ namespace CDPL
 {
 
     namespace Math
-    {    
+    {
 
         /**
          * \brief Computes the factorial \f$ n! \f$ of the non-negative integer \a n.
@@ -84,7 +84,7 @@ namespace CDPL
          */
         template <typename T>
         T gammaQ(const T& a, const T& x);
-    
+
         /**
          * \brief Computes the generalized bell function \f$ Bell(x) = \frac{1}{1 + |\frac{x-c}{a}|^{2b}} \f$ at \a x.
          * \param x The generalized bell function argument
@@ -95,11 +95,11 @@ namespace CDPL
          */
         template <typename T>
         T generalizedBell(const T& x, const T& a, const T& b, const T& c);
-    }
-}
+    } // namespace Math
+} // namespace CDPL
 
 
-// Implementation 
+// Implementation
 // \cond DOC_IMPL_DETAILS
 
 namespace CDPL
@@ -125,7 +125,7 @@ namespace CDPL
                     return 0;
                 }
 
-                T ap = a;
+                T ap  = a;
                 T del = 1 / a;
                 T sum = del;
 
@@ -149,7 +149,7 @@ namespace CDPL
                 using namespace CDPL;
                 using namespace Math;
 
-                static const T EPS = std::numeric_limits<T>::epsilon();
+                static const T EPS    = std::numeric_limits<T>::epsilon();
                 static const T FP_MIN = std::numeric_limits<T>::min() / EPS;
 
                 T b = x + 1 - a;
@@ -164,13 +164,13 @@ namespace CDPL
 
                     if (TypeTraits<T>::abs(d) < FP_MIN)
                         d = FP_MIN;
-        
+
                     c = b + an / c;
 
                     if (TypeTraits<T>::abs(c) < FP_MIN)
                         c = FP_MIN;
-        
-                    d = 1 / d;
+
+                    d     = 1 / d;
                     T del = d * c;
                     h *= del;
 
@@ -180,13 +180,13 @@ namespace CDPL
 
                 return std::numeric_limits<T>::quiet_NaN();
             }
-        }
-    }
-}
+        } // namespace Detail
+    } // namespace Math
+} // namespace CDPL
 
 
 template <typename T>
-T CDPL::Math::factorial(unsigned int n) 
+T CDPL::Math::factorial(unsigned int n)
 {
     T f(1);
 
@@ -200,7 +200,7 @@ T CDPL::Math::factorial(unsigned int n)
 }
 
 template <typename T>
-T CDPL::Math::pythag(const T& a, const T& b) 
+T CDPL::Math::pythag(const T& a, const T& b)
 {
     T abs_a = TypeTraits<T>::abs(a);
     T abs_b = TypeTraits<T>::abs(b);
@@ -216,13 +216,13 @@ T CDPL::Math::pythag(const T& a, const T& b)
 
     T tmp = abs_a / abs_b;
 
-    return (abs_b * TypeTraits<T>::sqrt(T(1) + tmp * tmp)); 
+    return (abs_b * TypeTraits<T>::sqrt(T(1) + tmp * tmp));
 }
 
 template <typename T1, typename T2>
 T1 CDPL::Math::sign(const T1& a, const T2& b)
 {
-    return (b >= 0 ? (a >= 0 ? a : -a) : (a >= 0 ? -a : a)); 
+    return (b >= 0 ? (a >= 0 ? a : -a) : (a >= 0 ? -a : a));
 }
 
 template <typename T>
@@ -234,16 +234,15 @@ T CDPL::Math::lnGamma(const T& xx)
         24.01409824083091,
         -1.231739572450155,
         0.1208650973866179e-2,
-        -0.5395239384953e-5
-    };
+        -0.5395239384953e-5};
 
     long double ser = 1.000000000190015;
-    long double x = xx;
-    long double y = xx;
+    long double x   = xx;
+    long double y   = xx;
     long double tmp = x + 5.5;
-    
+
     tmp -= (x + 0.5) * std::log(tmp);
-    
+
     for (unsigned int i = 0; i < 6; i++)
         ser += cof[i] / ++y;
 
@@ -256,9 +255,9 @@ T CDPL::Math::gammaQ(const T& a, const T& x)
     if (x < T(0) || a <= T(0))
         return std::numeric_limits<T>::quiet_NaN();
 
-    if (x < (a + T(1))) 
+    if (x < (a + T(1)))
         return (T(1) - Detail::gammaPSer(a, x));
-    
+
     return Detail::gammaQContFrac(a, x);
 }
 
@@ -271,4 +270,3 @@ T CDPL::Math::generalizedBell(const T& x, const T& a, const T& b, const T& c)
 // \endcond
 
 #endif // CDPL_MATH_SPECIALFUNCTIONS_HPP
-

@@ -32,7 +32,7 @@
 #include <functional>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -44,7 +44,7 @@ namespace CDPL
          * \brief A generic wrapper class used to store a user-defined bond predicate.
          */
         typedef std::function<bool(const Chem::Bond&)> BondPredicate;
-    }
-}
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_BONDPREDICATE_HPP

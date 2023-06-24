@@ -32,7 +32,7 @@
 #include "CDPL/Grid/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -50,9 +50,9 @@ namespace CDPL
         namespace AttributedGridProperty
         {
 
-            extern CDPL_GRID_API const Base::LookupKey NAME; 
+            extern CDPL_GRID_API const Base::LookupKey NAME;
         }
-    }
-}
+    } // namespace Grid
+} // namespace CDPL
 
 #endif // CDPL_GRID_ATTRIBUTEDGRIDPROPERTY_HPP

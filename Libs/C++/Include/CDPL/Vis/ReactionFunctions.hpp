@@ -32,16 +32,16 @@
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace Chem 
+    namespace Chem
     {
 
         class Reaction;
     }
-    
-    namespace Vis 
+
+    namespace Vis
     {
 
         class Color;
@@ -225,7 +225,7 @@ namespace CDPL
         CDPL_VIS_API bool hasShowPlusSigns(const Chem::Reaction& rxn);
 
         CDPL_VIS_API void clearShowPlusSigns(Chem::Reaction& rxn);
-    }
-}
+    } // namespace Vis
+} // namespace CDPL
 
 #endif // CDPL_VIS_REACTIONFUNCTIONS_HPP

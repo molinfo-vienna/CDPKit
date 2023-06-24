@@ -30,14 +30,14 @@
 #define CDPL_SHAPE_APIPREFIX_HPP
 
 #ifdef CDPL_SHAPE_STATIC_LINK
-#  define CDPL_SHAPE_API
+# define CDPL_SHAPE_API
 #else // CDPL_SHAPE_STATIC_LINK
-#  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_shape_shared_EXPORTS
-#    define CDPL_SHAPE_API CDPL_API_EXPORT
-#  else // cdpl_shape_shared_EXPORTS
-#    define CDPL_SHAPE_API CDPL_API_IMPORT
-#  endif // cdpl_shape_shared_EXPORTS
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_shape_shared_EXPORTS
+#  define CDPL_SHAPE_API CDPL_API_EXPORT
+# else // cdpl_shape_shared_EXPORTS
+#  define CDPL_SHAPE_API CDPL_API_IMPORT
+# endif // cdpl_shape_shared_EXPORTS
 #endif // CDPL_SHAPE_STATIC_LINK
 
 /**

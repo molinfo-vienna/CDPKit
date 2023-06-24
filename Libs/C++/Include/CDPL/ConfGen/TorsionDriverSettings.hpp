@@ -34,10 +34,10 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class CDPL_CONFGEN_API TorsionDriverSettings
@@ -49,11 +49,11 @@ namespace CDPL
             TorsionDriverSettings();
 
             void sampleHeteroAtomHydrogens(bool sample);
-                
+
             bool sampleHeteroAtomHydrogens() const;
 
             void sampleAngleToleranceRanges(bool sample);
-                
+
             bool sampleAngleToleranceRanges() const;
 
             void orderByEnergy(bool order);
@@ -69,9 +69,9 @@ namespace CDPL
             std::size_t getMaxPoolSize() const;
 
             void setForceFieldType(unsigned int type);
-        
+
             unsigned int getForceFieldType() const;
-            
+
             void strictForceFieldParameterization(bool strict);
 
             bool strictForceFieldParameterization() const;
@@ -95,7 +95,7 @@ namespace CDPL
             double       dielectricConst;
             double       distExponent;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 #endif // CDPL_CONFGEN_TORSIONDRIVERSETTINGS_HPP

@@ -30,7 +30,7 @@
 #define CDPL_CHEM_TAUTOMERIZATIONTYPE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,21 +41,21 @@ namespace CDPL
          */
         namespace TautomerizationType
         {
-            
-            const unsigned int KETO_ENOL              = 0;
-            const unsigned int IMINE_ENAMINE          = 1;
-            const unsigned int NITROSO_OXIME          = 2;
-            const unsigned int AMIDE_IMIDIC_ACID      = 3;
-            const unsigned int LACTAM_LACTIM          = 4;
-            const unsigned int KETENE_YNOL            = 5;
-            const unsigned int NITRO_ACI              = 6;
-            const unsigned int PHOSPHINIC_ACID        = 7;
-            const unsigned int SULFENIC_ACID          = 8;
-            const unsigned int GENERIC_H_13_SHIFT     = 9;
-            const unsigned int GENERIC_H_15_SHIFT     = 10;
 
-        }
-    }
-}
+            const unsigned int KETO_ENOL          = 0;
+            const unsigned int IMINE_ENAMINE      = 1;
+            const unsigned int NITROSO_OXIME      = 2;
+            const unsigned int AMIDE_IMIDIC_ACID  = 3;
+            const unsigned int LACTAM_LACTIM      = 4;
+            const unsigned int KETENE_YNOL        = 5;
+            const unsigned int NITRO_ACI          = 6;
+            const unsigned int PHOSPHINIC_ACID    = 7;
+            const unsigned int SULFENIC_ACID      = 8;
+            const unsigned int GENERIC_H_13_SHIFT = 9;
+            const unsigned int GENERIC_H_15_SHIFT = 10;
+
+        } // namespace TautomerizationType
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_TAUTOMERIZATIONTYPE_HPP

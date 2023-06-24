@@ -31,6 +31,6 @@ namespace CDPLPythonShape
 
     void exportSymmetryClasses();
     void exportAlignmentResultSelectionModes();
-}
+} // namespace CDPLPythonShape
 
 #endif // CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP

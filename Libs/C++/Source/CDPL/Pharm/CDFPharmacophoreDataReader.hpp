@@ -31,7 +31,7 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Base
@@ -48,8 +48,9 @@ namespace CDPL
         class CDFPharmacophoreDataReader : private Internal::CDFDataReaderBase
         {
 
-        public:
-            CDFPharmacophoreDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+          public:
+            CDFPharmacophoreDataReader(const Base::ControlParameterContainer& ctrl_params):
+                ctrlParams(ctrl_params) {}
 
             bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
 
@@ -59,16 +60,16 @@ namespace CDPL
 
             bool hasMoreData(std::istream& is);
 
-        private:
-            void init(); 
+          private:
+            void init();
 
             void readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
             void readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
 
-            const Base::ControlParameterContainer& ctrlParams;    
+            const Base::ControlParameterContainer& ctrlParams;
             Internal::ByteBuffer                   dataBuffer;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFPHARMACOPHOREDATAREADER_HPP

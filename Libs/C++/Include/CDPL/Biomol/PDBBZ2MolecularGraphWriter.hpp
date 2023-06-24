@@ -33,7 +33,7 @@
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -41,6 +41,6 @@ namespace CDPL
 
         typedef Util::CompressedDataWriter<PDBMolecularGraphWriter, Util::BZip2OStream> PDBBZ2MolecularGraphWriter;
     }
-}
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_PDBBZ2MOLECULARGRAPHWRITER_HPP

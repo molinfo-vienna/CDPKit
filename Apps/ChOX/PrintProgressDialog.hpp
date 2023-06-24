@@ -41,19 +41,19 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         PrintProgressDialog(QWidget*, const DataSet&, int);
 
         void setProgress(int);
 
         bool aborted() const;
 
-    private:
+      private:
         void init(const DataSet&);
 
         int     numPages;
         QLabel* progressLabel;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_PRINTPROGRESSDIALOG_HPP

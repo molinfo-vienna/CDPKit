@@ -30,7 +30,7 @@
 #define CDPL_MOLPROP_HBONDACCEPTORATOMTYPE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace MolProp
@@ -41,87 +41,87 @@ namespace CDPL
          */
         namespace HBondAcceptorAtomType
         {
-            
+
             /**
              * \brief Specifies that the H-bond acceptor type of the atom is undefined.
              */
-            const unsigned int UNDEF                   = 0;
+            const unsigned int UNDEF = 0;
 
             /**
              * \brief Specifies that the atom is not a H-bond acceptor.
              */
-            const unsigned int NONE                    = 1;
+            const unsigned int NONE = 1;
 
-            const unsigned int O_H2O                   = 2;
-            
-            const unsigned int O_UREA                  = 3;
-            
-            const unsigned int O_BARBITURIC_ACID       = 4;
-            
-            const unsigned int O_URIC_ACID             = 5;
-            
-            const unsigned int O_ETHER                 = 6;
-            
-            const unsigned int O_AMIDE                 = 7;
-            
-            const unsigned int O_N_OXIDE               = 8;
-            
-            const unsigned int O_ACID                  = 9;
-            
-            const unsigned int O_ESTER                 = 10;
-            
-            const unsigned int O_SULFOXIDE             = 11;
-            
-            const unsigned int O_NITRO                 = 12;
-            
-            const unsigned int O_SELEN_OXIDE           = 13;
-            
-            const unsigned int O_ALDEHYD               = 14;
-            
-            const unsigned int O_KETONE                = 15;
-            
-            const unsigned int O_ALCOHOL               = 16;
-            
-            const unsigned int N_NH3                   = 17;
-            
-            const unsigned int N_DIAMINE               = 18;
-            
+            const unsigned int O_H2O = 2;
+
+            const unsigned int O_UREA = 3;
+
+            const unsigned int O_BARBITURIC_ACID = 4;
+
+            const unsigned int O_URIC_ACID = 5;
+
+            const unsigned int O_ETHER = 6;
+
+            const unsigned int O_AMIDE = 7;
+
+            const unsigned int O_N_OXIDE = 8;
+
+            const unsigned int O_ACID = 9;
+
+            const unsigned int O_ESTER = 10;
+
+            const unsigned int O_SULFOXIDE = 11;
+
+            const unsigned int O_NITRO = 12;
+
+            const unsigned int O_SELEN_OXIDE = 13;
+
+            const unsigned int O_ALDEHYD = 14;
+
+            const unsigned int O_KETONE = 15;
+
+            const unsigned int O_ALCOHOL = 16;
+
+            const unsigned int N_NH3 = 17;
+
+            const unsigned int N_DIAMINE = 18;
+
             const unsigned int N_MONO_DI_NITRO_ANILINE = 19;
-            
-            const unsigned int N_TRI_NITRO_ANILINE     = 20;
-            
-            const unsigned int N_HALOGENO_ANILINE      = 21;
-            
-            const unsigned int N_ANILINE               = 22;
-            
-            const unsigned int N_NITRILE               = 23;
-            
-            const unsigned int N_AZOLE                 = 24;
-            
-            const unsigned int N_AMINE                 = 25;
-            
-            const unsigned int N_AMIDINE               = 26;
-            
-            const unsigned int N_AZO                   = 27;
-            
-            const unsigned int N_AZINE                 = 28;
-            
-            const unsigned int N_DIAZINE               = 29;
 
-            const unsigned int N_IMINE                 = 30;
-            
-            const unsigned int S_SULFIDE               = 31;
-            
-            const unsigned int S_THIOUREA              = 32;
-            
-            const unsigned int P_MONO_DI_PHOSPHINE     = 33;
-            
-            const unsigned int P_TRI_PHOSPHINE         = 34;
+            const unsigned int N_TRI_NITRO_ANILINE = 20;
 
-            const unsigned int MAX_TYPE                = P_TRI_PHOSPHINE;
+            const unsigned int N_HALOGENO_ANILINE = 21;
 
-        }
-    }
-}
+            const unsigned int N_ANILINE = 22;
+
+            const unsigned int N_NITRILE = 23;
+
+            const unsigned int N_AZOLE = 24;
+
+            const unsigned int N_AMINE = 25;
+
+            const unsigned int N_AMIDINE = 26;
+
+            const unsigned int N_AZO = 27;
+
+            const unsigned int N_AZINE = 28;
+
+            const unsigned int N_DIAZINE = 29;
+
+            const unsigned int N_IMINE = 30;
+
+            const unsigned int S_SULFIDE = 31;
+
+            const unsigned int S_THIOUREA = 32;
+
+            const unsigned int P_MONO_DI_PHOSPHINE = 33;
+
+            const unsigned int P_TRI_PHOSPHINE = 34;
+
+            const unsigned int MAX_TYPE = P_TRI_PHOSPHINE;
+
+        } // namespace HBondAcceptorAtomType
+    } // namespace MolProp
+} // namespace CDPL
 
 #endif // CDPL_MOLPROP_HBONDACCEPTORATOMTYPE_HPP

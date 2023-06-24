@@ -36,7 +36,7 @@
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -251,8 +251,8 @@ namespace CDPL
             extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
 
             extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
-        }
-    }
-}
+        } // namespace ControlParameterDefault
+    } // namespace Chem
+} // namespace CDPL
 
 #endif // CDPL_CHEM_CONTROLPARAMETERDEFAULT_HPP

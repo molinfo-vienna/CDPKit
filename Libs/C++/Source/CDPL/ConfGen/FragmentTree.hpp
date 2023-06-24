@@ -40,16 +40,16 @@
 #include "CDPL/Util/ObjectPool.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
-    
+
     namespace Chem
     {
 
         class FragmentList;
     }
 
-    namespace ConfGen 
+    namespace ConfGen
     {
 
         class FragmentTreeNode;
@@ -59,11 +59,11 @@ namespace CDPL
 
             friend class FragmentTreeNode;
 
-        public:
+          public:
             FragmentTree(std::size_t max_conf_data_cache_size);
 
             ~FragmentTree();
-                
+
             template <typename BondIter>
             void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
                        const BondIter& bonds_beg, const BondIter& bonds_end);
@@ -86,14 +86,14 @@ namespace CDPL
 
             FragmentTreeNode* getFragmentNode(std::size_t idx) const;
 
-        private:
+          private:
             FragmentTree(const FragmentTree&);
 
             FragmentTree& operator=(const FragmentTree&);
 
             void buildTree(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
 
-            FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
+            FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2,
                                                const Chem::Bond* bond);
 
             const Chem::Bond* findConnectingBond(FragmentTreeNode* node1, FragmentTreeNode* node2);
@@ -106,10 +106,10 @@ namespace CDPL
             bool aborted() const;
             bool timedout() const;
 
-            typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-            typedef std::vector<const Chem::Bond*> BondList;
-            typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
-            typedef std::vector<FragmentTreeNode*> TreeNodeList;
+            typedef Util::ObjectPool<ConformerData>                                           ConformerDataCache;
+            typedef std::vector<const Chem::Bond*>                                            BondList;
+            typedef Util::ObjectStack<FragmentTreeNode>                                       TreeNodeCache;
+            typedef std::vector<FragmentTreeNode*>                                            TreeNodeList;
             typedef std::vector<std::pair<Chem::Fragment::SharedPointer, FragmentTreeNode*> > FragmentToNodeMap;
 
             ConformerDataCache          confDataCache;
@@ -122,8 +122,8 @@ namespace CDPL
             CallbackFunction            abortCallback;
             CallbackFunction            timeoutCallback;
         };
-    }
-}
+    } // namespace ConfGen
+} // namespace CDPL
 
 
 // Implementation

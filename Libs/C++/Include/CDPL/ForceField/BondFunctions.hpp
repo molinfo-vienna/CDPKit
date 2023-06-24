@@ -32,7 +32,7 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Chem
@@ -41,7 +41,7 @@ namespace CDPL
         class Bond;
     }
 
-    namespace ForceField 
+    namespace ForceField
     {
 
         CDPL_FORCEFIELD_API unsigned int getMMFF94TypeIndex(const Chem::Bond& bond);
@@ -51,8 +51,7 @@ namespace CDPL
         CDPL_FORCEFIELD_API void clearMMFF94TypeIndex(Chem::Bond& bond);
 
         CDPL_FORCEFIELD_API bool hasMMFF94TypeIndex(const Chem::Bond& bond);
-    }
-}
+    } // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_BONDFUNCTIONS_HPP
- 

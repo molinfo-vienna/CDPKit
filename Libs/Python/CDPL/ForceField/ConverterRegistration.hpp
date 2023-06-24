@@ -28,9 +28,9 @@
 
 namespace CDPLPythonForceField
 {
-    
+
     void registerFromPythonConverters();
     void registerToPythonConverters();
-}
+} // namespace CDPLPythonForceField
 
 #endif // CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP

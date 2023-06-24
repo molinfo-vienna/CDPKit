@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/FeatureContainer.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -75,7 +75,7 @@ namespace CDPL
              * \brief Removes all features and clears all properties of the pharmacophore.
              */
             virtual void clear() = 0;
-        
+
             /**
              * \brief Returns the number of pharmacophore features.
              * \return The number of features.
@@ -103,7 +103,7 @@ namespace CDPL
              * \return A reference to the newly created features.
              */
             virtual Feature& addFeature() = 0;
-    
+
             /**
              * \brief Removes the pharmacophore feature at the specified index.
              * \param idx The index of the feature to remove.
@@ -148,7 +148,7 @@ namespace CDPL
              * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to copy.
              */
             virtual void copy(const FeatureContainer& cntnr) = 0;
-        
+
             /**
              * \brief Extends the current set of pharmacophore features by a copy of the features in the
              *        pharmacophore \a pharm.
@@ -232,7 +232,7 @@ namespace CDPL
              */
             Pharmacophore& operator-=(const FeatureContainer& cntnr);
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_PHARMACOPHORE_HPP

@@ -40,6 +40,6 @@
  * \param name The name of the variable to define.
  */
 #define CDPL_DEFINE_LOOKUP_KEY(name) \
-const CDPL::Base::LookupKey name = CDPL::Base::LookupKey::create(#name);
+ const CDPL::Base::LookupKey name = CDPL::Base::LookupKey::create(#name);
 
 #endif // CDPL_BASE_LOOKUPKEYDEFINITION_HPP

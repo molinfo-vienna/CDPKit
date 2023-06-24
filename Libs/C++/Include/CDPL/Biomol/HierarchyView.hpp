@@ -42,7 +42,7 @@
 #include "CDPL/Biomol/ResidueList.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Biomol
@@ -55,7 +55,7 @@ namespace CDPL
         {
 
             typedef std::shared_ptr<HierarchyViewModel> ModelPtr;
-            typedef std::vector<ModelPtr> ModelList;
+            typedef std::vector<ModelPtr>               ModelList;
 
           public:
             /**    
@@ -102,7 +102,7 @@ namespace CDPL
 
           private:
             void initModelList() const;
-        
+
             typedef std::unordered_map<std::size_t, ModelPtr> IDToModelMap;
 
             const Chem::MolecularGraph* molGraph;
@@ -113,7 +113,7 @@ namespace CDPL
             mutable bool                initModels;
             mutable std::mutex          initMutex;
         };
-    }
-}
+    } // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_HIERARCHYVIEW_HPP

@@ -35,7 +35,7 @@
 #include "CDPL/Util/StreamDataReader.hpp"
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -50,7 +50,7 @@ namespace CDPL
         class CDPL_PHARM_API CDFPharmacophoreReader : public Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>
         {
 
-        public:
+          public:
             /**
              * \brief Constructs a \c %CDFPharmacophoreReader instance that will read the pharmacophore data from the input
              *        stream \a is.
@@ -63,7 +63,7 @@ namespace CDPL
              */
             ~CDFPharmacophoreReader();
 
-        private:
+          private:
             friend class Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>;
 
             CDFPharmacophoreReader(const CDFPharmacophoreReader&);
@@ -78,7 +78,7 @@ namespace CDPL
 
             CDFDataReaderPtr reader;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_CDFPHARMACOPHOREREADER_HPP

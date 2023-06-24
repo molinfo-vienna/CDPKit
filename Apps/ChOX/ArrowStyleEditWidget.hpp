@@ -39,24 +39,24 @@ namespace ChOX
 
         Q_OBJECT
 
-    public:
+      public:
         ArrowStyleEditWidget(QWidget*, unsigned int&);
 
-    signals:
+      signals:
         void arrowStyleChanged();
 
-    public slots:
+      public slots:
         void updateGUI();
 
-    private slots:
+      private slots:
         void handleArrowStyleSelection(int);
 
-    private:
+      private:
         void init();
 
         unsigned int& arrowStyle;
         QComboBox*    arrowStyleComboBox;
     };
-}
+} // namespace ChOX
 
 #endif // CHOX_ARROWSTYLEEDITWIDGET_HPP

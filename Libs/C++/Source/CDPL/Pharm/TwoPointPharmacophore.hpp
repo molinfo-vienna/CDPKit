@@ -26,7 +26,7 @@
 #define CDPL_PHARM_TWOPOINTPHARMACOPHORE_HPP
 
 
-namespace CDPL 
+namespace CDPL
 {
 
     namespace Pharm
@@ -37,30 +37,33 @@ namespace CDPL
         class TwoPointPharmacophore
         {
 
-        public:
+          public:
             TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
 
             TwoPointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, double ftr_dist):
                 ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftrDistance(ftr_dist) {}
 
-            unsigned int getFeature1Type() const {
+            unsigned int getFeature1Type() const
+            {
                 return ftr1Type;
             }
 
-            unsigned int getFeature2Type() const {
+            unsigned int getFeature2Type() const
+            {
                 return ftr2Type;
             }
 
-            double getFeatureDistance() const {
+            double getFeatureDistance() const
+            {
                 return ftrDistance;
             }
 
-        private:
+          private:
             unsigned int ftr1Type;
             unsigned int ftr2Type;
             double       ftrDistance;
         };
-    }
-}
+    } // namespace Pharm
+} // namespace CDPL
 
 #endif // CDPL_PHARM_TWOPOINTPHARMACOPHORE_HPP
