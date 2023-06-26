@@ -114,6 +114,7 @@ namespace CDPL
 
         template <typename T>
         struct TypeTraits;
+
         template <typename T>
         struct ComplexTraits
         {
@@ -208,7 +209,6 @@ namespace CDPL
         template <typename T>
         struct IsScalar<std::complex<T> > : public std::is_arithmetic<T>
         {};
-
     } // namespace Math
 } // namespace CDPL
 
