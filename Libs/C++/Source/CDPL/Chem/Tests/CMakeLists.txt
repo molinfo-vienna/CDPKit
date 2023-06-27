@@ -34,11 +34,11 @@ SET(test-suite_SRCS
     MoleculeTest.cpp
     AtomTest.cpp
     BondTest.cpp
-    #AtomContainerTest.cpp
-    #BondContainerTest.cpp
+    AtomContainerTest.cpp
+    BondContainerTest.cpp
     FragmentTest.cpp
     AtomBondMappingTest.cpp
-    #DataFormatsTest.cpp
+    DataFormatsTest.cpp
     StringDataBlockTest.cpp
     AtomDictionaryTest.cpp
 
