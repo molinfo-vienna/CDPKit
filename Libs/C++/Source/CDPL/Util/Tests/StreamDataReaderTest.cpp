@@ -34,22 +34,25 @@
 class TestStringReader : public CDPL::Util::StreamDataReader<std::string, TestStringReader>
 {
 
-public:
+  public:
     typedef std::string DataType;
 
-    TestStringReader(std::istream& is): CDPL::Util::StreamDataReader<std::string, TestStringReader>(is) {}
+    TestStringReader(std::istream& is):
+        CDPL::Util::StreamDataReader<std::string, TestStringReader>(is) {}
 
-private:
+  private:
     friend class CDPL::Util::StreamDataReader<std::string, TestStringReader>;
 
-    bool readData(std::istream& is, std::string& str, bool) {
+    bool readData(std::istream& is, std::string& str, bool)
+    {
         if (moreData(is))
             return bool(is >> str);
 
         return false;
     }
 
-    bool skipData(std::istream& is) {
+    bool skipData(std::istream& is)
+    {
         if (!moreData(is))
             return false;
 
@@ -58,7 +61,8 @@ private:
         return bool(is >> sink);
     }
 
-    bool moreData(std::istream& is) {
+    bool moreData(std::istream& is)
+    {
         return bool(std::istream::sentry(is, false));
     }
 };
@@ -66,9 +70,11 @@ private:
 struct TestProgressCallback
 {
 
-    TestProgressCallback(): calls(0) {}
+    TestProgressCallback():
+        calls(0) {}
 
-    void operator()(const CDPL::Base::DataIOBase&, double) {
+    void operator()(const CDPL::Base::DataIOBase&, double)
+    {
         calls++;
     }
 
@@ -81,16 +87,16 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
     using namespace CDPL;
     using namespace Util;
 
-    std::string record;
+    std::string        record;
     std::istringstream is1("Record#1 Record#2 \nRecord#3 Record#4   ");
 
-    TestStringReader reader1(is1);
+    TestStringReader     reader1(is1);
     TestProgressCallback callback;
 
     reader1.registerIOCallback(std::ref(callback));
 
     BOOST_CHECK(reader1.getNumRecords() == 4);
-    
+
     BOOST_CHECK(callback.calls == 5);
 
     BOOST_CHECK(reader1.read(record));
@@ -159,7 +165,7 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
     BOOST_CHECK(!reader1.read(record));
     BOOST_CHECK(!reader1);
 
-// -------------
+    // -------------
 
     std::istringstream is2("\n  Record#1");
 
@@ -196,4 +202,3 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
 
     BOOST_CHECK(reader3.getNumRecords() == 0);
 }
-

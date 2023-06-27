@@ -35,7 +35,7 @@ namespace
     class TestExpression1 : public CDPL::Chem::MatchExpression<int>
     {
 
-    public:
+      public:
         bool operator()(const int&, const int&, const CDPL::Base::Any&) const
         {
             return false;
@@ -50,13 +50,14 @@ namespace
     class TestExpression2 : public CDPL::Chem::MatchExpression<int>
     {
 
-    public:
+      public:
         bool operator()(const int&, const int&, const CDPL::Base::Any&) const
         {
             return false;
         }
 
-        bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
+        bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&,
+                        const CDPL::Base::Any&) const
         {
             return true;
         }
@@ -66,7 +67,7 @@ namespace
             return true;
         }
     };
-}
+} // namespace
 
 
 BOOST_AUTO_TEST_CASE(MatchExpressionTest)

@@ -65,10 +65,10 @@ SET(test-suite_SRCS
 
     MatchConstraintListTest.cpp          # TODO
     MatchExpressionTest.cpp
-    ListMatchExpressionTest.cpp
+    MatchExpressionListTest.cpp
     #PropertyMatchExpressionTest.cpp
-    ANDListMatchExpressionTest.cpp
-    ORListMatchExpressionTest.cpp
+    ANDMatchExpressionListTest.cpp
+    ORMatchExpressionListTest.cpp
     NOTMatchExpressionTest.cpp
 
     #HashCodeCalculatorTest.cpp 
@@ -84,6 +84,7 @@ SET(test-suite_SRCS
     FragmentHydrogenManipulationFunctionsTest.cpp
     #ReactionFunctionsTest.cpp
 
+    AtomHybridizationPerceptionTest.cpp
     #AtomSymbolTest.cpp
     #AtomTypeTest.cpp
 
