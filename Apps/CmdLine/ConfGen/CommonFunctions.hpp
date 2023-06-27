@@ -31,6 +31,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 namespace ConfGen
@@ -40,38 +41,36 @@ namespace ConfGen
     {
         namespace po = boost::program_options;
         using namespace CDPL::ConfGen;
+        using namespace CDPL::Internal;
 
-        std::string uc_type = type_str;
-        boost::to_upper(uc_type);
-
-        if (uc_type == "MMFF94")
+        if (isEqualCI(type_str, "MMFF94"))
             return ForceFieldType::MMFF94;
 
-        if (uc_type == "MMFF94_NO_ESTAT")
+        if (isEqualCI(type_str, "MMFF94_NO_ESTAT"))
             return ForceFieldType::MMFF94_NO_ESTAT;
 
-        if (uc_type == "MMFF94S")
+        if (isEqualCI(type_str, "MMFF94S"))
             return ForceFieldType::MMFF94S;
 
-        if (uc_type == "MMFF94S_XOOP")
+        if (isEqualCI(type_str, "MMFF94S_XOOP"))
             return ForceFieldType::MMFF94S_XOOP;
 
-        if (uc_type == "MMFF94S_RTOR")
+        if (isEqualCI(type_str, "MMFF94S_RTOR"))
             return ForceFieldType::MMFF94S_RTOR;
 
-        if (uc_type == "MMFF94S_RTOR_XOOP")
+        if (isEqualCI(type_str, "MMFF94S_RTOR_XOOP"))
             return ForceFieldType::MMFF94S_RTOR_XOOP;
 
-        if (uc_type == "MMFF94S_NO_ESTAT")
+        if (isEqualCI(type_str, "MMFF94S_NO_ESTAT"))
             return ForceFieldType::MMFF94S_NO_ESTAT;
 
-        if (uc_type == "MMFF94S_XOOP_NO_ESTAT")
+        if (isEqualCI(type_str, "MMFF94S_XOOP_NO_ESTAT"))
             return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
 
-        if (uc_type == "MMFF94S_RTOR_NO_ESTAT")
+        if (isEqualCI(type_str, "MMFF94S_RTOR_NO_ESTAT"))
             return ForceFieldType::MMFF94S_RTOR_NO_ESTAT;
 
-        if (uc_type == "MMFF94S_RTOR_XOOP_NO_ESTAT")
+        if (isEqualCI(type_str, "MMFF94S_RTOR_XOOP_NO_ESTAT"))
             return ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT;
 
         throw po::validation_error(po::validation_error::invalid_option_value, opt);

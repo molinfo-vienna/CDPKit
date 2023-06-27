@@ -49,7 +49,7 @@ namespace PSDMerge
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
-        void setCreationMode(const std::string& mode);
+        void setCreationMode(const std::string& mode_str);
 
         int process();
         int mergeDatabases();

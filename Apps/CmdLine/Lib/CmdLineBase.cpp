@@ -42,6 +42,7 @@
 #include "CDPL/Version.hpp"
 #include "CDPL/BuildInfo.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLineBase.hpp"
 #include "HelperFunctions.hpp"
@@ -372,18 +373,17 @@ void CmdLineBase::throwValidationError(const std::string& opt_name) const
 
 void CmdLineBase::setVerbosityLevel(const std::string& level)
 {
-    std::string uc_level = level;
-    boost::to_upper(uc_level);
+    using namespace CDPL;
 
-    if (uc_level == "QUIET")
+    if (Internal::isEqualCI(level, "QUIET"))
         verbLevel = QUIET;
-    else if (uc_level == "ERROR")
+    else if (Internal::isEqualCI(level, "ERROR"))
         verbLevel = ERROR;
-    else if (uc_level == "INFO")
+    else if (Internal::isEqualCI(level, "INFO"))
         verbLevel = INFO;
-    else if (uc_level == "VERBOSE")
+    else if (Internal::isEqualCI(level, "VERBOSE"))
         verbLevel = VERBOSE;
-    else if (uc_level == "DEBUG")
+    else if (Internal::isEqualCI(level, "DEBUG"))
         verbLevel = DEBUG;
     else
         throwValidationError("verbosity");

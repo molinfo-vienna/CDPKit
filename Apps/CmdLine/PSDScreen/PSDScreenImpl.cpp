@@ -32,8 +32,6 @@
 #include <chrono>
 #include <functional>
 
-#include <boost/algorithm/string.hpp>
-
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
@@ -44,6 +42,7 @@
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
@@ -272,9 +271,6 @@ void PSDScreenImpl::setHitOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     hitOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 
     if (!hitOutputHandler)
@@ -285,27 +281,22 @@ void PSDScreenImpl::setQueryInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     queryInputHandler = Base::DataIOManager<Pharm::Pharmacophore>::getInputHandlerByFileExtension(file_ext);
 
     if (!queryInputHandler)
         throwValidationError("query-format");
 }
 
-void PSDScreenImpl::setMatchingMode(const std::string& mode)
+void PSDScreenImpl::setMatchingMode(const std::string& mode_str)
 {
     using namespace CDPL::Pharm;
+    using namespace CDPL;
 
-    std::string uc_mode = mode;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "FIRST-MATCH")
+    if (Internal::isEqualCI(mode_str, "FIRST-MATCH"))
         matchingMode = ScreeningProcessor::FIRST_MATCHING_CONF;
-    else if (uc_mode == "BEST-MATCH")
+    else if (Internal::isEqualCI(mode_str, "BEST-MATCH"))
         matchingMode = ScreeningProcessor::BEST_MATCHING_CONF;
-    else if (uc_mode == "ALL-MATCHES")
+    else if (Internal::isEqualCI(mode_str, "ALL-MATCHES"))
         matchingMode = ScreeningProcessor::ALL_MATCHING_CONFS;
     else
         throwValidationError("mode");

@@ -27,12 +27,11 @@
 #include <chrono>
 #include <functional>
 
-#include <boost/algorithm/string.hpp>
-
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
@@ -92,18 +91,16 @@ const char* PSDMergeImpl::getProgAboutText() const
     return "Merges multiple pharmacophore-screening databases into a single database.";
 }
 
-void PSDMergeImpl::setCreationMode(const std::string& mode)
+void PSDMergeImpl::setCreationMode(const std::string& mode_str)
 {
     using namespace CDPL::Pharm;
+    using namespace CDPL;
 
-    std::string uc_mode = mode;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "CREATE")
+    if (Internal::isEqualCI(mode_str, "CREATE"))
         creationMode = ScreeningDBCreator::CREATE;
-    else if (uc_mode == "APPEND")
+    else if (Internal::isEqualCI(mode_str, "APPEND"))
         creationMode = ScreeningDBCreator::APPEND;
-    else if (uc_mode == "UPDATE")
+    else if (Internal::isEqualCI(mode_str, "UPDATE"))
         creationMode = ScreeningDBCreator::UPDATE;
     else
         throwValidationError("mode");

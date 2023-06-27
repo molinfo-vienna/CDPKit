@@ -30,8 +30,8 @@
 #include <thread>
 #include <chrono>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -45,6 +45,7 @@
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 #include "CmdLine/ConfGen/CommonFunctions.hpp"
@@ -386,17 +387,16 @@ void GenFragLibImpl::addOptionLongDescriptions()
 
 void GenFragLibImpl::applyPreset(const std::string& pres_str)
 {
-    std::string pres = pres_str;
-    boost::to_upper(pres);
+    using namespace CDPL;
 
-    if (pres == "FAST")
+    preset = boost::to_upper_copy(pres_str);
+
+    if (preset == "FAST")
         settings = ConformerGeneratorSettings::FAST;
-    else if (pres == "THOROUGH")
+    else if (preset == "THOROUGH")
         settings = ConformerGeneratorSettings::THOROUGH;
     else
         throwValidationError("preset");
-
-    preset = pres;
 }
 
 void GenFragLibImpl::setTimeout(std::size_t timeout)
@@ -458,15 +458,13 @@ void GenFragLibImpl::setDistExponent(double exp)
 void GenFragLibImpl::setMode(const std::string& mode_str)
 {
     using namespace CDPL::Pharm;
-
-    std::string uc_mode = mode_str;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "CREATE")
+    using namespace CDPL;
+    
+    if (Internal::isEqualCI(mode_str, "CREATE"))
         mode = CREATE;
-    else if (uc_mode == "UPDATE")
+    else if (Internal::isEqualCI(mode_str, "UPDATE"))
         mode = UPDATE;
-    else if (uc_mode == "MERGE")
+    else if (Internal::isEqualCI(mode_str, "MERGE"))
         mode = MERGE;
     else
         throwValidationError("mode");
@@ -475,9 +473,6 @@ void GenFragLibImpl::setMode(const std::string& mode_str)
 void GenFragLibImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 

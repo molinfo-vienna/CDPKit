@@ -25,11 +25,10 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <functional>
-#include <locale>
 
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 
 using namespace CDPL; 
@@ -166,57 +165,19 @@ void Base::DataFormat::setMultiRecordFormat(bool multi)
 
 bool Base::DataFormat::matchesName(const std::string& query_name) const
 {
-    using namespace std::placeholders;
-    
-    if (name.length() != query_name.length())
-        return false;
-
-    const std::locale& locale = std::locale::classic();
-    char (*tolower)(char, const std::locale&) = &std::tolower;
-
-    return std::equal(name.begin(), name.end(), query_name.begin(),
-                      std::bind(std::equal_to<char>(), 
-                                std::bind(tolower, _1, std::ref(locale)),
-                                std::bind(tolower, _2, std::ref(locale))));
+    return Internal::isEqualCI(name, query_name);
 }
 
 bool Base::DataFormat::matchesMimeType(const std::string& query_type) const
 {
-    using namespace std::placeholders;
-    
-    if (mimeType.length() != query_type.length())
-        return false;
-
-    const std::locale& locale = std::locale::classic();
-    char (*tolower)(char, const std::locale&) = &std::tolower;
-
-    return std::equal(mimeType.begin(), mimeType.end(), query_type.begin(),
-                      std::bind(std::equal_to<char>(), 
-                                std::bind(tolower, _1, std::ref(locale)),
-                                std::bind(tolower, _2, std::ref(locale))));
+    return Internal::isEqualCI(mimeType, query_type);
 }
 
 bool Base::DataFormat::matchesFileExtension(const std::string& query_ext) const
 {
-    using namespace std::placeholders;
-    
-    ConstFileExtensionIterator ext_list_end = fileExtensions.end();
-
-    const std::locale& locale = std::locale::classic();
-    char (*tolower)(char, const std::locale&) = &std::tolower;
-
-    for (ConstFileExtensionIterator it = fileExtensions.begin(); it != ext_list_end; ++it) {
-        const std::string& file_ext = *it;
-
-        if (file_ext.length() != query_ext.length())
-            continue;
-
-        if (std::equal(file_ext.begin(), file_ext.end(), query_ext.begin(),
-                       std::bind(std::equal_to<char>(), std::bind(tolower, _1, std::ref(locale)), std::bind(tolower, _2, std::ref(locale)))))
-            return true;
-    }
-
-    return false;
+    return (std::find_if(fileExtensions.begin(), fileExtensions.end(),
+                         [&](const std::string& file_ext) { return Internal::isEqualCI(file_ext, query_ext); }) !=
+            fileExtensions.end());
 }
 
 bool Base::DataFormat::operator==(const DataFormat& fmt) const

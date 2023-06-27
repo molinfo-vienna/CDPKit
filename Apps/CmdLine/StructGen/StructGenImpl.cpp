@@ -31,8 +31,8 @@
 #include <ratio>
 #include <functional>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -48,6 +48,7 @@
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 #include "CmdLine/ConfGen/CommonFunctions.hpp"
@@ -465,31 +466,26 @@ void StructGenImpl::addOptionLongDescriptions()
 
 void StructGenImpl::applyFragBuildPreset(const std::string& pres_str)
 {
-    std::string pres = pres_str;
-    boost::to_upper(pres);
-
-    if (pres == "FAST")
+    fragBuildPreset = boost::to_upper_copy(pres_str);
+    
+    if (fragBuildPreset == "FAST")
         settings.getFragmentBuildSettings() = FragmentConformerGeneratorSettings::FAST;
-    else if (pres == "THOROUGH")
+    else if (fragBuildPreset == "THOROUGH")
         settings.getFragmentBuildSettings() = FragmentConformerGeneratorSettings::THOROUGH;
     else
         throwValidationError("frag-build-preset");
-
-    fragBuildPreset = pres;
 }
 
 void StructGenImpl::setGenerationMode(const std::string& mode_str)
 {
     using namespace CDPL::ConfGen;
+    using namespace CDPL;
 
-    std::string smpl_mode = mode_str;
-    boost::to_upper(smpl_mode);
-
-    if (smpl_mode == "AUTO")
+    if (Internal::isEqualCI(mode_str, "AUTO"))
         settings.setGenerationMode(StructureGenerationMode::AUTO);
-    else if (smpl_mode == "FRAGMENT")
+    else if (Internal::isEqualCI(mode_str, "FRAGMENT"))
         settings.setGenerationMode(StructureGenerationMode::FRAGMENT);
-    else if (smpl_mode == "DG")
+    else if (Internal::isEqualCI(mode_str, "DG"))
         settings.setGenerationMode(StructureGenerationMode::DISTANCE_GEOMETRY);
     else
         throwValidationError("mode");
@@ -566,9 +562,6 @@ void StructGenImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 
     if (!inputHandler)
@@ -579,9 +572,6 @@ void StructGenImpl::setOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 
     if (!outputHandler)
@@ -591,9 +581,6 @@ void StructGenImpl::setOutputFormat(const std::string& file_ext)
 void StructGenImpl::setFailedOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     failedOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 

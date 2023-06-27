@@ -21,7 +21,7 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-base_LIB_SRCS
     PropertyContainer.cpp
@@ -34,7 +34,7 @@ SET(cdpl-base_LIB_SRCS
     Exceptions.cpp
    )
 
-ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS})
+ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-base-static PROPERTIES 
                       OUTPUT_NAME cdpl-base
@@ -46,7 +46,7 @@ INSTALL(TARGETS cdpl-base-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-ADD_LIBRARY(cdpl-base-shared SHARED ${cdpl-base_LIB_SRCS})
+ADD_LIBRARY(cdpl-base-shared SHARED ${cdpl-base_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-base-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-base

@@ -45,6 +45,7 @@
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
@@ -390,9 +391,6 @@ void ShapeScreenImpl::setQueryFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     queryHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 
     if (!queryHandler)
@@ -403,9 +401,6 @@ void ShapeScreenImpl::setDatabaseFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     databaseHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 
     if (!databaseHandler)
@@ -415,9 +410,6 @@ void ShapeScreenImpl::setDatabaseFormat(const std::string& file_ext)
 void ShapeScreenImpl::setHitOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     hitOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 
@@ -1231,16 +1223,15 @@ std::string ShapeScreenImpl::screeningModeToString(ScreeningSettings::ScreeningM
 
 ShapeScreenImpl::ScreeningSettings::ScreeningMode ShapeScreenImpl::stringToScreeningMode(const std::string& mode_str) const
 {
-    std::string uc_mode = mode_str;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "BEST_OVERALL")
+    using namespace CDPL;
+    
+    if (Internal::isEqualCI(mode_str, "BEST_OVERALL"))
         return ScreeningSettings::BEST_OVERALL_MATCH;
     
-    if (uc_mode == "BEST_PER_QUERY")
+    if (Internal::isEqualCI(mode_str, "BEST_PER_QUERY"))
         return ScreeningSettings::BEST_MATCH_PER_QUERY;
 
-    if (uc_mode == "BEST_PER_QUERY_CONF")
+    if (Internal::isEqualCI(mode_str, "BEST_PER_QUERY_CONF"))
         return ScreeningSettings::BEST_MATCH_PER_QUERY_CONF;
 
     throwValidationError("mode");
@@ -1270,16 +1261,15 @@ std::string ShapeScreenImpl::colorFeatureTypeToString(ScreeningSettings::ColorFe
 
 ShapeScreenImpl::ScreeningSettings::ColorFeatureType ShapeScreenImpl::stringToColorFeatureType(const std::string& type_str) const
 {
-    std::string uc_type = type_str;
-    boost::to_upper(uc_type);
-
-    if (uc_type == "NONE")
+    using namespace CDPL;
+    
+    if (Internal::isEqualCI(type_str, "NONE"))
         return ScreeningSettings::NO_FEATURES;
 
-    if (uc_type == "EXP_PHARM")
+    if (Internal::isEqualCI(type_str, "EXP_PHARM"))
         return ScreeningSettings::PHARMACOPHORE_EXP_CHARGES;
 
-    if (uc_type == "IMP_PHARM")
+    if (Internal::isEqualCI(type_str, "IMP_PHARM"))
         return ScreeningSettings::PHARMACOPHORE_IMP_CHARGES;
 
     throwValidationError("color-ftr-type");

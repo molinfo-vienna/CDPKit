@@ -29,8 +29,6 @@
 #include <chrono>
 #include <functional>
 
-#include <boost/algorithm/string.hpp>
-
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -55,6 +53,7 @@
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
@@ -477,17 +476,15 @@ void TautGenImpl::addOptionLongDescriptions()
 void TautGenImpl::setMode(const std::string& mode_str)
 {
     using namespace CDPL::Pharm;
-
-    std::string uc_mode = mode_str;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "STANDARDIZE")
+    using namespace CDPL;
+    
+    if (Internal::isEqualCI(mode_str, "STANDARDIZE"))
         mode = Mode::STANDARDIZE;
-    else if (uc_mode == "TOP_UNIQUE")
+    else if (Internal::isEqualCI(mode_str, "TOP_UNIQUE"))
         mode = Mode::TOPOLOGICALLY_UNIQUE;
-    else if (uc_mode == "GEO_UNIQUE")
+    else if (Internal::isEqualCI(mode_str, "GEO_UNIQUE"))
         mode = Mode::GEOMETRICALLY_UNIQUE;
-    else if (uc_mode == "EXHAUSTIVE")
+    else if (Internal::isEqualCI(mode_str, "EXHAUSTIVE"))
         mode = Mode::EXHAUSTIVE;
     else
         throwValidationError("mode");
@@ -496,9 +493,6 @@ void TautGenImpl::setMode(const std::string& mode_str)
 void TautGenImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 
@@ -509,9 +503,6 @@ void TautGenImpl::setInputFormat(const std::string& file_ext)
 void TautGenImpl::setOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 

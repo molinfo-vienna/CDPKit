@@ -78,28 +78,28 @@ namespace
                 str = MOLECULE_TYPE_STRINGS[i].string;
                 boost::to_upper(str);
 
-                stringToMoleculeTypeMap.insert(StringToTypeMap::value_type(str, MOLECULE_TYPE_STRINGS[i].type));
+                stringToMoleculeTypeMap.emplace(str, MOLECULE_TYPE_STRINGS[i].type);
             }
 
             for (std::size_t i = 0; i < sizeof(CHARGE_TYPE_STRINGS) / sizeof(TypeToString); i++) {
                 str = CHARGE_TYPE_STRINGS[i].string;
                 boost::to_upper(str);
 
-                stringToChargeTypeMap.insert(StringToTypeMap::value_type(str, CHARGE_TYPE_STRINGS[i].type));
+                stringToChargeTypeMap.emplace(str, CHARGE_TYPE_STRINGS[i].type);
             }
 
             for (std::size_t i = 0; i < sizeof(ATOM_TYPE_STRINGS) / sizeof(TypeToString); i++) {
                 str = ATOM_TYPE_STRINGS[i].string;
                 boost::to_lower(str);
 
-                stringToAtomTypeMap.insert(StringToTypeMap::value_type(str, ATOM_TYPE_STRINGS[i].type));
+                stringToAtomTypeMap.emplace(str, ATOM_TYPE_STRINGS[i].type);
             }
 
             for (std::size_t i = 0; i < sizeof(BOND_TYPE_STRINGS) / sizeof(TypeToString); i++) {
                 str = BOND_TYPE_STRINGS[i].string;
                 boost::to_lower(str);
 
-                stringToBondTypeMap.insert(StringToTypeMap::value_type(str, BOND_TYPE_STRINGS[i].type));
+                stringToBondTypeMap.emplace(str, BOND_TYPE_STRINGS[i].type);
             }
         }
 
@@ -135,9 +135,11 @@ bool Chem::MOL2DataReader::readMolecule(std::istream& is, Molecule& mol)
 
             tgt_molgraph = confTargetFragment.get();
 
-            std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), std::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
-            std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), std::bind(&Fragment::addBond, confTargetFragment.get(), _1));
-            
+            std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(),
+                          std::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
+            std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(),
+                          std::bind(&Fragment::addBond, confTargetFragment.get(), _1));
+
             confTargetFragment->copyProperties(mol);
         }
 
@@ -387,7 +389,7 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
         if (strictErrorChecking && atomIDsToIndex.find(id) != atomIDsToIndex.end())
             throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + std::to_string(id));
 
-        atomIDsToIndex.insert(AtomIDToIndexMap::value_type(id, mol.getNumAtoms()));
+        atomIDsToIndex.emplace(id, mol.getNumAtoms());
 
 // Atom name
         
@@ -465,7 +467,7 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
                     setMOL2SubstructureID(atom, substruct_id);
                     setMOL2SubstructureName(atom, *t_it);
 
-                    substructIDsToAtoms.insert(SubstructIDToAtomMap::value_type(substruct_id, &atom));
+                    substructIDsToAtoms.emplace(substruct_id, &atom);
                 }
 
 // Atom charge

@@ -29,8 +29,6 @@
 #include <chrono>
 #include <functional>
 
-#include <boost/algorithm/string.hpp>
-
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -41,6 +39,7 @@
 #include "CDPL/Util/FileRemover.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
@@ -219,18 +218,16 @@ void PSDCreateImpl::addOptionLongDescriptions()
                              "Note that only storage formats make sense that allow to store atom 3D-coordinates!");
 }
 
-void PSDCreateImpl::setCreationMode(const std::string& mode)
+void PSDCreateImpl::setCreationMode(const std::string& mode_str)
 {
     using namespace CDPL::Pharm;
+    using namespace CDPL;
 
-    std::string uc_mode = mode;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "CREATE")
+    if (Internal::isEqualCI(mode_str, "CREATE"))
         creationMode = ScreeningDBCreator::CREATE;
-    else if (uc_mode == "APPEND")
+    else if (Internal::isEqualCI(mode_str, "APPEND"))
         creationMode = ScreeningDBCreator::APPEND;
-    else if (uc_mode == "UPDATE")
+    else if (Internal::isEqualCI(mode_str, "UPDATE"))
         creationMode = ScreeningDBCreator::UPDATE;
     else
         throwValidationError("mode");
@@ -239,9 +236,6 @@ void PSDCreateImpl::setCreationMode(const std::string& mode)
 void PSDCreateImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 

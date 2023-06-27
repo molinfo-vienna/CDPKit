@@ -22,6 +22,8 @@
  */
 
 
+#include <algorithm>
+
 #include <boost/algorithm/string.hpp>
 
 #include "StringUtilities.hpp"
@@ -55,15 +57,24 @@ std::string Internal::trimStringCopy(const std::string& str, bool left, bool rig
 {
     if (str.empty())
         return str;
-        
+
     if (left && right)
         return boost::trim_copy_if(str, IsWhitespace());
 
     if (right)
         return boost::trim_right_copy_if(str, IsWhitespace());
-        
+
     if (left)
         return boost::trim_left_copy_if(str, IsWhitespace());
-    
+
     return str;
+}
+
+bool Internal::isEqualCI(const std::string& str1, const std::string& str2)
+{
+    if (str1.length() != str2.length())
+        return false;
+
+    return std::equal(str1.begin(), str1.end(), str2.begin(),
+                      [](unsigned char c1, unsigned char c2) { return (std::tolower(c1) == std::tolower(c2)); });
 }

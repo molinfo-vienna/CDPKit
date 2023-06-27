@@ -66,7 +66,7 @@ namespace PSDCreate
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
-        void setCreationMode(const std::string& mode);
+        void setCreationMode(const std::string& mode_str);
         void setInputFormat(const std::string& file_ext);
         void setTmpFileDirectory(const std::string& dir_path);
 

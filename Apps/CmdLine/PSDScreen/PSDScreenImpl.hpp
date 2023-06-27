@@ -83,7 +83,7 @@ namespace PSDScreen
 
         void setHitOutputFormat(const std::string& file_ext);
         void setQueryInputFormat(const std::string& file_ext);
-        void setMatchingMode(const std::string& mode);
+        void setMatchingMode(const std::string& mode_str);
 
         int process();
 

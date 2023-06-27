@@ -31,8 +31,8 @@
 #include <ratio>
 #include <functional>
 
-#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -48,6 +48,7 @@
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "CmdLine/Lib/HelperFunctions.hpp"
 
@@ -535,54 +536,46 @@ void ConfGenImpl::applyConfGenPreset(const std::string& pres_str)
 {
     using namespace CDPL::ConfGen;
 
-    std::string pres = pres_str;
-    boost::to_upper(pres);
-
-    if (pres == "SMALL_SET_DIVERSE")
+    confGenPreset = boost::to_upper_copy(pres_str);
+    
+    if (confGenPreset == "SMALL_SET_DIVERSE")
         settings = ConformerGeneratorSettings::SMALL_SET_DIVERSE;
-    else if (pres == "MEDIUM_SET_DIVERSE")
+    else if (confGenPreset == "MEDIUM_SET_DIVERSE")
         settings = ConformerGeneratorSettings::MEDIUM_SET_DIVERSE;
-    else if (pres == "LARGE_SET_DIVERSE")
+    else if (confGenPreset == "LARGE_SET_DIVERSE")
         settings = ConformerGeneratorSettings::LARGE_SET_DIVERSE;
-    else if (pres == "SMALL_SET_DENSE")
+    else if (confGenPreset == "SMALL_SET_DENSE")
         settings = ConformerGeneratorSettings::SMALL_SET_DENSE;
-    else if (pres == "MEDIUM_SET_DENSE")
+    else if (confGenPreset == "MEDIUM_SET_DENSE")
         settings = ConformerGeneratorSettings::MEDIUM_SET_DENSE;
-    else if (pres == "LARGE_SET_DENSE")
+    else if (confGenPreset == "LARGE_SET_DENSE")
         settings = ConformerGeneratorSettings::LARGE_SET_DENSE;
     else 
         throwValidationError("conf-gen-preset");
-
-    confGenPreset = pres;
 }
 
 void ConfGenImpl::applyFragBuildPreset(const std::string& pres_str)
 {
-    std::string pres = pres_str;
-    boost::to_upper(pres);
-
-    if (pres == "FAST")
+    fragBuildPreset = boost::to_upper_copy(pres_str);
+    
+    if (fragBuildPreset == "FAST")
         settings.getFragmentBuildSettings() = FragmentConformerGeneratorSettings::FAST;
-    else if (pres == "THOROUGH")
+    else if (fragBuildPreset == "THOROUGH")
         settings.getFragmentBuildSettings() = FragmentConformerGeneratorSettings::THOROUGH;
     else
         throwValidationError("frag-build-preset");
-
-    fragBuildPreset = pres;
 }
 
 void ConfGenImpl::setSamplingMode(const std::string& mode_str)
 {
     using namespace CDPL::ConfGen;
-
-    std::string smpl_mode = mode_str;
-    boost::to_upper(smpl_mode);
-
-    if (smpl_mode == "AUTO")
+    using namespace CDPL;
+    
+    if (Internal::isEqualCI(mode_str, "AUTO"))
         settings.setSamplingMode(ConformerSamplingMode::AUTO);
-    else if (smpl_mode == "SYSTEMATIC")
+    else if (Internal::isEqualCI(mode_str, "SYSTEMATIC"))
         settings.setSamplingMode(ConformerSamplingMode::SYSTEMATIC);
-    else if (smpl_mode == "STOCHASTIC")
+    else if (Internal::isEqualCI(mode_str, "STOCHASTIC"))
         settings.setSamplingMode(ConformerSamplingMode::STOCHASTIC);
     else
         throwValidationError("mode");
@@ -687,15 +680,13 @@ void ConfGenImpl::setMaxNumConfs(std::size_t max_confs)
 void ConfGenImpl::setNitrogenEnumMode(const std::string& mode_str)
 {
     using namespace CDPL::ConfGen;
+    using namespace CDPL;
 
-    std::string uc_mode = mode_str;
-    boost::to_upper(uc_mode);
-
-    if (uc_mode == "NONE")
+    if (Internal::isEqualCI(mode_str, "NONE"))
         settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::NONE);
-    else if (uc_mode == "ALL")
+    else if (Internal::isEqualCI(mode_str, "ALL"))
         settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::ALL);
-    else if (uc_mode == "UNSPECIFIED")
+    else if (Internal::isEqualCI(mode_str, "UNSPECIFIED"))
         settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
     else
         throwValidationError("nitrogen-enum-mode");
@@ -730,9 +721,6 @@ void ConfGenImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
 
     if (!inputHandler)
@@ -743,9 +731,6 @@ void ConfGenImpl::setOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
-
     outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 
     if (!outputHandler)
@@ -755,9 +740,6 @@ void ConfGenImpl::setOutputFormat(const std::string& file_ext)
 void ConfGenImpl::setFailedOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    std::string lc_file_ext = file_ext;
-    boost::to_lower(lc_file_ext);
 
     failedOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 
