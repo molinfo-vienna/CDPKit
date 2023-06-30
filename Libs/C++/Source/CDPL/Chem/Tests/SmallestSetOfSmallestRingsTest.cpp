@@ -26,75 +26,41 @@
 #include <fstream>
 #include <algorithm>
 #include <functional>
-#include <set>
+#include <cstdlib>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/MolecularGraphProperties.hpp"
-#include "CDPL/Chem/AtomProperties.hpp"
-#include "CDPL/Chem/BondProperties.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
+
+#include "TestUtils.hpp"
 
 
 namespace
 {
-
-    std::size_t getUniqueAtomCount(const CDPL::Chem::FragmentList& frag_list)
-    {
-        using namespace CDPL;
-        using namespace Chem;
-
-        std::set<const Atom*> atoms;
-
-        for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), end = frag_list.getElementsEnd(); it != end; ++it) {
-            const Fragment& frag = *it;
-
-            for (Fragment::ConstAtomIterator a_it = frag.getAtomsBegin(), a_end = frag.getAtomsEnd(); a_it != a_end; ++a_it)
-                atoms.insert(&*a_it);
-        }
-
-        return atoms.size();
-    }
-
-    std::size_t getUniqueBondCount(const CDPL::Chem::FragmentList& frag_list)
-    {
-        using namespace CDPL;
-        using namespace Chem;
-
-        std::set<const Bond*> bonds;
-
-        for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), end = frag_list.getElementsEnd(); it != end; ++it) {
-            const Fragment& frag = *it;
-
-            for (Fragment::ConstBondIterator b_it = frag.getBondsBegin(),
-                     b_end = frag.getBondsEnd(); b_it != b_end; ++b_it)
-                bonds.insert(&*b_it);
-        }
-
-        return bonds.size();
-    }
-
+   
     void checkRingCount(const CDPL::Chem::FragmentList& frag_list, std::size_t size, std::size_t count)
     {
         using namespace CDPL;
         using namespace Chem;
 
-        BOOST_CHECK(std::size_t(std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
-                                              std::bind(std::equal_to<std::size_t>(), size, 
+        BOOST_CHECK(std::size_t(std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(),
+                                              std::bind(std::equal_to<std::size_t>(), size,
                                                         std::bind(&Fragment::getNumBonds, std::placeholders::_1)))) == count);
     }
-}
+} // namespace
 
 
 BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
 {
     using namespace CDPL;
     using namespace Chem;
-    
-    Molecule mol1, mol2;
+
+    BasicMolecule mol1, mol2;
 
     std::ifstream ifs1(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Fullerene2.jme").c_str());
     std::ifstream ifs2(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
@@ -105,7 +71,7 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     BOOST_CHECK(JMEMoleculeReader(ifs1).read(mol1));
     BOOST_CHECK(JMEMoleculeReader(ifs2).read(mol2));
 
-//-----
+    //-----
 
     SmallestSetOfSmallestRings sssr1;
 
@@ -121,7 +87,7 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     BOOST_CHECK(getUniqueAtomCount(sssr1) == mol1.getNumAtoms());
     BOOST_CHECK(getUniqueBondCount(sssr1) == mol1.getNumBonds());
 
-//-----
+    //-----
 
     SmallestSetOfSmallestRings sssr2(mol1);
 
@@ -133,7 +99,7 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     BOOST_CHECK(getUniqueAtomCount(sssr2) == mol1.getNumAtoms());
     BOOST_CHECK(getUniqueBondCount(sssr2) == mol1.getNumBonds());
 
-//-----
+    //-----
 
     sssr1.perceive(mol2);
 
@@ -142,10 +108,10 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr1, 5, 1);
     checkRingCount(sssr1, 6, 4);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr1) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT));
-    BOOST_CHECK(getUniqueBondCount(sssr1) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT));
+    BOOST_CHECK(getUniqueAtomCount(sssr1) == 18);
+    BOOST_CHECK(getUniqueBondCount(sssr1) == 22);
 
-//-----
+    //-----
 
     sssr2.perceive(mol2);
 
@@ -154,12 +120,12 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr2, 5, 1);
     checkRingCount(sssr2, 6, 4);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT));
-    BOOST_CHECK(getUniqueBondCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT));
+    BOOST_CHECK(getUniqueAtomCount(sssr2) == 18);
+    BOOST_CHECK(getUniqueBondCount(sssr2) == 22);
 
-//-----
+    //-----
 
-    Molecule mol3(mol1);
+    BasicMolecule mol3(mol1);
 
     mol3 += mol2;
 
@@ -170,12 +136,10 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr2, 5, 13);
     checkRingCount(sssr2, 6, 23);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT) 
-                + mol1.getNumAtoms());
-    BOOST_CHECK(getUniqueBondCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT) 
-                + mol1.getNumBonds());
+    BOOST_CHECK(getUniqueAtomCount(sssr2) == 18 + mol1.getNumAtoms());
+    BOOST_CHECK(getUniqueBondCount(sssr2) == 22 + mol1.getNumBonds());
 
-//-----
+    //-----
 
     Fragment frag1(mol3);
 
@@ -186,20 +150,18 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr2, 5, 13);
     checkRingCount(sssr2, 6, 23);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT) 
-                + mol1.getNumAtoms());
-    BOOST_CHECK(getUniqueBondCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT) 
-                + mol1.getNumBonds());
+    BOOST_CHECK(getUniqueAtomCount(sssr2) == 18 + mol1.getNumAtoms());
+    BOOST_CHECK(getUniqueBondCount(sssr2) == 22 + mol1.getNumBonds());
 
-//-----
+    //-----
 
-    Molecule mol4;
+    BasicMolecule mol4;
 
     sssr2.perceive(mol4);
 
     BOOST_CHECK(sssr2.getSize() == 0);
 
-//-----
+    //-----
 
     Fragment frag2;
 
@@ -207,19 +169,19 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
 
     BOOST_CHECK(sssr2.getSize() == 0);
 
-//-----
+    //-----
 
     SmallestSetOfSmallestRings sssr3(mol4);
 
     BOOST_CHECK(sssr3.getSize() == 0);
 
-//-----
+    //-----
 
     SmallestSetOfSmallestRings sssr4(frag2);
 
     BOOST_CHECK(sssr4.getSize() == 0);
 
-//-----
+    //-----
 
     frag2 += mol1;
     frag2 += mol2;
@@ -231,17 +193,17 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr2, 5, 13);
     checkRingCount(sssr2, 6, 23);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT) 
-                + mol1.getNumAtoms());
-    BOOST_CHECK(getUniqueBondCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT) 
-                + mol1.getNumBonds());
+    BOOST_CHECK(getUniqueAtomCount(sssr2) == 18 + mol1.getNumAtoms());
+    BOOST_CHECK(getUniqueBondCount(sssr2) == 22 + mol1.getNumBonds());
 
-//-----
+    //-----
 
     BOOST_CHECK(frag2.getNumAtoms() == mol1.getNumAtoms() + mol2.getNumAtoms());
 
-    for (std::size_t i = 0; i < frag2.getNumAtoms(); ) {
-        if (!frag2.getAtom(i).getProperty<bool>(AtomProperty::IN_RING))
+    setRingFlags(frag2, true);
+    
+    for (std::size_t i = 0; i < frag2.getNumAtoms();) {
+        if (!getRingFlag(frag2.getAtom(i)))
             frag2.removeAtom(i);
         else
             i++;
@@ -256,12 +218,10 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr2, 5, 13);
     checkRingCount(sssr2, 6, 23);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT) 
-                + mol1.getNumAtoms());
-    BOOST_CHECK(getUniqueBondCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT) 
-                + mol1.getNumBonds());
+    BOOST_CHECK(getUniqueAtomCount(sssr2) == 18 + mol1.getNumAtoms());
+    BOOST_CHECK(getUniqueBondCount(sssr2) == 22 + mol1.getNumBonds());
 
-//-----
+    //-----
 
     frag2.clear();
 
@@ -270,8 +230,10 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
 
     BOOST_CHECK(frag2.getNumBonds() == mol1.getNumBonds() + mol2.getNumBonds());
 
-    for (std::size_t i = 0; i < frag2.getNumBonds(); ) {
-        if (!frag2.getBond(i).getProperty<bool>(BondProperty::IN_RING))
+    setRingFlags(frag2, true);
+
+    for (std::size_t i = 0; i < frag2.getNumBonds();) {
+        if (!getRingFlag(frag2.getBond(i)))
             frag2.removeBond(i);
         else
             i++;
@@ -286,12 +248,10 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     checkRingCount(sssr2, 5, 13);
     checkRingCount(sssr2, 6, 23);
 
-    BOOST_CHECK(getUniqueAtomCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_ATOM_COUNT) 
-                + mol1.getNumAtoms());
-    BOOST_CHECK(getUniqueBondCount(sssr2) == mol2.getProperty<std::size_t>(MolecularGraphProperty::RING_BOND_COUNT) 
-                + mol1.getNumBonds());
+    BOOST_CHECK(getUniqueAtomCount(sssr2) == 18 + mol1.getNumAtoms());
+    BOOST_CHECK(getUniqueBondCount(sssr2) == 22 + mol1.getNumBonds());
 
-//-----
+    //-----
 
     frag2.clear();
 
@@ -322,7 +282,7 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
     BOOST_CHECK(getUniqueAtomCount(sssr4) == mol1.getNumAtoms());
     BOOST_CHECK(getUniqueBondCount(sssr4) == mol1.getNumBonds());
 
-//-----
+    //-----
 
     frag2.clear();
 
@@ -337,7 +297,7 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
 
     BOOST_CHECK(sssr4.getSize() == 0);
 
-//-----
+    //-----
 
     frag2.clear();
 
@@ -354,14 +314,16 @@ BOOST_AUTO_TEST_CASE(SmallestSetOfSmallestRingsTest)
 
     BOOST_CHECK(sssr4.getSize() == 0);
 
-//-----
+    //-----
 
     mol4.addAtom();
     mol4.addAtom();
     mol4.addAtom();
 
     mol4.addBond(0, 1);
-    mol4.addBond(0, 1);
+
+    BOOST_CHECK(&mol4.addBond(0, 1) == &mol4.getBond(0));
+    
     mol4.addBond(0, 0);
     mol4.addBond(1, 1);
     mol4.addBond(0, 2);

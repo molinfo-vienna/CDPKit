@@ -24,53 +24,15 @@
 
 #include <string>
 #include <fstream>
-#include <set>
+#include <cstdlib>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Chem/ComponentSet.hpp"
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 
-
-namespace
-{
-
-    std::size_t getUniqueAtomCount(const CDPL::Chem::FragmentList& frag_list)
-    {
-        using namespace CDPL;
-        using namespace Chem;
-
-        std::set<const Atom*> atoms;
-
-        for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), end = frag_list.getElementsEnd(); it != end; ++it) {
-            const Fragment& frag = *it;
-
-            for (Fragment::ConstAtomIterator a_it = frag.getAtomsBegin(), a_end = frag.getAtomsEnd(); a_it != a_end; ++a_it)
-                atoms.insert(&*a_it);
-        }
-
-        return atoms.size();
-    }
-
-    std::size_t getUniqueBondCount(const CDPL::Chem::FragmentList& frag_list)
-    {
-        using namespace CDPL;
-        using namespace Chem;
-
-        std::set<const Bond*> bonds;
-
-        for (FragmentList::ConstElementIterator it = frag_list.getElementsBegin(), end = frag_list.getElementsEnd(); it != end; ++it) {
-            const Fragment& frag = *it;
-
-            for (Fragment::ConstBondIterator b_it = frag.getBondsBegin(), b_end = frag.getBondsEnd(); b_it != b_end; ++b_it)
-                bonds.insert(&*b_it);
-        }
-
-        return bonds.size();
-    }
-}
+#include "TestUtils.hpp"
 
 
 BOOST_AUTO_TEST_CASE(ComponentSetTest)
@@ -78,7 +40,7 @@ BOOST_AUTO_TEST_CASE(ComponentSetTest)
     using namespace CDPL;
     using namespace Chem;
 
-    Molecule mol1, mol2, mol3;
+    BasicMolecule mol1, mol2, mol3;
 
     std::ifstream ifs1(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
     std::ifstream ifs2(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Clique8.jme").c_str());
@@ -266,7 +228,7 @@ BOOST_AUTO_TEST_CASE(ComponentSetTest)
 
 //-----
 
-    Molecule mol4;
+    BasicMolecule mol4;
 
     component_set2.perceive(mol4);
 

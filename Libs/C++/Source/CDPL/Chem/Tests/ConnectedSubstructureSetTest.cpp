@@ -24,11 +24,12 @@
 
 #include <string>
 #include <fstream>
+#include <cstdlib>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Chem/ConnectedSubstructureSet.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 
@@ -38,7 +39,7 @@ BOOST_AUTO_TEST_CASE(ConnectedSubstructureSetTest)
     using namespace CDPL;
     using namespace Chem;
 
-    Molecule mol1, mol2;
+    BasicMolecule mol1, mol2;
 
     std::ifstream ifs1(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Cis-14-Dimethylcyclohexane1.jme").c_str());
 
@@ -318,7 +319,7 @@ BOOST_AUTO_TEST_CASE(ConnectedSubstructureSetTest)
 
     mol2 = mol1;
 
-    Molecule mol3(mol1);
+    BasicMolecule mol3(mol1);
 
     BOOST_CHECK(mol1.getNumAtoms() == 4);
     BOOST_CHECK(mol1.getNumBonds() == 4);

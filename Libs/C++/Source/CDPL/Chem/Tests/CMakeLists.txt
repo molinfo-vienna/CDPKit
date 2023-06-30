@@ -73,10 +73,10 @@ SET(test-suite_SRCS
 
     #HashCodeCalculatorTest.cpp 
     
-    #CompleteRingSetTest.cpp 
-    #SmallestSetOfSmallestRingsTest.cpp 
-    #ConnectedSubstructureSetTest.cpp 
-    #ComponentSetTest.cpp 
+    CompleteRingSetTest.cpp 
+    SmallestSetOfSmallestRingsTest.cpp 
+    ConnectedSubstructureSetTest.cpp 
+    ComponentSetTest.cpp 
 
     #AtomFunctionsTest.cpp
     #BondFunctionsTest.cpp

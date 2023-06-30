@@ -109,7 +109,7 @@ void Chem::CyclicSubstructure::findRingAtomsAndBonds(const Atom* atom)
     for (Atom::ConstAtomIterator a_it = atom->getAtomsBegin(), a_end = atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
         const Bond& nbr_bond = *b_it;
 
-        if (&nbr_bond == prev_bond || !molGraph->containsBond(nbr_bond))
+        if (&nbr_bond == prev_bond || !molGraph->containsBond(nbr_bond) || &nbr_bond.getBegin() == &nbr_bond.getEnd())
             continue;
 
         const Atom& nbr_atom = *a_it;

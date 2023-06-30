@@ -85,6 +85,9 @@ void Chem::CompleteRingSet::init(const MolecularGraph& molgraph)
         const Atom& atom1 = bond.getBegin();
         const Atom& atom2 = bond.getEnd();
 
+        if (&atom1 == &atom2)
+            continue;
+        
         Node* node1 = &nodes[molgraph.getAtomIndex(atom1)];
         Node* node2 = &nodes[molgraph.getAtomIndex(atom2)];
         
