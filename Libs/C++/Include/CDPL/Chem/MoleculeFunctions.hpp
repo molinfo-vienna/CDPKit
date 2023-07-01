@@ -47,7 +47,7 @@ namespace CDPL
         /**
          * \brief Removes all explicit hydrogen atoms from the molecule \a mol.
          * \param mol The molecule for which to remove all explicit hydrogen atoms.
-         * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero,
+         * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected,
          *                          \c false if the property shall be left unchanged.
          * \return \c false if \a mol was not altered, \c true otherwise.
          */
@@ -57,7 +57,7 @@ namespace CDPL
          * \brief Removes all explicit ordinary hydrogen atoms from the molecule \a mol.
          * \param mol The molecule for which to remove all explicit ordinary hydrogen atoms.
          * \param flags Specifies the set of atom properties to check (see namespace Chem::AtomPropertyFlag).
-         * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero,
+         * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected,
          *                          \c false if the property shall be left unchanged.
          * \return \c false if \a mol was not altered, \c true otherwise.
          * \see Chem::isOrdinaryHydrogen
