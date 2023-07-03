@@ -57,7 +57,7 @@ namespace CDPL
             static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS =
                 BondPropertyFlag::ORDER;
 
-            DefaultMultiConfMoleculeInputProcessor(bool comp_names = false, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
+            DefaultMultiConfMoleculeInputProcessor(bool comp_names = true, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
 
             bool init(MolecularGraph& tgt_molgraph) const;
 

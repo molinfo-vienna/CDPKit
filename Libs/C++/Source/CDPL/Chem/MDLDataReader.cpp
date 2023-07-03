@@ -333,7 +333,7 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
     MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
 
     if (!mc_input_proc) {
-           if (!hasCoordinates(*confTargetMolecule, 3))
+	if (!hasCoordinates(*confTargetMolecule, 3))
             return true;
         
         while (hasMoreData(is)) {
