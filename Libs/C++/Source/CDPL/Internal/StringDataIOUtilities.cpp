@@ -151,12 +151,12 @@ std::string& Internal::readString(std::istream& is, std::size_t field_size, std:
     bool skip_ws = trim;
 
     for (std::size_t i = 0; i < field_size && is.get(c) && c != eol_char; i++) {
-        if (skip_ws && std::isspace(c, std::locale::classic()))
+        if (skip_ws && std::isspace(static_cast<unsigned char>(c)))
             continue;
 
         str.push_back(c);    
 
-        if (trim && !std::isspace(c, std::locale::classic()))
+        if (trim && !std::isspace(static_cast<unsigned char>(c)))
             ws_erase_beg = str.size(); 
 
         skip_ws = false;
