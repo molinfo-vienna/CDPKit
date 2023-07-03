@@ -117,7 +117,7 @@ namespace CDPL
             char  c           = 0;
 
             for (std::size_t i = 0; i < FieldSize && is.get(c) && c != eol_char; i++) {
-                if (std::isspace(static_cast<unsigned char>(c)))
+                if (std::isspace(c, std::locale::classic()))
                     continue;
 
                 *buf_end_ptr++ = c;
