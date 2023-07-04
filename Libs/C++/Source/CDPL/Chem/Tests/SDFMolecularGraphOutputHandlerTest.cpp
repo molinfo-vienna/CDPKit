@@ -1,5 +1,5 @@
 /* 
- * MOLMolecularGraphOutputHandlerTest.cpp 
+ * SDFMolecularGraphOutputHandlerTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,58 +30,77 @@
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Chem/JMEMolecularGraphOutputHandler.hpp"
-#include "CDPL/Chem/DataFormats.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
-#include "CDPL/Chem/MOLMoleculeReader.hpp"
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphProperties.hpp"
+#include "CDPL/Chem/SDFMoleculeReader.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataWriter.hpp"
-#include "CDPL/Base/IntTypes.hpp"
 
 
-BOOST_AUTO_TEST_CASE(MOLMolecularGraphOutputHandlerTest)
+BOOST_AUTO_TEST_CASE(SDFMolecularGraphOutputHandlerTest)
 {
     using namespace CDPL;
     using namespace Chem;
     using namespace Base;
 
-    Molecule mol1;
+    BasicMolecule mol1;
     std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
     BOOST_CHECK(ifs);
     BOOST_CHECK(JMEMoleculeReader(ifs).read(mol1));
 
-    const DataOutputHandler<MolecularGraph>* handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Chem::DataFormat::MOL);
+    const DataOutputHandler<MolecularGraph>::SharedPointer handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Chem::DataFormat::SDF);
 
     BOOST_CHECK(handler);
 
-    BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::MOL);
+    BOOST_CHECK(handler->getDataFormat() == Chem::DataFormat::SDF);
 
-    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByName("mol") == handler);
-    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("mol") == handler);
-    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("chemical/x-mdl-molfile") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByName("sdf") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("sdf") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("sd") == handler);
+    BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("chemical/x-mdl-sdfile") == handler);
 
-    std::ostringstream oss;
+    std::stringstream oss;
 
     BOOST_CHECK(oss);
 
     DataWriter<MolecularGraph>::SharedPointer writer_ptr(handler->createWriter(oss));
 
-    Molecule mol2;
+    BasicMolecule mol2;
 
+    perceiveComponents(mol1, false);
+    calcImplicitHydrogenCounts(mol1, false);
+    perceiveHybridizationStates(mol1, false);
+    perceiveSSSR(mol1, false);
+    setRingFlags(mol1, false);
+    setAromaticityFlags(mol1, false);
+    calcCIPPriorities(mol1, false);
+    calcAtomCIPConfigurations(mol1, false);
+    calcBondCIPConfigurations(mol1, false);
+ 
     BOOST_CHECK(writer_ptr);
     BOOST_CHECK(writer_ptr->write(mol1));
 
     std::istringstream iss(oss.str());
 
     BOOST_CHECK(iss);
-    BOOST_CHECK(MOLMoleculeReader(iss).read(mol2));
+    BOOST_CHECK(SDFMoleculeReader(iss).read(mol2));
+
+    perceiveComponents(mol2, false);
+    calcImplicitHydrogenCounts(mol2, false);
+    perceiveHybridizationStates(mol2, false);
+    perceiveSSSR(mol2, false);
+    setRingFlags(mol2, false);
+    setAromaticityFlags(mol2, false);
+    calcCIPPriorities(mol2, false);
+    calcAtomCIPConfigurations(mol2, false);
+    calcBondCIPConfigurations(mol2, false);
 
     BOOST_CHECK(mol1.getNumAtoms() == mol2.getNumAtoms());
     BOOST_CHECK(mol1.getNumBonds() == mol2.getNumBonds());
 
-    BOOST_CHECK(mol1.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE) == 
-                mol2.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE));
+    BOOST_CHECK(calcHashCode(mol1) == calcHashCode(mol2));
 }
 
