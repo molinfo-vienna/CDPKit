@@ -77,5 +77,5 @@ bool Internal::isEqualCI(const std::string& str1, const std::string& str2)
         return false;
 
     return std::equal(str1.begin(), str1.end(), str2.begin(),
-                      [](unsigned char c1, unsigned char c2) { return (std::tolower(c1, std::locale::classic()) == std::tolower(c2, std::locale::classic())); });
+                      [](char c1, char c2) { return (std::tolower(c1, std::locale::classic()) == std::tolower(c2, std::locale::classic())); });
 }
