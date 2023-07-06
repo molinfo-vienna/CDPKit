@@ -85,7 +85,7 @@ namespace CDPL
         CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);
 
 
-        CDPL_CHEM_API std::size_t buildAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true);
+        CDPL_CHEM_API std::size_t createAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true);
 
 
         CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append = false);

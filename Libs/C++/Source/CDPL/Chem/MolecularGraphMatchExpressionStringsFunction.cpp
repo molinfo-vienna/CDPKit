@@ -34,7 +34,7 @@
 using namespace CDPL; 
 
 
-void Chem::buildMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite)
+void Chem::generateMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite)
 {
     std::string expr_str;
 
@@ -46,7 +46,7 @@ void Chem::buildMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite)
         if (!overwrite && hasMatchExpressionString(atom))
             continue;
 
-        buildMatchExpressionString(atom, molgraph, expr_str);
+        generateMatchExpressionString(atom, molgraph, expr_str);
         setMatchExpressionString(atom, expr_str);
 
         expr_str.clear();
@@ -60,7 +60,7 @@ void Chem::buildMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite)
         if (!overwrite && hasMatchExpressionString(bond))
             continue;
 
-        buildMatchExpressionString(bond, molgraph, expr_str);
+        generateMatchExpressionString(bond, molgraph, expr_str);
         setMatchExpressionString(bond, expr_str);
 
         expr_str.clear();

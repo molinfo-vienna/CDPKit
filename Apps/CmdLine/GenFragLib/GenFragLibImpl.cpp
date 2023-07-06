@@ -144,7 +144,7 @@ private:
                 logRecordStream << std::endl << "- Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;
 
             prepareForConformerGeneration(molecule);
-            buildFragmentLinkBondMask(molecule, fragLinkBondMask);
+            createFragmentLinkBondMask(molecule, fragLinkBondMask);
 
             splitIntoFragments(molecule, fragList, fragLinkBondMask);
 

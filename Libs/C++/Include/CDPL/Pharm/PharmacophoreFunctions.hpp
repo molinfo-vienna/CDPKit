@@ -49,7 +49,7 @@ namespace CDPL
         class FeatureMapping;
         class FeatureContainer;
 
-        CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
+        CDPL_PHARM_API void generateInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
 
         CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
                                                    const Chem::Atom3DCoordinatesFunction& coords_func,

@@ -56,7 +56,7 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
     using namespace boost;
     using namespace CDPL;
     
-    python::def("buildInteractionPharmacophore", &Pharm::buildInteractionPharmacophore, 
+    python::def("generateInteractionPharmacophore", &Pharm::generateInteractionPharmacophore, 
                 (python::arg("pharm"), python::arg("iactions"), python::arg("append") = false));
     python::def("createExclusionVolumes", &createExclusionVolumesWrapper7,
                 (python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), 

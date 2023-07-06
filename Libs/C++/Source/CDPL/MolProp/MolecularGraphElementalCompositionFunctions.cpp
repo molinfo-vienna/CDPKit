@@ -37,7 +37,7 @@
 using namespace CDPL; 
 
 
-void MolProp::buildMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula)
+void MolProp::generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula)
 {
     using namespace Chem;
     
@@ -102,7 +102,7 @@ void MolProp::buildMolecularFormula(const Chem::MolecularGraph& molgraph, std::s
     formula = formula_os.str();
 }
 
-void MolProp::buildElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append)
+void MolProp::generateElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append)
 {
     using namespace Chem;
     

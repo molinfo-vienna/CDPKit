@@ -132,7 +132,7 @@ Pharm.prepareForPharmacophoreGeneration(mol)
 Pharm.DefaultPharmacophoreGenerator(mol, ph4)
 
 # print the number of features and feature composition
-print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.buildFeatureTypeHistogramString(ph4)))
+print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ph4)))
 ```
 
 ### Further Exploration

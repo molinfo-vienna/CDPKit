@@ -44,7 +44,7 @@
 using namespace CDPL; 
 
 
-std::size_t ConfGen::buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset)
+std::size_t ConfGen::createFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset)
 {
     using namespace Chem;
 
@@ -67,7 +67,7 @@ std::size_t ConfGen::buildFragmentLinkBondMask(const Chem::MolecularGraph& molgr
     return num_lnk_bonds;
 }
 
-std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 
+std::size_t ConfGen::createRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 
                                             bool het_h_rotors, bool reset)
 {
     using namespace Chem;
@@ -91,7 +91,7 @@ std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph
     return num_rot_bonds;
 }
 
-std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask, 
+std::size_t ConfGen::createRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask, 
                                             Util::BitSet& bond_mask, bool het_h_rotors, bool reset)
 {
     using namespace Chem;

@@ -82,9 +82,9 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasMatchExpression(const MolecularGraph& molgraph);
 
-        CDPL_CHEM_API MatchExpression<MolecularGraph>::SharedPointer buildMatchExpression(const MolecularGraph& molgraph);
+        CDPL_CHEM_API MatchExpression<MolecularGraph>::SharedPointer generateMatchExpression(const MolecularGraph& molgraph);
 
-        CDPL_CHEM_API MatchExpression<MolecularGraph>::SharedPointer buildMatchExpression(MolecularGraph& molgraph, bool overwrite);
+        CDPL_CHEM_API MatchExpression<MolecularGraph>::SharedPointer generateMatchExpression(MolecularGraph& molgraph, bool overwrite);
 
 
         CDPL_CHEM_API const FragmentList::SharedPointer& getRings(const MolecularGraph& molgraph);
@@ -334,15 +334,15 @@ namespace CDPL
         CDPL_CHEM_API bool hasMOL2ChargeType(const MolecularGraph& molgraph);
 
 
-        CDPL_CHEM_API void buildAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
+        CDPL_CHEM_API void generateAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-        CDPL_CHEM_API void buildIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
+        CDPL_CHEM_API void generateIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-        CDPL_CHEM_API void buildBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
+        CDPL_CHEM_API void generateBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-        CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
+        CDPL_CHEM_API void generateBondElectronMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-        CDPL_CHEM_API void buildBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
+        CDPL_CHEM_API void generateBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
 
         CDPL_CHEM_API const Math::ULMatrix::SharedPointer& getTopologicalDistanceMatrix(const MolecularGraph& molgraph);
@@ -471,9 +471,9 @@ namespace CDPL
         CDPL_CHEM_API void setBondMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr,
                                                    bool overwrite);
 
-        CDPL_CHEM_API void buildMatchExpressions(MolecularGraph& molgraph, bool overwrite);
+        CDPL_CHEM_API void generateMatchExpressions(MolecularGraph& molgraph, bool overwrite);
 
-        CDPL_CHEM_API void buildMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite);
+        CDPL_CHEM_API void generateMatchExpressionStrings(MolecularGraph& molgraph, bool overwrite);
 
         CDPL_CHEM_API void initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite);
 

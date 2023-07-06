@@ -35,7 +35,7 @@ void Chem::initSubstructureSearchQuery(MolecularGraph& molgraph, bool overwrite)
     initSubstructureSearchTarget(molgraph, overwrite);
 
     perceiveComponentGroups(molgraph, overwrite);
-    buildMatchExpressions(molgraph, overwrite);
+    generateMatchExpressions(molgraph, overwrite);
 }
 
 void Chem::initSubstructureSearchTarget(MolecularGraph& molgraph, bool overwrite)

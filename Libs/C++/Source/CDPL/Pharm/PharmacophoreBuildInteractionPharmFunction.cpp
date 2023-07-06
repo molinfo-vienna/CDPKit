@@ -37,7 +37,7 @@
 using namespace CDPL; 
 
 
-void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append)
+void Pharm::generateInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append)
 {
     if (!append)
         pharm.clear();

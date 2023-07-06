@@ -44,7 +44,7 @@
 using namespace CDPL; 
 
 
-bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
+bool Pharm::checkForExclusionVolumeClashes(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
                                       const Chem::Atom3DCoordinatesFunction& coords_func, 
                                       const Math::Matrix4D& xform, double vdw_factor)
 {

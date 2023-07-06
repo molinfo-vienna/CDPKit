@@ -89,7 +89,7 @@ namespace
     MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxAtomMappingID, CDPL::Chem::Reaction&)
     MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxComponentGroupID, CDPL::Chem::Reaction&)
 
-    MAKE_FUNCTION_WRAPPER1(CDPL::Chem::MatchExpression<CDPL::Chem::Reaction>::SharedPointer, buildMatchExpression, CDPL::Chem::Reaction&)
+    MAKE_FUNCTION_WRAPPER1(CDPL::Chem::MatchExpression<CDPL::Chem::Reaction>::SharedPointer, generateMatchExpression, CDPL::Chem::Reaction&)
     MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveComponentGroups, CDPL::Chem::Reaction&)
     MAKE_FUNCTION_WRAPPER1(CDPL::Chem::AtomMapping::SharedPointer, perceiveAtomMapping, CDPL::Chem::Reaction&)
 
@@ -117,7 +117,7 @@ void CDPLPythonChem::exportReactionFunctions()
     python::def("setAtomMatchConstraints", &Chem::setAtomMatchConstraints, (python::arg("rxn"), python::arg("constr"), python::arg("overwrite")));
     python::def("setBondMatchConstraints", &Chem::setBondMatchConstraints, (python::arg("rxn"), python::arg("constr"), python::arg("overwrite")));
     python::def("setComponentMatchConstraints", &Chem::setComponentMatchConstraints, (python::arg("rxn"), python::arg("constr"), python::arg("overwrite")));
-    python::def("buildMatchExpressions", &Chem::buildMatchExpressions, (python::arg("rxn"), python::arg("overwrite")));
+    python::def("generateMatchExpressions", &Chem::generateMatchExpressions, (python::arg("rxn"), python::arg("overwrite")));
     python::def("initSubstructureSearchQuery", &Chem::initSubstructureSearchQuery, (python::arg("rxn"), python::arg("overwrite")));
     python::def("initSubstructureSearchTarget", &Chem::initSubstructureSearchTarget, (python::arg("rxn"), python::arg("overwrite")));
     
@@ -127,14 +127,14 @@ void CDPLPythonChem::exportReactionFunctions()
     python::def("setMatchConstraints", &Chem::setMatchConstraints, (python::arg("rxn"), python::arg("constr")));
     python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("rxn"));
 
-    python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
+    python::def("generateMatchExpression", &generateMatchExpressionWrapper1,
                 python::arg("rxn"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveAtomMapping", &perceiveAtomMappingWrapper1,
                 python::arg("rxn"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveComponentGroups", &perceiveComponentGroupsWrapper1,
                 python::arg("rxn"), python::with_custodian_and_ward_postcall<0, 1>());
 
-    python::def("buildMatchExpression", static_cast<Chem::MatchExpression<Chem::Reaction>::SharedPointer (*)(Chem::Reaction&, bool)>(&Chem::buildMatchExpression),
+    python::def("generateMatchExpression", static_cast<Chem::MatchExpression<Chem::Reaction>::SharedPointer (*)(Chem::Reaction&, bool)>(&Chem::generateMatchExpression),
                 (python::arg("rxn"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveAtomMapping", static_cast<Chem::AtomMapping::SharedPointer (*)(Chem::Reaction&, bool)>(&Chem::perceiveAtomMapping),
                 (python::arg("rxn"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());

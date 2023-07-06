@@ -68,7 +68,7 @@ def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, appen
 # \param reset 
 # \return 
 #
-def buildAtomTypeMask(cntnr: AtomContainer, mask: CDPL.Util.BitSet, type: int, reset: bool = True) -> int: pass
+def createAtomTypeMask(cntnr: AtomContainer, mask: CDPL.Util.BitSet, type: int, reset: bool = True) -> int: pass
 
 ##
 # \brief 

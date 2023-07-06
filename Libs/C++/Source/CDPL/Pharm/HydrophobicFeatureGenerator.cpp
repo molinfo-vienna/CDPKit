@@ -188,7 +188,7 @@ void Pharm::HydrophobicFeatureGenerator::init(const Chem::MolecularGraph& molgra
 
     tmpAtomMask.resize(num_atoms);
 
-    buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+    createAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
 
     getAtomHydrophobicities();
 }
@@ -259,7 +259,7 @@ void Pharm::HydrophobicFeatureGenerator::genGroupFeatures(Pharmacophore& pharm)
         if (num_hvy_bonds < 3 || featureAtoms.empty()) 
             continue;
 
-        buildAtomMask(featureAtoms, tmpAtomMask);
+        createAtomMask(featureAtoms, tmpAtomMask);
 
         procAtomMask |= tmpAtomMask;
 
@@ -454,7 +454,7 @@ bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment&
     std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
                    std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
 
-    buildAtomMask(featureAtoms, tmpAtomMask);
+    createAtomMask(featureAtoms, tmpAtomMask);
 
     procAtomMask |= tmpAtomMask;
 
@@ -637,7 +637,7 @@ void Pharm::HydrophobicFeatureGenerator::getAtomHydrophobicities()
         atomHydTable[i] = MolProp::getHydrophobicity(molGraph->getAtom(i));
 }
 
-void Pharm::HydrophobicFeatureGenerator::buildAtomMask(const AtomList& alist, Util::BitSet& mask) const
+void Pharm::HydrophobicFeatureGenerator::createAtomMask(const AtomList& alist, Util::BitSet& mask) const
 {
     mask.reset();
 

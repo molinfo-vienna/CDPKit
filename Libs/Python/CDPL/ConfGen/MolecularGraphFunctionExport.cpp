@@ -37,13 +37,13 @@ void CDPLPythonConfGen::exportMolecularGraphFunctions()
     using namespace boost;
     using namespace CDPL;
 
-    python::def("buildFragmentLinkBondMask", &ConfGen::buildFragmentLinkBondMask, 
+    python::def("createFragmentLinkBondMask", &ConfGen::createFragmentLinkBondMask, 
                 (python::arg("molgraph"), python::arg("bond_mask"), python::arg("reset") = true));
-    python::def("buildRotatableBondMask", 
-                static_cast<std::size_t (*)(const Chem::MolecularGraph&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
+    python::def("createRotatableBondMask", 
+                static_cast<std::size_t (*)(const Chem::MolecularGraph&, Util::BitSet&, bool, bool)>(&ConfGen::createRotatableBondMask), 
                 (python::arg("molgraph"), python::arg("bond_mask"), python::arg("het_h_rotors"), python::arg("reset") = true));
-    python::def("buildRotatableBondMask", 
-                static_cast<std::size_t (*)(const Chem::MolecularGraph&, const Util::BitSet&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
+    python::def("createRotatableBondMask", 
+                static_cast<std::size_t (*)(const Chem::MolecularGraph&, const Util::BitSet&, Util::BitSet&, bool, bool)>(&ConfGen::createRotatableBondMask), 
                 (python::arg("molgraph"), python::arg("excl_bond_mask"), python::arg("bond_mask"), python::arg("het_h_rotors"), 
                  python::arg("reset") = true));
     python::def("getRotatableBondCount", &ConfGen::getRotatableBondCount, (python::arg("molgraph"), python::arg("het_h_rotors")));

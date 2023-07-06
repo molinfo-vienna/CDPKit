@@ -88,7 +88,7 @@ void MolProp::calcMassComposition(const Chem::MolecularGraph& molgraph, MassComp
         it->second /= mass;
 }
 
-void MolProp::buildMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp_str)
+void MolProp::generateMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp_str)
 {
     using namespace Chem;
     

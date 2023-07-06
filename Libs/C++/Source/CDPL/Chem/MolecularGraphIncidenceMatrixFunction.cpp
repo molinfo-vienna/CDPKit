@@ -31,7 +31,7 @@
 using namespace CDPL; 
 
 
-void Chem::buildIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
+void Chem::generateIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
     mtx.resize(molgraph.getNumAtoms(), molgraph.getNumBonds());
     mtx.clear();

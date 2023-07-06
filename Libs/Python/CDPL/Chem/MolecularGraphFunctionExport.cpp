@@ -99,7 +99,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("constr"), python::arg("overwrite")));
     python::def("setBondMatchConstraints", &Chem::setBondMatchConstraints, 
                 (python::arg("molgraph"), python::arg("constr"), python::arg("overwrite")));
-    python::def("buildMatchExpressions", &Chem::buildMatchExpressions, 
+    python::def("generateMatchExpressions", &Chem::generateMatchExpressions, 
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("initSubstructureSearchQuery", &Chem::initSubstructureSearchQuery, 
                 (python::arg("molgraph"), python::arg("overwrite")));
@@ -153,7 +153,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("calcBondCIPConfigurations", &Chem::calcBondCIPConfigurations,
                 (python::arg("molgraph"), python::arg("overwrite")));
-    python::def("buildMatchExpressionStrings", &Chem::buildMatchExpressionStrings, 
+    python::def("generateMatchExpressionStrings", &Chem::generateMatchExpressionStrings, 
                 (python::arg("molgraph"), python::arg("overwrite")));
     python::def("setAromaticityFlags", &Chem::setAromaticityFlags, 
                 (python::arg("molgraph"), python::arg("overwrite")));
@@ -177,10 +177,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
                 (python::arg("molgraph"), python::arg("frag_list"), python::arg("split_bond_mask"), 
                  python::arg("append") = false));
 
-    python::def("buildMatchExpression", static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::buildMatchExpression),
+    python::def("generateMatchExpression", static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::generateMatchExpression),
                  python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("buildMatchExpression", 
-                static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::buildMatchExpression),
+    python::def("generateMatchExpression", 
+                static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::generateMatchExpression),
                 (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveComponentGroups", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveComponentGroups),
                  python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
@@ -238,15 +238,15 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
      python::def("extractReactionCenter", &Chem::extractReactionCenter, 
                 (python::arg("molgraph"), python::arg("rxn_center")),
                 python::with_custodian_and_ward<2, 1>());
-    python::def("buildAdjacencyMatrix", &Chem::buildAdjacencyMatrix,
+    python::def("generateAdjacencyMatrix", &Chem::generateAdjacencyMatrix,
                 (python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildIncidenceMatrix", &Chem::buildIncidenceMatrix,
+    python::def("generateIncidenceMatrix", &Chem::generateIncidenceMatrix,
                 (python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildBondMatrix", &Chem::buildBondMatrix, 
+    python::def("generateBondMatrix", &Chem::generateBondMatrix, 
                 (python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildBondAtomTypeMatrix", &Chem::buildBondAtomTypeMatrix, 
+    python::def("generateBondAtomTypeMatrix", &Chem::generateBondAtomTypeMatrix, 
                 (python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildBondElectronMatrix", &Chem::buildBondElectronMatrix, 
+    python::def("generateBondElectronMatrix", &Chem::generateBondElectronMatrix, 
                 (python::arg("molgraph"), python::arg("mtx")));
 
     python::def("perceivePiElectronSystems", static_cast<Chem::ElectronSystemList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceivePiElectronSystems),

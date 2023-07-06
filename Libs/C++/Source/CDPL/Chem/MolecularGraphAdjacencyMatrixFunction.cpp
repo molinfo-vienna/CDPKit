@@ -31,7 +31,7 @@
 using namespace CDPL; 
 
 
-void Chem::buildAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
+void Chem::generateAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
     std::size_t num_atoms = molgraph.getNumAtoms();
 

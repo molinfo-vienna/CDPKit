@@ -44,7 +44,7 @@ double Descr::calcRandicIndex(const Chem::MolecularGraph& molgraph)
     using namespace Chem;
     
     Util::BitSet h_mask(molgraph.getNumAtoms());
-    buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    createAtomTypeMask(molgraph, h_mask, AtomType::H);
 
     double index = 0.0;
 

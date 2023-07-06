@@ -45,7 +45,7 @@ def calcLogS(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
 # \param molgraph 
 # \return 
 #
-def buildMolecularFormula(molgraph: CDPL.Chem.MolecularGraph) -> object: pass
+def generateMolecularFormula(molgraph: CDPL.Chem.MolecularGraph) -> object: pass
 
 ##
 # \brief 
@@ -59,7 +59,7 @@ def getRuleOfFiveScore(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 # \param molgraph 
 # \return 
 #
-def buildMassCompositionString(molgraph: CDPL.Chem.MolecularGraph) -> object: pass
+def generateMassCompositionString(molgraph: CDPL.Chem.MolecularGraph) -> object: pass
 
 ##
 # \brief 
@@ -67,7 +67,7 @@ def buildMassCompositionString(molgraph: CDPL.Chem.MolecularGraph) -> object: pa
 # \param molgraph 
 # \param hist 
 #
-def buildElementHistogram(arg1: CDPL.Chem.MolecularGraph, molgraph: ElementHistogram, hist: bool) -> None: pass
+def generateElementHistogram(arg1: CDPL.Chem.MolecularGraph, molgraph: ElementHistogram, hist: bool) -> None: pass
 
 ##
 # \brief 

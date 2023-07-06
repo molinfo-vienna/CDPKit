@@ -438,7 +438,7 @@ namespace
 }
 
 
-void Chem::buildMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& expr_str)
+void Chem::generateMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& expr_str)
 {
     createExpressionString(bond, molgraph, *getMatchConstraints(bond), expr_str, true);
 }

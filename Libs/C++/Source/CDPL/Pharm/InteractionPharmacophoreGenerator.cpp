@@ -142,7 +142,7 @@ void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGra
 
     iaAnalyzer.analyze(corePharm, envPharm, iaMapping, false);
 
-    buildInteractionPharmacophore(ia_pharm, iaMapping, append);
+    generateInteractionPharmacophore(ia_pharm, iaMapping, append);
 
     if (addXVolumes) {
         iaEnvFeatures.clear();

@@ -95,7 +95,7 @@ void Chem::MorganNumberingCalculator::NumberingState::init(const MolecularGraph&
     sortRCList       = false;
     molGraph         = &molgraph; 
     
-    buildBondMatrix(molgraph, *bondMatrix);
+    generateBondMatrix(molgraph, *bondMatrix);
     
     indexLookupTable.clear();
     atomNumbering.clear();

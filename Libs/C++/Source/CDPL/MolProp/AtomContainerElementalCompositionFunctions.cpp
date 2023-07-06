@@ -38,7 +38,7 @@
 using namespace CDPL; 
 
 
-void MolProp::buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula)
+void MolProp::generateExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula)
 {
     using namespace Chem;
 
@@ -95,7 +95,7 @@ void MolProp::buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, st
     formula = formula_os.str();
 }
 
-void MolProp::buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append)
+void MolProp::generateExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append)
 {
     using namespace Chem;
     

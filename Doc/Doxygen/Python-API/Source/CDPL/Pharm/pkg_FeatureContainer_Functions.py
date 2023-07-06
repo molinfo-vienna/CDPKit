@@ -51,7 +51,7 @@ def setName(cntnr: FeatureContainer, name: str) -> None: pass
 # \param cntnr 
 # \return 
 #
-def buildFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
+def generateFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
 
 ##
 # \brief 
@@ -62,7 +62,7 @@ def buildFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
 # \param vdw_factor 
 # \return 
 #
-def checkExclusionVolumeClash(ftr_cntnr: FeatureContainer, atom_cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, xform: CDPL.Math.Matrix4D, vdw_factor: float = 1.0) -> bool: pass
+def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, xform: CDPL.Math.Matrix4D, vdw_factor: float = 1.0) -> bool: pass
 
 ##
 # \brief 
@@ -70,7 +70,7 @@ def checkExclusionVolumeClash(ftr_cntnr: FeatureContainer, atom_cntnr: CDPL.Chem
 # \param hist 
 # \param append 
 #
-def buildFeatureTypeHistogram(cntnr: FeatureContainer, hist: FeatureTypeHistogram, append: bool = False) -> None: pass
+def generateFeatureTypeHistogram(cntnr: FeatureContainer, hist: FeatureTypeHistogram, append: bool = False) -> None: pass
 
 ##
 # \brief 

@@ -44,7 +44,7 @@ void Chem::initSubstructureSearchQuery(Reaction& rxn, bool overwrite)
                   std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchQuery),
                             std::placeholders::_1, overwrite));
 
-    buildMatchExpressions(rxn ,overwrite);
+    generateMatchExpressions(rxn ,overwrite);
 }
 
 void Chem::initSubstructureSearchTarget(Reaction& rxn, bool overwrite)

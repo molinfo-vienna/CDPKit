@@ -41,7 +41,7 @@ std::size_t Descr::calcZagrebIndex1(const Chem::MolecularGraph& molgraph)
     using namespace Chem;
     
     Util::BitSet h_mask(molgraph.getNumAtoms());
-    buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    createAtomTypeMask(molgraph, h_mask, AtomType::H);
 
     MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -79,7 +79,7 @@ std::size_t Descr::calcZagrebIndex2(const Chem::MolecularGraph& molgraph)
     using namespace Chem;
     
     Util::BitSet h_mask(molgraph.getNumAtoms());
-    buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    createAtomTypeMask(molgraph, h_mask, AtomType::H);
 
     std::size_t index2 = 0;
 

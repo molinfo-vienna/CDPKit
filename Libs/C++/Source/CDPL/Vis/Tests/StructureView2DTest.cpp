@@ -649,7 +649,7 @@ BOOST_AUTO_TEST_CASE(StructureView2DTest)
     mol.getBond(6).setProperty(Chem::BondProperty::MATCH_CONSTRAINTS, constr_ptr);
     mol.getBond(15).setProperty(Chem::BondProperty::MATCH_CONSTRAINTS, constr_ptr);
 
-    buildMatchExpressionStrings(mol, true);
+    generateMatchExpressionStrings(mol, true);
 
     view.setStructure(&mol);
 

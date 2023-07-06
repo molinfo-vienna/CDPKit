@@ -55,12 +55,12 @@ namespace CDPL
     namespace ConfGen
     {
 
-        CDPL_CONFGEN_API std::size_t buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset = true);
+        CDPL_CONFGEN_API std::size_t createFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset = true);
 
-        CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask,
+        CDPL_CONFGEN_API std::size_t createRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask,
                                                             bool het_h_rotors, bool reset = true);
 
-        CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask,
+        CDPL_CONFGEN_API std::size_t createRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask,
                                                             Util::BitSet& bond_mask, bool het_h_rotors, bool reset = true);
 
         CDPL_CONFGEN_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool het_h_rotors);

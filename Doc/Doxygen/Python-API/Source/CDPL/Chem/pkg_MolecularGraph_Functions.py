@@ -506,7 +506,7 @@ def setMDLCTABVersion(molgraph: MolecularGraph, version: int) -> None: pass
 # \param molgraph 
 # \return 
 #
-def buildMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpression: pass
+def generateMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpression: pass
 
 ##
 # \brief 
@@ -514,7 +514,7 @@ def buildMatchExpression(molgraph: MolecularGraph) -> MolecularGraphMatchExpress
 # \param overwrite 
 # \return 
 #
-def buildMatchExpression(molgraph: MolecularGraph, overwrite: bool) -> MolecularGraphMatchExpression: pass
+def generateMatchExpression(molgraph: MolecularGraph, overwrite: bool) -> MolecularGraphMatchExpression: pass
 
 ##
 # \brief 
@@ -829,7 +829,7 @@ def setRings(molgraph: MolecularGraph, rings: FragmentList) -> None: pass
 # \param molgraph 
 # \param overwrite 
 #
-def buildMatchExpressionStrings(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def generateMatchExpressionStrings(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -912,7 +912,7 @@ def setPiElectronSystems(molgraph: MolecularGraph, pi_systems: ElectronSystemLis
 # \param molgraph 
 # \param overwrite 
 #
-def buildMatchExpressions(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def generateMatchExpressions(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -1275,7 +1275,7 @@ def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgra
 # \param molgraph 
 # \param mtx 
 #
-def buildBondMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateBondMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1359,28 +1359,28 @@ def setGeometricalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.DMatri
 # \param molgraph 
 # \param mtx 
 #
-def buildIncidenceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateIncidenceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildBondElectronMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateBondElectronMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildAdjacencyMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateAdjacencyMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 

@@ -46,7 +46,7 @@ void ConfGen::SubstituentBulkinessCalculator::calculate(const Chem::MolecularGra
     hAtomMask.resize(num_atoms);
     hAtomMask.reset();
 
-    buildAtomTypeMask(molgraph, hAtomMask, AtomType::H, false);
+    createAtomTypeMask(molgraph, hAtomMask, AtomType::H, false);
 
     ecArray.assign(num_atoms, 1);
 

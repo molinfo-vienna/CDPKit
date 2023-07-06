@@ -147,7 +147,7 @@ namespace
 }
 
 
-Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(const Reaction& rxn)
+Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::generateMatchExpression(const Reaction& rxn)
 {
     MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpression(rxn, *getMatchConstraints(rxn));
 
@@ -157,7 +157,7 @@ Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(
     return expr_ptr; 
 }
 
-Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(Reaction& rxn, bool overwrite)
+Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::generateMatchExpression(Reaction& rxn, bool overwrite)
 {
     if (!overwrite) {
         Base::Any prev_expr = rxn.getProperty(ReactionProperty::MATCH_EXPRESSION, false);
@@ -166,18 +166,18 @@ Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(
             return prev_expr.getData<MatchExpression<Reaction>::SharedPointer>();
     }
 
-    MatchExpression<Reaction>::SharedPointer expr_ptr = buildMatchExpression(rxn);
+    MatchExpression<Reaction>::SharedPointer expr_ptr = generateMatchExpression(rxn);
 
     setMatchExpression(rxn, expr_ptr);
 
     return expr_ptr; 
 }
     
-void Chem::buildMatchExpressions(Reaction& rxn, bool overwrite)
+void Chem::generateMatchExpressions(Reaction& rxn, bool overwrite)
 {
-    buildMatchExpression(rxn, overwrite);
+    generateMatchExpression(rxn, overwrite);
 
     std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&buildMatchExpressions),
+                  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&generateMatchExpressions),
                             std::placeholders::_1, overwrite));
 }

@@ -586,7 +586,7 @@ void ConfGen::DGConstraintGenerator::init(const Chem::MolecularGraph& molgraph)
     hAtomMask.resize(numAtoms);
 
     if (settings.excludeHydrogens())
-        buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+        createAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
 
     if (settings.regardAtomConfiguration()) {
         stereoAtomMask.resize(numAtoms);

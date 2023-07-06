@@ -71,9 +71,9 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasMatchExpression(const Reaction& rxn);
 
-        CDPL_CHEM_API MatchExpression<Reaction>::SharedPointer buildMatchExpression(const Reaction& rxn);
+        CDPL_CHEM_API MatchExpression<Reaction>::SharedPointer generateMatchExpression(const Reaction& rxn);
 
-        CDPL_CHEM_API MatchExpression<Reaction>::SharedPointer buildMatchExpression(Reaction& rxn, bool overwrite);
+        CDPL_CHEM_API MatchExpression<Reaction>::SharedPointer generateMatchExpression(Reaction& rxn, bool overwrite);
 
 
         CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Reaction& rxn);
@@ -222,7 +222,7 @@ namespace CDPL
 
         CDPL_CHEM_API void setComponentMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);
 
-        CDPL_CHEM_API void buildMatchExpressions(Reaction& rxn, bool overwrite);
+        CDPL_CHEM_API void generateMatchExpressions(Reaction& rxn, bool overwrite);
 
         CDPL_CHEM_API void initSubstructureSearchQuery(Reaction& rxn, bool overwrite);
 

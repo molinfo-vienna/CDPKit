@@ -169,7 +169,7 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasMatchExpression(const Bond& bond);
 
-        CDPL_CHEM_API MatchExpression<Bond, MolecularGraph>::SharedPointer buildMatchExpression(const Bond& bond, const MolecularGraph& molgraph);
+        CDPL_CHEM_API MatchExpression<Bond, MolecularGraph>::SharedPointer generateMatchExpression(const Bond& bond, const MolecularGraph& molgraph);
 
 
         CDPL_CHEM_API const std::string& getMatchExpressionString(const Bond& bond);
@@ -180,7 +180,7 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasMatchExpressionString(const Bond& bond);
 
-        CDPL_CHEM_API void buildMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& str);
+        CDPL_CHEM_API void generateMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& str);
 
 
         CDPL_CHEM_API unsigned int getSybylType(const Bond& bond);

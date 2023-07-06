@@ -34,7 +34,7 @@ def perceiveFragmentType(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 # \param reset 
 # \return 
 #
-def buildRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
+def createRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -45,7 +45,7 @@ def buildRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.U
 # \param reset 
 # \return 
 #
-def buildRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, excl_bond_mask: CDPL.Util.BitSet, bond_mask: CDPL.Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
+def createRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, excl_bond_mask: CDPL.Util.BitSet, bond_mask: CDPL.Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -54,7 +54,7 @@ def buildRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, excl_bond_mask: C
 # \param reset 
 # \return 
 #
-def buildFragmentLinkBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet, reset: bool = True) -> int: pass
+def createFragmentLinkBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet, reset: bool = True) -> int: pass
 
 ##
 # \brief 

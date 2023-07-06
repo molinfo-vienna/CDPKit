@@ -54,11 +54,11 @@ namespace CDPL
 
         CDPL_MOLPROP_API void calcMassComposition(const Chem::MolecularGraph& molgraph, MassComposition& comp);
 
-        CDPL_MOLPROP_API void buildMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp);
+        CDPL_MOLPROP_API void generateMassCompositionString(const Chem::MolecularGraph& molgraph, std::string& comp);
 
-        CDPL_MOLPROP_API void buildMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula);
+        CDPL_MOLPROP_API void generateMolecularFormula(const Chem::MolecularGraph& molgraph, std::string& formula);
 
-        CDPL_MOLPROP_API void buildElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
+        CDPL_MOLPROP_API void generateElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
 
         CDPL_MOLPROP_API std::size_t calcCyclomaticNumber(const Chem::MolecularGraph& molgraph);

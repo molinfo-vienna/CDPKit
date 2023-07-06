@@ -24,7 +24,7 @@
 # \param cntnr 
 # \return 
 #
-def buildExplicitMolecularFormula(cntnr: CDPL.Chem.AtomContainer) -> str: pass
+def generateExplicitMolecularFormula(cntnr: CDPL.Chem.AtomContainer) -> str: pass
 
 ##
 # \brief 
@@ -38,7 +38,7 @@ def getNetFormalCharge(cntnr: CDPL.Chem.AtomContainer) -> int: pass
 # \param cntnr 
 # \return 
 #
-def buildExplicitMassCompositionString(cntnr: CDPL.Chem.AtomContainer) -> str: pass
+def generateExplicitMassCompositionString(cntnr: CDPL.Chem.AtomContainer) -> str: pass
 
 ##
 # \brief 
@@ -46,7 +46,7 @@ def buildExplicitMassCompositionString(cntnr: CDPL.Chem.AtomContainer) -> str: p
 # \param hist 
 # \param append 
 #
-def buildExplicitElementHistogram(cntnr: CDPL.Chem.AtomContainer, hist: ElementHistogram, append: bool = False) -> None: pass
+def generateExplicitElementHistogram(cntnr: CDPL.Chem.AtomContainer, hist: ElementHistogram, append: bool = False) -> None: pass
 
 ##
 # \brief 

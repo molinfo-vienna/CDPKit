@@ -99,7 +99,7 @@ namespace
     MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfSmallestContainingFragment, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingFragments, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&);
-    MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, buildMatchExpression, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, generateMatchExpression, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
@@ -112,11 +112,11 @@ namespace
 
     MAKE_FUNCTION_WRAPPER5(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t, bool);
 
-    std::string buildMatchExpressionStringWrapper(CDPL::Chem::Bond& bond, CDPL::Chem::MolecularGraph& molgraph)
+    std::string generateMatchExpressionStringWrapper(CDPL::Chem::Bond& bond, CDPL::Chem::MolecularGraph& molgraph)
     {
         std::string str;
 
-        buildMatchExpressionString(bond, molgraph, str);
+        generateMatchExpressionString(bond, molgraph, str);
         return str;
     }
 }
@@ -133,7 +133,7 @@ void CDPLPythonChem::exportBondFunctions()
                 (python::arg("bond"), python::arg("frag_list")));
     python::def("getNumContainingFragments", &getNumContainingFragmentsWrapper2,
                 (python::arg("bond"), python::arg("frag_list")));
-    python::def("buildMatchExpression", &buildMatchExpressionWrapper2, 
+    python::def("generateMatchExpression", &generateMatchExpressionWrapper2, 
                 (python::arg("bond"), python::arg("molgraph")),
                 python::with_custodian_and_ward_postcall<0, 1>());
 
@@ -159,7 +159,7 @@ void CDPLPythonChem::exportBondFunctions()
                 (python::arg("bond"), python::arg("molgraph"), python::arg("dim") = 1, 
                  python::arg("min_ring_size") = 8, python::arg("check_order") = true));
 
-    python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
+    python::def("generateMatchExpressionString", &generateMatchExpressionStringWrapper,
                 (python::arg("bond"), python::arg("molgraph")));
 
     python::def("getMatchConstraints", &getMatchConstraintsWrapper1, python::arg("bond"),

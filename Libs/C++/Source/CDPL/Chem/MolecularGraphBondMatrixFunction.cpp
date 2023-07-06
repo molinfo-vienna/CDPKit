@@ -32,7 +32,7 @@
 using namespace CDPL; 
 
 
-void Chem::buildBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
+void Chem::generateBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
     std::size_t num_atoms = molgraph.getNumAtoms();
 

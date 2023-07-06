@@ -134,7 +134,7 @@ def main() -> None:
                 ph4 = genPharmacophore(mol) # generate pharmacophore
 
                 if not args.quiet:
-                     print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.buildFeatureTypeHistogramString(ph4)))
+                     print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ph4)))
                      
                 if not writer.write(ph4):   # output pharmacophore
                     sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)

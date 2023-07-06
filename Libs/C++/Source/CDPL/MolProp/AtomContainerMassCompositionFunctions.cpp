@@ -75,7 +75,7 @@ void MolProp::calcExplicitMassComposition(const Chem::AtomContainer& cntnr, Mass
         it->second /= mass;
 }
 
-void MolProp::buildExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str)
+void MolProp::generateExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str)
 {
     using namespace Chem;
     

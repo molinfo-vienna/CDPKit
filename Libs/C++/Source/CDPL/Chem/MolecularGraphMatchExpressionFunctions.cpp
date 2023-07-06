@@ -134,7 +134,7 @@ namespace
 }
 
 
-Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(const MolecularGraph& molgraph)
+Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::generateMatchExpression(const MolecularGraph& molgraph)
 {
     MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(molgraph, *getMatchConstraints(molgraph));
 
@@ -144,7 +144,7 @@ Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpre
     return expr_ptr; 
 }
     
-Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(MolecularGraph& molgraph, bool overwrite)
+Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::generateMatchExpression(MolecularGraph& molgraph, bool overwrite)
 {
     if (!overwrite) {
         Base::Any prev_expr = molgraph.getProperty(MolecularGraphProperty::MATCH_EXPRESSION, false);
@@ -153,16 +153,16 @@ Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpre
             return prev_expr.getData<MatchExpression<MolecularGraph>::SharedPointer>();
     }
 
-    MatchExpression<MolecularGraph>::SharedPointer expr_ptr = buildMatchExpression(molgraph);
+    MatchExpression<MolecularGraph>::SharedPointer expr_ptr = generateMatchExpression(molgraph);
 
     setMatchExpression(molgraph, expr_ptr);
 
     return expr_ptr; 
 }
 
-void Chem::buildMatchExpressions(MolecularGraph& molgraph, bool overwrite)
+void Chem::generateMatchExpressions(MolecularGraph& molgraph, bool overwrite)
 {
-    buildMatchExpression(molgraph, overwrite);
+    generateMatchExpression(molgraph, overwrite);
 
     MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -172,7 +172,7 @@ void Chem::buildMatchExpressions(MolecularGraph& molgraph, bool overwrite)
         if (!overwrite && hasMatchExpression(atom))
             continue;
 
-        setMatchExpression(atom, buildMatchExpression(atom, molgraph));
+        setMatchExpression(atom, generateMatchExpression(atom, molgraph));
     }
 
     MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
@@ -183,6 +183,6 @@ void Chem::buildMatchExpressions(MolecularGraph& molgraph, bool overwrite)
         if (!overwrite && hasMatchExpression(bond))
             continue;
 
-        setMatchExpression(bond, buildMatchExpression(bond, molgraph));
+        setMatchExpression(bond, generateMatchExpression(bond, molgraph));
     }
 }

@@ -804,7 +804,7 @@ namespace
 }
 
 
-void Chem::buildMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str)
+void Chem::generateMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str)
 {
     createExpressionString(atom, molgraph, *getMatchConstraints(atom), expr_str, true);
 }

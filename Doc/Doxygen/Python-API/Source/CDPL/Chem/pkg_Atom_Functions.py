@@ -567,7 +567,7 @@ def setAromaticityFlag(atom: Atom, aromatic: bool) -> None: pass
 # \param molgraph 
 # \return 
 #
-def buildMatchExpressionString(atom: Atom, molgraph: MolecularGraph) -> str: pass
+def generateMatchExpressionString(atom: Atom, molgraph: MolecularGraph) -> str: pass
 
 ##
 # \brief 
@@ -663,7 +663,7 @@ def setMOL2SubstructureChain(atom: Atom, chain: str) -> None: pass
 # \param molgraph 
 # \return 
 #
-def buildMatchExpression(atom: Atom, molgraph: MolecularGraph) -> AtomMatchExpression: pass
+def generateMatchExpression(atom: Atom, molgraph: MolecularGraph) -> AtomMatchExpression: pass
 
 ##
 # \brief 

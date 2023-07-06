@@ -311,7 +311,7 @@ void Chem::BondOrderCalculator::init(const MolecularGraph& molgraph, Util::STArr
                                                      MolecularGraph>::SharedPointer&)>(&setMatchExpression), 
                                 _1, bond_expr));
 
-        buildMatchExpressions(*ptn_copy, false);
+        generateMatchExpressions(*ptn_copy, false);
 
         funcGroupPatterns.push_back(ptn_copy);
     }

@@ -139,7 +139,7 @@ namespace
     MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(CDPL::Chem::StereoDescriptor, calcStereoDescriptorFromMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(unsigned int, calcMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-    MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, buildMatchExpression, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+    MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, generateMatchExpression, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfSmallestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
     MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
@@ -158,11 +158,11 @@ namespace
     MAKE_FUNCTION_WRAPPER5(std::size_t, getEnvironment, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, CDPL::Chem::Fragment&, bool);
 
 
-    std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
+    std::string generateMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
     {
         std::string str;
 
-        buildMatchExpressionString(atom, molgraph, str);
+        generateMatchExpressionString(atom, molgraph, str);
         return str;
     }
 
@@ -255,7 +255,7 @@ void CDPLPythonChem::exportAtomFunctions()
     python::def("calcStereoDescriptorFromMDLParity", &calcStereoDescriptorFromMDLParityWrapper2,
                 (python::arg("atom"), python::arg("molgraph")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("calcMDLParity", &calcMDLParityWrapper2, (python::arg("atom"), python::arg("molgraph")));
-    python::def("buildMatchExpression", &buildMatchExpressionWrapper2, (python::arg("atom"), python::arg("molgraph")),
+    python::def("generateMatchExpression", &generateMatchExpressionWrapper2, (python::arg("atom"), python::arg("molgraph")),
                 python::with_custodian_and_ward_postcall<0, 1>());
     python::def("getSizeOfSmallestContainingFragment", &getSizeOfSmallestContainingFragmentWrapper2,
                 (python::arg("atom"), python::arg("frag_list")));
@@ -289,7 +289,7 @@ void CDPLPythonChem::exportAtomFunctions()
     python::def("getEnvironment", &getEnvironmentWrapper5,
                 (python::arg("atom"), python::arg("molgraph"), python::arg("max_dist"), python::arg("env"), python::arg("append") = false));
     
-    python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
+    python::def("generateMatchExpressionString", &generateMatchExpressionStringWrapper,
                 (python::arg("atom"), python::arg("molgraph")));
 
     python::def("getConnectedAtoms", &getConnectedAtomsWrapper1,

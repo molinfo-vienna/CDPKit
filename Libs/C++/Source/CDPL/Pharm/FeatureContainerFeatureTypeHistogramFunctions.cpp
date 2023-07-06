@@ -35,7 +35,7 @@
 using namespace CDPL; 
 
 
-void Pharm::buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append)
+void Pharm::generateFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append)
 {
     if (!append)
         hist.clear();
@@ -50,11 +50,11 @@ void Pharm::buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureType
     }
 }
 
-void Pharm::buildFeatureTypeHistogramString(const FeatureContainer& cntnr, std::string& histo_str)
+void Pharm::generateFeatureTypeHistogramString(const FeatureContainer& cntnr, std::string& histo_str)
 {
     FeatureTypeHistogram histo;
     
-    buildFeatureTypeHistogram(cntnr, histo);
+    generateFeatureTypeHistogram(cntnr, histo);
     histo_str.clear();
     
     for (const auto& entry : histo) {

@@ -215,7 +215,7 @@ def main() -> None:
                 ph4_gen.generate(lig_mol, rec_mol, ia_ph4, True) # generate the pharmacophore (True = extract ligand environment residues on-the-fly)
 
                 if not args.quiet:
-                     print(' -> Generated %s features: %s' % (str(ia_ph4.numFeatures), Pharm.buildFeatureTypeHistogramString(ia_ph4)))
+                     print(' -> Generated %s features: %s' % (str(ia_ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ia_ph4)))
                 
                 try:
                     if not ph4_writer.write(ia_ph4): # output pharmacophore

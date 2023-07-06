@@ -53,11 +53,11 @@ namespace CDPL
 
         CDPL_MOLPROP_API void calcExplicitMassComposition(const Chem::AtomContainer& cntnr, MassComposition& mass_comp);
 
-        CDPL_MOLPROP_API void buildExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str);
+        CDPL_MOLPROP_API void generateExplicitMassCompositionString(const Chem::AtomContainer& cntnr, std::string& comp_str);
 
-        CDPL_MOLPROP_API void buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula);
+        CDPL_MOLPROP_API void generateExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula);
 
-        CDPL_MOLPROP_API void buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
+        CDPL_MOLPROP_API void generateExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
 
 
         CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr);

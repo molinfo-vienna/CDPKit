@@ -238,7 +238,7 @@ def setMDLRXNFileVersion(rxn: Reaction, version: int) -> None: pass
 # \param rxn 
 # \return 
 #
-def buildMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
+def generateMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 
 ##
 # \brief 
@@ -246,7 +246,7 @@ def buildMatchExpression(rxn: Reaction) -> ReactionMatchExpression: pass
 # \param overwrite 
 # \return 
 #
-def buildMatchExpression(rxn: Reaction, overwrite: bool) -> ReactionMatchExpression: pass
+def generateMatchExpression(rxn: Reaction, overwrite: bool) -> ReactionMatchExpression: pass
 
 ##
 # \brief 
@@ -415,7 +415,7 @@ def setMDLUserInitials(rxn: Reaction, initials: str) -> None: pass
 # \param rxn 
 # \param overwrite 
 #
-def buildMatchExpressions(rxn: Reaction, overwrite: bool) -> None: pass
+def generateMatchExpressions(rxn: Reaction, overwrite: bool) -> None: pass
 
 ##
 # \brief 

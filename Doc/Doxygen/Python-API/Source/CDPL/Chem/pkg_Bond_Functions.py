@@ -177,7 +177,7 @@ def setAromaticityFlag(bond: Bond, aromatic: bool) -> None: pass
 # \param molgraph 
 # \return 
 #
-def buildMatchExpressionString(bond: Bond, molgraph: MolecularGraph) -> str: pass
+def generateMatchExpressionString(bond: Bond, molgraph: MolecularGraph) -> str: pass
 
 ##
 # \brief 
@@ -212,7 +212,7 @@ def setMatchExpressionString(bond: Bond, expr_str: str) -> None: pass
 # \param molgraph 
 # \return 
 #
-def buildMatchExpression(bond: Bond, molgraph: MolecularGraph) -> BondMatchExpression: pass
+def generateMatchExpression(bond: Bond, molgraph: MolecularGraph) -> BondMatchExpression: pass
 
 ##
 # \brief 

@@ -210,7 +210,7 @@ namespace CDPL
 
             void getAtomHydrophobicities();
 
-            void   buildAtomMask(const AtomList&, Util::BitSet&) const;
+            void createAtomMask(const AtomList&, Util::BitSet&) const;
             double calcSummedHydrophobicity(const AtomList& alist) const;
 
             Chem::Fragment::SharedPointer makeFragment(const AtomList&) const;

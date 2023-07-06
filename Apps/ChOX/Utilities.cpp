@@ -142,7 +142,7 @@ void ChOX::initData(CDPL::Chem::Molecule& mol)
 
     setAtomSymbolsFromTypes(mol, false);
 
-    buildMatchExpressionStrings(mol, false);
+    generateMatchExpressionStrings(mol, false);
 }
 
 void ChOX::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt, 

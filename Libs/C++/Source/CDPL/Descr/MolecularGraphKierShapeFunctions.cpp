@@ -43,7 +43,7 @@ double Descr::calcKierShape1(const Chem::MolecularGraph& molgraph)
     using namespace Chem;
         
     Util::BitSet h_mask(molgraph.getNumAtoms());
-    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - createAtomTypeMask(molgraph, h_mask, AtomType::H);
 
     MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
     std::size_t num_hvy_bonds = 0;
@@ -78,7 +78,7 @@ double Descr::calcKierShape2(const Chem::MolecularGraph& molgraph)
     using namespace Chem;
     
     Util::BitSet h_mask(molgraph.getNumAtoms());
-    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - createAtomTypeMask(molgraph, h_mask, AtomType::H);
     std::size_t num_2_bond_paths = 0;
     
     MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
@@ -119,7 +119,7 @@ double Descr::calcKierShape3(const Chem::MolecularGraph& molgraph)
     using namespace Chem;
     
     Util::BitSet h_mask(molgraph.getNumAtoms());
-    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - buildAtomTypeMask(molgraph, h_mask, AtomType::H);
+    std::size_t num_hvy_atoms = molgraph.getNumAtoms() - createAtomTypeMask(molgraph, h_mask, AtomType::H);
 
     MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
     std::size_t num_3_bond_paths = 0;

@@ -25,7 +25,7 @@
 # \param iactions 
 # \param append 
 #
-def buildInteractionPharmacophore(pharm: Pharmacophore, iactions: FeatureMapping, append: bool = False) -> None: pass
+def generateInteractionPharmacophore(pharm: Pharmacophore, iactions: FeatureMapping, append: bool = False) -> None: pass
 
 ##
 # \brief 

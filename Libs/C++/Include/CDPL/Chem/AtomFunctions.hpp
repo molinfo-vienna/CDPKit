@@ -402,7 +402,7 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasMatchExpression(const Atom& atom);
 
-        CDPL_CHEM_API MatchExpression<Atom, MolecularGraph>::SharedPointer buildMatchExpression(const Atom& atom, const MolecularGraph& molgraph);
+        CDPL_CHEM_API MatchExpression<Atom, MolecularGraph>::SharedPointer generateMatchExpression(const Atom& atom, const MolecularGraph& molgraph);
 
 
         CDPL_CHEM_API const std::string& getMatchExpressionString(const Atom& atom);
@@ -413,7 +413,7 @@ namespace CDPL
 
         CDPL_CHEM_API bool hasMatchExpressionString(const Atom& atom);
 
-        CDPL_CHEM_API void buildMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
+        CDPL_CHEM_API void generateMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
 
 
         CDPL_CHEM_API void markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph,

@@ -56,20 +56,20 @@ python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("molgrap
 namespace
 {
 
-    boost::python::object buildMassCompositionStringWrapper(CDPL::Chem::MolecularGraph& molgraph)
+    boost::python::object generateMassCompositionStringWrapper(CDPL::Chem::MolecularGraph& molgraph)
     {
         std::string str;
 
-        CDPL::MolProp::buildMassCompositionString(molgraph, str);
+        CDPL::MolProp::generateMassCompositionString(molgraph, str);
 
         return boost::python::str(str.c_str());
     }
 
-    boost::python::object buildMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph)
+    boost::python::object generateMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph)
     {
         std::string str;
 
-        CDPL::MolProp::buildMolecularFormula(molgraph, str);
+        CDPL::MolProp::generateMolecularFormula(molgraph, str);
 
         return boost::python::str(str.c_str());
     }
@@ -86,7 +86,7 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
     python::def("calcMass", &MolProp::calcMass, python::arg("molgraph"));
     python::def("calcMassComposition", &MolProp::calcMassComposition, 
                 (python::arg("molgraph"), python::arg("comp")));
-    python::def("buildElementHistogram", &MolProp::buildElementHistogram, 
+    python::def("generateElementHistogram", &MolProp::generateElementHistogram, 
                 (python::arg("molgraph"), python::arg("hist")));
 
     python::def("calcCyclomaticNumber", &MolProp::calcCyclomaticNumber, python::arg("molgraph"));
@@ -124,8 +124,8 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
     python::def("calcPEOEProperties", &MolProp::calcPEOEProperties,
                 (python::arg("molgraph"), python::arg("overwrite"), python::arg("num_iter") = 20, python::arg("damping") = 0.48));
     python::def("calcMHMOProperties", &MolProp::calcMHMOProperties,    (python::arg("molgraph"), python::arg("overwrite")));
-    python::def("buildMassCompositionString", &buildMassCompositionStringWrapper, python::arg("molgraph"));
-    python::def("buildMolecularFormula", &buildMolecularFormulaWrapper, python::arg("molgraph"));
+    python::def("generateMassCompositionString", &generateMassCompositionStringWrapper, python::arg("molgraph"));
+    python::def("generateMolecularFormula", &generateMolecularFormulaWrapper, python::arg("molgraph"));
 
     python::def("perceiveHBondDonorAtomTypes", &MolProp::perceiveHBondDonorAtomTypes,
                 (python::arg("molgraph"), python::arg("overwrite")));

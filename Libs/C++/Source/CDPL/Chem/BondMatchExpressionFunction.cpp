@@ -410,7 +410,7 @@ namespace
 }
 
 
-Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(const Bond& bond, const MolecularGraph& molgraph)
+Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>::SharedPointer Chem::generateMatchExpression(const Bond& bond, const MolecularGraph& molgraph)
 {
     MatchExpression<Bond, MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(bond, molgraph, *getMatchConstraints(bond));
 

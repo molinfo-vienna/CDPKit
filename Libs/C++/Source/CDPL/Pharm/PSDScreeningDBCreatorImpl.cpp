@@ -502,7 +502,7 @@ void Pharm::PSDScreeningDBCreatorImpl::insertPharmacophore(std::int64_t mol_id, 
 void Pharm::PSDScreeningDBCreatorImpl::genFtrCounts()
 {
     featureCounts.clear();
-    buildFeatureTypeHistogram(pharmacophore, featureCounts);
+    generateFeatureTypeHistogram(pharmacophore, featureCounts);
 }
 
 void Pharm::PSDScreeningDBCreatorImpl::insertFtrCounts(std::int64_t mol_id, std::size_t conf_idx)

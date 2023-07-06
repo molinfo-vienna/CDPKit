@@ -138,7 +138,7 @@ void Vis::initMolecule(Chem::Molecule& mol)
     calcAtomStereoDescriptors(mol, false);
     calcBondStereoDescriptors(mol, false);
 
-    buildMatchExpressionStrings(mol, false);
+    generateMatchExpressionStrings(mol, false);
 }
 
 void Vis::initReaction(Chem::Reaction& rxn)

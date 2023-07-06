@@ -46,22 +46,22 @@ namespace
     MAKE_FUNCTION_WRAPPER2(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3D&);
     
     MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&, unsigned int, bool)
-    MAKE_FUNCTION_WRAPPER3(void, buildExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::MolProp::ElementHistogram&, bool);
+    MAKE_FUNCTION_WRAPPER3(void, generateExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::MolProp::ElementHistogram&, bool);
     MAKE_FUNCTION_WRAPPER3(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
 
-    std::string buildExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
+    std::string generateExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
     {
         std::string str;
 
-        CDPL::MolProp::    buildExplicitMassCompositionString(cntnr, str);
+        CDPL::MolProp::    generateExplicitMassCompositionString(cntnr, str);
         return str;
     }
 
-    std::string buildExplicitMolecularFormulaWrapper(CDPL::Chem::AtomContainer& cntnr)
+    std::string generateExplicitMolecularFormulaWrapper(CDPL::Chem::AtomContainer& cntnr)
     {
         std::string str;
 
-        CDPL::MolProp::buildExplicitMolecularFormula(cntnr, str);
+        CDPL::MolProp::generateExplicitMolecularFormula(cntnr, str);
         return str;
     }
 }
@@ -82,10 +82,10 @@ void CDPLPythonMolProp::exportAtomContainerFunctions()
     python::def("calcExplicitMass", &calcExplicitMassWrapper1, python::arg("cntnr"));
 
     python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2, (python::arg("cntnr"), python::arg("mass_comp")));
-    python::def("buildExplicitMassCompositionString", &buildExplicitMassCompositionStringWrapper, python::arg("cntnr"));
+    python::def("generateExplicitMassCompositionString", &generateExplicitMassCompositionStringWrapper, python::arg("cntnr"));
 
-    python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
-    python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
+    python::def("generateExplicitMolecularFormula", &generateExplicitMolecularFormulaWrapper, python::arg("cntnr"));
+    python::def("generateExplicitElementHistogram", &generateExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
 
     python::def("calcDipoleMoment", &calcDipoleMomentWrapper2, (python::arg("cntnr"), python::arg("moment")));
     python::def("calcDipoleMoment", &calcDipoleMomentWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("moment")));
