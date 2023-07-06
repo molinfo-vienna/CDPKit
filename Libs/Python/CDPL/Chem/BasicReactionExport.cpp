@@ -22,11 +22,51 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/BasicReaction.hpp"
+#include "CDPL/Chem/CDFReactionWriter.hpp"
+#include "CDPL/Chem/CDFReactionReader.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+    struct BasicReactionPickleSuite : boost::python::pickle_suite
+    {
+
+        static boost::python::tuple
+        getstate(boost::python::object obj)
+        {
+            using namespace boost;
+            using namespace CDPL;
+
+            std::ostringstream os(std::ios_base::binary | std::ios_base::out);
+
+            Chem::CDFReactionWriter(os).write(python::extract<const Chem::BasicReaction&>(obj));
+
+            return python::make_tuple(obj.attr("__dict__"), os.str());
+        }
+
+        static void
+        setstate(boost::python::object obj, boost::python::tuple state)
+        {
+            using namespace boost;
+            using namespace CDPL;
+
+            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
+
+            python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
+            Chem::CDFReactionReader(is).read(python::extract<Chem::BasicReaction&>(obj));
+        }
+
+        static bool getstate_manages_dict() { return true; }
+    };
+} // namespace
 
 
 void CDPLPythonChem::exportBasicReaction()
@@ -43,19 +83,20 @@ void CDPLPythonChem::exportBasicReaction()
     Chem::BasicReaction& (Chem::BasicReaction::*assignBasicRxnFunc)(const Chem::BasicReaction&) = &Chem::BasicReaction::operator=;
     Chem::Reaction& (Chem::Reaction::*assignRxnFunc)(const Chem::Reaction&) = &Chem::Reaction::operator=;
 
-    python::class_<Chem::BasicReaction, Chem::BasicReaction::SharedPointer, 
-        python::bases<Chem::Reaction> >("BasicReaction", python::no_init)
+    python::class_<Chem::BasicReaction, Chem::BasicReaction::SharedPointer,
+                   python::bases<Chem::Reaction> >("BasicReaction", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::BasicReaction&>((python::arg("self"), python::arg("mol"))))
         .def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("mol"))))
-        .def("addComponent", addComponentFunc, (python::arg("self"), python::arg("role")), 
+        .def_pickle(BasicReactionPickleSuite())
+        .def("addComponent", addComponentFunc, (python::arg("self"), python::arg("role")),
              python::return_internal_reference<1>())
-        .def("addComponent", addComponentCopyFunc, (python::arg("self"), python::arg("role"), python::arg("mol")), 
-              python::return_internal_reference<1>())
+        .def("addComponent", addComponentCopyFunc, (python::arg("self"), python::arg("role"), python::arg("mol")),
+             python::return_internal_reference<1>())
         .def("copy", copyBasicRxnFunc, (python::arg("self"), python::arg("rxn")))
         .def("copy", copyRxnFunc, (python::arg("self"), python::arg("rxn")))
-        .def("assign", assignBasicRxnFunc, (python::arg("self"), python::arg("rxn")), 
+        .def("assign", assignBasicRxnFunc, (python::arg("self"), python::arg("rxn")),
              python::return_self<>())
-        .def("assign", assignRxnFunc, (python::arg("self"), python::arg("rxn")), 
+        .def("assign", assignRxnFunc, (python::arg("self"), python::arg("rxn")),
              python::return_self<>());
 }
