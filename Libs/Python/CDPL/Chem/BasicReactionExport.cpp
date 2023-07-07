@@ -29,6 +29,7 @@
 #include "CDPL/Chem/BasicReaction.hpp"
 #include "CDPL/Chem/CDFReactionWriter.hpp"
 #include "CDPL/Chem/CDFReactionReader.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "ClassExports.hpp"
 
@@ -47,8 +48,9 @@ namespace
 
             std::ostringstream os(std::ios_base::binary | std::ios_base::out);
 
-            Chem::CDFReactionWriter(os).write(python::extract<const Chem::BasicReaction&>(obj));
-
+            if (!Chem::CDFReactionWriter(os).write(python::extract<const Chem::BasicReaction&>(obj)))
+                throw Base::IOError("BasicReactionPickleSuite: writing CDF data record failed");
+            
             return python::make_tuple(obj.attr("__dict__"), os.str());
         }
 
@@ -58,10 +60,12 @@ namespace
             using namespace boost;
             using namespace CDPL;
 
-            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
-
             python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
-            Chem::CDFReactionReader(is).read(python::extract<Chem::BasicReaction&>(obj));
+
+            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
+            
+            if (!Chem::CDFReactionReader(is).read(python::extract<Chem::BasicReaction&>(obj)))
+                throw Base::IOError("BasicReactionPickleSuite: reading CDF data record failed");
         }
 
         static bool getstate_manages_dict() { return true; }

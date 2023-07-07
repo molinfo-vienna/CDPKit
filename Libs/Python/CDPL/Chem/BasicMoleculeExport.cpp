@@ -29,6 +29,7 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/CDFMolecularGraphWriter.hpp"
 #include "CDPL/Chem/CDFMoleculeReader.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "ClassExports.hpp"
 
@@ -47,7 +48,8 @@ namespace
 
             std::ostringstream os(std::ios_base::binary | std::ios_base::out);
 
-            Chem::CDFMolecularGraphWriter(os).write(python::extract<const Chem::BasicMolecule&>(obj));
+            if (!Chem::CDFMolecularGraphWriter(os).write(python::extract<const Chem::BasicMolecule&>(obj)))
+                throw Base::IOError("BasicMoleculePickleSuite: writing CDF data record failed");
 
             return python::make_tuple(obj.attr("__dict__"), os.str());
         }
@@ -58,10 +60,12 @@ namespace
             using namespace boost;
             using namespace CDPL;
 
-            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
-
             python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
-            Chem::CDFMoleculeReader(is).read(python::extract<Chem::BasicMolecule&>(obj));
+
+            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
+            
+            if (!Chem::CDFMoleculeReader(is).read(python::extract<Chem::BasicMolecule&>(obj)))
+                throw Base::IOError("BasicMoleculePickleSuite: reading CDF data record failed");
         }
 
         static bool getstate_manages_dict() { return true; }

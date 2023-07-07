@@ -29,6 +29,7 @@
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "ClassExports.hpp"
 
@@ -47,8 +48,9 @@ namespace
 
             std::ostringstream os(std::ios_base::binary | std::ios_base::out);
 
-            Pharm::CDFFeatureContainerWriter(os).write(python::extract<const Pharm::BasicPharmacophore&>(obj));
-
+            if (!Pharm::CDFFeatureContainerWriter(os).write(python::extract<const Pharm::BasicPharmacophore&>(obj)))
+                throw Base::IOError("BasicPharmacophorePickleSuite: writing CDF data record failed");
+                
             return python::make_tuple(obj.attr("__dict__"), os.str());
         }
 
@@ -58,10 +60,12 @@ namespace
             using namespace boost;
             using namespace CDPL;
 
+            python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
+            
             std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
 
-            python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
-            Pharm::CDFPharmacophoreReader(is).read(python::extract<Pharm::BasicPharmacophore&>(obj));
+            if (!Pharm::CDFPharmacophoreReader(is).read(python::extract<Pharm::BasicPharmacophore&>(obj)))
+                throw Base::IOError("BasicPharmacophorePickleSuite: reading CDF data record failed");
         }
 
         static bool getstate_manages_dict() { return true; }
