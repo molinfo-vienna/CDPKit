@@ -81,10 +81,3 @@ class BasicReaction(Reaction):
     # \return \a self
     #
     def assign(rxn: Reaction) -> BasicReaction: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
-    def __getstate__() -> tuple: pass

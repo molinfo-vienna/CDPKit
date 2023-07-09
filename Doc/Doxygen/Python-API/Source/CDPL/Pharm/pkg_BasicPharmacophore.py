@@ -105,13 +105,6 @@ class BasicPharmacophore(Pharmacophore):
     def assign(cntnr: FeatureContainer) -> BasicPharmacophore: pass
 
     ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
-    def __getstate__() -> tuple: pass
-
-    ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.

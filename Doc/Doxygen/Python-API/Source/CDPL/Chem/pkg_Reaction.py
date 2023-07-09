@@ -186,6 +186,13 @@ class Reaction(CDPL.Base.PropertyContainer):
 
     ##
     # \brief 
+    # \param arg1 
+    # \return 
+    #
+    def __getstate__() -> tuple: pass
+
+    ##
+    # \brief 
     # \param idx 
     # \return 
     #

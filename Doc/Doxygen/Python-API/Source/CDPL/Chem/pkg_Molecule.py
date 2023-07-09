@@ -270,6 +270,13 @@ class Molecule(MolecularGraph):
     def getNumBonds() -> int: pass
 
     ##
+    # \brief 
+    # \param arg1 
+    # \return 
+    #
+    def __getstate__() -> tuple: pass
+
+    ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
     # \param mol Specifies the second addend.
     # \return The updated \e %Molecule instance \a self.

@@ -395,6 +395,13 @@ class DRegularGrid(DSpatialGrid, CDPL.Math.DRegularSpatialGrid):
 
     ##
     # \brief 
+    # \param arg1 
+    # \return 
+    #
+    def __getstate__() -> tuple: pass
+
+    ##
+    # \brief 
     #
     size1 = property(getSize1)
 

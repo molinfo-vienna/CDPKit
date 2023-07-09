@@ -217,6 +217,13 @@ class DRegularGridSet(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param arg1 
+    # \return 
+    #
+    def __getstate__() -> tuple: pass
+
+    ##
+    # \brief 
     #
     objectID = property(getObjectID)
 

@@ -105,13 +105,6 @@ class BasicMolecule(Molecule):
     def assign(molgraph: MolecularGraph) -> BasicMolecule: pass
 
     ##
-    # \brief 
-    # \param arg1 
-    # \return 
-    #
-    def __getstate__() -> tuple: pass
-
-    ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
     # \param mol Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
