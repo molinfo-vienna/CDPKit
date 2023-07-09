@@ -25,7 +25,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Grid/RegularGridSet.hpp"
+#include "CDPL/Grid/CDFDRegularGridSetWriter.hpp"
+#include "CDPL/Grid/CDFDRegularGridSetReader.hpp"
 
+#include "Base/CDFPickleSuite.hpp"
 #include "Util/ArrayVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -34,22 +37,46 @@
 namespace
 {
 
-    template <typename T>
+    template <typename GridSetType, typename GridSetWriter, typename GridSetReader>
+    struct AddPickleSupport
+    {
+
+        template <typename Class>
+        static void add(Class& cls)
+        {
+            cls.def_pickle(CDPLPythonBase::CDFPickleSuite<GridSetType, GridSetWriter, GridSetReader>());
+        }
+    };
+
+    template <typename GridSetType>
+    struct AddPickleSupport<GridSetType, void, void>
+    {
+        
+       template <typename Class>
+       static void add(Class& cls) {}
+    };
+     
+    template <typename GridSetType, typename GridSetWriter = void, typename GridSetReader = void>
     void doExportRegularGridSet(const char* name)
     {
         using namespace boost;
         using namespace CDPL;
 
-        python::class_<T, typename T::SharedPointer>(name, python::no_init)
+        python::class_<GridSetType, typename GridSetType::SharedPointer> cls(name, python::no_init);
+
+        cls
             .def(python::init<>(python::arg("self")))
-            .def(python::init<const T&>((python::arg("self"), python::arg("set"))))
-            .def(CDPLPythonUtil::ArrayVisitor<T, 
-                 python::return_value_policy<python::return_by_value>, python::default_call_policies,
-                 python::default_call_policies, python::default_call_policies>())
-            .def("__eq__", &T::operator==, (python::arg("self"), python::arg("set")))
-            .def("__ne__", &T::operator!=, (python::arg("self"), python::arg("set")));
+            .def(python::init<const GridSetType&>((python::arg("self"), python::arg("set"))))
+            .def(CDPLPythonUtil::ArrayVisitor<GridSetType, python::return_value_policy<python::return_by_value>,
+                                              python::default_call_policies, python::default_call_policies,
+                                              python::default_call_policies>())
+            .def("__eq__", &GridSetType::operator==, (python::arg("self"), python::arg("set")))
+            .def("__ne__", &GridSetType::operator!=, (python::arg("self"), python::arg("set")));
+
+        AddPickleSupport<GridSetType, GridSetWriter, GridSetReader>::add(cls);
     }
-}
+
+} // namespace
 
 
 void CDPLPythonGrid::exportRegularGridSet()
@@ -57,5 +84,6 @@ void CDPLPythonGrid::exportRegularGridSet()
     using namespace CDPL;
 
     doExportRegularGridSet<Grid::FRegularGridSet>("FRegularGridSet");
-    doExportRegularGridSet<Grid::DRegularGridSet>("DRegularGridSet");
+    doExportRegularGridSet<Grid::DRegularGridSet, Grid::CDFDRegularGridSetWriter,
+                           Grid::CDFDRegularGridSetReader>("DRegularGridSet");
 }

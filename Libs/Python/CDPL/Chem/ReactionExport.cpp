@@ -29,7 +29,10 @@
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
+#include "CDPL/Chem/CDFReactionWriter.hpp"
+#include "CDPL/Chem/CDFReactionReader.hpp"
 
+#include "Base/CDFPickleSuite.hpp"
 #include "Base/PropertyContainerVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -187,6 +190,7 @@ void CDPLPythonChem::exportReaction()
     python::scope scope = python::class_<ReactionWrapper, ReactionWrapper::SharedPointer,
         python::bases<Base::PropertyContainer>, boost::noncopyable>("Reaction", python::no_init)
         .def(python::init<>(python::arg("self")))
+        .def_pickle(CDPLPythonBase::CDFPickleSuite<Chem::Reaction, Chem::CDFReactionWriter, Chem::CDFReactionReader>())
         .def("clear", python::pure_virtual(&Chem::Reaction::clear), python::arg("self"))
         .def("addComponent", python::pure_virtual(addComponentFunc), 
              (python::arg("self"), python::arg("role")), python::return_internal_reference<1>())

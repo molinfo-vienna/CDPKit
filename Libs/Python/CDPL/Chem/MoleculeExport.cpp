@@ -29,7 +29,10 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/CDFMolecularGraphWriter.hpp"
+#include "CDPL/Chem/CDFMoleculeReader.hpp"
 
+#include "Base/CDFPickleSuite.hpp"
 #include "Base/PropertyContainerVisitor.hpp"
 
 #include "AtomContainerVisitor.hpp"
@@ -143,6 +146,7 @@ void CDPLPythonChem::exportMolecule()
         python::bases<Chem::MolecularGraph>,
         boost::noncopyable>("Molecule", python::no_init)
         .def(python::init<>(python::arg("self")))
+        .def_pickle(CDPLPythonBase::CDFPickleSuite<Chem::Molecule, Chem::CDFMolecularGraphWriter, Chem::CDFMoleculeReader>())
         .def("reserveMemoryForAtoms", &Chem::Molecule::reserveMemoryForAtoms, &MoleculeWrapper::reserveMemoryForAtomsDef,
              (python::arg("self"), python::arg("num_atoms")))
         .def("reserveMemoryForBonds", &Chem::Molecule::reserveMemoryForBonds, &MoleculeWrapper::reserveMemoryForBondsDef,

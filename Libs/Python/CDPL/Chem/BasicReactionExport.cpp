@@ -22,55 +22,11 @@
  */
 
 
-#include <sstream>
-
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/BasicReaction.hpp"
-#include "CDPL/Chem/CDFReactionWriter.hpp"
-#include "CDPL/Chem/CDFReactionReader.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    struct BasicReactionPickleSuite : boost::python::pickle_suite
-    {
-
-        static boost::python::tuple
-        getstate(boost::python::object obj)
-        {
-            using namespace boost;
-            using namespace CDPL;
-
-            std::ostringstream os(std::ios_base::binary | std::ios_base::out);
-
-            if (!Chem::CDFReactionWriter(os).write(python::extract<const Chem::BasicReaction&>(obj)))
-                throw Base::IOError("BasicReactionPickleSuite: writing CDF data record failed");
-            
-            return python::make_tuple(obj.attr("__dict__"), os.str());
-        }
-
-        static void
-        setstate(boost::python::object obj, boost::python::tuple state)
-        {
-            using namespace boost;
-            using namespace CDPL;
-
-            python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
-
-            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
-            
-            if (!Chem::CDFReactionReader(is).read(python::extract<Chem::BasicReaction&>(obj)))
-                throw Base::IOError("BasicReactionPickleSuite: reading CDF data record failed");
-        }
-
-        static bool getstate_manages_dict() { return true; }
-    };
-} // namespace
 
 
 void CDPLPythonChem::exportBasicReaction()
@@ -92,7 +48,6 @@ void CDPLPythonChem::exportBasicReaction()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::BasicReaction&>((python::arg("self"), python::arg("mol"))))
         .def(python::init<const Chem::Reaction&>((python::arg("self"), python::arg("mol"))))
-        .def_pickle(BasicReactionPickleSuite())
         .def("addComponent", addComponentFunc, (python::arg("self"), python::arg("role")),
              python::return_internal_reference<1>())
         .def("addComponent", addComponentCopyFunc, (python::arg("self"), python::arg("role"), python::arg("mol")),

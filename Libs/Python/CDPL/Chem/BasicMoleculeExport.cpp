@@ -22,55 +22,11 @@
  */
 
 
-#include <sstream>
-
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/CDFMolecularGraphWriter.hpp"
-#include "CDPL/Chem/CDFMoleculeReader.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    struct BasicMoleculePickleSuite : boost::python::pickle_suite
-    {
-
-        static boost::python::tuple
-        getstate(boost::python::object obj)
-        {
-            using namespace boost;
-            using namespace CDPL;
-
-            std::ostringstream os(std::ios_base::binary | std::ios_base::out);
-
-            if (!Chem::CDFMolecularGraphWriter(os).write(python::extract<const Chem::BasicMolecule&>(obj)))
-                throw Base::IOError("BasicMoleculePickleSuite: writing CDF data record failed");
-
-            return python::make_tuple(obj.attr("__dict__"), os.str());
-        }
-
-        static void
-        setstate(boost::python::object obj, boost::python::tuple state)
-        {
-            using namespace boost;
-            using namespace CDPL;
-
-            python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
-
-            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
-            
-            if (!Chem::CDFMoleculeReader(is).read(python::extract<Chem::BasicMolecule&>(obj)))
-                throw Base::IOError("BasicMoleculePickleSuite: reading CDF data record failed");
-        }
-
-        static bool getstate_manages_dict() { return true; }
-    };
-} // namespace
 
 
 void CDPLPythonChem::exportBasicMolecule()
@@ -100,7 +56,6 @@ void CDPLPythonChem::exportBasicMolecule()
         .def(python::init<const Chem::BasicMolecule&>((python::arg("self"), python::arg("mol"))))
         .def(python::init<const Chem::Molecule&>((python::arg("self"), python::arg("mol"))))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-        .def_pickle(BasicMoleculePickleSuite())
         .def("copy", copyBasicMolFunc, (python::arg("self"), python::arg("mol")))
         .def("copy", copyMolFunc, (python::arg("self"), python::arg("mol")))
         .def("copy", copyMolGraphFunc, (python::arg("self"), python::arg("molgraph")))

@@ -28,7 +28,10 @@
 
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
+#include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 
+#include "Base/CDFPickleSuite.hpp"
 #include "Base/PropertyContainerVisitor.hpp"
 
 #include "FeatureContainerVisitor.hpp"
@@ -107,6 +110,7 @@ void CDPLPythonPharm::exportPharmacophore()
                                          python::bases<Pharm::FeatureContainer>,
                                          boost::noncopyable>("Pharmacophore", python::no_init)
         .def(python::init<>(python::arg("self")))
+        .def_pickle(CDPLPythonBase::CDFPickleSuite<Pharm::Pharmacophore, Pharm::CDFFeatureContainerWriter, Pharm::CDFPharmacophoreReader>())
         .def("clear",  python::pure_virtual(&Pharm::Pharmacophore::clear), python::arg("self"))
         .def("addFeature",  python::pure_virtual(&Pharm::Pharmacophore::addFeature), python::arg("self"),
              python::return_internal_reference<1>())

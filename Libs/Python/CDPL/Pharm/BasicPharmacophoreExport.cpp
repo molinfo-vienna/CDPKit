@@ -22,55 +22,11 @@
  */
 
 
-#include <sstream>
-
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
-#include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    struct BasicPharmacophorePickleSuite : boost::python::pickle_suite
-    {
-
-        static boost::python::tuple
-        getstate(boost::python::object obj)
-        {
-            using namespace boost;
-            using namespace CDPL;
-
-            std::ostringstream os(std::ios_base::binary | std::ios_base::out);
-
-            if (!Pharm::CDFFeatureContainerWriter(os).write(python::extract<const Pharm::BasicPharmacophore&>(obj)))
-                throw Base::IOError("BasicPharmacophorePickleSuite: writing CDF data record failed");
-                
-            return python::make_tuple(obj.attr("__dict__"), os.str());
-        }
-
-        static void
-        setstate(boost::python::object obj, boost::python::tuple state)
-        {
-            using namespace boost;
-            using namespace CDPL;
-
-            python::extract<python::dict>(obj.attr("__dict__"))().update(state[0]);
-            
-            std::istringstream is(python::extract<std::string>(state[1]), std::ios_base::binary | std::ios_base::in);
-
-            if (!Pharm::CDFPharmacophoreReader(is).read(python::extract<Pharm::BasicPharmacophore&>(obj)))
-                throw Base::IOError("BasicPharmacophorePickleSuite: reading CDF data record failed");
-        }
-
-        static bool getstate_manages_dict() { return true; }
-    };
-} // namespace
 
 
 void CDPLPythonPharm::exportBasicPharmacophore()
@@ -100,7 +56,6 @@ void CDPLPythonPharm::exportBasicPharmacophore()
         .def(python::init<const Pharm::BasicPharmacophore&>((python::arg("self"), python::arg("pharm"))))
         .def(python::init<const Pharm::Pharmacophore&>((python::arg("self"), python::arg("pharm"))))
         .def(python::init<const Pharm::FeatureContainer&>((python::arg("self"), python::arg("cntnr"))))
-        .def_pickle(BasicPharmacophorePickleSuite())
         .def("copy", copyBasicPharmFunc, (python::arg("self"), python::arg("pharm")))
         .def("copy", copyPharmFunc, (python::arg("self"), python::arg("pharm")))
         .def("copy", copyFtrContainerFunc, (python::arg("self"), python::arg("cntnr")))
