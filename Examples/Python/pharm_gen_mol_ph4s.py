@@ -32,19 +32,25 @@ import CDPL.Chem as Chem
 import CDPL.Pharm as Pharm
 
 
-# generates the pharmacophore of a given molecule
-def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
-    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
+# generates the pharmacophore of the argument molecule using
+# atom coordinates of the specified conformation
+def genPharmacophore(mol: Chem.Molecule, conf_idx: int) -> Pharm.Pharmacophore:
+    if conf_idx < 1:                                    # for a new molecule
+        Pharm.prepareForPharmacophoreGeneration(mol)    # first call utility function preparing the molecule for pharmacophore generation
         
-    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
-    ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
-
-    ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
-
-    Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore's name to the name of the input molecule
+    ph4_gen = Pharm.DefaultPharmacophoreGenerator()     # create an instance of the pharmacophore generator default implementation
+    ph4 = Pharm.BasicPharmacophore()                    # create an instance of the default implementation of the Pharm.Pharmacophore interface
+    ph4_name = Chem.getName(mol)                        # use the name of the input molecule as pharmacophore name
+    
+    if conf_idx >= 0:                                   # if mol is a multi-conf. molecule use atom 3D coordinates of the specified conf.
+        ph4_gen.setAtom3DCoordinatesFunction(Chem.AtomConformer3DCoordinatesFunctor(conf_idx))
+        ph4_name += '#' + str(conf_idx)                 # and append conformer index to the pharmacophore name
+        
+    ph4_gen.generate(mol, ph4)          # generate the pharmacophore
+    Pharm.setName(ph4, ph4_name)        # set the pharmacophore name
 
     return ph4
-    
+
 def parseArgs() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Generates pharmacophores of the given input molecules.')
 
@@ -130,14 +136,21 @@ def main() -> None:
             if not args.quiet:
                 print('- Generating pharmacophore of molecule %s...' % mol_id)
 
-            try:
-                ph4 = genPharmacophore(mol) # generate pharmacophore
+            num_confs = Chem.getNumConformations(mol)
+            start_conf_idx = 0
 
-                if not args.quiet:
-                     print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ph4)))
+            if num_confs == 0:         # test if molecule has conformations
+                start_conf_idx = -1    # if not, make sure conformer loop body gets executed
+
+            try:
+                for conf_idx in range(start_conf_idx, num_confs):  # for each conformer
+                    ph4 = genPharmacophore(mol, conf_idx)          # generate pharmacophore
+
+                    if not args.quiet:
+                        print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ph4)))
                      
-                if not writer.write(ph4):   # output pharmacophore
-                    sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
+                    if not writer.write(ph4):   # output pharmacophore
+                        sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
                         
             except Exception as e:
                 sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
