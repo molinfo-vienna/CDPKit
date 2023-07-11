@@ -134,7 +134,10 @@ bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_co
 {
     if (symMappings.empty()) {
         symMappingSearch.findMappings(symMappingSearchMolGraph);
-        
+
+        if (abortCallback && abortCallback())
+            return false;
+
         if (symMappings.empty())
             throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
     }
