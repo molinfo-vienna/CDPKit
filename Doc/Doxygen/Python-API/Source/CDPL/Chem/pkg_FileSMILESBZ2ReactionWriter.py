@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileSMILESBZ2ReactionWriter(ReactionWriter):
+class FileSMILESBZ2ReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FileSMILESBZ2ReactionWriter instance.

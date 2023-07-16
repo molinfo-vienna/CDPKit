@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SMARTSMolecularGraphWriter(MolecularGraphWriter):
+class SMARTSMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %SMARTSMolecularGraphWriter instance.

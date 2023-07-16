@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CompoundPharmacophoreReader(PharmacophoreReader):
+class CompoundPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundPharmacophoreReader instance.
@@ -52,7 +52,7 @@ class CompoundPharmacophoreReader(PharmacophoreReader):
     # \brief 
     # \param reader 
     #
-    def addReader(reader: PharmacophoreReader) -> None: pass
+    def addReader(reader: PharmacophoreReaderBase) -> None: pass
 
     ##
     # \brief 
@@ -70,7 +70,7 @@ class CompoundPharmacophoreReader(PharmacophoreReader):
     # \param idx 
     # \return 
     #
-    def getReader(idx: int) -> PharmacophoreReader: pass
+    def getReader(idx: int) -> PharmacophoreReaderBase: pass
 
     ##
     # \brief 

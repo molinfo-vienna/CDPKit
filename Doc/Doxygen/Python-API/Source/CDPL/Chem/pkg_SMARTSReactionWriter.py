@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SMARTSReactionWriter(ReactionWriter):
+class SMARTSReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %SMARTSReactionWriter instance.

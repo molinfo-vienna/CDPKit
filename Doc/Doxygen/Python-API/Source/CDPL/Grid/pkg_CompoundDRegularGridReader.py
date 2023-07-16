@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CompoundDRegularGridReader(DRegularGridReader):
+class CompoundDRegularGridReader(DRegularGridReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundDRegularGridReader instance.
@@ -52,7 +52,7 @@ class CompoundDRegularGridReader(DRegularGridReader):
     # \brief 
     # \param reader 
     #
-    def addReader(reader: DRegularGridReader) -> None: pass
+    def addReader(reader: DRegularGridReaderBase) -> None: pass
 
     ##
     # \brief 
@@ -70,7 +70,7 @@ class CompoundDRegularGridReader(DRegularGridReader):
     # \param idx 
     # \return 
     #
-    def getReader(idx: int) -> DRegularGridReader: pass
+    def getReader(idx: int) -> DRegularGridReaderBase: pass
 
     ##
     # \brief 

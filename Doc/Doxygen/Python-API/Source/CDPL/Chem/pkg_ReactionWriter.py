@@ -22,33 +22,52 @@
 ##
 # \brief 
 #
-class ReactionWriter(CDPL.Base.DataIOBase):
+class ReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %ReactionWriter instance.
+    # \param file_name 
+    # \param mode 
     #
-    def __init__() -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass
+
+    ##
+    # \brief Initializes the \e %ReactionWriter instance.
+    # \param file_name 
+    # \param fmt 
+    # \param mode 
+    #
+    def __init__(file_name: str, fmt: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass
+
+    ##
+    # \brief Initializes the \e %ReactionWriter instance.
+    # \param file_name 
+    # \param fmt 
+    # \param mode 
+    #
+    def __init__(file_name: str, fmt: CDPL.Base.DataFormat, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+
+    ##
+    # \brief Initializes the \e %ReactionWriter instance.
+    # \param ios 
+    # \param fmt 
+    #
+    def __init__(ios: CDPL.Base.IOStream, fmt: str) -> None: pass
+
+    ##
+    # \brief Initializes the \e %ReactionWriter instance.
+    # \param ios 
+    # \param fmt 
+    #
+    def __init__(ios: CDPL.Base.IOStream, fmt: CDPL.Base.DataFormat) -> None: pass
 
     ##
     # \brief 
-    # \param rxn 
     # \return 
     #
-    def write(rxn: Reaction) -> ReactionWriter: pass
+    def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
     # \brief 
     #
-    def close() -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def __bool__() -> bool: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def __nonzero__() -> bool: pass
+    dataFormat = property(getDataFormat)

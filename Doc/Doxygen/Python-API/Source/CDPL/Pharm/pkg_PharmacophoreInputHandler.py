@@ -52,7 +52,7 @@ class PharmacophoreInputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createReader(is: CDPL.Base.IStream) -> PharmacophoreReader: pass
+    def createReader(is: CDPL.Base.IStream) -> PharmacophoreReaderBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class PharmacophoreInputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> PharmacophoreReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> PharmacophoreReaderBase: pass
 
     ##
     # \brief 

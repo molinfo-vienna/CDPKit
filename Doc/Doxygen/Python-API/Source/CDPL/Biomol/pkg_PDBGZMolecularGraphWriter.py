@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class PDBGZMolecularGraphWriter(CDPL.Chem.MolecularGraphWriter):
+class PDBGZMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %PDBGZMolecularGraphWriter instance.

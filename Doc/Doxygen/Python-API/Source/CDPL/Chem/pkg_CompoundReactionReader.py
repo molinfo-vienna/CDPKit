@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CompoundReactionReader(ReactionReader):
+class CompoundReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundReactionReader instance.
@@ -52,7 +52,7 @@ class CompoundReactionReader(ReactionReader):
     # \brief 
     # \param reader 
     #
-    def addReader(reader: ReactionReader) -> None: pass
+    def addReader(reader: ReactionReaderBase) -> None: pass
 
     ##
     # \brief 
@@ -70,7 +70,7 @@ class CompoundReactionReader(ReactionReader):
     # \param idx 
     # \return 
     #
-    def getReader(idx: int) -> ReactionReader: pass
+    def getReader(idx: int) -> ReactionReaderBase: pass
 
     ##
     # \brief 

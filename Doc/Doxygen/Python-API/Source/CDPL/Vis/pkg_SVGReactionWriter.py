@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SVGReactionWriter(CDPL.Chem.ReactionWriter):
+class SVGReactionWriter(CDPL.Chem.ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %SVGReactionWriter instance.

@@ -52,7 +52,7 @@ class MolecularGraphOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IOStream) -> MolecularGraphWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> MolecularGraphWriterBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class MolecularGraphOutputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> MolecularGraphWriter: pass
+    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> MolecularGraphWriterBase: pass
 
     ##
     # \brief 

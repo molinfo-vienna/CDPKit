@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileCFLMoleculeReader(CDPL.Chem.MoleculeReader):
+class FileCFLMoleculeReader(CDPL.Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileCFLMoleculeReader instance.

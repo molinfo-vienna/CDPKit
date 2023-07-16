@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileINCHIMolecularGraphWriter(MolecularGraphWriter):
+class FileINCHIMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %FileINCHIMolecularGraphWriter instance.

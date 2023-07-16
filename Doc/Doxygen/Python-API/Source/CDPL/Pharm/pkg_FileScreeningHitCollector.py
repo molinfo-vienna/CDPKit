@@ -34,7 +34,7 @@ class FileScreeningHitCollector(Boost.Python.instance):
     # \brief Initializes the \e %FileScreeningHitCollector instance.
     # \param writer 
     #
-    def __init__(writer: CDPL.Chem.MolecularGraphWriter) -> None: pass
+    def __init__(writer: CDPL.Chem.MolecularGraphWriterBase) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -59,13 +59,13 @@ class FileScreeningHitCollector(Boost.Python.instance):
     # \brief 
     # \param writer 
     #
-    def setDataWriter(writer: CDPL.Chem.MolecularGraphWriter) -> None: pass
+    def setDataWriter(writer: CDPL.Chem.MolecularGraphWriterBase) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDataWriter() -> CDPL.Chem.MolecularGraphWriter: pass
+    def getDataWriter() -> CDPL.Chem.MolecularGraphWriterBase: pass
 
     ##
     # \brief 

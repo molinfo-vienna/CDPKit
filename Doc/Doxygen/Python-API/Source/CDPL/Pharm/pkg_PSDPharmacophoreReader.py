@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class PSDPharmacophoreReader(PharmacophoreReader):
+class PSDPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
     # \brief Initializes the \e %PSDPharmacophoreReader instance.

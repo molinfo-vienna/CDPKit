@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileCDFDRegularGridSetReader(DRegularGridSetReader):
+class FileCDFDRegularGridSetReader(DRegularGridSetReaderBase):
 
     ##
     # \brief Initializes the \e %FileCDFDRegularGridSetReader instance.

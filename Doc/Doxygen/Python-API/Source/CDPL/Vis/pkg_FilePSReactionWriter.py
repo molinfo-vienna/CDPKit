@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FilePSReactionWriter(CDPL.Chem.ReactionWriter):
+class FilePSReactionWriter(CDPL.Chem.ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FilePSReactionWriter instance.

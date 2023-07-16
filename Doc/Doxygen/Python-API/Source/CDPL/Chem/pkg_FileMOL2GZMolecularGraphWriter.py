@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileMOL2GZMolecularGraphWriter(MolecularGraphWriter):
+class FileMOL2GZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %FileMOL2GZMolecularGraphWriter instance.

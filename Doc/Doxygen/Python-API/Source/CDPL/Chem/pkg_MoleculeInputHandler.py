@@ -52,7 +52,7 @@ class MoleculeInputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createReader(is: CDPL.Base.IStream) -> MoleculeReader: pass
+    def createReader(is: CDPL.Base.IStream) -> MoleculeReaderBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class MoleculeInputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MoleculeReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MoleculeReaderBase: pass
 
     ##
     # \brief 

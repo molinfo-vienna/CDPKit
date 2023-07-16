@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class RXNReactionReader(ReactionReader):
+class RXNReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %RXNReactionReader instance.

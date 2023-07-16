@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileJMEMoleculeReader(MoleculeReader):
+class FileJMEMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileJMEMoleculeReader instance.

@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class RDFReactionWriter(ReactionWriter):
+class RDFReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %RDFReactionWriter instance.

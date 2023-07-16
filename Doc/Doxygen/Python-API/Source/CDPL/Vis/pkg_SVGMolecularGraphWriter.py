@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SVGMolecularGraphWriter(CDPL.Chem.MolecularGraphWriter):
+class SVGMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %SVGMolecularGraphWriter instance.

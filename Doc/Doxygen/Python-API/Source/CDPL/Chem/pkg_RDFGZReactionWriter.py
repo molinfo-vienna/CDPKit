@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class RDFGZReactionWriter(ReactionWriter):
+class RDFGZReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %RDFGZReactionWriter instance.

@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class RDFGZReactionReader(ReactionReader):
+class RDFGZReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %RDFGZReactionReader instance.

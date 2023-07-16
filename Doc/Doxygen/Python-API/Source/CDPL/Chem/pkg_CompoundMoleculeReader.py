@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CompoundMoleculeReader(MoleculeReader):
+class CompoundMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundMoleculeReader instance.
@@ -52,7 +52,7 @@ class CompoundMoleculeReader(MoleculeReader):
     # \brief 
     # \param reader 
     #
-    def addReader(reader: MoleculeReader) -> None: pass
+    def addReader(reader: MoleculeReaderBase) -> None: pass
 
     ##
     # \brief 
@@ -70,7 +70,7 @@ class CompoundMoleculeReader(MoleculeReader):
     # \param idx 
     # \return 
     #
-    def getReader(idx: int) -> MoleculeReader: pass
+    def getReader(idx: int) -> MoleculeReaderBase: pass
 
     ##
     # \brief 

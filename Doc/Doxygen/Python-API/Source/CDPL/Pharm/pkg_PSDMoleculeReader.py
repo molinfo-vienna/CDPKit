@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class PSDMoleculeReader(CDPL.Chem.MoleculeReader):
+class PSDMoleculeReader(CDPL.Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %PSDMoleculeReader instance.

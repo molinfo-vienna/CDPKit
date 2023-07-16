@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileCDFReactionWriter(ReactionWriter):
+class FileCDFReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FileCDFReactionWriter instance.

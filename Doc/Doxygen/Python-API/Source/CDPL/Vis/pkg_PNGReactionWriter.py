@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class PNGReactionWriter(CDPL.Chem.ReactionWriter):
+class PNGReactionWriter(CDPL.Chem.ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %PNGReactionWriter instance.

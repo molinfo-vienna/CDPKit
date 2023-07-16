@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileSMARTSReactionWriter(ReactionWriter):
+class FileSMARTSReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FileSMARTSReactionWriter instance.

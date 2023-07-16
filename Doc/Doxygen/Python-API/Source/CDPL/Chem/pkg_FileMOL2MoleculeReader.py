@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileMOL2MoleculeReader(MoleculeReader):
+class FileMOL2MoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileMOL2MoleculeReader instance.

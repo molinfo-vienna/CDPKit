@@ -52,7 +52,7 @@ class DRegularGridOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IOStream) -> DRegularGridWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> DRegularGridWriterBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class DRegularGridOutputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> DRegularGridWriter: pass
+    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> DRegularGridWriterBase: pass
 
     ##
     # \brief 

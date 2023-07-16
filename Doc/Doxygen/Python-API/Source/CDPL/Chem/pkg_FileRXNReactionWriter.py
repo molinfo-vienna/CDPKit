@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileRXNReactionWriter(ReactionWriter):
+class FileRXNReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FileRXNReactionWriter instance.

@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class JMEMolecularGraphWriter(MolecularGraphWriter):
+class JMEMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %JMEMolecularGraphWriter instance.

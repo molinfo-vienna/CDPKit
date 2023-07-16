@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SMARTSMoleculeReader(MoleculeReader):
+class SMARTSMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %SMARTSMoleculeReader instance.

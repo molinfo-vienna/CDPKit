@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileCDFMoleculeReader(MoleculeReader):
+class FileCDFMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileCDFMoleculeReader instance.

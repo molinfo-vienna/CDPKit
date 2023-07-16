@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CDFGZDRegularGridWriter(DRegularGridWriter):
+class CDFGZDRegularGridWriter(DRegularGridWriterBase):
 
     ##
     # \brief Initializes the \e %CDFGZDRegularGridWriter instance.

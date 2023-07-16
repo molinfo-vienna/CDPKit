@@ -52,7 +52,7 @@ class MolecularGraphInputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createReader(is: CDPL.Base.IStream) -> MolecularGraphReader: pass
+    def createReader(is: CDPL.Base.IStream) -> object: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class MolecularGraphInputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MolecularGraphReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> object: pass
 
     ##
     # \brief 

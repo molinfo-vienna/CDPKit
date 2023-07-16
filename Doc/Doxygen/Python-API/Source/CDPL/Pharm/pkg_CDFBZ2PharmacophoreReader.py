@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CDFBZ2PharmacophoreReader(PharmacophoreReader):
+class CDFBZ2PharmacophoreReader(PharmacophoreReaderBase):
 
     ##
     # \brief Initializes the \e %CDFBZ2PharmacophoreReader instance.

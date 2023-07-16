@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FilePMLPharmacophoreReader(PharmacophoreReader):
+class FilePMLPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
     # \brief Initializes the \e %FilePMLPharmacophoreReader instance.

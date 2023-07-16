@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class MMTFGZMoleculeReader(CDPL.Chem.MoleculeReader):
+class MMTFGZMoleculeReader(CDPL.Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %MMTFGZMoleculeReader instance.

@@ -22,19 +22,59 @@
 ##
 # \brief 
 #
-class MoleculeWriter(CDPL.Base.DataIOBase):
+class MoleculeReaderBase(CDPL.Base.DataIOBase):
 
     ##
-    # \brief Initializes the \e %MoleculeWriter instance.
+    # \brief Initializes the \e %MoleculeReaderBase instance.
     #
     def __init__() -> None: pass
 
     ##
     # \brief 
     # \param mol 
+    # \param overwrite 
     # \return 
     #
-    def write(mol: Molecule) -> MoleculeWriter: pass
+    def read(mol: Molecule, overwrite: bool = True) -> MoleculeReaderBase: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    # \param mol 
+    # \param overwrite 
+    # \return 
+    #
+    def read(idx: int, mol: Molecule, overwrite: bool = True) -> MoleculeReaderBase: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def skip() -> MoleculeReaderBase: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def hasMoreData() -> bool: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getRecordIndex() -> int: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    #
+    def setRecordIndex(idx: int) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getNumRecords() -> int: pass
 
     ##
     # \brief 
@@ -45,10 +85,15 @@ class MoleculeWriter(CDPL.Base.DataIOBase):
     # \brief 
     # \return 
     #
-    def __bool__() -> bool: pass
+    def __nonzero__() -> bool: pass
 
     ##
     # \brief 
     # \return 
     #
-    def __nonzero__() -> bool: pass
+    def __bool__() -> bool: pass
+
+    ##
+    # \brief 
+    #
+    numRecords = property(getNumRecords)

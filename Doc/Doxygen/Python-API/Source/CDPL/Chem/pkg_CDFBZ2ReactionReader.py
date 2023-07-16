@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CDFBZ2ReactionReader(ReactionReader):
+class CDFBZ2ReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %CDFBZ2ReactionReader instance.

@@ -52,7 +52,7 @@ class FeatureContainerOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IOStream) -> FeatureContainerWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> FeatureContainerWriterBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class FeatureContainerOutputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> FeatureContainerWriter: pass
+    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> FeatureContainerWriterBase: pass
 
     ##
     # \brief 

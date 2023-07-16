@@ -22,78 +22,52 @@
 ##
 # \brief 
 #
-class ReactionReader(CDPL.Base.DataIOBase):
+class ReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %ReactionReader instance.
+    # \param file_name 
+    # \param mode 
     #
-    def __init__() -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
 
     ##
-    # \brief 
-    # \param rxn 
-    # \param overwrite 
-    # \return 
+    # \brief Initializes the \e %ReactionReader instance.
+    # \param file_name 
+    # \param fmt 
+    # \param mode 
     #
-    def read(rxn: Reaction, overwrite: bool = True) -> ReactionReader: pass
+    def __init__(file_name: str, fmt: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \param rxn 
-    # \param overwrite 
-    # \return 
+    # \brief Initializes the \e %ReactionReader instance.
+    # \param file_name 
+    # \param fmt 
+    # \param mode 
     #
-    def read(idx: int, rxn: Reaction, overwrite: bool = True) -> ReactionReader: pass
+    def __init__(file_name: str, fmt: CDPL.Base.DataFormat, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
 
     ##
-    # \brief 
-    # \return 
+    # \brief Initializes the \e %ReactionReader instance.
+    # \param is 
+    # \param fmt 
     #
-    def skip() -> ReactionReader: pass
+    def __init__(is: CDPL.Base.IStream, fmt: str) -> None: pass
 
     ##
-    # \brief 
-    # \return 
+    # \brief Initializes the \e %ReactionReader instance.
+    # \param is 
+    # \param fmt 
     #
-    def hasMoreData() -> bool: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getRecordIndex() -> int: pass
-
-    ##
-    # \brief 
-    # \param idx 
-    #
-    def setRecordIndex(idx: int) -> None: pass
+    def __init__(is: CDPL.Base.IStream, fmt: CDPL.Base.DataFormat) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getNumRecords() -> int: pass
+    def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
     # \brief 
     #
-    def close() -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def __nonzero__() -> bool: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def __bool__() -> bool: pass
-
-    ##
-    # \brief 
-    #
-    numRecords = property(getNumRecords)
+    dataFormat = property(getDataFormat)

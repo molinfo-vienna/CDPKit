@@ -52,7 +52,7 @@ class ReactionOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IOStream) -> ReactionWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> ReactionWriterBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class ReactionOutputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> ReactionWriter: pass
+    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> ReactionWriterBase: pass
 
     ##
     # \brief 

@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SMILESGZReactionWriter(ReactionWriter):
+class SMILESGZReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %SMILESGZReactionWriter instance.

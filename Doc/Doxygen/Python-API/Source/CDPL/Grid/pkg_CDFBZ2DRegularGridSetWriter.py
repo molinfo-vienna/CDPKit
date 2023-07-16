@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class CDFBZ2DRegularGridSetWriter(DRegularGridSetWriter):
+class CDFBZ2DRegularGridSetWriter(DRegularGridSetWriterBase):
 
     ##
     # \brief Initializes the \e %CDFBZ2DRegularGridSetWriter instance.

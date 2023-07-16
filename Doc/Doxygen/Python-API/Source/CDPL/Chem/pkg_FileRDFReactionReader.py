@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileRDFReactionReader(ReactionReader):
+class FileRDFReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %FileRDFReactionReader instance.

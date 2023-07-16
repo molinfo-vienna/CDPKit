@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class PMLFeatureContainerWriter(FeatureContainerWriter):
+class PMLFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
     # \brief Initializes the \e %PMLFeatureContainerWriter instance.

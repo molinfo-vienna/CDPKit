@@ -52,7 +52,7 @@ class ReactionInputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createReader(is: CDPL.Base.IStream) -> ReactionReader: pass
+    def createReader(is: CDPL.Base.IStream) -> ReactionReaderBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class ReactionInputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> ReactionReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> ReactionReaderBase: pass
 
     ##
     # \brief 

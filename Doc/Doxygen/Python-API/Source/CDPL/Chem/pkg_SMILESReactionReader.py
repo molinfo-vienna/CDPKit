@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class SMILESReactionReader(ReactionReader):
+class SMILESReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %SMILESReactionReader instance.

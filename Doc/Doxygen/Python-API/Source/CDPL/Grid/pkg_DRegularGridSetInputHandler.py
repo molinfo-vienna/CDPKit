@@ -52,7 +52,7 @@ class DRegularGridSetInputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createReader(is: CDPL.Base.IStream) -> DRegularGridSetReader: pass
+    def createReader(is: CDPL.Base.IStream) -> DRegularGridSetReaderBase: pass
 
     ##
     # \brief 
@@ -60,7 +60,7 @@ class DRegularGridSetInputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> DRegularGridSetReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> DRegularGridSetReaderBase: pass
 
     ##
     # \brief 

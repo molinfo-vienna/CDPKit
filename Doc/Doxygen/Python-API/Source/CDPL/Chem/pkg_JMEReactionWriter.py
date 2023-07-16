@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class JMEReactionWriter(ReactionWriter):
+class JMEReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %JMEReactionWriter instance.

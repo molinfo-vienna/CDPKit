@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileCDFFeatureContainerWriter(FeatureContainerWriter):
+class FileCDFFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
     # \brief Initializes the \e %FileCDFFeatureContainerWriter instance.

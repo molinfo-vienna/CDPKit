@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FileINCHIMoleculeReader(MoleculeReader):
+class FileINCHIMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileINCHIMoleculeReader instance.

@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class JMEReactionReader(ReactionReader):
+class JMEReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %JMEReactionReader instance.
