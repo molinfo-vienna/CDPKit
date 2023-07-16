@@ -118,6 +118,8 @@
 #include "CDPL/Pharm/CDFBZ2PharmacophoreReader.hpp"
 #include "CDPL/Pharm/CDFGZFeatureContainerWriter.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerWriter.hpp"
+#include "CDPL/Pharm/PharmacophoreReader.hpp"
+#include "CDPL/Pharm/FeatureContainerWriter.hpp"
 
 #ifdef HAVE_SQLITE3
 

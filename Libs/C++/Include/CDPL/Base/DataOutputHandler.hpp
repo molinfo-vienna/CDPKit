@@ -81,9 +81,9 @@ namespace CDPL
              * \param mode Flags specifying the file open-mode.
              * \return A shared pointer to the created Base::DataWriter instance.
              */
-            virtual typename WriterType::SharedPointer createWriter(const std::string&      file_name,
-                                                                    std::ios_base::openmode mode =
-                                                                        std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
+            virtual typename WriterType::SharedPointer createWriter(const std::string& file_name,
+                                                                    std::ios_base::openmode mode = std::ios_base::in |
+                                                                    std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
         };
     } // namespace Base
 } // namespace CDPL

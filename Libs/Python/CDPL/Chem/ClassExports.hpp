@@ -140,8 +140,6 @@ namespace CDPLPythonChem
     void exportBRICSFragmentGenerator();
 
     void exportMoleculeReader();
-    void exportMoleculeWriter();
-    void exportMolecularGraphReader();
     void exportMolecularGraphWriter();
     void exportReactionReader();
     void exportReactionWriter();
@@ -173,7 +171,7 @@ namespace CDPLPythonChem
     void exportCDFReactionWriter();
     void exportMOL2MoleculeReader();
     void exportMOL2MolecularGraphWriter();
-
+    
     void exportMoleculeIOManager();
     void exportMolecularGraphIOManager();
     void exportReactionIOManager();

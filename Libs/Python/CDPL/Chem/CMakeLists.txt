@@ -173,8 +173,6 @@ SET(chem_MOD_SRCS
     MOL2MolecularGraphOutputHandlerExport.cpp 
 
     MoleculeReaderExport.cpp 
-    MoleculeWriterExport.cpp 
-    MolecularGraphReaderExport.cpp 
     MolecularGraphWriterExport.cpp 
     ReactionReaderExport.cpp 
     ReactionWriterExport.cpp 
@@ -206,7 +204,7 @@ SET(chem_MOD_SRCS
     RDFReactionWriterExport.cpp 
     MOL2MoleculeReaderExport.cpp 
     MOL2MolecularGraphWriterExport.cpp
-
+    
     MolecularGraphPropertyExport.cpp 
     Entity3DPropertyExport.cpp 
     AtomPropertyExport.cpp 

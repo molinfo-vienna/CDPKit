@@ -26,12 +26,16 @@
 
 #include "Base/DataReaderExport.hpp"
 #include "Util/CompoundDataReaderExport.hpp"
+#include "Util/MultiFormatDataReaderExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonGrid::exportRegularGridSetReader()
 {
-    CDPLPythonBase::DataReaderExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetReader", "grid_set");
-    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Grid::DRegularGridSet>("CompoundDRegularGridSetReader");
+    using namespace CDPL;
+    
+    CDPLPythonBase::DataReaderExport<Grid::DRegularGridSet>("DRegularGridSetReaderBase", "grid_set");
+    CDPLPythonUtil::CompoundDataReaderExport<Grid::DRegularGridSet>("CompoundDRegularGridSetReader");
+    CDPLPythonUtil::MultiFormatDataReaderExport<Grid::DRegularGridSet>("DRegularGridSetReader");
 }

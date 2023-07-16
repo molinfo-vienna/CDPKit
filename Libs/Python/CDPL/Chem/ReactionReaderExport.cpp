@@ -26,12 +26,16 @@
 
 #include "Base/DataReaderExport.hpp"
 #include "Util/CompoundDataReaderExport.hpp"
+#include "Util/MultiFormatDataReaderExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonChem::exportReactionReader()
 {
-    CDPLPythonBase::DataReaderExport<CDPL::Chem::Reaction>("ReactionReader", "rxn");
-    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Reaction>("CompoundReactionReader");
+    using namespace CDPL;
+    
+    CDPLPythonBase::DataReaderExport<Chem::Reaction>("ReactionReaderBase", "rxn");
+    CDPLPythonUtil::CompoundDataReaderExport<Chem::Reaction>("CompoundReactionReader");
+    CDPLPythonUtil::MultiFormatDataReaderExport<Chem::Reaction>("ReactionReader");
 }

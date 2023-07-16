@@ -205,6 +205,7 @@ namespace CDPL
          */
         template <typename T>
         DataReader<T>& operator>>(DataReader<T>& reader, T& obj);
+
     } // namespace Base
 } // namespace CDPL
 

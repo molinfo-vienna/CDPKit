@@ -25,11 +25,15 @@
 #include "CDPL/Chem/Reaction.hpp"
 
 #include "Base/DataWriterExport.hpp"
+#include "Util/MultiFormatDataWriterExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonChem::exportReactionWriter()
 {
-    CDPLPythonBase::DataWriterExport<CDPL::Chem::Reaction>("ReactionWriter", "rxn");
+    using namespace CDPL;
+
+    CDPLPythonBase::DataWriterExport<Chem::Reaction>("ReactionWriterBase", "rxn");
+    CDPLPythonUtil::MultiFormatDataWriterExport<Chem::Reaction>("ReactionWriter");
 }

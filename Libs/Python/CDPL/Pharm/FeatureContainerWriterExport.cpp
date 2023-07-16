@@ -25,11 +25,15 @@
 #include "CDPL/Pharm/FeatureContainer.hpp"
 
 #include "Base/DataWriterExport.hpp"
+#include "Util/MultiFormatDataWriterExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonPharm::exportFeatureContainerWriter()
 {
-    CDPLPythonBase::DataWriterExport<CDPL::Pharm::FeatureContainer>("FeatureContainerWriter", "cntnr");
+    using namespace CDPL;
+
+    CDPLPythonBase::DataWriterExport<Pharm::FeatureContainer>("FeatureContainerWriterBase", "cntnr");
+    CDPLPythonUtil::MultiFormatDataWriterExport<Pharm::FeatureContainer>("FeatureContainerWriter");
 }

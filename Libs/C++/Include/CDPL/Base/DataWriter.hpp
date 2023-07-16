@@ -135,6 +135,7 @@ namespace CDPL
          */
         template <typename T>
         DataWriter<T>& operator<<(DataWriter<T>& writer, const T& obj);
+
     } // namespace Base
 } // namespace CDPL
 

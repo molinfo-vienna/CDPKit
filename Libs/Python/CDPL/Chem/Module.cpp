@@ -143,8 +143,6 @@ BOOST_PYTHON_MODULE(_chem)
     exportProtonationStateStandardizer();
     
     exportMoleculeReader();
-    exportMoleculeWriter();
-    exportMolecularGraphReader();
     exportMolecularGraphWriter();
     exportReactionReader();
     exportReactionWriter();
@@ -176,7 +174,7 @@ BOOST_PYTHON_MODULE(_chem)
     exportCDFReactionWriter();
     exportMOL2MoleculeReader();
     exportMOL2MolecularGraphWriter();
-
+  
     exportMoleculeIOManager();
     exportMolecularGraphIOManager();
     exportReactionIOManager();

@@ -44,6 +44,8 @@
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Util/FileDataReader.hpp"
 #include "CDPL/Util/FileDataWriter.hpp"
+#include "CDPL/Util/MultiFormatDataReader.hpp"
+#include "CDPL/Util/MultiFormatDataWriter.hpp"
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/ObjectStack.hpp"

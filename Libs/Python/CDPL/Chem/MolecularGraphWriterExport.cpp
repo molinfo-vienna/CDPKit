@@ -25,11 +25,15 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/DataWriterExport.hpp"
+#include "Util/MultiFormatDataWriterExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonChem::exportMolecularGraphWriter()
 {
-    CDPLPythonBase::DataWriterExport<CDPL::Chem::MolecularGraph>("MolecularGraphWriter", "molgraph");
+    using namespace CDPL;
+    
+    CDPLPythonBase::DataWriterExport<Chem::MolecularGraph>("MolecularGraphWriterBase", "molgraph");
+    CDPLPythonUtil::MultiFormatDataWriterExport<Chem::MolecularGraph>("MolecularGraphWriter");
 }

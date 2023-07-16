@@ -25,11 +25,15 @@
 #include "CDPL/Grid/RegularGridSet.hpp"
 
 #include "Base/DataWriterExport.hpp"
+#include "Util/MultiFormatDataWriterExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonGrid::exportRegularGridSetWriter()
 {
-    CDPLPythonBase::DataWriterExport<CDPL::Grid::DRegularGridSet>("DRegularGridSetWriter", "grid_set");
+    using namespace CDPL;
+
+    CDPLPythonBase::DataWriterExport<Grid::DRegularGridSet>("DRegularGridSetWriterBase", "grid_set");
+    CDPLPythonUtil::MultiFormatDataWriterExport<Grid::DRegularGridSet>("DRegularGridSetWriter");
 }

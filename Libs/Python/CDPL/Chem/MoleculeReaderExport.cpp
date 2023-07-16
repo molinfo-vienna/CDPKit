@@ -26,12 +26,16 @@
 
 #include "Base/DataReaderExport.hpp"
 #include "Util/CompoundDataReaderExport.hpp"
+#include "Util/MultiFormatDataReaderExport.hpp"
 
 #include "ClassExports.hpp"
 
 
 void CDPLPythonChem::exportMoleculeReader()
 {
-    CDPLPythonBase::DataReaderExport<CDPL::Chem::Molecule>("MoleculeReader", "mol");
-    CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Molecule>("CompoundMoleculeReader");
+    using namespace CDPL;
+
+    CDPLPythonBase::DataReaderExport<Chem::Molecule>("MoleculeReaderBase", "mol");
+    CDPLPythonUtil::CompoundDataReaderExport<Chem::Molecule>("CompoundMoleculeReader");
+    CDPLPythonUtil::MultiFormatDataReaderExport<Chem::Molecule>("MoleculeReader");
 }

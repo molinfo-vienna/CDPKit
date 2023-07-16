@@ -62,6 +62,10 @@
 #include "CDPL/Grid/CDFBZ2DRegularGridReader.hpp"
 #include "CDPL/Grid/CDFDRegularGridReader.hpp"
 #include "CDPL/Grid/CDFGZDRegularGridInputHandler.hpp"
+#include "CDPL/Grid/DRegularGridReader.hpp"
+#include "CDPL/Grid/DRegularGridWriter.hpp"
+#include "CDPL/Grid/DRegularGridSetReader.hpp"
+#include "CDPL/Grid/DRegularGridSetWriter.hpp"
 #include "CDPL/Grid/AttributedGridFunctions.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
 

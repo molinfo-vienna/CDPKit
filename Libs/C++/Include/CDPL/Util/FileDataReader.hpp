@@ -55,6 +55,7 @@ namespace CDPL
                            std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary);
 
             FileDataReader& read(DataType& obj, bool overwrite = true);
+
             FileDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
             FileDataReader& skip();
@@ -62,11 +63,12 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void        setRecordIndex(std::size_t idx);
+
+            void setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
             void close();
