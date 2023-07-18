@@ -31,9 +31,7 @@
 #include <mutex>
 
 #include "CDPL/Util/CompoundDataReader.hpp"
-#include "CDPL/Base/DataWriter.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/MolecularGraphWriter.hpp"
 #include "CDPL/Chem/ProtonationStateStandardizer.hpp"
 #include "CDPL/Internal/Timer.hpp"
 
@@ -71,11 +69,6 @@ namespace TautGen
             EXHAUSTIVE
         };
 
-        typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule>        InputHandler;
-        typedef InputHandler::SharedPointer                               InputHandlerPtr;
-        typedef OutputHandler::SharedPointer                              OutputHandlerPtr;
-
         const char* getProgName() const;
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
@@ -112,20 +105,16 @@ namespace TautGen
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-        InputHandlerPtr  getInputHandler(const std::string& file_path) const;
-        OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
-
         void addOptionLongDescriptions();
 
         class InputScanProgressCallback;
         class TautGenerationWorker;
 
-        typedef std::vector<std::string>                                          StringList;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>                      MoleculeReader;
-        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule>              CompMoleculeReader;
-        typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-        typedef CDPL::Chem::ProtonationStateStandardizer                          ChargeNeutralizer;
-        typedef CDPL::Internal::Timer                                             Timer;
+        typedef std::vector<std::string>                             StringList;
+        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+        typedef CDPL::Chem::MolecularGraphWriter::SharedPointer      MoleculeWriterPtr;
+        typedef CDPL::Chem::ProtonationStateStandardizer             ChargeNeutralizer;
+        typedef CDPL::Internal::Timer                                Timer;
 
         StringList         inputFiles;
         std::string        outputFile;
@@ -146,9 +135,9 @@ namespace TautGen
         std::size_t        numThreads;
         std::size_t        maxNumTautomers;
         Mode               mode;
-        InputHandlerPtr    inputHandler;
+        std::string        inputFormat;
+        std::string        outputFormat;
         CompMoleculeReader inputReader;
-        OutputHandlerPtr   outputHandler;
         MoleculeWriterPtr  outputWriter;
         std::mutex         mutex;
         std::mutex         readMolMutex;

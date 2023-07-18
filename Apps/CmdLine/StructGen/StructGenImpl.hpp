@@ -31,9 +31,7 @@
 #include <mutex>
 
 #include "CDPL/Util/CompoundDataReader.hpp"
-#include "CDPL/Base/DataWriter.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/MolecularGraphWriter.hpp"
 #include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
@@ -64,11 +62,6 @@ namespace StructGen
         StructGenImpl();
 
       private:
-        typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule>        InputHandler;
-        typedef InputHandler::SharedPointer                               InputHandlerPtr;
-        typedef OutputHandler::SharedPointer                              OutputHandlerPtr;
-
         const char* getProgName() const;
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
@@ -125,24 +118,19 @@ namespace StructGen
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-        InputHandlerPtr  getInputHandler(const std::string& file_path) const;
-        OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
-        OutputHandlerPtr getFailedOutputHandler(const std::string& file_path) const;
-
         void addOptionLongDescriptions();
 
         class InputScanProgressCallback;
         class StructureGenerationWorker;
 
-        typedef std::vector<std::string>                                          StringList;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>                      MoleculeReader;
-        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule>              CompMoleculeReader;
-        typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-        typedef CDPL::Internal::Timer                                             Timer;
-        typedef CDPL::ConfGen::StructureGeneratorSettings                         StructureGeneratorSettings;
-        typedef CDPL::ConfGen::FragmentConformerGeneratorSettings                 FragmentConformerGeneratorSettings;
-        typedef CDPL::ConfGen::TorsionLibrary::SharedPointer                      TorsionLibraryPtr;
-        typedef CDPL::ConfGen::FragmentLibrary::SharedPointer                     FragmentLibraryPtr;
+        typedef std::vector<std::string>                             StringList;
+        typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+        typedef CDPL::Chem::MolecularGraphWriter::SharedPointer      MoleculeWriterPtr;
+        typedef CDPL::Internal::Timer                                Timer;
+        typedef CDPL::ConfGen::StructureGeneratorSettings            StructureGeneratorSettings;
+        typedef CDPL::ConfGen::FragmentConformerGeneratorSettings    FragmentConformerGeneratorSettings;
+        typedef CDPL::ConfGen::TorsionLibrary::SharedPointer         TorsionLibraryPtr;
+        typedef CDPL::ConfGen::FragmentLibrary::SharedPointer        FragmentLibraryPtr;
 
         StringList                 inputFiles;
         std::string                outputFile;
@@ -159,11 +147,11 @@ namespace StructGen
         std::string                fragmentLibName;
         FragmentLibraryPtr         fragmentLib;
         bool                       replaceBuiltinFragLib;
-        InputHandlerPtr            inputHandler;
+        std::string                inputFormat;
         CompMoleculeReader         inputReader;
-        OutputHandlerPtr           outputHandler;
+        std::string                outputFormat;
         MoleculeWriterPtr          outputWriter;
-        OutputHandlerPtr           failedOutputHandler;
+        std::string                failedOutputFormat;
         MoleculeWriterPtr          failedOutputWriter;
         std::mutex                 mutex;
         std::mutex                 readMolMutex;

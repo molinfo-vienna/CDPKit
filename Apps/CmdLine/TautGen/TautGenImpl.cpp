@@ -49,7 +49,8 @@
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"  
 #include "CDPL/Chem/AtomPropertyFlag.hpp"  
-#include "CDPL/Chem/BondPropertyFlag.hpp"  
+#include "CDPL/Chem/BondPropertyFlag.hpp"
+#include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -361,7 +362,7 @@ TautGenImpl::TautGenImpl():
     lactamLactim(true), keteneYnol(true), nitroAci(true), phosphinicAcid(true),
     sulfenicAcid(true), genericH13Shift(true), genericH15Shift(true),
     numThreads(0), maxNumTautomers(0), mode(Mode::TOPOLOGICALLY_UNIQUE), 
-    inputHandler(), outputHandler(), outputWriter(), numOutTautomers(0)
+    inputFormat(), outputFormat(), outputWriter(), numOutTautomers(0)
 {
     using namespace std::placeholders;
     
@@ -493,21 +494,21 @@ void TautGenImpl::setMode(const std::string& mode_str)
 void TautGenImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!inputHandler)
+    
+    if (Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("input-format");
+
+    inputFormat = file_ext;
 }
 
 void TautGenImpl::setOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!outputHandler)
+    
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("output-format");
+
+    outputFormat = file_ext;
 }
 
 int TautGenImpl::process()
@@ -769,14 +770,14 @@ void TautGenImpl::printOptionSummary()
         printMessage(VERBOSE, std::string(36, ' ') + *it);
 
     printMessage(VERBOSE, " Output File:                       " + outputFile);
-     printMessage(VERBOSE, " Mode:                              " + getModeString());
+    printMessage(VERBOSE, " Mode:                              " + getModeString());
     printMessage(VERBOSE, " Multithreading:                    " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
         printMessage(VERBOSE, " Number of Threads:                 " + std::to_string(numThreads));
 
-    printMessage(VERBOSE, " Input File Format:                 " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Output File Format:                " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Input File Format:                 " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Output File Format:                " + (!outputFormat.empty() ? outputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Stereochemistry Aware:             " + std::string(regardStereo ? "Yes" : "No"));
     printMessage(VERBOSE, " Isotope Aware:                     " + std::string(regardIsotopes ? "Yes" : "No"));
     printMessage(VERBOSE, " Neutralize Charges:                " + std::string(neutralize ? "Yes" : "No"));
@@ -815,13 +816,16 @@ void TautGenImpl::initInputReader()
             return;
 
         const std::string& file_path = inputFiles[i];
-        InputHandlerPtr input_handler = getInputHandler(file_path);
+        Chem::MoleculeReader::SharedPointer reader_ptr;
+        
+        try {
+            reader_ptr.reset(inputFormat.empty() ? new Chem::MoleculeReader(file_path) :
+                             new Chem::MoleculeReader(file_path, inputFormat));
 
-        if (!input_handler)
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no input handler found for file '" + file_path + '\'');
-
-        MoleculeReader::SharedPointer reader_ptr = input_handler->createReader(file_path);
-
+        }
+        
         setMultiConfImportParameter(*reader_ptr, false);
 
         std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
@@ -833,7 +837,7 @@ void TautGenImpl::initInputReader()
             reader_ptr->unregisterIOCallback(cb_id);
             break;
         }
-
+       
         reader_ptr->unregisterIOCallback(cb_id);
     }
 
@@ -848,32 +852,17 @@ void TautGenImpl::initOutputWriter()
 {
     using namespace CDPL;
 
-    OutputHandlerPtr output_handler = getOutputHandler(outputFile);
+    try {
+        outputWriter.reset(outputFormat.empty() ? new Chem::MolecularGraphWriter(outputFile) :
+                           new Chem::MolecularGraphWriter(outputFile, outputFormat));
 
-    if (!output_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no output handler found for file '" + outputFile + '\'');
-
-    outputWriter = output_handler->createWriter(outputFile);
+    }
 
     setSMILESRecordFormatParameter(*outputWriter, "SN");
     setSMILESWriteCanonicalFormParameter(*outputWriter, true);
     setMultiConfExportParameter(*outputWriter, false);
-}
-
-TautGenImpl::InputHandlerPtr TautGenImpl::getInputHandler(const std::string& file_path) const
-{
-    if (inputHandler)
-        return inputHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
-}
-
-TautGenImpl::OutputHandlerPtr TautGenImpl::getOutputHandler(const std::string& file_path) const
-{
-    if (outputHandler)
-        return outputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
 std::string TautGenImpl::getModeString() const

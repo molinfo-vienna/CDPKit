@@ -59,9 +59,6 @@ namespace PSDCreate
         PSDCreateImpl();
 
       private:
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-        typedef InputHandler::SharedPointer                        InputHandlerPtr;
-
         const char* getProgName() const;
         const char* getProgCopyright() const;
         const char* getProgAboutText() const;
@@ -93,8 +90,6 @@ namespace PSDCreate
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-        InputHandlerPtr getInputHandler(const std::string& file_path) const;
-
         void addOptionLongDescriptions();
 
         struct InputScanProgressCallback;
@@ -103,7 +98,6 @@ namespace PSDCreate
 
         typedef std::vector<std::string>                             StringList;
         typedef CDPL::Pharm::ScreeningDBCreator::Mode                CreationMode;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>         MoleculeReader;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
         typedef CDPL::Internal::Timer                                Timer;
 
@@ -112,7 +106,7 @@ namespace PSDCreate
         bool               dropDuplicates;
         std::size_t        numThreads;
         CreationMode       creationMode;
-        InputHandlerPtr    inputHandler;
+        std::string        inputFormat;
         CompMoleculeReader inputReader;
         std::mutex         mutex;
         std::mutex         molReadMutex;

@@ -29,9 +29,12 @@
 #include <chrono>
 #include <functional>
 
+#include <boost/filesystem.hpp>
+
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
@@ -153,7 +156,7 @@ private:
 
 PSDCreateImpl::PSDCreateImpl(): 
     dropDuplicates(false), numThreads(0), creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), 
-    inputHandler(), addSourceFileProp(false)
+    inputFormat(), addSourceFileProp(false)
 {
     using namespace std::placeholders;
 
@@ -237,10 +240,10 @@ void PSDCreateImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!inputHandler)
+    if (!Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("input-format");
+
+    inputFormat = file_ext;
 }
 
 void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
@@ -543,15 +546,15 @@ void PSDCreateImpl::printOptionSummary()
         printMessage(VERBOSE, std::string(27, ' ') + *it);
 
     printMessage(VERBOSE, " Output Database:          " + outputDatabase);
-     printMessage(VERBOSE, " Creation Mode:            " + getCreationModeString());
-     printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
+    printMessage(VERBOSE, " Creation Mode:            " + getCreationModeString());
+    printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
     printMessage(VERBOSE, " Multithreading:           " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
         printMessage(VERBOSE, " Number of Threads:        " + std::to_string(numThreads));
 
-    printMessage(VERBOSE, " Input File Format:        " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-     printMessage(VERBOSE, " Add Source-File Property: " + std::string(addSourceFileProp ? "Yes" : "No"));
+    printMessage(VERBOSE, " Input File Format:        " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Add Source-File Property: " + std::string(addSourceFileProp ? "Yes" : "No"));
 
     if (wasOptionSet("tmp-file-dir"))
         printMessage(VERBOSE, " Temp. File Directory:     " + getOptionValue<std::string>("tmp-file-dir"));
@@ -578,12 +581,16 @@ void PSDCreateImpl::initInputReader()
             return;
 
         const std::string& file_path = inputFiles[i];
-        InputHandlerPtr input_handler = getInputHandler(file_path);
+        Chem::MoleculeReader::SharedPointer reader_ptr;
 
-        if (!input_handler)
+        try {
+            reader_ptr.reset(inputFormat.empty() ? new Chem::MoleculeReader(file_path) :
+                             new Chem::MoleculeReader(file_path, inputFormat));
+
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no input handler found for file '" + file_path + '\'');
+        }
 
-        MoleculeReader::SharedPointer reader_ptr = input_handler->createReader(file_path);
         std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
 
         try {
@@ -602,14 +609,6 @@ void PSDCreateImpl::initInputReader()
 
     printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
     printMessage(INFO, "");
-}
-
-PSDCreateImpl::InputHandlerPtr PSDCreateImpl::getInputHandler(const std::string& file_path) const
-{
-    if (inputHandler)
-        return inputHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
 }
 
 std::string PSDCreateImpl::getCreationModeString() const

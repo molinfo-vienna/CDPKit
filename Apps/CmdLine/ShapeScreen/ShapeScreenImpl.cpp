@@ -125,7 +125,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 {
     using namespace std::placeholders;
     
-       addOption("query,q", "Query molecule file.", 
+    addOption("query,q", "Query molecule file.", 
               value<std::string>(&queryFile)->required());
     addOption("database,d", "Screened database file(s).", 
               value<std::string>(&databaseFile)->required());
@@ -391,30 +391,30 @@ void ShapeScreenImpl::setQueryFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    queryHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!queryHandler)
+    if (!Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("query-format");
+
+    queryFormat = file_ext;
 }
 
 void ShapeScreenImpl::setDatabaseFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    databaseHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!databaseHandler)
+    if (!Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("database-format");
+
+    databaseFormat = file_ext;
 }
 
 void ShapeScreenImpl::setHitOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    hitOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!hitOutputHandler)
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("output-format");
+
+    hitOutputFormat = file_ext;
 }
 
 void ShapeScreenImpl::setAlignmentMode()
@@ -652,16 +652,21 @@ void ShapeScreenImpl::initReportFileStreams()
 
 void ShapeScreenImpl::initHitMoleculeWriters()
 {
+    using namespace CDPL;
+    
     if (hitOutputFile.empty())
         return;
 
     if (!splitOutFiles) {
-        OutputHandlerPtr handler = getHitOutputHandler(hitOutputFile);
+        MoleculeWriterPtr writer;
+        
+        try {
+            writer.reset(hitOutputFormat.empty() ? new Chem::MolecularGraphWriter(hitOutputFile) :
+                         new Chem::MolecularGraphWriter(hitOutputFile, hitOutputFormat));
 
-        if (!handler)
-            throw CDPL::Base::IOError("no output handler found for hit molecule file '" + hitOutputFile + '\'');
-
-        MoleculeWriterPtr writer = handler->createWriter(hitOutputFile);
+        } catch (const Base::IOError& e) {
+            throw Base::IOError("no output handler found for hit molecule file '" + hitOutputFile + '\'');
+        }
 
         if (outputQuery && (numBestHits == 0 || mergeHitLists)) {
             setMultiConfExportParameter(*writer, true);
@@ -675,13 +680,16 @@ void ShapeScreenImpl::initHitMoleculeWriters()
     } else {
         for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
             std::string file_name = getOutputFileName(hitOutputFile, i);
-            OutputHandlerPtr handler = getHitOutputHandler(file_name);
+            MoleculeWriterPtr writer;
 
-            if (!handler)
-                throw CDPL::Base::IOError("no output handler found for hit molecule file '" + file_name + '\'');
+            try {
+                writer.reset(hitOutputFormat.empty() ? new Chem::MolecularGraphWriter(file_name) :
+                             new Chem::MolecularGraphWriter(file_name, hitOutputFormat));
 
-            MoleculeWriterPtr writer = handler->createWriter(file_name);
-
+            } catch (const Base::IOError& e) {
+                throw Base::IOError("no output handler found for hit molecule file '" + file_name + '\'');
+            }
+            
             if (outputQuery) {
                 setMultiConfExportParameter(*writer, true);
                 outputQueryMolecule(writer, i);
@@ -1110,7 +1118,8 @@ void ShapeScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc);
     printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? std::to_string(numBestHits) : std::string("All Hits")));
     printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
-    printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ? std::string("None") : (boost::format("%.4f") % settings.getScoreCutoff()).str()));
+    printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ?
+                                                                      std::string("None") : (boost::format("%.4f") % settings.getScoreCutoff()).str()));
     printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? (boost::format("%.4f") % shapeScoreCutoff).str() : std::string("None")));
     printMessage(VERBOSE, " Merge Hit Lists:                     " + std::string(mergeHitLists ? "Yes" : "No"));
     printMessage(VERBOSE, " Output File Splitting:               " + std::string(splitOutFiles ? "Yes" : "No"));
@@ -1137,9 +1146,9 @@ void ShapeScreenImpl::printOptionSummary()
     if (numThreads > 0)
         printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
-    printMessage(VERBOSE, " Query File Format:                   " + (queryHandler ? queryHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Database File Format:                " + (databaseHandler ? databaseHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Hit File Format:                     " + (hitOutputHandler ? hitOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Query File Format:                   " + (!queryFormat.empty() ? queryFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Database File Format:                " + (!databaseFormat.empty() ? databaseFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Hit File Format:                     " + (!hitOutputFormat.empty() ? hitOutputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, "");
 }
 
@@ -1150,12 +1159,13 @@ void ShapeScreenImpl::initQueryReader()
     if (termSignalCaught())
         return;
 
-    InputHandlerPtr query_handler = getQueryHandler(queryFile);
+    try {
+        queryReader.reset(queryFormat.empty() ? new Chem::MoleculeReader(queryFile) :
+                                                new Chem::MoleculeReader(queryFile, queryFormat));
 
-    if (!query_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no input handler found for query molecule file '" + queryFile + '\'');
-
-    queryReader = query_handler->createReader(queryFile);
+    }
 
     setMultiConfImportParameter(*queryReader, true);
 }
@@ -1167,38 +1177,15 @@ void ShapeScreenImpl::initDatabaseReader()
     if (termSignalCaught())
         return;
 
-    InputHandlerPtr database_handler = getDatabaseHandler(databaseFile);
+    try {
+        databaseReader.reset(databaseFormat.empty() ? new Chem::MoleculeReader(databaseFile) :
+                                                      new Chem::MoleculeReader(databaseFile, databaseFormat));
 
-    if (!database_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no input handler found for screening database file '" + databaseFile + '\'');
-
-    databaseReader = database_handler->createReader(databaseFile);
-
+    }
+   
     setMultiConfImportParameter(*databaseReader, true);
-}
-
-ShapeScreenImpl::InputHandlerPtr ShapeScreenImpl::getQueryHandler(const std::string& file_path) const
-{
-    if (queryHandler)
-        return queryHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
-}
-
-ShapeScreenImpl::InputHandlerPtr ShapeScreenImpl::getDatabaseHandler(const std::string& file_path) const
-{
-    if (databaseHandler)
-        return databaseHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
-}
-
-ShapeScreenImpl::OutputHandlerPtr ShapeScreenImpl::getHitOutputHandler(const std::string& file_path) const
-{
-    if (hitOutputHandler)
-        return hitOutputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
 std::string ShapeScreenImpl::screeningModeToString(ScreeningSettings::ScreeningMode mode) const

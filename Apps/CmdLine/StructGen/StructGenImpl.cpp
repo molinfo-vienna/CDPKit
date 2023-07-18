@@ -38,6 +38,7 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/ConfGen/StructureGenerator.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -303,8 +304,8 @@ private:
 
 StructGenImpl::StructGenImpl(): 
     numThreads(0), fragBuildPreset("FAST"), canonicalize(false),
-    hardTimeout(false), torsionLib(), fragmentLib(), inputHandler(), 
-    outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
+    hardTimeout(false), torsionLib(), fragmentLib(), inputFormat(), 
+    outputFormat(), outputWriter(), failedOutputFormat(), failedOutputWriter()
 {
     using namespace std::placeholders;
     
@@ -562,30 +563,30 @@ void StructGenImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!inputHandler)
+    if (!Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("input-format");
+
+    inputFormat = file_ext;
 }
 
 void StructGenImpl::setOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!outputHandler)
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("output-format");
+
+    outputFormat = file_ext;
 }
 
 void StructGenImpl::setFailedOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    failedOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!outputHandler)
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("failed-output-format");
+
+    failedOutputFormat = file_ext;
 }
 
 void StructGenImpl::addTorsionLib(const std::string& lib_file)
@@ -901,10 +902,10 @@ void StructGenImpl::printOptionSummary()
 
     printMessage(VERBOSE, " Output File:                         " + outputFile);
     printMessage(VERBOSE, " Failed Molecule Output File:         " + (failedFile.empty() ? std::string("None") : failedFile));
-     printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
-     printMessage(VERBOSE, " Structure Generation Mode:           " + getGenerationModeString());
-     printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
-     printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
+    printMessage(VERBOSE, " Structure Generation Mode:           " + getGenerationModeString());
+    printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
     printMessage(VERBOSE, " Fragment Mode Force Field Type:      " + ConfGen::getForceFieldTypeString(settings.getFragmentModeForceFieldType()));
     printMessage(VERBOSE, " Dist. Geom. Mode Force Field Type:   " + ConfGen::getForceFieldTypeString(settings.getDGModeForceFieldType()));
     printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
@@ -914,17 +915,19 @@ void StructGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Refinement Energy Tolerance:         " + (boost::format("%.4f") % settings.getRefinementTolerance()).str());
     printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + std::to_string(settings.getMaxNumRefinementIterations()));
     printMessage(VERBOSE, " Timeout:                             " + std::to_string(settings.getTimeout() / 1000) + "s");
-     printMessage(VERBOSE, " Hard Timeout:                        " + std::string(hardTimeout ? "Yes" : "No"));
+    printMessage(VERBOSE, " Hard Timeout:                        " + std::string(hardTimeout ? "Yes" : "No"));
     printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
         printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
-    printMessage(VERBOSE, " Torsion Library:                     " + (torsionLibName.empty() ? std::string("Built-in") : replaceBuiltinTorLib ? torsionLibName : torsionLibName + " + Built-in"));
-    printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") : replaceBuiltinFragLib ? fragmentLibName : fragmentLibName + " + Built-in"));
-    printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Output File Format:                  " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Failed Molecule File Format:         " + (failedOutputHandler ? failedOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Torsion Library:                     " + (torsionLibName.empty() ? std::string("Built-in") :
+                                                                      replaceBuiltinTorLib ? torsionLibName : torsionLibName + " + Built-in"));
+    printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") :
+                                                                      replaceBuiltinFragLib ? fragmentLibName : fragmentLibName + " + Built-in"));
+    printMessage(VERBOSE, " Input File Format:                   " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Output File Format:                  " + (!outputFormat.empty() ? outputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Failed Molecule File Format:         " + (!failedOutputFormat.empty() ? failedOutputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Canonicalize Input Molecules:        " + std::string(canonicalize ? "Yes" : "No"));
     printMessage(VERBOSE, "");
 }
@@ -1006,13 +1009,16 @@ void StructGenImpl::initInputReader()
             return;
 
         const std::string& file_path = inputFiles[i];
-        InputHandlerPtr input_handler = getInputHandler(file_path);
+        Chem::MoleculeReader::SharedPointer reader_ptr;
 
-        if (!input_handler)
+        try {
+            reader_ptr.reset(inputFormat.empty() ? new Chem::MoleculeReader(file_path) :
+                             new Chem::MoleculeReader(file_path, inputFormat));
+
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no input handler found for file '" + file_path + '\'');
-
-        MoleculeReader::SharedPointer reader_ptr = input_handler->createReader(file_path);
-
+        }
+        
         setMultiConfImportParameter(*reader_ptr, false);
 
         std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
@@ -1039,51 +1045,29 @@ void StructGenImpl::initOutputWriters()
 {
     using namespace CDPL;
 
-    OutputHandlerPtr output_handler = getOutputHandler(outputFile);
+    try {
+        outputWriter.reset(outputFormat.empty() ? new Chem::MolecularGraphWriter(outputFile) :
+                           new Chem::MolecularGraphWriter(outputFile, outputFormat));
 
-    if (!output_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no output handler found for file '" + outputFile + '\'');
-
-    outputWriter = output_handler->createWriter(outputFile);
+    }
 
     setMultiConfExportParameter(*outputWriter, false);
     setSMILESRecordFormatParameter(*outputWriter, "SN");
 
     if (!failedFile.empty()) {
-        output_handler = getFailedOutputHandler(failedFile);
+        try {
+            failedOutputWriter.reset(failedOutputFormat.empty() ? new Chem::MolecularGraphWriter(failedFile) :
+                                     new Chem::MolecularGraphWriter(failedFile, failedOutputFormat));
 
-        if (!output_handler)
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no output handler found for file '" + outputFile + '\'');
-
-        failedOutputWriter = output_handler->createWriter(failedFile);
-
+        }
+        
         setMultiConfExportParameter(*failedOutputWriter, false);
         setSMILESRecordFormatParameter(*failedOutputWriter, "SN");
     }
-}
-
-StructGenImpl::InputHandlerPtr StructGenImpl::getInputHandler(const std::string& file_path) const
-{
-    if (inputHandler)
-        return inputHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
-}
-
-StructGenImpl::OutputHandlerPtr StructGenImpl::getOutputHandler(const std::string& file_path) const
-{
-    if (outputHandler)
-        return outputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
-}
-
-StructGenImpl::OutputHandlerPtr StructGenImpl::getFailedOutputHandler(const std::string& file_path) const
-{
-    if (failedOutputHandler)
-        return failedOutputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
 std::string StructGenImpl::getGenerationModeString() const

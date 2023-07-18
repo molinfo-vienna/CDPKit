@@ -38,6 +38,7 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -333,7 +334,7 @@ ConfGenImpl::ConfGenImpl():
     numThreads(0), settings(ConformerGeneratorSettings::MEDIUM_SET_DIVERSE), 
     confGenPreset("MEDIUM_SET_DIVERSE"), fragBuildPreset("FAST"), canonicalize(false), energySDEntry(false), 
     energyComment(false), confIndexSuffix(false), maxNumRotorBonds(-1), torsionLib(), fragmentLib(),
-    inputHandler(), outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
+    inputFormat(), outputFormat(), outputWriter(), failedOutputFormat(), failedOutputWriter()
 {
     using namespace std::placeholders;
     
@@ -462,16 +463,16 @@ const char* ConfGenImpl::getProgCopyright() const
 const char* ConfGenImpl::getProgAboutText() const
 {
     return "Performs high-quality conformer generation for a set of input molecules.\n\n"
-        "Built-in torsion rules are based on the torsion library jointly developed by the\n"
-        "University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
-        "F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
-        "References:\n"
-        " -  Schaerfer, C., Schulz-Gasch, T., Ehrlich, H.C., Guba, W., Rarey, M.,\n"
-        "    Stahl, M. (2013). Torsion Angle Preferences in Drug-like Chemical Space:\n"
-        "    A Comprehensive Guide. Journal of Medicinal Chemistry, 56(6):2016-28.\n"
-        " -  Guba, W., Meyder, A., Rarey, M., and Hert, J. (2015). Torsion Library Reloaded:\n"
-        "    A New Version of Expert-Derived SMARTS Rules for Assessing Conformations of\n"
-        "    Small Molecules. Journal of Chemical Information and Modeling, 56(1):1-5.";
+           "Built-in torsion rules are based on the torsion library jointly developed by the\n"
+           "University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
+           "F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
+           "References:\n"
+           " -  Schaerfer, C., Schulz-Gasch, T., Ehrlich, H.C., Guba, W., Rarey, M.,\n"
+           "    Stahl, M. (2013). Torsion Angle Preferences in Drug-like Chemical Space:\n"
+           "    A Comprehensive Guide. Journal of Medicinal Chemistry, 56(6):2016-28.\n"
+           " -  Guba, W., Meyder, A., Rarey, M., and Hert, J. (2015). Torsion Library Reloaded:\n"
+           "    A New Version of Expert-Derived SMARTS Rules for Assessing Conformations of\n"
+           "    Small Molecules. Journal of Chemical Information and Modeling, 56(1):1-5.";
 }
 
 void ConfGenImpl::addOptionLongDescriptions()
@@ -721,30 +722,30 @@ void ConfGenImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!inputHandler)
+    if (!Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("input-format");
+
+    inputFormat = file_ext;
 }
 
 void ConfGenImpl::setOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!outputHandler)
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("output-format");
+
+    outputFormat = file_ext;
 }
 
 void ConfGenImpl::setFailedOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    failedOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!outputHandler)
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("failed-output-format");
+
+    failedOutputFormat = file_ext;
 }
 
 void ConfGenImpl::addTorsionLib(const std::string& lib_file)
@@ -1062,29 +1063,29 @@ void ConfGenImpl::printOptionSummary()
 {
     printMessage(VERBOSE, "Option Summary:");
     printMessage(VERBOSE, " Input File(s):                       " + inputFiles[0]);
-    
+
     for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
         printMessage(VERBOSE, std::string(38, ' ') + *it);
 
     printMessage(VERBOSE, " Output File:                         " + outputFile);
     printMessage(VERBOSE, " Failed Molecule Output File:         " + (failedFile.empty() ? std::string("None") : failedFile));
-     printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
-     printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
-     printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
+    printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
+    printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
+    printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
     printMessage(VERBOSE, " Max. Num. Output Conformers:         " + std::to_string(settings.getMaxNumOutputConformers()));
 
     if (settings.getMinRMSD() > 0.0)
         printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.3f") % settings.getMinRMSD()).str());
     else
         printMessage(VERBOSE, " Min. RMSD:                           RMSD Checking disabled");
-    
+
     printMessage(VERBOSE, " Energy Window:                       " + (boost::format("%.3f") % settings.getEnergyWindow()).str());
-     printMessage(VERBOSE, " Nitrogen Enumeration Mode:           " + getNitrogenEnumModeString());
-     printMessage(VERBOSE, " Enumerate Ring Conformers:           " + std::string(settings.enumerateRings() ? "Yes" : "No"));
-     printMessage(VERBOSE, " Sample Hetero Atom Hydrogens:        " + std::string(settings.sampleHeteroAtomHydrogens() ? "Yes" : "No"));
-     printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
-     printMessage(VERBOSE, " Include Input Structure:             " + std::string(settings.includeInputCoordinates() ? "Yes" : "No"));
-     printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Nitrogen Enumeration Mode:           " + getNitrogenEnumModeString());
+    printMessage(VERBOSE, " Enumerate Ring Conformers:           " + std::string(settings.enumerateRings() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Sample Hetero Atom Hydrogens:        " + std::string(settings.sampleHeteroAtomHydrogens() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Include Input Structure:             " + std::string(settings.includeInputCoordinates() ? "Yes" : "No"));
+    printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
     printMessage(VERBOSE, " Systematic Search Force Field Type:  " + getForceFieldTypeString(settings.getForceFieldTypeSystematic()));
     printMessage(VERBOSE, " Stochastic Search Force Field Type:  " + getForceFieldTypeString(settings.getForceFieldTypeStochastic()));
     printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()));
@@ -1104,11 +1105,13 @@ void ConfGenImpl::printOptionSummary()
     if (numThreads > 0)
         printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
-    printMessage(VERBOSE, " Torsion Library:                     " + (torsionLibName.empty() ? std::string("Built-in") : replaceBuiltinTorLib ? torsionLibName : torsionLibName + " + Built-in"));
-    printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") : replaceBuiltinFragLib ? fragmentLibName : fragmentLibName + " + Built-in"));
-    printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Output File Format:                  " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Failed Molecule File Format:         " + (failedOutputHandler ? failedOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Torsion Library:                     " + (torsionLibName.empty() ? std::string("Built-in") :
+                                                                      replaceBuiltinTorLib   ? torsionLibName : torsionLibName + " + Built-in"));
+    printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") :
+                                                                      replaceBuiltinFragLib   ? fragmentLibName : fragmentLibName + " + Built-in"));
+    printMessage(VERBOSE, " Input File Format:                   " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Output File Format:                  " + (!outputFormat.empty() ? outputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Failed Molecule File Format:         " + (!failedOutputFormat.empty() ? failedOutputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, " Canonicalize Input Molecules:        " + std::string(canonicalize ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Conf. Energy SD-Entry:        " + std::string(energySDEntry ? "Yes" : "No"));
     printMessage(VERBOSE, " Output Conf. Energy Comment:         " + std::string(energyComment ? "Yes" : "No"));
@@ -1193,13 +1196,16 @@ void ConfGenImpl::initInputReader()
             return;
 
         const std::string& file_path = inputFiles[i];
-        InputHandlerPtr input_handler = getInputHandler(file_path);
+        Chem::MoleculeReader::SharedPointer reader_ptr;
 
-        if (!input_handler)
+        try {
+            reader_ptr.reset(inputFormat.empty() ? new Chem::MoleculeReader(file_path) :
+                             new Chem::MoleculeReader(file_path, inputFormat));
+
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no input handler found for file '" + file_path + '\'');
-
-        MoleculeReader::SharedPointer reader_ptr = input_handler->createReader(file_path);
-
+        }
+        
         setMultiConfImportParameter(*reader_ptr, false);
 
         std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
@@ -1226,12 +1232,13 @@ void ConfGenImpl::initOutputWriters()
 {
     using namespace CDPL;
 
-    OutputHandlerPtr output_handler = getOutputHandler(outputFile);
+    try {
+        outputWriter.reset(outputFormat.empty() ? new Chem::MolecularGraphWriter(outputFile) :
+                           new Chem::MolecularGraphWriter(outputFile, outputFormat));
 
-    if (!output_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no output handler found for file '" + outputFile + '\'');
-
-    outputWriter = output_handler->createWriter(outputFile);
+    }
 
     setMultiConfExportParameter(*outputWriter, true);
     setMDLOutputConfEnergyAsSDEntryParameter(*outputWriter, energySDEntry);
@@ -1242,40 +1249,17 @@ void ConfGenImpl::initOutputWriters()
         setConfIndexNameSuffixPatternParameter(*outputWriter," %I%");
 
     if (!failedFile.empty()) {
-        output_handler = getFailedOutputHandler(failedFile);
+        try {
+            failedOutputWriter.reset(failedOutputFormat.empty() ? new Chem::MolecularGraphWriter(failedFile) :
+                                     new Chem::MolecularGraphWriter(failedFile, failedOutputFormat));
 
-        if (!output_handler)
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no output handler found for file '" + outputFile + '\'');
-
-        failedOutputWriter = output_handler->createWriter(failedFile);
+        }
 
         setMultiConfExportParameter(*failedOutputWriter, false);
         setSMILESRecordFormatParameter(*failedOutputWriter, "SN");
     }
-}
-
-ConfGenImpl::InputHandlerPtr ConfGenImpl::getInputHandler(const std::string& file_path) const
-{
-    if (inputHandler)
-        return inputHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
-}
-
-ConfGenImpl::OutputHandlerPtr ConfGenImpl::getOutputHandler(const std::string& file_path) const
-{
-    if (outputHandler)
-        return outputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
-}
-
-ConfGenImpl::OutputHandlerPtr ConfGenImpl::getFailedOutputHandler(const std::string& file_path) const
-{
-    if (failedOutputHandler)
-        return failedOutputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
 std::string ConfGenImpl::getSamplingModeString() const

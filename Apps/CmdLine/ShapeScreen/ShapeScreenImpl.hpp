@@ -34,10 +34,8 @@
 #include <memory>
 
 #include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Util/CompoundDataReader.hpp"
-#include "CDPL/Base/DataWriter.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/MoleculeReader.hpp"
+#include "CDPL/Chem/MolecularGraphWriter.hpp"
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/AlignmentResult.hpp"
 #include "CDPL/Internal/Timer.hpp"
@@ -55,14 +53,9 @@ namespace ShapeScreen
         ShapeScreenImpl();
 
       private:
-        typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule>        InputHandler;
-        typedef InputHandler::SharedPointer                               InputHandlerPtr;
-        typedef OutputHandler::SharedPointer                              OutputHandlerPtr;
-        typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>        MoleculeWriter;
-        typedef MoleculeWriter::SharedPointer                             MoleculeWriterPtr;
-        typedef CDPL::Shape::ScreeningSettings                            ScreeningSettings;
-        typedef CDPL::Chem::Molecule::SharedPointer                       MoleculePtr;
+        typedef CDPL::Shape::ScreeningSettings                  ScreeningSettings;
+        typedef CDPL::Chem::Molecule::SharedPointer             MoleculePtr;
+        typedef CDPL::Chem::MolecularGraphWriter::SharedPointer MoleculeWriterPtr;
 
         class ScreeningWorker;
 
@@ -157,14 +150,10 @@ namespace ShapeScreen
 
         void printOptionSummary();
 
-        InputHandlerPtr  getQueryHandler(const std::string& file_path) const;
-        InputHandlerPtr  getDatabaseHandler(const std::string& file_path) const;
-        OutputHandlerPtr getHitOutputHandler(const std::string& file_path) const;
-
-        std::string                      screeningModeToString(ScreeningSettings::ScreeningMode mode) const;
+        std::string screeningModeToString(ScreeningSettings::ScreeningMode mode) const;
         ScreeningSettings::ScreeningMode stringToScreeningMode(const std::string& mode_str) const;
 
-        std::string                         colorFeatureTypeToString(ScreeningSettings::ColorFeatureType type) const;
+        std::string colorFeatureTypeToString(ScreeningSettings::ColorFeatureType type) const;
         ScreeningSettings::ColorFeatureType stringToColorFeatureType(const std::string& type_str) const;
 
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
@@ -172,14 +161,14 @@ namespace ShapeScreen
 
         std::string getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const;
 
-        typedef std::shared_ptr<std::ostream>                               OStreamPtr;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>::SharedPointer MoleculeReaderPtr;
-        typedef std::vector<MoleculePtr>                                    QueryMoleculeList;
-        typedef std::multiset<HitMoleculeData>                              HitList;
-        typedef std::vector<HitList>                                        HitListArray;
-        typedef std::vector<OStreamPtr>                                     OStreamArray;
-        typedef std::vector<MoleculeWriterPtr>                              MoleculeWriterArray;
-        typedef CDPL::Internal::Timer                                       Timer;
+        typedef std::shared_ptr<std::ostream>             OStreamPtr;
+        typedef CDPL::Chem::MoleculeReader::SharedPointer MoleculeReaderPtr;
+        typedef std::vector<MoleculePtr>                  QueryMoleculeList;
+        typedef std::multiset<HitMoleculeData>            HitList;
+        typedef std::vector<HitList>                      HitListArray;
+        typedef std::vector<OStreamPtr>                   OStreamArray;
+        typedef std::vector<MoleculeWriterPtr>            MoleculeWriterArray;
+        typedef CDPL::Internal::Timer                     Timer;
 
         std::string         queryFile;
         std::string         databaseFile;
@@ -205,11 +194,11 @@ namespace ShapeScreen
         std::size_t         numBestHits;
         std::size_t         maxNumHits;
         double              shapeScoreCutoff;
-        InputHandlerPtr     queryHandler;
+        std::string         queryFormat;
         MoleculeReaderPtr   queryReader;
-        InputHandlerPtr     databaseHandler;
+        std::string         databaseFormat;
         MoleculeReaderPtr   databaseReader;
-        OutputHandlerPtr    hitOutputHandler;
+        std::string         hitOutputFormat;
         QueryMoleculeList   queryMolecules;
         HitListArray        hitLists;
         OStreamArray        reportOStreams;

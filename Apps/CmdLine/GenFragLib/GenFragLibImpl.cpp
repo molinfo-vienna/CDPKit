@@ -37,6 +37,7 @@
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/MoleculeReader.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
@@ -298,7 +299,7 @@ private:
 
 GenFragLibImpl::GenFragLibImpl(): 
     numThreads(0), mode(CREATE), settings(ConformerGeneratorSettings::THOROUGH), preset("THOROUGH"),
-    maxLibSize(0), inputHandler(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
+    maxLibSize(0), inputFormat(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
     using namespace std::placeholders;
     
@@ -473,11 +474,11 @@ void GenFragLibImpl::setMode(const std::string& mode_str)
 void GenFragLibImpl::setInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
-
-    inputHandler = Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext);
-
-    if (!inputHandler)
+    
+    if (!Base::DataIOManager<Chem::Molecule>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("input-format");
+
+    inputFormat = file_ext;
 }
 
 int GenFragLibImpl::process()
@@ -849,7 +850,7 @@ void GenFragLibImpl::printOptionSummary()
         if (numThreads > 0)
             printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
-        printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+        printMessage(VERBOSE, " Input File Format:                   " + (!inputFormat.empty() ? inputFormat : std::string("Auto-detect")));
         printMessage(VERBOSE, " Max. Output Library Size:            " + std::to_string(maxLibSize));
         printMessage(VERBOSE, " Timeout:                             " + std::to_string(settings.getMacrocycleSettings().getTimeout() / 1000) + "s");
         printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % settings.getMacrocycleSettings().getMinRMSD()).str());
@@ -885,13 +886,16 @@ void GenFragLibImpl::initInputReader()
             return;
 
         const std::string& file_path = inputFiles[i];
-        InputHandlerPtr input_handler = getInputHandler(file_path);
+        Chem::MoleculeReader::SharedPointer reader_ptr;
 
-        if (!input_handler)
+        try {
+            reader_ptr.reset(inputFormat.empty() ? new Chem::MoleculeReader(file_path) :
+                             new Chem::MoleculeReader(file_path, inputFormat));
+
+        } catch (const Base::IOError& e) {
             throw Base::IOError("no input handler found for file '" + file_path + '\'');
-
-        MoleculeReader::SharedPointer reader_ptr = input_handler->createReader(file_path);
-
+        }
+        
         setMultiConfImportParameter(*reader_ptr, false);
 
         std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
@@ -912,14 +916,6 @@ void GenFragLibImpl::initInputReader()
 
     printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
     printMessage(INFO, "");
-}
-
-GenFragLibImpl::InputHandlerPtr GenFragLibImpl::getInputHandler(const std::string& file_path) const
-{
-    if (inputHandler)
-        return inputHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
 }
 
 std::string GenFragLibImpl::getModeString() const

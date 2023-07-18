@@ -158,8 +158,8 @@ PSDScreenImpl::PSDScreenImpl():
     checkXVols(true), alignConfs(true), bestAlignments(false), outputScore(true), outputMolIndex(false), 
     outputConfIndex(false), outputDBName(false), outputPharmName(false), outputPharmIndex(false),  
     numThreads(0), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
-    matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputHandler(), 
-    queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0),
+    matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputFormat(), 
+    queryInputFormat(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0),
     lastProgValue(-1)
 {
     using namespace std::placeholders;
@@ -271,20 +271,20 @@ void PSDScreenImpl::setHitOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    hitOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
-
-    if (!hitOutputHandler)
+    if (!Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext))
         throwValidationError("output-format");
+
+    hitOutputFormat = file_ext;
 }
 
 void PSDScreenImpl::setQueryInputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
-    queryInputHandler = Base::DataIOManager<Pharm::Pharmacophore>::getInputHandlerByFileExtension(file_ext);
-
-    if (!queryInputHandler)
+    if (!Base::DataIOManager<Pharm::Pharmacophore>::getInputHandlerByFileExtension(file_ext))
         throwValidationError("query-format");
+
+    queryInputFormat = file_ext;
 }
 
 void PSDScreenImpl::setMatchingMode(const std::string& mode_str)
@@ -589,27 +589,27 @@ void PSDScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Pharm. Query File(s):         " + queryPharmFile);
     printMessage(VERBOSE, " Screening Database:           " + screeningDB);
     printMessage(VERBOSE, " Hit Output File:              " + hitOutputFile);
-     printMessage(VERBOSE, " Conformation Matching Mode:   " + getMatchingModeString());
+    printMessage(VERBOSE, " Conformation Matching Mode:   " + getMatchingModeString());
     printMessage(VERBOSE, " Max. Num. Omitted Features:   " + std::to_string(maxOmittedFtrs));
-     printMessage(VERBOSE, " Screening Start Molecule:     " + std::to_string(startMolIndex));
-     printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? std::to_string(startMolIndex) : std::string("Last")));
-     printMessage(VERBOSE, " Maximum Number of Hits:       " + (maxNumHits != 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
-     printMessage(VERBOSE, " Check X-Volume Clashes:       " + std::string(checkXVols ? "Yes" : "No"));
-     printMessage(VERBOSE, " Align Hit Molecules:          " + std::string(alignConfs ? "Yes" : "No"));
-     printMessage(VERBOSE, " Seek Best Alignments:         " + std::string(bestAlignments ? "Yes" : "No"));
-     printMessage(VERBOSE, " Output Score Property:        " + std::string(outputScore ? "Yes" : "No"));
-     printMessage(VERBOSE, " Output Mol. Index Property:   " + std::string(outputMolIndex ? "Yes" : "No"));
-     printMessage(VERBOSE, " Output Conf. Index Property:  " + std::string(outputConfIndex ? "Yes" : "No"));
-     printMessage(VERBOSE, " Output DB-Name Property:      " + std::string(outputDBName ? "Yes" : "No"));
-     printMessage(VERBOSE, " Output Pharm. Name Property:  " + std::string(outputPharmName ? "Yes" : "No"));
-     printMessage(VERBOSE, " Output Pharm. Index Property: " + std::string(outputPharmIndex ? "Yes" : "No"));
+    printMessage(VERBOSE, " Screening Start Molecule:     " + std::to_string(startMolIndex));
+    printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? std::to_string(startMolIndex) : std::string("Last")));
+    printMessage(VERBOSE, " Maximum Number of Hits:       " + (maxNumHits != 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
+    printMessage(VERBOSE, " Check X-Volume Clashes:       " + std::string(checkXVols ? "Yes" : "No"));
+    printMessage(VERBOSE, " Align Hit Molecules:          " + std::string(alignConfs ? "Yes" : "No"));
+    printMessage(VERBOSE, " Seek Best Alignments:         " + std::string(bestAlignments ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Score Property:        " + std::string(outputScore ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Mol. Index Property:   " + std::string(outputMolIndex ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Conf. Index Property:  " + std::string(outputConfIndex ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output DB-Name Property:      " + std::string(outputDBName ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Pharm. Name Property:  " + std::string(outputPharmName ? "Yes" : "No"));
+    printMessage(VERBOSE, " Output Pharm. Index Property: " + std::string(outputPharmIndex ? "Yes" : "No"));
     printMessage(VERBOSE, " Multithreading:               " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
         printMessage(VERBOSE, " Number of Threads:            " + std::to_string(numThreads));
 
-    printMessage(VERBOSE, " Hit Output File Format:       " + (hitOutputHandler ? hitOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-    printMessage(VERBOSE, " Query Input File Format:      " + (queryInputHandler ? queryInputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Hit Output File Format:       " + (!hitOutputFormat.empty() ? hitOutputFormat : std::string("Auto-detect")));
+    printMessage(VERBOSE, " Query Input File Format:      " + (!queryInputFormat.empty() ? queryInputFormat : std::string("Auto-detect")));
     printMessage(VERBOSE, "");
 }
 
@@ -617,13 +617,14 @@ void PSDScreenImpl::initHitCollector()
 {
     using namespace CDPL;
 
-    HitOutputHandlerPtr output_handler = getHitOutputHandler(hitOutputFile);
+    try {
+        hitMolWriter.reset(hitOutputFormat.empty() ? new Chem::MolecularGraphWriter(hitOutputFile) :
+                                                     new Chem::MolecularGraphWriter(hitOutputFile, hitOutputFormat));
 
-    if (!output_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no output handler found for file '" + hitOutputFile + '\'');
+    }
 
-    hitMolWriter = output_handler->createWriter(hitOutputFile);
-    
     setMultiConfExportParameter(*hitMolWriter, false);
 
     hitCollector.reset(new Pharm::FileScreeningHitCollector(*hitMolWriter));
@@ -639,12 +640,13 @@ void PSDScreenImpl::initQueryPharmReader()
 {
     using namespace CDPL;
 
-    QueryInputHandlerPtr input_handler = getQueryInputHandler(queryPharmFile);
+    try {
+        queryPharmReader.reset(queryInputFormat.empty() ? new Pharm::PharmacophoreReader(queryPharmFile) :
+                                                          new Pharm::PharmacophoreReader(queryPharmFile, queryInputFormat));
 
-    if (!input_handler)
+    } catch (const Base::IOError& e) {
         throw Base::IOError("no input handler found for file '" + queryPharmFile + '\'');
-
-    queryPharmReader = input_handler->createReader(queryPharmFile);
+    }
 }
 
 void PSDScreenImpl::analyzeInputFiles()
@@ -674,22 +676,6 @@ void PSDScreenImpl::analyzeInputFiles()
 
     printMessage(VERBOSE, "-> Screening " + std::to_string(num_screened) + " molecule" + (num_screened != 1 ? "s" : ""));
     printMessage(INFO, "");
-}
-
-PSDScreenImpl::HitOutputHandlerPtr PSDScreenImpl::getHitOutputHandler(const std::string& file_path) const
-{
-    if (hitOutputHandler)
-        return hitOutputHandler;
-
-    return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
-}
-
-PSDScreenImpl::QueryInputHandlerPtr PSDScreenImpl::getQueryInputHandler(const std::string& file_path) const
-{
-    if (queryInputHandler)
-        return queryInputHandler;
-
-    return CmdLineLib::getInputHandler<CDPL::Pharm::Pharmacophore>(file_path);
 }
 
 std::string PSDScreenImpl::getMatchingModeString() const

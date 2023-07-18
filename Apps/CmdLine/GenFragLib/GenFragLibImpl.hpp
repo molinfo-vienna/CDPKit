@@ -35,7 +35,6 @@
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
@@ -71,9 +70,6 @@ namespace GenFragLib
             UPDATE,
             MERGE
         };
-
-        typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
-        typedef InputHandler::SharedPointer                        InputHandlerPtr;
 
         const char* getProgName() const;
         const char* getProgCopyright() const;
@@ -123,8 +119,6 @@ namespace GenFragLib
         std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
         std::string createMoleculeIdentifier(std::size_t rec_idx);
 
-        InputHandlerPtr getInputHandler(const std::string& file_path) const;
-
         void addOptionLongDescriptions();
 
         class InputScanProgressCallback;
@@ -132,7 +126,6 @@ namespace GenFragLib
 
         typedef std::vector<std::string>                             StringList;
         typedef std::unordered_map<std::uint64_t, std::size_t>       FragmentFrequencyMap;
-        typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>         MoleculeReader;
         typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
         typedef CDPL::Internal::Timer                                Timer;
         typedef CDPL::ConfGen::FragmentConformerGeneratorSettings    ConformerGeneratorSettings;
@@ -144,7 +137,7 @@ namespace GenFragLib
         ConformerGeneratorSettings     settings;
         std::string                    preset;
         std::size_t                    maxLibSize;
-        InputHandlerPtr                inputHandler;
+        std::string                    inputFormat;
         CompMoleculeReader             inputReader;
         FragmentLibrary::SharedPointer fragmentLibPtr;
         FragmentFrequencyMap           fragmentOccCounts;
