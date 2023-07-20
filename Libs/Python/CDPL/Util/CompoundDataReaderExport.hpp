@@ -47,9 +47,6 @@ namespace CDPLPythonUtil
             python::class_<ReaderType, typename Util::CompoundDataReader<T>::SharedPointer,
                            python::bases<Base::DataReader<T> >, boost::noncopyable>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
-                .def(python::init<const ReaderType&>((python::arg("self"), python::arg("reader"))))
-                .def("assign", &ReaderType::operator=, (python::arg("self"), python::arg("reader")),
-                     python::return_self<>())
                 .def("getNumReaders", &ReaderType::getNumReaders, python::arg("self"))
                 .def("addReader", &ReaderType::addReader, (python::arg("self"), python::arg("reader")))
                 .def("removeReader", &ReaderType::removeReader, (python::arg("self"), python::arg("idx")))

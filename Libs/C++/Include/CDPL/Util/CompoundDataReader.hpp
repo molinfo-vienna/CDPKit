@@ -60,6 +60,10 @@ namespace CDPL
 
             ~CompoundDataReader();
 
+            CompoundDataReader(const CompoundDataReader&) = delete;
+
+            CompoundDataReader& operator=(const CompoundDataReader&) = delete;
+
             void addReader(const ReaderPointer& reader);
 
             void removeReader(std::size_t idx);
@@ -80,11 +84,11 @@ namespace CDPL
             bool hasMoreData();
 
             std::size_t getRecordIndex() const;
-            void        setRecordIndex(std::size_t idx);
+            void setRecordIndex(std::size_t idx);
 
             std::size_t getNumRecords();
 
-                 operator const void*() const;
+            operator const void*() const;
             bool operator!() const;
 
           private:
@@ -120,8 +124,8 @@ template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::clear()
 {
     std::for_each(readers.begin(), readers.end(),
-                  std::bind(&ReaderType::setParent, std::placeholders::_1, static_cast<CompoundDataReader*>(0)));
-
+                  std::bind(&ReaderType::setParent, std::placeholders::_1,
+                            static_cast<CompoundDataReader*>(0)));
     readers.clear();
     recordIdxBounds.clear();
 

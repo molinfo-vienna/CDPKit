@@ -68,7 +68,11 @@ namespace CDPL
             MultiFormatDataWriter(std::iostream& ios, const std::string& fmt);
 
             MultiFormatDataWriter(std::iostream& ios, const Base::DataFormat& fmt);
-            
+
+            MultiFormatDataWriter(const MultiFormatDataWriter&) = delete;
+
+            MultiFormatDataWriter& operator=(const MultiFormatDataWriter&) = delete;
+
             const Base::DataFormat& getDataFormat() const;
  
             MultiFormatDataWriter& write(const DataType& obj);

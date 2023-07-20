@@ -66,6 +66,10 @@ namespace CDPL
 
             MultiFormatDataReader(std::istream& is, const Base::DataFormat& fmt);
 
+            MultiFormatDataReader(const MultiFormatDataReader&) = delete;
+
+            MultiFormatDataReader& operator=(const MultiFormatDataReader&) = delete;
+
             const Base::DataFormat& getDataFormat() const;
             
             MultiFormatDataReader& read(DataType& obj, bool overwrite = true);
