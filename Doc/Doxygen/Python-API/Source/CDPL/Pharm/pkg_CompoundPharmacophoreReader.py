@@ -30,19 +30,6 @@ class CompoundPharmacophoreReader(PharmacophoreReaderBase):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CompoundPharmacophoreReader instance.
-    # \param reader 
-    #
-    def __init__(reader: CompoundPharmacophoreReader) -> None: pass
-
-    ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundPharmacophoreReader instance \a reader.
-    # \param reader The \e %CompoundPharmacophoreReader instance to copy.
-    # \return \a self
-    #
-    def assign(reader: CompoundPharmacophoreReader) -> CompoundPharmacophoreReader: pass
-
-    ##
     # \brief 
     # \return 
     #

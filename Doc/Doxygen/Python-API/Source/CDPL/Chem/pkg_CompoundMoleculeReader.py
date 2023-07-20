@@ -30,19 +30,6 @@ class CompoundMoleculeReader(MoleculeReaderBase):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CompoundMoleculeReader instance.
-    # \param reader 
-    #
-    def __init__(reader: CompoundMoleculeReader) -> None: pass
-
-    ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundMoleculeReader instance \a reader.
-    # \param reader The \e %CompoundMoleculeReader instance to copy.
-    # \return \a self
-    #
-    def assign(reader: CompoundMoleculeReader) -> CompoundMoleculeReader: pass
-
-    ##
     # \brief 
     # \return 
     #

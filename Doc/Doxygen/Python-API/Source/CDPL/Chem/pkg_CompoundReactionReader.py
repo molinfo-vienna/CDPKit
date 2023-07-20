@@ -30,19 +30,6 @@ class CompoundReactionReader(ReactionReaderBase):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CompoundReactionReader instance.
-    # \param reader 
-    #
-    def __init__(reader: CompoundReactionReader) -> None: pass
-
-    ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundReactionReader instance \a reader.
-    # \param reader The \e %CompoundReactionReader instance to copy.
-    # \return \a self
-    #
-    def assign(reader: CompoundReactionReader) -> CompoundReactionReader: pass
-
-    ##
     # \brief 
     # \return 
     #

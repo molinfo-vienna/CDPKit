@@ -30,19 +30,6 @@ class CompoundDRegularGridSetReader(DRegularGridSetReaderBase):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CompoundDRegularGridSetReader instance.
-    # \param reader 
-    #
-    def __init__(reader: CompoundDRegularGridSetReader) -> None: pass
-
-    ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundDRegularGridSetReader instance \a reader.
-    # \param reader The \e %CompoundDRegularGridSetReader instance to copy.
-    # \return \a self
-    #
-    def assign(reader: CompoundDRegularGridSetReader) -> CompoundDRegularGridSetReader: pass
-
-    ##
     # \brief 
     # \return 
     #
