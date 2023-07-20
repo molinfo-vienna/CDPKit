@@ -107,27 +107,12 @@ def parseArgs() -> argparse.Namespace:
 
     return parse_args
 
-def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: unsupported molecule input file format \'%s\'' % name_and_ext[1])
-
-    # create and return file reader instance
-    return ipt_handler.createReader(filename)
     
 def main() -> None:
     args = parseArgs()
-    
-    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
-    # reader = Chem.FileSDFMoleculeReader(args.in_file)
-    reader = getReaderByFileExt(args.in_file) 
+
+    # create reader for input molecules (format specified by file extension)
+    reader = Chem.MoleculeReader(args.in_file) 
 
     # open output file storing the generated fingerprints
     out_file = open(args.out_file, 'w')

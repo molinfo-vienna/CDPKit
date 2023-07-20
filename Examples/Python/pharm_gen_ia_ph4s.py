@@ -76,27 +76,18 @@ def parseArgs() -> argparse.Namespace:
 
 # reads and preprocesses the specified receptor structure
 def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
-    name_and_ext = os.path.splitext(args.receptor_file)    # get the extension of the input file
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine receptor input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:     # check if CDPKit supports reading molecule data stored in the given format
-        sys.exit('Error: receptor input file format \'%s\' not supported' % name_and_ext[1])
-
+    # create reader for receptor structure (format specified by file extension)
+    reader = Chem.MoleculeReader(args.receptor_file) 
+    
     sup_fmts = [ Chem.DataFormat.MOL2,
                  Biomol.DataFormat.PDB,
                  Biomol.DataFormat.MMTF ]
                         
-    if ipt_handler.getDataFormat() not in sup_fmts:       # check if the format is supported by this script 
+    if reader.getDataFormat() not in sup_fmts:   # check if the format is supported by this script 
         sys.exit('Error: receptor input file format \'%s\' not supported' % name_and_ext[1])
 
-    reader = ipt_handler.createReader(args.receptor_file) # create file reader instance
-    rec_mol = Chem.BasicMolecule()                        # create an instance of the default implementation of the
-                                                          # Chem.Molecule interface that will store the receptor struct.
+    rec_mol = Chem.BasicMolecule()    # create an instance of the default implementation of the
+                                      # Chem.Molecule interface that will store the receptor struct.
     try:
         if not reader.read(rec_mol):  # read receptor structure
             sys.exit('Error: reading receptor structure failed')
@@ -108,7 +99,7 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
     # calculation of properties required by the pharm. generation procedure)
     try:
         # if structure comes from an MOL2 file, convert MOL2 residue data into PDB-style data
-        if ipt_handler.getDataFormat() == Chem.DataFormat.MOL2: 
+        if reader.getDataFormat() == Chem.DataFormat.MOL2: 
             Biomol.convertMOL2ToPDBResidueInfo(rec_mol, True)
 
         rem_atoms = False
@@ -147,42 +138,12 @@ def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:
 
     return rec_mol
 
-# returns a Chem.MoleculeReader instance for the specified ligand input file format
-def getLigandMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    name_and_ext = os.path.splitext(filename)    # get the extension of the input file
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine ligand input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: ligand input file format \'%s\' not supported' % name_and_ext[1])
-
-    return ipt_handler.createReader(filename)    # create and return file reader instance
-
-# returns a Pharm.FeatureContainerWriter instance for the specified pharmacophore output file format
-def getPharmWriterByFileExt(filename: str) -> Pharm.FeatureContainerWriter:
-    name_and_ext = os.path.splitext(filename)    # get the extension of the output file
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine pharmacophore output file format (file extension missing)')
-
-    # get output handler for the format specified by the output file's extension
-    opt_handler = Pharm.FeatureContainerIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not opt_handler:
-        sys.exit('Error: pharmacophore output file format \'%s\' not supported' % name_and_ext[1])
-
-    return opt_handler.createWriter(filename)    # create and return file writer instance
-
 def main() -> None:
     args = parseArgs()
 
-    rec_mol = readAndPrepareReceptorStructure(args)             # read and preprocess the specified receptor structure
-    lig_reader = getLigandMolReaderByFileExt(args.ligands_file) # get a reader for the ligand structure input file
-    ph4_writer = getPharmWriterByFileExt(args.out_file)         # get writer for the pharmacophore output file
+    rec_mol = readAndPrepareReceptorStructure(args)          # read and preprocess the receptor structure
+    lig_reader = Chem.MoleculeReader(args.ligands_file)      # create reader for the ligand input file (format specified by file extension)
+    ph4_writer = Pharm.FeatureContainerWriter(args.out_file) # create writer for the generated pharmacophores (format specified by file extension)
  
     lig_mol = Chem.BasicMolecule()          # create an instance of the default implementation of the
                                             # Chem.Molecule interface that will store the ligand structures
@@ -198,8 +159,7 @@ def main() -> None:
 
         # read and process ligand molecules one after the other until the end of input has been reached (or a severe error occurs)
         while lig_reader.read(lig_mol):
-            # compose a simple ligand identifier for messages
-            mol_id = Chem.getName(lig_mol).strip() 
+            mol_id = Chem.getName(lig_mol).strip() # compose a simple ligand identifier for messages
 
             if mol_id == '':
                 mol_id = '#' + str(i)  # fallback if name is empty or not available

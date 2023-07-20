@@ -89,19 +89,8 @@ def parseArgs() -> argparse.Namespace:
 
 # reads and returns the specified alignment reference pharmacophore
 def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine pharmacophore input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Pharm.PharmacophoreIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: unsupported pharmacophore input file format \'%s\'' % name_and_ext[1])
-
-    # create reader instance
-    reader = ipt_handler.createReader(filename)
+    # create pharmacophore reader instance
+    reader = Pharm.PharmacophoreReader(filename)
 
     # create an instance of the default implementation of the Pharm.Pharmacophore interface
     ph4 = Pharm.BasicPharmacophore()
@@ -114,38 +103,6 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
         sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
 
     return ph4
-
-# returns a Chem.MoleculeReader instance for the specifed input molecule file format
-def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: unsupported molecule input file format \'%s\'' % name_and_ext[1])
-
-    # create and return file reader instance
-    return ipt_handler.createReader(filename)
-
-# returns a Chem.MolecularGraphWriter instance for the specifed outut molecule file format
-def getMolWriterByFileExt(filename: str) -> Chem.MolecularGraphWriter:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule output file format (file extension missing)')
-
-    # get output handler for the format specified by the output file's extension
-    opt_handler = Chem.MolecularGraphIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not opt_handler:
-        sys.exit('Error: unsupported molecule output file format \'%s\'' % name_and_ext[1])
-
-    # create and return file writer instance
-    return opt_handler.createWriter(filename)
 
 # generates and returns the pharmacophore of the specified molecule
 def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
@@ -167,17 +124,16 @@ def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
 def main() -> None:
     args = parseArgs()
 
-    ref_ph4 = readRefPharmacophore(args.ref_ph4_file) # read the reference pharmacophore
+    # read the reference pharmacophore
+    ref_ph4 = readRefPharmacophore(args.ref_ph4_file) 
 
-    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
-    # reader = Chem.FileSDFMoleculeReader(args.in_file)
-    mol_reader = getMolReaderByFileExt(args.in_file) 
+    # create reader for input molecules (format specified by file extension)
+    mol_reader = Chem.MoleculeReader(args.in_file) 
 
     Chem.setMultiConfImportParameter(mol_reader, False) # treat conformers as individual molecules
     
-    # if the output molecules have to be stored in a specific format, a writer for this format could be created directly, e.g.
-    # writer = Chem.FileSDFMolecularGraphWriter(args.out_file)
-    mol_writer = getMolWriterByFileExt(args.out_file) 
+    # create writer for aligned molecules (format specified by file extension)
+    mol_writer = Chem.MolecularGraphWriter(args.out_file) 
 
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()

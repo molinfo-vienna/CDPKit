@@ -94,41 +94,6 @@ def parseArgs() -> argparse.Namespace:
 
     return parse_args
 
-def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: unsupported molecule input file format \'%s\'' % name_and_ext[1])
-
-    # create and return file reader instance
-    return ipt_handler.createReader(filename)
-
-def getWriterByFileExt(filename: str) -> Chem.MolecularGraphWriter:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule output file format (file extension missing)')
-
-    # get output handler for the format specified by the output file's extension
-    opt_handler = Chem.MolecularGraphIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not opt_handler:
-        sys.exit('Error: unsupported molecule output file format \'%s\'' % name_and_ext[1])
-
-    # create file writer instance
-    writer = opt_handler.createWriter(filename)
-
-    # do not update timestamp during MDL output, just for testing purposes!
-    Chem.setMDLUpdateTimestampParameter(writer, False) 
-
-    return writer
-
 def getListOfChangesString(change_flags: Chem.ChEMBLStandardizer.ChangeFlags) -> str:
     changes = '   Carried out modifications:'
 
@@ -197,13 +162,14 @@ def getLogMessage(change_flags: Chem.ChEMBLStandardizer.ChangeFlags, args: argpa
 def main() -> None:
     args = parseArgs() # process command line arguments
 
-    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
-    # reader = Chem.FileSDFMoleculeReader(args.in_file)
-    reader = getReaderByFileExt(args.in_file) 
+    # create reader for input molecules (format specified by file extension)
+    reader = Chem.MoleculeReader(args.in_file) 
 
-    # if the output molecules have to be stored in a specific format, a writer for this format could be created directly, e.g.
-    # writer = Chem.FileSDFMolecularGraphWriter(args.out_file)
-    writer = getWriterByFileExt(args.out_file) 
+    # create writer for output molecules (format specified by file extension)
+    writer = Chem.MolecularGraphWriter(args.out_file) 
+
+    # do not update timestamp for output in an MDL format, just for testing purposes!
+    Chem.setMDLUpdateTimestampParameter(writer, False)
     
     # create instances of the default implementation of the Chem.Molecule interface for the input and output molecules
     in_mol = Chem.BasicMolecule()

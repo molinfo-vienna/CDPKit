@@ -33,30 +33,13 @@ import CDPL.Chem as Chem
 # function called for each read molecule
 def procMolecule(mol: Chem.Molecule) -> None: 
     print('Processing molecule with {!s} atoms and {!s} bonds'.format(mol.numAtoms, mol.numBonds))
-
-def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    # get the extension of the input file
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: unupported molecule input file format \'%s\'' % name_and_ext[1])
-
-    # create and return file reader instance
-    return ipt_handler.createReader(filename)
     
 def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input mol. file>' % sys.argv[0])
 
-    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
-    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
-    reader = getReaderByFileExt(sys.argv[1]) 
+    # create reader for input molecules (format specified by file extension)
+    reader = Chem.MoleculeReader(sys.argv[1]) 
     
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
