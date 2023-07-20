@@ -83,9 +83,8 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Ignore feature orientations, feature position matching only (default: false)')
-    parse_args = parser.parse_args()
 
-    return parse_args
+    return parser.parse_args()
 
 # reads and returns the specified alignment reference pharmacophore
 def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:

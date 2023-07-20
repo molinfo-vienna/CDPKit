@@ -90,9 +90,7 @@ def parseArgs() -> argparse.Namespace:
                         default=True,
                         help='Standardize structures that fulfill the exclusion criterions (default: true)')
 
-    parse_args = parser.parse_args()
-
-    return parse_args
+    return parser.parse_args()
 
 def getListOfChangesString(change_flags: Chem.ChEMBLStandardizer.ChangeFlags) -> str:
     changes = '   Carried out modifications:'

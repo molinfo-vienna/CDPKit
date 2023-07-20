@@ -70,9 +70,8 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Generate exclusion volumes (default: false)')
-    parse_args = parser.parse_args()
 
-    return parse_args
+    return parser.parse_args()
 
 # reads and preprocesses the specified receptor structure
 def readAndPrepareReceptorStructure(args: argparse.Namespace) -> Chem.Molecule:

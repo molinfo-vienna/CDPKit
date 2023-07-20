@@ -103,10 +103,7 @@ def parseArgs() -> argparse.Namespace:
                         default=False,
                         help='Include atom chirality (by default, atom chirality is not considered)')
 
-    parse_args = parser.parse_args()
-
-    return parse_args
-
+    return parser.parse_args()
     
 def main() -> None:
     args = parseArgs()

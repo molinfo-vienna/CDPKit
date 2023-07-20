@@ -71,52 +71,16 @@ def parseArgs() -> argparse.Namespace:
                         default=False,
                         help='Disable progress output (default: false)')
     
-    parse_args = parser.parse_args()
-
-    return parse_args
-
-# returns a Chem.MoleculeReader instance for the specified molecule input file format
-def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine molecule input file format (file extension missing)')
-
-    # get input handler for the format specified by the input file's extension
-    ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not ipt_handler:
-        sys.exit('Error: unsupported molecule input file format \'%s\'' % name_and_ext[1])
-
-    # create and return file reader instance
-    return ipt_handler.createReader(filename)
-
-# returns a Pharm.FeatureContainerWriter instance for the specified pharmacophore output file format
-def getPharmWriterByFileExt(filename: str) -> Pharm.FeatureContainerWriter:
-    name_and_ext = os.path.splitext(filename)
-
-    if name_and_ext[1] == '':
-        sys.exit('Error: could not determine pharmacophore output file format (file extension missing)')
-
-    # get output handler for the format specified by the output file's extension
-    opt_handler = Pharm.FeatureContainerIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
-
-    if not opt_handler:
-        sys.exit('Error: unsupported pharmacophore output file format \'%s\'' % name_and_ext[1])
-
-    # create and return file writer instance
-    return opt_handler.createWriter(filename)
+    return parser.parse_args()
 
 def main() -> None:
     args = parseArgs()
     
-    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
-    # reader = Chem.FileSDFMoleculeReader(args.in_file)
-    reader = getMolReaderByFileExt(args.in_file) 
+    # create reader for input molecules (format specified by file extension)
+    reader = Chem.MoleculeReader(args.in_file) 
 
-    # if the output pharmacophores have to be stored in a specific format, a writer for this format could be created directly, e.g.
-    # writer = Pharm.FilePMLFeatureContainerWriter(args.out_file)
-    writer = getPharmWriterByFileExt(args.out_file) 
+    # create writer for the generated pharmacophores (format specified by file extension)
+    writer = Pharm.FeatureContainerWriter(args.out_file) 
      
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
@@ -129,7 +93,7 @@ def main() -> None:
             mol_id = Chem.getName(mol).strip() 
 
             if mol_id == '':
-                mol_id = '#' + str(i)  # fallback if name is empty
+                mol_id = '#' + str(i) # fallback if name is empty
             else:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
@@ -139,12 +103,12 @@ def main() -> None:
             num_confs = Chem.getNumConformations(mol)
             start_conf_idx = 0
 
-            if num_confs == 0:         # test if molecule has conformations
-                start_conf_idx = -1    # if not, make sure conformer loop body gets executed
+            if num_confs == 0:      # test if molecule has conformations
+                start_conf_idx = -1 # if not, make sure conformer loop body gets executed
 
             try:
-                for conf_idx in range(start_conf_idx, num_confs):  # for each conformer
-                    ph4 = genPharmacophore(mol, conf_idx)          # generate pharmacophore
+                for conf_idx in range(start_conf_idx, num_confs): # for each conformer
+                    ph4 = genPharmacophore(mol, conf_idx)         # generate pharmacophore
 
                     if not args.quiet:
                         print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.generateFeatureTypeHistogramString(ph4)))
