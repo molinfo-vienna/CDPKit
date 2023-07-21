@@ -59,9 +59,7 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS _base DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/Base" COMPONENT CDPLPythonModules)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLPythonModules)

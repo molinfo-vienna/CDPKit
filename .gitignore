@@ -1,2 +1,6 @@
 *~
 *.pyc
+_skbuild
+dist
+CDPKit.egg-info
+MANIFEST.in

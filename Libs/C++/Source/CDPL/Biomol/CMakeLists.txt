@@ -78,29 +78,28 @@ IF(WIN32 AND MINGW)
    LINK_LIBRARIES(libwsock32.a)
 ENDIF(WIN32 AND MINGW)
 
-ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-SET_TARGET_PROPERTIES(cdpl-biomol-static PROPERTIES 
-                      OUTPUT_NAME cdpl-biomol
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_BIOMOL_STATIC_LINK"
-                     )
+  SET_TARGET_PROPERTIES(cdpl-biomol-static PROPERTIES 
+    OUTPUT_NAME cdpl-biomol
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_BIOMOL_STATIC_LINK")
 
-TARGET_LINK_LIBRARIES(cdpl-biomol-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static)
+  TARGET_LINK_LIBRARIES(cdpl-biomol-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static)
 
-INSTALL(TARGETS cdpl-biomol-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
+  INSTALL(TARGETS cdpl-biomol-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-biomol-shared SHARED ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 TARGET_LINK_LIBRARIES(cdpl-biomol-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 
 SET_TARGET_PROPERTIES(cdpl-biomol-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-biomol
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-biomol
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-biomol.dll")
@@ -111,15 +110,12 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS cdpl-biomol-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

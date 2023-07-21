@@ -60,29 +60,30 @@ SET(cdpl-descr_LIB_SRCS
     SimilarityFunctions.cpp
    )
 
-ADD_LIBRARY(cdpl-descr-static STATIC ${cdpl-descr_LIB_SRCS})
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-descr-static STATIC ${cdpl-descr_LIB_SRCS})
 
-SET_TARGET_PROPERTIES(cdpl-descr-static PROPERTIES 
-                      OUTPUT_NAME cdpl-descr
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK"
-                     )
+  SET_TARGET_PROPERTIES(cdpl-descr-static PROPERTIES 
+    OUTPUT_NAME cdpl-descr
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK")
 
-TARGET_LINK_LIBRARIES(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static)
+  TARGET_LINK_LIBRARIES(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-molprop-static
+    cdpl-math-static cdpl-util-static cdpl-base-static)
 
-INSTALL(TARGETS cdpl-descr-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
+  INSTALL(TARGETS cdpl-descr-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-descr-shared SHARED ${cdpl-descr_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+TARGET_LINK_LIBRARIES(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared
+  cdpl-math-shared cdpl-util-shared)
 
 SET_TARGET_PROPERTIES(cdpl-descr-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-descr
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-descr
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-descr.dll")
@@ -93,15 +94,12 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS cdpl-descr-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

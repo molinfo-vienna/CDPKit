@@ -34,25 +34,24 @@ SET(cdpl-base_LIB_SRCS
     Exceptions.cpp
    )
 
-ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-SET_TARGET_PROPERTIES(cdpl-base-static PROPERTIES 
-                      OUTPUT_NAME cdpl-base
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_BASE_STATIC_LINK"
-                     )
+  SET_TARGET_PROPERTIES(cdpl-base-static PROPERTIES 
+    OUTPUT_NAME cdpl-base
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_BASE_STATIC_LINK")
 
-INSTALL(TARGETS cdpl-base-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
+  INSTALL(TARGETS cdpl-base-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-base-shared SHARED ${cdpl-base_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-base-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-base
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-base
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-base.dll")
@@ -63,15 +62,12 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS cdpl-base-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

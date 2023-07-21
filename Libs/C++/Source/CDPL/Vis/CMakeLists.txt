@@ -124,29 +124,28 @@ IF(CAIRO_FOUND)
   INCLUDE_DIRECTORIES("${CAIRO_INCLUDE_DIR}")
 ENDIF(CAIRO_FOUND)
 
-ADD_LIBRARY(cdpl-vis-static STATIC ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-vis-static STATIC ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-molprop-static cdpl-base-static)
+  TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-molprop-static cdpl-base-static)
 
-SET_TARGET_PROPERTIES(cdpl-vis-static PROPERTIES 
-                      OUTPUT_NAME cdpl-vis
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK"
-                     )
+  SET_TARGET_PROPERTIES(cdpl-vis-static PROPERTIES 
+    OUTPUT_NAME cdpl-vis
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK")
 
-INSTALL(TARGETS cdpl-vis-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
+  INSTALL(TARGETS cdpl-vis-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 TARGET_LINK_LIBRARIES(cdpl-vis-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared)
 
 SET_TARGET_PROPERTIES(cdpl-vis-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-vis
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-vis
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-vis.dll")
@@ -157,15 +156,12 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS cdpl-vis-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

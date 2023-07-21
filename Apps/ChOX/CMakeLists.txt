@@ -140,26 +140,22 @@ IF(APPLE)
   ADD_EXECUTABLE(chox MACOSX_BUNDLE ${chox_SRCS} Icons/chox.icns)
 
   SET_TARGET_PROPERTIES(chox PROPERTIES
-                        MACOSX_BUNDLE_BUNDLE_NAME ChOX
-                        MACOSX_BUNDLE_BUNDLE_VERSION "${CDPKIT_VERSION}"
-                        MACOSX_BUNDLE_ICON_FILE chox.icns
-                        MACOSX_BUNDLE_COPYRIGHT "Thomas Seidel"
-                        MACOSX_BUNDLE_LONG_VERSION_STRING "${CDPKIT_VERSION}"
-                        MACOSX_BUNDLE_SHORT_VERSION_STRING "${CDPKIT_VERSION}"
-                        OUTPUT_NAME ChOX
-                       )
+    MACOSX_BUNDLE_BUNDLE_NAME ChOX
+    MACOSX_BUNDLE_BUNDLE_VERSION "${CDPKIT_VERSION}"
+    MACOSX_BUNDLE_ICON_FILE chox.icns
+    MACOSX_BUNDLE_COPYRIGHT "Thomas Seidel"
+    MACOSX_BUNDLE_LONG_VERSION_STRING "${CDPKIT_VERSION}"
+    MACOSX_BUNDLE_SHORT_VERSION_STRING "${CDPKIT_VERSION}"
+    OUTPUT_NAME ChOX)
 
   SET_SOURCE_FILES_PROPERTIES(Icons/chox.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 
   CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/MacDeployQt.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" 
-                 @ONLY
-                )
+    "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" @ONLY)
   CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/MacCodeSigning.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/MacCodeSigning.cmake" 
-                 @ONLY
-                )
-  TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-molprop-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+    "${CMAKE_CURRENT_BINARY_DIR}/MacCodeSigning.cmake" @ONLY)
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-molprop-static cdpl-vis-static cdpl-biomol-static
+    cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ELSE(APPLE)
   IF(WIN32)
     IF(MINGW) # resource compilation for mingw
@@ -193,15 +189,14 @@ ELSE(APPLE)
 
     INSTALL(FILES chox.desktop DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
     INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
-  
+    
     SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox")
   ENDIF(WIN32)
 
   CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-                 @ONLY
-                )
-  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared
+    cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 
 IF(NOT APPLE)

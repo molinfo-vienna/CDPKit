@@ -107,29 +107,30 @@ SET(cdpl-confgen_LIB_SRCS
 
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-SET_TARGET_PROPERTIES(cdpl-confgen-static PROPERTIES 
-                      OUTPUT_NAME cdpl-confgen
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK"
-                     )
+  SET_TARGET_PROPERTIES(cdpl-confgen-static PROPERTIES 
+    OUTPUT_NAME cdpl-confgen
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK")
 
-TARGET_LINK_LIBRARIES(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-forcefield-static)
+  TARGET_LINK_LIBRARIES(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static
+    cdpl-util-static cdpl-forcefield-static)
 
-INSTALL(TARGETS cdpl-confgen-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
+  INSTALL(TARGETS cdpl-confgen-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
+TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
+  cdpl-util-shared cdpl-forcefield-shared)
 
 SET_TARGET_PROPERTIES(cdpl-confgen-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-confgen
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-confgen
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-confgen.dll")
@@ -140,15 +141,12 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS cdpl-confgen-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

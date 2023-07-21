@@ -39,12 +39,10 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 TARGET_LINK_LIBRARIES(psdscreen cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
-              cdpl-pharm-shared cdpl-biomol-shared Threads::Threads)
+  cdpl-pharm-shared cdpl-biomol-shared Threads::Threads)
 
 INSTALL(TARGETS psdscreen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

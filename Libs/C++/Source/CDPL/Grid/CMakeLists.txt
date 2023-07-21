@@ -46,29 +46,28 @@ SET(cdpl-grid_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
-ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static)
+  TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static)
 
-SET_TARGET_PROPERTIES(cdpl-grid-static PROPERTIES 
-                      OUTPUT_NAME cdpl-grid
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_GRID_STATIC_LINK"
-                     )
+  SET_TARGET_PROPERTIES(cdpl-grid-static PROPERTIES 
+    OUTPUT_NAME cdpl-grid
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_GRID_STATIC_LINK")
 
-INSTALL(TARGETS cdpl-grid-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
+  INSTALL(TARGETS cdpl-grid-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-grid-shared SHARED ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 TARGET_LINK_LIBRARIES(cdpl-grid-shared cdpl-base-shared cdpl-util-shared)
 
 SET_TARGET_PROPERTIES(cdpl-grid-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-grid
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-grid
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-grid.dll")
@@ -79,15 +78,12 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
 
 INSTALL(TARGETS cdpl-grid-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 

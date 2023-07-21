@@ -43,31 +43,31 @@ SET(cdpl-grail_LIB_SRCS
     AttributedGridPropertyFunctions.cpp
     MoleculeFunctions.cpp
     FeatureExtendedTypeFunction.cpp
-   )
+    )
+  
+IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+  ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+  SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES 
+    OUTPUT_NAME cdpl-grail
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_GRAIL_STATIC_LINK")
 
-SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES 
-                      OUTPUT_NAME cdpl-grail
-                      CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_GRAIL_STATIC_LINK"
-                     )
+  TARGET_LINK_LIBRARIES(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static
+    cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)
 
-TARGET_LINK_LIBRARIES(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)
-
-INSTALL(TARGETS cdpl-grail-static
-        DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
-       )
-
+  INSTALL(TARGETS cdpl-grail-static DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
+    
 ADD_LIBRARY(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
+TARGET_LINK_LIBRARIES(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared
+  cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
 
 SET_TARGET_PROPERTIES(cdpl-grail-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                      OUTPUT_NAME cdpl-grail
-              CLEAN_DIRECT_OUTPUT 1
-              INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-              )
+  OUTPUT_NAME cdpl-grail
+  CLEAN_DIRECT_OUTPUT 1
+  INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
 
 IF(WIN32)
   SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/libcdpl-grail.dll")
@@ -78,15 +78,13 @@ ELSE()
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-           @ONLY
-           )
+  "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+  @ONLY)
 
 INSTALL(TARGETS cdpl-grail-shared
-        RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-    )
+  RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+  ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
