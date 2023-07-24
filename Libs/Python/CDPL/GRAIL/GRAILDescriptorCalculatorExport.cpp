@@ -72,6 +72,7 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
         .value("HBA_S2_COUNT", GRAIL::GRAILDescriptorCalculator::HBA_S2_COUNT)
         .value("TOTAL_HYD", GRAIL::GRAILDescriptorCalculator::TOTAL_HYD)
         .value("LOGP", GRAIL::GRAILDescriptorCalculator::LOGP)
+        .value("TPSA", GRAIL::GRAILDescriptorCalculator::TPSA)
         .value("ENV_HBA_N_OCC_SUM", GRAIL::GRAILDescriptorCalculator::ENV_HBA_N_OCC_SUM)
         .value("ENV_HBA_N_OCC_MAX", GRAIL::GRAILDescriptorCalculator::ENV_HBA_N_OCC_MAX)
         .value("ENV_HBA_O_OCC_SUM", GRAIL::GRAILDescriptorCalculator::ENV_HBA_O_OCC_SUM)
@@ -223,7 +224,7 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const GRAIL::GRAILDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDescriptorCalculator>())
-        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDescriptorCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDescriptorCalculator::operator=),
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("initTargetData", &GRAIL::GRAILDescriptorCalculator::initTargetData,
              (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("tgt_env_changed") = true))
