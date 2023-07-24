@@ -34,22 +34,22 @@
 #include "CDPL/MolProp/AtomFunctions.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 void GRAIL::prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_prot_state)
 {
     if (std_prot_state)
-    Chem::ProtonationStateStandardizer().standardize(mol, Chem::ProtonationStateStandardizer::PHYSIOLOGICAL_CONDITION_STATE);
-    
+        Chem::ProtonationStateStandardizer().standardize(mol, Chem::ProtonationStateStandardizer::PHYSIOLOGICAL_CONDITION_STATE);
+
     Pharm::prepareForPharmacophoreGeneration(mol, false);
 
     MolProp::XLogPCalculator calculator(mol);
     const Math::DVector& logp_contribs = calculator.getAtomContributions();
 
-    for (std::size_t i = 0, num_atoms = mol.getNumAtoms(); i < num_atoms; i++) 
-    MolProp::setHydrophobicity(mol.getAtom(i), logp_contribs[i]);
-    
+    for (std::size_t i = 0, num_atoms = mol.getNumAtoms(); i < num_atoms; i++)
+        MolProp::setHydrophobicity(mol.getAtom(i), logp_contribs[i]);
+
     Chem::perceiveSybylAtomTypes(mol, true);
     ForceField::perceiveMMFF94AromaticRings(mol, true);
     ForceField::assignMMFF94AtomTypes(mol, false, true);

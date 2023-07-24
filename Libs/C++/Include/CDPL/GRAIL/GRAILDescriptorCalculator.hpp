@@ -38,6 +38,7 @@
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/MolProp/TPSACalculator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -63,8 +64,8 @@ namespace CDPL
         {
 
           public:
-            static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 173;
-            static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 28;
+            static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 174;
+            static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 29;
 
             typedef std::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
 
@@ -99,6 +100,7 @@ namespace CDPL
                 HBA_S2_COUNT,
                 TOTAL_HYD,
                 LOGP,
+                TPSA,
                 ENV_HBA_N_OCC_SUM,
                 ENV_HBA_N_OCC_MAX,
                 ENV_HBA_O_OCC_SUM,
@@ -331,6 +333,7 @@ namespace CDPL
             IndexListArray                       ligFtrAtoms;
             DoubleArray                          ligFtrWeights;
             FastVector3DArray                    ligFtrCoords;
+            MolProp::TPSACalculator              ligTPSACalculator;
             double                               ligDescriptor[LIGAND_DESCRIPTOR_SIZE];
             std::size_t                          numLigAtoms;
             IndexList                            tmpIndexList;
