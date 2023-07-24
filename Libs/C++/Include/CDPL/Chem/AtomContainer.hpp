@@ -165,6 +165,24 @@ namespace CDPL
              */
             virtual void orderAtoms(const AtomCompareFunction& func) = 0;
 
+            /**
+             * \brief Returns a \c const reference to itself.
+             * \return A \c const reference to itself.
+             */
+            const AtomContainer& getAtoms() const
+            {
+                return *this;
+            }
+
+            /**
+             * \brief Returns a reference to itself.
+             * \return A reference to itself.
+             */
+            AtomContainer& getAtoms()
+            {
+                return *this;
+            }
+
           protected:
             /**
              * \brief Virtual destructor.

@@ -214,6 +214,12 @@ namespace CDPL
              */
             void swap(PropertyContainer& cntnr);
 
+            /**
+             * \brief Returns a \c const reference to itself.
+             * \return A \c const reference to itself.
+             */
+            inline const PropertyContainer& getProperties() const;
+
           protected:
             /**
              * \brief Constructs an empty \c %PropertyContainer instance.
@@ -309,6 +315,11 @@ template <typename T>
 bool CDPL::Base::PropertyContainer::isEmptyAny(const T&) const
 {
     return false;
+}
+
+const CDPL::Base::PropertyContainer& CDPL::Base::PropertyContainer::getProperties() const
+{
+    return *this;
 }
 
 #endif // CDPL_BASE_PROPERTYCONTAINER_HPP

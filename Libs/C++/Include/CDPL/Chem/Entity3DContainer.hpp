@@ -136,6 +136,24 @@ namespace CDPL
              */
             EntityIterator end();
 
+            /**
+             * \brief Returns a \c const reference to itself.
+             * \return A \c const reference to itself.
+             */
+            const Entity3DContainer& getEntities() const
+            {
+                return *this;
+            }
+
+            /**
+             * \brief Returns a reference to itself.
+             * \return A reference to itself.
+             */
+            Entity3DContainer& getEntities()
+            {
+                return *this;
+            }
+
           protected:
             /**
              * \brief Virtual destructor.

@@ -375,6 +375,12 @@ namespace CDPL
              */
             void unregisterParentChangedCallback(std::size_t id);
 
+            /**
+             * \brief Returns a \c const reference to itself.
+             * \return A \c const reference to itself.
+             */
+            inline const ControlParameterContainer& getParameters() const;
+              
           protected:
             /**
              * \brief Constructs an empty \c %ControlParameterContainer instance.
@@ -480,6 +486,11 @@ template <typename T>
 bool CDPL::Base::ControlParameterContainer::isEmptyAny(const T&) const
 {
     return false;
+}
+
+const CDPL::Base::ControlParameterContainer& CDPL::Base::ControlParameterContainer::getParameters() const
+{
+    return *this;
 }
 
 #endif // CDPL_BASE_CONTROLPARAMETERCONTAINER_HPP

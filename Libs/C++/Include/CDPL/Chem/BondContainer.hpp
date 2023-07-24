@@ -158,6 +158,24 @@ namespace CDPL
               */
             virtual void orderBonds(const BondCompareFunction& func) = 0;
 
+            /**
+             * \brief Returns a \c const reference to itself.
+             * \return A \c const reference to itself.
+             */
+            const BondContainer& getBonds() const
+            {
+                return *this;
+            }
+
+            /**
+             * \brief Returns a reference to itself.
+             * \return A reference to itself.
+             */
+            BondContainer& getBonds()
+            {
+                return *this;
+            }
+
           protected:
             /**
              * \brief Virtual destructor.
