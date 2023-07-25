@@ -48,12 +48,12 @@ namespace CDPL
         /**
          * \brief A safe, type checked container for arbitrary data of variable type.
          *
-         * The code is based on the std::experimental::any (N4562, merged into C++17) implementation for C++11 compilers
+         * The code is based on the <tt>std::experimental::any</tt> (N4562, merged into C++17) implementation for C++11 compilers
          * by <a href="https://github.com/thelink2012">Denilson das Mercês Amorim</a>. 
-         * \c %Any provides an optimization for small objects objects with a size of up to 2 words such as <tt>int<tt>, <tt>float</tt> 
+         * \c %Any provides an optimization for small objects objects with a size of up to 2 words such as <tt>int</tt>, <tt>float</tt> 
          * and <tt>std::shared_ptr</tt>. Storing those objects in the container will not trigger a dynamic allocation.
          *
-         * For more documentation, see [\ref ANY].
+         * For more details see [\ref ANY].
          */
         class Any final
         {

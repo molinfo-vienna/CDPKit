@@ -86,9 +86,9 @@ namespace CDPL
          * \tparam Value The type of the mapped values.
          * \tparam AllowDefValues Whether to return a default value or to throw an exception if a key/value
          *                        entry is not present in the map.
-         * \param KeyCompFunc The type of a functor class used to establish the strictly weak ordering on the map's keys.
-         *                    The functor has to return \c true if the first argument is less than the second one,
-         *                    and \c false otherwise. 
+         * \tparam KeyCompFunc The type of a functor class used to establish the strictly weak ordering on the map's keys.
+         *                     The functor has to return \c true if the first argument is less than the second one,
+         *                     and \c false otherwise. 
          */
         template <typename Key, typename Value, bool AllowDefValues = false,
                   typename KeyCompFunc = std::less<Key> >

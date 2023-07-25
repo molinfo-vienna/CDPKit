@@ -49,7 +49,7 @@ namespace CDPL
 
         /**
          * \brief AtomRDFCodeCalculator.
-         * \see [\ref CITB, \ref HBMD]
+         * \see [\ref CITB], [\ref HBMD]
          */
         class CDPL_DESCR_API AtomRDFCodeCalculator : public RDFCodeCalculator<Chem::Atom>
         {
