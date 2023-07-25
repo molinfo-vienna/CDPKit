@@ -170,739 +170,744 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
         LOGP = 27
 
         ##
+        # \brief TPSA.
+        #
+        TPSA = 28
+
+        ##
         # \brief ENV_HBA_N_OCC_SUM.
         #
-        ENV_HBA_N_OCC_SUM = 28
+        ENV_HBA_N_OCC_SUM = 29
 
         ##
         # \brief ENV_HBA_N_OCC_MAX.
         #
-        ENV_HBA_N_OCC_MAX = 29
+        ENV_HBA_N_OCC_MAX = 30
 
         ##
         # \brief ENV_HBA_O_OCC_SUM.
         #
-        ENV_HBA_O_OCC_SUM = 30
+        ENV_HBA_O_OCC_SUM = 31
 
         ##
         # \brief ENV_HBA_O_OCC_MAX.
         #
-        ENV_HBA_O_OCC_MAX = 31
+        ENV_HBA_O_OCC_MAX = 32
 
         ##
         # \brief ENV_HBA_S_OCC_SUM.
         #
-        ENV_HBA_S_OCC_SUM = 32
+        ENV_HBA_S_OCC_SUM = 33
 
         ##
         # \brief ENV_HBA_S_OCC_MAX.
         #
-        ENV_HBA_S_OCC_MAX = 33
+        ENV_HBA_S_OCC_MAX = 34
 
         ##
         # \brief ENV_HBD_N_OCC_SUM.
         #
-        ENV_HBD_N_OCC_SUM = 34
+        ENV_HBD_N_OCC_SUM = 35
 
         ##
         # \brief ENV_HBD_N_OCC_MAX.
         #
-        ENV_HBD_N_OCC_MAX = 35
+        ENV_HBD_N_OCC_MAX = 36
 
         ##
         # \brief ENV_HBD_O_OCC_SUM.
         #
-        ENV_HBD_O_OCC_SUM = 36
+        ENV_HBD_O_OCC_SUM = 37
 
         ##
         # \brief ENV_HBD_O_OCC_MAX.
         #
-        ENV_HBD_O_OCC_MAX = 37
+        ENV_HBD_O_OCC_MAX = 38
 
         ##
         # \brief ENV_HBD_S_OCC_SUM.
         #
-        ENV_HBD_S_OCC_SUM = 38
+        ENV_HBD_S_OCC_SUM = 39
 
         ##
         # \brief ENV_HBD_S_OCC_MAX.
         #
-        ENV_HBD_S_OCC_MAX = 39
+        ENV_HBD_S_OCC_MAX = 40
 
         ##
         # \brief PI_AR_SCORE_SUM.
         #
-        PI_AR_SCORE_SUM = 40
+        PI_AR_SCORE_SUM = 41
 
         ##
         # \brief PI_AR_SCORE_MAX.
         #
-        PI_AR_SCORE_MAX = 41
+        PI_AR_SCORE_MAX = 42
 
         ##
         # \brief AR_PI_SCORE_SUM.
         #
-        AR_PI_SCORE_SUM = 42
+        AR_PI_SCORE_SUM = 43
 
         ##
         # \brief AR_PI_SCORE_MAX.
         #
-        AR_PI_SCORE_MAX = 43
+        AR_PI_SCORE_MAX = 44
 
         ##
         # \brief H_H_SCORE_SUM.
         #
-        H_H_SCORE_SUM = 44
+        H_H_SCORE_SUM = 45
 
         ##
         # \brief H_H_SCORE_MAX.
         #
-        H_H_SCORE_MAX = 45
+        H_H_SCORE_MAX = 46
 
         ##
         # \brief AR_AR_SCORE_SUM.
         #
-        AR_AR_SCORE_SUM = 46
+        AR_AR_SCORE_SUM = 47
 
         ##
         # \brief AR_AR_SCORE_MAX.
         #
-        AR_AR_SCORE_MAX = 47
+        AR_AR_SCORE_MAX = 48
 
         ##
         # \brief HBD_HBA_N_SCORE_SUM.
         #
-        HBD_HBA_N_SCORE_SUM = 48
+        HBD_HBA_N_SCORE_SUM = 49
 
         ##
         # \brief HBD_HBA_N_SCORE_MAX.
         #
-        HBD_HBA_N_SCORE_MAX = 49
+        HBD_HBA_N_SCORE_MAX = 50
 
         ##
         # \brief HBD_HBA_O_SCORE_SUM.
         #
-        HBD_HBA_O_SCORE_SUM = 50
+        HBD_HBA_O_SCORE_SUM = 51
 
         ##
         # \brief HBD_HBA_O_SCORE_MAX.
         #
-        HBD_HBA_O_SCORE_MAX = 51
+        HBD_HBA_O_SCORE_MAX = 52
 
         ##
         # \brief HBD_HBA_S_SCORE_SUM.
         #
-        HBD_HBA_S_SCORE_SUM = 52
+        HBD_HBA_S_SCORE_SUM = 53
 
         ##
         # \brief HBD_HBA_S_SCORE_MAX.
         #
-        HBD_HBA_S_SCORE_MAX = 53
+        HBD_HBA_S_SCORE_MAX = 54
 
         ##
         # \brief HBD_N3_HBA_N_SCORE_SUM.
         #
-        HBD_N3_HBA_N_SCORE_SUM = 54
+        HBD_N3_HBA_N_SCORE_SUM = 55
 
         ##
         # \brief HBD_N3_HBA_N_SCORE_MAX.
         #
-        HBD_N3_HBA_N_SCORE_MAX = 55
+        HBD_N3_HBA_N_SCORE_MAX = 56
 
         ##
         # \brief HBD_N3_HBA_O_SCORE_SUM.
         #
-        HBD_N3_HBA_O_SCORE_SUM = 56
+        HBD_N3_HBA_O_SCORE_SUM = 57
 
         ##
         # \brief HBD_N3_HBA_O_SCORE_MAX.
         #
-        HBD_N3_HBA_O_SCORE_MAX = 57
+        HBD_N3_HBA_O_SCORE_MAX = 58
 
         ##
         # \brief HBD_N3_HBA_S_SCORE_SUM.
         #
-        HBD_N3_HBA_S_SCORE_SUM = 58
+        HBD_N3_HBA_S_SCORE_SUM = 59
 
         ##
         # \brief HBD_N3_HBA_S_SCORE_MAX.
         #
-        HBD_N3_HBA_S_SCORE_MAX = 59
+        HBD_N3_HBA_S_SCORE_MAX = 60
 
         ##
         # \brief HBD_N2_HBA_N_SCORE_SUM.
         #
-        HBD_N2_HBA_N_SCORE_SUM = 60
+        HBD_N2_HBA_N_SCORE_SUM = 61
 
         ##
         # \brief HBD_N2_HBA_N_SCORE_MAX.
         #
-        HBD_N2_HBA_N_SCORE_MAX = 61
+        HBD_N2_HBA_N_SCORE_MAX = 62
 
         ##
         # \brief HBD_N2_HBA_O_SCORE_SUM.
         #
-        HBD_N2_HBA_O_SCORE_SUM = 62
+        HBD_N2_HBA_O_SCORE_SUM = 63
 
         ##
         # \brief HBD_N2_HBA_O_SCORE_MAX.
         #
-        HBD_N2_HBA_O_SCORE_MAX = 63
+        HBD_N2_HBA_O_SCORE_MAX = 64
 
         ##
         # \brief HBD_N2_HBA_S_SCORE_SUM.
         #
-        HBD_N2_HBA_S_SCORE_SUM = 64
+        HBD_N2_HBA_S_SCORE_SUM = 65
 
         ##
         # \brief HBD_N2_HBA_S_SCORE_MAX.
         #
-        HBD_N2_HBA_S_SCORE_MAX = 65
+        HBD_N2_HBA_S_SCORE_MAX = 66
 
         ##
         # \brief HBD_Nar_HBA_N_SCORE_SUM.
         #
-        HBD_Nar_HBA_N_SCORE_SUM = 66
+        HBD_Nar_HBA_N_SCORE_SUM = 67
 
         ##
         # \brief HBD_Nar_HBA_N_SCORE_MAX.
         #
-        HBD_Nar_HBA_N_SCORE_MAX = 67
+        HBD_Nar_HBA_N_SCORE_MAX = 68
 
         ##
         # \brief HBD_Nar_HBA_O_SCORE_SUM.
         #
-        HBD_Nar_HBA_O_SCORE_SUM = 68
+        HBD_Nar_HBA_O_SCORE_SUM = 69
 
         ##
         # \brief HBD_Nar_HBA_O_SCORE_MAX.
         #
-        HBD_Nar_HBA_O_SCORE_MAX = 69
+        HBD_Nar_HBA_O_SCORE_MAX = 70
 
         ##
         # \brief HBD_Nar_HBA_S_SCORE_SUM.
         #
-        HBD_Nar_HBA_S_SCORE_SUM = 70
+        HBD_Nar_HBA_S_SCORE_SUM = 71
 
         ##
         # \brief HBD_Nar_HBA_S_SCORE_MAX.
         #
-        HBD_Nar_HBA_S_SCORE_MAX = 71
+        HBD_Nar_HBA_S_SCORE_MAX = 72
 
         ##
         # \brief HBD_Nam_HBA_N_SCORE_SUM.
         #
-        HBD_Nam_HBA_N_SCORE_SUM = 72
+        HBD_Nam_HBA_N_SCORE_SUM = 73
 
         ##
         # \brief HBD_Nam_HBA_N_SCORE_MAX.
         #
-        HBD_Nam_HBA_N_SCORE_MAX = 73
+        HBD_Nam_HBA_N_SCORE_MAX = 74
 
         ##
         # \brief HBD_Nam_HBA_O_SCORE_SUM.
         #
-        HBD_Nam_HBA_O_SCORE_SUM = 74
+        HBD_Nam_HBA_O_SCORE_SUM = 75
 
         ##
         # \brief HBD_Nam_HBA_O_SCORE_MAX.
         #
-        HBD_Nam_HBA_O_SCORE_MAX = 75
+        HBD_Nam_HBA_O_SCORE_MAX = 76
 
         ##
         # \brief HBD_Nam_HBA_S_SCORE_SUM.
         #
-        HBD_Nam_HBA_S_SCORE_SUM = 76
+        HBD_Nam_HBA_S_SCORE_SUM = 77
 
         ##
         # \brief HBD_Nam_HBA_S_SCORE_MAX.
         #
-        HBD_Nam_HBA_S_SCORE_MAX = 77
+        HBD_Nam_HBA_S_SCORE_MAX = 78
 
         ##
         # \brief HBD_Npl3_HBA_N_SCORE_SUM.
         #
-        HBD_Npl3_HBA_N_SCORE_SUM = 78
+        HBD_Npl3_HBA_N_SCORE_SUM = 79
 
         ##
         # \brief HBD_Npl3_HBA_N_SCORE_MAX.
         #
-        HBD_Npl3_HBA_N_SCORE_MAX = 79
+        HBD_Npl3_HBA_N_SCORE_MAX = 80
 
         ##
         # \brief HBD_Npl3_HBA_O_SCORE_SUM.
         #
-        HBD_Npl3_HBA_O_SCORE_SUM = 80
+        HBD_Npl3_HBA_O_SCORE_SUM = 81
 
         ##
         # \brief HBD_Npl3_HBA_O_SCORE_MAX.
         #
-        HBD_Npl3_HBA_O_SCORE_MAX = 81
+        HBD_Npl3_HBA_O_SCORE_MAX = 82
 
         ##
         # \brief HBD_Npl3_HBA_S_SCORE_SUM.
         #
-        HBD_Npl3_HBA_S_SCORE_SUM = 82
+        HBD_Npl3_HBA_S_SCORE_SUM = 83
 
         ##
         # \brief HBD_Npl3_HBA_S_SCORE_MAX.
         #
-        HBD_Npl3_HBA_S_SCORE_MAX = 83
+        HBD_Npl3_HBA_S_SCORE_MAX = 84
 
         ##
         # \brief HBD_N4_HBA_N_SCORE_SUM.
         #
-        HBD_N4_HBA_N_SCORE_SUM = 84
+        HBD_N4_HBA_N_SCORE_SUM = 85
 
         ##
         # \brief HBD_N4_HBA_N_SCORE_MAX.
         #
-        HBD_N4_HBA_N_SCORE_MAX = 85
+        HBD_N4_HBA_N_SCORE_MAX = 86
 
         ##
         # \brief HBD_N4_HBA_O_SCORE_SUM.
         #
-        HBD_N4_HBA_O_SCORE_SUM = 86
+        HBD_N4_HBA_O_SCORE_SUM = 87
 
         ##
         # \brief HBD_N4_HBA_O_SCORE_MAX.
         #
-        HBD_N4_HBA_O_SCORE_MAX = 87
+        HBD_N4_HBA_O_SCORE_MAX = 88
 
         ##
         # \brief HBD_N4_HBA_S_SCORE_SUM.
         #
-        HBD_N4_HBA_S_SCORE_SUM = 88
+        HBD_N4_HBA_S_SCORE_SUM = 89
 
         ##
         # \brief HBD_N4_HBA_S_SCORE_MAX.
         #
-        HBD_N4_HBA_S_SCORE_MAX = 89
+        HBD_N4_HBA_S_SCORE_MAX = 90
 
         ##
         # \brief HBD_O3_HBA_N_SCORE_SUM.
         #
-        HBD_O3_HBA_N_SCORE_SUM = 90
+        HBD_O3_HBA_N_SCORE_SUM = 91
 
         ##
         # \brief HBD_O3_HBA_N_SCORE_MAX.
         #
-        HBD_O3_HBA_N_SCORE_MAX = 91
+        HBD_O3_HBA_N_SCORE_MAX = 92
 
         ##
         # \brief HBD_O3_HBA_O_SCORE_SUM.
         #
-        HBD_O3_HBA_O_SCORE_SUM = 92
+        HBD_O3_HBA_O_SCORE_SUM = 93
 
         ##
         # \brief HBD_O3_HBA_O_SCORE_MAX.
         #
-        HBD_O3_HBA_O_SCORE_MAX = 93
+        HBD_O3_HBA_O_SCORE_MAX = 94
 
         ##
         # \brief HBD_O3_HBA_S_SCORE_SUM.
         #
-        HBD_O3_HBA_S_SCORE_SUM = 94
+        HBD_O3_HBA_S_SCORE_SUM = 95
 
         ##
         # \brief HBD_O3_HBA_S_SCORE_MAX.
         #
-        HBD_O3_HBA_S_SCORE_MAX = 95
+        HBD_O3_HBA_S_SCORE_MAX = 96
 
         ##
         # \brief HBD_S3_HBA_N_SCORE_SUM.
         #
-        HBD_S3_HBA_N_SCORE_SUM = 96
+        HBD_S3_HBA_N_SCORE_SUM = 97
 
         ##
         # \brief HBD_S3_HBA_N_SCORE_MAX.
         #
-        HBD_S3_HBA_N_SCORE_MAX = 97
+        HBD_S3_HBA_N_SCORE_MAX = 98
 
         ##
         # \brief HBD_S3_HBA_O_SCORE_SUM.
         #
-        HBD_S3_HBA_O_SCORE_SUM = 98
+        HBD_S3_HBA_O_SCORE_SUM = 99
 
         ##
         # \brief HBD_S3_HBA_O_SCORE_MAX.
         #
-        HBD_S3_HBA_O_SCORE_MAX = 99
+        HBD_S3_HBA_O_SCORE_MAX = 100
 
         ##
         # \brief HBD_S3_HBA_S_SCORE_SUM.
         #
-        HBD_S3_HBA_S_SCORE_SUM = 100
+        HBD_S3_HBA_S_SCORE_SUM = 101
 
         ##
         # \brief HBD_S3_HBA_S_SCORE_MAX.
         #
-        HBD_S3_HBA_S_SCORE_MAX = 101
+        HBD_S3_HBA_S_SCORE_MAX = 102
 
         ##
         # \brief HBA_HBD_N_SCORE_SUM.
         #
-        HBA_HBD_N_SCORE_SUM = 102
+        HBA_HBD_N_SCORE_SUM = 103
 
         ##
         # \brief HBA_HBD_N_SCORE_MAX.
         #
-        HBA_HBD_N_SCORE_MAX = 103
+        HBA_HBD_N_SCORE_MAX = 104
 
         ##
         # \brief HBA_HBD_O_SCORE_SUM.
         #
-        HBA_HBD_O_SCORE_SUM = 104
+        HBA_HBD_O_SCORE_SUM = 105
 
         ##
         # \brief HBA_HBD_O_SCORE_MAX.
         #
-        HBA_HBD_O_SCORE_MAX = 105
+        HBA_HBD_O_SCORE_MAX = 106
 
         ##
         # \brief HBA_HBD_S_SCORE_SUM.
         #
-        HBA_HBD_S_SCORE_SUM = 106
+        HBA_HBD_S_SCORE_SUM = 107
 
         ##
         # \brief HBA_HBD_S_SCORE_MAX.
         #
-        HBA_HBD_S_SCORE_MAX = 107
+        HBA_HBD_S_SCORE_MAX = 108
 
         ##
         # \brief HBA_N3_HBD_N_SCORE_SUM.
         #
-        HBA_N3_HBD_N_SCORE_SUM = 108
+        HBA_N3_HBD_N_SCORE_SUM = 109
 
         ##
         # \brief HBA_N3_HBD_N_SCORE_MAX.
         #
-        HBA_N3_HBD_N_SCORE_MAX = 109
+        HBA_N3_HBD_N_SCORE_MAX = 110
 
         ##
         # \brief HBA_N3_HBD_O_SCORE_SUM.
         #
-        HBA_N3_HBD_O_SCORE_SUM = 110
+        HBA_N3_HBD_O_SCORE_SUM = 111
 
         ##
         # \brief HBA_N3_HBD_O_SCORE_MAX.
         #
-        HBA_N3_HBD_O_SCORE_MAX = 111
+        HBA_N3_HBD_O_SCORE_MAX = 112
 
         ##
         # \brief HBA_N3_HBD_S_SCORE_SUM.
         #
-        HBA_N3_HBD_S_SCORE_SUM = 112
+        HBA_N3_HBD_S_SCORE_SUM = 113
 
         ##
         # \brief HBA_N3_HBD_S_SCORE_MAX.
         #
-        HBA_N3_HBD_S_SCORE_MAX = 113
+        HBA_N3_HBD_S_SCORE_MAX = 114
 
         ##
         # \brief HBA_N2_HBD_N_SCORE_SUM.
         #
-        HBA_N2_HBD_N_SCORE_SUM = 114
+        HBA_N2_HBD_N_SCORE_SUM = 115
 
         ##
         # \brief HBA_N2_HBD_N_SCORE_MAX.
         #
-        HBA_N2_HBD_N_SCORE_MAX = 115
+        HBA_N2_HBD_N_SCORE_MAX = 116
 
         ##
         # \brief HBA_N2_HBD_O_SCORE_SUM.
         #
-        HBA_N2_HBD_O_SCORE_SUM = 116
+        HBA_N2_HBD_O_SCORE_SUM = 117
 
         ##
         # \brief HBA_N2_HBD_O_SCORE_MAX.
         #
-        HBA_N2_HBD_O_SCORE_MAX = 117
+        HBA_N2_HBD_O_SCORE_MAX = 118
 
         ##
         # \brief HBA_N2_HBD_S_SCORE_SUM.
         #
-        HBA_N2_HBD_S_SCORE_SUM = 118
+        HBA_N2_HBD_S_SCORE_SUM = 119
 
         ##
         # \brief HBA_N2_HBD_S_SCORE_MAX.
         #
-        HBA_N2_HBD_S_SCORE_MAX = 119
+        HBA_N2_HBD_S_SCORE_MAX = 120
 
         ##
         # \brief HBA_N1_HBD_N_SCORE_SUM.
         #
-        HBA_N1_HBD_N_SCORE_SUM = 120
+        HBA_N1_HBD_N_SCORE_SUM = 121
 
         ##
         # \brief HBA_N1_HBD_N_SCORE_MAX.
         #
-        HBA_N1_HBD_N_SCORE_MAX = 121
+        HBA_N1_HBD_N_SCORE_MAX = 122
 
         ##
         # \brief HBA_N1_HBD_O_SCORE_SUM.
         #
-        HBA_N1_HBD_O_SCORE_SUM = 122
+        HBA_N1_HBD_O_SCORE_SUM = 123
 
         ##
         # \brief HBA_N1_HBD_O_SCORE_MAX.
         #
-        HBA_N1_HBD_O_SCORE_MAX = 123
+        HBA_N1_HBD_O_SCORE_MAX = 124
 
         ##
         # \brief HBA_N1_HBD_S_SCORE_SUM.
         #
-        HBA_N1_HBD_S_SCORE_SUM = 124
+        HBA_N1_HBD_S_SCORE_SUM = 125
 
         ##
         # \brief HBA_N1_HBD_S_SCORE_MAX.
         #
-        HBA_N1_HBD_S_SCORE_MAX = 125
+        HBA_N1_HBD_S_SCORE_MAX = 126
 
         ##
         # \brief HBA_Nar_HBD_N_SCORE_SUM.
         #
-        HBA_Nar_HBD_N_SCORE_SUM = 126
+        HBA_Nar_HBD_N_SCORE_SUM = 127
 
         ##
         # \brief HBA_Nar_HBD_N_SCORE_MAX.
         #
-        HBA_Nar_HBD_N_SCORE_MAX = 127
+        HBA_Nar_HBD_N_SCORE_MAX = 128
 
         ##
         # \brief HBA_Nar_HBD_O_SCORE_SUM.
         #
-        HBA_Nar_HBD_O_SCORE_SUM = 128
+        HBA_Nar_HBD_O_SCORE_SUM = 129
 
         ##
         # \brief HBA_Nar_HBD_O_SCORE_MAX.
         #
-        HBA_Nar_HBD_O_SCORE_MAX = 129
+        HBA_Nar_HBD_O_SCORE_MAX = 130
 
         ##
         # \brief HBA_Nar_HBD_S_SCORE_SUM.
         #
-        HBA_Nar_HBD_S_SCORE_SUM = 130
+        HBA_Nar_HBD_S_SCORE_SUM = 131
 
         ##
         # \brief HBA_Nar_HBD_S_SCORE_MAX.
         #
-        HBA_Nar_HBD_S_SCORE_MAX = 131
+        HBA_Nar_HBD_S_SCORE_MAX = 132
 
         ##
         # \brief HBA_Npl3_HBD_N_SCORE_SUM.
         #
-        HBA_Npl3_HBD_N_SCORE_SUM = 132
+        HBA_Npl3_HBD_N_SCORE_SUM = 133
 
         ##
         # \brief HBA_Npl3_HBD_N_SCORE_MAX.
         #
-        HBA_Npl3_HBD_N_SCORE_MAX = 133
+        HBA_Npl3_HBD_N_SCORE_MAX = 134
 
         ##
         # \brief HBA_Npl3_HBD_O_SCORE_SUM.
         #
-        HBA_Npl3_HBD_O_SCORE_SUM = 134
+        HBA_Npl3_HBD_O_SCORE_SUM = 135
 
         ##
         # \brief HBA_Npl3_HBD_O_SCORE_MAX.
         #
-        HBA_Npl3_HBD_O_SCORE_MAX = 135
+        HBA_Npl3_HBD_O_SCORE_MAX = 136
 
         ##
         # \brief HBA_Npl3_HBD_S_SCORE_SUM.
         #
-        HBA_Npl3_HBD_S_SCORE_SUM = 136
+        HBA_Npl3_HBD_S_SCORE_SUM = 137
 
         ##
         # \brief HBA_Npl3_HBD_S_SCORE_MAX.
         #
-        HBA_Npl3_HBD_S_SCORE_MAX = 137
+        HBA_Npl3_HBD_S_SCORE_MAX = 138
 
         ##
         # \brief HBA_O3_HBD_N_SCORE_SUM.
         #
-        HBA_O3_HBD_N_SCORE_SUM = 138
+        HBA_O3_HBD_N_SCORE_SUM = 139
 
         ##
         # \brief HBA_O3_HBD_N_SCORE_MAX.
         #
-        HBA_O3_HBD_N_SCORE_MAX = 139
+        HBA_O3_HBD_N_SCORE_MAX = 140
 
         ##
         # \brief HBA_O3_HBD_O_SCORE_SUM.
         #
-        HBA_O3_HBD_O_SCORE_SUM = 140
+        HBA_O3_HBD_O_SCORE_SUM = 141
 
         ##
         # \brief HBA_O3_HBD_O_SCORE_MAX.
         #
-        HBA_O3_HBD_O_SCORE_MAX = 141
+        HBA_O3_HBD_O_SCORE_MAX = 142
 
         ##
         # \brief HBA_O3_HBD_S_SCORE_SUM.
         #
-        HBA_O3_HBD_S_SCORE_SUM = 142
+        HBA_O3_HBD_S_SCORE_SUM = 143
 
         ##
         # \brief HBA_O3_HBD_S_SCORE_MAX.
         #
-        HBA_O3_HBD_S_SCORE_MAX = 143
+        HBA_O3_HBD_S_SCORE_MAX = 144
 
         ##
         # \brief HBA_O2_HBD_N_SCORE_SUM.
         #
-        HBA_O2_HBD_N_SCORE_SUM = 144
+        HBA_O2_HBD_N_SCORE_SUM = 145
 
         ##
         # \brief HBA_O2_HBD_N_SCORE_MAX.
         #
-        HBA_O2_HBD_N_SCORE_MAX = 145
+        HBA_O2_HBD_N_SCORE_MAX = 146
 
         ##
         # \brief HBA_O2_HBD_O_SCORE_SUM.
         #
-        HBA_O2_HBD_O_SCORE_SUM = 146
+        HBA_O2_HBD_O_SCORE_SUM = 147
 
         ##
         # \brief HBA_O2_HBD_O_SCORE_MAX.
         #
-        HBA_O2_HBD_O_SCORE_MAX = 147
+        HBA_O2_HBD_O_SCORE_MAX = 148
 
         ##
         # \brief HBA_O2_HBD_S_SCORE_SUM.
         #
-        HBA_O2_HBD_S_SCORE_SUM = 148
+        HBA_O2_HBD_S_SCORE_SUM = 149
 
         ##
         # \brief HBA_O2_HBD_S_SCORE_MAX.
         #
-        HBA_O2_HBD_S_SCORE_MAX = 149
+        HBA_O2_HBD_S_SCORE_MAX = 150
 
         ##
         # \brief HBA_Oco2_HBD_N_SCORE_SUM.
         #
-        HBA_Oco2_HBD_N_SCORE_SUM = 150
+        HBA_Oco2_HBD_N_SCORE_SUM = 151
 
         ##
         # \brief HBA_Oco2_HBD_N_SCORE_MAX.
         #
-        HBA_Oco2_HBD_N_SCORE_MAX = 151
+        HBA_Oco2_HBD_N_SCORE_MAX = 152
 
         ##
         # \brief HBA_Oco2_HBD_O_SCORE_SUM.
         #
-        HBA_Oco2_HBD_O_SCORE_SUM = 152
+        HBA_Oco2_HBD_O_SCORE_SUM = 153
 
         ##
         # \brief HBA_Oco2_HBD_O_SCORE_MAX.
         #
-        HBA_Oco2_HBD_O_SCORE_MAX = 153
+        HBA_Oco2_HBD_O_SCORE_MAX = 154
 
         ##
         # \brief HBA_Oco2_HBD_S_SCORE_SUM.
         #
-        HBA_Oco2_HBD_S_SCORE_SUM = 154
+        HBA_Oco2_HBD_S_SCORE_SUM = 155
 
         ##
         # \brief HBA_Oco2_HBD_S_SCORE_MAX.
         #
-        HBA_Oco2_HBD_S_SCORE_MAX = 155
+        HBA_Oco2_HBD_S_SCORE_MAX = 156
 
         ##
         # \brief HBA_S3_HBD_N_SCORE_SUM.
         #
-        HBA_S3_HBD_N_SCORE_SUM = 156
+        HBA_S3_HBD_N_SCORE_SUM = 157
 
         ##
         # \brief HBA_S3_HBD_N_SCORE_MAX.
         #
-        HBA_S3_HBD_N_SCORE_MAX = 157
+        HBA_S3_HBD_N_SCORE_MAX = 158
 
         ##
         # \brief HBA_S3_HBD_O_SCORE_SUM.
         #
-        HBA_S3_HBD_O_SCORE_SUM = 158
+        HBA_S3_HBD_O_SCORE_SUM = 159
 
         ##
         # \brief HBA_S3_HBD_O_SCORE_MAX.
         #
-        HBA_S3_HBD_O_SCORE_MAX = 159
+        HBA_S3_HBD_O_SCORE_MAX = 160
 
         ##
         # \brief HBA_S3_HBD_S_SCORE_SUM.
         #
-        HBA_S3_HBD_S_SCORE_SUM = 160
+        HBA_S3_HBD_S_SCORE_SUM = 161
 
         ##
         # \brief HBA_S3_HBD_S_SCORE_MAX.
         #
-        HBA_S3_HBD_S_SCORE_MAX = 161
+        HBA_S3_HBD_S_SCORE_MAX = 162
 
         ##
         # \brief HBA_S2_HBD_N_SCORE_SUM.
         #
-        HBA_S2_HBD_N_SCORE_SUM = 162
+        HBA_S2_HBD_N_SCORE_SUM = 163
 
         ##
         # \brief HBA_S2_HBD_N_SCORE_MAX.
         #
-        HBA_S2_HBD_N_SCORE_MAX = 163
+        HBA_S2_HBD_N_SCORE_MAX = 164
 
         ##
         # \brief HBA_S2_HBD_O_SCORE_SUM.
         #
-        HBA_S2_HBD_O_SCORE_SUM = 164
+        HBA_S2_HBD_O_SCORE_SUM = 165
 
         ##
         # \brief HBA_S2_HBD_O_SCORE_MAX.
         #
-        HBA_S2_HBD_O_SCORE_MAX = 165
+        HBA_S2_HBD_O_SCORE_MAX = 166
 
         ##
         # \brief HBA_S2_HBD_S_SCORE_SUM.
         #
-        HBA_S2_HBD_S_SCORE_SUM = 166
+        HBA_S2_HBD_S_SCORE_SUM = 167
 
         ##
         # \brief HBA_S2_HBD_S_SCORE_MAX.
         #
-        HBA_S2_HBD_S_SCORE_MAX = 167
+        HBA_S2_HBD_S_SCORE_MAX = 168
 
         ##
         # \brief XBD_XBA_SCORE_SUM.
         #
-        XBD_XBA_SCORE_SUM = 168
+        XBD_XBA_SCORE_SUM = 169
 
         ##
         # \brief XBD_XBA_SCORE_MAX.
         #
-        XBD_XBA_SCORE_MAX = 169
+        XBD_XBA_SCORE_MAX = 170
 
         ##
         # \brief ES_ENERGY.
         #
-        ES_ENERGY = 170
+        ES_ENERGY = 171
 
         ##
         # \brief ES_ENERGY_SQRD_DIST.
         #
-        ES_ENERGY_SQRD_DIST = 171
+        ES_ENERGY_SQRD_DIST = 172
 
         ##
         # \brief VDW_ENERGY.
         #
-        VDW_ENERGY = 172
+        VDW_ENERGY = 173
 
     ##
     # \brief 
     #
-    TOTAL_DESCRIPTOR_SIZE = 173
+    TOTAL_DESCRIPTOR_SIZE = 174
 
     ##
     # \brief 
     #
-    LIGAND_DESCRIPTOR_SIZE = 28
+    LIGAND_DESCRIPTOR_SIZE = 29
 
     ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
