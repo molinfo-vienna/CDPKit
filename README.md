@@ -15,7 +15,9 @@ and other properties of potential drug candidates. An example of the integration
 This short guide will help you get started with CDPKit and introduce you to some of its key features.
 
 ### Installation
+CDPKit can currently be install in two ways. The first one is to build it from source and the second one is to use the pip package manager (Python only).
 
+#### Installation via source
 For an installation of CDPKit from source please follow the steps below:
 
 1. **Build Requirements and Dependencies**
@@ -60,6 +62,25 @@ If the build finished without errors
 will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
+#### Installation via pip
+For an installation of CDPKit via pip please follow the steps below:
+
+1. **Build Requirements and Dependencies**
+- C++11 compliant compiler (mandatory)
+- cmake (V >= 3.17, mandatory)
+- boost-devel C++ libraries (V >= 1.63, mandatory)
+- python-devel 3.x (optional) and Python interpreter (mandatory)
+
+2. **Install CDPKit via pip from Github URL**
+```
+> pip install git+https://github.com/molinfo-vienna/CDPKit.git
+```
+
+2. **Install CDPKit via pip from source folder**
+Change you path to the CDPKit source folder and run:
+```
+> pip install .
+```
 
 ### Generating CDPKit Documentation
 
