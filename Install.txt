@@ -4,9 +4,9 @@ Installation Instructions
 For a successful build of CDPKit the following packages
 have to be installed on the build host:
 
-- a c++11 compliant compiler (mandatory)
+- C++11 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
-- boost-devel C++ libraries (V >= 1.63, mandatory)
+- boost-devel (V >= 1.63, mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
 - python-devel 3.x (optional) and Python-interpreter (mandatory)
