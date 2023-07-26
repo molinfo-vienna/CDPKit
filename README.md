@@ -1,4 +1,4 @@
-# ![CDPKit logo](https://github.com/molinfo-vienna/CDPKit/blob/master/Misc/InstallerIcon.png) CDPKit
+# ![CDPKit logo](https://github.com/molinfo-vienna/CDPKit/blob/master/Misc/InstallerIcon.png)
 **[About](#about)**<br>
 **[Getting Started with CDPKit](#getting-started-with-cdpkit)**<br>
 **[Insallation from source](#installation)**<br>
