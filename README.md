@@ -2,7 +2,7 @@
 **[About](#about)**<br>
 **[Getting Started with CDPKit](#getting-started-with-cdpkit)**<br>
 **[Insallation from source](#installation)**<br>
-**[Insallation via pip](#installation-via-pip)**<br>
+**[Insallation via pip](#installation-via-pip-python-bindings-only)**<br>
 **[Generating CDPKit Documentation](#generating-cdpkit-documentation)**<br>
 **[CDPKit Website](#cdpkit-website)**<br>
 **[Basic Usage](#basic-usage)**<br>
