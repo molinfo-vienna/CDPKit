@@ -88,7 +88,8 @@ For an installation of CDPKit via pip please follow the steps below:
 ```
 
 2. **Install CDPKit via pip from source folder**
-Change you path to the CDPKit source folder and run from woithin the folder:
+
+Change you path to the CDPKit source folder and run from within the folder:
 ```
 > pip install .
 ```
