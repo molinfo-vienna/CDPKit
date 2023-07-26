@@ -1,3 +1,15 @@
+# ![CDPKit logo](https://github.com/molinfo-vienna/CDPKit/blob/master/Misc/InstallerIcon.png) CDPKit
+**[About](#about)**<br>
+**[Getting Started with CDPKit](#getting-started-with-cdpkit)**<br>
+**[Insallation from source](#installation)**<br>
+**[Insallation via pip](#installation-via-pip)**<br>
+**[Generating CDPKit Documentation](#generating-cdpkit-documentation)**<br>
+**[CDPKit Website](#cdpkit-website)**<br>
+**[Basic Usage](#basic-usage)**<br>
+**[Further Exploration](#further-exploration)**<br>
+**[Documentation and Resources](#documentation-and-resources)**<br>
+
+
 # About
 
 CDPKit is an open-source cheminformatics software toolkit implemented in C++. In addition to the C++ API a Python-interfacing layer is provided that allows to use all of CDPKit's functionality
@@ -15,7 +27,7 @@ and other properties of potential drug candidates. An example of the integration
 This short guide will help you get started with CDPKit and introduce you to some of its key features.
 
 ### Installation
-CDPKit can currently be install in two ways. The first one is to build it from source and the second one is to use the pip package manager (Python only).
+CDPKit can currently be install in two ways. The first one is to build it from source and the second one is to use the pip package manager (Python bindings only).
 
 #### Installation via source
 For an installation of CDPKit from source please follow the steps below:
@@ -62,14 +74,13 @@ If the build finished without errors
 will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
-#### Installation via pip
+#### Installation via pip (python bindings only)
 For an installation of CDPKit via pip please follow the steps below:
 
 1. **Build Requirements and Dependencies**
 - C++11 compliant compiler (mandatory)
-- cmake (V >= 3.17, mandatory)
 - boost-devel C++ libraries (V >= 1.63, mandatory)
-- python-devel 3.x (optional) and Python interpreter (mandatory)
+- python-devel 3.x (optional)
 
 2. **Install CDPKit via pip from Github URL**
 ```
@@ -77,7 +88,7 @@ For an installation of CDPKit via pip please follow the steps below:
 ```
 
 2. **Install CDPKit via pip from source folder**
-Change you path to the CDPKit source folder and run:
+Change you path to the CDPKit source folder and run from woithin the folder:
 ```
 > pip install .
 ```
