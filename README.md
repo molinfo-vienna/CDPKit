@@ -1,8 +1,8 @@
 # ![CDPKit logo](https://github.com/molinfo-vienna/CDPKit/blob/master/Doc/Graphics/Logo.svg)
 **[About](#about)**<br>
 **[Getting Started with CDPKit](#getting-started-with-cdpkit)**<br>
-**[Insallation from source](#installation)**<br>
-**[Insallation via pip](#installation-via-pip-python-bindings-only)**<br>
+**[Installation from source](#installation)**<br>
+**[Installation via pip](#installation-via-pip-python-bindings-only)**<br>
 **[Generating CDPKit Documentation](#generating-cdpkit-documentation)**<br>
 **[CDPKit Website](#cdpkit-website)**<br>
 **[Basic Usage](#basic-usage)**<br>
@@ -29,7 +29,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 ### Installation
 Currently, CDPKit can be install in two ways. The first one is to build it from source and the second one is to use the pip package manager (CDPL Python bindings only).
 
-#### Installation via source
+#### Installation from source
 For an installation of CDPKit from source please follow the steps below:
 
 1. **Build Requirements and Dependencies**
