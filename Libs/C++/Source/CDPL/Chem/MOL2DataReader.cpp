@@ -676,6 +676,9 @@ bool Chem::MOL2DataReader::readNextConformer(std::istream& is, const MolecularGr
     if (!readDataLine(is))
         throw Base::IOError("MOL2DataReader: error while reading molecule name: unexpected end of molecule record");
 
+    if (getName(molgraph) != dataLine)
+        return false;
+ 
     if (!readDataLine(is))
         throw Base::IOError("MOL2DataReader: error while reading counts line: unexpected end of molecule record");
 
