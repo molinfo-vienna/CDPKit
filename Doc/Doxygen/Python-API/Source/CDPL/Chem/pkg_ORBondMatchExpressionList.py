@@ -20,24 +20,26 @@
 #
 
 ##
-# \brief 
-#
+# \brief ORBondMatchExpressionList.
+# 
 class ORBondMatchExpressionList(BondMatchExpressionList):
 
     ##
     # \brief Initializes the \e %ORBondMatchExpressionList instance.
-    #
+    # \param self The \e %ORBondMatchExpressionList instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ORBondMatchExpressionList instance.
+    # \param self The \e %ORBondMatchExpressionList instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: ORBondMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ORBondMatchExpressionList instance \a expr.
-    # \param expr The \e %ORBondMatchExpressionList instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: ORBondMatchExpressionList) -> ORBondMatchExpressionList: pass

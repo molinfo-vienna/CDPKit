@@ -20,27 +20,26 @@
 #
 
 ##
-# \brief 
-#
+# \brief AutomorphismGroupSearch.
+# 
 class AutomorphismGroupSearch(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AutomorphismGroupSearch instance.
-    # \param atom_flags 
-    # \param bond_flags 
-    #
+    # \brief Constructs and initializes a <tt>AutomorphismGroupSearch</tt> instance.
+    # 
     def __init__(atom_flags: int = 12702, bond_flags: int = 30) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AutomorphismGroupSearch instance this method is called upon.
+    # 
     # Different Python \e %AutomorphismGroupSearch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AutomorphismGroupSearch instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -80,10 +79,16 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def identityMappingIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Searches for the possible atom/bond mappings in the automorphism group of the given molecular graph.
+    # 
+    # The method will store all found mappings up to the maximum number of recorded mappings specified by setMaxNumMappings().
+    # 
+    # \param molgraph The molecular graph that has to be searched for automorphisms.
+    # 
+    # \return <tt>True</tt> if any mappings of the specified molecular graph have been found, and <tt>False</tt> otherwise. 
+    # 
+    # \note Any atom/bond mappings that were recorded in a previous call to findMappings() will be discarded.
+    # 
     def findMappings(molgraph: MolecularGraph) -> bool: pass
 
     ##
@@ -92,28 +97,41 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     def stopSearch() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
+    # 
+    # \return The number of atom/bond mappings that were recorded in the last call to findMappings().
+    # 
     def getNumMappings() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the stored atom/bond mapping object at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the atom/bond mapping object to return.
+    # 
+    # \return A reference to the atom/bond mapping object at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if no mappings are available or <em>idx</em> is not in the range [0, getNumMappings() - 1].
+    # 
     def getMapping(idx: int) -> AtomBondMapping: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the specified limit on the number of stored atom/bond mappings.
+    # 
+    # \return The specified maximum number of stored atom/bond mappings. 
+    # 
+    # \see setMaxNumMappings(), findMappings()
+    # 
     def getMaxNumMappings() -> int: pass
 
     ##
-    # \brief 
-    # \param max_num_mappings 
-    #
+    # \brief Allows to specify a limit on the number of stored atom/bond mappings.
+    # 
+    # In a call to findMappings() the automorphism search will terminate as soon as the specified maximum number of stored atom/bond mappings has been reached. A previously set limit on the number of mappings can be disabled by providing zero for the value of <em>max_num_mappings</em>.
+    # 
+    # \param max_num_mappings The maximum number of atom/bond mappings to store.
+    # 
+    # \note By default, no limit is imposed on the number of stored mappings.
+    # 
     def setMaxNumMappings(max_num_mappings: int) -> None: pass
 
     ##
@@ -141,37 +159,20 @@ class AutomorphismGroupSearch(Boost.Python.instance):
     #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     atomPropertyFlags = property(getAtomPropertyFlags, setAtomPropertyFlags)
 
-    ##
-    # \brief 
-    #
     bondPropertyFlags = property(getBondPropertyFlags, setBondPropertyFlags)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     incIdentityMapping = property(getIncIdentityMapping, setIncIdentityMapping)
 
-    ##
-    # \brief 
-    #
     numMappings = property(getNumMappings)
 
-    ##
-    # \brief 
-    #
     maxNumMappings = property(getMaxNumMappings, setMaxNumMappings)
 
-    ##
-    # \brief 
-    #
     foundMappingCallback = property(getFoundMappingCallback, setFoundMappingCallback)

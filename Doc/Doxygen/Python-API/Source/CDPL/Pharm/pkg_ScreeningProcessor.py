@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief ScreeningProcessor.
+# 
 class ScreeningProcessor(Boost.Python.instance):
 
     ##
@@ -51,6 +51,7 @@ class ScreeningProcessor(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %SearchHit instance.
+        # \param self The \e %SearchHit instance to initialize.
         # \param hit_prov 
         # \param qry_pharm 
         # \param hit_pharm 
@@ -59,31 +60,33 @@ class ScreeningProcessor(Boost.Python.instance):
         # \param pharm_idx 
         # \param mol_idx 
         # \param conf_idx 
-        #
+        # 
         def __init__(hit_prov: ScreeningProcessor, qry_pharm: FeatureContainer, hit_pharm: FeatureContainer, mol: CDPL.Chem.Molecule, xform: CDPL.Math.Matrix4D, pharm_idx: int, mol_idx: int, conf_idx: int) -> None: pass
 
         ##
         # \brief Initializes the \e %SearchHit instance.
+        # \param self The \e %SearchHit instance to initialize.
         # \param hit 
-        #
+        # 
         def __init__(hit: SearchHit) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %SearchHit instance this method is called upon.
+        # 
         # Different Python \e %SearchHit instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SearchHit instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %SearchHit instance \a hit.
-        # \param hit The \e %SearchHit instance to copy.
-        # \return \a self
+        # \brief 
+        # \param hit 
+        # \return 
         #
         def assign(hit: SearchHit) -> SearchHit: pass
 
@@ -135,67 +138,42 @@ class ScreeningProcessor(Boost.Python.instance):
         #
         def getHitConformationIndex() -> int: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         hitProvider = property(getHitProvider)
 
-        ##
-        # \brief 
-        #
         queryPharmacophore = property(getQueryPharmacophore)
 
-        ##
-        # \brief 
-        #
         hitPharmacophore = property(getHitPharmacophore)
 
-        ##
-        # \brief 
-        #
         hitMolecule = property(getHitMolecule)
 
-        ##
-        # \brief 
-        #
         hitAlignmentTransform = property(getHitAlignmentTransform)
 
-        ##
-        # \brief 
-        #
         hitPharmacophoreIndex = property(getHitPharmacophoreIndex)
 
-        ##
-        # \brief 
-        #
         hitMoleculeIndex = property(getHitMoleculeIndex)
 
-        ##
-        # \brief 
-        #
         hitConformationIndex = property(getHitConformationIndex)
 
     ##
-    # \brief Initializes the \e %ScreeningProcessor instance.
-    # \param db_acc 
-    #
+    # \brief Constructs the <tt>ScreeningProcessor</tt> instance for the given screening database accessor <em>db_acc</em>.
+    # 
+    # \param db_acc An accessor for the database to screen.
+    # 
     def __init__(db_acc: ScreeningDBAccessor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ScreeningProcessor instance this method is called upon.
+    # 
     # Different Python \e %ScreeningProcessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningProcessor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -303,47 +281,32 @@ class ScreeningProcessor(Boost.Python.instance):
     #
     def searchDB(query: FeatureContainer, mol_start_idx: int = 0, mol_end_idx: int = 0) -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     dbAcccessor = property(getDbAcccessor, setDbAcccessor)
 
-    ##
-    # \brief 
-    #
     hitCallback = property(getHitCallback, setHitCallback)
 
-    ##
-    # \brief 
-    #
     progressCallback = property(getProgressCallback, setProgressCallback)
 
-    ##
-    # \brief 
-    #
     scoringFunction = property(getScoringFunction, setScoringFunction)
 
-    ##
-    # \brief 
-    #
     hitReportMode = property(getHitReportMode, setHitReportMode)
 
-    ##
-    # \brief 
-    #
     maxNumOmittedFeatures = property(getMaxNumOmittedFeatures, setMaxNumOmittedFeatures)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     checkXVolumes = property(getCheckXVolumes, setCheckXVolumes)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     bestAlignments = property(getBestAlignments, setBestAlignments)

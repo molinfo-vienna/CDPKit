@@ -26,19 +26,22 @@ class MolecularGraphPointerStringFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MolecularGraphPointerStringFunctor instance.
-    #
+    # \param self The \e %MolecularGraphPointerStringFunctor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MolecularGraphPointerStringFunctor instance.
+    # \param self The \e %MolecularGraphPointerStringFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: MolecularGraphPointerStringFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %MolecularGraphPointerStringFunctor instance.
+    # \param arg1 The \e %MolecularGraphPointerStringFunctor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

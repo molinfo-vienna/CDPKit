@@ -41,13 +41,15 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
 
     ##
     # \brief Initializes the \e %PrincipalAxesAlignmentStartGenerator instance.
-    #
+    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PrincipalAxesAlignmentStartGenerator instance.
+    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: PrincipalAxesAlignmentStartGenerator) -> None: pass
 
     ##
@@ -177,58 +179,56 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     def setRandomSeed(seed: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PrincipalAxesAlignmentStartGenerator instance \a gen.
-    # \param gen The \e %PrincipalAxesAlignmentStartGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: PrincipalAxesAlignmentStartGenerator) -> PrincipalAxesAlignmentStartGenerator: pass
 
-    ##
-    # \brief 
-    #
     symmetryThreshold = property(getSymmetryThreshold, setSymmetryThreshold)
 
-    ##
-    # \brief 
-    #
     maxRandomTranslation = property(getMaxRandomTranslation, setMaxRandomTranslation)
 
-    ##
-    # \brief 
-    #
     numRandomStarts = property(getNumRandomStarts, setNumRandomStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     shapeCenterStarts = property(getShapeCenterStarts, setShapeCenterStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     colorCenterStarts = property(getColorCenterStarts, setColorCenterStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     nonColorCenterStarts = property(getNonColorCenterStarts, setNonColorCenterStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     randomStarts = property(getRandomStarts, setRandomStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genForAlignedShapeCtrs = property(getGenForAlignedShapeCtrs, setGenForAlignedShapeCtrs)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genForReferenceShapeCrs = property(getGenForReferenceShapeCrs, setGenForReferenceShapeCrs)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genForLargerShapeCtrs = property(getGenForLargerShapeCtrs, setGenForLargerShapeCtrs)

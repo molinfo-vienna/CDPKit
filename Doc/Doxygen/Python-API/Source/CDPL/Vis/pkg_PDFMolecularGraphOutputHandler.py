@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable Document Format (PDF)</em> [\ref WPDF].
+# 
 class PDFMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PDFMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %PDFMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

@@ -20,30 +20,33 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the extraction of all rings in the SSSR of a molecular graph that are aromatic according to MMFF94 conventions.
+# 
 class MMFF94AromaticSSSRSubset(CDPL.Chem.FragmentList):
 
     ##
-    # \brief Initializes the \e %MMFF94AromaticSSSRSubset instance.
-    #
+    # \brief Constructs an empty <tt>MMFF94AromaticSSSRSubset</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94AromaticSSSRSubset instance.
-    # \param molgraph 
-    #
+    # \brief Construct a <tt>MMFF94AromaticSSSRSubset</tt> instance that contains all aromatic rings of the SSSR of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to extract the aromatic rings.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to extract the aromatic rings.
+    # 
     def extract(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param sssr 
-    #
+    # \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to extract the aromatic rings.
+    # \param sssr The SSSR of the molecular graph <em>molgraph</em>.
+    # 
     def extract(molgraph: CDPL.Chem.MolecularGraph, sssr: CDPL.Chem.FragmentList) -> None: pass

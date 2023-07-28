@@ -31,42 +31,46 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param angle_type_idx 
         # \param term_atom1_type 
         # \param ctr_atom_type 
         # \param term_atom2_type 
         # \param force_const 
         # \param ref_angle 
-        #
+        # 
         def __init__(angle_type_idx: int, term_atom1_type: int, ctr_atom_type: int, term_atom2_type: int, force_const: float, ref_angle: float) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -118,62 +122,56 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
         #
         def __bool__() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         angleTypeIndex = property(getAngleTypeIndex)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         termAtom1Type = property(getTermAtom1Type)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         ctrAtomType = property(getCtrAtomType)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         termAtom2Type = property(getTermAtom2Type)
 
-        ##
-        # \brief 
-        #
         forceConstant = property(getForceConstant)
 
-        ##
-        # \brief 
-        #
         referenceAngle = property(getReferenceAngle)
 
     ##
     # \brief Initializes the \e %MMFF94AngleBendingParameterTable instance.
-    #
+    # \param self The \e %MMFF94AngleBendingParameterTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94AngleBendingParameterTable instance.
+    # \param self The \e %MMFF94AngleBendingParameterTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: MMFF94AngleBendingParameterTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94AngleBendingParameterTable instance this method is called upon.
+    # 
     # Different Python \e %MMFF94AngleBendingParameterTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94AngleBendingParameterTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -236,9 +234,9 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AngleBendingParameterTable instance \a table.
-    # \param table The \e %MMFF94AngleBendingParameterTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param table 
+    # \return 
     #
     def assign(table: MMFF94AngleBendingParameterTable) -> MMFF94AngleBendingParameterTable: pass
 
@@ -257,17 +255,8 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
     @staticmethod
     def get(: ) -> MMFF94AngleBendingParameterTable: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

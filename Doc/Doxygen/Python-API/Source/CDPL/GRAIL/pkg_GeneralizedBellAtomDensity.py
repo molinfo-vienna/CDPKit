@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief GeneralizedBellAtomDensity.
+# 
 class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
@@ -36,27 +36,30 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
+    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: GeneralizedBellAtomDensity) -> None: pass
 
     ##
     # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
+    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
     # \param probe_radius 
     # \param rad_scaling_factor 
-    #
+    # 
     def __init__(probe_radius: float = 0.0, rad_scaling_factor: float = 1.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    # 
     # Different Python \e %GeneralizedBellAtomDensity instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GeneralizedBellAtomDensity instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -72,9 +75,9 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def getRadiusScalingFactor() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GeneralizedBellAtomDensity instance \a func.
-    # \param func The \e %GeneralizedBellAtomDensity instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
 
@@ -87,17 +90,8 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     #
     def __call__(pos: CDPL.Math.Vector3D, atom_pos: CDPL.Math.Vector3D, atom: CDPL.Chem.Atom) -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     probeRadius = property(getProbeRadius)
 
-    ##
-    # \brief 
-    #
     radiusScalingFactor = property(getRadiusScalingFactor)

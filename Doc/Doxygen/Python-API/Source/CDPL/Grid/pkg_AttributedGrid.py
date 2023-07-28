@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief AttributedGrid.
+# 
 class AttributedGrid(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Initializes the \e %AttributedGrid instance.
-    #
+    # \param self The \e %AttributedGrid instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
@@ -56,9 +57,10 @@ class AttributedGrid(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
@@ -75,7 +77,4 @@ class AttributedGrid(CDPL.Base.PropertyContainer):
     #
     def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    #
     numElements = property(getNumElements)

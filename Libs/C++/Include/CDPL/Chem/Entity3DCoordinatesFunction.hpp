@@ -43,7 +43,7 @@ namespace CDPL
         class Entity;
 
         /**
-         * \brief A generic wrapper class used to store a user-defined entity3D coordinates function.
+         * \brief A generic wrapper class used to store a user-defined Chem::Entity3D coordinates function.
          */
         typedef std::function<const Math::Vector3D&(const Chem::Entity&)> Entity3DCoordinatesFunction;
     } // namespace Chem

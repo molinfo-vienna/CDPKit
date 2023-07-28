@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESReactionInputHandler instance.
-    #
+    # \param self The \e %SMILESReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

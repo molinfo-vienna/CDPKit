@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags for the specification of a set of force field interaction types.
+# 
 class InteractionType(Boost.Python.instance):
 
     ##

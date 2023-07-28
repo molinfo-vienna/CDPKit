@@ -20,24 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief BondSubstituentDirectionMatchExpression.
+# 
+# <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by indicating the relative direction of the bonds to its substituent atoms. <br>
+# 
 class BondSubstituentDirectionMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondSubstituentDirectionMatchExpression instance.
-    #
+    # \param self The \e %BondSubstituentDirectionMatchExpression instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BondSubstituentDirectionMatchExpression instance.
+    # \param self The \e %BondSubstituentDirectionMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: BondSubstituentDirectionMatchExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondSubstituentDirectionMatchExpression instance \a expr.
-    # \param expr The \e %BondSubstituentDirectionMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: BondSubstituentDirectionMatchExpression) -> BondSubstituentDirectionMatchExpression: pass

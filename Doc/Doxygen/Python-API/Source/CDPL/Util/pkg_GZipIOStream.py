@@ -26,13 +26,15 @@ class GZipIOStream(CDPL.Base.IOStream):
 
     ##
     # \brief Initializes the \e %GZipIOStream instance.
-    #
+    # \param self The \e %GZipIOStream instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GZipIOStream instance.
+    # \param self The \e %GZipIOStream instance to initialize.
     # \param ios 
-    #
+    # 
     def __init__(ios: CDPL.Base.IOStream) -> None: pass
 
     ##
@@ -143,20 +145,24 @@ class GZipIOStream(CDPL.Base.IOStream):
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     closed = property(getClosed)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     mode = property(getMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     modeFlags = property(getModeFlags)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     softspace = property(getSoftspace, setSoftspace)

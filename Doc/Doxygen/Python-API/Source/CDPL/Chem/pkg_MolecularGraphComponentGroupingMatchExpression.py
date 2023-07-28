@@ -20,25 +20,29 @@
 #
 
 ##
-# \brief 
-#
+# \brief MolecularGraphComponentGroupingMatchExpression.
+# 
+# \see [\ref SMARTS]
+# 
 class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpression):
 
     ##
     # \brief Initializes the \e %MolecularGraphComponentGroupingMatchExpression instance.
+    # \param self The \e %MolecularGraphComponentGroupingMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: MolecularGraphComponentGroupingMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %MolecularGraphComponentGroupingMatchExpression instance.
-    # \param comp_grouping 
-    #
+    # \brief Constructs a <tt>MolecularGraphComponentGroupingMatchExpression</tt> instance for the specified component-level grouping.
+    # 
+    # \param comp_grouping Specifies the component-level grouping constraints that have to be fulfilled by matching target molecuar graphs.
+    # 
     def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraphComponentGroupingMatchExpression instance \a expr.
-    # \param expr The \e %MolecularGraphComponentGroupingMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: MolecularGraphComponentGroupingMatchExpression) -> MolecularGraphComponentGroupingMatchExpression: pass

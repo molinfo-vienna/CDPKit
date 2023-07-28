@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# 
 class JMEMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %JMEMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %JMEMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

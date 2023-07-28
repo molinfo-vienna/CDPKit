@@ -20,41 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief A graphics primitive representing a list of points.
+# 
 class PointListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
-    # \brief Initializes the \e %PointListPrimitive2D instance.
-    #
+    # \brief Constructs an empty point list primitive.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PointListPrimitive2D instance.
+    # \param self The \e %PointListPrimitive2D instance to initialize.
     # \param prim 
-    #
+    # 
     def __init__(prim: PointListPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PointListPrimitive2D instance \a prim.
-    # \param prim The \e %PointListPrimitive2D instance to copy.
-    # \return \a self
+    # \brief 
+    # \param prim 
+    # \return 
     #
     def assign(prim: PointListPrimitive2D) -> PointListPrimitive2D: pass
 
     ##
-    # \brief 
-    # \param pen 
-    #
+    # \brief Sets the pen defining the color and diameter of the points.
+    # 
+    # \param pen The pen defining the color and diameter of the points.
+    # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pen defining the color and diameter of the points.
+    # 
+    # \return The pen defining the color and diameter of the points.
+    # 
     def getPen() -> Pen: pass
 
-    ##
-    # \brief 
-    #
     pen = property(getPen, setPen)

@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFDRegularGridOutputHandler(DRegularGridOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFDRegularGridOutputHandler instance.
-    #
+    # \param self The \e %CDFDRegularGridOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

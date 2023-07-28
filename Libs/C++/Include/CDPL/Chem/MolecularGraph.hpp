@@ -51,7 +51,6 @@ namespace CDPL
                                              public Base::PropertyContainer
         {
 
-
           public:
             /**    
              * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MolecularGraph instances.

@@ -20,50 +20,52 @@
 #
 
 ##
-# \brief 
-#
+# \brief AtomArray3DCoordinatesFunctor.
+# 
 class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomArray3DCoordinatesFunctor instance.
+    # \param self The \e %AtomArray3DCoordinatesFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: AtomArray3DCoordinatesFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomArray3DCoordinatesFunctor instance.
+    # \param self The \e %AtomArray3DCoordinatesFunctor instance to initialize.
     # \param coords 
     # \param molgraph 
-    #
+    # 
     def __init__(coords: CDPL.Math.Vector3DArray, molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AtomArray3DCoordinatesFunctor instance this method is called upon.
+    # 
     # Different Python \e %AtomArray3DCoordinatesFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomArray3DCoordinatesFunctor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomArray3DCoordinatesFunctor instance \a func.
-    # \param func The \e %AtomArray3DCoordinatesFunctor instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: AtomArray3DCoordinatesFunctor) -> AtomArray3DCoordinatesFunctor: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Returns the 3D-coordinates of the argument atom.
+    # 
+    # \param atom The atom.
+    # 
+    # \return The 3D-coordinates of the atom.
+    # 
     def __call__(atom: Atom) -> CDPL.Math.Vector3D: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

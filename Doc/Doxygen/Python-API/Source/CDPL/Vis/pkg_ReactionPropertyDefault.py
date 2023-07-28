@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides default values for built-in Vis.Reaction properties.
+# 
 class ReactionPropertyDefault(Boost.Python.instance):
 
     ##

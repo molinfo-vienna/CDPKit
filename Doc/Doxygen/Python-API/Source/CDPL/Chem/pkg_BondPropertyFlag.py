@@ -20,41 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags for the specification of basic Chem.Bond properties.
+# 
 class BondPropertyFlag(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Represents an empty set of bond properties.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Represents the default set of bond properties.
+    # 
     DEFAULT = 2147483648
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the membership of a bond in aromatic rings.
+    # 
     AROMATICITY = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the <em>CIP</em>-configuration of a double bond.
+    # 
     CIP_CONFIGURATION = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the steric configuration of a double bond.
+    # 
     CONFIGURATION = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the order of a bond.
+    # 
     ORDER = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the ring/chain topology of a bond.
+    # 
     TOPOLOGY = 4

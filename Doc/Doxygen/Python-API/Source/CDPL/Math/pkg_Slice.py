@@ -26,21 +26,24 @@ class Slice(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Slice instance.
-    #
+    # \param self The \e %Slice instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Slice instance.
+    # \param self The \e %Slice instance to initialize.
     # \param s 
-    #
+    # 
     def __init__(s: ast.Slice) -> None: pass
 
     ##
     # \brief Initializes the \e %Slice instance.
+    # \param self The \e %Slice instance to initialize.
     # \param start 
     # \param stride 
     # \param size 
-    #
+    # 
     def __init__(start: int, stride: int, size: int) -> None: pass
 
     ##
@@ -75,9 +78,9 @@ class Slice(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Slice instance \a s.
-    # \param s The \e %Slice instance to copy.
-    # \return \a self
+    # \brief 
+    # \param s 
+    # \return 
     #
     def assign(s: ast.Slice) -> ast.Slice: pass
 
@@ -89,28 +92,31 @@ class Slice(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %Slice instance this method is called upon.
+    # 
     # Different Python \e %Slice instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Slice instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == s</tt>.
+    # \param self The \e %Slice instance this method is called upon.
     # \param s The \e %Slice instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(s: ast.Slice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
+    # \param self The \e %Slice instance this method is called upon.
     # \param s The \e %Slice instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(s: ast.Slice) -> bool: pass
 
     ##
@@ -127,22 +133,10 @@ class Slice(Boost.Python.instance):
     #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     start = property(getStart)
 
-    ##
-    # \brief 
-    #
     stride = property(getStride)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

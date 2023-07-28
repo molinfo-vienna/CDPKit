@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFDRegularGridWriter(DRegularGridWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFDRegularGridWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>CDFDRegularGridWriter</tt> instance that will write data of spatial regular grids to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

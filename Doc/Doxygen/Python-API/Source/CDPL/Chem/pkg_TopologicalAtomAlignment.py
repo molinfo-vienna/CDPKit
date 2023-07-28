@@ -26,25 +26,28 @@ class TopologicalAtomAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TopologicalAtomAlignment instance.
-    #
+    # \param self The \e %TopologicalAtomAlignment instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TopologicalAtomAlignment instance.
+    # \param self The \e %TopologicalAtomAlignment instance to initialize.
     # \param alignment 
-    #
+    # 
     def __init__(alignment: TopologicalAtomAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TopologicalAtomAlignment instance this method is called upon.
+    # 
     # Different Python \e %TopologicalAtomAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TopologicalAtomAlignment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -119,23 +122,14 @@ class TopologicalAtomAlignment(Boost.Python.instance):
     def nextAlignment(mapping: CDPL.Util.STPairArray) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TopologicalAtomAlignment instance \a alignment.
-    # \param alignment The \e %TopologicalAtomAlignment instance to copy.
-    # \return \a self
+    # \brief 
+    # \param alignment 
+    # \return 
     #
     def assign(alignment: TopologicalAtomAlignment) -> TopologicalAtomAlignment: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     entityMatchFunction = property(getEntityMatchFunction, setEntityMatchFunction)
 
-    ##
-    # \brief 
-    #
     entityPairMatchFunction = property(getEntityPairMatchFunction, setEntityPairMatchFunction)

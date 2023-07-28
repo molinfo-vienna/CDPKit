@@ -20,13 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief Entity3D.
+# 
 class Entity3D(CDPL.Base.PropertyContainer):
 
     ##
-    # \brief Initializes the \e %Entity3D instance.
-    #
+    # \brief Default constructor.
+    # 
     def __init__() -> None: pass
 
     ##
@@ -38,9 +38,10 @@ class Entity3D(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %Entity3D instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##

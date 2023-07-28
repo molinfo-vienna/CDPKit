@@ -20,20 +20,23 @@
 #
 
 ##
-# \brief 
-#
+# \brief A binary functor that calculates the product of two property values retrieved from a pair of Base.PropertyContainer instances passed as argument.
+# 
 class PropertyValueProduct(builtins.object):
 
     ##
-    # \brief Initializes the \e %PropertyValueProduct instance.
-    # \param key 
-    #
+    # \brief Constructs a <tt>PropertyValueProduct</tt> instance for the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property.
+    # 
     def __init__(key: PropertyKey) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr1 
-    # \param cntnr2 
-    # \return 
-    #
+    # \brief Calculates the product of the property values stored in the Base.PropertyContainer instances <em>cntnr1</em> and <em>cntnr2</em>.
+    # 
+    # \param cntnr1 The Base.PropertyContainer instance storing the first property value.
+    # \param cntnr2 The Base.PropertyContainer instance storing the second property value.
+    # 
+    # \return The product of the property values.
+    # 
     def __call__(cntnr1: CDPL.Base.PropertyContainer, cntnr2: CDPL.Base.PropertyContainer) -> object: pass

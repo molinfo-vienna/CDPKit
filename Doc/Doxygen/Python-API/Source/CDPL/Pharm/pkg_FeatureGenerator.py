@@ -20,44 +20,48 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureGenerator.
+# 
 class FeatureGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>FeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeatureGenerator instance this method is called upon.
+    # 
     # Different Python \e %FeatureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a function for the retrieval of atom 3D-coordinates.
+    # 
+    # \param func The atom 3D-coordinates function.
+    # 
     def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+    # 
+    # \return The registered atom 3D-coordinates function.
+    # 
     def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives pharmacophore features and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
@@ -66,12 +70,10 @@ class FeatureGenerator(Boost.Python.instance):
     #
     def clone() -> FeatureGenerator: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     atom3DCoordsFunc = property(getAtom3DCoordsFunc, setAtom3DCoordsFunc)

@@ -20,56 +20,58 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags that are used to specify the 2D alignment of graphical objects within a bounded rectangular area.
+# 
+# The flags may be combined by a bitwise OR operation to specify a composite alignment for both directions. For example: <tt>(Alignment.RIGHT | Alignment.BOTTOM)</tt> specifies an alignment to the bottom-right corner.
+# 
 class Alignment(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an alignment to the bottom.
+    # 
     BOTTOM = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that an object has to be centered horizontally and vertically.
+    # 
     CENTER = 15
 
     ##
-    # \brief 
-    #
+    # \brief A bitmask for all horizontal alignment flags.
+    # 
     H_ALIGNMENT_MASK = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that an object has to be centered horizontally.
+    # 
     H_CENTER = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an alignment to the left.
+    # 
     LEFT = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that an object has no special alignment.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an alignment to the right.
+    # 
     RIGHT = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an alignment to the top.
+    # 
     TOP = 4
 
     ##
-    # \brief 
-    #
+    # \brief A bitmask for all vertical alignment flags.
+    # 
     V_ALIGNMENT_MASK = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that an object has to be centered vertically.
+    # 
     V_CENTER = 12

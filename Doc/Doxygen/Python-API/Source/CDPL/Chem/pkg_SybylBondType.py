@@ -20,46 +20,46 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the <em>Tripos Sybyl</em> bond type.
+# 
 class SybylBondType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an unknown bond (cannot be determined from the parameter tables).
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a single bond.
+    # 
     SINGLE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a double bond.
+    # 
     DOUBLE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a triple bond.
+    # 
     TRIPLE = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an aromatic bond.
+    # 
     AROMATIC = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an amide bond.
+    # 
     AMIDE = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a dummy bond.
+    # 
     DUMMY = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a pseudo bond.
+    # 
     NOT_CONNECTED = 7

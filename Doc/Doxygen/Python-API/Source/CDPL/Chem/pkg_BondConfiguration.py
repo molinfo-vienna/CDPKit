@@ -20,41 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the <em>E/Z</em> configuration of double bonds.
+# 
 class BondConfiguration(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the configuration of the bond is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that a bond does not meet the requirements (e.g. not a double bond or symmetric) to be assigned a configuration.
+    # 
     NONE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond has <em>E</em> configuration.
+    # 
     E = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond has <em>TRANS</em> configuration.
+    # 
     TRANS = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond has <em>Z</em> configuration.
+    # 
     Z = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond has <em>CIS</em> configuration.
+    # 
     CIS = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond meets all requirements but has no defined configuration.
+    # 
     EITHER = 8

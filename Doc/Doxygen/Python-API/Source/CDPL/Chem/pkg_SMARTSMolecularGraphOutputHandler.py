@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class SMARTSMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SMARTSMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %SMARTSMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

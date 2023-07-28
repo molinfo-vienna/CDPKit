@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief AmideImidicAcidTautomerizationRule.
+# 
 class AmideImidicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %AmideImidicAcidTautomerization instance.
-    #
+    # \param self The \e %AmideImidicAcidTautomerization instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AmideImidicAcidTautomerization instance.
+    # \param self The \e %AmideImidicAcidTautomerization instance to initialize.
     # \param rule 
-    #
+    # 
     def __init__(rule: AmideImidicAcidTautomerization) -> None: pass

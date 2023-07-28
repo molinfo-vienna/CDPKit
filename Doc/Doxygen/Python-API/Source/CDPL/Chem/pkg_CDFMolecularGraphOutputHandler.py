@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %CDFMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

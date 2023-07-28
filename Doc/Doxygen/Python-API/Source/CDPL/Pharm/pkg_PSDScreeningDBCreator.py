@@ -20,19 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief A class for the creation of optimized pharmacophore screening databases.
+# 
 class PSDScreeningDBCreator(ScreeningDBCreator):
 
     ##
     # \brief Initializes the \e %PSDScreeningDBCreator instance.
-    #
+    # \param self The \e %PSDScreeningDBCreator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PSDScreeningDBCreator instance.
-    # \param name 
-    # \param mode 
-    # \param allow_dup_entries 
-    #
+    # \brief Constructs a <tt>PSDScreeningDBCreator</tt> instance that will write data to the database-file specified by <em>name</em> in the given insert mode.
+    # 
+    # \param name The name of the database-file.
+    # \param mode Specifies whether to (re)create the database or to update/append to existing records.
+    # \param allow_dup_entries Specifies whether input molecules that are duplicates of already stored molecules should be discarded.
+    # 
     def __init__(name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass

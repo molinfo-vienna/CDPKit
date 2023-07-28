@@ -20,23 +20,25 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the perception of ring atoms and bonds in a molecular graph.
+# 
 class CyclicSubstructure(Fragment):
 
     ##
-    # \brief Initializes the \e %CyclicSubstructure instance.
-    #
+    # \brief Constructs an empty <tt>CyclicSubstructure</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CyclicSubstructure instance.
-    # \param molgraph 
-    #
+    # \brief Construct a <tt>CyclicSubstructure</tt> instance that consists of the ring atoms and bonds of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive ring atoms and bonds.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the currently stored atoms and bonds by the set of ring atoms and bonds of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive ring atoms and bonds.
+    # 
     def perceive(molgraph: MolecularGraph) -> None: pass

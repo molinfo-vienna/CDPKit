@@ -20,626 +20,628 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the chemical element or generic type of an atom.
+# 
+# For constants with a name equal to the symbol of a chemical element, the value of the constant corresponds to the atomic number of the respective element. Atom types with a value higher than AtomType.MAX_ATOMIC_NO are generic atom types that represent a set of chemical elements.
+# 
 class AtomType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an atom with an unknown or undefined atom type.
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Marks the end of the supported chemical elements.
+    # 
     MAX_ATOMIC_NO = 109
 
     ##
-    # \brief 
-    #
+    # \brief Marks the end of all supported atom types.
+    # 
     MAX_TYPE = 119
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element except hydrogen.
+    # 
     A = 110
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element.
+    # 
     AH = 111
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element (equivalent to AtomType.AH).
+    # 
     ANY = 118
 
     ##
-    # \brief 
-    #
+    # \brief A generic type for heteroatoms (N, O, S or P).
+    # 
     HET = 119
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Actinium</em>.
+    # 
     Ac = 89
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Silver</em>.
+    # 
     Ag = 47
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Aluminium</em>.
+    # 
     Al = 13
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Americium</em>.
+    # 
     Am = 95
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Argon</em>.
+    # 
     Ar = 18
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Arsenic</em>.
+    # 
     As = 33
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Astatine</em>.
+    # 
     At = 85
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Gold</em>.
+    # 
     Au = 79
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Boron</em>.
+    # 
     B = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Barium</em>.
+    # 
     Ba = 56
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Beryllium</em>.
+    # 
     Be = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Bohrium</em>.
+    # 
     Bh = 107
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Bismuth</em>.
+    # 
     Bi = 83
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Berkelium</em>.
+    # 
     Bk = 97
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Bromine</em>.
+    # 
     Br = 35
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Carbon</em>.
+    # 
     C = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Calcium</em>.
+    # 
     Ca = 20
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Cadmium</em>.
+    # 
     Cd = 48
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Cerium</em>.
+    # 
     Ce = 58
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Californium</em>.
+    # 
     Cf = 98
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Chlorine</em>.
+    # 
     Cl = 17
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Curium</em>.
+    # 
     Cm = 96
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Cobalt</em>.
+    # 
     Co = 27
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Chromium</em>.
+    # 
     Cr = 24
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Caesium</em>.
+    # 
     Cs = 55
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Copper</em>.
+    # 
     Cu = 29
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hydrogen (Deuterium)</em>.
+    # 
     D = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Dubnium</em>.
+    # 
     Db = 105
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Dysprosium</em>.
+    # 
     Dy = 66
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Erbium</em>.
+    # 
     Er = 68
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Einsteinium</em>.
+    # 
     Es = 99
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Europium</em>.
+    # 
     Eu = 63
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Fluorine</em>.
+    # 
     F = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Iron</em>.
+    # 
     Fe = 26
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Fermium</em>.
+    # 
     Fm = 100
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Francium</em>.
+    # 
     Fr = 87
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Gallium</em>.
+    # 
     Ga = 31
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Gadolinium</em>.
+    # 
     Gd = 64
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Germanium</em>.
+    # 
     Ge = 32
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hydrogen</em>.
+    # 
     H = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Helium</em>.
+    # 
     He = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hafnium</em>.
+    # 
     Hf = 72
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Mercury</em>.
+    # 
     Hg = 80
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Holmium</em>.
+    # 
     Ho = 67
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hassium</em>.
+    # 
     Hs = 108
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Iodine</em>.
+    # 
     I = 53
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Indium</em>.
+    # 
     In = 49
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Iridium</em>.
+    # 
     Ir = 77
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Potassium</em>.
+    # 
     K = 19
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Krypton</em>.
+    # 
     Kr = 36
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Lanthanum</em>.
+    # 
     La = 57
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Lithium</em>.
+    # 
     Li = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Lawrencium</em>.
+    # 
     Lr = 103
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Lutetium</em>.
+    # 
     Lu = 71
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element that is a metal.
+    # 
     M = 114
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers hydrogen and any element that is a metal.
+    # 
     MH = 115
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Mendelevium</em>.
+    # 
     Md = 101
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Magnesium</em>.
+    # 
     Mg = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Manganese</em>.
+    # 
     Mn = 25
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Molybdenum</em>.
+    # 
     Mo = 42
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Meitnerium</em>.
+    # 
     Mt = 109
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Nitrogen</em>.
+    # 
     N = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Sodium</em>.
+    # 
     Na = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Niobium</em>.
+    # 
     Nb = 41
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Neodymium</em>.
+    # 
     Nd = 60
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Neon</em>.
+    # 
     Ne = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Nickel</em>.
+    # 
     Ni = 28
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Nobelium</em>.
+    # 
     No = 102
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Neptunium</em>.
+    # 
     Np = 93
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Oxygen</em>.
+    # 
     O = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Osmium</em>.
+    # 
     Os = 76
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Phosphorus</em>.
+    # 
     P = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Protactinium</em>.
+    # 
     Pa = 91
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Lead</em>.
+    # 
     Pb = 82
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Palladium</em>.
+    # 
     Pd = 46
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Promethium</em>.
+    # 
     Pm = 61
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Polonium</em>.
+    # 
     Po = 84
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Praseodymium</em>.
+    # 
     Pr = 59
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Platinum</em>.
+    # 
     Pt = 78
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Plutonium</em>.
+    # 
     Pu = 94
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element except hydrogen and carbon.
+    # 
     Q = 112
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element except carbon.
+    # 
     QH = 113
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Radium</em>.
+    # 
     Ra = 88
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Rubidium</em>.
+    # 
     Rb = 37
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Rhenium</em>.
+    # 
     Re = 75
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Rutherfordium</em>.
+    # 
     Rf = 104
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Rhodium</em>.
+    # 
     Rh = 45
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Radon</em>.
+    # 
     Rn = 86
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Ruthenium</em>.
+    # 
     Ru = 44
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Sulfur</em>.
+    # 
     S = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Antimony</em>.
+    # 
     Sb = 51
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Scandium</em>.
+    # 
     Sc = 21
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Selenium</em>.
+    # 
     Se = 34
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Seaborgium</em>.
+    # 
     Sg = 106
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Silicon</em>.
+    # 
     Si = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Samarium</em>.
+    # 
     Sm = 62
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Tin</em>.
+    # 
     Sn = 50
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Strontium</em>.
+    # 
     Sr = 38
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hydrogen (Tritium)</em>.
+    # 
     T = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Tantalum</em>.
+    # 
     Ta = 73
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Terbium</em>.
+    # 
     Tb = 65
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Technetium</em>.
+    # 
     Tc = 43
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Tellurium</em>.
+    # 
     Te = 52
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Thorium</em>.
+    # 
     Th = 90
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Titanium</em>.
+    # 
     Ti = 22
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Thallium</em>.
+    # 
     Tl = 81
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Thulium</em>.
+    # 
     Tm = 69
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Uranium</em>.
+    # 
     U = 92
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Vanadium</em>.
+    # 
     V = 23
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Tungsten</em>.
+    # 
     W = 74
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers any element that is a halogen.
+    # 
     X = 116
 
     ##
-    # \brief 
-    #
+    # \brief A generic type that covers hydrogen and any element that is a halogen.
+    # 
     XH = 117
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Xenon</em>.
+    # 
     Xe = 54
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Yttrium</em>.
+    # 
     Y = 39
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Ytterbium</em>.
+    # 
     Yb = 70
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Zinc</em>.
+    # 
     Zn = 30
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Zirconium</em>.
+    # 
     Zr = 40

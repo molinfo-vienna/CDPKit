@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief HydrophobicFeatureGenerator.
+# 
+# \see [\ref CATA]
+# 
 class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
@@ -55,128 +57,162 @@ class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
     DEF_HYD_THRESHOLD_GROUP = 0.8
 
     ##
-    # \brief Initializes the \e %HydrophobicFeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>HydrophobicFeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %HydrophobicFeatureGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Initializes the \e %HydrophobicFeatureGenerator instance.
-    # \param gen 
-    #
+    # \brief Constructs a copy of the <tt>HydrophobicFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>HydrophobicFeatureGenerator</tt> to copy.
+    # 
     def __init__(gen: HydrophobicFeatureGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %HydrophobicFeatureGenerator instance \a gen.
-    # \param gen The \e %HydrophobicFeatureGenerator instance to copy.
+    # \brief Copies the <tt>HydrophobicFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>HydrophobicFeatureGenerator</tt> to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(gen: HydrophobicFeatureGenerator) -> HydrophobicFeatureGenerator: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Specifies the value of the feature type property that has to be set on newly generated features.
+    # 
+    # \param type The value of the feature type property.
+    # 
+    # \note The default type is specified by the constant HydrophobicFeatureGenerator.DEF_FEATURE_TYPE. 
+    # 
+    # \see FeatureProperty.TYPE
+    # 
     def setFeatureType(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \param geom 
-    #
+    # \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
+    # 
+    # \param geom The value of the feature geometry property.
+    # 
+    # \note The default type is specified by the constant HydrophobicFeatureGenerator.DEF_FEATURE_GEOM. 
+    # 
+    # \see FeatureProperty.GEOMETRY
+    # 
     def setFeatureGeometry(geom: int) -> None: pass
 
     ##
-    # \brief 
-    # \param tol 
-    #
+    # \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
+    # 
+    # \param tol The value of the feature tolerance property.
+    # 
+    # \note The default value is specified by the constant HydrophobicFeatureGenerator.DEF_FEATURE_TOL. 
+    # 
+    # \see FeatureProperty.TOLERANCE
+    # 
     def setFeatureTolerance(tol: float) -> None: pass
 
     ##
-    # \brief 
-    # \param thresh 
-    #
+    # \brief Specifies the minimum summed hydrophobicity of the atoms in small rings that is required for the generation of a new feature.
+    # 
+    # \param thresh The minimum total atom hydrophobicity.
+    # 
+    # \note The default value is specified by the constant HydrophobicFeatureGenerator.DEF_HYD_THRESHOLD_RING.
+    # 
     def setRingHydrophobicityThreshold(thresh: float) -> None: pass
 
     ##
-    # \brief 
-    # \param thresh 
-    #
+    # \brief Specifies the minimum summed hydrophobicity of the atoms in chain fragments that is required for the generation of a new feature.
+    # 
+    # \param thresh The minimum total atom hydrophobicity.
+    # 
+    # \note The default value is specified by the constant HydrophobicFeatureGenerator.DEF_HYD_THRESHOLD_CHAIN.
+    # 
     def setChainHydrophobicityThreshold(thresh: float) -> None: pass
 
     ##
-    # \brief 
-    # \param thresh 
-    #
+    # \brief Specifies the minimum summed hydrophobicity of the atoms in group fragments that is required for the generation of a new feature.
+    # 
+    # \param thresh The minimum total atom hydrophobicity.
+    # 
+    # \note The default value is specified by the constant HydrophobicFeatureGenerator.DEF_HYD_THRESHOLD_GROUP.
+    # 
     def setGroupHydrophobicityThreshold(thresh: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature type property that gets set on newly generated features.
+    # 
+    # \return The used value of the feature type property. 
+    # 
+    # \see FeatureProperty.TYPE
+    # 
     def getFeatureType() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature geometry property that gets set on newly generated features.
+    # 
+    # \return The used value of the feature geometry property. 
+    # 
+    # \see FeatureProperty.GEOMETRY
+    # 
     def getFeatureGeometry() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature tolerance property that gets set on newly generated features.
+    # 
+    # \return The value of the feature tolerance property. 
+    # 
+    # \see FeatureProperty.TOLERANCE
+    # 
     def getFeatureTolerance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the minimum summed hydrophobicity of the atoms in small rings that is required for the generation of a new feature.
+    # 
+    # \return The specified minimum total atom hydrophobicity.
+    # 
     def getRingHydrophobicityThreshold() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the minimum summed hydrophobicity of the atoms in chain fragments that is required for the generation of a new feature.
+    # 
+    # \return The specified minimum total atom hydrophobicity.
+    # 
     def getChainHydrophobicityThreshold() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the minimum summed hydrophobicity of the atoms in group fragments that is required for the generation of a new feature.
+    # 
+    # \return The specified minimum total atom hydrophobicity.
+    # 
     def getGroupHydrophobicityThreshold() -> float: pass
 
-    ##
-    # \brief 
-    #
     featureType = property(getFeatureType, setFeatureType)
 
-    ##
-    # \brief 
-    #
     featureGeometry = property(getFeatureGeometry, setFeatureGeometry)
 
-    ##
-    # \brief 
-    #
     featureTolerance = property(getFeatureTolerance, setFeatureTolerance)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     ringHydThreshold = property(getRingHydThreshold, setRingHydThreshold)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     chainHydThreshold = property(getChainHydThreshold, setChainHydThreshold)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     groupHydThreshold = property(getGroupHydThreshold, setGroupHydThreshold)

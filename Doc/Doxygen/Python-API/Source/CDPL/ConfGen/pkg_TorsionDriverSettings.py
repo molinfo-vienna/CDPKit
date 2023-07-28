@@ -25,37 +25,40 @@
 class TorsionDriverSettings(Boost.Python.instance):
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    DEFAULT = _UNKNOWN_VALUE_
+    DEFAULT = _HIDDEN_VALUE_
 
     ##
     # \brief Initializes the \e %TorsionDriverSettings instance.
-    #
+    # \param self The \e %TorsionDriverSettings instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionDriverSettings instance.
+    # \param self The \e %TorsionDriverSettings instance to initialize.
     # \param settings 
-    #
+    # 
     def __init__(settings: TorsionDriverSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TorsionDriverSettings instance this method is called upon.
+    # 
     # Different Python \e %TorsionDriverSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionDriverSettings instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionDriverSettings instance \a settings.
-    # \param settings The \e %TorsionDriverSettings instance to copy.
-    # \return \a self
+    # \brief 
+    # \param settings 
+    # \return 
     #
     def assign(settings: TorsionDriverSettings) -> TorsionDriverSettings: pass
 
@@ -167,52 +170,38 @@ class TorsionDriverSettings(Boost.Python.instance):
     #
     def getDistanceExponent() -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     sampleHetAtomHydrogens = property(getSampleHetAtomHydrogens, setSampleHetAtomHydrogens)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
 
-    ##
-    # \brief 
-    #
     forceFieldType = property(getForceFieldType, setForceFieldType)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
-    ##
-    # \brief 
-    #
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
-    ##
-    # \brief 
-    #
     distanceExponent = property(getDistanceExponent, setDistanceExponent)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     energyOrdered = property(getEnergyOrdered, setEnergyOrdered)
 
-    ##
-    # \brief 
-    #
     energyWindow = property(getEnergyWindow, setEnergyWindow)
 
-    ##
-    # \brief 
-    #
     maxPoolSize = property(getMaxPoolSize, setMaxPoolSize)

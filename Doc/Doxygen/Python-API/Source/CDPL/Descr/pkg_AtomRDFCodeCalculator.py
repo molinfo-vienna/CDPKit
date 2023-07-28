@@ -20,44 +20,49 @@
 #
 
 ##
-# \brief 
-#
+# \brief AtomRDFCodeCalculator.
+# 
+# \see [\ref CITB, \ref HBMD]
+# 
 class AtomRDFCodeCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    #
+    # \brief Constructs the <tt>AtomRDFCodeCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
+    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: AtomRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
+    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     # \param cntnr 
     # \param rdf_code 
-    #
+    # 
     def __init__(cntnr: CDPL.Chem.AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
+    # 
     # Different Python \e %AtomRDFCodeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomRDFCodeCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomRDFCodeCalculator instance \a calc.
-    # \param calc The \e %AtomRDFCodeCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: AtomRDFCodeCalculator) -> AtomRDFCodeCalculator: pass
 
@@ -152,37 +157,20 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     #
     def calculate(cntnr: CDPL.Chem.AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     distanceToIntervalCenterRounding = property(getDistanceToIntervalCenterRounding, setDistanceToIntervalCenterRounding)
 
-    ##
-    # \brief 
-    #
     smoothingFactor = property(getSmoothingFactor, setSmoothingFactor)
 
-    ##
-    # \brief 
-    #
     scalingFactor = property(getScalingFactor, setScalingFactor)
 
-    ##
-    # \brief 
-    #
     startRadius = property(getStartRadius, setStartRadius)
 
-    ##
-    # \brief 
-    #
     radiusIncrement = property(getRadiusIncrement, setRadiusIncrement)
 
-    ##
-    # \brief 
-    #
     numSteps = property(getNumSteps, setNumSteps)

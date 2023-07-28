@@ -20,31 +20,31 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides preinitialized Base.DataFormat objects for all supported data formats.
+# 
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the native binary <em>CDPL</em> format.
+    # 
     CDF = CDPL.Base.DataFormat(name='CDF', descr='Native CDPL-Format', mime_type'', file_exts=['cdf'], multi_rec=True)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+    # 
     CDF_GZ = CDPL.Base.DataFormat(name='CDF_GZ', descr='GZip-Compressed Native CDPL-Format', mime_type'', file_exts=['cdf.gz'], multi_rec=True)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+    # 
     CDF_BZ2 = CDPL.Base.DataFormat(name='CDF_BZ2', descr='BZip2-Compressed Native CDPL-Format', mime_type'', file_exts=['cdf.bz2'], multi_rec=True)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the native pharmacophore <em>LigandScout</em> format.
+    # 
     PML = CDPL.Base.DataFormat(name='PML', descr='LigandScout Pharmaceutical Markup Language', mime_type'', file_exts=['pml'], multi_rec=True)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the pharmacophore screening database <em>PSD</em> format.
+    # 
     PSD = CDPL.Base.DataFormat(name='PSD', descr='Pharmacophore Screening Database', mime_type'', file_exts=['psd'], multi_rec=True)

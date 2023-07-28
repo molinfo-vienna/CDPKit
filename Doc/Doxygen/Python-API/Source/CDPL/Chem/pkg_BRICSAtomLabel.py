@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
+# 
+# \see [\ref BRICS]
+# 
 class BRICSAtomLabel(Boost.Python.instance):
 
     ##

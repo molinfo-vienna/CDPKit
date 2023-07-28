@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief ResonanceStructureGenerator.
+# 
 class ResonanceStructureGenerator(Boost.Python.instance):
 
     ##
@@ -31,26 +31,28 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %StructureData instance.
+        # \param self The \e %StructureData instance to initialize.
         # \param data 
-        #
+        # 
         def __init__(data: StructureData) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %StructureData instance this method is called upon.
+        # 
         # Different Python \e %StructureData instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StructureData instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %ResonanceStructureGenerator instance \a data.
-        # \param data The \e %ResonanceStructureGenerator instance to copy.
-        # \return \a self
+        # \brief 
+        # \param data 
+        # \return 
         #
         def assign(data: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 
@@ -66,48 +68,41 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         #
         def getBondOrders() -> CDPL.Util.STArray: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         atomCharges = property(getAtomCharges)
 
-        ##
-        # \brief 
-        #
         bondOrders = property(getBondOrders)
 
     ##
-    # \brief Initializes the \e %ResonanceStructureGenerator instance.
-    #
+    # \brief Constructs the <tt>ResonanceStructureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ResonanceStructureGenerator instance.
+    # \param self The \e %ResonanceStructureGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: ResonanceStructureGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ResonanceStructureGenerator instance this method is called upon.
+    # 
     # Different Python \e %ResonanceStructureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ResonanceStructureGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ResonanceStructureGenerator instance \a gen.
-    # \param gen The \e %ResonanceStructureGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 
@@ -178,9 +173,10 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     def setMaxNumGeneratedStructures(max_num: int) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Generates all unique resonanceStructures of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to generate the resonanceStructures.
+    # 
     def generate(molgraph: MolecularGraph) -> None: pass
 
     ##
@@ -209,42 +205,30 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numStructures = property(getNumStructures)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     minOctetRuleViolations = property(getMinOctetRuleViolations, setMinOctetRuleViolations)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     minSP1GeometryViolations = property(getMinSP1GeometryViolations, setMinSP1GeometryViolations)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     minCarbonBond12Charges = property(getMinCarbonBond12Charges, setMinCarbonBond12Charges)
 
-    ##
-    # \brief 
-    #
     octetRuleCheckAtomTypes = property(getOctetRuleCheckAtomTypes)
 
-    ##
-    # \brief 
-    #
     chargeCountWindow = property(getChargeCountWindow, setChargeCountWindow)
 
-    ##
-    # \brief 
-    #
     maxNumGeneratedStructures = property(getMaxNumGeneratedStructures, setMaxNumGeneratedStructures)

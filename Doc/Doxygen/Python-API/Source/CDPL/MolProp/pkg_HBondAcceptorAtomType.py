@@ -20,18 +20,18 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants used to specify the structural class of H-bond acceptor atoms.
+# 
 class HBondAcceptorAtomType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the H-bond acceptor type of the atom is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is not a H-bond acceptor.
+    # 
     NONE = 1
 
     ##

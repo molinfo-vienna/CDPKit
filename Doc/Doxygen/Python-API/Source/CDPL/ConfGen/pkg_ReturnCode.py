@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to describe the result of operations related to conformer generation.
+# 
 class ReturnCode(Boost.Python.instance):
 
     ##

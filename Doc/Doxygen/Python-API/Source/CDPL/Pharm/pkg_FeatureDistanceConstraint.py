@@ -20,33 +20,36 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureDistanceConstraint.
+# 
 class FeatureDistanceConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureDistanceConstraint instance.
+    # \param self The \e %FeatureDistanceConstraint instance to initialize.
     # \param constr 
-    #
+    # 
     def __init__(constr: FeatureDistanceConstraint) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureDistanceConstraint instance.
-    # \param min_dist 
-    # \param max_dist 
-    #
+    # \brief Constructs a <tt>FeatureDistanceConstraint</tt> functor with a minimum feature distance of <em>min_dist</em> and maximum distance of <em>max_dist</em>.
+    # 
+    # \param min_dist The minimum feature pair distance.
+    # \param max_dist The maximum feature pair distance.
+    # 
     def __init__(min_dist: float, max_dist: float) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeatureDistanceConstraint instance this method is called upon.
+    # 
     # Different Python \e %FeatureDistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureDistanceConstraint instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -62,9 +65,9 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     def getMaxDistance() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceConstraint instance \a constr.
-    # \param constr The \e %FeatureDistanceConstraint instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: FeatureDistanceConstraint) -> FeatureDistanceConstraint: pass
 
@@ -76,17 +79,8 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     #
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     minDistance = property(getMinDistance)
 
-    ##
-    # \brief 
-    #
     maxDistance = property(getMaxDistance)

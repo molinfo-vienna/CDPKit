@@ -20,12 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Creates 2D structure diagrams of molecular graphs in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format.
+# 
+# <tt>SVGMolecularGraphWriter</tt> uses Vis.StructureView2D for the creation of 2D structure diagrams. All control-parameters and properties provided for the customization of Vis.StructureView2D are also supported by <tt>SVGMolecularGraphWriter</tt>.
+# 
 class SVGMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %SVGMolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>SVGMolecularGraphWriter</tt> instance that will write the image data to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

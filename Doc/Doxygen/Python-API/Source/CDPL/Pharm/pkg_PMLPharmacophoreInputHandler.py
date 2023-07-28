@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of pharmacophore data in the native I/O format of <em>LigandScout</em>.
+# 
 class PMLPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
     # \brief Initializes the \e %PMLPharmacophoreInputHandler instance.
-    #
+    # \param self The \e %PMLPharmacophoreInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

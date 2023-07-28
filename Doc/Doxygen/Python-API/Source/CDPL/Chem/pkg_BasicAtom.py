@@ -20,20 +20,24 @@
 #
 
 ##
-# \brief 
-#
+# \brief BasicAtom.
+# 
 class BasicAtom(Atom):
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Atom instance \a atom.
-    # \param atom The \e %Atom instance to copy.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>;.
+    # 
+    # \param atom The atom whose properties get copied.
+    # 
     # \return \a self
-    #
+    # 
     def assign(atom: Atom) -> Atom: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicAtom instance \a atom.
-    # \param atom The \e %BasicAtom instance to copy.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>;.
+    # 
+    # \param atom The atom whose properties get copied.
+    # 
     # \return \a self
-    #
+    # 
     def assign(atom: BasicAtom) -> BasicAtom: pass

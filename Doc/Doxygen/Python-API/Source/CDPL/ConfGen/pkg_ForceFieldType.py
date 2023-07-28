@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the forcefield that shall be used for 3D coordinates refinement and energy calculations.
+# 
 class ForceFieldType(Boost.Python.instance):
 
     ##

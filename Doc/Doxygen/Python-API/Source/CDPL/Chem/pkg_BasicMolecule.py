@@ -20,107 +20,137 @@
 #
 
 ##
-# \brief 
-#
+# \brief BasicMolecule.
+# 
 class BasicMolecule(Molecule):
 
     ##
-    # \brief Initializes the \e %BasicMolecule instance.
-    #
+    # \brief Constructs an empty <tt>BasicMolecule</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicMolecule instance.
-    # \param mol 
-    #
+    # \brief Constructs a copy of the Chem.Molecule instance <em>mol</em>.
+    # 
+    # \param mol The other Chem.Molecule instance to copy.
+    # 
     def __init__(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicMolecule instance.
-    # \param mol 
-    #
+    # \brief Constructs a copy of the Chem.Molecule instance <em>mol</em>.
+    # 
+    # \param mol The other Chem.Molecule instance to copy.
+    # 
     def __init__(mol: Molecule) -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicMolecule instance.
-    # \param molgraph 
-    #
+    # \brief Constructs a <tt>BasicMolecule</tt> instance with copies of the atoms and bonds of the Chem.MolecularGraph instance <em>molgraph</em>.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to copy.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param mol 
-    #
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
+    # 
+    # \param mol The molecule to copy.
+    # 
     def copy(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief 
-    # \param mol 
-    #
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
+    # 
+    # \param mol The molecule to copy.
+    # 
     def copy(mol: Molecule) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms, bonds and properties to copy.
+    # 
     def copy(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param mol 
-    #
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # 
+    # \param mol The molecule providing the atoms and bonds to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(mol: BasicMolecule) -> None: pass
 
     ##
-    # \brief 
-    # \param mol 
-    #
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecule <em>mol</em>.
+    # 
+    # \param mol The molecule providing the atoms and bonds to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(mol: Molecule) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Extends the current set of atoms and bonds by a copy of the atoms and bonds in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicMolecule instance \a mol.
-    # \param mol The \e %BasicMolecule instance to copy.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param mol The molecule to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(mol: BasicMolecule) -> BasicMolecule: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Molecule instance \a mol.
-    # \param mol The \e %Molecule instance to copy.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecule <em>mol</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param mol The molecule to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(mol: Molecule) -> BasicMolecule: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraph instance \a molgraph.
-    # \param molgraph The \e %MolecularGraph instance to copy.
+    # \brief Replaces the current set of atoms, bonds and properties by a copy of the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms and bonds to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(molgraph: MolecularGraph) -> BasicMolecule: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
+    # \param self The \e %BasicMolecule instance acting as in-place addend.
     # \param mol Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
-    #
+    # 
     def __iadd__(mol: BasicMolecule) -> BasicMolecule: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
+    # \param self The \e %BasicMolecule instance acting as in-place addend.
     # \param mol Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
-    #
+    # 
     def __iadd__(mol: Molecule) -> BasicMolecule: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
+    # \param self The \e %BasicMolecule instance acting as in-place addend.
     # \param molgraph Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
-    #
+    # 
     def __iadd__(molgraph: MolecularGraph) -> BasicMolecule: pass

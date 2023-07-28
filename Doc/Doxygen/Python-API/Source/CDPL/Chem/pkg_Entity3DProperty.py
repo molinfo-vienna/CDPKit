@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Chem.Entity3D properties.
+# 
 class Entity3DProperty(Boost.Python.instance):
 
     ##

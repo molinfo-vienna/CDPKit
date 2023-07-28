@@ -31,42 +31,46 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param atom_type 
         # \param atom_pol 
         # \param eff_el_num 
         # \param fact_a 
         # \param fact_g 
         # \param don_acc_type 
-        #
+        # 
         def __init__(atom_type: int, atom_pol: float, eff_el_num: float, fact_a: float, fact_g: float, don_acc_type: HDonorAcceptorType) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -77,27 +81,31 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         def getAtomType() -> int: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the atomic polarizability parameter.
+        # 
+        # \return The atomic polarizability.
+        # 
         def getAtomicPolarizability() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the Slater-Kirkwood effective number of valence electrons parameter.
+        # 
+        # \return The Slater-Kirkwood effective number of valence electrons.
+        # 
         def getEffectiveElectronNumber() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the scaling factor A parameter.
+        # 
+        # \return The scaling factor A.
+        # 
         def getFactorA() -> float: pass
 
         ##
-        # \brief 
-        # \return 
-        #
+        # \brief Returns the scaling factor G parameter.
+        # 
+        # \return The scaling factor G
+        # 
         def getFactorG() -> float: pass
 
         ##
@@ -118,62 +126,48 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         #
         def __bool__() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         atomType = property(getAtomType)
 
-        ##
-        # \brief 
-        #
         atomicPolarizability = property(getAtomicPolarizability)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         effElectronNumber = property(getEffElectronNumber)
 
-        ##
-        # \brief 
-        #
         factorA = property(getFactorA)
 
-        ##
-        # \brief 
-        #
         factorG = property(getFactorG)
 
-        ##
-        # \brief 
-        #
         hDonorAcceptorType = property(getHDonorAcceptorType)
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsParameterTable instance.
-    #
+    # \param self The \e %MMFF94VanDerWaalsParameterTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsParameterTable instance.
+    # \param self The \e %MMFF94VanDerWaalsParameterTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94VanDerWaalsParameterTable instance this method is called upon.
+    # 
     # Different Python \e %MMFF94VanDerWaalsParameterTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94VanDerWaalsParameterTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -230,9 +224,9 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsParameterTable instance \a table.
-    # \param table The \e %MMFF94VanDerWaalsParameterTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param table 
+    # \return 
     #
     def assign(table: MMFF94VanDerWaalsParameterTable) -> MMFF94VanDerWaalsParameterTable: pass
 
@@ -267,33 +261,38 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     def setFactorDAEPS(value: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the exponent used in the calculation of van der Waals interaction energies.
+    # 
+    # \return The exponent.
+    # 
     def getExponent() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the <em>B</em> factor used in the calculation of van der Waals interaction energies.
+    # 
+    # \return The value of the <em>B</em> factor.
+    # 
     def getFactorB() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of <em>beta</em> used in the calculation of van der Waals interaction energies.
+    # 
+    # \return The value of <em>beta</em>.
+    # 
     def getBeta() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the <em>DARAD</em> factor used in the calculation of van der Waals interaction energies.
+    # 
+    # \return The value of the <em>DARAD</em> factor.
+    # 
     def getFactorDARAD() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the <em>DAEPS</em> factor used in the calculation of van der Waals interaction energies.
+    # 
+    # \return The value of the <em>DAEPS</em> factor.
+    # 
     def getFactorDAEPS() -> float: pass
 
     ##
@@ -311,42 +310,18 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     @staticmethod
     def get(: ) -> MMFF94VanDerWaalsParameterTable: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)
 
-    ##
-    # \brief 
-    #
     exponent = property(getExponent, setExponent)
 
-    ##
-    # \brief 
-    #
     beta = property(getBeta, setBeta)
 
-    ##
-    # \brief 
-    #
     factorB = property(getFactorB, setFactorB)
 
-    ##
-    # \brief 
-    #
     factorDARAD = property(getFactorDARAD, setFactorDARAD)
 
-    ##
-    # \brief 
-    #
     factorDAEPS = property(getFactorDAEPS, setFactorDAEPS)

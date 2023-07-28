@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate errors caused by some invalid value.
+# 
 class ValueError(Exception, builtins.ValueError):
     pass

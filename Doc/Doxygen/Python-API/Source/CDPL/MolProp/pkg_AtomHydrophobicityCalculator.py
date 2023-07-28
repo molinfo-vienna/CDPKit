@@ -20,55 +20,58 @@
 #
 
 ##
-# \brief 
-#
+# \brief AtomHydrophobicityCalculator.
+# 
+# \see [\ref CATA]
+# 
 class AtomHydrophobicityCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
-    #
+    # \brief Constructs the <tt>AtomHydrophobicityCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
+    # \param self The \e %AtomHydrophobicityCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: AtomHydrophobicityCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
-    # \param molgraph 
-    # \param hyd_table 
-    #
+    # \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+    # 
+    # \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
+    # \param hyd_table The output vector where to store the atom hydrophobicities.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
+    # 
     # Different Python \e %AtomHydrophobicityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomHydrophobicityCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomHydrophobicityCalculator instance \a calc.
-    # \param calc The \e %AtomHydrophobicityCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: AtomHydrophobicityCalculator) -> AtomHydrophobicityCalculator: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param hyd_table 
-    #
+    # \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+    # 
+    # \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
+    # \param hyd_table The output vector where to store the atom hydrophobicities.
+    # 
     def calculate(molgraph: CDPL.Chem.MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

@@ -20,16 +20,16 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the main direction of object layouts.
+# 
 class LayoutDirection(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a horizontal layout (parallel to the x-axis).
+    # 
     HORIZONTAL = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a vertical layout (parallel to the y-axis).
+    # 
     VERTICAL = 1

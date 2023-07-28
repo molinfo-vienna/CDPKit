@@ -20,26 +20,32 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the degeneracy of the electronic state of radical atoms.
+# 
 class RadicalType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is not a radical.
+    # 
     NOT_RADICALIC = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is a doublet radical.
+    # 
+    # Doublet radicals are simple free radicals with one unpaired electron.
+    # 
     DOUBLET = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is a singlet diradical.
+    # 
+    # Singlet diradicals have two electrons with antiparallel spin (<em>+1/2</em> and <em>–1/2</em>) in one orbital. The other adjacent, degenerate (equal energy) orbital is empty.
+    # 
     SINGLET = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is a triplet diradical.
+    # 
+    # Triplet diradicals have two spin-up electrons in adjacent, degenerate (equal energy) orbitals.
+    # 
     TRIPLET = 3

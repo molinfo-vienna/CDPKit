@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief ParallelPiPiInteractionScore.
+# 
 class ParallelPiPiInteractionScore(FeatureInteractionScore):
 
     ##
@@ -46,17 +46,19 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionScore instance.
+    # \param self The \e %ParallelPiPiInteractionScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: ParallelPiPiInteractionScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %ParallelPiPiInteractionScore instance.
-    # \param min_v_dist 
-    # \param max_v_dist 
-    # \param max_h_dist 
-    # \param max_ang 
-    #
+    # \brief Constructs a <tt>ParallelPiPiInteractionScore</tt> functor with the specified constraints.
+    # 
+    # \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
+    # \param max_v_dist The maximum allowed distance of the two feature-positions orthogonal to the ring-planes.
+    # \param max_h_dist The maximum allowed distance of the feature-position along the their ring-planes.
+    # \param max_ang The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
+    # 
     def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, max_ang: float = 20.0) -> None: pass
 
     ##
@@ -96,28 +98,16 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionScore instance \a constr.
-    # \param constr The \e %ParallelPiPiInteractionScore instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: ParallelPiPiInteractionScore) -> ParallelPiPiInteractionScore: pass
 
-    ##
-    # \brief 
-    #
     minVDistance = property(getMinVDistance)
 
-    ##
-    # \brief 
-    #
     maxVDistance = property(getMaxVDistance)
 
-    ##
-    # \brief 
-    #
     maxHDistance = property(getMaxHDistance)
 
-    ##
-    # \brief 
-    #
     maxAngle = property(getMaxAngle)

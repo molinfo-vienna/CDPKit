@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
+# 
 class MMTFBZ2MolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %MMTFBZ2MolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %MMTFBZ2MolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

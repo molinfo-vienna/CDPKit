@@ -20,19 +20,22 @@
 #
 
 ##
-# \brief 
-#
+# \brief An unary functor that retrieves the value of a given property from the Base.PropertyContainer instance provided as argument.
+# 
 class PropertyValue(builtins.object):
 
     ##
-    # \brief Initializes the \e %PropertyValue instance.
-    # \param key 
-    #
+    # \brief Constructs a <tt>PropertyValue</tt> instance for the property specified by <em>key</em>.
+    # 
+    # \param key The key of the property.
+    # 
     def __init__(key: PropertyKey) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \return 
-    #
+    # \brief Retrievs the value of the property specified in the constructor from the Base.PropertyContainer instance <em>cntnr</em>.
+    # 
+    # \param cntnr The Base.PropertyContainer instance storing the property value.
+    # 
+    # \return The value of the property.
+    # 
     def __call__(cntnr: CDPL.Base.PropertyContainer) -> object: pass

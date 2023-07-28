@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFGZReactionOutputHandler(ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZReactionOutputHandler instance.
-    #
+    # \param self The \e %CDFGZReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

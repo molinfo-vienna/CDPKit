@@ -31,44 +31,43 @@ class FVectorExpression(ConstFVectorExpression):
     def swap(e: FVectorExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FVectorExpression instance \a e.
-    # \param e The \e %FVectorExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: FVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param e The \e %ConstFVectorExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstFVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param e The \e %ConstDVectorExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstDVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param e The \e %ConstLVectorExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstLVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param e The \e %ConstULVectorExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstULVectorExpression) -> FVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
-    # \return \a self
+    # \brief 
+    # \param a 
     #
     def assign(a: object) -> None: pass
 
@@ -88,44 +87,50 @@ class FVectorExpression(ConstFVectorExpression):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %FVectorExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %FVectorExpression instance \a self.
-    #
+    # 
     def __iadd__(e: FVectorExpression) -> FVectorExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %FVectorExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %FVectorExpression instance \a self.
-    #
+    # 
     def __iadd__(e: ConstFVectorExpression) -> FVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %FVectorExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %FVectorExpression instance \a self.
-    #
+    # 
     def __isub__(e: FVectorExpression) -> FVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %FVectorExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %FVectorExpression instance \a self.
-    #
+    # 
     def __isub__(e: ConstFVectorExpression) -> FVectorExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param self The \e %FVectorExpression instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %FVectorExpression instance \a self.
-    #
+    # 
     def __imul__(t: float) -> FVectorExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \param self The \e %FVectorExpression instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %FVectorExpression instance \a self.
-    #
+    # 
     def __idiv__(t: float) -> FVectorExpression: pass
 
     ##

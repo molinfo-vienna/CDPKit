@@ -25,7 +25,8 @@
 class MOL2MoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %MOL2MoleculeReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>MOL2MoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

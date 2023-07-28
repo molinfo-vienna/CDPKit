@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# 
 class INCHIMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %INCHIMoleculeInputHandler instance.
-    #
+    # \param self The \e %INCHIMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

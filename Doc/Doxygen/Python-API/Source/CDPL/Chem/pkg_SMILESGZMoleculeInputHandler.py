@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of gzip-compressed molecule data in <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESGZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESGZMoleculeInputHandler instance.
-    #
+    # \param self The \e %SMILESGZMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

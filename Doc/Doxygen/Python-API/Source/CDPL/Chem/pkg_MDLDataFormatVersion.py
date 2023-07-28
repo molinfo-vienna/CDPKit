@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the connection table and <em>Rxn-File</em> version for the I/O of molecular graphs and reactions in <em>MDL</em> format [\ref CTFILE].
+# 
 class MDLDataFormatVersion(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the data format version is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the data format version <em>V2000</em>.
+    # 
     V2000 = 2000
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the extended data format version <em>V3000</em>.
+    # 
     V3000 = 3000

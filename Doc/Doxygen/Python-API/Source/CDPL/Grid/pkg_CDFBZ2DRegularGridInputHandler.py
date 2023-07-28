@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of bzip2-compressed spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFBZ2DRegularGridInputHandler(DRegularGridInputHandler):
 
     ##
     # \brief Initializes the \e %CDFBZ2DRegularGridInputHandler instance.
-    #
+    # \param self The \e %CDFBZ2DRegularGridInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

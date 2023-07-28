@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# 
 class PDBMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PDBMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %PDBMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

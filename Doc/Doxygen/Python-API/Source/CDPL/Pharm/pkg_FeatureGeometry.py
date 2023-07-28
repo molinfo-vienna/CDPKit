@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
+# 
 class FeatureGeometry(Boost.Python.instance):
 
     ##

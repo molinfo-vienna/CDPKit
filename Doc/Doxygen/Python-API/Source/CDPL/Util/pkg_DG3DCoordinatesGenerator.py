@@ -55,37 +55,40 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %VolumeConstraint instance.
+        # \param self The \e %VolumeConstraint instance to initialize.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param pt3_idx 
         # \param pt4_idx 
         # \param lb 
         # \param ub 
-        #
+        # 
         def __init__(pt1_idx: int, pt2_idx: int, pt3_idx: int, pt4_idx: int, lb: float, ub: float) -> None: pass
 
         ##
         # \brief Initializes the \e %VolumeConstraint instance.
+        # \param self The \e %VolumeConstraint instance to initialize.
         # \param constr 
-        #
+        # 
         def __init__(constr: VolumeConstraint) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %VolumeConstraint instance this method is called upon.
+        # 
         # Different Python \e %VolumeConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %VolumeConstraint instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %VolumeConstraint instance \a constr.
-        # \param constr The \e %VolumeConstraint instance to copy.
-        # \return \a self
+        # \brief 
+        # \param constr 
+        # \return 
         #
         def assign(constr: VolumeConstraint) -> VolumeConstraint: pass
 
@@ -125,39 +128,18 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         #
         def getUpperBound() -> float: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         point1Index = property(getPoint1Index)
 
-        ##
-        # \brief 
-        #
         point2Index = property(getPoint2Index)
 
-        ##
-        # \brief 
-        #
         point3Index = property(getPoint3Index)
 
-        ##
-        # \brief 
-        #
         point4Index = property(getPoint4Index)
 
-        ##
-        # \brief 
-        #
         lowerBound = property(getLowerBound)
 
-        ##
-        # \brief 
-        #
         upperBound = property(getUpperBound)
 
     ##
@@ -191,35 +173,38 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DistanceConstraint instance.
+        # \param self The \e %DistanceConstraint instance to initialize.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
         # \param ub 
-        #
+        # 
         def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
         # \brief Initializes the \e %DistanceConstraint instance.
+        # \param self The \e %DistanceConstraint instance to initialize.
         # \param constr 
-        #
+        # 
         def __init__(constr: DistanceConstraint) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %DistanceConstraint instance this method is called upon.
+        # 
         # Different Python \e %DistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DistanceConstraint instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %DistanceConstraint instance \a constr.
-        # \param constr The \e %DistanceConstraint instance to copy.
-        # \return \a self
+        # \brief 
+        # \param constr 
+        # \return 
         #
         def assign(constr: DistanceConstraint) -> DistanceConstraint: pass
 
@@ -247,29 +232,14 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         #
         def getUpperBound() -> float: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         point1Index = property(getPoint1Index)
 
-        ##
-        # \brief 
-        #
         point2Index = property(getPoint2Index)
 
-        ##
-        # \brief 
-        #
         lowerBound = property(getLowerBound)
 
-        ##
-        # \brief 
-        #
         upperBound = property(getUpperBound)
 
     ##
@@ -299,31 +269,34 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DG3DCoordinatesGenerator instance.
-    #
+    # \param self The \e %DG3DCoordinatesGenerator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DG3DCoordinatesGenerator instance.
+    # \param self The \e %DG3DCoordinatesGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: DG3DCoordinatesGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DG3DCoordinatesGenerator instance this method is called upon.
+    # 
     # Different Python \e %DG3DCoordinatesGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DG3DCoordinatesGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DG3DCoordinatesGenerator instance \a gen.
-    # \param gen The \e %DG3DCoordinatesGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: DG3DCoordinatesGenerator) -> DG3DCoordinatesGenerator: pass
 
@@ -470,47 +443,28 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     #
     def getVolumeError(coords: CDPL.Math.Vector3DArray) -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numCycles = property(getNumCycles, setNumCycles)
 
-    ##
-    # \brief 
-    #
     cycleStepCountFactor = property(getCycleStepCountFactor, setCycleStepCountFactor)
 
-    ##
-    # \brief 
-    #
     startLearningRate = property(getStartLearningRate, setStartLearningRate)
 
-    ##
-    # \brief 
-    #
     learningRateDecrement = property(getLearningRateDecrement, setLearningRateDecrement)
 
-    ##
-    # \brief 
-    #
     numDistanceConstraints = property(getNumDistanceConstraints)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     distanceConstraints = property(getDistanceConstraints)
 
-    ##
-    # \brief 
-    #
     numVolumeConstraints = property(getNumVolumeConstraints)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     volumeConstraints = property(getVolumeConstraints)

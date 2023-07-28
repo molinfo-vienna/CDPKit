@@ -20,39 +20,39 @@
 #
 
 ##
-# \brief 
-#
+# \brief InteractionPharmacophoreGenerator.
+# 
 class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %InteractionPharmacophoreGenerator instance.
-    # \param core_ph4_gen_cfg 
-    # \param env_ph4_gen_cfg 
-    #
+    # \brief Constructs the <tt>InteractionPharmacophoreGenerator</tt> instance.
+    # 
     def __init__(core_ph4_gen_cfg: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG, env_ph4_gen_cfg: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionPharmacophoreGenerator instance.
+    # \param self The \e %InteractionPharmacophoreGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: InteractionPharmacophoreGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %InteractionPharmacophoreGenerator instance this method is called upon.
+    # 
     # Different Python \e %InteractionPharmacophoreGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionPharmacophoreGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionPharmacophoreGenerator instance \a gen.
-    # \param gen The \e %InteractionPharmacophoreGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: InteractionPharmacophoreGenerator) -> InteractionPharmacophoreGenerator: pass
 
@@ -132,52 +132,34 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     #
     def generate(core: CDPL.Chem.MolecularGraph, tgt: CDPL.Chem.MolecularGraph, ia_pharm: Pharmacophore, extract_core_env: bool, append: bool = False) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     coreEnvironmentRadius = property(getCoreEnvironmentRadius, setCoreEnvironmentRadius)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     addXVolumes = property(getAddXVolumes, setAddXVolumes)
 
-    ##
-    # \brief 
-    #
     corePharmacophoreGenerator = property(getCorePharmacophoreGenerator)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     envPharmacophoreGenerator = property(getEnvPharmacophoreGenerator)
 
-    ##
-    # \brief 
-    #
     interactionAnalyzer = property(getInteractionAnalyzer)
 
-    ##
-    # \brief 
-    #
     corePharmacophore = property(getCorePharmacophore)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     envPharmacophore = property(getEnvPharmacophore)
 
-    ##
-    # \brief 
-    #
     interactionMapping = property(getInteractionMapping)
 
-    ##
-    # \brief 
-    #
     coreEnvironment = property(getCoreEnvironment)

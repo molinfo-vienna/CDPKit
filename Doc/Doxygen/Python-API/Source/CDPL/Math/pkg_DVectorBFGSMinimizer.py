@@ -20,8 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief Fletcher's implementation of the BFGS method.
+# 
+# The implementation has been taken from the <em>GNU Scientific Library</em>.
+# 
+# \see R. Fletcher, "Practical Method's of Optimization", Second Edition, ISBN 0471915475. Algorithms 2.6.2 and 2.6.4.
+# 
 class DVectorBFGSMinimizer(Boost.Python.instance):
 
     ##
@@ -56,21 +60,23 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DVectorBFGSMinimizer instance.
+    # \param self The \e %DVectorBFGSMinimizer instance to initialize.
     # \param func 
     # \param grad_func 
-    #
+    # 
     def __init__(func: DoubleDVectorFunctor, grad_func: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
+    # 
     # Different Python \e %DVectorBFGSMinimizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DVectorBFGSMinimizer instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -134,32 +140,14 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
     #
     def iterate(f: float, x: DVector, g: DVector) -> tuple: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     gradientNorm = property(getGradientNorm)
 
-    ##
-    # \brief 
-    #
     functionDelta = property(getFunctionDelta)
 
-    ##
-    # \brief 
-    #
     functionValue = property(getFunctionValue)
 
-    ##
-    # \brief 
-    #
     numIterations = property(getNumIterations)
 
-    ##
-    # \brief 
-    #
     status = property(getStatus)

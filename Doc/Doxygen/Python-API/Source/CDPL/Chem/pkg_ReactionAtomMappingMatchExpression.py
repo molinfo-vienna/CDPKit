@@ -20,25 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief ReactionAtomMappingMatchExpression.
+# 
 class ReactionAtomMappingMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Initializes the \e %ReactionAtomMappingMatchExpression instance.
+    # \param self The \e %ReactionAtomMappingMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: ReactionAtomMappingMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ReactionAtomMappingMatchExpression instance.
-    # \param atom_mapping 
-    #
+    # \brief Constructs a <tt>ReactionAtomMappingMatchExpression</tt> instance for the specified reactant to product atom mapping.
+    # 
+    # \param atom_mapping Specifies the reactant to product atom mapping constraint that has to be fulfilled by matching target reactions.
+    # 
     def __init__(atom_mapping: AtomMapping) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionAtomMappingMatchExpression instance \a expr.
-    # \param expr The \e %ReactionAtomMappingMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: ReactionAtomMappingMatchExpression) -> ReactionAtomMappingMatchExpression: pass

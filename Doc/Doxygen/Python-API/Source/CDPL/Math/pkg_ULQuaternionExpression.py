@@ -31,44 +31,43 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
     def swap(e: ULQuaternionExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionExpression instance \a e.
-    # \param e The \e %ULQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
-    # \param e The \e %ConstFQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstFQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
-    # \param e The \e %ConstDQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstDQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
-    # \param e The \e %ConstLQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstLQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
-    # \param e The \e %ConstULQuaternionExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
-    # \return \a self
+    # \brief 
+    # \param a 
     #
     def assign(a: object) -> None: pass
 
@@ -107,86 +106,98 @@ class ULQuaternionExpression(ConstULQuaternionExpression):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place addend.
     # \param t Specifies the second addend.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __iadd__(t: int) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __iadd__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place addend.
     # \param q Specifies the second addend.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __iadd__(q: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place minuend.
     # \param t Specifies the subtrahend.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __isub__(t: int) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __isub__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place minuend.
     # \param q Specifies the subtrahend.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __isub__(q: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __imul__(t: int) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= e</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place multiplicand.
     # \param e Specifies the multiplier.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __imul__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place multiplicand.
     # \param q Specifies the multiplier.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __imul__(q: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __idiv__(t: int) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= e</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place dividend.
     # \param e Specifies the divisor.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __idiv__(e: ULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
+    # \param self The \e %ULQuaternionExpression instance acting as in-place dividend.
     # \param q Specifies the divisor.
     # \return The updated \e %ULQuaternionExpression instance \a self.
-    #
+    # 
     def __idiv__(q: ConstULQuaternionExpression) -> ULQuaternionExpression: pass
 
     ##

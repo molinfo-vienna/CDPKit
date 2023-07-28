@@ -20,26 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief BondDirectionMatchExpression.
+# 
 class BondDirectionMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondDirectionMatchExpression instance.
+    # \param self The \e %BondDirectionMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: BondDirectionMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %BondDirectionMatchExpression instance.
-    # \param dir_flags 
-    # \param not_match 
-    #
+    # \brief Constructs an <tt>BondDirectionMatchExpression</tt> instance for the specified matching mode and bond direction constraints.
+    # 
+    # \param dir_flags A bitwise OR combination of the flags defined in namespace Chem.BondDirection that specifies constraints on the direction of matching target bonds.
+    # \param not_match Specifies whether the direction of a target bond actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the query direction constraints.
+    # 
     def __init__(dir_flags: int, not_match: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondDirectionMatchExpression instance \a expr.
-    # \param expr The \e %BondDirectionMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: BondDirectionMatchExpression) -> BondDirectionMatchExpression: pass

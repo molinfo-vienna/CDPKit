@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# 
 class JMEMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %JMEMoleculeInputHandler instance.
-    #
+    # \param self The \e %JMEMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that some requested data item could not be found.
+# 
 class ItemNotFound(Exception):
     pass

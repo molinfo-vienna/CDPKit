@@ -20,23 +20,25 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the extraction of the aromatic rings in the SSSR of a molecular graph.
+# 
 class AromaticSSSRSubset(FragmentList):
 
     ##
-    # \brief Initializes the \e %AromaticSSSRSubset instance.
-    #
+    # \brief Constructs an empty <tt>AromaticSSSRSubset</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AromaticSSSRSubset instance.
-    # \param molgraph 
-    #
+    # \brief Construct a <tt>AromaticSSSRSubset</tt> instance that contains all aromatic rings of the SSSR of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to extract the aromatic rings.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of rings by the aromatic rings in the SSSR of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to extract the aromatic rings.
+    # 
     def extract(molgraph: MolecularGraph) -> None: pass

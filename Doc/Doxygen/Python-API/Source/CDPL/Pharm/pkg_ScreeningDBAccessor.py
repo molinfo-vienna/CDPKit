@@ -20,25 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief A class for accessing the data stored in pharmacophore screening databases.
+# 
 class ScreeningDBAccessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningDBAccessor instance.
-    #
+    # \param self The \e %ScreeningDBAccessor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
+    # 
     # Different Python \e %ScreeningDBAccessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningDBAccessor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -131,22 +133,10 @@ class ScreeningDBAccessor(Boost.Python.instance):
     #
     def getFeatureCounts(mol_idx: int, mol_conf_idx: int) -> FeatureTypeHistogram: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     databaseName = property(getDatabaseName)
 
-    ##
-    # \brief 
-    #
     numMolecules = property(getNumMolecules)
 
-    ##
-    # \brief 
-    #
     numPharmacophores = property(getNumPharmacophores)

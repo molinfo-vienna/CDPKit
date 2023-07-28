@@ -20,13 +20,15 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of <em>Universal Force Field (UFF)</em> atom types.
+# 
+# \see [\ref UFF]
+# 
 class UFFAtomType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Atom with no matching UFF atom type.
+    # 
     NONE = 0
 
     ##
@@ -35,8 +37,8 @@ class UFFAtomType(Boost.Python.instance):
     H   = 1
 
     ##
-    # \brief 
-    #
+    # \brief Hydrogen bridging between two boron atoms.
+    # 
     H_b = 2
 
     ##
@@ -110,8 +112,8 @@ class UFFAtomType(Boost.Python.instance):
     O_3 = 16
 
     ##
-    # \brief 
-    #
+    # \brief Oxygen in a zeolite framework.
+    # 
     O_3_z = 17
 
     ##

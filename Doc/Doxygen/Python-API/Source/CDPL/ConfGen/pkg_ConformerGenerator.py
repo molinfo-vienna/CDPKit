@@ -26,19 +26,21 @@ class ConformerGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConformerGenerator instance.
-    #
+    # \param self The \e %ConformerGenerator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ConformerGenerator instance this method is called upon.
+    # 
     # Different Python \e %ConformerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConformerGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -138,32 +140,14 @@ class ConformerGenerator(Boost.Python.instance):
     #
     def __getitem__(conf_idx: int) -> ConformerData: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numConformers = property(getNumConformers)
 
-    ##
-    # \brief 
-    #
     settings = property(getSettings)
 
-    ##
-    # \brief 
-    #
     abortCallback = property(getAbortCallback, setAbortCallback)
 
-    ##
-    # \brief 
-    #
     timeoutCallback = property(getTimeoutCallback, setTimeoutCallback)
 
-    ##
-    # \brief 
-    #
     logMessageCallback = property(getLogMessageCallback, setLogMessageCallback)

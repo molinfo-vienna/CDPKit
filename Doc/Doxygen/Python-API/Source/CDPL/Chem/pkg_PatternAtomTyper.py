@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief PatternAtomTyper.
+# 
 class PatternAtomTyper(Boost.Python.instance):
 
     ##
@@ -31,36 +31,39 @@ class PatternAtomTyper(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Pattern instance.
+        # \param self The \e %Pattern instance to initialize.
         # \param ptn 
-        #
+        # 
         def __init__(ptn: Pattern) -> None: pass
 
         ##
         # \brief Initializes the \e %Pattern instance.
+        # \param self The \e %Pattern instance to initialize.
         # \param structure 
         # \param atom_label 
         # \param priority 
         # \param all_matches 
         # \param unique_matches 
-        #
+        # 
         def __init__(structure: MolecularGraph, atom_label: int = 0, priority: int = 0, all_matches: bool = True, unique_matches: bool = False) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Pattern instance this method is called upon.
+        # 
         # Different Python \e %Pattern instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Pattern instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Pattern instance \a ptn.
-        # \param ptn The \e %Pattern instance to copy.
-        # \return \a self
+        # \brief 
+        # \param ptn 
+        # \return 
         #
         def assign(ptn: Pattern) -> Pattern: pass
 
@@ -94,57 +97,50 @@ class PatternAtomTyper(Boost.Python.instance):
         #
         def processUniqueMatchesOnly() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         structure = property(getStructure)
 
-        ##
-        # \brief 
-        #
         priority = property(getPriority)
 
-        ##
-        # \brief 
-        #
         atomLabel = property(getAtomLabel)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         allMatches = property(getAllMatches)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         uniqueMatches = property(getUniqueMatches)
 
     ##
     # \brief Initializes the \e %PatternAtomTyper instance.
-    #
+    # \param self The \e %PatternAtomTyper instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PatternAtomTyper instance.
+    # \param self The \e %PatternAtomTyper instance to initialize.
     # \param typer 
-    #
+    # 
     def __init__(typer: PatternAtomTyper) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %PatternAtomTyper instance this method is called upon.
+    # 
     # Different Python \e %PatternAtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PatternAtomTyper instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -215,18 +211,12 @@ class PatternAtomTyper(Boost.Python.instance):
     def execute(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternAtomTyper instance \a typer.
-    # \param typer The \e %PatternAtomTyper instance to copy.
-    # \return \a self
+    # \brief 
+    # \param typer 
+    # \return 
     #
     def assign(typer: PatternAtomTyper) -> PatternAtomTyper: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numPatterns = property(getNumPatterns)

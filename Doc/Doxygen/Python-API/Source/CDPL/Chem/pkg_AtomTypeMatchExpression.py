@@ -20,26 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief AtomTypeMatchExpression.
+# 
 class AtomTypeMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomTypeMatchExpression instance.
+    # \param self The \e %AtomTypeMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: AtomTypeMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomTypeMatchExpression instance.
-    # \param atom_type 
-    # \param not_match 
-    #
+    # \brief Constructs an <tt>AtomTypeMatchExpression</tt> instance for the specified query atom type and matching mode.
+    # 
+    # \param atom_type The atom type that has to be matched (or not matched) by target atoms.
+    # \param not_match Specifies whether the type of a target atom actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the query atom type.
+    # 
     def __init__(atom_type: int, not_match: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomTypeMatchExpression instance \a expr.
-    # \param expr The \e %AtomTypeMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: AtomTypeMatchExpression) -> AtomTypeMatchExpression: pass

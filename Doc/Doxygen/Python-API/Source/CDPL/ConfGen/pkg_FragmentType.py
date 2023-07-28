@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to describe the nature of fragments used to build-up molecule 3D models.
+# 
 class FragmentType(Boost.Python.instance):
 
     ##

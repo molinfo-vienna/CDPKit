@@ -26,31 +26,34 @@ class DGStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DGStructureGenerator instance.
-    #
+    # \param self The \e %DGStructureGenerator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGStructureGenerator instance.
+    # \param self The \e %DGStructureGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: DGStructureGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DGStructureGenerator instance this method is called upon.
+    # 
     # Different Python \e %DGStructureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DGStructureGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGenerator instance \a gen.
-    # \param gen The \e %DGStructureGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: DGStructureGenerator) -> DGStructureGenerator: pass
 
@@ -118,32 +121,18 @@ class DGStructureGenerator(Boost.Python.instance):
     #
     def getConstraintGenerator() -> DGConstraintGenerator: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numAtomStereoCenters = property(getNumAtomStereoCenters)
 
-    ##
-    # \brief 
-    #
     numBondStereoCenters = property(getNumBondStereoCenters)
 
-    ##
-    # \brief 
-    #
     settings = property(getSettings)
 
-    ##
-    # \brief 
-    #
     constraintGenerator = property(getConstraintGenerator)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     exclHydrogenMask = property(getExclHydrogenMask)

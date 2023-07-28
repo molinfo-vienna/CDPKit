@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# 
 class JMEReactionOutputHandler(ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %JMEReactionOutputHandler instance.
-    #
+    # \param self The \e %JMEReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

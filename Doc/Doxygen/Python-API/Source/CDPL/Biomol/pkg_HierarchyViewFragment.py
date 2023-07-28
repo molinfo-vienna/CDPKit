@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief HierarchyViewFragment.
+# 
 class HierarchyViewFragment(HierarchyViewNode):
     pass

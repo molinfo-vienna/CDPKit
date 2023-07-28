@@ -20,21 +20,23 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureDistanceScore.
+# 
 class FeatureDistanceScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %FeatureDistanceScore instance.
+    # \param self The \e %FeatureDistanceScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: FeatureDistanceScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureDistanceScore instance.
-    # \param min_dist 
-    # \param max_dist 
-    #
+    # \brief Constructs a <tt>FeatureDistanceScore</tt> functor with a minimum feature distance of <em>min_dist</em> and maximum distance of <em>max_dist</em>.
+    # 
+    # \param min_dist The minimum feature pair distance.
+    # \param max_dist The maximum feature pair distance.
+    # 
     def __init__(min_dist: float, max_dist: float) -> None: pass
 
     ##
@@ -56,18 +58,12 @@ class FeatureDistanceScore(FeatureInteractionScore):
     def getMaxDistance() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceScore instance \a func.
-    # \param func The \e %FeatureDistanceScore instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: FeatureDistanceScore) -> FeatureDistanceScore: pass
 
-    ##
-    # \brief 
-    #
     minDistance = property(getMinDistance)
 
-    ##
-    # \brief 
-    #
     maxDistance = property(getMaxDistance)

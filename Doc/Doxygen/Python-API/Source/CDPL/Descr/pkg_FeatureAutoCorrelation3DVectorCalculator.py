@@ -20,44 +20,49 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureAutoCorrelation3DVectorCalculator.
+# 
+# \see [\ref CITB, \ref HBMD]
+# 
 class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeatureAutoCorrelation3DVectorCalculator instance.
-    #
+    # \brief Constructs the <tt>FeatureAutoCorrelation3DVectorCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureAutoCorrelation3DVectorCalculator instance.
+    # \param self The \e %FeatureAutoCorrelation3DVectorCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: FeatureAutoCorrelation3DVectorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureAutoCorrelation3DVectorCalculator instance.
+    # \param self The \e %FeatureAutoCorrelation3DVectorCalculator instance to initialize.
     # \param cntnr 
     # \param vec 
-    #
+    # 
     def __init__(cntnr: CDPL.Pharm.FeatureContainer, vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeatureAutoCorrelation3DVectorCalculator instance this method is called upon.
+    # 
     # Different Python \e %FeatureAutoCorrelation3DVectorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureAutoCorrelation3DVectorCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureAutoCorrelation3DVectorCalculator instance \a calc.
-    # \param calc The \e %FeatureAutoCorrelation3DVectorCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: FeatureAutoCorrelation3DVectorCalculator) -> FeatureAutoCorrelation3DVectorCalculator: pass
 
@@ -116,22 +121,10 @@ class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     #
     def calculate(cntnr: CDPL.Pharm.FeatureContainer, vec: CDPL.Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     startRadius = property(getStartRadius, setStartRadius)
 
-    ##
-    # \brief 
-    #
     radiusIncrement = property(getRadiusIncrement, setRadiusIncrement)
 
-    ##
-    # \brief 
-    #
     numSteps = property(getNumSteps, setNumSteps)

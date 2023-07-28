@@ -20,41 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief A graphics primitive representing a list of disjoint line segments.
+# 
 class LineSegmentListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
-    # \brief Initializes the \e %LineSegmentListPrimitive2D instance.
-    #
+    # \brief Constructs an empty line segment list primitive.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LineSegmentListPrimitive2D instance.
+    # \param self The \e %LineSegmentListPrimitive2D instance to initialize.
     # \param prim 
-    #
+    # 
     def __init__(prim: LineSegmentListPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LineSegmentListPrimitive2D instance \a prim.
-    # \param prim The \e %LineSegmentListPrimitive2D instance to copy.
-    # \return \a self
+    # \brief 
+    # \param prim 
+    # \return 
     #
     def assign(prim: LineSegmentListPrimitive2D) -> LineSegmentListPrimitive2D: pass
 
     ##
-    # \brief 
-    # \param pen 
-    #
+    # \brief Sets the pen defining the color, width, line style and cap style of the line segments.
+    # 
+    # \param pen The pen defining the color, width, line style and cap style of the line segments.
+    # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pen defining the color, width, line style and cap style of the line segments.
+    # 
+    # \return The pen defining the color, width, line style and cap style of the line segments.
+    # 
     def getPen() -> Pen: pass
 
-    ##
-    # \brief 
-    #
     pen = property(getPen, setPen)

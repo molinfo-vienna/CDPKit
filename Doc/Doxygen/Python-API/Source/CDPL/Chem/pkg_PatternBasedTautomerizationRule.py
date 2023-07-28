@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief PatternBasedTautomerizationRule.
+# 
 class PatternBasedTautomerizationRule(TautomerizationRule):
 
     ##
@@ -31,76 +31,82 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
 
         ##
         # \brief Initializes the \e %BondOrderChange instance.
-        #
+        # \param self The \e %BondOrderChange instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %BondOrderChange instance.
+        # \param self The \e %BondOrderChange instance to initialize.
         # \param bond_chg 
-        #
+        # 
         def __init__(bond_chg: BondOrderChange) -> None: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %BondOrderChange instance \a bond_chg.
-        # \param bond_chg The \e %BondOrderChange instance to copy.
-        # \return \a self
+        # \brief 
+        # \param bond_chg 
+        # \return 
         #
         def assign(bond_chg: BondOrderChange) -> BondOrderChange: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %BondOrderChange instance this method is called upon.
+        # 
         # Different Python \e %BondOrderChange instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondOrderChange instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         atom1ID = property(getAtom1ID)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         atom2ID = property(getAtom2ID)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         orderChange = property(getOrderChange)
 
     ##
     # \brief Initializes the \e %PatternBasedTautomerizationRule instance.
+    # \param self The \e %PatternBasedTautomerizationRule instance to initialize.
     # \param id 
-    #
+    # 
     def __init__(id: int) -> None: pass
 
     ##
     # \brief Initializes the \e %PatternBasedTautomerizationRule instance.
+    # \param self The \e %PatternBasedTautomerizationRule instance to initialize.
     # \param rule 
-    #
+    # 
     def __init__(rule: PatternBasedTautomerizationRule) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
+    # 
     # Different Python \e %PatternBasedTautomerizationRule instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PatternBasedTautomerizationRule instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -128,13 +134,10 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def clearExcludePatterns() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternBasedTautomerizationRule instance \a rule.
-    # \param rule The \e %PatternBasedTautomerizationRule instance to copy.
-    # \return \a self
+    # \brief 
+    # \param rule 
+    # \return 
     #
     def assign(rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

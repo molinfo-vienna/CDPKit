@@ -26,13 +26,15 @@ class BZip2IStream(CDPL.Base.IStream):
 
     ##
     # \brief Initializes the \e %BZip2IStream instance.
-    #
+    # \param self The \e %BZip2IStream instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BZip2IStream instance.
+    # \param self The \e %BZip2IStream instance to initialize.
     # \param is 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass
 
     ##
@@ -113,15 +115,18 @@ class BZip2IStream(CDPL.Base.IStream):
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     closed = property(getClosed)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     mode = property(getMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     modeFlags = property(getModeFlags)

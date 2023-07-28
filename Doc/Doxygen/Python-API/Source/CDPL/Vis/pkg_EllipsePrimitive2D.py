@@ -20,117 +20,110 @@
 #
 
 ##
-# \brief 
-#
+# \brief A graphics primitive representing a ellipse.
+# 
 class EllipsePrimitive2D(GraphicsPrimitive2D):
 
     ##
-    # \brief Initializes the \e %EllipsePrimitive2D instance.
-    #
+    # \brief Constructs an undefined ellipse primitive.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %EllipsePrimitive2D instance.
-    # \param pos 
-    # \param width 
-    # \param height 
-    #
+    # \brief Constructs an undefined ellipse primitive.
+    # 
     def __init__(pos: CDPL.Math.Vector2D, width: float, height: float) -> None: pass
 
     ##
     # \brief Initializes the \e %EllipsePrimitive2D instance.
+    # \param self The \e %EllipsePrimitive2D instance to initialize.
     # \param prim 
-    #
+    # 
     def __init__(prim: EllipsePrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %EllipsePrimitive2D instance \a prim.
-    # \param prim The \e %EllipsePrimitive2D instance to copy.
-    # \return \a self
+    # \brief 
+    # \param prim 
+    # \return 
     #
     def assign(prim: EllipsePrimitive2D) -> EllipsePrimitive2D: pass
 
     ##
-    # \brief 
-    # \param width 
-    #
+    # \brief Sets the diameter of the ellipse in x-direction.
+    # 
+    # \param width The width of the ellipse.
+    # 
     def setWidth(width: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the diameter of the ellipse in x-direction.
+    # 
+    # \return The width of the ellipse.
+    # 
     def getWidth() -> float: pass
 
     ##
-    # \brief 
-    # \param height 
-    #
+    # \brief Sets the diameter of the ellipse in y-direction.
+    # 
+    # \param height The height of the ellipse.
+    # 
     def setHeight(height: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the diameter of the ellipse in y-direction.
+    # 
+    # \return The height of the ellipse.
+    # 
     def getHeight() -> float: pass
 
     ##
-    # \brief 
-    # \param pos 
-    #
+    # \brief Sets the position of the ellipse center.
+    # 
+    # \param pos The center position of the ellipse.
+    # 
     def setPosition(pos: CDPL.Math.Vector2D) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the position of the ellipse center.
+    # 
+    # \return The center position of the ellipse.
+    # 
     def getPosition() -> CDPL.Math.Vector2D: pass
 
     ##
-    # \brief 
-    # \param pen 
-    #
+    # \brief Sets the pen defining the color, width, line style, cap style and join style of the ellipse outline.
+    # 
+    # \param pen The pen defining the color, width, line style, cap style and join style of the ellipse's outline.
+    # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pen defining the color, width, line style, cap style and join style of the ellipse outline.
+    # 
+    # \return The pen defining the color, width, line style, cap style and join style of the ellipse outline.
+    # 
     def getPen() -> Pen: pass
 
     ##
-    # \brief 
-    # \param brush 
-    #
+    # \brief Sets the brush defining the fill color and fill pattern.
+    # 
+    # \param brush The brush defining the fill color and fill pattern.
+    # 
     def setBrush(brush: Brush) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the brush defining the fill color and fill pattern.
+    # 
+    # \return The brush defining the fill color and fill pattern.
+    # 
     def getBrush() -> Brush: pass
 
-    ##
-    # \brief 
-    #
     width = property(getWidth, setWidth)
 
-    ##
-    # \brief 
-    #
     height = property(getHeight, setHeight)
 
-    ##
-    # \brief 
-    #
     position = property(getPosition, setPosition)
 
-    ##
-    # \brief 
-    #
     pen = property(getPen, setPen)
 
-    ##
-    # \brief 
-    #
     brush = property(getBrush, setBrush)

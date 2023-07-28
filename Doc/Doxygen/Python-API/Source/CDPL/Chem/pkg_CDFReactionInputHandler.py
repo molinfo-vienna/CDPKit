@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of reaction data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %CDFReactionInputHandler instance.
-    #
+    # \param self The \e %CDFReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

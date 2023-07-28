@@ -20,31 +20,34 @@
 #
 
 ##
-# \brief 
-#
+# \brief Feature.
+# 
 class Feature(CDPL.Chem.Entity3D):
 
     ##
     # \brief Initializes the \e %Feature instance.
-    #
+    # \param self The \e %Feature instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the parent pharmacophore.
+    # 
+    # \return A reference to the parent pharmacophore.
+    # 
     def getPharmacophore() -> Pharmacophore: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the feature in its parent pharmacophore.
+    # 
+    # \return The zero-based index of the feature.
+    # 
     def getIndex() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Feature instance \a ftr.
-    # \param ftr The \e %Feature instance to copy.
-    # \return \a self
+    # \brief 
+    # \param ftr 
+    # \return 
     #
     def assign(ftr: Feature) -> Feature: pass
 
@@ -57,9 +60,10 @@ class Feature(CDPL.Chem.Entity3D):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %Feature instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
@@ -82,12 +86,6 @@ class Feature(CDPL.Chem.Entity3D):
     #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    #
     pharmacophore = property(getPharmacophore)
 
-    ##
-    # \brief 
-    #
     index = property(getIndex)

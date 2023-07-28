@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable Network Graphics (PNG)</em> [\ref WPNG] format.
+# 
 class PNGReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %PNGReactionOutputHandler instance.
-    #
+    # \param self The \e %PNGReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

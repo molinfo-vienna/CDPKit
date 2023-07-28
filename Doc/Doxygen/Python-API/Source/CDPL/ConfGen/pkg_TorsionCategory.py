@@ -31,20 +31,22 @@ class TorsionCategory(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %RuleSequence instance.
+        # \param self The \e %RuleSequence instance to initialize.
         # \param rules 
-        #
+        # 
         def __init__(rules: RuleSequence) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %RuleSequence instance this method is called upon.
+        # 
         # Different Python \e %RuleSequence instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %RuleSequence instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
@@ -66,9 +68,6 @@ class TorsionCategory(Boost.Python.instance):
         #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
     ##
@@ -78,20 +77,22 @@ class TorsionCategory(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %CategorySequence instance.
+        # \param self The \e %CategorySequence instance to initialize.
         # \param cat 
-        #
+        # 
         def __init__(cat: CategorySequence) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %CategorySequence instance this method is called upon.
+        # 
         # Different Python \e %CategorySequence instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CategorySequence instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
@@ -113,38 +114,38 @@ class TorsionCategory(Boost.Python.instance):
         #
         def __len__() -> int: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
     ##
     # \brief Initializes the \e %TorsionCategory instance.
-    #
+    # \param self The \e %TorsionCategory instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionCategory instance.
+    # \param self The \e %TorsionCategory instance to initialize.
     # \param cat 
-    #
+    # 
     def __init__(cat: TorsionCategory) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TorsionCategory instance this method is called upon.
+    # 
     # Different Python \e %TorsionCategory instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionCategory instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionCategory instance \a cat.
-    # \param cat The \e %TorsionCategory instance to copy.
-    # \return \a self
+    # \brief 
+    # \param cat 
+    # \return 
     #
     def assign(cat: TorsionCategory) -> TorsionCategory: pass
 
@@ -285,52 +286,22 @@ class TorsionCategory(Boost.Python.instance):
     #
     def swap(cat: TorsionCategory) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     rules = property(getRules)
 
-    ##
-    # \brief 
-    #
     categories = property(getCategories)
 
-    ##
-    # \brief 
-    #
     numRules = property(getNumRules)
 
-    ##
-    # \brief 
-    #
     numCategories = property(getNumCategories)
 
-    ##
-    # \brief 
-    #
     bondAtom1Type = property(getBondAtom1Type, setBondAtom1Type)
 
-    ##
-    # \brief 
-    #
     bondAtom2Type = property(getBondAtom2Type, setBondAtom2Type)
 
-    ##
-    # \brief 
-    #
     matchPatternString = property(getMatchPatternString, setMatchPatternString)
 
-    ##
-    # \brief 
-    #
     matchPattern = property(getMatchPattern, setMatchPattern)
 
-    ##
-    # \brief 
-    #
     name = property(getName, setName)

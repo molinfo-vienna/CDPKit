@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of gzip-compressed molecule data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFGZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZMoleculeInputHandler instance.
-    #
+    # \param self The \e %CDFGZMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

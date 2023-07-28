@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Sets the protation state of molecules according to desired objectives.
+# 
 class ProtonationStateStandardizer(Boost.Python.instance):
 
     ##
@@ -46,31 +46,34 @@ class ProtonationStateStandardizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ProtonationStateStandardizer instance.
-    #
+    # \param self The \e %ProtonationStateStandardizer instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ProtonationStateStandardizer instance.
+    # \param self The \e %ProtonationStateStandardizer instance to initialize.
     # \param standardizer 
-    #
+    # 
     def __init__(standardizer: ProtonationStateStandardizer) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ProtonationStateStandardizer instance this method is called upon.
+    # 
     # Different Python \e %ProtonationStateStandardizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ProtonationStateStandardizer instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ProtonationStateStandardizer instance \a standardizer.
-    # \param standardizer The \e %ProtonationStateStandardizer instance to copy.
-    # \return \a self
+    # \brief 
+    # \param standardizer 
+    # \return 
     #
     def assign(standardizer: ProtonationStateStandardizer) -> ProtonationStateStandardizer: pass
 
@@ -91,7 +94,4 @@ class ProtonationStateStandardizer(Boost.Python.instance):
     #
     def standardize(mol: Molecule, std_mol: Molecule, flavor: Flavor) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

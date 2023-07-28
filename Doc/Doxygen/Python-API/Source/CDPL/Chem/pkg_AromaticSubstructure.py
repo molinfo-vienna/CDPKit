@@ -20,23 +20,25 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the perception of aromatic atoms and bonds in a molecular graph.
+# 
 class AromaticSubstructure(Fragment):
 
     ##
-    # \brief Initializes the \e %AromaticSubstructure instance.
-    #
+    # \brief Constructs an empty <tt>AromaticSubstructure</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AromaticSubstructure instance.
-    # \param molgraph 
-    #
+    # \brief Construct a <tt>AromaticSubstructure</tt> instance that consists of the aromatic atoms and bonds of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive aromatic atoms and bonds.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the currently stored atoms and bonds by the set of aromatic atoms and bonds of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive aromatic atoms and bonds.
+    # 
     def perceive(molgraph: MolecularGraph) -> None: pass

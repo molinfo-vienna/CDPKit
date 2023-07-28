@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of bzip2-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# 
 class RDFBZ2ReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %RDFBZ2ReactionInputHandler instance.
-    #
+    # \param self The \e %RDFBZ2ReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the generic type of a pharmacophore feature.
+# 
 class FeatureType(Boost.Python.instance):
 
     ##

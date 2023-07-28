@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief CanonicalFragment.
+# 
 class CanonicalFragment(CDPL.Chem.MolecularGraph):
 
     ##
@@ -43,39 +43,42 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
         def __getitem__(idx: int) -> CDPL.Chem.Atom: pass
 
     ##
-    # \brief Initializes the \e %CanonicalFragment instance.
-    #
+    # \brief Constructs an empty <tt>CanonicalFragment</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CanonicalFragment instance.
-    # \param molgraph 
-    # \param parent 
-    #
+    # \brief Constructs a <tt>CanonicalFragment</tt> instance that contains the relevant atoms and bonds of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to generate the fragments.
+    # \param parent The parent molecular graph the fragment is coming from.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Initializes the \e %CanonicalFragment instance.
+    # \param self The \e %CanonicalFragment instance to initialize.
     # \param frag 
-    #
+    # 
     def __init__(frag: CanonicalFragment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %CanonicalFragment instance this method is called upon.
+    # 
     # Different Python \e %CanonicalFragment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CanonicalFragment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CanonicalFragment instance \a frag.
-    # \param frag The \e %CanonicalFragment instance to copy.
-    # \return \a self
+    # \brief 
+    # \param frag 
+    # \return 
     #
     def assign(frag: CanonicalFragment) -> CanonicalFragment: pass
 
@@ -104,17 +107,8 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
     #
     def getAtomMapping() -> CDPL.Chem.AtomMapping: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     hashCode = property(getHashCode)
 
-    ##
-    # \brief 
-    #
     atomMapping = property(getAtomMapping)

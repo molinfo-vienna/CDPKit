@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# 
 class MOLMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %MOLMoleculeInputHandler instance.
-    #
+    # \param self The \e %MOLMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

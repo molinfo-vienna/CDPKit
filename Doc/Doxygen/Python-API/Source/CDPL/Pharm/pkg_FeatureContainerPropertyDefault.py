@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides default values for built-in Pharm.FeatureContainer properties.
+# 
 class FeatureContainerPropertyDefault(Boost.Python.instance):
 
     ##

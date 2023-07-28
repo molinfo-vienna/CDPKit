@@ -20,108 +20,152 @@
 #
 
 ##
-# \brief 
-#
+# \brief CircularFingerprintGenerator.
+# 
+# \see [\ref STECFP]
+# 
 class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief The functor for the generation of ECFP atom identifiers.
+    # 
     class DefAtomIdentifierFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %DefAtomIdentifierFunctor instance.
-        # \param flags 
-        #
+        # \brief Constructs the atom identifier functor object for the specified set of atomic properties.
+        # 
+        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.AtomPropertyFlag.
+        # 
+        # Supported property flags are:
+        #  - Chem.AtomPropertyFlag.TYPE
+        #  - Chem.AtomPropertyFlag.ISOTOPE
+        #  - Chem.AtomPropertyFlag.VALENCE
+        #  - Chem.AtomPropertyFlag.HEAVY_BOND_COUNT
+        #  - Chem.AtomPropertyFlag.VALENCE
+        #  - Chem.AtomPropertyFlag.TOPOLOGY
+        #  - Chem.AtomPropertyFlag.FORMAL_CHARGE
+        #  - Chem.AtomPropertyFlag.AROMATICITY
+        # 
+        # \param flags Specifies the set of considered atomic properties.
+        # 
         def __init__(flags: int = 3166) -> None: pass
 
         ##
-        # \brief 
-        # \param atom 
-        # \param molgraph 
-        # \return 
-        #
+        # \brief Generates an identifier for the argument atom.
+        # 
+        # The generated identifier depends on the set of considered atomic properties that has been specified in the constructor.
+        # 
+        # \param atom The atom for which to generate the identifier.
+        # \param molgraph The parent molecular graph of the atom.
+        # 
+        # \return The generated atom identifier. \
+        # 
         def __call__(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief The default functor for the generation of bond identifiers.
+    # 
     class DefBondIdentifierFunctor(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %DefBondIdentifierFunctor instance.
-        # \param flags 
-        #
+        # \brief Constructs the bond identifier functor object for the specified set of bond properties.
+        # 
+        # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag.
+        # 
+        # Supported property flags are:
+        #  - Chem.BondPropertyFlag.ORDER
+        #  - Chem.BondPropertyFlag.TOPOLOGY
+        #  - Chem.BondPropertyFlag.AROMATICITY
+        # 
+        # \param flags Specifies the set of considered bond properties.
+        # 
         def __init__(flags: int = 10) -> None: pass
 
         ##
-        # \brief 
-        # \param bond 
-        # \return 
-        #
+        # \brief Generates an identifier for the argument bond.
+        # 
+        # The generated identifier depends on the set of considered bond properties that has been specified in the constructor.
+        # 
+        # \param bond The bond for which to generate the identifier.
+        # 
+        # \return The generated bond identifier.
+        # 
         def __call__(bond: CDPL.Chem.Bond) -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default set of atomic properties considered in the generation of atom identifiers by CircularFingerprintGenerator.DefAtomIdentifierFunction.
+    # 
     DEF_ATOM_PROPERTY_FLAGS = 3166
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default set of bond properties considered in the generation of bond identifiers by CircularFingerprintGenerator.DefBondIdentifierFunction.
+    # 
     DEF_BOND_PROPERTY_FLAGS = 10
 
     ##
-    # \brief Initializes the \e %CircularFingerprintGenerator instance.
-    #
+    # \brief Constructs the <tt>CircularFingerprintGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CircularFingerprintGenerator instance.
+    # \param self The \e %CircularFingerprintGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: CircularFingerprintGenerator) -> None: pass
 
     ##
-    # \brief Initializes the \e %CircularFingerprintGenerator instance.
-    # \param molgraph 
-    #
+    # \brief Constructs the <tt>CircularFingerprintGenerator</tt> instance and generates the atom-centered circular substructure fingerprint of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph to process.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %CircularFingerprintGenerator instance this method is called upon.
+    # 
     # Different Python \e %CircularFingerprintGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CircularFingerprintGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Allows to specify a customized function for the generation of initial atom identifiers.
+    # 
+    # \param func A CircularFingerprintGenerator.AtomIdentifierFunction instance that wraps the target function.
+    # 
+    # \note By default, atom identifiers are generated by a CircularFingerprintGenerator.DefAtomIdentifierFunctor instance. If the generated initial identifier for an atom is <em>0</em>, the atom is regarded as not being present in the processed molecular graph.
+    # 
     def setAtomIdentifierFunction(func: CDPL.Chem.SizeTypeAtomMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Allows to specify a customized function for the generation of initial bond identifiers.
+    # 
+    # \param func A CircularFingerprintGenerator.BondIdentifierFunction instance that wraps the target function.
+    # 
+    # \note By default, bond identifiers are generated by a CircularFingerprintGenerator.DefBondIdentifierFunctor instance. If the generated initial identifier for a bond is <em>0</em>, the bond is regarded as not being present in the processed molecular graph.
+    # 
     def setBondIdentifierFunction(func: CDPL.Chem.UInt64BondFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param num_iter 
-    #
+    # \brief Allows to specify the desired number of feature substructure growing iterations.
+    # 
+    # \param num_iter The number of iterations.
+    # 
+    # \note The default number of iterations is <em>2</em>.
+    # 
     def setNumIterations(num_iter: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of feature substructure growing iterations.
+    # 
+    # \return The number of iterations.
+    # 
     def getNumIterations() -> int: pass
 
     ##
@@ -149,24 +193,37 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     def chiralityIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Generates the atom-centered circular substructure fingerprint of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph to process.
+    # 
     def generate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param bs 
-    # \param reset 
-    #
+    # \brief Maps previously generated feature identifiers to bit indices and sets the correponding bits of <em>bs</em>.
+    # 
+    # \param bs The target bitset.
+    # \param reset If <em>True</em>, <em>bs</em> will be cleared before any feature bits are set.
+    # 
+    # \note The binary fingerprint size is specified implicitly via the size of <em>bs</em>. <br>
+    #  
+    # 
+    # \see generate()
+    # 
     def setFeatureBits(bs: CDPL.Util.BitSet, reset: bool = True) -> None: pass
 
     ##
-    # \brief 
-    # \param atom_idx 
-    # \param bs 
-    # \param reset 
-    #
+    # \brief Maps previously generated identifiers of structural features involving the atom specified by <em>atom_idx</em> to bit indices and sets the correponding bits of <em>bs</em>.
+    # 
+    # \param atom_idx The index of the atom that has to be involved in the structural features.
+    # \param bs The target bitset.
+    # \param reset If <em>True</em>, <em>bs</em> will be cleared before any feature bits are set.
+    # 
+    # \note The binary fingerprint size is specified implicitly via the size of <em>bs</em>. <br>
+    #  
+    # 
+    # \see generate()
+    # 
     def setFeatureBits(atom_idx: int, bs: CDPL.Util.BitSet, reset: bool = True) -> None: pass
 
     ##
@@ -207,33 +264,26 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     def getFeatureSubstructures(bit_idx: int, bs_size: int, frags: CDPL.Chem.FragmentList, clear: bool = True) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CircularFingerprintGenerator instance \a gen.
-    # \param gen The \e %CircularFingerprintGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: CircularFingerprintGenerator) -> CircularFingerprintGenerator: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numFeatures = property(getNumFeatures)
 
-    ##
-    # \brief 
-    #
     numIterations = property(getNumIterations, setNumIterations)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     incHydrogens = property(getIncHydrogens, setIncHydrogens)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     incChirality = property(getIncChirality, setIncChirality)

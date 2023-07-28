@@ -20,27 +20,29 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureInteractionScoreCombiner.
+# 
 class FeatureInteractionScoreCombiner(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreCombiner instance.
+    # \param self The \e %FeatureInteractionScoreCombiner instance to initialize.
     # \param comb 
-    #
+    # 
     def __init__(comb: FeatureInteractionScoreCombiner) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScoreCombiner instance.
-    # \param score1 
-    # \param score2 
-    # \param comb_func 
-    #
+    # \brief Constructs a <tt>FeatureInteractionScoreCombiner</tt> that combines the score values calculated by two feature interaction scoring functions.
+    # 
+    # \param score1 The first interaction scoring function.
+    # \param score2 The second interaction scoring function.
+    # \param comb_func The function calculating the final score value.
+    # 
     def __init__(score1: FeatureInteractionScore, score2: FeatureInteractionScore, comb_func: DoubleDouble2Functor) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreCombiner instance \a con.
-    # \param con The \e %FeatureInteractionScoreCombiner instance to copy.
-    # \return \a self
+    # \brief 
+    # \param con 
+    # \return 
     #
     def assign(con: FeatureInteractionScoreCombiner) -> FeatureInteractionScoreCombiner: pass

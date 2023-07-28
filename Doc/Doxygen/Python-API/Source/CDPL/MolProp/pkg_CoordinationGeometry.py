@@ -20,91 +20,91 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants used to specify the spatial geometry of atom arrangements around a common central atom.
+# 
 class CoordinationGeometry(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies undefined or unknown geometry.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that a geometry cannot be assigned due to the lack of enough (>1) defining entities.
+    # 
     NONE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>linear</em> geometry.
+    # 
     LINEAR = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>trigonal planar</em> geometry.
+    # 
     TRIGONAL_PLANAR = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>tetrahedral</em> geometry.
+    # 
     TETRAHEDRAL = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>trigonal bipyramidal</em> geometry.
+    # 
     TRIGONAL_BIPYRAMIDAL = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>octahedral</em> geometry.
+    # 
     OCTAHEDRAL = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>pentagonal bipyramidal</em> geometry.
+    # 
     PENTAGONAL_BIPYRAMIDAL = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>square antiprismatic</em> geometry.
+    # 
     SQUARE_ANTIPRISMATIC = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>bent</em> geometry.
+    # 
     BENT = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>trigonal pyramidal</em> geometry.
+    # 
     TRIGONAL_PYRAMIDAL = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>square planar</em> geometry.
+    # 
     SQUARE_PLANAR = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>square pyramidal</em> geometry.
+    # 
     SQUARE_PYRAMIDAL = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>T-shaped</em> geometry.
+    # 
     T_SHAPED = 13
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>seesaw</em> geometry.
+    # 
     SEESAW = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>pentagonal pyramidal</em> geometry.
+    # 
     PENTAGONAL_PYRAMIDAL = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>pentagonal planar</em> geometry.
+    # 
     PENTAGONAL_PLANAR = 16

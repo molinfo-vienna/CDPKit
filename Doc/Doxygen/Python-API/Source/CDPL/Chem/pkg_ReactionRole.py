@@ -20,36 +20,36 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the role of molecules (components) in a chemical reaction.
+# 
 class ReactionRole(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that a molecule is not a reaction component.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies reactants, agents and products of a reaction.
+    # 
     ALL = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the agents of a reaction (e.g. solvent or catalyst).
+    # 
     AGENT = 2
 
     ##
-    # \brief 
-    #
+    # \brief Equivalent to ReactionRole.AGENT.
+    # 
     CATALYST = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the products of a reaction.
+    # 
     PRODUCT = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the reactants of a reaction.
+    # 
     REACTANT = 1

@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of gzip-compressed molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESGZMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SMILESGZMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %SMILESGZMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

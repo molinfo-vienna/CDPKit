@@ -26,32 +26,35 @@ class AlignedColorTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AlignedColorTverskyScore instance.
+    # \param self The \e %AlignedColorTverskyScore instance to initialize.
     # \param beta 
-    #
+    # 
     def __init__(beta: float = 0.95) -> None: pass
 
     ##
     # \brief Initializes the \e %AlignedColorTverskyScore instance.
+    # \param self The \e %AlignedColorTverskyScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: AlignedColorTverskyScore) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AlignedColorTverskyScore instance this method is called upon.
+    # 
     # Different Python \e %AlignedColorTverskyScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AlignedColorTverskyScore instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AlignedColorTverskyScore instance \a score.
-    # \param score The \e %AlignedColorTverskyScore instance to copy.
-    # \return \a self
+    # \brief 
+    # \param score 
+    # \return 
     #
     def assign(score: AlignedColorTverskyScore) -> AlignedColorTverskyScore: pass
 
@@ -62,7 +65,4 @@ class AlignedColorTverskyScore(Boost.Python.instance):
     #
     def __call__(res: AlignmentResult) -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

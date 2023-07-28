@@ -20,25 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
+# 
 class MMFF94BondTypeIndexFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
-    #
+    # \param self The \e %MMFF94BondTypeIndexFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
+    # \param self The \e %MMFF94BondTypeIndexFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
+    # \param arg1 The \e %MMFF94BondTypeIndexFunction instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

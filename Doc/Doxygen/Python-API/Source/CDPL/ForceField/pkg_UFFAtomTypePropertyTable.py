@@ -31,17 +31,20 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param atom_type 
         # \param atom_type_sym 
         # \param atomic_no 
@@ -51,25 +54,26 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         # \param vdw_energy 
         # \param vdw_scale 
         # \param eff_charge 
-        #
+        # 
         def __init__(atom_type: int, atom_type_sym: str, atomic_no: int, bond_rad: float, bond_ang: float, vdw_dist: float, vdw_energy: float, vdw_scale: float, eff_charge: float) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -139,77 +143,62 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         #
         def __bool__() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         atomType = property(getAtomType)
 
-        ##
-        # \brief 
-        #
         atomicNumber = property(getAtomicNumber)
 
-        ##
-        # \brief 
-        #
         atomTypeSymbol = property(getAtomTypeSymbol)
 
-        ##
-        # \brief 
-        #
         bondRadius = property(getBondRadius)
 
-        ##
-        # \brief 
-        #
         bondAngle = property(getBondAngle)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         vdwDistance = property(getVdwDistance)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         vdwEnergy = property(getVdwEnergy)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         vdwScale = property(getVdwScale)
 
-        ##
-        # \brief 
-        #
         effectiveCharge = property(getEffectiveCharge)
 
     ##
     # \brief Initializes the \e %UFFAtomTypePropertyTable instance.
-    #
+    # \param self The \e %UFFAtomTypePropertyTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UFFAtomTypePropertyTable instance.
+    # \param self The \e %UFFAtomTypePropertyTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: UFFAtomTypePropertyTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %UFFAtomTypePropertyTable instance this method is called upon.
+    # 
     # Different Python \e %UFFAtomTypePropertyTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %UFFAtomTypePropertyTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -263,9 +252,9 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %UFFAtomTypePropertyTable instance \a table.
-    # \param table The \e %UFFAtomTypePropertyTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param table 
+    # \return 
     #
     def assign(table: UFFAtomTypePropertyTable) -> UFFAtomTypePropertyTable: pass
 
@@ -284,17 +273,8 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     @staticmethod
     def get(: ) -> UFFAtomTypePropertyTable: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

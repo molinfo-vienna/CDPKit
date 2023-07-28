@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief GRAILDataSetGenerator.
+# 
+# \see [\ref GRAIL]
+# 
 class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
@@ -31,31 +33,34 @@ class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GRAILDataSetGenerator instance.
-    #
+    # \param self The \e %GRAILDataSetGenerator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GRAILDataSetGenerator instance.
+    # \param self The \e %GRAILDataSetGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: GRAILDataSetGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GRAILDataSetGenerator instance this method is called upon.
+    # 
     # Different Python \e %GRAILDataSetGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GRAILDataSetGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDataSetGenerator instance \a gen.
-    # \param gen The \e %GRAILDataSetGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: GRAILDataSetGenerator) -> GRAILDataSetGenerator: pass
 
@@ -293,67 +298,52 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     #
     def calcAtomDensityGrid(atoms: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, grid_name: str) -> CDPL.Grid.DRegularGrid: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     normalizedScores = property(getNormalizedScores, setNormalizedScores)
 
-    ##
-    # \brief 
-    #
     scoreCombinationFunction = property(getScoreCombinationFunction, setScoreCombinationFunction)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     pharmProcessingFunction = property(getPharmProcessingFunction, setPharmProcessingFunction)
 
-    ##
-    # \brief 
-    #
     gridStepSize = property(getGridStepSize, setGridStepSize)
 
-    ##
-    # \brief 
-    #
     gridXSize = property(getGridXSize, setGridXSize)
 
-    ##
-    # \brief 
-    #
     gridYSize = property(getGridYSize, setGridYSize)
 
-    ##
-    # \brief 
-    #
     gridZSize = property(getGridZSize, setGridZSize)
 
-    ##
-    # \brief 
-    #
     gridTransform = property(getGridTransform, setGridTransform)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     pharmGenerator = property(getPharmGenerator)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     dimScoresByAtomDensity = property(getDimScoresByAtomDensity, setDimScoresByAtomDensity)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     storeEnvAtomDensityGrid = property(getStoreEnvAtomDensityGrid, setStoreEnvAtomDensityGrid)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     envAtomDensityGridName = property(getEnvAtomDensityGridName, setEnvAtomDensityGridName)

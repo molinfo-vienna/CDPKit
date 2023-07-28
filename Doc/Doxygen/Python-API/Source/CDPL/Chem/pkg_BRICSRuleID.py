@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the identification of BRICS fragmentation rules.
+# 
+# \see [\ref BRICS]
+# 
 class BRICSRuleID(Boost.Python.instance):
 
     ##

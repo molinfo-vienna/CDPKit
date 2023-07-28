@@ -20,31 +20,34 @@
 #
 
 ##
-# \brief 
-#
+# \brief A container for the storage and lookup of Vis.Color objects that are associated with a numeric identifier.
+# 
 class ColorTable(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ColorTable instance.
-    #
+    # \param self The \e %ColorTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ColorTable instance.
+    # \param self The \e %ColorTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: ColorTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ColorTable instance this method is called upon.
+    # 
     # Different Python \e %ColorTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ColorTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -65,9 +68,9 @@ class ColorTable(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ColorTable instance \a map.
-    # \param map The \e %ColorTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param map 
+    # \return 
     #
     def assign(map: ColorTable) -> ColorTable: pass
 
@@ -162,52 +165,41 @@ class ColorTable(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %ColorTable instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: int) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ColorTable instance.
+    # \param self The \e %ColorTable instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == table</tt>.
+    # \param self The \e %ColorTable instance this method is called upon.
     # \param table The \e %object instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(table: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != table</tt>.
+    # \param self The \e %ColorTable instance this method is called upon.
     # \param table The \e %object instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(table: object) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     keys = property(getKeys)
 
-    ##
-    # \brief 
-    #
     values = property(getValues)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

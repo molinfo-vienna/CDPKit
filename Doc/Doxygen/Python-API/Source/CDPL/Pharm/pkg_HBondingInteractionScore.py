@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief HBondingInteractionScore.
+# 
 class HBondingInteractionScore(FeatureInteractionScore):
 
     ##
@@ -46,18 +46,20 @@ class HBondingInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %HBondingInteractionScore instance.
+    # \param self The \e %HBondingInteractionScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: HBondingInteractionScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %HBondingInteractionScore instance.
-    # \param don_acc 
-    # \param min_len 
-    # \param max_len 
-    # \param min_ahd_ang 
-    # \param max_acc_ang 
-    #
+    # \brief Constructs a <tt>HBondingInteractionScore</tt> functor with the specified constraints.
+    # 
+    # \param don_acc <tt>True</tt> if the first feature argument represents the donor- and the second one the acceptor-feature, and <tt>False</tt> otherwise.
+    # \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+    # \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+    # \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
+    # \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
+    # 
     def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 2.8, min_ahd_ang: float = 150.0, max_acc_ang: float = 75.0) -> None: pass
 
     ##
@@ -103,28 +105,16 @@ class HBondingInteractionScore(FeatureInteractionScore):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondingInteractionScore instance \a constr.
-    # \param constr The \e %HBondingInteractionScore instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: HBondingInteractionScore) -> HBondingInteractionScore: pass
 
-    ##
-    # \brief 
-    #
     minLength = property(getMinLength)
 
-    ##
-    # \brief 
-    #
     maxLength = property(getMaxLength)
 
-    ##
-    # \brief 
-    #
     minAHDAngle = property(getMinAHDAngle)
 
-    ##
-    # \brief 
-    #
     maxAcceptorAngle = property(getMaxAcceptorAngle)

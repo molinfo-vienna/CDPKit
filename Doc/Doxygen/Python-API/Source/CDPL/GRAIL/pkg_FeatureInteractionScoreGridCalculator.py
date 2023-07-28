@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureInteractionScoreGridCalculator.
+# 
 class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
@@ -31,7 +31,8 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %MaxScoreFunctor instance.
-        #
+        # \param self The \e %MaxScoreFunctor instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
@@ -48,7 +49,8 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %ScoreSumFunctor instance.
-        #
+        # \param self The \e %ScoreSumFunctor instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
@@ -60,44 +62,49 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
-    #
+    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
+    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
+    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # \param scoring_func 
     # \param comb_func 
-    #
+    # 
     def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
+    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: FeatureInteractionScoreGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeatureInteractionScoreGridCalculator instance this method is called upon.
+    # 
     # Different Python \e %FeatureInteractionScoreGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureInteractionScoreGridCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreGridCalculator instance \a calc.
-    # \param calc The \e %FeatureInteractionScoreGridCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: FeatureInteractionScoreGridCalculator) -> FeatureInteractionScoreGridCalculator: pass
 
@@ -168,32 +175,18 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     #
     def calculate(tgt_ftrs: CDPL.Pharm.FeatureContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     normScores = property(getNormScores, setNormScores)
 
-    ##
-    # \brief 
-    #
     distanceCutoff = property(getDistanceCutoff, setDistanceCutoff)
 
-    ##
-    # \brief 
-    #
     scoringFunction = property(getScoringFunction, setScoringFunction)
 
-    ##
-    # \brief 
-    #
     scoreCombinationFunction = property(getScoreCombinationFunction, setScoreCombinationFunction)
 
-    ##
-    # \brief 
-    #
     featureSelectionPredicate = property(getFeatureSelectionPredicate, setFeatureSelectionPredicate)

@@ -26,25 +26,28 @@ class FragmentLibrary(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentLibrary instance.
-    #
+    # \param self The \e %FragmentLibrary instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentLibrary instance.
+    # \param self The \e %FragmentLibrary instance to initialize.
     # \param lib 
-    #
+    # 
     def __init__(lib: FragmentLibrary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FragmentLibrary instance this method is called upon.
+    # 
     # Different Python \e %FragmentLibrary instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibrary instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -116,9 +119,9 @@ class FragmentLibrary(Boost.Python.instance):
     def save(os: CDPL.Base.OStream) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibrary instance \a lib.
-    # \param lib The \e %FragmentLibrary instance to copy.
-    # \return \a self
+    # \brief 
+    # \param lib 
+    # \return 
     #
     def assign(lib: FragmentLibrary) -> FragmentLibrary: pass
 
@@ -137,17 +140,8 @@ class FragmentLibrary(Boost.Python.instance):
     @staticmethod
     def get(: ) -> FragmentLibrary: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

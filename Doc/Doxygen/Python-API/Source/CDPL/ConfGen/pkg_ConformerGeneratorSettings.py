@@ -25,67 +25,70 @@
 class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    DEFAULT = _UNKNOWN_VALUE_
+    DEFAULT = _HIDDEN_VALUE_
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    SMALL_SET_DIVERSE = _UNKNOWN_VALUE_
+    SMALL_SET_DIVERSE = _HIDDEN_VALUE_
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    MEDIUM_SET_DIVERSE = _UNKNOWN_VALUE_
+    MEDIUM_SET_DIVERSE = _HIDDEN_VALUE_
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    LARGE_SET_DIVERSE = _UNKNOWN_VALUE_
+    LARGE_SET_DIVERSE = _HIDDEN_VALUE_
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    SMALL_SET_DENSE = _UNKNOWN_VALUE_
+    SMALL_SET_DENSE = _HIDDEN_VALUE_
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    MEDIUM_SET_DENSE = _UNKNOWN_VALUE_
+    MEDIUM_SET_DENSE = _HIDDEN_VALUE_
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    LARGE_SET_DENSE = _UNKNOWN_VALUE_
+    LARGE_SET_DENSE = _HIDDEN_VALUE_
 
     ##
     # \brief Initializes the \e %ConformerGeneratorSettings instance.
-    #
+    # \param self The \e %ConformerGeneratorSettings instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerGeneratorSettings instance.
+    # \param self The \e %ConformerGeneratorSettings instance to initialize.
     # \param settings 
-    #
+    # 
     def __init__(settings: ConformerGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
+    # 
     # Different Python \e %ConformerGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConformerGeneratorSettings instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerGeneratorSettings instance \a settings.
-    # \param settings The \e %ConformerGeneratorSettings instance to copy.
-    # \return \a self
+    # \brief 
+    # \param settings 
+    # \return 
     #
     def assign(settings: ConformerGeneratorSettings) -> ConformerGeneratorSettings: pass
 
@@ -359,122 +362,86 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     #
     def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     samplingMode = property(getSamplingMode, setSamplingMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     sampleHetAtomHydrogens = property(getSampleHetAtomHydrogens, setSampleHetAtomHydrogens)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     enumRings = property(getEnumRings, setEnumRings)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     nitrogenEnumMode = property(getNitrogenEnumMode, setNitrogenEnumMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     includeInputCoords = property(getIncludeInputCoords, setIncludeInputCoords)
 
-    ##
-    # \brief 
-    #
     energyWindow = property(getEnergyWindow, setEnergyWindow)
 
-    ##
-    # \brief 
-    #
     maxPoolSize = property(getMaxPoolSize, setMaxPoolSize)
 
-    ##
-    # \brief 
-    #
     timeout = property(getTimeout, setTimeout)
 
-    ##
-    # \brief 
-    #
     forceFieldTypeSystematic = property(getForceFieldTypeSystematic, setForceFieldTypeSystematic)
 
-    ##
-    # \brief 
-    #
     forceFieldTypeStochastic = property(getForceFieldTypeStochastic, setForceFieldTypeStochastic)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
-    ##
-    # \brief 
-    #
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
-    ##
-    # \brief 
-    #
     distanceExponent = property(getDistanceExponent, setDistanceExponent)
 
-    ##
-    # \brief 
-    #
     maxNumOutputConformers = property(getMaxNumOutputConformers, setMaxNumOutputConformers)
 
-    ##
-    # \brief 
-    #
     minRMSD = property(getMinRMSD, setMinRMSD)
 
-    ##
-    # \brief 
-    #
     maxNumRefinementIterations = property(getMaxNumRefinementIterations, setMaxNumRefinementIterations)
 
-    ##
-    # \brief 
-    #
     refinementTolerance = property(getRefinementTolerance, setRefinementTolerance)
 
-    ##
-    # \brief 
-    #
     maxNumSampledConformers = property(getMaxNumSampledConformers, setMaxNumSampledConformers)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     convCheckCycleSize = property(getConvCheckCycleSize, setConvCheckCycleSize)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
 
-    ##
-    # \brief 
-    #
     fragmentBuildSettings = property(getFragmentBuildSettings)

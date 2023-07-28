@@ -20,20 +20,25 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureContainer.
+# 
 class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer):
 
     ##
     # \brief Initializes the \e %FeatureContainer instance.
-    #
+    # \param self The \e %FeatureContainer instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the pharmacophore feature at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the feature to return.
+    # 
+    # \return A reference to the feature at the specified index. 
+    # 
+    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # 
     def getFeature(idx: int) -> Feature: pass
 
     ##
@@ -51,36 +56,44 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
     def getFeatureIndex(ftr: Feature) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of contained features.
+    # 
+    # \return The number of features.
+    # 
     def getNumFeatures() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the entity at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the Chem.Entity3D instance to return.
+    # 
+    # \return A reference to the entity at the specified index. 
+    # 
+    # \throw Base.IndexError if the number of entities is zero or <em>idx</em> is not in the range [0, getNumEntities() - 1].
+    # 
     def getEntity(idx: int) -> CDPL.Chem.Entity3D: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored Chem.Entity3D objects.
+    # 
+    # \return The number of stored Chem.Entity3D objects.
+    # 
     def getNumEntities() -> int: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
+    # \param self The \e %FeatureContainer instance this method is called upon.
     # \param ftr The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(ftr: Feature) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %FeatureContainer instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
@@ -117,7 +130,4 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
     #
     def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
-    ##
-    # \brief 
-    #
     numFeatures = property(getNumFeatures)

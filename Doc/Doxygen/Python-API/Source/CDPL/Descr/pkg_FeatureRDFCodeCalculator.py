@@ -20,44 +20,49 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureRDFCodeCalculator.
+# 
+# \see [\ref CITB, \ref HBMD]
+# 
 class FeatureRDFCodeCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
-    #
+    # \brief Constructs the <tt>FeatureRDFCodeCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
+    # \param self The \e %FeatureRDFCodeCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: FeatureRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
+    # \param self The \e %FeatureRDFCodeCalculator instance to initialize.
     # \param cntnr 
     # \param rdf_code 
-    #
+    # 
     def __init__(cntnr: CDPL.Pharm.FeatureContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
+    # 
     # Different Python \e %FeatureRDFCodeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureRDFCodeCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureRDFCodeCalculator instance \a calc.
-    # \param calc The \e %FeatureRDFCodeCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
 
@@ -152,37 +157,20 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     #
     def calculate(cntnr: CDPL.Pharm.FeatureContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     distanceToIntervalCenterRounding = property(getDistanceToIntervalCenterRounding, setDistanceToIntervalCenterRounding)
 
-    ##
-    # \brief 
-    #
     smoothingFactor = property(getSmoothingFactor, setSmoothingFactor)
 
-    ##
-    # \brief 
-    #
     scalingFactor = property(getScalingFactor, setScalingFactor)
 
-    ##
-    # \brief 
-    #
     startRadius = property(getStartRadius, setStartRadius)
 
-    ##
-    # \brief 
-    #
     radiusIncrement = property(getRadiusIncrement, setRadiusIncrement)
 
-    ##
-    # \brief 
-    #
     numSteps = property(getNumSteps, setNumSteps)

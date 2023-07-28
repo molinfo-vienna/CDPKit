@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format version.
+# 
 class PDBFormatVersion(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the data format version is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the PDB format version <em>V2</em>.
+    # 
     V2 = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the PDB format version <em>V3</em>.
+    # 
     V3 = 3

@@ -20,84 +20,107 @@
 #
 
 ##
-# \brief 
-#
+# \brief A data type for the storage and lookup of arbitrary bond to bond mappings.
+# 
+# Bonds mappings are stored as pairs of references to the mapped Chem.Bond objects. Mappings do not have to be unique and multiple mappings of a given bond to other bonds are possible. If a mapping entry for a particular bond does not exist, the methods BondMapping.getValue() and BondMapping.operator[]() return a <em>None</em> reference to indicate that the lookup of the mapped bond has failed.
+# 
 class BondMapping(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BondMapping instance.
-    #
+    # \brief Creates an empty map.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BondMapping instance.
+    # \param self The \e %BondMapping instance to initialize.
     # \param mapping 
-    #
+    # 
     def __init__(mapping: BondMapping) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %BondMapping instance this method is called upon.
+    # 
     # Different Python \e %BondMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondMapping instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the size (number of entries) of the map.
+    # 
+    # \return The size of the map.
+    # 
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether the map is empty (getSize() == 0).
+    # 
+    # \return <tt>True</tt> if the map is empty, and <tt>False</tt> otherwise.
+    # 
     def isEmpty() -> bool: pass
 
     ##
-    # \brief 
-    #
+    # \brief Erases all entries.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMapping instance \a map.
-    # \param map The \e %BondMapping instance to copy.
-    # \return \a self
+    # \brief 
+    # \param map 
+    # \return 
     #
     def assign(map: BondMapping) -> BondMapping: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
+    # \brief Returns a reference to the first value associated with the specified key.
+    # 
+    # If the map contains the specified entry, a reference to the associated value is returned. If the map does not contain the entry and default values are enabled (that is, the template parameter <em>AllowDefValues</em> is <tt>True</tt>), a reference to a default constructed value object is returned. Otherwise, Base.ItemNotFound is thrown to indicate the error.
+    # 
+    # \param key The key associated with the requested value.
+    # 
+    # \return A reference to the requested value. 
+    # 
+    # \throw Base.ItemNotFound if <em>AllowDefValues</em> is <tt>False</tt> and the map does not contain an entry with the specified key.
+    # 
+    # \see getValue(const Key&) const
+    # 
     def getValue(key: Bond) -> Bond: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \param def_value 
-    # \return 
-    #
+    # \brief Returns a reference to the first value associated with the specified key, or the value given by the second argument if an entry with the given key does not exist.
+    # 
+    # If the map contains an entry with the specified key, a reference to the associated value is returned. If the map does not contain the entry, the second argument <em>def_value</em> is returned.
+    # 
+    # \param key The key associated with the requested value.
+    # \param def_value The value which is returned if the specified entry does not exist.
+    # 
+    # \return A reference to the requested or default value.
+    # 
     def getValue(key: Bond, def_value: Bond) -> Bond: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
+    # \brief Removes the first entry with the specified key from the map.
+    # 
+    # \param key The key specifying the entry to remove.
+    # 
     def removeEntry(key: Bond) -> bool: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
+    # \brief Replaces all entries with a key equivalent to <em>key</em> with a single copy of the key/value pair (<em>key</em>, <em>value</em>).
+    # 
+    # If no entries with a key equivalent to the specified key exist, <tt>setEntry(k, v)</tt> is equivalent to <tt>insertEntry(k, v)</tt>.
+    # 
+    # \param key The key of the entries to replace.
+    # \param value The value associated with <em>key</em>.
+    # 
+    # \return An iterator that points to the entry with a key that is equivalent to the specified key.
+    # 
     def setEntry(key: Bond, value: Bond) -> None: pass
 
     ##
@@ -126,24 +149,31 @@ class BondMapping(Boost.Python.instance):
     def getEntries() -> object: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
+    # \brief Returns the number of entries with the specified key.
+    # 
+    # \param key The key of the entries to count.
+    # 
+    # \return The number of entries with the specified key.
+    # 
     def getNumEntries(key: Bond) -> int: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
+    # \brief Removes all entries with the specified key from the map.
+    # 
+    # \param key The key specifying the entries to remove.
+    # 
+    # \return The number of removed entries.
+    # 
     def removeEntries(key: Bond) -> int: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
+    # \brief Inserts a new entry with specified key and value into the map.
+    # 
+    # \param key The key of the entry to insert.
+    # \param value The value associated with <em>key</em>
+    # 
+    # \return An iterator pointing to the inserted entry.
+    # 
     def insertEntry(key: Bond, value: Bond) -> None: pass
 
     ##
@@ -175,32 +205,18 @@ class BondMapping(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %BondMapping instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: Bond) -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     keys = property(getKeys)
 
-    ##
-    # \brief 
-    #
     values = property(getValues)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

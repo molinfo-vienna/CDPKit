@@ -20,12 +20,17 @@
 #
 
 ##
-# \brief 
-#
+# \brief Creates 2D structure diagrams of molecular graphs in the <em>PostScript (PS)</em> [\ref WPS] format.
+# 
+# <tt>PSMolecularGraphWriter</tt> uses Vis.StructureView2D for the creation of 2D structure diagrams. All control-parameters and properties provided for the customization of Vis.StructureView2D are also supported by <tt>PSMolecularGraphWriter</tt>.
+# 
 class PSMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %PSMolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>PSMolecularGraphWriter</tt> instance that will write the image data to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
+    # \note To ensure the validity of the written data, it is recommended to open the output stream in binary mode.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

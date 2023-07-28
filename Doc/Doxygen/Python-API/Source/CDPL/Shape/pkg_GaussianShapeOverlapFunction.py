@@ -26,19 +26,21 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeOverlapFunction instance.
-    #
+    # \param self The \e %GaussianShapeOverlapFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
+    # 
     # Different Python \e %GaussianShapeOverlapFunction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeOverlapFunction instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -127,17 +129,8 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     #
     def calcOverlapGradient(coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     colorMatchFunction = property(getColorMatchFunction, setColorMatchFunction)
 
-    ##
-    # \brief 
-    #
     colorFilterFunction = property(getColorFilterFunction, setColorFilterFunction)

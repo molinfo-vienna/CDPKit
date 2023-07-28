@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for reaction data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %CDFReactionReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>CDFReactionReader</tt> instance that will read the reaction data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

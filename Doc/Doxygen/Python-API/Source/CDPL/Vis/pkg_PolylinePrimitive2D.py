@@ -20,41 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief A graphics primitive representing a set of connected line segments.
+# 
 class PolylinePrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
-    # \brief Initializes the \e %PolylinePrimitive2D instance.
-    #
+    # \brief Constructs an empty polyline primitive.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PolylinePrimitive2D instance.
+    # \param self The \e %PolylinePrimitive2D instance to initialize.
     # \param prim 
-    #
+    # 
     def __init__(prim: PolylinePrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PolylinePrimitive2D instance \a prim.
-    # \param prim The \e %PolylinePrimitive2D instance to copy.
-    # \return \a self
+    # \brief 
+    # \param prim 
+    # \return 
     #
     def assign(prim: PolylinePrimitive2D) -> PolylinePrimitive2D: pass
 
     ##
-    # \brief 
-    # \param pen 
-    #
+    # \brief Sets the pen defining the color, width, line style, join style and cap style of the line segments.
+    # 
+    # \param pen The pen defining the color, width, line style, join style and cap style of the line segments.
+    # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pen defining the color, width, line style, join style and cap style of the line segments.
+    # 
+    # \return The pen defining the color, width, line style, join style and cap style of the line segments.
+    # 
     def getPen() -> Pen: pass
 
-    ##
-    # \brief 
-    #
     pen = property(getPen, setPen)

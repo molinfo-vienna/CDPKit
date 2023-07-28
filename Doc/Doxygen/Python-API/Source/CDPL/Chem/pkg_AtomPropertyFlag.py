@@ -20,86 +20,86 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags for the specification of basic Chem.Atom properties.
+# 
 class AtomPropertyFlag(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Represents an empty set of atom properties.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Represents the default set of atom properties.
+    # 
     DEFAULT = 2147483648
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the membership of an atom in aromatic rings.
+    # 
     AROMATICITY = 128
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the generic type or element of an atom.
+    # 
     TYPE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the <em>CIP</em>-configuration of a chiral atom.
+    # 
     CIP_CONFIGURATION = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the configuration of a stereogenic atom.
+    # 
     CONFIGURATION = 256
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the formal charge of an atom.
+    # 
     FORMAL_CHARGE = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hydrogen count of an atom.
+    # 
     H_COUNT = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the heavy bond count of an atom.
+    # 
     HEAVY_BOND_COUNT = 1024
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the explicit bond count of an atom.
+    # 
     EXPLICIT_BOND_COUNT = 4096
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the valence of an atom.
+    # 
     VALENCE = 2048
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the isotopic mass of an atom.
+    # 
     ISOTOPE = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the symbol of an atom's element.
+    # 
     SYMBOL = 32
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the ring/chain topology of an atom.
+    # 
     TOPOLOGY = 64
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state an atom.
+    # 
     HYBRIDIZATION_STATE = 8192
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the atom-mapping ID an atom in a reaction.
+    # 
     ATOM_MAPPING_ID = 512

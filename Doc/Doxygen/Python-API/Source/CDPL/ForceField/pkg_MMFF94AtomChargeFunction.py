@@ -20,25 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
+# 
 class MMFF94AtomChargeFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94AtomChargeFunction instance.
-    #
+    # \param self The \e %MMFF94AtomChargeFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94AtomChargeFunction instance.
+    # \param self The \e %MMFF94AtomChargeFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94AtomChargeFunction instance.
+    # \param arg1 The \e %MMFF94AtomChargeFunction instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

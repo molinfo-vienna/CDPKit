@@ -57,14 +57,14 @@ namespace CDPL
             typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
 
             /**
-             * \brief Constructs a \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.
+             * \brief Constructs a \c %NOTMatchExpression object that wraps the match expression instance specified by \a expr_ptr.
              * \param expr_ptr A pointer to the wrapped Chem::MatchExpression instance.
              */
             NOTMatchExpression(const typename MatchExpression<ObjType1, ObjType2>::SharedPointer& expr_ptr):
                 expression(expr_ptr) {}
 
             /**
-             * Performs an evaluation of the wrapped match expression for the given query and target objects and returns the inverted result.
+             * \brief Performs an evaluation of the wrapped match expression for the given query and target objects and returns the inverted result.
              *
              * \param query_obj1 The primary query object.
              * \param query_obj2 The secondary query object.
@@ -77,7 +77,7 @@ namespace CDPL
                             const Base::Any& aux_data) const;
 
             /**
-             * Performs an evaluation of the wrapped match expression for the given query and target objects under consideration of the
+             * \brief Performs an evaluation of the wrapped match expression for the given query and target objects under consideration of the
              * provided candidate atom/bond mapping and returns the inverted result.
              *
              * \param query_obj1 The primary query object.
@@ -125,7 +125,7 @@ namespace CDPL
                 expression(expr_ptr) {}
 
             /**
-             * Performs an evaluation of the wrapped match expression for the given query and target objects and returns the inverted result.
+             * \brief Performs an evaluation of the wrapped match expression for the given query and target objects and returns the inverted result.
              *
              * \param query_obj The query object.
              * \param target_obj The target object.
@@ -135,8 +135,8 @@ namespace CDPL
             bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
             /**
-             * Performs an evaluation of the wrapped match expression for the given query and target objects under consideration of the
-             * provided candidate atom/bond mapping and returns the inverted result.
+             * \brief Performs an evaluation of the wrapped match expression for the given query and target objects under consideration of the
+             *        provided candidate atom/bond mapping and returns the inverted result.
              *
              * \param query_obj The query object.
              * \param target_obj The target object.

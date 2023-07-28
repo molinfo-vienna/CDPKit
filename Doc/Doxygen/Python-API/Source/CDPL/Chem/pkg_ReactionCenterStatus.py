@@ -20,56 +20,58 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags that are used to describe state changes of atoms and bonds in a reaction center.
+# 
+# \note The flags ReactionCenterStatus.IS_CENTER, ReactionCenterStatus.BOND_MADE, ReactionCenterStatus.BOND_BROKEN, and ReactionCenterStatus.BOND_ORDER_CHANGE may be combined by bitwise OR operations to obtain a composite reaction center state.
+# 
 class ReactionCenterStatus(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom or bond is not part of the reaction center.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond is broken by the reaction.
+    # 
     BOND_BROKEN = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond is made by the reaction.
+    # 
     BOND_MADE = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond order is changed by the reaction.
+    # 
     BOND_ORDER_CHANGE = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the change of the atom is exactly as specified.
+    # 
     EXACT_CHANGE = 128
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond is part of the reaction center.
+    # 
     IS_CENTER = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies for bonds in a reaction substructure search query that matching target bonds must not be part of a reaction center.
+    # 
     NO_CENTER = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the bond is left unaltered by the reaction.
+    # 
     NO_CHANGE = 32
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the configuration of the atom is inverted by the reaction.
+    # 
     STEREO_INVERSION = 64
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the configuration of the atom is retained in the reaction.
+    # 
     STEREO_RETENTION = 128

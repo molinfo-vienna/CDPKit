@@ -31,70 +31,76 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param parent_type 
         # \param h_atom_type 
-        #
+        # 
         def __init__(parent_type: str, h_atom_type: str) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         parentAtomType = property(getParentAtomType)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         hydrogenAtomType = property(getHydrogenAtomType)
 
     ##
     # \brief Initializes the \e %MMFF94HeavyToHydrogenAtomTypeMap instance.
-    #
+    # \param self The \e %MMFF94HeavyToHydrogenAtomTypeMap instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94HeavyToHydrogenAtomTypeMap instance.
+    # \param self The \e %MMFF94HeavyToHydrogenAtomTypeMap instance to initialize.
     # \param map 
-    #
+    # 
     def __init__(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94HeavyToHydrogenAtomTypeMap instance this method is called upon.
+    # 
     # Different Python \e %MMFF94HeavyToHydrogenAtomTypeMap instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94HeavyToHydrogenAtomTypeMap instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -147,9 +153,9 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94HeavyToHydrogenAtomTypeMap instance \a map.
-    # \param map The \e %MMFF94HeavyToHydrogenAtomTypeMap instance to copy.
-    # \return \a self
+    # \brief 
+    # \param map 
+    # \return 
     #
     def assign(map: MMFF94HeavyToHydrogenAtomTypeMap) -> MMFF94HeavyToHydrogenAtomTypeMap: pass
 
@@ -168,17 +174,8 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
     @staticmethod
     def get(: ) -> MMFF94HeavyToHydrogenAtomTypeMap: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

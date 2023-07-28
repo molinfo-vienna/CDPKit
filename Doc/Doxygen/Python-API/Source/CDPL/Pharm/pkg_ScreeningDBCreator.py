@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A class for the creation of optimized pharmacophore screening databases.
+# 
 class ScreeningDBCreator(Boost.Python.instance):
 
     ##
@@ -46,19 +46,21 @@ class ScreeningDBCreator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningDBCreator instance.
-    #
+    # \param self The \e %ScreeningDBCreator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ScreeningDBCreator instance this method is called upon.
+    # 
     # Different Python \e %ScreeningDBCreator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningDBCreator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -131,42 +133,22 @@ class ScreeningDBCreator(Boost.Python.instance):
     #
     def getDatabaseName() -> str: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     mode = property(getMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     allowDuplicates = property(getAllowDuplicates)
 
-    ##
-    # \brief 
-    #
     numProcessed = property(getNumProcessed)
 
-    ##
-    # \brief 
-    #
     numRejected = property(getNumRejected)
 
-    ##
-    # \brief 
-    #
     numDeleted = property(getNumDeleted)
 
-    ##
-    # \brief 
-    #
     numInserted = property(getNumInserted)
 
-    ##
-    # \brief 
-    #
     databaseName = property(getDatabaseName)

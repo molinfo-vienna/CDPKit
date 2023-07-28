@@ -20,25 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief BondReactionCenterStatusMatchExpression.
+# 
 class BondReactionCenterStatusMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondReactionCenterStatusMatchExpression instance.
+    # \param self The \e %BondReactionCenterStatusMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: BondReactionCenterStatusMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %BondReactionCenterStatusMatchExpression instance.
-    # \param status 
-    #
+    # \brief Constructs a <tt>BondReactionCenterStatusMatchExpression</tt> instance for the specified query reaction center status.
+    # 
+    # \param status The query reaction center status as a (valid) bitwise OR combination of the flags defined in namespace Chem.ReactionCenterStatus. The following flags are supported: Chem.ReactionCenterStatus.NO_CENTER, Chem.ReactionCenterStatus.IS_CENTER, Chem.ReactionCenterStatus.BOND_MADE, Chem.ReactionCenterStatus.BOND_BROKEN, Chem.ReactionCenterStatus.BOND_ORDER_CHANGE and Chem.ReactionCenterStatus.NO_CHANGE - all other flags are ignored. For valid flag combinations see __call__().
+    # 
     def __init__(status: int) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondReactionCenterStatusMatchExpression instance \a expr.
-    # \param expr The \e %BondReactionCenterStatusMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: BondReactionCenterStatusMatchExpression) -> BondReactionCenterStatusMatchExpression: pass

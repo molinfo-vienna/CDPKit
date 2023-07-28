@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief ParallelPiPiInteractionConstraint.
+# 
 class ParallelPiPiInteractionConstraint(Boost.Python.instance):
 
     ##
@@ -46,29 +46,32 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionConstraint instance.
+    # \param self The \e %ParallelPiPiInteractionConstraint instance to initialize.
     # \param constr 
-    #
+    # 
     def __init__(constr: ParallelPiPiInteractionConstraint) -> None: pass
 
     ##
-    # \brief Initializes the \e %ParallelPiPiInteractionConstraint instance.
-    # \param min_v_dist 
-    # \param max_v_dist 
-    # \param max_h_dist 
-    # \param max_ang 
-    #
+    # \brief Constructs a <tt>ParallelPiPiInteractionConstraint</tt> functor with the specified constraints.
+    # 
+    # \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
+    # \param max_v_dist The maximum allowed distance of the two feature-positions orthogonal to the ring-planes.
+    # \param max_h_dist The maximum allowed distance of the feature-position along the their ring-planes.
+    # \param max_ang The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
+    # 
     def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, max_ang: float = 30.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
+    # 
     # Different Python \e %ParallelPiPiInteractionConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ParallelPiPiInteractionConstraint instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -96,9 +99,9 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionConstraint instance \a constr.
-    # \param constr The \e %ParallelPiPiInteractionConstraint instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: ParallelPiPiInteractionConstraint) -> ParallelPiPiInteractionConstraint: pass
 
@@ -110,27 +113,12 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     #
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     minVDistance = property(getMinVDistance)
 
-    ##
-    # \brief 
-    #
     maxVDistance = property(getMaxVDistance)
 
-    ##
-    # \brief 
-    #
     maxHDistance = property(getMaxHDistance)
 
-    ##
-    # \brief 
-    #
     maxAngle = property(getMaxAngle)

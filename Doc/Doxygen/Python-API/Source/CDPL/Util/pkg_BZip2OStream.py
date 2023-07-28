@@ -26,13 +26,15 @@ class BZip2OStream(CDPL.Base.OStream):
 
     ##
     # \brief Initializes the \e %BZip2OStream instance.
-    #
+    # \param self The \e %BZip2OStream instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BZip2OStream instance.
+    # \param self The \e %BZip2OStream instance to initialize.
     # \param os 
-    #
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass
 
     ##
@@ -78,20 +80,24 @@ class BZip2OStream(CDPL.Base.OStream):
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     closed = property(getClosed)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     softspace = property(getSoftspace, setSoftspace)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     mode = property(getMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     modeFlags = property(getModeFlags)

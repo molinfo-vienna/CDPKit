@@ -20,21 +20,23 @@
 #
 
 ##
-# \brief 
-#
+# \brief BondConfigurationMatchExpression.
+# 
 class BondConfigurationMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondConfigurationMatchExpression instance.
+    # \param self The \e %BondConfigurationMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: BondConfigurationMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %BondConfigurationMatchExpression instance.
-    # \param query_stereo_descr 
-    # \param query_bond 
-    # \param not_match 
-    # \param allow_part_maps 
-    #
+    # \brief Constructs an <tt>BondConfigurationMatchExpression</tt> instance for the specified matching mode, cis/trans bond configuration constraints.
+    # 
+    # \param query_stereo_descr The descriptor object specifying the query bond's cis/trans configuration reference atoms and associated configuration constraints on matching target bonds.
+    # \param query_bond The bond for which this <tt>BondConfigurationMatchExpression</tt> instance gets constructed.
+    # \param not_match Specifies whether the configuration of a target bond actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the query configuration constraints.
+    # \param allow_part_maps Specifies whether or not a target bond that has an incomplete query to target neighbor atom/bond mapping shall be considered to match the query configuration constraints. This is important for maximum common substructure searches where the provided query to target mapping may not be complete.
+    # 
     def __init__(query_stereo_descr: StereoDescriptor, query_bond: Bond, not_match: bool, allow_part_maps: bool) -> None: pass

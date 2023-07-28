@@ -26,20 +26,23 @@ class ConformerData(CDPL.Math.Vector3DArray):
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    #
+    # \param self The \e %ConformerData instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerData instance.
+    # \param self The \e %ConformerData instance to initialize.
     # \param data 
-    #
+    # 
     def __init__(data: ConformerData) -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerData instance.
+    # \param self The \e %ConformerData instance to initialize.
     # \param coords 
     # \param energy 
-    #
+    # 
     def __init__(coords: CDPL.Math.Vector3DArray, energy: float = 0.0) -> None: pass
 
     ##
@@ -49,16 +52,16 @@ class ConformerData(CDPL.Math.Vector3DArray):
     def swap(data: ConformerData) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerData instance \a data.
-    # \param data The \e %ConformerData instance to copy.
-    # \return \a self
+    # \brief 
+    # \param data 
+    # \return 
     #
     def assign(data: ConformerData) -> ConformerData: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3DArray instance \a coords.
-    # \param coords The \e %Vector3DArray instance to copy.
-    # \return \a self
+    # \brief 
+    # \param coords 
+    # \return 
     #
     def assign(coords: CDPL.Math.Vector3DArray) -> ConformerData: pass
 
@@ -74,7 +77,4 @@ class ConformerData(CDPL.Math.Vector3DArray):
     #
     def setEnergy(energy: float) -> None: pass
 
-    ##
-    # \brief 
-    #
     energy = property(getEnergy, setEnergy)

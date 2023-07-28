@@ -20,18 +20,26 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in control-parameters.
+# 
 class ControlParameter(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
+    # 
+    # If the control-parameter is set to <tt>True</tt>, not only severe errors cause an I/O operation to fail, but also non-fatal errors from which a recovery would be possible. If the control-parameter is set to <tt>False</tt>, I/O operations will proceed even if a non-fatal error has been detected.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt>
+    # 
     STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=285, name='STRICT_ERROR_CHECKING')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data in <em>PDB</em> [\ref PDB] format.
+    # 
+    # If the control-parameter is set to <tt>True</tt>, the length of data lines that were read from or have to be written to data encoded in one of the above mentioned formats will be checked against the maximum allowed line length. Lines that exceeded the line length limit are considered as an error condition and cause the input or output operation to fail. If <tt>CHECK_LINE_LENGTH</tt> is <tt>False</tt>, the length of data lines will not be checked and has no impact on the success of the performed I/O operation.
+    # 
+    # <b>Value Type:</b> <tt>bool</tt>
+    # 
     CHECK_LINE_LENGTH = CDPL.Base.LookupKey(id=286, name='CHECK_LINE_LENGTH')
 
     ##

@@ -26,7 +26,8 @@ class FileSMILESGZReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %FileSMILESGZReactionReader instance.
+    # \param self The \e %FileSMILESGZReactionReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

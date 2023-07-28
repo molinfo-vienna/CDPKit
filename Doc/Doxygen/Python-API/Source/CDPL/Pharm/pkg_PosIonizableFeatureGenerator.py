@@ -20,33 +20,34 @@
 #
 
 ##
-# \brief 
-#
+# \brief PosIonizableFeatureGenerator.
+# 
 class PosIonizableFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
-    # \brief Initializes the \e %PosIonizableFeatureGenerator instance.
-    # \param chgd_groups_only 
-    #
+    # \brief Constructs the <tt>PosIonizableFeatureGenerator</tt> instance.
+    # 
     def __init__(chgd_groups_only: bool) -> None: pass
 
     ##
     # \brief Initializes the \e %PosIonizableFeatureGenerator instance.
+    # \param self The \e %PosIonizableFeatureGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: PosIonizableFeatureGenerator) -> None: pass
 
     ##
-    # \brief Initializes the \e %PosIonizableFeatureGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    # \param chgd_groups_only 
-    #
+    # \brief Perceives the positive ionizable group features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # \param chgd_groups_only <tt>True</tt> if features shall be generated only for charged groups.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PosIonizableFeatureGenerator instance \a gen.
-    # \param gen The \e %PosIonizableFeatureGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: PosIonizableFeatureGenerator) -> PosIonizableFeatureGenerator: pass

@@ -26,19 +26,22 @@ class InteractionFilterFunction2(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction2 instance.
-    #
+    # \param self The \e %InteractionFilterFunction2 instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction2 instance.
+    # \param self The \e %InteractionFilterFunction2 instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction2 instance.
+    # \param arg1 The \e %InteractionFilterFunction2 instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

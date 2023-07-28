@@ -20,25 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief A generic wrapper class used to store a user-defined Chem.Atom 3D-coordinates function.
+# 
 class Atom3DCoordinatesFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Atom3DCoordinatesFunction instance.
-    #
+    # \param self The \e %Atom3DCoordinatesFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Atom3DCoordinatesFunction instance.
+    # \param self The \e %Atom3DCoordinatesFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %Atom3DCoordinatesFunction instance.
+    # \param arg1 The \e %Atom3DCoordinatesFunction instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

@@ -20,12 +20,20 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
+# <tt>SMARTSReactionReader</tt> supports the following control-parameter:
+# 
+# <table>
+#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
+#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
+# </table>
+# 
 class SMARTSReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %SMARTSReactionReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>SMARTSReactionReader</tt> instance that will read the reaction data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

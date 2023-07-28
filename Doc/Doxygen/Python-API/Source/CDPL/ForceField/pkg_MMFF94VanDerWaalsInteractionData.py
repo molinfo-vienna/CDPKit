@@ -26,25 +26,28 @@ class MMFF94VanDerWaalsInteractionData(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionData instance.
-    #
+    # \param self The \e %MMFF94VanDerWaalsInteractionData instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionData instance.
+    # \param self The \e %MMFF94VanDerWaalsInteractionData instance to initialize.
     # \param ia_data 
-    #
+    # 
     def __init__(ia_data: MMFF94VanDerWaalsInteractionData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94VanDerWaalsInteractionData instance this method is called upon.
+    # 
     # Different Python \e %MMFF94VanDerWaalsInteractionData instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94VanDerWaalsInteractionData instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -84,9 +87,9 @@ class MMFF94VanDerWaalsInteractionData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteractionData instance \a array.
-    # \param array The \e %MMFF94VanDerWaalsInteractionData instance to copy.
-    # \return \a self
+    # \brief 
+    # \param array 
+    # \return 
     #
     def assign(array: MMFF94VanDerWaalsInteractionData) -> MMFF94VanDerWaalsInteractionData: pass
 
@@ -201,12 +204,6 @@ class MMFF94VanDerWaalsInteractionData(Boost.Python.instance):
     #
     def __setitem__(index: int, value: MMFF94VanDerWaalsInteraction) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

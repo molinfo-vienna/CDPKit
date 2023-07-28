@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class SMARTSReactionOutputHandler(ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %SMARTSReactionOutputHandler instance.
-    #
+    # \param self The \e %SMARTSReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

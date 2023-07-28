@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief CompoundDataReader.
+# 
 class CompoundMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundMoleculeReader instance.
-    #
+    # \param self The \e %CompoundMoleculeReader instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
@@ -59,7 +60,4 @@ class CompoundMoleculeReader(MoleculeReaderBase):
     #
     def getReader(idx: int) -> MoleculeReaderBase: pass
 
-    ##
-    # \brief 
-    #
     numReaders = property(getNumReaders)

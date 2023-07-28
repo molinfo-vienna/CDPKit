@@ -31,26 +31,29 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    #
+    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
+    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # \param ref_shape_func 
     # \param ovl_shape_func 
-    #
+    # 
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
+    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FastGaussianShapeOverlapFunction instance \a func.
-    # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
 
@@ -92,15 +95,14 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     proximityOpt = property(getProximityOpt, setProximityOpt)
 
-    ##
-    # \brief 
-    #
     radiusScalingFactor = property(getRadiusScalingFactor, setRadiusScalingFactor)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     fastExpFunc = property(getFastExpFunc, setFastExpFunc)

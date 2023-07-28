@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class SDFMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SDFMoleculeInputHandler instance.
-    #
+    # \param self The \e %SDFMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

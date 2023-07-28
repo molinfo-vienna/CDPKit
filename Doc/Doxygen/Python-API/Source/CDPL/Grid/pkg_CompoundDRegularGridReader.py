@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief CompoundDataReader.
+# 
 class CompoundDRegularGridReader(DRegularGridReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundDRegularGridReader instance.
-    #
+    # \param self The \e %CompoundDRegularGridReader instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
@@ -59,7 +60,4 @@ class CompoundDRegularGridReader(DRegularGridReaderBase):
     #
     def getReader(idx: int) -> DRegularGridReaderBase: pass
 
-    ##
-    # \brief 
-    #
     numReaders = property(getNumReaders)

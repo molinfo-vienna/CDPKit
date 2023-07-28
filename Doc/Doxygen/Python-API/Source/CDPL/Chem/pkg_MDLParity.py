@@ -20,31 +20,31 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the MDL stereo parity of atoms.
+# 
 class MDLParity(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the parity of the atom is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is not a stereogenic center and thus has no defined parity.
+    # 
     NONE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom has an <em>odd</em> parity.
+    # 
     ODD = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom has an <em>even</em> parity.
+    # 
     EVEN = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is a stereogenic center but has no defined parity.
+    # 
     EITHER = 8

@@ -20,25 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
+# 
 class MMFF94NumericAtomTypeFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94NumericAtomTypeFunction instance.
-    #
+    # \param self The \e %MMFF94NumericAtomTypeFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94NumericAtomTypeFunction instance.
+    # \param self The \e %MMFF94NumericAtomTypeFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94NumericAtomTypeFunction instance.
+    # \param arg1 The \e %MMFF94NumericAtomTypeFunction instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

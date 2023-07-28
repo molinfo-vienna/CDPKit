@@ -26,33 +26,37 @@ class MMFF94BondTyper(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94BondTyper instance.
-    #
+    # \param self The \e %MMFF94BondTyper instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \param self The \e %MMFF94BondTyper instance to initialize.
     # \param typer 
-    #
+    # 
     def __init__(typer: MMFF94BondTyper) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \param self The \e %MMFF94BondTyper instance to initialize.
     # \param molgraph 
     # \param types 
     # \param strict 
-    #
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94BondTyper instance this method is called upon.
+    # 
     # Different Python \e %MMFF94BondTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94BondTyper instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -74,21 +78,21 @@ class MMFF94BondTyper(Boost.Python.instance):
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondTyper instance \a typer.
-    # \param typer The \e %MMFF94BondTyper instance to copy.
-    # \return \a self
+    # \brief 
+    # \param typer 
+    # \return 
     #
     def assign(typer: MMFF94BondTyper) -> MMFF94BondTyper: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param types 
-    # \param strict 
-    #
+    # \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.
+    # 
+    # Specifically, an nonstandard bond type index of <em>"1"</em> is assigned whenever a single bond (formal bond order 1) is found a) between non-aromatic atoms <em>i</em> and <em>j</em> of types <em>I</em> and <em>J</em> for which <em>"sbmb"</em> entries in of <em>"1"</em> appear in the "MMFFPROP.PAR" file or b) between aromatic atoms belonging to different aromatic rings (as in the case of the central C-C bond in biphenyl).
+    # 
+    # \param molgraph The molecular graph for which to assign bond type indices
+    # \param types The output array storing the determined bond type indices.
+    # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail.
+    # 
     def perceiveTypes(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray, strict: bool) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

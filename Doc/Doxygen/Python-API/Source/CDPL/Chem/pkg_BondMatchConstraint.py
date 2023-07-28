@@ -20,76 +20,82 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides numerical identifiers for built-in Chem.Bond matching constraints and flags for the specification of bond orders.
+# 
 class BondMatchConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint which requires the target bond to fulfill additional contraints specified by a Chem.MatchConstraintList object.
+    # 
     CONSTRAINT_LIST = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a bond of any order.
+    # 
     ANY_ORDER = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an aromatic bond with delocalized electrons.
+    # 
     AROMATIC = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the aromaticity of the target bond.
+    # 
     AROMATICITY = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the relative direction of the target bond.
+    # 
+    # \see Chem.BondDirection
+    # 
     DIRECTION = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the steric configuration of the target bond that is defined by the relative direction of attached bonds.
+    # 
+    # \see Chem.BondDirection
+    # 
     DIRECTION_CONFIG = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a double bond.
+    # 
     DOUBLE = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the steric configuration of the target bond.
+    # 
     CONFIGURATION = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the target bond must have the specified order even if the bond is aromatic.
+    # 
     IGNORE_AROMATICITY = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the order of the target bond.
+    # 
     ORDER = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the reaction center status of the target bond.
+    # 
+    # \see Chem.ReactionCenterStatus
+    # 
     REACTION_CENTER_STATUS = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint on the ring-membership of the target bond.
+    # 
     RING_TOPOLOGY = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a single bond.
+    # 
     SINGLE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a triple bond.
+    # 
     TRIPLE = 4

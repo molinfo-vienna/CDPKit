@@ -26,19 +26,22 @@ class DoubleVector3D2AtomFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleVector3D2AtomFunctor instance.
-    #
+    # \param self The \e %DoubleVector3D2AtomFunctor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector3D2AtomFunctor instance.
+    # \param self The \e %DoubleVector3D2AtomFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: DoubleVector3D2AtomFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector3D2AtomFunctor instance.
+    # \param arg1 The \e %DoubleVector3D2AtomFunctor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

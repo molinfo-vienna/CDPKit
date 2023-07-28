@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Pharm.FeatureContainer properties.
+# 
 class FeatureContainerProperty(Boost.Python.instance):
 
     ##

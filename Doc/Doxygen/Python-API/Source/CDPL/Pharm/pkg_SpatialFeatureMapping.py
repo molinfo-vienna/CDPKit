@@ -20,38 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief SpatialFeatureMapping.
+# 
 class SpatialFeatureMapping(FeatureMapping):
 
     ##
     # \brief Initializes the \e %SpatialFeatureMapping instance.
+    # \param self The \e %SpatialFeatureMapping instance to initialize.
     # \param mapping 
-    #
+    # 
     def __init__(mapping: SpatialFeatureMapping) -> None: pass
 
     ##
-    # \brief Initializes the \e %SpatialFeatureMapping instance.
-    # \param query_mode 
-    #
+    # \brief Constructs a <tt>SpatialFeatureMapping</tt> instance.
+    # 
+    # \param query_mode If <tt>True</tt>, the reference feature container is interpreted as a query feature container and some of the set default functions will operate in a special query mode.
+    # 
     def __init__(query_mode: bool = False) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
+    # 
     # Different Python \e %SpatialFeatureMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialFeatureMapping instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialFeatureMapping instance \a mapping.
-    # \param mapping The \e %SpatialFeatureMapping instance to copy.
-    # \return \a self
+    # \brief 
+    # \param mapping 
+    # \return 
     #
     def assign(mapping: SpatialFeatureMapping) -> SpatialFeatureMapping: pass
 
@@ -64,39 +67,45 @@ class SpatialFeatureMapping(FeatureMapping):
     def perceive(ref_ftrs: FeatureContainer, aligned_ftrs: FeatureContainer, xform: CDPL.Math.Matrix4D) -> None: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a function for testing the type compatibility of features.
+    # 
+    # \param func The type compatibility test function.
+    # 
     def setTypeMatchFunction(func: BoolFeature2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function that was registered for testing the type compatibility of the features.
+    # 
+    # \return The registered type compatibility test function.
+    # 
     def getTypeMatchFunction() -> BoolFeature2Functor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a function for checking the proximity of mapped feature positions.
+    # 
+    # \param func The position proximity test function.
+    # 
     def setPositionMatchFunction(func: DoubleFeature2Matrix4DFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function that was registered for checking the proximity of mapped feature positions.
+    # 
+    # \return The registered position proximity test function.
+    # 
     def getPositionMatchFunction() -> DoubleFeature2Matrix4DFunctor: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a function for checking the match of mapped feature geometries.
+    # 
+    # \param func The feature geometry match test function.
+    # 
     def setGeometryMatchFunction(func: DoubleFeature2Matrix4DFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the function that was registered for checking the match of mapped feature geometries.
+    # 
+    # \return The registered geometry match test function.
+    # 
     def getGeometryMatchFunction() -> DoubleFeature2Matrix4DFunctor: pass
 
     ##
@@ -115,22 +124,10 @@ class SpatialFeatureMapping(FeatureMapping):
     #
     def getGeometryMatchScore(ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     typeMatchFunction = property(getTypeMatchFunction, setTypeMatchFunction)
 
-    ##
-    # \brief 
-    #
     positionMatchFunction = property(getPositionMatchFunction, setPositionMatchFunction)
 
-    ##
-    # \brief 
-    #
     geometryMatchFunction = property(getGeometryMatchFunction, setGeometryMatchFunction)

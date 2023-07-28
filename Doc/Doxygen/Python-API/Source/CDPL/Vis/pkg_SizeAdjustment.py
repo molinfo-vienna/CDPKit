@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the size adjustment policy for graphical objects within a bounded rectangular area.
+# 
 class SizeAdjustment(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that a graphical object shall be resized to achieve a maximum coverage of the available area.
+    # 
     BEST_FIT = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that a graphical object shall only be resized if its bounds exceed the available area.
+    # 
     IF_REQUIRED = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the size of a graphical object shall be left unchanged.
+    # 
     NONE = 0

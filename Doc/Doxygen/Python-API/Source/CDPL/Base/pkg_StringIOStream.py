@@ -26,16 +26,18 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %StringIOStream instance.
+    # \param self The \e %StringIOStream instance to initialize.
     # \param string 
     # \param mode 
-    #
+    # 
     def __init__(string: str = '', mode: str = 'r+') -> None: pass
 
     ##
     # \brief Initializes the \e %StringIOStream instance.
+    # \param self The \e %StringIOStream instance to initialize.
     # \param string 
     # \param mode 
-    #
+    # 
     def __init__(string: str = '', mode: OpenMode = CDPL.Base.OpenMode(24)) -> None: pass
 
     ##
@@ -159,25 +161,30 @@ class StringIOStream(IOStream):
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     closed = property(getClosed)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     mode = property(getMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     modeFlags = property(getModeFlags)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     softspace = property(getSoftspace, setSoftspace)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     value = property(getValue, setValue)

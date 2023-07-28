@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of gzip-compressed pharmacophore data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFGZPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZPharmacophoreInputHandler instance.
-    #
+    # \param self The \e %CDFGZPharmacophoreInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

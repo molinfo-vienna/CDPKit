@@ -20,18 +20,18 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants used to specify the structural class of H-bond donor atoms.
+# 
 class HBondDonorAtomType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the H-bond donor type of the atom is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is not a H-bond donor.
+    # 
     NONE = 1
 
     ##

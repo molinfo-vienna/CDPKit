@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown when an operation requires or expects a valid reference but a <em>None</em> reference was provided.
+# 
 class NullPointerException(ValueError):
     pass

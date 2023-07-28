@@ -77,8 +77,8 @@ namespace CDPL
             virtual typename ReaderType::SharedPointer createReader(std::istream& is) const = 0;
 
             /**
-             * \brief Creates a Base::DataReader instance that will read the data from the file \a file_name.
-             * \param file_name The name of the file to read from.
+             * \brief Creates a Base::DataReader instance that will read the data from the file specified by \a file_name.
+             * \param file_name The full path of the file to read from.
              * \param mode Flags specifying the file open-mode.
              * \return A shared pointer to the created Base::DataReader instance.
              */

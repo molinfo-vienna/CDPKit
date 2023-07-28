@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESMoleculeInputHandler instance.
-    #
+    # \param self The \e %SMILESMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

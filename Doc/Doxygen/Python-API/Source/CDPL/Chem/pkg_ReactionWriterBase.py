@@ -20,25 +20,38 @@
 #
 
 ##
-# \brief 
-#
+# \brief An interface for writing data objects of type Chem.Reaction to an arbitrary data sink.
+# 
+# <tt>ReactionWriterBase</tt> is the common interface of classes which write objects of type Chem.Reaction to some data sink (e.g. a file) that expects the data to be encoded in a particular storage format.
+# 
+# From the <tt>ReactionWriterBase</tt> interface point of view, the data sink is continuous output stream in which the data objects are written as data records. For the output of a given data object the method write() has to be called with the object passed as an argument.
+# 
+# If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>ReactionWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
+# 
 class ReactionWriterBase(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %ReactionWriterBase instance.
-    #
+    # \param self The \e %ReactionWriterBase instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \param rxn 
-    # \return 
-    #
+    # \brief Writes the Reaction object <em>rxn</em>.
+    # 
+    # \param rxn The Reaction object to write.
+    # 
+    # \return \a self 
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def write(rxn: Reaction) -> ReactionWriterBase: pass
 
     ##
-    # \brief 
-    #
+    # \brief Writes format dependent data (if required) to mark the end of output.
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def close() -> None: pass
 
     ##

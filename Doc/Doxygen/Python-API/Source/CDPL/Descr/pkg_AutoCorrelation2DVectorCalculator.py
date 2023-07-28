@@ -20,78 +20,89 @@
 #
 
 ##
-# \brief 
-#
+# \brief AutoCorrelation2DVectorCalculator.
+# 
+# \see [\ref AUCOR, \ref HBMD]
+# 
 class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
-    #
+    # \brief Constructs the <tt>AutoCorrelation2DVectorCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
+    # \param self The \e %AutoCorrelation2DVectorCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: AutoCorrelation2DVectorCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
-    # \param molgraph 
-    # \param corr_vec 
-    #
+    # \brief Constructs the <tt>AutoCorrelation2DVectorCalculator</tt> instance and calculates the autocorrelation vector of the molecular graph <em>molgraph</em>.
+    # 
+    # The calculated autocorrelation vector can be retrieved by a call to getResult().
+    # 
+    # \param molgraph The molecular graph for which to calculate the autocorrelation vector.
+    # \param corr_vec The calculated autocorrelation vector.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
+    # 
     # Different Python \e %AutoCorrelation2DVectorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AutoCorrelation2DVectorCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AutoCorrelation2DVectorCalculator instance \a calc.
-    # \param calc The \e %AutoCorrelation2DVectorCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: AutoCorrelation2DVectorCalculator) -> AutoCorrelation2DVectorCalculator: pass
 
     ##
-    # \brief 
-    # \param max_dist 
-    #
+    # \brief Allows to specify that maximum bond path length to consider.
+    # 
+    # \param max_dist The maximum considered bond path length.
+    # 
+    # \note The default value is <em>0</em> which signals no path length limit.
+    # 
     def setMaxDistance(max_dist: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the maximum considered bond path length.
+    # 
+    # \return The maximum considered bond path length.
+    # 
     def getMaxDistance() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Allows to specify a custom atom pair weight function.
+    # 
+    # \param func An AutoCorrelation2DVectorCalculator.AtomPairWeightFunction instance that wraps the target function.
+    # 
+    # \note The default atom pair weight function returns the product of the atom types (see namespace Chem.AtomType).
+    # 
     def setAtomPairWeightFunction(func: CDPL.Chem.DoubleAtom2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param corr_vec 
-    #
+    # \brief Calculates the topological autocorrelation vector of the molecular graph <em>molgraph</em>.
+    # 
+    # The elements of the calculated vector provide the sum of the weights of all atom pairs with a topological distance equal to the element index. The size of the vector is limited by the topological diameter of the molecular graph or the specified maximum considered bond path length (\see setMaxDistance()).
+    # 
+    # \param molgraph The molecular graph for which to calculate the autocorrelation vector.
+    # \param corr_vec The calculated autocorrelation vector.
+    # 
     def calculate(molgraph: CDPL.Chem.MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     maxDistance = property(getMaxDistance, setMaxDistance)

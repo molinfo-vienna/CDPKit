@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags for the specification of the MMFF94 parameter set to use.
+# 
 class MMFF94ParameterSet(Boost.Python.instance):
 
     ##

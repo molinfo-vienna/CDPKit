@@ -20,12 +20,17 @@
 #
 
 ##
-# \brief 
-#
+# \brief Creates 2D structure diagrams of molecular graphs in the <em>Portable Network Graphics (PNG)</em> [\ref WPNG] format.
+# 
+# <tt>PNGMolecularGraphWriter</tt> uses Vis.StructureView2D for the creation of 2D structure diagrams. All control-parameters and properties provided for the customization of Vis.StructureView2D are also supported by <tt>PNGMolecularGraphWriter</tt>.
+# 
 class PNGMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %PNGMolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>PNGMolecularGraphWriter</tt> instance that will write the image data to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
+    # \note PNG is a binary format. To avoid data corruption, the output stream has to be opened in binary mode.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

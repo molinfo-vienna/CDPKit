@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
+# 
 class GaussianShape(CDPL.Base.PropertyContainer):
 
     ##
@@ -31,26 +31,28 @@ class GaussianShape(CDPL.Base.PropertyContainer):
 
         ##
         # \brief Initializes the \e %Element instance.
+        # \param self The \e %Element instance to initialize.
         # \param elem 
-        #
+        # 
         def __init__(elem: Element) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Element instance this method is called upon.
+        # 
         # Different Python \e %Element instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Element instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Element instance \a elem.
-        # \param elem The \e %Element instance to copy.
-        # \return \a self
+        # \brief 
+        # \param elem 
+        # \return 
         #
         def assign(elem: Element) -> Element: pass
 
@@ -102,46 +104,33 @@ class GaussianShape(CDPL.Base.PropertyContainer):
         #
         def getHardness() -> float: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         radius = property(getRadius, setRadius)
 
-        ##
-        # \brief 
-        #
         color = property(getColor, setColor)
 
-        ##
-        # \brief 
-        #
         hardness = property(getHardness, setHardness)
 
-        ##
-        # \brief 
-        #
         position = property(getPosition, setPosition)
 
     ##
     # \brief Initializes the \e %GaussianShape instance.
-    #
+    # \param self The \e %GaussianShape instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShape instance.
+    # \param self The \e %GaussianShape instance to initialize.
     # \param shape 
-    #
+    # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShape instance \a shape.
-    # \param shape The \e %GaussianShape instance to copy.
-    # \return \a self
+    # \brief 
+    # \param shape 
+    # \return 
     #
     def assign(shape: GaussianShape) -> GaussianShape: pass
 
@@ -200,9 +189,10 @@ class GaussianShape(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %GaussianShape instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##

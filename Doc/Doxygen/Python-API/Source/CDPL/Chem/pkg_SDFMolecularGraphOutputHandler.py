@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class SDFMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SDFMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %SDFMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

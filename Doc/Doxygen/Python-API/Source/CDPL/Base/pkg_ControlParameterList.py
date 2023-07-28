@@ -20,24 +20,31 @@
 #
 
 ##
-# \brief 
-#
+# \brief A data structure for the storage and lookup of control-parameter values.
+# 
+# \see Base.ControlParameterContainer for a description of the available methods.
+# 
 class ControlParameterList(ControlParameterContainer):
 
     ##
-    # \brief Initializes the \e %ControlParameterList instance.
-    #
+    # \brief Constructs an empty <tt>ControlParameterList</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ControlParameterList instance.
-    # \param cntnr 
-    #
+    # \brief Constructs a copy of the <tt>ControlParameterContainer</tt> instance <em>cntnr</em>.
+    # 
+    # \param cntnr The <tt>ControlParameterContainer</tt> instance to copy.
+    # 
+    # \note Only the control-parameter entries of <em>cntnr</em> are copied. Entries in the parent container of <em>cntnr</em> (if set) will be ignored (see setParent()).
+    # 
     def __init__(cntnr: ControlParameterContainer) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ControlParameterContainer instance \a cntnr.
-    # \param cntnr The \e %ControlParameterContainer instance to copy.
+    # \brief Assignment operator.
+    # 
+    # \param cntnr The <tt>ControlParameterContainer</tt> instance to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(cntnr: ControlParameterContainer) -> ControlParameterList: pass

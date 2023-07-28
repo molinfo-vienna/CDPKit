@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Bond.
+# 
 class Bond(AtomContainer, CDPL.Base.PropertyContainer):
 
     ##
@@ -44,14 +44,16 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
-        #
+        # 
         def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief Initializes the \e %Bond instance.
-    #
+    # \param self The \e %Bond instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
@@ -63,34 +65,40 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
     def getNeighbor(self: Bond, atom: Atom) -> Atom: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the start atom of the bond.
+    # 
+    # \return A reference to the start atom of the bond.
+    # 
     def getBegin() -> Atom: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the end atom of the bond.
+    # 
+    # \return A reference to the end atom of the bond.
+    # 
     def getEnd() -> Atom: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the parent molecule.
+    # 
+    # \return A reference to the parent molecule.
+    # 
     def getMolecule() -> Molecule: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the bond in its parent molecule.
+    # 
+    # \return The zero-based index of the bond.
+    # 
     def getIndex() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Bond instance \a bond.
-    # \param bond The \e %Bond instance to copy.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>bond</em>;.
+    # 
+    # \param bond The bond whose properties get copied.
+    # 
     # \return \a self
-    #
+    # 
     def assign(bond: Bond) -> Bond: pass
 
     ##
@@ -100,30 +108,47 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
     def getAtoms() -> object: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the atom at index <em>idx</em>.
+    # 
+    # The index <em>0</em> specifies the start atom (see getBegin() const) and <em>1</em> the end atom of the bond (see getEnd() const).
+    # 
+    # \param idx The index of the atom to return.
+    # 
+    # \return A reference to the atom at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, 1].
+    # 
     def getAtom(idx: int) -> Atom: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Tells whether the bond is incident to the specified atom.
+    # 
+    # \param atom The atom to check.
+    # 
+    # \return <tt>True</tt> if the bond is incident to the specified atom, and <tt>False</tt> otherwise.
+    # 
     def containsAtom(atom: Atom) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Returns the index of the specified atom.
+    # 
+    # If the specified atom is the start atom of the bond, the index <em>0</em> is returned. For the end atom of the bond, the value <em>1</em> will be returned.
+    # 
+    # \param atom The atom for which to return the index.
+    # 
+    # \return The zero-based index of the specified atom. 
+    # 
+    # \throw Base.ItemNotFound if the bond is not incident to the specified atom.
+    # 
     def getAtomIndex(atom: Atom) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of atoms connected by the bond.
+    # 
+    # Since a bond connects exactly two atoms, the return value is always <em>2</em>.
+    # 
+    # \return The number of atoms connected by the bond (always <em>2</em>).
+    # 
     def getNumAtoms() -> int: pass
 
     ##
@@ -147,16 +172,18 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+    # \param self The \e %Bond instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %Bond instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
@@ -186,27 +213,12 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
     #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    #
     begin = property(getBegin)
 
-    ##
-    # \brief 
-    #
     end = property(getEnd)
 
-    ##
-    # \brief 
-    #
     molecule = property(getMolecule)
 
-    ##
-    # \brief 
-    #
     index = property(getIndex)
 
-    ##
-    # \brief 
-    #
     atoms = property(getAtoms)

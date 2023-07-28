@@ -20,57 +20,60 @@
 #
 
 ##
-# \brief 
-#
+# \brief MatchConstraintList.
+# 
 class MatchConstraintList(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Defines constants that describe the logical type of the match constraint list.
+    # 
     class Type(Boost.Python.enum):
 
         ##
-        # \brief AND_LIST.
-        #
+        # \brief Specifies that all of the match constraints must be fulfilled.
+        # 
         AND_LIST = 0
 
         ##
-        # \brief OR_LIST.
-        #
+        # \brief Specifies that at least one of the match constraints must be fulfilled.
+        # 
         OR_LIST = 2
 
         ##
-        # \brief NOT_AND_LIST.
-        #
+        # \brief Specifies that at least one of the match constraints must not be fulfilled.
+        # 
         NOT_AND_LIST = 1
 
         ##
-        # \brief NOT_OR_LIST.
-        #
+        # \brief Specifies that all of the match constraints must not be fulfilled.
+        # 
         NOT_OR_LIST = 3
 
     ##
     # \brief Initializes the \e %MatchConstraintList instance.
+    # \param self The \e %MatchConstraintList instance to initialize.
     # \param list 
-    #
+    # 
     def __init__(list: MatchConstraintList) -> None: pass
 
     ##
-    # \brief Initializes the \e %MatchConstraintList instance.
-    # \param type 
-    #
+    # \brief Constructs a <tt>MatchConstraintList</tt> object with the specified logical type.
+    # 
+    # \param type The logical type of the match constraint list.
+    # 
     def __init__(type: Type = CDPL.Chem.Type.AND_LIST) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MatchConstraintList instance this method is called upon.
+    # 
     # Different Python \e %MatchConstraintList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MatchConstraintList instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -110,9 +113,9 @@ class MatchConstraintList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraintList instance \a array.
-    # \param array The \e %MatchConstraintList instance to copy.
-    # \return \a self
+    # \brief 
+    # \param array 
+    # \return 
     #
     def assign(array: MatchConstraintList) -> MatchConstraintList: pass
 
@@ -130,18 +133,20 @@ class MatchConstraintList(Boost.Python.instance):
     def addElement(value: MatchConstraint) -> None: pass
 
     ##
-    # \brief 
-    # \param id 
-    # \param rel 
-    #
+    # \brief Appends a new Chem.MatchConstraint element with the given identifier and relational constraint on the values of matching query/target attribute pairs.
+    # 
+    # \param id The identifier of the match constraint.
+    # \param rel The relational constraint on the values of matching query/target attribute pairs.
+    # 
     def addElement(id: int, rel: Relation) -> None: pass
 
     ##
-    # \brief 
-    # \param id 
-    # \param rel 
-    # \param val 
-    #
+    # \brief Appends a new Chem.MatchConstraint element with the given identifier, relational constraint on the values of matching query/target attribute pairs and value of the query attribute.
+    # 
+    # \param id The identifier of the match constraint.
+    # \param rel The relational constraint on the values of matching query/target attribute pairs.
+    # \param val The value of the query attribute.
+    # 
     def addElement(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
 
     ##
@@ -217,15 +222,17 @@ class MatchConstraintList(Boost.Python.instance):
     def setElement(idx: int, value: MatchConstraint) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the logical type of the match constraint list.
+    # 
+    # \return The logical type of the match constraint list.
+    # 
     def getType() -> Type: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Sets the logical type of the match constraint list.
+    # 
+    # \param type The logical type of the match constraint list.
+    # 
     def setType(type: Type) -> None: pass
 
     ##
@@ -256,21 +263,13 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %MatchConstraintList instance.
+    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)
 
-    ##
-    # \brief 
-    #
     type = property(getType, setType)

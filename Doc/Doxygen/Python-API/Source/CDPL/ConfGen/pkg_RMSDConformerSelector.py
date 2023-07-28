@@ -31,19 +31,21 @@ class RMSDConformerSelector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %RMSDConformerSelector instance.
-    #
+    # \param self The \e %RMSDConformerSelector instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %RMSDConformerSelector instance this method is called upon.
+    # 
     # Different Python \e %RMSDConformerSelector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %RMSDConformerSelector instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -111,27 +113,12 @@ class RMSDConformerSelector(Boost.Python.instance):
     #
     def selected(conf_coords: CDPL.Math.Vector3DArray) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     abortCallback = property(getAbortCallback, setAbortCallback)
 
-    ##
-    # \brief 
-    #
     numSymmetryMappings = property(getNumSymmetryMappings)
 
-    ##
-    # \brief 
-    #
     maxNumSymmetryMappings = property(getMaxNumSymmetryMappings, setMaxNumSymmetryMappings)
 
-    ##
-    # \brief 
-    #
     minRMSD = property(getMinRMSD, setMinRMSD)

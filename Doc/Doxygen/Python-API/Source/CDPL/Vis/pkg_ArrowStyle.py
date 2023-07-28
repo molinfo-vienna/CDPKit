@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of reaction arrow styles in 2D depictions of chemical reactions.
+# 
 class ArrowStyle(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that no reaction arrow shall be drawn.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a hollow reaction arrow (interior will be not filled).
+    # 
     REACTION_HOLLOW = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a solid reaction arrow (interior will be filled).
+    # 
     REACTION_SOLID = 1

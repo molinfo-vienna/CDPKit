@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of gzip-compressed molecule data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF] format.
+# 
 class MMTFGZMoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %MMTFGZMoleculeInputHandler instance.
-    #
+    # \param self The \e %MMTFGZMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

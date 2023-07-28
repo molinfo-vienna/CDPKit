@@ -26,7 +26,8 @@ class FileCDFDRegularGridWriter(DRegularGridWriterBase):
 
     ##
     # \brief Initializes the \e %FileCDFDRegularGridWriter instance.
+    # \param self The \e %FileCDFDRegularGridWriter instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass

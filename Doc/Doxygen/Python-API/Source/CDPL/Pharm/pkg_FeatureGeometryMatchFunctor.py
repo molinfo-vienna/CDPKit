@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeatureGeometryMatchFunctor.
+# 
 class FeatureGeometryMatchFunctor(Boost.Python.instance):
 
     ##
@@ -56,37 +56,40 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureGeometryMatchFunctor instance.
+    # \param self The \e %FeatureGeometryMatchFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: FeatureGeometryMatchFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureGeometryMatchFunctor instance.
+    # \param self The \e %FeatureGeometryMatchFunctor instance to initialize.
     # \param max_hba_int_dir_angle 
     # \param max_hba_orient_dev 
     # \param max_hbd_int_dir_dev 
     # \param max_xba_int_dir_dev 
     # \param max_xbd_int_dir_dev 
     # \param max_ar_orient_dev 
-    #
+    # 
     def __init__(max_hba_int_dir_angle: float = 85.0, max_hba_orient_dev: float = 45.0, max_hbd_int_dir_dev: float = 45.0, max_xba_int_dir_dev: float = 45.0, max_xbd_int_dir_dev: float = 45.0, max_ar_orient_dev: float = 45.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeatureGeometryMatchFunctor instance this method is called upon.
+    # 
     # Different Python \e %FeatureGeometryMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureGeometryMatchFunctor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureGeometryMatchFunctor instance \a func.
-    # \param func The \e %FeatureGeometryMatchFunctor instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: FeatureGeometryMatchFunctor) -> FeatureGeometryMatchFunctor: pass
 
@@ -163,53 +166,36 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     def setMaxAROrientationDeviation(angle: float) -> None: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
+    # \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
+    # 
+    # \param ftr1 The first feature.
+    # \param ftr2 The second feature.
+    # 
+    # \return A score from <em>0</em> (=spatial deviation outside the allowed range) and <em>1</em> (optimum match) describing the goodness of the spatial orientation match of the two features.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \param xform 
-    # \return 
-    #
+    # \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
+    # 
+    # \param ftr1 The first feature.
+    # \param ftr2 The second feature.
+    # \param xform The transformation to apply to the spatial orientation of the second feature.
+    # 
+    # \return A score from <em>0</em> (=spatial deviation outside the allowed range) and <em>1</em> (optimum match) describing the goodness of the spatial orientation match of the two features.
+    # 
     def __call__(ftr1: Feature, ftr2: Feature, xform: CDPL.Math.Matrix4D) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     maxHBAInteractionDirAngle = property(getMaxHBAInteractionDirAngle, setMaxHBAInteractionDirAngle)
 
-    ##
-    # \brief 
-    #
     maxHBAOrientationDeviation = property(getMaxHBAOrientationDeviation, setMaxHBAOrientationDeviation)
 
-    ##
-    # \brief 
-    #
     maxHBDInteractionDirDeviation = property(getMaxHBDInteractionDirDeviation, setMaxHBDInteractionDirDeviation)
 
-    ##
-    # \brief 
-    #
     maxXBDInteractionDirDeviation = property(getMaxXBDInteractionDirDeviation, setMaxXBDInteractionDirDeviation)
 
-    ##
-    # \brief 
-    #
     maxXBAInteractionDirDeviation = property(getMaxXBAInteractionDirDeviation, setMaxXBAInteractionDirDeviation)
 
-    ##
-    # \brief 
-    #
     maxAROrientationDeviation = property(getMaxAROrientationDeviation, setMaxAROrientationDeviation)

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Chem.Reaction properties.
+# 
 class ReactionProperty(Boost.Python.instance):
 
     ##

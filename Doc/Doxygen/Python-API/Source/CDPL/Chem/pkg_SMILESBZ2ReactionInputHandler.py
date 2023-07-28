@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of bzip2-compressed reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESBZ2ReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESBZ2ReactionInputHandler instance.
-    #
+    # \param self The \e %SMILESBZ2ReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

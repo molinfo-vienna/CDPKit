@@ -20,87 +20,116 @@
 #
 
 ##
-# \brief 
-#
+# \brief Pharmacophore.
+# 
 class Pharmacophore(FeatureContainer):
 
     ##
     # \brief Initializes the \e %Pharmacophore instance.
-    #
+    # \param self The \e %Pharmacophore instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all features and clears all properties of the pharmacophore.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Creates a new pharmacophore feature and adds it to the pharmacophore.
+    # 
+    # \return A reference to the newly created features.
+    # 
     def addFeature() -> Feature: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the pharmacophore feature at the specified index.
+    # 
+    # \param idx The index of the feature to remove.
+    # 
+    # \throw Base.IndexError if the number of features is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # 
     def removeFeature(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    #
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # 
+    # \param pharm The pharmacophore to copy.
+    # 
     def copy(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    #
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the feature container <em>cntnr</em>.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to copy.
+    # 
     def copy(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    #
+    # \brief Extends the current set of pharmacophore features by a copy of the features in the pharmacophore <em>pharm</em>.
+    # 
+    # \param pharm The pharmacophore providing the features to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    #
+    # \brief Extends the current set of pharmacophore features by a copy of the features in the feature container <em>cntnr</em>.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    #
+    # \brief Removes the pharmacophore features referenced by the feature container <em>cntnr</em> from this <tt>Pharmacophore</tt> instance.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features to remove.
+    # 
+    # \note Does not affect any properties if <tt>this != &cntr</tt>.
+    # 
     def remove(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a pharm.
-    # \param pharm The \e %Pharmacophore instance to copy.
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param pharm The pharmacophore to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(pharm: Pharmacophore) -> Pharmacophore: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureContainer instance \a cntnr.
-    # \param cntnr The \e %FeatureContainer instance to copy.
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the feature container <em>cntnr</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Creates a copy of the current pharmacophore state.
+    # 
+    # \return A smart reference to the copy of the pharmacophore.
+    # 
     def clone() -> Pharmacophore: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the pharmacophore feature at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the feature to return.
+    # 
+    # \return A reference to the feature at the specified index. 
+    # 
+    # \throw Base.IndexError if the number of featuress is zero or <em>idx</em> is not in the range [0, getNumFeatures() - 1].
+    # 
     def getFeature(idx: int) -> Feature: pass
 
     ##
@@ -118,9 +147,10 @@ class Pharmacophore(FeatureContainer):
     def getFeatureIndex(ftr: Feature) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of pharmacophore features.
+    # 
+    # \return The number of features.
+    # 
     def getNumFeatures() -> int: pass
 
     ##
@@ -145,23 +175,26 @@ class Pharmacophore(FeatureContainer):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
+    # \param self The \e %Pharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %Pharmacophore instance \a self.
-    #
+    # 
     def __iadd__(pharm: Pharmacophore) -> Pharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
+    # \param self The \e %Pharmacophore instance acting as in-place addend.
     # \param cntnr Specifies the second addend.
     # \return The updated \e %Pharmacophore instance \a self.
-    #
+    # 
     def __iadd__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= cntnr</tt>.
+    # \param self The \e %Pharmacophore instance acting as in-place minuend.
     # \param cntnr Specifies the subtrahend.
     # \return The updated \e %Pharmacophore instance \a self.
-    #
+    # 
     def __isub__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
@@ -179,16 +212,18 @@ class Pharmacophore(FeatureContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
+    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param ftr The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(ftr: Feature) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##

@@ -1,5 +1,5 @@
 ## 
-# ExtractCXXAPIDoc.py 
+# ExtractCXXAPIDocBlocks.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -142,7 +142,8 @@ def getTextRecursive(parent_node):
             rc.append(getTextRecursive(node))
             rc.append('</sub>')
         elif node.nodeName == 'ref':
-            rc.append('\\ref ')
+            if 'References' in node.attributes['refid'].value:
+                rc.append('\\ref ')
             rc.append(getTextRecursive(node))
         elif node.nodeName == 'Aring':
             rc.append('&Aring;')
@@ -230,22 +231,18 @@ def getDetailedDocText(parent_node):
 
     return doc_text + '\n'
 
-def getDocText(node):
-    doc_text = getBriefDocText(node)
+def getDocBlock(node):
+    doc_block = getBriefDocText(node)
 
-    if not doc_text:
-        return doc_text
+    if not doc_block:
+        return doc_block
     
     detailed_doc = getDetailedDocText(node)
 
     if detailed_doc:
-        doc_text += '\n' + detailed_doc
+        doc_block += '\n' + detailed_doc
 
-    return doc_text\
-        .replace(' \\ref ', ' ').replace('\n\\ref ', '\n').replace('>\\ref ', '>')\
-        .replace('(\\ref ', '(').replace('$', '\\f$').replace('::', '.').replace('std.size_t', 'int')\
-        .replace('double', 'float').replace('<tt>non-const</tt> ', '').replace('pointer', 'reference')\
-        .replace('non-<tt>const</tt> ', '').replace('<tt>const</tt> ', '')
+    return doc_block.replace('$', '\\f$')
     
 def processCXXAPIDocFile(file_path, api_doc_db):
     print('Processing file: %s...' % path.basename(file_path))
@@ -253,12 +250,12 @@ def processCXXAPIDocFile(file_path, api_doc_db):
     dom = parse(file_path)
     comp_def = dom.getElementsByTagName('compounddef')[0]
     comp_name = getTextRecursive(comp_def.getElementsByTagName('compoundname')[0]).replace('::', '.')
-    doc_text = getDocText(comp_def)
+    doc_block = getDocBlock(comp_def)
 
-    if doc_text:
-        api_doc_db[comp_name] = doc_text
+    if doc_block:
+        api_doc_db[comp_name] = doc_block
 
-    sup_mem_kinds = [ 'function', 'variable' ]
+    sup_mem_kinds = [ 'function', 'variable', 'enum', 'typedef' ]
         
     for mem_def in comp_def.getElementsByTagName('memberdef'):
         mem_kind = mem_def.attributes['kind'].value
@@ -266,18 +263,16 @@ def processCXXAPIDocFile(file_path, api_doc_db):
         if mem_kind not in sup_mem_kinds:
             continue
 
-        doc_text = getDocText(mem_def)
+        doc_block = getDocBlock(mem_def)
 
-        if not doc_text:
+        if not doc_block:
             continue
         
         mem_name = getTextRecursive(mem_def.getElementsByTagName('name')[0]).strip()
-        
-        if mem_kind == 'function':
-            num_args = len(mem_def.getElementsByTagName('param'))
 
+        if mem_kind == 'function':
             if mem_name.startswith('~'):
-                mem_name = '__del__'
+                mem_name = '__del__()'
             else:
                 comp_name_uq = comp_name.split('.')[-1]
 
@@ -297,12 +292,32 @@ def processCXXAPIDocFile(file_path, api_doc_db):
                     mem_name = '__ne__'
                 elif mem_name == 'operator==':
                     mem_name = '__eq__'
-                    
-            mem_name += '(' + str(num_args) + ')'
+                elif mem_name == 'operator()':
+                    mem_name = '__call__'
 
-        api_doc_db[comp_name + '.' + mem_name] = doc_text
-        
-def extractCXXAPIDoc():
+                arg_names = ''
+                    
+                for decl_name in mem_def.getElementsByTagName('declname'):
+                    arg_names += ',' + getTextRecursive(decl_name)
+
+                if arg_names:
+                    arg_names = arg_names[1:]
+                    
+                mem_name += '(' + arg_names + ')'
+                
+        api_doc_db[comp_name + '.' + mem_name] = doc_block
+
+        if mem_kind == 'enum':
+            for enum_val in comp_def.getElementsByTagName('enumvalue'):
+                doc_block = getDocBlock(enum_val)
+
+                if not doc_block:
+                    continue
+                
+                name = getTextRecursive(enum_val.getElementsByTagName('name')[0]).strip()
+                api_doc_db[comp_name + '.' + mem_name + '.' + name] = doc_block
+                
+def extractCXXAPIDocBlocks():
     if len(sys.argv) < 2:
         print('Usage:', sys.argv[0], '[C++ API doc. XML dir] [output file]', file=sys.stderr)
         sys.exit(2)
@@ -316,14 +331,14 @@ def extractCXXAPIDoc():
         if 'struct' in f or 'class' in f or 'namespace' in f:
             processCXXAPIDocFile(f, api_doc_db)
 
-    out_file = open(sys.argv[2], 'w')
+    out_file = open(sys.argv[2], 'wb')
 
-    for k, v in api_doc_db.items():
-        out_file.write('>> ' + k + '\n')
-        out_file.write(v + '\n')
+    #for k, v in api_doc_db.items():
+    #    out_file.write('>> ' + k + '\n')
+    #    out_file.write(v + '\n')
     
-    #pickle.dump(api_doc_db, out_file, protocol=pickle.DEFAULT_PROTOCOL)
+    pickle.dump(api_doc_db, out_file, protocol=pickle.DEFAULT_PROTOCOL)
     out_file.close()
 
 if __name__ == '__main__':
-    extractCXXAPIDoc()
+    extractCXXAPIDocBlocks()

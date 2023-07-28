@@ -20,131 +20,142 @@
 #
 
 ##
-# \brief 
-#
+# \brief MatchConstraint.
+# 
 class MatchConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Defines constants for the specification of relational constraints on the values of query/target attribute pairs.
+    # 
     class Relation(Boost.Python.enum):
 
         ##
-        # \brief ANY.
-        #
+        # \brief Specifies that the relation between the query and target attribute value is not constrained.
+        # 
         ANY = 0
 
         ##
-        # \brief LESS.
-        #
+        # \brief Specifies that the value of the query attribute must be less than the corresponding value of the target attribute to fulfill the constraint.
+        # 
         LESS = 1
 
         ##
-        # \brief EQUAL.
-        #
+        # \brief Specifies that the value of the query attribute must be equal to the corresponding value of the target attribute to fulfill the constraint.
+        # 
         EQUAL = 2
 
         ##
-        # \brief GREATER.
-        #
+        # \brief Specifies that the value of the query attribute must be greater than the corresponding value of the target attribute to fulfill the constraint.
+        # 
         GREATER = 3
 
         ##
-        # \brief LESS_OR_EQUAL.
-        #
+        # \brief Specifies that the value of the query attribute must be less than or equal to the corresponding value of the target attribute to fulfill the constraint.
+        # 
         LESS_OR_EQUAL = 4
 
         ##
-        # \brief GREATER_OR_EQUAL.
-        #
+        # \brief Specifies that the value of the query attribute must be greater than or equal to the corresponding value of the target attribute to fulfill the constraint.
+        # 
         GREATER_OR_EQUAL = 5
 
         ##
-        # \brief NOT_EQUAL.
-        #
+        # \brief Specifies that the value of the query attribute must not be equal to the corresponding value of the target attribute to fulfill the constraint.
+        # 
         NOT_EQUAL = 6
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
+    # \param self The \e %MatchConstraint instance to initialize.
     # \param constr 
-    #
+    # 
     def __init__(constr: MatchConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
+    # \param self The \e %MatchConstraint instance to initialize.
     # \param id 
     # \param rel 
-    #
+    # 
     def __init__(id: int, rel: Relation) -> None: pass
 
     ##
-    # \brief Initializes the \e %MatchConstraint instance.
-    # \param id 
-    # \param rel 
-    # \param val 
-    #
+    # \brief Constructs a <tt>MatchConstraint</tt> object with the given identifier, relational constraint on the values of matching query/target attribute pairs and value of the query attribute.
+    # 
+    # \param id The identifier of the match constraint.
+    # \param rel The relational constraint on the values of matching query/target attribute pairs.
+    # \param val The value of the query attribute.
+    # 
     def __init__(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraint instance \a constr.
-    # \param constr The \e %MatchConstraint instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: MatchConstraint) -> MatchConstraint: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the identifier of the match constraint.
+    # 
+    # \return The identifier of the match constraint.
+    # 
     def getID() -> int: pass
 
     ##
-    # \brief 
-    # \param id 
-    #
+    # \brief Sets the match constraint identifier to <em>id</em>.
+    # 
+    # \param id The identifier of the match constraint.
+    # 
     def setID(id: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the relational constraint that must be fulfilled by the values of matching query/target attribute pairs.
+    # 
+    # \return The relational constraint on the values of matching query/target attribute pairs.
+    # 
     def getRelation() -> Relation: pass
 
     ##
-    # \brief 
-    # \param rel 
-    #
+    # \brief Sets the relational constraint that must be fulfilled by the values of matching query/target attribute pairs.
+    # 
+    # \param rel The relational constraint on the values of matching query/target attribute pairs.
+    # 
     def setRelation(rel: Relation) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the value of the query attribute of type <em>T</em>.
+    # 
+    # \return A reference to the value of the stored query attribute. 
+    # 
+    # \throw Base.BadCast if the stored <tt>Any</tt> instance is empty, or the stored value is not of the specified type <em>T</em>.
+    # 
     def getValue() -> CDPL.Base.Any: pass
 
     ##
-    # \brief 
-    # \param val 
-    #
+    # \brief Sets the value of the query attribute.
+    # 
+    # \param val The value of the query attribute.
+    # 
     def setValue(val: CDPL.Base.Any) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells wether a query attribute value has been set.
+    # 
+    # \return <tt>True</tt> if the value of the query attribute has been set, <tt>False</tt> otherwise.
+    # 
     def hasValue() -> bool: pass
 
-    ##
-    # \brief 
-    #
     ID = property(getID, setID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     rel = property(getRel, setRel)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     val = property(getVal, setVal)

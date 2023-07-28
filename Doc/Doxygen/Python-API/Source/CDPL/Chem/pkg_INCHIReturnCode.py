@@ -20,46 +20,48 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to describe the status of an <em>InChI</em> [\ref INCHI] output or input operation.
+# 
+# The defined constants correspond to the return values of the <em>InChI C-API</em> functions (see [\ref INCHI]) that were used for the creation or decoding of <em>InChI</em> strings and keys.
+# 
 class INCHIReturnCode(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Not used by the <em>InChI</em> C-library.
+    # 
     SKIP = -2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that no structural data were provided for the <em>InChI</em> generation (e.g. empty structure).
+    # 
     EOF_ = -1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the operation was successful and no warnings have been issued.
+    # 
     OKAY = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the operation was successful but warnings have been issued.
+    # 
     WARNING = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the operation was not successful and no <em>InChI</em> has been created.
+    # 
     ERROR = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the operation was not successful because some severe error occurred during processing (typically a memory allocation failure).
+    # 
     FATAL = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the operation was not successful because of an unknown program error.
+    # 
     UNKNOWN = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that a previous call to the <em>InChI</em> generation function has not yet returned (should never happen).
+    # 
     BUSY = 5

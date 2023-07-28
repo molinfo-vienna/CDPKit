@@ -20,103 +20,127 @@
 #
 
 ##
-# \brief 
-#
+# \brief SymmetryClassCalculator.
+# 
+# \see [\ref TOPSY]
+# 
 class SymmetryClassCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default set of atomic properties considered in the perception of topological symmetry classes.
+    # 
     DEF_ATOM_PROPERTY_FLAGS = 158
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the default set of bond properties considered in the perception of topological symmetry classes.
+    # 
     DEF_BOND_PROPERTY_FLAGS = 10
 
     ##
-    # \brief Initializes the \e %SymmetryClassCalculator instance.
-    #
+    # \brief Constructs the <tt>SymmetryClassCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SymmetryClassCalculator instance.
-    # \param molgraph 
-    # \param class_ids 
-    #
+    # \brief Constructs the <tt>SymmetryClassCalculator</tt> instance and perceives the topological symmetry classes of the atoms in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the symmetry classes.
+    # \param class_ids An array containing the perceived symmetry class IDs. The class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the symmetry class of an atom is accessible via its index).
+    # 
     def __init__(molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
+    # 
     # Different Python \e %SymmetryClassCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SymmetryClassCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param flags 
-    #
+    # \brief Allows to specify the set of atomic properties that has to be considered in the perception of topological symmetry classes.
+    # 
+    # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.AtomPropertyFlag. Supported property flags are:
+    #  - Chem.AtomPropertyFlag.TYPE
+    #  - Chem.AtomPropertyFlag.ISOTOPE
+    #  - Chem.AtomPropertyFlag.FORMAL_CHARGE
+    #  - Chem.AtomPropertyFlag.AROMATICITY
+    #  - and Chem.AtomPropertyFlag.H_COUNT
+    # 
+    # \param flags The set of atomic properties to consider.
+    # 
+    # \note The default set of atomic properties is specified by SymmetryClassCalculator.DEF_ATOM_PROPERTY_FLAGS.
+    # 
     def setAtomPropertyFlags(flags: int) -> None: pass
 
     ##
-    # \brief 
-    # \param flags 
-    #
+    # \brief Allows to specify the set of bond properties that has to be considered in the perception of topological symmetry classes.
+    # 
+    # The <em>flags</em> argument is an OR combination of the constants defined in namespace Chem.BondPropertyFlag. Supported property flags are:
+    #  - Chem.BondPropertyFlag.ORDER
+    #  - and Chem.BondPropertyFlag.AROMATICITY
+    # 
+    # \param flags The set of bond properties to consider.
+    # 
+    # \note The default set of bond properties is specified by SymmetryClassCalculator.DEF_BOND_PROPERTY_FLAGS.
+    # 
     def setBondPropertyFlags(flags: int) -> None: pass
 
     ##
-    # \brief 
-    # \param include 
-    #
+    # \brief Allows to specify whether implicit hydrogen atoms shall be ignored or treated in the same way as explicit ones.
+    # 
+    # \param include If <tt>True</tt>, implicit hydrogen atoms are treated as if they were explicit and are ignored otherwise.
+    # 
+    # \note By default, implicit hydrogen atoms are treated in the same way as explicit ones.
+    # 
     def includeImplicitHydrogens(include: bool) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the set of atomic properties that gets considered in the perception of topological symmetry classes.
+    # 
+    # \return The set of considered atomic properties. 
+    # 
+    # \see setAtomPropertyFlags()
+    # 
     def getAtomPropertyFlags() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the set of bond properties that gets considered in the perception of topological symmetry classes.
+    # 
+    # \return The set of considered bond properties. 
+    # 
+    # \see setBondPropertyFlags()
+    # 
     def getBondPropertyFlags() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells whether implicit hydrogen atoms are ignored or treated in the same way as explicit ones.
+    # 
+    # \return <tt>True</tt> if implicit hydrogen atoms are treated in the same way as explicit ones, and <tt>False</tt> if they are ignored.
+    # 
     def implicitHydrogensIncluded() -> bool: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param class_ids 
-    #
+    # \brief Perceives the topological symmetry classes of the atoms in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the symmetry classes.
+    # \param class_ids An array containing the perceived symmetry class IDs. The class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the symmetry class of an atom is accessible via its index).
+    # 
     def calculate(molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     atomPropertyFlags = property(getAtomPropertyFlags, setAtomPropertyFlags)
 
-    ##
-    # \brief 
-    #
     bondPropertyFlags = property(getBondPropertyFlags, setBondPropertyFlags)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     hydrogenComplete = property(getHydrogenComplete, setHydrogenComplete)

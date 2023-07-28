@@ -20,104 +20,115 @@
 #
 
 ##
-# \brief 
-#
+# \brief An unique lookup key for control-parameter and property values.
+# 
+# <tt>LookupKey</tt> has a private default constructor and a public copy constructor. The creation of not copy constructed new instances is only possible by the method create(const std::string& name). <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards. <br>
+# 
 class LookupKey(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Used to denote an invalid, unused or unspecified key.
+    # 
     NONE = LookupKey(id=0, name='NONE')
 
     ##
     # \brief Initializes the \e %LookupKey instance.
+    # \param self The \e %LookupKey instance to initialize.
     # \param key 
-    #
+    # 
     def __init__(key: LookupKey) -> None: pass
 
     ##
-    # \brief 
-    # \param name 
-    # \return 
-    #
+    # \brief Creates a new unique <tt>LookupKey</tt> instance and registers it under the specified name.
+    # 
+    # <tt>LookupKey</tt> instances created by this method are guaranteed to be unique (given that the internal instance counter of type <tt>std::size_t</tt> does not overflow), i.e. the instance is <em>not a copy</em> of an existing key and does not compare equal to any instance created before or afterwards.
+    # 
+    # \param name The name of the <tt>LookupKey</tt> instance.
+    # 
+    # \return A new unique <tt>LookupKey</tt> instance.
+    # 
     @staticmethod
     def create(name: str) -> LookupKey: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the unique numeric identifier associated with the <tt>LookupKey</tt> instance.
+    # 
+    # \return The unique numeric identifier of the <tt>LookupKey</tt> instance.
+    # 
     def getID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LookupKey instance \a key.
-    # \param key The \e %LookupKey instance to copy.
-    # \return \a self
+    # \brief 
+    # \param key 
+    # \return 
     #
     def assign(key: LookupKey) -> LookupKey: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the name of the <tt>LookupKey</tt> instance.
+    # 
+    # \return The name of the <tt>LookupKey</tt> instance. 
+    # 
+    # \throw Base.ItemNotFound if the requested name could not be found.
+    # 
     def getName() -> str: pass
 
     ##
-    # \brief 
-    # \param name 
-    #
+    # \brief Sets the name of the <tt>LookupKey</tt> instance.
+    # 
+    # \param name The new name of the <tt>LookupKey</tt> instance.
+    # 
     def setName(name: str) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %LookupKey instance this method is called upon.
+    # 
     # Different Python \e %LookupKey instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LookupKey instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self < key</tt>.
-    # \param key The \e %LookupKey instance to be compared with.
-    # \return The result of the comparison operation.
-    #
+    # \brief Less than comparison operator.
+    # 
+    # \param key The other <tt>LookupKey</tt> instance to be compared with.
+    # 
+    # \return <tt>True</tt> if the numeric identifier of this instance is smaller than the identifier of <em>key</em>, and <tt>False</tt> otherwise.
+    # 
     def __lt__(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self == key</tt>.
-    # \param key The \e %LookupKey instance to be compared with.
-    # \return The result of the comparison operation.
-    #
+    # \brief Equality comparison operator.
+    # 
+    # \param key The other <tt>LookupKey</tt> instance to be compared with.
+    # 
+    # \return <tt>True</tt> if the numeric identifiers of the keys are equal, and <tt>False</tt> otherwise.
+    # 
     def __eq__(key: LookupKey) -> bool: pass
 
     ##
-    # \brief Returns the result of the comparison operation <tt>self != key</tt>.
-    # \param key The \e %LookupKey instance to be compared with.
-    # \return The result of the comparison operation.
-    #
+    # \brief Inequality comparison operator.
+    # 
+    # \param key The other <tt>LookupKey</tt> instance to be compared with.
+    # 
+    # \return <tt>True</tt> if the numeric identifiers of the keys are not equal, and <tt>False</tt> otherwise.
+    # 
     def __ne__(key: LookupKey) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %LookupKey instance.
+    # \param self The \e %LookupKey instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    numericID = property(getNumericID)
+    numericID = property(getID)
 
-    ##
-    # \brief 
-    #
     name = property(getName, setName)

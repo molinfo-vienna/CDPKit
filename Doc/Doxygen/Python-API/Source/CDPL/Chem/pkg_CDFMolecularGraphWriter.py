@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFMolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>CDFMolecularGraphWriter</tt> instance that will write data of molecular graphs to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

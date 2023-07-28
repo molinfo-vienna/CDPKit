@@ -20,37 +20,40 @@
 #
 
 ##
-# \brief 
-#
+# \brief A datastructure allowing a hierarchical view on biological macromolecules.
+# 
 class HierarchyView(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %HierarchyView instance.
-    #
+    # \brief Constructs an empty <tt>HierarchyView</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %HierarchyView instance.
-    # \param molgraph 
-    #
+    # \brief Constructs a <tt>HierarchyView</tt> instance for the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to build the hierarchy view.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %HierarchyView instance this method is called upon.
+    # 
     # Different Python \e %HierarchyView instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HierarchyView instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Build the hierarchy view for the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to build the hierarchy view.
+    # 
     def build(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
@@ -99,17 +102,8 @@ class HierarchyView(Boost.Python.instance):
     #
     def __getitem__(idx: int) -> HierarchyViewModel: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numModels = property(getNumModels)
 
-    ##
-    # \brief 
-    #
     residues = property(getResidues)

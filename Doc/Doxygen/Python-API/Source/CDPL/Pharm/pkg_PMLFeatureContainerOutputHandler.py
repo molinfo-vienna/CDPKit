@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of pharmacophore data in the native I/O format of <em>LigandScout</em>.
+# 
 class PMLFeatureContainerOutputHandler(FeatureContainerOutputHandler):
 
     ##
     # \brief Initializes the \e %PMLFeatureContainerOutputHandler instance.
-    #
+    # \param self The \e %PMLFeatureContainerOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

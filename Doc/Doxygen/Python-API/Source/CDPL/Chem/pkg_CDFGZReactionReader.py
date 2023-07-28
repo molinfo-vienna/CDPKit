@@ -26,6 +26,7 @@ class CDFGZReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %CDFGZReactionReader instance.
+    # \param self The \e %CDFGZReactionReader instance to initialize.
     # \param is 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

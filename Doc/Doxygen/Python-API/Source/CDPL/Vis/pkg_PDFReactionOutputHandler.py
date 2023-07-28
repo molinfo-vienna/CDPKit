@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable Document Format (PDF)</em> [\ref WPDF].
+# 
 class PDFReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %PDFReactionOutputHandler instance.
-    #
+    # \param self The \e %PDFReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

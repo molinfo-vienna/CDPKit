@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that an index is out of range.
+# 
 class IndexError(RangeError, builtins.IndexError):
     pass

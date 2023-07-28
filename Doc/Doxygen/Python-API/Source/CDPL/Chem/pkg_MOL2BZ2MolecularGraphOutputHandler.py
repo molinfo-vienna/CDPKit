@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of bzip2-compressed molecular graph data in the <em>Sybyl MOL2</em> format.
+# 
 class MOL2BZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %MOL2BZ2MolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %MOL2BZ2MolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

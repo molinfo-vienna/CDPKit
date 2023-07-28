@@ -31,41 +31,45 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param bond_type_idx 
         # \param atom1_type 
         # \param atom2_type 
         # \param force_const 
         # \param ref_length 
-        #
+        # 
         def __init__(bond_type_idx: int, atom1_type: int, atom2_type: int, force_const: float, ref_length: float) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -111,57 +115,42 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
         #
         def __bool__() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         bondTypeIndex = property(getBondTypeIndex)
 
-        ##
-        # \brief 
-        #
         atom1Type = property(getAtom1Type)
 
-        ##
-        # \brief 
-        #
         atom2Type = property(getAtom2Type)
 
-        ##
-        # \brief 
-        #
         forceConstant = property(getForceConstant)
 
-        ##
-        # \brief 
-        #
         referenceLength = property(getReferenceLength)
 
     ##
     # \brief Initializes the \e %MMFF94BondStretchingParameterTable instance.
-    #
+    # \param self The \e %MMFF94BondStretchingParameterTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondStretchingParameterTable instance.
+    # \param self The \e %MMFF94BondStretchingParameterTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: MMFF94BondStretchingParameterTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94BondStretchingParameterTable instance this method is called upon.
+    # 
     # Different Python \e %MMFF94BondStretchingParameterTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94BondStretchingParameterTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -221,9 +210,9 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondStretchingParameterTable instance \a table.
-    # \param table The \e %MMFF94BondStretchingParameterTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param table 
+    # \return 
     #
     def assign(table: MMFF94BondStretchingParameterTable) -> MMFF94BondStretchingParameterTable: pass
 
@@ -242,17 +231,8 @@ class MMFF94BondStretchingParameterTable(Boost.Python.instance):
     @staticmethod
     def get(: ) -> MMFF94BondStretchingParameterTable: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

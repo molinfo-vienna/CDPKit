@@ -57,7 +57,7 @@ namespace CDPL
             typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
 
             /**
-             * Performs an evaluation of the conjunctive expression list for the given query and target objects.
+             * \brief Performs an evaluation of the conjunctive expression list for the given query and target objects.
              *
              * \param query_obj1 The primary query object.
              * \param query_obj2 The secondary query object.
@@ -71,8 +71,8 @@ namespace CDPL
                             const Base::Any& aux_data) const;
 
             /**
-             * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
-             * provided candidate atom/bond mapping.
+             * \brief Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
+             *        provided candidate atom/bond mapping.
              *
              * \param query_obj1 The primary query object.
              * \param query_obj2 The secondary query object.
@@ -108,7 +108,7 @@ namespace CDPL
             typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
 
             /**
-             * Performs an evaluation of the conjunctive expression list for the given query and target objects.
+             * \brief Performs an evaluation of the conjunctive expression list for the given query and target objects.
              *
              * \param query_obj The query object.
              * \param target_obj The target object.
@@ -119,8 +119,8 @@ namespace CDPL
             bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
             /**
-             * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
-             * provided candidate atom/bond mapping.
+             * \brief Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
+             *        provided candidate atom/bond mapping.
              *
              * \param query_obj The query object.
              * \param target_obj The target object.

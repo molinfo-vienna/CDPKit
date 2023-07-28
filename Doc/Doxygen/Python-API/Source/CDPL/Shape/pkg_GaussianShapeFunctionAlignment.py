@@ -31,34 +31,37 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Result instance.
+        # \param self The \e %Result instance to initialize.
         # \param transform 
         # \param overlap 
         # \param col_overlap 
-        #
+        # 
         def __init__(transform: CDPL.Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
 
         ##
         # \brief Initializes the \e %Result instance.
+        # \param self The \e %Result instance to initialize.
         # \param res 
-        #
+        # 
         def __init__(res: Result) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Result instance this method is called upon.
+        # 
         # Different Python \e %Result instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Result instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Result instance \a res.
-        # \param res The \e %Result instance to copy.
-        # \return \a self
+        # \brief 
+        # \param res 
+        # \return 
         #
         def assign(res: Result) -> Result: pass
 
@@ -80,24 +83,12 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         #
         def getColorOverlap() -> float: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         transform = property(getTransform)
 
-        ##
-        # \brief 
-        #
         overlap = property(getOverlap)
 
-        ##
-        # \brief 
-        #
         colorOverlap = property(getColorOverlap)
 
     ##
@@ -112,26 +103,29 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeFunctionAlignment instance.
-    #
+    # \param self The \e %GaussianShapeFunctionAlignment instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunctionAlignment instance.
+    # \param self The \e %GaussianShapeFunctionAlignment instance to initialize.
     # \param ref_func 
     # \param sym_class 
-    #
+    # 
     def __init__(ref_func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
+    # 
     # Different Python \e %GaussianShapeFunctionAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeFunctionAlignment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -343,77 +337,60 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     #
     def __getitem__(idx: int) -> Result: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numResults = property(getNumResults)
 
-    ##
-    # \brief 
-    #
     overlapFunction = property(getOverlapFunction, setOverlapFunction)
 
-    ##
-    # \brief 
-    #
     defaultOverlapFunction = property(getDefaultOverlapFunction)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     referenceShapeFunction = property(getReferenceShapeFunction, setReferenceShapeFunction)
 
-    ##
-    # \brief 
-    #
     startGenerator = property(getStartGenerator, setStartGenerator)
 
-    ##
-    # \brief 
-    #
     defaultStartGenerator = property(getDefaultStartGenerator)
 
-    ##
-    # \brief 
-    #
     colorMatchFunction = property(getColorMatchFunction, setColorMatchFunction)
 
-    ##
-    # \brief 
-    #
     colorFilterFunction = property(getColorFilterFunction, setColorFilterFunction)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     perfAlignment = property(getPerfAlignment, setPerfAlignment)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     maxNumOptIterations = property(getMaxNumOptIterations, setMaxNumOptIterations)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     optStopGradient = property(getOptStopGradient, setOptStopGradient)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     optOverlap = property(getOptOverlap, setOptOverlap)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     greedyOpt = property(getGreedyOpt, setGreedyOpt)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     colorOverlaps = property(getColorOverlaps, setColorOverlaps)

@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS] format.
+# 
 class PSReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %PSReactionOutputHandler instance.
-    #
+    # \param self The \e %PSReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

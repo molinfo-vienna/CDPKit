@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants used to specify the employed structure generation method.
+# 
 class StructureGenerationMode(Boost.Python.instance):
 
     ##

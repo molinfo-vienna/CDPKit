@@ -165,11 +165,11 @@ namespace
                 boost::noncopyable>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MatchExpression<ObjType1, ObjType2> >())    
-                .def("matches", &MatchExpressionWrapper<ObjType1, ObjType2>::matches,
+                .def("__call__", &MatchExpressionWrapper<ObjType1, ObjType2>::matches,
                      (python::arg("self"), python::arg(query_arg1_name), 
                       python::arg(query_arg2_name), python::arg(target_arg1_name), 
                       python::arg(target_arg2_name), python::arg("aux_data")))
-                .def("mappingMatches", &MatchExpressionWrapper<ObjType1, ObjType2>::mappingMatches,
+                .def("__call__", &MatchExpressionWrapper<ObjType1, ObjType2>::mappingMatches,
                      (python::arg("self"), python::arg(query_arg1_name), 
                       python::arg(query_arg2_name), python::arg(target_arg1_name), 
                       python::arg(target_arg2_name), python::arg("mapping"),
@@ -196,10 +196,10 @@ namespace
                 boost::noncopyable>(name, python::no_init)
                 .def(python::init<>(python::arg("self")))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MatchExpression<ObjType, void> >())    
-                .def("matches", &MatchExpressionWrapper<ObjType, void>::matches,
+                .def("__call__", &MatchExpressionWrapper<ObjType, void>::matches,
                      (python::arg("self"), python::arg(query_arg_name), 
                       python::arg(target_arg_name), python::arg("aux_data")))
-                .def("mappingMatches", &MatchExpressionWrapper<ObjType, void>::mappingMatches,
+                .def("__call__", &MatchExpressionWrapper<ObjType, void>::mappingMatches,
                      (python::arg("self"), python::arg(query_arg_name), 
                       python::arg(target_arg_name), python::arg("mapping"), 
                       python::arg("aux_data")))

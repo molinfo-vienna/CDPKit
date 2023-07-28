@@ -83,7 +83,7 @@ namespace CDPLPythonBase
                 .def("getDataFormat", python::pure_virtual(&HandlerType::getDataFormat),
                      python::arg("self"), python::return_internal_reference<1>())
                 .def("createWriter", python::pure_virtual(createWriterFunc1),
-                     (python::arg("self"), python::arg("is")), python::with_custodian_and_ward_postcall<0, 2>())
+                     (python::arg("self"), python::arg("ios")), python::with_custodian_and_ward_postcall<0, 2>())
                 .def("createWriter", python::pure_virtual(createWriterFunc2),
                      (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary));
 

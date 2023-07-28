@@ -25,7 +25,8 @@
 class MOL2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %MOL2MolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>MOL2MolecularGraphWriter</tt> instance that will write data of molecular graphs to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

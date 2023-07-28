@@ -20,31 +20,33 @@
 #
 
 ##
-# \brief 
-#
+# \brief XBondAcceptorFeatureGenerator.
+# 
 class XBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
-    # \brief Initializes the \e %XBondAcceptorFeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>XBondAcceptorFeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %XBondAcceptorFeatureGenerator instance.
+    # \param self The \e %XBondAcceptorFeatureGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: XBondAcceptorFeatureGenerator) -> None: pass
 
     ##
-    # \brief Initializes the \e %XBondAcceptorFeatureGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives the halogen bond acceptor features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondAcceptorFeatureGenerator instance \a gen.
-    # \param gen The \e %XBondAcceptorFeatureGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: XBondAcceptorFeatureGenerator) -> XBondAcceptorFeatureGenerator: pass

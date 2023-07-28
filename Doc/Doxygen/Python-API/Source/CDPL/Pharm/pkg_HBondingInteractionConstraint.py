@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief HBondingInteractionConstraint.
+# 
 class HBondingInteractionConstraint(Boost.Python.instance):
 
     ##
@@ -46,30 +46,33 @@ class HBondingInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %HBondingInteractionConstraint instance.
+    # \param self The \e %HBondingInteractionConstraint instance to initialize.
     # \param constr 
-    #
+    # 
     def __init__(constr: HBondingInteractionConstraint) -> None: pass
 
     ##
-    # \brief Initializes the \e %HBondingInteractionConstraint instance.
-    # \param don_acc 
-    # \param min_len 
-    # \param max_len 
-    # \param min_ahd_ang 
-    # \param max_acc_ang 
-    #
+    # \brief Constructs a <tt>HBondingInteractionConstraint</tt> functor with the specified constraints.
+    # 
+    # \param don_acc <tt>True</tt> if the first feature argument represents the donor- and the second one the acceptor-feature, and <tt>False</tt> otherwise.
+    # \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+    # \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
+    # \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
+    # \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
+    # 
     def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
+    # 
     # Different Python \e %HBondingInteractionConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HBondingInteractionConstraint instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -97,9 +100,9 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondingInteractionConstraint instance \a constr.
-    # \param constr The \e %HBondingInteractionConstraint instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: HBondingInteractionConstraint) -> HBondingInteractionConstraint: pass
 
@@ -111,27 +114,12 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     #
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     minLength = property(getMinLength)
 
-    ##
-    # \brief 
-    #
     maxLength = property(getMaxLength)
 
-    ##
-    # \brief 
-    #
     minAHDAngle = property(getMinAHDAngle)
 
-    ##
-    # \brief 
-    #
     maxAcceptorAngle = property(getMaxAcceptorAngle)

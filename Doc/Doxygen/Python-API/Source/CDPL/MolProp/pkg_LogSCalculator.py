@@ -20,76 +20,85 @@
 #
 
 ##
-# \brief 
-#
+# \brief LogSCalculator.
+# 
+# \see [\ref LOGS]
+# 
 class LogSCalculator(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the number of different features used by the \f$ \log S \f$ model.
+    # 
     FEATURE_VECTOR_SIZE = 79
 
     ##
-    # \brief Initializes the \e %LogSCalculator instance.
-    #
+    # \brief Constructs the <tt>LogSCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
+    # \param self The \e %LogSCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: LogSCalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %LogSCalculator instance.
-    # \param molgraph 
-    #
+    # \brief Constructs the <tt>LogSCalculator</tt> instance and calculates the \f$ \log S \f$ of the molecular graph <em>molgraph</em>.
+    # 
+    # The calculated \f$ \log S \f$ can be retrieved by a call to getResult().
+    # 
+    # \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %LogSCalculator instance this method is called upon.
+    # 
     # Different Python \e %LogSCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LogSCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LogSCalculator instance \a calc.
-    # \param calc The \e %LogSCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: LogSCalculator) -> LogSCalculator: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Calculates the \f$ \log S \f$ of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
+    # 
+    # \return The calculated \f$ \log S \f$ of the molecular graph <em>molgraph</em>.
+    # 
     def calculate(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the result of the last \f$ \log S \f$ calculation.
+    # 
+    # \return The result of the last \f$ \log S \f$ calculation, or zero if a calculation has not yet been performed.
+    # 
     def getResult() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the feature count vector of the last \f$ \log S \f$ calculation.
+    # 
+    # The occurrence count of a particular structural feature can be retrieved from the returned vector via its feature index. The feature index correspond to the numerical identifier of the feature's definition in the original publication [\ref LOGS].
+    # 
+    # \return The feature count vector of the last \f$ \log S \f$ calculation. 
+    # 
+    # \note The returned feature vector is of size LogSCalculator.FEATURE_VECTOR_SIZE.
+    # 
     def getFeatureVector() -> CDPL.Math.DVector: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     result = property(getResult)

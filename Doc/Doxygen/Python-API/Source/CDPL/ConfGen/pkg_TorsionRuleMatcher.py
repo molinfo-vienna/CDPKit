@@ -26,13 +26,15 @@ class TorsionRuleMatcher(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionRuleMatcher instance.
-    #
+    # \param self The \e %TorsionRuleMatcher instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionRuleMatcher instance.
+    # \param self The \e %TorsionRuleMatcher instance to initialize.
     # \param lib 
-    #
+    # 
     def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
@@ -84,16 +86,21 @@ class TorsionRuleMatcher(Boost.Python.instance):
     def getTorsionLibrary() -> TorsionLibrary: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of stored torsion rule matches found by calls to findMatches().
+    # 
+    # \return The number of stored torsion rule matches.
+    # 
     def getNumMatches() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the stored torsion rule match object at index <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the torsion rule match object to return.
+    # 
+    # \return A reference to the torsion rule match object at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if no torsion rule matches are available or <em>idx</em> is not in the range [0, getNumMatches() - 1].
+    # 
     def getMatch(idx: int) -> TorsionRuleMatch: pass
 
     ##
@@ -107,14 +114,15 @@ class TorsionRuleMatcher(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
+    # 
     # Different Python \e %TorsionRuleMatcher instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRuleMatcher instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -130,32 +138,26 @@ class TorsionRuleMatcher(Boost.Python.instance):
     #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numMatches = property(getNumMatches)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     uniqueMappingsOnly = property(getUniqueMappingsOnly, setUniqueMappingsOnly)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     allRuleMappings = property(getAllRuleMappings, setAllRuleMappings)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     onlyFirstMatchingRule = property(getOnlyFirstMatchingRule, setOnlyFirstMatchingRule)
 
-    ##
-    # \brief 
-    #
     torsionLibrary = property(getTorsionLibrary, setTorsionLibrary)

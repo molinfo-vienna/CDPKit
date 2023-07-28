@@ -20,41 +20,69 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Chem.Atom properties.
+# 
 class AtomProperty(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the color of text labels.
+    # 
+    # The color specified by this property takes precedence over the colors specified by Vis.ControlParameter.ATOM_COLOR and Vis.MolecularGraphProperty.ATOM_COLOR. Furthermore, color tables specified by Vis.ControlParameter.ATOM_COLOR_TABLE or Vis.MolecularGraphProperty.ATOM_COLOR_TABLE will not be considered if this property is set.
+    # 
+    # <b>Value Type:</b> Vis.Color
+    # 
     COLOR = CDPL.Base.LookupKey(id=147, name='COLOR')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the size of radical electron dots.
+    # 
+    # The dot size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.AtomProperty.LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.ControlParameter.ATOM_LABEL_SIZE. If input-scaling is enabled, the dot diameter will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the diameter will follow the size change of the chemical structure during viewport size adjustment. The dot diameter specified by this property takes precedence over the diameters specified by Vis.ControlParameter.ATOM_LABEL_MARGIN and Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification
+    # 
     RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=153, name='RADICAL_ELECTRON_DOT_SIZE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the font for atom element and query match expression labels.
+    # 
+    # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.ATOM_LABEL_FONT and Vis.MolecularGraphProperty.ATOM_LABEL_FONT.
+    # 
+    # <b>Value Type:</b> Vis.Font
+    # 
     LABEL_FONT = CDPL.Base.LookupKey(id=148, name='LABEL_FONT')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the margin of free space around atom labels.
+    # 
+    # The margin can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.AtomProperty.LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.ControlParameter.ATOM_LABEL_SIZE. If input-scaling is enabled, the width of the margin will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the label margin will follow the size change of the chemical structure during viewport size adjustment. The margin specified by this property takes precedence over the margins specified by Vis.ControlParameter.ATOM_LABEL_MARGIN and Vis.MolecularGraphProperty.ATOM_LABEL_MARGIN.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification
+    # 
     LABEL_MARGIN = CDPL.Base.LookupKey(id=152, name='LABEL_MARGIN')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the size of atom element and query match expression labels.
+    # 
+    # The font size has to be specified as an absolute value. If input-scaling is enabled, the font size will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size grows/shrinks with the size of the chemical structure during viewport size adjustment. The label size specified by this property takes precedence over the sizes specified by Vis.ControlParameter.ATOM_LABEL_SIZE and Vis.MolecularGraphProperty.ATOM_LABEL_SIZE.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification
+    # 
     LABEL_SIZE = CDPL.Base.LookupKey(id=149, name='LABEL_SIZE')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the font for text labels that show the value of various atomic properties.
+    # 
+    # The font specified by this property takes precedence over the fonts specified by Vis.ControlParameter.SECONDARY_ATOM_LABEL_FONT and Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_FONT.
+    # 
+    # <b>Value Type:</b> Vis.Font
+    # 
     SECONDARY_LABEL_FONT = CDPL.Base.LookupKey(id=150, name='SECONDARY_LABEL_FONT')
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the size of text labels that show the value of various atomic properties.
+    # 
+    # The size can either be specified as an absolute value or as a scaling factor for the primary label size given by Vis.AtomProperty.LABEL_SIZE, Vis.MolecularGraphProperty.ATOM_LABEL_SIZE or Vis.ControlParameter.ATOM_LABEL_SIZE. If input-scaling is enabled, the size of the font will follow the size change of the chemical structure during bond length normalization. If output-scaling is enabled, the font size will follow the size change of the chemical structure during viewport size adjustment. The label size specified by this property takes precedence over the sizes specified by Vis.ControlParameter.SECONDARY_ATOM_LABEL_SIZE and Vis.MolecularGraphProperty.SECONDARY_ATOM_LABEL_SIZE.
+    # 
+    # <b>Value Type:</b> Vis.SizeSpecification
+    # 
     SECONDARY_LABEL_SIZE = CDPL.Base.LookupKey(id=151, name='SECONDARY_LABEL_SIZE')

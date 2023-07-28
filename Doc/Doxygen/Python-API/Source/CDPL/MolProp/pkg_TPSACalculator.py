@@ -20,65 +20,69 @@
 #
 
 ##
-# \brief 
-#
+# \brief TPSACalculator.
+# 
+# \see [\ref TPSA]
+# 
 class TPSACalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %TPSACalculator instance.
-    #
+    # \brief Constructs the <tt>TPSACalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TPSACalculator instance.
+    # \param self The \e %TPSACalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: TPSACalculator) -> None: pass
 
     ##
-    # \brief Initializes the \e %TPSACalculator instance.
-    # \param molgraph 
-    #
+    # \brief Constructs the <tt>TPSACalculator</tt> instance and calculates the <em>TPSA</em> of the molecular graph <em>molgraph</em>.
+    # 
+    # The calculated <em>TPSA</em> can be retrieved by a call to getResult().
+    # 
+    # \param molgraph The molecular graph for which to calculate the <em>TPSA</em>.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TPSACalculator instance this method is called upon.
+    # 
     # Different Python \e %TPSACalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TPSACalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TPSACalculator instance \a calc.
-    # \param calc The \e %TPSACalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: TPSACalculator) -> TPSACalculator: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \return 
-    #
+    # \brief Calculates the <em>TPSA</em> of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to calculate the <em>TPSA</em>.
+    # 
+    # \return The calculated <em>TPSA</em> of the molecular graph <em>molgraph</em>.
+    # 
     def calculate(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the result of the last <em>TPSA</em> calculation.
+    # 
+    # \return The result of the last <em>TPSA</em> calculation, or zero if a calculation has not yet been performed.
+    # 
     def getResult() -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     result = property(getResult)

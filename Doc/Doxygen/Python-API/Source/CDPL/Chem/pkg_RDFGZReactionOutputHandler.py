@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of gzip-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# 
 class RDFGZReactionOutputHandler(ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %RDFGZReactionOutputHandler instance.
-    #
+    # \param self The \e %RDFGZReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

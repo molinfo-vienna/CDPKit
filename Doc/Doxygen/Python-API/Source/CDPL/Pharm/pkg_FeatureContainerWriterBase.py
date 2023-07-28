@@ -20,25 +20,38 @@
 #
 
 ##
-# \brief 
-#
+# \brief An interface for writing data objects of type Pharm.FeatureContainer to an arbitrary data sink.
+# 
+# <tt>FeatureContainerWriterBase</tt> is the common interface of classes which write objects of type Pharm.FeatureContainer to some data sink (e.g. a file) that expects the data to be encoded in a particular storage format.
+# 
+# From the <tt>FeatureContainerWriterBase</tt> interface point of view, the data sink is continuous output stream in which the data objects are written as data records. For the output of a given data object the method write() has to be called with the object passed as an argument.
+# 
+# If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>FeatureContainerWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
+# 
 class FeatureContainerWriterBase(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %FeatureContainerWriterBase instance.
-    #
+    # \param self The \e %FeatureContainerWriterBase instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \return 
-    #
+    # \brief Writes the FeatureContainer object <em>cntnr</em>.
+    # 
+    # \param cntnr The FeatureContainer object to write.
+    # 
+    # \return \a self 
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def write(cntnr: FeatureContainer) -> FeatureContainerWriterBase: pass
 
     ##
-    # \brief 
-    #
+    # \brief Writes format dependent data (if required) to mark the end of output.
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def close() -> None: pass
 
     ##

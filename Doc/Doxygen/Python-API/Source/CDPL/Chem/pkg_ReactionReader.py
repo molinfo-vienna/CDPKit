@@ -20,45 +20,50 @@
 #
 
 ##
-# \brief 
-#
+# \brief Reader for reaction data in any supported format.
+# 
 class ReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %ReactionReader instance.
+    # \param self The \e %ReactionReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionReader instance.
+    # \param self The \e %ReactionReader instance to initialize.
     # \param file_name 
     # \param fmt 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, fmt: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionReader instance.
+    # \param self The \e %ReactionReader instance to initialize.
     # \param file_name 
     # \param fmt 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, fmt: CDPL.Base.DataFormat, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionReader instance.
+    # \param self The \e %ReactionReader instance to initialize.
     # \param is 
     # \param fmt 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream, fmt: str) -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionReader instance.
+    # \param self The \e %ReactionReader instance to initialize.
     # \param is 
     # \param fmt 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream, fmt: CDPL.Base.DataFormat) -> None: pass
 
     ##
@@ -67,7 +72,4 @@ class ReactionReader(ReactionReaderBase):
     #
     def getDataFormat() -> CDPL.Base.DataFormat: pass
 
-    ##
-    # \brief 
-    #
     dataFormat = property(getDataFormat)

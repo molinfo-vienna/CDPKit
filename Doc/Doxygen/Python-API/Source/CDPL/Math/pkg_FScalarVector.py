@@ -26,20 +26,23 @@ class FScalarVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FScalarVector instance.
-    #
+    # \param self The \e %FScalarVector instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FScalarVector instance.
+    # \param self The \e %FScalarVector instance to initialize.
     # \param v 
-    #
+    # 
     def __init__(v: FScalarVector) -> None: pass
 
     ##
     # \brief Initializes the \e %FScalarVector instance.
+    # \param self The \e %FScalarVector instance to initialize.
     # \param n 
     # \param v 
-    #
+    # 
     def __init__(n: int, v: float = 0.0) -> None: pass
 
     ##
@@ -50,14 +53,15 @@ class FScalarVector(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FScalarVector instance this method is called upon.
+    # 
     # Different Python \e %FScalarVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FScalarVector instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -86,9 +90,9 @@ class FScalarVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FScalarVector instance \a v.
-    # \param v The \e %FScalarVector instance to copy.
-    # \return \a self
+    # \brief 
+    # \param v 
+    # \return 
     #
     def assign(v: FScalarVector) -> FScalarVector: pass
 
@@ -100,30 +104,34 @@ class FScalarVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
+    # \param self The \e %FScalarVector instance this method is called upon.
     # \param v The \e %FScalarVector instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(v: FScalarVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
+    # \param self The \e %FScalarVector instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
+    # \param self The \e %FScalarVector instance this method is called upon.
     # \param v The \e %FScalarVector instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(v: FScalarVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
+    # \param self The \e %FScalarVector instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
@@ -148,8 +156,9 @@ class FScalarVector(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %FScalarVector instance.
+    # \param self The \e %FScalarVector instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -166,37 +175,42 @@ class FScalarVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %FScalarVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstFVectorExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %FScalarVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FScalarVector instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %FScalarVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %FScalarVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %FScalarVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstFVectorExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
@@ -213,12 +227,6 @@ class FScalarVector(Boost.Python.instance):
     #
     def __rmul__(t: float) -> ConstFVectorExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

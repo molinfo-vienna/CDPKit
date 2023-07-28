@@ -20,12 +20,26 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# 
+# <tt>MOLMoleculeReader</tt> supports the following control-parameters:
+# 
+# <table>
+#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
+#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
+#  <tr><td>Chem.ControlParameter.MULTI_CONF_IMPORT</td><td><tt>True</tt></td><td>Specifies whether to check for and import multi-conformer molecules</td></tr>
+#  <tr><td>Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR</td><td>reference to a Chem.DefaultMultiConfMoleculeInputProcessor instance</td><td>Specifies an instance of Chem.MultiConfMoleculeInputProcessor that implements the logic of multi-conformer molecule detection and conformational data processing</td></tr>
+#  <tr><td>Chem.ControlParameter.MDL_IGNORE_PARITY</td><td><tt>False</tt></td><td>Specifies whether the stereo parity of atoms shall be ignored</td></tr>
+#  <tr><td>Chem.ControlParameter.MDL_TRIM_STRINGS</td><td><tt>True</tt></td><td>Specifies whether to remove leading and trailing whitespace from string values</td></tr>
+#  <tr><td>Chem.ControlParameter.MDL_TRIM_LINES</td><td><tt>False</tt></td><td>Specifies whether to remove leading and trailing whitespace from data lines</td></tr>
+#  <tr><td>Chem.ControlParameter.MDL_IGNORE_LINE_LENGTH_LIMIT</td><td><tt>True</tt></td><td>Specifies whether to check if data lines exceed the maximum allowed line length</td></tr>
+# </table>
+# 
 class MOLMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %MOLMoleculeReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>MOLMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

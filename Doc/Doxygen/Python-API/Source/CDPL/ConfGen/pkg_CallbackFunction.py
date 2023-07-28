@@ -20,25 +20,28 @@
 #
 
 ##
-# \brief 
-#
+# \brief A generic wrapper class used to store a user-defined callback functions (see [\ref FUNWRP]).
+# 
 class CallbackFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CallbackFunction instance.
-    #
+    # \param self The \e %CallbackFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CallbackFunction instance.
+    # \param self The \e %CallbackFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: CallbackFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %CallbackFunction instance.
+    # \param arg1 The \e %CallbackFunction instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

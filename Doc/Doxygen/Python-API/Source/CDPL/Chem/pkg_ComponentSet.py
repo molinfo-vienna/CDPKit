@@ -20,23 +20,25 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the perception of molecular graph components.
+# 
 class ComponentSet(FragmentList):
 
     ##
-    # \brief Initializes the \e %ComponentSet instance.
-    #
+    # \brief Constructs an empty <tt>ComponentSet</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ComponentSet instance.
-    # \param molgraph 
-    #
+    # \brief Constructs a <tt>ComponentSet</tt> instance that contains the componenents of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the components.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of components by the components of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the components.
+    # 
     def perceive(molgraph: MolecularGraph) -> None: pass

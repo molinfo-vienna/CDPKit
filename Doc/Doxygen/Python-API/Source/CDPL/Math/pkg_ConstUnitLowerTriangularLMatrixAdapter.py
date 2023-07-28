@@ -26,26 +26,29 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstUnitLowerTriangularLMatrixAdapter instance.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance to initialize.
     # \param a 
-    #
+    # 
     def __init__(a: ConstUnitLowerTriangularLMatrixAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstUnitLowerTriangularLMatrixAdapter instance.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance to initialize.
     # \param e 
-    #
+    # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance this method is called upon.
+    # 
     # Different Python \e %ConstUnitLowerTriangularLMatrixAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstUnitLowerTriangularLMatrixAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -109,36 +112,41 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance this method is called upon.
     # \param a The \e %ConstUnitLowerTriangularLMatrixAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(a: ConstUnitLowerTriangularLMatrixAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance this method is called upon.
     # \param a The \e %ConstUnitLowerTriangularLMatrixAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(a: ConstUnitLowerTriangularLMatrixAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstUnitLowerTriangularLMatrixAdapter instance.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -155,44 +163,50 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLMatrixExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstUnitLowerTriangularLMatrixAdapter instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %ConstUnitLowerTriangularLMatrixAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLMatrixExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: int) -> ConstLMatrixExpression: pass
 
     ##
@@ -209,22 +223,10 @@ class ConstUnitLowerTriangularLMatrixAdapter(Boost.Python.instance):
     #
     def __rmul__(t: int) -> ConstLMatrixExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size1 = property(getSize1)
 
-    ##
-    # \brief 
-    #
     size2 = property(getSize2)
 
-    ##
-    # \brief 
-    #
     data = property(getData)

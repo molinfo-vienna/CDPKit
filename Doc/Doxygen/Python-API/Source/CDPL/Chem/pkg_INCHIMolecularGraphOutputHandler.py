@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em> [\ref INCHI] format.
+# 
 class INCHIMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %INCHIMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %INCHIMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

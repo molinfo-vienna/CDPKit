@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides default values for built-in control-parameters.
+# 
 class ControlParameterDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter ConfGen.ControlParameter.STRICT_ERROR_CHECKING.
+    # 
     STRICT_ERROR_CHECKING = False

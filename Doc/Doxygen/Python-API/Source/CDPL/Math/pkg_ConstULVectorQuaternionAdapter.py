@@ -26,26 +26,29 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstULVectorQuaternionAdapter instance.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance to initialize.
     # \param a 
-    #
+    # 
     def __init__(a: ConstULVectorQuaternionAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstULVectorQuaternionAdapter instance.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance to initialize.
     # \param e 
-    #
+    # 
     def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ConstULVectorQuaternionAdapter instance this method is called upon.
+    # 
     # Different Python \e %ConstULVectorQuaternionAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstULVectorQuaternionAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -86,36 +89,41 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %ConstULVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(a: ConstULVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstULQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %ConstULVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(a: ConstULVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstULQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(q: ConstULQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstULVectorQuaternionAdapter instance.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -132,16 +140,18 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %ConstULQuaternionExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstULQuaternionExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
     ##
@@ -153,16 +163,18 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %ConstULVectorQuaternionAdapter instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstULVectorQuaternionAdapter instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
     ##
@@ -174,16 +186,18 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstULQuaternionExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstULQuaternionExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
     ##
@@ -195,16 +209,18 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstULQuaternionExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
+    # \param self The \e %ConstULVectorQuaternionAdapter instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %ConstULQuaternionExpression instance holding the result of the division.
-    #
+    # 
     def __div__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
     ##
@@ -221,12 +237,6 @@ class ConstULVectorQuaternionAdapter(Boost.Python.instance):
     #
     def __rdiv__(t: int) -> ConstULQuaternionExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     data = property(getData)

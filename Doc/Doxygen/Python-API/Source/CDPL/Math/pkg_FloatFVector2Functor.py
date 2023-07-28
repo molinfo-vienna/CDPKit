@@ -26,19 +26,22 @@ class FloatFVector2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FloatFVector2Functor instance.
-    #
+    # \param self The \e %FloatFVector2Functor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FloatFVector2Functor instance.
+    # \param self The \e %FloatFVector2Functor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: FloatFVector2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %FloatFVector2Functor instance.
+    # \param arg1 The \e %FloatFVector2Functor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

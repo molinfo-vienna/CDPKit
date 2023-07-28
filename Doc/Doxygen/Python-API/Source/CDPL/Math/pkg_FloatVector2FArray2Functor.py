@@ -26,19 +26,22 @@ class FloatVector2FArray2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FloatVector2FArray2Functor instance.
-    #
+    # \param self The \e %FloatVector2FArray2Functor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FloatVector2FArray2Functor instance.
+    # \param self The \e %FloatVector2FArray2Functor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: FloatVector2FArray2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %FloatVector2FArray2Functor instance.
+    # \param arg1 The \e %FloatVector2FArray2Functor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

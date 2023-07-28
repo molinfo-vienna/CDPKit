@@ -20,13 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief NOTBondMatchExpression.
+# 
 class NOTBondMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Replaces the current state of \a arg1 with a copy of the state of the \e %NOTBondMatchExpression instance \a expression.
-    # \param expression The \e %NOTBondMatchExpression instance to copy.
-    # \return \a arg1
+    # \brief Constructs a <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # 
+    # \param expr_ptr A reference to the wrapped Chem.MatchExpression instance.
+    # 
+    def __init__(expr_ptr: NOTBondMatchExpression) -> None: pass
+
+    ##
+    # \brief Constructs a <tt>NOTBondMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # 
+    # \param expr_ptr A reference to the wrapped Chem.MatchExpression instance.
+    # 
+    def __init__(expr_ptr: BondMatchExpression) -> None: pass
+
+    ##
+    # \brief 
+    # \param expression 
+    # \return 
     #
     def assign(expression: NOTBondMatchExpression) -> NOTBondMatchExpression: pass

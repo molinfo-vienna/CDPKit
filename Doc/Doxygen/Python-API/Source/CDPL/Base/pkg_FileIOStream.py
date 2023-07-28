@@ -26,16 +26,18 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %FileIOStream instance.
+    # \param self The \e %FileIOStream instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: str = 'r') -> None: pass
 
     ##
     # \brief Initializes the \e %FileIOStream instance.
+    # \param self The \e %FileIOStream instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode.IN) -> None: pass
 
     ##
@@ -140,25 +142,30 @@ class FileIOStream(IOStream):
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     closed = property(getClosed)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     mode = property(getMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     modeFlags = property(getModeFlags)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     softspace = property(getSoftspace, setSoftspace)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     name = property(getName)

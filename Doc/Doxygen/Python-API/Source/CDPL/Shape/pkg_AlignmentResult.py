@@ -26,31 +26,34 @@ class AlignmentResult(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AlignmentResult instance.
-    #
+    # \param self The \e %AlignmentResult instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AlignmentResult instance.
+    # \param self The \e %AlignmentResult instance to initialize.
     # \param res 
-    #
+    # 
     def __init__(res: AlignmentResult) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AlignmentResult instance this method is called upon.
+    # 
     # Different Python \e %AlignmentResult instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AlignmentResult instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AlignmentResult instance \a res.
-    # \param res The \e %AlignmentResult instance to copy.
-    # \return \a self
+    # \brief 
+    # \param res 
+    # \return 
     #
     def assign(res: AlignmentResult) -> AlignmentResult: pass
 
@@ -186,62 +189,26 @@ class AlignmentResult(Boost.Python.instance):
     #
     def setAlignedColorSelfOverlap(overlap: float) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     transform = property(getTransform, setTransform)
 
-    ##
-    # \brief 
-    #
     score = property(getScore, setScore)
 
-    ##
-    # \brief 
-    #
     referenceShapeSetIndex = property(getReferenceShapeSetIndex, setReferenceShapeSetIndex)
 
-    ##
-    # \brief 
-    #
     referenceShapeIndex = property(getReferenceShapeIndex, setReferenceShapeIndex)
 
-    ##
-    # \brief 
-    #
     alignedShapeIndex = property(getAlignedShapeIndex, setAlignedShapeIndex)
 
-    ##
-    # \brief 
-    #
     overlap = property(getOverlap, setOverlap)
 
-    ##
-    # \brief 
-    #
     colorOverlap = property(getColorOverlap, setColorOverlap)
 
-    ##
-    # \brief 
-    #
     referenceSelfOverlap = property(getReferenceSelfOverlap, setReferenceSelfOverlap)
 
-    ##
-    # \brief 
-    #
     referenceColorSelfOverlap = property(getReferenceColorSelfOverlap, setReferenceColorSelfOverlap)
 
-    ##
-    # \brief 
-    #
     alignedSelfOverlap = property(getAlignedSelfOverlap, setAlignedSelfOverlap)
 
-    ##
-    # \brief 
-    #
     alignedColorSelfOverlap = property(getAlignedColorSelfOverlap, setAlignedColorSelfOverlap)

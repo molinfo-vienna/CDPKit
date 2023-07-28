@@ -20,28 +20,36 @@
 #
 
 ##
-# \brief 
-# \param mol 
-# \param corr_impl_h_count 
-# \return 
-#
+# \brief Removes all explicit hydrogen atoms from the molecule <em>mol</em>.
+# 
+# \param mol The molecule for which to remove all explicit hydrogen atoms.
+# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
+# 
+# \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise.
+# 
 def makeHydrogenDeplete(mol: Molecule, corr_impl_h_count: bool = True) -> bool: pass
 
 ##
-# \brief 
-# \param mol 
-# \param flags 
-# \param corr_impl_h_count 
-# \return 
-#
+# \brief Removes all explicit ordinary hydrogen atoms from the molecule <em>mol</em>.
+# 
+# \param mol The molecule for which to remove all explicit ordinary hydrogen atoms.
+# \param flags Specifies the set of atom properties to check (see namespace Chem.AtomPropertyFlag).
+# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed atoms shall be corrected, <tt>False</tt> if the property shall be left unchanged.
+# 
+# \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise. 
+# 
+# \see Chem.isOrdinaryHydrogen
+# 
 def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int, corr_impl_h_count: bool = True) -> bool: pass
 
 ##
-# \brief 
-# \param mol 
-# \param corr_impl_h_count 
-# \return 
-#
+# \brief Converts all implicit hydrogens of the molecule <em>mol</em> to explicit hydrogen atoms.
+# 
+# \param mol The molecule that has to be made hydrogen complete.
+# \param corr_impl_h_count <tt>True</tt> if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero, <tt>False</tt> if the property shall be left unchanged.
+# 
+# \return <tt>False</tt> if <em>mol</em> was not altered, <tt>True</tt> otherwise.
+# 
 def makeHydrogenComplete(mol: Molecule, corr_impl_h_count: bool = True) -> bool: pass
 
 ##

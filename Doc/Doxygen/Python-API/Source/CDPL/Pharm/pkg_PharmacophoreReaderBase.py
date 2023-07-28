@@ -20,65 +20,105 @@
 #
 
 ##
-# \brief 
-#
+# \brief An interface for reading data objects of type Pharm.Pharmacophore from an arbitrary data source.
+# 
+# <tt>PharmacophoreReaderBase</tt> is the common interface of classes which read objects of type Pharm.Pharmacophore from some data source (e.g. a file) that provides the data encoded in a particular storage format.
+# 
+# From the <tt>PharmacophoreReaderBase</tt> interface point of view, the data source is organized as an array of logical data records. Each record is addressed by a zero-based sequential record index and contains the data for exactly <em>one</em> data object. The total number of available data records (which is equal to the maximum record index plus <em>1</em>) can be queried by the method getNumRecords().
+# 
+# Similar to low-level file I/O, data records may either be read in a sequential or in a random access manner. For sequential access the method read(pharm: Pharmacophore) is provided which will read the data record at the 'current' record index (similar to a file reference). The current record index is accessible by the method getRecordIndex() and can be modified using the method setRecordIndex() (similar to a seek operation).
+# 
+# For reading data records in a random access manner, the method read(std::size_t idx, pharm: Pharmacophore) is available. In contrast to the former read() method, this method expects the index of the record to read as the first argument.
+# 
+# If a read() (or skip()) operation was successful, the current record index is updated to point to the record immediately following the just read (or skipped) data record. If an operation fails, the reader instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>PharmacophoreReaderBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
+# 
 class PharmacophoreReaderBase(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %PharmacophoreReaderBase instance.
-    #
+    # \param self The \e %PharmacophoreReaderBase instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    # \param overwrite 
-    # \return 
-    #
+    # \brief Reads the data record at the current record index and stores the read data in <em>pharm</em>.
+    # 
+    # If the read operation was successful, the record index is incremented by <em>1</em>.
+    # 
+    # \param pharm The Pharmacophore object storing the read data.
+    # \param overwrite Specifies whether any existing data in <em>pharm</em> shall be replaced by the newly read data or if the read data should be appended (if supported by the reader and data type).
+    # 
+    # \return \a self 
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def read(pharm: Pharmacophore, overwrite: bool = True) -> PharmacophoreReaderBase: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \param pharm 
-    # \param overwrite 
-    # \return 
-    #
+    # \brief Reads the data record at index <em>idx</em> and stores the read data in <em>pharm</em>.
+    # 
+    # If the read operation was successful, the record index is set to <em>idx + 1</em>.
+    # 
+    # \param idx The zero-based index of the data record to read.
+    # \param pharm The Pharmacophore object storing the read data.
+    # \param overwrite Specifies whether any existing data in <em>pharm</em> shall be replaced by the newly read data or if the read data should be appended (if supported by the reader and data type).
+    # 
+    # \return \a self 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is greater or equal to the number of records. Base.IOError if an I/O error occurred.
+    # 
     def read(idx: int, pharm: Pharmacophore, overwrite: bool = True) -> PharmacophoreReaderBase: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Skips the data record at the current record index.
+    # 
+    # If the operation was successful, the record index is incremented by <em>1</em>.
+    # 
+    # \return \a self 
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def skip() -> PharmacophoreReaderBase: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Tells if there are any data records left to read.
+    # 
+    # \return <tt>True</tt> if there are data records left to read, and <tt>False</tt> otherwise. 
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def hasMoreData() -> bool: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the current data record.
+    # 
+    # \return The zero-based index of the current data record.
+    # 
     def getRecordIndex() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Sets the index of the current data record to <em>idx</em>.
+    # 
+    # \param idx The zero-based index of the data record.
+    # 
+    # \throw Base.IndexError if <em>idx</em> is greater or equal to the number of available data records. Base.IOError if an I/O error occurred.
+    # 
     def setRecordIndex(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the total number of available data records.
+    # 
+    # \return The total number of available data records. 
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def getNumRecords() -> int: pass
 
     ##
-    # \brief 
-    #
+    # \brief Performs a reader specific shutdown operation (if required).
+    # 
+    # \throw Base.IOError if an I/O error occurred.
+    # 
     def close() -> None: pass
 
     ##
@@ -93,7 +133,4 @@ class PharmacophoreReaderBase(CDPL.Base.DataIOBase):
     #
     def __bool__() -> bool: pass
 
-    ##
-    # \brief 
-    #
     numRecords = property(getNumRecords)

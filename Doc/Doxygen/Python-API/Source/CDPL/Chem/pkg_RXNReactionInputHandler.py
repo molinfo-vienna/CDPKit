@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
+# 
 class RXNReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %RXNReactionInputHandler instance.
-    #
+    # \param self The \e %RXNReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

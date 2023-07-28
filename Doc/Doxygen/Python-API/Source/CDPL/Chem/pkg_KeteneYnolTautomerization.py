@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief KeteneYnolTautomerizationRule.
+# 
 class KeteneYnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %KeteneYnolTautomerization instance.
-    #
+    # \param self The \e %KeteneYnolTautomerization instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %KeteneYnolTautomerization instance.
+    # \param self The \e %KeteneYnolTautomerization instance to initialize.
     # \param rule 
-    #
+    # 
     def __init__(rule: KeteneYnolTautomerization) -> None: pass

@@ -31,40 +31,44 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param atom_type 
         # \param ass_mode 
         # \param charge 
         # \param type_list 
-        #
+        # 
         def __init__(atom_type: str, ass_mode: int, charge: float, type_list: str) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -104,52 +108,40 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
         #
         def __bool__() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         atomType = property(getAtomType)
 
-        ##
-        # \brief 
-        #
         assignmentMode = property(getAssignmentMode)
 
-        ##
-        # \brief 
-        #
         formalCharge = property(getFormalCharge)
 
-        ##
-        # \brief 
-        #
         atomTypeList = property(getAtomTypeList)
 
     ##
     # \brief Initializes the \e %MMFF94FormalAtomChargeDefinitionTable instance.
-    #
+    # \param self The \e %MMFF94FormalAtomChargeDefinitionTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94FormalAtomChargeDefinitionTable instance.
+    # \param self The \e %MMFF94FormalAtomChargeDefinitionTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94FormalAtomChargeDefinitionTable instance this method is called upon.
+    # 
     # Different Python \e %MMFF94FormalAtomChargeDefinitionTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94FormalAtomChargeDefinitionTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -204,9 +196,9 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94FormalAtomChargeDefinitionTable instance \a table.
-    # \param table The \e %MMFF94FormalAtomChargeDefinitionTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param table 
+    # \return 
     #
     def assign(table: MMFF94FormalAtomChargeDefinitionTable) -> MMFF94FormalAtomChargeDefinitionTable: pass
 
@@ -225,17 +217,8 @@ class MMFF94FormalAtomChargeDefinitionTable(Boost.Python.instance):
     @staticmethod
     def get(: ) -> MMFF94FormalAtomChargeDefinitionTable: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

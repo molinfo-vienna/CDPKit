@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief A dynamic bitset class.
+# 
+# For further information see [\ref BDBS].
+# 
 class BitSet(Boost.Python.instance):
 
     ##
@@ -31,38 +33,43 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    #
+    # \param self The \e %BitSet instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
+    # \param self The \e %BitSet instance to initialize.
     # \param bs 
-    #
+    # 
     def __init__(bs: BitSet) -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
+    # \param self The \e %BitSet instance to initialize.
     # \param num_bits 
     # \param value 
-    #
+    # 
     def __init__(num_bits: int, value: int = 0) -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
+    # \param self The \e %BitSet instance to initialize.
     # \param bit_str 
-    #
+    # 
     def __init__(bit_str: str) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %BitSet instance this method is called upon.
+    # 
     # Different Python \e %BitSet instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BitSet instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -72,9 +79,9 @@ class BitSet(Boost.Python.instance):
     def swap(bs: BitSet) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BitSet instance \a bs.
-    # \param bs The \e %BitSet instance to copy.
-    # \return \a self
+    # \brief 
+    # \param bs 
+    # \return 
     #
     def assign(bs: BitSet) -> BitSet: pass
 
@@ -243,9 +250,10 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - bs</tt>.
+    # \param self The \e %BitSet instance acting as minuend.
     # \param bs Specifies the subtrahend.
     # \return A \e %BitSet instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(bs: BitSet) -> BitSet: pass
 
     ##
@@ -271,9 +279,10 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= bs</tt>.
+    # \param self The \e %BitSet instance acting as in-place minuend.
     # \param bs Specifies the subtrahend.
     # \return The updated \e %BitSet instance \a self.
-    #
+    # 
     def __isub__(bs: BitSet) -> BitSet: pass
 
     ##
@@ -318,44 +327,50 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == bs</tt>.
+    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != bs</tt>.
+    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < bs</tt>.
+    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __lt__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= bs</tt>.
+    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __le__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > bs</tt>.
+    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __gt__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= bs</tt>.
+    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ge__(bs: BitSet) -> bool: pass
 
     ##
@@ -378,41 +393,33 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %BitSet instance.
+    # \param self The \e %BitSet instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     empty = property(getEmpty)
 
-    ##
-    # \brief 
-    #
     count = property(getCount)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)
 
-    ##
-    # \brief 
-    #
     maxSize = property(getMaxSize)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     any = property(getAny)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     none = property(getNone)

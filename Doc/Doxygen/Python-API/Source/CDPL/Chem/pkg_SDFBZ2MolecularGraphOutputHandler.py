@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of bzip2-compressed molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class SDFBZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SDFBZ2MolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %SDFBZ2MolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

@@ -20,23 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the perception of the <em>Smallest Set of Smallest Rings (SSSR)</em> of a molecular graphs.
+# 
+# \see [\ref BALD]
+# 
 class SmallestSetOfSmallestRings(FragmentList):
 
     ##
-    # \brief Initializes the \e %SmallestSetOfSmallestRings instance.
-    #
+    # \brief Constructs an empty <tt>SmallestSetOfSmallestRings</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SmallestSetOfSmallestRings instance.
-    # \param molgraph 
-    #
+    # \brief Constructs a <tt>SmallestSetOfSmallestRings</tt> instance containing the <em>SSSR</em> of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the <em>SSSR</em>.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of rings by the <em>SSSR</em> of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the <em>SSSR</em>.
+    # 
     def perceive(molgraph: MolecularGraph) -> None: pass

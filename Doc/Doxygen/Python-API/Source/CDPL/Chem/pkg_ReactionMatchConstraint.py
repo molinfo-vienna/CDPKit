@@ -20,21 +20,23 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides numerical identifiers for built-in Chem.Reaction matching constraints.
+# 
 class ReactionMatchConstraint(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint which requires the target reaction to fulfill additional contraints specified by a Chem.MatchConstraintList object.
+    # 
     CONSTRAINT_LIST = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint which requires the target reaction to match the reactant to product atom mapping of the query reaction.
+    # 
     ATOM_MAPPING = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a constraint which requires the target reaction to match any component level groupings defined by the query reaction.
+    # 
+    # Component level groupings specify whether the components of a query reaction have to be matched by a single target reaction component (intramolecular reaction) or by different components of the target (intermolecular reaction). <em>Daylight SMARTS</em> patterns [\ref SMARTS] allow to specify component groupings by parentheses that enclose those components of the query which have to be part of the same target reaction component.
+    # 
     COMPONENT_GROUPING = 2

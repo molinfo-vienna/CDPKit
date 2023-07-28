@@ -20,12 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
+# <tt>SMILESReactionReader</tt> supports the following control-parameters:
+# 
+# <table>
+#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
+#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_RECORD_FORMAT</td><td><tt>"S"</tt></td><td>Specifies the data record format</td></tr>
+# </table>
+# 
 class SMILESReactionReader(ReactionReaderBase):
 
     ##
-    # \brief Initializes the \e %SMILESReactionReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>SMILESReactionReader</tt> instance that will read the reaction data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief PatternBasedFeatureGenerator.
+# 
 class PatternBasedFeatureGenerator(FeatureGenerator):
 
     ##
@@ -50,54 +50,60 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
         GEOM_REF_ATOM2_FLAG = 8
 
     ##
-    # \brief Initializes the \e %PatternBasedFeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>PatternBasedFeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PatternBasedFeatureGenerator instance.
-    # \param gen 
-    #
+    # \brief Constructs a copy of the <tt>PatternBasedFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>PatternBasedFeatureGenerator</tt> instance to copy.
+    # 
     def __init__(gen: PatternBasedFeatureGenerator) -> None: pass
 
     ##
-    # \brief 
-    # \param pattern 
-    # \param type 
-    # \param tol 
-    # \param geom 
-    # \param length 
-    #
+    # \brief Appends a new feature include pattern to the current set of patterns.
+    # 
+    # \param pattern The substructure search pattern of the feature.
+    # \param type The value of the type property of the feature.
+    # \param tol The value of the tolerance property of the feature.
+    # \param geom The value of the geometry property of the feature.
+    # \param length The value of the length property of vector features.
+    # 
     def addIncludePattern(pattern: CDPL.Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
 
     ##
-    # \brief 
-    # \param pattern 
-    #
+    # \brief Appends a new feature include pattern to the current set of patterns.
+    # 
+    # \param pattern The substructure search pattern of the feature.
+    # 
     def addExcludePattern(pattern: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Clears the current set of include patterns.
+    # 
     def clearIncludePatterns() -> None: pass
 
     ##
-    # \brief 
-    #
+    # \brief Clears the current set of exclude patterns.
+    # 
     def clearExcludePatterns() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternBasedFeatureGenerator instance \a gen.
-    # \param gen The \e %PatternBasedFeatureGenerator instance to copy.
+    # \brief Replaces the current set include/exclude patterns by the patterns in the <tt>PatternBasedFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>PatternBasedFeatureGenerator</tt> instance providing the new patterns to use.
+    # 
     # \return \a self
-    #
+    # 
     def assign(gen: PatternBasedFeatureGenerator) -> PatternBasedFeatureGenerator: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##

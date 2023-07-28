@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A global dictionary for the lookup of meta-data associated with the residues in biological macromolecules.
+# 
 class ResidueDictionary(Boost.Python.instance):
 
     ##
@@ -31,17 +31,20 @@ class ResidueDictionary(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param code 
         # \param rep_code 
         # \param rep_by_code 
@@ -49,25 +52,26 @@ class ResidueDictionary(Boost.Python.instance):
         # \param name 
         # \param type 
         # \param struc_ret_func 
-        #
+        # 
         def __init__(code: str, rep_code: str, rep_by_code: str, obsolete: bool, name: str, type: int, struc_ret_func: MolecularGraphPointerStringFunctor) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -113,67 +117,50 @@ class ResidueDictionary(Boost.Python.instance):
         #
         def getStructure() -> CDPL.Chem.MolecularGraph: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         code = property(getCode)
 
-        ##
-        # \brief 
-        #
         replacedCode = property(getReplacedCode)
 
-        ##
-        # \brief 
-        #
         replacedByCode = property(getReplacedByCode)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         obsolete = property(getObsolete)
 
-        ##
-        # \brief 
-        #
         name = property(getName)
 
-        ##
-        # \brief 
-        #
         type = property(getType)
 
-        ##
-        # \brief 
-        #
         structure = property(getStructure)
 
     ##
     # \brief Initializes the \e %ResidueDictionary instance.
-    #
+    # \param self The \e %ResidueDictionary instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ResidueDictionary instance.
+    # \param self The \e %ResidueDictionary instance to initialize.
     # \param dict 
-    #
+    # 
     def __init__(dict: ResidueDictionary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ResidueDictionary instance this method is called upon.
+    # 
     # Different Python \e %ResidueDictionary instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ResidueDictionary instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -225,9 +212,9 @@ class ResidueDictionary(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ResidueDictionary instance \a dict.
-    # \param dict The \e %ResidueDictionary instance to copy.
-    # \return \a self
+    # \brief 
+    # \param dict 
+    # \return 
     #
     def assign(dict: ResidueDictionary) -> ResidueDictionary: pass
 
@@ -302,17 +289,8 @@ class ResidueDictionary(Boost.Python.instance):
     @staticmethod
     def getStructure(code: str) -> CDPL.Chem.MolecularGraph: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

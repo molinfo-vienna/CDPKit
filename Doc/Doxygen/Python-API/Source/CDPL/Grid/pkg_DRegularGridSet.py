@@ -20,31 +20,34 @@
 #
 
 ##
-# \brief 
-#
+# \brief RegularGridSet.
+# 
 class DRegularGridSet(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DRegularGridSet instance.
-    #
+    # \param self The \e %DRegularGridSet instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGridSet instance.
+    # \param self The \e %DRegularGridSet instance to initialize.
     # \param set 
-    #
+    # 
     def __init__(set: DRegularGridSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DRegularGridSet instance this method is called upon.
+    # 
     # Different Python \e %DRegularGridSet instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DRegularGridSet instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -84,9 +87,9 @@ class DRegularGridSet(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularGridSet instance \a array.
-    # \param array The \e %DRegularGridSet instance to copy.
-    # \return \a self
+    # \brief 
+    # \param array 
+    # \return 
     #
     def assign(array: DRegularGridSet) -> DRegularGridSet: pass
 
@@ -203,16 +206,18 @@ class DRegularGridSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == set</tt>.
+    # \param self The \e %DRegularGridSet instance this method is called upon.
     # \param set The \e %object instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(set: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != set</tt>.
+    # \param self The \e %DRegularGridSet instance this method is called upon.
     # \param set The \e %object instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(set: object) -> bool: pass
 
     ##
@@ -222,12 +227,6 @@ class DRegularGridSet(Boost.Python.instance):
     #
     def __getstate__() -> tuple: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

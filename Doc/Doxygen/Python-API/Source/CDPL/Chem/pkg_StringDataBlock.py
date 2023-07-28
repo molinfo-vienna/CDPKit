@@ -20,31 +20,34 @@
 #
 
 ##
-# \brief 
-#
+# \brief An array of Chem.StringDataBlockEntry objects used to store the structure or reaction data block of a <em>STRING SD-</em> or <em>RD-File</em> data record (see [\ref CTFILE]).
+# 
 class StringDataBlock(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %StringDataBlock instance.
-    #
+    # \param self The \e %StringDataBlock instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StringDataBlock instance.
+    # \param self The \e %StringDataBlock instance to initialize.
     # \param data_block 
-    #
+    # 
     def __init__(data_block: StringDataBlock) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %StringDataBlock instance this method is called upon.
+    # 
     # Different Python \e %StringDataBlock instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StringDataBlock instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -84,9 +87,9 @@ class StringDataBlock(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlock instance \a array.
-    # \param array The \e %StringDataBlock instance to copy.
-    # \return \a self
+    # \brief 
+    # \param array 
+    # \return 
     #
     def assign(array: StringDataBlock) -> StringDataBlock: pass
 
@@ -210,24 +213,20 @@ class StringDataBlock(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == data_block</tt>.
+    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param data_block The \e %object instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(data_block: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != data_block</tt>.
+    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param data_block The \e %object instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(data_block: object) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

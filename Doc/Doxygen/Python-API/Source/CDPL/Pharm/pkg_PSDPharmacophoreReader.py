@@ -20,18 +20,20 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for pharmacophore data in the PSD-format of the <em>CDPL</em>.
+# 
 class PSDPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \e %PSDPharmacophoreReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>PSDPharmacophoreReader</tt> instance that will read the pharmacophore data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass
 
     ##
-    # \brief Initializes the \e %PSDPharmacophoreReader instance.
-    # \param file_name 
-    #
+    # \brief Constructs a <tt>PSDPharmacophoreReader</tt> instance that will read the pharmacophore data from the input file <em>file_name</em>.
+    # 
+    # \param file_name The input file to read from.
+    # 
     def __init__(file_name: str) -> None: pass

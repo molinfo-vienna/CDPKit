@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief AromaticFeatureGenerator.
+# 
 class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
@@ -40,77 +40,96 @@ class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
     DEF_FEATURE_GEOM = 3
 
     ##
-    # \brief Initializes the \e %AromaticFeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>AromaticFeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AromaticFeatureGenerator instance.
-    # \param gen 
-    #
+    # \brief Constructs a copy of the <tt>AromaticFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>AromaticFeatureGenerator</tt> instance to copy.
+    # 
     def __init__(gen: AromaticFeatureGenerator) -> None: pass
 
     ##
-    # \brief Initializes the \e %AromaticFeatureGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Specifies the value of the feature type property that has to be set on newly generated features.
+    # 
+    # \param type The value of the feature type property.
+    # 
+    # \note The default type is specified by the constant AromaticFeatureGenerator.DEF_FEATURE_TYPE. 
+    # 
+    # \see FeatureProperty.TYPE
+    # 
     def setFeatureType(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \param geom 
-    #
+    # \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
+    # 
+    # \param geom The value of the feature geometry property.
+    # 
+    # \note The default type is specified by the constant AromaticFeatureGenerator.DEF_FEATURE_GEOM. 
+    # 
+    # \see FeatureProperty.GEOMETRY
+    # 
     def setFeatureGeometry(geom: int) -> None: pass
 
     ##
-    # \brief 
-    # \param tol 
-    #
+    # \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
+    # 
+    # \param tol The value of the feature tolerance property.
+    # 
+    # \note The default value is specified by the constant AromaticFeatureGenerator.DEF_FEATURE_TOL. 
+    # 
+    # \see FeatureProperty.TOLERANCE
+    # 
     def setFeatureTolerance(tol: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature type property that gets set on newly generated features.
+    # 
+    # \return The used value of the feature type property. 
+    # 
+    # \see FeatureProperty.TYPE
+    # 
     def getFeatureType() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature geometry property that gets set on newly generated features.
+    # 
+    # \return The used value of the feature geometry property. 
+    # 
+    # \see FeatureProperty.GEOMETRY
+    # 
     def getFeatureGeometry() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature tolerance property that gets set on newly generated features.
+    # 
+    # \return The value of the feature tolerance property. 
+    # 
+    # \see FeatureProperty.TOLERANCE
+    # 
     def getFeatureTolerance() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AromaticFeatureGenerator instance \a gen.
-    # \param gen The \e %AromaticFeatureGenerator instance to copy.
+    # \brief Replaces the current set include/exclude patterns and attributes by a copy of the <tt>AromaticFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>AromaticFeatureGenerator</tt> instance to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(gen: AromaticFeatureGenerator) -> AromaticFeatureGenerator: pass
 
-    ##
-    # \brief 
-    #
     featureType = property(getFeatureType, setFeatureType)
 
-    ##
-    # \brief 
-    #
     featureGeometry = property(getFeatureGeometry, setFeatureGeometry)
 
-    ##
-    # \brief 
-    #
     featureTolerance = property(getFeatureTolerance, setFeatureTolerance)

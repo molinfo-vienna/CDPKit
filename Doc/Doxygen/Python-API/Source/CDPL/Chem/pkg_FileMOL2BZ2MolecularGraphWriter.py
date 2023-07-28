@@ -26,7 +26,8 @@ class FileMOL2BZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %FileMOL2BZ2MolecularGraphWriter instance.
+    # \param self The \e %FileMOL2BZ2MolecularGraphWriter instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass

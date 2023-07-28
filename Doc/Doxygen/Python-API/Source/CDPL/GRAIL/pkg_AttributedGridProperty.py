@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Grid.AttributedGrid properties.
+# 
 class AttributedGridProperty(Boost.Python.instance):
 
     ##

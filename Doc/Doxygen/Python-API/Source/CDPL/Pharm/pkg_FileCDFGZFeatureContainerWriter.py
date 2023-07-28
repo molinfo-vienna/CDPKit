@@ -26,7 +26,8 @@ class FileCDFGZFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
     # \brief Initializes the \e %FileCDFGZFeatureContainerWriter instance.
+    # \param self The \e %FileCDFGZFeatureContainerWriter instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass

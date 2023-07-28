@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief HierarchyViewNode.
+# 
 class HierarchyViewNode(CDPL.Chem.Fragment):
 
     ##
@@ -30,7 +30,4 @@ class HierarchyViewNode(CDPL.Chem.Fragment):
     #
     def getResidues() -> ResidueList: pass
 
-    ##
-    # \brief 
-    #
     residues = property(getResidues)

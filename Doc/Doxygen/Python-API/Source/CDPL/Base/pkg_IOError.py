@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that an I/O operation has failed because of physical (e.g. broken pipe) or logical (e.g. invalid file format) errors.
+# 
 class IOError(OperationFailed, builtins.OSError):
     pass

@@ -26,7 +26,8 @@ class FileRDFBZ2ReactionWriter(ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FileRDFBZ2ReactionWriter instance.
+    # \param self The \e %FileRDFBZ2ReactionWriter instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass

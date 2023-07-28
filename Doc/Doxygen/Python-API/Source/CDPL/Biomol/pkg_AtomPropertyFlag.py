@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides flags for the specification of basic Chem.Atom properties.
+# 
 class AtomPropertyFlag(Boost.Python.instance):
 
     ##

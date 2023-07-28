@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in MolProp.Atom properties.
+# 
 class AtomProperty(Boost.Python.instance):
 
     ##

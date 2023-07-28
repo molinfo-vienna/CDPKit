@@ -26,26 +26,29 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstDVectorQuaternionAdapter instance.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance to initialize.
     # \param a 
-    #
+    # 
     def __init__(a: ConstDVectorQuaternionAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstDVectorQuaternionAdapter instance.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance to initialize.
     # \param e 
-    #
+    # 
     def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
+    # 
     # Different Python \e %ConstDVectorQuaternionAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstDVectorQuaternionAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -86,36 +89,41 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %ConstDVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(a: ConstDVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstDQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %ConstDVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(a: ConstDVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstDQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstDVectorQuaternionAdapter instance.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -132,16 +140,18 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %ConstDQuaternionExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDQuaternionExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
@@ -153,16 +163,18 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
@@ -174,16 +186,18 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDQuaternionExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDQuaternionExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
@@ -195,16 +209,18 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDQuaternionExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
+    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %ConstDQuaternionExpression instance holding the result of the division.
-    #
+    # 
     def __div__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
@@ -221,12 +237,6 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     #
     def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     data = property(getData)

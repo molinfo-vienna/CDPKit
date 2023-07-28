@@ -26,6 +26,7 @@ class CDFGZPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
     # \brief Initializes the \e %CDFGZPharmacophoreReader instance.
+    # \param self The \e %CDFGZPharmacophoreReader instance to initialize.
     # \param is 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

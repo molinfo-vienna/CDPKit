@@ -31,44 +31,43 @@ class LMatrixExpression(ConstLMatrixExpression):
     def swap(e: LMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrixExpression instance \a e.
-    # \param e The \e %LMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: LMatrixExpression) -> LMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
-    # \param e The \e %ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstFMatrixExpression) -> LMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
-    # \param e The \e %ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstDMatrixExpression) -> LMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
-    # \param e The \e %ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstLMatrixExpression) -> LMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
-    # \param e The \e %ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstULMatrixExpression) -> LMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
-    # \return \a self
+    # \brief 
+    # \param a 
     #
     def assign(a: object) -> None: pass
 
@@ -89,44 +88,50 @@ class LMatrixExpression(ConstLMatrixExpression):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %LMatrixExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %LMatrixExpression instance \a self.
-    #
+    # 
     def __iadd__(e: LMatrixExpression) -> LMatrixExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %LMatrixExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %LMatrixExpression instance \a self.
-    #
+    # 
     def __iadd__(e: ConstLMatrixExpression) -> LMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %LMatrixExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %LMatrixExpression instance \a self.
-    #
+    # 
     def __isub__(e: LMatrixExpression) -> LMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %LMatrixExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %LMatrixExpression instance \a self.
-    #
+    # 
     def __isub__(e: ConstLMatrixExpression) -> LMatrixExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param self The \e %LMatrixExpression instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %LMatrixExpression instance \a self.
-    #
+    # 
     def __imul__(t: int) -> LMatrixExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \param self The \e %LMatrixExpression instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %LMatrixExpression instance \a self.
-    #
+    # 
     def __idiv__(t: int) -> LMatrixExpression: pass
 
     ##

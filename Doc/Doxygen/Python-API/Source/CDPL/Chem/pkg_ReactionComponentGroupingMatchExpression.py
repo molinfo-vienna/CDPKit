@@ -20,25 +20,29 @@
 #
 
 ##
-# \brief 
-#
+# \brief ReactionComponentGroupingMatchExpression.
+# 
+# \see [\ref SMARTS]
+# 
 class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Initializes the \e %ReactionComponentGroupingMatchExpression instance.
+    # \param self The \e %ReactionComponentGroupingMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: ReactionComponentGroupingMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %ReactionComponentGroupingMatchExpression instance.
-    # \param comp_grouping 
-    #
+    # \brief Constructs a <tt>ReactionComponentGroupingMatchExpression</tt> instance for the specified component-level grouping.
+    # 
+    # \param comp_grouping Specifies the component-level grouping constraints that must be fulfilled by matching target reactions.
+    # 
     def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionComponentGroupingMatchExpression instance \a expr.
-    # \param expr The \e %ReactionComponentGroupingMatchExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: ReactionComponentGroupingMatchExpression) -> ReactionComponentGroupingMatchExpression: pass

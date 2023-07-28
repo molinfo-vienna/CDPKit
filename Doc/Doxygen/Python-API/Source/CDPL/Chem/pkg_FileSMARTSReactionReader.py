@@ -26,7 +26,8 @@ class FileSMARTSReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %FileSMARTSReactionReader instance.
+    # \param self The \e %FileSMARTSReactionReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

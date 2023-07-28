@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>Sybyl MOL2</em> format.
+# 
 class MOL2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %MOL2MoleculeInputHandler instance.
-    #
+    # \param self The \e %MOL2MoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

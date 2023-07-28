@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief FragmentGenerator.
+# 
 class FragmentGenerator(Boost.Python.instance):
 
     ##
@@ -31,33 +31,36 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentationRuler instance.
+        # \param self The \e %FragmentationRuler instance to initialize.
         # \param rule 
-        #
+        # 
         def __init__(rule: FragmentationRuler) -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentationRuler instance.
+        # \param self The \e %FragmentationRuler instance to initialize.
         # \param match_ptn 
         # \param id 
-        #
+        # 
         def __init__(match_ptn: MolecularGraph, id: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %FragmentationRuler instance this method is called upon.
+        # 
         # Different Python \e %FragmentationRuler instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentationRuler instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentationRuler instance \a rule.
-        # \param rule The \e %FragmentationRuler instance to copy.
-        # \return \a self
+        # \brief 
+        # \param rule 
+        # \return 
         #
         def assign(rule: FragmentationRuler) -> FragmentationRuler: pass
 
@@ -85,18 +88,13 @@ class FragmentGenerator(Boost.Python.instance):
         #
         def setID(id: int) -> None: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         matchPattern = property(getMatchPattern, setMatchPattern)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         id = property(getId, setId)
 
@@ -107,33 +105,36 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %ExcludePattern instance.
+        # \param self The \e %ExcludePattern instance to initialize.
         # \param excl_ptn 
-        #
+        # 
         def __init__(excl_ptn: ExcludePattern) -> None: pass
 
         ##
         # \brief Initializes the \e %ExcludePattern instance.
+        # \param self The \e %ExcludePattern instance to initialize.
         # \param match_ptn 
         # \param rule_id 
-        #
+        # 
         def __init__(match_ptn: MolecularGraph, rule_id: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %ExcludePattern instance this method is called upon.
+        # 
         # Different Python \e %ExcludePattern instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ExcludePattern instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %ExcludePattern instance \a excl_ptn.
-        # \param excl_ptn The \e %ExcludePattern instance to copy.
-        # \return \a self
+        # \brief 
+        # \param excl_ptn 
+        # \return 
         #
         def assign(excl_ptn: ExcludePattern) -> ExcludePattern: pass
 
@@ -173,23 +174,15 @@ class FragmentGenerator(Boost.Python.instance):
         #
         def setGeneric(generic: bool) -> None: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         matchPattern = property(getMatchPattern, setMatchPattern)
 
-        ##
-        # \brief 
-        #
         ruleID = property(getRuleID, setRuleID)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         generic = property(getGeneric, setGeneric)
 
@@ -200,37 +193,40 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentLink instance.
+        # \param self The \e %FragmentLink instance to initialize.
         # \param link 
-        #
+        # 
         def __init__(link: FragmentLink) -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentLink instance.
+        # \param self The \e %FragmentLink instance to initialize.
         # \param frag1_idx 
         # \param frag2_idx 
         # \param bond 
         # \param rule_id 
         # \param atom1_label 
         # \param atom2_label 
-        #
+        # 
         def __init__(frag1_idx: int, frag2_idx: int, bond: Bond, rule_id: int, atom1_label: int, atom2_label: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %FragmentLink instance this method is called upon.
+        # 
         # Different Python \e %FragmentLink instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLink instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLink instance \a link.
-        # \param link The \e %FragmentLink instance to copy.
-        # \return \a self
+        # \brief 
+        # \param link 
+        # \return 
         #
         def assign(link: FragmentLink) -> FragmentLink: pass
 
@@ -270,68 +266,49 @@ class FragmentGenerator(Boost.Python.instance):
         #
         def getAtom2Label() -> int: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         fragment1Index = property(getFragment1Index)
 
-        ##
-        # \brief 
-        #
         fragment2Index = property(getFragment2Index)
 
-        ##
-        # \brief 
-        #
         bond = property(getBond)
 
-        ##
-        # \brief 
-        #
         ruleID = property(getRuleID)
 
-        ##
-        # \brief 
-        #
         atom1Label = property(getAtom1Label)
 
-        ##
-        # \brief 
-        #
         atom2Label = property(getAtom2Label)
 
     ##
-    # \brief Initializes the \e %FragmentGenerator instance.
-    #
+    # \brief Constructs the <tt>FragmentGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentGenerator instance.
+    # \param self The \e %FragmentGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: FragmentGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FragmentGenerator instance this method is called upon.
+    # 
     # Different Python \e %FragmentGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentGenerator instance \a gen.
-    # \param gen The \e %FragmentGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: FragmentGenerator) -> FragmentGenerator: pass
 
@@ -454,32 +431,18 @@ class FragmentGenerator(Boost.Python.instance):
     #
     def includeSplitBonds(include: bool) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     fragmentFilterFunction = property(getFragmentFilterFunction, setFragmentFilterFunction)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     incSplitBonds = property(getIncSplitBonds, setIncSplitBonds)
 
-    ##
-    # \brief 
-    #
     numFragmentationRules = property(getNumFragmentationRules)
 
-    ##
-    # \brief 
-    #
     numExcludePatterns = property(getNumExcludePatterns)
 
-    ##
-    # \brief 
-    #
     numFragmentLinks = property(getNumFragmentLinks)

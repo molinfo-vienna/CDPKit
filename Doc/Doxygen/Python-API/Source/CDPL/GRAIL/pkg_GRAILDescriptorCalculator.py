@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief GRAILDescriptorCalculator.
+# 
+# \see [\ref GRAIL]
+# 
 class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
@@ -911,31 +913,34 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
-    #
+    # \param self The \e %GRAILDescriptorCalculator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
+    # \param self The \e %GRAILDescriptorCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: GRAILDescriptorCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GRAILDescriptorCalculator instance this method is called upon.
+    # 
     # Different Python \e %GRAILDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GRAILDescriptorCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDescriptorCalculator instance \a calc.
-    # \param calc The \e %GRAILDescriptorCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: GRAILDescriptorCalculator) -> GRAILDescriptorCalculator: pass
 
@@ -961,7 +966,4 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     #
     def calculate(atom_coords: CDPL.Math.Vector3DArray, descr: CDPL.Math.DVector, update_lig_part: bool = True) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

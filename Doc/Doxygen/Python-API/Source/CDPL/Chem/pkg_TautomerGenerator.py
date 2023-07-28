@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief TautomerGenerator.
+# 
 class TautomerGenerator(Boost.Python.instance):
 
     ##
@@ -45,26 +45,28 @@ class TautomerGenerator(Boost.Python.instance):
         EXHAUSTIVE = 2
 
     ##
-    # \brief Initializes the \e %TautomerGenerator instance.
-    #
+    # \brief Constructs the <tt>TautomerGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TautomerGenerator instance.
+    # \param self The \e %TautomerGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: TautomerGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TautomerGenerator instance this method is called upon.
+    # 
     # Different Python \e %TautomerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TautomerGenerator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -147,44 +149,35 @@ class TautomerGenerator(Boost.Python.instance):
     def setCustomSetupFunction(func: VoidMolecularGraphFunctor) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Generates all unique tautomers of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to generate the tautomers.
+    # 
     def generate(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TautomerGenerator instance \a gen.
-    # \param gen The \e %TautomerGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: TautomerGenerator) -> TautomerGenerator: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     callbackFunction = property(getCallbackFunction, setCallbackFunction)
 
-    ##
-    # \brief 
-    #
     mode = property(getMode, setMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     regStereo = property(getRegStereo, setRegStereo)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     regIsotopes = property(getRegIsotopes, setRegIsotopes)
 
-    ##
-    # \brief 
-    #
     numTautomerizationRules = property(getNumTautomerizationRules)

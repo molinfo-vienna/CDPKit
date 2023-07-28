@@ -20,48 +20,49 @@
 #
 
 ##
-# \brief 
-#
+# \brief DefaultPharmacophoreGenerator.
+# 
 class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
 
     ##
-    # \brief 
-    #
+    # \brief Flags controlling feature generation.
+    # 
     class Configuration(Boost.Python.enum):
 
         ##
-        # \brief PI_NI_ON_CHARGED_GROUPS_ONLY.
-        #
+        # \brief If set, ionic features are only generated for explicitely charged atoms/groups.
+        # 
         PI_NI_ON_CHARGED_GROUPS_ONLY = 1
 
         ##
-        # \brief STATIC_H_DONORS.
-        #
+        # \brief If set, the HBD feature representation will always be a defined vector from the hydrogen donor heavy atom to the hydrogen atom.
+        # 
         STATIC_H_DONORS = 2
 
         ##
-        # \brief DEFAULT_CONFIG.
-        #
+        # \brief Default configuration.
+        # 
         DEFAULT_CONFIG = 0
 
     ##
-    # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
-    # \param config 
-    #
+    # \brief Constructs the <tt>DefaultPharmacophoreGenerator</tt> instance.
+    # 
     def __init__(config: int = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
-    # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    # \param config 
-    #
+    # \brief Perceives all pharmacophore features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # \param config Feature generation configuration.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, config: int = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
+    # \param self The \e %DefaultPharmacophoreGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: DefaultPharmacophoreGenerator) -> None: pass
 
     ##

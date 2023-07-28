@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of bzip2-compressed molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESBZ2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESBZ2MoleculeInputHandler instance.
-    #
+    # \param self The \e %SMILESBZ2MoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

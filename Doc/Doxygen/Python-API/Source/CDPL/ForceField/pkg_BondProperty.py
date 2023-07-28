@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Chem.Bond properties.
+# 
 class BondProperty(Boost.Python.instance):
 
     ##

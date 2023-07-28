@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A global dictionary for the lookup of meta-data associated with the atom types defined in namespace Chem.AtomType.
+# 
 class AtomDictionary(Boost.Python.instance):
 
     ##
@@ -31,17 +31,20 @@ class AtomDictionary(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param arg1 The \e %Entry instance to initialize.
         # \param atom_type 
         # \param iso 
         # \param sym 
@@ -57,25 +60,26 @@ class AtomDictionary(Boost.Python.instance):
         # \param cov_radii 
         # \param ar_eneg 
         # \param iso_masses 
-        #
+        # 
         def __init__(atom_type: int, iso: int, sym: str, name: str, most_abdt_iso: int, avg_weight: float, iupac_grp: int, period: int, metal: bool, non_metal: bool, val_states: object, vdw_rad: float, cov_radii: object, ar_eneg: float, iso_masses: object) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -170,102 +174,68 @@ class AtomDictionary(Boost.Python.instance):
         #
         def getIsotopeMasses() -> dict: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         type = property(getType)
 
-        ##
-        # \brief 
-        #
         isotope = property(getIsotope)
 
-        ##
-        # \brief 
-        #
         name = property(getName)
 
-        ##
-        # \brief 
-        #
         symbol = property(getSymbol)
 
-        ##
-        # \brief 
-        #
         mostAbundantIsotope = property(getMostAbundantIsotope)
 
-        ##
-        # \brief 
-        #
         averageWeight = property(getAverageWeight)
 
-        ##
-        # \brief 
-        #
         IUPACGroup = property(getIUPACGroup)
 
-        ##
-        # \brief 
-        #
         period = property(getPeriod)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         metal = property(getMetal)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         nonMetal = property(getNonMetal)
 
-        ##
-        # \brief 
-        #
         valenceStates = property(getValenceStates)
 
-        ##
-        # \brief 
-        #
         VdWRadius = property(getVdWRadius)
 
-        ##
-        # \brief 
-        #
         AllredRochowElectronegativity = property(getAllredRochowElectronegativity)
 
-        ##
-        # \brief 
-        #
         isotopeMasses = property(getIsotopeMasses)
 
     ##
     # \brief Initializes the \e %AtomDictionary instance.
-    #
+    # \param self The \e %AtomDictionary instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomDictionary instance.
+    # \param self The \e %AtomDictionary instance to initialize.
     # \param dict 
-    #
+    # 
     def __init__(dict: AtomDictionary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %AtomDictionary instance this method is called upon.
+    # 
     # Different Python \e %AtomDictionary instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomDictionary instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -320,9 +290,9 @@ class AtomDictionary(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomDictionary instance \a dict.
-    # \param dict The \e %AtomDictionary instance to copy.
-    # \return \a self
+    # \brief 
+    # \param dict 
+    # \return 
     #
     def assign(dict: AtomDictionary) -> AtomDictionary: pass
 
@@ -342,181 +312,218 @@ class AtomDictionary(Boost.Python.instance):
     def get(: ) -> AtomDictionary: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param isotope 
-    # \return 
-    #
+    # \brief Returns the symbol that is associated with the specified atom type and isotope.
+    # 
+    # The <em>isotope</em> argument has only an effect for hydrogen whose isotopes have different symbols (D for <em>Deuterium</em> and T for <em>Tritium</em>).
+    # 
+    # \param type The atom type.
+    # \param isotope The mass number of the isotope, or <em>0</em> if not specified.
+    # 
+    # \return The atom type symbol, or an empty string if the symbol for the specified type and isotope is not available.
+    # 
     @staticmethod
     def getSymbol(type: int, isotope: int = 0) -> str: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param isotope 
-    # \return 
-    #
+    # \brief Returns the name of the chemical element that is associated with the specified atom type and isotope.
+    # 
+    # The <em>isotope</em> argument has only an effect for hydrogen whose isotopes are named differently (<em>Deuterium</em> and <em>Tritium</em>).
+    # 
+    # \param type The atom type specifying the chemical element.
+    # \param isotope The mass number of the element's isotope, or <em>0</em> if not specified.
+    # 
+    # \return The name of the element isotope, or an empty string if <em>type</em> does not specify a supported chemical element.
+    # 
     @staticmethod
     def getName(type: int, isotope: int = 0) -> str: pass
 
     ##
-    # \brief 
-    # \param symbol 
-    # \param strict 
-    # \return 
-    #
+    # \brief Returns the numeric atom type that is associated with the specified atom type symbol.
+    # 
+    # \param symbol The atom type symbol.
+    # \param strict If <tt>True</tt>, dictionary symbols strictly have to match the argument symbol. Otherwise, the symbols will be converted to upper-case before their comparison.
+    # 
+    # \return The numeric atom type, or AtomType.UNKNOWN if <em>symbol</em> does not specify a supported atom type.
+    # 
     @staticmethod
     def getType(symbol: str, strict: bool = False) -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the mass number of the most abundant isotope of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return The mass number of the most abundant isotope of the element, or <em>0</em> if <em>type</em> does not specify a supported chemical element.
+    # 
     @staticmethod
     def getMostAbundantIsotope(type: int) -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the IUPAC group of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return The IUPAC group of the element, or <em>0</em> if <em>type</em> does not specify a supported chemical element.
+    # 
     @staticmethod
     def getIUPACGroup(type: int) -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the period number of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return The period of the element, or <em>0</em> if <em>type</em> does not specify a supported chemical element.
+    # 
     @staticmethod
     def getPeriod(type: int) -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the number of valence electrons of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return The number of valence electrons, or <em>0</em> if <em>type</em> does not specify a supported chemical element.
+    # 
     @staticmethod
     def getNumValenceElectrons(type: int) -> int: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param isotope 
-    # \return 
-    #
+    # \brief Returns the standard atomic weight or the relative isotopic mass of an isotope of the chemical element specified by <em>type</em>.
+    # 
+    # If the element isotope is left unspecified, i.e. the argument <em>isotope</em> is zero, then the standard atomic weight of the chemical element will be returned. If an isotope is specified and the exact relative isotopic mass of the specified isotope is not available, the relative isotopic mass is approximated by the provided mass number of the isotope.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # \param isotope The mass number of the element's isotope, or <em>0</em> if not specified.
+    # 
+    # \return The relative isotopic mass of the specified element isotope, or the standard atomic weight of the element if <em>isotope</em> is zero.
+    # 
     @staticmethod
     def getAtomicWeight(type: int, isotope: int = 0) -> float: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the <em>van der Waals</em> radius of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return The <em>van der Waals</em> radius, or <em>0.0</em> if <em>type</em> does not specify a supported chemical element.
+    # 
     @staticmethod
     def getVdWRadius(type: int) -> float: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \param order 
-    # \return 
-    #
+    # \brief Returns the covalent radius of the chemical element specified by <em>type</em> for the given bond order.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # \param order The bond order.
+    # 
+    # \return The covalent radius for the specified bond order, or <em>0.0</em> if <em>type</em> does not specify a supported chemical element, <em>order</em> is not valid or the radius is unknown.
+    # 
     @staticmethod
     def getCovalentRadius(type: int, order: int = 1) -> float: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns the <em>Allred-Rochow</em> electronegativity of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return The <em>Allred-Rochow</em> electronegativity, or <em>0.0</em> if the electronegativity of the specified element is not available.
+    # 
     @staticmethod
     def getAllredRochowElectronegativity(type: int) -> float: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Returns an array with the valence states of the chemical element specified by <em>type</em>.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return An array with the valence states of the specified chemical element.
+    # 
     @staticmethod
     def getValenceStates(type: int) -> CDPL.Util.STArray: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the specified atom type represents a chemical element.
+    # 
+    # \param type The atom type.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a chemical element, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isChemicalElement(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a main group element.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a main group element, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isMainGroupElement(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a transition metal.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a transition metal, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isTransitionMetal(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a metal.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a metal, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isMetal(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a semi-metal.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a semi-metal, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isSemiMetal(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a non-metal.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a non-metal, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isNonMetal(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a halogen.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a halogen, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isHalogen(type: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param type 
-    # \return 
-    #
+    # \brief Tells whether the chemical element specified by <em>type</em> is a noble gas.
+    # 
+    # \param type The atom type specifying the chemical element.
+    # 
+    # \return <tt>True</tt> if <em>type</em> specifies a noble gas, and <tt>False</tt> otherwise.
+    # 
     @staticmethod
     def isNobleGas(type: int) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

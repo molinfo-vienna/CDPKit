@@ -20,107 +20,137 @@
 #
 
 ##
-# \brief 
-#
+# \brief BasicPharmacophore.
+# 
 class BasicPharmacophore(Pharmacophore):
 
     ##
-    # \brief Initializes the \e %BasicPharmacophore instance.
-    #
+    # \brief Constructs an empty <tt>BasicPharmacophore</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param pharm 
-    #
+    # \brief Constructs a copy of the Pharm.Pharmacophore instance <em>pharm</em>.
+    # 
+    # \param pharm The other Pharm.Pharmacophore instance to copy.
+    # 
     def __init__(pharm: BasicPharmacophore) -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param pharm 
-    #
+    # \brief Constructs a copy of the Pharm.Pharmacophore instance <em>pharm</em>.
+    # 
+    # \param pharm The other Pharm.Pharmacophore instance to copy.
+    # 
     def __init__(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param cntnr 
-    #
+    # \brief Constructs a BasicPharmacophore instance with copies of the features in the Pharm.FeatureContainer instance <em>cntnr</em>.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance with the features to copy.
+    # 
     def __init__(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    #
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # 
+    # \param pharm The pharmacophore to copy.
+    # 
     def copy(pharm: BasicPharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    #
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # 
+    # \param pharm The pharmacophore to copy.
+    # 
     def copy(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    #
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the feature container <em>cntnr</em>.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to copy.
+    # 
     def copy(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    #
+    # \brief Extends the current set of pharmacophore features by a copy of the features in the pharmacophore <em>pharm</em>.
+    # 
+    # \param pharm The pharmacophore providing the features to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(pharm: BasicPharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param pharm 
-    #
+    # \brief Extends the current set of pharmacophore features by a copy of the features in the pharmacophore <em>pharm</em>.
+    # 
+    # \param pharm The pharmacophore providing the features to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    #
+    # \brief Extends the current set of pharmacophore features by a copy of the features in the feature container <em>cntnr</em>.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features to append.
+    # 
+    # \note Does not affect any properties.
+    # 
     def append(cntnr: FeatureContainer) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a pharm.
-    # \param pharm The \e %BasicPharmacophore instance to copy.
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param pharm The pharmacophore to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a pharm.
-    # \param pharm The \e %Pharmacophore instance to copy.
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the pharmacophore <em>pharm</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param pharm The pharmacophore to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureContainer instance \a cntnr.
-    # \param cntnr The \e %FeatureContainer instance to copy.
+    # \brief Replaces the current set of pharmacophore features and properties by a copy of the features and properties of the feature container <em>cntnr</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param cntnr The Pharm.FeatureContainer instance providing the features and properties to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(cntnr: FeatureContainer) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
+    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
-    #
+    # 
     def __iadd__(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
+    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
-    #
+    # 
     def __iadd__(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
+    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param cntnr Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
-    #
+    # 
     def __iadd__(cntnr: FeatureContainer) -> BasicPharmacophore: pass

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief CationPiInteractionScore.
+# 
 class CationPiInteractionScore(FeatureInteractionScore):
 
     ##
@@ -41,17 +41,19 @@ class CationPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %CationPiInteractionScore instance.
+    # \param self The \e %CationPiInteractionScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: CationPiInteractionScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %CationPiInteractionScore instance.
-    # \param aro_cat 
-    # \param min_dist 
-    # \param max_dist 
-    # \param max_ang 
-    #
+    # \brief Constructs a <tt>CationPiInteractionScore</tt> functor with the specified constraints.
+    # 
+    # \param aro_cat <tt>True</tt> if the first feature argument represents the aromatic- and the second one the cationic-feature, and <tt>False</tt> otherwise.
+    # \param min_dist The minimum allowed distance between the cationic- and aromatic-feature centers.
+    # \param max_dist The maximum allowed distance between the cationic- and aromatic-feature centers.
+    # \param max_ang The maximum allowed angle between the cationic- and aromatic-feature plane normal.
+    # 
     def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 30.0) -> None: pass
 
     ##
@@ -85,23 +87,14 @@ class CationPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CationPiInteractionScore instance \a constr.
-    # \param constr The \e %CationPiInteractionScore instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: CationPiInteractionScore) -> CationPiInteractionScore: pass
 
-    ##
-    # \brief 
-    #
     minDistance = property(getMinDistance)
 
-    ##
-    # \brief 
-    #
     maxDistance = property(getMaxDistance)
 
-    ##
-    # \brief 
-    #
     maxAngle = property(getMaxAngle)

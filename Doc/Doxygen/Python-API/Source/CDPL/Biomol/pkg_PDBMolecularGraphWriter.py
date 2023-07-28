@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# 
 class PDBMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %PDBMolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>PDBMolecularGraphWriter</tt> instance that will write data of molecular graphs to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

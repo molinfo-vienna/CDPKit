@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants serving as identifiers for built-in Chem.TautomerizationRule implementations.
+# 
 class TautomerizationType(Boost.Python.instance):
 
     ##

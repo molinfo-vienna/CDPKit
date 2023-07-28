@@ -20,17 +20,18 @@
 #
 
 ##
-# \brief 
-#
+# \brief DefaultTautomerGenerator.
+# 
 class DefaultTautomerGenerator(TautomerGenerator):
 
     ##
-    # \brief Initializes the \e %DefaultTautomerGenerator instance.
-    #
+    # \brief Constructs the <tt>DefaultTautomerGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultTautomerGenerator instance.
+    # \param self The \e %DefaultTautomerGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: DefaultTautomerGenerator) -> None: pass

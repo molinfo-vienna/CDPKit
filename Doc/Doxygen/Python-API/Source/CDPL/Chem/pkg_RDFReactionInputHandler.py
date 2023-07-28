@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# 
 class RDFReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %RDFReactionInputHandler instance.
-    #
+    # \param self The \e %RDFReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

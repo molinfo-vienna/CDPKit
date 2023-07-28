@@ -26,7 +26,8 @@ class FileSDFGZMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileSDFGZMoleculeReader instance.
+    # \param self The \e %FileSDFGZMoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

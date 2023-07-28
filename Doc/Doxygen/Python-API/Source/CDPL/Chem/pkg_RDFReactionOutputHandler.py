@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
+# 
 class RDFReactionOutputHandler(ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %RDFReactionOutputHandler instance.
-    #
+    # \param self The \e %RDFReactionOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

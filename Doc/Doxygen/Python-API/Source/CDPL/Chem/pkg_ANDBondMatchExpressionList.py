@@ -20,24 +20,26 @@
 #
 
 ##
-# \brief 
-#
+# \brief ANDBondMatchExpressionList.
+# 
 class ANDBondMatchExpressionList(BondMatchExpressionList):
 
     ##
     # \brief Initializes the \e %ANDBondMatchExpressionList instance.
-    #
+    # \param self The \e %ANDBondMatchExpressionList instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ANDBondMatchExpressionList instance.
+    # \param self The \e %ANDBondMatchExpressionList instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: ANDBondMatchExpressionList) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ANDBondMatchExpressionList instance \a expr.
-    # \param expr The \e %ANDBondMatchExpressionList instance to copy.
-    # \return \a self
+    # \brief 
+    # \param expr 
+    # \return 
     #
     def assign(expr: ANDBondMatchExpressionList) -> ANDBondMatchExpressionList: pass

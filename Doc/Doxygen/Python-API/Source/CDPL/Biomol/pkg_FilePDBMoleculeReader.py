@@ -26,7 +26,8 @@ class FilePDBMoleculeReader(CDPL.Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FilePDBMoleculeReader instance.
+    # \param self The \e %FilePDBMoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

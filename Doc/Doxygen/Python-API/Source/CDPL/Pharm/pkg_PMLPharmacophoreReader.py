@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for pharmacophore data in the native I/O format of <em>LigandScout</em>.
+# 
 class PMLPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \e %PMLPharmacophoreReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>PMLPharmacophoreReader</tt> instance that will read the pharmacophore data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

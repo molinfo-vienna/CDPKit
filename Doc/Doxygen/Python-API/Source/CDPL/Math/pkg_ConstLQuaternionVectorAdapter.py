@@ -26,26 +26,29 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstLQuaternionVectorAdapter instance.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance to initialize.
     # \param a 
-    #
+    # 
     def __init__(a: ConstLQuaternionVectorAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstLQuaternionVectorAdapter instance.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance to initialize.
     # \param e 
-    #
+    # 
     def __init__(e: ConstLQuaternionExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ConstLQuaternionVectorAdapter instance this method is called upon.
+    # 
     # Different Python \e %ConstLQuaternionVectorAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstLQuaternionVectorAdapter instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -81,30 +84,34 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance this method is called upon.
     # \param a The \e %ConstLQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(a: ConstLQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance this method is called upon.
     # \param a The \e %ConstLQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(a: ConstLQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
@@ -129,8 +136,9 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %ConstLQuaternionVectorAdapter instance.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -147,37 +155,42 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLVectorExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstLQuaternionVectorAdapter instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %ConstLQuaternionVectorAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLVectorExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
@@ -194,17 +207,8 @@ class ConstLQuaternionVectorAdapter(Boost.Python.instance):
     #
     def __rmul__(t: int) -> ConstLVectorExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)
 
-    ##
-    # \brief 
-    #
     data = property(getData)

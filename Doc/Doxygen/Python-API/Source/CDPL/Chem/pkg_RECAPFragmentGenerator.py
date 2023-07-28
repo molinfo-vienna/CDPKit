@@ -20,24 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief RECAPFragmentGenerator.
+# 
+# \see [\ref RECAP]
+# 
 class RECAPFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Initializes the \e %RECAPFragmentGenerator instance.
-    #
+    # \brief Constructs the <tt>RECAPFragmentGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %RECAPFragmentGenerator instance.
+    # \param self The \e %RECAPFragmentGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: RECAPFragmentGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %RECAPFragmentGenerator instance \a gen.
-    # \param gen The \e %RECAPFragmentGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: RECAPFragmentGenerator) -> RECAPFragmentGenerator: pass

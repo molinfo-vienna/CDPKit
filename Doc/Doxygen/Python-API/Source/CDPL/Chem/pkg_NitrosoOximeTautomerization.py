@@ -20,17 +20,19 @@
 #
 
 ##
-# \brief 
-#
+# \brief NitrosoOximeTautomerizationRule.
+# 
 class NitrosoOximeTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %NitrosoOximeTautomerization instance.
-    #
+    # \param self The \e %NitrosoOximeTautomerization instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %NitrosoOximeTautomerization instance.
+    # \param self The \e %NitrosoOximeTautomerization instance to initialize.
     # \param rule 
-    #
+    # 
     def __init__(rule: NitrosoOximeTautomerization) -> None: pass

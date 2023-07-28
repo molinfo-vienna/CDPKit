@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that some requested operation has failed (e.g. due to unfulfilled preconditions or other errors).
+# 
 class OperationFailed(Exception):
     pass

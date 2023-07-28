@@ -20,18 +20,22 @@
 #
 
 ##
-# \brief 
-# \param a 
-# \param x 
-# \return 
-#
+# \brief Computes the incomplete gamma function \f$ Q(a, x) = 1 - P(a, x) \f$ (see [\ref NRIC] for details).
+# 
+# \param a The function argument <em>a</em>.
+# \param x The function argument <em>x</em>.
+# 
+# \return The computed value of the incomplete gamma function.
+# 
 def gammaQ(a: float, x: float) -> float: pass
 
 ##
-# \brief 
-# \param z 
-# \return 
-#
+# \brief Computes \f$ \ln[\Gamma(z)] \f$ for \f$ z > 0 \f$.
+# 
+# \param z The argument to the gamma function.
+# 
+# \return The computed logarithm of the gamma function value for <em>z</em>.
+# 
 def lnGamma(z: float) -> float: pass
 
 ##
@@ -62,29 +66,35 @@ def vec(t1: float, t2: float, t3: float) -> Vector3F: pass
 def vec(t1: float, t2: float, t3: float, t4: float) -> Vector4F: pass
 
 ##
-# \brief 
-# \param a 
-# \param b 
-# \return 
-#
+# \brief Computes \f$ \sqrt{a^2 + b^2} \f$ without destructive underflow or overflow.
+# 
+# \param a The variable <em>a</em>.
+# \param b The variable <em>b</em>.
+# 
+# \return The result of computing \f$ \sqrt{a^2 + b^2} \f$.
+# 
 def pythag(a: float, b: float) -> float: pass
 
 ##
-# \brief 
-# \param x 
-# \param a 
-# \param b 
-# \param c 
-# \return 
-#
+# \brief Computes the generalized bell function \f$ Bell(x) = \frac{1}{1 + |\frac{x-c}{a}|^{2b}} \f$ at <em>x</em>.
+# 
+# \param x The generalized bell function argument
+# \param a Controls the width of the curve at \f$f(x) = 0.5 \f$.
+# \param b Controls the slope of the curve at \f$ x = c - a \f$ and \f$ x = c + a \f$.
+# \param c Locates the center of the curve.
+# 
+# \return The generalized bell function value at <em>x</em>.
+# 
 def generalizedBell(x: float, a: float, b: float, c: float) -> float: pass
 
 ##
-# \brief 
-# \param a 
-# \param b 
-# \return 
-#
+# \brief Returns the magnitude of parameter <em>a</em> times the sign of parameter <em>b</em>.
+# 
+# \param a The parameter <em>a</em>.
+# \param b The parameter <em>b</em>.
+# 
+# \return <em>a</em> times the sign of parameter <em>b</em>.
+# 
 def sign(a: float, b: float) -> float: pass
 
 ##

@@ -20,73 +20,73 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides default values for built-in control-parameters.
+# 
 class ControlParameterDefault(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.STRICT_ERROR_CHECKING.
+    # 
     STRICT_ERROR_CHECKING = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE.
+    # 
     ORDINARY_HYDROGEN_DEPLETE = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.BOND_MEMBER_SWAP_STEREO_FIX.
+    # 
     BOND_MEMBER_SWAP_STEREO_FIX = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>"\n"</tt>) for the control-parameter Chem.ControlParameter.RECORD_SEPARATOR.
+    # 
     RECORD_SEPARATOR = '\n'
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.JME_SEPARATE_COMPONENTS.
+    # 
     JME_SEPARATE_COMPONENTS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>1</tt>) for the control-parameter Chem.ControlParameter.COORDINATES_DIMENSION.
+    # 
     COORDINATES_DIMENSION = 1
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>""</tt>) for the control-parameter Chem.ControlParameter.INCHI_INPUT_OPTIONS.
+    # 
     INCHI_INPUT_OPTIONS = ''
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>"/WarnOnEmptyStructure /AuxNone /NEWPSOFF"</tt>) for the control-parameter Chem.ControlParameter.INCHI_OUTPUT_OPTIONS.
+    # 
     INCHI_OUTPUT_OPTIONS = '/WarnOnEmptyStructure /AuxNone /NEWPSOFF'
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.CHECK_LINE_LENGTH.
+    # 
     CHECK_LINE_LENGTH = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_IGNORE_PARITY.
+    # 
     MDL_IGNORE_PARITY = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.MDL_TRIM_STRINGS.
+    # 
     MDL_TRIM_STRINGS = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_TRIM_LINES.
+    # 
     MDL_TRIM_LINES = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_TRUNCATE_STRINGS.
+    # 
     MDL_TRUNCATE_STRINGS = False
 
     ##
@@ -95,118 +95,118 @@ class ControlParameterDefault(Boost.Python.instance):
     MDL_TRUNCATE_LINESS = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_UPDATE_TIMESTAMP.
+    # 
     MDL_UPDATE_TIMESTAMP = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>MDLDataFormatVersion.UNDEF</tt>) for the control-parameter Chem.ControlParameter.MDL_CTAB_VERSION.
+    # 
     MDL_CTAB_VERSION = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>MDLDataFormatVersion.UNDEF</tt>) for the control-parameter Chem.ControlParameter.MDL_RXN_FILE_VERSION.
+    # 
     MDL_RXN_FILE_VERSION = 0
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD.
+    # 
     MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY.
+    # 
     MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>"<Energy>"</tt>) for the control-parameter Chem.ControlParameter.MDL_CONF_ENERGY_SD_TAG.
+    # 
     MDL_CONF_ENERGY_SD_TAG = '<Energy>'
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>"S"</tt>) for the control-parameter Chem.ControlParameter.SMILES_RECORD_FORMAT.
+    # 
     SMILES_RECORD_FORMAT = 'S'
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_CANONICAL_FORM.
+    # 
     SMILES_WRITE_CANONICAL_FORM = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_KEKULE_FORM.
+    # 
     SMILES_WRITE_KEKULE_FORM = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ATOM_STEREO.
+    # 
     SMILES_WRITE_ATOM_STEREO = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_BOND_STEREO.
+    # 
     SMILES_WRITE_BOND_STEREO = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_RING_BOND_STEREO.
+    # 
     SMILES_WRITE_RING_BOND_STEREO = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>8</tt>) for the control-parameter Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE.
+    # 
     SMILES_MIN_STEREO_BOND_RING_SIZE = 8
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ISOTOPE.
+    # 
     SMILES_WRITE_ISOTOPE = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ATOM_MAPPING_ID on reaction SMILES output.
+    # 
     SMILES_RXN_WRITE_ATOM_MAPPING_ID = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_ATOM_MAPPING_ID on molecule SMILES output.
+    # 
     SMILES_MOL_WRITE_ATOM_MAPPING_ID = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_SINGLE_BONDS.
+    # 
     SMILES_WRITE_SINGLE_BONDS = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_WRITE_AROMATIC_BONDS.
+    # 
     SMILES_WRITE_AROMATIC_BONDS = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET.
+    # 
     SMILES_NO_ORGANIC_SUBSET = False
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.MULTI_CONF_IMPORT.
+    # 
     MULTI_CONF_IMPORT = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>True</tt>) for the control-parameter Chem.ControlParameter.MULTI_CONF_EXPORT.
+    # 
     MULTI_CONF_EXPORT = True
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= reference to Chem.DefaultMultiConfMoleculeInputProcessor instance) for the control-parameter Chem.ControlParameter.MULTI_CONF_INPUT_PROCESSOR.
+    # 
     MULTI_CONF_INPUT_PROCESSOR = None
 
     ##
-    # \brief 
-    #
+    # \brief Default setting (= <tt>False</tt>) for the control-parameter Chem.ControlParameter.OUTPUT_CONF_ENERGY_AS_COMMENT.
+    # 
     OUTPUT_CONF_ENERGY_AS_COMMENT = False
 
     ##

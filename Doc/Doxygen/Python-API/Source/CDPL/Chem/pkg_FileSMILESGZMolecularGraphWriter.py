@@ -26,7 +26,8 @@ class FileSMILESGZMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %FileSMILESGZMolecularGraphWriter instance.
+    # \param self The \e %FileSMILESGZMolecularGraphWriter instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass

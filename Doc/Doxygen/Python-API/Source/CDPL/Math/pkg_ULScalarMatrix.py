@@ -26,21 +26,24 @@ class ULScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ULScalarMatrix instance.
-    #
+    # \param self The \e %ULScalarMatrix instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ULScalarMatrix instance.
+    # \param self The \e %ULScalarMatrix instance to initialize.
     # \param m 
-    #
+    # 
     def __init__(m: ULScalarMatrix) -> None: pass
 
     ##
     # \brief Initializes the \e %ULScalarMatrix instance.
+    # \param self The \e %ULScalarMatrix instance to initialize.
     # \param m 
     # \param n 
     # \param v 
-    #
+    # 
     def __init__(m: int, n: int, v: int = 0) -> None: pass
 
     ##
@@ -52,14 +55,15 @@ class ULScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %ULScalarMatrix instance this method is called upon.
+    # 
     # Different Python \e %ULScalarMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ULScalarMatrix instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -95,9 +99,9 @@ class ULScalarMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULScalarMatrix instance \a m.
-    # \param m The \e %ULScalarMatrix instance to copy.
-    # \return \a self
+    # \brief 
+    # \param m 
+    # \return 
     #
     def assign(m: ULScalarMatrix) -> ULScalarMatrix: pass
 
@@ -130,36 +134,41 @@ class ULScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
+    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m The \e %ULScalarMatrix instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(m: ULScalarMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
+    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
+    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m The \e %ULScalarMatrix instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(m: ULScalarMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
+    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ULScalarMatrix instance.
+    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -176,44 +185,50 @@ class ULScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %ULScalarMatrix instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstULMatrixExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %ULScalarMatrix instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ULScalarMatrix instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %ULScalarMatrix instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ULScalarMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %ULScalarMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstULVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %ULScalarMatrix instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstULMatrixExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: int) -> ConstULMatrixExpression: pass
 
     ##
@@ -230,17 +245,8 @@ class ULScalarMatrix(Boost.Python.instance):
     #
     def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size1 = property(getSize1)
 
-    ##
-    # \brief 
-    #
     size2 = property(getSize2)

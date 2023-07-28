@@ -20,36 +20,36 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides preinitialized Base.DataFormat objects for all supported biopolymer data formats.
+# 
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the <em>Brookhaven Protein Data Bank Format</em> [\ref PDB] format.
+    # 
     PDB = CDPL.Base.DataFormat(name='PDB', descr='Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb', 'ent'], multi_rec=False)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the gzip-compressed <em>Brookhaven Protein Data Bank Format</em> [\ref PDB] format.
+    # 
     PDB_GZ = CDPL.Base.DataFormat(name='PDB_GZ', descr='GZip-Compressed Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb.gz', 'ent.gz'], multi_rec=False)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the bzip2-compressed <em>Brookhaven Protein Data Bank Format</em> [\ref PDB] format.
+    # 
     PDB_BZ2 = CDPL.Base.DataFormat(name='PDB_BZ2', descr='BZip2-Compressed Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb.bz2', 'ent.bz2'], multi_rec=False)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
+    # 
     MMTF = CDPL.Base.DataFormat(name='MMTF', descr='Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf'], multi_rec=False)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the gzip-compressed <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
+    # 
     MMTF_GZ = CDPL.Base.DataFormat(name='MMTF_GZ', descr='GZip-Compressed Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf.gz'], multi_rec=False)
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Transmission Format</em> [\ref MMTF] format.
+    # 
     MMTF_BZ2 = CDPL.Base.DataFormat(name='MMTF_BZ2', descr='BZip2-Compressed Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf.bz2'], multi_rec=False)

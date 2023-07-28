@@ -26,18 +26,20 @@ class MMFF94BondStretchingInteraction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94BondStretchingInteraction instance.
+    # \param self The \e %MMFF94BondStretchingInteraction instance to initialize.
     # \param iactn 
-    #
+    # 
     def __init__(iactn: MMFF94BondStretchingInteraction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondStretchingInteraction instance.
+    # \param self The \e %MMFF94BondStretchingInteraction instance to initialize.
     # \param atom1_idx 
     # \param atom2_idx 
     # \param bond_type_idx 
     # \param force_const 
     # \param ref_length 
-    #
+    # 
     def __init__(atom1_idx: int, atom2_idx: int, bond_type_idx: int, force_const: float, ref_length: float) -> None: pass
 
     ##
@@ -77,50 +79,33 @@ class MMFF94BondStretchingInteraction(Boost.Python.instance):
     def setReferenceLength(length: float) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondStretchingInteraction instance \a iactn.
-    # \param iactn The \e %MMFF94BondStretchingInteraction instance to copy.
-    # \return \a self
+    # \brief 
+    # \param iactn 
+    # \return 
     #
     def assign(iactn: MMFF94BondStretchingInteraction) -> MMFF94BondStretchingInteraction: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94BondStretchingInteraction instance this method is called upon.
+    # 
     # Different Python \e %MMFF94BondStretchingInteraction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94BondStretchingInteraction instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     atom1Index = property(getAtom1Index)
 
-    ##
-    # \brief 
-    #
     atom2Index = property(getAtom2Index)
 
-    ##
-    # \brief 
-    #
     bondTypeIndex = property(getBondTypeIndex)
 
-    ##
-    # \brief 
-    #
     forceConstant = property(getForceConstant)
 
-    ##
-    # \brief 
-    #
     referenceLength = property(getReferenceLength, setReferenceLength)

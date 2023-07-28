@@ -56,21 +56,23 @@ class Vector3FArrayBFGSMinimizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector3FArrayBFGSMinimizer instance.
+    # \param self The \e %Vector3FArrayBFGSMinimizer instance to initialize.
     # \param func 
     # \param grad_func 
-    #
+    # 
     def __init__(func: FloatVector3FArrayFunctor, grad_func: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %Vector3FArrayBFGSMinimizer instance this method is called upon.
+    # 
     # Different Python \e %Vector3FArrayBFGSMinimizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector3FArrayBFGSMinimizer instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -134,32 +136,14 @@ class Vector3FArrayBFGSMinimizer(Boost.Python.instance):
     #
     def iterate(f: float, x: Vector3FArray, g: Vector3FArray) -> tuple: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     gradientNorm = property(getGradientNorm)
 
-    ##
-    # \brief 
-    #
     functionDelta = property(getFunctionDelta)
 
-    ##
-    # \brief 
-    #
     functionValue = property(getFunctionValue)
 
-    ##
-    # \brief 
-    #
     numIterations = property(getNumIterations)
 
-    ##
-    # \brief 
-    #
     status = property(getStatus)

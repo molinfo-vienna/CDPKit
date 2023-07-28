@@ -26,6 +26,7 @@ class SMILESGZMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %SMILESGZMoleculeReader instance.
+    # \param self The \e %SMILESGZMoleculeReader instance to initialize.
     # \param is 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

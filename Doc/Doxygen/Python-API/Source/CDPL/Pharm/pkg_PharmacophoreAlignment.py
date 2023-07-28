@@ -20,32 +20,35 @@
 #
 
 ##
-# \brief 
-#
+# \brief PharmacophoreAlignment.
+# 
 class PharmacophoreAlignment(SpatialFeatureAlignment):
 
     ##
-    # \brief Initializes the \e %PharmacophoreAlignment instance.
-    # \param query_mode 
-    #
+    # \brief Constructs the <tt>PharmacophoreAlignment</tt> instance.
+    # 
+    # \param query_mode If <tt>True</tt>, the features of the first set are interpreted as a query pharmacophore and the features of the second have to match this query after alignment. If <tt>False</tt>, there is no distinction between the features of the first and second set in various performed intermediate checks.
+    # 
     def __init__(query_mode: bool) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreAlignment instance.
+    # \param self The \e %PharmacophoreAlignment instance to initialize.
     # \param alignment 
-    #
+    # 
     def __init__(alignment: PharmacophoreAlignment) -> None: pass
 
     ##
-    # \brief 
-    # \param cntnr 
-    # \param first_set 
-    #
+    # \brief Adds the features of the feature container <em>cntnr</em> to the specified alignment feature set.
+    # 
+    # \param cntnr The feature container containing features to add.
+    # \param first_set If <tt>True</tt>, the features are added to the first feature set, if <tt>False</tt> to the second one.
+    # 
     def addFeatures(cntnr: FeatureContainer, first_set: bool) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreAlignment instance \a alignment.
-    # \param alignment The \e %PharmacophoreAlignment instance to copy.
-    # \return \a self
+    # \brief 
+    # \param alignment 
+    # \return 
     #
     def assign(alignment: PharmacophoreAlignment) -> PharmacophoreAlignment: pass

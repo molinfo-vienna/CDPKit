@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief HierarchyViewModel.
+# 
 class HierarchyViewModel(HierarchyViewNode):
 
     ##
@@ -64,7 +64,4 @@ class HierarchyViewModel(HierarchyViewNode):
     #
     def __getitem__(idx: int) -> HierarchyViewChain: pass
 
-    ##
-    # \brief 
-    #
     numChains = property(getNumChains)

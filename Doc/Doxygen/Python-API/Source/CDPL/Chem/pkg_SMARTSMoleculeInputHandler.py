@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class SMARTSMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SMARTSMoleculeInputHandler instance.
-    #
+    # \param self The \e %SMARTSMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

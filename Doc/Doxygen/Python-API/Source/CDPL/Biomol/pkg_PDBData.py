@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief A datastructure for the storage of imported PDB data records (see [\ref CTFILE]).
+# 
 class PDBData(Boost.Python.instance):
 
     ##
@@ -251,25 +251,28 @@ class PDBData(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PDBData instance.
-    #
+    # \param self The \e %PDBData instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PDBData instance.
+    # \param self The \e %PDBData instance to initialize.
     # \param other 
-    #
+    # 
     def __init__(other: PDBData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %PDBData instance this method is called upon.
+    # 
     # Different Python \e %PDBData instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PDBData instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -290,9 +293,9 @@ class PDBData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PDBData instance \a data.
-    # \param data The \e %PDBData instance to copy.
-    # \return \a self
+    # \brief 
+    # \param data 
+    # \return 
     #
     def assign(data: PDBData) -> PDBData: pass
 
@@ -371,32 +374,18 @@ class PDBData(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>type in self</tt>.
+    # \param self The \e %PDBData instance this method is called upon.
     # \param type The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(type: RecordType) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numRecords = property(getNumRecords)
 
-    ##
-    # \brief 
-    #
     recordTypes = property(getRecordTypes)
 
-    ##
-    # \brief 
-    #
     recordData = property(getRecordData)
 
-    ##
-    # \brief 
-    #
     records = property(getRecords)

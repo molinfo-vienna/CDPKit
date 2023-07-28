@@ -26,33 +26,37 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
-    #
+    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
+    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance to initialize.
     # \param parameterizer 
-    #
+    # 
     def __init__(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
+    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance to initialize.
     # \param molgraph 
     # \param ia_data 
     # \param strict 
-    #
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94VanDerWaalsInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
+    # 
     # Different Python \e %MMFF94VanDerWaalsInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94VanDerWaalsInteractionParameterizer instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -80,9 +84,9 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
-    # \return \a self
+    # \brief 
+    # \param parameterizer 
+    # \return 
     #
     def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 
@@ -94,7 +98,4 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     #
     def parameterize(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94VanDerWaalsInteractionData, strict: bool) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

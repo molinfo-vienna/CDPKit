@@ -20,22 +20,24 @@
 #
 
 ##
-# \brief 
-#
+# \brief PharmacophoreFitScreeningScore.
+# 
 class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScreeningScore instance.
+    # \param self The \e %PharmacophoreFitScreeningScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: PharmacophoreFitScreeningScore) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScreeningScore instance.
+    # \param self The \e %PharmacophoreFitScreeningScore instance to initialize.
     # \param match_cnt_weight 
     # \param pos_match_weight 
     # \param geom_match_weight 
-    #
+    # 
     def __init__(match_cnt_weight: float = 1.0, pos_match_weight: float = 0.5, geom_match_weight: float = 0.4) -> None: pass
 
     ##

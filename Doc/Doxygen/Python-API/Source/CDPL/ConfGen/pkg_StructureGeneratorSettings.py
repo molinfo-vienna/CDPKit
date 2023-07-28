@@ -25,37 +25,40 @@
 class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    DEFAULT = _UNKNOWN_VALUE_
+    DEFAULT = _HIDDEN_VALUE_
 
     ##
     # \brief Initializes the \e %StructureGeneratorSettings instance.
-    #
+    # \param self The \e %StructureGeneratorSettings instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StructureGeneratorSettings instance.
+    # \param self The \e %StructureGeneratorSettings instance to initialize.
     # \param settings 
-    #
+    # 
     def __init__(settings: StructureGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
+    # 
     # Different Python \e %StructureGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StructureGeneratorSettings instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %StructureGeneratorSettings instance \a settings.
-    # \param settings The \e %StructureGeneratorSettings instance to copy.
-    # \return \a self
+    # \brief 
+    # \param settings 
+    # \return 
     #
     def assign(settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
 
@@ -233,82 +236,62 @@ class StructureGeneratorSettings(Boost.Python.instance):
     #
     def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     generationMode = property(getGenerationMode, setGenerationMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
 
-    ##
-    # \brief 
-    #
     timeout = property(getTimeout, setTimeout)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     fragModeForceFieldType = property(getFragModeForceFieldType, setFragModeForceFieldType)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     dgModeForceFieldType = property(getDgModeForceFieldType, setDgModeForceFieldType)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
-    ##
-    # \brief 
-    #
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
-    ##
-    # \brief 
-    #
     distanceExponent = property(getDistanceExponent, setDistanceExponent)
 
-    ##
-    # \brief 
-    #
     maxNumRefinementIterations = property(getMaxNumRefinementIterations, setMaxNumRefinementIterations)
 
-    ##
-    # \brief 
-    #
     refinementTolerance = property(getRefinementTolerance, setRefinementTolerance)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
 
-    ##
-    # \brief 
-    #
     maxNumSampledConformers = property(getMaxNumSampledConformers, setMaxNumSampledConformers)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     convCheckCycleSize = property(getConvCheckCycleSize, setConvCheckCycleSize)
 
-    ##
-    # \brief 
-    #
     fragmentBuildSettings = property(getFragmentBuildSettings)

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of pharmacophore feature types with extensions for H-bond acceptors and donors.
+# 
 class FeatureType(Boost.Python.instance):
 
     ##

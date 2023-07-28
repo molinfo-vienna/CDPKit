@@ -20,64 +20,84 @@
 #
 
 ##
-# \brief 
-#
+# \brief BasicReaction.
+# 
 class BasicReaction(Reaction):
 
     ##
-    # \brief Initializes the \e %BasicReaction instance.
-    #
+    # \brief Constructs an empty <tt>BasicReaction</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
+    # \param self The \e %BasicReaction instance to initialize.
     # \param mol 
-    #
+    # 
     def __init__(mol: BasicReaction) -> None: pass
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
+    # \param self The \e %BasicReaction instance to initialize.
     # \param mol 
-    #
+    # 
     def __init__(mol: Reaction) -> None: pass
 
     ##
-    # \brief 
-    # \param role 
-    # \return 
-    #
+    # \brief Creates a new reaction component with the specified role.
+    # 
+    # \param role A flag specifying the reaction role of the new component (see namespace Chem.ReactionRole).
+    # 
+    # \return A reference to the newly created component molecule. 
+    # 
+    # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
+    # 
     def addComponent(role: int) -> BasicMolecule: pass
 
     ##
-    # \brief 
-    # \param role 
-    # \param mol 
-    # \return 
-    #
+    # \brief Creates a new reaction component with the specified role that is a copy of the molecule <em>mol</em>.
+    # 
+    # \param role A flag specifying the reaction role of the new component (see namespace Chem.ReactionRole).
+    # \param mol Specifies a molecule that provides the data for the new reaction component (note that only explicitly assigned molecule, atom and bond properties will be copied).
+    # 
+    # \return A reference to the newly created component molecule. 
+    # 
+    # \throw Base.ValueError if the value of <em>role</em> is not Chem.ReactionRole.REACTANT, Chem.ReactionRole.AGENT or Chem.ReactionRole.PRODUCT.
+    # 
     def addComponent(role: int, mol: Molecule) -> BasicMolecule: pass
 
     ##
-    # \brief 
-    # \param rxn 
-    #
+    # \brief Replaces the current set of reaction components and properties by a copy of the components and properties of the reaction <em>rxn</em>.
+    # 
+    # \param rxn The reaction to copy.
+    # 
     def copy(rxn: BasicReaction) -> None: pass
 
     ##
-    # \brief 
-    # \param rxn 
-    #
+    # \brief Replaces the current set of reaction components and properties by a copy of the components and properties of the reaction <em>rxn</em>.
+    # 
+    # \param rxn The reaction to copy.
+    # 
     def copy(rxn: Reaction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicReaction instance \a rxn.
-    # \param rxn The \e %BasicReaction instance to copy.
+    # \brief Replaces the current set of reaction components and properties by a copy of the components and properties of the reaction <em>rxn</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param rxn The reaction to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(rxn: BasicReaction) -> BasicReaction: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Reaction instance \a rxn.
-    # \param rxn The \e %Reaction instance to copy.
+    # \brief Replaces the current set of reaction components and properties by a copy of the components and properties of the reaction <em>rxn</em>.
+    # 
+    # Internally calls copy() to perform the actual work.
+    # 
+    # \param rxn The reaction to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(rxn: Reaction) -> BasicReaction: pass

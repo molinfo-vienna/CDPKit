@@ -20,48 +20,57 @@
 #
 
 ##
-# \brief 
-#
+# \brief BCUTDescriptorCalculator.
+# 
+# \see [\ref BCUT]
+# 
 class BCUTDescriptorCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %BCUTDescriptorCalculator instance.
-    #
+    # \brief Constructs the <tt>BCUTDescriptorCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BCUTDescriptorCalculator instance.
-    # \param molgraph 
-    # \param descr 
-    #
+    # \brief Constructs the <tt>BCUTDescriptorCalculator</tt> instance and calculates the <em>BCUT</em> descriptor of the molecular graph <em>molgraph</em>.
+    # 
+    # The calculated descriptor can be retrieved by a call to getResult().
+    # 
+    # \param molgraph The molecular graph for which to calculate the <em>BCUT</em> descriptor.
+    # \param descr The calculated <em>BCUT</em> descriptor.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, descr: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %BCUTDescriptorCalculator instance this method is called upon.
+    # 
     # Different Python \e %BCUTDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BCUTDescriptorCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Allows to specify a custom atom weight function for the initialization of the underlying <em>Burden</em> matrix [\ref BURMA].
+    # 
+    # \param func A BCUTDescriptorCalculator.AtomWeightFunction instance that wraps the target function.
+    # 
+    # \see Descr.BurdenMatrixGenerator.setAtomWeightFunction()
+    # 
     def setAtomWeightFunction(func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param descr 
-    #
+    # \brief Calculates the <em>BCUT</em> descriptor of the molecular graph <em>molgraph</em>.
+    # 
+    # The calculated <em>BCUT</em> descriptor is a vector that contains the calculated eigenvalues of the underlying <em>Burden</em> matrix [\ref BURMA]. The elements of the vector are sorted in ascending order. Note that explicit hydrogen atoms are included in the calculation of the <em>BCUT</em> descriptor. In order to calculate the descriptor for a hydrogen depleted molecular graph, any hydrogen atoms have to be removed from the molecular graph <em>before</em> the calculation is performed.
+    # 
+    # \param molgraph The molecular graph for which to calculate the <em>BCUT</em> descriptor.
+    # \param descr The calculated <em>BCUT</em> descriptor.
+    # 
     def calculate(molgraph: CDPL.Chem.MolecularGraph, descr: CDPL.Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

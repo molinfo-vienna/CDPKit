@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief AtomEnvironmentMatchExpression.
+# 
 class AtomEnvironmentMatchExpression(AtomMatchExpression):
 
     ##
-    # \brief Initializes the \e %AtomEnvironmentMatchExpression instance.
-    # \param env_pattern 
-    # \param not_match 
-    #
+    # \brief Constructs an <tt>AtomEnvironmentMatchExpression</tt> instance for the specified atom environment pattern and matching mode.
+    # 
+    # \param env_pattern A substructure search pattern that describes the required (or not desired) structural environment of matching target atoms. Note: The substructure pattern has to be formulated in a way that the first atom of the pattern molecule matches the target atoms.
+    # \param not_match Specifies whether the environment of a target atom actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the given query environment pattern.
+    # 
     def __init__(env_pattern: MolecularGraph, not_match: bool) -> None: pass

@@ -26,19 +26,22 @@ class DZeroVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DZeroVector instance.
-    #
+    # \param self The \e %DZeroVector instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DZeroVector instance.
+    # \param self The \e %DZeroVector instance to initialize.
     # \param v 
-    #
+    # 
     def __init__(v: DZeroVector) -> None: pass
 
     ##
     # \brief Initializes the \e %DZeroVector instance.
+    # \param self The \e %DZeroVector instance to initialize.
     # \param n 
-    #
+    # 
     def __init__(n: int) -> None: pass
 
     ##
@@ -49,14 +52,15 @@ class DZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DZeroVector instance this method is called upon.
+    # 
     # Different Python \e %DZeroVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DZeroVector instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -85,9 +89,9 @@ class DZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DZeroVector instance \a v.
-    # \param v The \e %DZeroVector instance to copy.
-    # \return \a self
+    # \brief 
+    # \param v 
+    # \return 
     #
     def assign(v: DZeroVector) -> DZeroVector: pass
 
@@ -99,30 +103,34 @@ class DZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
+    # \param self The \e %DZeroVector instance this method is called upon.
     # \param v The \e %DZeroVector instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(v: DZeroVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
+    # \param self The \e %DZeroVector instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
+    # \param self The \e %DZeroVector instance this method is called upon.
     # \param v The \e %DZeroVector instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(v: DZeroVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
+    # \param self The \e %DZeroVector instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
@@ -147,8 +155,9 @@ class DZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %DZeroVector instance.
+    # \param self The \e %DZeroVector instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass
 
     ##
@@ -165,37 +174,42 @@ class DZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
+    # \param self The \e %DZeroVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDVectorExpression instance holding the result of the addition.
-    #
+    # 
     def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
+    # \param self The \e %DZeroVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DZeroVector instance holding the result of the subtraction.
-    #
+    # 
     def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
+    # \param self The \e %DZeroVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
+    # \param self The \e %DZeroVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
-    #
+    # 
     def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
+    # \param self The \e %DZeroVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDVectorExpression instance holding the result of the division.
-    #
+    # 
     def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
@@ -212,12 +226,6 @@ class DZeroVector(Boost.Python.instance):
     #
     def __rmul__(t: float) -> ConstDVectorExpression: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

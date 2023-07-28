@@ -38,7 +38,10 @@ namespace CDPL
     namespace Shape
     {
 
-        typedef Math::CVector<double, 7> QuaternionTransformation;
+        /**
+         * \brief A bounded 7 element vector specifying a quaternion-based rotation plus translation.
+         */
+        typedef Math::Vector7D QuaternionTransformation;
     }
 } // namespace CDPL
 

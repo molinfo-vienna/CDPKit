@@ -20,49 +20,53 @@
 #
 
 ##
-# \brief 
-#
+# \brief A factory interface providing methods for the creation of Grid.DRegularGridSetWriterBase instances for data output in a particular storage format.
+# 
 class DRegularGridSetOutputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DRegularGridSetOutputHandler instance.
-    #
+    # \param self The \e %DRegularGridSetOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DRegularGridSetOutputHandler instance this method is called upon.
+    # 
     # Different Python \e %DRegularGridSetOutputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DRegularGridSetOutputHandler instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a Base.DataFormat object that provides information about the handled output data format.
+    # 
+    # \return A Base.DataFormat object that provides information about the handled data format.
+    # 
     def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
-    # \brief 
-    # \param is 
-    # \return 
-    #
-    def createWriter(is: CDPL.Base.IOStream) -> DRegularGridSetWriterBase: pass
+    # \brief Creates a Base.DataWriter instance that will write the data to the I/O stream <em>ios</em>.
+    # 
+    # \param ios The I/O stream to write to.
+    # 
+    # \return A shared reference to the created Base.DataWriter instance.
+    # 
+    def createWriter(ios: CDPL.Base.IOStream) -> DRegularGridSetWriterBase: pass
 
     ##
-    # \brief 
-    # \param file_name 
-    # \param mode 
-    # \return 
-    #
+    # \brief Creates a Base.DataWriter instance that will write the data to the file specified by <em>file_name</em>.
+    # 
+    # \param file_name The full path of the file to write to.
+    # \param mode Flags specifying the file open-mode.
+    # 
+    # \return A shared reference to the created Base.DataWriter instance.
+    # 
     def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> DRegularGridSetWriterBase: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

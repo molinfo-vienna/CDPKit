@@ -26,7 +26,8 @@ class FileSMILESBZ2MoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileSMILESBZ2MoleculeReader instance.
+    # \param self The \e %FileSMILESBZ2MoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

@@ -31,44 +31,43 @@ class FMatrixExpression(ConstFMatrixExpression):
     def swap(e: FMatrixExpression) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FMatrixExpression instance \a e.
-    # \param e The \e %FMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: FMatrixExpression) -> FMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
-    # \param e The \e %ConstFMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstFMatrixExpression) -> FMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
-    # \param e The \e %ConstDMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstDMatrixExpression) -> FMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
-    # \param e The \e %ConstLMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstLMatrixExpression) -> FMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
-    # \param e The \e %ConstULMatrixExpression instance to copy.
-    # \return \a self
+    # \brief 
+    # \param e 
+    # \return 
     #
     def assign(e: ConstULMatrixExpression) -> FMatrixExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param a The \e %object instance to copy.
-    # \return \a self
+    # \brief 
+    # \param a 
     #
     def assign(a: object) -> None: pass
 
@@ -89,44 +88,50 @@ class FMatrixExpression(ConstFMatrixExpression):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %FMatrixExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %FMatrixExpression instance \a self.
-    #
+    # 
     def __iadd__(e: FMatrixExpression) -> FMatrixExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
+    # \param self The \e %FMatrixExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %FMatrixExpression instance \a self.
-    #
+    # 
     def __iadd__(e: ConstFMatrixExpression) -> FMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %FMatrixExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %FMatrixExpression instance \a self.
-    #
+    # 
     def __isub__(e: FMatrixExpression) -> FMatrixExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
+    # \param self The \e %FMatrixExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %FMatrixExpression instance \a self.
-    #
+    # 
     def __isub__(e: ConstFMatrixExpression) -> FMatrixExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
+    # \param self The \e %FMatrixExpression instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %FMatrixExpression instance \a self.
-    #
+    # 
     def __imul__(t: float) -> FMatrixExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
+    # \param self The \e %FMatrixExpression instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %FMatrixExpression instance \a self.
-    #
+    # 
     def __idiv__(t: float) -> FMatrixExpression: pass
 
     ##

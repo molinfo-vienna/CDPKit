@@ -26,19 +26,22 @@ class DoubleVector2DArrayFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleVector2DArrayFunctor instance.
-    #
+    # \param self The \e %DoubleVector2DArrayFunctor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector2DArrayFunctor instance.
+    # \param self The \e %DoubleVector2DArrayFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: DoubleVector2DArrayFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector2DArrayFunctor instance.
+    # \param arg1 The \e %DoubleVector2DArrayFunctor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

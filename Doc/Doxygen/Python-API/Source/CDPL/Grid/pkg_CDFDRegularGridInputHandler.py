@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of spatial regular grid data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFDRegularGridInputHandler(DRegularGridInputHandler):
 
     ##
     # \brief Initializes the \e %CDFDRegularGridInputHandler instance.
-    #
+    # \param self The \e %CDFDRegularGridInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

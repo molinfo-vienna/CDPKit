@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Fragment.
+# 
 class Fragment(MolecularGraph):
 
     ##
@@ -50,9 +50,10 @@ class Fragment(MolecularGraph):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
-        #
+        # 
         def __contains__(atom: Atom) -> bool: pass
 
     ##
@@ -81,91 +82,119 @@ class Fragment(MolecularGraph):
 
         ##
         # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
+        # \param self The \e %BondSequence instance this method is called upon.
         # \param bond The value to test for membership.
         # \return The result of the membership test operation.
-        #
+        # 
         def __contains__(bond: Bond) -> bool: pass
 
     ##
-    # \brief Initializes the \e %Fragment instance.
-    #
+    # \brief Constructs an empty <tt>Fragment</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Fragment instance.
-    # \param frag 
-    #
+    # \brief Constructs a copy of the <tt>Fragment</tt> instance <em>frag</em>.
+    # 
+    # \param frag The other <tt>Fragment</tt> instance to copy.
+    # 
     def __init__(frag: Fragment) -> None: pass
 
     ##
-    # \brief Initializes the \e %Fragment instance.
-    # \param molgraph 
-    #
+    # \brief Constructs a <tt>Fragment</tt> instance storing the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms, bonds and properties to store.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Fragment instance \a frag.
-    # \param frag The \e %Fragment instance to copy.
+    # \brief Replaces the current set of atoms, bonds and properties by the atoms, bonds and properties of the fragment <em>frag</em>.
+    # 
+    # \param frag The fragment to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(frag: Fragment) -> Fragment: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraph instance \a molgraph.
-    # \param molgraph The \e %MolecularGraph instance to copy.
+    # \brief Replaces the current set of atoms, bonds and properties by the atoms, bonds and properties of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The Chem.MolecularGraph instance providing the atoms, bonds and properties to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Extends the fragment by the specified atom.
+    # 
+    # \param atom The atom to add.
+    # 
+    # \return <tt>True</tt> if the atom was not already a part of the fragment, and <tt>False</tt> otherwise.
+    # 
     def addAtom(atom: Atom) -> bool: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the atom at the specified index.
+    # 
+    # If the specified atom is connected to any other atoms of the fragment, the connecting bonds will also be removed.
+    # 
+    # \param idx The zero-based index of the atom to remove.
+    # 
+    # \throw Base.IndexError if the number of atoms is zero or <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # 
     def removeAtom(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Removes the specified atom.
+    # 
+    # If the specified atom is connected to any other atoms of the fragment, the connecting bonds will also be removed.
+    # 
+    # \param atom The atom to remove.
+    # 
+    # \return <tt>True</tt> if the atom was part of the fragment and has been removed, and <tt>False</tt> otherwise.
+    # 
     def removeAtom(atom: Atom) -> bool: pass
 
     ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
+    # \brief Extends the fragment by the specified bond.
+    # 
+    # If the atoms of the bond are not already part of the fragment, they will be added automatically.
+    # 
+    # \param bond The bond to add.
+    # 
+    # \return <tt>True</tt> if the bond was not already a part of the fragment, and <tt>False</tt> otherwise.
+    # 
     def addBond(bond: Bond) -> bool: pass
 
     ##
-    # \brief 
-    # \param idx 
-    #
+    # \brief Removes the bond at the specified index.
+    # 
+    # \param idx The zero-based index of the bond to remove.
+    # 
+    # \throw Base.IndexError if the number of bonds is zero or <em>idx</em> is not in the range [0, getNumBonds() - 1].
+    # 
     def removeBond(idx: int) -> None: pass
 
     ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
+    # \brief Removes the specified bond.
+    # 
+    # \param bond The bond to remove.
+    # 
+    # \return <tt>True</tt> if the bond was removed, and <tt>False</tt> otherwise.
+    # 
     def removeBond(bond: Bond) -> bool: pass
 
     ##
-    # \brief 
-    #
+    # \brief Removes all atoms and bonds.
+    # 
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param frag 
-    #
+    # \brief Exchanges the atoms, bonds and properties of this fragment with the atoms, bonds and properties of the fragment <em>frag</em>.
+    # 
+    # \param frag The fragment the atoms, bonds and properties get exchanged with.
+    # 
     def swap(frag: Fragment) -> None: pass
 
     ##
@@ -194,23 +223,26 @@ class Fragment(MolecularGraph):
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+    # \param self The \e %Fragment instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
+    # \param self The \e %Fragment instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %Fragment instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
@@ -242,24 +274,20 @@ class Fragment(MolecularGraph):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
+    # \param self The \e %Fragment instance acting as in-place addend.
     # \param molgraph Specifies the second addend.
     # \return The updated \e %Fragment instance \a self.
-    #
+    # 
     def __iadd__(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
+    # \param self The \e %Fragment instance acting as in-place minuend.
     # \param molgraph Specifies the subtrahend.
     # \return The updated \e %Fragment instance \a self.
-    #
+    # 
     def __isub__(molgraph: MolecularGraph) -> Fragment: pass
 
-    ##
-    # \brief 
-    #
     atoms = property(getAtoms)
 
-    ##
-    # \brief 
-    #
     bonds = property(getBonds)

@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of bzip2-compressed feature container data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFBZ2FeatureContainerOutputHandler(FeatureContainerOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFBZ2FeatureContainerOutputHandler instance.
-    #
+    # \param self The \e %CDFBZ2FeatureContainerOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

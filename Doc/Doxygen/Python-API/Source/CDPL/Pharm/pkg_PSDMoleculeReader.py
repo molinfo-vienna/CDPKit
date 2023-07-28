@@ -20,18 +20,20 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for molecule data in the PSD-format of the <em>CDPL</em>.
+# 
 class PSDMoleculeReader(CDPL.Chem.MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %PSDMoleculeReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>PSDMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass
 
     ##
-    # \brief Initializes the \e %PSDMoleculeReader instance.
-    # \param file_name 
-    #
+    # \brief Constructs a <tt>PSDMoleculeReader</tt> instance that will read the molecule data from the input file <em>file_name</em>.
+    # 
+    # \param file_name The input file to read from.
+    # 
     def __init__(file_name: str) -> None: pass

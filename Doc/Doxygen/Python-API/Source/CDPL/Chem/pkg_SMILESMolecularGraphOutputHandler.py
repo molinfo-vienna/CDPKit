@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
 class SMILESMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SMILESMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %SMILESMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

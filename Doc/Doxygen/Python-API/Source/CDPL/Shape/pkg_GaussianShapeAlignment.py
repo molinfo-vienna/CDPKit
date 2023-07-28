@@ -51,31 +51,35 @@ class GaussianShapeAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignment instance.
-    #
+    # \param self The \e %GaussianShapeAlignment instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignment instance.
+    # \param self The \e %GaussianShapeAlignment instance to initialize.
     # \param ref_shape 
-    #
+    # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignment instance.
+    # \param self The \e %GaussianShapeAlignment instance to initialize.
     # \param ref_shapes 
-    #
+    # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GaussianShapeAlignment instance this method is called upon.
+    # 
     # Different Python \e %GaussianShapeAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeAlignment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -366,112 +370,82 @@ class GaussianShapeAlignment(Boost.Python.instance):
     #
     def __getitem__(idx: int) -> AlignmentResult: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numResults = property(getNumResults)
 
-    ##
-    # \brief 
-    #
     overlapFunction = property(getOverlapFunction, setOverlapFunction)
 
-    ##
-    # \brief 
-    #
     defaultOverlapFunction = property(getDefaultOverlapFunction)
 
-    ##
-    # \brief 
-    #
     startGenerator = property(getStartGenerator, setStartGenerator)
 
-    ##
-    # \brief 
-    #
     defaultStartGenerator = property(getDefaultStartGenerator)
 
-    ##
-    # \brief 
-    #
     colorMatchFunction = property(getColorMatchFunction, setColorMatchFunction)
 
-    ##
-    # \brief 
-    #
     colorFilterFunction = property(getColorFilterFunction, setColorFilterFunction)
 
-    ##
-    # \brief 
-    #
     resultCompareFunction = property(getResultCompareFunction, setResultCompareFunction)
 
-    ##
-    # \brief 
-    #
     scoringFunction = property(getScoringFunction, setScoringFunction)
 
-    ##
-    # \brief 
-    #
     resultSelectionMode = property(getResultSelectionMode, setResultSelectionMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     maxNumOptIterations = property(getMaxNumOptIterations, setMaxNumOptIterations)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     optStopGradient = property(getOptStopGradient, setOptStopGradient)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     perfAlignment = property(getPerfAlignment, setPerfAlignment)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     optOverlap = property(getOptOverlap, setOptOverlap)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     greedyOpt = property(getGreedyOpt, setGreedyOpt)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     selfOverlaps = property(getSelfOverlaps, setSelfOverlaps)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     colorSelfOverlaps = property(getColorSelfOverlaps, setColorSelfOverlaps)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     colorOverlaps = property(getColorOverlaps, setColorOverlaps)
 
-    ##
-    # \brief 
-    #
     maxOrder = property(getMaxOrder, setMaxOrder)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     distCutoff = property(getDistCutoff, setDistCutoff)
 
-    ##
-    # \brief 
-    #
     numReferenceShapes = property(getNumReferenceShapes)

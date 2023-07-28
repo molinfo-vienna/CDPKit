@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief HydrophobicAtomFeatureGenerator.
+# 
+# \see [\ref CATA]
+# 
 class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
@@ -45,94 +47,118 @@ class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
     DEF_HYD_THRESHOLD = 0.5
 
     ##
-    # \brief Initializes the \e %HydrophobicAtomFeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>HydrophobicAtomFeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %HydrophobicAtomFeatureGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Initializes the \e %HydrophobicAtomFeatureGenerator instance.
-    # \param gen 
-    #
+    # \brief Constructs a copy of the <tt>HydrophobicAtomFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>HydrophobicAtomFeatureGenerator</tt> to copy.
+    # 
     def __init__(gen: HydrophobicAtomFeatureGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %HydrophobicAtomFeatureGenerator instance \a gen.
-    # \param gen The \e %HydrophobicAtomFeatureGenerator instance to copy.
+    # \brief Copies the <tt>HydrophobicAtomFeatureGenerator</tt> instance <em>gen</em>.
+    # 
+    # \param gen The <tt>HydrophobicAtomFeatureGenerator</tt> to copy.
+    # 
     # \return \a self
-    #
+    # 
     def assign(gen: HydrophobicAtomFeatureGenerator) -> HydrophobicAtomFeatureGenerator: pass
 
     ##
-    # \brief 
-    # \param type 
-    #
+    # \brief Specifies the value of the feature type property that has to be set on newly generated features.
+    # 
+    # \param type The value of the feature type property.
+    # 
+    # \note The default type is specified by the constant HydrophobicAtomFeatureGenerator.DEF_FEATURE_TYPE. 
+    # 
+    # \see FeatureProperty.TYPE
+    # 
     def setFeatureType(type: int) -> None: pass
 
     ##
-    # \brief 
-    # \param geom 
-    #
+    # \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
+    # 
+    # \param geom The value of the feature geometry property.
+    # 
+    # \note The default type is specified by the constant HydrophobicAtomFeatureGenerator.DEF_FEATURE_GEOM. 
+    # 
+    # \see FeatureProperty.GEOMETRY
+    # 
     def setFeatureGeometry(geom: int) -> None: pass
 
     ##
-    # \brief 
-    # \param tol 
-    #
+    # \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
+    # 
+    # \param tol The value of the feature tolerance property.
+    # 
+    # \note The default value is specified by the constant HydrophobicAtomFeatureGenerator.DEF_FEATURE_TOL. 
+    # 
+    # \see FeatureProperty.TOLERANCE
+    # 
     def setFeatureTolerance(tol: float) -> None: pass
 
     ##
-    # \brief 
-    # \param thresh 
-    #
+    # \brief Specifies the minimum hydrophobicity of an atom that is required for the generation of a new feature.
+    # 
+    # \param thresh The minimum atom hydrophobicity.
+    # 
+    # \note The default value is specified by the constant HydrophobicAtomFeatureGenerator.DEF_HYD_THRESHOLD.
+    # 
     def setHydrophobicityThreshold(thresh: float) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature type property that gets set on newly generated features.
+    # 
+    # \return The used value of the feature type property. 
+    # 
+    # \see FeatureProperty.TYPE
+    # 
     def getFeatureType() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature geometry property that gets set on newly generated features.
+    # 
+    # \return The used value of the feature geometry property. 
+    # 
+    # \see FeatureProperty.GEOMETRY
+    # 
     def getFeatureGeometry() -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the value of the feature tolerance property that gets set on newly generated features.
+    # 
+    # \return The value of the feature tolerance property. 
+    # 
+    # \see FeatureProperty.TOLERANCE
+    # 
     def getFeatureTolerance() -> float: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the minimum hydrophobicity of an atom that is required for the generation of a new feature.
+    # 
+    # \return The specified minimum atom hydrophobicity.
+    # 
     def getHydrophobicityThreshold() -> float: pass
 
-    ##
-    # \brief 
-    #
     featureType = property(getFeatureType, setFeatureType)
 
-    ##
-    # \brief 
-    #
     featureGeometry = property(getFeatureGeometry, setFeatureGeometry)
 
-    ##
-    # \brief 
-    #
     featureTolerance = property(getFeatureTolerance, setFeatureTolerance)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     hydThreshold = property(getHydThreshold, setHydThreshold)

@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that a cast or conversion from a given source type to a requested target type is not possible.
+# 
 class BadCast(Exception):
     pass

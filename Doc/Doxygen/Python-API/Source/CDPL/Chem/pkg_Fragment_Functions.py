@@ -37,18 +37,24 @@ def isAromatic(ring: Fragment, molgraph: MolecularGraph, arom_bond_mask: CDPL.Ut
 def isNotAromatic(ring: Fragment, molgraph: MolecularGraph) -> bool: pass
 
 ##
-# \brief 
-# \param frag 
-# \return 
-#
+# \brief Removes all explicit hydrogen atoms from the fragment <em>frag</em>.
+# 
+# \param frag The fragment for which to remove all explicit hydrogen atoms.
+# 
+# \return <tt>False</tt> if <em>frag</em> was not altered, <tt>True</tt> otherwise.
+# 
 def makeHydrogenDeplete(frag: Fragment) -> bool: pass
 
 ##
-# \brief 
-# \param frag 
-# \param flags 
-# \return 
-#
+# \brief Removes all explicit ordinary hydrogen atoms from the fragment <em>frag</em>.
+# 
+# \param frag The fragment for which to remove all explicit ordinary hydrogen atoms.
+# \param flags Specifies the set of atom properties to check (see namespace Chem.AtomPropertyFlag).
+# 
+# \return <tt>False</tt> if <em>frag</em> was not altered, <tt>True</tt> otherwise. 
+# 
+# \see Chem.isOrdinaryHydrogen
+# 
 def makeOrdinaryHydrogenDeplete(frag: Fragment, flags: int) -> bool: pass
 
 ##

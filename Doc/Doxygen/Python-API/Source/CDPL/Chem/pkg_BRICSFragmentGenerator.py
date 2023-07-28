@@ -20,24 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief BRICSFragmentGenerator.
+# 
+# \see [\ref BRICS]
+# 
 class BRICSFragmentGenerator(FragmentGenerator):
 
     ##
-    # \brief Initializes the \e %BRICSFragmentGenerator instance.
-    #
+    # \brief Constructs the <tt>BRICSFragmentGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BRICSFragmentGenerator instance.
+    # \param self The \e %BRICSFragmentGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: BRICSFragmentGenerator) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BRICSFragmentGenerator instance \a gen.
-    # \param gen The \e %BRICSFragmentGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: BRICSFragmentGenerator) -> BRICSFragmentGenerator: pass

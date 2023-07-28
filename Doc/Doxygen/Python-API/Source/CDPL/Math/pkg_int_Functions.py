@@ -71,10 +71,12 @@ def range(start: int, stop: int) -> Range: pass
 def prime(i: int) -> int: pass
 
 ##
-# \brief 
-# \param n 
-# \return 
-#
+# \brief Computes the factorial \f$ n! \f$ of the non-negative integer <em>n</em>.
+# 
+# \param n The non-negative integer for which to compute the factorial.
+# 
+# \return The computed factorial of <em>n</em>.
+# 
 def factorial(n: int) -> int: pass
 
 ##

@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the mode of invertible nitrogen enumeration.
+# 
 class NitrogenEnumerationMode(Boost.Python.instance):
 
     ##

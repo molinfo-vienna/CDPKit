@@ -20,12 +20,17 @@
 #
 
 ##
-# \brief 
-#
+# \brief Creates 2D depictions of chemical reactions in the <em>Portable Document Format (PDF)</em> [\ref WPDF].
+# 
+# <tt>PDFReactionWriter</tt> uses Vis.ReactionView2D for the visualization of chemical reactions. All control-parameters and properties provided for the customization of Vis.ReactionView2D are also supported by <tt>PDFReactionWriter</tt>.
+# 
 class PDFReactionWriter(CDPL.Chem.ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %PDFReactionWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>PDFReactionWriter</tt> instance that will write the image data to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
+    # \note PDF is a binary format. To avoid data corruption, the output stream has to be opened in binary mode.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

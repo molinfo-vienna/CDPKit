@@ -20,37 +20,40 @@
 #
 
 ##
-# \brief 
-#
+# \brief BuriednessGridCalculator.
+# 
 class BuriednessGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BuriednessGridCalculator instance.
-    #
+    # \param self The \e %BuriednessGridCalculator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BuriednessGridCalculator instance.
+    # \param self The \e %BuriednessGridCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: BuriednessGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
+    # 
     # Different Python \e %BuriednessGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BuriednessGridCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessGridCalculator instance \a calc.
-    # \param calc The \e %BuriednessGridCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 
@@ -91,9 +94,10 @@ class BuriednessGridCalculator(Boost.Python.instance):
     def getNumTestRays() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
+    # 
+    # \param func The atom 3D-coordinates function.
+    # 
     def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
@@ -109,27 +113,12 @@ class BuriednessGridCalculator(Boost.Python.instance):
     #
     def calculate(atoms: CDPL.Chem.AtomContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     probeRadius = property(getProbeRadius, setProbeRadius)
 
-    ##
-    # \brief 
-    #
     minVdWSurfaceDistance = property(getMinVdWSurfaceDistance, setMinVdWSurfaceDistance)
 
-    ##
-    # \brief 
-    #
     numTestRays = property(getNumTestRays, setNumTestRays)
 
-    ##
-    # \brief 
-    #
     atom3DCoordinatesFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesFunction)

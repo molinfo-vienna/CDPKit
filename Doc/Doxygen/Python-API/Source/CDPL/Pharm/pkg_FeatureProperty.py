@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides keys for built-in Pharm.Feature properties.
+# 
 class FeatureProperty(Boost.Python.instance):
 
     ##

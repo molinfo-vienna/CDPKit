@@ -36,37 +36,41 @@ class GaussianShapeFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    #
+    # \param self The \e %GaussianShapeFunction instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
+    # \param self The \e %GaussianShapeFunction instance to initialize.
     # \param shape 
-    #
+    # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
+    # \param self The \e %GaussianShapeFunction instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: GaussianShapeFunction) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %GaussianShapeFunction instance this method is called upon.
+    # 
     # Different Python \e %GaussianShapeFunction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeFunction instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeFunction instance \a func.
-    # \param func The \e %GaussianShapeFunction instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: GaussianShapeFunction) -> GaussianShapeFunction: pass
 
@@ -163,32 +167,26 @@ class GaussianShapeFunction(Boost.Python.instance):
     #
     def calcQuadrupoleTensor(ctr: CDPL.Math.Vector3D, quad_tensor: CDPL.Math.Matrix3D) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     shape = property(getShape, setShape)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     volume = property(getVolume)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     surfaceArea = property(getSurfaceArea)
 
-    ##
-    # \brief 
-    #
     maxOrder = property(getMaxOrder, setMaxOrder)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     distCutoff = property(getDistCutoff, setDistCutoff)

@@ -56,31 +56,35 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    #
+    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
+    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # \param ref_shape 
-    #
+    # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
+    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # \param ref_shapes 
-    #
+    # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
+    # 
     # Different Python \e %FastGaussianShapeAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FastGaussianShapeAlignment instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -370,107 +374,92 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     #
     def __getitem__(idx: int) -> AlignmentResult: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numResults = property(getNumResults)
 
-    ##
-    # \brief 
-    #
     resultCompareFunction = property(getResultCompareFunction, setResultCompareFunction)
 
-    ##
-    # \brief 
-    #
     scoringFunction = property(getScoringFunction, setScoringFunction)
 
-    ##
-    # \brief 
-    #
     resultSelectionMode = property(getResultSelectionMode, setResultSelectionMode)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     maxNumOptIterations = property(getMaxNumOptIterations, setMaxNumOptIterations)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     optStopGradient = property(getOptStopGradient, setOptStopGradient)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     perfAlignment = property(getPerfAlignment, setPerfAlignment)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     optOverlap = property(getOptOverlap, setOptOverlap)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     greedyOpt = property(getGreedyOpt, setGreedyOpt)
 
-    ##
-    # \brief 
-    #
     numReferenceShapes = property(getNumReferenceShapes)
 
-    ##
-    # \brief 
-    #
     symmetryThreshold = property(getSymmetryThreshold, setSymmetryThreshold)
 
-    ##
-    # \brief 
-    #
     maxRandomTranslation = property(getMaxRandomTranslation, setMaxRandomTranslation)
 
-    ##
-    # \brief 
-    #
     numRandomStarts = property(getNumRandomStarts, setNumRandomStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     shapeCenterStarts = property(getShapeCenterStarts, setShapeCenterStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     colorCenterStarts = property(getColorCenterStarts, setColorCenterStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     nonColorCenterStarts = property(getNonColorCenterStarts, setNonColorCenterStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     randomStarts = property(getRandomStarts, setRandomStarts)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genForAlignedShapeCtrs = property(getGenForAlignedShapeCtrs, setGenForAlignedShapeCtrs)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genForReferenceShapeCrs = property(getGenForReferenceShapeCrs, setGenForReferenceShapeCrs)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     genForLargerShapeCtrs = property(getGenForLargerShapeCtrs, setGenForLargerShapeCtrs)

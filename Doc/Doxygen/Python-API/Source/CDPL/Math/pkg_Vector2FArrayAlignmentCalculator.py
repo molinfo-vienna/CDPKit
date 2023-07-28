@@ -26,31 +26,34 @@ class Vector2FArrayAlignmentCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector2FArrayAlignmentCalculator instance.
-    #
+    # \param self The \e %Vector2FArrayAlignmentCalculator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector2FArrayAlignmentCalculator instance.
+    # \param self The \e %Vector2FArrayAlignmentCalculator instance to initialize.
     # \param algo 
-    #
+    # 
     def __init__(algo: Vector2FArrayAlignmentCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %Vector2FArrayAlignmentCalculator instance this method is called upon.
+    # 
     # Different Python \e %Vector2FArrayAlignmentCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector2FArrayAlignmentCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2FArrayAlignmentCalculator instance \a algo.
-    # \param algo The \e %Vector2FArrayAlignmentCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param algo 
+    # \return 
     #
     def assign(algo: Vector2FArrayAlignmentCalculator) -> Vector2FArrayAlignmentCalculator: pass
 
@@ -92,12 +95,6 @@ class Vector2FArrayAlignmentCalculator(Boost.Python.instance):
     #
     def calculate(points: Vector2FArray, ref_points: Vector2FArray, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     transform = property(getTransform)

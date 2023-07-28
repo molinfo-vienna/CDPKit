@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides default values for built-in Grid.AttributedGrid properties.
+# 
 class AttributedGridPropertyDefault(Boost.Python.instance):
 
     ##

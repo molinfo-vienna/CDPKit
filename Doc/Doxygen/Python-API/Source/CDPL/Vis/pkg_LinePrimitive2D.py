@@ -20,54 +20,56 @@
 #
 
 ##
-# \brief 
-#
+# \brief A graphics primitive representing a single line.
+# 
 class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
 
     ##
-    # \brief Initializes the \e %LinePrimitive2D instance.
-    #
+    # \brief Constructs a line primitive whose starting and end point is set to <em>(0, 0)</em>.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LinePrimitive2D instance.
+    # \param self The \e %LinePrimitive2D instance to initialize.
     # \param prim 
-    #
+    # 
     def __init__(prim: LinePrimitive2D) -> None: pass
 
     ##
-    # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param line 
-    #
+    # \brief Constructs a line primitive with the same starting and end point as <em>line</em>.
+    # 
+    # \param line The line defining the starting and end point.
+    # 
     def __init__(line: Line2D) -> None: pass
 
     ##
-    # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param beg 
-    # \param end 
-    #
+    # \brief Constructs a line primitive with the starting point set to <em>beg</em> and the end point set to <em>end</em>.
+    # 
+    # \param beg The starting point.
+    # \param end The end point.
+    # 
     def __init__(beg: CDPL.Math.Vector2D, end: CDPL.Math.Vector2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LinePrimitive2D instance \a prim.
-    # \param prim The \e %LinePrimitive2D instance to copy.
-    # \return \a self
+    # \brief 
+    # \param prim 
+    # \return 
     #
     def assign(prim: LinePrimitive2D) -> LinePrimitive2D: pass
 
     ##
-    # \brief 
-    # \param pen 
-    #
+    # \brief Sets the pen defining the color, width, line style and cap style of the line.
+    # 
+    # \param pen The pen defining the color, width, line style and cap style.
+    # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pen defining the color, width, line style and cap style of the line.
+    # 
+    # \return The pen defining the color, width, line style and cap style of the line.
+    # 
     def getPen() -> Pen: pass
 
-    ##
-    # \brief 
-    #
     pen = property(getPen, setPen)

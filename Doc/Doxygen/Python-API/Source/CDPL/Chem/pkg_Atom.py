@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Atom.
+# 
 class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
@@ -44,9 +44,10 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
-        #
+        # 
         def __contains__(atom: Atom) -> bool: pass
 
     ##
@@ -69,47 +70,59 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
         ##
         # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
+        # \param self The \e %BondSequence instance this method is called upon.
         # \param bond The value to test for membership.
         # \return The result of the membership test operation.
-        #
+        # 
         def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Initializes the \e %Atom instance.
-    #
+    # \param self The \e %Atom instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns a reference to the parent molecule.
+    # 
+    # \return A reference to the parent molecule.
+    # 
     def getMolecule() -> Molecule: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Returns a reference to the Chem.Bond object that connects this atom to the argument atom.
+    # 
+    # \param atom The adjacent atom for which to return the connecting bond.
+    # 
+    # \return A reference to the Chem.Bond object connecting this atom and the argument atom. 
+    # 
+    # \throw Base.ItemNotFound if the argument atom is not connected to this atom.
+    # 
     def getBondToAtom(atom: Atom) -> Bond: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Returns a reference to the Chem.Bond object that connects this atom to the argument atom.
+    # 
+    # \param atom The adjacent atom for which to return a reference to the connecting bond.
+    # 
+    # \return A reference to the Chem.Bond object that connects this atom to the argument atom, or <em>None</em> if the argument atom is not connected.
+    # 
     def findBondToAtom(atom: Atom) -> Bond: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the index of the atom in its parent molecule.
+    # 
+    # \return The zero-based index of the atom.
+    # 
     def getIndex() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Atom instance \a atom.
-    # \param atom The \e %Atom instance to copy.
+    # \brief Assignment operator that replaces the current set of properties with the properties of <em>atom</em>;.
+    # 
+    # \param atom The atom whose properties get copied.
+    # 
     # \return \a self
-    #
+    # 
     def assign(atom: Atom) -> Atom: pass
 
     ##
@@ -125,30 +138,45 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getBonds() -> object: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the connected atom at index <em>idx</em>.
+    # 
+    # \param idx The index of the atom to return.
+    # 
+    # \return A reference to the connected atom at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumAtoms() - 1].
+    # 
+    # \note The order of connected atoms corresponds to the order of connecting bonds.
+    # 
     def getAtom(idx: int) -> Atom: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Tells whether this atom and the argument atom are connected by a bond.
+    # 
+    # \param atom The atom to test for adjacency.
+    # 
+    # \return <tt>True</tt> if the argument atom is connected to this atom, and <tt>False</tt> otherwise.
+    # 
     def containsAtom(atom: Atom) -> bool: pass
 
     ##
-    # \brief 
-    # \param atom 
-    # \return 
-    #
+    # \brief Returns the index of the specified connected atom.
+    # 
+    # \param atom The connected atom for which to return the index.
+    # 
+    # \return The zero-based index of the specified atom. 
+    # 
+    # \throw Base.ItemNotFound if the specified atom is not connected to this atom.
+    # 
     def getAtomIndex(atom: Atom) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of connected atoms.
+    # 
+    # Equivalent to getNumBonds().
+    # 
+    # \return The number of connected atoms.
+    # 
     def getNumAtoms() -> int: pass
 
     ##
@@ -171,17 +199,25 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def getNumEntities() -> int: pass
 
     ##
-    # \brief 
-    # \param idx 
-    # \return 
-    #
+    # \brief Returns a reference to the incident bond at index <em>idx</em>.
+    # 
+    # \param idx The index of the incident bond to return.
+    # 
+    # \return A reference to the incident bond at index <em>idx</em>. 
+    # 
+    # \throw Base.IndexError if <em>idx</em> is not in the range [0, getNumBonds() - 1].
+    # 
+    # \note The order of incident bonds corresponds to the order of connected atoms.
+    # 
     def getBond(idx: int) -> Bond: pass
 
     ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
+    # \brief Tells whether the specified bond is incident to this atom.
+    # 
+    # \param bond The bond to test for incidence.
+    # 
+    # \return <tt>True</tt> if the argument bond is incident to this atom, and <tt>False</tt> otherwise.
+    # 
     def containsBond(bond: Bond) -> bool: pass
 
     ##
@@ -191,37 +227,47 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     def orderBonds(func: BoolBond2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param bond 
-    # \return 
-    #
+    # \brief Returns the index of the specified incident bond.
+    # 
+    # \param bond The bond for which to return the index.
+    # 
+    # \return The zero-based index of the specified bond. 
+    # 
+    # \throw Base.ItemNotFound if the specified bond is not incident to this atom.
+    # 
     def getBondIndex(bond: Bond) -> int: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the number of incident bonds.
+    # 
+    # Equivalent to getNumAtoms().
+    # 
+    # \return The number of incident bonds.
+    # 
     def getNumBonds() -> int: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+    # \param self The \e %Atom instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
+    # \param self The \e %Atom instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %Atom instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
@@ -251,22 +297,10 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     #
     def __len__() -> int: pass
 
-    ##
-    # \brief 
-    #
     molecule = property(getMolecule)
 
-    ##
-    # \brief 
-    #
     index = property(getIndex)
 
-    ##
-    # \brief 
-    #
     atoms = property(getAtoms)
 
-    ##
-    # \brief 
-    #
     bonds = property(getBonds)

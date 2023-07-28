@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of gzip-compressed molecule data in the <em>Sybyl MOL2</em> format.
+# 
 class MOL2GZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %MOL2GZMoleculeInputHandler instance.
-    #
+    # \param self The \e %MOL2GZMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

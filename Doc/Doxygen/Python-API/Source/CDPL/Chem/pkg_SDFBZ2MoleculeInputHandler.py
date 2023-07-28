@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of bzip2-compressed molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
+# 
 class SDFBZ2MoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SDFBZ2MoleculeInputHandler instance.
-    #
+    # \param self The \e %SDFBZ2MoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

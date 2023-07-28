@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of pharmacophore data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFPharmacophoreInputHandler(PharmacophoreInputHandler):
 
     ##
     # \brief Initializes the \e %CDFPharmacophoreInputHandler instance.
-    #
+    # \param self The \e %CDFPharmacophoreInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

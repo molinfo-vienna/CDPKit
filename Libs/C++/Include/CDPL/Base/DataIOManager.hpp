@@ -126,37 +126,37 @@ namespace CDPL
             typedef typename OutputHandlerList::iterator OutputHandlerIterator;
 
             /**
-             * \brief Registers the specified Base::DataInputHandler implementation instance as an input handler.
+             * \brief Registers the specified Base::DataInputHandler implementation instance.
              * \param handler The Base::DataInputHandler implementation instance to register.
              */
             static void registerInputHandler(const InputHandlerPointer& handler);
 
             /**
-             * \brief Registers the specified Base::DataOutputHandler implementation instanceas an output handler.
+             * \brief Registers the specified Base::DataOutputHandler implementation instance.
              * \param handler The Base::DataOutputHandler implementation instance to register.
              */
             static void registerOutputHandler(const OutputHandlerPointer& handler);
 
             /**
-             * \brief Unregisters the input handler for the specified data format.
+             * \brief Unregisters the Base::DataInputHandler implementation instance for the specified data format.
              *
-             * Only one handler at a time will be unregistered (in a first in - first out manner). If more than one handler has
-             * been registered for the given data format, the method has to be called multiple times to unregister all handlers.
+             * Only one handler instance at a time will be unregistered (in a first in - first out manner). If more than one handler instance has
+             * been registered for the given data format, the method has to be called multiple times to unregister all instances.
              *
-             * \param fmt Specifies the data format that is associated with the handler to unregister.
-             * \return \c true if a handler for the specified data format was found and has been unregistered,
+             * \param fmt Specifies the data format that is associated with the handler instance to unregister.
+             * \return \c true if a handler instance for the specified data format was found and has been unregistered,
              *         and \c false otherwise.
              */
             static bool unregisterInputHandler(const DataFormat& fmt);
 
             /**
-             * \brief Unregisters the output handler for the specified data format.
+             * \brief Unregisters the Base::DataOutputHandler implementation instance for the specified data format.
              *
-             * Only one handler at a time will be unregistered (in a first in - first out manner). If more than one handler has
-             * been registered for the given data format, the method has to be called multiple times to unregister all handlers.
+             * Only one handler instance at a time will be unregistered (in a first in - first out manner). If more than one handler instance has
+             * been registered for the given data format, the method has to be called multiple times to unregister all instances.
              *
-             * \param fmt Specifies the data format that is associated with the handler to unregister.
-             * \return \c true if a handler for the specified data format was found and has been unregistered,
+             * \param fmt Specifies the data format that is associated with the handler instance to unregister.
+             * \return \c true if a handler instance for the specified data format was found and has been unregistered,
              *         and \c false otherwise.
              */
             static bool unregisterOutputHandler(const DataFormat& fmt);
@@ -164,165 +164,167 @@ namespace CDPL
             /**
              * \brief Unregisters the specified Base::DataInputHandler implementation instance.
              * \param handler The Base::DataInputHandler implementation instance to unregister.
-             * \return \c true if the handler was found and has been unregistered, and \c false otherwise.
+             * \return \c true if the handler instance was found and has been unregistered, and \c false otherwise.
              */
             static bool unregisterInputHandler(const InputHandlerPointer& handler);
 
             /**
              * \brief Unregisters the specified Base::DataOutputHandler implementation instance.
              * \param handler The Base::DataOutputHandler implementation instance to unregister.
-             * \return \c true if the handler was found and has been unregistered, and \c false otherwise.
+             * \return \c true if the handler instance was found and has been unregistered, and \c false otherwise.
              */
             static bool unregisterOutputHandler(const OutputHandlerPointer& handler);
 
             /**
-             * \brief Unregisters the input handler with the specified index.
-             * \param idx The zero-based index of the input handler to unregister.
+             * \brief Unregisters the Base::DataInputHandler implementation instance with the specified index.
+             * \param idx The zero-based index of the Base::DataInputHandler implementation instance to unregister.
              * \throw Base::IndexError if \a idx is out of bounds.
              */
             static void unregisterInputHandler(std::size_t idx);
 
             /**
-             * \brief Unregisters the output handler with the specified index.
-             * \param idx The zero-based index of the output handler to unregister.
+             * \brief Unregisters the Base::DataOutputHandler implementation instance with the specified index.
+             * \param idx The zero-based index of the Base::DataOutputHandler implementation instance to unregister.
              * \throw Base::IndexError if \a idx is out of bounds.
              */
             static void unregisterOutputHandler(std::size_t idx);
 
             /**
-             * \brief Unregisters the input handler pointed to by the iterator \a it.
-             * \param it An iterator pointing to the input handler to unregister.
+             * \brief Unregisters the Base::DataInputHandler implementation instance pointed to by the iterator \a it.
+             * \param it An iterator pointing to the Base::DataInputHandler implementation instance to unregister.
              * \throw Base::RangeError if \a it is not in the range [getInputHandlersBegin(), getInputHandlersEnd() - 1].
              */
             static InputHandlerIterator unregisterInputHandler(const InputHandlerIterator& it);
 
             /**
-             * \brief Unregisters the output handler implementation instance pointed to by the iterator \a it.
-             * \param it An iterator pointing to the output handler to unregister.
+             * \brief Unregisters the Base::DataOutputHandler implementation instance implementation instance pointed to by the iterator \a it.
+             * \param it An iterator pointing to the Base::DataOutputHandler implementation instance to unregister.
              * \throw Base::RangeError if \a it is not in the range [getOutputHandlersBegin(), getOutputHandlersEnd() - 1].
              */
             static OutputHandlerIterator unregisterOutputHandler(const OutputHandlerIterator& it);
 
             /**
-             * \brief Returns the number of registered input handlers.
-             * \return The number of registered input handlers.
+             * \brief Returns the number of registered Base::DataInputHandler implementation instances.
+             * \return The number of registered Base::DataInputHandler implementation instances.
              */
             static std::size_t getNumInputHandlers();
 
             /**
-             * \brief Returns the number of registered output handlers.
-             * \return The number of registered output handlers.
+             * \brief Returns the number of registered Base::DataOutputHandler implementation instances.
+             * \return The number of registered Base::DataOutputHandler implementation instances.
              */
             static std::size_t getNumOutputHandlers();
 
             /**
-             * \brief Returns a reference to the registered input handler with the specified index.
-             * \param idx The zero-based index of the input handler to return.
-             * \return A reference to the input handler at the specified index.
+             * \brief Returns a reference to the registered Base::DataInputHandler implementation instance with the specified index.
+             * \param idx The zero-based index of the Base::DataInputHandler implementation instance to return.
+             * \return A reference to the Base::DataInputHandler implementation instance with the specified index.
              * \throw Base::IndexError if \a idx is out of bounds.
              */
             static const InputHandlerPointer& getInputHandler(std::size_t idx);
 
             /**
-             * \brief Returns a reference to the registered output handler with the specified index.
-             * \param idx The zero-based index of the output handler to return.
-             * \return A reference to the output handler with the specified index.
+             * \brief Returns a reference to the registered Base::DataOutputHandler implementation instance with the specified index.
+             * \param idx The zero-based index of the Base::DataOutputHandler implementation instance to return.
+             * \return A reference to the Base::DataOutputHandler implementation instance with the specified index.
              * \throw Base::IndexError if \a idx is out of bounds.
              */
             static const OutputHandlerPointer& getOutputHandler(std::size_t idx);
 
             /**
-             * \brief Returns an iterator pointing to the beginning of the list of registered input handlers.
-             * \return An iterator pointing to the beginning of the list of registered input handlers.
+             * \brief Returns an iterator pointing to the beginning of the list of registered Base::DataInputHandler implementation instances.
+             * \return An iterator pointing to the beginning of the list of registered Base::DataInputHandler implementation instances.
              */
             static InputHandlerIterator getInputHandlersBegin();
 
             /**
-             * \brief Returns an iterator pointing to the end of the list of registered input handlers.
-             * \return An iterator pointing to the end of the list of registered input handlers.
+             * \brief Returns an iterator pointing to the end of the list of registered Base::DataInputHandler implementation instances.
+             * \return An iterator pointing to the end of the list of registered Base::DataInputHandler implementation instances.
              */
             static InputHandlerIterator getInputHandlersEnd();
 
             /**
-             * \brief Returns an iterator pointing to the beginning of the list of registered output handlers.
-             * \return An iterator pointing to the beginning of the list of registered output handlers.
+             * \brief Returns an iterator pointing to the beginning of the list of registered Base::DataOutputHandler implementation instances.
+             * \return An iterator pointing to the beginning of the list of registered Base::DataOutputHandler implementation instances.
              */
             static OutputHandlerIterator getOutputHandlersBegin();
 
             /**
-             * \brief Returns an iterator pointing to the end of the list of registered output handlers.
-             * \return An iterator pointing to the end of the list of registered output handlers.
+             * \brief Returns an iterator pointing to the end of the list of registered Base::DataOutputHandler implementation instances.
+             * \return An iterator pointing to the end of the list of registered Base::DataOutputHandler implementation instances.
              */
             static OutputHandlerIterator getOutputHandlersEnd();
 
             /**
-             * \brief Returns a pointer to a registered input handler for the specified data format.
-             * \param fmt Specifies the data format that is associated with the requested input handler.
-             * \return A pointer to an input handler for the specified data format, or \e null if a suitable handler is not available.
+             * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the specified data format.
+             * \param fmt Specifies the data format that is associated with the requested Base::DataInputHandler implementation instance.
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the specified data format, or \e null if 
+             *         not available.
              */
             static InputHandlerPointer getInputHandlerByFormat(const DataFormat& fmt);
 
             /**
-             * \brief Returns a pointer to a registered input handler for the data format with the specified name.
-             * \param name Specifies the name of the data format that is associated with the requested input handler.
-             * \return A pointer to an input handler for the data format with the specified name, or \e null if
-             *         a suitable handler is not available.
+             * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified name.
+             * \param name Specifies the name of the data format that is associated with the requested Base::DataInputHandler implementation instance.
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified name, or \e null if
+             *         not available.
              * \note The matching of the name is not case-sensitive.
              */
             static InputHandlerPointer getInputHandlerByName(const std::string& name);
 
             /**
-             * \brief Returns a pointer to a registered input handler for the data format with the specified file extension.
+             * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified file extension.
              * \param file_ext Specifies the file extension of the data format that is associated with the
-             *                 requested input handler.
-             * \return A pointer to an input handler for the data format with the specified file extension, or \e null if a
-             *         suitable handler is not available.
+             *                 requested Base::DataInputHandler implementation instance.
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified file extension, or \e null if
+             *         not available.
              * \note The matching of the file extension is not case-sensitive.
              */
             static InputHandlerPointer getInputHandlerByFileExtension(const std::string& file_ext);
 
             /**
-             * \brief Returns a pointer to a registered input handler for the data format with the specified mime-type.
+             * \brief Returns a pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified mime-type.
              * \param mime_type Specifies the mime-type of the data format that is associated with the
-             *                  requested input handler.
-             * \return A pointer to an input handler for the data format with the specified mime-type, or \e null if a
-             *         suitable handler is not available.
+             *                  requested Base::DataInputHandler implementation instance.
+             * \return A pointer to a Base::DataInputHandler implementation instance registered for the data format with the specified mime-type, or \e null if
+             *         not available.
              * \note The matching of the mime-type is not case-sensitive.
              */
             static InputHandlerPointer getInputHandlerByMimeType(const std::string& mime_type);
 
             /**
-             * \brief Returns a pointer to a registered output handler for the specified data format.
-             * \param fmt Specifies the data format that is associated with the requested output handler.
-             * \return A pointer to an output handler for the specified data format, or \e null if a suitable handler is not available.
+             * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the specified data format.
+             * \param fmt Specifies the data format that is associated with the requested Base::DataOutputHandler implementation instance.
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the specified data format, or \e null if
+             *         not available.
              */
             static OutputHandlerPointer getOutputHandlerByFormat(const DataFormat& fmt);
 
             /**
-             * \brief Returns a pointer to a registered output handler for the data format with the specified name.
-             * \param name Specifies the name of the data format that is associated with the requested output handler.
-             * \return A pointer to an output handler for the data format with the specified name, or \e null if
-             *         a suitable handler is not available.
+             * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified name.
+             * \param name Specifies the name of the data format that is associated with the requested Base::DataOutputHandler implementation instance.
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified name, or \e null if
+             *         not available.
              * \note The matching of the name is not case-sensitive.
              */
             static OutputHandlerPointer getOutputHandlerByName(const std::string& name);
 
             /**
-             * \brief Returns a pointer to a registered output handler for the data format with the specified file extension.
+             * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified file extension.
              * \param file_ext Specifies the file extension of the data format that is associated with the
-             *                 requested output handler.
-             * \return A pointer to an output handler for the data format with the specified file extension, or \e null if a
-             *         suitable handler is not available.
+             *                 requested Base::DataOutputHandler implementation instance.
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified file extension, or \e null if
+             *         not available.
              * \note The matching of the file extension is not case-sensitive.
              */
             static OutputHandlerPointer getOutputHandlerByFileExtension(const std::string& file_ext);
 
             /**
-             * \brief Returns a pointer to a registered output handler for the data format with the specified mime-type.
+             * \brief Returns a pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified mime-type.
              * \param mime_type Specifies the mime-type of the data format that is associated with the
-             *                  requested output handler.
-             * \return A pointer to an output handler for the data format with the specified mime-type, or \e null if a
-             *         suitable handler is not available.
+             *                  requested Base::DataOutputHandler implementation instance.
+             * \return A pointer to a Base::DataOutputHandler implementation instance registered for the data format with the specified mime-type, or \e null if
+             *         not available.
              * \note The matching of the mime-type is not case-sensitive.
              */
             static OutputHandlerPointer getOutputHandlerByMimeType(const std::string& mime_type);

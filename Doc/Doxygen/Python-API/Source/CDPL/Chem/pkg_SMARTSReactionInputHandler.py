@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
 class SMARTSReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %SMARTSReactionInputHandler instance.
-    #
+    # \param self The \e %SMARTSReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

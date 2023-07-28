@@ -20,13 +20,14 @@
 #
 
 ##
-# \brief 
-#
+# \brief SpatialGrid.
+# 
 class DSpatialGrid(AttributedGrid):
 
     ##
     # \brief Initializes the \e %DSpatialGrid instance.
-    #
+    # \param self The \e %DSpatialGrid instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
@@ -105,9 +106,10 @@ class DSpatialGrid(AttributedGrid):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
+    # \param self The \e %DSpatialGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
-    #
+    # 
     def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##

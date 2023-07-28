@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of molecular graph data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
+# 
 class MOLMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %MOLMolecularGraphOutputHandler instance.
-    #
+    # \param self The \e %MOLMolecularGraphOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

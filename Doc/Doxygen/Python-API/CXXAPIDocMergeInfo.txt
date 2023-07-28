@@ -1,0 +1,502 @@
+#
+# --- CDPL.Base package ---
+#
+Base.Any % Base.Any
+std::experimental.any % std::experimental::any
+
+#
+# --- CDPL.Math package ---
+#
+Math.FGrid. % Math.Grid.
+
+Math.DGrid. % Math.Grid.
+
+Math.FMatrix. % Math.Matrix.
+
+Math.DMatrix. % Math.Matrix.
+
+Math.LMatrix. % Math.Matrix.
+
+Math.ULMatrix. % Math.Matrix.
+
+Math.Matrix2F. % Math.CMatrix.
+
+Math.Matrix3F. % Math.CMatrix.
+
+Math.Matrix4F. % Math.CMatrix.
+
+Math.Matrix2D. % Math.CMatrix.
+
+Math.Matrix3D. % Math.CMatrix.
+
+Math.Matrix4D. % Math.CMatrix.
+
+Math.Matrix2L. % Math.CMatrix.
+
+Math.Matrix3L. % Math.CMatrix.
+
+Math.Matrix4L. % Math.CMatrix.
+
+Math.Matrix2UL. % Math.CMatrix.
+
+Math.Matrix3UL. % Math.CMatrix.
+
+Math.Matrix4UL. % Math.CMatrix.
+
+Math.SparseFMatrix. % Math.SparseMatrix.
+
+Math.SparseDMatrix. % Math.SparseMatrix.
+
+Math.SparseLMatrix. % Math.SparseMatrix.
+
+Math.SparseULMatrix. % Math.SparseMatrix.
+
+Math.FRegularSpatialGrid. % Math.RegularSpatialGrid.
+
+Math.DRegularSpatialGrid. % Math.RegularSpatialGrid.
+
+Math.Vector2F. % Math.CVector.
+
+Math.Vector3F. % Math.CVector.
+
+Math.Vector4F. % Math.CVector.
+
+Math.Vector2D. % Math.CVector.
+
+Math.Vector3D. % Math.CVector.
+
+Math.Vector4D. % Math.CVector.
+
+Math.Vector7D. % Math.CVector.
+
+Math.Vector2L. % Math.CVector.
+
+Math.Vector3L. % Math.CVector.
+
+Math.Vector4L. % Math.CVector.
+
+Math.Vector2UL. % Math.CVector.
+
+Math.Vector3UL. % Math.CVector.
+
+Math.Vector4UL. % Math.CVector.
+
+Math.FVector. % Math.Vector.
+
+Math.DVector. % Math.Vector.
+
+Math.LVector. % Math.Vector.
+
+Math.ULVector. % Math.Vector.
+
+Math.SparseFVector. % Math.SparseVector.
+
+Math.SparseDVector. % Math.SparseVector.
+
+Math.SparseLVector. % Math.SparseVector.
+
+Math.SparseULVector. % Math.SparseVector.
+
+Math.Vector2FArray. % Math.VectorArray.
+
+Math.Vector2FArray. % Util.Array.
+
+Math.Vector3FArray. % Math.VectorArray.
+
+Math.Vector3FArray. % Util.Array.
+
+Math.Vector2DArray. % Math.VectorArray.
+
+Math.Vector2DArray. % Util.Array.
+
+Math.Vector3DArray. % Math.VectorArray.
+
+Math.Vector3DArray. % Util.Array.
+
+Math.Vector2LArray. % Math.VectorArray.
+
+Math.Vector2LArray. % Util.Array.
+
+Math.Vector3LArray. % Math.VectorArray.
+
+Math.Vector3LArray. % Util.Array.
+
+Math.Vector2ULArray. % Math.VectorArray.
+
+Math.Vector2ULArray. % Util.Array.
+
+Math.Vector3ULArray. % Math.VectorArray.
+
+Math.Vector3ULArray. % Util.Array.
+
+Math.DMLR % Math.MLR
+
+Math.FMLR % Math.MLR
+
+Math.DSparse % Math.Sparse
+
+Math.FSparse % Math.Sparse
+
+Math.DVectorBFGSMinimizer % Math.BFGSMinimizer
+
+Math.FVectorBFGSMinimizer % Math.BFGSMinimizer
+
+#
+# --- CDPL.Util package ---
+#
+Util.UIArray. % Util.Array.
+
+Util.STArray. % Util.Array.
+
+Util.LArray. % Util.Array.
+
+Util.STPairArray. % Util.Array.
+
+Util.DArray. % Util.Array.
+
+Util.SArray. % Util.Array.
+
+Util.BitSetArray. % Util.Array.
+
+#
+# --- CDPL.Chem package ---
+#
+Chem.MoleculeReaderBase % Base.DataReader
+DataReader % MoleculeReaderBase
+a given type (specified by the template parameter <em>T</em>) % type Chem.Molecule
+of a given type % of type Chem.Molecule
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+DataType& obj % mol: Molecule
+
+Chem.MoleculeReaderBase.read(mol,overwrite) % Base.DataReader.read(obj,overwrite)
+obj % mol
+molect % Molecule object
+
+Chem.MoleculeReaderBase.read(idx,mol,overwrite) % Base.DataReader.read(idx,obj,overwrite)
+obj % mol
+molect % Molecule object
+
+Chem.MolecularGraphWriterBase % Base.DataWriter
+DataWriter % MolecularGraphWriterBase
+a given type (specified by the template parameter <em>T</em>) % type Chem.MolecularGraph
+of a given type % of type Chem.MolecularGraph
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+
+Chem.MolecularGraphWriterBase.write(molgraph) % Base.DataWriter.write(obj)
+obj % molgraph
+data molgraphect % MolecularGraph object
+
+Chem.ReactionReaderBase % Base.DataReader
+DataReader % ReactionReaderBase
+a given type (specified by the template parameter <em>T</em>) % type Chem.Reaction
+of a given type % of type Chem.Reaction
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+DataType& obj % rxn: Reaction
+
+Chem.ReactionReaderBase.read(rxn,overwrite) % Base.DataReader.read(obj,overwrite)
+obj % rxn
+rxnect % Reaction object
+
+Chem.ReactionReaderBase.read(idx,rxn,overwrite) % Base.DataReader.read(idx,obj,overwrite)
+obj % rxn
+rxnect % Reaction object
+
+Chem.ReactionWriterBase % Base.DataWriter
+DataWriter % ReactionWriterBase
+a given type (specified by the template parameter <em>T</em>) % type Chem.Reaction
+of a given type % of type Chem.Reaction
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+
+Chem.ReactionWriterBase.write(rxn) % Base.DataWriter.write(obj)
+obj % rxn
+data rxnect % Reaction object
+
+Chem.MoleculeIOManager % Base.DataIOManager
+Base.DataIOManager % Chem.MoleculeIOManager
+Base.DataInputHandler % Chem.MoleculeInputHandler
+Base.DataOutputHandler % Chem.MoleculeOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Chem.MolecularGraphIOManager % Base.DataIOManager
+Base.DataIOManager % Chem.MolecularGraphIOManager
+Base.DataInputHandler % Chem.MolecularGraphInputHandler
+Base.DataOutputHandler % Chem.MolecularGraphOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Chem.ReactionIOManager % Base.DataIOManager
+Base.DataIOManager % Chem.ReactionIOManager
+Base.DataInputHandler % Chem.ReactionInputHandler
+Base.DataOutputHandler % Chem.ReactionOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Chem.MoleculeInputHandler % Base.DataInputHandler
+Base.DataReader instances handling a particular object type and storage format % Chem.MoleculeReaderBase instances for reading data provided in a particular storage format
+
+Chem.MolecularGraphOutputHandler % Base.DataOutputHandler
+Base.DataWriter instances handling a particular object type and storage format % Chem.MolecularGraphWriterBase instances for data output in a particular storage format
+
+Chem.ReactionInputHandler % Base.DataInputHandler
+Base.DataReader instances handling a particular object type and storage format % Chem.ReactionReaderBase instances for reading data provided in a particular storage format
+
+Chem.ReactionOutputHandler % Base.DataOutputHandler
+Base.DataWriter instances handling a particular object type and storage format % Chem.ReactionWriterBase instances for data output in a particular storage format
+
+Chem.MoleculeReader. % Util.MultiFormatDataReader.
+
+Chem.MolecularGraphWriter. % Util.MultiFormatDataWriter.
+
+Chem.ReactionReader. % Util.MultiFormatDataReader.
+
+Chem.ReactionWriter. % Util.MultiFormatDataWriter.
+
+Chem.CompoundMoleculeReader % Util.CompoundDataReader
+
+Chem.CompoundReactionReader % Util.CompoundDataReader
+
+Chem.FragmentList. % Util.Array.
+
+Chem.AtomMapping. % Util.MultiMap.
+
+Chem.BondMapping. % Util.MultiMap.
+
+Chem.AtomMatchExpressionList. % Util.Array.
+array % list
+
+Chem.AtomMatchExpression % Chem.MatchExpression
+MatchExpression % AtomMatchExpression
+
+Chem.AtomMatchExpression.__call__(query_atom,query_molgraph,target_atom,target_molgraph % Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
+primary query object % query atom
+primary target object % target atom
+secondary query object % query molecular graph
+secondary target object % target molecular graph
+obj1 % atom
+obj2 % molgraph
+
+ANDAtomMatch % ANDMatch
+ANDMatch % ANDAtomMatch
+
+ORAtomMatch % ORMatch
+ORMatch % ORAtomMatch
+
+NOTAtomMatch % NOTMatch
+NOTMatch % NOTAtomMatch
+
+Chem.BondMatchExpressionList. % Util.Array.
+array % list
+
+Chem.BondMatchExpression % Chem.MatchExpression
+MatchExpression % BondMatchExpression
+
+Chem.BondMatchExpression.__call__(query_bond,query_molgraph,target_bond,target_molgraph % Chem.MatchExpression.__call__(query_obj1,query_obj2,target_obj1,target_obj2
+primary query object % query bond
+primary target object % target bond
+secondary query object % query molecular graph
+secondary target object % target molecular graph
+obj1 % bond
+obj2 % molgraph
+
+ANDBondMatch % ANDMatch
+ANDMatch % ANDBondMatch
+
+ORBondMatch % ORMatch
+ORMatch % ORBondMatch
+
+NOTBondMatch % NOTMatch
+NOTMatch % NOTBondMatch
+
+Chem.MolecularGraphMatchExpressionList. % Util.Array.
+array % list
+
+Chem.MolecularGraphMatchExpression % Chem.MatchExpression< ObjType, void >
+MatchExpression % MolecularGraphMatchExpression
+
+Chem.MolecularGraphMatchExpression.__call__(query_molgraph,target_molgraph % Chem.MatchExpression< ObjType, void >.__call__(query_obj,target_obj
+object % molecular graph
+obj % molgraph
+
+ANDMolecularGraphMatch % ANDMatch
+ANDMatch % ANDMolecularGraphMatch
+
+ORMolecularGraphMatch % ORMatch
+ORMatch % ORMolecularGraphMatch
+
+NOTMolecularGraphMatch % NOTMatch
+NOTMatch % NOTMolecularGraphMatch
+
+Chem.ReactionMatchExpressionList. % Util.Array.
+array % list
+
+Chem.ReactionMatchExpression % Chem.MatchExpression< ObjType, void >
+MatchExpression % ReactionMatchExpression
+
+Chem.ReactionMatchExpression.__call__(query_rxn,target_rxn % Chem.MatchExpression< ObjType, void >.__call__(query_obj,target_obj
+object % reaction
+obj % rxn
+
+ANDReactionMatch % ANDMatch
+ANDMatch % ANDReactionMatch
+
+ORReactionMatch % ORMatch
+ORMatch % ORReactionMatch
+
+NOTReactionMatch % NOTMatch
+NOTMatch % NOTReactionMatch
+
+#
+# --- CDPL.Pharm package ---
+#
+Pharm.PharmacophoreReaderBase % Base.DataReader
+DataReader % PharmacophoreReaderBase
+a given type (specified by the template parameter <em>T</em>) % type Pharm.Pharmacophore
+of a given type % of type Pharm.Pharmacophore
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+DataType& obj % pharm: Pharmacophore
+
+Pharm.PharmacophoreReaderBase.read(pharm,overwrite) % Base.DataReader.read(obj,overwrite)
+obj % pharm
+pharmect % Pharmacophore object
+
+Pharm.PharmacophoreReaderBase.read(idx,pharm,overwrite) % Base.DataReader.read(idx,obj,overwrite)
+obj % pharm
+pharmect % Pharmacophore object
+
+Pharm.FeatureContainerWriterBase % Base.DataWriter
+DataWriter % FeatureContainerWriterBase
+a given type (specified by the template parameter <em>T</em>) % type Pharm.FeatureContainer
+of a given type % of type Pharm.FeatureContainer
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+
+Pharm.FeatureContainerWriterBase.write(cntnr) % Base.DataWriter.write(obj)
+obj % cntnr
+data cntnrect % FeatureContainer object
+
+Pharm.PharmacophoreIOManager % Base.DataIOManager
+Base.DataIOManager % Pharm.PharmacophoreIOManager
+Base.DataInputHandler % Pharm.PharmacophoreInputHandler
+Base.DataOutputHandler % Pharm.PharmacophoreOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Pharm.FeatureContainerIOManager % Base.DataIOManager
+Base.DataIOManager % Pharm.FeatureContainerIOManager
+Base.DataInputHandler % Pharm.FeatureContainerInputHandler
+Base.DataOutputHandler % Pharm.FeatureContainerOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Pharm.PharmacophoreInputHandler % Base.DataInputHandler
+Base.DataReader instances handling a particular object type and storage format % Pharm.PharmacophoreReaderBase instances for reading data provided in a particular storage format
+
+Pharm.FeatureContainerOutputHandler % Base.DataOutputHandler
+Base.DataWriter instances handling a particular object type and storage format % Pharm.FeatureContainerWriterBase instances for data output in a particular storage format
+
+Pharm.PharmacophoreReader. % Util.MultiFormatDataReader.
+
+Pharm.FeatureContainerWriter. % Util.MultiFormatDataWriter.
+
+Pharm.CompoundPharmacophoreReader % Util.CompoundDataReader
+
+Pharm.FeatureTypeHistogram. % Util.Map.
+
+Pharm.FeatureMapping. % Util.MultiMap.
+
+#
+# --- CDPL.Grid package ---
+#
+Grid.DRegularGridReaderBase % Base.DataReader
+DataReader % DRegularGridReaderBase
+a given type (specified by the template parameter <em>T</em>) % type Grid.DRegularGrid
+of a given type % of type Grid.DRegularGrid
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+DataType& obj % grid: DRegularGrid
+
+Grid.DRegularGridReaderBase.read(grid,overwrite) % Base.DataReader.read(obj,overwrite)
+obj % grid
+gridect % DRegularGrid object
+
+Grid.DRegularGridReaderBase.read(idx,grid,overwrite) % Base.DataReader.read(idx,obj,overwrite)
+obj % grid
+gridect % DRegularGrid object
+
+Grid.DRegularGridWriterBase % Base.DataWriter
+DataWriter % DRegularGridWriterBase
+a given type (specified by the template parameter <em>T</em>) % type Grid.DRegularGrid
+of a given type % of type Grid.DRegularGrid
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+
+Grid.DRegularGridWriterBase.write(grid) % Base.DataWriter.write(obj)
+obj % grid
+data gridect % DRegularGrid object
+
+Grid.DRegularGridSetReaderBase % Base.DataReader
+DataReader % DRegularGridSetReaderBase
+a given type (specified by the template parameter <em>T</em>) % type Grid.DRegularGridSet
+of a given type % of type Grid.DRegularGridSet
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+DataType& obj % grid_set: DRegularGridSet
+
+Grid.DRegularGridSetReaderBase.read(grid_set,overwrite) % Base.DataReader.read(obj,overwrite)
+obj % grid_set
+grid_setect % DRegularGridSet object
+
+Grid.DRegularGridSetReaderBase.read(idx,grid_set,overwrite) % Base.DataReader.read(idx,obj,overwrite)
+obj % grid_set
+grid_setect % DRegularGridSet object
+
+Grid.DRegularGridSetWriterBase % Base.DataWriter
+DataWriter % DRegularGridSetWriterBase
+a given type (specified by the template parameter <em>T</em>) % type Grid.DRegularGridSet
+of a given type % of type Grid.DRegularGridSet
+operators operator const void*() and bool operator!() % special methods __bool__() and __nonzero__()
+
+Grid.DRegularGridSetWriterBase.write(grid_set) % Base.DataWriter.write(obj)
+obj % grid_set
+data grid_setect % DRegularGridSet object
+
+Grid.DRegularGridIOManager % Base.DataIOManager
+Base.DataIOManager % Grid.DRegularGridIOManager
+Base.DataInputHandler % Grid.DRegularGridInputHandler
+Base.DataOutputHandler % Grid.DRegularGridOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Grid.DRegularGridSetIOManager % Base.DataIOManager
+Base.DataIOManager % Grid.DRegularGridSetIOManager
+Base.DataInputHandler % Grid.DRegularGridSetInputHandler
+Base.DataOutputHandler % Grid.DRegularGridSetOutputHandler
+formats for a specific object type (specified by the template parameter <em>T</em>) % formats
+
+Grid.DRegularGridInputHandler % Base.DataInputHandler
+Base.DataReader instances handling a particular object type and storage format % Grid.DRegularGridReaderBase instances for reading data provided in a particular storage format
+
+Grid.DRegularGridOutputHandler % Base.DataOutputHandler
+Base.DataWriter instances handling a particular object type and storage format % Grid.DRegularGridWriterBase instances for data output in a particular storage format
+
+Grid.DRegularGridSetInputHandler % Base.DataInputHandler
+Base.DataReader instances handling a particular object type and storage format % Grid.DRegularGridSetReaderBase instances for reading data provided in a particular storage format
+
+Grid.DRegularGridSetOutputHandler % Base.DataOutputHandler
+Base.DataWriter instances handling a particular object type and storage format % Grid.DRegularGridSetWriterBase instances for data output in a particular storage format
+
+Grid.DRegularGridReader. % Util.MultiFormatDataReader.
+
+Grid.DRegularGridWriter. % Util.MultiFormatDataWriter.
+
+Grid.CompoundDRegularGridReader % Util.CompoundDataReader
+
+Grid.DRegularGridSetReader. % Util.MultiFormatDataReader.
+
+Grid.DRegularGridSetWriter. % Util.MultiFormatDataWriter.
+
+Grid.CompoundDRegularGridSetReader % Util.CompoundDataReader
+
+Grid.DRegular % Grid.Regular
+
+Grid.FRegular % Grid.Regular
+
+Grid.DSpatial % Grid.Spatial
+
+Grid.FSpatial % Grid.Spatial
+
+#
+# --- CDPL.MolProp package ---
+#
+MolProp.ElementHistogram. % Util.Map.

@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides preinitialized Base.DataFormat objects for all supported data formats.
+# 
 class DataFormat(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Provides meta-information about the conformer generator fragment library format.
+    # 
     CFL = CDPL.Base.DataFormat(name='CFL', descr='CDPL Conformer Generator Fragment Library Format', mime_type'', file_exts=['cfl', 'cdf'], multi_rec=True)

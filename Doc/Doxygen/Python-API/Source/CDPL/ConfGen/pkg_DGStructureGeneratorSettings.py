@@ -25,32 +25,34 @@
 class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    DEFAULT_ = _UNKNOWN_VALUE_
+    DEFAULT_ = _HIDDEN_VALUE_
 
     ##
     # \brief Initializes the \e %DGStructureGeneratorSettings instance.
-    #
+    # \param self The \e %DGStructureGeneratorSettings instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGStructureGeneratorSettings instance.
+    # \param self The \e %DGStructureGeneratorSettings instance to initialize.
     # \param settings 
-    #
+    # 
     def __init__(settings: DGStructureGeneratorSettings) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGeneratorSettings instance \a settings.
-    # \param settings The \e %DGStructureGeneratorSettings instance to copy.
-    # \return \a self
+    # \brief 
+    # \param settings 
+    # \return 
     #
     def assign(settings: DGStructureGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGeneratorSettings instance \a settings.
-    # \param settings The \e %DGConstraintGeneratorSettings instance to copy.
-    # \return \a self
+    # \brief 
+    # \param settings 
+    # \return 
     #
     def assign(settings: DGConstraintGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
@@ -78,12 +80,10 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
     #
     def enablePlanarityConstraints() -> bool: pass
 
-    ##
-    # \brief 
-    #
     boxSize = property(getBoxSize, setBoxSize)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     planarityConstraints = property(getPlanarityConstraints, setPlanarityConstraints)

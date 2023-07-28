@@ -20,8 +20,10 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the identification of RECAP fragmentation rules.
+# 
+# \see [\ref RECAP]
+# 
 class RECAPRuleID(Boost.Python.instance):
 
     ##

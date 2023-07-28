@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for feature container data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFFeatureContainerWriter(FeatureContainerWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFFeatureContainerWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>CDFFeatureContainerWriter</tt> instance that will write data of feature containers to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

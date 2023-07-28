@@ -20,13 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief NOTMolecularGraphMatchExpression.
+# 
 class NOTMolecularGraphMatchExpression(MolecularGraphMatchExpression):
 
     ##
-    # \brief Replaces the current state of \a arg1 with a copy of the state of the \e %NOTMolecularGraphMatchExpression instance \a expression.
-    # \param expression The \e %NOTMolecularGraphMatchExpression instance to copy.
-    # \return \a arg1
+    # \brief Constructs a <tt>NOTMolecularGraphMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # 
+    # \param expr_ptr A reference to the wrapped Chem.MatchExpression instance.
+    # 
+    def __init__(expr_ptr: NOTMolecularGraphMatchExpression) -> None: pass
+
+    ##
+    # \brief Constructs a <tt>NOTMolecularGraphMatchExpression</tt> object that wraps the match expression instance specified by <em>expr_ptr</em>.
+    # 
+    # \param expr_ptr A reference to the wrapped Chem.MatchExpression instance.
+    # 
+    def __init__(expr_ptr: MolecularGraphMatchExpression) -> None: pass
+
+    ##
+    # \brief 
+    # \param expression 
+    # \return 
     #
     def assign(expression: NOTMolecularGraphMatchExpression) -> NOTMolecularGraphMatchExpression: pass

@@ -27,6 +27,7 @@ from __future__ import print_function
 import sys
 import inspect
 import re
+import pickle
 
 import CDPL
 import CDPL.Base
@@ -47,6 +48,7 @@ import CDPL.GRAIL
 
 HIDE_SELF_ARG = True
 DOC_FILE_EXT = '.py'
+
 FILE_HEADER = \
 """#
 # This file is part of the Chemical Data Processing Toolkit
@@ -70,181 +72,214 @@ FILE_HEADER = \
 #
 """
 
-__init__DOC_TEMPLATE = \
-"""##
-# \\brief Initializes the \\e %@CN@ instance.
-# \\param @A0@ The \\e %@CN@ instance to initialize.
-# \\param @ARGS@ 
-#
-"""
-
-__str__DOC_TEMPLATE = \
-"""##
-# \\brief Returns a string representation of the \\e %@CN@ instance.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\return The generated string representation.
-#
-"""
-
-__lt__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the comparison operation <tt>@A0@ < @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to be compared with.
-# \\return The result of the comparison operation.
-#
-"""
-
-__le__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the comparison operation <tt>@A0@ <= @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to be compared with.
-# \\return The result of the comparison operation.
-#
-"""
-
-__gt__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the comparison operation <tt>@A0@ > @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to be compared with.
-# \\return The result of the comparison operation.
-#
-"""
-
-__ge__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the comparison operation <tt>@A0@ >= @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to be compared with.
-# \\return The result of the comparison operation.
-#
-"""
-
-__ne__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the comparison operation <tt>@A0@ != @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to be compared with.
-# \\return The result of the comparison operation.
-#
-"""
-
-__eq__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the comparison operation <tt>@A0@ == @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to be compared with.
-# \\return The result of the comparison operation.
-#
-"""
-
-__contains__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the membership test operation <tt>@A1@ in @A0@</tt>.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The value to test for membership.
-# \\return The result of the membership test operation.
-#
-"""
-
-__iadd__DOC_TEMPLATE = \
-"""##
-# \\brief Performs the in-place addition operation <tt>@A0@ += @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as in-place addend.
-# \\param @A1@ Specifies the second addend.
-# \\return The updated \\e %@RT@ instance \\a @A0@.
-#
-"""
-
-__isub__DOC_TEMPLATE = \
-"""##
-# \\brief Performs the in-place subtraction operation <tt>@A0@ -= @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as in-place minuend.
-# \\param @A1@ Specifies the subtrahend.
-# \\return The updated \\e %@RT@ instance \\a @A0@.
-#
-"""
-
-__imul__DOC_TEMPLATE = \
-"""##
-# \\brief Performs the in-place multiplication operation <tt>@A0@ *= @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as in-place multiplicand.
-# \\param @A1@ Specifies the multiplier.
-# \\return The updated \\e %@RT@ instance \\a @A0@.
-#
-"""
-
-__idiv__DOC_TEMPLATE = \
-"""##
-# \\brief Performs the in-place division operation <tt>@A0@ /= @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as in-place dividend.
-# \\param @A1@ Specifies the divisor.
-# \\return The updated \\e %@RT@ instance \\a @A0@.
-#
-"""
-
-__add__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the addition operation <tt>@A0@ + @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance representing the first addend.
-# \\param @A1@ Specifies the second addend.
-# \\return A \\e %@RT@ instance holding the result of the addition.
-#
-"""
-
-__sub__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the subtraction operation <tt>@A0@ - @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as minuend.
-# \\param @A1@ Specifies the subtrahend.
-# \\return A \\e %@CN@ instance holding the result of the subtraction.
-#
-"""
-
-__mul__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the multiplication operation <tt>@A0@ * @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as multiplicand.
-# \\param @A1@ Specifies the multiplier.
-# \\return A \\e %@RT@ instance holding the result of the multiplication.
-#
-"""
-
-__div__DOC_TEMPLATE = \
-"""##
-# \\brief Returns the result of the division operation <tt>@A0@ / @A1@</tt>.
-# \\param @A0@ The \\e %@CN@ instance acting as dividend.
-# \\param @A1@ Specifies the divisor.
-# \\return A \\e %@RT@ instance holding the result of the division.
-#
-"""
-
-assign_DOC_TEMPLATE = \
-"""##
-# \\brief Replaces the current state of \\a @A0@ with a copy of the state of the \\e %@AT1@ instance \\a @A1@.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@AT1@ instance to copy.
-# \\return \\a @A0@
-#
-"""
-
-getObjectID_DOC_TEMPLATE = \
-"""##
-# \\brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-# \\param @A0@ The \\e %@CN@ instance this method is called upon.
-#
-# Different Python \\e %@CN@ instances may reference the same underlying C++ class instance. The commonly used Python expression
-# <tt>a is not b</tt> thus cannot tell reliably whether the two \\e %@CN@ instances \\e a and \\e b reference different C++ objects. 
-# The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
-# <tt>a.getObjectID() != b.getObjectID()</tt>.
-#
-# \\return The numeric ID of the internally referenced C++ class instance.
-#
-"""
+DOC_BLOCKS = []
+CPP_API_DOC_BLOCKS = {}
+CPP_API_DOC_MERGE_INFO = []
+CPP_API_DOC_STR_REPLACEMENTS = [
+    ( '\n\n\n', '\n\n' ),
+    ( '::', '.' ),
+    ( 'std.', 'std::' ),
+    ( 'boost.', 'boost::' ),
+    ( '*this', 'self' ),
+    ( 'operator==', '__eq__' ),
+    ( 'operator!=', '__ne__' ),
+    ( 'operator<=', '__le__' ),
+    ( 'operator>=', '__ge__' ),
+    ( 'operator>', '__gt__' ),
+    ( 'operator<', '__lt__' ),
+    ( 'operator()', '__call__' ),
+    ( '<tt>non-const</tt> ', '' ),
+    ( 'pointer', 'reference' ),
+    ( 'non-<tt>const</tt> ', '' ),
+    ( '<tt>const</tt> ', '' ),
+    ( 'true', 'True' ),
+    ( 'false', 'False' ),
+    ( '<em>null</em>', '<em>None</em>' ),
+    ( 'A reference to itself.' , '\\a self' ) ]
 
 
+def readLine(in_file):
+    while True:
+        line = in_file.readline()
+
+        if not line:
+            return None
+
+        if line.startswith('#'):
+            continue
+
+        return line
+        
+def loadDocBlocks(file_name):
+    global DOC_BLOCKS
+
+    doc_ipt = open(file_name)
+
+    while True:
+        line = readLine(doc_ipt)
+
+        if not line:
+            break
+
+        line = line.strip()
+
+        if len(line) == 0:
+            continue
+
+        entry = []
+
+        entry.append(line)
+
+        while True:
+            line = readLine(doc_ipt)
+
+            if not line:
+                break
+
+            if line.startswith('$$$$'):
+                break
+
+            entry.append(line)
+            
+        DOC_BLOCKS.append(entry)
+
+def loadCPPAPIDocMergeInfo(file_name):
+    global CPP_API_DOC_MERGE_INFO
+        
+    info_ipt = open(file_name)
+
+    while True:
+        line = readLine(info_ipt)
+
+        if not line:
+            break
+
+        if len(line.strip()) == 0:
+            continue
+
+        entry = line.split('%')
+
+        entry[0] = entry[0].strip()
+        entry[1] = entry[1].strip()
+
+        entry.append([])
+
+        while True:
+            line = readLine(info_ipt)
+
+            if not line:
+                break
+
+            if len(line.strip()) == 0:
+                break
+            
+            str_rpl = line.split('%')
+
+            str_rpl[0] = str_rpl[0].strip()
+            str_rpl[1] = str_rpl[1].strip()
+
+            entry[2].append(str_rpl)
+            
+        CPP_API_DOC_MERGE_INFO.append(entry)
+
+def getProvidedDocBlock(key, func_data, func_name, class_name, is_static):
+    doc_block = None
+
+    for entry in DOC_BLOCKS:
+        if key.find(entry[0]) != -1:
+            doc_block = entry
+            break
+
+    if not doc_block:
+        return None
+
+    if not func_data:
+        return doc_block
+    
+    proc_args = []
+    rc = []
+    
+    for line in doc_block[1:]:
+        if not is_static and HIDE_SELF_ARG and line.lstrip().startswith('# \\param @A0@'):
+            continue
+ 
+        line = line.replace('@CN@', class_name).replace('@MN@', func_name).replace('@RT@', func_data['ret_type'])
+       
+        if '@ARGS@' in line:
+            for i in range(0, len(func_data['arg_names'])):
+                if not is_static and HIDE_SELF_ARG and i == 0:
+                    continue
+                if func_data['arg_names'][i] in proc_args:
+                    continue
+
+                rc.append(line.replace('@ARGS@', func_data['arg_names'][i]))
+
+            continue
+            
+        for i in range(0, len(func_data['arg_names'])):
+            tmp_line = line.replace('@A' + str(i) + '@', func_data['arg_names'][i])
+
+            if tmp_line != line:
+                proc_args.append(func_data['arg_names'][i])
+                
+            line = tmp_line
+
+        for i in range(0, len(func_data['arg_types'])):
+            line = line.replace('@AT' + str(i) + '@', func_data['arg_types'][i])
+                
+        rc.append(line)
+        
+    return ''.join(rc)
+
+def getDocBlockEntry(key):
+    for entry in DOC_BLOCKS:
+        if key == entry[0]:
+            return entry
+
+    return None
+            
+def performGenericCPPAPIDocFixes(doc_block):
+    for entry in CPP_API_DOC_STR_REPLACEMENTS:
+        doc_block = doc_block.replace(entry[0], entry[1])
+
+    return doc_block
+    
+def getAPIDocBlock(key, ident = '', func_data = None, func_name = '', class_name = '', is_static = True):
+    key = sys.argv[1] + '.' + key
+    doc_block = None
+    
+    for entry in CPP_API_DOC_MERGE_INFO:
+        mod_key = key.replace(entry[0], entry[1])
+
+        if mod_key in CPP_API_DOC_BLOCKS:
+            doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[mod_key])
+
+            for str_repl in entry[2]:
+                doc_block = doc_block.replace(str_repl[0], str_repl[1])
+
+            break
+                
+    if not doc_block:
+        if key in CPP_API_DOC_BLOCKS:
+            doc_block = performGenericCPPAPIDocFixes(CPP_API_DOC_BLOCKS[key])
+        else:
+            doc_block = getProvidedDocBlock(key, func_data, func_name, class_name, is_static)
+
+    if not doc_block:
+        return None
+    
+    rc = [ ident ]
+
+    rc.append('##\n')
+
+    for line in doc_block.split('\n'):
+        rc.append(ident)
+        rc.append('# ')
+        rc.append(line)
+        rc.append('\n')
+
+    return ''.join(rc)
+    
 def isProperty(obj):
     return type(obj).__name__ == 'property'
 
@@ -334,60 +369,7 @@ def getBases(class_obj):
 
     return bases
 
-def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, func_data, is_static):
-    mn_to_doc_tmplts = { '__str__': __str__DOC_TEMPLATE, '__ne__': __ne__DOC_TEMPLATE, \
-                         '__eq__': __eq__DOC_TEMPLATE, '__init__': __init__DOC_TEMPLATE, \
-                         '__lt__': __lt__DOC_TEMPLATE, '__le__': __le__DOC_TEMPLATE, \
-                         '__gt__': __gt__DOC_TEMPLATE, '__ge__': __ge__DOC_TEMPLATE, \
-                         '__contains__': __contains__DOC_TEMPLATE, '__iadd__': __iadd__DOC_TEMPLATE, \
-                         '__isub__': __isub__DOC_TEMPLATE, '__imul__': __imul__DOC_TEMPLATE, \
-                         '__idiv__': __idiv__DOC_TEMPLATE, '__add__': __add__DOC_TEMPLATE, \
-                         '__sub__': __sub__DOC_TEMPLATE, '__mul__': __mul__DOC_TEMPLATE, \
-                         '__div__': __div__DOC_TEMPLATE, 'assign': assign_DOC_TEMPLATE,
-                         'getObjectID': getObjectID_DOC_TEMPLATE }
-
-    if method_name not in mn_to_doc_tmplts:
-        return False
-
-    if method_name == "assign" and len(func_data['arg_names']) > 2:
-        return False
-    
-    tmplt = mn_to_doc_tmplts[method_name]
-    proc_args = []
-   
-    for line in tmplt.splitlines(True):
-        if not is_static and HIDE_SELF_ARG and line.lstrip().startswith('# \\param @A0@'):
-            continue
- 
-        line = line.replace('@CN@', class_obj.__name__).replace('@MN@', method_name).replace('@RT@', func_data['ret_type'])
-       
-        if '@ARGS@' in line:
-            for i in range(0, len(func_data['arg_names'])):
-                if not is_static and HIDE_SELF_ARG and i == 0:
-                    continue
-                if func_data['arg_names'][i] in proc_args:
-                    continue
-
-                out_file.write(ident + line.replace('@ARGS@', func_data['arg_names'][i]))
-
-            continue
-            
-        for i in range(0, len(func_data['arg_names'])):
-            tmp_line = line.replace('@A' + str(i) + '@', func_data['arg_names'][i])
-
-            if tmp_line != line:
-                proc_args.append(func_data['arg_names'][i])
-                
-            line = tmp_line
-
-        for i in range(0, len(func_data['arg_types'])):
-            line = line.replace('@AT' + str(i) + '@', func_data['arg_types'][i])
-                
-        out_file.write(ident + line)
-        
-    return True
-    
-def printMethod(class_obj, func_obj, method_name, out_file, ident):
+def printMethod(class_obj, func_obj, method_name, out_file, ident, scope):
     is_static = isStaticMethod(class_obj, method_name)
     overloads = None
 
@@ -410,8 +392,12 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident):
                     func_data['arg_list'] = ''
                 else:
                     func_data['arg_list'] = func_data['arg_list'][idx + 2:]
-                    
-            if not printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, func_data, is_static):
+
+            doc_block = getAPIDocBlock(scope + getFunctionKey(func_data, not is_static), ident, func_data, method_name, class_obj.__name__, is_static)
+
+            if doc_block:
+                out_file.write(doc_block)
+            else:
                 out_file.write(ident + '##\n')
                 #out_file.write(ident + '# \\brief ' + method_name + '.\n')
                 out_file.write(ident + '# \\brief \n')
@@ -466,18 +452,32 @@ def printEnumeration(enum_obj, out_file = None, ident = '', scope = ''):
         printPackageHeader(out_file)
 
     out_file.write('\n')
-    out_file.write(ident + '##\n')
-    #out_file.write(ident + '# \\brief Enumeration ' + enum_name + '.\n')
-    out_file.write(ident + '# \\brief \n')
-    out_file.write(ident + '#\n')
+
+    doc_block = getAPIDocBlock(scope + enum_name, ident)
+
+    if doc_block:
+        out_file.write(doc_block)
+    else:
+        out_file.write(ident + '##\n')
+        #out_file.write(ident + '# \\brief Enumeration ' + enum_name + '.\n')
+        out_file.write(ident + '# \\brief \n')
+        out_file.write(ident + '#\n')
+
     out_file.write(ident + 'class ' + enum_name + '(' + getBases(enum_obj) + '):\n')
 
     for v, k in enum_obj.values.items():
         out_file.write('\n')
-        out_file.write(ident + '    ' + '##\n')
-        out_file.write(ident + '    ' + '# \\brief ' + str(k) + '.\n')
-        #out_file.write(ident + '    ' + '# \\brief \n')
-        out_file.write(ident + '    ' + '#\n')
+
+        doc_block = getAPIDocBlock(scope + enum_name + '.' + str(k), ident + '    ')
+
+        if doc_block:
+            out_file.write(doc_block)
+        else:
+            out_file.write(ident + '    ' + '##\n')
+            out_file.write(ident + '    ' + '# \\brief ' + str(k) + '.\n')
+            #out_file.write(ident + '    ' + '# \\brief \n')
+            out_file.write(ident + '    ' + '#\n')
+
         out_file.write(ident + '    ' + str(k) + ' = ' + str(v) + '\n')
 
 def printProperty(class_obj, prop_obj, property_name, out_file, ident):
@@ -486,16 +486,26 @@ def printProperty(class_obj, prop_obj, property_name, out_file, ident):
     get_meth_name = 'get' + cap_name
     set_meth_name = 'set' + cap_name
     get_meth_found = (get_meth_name in class_obj.__dict__.keys() )
-    
-    out_file.write('\n')
-    out_file.write(ident + '##\n')
 
     if not get_meth_found:
-        out_file.write(ident + '# \\brief FIXME!\n')
-    else:
-        out_file.write(ident + '# \\brief \n')
+        db_entry = getDocBlockEntry(class_obj.__name__ + '.' + property_name + '.value')
+        
+        if db_entry:
+            get_meth_name = db_entry[1].strip()
 
-    out_file.write(ident + '#\n')
+            if rw_prop:
+                set_meth_name = db_entry[2].strip()
+
+            get_meth_found = True
+        
+    out_file.write('\n')  
+
+    if not get_meth_found:
+        out_file.write(ident + '##\n')
+        out_file.write(ident + '# \\brief FIXME!\n')
+        out_file.write(ident + '# \\brief \n')
+        out_file.write(ident + '#\n')
+        
     out_file.write(ident + property_name + ' = property(' + get_meth_name)
 
     if rw_prop:
@@ -520,7 +530,7 @@ def getValueString(obj, is_prop = True):
     value = str(value)
 
     if value.startswith('<'):
-        return '_UNKNOWN_VALUE_'
+        return '_HIDDEN_VALUE_'
 
     return value.replace(sys.argv[1] + '.', '').replace('=true', '=True').replace('=false', '=False')
 
@@ -538,23 +548,26 @@ def getValueType(obj, is_prop = True):
 
     return type_name
 
-def printStaticProperty(property_obj, property_name, out_file, ident):
+def printStaticProperty(property_obj, property_name, out_file, ident, scope):
     out_file.write('\n')
-    out_file.write(ident + '##\n')
 
+    doc_block = getAPIDocBlock(scope + property_name, ident)
     value_str = getValueString(property_obj)
 
-    if value_str != '_UNKNOWN_VALUE_':
-        #out_file.write(ident + '# \\brief ' + property_name + '.\n')
-        out_file.write(ident + '# \\brief \n')
-    else:
-        #out_file.write(ident + '# \\brief ' + property_name + '. FIXME!\n')
-        out_file.write(ident + '# \\brief FIXME!\n')
+    if value_str == '_HIDDEN_VALUE_':
+        db_entry = getDocBlockEntry(scope + property_name + '.value')
 
-    #out_file.write(ident + '# \\valuetype ' + getValueType(property_obj) + '\n')
-    out_file.write(ident + '#\n')
-    out_file.write(ident + property_name)
-    out_file.write(' = ' + value_str + '\n')
+        if db_entry:
+            value_str = db_entry[1].strip()
+        
+    if doc_block:
+        out_file.write(doc_block)
+    else:
+        out_file.write(ident + '##\n')
+        out_file.write(ident + '# \\brief \n')
+        out_file.write(ident + '#\n')
+
+    out_file.write(ident + property_name + ' = ' + value_str + '\n')
 
 def printClass(class_obj, out_file = None, ident = '', scope = ''):
     if out_file == None:
@@ -563,10 +576,17 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
     ignored_names = [ '__doc__', '__file__', '__name__', '__path__', '__module__', '__class__', '__dict__', '__bases__', '__reduce__' ]
     
     out_file.write('\n')
-    out_file.write(ident + '##\n')
-    #out_file.write(ident + '# \\brief ' + class_obj.__name__ + '.\n')
-    out_file.write(ident + '# \\brief \n')
-    out_file.write(ident + '#\n')
+
+    doc_block = getAPIDocBlock(scope + class_obj.__name__, ident)
+
+    if doc_block:
+        out_file.write(doc_block)
+    else:
+        out_file.write(ident + '##\n')
+        #out_file.write(ident + '# \\brief ' + class_obj.__name__ + '.\n')
+        out_file.write(ident + '# \\brief \n')
+        out_file.write(ident + '#\n')
+    
     out_file.write(ident + 'class ' + class_obj.__name__ + '(' + getBases(class_obj) + '):\n')
 
     members = class_obj.__dict__.items()
@@ -600,33 +620,36 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
         elif isClass(obj):
             classes.append(obj)
 
+    mem_scope = scope + class_obj.__name__ + '.'
+    mem_ident = ident + '    '
+    
     for enum_obj in enumerations:
         have_members = True
-        printEnumeration(enum_obj, out_file, ident + '    ', scope + class_obj.__name__ + '.')
+        printEnumeration(enum_obj, out_file, mem_ident, mem_scope)
 
     for class_obj2 in classes:
         have_members = True
-        printClass(class_obj2, out_file, ident + '    ', scope + class_obj.__name__ + '.')
+        printClass(class_obj2, out_file, mem_ident, mem_scope)
 
     for prop_data in static_properties:
         have_members = True
-        printStaticProperty(prop_data[0], prop_data[1], out_file, ident + '    ')    
+        printStaticProperty(prop_data[0], prop_data[1], out_file, mem_ident, mem_scope)    
 
     for method_data in constructors:
         have_members = True
-        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '    ')    
+        printMethod(class_obj, method_data[0], method_data[1], out_file, mem_ident, mem_scope)    
 
     for method_data in methods:
         have_members = True
-        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '    ')    
+        printMethod(class_obj, method_data[0], method_data[1], out_file, mem_ident, mem_scope)    
 
     for method_data in special_methods:
         have_members = True
-        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '    ')    
+        printMethod(class_obj, method_data[0], method_data[1], out_file, mem_ident, mem_scope)    
 
     for prop_data in properties:
         have_members = True
-        printProperty(class_obj, prop_data[0], prop_data[1], out_file, ident + '    ')    
+        printProperty(class_obj, prop_data[0], prop_data[1], out_file, mem_ident)    
 
     if not have_members:
         out_file.write(ident + '    pass\n')
@@ -636,6 +659,24 @@ def getFirstArgType(func_data):
         return 'Misc'
 
     return func_data['arg_types'][0]
+
+def getFunctionKey(func_data, mem_func=False):
+    rc = [ func_data['name'] ]
+
+    rc.append('(')
+
+    for arg_name in func_data['arg_names']:
+        if mem_func and arg_name == 'self':
+            continue
+        
+        if len(rc) > 2:
+            rc.append(',')
+            
+        rc.append(arg_name)
+
+    rc.append(')')
+    
+    return ''.join(rc)
 
 def printFunctions(func_objects):
     if len(func_objects) == 0:
@@ -674,17 +715,24 @@ def printFunctions(func_objects):
 
         for func_data in sorted(func_list, key=func_sort_key):
             out_file.write('\n')
-            out_file.write('##\n')
-            #out_file.write('# \\brief ' + func_data['name'] + '.\n')
-            out_file.write('# \\brief \n')
+
+            doc_block = getAPIDocBlock(getFunctionKey(func_data), func_data=func_data, func_name=func_data['name'])
+        
+            if doc_block:
+                out_file.write(doc_block)
+            else:
+                out_file.write('##\n')
+                #out_file.write('# \\brief ' + func_data['name'] + '.\n')
+                out_file.write('# \\brief \n')
     
-            for arg_name in func_data['arg_names']:
-                out_file.write('# \\param ' + arg_name + ' \n')
+                for arg_name in func_data['arg_names']:
+                    out_file.write('# \\param ' + arg_name + ' \n')
 
-            if func_data['ret_type'] != 'None':
-                out_file.write('# \\return \n')
+                if func_data['ret_type'] != 'None':
+                    out_file.write('# \\return \n')
 
-            out_file.write('#\n')
+                out_file.write('#\n')
+                    
             out_file.write('def ' + func_data['name'] + '(' + func_data['arg_list'] + ') -> ' + func_data['ret_type'] + ': pass\n')
             
 def getFuncOverloads(func_obj, func_name):
@@ -794,19 +842,23 @@ def printVariables(variable_objects):
             continue
 
         out_file.write('\n')
-        out_file.write('##\n')
-
+ 
+        doc_block = getAPIDocBlock(name)
         value_str = getValueString(var_obj, False)
 
-        if value_str != '_UNKNOWN_VALUE_':
-            #out_file.write('# \\brief ' + name + '.\n')
-            out_file.write('# \\brief \n')
-        else:
-            #out_file.write('# \\brief ' + name + '. FIXME!\n')
-            out_file.write('# \\brief FIXME!\n')
+        if value_str == '_HIDDEN_VALUE_':
+            db_entry = getDocBlockEntry(sys.argv[1] + '.' + name + '.value')
 
-        #out_file.write('# \\valuetype ' + getValueType(var_obj, False) + '\n')
-        out_file.write('#\n')
+            if db_entry:
+                value_str = db_entry[1]
+
+        if doc_block:
+            out_file.write(doc_block)
+        else:
+            out_file.write('##\n')
+            out_file.write('# \\brief \n')
+            out_file.write('#\n')
+        
         out_file.write(name)
         out_file.write(' = ' + value_str + '\n')
 
@@ -824,18 +876,28 @@ def extendByModuleName(type_name):
     return type_name
 
 def genPythonAPIDocFiles():
-    if len(sys.argv) < 2:
-        print('Usage:', sys.argv[0], '[package] [output dir]', file=sys.stderr)
+    if len(sys.argv) < 3:
+        print('Usage:', sys.argv[0], '[package] [output dir] [[predef. doc blocks]] [[c++ API doc blocks]] [[c++ API doc merge info]]', file=sys.stderr)
         sys.exit(2)
 
+    if len(sys.argv) > 3:
+        loadDocBlocks(sys.argv[3])
+        
+    if len(sys.argv) > 4:
+        global CPP_API_DOC_BLOCKS
+        CPP_API_DOC_BLOCKS = pickle.load(open(sys.argv[4], 'rb'))
+
+    if len(sys.argv) > 5:
+        loadCPPAPIDocMergeInfo(sys.argv[5])
+        
     __import__(sys.argv[1])
 
     module = sys.modules[sys.argv[1]]
 
     functions = []
     variables = []
-    
-    ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_grid', '_forcefield', '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '_descr', '_molprop', '__package__' ]
+    ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_grid', '_forcefield',
+                      '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '_descr', '_molprop', '__package__' ]
     exported_names = []
 
     if hasattr(module, '__all__'):

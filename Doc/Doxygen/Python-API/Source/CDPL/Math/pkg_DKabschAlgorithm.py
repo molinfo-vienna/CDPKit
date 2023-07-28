@@ -26,31 +26,34 @@ class DKabschAlgorithm(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DKabschAlgorithm instance.
-    #
+    # \param self The \e %DKabschAlgorithm instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DKabschAlgorithm instance.
+    # \param self The \e %DKabschAlgorithm instance to initialize.
     # \param algo 
-    #
+    # 
     def __init__(algo: DKabschAlgorithm) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DKabschAlgorithm instance this method is called upon.
+    # 
     # Different Python \e %DKabschAlgorithm instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DKabschAlgorithm instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DKabschAlgorithm instance \a algo.
-    # \param algo The \e %DKabschAlgorithm instance to copy.
-    # \return \a self
+    # \brief 
+    # \param algo 
+    # \return 
     #
     def assign(algo: DKabschAlgorithm) -> DKabschAlgorithm: pass
 
@@ -102,12 +105,6 @@ class DKabschAlgorithm(Boost.Python.instance):
     #
     def align(points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     transform = property(getTransform)

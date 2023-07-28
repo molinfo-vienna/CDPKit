@@ -20,38 +20,44 @@
 #
 
 ##
-# \brief 
-#
+# \brief MHMOPiChargeCalculator.
+# 
+# \see [\ref MHMO]
+# 
 class MHMOPiChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MHMOPiChargeCalculator instance.
-    #
+    # \param self The \e %MHMOPiChargeCalculator instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MHMOPiChargeCalculator instance.
+    # \param self The \e %MHMOPiChargeCalculator instance to initialize.
     # \param molgraph 
-    #
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Initializes the \e %MHMOPiChargeCalculator instance.
+    # \param self The \e %MHMOPiChargeCalculator instance to initialize.
     # \param pi_sys_list 
     # \param molgraph 
-    #
+    # 
     def __init__(pi_sys_list: CDPL.Chem.ElectronSystemList, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MHMOPiChargeCalculator instance this method is called upon.
+    # 
     # Different Python \e %MHMOPiChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MHMOPiChargeCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -107,17 +113,12 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
     #
     def getEnergy() -> float: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     locPiBonds = property(getLocPiBonds, setLocPiBonds)
 
-    ##
-    # \brief 
-    #
     energy = property(getEnergy)

@@ -20,32 +20,35 @@
 #
 
 ##
-# \brief 
-#
+# \brief FeaturePairDistanceMatchFunctor.
+# 
 class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeaturePairDistanceMatchFunctor instance.
+    # \param self The \e %FeaturePairDistanceMatchFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: FeaturePairDistanceMatchFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeaturePairDistanceMatchFunctor instance.
-    # \param query_mode 
-    #
+    # \brief Constructs the <tt>FeaturePairDistanceMatchFunctor</tt> instance.
+    # 
+    # \param query_mode If <tt>True</tt>, the second pair feature distance must fall in the distance +/- tolerances of the first pair for the compatibility check to succeed. If <tt>False</tt>, it is sufficient that any one of the pairs matches the distance range of the other.
+    # 
     def __init__(query_mode: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %FeaturePairDistanceMatchFunctor instance this method is called upon.
+    # 
     # Different Python \e %FeaturePairDistanceMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeaturePairDistanceMatchFunctor instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -55,28 +58,30 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
     def queryMode() -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePairDistanceMatchFunctor instance \a func.
-    # \param func The \e %FeaturePairDistanceMatchFunctor instance to copy.
-    # \return \a self
+    # \brief 
+    # \param func 
+    # \return 
     #
     def assign(func: FeaturePairDistanceMatchFunctor) -> FeaturePairDistanceMatchFunctor: pass
 
     ##
-    # \brief 
-    # \param p1_ftr1 
-    # \param p1_ftr2 
-    # \param p2_ftr1 
-    # \param p2_ftr2 
-    # \return 
-    #
+    # \brief Checks if the feature pairs (<em>p1_ftr1</em>, <em>p1_ftr2</em>) and (<em>p2_ftr1</em>, <em>p2_ftr2</em>) are matching in terms of their feature distance.
+    # 
+    # \param p1_ftr1 The first feature of the first pair.
+    # \param p1_ftr2 The second feature of the first pair.
+    # \param p2_ftr1 The first feature of the second pair.
+    # \param p2_ftr2 The second feature of the second pair.
+    # 
+    # \return <tt>True</tt> if the feature pair distance are compatible, and <tt>False</tt> otherwise. 
+    # 
+    # \see FeaturePairDistanceMatchFunctor()
+    # 
     def __call__(p1_ftr1: Feature, p1_ftr2: Feature, p2_ftr1: Feature, p2_ftr2: Feature) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     qryMode = property(getQryMode)

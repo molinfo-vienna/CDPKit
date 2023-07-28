@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants used to specify the employed conformer sampling method.
+# 
 class ConformerSamplingMode(Boost.Python.instance):
 
     ##

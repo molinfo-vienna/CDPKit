@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that some requested calculation has failed.
+# 
 class CalculationFailed(OperationFailed):
     pass

@@ -31,17 +31,20 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        #
+        # \param self The \e %Entry instance to initialize.
+        # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param entry 
-        #
+        # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
+        # \param self The \e %Entry instance to initialize.
         # \param atom_type 
         # \param atomic_no 
         # \param num_nbrs 
@@ -51,25 +54,26 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         # \param is_arom 
         # \param lin_bnd_ang 
         # \param has_mb_or_sb 
-        #
+        # 
         def __init__(atom_type: int, atomic_no: int, num_nbrs: int, valence: int, has_pi_lp: bool, mltb_desig: int, is_arom: bool, lin_bnd_ang: bool, has_mb_or_sb: bool) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        #
+        # \param self The \e %Entry instance this method is called upon.
+        # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
-        #
+        # 
         # \return The numeric ID of the internally referenced C++ class instance.
-        #
+        # 
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param entry The \e %Entry instance to copy.
-        # \return \a self
+        # \brief 
+        # \param entry 
+        # \return 
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -139,77 +143,66 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
         #
         def __bool__() -> bool: pass
 
-        ##
-        # \brief 
-        #
         objectID = property(getObjectID)
 
-        ##
-        # \brief 
-        #
         atomType = property(getAtomType)
 
-        ##
-        # \brief 
-        #
         atomicNumber = property(getAtomicNumber)
 
-        ##
-        # \brief 
-        #
         numNeighbors = property(getNumNeighbors)
 
-        ##
-        # \brief 
-        #
         valence = property(getValence)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         piLonePair = property(getPiLonePair)
 
-        ##
-        # \brief 
-        #
         multiBondDesignator = property(getMultiBondDesignator)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         aromAtomType = property(getAromAtomType)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         linearBondAngle = property(getLinearBondAngle)
 
         ##
         # \brief FIXME!
+        # \brief 
         #
         multiOrSingleBonds = property(getMultiOrSingleBonds)
 
     ##
     # \brief Initializes the \e %MMFF94AtomTypePropertyTable instance.
-    #
+    # \param self The \e %MMFF94AtomTypePropertyTable instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94AtomTypePropertyTable instance.
+    # \param self The \e %MMFF94AtomTypePropertyTable instance to initialize.
     # \param table 
-    #
+    # 
     def __init__(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MMFF94AtomTypePropertyTable instance this method is called upon.
+    # 
     # Different Python \e %MMFF94AtomTypePropertyTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94AtomTypePropertyTable instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -269,9 +262,9 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AtomTypePropertyTable instance \a table.
-    # \param table The \e %MMFF94AtomTypePropertyTable instance to copy.
-    # \return \a self
+    # \brief 
+    # \param table 
+    # \return 
     #
     def assign(table: MMFF94AtomTypePropertyTable) -> MMFF94AtomTypePropertyTable: pass
 
@@ -290,17 +283,8 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
     @staticmethod
     def get(: ) -> MMFF94AtomTypePropertyTable: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     numEntries = property(getNumEntries)
 
-    ##
-    # \brief 
-    #
     entries = property(getEntries)

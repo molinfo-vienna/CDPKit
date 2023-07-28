@@ -20,21 +20,23 @@
 #
 
 ##
-# \brief 
-#
+# \brief AtomConfigurationMatchExpression.
+# 
 class AtomConfigurationMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomConfigurationMatchExpression instance.
+    # \param self The \e %AtomConfigurationMatchExpression instance to initialize.
     # \param expr 
-    #
+    # 
     def __init__(expr: AtomConfigurationMatchExpression) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomConfigurationMatchExpression instance.
-    # \param query_stereo_descr 
-    # \param query_atom 
-    # \param not_match 
-    # \param allow_part_maps 
-    #
+    # \brief Constructs an <tt>AtomConfigurationMatchExpression</tt> instance for the specified matching mode and stereo configuration constraints.
+    # 
+    # \param query_stereo_descr The descriptor object specifying the query atom's stereo configuration reference atoms and associated configuration constraints on matching target atoms.
+    # \param query_atom The atom for which this <tt>AtomConfigurationMatchExpression</tt> instance gets constructed.
+    # \param not_match Specifies whether the stereo configuration of a target atom actually has to match (<tt>True</tt>) or <em>not</em> match (<tt>False</tt>) the query configuration constraints.
+    # \param allow_part_maps Specifies whether or not a target atom that has an incomplete query to target neighbor atom/bond mapping shall be considered to match the query configuration constraints. This is important for maximum common substructure searches where the provided query to target atom mapping may not be complete.
+    # 
     def __init__(query_stereo_descr: StereoDescriptor, query_atom: Atom, not_match: bool, allow_part_maps: bool) -> None: pass

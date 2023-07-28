@@ -20,58 +20,57 @@
 #
 
 ##
-# \brief 
-#
+# \brief A graphics primitive representing a polygon.
+# 
 class PolygonPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
-    # \brief Initializes the \e %PolygonPrimitive2D instance.
-    #
+    # \brief Constructs an undefined polygon primitive.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PolygonPrimitive2D instance.
+    # \param self The \e %PolygonPrimitive2D instance to initialize.
     # \param prim 
-    #
+    # 
     def __init__(prim: PolygonPrimitive2D) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %PolygonPrimitive2D instance \a prim.
-    # \param prim The \e %PolygonPrimitive2D instance to copy.
-    # \return \a self
+    # \brief 
+    # \param prim 
+    # \return 
     #
     def assign(prim: PolygonPrimitive2D) -> PolygonPrimitive2D: pass
 
     ##
-    # \brief 
-    # \param pen 
-    #
+    # \brief Sets the pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # 
+    # \param pen The pen defining the color, width, line style, cap style and join style of the polygon's outline.
+    # 
     def setPen(pen: Pen) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # 
+    # \return The pen defining the color, width, line style, cap style and join style of the polygon outline.
+    # 
     def getPen() -> Pen: pass
 
     ##
-    # \brief 
-    # \param brush 
-    #
+    # \brief Sets the brush defining the fill color and fill pattern.
+    # 
+    # \param brush The brush defining the fill color and fill pattern.
+    # 
     def setBrush(brush: Brush) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the brush defining the fill color and fill pattern.
+    # 
+    # \return The brush defining the fill color and fill pattern.
+    # 
     def getBrush() -> Brush: pass
 
-    ##
-    # \brief 
-    #
     pen = property(getPen, setPen)
 
-    ##
-    # \brief 
-    #
     brush = property(getBrush, setBrush)

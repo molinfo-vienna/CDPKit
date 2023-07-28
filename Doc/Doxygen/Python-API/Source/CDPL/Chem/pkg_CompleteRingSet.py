@@ -20,23 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the exhaustive perception of rings in a molecular graph.
+# 
+# \see [\ref HANSER]
+# 
 class CompleteRingSet(FragmentList):
 
     ##
-    # \brief Initializes the \e %CompleteRingSet instance.
-    #
+    # \brief Constructs an empty <tt>CompleteRingSet</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CompleteRingSet instance.
-    # \param molgraph 
-    #
+    # \brief Constructs a <tt>CompleteRingSet</tt> instance that contains the rings in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the complete set of rings.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of rings by the rings in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the complete set of rings.
+    # 
     def perceive(molgraph: MolecularGraph) -> None: pass

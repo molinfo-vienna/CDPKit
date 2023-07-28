@@ -20,61 +20,61 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of atom hybridization states.
+# 
 class HybridizationState(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an unknown hybridization state.
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization <em>dp</em>.
+    # 
     DP = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sd<sup>3</sup></em>.
+    # 
     SD3 = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp</em>.
+    # 
     SP = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>1</sup></em>.
+    # 
     SP1 = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>2</sup></em>.
+    # 
     SP2 = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>2</sup>d</em>.
+    # 
     SP2D = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>3</sup></em>.
+    # 
     SP3 = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>3</sup>d</em>.
+    # 
     SP3D = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>3</sup>d<sup>2</sup></em>.
+    # 
     SP3D2 = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies the hybridization state <em>sp<sup>3</sup>d<sup>3</sup></em>.
+    # 
     SP3D3 = 9

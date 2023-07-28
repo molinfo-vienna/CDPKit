@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief XBondingInteractionScore.
+# 
 class XBondingInteractionScore(FeatureInteractionScore):
 
     ##
@@ -46,18 +46,20 @@ class XBondingInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %XBondingInteractionScore instance.
+    # \param self The \e %XBondingInteractionScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: XBondingInteractionScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %XBondingInteractionScore instance.
-    # \param don_acc 
-    # \param min_ax_dist 
-    # \param max_ax_dist 
-    # \param min_axb_ang 
-    # \param max_acc_ang 
-    #
+    # \brief Constructs a <tt>XBondingInteractionScore</tt> functor with the specified scores.
+    # 
+    # \param don_acc <tt>True</tt> if the first feature argument represents the donor- and the second one the acceptor-feature, and <tt>False</tt> otherwise.
+    # \param min_ax_dist The minimum allowed distance between the halogen-atom and the acceptor-feature.
+    # \param max_ax_dist The maximum allowed distance between the halogen-atom and the acceptor-feature.
+    # \param min_axb_ang The minimum allowed angle between the vectors halogen->acceptor snd halogen->bound atom.
+    # \param max_acc_ang The maximum allowed angle deviation from the acceptor's preferred X-bonding direction.
+    # 
     def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 4.0, min_axb_ang: float = 150.0, max_acc_ang: float = 35.0) -> None: pass
 
     ##
@@ -103,28 +105,16 @@ class XBondingInteractionScore(FeatureInteractionScore):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondingInteractionScore instance \a constr.
-    # \param constr The \e %XBondingInteractionScore instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: XBondingInteractionScore) -> XBondingInteractionScore: pass
 
-    ##
-    # \brief 
-    #
     minAXDistance = property(getMinAXDistance)
 
-    ##
-    # \brief 
-    #
     maxAXDistance = property(getMaxAXDistance)
 
-    ##
-    # \brief 
-    #
     minAXBAngle = property(getMinAXBAngle)
 
-    ##
-    # \brief 
-    #
     maxAcceptorAngle = property(getMaxAcceptorAngle)

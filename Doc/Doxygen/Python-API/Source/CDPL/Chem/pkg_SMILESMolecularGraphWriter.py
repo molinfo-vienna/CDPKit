@@ -20,12 +20,33 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
+# 
+# <tt>SMILESMolecularGraphWriter</tt> supports the following control-parameters:
+# 
+# <table>
+#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
+#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a write operation to fail</td></tr>
+#  <tr><td>Chem.ControlParameter.ORDINARY_HYDROGEN_DEPLETE</td><td><tt>True</tt></td><td>Specifies whether or not to write explicit ordinary hydrogen atoms</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_RECORD_FORMAT</td><td><tt>"S"</tt></td><td>Specifies the data record format</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_CANONICAL_FORM</td><td><tt>False</tt></td><td>Specifies whether to generate canonical <em>SMILES</em> strings</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_KEKULE_FORM</td><td><tt>False</tt></td><td>Specifies whether to output aromatic rings as <em>Kekul&eacute;</em> structures</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_ATOM_STEREO</td><td><tt>True</tt></td><td>Specifies whether to output the chirality of tetrahedral stereogenic atoms</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_BOND_STEREO</td><td><tt>True</tt></td><td>Specifies whether to output directional bonds for the specification of chain double bond geometries</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_RING_BOND_STEREO</td><td><tt>True</tt></td><td>Specifies whether to output directional bonds for the specification of ring double bond geometries</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_MIN_STEREO_BOND_RING_SIZE</td><td><tt>8</tt></td><td>Specifies the minimum ring size that is required for the specification of ring double bond geometries</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_ISOTOPE</td><td><tt>True</tt></td><td>Specifies whether to output the mass of isotopes</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_MOL_WRITE_ATOM_MAPPING_ID</td><td><tt>False</tt></td><td>Specifies whether to output reaction atom-atom mapping numbers</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_SINGLE_BONDS</td><td><tt>False</tt></td><td>Specifies whether to output single bonds</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_WRITE_AROMATIC_BONDS</td><td><tt>False</tt></td><td>Specifies whether to output aromatic bonds</td></tr>
+#  <tr><td>Chem.ControlParameter.SMILES_NO_ORGANIC_SUBSET</td><td><tt>False</tt></td><td>Specifies whether ordinary <em>C, N, O, S, P, F, Cl, Br</em> and <em>I</em> atoms shall be enclosed in brackets</td></tr>
+# </table>
+# 
 class SMILESMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
-    # \brief Initializes the \e %SMILESMolecularGraphWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>SMILESMolecularGraphWriter</tt> instance that will write data of molecular graphs to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

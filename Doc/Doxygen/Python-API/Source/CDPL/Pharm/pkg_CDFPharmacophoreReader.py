@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for pharmacophore data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
-    # \brief Initializes the \e %CDFPharmacophoreReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>CDFPharmacophoreReader</tt> instance that will read the pharmacophore data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

@@ -20,228 +20,228 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the <em>Tripos Sybyl</em> atom type.
+# 
 class SybylAtomType(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Atom with no matching Sybyl atom type.
+    # 
     UNKNOWN = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp3 <em>Carbon</em>.
+    # 
     C_3 = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp2 <em>Carbon</em>.
+    # 
     C_2 = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp <em>Carbon</em>.
+    # 
     C_1 = 3
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an aromatic <em>Carbon</em>.
+    # 
     C_ar = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a <em>Carbocation</em> (C+), used only in a guanidinium group.
+    # 
     C_cat = 5
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp3 <em>Nitrogen</em>.
+    # 
     N_3 = 6
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp2 <em>Nitrogen</em>.
+    # 
     N_2 = 7
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp <em>Nitrogen</em>.
+    # 
     N_1 = 8
 
     ##
-    # \brief 
-    #
+    # \brief Specifies an aromatic <em>Nitrogen</em>.
+    # 
     N_ar = 9
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Nitrogen</em> in amides.
+    # 
     N_am = 10
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a trigonal planar <em>Nitrogen</em>.
+    # 
     N_pl3 = 11
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a positively charged sp3 <em>Nitrogen</em>.
+    # 
     N_4 = 12
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp3 <em>Oxygen</em>.
+    # 
     O_3 = 13
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp2 <em>Oxygen</em>.
+    # 
     O_2 = 14
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Oxygen</em> in carboxylate and phosphate groups.
+    # 
     O_co2 = 15
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Oxygen</em> in the <em>Single Point Charge (SPC)</em> water model.
+    # 
     O_spc = 16
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Oxygen</em> in the <em>Transferable Intermolecular Potential (TIP3P)</em> water model.
+    # 
     O_t3p = 17
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp3 <em>Sulfur</em>.
+    # 
     S_3 = 18
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp2 <em>Sulfur</em>.
+    # 
     S_2 = 19
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Sulfur</em> in sulfoxides.
+    # 
     S_O = 20
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Sulfur</em> in sulfones.
+    # 
     S_O2 = 21
 
     ##
-    # \brief 
-    #
+    # \brief Specifies sp3 <em>Phosphorous</em>.
+    # 
     P_3 = 22
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Fluorine</em>.
+    # 
     F = 23
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hydrogen</em>.
+    # 
     H = 24
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hydrogen</em> in the <em>Single Point Charge (SPC)</em> water model.
+    # 
     H_spc = 25
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Hydrogen</em> in the <em>Transferable intermolecular Potential (TIP3P)</em> water model.
+    # 
     H_t3p = 26
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a lone pair.
+    # 
     LP = 27
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a dummy atom.
+    # 
     Du = 28
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a dummy <em>Carbon</em>.
+    # 
     Du_C = 29
 
     ##
-    # \brief 
-    #
+    # \brief Specifies any atom.
+    # 
     Any = 30
 
     ##
-    # \brief 
-    #
+    # \brief Specifies any halogen.
+    # 
     Hal = 31
 
     ##
-    # \brief 
-    #
+    # \brief Specifies a heteroatom (N, O, S or P).
+    # 
     Het = 32
 
     ##
-    # \brief 
-    #
+    # \brief Specifies any heavy atom (non-Hydrogen).
+    # 
     Hev = 33
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Lithium</em>.
+    # 
     Li = 34
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Sodium</em>.
+    # 
     Na = 35
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Magnesium</em>.
+    # 
     Mg = 36
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Aluminum</em>.
+    # 
     Al = 37
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Silicon</em>.
+    # 
     Si = 38
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Potassium</em>.
+    # 
     K = 39
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Calcium</em>.
+    # 
     Ca = 40
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Chromium</em> (tetrahedral).
+    # 
     Cr_th = 41
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Chromium</em> (octahedral).
+    # 
     Cr_oh = 42
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Manganese</em>.
+    # 
     Mn = 43
 
     ##
@@ -250,51 +250,51 @@ class SybylAtomType(Boost.Python.instance):
     e = 44
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Cobalt</em> (octahedral).
+    # 
     Co_oh = 45
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Copper</em>.
+    # 
     Cu = 46
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Chlorine</em>.
+    # 
     Cl = 47
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Bromine</em>.
+    # 
     Br = 48
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Iodine</em>.
+    # 
     I = 49
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Zinc</em>.
+    # 
     Zn = 50
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Selenium</em>.
+    # 
     Se = 51
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Molybdenum</em>.
+    # 
     Mo = 52
 
     ##
-    # \brief 
-    #
+    # \brief Specifies <em>Tin</em>.
+    # 
     Sn = 53
 
     ##
-    # \brief 
-    #
+    # \brief Marks the end of all supported atom types.
+    # 
     MAX_TYPE = 55

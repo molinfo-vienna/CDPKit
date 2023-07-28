@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data from conformer generator fragment libraries.
+# 
 class CFLMoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %CFLMoleculeInputHandler instance.
-    #
+    # \param self The \e %CFLMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

@@ -26,19 +26,22 @@ class BoolAlignmentResult2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolAlignmentResult2Functor instance.
-    #
+    # \param self The \e %BoolAlignmentResult2Functor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAlignmentResult2Functor instance.
+    # \param self The \e %BoolAlignmentResult2Functor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAlignmentResult2Functor instance.
+    # \param arg1 The \e %BoolAlignmentResult2Functor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

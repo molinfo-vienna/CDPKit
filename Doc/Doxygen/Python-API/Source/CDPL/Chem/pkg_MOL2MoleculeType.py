@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants for the specification of the molecule type in <em>Tripos MOL2</em> files.
+# 
 class MOL2MoleculeType(Boost.Python.instance):
 
     ##

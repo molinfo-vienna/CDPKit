@@ -26,20 +26,23 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Range instance.
-    #
+    # \param self The \e %Range instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Range instance.
+    # \param self The \e %Range instance to initialize.
     # \param r 
-    #
+    # 
     def __init__(r: Range) -> None: pass
 
     ##
     # \brief Initializes the \e %Range instance.
+    # \param self The \e %Range instance to initialize.
     # \param start 
     # \param stop 
-    #
+    # 
     def __init__(start: int, stop: int) -> None: pass
 
     ##
@@ -74,9 +77,9 @@ class Range(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Range instance \a r.
-    # \param r The \e %Range instance to copy.
-    # \return \a self
+    # \brief 
+    # \param r 
+    # \return 
     #
     def assign(r: Range) -> Range: pass
 
@@ -88,28 +91,31 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %Range instance this method is called upon.
+    # 
     # Different Python \e %Range instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Range instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
+    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __eq__(r: Range) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
+    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to be compared with.
     # \return The result of the comparison operation.
-    #
+    # 
     def __ne__(r: Range) -> bool: pass
 
     ##
@@ -126,22 +132,10 @@ class Range(Boost.Python.instance):
     #
     def __getitem__(i: int) -> int: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     start = property(getStart)
 
-    ##
-    # \brief 
-    #
     stop = property(getStop)
 
-    ##
-    # \brief 
-    #
     size = property(getSize)

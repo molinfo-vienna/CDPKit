@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that a value is out of range.
+# 
 class RangeError(ValueError):
     pass

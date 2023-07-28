@@ -26,7 +26,8 @@ class FileCDFGZPharmacophoreReader(PharmacophoreReaderBase):
 
     ##
     # \brief Initializes the \e %FileCDFGZPharmacophoreReader instance.
+    # \param self The \e %FileCDFGZPharmacophoreReader instance to initialize.
     # \param file_name 
     # \param mode 
-    #
+    # 
     def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

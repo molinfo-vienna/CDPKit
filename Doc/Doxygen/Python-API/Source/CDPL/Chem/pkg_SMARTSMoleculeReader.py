@@ -20,12 +20,20 @@
 #
 
 ##
-# \brief 
-#
+# \brief A reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
+# 
+# <tt>SMARTSMoleculeReader</tt> supports the following control-parameter:
+# 
+# <table>
+#  <tr><th>Control-Parameter</th><th>Default Value (see Chem.ControlParameterDefault)</th><th>Description</th></tr>
+#  <tr><td>Chem.ControlParameter.STRICT_ERROR_CHECKING</td><td><tt>False</tt></td><td>Specifies whether non-fatal recoverable errors should be ignored or cause a read operation to fail</td></tr>
+# </table>
+# 
 class SMARTSMoleculeReader(MoleculeReaderBase):
 
     ##
-    # \brief Initializes the \e %SMARTSMoleculeReader instance.
-    # \param is 
-    #
+    # \brief Constructs a <tt>SMARTSMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
+    # 
+    # \param is The input stream to read from.
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

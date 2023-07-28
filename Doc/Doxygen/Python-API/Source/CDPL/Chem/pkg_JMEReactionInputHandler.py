@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
+# 
 class JMEReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %JMEReactionInputHandler instance.
-    #
+    # \param self The \e %JMEReactionInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

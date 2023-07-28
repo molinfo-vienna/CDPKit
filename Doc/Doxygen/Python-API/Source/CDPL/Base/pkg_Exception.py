@@ -20,24 +20,27 @@
 #
 
 ##
-# \brief 
-#
+# \brief The root of the <em>CDPL</em> exception hierarchy.
+# 
 class Exception(builtins.Exception):
 
     ##
-    # \brief Initializes the \e %Exception instance.
-    # \param msg 
-    #
+    # \brief Constructs an <tt>Exception</tt> object with the error message set to <em>msg</em>.
+    # 
+    # \param msg A message describing the cause of the exception and/or the location where the error occurred.
+    # 
     def __init__(msg: str = '') -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the message describing the cause of the exception and/or the location where the error occurred.
+    # 
+    # \return The message describing the cause of the exception and/or the location where the error occurred.
+    # 
     def what() -> str: pass
 
     ##
     # \brief Returns a string representation of the \e %Exception instance.
+    # \param self The \e %Exception instance this method is called upon.
     # \return The generated string representation.
-    #
+    # 
     def __str__() -> str: pass

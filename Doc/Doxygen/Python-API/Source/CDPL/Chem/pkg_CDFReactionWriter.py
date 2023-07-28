@@ -20,12 +20,13 @@
 #
 
 ##
-# \brief 
-#
+# \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFReactionWriter(ReactionWriterBase):
 
     ##
-    # \brief Initializes the \e %CDFReactionWriter instance.
-    # \param os 
-    #
+    # \brief Constructs a <tt>CDFReactionWriter</tt> instance that will write reaction data to the output stream <em>os</em>.
+    # 
+    # \param os The output stream to write to.
+    # 
     def __init__(os: CDPL.Base.OStream) -> None: pass

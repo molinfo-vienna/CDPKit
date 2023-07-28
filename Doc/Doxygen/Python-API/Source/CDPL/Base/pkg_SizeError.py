@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief 
-#
+# \brief Thrown to indicate that the size of a (multidimensional) array is not correct.
+# 
 class SizeError(ValueError):
     pass

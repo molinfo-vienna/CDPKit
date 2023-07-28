@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief HierarchyViewChain.
+# 
 class HierarchyViewChain(HierarchyViewNode):
 
     ##
@@ -50,7 +50,4 @@ class HierarchyViewChain(HierarchyViewNode):
     #
     def __getitem__(idx: int) -> HierarchyViewFragment: pass
 
-    ##
-    # \brief 
-    #
     numFragments = property(getNumFragments)

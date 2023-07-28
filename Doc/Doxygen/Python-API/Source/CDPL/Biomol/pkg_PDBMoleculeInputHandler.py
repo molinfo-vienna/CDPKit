@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the input of molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
+# 
 class PDBMoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %PDBMoleculeInputHandler instance.
-    #
+    # \param self The \e %PDBMoleculeInputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

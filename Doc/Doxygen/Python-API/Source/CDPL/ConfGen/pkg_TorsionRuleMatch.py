@@ -37,9 +37,10 @@ class TorsionRuleMatch(Boost.Python.instance):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
+        # \param self The \e %AtomArray instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
-        #
+        # 
         def __contains__(atom: CDPL.Chem.Atom) -> bool: pass
 
         ##
@@ -51,31 +52,34 @@ class TorsionRuleMatch(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionRuleMatch instance.
+    # \param self The \e %TorsionRuleMatch instance to initialize.
     # \param match 
-    #
+    # 
     def __init__(match: TorsionRuleMatch) -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionRuleMatch instance.
+    # \param self The \e %TorsionRuleMatch instance to initialize.
     # \param rule 
     # \param bond 
     # \param atom1 
     # \param atom2 
     # \param atom3 
     # \param atom4 
-    #
+    # 
     def __init__(rule: TorsionRule, bond: CDPL.Chem.Bond, atom1: CDPL.Chem.Atom, atom2: CDPL.Chem.Atom, atom3: CDPL.Chem.Atom, atom4: CDPL.Chem.Atom) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %TorsionRuleMatch instance this method is called upon.
+    # 
     # Different Python \e %TorsionRuleMatch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRuleMatch instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -97,28 +101,16 @@ class TorsionRuleMatch(Boost.Python.instance):
     def getRule() -> TorsionRule: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRuleMatch instance \a match.
-    # \param match The \e %TorsionRuleMatch instance to copy.
-    # \return \a self
+    # \brief 
+    # \param match 
+    # \return 
     #
     def assign(match: TorsionRuleMatch) -> TorsionRuleMatch: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     rule = property(getRule)
 
-    ##
-    # \brief 
-    #
     bond = property(getBond)
 
-    ##
-    # \brief 
-    #
     atoms = property(getAtoms)

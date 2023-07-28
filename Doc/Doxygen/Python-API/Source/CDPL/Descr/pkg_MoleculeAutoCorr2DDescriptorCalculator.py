@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief MoleculeAutoCorr2DDescriptorCalculator.
+# 
 class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
 
     ##
@@ -40,52 +40,59 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
         FULL_SPLIT = 1
 
     ##
-    # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
-    #
+    # \brief Constructs the <tt>MoleculeAutoCorr2DDescriptorCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
+    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance to initialize.
     # \param calc 
-    #
+    # 
     def __init__(calc: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
+    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance to initialize.
     # \param molgraph 
     # \param corr_vec 
-    #
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance this method is called upon.
+    # 
     # Different Python \e %MoleculeAutoCorr2DDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeAutoCorr2DDescriptorCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
-    # \param calc The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param calc 
+    # \return 
     #
     def assign(calc: MoleculeAutoCorr2DDescriptorCalculator) -> MoleculeAutoCorr2DDescriptorCalculator: pass
 
     ##
-    # \brief 
-    # \param max_dist 
-    #
+    # \brief Allows to specify that maximum bond path length to consider.
+    # 
+    # \param max_dist The maximum considered bond path length.
+    # 
+    # \note The default value is <em>15</em>.
+    # 
     def setMaxDistance(max_dist: int) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the maximum considered bond path length.
+    # 
+    # \return The maximum considered bond path length.
+    # 
     def getMaxDistance() -> int: pass
 
     ##
@@ -101,9 +108,10 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def getMode() -> Mode: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
+    # \brief Allows to specify a custom atom pair weight function.
+    # 
+    # \param func A AtomPairWeightFunction instance that wraps the target function.
+    # 
     def setAtomPairWeightFunction(func: CDPL.Chem.DoubleAtom2UInt2Functor) -> None: pass
 
     ##
@@ -113,17 +121,8 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     #
     def calculate(molgraph: CDPL.Chem.MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     maxDistance = property(getMaxDistance, setMaxDistance)
 
-    ##
-    # \brief 
-    #
     mode = property(getMode, setMode)

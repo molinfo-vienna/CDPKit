@@ -1642,6 +1642,11 @@ namespace CDPL
         typedef CVector<double, 4> Vector4D;
 
         /**
+         * \brief A bounded 7 element vector holding floating point values of type <tt>double</tt>.
+         */
+        typedef CVector<double, 7> Vector7D;
+
+        /**
          * \brief A bounded 2 element vector holding signed integers of type <tt>long</tt>.
          */
         typedef CVector<long, 2> Vector2L;

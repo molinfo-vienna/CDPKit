@@ -20,31 +20,33 @@
 #
 
 ##
-# \brief 
-#
+# \brief XBondDonorFeatureGenerator.
+# 
 class XBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
-    # \brief Initializes the \e %XBondDonorFeatureGenerator instance.
-    #
+    # \brief Constructs the <tt>XBondDonorFeatureGenerator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %XBondDonorFeatureGenerator instance.
+    # \param self The \e %XBondDonorFeatureGenerator instance to initialize.
     # \param gen 
-    #
+    # 
     def __init__(gen: XBondDonorFeatureGenerator) -> None: pass
 
     ##
-    # \brief Initializes the \e %XBondDonorFeatureGenerator instance.
-    # \param molgraph 
-    # \param pharm 
-    #
+    # \brief Perceives the halogen bond donor features of the molecular graph a\ molgraph and adds them to the pharmacophore <em>pharm</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the features.
+    # \param pharm The output pharmacophore where to add the generated features.
+    # 
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondDonorFeatureGenerator instance \a gen.
-    # \param gen The \e %XBondDonorFeatureGenerator instance to copy.
-    # \return \a self
+    # \brief 
+    # \param gen 
+    # \return 
     #
     def assign(gen: XBondDonorFeatureGenerator) -> XBondDonorFeatureGenerator: pass

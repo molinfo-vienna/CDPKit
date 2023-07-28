@@ -26,19 +26,22 @@ class DoubleFeatureFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleFeatureFunctor instance.
-    #
+    # \param self The \e %DoubleFeatureFunctor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleFeatureFunctor instance.
+    # \param self The \e %DoubleFeatureFunctor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: DoubleFeatureFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleFeatureFunctor instance.
+    # \param arg1 The \e %DoubleFeatureFunctor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

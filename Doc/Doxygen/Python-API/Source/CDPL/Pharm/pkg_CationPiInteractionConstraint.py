@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief CationPiInteractionConstraint.
+# 
 class CationPiInteractionConstraint(Boost.Python.instance):
 
     ##
@@ -41,29 +41,32 @@ class CationPiInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CationPiInteractionConstraint instance.
+    # \param self The \e %CationPiInteractionConstraint instance to initialize.
     # \param constr 
-    #
+    # 
     def __init__(constr: CationPiInteractionConstraint) -> None: pass
 
     ##
-    # \brief Initializes the \e %CationPiInteractionConstraint instance.
-    # \param aro_cat 
-    # \param min_dist 
-    # \param max_dist 
-    # \param max_ang 
-    #
+    # \brief Constructs a <tt>CationPiInteractionConstraint</tt> functor with the specified constraints.
+    # 
+    # \param aro_cat <tt>True</tt> if the first feature argument represents the aromatic- and the second one the cationic-feature, and <tt>False</tt> otherwise.
+    # \param min_dist The minimum allowed distance between the cationic- and aromatic-feature centers.
+    # \param max_dist The maximum allowed distance between the cationic- and aromatic-feature centers.
+    # \param max_ang The maximum allowed angle between the cationic- and aromatic-feature plane normal.
+    # 
     def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 45.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %CationPiInteractionConstraint instance this method is called upon.
+    # 
     # Different Python \e %CationPiInteractionConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CationPiInteractionConstraint instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -85,9 +88,9 @@ class CationPiInteractionConstraint(Boost.Python.instance):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %CationPiInteractionConstraint instance \a constr.
-    # \param constr The \e %CationPiInteractionConstraint instance to copy.
-    # \return \a self
+    # \brief 
+    # \param constr 
+    # \return 
     #
     def assign(constr: CationPiInteractionConstraint) -> CationPiInteractionConstraint: pass
 
@@ -99,22 +102,10 @@ class CationPiInteractionConstraint(Boost.Python.instance):
     #
     def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
-    ##
-    # \brief 
-    #
     minDistance = property(getMinDistance)
 
-    ##
-    # \brief 
-    #
     maxDistance = property(getMaxDistance)
 
-    ##
-    # \brief 
-    #
     maxAngle = property(getMaxAngle)

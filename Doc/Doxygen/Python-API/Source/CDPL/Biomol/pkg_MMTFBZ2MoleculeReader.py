@@ -26,6 +26,7 @@ class MMTFBZ2MoleculeReader(CDPL.Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %MMTFBZ2MoleculeReader instance.
+    # \param self The \e %MMTFBZ2MoleculeReader instance to initialize.
     # \param is 
-    #
+    # 
     def __init__(is: CDPL.Base.IStream) -> None: pass

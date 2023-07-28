@@ -20,8 +20,11 @@
 #
 
 ##
-# \brief 
-# \param bs 
-# \param num_times 
-#
+# \brief Folds the bitset <em>bs</em> the specified number of times.
+# 
+# Folding a bitset means that the lower and upper half of the bitset are combined by a logical OR operation to produce a new bitset which is half of the original size. This process is repeated the specified number of times. See also [\ref DTPFP].
+# 
+# \param bs The bitset to fold.
+# \param num_times The number of times the bitset has to be folded.
+# 
 def fold(bs: BitSet, num_times: int) -> None: pass

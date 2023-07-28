@@ -20,21 +20,21 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the layout of a set of graphical objects.
+# 
 class LayoutStyle(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the objects have to be arranged along a line.
+    # 
     LINEAR = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the objects have no special layout.
+    # 
     NONE = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the objects have to be arranged in multiple rows within a rectangle.
+    # 
     PACKED = 2

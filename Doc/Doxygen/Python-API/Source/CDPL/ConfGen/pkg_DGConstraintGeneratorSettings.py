@@ -25,37 +25,40 @@
 class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     ##
-    # \brief FIXME!
+    # \brief 
     #
-    DEFAULT = _UNKNOWN_VALUE_
+    DEFAULT = _HIDDEN_VALUE_
 
     ##
     # \brief Initializes the \e %DGConstraintGeneratorSettings instance.
-    #
+    # \param self The \e %DGConstraintGeneratorSettings instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGConstraintGeneratorSettings instance.
+    # \param self The \e %DGConstraintGeneratorSettings instance to initialize.
     # \param settings 
-    #
+    # 
     def __init__(settings: DGConstraintGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %DGConstraintGeneratorSettings instance this method is called upon.
+    # 
     # Different Python \e %DGConstraintGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DGConstraintGeneratorSettings instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGeneratorSettings instance \a settings.
-    # \param settings The \e %DGConstraintGeneratorSettings instance to copy.
-    # \return \a self
+    # \brief 
+    # \param settings 
+    # \return 
     #
     def assign(settings: DGConstraintGeneratorSettings) -> DGConstraintGeneratorSettings: pass
 
@@ -95,22 +98,22 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
     #
     def regardBondConfiguration() -> bool: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     exclHydrogens = property(getExclHydrogens, setExclHydrogens)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     regardAtomConfig = property(getRegardAtomConfig, setRegardAtomConfig)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     regardBondConfig = property(getRegardBondConfig, setRegardBondConfig)

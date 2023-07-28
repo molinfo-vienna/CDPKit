@@ -20,23 +20,25 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implements the perception of aromatic rings in a molecular graph.
+# 
 class AromaticRingSet(FragmentList):
 
     ##
-    # \brief Initializes the \e %AromaticRingSet instance.
-    #
+    # \brief Constructs an empty <tt>AromaticRingSet</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AromaticRingSet instance.
-    # \param molgraph 
-    #
+    # \brief Construct a <tt>AromaticRingSet</tt> instance that contains all aromatic rings of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the aromatic rings.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Replaces the current set of rings by the aromatic rings of the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to perceive the aromatic rings.
+    # 
     def perceive(molgraph: MolecularGraph) -> None: pass

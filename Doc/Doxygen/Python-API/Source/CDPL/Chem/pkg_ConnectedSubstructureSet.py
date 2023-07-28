@@ -20,40 +20,47 @@
 #
 
 ##
-# \brief 
-#
+# \brief ConnectedSubstructureSet.
+# 
 class ConnectedSubstructureSet(FragmentList):
 
     ##
-    # \brief Initializes the \e %ConnectedSubstructureSet instance.
-    #
+    # \brief Constructs an empty <tt>ConnectedSubstructureSet</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ConnectedSubstructureSet instance.
-    # \param molgraph 
-    #
+    # \brief Constructs and initialzes a <tt>ConnectedSubstructureSet</tt> instance for the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph to search for connected substructures.
+    # 
     def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    #
+    # \brief Specifies the molecular graph that is searched for connected substructures.
+    # 
+    # The current substructure size is reset to zero.
+    # 
+    # \param molgraph The molecular graph to search for connected substructures.
+    # 
     def reset(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \return 
-    #
+    # \brief Returns the current substructure size in terms of number of bonds.
+    # 
+    # The current substructure size corresponds to the size that was specified in the the last call to findSubstructures(). If findSubstructures() has not yet been called, the current substructure size is zero.
+    # 
+    # \return The current substructure size.
+    # 
     def getSubstructureSize() -> int: pass
 
     ##
-    # \brief 
-    # \param size 
-    #
+    # \brief Searches the specified molecular graph for connected substructures of the given size.
+    # 
+    # If a molecular graph has not yet been specified (in the constructor or by a prior call to reset(const Chem.MolecularGraph&)), the method has no effect. Otherwise, all connected substructures of the specified size are added as Chem.Fragment objects to the list of previously found (if any) substructures. If the specified size is zero, substructures of size <em>1</em> (i.e. the bonds of the molecular graph) will be extracted.
+    # 
+    # \param size The substructure size in terms of number of bonds.
+    # 
     def findSubstructures(size: int) -> None: pass
 
-    ##
-    # \brief 
-    #
     substructureSize = property(getSubstructureSize, setSubstructureSize)

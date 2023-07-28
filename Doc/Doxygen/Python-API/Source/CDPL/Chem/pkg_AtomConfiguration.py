@@ -20,31 +20,31 @@
 #
 
 ##
-# \brief 
-#
+# \brief Provides constants that are used to specify the <em>R/S</em> configuration of atoms.
+# 
 class AtomConfiguration(Boost.Python.instance):
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the configuration of the atom is undefined.
+    # 
     UNDEF = 0
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is not a stereogenic center and thus cannot be assigned a configuration.
+    # 
     NONE = 1
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom has <em>R</em> configuration.
+    # 
     R = 2
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom has <em>S</em> configuration.
+    # 
     S = 4
 
     ##
-    # \brief 
-    #
+    # \brief Specifies that the atom is a stereogenic center but has no defined configuration.
+    # 
     EITHER = 8

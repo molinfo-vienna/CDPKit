@@ -125,7 +125,7 @@ namespace CDPL
 
             /**
              * \brief Tells if there are any data records left to read.
-             * \return \c true if there are data record left to read, and \c false otherwise.
+             * \return \c true if there are data records left to read, and \c false otherwise.
              * \throw Base::IOError if an I/O error occurred.
              */
             virtual bool hasMoreData() = 0;

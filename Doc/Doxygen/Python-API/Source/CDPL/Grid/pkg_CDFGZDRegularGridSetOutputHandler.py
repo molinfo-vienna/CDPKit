@@ -20,11 +20,12 @@
 #
 
 ##
-# \brief 
-#
+# \brief A handler for the output of gzip-compressed spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
+# 
 class CDFGZDRegularGridSetOutputHandler(DRegularGridSetOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZDRegularGridSetOutputHandler instance.
-    #
+    # \param self The \e %CDFGZDRegularGridSetOutputHandler instance to initialize.
+    # 
     def __init__() -> None: pass

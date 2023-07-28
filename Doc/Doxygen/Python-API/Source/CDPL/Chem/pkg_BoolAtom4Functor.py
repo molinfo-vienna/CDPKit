@@ -26,19 +26,22 @@ class BoolAtom4Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolAtom4Functor instance.
-    #
+    # \param self The \e %BoolAtom4Functor instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAtom4Functor instance.
+    # \param self The \e %BoolAtom4Functor instance to initialize.
     # \param func 
-    #
+    # 
     def __init__(func: CDPL.ForceField.InteractionFilterFunction4) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAtom4Functor instance.
+    # \param arg1 The \e %BoolAtom4Functor instance to initialize.
     # \param callable 
-    #
+    # 
     def __init__(callable: object) -> None: pass
 
     ##

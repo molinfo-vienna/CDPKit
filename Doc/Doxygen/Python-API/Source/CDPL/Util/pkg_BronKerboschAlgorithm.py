@@ -20,37 +20,41 @@
 #
 
 ##
-# \brief 
-#
+# \brief Implementation of the Bron-Kerbosch clique-detection algorithm [\ref BKA].
+# 
 class BronKerboschAlgorithm(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BronKerboschAlgorithm instance.
-    #
+    # \param self The \e %BronKerboschAlgorithm instance to initialize.
+    # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BronKerboschAlgorithm instance.
+    # \param self The \e %BronKerboschAlgorithm instance to initialize.
     # \param bka 
-    #
+    # 
     def __init__(bka: BronKerboschAlgorithm) -> None: pass
 
     ##
     # \brief Initializes the \e %BronKerboschAlgorithm instance.
+    # \param self The \e %BronKerboschAlgorithm instance to initialize.
     # \param adj_mtx 
-    #
+    # 
     def __init__(adj_mtx: BitSetArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %BronKerboschAlgorithm instance this method is called upon.
+    # 
     # Different Python \e %BronKerboschAlgorithm instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BronKerboschAlgorithm instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -67,13 +71,10 @@ class BronKerboschAlgorithm(Boost.Python.instance):
     def nextClique(clique: BitSet) -> bool: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BronKerboschAlgorithm instance \a bka.
-    # \param bka The \e %BronKerboschAlgorithm instance to copy.
-    # \return \a self
+    # \brief 
+    # \param bka 
+    # \return 
     #
     def assign(bka: BronKerboschAlgorithm) -> BronKerboschAlgorithm: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)

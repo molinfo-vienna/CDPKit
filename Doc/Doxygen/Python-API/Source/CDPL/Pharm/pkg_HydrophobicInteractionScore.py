@@ -20,8 +20,8 @@
 #
 
 ##
-# \brief 
-#
+# \brief HydrophobicInteractionScore.
+# 
 class HydrophobicInteractionScore(FeatureDistanceScore):
 
     ##
@@ -36,13 +36,15 @@ class HydrophobicInteractionScore(FeatureDistanceScore):
 
     ##
     # \brief Initializes the \e %HydrophobicInteractionScore instance.
+    # \param self The \e %HydrophobicInteractionScore instance to initialize.
     # \param score 
-    #
+    # 
     def __init__(score: HydrophobicInteractionScore) -> None: pass
 
     ##
-    # \brief Initializes the \e %HydrophobicInteractionScore instance.
-    # \param min_dist 
-    # \param max_dist 
-    #
+    # \brief Constructs a <tt>HydrophobicInteractionScore</tt> functor with a minimum hydrophobic-feature pair distance of <em>min_dist</em> and a maximum distance of <em>max_dist</em>.
+    # 
+    # \param min_dist The minimum allowed feature pair distance.
+    # \param max_dist The maximum allowed feature pair distance.
+    # 
     def __init__(min_dist: float = 2.0, max_dist: float = 6.0) -> None: pass

@@ -20,32 +20,36 @@
 #
 
 ##
-# \brief 
-#
+# \brief CIPPriorityCalculator.
+# 
+# \see [\ref TCIP]
+# 
 class CIPPriorityCalculator(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %CIPPriorityCalculator instance.
-    #
+    # \brief Constructs the <tt>CIPPriorityCalculator</tt> instance.
+    # 
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CIPPriorityCalculator instance.
-    # \param molgraph 
-    # \param priorities 
-    #
+    # \brief Constructs the <tt>CIPPriorityCalculator</tt> instance and calculates the topological <em>CIP</em> priorities of the atoms in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
+    # \param priorities An array containing the calculated <em>CIP</em> priorities. The <em>CIP</em> priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the <em>CIP</em> priority of an atom is accessible via its index).
+    # 
     def __init__(molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
+    # \param self The \e %CIPPriorityCalculator instance this method is called upon.
+    # 
     # Different Python \e %CIPPriorityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CIPPriorityCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
+    # 
     # \return The numeric ID of the internally referenced C++ class instance.
-    #
+    # 
     def getObjectID() -> int: pass
 
     ##
@@ -61,18 +65,17 @@ class CIPPriorityCalculator(Boost.Python.instance):
     def getImplicitHydrogenCountFunction() -> SizeTypeAtomFunctor: pass
 
     ##
-    # \brief 
-    # \param molgraph 
-    # \param priorities 
-    #
+    # \brief Calculates the topological <em>CIP</em> priorities of the atoms in the molecular graph <em>molgraph</em>.
+    # 
+    # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
+    # \param priorities An array containing the calculated <em>CIP</em> priorities. The <em>CIP</em> priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the <em>CIP</em> priority of an atom is accessible via its index).
+    # 
     def calculate(molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
 
-    ##
-    # \brief 
-    #
     objectID = property(getObjectID)
 
     ##
     # \brief FIXME!
+    # \brief 
     #
     implHydrogenCountFunc = property(getImplHydrogenCountFunc, setImplHydrogenCountFunc)
