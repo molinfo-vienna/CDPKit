@@ -147,10 +147,11 @@ class Pen(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param pen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Pen instance \a pen.
+    # \param self The \e %Pen instance this method is called upon.
+    # \param pen The \e %Pen instance to copy.
+    # \return \a self
+    # 
     def assign(pen: Pen) -> Pen: pass
 
     ##

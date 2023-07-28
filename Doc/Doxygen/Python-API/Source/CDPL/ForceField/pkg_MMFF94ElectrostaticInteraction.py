@@ -87,10 +87,11 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     def getDistanceExponent() -> float: pass
 
     ##
-    # \brief 
-    # \param iactn 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ElectrostaticInteraction instance \a iactn.
+    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
+    # \param iactn The \e %MMFF94ElectrostaticInteraction instance to copy.
+    # \return \a self
+    # 
     def assign(iactn: MMFF94ElectrostaticInteraction) -> MMFF94ElectrostaticInteraction: pass
 
     ##

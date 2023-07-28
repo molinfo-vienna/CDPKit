@@ -45,10 +45,11 @@ class Feature(CDPL.Chem.Entity3D):
     def getIndex() -> int: pass
 
     ##
-    # \brief 
-    # \param ftr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Feature instance \a ftr.
+    # \param self The \e %Feature instance this method is called upon.
+    # \param ftr The \e %Feature instance to copy.
+    # \return \a self
+    # 
     def assign(ftr: Feature) -> Feature: pass
 
     ##

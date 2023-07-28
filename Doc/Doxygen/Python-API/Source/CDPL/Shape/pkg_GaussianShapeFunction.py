@@ -68,10 +68,11 @@ class GaussianShapeFunction(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeFunction instance \a func.
+    # \param self The \e %GaussianShapeFunction instance this method is called upon.
+    # \param func The \e %GaussianShapeFunction instance to copy.
+    # \return \a self
+    # 
     def assign(func: GaussianShapeFunction) -> GaussianShapeFunction: pass
 
     ##

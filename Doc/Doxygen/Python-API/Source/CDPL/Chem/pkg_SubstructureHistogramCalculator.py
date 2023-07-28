@@ -61,10 +61,11 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param ptn 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %Pattern instance \a ptn.
+        # \param self The \e %Pattern instance this method is called upon.
+        # \param ptn The \e %Pattern instance to copy.
+        # \return \a self
+        # 
         def assign(ptn: Pattern) -> Pattern: pass
 
         ##
@@ -195,10 +196,11 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     def calculate(molgraph: MolecularGraph, histo: object) -> None: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SubstructureHistogramCalculator instance \a calc.
+    # \param self The \e %SubstructureHistogramCalculator instance this method is called upon.
+    # \param calc The \e %SubstructureHistogramCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: SubstructureHistogramCalculator) -> SubstructureHistogramCalculator: pass
 
     objectID = property(getObjectID)

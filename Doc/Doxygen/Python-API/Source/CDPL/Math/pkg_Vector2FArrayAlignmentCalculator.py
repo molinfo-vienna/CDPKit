@@ -51,10 +51,11 @@ class Vector2FArrayAlignmentCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param algo 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2FArrayAlignmentCalculator instance \a algo.
+    # \param self The \e %Vector2FArrayAlignmentCalculator instance this method is called upon.
+    # \param algo The \e %Vector2FArrayAlignmentCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(algo: Vector2FArrayAlignmentCalculator) -> Vector2FArrayAlignmentCalculator: pass
 
     ##

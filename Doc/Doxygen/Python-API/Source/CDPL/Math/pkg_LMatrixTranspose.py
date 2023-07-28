@@ -52,44 +52,51 @@ class LMatrixTranspose(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param self The \e %LMatrixTranspose instance this method is called upon.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param self The \e %LMatrixTranspose instance this method is called upon.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param self The \e %LMatrixTranspose instance this method is called upon.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param self The \e %LMatrixTranspose instance this method is called upon.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULMatrixExpression) -> LMatrixTranspose: pass
 
     ##
-    # \brief 
-    # \param mt 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrixTranspose instance \a mt.
+    # \param self The \e %LMatrixTranspose instance this method is called upon.
+    # \param mt The \e %LMatrixTranspose instance to copy.
+    # \return \a self
+    # 
     def assign(mt: LMatrixTranspose) -> LMatrixTranspose: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %LMatrixTranspose instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

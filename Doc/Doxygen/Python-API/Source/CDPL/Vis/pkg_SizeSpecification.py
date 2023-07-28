@@ -57,10 +57,11 @@ class SizeSpecification(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param spec 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SizeSpecification instance \a spec.
+    # \param self The \e %SizeSpecification instance this method is called upon.
+    # \param spec The \e %SizeSpecification instance to copy.
+    # \return \a self
+    # 
     def assign(spec: SizeSpecification) -> SizeSpecification: pass
 
     ##

@@ -76,10 +76,11 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param frag 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %CanonicalFragment instance \a frag.
+    # \param self The \e %CanonicalFragment instance this method is called upon.
+    # \param frag The \e %CanonicalFragment instance to copy.
+    # \return \a self
+    # 
     def assign(frag: CanonicalFragment) -> CanonicalFragment: pass
 
     ##

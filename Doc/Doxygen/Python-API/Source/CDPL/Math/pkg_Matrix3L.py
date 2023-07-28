@@ -99,44 +99,51 @@ class Matrix3L(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param self The \e %Matrix3L instance this method is called upon.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFMatrixExpression) -> Matrix3L: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param self The \e %Matrix3L instance this method is called upon.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDMatrixExpression) -> Matrix3L: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param self The \e %Matrix3L instance this method is called upon.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLMatrixExpression) -> Matrix3L: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param self The \e %Matrix3L instance this method is called upon.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULMatrixExpression) -> Matrix3L: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Matrix3L instance \a m.
+    # \param self The \e %Matrix3L instance this method is called upon.
+    # \param m The \e %Matrix3L instance to copy.
+    # \return \a self
+    # 
     def assign(m: Matrix3L) -> Matrix3L: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %Matrix3L instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

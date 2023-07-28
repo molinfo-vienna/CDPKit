@@ -97,10 +97,11 @@ class FRotationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FRotationMatrix instance \a m.
+    # \param self The \e %FRotationMatrix instance this method is called upon.
+    # \param m The \e %FRotationMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: FRotationMatrix) -> FRotationMatrix: pass
 
     ##

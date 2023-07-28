@@ -59,10 +59,11 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param typer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondDonorAtomTyper instance \a typer.
+    # \param self The \e %HBondDonorAtomTyper instance this method is called upon.
+    # \param typer The \e %HBondDonorAtomTyper instance to copy.
+    # \return \a self
+    # 
     def assign(typer: HBondDonorAtomTyper) -> HBondDonorAtomTyper: pass
 
     ##

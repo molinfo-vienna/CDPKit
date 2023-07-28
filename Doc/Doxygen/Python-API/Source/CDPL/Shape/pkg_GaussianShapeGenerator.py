@@ -51,10 +51,11 @@ class GaussianShapeGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeGenerator instance \a gen.
+    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
+    # \param gen The \e %GaussianShapeGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: GaussianShapeGenerator) -> GaussianShapeGenerator: pass
 
     ##

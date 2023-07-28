@@ -51,10 +51,11 @@ class FKabschAlgorithm(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param algo 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FKabschAlgorithm instance \a algo.
+    # \param self The \e %FKabschAlgorithm instance this method is called upon.
+    # \param algo The \e %FKabschAlgorithm instance to copy.
+    # \return \a self
+    # 
     def assign(algo: FKabschAlgorithm) -> FKabschAlgorithm: pass
 
     ##

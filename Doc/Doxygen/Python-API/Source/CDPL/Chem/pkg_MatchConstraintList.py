@@ -113,17 +113,19 @@ class MatchConstraintList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraintList instance \a array.
+    # \param self The \e %MatchConstraintList instance this method is called upon.
+    # \param array The \e %MatchConstraintList instance to copy.
+    # \return \a self
+    # 
     def assign(array: MatchConstraintList) -> MatchConstraintList: pass
 
     ##
-    # \brief 
-    # \param num_elem 
-    # \param value 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param self The \e %MatchConstraintList instance this method is called upon.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
+    # 
     def assign(num_elem: int, value: MatchConstraint) -> None: pass
 
     ##

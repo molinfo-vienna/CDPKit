@@ -50,10 +50,11 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param settings 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentSettings instance \a settings.
+        # \param self The \e %FragmentSettings instance this method is called upon.
+        # \param settings The \e %FragmentSettings instance to copy.
+        # \return \a self
+        # 
         def assign(settings: FragmentSettings) -> FragmentSettings: pass
 
         ##
@@ -184,10 +185,11 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param settings 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentConformerGeneratorSettings instance \a settings.
+    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
+    # \param settings The \e %FragmentConformerGeneratorSettings instance to copy.
+    # \return \a self
+    # 
     def assign(settings: FragmentConformerGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
 
     ##

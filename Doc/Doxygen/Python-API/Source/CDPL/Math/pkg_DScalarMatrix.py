@@ -99,10 +99,11 @@ class DScalarMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DScalarMatrix instance \a m.
+    # \param self The \e %DScalarMatrix instance this method is called upon.
+    # \param m The \e %DScalarMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: DScalarMatrix) -> DScalarMatrix: pass
 
     ##

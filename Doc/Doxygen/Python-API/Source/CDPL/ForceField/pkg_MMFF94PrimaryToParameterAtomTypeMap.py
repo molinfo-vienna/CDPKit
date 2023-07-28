@@ -69,10 +69,11 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param entry 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
+        # \param self The \e %Entry instance this method is called upon.
+        # \param entry The \e %Entry instance to copy.
+        # \return \a self
+        # 
         def assign(entry: Entry) -> Entry: pass
 
         ##
@@ -185,10 +186,11 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94PrimaryToParameterAtomTypeMap instance \a map.
+    # \param self The \e %MMFF94PrimaryToParameterAtomTypeMap instance this method is called upon.
+    # \param map The \e %MMFF94PrimaryToParameterAtomTypeMap instance to copy.
+    # \return \a self
+    # 
     def assign(map: MMFF94PrimaryToParameterAtomTypeMap) -> MMFF94PrimaryToParameterAtomTypeMap: pass
 
     ##

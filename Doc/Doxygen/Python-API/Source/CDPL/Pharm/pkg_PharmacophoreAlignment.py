@@ -47,8 +47,9 @@ class PharmacophoreAlignment(SpatialFeatureAlignment):
     def addFeatures(cntnr: FeatureContainer, first_set: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param alignment 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreAlignment instance \a alignment.
+    # \param self The \e %PharmacophoreAlignment instance this method is called upon.
+    # \param alignment The \e %PharmacophoreAlignment instance to copy.
+    # \return \a self
+    # 
     def assign(alignment: PharmacophoreAlignment) -> PharmacophoreAlignment: pass

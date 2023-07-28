@@ -121,10 +121,11 @@ class FScalarGrid(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \param g 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FScalarGrid instance \a g.
+    # \param self The \e %FScalarGrid instance this method is called upon.
+    # \param g The \e %FScalarGrid instance to copy.
+    # \return \a self
+    # 
     def assign(g: FScalarGrid) -> FScalarGrid: pass
 
     ##

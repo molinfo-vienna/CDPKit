@@ -97,10 +97,11 @@ class UIArray(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %UIArray instance \a array.
+    # \param self The \e %UIArray instance this method is called upon.
+    # \param array The \e %UIArray instance to copy.
+    # \return \a self
+    # 
     def assign(array: UIArray) -> UIArray: pass
 
     ##

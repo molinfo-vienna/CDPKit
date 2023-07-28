@@ -72,10 +72,11 @@ class Rectangle2D(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param rect 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Rectangle2D instance \a rect.
+    # \param self The \e %Rectangle2D instance this method is called upon.
+    # \param rect The \e %Rectangle2D instance to copy.
+    # \return \a self
+    # 
     def assign(rect: Rectangle2D) -> Rectangle2D: pass
 
     ##

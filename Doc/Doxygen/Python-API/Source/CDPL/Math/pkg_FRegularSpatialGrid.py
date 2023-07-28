@@ -450,31 +450,35 @@ class FRegularSpatialGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
+    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
+    # \param e The \e %ConstFGridExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
+    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
+    # \param e The \e %ConstDGridExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDGridExpression) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
+    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
+    # \param e The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(e: object) -> FRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \param g 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularSpatialGrid instance \a g.
+    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
+    # \param g The \e %FRegularSpatialGrid instance to copy.
+    # \return \a self
+    # 
     def assign(g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
 
     ##

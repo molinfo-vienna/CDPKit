@@ -59,44 +59,51 @@ class ULMatrixColumn(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
+    # \param self The \e %ULMatrixColumn instance this method is called upon.
+    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFVectorExpression) -> ULMatrixColumn: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
+    # \param self The \e %ULMatrixColumn instance this method is called upon.
+    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDVectorExpression) -> ULMatrixColumn: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
+    # \param self The \e %ULMatrixColumn instance this method is called upon.
+    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLVectorExpression) -> ULMatrixColumn: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
+    # \param self The \e %ULMatrixColumn instance this method is called upon.
+    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULVectorExpression) -> ULMatrixColumn: pass
 
     ##
-    # \brief 
-    # \param c 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixColumn instance \a c.
+    # \param self The \e %ULMatrixColumn instance this method is called upon.
+    # \param c The \e %ULMatrixColumn instance to copy.
+    # \return \a self
+    # 
     def assign(c: ULMatrixColumn) -> ULMatrixColumn: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %ULMatrixColumn instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

@@ -243,10 +243,11 @@ class DataFormat(Boost.Python.instance):
     def getFileExtensions() -> FileExtensionSequence: pass
 
     ##
-    # \brief 
-    # \param fmt 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DataFormat instance \a fmt.
+    # \param self The \e %DataFormat instance this method is called upon.
+    # \param fmt The \e %DataFormat instance to copy.
+    # \return \a self
+    # 
     def assign(fmt: DataFormat) -> DataFormat: pass
 
     ##

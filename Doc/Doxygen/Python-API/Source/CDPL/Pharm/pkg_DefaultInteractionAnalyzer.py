@@ -37,8 +37,9 @@ class DefaultInteractionAnalyzer(InteractionAnalyzer):
     def __init__(analyzer: DefaultInteractionAnalyzer) -> None: pass
 
     ##
-    # \brief 
-    # \param analyzer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DefaultInteractionAnalyzer instance \a analyzer.
+    # \param self The \e %DefaultInteractionAnalyzer instance this method is called upon.
+    # \param analyzer The \e %DefaultInteractionAnalyzer instance to copy.
+    # \return \a self
+    # 
     def assign(analyzer: DefaultInteractionAnalyzer) -> DefaultInteractionAnalyzer: pass

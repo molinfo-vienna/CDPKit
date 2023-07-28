@@ -41,8 +41,9 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
     def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
-    # \brief 
-    # \param expr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionComponentGroupingMatchExpression instance \a expr.
+    # \param self The \e %ReactionComponentGroupingMatchExpression instance this method is called upon.
+    # \param expr The \e %ReactionComponentGroupingMatchExpression instance to copy.
+    # \return \a self
+    # 
     def assign(expr: ReactionComponentGroupingMatchExpression) -> ReactionComponentGroupingMatchExpression: pass

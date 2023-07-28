@@ -58,10 +58,11 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94EnergyCalculator instance \a calc.
+    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
+    # \param calc The \e %MMFF94EnergyCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: MMFF94EnergyCalculator) -> MMFF94EnergyCalculator: pass
 
     ##

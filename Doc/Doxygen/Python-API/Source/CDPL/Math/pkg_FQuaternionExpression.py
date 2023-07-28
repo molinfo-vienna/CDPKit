@@ -31,44 +31,51 @@ class FQuaternionExpression(ConstFQuaternionExpression):
     def swap(e: FQuaternionExpression) -> None: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionExpression instance \a e.
+    # \param self The \e %FQuaternionExpression instance this method is called upon.
+    # \param e The \e %FQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: FQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
+    # \param self The \e %FQuaternionExpression instance this method is called upon.
+    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
+    # \param self The \e %FQuaternionExpression instance this method is called upon.
+    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
+    # \param self The \e %FQuaternionExpression instance this method is called upon.
+    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
+    # \param self The \e %FQuaternionExpression instance this method is called upon.
+    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULQuaternionExpression) -> FQuaternionExpression: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %FQuaternionExpression instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

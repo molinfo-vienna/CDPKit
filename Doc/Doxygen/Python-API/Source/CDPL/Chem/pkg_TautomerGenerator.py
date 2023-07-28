@@ -156,10 +156,11 @@ class TautomerGenerator(Boost.Python.instance):
     def generate(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TautomerGenerator instance \a gen.
+    # \param self The \e %TautomerGenerator instance this method is called upon.
+    # \param gen The \e %TautomerGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: TautomerGenerator) -> TautomerGenerator: pass
 
     objectID = property(getObjectID)

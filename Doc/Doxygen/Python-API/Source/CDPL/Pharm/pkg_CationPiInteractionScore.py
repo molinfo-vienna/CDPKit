@@ -87,10 +87,11 @@ class CationPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %CationPiInteractionScore instance \a constr.
+    # \param self The \e %CationPiInteractionScore instance this method is called upon.
+    # \param constr The \e %CationPiInteractionScore instance to copy.
+    # \return \a self
+    # 
     def assign(constr: CationPiInteractionScore) -> CationPiInteractionScore: pass
 
     minDistance = property(getMinDistance)

@@ -52,38 +52,43 @@ class DVectorQuaternionAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
+    # \param self The \e %DVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
+    # \param self The \e %DVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
+    # \param self The \e %DVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
+    # \param self The \e %DVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULQuaternionExpression) -> DVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param a 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorQuaternionAdapter instance \a a.
+    # \param self The \e %DVectorQuaternionAdapter instance this method is called upon.
+    # \param a The \e %DVectorQuaternionAdapter instance to copy.
+    # \return \a self
+    # 
     def assign(a: DVectorQuaternionAdapter) -> DVectorQuaternionAdapter: pass
 
     ##

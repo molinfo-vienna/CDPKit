@@ -52,38 +52,43 @@ class ULVectorQuaternionAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
+    # \param self The \e %ULVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
+    # \param self The \e %ULVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
+    # \param self The \e %ULVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
+    # \param self The \e %ULVectorQuaternionAdapter instance this method is called upon.
+    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULQuaternionExpression) -> ULVectorQuaternionAdapter: pass
 
     ##
-    # \brief 
-    # \param a 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVectorQuaternionAdapter instance \a a.
+    # \param self The \e %ULVectorQuaternionAdapter instance this method is called upon.
+    # \param a The \e %ULVectorQuaternionAdapter instance to copy.
+    # \return \a self
+    # 
     def assign(a: ULVectorQuaternionAdapter) -> ULVectorQuaternionAdapter: pass
 
     ##

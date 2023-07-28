@@ -98,10 +98,11 @@ class FZeroMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FZeroMatrix instance \a m.
+    # \param self The \e %FZeroMatrix instance this method is called upon.
+    # \param m The \e %FZeroMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: FZeroMatrix) -> FZeroMatrix: pass
 
     ##

@@ -180,10 +180,11 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def extract(cntr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
 
     ##
-    # \brief 
-    # \param extractor 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SurfaceAtomExtractor instance \a extractor.
+    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
+    # \param extractor The \e %SurfaceAtomExtractor instance to copy.
+    # \return \a self
+    # 
     def assign(extractor: SurfaceAtomExtractor) -> SurfaceAtomExtractor: pass
 
     objectID = property(getObjectID)

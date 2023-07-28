@@ -58,10 +58,11 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomAutoCorrelation3DVectorCalculator instance \a calc.
+    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
+    # \param calc The \e %AtomAutoCorrelation3DVectorCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: AtomAutoCorrelation3DVectorCalculator) -> AtomAutoCorrelation3DVectorCalculator: pass
 
     ##

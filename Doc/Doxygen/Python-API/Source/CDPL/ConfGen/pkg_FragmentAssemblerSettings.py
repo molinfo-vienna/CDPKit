@@ -56,10 +56,11 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param settings 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentAssemblerSettings instance \a settings.
+    # \param self The \e %FragmentAssemblerSettings instance this method is called upon.
+    # \param settings The \e %FragmentAssemblerSettings instance to copy.
+    # \return \a self
+    # 
     def assign(settings: FragmentAssemblerSettings) -> FragmentAssemblerSettings: pass
 
     ##

@@ -78,10 +78,11 @@ class MMFF94BondTyper(Boost.Python.instance):
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param typer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondTyper instance \a typer.
+    # \param self The \e %MMFF94BondTyper instance this method is called upon.
+    # \param typer The \e %MMFF94BondTyper instance to copy.
+    # \return \a self
+    # 
     def assign(typer: MMFF94BondTyper) -> MMFF94BondTyper: pass
 
     ##

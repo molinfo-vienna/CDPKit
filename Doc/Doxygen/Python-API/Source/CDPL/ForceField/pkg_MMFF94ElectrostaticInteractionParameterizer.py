@@ -105,10 +105,11 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
+    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
+    # \param parameterizer The \e %MMFF94ElectrostaticInteractionParameterizer instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> MMFF94ElectrostaticInteractionParameterizer: pass
 
     ##

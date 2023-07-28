@@ -50,10 +50,11 @@ class ElectronSystem(AtomContainer):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param elec_sys 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ElectronSystem instance \a elec_sys.
+    # \param self The \e %ElectronSystem instance this method is called upon.
+    # \param elec_sys The \e %ElectronSystem instance to copy.
+    # \return \a self
+    # 
     def assign(elec_sys: ElectronSystem) -> ElectronSystem: pass
 
     ##

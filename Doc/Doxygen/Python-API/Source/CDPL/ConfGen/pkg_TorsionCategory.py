@@ -143,10 +143,11 @@ class TorsionCategory(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param cat 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionCategory instance \a cat.
+    # \param self The \e %TorsionCategory instance this method is called upon.
+    # \param cat The \e %TorsionCategory instance to copy.
+    # \return \a self
+    # 
     def assign(cat: TorsionCategory) -> TorsionCategory: pass
 
     ##

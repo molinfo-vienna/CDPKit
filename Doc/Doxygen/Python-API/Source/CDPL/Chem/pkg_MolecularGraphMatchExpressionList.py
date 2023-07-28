@@ -97,10 +97,11 @@ class MolecularGraphMatchExpressionList(MolecularGraphMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraphMatchExpressionList instance \a array.
+    # \param self The \e %MolecularGraphMatchExpressionList instance this method is called upon.
+    # \param array The \e %MolecularGraphMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(array: MolecularGraphMatchExpressionList) -> MolecularGraphMatchExpressionList: pass
 
     ##

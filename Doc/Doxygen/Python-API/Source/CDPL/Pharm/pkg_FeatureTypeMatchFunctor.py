@@ -45,10 +45,11 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureTypeMatchFunctor instance \a func.
+    # \param self The \e %FeatureTypeMatchFunctor instance this method is called upon.
+    # \param func The \e %FeatureTypeMatchFunctor instance to copy.
+    # \return \a self
+    # 
     def assign(func: FeatureTypeMatchFunctor) -> FeatureTypeMatchFunctor: pass
 
     ##

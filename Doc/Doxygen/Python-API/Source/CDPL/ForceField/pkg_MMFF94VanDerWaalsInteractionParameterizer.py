@@ -84,10 +84,11 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
+    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
+    # \param parameterizer The \e %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 
     ##

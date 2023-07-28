@@ -78,44 +78,51 @@ class FMatrixSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param self The \e %FMatrixSlice instance this method is called upon.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param self The \e %FMatrixSlice instance this method is called upon.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param self The \e %FMatrixSlice instance this method is called upon.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param self The \e %FMatrixSlice instance this method is called upon.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULMatrixExpression) -> FMatrixSlice: pass
 
     ##
-    # \brief 
-    # \param s 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FMatrixSlice instance \a s.
+    # \param self The \e %FMatrixSlice instance this method is called upon.
+    # \param s The \e %FMatrixSlice instance to copy.
+    # \return \a self
+    # 
     def assign(s: FMatrixSlice) -> FMatrixSlice: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %FMatrixSlice instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

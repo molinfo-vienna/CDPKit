@@ -82,31 +82,35 @@ class DRegularGrid(DSpatialGrid, CDPL.Math.DRegularSpatialGrid):
     def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
+    # \param self The \e %DRegularGrid instance this method is called upon.
+    # \param e The \e %ConstFGridExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
+    # \param self The \e %DRegularGrid instance this method is called upon.
+    # \param e The \e %ConstDGridExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
+    # \param self The \e %DRegularGrid instance this method is called upon.
+    # \param e The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(e: object) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
-    # \brief 
-    # \param g 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularSpatialGrid instance \a g.
+    # \param self The \e %DRegularGrid instance this method is called upon.
+    # \param g The \e %DRegularSpatialGrid instance to copy.
+    # \return \a self
+    # 
     def assign(g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##

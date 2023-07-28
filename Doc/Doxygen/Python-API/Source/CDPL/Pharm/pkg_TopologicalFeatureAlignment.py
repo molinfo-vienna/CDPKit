@@ -122,10 +122,11 @@ class TopologicalFeatureAlignment(Boost.Python.instance):
     def nextAlignment(mapping: CDPL.Util.STPairArray) -> bool: pass
 
     ##
-    # \brief 
-    # \param alignment 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TopologicalFeatureAlignment instance \a alignment.
+    # \param self The \e %TopologicalFeatureAlignment instance this method is called upon.
+    # \param alignment The \e %TopologicalFeatureAlignment instance to copy.
+    # \return \a self
+    # 
     def assign(alignment: TopologicalFeatureAlignment) -> TopologicalFeatureAlignment: pass
 
     objectID = property(getObjectID)

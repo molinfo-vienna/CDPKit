@@ -97,10 +97,11 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
     def getRIJPow7() -> float: pass
 
     ##
-    # \brief 
-    # \param iactn 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteraction instance \a iactn.
+    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
+    # \param iactn The \e %MMFF94VanDerWaalsInteraction instance to copy.
+    # \return \a self
+    # 
     def assign(iactn: MMFF94VanDerWaalsInteraction) -> MMFF94VanDerWaalsInteraction: pass
 
     ##

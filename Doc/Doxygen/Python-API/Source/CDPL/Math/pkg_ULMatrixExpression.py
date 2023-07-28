@@ -31,44 +31,51 @@ class ULMatrixExpression(ConstULMatrixExpression):
     def swap(e: ULMatrixExpression) -> None: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixExpression instance \a e.
+    # \param self The \e %ULMatrixExpression instance this method is called upon.
+    # \param e The \e %ULMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param self The \e %ULMatrixExpression instance this method is called upon.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param self The \e %ULMatrixExpression instance this method is called upon.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param self The \e %ULMatrixExpression instance this method is called upon.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param self The \e %ULMatrixExpression instance this method is called upon.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULMatrixExpression) -> ULMatrixExpression: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %ULMatrixExpression instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

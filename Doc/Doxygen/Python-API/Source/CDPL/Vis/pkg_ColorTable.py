@@ -68,10 +68,11 @@ class ColorTable(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ColorTable instance \a map.
+    # \param self The \e %ColorTable instance this method is called upon.
+    # \param map The \e %ColorTable instance to copy.
+    # \return \a self
+    # 
     def assign(map: ColorTable) -> ColorTable: pass
 
     ##

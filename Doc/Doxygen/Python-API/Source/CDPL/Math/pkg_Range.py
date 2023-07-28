@@ -77,10 +77,11 @@ class Range(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief 
-    # \param r 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Range instance \a r.
+    # \param self The \e %Range instance this method is called upon.
+    # \param r The \e %Range instance to copy.
+    # \return \a self
+    # 
     def assign(r: Range) -> Range: pass
 
     ##

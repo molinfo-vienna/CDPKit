@@ -120,10 +120,11 @@ class FZeroGrid(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \param g 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FZeroGrid instance \a g.
+    # \param self The \e %FZeroGrid instance this method is called upon.
+    # \param g The \e %FZeroGrid instance to copy.
+    # \return \a self
+    # 
     def assign(g: FZeroGrid) -> FZeroGrid: pass
 
     ##

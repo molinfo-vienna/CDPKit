@@ -153,10 +153,11 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94SymbolicToNumericAtomTypeMap instance \a map.
+    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
+    # \param map The \e %MMFF94SymbolicToNumericAtomTypeMap instance to copy.
+    # \return \a self
+    # 
     def assign(map: MMFF94SymbolicToNumericAtomTypeMap) -> MMFF94SymbolicToNumericAtomTypeMap: pass
 
     ##

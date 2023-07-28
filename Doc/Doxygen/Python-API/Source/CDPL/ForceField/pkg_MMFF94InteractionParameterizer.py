@@ -219,10 +219,11 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def setParameterSet(param_set: int) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94InteractionParameterizer instance \a parameterizer.
+    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
+    # \param parameterizer The \e %MMFF94InteractionParameterizer instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94InteractionParameterizer) -> MMFF94InteractionParameterizer: pass
 
     ##

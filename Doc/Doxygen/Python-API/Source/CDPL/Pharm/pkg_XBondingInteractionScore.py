@@ -105,10 +105,11 @@ class XBondingInteractionScore(FeatureInteractionScore):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondingInteractionScore instance \a constr.
+    # \param self The \e %XBondingInteractionScore instance this method is called upon.
+    # \param constr The \e %XBondingInteractionScore instance to copy.
+    # \return \a self
+    # 
     def assign(constr: XBondingInteractionScore) -> XBondingInteractionScore: pass
 
     minAXDistance = property(getMinAXDistance)

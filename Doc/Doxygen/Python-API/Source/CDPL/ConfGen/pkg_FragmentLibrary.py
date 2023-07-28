@@ -119,10 +119,11 @@ class FragmentLibrary(Boost.Python.instance):
     def save(os: CDPL.Base.OStream) -> None: pass
 
     ##
-    # \brief 
-    # \param lib 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibrary instance \a lib.
+    # \param self The \e %FragmentLibrary instance this method is called upon.
+    # \param lib The \e %FragmentLibrary instance to copy.
+    # \return \a self
+    # 
     def assign(lib: FragmentLibrary) -> FragmentLibrary: pass
 
     ##

@@ -58,10 +58,11 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
     def queryMode() -> bool: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePairDistanceMatchFunctor instance \a func.
+    # \param self The \e %FeaturePairDistanceMatchFunctor instance this method is called upon.
+    # \param func The \e %FeaturePairDistanceMatchFunctor instance to copy.
+    # \return \a self
+    # 
     def assign(func: FeaturePairDistanceMatchFunctor) -> FeaturePairDistanceMatchFunctor: pass
 
     ##

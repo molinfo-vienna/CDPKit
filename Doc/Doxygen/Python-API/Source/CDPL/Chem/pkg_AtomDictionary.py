@@ -77,10 +77,11 @@ class AtomDictionary(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param entry 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
+        # \param self The \e %Entry instance this method is called upon.
+        # \param entry The \e %Entry instance to copy.
+        # \return \a self
+        # 
         def assign(entry: Entry) -> Entry: pass
 
         ##
@@ -290,10 +291,11 @@ class AtomDictionary(Boost.Python.instance):
     def loadDefaults() -> None: pass
 
     ##
-    # \brief 
-    # \param dict 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomDictionary instance \a dict.
+    # \param self The \e %AtomDictionary instance this method is called upon.
+    # \param dict The \e %AtomDictionary instance to copy.
+    # \return \a self
+    # 
     def assign(dict: AtomDictionary) -> AtomDictionary: pass
 
     ##

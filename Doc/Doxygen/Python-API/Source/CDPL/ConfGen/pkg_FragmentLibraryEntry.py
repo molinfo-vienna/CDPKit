@@ -50,10 +50,11 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param entry 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibraryEntry instance \a entry.
+    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
+    # \param entry The \e %FragmentLibraryEntry instance to copy.
+    # \return \a self
+    # 
     def assign(entry: FragmentLibraryEntry) -> FragmentLibraryEntry: pass
 
     ##

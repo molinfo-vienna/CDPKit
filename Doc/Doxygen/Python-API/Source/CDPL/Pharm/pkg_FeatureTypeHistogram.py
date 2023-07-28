@@ -71,10 +71,11 @@ class FeatureTypeHistogram(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureTypeHistogram instance \a map.
+    # \param self The \e %FeatureTypeHistogram instance this method is called upon.
+    # \param map The \e %FeatureTypeHistogram instance to copy.
+    # \return \a self
+    # 
     def assign(map: FeatureTypeHistogram) -> FeatureTypeHistogram: pass
 
     ##

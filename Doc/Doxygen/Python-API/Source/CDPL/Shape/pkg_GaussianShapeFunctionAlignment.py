@@ -59,10 +59,11 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param res 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %Result instance \a res.
+        # \param self The \e %Result instance this method is called upon.
+        # \param res The \e %Result instance to copy.
+        # \return \a self
+        # 
         def assign(res: Result) -> Result: pass
 
         ##

@@ -78,10 +78,11 @@ class Slice(Boost.Python.instance):
     def getIndex(i: int) -> int: pass
 
     ##
-    # \brief 
-    # \param s 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Slice instance \a s.
+    # \param self The \e %Slice instance this method is called upon.
+    # \param s The \e %Slice instance to copy.
+    # \return \a self
+    # 
     def assign(s: ast.Slice) -> ast.Slice: pass
 
     ##

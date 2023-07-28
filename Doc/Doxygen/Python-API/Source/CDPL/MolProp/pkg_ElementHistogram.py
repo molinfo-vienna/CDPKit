@@ -71,10 +71,11 @@ class ElementHistogram(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ElementHistogram instance \a map.
+    # \param self The \e %ElementHistogram instance this method is called upon.
+    # \param map The \e %ElementHistogram instance to copy.
+    # \return \a self
+    # 
     def assign(map: ElementHistogram) -> ElementHistogram: pass
 
     ##

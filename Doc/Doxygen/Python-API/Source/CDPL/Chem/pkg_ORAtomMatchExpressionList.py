@@ -38,8 +38,9 @@ class ORAtomMatchExpressionList(AtomMatchExpressionList):
     def __init__(expr: ORAtomMatchExpressionList) -> None: pass
 
     ##
-    # \brief 
-    # \param expr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ORAtomMatchExpressionList instance \a expr.
+    # \param self The \e %ORAtomMatchExpressionList instance this method is called upon.
+    # \param expr The \e %ORAtomMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(expr: ORAtomMatchExpressionList) -> ORAtomMatchExpressionList: pass

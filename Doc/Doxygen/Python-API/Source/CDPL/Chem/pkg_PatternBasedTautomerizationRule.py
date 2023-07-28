@@ -43,10 +43,11 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         def __init__(bond_chg: BondOrderChange) -> None: pass
 
         ##
-        # \brief 
-        # \param bond_chg 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %BondOrderChange instance \a bond_chg.
+        # \param self The \e %BondOrderChange instance this method is called upon.
+        # \param bond_chg The \e %BondOrderChange instance to copy.
+        # \return \a self
+        # 
         def assign(bond_chg: BondOrderChange) -> BondOrderChange: pass
 
         ##
@@ -134,10 +135,11 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def clearExcludePatterns() -> None: pass
 
     ##
-    # \brief 
-    # \param rule 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternBasedTautomerizationRule instance \a rule.
+    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
+    # \param rule The \e %PatternBasedTautomerizationRule instance to copy.
+    # \return \a self
+    # 
     def assign(rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass
 
     objectID = property(getObjectID)

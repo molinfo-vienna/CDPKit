@@ -50,10 +50,11 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param data 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %ResonanceStructureGenerator instance \a data.
+        # \param self The \e %StructureData instance this method is called upon.
+        # \param data The \e %ResonanceStructureGenerator instance to copy.
+        # \return \a self
+        # 
         def assign(data: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 
         ##
@@ -100,10 +101,11 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ResonanceStructureGenerator instance \a gen.
+    # \param self The \e %ResonanceStructureGenerator instance this method is called upon.
+    # \param gen The \e %ResonanceStructureGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: ResonanceStructureGenerator) -> ResonanceStructureGenerator: pass
 
     ##

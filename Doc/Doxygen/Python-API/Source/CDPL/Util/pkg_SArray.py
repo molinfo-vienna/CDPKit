@@ -97,10 +97,11 @@ class SArray(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SArray instance \a array.
+    # \param self The \e %SArray instance this method is called upon.
+    # \param array The \e %SArray instance to copy.
+    # \return \a self
+    # 
     def assign(array: SArray) -> SArray: pass
 
     ##

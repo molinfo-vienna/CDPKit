@@ -31,44 +31,51 @@ class LVectorExpression(ConstLVectorExpression):
     def swap(e: LVectorExpression) -> None: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a e.
+    # \param self The \e %LVectorExpression instance this method is called upon.
+    # \param e The \e %LVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
+    # \param self The \e %LVectorExpression instance this method is called upon.
+    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
+    # \param self The \e %LVectorExpression instance this method is called upon.
+    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
+    # \param self The \e %LVectorExpression instance this method is called upon.
+    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
+    # \param self The \e %LVectorExpression instance this method is called upon.
+    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULVectorExpression) -> LVectorExpression: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %LVectorExpression instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

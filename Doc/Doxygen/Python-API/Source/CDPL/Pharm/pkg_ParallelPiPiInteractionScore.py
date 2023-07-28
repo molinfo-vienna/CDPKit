@@ -98,10 +98,11 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionScore instance \a constr.
+    # \param self The \e %ParallelPiPiInteractionScore instance this method is called upon.
+    # \param constr The \e %ParallelPiPiInteractionScore instance to copy.
+    # \return \a self
+    # 
     def assign(constr: ParallelPiPiInteractionScore) -> ParallelPiPiInteractionScore: pass
 
     minVDistance = property(getMinVDistance)

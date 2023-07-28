@@ -75,10 +75,11 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     def getRadiusScalingFactor() -> float: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GeneralizedBellAtomDensity instance \a func.
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    # \param func The \e %GeneralizedBellAtomDensity instance to copy.
+    # \return \a self
+    # 
     def assign(func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
 
     ##

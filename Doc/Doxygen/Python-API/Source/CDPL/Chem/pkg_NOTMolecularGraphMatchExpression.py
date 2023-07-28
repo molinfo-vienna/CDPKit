@@ -39,8 +39,9 @@ class NOTMolecularGraphMatchExpression(MolecularGraphMatchExpression):
     def __init__(expr_ptr: MolecularGraphMatchExpression) -> None: pass
 
     ##
-    # \brief 
-    # \param expression 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %NOTMolecularGraphMatchExpression instance \a expression.
+    # \param self The \e %NOTMolecularGraphMatchExpression instance this method is called upon.
+    # \param expression The \e %NOTMolecularGraphMatchExpression instance to copy.
+    # \return \a self
+    # 
     def assign(expression: NOTMolecularGraphMatchExpression) -> NOTMolecularGraphMatchExpression: pass

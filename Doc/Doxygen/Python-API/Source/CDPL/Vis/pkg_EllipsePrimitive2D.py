@@ -42,10 +42,11 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
     def __init__(prim: EllipsePrimitive2D) -> None: pass
 
     ##
-    # \brief 
-    # \param prim 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %EllipsePrimitive2D instance \a prim.
+    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
+    # \param prim The \e %EllipsePrimitive2D instance to copy.
+    # \return \a self
+    # 
     def assign(prim: EllipsePrimitive2D) -> EllipsePrimitive2D: pass
 
     ##

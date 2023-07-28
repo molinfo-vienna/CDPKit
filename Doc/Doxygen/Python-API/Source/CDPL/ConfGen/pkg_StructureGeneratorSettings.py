@@ -56,10 +56,11 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param settings 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %StructureGeneratorSettings instance \a settings.
+    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
+    # \param settings The \e %StructureGeneratorSettings instance to copy.
+    # \return \a self
+    # 
     def assign(settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
 
     ##

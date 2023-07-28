@@ -60,10 +60,11 @@ class FMLRModel(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param model 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FMLRModel instance \a model.
+    # \param self The \e %FMLRModel instance this method is called upon.
+    # \param model The \e %FMLRModel instance to copy.
+    # \return \a self
+    # 
     def assign(model: FMLRModel) -> FMLRModel: pass
 
     ##

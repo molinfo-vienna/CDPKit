@@ -79,10 +79,11 @@ class BitSet(Boost.Python.instance):
     def swap(bs: BitSet) -> None: pass
 
     ##
-    # \brief 
-    # \param bs 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %BitSet instance \a bs.
+    # \param self The \e %BitSet instance this method is called upon.
+    # \param bs The \e %BitSet instance to copy.
+    # \return \a self
+    # 
     def assign(bs: BitSet) -> BitSet: pass
 
     ##

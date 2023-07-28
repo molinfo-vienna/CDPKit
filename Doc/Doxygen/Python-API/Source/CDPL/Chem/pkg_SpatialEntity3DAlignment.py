@@ -188,10 +188,11 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     def getTransform() -> CDPL.Math.Matrix4D: pass
 
     ##
-    # \brief 
-    # \param alignment 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialEntity3DAlignment instance \a alignment.
+    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
+    # \param alignment The \e %SpatialEntity3DAlignment instance to copy.
+    # \return \a self
+    # 
     def assign(alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass
 
     ##

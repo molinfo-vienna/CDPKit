@@ -58,10 +58,11 @@ class FeatureDistanceScore(FeatureInteractionScore):
     def getMaxDistance() -> float: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceScore instance \a func.
+    # \param self The \e %FeatureDistanceScore instance this method is called upon.
+    # \param func The \e %FeatureDistanceScore instance to copy.
+    # \return \a self
+    # 
     def assign(func: FeatureDistanceScore) -> FeatureDistanceScore: pass
 
     minDistance = property(getMinDistance)

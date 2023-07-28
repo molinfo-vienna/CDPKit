@@ -98,10 +98,11 @@ class DGConstraintGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGenerator instance \a gen.
+    # \param self The \e %DGConstraintGenerator instance this method is called upon.
+    # \param gen The \e %DGConstraintGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: DGConstraintGenerator) -> DGConstraintGenerator: pass
 
     ##

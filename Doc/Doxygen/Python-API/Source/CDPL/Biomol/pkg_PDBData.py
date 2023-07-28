@@ -293,10 +293,11 @@ class PDBData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param data 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PDBData instance \a data.
+    # \param self The \e %PDBData instance this method is called upon.
+    # \param data The \e %PDBData instance to copy.
+    # \return \a self
+    # 
     def assign(data: PDBData) -> PDBData: pass
 
     ##

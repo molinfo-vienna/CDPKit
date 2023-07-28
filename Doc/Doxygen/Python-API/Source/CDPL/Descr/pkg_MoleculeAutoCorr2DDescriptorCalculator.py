@@ -73,10 +73,11 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
+    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance this method is called upon.
+    # \param calc The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: MoleculeAutoCorr2DDescriptorCalculator) -> MoleculeAutoCorr2DDescriptorCalculator: pass
 
     ##

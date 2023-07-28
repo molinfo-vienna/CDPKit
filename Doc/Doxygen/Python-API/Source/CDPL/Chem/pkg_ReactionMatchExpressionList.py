@@ -97,10 +97,11 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionMatchExpressionList instance \a array.
+    # \param self The \e %ReactionMatchExpressionList instance this method is called upon.
+    # \param array The \e %ReactionMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(array: ReactionMatchExpressionList) -> ReactionMatchExpressionList: pass
 
     ##

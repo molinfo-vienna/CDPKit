@@ -96,44 +96,51 @@ class ULQuaternion(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
+    # \param self The \e %ULQuaternion instance this method is called upon.
+    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
+    # \param self The \e %ULQuaternion instance this method is called upon.
+    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
+    # \param self The \e %ULQuaternion instance this method is called upon.
+    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
+    # \param self The \e %ULQuaternion instance this method is called upon.
+    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a q.
+    # \param self The \e %ULQuaternion instance this method is called upon.
+    # \param q The \e %ULQuaternion instance to copy.
+    # \return \a self
+    # 
     def assign(q: ULQuaternion) -> ULQuaternion: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %ULQuaternion instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

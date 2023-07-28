@@ -58,10 +58,11 @@ class PharmacophoreAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreAutoCorr3DDescriptorCalculator instance \a calc.
+    # \param self The \e %PharmacophoreAutoCorr3DDescriptorCalculator instance this method is called upon.
+    # \param calc The \e %PharmacophoreAutoCorr3DDescriptorCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: PharmacophoreAutoCorr3DDescriptorCalculator) -> PharmacophoreAutoCorr3DDescriptorCalculator: pass
 
     ##

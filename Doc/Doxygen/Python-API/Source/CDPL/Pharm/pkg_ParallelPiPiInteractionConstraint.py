@@ -99,10 +99,11 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionConstraint instance \a constr.
+    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
+    # \param constr The \e %ParallelPiPiInteractionConstraint instance to copy.
+    # \return \a self
+    # 
     def assign(constr: ParallelPiPiInteractionConstraint) -> ParallelPiPiInteractionConstraint: pass
 
     ##

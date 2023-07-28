@@ -60,10 +60,11 @@ class TorsionRule(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param entry 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %AngleEntry instance \a entry.
+        # \param self The \e %AngleEntry instance this method is called upon.
+        # \param entry The \e %AngleEntry instance to copy.
+        # \return \a self
+        # 
         def assign(entry: AngleEntry) -> AngleEntry: pass
 
         ##
@@ -127,10 +128,11 @@ class TorsionRule(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param rule 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRule instance \a rule.
+    # \param self The \e %TorsionRule instance this method is called upon.
+    # \param rule The \e %TorsionRule instance to copy.
+    # \return \a self
+    # 
     def assign(rule: TorsionRule) -> TorsionRule: pass
 
     ##

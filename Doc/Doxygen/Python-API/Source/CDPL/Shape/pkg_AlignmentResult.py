@@ -51,10 +51,11 @@ class AlignmentResult(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param res 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %AlignmentResult instance \a res.
+    # \param self The \e %AlignmentResult instance this method is called upon.
+    # \param res The \e %AlignmentResult instance to copy.
+    # \return \a self
+    # 
     def assign(res: AlignmentResult) -> AlignmentResult: pass
 
     ##

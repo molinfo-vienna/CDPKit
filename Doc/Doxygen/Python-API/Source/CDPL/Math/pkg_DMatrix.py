@@ -118,44 +118,51 @@ class DMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param self The \e %DMatrix instance this method is called upon.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param self The \e %DMatrix instance this method is called upon.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param self The \e %DMatrix instance this method is called upon.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param self The \e %DMatrix instance this method is called upon.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULMatrixExpression) -> DMatrix: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrix instance \a m.
+    # \param self The \e %DMatrix instance this method is called upon.
+    # \param m The \e %DMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: DMatrix) -> DMatrix: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %DMatrix instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

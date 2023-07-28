@@ -147,10 +147,11 @@ class Brush(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param brush 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Brush instance \a brush.
+    # \param self The \e %Brush instance this method is called upon.
+    # \param brush The \e %Brush instance to copy.
+    # \return \a self
+    # 
     def assign(brush: Brush) -> Brush: pass
 
     ##

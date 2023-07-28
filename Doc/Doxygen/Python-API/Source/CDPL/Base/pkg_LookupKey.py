@@ -58,10 +58,11 @@ class LookupKey(Boost.Python.instance):
     def getID() -> int: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LookupKey instance \a key.
+    # \param self The \e %LookupKey instance this method is called upon.
+    # \param key The \e %LookupKey instance to copy.
+    # \return \a self
+    # 
     def assign(key: LookupKey) -> LookupKey: pass
 
     ##

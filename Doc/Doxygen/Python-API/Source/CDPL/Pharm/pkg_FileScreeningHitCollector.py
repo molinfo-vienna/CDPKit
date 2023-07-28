@@ -52,10 +52,11 @@ class FileScreeningHitCollector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param collector 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FileScreeningHitCollector instance \a collector.
+    # \param self The \e %FileScreeningHitCollector instance this method is called upon.
+    # \param collector The \e %FileScreeningHitCollector instance to copy.
+    # \return \a self
+    # 
     def assign(collector: FileScreeningHitCollector) -> FileScreeningHitCollector: pass
 
     ##

@@ -100,10 +100,11 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     def getMaxAcceptorAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondingInteractionConstraint instance \a constr.
+    # \param self The \e %XBondingInteractionConstraint instance this method is called upon.
+    # \param constr The \e %XBondingInteractionConstraint instance to copy.
+    # \return \a self
+    # 
     def assign(constr: XBondingInteractionConstraint) -> XBondingInteractionConstraint: pass
 
     ##

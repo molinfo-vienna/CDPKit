@@ -99,10 +99,11 @@ class LScalarMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LScalarMatrix instance \a m.
+    # \param self The \e %LScalarMatrix instance this method is called upon.
+    # \param m The \e %LScalarMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: LScalarMatrix) -> LScalarMatrix: pass
 
     ##

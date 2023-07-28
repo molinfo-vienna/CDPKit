@@ -61,10 +61,11 @@ class PatternAtomTyper(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param ptn 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %Pattern instance \a ptn.
+        # \param self The \e %Pattern instance this method is called upon.
+        # \param ptn The \e %Pattern instance to copy.
+        # \return \a self
+        # 
         def assign(ptn: Pattern) -> Pattern: pass
 
         ##
@@ -211,10 +212,11 @@ class PatternAtomTyper(Boost.Python.instance):
     def execute(molgraph: MolecularGraph) -> None: pass
 
     ##
-    # \brief 
-    # \param typer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternAtomTyper instance \a typer.
+    # \param self The \e %PatternAtomTyper instance this method is called upon.
+    # \param typer The \e %PatternAtomTyper instance to copy.
+    # \return \a self
+    # 
     def assign(typer: PatternAtomTyper) -> PatternAtomTyper: pass
 
     objectID = property(getObjectID)

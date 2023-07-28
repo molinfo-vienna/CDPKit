@@ -95,10 +95,11 @@ class FRealQuaternion(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param q 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FRealQuaternion instance \a q.
+    # \param self The \e %FRealQuaternion instance this method is called upon.
+    # \param q The \e %FRealQuaternion instance to copy.
+    # \return \a self
+    # 
     def assign(q: FRealQuaternion) -> FRealQuaternion: pass
 
     ##

@@ -114,10 +114,11 @@ class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
     def setParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
+    # \param self The \e %MMFF94AngleBendingInteractionParameterizer instance this method is called upon.
+    # \param parameterizer The \e %MMFF94AngleBendingInteractionParameterizer instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94AngleBendingInteractionParameterizer) -> MMFF94AngleBendingInteractionParameterizer: pass
 
     ##

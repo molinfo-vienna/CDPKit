@@ -99,10 +99,11 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %OrthogonalPiPiInteractionConstraint instance \a constr.
+    # \param self The \e %OrthogonalPiPiInteractionConstraint instance this method is called upon.
+    # \param constr The \e %OrthogonalPiPiInteractionConstraint instance to copy.
+    # \return \a self
+    # 
     def assign(constr: OrthogonalPiPiInteractionConstraint) -> OrthogonalPiPiInteractionConstraint: pass
 
     ##

@@ -97,10 +97,11 @@ class FragmentList(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentList instance \a array.
+    # \param self The \e %FragmentList instance this method is called upon.
+    # \param array The \e %FragmentList instance to copy.
+    # \return \a self
+    # 
     def assign(array: FragmentList) -> FragmentList: pass
 
     ##

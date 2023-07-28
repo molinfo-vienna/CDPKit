@@ -39,8 +39,9 @@ class BondReactionCenterStatusMatchExpression(BondMatchExpression):
     def __init__(status: int) -> None: pass
 
     ##
-    # \brief 
-    # \param expr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondReactionCenterStatusMatchExpression instance \a expr.
+    # \param self The \e %BondReactionCenterStatusMatchExpression instance this method is called upon.
+    # \param expr The \e %BondReactionCenterStatusMatchExpression instance to copy.
+    # \return \a self
+    # 
     def assign(expr: BondReactionCenterStatusMatchExpression) -> BondReactionCenterStatusMatchExpression: pass

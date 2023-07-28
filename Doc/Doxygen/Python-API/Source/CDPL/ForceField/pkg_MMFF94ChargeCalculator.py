@@ -108,10 +108,11 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ChargeCalculator instance \a parameterizer.
+    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
+    # \param parameterizer The \e %MMFF94ChargeCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94ChargeCalculator) -> MMFF94ChargeCalculator: pass
 
     ##

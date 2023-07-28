@@ -51,10 +51,11 @@ class TanimotoComboScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param score 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TanimotoComboScore instance \a score.
+    # \param self The \e %TanimotoComboScore instance this method is called upon.
+    # \param score The \e %TanimotoComboScore instance to copy.
+    # \return \a self
+    # 
     def assign(score: TanimotoComboScore) -> TanimotoComboScore: pass
 
     ##

@@ -89,10 +89,11 @@ class MatchConstraint(Boost.Python.instance):
     def __init__(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraint instance \a constr.
+    # \param self The \e %MatchConstraint instance this method is called upon.
+    # \param constr The \e %MatchConstraint instance to copy.
+    # \return \a self
+    # 
     def assign(constr: MatchConstraint) -> MatchConstraint: pass
 
     ##

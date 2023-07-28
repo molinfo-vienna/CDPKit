@@ -99,10 +99,11 @@ class BondMatchExpressionList(BondMatchExpression):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMatchExpressionList instance \a array.
+    # \param self The \e %BondMatchExpressionList instance this method is called upon.
+    # \param array The \e %BondMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(array: BondMatchExpressionList) -> BondMatchExpressionList: pass
 
     ##

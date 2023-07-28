@@ -179,10 +179,11 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     def setRandomSeed(seed: int) -> None: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PrincipalAxesAlignmentStartGenerator instance \a gen.
+    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
+    # \param gen The \e %PrincipalAxesAlignmentStartGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: PrincipalAxesAlignmentStartGenerator) -> PrincipalAxesAlignmentStartGenerator: pass
 
     symmetryThreshold = property(getSymmetryThreshold, setSymmetryThreshold)

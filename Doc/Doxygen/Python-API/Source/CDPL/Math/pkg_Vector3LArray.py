@@ -104,10 +104,11 @@ class Vector3LArray(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3LArray instance \a array.
+    # \param self The \e %Vector3LArray instance this method is called upon.
+    # \param array The \e %Vector3LArray instance to copy.
+    # \return \a self
+    # 
     def assign(array: Vector3LArray) -> Vector3LArray: pass
 
     ##
@@ -121,9 +122,11 @@ class Vector3LArray(Boost.Python.instance):
     def assign(num_elem: int, value: Vector3L) -> None: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %Vector3LArray instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

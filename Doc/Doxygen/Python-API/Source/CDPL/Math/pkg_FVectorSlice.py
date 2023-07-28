@@ -65,44 +65,51 @@ class FVectorSlice(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
+    # \param self The \e %FVectorSlice instance this method is called upon.
+    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
+    # \param self The \e %FVectorSlice instance this method is called upon.
+    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
+    # \param self The \e %FVectorSlice instance this method is called upon.
+    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstLVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
+    # \param self The \e %FVectorSlice instance this method is called upon.
+    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstULVectorExpression) -> FVectorSlice: pass
 
     ##
-    # \brief 
-    # \param s 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FVectorSlice instance \a s.
+    # \param self The \e %FVectorSlice instance this method is called upon.
+    # \param s The \e %FVectorSlice instance to copy.
+    # \return \a self
+    # 
     def assign(s: FVectorSlice) -> FVectorSlice: pass
 
     ##
-    # \brief 
-    # \param a 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param self The \e %FVectorSlice instance this method is called upon.
+    # \param a The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(a: object) -> None: pass
 
     ##

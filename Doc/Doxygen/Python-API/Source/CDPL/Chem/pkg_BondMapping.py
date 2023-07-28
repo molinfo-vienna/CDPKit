@@ -71,10 +71,11 @@ class BondMapping(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMapping instance \a map.
+    # \param self The \e %BondMapping instance this method is called upon.
+    # \param map The \e %BondMapping instance to copy.
+    # \return \a self
+    # 
     def assign(map: BondMapping) -> BondMapping: pass
 
     ##

@@ -71,10 +71,11 @@ class ProtonationStateStandardizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param standardizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ProtonationStateStandardizer instance \a standardizer.
+    # \param self The \e %ProtonationStateStandardizer instance this method is called upon.
+    # \param standardizer The \e %ProtonationStateStandardizer instance to copy.
+    # \return \a self
+    # 
     def assign(standardizer: ProtonationStateStandardizer) -> ProtonationStateStandardizer: pass
 
     ##

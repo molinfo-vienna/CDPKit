@@ -38,8 +38,9 @@ class ANDBondMatchExpressionList(BondMatchExpressionList):
     def __init__(expr: ANDBondMatchExpressionList) -> None: pass
 
     ##
-    # \brief 
-    # \param expr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ANDBondMatchExpressionList instance \a expr.
+    # \param self The \e %ANDBondMatchExpressionList instance this method is called upon.
+    # \param expr The \e %ANDBondMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(expr: ANDBondMatchExpressionList) -> ANDBondMatchExpressionList: pass

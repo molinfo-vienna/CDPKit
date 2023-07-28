@@ -66,10 +66,11 @@ class LogSCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LogSCalculator instance \a calc.
+    # \param self The \e %LogSCalculator instance this method is called upon.
+    # \param calc The \e %LogSCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: LogSCalculator) -> LogSCalculator: pass
 
     ##

@@ -98,10 +98,11 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     def getMaxAngle() -> float: pass
 
     ##
-    # \brief 
-    # \param constr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %OrthogonalPiPiInteractionScore instance \a constr.
+    # \param self The \e %OrthogonalPiPiInteractionScore instance this method is called upon.
+    # \param constr The \e %OrthogonalPiPiInteractionScore instance to copy.
+    # \return \a self
+    # 
     def assign(constr: OrthogonalPiPiInteractionScore) -> OrthogonalPiPiInteractionScore: pass
 
     minHDistance = property(getMinHDistance)

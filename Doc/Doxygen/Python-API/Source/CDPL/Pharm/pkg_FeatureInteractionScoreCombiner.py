@@ -41,8 +41,9 @@ class FeatureInteractionScoreCombiner(FeatureInteractionScore):
     def __init__(score1: FeatureInteractionScore, score2: FeatureInteractionScore, comb_func: DoubleDouble2Functor) -> None: pass
 
     ##
-    # \brief 
-    # \param con 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreCombiner instance \a con.
+    # \param self The \e %FeatureInteractionScoreCombiner instance this method is called upon.
+    # \param con The \e %FeatureInteractionScoreCombiner instance to copy.
+    # \return \a self
+    # 
     def assign(con: FeatureInteractionScoreCombiner) -> FeatureInteractionScoreCombiner: pass

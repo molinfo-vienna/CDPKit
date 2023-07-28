@@ -50,10 +50,11 @@ class GaussianShape(CDPL.Base.PropertyContainer):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param elem 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %Element instance \a elem.
+        # \param self The \e %Element instance this method is called upon.
+        # \param elem The \e %Element instance to copy.
+        # \return \a self
+        # 
         def assign(elem: Element) -> Element: pass
 
         ##
@@ -128,10 +129,11 @@ class GaussianShape(CDPL.Base.PropertyContainer):
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief 
-    # \param shape 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShape instance \a shape.
+    # \param self The \e %GaussianShape instance this method is called upon.
+    # \param shape The \e %GaussianShape instance to copy.
+    # \return \a self
+    # 
     def assign(shape: GaussianShape) -> GaussianShape: pass
 
     ##

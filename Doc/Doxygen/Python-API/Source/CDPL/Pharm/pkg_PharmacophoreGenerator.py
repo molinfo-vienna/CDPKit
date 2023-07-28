@@ -125,10 +125,11 @@ class PharmacophoreGenerator(Boost.Python.instance):
     def clearEnabledFeatures(self: int) -> bool: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreGenerator instance \a gen.
+    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
+    # \param gen The \e %PharmacophoreGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: PharmacophoreGenerator) -> PharmacophoreGenerator: pass
 
     objectID = property(getObjectID)

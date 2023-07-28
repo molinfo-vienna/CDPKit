@@ -68,10 +68,11 @@ class Line2D(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param line 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Line2D instance \a line.
+    # \param self The \e %Line2D instance this method is called upon.
+    # \param line The \e %Line2D instance to copy.
+    # \return \a self
+    # 
     def assign(line: Line2D) -> Line2D: pass
 
     ##

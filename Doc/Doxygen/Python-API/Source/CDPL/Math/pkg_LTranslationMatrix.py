@@ -95,10 +95,11 @@ class LTranslationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LTranslationMatrix instance \a m.
+    # \param self The \e %LTranslationMatrix instance this method is called upon.
+    # \param m The \e %LTranslationMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: LTranslationMatrix) -> LTranslationMatrix: pass
 
     ##

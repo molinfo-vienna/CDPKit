@@ -98,10 +98,11 @@ class DIdentityMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DIdentityMatrix instance \a m.
+    # \param self The \e %DIdentityMatrix instance this method is called upon.
+    # \param m The \e %DIdentityMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: DIdentityMatrix) -> DIdentityMatrix: pass
 
     ##

@@ -58,10 +58,11 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param rule 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentationRuler instance \a rule.
+        # \param self The \e %FragmentationRuler instance this method is called upon.
+        # \param rule The \e %FragmentationRuler instance to copy.
+        # \return \a self
+        # 
         def assign(rule: FragmentationRuler) -> FragmentationRuler: pass
 
         ##
@@ -132,10 +133,11 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param excl_ptn 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %ExcludePattern instance \a excl_ptn.
+        # \param self The \e %ExcludePattern instance this method is called upon.
+        # \param excl_ptn The \e %ExcludePattern instance to copy.
+        # \return \a self
+        # 
         def assign(excl_ptn: ExcludePattern) -> ExcludePattern: pass
 
         ##
@@ -224,10 +226,11 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param link 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLink instance \a link.
+        # \param self The \e %FragmentLink instance this method is called upon.
+        # \param link The \e %FragmentLink instance to copy.
+        # \return \a self
+        # 
         def assign(link: FragmentLink) -> FragmentLink: pass
 
         ##
@@ -306,10 +309,11 @@ class FragmentGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentGenerator instance \a gen.
+    # \param self The \e %FragmentGenerator instance this method is called upon.
+    # \param gen The \e %FragmentGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: FragmentGenerator) -> FragmentGenerator: pass
 
     ##

@@ -38,8 +38,9 @@ class ORMolecularGraphMatchExpressionList(MolecularGraphMatchExpressionList):
     def __init__(expr: ORMolecularGraphMatchExpressionList) -> None: pass
 
     ##
-    # \brief 
-    # \param expr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ORMolecularGraphMatchExpressionList instance \a expr.
+    # \param self The \e %ORMolecularGraphMatchExpressionList instance this method is called upon.
+    # \param expr The \e %ORMolecularGraphMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(expr: ORMolecularGraphMatchExpressionList) -> ORMolecularGraphMatchExpressionList: pass

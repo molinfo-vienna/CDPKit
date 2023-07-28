@@ -90,10 +90,11 @@ class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
     def setParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance \a parameterizer.
+    # \param self The \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance this method is called upon.
+    # \param parameterizer The \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94OutOfPlaneBendingInteractionParameterizer) -> MMFF94OutOfPlaneBendingInteractionParameterizer: pass
 
     ##

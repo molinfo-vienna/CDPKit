@@ -48,8 +48,9 @@ class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief 
-    # \param gen 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %NegIonizableFeatureGenerator instance \a gen.
+    # \param self The \e %NegIonizableFeatureGenerator instance this method is called upon.
+    # \param gen The \e %NegIonizableFeatureGenerator instance to copy.
+    # \return \a self
+    # 
     def assign(gen: NegIonizableFeatureGenerator) -> NegIonizableFeatureGenerator: pass

@@ -87,17 +87,19 @@ class MMFF94StretchBendInteractionData(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param array 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94StretchBendInteractionData instance \a array.
+    # \param self The \e %MMFF94StretchBendInteractionData instance this method is called upon.
+    # \param array The \e %MMFF94StretchBendInteractionData instance to copy.
+    # \return \a self
+    # 
     def assign(array: MMFF94StretchBendInteractionData) -> MMFF94StretchBendInteractionData: pass
 
     ##
-    # \brief 
-    # \param num_elem 
-    # \param value 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param self The \e %MMFF94StretchBendInteractionData instance this method is called upon.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
+    # 
     def assign(num_elem: int, value: MMFF94StretchBendInteraction) -> None: pass
 
     ##

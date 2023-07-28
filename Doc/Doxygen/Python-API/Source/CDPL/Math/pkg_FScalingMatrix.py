@@ -95,10 +95,11 @@ class FScalingMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FScalingMatrix instance \a m.
+    # \param self The \e %FScalingMatrix instance this method is called upon.
+    # \param m The \e %FScalingMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: FScalingMatrix) -> FScalingMatrix: pass
 
     ##

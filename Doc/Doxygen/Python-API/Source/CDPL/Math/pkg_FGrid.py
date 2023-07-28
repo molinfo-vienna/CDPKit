@@ -107,31 +107,35 @@ class FGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
+    # \param self The \e %FGrid instance this method is called upon.
+    # \param e The \e %ConstFGridExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstFGridExpression) -> FGrid: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
+    # \param self The \e %FGrid instance this method is called upon.
+    # \param e The \e %ConstDGridExpression instance to copy.
+    # \return \a self
+    # 
     def assign(e: ConstDGridExpression) -> FGrid: pass
 
     ##
-    # \brief 
-    # \param e 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
+    # \param self The \e %FGrid instance this method is called upon.
+    # \param e The \e %object instance to copy.
+    # \return \a self
+    # 
     def assign(e: object) -> FGrid: pass
 
     ##
-    # \brief 
-    # \param g 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FGrid instance \a g.
+    # \param self The \e %FGrid instance this method is called upon.
+    # \param g The \e %FGrid instance to copy.
+    # \return \a self
+    # 
     def assign(g: FGrid) -> FGrid: pass
 
     ##

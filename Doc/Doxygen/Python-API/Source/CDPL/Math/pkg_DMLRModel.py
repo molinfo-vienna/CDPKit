@@ -60,10 +60,11 @@ class DMLRModel(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param model 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DMLRModel instance \a model.
+    # \param self The \e %DMLRModel instance this method is called upon.
+    # \param model The \e %DMLRModel instance to copy.
+    # \return \a self
+    # 
     def assign(model: DMLRModel) -> DMLRModel: pass
 
     ##

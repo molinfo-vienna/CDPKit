@@ -52,10 +52,11 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomConformer3DCoordinatesFunctor instance \a func.
+    # \param self The \e %AtomConformer3DCoordinatesFunctor instance this method is called upon.
+    # \param func The \e %AtomConformer3DCoordinatesFunctor instance to copy.
+    # \return \a self
+    # 
     def assign(func: AtomConformer3DCoordinatesFunctor) -> AtomConformer3DCoordinatesFunctor: pass
 
     ##

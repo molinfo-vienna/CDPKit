@@ -122,10 +122,11 @@ class TopologicalAtomAlignment(Boost.Python.instance):
     def nextAlignment(mapping: CDPL.Util.STPairArray) -> bool: pass
 
     ##
-    # \brief 
-    # \param alignment 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TopologicalAtomAlignment instance \a alignment.
+    # \param self The \e %TopologicalAtomAlignment instance this method is called upon.
+    # \param alignment The \e %TopologicalAtomAlignment instance to copy.
+    # \return \a self
+    # 
     def assign(alignment: TopologicalAtomAlignment) -> TopologicalAtomAlignment: pass
 
     objectID = property(getObjectID)

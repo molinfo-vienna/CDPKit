@@ -62,10 +62,11 @@ class Font(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param font 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Font instance \a font.
+    # \param self The \e %Font instance this method is called upon.
+    # \param font The \e %Font instance to copy.
+    # \return \a self
+    # 
     def assign(font: Font) -> Font: pass
 
     ##

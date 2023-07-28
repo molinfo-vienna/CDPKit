@@ -38,8 +38,9 @@ class ORBondMatchExpressionList(BondMatchExpressionList):
     def __init__(expr: ORBondMatchExpressionList) -> None: pass
 
     ##
-    # \brief 
-    # \param expr 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ORBondMatchExpressionList instance \a expr.
+    # \param self The \e %ORBondMatchExpressionList instance this method is called upon.
+    # \param expr The \e %ORBondMatchExpressionList instance to copy.
+    # \return \a self
+    # 
     def assign(expr: ORBondMatchExpressionList) -> ORBondMatchExpressionList: pass

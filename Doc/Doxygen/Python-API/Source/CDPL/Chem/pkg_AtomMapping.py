@@ -71,10 +71,11 @@ class AtomMapping(Boost.Python.instance):
     def clear() -> None: pass
 
     ##
-    # \brief 
-    # \param map 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomMapping instance \a map.
+    # \param self The \e %AtomMapping instance this method is called upon.
+    # \param map The \e %AtomMapping instance to copy.
+    # \return \a self
+    # 
     def assign(map: AtomMapping) -> AtomMapping: pass
 
     ##

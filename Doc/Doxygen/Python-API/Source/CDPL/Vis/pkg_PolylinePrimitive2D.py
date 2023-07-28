@@ -37,10 +37,11 @@ class PolylinePrimitive2D(PointArray2D, GraphicsPrimitive2D):
     def __init__(prim: PolylinePrimitive2D) -> None: pass
 
     ##
-    # \brief 
-    # \param prim 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %PolylinePrimitive2D instance \a prim.
+    # \param self The \e %PolylinePrimitive2D instance this method is called upon.
+    # \param prim The \e %PolylinePrimitive2D instance to copy.
+    # \return \a self
+    # 
     def assign(prim: PolylinePrimitive2D) -> PolylinePrimitive2D: pass
 
     ##

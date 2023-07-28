@@ -84,10 +84,11 @@ class ScreeningProcessor(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief 
-        # \param hit 
-        # \return 
-        #
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %SearchHit instance \a hit.
+        # \param self The \e %SearchHit instance this method is called upon.
+        # \param hit The \e %SearchHit instance to copy.
+        # \return \a self
+        # 
         def assign(hit: SearchHit) -> SearchHit: pass
 
         ##

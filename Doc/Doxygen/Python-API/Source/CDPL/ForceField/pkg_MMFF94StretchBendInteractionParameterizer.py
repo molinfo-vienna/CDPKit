@@ -92,10 +92,11 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
-    # \brief 
-    # \param parameterizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94StretchBendInteractionParameterizer instance \a parameterizer.
+    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
+    # \param parameterizer The \e %MMFF94StretchBendInteractionParameterizer instance to copy.
+    # \return \a self
+    # 
     def assign(parameterizer: MMFF94StretchBendInteractionParameterizer) -> MMFF94StretchBendInteractionParameterizer: pass
 
     ##

@@ -77,10 +77,11 @@ class InteractionAnalyzer(Boost.Python.instance):
     def getConstraintFunction(type1: int, type2: int) -> BoolFeature2Functor: pass
 
     ##
-    # \brief 
-    # \param analyzer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionAnalyzer instance \a analyzer.
+    # \param self The \e %InteractionAnalyzer instance this method is called upon.
+    # \param analyzer The \e %InteractionAnalyzer instance to copy.
+    # \return \a self
+    # 
     def assign(analyzer: InteractionAnalyzer) -> InteractionAnalyzer: pass
 
     ##

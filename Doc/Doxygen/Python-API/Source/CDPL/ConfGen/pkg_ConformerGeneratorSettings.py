@@ -86,10 +86,11 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param settings 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerGeneratorSettings instance \a settings.
+    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
+    # \param settings The \e %ConformerGeneratorSettings instance to copy.
+    # \return \a self
+    # 
     def assign(settings: ConformerGeneratorSettings) -> ConformerGeneratorSettings: pass
 
     ##

@@ -60,10 +60,11 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param calc 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureRDFCodeCalculator instance \a calc.
+    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
+    # \param calc The \e %FeatureRDFCodeCalculator instance to copy.
+    # \return \a self
+    # 
     def assign(calc: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
 
     ##

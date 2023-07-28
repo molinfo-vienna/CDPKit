@@ -98,10 +98,11 @@ class ULIdentityMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULIdentityMatrix instance \a m.
+    # \param self The \e %ULIdentityMatrix instance this method is called upon.
+    # \param m The \e %ULIdentityMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: ULIdentityMatrix) -> ULIdentityMatrix: pass
 
     ##

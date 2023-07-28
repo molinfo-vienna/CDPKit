@@ -51,10 +51,11 @@ class TotalOverlapTanimotoScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param score 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TotalOverlapTanimotoScore instance \a score.
+    # \param self The \e %TotalOverlapTanimotoScore instance this method is called upon.
+    # \param score The \e %TotalOverlapTanimotoScore instance to copy.
+    # \return \a self
+    # 
     def assign(score: TotalOverlapTanimotoScore) -> TotalOverlapTanimotoScore: pass
 
     ##

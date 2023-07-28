@@ -71,10 +71,11 @@ class BronKerboschAlgorithm(Boost.Python.instance):
     def nextClique(clique: BitSet) -> bool: pass
 
     ##
-    # \brief 
-    # \param bka 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %BronKerboschAlgorithm instance \a bka.
+    # \param self The \e %BronKerboschAlgorithm instance this method is called upon.
+    # \param bka The \e %BronKerboschAlgorithm instance to copy.
+    # \return \a self
+    # 
     def assign(bka: BronKerboschAlgorithm) -> BronKerboschAlgorithm: pass
 
     objectID = property(getObjectID)

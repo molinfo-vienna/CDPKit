@@ -154,10 +154,11 @@ class Color(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param color 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Color instance \a color.
+    # \param self The \e %Color instance this method is called upon.
+    # \param color The \e %Color instance to copy.
+    # \return \a self
+    # 
     def assign(color: Color) -> Color: pass
 
     ##

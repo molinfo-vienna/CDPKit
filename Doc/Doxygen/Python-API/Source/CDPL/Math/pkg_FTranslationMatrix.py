@@ -95,10 +95,11 @@ class FTranslationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FTranslationMatrix instance \a m.
+    # \param self The \e %FTranslationMatrix instance this method is called upon.
+    # \param m The \e %FTranslationMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: FTranslationMatrix) -> FTranslationMatrix: pass
 
     ##

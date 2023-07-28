@@ -89,10 +89,11 @@ class LZeroVector(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param v 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LZeroVector instance \a v.
+    # \param self The \e %LZeroVector instance this method is called upon.
+    # \param v The \e %LZeroVector instance to copy.
+    # \return \a self
+    # 
     def assign(v: LZeroVector) -> LZeroVector: pass
 
     ##

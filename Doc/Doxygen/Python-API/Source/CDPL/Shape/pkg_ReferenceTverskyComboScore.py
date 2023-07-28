@@ -52,10 +52,11 @@ class ReferenceTverskyComboScore(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param score 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ReferenceTverskyComboScore instance \a score.
+    # \param self The \e %ReferenceTverskyComboScore instance this method is called upon.
+    # \param score The \e %ReferenceTverskyComboScore instance to copy.
+    # \return \a self
+    # 
     def assign(score: ReferenceTverskyComboScore) -> ReferenceTverskyComboScore: pass
 
     ##

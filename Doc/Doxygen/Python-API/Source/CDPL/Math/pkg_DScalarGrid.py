@@ -121,10 +121,11 @@ class DScalarGrid(Boost.Python.instance):
     def getSize() -> int: pass
 
     ##
-    # \brief 
-    # \param g 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DScalarGrid instance \a g.
+    # \param self The \e %DScalarGrid instance this method is called upon.
+    # \param g The \e %DScalarGrid instance to copy.
+    # \return \a self
+    # 
     def assign(g: DScalarGrid) -> DScalarGrid: pass
 
     ##

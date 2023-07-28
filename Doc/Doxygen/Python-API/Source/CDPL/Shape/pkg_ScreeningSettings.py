@@ -131,10 +131,11 @@ class ScreeningSettings(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param settings 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ScreeningSettings instance \a settings.
+    # \param self The \e %ScreeningSettings instance this method is called upon.
+    # \param settings The \e %ScreeningSettings instance to copy.
+    # \return \a self
+    # 
     def assign(settings: ScreeningSettings) -> ScreeningSettings: pass
 
     ##

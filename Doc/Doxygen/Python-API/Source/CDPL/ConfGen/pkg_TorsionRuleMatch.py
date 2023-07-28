@@ -101,10 +101,11 @@ class TorsionRuleMatch(Boost.Python.instance):
     def getRule() -> TorsionRule: pass
 
     ##
-    # \brief 
-    # \param match 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRuleMatch instance \a match.
+    # \param self The \e %TorsionRuleMatch instance this method is called upon.
+    # \param match The \e %TorsionRuleMatch instance to copy.
+    # \return \a self
+    # 
     def assign(match: TorsionRuleMatch) -> TorsionRuleMatch: pass
 
     objectID = property(getObjectID)

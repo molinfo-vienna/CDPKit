@@ -85,10 +85,11 @@ class MMFF94InteractionData(Boost.Python.instance):
     def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionData: pass
 
     ##
-    # \brief 
-    # \param ia_data 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94InteractionData instance \a ia_data.
+    # \param self The \e %MMFF94InteractionData instance this method is called upon.
+    # \param ia_data The \e %MMFF94InteractionData instance to copy.
+    # \return \a self
+    # 
     def assign(ia_data: MMFF94InteractionData) -> MMFF94InteractionData: pass
 
     ##

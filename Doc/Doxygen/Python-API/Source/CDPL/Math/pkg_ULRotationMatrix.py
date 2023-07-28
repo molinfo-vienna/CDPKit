@@ -97,10 +97,11 @@ class ULRotationMatrix(Boost.Python.instance):
     def toArray() -> object: pass
 
     ##
-    # \brief 
-    # \param m 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULRotationMatrix instance \a m.
+    # \param self The \e %ULRotationMatrix instance this method is called upon.
+    # \param m The \e %ULRotationMatrix instance to copy.
+    # \return \a self
+    # 
     def assign(m: ULRotationMatrix) -> ULRotationMatrix: pass
 
     ##

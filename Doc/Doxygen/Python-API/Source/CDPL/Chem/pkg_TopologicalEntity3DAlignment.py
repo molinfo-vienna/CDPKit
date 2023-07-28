@@ -122,10 +122,11 @@ class TopologicalEntity3DAlignment(Boost.Python.instance):
     def nextAlignment(mapping: CDPL.Util.STPairArray) -> bool: pass
 
     ##
-    # \brief 
-    # \param alignment 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TopologicalEntity3DAlignment instance \a alignment.
+    # \param self The \e %TopologicalEntity3DAlignment instance this method is called upon.
+    # \param alignment The \e %TopologicalEntity3DAlignment instance to copy.
+    # \return \a self
+    # 
     def assign(alignment: TopologicalEntity3DAlignment) -> TopologicalEntity3DAlignment: pass
 
     objectID = property(getObjectID)

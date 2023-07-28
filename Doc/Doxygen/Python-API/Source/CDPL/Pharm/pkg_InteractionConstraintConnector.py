@@ -54,10 +54,11 @@ class InteractionConstraintConnector(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param con 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionConstraintConnector instance \a con.
+    # \param self The \e %InteractionConstraintConnector instance this method is called upon.
+    # \param con The \e %InteractionConstraintConnector instance to copy.
+    # \return \a self
+    # 
     def assign(con: InteractionConstraintConnector) -> InteractionConstraintConnector: pass
 
     ##

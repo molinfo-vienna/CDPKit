@@ -123,10 +123,11 @@ class ChEMBLStandardizer(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param standardizer 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ChEMBLStandardizer instance \a standardizer.
+    # \param self The \e %ChEMBLStandardizer instance this method is called upon.
+    # \param standardizer The \e %ChEMBLStandardizer instance to copy.
+    # \return \a self
+    # 
     def assign(standardizer: ChEMBLStandardizer) -> ChEMBLStandardizer: pass
 
     ##

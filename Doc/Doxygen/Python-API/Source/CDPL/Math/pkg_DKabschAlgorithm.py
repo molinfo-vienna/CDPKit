@@ -51,10 +51,11 @@ class DKabschAlgorithm(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param algo 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %DKabschAlgorithm instance \a algo.
+    # \param self The \e %DKabschAlgorithm instance this method is called upon.
+    # \param algo The \e %DKabschAlgorithm instance to copy.
+    # \return \a self
+    # 
     def assign(algo: DKabschAlgorithm) -> DKabschAlgorithm: pass
 
     ##

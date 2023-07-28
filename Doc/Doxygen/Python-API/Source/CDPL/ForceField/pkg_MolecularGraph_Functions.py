@@ -20,11 +20,11 @@
 #
 
 ##
-# \brief 
-# \param molgraph 
-# \param strict 
-# \param overwrite 
-#
+# \brief Replaces the current state of \a molgraph with a copy of the state of the \e %bool instance \a strict.
+# \param molgraph The \e % instance this method is called upon.
+# \param strict The \e %bool instance to copy.
+# \return \a molgraph
+# 
 def assignMMFF94BondTypeIndices(molgraph: CDPL.Chem.MolecularGraph, strict: bool, overwrite: bool) -> None: pass
 
 ##
@@ -36,18 +36,19 @@ def assignMMFF94BondTypeIndices(molgraph: CDPL.Chem.MolecularGraph, strict: bool
 def calcMMFF94AtomCharges(molgraph: CDPL.Chem.MolecularGraph, strict: bool, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param strict 
-# \param overwrite 
-#
+# \brief Replaces the current state of \a molgraph with a copy of the state of the \e %bool instance \a strict.
+# \param molgraph The \e % instance this method is called upon.
+# \param strict The \e %bool instance to copy.
+# \return \a molgraph
+# 
 def assignMMFF94AtomTypes(molgraph: CDPL.Chem.MolecularGraph, strict: bool, overwrite: bool) -> None: pass
 
 ##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-#
+# \brief Replaces the current state of \a molgraph with a copy of the state of the \e %bool instance \a overwrite.
+# \param molgraph The \e % instance this method is called upon.
+# \param overwrite The \e %bool instance to copy.
+# \return \a molgraph
+# 
 def assignUFFAtomTypes(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
 
 ##

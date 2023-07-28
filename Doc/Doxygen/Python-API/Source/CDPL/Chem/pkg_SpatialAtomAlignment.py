@@ -188,10 +188,11 @@ class SpatialAtomAlignment(Boost.Python.instance):
     def getTransform() -> CDPL.Math.Matrix4D: pass
 
     ##
-    # \brief 
-    # \param alignment 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialAtomAlignment instance \a alignment.
+    # \param self The \e %SpatialAtomAlignment instance this method is called upon.
+    # \param alignment The \e %SpatialAtomAlignment instance to copy.
+    # \return \a self
+    # 
     def assign(alignment: SpatialAtomAlignment) -> SpatialAtomAlignment: pass
 
     ##

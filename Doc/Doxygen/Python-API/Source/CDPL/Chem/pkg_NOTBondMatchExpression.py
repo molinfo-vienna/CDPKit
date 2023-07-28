@@ -39,8 +39,9 @@ class NOTBondMatchExpression(BondMatchExpression):
     def __init__(expr_ptr: BondMatchExpression) -> None: pass
 
     ##
-    # \brief 
-    # \param expression 
-    # \return 
-    #
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %NOTBondMatchExpression instance \a expression.
+    # \param self The \e %NOTBondMatchExpression instance this method is called upon.
+    # \param expression The \e %NOTBondMatchExpression instance to copy.
+    # \return \a self
+    # 
     def assign(expression: NOTBondMatchExpression) -> NOTBondMatchExpression: pass
