@@ -26,20 +26,17 @@ class GaussianShapeGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeGenerator instance.
-    # \param self The \e %GaussianShapeGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeGenerator instance.
-    # \param self The \e %GaussianShapeGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: GaussianShapeGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # 
     # Different Python \e %GaussianShapeGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeGenerator instances \e a and \e b reference different C++ objects. 
@@ -52,7 +49,6 @@ class GaussianShapeGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeGenerator instance \a gen.
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param gen The \e %GaussianShapeGenerator instance to copy.
     # \return \a self
     # 
@@ -62,19 +58,19 @@ class GaussianShapeGenerator(Boost.Python.instance):
     # \brief 
     # \param gen 
     #
-    def setPharmacophoreGenerator(gen: CDPL.Pharm.PharmacophoreGenerator) -> None: pass
+    def setPharmacophoreGenerator(gen: Pharm.PharmacophoreGenerator) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getPharmacophoreGenerator() -> CDPL.Pharm.PharmacophoreGenerator: pass
+    def getPharmacophoreGenerator() -> Pharm.PharmacophoreGenerator: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDefaultPharmacophoreGenerator() -> CDPL.Pharm.DefaultPharmacophoreGenerator: pass
+    def getDefaultPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
     # \brief 
@@ -177,7 +173,7 @@ class GaussianShapeGenerator(Boost.Python.instance):
     # \param molgraph 
     # \return 
     #
-    def generate(molgraph: CDPL.Chem.MolecularGraph) -> GaussianShapeSet: pass
+    def generate(molgraph: Chem.MolecularGraph) -> GaussianShapeSet: pass
 
     ##
     # \brief 

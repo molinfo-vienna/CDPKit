@@ -26,7 +26,6 @@ class FSpatialGrid(AttributedGrid):
 
     ##
     # \brief Initializes the \e %FSpatialGrid instance.
-    # \param self The \e %FSpatialGrid instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -61,7 +60,7 @@ class FSpatialGrid(AttributedGrid):
     # \param i 
     # \param coords 
     #
-    def getCoordinates(i: int, coords: CDPL.Math.Vector3F) -> None: pass
+    def getCoordinates(i: int, coords: Math.Vector3F) -> None: pass
 
     ##
     # \brief 
@@ -88,7 +87,7 @@ class FSpatialGrid(AttributedGrid):
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -102,19 +101,18 @@ class FSpatialGrid(AttributedGrid):
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass

@@ -26,20 +26,17 @@ class FKabschAlgorithm(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FKabschAlgorithm instance.
-    # \param self The \e %FKabschAlgorithm instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FKabschAlgorithm instance.
-    # \param self The \e %FKabschAlgorithm instance to initialize.
     # \param algo 
     # 
     def __init__(algo: FKabschAlgorithm) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # 
     # Different Python \e %FKabschAlgorithm instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FKabschAlgorithm instances \e a and \e b reference different C++ objects. 
@@ -52,7 +49,6 @@ class FKabschAlgorithm(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FKabschAlgorithm instance \a algo.
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \param algo The \e %FKabschAlgorithm instance to copy.
     # \return \a self
     # 

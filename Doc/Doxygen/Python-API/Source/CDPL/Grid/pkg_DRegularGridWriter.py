@@ -26,50 +26,45 @@ class DRegularGridWriter(DRegularGridWriterBase):
 
     ##
     # \brief Initializes the \e %DRegularGridWriter instance.
-    # \param self The \e %DRegularGridWriter instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGridWriter instance.
-    # \param self The \e %DRegularGridWriter instance to initialize.
     # \param file_name 
     # \param fmt 
     # \param mode 
     # 
-    def __init__(file_name: str, fmt: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass
+    def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGridWriter instance.
-    # \param self The \e %DRegularGridWriter instance to initialize.
     # \param file_name 
     # \param fmt 
     # \param mode 
     # 
-    def __init__(file_name: str, fmt: CDPL.Base.DataFormat, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGridWriter instance.
-    # \param self The \e %DRegularGridWriter instance to initialize.
     # \param ios 
     # \param fmt 
     # 
-    def __init__(ios: CDPL.Base.IOStream, fmt: str) -> None: pass
+    def __init__(ios: Base.IOStream, fmt: str) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGridWriter instance.
-    # \param self The \e %DRegularGridWriter instance to initialize.
     # \param ios 
     # \param fmt 
     # 
-    def __init__(ios: CDPL.Base.IOStream, fmt: CDPL.Base.DataFormat) -> None: pass
+    def __init__(ios: Base.IOStream, fmt: Base.DataFormat) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDataFormat() -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> Base.DataFormat: pass
 
     dataFormat = property(getDataFormat)

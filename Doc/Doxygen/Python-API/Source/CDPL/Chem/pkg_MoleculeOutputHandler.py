@@ -26,13 +26,11 @@ class MoleculeOutputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeOutputHandler instance.
-    # \param self The \e %MoleculeOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MoleculeOutputHandler instance this method is called upon.
     # 
     # Different Python \e %MoleculeOutputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeOutputHandler instances \e a and \e b reference different C++ objects. 
@@ -47,14 +45,14 @@ class MoleculeOutputHandler(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getDataFormat() -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> Base.DataFormat: pass
 
     ##
     # \brief 
     # \param ios 
     # \return 
     #
-    def createWriter(ios: CDPL.Base.IOStream) -> object: pass
+    def createWriter(ios: Base.IOStream) -> object: pass
 
     ##
     # \brief 
@@ -62,6 +60,6 @@ class MoleculeOutputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> object: pass
+    def createWriter(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> object: pass
 
     objectID = property(getObjectID)

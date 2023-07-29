@@ -36,14 +36,12 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
-    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
     # \param func 
     # 
     def __init__(func: GeneralizedBellAtomDensity) -> None: pass
 
     ##
     # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
-    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
     # \param probe_radius 
     # \param rad_scaling_factor 
     # 
@@ -51,7 +49,6 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     # 
     # Different Python \e %GeneralizedBellAtomDensity instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GeneralizedBellAtomDensity instances \e a and \e b reference different C++ objects. 
@@ -76,7 +73,6 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GeneralizedBellAtomDensity instance \a func.
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     # \param func The \e %GeneralizedBellAtomDensity instance to copy.
     # \return \a self
     # 
@@ -89,7 +85,7 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     # \param atom 
     # \return 
     #
-    def __call__(pos: CDPL.Math.Vector3D, atom_pos: CDPL.Math.Vector3D, atom: CDPL.Chem.Atom) -> float: pass
+    def __call__(pos: Math.Vector3D, atom_pos: Math.Vector3D, atom: Chem.Atom) -> float: pass
 
     objectID = property(getObjectID)
 

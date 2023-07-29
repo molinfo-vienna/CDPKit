@@ -26,7 +26,6 @@ class BondConfigurationMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondConfigurationMatchExpression instance.
-    # \param self The \e %BondConfigurationMatchExpression instance to initialize.
     # \param expr 
     # 
     def __init__(expr: BondConfigurationMatchExpression) -> None: pass

@@ -26,20 +26,17 @@ class VoidLookupKeyFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %VoidLookupKeyFunctor instance.
-    # \param self The \e %VoidLookupKeyFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %VoidLookupKeyFunctor instance.
-    # \param self The \e %VoidLookupKeyFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: VoidLookupKeyFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %VoidLookupKeyFunctor instance.
-    # \param arg1 The \e %VoidLookupKeyFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

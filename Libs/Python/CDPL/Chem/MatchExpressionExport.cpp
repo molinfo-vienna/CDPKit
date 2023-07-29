@@ -52,7 +52,7 @@ namespace
                         const ObjType1& target_obj1, const ObjType2& target_obj2, 
                         const CDPL::Base::Any& aux_data) const {
 
-            boost::python::override override = this->get_override("matches");
+            boost::python::override override = this->get_override("__call__");
              
             if (override)
                 return override(boost::ref(query_obj1), boost::ref(query_obj2), boost::ref(target_obj1), boost::ref(target_obj2), aux_data);
@@ -72,7 +72,7 @@ namespace
                         const ObjType1& target_obj1, const ObjType2& target_obj2, 
                         const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Any& aux_data) const {
 
-            boost::python::override override = this->get_override("mappingMatches");
+            boost::python::override override = this->get_override("__call__");
              
             if (override)
                 return override(boost::ref(query_obj1), boost::ref(query_obj2), boost::ref(target_obj1), boost::ref(target_obj2),
@@ -108,7 +108,7 @@ namespace
         typedef std::shared_ptr<MatchExpressionWrapper> SharedPointer;
 
         bool operator()(const ObjType& query_obj, const ObjType& target_obj, const CDPL::Base::Any& aux_data) const {
-            boost::python::override override = this->get_override("matches");
+            boost::python::override override = this->get_override("__call__");
              
             if (override)
                 return override(boost::ref(query_obj), boost::ref(target_obj), aux_data);
@@ -126,7 +126,7 @@ namespace
         bool operator()(const ObjType& query_obj, const ObjType& target_obj, 
                         const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Any& aux_data) const {
 
-            boost::python::override override = this->get_override("mappingMatches");
+            boost::python::override override = this->get_override("__call__");
              
             if (override)
                 return override(boost::ref(query_obj), boost::ref(target_obj), boost::ref(mapping), aux_data);
@@ -191,6 +191,7 @@ namespace
             using namespace boost;
             using namespace CDPL;
 
+            
             python::class_<MatchExpressionWrapper<ObjType, void>, 
                 typename MatchExpressionWrapper<ObjType, void>::SharedPointer, 
                 boost::noncopyable>(name, python::no_init)

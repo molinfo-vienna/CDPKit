@@ -40,7 +40,6 @@ class Exception(builtins.Exception):
 
     ##
     # \brief Returns a string representation of the \e %Exception instance.
-    # \param self The \e %Exception instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

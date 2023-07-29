@@ -22,12 +22,11 @@
 ##
 # \brief 
 #
-class FilePDFReactionWriter(CDPL.Chem.ReactionWriterBase):
+class FilePDFReactionWriter(Chem.ReactionWriterBase):
 
     ##
     # \brief Initializes the \e %FilePDFReactionWriter instance.
-    # \param self The \e %FilePDFReactionWriter instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

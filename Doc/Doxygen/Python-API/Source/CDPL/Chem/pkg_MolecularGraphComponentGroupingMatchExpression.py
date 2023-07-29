@@ -28,7 +28,6 @@ class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpressi
 
     ##
     # \brief Initializes the \e %MolecularGraphComponentGroupingMatchExpression instance.
-    # \param self The \e %MolecularGraphComponentGroupingMatchExpression instance to initialize.
     # \param expr 
     # 
     def __init__(expr: MolecularGraphComponentGroupingMatchExpression) -> None: pass
@@ -42,7 +41,6 @@ class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpressi
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraphComponentGroupingMatchExpression instance \a expr.
-    # \param self The \e %MolecularGraphComponentGroupingMatchExpression instance this method is called upon.
     # \param expr The \e %MolecularGraphComponentGroupingMatchExpression instance to copy.
     # \return \a self
     # 

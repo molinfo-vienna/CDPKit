@@ -24,21 +24,21 @@
 # \param cntnr 
 # \return 
 #
-def generateExplicitMolecularFormula(cntnr: CDPL.Chem.AtomContainer) -> str: pass
+def generateExplicitMolecularFormula(cntnr: Chem.AtomContainer) -> str: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getNetFormalCharge(cntnr: CDPL.Chem.AtomContainer) -> int: pass
+def getNetFormalCharge(cntnr: Chem.AtomContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def generateExplicitMassCompositionString(cntnr: CDPL.Chem.AtomContainer) -> str: pass
+def generateExplicitMassCompositionString(cntnr: Chem.AtomContainer) -> str: pass
 
 ##
 # \brief 
@@ -46,21 +46,21 @@ def generateExplicitMassCompositionString(cntnr: CDPL.Chem.AtomContainer) -> str
 # \param hist 
 # \param append 
 #
-def generateExplicitElementHistogram(cntnr: CDPL.Chem.AtomContainer, hist: ElementHistogram, append: bool = False) -> None: pass
+def generateExplicitElementHistogram(cntnr: Chem.AtomContainer, hist: ElementHistogram, append: bool = False) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param mass_comp 
 #
-def calcExplicitMassComposition(cntnr: CDPL.Chem.AtomContainer, mass_comp: MassComposition) -> None: pass
+def calcExplicitMassComposition(cntnr: Chem.AtomContainer, mass_comp: MassComposition) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def calcExplicitMass(cntnr: CDPL.Chem.AtomContainer) -> float: pass
+def calcExplicitMass(cntnr: Chem.AtomContainer) -> float: pass
 
 ##
 # \brief 
@@ -68,7 +68,7 @@ def calcExplicitMass(cntnr: CDPL.Chem.AtomContainer) -> float: pass
 # \param moment 
 # \return 
 #
-def calcDipoleMoment(cntnr: CDPL.Chem.AtomContainer, moment: CDPL.Math.Vector3D) -> bool: pass
+def calcDipoleMoment(cntnr: Chem.AtomContainer, moment: Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
@@ -77,35 +77,35 @@ def calcDipoleMoment(cntnr: CDPL.Chem.AtomContainer, moment: CDPL.Math.Vector3D)
 # \param moment 
 # \return 
 #
-def calcDipoleMoment(cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, moment: CDPL.Math.Vector3D) -> bool: pass
+def calcDipoleMoment(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, moment: Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAromaticAtomCount(cntnr: CDPL.Chem.AtomContainer) -> int: pass
+def getAromaticAtomCount(cntnr: Chem.AtomContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getRingAtomCount(cntnr: CDPL.Chem.AtomContainer) -> int: pass
+def getRingAtomCount(cntnr: Chem.AtomContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getExplicitChainAtomCount(cntnr: CDPL.Chem.AtomContainer) -> int: pass
+def getExplicitChainAtomCount(cntnr: Chem.AtomContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getExplicitAtomCount(cntnr: CDPL.Chem.AtomContainer) -> int: pass
+def getExplicitAtomCount(cntnr: Chem.AtomContainer) -> int: pass
 
 ##
 # \brief 
@@ -114,11 +114,11 @@ def getExplicitAtomCount(cntnr: CDPL.Chem.AtomContainer) -> int: pass
 # \param strict 
 # \return 
 #
-def getExplicitAtomCount(cntnr: CDPL.Chem.AtomContainer, type: int, strict: bool = True) -> int: pass
+def getExplicitAtomCount(cntnr: Chem.AtomContainer, type: int, strict: bool = True) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getHeavyAtomCount(cntnr: CDPL.Chem.AtomContainer) -> int: pass
+def getHeavyAtomCount(cntnr: Chem.AtomContainer) -> int: pass

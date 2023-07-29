@@ -36,7 +36,6 @@ class IonicInteractionConstraint(FeatureDistanceConstraint):
 
     ##
     # \brief Initializes the \e %IonicInteractionConstraint instance.
-    # \param self The \e %IonicInteractionConstraint instance to initialize.
     # \param constr 
     # 
     def __init__(constr: IonicInteractionConstraint) -> None: pass

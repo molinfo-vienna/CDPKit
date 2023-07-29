@@ -26,6 +26,5 @@ class SMILESMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESMoleculeInputHandler instance.
-    # \param self The \e %SMILESMoleculeInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

@@ -22,11 +22,10 @@
 ##
 # \brief FeatureContainer.
 # 
-class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer):
+class FeatureContainer(Chem.Entity3DContainer, Base.PropertyContainer):
 
     ##
     # \brief Initializes the \e %FeatureContainer instance.
-    # \param self The \e %FeatureContainer instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -71,7 +70,7 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
     # 
     # \throw Base.IndexError if the number of entities is zero or <em>idx</em> is not in the range [0, getNumEntities() - 1].
     # 
-    def getEntity(idx: int) -> CDPL.Chem.Entity3D: pass
+    def getEntity(idx: int) -> Chem.Entity3D: pass
 
     ##
     # \brief Returns the number of stored Chem.Entity3D objects.
@@ -82,7 +81,6 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
 
     ##
     # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param self The \e %FeatureContainer instance this method is called upon.
     # \param ftr The value to test for membership.
     # \return The result of the membership test operation.
     # 
@@ -90,11 +88,10 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %FeatureContainer instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
@@ -108,7 +105,7 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -121,13 +118,13 @@ class FeatureContainer(CDPL.Chem.Entity3DContainer, CDPL.Base.PropertyContainer)
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     numFeatures = property(getNumFeatures)

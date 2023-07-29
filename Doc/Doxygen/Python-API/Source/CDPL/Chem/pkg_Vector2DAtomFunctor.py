@@ -26,20 +26,17 @@ class Vector2DAtomFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector2DAtomFunctor instance.
-    # \param self The \e %Vector2DAtomFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector2DAtomFunctor instance.
-    # \param self The \e %Vector2DAtomFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: Vector2DAtomFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector2DAtomFunctor instance.
-    # \param arg1 The \e %Vector2DAtomFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -49,7 +46,7 @@ class Vector2DAtomFunctor(Boost.Python.instance):
     # \param arg1 
     # \return 
     #
-    def __call__(arg1: Atom) -> CDPL.Math.Vector2D: pass
+    def __call__(arg1: Atom) -> Math.Vector2D: pass
 
     ##
     # \brief 

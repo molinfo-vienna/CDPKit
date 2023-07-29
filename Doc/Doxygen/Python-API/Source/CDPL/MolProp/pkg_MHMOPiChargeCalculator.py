@@ -28,28 +28,24 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MHMOPiChargeCalculator instance.
-    # \param self The \e %MHMOPiChargeCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MHMOPiChargeCalculator instance.
-    # \param self The \e %MHMOPiChargeCalculator instance to initialize.
     # \param molgraph 
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Initializes the \e %MHMOPiChargeCalculator instance.
-    # \param self The \e %MHMOPiChargeCalculator instance to initialize.
     # \param pi_sys_list 
     # \param molgraph 
     # 
-    def __init__(pi_sys_list: CDPL.Chem.ElectronSystemList, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(pi_sys_list: Chem.ElectronSystemList, molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MHMOPiChargeCalculator instance this method is called upon.
     # 
     # Different Python \e %MHMOPiChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MHMOPiChargeCalculator instances \e a and \e b reference different C++ objects. 
@@ -77,14 +73,14 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
     # \brief 
     # \param molgraph 
     #
-    def calculate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def calculate(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
     # \param pi_sys_list 
     # \param molgraph 
     #
-    def calculate(pi_sys_list: CDPL.Chem.ElectronSystemList, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def calculate(pi_sys_list: Chem.ElectronSystemList, molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 

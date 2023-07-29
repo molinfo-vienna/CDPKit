@@ -24,4 +24,4 @@
 # \param mol 
 # \param std_prot_state 
 #
-def prepareForGRAILDescriptorCalculation(mol: CDPL.Chem.Molecule, std_prot_state: bool = False) -> None: pass
+def prepareForGRAILDescriptorCalculation(mol: Chem.Molecule, std_prot_state: bool = False) -> None: pass

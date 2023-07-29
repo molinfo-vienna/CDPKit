@@ -26,7 +26,7 @@
 # \param grad 
 # \return 
 #
-def calcMMFF94ElectrostaticGradient(ia_data: MMFF94ElectrostaticInteractionData, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94ElectrostaticGradient(ia_data: MMFF94ElectrostaticInteractionData, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def calcMMFF94ElectrostaticGradient(ia_data: MMFF94ElectrostaticInteractionData,
 # \param coords 
 # \return 
 #
-def calcMMFF94ElectrostaticEnergy(ia_data: MMFF94ElectrostaticInteractionData, coords: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94ElectrostaticEnergy(ia_data: MMFF94ElectrostaticInteractionData, coords: Math.Vector3DArray) -> float: pass

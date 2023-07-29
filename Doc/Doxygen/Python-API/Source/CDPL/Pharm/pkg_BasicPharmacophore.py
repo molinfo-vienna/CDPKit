@@ -133,7 +133,6 @@ class BasicPharmacophore(Pharmacophore):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
-    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
     # 
@@ -141,7 +140,6 @@ class BasicPharmacophore(Pharmacophore):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
-    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
     # 
@@ -149,7 +147,6 @@ class BasicPharmacophore(Pharmacophore):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
-    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param cntnr Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
     # 

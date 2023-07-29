@@ -31,14 +31,12 @@ class FragmentList(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentList instance.
-    # \param self The \e %FragmentList instance to initialize.
     # \param list 
     # 
     def __init__(list: FragmentList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentList instance this method is called upon.
     # 
     # Different Python \e %FragmentList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentList instances \e a and \e b reference different C++ objects. 
@@ -98,7 +96,6 @@ class FragmentList(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentList instance \a array.
-    # \param self The \e %FragmentList instance this method is called upon.
     # \param array The \e %FragmentList instance to copy.
     # \return \a self
     # 
@@ -247,7 +244,6 @@ class FragmentList(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == list</tt>.
-    # \param self The \e %FragmentList instance this method is called upon.
     # \param list The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -255,7 +251,6 @@ class FragmentList(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != list</tt>.
-    # \param self The \e %FragmentList instance this method is called upon.
     # \param list The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 

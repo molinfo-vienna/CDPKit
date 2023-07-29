@@ -31,14 +31,12 @@ class PharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreGenerator instance.
-    # \param self The \e %PharmacophoreGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: PharmacophoreGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # 
     # Different Python \e %PharmacophoreGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PharmacophoreGenerator instances \e a and \e b reference different C++ objects. 
@@ -56,7 +54,7 @@ class PharmacophoreGenerator(Boost.Python.instance):
     # \param pharm The pharmacophore instance where the generated output features get appended.
     # \param append If <tt>False</tt>, <em>pharm</em> gets cleared before adding any new features.
     # 
-    def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, append: bool = False) -> None: pass
+    def generate(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, append: bool = False) -> None: pass
 
     ##
     # \brief 
@@ -69,14 +67,14 @@ class PharmacophoreGenerator(Boost.Python.instance):
     # 
     # \param func The atom 3D-coordinates function.
     # 
-    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
     # 
     # \return The registered atom 3D-coordinates function.
     # 
-    def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
     # \brief Specifies a Pharm.FeatureGenerator instance that gets used for the generation of the specified type of features.
@@ -126,7 +124,6 @@ class PharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreGenerator instance \a gen.
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param gen The \e %PharmacophoreGenerator instance to copy.
     # \return \a self
     # 

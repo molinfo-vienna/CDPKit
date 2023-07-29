@@ -31,14 +31,12 @@ class STPairArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %STPairArray instance.
-    # \param self The \e %STPairArray instance to initialize.
     # \param array 
     # 
     def __init__(array: STPairArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %STPairArray instance this method is called upon.
     # 
     # Different Python \e %STPairArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %STPairArray instances \e a and \e b reference different C++ objects. 
@@ -98,7 +96,6 @@ class STPairArray(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %STPairArray instance \a array.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to copy.
     # \return \a self
     # 

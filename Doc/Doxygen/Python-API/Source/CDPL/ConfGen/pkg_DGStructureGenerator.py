@@ -26,20 +26,17 @@ class DGStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DGStructureGenerator instance.
-    # \param self The \e %DGStructureGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGStructureGenerator instance.
-    # \param self The \e %DGStructureGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: DGStructureGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # 
     # Different Python \e %DGStructureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DGStructureGenerator instances \e a and \e b reference different C++ objects. 
@@ -52,7 +49,6 @@ class DGStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGenerator instance \a gen.
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param gen The \e %DGStructureGenerator instance to copy.
     # \return \a self
     # 
@@ -62,27 +58,27 @@ class DGStructureGenerator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getExcludedHydrogenMask() -> CDPL.Util.BitSet: pass
+    def getExcludedHydrogenMask() -> Util.BitSet: pass
 
     ##
     # \brief 
     # \param molgraph 
     #
-    def setup(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setup(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
     # \param molgraph 
     # \param ia_data 
     #
-    def setup(molgraph: CDPL.Chem.MolecularGraph, ia_data: CDPL.ForceField.MMFF94InteractionData) -> None: pass
+    def setup(molgraph: Chem.MolecularGraph, ia_data: ForceField.MMFF94InteractionData) -> None: pass
 
     ##
     # \brief 
     # \param coords 
     # \return 
     #
-    def generate(coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def generate(coords: Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 
@@ -101,14 +97,14 @@ class DGStructureGenerator(Boost.Python.instance):
     # \param coords 
     # \return 
     #
-    def checkAtomConfigurations(coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def checkAtomConfigurations(coords: Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 
     # \param coords 
     # \return 
     #
-    def checkBondConfigurations(coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def checkBondConfigurations(coords: Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 

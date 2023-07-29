@@ -23,322 +23,322 @@
 # \brief 
 # \param bond 
 #
-def clearLabelSize(bond: CDPL.Chem.Bond) -> None: pass
+def clearLabelSize(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def hasLabelSize(bond: CDPL.Chem.Bond) -> bool: pass
+def hasLabelSize(bond: Chem.Bond) -> bool: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getLabelSize(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def getLabelSize(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param size 
 #
-def setLabelSize(bond: CDPL.Chem.Bond, size: SizeSpecification) -> None: pass
+def setLabelSize(bond: Chem.Bond, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearLineSpacing(bond: CDPL.Chem.Bond) -> None: pass
+def clearLineSpacing(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearReactionCenterLineSpacing(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasReactionCenterLineSpacing(bond: CDPL.Chem.Bond) -> bool: pass
+def clearReactionCenterLineSpacing(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getReactionCenterLineSpacing(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasReactionCenterLineSpacing(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getReactionCenterLineSpacing(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param spacing 
 #
-def setReactionCenterLineSpacing(bond: CDPL.Chem.Bond, spacing: SizeSpecification) -> None: pass
+def setReactionCenterLineSpacing(bond: Chem.Bond, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def hasLineSpacing(bond: CDPL.Chem.Bond) -> bool: pass
+def hasLineSpacing(bond: Chem.Bond) -> bool: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getLineSpacing(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def getLineSpacing(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param spacing 
 #
-def setLineSpacing(bond: CDPL.Chem.Bond, spacing: SizeSpecification) -> None: pass
+def setLineSpacing(bond: Chem.Bond, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearStereoBondHashSpacing(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasStereoBondHashSpacing(bond: CDPL.Chem.Bond) -> bool: pass
+def clearStereoBondHashSpacing(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getStereoBondHashSpacing(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasStereoBondHashSpacing(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getStereoBondHashSpacing(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param spacing 
 #
-def setStereoBondHashSpacing(bond: CDPL.Chem.Bond, spacing: SizeSpecification) -> None: pass
+def setStereoBondHashSpacing(bond: Chem.Bond, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearStereoBondWedgeWidth(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasStereoBondWedgeWidth(bond: CDPL.Chem.Bond) -> bool: pass
+def clearStereoBondWedgeWidth(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getStereoBondWedgeWidth(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasStereoBondWedgeWidth(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getStereoBondWedgeWidth(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param width 
 #
-def setStereoBondWedgeWidth(bond: CDPL.Chem.Bond, width: SizeSpecification) -> None: pass
+def setStereoBondWedgeWidth(bond: Chem.Bond, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearLineWidth(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasLineWidth(bond: CDPL.Chem.Bond) -> bool: pass
+def clearLineWidth(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getLineWidth(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasLineWidth(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getLineWidth(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param width 
 #
-def setLineWidth(bond: CDPL.Chem.Bond, width: SizeSpecification) -> None: pass
+def setLineWidth(bond: Chem.Bond, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearReactionCenterLineLength(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasReactionCenterLineLength(bond: CDPL.Chem.Bond) -> bool: pass
+def clearReactionCenterLineLength(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getReactionCenterLineLength(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasReactionCenterLineLength(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getReactionCenterLineLength(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param length 
 #
-def setReactionCenterLineLength(bond: CDPL.Chem.Bond, length: SizeSpecification) -> None: pass
+def setReactionCenterLineLength(bond: Chem.Bond, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearDoubleBondTrimLength(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasDoubleBondTrimLength(bond: CDPL.Chem.Bond) -> bool: pass
+def clearDoubleBondTrimLength(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getDoubleBondTrimLength(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasDoubleBondTrimLength(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getDoubleBondTrimLength(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param length 
 #
-def setDoubleBondTrimLength(bond: CDPL.Chem.Bond, length: SizeSpecification) -> None: pass
+def setDoubleBondTrimLength(bond: Chem.Bond, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearTripleBondTrimLength(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasTripleBondTrimLength(bond: CDPL.Chem.Bond) -> bool: pass
+def clearTripleBondTrimLength(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getTripleBondTrimLength(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasTripleBondTrimLength(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getTripleBondTrimLength(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param length 
 #
-def setTripleBondTrimLength(bond: CDPL.Chem.Bond, length: SizeSpecification) -> None: pass
+def setTripleBondTrimLength(bond: Chem.Bond, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearLabelMargin(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasLabelMargin(bond: CDPL.Chem.Bond) -> bool: pass
+def clearLabelMargin(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getLabelMargin(bond: CDPL.Chem.Bond) -> SizeSpecification: pass
+def hasLabelMargin(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getLabelMargin(bond: Chem.Bond) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param bond 
 # \param margin 
 #
-def setLabelMargin(bond: CDPL.Chem.Bond, margin: SizeSpecification) -> None: pass
+def setLabelMargin(bond: Chem.Bond, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearColor(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasColor(bond: CDPL.Chem.Bond) -> bool: pass
+def clearColor(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getColor(bond: CDPL.Chem.Bond) -> Color: pass
+def hasColor(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getColor(bond: Chem.Bond) -> Color: pass
 
 ##
 # \brief 
 # \param bond 
 # \param color 
 #
-def setColor(bond: CDPL.Chem.Bond, color: Color) -> None: pass
+def setColor(bond: Chem.Bond, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearLabelFont(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasLabelFont(bond: CDPL.Chem.Bond) -> bool: pass
+def clearLabelFont(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getLabelFont(bond: CDPL.Chem.Bond) -> Font: pass
+def hasLabelFont(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getLabelFont(bond: Chem.Bond) -> Font: pass
 
 ##
 # \brief 
 # \param bond 
 # \param font 
 #
-def setLabelFont(bond: CDPL.Chem.Bond, font: Font) -> None: pass
+def setLabelFont(bond: Chem.Bond, font: Font) -> None: pass

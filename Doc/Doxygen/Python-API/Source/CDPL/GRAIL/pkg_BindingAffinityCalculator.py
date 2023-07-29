@@ -46,13 +46,11 @@ class BindingAffinityCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BindingAffinityCalculator instance.
-    # \param self The \e %BindingAffinityCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BindingAffinityCalculator instance this method is called upon.
     # 
     # Different Python \e %BindingAffinityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BindingAffinityCalculator instances \e a and \e b reference different C++ objects. 
@@ -69,6 +67,6 @@ class BindingAffinityCalculator(Boost.Python.instance):
     # \param measure 
     # \return 
     #
-    def __call__(grail_descr: CDPL.Math.DVector, measure: AffinityMeasure) -> float: pass
+    def __call__(grail_descr: Math.DVector, measure: AffinityMeasure) -> float: pass
 
     objectID = property(getObjectID)

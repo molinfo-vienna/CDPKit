@@ -22,7 +22,7 @@
 ##
 # \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
 # 
-class GaussianShape(CDPL.Base.PropertyContainer):
+class GaussianShape(Base.PropertyContainer):
 
     ##
     # \brief 
@@ -31,14 +31,12 @@ class GaussianShape(CDPL.Base.PropertyContainer):
 
         ##
         # \brief Initializes the \e %Element instance.
-        # \param self The \e %Element instance to initialize.
         # \param elem 
         # 
         def __init__(elem: Element) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Element instance this method is called upon.
         # 
         # Different Python \e %Element instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Element instances \e a and \e b reference different C++ objects. 
@@ -51,7 +49,6 @@ class GaussianShape(CDPL.Base.PropertyContainer):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Element instance \a elem.
-        # \param self The \e %Element instance this method is called upon.
         # \param elem The \e %Element instance to copy.
         # \return \a self
         # 
@@ -61,13 +58,13 @@ class GaussianShape(CDPL.Base.PropertyContainer):
         # \brief 
         # \param pos 
         #
-        def setPosition(pos: CDPL.Math.Vector3D) -> None: pass
+        def setPosition(pos: Math.Vector3D) -> None: pass
 
         ##
         # \brief 
         # \return 
         #
-        def getPosition() -> CDPL.Math.Vector3D: pass
+        def getPosition() -> Math.Vector3D: pass
 
         ##
         # \brief 
@@ -117,20 +114,17 @@ class GaussianShape(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Initializes the \e %GaussianShape instance.
-    # \param self The \e %GaussianShape instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShape instance.
-    # \param self The \e %GaussianShape instance to initialize.
     # \param shape 
     # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShape instance \a shape.
-    # \param self The \e %GaussianShape instance this method is called upon.
     # \param shape The \e %GaussianShape instance to copy.
     # \return \a self
     # 
@@ -154,7 +148,7 @@ class GaussianShape(CDPL.Base.PropertyContainer):
     # \param color 
     # \param hardness 
     #
-    def addElement(pos: CDPL.Math.Vector3D, radius: float, color: int = 0, hardness: float = 2.7) -> None: pass
+    def addElement(pos: Math.Vector3D, radius: float, color: int = 0, hardness: float = 2.7) -> None: pass
 
     ##
     # \brief 
@@ -180,7 +174,7 @@ class GaussianShape(CDPL.Base.PropertyContainer):
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -191,25 +185,24 @@ class GaussianShape(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %GaussianShape instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 

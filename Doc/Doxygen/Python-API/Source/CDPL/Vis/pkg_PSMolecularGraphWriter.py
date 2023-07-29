@@ -24,7 +24,7 @@
 # 
 # <tt>PSMolecularGraphWriter</tt> uses Vis.StructureView2D for the creation of 2D structure diagrams. All control-parameters and properties provided for the customization of Vis.StructureView2D are also supported by <tt>PSMolecularGraphWriter</tt>.
 # 
-class PSMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
+class PSMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Constructs a <tt>PSMolecularGraphWriter</tt> instance that will write the image data to the output stream <em>os</em>.
@@ -33,4 +33,4 @@ class PSMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
     # 
     # \note To ensure the validity of the written data, it is recommended to open the output stream in binary mode.
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass

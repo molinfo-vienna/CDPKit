@@ -35,11 +35,10 @@ class Atom2DCoordinatesCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate 2D-coordinates.
     # \param coords An array containing the calculated 2D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # 
-    def __init__(molgraph: MolecularGraph, coords: CDPL.Math.Vector2DArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, coords: Math.Vector2DArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Atom2DCoordinatesCalculator instance this method is called upon.
     # 
     # Different Python \e %Atom2DCoordinatesCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Atom2DCoordinatesCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,6 +55,6 @@ class Atom2DCoordinatesCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate 2D-coordinates.
     # \param coords An array containing the calculated 2D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # 
-    def calculate(molgraph: MolecularGraph, coords: CDPL.Math.Vector2DArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, coords: Math.Vector2DArray) -> None: pass
 
     objectID = property(getObjectID)

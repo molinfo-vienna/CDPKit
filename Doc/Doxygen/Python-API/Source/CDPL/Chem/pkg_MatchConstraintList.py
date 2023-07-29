@@ -51,7 +51,6 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MatchConstraintList instance.
-    # \param self The \e %MatchConstraintList instance to initialize.
     # \param list 
     # 
     def __init__(list: MatchConstraintList) -> None: pass
@@ -65,7 +64,6 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # 
     # Different Python \e %MatchConstraintList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MatchConstraintList instances \e a and \e b reference different C++ objects. 
@@ -114,7 +112,6 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraintList instance \a array.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param array The \e %MatchConstraintList instance to copy.
     # \return \a self
     # 
@@ -122,7 +119,6 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param num_elem The \e %int instance to copy.
     # \return \a self
     # 
@@ -149,7 +145,7 @@ class MatchConstraintList(Boost.Python.instance):
     # \param rel The relational constraint on the values of matching query/target attribute pairs.
     # \param val The value of the query attribute.
     # 
-    def addElement(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
+    def addElement(id: int, rel: Relation, val: Base.Any) -> None: pass
 
     ##
     # \brief 
@@ -265,7 +261,6 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %MatchConstraintList instance.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

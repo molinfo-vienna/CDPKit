@@ -26,20 +26,17 @@ class VoidPharmacophoreFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %VoidPharmacophoreFunctor instance.
-    # \param self The \e %VoidPharmacophoreFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %VoidPharmacophoreFunctor instance.
-    # \param self The \e %VoidPharmacophoreFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: VoidPharmacophoreFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %VoidPharmacophoreFunctor instance.
-    # \param arg1 The \e %VoidPharmacophoreFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -48,7 +45,7 @@ class VoidPharmacophoreFunctor(Boost.Python.instance):
     # \brief 
     # \param arg1 
     #
-    def __call__(arg1: CDPL.Pharm.Pharmacophore) -> None: pass
+    def __call__(arg1: Pharm.Pharmacophore) -> None: pass
 
     ##
     # \brief 

@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of molecular graph dara in the PSD-format of the <em>CDPL</em>.
 # 
-class PSDMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
+class PSDMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PSDMolecularGraphOutputHandler instance.
-    # \param self The \e %PSDMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

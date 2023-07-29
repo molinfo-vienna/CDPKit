@@ -26,14 +26,12 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstFVectorRange instance.
-    # \param self The \e %ConstFVectorRange instance to initialize.
     # \param r 
     # 
     def __init__(r: ConstFVectorRange) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstFVectorRange instance.
-    # \param self The \e %ConstFVectorRange instance to initialize.
     # \param e 
     # \param r 
     # 
@@ -47,7 +45,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstFVectorRange instance this method is called upon.
     # 
     # Different Python \e %ConstFVectorRange instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstFVectorRange instances \e a and \e b reference different C++ objects. 
@@ -91,7 +88,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %ConstFVectorRange instance this method is called upon.
     # \param r The \e %ConstFVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -99,7 +95,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstFVectorRange instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -107,7 +102,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %ConstFVectorRange instance this method is called upon.
     # \param r The \e %ConstFVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -115,7 +109,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstFVectorRange instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -143,7 +136,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %ConstFVectorRange instance.
-    # \param self The \e %ConstFVectorRange instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -162,7 +154,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstFVectorRange instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstFVectorExpression instance holding the result of the addition.
     # 
@@ -170,7 +161,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstFVectorRange instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstFVectorRange instance holding the result of the subtraction.
     # 
@@ -178,7 +168,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstFVectorRange instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     # 
@@ -186,7 +175,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstFVectorRange instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     # 
@@ -194,7 +182,6 @@ class ConstFVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstFVectorRange instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstFVectorExpression instance holding the result of the division.
     # 

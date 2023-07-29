@@ -31,14 +31,12 @@ class BitSetArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BitSetArray instance.
-    # \param self The \e %BitSetArray instance to initialize.
     # \param array 
     # 
     def __init__(array: BitSetArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BitSetArray instance this method is called upon.
     # 
     # Different Python \e %BitSetArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BitSetArray instances \e a and \e b reference different C++ objects. 
@@ -98,7 +96,6 @@ class BitSetArray(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BitSetArray instance \a array.
-    # \param self The \e %BitSetArray instance this method is called upon.
     # \param array The \e %BitSetArray instance to copy.
     # \return \a self
     # 

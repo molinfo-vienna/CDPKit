@@ -26,7 +26,7 @@
 # \param grad 
 # \return 
 #
-def calcMMFF94AngleBendingGradient(ia_data: MMFF94AngleBendingInteractionData, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94AngleBendingGradient(ia_data: MMFF94AngleBendingInteractionData, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def calcMMFF94AngleBendingGradient(ia_data: MMFF94AngleBendingInteractionData, c
 # \param coords 
 # \return 
 #
-def calcMMFF94AngleBendingEnergy(ia_data: MMFF94AngleBendingInteractionData, coords: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94AngleBendingEnergy(ia_data: MMFF94AngleBendingInteractionData, coords: Math.Vector3DArray) -> float: pass

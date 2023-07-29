@@ -22,12 +22,11 @@
 ##
 # \brief 
 #
-class FilePDBBZ2MoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class FilePDBBZ2MoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FilePDBBZ2MoleculeReader instance.
-    # \param self The \e %FilePDBBZ2MoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

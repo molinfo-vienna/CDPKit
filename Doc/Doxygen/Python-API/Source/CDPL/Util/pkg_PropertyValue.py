@@ -38,4 +38,4 @@ class PropertyValue(builtins.object):
     # 
     # \return The value of the property.
     # 
-    def __call__(cntnr: CDPL.Base.PropertyContainer) -> object: pass
+    def __call__(cntnr: Base.PropertyContainer) -> object: pass

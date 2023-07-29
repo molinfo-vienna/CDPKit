@@ -26,13 +26,11 @@ class FragmentAssembler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentAssembler instance.
-    # \param self The \e %FragmentAssembler instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentAssembler instance this method is called upon.
     # 
     # Different Python \e %FragmentAssembler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentAssembler instances \e a and \e b reference different C++ objects. 
@@ -101,7 +99,7 @@ class FragmentAssembler(Boost.Python.instance):
     # \param molgraph 
     # \return 
     #
-    def assemble(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+    def assemble(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 

@@ -26,7 +26,7 @@
 # \param het_h_rotors 
 # \return 
 #
-def isRotatableBond(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, het_h_rotors: bool) -> bool: pass
+def isRotatableBond(bond: Chem.Bond, molgraph: Chem.MolecularGraph, het_h_rotors: bool) -> bool: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def isRotatableBond(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, he
 # \param molgraph 
 # \return 
 #
-def isFragmentLinkBond(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isFragmentLinkBond(bond: Chem.Bond, molgraph: Chem.MolecularGraph) -> bool: pass

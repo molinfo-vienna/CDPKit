@@ -25,14 +25,14 @@
 # \param molgraph 
 # \return 
 #
-def isUnsaturated(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isUnsaturated(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getPeriod(atom: CDPL.Chem.Atom) -> int: pass
+def getPeriod(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
@@ -40,7 +40,7 @@ def getPeriod(atom: CDPL.Chem.Atom) -> int: pass
 # \param molgraph 
 # \return 
 #
-def calcValence(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcValence(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -48,129 +48,129 @@ def calcValence(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int
 # \param molgraph 
 # \return 
 #
-def calcExplicitValence(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcExplicitValence(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearPEOESigmaCharge(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasPEOESigmaCharge(atom: CDPL.Chem.Atom) -> bool: pass
+def clearPEOESigmaCharge(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getPEOESigmaCharge(atom: CDPL.Chem.Atom) -> float: pass
+def hasPEOESigmaCharge(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getPEOESigmaCharge(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param charge 
 #
-def setPEOESigmaCharge(atom: CDPL.Chem.Atom, charge: float) -> None: pass
+def setPEOESigmaCharge(atom: Chem.Atom, charge: float) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearMHMOPiCharge(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasMHMOPiCharge(atom: CDPL.Chem.Atom) -> bool: pass
+def clearMHMOPiCharge(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getMHMOPiCharge(atom: CDPL.Chem.Atom) -> float: pass
+def hasMHMOPiCharge(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getMHMOPiCharge(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param charge 
 #
-def setMHMOPiCharge(atom: CDPL.Chem.Atom, charge: float) -> None: pass
+def setMHMOPiCharge(atom: Chem.Atom, charge: float) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def calcTotalPartialCharge(atom: CDPL.Chem.Atom) -> float: pass
+def calcTotalPartialCharge(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getElementName(atom: CDPL.Chem.Atom) -> str: pass
+def getElementName(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearHBondDonorType(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasHBondDonorType(atom: CDPL.Chem.Atom) -> bool: pass
+def clearHBondDonorType(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getHBondDonorType(atom: CDPL.Chem.Atom) -> int: pass
+def hasHBondDonorType(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHBondDonorType(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 # \param type 
 #
-def setHBondDonorType(atom: CDPL.Chem.Atom, type: int) -> None: pass
+def setHBondDonorType(atom: Chem.Atom, type: int) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearHBondAcceptorType(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasHBondAcceptorType(atom: CDPL.Chem.Atom) -> bool: pass
+def clearHBondAcceptorType(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getHBondAcceptorType(atom: CDPL.Chem.Atom) -> int: pass
+def hasHBondAcceptorType(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHBondAcceptorType(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 # \param type 
 #
-def setHBondAcceptorType(atom: CDPL.Chem.Atom, type: int) -> None: pass
+def setHBondAcceptorType(atom: Chem.Atom, type: int) -> None: pass
 
 ##
 # \brief 
@@ -179,7 +179,7 @@ def setHBondAcceptorType(atom: CDPL.Chem.Atom, type: int) -> None: pass
 # \param size 
 # \return 
 #
-def isInRingOfSize(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, size: int) -> bool: pass
+def isInRingOfSize(atom: Chem.Atom, molgraph: Chem.MolecularGraph, size: int) -> bool: pass
 
 ##
 # \brief 
@@ -187,45 +187,35 @@ def isInRingOfSize(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, siz
 # \param molgraph 
 # \return 
 #
-def isInRing(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isInRing(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isSemiMetal(atom: CDPL.Chem.Atom) -> bool: pass
+def isSemiMetal(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isNonMetal(atom: CDPL.Chem.Atom) -> bool: pass
+def isNonMetal(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isTransitionMetal(atom: CDPL.Chem.Atom) -> bool: pass
+def isTransitionMetal(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isMetal(atom: CDPL.Chem.Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isCarbonylLikeAtom(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
+def isMetal(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
@@ -235,14 +225,24 @@ def isCarbonylLikeAtom(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph,
 # \param db_o_only 
 # \return 
 #
-def isAmideCenterAtom(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
+def isCarbonylLikeAtom(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \param c_only 
+# \param db_o_only 
+# \return 
+#
+def isAmideCenterAtom(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isHalogen(atom: CDPL.Chem.Atom) -> bool: pass
+def isHalogen(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
@@ -251,7 +251,7 @@ def isHalogen(atom: CDPL.Chem.Atom) -> bool: pass
 # \param flags 
 # \return 
 #
-def isOrdinaryHydrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> bool: pass
+def isOrdinaryHydrogen(atom: Chem.Atom, molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> bool: pass
 
 ##
 # \brief 
@@ -261,7 +261,7 @@ def isOrdinaryHydrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph,
 # \param db_o_only 
 # \return 
 #
-def isAmideNitrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
+def isAmideNitrogen(atom: Chem.Atom, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
 
 ##
 # \brief 
@@ -269,7 +269,7 @@ def isAmideNitrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, c_
 # \param molgraph 
 # \return 
 #
-def isInvertibleNitrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isInvertibleNitrogen(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -277,22 +277,14 @@ def isInvertibleNitrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param molgraph 
 # \return 
 #
-def isPlanarNitrogen(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isPlanarNitrogen(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getIUPACGroup(atom: CDPL.Chem.Atom) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def calcStericNumber(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getIUPACGroup(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
@@ -300,7 +292,7 @@ def calcStericNumber(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -
 # \param molgraph 
 # \return 
 #
-def isHBondDonor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def calcStericNumber(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -308,14 +300,7 @@ def isHBondDonor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bo
 # \param molgraph 
 # \return 
 #
-def isHBondAcceptor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isNobleGas(atom: CDPL.Chem.Atom) -> bool: pass
+def isHBondDonor(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -323,14 +308,29 @@ def isNobleGas(atom: CDPL.Chem.Atom) -> bool: pass
 # \param molgraph 
 # \return 
 #
-def getNumContainingSSSRRings(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def isHBondAcceptor(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getVdWRadius(atom: CDPL.Chem.Atom) -> float: pass
+def isNobleGas(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \return 
+#
+def getNumContainingSSSRRings(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getVdWRadius(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
@@ -338,7 +338,7 @@ def getVdWRadius(atom: CDPL.Chem.Atom) -> float: pass
 # \param order 
 # \return 
 #
-def getCovalentRadius(atom: CDPL.Chem.Atom, order: int = 1) -> float: pass
+def getCovalentRadius(atom: Chem.Atom, order: int = 1) -> float: pass
 
 ##
 # \brief 
@@ -347,28 +347,28 @@ def getCovalentRadius(atom: CDPL.Chem.Atom, order: int = 1) -> float: pass
 # \param num_bonds 
 # \return 
 #
-def calcInductiveEffect(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, num_bonds: int = 10) -> float: pass
+def calcInductiveEffect(atom: Chem.Atom, molgraph: Chem.MolecularGraph, num_bonds: int = 10) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getAtomicWeight(atom: CDPL.Chem.Atom) -> float: pass
+def getAtomicWeight(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isChemicalElement(atom: CDPL.Chem.Atom) -> bool: pass
+def isChemicalElement(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isMainGroupElement(atom: CDPL.Chem.Atom) -> bool: pass
+def isMainGroupElement(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
@@ -376,7 +376,7 @@ def isMainGroupElement(atom: CDPL.Chem.Atom) -> bool: pass
 # \param molgraph 
 # \return 
 #
-def getAromaticBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getAromaticBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -387,7 +387,7 @@ def getAromaticBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param amide_bonds 
 # \return 
 #
-def getRotatableBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
+def getRotatableBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
 
 ##
 # \brief 
@@ -395,7 +395,7 @@ def getRotatableBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGra
 # \param molgraph 
 # \return 
 #
-def getRingBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getRingBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -403,7 +403,7 @@ def getRingBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -
 # \param molgraph 
 # \return 
 #
-def getChainBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getChainBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -411,7 +411,7 @@ def getChainBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) 
 # \param molgraph 
 # \return 
 #
-def getExplicitChainBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getExplicitChainBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -419,35 +419,7 @@ def getExplicitChainBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.Molecula
 # \param molgraph 
 # \return 
 #
-def getBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param order 
-# \return 
-#
-def getBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, order: int) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param order 
-# \param type 
-# \param strict 
-# \return 
-#
-def getBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getExplicitBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -456,7 +428,7 @@ def getExplicitBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param order 
 # \return 
 #
-def getExplicitBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, order: int) -> int: pass
+def getBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int) -> int: pass
 
 ##
 # \brief 
@@ -467,7 +439,7 @@ def getExplicitBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param strict 
 # \return 
 #
-def getExplicitBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
+def getBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -475,7 +447,27 @@ def getExplicitBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param molgraph 
 # \return 
 #
-def getHeavyBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getExplicitBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \param order 
+# \return 
+#
+def getExplicitBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \param order 
+# \param type 
+# \param strict 
+# \return 
+#
+def getExplicitBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -483,7 +475,7 @@ def getHeavyBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) 
 # \param molgraph 
 # \return 
 #
-def getAromaticAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getHeavyBondCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -491,7 +483,7 @@ def getAromaticAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param molgraph 
 # \return 
 #
-def getRingAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getAromaticAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -499,7 +491,7 @@ def getRingAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -
 # \param molgraph 
 # \return 
 #
-def getChainAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getRingAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -507,7 +499,15 @@ def getChainAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) 
 # \param molgraph 
 # \return 
 #
-def getExplicitChainAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getChainAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \return 
+#
+def getExplicitChainAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -517,7 +517,7 @@ def getExplicitChainAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.Molecula
 # \param strict 
 # \return 
 #
-def getAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
+def getAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -527,7 +527,7 @@ def getAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, type:
 # \param strict 
 # \return 
 #
-def getExplicitAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
+def getExplicitAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, type: int, strict: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -535,7 +535,7 @@ def getExplicitAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \param molgraph 
 # \return 
 #
-def getHeavyAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getHeavyAtomCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -544,29 +544,14 @@ def getHeavyAtomCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) 
 # \param flags 
 # \return 
 #
-def getOrdinaryHydrogenCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> int: pass
+def getOrdinaryHydrogenCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def calcValenceElectronCount(atom: CDPL.Chem.Atom) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def calcFreeValenceElectronCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def getElementValenceElectronCount(atom: CDPL.Chem.Atom) -> int: pass
+def calcValenceElectronCount(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
@@ -574,7 +559,22 @@ def getElementValenceElectronCount(atom: CDPL.Chem.Atom) -> int: pass
 # \param molgraph 
 # \return 
 #
-def getVSEPRCoordinationGeometry(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcFreeValenceElectronCount(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getElementValenceElectronCount(atom: Chem.Atom) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \return 
+#
+def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -583,34 +583,34 @@ def getVSEPRCoordinationGeometry(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.Molec
 # \param steric_num 
 # \return 
 #
-def getVSEPRCoordinationGeometry(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, steric_num: int) -> int: pass
+def getVSEPRCoordinationGeometry(atom: Chem.Atom, molgraph: Chem.MolecularGraph, steric_num: int) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearHydrophobicity(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasHydrophobicity(atom: CDPL.Chem.Atom) -> bool: pass
+def clearHydrophobicity(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getHydrophobicity(atom: CDPL.Chem.Atom) -> float: pass
+def hasHydrophobicity(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHydrophobicity(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param hyd 
 #
-def setHydrophobicity(atom: CDPL.Chem.Atom, hyd: float) -> None: pass
+def setHydrophobicity(atom: Chem.Atom, hyd: float) -> None: pass
 
 ##
 # \brief 
@@ -618,7 +618,7 @@ def setHydrophobicity(atom: CDPL.Chem.Atom, hyd: float) -> None: pass
 # \param molgraph 
 # \return 
 #
-def getHybridPolarizability(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def getHybridPolarizability(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
@@ -627,34 +627,34 @@ def getHybridPolarizability(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularG
 # \param damping 
 # \return 
 #
-def calcEffectivePolarizability(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, damping: float = 0.75) -> float: pass
+def calcEffectivePolarizability(atom: Chem.Atom, molgraph: Chem.MolecularGraph, damping: float = 0.75) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearPEOESigmaElectronegativity(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasPEOESigmaElectronegativity(atom: CDPL.Chem.Atom) -> bool: pass
+def clearPEOESigmaElectronegativity(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getPEOESigmaElectronegativity(atom: CDPL.Chem.Atom) -> float: pass
+def hasPEOESigmaElectronegativity(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getPEOESigmaElectronegativity(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param e_neg 
 #
-def setPEOESigmaElectronegativity(atom: CDPL.Chem.Atom, e_neg: float) -> None: pass
+def setPEOESigmaElectronegativity(atom: Chem.Atom, e_neg: float) -> None: pass
 
 ##
 # \brief 
@@ -662,7 +662,7 @@ def setPEOESigmaElectronegativity(atom: CDPL.Chem.Atom, e_neg: float) -> None: p
 # \param molgraph 
 # \return 
 #
-def calcPiElectronegativity(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcPiElectronegativity(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
@@ -670,18 +670,18 @@ def calcPiElectronegativity(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularG
 # \param molgraph 
 # \return 
 #
-def calcLonePairElectronegativity(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcLonePairElectronegativity(atom: Chem.Atom, molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getAllredRochowElectronegativity(atom: CDPL.Chem.Atom) -> float: pass
+def getAllredRochowElectronegativity(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isHeavy(atom: CDPL.Chem.Atom) -> bool: pass
+def isHeavy(atom: Chem.Atom) -> bool: pass

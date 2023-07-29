@@ -23,538 +23,538 @@
 # \brief 
 # \param molgraph 
 #
-def clearAtomColorTable(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+def clearAtomColorTable(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def hasAtomColorTable(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def hasAtomColorTable(molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getAtomColorTable(molgraph: CDPL.Chem.MolecularGraph) -> ColorTable: pass
+def getAtomColorTable(molgraph: Chem.MolecularGraph) -> ColorTable: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param colors 
 #
-def setAtomColorTable(molgraph: CDPL.Chem.MolecularGraph, colors: ColorTable) -> None: pass
+def setAtomColorTable(molgraph: Chem.MolecularGraph, colors: ColorTable) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearBondLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasBondLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearBondLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getBondLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasBondLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param size 
 #
-def setBondLabelSize(molgraph: CDPL.Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+def setBondLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearAtomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasAtomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param size 
 #
-def setAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+def setAtomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearSecondaryAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasSecondaryAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getSecondaryAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param size 
 #
-def setSecondaryAtomLabelSize(molgraph: CDPL.Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+def setSecondaryAtomLabelSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearRadicalElectronDotSize(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasRadicalElectronDotSize(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getRadicalElectronDotSize(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getRadicalElectronDotSize(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param size 
 #
-def setRadicalElectronDotSize(molgraph: CDPL.Chem.MolecularGraph, size: SizeSpecification) -> None: pass
+def setRadicalElectronDotSize(molgraph: Chem.MolecularGraph, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearBondLineSpacing(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasBondLineSpacing(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearBondLineSpacing(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getBondLineSpacing(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasBondLineSpacing(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondLineSpacing(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param spacing 
 #
-def setBondLineSpacing(molgraph: CDPL.Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
+def setBondLineSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearReactionCenterLineSpacing(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasReactionCenterLineSpacing(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearReactionCenterLineSpacing(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getReactionCenterLineSpacing(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasReactionCenterLineSpacing(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getReactionCenterLineSpacing(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param spacing 
 #
-def setReactionCenterLineSpacing(molgraph: CDPL.Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
+def setReactionCenterLineSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearStereoBondHashSpacing(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasStereoBondHashSpacing(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearStereoBondHashSpacing(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getStereoBondHashSpacing(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasStereoBondHashSpacing(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getStereoBondHashSpacing(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param spacing 
 #
-def setStereoBondHashSpacing(molgraph: CDPL.Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
+def setStereoBondHashSpacing(molgraph: Chem.MolecularGraph, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearStereoBondWedgeWidth(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasStereoBondWedgeWidth(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getStereoBondWedgeWidth(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getStereoBondWedgeWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param width 
 #
-def setStereoBondWedgeWidth(molgraph: CDPL.Chem.MolecularGraph, width: SizeSpecification) -> None: pass
+def setStereoBondWedgeWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearBondLineWidth(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasBondLineWidth(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearBondLineWidth(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getBondLineWidth(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasBondLineWidth(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondLineWidth(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param width 
 #
-def setBondLineWidth(molgraph: CDPL.Chem.MolecularGraph, width: SizeSpecification) -> None: pass
+def setBondLineWidth(molgraph: Chem.MolecularGraph, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearReactionCenterLineLength(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasReactionCenterLineLength(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearReactionCenterLineLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getReactionCenterLineLength(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasReactionCenterLineLength(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getReactionCenterLineLength(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param length 
 #
-def setReactionCenterLineLength(molgraph: CDPL.Chem.MolecularGraph, length: SizeSpecification) -> None: pass
+def setReactionCenterLineLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearDoubleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasDoubleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearDoubleBondTrimLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getDoubleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasDoubleBondTrimLength(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getDoubleBondTrimLength(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param length 
 #
-def setDoubleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph, length: SizeSpecification) -> None: pass
+def setDoubleBondTrimLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearTripleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasTripleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getTripleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getTripleBondTrimLength(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param length 
 #
-def setTripleBondTrimLength(molgraph: CDPL.Chem.MolecularGraph, length: SizeSpecification) -> None: pass
+def setTripleBondTrimLength(molgraph: Chem.MolecularGraph, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearBondLabelMargin(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasBondLabelMargin(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearBondLabelMargin(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getBondLabelMargin(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasBondLabelMargin(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondLabelMargin(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param margin 
 #
-def setBondLabelMargin(molgraph: CDPL.Chem.MolecularGraph, margin: SizeSpecification) -> None: pass
+def setBondLabelMargin(molgraph: Chem.MolecularGraph, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearAtomLabelMargin(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasAtomLabelMargin(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearAtomLabelMargin(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getAtomLabelMargin(molgraph: CDPL.Chem.MolecularGraph) -> SizeSpecification: pass
+def hasAtomLabelMargin(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomLabelMargin(molgraph: Chem.MolecularGraph) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param margin 
 #
-def setAtomLabelMargin(molgraph: CDPL.Chem.MolecularGraph, margin: SizeSpecification) -> None: pass
+def setAtomLabelMargin(molgraph: Chem.MolecularGraph, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearBondColor(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasBondColor(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearBondColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getBondColor(molgraph: CDPL.Chem.MolecularGraph) -> Color: pass
+def hasBondColor(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param color 
 #
-def setBondColor(molgraph: CDPL.Chem.MolecularGraph, color: Color) -> None: pass
+def setBondColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearAtomColor(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasAtomColor(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearAtomColor(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getAtomColor(molgraph: CDPL.Chem.MolecularGraph) -> Color: pass
+def hasAtomColor(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomColor(molgraph: Chem.MolecularGraph) -> Color: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param color 
 #
-def setAtomColor(molgraph: CDPL.Chem.MolecularGraph, color: Color) -> None: pass
+def setAtomColor(molgraph: Chem.MolecularGraph, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearBondLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasBondLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearBondLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getBondLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> Font: pass
+def hasBondLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getBondLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param font 
 #
-def setBondLabelFont(molgraph: CDPL.Chem.MolecularGraph, font: Font) -> None: pass
+def setBondLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearAtomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> Font: pass
+def hasAtomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getAtomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param font 
 #
-def setAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph, font: Font) -> None: pass
+def setAtomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 #
-def clearSecondaryAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def hasSecondaryAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def clearSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getSecondaryAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph) -> Font: pass
+def hasSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph) -> Font: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param font 
 #
-def setSecondaryAtomLabelFont(molgraph: CDPL.Chem.MolecularGraph, font: Font) -> None: pass
+def setSecondaryAtomLabelFont(molgraph: Chem.MolecularGraph, font: Font) -> None: pass

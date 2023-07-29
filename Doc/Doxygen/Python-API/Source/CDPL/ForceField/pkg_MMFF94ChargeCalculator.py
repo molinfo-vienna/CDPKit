@@ -26,29 +26,25 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param self The \e %MMFF94ChargeCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param self The \e %MMFF94ChargeCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: MMFF94ChargeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param self The \e %MMFF94ChargeCalculator instance to initialize.
     # \param molgraph 
     # \param charges 
     # \param strict 
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray, strict: bool) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, charges: Util.DArray, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # 
     # Different Python \e %MMFF94ChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94ChargeCalculator instances \e a and \e b reference different C++ objects. 
@@ -109,7 +105,6 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ChargeCalculator instance \a parameterizer.
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param parameterizer The \e %MMFF94ChargeCalculator instance to copy.
     # \return \a self
     # 
@@ -128,19 +123,19 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     # \param charges The output array storing the calculated partial charges.
     # \param strict If <tt>True</tt>, strict parameterization will be peformed that might fail.
     # 
-    def calculate(molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray, strict: bool) -> None: pass
+    def calculate(molgraph: Chem.MolecularGraph, charges: Util.DArray, strict: bool) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getFormalCharges() -> CDPL.Util.DArray: pass
+    def getFormalCharges() -> Util.DArray: pass
 
     ##
     # \brief 
     # \param arg1 
     # \return 
     #
-    def formalCharges() -> CDPL.Util.DArray: pass
+    def formalCharges() -> Util.DArray: pass
 
     objectID = property(getObjectID)

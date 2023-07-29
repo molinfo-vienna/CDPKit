@@ -56,27 +56,23 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # \param ref_shape 
     # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # \param ref_shapes 
     # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # 
     # Different Python \e %FastGaussianShapeAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FastGaussianShapeAlignment instances \e a and \e b reference different C++ objects. 

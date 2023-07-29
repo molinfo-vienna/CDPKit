@@ -26,8 +26,7 @@ class FileRDFBZ2ReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %FileRDFBZ2ReactionReader instance.
-    # \param self The \e %FileRDFBZ2ReactionReader instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

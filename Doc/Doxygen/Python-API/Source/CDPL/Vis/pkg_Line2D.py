@@ -31,7 +31,6 @@ class Line2D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Line2D instance.
-    # \param self The \e %Line2D instance to initialize.
     # \param line 
     # 
     def __init__(line: Line2D) -> None: pass
@@ -42,7 +41,7 @@ class Line2D(Boost.Python.instance):
     # \param beg The starting point.
     # \param end The end point.
     # 
-    def __init__(beg: CDPL.Math.Vector2D, end: CDPL.Math.Vector2D) -> None: pass
+    def __init__(beg: Math.Vector2D, end: Math.Vector2D) -> None: pass
 
     ##
     # \brief Constructs a line with the starting point set to <em>(beg_x, beg_y)</em> and the end point set to <em>(end_x, end_y)</em>.
@@ -56,7 +55,6 @@ class Line2D(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Line2D instance this method is called upon.
     # 
     # Different Python \e %Line2D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Line2D instances \e a and \e b reference different C++ objects. 
@@ -69,7 +67,6 @@ class Line2D(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Line2D instance \a line.
-    # \param self The \e %Line2D instance this method is called upon.
     # \param line The \e %Line2D instance to copy.
     # \return \a self
     # 
@@ -80,7 +77,7 @@ class Line2D(Boost.Python.instance):
     # 
     # \param pt The new starting point of the line.
     # 
-    def setBegin(pt: CDPL.Math.Vector2D) -> None: pass
+    def setBegin(pt: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the starting point of the line to <em>(x, y)</em>.
@@ -95,14 +92,14 @@ class Line2D(Boost.Python.instance):
     # 
     # \return The starting point of the line.
     # 
-    def getBegin() -> CDPL.Math.Vector2D: pass
+    def getBegin() -> Math.Vector2D: pass
 
     ##
     # \brief Sets the end point of the line to <em>pt</em>.
     # 
     # \param pt The new end point of the line.
     # 
-    def setEnd(pt: CDPL.Math.Vector2D) -> None: pass
+    def setEnd(pt: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the end point of the line to <em>(x, y)</em>.
@@ -117,7 +114,7 @@ class Line2D(Boost.Python.instance):
     # 
     # \return The end point of the line.
     # 
-    def getEnd() -> CDPL.Math.Vector2D: pass
+    def getEnd() -> Math.Vector2D: pass
 
     ##
     # \brief Sets the starting point of the line to <em>beg</em> and the end point to <em>end</em>.
@@ -125,7 +122,7 @@ class Line2D(Boost.Python.instance):
     # \param beg The new starting point.
     # \param end The new end point.
     # 
-    def setPoints(beg: CDPL.Math.Vector2D, end: CDPL.Math.Vector2D) -> None: pass
+    def setPoints(beg: Math.Vector2D, end: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the starting point of the line to <em>(beg_x, beg_y)</em> and the end point to <em>(end_x, end_y)</em>.
@@ -149,56 +146,56 @@ class Line2D(Boost.Python.instance):
     # 
     # \return The calculated direction vector.
     # 
-    def getDirection() -> CDPL.Math.Vector2D: pass
+    def getDirection() -> Math.Vector2D: pass
 
     ##
     # \brief Calculates the normalized direction vector of the line and stores the result in <em>dir</em>.
     # 
     # \param dir Holds the calculated direction vector.
     # 
-    def getDirection(dir: CDPL.Math.Vector2D) -> None: pass
+    def getDirection(dir: Math.Vector2D) -> None: pass
 
     ##
     # \brief Calculates the normalized direction vector rotated by <em>90</em> degrees in counter-clockwise direction.
     # 
     # \return The calculated rotated direction vector.
     # 
-    def getCCWPerpDirection() -> CDPL.Math.Vector2D: pass
+    def getCCWPerpDirection() -> Math.Vector2D: pass
 
     ##
     # \brief Calculates the normalized direction vector rotated by <em>90</em> degrees in counter-clockwise direction and stores the result in <em>dir</em>.
     # 
     # \param dir Holds the calculated rotated direction vector.
     # 
-    def getCCWPerpDirection(dir: CDPL.Math.Vector2D) -> None: pass
+    def getCCWPerpDirection(dir: Math.Vector2D) -> None: pass
 
     ##
     # \brief Calculates the normalized direction vector rotated by <em>90</em> degrees in clockwise direction.
     # 
     # \return The calculated rotated direction vector.
     # 
-    def getCWPerpDirection() -> CDPL.Math.Vector2D: pass
+    def getCWPerpDirection() -> Math.Vector2D: pass
 
     ##
     # \brief Calculates the normalized direction vector rotated by <em>90</em> degrees in clockwise direction and stores the result in <em>dir</em>.
     # 
     # \param dir Holds the calculated rotated direction vector.
     # 
-    def getCWPerpDirection(dir: CDPL.Math.Vector2D) -> None: pass
+    def getCWPerpDirection(dir: Math.Vector2D) -> None: pass
 
     ##
     # \brief Calculates the center point of the line.
     # 
     # \return The calculated center point of the line.
     # 
-    def getCenter() -> CDPL.Math.Vector2D: pass
+    def getCenter() -> Math.Vector2D: pass
 
     ##
     # \brief Calculates the center point of the line and stores the result in <em>ctr</em>.
     # 
     # \param ctr Holds the calculated center point of the line.
     # 
-    def getCenter(ctr: CDPL.Math.Vector2D) -> None: pass
+    def getCenter(ctr: Math.Vector2D) -> None: pass
 
     ##
     # \brief Returns the length of the line segment.
@@ -212,21 +209,21 @@ class Line2D(Boost.Python.instance):
     # 
     # \param vec The translation vector.
     # 
-    def translate(vec: CDPL.Math.Vector2D) -> None: pass
+    def translate(vec: Math.Vector2D) -> None: pass
 
     ##
     # \brief Translates the starting point of the line by <em>vec</em>.
     # 
     # \param vec The translation vector.
     # 
-    def translateBegin(vec: CDPL.Math.Vector2D) -> None: pass
+    def translateBegin(vec: Math.Vector2D) -> None: pass
 
     ##
     # \brief Translates the end of the line point by <em>vec</em>.
     # 
     # \param vec The translation vector.
     # 
-    def translateEnd(vec: CDPL.Math.Vector2D) -> None: pass
+    def translateEnd(vec: Math.Vector2D) -> None: pass
 
     ##
     # \brief Tests if the point <em>pt</em> is contained within the boundary of the line segment.
@@ -237,7 +234,7 @@ class Line2D(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if <em>pt</em> is contained within the boundary of the line segment, and <tt>False</tt> otherwise.
     # 
-    def containsPoint(pt: CDPL.Math.Vector2D) -> bool: pass
+    def containsPoint(pt: Math.Vector2D) -> bool: pass
 
     ##
     # \brief 
@@ -321,7 +318,7 @@ class Line2D(Boost.Python.instance):
     # 
     # \return The shortest distance between <em>pt</em> and the infinitely extended line.
     # 
-    def getDistance(pt: CDPL.Math.Vector2D) -> float: pass
+    def getDistance(pt: Math.Vector2D) -> float: pass
 
     ##
     # \brief Equality comparison operator.
@@ -345,11 +342,10 @@ class Line2D(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>pt in self</tt>.
-    # \param self The \e %Line2D instance this method is called upon.
     # \param pt The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(pt: CDPL.Math.Vector2D) -> bool: pass
+    def __contains__(pt: Math.Vector2D) -> bool: pass
 
     objectID = property(getObjectID)
 

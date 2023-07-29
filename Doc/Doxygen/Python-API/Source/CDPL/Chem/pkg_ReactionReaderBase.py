@@ -32,11 +32,10 @@
 # 
 # If a read() (or skip()) operation was successful, the current record index is updated to point to the record immediately following the just read (or skipped) data record. If an operation fails, the reader instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>ReactionReaderBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
-class ReactionReaderBase(CDPL.Base.DataIOBase):
+class ReactionReaderBase(Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %ReactionReaderBase instance.
-    # \param self The \e %ReactionReaderBase instance to initialize.
     # 
     def __init__() -> None: pass
 

@@ -98,7 +98,7 @@ class FeatureSet(FeatureContainer):
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -109,15 +109,13 @@ class FeatureSet(FeatureContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %FeatureSet instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param self The \e %FeatureSet instance this method is called upon.
     # \param ftr The value to test for membership.
     # \return The result of the membership test operation.
     # 
@@ -128,14 +126,14 @@ class FeatureSet(FeatureContainer):
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
@@ -145,7 +143,6 @@ class FeatureSet(FeatureContainer):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
-    # \param self The \e %FeatureSet instance acting as in-place addend.
     # \param cntnr Specifies the second addend.
     # \return The updated \e %FeatureSet instance \a self.
     # 
@@ -153,7 +150,6 @@ class FeatureSet(FeatureContainer):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= cntnr</tt>.
-    # \param self The \e %FeatureSet instance acting as in-place minuend.
     # \param cntnr Specifies the subtrahend.
     # \return The updated \e %FeatureSet instance \a self.
     # 

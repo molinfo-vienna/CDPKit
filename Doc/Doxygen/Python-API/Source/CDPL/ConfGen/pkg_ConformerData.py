@@ -22,28 +22,25 @@
 ##
 # \brief 
 #
-class ConformerData(CDPL.Math.Vector3DArray):
+class ConformerData(Math.Vector3DArray):
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    # \param self The \e %ConformerData instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    # \param self The \e %ConformerData instance to initialize.
     # \param data 
     # 
     def __init__(data: ConformerData) -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    # \param self The \e %ConformerData instance to initialize.
     # \param coords 
     # \param energy 
     # 
-    def __init__(coords: CDPL.Math.Vector3DArray, energy: float = 0.0) -> None: pass
+    def __init__(coords: Math.Vector3DArray, energy: float = 0.0) -> None: pass
 
     ##
     # \brief 
@@ -53,7 +50,6 @@ class ConformerData(CDPL.Math.Vector3DArray):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerData instance \a data.
-    # \param self The \e %ConformerData instance this method is called upon.
     # \param data The \e %ConformerData instance to copy.
     # \return \a self
     # 
@@ -61,11 +57,10 @@ class ConformerData(CDPL.Math.Vector3DArray):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3DArray instance \a coords.
-    # \param self The \e %ConformerData instance this method is called upon.
     # \param coords The \e %Vector3DArray instance to copy.
     # \return \a self
     # 
-    def assign(coords: CDPL.Math.Vector3DArray) -> ConformerData: pass
+    def assign(coords: Math.Vector3DArray) -> ConformerData: pass
 
     ##
     # \brief 

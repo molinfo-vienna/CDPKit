@@ -26,28 +26,24 @@ class HBondDonorAtomTyper(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %HBondDonorAtomTyper instance.
-    # \param self The \e %HBondDonorAtomTyper instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %HBondDonorAtomTyper instance.
-    # \param self The \e %HBondDonorAtomTyper instance to initialize.
     # \param typer 
     # 
     def __init__(typer: HBondDonorAtomTyper) -> None: pass
 
     ##
     # \brief Initializes the \e %HBondDonorAtomTyper instance.
-    # \param self The \e %HBondDonorAtomTyper instance to initialize.
     # \param molgraph 
     # \param types 
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, types: Util.UIArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %HBondDonorAtomTyper instance this method is called upon.
     # 
     # Different Python \e %HBondDonorAtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HBondDonorAtomTyper instances \e a and \e b reference different C++ objects. 
@@ -60,7 +56,6 @@ class HBondDonorAtomTyper(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondDonorAtomTyper instance \a typer.
-    # \param self The \e %HBondDonorAtomTyper instance this method is called upon.
     # \param typer The \e %HBondDonorAtomTyper instance to copy.
     # \return \a self
     # 
@@ -71,6 +66,6 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     # \param molgraph 
     # \param types 
     #
-    def perceiveTypes(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray) -> None: pass
+    def perceiveTypes(molgraph: Chem.MolecularGraph, types: Util.UIArray) -> None: pass
 
     objectID = property(getObjectID)

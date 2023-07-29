@@ -229,14 +229,30 @@ Base.DataInputHandler % Chem.ReactionInputHandler
 Base.DataOutputHandler % Chem.ReactionOutputHandler
 formats for a specific object type (specified by the template parameter <em>T</em>) % formats
 
+Chem.MoleculeInputHandler.create % Base.DataInputHandler.create
+Base.DataReader % MoleculeReaderBase
+A shared reference to t % T
+
 Chem.MoleculeInputHandler % Base.DataInputHandler
 Base.DataReader instances handling a particular object type and storage format % Chem.MoleculeReaderBase instances for reading data provided in a particular storage format
+
+Chem.MolecularGraphOutputHandler.create % Base.DataOutputHandler.create
+Base.DataWriter % MolecularGraphWriterBase
+A shared reference to t % T
 
 Chem.MolecularGraphOutputHandler % Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format % Chem.MolecularGraphWriterBase instances for data output in a particular storage format
 
+Chem.ReactionInputHandler.create % Base.DataInputHandler.create
+Base.DataReader % ReactionReaderBase
+A shared reference to t % T
+
 Chem.ReactionInputHandler % Base.DataInputHandler
 Base.DataReader instances handling a particular object type and storage format % Chem.ReactionReaderBase instances for reading data provided in a particular storage format
+
+Chem.ReactionOutputHandler.create % Base.DataOutputHandler.create
+Base.DataWriter % ReactionWriterBase
+A shared reference to t % T
 
 Chem.ReactionOutputHandler % Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format % Chem.ReactionWriterBase instances for data output in a particular storage format
@@ -383,8 +399,16 @@ Base.DataInputHandler % Pharm.FeatureContainerInputHandler
 Base.DataOutputHandler % Pharm.FeatureContainerOutputHandler
 formats for a specific object type (specified by the template parameter <em>T</em>) % formats
 
+Pharm.PharmacophoreInputHandler.create % Base.DataInputHandler.create
+Base.DataReader % PharmacophoreReaderBase
+A shared reference to t % T
+
 Pharm.PharmacophoreInputHandler % Base.DataInputHandler
 Base.DataReader instances handling a particular object type and storage format % Pharm.PharmacophoreReaderBase instances for reading data provided in a particular storage format
+
+Pharm.FeatureContainerOutputHandler.create % Base.DataOutputHandler.create
+Base.DataWriter % FeatureContainerWriterBase
+A shared reference to t % T
 
 Pharm.FeatureContainerOutputHandler % Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format % Pharm.FeatureContainerWriterBase instances for data output in a particular storage format
@@ -464,14 +488,30 @@ Base.DataInputHandler % Grid.DRegularGridSetInputHandler
 Base.DataOutputHandler % Grid.DRegularGridSetOutputHandler
 formats for a specific object type (specified by the template parameter <em>T</em>) % formats
 
+Grid.DRegularGridInputHandler.create % Base.DataInputHandler.create
+Base.DataReader % DRegularGridReaderBase
+A shared reference to t % T
+
 Grid.DRegularGridInputHandler % Base.DataInputHandler
 Base.DataReader instances handling a particular object type and storage format % Grid.DRegularGridReaderBase instances for reading data provided in a particular storage format
+
+Grid.DRegularGridOutputHandler.create % Base.DataOutputHandler.create
+Base.DataWriter % DRegularGridWriterBase
+A shared reference to t % T
 
 Grid.DRegularGridOutputHandler % Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format % Grid.DRegularGridWriterBase instances for data output in a particular storage format
 
+Grid.DRegularGridSetInputHandler.create % Base.DataInputHandler.create
+Base.DataReader % DRegularGridSetReaderBase
+A shared reference to t % T
+
 Grid.DRegularGridSetInputHandler % Base.DataInputHandler
 Base.DataReader instances handling a particular object type and storage format % Grid.DRegularGridSetReaderBase instances for reading data provided in a particular storage format
+
+Grid.DRegularGridSetOutputHandler.create % Base.DataOutputHandler.create
+Base.DataWriter % DRegularGridSetWriterBase
+A shared reference to t % T
 
 Grid.DRegularGridSetOutputHandler % Base.DataOutputHandler
 Base.DataWriter instances handling a particular object type and storage format % Grid.DRegularGridSetWriterBase instances for data output in a particular storage format

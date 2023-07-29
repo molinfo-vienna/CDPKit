@@ -31,7 +31,6 @@ class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param self The \e %LinePrimitive2D instance to initialize.
     # \param prim 
     # 
     def __init__(prim: LinePrimitive2D) -> None: pass
@@ -49,11 +48,10 @@ class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
     # \param beg The starting point.
     # \param end The end point.
     # 
-    def __init__(beg: CDPL.Math.Vector2D, end: CDPL.Math.Vector2D) -> None: pass
+    def __init__(beg: Math.Vector2D, end: Math.Vector2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LinePrimitive2D instance \a prim.
-    # \param self The \e %LinePrimitive2D instance this method is called upon.
     # \param prim The \e %LinePrimitive2D instance to copy.
     # \return \a self
     # 

@@ -26,7 +26,7 @@
 # \param coords 
 # \param reset 
 #
-def extendBoundingBox(min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, coords: CDPL.Math.Vector3D, reset: bool = False) -> None: pass
+def extendBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vector3D, reset: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -35,4 +35,4 @@ def extendBoundingBox(min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, coords: 
 # \param coords 
 # \return 
 #
-def insideBoundingBox(min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, coords: CDPL.Math.Vector3D) -> bool: pass
+def insideBoundingBox(min: Math.Vector3D, max: Math.Vector3D, coords: Math.Vector3D) -> bool: pass

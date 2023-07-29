@@ -22,11 +22,11 @@
 ##
 # \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
-class PDBMoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class PDBMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Constructs a <tt>PDBMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass

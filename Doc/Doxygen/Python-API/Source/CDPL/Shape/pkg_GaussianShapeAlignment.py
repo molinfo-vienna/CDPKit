@@ -51,27 +51,23 @@ class GaussianShapeAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignment instance.
-    # \param self The \e %GaussianShapeAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignment instance.
-    # \param self The \e %GaussianShapeAlignment instance to initialize.
     # \param ref_shape 
     # 
     def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignment instance.
-    # \param self The \e %GaussianShapeAlignment instance to initialize.
     # \param ref_shapes 
     # 
     def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeAlignment instance this method is called upon.
     # 
     # Different Python \e %GaussianShapeAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeAlignment instances \e a and \e b reference different C++ objects. 
@@ -122,13 +118,13 @@ class GaussianShapeAlignment(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setColorMatchFunction(func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
+    def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getColorMatchFunction() -> CDPL.Pharm.BoolSizeType2Functor: pass
+    def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief 

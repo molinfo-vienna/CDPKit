@@ -26,14 +26,12 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstLMatrixSlice instance.
-    # \param self The \e %ConstLMatrixSlice instance to initialize.
     # \param s 
     # 
     def __init__(s: ConstLMatrixSlice) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstLMatrixSlice instance.
-    # \param self The \e %ConstLMatrixSlice instance to initialize.
     # \param e 
     # \param s1 
     # \param s2 
@@ -66,7 +64,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstLMatrixSlice instance this method is called upon.
     # 
     # Different Python \e %ConstLMatrixSlice instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstLMatrixSlice instances \e a and \e b reference different C++ objects. 
@@ -138,7 +135,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == s</tt>.
-    # \param self The \e %ConstLMatrixSlice instance this method is called upon.
     # \param s The \e %ConstLMatrixSlice instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -146,7 +142,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstLMatrixSlice instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -154,7 +149,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
-    # \param self The \e %ConstLMatrixSlice instance this method is called upon.
     # \param s The \e %ConstLMatrixSlice instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -162,7 +156,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstLMatrixSlice instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -170,7 +163,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %ConstLMatrixSlice instance.
-    # \param self The \e %ConstLMatrixSlice instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -189,7 +181,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstLMatrixSlice instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLMatrixExpression instance holding the result of the addition.
     # 
@@ -197,7 +188,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstLMatrixSlice instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstLMatrixSlice instance holding the result of the subtraction.
     # 
@@ -205,7 +195,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstLMatrixSlice instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     # 
@@ -213,7 +202,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstLMatrixSlice instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     # 
@@ -221,7 +209,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstLMatrixSlice instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     # 
@@ -229,7 +216,6 @@ class ConstLMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstLMatrixSlice instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLMatrixExpression instance holding the result of the division.
     # 

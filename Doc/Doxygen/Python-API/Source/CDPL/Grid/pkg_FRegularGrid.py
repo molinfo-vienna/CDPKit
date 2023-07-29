@@ -22,36 +22,32 @@
 ##
 # \brief RegularGrid.
 # 
-class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
+class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
 
     ##
     # \brief Initializes the \e %FRegularGrid instance.
-    # \param self The \e %FRegularGrid instance to initialize.
     # \param grid 
     # 
     def __init__(grid: FRegularGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularGrid instance.
-    # \param self The \e %FRegularGrid instance to initialize.
     # \param data 
     # \param xs 
     # \param ys 
     # \param zs 
     # 
-    def __init__(data: CDPL.Math.FGrid, xs: float, ys: float, zs: float) -> None: pass
+    def __init__(data: Math.FGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularGrid instance.
-    # \param self The \e %FRegularGrid instance to initialize.
     # \param data 
     # \param s 
     # 
-    def __init__(data: CDPL.Math.FGrid, s: float) -> None: pass
+    def __init__(data: Math.FGrid, s: float) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularGrid instance.
-    # \param self The \e %FRegularGrid instance to initialize.
     # \param xs 
     # \param ys 
     # \param zs 
@@ -60,7 +56,6 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
 
     ##
     # \brief Initializes the \e %FRegularGrid instance.
-    # \param self The \e %FRegularGrid instance to initialize.
     # \param s 
     # 
     def __init__(s: float) -> None: pass
@@ -83,35 +78,31 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param e The \e %ConstFGridExpression instance to copy.
     # \return \a self
     # 
-    def assign(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.FRegularSpatialGrid: pass
+    def assign(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param e The \e %ConstDGridExpression instance to copy.
     # \return \a self
     # 
-    def assign(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.FRegularSpatialGrid: pass
+    def assign(e: Math.ConstDGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param e The \e %object instance to copy.
     # \return \a self
     # 
-    def assign(e: object) -> CDPL.Math.FRegularSpatialGrid: pass
+    def assign(e: object) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularSpatialGrid instance \a g.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param g The \e %FRegularSpatialGrid instance to copy.
     # \return \a self
     # 
-    def assign(g: CDPL.Math.FRegularSpatialGrid) -> CDPL.Math.FRegularSpatialGrid: pass
+    def assign(g: Math.FRegularSpatialGrid) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief 
@@ -169,7 +160,7 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
     # \brief 
     # \param g 
     #
-    def swap(g: CDPL.Math.FRegularSpatialGrid) -> None: pass
+    def swap(g: Math.FRegularSpatialGrid) -> None: pass
 
     ##
     # \brief 
@@ -192,7 +183,7 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
@@ -210,18 +201,17 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
@@ -242,7 +232,7 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
@@ -268,39 +258,34 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param g The \e %FRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(g: CDPL.Math.FRegularSpatialGrid) -> bool: pass
+    def __eq__(g: Math.FRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param e The \e %ConstFGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(e: CDPL.Math.ConstFGridExpression) -> bool: pass
+    def __eq__(e: Math.ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param g The \e %FRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(g: CDPL.Math.FRegularSpatialGrid) -> bool: pass
+    def __ne__(g: Math.FRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \param e The \e %ConstFGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(e: CDPL.Math.ConstFGridExpression) -> bool: pass
+    def __ne__(e: Math.ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %FRegularGrid instance.
-    # \param self The \e %FRegularGrid instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -309,114 +294,104 @@ class FRegularGrid(FSpatialGrid, CDPL.Math.FRegularSpatialGrid):
     # \brief 
     # \return 
     #
-    def __pos__() -> CDPL.Math.FRegularSpatialGrid: pass
+    def __pos__() -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief 
     # \return 
     #
-    def __neg__() -> CDPL.Math.ConstFGridExpression: pass
+    def __neg__() -> Math.ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FRegularGrid instance representing the first addend.
     # \param e Specifies the second addend.
-    # \return A \e %CDPL.Math.ConstFGridExpression instance holding the result of the addition.
+    # \return A \e %Math.ConstFGridExpression instance holding the result of the addition.
     # 
-    def __add__(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.ConstFGridExpression: pass
+    def __add__(e: Math.ConstFGridExpression) -> Math.ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FRegularGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FRegularGrid instance holding the result of the subtraction.
     # 
-    def __sub__(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.ConstFGridExpression: pass
+    def __sub__(e: Math.ConstFGridExpression) -> Math.ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FRegularGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
-    # \return A \e %CDPL.Math.ConstFGridExpression instance holding the result of the multiplication.
+    # \return A \e %Math.ConstFGridExpression instance holding the result of the multiplication.
     # 
-    def __mul__(t: float) -> CDPL.Math.ConstFGridExpression: pass
+    def __mul__(t: float) -> Math.ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FRegularGrid instance acting as dividend.
     # \param t Specifies the divisor.
-    # \return A \e %CDPL.Math.ConstFGridExpression instance holding the result of the division.
+    # \return A \e %Math.ConstFGridExpression instance holding the result of the division.
     # 
-    def __div__(t: float) -> CDPL.Math.ConstFGridExpression: pass
+    def __div__(t: float) -> Math.ConstFGridExpression: pass
 
     ##
     # \brief 
     # \param t 
     # \return 
     #
-    def __truediv__(t: float) -> CDPL.Math.ConstFGridExpression: pass
+    def __truediv__(t: float) -> Math.ConstFGridExpression: pass
 
     ##
     # \brief 
     # \param t 
     # \return 
     #
-    def __rmul__(t: float) -> CDPL.Math.ConstFGridExpression: pass
+    def __rmul__(t: float) -> Math.ConstFGridExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param self The \e %FRegularGrid instance acting as in-place addend.
     # \param g Specifies the second addend.
-    # \return The updated \e %CDPL.Math.FRegularSpatialGrid instance \a self.
+    # \return The updated \e %Math.FRegularSpatialGrid instance \a self.
     # 
-    def __iadd__(g: CDPL.Math.FRegularSpatialGrid) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __iadd__(g: Math.FRegularSpatialGrid) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %FRegularGrid instance acting as in-place addend.
     # \param e Specifies the second addend.
-    # \return The updated \e %CDPL.Math.FRegularSpatialGrid instance \a self.
+    # \return The updated \e %Math.FRegularSpatialGrid instance \a self.
     # 
-    def __iadd__(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __iadd__(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param self The \e %FRegularGrid instance acting as in-place minuend.
     # \param g Specifies the subtrahend.
-    # \return The updated \e %CDPL.Math.FRegularSpatialGrid instance \a self.
+    # \return The updated \e %Math.FRegularSpatialGrid instance \a self.
     # 
-    def __isub__(g: CDPL.Math.FRegularSpatialGrid) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __isub__(g: Math.FRegularSpatialGrid) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %FRegularGrid instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %CDPL.Math.FRegularSpatialGrid instance \a self.
+    # \return The updated \e %Math.FRegularSpatialGrid instance \a self.
     # 
-    def __isub__(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __isub__(e: Math.ConstFGridExpression) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %FRegularGrid instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
-    # \return The updated \e %CDPL.Math.FRegularSpatialGrid instance \a self.
+    # \return The updated \e %Math.FRegularSpatialGrid instance \a self.
     # 
-    def __imul__(t: float) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __imul__(t: float) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %FRegularGrid instance acting as in-place dividend.
     # \param t Specifies the divisor.
-    # \return The updated \e %CDPL.Math.FRegularSpatialGrid instance \a self.
+    # \return The updated \e %Math.FRegularSpatialGrid instance \a self.
     # 
-    def __idiv__(t: float) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __idiv__(t: float) -> Math.FRegularSpatialGrid: pass
 
     ##
     # \brief 
     # \param t 
     # \return 
     #
-    def __itruediv__(t: float) -> CDPL.Math.FRegularSpatialGrid: pass
+    def __itruediv__(t: float) -> Math.FRegularSpatialGrid: pass
 
     size1 = property(getSize1)
 

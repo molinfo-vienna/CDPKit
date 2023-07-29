@@ -26,20 +26,17 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FZeroVector instance.
-    # \param self The \e %FZeroVector instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FZeroVector instance.
-    # \param self The \e %FZeroVector instance to initialize.
     # \param v 
     # 
     def __init__(v: FZeroVector) -> None: pass
 
     ##
     # \brief Initializes the \e %FZeroVector instance.
-    # \param self The \e %FZeroVector instance to initialize.
     # \param n 
     # 
     def __init__(n: int) -> None: pass
@@ -52,7 +49,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # 
     # Different Python \e %FZeroVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FZeroVector instances \e a and \e b reference different C++ objects. 
@@ -90,7 +86,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FZeroVector instance \a v.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # \param v The \e %FZeroVector instance to copy.
     # \return \a self
     # 
@@ -104,7 +99,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # \param v The \e %FZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -112,7 +106,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -120,7 +113,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # \param v The \e %FZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -128,7 +120,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -156,7 +147,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %FZeroVector instance.
-    # \param self The \e %FZeroVector instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -175,7 +165,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FZeroVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstFVectorExpression instance holding the result of the addition.
     # 
@@ -183,7 +172,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FZeroVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FZeroVector instance holding the result of the subtraction.
     # 
@@ -191,7 +179,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FZeroVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     # 
@@ -199,7 +186,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %FZeroVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     # 
@@ -207,7 +193,6 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FZeroVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstFVectorExpression instance holding the result of the division.
     # 

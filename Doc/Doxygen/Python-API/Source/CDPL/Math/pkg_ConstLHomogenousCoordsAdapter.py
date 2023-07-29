@@ -26,21 +26,18 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstLHomogenousCoordsAdapter instance.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance to initialize.
     # \param a 
     # 
     def __init__(a: ConstLHomogenousCoordsAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstLHomogenousCoordsAdapter instance.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance to initialize.
     # \param e 
     # 
     def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance this method is called upon.
     # 
     # Different Python \e %ConstLHomogenousCoordsAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstLHomogenousCoordsAdapter instances \e a and \e b reference different C++ objects. 
@@ -84,7 +81,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance this method is called upon.
     # \param a The \e %ConstLHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -92,7 +88,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -100,7 +95,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance this method is called upon.
     # \param a The \e %ConstLHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -108,7 +102,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -136,7 +129,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %ConstLHomogenousCoordsAdapter instance.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -155,7 +147,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLVectorExpression instance holding the result of the addition.
     # 
@@ -163,7 +154,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstLHomogenousCoordsAdapter instance holding the result of the subtraction.
     # 
@@ -171,7 +161,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     # 
@@ -179,7 +168,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     # 
@@ -187,7 +175,6 @@ class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstLHomogenousCoordsAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLVectorExpression instance holding the result of the division.
     # 

@@ -26,8 +26,7 @@ class FileINCHIMolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %FileINCHIMolecularGraphWriter instance.
-    # \param self The \e %FileINCHIMolecularGraphWriter instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(60)) -> None: pass

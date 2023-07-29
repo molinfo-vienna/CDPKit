@@ -26,14 +26,12 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LRotationMatrix instance.
-    # \param self The \e %LRotationMatrix instance to initialize.
     # \param m 
     # 
     def __init__(m: LRotationMatrix) -> None: pass
 
     ##
     # \brief Initializes the \e %LRotationMatrix instance.
-    # \param self The \e %LRotationMatrix instance to initialize.
     # \param n 
     # \param w 
     # \param ux 
@@ -53,7 +51,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # 
     # Different Python \e %LRotationMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LRotationMatrix instances \e a and \e b reference different C++ objects. 
@@ -98,7 +95,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LRotationMatrix instance \a m.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # \param m The \e %LRotationMatrix instance to copy.
     # \return \a self
     # 
@@ -133,7 +129,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # \param m The \e %LRotationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -141,7 +136,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -149,7 +143,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # \param m The \e %LRotationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -157,7 +150,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -165,7 +157,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %LRotationMatrix instance.
-    # \param self The \e %LRotationMatrix instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -184,7 +175,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %LRotationMatrix instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLMatrixExpression instance holding the result of the addition.
     # 
@@ -192,7 +182,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %LRotationMatrix instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %LRotationMatrix instance holding the result of the subtraction.
     # 
@@ -200,7 +189,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %LRotationMatrix instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     # 
@@ -208,7 +196,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %LRotationMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     # 
@@ -216,7 +203,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %LRotationMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     # 
@@ -224,7 +210,6 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %LRotationMatrix instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLMatrixExpression instance holding the result of the division.
     # 

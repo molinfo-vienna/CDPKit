@@ -26,20 +26,17 @@ class BoolSearchHitDoubleFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
-    # \param self The \e %BoolSearchHitDoubleFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
-    # \param self The \e %BoolSearchHitDoubleFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: BoolSearchHitDoubleFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
-    # \param arg1 The \e %BoolSearchHitDoubleFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

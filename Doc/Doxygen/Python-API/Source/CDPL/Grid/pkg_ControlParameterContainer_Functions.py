@@ -23,52 +23,52 @@
 # \brief 
 # \param cntnr 
 #
-def clearStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
+def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param strict 
 #
-def setStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer, strict: bool) -> None: pass
+def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param single_prec 
 #
-def setCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer, single_prec: bool) -> None: pass
+def setCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass

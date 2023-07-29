@@ -36,27 +36,23 @@ class GaussianShapeFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    # \param self The \e %GaussianShapeFunction instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    # \param self The \e %GaussianShapeFunction instance to initialize.
     # \param shape 
     # 
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    # \param self The \e %GaussianShapeFunction instance to initialize.
     # \param func 
     # 
     def __init__(func: GaussianShapeFunction) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # 
     # Different Python \e %GaussianShapeFunction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeFunction instances \e a and \e b reference different C++ objects. 
@@ -69,7 +65,6 @@ class GaussianShapeFunction(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeFunction instance \a func.
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param func The \e %GaussianShapeFunction instance to copy.
     # \return \a self
     # 
@@ -120,27 +115,27 @@ class GaussianShapeFunction(Boost.Python.instance):
     # \brief 
     # \param xform 
     #
-    def transform(xform: CDPL.Math.Matrix4D) -> None: pass
+    def transform(xform: Math.Matrix4D) -> None: pass
 
     ##
     # \brief 
     # \param coords 
     #
-    def getElementPositions(coords: CDPL.Math.Vector3DArray) -> None: pass
+    def getElementPositions(coords: Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
     # \param idx 
     # \return 
     #
-    def getElementPosition(idx: int) -> CDPL.Math.Vector3D: pass
+    def getElementPosition(idx: int) -> Math.Vector3D: pass
 
     ##
     # \brief 
     # \param pos 
     # \return 
     #
-    def calcDensity(pos: CDPL.Math.Vector3D) -> float: pass
+    def calcDensity(pos: Math.Vector3D) -> float: pass
 
     ##
     # \brief 
@@ -159,14 +154,14 @@ class GaussianShapeFunction(Boost.Python.instance):
     # \brief 
     # \param ctr 
     #
-    def calcCentroid(ctr: CDPL.Math.Vector3D) -> None: pass
+    def calcCentroid(ctr: Math.Vector3D) -> None: pass
 
     ##
     # \brief 
     # \param ctr 
     # \param quad_tensor 
     #
-    def calcQuadrupoleTensor(ctr: CDPL.Math.Vector3D, quad_tensor: CDPL.Math.Matrix3D) -> None: pass
+    def calcQuadrupoleTensor(ctr: Math.Vector3D, quad_tensor: Math.Matrix3D) -> None: pass
 
     objectID = property(getObjectID)
 

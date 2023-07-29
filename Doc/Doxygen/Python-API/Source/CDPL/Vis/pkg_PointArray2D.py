@@ -22,17 +22,15 @@
 ##
 # \brief Stores a set of points in 2D space.
 # 
-class PointArray2D(CDPL.Math.Vector2DArray):
+class PointArray2D(Math.Vector2DArray):
 
     ##
     # \brief Initializes the \e %PointArray2D instance.
-    # \param self The \e %PointArray2D instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PointArray2D instance.
-    # \param self The \e %PointArray2D instance to initialize.
     # \param array 
     # 
     def __init__(array: PointArray2D) -> None: pass
@@ -42,7 +40,7 @@ class PointArray2D(CDPL.Math.Vector2DArray):
     # 
     # \param vec The translation vector.
     # 
-    def translate(vec: CDPL.Math.Vector2D) -> None: pass
+    def translate(vec: Math.Vector2D) -> None: pass
 
     ##
     # \brief 

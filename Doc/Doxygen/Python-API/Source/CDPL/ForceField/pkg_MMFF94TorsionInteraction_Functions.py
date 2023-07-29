@@ -26,7 +26,7 @@
 # \param grad 
 # \return 
 #
-def calcMMFF94TorsionGradient(iaction: MMFF94TorsionInteraction, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94TorsionGradient(iaction: MMFF94TorsionInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def calcMMFF94TorsionGradient(iaction: MMFF94TorsionInteraction, coords: CDPL.Ma
 # \param coords 
 # \return 
 #
-def calcMMFF94TorsionEnergy(iaction: MMFF94TorsionInteraction, coords: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94TorsionEnergy(iaction: MMFF94TorsionInteraction, coords: Math.Vector3DArray) -> float: pass

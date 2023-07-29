@@ -31,14 +31,12 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionPharmacophoreGenerator instance.
-    # \param self The \e %InteractionPharmacophoreGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: InteractionPharmacophoreGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %InteractionPharmacophoreGenerator instance this method is called upon.
     # 
     # Different Python \e %InteractionPharmacophoreGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionPharmacophoreGenerator instances \e a and \e b reference different C++ objects. 
@@ -51,7 +49,6 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionPharmacophoreGenerator instance \a gen.
-    # \param self The \e %InteractionPharmacophoreGenerator instance this method is called upon.
     # \param gen The \e %InteractionPharmacophoreGenerator instance to copy.
     # \return \a self
     # 
@@ -121,7 +118,7 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getCoreEnvironment() -> CDPL.Chem.Fragment: pass
+    def getCoreEnvironment() -> Chem.Fragment: pass
 
     ##
     # \brief 
@@ -131,7 +128,7 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     # \param extract_core_env 
     # \param append 
     #
-    def generate(core: CDPL.Chem.MolecularGraph, tgt: CDPL.Chem.MolecularGraph, ia_pharm: Pharmacophore, extract_core_env: bool, append: bool = False) -> None: pass
+    def generate(core: Chem.MolecularGraph, tgt: Chem.MolecularGraph, ia_pharm: Pharmacophore, extract_core_env: bool, append: bool = False) -> None: pass
 
     objectID = property(getObjectID)
 

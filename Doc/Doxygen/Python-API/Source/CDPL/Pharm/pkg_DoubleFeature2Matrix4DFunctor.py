@@ -26,20 +26,17 @@ class DoubleFeature2Matrix4DFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleFeature2Matrix4DFunctor instance.
-    # \param self The \e %DoubleFeature2Matrix4DFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleFeature2Matrix4DFunctor instance.
-    # \param self The \e %DoubleFeature2Matrix4DFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: DoubleFeature2Matrix4DFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleFeature2Matrix4DFunctor instance.
-    # \param arg1 The \e %DoubleFeature2Matrix4DFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -51,7 +48,7 @@ class DoubleFeature2Matrix4DFunctor(Boost.Python.instance):
     # \param arg3 
     # \return 
     #
-    def __call__(arg1: Feature, arg2: Feature, arg3: CDPL.Math.Matrix4D) -> float: pass
+    def __call__(arg1: Feature, arg2: Feature, arg3: Math.Matrix4D) -> float: pass
 
     ##
     # \brief 

@@ -35,11 +35,10 @@ class KekuleStructureCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
     # \param orders An array containing the assigned bond orders. The orders are stored in the same sequence as the bonds appear in the input molecular graph, i.e. the order of a particular bond is accessible via its index in the molecular graph.
     # 
-    def __init__(molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, orders: Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %KekuleStructureCalculator instance this method is called upon.
     # 
     # Different Python \e %KekuleStructureCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %KekuleStructureCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,6 +55,6 @@ class KekuleStructureCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the alternating single/double bond pattern.
     # \param orders An array containing the assigned bond orders. The orders are stored in the same sequence as the bonds appear in the input molecular graph, i.e. the order of a particular bond is accessible via its index in the molecular graph.
     # 
-    def calculate(molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, orders: Util.STArray) -> None: pass
 
     objectID = property(getObjectID)

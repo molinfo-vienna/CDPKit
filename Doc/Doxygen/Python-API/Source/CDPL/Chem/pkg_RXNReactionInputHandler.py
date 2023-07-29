@@ -26,6 +26,5 @@ class RXNReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %RXNReactionInputHandler instance.
-    # \param self The \e %RXNReactionInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

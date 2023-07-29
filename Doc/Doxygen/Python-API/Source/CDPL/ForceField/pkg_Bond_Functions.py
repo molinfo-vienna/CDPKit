@@ -23,25 +23,25 @@
 # \brief 
 # \param bond 
 #
-def clearMMFF94TypeIndex(bond: CDPL.Chem.Bond) -> None: pass
+def clearMMFF94TypeIndex(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def hasMMFF94TypeIndex(bond: CDPL.Chem.Bond) -> bool: pass
+def hasMMFF94TypeIndex(bond: Chem.Bond) -> bool: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getMMFF94TypeIndex(bond: CDPL.Chem.Bond) -> int: pass
+def getMMFF94TypeIndex(bond: Chem.Bond) -> int: pass
 
 ##
 # \brief 
 # \param bond 
 # \param type_idx 
 #
-def setMMFF94TypeIndex(bond: CDPL.Chem.Bond, type_idx: int) -> None: pass
+def setMMFF94TypeIndex(bond: Chem.Bond, type_idx: int) -> None: pass

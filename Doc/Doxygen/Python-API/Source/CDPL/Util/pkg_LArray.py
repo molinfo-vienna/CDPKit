@@ -31,14 +31,12 @@ class LArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LArray instance.
-    # \param self The \e %LArray instance to initialize.
     # \param array 
     # 
     def __init__(array: LArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LArray instance this method is called upon.
     # 
     # Different Python \e %LArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LArray instances \e a and \e b reference different C++ objects. 
@@ -98,7 +96,6 @@ class LArray(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LArray instance \a array.
-    # \param self The \e %LArray instance this method is called upon.
     # \param array The \e %LArray instance to copy.
     # \return \a self
     # 

@@ -26,20 +26,17 @@ class SpatialFeatureAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SpatialFeatureAlignment instance.
-    # \param self The \e %SpatialFeatureAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SpatialFeatureAlignment instance.
-    # \param self The \e %SpatialFeatureAlignment instance to initialize.
     # \param alignment 
     # 
     def __init__(alignment: SpatialFeatureAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # 
     # Different Python \e %SpatialFeatureAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialFeatureAlignment instances \e a and \e b reference different C++ objects. 
@@ -78,13 +75,13 @@ class SpatialFeatureAlignment(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setTopAlignmentConstraintFunction(func: CDPL.Chem.BoolSTPairArrayFunctor) -> None: pass
+    def setTopAlignmentConstraintFunction(func: Chem.BoolSTPairArrayFunctor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getTopAlignmentConstraintFunction() -> CDPL.Chem.BoolSTPairArrayFunctor: pass
+    def getTopAlignmentConstraintFunction() -> Chem.BoolSTPairArrayFunctor: pass
 
     ##
     # \brief 
@@ -185,11 +182,10 @@ class SpatialFeatureAlignment(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getTransform() -> CDPL.Math.Matrix4D: pass
+    def getTransform() -> Math.Matrix4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialFeatureAlignment instance \a alignment.
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param alignment The \e %SpatialFeatureAlignment instance to copy.
     # \return \a self
     # 
@@ -199,7 +195,7 @@ class SpatialFeatureAlignment(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getTopologicalMapping() -> CDPL.Util.STPairArray: pass
+    def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)
 

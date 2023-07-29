@@ -26,13 +26,11 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignmentStartGenerator instance.
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # 
     # Different Python \e %GaussianShapeAlignmentStartGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeAlignmentStartGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,7 +47,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \param xform 
     # \return 
     #
-    def setupReference(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupReference(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
@@ -57,7 +55,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \param xform 
     # \return 
     #
-    def setupAligned(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
@@ -91,7 +89,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \param idx 
     # \return 
     #
-    def getStartTransform(idx: int) -> CDPL.Math.Vector7D: pass
+    def getStartTransform(idx: int) -> Math.Vector7D: pass
 
     ##
     # \brief 
@@ -104,7 +102,7 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     # \param idx 
     # \return 
     #
-    def __getitem__(idx: int) -> CDPL.Math.Vector7D: pass
+    def __getitem__(idx: int) -> Math.Vector7D: pass
 
     objectID = property(getObjectID)
 

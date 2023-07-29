@@ -22,14 +22,14 @@
 ##
 # \brief A writer for molecular graph data in the PSD-format of the <em>CDPL</em>.
 # 
-class PSDMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
+class PSDMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Constructs a <tt>PSDMolecularGraphWriter</tt> instance that will write the molecular graph data to the I/O stream <em>ios</em>.
     # 
     # \param ios The I/O stream to write to.
     # 
-    def __init__(ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: Base.IOStream) -> None: pass
 
     ##
     # \brief Constructs a <tt>PSDMolecularGraphWriter</tt> instance that will write the molecular graph data to the output file <em>file_name</em>.

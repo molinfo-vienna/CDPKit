@@ -28,13 +28,11 @@ class GraphicsPrimitive2D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GraphicsPrimitive2D instance.
-    # \param self The \e %GraphicsPrimitive2D instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
     # 
     # Different Python \e %GraphicsPrimitive2D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GraphicsPrimitive2D instances \e a and \e b reference different C++ objects. 

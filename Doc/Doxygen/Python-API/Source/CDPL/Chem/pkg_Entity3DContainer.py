@@ -28,7 +28,6 @@ class Entity3DContainer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Entity3DContainer instance.
-    # \param self The \e %Entity3DContainer instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -52,7 +51,6 @@ class Entity3DContainer(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Entity3DContainer instance this method is called upon.
     # 
     # Different Python \e %Entity3DContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entity3DContainer instances \e a and \e b reference different C++ objects. 

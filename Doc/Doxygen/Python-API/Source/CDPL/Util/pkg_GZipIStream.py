@@ -22,20 +22,18 @@
 ##
 # \brief 
 #
-class GZipIStream(CDPL.Base.IStream):
+class GZipIStream(Base.IStream):
 
     ##
     # \brief Initializes the \e %GZipIStream instance.
-    # \param self The \e %GZipIStream instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GZipIStream instance.
-    # \param self The \e %GZipIStream instance to initialize.
     # \param is 
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass
 
     ##
     # \brief 
@@ -105,7 +103,7 @@ class GZipIStream(CDPL.Base.IStream):
     # \brief 
     # \param is 
     #
-    def open(is: CDPL.Base.IStream) -> None: pass
+    def open(is: Base.IStream) -> None: pass
 
     ##
     # \brief 

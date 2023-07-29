@@ -31,14 +31,12 @@ class DefaultInteractionAnalyzer(InteractionAnalyzer):
 
     ##
     # \brief Initializes the \e %DefaultInteractionAnalyzer instance.
-    # \param self The \e %DefaultInteractionAnalyzer instance to initialize.
     # \param analyzer 
     # 
     def __init__(analyzer: DefaultInteractionAnalyzer) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DefaultInteractionAnalyzer instance \a analyzer.
-    # \param self The \e %DefaultInteractionAnalyzer instance this method is called upon.
     # \param analyzer The \e %DefaultInteractionAnalyzer instance to copy.
     # \return \a self
     # 

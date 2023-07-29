@@ -55,7 +55,6 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %VolumeConstraint instance.
-        # \param self The \e %VolumeConstraint instance to initialize.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param pt3_idx 
@@ -67,14 +66,12 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %VolumeConstraint instance.
-        # \param self The \e %VolumeConstraint instance to initialize.
         # \param constr 
         # 
         def __init__(constr: VolumeConstraint) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %VolumeConstraint instance this method is called upon.
         # 
         # Different Python \e %VolumeConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %VolumeConstraint instances \e a and \e b reference different C++ objects. 
@@ -87,7 +84,6 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %VolumeConstraint instance \a constr.
-        # \param self The \e %VolumeConstraint instance this method is called upon.
         # \param constr The \e %VolumeConstraint instance to copy.
         # \return \a self
         # 
@@ -174,7 +170,6 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DistanceConstraint instance.
-        # \param self The \e %DistanceConstraint instance to initialize.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
@@ -184,14 +179,12 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DistanceConstraint instance.
-        # \param self The \e %DistanceConstraint instance to initialize.
         # \param constr 
         # 
         def __init__(constr: DistanceConstraint) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # 
         # Different Python \e %DistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DistanceConstraint instances \e a and \e b reference different C++ objects. 
@@ -204,7 +197,6 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %DistanceConstraint instance \a constr.
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # \param constr The \e %DistanceConstraint instance to copy.
         # \return \a self
         # 
@@ -271,20 +263,17 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DG3DCoordinatesGenerator instance.
-    # \param self The \e %DG3DCoordinatesGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DG3DCoordinatesGenerator instance.
-    # \param self The \e %DG3DCoordinatesGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: DG3DCoordinatesGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DG3DCoordinatesGenerator instance this method is called upon.
     # 
     # Different Python \e %DG3DCoordinatesGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DG3DCoordinatesGenerator instances \e a and \e b reference different C++ objects. 
@@ -297,7 +286,6 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DG3DCoordinatesGenerator instance \a gen.
-    # \param self The \e %DG3DCoordinatesGenerator instance this method is called upon.
     # \param gen The \e %DG3DCoordinatesGenerator instance to copy.
     # \return \a self
     # 
@@ -395,14 +383,14 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     # \param num_points 
     # \param coords 
     #
-    def generate(num_points: int, coords: CDPL.Math.Vector3DArray) -> None: pass
+    def generate(num_points: int, coords: Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
     # \param coords 
     # \return 
     #
-    def getDistanceError(coords: CDPL.Math.Vector3DArray) -> float: pass
+    def getDistanceError(coords: Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
@@ -444,7 +432,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     # \param coords 
     # \return 
     #
-    def getVolumeError(coords: CDPL.Math.Vector3DArray) -> float: pass
+    def getVolumeError(coords: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)
 

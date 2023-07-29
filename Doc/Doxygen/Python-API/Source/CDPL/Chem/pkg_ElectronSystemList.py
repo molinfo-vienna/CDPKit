@@ -26,20 +26,17 @@ class ElectronSystemList(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ElectronSystemList instance.
-    # \param self The \e %ElectronSystemList instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ElectronSystemList instance.
-    # \param self The \e %ElectronSystemList instance to initialize.
     # \param list 
     # 
     def __init__(list: ElectronSystemList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ElectronSystemList instance this method is called upon.
     # 
     # Different Python \e %ElectronSystemList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ElectronSystemList instances \e a and \e b reference different C++ objects. 
@@ -88,7 +85,6 @@ class ElectronSystemList(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ElectronSystemList instance \a array.
-    # \param self The \e %ElectronSystemList instance this method is called upon.
     # \param array The \e %ElectronSystemList instance to copy.
     # \return \a self
     # 
@@ -96,7 +92,6 @@ class ElectronSystemList(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
-    # \param self The \e %ElectronSystemList instance this method is called upon.
     # \param num_elem The \e %int instance to copy.
     # \return \a self
     # 
@@ -208,7 +203,6 @@ class ElectronSystemList(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == list</tt>.
-    # \param self The \e %ElectronSystemList instance this method is called upon.
     # \param list The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -216,7 +210,6 @@ class ElectronSystemList(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != list</tt>.
-    # \param self The \e %ElectronSystemList instance this method is called upon.
     # \param list The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 

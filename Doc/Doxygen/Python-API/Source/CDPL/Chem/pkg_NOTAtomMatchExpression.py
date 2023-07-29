@@ -40,7 +40,6 @@ class NOTAtomMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %NOTAtomMatchExpression instance \a expression.
-    # \param self The \e %NOTAtomMatchExpression instance this method is called upon.
     # \param expression The \e %NOTAtomMatchExpression instance to copy.
     # \return \a self
     # 

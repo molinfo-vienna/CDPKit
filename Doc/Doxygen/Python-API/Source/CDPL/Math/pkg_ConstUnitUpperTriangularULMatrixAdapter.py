@@ -26,21 +26,18 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstUnitUpperTriangularULMatrixAdapter instance.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance to initialize.
     # \param a 
     # 
     def __init__(a: ConstUnitUpperTriangularULMatrixAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstUnitUpperTriangularULMatrixAdapter instance.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance to initialize.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance this method is called upon.
     # 
     # Different Python \e %ConstUnitUpperTriangularULMatrixAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstUnitUpperTriangularULMatrixAdapter instances \e a and \e b reference different C++ objects. 
@@ -112,7 +109,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance this method is called upon.
     # \param a The \e %ConstUnitUpperTriangularULMatrixAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -120,7 +116,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance this method is called upon.
     # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -128,7 +123,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance this method is called upon.
     # \param a The \e %ConstUnitUpperTriangularULMatrixAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -136,7 +130,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance this method is called upon.
     # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -144,7 +137,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %ConstUnitUpperTriangularULMatrixAdapter instance.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -163,7 +155,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstULMatrixExpression instance holding the result of the addition.
     # 
@@ -171,7 +162,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstUnitUpperTriangularULMatrixAdapter instance holding the result of the subtraction.
     # 
@@ -179,7 +169,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
     # 
@@ -187,7 +176,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
     # 
@@ -195,7 +183,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstULVectorExpression instance holding the result of the multiplication.
     # 
@@ -203,7 +190,6 @@ class ConstUnitUpperTriangularULMatrixAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstUnitUpperTriangularULMatrixAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstULMatrixExpression instance holding the result of the division.
     # 

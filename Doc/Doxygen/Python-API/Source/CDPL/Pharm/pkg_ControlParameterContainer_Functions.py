@@ -23,106 +23,106 @@
 # \brief 
 # \param cntnr 
 #
-def clearPSDCreationModeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
+def clearPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPSDCreationModeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPSDCreationModeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Mode: pass
+def getPSDCreationModeParameter(cntnr: Base.ControlParameterContainer) -> Mode: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param mode 
 #
-def setPSDCreationModeParameter(cntnr: CDPL.Base.ControlParameterContainer, mode: Mode) -> None: pass
+def setPSDCreationModeParameter(cntnr: Base.ControlParameterContainer, mode: Mode) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param strict 
 #
-def setStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer, strict: bool) -> None: pass
+def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPSDAllowDuplicatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPSDAllowDuplicatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPSDAllowDuplicatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param allow 
 #
-def setPSDAllowDuplicatesParameter(cntnr: CDPL.Base.ControlParameterContainer, allow: bool) -> None: pass
+def setPSDAllowDuplicatesParameter(cntnr: Base.ControlParameterContainer, allow: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param single_prec 
 #
-def setCDFWriteSinglePrecisionFloatsParameter(cntnr: CDPL.Base.ControlParameterContainer, single_prec: bool) -> None: pass
+def setCDFWriteSinglePrecisionFloatsParameter(cntnr: Base.ControlParameterContainer, single_prec: bool) -> None: pass

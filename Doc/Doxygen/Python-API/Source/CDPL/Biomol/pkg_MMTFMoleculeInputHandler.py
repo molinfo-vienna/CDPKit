@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)y</em> [\ref MMTF].
 # 
-class MMTFMoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
+class MMTFMoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %MMTFMoleculeInputHandler instance.
-    # \param self The \e %MMTFMoleculeInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

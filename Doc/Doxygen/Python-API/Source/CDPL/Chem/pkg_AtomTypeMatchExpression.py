@@ -26,7 +26,6 @@ class AtomTypeMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomTypeMatchExpression instance.
-    # \param self The \e %AtomTypeMatchExpression instance to initialize.
     # \param expr 
     # 
     def __init__(expr: AtomTypeMatchExpression) -> None: pass
@@ -41,7 +40,6 @@ class AtomTypeMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomTypeMatchExpression instance \a expr.
-    # \param self The \e %AtomTypeMatchExpression instance this method is called upon.
     # \param expr The \e %AtomTypeMatchExpression instance to copy.
     # \return \a self
     # 

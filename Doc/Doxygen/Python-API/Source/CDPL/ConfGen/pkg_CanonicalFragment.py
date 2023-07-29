@@ -22,7 +22,7 @@
 ##
 # \brief CanonicalFragment.
 # 
-class CanonicalFragment(CDPL.Chem.MolecularGraph):
+class CanonicalFragment(Chem.MolecularGraph):
 
     ##
     # \brief 
@@ -40,7 +40,7 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
         # \param idx 
         # \return 
         #
-        def __getitem__(idx: int) -> CDPL.Chem.Atom: pass
+        def __getitem__(idx: int) -> Chem.Atom: pass
 
     ##
     # \brief Constructs an empty <tt>CanonicalFragment</tt> instance.
@@ -53,18 +53,16 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
     # \param molgraph The molecular graph for which to generate the fragments.
     # \param parent The parent molecular graph the fragment is coming from.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Initializes the \e %CanonicalFragment instance.
-    # \param self The \e %CanonicalFragment instance to initialize.
     # \param frag 
     # 
     def __init__(frag: CanonicalFragment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     # 
     # Different Python \e %CanonicalFragment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CanonicalFragment instances \e a and \e b reference different C++ objects. 
@@ -77,7 +75,6 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CanonicalFragment instance \a frag.
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     # \param frag The \e %CanonicalFragment instance to copy.
     # \return \a self
     # 
@@ -89,7 +86,7 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
     # \param parent 
     # \param modify 
     #
-    def create(molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph, modify: bool = True) -> None: pass
+    def create(molgraph: Chem.MolecularGraph, parent: Chem.MolecularGraph, modify: bool = True) -> None: pass
 
     ##
     # \brief 
@@ -106,7 +103,7 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
     # \brief 
     # \return 
     #
-    def getAtomMapping() -> CDPL.Chem.AtomMapping: pass
+    def getAtomMapping() -> Chem.AtomMapping: pass
 
     objectID = property(getObjectID)
 

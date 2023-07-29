@@ -31,13 +31,11 @@ class RMSDConformerSelector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %RMSDConformerSelector instance.
-    # \param self The \e %RMSDConformerSelector instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # 
     # Different Python \e %RMSDConformerSelector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %RMSDConformerSelector instances \e a and \e b reference different C++ objects. 
@@ -97,21 +95,21 @@ class RMSDConformerSelector(Boost.Python.instance):
     # \param stable_config_atom_mask 
     # \param coords 
     #
-    def setup(molgraph: CDPL.Chem.MolecularGraph, atom_mask: CDPL.Util.BitSet, stable_config_atom_mask: CDPL.Util.BitSet, coords: CDPL.Math.Vector3DArray) -> None: pass
+    def setup(molgraph: Chem.MolecularGraph, atom_mask: Util.BitSet, stable_config_atom_mask: Util.BitSet, coords: Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
     # \param molgraph 
     # \param atom_mask 
     #
-    def setup(molgraph: CDPL.Chem.MolecularGraph, atom_mask: CDPL.Util.BitSet) -> None: pass
+    def setup(molgraph: Chem.MolecularGraph, atom_mask: Util.BitSet) -> None: pass
 
     ##
     # \brief 
     # \param conf_coords 
     # \return 
     #
-    def selected(conf_coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def selected(conf_coords: Math.Vector3DArray) -> bool: pass
 
     objectID = property(getObjectID)
 

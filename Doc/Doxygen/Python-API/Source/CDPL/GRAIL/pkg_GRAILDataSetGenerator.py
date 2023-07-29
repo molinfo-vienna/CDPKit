@@ -33,20 +33,17 @@ class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GRAILDataSetGenerator instance.
-    # \param self The \e %GRAILDataSetGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GRAILDataSetGenerator instance.
-    # \param self The \e %GRAILDataSetGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: GRAILDataSetGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GRAILDataSetGenerator instance this method is called upon.
     # 
     # Different Python \e %GRAILDataSetGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GRAILDataSetGenerator instances \e a and \e b reference different C++ objects. 
@@ -59,7 +56,6 @@ class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDataSetGenerator instance \a gen.
-    # \param self The \e %GRAILDataSetGenerator instance this method is called upon.
     # \param gen The \e %GRAILDataSetGenerator instance to copy.
     # \return \a self
     # 
@@ -139,13 +135,13 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setScoreCombinationFunction(func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
+    def setScoreCombinationFunction(func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getScoreCombinationFunction() -> CDPL.Math.DoubleDVectorFunctor: pass
+    def getScoreCombinationFunction() -> Math.DoubleDVectorFunctor: pass
 
     ##
     # \brief 
@@ -247,13 +243,13 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getGridTransform() -> CDPL.Math.Matrix4D: pass
+    def getGridTransform() -> Math.Matrix4D: pass
 
     ##
     # \brief 
     # \param xform 
     #
-    def setGridTransform(xform: CDPL.Math.Matrix4D) -> None: pass
+    def setGridTransform(xform: Math.Matrix4D) -> None: pass
 
     ##
     # \brief 
@@ -261,13 +257,13 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \param bbox_max 
     # \param step_size 
     #
-    def setGridParamsForBoundingBox(bbox_min: CDPL.Math.Vector3D, bbox_max: CDPL.Math.Vector3D, step_size: float = 0.5) -> None: pass
+    def setGridParamsForBoundingBox(bbox_min: Math.Vector3D, bbox_max: Math.Vector3D, step_size: float = 0.5) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getPharmacophoreGenerator() -> CDPL.Pharm.DefaultPharmacophoreGenerator: pass
+    def getPharmacophoreGenerator() -> Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
     # \brief 
@@ -288,7 +284,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \param grid_set 
     # \param append 
     #
-    def calcInteractionGrids(tgt_env: CDPL.Chem.MolecularGraph, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, grid_set: CDPL.Grid.DRegularGridSet, append: bool = False) -> None: pass
+    def calcInteractionGrids(tgt_env: Chem.MolecularGraph, coords_func: Chem.Atom3DCoordinatesFunction, grid_set: Grid.DRegularGridSet, append: bool = False) -> None: pass
 
     ##
     # \brief 
@@ -297,7 +293,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \param grid_name 
     # \return 
     #
-    def calcAtomDensityGrid(atoms: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, grid_name: str) -> CDPL.Grid.DRegularGrid: pass
+    def calcAtomDensityGrid(atoms: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, grid_name: str) -> Grid.DRegularGrid: pass
 
     objectID = property(getObjectID)
 

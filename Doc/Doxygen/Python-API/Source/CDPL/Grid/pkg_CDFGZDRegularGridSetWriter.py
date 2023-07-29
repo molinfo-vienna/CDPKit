@@ -26,7 +26,6 @@ class CDFGZDRegularGridSetWriter(DRegularGridSetWriterBase):
 
     ##
     # \brief Initializes the \e %CDFGZDRegularGridSetWriter instance.
-    # \param self The \e %CDFGZDRegularGridSetWriter instance to initialize.
     # \param ios 
     # 
-    def __init__(ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: Base.IOStream) -> None: pass

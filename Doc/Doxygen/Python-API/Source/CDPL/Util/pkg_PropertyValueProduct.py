@@ -39,4 +39,4 @@ class PropertyValueProduct(builtins.object):
     # 
     # \return The product of the property values.
     # 
-    def __call__(cntnr1: CDPL.Base.PropertyContainer, cntnr2: CDPL.Base.PropertyContainer) -> object: pass
+    def __call__(cntnr1: Base.PropertyContainer, cntnr2: Base.PropertyContainer) -> object: pass

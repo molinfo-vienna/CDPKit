@@ -28,7 +28,7 @@
 # \param inc_h 
 # \param p 
 #
-def generateGaussianShape(atoms: CDPL.Chem.AtomContainer, shape: GaussianShape, append: bool = False, radius: float = -1.0, inc_h: bool = False, p: float = 2.7) -> None: pass
+def generateGaussianShape(atoms: Chem.AtomContainer, shape: GaussianShape, append: bool = False, radius: float = -1.0, inc_h: bool = False, p: float = 2.7) -> None: pass
 
 ##
 # \brief 
@@ -40,4 +40,4 @@ def generateGaussianShape(atoms: CDPL.Chem.AtomContainer, shape: GaussianShape, 
 # \param inc_h 
 # \param p 
 #
-def generateGaussianShape(atoms: CDPL.Chem.AtomContainer, shape: GaussianShape, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, append: bool = False, radius: float = -1.0, inc_h: bool = False, p: float = 2.7) -> None: pass
+def generateGaussianShape(atoms: Chem.AtomContainer, shape: GaussianShape, coords_func: Chem.Atom3DCoordinatesFunction, append: bool = False, radius: float = -1.0, inc_h: bool = False, p: float = 2.7) -> None: pass

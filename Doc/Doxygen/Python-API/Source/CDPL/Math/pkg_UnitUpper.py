@@ -26,13 +26,11 @@ class UnitUpper(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %UnitUpper instance.
-    # \param self The \e %UnitUpper instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UnitUpper instance.
-    # \param self The \e %UnitUpper instance to initialize.
     # \param t 
     # 
     def __init__(t: UnitUpper) -> None: pass

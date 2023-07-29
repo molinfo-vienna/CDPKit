@@ -31,14 +31,12 @@ class FragmentLibraryEntry(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentLibraryEntry instance.
-    # \param self The \e %FragmentLibraryEntry instance to initialize.
     # \param entry 
     # 
     def __init__(entry: FragmentLibraryEntry) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # 
     # Different Python \e %FragmentLibraryEntry instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibraryEntry instances \e a and \e b reference different C++ objects. 
@@ -51,7 +49,6 @@ class FragmentLibraryEntry(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibraryEntry instance \a entry.
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param entry The \e %FragmentLibraryEntry instance to copy.
     # \return \a self
     # 

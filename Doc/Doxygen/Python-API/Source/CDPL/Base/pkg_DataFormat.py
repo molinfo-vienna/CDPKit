@@ -57,7 +57,6 @@ class DataFormat(Boost.Python.instance):
 
         ##
         # \brief Returns the result of the membership test operation <tt>file_ext in self</tt>.
-        # \param self The \e %FileExtensionSequence instance this method is called upon.
         # \param file_ext The value to test for membership.
         # \return The result of the membership test operation.
         # 
@@ -72,14 +71,12 @@ class DataFormat(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DataFormat instance.
-    # \param self The \e %DataFormat instance to initialize.
     # \param fmt 
     # 
     def __init__(fmt: DataFormat) -> None: pass
 
     ##
     # \brief Initializes the \e %DataFormat instance.
-    # \param self The \e %DataFormat instance to initialize.
     # \param name 
     # \param descr 
     # \param mime_type 
@@ -89,7 +86,6 @@ class DataFormat(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DataFormat instance.
-    # \param self The \e %DataFormat instance to initialize.
     # \param name 
     # \param descr 
     # \param mime_type 
@@ -244,7 +240,6 @@ class DataFormat(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DataFormat instance \a fmt.
-    # \param self The \e %DataFormat instance this method is called upon.
     # \param fmt The \e %DataFormat instance to copy.
     # \return \a self
     # 
@@ -252,7 +247,6 @@ class DataFormat(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DataFormat instance this method is called upon.
     # 
     # Different Python \e %DataFormat instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DataFormat instances \e a and \e b reference different C++ objects. 
@@ -265,7 +259,6 @@ class DataFormat(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %DataFormat instance.
-    # \param self The \e %DataFormat instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

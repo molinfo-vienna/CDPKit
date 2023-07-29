@@ -26,7 +26,6 @@ class BondDirectionMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondDirectionMatchExpression instance.
-    # \param self The \e %BondDirectionMatchExpression instance to initialize.
     # \param expr 
     # 
     def __init__(expr: BondDirectionMatchExpression) -> None: pass
@@ -41,7 +40,6 @@ class BondDirectionMatchExpression(BondMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondDirectionMatchExpression instance \a expr.
-    # \param self The \e %BondDirectionMatchExpression instance this method is called upon.
     # \param expr The \e %BondDirectionMatchExpression instance to copy.
     # \return \a self
     # 

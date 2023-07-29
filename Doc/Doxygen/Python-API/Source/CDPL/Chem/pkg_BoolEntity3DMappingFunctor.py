@@ -26,20 +26,17 @@ class BoolEntity3DMappingFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolEntity3DMappingFunctor instance.
-    # \param self The \e %BoolEntity3DMappingFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolEntity3DMappingFunctor instance.
-    # \param self The \e %BoolEntity3DMappingFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: BoolEntity3DMappingFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolEntity3DMappingFunctor instance.
-    # \param arg1 The \e %BoolEntity3DMappingFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

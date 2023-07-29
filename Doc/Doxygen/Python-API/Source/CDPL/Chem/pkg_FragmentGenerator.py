@@ -31,14 +31,12 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentationRuler instance.
-        # \param self The \e %FragmentationRuler instance to initialize.
         # \param rule 
         # 
         def __init__(rule: FragmentationRuler) -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentationRuler instance.
-        # \param self The \e %FragmentationRuler instance to initialize.
         # \param match_ptn 
         # \param id 
         # 
@@ -46,7 +44,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # 
         # Different Python \e %FragmentationRuler instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentationRuler instances \e a and \e b reference different C++ objects. 
@@ -59,7 +56,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentationRuler instance \a rule.
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # \param rule The \e %FragmentationRuler instance to copy.
         # \return \a self
         # 
@@ -106,14 +102,12 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %ExcludePattern instance.
-        # \param self The \e %ExcludePattern instance to initialize.
         # \param excl_ptn 
         # 
         def __init__(excl_ptn: ExcludePattern) -> None: pass
 
         ##
         # \brief Initializes the \e %ExcludePattern instance.
-        # \param self The \e %ExcludePattern instance to initialize.
         # \param match_ptn 
         # \param rule_id 
         # 
@@ -121,7 +115,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # 
         # Different Python \e %ExcludePattern instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ExcludePattern instances \e a and \e b reference different C++ objects. 
@@ -134,7 +127,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %ExcludePattern instance \a excl_ptn.
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \param excl_ptn The \e %ExcludePattern instance to copy.
         # \return \a self
         # 
@@ -195,14 +187,12 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentLink instance.
-        # \param self The \e %FragmentLink instance to initialize.
         # \param link 
         # 
         def __init__(link: FragmentLink) -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentLink instance.
-        # \param self The \e %FragmentLink instance to initialize.
         # \param frag1_idx 
         # \param frag2_idx 
         # \param bond 
@@ -214,7 +204,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %FragmentLink instance this method is called upon.
         # 
         # Different Python \e %FragmentLink instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLink instances \e a and \e b reference different C++ objects. 
@@ -227,7 +216,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLink instance \a link.
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \param link The \e %FragmentLink instance to copy.
         # \return \a self
         # 
@@ -290,14 +278,12 @@ class FragmentGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentGenerator instance.
-    # \param self The \e %FragmentGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: FragmentGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # 
     # Different Python \e %FragmentGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentGenerator instances \e a and \e b reference different C++ objects. 
@@ -310,7 +296,6 @@ class FragmentGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentGenerator instance \a gen.
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param gen The \e %FragmentGenerator instance to copy.
     # \return \a self
     # 

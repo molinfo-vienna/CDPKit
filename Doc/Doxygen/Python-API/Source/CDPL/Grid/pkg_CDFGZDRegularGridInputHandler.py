@@ -26,6 +26,5 @@ class CDFGZDRegularGridInputHandler(DRegularGridInputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZDRegularGridInputHandler instance.
-    # \param self The \e %CDFGZDRegularGridInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

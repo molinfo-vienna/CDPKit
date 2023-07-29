@@ -26,13 +26,11 @@ class TautomerizationRule(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TautomerizationRule instance.
-    # \param self The \e %TautomerizationRule instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TautomerizationRule instance this method is called upon.
     # 
     # Different Python \e %TautomerizationRule instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TautomerizationRule instances \e a and \e b reference different C++ objects. 

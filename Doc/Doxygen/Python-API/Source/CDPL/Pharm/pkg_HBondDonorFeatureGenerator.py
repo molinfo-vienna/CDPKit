@@ -33,7 +33,6 @@ class HBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %HBondDonorFeatureGenerator instance.
-    # \param self The \e %HBondDonorFeatureGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: HBondDonorFeatureGenerator) -> None: pass
@@ -45,11 +44,10 @@ class HBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
     # \param pharm The output pharmacophore where to add the generated features.
     # \param static_h_bonds <tt>True</tt> if hydrogens on donor atoms connected via rotatable bonds should be considered static and emitted features modeled as defined vectors, and <tt>False</tt> otherwise.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, static_h_bonds: bool) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, static_h_bonds: bool) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondDonorFeatureGenerator instance \a gen.
-    # \param self The \e %HBondDonorFeatureGenerator instance this method is called upon.
     # \param gen The \e %HBondDonorFeatureGenerator instance to copy.
     # \return \a self
     # 

@@ -26,13 +26,11 @@ class GenericHydrogen13ShiftTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %GenericHydrogen13ShiftTautomerization instance.
-    # \param self The \e %GenericHydrogen13ShiftTautomerization instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GenericHydrogen13ShiftTautomerization instance.
-    # \param self The \e %GenericHydrogen13ShiftTautomerization instance to initialize.
     # \param rule 
     # 
     def __init__(rule: GenericHydrogen13ShiftTautomerization) -> None: pass

@@ -26,13 +26,11 @@ class TorsionDriver(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionDriver instance.
-    # \param self The \e %TorsionDriver instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # 
     # Different Python \e %TorsionDriver instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionDriver instances \e a and \e b reference different C++ objects. 
@@ -65,7 +63,7 @@ class TorsionDriver(Boost.Python.instance):
     # \param molgraph 
     # \return 
     #
-    def setup(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+    def setup(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
@@ -73,7 +71,7 @@ class TorsionDriver(Boost.Python.instance):
     # \param bond_mask 
     # \return 
     #
-    def setup(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet) -> int: pass
+    def setup(molgraph: Chem.MolecularGraph, bond_mask: Util.BitSet) -> int: pass
 
     ##
     # \brief 
@@ -90,14 +88,14 @@ class TorsionDriver(Boost.Python.instance):
     # \brief 
     # \param coords 
     #
-    def addInputCoordinates(coords: CDPL.Math.Vector3DArray) -> None: pass
+    def addInputCoordinates(coords: Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
     # \param coords 
     # \param frag_idx 
     #
-    def addInputCoordinates(coords: CDPL.Math.Vector3DArray, frag_idx: int) -> None: pass
+    def addInputCoordinates(coords: Math.Vector3DArray, frag_idx: int) -> None: pass
 
     ##
     # \brief 

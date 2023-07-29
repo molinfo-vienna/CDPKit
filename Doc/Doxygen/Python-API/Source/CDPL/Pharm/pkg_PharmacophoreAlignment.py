@@ -33,7 +33,6 @@ class PharmacophoreAlignment(SpatialFeatureAlignment):
 
     ##
     # \brief Initializes the \e %PharmacophoreAlignment instance.
-    # \param self The \e %PharmacophoreAlignment instance to initialize.
     # \param alignment 
     # 
     def __init__(alignment: PharmacophoreAlignment) -> None: pass
@@ -48,7 +47,6 @@ class PharmacophoreAlignment(SpatialFeatureAlignment):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreAlignment instance \a alignment.
-    # \param self The \e %PharmacophoreAlignment instance this method is called upon.
     # \param alignment The \e %PharmacophoreAlignment instance to copy.
     # \return \a self
     # 

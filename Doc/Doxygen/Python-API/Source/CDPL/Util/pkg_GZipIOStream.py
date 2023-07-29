@@ -22,20 +22,18 @@
 ##
 # \brief 
 #
-class GZipIOStream(CDPL.Base.IOStream):
+class GZipIOStream(Base.IOStream):
 
     ##
     # \brief Initializes the \e %GZipIOStream instance.
-    # \param self The \e %GZipIOStream instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GZipIOStream instance.
-    # \param self The \e %GZipIOStream instance to initialize.
     # \param ios 
     # 
-    def __init__(ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: Base.IOStream) -> None: pass
 
     ##
     # \brief 
@@ -135,7 +133,7 @@ class GZipIOStream(CDPL.Base.IOStream):
     # \brief 
     # \param ios 
     #
-    def open(ios: CDPL.Base.IOStream) -> None: pass
+    def open(ios: Base.IOStream) -> None: pass
 
     ##
     # \brief 

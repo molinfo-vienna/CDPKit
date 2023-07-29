@@ -37,11 +37,10 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to generate the <em>Burden</em> matrix.
     # \param mtx The generated <em>Burden</em> matrix of the specified molecular graph.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, mtx: Math.DMatrix) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BurdenMatrixGenerator instance this method is called upon.
     # 
     # Different Python \e %BurdenMatrixGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BurdenMatrixGenerator instances \e a and \e b reference different C++ objects. 
@@ -59,7 +58,7 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     # 
     # \note By default, the diagonal elements of the <em>Burden</em> matrix are atom types (see namespace Chem.AtomType).
     # 
-    def setAtomWeightFunction(func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setAtomWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief Generates the <em>Burden</em> matrix of the molecular graph <em>molgraph</em>.
@@ -67,6 +66,6 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to generate the <em>Burden</em> matrix.
     # \param mtx The generated <em>Burden</em> matrix of the specified molecular graph.
     # 
-    def generate(molgraph: CDPL.Chem.MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
+    def generate(molgraph: Chem.MolecularGraph, mtx: Math.DMatrix) -> None: pass
 
     objectID = property(getObjectID)

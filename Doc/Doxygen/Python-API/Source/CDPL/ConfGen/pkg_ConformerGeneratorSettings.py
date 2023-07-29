@@ -61,20 +61,17 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConformerGeneratorSettings instance.
-    # \param self The \e %ConformerGeneratorSettings instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerGeneratorSettings instance.
-    # \param self The \e %ConformerGeneratorSettings instance to initialize.
     # \param settings 
     # 
     def __init__(settings: ConformerGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # 
     # Different Python \e %ConformerGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConformerGeneratorSettings instances \e a and \e b reference different C++ objects. 
@@ -87,7 +84,6 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerGeneratorSettings instance \a settings.
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param settings The \e %ConformerGeneratorSettings instance to copy.
     # \return \a self
     # 

@@ -46,22 +46,19 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
-    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
-    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance to initialize.
     # \param molgraph 
     # \param corr_vec 
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, corr_vec: Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance this method is called upon.
     # 
     # Different Python \e %MoleculeAutoCorr2DDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeAutoCorr2DDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -74,7 +71,6 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
-    # \param self The \e %MoleculeAutoCorr2DDescriptorCalculator instance this method is called upon.
     # \param calc The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
     # \return \a self
     # 
@@ -113,14 +109,14 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     # 
     # \param func A AtomPairWeightFunction instance that wraps the target function.
     # 
-    def setAtomPairWeightFunction(func: CDPL.Chem.DoubleAtom2UInt2Functor) -> None: pass
+    def setAtomPairWeightFunction(func: Chem.DoubleAtom2UInt2Functor) -> None: pass
 
     ##
     # \brief 
     # \param molgraph 
     # \param corr_vec 
     #
-    def calculate(molgraph: CDPL.Chem.MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
+    def calculate(molgraph: Chem.MolecularGraph, corr_vec: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)
 

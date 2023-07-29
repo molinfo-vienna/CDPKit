@@ -24,35 +24,35 @@
 # \param cntnr 
 # \return 
 #
-def getAromaticBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
+def getAromaticBondCount(cntnr: Chem.BondContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getRingBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
+def getRingBondCount(cntnr: Chem.BondContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getExplicitHydrogenBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
+def getExplicitHydrogenBondCount(cntnr: Chem.BondContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getExplicitChainBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
+def getExplicitChainBondCount(cntnr: Chem.BondContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getExplicitBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
+def getExplicitBondCount(cntnr: Chem.BondContainer) -> int: pass
 
 ##
 # \brief 
@@ -61,11 +61,11 @@ def getExplicitBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
 # \param inc_aro 
 # \return 
 #
-def getExplicitBondCount(cntnr: CDPL.Chem.BondContainer, order: int, inc_aro: bool = True) -> int: pass
+def getExplicitBondCount(cntnr: Chem.BondContainer, order: int, inc_aro: bool = True) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getHeavyBondCount(cntnr: CDPL.Chem.BondContainer) -> int: pass
+def getHeavyBondCount(cntnr: Chem.BondContainer) -> int: pass

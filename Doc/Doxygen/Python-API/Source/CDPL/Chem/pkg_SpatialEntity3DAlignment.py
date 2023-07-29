@@ -26,20 +26,17 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SpatialEntity3DAlignment instance.
-    # \param self The \e %SpatialEntity3DAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SpatialEntity3DAlignment instance.
-    # \param self The \e %SpatialEntity3DAlignment instance to initialize.
     # \param alignment 
     # 
     def __init__(alignment: SpatialEntity3DAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # 
     # Different Python \e %SpatialEntity3DAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialEntity3DAlignment instances \e a and \e b reference different C++ objects. 
@@ -185,11 +182,10 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getTransform() -> CDPL.Math.Matrix4D: pass
+    def getTransform() -> Math.Matrix4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialEntity3DAlignment instance \a alignment.
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param alignment The \e %SpatialEntity3DAlignment instance to copy.
     # \return \a self
     # 
@@ -199,7 +195,7 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getTopologicalMapping() -> CDPL.Util.STPairArray: pass
+    def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)
 

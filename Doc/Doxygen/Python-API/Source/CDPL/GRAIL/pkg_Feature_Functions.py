@@ -25,4 +25,4 @@
 # \param ligand 
 # \return 
 #
-def perceiveExtendedType(feature: CDPL.Pharm.Feature, ligand: bool) -> int: pass
+def perceiveExtendedType(feature: Pharm.Feature, ligand: bool) -> int: pass

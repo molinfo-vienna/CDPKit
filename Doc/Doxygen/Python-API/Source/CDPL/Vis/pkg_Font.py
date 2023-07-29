@@ -33,7 +33,6 @@ class Font(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Font instance.
-    # \param self The \e %Font instance to initialize.
     # \param font 
     # 
     def __init__(font: Font) -> None: pass
@@ -50,7 +49,6 @@ class Font(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Font instance this method is called upon.
     # 
     # Different Python \e %Font instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Font instances \e a and \e b reference different C++ objects. 
@@ -63,7 +61,6 @@ class Font(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Font instance \a font.
-    # \param self The \e %Font instance this method is called upon.
     # \param font The \e %Font instance to copy.
     # \return \a self
     # 
@@ -205,7 +202,6 @@ class Font(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %Font instance.
-    # \param self The \e %Font instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

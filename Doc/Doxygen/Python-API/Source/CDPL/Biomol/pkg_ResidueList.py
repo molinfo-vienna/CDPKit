@@ -22,7 +22,7 @@
 ##
 # \brief Implements the extraction of residues in biological macromolecules.
 # 
-class ResidueList(CDPL.Chem.FragmentList):
+class ResidueList(Chem.FragmentList):
 
     ##
     # \brief Constructs an empty <tt>ResidueList</tt> instance.
@@ -35,7 +35,7 @@ class ResidueList(CDPL.Chem.FragmentList):
     # \param molgraph The molecular graph for which to extract the residues.
     # \param flags The set of atom properties uniquely identifying a residue.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
 
     ##
     # \brief Replaces the current list of residues by the residues in the molecular graph <em>molgraph</em>.
@@ -43,4 +43,4 @@ class ResidueList(CDPL.Chem.FragmentList):
     # \param molgraph The molecular graph for which to extract the residues.
     # \param flags The set of atom properties uniquely identifying a residue.
     # 
-    def extract(molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
+    def extract(molgraph: Chem.MolecularGraph, flags: int = 2147483648) -> None: pass

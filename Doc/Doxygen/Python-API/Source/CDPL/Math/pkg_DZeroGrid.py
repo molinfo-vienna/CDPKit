@@ -26,20 +26,17 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DZeroGrid instance.
-    # \param self The \e %DZeroGrid instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DZeroGrid instance.
-    # \param self The \e %DZeroGrid instance to initialize.
     # \param g 
     # 
     def __init__(g: DZeroGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %DZeroGrid instance.
-    # \param self The \e %DZeroGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
@@ -56,7 +53,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # 
     # Different Python \e %DZeroGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DZeroGrid instances \e a and \e b reference different C++ objects. 
@@ -121,7 +117,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DZeroGrid instance \a g.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # \param g The \e %DZeroGrid instance to copy.
     # \return \a self
     # 
@@ -171,7 +166,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # \param g The \e %DZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -179,7 +173,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -187,7 +180,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # \param g The \e %DZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -195,7 +187,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -203,7 +194,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %DZeroGrid instance.
-    # \param self The \e %DZeroGrid instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -222,7 +212,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DZeroGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDGridExpression instance holding the result of the addition.
     # 
@@ -230,7 +219,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DZeroGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DZeroGrid instance holding the result of the subtraction.
     # 
@@ -238,7 +226,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DZeroGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDGridExpression instance holding the result of the multiplication.
     # 
@@ -246,7 +233,6 @@ class DZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DZeroGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDGridExpression instance holding the result of the division.
     # 

@@ -31,14 +31,12 @@ class SArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SArray instance.
-    # \param self The \e %SArray instance to initialize.
     # \param array 
     # 
     def __init__(array: SArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SArray instance this method is called upon.
     # 
     # Different Python \e %SArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SArray instances \e a and \e b reference different C++ objects. 
@@ -98,7 +96,6 @@ class SArray(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SArray instance \a array.
-    # \param self The \e %SArray instance this method is called upon.
     # \param array The \e %SArray instance to copy.
     # \return \a self
     # 

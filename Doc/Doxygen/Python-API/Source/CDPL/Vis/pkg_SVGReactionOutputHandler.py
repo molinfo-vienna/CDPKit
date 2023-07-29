@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format.
 # 
-class SVGReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
+class SVGReactionOutputHandler(Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %SVGReactionOutputHandler instance.
-    # \param self The \e %SVGReactionOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

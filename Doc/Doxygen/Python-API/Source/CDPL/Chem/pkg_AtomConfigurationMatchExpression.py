@@ -26,7 +26,6 @@ class AtomConfigurationMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomConfigurationMatchExpression instance.
-    # \param self The \e %AtomConfigurationMatchExpression instance to initialize.
     # \param expr 
     # 
     def __init__(expr: AtomConfigurationMatchExpression) -> None: pass

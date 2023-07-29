@@ -32,11 +32,10 @@
 # 
 # If a read() (or skip()) operation was successful, the current record index is updated to point to the record immediately following the just read (or skipped) data record. If an operation fails, the reader instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>DRegularGridSetReaderBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
-class DRegularGridSetReaderBase(CDPL.Base.DataIOBase):
+class DRegularGridSetReaderBase(Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %DRegularGridSetReaderBase instance.
-    # \param self The \e %DRegularGridSetReaderBase instance to initialize.
     # 
     def __init__() -> None: pass
 

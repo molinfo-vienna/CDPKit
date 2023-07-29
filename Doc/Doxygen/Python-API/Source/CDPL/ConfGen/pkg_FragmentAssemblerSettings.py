@@ -31,20 +31,17 @@ class FragmentAssemblerSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentAssemblerSettings instance.
-    # \param self The \e %FragmentAssemblerSettings instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentAssemblerSettings instance.
-    # \param self The \e %FragmentAssemblerSettings instance to initialize.
     # \param settings 
     # 
     def __init__(settings: FragmentAssemblerSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentAssemblerSettings instance this method is called upon.
     # 
     # Different Python \e %FragmentAssemblerSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentAssemblerSettings instances \e a and \e b reference different C++ objects. 
@@ -57,7 +54,6 @@ class FragmentAssemblerSettings(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentAssemblerSettings instance \a settings.
-    # \param self The \e %FragmentAssemblerSettings instance this method is called upon.
     # \param settings The \e %FragmentAssemblerSettings instance to copy.
     # \return \a self
     # 

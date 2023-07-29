@@ -22,20 +22,18 @@
 ##
 # \brief 
 #
-class BZip2IOStream(CDPL.Base.IOStream):
+class BZip2IOStream(Base.IOStream):
 
     ##
     # \brief Initializes the \e %BZip2IOStream instance.
-    # \param self The \e %BZip2IOStream instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BZip2IOStream instance.
-    # \param self The \e %BZip2IOStream instance to initialize.
     # \param ios 
     # 
-    def __init__(ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: Base.IOStream) -> None: pass
 
     ##
     # \brief 
@@ -135,7 +133,7 @@ class BZip2IOStream(CDPL.Base.IOStream):
     # \brief 
     # \param ios 
     #
-    def open(ios: CDPL.Base.IOStream) -> None: pass
+    def open(ios: Base.IOStream) -> None: pass
 
     ##
     # \brief 

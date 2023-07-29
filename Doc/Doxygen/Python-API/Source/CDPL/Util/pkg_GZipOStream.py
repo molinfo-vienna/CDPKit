@@ -22,20 +22,18 @@
 ##
 # \brief 
 #
-class GZipOStream(CDPL.Base.OStream):
+class GZipOStream(Base.OStream):
 
     ##
     # \brief Initializes the \e %GZipOStream instance.
-    # \param self The \e %GZipOStream instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GZipOStream instance.
-    # \param self The \e %GZipOStream instance to initialize.
     # \param os 
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass
 
     ##
     # \brief 
@@ -76,7 +74,7 @@ class GZipOStream(CDPL.Base.OStream):
     # \brief 
     # \param os 
     #
-    def open(os: CDPL.Base.OStream) -> None: pass
+    def open(os: Base.OStream) -> None: pass
 
     ##
     # \brief FIXME!

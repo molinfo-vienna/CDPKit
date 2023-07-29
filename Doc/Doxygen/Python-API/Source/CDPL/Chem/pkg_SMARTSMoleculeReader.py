@@ -36,4 +36,4 @@ class SMARTSMoleculeReader(MoleculeReaderBase):
     # 
     # \param is The input stream to read from.
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass

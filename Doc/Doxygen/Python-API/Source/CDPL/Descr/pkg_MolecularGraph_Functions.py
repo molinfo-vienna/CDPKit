@@ -24,81 +24,81 @@
 # \param molgraph 
 # \return 
 #
-def calcKierShape1(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcKierShape1(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcZagrebIndex1(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcZagrebIndex1(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcKierShape2(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcKierShape2(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcZagrebIndex2(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcZagrebIndex2(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcKierShape3(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcKierShape3(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcTopologicalDiameter(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcTopologicalDiameter(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcTopologicalRadius(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcTopologicalRadius(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcTotalWalkCount(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcTotalWalkCount(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcRandicIndex(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcRandicIndex(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcWienerIndex(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def calcWienerIndex(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcRingComplexity(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcRingComplexity(molgraph: Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def calcMolecularComplexity(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+def calcMolecularComplexity(molgraph: Chem.MolecularGraph) -> float: pass

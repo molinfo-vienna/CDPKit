@@ -26,20 +26,17 @@ class DoubleDVectorFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleDVectorFunctor instance.
-    # \param self The \e %DoubleDVectorFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleDVectorFunctor instance.
-    # \param self The \e %DoubleDVectorFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleDVectorFunctor instance.
-    # \param arg1 The \e %DoubleDVectorFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

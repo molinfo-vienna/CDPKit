@@ -913,20 +913,17 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
-    # \param self The \e %GRAILDescriptorCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
-    # \param self The \e %GRAILDescriptorCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: GRAILDescriptorCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GRAILDescriptorCalculator instance this method is called upon.
     # 
     # Different Python \e %GRAILDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GRAILDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -939,7 +936,6 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDescriptorCalculator instance \a calc.
-    # \param self The \e %GRAILDescriptorCalculator instance this method is called upon.
     # \param calc The \e %GRAILDescriptorCalculator instance to copy.
     # \return \a self
     # 
@@ -951,13 +947,13 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     # \param coords_func 
     # \param tgt_env_changed 
     #
-    def initTargetData(tgt_env: CDPL.Chem.MolecularGraph, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, tgt_env_changed: bool = True) -> None: pass
+    def initTargetData(tgt_env: Chem.MolecularGraph, coords_func: Chem.Atom3DCoordinatesFunction, tgt_env_changed: bool = True) -> None: pass
 
     ##
     # \brief 
     # \param ligand 
     #
-    def initLigandData(ligand: CDPL.Chem.MolecularGraph) -> None: pass
+    def initLigandData(ligand: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
@@ -965,6 +961,6 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     # \param descr 
     # \param update_lig_part 
     #
-    def calculate(atom_coords: CDPL.Math.Vector3DArray, descr: CDPL.Math.DVector, update_lig_part: bool = True) -> None: pass
+    def calculate(atom_coords: Math.Vector3DArray, descr: Math.DVector, update_lig_part: bool = True) -> None: pass
 
     objectID = property(getObjectID)

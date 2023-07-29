@@ -26,7 +26,6 @@ class SpatialFeatureMapping(FeatureMapping):
 
     ##
     # \brief Initializes the \e %SpatialFeatureMapping instance.
-    # \param self The \e %SpatialFeatureMapping instance to initialize.
     # \param mapping 
     # 
     def __init__(mapping: SpatialFeatureMapping) -> None: pass
@@ -40,7 +39,6 @@ class SpatialFeatureMapping(FeatureMapping):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # 
     # Different Python \e %SpatialFeatureMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialFeatureMapping instances \e a and \e b reference different C++ objects. 
@@ -53,7 +51,6 @@ class SpatialFeatureMapping(FeatureMapping):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialFeatureMapping instance \a mapping.
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param mapping The \e %SpatialFeatureMapping instance to copy.
     # \return \a self
     # 
@@ -65,7 +62,7 @@ class SpatialFeatureMapping(FeatureMapping):
     # \param aligned_ftrs 
     # \param xform 
     #
-    def perceive(ref_ftrs: FeatureContainer, aligned_ftrs: FeatureContainer, xform: CDPL.Math.Matrix4D) -> None: pass
+    def perceive(ref_ftrs: FeatureContainer, aligned_ftrs: FeatureContainer, xform: Math.Matrix4D) -> None: pass
 
     ##
     # \brief Specifies a function for testing the type compatibility of features.

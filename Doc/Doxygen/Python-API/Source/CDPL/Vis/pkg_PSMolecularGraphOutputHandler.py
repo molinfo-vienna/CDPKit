@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS] format.
 # 
-class PSMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
+class PSMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PSMolecularGraphOutputHandler instance.
-    # \param self The \e %PSMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

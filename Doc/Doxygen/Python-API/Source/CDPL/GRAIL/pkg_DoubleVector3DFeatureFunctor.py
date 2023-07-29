@@ -26,20 +26,17 @@ class DoubleVector3DFeatureFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleVector3DFeatureFunctor instance.
-    # \param self The \e %DoubleVector3DFeatureFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector3DFeatureFunctor instance.
-    # \param self The \e %DoubleVector3DFeatureFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector3DFeatureFunctor instance.
-    # \param arg1 The \e %DoubleVector3DFeatureFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -50,7 +47,7 @@ class DoubleVector3DFeatureFunctor(Boost.Python.instance):
     # \param arg2 
     # \return 
     #
-    def __call__(arg1: CDPL.Math.Vector3D, arg2: CDPL.Pharm.Feature) -> float: pass
+    def __call__(arg1: Math.Vector3D, arg2: Pharm.Feature) -> float: pass
 
     ##
     # \brief 

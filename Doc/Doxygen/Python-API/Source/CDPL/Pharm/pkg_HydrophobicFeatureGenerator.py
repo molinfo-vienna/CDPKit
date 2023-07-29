@@ -67,7 +67,7 @@ class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief Constructs a copy of the <tt>HydrophobicFeatureGenerator</tt> instance <em>gen</em>.

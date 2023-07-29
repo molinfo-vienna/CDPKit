@@ -22,11 +22,10 @@
 ##
 # \brief 
 #
-class PDBBZ2MoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class PDBBZ2MoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %PDBBZ2MoleculeReader instance.
-    # \param self The \e %PDBBZ2MoleculeReader instance to initialize.
     # \param is 
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass

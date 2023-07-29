@@ -40,7 +40,7 @@ def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 # \param ctr 
 # \return 
 #
-def calcCentroid(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: CDPL.Math.Vector3D) -> bool: pass
+def calcCentroid(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
@@ -68,14 +68,14 @@ def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, appen
 # \param reset 
 # \return 
 #
-def createAtomTypeMask(cntnr: AtomContainer, mask: CDPL.Util.BitSet, type: int, reset: bool = True) -> int: pass
+def createAtomTypeMask(cntnr: AtomContainer, mask: Util.BitSet, type: int, reset: bool = True) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param coords 
 #
-def addConformation(cntnr: AtomContainer, coords: CDPL.Math.Vector3DArray) -> None: pass
+def addConformation(cntnr: AtomContainer, coords: Math.Vector3DArray) -> None: pass
 
 ##
 # \brief 
@@ -83,7 +83,7 @@ def addConformation(cntnr: AtomContainer, coords: CDPL.Math.Vector3DArray) -> No
 # \param conf_idx 
 # \param mtx 
 #
-def transformConformation(cntnr: AtomContainer, conf_idx: int, mtx: CDPL.Math.Matrix4D) -> None: pass
+def transformConformation(cntnr: AtomContainer, conf_idx: int, mtx: Math.Matrix4D) -> None: pass
 
 ##
 # \brief 
@@ -92,7 +92,7 @@ def transformConformation(cntnr: AtomContainer, conf_idx: int, mtx: CDPL.Math.Ma
 # \param coords 
 # \param append 
 #
-def getConformation(cntnr: AtomContainer, conf_idx: int, coords: CDPL.Math.Vector3DArray, append: bool = False) -> None: pass
+def getConformation(cntnr: AtomContainer, conf_idx: int, coords: Math.Vector3DArray, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -106,7 +106,7 @@ def applyConformation(cntnr: AtomContainer, conf_idx: int) -> None: pass
 # \param cntnr 
 # \param mtx 
 #
-def transform2DCoordinates(cntnr: AtomContainer, mtx: CDPL.Math.Matrix3D) -> None: pass
+def transform2DCoordinates(cntnr: AtomContainer, mtx: Math.Matrix3D) -> None: pass
 
 ##
 # \brief 
@@ -114,14 +114,14 @@ def transform2DCoordinates(cntnr: AtomContainer, mtx: CDPL.Math.Matrix3D) -> Non
 # \param coords 
 # \param append 
 #
-def get2DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector2DArray, append: bool = False) -> None: pass
+def get2DCoordinates(cntnr: AtomContainer, coords: Math.Vector2DArray, append: bool = False) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param coords 
 #
-def set2DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector2DArray) -> None: pass
+def set2DCoordinates(cntnr: AtomContainer, coords: Math.Vector2DArray) -> None: pass
 
 ##
 # \brief 
@@ -130,7 +130,7 @@ def set2DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector2DArray) -> N
 # \param coords_func 
 # \param append 
 #
-def get3DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector3DArray, coords_func: Atom3DCoordinatesFunction, append: bool = False) -> None: pass
+def get3DCoordinates(cntnr: AtomContainer, coords: Math.Vector3DArray, coords_func: Atom3DCoordinatesFunction, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -145,7 +145,7 @@ def hasCoordinates(cntnr: AtomContainer, dim: int) -> bool: pass
 # \param cntnr 
 # \param mtx 
 #
-def transformConformations(cntnr: AtomContainer, mtx: CDPL.Math.Matrix4D) -> None: pass
+def transformConformations(cntnr: AtomContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##
 # \brief 
@@ -167,7 +167,7 @@ def clearConformations(cntnr: AtomContainer) -> None: pass
 # \param ctr 
 # \return 
 #
-def calcCenterOfMass(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: CDPL.Math.Vector3D) -> bool: pass
+def calcCenterOfMass(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
@@ -195,7 +195,7 @@ def copyAtomsIfNot(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, ap
 # \param coords_func 
 # \param reset 
 #
-def calcBoundingBox(cntnr: AtomContainer, min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, coords_func: Atom3DCoordinatesFunction, reset: bool = True) -> None: pass
+def calcBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction, reset: bool = True) -> None: pass
 
 ##
 # \brief 
@@ -205,7 +205,7 @@ def calcBoundingBox(cntnr: AtomContainer, min: CDPL.Math.Vector3D, max: CDPL.Mat
 # \param coords_func 
 # \return 
 #
-def insideBoundingBox(cntnr: AtomContainer, min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
+def insideBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
 
 ##
 # \brief 
@@ -215,4 +215,4 @@ def insideBoundingBox(cntnr: AtomContainer, min: CDPL.Math.Vector3D, max: CDPL.M
 # \param coords_func 
 # \return 
 #
-def intersectsBoundingBox(cntnr: AtomContainer, min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass
+def intersectsBoundingBox(cntnr: AtomContainer, min: Math.Vector3D, max: Math.Vector3D, coords_func: Atom3DCoordinatesFunction) -> bool: pass

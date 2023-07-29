@@ -31,14 +31,12 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %StructureData instance.
-        # \param self The \e %StructureData instance to initialize.
         # \param data 
         # 
         def __init__(data: StructureData) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %StructureData instance this method is called upon.
         # 
         # Different Python \e %StructureData instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StructureData instances \e a and \e b reference different C++ objects. 
@@ -51,7 +49,6 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %ResonanceStructureGenerator instance \a data.
-        # \param self The \e %StructureData instance this method is called upon.
         # \param data The \e %ResonanceStructureGenerator instance to copy.
         # \return \a self
         # 
@@ -61,13 +58,13 @@ class ResonanceStructureGenerator(Boost.Python.instance):
         # \brief 
         # \return 
         #
-        def getAtomCharges() -> CDPL.Util.LArray: pass
+        def getAtomCharges() -> Util.LArray: pass
 
         ##
         # \brief 
         # \return 
         #
-        def getBondOrders() -> CDPL.Util.STArray: pass
+        def getBondOrders() -> Util.STArray: pass
 
         objectID = property(getObjectID)
 
@@ -82,14 +79,12 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ResonanceStructureGenerator instance.
-    # \param self The \e %ResonanceStructureGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: ResonanceStructureGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ResonanceStructureGenerator instance this method is called upon.
     # 
     # Different Python \e %ResonanceStructureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ResonanceStructureGenerator instances \e a and \e b reference different C++ objects. 
@@ -102,7 +97,6 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ResonanceStructureGenerator instance \a gen.
-    # \param self The \e %ResonanceStructureGenerator instance this method is called upon.
     # \param gen The \e %ResonanceStructureGenerator instance to copy.
     # \return \a self
     # 
@@ -148,7 +142,7 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getOctetRuleCheckAtomTypes() -> CDPL.Util.BitSet: pass
+    def getOctetRuleCheckAtomTypes() -> Util.BitSet: pass
 
     ##
     # \brief 

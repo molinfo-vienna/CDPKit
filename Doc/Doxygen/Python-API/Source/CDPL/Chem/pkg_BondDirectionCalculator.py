@@ -37,11 +37,10 @@ class BondDirectionCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the bond direction flags.
     # \param dirs An array containing the calculated bond direction flags (possible values are defined as constants in namespace Chem.BondDirection). The directions are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the direction flag of a bond is accessible via its index).
     # 
-    def __init__(molgraph: MolecularGraph, dirs: CDPL.Util.UIArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, dirs: Util.UIArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondDirectionCalculator instance this method is called upon.
     # 
     # Different Python \e %BondDirectionCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondDirectionCalculator instances \e a and \e b reference different C++ objects. 
@@ -94,7 +93,7 @@ class BondDirectionCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the bond direction flags.
     # \param dirs An array containing the calculated bond direction flags (possible values are defined as constants in namespace Chem.BondDirection). The directions are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the direction flag of a bond is accessible via its index).
     # 
-    def calculate(molgraph: MolecularGraph, dirs: CDPL.Util.UIArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, dirs: Util.UIArray) -> None: pass
 
     objectID = property(getObjectID)
 

@@ -32,18 +32,16 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
     ##
     # \brief Constructs an undefined ellipse primitive.
     # 
-    def __init__(pos: CDPL.Math.Vector2D, width: float, height: float) -> None: pass
+    def __init__(pos: Math.Vector2D, width: float, height: float) -> None: pass
 
     ##
     # \brief Initializes the \e %EllipsePrimitive2D instance.
-    # \param self The \e %EllipsePrimitive2D instance to initialize.
     # \param prim 
     # 
     def __init__(prim: EllipsePrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %EllipsePrimitive2D instance \a prim.
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param prim The \e %EllipsePrimitive2D instance to copy.
     # \return \a self
     # 
@@ -82,14 +80,14 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
     # 
     # \param pos The center position of the ellipse.
     # 
-    def setPosition(pos: CDPL.Math.Vector2D) -> None: pass
+    def setPosition(pos: Math.Vector2D) -> None: pass
 
     ##
     # \brief Returns the position of the ellipse center.
     # 
     # \return The center position of the ellipse.
     # 
-    def getPosition() -> CDPL.Math.Vector2D: pass
+    def getPosition() -> Math.Vector2D: pass
 
     ##
     # \brief Sets the pen defining the color, width, line style, cap style and join style of the ellipse outline.

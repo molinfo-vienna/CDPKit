@@ -25,7 +25,7 @@
 # \param eigen_vecs 
 # \param eigen_vals 
 #
-def calcQuadrupoleTensorEigenDecomposition(quad_tensor: CDPL.Math.Matrix3D, eigen_vecs: CDPL.Math.Matrix3D, eigen_vals: CDPL.Math.Vector3D) -> None: pass
+def calcQuadrupoleTensorEigenDecomposition(quad_tensor: Math.Matrix3D, eigen_vecs: Math.Matrix3D, eigen_vals: Math.Vector3D) -> None: pass
 
 ##
 # \brief 
@@ -35,4 +35,4 @@ def calcQuadrupoleTensorEigenDecomposition(quad_tensor: CDPL.Math.Matrix3D, eige
 # \param z_axis 
 # \param moments 
 #
-def calcPrincipalAxes(quad_tensor: CDPL.Math.Matrix3D, x_axis: CDPL.Math.Vector3D, y_axis: CDPL.Math.Vector3D, z_axis: CDPL.Math.Vector3D, moments: CDPL.Math.Vector3D) -> None: pass
+def calcPrincipalAxes(quad_tensor: Math.Matrix3D, x_axis: Math.Vector3D, y_axis: Math.Vector3D, z_axis: Math.Vector3D, moments: Math.Vector3D) -> None: pass

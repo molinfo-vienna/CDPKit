@@ -46,7 +46,6 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %OrthogonalPiPiInteractionScore instance.
-    # \param self The \e %OrthogonalPiPiInteractionScore instance to initialize.
     # \param score 
     # 
     def __init__(score: OrthogonalPiPiInteractionScore) -> None: pass
@@ -99,7 +98,6 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %OrthogonalPiPiInteractionScore instance \a constr.
-    # \param self The \e %OrthogonalPiPiInteractionScore instance this method is called upon.
     # \param constr The \e %OrthogonalPiPiInteractionScore instance to copy.
     # \return \a self
     # 

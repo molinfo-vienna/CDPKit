@@ -31,7 +31,6 @@ class HBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %HBondAcceptorFeatureGenerator instance.
-    # \param self The \e %HBondAcceptorFeatureGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: HBondAcceptorFeatureGenerator) -> None: pass
@@ -42,11 +41,10 @@ class HBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondAcceptorFeatureGenerator instance \a gen.
-    # \param self The \e %HBondAcceptorFeatureGenerator instance this method is called upon.
     # \param gen The \e %HBondAcceptorFeatureGenerator instance to copy.
     # \return \a self
     # 

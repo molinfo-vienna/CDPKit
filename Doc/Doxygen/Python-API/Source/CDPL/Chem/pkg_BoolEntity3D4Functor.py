@@ -26,20 +26,17 @@ class BoolEntity3D4Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolEntity3D4Functor instance.
-    # \param self The \e %BoolEntity3D4Functor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolEntity3D4Functor instance.
-    # \param self The \e %BoolEntity3D4Functor instance to initialize.
     # \param func 
     # 
     def __init__(func: BoolEntity3D4Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolEntity3D4Functor instance.
-    # \param arg1 The \e %BoolEntity3D4Functor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

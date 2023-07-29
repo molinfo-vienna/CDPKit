@@ -37,4 +37,4 @@ class SMARTSMolecularGraphWriter(MolecularGraphWriterBase):
     # 
     # \param os The output stream to write to.
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass

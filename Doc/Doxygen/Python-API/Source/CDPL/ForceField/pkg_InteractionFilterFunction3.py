@@ -26,20 +26,17 @@ class InteractionFilterFunction3(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction3 instance.
-    # \param self The \e %InteractionFilterFunction3 instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction3 instance.
-    # \param self The \e %InteractionFilterFunction3 instance to initialize.
     # \param func 
     # 
     def __init__(func: InteractionFilterFunction3) -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction3 instance.
-    # \param arg1 The \e %InteractionFilterFunction3 instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -51,7 +48,7 @@ class InteractionFilterFunction3(Boost.Python.instance):
     # \param arg3 
     # \return 
     #
-    def __call__(arg1: CDPL.Chem.Atom, arg2: CDPL.Chem.Atom, arg3: CDPL.Chem.Atom) -> bool: pass
+    def __call__(arg1: Chem.Atom, arg2: Chem.Atom, arg3: Chem.Atom) -> bool: pass
 
     ##
     # \brief 

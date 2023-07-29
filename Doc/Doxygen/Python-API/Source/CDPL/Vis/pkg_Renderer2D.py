@@ -47,13 +47,11 @@ class Renderer2D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Renderer2D instance.
-    # \param self The \e %Renderer2D instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Renderer2D instance this method is called upon.
     # 
     # Different Python \e %Renderer2D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Renderer2D instances \e a and \e b reference different C++ objects. 
@@ -85,14 +83,14 @@ class Renderer2D(Boost.Python.instance):
     # 
     # \param xform The new affine transformation matrix.
     # 
-    def setTransform(xform: CDPL.Math.Matrix3D) -> None: pass
+    def setTransform(xform: Math.Matrix3D) -> None: pass
 
     ##
     # \brief Multiplies the current affine transformation matrix by <em>xform</em>.
     # 
     # \param xform The matrix by which the current affine transformation matrix is multiplied.
     # 
-    def transform(xform: CDPL.Math.Matrix3D) -> None: pass
+    def transform(xform: Math.Matrix3D) -> None: pass
 
     ##
     # \brief Sets the pen to be used in subsequent drawing operations.
@@ -158,7 +156,7 @@ class Renderer2D(Boost.Python.instance):
     # 
     # \see setPen(), setBrush()
     # 
-    def drawPolygon(points: CDPL.Math.Vector2DArray) -> None: pass
+    def drawPolygon(points: Math.Vector2DArray) -> None: pass
 
     ##
     # \brief Draws a line segment from <em>(x1, y1)</em> to <em>(x2, y2)</em>.
@@ -183,7 +181,7 @@ class Renderer2D(Boost.Python.instance):
     # 
     # \see setPen()
     # 
-    def drawPolyline(points: CDPL.Math.Vector2DArray) -> None: pass
+    def drawPolyline(points: Math.Vector2DArray) -> None: pass
 
     ##
     # \brief Draws the sequence of disjoint line segments defined by <em>points</em>.
@@ -194,7 +192,7 @@ class Renderer2D(Boost.Python.instance):
     # 
     # \see setPen()
     # 
-    def drawLineSegments(points: CDPL.Math.Vector2DArray) -> None: pass
+    def drawLineSegments(points: Math.Vector2DArray) -> None: pass
 
     ##
     # \brief Draws a point at the position <em>(x, y)</em>.

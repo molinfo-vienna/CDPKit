@@ -36,11 +36,10 @@ class BondOrderCalculator(Boost.Python.instance):
     # \param orders An array containing the perceived bond orders. The orders are stored in the same sequence as the bonds appear in the input molecular graph, i.e. the order of a particular bond is accessible via its index in the molecular graph.
     # \param undef_only Specifies whether or not to perceive only undefined (= unset) bond orders.
     # 
-    def __init__(molgraph: MolecularGraph, orders: CDPL.Util.STArray, undef_only: bool = True) -> None: pass
+    def __init__(molgraph: MolecularGraph, orders: Util.STArray, undef_only: bool = True) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondOrderCalculator instance this method is called upon.
     # 
     # Different Python \e %BondOrderCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondOrderCalculator instances \e a and \e b reference different C++ objects. 
@@ -57,7 +56,7 @@ class BondOrderCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perceive the bond orders.
     # \param orders An array containing the perceived bond orders. The orders are stored in the same sequence as the bonds appear in the input molecular graph, i.e. the order of a particular bond is accessible via its index in the molecular graph.
     # 
-    def calculate(molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, orders: Util.STArray) -> None: pass
 
     objectID = property(getObjectID)
 

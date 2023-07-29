@@ -50,7 +50,6 @@ class Molecule(MolecularGraph):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         # 
@@ -82,7 +81,6 @@ class Molecule(MolecularGraph):
 
         ##
         # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param bond The value to test for membership.
         # \return The result of the membership test operation.
         # 
@@ -90,7 +88,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Initializes the \e %Molecule instance.
-    # \param self The \e %Molecule instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -277,7 +274,7 @@ class Molecule(MolecularGraph):
     # \brief 
     # \param func 
     #
-    def orderAtoms(func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
@@ -345,7 +342,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param self The \e %Molecule instance acting as in-place addend.
     # \param mol Specifies the second addend.
     # \return The updated \e %Molecule instance \a self.
     # 
@@ -353,7 +349,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param self The \e %Molecule instance acting as in-place addend.
     # \param molgraph Specifies the second addend.
     # \return The updated \e %Molecule instance \a self.
     # 
@@ -361,7 +356,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
-    # \param self The \e %Molecule instance acting as in-place minuend.
     # \param molgraph Specifies the subtrahend.
     # \return The updated \e %Molecule instance \a self.
     # 
@@ -369,7 +363,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
     # 
@@ -377,7 +370,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
     # 
@@ -385,32 +377,31 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 

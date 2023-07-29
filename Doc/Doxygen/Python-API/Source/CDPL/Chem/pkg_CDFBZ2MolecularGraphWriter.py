@@ -26,7 +26,6 @@ class CDFBZ2MolecularGraphWriter(MolecularGraphWriterBase):
 
     ##
     # \brief Initializes the \e %CDFBZ2MolecularGraphWriter instance.
-    # \param self The \e %CDFBZ2MolecularGraphWriter instance to initialize.
     # \param ios 
     # 
-    def __init__(ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: Base.IOStream) -> None: pass

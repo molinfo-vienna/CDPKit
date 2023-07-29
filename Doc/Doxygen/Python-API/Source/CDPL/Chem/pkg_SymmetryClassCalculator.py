@@ -47,11 +47,10 @@ class SymmetryClassCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perceive the symmetry classes.
     # \param class_ids An array containing the perceived symmetry class IDs. The class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the symmetry class of an atom is accessible via its index).
     # 
-    def __init__(molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, class_ids: Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # 
     # Different Python \e %SymmetryClassCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SymmetryClassCalculator instances \e a and \e b reference different C++ objects. 
@@ -131,7 +130,7 @@ class SymmetryClassCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perceive the symmetry classes.
     # \param class_ids An array containing the perceived symmetry class IDs. The class IDs are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the symmetry class of an atom is accessible via its index).
     # 
-    def calculate(molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, class_ids: Util.STArray) -> None: pass
 
     objectID = property(getObjectID)
 

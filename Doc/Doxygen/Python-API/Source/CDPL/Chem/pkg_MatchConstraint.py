@@ -66,14 +66,12 @@ class MatchConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
-    # \param self The \e %MatchConstraint instance to initialize.
     # \param constr 
     # 
     def __init__(constr: MatchConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
-    # \param self The \e %MatchConstraint instance to initialize.
     # \param id 
     # \param rel 
     # 
@@ -86,11 +84,10 @@ class MatchConstraint(Boost.Python.instance):
     # \param rel The relational constraint on the values of matching query/target attribute pairs.
     # \param val The value of the query attribute.
     # 
-    def __init__(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
+    def __init__(id: int, rel: Relation, val: Base.Any) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraint instance \a constr.
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \param constr The \e %MatchConstraint instance to copy.
     # \return \a self
     # 
@@ -131,14 +128,14 @@ class MatchConstraint(Boost.Python.instance):
     # 
     # \throw Base.BadCast if the stored <tt>Any</tt> instance is empty, or the stored value is not of the specified type <em>T</em>.
     # 
-    def getValue() -> CDPL.Base.Any: pass
+    def getValue() -> Base.Any: pass
 
     ##
     # \brief Sets the value of the query attribute.
     # 
     # \param val The value of the query attribute.
     # 
-    def setValue(val: CDPL.Base.Any) -> None: pass
+    def setValue(val: Base.Any) -> None: pass
 
     ##
     # \brief Tells wether a query attribute value has been set.

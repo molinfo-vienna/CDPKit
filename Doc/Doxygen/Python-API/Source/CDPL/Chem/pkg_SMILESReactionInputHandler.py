@@ -26,6 +26,5 @@ class SMILESReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %SMILESReactionInputHandler instance.
-    # \param self The \e %SMILESReactionInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

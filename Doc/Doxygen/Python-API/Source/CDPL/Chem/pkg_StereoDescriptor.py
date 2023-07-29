@@ -62,7 +62,6 @@ class StereoDescriptor(Boost.Python.instance):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %ReferenceAtomArray instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         # 
@@ -161,7 +160,6 @@ class StereoDescriptor(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # 
     # Different Python \e %StereoDescriptor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StereoDescriptor instances \e a and \e b reference different C++ objects. 
@@ -185,7 +183,6 @@ class StereoDescriptor(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %StereoDescriptor instance.
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

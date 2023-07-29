@@ -40,7 +40,6 @@ class MaxCommonBondSubstructureSearch(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # 
     # Different Python \e %MaxCommonBondSubstructureSearch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MaxCommonBondSubstructureSearch instances \e a and \e b reference different C++ objects. 

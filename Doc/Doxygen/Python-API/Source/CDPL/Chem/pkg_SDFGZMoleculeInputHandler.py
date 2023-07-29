@@ -26,6 +26,5 @@ class SDFGZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SDFGZMoleculeInputHandler instance.
-    # \param self The \e %SDFGZMoleculeInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

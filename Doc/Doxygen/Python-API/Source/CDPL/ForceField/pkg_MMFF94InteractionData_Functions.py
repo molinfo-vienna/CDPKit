@@ -25,4 +25,4 @@
 # \param filtered_ia_data 
 # \param inc_atom_mask 
 #
-def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94InteractionData, inc_atom_mask: CDPL.Util.BitSet) -> None: pass
+def filterInteractions(ia_data: MMFF94InteractionData, filtered_ia_data: MMFF94InteractionData, inc_atom_mask: Util.BitSet) -> None: pass

@@ -26,13 +26,11 @@ class FeatureInteractionScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureInteractionScore instance.
-    # \param self The \e %FeatureInteractionScore instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureInteractionScore instance this method is called upon.
     # 
     # Different Python \e %FeatureInteractionScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureInteractionScore instances \e a and \e b reference different C++ objects. 
@@ -57,6 +55,6 @@ class FeatureInteractionScore(Boost.Python.instance):
     # \param arg2 
     # \return 
     #
-    def __call__(arg2: CDPL.Math.Vector3D, self: Feature) -> float: pass
+    def __call__(arg2: Math.Vector3D, self: Feature) -> float: pass
 
     objectID = property(getObjectID)

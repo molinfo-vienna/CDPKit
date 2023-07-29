@@ -44,7 +44,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         # 
@@ -70,7 +69,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
         ##
         # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param bond The value to test for membership.
         # \return The result of the membership test operation.
         # 
@@ -78,7 +76,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
     # \brief Initializes the \e %Atom instance.
-    # \param self The \e %Atom instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -183,7 +180,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # \brief 
     # \param func 
     #
-    def orderAtoms(func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
@@ -248,7 +245,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param self The \e %Atom instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
     # 
@@ -256,7 +252,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param self The \e %Atom instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
     # 
@@ -264,32 +259,31 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Atom instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief 
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 

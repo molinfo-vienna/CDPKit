@@ -26,13 +26,11 @@ class ConformerGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConformerGenerator instance.
-    # \param self The \e %ConformerGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConformerGenerator instance this method is called upon.
     # 
     # Different Python \e %ConformerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConformerGenerator instances \e a and \e b reference different C++ objects. 
@@ -48,7 +46,7 @@ class ConformerGenerator(Boost.Python.instance):
     # \param molgraph 
     # \return 
     #
-    def generate(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+    def generate(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
@@ -118,7 +116,7 @@ class ConformerGenerator(Boost.Python.instance):
     # \brief 
     # \param molgraph 
     #
-    def setConformers(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setConformers(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 

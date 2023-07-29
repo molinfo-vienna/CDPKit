@@ -23,163 +23,163 @@
 # \brief 
 # \param atom 
 #
-def clearChainID(atom: CDPL.Chem.Atom) -> None: pass
+def clearChainID(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def hasChainID(atom: CDPL.Chem.Atom) -> bool: pass
+def hasChainID(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getChainID(atom: CDPL.Chem.Atom) -> str: pass
+def getChainID(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 # \param id 
 #
-def setChainID(atom: CDPL.Chem.Atom, id: str) -> None: pass
+def setChainID(atom: Chem.Atom, id: str) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearAltLocationID(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasAltLocationID(atom: CDPL.Chem.Atom) -> bool: pass
+def clearAltLocationID(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getAltLocationID(atom: CDPL.Chem.Atom) -> str: pass
+def hasAltLocationID(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getAltLocationID(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 # \param id 
 #
-def setAltLocationID(atom: CDPL.Chem.Atom, id: str) -> None: pass
+def setAltLocationID(atom: Chem.Atom, id: str) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueCode(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueCode(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueCode(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueCode(atom: CDPL.Chem.Atom) -> str: pass
+def hasResidueCode(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueCode(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 # \param code 
 #
-def setResidueCode(atom: CDPL.Chem.Atom, code: str) -> None: pass
+def setResidueCode(atom: Chem.Atom, code: str) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueInsertionCode(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueInsertionCode(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueInsertionCode(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueInsertionCode(atom: CDPL.Chem.Atom) -> str: pass
+def hasResidueInsertionCode(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueInsertionCode(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 # \param code 
 #
-def setResidueInsertionCode(atom: CDPL.Chem.Atom, code: str) -> None: pass
+def setResidueInsertionCode(atom: Chem.Atom, code: str) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueAtomName(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueAtomName(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueAtomName(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueAtomName(atom: CDPL.Chem.Atom) -> str: pass
+def hasResidueAtomName(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueAtomName(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 # \param name 
 #
-def setResidueAtomName(atom: CDPL.Chem.Atom, name: str) -> None: pass
+def setResidueAtomName(atom: Chem.Atom, name: str) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueAltAtomName(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueAltAtomName(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueAltAtomName(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueAltAtomName(atom: CDPL.Chem.Atom) -> str: pass
+def hasResidueAltAtomName(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueAltAtomName(atom: Chem.Atom) -> str: pass
 
 ##
 # \brief 
 # \param atom 
 # \param name 
 #
-def setResidueAltAtomName(atom: CDPL.Chem.Atom, name: str) -> None: pass
+def setResidueAltAtomName(atom: Chem.Atom, name: str) -> None: pass
 
 ##
 # \brief 
@@ -190,7 +190,7 @@ def setResidueAltAtomName(atom: CDPL.Chem.Atom, name: str) -> None: pass
 # \param flags 
 # \param append 
 #
-def extractResidueSubstructure(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, res_substruct: CDPL.Chem.Fragment, cnctd_only: bool = False, flags: int = 2147483648, append: bool = False) -> None: pass
+def extractResidueSubstructure(atom: Chem.Atom, molgraph: Chem.MolecularGraph, res_substruct: Chem.Fragment, cnctd_only: bool = False, flags: int = 2147483648, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -199,95 +199,95 @@ def extractResidueSubstructure(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.Molecul
 # \param flags 
 # \return 
 #
-def areInSameResidue(atom1: CDPL.Chem.Atom, atom2: CDPL.Chem.Atom, flags: int = 2147483648) -> bool: pass
+def areInSameResidue(atom1: Chem.Atom, atom2: Chem.Atom, flags: int = 2147483648) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueLinkingAtomFlag(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueLinkingAtomFlag(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueLinkingAtomFlag(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueLinkingAtomFlag(atom: CDPL.Chem.Atom) -> bool: pass
+def hasResidueLinkingAtomFlag(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueLinkingAtomFlag(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \param linking 
 #
-def setResidueLinkingAtomFlag(atom: CDPL.Chem.Atom, linking: bool) -> None: pass
+def setResidueLinkingAtomFlag(atom: Chem.Atom, linking: bool) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueLeavingAtomFlag(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueLeavingAtomFlag(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueLeavingAtomFlag(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueLeavingAtomFlag(atom: CDPL.Chem.Atom) -> bool: pass
+def hasResidueLeavingAtomFlag(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueLeavingAtomFlag(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \param leaving 
 #
-def setResidueLeavingAtomFlag(atom: CDPL.Chem.Atom, leaving: bool) -> None: pass
+def setResidueLeavingAtomFlag(atom: Chem.Atom, leaving: bool) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearHeteroAtomFlag(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasHeteroAtomFlag(atom: CDPL.Chem.Atom) -> bool: pass
+def clearHeteroAtomFlag(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getHeteroAtomFlag(atom: CDPL.Chem.Atom) -> bool: pass
+def hasHeteroAtomFlag(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHeteroAtomFlag(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \param is_het 
 #
-def setHeteroAtomFlag(atom: CDPL.Chem.Atom, is_het: bool) -> None: pass
+def setHeteroAtomFlag(atom: Chem.Atom, is_het: bool) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def isPDBBackboneAtom(atom: CDPL.Chem.Atom) -> bool: pass
+def isPDBBackboneAtom(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
@@ -301,139 +301,139 @@ def isPDBBackboneAtom(atom: CDPL.Chem.Atom) -> bool: pass
 # \param serial_no 
 # \return 
 #
-def matchesResidueInfo(atom: CDPL.Chem.Atom, res_code: str = '', chain_id: str = '', res_seq_no: int = -9223372036854775808, ins_code: str = '\x00', model_no: int = 0, atom_name: str = '', serial_no: int = -9223372036854775808) -> bool: pass
+def matchesResidueInfo(atom: Chem.Atom, res_code: str = '', chain_id: str = '', res_seq_no: int = -9223372036854775808, ins_code: str = '\x00', model_no: int = 0, atom_name: str = '', serial_no: int = -9223372036854775808) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearResidueSequenceNumber(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasResidueSequenceNumber(atom: CDPL.Chem.Atom) -> bool: pass
+def clearResidueSequenceNumber(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getResidueSequenceNumber(atom: CDPL.Chem.Atom) -> int: pass
+def hasResidueSequenceNumber(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getResidueSequenceNumber(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 # \param seq_no 
 #
-def setResidueSequenceNumber(atom: CDPL.Chem.Atom, seq_no: int) -> None: pass
+def setResidueSequenceNumber(atom: Chem.Atom, seq_no: int) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearSerialNumber(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasSerialNumber(atom: CDPL.Chem.Atom) -> bool: pass
+def clearSerialNumber(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getSerialNumber(atom: CDPL.Chem.Atom) -> int: pass
+def hasSerialNumber(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getSerialNumber(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 # \param serial_no 
 #
-def setSerialNumber(atom: CDPL.Chem.Atom, serial_no: int) -> None: pass
+def setSerialNumber(atom: Chem.Atom, serial_no: int) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearModelNumber(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasModelNumber(atom: CDPL.Chem.Atom) -> bool: pass
+def clearModelNumber(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getModelNumber(atom: CDPL.Chem.Atom) -> int: pass
+def hasModelNumber(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getModelNumber(atom: Chem.Atom) -> int: pass
 
 ##
 # \brief 
 # \param atom 
 # \param model_no 
 #
-def setModelNumber(atom: CDPL.Chem.Atom, model_no: int) -> None: pass
+def setModelNumber(atom: Chem.Atom, model_no: int) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearBFactor(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasBFactor(atom: CDPL.Chem.Atom) -> bool: pass
+def clearBFactor(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getBFactor(atom: CDPL.Chem.Atom) -> float: pass
+def hasBFactor(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getBFactor(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param factor 
 #
-def setBFactor(atom: CDPL.Chem.Atom, factor: float) -> None: pass
+def setBFactor(atom: Chem.Atom, factor: float) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearOccupancy(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasOccupancy(atom: CDPL.Chem.Atom) -> bool: pass
+def clearOccupancy(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getOccupancy(atom: CDPL.Chem.Atom) -> float: pass
+def hasOccupancy(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getOccupancy(atom: Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param occupancy 
 #
-def setOccupancy(atom: CDPL.Chem.Atom, occupancy: float) -> None: pass
+def setOccupancy(atom: Chem.Atom, occupancy: float) -> None: pass

@@ -28,11 +28,10 @@
 # 
 # If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>ReactionWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
-class ReactionWriterBase(CDPL.Base.DataIOBase):
+class ReactionWriterBase(Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %ReactionWriterBase instance.
-    # \param self The \e %ReactionWriterBase instance to initialize.
     # 
     def __init__() -> None: pass
 

@@ -40,7 +40,6 @@ class NOTReactionMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %NOTReactionMatchExpression instance \a expression.
-    # \param self The \e %NOTReactionMatchExpression instance this method is called upon.
     # \param expression The \e %NOTReactionMatchExpression instance to copy.
     # \return \a self
     # 

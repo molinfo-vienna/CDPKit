@@ -33,14 +33,12 @@ class AtomMatchExpressionList(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomMatchExpressionList instance.
-    # \param self The \e %AtomMatchExpressionList instance to initialize.
     # \param expr 
     # 
     def __init__(expr: AtomMatchExpressionList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # 
     # Different Python \e %AtomMatchExpressionList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomMatchExpressionList instances \e a and \e b reference different C++ objects. 
@@ -100,7 +98,6 @@ class AtomMatchExpressionList(AtomMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomMatchExpressionList instance \a array.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param array The \e %AtomMatchExpressionList instance to copy.
     # \return \a self
     # 
@@ -249,7 +246,6 @@ class AtomMatchExpressionList(AtomMatchExpression):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param expr The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -257,7 +253,6 @@ class AtomMatchExpressionList(AtomMatchExpression):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != expr</tt>.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param expr The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 

@@ -744,7 +744,7 @@ def setCIPConfiguration(atom: Atom, config: int) -> None: pass
 # \param coords 
 # \return 
 #
-def calcAtomConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescriptor, coords: CDPL.Math.Vector3DArray) -> int: pass
+def calcAtomConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
 ##
 # \brief 
@@ -885,14 +885,14 @@ def has2DCoordinates(atom: Atom) -> bool: pass
 # \param atom 
 # \return 
 #
-def get2DCoordinates(atom: Atom) -> CDPL.Math.Vector2D: pass
+def get2DCoordinates(atom: Atom) -> Math.Vector2D: pass
 
 ##
 # \brief 
 # \param atom 
 # \param coords 
 #
-def set2DCoordinates(atom: Atom, coords: CDPL.Math.Vector2D) -> None: pass
+def set2DCoordinates(atom: Atom, coords: Math.Vector2D) -> None: pass
 
 ##
 # \brief 
@@ -900,7 +900,7 @@ def set2DCoordinates(atom: Atom, coords: CDPL.Math.Vector2D) -> None: pass
 # \param conf_idx 
 # \return 
 #
-def getConformer3DCoordinates(atom: Atom, conf_idx: int) -> CDPL.Math.Vector3D: pass
+def getConformer3DCoordinates(atom: Atom, conf_idx: int) -> Math.Vector3D: pass
 
 ##
 # \brief 
@@ -919,7 +919,7 @@ def getConnectedAtoms(atom: Atom, molgraph: MolecularGraph, atoms: list, excl_at
 # \param atom_mask 
 # \param reset 
 #
-def markReachableAtoms(atom: Atom, molgraph: MolecularGraph, atom_mask: CDPL.Util.BitSet, reset: bool = True) -> None: pass
+def markReachableAtoms(atom: Atom, molgraph: MolecularGraph, atom_mask: Util.BitSet, reset: bool = True) -> None: pass
 
 ##
 # \brief 
@@ -1125,14 +1125,14 @@ def has3DCoordinatesArray(atom: Atom) -> bool: pass
 # \param atom 
 # \return 
 #
-def get3DCoordinatesArray(atom: Atom) -> CDPL.Math.Vector3DArray: pass
+def get3DCoordinatesArray(atom: Atom) -> Math.Vector3DArray: pass
 
 ##
 # \brief 
 # \param atom 
 # \param coords_array 
 #
-def set3DCoordinatesArray(atom: Atom, coords_array: CDPL.Math.Vector3DArray) -> None: pass
+def set3DCoordinatesArray(atom: Atom, coords_array: Math.Vector3DArray) -> None: pass
 
 ##
 # \brief 

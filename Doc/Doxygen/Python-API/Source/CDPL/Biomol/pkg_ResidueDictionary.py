@@ -31,20 +31,17 @@ class ResidueDictionary(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param code 
         # \param rep_code 
         # \param rep_by_code 
@@ -57,7 +54,6 @@ class ResidueDictionary(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -70,7 +66,6 @@ class ResidueDictionary(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return \a self
         # 
@@ -116,7 +111,7 @@ class ResidueDictionary(Boost.Python.instance):
         # \brief 
         # \return 
         #
-        def getStructure() -> CDPL.Chem.MolecularGraph: pass
+        def getStructure() -> Chem.MolecularGraph: pass
 
         objectID = property(getObjectID)
 
@@ -140,20 +135,17 @@ class ResidueDictionary(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ResidueDictionary instance.
-    # \param self The \e %ResidueDictionary instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ResidueDictionary instance.
-    # \param self The \e %ResidueDictionary instance to initialize.
     # \param dict 
     # 
     def __init__(dict: ResidueDictionary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ResidueDictionary instance this method is called upon.
     # 
     # Different Python \e %ResidueDictionary instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ResidueDictionary instances \e a and \e b reference different C++ objects. 
@@ -214,7 +206,6 @@ class ResidueDictionary(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ResidueDictionary instance \a dict.
-    # \param self The \e %ResidueDictionary instance this method is called upon.
     # \param dict The \e %ResidueDictionary instance to copy.
     # \return \a self
     # 
@@ -289,7 +280,7 @@ class ResidueDictionary(Boost.Python.instance):
     # \return 
     #
     @staticmethod
-    def getStructure(code: str) -> CDPL.Chem.MolecularGraph: pass
+    def getStructure(code: str) -> Chem.MolecularGraph: pass
 
     objectID = property(getObjectID)
 

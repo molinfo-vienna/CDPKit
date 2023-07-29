@@ -26,7 +26,7 @@
 # \param grad 
 # \return 
 #
-def calcMMFF94VanDerWaalsGradient(iaction: MMFF94VanDerWaalsInteraction, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94VanDerWaalsGradient(iaction: MMFF94VanDerWaalsInteraction, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def calcMMFF94VanDerWaalsGradient(iaction: MMFF94VanDerWaalsInteraction, coords:
 # \param coords 
 # \return 
 #
-def calcMMFF94VanDerWaalsEnergy(iaction: MMFF94VanDerWaalsInteraction, coords: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94VanDerWaalsEnergy(iaction: MMFF94VanDerWaalsInteraction, coords: Math.Vector3DArray) -> float: pass

@@ -31,20 +31,17 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %StructureGeneratorSettings instance.
-    # \param self The \e %StructureGeneratorSettings instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StructureGeneratorSettings instance.
-    # \param self The \e %StructureGeneratorSettings instance to initialize.
     # \param settings 
     # 
     def __init__(settings: StructureGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # 
     # Different Python \e %StructureGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StructureGeneratorSettings instances \e a and \e b reference different C++ objects. 
@@ -57,7 +54,6 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StructureGeneratorSettings instance \a settings.
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param settings The \e %StructureGeneratorSettings instance to copy.
     # \return \a self
     # 

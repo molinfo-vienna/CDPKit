@@ -24,7 +24,7 @@
 # 
 # <tt>PNGReactionWriter</tt> uses Vis.ReactionView2D for the visualization of chemical reactions. All control-parameters and properties provided for the customization of Vis.ReactionView2D are also supported by <tt>PNGReactionWriter</tt>.
 # 
-class PNGReactionWriter(CDPL.Chem.ReactionWriterBase):
+class PNGReactionWriter(Chem.ReactionWriterBase):
 
     ##
     # \brief Constructs a <tt>PNGReactionWriter</tt> instance that will write the image data to the output stream <em>os</em>.
@@ -33,4 +33,4 @@ class PNGReactionWriter(CDPL.Chem.ReactionWriterBase):
     # 
     # \note PNG is a binary format. To avoid data corruption, the output stream has to be opened in binary mode.
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass

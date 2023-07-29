@@ -33,22 +33,19 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: AtomRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     # \param cntnr 
     # \param rdf_code 
     # 
-    def __init__(cntnr: CDPL.Chem.AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: Chem.AtomContainer, rdf_code: Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # 
     # Different Python \e %AtomRDFCodeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomRDFCodeCalculator instances \e a and \e b reference different C++ objects. 
@@ -61,7 +58,6 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomRDFCodeCalculator instance \a calc.
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param calc The \e %AtomRDFCodeCalculator instance to copy.
     # \return \a self
     # 
@@ -71,13 +67,13 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setEntityPairWeightFunction(func: CDPL.Chem.DoubleAtom2Functor) -> None: pass
+    def setEntityPairWeightFunction(func: Chem.DoubleAtom2Functor) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setEntity3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setEntity3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
@@ -156,7 +152,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     # \param cntnr 
     # \param rdf_code 
     #
-    def calculate(cntnr: CDPL.Chem.AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: Chem.AtomContainer, rdf_code: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)
 

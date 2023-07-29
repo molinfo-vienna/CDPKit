@@ -26,6 +26,5 @@ class MOLMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %MOLMolecularGraphOutputHandler instance.
-    # \param self The \e %MOLMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

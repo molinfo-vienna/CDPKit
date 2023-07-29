@@ -26,21 +26,18 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FVectorQuaternionAdapter instance.
-    # \param self The \e %FVectorQuaternionAdapter instance to initialize.
     # \param a 
     # 
     def __init__(a: FVectorQuaternionAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %FVectorQuaternionAdapter instance.
-    # \param self The \e %FVectorQuaternionAdapter instance to initialize.
     # \param e 
     # 
     def __init__(e: FVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # 
     # Different Python \e %FVectorQuaternionAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FVectorQuaternionAdapter instances \e a and \e b reference different C++ objects. 
@@ -53,7 +50,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param e The \e %ConstFQuaternionExpression instance to copy.
     # \return \a self
     # 
@@ -61,7 +57,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param e The \e %ConstDQuaternionExpression instance to copy.
     # \return \a self
     # 
@@ -69,7 +64,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param e The \e %ConstLQuaternionExpression instance to copy.
     # \return \a self
     # 
@@ -77,7 +71,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param e The \e %ConstULQuaternionExpression instance to copy.
     # \return \a self
     # 
@@ -85,7 +78,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FVectorQuaternionAdapter instance \a a.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %FVectorQuaternionAdapter instance to copy.
     # \return \a self
     # 
@@ -168,7 +160,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %FVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -176,7 +167,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstFQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -184,7 +174,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %FVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -192,7 +181,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstFQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -200,7 +188,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %FVectorQuaternionAdapter instance.
-    # \param self The \e %FVectorQuaternionAdapter instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -219,7 +206,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %ConstFQuaternionExpression instance holding the result of the addition.
     # 
@@ -227,7 +213,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstFQuaternionExpression instance holding the result of the addition.
     # 
@@ -242,7 +227,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %FVectorQuaternionAdapter instance holding the result of the subtraction.
     # 
@@ -250,7 +234,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FVectorQuaternionAdapter instance holding the result of the subtraction.
     # 
@@ -265,7 +248,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstFQuaternionExpression instance holding the result of the multiplication.
     # 
@@ -273,7 +255,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstFQuaternionExpression instance holding the result of the multiplication.
     # 
@@ -288,7 +269,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstFQuaternionExpression instance holding the result of the division.
     # 
@@ -296,7 +276,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %ConstFQuaternionExpression instance holding the result of the division.
     # 
@@ -318,7 +297,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place addend.
     # \param t Specifies the second addend.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -326,7 +304,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += a</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place addend.
     # \param a Specifies the second addend.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -334,7 +311,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place addend.
     # \param q Specifies the second addend.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -342,7 +318,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place minuend.
     # \param t Specifies the subtrahend.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -350,7 +325,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place minuend.
     # \param a Specifies the subtrahend.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -358,7 +332,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place minuend.
     # \param q Specifies the subtrahend.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -366,7 +339,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -374,7 +346,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= a</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place multiplicand.
     # \param a Specifies the multiplier.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -382,7 +353,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place multiplicand.
     # \param q Specifies the multiplier.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -390,7 +360,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -398,7 +367,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= a</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place dividend.
     # \param a Specifies the divisor.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 
@@ -406,7 +374,6 @@ class FVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
-    # \param self The \e %FVectorQuaternionAdapter instance acting as in-place dividend.
     # \param q Specifies the divisor.
     # \return The updated \e %FVectorQuaternionAdapter instance \a self.
     # 

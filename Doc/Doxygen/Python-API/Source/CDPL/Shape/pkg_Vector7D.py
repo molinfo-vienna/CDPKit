@@ -26,55 +26,47 @@ class Vector7D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param self The \e %Vector7D instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param self The \e %Vector7D instance to initialize.
     # \param v 
     # 
-    def __init__(v: CDPL.Math.Vector7D) -> None: pass
+    def __init__(v: Math.Vector7D) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param self The \e %Vector7D instance to initialize.
     # \param v 
     # 
     def __init__(v: float) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param arg1 The \e %Vector7D instance to initialize.
     # \param e 
     # 
-    def __init__(e: CDPL.Math.ConstFVectorExpression) -> None: pass
+    def __init__(e: Math.ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param arg1 The \e %Vector7D instance to initialize.
     # \param e 
     # 
-    def __init__(e: CDPL.Math.ConstDVectorExpression) -> None: pass
+    def __init__(e: Math.ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param arg1 The \e %Vector7D instance to initialize.
     # \param e 
     # 
-    def __init__(e: CDPL.Math.ConstLVectorExpression) -> None: pass
+    def __init__(e: Math.ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param arg1 The \e %Vector7D instance to initialize.
     # \param e 
     # 
-    def __init__(e: CDPL.Math.ConstULVectorExpression) -> None: pass
+    def __init__(e: Math.ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector7D instance.
-    # \param arg1 The \e %Vector7D instance to initialize.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -87,7 +79,6 @@ class Vector7D(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector7D instance this method is called upon.
     # 
     # Different Python \e %Vector7D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector7D instances \e a and \e b reference different C++ objects. 
@@ -100,47 +91,41 @@ class Vector7D(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to copy.
     # \return \a self
     # 
-    def assign(e: CDPL.Math.ConstFVectorExpression) -> CDPL.Math.Vector7D: pass
+    def assign(e: Math.ConstFVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to copy.
     # \return \a self
     # 
-    def assign(e: CDPL.Math.ConstDVectorExpression) -> CDPL.Math.Vector7D: pass
+    def assign(e: Math.ConstDVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to copy.
     # \return \a self
     # 
-    def assign(e: CDPL.Math.ConstLVectorExpression) -> CDPL.Math.Vector7D: pass
+    def assign(e: Math.ConstLVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param e The \e %ConstULVectorExpression instance to copy.
     # \return \a self
     # 
-    def assign(e: CDPL.Math.ConstULVectorExpression) -> CDPL.Math.Vector7D: pass
+    def assign(e: Math.ConstULVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector7D instance \a v.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param v The \e %Vector7D instance to copy.
     # \return \a self
     # 
-    def assign(v: CDPL.Math.Vector7D) -> CDPL.Math.Vector7D: pass
+    def assign(v: Math.Vector7D) -> Math.Vector7D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param a The \e %object instance to copy.
     # \return \a self
     # 
@@ -175,7 +160,7 @@ class Vector7D(Boost.Python.instance):
     # \brief 
     # \param v 
     #
-    def swap(v: CDPL.Math.Vector7D) -> None: pass
+    def swap(v: Math.Vector7D) -> None: pass
 
     ##
     # \brief 
@@ -186,35 +171,31 @@ class Vector7D(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param v The \e %Vector7D instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(v: CDPL.Math.Vector7D) -> bool: pass
+    def __eq__(v: Math.Vector7D) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __eq__(e: CDPL.Math.ConstDVectorExpression) -> bool: pass
+    def __eq__(e: Math.ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param v The \e %Vector7D instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(v: CDPL.Math.Vector7D) -> bool: pass
+    def __ne__(v: Math.Vector7D) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
-    def __ne__(e: CDPL.Math.ConstDVectorExpression) -> bool: pass
+    def __ne__(e: Math.ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
@@ -238,7 +219,6 @@ class Vector7D(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %Vector7D instance.
-    # \param self The \e %Vector7D instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -247,67 +227,62 @@ class Vector7D(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def __pos__() -> CDPL.Math.Vector7D: pass
+    def __pos__() -> Math.Vector7D: pass
 
     ##
     # \brief 
     # \return 
     #
-    def __neg__() -> CDPL.Math.ConstDVectorExpression: pass
+    def __neg__() -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %Vector7D instance representing the first addend.
     # \param e Specifies the second addend.
-    # \return A \e %CDPL.Math.ConstDVectorExpression instance holding the result of the addition.
+    # \return A \e %Math.ConstDVectorExpression instance holding the result of the addition.
     # 
-    def __add__(e: CDPL.Math.ConstDVectorExpression) -> CDPL.Math.ConstDVectorExpression: pass
+    def __add__(e: Math.ConstDVectorExpression) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %Vector7D instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %Vector7D instance holding the result of the subtraction.
     # 
-    def __sub__(e: CDPL.Math.ConstDVectorExpression) -> CDPL.Math.ConstDVectorExpression: pass
+    def __sub__(e: Math.ConstDVectorExpression) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %Vector7D instance acting as multiplicand.
     # \param t Specifies the multiplier.
-    # \return A \e %CDPL.Math.ConstDVectorExpression instance holding the result of the multiplication.
+    # \return A \e %Math.ConstDVectorExpression instance holding the result of the multiplication.
     # 
-    def __mul__(t: float) -> CDPL.Math.ConstDVectorExpression: pass
+    def __mul__(t: float) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %Vector7D instance acting as multiplicand.
     # \param e Specifies the multiplier.
-    # \return A \e %CDPL.Math.ConstDVectorExpression instance holding the result of the multiplication.
+    # \return A \e %Math.ConstDVectorExpression instance holding the result of the multiplication.
     # 
-    def __mul__(e: CDPL.Math.ConstDMatrixExpression) -> CDPL.Math.ConstDVectorExpression: pass
+    def __mul__(e: Math.ConstDMatrixExpression) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %Vector7D instance acting as dividend.
     # \param t Specifies the divisor.
-    # \return A \e %CDPL.Math.ConstDVectorExpression instance holding the result of the division.
+    # \return A \e %Math.ConstDVectorExpression instance holding the result of the division.
     # 
-    def __div__(t: float) -> CDPL.Math.ConstDVectorExpression: pass
+    def __div__(t: float) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief 
     # \param t 
     # \return 
     #
-    def __truediv__(t: float) -> CDPL.Math.ConstDVectorExpression: pass
+    def __truediv__(t: float) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief 
     # \param t 
     # \return 
     #
-    def __rmul__(t: float) -> CDPL.Math.ConstDVectorExpression: pass
+    def __rmul__(t: float) -> Math.ConstDVectorExpression: pass
 
     ##
     # \brief 
@@ -318,58 +293,52 @@ class Vector7D(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %Vector7D instance acting as in-place addend.
     # \param v Specifies the second addend.
-    # \return The updated \e %CDPL.Math.Vector7D instance \a self.
+    # \return The updated \e %Math.Vector7D instance \a self.
     # 
-    def __iadd__(v: CDPL.Math.Vector7D) -> CDPL.Math.Vector7D: pass
+    def __iadd__(v: Math.Vector7D) -> Math.Vector7D: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %Vector7D instance acting as in-place addend.
     # \param e Specifies the second addend.
-    # \return The updated \e %CDPL.Math.Vector7D instance \a self.
+    # \return The updated \e %Math.Vector7D instance \a self.
     # 
-    def __iadd__(e: CDPL.Math.ConstDVectorExpression) -> CDPL.Math.Vector7D: pass
+    def __iadd__(e: Math.ConstDVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %Vector7D instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
-    # \return The updated \e %CDPL.Math.Vector7D instance \a self.
+    # \return The updated \e %Math.Vector7D instance \a self.
     # 
-    def __isub__(v: CDPL.Math.Vector7D) -> CDPL.Math.Vector7D: pass
+    def __isub__(v: Math.Vector7D) -> Math.Vector7D: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %Vector7D instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
-    # \return The updated \e %CDPL.Math.Vector7D instance \a self.
+    # \return The updated \e %Math.Vector7D instance \a self.
     # 
-    def __isub__(e: CDPL.Math.ConstDVectorExpression) -> CDPL.Math.Vector7D: pass
+    def __isub__(e: Math.ConstDVectorExpression) -> Math.Vector7D: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %Vector7D instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
-    # \return The updated \e %CDPL.Math.Vector7D instance \a self.
+    # \return The updated \e %Math.Vector7D instance \a self.
     # 
-    def __imul__(t: float) -> CDPL.Math.Vector7D: pass
+    def __imul__(t: float) -> Math.Vector7D: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %Vector7D instance acting as in-place dividend.
     # \param t Specifies the divisor.
-    # \return The updated \e %CDPL.Math.Vector7D instance \a self.
+    # \return The updated \e %Math.Vector7D instance \a self.
     # 
-    def __idiv__(t: float) -> CDPL.Math.Vector7D: pass
+    def __idiv__(t: float) -> Math.Vector7D: pass
 
     ##
     # \brief 
     # \param t 
     # \return 
     #
-    def __itruediv__(t: float) -> CDPL.Math.Vector7D: pass
+    def __itruediv__(t: float) -> Math.Vector7D: pass
 
     objectID = property(getObjectID)
 

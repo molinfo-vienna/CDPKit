@@ -26,20 +26,17 @@ class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param self The \e %MMFF94GradientCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param self The \e %MMFF94GradientCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: MMFF94GradientCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param self The \e %MMFF94GradientCalculator instance to initialize.
     # \param ia_data 
     # \param num_atoms 
     # 
@@ -47,7 +44,6 @@ class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # 
     # Different Python \e %MMFF94GradientCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94GradientCalculator instances \e a and \e b reference different C++ objects. 
@@ -60,7 +56,6 @@ class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94GradientCalculator instance \a calc.
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param calc The \e %MMFF94GradientCalculator instance to copy.
     # \return \a self
     # 
@@ -137,7 +132,7 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     # \brief 
     # \param mask 
     #
-    def setFixedAtomMask(mask: CDPL.Util.BitSet) -> None: pass
+    def setFixedAtomMask(mask: Util.BitSet) -> None: pass
 
     ##
     # \brief 
@@ -148,14 +143,14 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getFixedAtomMask() -> CDPL.Util.BitSet: pass
+    def getFixedAtomMask() -> Util.BitSet: pass
 
     ##
     # \brief 
     # \param coords 
     # \return 
     #
-    def __call__(coords: CDPL.Math.Vector3DArray) -> float: pass
+    def __call__(coords: Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
@@ -163,7 +158,7 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     # \param grad 
     # \return 
     #
-    def __call__(coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+    def __call__(coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)
 

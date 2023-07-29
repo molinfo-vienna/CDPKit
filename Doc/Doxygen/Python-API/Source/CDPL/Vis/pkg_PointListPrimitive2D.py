@@ -31,14 +31,12 @@ class PointListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %PointListPrimitive2D instance.
-    # \param self The \e %PointListPrimitive2D instance to initialize.
     # \param prim 
     # 
     def __init__(prim: PointListPrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PointListPrimitive2D instance \a prim.
-    # \param self The \e %PointListPrimitive2D instance this method is called upon.
     # \param prim The \e %PointListPrimitive2D instance to copy.
     # \return \a self
     # 

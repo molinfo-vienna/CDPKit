@@ -31,14 +31,12 @@ class ElectronSystem(AtomContainer):
 
     ##
     # \brief Initializes the \e %ElectronSystem instance.
-    # \param self The \e %ElectronSystem instance to initialize.
     # \param elec_sys 
     # 
     def __init__(elec_sys: ElectronSystem) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ElectronSystem instance this method is called upon.
     # 
     # Different Python \e %ElectronSystem instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ElectronSystem instances \e a and \e b reference different C++ objects. 
@@ -51,7 +49,6 @@ class ElectronSystem(AtomContainer):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ElectronSystem instance \a elec_sys.
-    # \param self The \e %ElectronSystem instance this method is called upon.
     # \param elec_sys The \e %ElectronSystem instance to copy.
     # \return \a self
     # 
@@ -198,7 +195,6 @@ class ElectronSystem(AtomContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param self The \e %ElectronSystem instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
     # 

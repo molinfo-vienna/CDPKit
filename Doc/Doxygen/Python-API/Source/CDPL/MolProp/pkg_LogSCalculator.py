@@ -38,7 +38,6 @@ class LogSCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
-    # \param self The \e %LogSCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: LogSCalculator) -> None: pass
@@ -50,11 +49,10 @@ class LogSCalculator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to calculate the \f$ \log S \f$.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LogSCalculator instance this method is called upon.
     # 
     # Different Python \e %LogSCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LogSCalculator instances \e a and \e b reference different C++ objects. 
@@ -67,7 +65,6 @@ class LogSCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LogSCalculator instance \a calc.
-    # \param self The \e %LogSCalculator instance this method is called upon.
     # \param calc The \e %LogSCalculator instance to copy.
     # \return \a self
     # 
@@ -80,7 +77,7 @@ class LogSCalculator(Boost.Python.instance):
     # 
     # \return The calculated \f$ \log S \f$ of the molecular graph <em>molgraph</em>.
     # 
-    def calculate(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+    def calculate(molgraph: Chem.MolecularGraph) -> float: pass
 
     ##
     # \brief Returns the result of the last \f$ \log S \f$ calculation.
@@ -98,7 +95,7 @@ class LogSCalculator(Boost.Python.instance):
     # 
     # \note The returned feature vector is of size LogSCalculator.FEATURE_VECTOR_SIZE.
     # 
-    def getFeatureVector() -> CDPL.Math.DVector: pass
+    def getFeatureVector() -> Math.DVector: pass
 
     objectID = property(getObjectID)
 

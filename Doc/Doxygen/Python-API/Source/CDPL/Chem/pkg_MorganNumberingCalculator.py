@@ -37,11 +37,10 @@ class MorganNumberingCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perform the canonical numbering.
     # \param numbering An array that contains the calculated canonical atom numbering. The numbers are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the canonical number of an atom is accessible via its index).
     # 
-    def __init__(molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, numbering: Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MorganNumberingCalculator instance this method is called upon.
     # 
     # Different Python \e %MorganNumberingCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MorganNumberingCalculator instances \e a and \e b reference different C++ objects. 
@@ -58,6 +57,6 @@ class MorganNumberingCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perform the canonical numbering.
     # \param numbering An array that contains the calculated canonical atom numbering. The numbers are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the canonical number of an atom is accessible via its index).
     # 
-    def calculate(molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, numbering: Util.STArray) -> None: pass
 
     objectID = property(getObjectID)

@@ -46,11 +46,10 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to perform the calculations.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PEOESigmaChargeCalculator instance this method is called upon.
     # 
     # Different Python \e %PEOESigmaChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PEOESigmaChargeCalculator instances \e a and \e b reference different C++ objects. 
@@ -98,7 +97,7 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to perform the calculations. <br>
     # 
-    def calculate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def calculate(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the calculated sigma charge of the atom with index <em>idx</em>.

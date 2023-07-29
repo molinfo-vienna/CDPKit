@@ -31,7 +31,6 @@ class FeatureGenerator(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureGenerator instance this method is called upon.
     # 
     # Different Python \e %FeatureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureGenerator instances \e a and \e b reference different C++ objects. 
@@ -47,14 +46,14 @@ class FeatureGenerator(Boost.Python.instance):
     # 
     # \param func The atom 3D-coordinates function.
     # 
-    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
     # 
     # \return The registered atom 3D-coordinates function.
     # 
-    def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
     # \brief Perceives pharmacophore features and adds them to the pharmacophore <em>pharm</em>.
@@ -62,7 +61,7 @@ class FeatureGenerator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.
     # 
-    def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def generate(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 

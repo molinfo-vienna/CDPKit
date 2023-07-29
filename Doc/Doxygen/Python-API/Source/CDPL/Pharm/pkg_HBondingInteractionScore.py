@@ -46,7 +46,6 @@ class HBondingInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %HBondingInteractionScore instance.
-    # \param self The \e %HBondingInteractionScore instance to initialize.
     # \param score 
     # 
     def __init__(score: HBondingInteractionScore) -> None: pass
@@ -106,7 +105,6 @@ class HBondingInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondingInteractionScore instance \a constr.
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \param constr The \e %HBondingInteractionScore instance to copy.
     # \return \a self
     # 

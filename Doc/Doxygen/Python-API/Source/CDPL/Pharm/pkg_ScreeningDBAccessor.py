@@ -26,13 +26,11 @@ class ScreeningDBAccessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningDBAccessor instance.
-    # \param self The \e %ScreeningDBAccessor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # 
     # Different Python \e %ScreeningDBAccessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningDBAccessor instances \e a and \e b reference different C++ objects. 
@@ -85,7 +83,7 @@ class ScreeningDBAccessor(Boost.Python.instance):
     # \param mol 
     # \param overwrite 
     #
-    def getMolecule(mol_idx: int, mol: CDPL.Chem.Molecule, overwrite: bool = True) -> None: pass
+    def getMolecule(mol_idx: int, mol: Chem.Molecule, overwrite: bool = True) -> None: pass
 
     ##
     # \brief 

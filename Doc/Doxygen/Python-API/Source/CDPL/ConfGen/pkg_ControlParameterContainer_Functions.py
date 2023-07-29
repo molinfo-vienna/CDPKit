@@ -23,25 +23,25 @@
 # \brief 
 # \param cntnr 
 #
-def clearStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
+def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param strict 
 #
-def setStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer, strict: bool) -> None: pass
+def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass

@@ -28,4 +28,4 @@
 # \param inc_xv 
 # \param p 
 #
-def generateGaussianShape(features: CDPL.Pharm.FeatureContainer, shape: GaussianShape, append: bool = False, radius: float = -1.0, inc_xv: bool = False, p: float = 5.0) -> None: pass
+def generateGaussianShape(features: Pharm.FeatureContainer, shape: GaussianShape, append: bool = False, radius: float = -1.0, inc_xv: bool = False, p: float = 5.0) -> None: pass

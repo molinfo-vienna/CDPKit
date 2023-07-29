@@ -26,14 +26,12 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureTypeMatchFunctor instance.
-    # \param self The \e %FeatureTypeMatchFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: FeatureTypeMatchFunctor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureTypeMatchFunctor instance this method is called upon.
     # 
     # Different Python \e %FeatureTypeMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureTypeMatchFunctor instances \e a and \e b reference different C++ objects. 
@@ -46,7 +44,6 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureTypeMatchFunctor instance \a func.
-    # \param self The \e %FeatureTypeMatchFunctor instance this method is called upon.
     # \param func The \e %FeatureTypeMatchFunctor instance to copy.
     # \return \a self
     # 

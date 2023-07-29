@@ -24,11 +24,11 @@
 # \param cntnr 
 # \return 
 #
-def calcGeometricalDiameter(cntnr: CDPL.Chem.Entity3DContainer) -> float: pass
+def calcGeometricalDiameter(cntnr: Chem.Entity3DContainer) -> float: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def calcGeometricalRadius(cntnr: CDPL.Chem.Entity3DContainer) -> float: pass
+def calcGeometricalRadius(cntnr: Chem.Entity3DContainer) -> float: pass

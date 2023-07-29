@@ -37,11 +37,11 @@ def has3DCoordinates(entity: Entity3D) -> bool: pass
 # \param entity 
 # \return 
 #
-def get3DCoordinates(entity: Entity3D) -> CDPL.Math.Vector3D: pass
+def get3DCoordinates(entity: Entity3D) -> Math.Vector3D: pass
 
 ##
 # \brief 
 # \param entity 
 # \param coords 
 #
-def set3DCoordinates(entity: Entity3D, coords: CDPL.Math.Vector3D) -> None: pass
+def set3DCoordinates(entity: Entity3D, coords: Math.Vector3D) -> None: pass

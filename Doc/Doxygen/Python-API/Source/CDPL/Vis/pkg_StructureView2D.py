@@ -133,7 +133,6 @@ class StructureView2D(View2D):
 
     ##
     # \brief Initializes the \e %StructureView2D instance.
-    # \param self The \e %StructureView2D instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -142,7 +141,7 @@ class StructureView2D(View2D):
     # 
     # \param molgraph A reference to the Chem.MolecularGraph object to visualize.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Specifies the chemical structure to visualize.
@@ -151,14 +150,14 @@ class StructureView2D(View2D):
     # 
     # \param molgraph A reference to the Chem.MolecularGraph object to visualize, or <em>None</em>.
     # 
-    def setStructure(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setStructure(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns a reference to the visualized chemical structure.
     # 
     # \return A reference to the visualized Chem.MolecularGraph object, or <em>None</em> if none was specified.
     # 
-    def getStructure() -> CDPL.Chem.MolecularGraph: pass
+    def getStructure() -> Chem.MolecularGraph: pass
 
     ##
     # \brief Returns a reference to the used font metrics object.

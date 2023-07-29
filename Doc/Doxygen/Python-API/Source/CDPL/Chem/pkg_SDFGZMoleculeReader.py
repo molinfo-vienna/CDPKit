@@ -26,7 +26,6 @@ class SDFGZMoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %SDFGZMoleculeReader instance.
-    # \param self The \e %SDFGZMoleculeReader instance to initialize.
     # \param is 
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass

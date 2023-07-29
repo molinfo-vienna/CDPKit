@@ -133,7 +133,6 @@ class BasicMolecule(Molecule):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param self The \e %BasicMolecule instance acting as in-place addend.
     # \param mol Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
     # 
@@ -141,7 +140,6 @@ class BasicMolecule(Molecule):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param self The \e %BasicMolecule instance acting as in-place addend.
     # \param mol Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
     # 
@@ -149,7 +147,6 @@ class BasicMolecule(Molecule):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param self The \e %BasicMolecule instance acting as in-place addend.
     # \param molgraph Specifies the second addend.
     # \return The updated \e %BasicMolecule instance \a self.
     # 

@@ -230,7 +230,6 @@ class ControlParameterContainer(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # 
     # Different Python \e %ControlParameterContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ControlParameterContainer instances \e a and \e b reference different C++ objects. 
@@ -264,7 +263,6 @@ class ControlParameterContainer(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>self in arg1</tt>.
-    # \param arg1 The \e %ControlParameterContainer instance this method is called upon.
     # \param self The value to test for membership.
     # \return The result of the membership test operation.
     # 

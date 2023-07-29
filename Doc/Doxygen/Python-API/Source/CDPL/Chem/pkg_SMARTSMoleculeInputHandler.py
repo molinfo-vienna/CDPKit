@@ -26,6 +26,5 @@ class SMARTSMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %SMARTSMoleculeInputHandler instance.
-    # \param self The \e %SMARTSMoleculeInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

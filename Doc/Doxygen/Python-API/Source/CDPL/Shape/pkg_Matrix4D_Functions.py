@@ -24,4 +24,4 @@
 # \param mtx 
 # \param quat 
 #
-def matrixToQuaternion(mtx: CDPL.Math.Matrix4D, quat: CDPL.Math.Vector7D) -> None: pass
+def matrixToQuaternion(mtx: Math.Matrix4D, quat: Math.Vector7D) -> None: pass

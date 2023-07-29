@@ -32,7 +32,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
-    # \param self The \e %DVectorExpression instance this method is called upon.
     # \param e The \e %DVectorExpression instance to copy.
     # \return \a self
     # 
@@ -40,7 +39,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param self The \e %DVectorExpression instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to copy.
     # \return \a self
     # 
@@ -48,7 +46,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param self The \e %DVectorExpression instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to copy.
     # \return \a self
     # 
@@ -56,7 +53,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param self The \e %DVectorExpression instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to copy.
     # \return \a self
     # 
@@ -64,7 +60,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param self The \e %DVectorExpression instance this method is called upon.
     # \param e The \e %ConstULVectorExpression instance to copy.
     # \return \a self
     # 
@@ -72,7 +67,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param self The \e %DVectorExpression instance this method is called upon.
     # \param a The \e %object instance to copy.
     # \return \a self
     # 
@@ -94,7 +88,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DVectorExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DVectorExpression instance \a self.
     # 
@@ -102,7 +95,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DVectorExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DVectorExpression instance \a self.
     # 
@@ -110,7 +102,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DVectorExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DVectorExpression instance \a self.
     # 
@@ -118,7 +109,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DVectorExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DVectorExpression instance \a self.
     # 
@@ -126,7 +116,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DVectorExpression instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DVectorExpression instance \a self.
     # 
@@ -134,7 +123,6 @@ class DVectorExpression(ConstDVectorExpression):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DVectorExpression instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DVectorExpression instance \a self.
     # 

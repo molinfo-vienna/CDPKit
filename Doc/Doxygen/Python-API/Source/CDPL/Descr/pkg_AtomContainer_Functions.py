@@ -25,7 +25,7 @@
 # \param coords_func 
 # \return 
 #
-def calcGeometricalDiameter(cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction) -> float: pass
+def calcGeometricalDiameter(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction) -> float: pass
 
 ##
 # \brief 
@@ -33,4 +33,4 @@ def calcGeometricalDiameter(cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Ch
 # \param coords_func 
 # \return 
 #
-def calcGeometricalRadius(cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction) -> float: pass
+def calcGeometricalRadius(cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction) -> float: pass

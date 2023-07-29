@@ -46,7 +46,6 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionScore instance.
-    # \param self The \e %ParallelPiPiInteractionScore instance to initialize.
     # \param score 
     # 
     def __init__(score: ParallelPiPiInteractionScore) -> None: pass
@@ -99,7 +98,6 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionScore instance \a constr.
-    # \param self The \e %ParallelPiPiInteractionScore instance this method is called upon.
     # \param constr The \e %ParallelPiPiInteractionScore instance to copy.
     # \return \a self
     # 

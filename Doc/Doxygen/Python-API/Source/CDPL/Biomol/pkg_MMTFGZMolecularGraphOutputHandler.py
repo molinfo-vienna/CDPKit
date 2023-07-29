@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of gzip-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
-class MMTFGZMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
+class MMTFGZMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %MMTFGZMolecularGraphOutputHandler instance.
-    # \param self The \e %MMTFGZMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

@@ -24,7 +24,7 @@
 # \param shape 
 # \param xform 
 #
-def transform(shape: GaussianShape, xform: CDPL.Math.Matrix4D) -> None: pass
+def transform(shape: GaussianShape, xform: Math.Matrix4D) -> None: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def transform(shape: GaussianShape, xform: CDPL.Math.Matrix4D) -> None: pass
 # \param mom_eq_thresh 
 # \return 
 #
-def centerAndAlignPrincipalAxes(shape: GaussianShape, func: GaussianShapeFunction, back_xform: CDPL.Math.Matrix4D, mom_eq_thresh: float = 0.15) -> int: pass
+def centerAndAlignPrincipalAxes(shape: GaussianShape, func: GaussianShapeFunction, back_xform: Math.Matrix4D, mom_eq_thresh: float = 0.15) -> int: pass

@@ -123,7 +123,6 @@ class Color(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Color instance.
-    # \param self The \e %Color instance to initialize.
     # \param color 
     # 
     def __init__(color: Color) -> None: pass
@@ -142,7 +141,6 @@ class Color(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Color instance this method is called upon.
     # 
     # Different Python \e %Color instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Color instances \e a and \e b reference different C++ objects. 
@@ -155,7 +153,6 @@ class Color(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Color instance \a color.
-    # \param self The \e %Color instance this method is called upon.
     # \param color The \e %Color instance to copy.
     # \return \a self
     # 
@@ -259,7 +256,6 @@ class Color(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %Color instance.
-    # \param self The \e %Color instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

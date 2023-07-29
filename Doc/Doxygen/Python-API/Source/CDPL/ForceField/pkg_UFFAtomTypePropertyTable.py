@@ -31,20 +31,17 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param atom_type 
         # \param atom_type_sym 
         # \param atomic_no 
@@ -59,7 +56,6 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -72,7 +68,6 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return \a self
         # 
@@ -178,20 +173,17 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %UFFAtomTypePropertyTable instance.
-    # \param self The \e %UFFAtomTypePropertyTable instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UFFAtomTypePropertyTable instance.
-    # \param self The \e %UFFAtomTypePropertyTable instance to initialize.
     # \param table 
     # 
     def __init__(table: UFFAtomTypePropertyTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %UFFAtomTypePropertyTable instance this method is called upon.
     # 
     # Different Python \e %UFFAtomTypePropertyTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %UFFAtomTypePropertyTable instances \e a and \e b reference different C++ objects. 
@@ -254,7 +246,6 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %UFFAtomTypePropertyTable instance \a table.
-    # \param self The \e %UFFAtomTypePropertyTable instance this method is called upon.
     # \param table The \e %UFFAtomTypePropertyTable instance to copy.
     # \return \a self
     # 

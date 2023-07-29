@@ -40,7 +40,6 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # 
     # Different Python \e %CommonConnectedSubstructureSearch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CommonConnectedSubstructureSearch instances \e a and \e b reference different C++ objects. 

@@ -179,7 +179,6 @@ class ReactionView2D(View2D):
 
     ##
     # \brief Initializes the \e %ReactionView2D instance.
-    # \param self The \e %ReactionView2D instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -188,7 +187,7 @@ class ReactionView2D(View2D):
     # 
     # \param rxn A reference to the Chem.Reaction object to visualize.
     # 
-    def __init__(rxn: CDPL.Chem.Reaction) -> None: pass
+    def __init__(rxn: Chem.Reaction) -> None: pass
 
     ##
     # \brief Specifies the chemical reaction to visualize.
@@ -197,14 +196,14 @@ class ReactionView2D(View2D):
     # 
     # \param rxn A reference to the Chem.Reaction object to visualize, or <em>None</em>.
     # 
-    def setReaction(rxn: CDPL.Chem.Reaction) -> None: pass
+    def setReaction(rxn: Chem.Reaction) -> None: pass
 
     ##
     # \brief Returns a reference to the visualized chemical reaction.
     # 
     # \return A reference to the visualized Chem.Reaction object, or <em>None</em> if none was specified.
     # 
-    def getReaction() -> CDPL.Chem.Reaction: pass
+    def getReaction() -> Chem.Reaction: pass
 
     ##
     # \brief Returns a reference to the used font metrics object.

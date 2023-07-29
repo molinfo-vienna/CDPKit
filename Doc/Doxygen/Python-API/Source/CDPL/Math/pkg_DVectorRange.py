@@ -26,14 +26,12 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DVectorRange instance.
-    # \param self The \e %DVectorRange instance to initialize.
     # \param r 
     # 
     def __init__(r: DVectorRange) -> None: pass
 
     ##
     # \brief Initializes the \e %DVectorRange instance.
-    # \param self The \e %DVectorRange instance to initialize.
     # \param e 
     # \param r 
     # 
@@ -47,7 +45,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # 
     # Different Python \e %DVectorRange instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DVectorRange instances \e a and \e b reference different C++ objects. 
@@ -60,7 +57,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to copy.
     # \return \a self
     # 
@@ -68,7 +64,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to copy.
     # \return \a self
     # 
@@ -76,7 +71,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to copy.
     # \return \a self
     # 
@@ -84,7 +78,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %ConstULVectorExpression instance to copy.
     # \return \a self
     # 
@@ -92,7 +85,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a r.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r The \e %DVectorRange instance to copy.
     # \return \a self
     # 
@@ -100,7 +92,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param a The \e %object instance to copy.
     # \return \a self
     # 
@@ -152,7 +143,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r The \e %DVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -160,7 +150,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -168,7 +157,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r The \e %DVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -176,7 +164,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -204,7 +191,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %DVectorRange instance.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -223,7 +209,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DVectorRange instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDVectorExpression instance holding the result of the addition.
     # 
@@ -231,7 +216,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DVectorRange instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DVectorRange instance holding the result of the subtraction.
     # 
@@ -239,7 +223,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DVectorRange instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     # 
@@ -247,7 +230,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DVectorRange instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     # 
@@ -255,7 +237,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DVectorRange instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDVectorExpression instance holding the result of the division.
     # 
@@ -284,7 +265,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place addend.
     # \param r Specifies the second addend.
     # \return The updated \e %DVectorRange instance \a self.
     # 
@@ -292,7 +272,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DVectorRange instance \a self.
     # 
@@ -300,7 +279,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place minuend.
     # \param r Specifies the subtrahend.
     # \return The updated \e %DVectorRange instance \a self.
     # 
@@ -308,7 +286,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DVectorRange instance \a self.
     # 
@@ -316,7 +293,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DVectorRange instance \a self.
     # 
@@ -324,7 +300,6 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DVectorRange instance \a self.
     # 

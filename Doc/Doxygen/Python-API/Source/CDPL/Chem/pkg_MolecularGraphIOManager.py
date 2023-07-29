@@ -53,7 +53,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __getitem__(fmt: CDPL.Base.DataFormat) -> MolecularGraphInputHandler: pass
+        def __getitem__(fmt: Base.DataFormat) -> MolecularGraphInputHandler: pass
 
         ##
         # \brief 
@@ -76,7 +76,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __delitem__(fmt: CDPL.Base.DataFormat) -> bool: pass
+        def __delitem__(fmt: Base.DataFormat) -> bool: pass
 
         ##
         # \brief 
@@ -113,7 +113,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __getitem__(fmt: CDPL.Base.DataFormat) -> MolecularGraphOutputHandler: pass
+        def __getitem__(fmt: Base.DataFormat) -> MolecularGraphOutputHandler: pass
 
         ##
         # \brief 
@@ -136,7 +136,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __delitem__(fmt: CDPL.Base.DataFormat) -> bool: pass
+        def __delitem__(fmt: Base.DataFormat) -> bool: pass
 
         ##
         # \brief 
@@ -202,7 +202,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     # \return A reference to a Chem.MolecularGraphInputHandler implementation instance registered for the specified data format, or <em>None</em> if not available.
     # 
     @staticmethod
-    def getInputHandlerByFormat(fmt: CDPL.Base.DataFormat) -> MolecularGraphInputHandler: pass
+    def getInputHandlerByFormat(fmt: Base.DataFormat) -> MolecularGraphInputHandler: pass
 
     ##
     # \brief Returns a reference to a Chem.MolecularGraphInputHandler implementation instance registered for the data format with the specified name.
@@ -250,7 +250,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     # \return <tt>True</tt> if a handler instance for the specified data format was found and has been unregistered, and <tt>False</tt> otherwise.
     # 
     @staticmethod
-    def unregisterInputHandler(fmt: CDPL.Base.DataFormat) -> bool: pass
+    def unregisterInputHandler(fmt: Base.DataFormat) -> bool: pass
 
     ##
     # \brief Unregisters the Chem.MolecularGraphInputHandler implementation instance with the specified index.
@@ -316,7 +316,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     # \return A reference to a Chem.MolecularGraphOutputHandler implementation instance registered for the specified data format, or <em>None</em> if not available.
     # 
     @staticmethod
-    def getOutputHandlerByFormat(fmt: CDPL.Base.DataFormat) -> MolecularGraphOutputHandler: pass
+    def getOutputHandlerByFormat(fmt: Base.DataFormat) -> MolecularGraphOutputHandler: pass
 
     ##
     # \brief Returns a reference to a Chem.MolecularGraphOutputHandler implementation instance registered for the data format with the specified name.
@@ -364,7 +364,7 @@ class MolecularGraphIOManager(Boost.Python.instance):
     # \return <tt>True</tt> if a handler instance for the specified data format was found and has been unregistered, and <tt>False</tt> otherwise.
     # 
     @staticmethod
-    def unregisterOutputHandler(fmt: CDPL.Base.DataFormat) -> bool: pass
+    def unregisterOutputHandler(fmt: Base.DataFormat) -> bool: pass
 
     ##
     # \brief Unregisters the Chem.MolecularGraphOutputHandler implementation instance with the specified index.

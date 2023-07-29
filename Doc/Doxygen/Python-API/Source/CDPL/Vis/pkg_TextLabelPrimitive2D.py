@@ -31,14 +31,12 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %TextLabelPrimitive2D instance.
-    # \param self The \e %TextLabelPrimitive2D instance to initialize.
     # \param prim 
     # 
     def __init__(prim: TextLabelPrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TextLabelPrimitive2D instance \a prim.
-    # \param self The \e %TextLabelPrimitive2D instance this method is called upon.
     # \param prim The \e %TextLabelPrimitive2D instance to copy.
     # \return \a self
     # 
@@ -63,7 +61,7 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
     # 
     # \param pos The baseline position of the text label.
     # 
-    def setPosition(pos: CDPL.Math.Vector2D) -> None: pass
+    def setPosition(pos: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the position of the text label to <em>(x, y)</em>.
@@ -78,7 +76,7 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
     # 
     # \return The position of the text label.
     # 
-    def getPosition() -> CDPL.Math.Vector2D: pass
+    def getPosition() -> Math.Vector2D: pass
 
     ##
     # \brief Sets the pen defining the color of the text label.

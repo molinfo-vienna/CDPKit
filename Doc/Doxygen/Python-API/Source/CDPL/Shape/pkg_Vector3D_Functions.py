@@ -25,4 +25,4 @@
 # \param eq_thresh 
 # \return 
 #
-def perceiveSymmetryClass(moments: CDPL.Math.Vector3D, eq_thresh: float = 0.15) -> int: pass
+def perceiveSymmetryClass(moments: Math.Vector3D, eq_thresh: float = 0.15) -> int: pass

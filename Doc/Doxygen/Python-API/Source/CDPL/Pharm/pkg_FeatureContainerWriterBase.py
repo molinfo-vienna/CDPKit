@@ -28,11 +28,10 @@
 # 
 # If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>FeatureContainerWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
-class FeatureContainerWriterBase(CDPL.Base.DataIOBase):
+class FeatureContainerWriterBase(Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %FeatureContainerWriterBase instance.
-    # \param self The \e %FeatureContainerWriterBase instance to initialize.
     # 
     def __init__() -> None: pass
 

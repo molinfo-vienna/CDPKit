@@ -26,27 +26,23 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94EnergyCalculator instance.
-    # \param self The \e %MMFF94EnergyCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94EnergyCalculator instance.
-    # \param self The \e %MMFF94EnergyCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: MMFF94EnergyCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94EnergyCalculator instance.
-    # \param self The \e %MMFF94EnergyCalculator instance to initialize.
     # \param ia_data 
     # 
     def __init__(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # 
     # Different Python \e %MMFF94EnergyCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94EnergyCalculator instances \e a and \e b reference different C++ objects. 
@@ -59,7 +55,6 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94EnergyCalculator instance \a calc.
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \param calc The \e %MMFF94EnergyCalculator instance to copy.
     # \return \a self
     # 
@@ -136,7 +131,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     # \param coords 
     # \return 
     #
-    def __call__(coords: CDPL.Math.Vector3DArray) -> float: pass
+    def __call__(coords: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)
 

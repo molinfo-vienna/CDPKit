@@ -51,7 +51,6 @@ class ScreeningProcessor(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %SearchHit instance.
-        # \param self The \e %SearchHit instance to initialize.
         # \param hit_prov 
         # \param qry_pharm 
         # \param hit_pharm 
@@ -61,18 +60,16 @@ class ScreeningProcessor(Boost.Python.instance):
         # \param mol_idx 
         # \param conf_idx 
         # 
-        def __init__(hit_prov: ScreeningProcessor, qry_pharm: FeatureContainer, hit_pharm: FeatureContainer, mol: CDPL.Chem.Molecule, xform: CDPL.Math.Matrix4D, pharm_idx: int, mol_idx: int, conf_idx: int) -> None: pass
+        def __init__(hit_prov: ScreeningProcessor, qry_pharm: FeatureContainer, hit_pharm: FeatureContainer, mol: Chem.Molecule, xform: Math.Matrix4D, pharm_idx: int, mol_idx: int, conf_idx: int) -> None: pass
 
         ##
         # \brief Initializes the \e %SearchHit instance.
-        # \param self The \e %SearchHit instance to initialize.
         # \param hit 
         # 
         def __init__(hit: SearchHit) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %SearchHit instance this method is called upon.
         # 
         # Different Python \e %SearchHit instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SearchHit instances \e a and \e b reference different C++ objects. 
@@ -85,7 +82,6 @@ class ScreeningProcessor(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %SearchHit instance \a hit.
-        # \param self The \e %SearchHit instance this method is called upon.
         # \param hit The \e %SearchHit instance to copy.
         # \return \a self
         # 
@@ -113,13 +109,13 @@ class ScreeningProcessor(Boost.Python.instance):
         # \brief 
         # \return 
         #
-        def getHitMolecule() -> CDPL.Chem.Molecule: pass
+        def getHitMolecule() -> Chem.Molecule: pass
 
         ##
         # \brief 
         # \return 
         #
-        def getHitAlignmentTransform() -> CDPL.Math.Matrix4D: pass
+        def getHitAlignmentTransform() -> Math.Matrix4D: pass
 
         ##
         # \brief 
@@ -166,7 +162,6 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # 
     # Different Python \e %ScreeningProcessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningProcessor instances \e a and \e b reference different C++ objects. 

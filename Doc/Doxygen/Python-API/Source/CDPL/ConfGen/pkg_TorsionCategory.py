@@ -31,14 +31,12 @@ class TorsionCategory(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %RuleSequence instance.
-        # \param self The \e %RuleSequence instance to initialize.
         # \param rules 
         # 
         def __init__(rules: RuleSequence) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %RuleSequence instance this method is called upon.
         # 
         # Different Python \e %RuleSequence instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %RuleSequence instances \e a and \e b reference different C++ objects. 
@@ -77,14 +75,12 @@ class TorsionCategory(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %CategorySequence instance.
-        # \param self The \e %CategorySequence instance to initialize.
         # \param cat 
         # 
         def __init__(cat: CategorySequence) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %CategorySequence instance this method is called upon.
         # 
         # Different Python \e %CategorySequence instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CategorySequence instances \e a and \e b reference different C++ objects. 
@@ -118,20 +114,17 @@ class TorsionCategory(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionCategory instance.
-    # \param self The \e %TorsionCategory instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionCategory instance.
-    # \param self The \e %TorsionCategory instance to initialize.
     # \param cat 
     # 
     def __init__(cat: TorsionCategory) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionCategory instance this method is called upon.
     # 
     # Different Python \e %TorsionCategory instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionCategory instances \e a and \e b reference different C++ objects. 
@@ -144,7 +137,6 @@ class TorsionCategory(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionCategory instance \a cat.
-    # \param self The \e %TorsionCategory instance this method is called upon.
     # \param cat The \e %TorsionCategory instance to copy.
     # \return \a self
     # 
@@ -166,13 +158,13 @@ class TorsionCategory(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getMatchPattern() -> CDPL.Chem.MolecularGraph: pass
+    def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
     # \brief 
     # \param ptn 
     #
-    def setMatchPattern(ptn: CDPL.Chem.MolecularGraph) -> None: pass
+    def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 

@@ -26,6 +26,5 @@ class SMARTSMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SMARTSMolecularGraphOutputHandler instance.
-    # \param self The \e %SMARTSMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

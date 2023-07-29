@@ -26,31 +26,27 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance to initialize.
     # \param parameterizer 
     # 
     def __init__(parameterizer: MMFF94StretchBendInteractionParameterizer) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance to initialize.
     # \param molgraph 
     # \param bs_ia_data 
     # \param ab_ia_data 
     # \param ia_data 
     # \param strict 
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # 
     # Different Python \e %MMFF94StretchBendInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94StretchBendInteractionParameterizer instances \e a and \e b reference different C++ objects. 
@@ -93,7 +89,6 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94StretchBendInteractionParameterizer instance \a parameterizer.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param parameterizer The \e %MMFF94StretchBendInteractionParameterizer instance to copy.
     # \return \a self
     # 
@@ -107,6 +102,6 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     # \param ia_data 
     # \param strict 
     #
-    def parameterize(molgraph: CDPL.Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
+    def parameterize(molgraph: Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
 
     objectID = property(getObjectID)

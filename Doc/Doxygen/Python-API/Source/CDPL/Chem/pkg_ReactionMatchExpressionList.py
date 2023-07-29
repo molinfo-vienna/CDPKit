@@ -31,14 +31,12 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
 
     ##
     # \brief Initializes the \e %ReactionMatchExpressionList instance.
-    # \param self The \e %ReactionMatchExpressionList instance to initialize.
     # \param expr 
     # 
     def __init__(expr: ReactionMatchExpressionList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ReactionMatchExpressionList instance this method is called upon.
     # 
     # Different Python \e %ReactionMatchExpressionList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ReactionMatchExpressionList instances \e a and \e b reference different C++ objects. 
@@ -98,7 +96,6 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionMatchExpressionList instance \a array.
-    # \param self The \e %ReactionMatchExpressionList instance this method is called upon.
     # \param array The \e %ReactionMatchExpressionList instance to copy.
     # \return \a self
     # 
@@ -247,7 +244,6 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.
-    # \param self The \e %ReactionMatchExpressionList instance this method is called upon.
     # \param expr The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -255,7 +251,6 @@ class ReactionMatchExpressionList(ReactionMatchExpression):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != expr</tt>.
-    # \param self The \e %ReactionMatchExpressionList instance this method is called upon.
     # \param expr The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     # 

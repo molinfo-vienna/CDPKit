@@ -35,11 +35,10 @@ class BondStereoFlagCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the stereo flags.
     # \param flags An array containing the calculated stereo flags (possible values are defined as constants in namespace Chem.BondStereoFlag). The stereo flags are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the 2D stereo flag of a bond is accessible via its index).
     # 
-    def __init__(molgraph: MolecularGraph, flags: CDPL.Util.UIArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, flags: Util.UIArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondStereoFlagCalculator instance this method is called upon.
     # 
     # Different Python \e %BondStereoFlagCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondStereoFlagCalculator instances \e a and \e b reference different C++ objects. 
@@ -70,6 +69,6 @@ class BondStereoFlagCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the stereo flags.
     # \param flags An array containing the calculated stereo flags (possible values are defined as constants in namespace Chem.BondStereoFlag). The stereo flags are stored in the same order as the bonds appear in the bond list of the molecular graph (i.e. the 2D stereo flag of a bond is accessible via its index).
     # 
-    def calculate(molgraph: MolecularGraph, flags: CDPL.Util.UIArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, flags: Util.UIArray) -> None: pass
 
     objectID = property(getObjectID)

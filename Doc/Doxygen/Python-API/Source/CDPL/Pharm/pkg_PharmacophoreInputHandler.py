@@ -26,13 +26,11 @@ class PharmacophoreInputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreInputHandler instance.
-    # \param self The \e %PharmacophoreInputHandler instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PharmacophoreInputHandler instance this method is called upon.
     # 
     # Different Python \e %PharmacophoreInputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PharmacophoreInputHandler instances \e a and \e b reference different C++ objects. 
@@ -48,25 +46,25 @@ class PharmacophoreInputHandler(Boost.Python.instance):
     # 
     # \return A Base.DataFormat object that provides information about the handled data format.
     # 
-    def getDataFormat() -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> Base.DataFormat: pass
 
     ##
-    # \brief Creates a Base.DataReader instance that will read the data from the input stream <em>is</em>.
+    # \brief Creates a PharmacophoreReaderBase instance that will read the data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 
-    # \return A shared reference to the created Base.DataReader instance.
+    # \return The created PharmacophoreReaderBase instance.
     # 
-    def createReader(is: CDPL.Base.IStream) -> PharmacophoreReaderBase: pass
+    def createReader(is: Base.IStream) -> PharmacophoreReaderBase: pass
 
     ##
-    # \brief Creates a Base.DataReader instance that will read the data from the file specified by <em>file_name</em>.
+    # \brief Creates a PharmacophoreReaderBase instance that will read the data from the file specified by <em>file_name</em>.
     # 
     # \param file_name The full path of the file to read from.
     # \param mode Flags specifying the file open-mode.
     # 
-    # \return A shared reference to the created Base.DataReader instance.
+    # \return The created PharmacophoreReaderBase instance.
     # 
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> PharmacophoreReaderBase: pass
+    def createReader(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> PharmacophoreReaderBase: pass
 
     objectID = property(getObjectID)

@@ -22,14 +22,14 @@
 ##
 # \brief A reader for molecule data in the PSD-format of the <em>CDPL</em>.
 # 
-class PSDMoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class PSDMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Constructs a <tt>PSDMoleculeReader</tt> instance that will read the molecule data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass
 
     ##
     # \brief Constructs a <tt>PSDMoleculeReader</tt> instance that will read the molecule data from the input file <em>file_name</em>.

@@ -26,7 +26,6 @@ class TotalOverlapTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TotalOverlapTverskyScore instance.
-    # \param self The \e %TotalOverlapTverskyScore instance to initialize.
     # \param alpha 
     # \param beta 
     # 
@@ -34,14 +33,12 @@ class TotalOverlapTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TotalOverlapTverskyScore instance.
-    # \param self The \e %TotalOverlapTverskyScore instance to initialize.
     # \param score 
     # 
     def __init__(score: TotalOverlapTverskyScore) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TotalOverlapTverskyScore instance this method is called upon.
     # 
     # Different Python \e %TotalOverlapTverskyScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TotalOverlapTverskyScore instances \e a and \e b reference different C++ objects. 
@@ -54,7 +51,6 @@ class TotalOverlapTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TotalOverlapTverskyScore instance \a score.
-    # \param self The \e %TotalOverlapTverskyScore instance this method is called upon.
     # \param score The \e %TotalOverlapTverskyScore instance to copy.
     # \return \a self
     # 

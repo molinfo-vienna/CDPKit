@@ -27,4 +27,4 @@
 # \param mom_eq_thresh 
 # \return 
 #
-def calcCenterAlignmentTransforms(func: GaussianShapeFunction, to_ctr_xform: CDPL.Math.Matrix4D, from_ctr_xform: CDPL.Math.Matrix4D, mom_eq_thresh: float = 0.15) -> int: pass
+def calcCenterAlignmentTransforms(func: GaussianShapeFunction, to_ctr_xform: Math.Matrix4D, from_ctr_xform: Math.Matrix4D, mom_eq_thresh: float = 0.15) -> int: pass

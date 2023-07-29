@@ -26,20 +26,17 @@ class MMFF94NumericAtomTypeFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94NumericAtomTypeFunction instance.
-    # \param self The \e %MMFF94NumericAtomTypeFunction instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94NumericAtomTypeFunction instance.
-    # \param self The \e %MMFF94NumericAtomTypeFunction instance to initialize.
     # \param func 
     # 
     def __init__(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94NumericAtomTypeFunction instance.
-    # \param arg1 The \e %MMFF94NumericAtomTypeFunction instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -49,7 +46,7 @@ class MMFF94NumericAtomTypeFunction(Boost.Python.instance):
     # \param arg1 
     # \return 
     #
-    def __call__(arg1: CDPL.Chem.Atom) -> int: pass
+    def __call__(arg1: Chem.Atom) -> int: pass
 
     ##
     # \brief 

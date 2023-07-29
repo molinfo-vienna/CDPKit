@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of gzip-compressed molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
-class PDBGZMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
+class PDBGZMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PDBGZMolecularGraphOutputHandler instance.
-    # \param self The \e %PDBGZMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

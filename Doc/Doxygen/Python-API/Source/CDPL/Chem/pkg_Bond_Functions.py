@@ -293,7 +293,7 @@ def setCIPConfiguration(bond: Bond, config: int) -> None: pass
 # \param coords 
 # \return 
 #
-def calcBondConfiguration(bond: Bond, molgraph: MolecularGraph, descr: StereoDescriptor, coords: CDPL.Math.Vector3DArray) -> int: pass
+def calcBondConfiguration(bond: Bond, molgraph: MolecularGraph, descr: StereoDescriptor, coords: Math.Vector3DArray) -> int: pass
 
 ##
 # \brief 

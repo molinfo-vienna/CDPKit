@@ -31,14 +31,12 @@ class PolylinePrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %PolylinePrimitive2D instance.
-    # \param self The \e %PolylinePrimitive2D instance to initialize.
     # \param prim 
     # 
     def __init__(prim: PolylinePrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PolylinePrimitive2D instance \a prim.
-    # \param self The \e %PolylinePrimitive2D instance this method is called upon.
     # \param prim The \e %PolylinePrimitive2D instance to copy.
     # \return \a self
     # 

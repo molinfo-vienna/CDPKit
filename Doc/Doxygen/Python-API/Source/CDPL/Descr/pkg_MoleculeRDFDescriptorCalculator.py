@@ -33,22 +33,19 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeRDFDescriptorCalculator instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: MoleculeRDFDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeRDFDescriptorCalculator instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance to initialize.
     # \param cntnr 
     # \param descr 
     # 
-    def __init__(cntnr: CDPL.Chem.AtomContainer, descr: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: Chem.AtomContainer, descr: Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # 
     # Different Python \e %MoleculeRDFDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeRDFDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -61,7 +58,6 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeRDFDescriptorCalculator instance \a calc.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param calc The \e %MoleculeRDFDescriptorCalculator instance to copy.
     # \return \a self
     # 
@@ -74,14 +70,14 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
     # 
     # \note The coordinates function must be specified before calling calculate(), otherwise a zero distance for each atom pair will be used for the calculation.
     # 
-    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief Allows to specify a custom atom pair weight function.
     # 
     # \param func A AtomPairWeightFunction instance that wraps the target function.
     # 
-    def setAtomPairWeightFunction(func: CDPL.Chem.DoubleAtom2UIntFunctor) -> None: pass
+    def setAtomPairWeightFunction(func: Chem.DoubleAtom2UIntFunctor) -> None: pass
 
     ##
     # \brief Sets the number of desired radius incrementation steps.
@@ -186,7 +182,7 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
     # \param cntnr 
     # \param descr 
     #
-    def calculate(cntnr: CDPL.Chem.AtomContainer, descr: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: Chem.AtomContainer, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)
 

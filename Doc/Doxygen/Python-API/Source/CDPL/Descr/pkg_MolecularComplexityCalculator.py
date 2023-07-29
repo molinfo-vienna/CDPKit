@@ -38,11 +38,10 @@ class MolecularComplexityCalculator(Boost.Python.instance):
     # 
     # \param molgraph The molecular graph for which to calculate the complexity.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MolecularComplexityCalculator instance this method is called upon.
     # 
     # Different Python \e %MolecularComplexityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MolecularComplexityCalculator instances \e a and \e b reference different C++ objects. 
@@ -60,7 +59,7 @@ class MolecularComplexityCalculator(Boost.Python.instance):
     # 
     # \return The calculated complexity of the molecular graph <em>molgraph</em>.
     # 
-    def calculate(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+    def calculate(molgraph: Chem.MolecularGraph) -> float: pass
 
     ##
     # \brief Returns the result of the last molecular graph complexity calculation.

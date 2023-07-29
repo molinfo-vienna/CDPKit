@@ -25,4 +25,4 @@
 # \param max_ctr_dist 
 # \return 
 #
-def combineInterferingResidueCoordinates(mol: CDPL.Chem.Molecule, max_ctr_dist: float = 1.0) -> bool: pass
+def combineInterferingResidueCoordinates(mol: Chem.Molecule, max_ctr_dist: float = 1.0) -> bool: pass

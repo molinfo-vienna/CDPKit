@@ -28,11 +28,10 @@
 # 
 # If the write() operation fails, the writer instance is set into an error state that can be queried by the special methods __bool__() and __nonzero__(). Additionally, a <tt>DRegularGridSetWriterBase</tt> implementation may decide to throw an exception of type Base.IOError to report the error condition.
 # 
-class DRegularGridSetWriterBase(CDPL.Base.DataIOBase):
+class DRegularGridSetWriterBase(Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %DRegularGridSetWriterBase instance.
-    # \param self The \e %DRegularGridSetWriterBase instance to initialize.
     # 
     def __init__() -> None: pass
 

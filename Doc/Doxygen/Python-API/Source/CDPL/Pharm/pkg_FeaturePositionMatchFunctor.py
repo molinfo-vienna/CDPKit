@@ -26,21 +26,18 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeaturePositionMatchFunctor instance.
-    # \param self The \e %FeaturePositionMatchFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: FeaturePositionMatchFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeaturePositionMatchFunctor instance.
-    # \param self The \e %FeaturePositionMatchFunctor instance to initialize.
     # \param query_mode 
     # 
     def __init__(query_mode: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeaturePositionMatchFunctor instance this method is called upon.
     # 
     # Different Python \e %FeaturePositionMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeaturePositionMatchFunctor instances \e a and \e b reference different C++ objects. 
@@ -53,7 +50,6 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePositionMatchFunctor instance \a func.
-    # \param self The \e %FeaturePositionMatchFunctor instance this method is called upon.
     # \param func The \e %FeaturePositionMatchFunctor instance to copy.
     # \return \a self
     # 
@@ -86,7 +82,7 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     # 
     # \see Pharm.getPosition(const Feature&), Pharm.getTolerance(const Feature&)
     # 
-    def __call__(ftr1: Feature, ftr2: Feature, xform: CDPL.Math.Matrix4D) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature, xform: Math.Matrix4D) -> bool: pass
 
     objectID = property(getObjectID)
 

@@ -22,11 +22,11 @@
 ##
 # \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
-class MMTFMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
+class MMTFMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Constructs a <tt>MMTFMolecularGraphWriter</tt> instance that will write data of molecular graphs to the output stream <em>os</em>.
     # 
     # \param os The output stream to write to.
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass

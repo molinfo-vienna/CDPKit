@@ -26,7 +26,7 @@
 # \param grad 
 # \return 
 #
-def calcMMFF94StretchBendGradient(ia_data: MMFF94StretchBendInteractionData, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94StretchBendGradient(ia_data: MMFF94StretchBendInteractionData, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def calcMMFF94StretchBendGradient(ia_data: MMFF94StretchBendInteractionData, coo
 # \param coords 
 # \return 
 #
-def calcMMFF94StretchBendEnergy(ia_data: MMFF94StretchBendInteractionData, coords: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94StretchBendEnergy(ia_data: MMFF94StretchBendInteractionData, coords: Math.Vector3DArray) -> float: pass

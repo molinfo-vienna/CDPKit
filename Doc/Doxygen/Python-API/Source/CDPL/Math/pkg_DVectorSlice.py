@@ -26,14 +26,12 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DVectorSlice instance.
-    # \param self The \e %DVectorSlice instance to initialize.
     # \param s 
     # 
     def __init__(s: DVectorSlice) -> None: pass
 
     ##
     # \brief Initializes the \e %DVectorSlice instance.
-    # \param self The \e %DVectorSlice instance to initialize.
     # \param e 
     # \param s 
     # 
@@ -53,7 +51,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # 
     # Different Python \e %DVectorSlice instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DVectorSlice instances \e a and \e b reference different C++ objects. 
@@ -66,7 +63,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param e The \e %ConstFVectorExpression instance to copy.
     # \return \a self
     # 
@@ -74,7 +70,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to copy.
     # \return \a self
     # 
@@ -82,7 +77,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to copy.
     # \return \a self
     # 
@@ -90,7 +84,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param e The \e %ConstULVectorExpression instance to copy.
     # \return \a self
     # 
@@ -98,7 +91,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorSlice instance \a s.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param s The \e %DVectorSlice instance to copy.
     # \return \a self
     # 
@@ -106,7 +98,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param a The \e %object instance to copy.
     # \return \a self
     # 
@@ -158,7 +149,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == s</tt>.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param s The \e %DVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -166,7 +156,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -174,7 +163,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param s The \e %DVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -182,7 +170,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -210,7 +197,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %DVectorSlice instance.
-    # \param self The \e %DVectorSlice instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -229,7 +215,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DVectorSlice instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDVectorExpression instance holding the result of the addition.
     # 
@@ -237,7 +222,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DVectorSlice instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DVectorSlice instance holding the result of the subtraction.
     # 
@@ -245,7 +229,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DVectorSlice instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     # 
@@ -253,7 +236,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DVectorSlice instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     # 
@@ -261,7 +243,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DVectorSlice instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDVectorExpression instance holding the result of the division.
     # 
@@ -290,7 +271,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += s</tt>.
-    # \param self The \e %DVectorSlice instance acting as in-place addend.
     # \param s Specifies the second addend.
     # \return The updated \e %DVectorSlice instance \a self.
     # 
@@ -298,7 +278,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DVectorSlice instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DVectorSlice instance \a self.
     # 
@@ -306,7 +285,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= s</tt>.
-    # \param self The \e %DVectorSlice instance acting as in-place minuend.
     # \param s Specifies the subtrahend.
     # \return The updated \e %DVectorSlice instance \a self.
     # 
@@ -314,7 +292,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DVectorSlice instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DVectorSlice instance \a self.
     # 
@@ -322,7 +299,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DVectorSlice instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DVectorSlice instance \a self.
     # 
@@ -330,7 +306,6 @@ class DVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DVectorSlice instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DVectorSlice instance \a self.
     # 

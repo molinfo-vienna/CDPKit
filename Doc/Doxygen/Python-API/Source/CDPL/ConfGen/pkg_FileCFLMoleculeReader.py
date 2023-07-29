@@ -22,12 +22,11 @@
 ##
 # \brief 
 #
-class FileCFLMoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class FileCFLMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %FileCFLMoleculeReader instance.
-    # \param self The \e %FileCFLMoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

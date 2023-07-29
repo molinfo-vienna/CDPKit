@@ -26,21 +26,18 @@ class AlignedShapeTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AlignedShapeTverskyScore instance.
-    # \param self The \e %AlignedShapeTverskyScore instance to initialize.
     # \param beta 
     # 
     def __init__(beta: float = 0.95) -> None: pass
 
     ##
     # \brief Initializes the \e %AlignedShapeTverskyScore instance.
-    # \param self The \e %AlignedShapeTverskyScore instance to initialize.
     # \param score 
     # 
     def __init__(score: AlignedShapeTverskyScore) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AlignedShapeTverskyScore instance this method is called upon.
     # 
     # Different Python \e %AlignedShapeTverskyScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AlignedShapeTverskyScore instances \e a and \e b reference different C++ objects. 
@@ -53,7 +50,6 @@ class AlignedShapeTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AlignedShapeTverskyScore instance \a score.
-    # \param self The \e %AlignedShapeTverskyScore instance this method is called upon.
     # \param score The \e %AlignedShapeTverskyScore instance to copy.
     # \return \a self
     # 

@@ -28,13 +28,11 @@ class BondMatchExpression(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BondMatchExpression instance.
-    # \param self The \e %BondMatchExpression instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondMatchExpression instance this method is called upon.
     # 
     # Different Python \e %BondMatchExpression instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondMatchExpression instances \e a and \e b reference different C++ objects. 
@@ -67,7 +65,7 @@ class BondMatchExpression(Boost.Python.instance):
     # 
     # \note The default implementation returns <tt>True</tt>.
     # 
-    def __call__(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Any) -> bool: pass
+    def __call__(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, aux_data: Base.Any) -> bool: pass
 
     ##
     # \brief Performs an evaluation of the expression for the given query and target objects under consideration of the provided candidate atom/bond mapping.
@@ -83,6 +81,6 @@ class BondMatchExpression(Boost.Python.instance):
     # 
     # \note The default implementation returns the result of <tt>__call__(query_bond, query_molgraph, target_bond, target_molgraph, aux_data)</tt>.
     # 
-    def __call__(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Any) -> bool: pass
+    def __call__(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: Base.Any) -> bool: pass
 
     objectID = property(getObjectID)

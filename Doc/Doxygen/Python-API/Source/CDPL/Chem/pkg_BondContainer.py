@@ -28,7 +28,6 @@ class BondContainer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BondContainer instance.
-    # \param self The \e %BondContainer instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -79,7 +78,6 @@ class BondContainer(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondContainer instance this method is called upon.
     # 
     # Different Python \e %BondContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondContainer instances \e a and \e b reference different C++ objects. 
@@ -92,7 +90,6 @@ class BondContainer(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
     # 

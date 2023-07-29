@@ -31,21 +31,18 @@ class Vector2DArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector2DArray instance.
-    # \param self The \e %Vector2DArray instance to initialize.
     # \param array 
     # 
     def __init__(array: Vector2DArray) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector2DArray instance.
-    # \param arg1 The \e %Vector2DArray instance to initialize.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector2DArray instance this method is called upon.
     # 
     # Different Python \e %Vector2DArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector2DArray instances \e a and \e b reference different C++ objects. 
@@ -105,7 +102,6 @@ class Vector2DArray(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2DArray instance \a array.
-    # \param self The \e %Vector2DArray instance this method is called upon.
     # \param array The \e %Vector2DArray instance to copy.
     # \return \a self
     # 
@@ -123,7 +119,6 @@ class Vector2DArray(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param self The \e %Vector2DArray instance this method is called upon.
     # \param a The \e %object instance to copy.
     # \return \a self
     # 

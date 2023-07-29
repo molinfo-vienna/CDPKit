@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the input of bzip2-compressed molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 # 
-class PDBBZ2MoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
+class PDBBZ2MoleculeInputHandler(Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %PDBBZ2MoleculeInputHandler instance.
-    # \param self The \e %PDBBZ2MoleculeInputHandler instance to initialize.
     # 
     def __init__() -> None: pass

@@ -36,20 +36,17 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # 
         def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         # 
         def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param arg1 The \e %Entry instance to initialize.
         # \param atom_type 
         # \param param_types 
         # 
@@ -57,7 +54,6 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         # 
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -70,7 +66,6 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return \a self
         # 
@@ -112,20 +107,17 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94PrimaryToParameterAtomTypeMap instance.
-    # \param self The \e %MMFF94PrimaryToParameterAtomTypeMap instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94PrimaryToParameterAtomTypeMap instance.
-    # \param self The \e %MMFF94PrimaryToParameterAtomTypeMap instance to initialize.
     # \param map 
     # 
     def __init__(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94PrimaryToParameterAtomTypeMap instance this method is called upon.
     # 
     # Different Python \e %MMFF94PrimaryToParameterAtomTypeMap instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94PrimaryToParameterAtomTypeMap instances \e a and \e b reference different C++ objects. 
@@ -178,7 +170,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
     # \brief 
     # \param is 
     #
-    def load(is: CDPL.Base.IStream) -> None: pass
+    def load(is: Base.IStream) -> None: pass
 
     ##
     # \brief 
@@ -187,7 +179,6 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94PrimaryToParameterAtomTypeMap instance \a map.
-    # \param self The \e %MMFF94PrimaryToParameterAtomTypeMap instance this method is called upon.
     # \param map The \e %MMFF94PrimaryToParameterAtomTypeMap instance to copy.
     # \return \a self
     # 

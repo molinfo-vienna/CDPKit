@@ -26,20 +26,17 @@ class TopologicalEntity3DAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TopologicalEntity3DAlignment instance.
-    # \param self The \e %TopologicalEntity3DAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TopologicalEntity3DAlignment instance.
-    # \param self The \e %TopologicalEntity3DAlignment instance to initialize.
     # \param alignment 
     # 
     def __init__(alignment: TopologicalEntity3DAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TopologicalEntity3DAlignment instance this method is called upon.
     # 
     # Different Python \e %TopologicalEntity3DAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TopologicalEntity3DAlignment instances \e a and \e b reference different C++ objects. 
@@ -119,11 +116,10 @@ class TopologicalEntity3DAlignment(Boost.Python.instance):
     # \param mapping 
     # \return 
     #
-    def nextAlignment(mapping: CDPL.Util.STPairArray) -> bool: pass
+    def nextAlignment(mapping: Util.STPairArray) -> bool: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TopologicalEntity3DAlignment instance \a alignment.
-    # \param self The \e %TopologicalEntity3DAlignment instance this method is called upon.
     # \param alignment The \e %TopologicalEntity3DAlignment instance to copy.
     # \return \a self
     # 

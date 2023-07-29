@@ -31,7 +31,6 @@ class DefaultTautomerGenerator(TautomerGenerator):
 
     ##
     # \brief Initializes the \e %DefaultTautomerGenerator instance.
-    # \param self The \e %DefaultTautomerGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: DefaultTautomerGenerator) -> None: pass

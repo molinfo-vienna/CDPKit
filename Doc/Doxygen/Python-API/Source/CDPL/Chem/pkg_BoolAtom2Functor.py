@@ -26,20 +26,17 @@ class BoolAtom2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolAtom2Functor instance.
-    # \param self The \e %BoolAtom2Functor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAtom2Functor instance.
-    # \param self The \e %BoolAtom2Functor instance to initialize.
     # \param func 
     # 
-    def __init__(func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
+    def __init__(func: ForceField.InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAtom2Functor instance.
-    # \param arg1 The \e %BoolAtom2Functor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

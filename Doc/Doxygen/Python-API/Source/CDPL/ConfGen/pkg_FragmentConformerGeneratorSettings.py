@@ -31,14 +31,12 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentSettings instance.
-        # \param self The \e %FragmentSettings instance to initialize.
         # \param settings 
         # 
         def __init__(settings: FragmentSettings) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # 
         # Different Python \e %FragmentSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentSettings instances \e a and \e b reference different C++ objects. 
@@ -51,7 +49,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentSettings instance \a settings.
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param settings The \e %FragmentSettings instance to copy.
         # \return \a self
         # 
@@ -160,20 +157,17 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentConformerGeneratorSettings instance.
-    # \param self The \e %FragmentConformerGeneratorSettings instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentConformerGeneratorSettings instance.
-    # \param self The \e %FragmentConformerGeneratorSettings instance to initialize.
     # \param settings 
     # 
     def __init__(settings: FragmentConformerGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # 
     # Different Python \e %FragmentConformerGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentConformerGeneratorSettings instances \e a and \e b reference different C++ objects. 
@@ -186,7 +180,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentConformerGeneratorSettings instance \a settings.
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param settings The \e %FragmentConformerGeneratorSettings instance to copy.
     # \return \a self
     # 

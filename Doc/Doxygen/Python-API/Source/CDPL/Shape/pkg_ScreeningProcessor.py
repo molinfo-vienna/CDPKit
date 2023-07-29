@@ -26,20 +26,17 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningProcessor instance.
-    # \param self The \e %ScreeningProcessor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ScreeningProcessor instance.
-    # \param self The \e %ScreeningProcessor instance to initialize.
     # \param query 
     # 
-    def __init__(query: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(query: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # 
     # Different Python \e %ScreeningProcessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningProcessor instances \e a and \e b reference different C++ objects. 
@@ -77,7 +74,7 @@ class ScreeningProcessor(Boost.Python.instance):
     # \brief 
     # \param molgraph 
     #
-    def addQuery(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def addQuery(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
@@ -90,14 +87,14 @@ class ScreeningProcessor(Boost.Python.instance):
     # \param idx 
     # \return 
     #
-    def getQuery(idx: int) -> CDPL.Chem.MolecularGraph: pass
+    def getQuery(idx: int) -> Chem.MolecularGraph: pass
 
     ##
     # \brief 
     # \param molgraph 
     # \return 
     #
-    def process(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+    def process(molgraph: Chem.MolecularGraph) -> bool: pass
 
     objectID = property(getObjectID)
 

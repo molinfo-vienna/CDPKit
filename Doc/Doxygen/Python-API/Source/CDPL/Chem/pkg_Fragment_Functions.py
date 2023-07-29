@@ -26,7 +26,7 @@
 # \param arom_bond_mask 
 # \return 
 #
-def isAromatic(ring: Fragment, molgraph: MolecularGraph, arom_bond_mask: CDPL.Util.BitSet) -> bool: pass
+def isAromatic(ring: Fragment, molgraph: MolecularGraph, arom_bond_mask: Util.BitSet) -> bool: pass
 
 ##
 # \brief 

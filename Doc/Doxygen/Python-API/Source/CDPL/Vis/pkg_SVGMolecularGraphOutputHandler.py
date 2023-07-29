@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of 2D depictions of chemical structures in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format.
 # 
-class SVGMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
+class SVGMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SVGMolecularGraphOutputHandler instance.
-    # \param self The \e %SVGMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

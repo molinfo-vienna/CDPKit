@@ -31,13 +31,11 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # \param ref_shape_func 
     # \param ovl_shape_func 
     # 
@@ -45,14 +43,12 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # \param func 
     # 
     def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FastGaussianShapeOverlapFunction instance \a func.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
     # \return \a self
     # 

@@ -26,50 +26,45 @@ class MoleculeReader(MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %MoleculeReader instance.
-    # \param self The \e %MoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeReader instance.
-    # \param self The \e %MoleculeReader instance to initialize.
     # \param file_name 
     # \param fmt 
     # \param mode 
     # 
-    def __init__(file_name: str, fmt: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, fmt: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeReader instance.
-    # \param self The \e %MoleculeReader instance to initialize.
     # \param file_name 
     # \param fmt 
     # \param mode 
     # 
-    def __init__(file_name: str, fmt: CDPL.Base.DataFormat, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, fmt: Base.DataFormat, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeReader instance.
-    # \param self The \e %MoleculeReader instance to initialize.
     # \param is 
     # \param fmt 
     # 
-    def __init__(is: CDPL.Base.IStream, fmt: str) -> None: pass
+    def __init__(is: Base.IStream, fmt: str) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeReader instance.
-    # \param self The \e %MoleculeReader instance to initialize.
     # \param is 
     # \param fmt 
     # 
-    def __init__(is: CDPL.Base.IStream, fmt: CDPL.Base.DataFormat) -> None: pass
+    def __init__(is: Base.IStream, fmt: Base.DataFormat) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDataFormat() -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> Base.DataFormat: pass
 
     dataFormat = property(getDataFormat)

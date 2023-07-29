@@ -26,13 +26,11 @@ class ReactionInputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ReactionInputHandler instance.
-    # \param self The \e %ReactionInputHandler instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ReactionInputHandler instance this method is called upon.
     # 
     # Different Python \e %ReactionInputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ReactionInputHandler instances \e a and \e b reference different C++ objects. 
@@ -48,25 +46,25 @@ class ReactionInputHandler(Boost.Python.instance):
     # 
     # \return A Base.DataFormat object that provides information about the handled data format.
     # 
-    def getDataFormat() -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> Base.DataFormat: pass
 
     ##
-    # \brief Creates a Base.DataReader instance that will read the data from the input stream <em>is</em>.
+    # \brief Creates a ReactionReaderBase instance that will read the data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 
-    # \return A shared reference to the created Base.DataReader instance.
+    # \return The created ReactionReaderBase instance.
     # 
-    def createReader(is: CDPL.Base.IStream) -> ReactionReaderBase: pass
+    def createReader(is: Base.IStream) -> ReactionReaderBase: pass
 
     ##
-    # \brief Creates a Base.DataReader instance that will read the data from the file specified by <em>file_name</em>.
+    # \brief Creates a ReactionReaderBase instance that will read the data from the file specified by <em>file_name</em>.
     # 
     # \param file_name The full path of the file to read from.
     # \param mode Flags specifying the file open-mode.
     # 
-    # \return A shared reference to the created Base.DataReader instance.
+    # \return The created ReactionReaderBase instance.
     # 
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> ReactionReaderBase: pass
+    def createReader(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> ReactionReaderBase: pass
 
     objectID = property(getObjectID)

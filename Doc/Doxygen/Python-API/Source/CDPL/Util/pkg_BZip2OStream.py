@@ -22,20 +22,18 @@
 ##
 # \brief 
 #
-class BZip2OStream(CDPL.Base.OStream):
+class BZip2OStream(Base.OStream):
 
     ##
     # \brief Initializes the \e %BZip2OStream instance.
-    # \param self The \e %BZip2OStream instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BZip2OStream instance.
-    # \param self The \e %BZip2OStream instance to initialize.
     # \param os 
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass
 
     ##
     # \brief 
@@ -76,7 +74,7 @@ class BZip2OStream(CDPL.Base.OStream):
     # \brief 
     # \param os 
     #
-    def open(os: CDPL.Base.OStream) -> None: pass
+    def open(os: Base.OStream) -> None: pass
 
     ##
     # \brief FIXME!

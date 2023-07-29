@@ -26,13 +26,11 @@ class MolecularGraphInputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MolecularGraphInputHandler instance.
-    # \param self The \e %MolecularGraphInputHandler instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MolecularGraphInputHandler instance this method is called upon.
     # 
     # Different Python \e %MolecularGraphInputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MolecularGraphInputHandler instances \e a and \e b reference different C++ objects. 
@@ -47,14 +45,14 @@ class MolecularGraphInputHandler(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getDataFormat() -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> Base.DataFormat: pass
 
     ##
     # \brief 
     # \param is 
     # \return 
     #
-    def createReader(is: CDPL.Base.IStream) -> object: pass
+    def createReader(is: Base.IStream) -> object: pass
 
     ##
     # \brief 
@@ -62,6 +60,6 @@ class MolecularGraphInputHandler(Boost.Python.instance):
     # \param mode 
     # \return 
     #
-    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> object: pass
+    def createReader(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> object: pass
 
     objectID = property(getObjectID)

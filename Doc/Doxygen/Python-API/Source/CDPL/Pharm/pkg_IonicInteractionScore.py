@@ -36,7 +36,6 @@ class IonicInteractionScore(FeatureDistanceScore):
 
     ##
     # \brief Initializes the \e %IonicInteractionScore instance.
-    # \param self The \e %IonicInteractionScore instance to initialize.
     # \param score 
     # 
     def __init__(score: IonicInteractionScore) -> None: pass

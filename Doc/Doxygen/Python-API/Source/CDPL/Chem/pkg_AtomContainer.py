@@ -28,7 +28,6 @@ class AtomContainer(Entity3DContainer):
 
     ##
     # \brief Initializes the \e %AtomContainer instance.
-    # \param self The \e %AtomContainer instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -75,7 +74,7 @@ class AtomContainer(Entity3DContainer):
     # 
     # \param func The atom comparison function implementing the applied ordering criteria.
     # 
-    def orderAtoms(func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: ForceField.InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief Returns a reference to the entity at index <em>idx</em>.
@@ -97,7 +96,6 @@ class AtomContainer(Entity3DContainer):
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param self The \e %AtomContainer instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
     # 

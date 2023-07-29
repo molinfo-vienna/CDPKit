@@ -35,7 +35,7 @@
 # 
 # \return The calculated distance.
 # 
-def calcHammingDistance(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> int: pass
+def calcHammingDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> int: pass
 
 ##
 # \brief Calculates the <em>Euclidean Distance</em> [\ref CITB] between the bitsets <em>bs1</em> and <em>bs2</em>.
@@ -53,7 +53,7 @@ def calcHammingDistance(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> int: pa
 # 
 # \return The calculated distance.
 # 
-def calcEuclideanDistance(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: pass
+def calcEuclideanDistance(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
 # \brief Calculates the <em>Dice Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
@@ -71,7 +71,7 @@ def calcEuclideanDistance(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float
 # 
 # \return The calculated similarity measure.
 # 
-def calcDiceSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: pass
+def calcDiceSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
 # \brief Calculates the <em>Cosine Similarity Measure</em> [\ref WCOS] for the given bitsets <em>bs1</em> and <em>bs2</em>.
@@ -89,7 +89,7 @@ def calcDiceSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: p
 # 
 # \return The calculated similarity measure.
 # 
-def calcCosineSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: pass
+def calcCosineSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
 # \brief Calculates the <em>Euclidean Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
@@ -107,7 +107,7 @@ def calcCosineSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float:
 # 
 # \return The calculated similarity measure.
 # 
-def calcEuclideanSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: pass
+def calcEuclideanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
 # \brief Calculates the <em>Manhattan Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
@@ -125,7 +125,7 @@ def calcEuclideanSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> flo
 # 
 # \return The calculated similarity measure.
 # 
-def calcManhattanSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: pass
+def calcManhattanSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
 # \brief Calculates the <em>Tanimoto Similarity Measure</em> [\ref CITB] for the given bitsets <em>bs1</em> and <em>bs2</em>.
@@ -143,7 +143,7 @@ def calcManhattanSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> flo
 # 
 # \return The calculated similarity measure.
 # 
-def calcTanimotoSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> float: pass
+def calcTanimotoSimilarity(bs1: Util.BitSet, bs2: Util.BitSet) -> float: pass
 
 ##
 # \brief Calculates the <em>Tversky Similarity Measure</em> [\ref GSIM] for the given bitsets <em>bs1</em> and <em>bs2</em>.
@@ -165,4 +165,4 @@ def calcTanimotoSimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet) -> floa
 # 
 # \return The calculated similarity measure.
 # 
-def calcTverskySimilarity(bs1: CDPL.Util.BitSet, bs2: CDPL.Util.BitSet, a: float, b: float) -> float: pass
+def calcTverskySimilarity(bs1: Util.BitSet, bs2: Util.BitSet, a: float, b: float) -> float: pass

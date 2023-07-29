@@ -53,7 +53,7 @@ class MoleculeIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __getitem__(fmt: CDPL.Base.DataFormat) -> MoleculeInputHandler: pass
+        def __getitem__(fmt: Base.DataFormat) -> MoleculeInputHandler: pass
 
         ##
         # \brief 
@@ -76,7 +76,7 @@ class MoleculeIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __delitem__(fmt: CDPL.Base.DataFormat) -> bool: pass
+        def __delitem__(fmt: Base.DataFormat) -> bool: pass
 
         ##
         # \brief 
@@ -113,7 +113,7 @@ class MoleculeIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __getitem__(fmt: CDPL.Base.DataFormat) -> MoleculeOutputHandler: pass
+        def __getitem__(fmt: Base.DataFormat) -> MoleculeOutputHandler: pass
 
         ##
         # \brief 
@@ -136,7 +136,7 @@ class MoleculeIOManager(Boost.Python.instance):
         # \return 
         #
         @staticmethod
-        def __delitem__(fmt: CDPL.Base.DataFormat) -> bool: pass
+        def __delitem__(fmt: Base.DataFormat) -> bool: pass
 
         ##
         # \brief 
@@ -202,7 +202,7 @@ class MoleculeIOManager(Boost.Python.instance):
     # \return A reference to a Chem.MoleculeInputHandler implementation instance registered for the specified data format, or <em>None</em> if not available.
     # 
     @staticmethod
-    def getInputHandlerByFormat(fmt: CDPL.Base.DataFormat) -> MoleculeInputHandler: pass
+    def getInputHandlerByFormat(fmt: Base.DataFormat) -> MoleculeInputHandler: pass
 
     ##
     # \brief Returns a reference to a Chem.MoleculeInputHandler implementation instance registered for the data format with the specified name.
@@ -250,7 +250,7 @@ class MoleculeIOManager(Boost.Python.instance):
     # \return <tt>True</tt> if a handler instance for the specified data format was found and has been unregistered, and <tt>False</tt> otherwise.
     # 
     @staticmethod
-    def unregisterInputHandler(fmt: CDPL.Base.DataFormat) -> bool: pass
+    def unregisterInputHandler(fmt: Base.DataFormat) -> bool: pass
 
     ##
     # \brief Unregisters the Chem.MoleculeInputHandler implementation instance with the specified index.
@@ -316,7 +316,7 @@ class MoleculeIOManager(Boost.Python.instance):
     # \return A reference to a Chem.MoleculeOutputHandler implementation instance registered for the specified data format, or <em>None</em> if not available.
     # 
     @staticmethod
-    def getOutputHandlerByFormat(fmt: CDPL.Base.DataFormat) -> MoleculeOutputHandler: pass
+    def getOutputHandlerByFormat(fmt: Base.DataFormat) -> MoleculeOutputHandler: pass
 
     ##
     # \brief Returns a reference to a Chem.MoleculeOutputHandler implementation instance registered for the data format with the specified name.
@@ -364,7 +364,7 @@ class MoleculeIOManager(Boost.Python.instance):
     # \return <tt>True</tt> if a handler instance for the specified data format was found and has been unregistered, and <tt>False</tt> otherwise.
     # 
     @staticmethod
-    def unregisterOutputHandler(fmt: CDPL.Base.DataFormat) -> bool: pass
+    def unregisterOutputHandler(fmt: Base.DataFormat) -> bool: pass
 
     ##
     # \brief Unregisters the Chem.MoleculeOutputHandler implementation instance with the specified index.

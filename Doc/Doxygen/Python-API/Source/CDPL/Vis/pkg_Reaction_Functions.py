@@ -23,538 +23,538 @@
 # \brief 
 # \param rxn 
 #
-def clearArrowStyle(rxn: CDPL.Chem.Reaction) -> None: pass
+def clearArrowStyle(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def hasArrowStyle(rxn: CDPL.Chem.Reaction) -> bool: pass
+def hasArrowStyle(rxn: Chem.Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowStyle(rxn: CDPL.Chem.Reaction) -> int: pass
+def getArrowStyle(rxn: Chem.Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param style 
 #
-def setArrowStyle(rxn: CDPL.Chem.Reaction, style: int) -> None: pass
+def setArrowStyle(rxn: Chem.Reaction, style: int) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearPlusSignSize(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasPlusSignSize(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearPlusSignSize(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getPlusSignSize(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasPlusSignSize(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getPlusSignSize(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param size 
 #
-def setPlusSignSize(rxn: CDPL.Chem.Reaction, size: SizeSpecification) -> None: pass
+def setPlusSignSize(rxn: Chem.Reaction, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearArrowHeadWidth(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasArrowHeadWidth(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearArrowHeadWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowHeadWidth(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasArrowHeadWidth(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getArrowHeadWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param width 
 #
-def setArrowHeadWidth(rxn: CDPL.Chem.Reaction, width: SizeSpecification) -> None: pass
+def setArrowHeadWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearPlusSignLineWidth(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasPlusSignLineWidth(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearPlusSignLineWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getPlusSignLineWidth(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasPlusSignLineWidth(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getPlusSignLineWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param width 
 #
-def setPlusSignLineWidth(rxn: CDPL.Chem.Reaction, width: SizeSpecification) -> None: pass
+def setPlusSignLineWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearArrowLineWidth(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasArrowLineWidth(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearArrowLineWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowLineWidth(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasArrowLineWidth(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getArrowLineWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param width 
 #
-def setArrowLineWidth(rxn: CDPL.Chem.Reaction, width: SizeSpecification) -> None: pass
+def setArrowLineWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearArrowShaftWidth(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasArrowShaftWidth(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearArrowShaftWidth(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowShaftWidth(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasArrowShaftWidth(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getArrowShaftWidth(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param width 
 #
-def setArrowShaftWidth(rxn: CDPL.Chem.Reaction, width: SizeSpecification) -> None: pass
+def setArrowShaftWidth(rxn: Chem.Reaction, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearArrowHeadLength(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasArrowHeadLength(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearArrowHeadLength(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowHeadLength(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasArrowHeadLength(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getArrowHeadLength(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param length 
 #
-def setArrowHeadLength(rxn: CDPL.Chem.Reaction, length: SizeSpecification) -> None: pass
+def setArrowHeadLength(rxn: Chem.Reaction, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearArrowLength(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasArrowLength(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearArrowLength(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowLength(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasArrowLength(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getArrowLength(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param length 
 #
-def setArrowLength(rxn: CDPL.Chem.Reaction, length: SizeSpecification) -> None: pass
+def setArrowLength(rxn: Chem.Reaction, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearComponentMargin(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasComponentMargin(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearComponentMargin(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getComponentMargin(rxn: CDPL.Chem.Reaction) -> SizeSpecification: pass
+def hasComponentMargin(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getComponentMargin(rxn: Chem.Reaction) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param margin 
 #
-def setComponentMargin(rxn: CDPL.Chem.Reaction, margin: SizeSpecification) -> None: pass
+def setComponentMargin(rxn: Chem.Reaction, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearAgentLayoutDirection(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasAgentLayoutDirection(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearAgentLayoutDirection(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getAgentLayoutDirection(rxn: CDPL.Chem.Reaction) -> int: pass
+def hasAgentLayoutDirection(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getAgentLayoutDirection(rxn: Chem.Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param dir 
 #
-def setAgentLayoutDirection(rxn: CDPL.Chem.Reaction, dir: int) -> None: pass
+def setAgentLayoutDirection(rxn: Chem.Reaction, dir: int) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearComponentLayoutDirection(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasComponentLayoutDirection(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearComponentLayoutDirection(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getComponentLayoutDirection(rxn: CDPL.Chem.Reaction) -> int: pass
+def hasComponentLayoutDirection(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getComponentLayoutDirection(rxn: Chem.Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param dir 
 #
-def setComponentLayoutDirection(rxn: CDPL.Chem.Reaction, dir: int) -> None: pass
+def setComponentLayoutDirection(rxn: Chem.Reaction, dir: int) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearPlusSignColor(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasPlusSignColor(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearPlusSignColor(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getPlusSignColor(rxn: CDPL.Chem.Reaction) -> Color: pass
+def hasPlusSignColor(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getPlusSignColor(rxn: Chem.Reaction) -> Color: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param color 
 #
-def setPlusSignColor(rxn: CDPL.Chem.Reaction, color: Color) -> None: pass
+def setPlusSignColor(rxn: Chem.Reaction, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearArrowColor(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasArrowColor(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearArrowColor(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getArrowColor(rxn: CDPL.Chem.Reaction) -> Color: pass
+def hasArrowColor(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getArrowColor(rxn: Chem.Reaction) -> Color: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param color 
 #
-def setArrowColor(rxn: CDPL.Chem.Reaction, color: Color) -> None: pass
+def setArrowColor(rxn: Chem.Reaction, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearShowPlusSigns(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasShowPlusSigns(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearShowPlusSigns(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getShowPlusSigns(rxn: CDPL.Chem.Reaction) -> bool: pass
+def hasShowPlusSigns(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getShowPlusSigns(rxn: Chem.Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param show 
 #
-def setShowPlusSigns(rxn: CDPL.Chem.Reaction, show: bool) -> None: pass
+def setShowPlusSigns(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearShowProducts(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasShowProducts(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearShowProducts(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getShowProducts(rxn: CDPL.Chem.Reaction) -> bool: pass
+def hasShowProducts(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getShowProducts(rxn: Chem.Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param show 
 #
-def setShowProducts(rxn: CDPL.Chem.Reaction, show: bool) -> None: pass
+def setShowProducts(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearShowReactants(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasShowReactants(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearShowReactants(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getShowReactants(rxn: CDPL.Chem.Reaction) -> bool: pass
+def hasShowReactants(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getShowReactants(rxn: Chem.Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param show 
 #
-def setShowReactants(rxn: CDPL.Chem.Reaction, show: bool) -> None: pass
+def setShowReactants(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearShowAgents(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasShowAgents(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearShowAgents(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getShowAgents(rxn: CDPL.Chem.Reaction) -> bool: pass
+def hasShowAgents(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getShowAgents(rxn: Chem.Reaction) -> bool: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param show 
 #
-def setShowAgents(rxn: CDPL.Chem.Reaction, show: bool) -> None: pass
+def setShowAgents(rxn: Chem.Reaction, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearAgentAlignment(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasAgentAlignment(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearAgentAlignment(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getAgentAlignment(rxn: CDPL.Chem.Reaction) -> int: pass
+def hasAgentAlignment(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getAgentAlignment(rxn: Chem.Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param show 
 #
-def setAgentAlignment(rxn: CDPL.Chem.Reaction, show: int) -> None: pass
+def setAgentAlignment(rxn: Chem.Reaction, show: int) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearAgentLayout(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasAgentLayout(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearAgentLayout(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getAgentLayout(rxn: CDPL.Chem.Reaction) -> int: pass
+def hasAgentLayout(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getAgentLayout(rxn: Chem.Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param show 
 #
-def setAgentLayout(rxn: CDPL.Chem.Reaction, show: int) -> None: pass
+def setAgentLayout(rxn: Chem.Reaction, show: int) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 #
-def clearComponentLayout(rxn: CDPL.Chem.Reaction) -> None: pass
-
-##
-# \brief 
-# \param rxn 
-# \return 
-#
-def hasComponentLayout(rxn: CDPL.Chem.Reaction) -> bool: pass
+def clearComponentLayout(rxn: Chem.Reaction) -> None: pass
 
 ##
 # \brief 
 # \param rxn 
 # \return 
 #
-def getComponentLayout(rxn: CDPL.Chem.Reaction) -> int: pass
+def hasComponentLayout(rxn: Chem.Reaction) -> bool: pass
+
+##
+# \brief 
+# \param rxn 
+# \return 
+#
+def getComponentLayout(rxn: Chem.Reaction) -> int: pass
 
 ##
 # \brief 
 # \param rxn 
 # \param layout 
 #
-def setComponentLayout(rxn: CDPL.Chem.Reaction, layout: int) -> None: pass
+def setComponentLayout(rxn: Chem.Reaction, layout: int) -> None: pass

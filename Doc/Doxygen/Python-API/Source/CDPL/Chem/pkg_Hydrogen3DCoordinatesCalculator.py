@@ -38,11 +38,10 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     # \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # \param undef_only Specifies whether or not to recalculate already defined hydrogen atom coordinates.
     # 
-    def __init__(molgraph: MolecularGraph, coords: CDPL.Math.Vector3DArray, undef_only: bool = True) -> None: pass
+    def __init__(molgraph: MolecularGraph, coords: Math.Vector3DArray, undef_only: bool = True) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Hydrogen3DCoordinatesCalculator instance this method is called upon.
     # 
     # Different Python \e %Hydrogen3DCoordinatesCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Hydrogen3DCoordinatesCalculator instances \e a and \e b reference different C++ objects. 
@@ -94,14 +93,14 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     # \param coords An array containing the heavy atom and calculated hydrogen 3D-coordinates. The coordinates are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the coordinates of an atom are accessible via its index).
     # \param init_coords If <tt>False</tt>, defined atom coordinates are already present in <em>coords</em> and thus won't get assigned again.
     # 
-    def calculate(molgraph: MolecularGraph, coords: CDPL.Math.Vector3DArray, init_coords: bool = True) -> None: pass
+    def calculate(molgraph: MolecularGraph, coords: Math.Vector3DArray, init_coords: bool = True) -> None: pass
 
     ##
     # \brief 
     # \param coords 
     # \param init_coords 
     #
-    def calculate(coords: CDPL.Math.Vector3DArray, init_coords: bool = True) -> None: pass
+    def calculate(coords: Math.Vector3DArray, init_coords: bool = True) -> None: pass
 
     objectID = property(getObjectID)
 

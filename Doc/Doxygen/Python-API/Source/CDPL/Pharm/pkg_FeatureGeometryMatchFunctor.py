@@ -56,14 +56,12 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureGeometryMatchFunctor instance.
-    # \param self The \e %FeatureGeometryMatchFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: FeatureGeometryMatchFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureGeometryMatchFunctor instance.
-    # \param self The \e %FeatureGeometryMatchFunctor instance to initialize.
     # \param max_hba_int_dir_angle 
     # \param max_hba_orient_dev 
     # \param max_hbd_int_dir_dev 
@@ -75,7 +73,6 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureGeometryMatchFunctor instance this method is called upon.
     # 
     # Different Python \e %FeatureGeometryMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureGeometryMatchFunctor instances \e a and \e b reference different C++ objects. 
@@ -88,7 +85,6 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureGeometryMatchFunctor instance \a func.
-    # \param self The \e %FeatureGeometryMatchFunctor instance this method is called upon.
     # \param func The \e %FeatureGeometryMatchFunctor instance to copy.
     # \return \a self
     # 
@@ -185,7 +181,7 @@ class FeatureGeometryMatchFunctor(Boost.Python.instance):
     # 
     # \return A score from <em>0</em> (=spatial deviation outside the allowed range) and <em>1</em> (optimum match) describing the goodness of the spatial orientation match of the two features.
     # 
-    def __call__(ftr1: Feature, ftr2: Feature, xform: CDPL.Math.Matrix4D) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature, xform: Math.Matrix4D) -> bool: pass
 
     objectID = property(getObjectID)
 

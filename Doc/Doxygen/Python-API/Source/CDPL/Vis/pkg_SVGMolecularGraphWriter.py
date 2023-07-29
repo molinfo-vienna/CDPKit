@@ -24,11 +24,11 @@
 # 
 # <tt>SVGMolecularGraphWriter</tt> uses Vis.StructureView2D for the creation of 2D structure diagrams. All control-parameters and properties provided for the customization of Vis.StructureView2D are also supported by <tt>SVGMolecularGraphWriter</tt>.
 # 
-class SVGMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
+class SVGMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Constructs a <tt>SVGMolecularGraphWriter</tt> instance that will write the image data to the output stream <em>os</em>.
     # 
     # \param os The output stream to write to.
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass

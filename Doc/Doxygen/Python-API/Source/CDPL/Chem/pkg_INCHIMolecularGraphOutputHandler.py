@@ -26,6 +26,5 @@ class INCHIMolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %INCHIMolecularGraphOutputHandler instance.
-    # \param self The \e %INCHIMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

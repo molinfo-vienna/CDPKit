@@ -26,7 +26,6 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeaturePairDistanceMatchFunctor instance.
-    # \param self The \e %FeaturePairDistanceMatchFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: FeaturePairDistanceMatchFunctor) -> None: pass
@@ -40,7 +39,6 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeaturePairDistanceMatchFunctor instance this method is called upon.
     # 
     # Different Python \e %FeaturePairDistanceMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeaturePairDistanceMatchFunctor instances \e a and \e b reference different C++ objects. 
@@ -59,7 +57,6 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePairDistanceMatchFunctor instance \a func.
-    # \param self The \e %FeaturePairDistanceMatchFunctor instance this method is called upon.
     # \param func The \e %FeaturePairDistanceMatchFunctor instance to copy.
     # \return \a self
     # 

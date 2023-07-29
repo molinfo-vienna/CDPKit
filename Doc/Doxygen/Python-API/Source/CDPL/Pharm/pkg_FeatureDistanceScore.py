@@ -26,7 +26,6 @@ class FeatureDistanceScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %FeatureDistanceScore instance.
-    # \param self The \e %FeatureDistanceScore instance to initialize.
     # \param score 
     # 
     def __init__(score: FeatureDistanceScore) -> None: pass
@@ -59,7 +58,6 @@ class FeatureDistanceScore(FeatureInteractionScore):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceScore instance \a func.
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \param func The \e %FeatureDistanceScore instance to copy.
     # \return \a self
     # 

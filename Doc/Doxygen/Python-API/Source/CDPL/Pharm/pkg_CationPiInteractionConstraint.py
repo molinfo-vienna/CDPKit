@@ -41,7 +41,6 @@ class CationPiInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CationPiInteractionConstraint instance.
-    # \param self The \e %CationPiInteractionConstraint instance to initialize.
     # \param constr 
     # 
     def __init__(constr: CationPiInteractionConstraint) -> None: pass
@@ -58,7 +57,6 @@ class CationPiInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CationPiInteractionConstraint instance this method is called upon.
     # 
     # Different Python \e %CationPiInteractionConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CationPiInteractionConstraint instances \e a and \e b reference different C++ objects. 
@@ -89,7 +87,6 @@ class CationPiInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CationPiInteractionConstraint instance \a constr.
-    # \param self The \e %CationPiInteractionConstraint instance this method is called upon.
     # \param constr The \e %CationPiInteractionConstraint instance to copy.
     # \return \a self
     # 

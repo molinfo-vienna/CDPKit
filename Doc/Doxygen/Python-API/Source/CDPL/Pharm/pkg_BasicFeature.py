@@ -26,7 +26,6 @@ class BasicFeature(Feature):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Feature instance \a ftr.
-    # \param self The \e %BasicFeature instance this method is called upon.
     # \param ftr The \e %Feature instance to copy.
     # \return \a self
     # 
@@ -34,7 +33,6 @@ class BasicFeature(Feature):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicFeature instance \a ftr.
-    # \param self The \e %BasicFeature instance this method is called upon.
     # \param ftr The \e %BasicFeature instance to copy.
     # \return \a self
     # 

@@ -26,20 +26,17 @@ class UInt64BondFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %UInt64BondFunctor instance.
-    # \param self The \e %UInt64BondFunctor instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UInt64BondFunctor instance.
-    # \param self The \e %UInt64BondFunctor instance to initialize.
     # \param func 
     # 
     def __init__(func: UInt64BondFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %UInt64BondFunctor instance.
-    # \param arg1 The \e %UInt64BondFunctor instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass

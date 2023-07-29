@@ -26,20 +26,17 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DScalarGrid instance.
-    # \param self The \e %DScalarGrid instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DScalarGrid instance.
-    # \param self The \e %DScalarGrid instance to initialize.
     # \param g 
     # 
     def __init__(g: DScalarGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %DScalarGrid instance.
-    # \param self The \e %DScalarGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
@@ -57,7 +54,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # 
     # Different Python \e %DScalarGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DScalarGrid instances \e a and \e b reference different C++ objects. 
@@ -122,7 +118,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DScalarGrid instance \a g.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # \param g The \e %DScalarGrid instance to copy.
     # \return \a self
     # 
@@ -172,7 +167,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # \param g The \e %DScalarGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -180,7 +174,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -188,7 +181,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # \param g The \e %DScalarGrid instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -196,7 +188,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -204,7 +195,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %DScalarGrid instance.
-    # \param self The \e %DScalarGrid instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -223,7 +213,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DScalarGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDGridExpression instance holding the result of the addition.
     # 
@@ -231,7 +220,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DScalarGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DScalarGrid instance holding the result of the subtraction.
     # 
@@ -239,7 +227,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DScalarGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDGridExpression instance holding the result of the multiplication.
     # 
@@ -247,7 +234,6 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DScalarGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDGridExpression instance holding the result of the division.
     # 

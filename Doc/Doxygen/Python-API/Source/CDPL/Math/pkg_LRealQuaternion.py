@@ -26,20 +26,17 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LRealQuaternion instance.
-    # \param self The \e %LRealQuaternion instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LRealQuaternion instance.
-    # \param self The \e %LRealQuaternion instance to initialize.
     # \param q 
     # 
     def __init__(q: LRealQuaternion) -> None: pass
 
     ##
     # \brief Initializes the \e %LRealQuaternion instance.
-    # \param self The \e %LRealQuaternion instance to initialize.
     # \param r 
     # 
     def __init__(r: int) -> None: pass
@@ -53,7 +50,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # 
     # Different Python \e %LRealQuaternion instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LRealQuaternion instances \e a and \e b reference different C++ objects. 
@@ -96,7 +92,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LRealQuaternion instance \a q.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # \param q The \e %LRealQuaternion instance to copy.
     # \return \a self
     # 
@@ -110,7 +105,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place addend.
     # \param t Specifies the second addend.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -118,7 +112,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place addend.
     # \param q Specifies the second addend.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -126,7 +119,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place minuend.
     # \param t Specifies the subtrahend.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -134,7 +126,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place minuend.
     # \param q Specifies the subtrahend.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -142,7 +133,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -150,7 +140,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place multiplicand.
     # \param q Specifies the multiplier.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -158,7 +147,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -166,7 +154,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
-    # \param self The \e %LRealQuaternion instance acting as in-place dividend.
     # \param q Specifies the divisor.
     # \return The updated \e %LRealQuaternion instance \a self.
     # 
@@ -188,7 +175,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # \param q The \e %LRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -196,7 +182,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # \param q The \e %ConstLQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -204,7 +189,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # \param q The \e %LRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -212,7 +196,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # \param q The \e %ConstLQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -220,7 +203,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %LRealQuaternion instance.
-    # \param self The \e %LRealQuaternion instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -239,7 +221,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
-    # \param self The \e %LRealQuaternion instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %ConstLQuaternionExpression instance holding the result of the addition.
     # 
@@ -247,7 +228,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %LRealQuaternion instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLQuaternionExpression instance holding the result of the addition.
     # 
@@ -262,7 +242,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %LRealQuaternion instance holding the result of the subtraction.
     # 
@@ -270,7 +249,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %LRealQuaternion instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %LRealQuaternion instance holding the result of the subtraction.
     # 
@@ -285,7 +263,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLQuaternionExpression instance holding the result of the multiplication.
     # 
@@ -293,7 +270,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %LRealQuaternion instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLQuaternionExpression instance holding the result of the multiplication.
     # 
@@ -308,7 +284,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %LRealQuaternion instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLQuaternionExpression instance holding the result of the division.
     # 
@@ -316,7 +291,6 @@ class LRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
-    # \param self The \e %LRealQuaternion instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %ConstLQuaternionExpression instance holding the result of the division.
     # 

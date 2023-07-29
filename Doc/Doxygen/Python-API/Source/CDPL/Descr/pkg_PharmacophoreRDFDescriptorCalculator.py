@@ -33,22 +33,19 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreRDFDescriptorCalculator instance.
-    # \param self The \e %PharmacophoreRDFDescriptorCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: PharmacophoreRDFDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreRDFDescriptorCalculator instance.
-    # \param self The \e %PharmacophoreRDFDescriptorCalculator instance to initialize.
     # \param cntnr 
     # \param descr 
     # 
-    def __init__(cntnr: CDPL.Pharm.FeatureContainer, descr: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: Pharm.FeatureContainer, descr: Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PharmacophoreRDFDescriptorCalculator instance this method is called upon.
     # 
     # Different Python \e %PharmacophoreRDFDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PharmacophoreRDFDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -61,7 +58,6 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreRDFDescriptorCalculator instance \a calc.
-    # \param self The \e %PharmacophoreRDFDescriptorCalculator instance this method is called upon.
     # \param calc The \e %PharmacophoreRDFDescriptorCalculator instance to copy.
     # \return \a self
     # 
@@ -74,14 +70,14 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     # 
     # \note The coordinates function must be specified before calling calculate(), otherwise a zero distance for each feature pair will be used for the calculation.
     # 
-    def setFeature3DCoordinatesFunction(func: CDPL.Pharm.Feature3DCoordinatesFunction) -> None: pass
+    def setFeature3DCoordinatesFunction(func: Pharm.Feature3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief Allows to specify a custom feature pair weight function.
     # 
     # \param func A FeaturePairWeightFunction instance that wraps the target function.
     # 
-    def setFeaturePairWeightFunction(func: CDPL.Pharm.DoubleFeature2UIntFunctor) -> None: pass
+    def setFeaturePairWeightFunction(func: Pharm.DoubleFeature2UIntFunctor) -> None: pass
 
     ##
     # \brief Sets the number of desired radius incrementation steps.
@@ -186,7 +182,7 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     # \param cntnr 
     # \param descr 
     #
-    def calculate(cntnr: CDPL.Pharm.FeatureContainer, descr: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: Pharm.FeatureContainer, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)
 

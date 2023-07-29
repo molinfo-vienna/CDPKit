@@ -26,13 +26,11 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeOverlapFunction instance.
-    # \param self The \e %GaussianShapeOverlapFunction instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # 
     # Different Python \e %GaussianShapeOverlapFunction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeOverlapFunction instances \e a and \e b reference different C++ objects. 
@@ -61,13 +59,13 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setColorMatchFunction(func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
+    def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getColorMatchFunction() -> CDPL.Pharm.BoolSizeType2Functor: pass
+    def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief 
@@ -106,7 +104,7 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # \param coords 
     # \return 
     #
-    def calcOverlap(coords: CDPL.Math.Vector3DArray) -> float: pass
+    def calcOverlap(coords: Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
@@ -119,7 +117,7 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # \param coords 
     # \return 
     #
-    def calcColorOverlap(coords: CDPL.Math.Vector3DArray) -> float: pass
+    def calcColorOverlap(coords: Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
@@ -127,7 +125,7 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     # \param grad 
     # \return 
     #
-    def calcOverlapGradient(coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+    def calcOverlapGradient(coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
     objectID = property(getObjectID)
 

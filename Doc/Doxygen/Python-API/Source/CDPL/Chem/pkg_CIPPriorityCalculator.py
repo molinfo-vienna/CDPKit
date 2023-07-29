@@ -37,11 +37,10 @@ class CIPPriorityCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
     # \param priorities An array containing the calculated <em>CIP</em> priorities. The <em>CIP</em> priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the <em>CIP</em> priority of an atom is accessible via its index).
     # 
-    def __init__(molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, priorities: Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CIPPriorityCalculator instance this method is called upon.
     # 
     # Different Python \e %CIPPriorityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CIPPriorityCalculator instances \e a and \e b reference different C++ objects. 
@@ -70,7 +69,7 @@ class CIPPriorityCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the <em>CIP</em> priorities.
     # \param priorities An array containing the calculated <em>CIP</em> priorities. The <em>CIP</em> priorities are stored in the same order as the atoms appear in the atom list of the molecular graph (i.e. the <em>CIP</em> priority of an atom is accessible via its index).
     # 
-    def calculate(molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, priorities: Util.STArray) -> None: pass
 
     objectID = property(getObjectID)
 

@@ -36,7 +36,6 @@ class DefaultMultiConfMoleculeInputProcessor(MultiConfMoleculeInputProcessor):
 
     ##
     # \brief Initializes the \e %DefaultMultiConfMoleculeInputProcessor instance.
-    # \param self The \e %DefaultMultiConfMoleculeInputProcessor instance to initialize.
     # \param comp_names 
     # \param atom_flags 
     # \param bond_flags 

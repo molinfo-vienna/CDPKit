@@ -26,14 +26,12 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstDMatrixColumn instance.
-    # \param self The \e %ConstDMatrixColumn instance to initialize.
     # \param c 
     # 
     def __init__(c: ConstDMatrixColumn) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstDMatrixColumn instance.
-    # \param self The \e %ConstDMatrixColumn instance to initialize.
     # \param e 
     # \param i 
     # 
@@ -47,7 +45,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstDMatrixColumn instance this method is called upon.
     # 
     # Different Python \e %ConstDMatrixColumn instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstDMatrixColumn instances \e a and \e b reference different C++ objects. 
@@ -91,7 +88,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == c</tt>.
-    # \param self The \e %ConstDMatrixColumn instance this method is called upon.
     # \param c The \e %ConstDMatrixColumn instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -99,7 +95,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstDMatrixColumn instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -107,7 +102,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != c</tt>.
-    # \param self The \e %ConstDMatrixColumn instance this method is called upon.
     # \param c The \e %ConstDMatrixColumn instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -115,7 +109,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstDMatrixColumn instance this method is called upon.
     # \param e The \e %ConstDVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -143,7 +136,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %ConstDMatrixColumn instance.
-    # \param self The \e %ConstDMatrixColumn instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -162,7 +154,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstDMatrixColumn instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDVectorExpression instance holding the result of the addition.
     # 
@@ -170,7 +161,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstDMatrixColumn instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstDMatrixColumn instance holding the result of the subtraction.
     # 
@@ -178,7 +168,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstDMatrixColumn instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     # 
@@ -186,7 +175,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstDMatrixColumn instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     # 
@@ -194,7 +182,6 @@ class ConstDMatrixColumn(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstDMatrixColumn instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDVectorExpression instance holding the result of the division.
     # 

@@ -26,35 +26,30 @@ class AtomDensityGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomDensityGridCalculator instance.
-    # \param self The \e %AtomDensityGridCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomDensityGridCalculator instance.
-    # \param self The \e %AtomDensityGridCalculator instance to initialize.
     # \param func 
     # 
-    def __init__(func: CDPL.Chem.DoubleVector3D2AtomFunctor) -> None: pass
+    def __init__(func: Chem.DoubleVector3D2AtomFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomDensityGridCalculator instance.
-    # \param self The \e %AtomDensityGridCalculator instance to initialize.
     # \param density_func 
     # \param comb_func 
     # 
-    def __init__(density_func: CDPL.Chem.DoubleVector3D2AtomFunctor, comb_func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
+    def __init__(density_func: Chem.DoubleVector3D2AtomFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomDensityGridCalculator instance.
-    # \param self The \e %AtomDensityGridCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: AtomDensityGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomDensityGridCalculator instance this method is called upon.
     # 
     # Different Python \e %AtomDensityGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomDensityGridCalculator instances \e a and \e b reference different C++ objects. 
@@ -67,7 +62,6 @@ class AtomDensityGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomDensityGridCalculator instance \a calc.
-    # \param self The \e %AtomDensityGridCalculator instance this method is called upon.
     # \param calc The \e %AtomDensityGridCalculator instance to copy.
     # \return \a self
     # 
@@ -89,45 +83,45 @@ class AtomDensityGridCalculator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getDensityFunction() -> CDPL.Chem.DoubleVector3D2AtomFunctor: pass
+    def getDensityFunction() -> Chem.DoubleVector3D2AtomFunctor: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setDensityFunction(func: CDPL.Chem.DoubleVector3D2AtomFunctor) -> None: pass
+    def setDensityFunction(func: Chem.DoubleVector3D2AtomFunctor) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setDensityCombinationFunction(func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
+    def setDensityCombinationFunction(func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDensityCombinationFunction() -> CDPL.Math.DoubleDVectorFunctor: pass
+    def getDensityCombinationFunction() -> Math.DoubleDVectorFunctor: pass
 
     ##
     # \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
     # 
     # \param func The atom 3D-coordinates function.
     # 
-    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Chem.Atom3DCoordinatesFunction: pass
 
     ##
     # \brief 
     # \param atoms 
     # \param grid 
     #
-    def calculate(atoms: CDPL.Chem.AtomContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
+    def calculate(atoms: Chem.AtomContainer, grid: Grid.DSpatialGrid) -> None: pass
 
     objectID = property(getObjectID)
 

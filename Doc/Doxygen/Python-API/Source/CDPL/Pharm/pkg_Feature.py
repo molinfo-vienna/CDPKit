@@ -22,11 +22,10 @@
 ##
 # \brief Feature.
 # 
-class Feature(CDPL.Chem.Entity3D):
+class Feature(Chem.Entity3D):
 
     ##
     # \brief Initializes the \e %Feature instance.
-    # \param self The \e %Feature instance to initialize.
     # 
     def __init__() -> None: pass
 
@@ -46,7 +45,6 @@ class Feature(CDPL.Chem.Entity3D):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Feature instance \a ftr.
-    # \param self The \e %Feature instance this method is called upon.
     # \param ftr The \e %Feature instance to copy.
     # \return \a self
     # 
@@ -57,29 +55,28 @@ class Feature(CDPL.Chem.Entity3D):
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
+    def __getitem__(key: Base.LookupKey) -> Base.Any: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Feature instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
+    def __setitem__(key: Base.LookupKey, value: Base.Any) -> None: pass
 
     ##
     # \brief 
     # \param key 
     # \return 
     #
-    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: Base.LookupKey) -> bool: pass
 
     ##
     # \brief 

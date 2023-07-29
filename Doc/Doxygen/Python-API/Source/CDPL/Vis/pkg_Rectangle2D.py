@@ -35,7 +35,6 @@ class Rectangle2D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Rectangle2D instance.
-    # \param self The \e %Rectangle2D instance to initialize.
     # \param rect 
     # 
     def __init__(rect: Rectangle2D) -> None: pass
@@ -46,7 +45,7 @@ class Rectangle2D(Boost.Python.instance):
     # \param min The minimum point.
     # \param max The maximum point.
     # 
-    def __init__(min: CDPL.Math.Vector2D, max: CDPL.Math.Vector2D) -> None: pass
+    def __init__(min: Math.Vector2D, max: Math.Vector2D) -> None: pass
 
     ##
     # \brief Constructs a rectangle with the minimum point set to <em>(min_x, min_y)</em> and the maximum point set to <em>(max_x, max_y)</em>.
@@ -60,7 +59,6 @@ class Rectangle2D(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Rectangle2D instance this method is called upon.
     # 
     # Different Python \e %Rectangle2D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Rectangle2D instances \e a and \e b reference different C++ objects. 
@@ -73,7 +71,6 @@ class Rectangle2D(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Rectangle2D instance \a rect.
-    # \param self The \e %Rectangle2D instance this method is called upon.
     # \param rect The \e %Rectangle2D instance to copy.
     # \return \a self
     # 
@@ -97,7 +94,7 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \param pt The point to add.
     # 
-    def addPoint(pt: CDPL.Math.Vector2D) -> None: pass
+    def addPoint(pt: Math.Vector2D) -> None: pass
 
     ##
     # \brief Adds the point <em>(x, y)</em> to the current rectangle.
@@ -137,7 +134,7 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \return <tt>True</tt> if <em>pt</em> is within the boundary of the rectangle, and <tt>False</tt> otherwise. <br>
     # 
-    def containsPoint(pt: CDPL.Math.Vector2D) -> bool: pass
+    def containsPoint(pt: Math.Vector2D) -> bool: pass
 
     ##
     # \brief Tests if the point <em>(x, y)</em> is within the boundary of the rectangle.
@@ -178,7 +175,7 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \param pt The new minimum point.
     # 
-    def setMin(pt: CDPL.Math.Vector2D) -> None: pass
+    def setMin(pt: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the minimum point of the rectangle to <em>(x, y)</em>.
@@ -193,7 +190,7 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \param pt The new maximum point.
     # 
-    def setMax(pt: CDPL.Math.Vector2D) -> None: pass
+    def setMax(pt: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the maximum point of the rectangle to <em>(x, y)</em>.
@@ -209,7 +206,7 @@ class Rectangle2D(Boost.Python.instance):
     # \param min The new minimum point.
     # \param max The new maximum point.
     # 
-    def setBounds(min: CDPL.Math.Vector2D, max: CDPL.Math.Vector2D) -> None: pass
+    def setBounds(min: Math.Vector2D, max: Math.Vector2D) -> None: pass
 
     ##
     # \brief Sets the minimum point of the rectangle to <em>(min_x, min_y)</em> and the maximum point to <em>(max_x, max_y)</em>.
@@ -226,28 +223,28 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \return The minimum point of the rectangle.
     # 
-    def getMin() -> CDPL.Math.Vector2D: pass
+    def getMin() -> Math.Vector2D: pass
 
     ##
     # \brief Returns the maximum point of the rectangle.
     # 
     # \return The maximum point of the rectangle.
     # 
-    def getMax() -> CDPL.Math.Vector2D: pass
+    def getMax() -> Math.Vector2D: pass
 
     ##
     # \brief Calculates the center of the rectangle.
     # 
     # \return The center of the rectangle.
     # 
-    def getCenter() -> CDPL.Math.Vector2D: pass
+    def getCenter() -> Math.Vector2D: pass
 
     ##
     # \brief Calculates the center of the rectangle and stores the result in <em>ctr</em>.
     # 
     # \param ctr A vector storing the calculated center point.
     # 
-    def getCenter(ctr: CDPL.Math.Vector2D) -> None: pass
+    def getCenter(ctr: Math.Vector2D) -> None: pass
 
     ##
     # \brief Calculates the area of the rectangle.
@@ -293,11 +290,10 @@ class Rectangle2D(Boost.Python.instance):
     # 
     # \param vec The translation vector.
     # 
-    def translate(vec: CDPL.Math.Vector2D) -> None: pass
+    def translate(vec: Math.Vector2D) -> None: pass
 
     ##
     # \brief Returns a string representation of the \e %Rectangle2D instance.
-    # \param self The \e %Rectangle2D instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -324,15 +320,13 @@ class Rectangle2D(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the membership test operation <tt>pt in self</tt>.
-    # \param self The \e %Rectangle2D instance this method is called upon.
     # \param pt The value to test for membership.
     # \return The result of the membership test operation.
     # 
-    def __contains__(pt: CDPL.Math.Vector2D) -> bool: pass
+    def __contains__(pt: Math.Vector2D) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>rect in self</tt>.
-    # \param self The \e %Rectangle2D instance this method is called upon.
     # \param rect The value to test for membership.
     # \return The result of the membership test operation.
     # 

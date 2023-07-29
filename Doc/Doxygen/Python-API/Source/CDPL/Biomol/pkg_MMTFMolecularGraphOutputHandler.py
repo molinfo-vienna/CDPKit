@@ -22,10 +22,9 @@
 ##
 # \brief A handler for the output of molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF] format.
 # 
-class MMTFMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
+class MMTFMolecularGraphOutputHandler(Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %MMTFMolecularGraphOutputHandler instance.
-    # \param self The \e %MMTFMolecularGraphOutputHandler instance to initialize.
     # 
     def __init__() -> None: pass

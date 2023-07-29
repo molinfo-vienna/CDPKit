@@ -43,7 +43,7 @@ def generateInteractionPharmacophore(pharm: Pharmacophore, iactions: FeatureMapp
 # \param vdw_scaling_fact 
 # \return 
 #
-def removeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
+def removeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
 
 ##
 # \brief 
@@ -53,7 +53,7 @@ def removeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: CDPL.Chem.Ato
 # \param vdw_scaling_fact 
 # \return 
 #
-def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
+def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, vdw_scaling_fact: float = 1.0) -> bool: pass
 
 ##
 # \brief 
@@ -65,7 +65,7 @@ def resizeExclusionVolumesWithClashes(pharm: Pharmacophore, cntnr: CDPL.Chem.Ato
 # \param rel_dist 
 # \param append 
 #
-def createExclusionVolumes(pharm: Pharmacophore, cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
+def createExclusionVolumes(pharm: Pharmacophore, cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, tol: float = 0.0, min_dist: float = 0.0, rel_dist: bool = True, append: bool = True) -> None: pass
 
 ##
 # \brief 

@@ -70,14 +70,14 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
     # \param geom The value of the geometry property of the feature.
     # \param length The value of the length property of vector features.
     # 
-    def addIncludePattern(pattern: CDPL.Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
+    def addIncludePattern(pattern: Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
 
     ##
     # \brief Appends a new feature include pattern to the current set of patterns.
     # 
     # \param pattern The substructure search pattern of the feature.
     # 
-    def addExcludePattern(pattern: CDPL.Chem.MolecularGraph) -> None: pass
+    def addExcludePattern(pattern: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Clears the current set of include patterns.
@@ -104,11 +104,11 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
     # \param molgraph The molecular graph for which to perceive the features.
     # \param pharm The output pharmacophore where to add the generated features.
     # 
-    def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def generate(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
     # \param molgraph 
     # \param pharm 
     #
-    def __call__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __call__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass

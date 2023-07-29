@@ -23,1564 +23,1564 @@
 # \brief 
 # \param cntnr 
 #
-def clearAtomColorTableParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
+def clearAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasAtomColorTableParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAtomColorTableParameter(cntnr: CDPL.Base.ControlParameterContainer) -> ColorTable: pass
+def getAtomColorTableParameter(cntnr: Base.ControlParameterContainer) -> ColorTable: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param colors 
 #
-def setAtomColorTableParameter(cntnr: CDPL.Base.ControlParameterContainer, colors: ColorTable) -> None: pass
+def setAtomColorTableParameter(cntnr: Base.ControlParameterContainer, colors: ColorTable) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowStyleParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowStyleParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowStyleParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param style 
 #
-def setReactionArrowStyleParameter(cntnr: CDPL.Base.ControlParameterContainer, style: int) -> None: pass
+def setReactionArrowStyleParameter(cntnr: Base.ControlParameterContainer, style: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasBondLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param size 
 #
-def setBondLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+def setBondLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param size 
 #
-def setAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+def setAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSecondaryAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSecondaryAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSecondaryAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param size 
 #
-def setSecondaryAtomLabelSizeParameter(cntnr: CDPL.Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+def setSecondaryAtomLabelSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionPlusSignSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionPlusSignSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionPlusSignSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param size 
 #
-def setReactionPlusSignSizeParameter(cntnr: CDPL.Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+def setReactionPlusSignSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearRadicalElectronDotSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasRadicalElectronDotSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getRadicalElectronDotSizeParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param size 
 #
-def setRadicalElectronDotSizeParameter(cntnr: CDPL.Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
+def setRadicalElectronDotSizeParameter(cntnr: Base.ControlParameterContainer, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasBondLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param spacing 
 #
-def setBondLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
+def setBondLineSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionCenterLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionCenterLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionCenterLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param spacing 
 #
-def setReactionCenterLineSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
+def setReactionCenterLineSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearStereoBondHashSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasStereoBondHashSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getStereoBondHashSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param spacing 
 #
-def setStereoBondHashSpacingParameter(cntnr: CDPL.Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
+def setStereoBondHashSpacingParameter(cntnr: Base.ControlParameterContainer, spacing: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowHeadWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowHeadWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowHeadWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param width 
 #
-def setReactionArrowHeadWidthParameter(cntnr: CDPL.Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+def setReactionArrowHeadWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearStereoBondWedgeWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasStereoBondWedgeWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getStereoBondWedgeWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param width 
 #
-def setStereoBondWedgeWidthParameter(cntnr: CDPL.Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+def setStereoBondWedgeWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondLineWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasBondLineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondLineWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param width 
 #
-def setBondLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+def setBondLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionPlusSignLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionPlusSignLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionPlusSignLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param width 
 #
-def setReactionPlusSignLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+def setReactionPlusSignLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param width 
 #
-def setReactionArrowLineWidthParameter(cntnr: CDPL.Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+def setReactionArrowLineWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowShaftWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowShaftWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowShaftWidthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param width 
 #
-def setReactionArrowShaftWidthParameter(cntnr: CDPL.Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
+def setReactionArrowShaftWidthParameter(cntnr: Base.ControlParameterContainer, width: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowHeadLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowHeadLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowHeadLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param length 
 #
-def setReactionArrowHeadLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+def setReactionArrowHeadLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasBondLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondLengthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param length 
 #
-def setBondLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+def setBondLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionCenterLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionCenterLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionCenterLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param length 
 #
-def setReactionCenterLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+def setReactionCenterLineLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearDoubleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasDoubleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getDoubleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param length 
 #
-def setDoubleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+def setDoubleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearTripleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasTripleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getTripleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param length 
 #
-def setTripleBondTrimLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+def setTripleBondTrimLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param length 
 #
-def setReactionArrowLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
+def setReactionArrowLengthParameter(cntnr: Base.ControlParameterContainer, length: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasBondLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param margin 
 #
-def setBondLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
+def setBondLabelMarginParameter(cntnr: Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearAtomLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasAtomLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAtomLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param margin 
 #
-def setAtomLabelMarginParameter(cntnr: CDPL.Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
+def setAtomLabelMarginParameter(cntnr: Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionComponentMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionComponentMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionComponentMarginParameter(cntnr: CDPL.Base.ControlParameterContainer) -> SizeSpecification: pass
+def hasReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param margin 
 #
-def setReactionComponentMarginParameter(cntnr: CDPL.Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
+def setReactionComponentMarginParameter(cntnr: Base.ControlParameterContainer, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionAgentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionAgentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionAgentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param dir 
 #
-def setReactionAgentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer, dir: int) -> None: pass
+def setReactionAgentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer, dir: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionComponentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionComponentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionComponentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param dir 
 #
-def setReactionComponentLayoutDirectionParameter(cntnr: CDPL.Base.ControlParameterContainer, dir: int) -> None: pass
+def setReactionComponentLayoutDirectionParameter(cntnr: Base.ControlParameterContainer, dir: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Color: pass
+def hasBondColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param color 
 #
-def setBondColorParameter(cntnr: CDPL.Base.ControlParameterContainer, color: Color) -> None: pass
+def setBondColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBackgroundColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBackgroundColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBackgroundColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBackgroundColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Color: pass
+def hasBackgroundColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBackgroundColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param color 
 #
-def setBackgroundColorParameter(cntnr: CDPL.Base.ControlParameterContainer, color: Color) -> None: pass
+def setBackgroundColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearAtomColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasAtomColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearAtomColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAtomColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Color: pass
+def hasAtomColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param color 
 #
-def setAtomColorParameter(cntnr: CDPL.Base.ControlParameterContainer, color: Color) -> None: pass
+def setAtomColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionPlusSignColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionPlusSignColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionPlusSignColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Color: pass
+def hasReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param color 
 #
-def setReactionPlusSignColorParameter(cntnr: CDPL.Base.ControlParameterContainer, color: Color) -> None: pass
+def setReactionPlusSignColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionArrowColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionArrowColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionArrowColorParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionArrowColorParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Color: pass
+def hasReactionArrowColorParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionArrowColorParameter(cntnr: Base.ControlParameterContainer) -> Color: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param color 
 #
-def setReactionArrowColorParameter(cntnr: CDPL.Base.ControlParameterContainer, color: Color) -> None: pass
+def setReactionArrowColorParameter(cntnr: Base.ControlParameterContainer, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowStereoBondsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowStereoBondsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowStereoBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowStereoBondsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowStereoBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowStereoBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowStereoBondsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowStereoBondsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowChargesParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowChargesParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowIsotopesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowIsotopesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowIsotopesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowIsotopesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowIsotopesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowIsotopesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowIsotopesParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowIsotopesParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearUseCalculatedAtomCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasUseCalculatedAtomCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getUseCalculatedAtomCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param use 
 #
-def setUseCalculatedAtomCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer, use: bool) -> None: pass
+def setUseCalculatedAtomCoordinatesParameter(cntnr: Base.ControlParameterContainer, use: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowExplicitHydrogensParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowExplicitHydrogensParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowExplicitHydrogensParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowExplicitHydrogensParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowExplicitHydrogensParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowReactionPlusSignsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowReactionPlusSignsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowReactionPlusSignsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowReactionPlusSignsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowReactionPlusSignsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowCarbonsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowCarbonsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowCarbonsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowCarbonsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowCarbonsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowCarbonsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowCarbonsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowCarbonsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowRadicalElectronsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowRadicalElectronsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowRadicalElectronsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowRadicalElectronsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowRadicalElectronsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowBondReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowBondReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowBondReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowBondReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowBondReactionInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowAtomReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowAtomReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowAtomReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowAtomReactionInfosParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowAtomReactionInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowBondQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowBondQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowBondQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowBondQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowBondQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowAtomQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowAtomQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowAtomQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowAtomQueryInfosParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowAtomQueryInfosParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowReactionProductsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowReactionProductsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowReactionProductsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowReactionProductsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowReactionProductsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowReactionProductsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowReactionProductsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowReactionProductsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowReactionReactantsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowReactionReactantsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowReactionReactantsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowReactionReactantsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowReactionReactantsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowReactionAgentsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowReactionAgentsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowReactionAgentsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowReactionAgentsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowReactionAgentsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowNonCarbonHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowNonCarbonHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowNonCarbonHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowNonCarbonHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowNonCarbonHydrogenCountsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearShowHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasShowHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getShowHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param show 
 #
-def setShowHydrogenCountsParameter(cntnr: CDPL.Base.ControlParameterContainer, show: bool) -> None: pass
+def setShowHydrogenCountsParameter(cntnr: Base.ControlParameterContainer, show: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearAlignmentParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasAlignmentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAlignmentParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param alignment 
 #
-def setAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer, alignment: int) -> None: pass
+def setAlignmentParameter(cntnr: Base.ControlParameterContainer, alignment: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionAgentAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionAgentAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionAgentAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param alignment 
 #
-def setReactionAgentAlignmentParameter(cntnr: CDPL.Base.ControlParameterContainer, alignment: int) -> None: pass
+def setReactionAgentAlignmentParameter(cntnr: Base.ControlParameterContainer, alignment: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSizeAdjustmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSizeAdjustmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSizeAdjustmentParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param adjustment 
 #
-def setSizeAdjustmentParameter(cntnr: CDPL.Base.ControlParameterContainer, adjustment: int) -> None: pass
+def setSizeAdjustmentParameter(cntnr: Base.ControlParameterContainer, adjustment: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearBondLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasBondLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearBondLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getBondLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Font: pass
+def hasBondLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getBondLabelFontParameter(cntnr: Base.ControlParameterContainer) -> Font: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param font 
 #
-def setBondLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer, font: Font) -> None: pass
+def setBondLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Font: pass
+def hasAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> Font: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param font 
 #
-def setAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer, font: Font) -> None: pass
+def setAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearSecondaryAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasSecondaryAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getSecondaryAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Font: pass
+def hasSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer) -> Font: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param font 
 #
-def setSecondaryAtomLabelFontParameter(cntnr: CDPL.Base.ControlParameterContainer, font: Font) -> None: pass
+def setSecondaryAtomLabelFontParameter(cntnr: Base.ControlParameterContainer, font: Font) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearViewportParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasViewportParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearViewportParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getViewportParameter(cntnr: CDPL.Base.ControlParameterContainer) -> Rectangle2D: pass
+def hasViewportParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getViewportParameter(cntnr: Base.ControlParameterContainer) -> Rectangle2D: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param viewport 
 #
-def setViewportParameter(cntnr: CDPL.Base.ControlParameterContainer, viewport: Rectangle2D) -> None: pass
+def setViewportParameter(cntnr: Base.ControlParameterContainer, viewport: Rectangle2D) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionAgentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionAgentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionAgentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param layout 
 #
-def setReactionAgentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer, layout: int) -> None: pass
+def setReactionAgentLayoutParameter(cntnr: Base.ControlParameterContainer, layout: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearReactionComponentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasReactionComponentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getReactionComponentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param layout 
 #
-def setReactionComponentLayoutParameter(cntnr: CDPL.Base.ControlParameterContainer, layout: int) -> None: pass
+def setReactionComponentLayoutParameter(cntnr: Base.ControlParameterContainer, layout: int) -> None: pass

@@ -46,7 +46,6 @@ class XBondingInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %XBondingInteractionScore instance.
-    # \param self The \e %XBondingInteractionScore instance to initialize.
     # \param score 
     # 
     def __init__(score: XBondingInteractionScore) -> None: pass
@@ -106,7 +105,6 @@ class XBondingInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondingInteractionScore instance \a constr.
-    # \param self The \e %XBondingInteractionScore instance this method is called upon.
     # \param constr The \e %XBondingInteractionScore instance to copy.
     # \return \a self
     # 

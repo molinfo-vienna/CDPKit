@@ -24,7 +24,7 @@
 # 
 # <tt>PDFMolecularGraphWriter</tt> uses Vis.StructureView2D for the creation of 2D structure diagrams. All control-parameters and properties provided for the customization of Vis.StructureView2D are also supported by <tt>PDFMolecularGraphWriter</tt>.
 # 
-class PDFMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
+class PDFMolecularGraphWriter(Chem.MolecularGraphWriterBase):
 
     ##
     # \brief Constructs a <tt>PDFMolecularGraphWriter</tt> instance that will write the image data to the output stream <em>os</em>.
@@ -33,4 +33,4 @@ class PDFMolecularGraphWriter(CDPL.Chem.MolecularGraphWriterBase):
     # 
     # \note PDF is a binary format. To avoid data corruption, the output stream has to be opened in binary mode.
     # 
-    def __init__(os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: Base.OStream) -> None: pass

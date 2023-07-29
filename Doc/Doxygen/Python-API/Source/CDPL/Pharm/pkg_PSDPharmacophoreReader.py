@@ -29,7 +29,7 @@ class PSDPharmacophoreReader(PharmacophoreReaderBase):
     # 
     # \param is The input stream to read from.
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass
 
     ##
     # \brief Constructs a <tt>PSDPharmacophoreReader</tt> instance that will read the pharmacophore data from the input file <em>file_name</em>.

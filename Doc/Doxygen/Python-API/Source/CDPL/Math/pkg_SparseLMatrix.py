@@ -26,20 +26,17 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param self The \e %SparseLMatrix instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param self The \e %SparseLMatrix instance to initialize.
     # \param m 
     # 
     def __init__(m: SparseLMatrix) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param self The \e %SparseLMatrix instance to initialize.
     # \param m 
     # \param n 
     # 
@@ -47,35 +44,30 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param arg1 The \e %SparseLMatrix instance to initialize.
     # \param e 
     # 
     def __init__(e: ConstFMatrixExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param arg1 The \e %SparseLMatrix instance to initialize.
     # \param e 
     # 
     def __init__(e: ConstDMatrixExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param arg1 The \e %SparseLMatrix instance to initialize.
     # \param e 
     # 
     def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param arg1 The \e %SparseLMatrix instance to initialize.
     # \param e 
     # 
     def __init__(e: ConstULMatrixExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseLMatrix instance.
-    # \param arg1 The \e %SparseLMatrix instance to initialize.
     # \param a 
     # 
     def __init__(a: object) -> None: pass
@@ -100,7 +92,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # 
     # Different Python \e %SparseLMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SparseLMatrix instances \e a and \e b reference different C++ objects. 
@@ -113,7 +104,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param e The \e %ConstFMatrixExpression instance to copy.
     # \return \a self
     # 
@@ -121,7 +111,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param e The \e %ConstDMatrixExpression instance to copy.
     # \return \a self
     # 
@@ -129,7 +118,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to copy.
     # \return \a self
     # 
@@ -137,7 +125,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param e The \e %ConstULMatrixExpression instance to copy.
     # \return \a self
     # 
@@ -145,7 +132,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseLMatrix instance \a m.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param m The \e %SparseLMatrix instance to copy.
     # \return \a self
     # 
@@ -153,7 +139,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param a The \e %object instance to copy.
     # \return \a self
     # 
@@ -228,7 +213,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param m The \e %SparseLMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -236,7 +220,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -244,7 +227,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param m The \e %SparseLMatrix instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -252,7 +234,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -260,7 +241,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %SparseLMatrix instance.
-    # \param self The \e %SparseLMatrix instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass
@@ -279,7 +259,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %SparseLMatrix instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLMatrixExpression instance holding the result of the addition.
     # 
@@ -287,7 +266,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %SparseLMatrix instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %SparseLMatrix instance holding the result of the subtraction.
     # 
@@ -295,7 +273,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %SparseLMatrix instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     # 
@@ -303,7 +280,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %SparseLMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     # 
@@ -311,7 +287,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %SparseLMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     # 
@@ -319,7 +294,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %SparseLMatrix instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLMatrixExpression instance holding the result of the division.
     # 
@@ -348,7 +322,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += m</tt>.
-    # \param self The \e %SparseLMatrix instance acting as in-place addend.
     # \param m Specifies the second addend.
     # \return The updated \e %SparseLMatrix instance \a self.
     # 
@@ -356,7 +329,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %SparseLMatrix instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %SparseLMatrix instance \a self.
     # 
@@ -364,7 +336,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= m</tt>.
-    # \param self The \e %SparseLMatrix instance acting as in-place minuend.
     # \param m Specifies the subtrahend.
     # \return The updated \e %SparseLMatrix instance \a self.
     # 
@@ -372,7 +343,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %SparseLMatrix instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %SparseLMatrix instance \a self.
     # 
@@ -380,7 +350,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %SparseLMatrix instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %SparseLMatrix instance \a self.
     # 
@@ -388,7 +357,6 @@ class SparseLMatrix(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %SparseLMatrix instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %SparseLMatrix instance \a self.
     # 

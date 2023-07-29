@@ -26,13 +26,11 @@ class FragmentConformerGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentConformerGenerator instance.
-    # \param self The \e %FragmentConformerGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # 
     # Different Python \e %FragmentConformerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentConformerGenerator instances \e a and \e b reference different C++ objects. 
@@ -84,7 +82,7 @@ class FragmentConformerGenerator(Boost.Python.instance):
     # \param molgraph 
     # \return 
     #
-    def generate(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+    def generate(molgraph: Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
@@ -92,13 +90,13 @@ class FragmentConformerGenerator(Boost.Python.instance):
     # \param frag_type 
     # \return 
     #
-    def generate(molgraph: CDPL.Chem.MolecularGraph, frag_type: int) -> int: pass
+    def generate(molgraph: Chem.MolecularGraph, frag_type: int) -> int: pass
 
     ##
     # \brief 
     # \param molgraph 
     #
-    def setConformers(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setConformers(molgraph: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 

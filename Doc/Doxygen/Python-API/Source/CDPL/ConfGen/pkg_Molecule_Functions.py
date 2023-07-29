@@ -24,4 +24,4 @@
 # \param mol 
 # \param canonicalize 
 #
-def prepareForConformerGeneration(mol: CDPL.Chem.Molecule, canonicalize: bool = False) -> None: pass
+def prepareForConformerGeneration(mol: Chem.Molecule, canonicalize: bool = False) -> None: pass

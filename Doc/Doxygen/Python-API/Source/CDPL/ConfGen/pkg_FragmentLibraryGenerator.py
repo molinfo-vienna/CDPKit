@@ -26,20 +26,17 @@ class FragmentLibraryGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentLibraryGenerator instance.
-    # \param self The \e %FragmentLibraryGenerator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentLibraryGenerator instance.
-    # \param self The \e %FragmentLibraryGenerator instance to initialize.
     # \param lib 
     # 
     def __init__(lib: FragmentLibrary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # 
     # Different Python \e %FragmentLibraryGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibraryGenerator instances \e a and \e b reference different C++ objects. 
@@ -104,7 +101,7 @@ class FragmentLibraryGenerator(Boost.Python.instance):
     # \param frag 
     # \return 
     #
-    def process(self: MolecularGraph, frag: CDPL.Chem.MolecularGraph) -> int: pass
+    def process(self: MolecularGraph, frag: Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 

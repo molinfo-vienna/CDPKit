@@ -27,14 +27,14 @@
 # \param db_o_only 
 # \return 
 #
-def isAmideBond(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
+def isAmideBond(bond: Chem.Bond, molgraph: Chem.MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def isHydrogenBond(bond: CDPL.Chem.Bond) -> bool: pass
+def isHydrogenBond(bond: Chem.Bond) -> bool: pass
 
 ##
 # \brief 
@@ -45,7 +45,7 @@ def isHydrogenBond(bond: CDPL.Chem.Bond) -> bool: pass
 # \param amide_bonds 
 # \return 
 #
-def isRotatable(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, h_rotors: bool, ring_bonds: bool, amide_bonds: bool) -> bool: pass
+def isRotatable(bond: Chem.Bond, molgraph: Chem.MolecularGraph, h_rotors: bool, ring_bonds: bool, amide_bonds: bool) -> bool: pass
 
 ##
 # \brief 
@@ -54,7 +54,7 @@ def isRotatable(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, h_roto
 # \param size 
 # \return 
 #
-def isInRingOfSize(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, size: int) -> bool: pass
+def isInRingOfSize(bond: Chem.Bond, molgraph: Chem.MolecularGraph, size: int) -> bool: pass
 
 ##
 # \brief 
@@ -62,34 +62,34 @@ def isInRingOfSize(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, siz
 # \param molgraph 
 # \return 
 #
-def isInRing(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isInRing(bond: Chem.Bond, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
 # \param bond 
 #
-def clearMHMOPiOrder(bond: CDPL.Chem.Bond) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def hasMHMOPiOrder(bond: CDPL.Chem.Bond) -> bool: pass
+def clearMHMOPiOrder(bond: Chem.Bond) -> None: pass
 
 ##
 # \brief 
 # \param bond 
 # \return 
 #
-def getMHMOPiOrder(bond: CDPL.Chem.Bond) -> float: pass
+def hasMHMOPiOrder(bond: Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getMHMOPiOrder(bond: Chem.Bond) -> float: pass
 
 ##
 # \brief 
 # \param bond 
 # \param order 
 #
-def setMHMOPiOrder(bond: CDPL.Chem.Bond, order: float) -> None: pass
+def setMHMOPiOrder(bond: Chem.Bond, order: float) -> None: pass
 
 ##
 # \brief 
@@ -97,7 +97,7 @@ def setMHMOPiOrder(bond: CDPL.Chem.Bond, order: float) -> None: pass
 # \param molgraph 
 # \return 
 #
-def isHeteroAtomHydrogenRotor(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isHeteroAtomHydrogenRotor(bond: Chem.Bond, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -105,7 +105,7 @@ def isHeteroAtomHydrogenRotor(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.Molecula
 # \param molgraph 
 # \return 
 #
-def isHydrogenRotor(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isHydrogenRotor(bond: Chem.Bond, molgraph: Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -113,7 +113,7 @@ def isHydrogenRotor(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) ->
 # \param molgraph 
 # \return 
 #
-def getNumContainingSSSRRings(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getNumContainingSSSRRings(bond: Chem.Bond, molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -122,4 +122,4 @@ def getNumContainingSSSRRings(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.Molecula
 # \param damping 
 # \return 
 #
-def calcPolarizability(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, damping: float = 0.75) -> float: pass
+def calcPolarizability(bond: Chem.Bond, molgraph: Chem.MolecularGraph, damping: float = 0.75) -> float: pass

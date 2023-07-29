@@ -39,11 +39,10 @@ class BCUTDescriptorCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the <em>BCUT</em> descriptor.
     # \param descr The calculated <em>BCUT</em> descriptor.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, descr: CDPL.Math.DVector) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, descr: Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BCUTDescriptorCalculator instance this method is called upon.
     # 
     # Different Python \e %BCUTDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BCUTDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -61,7 +60,7 @@ class BCUTDescriptorCalculator(Boost.Python.instance):
     # 
     # \see Descr.BurdenMatrixGenerator.setAtomWeightFunction()
     # 
-    def setAtomWeightFunction(func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setAtomWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief Calculates the <em>BCUT</em> descriptor of the molecular graph <em>molgraph</em>.
@@ -71,6 +70,6 @@ class BCUTDescriptorCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to calculate the <em>BCUT</em> descriptor.
     # \param descr The calculated <em>BCUT</em> descriptor.
     # 
-    def calculate(molgraph: CDPL.Chem.MolecularGraph, descr: CDPL.Math.DVector) -> None: pass
+    def calculate(molgraph: Chem.MolecularGraph, descr: Math.DVector) -> None: pass
 
     objectID = property(getObjectID)

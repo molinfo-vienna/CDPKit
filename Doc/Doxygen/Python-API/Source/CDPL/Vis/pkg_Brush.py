@@ -113,7 +113,6 @@ class Brush(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Brush instance.
-    # \param self The \e %Brush instance to initialize.
     # \param brush 
     # 
     def __init__(brush: Brush) -> None: pass
@@ -135,7 +134,6 @@ class Brush(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Brush instance this method is called upon.
     # 
     # Different Python \e %Brush instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Brush instances \e a and \e b reference different C++ objects. 
@@ -148,7 +146,6 @@ class Brush(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Brush instance \a brush.
-    # \param self The \e %Brush instance this method is called upon.
     # \param brush The \e %Brush instance to copy.
     # \return \a self
     # 

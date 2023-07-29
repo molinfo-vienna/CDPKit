@@ -33,20 +33,17 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # \param bs 
     # 
     def __init__(bs: BitSet) -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # \param num_bits 
     # \param value 
     # 
@@ -54,14 +51,12 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # \param bit_str 
     # 
     def __init__(bit_str: str) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BitSet instance this method is called upon.
     # 
     # Different Python \e %BitSet instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BitSet instances \e a and \e b reference different C++ objects. 
@@ -80,7 +75,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BitSet instance \a bs.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to copy.
     # \return \a self
     # 
@@ -251,7 +245,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - bs</tt>.
-    # \param self The \e %BitSet instance acting as minuend.
     # \param bs Specifies the subtrahend.
     # \return A \e %BitSet instance holding the result of the subtraction.
     # 
@@ -280,7 +273,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= bs</tt>.
-    # \param self The \e %BitSet instance acting as in-place minuend.
     # \param bs Specifies the subtrahend.
     # \return The updated \e %BitSet instance \a self.
     # 
@@ -328,7 +320,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -336,7 +327,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -344,7 +334,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -352,7 +341,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -360,7 +348,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -368,7 +355,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -394,7 +380,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Returns a string representation of the \e %BitSet instance.
-    # \param self The \e %BitSet instance this method is called upon.
     # \return The generated string representation.
     # 
     def __str__() -> str: pass

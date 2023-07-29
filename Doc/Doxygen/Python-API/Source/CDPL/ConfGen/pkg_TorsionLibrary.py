@@ -26,13 +26,11 @@ class TorsionLibrary(TorsionCategory):
 
     ##
     # \brief Initializes the \e %TorsionLibrary instance.
-    # \param self The \e %TorsionLibrary instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionLibrary instance.
-    # \param self The \e %TorsionLibrary instance to initialize.
     # \param lib 
     # 
     def __init__(lib: TorsionLibrary) -> None: pass
@@ -41,7 +39,7 @@ class TorsionLibrary(TorsionCategory):
     # \brief 
     # \param is 
     #
-    def load(is: CDPL.Base.IStream) -> None: pass
+    def load(is: Base.IStream) -> None: pass
 
     ##
     # \brief 
@@ -52,11 +50,10 @@ class TorsionLibrary(TorsionCategory):
     # \brief 
     # \param os 
     #
-    def save(os: CDPL.Base.OStream) -> None: pass
+    def save(os: Base.OStream) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionLibrary instance \a lib.
-    # \param self The \e %TorsionLibrary instance this method is called upon.
     # \param lib The \e %TorsionLibrary instance to copy.
     # \return \a self
     # 

@@ -26,13 +26,11 @@ class UnitLower(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %UnitLower instance.
-    # \param self The \e %UnitLower instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UnitLower instance.
-    # \param self The \e %UnitLower instance to initialize.
     # \param t 
     # 
     def __init__(t: UnitLower) -> None: pass

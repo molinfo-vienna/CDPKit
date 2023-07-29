@@ -51,7 +51,6 @@ class SurfaceAtomExtractor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SurfaceAtomExtractor instance.
-    # \param self The \e %SurfaceAtomExtractor instance to initialize.
     # \param extractor 
     # 
     def __init__(extractor: SurfaceAtomExtractor) -> None: pass
@@ -67,7 +66,6 @@ class SurfaceAtomExtractor(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # 
     # Different Python \e %SurfaceAtomExtractor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SurfaceAtomExtractor instances \e a and \e b reference different C++ objects. 
@@ -181,7 +179,6 @@ class SurfaceAtomExtractor(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SurfaceAtomExtractor instance \a extractor.
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param extractor The \e %SurfaceAtomExtractor instance to copy.
     # \return \a self
     # 

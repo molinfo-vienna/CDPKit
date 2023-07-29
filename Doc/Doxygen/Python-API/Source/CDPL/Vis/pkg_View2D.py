@@ -24,11 +24,10 @@
 # 
 # Subclasses of <tt>View2D</tt> implement the generation of two-dimensional visual representations of data objects with a given type. According to the <em>Model-View-Controller</em> [\ref WMVC] concept, a <tt>View2D</tt> instance thus plays the role of the <em>View</em> for a <em>Model</em> represented by the visualized data object. The rendering of a model's visual represention on a given target device is performed by the render() method, which uses a passed Vis.Renderer2DRenderer2D instance for drawing the graphical primitives constituting the overall depiction. The behaviour of a <tt>View2D</tt> instance can be configured using control-parameters and properties (if the type of the data object is a direct or indirect subclass of Base.PropertyContainer). Control-parameters can be modified and queried using the methods provided by Base.ControlParameterContainer which is a public base class of <tt>View2D</tt>.
 # 
-class View2D(CDPL.Base.ControlParameterContainer):
+class View2D(Base.ControlParameterContainer):
 
     ##
     # \brief Initializes the \e %View2D instance.
-    # \param self The \e %View2D instance to initialize.
     # 
     def __init__() -> None: pass
 

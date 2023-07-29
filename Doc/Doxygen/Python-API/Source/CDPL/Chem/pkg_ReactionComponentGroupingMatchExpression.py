@@ -28,7 +28,6 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Initializes the \e %ReactionComponentGroupingMatchExpression instance.
-    # \param self The \e %ReactionComponentGroupingMatchExpression instance to initialize.
     # \param expr 
     # 
     def __init__(expr: ReactionComponentGroupingMatchExpression) -> None: pass
@@ -42,7 +41,6 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionComponentGroupingMatchExpression instance \a expr.
-    # \param self The \e %ReactionComponentGroupingMatchExpression instance this method is called upon.
     # \param expr The \e %ReactionComponentGroupingMatchExpression instance to copy.
     # \return \a self
     # 

@@ -77,14 +77,14 @@ def generateFeatureTypeHistogram(cntnr: FeatureContainer, hist: FeatureTypeHisto
 # \param vdw_factor 
 # \return 
 #
-def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: CDPL.Chem.AtomContainer, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, xform: CDPL.Math.Matrix4D, vdw_factor: float = 1.0) -> bool: pass
+def checkForExclusionVolumeClashes(ftr_cntnr: FeatureContainer, atom_cntnr: Chem.AtomContainer, coords_func: Chem.Atom3DCoordinatesFunction, xform: Math.Matrix4D, vdw_factor: float = 1.0) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param mtx 
 #
-def transform3DCoordinates(cntnr: FeatureContainer, mtx: CDPL.Math.Matrix4D) -> None: pass
+def transform3DCoordinates(cntnr: FeatureContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##
 # \brief 
@@ -92,7 +92,7 @@ def transform3DCoordinates(cntnr: FeatureContainer, mtx: CDPL.Math.Matrix4D) -> 
 # \param atoms 
 # \param append 
 #
-def getFeatureAtoms(cntnr: FeatureContainer, atoms: CDPL.Chem.Fragment, append: bool = False) -> None: pass
+def getFeatureAtoms(cntnr: FeatureContainer, atoms: Chem.Fragment, append: bool = False) -> None: pass
 
 ##
 # \brief 

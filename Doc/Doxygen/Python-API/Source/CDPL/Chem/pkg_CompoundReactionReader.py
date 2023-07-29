@@ -26,7 +26,6 @@ class CompoundReactionReader(ReactionReaderBase):
 
     ##
     # \brief Initializes the \e %CompoundReactionReader instance.
-    # \param self The \e %CompoundReactionReader instance to initialize.
     # 
     def __init__() -> None: pass
 

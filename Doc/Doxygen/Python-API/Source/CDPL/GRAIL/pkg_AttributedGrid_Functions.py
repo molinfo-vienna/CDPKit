@@ -23,52 +23,52 @@
 # \brief 
 # \param grid 
 #
-def clearFeatureType(grid: CDPL.Grid.AttributedGrid) -> None: pass
+def clearFeatureType(grid: Grid.AttributedGrid) -> None: pass
 
 ##
 # \brief 
 # \param grid 
 # \return 
 #
-def hasFeatureType(grid: CDPL.Grid.AttributedGrid) -> bool: pass
+def hasFeatureType(grid: Grid.AttributedGrid) -> bool: pass
 
 ##
 # \brief 
 # \param grid 
 # \return 
 #
-def getFeatureType(grid: CDPL.Grid.AttributedGrid) -> int: pass
+def getFeatureType(grid: Grid.AttributedGrid) -> int: pass
 
 ##
 # \brief 
 # \param grid 
 #
-def clearTargetFeatureType(grid: CDPL.Grid.AttributedGrid) -> None: pass
-
-##
-# \brief 
-# \param grid 
-# \return 
-#
-def hasTargetFeatureType(grid: CDPL.Grid.AttributedGrid) -> bool: pass
+def clearTargetFeatureType(grid: Grid.AttributedGrid) -> None: pass
 
 ##
 # \brief 
 # \param grid 
 # \return 
 #
-def getTargetFeatureType(grid: CDPL.Grid.AttributedGrid) -> int: pass
+def hasTargetFeatureType(grid: Grid.AttributedGrid) -> bool: pass
+
+##
+# \brief 
+# \param grid 
+# \return 
+#
+def getTargetFeatureType(grid: Grid.AttributedGrid) -> int: pass
 
 ##
 # \brief 
 # \param grid 
 # \param type 
 #
-def setTargetFeatureType(grid: CDPL.Grid.AttributedGrid, type: int) -> None: pass
+def setTargetFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass
 
 ##
 # \brief 
 # \param grid 
 # \param type 
 #
-def setFeatureType(grid: CDPL.Grid.AttributedGrid, type: int) -> None: pass
+def setFeatureType(grid: Grid.AttributedGrid, type: int) -> None: pass

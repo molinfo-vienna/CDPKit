@@ -31,7 +31,6 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %MaxScoreFunctor instance.
-        # \param self The \e %MaxScoreFunctor instance to initialize.
         # 
         def __init__() -> None: pass
 
@@ -40,7 +39,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         # \param scores 
         # \return 
         #
-        def __call__(scores: CDPL.Math.DVector) -> float: pass
+        def __call__(scores: Math.DVector) -> float: pass
 
     ##
     # \brief 
@@ -49,7 +48,6 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %ScoreSumFunctor instance.
-        # \param self The \e %ScoreSumFunctor instance to initialize.
         # 
         def __init__() -> None: pass
 
@@ -58,39 +56,34 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
         # \param scores 
         # \return 
         #
-        def __call__(scores: CDPL.Math.DVector) -> float: pass
+        def __call__(scores: Math.DVector) -> float: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
-    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
-    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # \param func 
     # 
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
-    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # \param scoring_func 
     # \param comb_func 
     # 
-    def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
+    def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
-    # \param self The \e %FeatureInteractionScoreGridCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: FeatureInteractionScoreGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureInteractionScoreGridCalculator instance this method is called upon.
     # 
     # Different Python \e %FeatureInteractionScoreGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureInteractionScoreGridCalculator instances \e a and \e b reference different C++ objects. 
@@ -103,7 +96,6 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreGridCalculator instance \a calc.
-    # \param self The \e %FeatureInteractionScoreGridCalculator instance this method is called upon.
     # \param calc The \e %FeatureInteractionScoreGridCalculator instance to copy.
     # \return \a self
     # 
@@ -137,25 +129,25 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setScoreCombinationFunction(func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
+    def setScoreCombinationFunction(func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getScoreCombinationFunction() -> CDPL.Math.DoubleDVectorFunctor: pass
+    def getScoreCombinationFunction() -> Math.DoubleDVectorFunctor: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setFeatureSelectionPredicate(func: CDPL.Pharm.BoolFeatureFunctor) -> None: pass
+    def setFeatureSelectionPredicate(func: Pharm.BoolFeatureFunctor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getFeatureSelectionPredicate() -> CDPL.Pharm.BoolFeatureFunctor: pass
+    def getFeatureSelectionPredicate() -> Pharm.BoolFeatureFunctor: pass
 
     ##
     # \brief 
@@ -174,7 +166,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     # \param tgt_ftrs 
     # \param grid 
     #
-    def calculate(tgt_ftrs: CDPL.Pharm.FeatureContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
+    def calculate(tgt_ftrs: Pharm.FeatureContainer, grid: Grid.DSpatialGrid) -> None: pass
 
     objectID = property(getObjectID)
 

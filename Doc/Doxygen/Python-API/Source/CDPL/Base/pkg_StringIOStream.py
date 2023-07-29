@@ -26,7 +26,6 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %StringIOStream instance.
-    # \param self The \e %StringIOStream instance to initialize.
     # \param string 
     # \param mode 
     # 
@@ -34,11 +33,10 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %StringIOStream instance.
-    # \param self The \e %StringIOStream instance to initialize.
     # \param string 
     # \param mode 
     # 
-    def __init__(string: str = '', mode: OpenMode = CDPL.Base.OpenMode(24)) -> None: pass
+    def __init__(string: str = '', mode: OpenMode = IOStream.OpenMode(24)) -> None: pass
 
     ##
     # \brief 

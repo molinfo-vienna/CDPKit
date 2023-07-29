@@ -26,21 +26,18 @@ class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FileScreeningHitCollector instance.
-    # \param self The \e %FileScreeningHitCollector instance to initialize.
     # \param collector 
     # 
     def __init__(collector: FileScreeningHitCollector) -> None: pass
 
     ##
     # \brief Initializes the \e %FileScreeningHitCollector instance.
-    # \param self The \e %FileScreeningHitCollector instance to initialize.
     # \param writer 
     # 
-    def __init__(writer: CDPL.Chem.MolecularGraphWriterBase) -> None: pass
+    def __init__(writer: Chem.MolecularGraphWriterBase) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FileScreeningHitCollector instance this method is called upon.
     # 
     # Different Python \e %FileScreeningHitCollector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FileScreeningHitCollector instances \e a and \e b reference different C++ objects. 
@@ -53,7 +50,6 @@ class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FileScreeningHitCollector instance \a collector.
-    # \param self The \e %FileScreeningHitCollector instance this method is called upon.
     # \param collector The \e %FileScreeningHitCollector instance to copy.
     # \return \a self
     # 
@@ -63,13 +59,13 @@ class FileScreeningHitCollector(Boost.Python.instance):
     # \brief 
     # \param writer 
     #
-    def setDataWriter(writer: CDPL.Chem.MolecularGraphWriterBase) -> None: pass
+    def setDataWriter(writer: Chem.MolecularGraphWriterBase) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDataWriter() -> CDPL.Chem.MolecularGraphWriterBase: pass
+    def getDataWriter() -> Chem.MolecularGraphWriterBase: pass
 
     ##
     # \brief 

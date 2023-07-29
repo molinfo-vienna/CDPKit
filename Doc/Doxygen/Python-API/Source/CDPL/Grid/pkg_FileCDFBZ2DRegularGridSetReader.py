@@ -26,8 +26,7 @@ class FileCDFBZ2DRegularGridSetReader(DRegularGridSetReaderBase):
 
     ##
     # \brief Initializes the \e %FileCDFBZ2DRegularGridSetReader instance.
-    # \param self The \e %FileCDFBZ2DRegularGridSetReader instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = Base.IOStream.OpenMode(12)) -> None: pass

@@ -26,13 +26,11 @@ class TorsionRuleMatcher(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionRuleMatcher instance.
-    # \param self The \e %TorsionRuleMatcher instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionRuleMatcher instance.
-    # \param self The \e %TorsionRuleMatcher instance to initialize.
     # \param lib 
     # 
     def __init__(lib: TorsionLibrary) -> None: pass
@@ -110,11 +108,10 @@ class TorsionRuleMatcher(Boost.Python.instance):
     # \param append 
     # \return 
     #
-    def findMatches(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, append: bool = False) -> bool: pass
+    def findMatches(bond: Chem.Bond, molgraph: Chem.MolecularGraph, append: bool = False) -> bool: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # 
     # Different Python \e %TorsionRuleMatcher instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRuleMatcher instances \e a and \e b reference different C++ objects. 

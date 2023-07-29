@@ -26,7 +26,6 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %FileIOStream instance.
-    # \param self The \e %FileIOStream instance to initialize.
     # \param file_name 
     # \param mode 
     # 
@@ -34,11 +33,10 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %FileIOStream instance.
-    # \param self The \e %FileIOStream instance to initialize.
     # \param file_name 
     # \param mode 
     # 
-    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode.IN) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = IOStream.OpenMode.IN) -> None: pass
 
     ##
     # \brief 

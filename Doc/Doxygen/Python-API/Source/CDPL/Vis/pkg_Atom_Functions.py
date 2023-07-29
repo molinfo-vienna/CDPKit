@@ -23,187 +23,187 @@
 # \brief 
 # \param atom 
 #
-def clearLabelSize(atom: CDPL.Chem.Atom) -> None: pass
+def clearLabelSize(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def hasLabelSize(atom: CDPL.Chem.Atom) -> bool: pass
+def hasLabelSize(atom: Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getLabelSize(atom: CDPL.Chem.Atom) -> SizeSpecification: pass
+def getLabelSize(atom: Chem.Atom) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param atom 
 # \param size 
 #
-def setLabelSize(atom: CDPL.Chem.Atom, size: SizeSpecification) -> None: pass
+def setLabelSize(atom: Chem.Atom, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearSecondaryLabelSize(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasSecondaryLabelSize(atom: CDPL.Chem.Atom) -> bool: pass
+def clearSecondaryLabelSize(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getSecondaryLabelSize(atom: CDPL.Chem.Atom) -> SizeSpecification: pass
+def hasSecondaryLabelSize(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getSecondaryLabelSize(atom: Chem.Atom) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param atom 
 # \param size 
 #
-def setSecondaryLabelSize(atom: CDPL.Chem.Atom, size: SizeSpecification) -> None: pass
+def setSecondaryLabelSize(atom: Chem.Atom, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearRadicalElectronDotSize(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasRadicalElectronDotSize(atom: CDPL.Chem.Atom) -> bool: pass
+def clearRadicalElectronDotSize(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getRadicalElectronDotSize(atom: CDPL.Chem.Atom) -> SizeSpecification: pass
+def hasRadicalElectronDotSize(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getRadicalElectronDotSize(atom: Chem.Atom) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param atom 
 # \param size 
 #
-def setRadicalElectronDotSize(atom: CDPL.Chem.Atom, size: SizeSpecification) -> None: pass
+def setRadicalElectronDotSize(atom: Chem.Atom, size: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearLabelMargin(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasLabelMargin(atom: CDPL.Chem.Atom) -> bool: pass
+def clearLabelMargin(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getLabelMargin(atom: CDPL.Chem.Atom) -> SizeSpecification: pass
+def hasLabelMargin(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getLabelMargin(atom: Chem.Atom) -> SizeSpecification: pass
 
 ##
 # \brief 
 # \param atom 
 # \param margin 
 #
-def setLabelMargin(atom: CDPL.Chem.Atom, margin: SizeSpecification) -> None: pass
+def setLabelMargin(atom: Chem.Atom, margin: SizeSpecification) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearColor(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasColor(atom: CDPL.Chem.Atom) -> bool: pass
+def clearColor(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getColor(atom: CDPL.Chem.Atom) -> Color: pass
+def hasColor(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getColor(atom: Chem.Atom) -> Color: pass
 
 ##
 # \brief 
 # \param atom 
 # \param color 
 #
-def setColor(atom: CDPL.Chem.Atom, color: Color) -> None: pass
+def setColor(atom: Chem.Atom, color: Color) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearLabelFont(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasLabelFont(atom: CDPL.Chem.Atom) -> bool: pass
+def clearLabelFont(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getLabelFont(atom: CDPL.Chem.Atom) -> Font: pass
+def hasLabelFont(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getLabelFont(atom: Chem.Atom) -> Font: pass
 
 ##
 # \brief 
 # \param atom 
 # \param font 
 #
-def setLabelFont(atom: CDPL.Chem.Atom, font: Font) -> None: pass
+def setLabelFont(atom: Chem.Atom, font: Font) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 #
-def clearSecondaryLabelFont(atom: CDPL.Chem.Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasSecondaryLabelFont(atom: CDPL.Chem.Atom) -> bool: pass
+def clearSecondaryLabelFont(atom: Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getSecondaryLabelFont(atom: CDPL.Chem.Atom) -> Font: pass
+def hasSecondaryLabelFont(atom: Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getSecondaryLabelFont(atom: Chem.Atom) -> Font: pass
 
 ##
 # \brief 
 # \param atom 
 # \param font 
 #
-def setSecondaryLabelFont(atom: CDPL.Chem.Atom, font: Font) -> None: pass
+def setSecondaryLabelFont(atom: Chem.Atom, font: Font) -> None: pass

@@ -22,7 +22,7 @@
 ##
 # \brief HierarchyViewNode.
 # 
-class HierarchyViewNode(CDPL.Chem.Fragment):
+class HierarchyViewNode(Chem.Fragment):
 
     ##
     # \brief 

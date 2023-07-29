@@ -200,7 +200,7 @@ def getProvidedDocBlock(key, func_data, func_name, class_name, is_static):
     rc = []
     
     for line in doc_block[1:]:
-        if not is_static and HIDE_SELF_ARG and line.lstrip().startswith('# \\param @A0@'):
+        if not is_static and HIDE_SELF_ARG and line.lstrip().startswith('\\param @A0@'):
             continue
  
         line = line.replace('@CN@', class_name).replace('@MN@', func_name).replace('@RT@', func_data['ret_type'])
@@ -337,9 +337,16 @@ def stripExtModuleName(name):
     name = name.replace('._descr', '')
     name = name.replace('._molprop', '')
     name = name.replace('._grail', '')
+
+    if sys.argv[1] != 'CDPL.Base':
+        name = name.replace('CDPL.Base.OpenMode', 'Base.IOStream.OpenMode')
+    else:
+        name = name.replace('CDPL.Base.OpenMode', 'IOStream.OpenMode')
+                
     name = name.replace('OpenMode24', 'OpenMode(24)')
     name = name.replace('OpenMode60', 'OpenMode(60)')
-
+    name = name.replace('OpenMode12', 'OpenMode(12)')
+    
     return name
     
 def cleanModuleName(name):
@@ -349,7 +356,7 @@ def cleanModuleName(name):
     #name = name.replace('__builtin__', '')
     name = name.replace('sre_parse', '')
     name = name.replace(sys.argv[1], '')
-    #name = name.replace('CDPL.', '')
+    name = name.replace('CDPL.', '')
     
     if len(name) > 0:
         name = name + '.'

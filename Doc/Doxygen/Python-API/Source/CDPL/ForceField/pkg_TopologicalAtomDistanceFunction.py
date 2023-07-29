@@ -26,20 +26,17 @@ class TopologicalAtomDistanceFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TopologicalAtomDistanceFunction instance.
-    # \param self The \e %TopologicalAtomDistanceFunction instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TopologicalAtomDistanceFunction instance.
-    # \param self The \e %TopologicalAtomDistanceFunction instance to initialize.
     # \param func 
     # 
     def __init__(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %TopologicalAtomDistanceFunction instance.
-    # \param arg1 The \e %TopologicalAtomDistanceFunction instance to initialize.
     # \param callable 
     # 
     def __init__(callable: object) -> None: pass
@@ -51,7 +48,7 @@ class TopologicalAtomDistanceFunction(Boost.Python.instance):
     # \param arg3 
     # \return 
     #
-    def __call__(arg1: CDPL.Chem.Atom, arg2: CDPL.Chem.Atom, arg3: CDPL.Chem.MolecularGraph) -> int: pass
+    def __call__(arg1: Chem.Atom, arg2: Chem.Atom, arg3: Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 

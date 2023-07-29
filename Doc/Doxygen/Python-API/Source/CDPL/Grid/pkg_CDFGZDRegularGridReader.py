@@ -26,7 +26,6 @@ class CDFGZDRegularGridReader(DRegularGridReaderBase):
 
     ##
     # \brief Initializes the \e %CDFGZDRegularGridReader instance.
-    # \param self The \e %CDFGZDRegularGridReader instance to initialize.
     # \param is 
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass

@@ -35,7 +35,7 @@
 # 
 # \return The calculated distance \f$ r_{ij} \f$.
 # 
-def calcDistance(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D) -> float: pass
+def calcDistance(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the squared distance \f$ r_{ij}^2 \f$ between two atoms <em>i</em> and <em>j</em>.
@@ -53,7 +53,7 @@ def calcDistance(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D) -
 # 
 # \return The calculated squared distance \f$ r_{ij}^2 \f$.
 # 
-def calcSquaredDistance(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D) -> float: pass
+def calcSquaredDistance(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D) -> float: pass
 
 ##
 # \brief 
@@ -62,7 +62,7 @@ def calcSquaredDistance(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vect
 # \param term_atom2_pos 
 # \return 
 #
-def calcBondLengthsAndAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D) -> tuple: pass
+def calcBondLengthsAndAngle(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D) -> tuple: pass
 
 ##
 # \brief Calculates the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds <em>i-j</em> and <em>j-k</em>.
@@ -85,7 +85,7 @@ def calcBondLengthsAndAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CD
 # 
 # \return The calculated bond angle \f$ \vartheta_{ijk} \f$.
 # 
-def calcBondAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, r_ij: float, r_jk: float) -> float: pass
+def calcBondAngle(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float) -> float: pass
 
 ##
 # \brief Calculates the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds <em>i-j</em> and <em>j-k</em>.
@@ -106,7 +106,7 @@ def calcBondAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Ve
 # 
 # \return The calculated bond angle \f$ \vartheta_{ijk} \f$.
 # 
-def calcBondAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D) -> float: pass
+def calcBondAngle(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the out-of-plane angle \f$ \chi_{ijk;l} \f$ between the bond <em>j-l</em> and the plane defined by the atoms <em>i-j-k</em>.
@@ -132,7 +132,7 @@ def calcBondAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Ve
 # 
 # \return The calculated out-of-plane angle \f$ \chi_{ijk;l} \f$.
 # 
-def calcOutOfPlaneAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, oop_atom_pos: CDPL.Math.Vector3D, r_jl: float) -> float: pass
+def calcOutOfPlaneAngle(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, r_jl: float) -> float: pass
 
 ##
 # \brief Calculates the partial derivatives \f$ \frac{\partial r_{ij}}{\partial \vec{p_x}} \f$ of the distance \f$ r_{ij} \f$ between two atoms <em>i</em> and <em>j</em>.
@@ -154,7 +154,7 @@ def calcOutOfPlaneAngle(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.M
 # 
 # \return The calculated distance \f$ r_{ij} \f$.
 # 
-def calcDistanceDerivatives(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, atom1_deriv: CDPL.Math.Vector3D, atom2_deriv: CDPL.Math.Vector3D) -> float: pass
+def calcDistanceDerivatives(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_deriv: Math.Vector3D, atom2_deriv: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_x}} \f$ of the of the <em>cosine</em> of the angle \f$ \vartheta_{ijk} \f$ between the bonds <em>i-j</em> and <em>j-k</em>.
@@ -183,7 +183,7 @@ def calcDistanceDerivatives(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.
 # 
 # \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
 # 
-def calcBondAngleCosDerivatives(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, term_atom1_deriv: CDPL.Math.Vector3D, ctr_atom_deriv: CDPL.Math.Vector3D, term_atom2_deriv: CDPL.Math.Vector3D) -> float: pass
+def calcBondAngleCosDerivatives(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_deriv: Math.Vector3D, ctr_atom_deriv: Math.Vector3D, term_atom2_deriv: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_x}} \f$ of the <em>cosine</em> of the angle \f$ \omega_{ijk;l} \f$ between the bond <em>j-l</em> and the normal of the plane defined by the atoms <em>i-j-k</em>.
@@ -221,7 +221,7 @@ def calcBondAngleCosDerivatives(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos
 # 
 # \return The calculated cosine of the angle \f$ \omega_{ijk;l} \f$.
 # 
-def calcOutOfPlaneAngleCosDerivatives(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, oop_atom_pos: CDPL.Math.Vector3D, term_atom1_deriv: CDPL.Math.Vector3D, ctr_atom_deriv: CDPL.Math.Vector3D, term_atom2_deriv: CDPL.Math.Vector3D, oop_atom_deriv: CDPL.Math.Vector3D) -> float: pass
+def calcOutOfPlaneAngleCosDerivatives(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, term_atom1_deriv: Math.Vector3D, ctr_atom_deriv: Math.Vector3D, term_atom2_deriv: Math.Vector3D, oop_atom_deriv: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$ of the <em>cosine</em> of the angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets <em>i-j-k</em> and <em>j-k-l</em>.
@@ -259,7 +259,7 @@ def calcOutOfPlaneAngleCosDerivatives(term_atom1_pos: CDPL.Math.Vector3D, ctr_at
 # 
 # \return The calculated cosine of the dihedral angle \f$ \Phi_{ijkl} \f$.
 # 
-def calcDihedralAngleCosDerivatives(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos: CDPL.Math.Vector3D, ctr_atom2_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, term_atom1_deriv: CDPL.Math.Vector3D, ctr_atom1_deriv: CDPL.Math.Vector3D, ctr_atom2_deriv: CDPL.Math.Vector3D, term_atom2_deriv: CDPL.Math.Vector3D) -> float: pass
+def calcDihedralAngleCosDerivatives(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_deriv: Math.Vector3D, ctr_atom1_deriv: Math.Vector3D, ctr_atom2_deriv: Math.Vector3D, term_atom2_deriv: Math.Vector3D) -> float: pass
 
 ##
 # \brief 
@@ -268,7 +268,7 @@ def calcDihedralAngleCosDerivatives(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom
 # \param term_atom2_pos 
 # \return 
 #
-def calcBondLengthsAndAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D) -> tuple: pass
+def calcBondLengthsAndAngleCos(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D) -> tuple: pass
 
 ##
 # \brief Calculates the <em>cosine</em> of the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds <em>i-j</em> and <em>j-k</em>.
@@ -291,7 +291,7 @@ def calcBondLengthsAndAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos:
 # 
 # \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
 # 
-def calcBondAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, r_ij: float, r_jk: float) -> float: pass
+def calcBondAngleCos(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float) -> float: pass
 
 ##
 # \brief Calculates the <em>cosine</em> of the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds <em>i-j</em> and <em>j-k</em>.
@@ -312,7 +312,7 @@ def calcBondAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math
 # 
 # \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
 # 
-def calcBondAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D) -> float: pass
+def calcBondAngleCos(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the <em>cosine</em> of the dihedral angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets <em>i-j-k</em> and <em>j-k-l</em>.
@@ -338,7 +338,7 @@ def calcBondAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math
 # 
 # \return The calculated cosine of the dihedral angle \f$ \Phi_{ijkl} \f$.
 # 
-def calcDihedralAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos: CDPL.Math.Vector3D, ctr_atom2_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D) -> float: pass
+def calcDihedralAngleCos(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D) -> float: pass
 
 ##
 # \brief Calculates the electrostatic interaction energy gradient \f$ \nabla EQ_{ij} \f$ for the atom pair <em>i-j</em>.
@@ -380,7 +380,7 @@ def calcDihedralAngleCos(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos: CDPL
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94ElectrostaticGradient(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, atom1_grad: CDPL.Math.Vector3D, atom2_grad: CDPL.Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
+def calcMMFF94ElectrostaticGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
 ##
 # \brief Calculates the stretch-bend interaction energy gradient \f$ \nabla EBA_{ijk} \f$ for two bonds <em>i-j</em> and <em>j-k</em>.
@@ -425,7 +425,7 @@ def calcMMFF94ElectrostaticGradient(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CD
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94StretchBendGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, term_atom1_grad: CDPL.Math.Vector3D, ctr_atom_grad: CDPL.Math.Vector3D, term_atom2_grad: CDPL.Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
+def calcMMFF94StretchBendGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
 ##
 # \brief Calculates the angle bending interaction energy gradient \f$ \nabla EA_{ijk} \f$ for two bonds <em>i-j</em> and <em>j-k</em>.
@@ -472,7 +472,7 @@ def calcMMFF94StretchBendGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_p
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94AngleBendingGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, term_atom1_grad: CDPL.Math.Vector3D, ctr_atom_grad: CDPL.Math.Vector3D, term_atom2_grad: CDPL.Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
+def calcMMFF94AngleBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
 ##
 # \brief Calculates the out-of-plane bending interaction energy gradient \f$ \nabla EOOP_{ijk;l} \f$ for the bond <em>j-l</em> and the plane <em>i-j-k</em>.
@@ -510,7 +510,7 @@ def calcMMFF94AngleBendingGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, oop_atom_pos: CDPL.Math.Vector3D, term_atom1_grad: CDPL.Math.Vector3D, ctr_atom_grad: CDPL.Math.Vector3D, term_atom2_grad: CDPL.Math.Vector3D, oop_atom_grad: CDPL.Math.Vector3D, force_const: float) -> float: pass
+def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, oop_atom_grad: Math.Vector3D, force_const: float) -> float: pass
 
 ##
 # \brief Calculates the bond stretching interaction energy gradient \f$ \nabla EB_{ij} \f$ for the bond <em>i-j</em>.
@@ -546,7 +546,7 @@ def calcMMFF94OutOfPlaneBendingGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94BondStretchingGradient(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, atom1_grad: CDPL.Math.Vector3D, atom2_grad: CDPL.Math.Vector3D, force_const: float, ref_length: float) -> float: pass
+def calcMMFF94BondStretchingGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
 # \brief Calculates the torsion interaction energy gradient \f$ \nabla ET_{ijkl} \f$ for the central bond <em>j-k</em> and the connected bonds <em>i-j</em> and <em>k-l</em>.
@@ -585,7 +585,7 @@ def calcMMFF94BondStretchingGradient(atom1_pos: CDPL.Math.Vector3D, atom2_pos: C
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94TorsionGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos: CDPL.Math.Vector3D, ctr_atom2_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, term_atom1_grad: CDPL.Math.Vector3D, ctr_atom1_grad: CDPL.Math.Vector3D, ctr_atom2_grad: CDPL.Math.Vector3D, term_atom2_grad: CDPL.Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
+def calcMMFF94TorsionGradient(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, term_atom1_grad: Math.Vector3D, ctr_atom1_grad: Math.Vector3D, ctr_atom2_grad: Math.Vector3D, term_atom2_grad: Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
 
 ##
 # \brief Calculates the van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
@@ -625,7 +625,7 @@ def calcMMFF94TorsionGradient(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos:
 # 
 # \note The calculated partial energy derivative (see above) for an atom gets <em>added</em> to the corresponding output variable!
 # 
-def calcMMFF94VanDerWaalsGradient(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, atom1_grad: CDPL.Math.Vector3D, atom2_grad: CDPL.Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
+def calcMMFF94VanDerWaalsGradient(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_grad: Math.Vector3D, atom2_grad: Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
 
 ##
 # \brief Calculates the electrostatic interaction energy \f$ EQ_{ij} \f$ for the atom pair <em>i-j</em>.
@@ -652,7 +652,7 @@ def calcMMFF94VanDerWaalsGradient(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL
 # 
 # \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
 # 
-def calcMMFF94ElectrostaticEnergy(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
+def calcMMFF94ElectrostaticEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> float: pass
 
 ##
 # \brief Calculates the stretch-bend interaction energy \f$ EBA_{ijk} \f$ for two bonds <em>i-j</em> and <em>j-k</em>.
@@ -681,7 +681,7 @@ def calcMMFF94ElectrostaticEnergy(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL
 # 
 # \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
 # 
-def calcMMFF94StretchBendEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
+def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
 ##
 # \brief Calculates the stretch-bend interaction energy \f$ EBA_{ijk} \f$ for two bonds <em>i-j</em> and <em>j-k</em>.
@@ -712,7 +712,7 @@ def calcMMFF94StretchBendEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos
 # 
 # \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
 # 
-def calcMMFF94StretchBendEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, r_ij: float, r_jk: float, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
+def calcMMFF94StretchBendEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float, ijk_force_const: float, kji_force_const: float, ref_angle: float, ref_length1: float, ref_length2: float) -> float: pass
 
 ##
 # \brief Calculates the angle bending interaction energy \f$ EA_{ijk} \f$ for two bonds <em>i-j</em> and <em>j-k</em>.
@@ -739,7 +739,7 @@ def calcMMFF94StretchBendEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos
 # 
 # \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
 # 
-def calcMMFF94AngleBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
+def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
 ##
 # \brief Calculates the angle bending interaction energy \f$ EA_{ijk} \f$ for two bonds <em>i-j</em> and <em>j-k</em>.
@@ -768,7 +768,7 @@ def calcMMFF94AngleBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_po
 # 
 # \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
 # 
-def calcMMFF94AngleBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, r_ij: float, r_jk: float, linear: bool, force_const: float, ref_angle: float) -> float: pass
+def calcMMFF94AngleBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, r_ij: float, r_jk: float, linear: bool, force_const: float, ref_angle: float) -> float: pass
 
 ##
 # \brief Calculates the out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$ for the bond <em>j-l</em> and the plane <em>i-j-k</em>.
@@ -787,7 +787,7 @@ def calcMMFF94AngleBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_po
 # 
 # \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
 # 
-def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, oop_atom_pos: CDPL.Math.Vector3D, force_const: float) -> float: pass
+def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, force_const: float) -> float: pass
 
 ##
 # \brief Calculates the out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$ for the bond <em>j-l</em> and the plane <em>i-j-k</em>.
@@ -807,7 +807,7 @@ def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_at
 # 
 # \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
 # 
-def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, oop_atom_pos: CDPL.Math.Vector3D, r_jl: float, force_const: float) -> float: pass
+def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: Math.Vector3D, ctr_atom_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, oop_atom_pos: Math.Vector3D, r_jl: float, force_const: float) -> float: pass
 
 ##
 # \brief Calculates the bond stretching interaction energy \f$ EB_{ij} \f$ for the bond <em>i-j</em>.
@@ -828,7 +828,7 @@ def calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_at
 # 
 # \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
 # 
-def calcMMFF94BondStretchingEnergy(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, force_const: float, ref_length: float) -> float: pass
+def calcMMFF94BondStretchingEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, force_const: float, ref_length: float) -> float: pass
 
 ##
 # \brief Calculates the torsion interaction energy \f$ ET_{ijkl} \f$ for the central bond <em>j-k</em> and the connected bonds <em>i-j</em> and <em>k-l</em>.
@@ -849,7 +849,7 @@ def calcMMFF94BondStretchingEnergy(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDP
 # 
 # \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
 # 
-def calcMMFF94TorsionEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos: CDPL.Math.Vector3D, ctr_atom2_pos: CDPL.Math.Vector3D, term_atom2_pos: CDPL.Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
+def calcMMFF94TorsionEnergy(term_atom1_pos: Math.Vector3D, ctr_atom1_pos: Math.Vector3D, ctr_atom2_pos: Math.Vector3D, term_atom2_pos: Math.Vector3D, tor_param1: float, tor_param2: float, tor_param3: float) -> float: pass
 
 ##
 # \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair <em>i-j</em>.
@@ -875,4 +875,4 @@ def calcMMFF94TorsionEnergy(term_atom1_pos: CDPL.Math.Vector3D, ctr_atom1_pos: C
 # 
 # \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
 # 
-def calcMMFF94VanDerWaalsEnergy(atom1_pos: CDPL.Math.Vector3D, atom2_pos: CDPL.Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass
+def calcMMFF94VanDerWaalsEnergy(atom1_pos: Math.Vector3D, atom2_pos: Math.Vector3D, e_IJ: float, r_IJ: float, r_IJ_7: float) -> float: pass

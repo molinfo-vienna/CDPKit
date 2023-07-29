@@ -31,7 +31,6 @@ class TorsionRule(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %AngleEntry instance.
-        # \param self The \e %AngleEntry instance to initialize.
         # \param ang 
         # \param tol1 
         # \param tol2 
@@ -41,14 +40,12 @@ class TorsionRule(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %AngleEntry instance.
-        # \param self The \e %AngleEntry instance to initialize.
         # \param entry 
         # 
         def __init__(entry: AngleEntry) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %AngleEntry instance this method is called upon.
         # 
         # Different Python \e %AngleEntry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AngleEntry instances \e a and \e b reference different C++ objects. 
@@ -61,7 +58,6 @@ class TorsionRule(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %AngleEntry instance \a entry.
-        # \param self The \e %AngleEntry instance this method is called upon.
         # \param entry The \e %AngleEntry instance to copy.
         # \return \a self
         # 
@@ -103,20 +99,17 @@ class TorsionRule(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionRule instance.
-    # \param self The \e %TorsionRule instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionRule instance.
-    # \param self The \e %TorsionRule instance to initialize.
     # \param rule 
     # 
     def __init__(rule: TorsionRule) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionRule instance this method is called upon.
     # 
     # Different Python \e %TorsionRule instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRule instances \e a and \e b reference different C++ objects. 
@@ -129,7 +122,6 @@ class TorsionRule(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRule instance \a rule.
-    # \param self The \e %TorsionRule instance this method is called upon.
     # \param rule The \e %TorsionRule instance to copy.
     # \return \a self
     # 
@@ -151,13 +143,13 @@ class TorsionRule(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getMatchPattern() -> CDPL.Chem.MolecularGraph: pass
+    def getMatchPattern() -> Chem.MolecularGraph: pass
 
     ##
     # \brief 
     # \param ptn 
     #
-    def setMatchPattern(ptn: CDPL.Chem.MolecularGraph) -> None: pass
+    def setMatchPattern(ptn: Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
@@ -225,7 +217,6 @@ class TorsionRule(Boost.Python.instance):
 
     ##
     # \brief Performs the in-place addition operation <tt>self += ang_entry</tt>.
-    # \param self The \e %TorsionRule instance acting as in-place addend.
     # \param ang_entry Specifies the second addend.
     # \return The updated \e %None instance \a self.
     # 

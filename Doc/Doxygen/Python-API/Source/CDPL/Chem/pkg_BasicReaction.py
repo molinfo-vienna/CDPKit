@@ -31,14 +31,12 @@ class BasicReaction(Reaction):
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
-    # \param self The \e %BasicReaction instance to initialize.
     # \param mol 
     # 
     def __init__(mol: BasicReaction) -> None: pass
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
-    # \param self The \e %BasicReaction instance to initialize.
     # \param mol 
     # 
     def __init__(mol: Reaction) -> None: pass

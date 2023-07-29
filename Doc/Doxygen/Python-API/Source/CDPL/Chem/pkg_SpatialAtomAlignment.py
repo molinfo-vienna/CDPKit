@@ -26,20 +26,17 @@ class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SpatialAtomAlignment instance.
-    # \param self The \e %SpatialAtomAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SpatialAtomAlignment instance.
-    # \param self The \e %SpatialAtomAlignment instance to initialize.
     # \param alignment 
     # 
     def __init__(alignment: SpatialAtomAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialAtomAlignment instance this method is called upon.
     # 
     # Different Python \e %SpatialAtomAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialAtomAlignment instances \e a and \e b reference different C++ objects. 
@@ -54,25 +51,25 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setEntityMatchFunction(func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
+    def setEntityMatchFunction(func: ForceField.InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getEntityMatchFunction() -> CDPL.ForceField.InteractionFilterFunction2: pass
+    def getEntityMatchFunction() -> ForceField.InteractionFilterFunction2: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setEntityPairMatchFunction(func: CDPL.ForceField.InteractionFilterFunction4) -> None: pass
+    def setEntityPairMatchFunction(func: ForceField.InteractionFilterFunction4) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getEntityPairMatchFunction() -> CDPL.ForceField.InteractionFilterFunction4: pass
+    def getEntityPairMatchFunction() -> ForceField.InteractionFilterFunction4: pass
 
     ##
     # \brief 
@@ -102,13 +99,13 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setEntityWeightFunction(func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setEntityWeightFunction(func: ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getEntityWeightFunction() -> CDPL.ForceField.MMFF94AtomChargeFunction: pass
+    def getEntityWeightFunction() -> ForceField.MMFF94AtomChargeFunction: pass
 
     ##
     # \brief 
@@ -185,11 +182,10 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getTransform() -> CDPL.Math.Matrix4D: pass
+    def getTransform() -> Math.Matrix4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialAtomAlignment instance \a alignment.
-    # \param self The \e %SpatialAtomAlignment instance this method is called upon.
     # \param alignment The \e %SpatialAtomAlignment instance to copy.
     # \return \a self
     # 
@@ -199,7 +195,7 @@ class SpatialAtomAlignment(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getTopologicalMapping() -> CDPL.Util.STPairArray: pass
+    def getTopologicalMapping() -> Util.STPairArray: pass
 
     objectID = property(getObjectID)
 

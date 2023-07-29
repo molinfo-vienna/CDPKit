@@ -56,11 +56,10 @@ class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
     # \param pharm The output pharmacophore where to add the generated features.
     # \param config Feature generation configuration.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, config: int = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, pharm: Pharmacophore, config: int = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
-    # \param self The \e %DefaultPharmacophoreGenerator instance to initialize.
     # \param gen 
     # 
     def __init__(gen: DefaultPharmacophoreGenerator) -> None: pass

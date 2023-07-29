@@ -33,7 +33,6 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
-    # \param self The \e %AtomHydrophobicityCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: AtomHydrophobicityCalculator) -> None: pass
@@ -44,11 +43,10 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
     # \param hyd_table The output vector where to store the atom hydrophobicities.
     # 
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
+    def __init__(molgraph: Chem.MolecularGraph, hyd_table: Util.DArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     # 
     # Different Python \e %AtomHydrophobicityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomHydrophobicityCalculator instances \e a and \e b reference different C++ objects. 
@@ -61,7 +59,6 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomHydrophobicityCalculator instance \a calc.
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     # \param calc The \e %AtomHydrophobicityCalculator instance to copy.
     # \return \a self
     # 
@@ -73,6 +70,6 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     # \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
     # \param hyd_table The output vector where to store the atom hydrophobicities.
     # 
-    def calculate(molgraph: CDPL.Chem.MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
+    def calculate(molgraph: Chem.MolecularGraph, hyd_table: Util.DArray) -> None: pass
 
     objectID = property(getObjectID)

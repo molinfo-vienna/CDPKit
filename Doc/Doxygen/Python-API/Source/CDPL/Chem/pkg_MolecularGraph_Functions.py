@@ -419,7 +419,7 @@ def canonicalize(molgraph: MolecularGraph, atoms: bool = True, atom_nbrs: bool =
 # \param bonds 
 # \param bond_atoms 
 #
-def canonicalize(molgraph: MolecularGraph, func: CDPL.ForceField.InteractionFilterFunction2, atoms: bool = True, atom_nbrs: bool = True, bonds: bool = True, bond_atoms: bool = False) -> None: pass
+def canonicalize(molgraph: MolecularGraph, func: ForceField.InteractionFilterFunction2, atoms: bool = True, atom_nbrs: bool = True, bonds: bool = True, bond_atoms: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -549,7 +549,7 @@ def setMatchExpression(molgraph: MolecularGraph, expr: MolecularGraphMatchExpres
 # \param coords 
 # \param energy 
 #
-def addConformation(molgraph: MolecularGraph, coords: CDPL.Math.Vector3DArray, energy: float) -> None: pass
+def addConformation(molgraph: MolecularGraph, coords: Math.Vector3DArray, energy: float) -> None: pass
 
 ##
 # \brief 
@@ -558,7 +558,7 @@ def addConformation(molgraph: MolecularGraph, coords: CDPL.Math.Vector3DArray, e
 # \param coords 
 # \param energy 
 #
-def setConformation(molgraph: MolecularGraph, conf_idx: int, coords: CDPL.Math.Vector3DArray, energy: float) -> None: pass
+def setConformation(molgraph: MolecularGraph, conf_idx: int, coords: Math.Vector3DArray, energy: float) -> None: pass
 
 ##
 # \brief 
@@ -679,14 +679,14 @@ def hasConformerEnergies(molgraph: MolecularGraph) -> bool: pass
 # \param molgraph 
 # \return 
 #
-def getConformerEnergies(molgraph: MolecularGraph) -> CDPL.Util.DArray: pass
+def getConformerEnergies(molgraph: MolecularGraph) -> Util.DArray: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param energies 
 #
-def setConformerEnergies(molgraph: MolecularGraph, energies: CDPL.Util.DArray) -> None: pass
+def setConformerEnergies(molgraph: MolecularGraph, energies: Util.DArray) -> None: pass
 
 ##
 # \brief 
@@ -1067,7 +1067,7 @@ def getContainingFragments(molgraph: MolecularGraph, frag_list: FragmentList, co
 # \param split_bond_mask 
 # \param append 
 #
-def splitIntoFragments(molgraph: MolecularGraph, frag_list: FragmentList, split_bond_mask: CDPL.Util.BitSet, append: bool = False) -> None: pass
+def splitIntoFragments(molgraph: MolecularGraph, frag_list: FragmentList, split_bond_mask: Util.BitSet, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -1260,7 +1260,7 @@ def setConformationIndex(molgraph: MolecularGraph, index: int) -> None: pass
 # \param overwrite 
 # \return 
 #
-def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> CDPL.Math.ULMatrix: pass
+def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> Math.ULMatrix: pass
 
 ##
 # \brief 
@@ -1268,14 +1268,14 @@ def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgra
 # \param tgt_molgraph 
 # \param mtx 
 #
-def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def generateBondMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateBondMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1283,14 +1283,14 @@ def generateBondMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) 
 # \param overwrite 
 # \return 
 #
-def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> CDPL.Math.ULMatrix: pass
+def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> Math.ULMatrix: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1310,14 +1310,14 @@ def hasTopologicalDistanceMatrix(molgraph: MolecularGraph) -> bool: pass
 # \param molgraph 
 # \return 
 #
-def getTopologicalDistanceMatrix(molgraph: MolecularGraph) -> CDPL.Math.ULMatrix: pass
+def getTopologicalDistanceMatrix(molgraph: MolecularGraph) -> Math.ULMatrix: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def setTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def setTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.ULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1325,7 +1325,7 @@ def setTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatr
 # \param overwrite 
 # \return 
 #
-def calcGeometricalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> CDPL.Math.DMatrix: pass
+def calcGeometricalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> Math.DMatrix: pass
 
 ##
 # \brief 
@@ -1345,42 +1345,42 @@ def hasGeometricalDistanceMatrix(molgraph: MolecularGraph) -> bool: pass
 # \param molgraph 
 # \return 
 #
-def getGeometricalDistanceMatrix(molgraph: MolecularGraph) -> CDPL.Math.DMatrix: pass
+def getGeometricalDistanceMatrix(molgraph: MolecularGraph) -> Math.DMatrix: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def setGeometricalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
+def setGeometricalDistanceMatrix(molgraph: MolecularGraph, mtx: Math.DMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def generateIncidenceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateIncidenceMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def generateBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def generateBondElectronMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateBondElectronMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def generateAdjacencyMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
+def generateAdjacencyMatrix(molgraph: MolecularGraph, mtx: Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 

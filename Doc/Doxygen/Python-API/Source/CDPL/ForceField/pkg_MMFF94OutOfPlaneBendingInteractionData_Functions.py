@@ -26,7 +26,7 @@
 # \param grad 
 # \return 
 #
-def calcMMFF94OutOfPlaneBendingGradient(ia_data: MMFF94OutOfPlaneBendingInteractionData, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94OutOfPlaneBendingGradient(ia_data: MMFF94OutOfPlaneBendingInteractionData, coords: Math.Vector3DArray, grad: Math.Vector3DArray) -> float: pass
 
 ##
 # \brief 
@@ -34,4 +34,4 @@ def calcMMFF94OutOfPlaneBendingGradient(ia_data: MMFF94OutOfPlaneBendingInteract
 # \param coords 
 # \return 
 #
-def calcMMFF94OutOfPlaneBendingEnergy(ia_data: MMFF94OutOfPlaneBendingInteractionData, coords: CDPL.Math.Vector3DArray) -> float: pass
+def calcMMFF94OutOfPlaneBendingEnergy(ia_data: MMFF94OutOfPlaneBendingInteractionData, coords: Math.Vector3DArray) -> float: pass

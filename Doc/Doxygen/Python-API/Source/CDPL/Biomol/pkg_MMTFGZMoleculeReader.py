@@ -22,11 +22,10 @@
 ##
 # \brief 
 #
-class MMTFGZMoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class MMTFGZMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Initializes the \e %MMTFGZMoleculeReader instance.
-    # \param self The \e %MMTFGZMoleculeReader instance to initialize.
     # \param is 
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass

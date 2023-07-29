@@ -91,14 +91,14 @@ def hasSubstructure(feature: Feature) -> bool: pass
 # \param feature 
 # \return 
 #
-def getSubstructure(feature: Feature) -> CDPL.Chem.Fragment: pass
+def getSubstructure(feature: Feature) -> Chem.Fragment: pass
 
 ##
 # \brief 
 # \param feature 
 # \param substruct 
 #
-def setSubstructure(feature: Feature, substruct: CDPL.Chem.Fragment) -> None: pass
+def setSubstructure(feature: Feature, substruct: Chem.Fragment) -> None: pass
 
 ##
 # \brief 
@@ -199,14 +199,14 @@ def hasOrientation(feature: Feature) -> bool: pass
 # \param feature 
 # \return 
 #
-def getOrientation(feature: Feature) -> CDPL.Math.Vector3D: pass
+def getOrientation(feature: Feature) -> Math.Vector3D: pass
 
 ##
 # \brief 
 # \param feature 
 # \param orient 
 #
-def setOrientation(feature: Feature, orient: CDPL.Math.Vector3D) -> None: pass
+def setOrientation(feature: Feature, orient: Math.Vector3D) -> None: pass
 
 ##
 # \brief 

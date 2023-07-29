@@ -23,592 +23,592 @@
 # \brief 
 # \param cntnr 
 #
-def clearPDBIgnoreFormalChargeFieldParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
+def clearPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def hasPDBIgnoreFormalChargeFieldParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBIgnoreFormalChargeFieldParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def getPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param ignore 
 #
-def setPDBIgnoreFormalChargeFieldParameter(cntnr: CDPL.Base.ControlParameterContainer, ignore: bool) -> None: pass
+def setPDBIgnoreFormalChargeFieldParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBEvaluateMASTERRecordParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBEvaluateMASTERRecordParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBEvaluateMASTERRecordParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param evaluate 
 #
-def setPDBEvaluateMASTERRecordParameter(cntnr: CDPL.Base.ControlParameterContainer, evaluate: bool) -> None: pass
+def setPDBEvaluateMASTERRecordParameter(cntnr: Base.ControlParameterContainer, evaluate: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param strict 
 #
-def setStrictErrorCheckingParameter(cntnr: CDPL.Base.ControlParameterContainer, strict: bool) -> None: pass
+def setStrictErrorCheckingParameter(cntnr: Base.ControlParameterContainer, strict: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearCheckLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasCheckLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getCheckLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCheckLineLengthParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param check 
 #
-def setCheckLineLengthParameter(cntnr: CDPL.Base.ControlParameterContainer, check: bool) -> None: pass
+def setCheckLineLengthParameter(cntnr: Base.ControlParameterContainer, check: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBFormatVersionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBFormatVersionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBFormatVersionParameter(cntnr: CDPL.Base.ControlParameterContainer) -> int: pass
+def hasPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer) -> int: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param ver 
 #
-def setPDBFormatVersionParameter(cntnr: CDPL.Base.ControlParameterContainer, ver: int) -> None: pass
+def setPDBFormatVersionParameter(cntnr: Base.ControlParameterContainer, ver: int) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param write 
 #
-def setPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: CDPL.Base.ControlParameterContainer, write: bool) -> None: pass
+def setPDBWriteCONECTRecordsReflectingBondOrderParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBWriteCONECTRecordsForAllBondsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBWriteCONECTRecordsForAllBondsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBWriteCONECTRecordsForAllBondsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param write 
 #
-def setPDBWriteCONECTRecordsForAllBondsParameter(cntnr: CDPL.Base.ControlParameterContainer, write: bool) -> None: pass
+def setPDBWriteCONECTRecordsForAllBondsParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBWriteCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBWriteCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBWriteCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param write 
 #
-def setPDBWriteCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer, write: bool) -> None: pass
+def setPDBWriteCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param deduce 
 #
-def setPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer, deduce: bool) -> None: pass
+def setPDBDeduceBondOrdersFromCONECTRecordsParameter(cntnr: Base.ControlParameterContainer, deduce: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBIgnoreConectRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBIgnoreConectRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBIgnoreConectRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param ignore 
 #
-def setPDBIgnoreConectRecordsParameter(cntnr: CDPL.Base.ControlParameterContainer, ignore: bool) -> None: pass
+def setPDBIgnoreConectRecordsParameter(cntnr: Base.ControlParameterContainer, ignore: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBWriteFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBWriteFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBWriteFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param write 
 #
-def setPDBWriteFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer, write: bool) -> None: pass
+def setPDBWriteFormalChargesParameter(cntnr: Base.ControlParameterContainer, write: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBCalcMissingFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBCalcMissingFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBCalcMissingFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param calc 
 #
-def setPDBCalcMissingFormalChargesParameter(cntnr: CDPL.Base.ControlParameterContainer, calc: bool) -> None: pass
+def setPDBCalcMissingFormalChargesParameter(cntnr: Base.ControlParameterContainer, calc: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictFormalAtomChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictFormalAtomChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictFormalAtomChargesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictFormalAtomChargesParameter(cntnr: CDPL.Base.ControlParameterContainer, apply: bool) -> None: pass
+def setPDBApplyDictFormalAtomChargesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBTruncateLinesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBTruncateLinesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBTruncateLinesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param trunc 
 #
-def setPDBTruncateLinesParameter(cntnr: CDPL.Base.ControlParameterContainer, trunc: bool) -> None: pass
+def setPDBTruncateLinesParameter(cntnr: Base.ControlParameterContainer, trunc: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictAtomTypesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictAtomTypesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictAtomTypesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictAtomTypesParameter(cntnr: CDPL.Base.ControlParameterContainer, apply: bool) -> None: pass
+def setPDBApplyDictAtomTypesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearCombineInterferingResidueCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasCombineInterferingResidueCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getCombineInterferingResidueCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param comb 
 #
-def setCombineInterferingResidueCoordinatesParameter(cntnr: CDPL.Base.ControlParameterContainer, comb: bool) -> None: pass
+def setCombineInterferingResidueCoordinatesParameter(cntnr: Base.ControlParameterContainer, comb: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer, apply: bool) -> None: pass
+def setPDBApplyDictAtomBondingToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer, apply: bool) -> None: pass
+def setPDBApplyDictBondOrdersToNonStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer, apply: bool) -> None: pass
+def setPDBApplyDictAtomBondingToStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param apply 
 #
-def setPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: CDPL.Base.ControlParameterContainer, apply: bool) -> None: pass
+def setPDBApplyDictBondOrdersToStdResiduesParameter(cntnr: Base.ControlParameterContainer, apply: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBPerceiveMissingBondOrdersParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBPerceiveMissingBondOrdersParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBPerceiveMissingBondOrdersParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def hasPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param perceive 
 #
-def setPDBPerceiveMissingBondOrdersParameter(cntnr: CDPL.Base.ControlParameterContainer, perceive: bool) -> None: pass
+def setPDBPerceiveMissingBondOrdersParameter(cntnr: Base.ControlParameterContainer, perceive: bool) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 #
-def clearPDBResidueDictionaryParameter(cntnr: CDPL.Base.ControlParameterContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def hasPDBResidueDictionaryParameter(cntnr: CDPL.Base.ControlParameterContainer) -> bool: pass
+def clearPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \return 
 #
-def getPDBResidueDictionaryParameter(cntnr: CDPL.Base.ControlParameterContainer) -> ResidueDictionary: pass
+def hasPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
+# \return 
+#
+def getPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer) -> ResidueDictionary: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param dict 
 #
-def setPDBResidueDictionaryParameter(cntnr: CDPL.Base.ControlParameterContainer, dict: ResidueDictionary) -> None: pass
+def setPDBResidueDictionaryParameter(cntnr: Base.ControlParameterContainer, dict: ResidueDictionary) -> None: pass

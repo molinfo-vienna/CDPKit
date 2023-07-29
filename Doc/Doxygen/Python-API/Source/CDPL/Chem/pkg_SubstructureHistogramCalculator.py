@@ -31,14 +31,12 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Pattern instance.
-        # \param self The \e %Pattern instance to initialize.
         # \param ptn 
         # 
         def __init__(ptn: Pattern) -> None: pass
 
         ##
         # \brief Initializes the \e %Pattern instance.
-        # \param self The \e %Pattern instance to initialize.
         # \param structure 
         # \param id 
         # \param priority 
@@ -49,7 +47,6 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Pattern instance this method is called upon.
         # 
         # Different Python \e %Pattern instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Pattern instances \e a and \e b reference different C++ objects. 
@@ -62,7 +59,6 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Pattern instance \a ptn.
-        # \param self The \e %Pattern instance this method is called upon.
         # \param ptn The \e %Pattern instance to copy.
         # \return \a self
         # 
@@ -124,20 +120,17 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SubstructureHistogramCalculator instance.
-    # \param self The \e %SubstructureHistogramCalculator instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SubstructureHistogramCalculator instance.
-    # \param self The \e %SubstructureHistogramCalculator instance to initialize.
     # \param calc 
     # 
     def __init__(calc: SubstructureHistogramCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SubstructureHistogramCalculator instance this method is called upon.
     # 
     # Different Python \e %SubstructureHistogramCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SubstructureHistogramCalculator instances \e a and \e b reference different C++ objects. 
@@ -197,7 +190,6 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SubstructureHistogramCalculator instance \a calc.
-    # \param self The \e %SubstructureHistogramCalculator instance this method is called upon.
     # \param calc The \e %SubstructureHistogramCalculator instance to copy.
     # \return \a self
     # 

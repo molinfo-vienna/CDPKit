@@ -26,20 +26,17 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Range instance.
-    # \param self The \e %Range instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Range instance.
-    # \param self The \e %Range instance to initialize.
     # \param r 
     # 
     def __init__(r: Range) -> None: pass
 
     ##
     # \brief Initializes the \e %Range instance.
-    # \param self The \e %Range instance to initialize.
     # \param start 
     # \param stop 
     # 
@@ -78,7 +75,6 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Range instance \a r.
-    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to copy.
     # \return \a self
     # 
@@ -92,7 +88,6 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Range instance this method is called upon.
     # 
     # Different Python \e %Range instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Range instances \e a and \e b reference different C++ objects. 
@@ -105,7 +100,6 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to be compared with.
     # \return The result of the comparison operation.
     # 
@@ -113,7 +107,6 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to be compared with.
     # \return The result of the comparison operation.
     # 

@@ -22,5 +22,5 @@
 ##
 # \brief 
 #
-class Error(CDPL.Base.Exception):
+class Error(Base.Exception):
     pass

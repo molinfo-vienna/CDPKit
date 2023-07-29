@@ -25,14 +25,14 @@
 # \param ctr 
 # \return 
 #
-def calcCentroid(cntnr: Entity3DContainer, ctr: CDPL.Math.Vector3D) -> bool: pass
+def calcCentroid(cntnr: Entity3DContainer, ctr: Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param mtx 
 #
-def transform3DCoordinates(cntnr: Entity3DContainer, mtx: CDPL.Math.Matrix4D) -> None: pass
+def transform3DCoordinates(cntnr: Entity3DContainer, mtx: Math.Matrix4D) -> None: pass
 
 ##
 # \brief 
@@ -40,21 +40,21 @@ def transform3DCoordinates(cntnr: Entity3DContainer, mtx: CDPL.Math.Matrix4D) ->
 # \param coords 
 # \param append 
 #
-def get3DCoordinates(cntnr: Entity3DContainer, coords: CDPL.Math.Vector3DArray, append: bool = False) -> None: pass
+def get3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray, append: bool = False) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param coords 
 #
-def set3DCoordinates(cntnr: Entity3DContainer, coords: CDPL.Math.Vector3DArray) -> None: pass
+def set3DCoordinates(cntnr: Entity3DContainer, coords: Math.Vector3DArray) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param mtx 
 #
-def calcGeometricalDistanceMatrix(cntnr: Entity3DContainer, mtx: CDPL.Math.DMatrix) -> None: pass
+def calcGeometricalDistanceMatrix(cntnr: Entity3DContainer, mtx: Math.DMatrix) -> None: pass
 
 ##
 # \brief 
@@ -63,7 +63,7 @@ def calcGeometricalDistanceMatrix(cntnr: Entity3DContainer, mtx: CDPL.Math.DMatr
 # \param max 
 # \param reset 
 #
-def calcBoundingBox(cntnr: Entity3DContainer, min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D, reset: bool = True) -> None: pass
+def calcBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D, reset: bool = True) -> None: pass
 
 ##
 # \brief 
@@ -72,7 +72,7 @@ def calcBoundingBox(cntnr: Entity3DContainer, min: CDPL.Math.Vector3D, max: CDPL
 # \param max 
 # \return 
 #
-def insideBoundingBox(cntnr: Entity3DContainer, min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D) -> bool: pass
+def insideBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
@@ -81,4 +81,4 @@ def insideBoundingBox(cntnr: Entity3DContainer, min: CDPL.Math.Vector3D, max: CD
 # \param max 
 # \return 
 #
-def intersectsBoundingBox(cntnr: Entity3DContainer, min: CDPL.Math.Vector3D, max: CDPL.Math.Vector3D) -> bool: pass
+def intersectsBoundingBox(cntnr: Entity3DContainer, min: Math.Vector3D, max: Math.Vector3D) -> bool: pass

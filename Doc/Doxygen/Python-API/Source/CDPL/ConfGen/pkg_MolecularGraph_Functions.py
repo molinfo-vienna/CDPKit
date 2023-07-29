@@ -24,7 +24,7 @@
 # \param molgraph 
 # \return 
 #
-def perceiveFragmentType(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def perceiveFragmentType(molgraph: Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -34,7 +34,7 @@ def perceiveFragmentType(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 # \param reset 
 # \return 
 #
-def createRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
+def createRotatableBondMask(molgraph: Chem.MolecularGraph, bond_mask: Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -45,7 +45,7 @@ def createRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.
 # \param reset 
 # \return 
 #
-def createRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, excl_bond_mask: CDPL.Util.BitSet, bond_mask: CDPL.Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
+def createRotatableBondMask(molgraph: Chem.MolecularGraph, excl_bond_mask: Util.BitSet, bond_mask: Util.BitSet, het_h_rotors: bool, reset: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -54,7 +54,7 @@ def createRotatableBondMask(molgraph: CDPL.Chem.MolecularGraph, excl_bond_mask: 
 # \param reset 
 # \return 
 #
-def createFragmentLinkBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet, reset: bool = True) -> int: pass
+def createFragmentLinkBondMask(molgraph: Chem.MolecularGraph, bond_mask: Util.BitSet, reset: bool = True) -> int: pass
 
 ##
 # \brief 
@@ -67,7 +67,7 @@ def createFragmentLinkBondMask(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CD
 # \param estat_dist_expo 
 # \return 
 #
-def parameterizeMMFF94Interactions(molgraph: CDPL.Chem.MolecularGraph, parameterizer: CDPL.ForceField.MMFF94InteractionParameterizer, param_data: CDPL.ForceField.MMFF94InteractionData, ff_type: int, strict: bool, estat_de_const: float, estat_dist_expo: float) -> int: pass
+def parameterizeMMFF94Interactions(molgraph: Chem.MolecularGraph, parameterizer: ForceField.MMFF94InteractionParameterizer, param_data: ForceField.MMFF94InteractionData, ff_type: int, strict: bool, estat_de_const: float, estat_dist_expo: float) -> int: pass
 
 ##
 # \brief 
@@ -75,4 +75,4 @@ def parameterizeMMFF94Interactions(molgraph: CDPL.Chem.MolecularGraph, parameter
 # \param het_h_rotors 
 # \return 
 #
-def getRotatableBondCount(molgraph: CDPL.Chem.MolecularGraph, het_h_rotors: bool) -> int: pass
+def getRotatableBondCount(molgraph: Chem.MolecularGraph, het_h_rotors: bool) -> int: pass

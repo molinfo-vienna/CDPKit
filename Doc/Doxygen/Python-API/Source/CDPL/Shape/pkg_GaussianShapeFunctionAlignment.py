@@ -31,23 +31,20 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Result instance.
-        # \param self The \e %Result instance to initialize.
         # \param transform 
         # \param overlap 
         # \param col_overlap 
         # 
-        def __init__(transform: CDPL.Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
+        def __init__(transform: Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
 
         ##
         # \brief Initializes the \e %Result instance.
-        # \param self The \e %Result instance to initialize.
         # \param res 
         # 
         def __init__(res: Result) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Result instance this method is called upon.
         # 
         # Different Python \e %Result instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Result instances \e a and \e b reference different C++ objects. 
@@ -60,7 +57,6 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Result instance \a res.
-        # \param self The \e %Result instance this method is called upon.
         # \param res The \e %Result instance to copy.
         # \return \a self
         # 
@@ -70,7 +66,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         # \brief 
         # \return 
         #
-        def getTransform() -> CDPL.Math.Matrix4D: pass
+        def getTransform() -> Math.Matrix4D: pass
 
         ##
         # \brief 
@@ -104,13 +100,11 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeFunctionAlignment instance.
-    # \param self The \e %GaussianShapeFunctionAlignment instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunctionAlignment instance.
-    # \param self The \e %GaussianShapeFunctionAlignment instance to initialize.
     # \param ref_func 
     # \param sym_class 
     # 
@@ -118,7 +112,6 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # 
     # Different Python \e %GaussianShapeFunctionAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeFunctionAlignment instances \e a and \e b reference different C++ objects. 
@@ -182,13 +175,13 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \brief 
     # \param func 
     #
-    def setColorMatchFunction(func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
+    def setColorMatchFunction(func: Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getColorMatchFunction() -> CDPL.Pharm.BoolSizeType2Functor: pass
+    def getColorMatchFunction() -> Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief 
@@ -268,7 +261,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \param xform 
     # \return 
     #
-    def setupReference(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupReference(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
@@ -276,7 +269,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     # \param xform 
     # \return 
     #
-    def setupAligned(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupAligned(func: GaussianShapeFunction, xform: Math.Matrix4D) -> int: pass
 
     ##
     # \brief 

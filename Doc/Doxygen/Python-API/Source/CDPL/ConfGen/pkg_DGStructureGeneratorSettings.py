@@ -31,20 +31,17 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
     # \brief Initializes the \e %DGStructureGeneratorSettings instance.
-    # \param self The \e %DGStructureGeneratorSettings instance to initialize.
     # 
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGStructureGeneratorSettings instance.
-    # \param self The \e %DGStructureGeneratorSettings instance to initialize.
     # \param settings 
     # 
     def __init__(settings: DGStructureGeneratorSettings) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGeneratorSettings instance \a settings.
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \param settings The \e %DGStructureGeneratorSettings instance to copy.
     # \return \a self
     # 
@@ -52,7 +49,6 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGeneratorSettings instance \a settings.
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \param settings The \e %DGConstraintGeneratorSettings instance to copy.
     # \return \a self
     # 

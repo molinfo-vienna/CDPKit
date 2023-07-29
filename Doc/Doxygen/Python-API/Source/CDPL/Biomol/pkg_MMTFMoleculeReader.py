@@ -22,11 +22,11 @@
 ##
 # \brief A reader for molecule data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 # 
-class MMTFMoleculeReader(CDPL.Chem.MoleculeReaderBase):
+class MMTFMoleculeReader(Chem.MoleculeReaderBase):
 
     ##
     # \brief Constructs a <tt>MMTFMoleculeReader</tt> instance that will read molecule data from the input stream <em>is</em>.
     # 
     # \param is The input stream to read from.
     # 
-    def __init__(is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: Base.IStream) -> None: pass
