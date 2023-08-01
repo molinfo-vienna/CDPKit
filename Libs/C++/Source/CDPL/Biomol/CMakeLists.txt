@@ -23,13 +23,14 @@
 
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}/MessagePack" "${CDPKIT_EXTERNAL_DIR}/MMTF")
 
-ADD_CUSTOM_COMMAND(OUTPUT "ResidueDictionaryStructureData.cdf.str"
-           COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-           "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-           "ResidueDictionaryStructureData.cdf.str"
-           DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-           COMMENT "-- Processing residue dictionary structure data, please wait..."
-           )
+ADD_CUSTOM_COMMAND(OUTPUT ResidueDictionaryStructureData.cdf.str
+  COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+  "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+  "ResidueDictionaryStructureData.cdf.str"
+  DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+  COMMENT "-- Processing residue dictionary structure data..."
+  )
+ADD_CUSTOM_TARGET(gen-biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.str)
 
 SET(cdpl-biomol_LIB_SRCS
     ResidueDictionaryStructureData.cdf.str
@@ -80,7 +81,8 @@ ENDIF(WIN32 AND MINGW)
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-
+  ADD_DEPENDENCIES(cdpl-biomol-static gen-biomol-data-files)
+  
   SET_TARGET_PROPERTIES(cdpl-biomol-static PROPERTIES 
     OUTPUT_NAME cdpl-biomol
     CLEAN_DIRECT_OUTPUT 1
@@ -93,6 +95,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-biomol-shared SHARED ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+ADD_DEPENDENCIES(cdpl-biomol-shared gen-biomol-data-files)
 
 TARGET_LINK_LIBRARIES(cdpl-biomol-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 

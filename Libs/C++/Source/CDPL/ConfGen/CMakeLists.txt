@@ -31,13 +31,16 @@ SET(DATA_FILES
 
 FOREACH(DATA_FILE ${DATA_FILES})
   ADD_CUSTOM_COMMAND(OUTPUT "${DATA_FILE}.str"
-             COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-               "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}" 
-             "${DATA_FILE}.str"
-             DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}"
-             )
+    COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+    "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}" 
+    "${DATA_FILE}.str"
+    DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}"
+    COMMENT "-- Processing ${DATA_FILE}..."
+    )
   SET(DATA_FILE_STRINGS "${DATA_FILE_STRINGS}" "${DATA_FILE}.str") 
 ENDFOREACH(DATA_FILE)
+
+ADD_CUSTOM_TARGET(gen-confgen-data-files DEPENDS ${DATA_FILE_STRINGS})
 
 SET(cdpl-confgen_LIB_SRCS
     ${DATA_FILE_STRINGS}
@@ -109,7 +112,8 @@ LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-
+  ADD_DEPENDENCIES(cdpl-confgen-static gen-confgen-data-files)
+  
   SET_TARGET_PROPERTIES(cdpl-confgen-static PROPERTIES 
     OUTPUT_NAME cdpl-confgen
     CLEAN_DIRECT_OUTPUT 1
@@ -123,6 +127,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+ADD_DEPENDENCIES(cdpl-confgen-shared gen-confgen-data-files)
 
 TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared
   cdpl-util-shared cdpl-forcefield-shared)

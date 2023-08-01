@@ -23,21 +23,22 @@
 
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
 
-ADD_CUSTOM_COMMAND(OUTPUT "ChEMBL-Solvents.smi.str"
-           COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-           "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
-           "ChEMBL-Solvents.smi.str"
-           DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
-           COMMENT "-- Processing ChEMBL-Solvents.smi, please wait..."
-           )
-ADD_CUSTOM_COMMAND(OUTPUT "ChEMBL-Salts.smi.str"
-           COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-           "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
-           "ChEMBL-Salts.smi.str"
-           DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
-           COMMENT "-- Processing ChEMBL-Salts.smi, please wait..."
-           )
-
+ADD_CUSTOM_COMMAND(OUTPUT ChEMBL-Solvents.smi.str
+  COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+  "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
+  "ChEMBL-Solvents.smi.str"
+  DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
+  COMMENT "-- Processing ChEMBL-Solvents.smi..."
+  )
+ADD_CUSTOM_COMMAND(OUTPUT ChEMBL-Salts.smi.str
+  COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+  "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
+  "ChEMBL-Salts.smi.str"
+  DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
+  COMMENT "-- Processing ChEMBL-Salts.smi..."
+  )
+ADD_CUSTOM_TARGET(gen-chem-data-files DEPENDS ChEMBL-Solvents.smi.str ChEMBL-Salts.smi.str)
+           
 SET(cdpl-chem_LIB_SRCS
     ChEMBL-Solvents.smi.str
     ChEMBL-Salts.smi.str
@@ -314,7 +315,8 @@ LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
-
+  ADD_DEPENDENCIES(cdpl-chem-static gen-chem-data-files)
+  
   SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES 
     OUTPUT_NAME cdpl-chem
     CLEAN_DIRECT_OUTPUT 1
@@ -327,6 +329,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
+ADD_DEPENDENCIES(cdpl-chem-shared gen-chem-data-files)
 
 TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 

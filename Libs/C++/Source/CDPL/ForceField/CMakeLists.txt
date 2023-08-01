@@ -49,13 +49,16 @@ SET(PARAMETER_FILES
 
 FOREACH(PARAM_FILE ${PARAMETER_FILES})
   ADD_CUSTOM_COMMAND(OUTPUT "${PARAM_FILE}.str"
-             COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-               "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}" 
-             "${PARAM_FILE}.str"
-             DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}"
-             )
+    COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+    "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}" 
+    "${PARAM_FILE}.str"
+    DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ForceField/${PARAM_FILE}"
+    COMMENT "-- Processing ${PARAM_FILE}..."
+    )
   SET(PARAMETER_FILE_STRINGS "${PARAMETER_FILE_STRINGS}" "${PARAM_FILE}.str") 
 ENDFOREACH(PARAM_FILE)
+
+ADD_CUSTOM_TARGET(gen-forcefield-data-files DEPENDS ${PARAMETER_FILE_STRINGS})
 
 SET(cdpl-forcefield_LIB_SRCS
     ${PARAMETER_FILE_STRINGS}
@@ -122,7 +125,8 @@ LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-
+  ADD_DEPENDENCIES(cdpl-forcefield-static gen-forcefield-data-files)
+  
   SET_TARGET_PROPERTIES(cdpl-forcefield-static PROPERTIES 
     OUTPUT_NAME cdpl-forcefield
     CLEAN_DIRECT_OUTPUT 1
@@ -135,6 +139,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+ADD_DEPENDENCIES(cdpl-forcefield-shared gen-forcefield-data-files)
 
 TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
 
