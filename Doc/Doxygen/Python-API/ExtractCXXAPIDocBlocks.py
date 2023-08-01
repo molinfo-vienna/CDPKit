@@ -249,7 +249,7 @@ def processCXXAPIDocFile(file_path, api_doc_db):
     
     dom = parse(file_path)
     comp_def = dom.getElementsByTagName('compounddef')[0]
-    comp_name = getTextRecursive(comp_def.getElementsByTagName('compoundname')[0]).replace('::', '.')
+    comp_name = getTextRecursive(comp_def.getElementsByTagName('compoundname')[0]).replace('::', '.').strip()
     doc_block = getDocBlock(comp_def)
 
     if doc_block:

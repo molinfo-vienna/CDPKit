@@ -189,6 +189,10 @@ def loadCPPAPIDocMergeInfo(file_name):
 
 def getDocBlockEntry(key):
     for entry in DOC_BLOCKS:
+        if entry[0].endswith('^'):
+            if key.endswith(entry[0][0:-1]):
+                return entry
+            
         if key.find(entry[0]) != -1:
             return entry
 
@@ -210,9 +214,9 @@ def getProvidedDocBlock(key, func_data, func_name, class_name, is_static):
 
     if not func_data:
         if not class_name:
-            return ''.join(doc_block)
+            return ''.join(doc_block[1:])
         
-        return ''.join([l.replace('@CN@', class_name) for l in doc_block])
+        return ''.join([l.replace('@CN@', class_name) for l in doc_block[1:]])
     
     proc_args = []
     rc = []
@@ -255,8 +259,10 @@ def performGenericCPPAPIDocFixes(doc_block):
 
     return doc_block
     
-def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_name = None, is_static = True):
-    key = sys.argv[1] + '.' + key
+def getAPIDocBlock(key, ident = '', func_data = None, func_name = None, class_name = None, is_static = True, verbatim_key = False):
+    if not verbatim_key:
+        key = sys.argv[1] + '.' + key
+
     doc_block = None
     
     for entry in CPP_API_DOC_MERGE_INFO:
@@ -622,6 +628,9 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
         if name in ignored_names:
             continue
 
+        if name.startswith('_' + class_obj.__name__ + '_'):
+            continue
+        
         if isProperty(obj):
             properties.append((obj, name))
         elif isStaticProperty(class_obj, name):
@@ -880,6 +889,23 @@ def printVariables(variable_objects):
         out_file.write(name)
         out_file.write(' = ' + value_str + '\n')
 
+def outputPackageDoc():
+    doc_block = getAPIDocBlock(sys.argv[1], verbatim_key=True)
+
+    if not doc_block:
+        return
+    
+    out_file = openOutputFile('Package')
+
+    out_file.write('\n##\n')
+    out_file.write('# \\package ')
+    out_file.write(sys.argv[1])
+    out_file.write('\n')
+    
+    for line in doc_block.split('\n')[1:]:
+        out_file.write(line)
+        out_file.write('\n')
+    
 def extendByModuleName(type_name):
     ignored_types = [ 'int', 'object', 'float', 'None', 'str', 'bool', 'list', 'tuple', 'dict' ]
 
@@ -941,6 +967,7 @@ def genPythonAPIDocFiles():
 
     printFunctions(functions)
     printVariables(variables)
+    outputPackageDoc()
 
 if __name__ == '__main__':
     genPythonAPIDocFiles()

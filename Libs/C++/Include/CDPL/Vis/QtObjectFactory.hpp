@@ -60,33 +60,32 @@ namespace CDPL
 
           public:
             /**
-             * \brief Creates a \c QFont object that corresponds to the specified font \a f.
-             * \param f The font object.
-             * \return A \c QFont object equivalent to \a f.
+             * \brief Creates a \c QFont object that corresponds to the specified font.
+             * \param font The font object.
+             * \return A \c QFont object equivalent to \a font.
              */
-            static QFont createQFont(const Font& f);
+            static QFont createQFont(const Font& font);
 
             /**
-             * \brief Creates a \c QColor object that corresponds to the specified color \a c.
-             * \param c The color object.
-             * \return A \c QColor object equivalent to \a c.
-             * \note <em>Qt 3.x</em> does not support alpha channels.
+             * \brief Creates a \c QColor object that corresponds to the specified color.
+             * \param color The color object.
+             * \return A \c QColor object equivalent to \a color.
              */
-            static QColor createQColor(const Color& c);
+            static QColor createQColor(const Color& color);
 
             /**
-             * \brief Creates a \c QPen object that corresponds to the specified pen \a p.
-             * \param p The pen object.
-             * \return A \c QPen object equivalent to \a p.
+             * \brief Creates a \c QPen object that corresponds to the specified pen.
+             * \param pen The pen object.
+             * \return A \c QPen object equivalent to \a pen.
              */
-            static QPen createQPen(const Pen& p);
+            static QPen createQPen(const Pen& pen);
 
             /**
-             * \brief Creates a \c QBrush object that corresponds to the specified brush \a b.
-             * \param b The brush object.
-             * \return A \c QBrush object equivalent to \a b.
+             * \brief Creates a \c QBrush object that corresponds to the specified brush.
+             * \param brush The brush object.
+             * \return A \c QBrush object equivalent to \a brush.
              */
-            static QBrush createQBrush(const Brush& b);
+            static QBrush createQBrush(const Brush& brush);
 
           private:
             QtObjectFactory() {}

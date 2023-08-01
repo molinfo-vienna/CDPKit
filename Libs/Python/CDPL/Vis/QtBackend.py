@@ -68,7 +68,7 @@ brushStyleMap = { CDPL.Vis.Brush.SOLID_PATTERN      : QtCore.Qt.SolidPattern,
 class QtObjectFactory(object):
 
     def createQFont(font):
-        "createQFont(Vis.Font font) -> PyQt4.QtGui.QFont :"
+        "createQFont(Vis.Font font) -> PyQt5.QtGui.QFont :"
         qt_font = QtGui.QFont(font.family)
 
         if (font.size <= 1.0):
@@ -86,7 +86,7 @@ class QtObjectFactory(object):
         return qt_font
 
     def createQColor(color):
-        "createQColor(Vis.Color color) -> PyQt4.QtGui.QColor :"
+        "createQColor(Vis.Color color) -> PyQt5.QtGui.QColor :"
         qt_color = QtGui.QColor()
         
         qt_color.setRedF(color.red)
@@ -97,7 +97,7 @@ class QtObjectFactory(object):
         return qt_color
 
     def createQPen(pen):
-        "createQPen(Vis.Pen pen) -> PyQt4.QtGui.QPen :"
+        "createQPen(Vis.Pen pen) -> PyQt5.QtGui.QPen :"
         try:
             pen_style = lineStyleMap[pen.lineStyle]
         except KeyError:
@@ -123,7 +123,7 @@ class QtObjectFactory(object):
         return qt_pen
 
     def createQBrush(brush):
-        "createQBrush(Vis.Brush brush) -> PyQt4.QtGui.QBrush :"
+        "createQBrush(Vis.Brush brush) -> PyQt5.QtGui.QBrush :"
         try:
             brush_style = brushStyleMap[brush.style]
         except KeyError:
@@ -140,7 +140,7 @@ class QtObjectFactory(object):
 class QtFontMetrics(CDPL.Vis.FontMetrics):
 
     def __init__(self, paint_dev = None):
-        "__init__(QtFontMetrics self, PyQt4.QtGui.QPaintDevice paint_dev) -> None :"
+        "__init__(QtFontMetrics self, PyQt5.QtGui.QPaintDevice paint_dev) -> None :"
         CDPL.Vis.FontMetrics.__init__(self)
 
         self.__qPaintDevice = paint_dev
@@ -180,7 +180,7 @@ class QtFontMetrics(CDPL.Vis.FontMetrics):
 class QtRenderer2D(CDPL.Vis.Renderer2D):
 
     def __init__(self, painter):
-        "__init__(QtRenderer2D self, cairo.Context cairo_ctxt) -> None :"
+        "__init__(QtRenderer2D self, PyQt5.QtGui.QPainter painter) -> None :"
         CDPL.Vis.Renderer2D.__init__(self)
         self.__qPainter = painter
 
@@ -193,13 +193,13 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
         self.__qPainter.restore()
     
     def setTransform(self, xform):
-        "setTransform(QtRenderer2D self, Math.AffineTransform3D xform) -> None :"
+        "setTransform(QtRenderer2D self, Math.Matrix3D xform) -> None :"
         self.__qPainter.setWorldTransform(QtGui.QTransform(xform(0, 0), xform(1, 0), xform(2, 0), 
                                                            xform(0, 1), xform(1, 1), xform(2, 1), 
                                                            xform(0, 2), xform(1, 2), xform(2, 2)), False)
     
     def transform(self, xform):
-        "transform(QtRenderer2D self, Math.AffineTransform3D xform) -> None :"
+        "transform(QtRenderer2D self, Math.Matrix3D xform) -> None :"
         self.__qPainter.setWorldTransform(QtGui.QTransform(xform(0, 0), xform(1, 0), xform(2, 0), 
                                                            xform(0, 1), xform(1, 1), xform(2, 1), 
                                                            xform(0, 2), xform(1, 2), xform(2, 2)), True)

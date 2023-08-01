@@ -3,7 +3,7 @@
 \mainpage 
 \par Here is a list of entry points to all documentation pages:  
 
-- <a href="namespaces.html">Annotated Namespace List</a>
+- <a href="namespaces.html">Annotated Package List</a>
 - <a href="annotated.html">Annotated Class List</a>
 - <a href="classes.html">Alphabetical Class List</a>
 - <a href="hierarchy.html">Hierarchical Class List</a>
@@ -17,8 +17,7 @@
 \par License:
 
 The <em>Chemical Data Processing Library</em> is released under the terms of the
-<em>GNU Lesser General Public License V2.1 (GNU LGPL)</em> available <a href="LGPL.html">here</a>.
-This documentation is licensend under the terms of <em>GNU Free Documentation License V1.2 (GNU FDL)</em>
-available <a href="FDL.html">here</a>.
+<a href="LGPL.html"><em>GNU Lesser General Public License V2.1 (GNU LGPL)</em></a>.
+This documentation is licensend under the terms of the <a href="FDL.html"><em>GNU Free Documentation License V1.2 (GNU FDL)</em></a>.
 
 */

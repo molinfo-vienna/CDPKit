@@ -169,14 +169,14 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
             del self.__fontStack[-1]
 
     def setTransform(self, xform):
-        "setTransform(CairoRenderer2D self, Math.AffineTransform3D xform) -> None :"
+        "setTransform(CairoRenderer2D self, Math.Matrix3D xform) -> None :"
         cairo_xform = cairo.Matrix(xform(0, 0), xform(1, 0), xform(0, 1), 
                                    xform(1, 1), xform(0, 2), xform(1, 2))
 
         self.__cairoContext.set_matrix(cairo_xform)
 
     def transform(self, xform):
-        "transform(CairoRenderer2D self, Math.AffineTransform3D xform) -> None :"
+        "transform(CairoRenderer2D self, Math.Matrix3D xform) -> None :"
         cairo_xform = cairo.Matrix(xform(0, 0), xform(1, 0), xform(0, 1), 
                                    xform(1, 1), xform(0, 2), xform(1, 2))
     

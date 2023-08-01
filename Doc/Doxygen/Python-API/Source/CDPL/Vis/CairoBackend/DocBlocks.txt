@@ -1,0 +1,3 @@
+CairoBackend^
+\brief Contains classes related to the implementation of CDPL.Vis interfaces on top of the <em>Cairo 2D Graphics Library</em> [\ref CAIRO].
+$$$$

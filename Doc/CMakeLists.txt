@@ -29,7 +29,8 @@ IF(SPHINX_FOUND)
   ADD_SUBDIRECTORY(Sphinx)
 
   ADD_CUSTOM_TARGET(doc ${CMAKE_COMMAND} -E copy_directory
-    "${CMAKE_CURRENT_BINARY_DIR}/Sphinx/html" "${CMAKE_CURRENT_BINARY_DIR}/html")
+    "${CMAKE_CURRENT_BINARY_DIR}/Sphinx/html" "${CMAKE_CURRENT_BINARY_DIR}/html"
+    COMMENT "-- Generating CDPKit documentation pages...")
 
   IF(DOXYGEN_EXECUTABLE)
     ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD

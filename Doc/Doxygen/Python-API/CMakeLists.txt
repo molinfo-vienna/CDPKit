@@ -33,6 +33,7 @@ ADD_CUSTOM_COMMAND(OUTPUT cxx_api_doc.db
 CONFIGURE_FILE(Doxyfile.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
 CONFIGURE_FILE(CopyDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake" @ONLY)
 CONFIGURE_FILE(GenDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/GenDocSourceFiles.cmake" @ONLY)
+CONFIGURE_FILE(PostProcHTMLFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/PostProcHTMLFiles.cmake" @ONLY)
 
 ADD_CUSTOM_TARGET(copy-python-api-doc-sources
   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake"
@@ -45,3 +46,7 @@ ADD_CUSTOM_TARGET(gen-python-api-doc-sources
 
 ADD_CUSTOM_TARGET(python-api-doc "${DOXYGEN_EXECUTABLE}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
 ADD_DEPENDENCIES(python-api-doc copy-python-api-doc-sources)
+
+ADD_CUSTOM_COMMAND(TARGET python-api-doc POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/PostProcHTMLFiles.cmake"
+  COMMENT "-- Post-processing Python API documentation HTML files...")

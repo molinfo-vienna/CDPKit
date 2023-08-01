@@ -569,3 +569,11 @@ MolProp.ElementHistogram. % Util.Map.
 # --- CDPL.ConfGen package ---
 #
 DGStructureGeneratorSettings.DEFAULT_ % DGStructureGeneratorSettings.DEFAULT
+
+#
+# --- CDPL.Vis package ---
+#
+.QtBackend. % .
+
+.CairoBackend. % .
+
