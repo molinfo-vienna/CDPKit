@@ -1,0 +1,141 @@
+.__init__
+\brief Initializes the \e %@CN@ instance.
+\param @A0@ The \e %@CN@ instance to initialize.
+\param @ARGS@ 
+$$$$
+
+.__copy__init__
+\brief Initializes the \e %@CN@ instance with a copy of the state of the \e %@AT1@ instance \a @A1@.
+\param @A0@ The \e %@CN@ instance to initialize.
+\param @A1@ The \e %@AT1@ instance to copy.
+$$$$
+
+.__str__
+\brief Returns a string representation of the \e %@CN@ instance.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\return The generated string representation.
+$$$$
+
+.__lt__
+\brief Returns the result of the comparison operation <tt>@A0@ < @A1@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to be compared with.
+\return The result of the comparison operation.
+$$$$
+
+.__le__
+\brief Returns the result of the comparison operation <tt>@A0@ <= @A1@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to be compared with.
+\return The result of the comparison operation.
+$$$$
+
+.__gt__
+\brief Returns the result of the comparison operation <tt>@A0@ > @A1@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to be compared with.
+\return The result of the comparison operation.
+$$$$
+
+.__ge__
+\brief Returns the result of the comparison operation <tt>@A0@ >= @A1@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to be compared with.
+\return The result of the comparison operation.
+$$$$
+
+.__ne__
+\brief Returns the result of the comparison operation <tt>@A0@ != @A1@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to be compared with.
+\return The result of the comparison operation.
+$$$$
+
+.__eq__
+\brief Returns the result of the comparison operation <tt>@A0@ == @A1@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to be compared with.
+\return The result of the comparison operation.
+$$$$
+
+.__contains__
+\brief Returns the result of the membership test operation <tt>@A1@ in @A0@</tt>.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The value to test for membership.
+\return The result of the membership test operation.
+$$$$
+
+.__iadd__
+\brief Performs the in-place addition operation <tt>@A0@ += @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as in-place addend.
+\param @A1@ Specifies the second addend.
+\return The updated \e %@RT@ instance \a @A0@.
+$$$$
+
+.__isub__
+\brief Performs the in-place subtraction operation <tt>@A0@ -= @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as in-place minuend.
+\param @A1@ Specifies the subtrahend.
+\return The updated \e %@RT@ instance \a @A0@.
+$$$$
+
+.__imul__
+\brief Performs the in-place multiplication operation <tt>@A0@ *= @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as in-place multiplicand.
+\param @A1@ Specifies the multiplier.
+\return The updated \e %@RT@ instance \a @A0@.
+$$$$
+
+.__idiv__
+\brief Performs the in-place division operation <tt>@A0@ /= @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as in-place dividend.
+\param @A1@ Specifies the divisor.
+\return The updated \e %@RT@ instance \a @A0@.
+$$$$
+
+.__add__
+\brief Returns the result of the addition operation <tt>@A0@ + @A1@</tt>.
+\param @A0@ The \e %@CN@ instance representing the first addend.
+\param @A1@ Specifies the second addend.
+\return A \e %@RT@ instance holding the result of the addition.
+$$$$
+
+.__sub__
+\brief Returns the result of the subtraction operation <tt>@A0@ - @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as minuend.
+\param @A1@ Specifies the subtrahend.
+\return A \e %@CN@ instance holding the result of the subtraction.
+$$$$
+
+.__mul__
+\brief Returns the result of the multiplication operation <tt>@A0@ * @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as multiplicand.
+\param @A1@ Specifies the multiplier.
+\return A \e %@RT@ instance holding the result of the multiplication.
+$$$$
+
+.__div__
+\brief Returns the result of the division operation <tt>@A0@ / @A1@</tt>.
+\param @A0@ The \e %@CN@ instance acting as dividend.
+\param @A1@ Specifies the divisor.
+\return A \e %@RT@ instance holding the result of the division.
+$$$$
+
+.__copy__assign
+\brief Replaces the current state of \a @A0@ with a copy of the state of the \e %@AT1@ instance \a @A1@.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+\param @A1@ The \e %@AT1@ instance to copy.
+\return \a @A0@
+$$$$
+
+.getObjectID
+\brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
+\param @A0@ The \e %@CN@ instance this method is called upon.
+
+Different Python \e %@CN@ instances may reference the same underlying C++ class instance. The commonly used Python expression
+<tt>a is not b</tt> thus cannot tell reliably whether the two \e %@CN@ instances \e a and \e b reference different C++ objects. 
+The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
+<tt>a.getObjectID() != b.getObjectID()</tt>.
+
+\return The numeric ID of the internally referenced C++ class instance.
+$$$$

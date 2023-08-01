@@ -437,6 +437,10 @@ namespace CDPLPythonBase
                 .def("seek", &StreamType::seekReadPos, (python::arg("self"), python::arg("offs"), python::arg("whence") = 0))
                 .def("seekr", &StreamType::seekReadPos, (python::arg("self"), python::arg("offs"), python::arg("whence") = 0))
                 .def("next", &StreamType::nextLine, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+                .def("isClosed", &StreamType::isClosed, python::arg("self"))
+                .def("getOpenModeString", &StreamType::getOpenModeString, python::arg("self"),
+                     python::return_value_policy<python::copy_const_reference>())
+                .def("getOpenModeFlags", &StreamType::getOpenModeFlags, python::arg("self"))
                 .add_property("closed", &StreamType::isClosed)
                 .add_property("mode", python::make_function(&StreamType::getOpenModeString,
                                                             python::return_value_policy<python::copy_const_reference>()))
@@ -463,6 +467,12 @@ namespace CDPLPythonBase
                 .def("writelines", &StreamType::writeLines, (python::arg("self"), python::arg("iterable")))
                 .def("tellw", &StreamType::tellWritePos, python::arg("self"))
                 .def("seekw", &StreamType::seekWritePos, (python::arg("self"), python::arg("offs"), python::arg("whence") = 0))
+                .def("isClosed", &StreamType::isClosed, python::arg("self"))
+                .def("getOpenModeString", &StreamType::getOpenModeString, python::arg("self"),
+                     python::return_value_policy<python::copy_const_reference>())
+                .def("getOpenModeFlags", &StreamType::getOpenModeFlags, python::arg("self"))
+                .def("getSoftSpace", &StreamType::getSoftSpace, python::arg("self"))
+                .def("setSoftSpace", &StreamType::setSoftSpace, (python::arg("self"), python::arg("value")))
                 .add_property("closed", &StreamType::isClosed)
                 .add_property("softspace", &StreamType::getSoftSpace, &StreamType::setSoftSpace)
                 .add_property("mode", python::make_function(&StreamType::getOpenModeString,
