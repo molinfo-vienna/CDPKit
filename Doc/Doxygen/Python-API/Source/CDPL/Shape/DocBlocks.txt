@@ -1,27 +1,32 @@
 #
 # --- Unresolved property getter/setter functions ---
 #
-ShapeAlignment.maxNumOptIterations.value
+.maxNumOptIterations.value
 getMaxNumOptimizationIterations
 setMaxNumOptimizationIterations
 $$$$
 
-ShapeAlignment.optStopGradient.value
+.optStopGradient.value
 getOptimizationStopGradient
 setOptimizationStopGradient
 $$$$
 
-ShapeAlignment.optOverlap.value
+.optOverlap.value
 optimizeOverlap
 optimizeOverlap
 $$$$
 
-ShapeAlignment.greedyOpt.value
+.greedyOpt.value
 greedyOptimization
 greedyOptimization
 $$$$
 
-GaussianShapeAlignment.perfAlignment.value
+.colorOverlaps.value
+calcColorOverlaps
+calcColorOverlaps
+$$$$
+
+.perfAlignment.value
 performAlignment
 performAlignment
 $$$$
@@ -34,11 +39,6 @@ $$$$
 GaussianShapeAlignment.colorSelfOverlaps.value
 calcColorSelfOverlaps
 calcColorSelfOverlaps
-$$$$
-
-GaussianShapeAlignment.colorOverlaps.value
-calcColorOverlaps
-calcColorOverlaps
 $$$$
 
 GaussianShapeAlignment.distCutoff.value

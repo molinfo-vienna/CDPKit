@@ -304,26 +304,10 @@ class ScreeningSettings(Boost.Python.instance):
 
     colorFeatureType = property(getColorFeatureType, setColorFeatureType)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    maxNumOptIterations = property(getMaxNumOptIterations, setMaxNumOptIterations)
+    maxNumOptIterations = property(getMaxNumOptimizationIterations, setMaxNumOptimizationIterations)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    optStopGradient = property(getOptStopGradient, setOptStopGradient)
+    optStopGradient = property(getOptimizationStopGradient, setOptimizationStopGradient)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    optOverlap = property(getOptOverlap, setOptOverlap)
+    optOverlap = property(optimizeOverlap, optimizeOverlap)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    greedyOpt = property(getGreedyOpt, setGreedyOpt)
+    greedyOpt = property(greedyOptimization, greedyOptimization)

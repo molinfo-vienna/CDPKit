@@ -171,26 +171,10 @@ class GZipIOStream(Base.IOStream):
     #
     def __iter__() -> GZipIOStream: pass
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    closed = property(getClosed)
+    closed = property(isClosed)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    mode = property(getMode)
+    mode = property(getOpenModeString)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    modeFlags = property(getModeFlags)
+    modeFlags = property(getOpenModeFlags)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    softspace = property(getSoftspace, setSoftspace)
+    softspace = property(getSoftSpace, setSoftSpace)

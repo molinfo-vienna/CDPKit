@@ -353,38 +353,14 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     colorFilterFunction = property(getColorFilterFunction, setColorFilterFunction)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    perfAlignment = property(getPerfAlignment, setPerfAlignment)
+    perfAlignment = property(performAlignment, performAlignment)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    maxNumOptIterations = property(getMaxNumOptIterations, setMaxNumOptIterations)
+    maxNumOptIterations = property(getMaxNumOptimizationIterations, setMaxNumOptimizationIterations)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    optStopGradient = property(getOptStopGradient, setOptStopGradient)
+    optStopGradient = property(getOptimizationStopGradient, setOptimizationStopGradient)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    optOverlap = property(getOptOverlap, setOptOverlap)
+    optOverlap = property(optimizeOverlap, optimizeOverlap)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    greedyOpt = property(getGreedyOpt, setGreedyOpt)
+    greedyOpt = property(greedyOptimization, greedyOptimization)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    colorOverlaps = property(getColorOverlaps, setColorOverlaps)
+    colorOverlaps = property(calcColorOverlaps, calcColorOverlaps)

@@ -527,7 +527,6 @@ def printProperty(class_obj, prop_obj, property_name, out_file, ident):
     if not get_meth_found:
         out_file.write(ident + '##\n')
         out_file.write(ident + '# \\brief FIXME!\n')
-        out_file.write(ident + '# \\brief \n')
         out_file.write(ident + '#\n')
         
     out_file.write(ident + property_name + ' = property(' + get_meth_name)

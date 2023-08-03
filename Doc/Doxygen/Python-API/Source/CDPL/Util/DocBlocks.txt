@@ -1,1 +1,19 @@
- 
+#
+# --- Unresolved property getter/setter functions ---
+#
+Stream.closed.value
+isClosed
+$$$$
+
+Stream.mode.value
+getOpenModeString
+$$$$
+
+Stream.modeFlags.value
+getOpenModeFlags
+$$$$
+
+Stream.softspace.value
+getSoftSpace
+setSoftSpace
+$$$$

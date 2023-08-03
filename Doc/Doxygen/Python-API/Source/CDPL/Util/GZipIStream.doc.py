@@ -129,20 +129,8 @@ class GZipIStream(Base.IStream):
     #
     def __iter__() -> GZipIStream: pass
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    closed = property(getClosed)
+    closed = property(isClosed)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    mode = property(getMode)
+    mode = property(getOpenModeString)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    modeFlags = property(getModeFlags)
+    modeFlags = property(getOpenModeFlags)

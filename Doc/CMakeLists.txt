@@ -30,8 +30,10 @@ IF(SPHINX_FOUND)
 
   ADD_CUSTOM_TARGET(doc ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_CURRENT_BINARY_DIR}/Sphinx/html" "${CMAKE_CURRENT_BINARY_DIR}/html"
-    COMMENT "-- Generating CDPKit documentation pages...")
+    COMMENT "-- Generating CDPKit documentation HTML pages...")
 
+  ADD_DEPENDENCIES(doc sphinx-doc)
+  
   IF(DOXYGEN_EXECUTABLE)
     ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -41,7 +43,7 @@ IF(SPHINX_FOUND)
       COMMAND ${CMAKE_COMMAND} -E copy_directory
       "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/python_api")
 
-    ADD_DEPENDENCIES(doc c++-api-doc python-api-doc sphinx-doc)
+    ADD_DEPENDENCIES(doc c++-api-doc python-api-doc)
   ENDIF(DOXYGEN_EXECUTABLE)
 
   INSTALL(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION "${CDPKIT_DOC_INSTALL_DIR}"
