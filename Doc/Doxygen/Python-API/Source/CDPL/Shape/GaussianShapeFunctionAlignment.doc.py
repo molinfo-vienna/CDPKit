@@ -339,11 +339,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     defaultOverlapFunction = property(getDefaultOverlapFunction)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    referenceShapeFunction = property(getReferenceShapeFunction, setReferenceShapeFunction)
+    reference = property(getReference, setReference)
 
     startGenerator = property(getStartGenerator, setStartGenerator)
 

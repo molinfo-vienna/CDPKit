@@ -158,7 +158,6 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     distanceToIntervalCenterRounding = property(getDistanceToIntervalCenterRounding, setDistanceToIntervalCenterRounding)
 

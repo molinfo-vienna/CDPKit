@@ -736,7 +736,6 @@ class DRegularSpatialGrid(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     coordsTransform = property(getCoordsTransform, setCoordsTransform)
 

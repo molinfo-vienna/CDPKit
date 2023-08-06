@@ -128,11 +128,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
 
         atomicPolarizability = property(getAtomicPolarizability)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        effElectronNumber = property(getEffElectronNumber)
+        effElectronNumber = property(getEffectiveElectronNumber)
 
         factorA = property(getFactorA)
 

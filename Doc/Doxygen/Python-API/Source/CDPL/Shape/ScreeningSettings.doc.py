@@ -290,17 +290,9 @@ class ScreeningSettings(Boost.Python.instance):
 
     numRandomStarts = property(getNumRandomStarts, setNumRandomStarts)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    allCarbon = property(getAllCarbon, setAllCarbon)
+    allCarbon = property(allCarbonMode, allCarbonMode)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    singleConfSearch = property(getSingleConfSearch, setSingleConfSearch)
+    singleConfSearch = property(singleConformerSearch, singleConformerSearch)
 
     colorFeatureType = property(getColorFeatureType, setColorFeatureType)
 

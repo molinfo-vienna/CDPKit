@@ -62,6 +62,5 @@ class BondOrderCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     undefinedOnly = property(getUndefinedOnly, setUndefinedOnly)

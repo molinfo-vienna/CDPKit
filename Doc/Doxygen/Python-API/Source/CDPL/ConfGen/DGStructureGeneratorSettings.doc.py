@@ -82,6 +82,5 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     planarityConstraints = property(getPlanarityConstraints, setPlanarityConstraints)

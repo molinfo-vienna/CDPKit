@@ -91,7 +91,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         id = property(getId, setId)
 
@@ -176,7 +175,6 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         generic = property(getGeneric, setGeneric)
 
@@ -426,7 +424,6 @@ class FragmentGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     incSplitBonds = property(getIncSplitBonds, setIncSplitBonds)
 

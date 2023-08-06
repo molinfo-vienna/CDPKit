@@ -123,7 +123,6 @@ class ResidueDictionary(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         obsolete = property(getObsolete)
 

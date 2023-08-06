@@ -136,29 +136,13 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    termAtom1Index = property(getTermAtom1Index)
+    termAtom1Index = property(getTerminalAtom1Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    termAtom2Index = property(getTermAtom2Index)
+    termAtom2Index = property(getTerminalAtom2Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    ctrAtom1Index = property(getCtrAtom1Index)
+    ctrAtom1Index = property(getCenterAtom1Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    ctrAtom2Index = property(getCtrAtom2Index)
+    ctrAtom2Index = property(getCenterAtom2Index)
 
     atom1Index = property(getAtom1Index)
 
@@ -170,20 +154,8 @@ class MMFF94TorsionInteraction(Boost.Python.instance):
 
     torsionTypeIndex = property(getTorsionTypeIndex)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    torsionParam1 = property(getTorsionParam1)
+    torsionParam1 = property(getTorsionParameter1)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    torsionParam2 = property(getTorsionParam2)
+    torsionParam2 = property(getTorsionParameter2)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    torsionParam3 = property(getTorsionParam3)
+    torsionParam3 = property(getTorsionParameter3)

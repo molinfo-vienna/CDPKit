@@ -122,23 +122,11 @@ class MMFF94AngleBendingParameterTable(Boost.Python.instance):
 
         angleTypeIndex = property(getAngleTypeIndex)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom1Type = property(getTermAtom1Type)
+        termAtom1Type = property(getTerminalAtom1Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        ctrAtomType = property(getCtrAtomType)
+        ctrAtomType = property(getCenterAtomType)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom2Type = property(getTermAtom2Type)
+        termAtom2Type = property(getTerminalAtom2Type)
 
         forceConstant = property(getForceConstant)
 

@@ -59,18 +59,22 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
+        ##
+        # \brief 
+        # \return 
+        #
+        def getSymbolicType() -> str: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getNumericType() -> int: pass
+
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
         symbolicType = property(getSymbolicType)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
         numericType = property(getNumericType)
 
     ##

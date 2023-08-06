@@ -149,31 +149,15 @@ class MMFF94AtomTypePropertyTable(Boost.Python.instance):
 
         valence = property(getValence)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        piLonePair = property(getPiLonePair)
+        piLonePair = property(hasPiLonePair)
 
         multiBondDesignator = property(getMultiBondDesignator)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        aromAtomType = property(getAromAtomType)
+        aromAtomType = property(isAromaticAtomType)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        linearBondAngle = property(getLinearBondAngle)
+        linearBondAngle = property(formsLinearBondAngle)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        multiOrSingleBonds = property(getMultiOrSingleBonds)
+        multiOrSingleBonds = property(formsMultiOrSingleBonds)
 
     ##
     # \brief Initializes the \e %MMFF94AtomTypePropertyTable instance.

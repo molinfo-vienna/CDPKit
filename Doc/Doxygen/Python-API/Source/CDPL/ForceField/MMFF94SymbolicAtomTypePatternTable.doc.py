@@ -74,17 +74,19 @@ class MMFF94SymbolicAtomTypePatternTable(Boost.Python.instance):
         #
         def getSymbolicType() -> str: pass
 
-        objectID = property(getObjectID)
-
         ##
-        # \brief FIXME!
         # \brief 
+        # \return 
         #
-        isFallbackType = property(getIsFallbackType)
+        def isFallbackType() -> bool: pass
+
+        objectID = property(getObjectID)
 
         symbolicType = property(getSymbolicType)
 
         pattern = property(getPattern)
+
+        fallbackType = property(isFallbackType)
 
     ##
     # \brief Initializes the \e %MMFF94SymbolicAtomTypePatternTable instance.

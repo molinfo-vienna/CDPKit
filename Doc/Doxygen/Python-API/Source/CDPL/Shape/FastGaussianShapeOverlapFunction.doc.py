@@ -90,16 +90,8 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     #
     def fastExpFunction() -> bool: pass
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    proximityOpt = property(getProximityOpt, setProximityOpt)
+    proximityOpt = property(proximityOptimization, proximityOptimization)
 
     radiusScalingFactor = property(getRadiusScalingFactor, setRadiusScalingFactor)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    fastExpFunc = property(getFastExpFunc, setFastExpFunc)
+    fastExpFunc = property(fastExpFunction, fastExpFunction)

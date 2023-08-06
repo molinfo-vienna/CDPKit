@@ -239,13 +239,11 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
 
@@ -253,19 +251,16 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     fragModeForceFieldType = property(getFragModeForceFieldType, setFragModeForceFieldType)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     dgModeForceFieldType = property(getDgModeForceFieldType, setDgModeForceFieldType)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
@@ -279,7 +274,6 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
 
@@ -287,7 +281,6 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     convCheckCycleSize = property(getConvCheckCycleSize, setConvCheckCycleSize)
 

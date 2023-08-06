@@ -88,6 +88,5 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     qryMode = property(getQryMode)

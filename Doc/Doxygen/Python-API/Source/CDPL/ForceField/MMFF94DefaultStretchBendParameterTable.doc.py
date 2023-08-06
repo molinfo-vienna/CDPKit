@@ -113,35 +113,15 @@ class MMFF94DefaultStretchBendParameterTable(Boost.Python.instance):
 
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom1PTERow = property(getTermAtom1PTERow)
+        termAtom1PTERow = property(getTerminalAtom1PTERow)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        ctrAtomPTERow = property(getCtrAtomPTERow)
+        ctrAtomPTERow = property(getCenterAtomPTERow)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom2PTERow = property(getTermAtom2PTERow)
+        termAtom2PTERow = property(getTerminalAtom2PTERow)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        ijkForceConstant = property(getIjkForceConstant)
+        ijkForceConstant = property(getIJKForceConstant)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        kjiForceConstant = property(getKjiForceConstant)
+        kjiForceConstant = property(getKJIForceConstant)
 
     ##
     # \brief Initializes the \e %MMFF94DefaultStretchBendParameterTable instance.

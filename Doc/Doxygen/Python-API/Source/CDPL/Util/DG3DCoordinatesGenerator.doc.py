@@ -448,7 +448,6 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     distanceConstraints = property(getDistanceConstraints)
 
@@ -456,6 +455,5 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     volumeConstraints = property(getVolumeConstraints)

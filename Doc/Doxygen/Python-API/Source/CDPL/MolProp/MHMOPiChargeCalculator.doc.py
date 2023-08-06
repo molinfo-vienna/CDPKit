@@ -113,7 +113,6 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     locPiBonds = property(getLocPiBonds, setLocPiBonds)
 

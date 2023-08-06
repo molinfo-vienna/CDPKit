@@ -151,23 +151,11 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
 
         bondAngle = property(getBondAngle)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        vdwDistance = property(getVdwDistance)
+        vdwDistance = property(getVdWDistance)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        vdwEnergy = property(getVdwEnergy)
+        vdwEnergy = property(getVdWEnergy)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        vdwScale = property(getVdwScale)
+        vdwScale = property(getVdWScale)
 
         effectiveCharge = property(getEffectiveCharge)
 

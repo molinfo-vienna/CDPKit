@@ -388,7 +388,6 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     empty = property(getEmpty)
 
@@ -400,12 +399,10 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     any = property(getAny)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     none = property(getNone)

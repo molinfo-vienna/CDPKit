@@ -336,7 +336,6 @@ class Rectangle2D(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     defined = property(getDefined)
 

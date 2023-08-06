@@ -47,6 +47,16 @@ namespace
 
         return entries;
     }
+
+    const std::string& getParentAtomType(const CDPL::ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry& entry)
+    {
+        return entry.first;
+    }
+
+    const std::string& getHydrogenAtomType(const CDPL::ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry& entry)
+    {
+        return entry.second;
+    }
 }
 
 
@@ -85,7 +95,11 @@ void CDPLPythonForceField::exportMMFF94HeavyToHydrogenAtomTypeMap()
         .def(python::init<const ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry&>((python::arg("self"), python::arg("entry"))))
         .def(python::init<const std::string&, const std::string&>(
                  (python::arg("self"), python::arg("parent_type"), python::arg("h_atom_type"))))
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry>())    
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry>())
+        .def("getParentAtomType", &getParentAtomType, python::arg("self"),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("getHydrogenAtomType", &getHydrogenAtomType, python::arg("self"),
+             python::return_value_policy<python::copy_const_reference>())
         .def_readonly("parentAtomType", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry::first)
         .def_readonly("hydrogenAtomType", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::Entry::second);
 }

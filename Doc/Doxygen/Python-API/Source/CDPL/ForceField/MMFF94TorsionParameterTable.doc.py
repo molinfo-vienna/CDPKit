@@ -134,53 +134,21 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
 
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        torTypeIndex = property(getTorTypeIndex)
+        torTypeIndex = property(getTorsionTypeIndex)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom1Type = property(getTermAtom1Type)
+        termAtom1Type = property(getTerminalAtom1Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        ctrAtom1Type = property(getCtrAtom1Type)
+        ctrAtom1Type = property(getCenterAtom1Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        ctrAtom2Type = property(getCtrAtom2Type)
+        ctrAtom2Type = property(getCenterAtom2Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom2Type = property(getTermAtom2Type)
+        termAtom2Type = property(getTerminalAtom2Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        torsionParam1 = property(getTorsionParam1)
+        torsionParam1 = property(getTorsionParameter1)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        torsionParam2 = property(getTorsionParam2)
+        torsionParam2 = property(getTorsionParameter2)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        torsionParam3 = property(getTorsionParam3)
+        torsionParam3 = property(getTorsionParameter3)
 
     ##
     # \brief Initializes the \e %MMFF94TorsionParameterTable instance.

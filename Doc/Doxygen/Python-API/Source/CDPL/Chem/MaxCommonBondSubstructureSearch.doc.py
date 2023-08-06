@@ -196,7 +196,6 @@ class MaxCommonBondSubstructureSearch(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     uniqueMappings = property(getUniqueMappings, setUniqueMappings)
 

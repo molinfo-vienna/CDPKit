@@ -185,37 +185,17 @@ class GaussianShapeGenerator(Boost.Python.instance):
 
     pharmacophoreGenerator = property(getPharmacophoreGenerator, setPharmacophoreGenerator)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    defPharmacophoreGenerator = property(getDefPharmacophoreGenerator)
+    defPharmacophoreGenerator = property(getDefaultPharmacophoreGenerator)
 
     shapes = property(getShapes)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    genPharmacophoreShape = property(getGenPharmacophoreShape, setGenPharmacophoreShape)
+    genPharmacophoreShape = property(generatePharmacophoreShape, generatePharmacophoreShape)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    genMoleculeShape = property(getGenMoleculeShape, setGenMoleculeShape)
+    genMoleculeShape = property(generateMoleculeShape, generateMoleculeShape)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    multiConfMode = property(getMultiConfMode, setMultiConfMode)
+    multiConfMode = property(multiConformerMode, multiConformerMode)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    incHydrogens = property(getIncHydrogens, setIncHydrogens)
+    incHydrogens = property(includeHydrogens, includeHydrogens)
 
     atomRadius = property(getAtomRadius, setAtomRadius)
 

@@ -99,11 +99,7 @@ class MMFF94PrimaryToParameterAtomTypeMap(Boost.Python.instance):
 
         atomType = property(getAtomType)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        paramAtomTypes = property(getParamAtomTypes)
+        paramAtomTypes = property(getParameterAtomTypes)
 
     ##
     # \brief Initializes the \e %MMFF94PrimaryToParameterAtomTypeMap instance.

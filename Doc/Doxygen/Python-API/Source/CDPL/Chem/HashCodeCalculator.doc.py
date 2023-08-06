@@ -181,6 +181,5 @@ class HashCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     globalStereoFeatures = property(getGlobalStereoFeatures, setGlobalStereoFeatures)

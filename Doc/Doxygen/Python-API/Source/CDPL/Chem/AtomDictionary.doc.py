@@ -190,13 +190,11 @@ class AtomDictionary(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         metal = property(getMetal)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         nonMetal = property(getNonMetal)
 

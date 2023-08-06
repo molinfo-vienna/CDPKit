@@ -140,6 +140,5 @@ class SymmetryClassCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     hydrogenComplete = property(getHydrogenComplete, setHydrogenComplete)

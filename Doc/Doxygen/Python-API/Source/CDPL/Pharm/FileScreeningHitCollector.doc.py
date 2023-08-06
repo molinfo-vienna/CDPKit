@@ -141,30 +141,25 @@ class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     hitMoleculeAlignment = property(getHitMoleculeAlignment, setHitMoleculeAlignment)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     scorePropertyOutput = property(getScorePropertyOutput, setScorePropertyOutput)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     dbNamePropertyOutput = property(getDbNamePropertyOutput, setDbNamePropertyOutput)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     dbMoleculeIndexPropertyOutput = property(getDbMoleculeIndexPropertyOutput, setDbMoleculeIndexPropertyOutput)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     moleculeConfIndexPropertyOutput = property(getMoleculeConfIndexPropertyOutput, setMoleculeConfIndexPropertyOutput)

@@ -124,7 +124,7 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
                       python::make_function(static_cast<Shape::FastGaussianShapeOverlapFunction& (Shape::GaussianShapeFunctionAlignment::*)()>
                                             (&Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction),
                                             python::return_internal_reference<>()))
-        .add_property("referenceShapeFunction",
+        .add_property("reference",
                       python::make_function(&Shape::GaussianShapeFunctionAlignment::getReference,
                                             python::return_internal_reference<>()),
                       python::make_function(&Shape::GaussianShapeFunctionAlignment::setReference,

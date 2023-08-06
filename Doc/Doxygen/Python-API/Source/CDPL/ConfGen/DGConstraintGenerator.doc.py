@@ -58,13 +58,11 @@ class DGConstraintGenerator(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         centerIndex = property(getCenterIndex)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         descriptor = property(getDescriptor)
 
@@ -207,6 +205,5 @@ class DGConstraintGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     exclHydrogenMask = property(getExclHydrogenMask)

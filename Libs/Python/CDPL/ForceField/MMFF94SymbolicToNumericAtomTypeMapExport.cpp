@@ -47,6 +47,16 @@ namespace
 
         return entries;
     }
+
+    const std::string& getSymbolicType(const CDPL::ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry& entry)
+    {
+        return entry.first;
+    }
+    
+    unsigned int getNumericType(const CDPL::ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry& entry)
+    {
+        return entry.second;
+    }
 }
 
 
@@ -84,8 +94,11 @@ void CDPLPythonForceField::exportMMFF94SymbolicToNumericAtomTypeMap()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry&>((python::arg("self"), python::arg("entry"))))
         .def(python::init<const std::string&, unsigned int>(
-                 (python::arg("self"), python::arg("sym_type"), python::arg("num_type"))))
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry>())    
+            (python::arg("self"), python::arg("sym_type"), python::arg("num_type"))))
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry>())
+        .def("getSymbolicType", &getSymbolicType, python::arg("self"),
+             python::return_value_policy<python::copy_const_reference>())
+        .def("getNumericType", &getNumericType, python::arg("self"))
         .def_readonly("symbolicType", &ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry::first)
         .def_readonly("numericType", &ForceField::MMFF94SymbolicToNumericAtomTypeMap::Entry::second);
 }

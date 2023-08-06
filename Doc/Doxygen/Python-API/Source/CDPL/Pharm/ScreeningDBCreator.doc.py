@@ -137,7 +137,6 @@ class ScreeningDBCreator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     allowDuplicates = property(getAllowDuplicates)
 

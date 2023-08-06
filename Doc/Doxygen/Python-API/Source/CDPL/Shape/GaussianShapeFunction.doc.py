@@ -132,6 +132,12 @@ class GaussianShapeFunction(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def calcVolume() -> float: pass
+
+    ##
+    # \brief 
     # \param pos 
     # \return 
     #
@@ -167,22 +173,10 @@ class GaussianShapeFunction(Boost.Python.instance):
 
     shape = property(getShape, setShape)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    volume = property(getVolume)
+    volume = property(calcVolume)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    surfaceArea = property(getSurfaceArea)
+    surfaceArea = property(calcSurfaceArea)
 
     maxOrder = property(getMaxOrder, setMaxOrder)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    distCutoff = property(getDistCutoff, setDistCutoff)
+    distCutoff = property(getDistanceCutoff, setDistanceCutoff)

@@ -201,18 +201,15 @@ class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     ringHydThreshold = property(getRingHydThreshold, setRingHydThreshold)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     chainHydThreshold = property(getChainHydThreshold, setChainHydThreshold)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     groupHydThreshold = property(getGroupHydThreshold, setGroupHydThreshold)

@@ -365,37 +365,31 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     sampleHetAtomHydrogens = property(getSampleHetAtomHydrogens, setSampleHetAtomHydrogens)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     enumRings = property(getEnumRings, setEnumRings)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     nitrogenEnumMode = property(getNitrogenEnumMode, setNitrogenEnumMode)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     includeInputCoords = property(getIncludeInputCoords, setIncludeInputCoords)
 
@@ -411,7 +405,6 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
@@ -431,13 +424,11 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     convCheckCycleSize = property(getConvCheckCycleSize, setConvCheckCycleSize)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
 

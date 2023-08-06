@@ -130,6 +130,5 @@ class DGStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     exclHydrogenMask = property(getExclHydrogenMask)

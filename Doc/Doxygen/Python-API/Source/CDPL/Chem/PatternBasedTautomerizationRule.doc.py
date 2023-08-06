@@ -63,19 +63,16 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         atom1ID = property(getAtom1ID)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         atom2ID = property(getAtom2ID)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         orderChange = property(getOrderChange)
 

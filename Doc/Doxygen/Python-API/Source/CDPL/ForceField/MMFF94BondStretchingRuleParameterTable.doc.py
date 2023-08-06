@@ -106,17 +106,9 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
 
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        atomicNo1 = property(getAtomicNo1)
+        atomicNo1 = property(getAtomicNumber1)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        atomicNo2 = property(getAtomicNo2)
+        atomicNo2 = property(getAtomicNumber2)
 
         forceConstant = property(getForceConstant)
 

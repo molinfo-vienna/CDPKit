@@ -113,29 +113,13 @@ class MMFF94OutOfPlaneBendingParameterTable(Boost.Python.instance):
 
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom1Type = property(getTermAtom1Type)
+        termAtom1Type = property(getTerminalAtom1Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        ctrAtomType = property(getCtrAtomType)
+        ctrAtomType = property(getCenterAtomType)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        termAtom2Type = property(getTermAtom2Type)
+        termAtom2Type = property(getTerminalAtom2Type)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        oopAtomType = property(getOopAtomType)
+        oopAtomType = property(getOutOfPlaneAtomType)
 
         forceConstant = property(getForceConstant)
 

@@ -159,6 +159,5 @@ class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     hydThreshold = property(getHydThreshold, setHydThreshold)

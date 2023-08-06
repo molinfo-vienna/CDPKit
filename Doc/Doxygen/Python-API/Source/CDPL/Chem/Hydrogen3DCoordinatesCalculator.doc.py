@@ -106,18 +106,15 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     undefinedOnly = property(getUndefinedOnly, setUndefinedOnly)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     coordsFunction = property(getCoordsFunction, setCoordsFunction)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     coordsCheckFunction = property(getCoordsCheckFunction, setCoordsCheckFunction)

@@ -168,13 +168,11 @@ class TautomerGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     regStereo = property(getRegStereo, setRegStereo)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     regIsotopes = property(getRegIsotopes, setRegIsotopes)
 

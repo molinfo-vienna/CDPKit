@@ -99,18 +99,15 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     exclHydrogens = property(getExclHydrogens, setExclHydrogens)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     regardAtomConfig = property(getRegardAtomConfig, setRegardAtomConfig)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     regardBondConfig = property(getRegardBondConfig, setRegardBondConfig)

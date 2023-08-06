@@ -201,7 +201,6 @@ class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     topMapping = property(getTopMapping)
 
@@ -209,7 +208,6 @@ class SpatialAtomAlignment(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     exhaustiveSearch = property(getExhaustiveSearch, setExhaustiveSearch)
 

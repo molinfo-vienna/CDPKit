@@ -359,13 +359,11 @@ class Line2D(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     ccwPerpDirection = property(getCcwPerpDirection)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     cwPerpDirection = property(getCwPerpDirection)
 

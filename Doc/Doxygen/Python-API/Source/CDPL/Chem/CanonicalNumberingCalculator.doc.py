@@ -138,6 +138,5 @@ class CanonicalNumberingCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     hydrogenCountFunc = property(getHydrogenCountFunc, setHydrogenCountFunc)

@@ -125,6 +125,5 @@ class FragmentLibraryEntry(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     smiles = property(getSmiles, setSmiles)

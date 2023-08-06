@@ -163,19 +163,16 @@ class SizeSpecification(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     inputScaling = property(getInputScaling, setInputScaling)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     outputScaling = property(getOutputScaling, setOutputScaling)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     relative = property(getRelative, setRelative)
 

@@ -166,7 +166,6 @@ class AutomorphismGroupSearch(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     incIdentityMapping = property(getIncIdentityMapping, setIncIdentityMapping)
 

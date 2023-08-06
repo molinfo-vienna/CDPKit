@@ -212,38 +212,14 @@ class Font(Boost.Python.instance):
 
     size = property(getSize, setSize)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    bold = property(getBold, setBold)
+    bold = property(isBold, setBold)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    italic = property(getItalic, setItalic)
+    italic = property(isItalic, setItalic)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    underlined = property(getUnderlined, setUnderlined)
+    underlined = property(isUnderlined, setUnderlined)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    overlined = property(getOverlined, setOverlined)
+    overlined = property(isOverlined, setOverlined)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    strikedOut = property(getStrikedOut, setStrikedOut)
+    strikedOut = property(isStrikedOut, setStrikedOut)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    fixedPitch = property(getFixedPitch, setFixedPitch)
+    fixedPitch = property(hasFixedPitch, setFixedPitch)

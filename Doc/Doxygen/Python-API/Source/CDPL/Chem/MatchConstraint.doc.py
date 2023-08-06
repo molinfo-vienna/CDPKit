@@ -148,12 +148,10 @@ class MatchConstraint(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     rel = property(getRel, setRel)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     val = property(getVal, setVal)

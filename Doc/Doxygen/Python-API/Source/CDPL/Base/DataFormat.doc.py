@@ -297,7 +297,6 @@ class DataFormat(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     multiRecordFormat = property(getMultiRecordFormat, setMultiRecordFormat)
 

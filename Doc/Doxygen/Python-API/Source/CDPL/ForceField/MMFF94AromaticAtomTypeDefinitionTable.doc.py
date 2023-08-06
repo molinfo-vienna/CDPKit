@@ -120,17 +120,9 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
 
         heteroAtomDistance = property(getHeteroAtomDistance)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        imidazoliumCation = property(getImidazoliumCation)
+        imidazoliumCation = property(isImidazoliumCation)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
-        n5RingAnion = property(getN5RingAnion)
+        n5RingAnion = property(isN5RingAnion)
 
     ##
     # \brief Initializes the \e %MMFF94AromaticAtomTypeDefinitionTable instance.

@@ -171,13 +171,11 @@ class TorsionDriverSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     sampleHetAtomHydrogens = property(getSampleHetAtomHydrogens, setSampleHetAtomHydrogens)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
 
@@ -185,7 +183,6 @@ class TorsionDriverSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
@@ -195,7 +192,6 @@ class TorsionDriverSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     energyOrdered = property(getEnergyOrdered, setEnergyOrdered)
 

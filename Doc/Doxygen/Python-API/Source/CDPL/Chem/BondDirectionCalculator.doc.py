@@ -101,6 +101,5 @@ class BondDirectionCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     ringBonds = property(getRingBonds, setRingBonds)

@@ -276,12 +276,10 @@ class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     incHydrogens = property(getIncHydrogens, setIncHydrogens)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     incChirality = property(getIncChirality, setIncChirality)

@@ -281,7 +281,6 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     dbAcccessor = property(getDbAcccessor, setDbAcccessor)
 
@@ -297,12 +296,10 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     checkXVolumes = property(getCheckXVolumes, setCheckXVolumes)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     bestAlignments = property(getBestAlignments, setBestAlignments)

@@ -136,7 +136,6 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     addXVolumes = property(getAddXVolumes, setAddXVolumes)
 
@@ -144,7 +143,6 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     envPharmacophoreGenerator = property(getEnvPharmacophoreGenerator)
 
@@ -154,7 +152,6 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     envPharmacophore = property(getEnvPharmacophore)
 

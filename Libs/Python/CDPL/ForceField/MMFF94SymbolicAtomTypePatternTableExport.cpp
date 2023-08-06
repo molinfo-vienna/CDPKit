@@ -96,5 +96,5 @@ void CDPLPythonForceField::exportMMFF94SymbolicAtomTypePatternTable()
                                                             python::return_value_policy<python::copy_const_reference>()))
         .add_property("pattern", python::make_function(&ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::getPattern,
                                                        python::return_value_policy<python::copy_const_reference>()))
-        .add_property("isFallbackType", &ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::isFallbackType);
+        .add_property("fallbackType", &ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::isFallbackType);
 }

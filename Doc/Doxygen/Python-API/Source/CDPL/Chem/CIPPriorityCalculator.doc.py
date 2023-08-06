@@ -75,6 +75,5 @@ class CIPPriorityCalculator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     implHydrogenCountFunc = property(getImplHydrogenCountFunc, setImplHydrogenCountFunc)

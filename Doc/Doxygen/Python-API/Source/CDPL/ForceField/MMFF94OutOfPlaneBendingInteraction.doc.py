@@ -115,29 +115,13 @@ class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    termAtom1Index = property(getTermAtom1Index)
+    termAtom1Index = property(getTerminalAtom1Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    termAtom2Index = property(getTermAtom2Index)
+    termAtom2Index = property(getTerminalAtom2Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    ctrAtomIndex = property(getCtrAtomIndex)
+    ctrAtomIndex = property(getCenterAtomIndex)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    oopAtomIndex = property(getOopAtomIndex)
+    oopAtomIndex = property(getOutOfPlaneAtomIndex)
 
     atom1Index = property(getAtom1Index)
 

@@ -291,6 +291,5 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     distanceConstraints = property(getDistanceConstraints)

@@ -155,23 +155,11 @@ class MMFF94StretchBendInteraction(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    termAtom1Index = property(getTermAtom1Index)
+    termAtom1Index = property(getTerminalAtom1Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    termAtom2Index = property(getTermAtom2Index)
+    termAtom2Index = property(getTerminalAtom2Index)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    ctrAtomIndex = property(getCtrAtomIndex)
+    ctrAtomIndex = property(getCenterAtomIndex)
 
     atom1Index = property(getAtom1Index)
 
@@ -187,14 +175,6 @@ class MMFF94StretchBendInteraction(Boost.Python.instance):
 
     referenceLength2 = property(getReferenceLength2, setReferenceLength2)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    ijkForceConstant = property(getIjkForceConstant)
+    ijkForceConstant = property(getIJKForceConstant)
 
-    ##
-    # \brief FIXME!
-    # \brief 
-    #
-    kjiForceConstant = property(getKjiForceConstant)
+    kjiForceConstant = property(getKJIForceConstant)

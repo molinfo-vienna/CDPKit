@@ -133,6 +133,5 @@ class PharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     atom3DCoordsFunc = property(getAtom3DCoordsFunc, setAtom3DCoordsFunc)

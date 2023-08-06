@@ -124,6 +124,5 @@ class StructureGenerator(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     logMessageCallback = property(getLogMessageCallback, setLogMessageCallback)

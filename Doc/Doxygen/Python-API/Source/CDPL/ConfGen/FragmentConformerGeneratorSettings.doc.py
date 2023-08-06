@@ -315,7 +315,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     preserveInputBondingGeom = property(getPreserveInputBondingGeom, setPreserveInputBondingGeom)
 
@@ -323,7 +322,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
 
@@ -335,13 +333,11 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     minimizationStopGradientNorm = property(getMinimizationStopGradientNorm, setMinimizationStopGradientNorm)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
 
@@ -351,12 +347,10 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     smallRingSysSettings = property(getSmallRingSysSettings)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     smallRingSysSamplingFactor = property(getSmallRingSysSamplingFactor, setSmallRingSysSamplingFactor)

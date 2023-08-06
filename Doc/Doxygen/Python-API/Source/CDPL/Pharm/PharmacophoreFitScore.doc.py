@@ -93,18 +93,15 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     featureMatchCountWeight = property(getFeatureMatchCountWeight, setFeatureMatchCountWeight)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     featurePositionMatchWeight = property(getFeaturePositionMatchWeight, setFeaturePositionMatchWeight)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     featureGeometryMatchWeight = property(getFeatureGeometryMatchWeight, setFeatureGeometryMatchWeight)

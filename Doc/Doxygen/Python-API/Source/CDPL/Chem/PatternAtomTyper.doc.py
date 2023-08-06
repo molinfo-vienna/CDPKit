@@ -104,13 +104,11 @@ class PatternAtomTyper(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         allMatches = property(getAllMatches)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         uniqueMatches = property(getUniqueMatches)
 

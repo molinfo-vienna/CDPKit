@@ -504,7 +504,7 @@ def printEnumeration(enum_obj, out_file = None, ident = '', scope = ''):
 
         out_file.write(ident + '    ' + str(k) + ' = ' + str(v) + '\n')
 
-def printProperty(class_obj, prop_obj, property_name, out_file, ident):
+def printProperty(class_obj, prop_obj, property_name, out_file, ident, scope):
     cap_name = property_name[0].upper() + property_name[1:]
     rw_prop = (prop_obj.fset != None)
     get_meth_name = 'get' + cap_name
@@ -512,8 +512,8 @@ def printProperty(class_obj, prop_obj, property_name, out_file, ident):
     get_meth_found = (get_meth_name in class_obj.__dict__.keys() )
 
     if not get_meth_found:
-        db_entry = getDocBlockEntry(class_obj.__name__ + '.' + property_name + '.value')
-        
+        db_entry = getDocBlockEntry(scope + property_name + '.value')
+
         if db_entry:
             get_meth_name = db_entry[1].strip()
 
@@ -675,7 +675,7 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
 
     for prop_data in properties:
         have_members = True
-        printProperty(class_obj, prop_data[0], prop_data[1], out_file, mem_ident)    
+        printProperty(class_obj, prop_data[0], prop_data[1], out_file, mem_ident, mem_scope)    
 
     if not have_members:
         out_file.write(ident + '    pass\n')

@@ -59,18 +59,22 @@ class MMFF94HeavyToHydrogenAtomTypeMap(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
+        ##
+        # \brief 
+        # \return 
+        #
+        def getParentAtomType() -> str: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getHydrogenAtomType() -> str: pass
+
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
         parentAtomType = property(getParentAtomType)
 
-        ##
-        # \brief FIXME!
-        # \brief 
-        #
         hydrogenAtomType = property(getHydrogenAtomType)
 
     ##

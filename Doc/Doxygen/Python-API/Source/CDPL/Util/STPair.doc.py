@@ -93,12 +93,10 @@ class STPair(Boost.Python.instance):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     first = property(getFirst, setFirst)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     second = property(getSecond, setSecond)

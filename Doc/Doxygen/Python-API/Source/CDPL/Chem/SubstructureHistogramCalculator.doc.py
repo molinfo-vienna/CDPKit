@@ -102,19 +102,16 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         id = property(getId)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         allMatches = property(getAllMatches)
 
         ##
         # \brief FIXME!
-        # \brief 
         #
         uniqueMatches = property(getUniqueMatches)
 

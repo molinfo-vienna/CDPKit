@@ -302,18 +302,15 @@ class Reaction(Base.PropertyContainer):
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     numReactants = property(getNumReactants)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     numAgents = property(getNumAgents)
 
     ##
     # \brief FIXME!
-    # \brief 
     #
     numProducts = property(getNumProducts)
