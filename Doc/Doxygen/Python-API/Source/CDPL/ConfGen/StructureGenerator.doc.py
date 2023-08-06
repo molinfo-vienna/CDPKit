@@ -95,6 +95,18 @@ class StructureGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param func 
+    #
+    def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getLogMessageCallback() -> LogMessageCallbackFunction: pass
+
+    ##
+    # \brief 
     # \param molgraph 
     # \return 
     #
@@ -122,7 +134,4 @@ class StructureGenerator(Boost.Python.instance):
 
     timeoutCallback = property(getTimeoutCallback, setTimeoutCallback)
 
-    ##
-    # \brief FIXME!
-    #
     logMessageCallback = property(getLogMessageCallback, setLogMessageCallback)

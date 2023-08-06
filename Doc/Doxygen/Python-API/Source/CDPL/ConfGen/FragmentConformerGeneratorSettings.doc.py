@@ -320,10 +320,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     forceFieldType = property(getForceFieldType, setForceFieldType)
 
-    ##
-    # \brief FIXME!
-    #
-    strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
+    strictForceFieldParam = property(strictForceFieldParameterization, strictForceFieldParameterization)
 
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
@@ -331,15 +328,9 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     maxNumRefinementIterations = property(getMaxNumRefinementIterations, setMaxNumRefinementIterations)
 
-    ##
-    # \brief FIXME!
-    #
-    minimizationStopGradientNorm = property(getMinimizationStopGradientNorm, setMinimizationStopGradientNorm)
+    refinementStopGradient = property(getRefinementStopGradient, setRefinementStopGradient)
 
-    ##
-    # \brief FIXME!
-    #
-    macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
+    macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThreshold, setMacrocycleRotorBondCountThreshold)
 
     chainSettings = property(getChainSettings)
 

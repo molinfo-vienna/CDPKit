@@ -363,30 +363,15 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     samplingMode = property(getSamplingMode, setSamplingMode)
 
-    ##
-    # \brief FIXME!
-    #
-    sampleHetAtomHydrogens = property(getSampleHetAtomHydrogens, setSampleHetAtomHydrogens)
+    sampleHetAtomHydrogens = property(sampleHeteroAtomHydrogens, sampleHeteroAtomHydrogens)
 
-    ##
-    # \brief FIXME!
-    #
-    sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
+    sampleAngleTolRanges = property(sampleAngleToleranceRanges, sampleAngleToleranceRanges)
 
-    ##
-    # \brief FIXME!
-    #
-    enumRings = property(getEnumRings, setEnumRings)
+    enumRings = property(enumerateRings, enumerateRings)
 
-    ##
-    # \brief FIXME!
-    #
-    nitrogenEnumMode = property(getNitrogenEnumMode, setNitrogenEnumMode)
+    nitrogenEnumMode = property(getNitrogenEnumerationMode, setNitrogenEnumerationMode)
 
-    ##
-    # \brief FIXME!
-    #
-    genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
+    genCoordsFromScratch = property(generateCoordinatesFromScratch, generateCoordinatesFromScratch)
 
     ##
     # \brief FIXME!
@@ -403,10 +388,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     forceFieldTypeStochastic = property(getForceFieldTypeStochastic, setForceFieldTypeStochastic)
 
-    ##
-    # \brief FIXME!
-    #
-    strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
+    strictForceFieldParam = property(strictForceFieldParameterization, strictForceFieldParameterization)
 
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
@@ -422,14 +404,8 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     maxNumSampledConformers = property(getMaxNumSampledConformers, setMaxNumSampledConformers)
 
-    ##
-    # \brief FIXME!
-    #
-    convCheckCycleSize = property(getConvCheckCycleSize, setConvCheckCycleSize)
+    convCheckCycleSize = property(getConvergenceCheckCycleSize, setConvergenceCheckCycleSize)
 
-    ##
-    # \brief FIXME!
-    #
-    macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
+    macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThreshold, setMacrocycleRotorBondCountThreshold)
 
     fragmentBuildSettings = property(getFragmentBuildSettings)

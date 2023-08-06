@@ -237,15 +237,9 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     generationMode = property(getGenerationMode, setGenerationMode)
 
-    ##
-    # \brief FIXME!
-    #
-    genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
+    genCoordsFromScratch = property(generateCoordinatesFromScratch, generateCoordinatesFromScratch)
 
-    ##
-    # \brief FIXME!
-    #
-    sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
+    sampleAngleTolRanges = property(sampleAngleToleranceRanges, sampleAngleToleranceRanges)
 
     timeout = property(getTimeout, setTimeout)
 
@@ -259,10 +253,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     #
     dgModeForceFieldType = property(getDgModeForceFieldType, setDgModeForceFieldType)
 
-    ##
-    # \brief FIXME!
-    #
-    strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
+    strictForceFieldParam = property(strictForceFieldParameterization, strictForceFieldParameterization)
 
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
@@ -272,16 +263,10 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     refinementTolerance = property(getRefinementTolerance, setRefinementTolerance)
 
-    ##
-    # \brief FIXME!
-    #
-    macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThresh, setMacrocycleRotorBondCountThresh)
+    macrocycleRotorBondCountThresh = property(getMacrocycleRotorBondCountThreshold, setMacrocycleRotorBondCountThreshold)
 
     maxNumSampledConformers = property(getMaxNumSampledConformers, setMaxNumSampledConformers)
 
-    ##
-    # \brief FIXME!
-    #
-    convCheckCycleSize = property(getConvCheckCycleSize, setConvCheckCycleSize)
+    convCheckCycleSize = property(getConvergenceCheckCycleSize, setConvergenceCheckCycleSize)
 
     fragmentBuildSettings = property(getFragmentBuildSettings)

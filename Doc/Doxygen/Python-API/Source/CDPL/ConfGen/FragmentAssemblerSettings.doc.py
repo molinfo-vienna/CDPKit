@@ -103,19 +103,10 @@ class FragmentAssemblerSettings(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    enumRings = property(getEnumRings, setEnumRings)
+    enumRings = property(enumerateRings, enumerateRings)
 
-    ##
-    # \brief FIXME!
-    #
-    nitrogenEnumMode = property(getNitrogenEnumMode, setNitrogenEnumMode)
+    nitrogenEnumMode = property(getNitrogenEnumerationMode, setNitrogenEnumerationMode)
 
-    ##
-    # \brief FIXME!
-    #
-    genCoordsFromScratch = property(getGenCoordsFromScratch, setGenCoordsFromScratch)
+    genCoordsFromScratch = property(generateCoordinatesFromScratch, generateCoordinatesFromScratch)
 
     fragmentBuildSettings = property(getFragmentBuildSettings)

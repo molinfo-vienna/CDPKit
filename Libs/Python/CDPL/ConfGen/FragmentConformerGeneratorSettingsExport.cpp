@@ -155,7 +155,7 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
                       &ConfGen::FragmentConformerGeneratorSettings::setDistanceExponent)
         .add_property("maxNumRefinementIterations", &ConfGen::FragmentConformerGeneratorSettings::getMaxNumRefinementIterations, 
                       &ConfGen::FragmentConformerGeneratorSettings::setMaxNumRefinementIterations)
-        .add_property("minimizationStopGradientNorm", &ConfGen::FragmentConformerGeneratorSettings::getRefinementStopGradient,
+        .add_property("refinementStopGradient", &ConfGen::FragmentConformerGeneratorSettings::getRefinementStopGradient,
                       &ConfGen::FragmentConformerGeneratorSettings::setRefinementStopGradient)
         .add_property("macrocycleRotorBondCountThresh", &ConfGen::FragmentConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
                       &ConfGen::FragmentConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold)

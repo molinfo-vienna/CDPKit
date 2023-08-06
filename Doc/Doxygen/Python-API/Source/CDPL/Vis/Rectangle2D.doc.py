@@ -334,10 +334,7 @@ class Rectangle2D(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    defined = property(getDefined)
+    defined = property(isDefined)
 
     min = property(getMin, setMin)
 

@@ -169,31 +169,19 @@ class TorsionDriverSettings(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    sampleHetAtomHydrogens = property(getSampleHetAtomHydrogens, setSampleHetAtomHydrogens)
+    sampleHetAtomHydrogens = property(sampleHeteroAtomHydrogens, sampleHeteroAtomHydrogens)
 
-    ##
-    # \brief FIXME!
-    #
-    sampleAngleTolRanges = property(getSampleAngleTolRanges, setSampleAngleTolRanges)
+    sampleAngleTolRanges = property(sampleAngleToleranceRanges, sampleAngleToleranceRanges)
 
     forceFieldType = property(getForceFieldType, setForceFieldType)
 
-    ##
-    # \brief FIXME!
-    #
-    strictForceFieldParam = property(getStrictForceFieldParam, setStrictForceFieldParam)
+    strictForceFieldParam = property(strictForceFieldParameterization, strictForceFieldParameterization)
 
     dielectricConstant = property(getDielectricConstant, setDielectricConstant)
 
     distanceExponent = property(getDistanceExponent, setDistanceExponent)
 
-    ##
-    # \brief FIXME!
-    #
-    energyOrdered = property(getEnergyOrdered, setEnergyOrdered)
+    energyOrdered = property(orderByEnergy, orderByEnergy)
 
     energyWindow = property(getEnergyWindow, setEnergyWindow)
 

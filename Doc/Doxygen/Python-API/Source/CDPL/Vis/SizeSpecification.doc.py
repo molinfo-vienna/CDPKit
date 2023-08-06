@@ -161,19 +161,10 @@ class SizeSpecification(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    inputScaling = property(getInputScaling, setInputScaling)
+    inputScaling = property(followsInputScaling, followInputScaling)
 
-    ##
-    # \brief FIXME!
-    #
-    outputScaling = property(getOutputScaling, setOutputScaling)
+    outputScaling = property(followsOutputScaling, followOutputScaling)
 
-    ##
-    # \brief FIXME!
-    #
-    relative = property(getRelative, setRelative)
+    relative = property(isRelative, setRelative)
 
     value = property(getValue, setValue)

@@ -64,9 +64,9 @@ void CDPLPythonConfGen::exportStructureGenerator()
              (python::arg("self"), python::arg("func")))
         .def("getTimeoutCallback", &ConfGen::StructureGenerator::getTimeoutCallback, 
              python::arg("self"), python::return_internal_reference<>())
-        .def("setTimeoutCallback", &ConfGen::StructureGenerator::setTimeoutCallback, 
+        .def("setLogMessageCallback", &ConfGen::StructureGenerator::setLogMessageCallback, 
              (python::arg("self"), python::arg("func")))
-        .def("getTimeoutCallback", &ConfGen::StructureGenerator::getTimeoutCallback, 
+        .def("getLogMessageCallback", &ConfGen::StructureGenerator::getLogMessageCallback, 
              python::arg("self"), python::return_internal_reference<>())
         .def("generate", &ConfGen::StructureGenerator::generate,
              (python::arg("self"), python::arg("molgraph")))
