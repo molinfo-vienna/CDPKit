@@ -48,6 +48,16 @@ namespace
     {
         gen.addBondStereoCenter(bond, descr);
     }
+
+    std::size_t getCenterIndex(const ConfGen::DGConstraintGenerator::StereoCenterData& entry)
+    {
+        return entry.first;
+    }
+
+    const CDPL::Chem::StereoDescriptor& getDescriptor(const ConfGen::DGConstraintGenerator::StereoCenterData& entry)
+    {
+        return entry.second;
+    }
 }
 
 
@@ -64,6 +74,8 @@ void CDPLPythonConfGen::exportDGConstraintGenerator()
         .def(python::init<std::size_t, const Chem::StereoDescriptor&>((python::arg("self"), python::arg("ctr_idx"), python::arg("descr"))))
         .def(python::init<const ConfGen::DGConstraintGenerator::StereoCenterData&>((python::arg("self"), python::arg("data"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGConstraintGenerator::StereoCenterData>())
+        .def("getCenterIndex", &getCenterIndex, python::arg("self"))
+        .def("getDescriptor", &getDescriptor, python::arg("self"))
         .add_property("centerIndex", &ConfGen::DGConstraintGenerator::StereoCenterData::first)
         .add_property("descriptor", &ConfGen::DGConstraintGenerator::StereoCenterData::second);
 

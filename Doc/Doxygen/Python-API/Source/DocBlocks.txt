@@ -5,7 +5,7 @@
 $$$$
 
 .__copy__init__
-\brief Initializes the \e %@CN@ instance with a copy of the state of the \e %@AT1@ instance \a @A1@.
+\brief Initializes the \e %@CN@ instance as a copy of the state of the \e %@AT1@ instance \a @A1@.
 \param @A0@ The \e %@CN@ instance to initialize.
 \param @A1@ The \e %@AT1@ instance to copy.
 $$$$

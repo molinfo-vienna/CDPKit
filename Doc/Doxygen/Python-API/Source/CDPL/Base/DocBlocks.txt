@@ -30,3 +30,8 @@ $$$$
 FileIOStream.name.value
 getFileName
 $$$$
+
+DataFormat.multiRecordFormat.value
+isMultiRecordFormat
+setMultiRecordFormat
+$$$$
