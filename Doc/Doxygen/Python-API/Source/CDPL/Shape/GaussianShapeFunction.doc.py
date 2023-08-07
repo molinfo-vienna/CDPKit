@@ -46,7 +46,7 @@ class GaussianShapeFunction(Boost.Python.instance):
     def __init__(shape: GaussianShape) -> None: pass
 
     ##
-    # \brief Initializes the \e %GaussianShapeFunction instance with a copy of the state of the \e %GaussianShapeFunction instance \a func.
+    # \brief Initializes a copy of the \e %GaussianShapeFunction instance \a func.
     # \param func The \e %GaussianShapeFunction instance to copy.
     # 
     def __init__(func: GaussianShapeFunction) -> None: pass

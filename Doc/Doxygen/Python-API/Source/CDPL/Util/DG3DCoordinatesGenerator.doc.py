@@ -65,7 +65,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, pt3_idx: int, pt4_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes the \e %VolumeConstraint instance with a copy of the state of the \e %VolumeConstraint instance \a constr.
+        # \brief Initializes a copy of the \e %VolumeConstraint instance \a constr.
         # \param constr The \e %VolumeConstraint instance to copy.
         # 
         def __init__(constr: VolumeConstraint) -> None: pass
@@ -178,7 +178,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
         def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
-        # \brief Initializes the \e %DistanceConstraint instance with a copy of the state of the \e %DistanceConstraint instance \a constr.
+        # \brief Initializes a copy of the \e %DistanceConstraint instance \a constr.
         # \param constr The \e %DistanceConstraint instance to copy.
         # 
         def __init__(constr: DistanceConstraint) -> None: pass
@@ -267,7 +267,7 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DG3DCoordinatesGenerator instance with a copy of the state of the \e %DG3DCoordinatesGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %DG3DCoordinatesGenerator instance \a gen.
     # \param gen The \e %DG3DCoordinatesGenerator instance to copy.
     # 
     def __init__(gen: DG3DCoordinatesGenerator) -> None: pass

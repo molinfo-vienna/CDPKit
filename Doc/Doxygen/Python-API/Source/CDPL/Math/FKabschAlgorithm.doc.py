@@ -30,7 +30,7 @@ class FKabschAlgorithm(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FKabschAlgorithm instance with a copy of the state of the \e %FKabschAlgorithm instance \a algo.
+    # \brief Initializes a copy of the \e %FKabschAlgorithm instance \a algo.
     # \param algo The \e %FKabschAlgorithm instance to copy.
     # 
     def __init__(algo: FKabschAlgorithm) -> None: pass

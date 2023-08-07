@@ -45,7 +45,7 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
         ACCEPTOR = 2
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsInteraction instance with a copy of the state of the \e %MMFF94VanDerWaalsInteraction instance \a iactn.
+    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsInteraction instance \a iactn.
     # \param iactn The \e %MMFF94VanDerWaalsInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94VanDerWaalsInteraction) -> None: pass

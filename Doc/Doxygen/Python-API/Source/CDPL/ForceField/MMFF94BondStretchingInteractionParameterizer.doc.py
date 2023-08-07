@@ -30,7 +30,7 @@ class MMFF94BondStretchingInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondStretchingInteractionParameterizer instance with a copy of the state of the \e %MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
+    # \brief Initializes a copy of the \e %MMFF94BondStretchingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94BondStretchingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94BondStretchingInteractionParameterizer) -> None: pass

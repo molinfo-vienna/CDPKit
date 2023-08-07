@@ -25,7 +25,7 @@
 class ULVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULVectorSlice instance with a copy of the state of the \e %ULVectorSlice instance \a s.
+    # \brief Initializes a copy of the \e %ULVectorSlice instance \a s.
     # \param s The \e %ULVectorSlice instance to copy.
     # 
     def __init__(s: ULVectorSlice) -> None: pass

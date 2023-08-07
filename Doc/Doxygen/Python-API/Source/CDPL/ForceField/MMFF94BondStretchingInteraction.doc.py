@@ -25,7 +25,7 @@
 class MMFF94BondStretchingInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94BondStretchingInteraction instance with a copy of the state of the \e %MMFF94BondStretchingInteraction instance \a iactn.
+    # \brief Initializes a copy of the \e %MMFF94BondStretchingInteraction instance \a iactn.
     # \param iactn The \e %MMFF94BondStretchingInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94BondStretchingInteraction) -> None: pass

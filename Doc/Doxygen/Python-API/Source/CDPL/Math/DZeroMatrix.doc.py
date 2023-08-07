@@ -30,7 +30,7 @@ class DZeroMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DZeroMatrix instance with a copy of the state of the \e %DZeroMatrix instance \a m.
+    # \brief Initializes a copy of the \e %DZeroMatrix instance \a m.
     # \param m The \e %DZeroMatrix instance to copy.
     # 
     def __init__(m: DZeroMatrix) -> None: pass

@@ -30,7 +30,7 @@ class DZeroGrid(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DZeroGrid instance with a copy of the state of the \e %DZeroGrid instance \a g.
+    # \brief Initializes a copy of the \e %DZeroGrid instance \a g.
     # \param g The \e %DZeroGrid instance to copy.
     # 
     def __init__(g: DZeroGrid) -> None: pass

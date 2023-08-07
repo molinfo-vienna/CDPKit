@@ -30,7 +30,7 @@ class ULRealQuaternion(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ULRealQuaternion instance with a copy of the state of the \e %ULRealQuaternion instance \a q.
+    # \brief Initializes a copy of the \e %ULRealQuaternion instance \a q.
     # \param q The \e %ULRealQuaternion instance to copy.
     # 
     def __init__(q: ULRealQuaternion) -> None: pass

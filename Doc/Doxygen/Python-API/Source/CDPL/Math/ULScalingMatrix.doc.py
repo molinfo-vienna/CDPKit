@@ -25,7 +25,7 @@
 class ULScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULScalingMatrix instance with a copy of the state of the \e %ULScalingMatrix instance \a m.
+    # \brief Initializes a copy of the \e %ULScalingMatrix instance \a m.
     # \param m The \e %ULScalingMatrix instance to copy.
     # 
     def __init__(m: ULScalingMatrix) -> None: pass

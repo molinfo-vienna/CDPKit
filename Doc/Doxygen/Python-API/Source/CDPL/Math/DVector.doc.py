@@ -30,7 +30,7 @@ class DVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DVector instance with a copy of the state of the \e %DVector instance \a v.
+    # \brief Initializes a copy of the \e %DVector instance \a v.
     # \param v The \e %DVector instance to copy.
     # 
     def __init__(v: DVector) -> None: pass

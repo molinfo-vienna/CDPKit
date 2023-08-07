@@ -30,7 +30,7 @@ class TorsionCategory(Boost.Python.instance):
     class RuleSequence(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %RuleSequence instance with a copy of the state of the \e %RuleSequence instance \a rules.
+        # \brief Initializes a copy of the \e %RuleSequence instance \a rules.
         # \param rules The \e %RuleSequence instance to copy.
         # 
         def __init__(rules: RuleSequence) -> None: pass
@@ -74,7 +74,7 @@ class TorsionCategory(Boost.Python.instance):
     class CategorySequence(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %CategorySequence instance with a copy of the state of the \e %CategorySequence instance \a cat.
+        # \brief Initializes a copy of the \e %CategorySequence instance \a cat.
         # \param cat The \e %CategorySequence instance to copy.
         # 
         def __init__(cat: CategorySequence) -> None: pass
@@ -118,7 +118,7 @@ class TorsionCategory(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TorsionCategory instance with a copy of the state of the \e %TorsionCategory instance \a cat.
+    # \brief Initializes a copy of the \e %TorsionCategory instance \a cat.
     # \param cat The \e %TorsionCategory instance to copy.
     # 
     def __init__(cat: TorsionCategory) -> None: pass

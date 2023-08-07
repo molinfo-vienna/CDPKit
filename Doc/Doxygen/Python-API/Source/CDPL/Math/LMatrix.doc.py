@@ -30,7 +30,7 @@ class LMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %LMatrix instance with a copy of the state of the \e %LMatrix instance \a m.
+    # \brief Initializes a copy of the \e %LMatrix instance \a m.
     # \param m The \e %LMatrix instance to copy.
     # 
     def __init__(m: LMatrix) -> None: pass

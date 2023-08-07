@@ -30,7 +30,7 @@ class SArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SArray instance with a copy of the state of the \e %SArray instance \a array.
+    # \brief Initializes a copy of the \e %SArray instance \a array.
     # \param array The \e %SArray instance to copy.
     # 
     def __init__(array: SArray) -> None: pass

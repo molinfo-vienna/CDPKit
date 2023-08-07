@@ -30,7 +30,7 @@ class ULZeroVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ULZeroVector instance with a copy of the state of the \e %ULZeroVector instance \a v.
+    # \brief Initializes a copy of the \e %ULZeroVector instance \a v.
     # \param v The \e %ULZeroVector instance to copy.
     # 
     def __init__(v: ULZeroVector) -> None: pass

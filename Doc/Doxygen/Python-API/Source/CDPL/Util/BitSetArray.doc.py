@@ -30,7 +30,7 @@ class BitSetArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BitSetArray instance with a copy of the state of the \e %BitSetArray instance \a array.
+    # \brief Initializes a copy of the \e %BitSetArray instance \a array.
     # \param array The \e %BitSetArray instance to copy.
     # 
     def __init__(array: BitSetArray) -> None: pass

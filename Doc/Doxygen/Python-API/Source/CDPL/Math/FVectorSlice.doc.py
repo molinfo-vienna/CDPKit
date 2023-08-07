@@ -25,7 +25,7 @@
 class FVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FVectorSlice instance with a copy of the state of the \e %FVectorSlice instance \a s.
+    # \brief Initializes a copy of the \e %FVectorSlice instance \a s.
     # \param s The \e %FVectorSlice instance to copy.
     # 
     def __init__(s: FVectorSlice) -> None: pass

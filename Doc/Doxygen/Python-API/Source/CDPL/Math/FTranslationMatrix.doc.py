@@ -25,7 +25,7 @@
 class FTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FTranslationMatrix instance with a copy of the state of the \e %FTranslationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %FTranslationMatrix instance \a m.
     # \param m The \e %FTranslationMatrix instance to copy.
     # 
     def __init__(m: FTranslationMatrix) -> None: pass

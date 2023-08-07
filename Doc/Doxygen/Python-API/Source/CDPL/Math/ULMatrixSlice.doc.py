@@ -25,7 +25,7 @@
 class ULMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULMatrixSlice instance with a copy of the state of the \e %ULMatrixSlice instance \a s.
+    # \brief Initializes a copy of the \e %ULMatrixSlice instance \a s.
     # \param s The \e %ULMatrixSlice instance to copy.
     # 
     def __init__(s: ULMatrixSlice) -> None: pass

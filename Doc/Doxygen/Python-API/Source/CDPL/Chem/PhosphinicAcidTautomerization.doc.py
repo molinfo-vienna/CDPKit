@@ -30,7 +30,7 @@ class PhosphinicAcidTautomerization(PatternBasedTautomerizationRule):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PhosphinicAcidTautomerization instance with a copy of the state of the \e %PhosphinicAcidTautomerization instance \a rule.
+    # \brief Initializes a copy of the \e %PhosphinicAcidTautomerization instance \a rule.
     # \param rule The \e %PhosphinicAcidTautomerization instance to copy.
     # 
     def __init__(rule: PhosphinicAcidTautomerization) -> None: pass

@@ -25,7 +25,7 @@
 class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeaturePairDistanceMatchFunctor instance with a copy of the state of the \e %FeaturePairDistanceMatchFunctor instance \a func.
+    # \brief Initializes a copy of the \e %FeaturePairDistanceMatchFunctor instance \a func.
     # \param func The \e %FeaturePairDistanceMatchFunctor instance to copy.
     # 
     def __init__(func: FeaturePairDistanceMatchFunctor) -> None: pass

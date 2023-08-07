@@ -25,7 +25,7 @@
 class ConstDMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstDMatrixRange instance with a copy of the state of the \e %ConstDMatrixRange instance \a r.
+    # \brief Initializes a copy of the \e %ConstDMatrixRange instance \a r.
     # \param r The \e %ConstDMatrixRange instance to copy.
     # 
     def __init__(r: ConstDMatrixRange) -> None: pass

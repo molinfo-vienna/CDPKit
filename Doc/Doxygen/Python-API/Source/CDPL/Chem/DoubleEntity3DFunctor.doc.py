@@ -30,7 +30,7 @@ class DoubleEntity3DFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleEntity3DFunctor instance with a copy of the state of the \e %DoubleEntity3DFunctor instance \a func.
+    # \brief Initializes a copy of the \e %DoubleEntity3DFunctor instance \a func.
     # \param func The \e %DoubleEntity3DFunctor instance to copy.
     # 
     def __init__(func: DoubleEntity3DFunctor) -> None: pass

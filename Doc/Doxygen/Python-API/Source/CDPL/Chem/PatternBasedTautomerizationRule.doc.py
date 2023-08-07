@@ -35,7 +35,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes the \e %BondOrderChange instance with a copy of the state of the \e %BondOrderChange instance \a bond_chg.
+        # \brief Initializes a copy of the \e %BondOrderChange instance \a bond_chg.
         # \param bond_chg The \e %BondOrderChange instance to copy.
         # 
         def __init__(bond_chg: BondOrderChange) -> None: pass
@@ -83,7 +83,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     def __init__(id: int) -> None: pass
 
     ##
-    # \brief Initializes the \e %PatternBasedTautomerizationRule instance with a copy of the state of the \e %PatternBasedTautomerizationRule instance \a rule.
+    # \brief Initializes a copy of the \e %PatternBasedTautomerizationRule instance \a rule.
     # \param rule The \e %PatternBasedTautomerizationRule instance to copy.
     # 
     def __init__(rule: PatternBasedTautomerizationRule) -> None: pass

@@ -25,7 +25,7 @@
 class DVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DVectorSlice instance with a copy of the state of the \e %DVectorSlice instance \a s.
+    # \brief Initializes a copy of the \e %DVectorSlice instance \a s.
     # \param s The \e %DVectorSlice instance to copy.
     # 
     def __init__(s: DVectorSlice) -> None: pass

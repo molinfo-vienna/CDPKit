@@ -30,7 +30,7 @@ class Slice(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Slice instance with a copy of the state of the \e %Slice instance \a s.
+    # \brief Initializes a copy of the \e %Slice instance \a s.
     # \param s The \e %Slice instance to copy.
     # 
     def __init__(s: ast.Slice) -> None: pass

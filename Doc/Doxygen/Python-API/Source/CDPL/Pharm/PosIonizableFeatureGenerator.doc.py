@@ -30,7 +30,7 @@ class PosIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__(chgd_groups_only: bool) -> None: pass
 
     ##
-    # \brief Initializes the \e %PosIonizableFeatureGenerator instance with a copy of the state of the \e %PosIonizableFeatureGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %PosIonizableFeatureGenerator instance \a gen.
     # \param gen The \e %PosIonizableFeatureGenerator instance to copy.
     # 
     def __init__(gen: PosIonizableFeatureGenerator) -> None: pass

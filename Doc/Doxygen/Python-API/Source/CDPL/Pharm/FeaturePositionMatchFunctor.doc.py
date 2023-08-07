@@ -25,7 +25,7 @@
 class FeaturePositionMatchFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeaturePositionMatchFunctor instance with a copy of the state of the \e %FeaturePositionMatchFunctor instance \a func.
+    # \brief Initializes a copy of the \e %FeaturePositionMatchFunctor instance \a func.
     # \param func The \e %FeaturePositionMatchFunctor instance to copy.
     # 
     def __init__(func: FeaturePositionMatchFunctor) -> None: pass

@@ -31,7 +31,7 @@ class ReferenceColorTverskyScore(Boost.Python.instance):
     def __init__(alpha: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes the \e %ReferenceColorTverskyScore instance with a copy of the state of the \e %ReferenceColorTverskyScore instance \a score.
+    # \brief Initializes a copy of the \e %ReferenceColorTverskyScore instance \a score.
     # \param score The \e %ReferenceColorTverskyScore instance to copy.
     # 
     def __init__(score: ReferenceColorTverskyScore) -> None: pass

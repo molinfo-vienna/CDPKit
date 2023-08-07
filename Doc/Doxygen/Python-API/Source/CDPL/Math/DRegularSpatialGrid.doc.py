@@ -40,7 +40,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
         POINT = 1
 
     ##
-    # \brief Initializes the \e %DRegularSpatialGrid instance with a copy of the state of the \e %DRegularSpatialGrid instance \a grid.
+    # \brief Initializes a copy of the \e %DRegularSpatialGrid instance \a grid.
     # \param grid The \e %DRegularSpatialGrid instance to copy.
     # 
     def __init__(grid: DRegularSpatialGrid) -> None: pass
@@ -734,10 +734,7 @@ class DRegularSpatialGrid(Boost.Python.instance):
 
     data = property(getData)
 
-    ##
-    # \brief FIXME!
-    #
-    coordsTransform = property(getCoordsTransform, setCoordsTransform)
+    coordsTransform = property(getCoordinatesTransform, setCoordinatesTransform)
 
     dataMode = property(getDataMode, setDataMode)
 

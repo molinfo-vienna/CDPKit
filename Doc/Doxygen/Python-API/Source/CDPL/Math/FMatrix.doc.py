@@ -30,7 +30,7 @@ class FMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FMatrix instance with a copy of the state of the \e %FMatrix instance \a m.
+    # \brief Initializes a copy of the \e %FMatrix instance \a m.
     # \param m The \e %FMatrix instance to copy.
     # 
     def __init__(m: FMatrix) -> None: pass

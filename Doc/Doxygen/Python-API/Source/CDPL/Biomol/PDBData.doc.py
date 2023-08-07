@@ -255,7 +255,7 @@ class PDBData(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PDBData instance with a copy of the state of the \e %PDBData instance \a other.
+    # \brief Initializes a copy of the \e %PDBData instance \a other.
     # \param other The \e %PDBData instance to copy.
     # 
     def __init__(other: PDBData) -> None: pass

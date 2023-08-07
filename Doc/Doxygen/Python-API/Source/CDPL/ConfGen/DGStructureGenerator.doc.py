@@ -30,7 +30,7 @@ class DGStructureGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DGStructureGenerator instance with a copy of the state of the \e %DGStructureGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %DGStructureGenerator instance \a gen.
     # \param gen The \e %DGStructureGenerator instance to copy.
     # 
     def __init__(gen: DGStructureGenerator) -> None: pass
@@ -128,7 +128,4 @@ class DGStructureGenerator(Boost.Python.instance):
 
     constraintGenerator = property(getConstraintGenerator)
 
-    ##
-    # \brief FIXME!
-    #
-    exclHydrogenMask = property(getExclHydrogenMask)
+    exclHydrogenMask = property(getExcludedHydrogenMask)

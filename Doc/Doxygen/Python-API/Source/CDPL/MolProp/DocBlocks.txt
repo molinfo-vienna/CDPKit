@@ -1,1 +1,7 @@
- 
+#
+# --- Unresolved property getter/setter functions ---
+#
+MHMOPiChargeCalculator.locPiBonds.value
+localizedPiBonds
+localizedPiBonds
+$$$$

@@ -122,7 +122,7 @@ class Color(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Color instance with a copy of the state of the \e %Color instance \a color.
+    # \brief Initializes a copy of the \e %Color instance \a color.
     # \param color The \e %Color instance to copy.
     # 
     def __init__(color: Color) -> None: pass

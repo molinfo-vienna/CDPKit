@@ -30,7 +30,7 @@ class Vector3ULArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector3ULArray instance with a copy of the state of the \e %Vector3ULArray instance \a array.
+    # \brief Initializes a copy of the \e %Vector3ULArray instance \a array.
     # \param array The \e %Vector3ULArray instance to copy.
     # 
     def __init__(array: Vector3ULArray) -> None: pass

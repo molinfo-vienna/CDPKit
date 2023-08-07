@@ -30,7 +30,7 @@ class FragmentGenerator(Boost.Python.instance):
     class FragmentationRuler(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %FragmentationRuler instance with a copy of the state of the \e %FragmentationRuler instance \a rule.
+        # \brief Initializes a copy of the \e %FragmentationRuler instance \a rule.
         # \param rule The \e %FragmentationRuler instance to copy.
         # 
         def __init__(rule: FragmentationRuler) -> None: pass
@@ -100,7 +100,7 @@ class FragmentGenerator(Boost.Python.instance):
     class ExcludePattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %ExcludePattern instance with a copy of the state of the \e %ExcludePattern instance \a excl_ptn.
+        # \brief Initializes a copy of the \e %ExcludePattern instance \a excl_ptn.
         # \param excl_ptn The \e %ExcludePattern instance to copy.
         # 
         def __init__(excl_ptn: ExcludePattern) -> None: pass
@@ -184,7 +184,7 @@ class FragmentGenerator(Boost.Python.instance):
     class FragmentLink(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %FragmentLink instance with a copy of the state of the \e %FragmentLink instance \a link.
+        # \brief Initializes a copy of the \e %FragmentLink instance \a link.
         # \param link The \e %FragmentLink instance to copy.
         # 
         def __init__(link: FragmentLink) -> None: pass
@@ -275,7 +275,7 @@ class FragmentGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FragmentGenerator instance with a copy of the state of the \e %FragmentGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %FragmentGenerator instance \a gen.
     # \param gen The \e %FragmentGenerator instance to copy.
     # 
     def __init__(gen: FragmentGenerator) -> None: pass

@@ -30,7 +30,7 @@ class NitroAciTautomerization(PatternBasedTautomerizationRule):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %NitroAciTautomerization instance with a copy of the state of the \e %NitroAciTautomerization instance \a rule.
+    # \brief Initializes a copy of the \e %NitroAciTautomerization instance \a rule.
     # \param rule The \e %NitroAciTautomerization instance to copy.
     # 
     def __init__(rule: NitroAciTautomerization) -> None: pass

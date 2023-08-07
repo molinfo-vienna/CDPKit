@@ -30,7 +30,7 @@ class TopologicalAtomDistanceFunction(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TopologicalAtomDistanceFunction instance with a copy of the state of the \e %TopologicalAtomDistanceFunction instance \a func.
+    # \brief Initializes a copy of the \e %TopologicalAtomDistanceFunction instance \a func.
     # \param func The \e %TopologicalAtomDistanceFunction instance to copy.
     # 
     def __init__(func: TopologicalAtomDistanceFunction) -> None: pass

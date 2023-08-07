@@ -30,7 +30,7 @@ class DMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DMatrix instance with a copy of the state of the \e %DMatrix instance \a m.
+    # \brief Initializes a copy of the \e %DMatrix instance \a m.
     # \param m The \e %DMatrix instance to copy.
     # 
     def __init__(m: DMatrix) -> None: pass

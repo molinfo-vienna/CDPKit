@@ -30,7 +30,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     class FragmentSettings(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %FragmentSettings instance with a copy of the state of the \e %FragmentSettings instance \a settings.
+        # \brief Initializes a copy of the \e %FragmentSettings instance \a settings.
         # \param settings The \e %FragmentSettings instance to copy.
         # 
         def __init__(settings: FragmentSettings) -> None: pass
@@ -161,7 +161,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FragmentConformerGeneratorSettings instance with a copy of the state of the \e %FragmentConformerGeneratorSettings instance \a settings.
+    # \brief Initializes a copy of the \e %FragmentConformerGeneratorSettings instance \a settings.
     # \param settings The \e %FragmentConformerGeneratorSettings instance to copy.
     # 
     def __init__(settings: FragmentConformerGeneratorSettings) -> None: pass
@@ -313,10 +313,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    preserveInputBondingGeom = property(getPreserveInputBondingGeom, setPreserveInputBondingGeom)
+    preserveInputBondingGeom = property(preserveInputBondingGeometries, preserveInputBondingGeometries)
 
     forceFieldType = property(getForceFieldType, setForceFieldType)
 
@@ -336,12 +333,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     macrocycleSettings = property(getMacrocycleSettings)
 
-    ##
-    # \brief FIXME!
-    #
-    smallRingSysSettings = property(getSmallRingSysSettings)
+    smallRingSysSettings = property(getSmallRingSystemSettings)
 
-    ##
-    # \brief FIXME!
-    #
-    smallRingSysSamplingFactor = property(getSmallRingSysSamplingFactor, setSmallRingSysSamplingFactor)
+    smallRingSysSamplingFactor = property(getSmallRingSystemSamplingFactor, setSmallRingSystemSamplingFactor)

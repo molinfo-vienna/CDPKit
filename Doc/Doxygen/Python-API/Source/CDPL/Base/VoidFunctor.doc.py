@@ -30,7 +30,7 @@ class VoidFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidFunctor instance with a copy of the state of the \e %VoidFunctor instance \a func.
+    # \brief Initializes a copy of the \e %VoidFunctor instance \a func.
     # \param func The \e %VoidFunctor instance to copy.
     # 
     def __init__(func: VoidFunctor) -> None: pass

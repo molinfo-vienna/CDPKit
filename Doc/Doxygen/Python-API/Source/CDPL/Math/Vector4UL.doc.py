@@ -30,7 +30,7 @@ class Vector4UL(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector4UL instance with a copy of the state of the \e %Vector4UL instance \a v.
+    # \brief Initializes a copy of the \e %Vector4UL instance \a v.
     # \param v The \e %Vector4UL instance to copy.
     # 
     def __init__(v: Vector4UL) -> None: pass

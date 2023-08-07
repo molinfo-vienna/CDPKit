@@ -38,6 +38,26 @@ namespace
     {
         return lhs.operator=(rhs);
     }
+
+    std::size_t getFirst(const CDPL::Util::STPair& pair)
+    {
+        return pair.first;
+    }
+
+    void setFirst(CDPL::Util::STPair& pair, std::size_t value)
+    {
+        pair.first = value;
+    }
+
+    std::size_t getSecond(const CDPL::Util::STPair& pair)
+    {
+        return pair.second;
+    }
+
+    void setSecond(CDPL::Util::STPair& pair, std::size_t value)
+    {
+        pair.second = value;
+    }
 }
 
 
@@ -89,6 +109,10 @@ void CDPLPythonUtil::exportArrays()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Util::STPair&>((python::arg("self"), python::arg("pair"))))
         .def(python::init<std::size_t, std::size_t>((python::arg("self"), python::arg("first"), python::arg("second"))))
+        .def("getFirst", &getFirst, python::arg("self"))
+        .def("setFirst", &setFirst, (python::arg("self"), python::arg("value")))
+        .def("getSecond", &getSecond, python::arg("self"))
+        .def("setSecond", &setSecond, (python::arg("self"), python::arg("value")))
         .def_readwrite("first", &Util::STPair::first)
         .def_readwrite("second", &Util::STPair::second)
         .def("assign", &assignSTPair,

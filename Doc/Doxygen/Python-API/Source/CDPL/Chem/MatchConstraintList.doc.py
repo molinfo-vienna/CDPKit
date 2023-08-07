@@ -50,7 +50,7 @@ class MatchConstraintList(Boost.Python.instance):
         NOT_OR_LIST = 3
 
     ##
-    # \brief Initializes the \e %MatchConstraintList instance with a copy of the state of the \e %MatchConstraintList instance \a list.
+    # \brief Initializes a copy of the \e %MatchConstraintList instance \a list.
     # \param list The \e %MatchConstraintList instance to copy.
     # 
     def __init__(list: MatchConstraintList) -> None: pass

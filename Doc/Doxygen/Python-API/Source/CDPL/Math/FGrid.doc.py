@@ -30,7 +30,7 @@ class FGrid(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FGrid instance with a copy of the state of the \e %FGrid instance \a g.
+    # \brief Initializes a copy of the \e %FGrid instance \a g.
     # \param g The \e %FGrid instance to copy.
     # 
     def __init__(g: FGrid) -> None: pass

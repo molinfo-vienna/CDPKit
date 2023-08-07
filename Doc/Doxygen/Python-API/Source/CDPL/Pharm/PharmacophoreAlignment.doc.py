@@ -32,7 +32,7 @@ class PharmacophoreAlignment(SpatialFeatureAlignment):
     def __init__(query_mode: bool) -> None: pass
 
     ##
-    # \brief Initializes the \e %PharmacophoreAlignment instance with a copy of the state of the \e %PharmacophoreAlignment instance \a alignment.
+    # \brief Initializes a copy of the \e %PharmacophoreAlignment instance \a alignment.
     # \param alignment The \e %PharmacophoreAlignment instance to copy.
     # 
     def __init__(alignment: PharmacophoreAlignment) -> None: pass

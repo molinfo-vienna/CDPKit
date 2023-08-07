@@ -25,7 +25,7 @@
 class ULQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULQuaternionVectorAdapter instance with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a a.
+    # \brief Initializes a copy of the \e %ULQuaternionVectorAdapter instance \a a.
     # \param a The \e %ULQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: ULQuaternionVectorAdapter) -> None: pass

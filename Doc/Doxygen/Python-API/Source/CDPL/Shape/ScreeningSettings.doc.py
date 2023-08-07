@@ -110,7 +110,7 @@ class ScreeningSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ScreeningSettings instance with a copy of the state of the \e %ScreeningSettings instance \a settings.
+    # \brief Initializes a copy of the \e %ScreeningSettings instance \a settings.
     # \param settings The \e %ScreeningSettings instance to copy.
     # 
     def __init__(settings: ScreeningSettings) -> None: pass

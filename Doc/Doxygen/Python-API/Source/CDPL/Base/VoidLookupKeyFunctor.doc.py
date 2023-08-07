@@ -30,7 +30,7 @@ class VoidLookupKeyFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidLookupKeyFunctor instance with a copy of the state of the \e %VoidLookupKeyFunctor instance \a func.
+    # \brief Initializes a copy of the \e %VoidLookupKeyFunctor instance \a func.
     # \param func The \e %VoidLookupKeyFunctor instance to copy.
     # 
     def __init__(func: VoidLookupKeyFunctor) -> None: pass

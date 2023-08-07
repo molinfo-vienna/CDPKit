@@ -30,7 +30,7 @@ class ConformerData(Math.Vector3DArray):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ConformerData instance with a copy of the state of the \e %ConformerData instance \a data.
+    # \brief Initializes a copy of the \e %ConformerData instance \a data.
     # \param data The \e %ConformerData instance to copy.
     # 
     def __init__(data: ConformerData) -> None: pass

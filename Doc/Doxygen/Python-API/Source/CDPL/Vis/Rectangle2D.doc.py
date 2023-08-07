@@ -34,7 +34,7 @@ class Rectangle2D(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Rectangle2D instance with a copy of the state of the \e %Rectangle2D instance \a rect.
+    # \brief Initializes a copy of the \e %Rectangle2D instance \a rect.
     # \param rect The \e %Rectangle2D instance to copy.
     # 
     def __init__(rect: Rectangle2D) -> None: pass

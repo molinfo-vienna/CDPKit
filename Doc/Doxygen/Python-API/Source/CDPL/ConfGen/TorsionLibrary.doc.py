@@ -30,7 +30,7 @@ class TorsionLibrary(TorsionCategory):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TorsionLibrary instance with a copy of the state of the \e %TorsionLibrary instance \a lib.
+    # \brief Initializes a copy of the \e %TorsionLibrary instance \a lib.
     # \param lib The \e %TorsionLibrary instance to copy.
     # 
     def __init__(lib: TorsionLibrary) -> None: pass

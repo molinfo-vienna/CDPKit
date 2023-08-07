@@ -30,7 +30,7 @@ class BronKerboschAlgorithm(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BronKerboschAlgorithm instance with a copy of the state of the \e %BronKerboschAlgorithm instance \a bka.
+    # \brief Initializes a copy of the \e %BronKerboschAlgorithm instance \a bka.
     # \param bka The \e %BronKerboschAlgorithm instance to copy.
     # 
     def __init__(bka: BronKerboschAlgorithm) -> None: pass

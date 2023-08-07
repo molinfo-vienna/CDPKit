@@ -38,7 +38,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         def __init__(transform: Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
 
         ##
-        # \brief Initializes the \e %Result instance with a copy of the state of the \e %Result instance \a res.
+        # \brief Initializes a copy of the \e %Result instance \a res.
         # \param res The \e %Result instance to copy.
         # 
         def __init__(res: Result) -> None: pass

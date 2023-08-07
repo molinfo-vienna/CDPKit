@@ -30,7 +30,7 @@ class SparseLVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseLVector instance with a copy of the state of the \e %SparseLVector instance \a v.
+    # \brief Initializes a copy of the \e %SparseLVector instance \a v.
     # \param v The \e %SparseLVector instance to copy.
     # 
     def __init__(v: SparseLVector) -> None: pass

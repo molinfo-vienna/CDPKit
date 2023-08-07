@@ -31,7 +31,7 @@ class AlignedTverskyComboScore(Boost.Python.instance):
     def __init__(beta: float = 0.95) -> None: pass
 
     ##
-    # \brief Initializes the \e %AlignedTverskyComboScore instance with a copy of the state of the \e %AlignedTverskyComboScore instance \a score.
+    # \brief Initializes a copy of the \e %AlignedTverskyComboScore instance \a score.
     # \param score The \e %AlignedTverskyComboScore instance to copy.
     # 
     def __init__(score: AlignedTverskyComboScore) -> None: pass

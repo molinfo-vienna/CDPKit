@@ -1,1 +1,6 @@
- 
+#
+# --- Unresolved property getter/setter functions ---
+#
+ResidueDictionary.Entry.obsolete.value
+isObsolete
+$$$$

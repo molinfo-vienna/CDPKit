@@ -30,7 +30,7 @@ class TopologicalEntity3DAlignment(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TopologicalEntity3DAlignment instance with a copy of the state of the \e %TopologicalEntity3DAlignment instance \a alignment.
+    # \brief Initializes a copy of the \e %TopologicalEntity3DAlignment instance \a alignment.
     # \param alignment The \e %TopologicalEntity3DAlignment instance to copy.
     # 
     def __init__(alignment: TopologicalEntity3DAlignment) -> None: pass

@@ -30,7 +30,7 @@ class Vector2F(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2F instance with a copy of the state of the \e %Vector2F instance \a v.
+    # \brief Initializes a copy of the \e %Vector2F instance \a v.
     # \param v The \e %Vector2F instance to copy.
     # 
     def __init__(v: Vector2F) -> None: pass

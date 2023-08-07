@@ -32,7 +32,7 @@ class BondMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BondMapping instance with a copy of the state of the \e %BondMapping instance \a mapping.
+    # \brief Initializes a copy of the \e %BondMapping instance \a mapping.
     # \param mapping The \e %BondMapping instance to copy.
     # 
     def __init__(mapping: BondMapping) -> None: pass

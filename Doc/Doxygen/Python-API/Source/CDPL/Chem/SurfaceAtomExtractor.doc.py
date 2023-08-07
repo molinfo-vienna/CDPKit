@@ -50,7 +50,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SurfaceAtomExtractor instance with a copy of the state of the \e %SurfaceAtomExtractor instance \a extractor.
+    # \brief Initializes a copy of the \e %SurfaceAtomExtractor instance \a extractor.
     # \param extractor The \e %SurfaceAtomExtractor instance to copy.
     # 
     def __init__(extractor: SurfaceAtomExtractor) -> None: pass

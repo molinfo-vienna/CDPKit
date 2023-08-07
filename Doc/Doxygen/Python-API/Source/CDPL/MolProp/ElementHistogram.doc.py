@@ -32,7 +32,7 @@ class ElementHistogram(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ElementHistogram instance with a copy of the state of the \e %ElementHistogram instance \a hist.
+    # \brief Initializes a copy of the \e %ElementHistogram instance \a hist.
     # \param hist The \e %ElementHistogram instance to copy.
     # 
     def __init__(hist: ElementHistogram) -> None: pass

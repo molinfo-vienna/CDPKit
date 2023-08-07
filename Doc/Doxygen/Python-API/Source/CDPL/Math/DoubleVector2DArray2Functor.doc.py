@@ -30,7 +30,7 @@ class DoubleVector2DArray2Functor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleVector2DArray2Functor instance with a copy of the state of the \e %DoubleVector2DArray2Functor instance \a func.
+    # \brief Initializes a copy of the \e %DoubleVector2DArray2Functor instance \a func.
     # \param func The \e %DoubleVector2DArray2Functor instance to copy.
     # 
     def __init__(func: DoubleVector2DArray2Functor) -> None: pass

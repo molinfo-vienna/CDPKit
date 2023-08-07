@@ -25,7 +25,7 @@
 class ULRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULRotationMatrix instance with a copy of the state of the \e %ULRotationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %ULRotationMatrix instance \a m.
     # \param m The \e %ULRotationMatrix instance to copy.
     # 
     def __init__(m: ULRotationMatrix) -> None: pass

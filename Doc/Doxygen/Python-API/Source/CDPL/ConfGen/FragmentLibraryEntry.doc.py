@@ -30,7 +30,7 @@ class FragmentLibraryEntry(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FragmentLibraryEntry instance with a copy of the state of the \e %FragmentLibraryEntry instance \a entry.
+    # \brief Initializes a copy of the \e %FragmentLibraryEntry instance \a entry.
     # \param entry The \e %FragmentLibraryEntry instance to copy.
     # 
     def __init__(entry: FragmentLibraryEntry) -> None: pass
@@ -123,7 +123,4 @@ class FragmentLibraryEntry(Boost.Python.instance):
 
     hashCode = property(getHashCode, setHashCode)
 
-    ##
-    # \brief FIXME!
-    #
-    smiles = property(getSmiles, setSmiles)
+    smiles = property(getSMILES, setSMILES)

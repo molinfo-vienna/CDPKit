@@ -30,7 +30,7 @@ class LScalarVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %LScalarVector instance with a copy of the state of the \e %LScalarVector instance \a v.
+    # \brief Initializes a copy of the \e %LScalarVector instance \a v.
     # \param v The \e %LScalarVector instance to copy.
     # 
     def __init__(v: LScalarVector) -> None: pass

@@ -25,7 +25,7 @@
 class FMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FMatrixColumn instance with a copy of the state of the \e %FMatrixColumn instance \a mc.
+    # \brief Initializes a copy of the \e %FMatrixColumn instance \a mc.
     # \param mc The \e %FMatrixColumn instance to copy.
     # 
     def __init__(mc: FMatrixColumn) -> None: pass

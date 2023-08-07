@@ -25,7 +25,7 @@
 class ConstFMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstFMatrixRow instance with a copy of the state of the \e %ConstFMatrixRow instance \a r.
+    # \brief Initializes a copy of the \e %ConstFMatrixRow instance \a r.
     # \param r The \e %ConstFMatrixRow instance to copy.
     # 
     def __init__(r: ConstFMatrixRow) -> None: pass

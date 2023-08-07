@@ -25,7 +25,7 @@
 class ConstUnitLowerTriangularFMatrixAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstUnitLowerTriangularFMatrixAdapter instance with a copy of the state of the \e %ConstUnitLowerTriangularFMatrixAdapter instance \a a.
+    # \brief Initializes a copy of the \e %ConstUnitLowerTriangularFMatrixAdapter instance \a a.
     # \param a The \e %ConstUnitLowerTriangularFMatrixAdapter instance to copy.
     # 
     def __init__(a: ConstUnitLowerTriangularFMatrixAdapter) -> None: pass

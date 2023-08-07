@@ -25,7 +25,7 @@
 class FRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FRotationMatrix instance with a copy of the state of the \e %FRotationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %FRotationMatrix instance \a m.
     # \param m The \e %FRotationMatrix instance to copy.
     # 
     def __init__(m: FRotationMatrix) -> None: pass

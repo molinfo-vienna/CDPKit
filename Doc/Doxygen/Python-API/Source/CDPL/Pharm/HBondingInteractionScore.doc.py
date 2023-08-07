@@ -45,7 +45,7 @@ class HBondingInteractionScore(FeatureInteractionScore):
     DEF_MAX_ACC_ANGLE = 75.0
 
     ##
-    # \brief Initializes the \e %HBondingInteractionScore instance with a copy of the state of the \e %HBondingInteractionScore instance \a score.
+    # \brief Initializes a copy of the \e %HBondingInteractionScore instance \a score.
     # \param score The \e %HBondingInteractionScore instance to copy.
     # 
     def __init__(score: HBondingInteractionScore) -> None: pass

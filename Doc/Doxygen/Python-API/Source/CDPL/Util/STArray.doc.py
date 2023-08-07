@@ -30,7 +30,7 @@ class STArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %STArray instance with a copy of the state of the \e %STArray instance \a array.
+    # \brief Initializes a copy of the \e %STArray instance \a array.
     # \param array The \e %STArray instance to copy.
     # 
     def __init__(array: STArray) -> None: pass

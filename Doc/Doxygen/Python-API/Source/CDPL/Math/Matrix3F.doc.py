@@ -36,7 +36,7 @@ class Matrix3F(Boost.Python.instance):
     def __init__(v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix3F instance with a copy of the state of the \e %Matrix3F instance \a m.
+    # \brief Initializes a copy of the \e %Matrix3F instance \a m.
     # \param m The \e %Matrix3F instance to copy.
     # 
     def __init__(m: Matrix3F) -> None: pass

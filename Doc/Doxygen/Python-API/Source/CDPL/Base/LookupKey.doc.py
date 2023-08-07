@@ -32,7 +32,7 @@ class LookupKey(Boost.Python.instance):
     NONE = LookupKey(id=0, name='NONE')
 
     ##
-    # \brief Initializes the \e %LookupKey instance with a copy of the state of the \e %LookupKey instance \a key.
+    # \brief Initializes a copy of the \e %LookupKey instance \a key.
     # \param key The \e %LookupKey instance to copy.
     # 
     def __init__(key: LookupKey) -> None: pass

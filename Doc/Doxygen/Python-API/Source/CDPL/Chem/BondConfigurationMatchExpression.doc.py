@@ -25,7 +25,7 @@
 class BondConfigurationMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Initializes the \e %BondConfigurationMatchExpression instance with a copy of the state of the \e %BondConfigurationMatchExpression instance \a expr.
+    # \brief Initializes a copy of the \e %BondConfigurationMatchExpression instance \a expr.
     # \param expr The \e %BondConfigurationMatchExpression instance to copy.
     # 
     def __init__(expr: BondConfigurationMatchExpression) -> None: pass

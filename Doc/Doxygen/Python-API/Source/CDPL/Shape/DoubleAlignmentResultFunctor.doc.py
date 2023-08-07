@@ -30,7 +30,7 @@ class DoubleAlignmentResultFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleAlignmentResultFunctor instance with a copy of the state of the \e %DoubleAlignmentResultFunctor instance \a func.
+    # \brief Initializes a copy of the \e %DoubleAlignmentResultFunctor instance \a func.
     # \param func The \e %DoubleAlignmentResultFunctor instance to copy.
     # 
     def __init__(func: DoubleAlignmentResultFunctor) -> None: pass

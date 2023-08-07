@@ -70,7 +70,7 @@ class DataFormat(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DataFormat instance with a copy of the state of the \e %DataFormat instance \a fmt.
+    # \brief Initializes a copy of the \e %DataFormat instance \a fmt.
     # \param fmt The \e %DataFormat instance to copy.
     # 
     def __init__(fmt: DataFormat) -> None: pass
@@ -295,9 +295,6 @@ class DataFormat(Boost.Python.instance):
 
     mimeType = property(getMimeType, setMimeType)
 
-    ##
-    # \brief FIXME!
-    #
-    multiRecordFormat = property(getMultiRecordFormat, setMultiRecordFormat)
+    multiRecordFormat = property(isMultiRecordFormat, setMultiRecordFormat)
 
     fileExtensions = property(getFileExtensions)

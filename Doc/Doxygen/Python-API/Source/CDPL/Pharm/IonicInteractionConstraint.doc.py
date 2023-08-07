@@ -35,7 +35,7 @@ class IonicInteractionConstraint(FeatureDistanceConstraint):
     DEF_MAX_DISTANCE = 5.5
 
     ##
-    # \brief Initializes the \e %IonicInteractionConstraint instance with a copy of the state of the \e %IonicInteractionConstraint instance \a constr.
+    # \brief Initializes a copy of the \e %IonicInteractionConstraint instance \a constr.
     # \param constr The \e %IonicInteractionConstraint instance to copy.
     # 
     def __init__(constr: IonicInteractionConstraint) -> None: pass

@@ -32,7 +32,7 @@ class FeatureTypeHistogram(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureTypeHistogram instance with a copy of the state of the \e %FeatureTypeHistogram instance \a ft_hist.
+    # \brief Initializes a copy of the \e %FeatureTypeHistogram instance \a ft_hist.
     # \param ft_hist The \e %FeatureTypeHistogram instance to copy.
     # 
     def __init__(ft_hist: FeatureTypeHistogram) -> None: pass

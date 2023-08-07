@@ -35,7 +35,7 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DGStructureGeneratorSettings instance with a copy of the state of the \e %DGStructureGeneratorSettings instance \a settings.
+    # \brief Initializes a copy of the \e %DGStructureGeneratorSettings instance \a settings.
     # \param settings The \e %DGStructureGeneratorSettings instance to copy.
     # 
     def __init__(settings: DGStructureGeneratorSettings) -> None: pass
@@ -80,7 +80,4 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     boxSize = property(getBoxSize, setBoxSize)
 
-    ##
-    # \brief FIXME!
-    #
-    planarityConstraints = property(getPlanarityConstraints, setPlanarityConstraints)
+    planarityConstraints = property(enablePlanarityConstraints, enablePlanarityConstraints)

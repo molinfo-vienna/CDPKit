@@ -30,7 +30,7 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %HBondDonorAtomTyper instance with a copy of the state of the \e %HBondDonorAtomTyper instance \a typer.
+    # \brief Initializes a copy of the \e %HBondDonorAtomTyper instance \a typer.
     # \param typer The \e %HBondDonorAtomTyper instance to copy.
     # 
     def __init__(typer: HBondDonorAtomTyper) -> None: pass

@@ -25,7 +25,7 @@
 class LMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LMatrixTranspose instance with a copy of the state of the \e %LMatrixTranspose instance \a mt.
+    # \brief Initializes a copy of the \e %LMatrixTranspose instance \a mt.
     # \param mt The \e %LMatrixTranspose instance to copy.
     # 
     def __init__(mt: LMatrixTranspose) -> None: pass

@@ -40,7 +40,7 @@ class DMLRModel(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DMLRModel instance with a copy of the state of the \e %DMLRModel instance \a model.
+    # \brief Initializes a copy of the \e %DMLRModel instance \a model.
     # \param model The \e %DMLRModel instance to copy.
     # 
     def __init__(model: DMLRModel) -> None: pass

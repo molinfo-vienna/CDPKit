@@ -30,7 +30,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     class Pattern(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Pattern instance with a copy of the state of the \e %Pattern instance \a ptn.
+        # \brief Initializes a copy of the \e %Pattern instance \a ptn.
         # \param ptn The \e %Pattern instance to copy.
         # 
         def __init__(ptn: Pattern) -> None: pass
@@ -121,7 +121,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SubstructureHistogramCalculator instance with a copy of the state of the \e %SubstructureHistogramCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %SubstructureHistogramCalculator instance \a calc.
     # \param calc The \e %SubstructureHistogramCalculator instance to copy.
     # 
     def __init__(calc: SubstructureHistogramCalculator) -> None: pass

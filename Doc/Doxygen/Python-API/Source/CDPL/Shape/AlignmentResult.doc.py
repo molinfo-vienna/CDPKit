@@ -30,7 +30,7 @@ class AlignmentResult(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AlignmentResult instance with a copy of the state of the \e %AlignmentResult instance \a res.
+    # \brief Initializes a copy of the \e %AlignmentResult instance \a res.
     # \param res The \e %AlignmentResult instance to copy.
     # 
     def __init__(res: AlignmentResult) -> None: pass

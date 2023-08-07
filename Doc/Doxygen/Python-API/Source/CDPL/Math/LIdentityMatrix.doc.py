@@ -30,7 +30,7 @@ class LIdentityMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %LIdentityMatrix instance with a copy of the state of the \e %LIdentityMatrix instance \a m.
+    # \brief Initializes a copy of the \e %LIdentityMatrix instance \a m.
     # \param m The \e %LIdentityMatrix instance to copy.
     # 
     def __init__(m: LIdentityMatrix) -> None: pass

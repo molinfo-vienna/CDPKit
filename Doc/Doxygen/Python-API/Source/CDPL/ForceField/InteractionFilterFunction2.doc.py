@@ -30,7 +30,7 @@ class InteractionFilterFunction2(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %InteractionFilterFunction2 instance with a copy of the state of the \e %InteractionFilterFunction2 instance \a func.
+    # \brief Initializes a copy of the \e %InteractionFilterFunction2 instance \a func.
     # \param func The \e %InteractionFilterFunction2 instance to copy.
     # 
     def __init__(func: InteractionFilterFunction2) -> None: pass

@@ -32,7 +32,7 @@ class TotalOverlapTverskyScore(Boost.Python.instance):
     def __init__(alpha: float = 0.95, beta: float = 0.05) -> None: pass
 
     ##
-    # \brief Initializes the \e %TotalOverlapTverskyScore instance with a copy of the state of the \e %TotalOverlapTverskyScore instance \a score.
+    # \brief Initializes a copy of the \e %TotalOverlapTverskyScore instance \a score.
     # \param score The \e %TotalOverlapTverskyScore instance to copy.
     # 
     def __init__(score: TotalOverlapTverskyScore) -> None: pass

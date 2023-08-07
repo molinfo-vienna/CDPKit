@@ -32,7 +32,7 @@ class AtomMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomMapping instance with a copy of the state of the \e %AtomMapping instance \a mapping.
+    # \brief Initializes a copy of the \e %AtomMapping instance \a mapping.
     # \param mapping The \e %AtomMapping instance to copy.
     # 
     def __init__(mapping: AtomMapping) -> None: pass

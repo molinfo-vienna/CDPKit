@@ -25,7 +25,7 @@
 class ULMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULMatrixRange instance with a copy of the state of the \e %ULMatrixRange instance \a r.
+    # \brief Initializes a copy of the \e %ULMatrixRange instance \a r.
     # \param r The \e %ULMatrixRange instance to copy.
     # 
     def __init__(r: ULMatrixRange) -> None: pass

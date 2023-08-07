@@ -65,7 +65,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ConformerGeneratorSettings instance with a copy of the state of the \e %ConformerGeneratorSettings instance \a settings.
+    # \brief Initializes a copy of the \e %ConformerGeneratorSettings instance \a settings.
     # \param settings The \e %ConformerGeneratorSettings instance to copy.
     # 
     def __init__(settings: ConformerGeneratorSettings) -> None: pass
@@ -373,10 +373,7 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     genCoordsFromScratch = property(generateCoordinatesFromScratch, generateCoordinatesFromScratch)
 
-    ##
-    # \brief FIXME!
-    #
-    includeInputCoords = property(getIncludeInputCoords, setIncludeInputCoords)
+    includeInputCoords = property(includeInputCoordinates, includeInputCoordinates)
 
     energyWindow = property(getEnergyWindow, setEnergyWindow)
 

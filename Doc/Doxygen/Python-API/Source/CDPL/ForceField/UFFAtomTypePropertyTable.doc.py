@@ -35,7 +35,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance with a copy of the state of the \e %Entry instance \a entry.
+        # \brief Initializes a copy of the \e %Entry instance \a entry.
         # \param entry The \e %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -165,7 +165,7 @@ class UFFAtomTypePropertyTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %UFFAtomTypePropertyTable instance with a copy of the state of the \e %UFFAtomTypePropertyTable instance \a table.
+    # \brief Initializes a copy of the \e %UFFAtomTypePropertyTable instance \a table.
     # \param table The \e %UFFAtomTypePropertyTable instance to copy.
     # 
     def __init__(table: UFFAtomTypePropertyTable) -> None: pass

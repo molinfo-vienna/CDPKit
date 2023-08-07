@@ -25,7 +25,7 @@
 class FeatureDistanceConstraint(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FeatureDistanceConstraint instance with a copy of the state of the \e %FeatureDistanceConstraint instance \a constr.
+    # \brief Initializes a copy of the \e %FeatureDistanceConstraint instance \a constr.
     # \param constr The \e %FeatureDistanceConstraint instance to copy.
     # 
     def __init__(constr: FeatureDistanceConstraint) -> None: pass

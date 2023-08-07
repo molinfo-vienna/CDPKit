@@ -30,7 +30,7 @@ class TextLabelPrimitive2D(GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TextLabelPrimitive2D instance with a copy of the state of the \e %TextLabelPrimitive2D instance \a prim.
+    # \brief Initializes a copy of the \e %TextLabelPrimitive2D instance \a prim.
     # \param prim The \e %TextLabelPrimitive2D instance to copy.
     # 
     def __init__(prim: TextLabelPrimitive2D) -> None: pass

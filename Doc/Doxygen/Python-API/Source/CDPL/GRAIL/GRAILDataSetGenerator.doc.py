@@ -37,7 +37,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GRAILDataSetGenerator instance with a copy of the state of the \e %GRAILDataSetGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %GRAILDataSetGenerator instance \a gen.
     # \param gen The \e %GRAILDataSetGenerator instance to copy.
     # 
     def __init__(gen: GRAILDataSetGenerator) -> None: pass

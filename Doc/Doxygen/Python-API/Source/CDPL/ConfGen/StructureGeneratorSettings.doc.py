@@ -35,7 +35,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %StructureGeneratorSettings instance with a copy of the state of the \e %StructureGeneratorSettings instance \a settings.
+    # \brief Initializes a copy of the \e %StructureGeneratorSettings instance \a settings.
     # \param settings The \e %StructureGeneratorSettings instance to copy.
     # 
     def __init__(settings: StructureGeneratorSettings) -> None: pass
@@ -243,15 +243,9 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     timeout = property(getTimeout, setTimeout)
 
-    ##
-    # \brief FIXME!
-    #
-    fragModeForceFieldType = property(getFragModeForceFieldType, setFragModeForceFieldType)
+    fragModeForceFieldType = property(getFragmentModeForceFieldType, setFragmentModeForceFieldType)
 
-    ##
-    # \brief FIXME!
-    #
-    dgModeForceFieldType = property(getDgModeForceFieldType, setDgModeForceFieldType)
+    dgModeForceFieldType = property(getDGModeForceFieldType, setDGModeForceFieldType)
 
     strictForceFieldParam = property(strictForceFieldParameterization, strictForceFieldParameterization)
 

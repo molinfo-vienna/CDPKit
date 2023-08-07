@@ -77,7 +77,7 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance with a copy of the state of the \e %FeatureInteractionScoreGridCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %FeatureInteractionScoreGridCalculator instance \a calc.
     # \param calc The \e %FeatureInteractionScoreGridCalculator instance to copy.
     # 
     def __init__(calc: FeatureInteractionScoreGridCalculator) -> None: pass

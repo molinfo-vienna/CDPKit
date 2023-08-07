@@ -30,7 +30,7 @@ class DoubleFeatureFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleFeatureFunctor instance with a copy of the state of the \e %DoubleFeatureFunctor instance \a func.
+    # \brief Initializes a copy of the \e %DoubleFeatureFunctor instance \a func.
     # \param func The \e %DoubleFeatureFunctor instance to copy.
     # 
     def __init__(func: DoubleFeatureFunctor) -> None: pass

@@ -25,7 +25,7 @@
 class MMFF94VanDerWaalsAtomParameters(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsAtomParameters instance with a copy of the state of the \e %MMFF94VanDerWaalsAtomParameters instance \a params.
+    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsAtomParameters instance \a params.
     # \param params The \e %MMFF94VanDerWaalsAtomParameters instance to copy.
     # 
     def __init__(params: MMFF94VanDerWaalsAtomParameters) -> None: pass

@@ -30,7 +30,7 @@ class BoolFeature4Functor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolFeature4Functor instance with a copy of the state of the \e %BoolFeature4Functor instance \a func.
+    # \brief Initializes a copy of the \e %BoolFeature4Functor instance \a func.
     # \param func The \e %BoolFeature4Functor instance to copy.
     # 
     def __init__(func: BoolFeature4Functor) -> None: pass

@@ -30,7 +30,7 @@ class ULMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ULMatrix instance with a copy of the state of the \e %ULMatrix instance \a m.
+    # \brief Initializes a copy of the \e %ULMatrix instance \a m.
     # \param m The \e %ULMatrix instance to copy.
     # 
     def __init__(m: ULMatrix) -> None: pass

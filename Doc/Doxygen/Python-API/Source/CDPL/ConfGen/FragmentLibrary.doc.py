@@ -30,7 +30,7 @@ class FragmentLibrary(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FragmentLibrary instance with a copy of the state of the \e %FragmentLibrary instance \a lib.
+    # \brief Initializes a copy of the \e %FragmentLibrary instance \a lib.
     # \param lib The \e %FragmentLibrary instance to copy.
     # 
     def __init__(lib: FragmentLibrary) -> None: pass

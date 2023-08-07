@@ -139,19 +139,10 @@ class TorsionRuleMatcher(Boost.Python.instance):
 
     numMatches = property(getNumMatches)
 
-    ##
-    # \brief FIXME!
-    #
-    uniqueMappingsOnly = property(getUniqueMappingsOnly, setUniqueMappingsOnly)
+    uniqueMappingsOnly = property(findUniqueMappingsOnly, findUniqueMappingsOnly)
 
-    ##
-    # \brief FIXME!
-    #
-    allRuleMappings = property(getAllRuleMappings, setAllRuleMappings)
+    allRuleMappings = property(findAllRuleMappings, findAllRuleMappings)
 
-    ##
-    # \brief FIXME!
-    #
-    onlyFirstMatchingRule = property(getOnlyFirstMatchingRule, setOnlyFirstMatchingRule)
+    onlyFirstMatchingRule = property(stopAtFirstMatchingRule, stopAtFirstMatchingRule)
 
     torsionLibrary = property(getTorsionLibrary, setTorsionLibrary)

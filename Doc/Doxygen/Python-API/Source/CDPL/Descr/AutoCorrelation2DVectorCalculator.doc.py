@@ -32,7 +32,7 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance with a copy of the state of the \e %AutoCorrelation2DVectorCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %AutoCorrelation2DVectorCalculator instance \a calc.
     # \param calc The \e %AutoCorrelation2DVectorCalculator instance to copy.
     # 
     def __init__(calc: AutoCorrelation2DVectorCalculator) -> None: pass

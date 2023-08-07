@@ -30,7 +30,7 @@ class DoubleVector3D2AtomFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DoubleVector3D2AtomFunctor instance with a copy of the state of the \e %DoubleVector3D2AtomFunctor instance \a func.
+    # \brief Initializes a copy of the \e %DoubleVector3D2AtomFunctor instance \a func.
     # \param func The \e %DoubleVector3D2AtomFunctor instance to copy.
     # 
     def __init__(func: DoubleVector3D2AtomFunctor) -> None: pass

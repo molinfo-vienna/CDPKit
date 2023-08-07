@@ -42,7 +42,7 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance with a copy of the state of the \e %FastGaussianShapeOverlapFunction instance \a func.
+    # \brief Initializes a copy of the \e %FastGaussianShapeOverlapFunction instance \a func.
     # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
     # 
     def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass

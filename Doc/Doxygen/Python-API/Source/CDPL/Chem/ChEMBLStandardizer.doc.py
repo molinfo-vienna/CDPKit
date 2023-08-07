@@ -102,7 +102,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ChEMBLStandardizer instance with a copy of the state of the \e %ChEMBLStandardizer instance \a standardizer.
+    # \brief Initializes a copy of the \e %ChEMBLStandardizer instance \a standardizer.
     # \param standardizer The \e %ChEMBLStandardizer instance to copy.
     # 
     def __init__(standardizer: ChEMBLStandardizer) -> None: pass

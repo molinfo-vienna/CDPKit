@@ -32,7 +32,7 @@ class MassComposition(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MassComposition instance with a copy of the state of the \e %MassComposition instance \a mass_comp.
+    # \brief Initializes a copy of the \e %MassComposition instance \a mass_comp.
     # \param mass_comp The \e %MassComposition instance to copy.
     # 
     def __init__(mass_comp: MassComposition) -> None: pass

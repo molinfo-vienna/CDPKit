@@ -37,7 +37,7 @@ class BitSet(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BitSet instance with a copy of the state of the \e %BitSet instance \a bs.
+    # \brief Initializes a copy of the \e %BitSet instance \a bs.
     # \param bs The \e %BitSet instance to copy.
     # 
     def __init__(bs: BitSet) -> None: pass

@@ -25,7 +25,7 @@
 class FRegularGrid(FSpatialGrid, Math.FRegularSpatialGrid):
 
     ##
-    # \brief Initializes the \e %FRegularGrid instance with a copy of the state of the \e %FRegularGrid instance \a grid.
+    # \brief Initializes a copy of the \e %FRegularGrid instance \a grid.
     # \param grid The \e %FRegularGrid instance to copy.
     # 
     def __init__(grid: FRegularGrid) -> None: pass

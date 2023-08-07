@@ -25,7 +25,7 @@
 class FMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FMatrixTranspose instance with a copy of the state of the \e %FMatrixTranspose instance \a mt.
+    # \brief Initializes a copy of the \e %FMatrixTranspose instance \a mt.
     # \param mt The \e %FMatrixTranspose instance to copy.
     # 
     def __init__(mt: FMatrixTranspose) -> None: pass

@@ -25,7 +25,7 @@
 class MMFF94StretchBendInteraction(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94StretchBendInteraction instance with a copy of the state of the \e %MMFF94StretchBendInteraction instance \a iactn.
+    # \brief Initializes a copy of the \e %MMFF94StretchBendInteraction instance \a iactn.
     # \param iactn The \e %MMFF94StretchBendInteraction instance to copy.
     # 
     def __init__(iactn: MMFF94StretchBendInteraction) -> None: pass

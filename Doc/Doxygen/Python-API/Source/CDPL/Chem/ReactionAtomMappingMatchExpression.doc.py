@@ -25,7 +25,7 @@
 class ReactionAtomMappingMatchExpression(ReactionMatchExpression):
 
     ##
-    # \brief Initializes the \e %ReactionAtomMappingMatchExpression instance with a copy of the state of the \e %ReactionAtomMappingMatchExpression instance \a expr.
+    # \brief Initializes a copy of the \e %ReactionAtomMappingMatchExpression instance \a expr.
     # \param expr The \e %ReactionAtomMappingMatchExpression instance to copy.
     # 
     def __init__(expr: ReactionAtomMappingMatchExpression) -> None: pass

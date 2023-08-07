@@ -25,7 +25,7 @@
 class DRegularGrid(DSpatialGrid, Math.DRegularSpatialGrid):
 
     ##
-    # \brief Initializes the \e %DRegularGrid instance with a copy of the state of the \e %DRegularGrid instance \a grid.
+    # \brief Initializes a copy of the \e %DRegularGrid instance \a grid.
     # \param grid The \e %DRegularGrid instance to copy.
     # 
     def __init__(grid: DRegularGrid) -> None: pass

@@ -32,7 +32,7 @@ class Font(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Font instance with a copy of the state of the \e %Font instance \a font.
+    # \brief Initializes a copy of the \e %Font instance \a font.
     # \param font The \e %Font instance to copy.
     # 
     def __init__(font: Font) -> None: pass

@@ -30,7 +30,7 @@ class SparseULVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULVector instance with a copy of the state of the \e %SparseULVector instance \a v.
+    # \brief Initializes a copy of the \e %SparseULVector instance \a v.
     # \param v The \e %SparseULVector instance to copy.
     # 
     def __init__(v: SparseULVector) -> None: pass

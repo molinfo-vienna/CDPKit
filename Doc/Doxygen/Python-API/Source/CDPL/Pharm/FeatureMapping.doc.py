@@ -32,7 +32,7 @@ class FeatureMapping(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FeatureMapping instance with a copy of the state of the \e %FeatureMapping instance \a mapping.
+    # \brief Initializes a copy of the \e %FeatureMapping instance \a mapping.
     # \param mapping The \e %FeatureMapping instance to copy.
     # 
     def __init__(mapping: FeatureMapping) -> None: pass

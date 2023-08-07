@@ -25,7 +25,7 @@
 class ULMatrixRow(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULMatrixRow instance with a copy of the state of the \e %ULMatrixRow instance \a mr.
+    # \brief Initializes a copy of the \e %ULMatrixRow instance \a mr.
     # \param mr The \e %ULMatrixRow instance to copy.
     # 
     def __init__(mr: ULMatrixRow) -> None: pass

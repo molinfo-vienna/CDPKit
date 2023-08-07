@@ -30,7 +30,7 @@ class GaussianShape(Base.PropertyContainer):
     class Element(Boost.Python.instance):
 
         ##
-        # \brief Initializes the \e %Element instance with a copy of the state of the \e %Element instance \a elem.
+        # \brief Initializes a copy of the \e %Element instance \a elem.
         # \param elem The \e %Element instance to copy.
         # 
         def __init__(elem: Element) -> None: pass
@@ -118,7 +118,7 @@ class GaussianShape(Base.PropertyContainer):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GaussianShape instance with a copy of the state of the \e %GaussianShape instance \a shape.
+    # \brief Initializes a copy of the \e %GaussianShape instance \a shape.
     # \param shape The \e %GaussianShape instance to copy.
     # 
     def __init__(shape: GaussianShape) -> None: pass

@@ -25,7 +25,7 @@
 class SpatialFeatureMapping(FeatureMapping):
 
     ##
-    # \brief Initializes the \e %SpatialFeatureMapping instance with a copy of the state of the \e %SpatialFeatureMapping instance \a mapping.
+    # \brief Initializes a copy of the \e %SpatialFeatureMapping instance \a mapping.
     # \param mapping The \e %SpatialFeatureMapping instance to copy.
     # 
     def __init__(mapping: SpatialFeatureMapping) -> None: pass

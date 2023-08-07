@@ -37,7 +37,7 @@ class DGConstraintGenerator(Boost.Python.instance):
         def __init__(ctr_idx: int, descr: Chem.StereoDescriptor) -> None: pass
 
         ##
-        # \brief Initializes the \e %StereoCenterData instance with a copy of the state of the \e %StereoCenterData instance \a data.
+        # \brief Initializes a copy of the \e %StereoCenterData instance \a data.
         # \param data The \e %StereoCenterData instance to copy.
         # 
         def __init__(data: StereoCenterData) -> None: pass
@@ -54,16 +54,22 @@ class DGConstraintGenerator(Boost.Python.instance):
         # 
         def getObjectID() -> int: pass
 
+        ##
+        # \brief 
+        # \return 
+        #
+        def getCenterIndex() -> int: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getDescriptor() -> Chem.StereoDescriptor: pass
+
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        #
         centerIndex = property(getCenterIndex)
 
-        ##
-        # \brief FIXME!
-        #
         descriptor = property(getDescriptor)
 
     ##
@@ -72,7 +78,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DGConstraintGenerator instance with a copy of the state of the \e %DGConstraintGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %DGConstraintGenerator instance \a gen.
     # \param gen The \e %DGConstraintGenerator instance to copy.
     # 
     def __init__(gen: DGConstraintGenerator) -> None: pass
@@ -203,7 +209,4 @@ class DGConstraintGenerator(Boost.Python.instance):
 
     numBondStereoCenters = property(getNumBondStereoCenters)
 
-    ##
-    # \brief FIXME!
-    #
-    exclHydrogenMask = property(getExclHydrogenMask)
+    exclHydrogenMask = property(getExcludedHydrogenMask)

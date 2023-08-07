@@ -30,7 +30,7 @@ class BoolEntity3D4Functor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolEntity3D4Functor instance with a copy of the state of the \e %BoolEntity3D4Functor instance \a func.
+    # \brief Initializes a copy of the \e %BoolEntity3D4Functor instance \a func.
     # \param func The \e %BoolEntity3D4Functor instance to copy.
     # 
     def __init__(func: BoolEntity3D4Functor) -> None: pass

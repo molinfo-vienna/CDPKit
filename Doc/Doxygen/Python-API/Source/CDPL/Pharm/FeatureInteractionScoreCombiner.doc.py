@@ -25,7 +25,7 @@
 class FeatureInteractionScoreCombiner(FeatureInteractionScore):
 
     ##
-    # \brief Initializes the \e %FeatureInteractionScoreCombiner instance with a copy of the state of the \e %FeatureInteractionScoreCombiner instance \a comb.
+    # \brief Initializes a copy of the \e %FeatureInteractionScoreCombiner instance \a comb.
     # \param comb The \e %FeatureInteractionScoreCombiner instance to copy.
     # 
     def __init__(comb: FeatureInteractionScoreCombiner) -> None: pass

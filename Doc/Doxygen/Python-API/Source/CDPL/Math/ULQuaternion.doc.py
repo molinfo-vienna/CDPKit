@@ -30,7 +30,7 @@ class ULQuaternion(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ULQuaternion instance with a copy of the state of the \e %ULQuaternion instance \a q.
+    # \brief Initializes a copy of the \e %ULQuaternion instance \a q.
     # \param q The \e %ULQuaternion instance to copy.
     # 
     def __init__(q: ULQuaternion) -> None: pass

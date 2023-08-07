@@ -25,7 +25,7 @@
 class ConstLVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstLVectorRange instance with a copy of the state of the \e %ConstLVectorRange instance \a r.
+    # \brief Initializes a copy of the \e %ConstLVectorRange instance \a r.
     # \param r The \e %ConstLVectorRange instance to copy.
     # 
     def __init__(r: ConstLVectorRange) -> None: pass

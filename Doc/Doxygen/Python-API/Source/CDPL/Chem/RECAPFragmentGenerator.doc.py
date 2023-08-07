@@ -32,7 +32,7 @@ class RECAPFragmentGenerator(FragmentGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %RECAPFragmentGenerator instance with a copy of the state of the \e %RECAPFragmentGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %RECAPFragmentGenerator instance \a gen.
     # \param gen The \e %RECAPFragmentGenerator instance to copy.
     # 
     def __init__(gen: RECAPFragmentGenerator) -> None: pass

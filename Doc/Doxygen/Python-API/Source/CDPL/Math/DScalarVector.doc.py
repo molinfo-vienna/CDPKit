@@ -30,7 +30,7 @@ class DScalarVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DScalarVector instance with a copy of the state of the \e %DScalarVector instance \a v.
+    # \brief Initializes a copy of the \e %DScalarVector instance \a v.
     # \param v The \e %DScalarVector instance to copy.
     # 
     def __init__(v: DScalarVector) -> None: pass

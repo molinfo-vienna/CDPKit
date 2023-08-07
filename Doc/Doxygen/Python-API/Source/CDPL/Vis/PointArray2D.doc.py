@@ -30,7 +30,7 @@ class PointArray2D(Math.Vector2DArray):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PointArray2D instance with a copy of the state of the \e %PointArray2D instance \a array.
+    # \brief Initializes a copy of the \e %PointArray2D instance \a array.
     # \param array The \e %PointArray2D instance to copy.
     # 
     def __init__(array: PointArray2D) -> None: pass

@@ -30,7 +30,7 @@ class STPair(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %STPair instance with a copy of the state of the \e %STPair instance \a pair.
+    # \brief Initializes a copy of the \e %STPair instance \a pair.
     # \param pair The \e %STPair instance to copy.
     # 
     def __init__(pair: STPair) -> None: pass
@@ -41,6 +41,30 @@ class STPair(Boost.Python.instance):
     # \param second 
     # 
     def __init__(first: int, second: int) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getFirst() -> int: pass
+
+    ##
+    # \brief 
+    # \param value 
+    #
+    def setFirst(value: int) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getSecond() -> int: pass
+
+    ##
+    # \brief 
+    # \param value 
+    #
+    def setSecond(value: int) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %STPair instance \a array.
@@ -91,12 +115,6 @@ class STPair(Boost.Python.instance):
     # 
     def __gt__(pair: STPair) -> bool: pass
 
-    ##
-    # \brief FIXME!
-    #
     first = property(getFirst, setFirst)
 
-    ##
-    # \brief FIXME!
-    #
     second = property(getSecond, setSecond)

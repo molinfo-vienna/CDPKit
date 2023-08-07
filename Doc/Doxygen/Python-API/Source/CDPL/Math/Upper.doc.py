@@ -30,7 +30,7 @@ class Upper(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Upper instance with a copy of the state of the \e %Upper instance \a t.
+    # \brief Initializes a copy of the \e %Upper instance \a t.
     # \param t The \e %Upper instance to copy.
     # 
     def __init__(t: Upper) -> None: pass

@@ -37,7 +37,7 @@ class ExactGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
-    # \brief Initializes the \e %ExactGaussianShapeOverlapFunction instance with a copy of the state of the \e %ExactGaussianShapeOverlapFunction instance \a func.
+    # \brief Initializes a copy of the \e %ExactGaussianShapeOverlapFunction instance \a func.
     # \param func The \e %ExactGaussianShapeOverlapFunction instance to copy.
     # 
     def __init__(func: ExactGaussianShapeOverlapFunction) -> None: pass

@@ -30,7 +30,7 @@ class ULUnitVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ULUnitVector instance with a copy of the state of the \e %ULUnitVector instance \a v.
+    # \brief Initializes a copy of the \e %ULUnitVector instance \a v.
     # \param v The \e %ULUnitVector instance to copy.
     # 
     def __init__(v: ULUnitVector) -> None: pass

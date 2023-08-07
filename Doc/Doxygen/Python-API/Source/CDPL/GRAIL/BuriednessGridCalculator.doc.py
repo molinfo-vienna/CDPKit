@@ -30,7 +30,7 @@ class BuriednessGridCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BuriednessGridCalculator instance with a copy of the state of the \e %BuriednessGridCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %BuriednessGridCalculator instance \a calc.
     # \param calc The \e %BuriednessGridCalculator instance to copy.
     # 
     def __init__(calc: BuriednessGridCalculator) -> None: pass

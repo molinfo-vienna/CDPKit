@@ -25,7 +25,7 @@
 class FMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FMatrixRange instance with a copy of the state of the \e %FMatrixRange instance \a r.
+    # \brief Initializes a copy of the \e %FMatrixRange instance \a r.
     # \param r The \e %FMatrixRange instance to copy.
     # 
     def __init__(r: FMatrixRange) -> None: pass

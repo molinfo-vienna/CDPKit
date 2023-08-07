@@ -30,7 +30,7 @@ class ANDReactionMatchExpressionList(ReactionMatchExpressionList):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ANDReactionMatchExpressionList instance with a copy of the state of the \e %ANDReactionMatchExpressionList instance \a expr.
+    # \brief Initializes a copy of the \e %ANDReactionMatchExpressionList instance \a expr.
     # \param expr The \e %ANDReactionMatchExpressionList instance to copy.
     # 
     def __init__(expr: ANDReactionMatchExpressionList) -> None: pass

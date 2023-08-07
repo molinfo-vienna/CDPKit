@@ -1,1 +1,7 @@
- 
+#
+# --- Unresolved property getter/setter functions ---
+#
+Grid.coordsTransform.value
+getCoordinatesTransform
+setCoordinatesTransform
+$$$$

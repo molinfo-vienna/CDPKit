@@ -30,7 +30,7 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94AtomTyper instance with a copy of the state of the \e %MMFF94AtomTyper instance \a typer.
+    # \brief Initializes a copy of the \e %MMFF94AtomTyper instance \a typer.
     # \param typer The \e %MMFF94AtomTyper instance to copy.
     # 
     def __init__(typer: MMFF94AtomTyper) -> None: pass

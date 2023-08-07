@@ -32,7 +32,7 @@ class BondMatchExpressionList(BondMatchExpression):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BondMatchExpressionList instance with a copy of the state of the \e %BondMatchExpressionList instance \a expr.
+    # \brief Initializes a copy of the \e %BondMatchExpressionList instance \a expr.
     # \param expr The \e %BondMatchExpressionList instance to copy.
     # 
     def __init__(expr: BondMatchExpressionList) -> None: pass

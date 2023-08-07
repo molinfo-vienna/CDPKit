@@ -35,7 +35,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance with a copy of the state of the \e %Entry instance \a entry.
+        # \brief Initializes a copy of the \e %Entry instance \a entry.
         # \param entry The \e %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -111,7 +111,7 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94PartialBondChargeIncrementTable instance with a copy of the state of the \e %MMFF94PartialBondChargeIncrementTable instance \a table.
+    # \brief Initializes a copy of the \e %MMFF94PartialBondChargeIncrementTable instance \a table.
     # \param table The \e %MMFF94PartialBondChargeIncrementTable instance to copy.
     # 
     def __init__(table: MMFF94PartialBondChargeIncrementTable) -> None: pass

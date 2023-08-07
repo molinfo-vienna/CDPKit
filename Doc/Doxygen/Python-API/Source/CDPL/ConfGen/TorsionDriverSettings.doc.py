@@ -35,7 +35,7 @@ class TorsionDriverSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %TorsionDriverSettings instance with a copy of the state of the \e %TorsionDriverSettings instance \a settings.
+    # \brief Initializes a copy of the \e %TorsionDriverSettings instance \a settings.
     # \param settings The \e %TorsionDriverSettings instance to copy.
     # 
     def __init__(settings: TorsionDriverSettings) -> None: pass

@@ -108,7 +108,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CircularFingerprintGenerator instance with a copy of the state of the \e %CircularFingerprintGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %CircularFingerprintGenerator instance \a gen.
     # \param gen The \e %CircularFingerprintGenerator instance to copy.
     # 
     def __init__(gen: CircularFingerprintGenerator) -> None: pass

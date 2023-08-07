@@ -35,7 +35,7 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DGConstraintGeneratorSettings instance with a copy of the state of the \e %DGConstraintGeneratorSettings instance \a settings.
+    # \brief Initializes a copy of the \e %DGConstraintGeneratorSettings instance \a settings.
     # \param settings The \e %DGConstraintGeneratorSettings instance to copy.
     # 
     def __init__(settings: DGConstraintGeneratorSettings) -> None: pass
@@ -97,17 +97,8 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    exclHydrogens = property(getExclHydrogens, setExclHydrogens)
+    exclHydrogens = property(excludeHydrogens, excludeHydrogens)
 
-    ##
-    # \brief FIXME!
-    #
-    regardAtomConfig = property(getRegardAtomConfig, setRegardAtomConfig)
+    regardAtomConfig = property(regardAtomConfiguration, regardAtomConfiguration)
 
-    ##
-    # \brief FIXME!
-    #
-    regardBondConfig = property(getRegardBondConfig, setRegardBondConfig)
+    regardBondConfig = property(regardBondConfiguration, regardBondConfiguration)

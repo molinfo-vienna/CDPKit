@@ -65,7 +65,7 @@ class MatchConstraint(Boost.Python.instance):
         NOT_EQUAL = 6
 
     ##
-    # \brief Initializes the \e %MatchConstraint instance with a copy of the state of the \e %MatchConstraint instance \a constr.
+    # \brief Initializes a copy of the \e %MatchConstraint instance \a constr.
     # \param constr The \e %MatchConstraint instance to copy.
     # 
     def __init__(constr: MatchConstraint) -> None: pass

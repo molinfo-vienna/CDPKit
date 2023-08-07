@@ -30,7 +30,7 @@ class ColorTable(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ColorTable instance with a copy of the state of the \e %ColorTable instance \a table.
+    # \brief Initializes a copy of the \e %ColorTable instance \a table.
     # \param table The \e %ColorTable instance to copy.
     # 
     def __init__(table: ColorTable) -> None: pass

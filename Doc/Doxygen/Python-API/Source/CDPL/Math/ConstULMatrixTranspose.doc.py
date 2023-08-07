@@ -25,7 +25,7 @@
 class ConstULMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstULMatrixTranspose instance with a copy of the state of the \e %ConstULMatrixTranspose instance \a mt.
+    # \brief Initializes a copy of the \e %ConstULMatrixTranspose instance \a mt.
     # \param mt The \e %ConstULMatrixTranspose instance to copy.
     # 
     def __init__(mt: ConstULMatrixTranspose) -> None: pass

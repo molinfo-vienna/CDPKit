@@ -25,7 +25,7 @@
 class DVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DVectorRange instance with a copy of the state of the \e %DVectorRange instance \a r.
+    # \brief Initializes a copy of the \e %DVectorRange instance \a r.
     # \param r The \e %DVectorRange instance to copy.
     # 
     def __init__(r: DVectorRange) -> None: pass

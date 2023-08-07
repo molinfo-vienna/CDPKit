@@ -25,7 +25,7 @@
 class ConstULMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstULMatrixRange instance with a copy of the state of the \e %ConstULMatrixRange instance \a r.
+    # \brief Initializes a copy of the \e %ConstULMatrixRange instance \a r.
     # \param r The \e %ConstULMatrixRange instance to copy.
     # 
     def __init__(r: ConstULMatrixRange) -> None: pass

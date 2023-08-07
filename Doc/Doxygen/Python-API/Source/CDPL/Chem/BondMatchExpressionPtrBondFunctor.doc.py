@@ -30,7 +30,7 @@ class BondMatchExpressionPtrBondFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BondMatchExpressionPtrBondFunctor instance with a copy of the state of the \e %BondMatchExpressionPtrBondFunctor instance \a func.
+    # \brief Initializes a copy of the \e %BondMatchExpressionPtrBondFunctor instance \a func.
     # \param func The \e %BondMatchExpressionPtrBondFunctor instance to copy.
     # 
     def __init__(func: BondMatchExpressionPtrBondFunctor) -> None: pass

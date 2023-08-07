@@ -30,7 +30,7 @@ class Vector2DArrayAlignmentCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Vector2DArrayAlignmentCalculator instance with a copy of the state of the \e %Vector2DArrayAlignmentCalculator instance \a algo.
+    # \brief Initializes a copy of the \e %Vector2DArrayAlignmentCalculator instance \a algo.
     # \param algo The \e %Vector2DArrayAlignmentCalculator instance to copy.
     # 
     def __init__(algo: Vector2DArrayAlignmentCalculator) -> None: pass

@@ -25,7 +25,7 @@
 class ConstLHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstLHomogenousCoordsAdapter instance with a copy of the state of the \e %ConstLHomogenousCoordsAdapter instance \a a.
+    # \brief Initializes a copy of the \e %ConstLHomogenousCoordsAdapter instance \a a.
     # \param a The \e %ConstLHomogenousCoordsAdapter instance to copy.
     # 
     def __init__(a: ConstLHomogenousCoordsAdapter) -> None: pass

@@ -50,7 +50,7 @@ class ProtonationStateStandardizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ProtonationStateStandardizer instance with a copy of the state of the \e %ProtonationStateStandardizer instance \a standardizer.
+    # \brief Initializes a copy of the \e %ProtonationStateStandardizer instance \a standardizer.
     # \param standardizer The \e %ProtonationStateStandardizer instance to copy.
     # 
     def __init__(standardizer: ProtonationStateStandardizer) -> None: pass

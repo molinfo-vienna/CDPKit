@@ -30,7 +30,7 @@ class SparseULMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseULMatrix instance with a copy of the state of the \e %SparseULMatrix instance \a m.
+    # \brief Initializes a copy of the \e %SparseULMatrix instance \a m.
     # \param m The \e %SparseULMatrix instance to copy.
     # 
     def __init__(m: SparseULMatrix) -> None: pass

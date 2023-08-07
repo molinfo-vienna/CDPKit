@@ -30,7 +30,7 @@ class MMFF94BondTypeIndexFunction(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance with a copy of the state of the \e %MMFF94BondTypeIndexFunction instance \a func.
+    # \brief Initializes a copy of the \e %MMFF94BondTypeIndexFunction instance \a func.
     # \param func The \e %MMFF94BondTypeIndexFunction instance to copy.
     # 
     def __init__(func: MMFF94BondTypeIndexFunction) -> None: pass

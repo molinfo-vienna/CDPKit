@@ -30,7 +30,7 @@ class DRealQuaternion(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DRealQuaternion instance with a copy of the state of the \e %DRealQuaternion instance \a q.
+    # \brief Initializes a copy of the \e %DRealQuaternion instance \a q.
     # \param q The \e %DRealQuaternion instance to copy.
     # 
     def __init__(q: DRealQuaternion) -> None: pass

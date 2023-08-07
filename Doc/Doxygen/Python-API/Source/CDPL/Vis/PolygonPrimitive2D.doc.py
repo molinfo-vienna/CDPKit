@@ -30,7 +30,7 @@ class PolygonPrimitive2D(PointArray2D, GraphicsPrimitive2D):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PolygonPrimitive2D instance with a copy of the state of the \e %PolygonPrimitive2D instance \a prim.
+    # \brief Initializes a copy of the \e %PolygonPrimitive2D instance \a prim.
     # \param prim The \e %PolygonPrimitive2D instance to copy.
     # 
     def __init__(prim: PolygonPrimitive2D) -> None: pass

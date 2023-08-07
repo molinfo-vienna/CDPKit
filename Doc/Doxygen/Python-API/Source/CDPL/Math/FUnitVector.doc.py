@@ -30,7 +30,7 @@ class FUnitVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FUnitVector instance with a copy of the state of the \e %FUnitVector instance \a v.
+    # \brief Initializes a copy of the \e %FUnitVector instance \a v.
     # \param v The \e %FUnitVector instance to copy.
     # 
     def __init__(v: FUnitVector) -> None: pass

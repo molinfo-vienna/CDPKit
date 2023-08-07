@@ -35,7 +35,7 @@ class FragmentAssemblerSettings(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FragmentAssemblerSettings instance with a copy of the state of the \e %FragmentAssemblerSettings instance \a settings.
+    # \brief Initializes a copy of the \e %FragmentAssemblerSettings instance \a settings.
     # \param settings The \e %FragmentAssemblerSettings instance to copy.
     # 
     def __init__(settings: FragmentAssemblerSettings) -> None: pass

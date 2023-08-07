@@ -30,7 +30,7 @@ class DKabschAlgorithm(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DKabschAlgorithm instance with a copy of the state of the \e %DKabschAlgorithm instance \a algo.
+    # \brief Initializes a copy of the \e %DKabschAlgorithm instance \a algo.
     # \param algo The \e %DKabschAlgorithm instance to copy.
     # 
     def __init__(algo: DKabschAlgorithm) -> None: pass

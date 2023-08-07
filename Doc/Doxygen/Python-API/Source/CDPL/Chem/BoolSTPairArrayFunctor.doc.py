@@ -30,7 +30,7 @@ class BoolSTPairArrayFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolSTPairArrayFunctor instance with a copy of the state of the \e %BoolSTPairArrayFunctor instance \a func.
+    # \brief Initializes a copy of the \e %BoolSTPairArrayFunctor instance \a func.
     # \param func The \e %BoolSTPairArrayFunctor instance to copy.
     # 
     def __init__(func: BoolSTPairArrayFunctor) -> None: pass

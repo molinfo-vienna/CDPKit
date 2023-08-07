@@ -30,7 +30,7 @@ class MMFF94SymbolicAtomTypeFunction(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94SymbolicAtomTypeFunction instance with a copy of the state of the \e %MMFF94SymbolicAtomTypeFunction instance \a func.
+    # \brief Initializes a copy of the \e %MMFF94SymbolicAtomTypeFunction instance \a func.
     # \param func The \e %MMFF94SymbolicAtomTypeFunction instance to copy.
     # 
     def __init__(func: MMFF94SymbolicAtomTypeFunction) -> None: pass

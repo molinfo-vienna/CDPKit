@@ -30,7 +30,7 @@ class FScalarVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FScalarVector instance with a copy of the state of the \e %FScalarVector instance \a v.
+    # \brief Initializes a copy of the \e %FScalarVector instance \a v.
     # \param v The \e %FScalarVector instance to copy.
     # 
     def __init__(v: FScalarVector) -> None: pass

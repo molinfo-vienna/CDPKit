@@ -30,7 +30,7 @@ class ColorTanimotoScore(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %ColorTanimotoScore instance with a copy of the state of the \e %ColorTanimotoScore instance \a score.
+    # \brief Initializes a copy of the \e %ColorTanimotoScore instance \a score.
     # \param score The \e %ColorTanimotoScore instance to copy.
     # 
     def __init__(score: ColorTanimotoScore) -> None: pass

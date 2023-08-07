@@ -25,7 +25,7 @@
 class BondReactionCenterStatusMatchExpression(BondMatchExpression):
 
     ##
-    # \brief Initializes the \e %BondReactionCenterStatusMatchExpression instance with a copy of the state of the \e %BondReactionCenterStatusMatchExpression instance \a expr.
+    # \brief Initializes a copy of the \e %BondReactionCenterStatusMatchExpression instance \a expr.
     # \param expr The \e %BondReactionCenterStatusMatchExpression instance to copy.
     # 
     def __init__(expr: BondReactionCenterStatusMatchExpression) -> None: pass

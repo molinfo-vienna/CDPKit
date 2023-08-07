@@ -30,7 +30,7 @@ class DUnitVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %DUnitVector instance with a copy of the state of the \e %DUnitVector instance \a v.
+    # \brief Initializes a copy of the \e %DUnitVector instance \a v.
     # \param v The \e %DUnitVector instance to copy.
     # 
     def __init__(v: DUnitVector) -> None: pass

@@ -30,7 +30,7 @@ class FScalarMatrix(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FScalarMatrix instance with a copy of the state of the \e %FScalarMatrix instance \a m.
+    # \brief Initializes a copy of the \e %FScalarMatrix instance \a m.
     # \param m The \e %FScalarMatrix instance to copy.
     # 
     def __init__(m: FScalarMatrix) -> None: pass

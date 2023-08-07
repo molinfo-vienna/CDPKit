@@ -30,7 +30,7 @@ class FloatFVectorFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FloatFVectorFunctor instance with a copy of the state of the \e %FloatFVectorFunctor instance \a func.
+    # \brief Initializes a copy of the \e %FloatFVectorFunctor instance \a func.
     # \param func The \e %FloatFVectorFunctor instance to copy.
     # 
     def __init__(func: FloatFVectorFunctor) -> None: pass

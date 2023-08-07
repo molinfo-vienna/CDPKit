@@ -25,7 +25,7 @@
 class DScalingMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DScalingMatrix instance with a copy of the state of the \e %DScalingMatrix instance \a m.
+    # \brief Initializes a copy of the \e %DScalingMatrix instance \a m.
     # \param m The \e %DScalingMatrix instance to copy.
     # 
     def __init__(m: DScalingMatrix) -> None: pass

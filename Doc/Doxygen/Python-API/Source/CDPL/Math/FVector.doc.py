@@ -30,7 +30,7 @@ class FVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FVector instance with a copy of the state of the \e %FVector instance \a v.
+    # \brief Initializes a copy of the \e %FVector instance \a v.
     # \param v The \e %FVector instance to copy.
     # 
     def __init__(v: FVector) -> None: pass

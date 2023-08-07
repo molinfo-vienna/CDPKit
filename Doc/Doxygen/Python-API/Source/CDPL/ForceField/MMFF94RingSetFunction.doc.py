@@ -30,7 +30,7 @@ class MMFF94RingSetFunction(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94RingSetFunction instance with a copy of the state of the \e %MMFF94RingSetFunction instance \a func.
+    # \brief Initializes a copy of the \e %MMFF94RingSetFunction instance \a func.
     # \param func The \e %MMFF94RingSetFunction instance to copy.
     # 
     def __init__(func: MMFF94RingSetFunction) -> None: pass

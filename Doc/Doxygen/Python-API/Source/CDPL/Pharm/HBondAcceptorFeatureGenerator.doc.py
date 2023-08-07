@@ -30,7 +30,7 @@ class HBondAcceptorFeatureGenerator(PatternBasedFeatureGenerator):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %HBondAcceptorFeatureGenerator instance with a copy of the state of the \e %HBondAcceptorFeatureGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %HBondAcceptorFeatureGenerator instance \a gen.
     # \param gen The \e %HBondAcceptorFeatureGenerator instance to copy.
     # 
     def __init__(gen: HBondAcceptorFeatureGenerator) -> None: pass

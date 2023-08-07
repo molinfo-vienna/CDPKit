@@ -30,7 +30,7 @@ class BoolAlignmentResult2Functor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolAlignmentResult2Functor instance with a copy of the state of the \e %BoolAlignmentResult2Functor instance \a func.
+    # \brief Initializes a copy of the \e %BoolAlignmentResult2Functor instance \a func.
     # \param func The \e %BoolAlignmentResult2Functor instance to copy.
     # 
     def __init__(func: BoolAlignmentResult2Functor) -> None: pass

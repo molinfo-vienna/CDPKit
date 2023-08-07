@@ -917,7 +917,7 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GRAILDescriptorCalculator instance with a copy of the state of the \e %GRAILDescriptorCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %GRAILDescriptorCalculator instance \a calc.
     # \param calc The \e %GRAILDescriptorCalculator instance to copy.
     # 
     def __init__(calc: GRAILDescriptorCalculator) -> None: pass

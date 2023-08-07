@@ -25,7 +25,7 @@
 class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
 
     ##
-    # \brief Initializes the \e %PharmacophoreFitScreeningScore instance with a copy of the state of the \e %PharmacophoreFitScreeningScore instance \a score.
+    # \brief Initializes a copy of the \e %PharmacophoreFitScreeningScore instance \a score.
     # \param score The \e %PharmacophoreFitScreeningScore instance to copy.
     # 
     def __init__(score: PharmacophoreFitScreeningScore) -> None: pass

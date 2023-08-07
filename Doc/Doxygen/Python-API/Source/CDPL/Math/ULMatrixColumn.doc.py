@@ -25,7 +25,7 @@
 class ULMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULMatrixColumn instance with a copy of the state of the \e %ULMatrixColumn instance \a mc.
+    # \brief Initializes a copy of the \e %ULMatrixColumn instance \a mc.
     # \param mc The \e %ULMatrixColumn instance to copy.
     # 
     def __init__(mc: ULMatrixColumn) -> None: pass

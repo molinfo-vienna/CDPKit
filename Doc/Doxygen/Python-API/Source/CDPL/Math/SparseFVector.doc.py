@@ -30,7 +30,7 @@ class SparseFVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %SparseFVector instance with a copy of the state of the \e %SparseFVector instance \a v.
+    # \brief Initializes a copy of the \e %SparseFVector instance \a v.
     # \param v The \e %SparseFVector instance to copy.
     # 
     def __init__(v: SparseFVector) -> None: pass

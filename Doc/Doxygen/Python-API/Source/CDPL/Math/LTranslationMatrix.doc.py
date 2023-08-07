@@ -25,7 +25,7 @@
 class LTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LTranslationMatrix instance with a copy of the state of the \e %LTranslationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %LTranslationMatrix instance \a m.
     # \param m The \e %LTranslationMatrix instance to copy.
     # 
     def __init__(m: LTranslationMatrix) -> None: pass

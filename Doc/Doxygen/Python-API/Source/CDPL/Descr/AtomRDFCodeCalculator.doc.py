@@ -32,7 +32,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomRDFCodeCalculator instance with a copy of the state of the \e %AtomRDFCodeCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %AtomRDFCodeCalculator instance \a calc.
     # \param calc The \e %AtomRDFCodeCalculator instance to copy.
     # 
     def __init__(calc: AtomRDFCodeCalculator) -> None: pass

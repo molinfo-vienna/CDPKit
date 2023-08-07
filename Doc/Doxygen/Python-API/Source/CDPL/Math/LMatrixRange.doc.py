@@ -25,7 +25,7 @@
 class LMatrixRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LMatrixRange instance with a copy of the state of the \e %LMatrixRange instance \a r.
+    # \brief Initializes a copy of the \e %LMatrixRange instance \a r.
     # \param r The \e %LMatrixRange instance to copy.
     # 
     def __init__(r: LMatrixRange) -> None: pass

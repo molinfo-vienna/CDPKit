@@ -63,7 +63,7 @@ class ScreeningProcessor(Boost.Python.instance):
         def __init__(hit_prov: ScreeningProcessor, qry_pharm: FeatureContainer, hit_pharm: FeatureContainer, mol: Chem.Molecule, xform: Math.Matrix4D, pharm_idx: int, mol_idx: int, conf_idx: int) -> None: pass
 
         ##
-        # \brief Initializes the \e %SearchHit instance with a copy of the state of the \e %SearchHit instance \a hit.
+        # \brief Initializes a copy of the \e %SearchHit instance \a hit.
         # \param hit The \e %SearchHit instance to copy.
         # 
         def __init__(hit: SearchHit) -> None: pass

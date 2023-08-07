@@ -36,7 +36,7 @@ class Matrix4D(Boost.Python.instance):
     def __init__(v: float) -> None: pass
 
     ##
-    # \brief Initializes the \e %Matrix4D instance with a copy of the state of the \e %Matrix4D instance \a m.
+    # \brief Initializes a copy of the \e %Matrix4D instance \a m.
     # \param m The \e %Matrix4D instance to copy.
     # 
     def __init__(m: Matrix4D) -> None: pass

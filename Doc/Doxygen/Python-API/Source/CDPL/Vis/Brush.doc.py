@@ -112,7 +112,7 @@ class Brush(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Brush instance with a copy of the state of the \e %Brush instance \a brush.
+    # \brief Initializes a copy of the \e %Brush instance \a brush.
     # \param brush The \e %Brush instance to copy.
     # 
     def __init__(brush: Brush) -> None: pass

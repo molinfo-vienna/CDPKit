@@ -30,7 +30,7 @@ class BoolSizeTypeFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolSizeTypeFunctor instance with a copy of the state of the \e %BoolSizeTypeFunctor instance \a func.
+    # \brief Initializes a copy of the \e %BoolSizeTypeFunctor instance \a func.
     # \param func The \e %BoolSizeTypeFunctor instance to copy.
     # 
     def __init__(func: BoolSizeTypeFunctor) -> None: pass

@@ -30,7 +30,7 @@ class LRealQuaternion(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %LRealQuaternion instance with a copy of the state of the \e %LRealQuaternion instance \a q.
+    # \brief Initializes a copy of the \e %LRealQuaternion instance \a q.
     # \param q The \e %LRealQuaternion instance to copy.
     # 
     def __init__(q: LRealQuaternion) -> None: pass

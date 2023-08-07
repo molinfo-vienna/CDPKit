@@ -45,7 +45,7 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance with a copy of the state of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
     # \param calc The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
     # 
     def __init__(calc: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass

@@ -30,7 +30,7 @@ class MMFF94OutOfPlaneBendingInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance with a copy of the state of the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance \a parameterizer.
+    # \brief Initializes a copy of the \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94OutOfPlaneBendingInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94OutOfPlaneBendingInteractionParameterizer) -> None: pass

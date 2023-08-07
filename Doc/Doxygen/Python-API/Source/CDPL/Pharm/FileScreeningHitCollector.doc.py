@@ -25,7 +25,7 @@
 class FileScreeningHitCollector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FileScreeningHitCollector instance with a copy of the state of the \e %FileScreeningHitCollector instance \a collector.
+    # \brief Initializes a copy of the \e %FileScreeningHitCollector instance \a collector.
     # \param collector The \e %FileScreeningHitCollector instance to copy.
     # 
     def __init__(collector: FileScreeningHitCollector) -> None: pass

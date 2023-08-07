@@ -30,7 +30,7 @@ class CallbackFunction(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %CallbackFunction instance with a copy of the state of the \e %CallbackFunction instance \a func.
+    # \brief Initializes a copy of the \e %CallbackFunction instance \a func.
     # \param func The \e %CallbackFunction instance to copy.
     # 
     def __init__(func: CallbackFunction) -> None: pass

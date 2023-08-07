@@ -111,9 +111,6 @@ class MHMOPiChargeCalculator(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    locPiBonds = property(getLocPiBonds, setLocPiBonds)
+    locPiBonds = property(localizedPiBonds, localizedPiBonds)
 
     energy = property(getEnergy)

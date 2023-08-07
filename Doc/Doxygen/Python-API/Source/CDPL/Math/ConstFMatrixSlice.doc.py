@@ -25,7 +25,7 @@
 class ConstFMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstFMatrixSlice instance with a copy of the state of the \e %ConstFMatrixSlice instance \a s.
+    # \brief Initializes a copy of the \e %ConstFMatrixSlice instance \a s.
     # \param s The \e %ConstFMatrixSlice instance to copy.
     # 
     def __init__(s: ConstFMatrixSlice) -> None: pass

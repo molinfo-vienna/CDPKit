@@ -25,7 +25,7 @@
 class SizeSpecification(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %SizeSpecification instance with a copy of the state of the \e %SizeSpecification instance \a spec.
+    # \brief Initializes a copy of the \e %SizeSpecification instance \a spec.
     # \param spec The \e %SizeSpecification instance to copy.
     # 
     def __init__(spec: SizeSpecification) -> None: pass

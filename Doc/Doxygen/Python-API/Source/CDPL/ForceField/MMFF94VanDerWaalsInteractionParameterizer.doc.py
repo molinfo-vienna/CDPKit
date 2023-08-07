@@ -30,7 +30,7 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance with a copy of the state of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
+    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass

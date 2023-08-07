@@ -30,7 +30,7 @@ class LUnitVector(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %LUnitVector instance with a copy of the state of the \e %LUnitVector instance \a v.
+    # \brief Initializes a copy of the \e %LUnitVector instance \a v.
     # \param v The \e %LUnitVector instance to copy.
     # 
     def __init__(v: LUnitVector) -> None: pass

@@ -25,7 +25,7 @@
 class FMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %FMatrixSlice instance with a copy of the state of the \e %FMatrixSlice instance \a s.
+    # \brief Initializes a copy of the \e %FMatrixSlice instance \a s.
     # \param s The \e %FMatrixSlice instance to copy.
     # 
     def __init__(s: FMatrixSlice) -> None: pass

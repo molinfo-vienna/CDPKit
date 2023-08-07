@@ -45,7 +45,7 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PrincipalAxesAlignmentStartGenerator instance with a copy of the state of the \e %PrincipalAxesAlignmentStartGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %PrincipalAxesAlignmentStartGenerator instance \a gen.
     # \param gen The \e %PrincipalAxesAlignmentStartGenerator instance to copy.
     # 
     def __init__(gen: PrincipalAxesAlignmentStartGenerator) -> None: pass

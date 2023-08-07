@@ -30,7 +30,7 @@ class GaussianShapeGenerator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %GaussianShapeGenerator instance with a copy of the state of the \e %GaussianShapeGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %GaussianShapeGenerator instance \a gen.
     # \param gen The \e %GaussianShapeGenerator instance to copy.
     # 
     def __init__(gen: GaussianShapeGenerator) -> None: pass

@@ -25,7 +25,7 @@
 class ConstULMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstULMatrixColumn instance with a copy of the state of the \e %ConstULMatrixColumn instance \a c.
+    # \brief Initializes a copy of the \e %ConstULMatrixColumn instance \a c.
     # \param c The \e %ConstULMatrixColumn instance to copy.
     # 
     def __init__(c: ConstULMatrixColumn) -> None: pass

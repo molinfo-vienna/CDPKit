@@ -25,7 +25,7 @@
 class DRotationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DRotationMatrix instance with a copy of the state of the \e %DRotationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %DRotationMatrix instance \a m.
     # \param m The \e %DRotationMatrix instance to copy.
     # 
     def __init__(m: DRotationMatrix) -> None: pass

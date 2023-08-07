@@ -35,7 +35,7 @@ class AtomDictionary(Boost.Python.instance):
         def __init__() -> None: pass
 
         ##
-        # \brief Initializes the \e %Entry instance with a copy of the state of the \e %Entry instance \a entry.
+        # \brief Initializes a copy of the \e %Entry instance \a entry.
         # \param entry The \e %Entry instance to copy.
         # 
         def __init__(entry: Entry) -> None: pass
@@ -212,7 +212,7 @@ class AtomDictionary(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomDictionary instance with a copy of the state of the \e %AtomDictionary instance \a dict.
+    # \brief Initializes a copy of the \e %AtomDictionary instance \a dict.
     # \param dict The \e %AtomDictionary instance to copy.
     # 
     def __init__(dict: AtomDictionary) -> None: pass

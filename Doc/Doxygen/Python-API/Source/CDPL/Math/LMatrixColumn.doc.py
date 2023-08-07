@@ -25,7 +25,7 @@
 class LMatrixColumn(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LMatrixColumn instance with a copy of the state of the \e %LMatrixColumn instance \a mc.
+    # \brief Initializes a copy of the \e %LMatrixColumn instance \a mc.
     # \param mc The \e %LMatrixColumn instance to copy.
     # 
     def __init__(mc: LMatrixColumn) -> None: pass

@@ -30,7 +30,7 @@ class MMFF94VanDerWaalsInteractionData(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94VanDerWaalsInteractionData instance with a copy of the state of the \e %MMFF94VanDerWaalsInteractionData instance \a ia_data.
+    # \brief Initializes a copy of the \e %MMFF94VanDerWaalsInteractionData instance \a ia_data.
     # \param ia_data The \e %MMFF94VanDerWaalsInteractionData instance to copy.
     # 
     def __init__(ia_data: MMFF94VanDerWaalsInteractionData) -> None: pass

@@ -30,7 +30,7 @@ class BoolDoubleFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BoolDoubleFunctor instance with a copy of the state of the \e %BoolDoubleFunctor instance \a func.
+    # \brief Initializes a copy of the \e %BoolDoubleFunctor instance \a func.
     # \param func The \e %BoolDoubleFunctor instance to copy.
     # 
     def __init__(func: BoolDoubleFunctor) -> None: pass

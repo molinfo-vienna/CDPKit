@@ -107,7 +107,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
     def __init__(molgraph: Chem.MolecularGraph, fp: Util.BitSet) -> None: pass
 
     ##
-    # \brief Initializes the \e %PathFingerprintGenerator instance with a copy of the state of the \e %PathFingerprintGenerator instance \a gen.
+    # \brief Initializes a copy of the \e %PathFingerprintGenerator instance \a gen.
     # \param gen The \e %PathFingerprintGenerator instance to copy.
     # 
     def __init__(gen: PathFingerprintGenerator) -> None: pass

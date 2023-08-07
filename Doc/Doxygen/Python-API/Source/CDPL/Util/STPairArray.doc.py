@@ -30,7 +30,7 @@ class STPairArray(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %STPairArray instance with a copy of the state of the \e %STPairArray instance \a array.
+    # \brief Initializes a copy of the \e %STPairArray instance \a array.
     # \param array The \e %STPairArray instance to copy.
     # 
     def __init__(array: STPairArray) -> None: pass

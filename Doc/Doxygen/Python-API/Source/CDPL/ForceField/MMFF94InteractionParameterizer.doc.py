@@ -31,7 +31,7 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     def __init__(param_set: int = 1) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94InteractionParameterizer instance with a copy of the state of the \e %MMFF94InteractionParameterizer instance \a parameterizer.
+    # \brief Initializes a copy of the \e %MMFF94InteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94InteractionParameterizer instance to copy.
     # 
     def __init__(parameterizer: MMFF94InteractionParameterizer) -> None: pass

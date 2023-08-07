@@ -25,7 +25,7 @@
 class ULMatrixTranspose(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULMatrixTranspose instance with a copy of the state of the \e %ULMatrixTranspose instance \a mt.
+    # \brief Initializes a copy of the \e %ULMatrixTranspose instance \a mt.
     # \param mt The \e %ULMatrixTranspose instance to copy.
     # 
     def __init__(mt: ULMatrixTranspose) -> None: pass

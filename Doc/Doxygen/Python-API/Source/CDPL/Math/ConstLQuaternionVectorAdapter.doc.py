@@ -25,7 +25,7 @@
 class ConstLQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstLQuaternionVectorAdapter instance with a copy of the state of the \e %ConstLQuaternionVectorAdapter instance \a a.
+    # \brief Initializes a copy of the \e %ConstLQuaternionVectorAdapter instance \a a.
     # \param a The \e %ConstLQuaternionVectorAdapter instance to copy.
     # 
     def __init__(a: ConstLQuaternionVectorAdapter) -> None: pass

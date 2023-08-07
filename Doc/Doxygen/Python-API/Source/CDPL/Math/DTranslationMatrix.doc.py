@@ -25,7 +25,7 @@
 class DTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DTranslationMatrix instance with a copy of the state of the \e %DTranslationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %DTranslationMatrix instance \a m.
     # \param m The \e %DTranslationMatrix instance to copy.
     # 
     def __init__(m: DTranslationMatrix) -> None: pass

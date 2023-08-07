@@ -30,7 +30,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94EnergyCalculator instance with a copy of the state of the \e %MMFF94EnergyCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %MMFF94EnergyCalculator instance \a calc.
     # \param calc The \e %MMFF94EnergyCalculator instance to copy.
     # 
     def __init__(calc: MMFF94EnergyCalculator) -> None: pass

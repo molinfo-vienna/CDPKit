@@ -25,7 +25,7 @@
 class ULTranslationMatrix(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ULTranslationMatrix instance with a copy of the state of the \e %ULTranslationMatrix instance \a m.
+    # \brief Initializes a copy of the \e %ULTranslationMatrix instance \a m.
     # \param m The \e %ULTranslationMatrix instance to copy.
     # 
     def __init__(m: ULTranslationMatrix) -> None: pass

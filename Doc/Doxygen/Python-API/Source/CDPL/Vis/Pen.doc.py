@@ -107,7 +107,7 @@ class Pen(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %Pen instance with a copy of the state of the \e %Pen instance \a pen.
+    # \brief Initializes a copy of the \e %Pen instance \a pen.
     # \param pen The \e %Pen instance to copy.
     # 
     def __init__(pen: Pen) -> None: pass

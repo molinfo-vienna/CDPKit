@@ -30,7 +30,7 @@ class FloatVector3FArrayFunctor(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FloatVector3FArrayFunctor instance with a copy of the state of the \e %FloatVector3FArrayFunctor instance \a func.
+    # \brief Initializes a copy of the \e %FloatVector3FArrayFunctor instance \a func.
     # \param func The \e %FloatVector3FArrayFunctor instance to copy.
     # 
     def __init__(func: FloatVector3FArrayFunctor) -> None: pass

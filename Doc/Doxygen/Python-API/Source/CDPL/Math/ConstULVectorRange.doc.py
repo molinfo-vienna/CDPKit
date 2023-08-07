@@ -25,7 +25,7 @@
 class ConstULVectorRange(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %ConstULVectorRange instance with a copy of the state of the \e %ConstULVectorRange instance \a r.
+    # \brief Initializes a copy of the \e %ConstULVectorRange instance \a r.
     # \param r The \e %ConstULVectorRange instance to copy.
     # 
     def __init__(r: ConstULVectorRange) -> None: pass

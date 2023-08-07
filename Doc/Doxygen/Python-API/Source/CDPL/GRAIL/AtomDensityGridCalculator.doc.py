@@ -43,7 +43,7 @@ class AtomDensityGridCalculator(Boost.Python.instance):
     def __init__(density_func: Chem.DoubleVector3D2AtomFunctor, comb_func: Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %AtomDensityGridCalculator instance with a copy of the state of the \e %AtomDensityGridCalculator instance \a calc.
+    # \brief Initializes a copy of the \e %AtomDensityGridCalculator instance \a calc.
     # \param calc The \e %AtomDensityGridCalculator instance to copy.
     # 
     def __init__(calc: AtomDensityGridCalculator) -> None: pass

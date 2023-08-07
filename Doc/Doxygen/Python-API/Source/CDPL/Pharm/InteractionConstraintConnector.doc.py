@@ -25,7 +25,7 @@
 class InteractionConstraintConnector(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %InteractionConstraintConnector instance with a copy of the state of the \e %InteractionConstraintConnector instance \a con.
+    # \brief Initializes a copy of the \e %InteractionConstraintConnector instance \a con.
     # \param con The \e %InteractionConstraintConnector instance to copy.
     # 
     def __init__(con: InteractionConstraintConnector) -> None: pass

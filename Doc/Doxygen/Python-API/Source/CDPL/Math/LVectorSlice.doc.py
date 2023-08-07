@@ -25,7 +25,7 @@
 class LVectorSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %LVectorSlice instance with a copy of the state of the \e %LVectorSlice instance \a s.
+    # \brief Initializes a copy of the \e %LVectorSlice instance \a s.
     # \param s The \e %LVectorSlice instance to copy.
     # 
     def __init__(s: LVectorSlice) -> None: pass

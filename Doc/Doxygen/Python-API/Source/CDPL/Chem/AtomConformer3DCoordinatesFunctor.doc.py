@@ -25,7 +25,7 @@
 class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %AtomConformer3DCoordinatesFunctor instance with a copy of the state of the \e %AtomConformer3DCoordinatesFunctor instance \a func.
+    # \brief Initializes a copy of the \e %AtomConformer3DCoordinatesFunctor instance \a func.
     # \param func The \e %AtomConformer3DCoordinatesFunctor instance to copy.
     # 
     def __init__(func: AtomConformer3DCoordinatesFunctor) -> None: pass

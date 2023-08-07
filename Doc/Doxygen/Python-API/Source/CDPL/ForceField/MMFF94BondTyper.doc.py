@@ -30,7 +30,7 @@ class MMFF94BondTyper(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance with a copy of the state of the \e %MMFF94BondTyper instance \a typer.
+    # \brief Initializes a copy of the \e %MMFF94BondTyper instance \a typer.
     # \param typer The \e %MMFF94BondTyper instance to copy.
     # 
     def __init__(typer: MMFF94BondTyper) -> None: pass

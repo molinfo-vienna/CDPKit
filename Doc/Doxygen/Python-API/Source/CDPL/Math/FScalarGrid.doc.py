@@ -30,7 +30,7 @@ class FScalarGrid(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %FScalarGrid instance with a copy of the state of the \e %FScalarGrid instance \a g.
+    # \brief Initializes a copy of the \e %FScalarGrid instance \a g.
     # \param g The \e %FScalarGrid instance to copy.
     # 
     def __init__(g: FScalarGrid) -> None: pass

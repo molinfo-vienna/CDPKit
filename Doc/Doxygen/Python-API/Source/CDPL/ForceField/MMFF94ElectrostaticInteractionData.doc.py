@@ -30,7 +30,7 @@ class MMFF94ElectrostaticInteractionData(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94ElectrostaticInteractionData instance with a copy of the state of the \e %MMFF94ElectrostaticInteractionData instance \a ia_data.
+    # \brief Initializes a copy of the \e %MMFF94ElectrostaticInteractionData instance \a ia_data.
     # \param ia_data The \e %MMFF94ElectrostaticInteractionData instance to copy.
     # 
     def __init__(ia_data: MMFF94ElectrostaticInteractionData) -> None: pass

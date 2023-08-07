@@ -25,7 +25,7 @@
 class DMatrixSlice(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %DMatrixSlice instance with a copy of the state of the \e %DMatrixSlice instance \a s.
+    # \brief Initializes a copy of the \e %DMatrixSlice instance \a s.
     # \param s The \e %DMatrixSlice instance to copy.
     # 
     def __init__(s: DMatrixSlice) -> None: pass
