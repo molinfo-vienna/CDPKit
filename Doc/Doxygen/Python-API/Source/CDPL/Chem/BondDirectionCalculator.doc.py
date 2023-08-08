@@ -99,7 +99,4 @@ class BondDirectionCalculator(Boost.Python.instance):
 
     ringSizeLimit = property(getRingSizeLimit, setRingSizeLimit)
 
-    ##
-    # \brief FIXME!
-    #
-    ringBonds = property(getRingBonds, setRingBonds)
+    incRingBonds = property(ringBondsIncluded, includeRingBonds)

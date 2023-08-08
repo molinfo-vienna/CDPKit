@@ -144,14 +144,8 @@ class MatchConstraint(Boost.Python.instance):
     # 
     def hasValue() -> bool: pass
 
-    ID = property(getID, setID)
+    id = property(getID, setID)
 
-    ##
-    # \brief FIXME!
-    #
-    rel = property(getRel, setRel)
+    relation = property(getRelation, setRelation)
 
-    ##
-    # \brief FIXME!
-    #
-    val = property(getVal, setVal)
+    value = property(getValue, setValue)

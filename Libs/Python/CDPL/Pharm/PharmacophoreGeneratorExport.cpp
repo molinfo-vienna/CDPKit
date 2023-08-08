@@ -63,7 +63,7 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
         .def("clearEnabledFeatures", &Pharm::PharmacophoreGenerator::isFeatureEnabled, python::arg("self"))
         .def("assign", &Pharm::PharmacophoreGenerator::operator=, 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
-        .add_property("atom3DCoordsFunc", python::make_function(&Pharm::PharmacophoreGenerator::getAtom3DCoordinatesFunction, 
+        .add_property("atomCoordsFunction", python::make_function(&Pharm::PharmacophoreGenerator::getAtom3DCoordinatesFunction, 
                                                                 python::return_internal_reference<>()),
                       &Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction);
 }

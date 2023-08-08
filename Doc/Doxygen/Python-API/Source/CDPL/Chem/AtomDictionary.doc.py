@@ -20,7 +20,7 @@
 #
 
 ##
-# \brief A global dictionary for the lookup of meta-data associated with the atom types defined in namespace Chem.AtomType.
+# \brief A global dictionary for the lookup of data associated with the atom types defined in namespace Chem.AtomType.
 # 
 class AtomDictionary(Boost.Python.instance):
 
@@ -188,15 +188,9 @@ class AtomDictionary(Boost.Python.instance):
 
         period = property(getPeriod)
 
-        ##
-        # \brief FIXME!
-        #
-        metal = property(getMetal)
+        metal = property(isMetal)
 
-        ##
-        # \brief FIXME!
-        #
-        nonMetal = property(getNonMetal)
+        nonMetal = property(isNonMetal)
 
         valenceStates = property(getValenceStates)
 

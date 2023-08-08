@@ -157,7 +157,4 @@ class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
 
     featureTolerance = property(getFeatureTolerance, setFeatureTolerance)
 
-    ##
-    # \brief FIXME!
-    #
-    hydThreshold = property(getHydThreshold, setHydThreshold)
+    hydThreshold = property(getHydrophobicityThreshold, setHydrophobicityThreshold)

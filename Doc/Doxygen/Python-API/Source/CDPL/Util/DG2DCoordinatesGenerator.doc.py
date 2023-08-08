@@ -277,6 +277,12 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     #
     def getDistanceError(coords: Math.Vector2DArray) -> float: pass
 
+    ##
+    # \brief 
+    # \return 
+    #
+    def getDistanceConstraints() -> DistanceConstraintList: pass
+
     objectID = property(getObjectID)
 
     numCycles = property(getNumCycles, setNumCycles)
@@ -289,7 +295,4 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
 
     numDistanceConstraints = property(getNumDistanceConstraints)
 
-    ##
-    # \brief FIXME!
-    #
     distanceConstraints = property(getDistanceConstraints)

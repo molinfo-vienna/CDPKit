@@ -296,7 +296,7 @@ void Chem::FragmentGenerator::clearExcludePatterns()
     exclPatterns.clear();
 }
 
-bool Chem::FragmentGenerator::includeSplitBonds() const
+bool Chem::FragmentGenerator::splitBondsIncluded() const
 {
     return incSplitBonds;
 }

@@ -56,6 +56,12 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     def assign(func: FeaturePositionMatchFunctor) -> FeaturePositionMatchFunctor: pass
 
     ##
+    # \brief 
+    # \return 
+    #
+    def queryMode() -> bool: pass
+
+    ##
     # \brief Checks if the distance between <em>ftr1</em> and <em>ftr2</em> is below the allowed maximum and calculates a score reflecting their proximity.
     # 
     # If in 'query mode', the tolerance of <em>ftr1</em> specifies the allowed maximum distance. Otherwise, the maximum tolerance of the features takes effect.
@@ -86,7 +92,4 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    qryMode = property(getQryMode)
+    qryMode = property(queryMode)

@@ -43,7 +43,7 @@ void CDPLPythonChem::exportFragmentGenerator()
 
     python::scope scope = cl;
 
-    python::class_<Chem::FragmentGenerator::FragmentationRule, boost::noncopyable>("FragmentationRuler", python::no_init)
+    python::class_<Chem::FragmentGenerator::FragmentationRule, boost::noncopyable>("FragmentationRule", python::no_init)
         .def(python::init<Chem::FragmentGenerator::FragmentationRule>((python::arg("self"), python::arg("rule"))))
         .def(python::init<const Chem::MolecularGraph::SharedPointer&, unsigned int>(
                  (python::arg("self"), python::arg("match_ptn"), python::arg("id"))))
@@ -180,19 +180,14 @@ void CDPLPythonChem::exportFragmentGenerator()
              (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
         .def("getNumFragmentLinks", &Chem::FragmentGenerator::getNumFragmentLinks, 
              python::arg("self"))
-        .def("includeSplitBonds",
-             static_cast<bool (Chem::FragmentGenerator::*)() const>(&Chem::FragmentGenerator::includeSplitBonds), 
-             python::arg("self"))
-        .def("includeSplitBonds",
-             static_cast<void (Chem::FragmentGenerator::*)(bool)>(&Chem::FragmentGenerator::includeSplitBonds), 
+        .def("splitBondsIncluded", &Chem::FragmentGenerator::includeSplitBonds, python::arg("self"))
+        .def("includeSplitBonds", &Chem::FragmentGenerator::includeSplitBonds, 
              (python::arg("self"), python::arg("include")))
         .add_property("fragmentFilterFunction",
                       python::make_function(&Chem::FragmentGenerator::getFragmentFilterFunction,
                                             python::return_internal_reference<>()),
                       &Chem::FragmentGenerator::setFragmentFilterFunction)
-        .add_property("incSplitBonds",
-                      static_cast<bool (Chem::FragmentGenerator::*)() const>(&Chem::FragmentGenerator::includeSplitBonds),
-                      static_cast<void (Chem::FragmentGenerator::*)(bool)>(&Chem::FragmentGenerator::includeSplitBonds))
+        .add_property("incSplitBonds", &Chem::FragmentGenerator::splitBondsIncluded, &Chem::FragmentGenerator::includeSplitBonds)
         .add_property("numFragmentationRules", &Chem::FragmentGenerator::getNumFragmentationRules)
         .add_property("numExcludePatterns", &Chem::FragmentGenerator::getNumExcludePatterns)
         .add_property("numFragmentLinks", &Chem::FragmentGenerator::getNumFragmentLinks);

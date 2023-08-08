@@ -164,10 +164,7 @@ class AutomorphismGroupSearch(Boost.Python.instance):
 
     bondPropertyFlags = property(getBondPropertyFlags, setBondPropertyFlags)
 
-    ##
-    # \brief FIXME!
-    #
-    incIdentityMapping = property(getIncIdentityMapping, setIncIdentityMapping)
+    incIdentityMapping = property(identityMappingIncluded, includeIdentityMapping)
 
     numMappings = property(getNumMappings)
 

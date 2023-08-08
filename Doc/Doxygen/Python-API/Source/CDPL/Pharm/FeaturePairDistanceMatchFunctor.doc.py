@@ -78,7 +78,4 @@ class FeaturePairDistanceMatchFunctor(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    qryMode = property(getQryMode)
+    qryMode = property(queryMode)

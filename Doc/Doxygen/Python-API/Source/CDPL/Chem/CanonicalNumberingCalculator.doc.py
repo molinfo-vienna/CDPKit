@@ -136,7 +136,4 @@ class CanonicalNumberingCalculator(Boost.Python.instance):
 
     bondPropertyFlags = property(getBondPropertyFlags, setBondPropertyFlags)
 
-    ##
-    # \brief FIXME!
-    #
-    hydrogenCountFunc = property(getHydrogenCountFunc, setHydrogenCountFunc)
+    hydrogenCountFunc = property(getHydrogenCountFunction, setHydrogenCountFunction)

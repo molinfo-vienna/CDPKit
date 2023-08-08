@@ -38,6 +38,9 @@ void CDPLPythonPharm::exportFileScreeningHitCollector()
     using namespace boost;
     using namespace CDPL;
 
+    typedef void (Pharm::FileScreeningHitCollector::*SetBoolFunc)(bool);
+    typedef bool (Pharm::FileScreeningHitCollector::*GetBoolFunc)() const;
+
     python::class_<Pharm::FileScreeningHitCollector, boost::noncopyable>("FileScreeningHitCollector", python::no_init)
         .def(python::init<const Pharm::FileScreeningHitCollector&>((python::arg("self"), python::arg("collector")))
              [python::with_custodian_and_ward<1, 2>()])
@@ -53,35 +56,35 @@ void CDPLPythonPharm::exportFileScreeningHitCollector()
              python::with_custodian_and_ward<1, 2>())
         .def("getDataWriter", &Pharm::FileScreeningHitCollector::getDataWriter, python::arg("self"),
              python::return_internal_reference<>())
-        .def("alignHitMolecule", &Pharm::FileScreeningHitCollector::alignHitMolecule, 
+        .def("alignHitMolecule", SetBoolFunc(&Pharm::FileScreeningHitCollector::alignHitMolecule), 
              (python::arg("self"), python::arg("align")))
-        .def("isHitMoleculeAligned", &Pharm::FileScreeningHitCollector::isHitMoleculeAligned, python::arg("self"))
-        .def("writeScoreProperty", &Pharm::FileScreeningHitCollector::writeScoreProperty, 
-             (python::arg("self"), python::arg("write")))
-        .def("isScorePropertyWritten", &Pharm::FileScreeningHitCollector::isScorePropertyWritten, python::arg("self"))
-        .def("writeDBNameProperty", &Pharm::FileScreeningHitCollector::writeDBNameProperty, 
-             (python::arg("self"), python::arg("write")))
-        .def("isDBNamePropertyWritten", &Pharm::FileScreeningHitCollector::isDBNamePropertyWritten, python::arg("self"))
-        .def("writeDBMoleculeIndexProperty", &Pharm::FileScreeningHitCollector::writeDBMoleculeIndexProperty, 
-             (python::arg("self"), python::arg("write")))
-        .def("isDBMoleculeIndexPropertyWritten", &Pharm::FileScreeningHitCollector::isDBMoleculeIndexPropertyWritten, 
+        .def("alignHitMolecule", GetBoolFunc(&Pharm::FileScreeningHitCollector::alignHitMolecule), python::arg("self"))
+        .def("outputScoreProperty", SetBoolFunc(&Pharm::FileScreeningHitCollector::outputScoreProperty), 
+             (python::arg("self"), python::arg("output")))
+        .def("outputScoreProperty", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputScoreProperty), python::arg("self"))
+        .def("outputDBNameProperty", SetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBNameProperty), 
+             (python::arg("self"), python::arg("output")))
+        .def("outputDBNameProperty", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBNameProperty), python::arg("self"))
+        .def("outputDBMoleculeIndexProperty", SetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty), 
+             (python::arg("self"), python::arg("output")))
+        .def("outputDBMoleculeIndexProperty", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty), 
              python::arg("self"))
-        .def("writeMoleculeConfIndexProperty", &Pharm::FileScreeningHitCollector::writeMoleculeConfIndexProperty, 
-             (python::arg("self"), python::arg("write")))
-        .def("isMoleculeConfIndexPropertyWritten", &Pharm::FileScreeningHitCollector::isMoleculeConfIndexPropertyWritten, 
+        .def("outputMoleculeConfIndexProperty", SetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty), 
+             (python::arg("self"), python::arg("output")))
+        .def("outputMoleculeConfIndexProperty", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty), 
              python::arg("self"))
         .add_property("dataWriter", python::make_function(&Pharm::FileScreeningHitCollector::getDataWriter,
                                                           python::return_internal_reference<>()),
                       python::make_function(&Pharm::FileScreeningHitCollector::setDataWriter, 
                                             python::with_custodian_and_ward<1, 2>()))
-        .add_property("hitMoleculeAlignment", &Pharm::FileScreeningHitCollector::isHitMoleculeAligned,
-                      &Pharm::FileScreeningHitCollector::alignHitMolecule)
-        .add_property("scorePropertyOutput", &Pharm::FileScreeningHitCollector::isScorePropertyWritten,
-                      &Pharm::FileScreeningHitCollector::writeScoreProperty)
-        .add_property("dbNamePropertyOutput", &Pharm::FileScreeningHitCollector::isDBNamePropertyWritten,
-                      &Pharm::FileScreeningHitCollector::writeDBNameProperty)
-        .add_property("dbMoleculeIndexPropertyOutput", &Pharm::FileScreeningHitCollector::isDBMoleculeIndexPropertyWritten,
-                      &Pharm::FileScreeningHitCollector::writeDBMoleculeIndexProperty)
-        .add_property("moleculeConfIndexPropertyOutput", &Pharm::FileScreeningHitCollector::isMoleculeConfIndexPropertyWritten,
-                      &Pharm::FileScreeningHitCollector::writeMoleculeConfIndexProperty);
+        .add_property("alignHitMol", GetBoolFunc(&Pharm::FileScreeningHitCollector::alignHitMolecule),
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::alignHitMolecule))
+        .add_property("outputScoreProp", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputScoreProperty),
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputScoreProperty))
+        .add_property("outputDBNameProp", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBNameProperty),
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBNameProperty))
+        .add_property("outputDBMoleculeIndexProp", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty),
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty))
+        .add_property("outputMoleculeConfIndexProp", GetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty),
+                      SetBoolFunc(&Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty));
 }

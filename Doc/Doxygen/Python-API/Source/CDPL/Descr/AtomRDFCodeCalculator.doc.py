@@ -156,10 +156,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    distanceToIntervalCenterRounding = property(getDistanceToIntervalCenterRounding, setDistanceToIntervalCenterRounding)
+    distanceToIntervalCenterRounding = property(distanceToIntervalsCenterRoundingEnabled, enableDistanceToIntervalCenterRounding)
 
     smoothingFactor = property(getSmoothingFactor, setSmoothingFactor)
 

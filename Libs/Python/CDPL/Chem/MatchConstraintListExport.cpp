@@ -84,31 +84,30 @@ void CDPLPythonChem::exportMatchConstraintList()
 
         mc_cls
             .def(python::init<const Chem::MatchConstraint&>((python::arg("self"), python::arg("constr"))))
-            .def(python::init<unsigned int, Chem::MatchConstraint::Relation>((python::arg("self"), 
-                                                                              python::arg("id"), 
+            .def(python::init<unsigned int, Chem::MatchConstraint::Relation>((python::arg("self"),
+                                                                              python::arg("id"),
                                                                               python::arg("rel"))))
-            .def(python::init<unsigned int, Chem::MatchConstraint::Relation, const Base::Any&>((python::arg("self"), 
-                                                                                             python::arg("id"), 
-                                                                                                python::arg("rel"), 
+            .def(python::init<unsigned int, Chem::MatchConstraint::Relation, const Base::Any&>((python::arg("self"),
+                                                                                                python::arg("id"),
+                                                                                                python::arg("rel"),
                                                                                                 python::arg("val"))))
             .def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchConstraint::operator=), (python::arg("self"), python::arg("constr")),
                  python::return_self<>())
-            .def("getID", &Chem::MatchConstraint::getID, python::arg("self")) 
+            .def("getID", &Chem::MatchConstraint::getID, python::arg("self"))
             .def("setID", &Chem::MatchConstraint::setID, (python::arg("self"), python::arg("id")))
-            .def("getRelation", &Chem::MatchConstraint::getRelation, python::arg("self")) 
+            .def("getRelation", &Chem::MatchConstraint::getRelation, python::arg("self"))
             .def("setRelation", &Chem::MatchConstraint::setRelation, (python::arg("self"), python::arg("rel")))
-            .def("getValue", &getConstraintValue, python::arg("self"), 
+            .def("getValue", &getConstraintValue, python::arg("self"),
                  python::return_value_policy<python::copy_const_reference>())
             .def("setValue", &Chem::MatchConstraint::setValue<const Base::Any&>, (python::arg("self"), python::arg("val")))
-            .def("hasValue", &Chem::MatchConstraint::hasValue, python::arg("self")) 
-            .add_property("ID", &Chem::MatchConstraint::getID, &Chem::MatchConstraint::setID)
-            .add_property("rel", &Chem::MatchConstraint::getRelation, &Chem::MatchConstraint::setRelation)
-            .add_property("val", python::make_function(&getConstraintValue,
-                                                         python::return_value_policy<python::copy_const_reference>()),
+            .def("hasValue", &Chem::MatchConstraint::hasValue, python::arg("self"))
+            .add_property("id", &Chem::MatchConstraint::getID, &Chem::MatchConstraint::setID)
+            .add_property("relation", &Chem::MatchConstraint::getRelation, &Chem::MatchConstraint::setRelation)
+            .add_property("value", python::make_function(&getConstraintValue, python::return_value_policy<python::copy_const_reference>()),
                           &Chem::MatchConstraint::setValue<const Base::Any&>);
     }
 
-    python::class_<Chem::MatchConstraintList, Chem::MatchConstraintList::SharedPointer> 
+    python::class_<Chem::MatchConstraintList, Chem::MatchConstraintList::SharedPointer>
         mcl_cls("MatchConstraintList", python::no_init);
 
     python::scope scope = mcl_cls;

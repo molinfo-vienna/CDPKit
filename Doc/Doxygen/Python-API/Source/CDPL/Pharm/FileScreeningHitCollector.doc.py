@@ -77,55 +77,55 @@ class FileScreeningHitCollector(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def isHitMoleculeAligned() -> bool: pass
+    def alignHitMolecule() -> bool: pass
 
     ##
     # \brief 
-    # \param write 
+    # \param output 
     #
-    def writeScoreProperty(write: bool) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def isScorePropertyWritten() -> bool: pass
-
-    ##
-    # \brief 
-    # \param write 
-    #
-    def writeDBNameProperty(write: bool) -> None: pass
+    def outputScoreProperty(output: bool) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def isDBNamePropertyWritten() -> bool: pass
+    def outputScoreProperty() -> bool: pass
 
     ##
     # \brief 
-    # \param write 
+    # \param output 
     #
-    def writeDBMoleculeIndexProperty(write: bool) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def isDBMoleculeIndexPropertyWritten() -> bool: pass
-
-    ##
-    # \brief 
-    # \param write 
-    #
-    def writeMoleculeConfIndexProperty(write: bool) -> None: pass
+    def outputDBNameProperty(output: bool) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def isMoleculeConfIndexPropertyWritten() -> bool: pass
+    def outputDBNameProperty() -> bool: pass
+
+    ##
+    # \brief 
+    # \param output 
+    #
+    def outputDBMoleculeIndexProperty(output: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def outputDBMoleculeIndexProperty() -> bool: pass
+
+    ##
+    # \brief 
+    # \param output 
+    #
+    def outputMoleculeConfIndexProperty(output: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def outputMoleculeConfIndexProperty() -> bool: pass
 
     ##
     # \brief 
@@ -139,27 +139,12 @@ class FileScreeningHitCollector(Boost.Python.instance):
 
     dataWriter = property(getDataWriter, setDataWriter)
 
-    ##
-    # \brief FIXME!
-    #
-    hitMoleculeAlignment = property(getHitMoleculeAlignment, setHitMoleculeAlignment)
+    alignHitMol = property(alignHitMolecule, alignHitMolecule)
 
-    ##
-    # \brief FIXME!
-    #
-    scorePropertyOutput = property(getScorePropertyOutput, setScorePropertyOutput)
+    outputScoreProp = property(outputScoreProperty, outputScoreProperty)
 
-    ##
-    # \brief FIXME!
-    #
-    dbNamePropertyOutput = property(getDbNamePropertyOutput, setDbNamePropertyOutput)
+    outputDBNameProp = property(outputDBNameProperty, outputDBNameProperty)
 
-    ##
-    # \brief FIXME!
-    #
-    dbMoleculeIndexPropertyOutput = property(getDbMoleculeIndexPropertyOutput, setDbMoleculeIndexPropertyOutput)
+    outputDBMoleculeIndexProp = property(outputDBMoleculeIndexProperty, outputDBMoleculeIndexProperty)
 
-    ##
-    # \brief FIXME!
-    #
-    moleculeConfIndexPropertyOutput = property(getMoleculeConfIndexPropertyOutput, setMoleculeConfIndexPropertyOutput)
+    outputMoleculeConfIndexProp = property(outputMoleculeConfIndexProperty, outputMoleculeConfIndexProperty)

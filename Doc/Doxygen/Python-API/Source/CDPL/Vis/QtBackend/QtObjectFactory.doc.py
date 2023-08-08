@@ -27,33 +27,41 @@
 class QtObjectFactory(builtins.object):
 
     ##
-    # \brief 
-    # \param font 
-    # \return 
-    #
+    # \brief Creates a <tt>QFont</tt> object that corresponds to the specified font.
+    # 
+    # \param font The font object.
+    # 
+    # \return A <tt>QFont</tt> object equivalent to <em>font</em>.
+    # 
     @staticmethod
     def createQFont(font: Vis.Font) -> PyQt5.QtGui.QFont: pass
 
     ##
-    # \brief 
-    # \param color 
-    # \return 
-    #
+    # \brief Creates a <tt>QColor</tt> object that corresponds to the specified color.
+    # 
+    # \param color The color object.
+    # 
+    # \return A <tt>QColor</tt> object equivalent to <em>color</em>.
+    # 
     @staticmethod
     def createQColor(color: Vis.Color) -> PyQt5.QtGui.QColor: pass
 
     ##
-    # \brief 
-    # \param pen 
-    # \return 
-    #
+    # \brief Creates a <tt>QPen</tt> object that corresponds to the specified pen.
+    # 
+    # \param pen The pen object.
+    # 
+    # \return A <tt>QPen</tt> object equivalent to <em>pen</em>.
+    # 
     @staticmethod
     def createQPen(pen: Vis.Pen) -> PyQt5.QtGui.QPen: pass
 
     ##
-    # \brief 
-    # \param brush 
-    # \return 
-    #
+    # \brief Creates a <tt>QBrush</tt> object that corresponds to the specified brush.
+    # 
+    # \param brush The brush object.
+    # 
+    # \return A <tt>QBrush</tt> object equivalent to <em>brush</em>.
+    # 
     @staticmethod
     def createQBrush(brush: Vis.Brush) -> PyQt5.QtGui.QBrush: pass

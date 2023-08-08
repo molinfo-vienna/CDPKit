@@ -53,8 +53,8 @@ namespace
 
 
 Pharm::FileScreeningHitCollector::FileScreeningHitCollector(MolecularGraphWriter& writer):
-    dataWriter(&writer), alignMolecule(true), outputScore(true), outputDBName(true), 
-    outputMolIndex(true), outputConfIndex(false)
+    dataWriter(&writer), alignMolecule(true), optScore(true), optDBName(true), 
+    optMolIndex(true), optConfIndex(false)
 {}
 
 void Pharm::FileScreeningHitCollector::setDataWriter(MolecularGraphWriter& writer)
@@ -72,49 +72,49 @@ void Pharm::FileScreeningHitCollector::alignHitMolecule(bool align)
     alignMolecule = align;
 }
 
-bool Pharm::FileScreeningHitCollector::isHitMoleculeAligned() const
+bool Pharm::FileScreeningHitCollector::alignHitMolecule() const
 {
     return alignMolecule;
 }
 
-void Pharm::FileScreeningHitCollector::writeScoreProperty(bool write)
+void Pharm::FileScreeningHitCollector::outputScoreProperty(bool output)
 {
-    outputScore = write;
+    optScore = output;
 }
 
-bool Pharm::FileScreeningHitCollector::isScorePropertyWritten() const
+bool Pharm::FileScreeningHitCollector::outputScoreProperty() const
 {
-    return outputScore;
+    return optScore;
 }
 
-void Pharm::FileScreeningHitCollector::writeDBNameProperty(bool write)
+void Pharm::FileScreeningHitCollector::outputDBNameProperty(bool output)
 {
-    outputDBName = write;
+    optDBName = output;
 }
 
-bool Pharm::FileScreeningHitCollector::isDBNamePropertyWritten() const
+bool Pharm::FileScreeningHitCollector::outputDBNameProperty() const
 {
-    return outputDBName;
+    return optDBName;
 }
 
-void Pharm::FileScreeningHitCollector::writeDBMoleculeIndexProperty(bool write)
+void Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty(bool output)
 {
-    outputMolIndex = write;
+    optMolIndex = output;
 }
 
-bool Pharm::FileScreeningHitCollector::isDBMoleculeIndexPropertyWritten() const
+bool Pharm::FileScreeningHitCollector::outputDBMoleculeIndexProperty() const
 {
-    return outputMolIndex;
+    return optMolIndex;
 }
     
-void Pharm::FileScreeningHitCollector::writeMoleculeConfIndexProperty(bool write)
+void Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty(bool output)
 {
-    outputConfIndex = write;
+    optConfIndex = output;
 }
 
-bool Pharm::FileScreeningHitCollector::isMoleculeConfIndexPropertyWritten() const
+bool Pharm::FileScreeningHitCollector::outputMoleculeConfIndexProperty() const
 {
-    return outputConfIndex;
+    return optConfIndex;
 }
 
 bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::SearchHit& hit, double score)
@@ -146,20 +146,20 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
     else
         struc_data.reset(new Chem::StringDataBlock());
 
-    if (outputScore)
+    if (optScore)
         struc_data->addEntry(SCORE_PROPERTY_NAME, 
                              std::to_string(score));
 
-    if (outputDBName)
+    if (optDBName)
         struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
                              boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().string());
 
-    if (outputMolIndex) {
+    if (optMolIndex) {
         struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
                              std::to_string(hit.getHitMoleculeIndex()));
     }
 
-    if (outputConfIndex)
+    if (optConfIndex)
         struc_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
                              std::to_string(hit.getHitConformationIndex()));
 

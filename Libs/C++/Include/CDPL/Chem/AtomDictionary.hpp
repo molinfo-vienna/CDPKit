@@ -51,7 +51,7 @@ namespace CDPL
     {
 
         /**
-         * \brief A global dictionary for the lookup of meta-data associated with the atom
+         * \brief A global dictionary for the lookup of data associated with the atom
          *        types defined in namespace Chem::AtomType
          */
         class CDPL_CHEM_API AtomDictionary

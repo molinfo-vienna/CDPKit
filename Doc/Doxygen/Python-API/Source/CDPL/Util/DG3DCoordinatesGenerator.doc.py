@@ -394,6 +394,12 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def getDistanceConstraints() -> DistanceConstraintList: pass
+
+    ##
+    # \brief 
     #
     def clearVolumeConstraints() -> None: pass
 
@@ -434,6 +440,12 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
     #
     def getVolumeError(coords: Math.Vector3DArray) -> float: pass
 
+    ##
+    # \brief 
+    # \return 
+    #
+    def getVolumeConstraints() -> VolumeConstraintList: pass
+
     objectID = property(getObjectID)
 
     numCycles = property(getNumCycles, setNumCycles)
@@ -446,14 +458,8 @@ class DG3DCoordinatesGenerator(Boost.Python.instance):
 
     numDistanceConstraints = property(getNumDistanceConstraints)
 
-    ##
-    # \brief FIXME!
-    #
     distanceConstraints = property(getDistanceConstraints)
 
     numVolumeConstraints = property(getNumVolumeConstraints)
 
-    ##
-    # \brief FIXME!
-    #
     volumeConstraints = property(getVolumeConstraints)

@@ -64,12 +64,12 @@ void CDPLPythonChem::exportHydrogen3DCoordinatesCalculator()
                  &Chem::Hydrogen3DCoordinatesCalculator::calculate), 
              (python::arg("self"), python::arg("coords"), python::arg("init_coords") = true))
 
-        .add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc)
-        .add_property("coordsFunction", 
+        .add_property("undefOnly", undefOnlyGetterFunc, undefOnlySetterFunc)
+        .add_property("atomCoordsFunction", 
                       python::make_function(&Chem::Hydrogen3DCoordinatesCalculator::getAtom3DCoordinatesFunction, 
                                             python::return_internal_reference<>()),
                       &Chem::Hydrogen3DCoordinatesCalculator::setAtom3DCoordinatesFunction)
-        .add_property("coordsCheckFunction", 
+        .add_property("atomCoordsCheckFunction", 
                       python::make_function(&Chem::Hydrogen3DCoordinatesCalculator::getAtom3DCoordinatesCheckFunction, 
                                             python::return_internal_reference<>()),
                       &Chem::Hydrogen3DCoordinatesCalculator::setAtom3DCoordinatesCheckFunction);

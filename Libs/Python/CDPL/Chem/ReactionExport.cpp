@@ -84,12 +84,6 @@ namespace
         return ComponentSequence(rxn, Role);
     }
 
-    template <unsigned int Role>
-    std::size_t getNumComponents(const CDPL::Chem::Reaction& rxn)
-    {
-        return rxn.getNumComponents(Role);
-    }
-
     struct ReactionWrapper : CDPL::Chem::Reaction, boost::python::wrapper<CDPL::Chem::Reaction> 
     {
 
@@ -242,10 +236,7 @@ void CDPLPythonChem::exportReaction()
                                                       python::with_custodian_and_ward_postcall<0, 1>()))
         .add_property("products", python::make_function(&createComponentSequence<Chem::ReactionRole::PRODUCT>, 
                                                         python::with_custodian_and_ward_postcall<0, 1>()))
-        .add_property("numComponents", getNumComponentsFunc)
-        .add_property("numReactants", &getNumComponents<Chem::ReactionRole::REACTANT>)
-        .add_property("numAgents", &getNumComponents<Chem::ReactionRole::AGENT>)
-        .add_property("numProducts", &getNumComponents<Chem::ReactionRole::PRODUCT>);
+        .add_property("numComponents", getNumComponentsFunc);
 
     python::class_<ComponentSequence>("ComponentSequence", python::no_init)
         .def("__contains__", &ComponentSequence::containsComponent, (python::arg("self"), python::arg("mol")))

@@ -199,17 +199,11 @@ class SpatialFeatureAlignment(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    topMapping = property(getTopMapping)
+    topMapping = property(getTopologicalMapping)
 
     minTopologicalMappingSize = property(getMinTopologicalMappingSize, setMinTopologicalMappingSize)
 
-    ##
-    # \brief FIXME!
-    #
-    exhaustiveSearch = property(getExhaustiveSearch, setExhaustiveSearch)
+    exhaustiveSearch = property(exhaustiveSearchPerformed, performExhaustiveSearch)
 
     transform = property(getTransform)
 
@@ -219,6 +213,6 @@ class SpatialFeatureAlignment(Boost.Python.instance):
 
     topAlignmentConstraintFunction = property(getTopAlignmentConstraintFunction, setTopAlignmentConstraintFunction)
 
-    entity3DCoordinatesFunction = property(getEntity3DCoordinatesFunction, setEntity3DCoordinatesFunction)
+    entityCoordsFunction = property(getEntity3DCoordinatesFunction, setEntity3DCoordinatesFunction)
 
     entityWeightFunction = property(getEntityWeightFunction, setEntityWeightFunction)

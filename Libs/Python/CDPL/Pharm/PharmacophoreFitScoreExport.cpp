@@ -53,6 +53,18 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
         .def("__call__", static_cast<double (Pharm::PharmacophoreFitScore::*)
              (const Pharm::FeatureContainer&, const Pharm::SpatialFeatureMapping&)>(&Pharm::PharmacophoreFitScore::operator()),
              (python::arg("self"), python::arg("ref_ftrs"), python::arg("mapping")))
+        .def("getFeatureMatchCountWeight", &Pharm::PharmacophoreFitScore::getFeatureMatchCountWeight,
+             python::arg("self"))
+        .def("setFeatureMatchCountWeight", &Pharm::PharmacophoreFitScore::setFeatureMatchCountWeight,
+             (python::arg("self"), python::arg("weight")))
+        .def("getFeaturePositionMatchWeight", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchWeight,
+             python::arg("self"))
+        .def("setFeaturePositionMatchWeight", &Pharm::PharmacophoreFitScore::setFeaturePositionMatchWeight,
+             (python::arg("self"), python::arg("weight")))
+        .def("getFeatureGeometryMatchWeight", &Pharm::PharmacophoreFitScore::getFeatureGeometryMatchWeight,
+             python::arg("self"))
+        .def("setFeatureGeometryMatchWeight", &Pharm::PharmacophoreFitScore::setFeatureGeometryMatchWeight,
+             (python::arg("self"), python::arg("weight")))
         .add_property("featureMatchCountWeight", &Pharm::PharmacophoreFitScore::getFeatureMatchCountWeight, 
                       &Pharm::PharmacophoreFitScore::setFeatureMatchCountWeight)
         .add_property("featurePositionMatchWeight", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchWeight, 

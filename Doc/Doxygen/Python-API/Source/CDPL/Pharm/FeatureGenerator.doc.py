@@ -71,7 +71,4 @@ class FeatureGenerator(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    atom3DCoordsFunc = property(getAtom3DCoordsFunc, setAtom3DCoordsFunc)
+    atomCoordsFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesFunction)

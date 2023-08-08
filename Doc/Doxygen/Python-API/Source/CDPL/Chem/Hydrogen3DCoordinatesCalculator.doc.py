@@ -53,6 +53,22 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
+    # \brief Allows to specify whether already defined hydrogen atom coordinates have to be recalculated or are left unchanged.
+    # 
+    # \param undef_only <tt>True</tt> if already defined hydrogen atom coordinates have to be left unchanged, and <tt>False</tt> otherwise.
+    # 
+    # \note The default setting is to calculate coordinates only for hydrogens with not yet defined positions.
+    # 
+    def undefinedOnly(undef_only: bool) -> None: pass
+
+    ##
+    # \brief Tells whether already defined hydrogen atom coordinates are recalculated or left unchanged.
+    # 
+    # \return <tt>True</tt> if already defined hydrogen atom coordinates are left unchanged, and <tt>False</tt> otherwise.
+    # 
+    def undefinedOnly() -> bool: pass
+
+    ##
     # \brief Specifies a function for the retrieval of atom 3D-coordinates.
     # 
     # \param func The atom 3D-coordinates function.
@@ -104,17 +120,8 @@ class Hydrogen3DCoordinatesCalculator(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    undefinedOnly = property(getUndefinedOnly, setUndefinedOnly)
+    undefOnly = property(undefinedOnly, undefinedOnly)
 
-    ##
-    # \brief FIXME!
-    #
-    coordsFunction = property(getCoordsFunction, setCoordsFunction)
+    atomCoordsFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesCheckFunction)
 
-    ##
-    # \brief FIXME!
-    #
-    coordsCheckFunction = property(getCoordsCheckFunction, setCoordsCheckFunction)
+    atomCoordsCheckFunction = property(getAtom3DCoordinatesCheckFunction, setAtom3DCoordinatesCheckFunction)

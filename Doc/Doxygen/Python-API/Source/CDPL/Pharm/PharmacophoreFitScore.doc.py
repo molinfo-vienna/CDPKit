@@ -74,6 +74,42 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def getFeatureMatchCountWeight() -> float: pass
+
+    ##
+    # \brief 
+    # \param weight 
+    #
+    def setFeatureMatchCountWeight(weight: float) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getFeaturePositionMatchWeight() -> float: pass
+
+    ##
+    # \brief 
+    # \param weight 
+    #
+    def setFeaturePositionMatchWeight(weight: float) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getFeatureGeometryMatchWeight() -> float: pass
+
+    ##
+    # \brief 
+    # \param weight 
+    #
+    def setFeatureGeometryMatchWeight(weight: float) -> None: pass
+
+    ##
+    # \brief 
     # \param ref_ftrs 
     # \param algnd_ftrs 
     # \param xform 
@@ -91,17 +127,8 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
     featureMatchCountWeight = property(getFeatureMatchCountWeight, setFeatureMatchCountWeight)
 
-    ##
-    # \brief FIXME!
-    #
     featurePositionMatchWeight = property(getFeaturePositionMatchWeight, setFeaturePositionMatchWeight)
 
-    ##
-    # \brief FIXME!
-    #
     featureGeometryMatchWeight = property(getFeatureGeometryMatchWeight, setFeatureGeometryMatchWeight)

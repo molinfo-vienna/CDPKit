@@ -202,7 +202,7 @@ namespace CDPL
 
             void clearExcludePatterns();
 
-            bool includeSplitBonds() const;
+            bool splitBondsIncluded() const;
 
             void includeSplitBonds(bool include);
 

@@ -199,17 +199,8 @@ class HydrophobicFeatureGenerator(PatternBasedFeatureGenerator):
 
     featureTolerance = property(getFeatureTolerance, setFeatureTolerance)
 
-    ##
-    # \brief FIXME!
-    #
-    ringHydThreshold = property(getRingHydThreshold, setRingHydThreshold)
+    ringHydThreshold = property(getRingHydrophobicityThreshold, setRingHydrophobicityThreshold)
 
-    ##
-    # \brief FIXME!
-    #
-    chainHydThreshold = property(getChainHydThreshold, setChainHydThreshold)
+    chainHydThreshold = property(getChainHydrophobicityThreshold, setChainHydrophobicityThreshold)
 
-    ##
-    # \brief FIXME!
-    #
-    groupHydThreshold = property(getGroupHydThreshold, setGroupHydThreshold)
+    groupHydThreshold = property(getGroupHydrophobicityThreshold, setGroupHydrophobicityThreshold)

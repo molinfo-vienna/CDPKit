@@ -27,16 +27,16 @@ class FragmentGenerator(Boost.Python.instance):
     ##
     # \brief 
     #
-    class FragmentationRuler(Boost.Python.instance):
+    class FragmentationRule(Boost.Python.instance):
 
         ##
-        # \brief Initializes a copy of the \e %FragmentationRuler instance \a rule.
-        # \param rule The \e %FragmentationRuler instance to copy.
+        # \brief Initializes a copy of the \e %FragmentationRule instance \a rule.
+        # \param rule The \e %FragmentationRule instance to copy.
         # 
-        def __init__(rule: FragmentationRuler) -> None: pass
+        def __init__(rule: FragmentationRule) -> None: pass
 
         ##
-        # \brief Initializes the \e %FragmentationRuler instance.
+        # \brief Initializes the \e %FragmentationRule instance.
         # \param match_ptn 
         # \param id 
         # 
@@ -45,8 +45,8 @@ class FragmentGenerator(Boost.Python.instance):
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         # 
-        # Different Python \e %FragmentationRuler instances may reference the same underlying C++ class instance. The commonly used Python expression
-        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentationRuler instances \e a and \e b reference different C++ objects. 
+        # Different Python \e %FragmentationRule instances may reference the same underlying C++ class instance. The commonly used Python expression
+        # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentationRule instances \e a and \e b reference different C++ objects. 
         # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
         # <tt>a.getObjectID() != b.getObjectID()</tt>.
         # 
@@ -55,11 +55,11 @@ class FragmentGenerator(Boost.Python.instance):
         def getObjectID() -> int: pass
 
         ##
-        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentationRuler instance \a rule.
-        # \param rule The \e %FragmentationRuler instance to copy.
+        # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentationRule instance \a rule.
+        # \param rule The \e %FragmentationRule instance to copy.
         # \return \a self
         # 
-        def assign(rule: FragmentationRuler) -> FragmentationRuler: pass
+        def assign(rule: FragmentationRule) -> FragmentationRule: pass
 
         ##
         # \brief 
@@ -89,10 +89,7 @@ class FragmentGenerator(Boost.Python.instance):
 
         matchPattern = property(getMatchPattern, setMatchPattern)
 
-        ##
-        # \brief FIXME!
-        #
-        id = property(getId, setId)
+        id = property(getID, setID)
 
     ##
     # \brief 
@@ -173,10 +170,7 @@ class FragmentGenerator(Boost.Python.instance):
 
         ruleID = property(getRuleID, setRuleID)
 
-        ##
-        # \brief FIXME!
-        #
-        generic = property(getGeneric, setGeneric)
+        generic = property(isGeneric, setGeneric)
 
     ##
     # \brief 
@@ -310,7 +304,7 @@ class FragmentGenerator(Boost.Python.instance):
     # \brief 
     # \param rule 
     #
-    def addFragmentationRule(rule: FragmentationRuler) -> None: pass
+    def addFragmentationRule(rule: FragmentationRule) -> None: pass
 
     ##
     # \brief 
@@ -323,7 +317,7 @@ class FragmentGenerator(Boost.Python.instance):
     # \param idx 
     # \return 
     #
-    def getFragmentationRule(idx: int) -> FragmentationRuler: pass
+    def getFragmentationRule(idx: int) -> FragmentationRule: pass
 
     ##
     # \brief 
@@ -408,12 +402,6 @@ class FragmentGenerator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \return 
-    #
-    def includeSplitBonds() -> bool: pass
-
-    ##
-    # \brief 
     # \param include 
     #
     def includeSplitBonds(include: bool) -> None: pass
@@ -422,10 +410,7 @@ class FragmentGenerator(Boost.Python.instance):
 
     fragmentFilterFunction = property(getFragmentFilterFunction, setFragmentFilterFunction)
 
-    ##
-    # \brief FIXME!
-    #
-    incSplitBonds = property(getIncSplitBonds, setIncSplitBonds)
+    incSplitBonds = property(splitBondsIncluded, includeSplitBonds)
 
     numFragmentationRules = property(getNumFragmentationRules)
 

@@ -166,14 +166,8 @@ class TautomerGenerator(Boost.Python.instance):
 
     mode = property(getMode, setMode)
 
-    ##
-    # \brief FIXME!
-    #
-    regStereo = property(getRegStereo, setRegStereo)
+    regStereo = property(stereochemistryRegarded, regardStereochemistry)
 
-    ##
-    # \brief FIXME!
-    #
-    regIsotopes = property(getRegIsotopes, setRegIsotopes)
+    regIsotopes = property(isotopesRegarded, regardIsotopes)
 
     numTautomerizationRules = property(getNumTautomerizationRules)

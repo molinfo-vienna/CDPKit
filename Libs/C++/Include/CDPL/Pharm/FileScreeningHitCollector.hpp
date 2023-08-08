@@ -65,33 +65,33 @@ namespace CDPL
 
             void alignHitMolecule(bool align);
 
-            bool isHitMoleculeAligned() const;
+            bool alignHitMolecule() const;
 
-            void writeScoreProperty(bool write);
+            void outputScoreProperty(bool output);
 
-            bool isScorePropertyWritten() const;
+            bool outputScoreProperty() const;
 
-            void writeDBNameProperty(bool write);
+            void outputDBNameProperty(bool output);
 
-            bool isDBNamePropertyWritten() const;
+            bool outputDBNameProperty() const;
 
-            void writeDBMoleculeIndexProperty(bool write);
+            void outputDBMoleculeIndexProperty(bool output);
 
-            bool isDBMoleculeIndexPropertyWritten() const;
+            bool outputDBMoleculeIndexProperty() const;
 
-            void writeMoleculeConfIndexProperty(bool write);
+            void outputMoleculeConfIndexProperty(bool output);
 
-            bool isMoleculeConfIndexPropertyWritten() const;
+            bool outputMoleculeConfIndexProperty() const;
 
             bool operator()(const ScreeningProcessor::SearchHit& hit, double score);
 
           private:
             MolecularGraphWriter* dataWriter;
             bool                  alignMolecule;
-            bool                  outputScore;
-            bool                  outputDBName;
-            bool                  outputMolIndex;
-            bool                  outputConfIndex;
+            bool                  optScore;
+            bool                  optDBName;
+            bool                  optMolIndex;
+            bool                  optConfIndex;
             Math::Vector3DArray   alignedCoords;
             Chem::BasicMolecule   molecule;
         };

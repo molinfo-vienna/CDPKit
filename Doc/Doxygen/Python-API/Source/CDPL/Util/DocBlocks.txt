@@ -17,3 +17,15 @@ Stream.softspace.value
 getSoftSpace
 setSoftSpace
 $$$$
+
+BitSet.any.value
+hasAny
+$$$$
+
+BitSet.none.value
+hasNone
+$$$$
+
+BitSet.empty.value
+isEmpty
+$$$$

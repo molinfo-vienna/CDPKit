@@ -48,6 +48,6 @@ void CDPLPythonChem::exportBondDirectionCalculator()
         .def("calculate", &Chem::BondDirectionCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("dirs")))
         .add_property("ringSizeLimit", &Chem::BondDirectionCalculator::getRingSizeLimit, 
                       &Chem::BondDirectionCalculator::setRingSizeLimit)
-        .add_property("ringBonds", &Chem::BondDirectionCalculator::ringBondsIncluded,
+        .add_property("incRingBonds", &Chem::BondDirectionCalculator::ringBondsIncluded,
                       &Chem::BondDirectionCalculator::includeRingBonds);
 }

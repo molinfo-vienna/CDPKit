@@ -135,10 +135,7 @@ class ScreeningDBCreator(Boost.Python.instance):
 
     mode = property(getMode)
 
-    ##
-    # \brief FIXME!
-    #
-    allowDuplicates = property(getAllowDuplicates)
+    allowDuplicates = property(allowDuplicateEntries)
 
     numProcessed = property(getNumProcessed)
 

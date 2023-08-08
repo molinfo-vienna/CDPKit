@@ -73,7 +73,4 @@ class CIPPriorityCalculator(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    implHydrogenCountFunc = property(getImplHydrogenCountFunc, setImplHydrogenCountFunc)
+    implHydrogenCountFunc = property(getImplicitHydrogenCountFunction, setImplicitHydrogenCountFunction)

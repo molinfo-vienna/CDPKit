@@ -100,20 +100,11 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
         priority = property(getPriority)
 
-        ##
-        # \brief FIXME!
-        #
-        id = property(getId)
+        id = property(getID)
 
-        ##
-        # \brief FIXME!
-        #
-        allMatches = property(getAllMatches)
+        allMatches = property(processAllMatches)
 
-        ##
-        # \brief FIXME!
-        #
-        uniqueMatches = property(getUniqueMatches)
+        uniqueMatches = property(processUniqueMatchesOnly)
 
     ##
     # \brief Initializes the \e %SubstructureHistogramCalculator instance.

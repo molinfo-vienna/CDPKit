@@ -205,20 +205,11 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
     numStructures = property(getNumStructures)
 
-    ##
-    # \brief FIXME!
-    #
-    minOctetRuleViolations = property(getMinOctetRuleViolations, setMinOctetRuleViolations)
+    minOctetRuleViolations = property(octetRuleViolationsMinimized, minimizeOctetRuleViolations)
 
-    ##
-    # \brief FIXME!
-    #
-    minSP1GeometryViolations = property(getMinSP1GeometryViolations, setMinSP1GeometryViolations)
+    minSP1GeometryViolations = property(sp1GeometryViolationsMinimized, minimizeSP1GeometryViolations)
 
-    ##
-    # \brief FIXME!
-    #
-    minCarbonBond12Charges = property(getMinCarbonBond12Charges, setMinCarbonBond12Charges)
+    minCarbonBond12Charges = property(carbonBond12ChargesMinimized, minimizeCarbonBond12Charges)
 
     octetRuleCheckAtomTypes = property(getOctetRuleCheckAtomTypes)
 

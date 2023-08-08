@@ -299,18 +299,3 @@ class Reaction(Base.PropertyContainer):
     products = property(getProducts)
 
     numComponents = property(getNumComponents)
-
-    ##
-    # \brief FIXME!
-    #
-    numReactants = property(getNumReactants)
-
-    ##
-    # \brief FIXME!
-    #
-    numAgents = property(getNumAgents)
-
-    ##
-    # \brief FIXME!
-    #
-    numProducts = property(getNumProducts)

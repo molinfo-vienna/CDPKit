@@ -69,6 +69,36 @@ namespace
 
         rule.addTransformationPattern(pattern, order_chgs.begin(), order_chgs.end());
     }
+
+    std::size_t getAtom1ID(const CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change)
+    {
+        return bo_change.atom1ID;
+    }
+
+    void setAtom1ID(CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change, std::size_t id)
+    {
+        bo_change.atom1ID = id;
+    }
+
+    std::size_t getAtom2ID(const CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change)
+    {
+        return bo_change.atom2ID;
+    }
+
+    void setAtom2ID(CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change, std::size_t id)
+    {
+        bo_change.atom2ID = id;
+    }
+
+    long getOrderChange(const CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change)
+    {
+        return bo_change.orderChange;
+    }
+
+    void setOrderChange(CDPL::Chem::PatternBasedTautomerizationRule::BondOrderChange& bo_change, long value)
+    {
+        bo_change.orderChange = value;
+    }
 }
 
 
@@ -87,7 +117,13 @@ void CDPLPythonChem::exportPatternBasedTautomerizationRule()
         .def(python::init<const Chem::PatternBasedTautomerizationRule::BondOrderChange&>((python::arg("self"), python::arg("bond_chg"))))
         .def("assign", CDPLPythonBase::copyAssOp(&Chem::PatternBasedTautomerizationRule::BondOrderChange::operator=), 
              (python::arg("self"), python::arg("bond_chg")), python::return_self<>())
-        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedTautomerizationRule::BondOrderChange>())    
+        .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedTautomerizationRule::BondOrderChange>())
+        .def("getAtom1ID", &getAtom1ID, python::arg("self"))
+        .def("setAtom1ID", &setAtom1ID, (python::arg("self"), python::arg("id")))
+        .def("getAtom2ID", &getAtom2ID, python::arg("self"))
+        .def("setAtom2ID", &setAtom2ID, (python::arg("self"), python::arg("id")))
+        .def("getOrderChange", &getOrderChange, python::arg("self"))
+        .def("setOrderChange", &setOrderChange, (python::arg("self"), python::arg("value")))
         .add_property("atom1ID", &Chem::PatternBasedTautomerizationRule::BondOrderChange::atom1ID)
         .add_property("atom2ID", &Chem::PatternBasedTautomerizationRule::BondOrderChange::atom2ID)
         .add_property("orderChange", &Chem::PatternBasedTautomerizationRule::BondOrderChange::orderChange);

@@ -72,7 +72,7 @@ void CDPLPythonGRAIL::exportBuriednessScore()
         .add_property("minVdWSurfaceDistance", &GRAIL::BuriednessScore::getMinVdWSurfaceDistance, 
                       &GRAIL::BuriednessScore::setMinVdWSurfaceDistance)
         .add_property("numTestRays", &GRAIL::BuriednessScore::getNumTestRays, &GRAIL::BuriednessScore::setNumTestRays)
-        .add_property("atomCoordinatesFunction", 
+        .add_property("atomCoordsFunction", 
                       python::make_function(&GRAIL::BuriednessScore::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
                       &GRAIL::BuriednessScore::setAtom3DCoordinatesFunction)
         .def_readonly("DEF_NUM_TEST_RAYS", GRAIL::BuriednessScore::DEF_NUM_TEST_RAYS)

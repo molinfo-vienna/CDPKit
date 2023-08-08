@@ -51,6 +51,22 @@ class BondOrderCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
+    # \brief Allows to specify whether already defined bond orders should be left unchanged.
+    # 
+    # \param undef_only Specifies whether or not to perceive only undefined (= unset) bond orders.
+    # 
+    # \note The default setting is to perceive only the order of undefined bonds.
+    # 
+    def undefinedOnly(undef_only: bool) -> None: pass
+
+    ##
+    # \brief Tells whether or not only undefined bond orders have to be perceived.
+    # 
+    # \return <tt>True</tt> if only undefined (= unset) bond orders are perceived, and <tt>False</tt> otherwise.
+    # 
+    def undefinedOnly() -> bool: pass
+
+    ##
     # \brief Perceives the order of the bonds in the molecular graph <em>molgraph</em> from its 3D structure and atom connectivity.
     # 
     # \param molgraph The molecular graph for which to perceive the bond orders.
@@ -60,7 +76,4 @@ class BondOrderCalculator(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    undefinedOnly = property(getUndefinedOnly, setUndefinedOnly)
+    undefOnly = property(undefinedOnly, undefinedOnly)

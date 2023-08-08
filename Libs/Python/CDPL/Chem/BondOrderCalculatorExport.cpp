@@ -49,5 +49,5 @@ void CDPLPythonChem::exportBondOrderCalculator()
         .def("undefinedOnly", undefOnlyGetterFunc, python::arg("self"))
         .def("calculate", &Chem::BondOrderCalculator::calculate, 
              (python::arg("self"), python::arg("molgraph"), python::arg("orders")))
-        .add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc);
+        .add_property("undefOnly", undefOnlyGetterFunc, undefOnlySetterFunc);
 }

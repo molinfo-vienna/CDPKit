@@ -179,7 +179,4 @@ class HashCodeCalculator(Boost.Python.instance):
 
     result = property(getResult)
 
-    ##
-    # \brief FIXME!
-    #
-    globalStereoFeatures = property(getGlobalStereoFeatures, setGlobalStereoFeatures)
+    globalStereoFeatures = property(globalStereoFeaturesIncluded, includeGlobalStereoFeatures)

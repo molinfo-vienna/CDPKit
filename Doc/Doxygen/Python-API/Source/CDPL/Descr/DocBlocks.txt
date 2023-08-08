@@ -1,1 +1,17 @@
- 
+#
+# --- Unresolved property getter/setter functions ---
+#
+Calculator.distanceToIntervalCenterRounding.value
+distanceToIntervalsCenterRoundingEnabled
+enableDistanceToIntervalCenterRounding
+$$$$
+
+CircularFingerprintGenerator.incHydrogens.value
+hydrogensIncluded
+includeHydrogens
+$$$$
+
+CircularFingerprintGenerator.incChirality.value
+chiralityIncluded
+includeChirality
+$$$$

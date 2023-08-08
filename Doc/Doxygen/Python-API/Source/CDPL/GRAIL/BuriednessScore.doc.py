@@ -132,4 +132,4 @@ class BuriednessScore(Boost.Python.instance):
 
     numTestRays = property(getNumTestRays, setNumTestRays)
 
-    atomCoordinatesFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesFunction)
+    atomCoordsFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesFunction)

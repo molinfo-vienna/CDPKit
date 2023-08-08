@@ -82,10 +82,10 @@ void CDPLPythonGRAIL::exportAtomDensityGridCalculator()
         .add_property("densityFunction", 
                       python::make_function(&GRAIL::AtomDensityGridCalculator::getDensityFunction, python::return_internal_reference<>()),
                       &GRAIL::AtomDensityGridCalculator::setDensityFunction)
-        .add_property("densityCombinationFunction", 
+        .add_property("densityCombFunction", 
                       python::make_function(&GRAIL::AtomDensityGridCalculator::getDensityCombinationFunction, python::return_internal_reference<>()),
                       &GRAIL::AtomDensityGridCalculator::setDensityCombinationFunction)    
-        .add_property("atomCoordinatesFunction", 
+        .add_property("atomCoordsFunction", 
                       python::make_function(&GRAIL::AtomDensityGridCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
                       &GRAIL::AtomDensityGridCalculator::setAtom3DCoordinatesFunction);
 

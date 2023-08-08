@@ -102,15 +102,9 @@ class PatternAtomTyper(Boost.Python.instance):
 
         atomLabel = property(getAtomLabel)
 
-        ##
-        # \brief FIXME!
-        #
-        allMatches = property(getAllMatches)
+        allMatches = property(processAllMatches)
 
-        ##
-        # \brief FIXME!
-        #
-        uniqueMatches = property(getUniqueMatches)
+        uniqueMatches = property(processUniqueMatchesOnly)
 
     ##
     # \brief Initializes the \e %PatternAtomTyper instance.

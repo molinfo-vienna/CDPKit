@@ -59,21 +59,48 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         # 
         def getObjectID() -> int: pass
 
+        ##
+        # \brief 
+        # \return 
+        #
+        def getAtom1ID() -> int: pass
+
+        ##
+        # \brief 
+        # \param id 
+        #
+        def setAtom1ID(id: int) -> None: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getAtom2ID() -> int: pass
+
+        ##
+        # \brief 
+        # \param id 
+        #
+        def setAtom2ID(id: int) -> None: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getOrderChange() -> int: pass
+
+        ##
+        # \brief 
+        # \param value 
+        #
+        def setOrderChange(value: int) -> None: pass
+
         objectID = property(getObjectID)
 
-        ##
-        # \brief FIXME!
-        #
         atom1ID = property(getAtom1ID)
 
-        ##
-        # \brief FIXME!
-        #
         atom2ID = property(getAtom2ID)
 
-        ##
-        # \brief FIXME!
-        #
         orderChange = property(getOrderChange)
 
     ##

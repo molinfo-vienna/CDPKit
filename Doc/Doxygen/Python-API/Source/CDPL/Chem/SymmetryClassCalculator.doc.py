@@ -138,7 +138,4 @@ class SymmetryClassCalculator(Boost.Python.instance):
 
     bondPropertyFlags = property(getBondPropertyFlags, setBondPropertyFlags)
 
-    ##
-    # \brief FIXME!
-    #
-    hydrogenComplete = property(getHydrogenComplete, setHydrogenComplete)
+    hydrogenComplete = property(implicitHydrogensIncluded, includeImplicitHydrogens)

@@ -386,10 +386,7 @@ class BitSet(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    empty = property(getEmpty)
+    empty = property(isEmpty)
 
     count = property(getCount)
 
@@ -397,12 +394,6 @@ class BitSet(Boost.Python.instance):
 
     maxSize = property(getMaxSize)
 
-    ##
-    # \brief FIXME!
-    #
-    any = property(getAny)
+    any = property(hasAny)
 
-    ##
-    # \brief FIXME!
-    #
-    none = property(getNone)
+    none = property(hasNone)

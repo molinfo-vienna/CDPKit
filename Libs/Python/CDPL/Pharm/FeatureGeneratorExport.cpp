@@ -71,7 +71,7 @@ void CDPLPythonPharm::exportFeatureGenerator()
              (python::arg("self"), python::arg("molgraph"), python::arg("pharm")))
         .def("clone", python::pure_virtual(&Pharm::FeatureGenerator::clone),
              python::arg("self"))
-        .add_property("atom3DCoordsFunc", python::make_function(&Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, 
+        .add_property("atomCoordsFunction", python::make_function(&Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, 
                                                                 python::return_internal_reference<>()),
                       &Pharm::FeatureGenerator::setAtom3DCoordinatesFunction);
 

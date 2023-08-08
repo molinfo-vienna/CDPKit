@@ -115,7 +115,7 @@ namespace CDPLPythonChem
                 .add_property("topAlignmentConstraintFunction",
                               python::make_function(&AlignmentType::getTopAlignmentConstraintFunction, python::return_internal_reference<>()),
                               &AlignmentType::setTopAlignmentConstraintFunction)
-                .add_property("entity3DCoordinatesFunction",
+                .add_property("entityCoordsFunction",
                               python::make_function(&AlignmentType::setEntity3DCoordinatesFunction, python::return_internal_reference<>()),
                               &AlignmentType::setEntity3DCoordinatesFunction)
                 .add_property("entityWeightFunction",

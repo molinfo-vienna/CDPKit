@@ -134,26 +134,17 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
 
     coreEnvironmentRadius = property(getCoreEnvironmentRadius, setCoreEnvironmentRadius)
 
-    ##
-    # \brief FIXME!
-    #
-    addXVolumes = property(getAddXVolumes, setAddXVolumes)
+    addXVolumes = property(exclusionVolumesAdded, addExclusionVolumes)
 
     corePharmacophoreGenerator = property(getCorePharmacophoreGenerator)
 
-    ##
-    # \brief FIXME!
-    #
-    envPharmacophoreGenerator = property(getEnvPharmacophoreGenerator)
+    envPharmacophoreGenerator = property(getEnvironmentPharmacophoreGenerator)
 
     interactionAnalyzer = property(getInteractionAnalyzer)
 
     corePharmacophore = property(getCorePharmacophore)
 
-    ##
-    # \brief FIXME!
-    #
-    envPharmacophore = property(getEnvPharmacophore)
+    envPharmacophore = property(getEnvironmentPharmacophore)
 
     interactionMapping = property(getInteractionMapping)
 

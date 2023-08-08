@@ -279,10 +279,7 @@ class ScreeningProcessor(Boost.Python.instance):
 
     objectID = property(getObjectID)
 
-    ##
-    # \brief FIXME!
-    #
-    dbAcccessor = property(getDbAcccessor, setDbAcccessor)
+    dbAcccessor = property(getDBAccessor, setDBAccessor)
 
     hitCallback = property(getHitCallback, setHitCallback)
 
@@ -294,12 +291,6 @@ class ScreeningProcessor(Boost.Python.instance):
 
     maxNumOmittedFeatures = property(getMaxNumOmittedFeatures, setMaxNumOmittedFeatures)
 
-    ##
-    # \brief FIXME!
-    #
-    checkXVolumes = property(getCheckXVolumes, setCheckXVolumes)
+    checkXVolumes = property(xVolumeClashesChecked, checkXVolumeClashes)
 
-    ##
-    # \brief FIXME!
-    #
-    bestAlignments = property(getBestAlignments, setBestAlignments)
+    bestAlignments = property(bestAlignmentsSeeked, seekBestAlignments)

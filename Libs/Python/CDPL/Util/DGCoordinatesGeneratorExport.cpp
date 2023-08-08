@@ -167,6 +167,8 @@ namespace
                 .def("getDistanceError", 
                      &GeneratorType::template getDistanceError<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
                      (python::arg("self"), python::arg("coords")))
+                .def("getDistanceConstraints", &createDistanceConstraintList<GeneratorType>, python::arg("self"),
+                     python::with_custodian_and_ward_postcall<0, 1>())
                 .def_readonly("COORDS_DIM", GeneratorType::COORDS_DIM)
                 .def_readonly("DEF_NUM_CYCLES", GeneratorType::DEF_NUM_CYCLES)
                 .def_readonly("DEF_CYCLE_STEP_COUNT_FACTOR", GeneratorType::DEF_CYCLE_STEP_COUNT_FACTOR)
@@ -253,6 +255,8 @@ void CDPLPythonUtil::exportDGCoordinatesGenerator()
         .def("getVolumeError", 
                      &GeneratorType::getVolumeError<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
                      (python::arg("self"), python::arg("coords")))
+        .def("getVolumeConstraints", &createVolumeConstraintList<GeneratorType>, python::arg("self"),
+             python::with_custodian_and_ward_postcall<0, 1>())
         .add_property("numVolumeConstraints", &GeneratorType::getNumVolumeConstraints)
         .add_property("volumeConstraints", python::make_function(&createVolumeConstraintList<GeneratorType>,
                                                                  python::with_custodian_and_ward_postcall<0, 1>()));

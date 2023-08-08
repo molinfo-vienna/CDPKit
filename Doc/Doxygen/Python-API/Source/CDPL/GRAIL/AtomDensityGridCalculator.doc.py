@@ -129,6 +129,6 @@ class AtomDensityGridCalculator(Boost.Python.instance):
 
     densityFunction = property(getDensityFunction, setDensityFunction)
 
-    densityCombinationFunction = property(getDensityCombinationFunction, setDensityCombinationFunction)
+    densityCombFunction = property(getDensityCombinationFunction, setDensityCombinationFunction)
 
-    atomCoordinatesFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesFunction)
+    atomCoordsFunction = property(getAtom3DCoordinatesFunction, setAtom3DCoordinatesFunction)

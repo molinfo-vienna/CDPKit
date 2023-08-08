@@ -630,10 +630,10 @@ void PSDScreenImpl::initHitCollector()
     hitCollector.reset(new Pharm::FileScreeningHitCollector(*hitMolWriter));
 
     hitCollector->alignHitMolecule(alignConfs);
-    hitCollector->writeScoreProperty(outputScore);
-    hitCollector->writeDBNameProperty(outputDBName);
-    hitCollector->writeDBMoleculeIndexProperty(outputMolIndex);
-    hitCollector->writeMoleculeConfIndexProperty(outputConfIndex);
+    hitCollector->outputScoreProperty(outputScore);
+    hitCollector->outputDBNameProperty(outputDBName);
+    hitCollector->outputDBMoleculeIndexProperty(outputMolIndex);
+    hitCollector->outputMoleculeConfIndexProperty(outputConfIndex);
 }
 
 void PSDScreenImpl::initQueryPharmReader()
