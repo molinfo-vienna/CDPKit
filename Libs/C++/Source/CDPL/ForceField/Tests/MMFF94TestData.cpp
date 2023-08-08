@@ -30,6 +30,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/MOL2MoleculeReader.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Util/FileDataReader.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
@@ -78,6 +79,8 @@ namespace
 
         Util::FileDataReader<MOL2MoleculeReader> mol_reader(fname);
 
+        setMultiConfImportParameter(mol_reader, false);
+        
         while (true) {
             BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
 

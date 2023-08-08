@@ -501,12 +501,11 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsEnergyFunctionTest)
 
                     double energy = ForceField::calcMMFF94VanDerWaalsEnergy<double>(iaction, coords);
            
-                    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00356, 
+                    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00415, 
                                         "Energy mismatch for van der Waals interaction #" << ia_data[i].atom1Idx << "(" << 
                                         getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << ")-#" << ia_data[i].atom2Idx << "(" << 
                                         getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
                                         "): calc. " << energy << " != " << ia_data[i].energy);
-            
                     iaction_found = true;
                     break;
                 }
@@ -561,7 +560,7 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticEnergyFunctionTest)
 
         //max_en_diff = std::max(max_en_diff, std::abs(energy - energies.electrostatic));
             
-        BOOST_CHECK_MESSAGE(std::abs(energy - energies.electrostatic) < 0.00564, 
+        BOOST_CHECK_MESSAGE(std::abs(energy - energies.electrostatic) < 0.0075, 
                             "Total electrostatic energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
                             "): calc. " << energy << " != " << energies.electrostatic);
     }

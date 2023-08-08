@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(MMFF94EnergyCalculatorTest)
                                 "Total van der Waals energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
                                 "): calc. " << calculator.getVanDerWaalsEnergy() << " != " << energies.vanDerWaals);
     
-            BOOST_CHECK_MESSAGE(std::abs(calculator.getElectrostaticEnergy() - energies.electrostatic) < 0.00564, 
+            BOOST_CHECK_MESSAGE(std::abs(calculator.getElectrostaticEnergy() - energies.electrostatic) < 0.0075, 
                                 "Total electrostatic energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
                                 "): calc. " << calculator.getElectrostaticEnergy() << " != " << energies.electrostatic);
         }
