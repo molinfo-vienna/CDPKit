@@ -47,7 +47,7 @@ SET(test-suite_SRCS
     SDFMolecularGraphOutputHandlerTest.cpp
     SMILESMolecularGraphOutputHandlerTest.cpp
     SMARTSMolecularGraphOutputHandlerTest.cpp
-#    JMEMoleculeInputHandlerTest.cpp
+    JMEMoleculeInputHandlerTest.cpp
 #    MOLMoleculeInputHandlerTest.cpp
 #    SDFMoleculeInputHandlerTest.cpp
 #    SMILESMoleculeInputHandlerTest.cpp

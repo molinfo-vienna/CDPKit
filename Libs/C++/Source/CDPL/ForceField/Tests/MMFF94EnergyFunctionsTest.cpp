@@ -434,7 +434,6 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionEnergyFunctionTest)
                                         ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
                                         " (" << mol_name << "): calc. " << energy << " != " << ia_data[i].energy);
     
-
                     iaction_found = true;
                     break;
                 }
@@ -506,6 +505,7 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsEnergyFunctionTest)
                                         getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << ")-#" << ia_data[i].atom2Idx << "(" << 
                                         getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
                                         "): calc. " << energy << " != " << ia_data[i].energy);
+
                     iaction_found = true;
                     break;
                 }
