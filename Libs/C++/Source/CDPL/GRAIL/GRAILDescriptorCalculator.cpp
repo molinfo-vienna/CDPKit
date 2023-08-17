@@ -49,6 +49,8 @@
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/MolProp/AtomContainerFunctions.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/Octree.hpp"
 
@@ -350,7 +352,9 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
     ligDescriptor[TOTAL_HYD] = 0.0;
     ligDescriptor[LOGP] = 0.0;
     ligDescriptor[TPSA] = ligTPSACalculator.calculate(ligand);
-    
+    ligDescriptor[HVY_ATOM_COUNT] = MolProp::getHeavyAtomCount(ligand);
+    ligDescriptor[ROT_BOND_COUNT] = MolProp::getRotatableBondCount(ligand);
+        
     for (std::size_t i = 0; i < numLigAtoms; i++) {
         const Atom& atom = ligand.getAtom(i);
 

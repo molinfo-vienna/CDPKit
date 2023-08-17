@@ -64,8 +64,8 @@ namespace CDPL
         {
 
           public:
-            static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 174;
-            static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 29;
+            static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 176;
+            static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 31;
 
             typedef std::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
 
@@ -98,6 +98,8 @@ namespace CDPL
                 HBA_Oco2_COUNT,
                 HBA_S3_COUNT,
                 HBA_S2_COUNT,
+                HVY_ATOM_COUNT,
+                ROT_BOND_COUNT,
                 TOTAL_HYD,
                 LOGP,
                 TPSA,
