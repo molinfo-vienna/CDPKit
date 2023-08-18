@@ -29,13 +29,12 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/SMARTSMoleculeInputHandler.hpp"
-#include "CDPL/Chem/DataFormats.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/SMARTSMolecularGraphWriter.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataReader.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SMARTSMoleculeInputHandlerTest)
@@ -44,10 +43,10 @@ BOOST_AUTO_TEST_CASE(SMARTSMoleculeInputHandlerTest)
     using namespace Chem;
     using namespace Base;
 
-    Molecule mol1;
-    Molecule mol2;
+    BasicMolecule mol1;
+    BasicMolecule mol2;
 
-    const DataInputHandler<Molecule>* handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::SMARTS);
+    const DataInputHandler<Molecule>::SharedPointer handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::SMARTS);
 
     BOOST_CHECK(handler);
 
@@ -68,6 +67,8 @@ BOOST_AUTO_TEST_CASE(SMARTSMoleculeInputHandlerTest)
 
     SMARTSMolecularGraphWriter writer(oss);
 
+    perceiveComponents(mol1, true);
+ 
     BOOST_CHECK(writer.write(mol1));
 
     std::istringstream iss(oss.str());

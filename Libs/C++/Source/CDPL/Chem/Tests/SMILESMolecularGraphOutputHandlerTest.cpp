@@ -29,7 +29,6 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/JMEMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/SMILESMoleculeReader.hpp"
@@ -40,7 +39,6 @@
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataWriter.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SMILESMolecularGraphOutputHandlerTest)

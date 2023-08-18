@@ -29,15 +29,12 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/SDFMoleculeInputHandler.hpp"
-#include "CDPL/Chem/DataFormats.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/SDFMolecularGraphWriter.hpp"
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphProperties.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataReader.hpp"
-#include "CDPL/Base/IntTypes.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SDFMoleculeInputHandlerTest)
@@ -46,10 +43,10 @@ BOOST_AUTO_TEST_CASE(SDFMoleculeInputHandlerTest)
     using namespace Chem;
     using namespace Base;
 
-    Molecule mol1;
-    Molecule mol2;
+    BasicMolecule mol1;
+    BasicMolecule mol2;
 
-    const DataInputHandler<Molecule>* handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::SDF);
+    const DataInputHandler<Molecule>::SharedPointer handler = DataIOManager<Molecule>::getInputHandlerByFormat(Chem::DataFormat::SDF);
 
     BOOST_CHECK(handler);
 
@@ -70,6 +67,16 @@ BOOST_AUTO_TEST_CASE(SDFMoleculeInputHandlerTest)
 
     BOOST_CHECK(oss);
 
+    perceiveComponents(mol1, false);
+    calcImplicitHydrogenCounts(mol1, false);
+    perceiveHybridizationStates(mol1, false);
+    perceiveSSSR(mol1, false);
+    setRingFlags(mol1, false);
+    setAromaticityFlags(mol1, false);
+    calcCIPPriorities(mol1, false);
+    calcAtomCIPConfigurations(mol1, false);
+    calcBondCIPConfigurations(mol1, false);
+
     BOOST_CHECK(SDFMolecularGraphWriter(oss).write(mol1));
 
     std::istringstream iss(oss.str());
@@ -81,10 +88,19 @@ BOOST_AUTO_TEST_CASE(SDFMoleculeInputHandlerTest)
     BOOST_CHECK(reader_ptr);
     BOOST_CHECK(reader_ptr->read(mol2));
 
+    perceiveComponents(mol2, false);
+    calcImplicitHydrogenCounts(mol2, false);
+    perceiveHybridizationStates(mol2, false);
+    perceiveSSSR(mol2, false);
+    setRingFlags(mol2, false);
+    setAromaticityFlags(mol2, false);
+    calcCIPPriorities(mol2, false);
+    calcAtomCIPConfigurations(mol2, false);
+    calcBondCIPConfigurations(mol2, false);
+   
     BOOST_CHECK(mol1.getNumAtoms() == mol2.getNumAtoms());
     BOOST_CHECK(mol1.getNumBonds() == mol2.getNumBonds());
 
-    BOOST_CHECK(mol1.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE) == 
-                mol2.getProperty<Base::uint64>(MolecularGraphProperty::HASH_CODE));
+    BOOST_CHECK(calcHashCode(mol1) == calcHashCode(mol2));
 }
 

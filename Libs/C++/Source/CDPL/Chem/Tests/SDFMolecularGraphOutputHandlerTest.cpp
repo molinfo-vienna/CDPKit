@@ -29,14 +29,12 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/JMEMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/SDFMoleculeReader.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataWriter.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SDFMolecularGraphOutputHandlerTest)
