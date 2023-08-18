@@ -219,7 +219,8 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
         .value("XBD_XBA_SCORE_MAX", GRAIL::GRAILDescriptorCalculator::XBD_XBA_SCORE_MAX)
         .value("ES_ENERGY", GRAIL::GRAILDescriptorCalculator::ES_ENERGY)
         .value("ES_ENERGY_SQRD_DIST", GRAIL::GRAILDescriptorCalculator::ES_ENERGY_SQRD_DIST)
-        .value("VDW_ENERGY", GRAIL::GRAILDescriptorCalculator::VDW_ENERGY)
+        .value("VDW_ENERGY_ATT", GRAIL::GRAILDescriptorCalculator::VDW_ENERGY_ATT)
+        .value("VDW_ENERGY_REP", GRAIL::GRAILDescriptorCalculator::VDW_ENERGY_REP)
         .export_values();
 
     cls

@@ -593,7 +593,8 @@ void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vect
     const double RMIN_FACT = std::pow(2, 1.0 / 6);
     const double ALPHA = 1.1;
 
-    double energy = 0.0;
+    double energy_att = 0.0;
+    double energy_rep = 0.0;
     
     for (std::size_t i = 0; i < numLigAtoms; i++) {
         const DoublePair& la_params = ligAtomVdWParams[i];
@@ -610,11 +611,13 @@ void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vect
             double x_ij = RMIN_FACT * std::sqrt(la_params.first * ta_params.first);
             double r_delta = r_ij - x_ij;
 
-            energy += D_ij * (std::exp(-2 * ALPHA * r_delta) - 2 * std::exp(-ALPHA * r_delta));
+            energy_att += -D_ij * 2 * std::exp(-ALPHA * r_delta);
+            energy_rep += D_ij * std::exp(-2 * ALPHA * r_delta);
         }
     }
 
-    descr[idx++] = energy;
+    descr[idx++] = energy_att;
+    descr[idx++] = energy_rep;
 }
 
 void GRAIL::GRAILDescriptorCalculator::getVdWParameters(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, DoublePair& params) const

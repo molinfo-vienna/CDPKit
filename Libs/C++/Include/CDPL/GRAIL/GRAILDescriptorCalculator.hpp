@@ -64,7 +64,7 @@ namespace CDPL
         {
 
           public:
-            static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 176;
+            static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 177;
             static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 31;
 
             typedef std::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
@@ -247,7 +247,8 @@ namespace CDPL
                 XBD_XBA_SCORE_MAX,
                 ES_ENERGY,
                 ES_ENERGY_SQRD_DIST,
-                VDW_ENERGY
+                VDW_ENERGY_ATT,
+                VDW_ENERGY_REP
             };
 
             GRAILDescriptorCalculator();
