@@ -29,13 +29,13 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/JMEReactionOutputHandler.hpp"
-#include "CDPL/Chem/DataFormats.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"
 #include "CDPL/Chem/SMARTSReactionReader.hpp"
-#include "CDPL/Chem/Reaction.hpp"
+#include "CDPL/Chem/BasicReaction.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataWriter.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SMARTSReactionOutputHandlerTest)
@@ -44,13 +44,13 @@ BOOST_AUTO_TEST_CASE(SMARTSReactionOutputHandlerTest)
     using namespace Chem;
     using namespace Base;
 
-    Reaction rxn1;
+    BasicReaction rxn1;
     std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
 
     BOOST_CHECK(ifs);
     BOOST_CHECK(JMEReactionReader(ifs).read(rxn1));
 
-    const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Chem::DataFormat::SMARTS);
+    const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Chem::DataFormat::SMARTS);
 
     BOOST_CHECK(handler);
 
@@ -59,14 +59,41 @@ BOOST_AUTO_TEST_CASE(SMARTSReactionOutputHandlerTest)
     BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByName("smarts") == handler);
     BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("sma") == handler);
 
-    std::ostringstream oss;
+    std::stringstream oss;
 
     BOOST_CHECK(oss);
 
     DataWriter<Reaction>::SharedPointer writer_ptr(handler->createWriter(oss));
 
-    Reaction rxn2;
+    BasicReaction rxn2;
+    
+    for (auto& mol : rxn1)
+        perceiveComponents(mol, false);
 
+    for (auto& mol : rxn1)
+        calcImplicitHydrogenCounts(mol, false);
+
+    for (auto& mol : rxn1)
+        perceiveHybridizationStates(mol, false);
+
+    for (auto& mol : rxn1)
+        perceiveSSSR(mol, false);
+
+    for (auto& mol : rxn1)
+        setRingFlags(mol, false);
+
+    for (auto& mol : rxn1)
+        setAromaticityFlags(mol, false);
+
+    for (auto& mol : rxn1)
+        calcCIPPriorities(mol, false);
+
+    for (auto& mol : rxn1)
+        calcAtomCIPConfigurations(mol, false);
+
+    for (auto& mol : rxn1)
+        calcBondCIPConfigurations(mol, false);
+    
     BOOST_CHECK(writer_ptr);
     BOOST_CHECK(writer_ptr->write(rxn1));
 
@@ -74,9 +101,37 @@ BOOST_AUTO_TEST_CASE(SMARTSReactionOutputHandlerTest)
 
     BOOST_CHECK(iss);
     BOOST_CHECK(SMARTSReactionReader(iss).read(rxn2));
+    
+    for (auto& mol : rxn2)
+        perceiveComponents(mol, false);
 
-    BOOST_CHECK(rxn1.getNumReactants() == rxn2.getNumReactants());
-    BOOST_CHECK(rxn1.getNumAgents() == rxn2.getNumAgents());
-    BOOST_CHECK(rxn1.getNumProducts() == rxn2.getNumProducts());
+    for (auto& mol : rxn2)
+        calcImplicitHydrogenCounts(mol, false);
+
+    for (auto& mol : rxn2)
+        perceiveHybridizationStates(mol, false);
+
+    for (auto& mol : rxn2)
+        perceiveSSSR(mol, false);
+
+    for (auto& mol : rxn2)
+        setRingFlags(mol, false);
+
+    for (auto& mol : rxn2)
+        setAromaticityFlags(mol, false);
+
+    for (auto& mol : rxn2)
+        calcCIPPriorities(mol, false);
+
+    for (auto& mol : rxn2)
+        calcAtomCIPConfigurations(mol, false);
+
+    for (auto& mol : rxn2)
+        calcBondCIPConfigurations(mol, false);
+    
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::REACTANT) == rxn2.getNumComponents(ReactionRole::REACTANT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::AGENT) == rxn2.getNumComponents(ReactionRole::AGENT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::PRODUCT) == rxn2.getNumComponents(ReactionRole::PRODUCT));
+
 }
 

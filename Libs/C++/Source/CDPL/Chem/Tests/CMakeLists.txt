@@ -57,8 +57,8 @@ SET(test-suite_SRCS
     JMEReactionOutputHandlerTest.cpp
     RXNReactionOutputHandlerTest.cpp
     RDFReactionOutputHandlerTest.cpp
-#    SMILESReactionOutputHandlerTest.cpp
-#    SMARTSReactionOutputHandlerTest.cpp
+    SMILESReactionOutputHandlerTest.cpp
+    SMARTSReactionOutputHandlerTest.cpp
 
 #    JMEReactionInputHandlerTest.cpp
 #    RXNReactionInputHandlerTest.cpp

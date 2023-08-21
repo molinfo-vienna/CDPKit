@@ -29,19 +29,18 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/JMEReactionOutputHandler.hpp"
-#include "CDPL/Chem/DataFormats.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"
 #include "CDPL/Chem/SMILESReactionReader.hpp"
-#include "CDPL/Chem/Reaction.hpp"
-#include "CDPL/Chem/ReactionProperties.hpp"
-#include "CDPL/Chem/ControlParameters.hpp"
-#include "CDPL/Chem/AtomPropertyFlags.hpp"
-#include "CDPL/Chem/BondPropertyFlags.hpp"
+#include "CDPL/Chem/BasicReaction.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/ReactionFunctions.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/ReactionRole.hpp"
+#include "CDPL/Chem/AtomPropertyFlag.hpp"
+#include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataWriter.hpp"
-#include "CDPL/Base/ControlParameterList.hpp"
-#include "CDPL/Base/IntTypes.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SMILESReactionOutputHandlerTest)
@@ -50,13 +49,13 @@ BOOST_AUTO_TEST_CASE(SMILESReactionOutputHandlerTest)
     using namespace Chem;
     using namespace Base;
 
-    Reaction rxn1;
+    BasicReaction rxn1;
     std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
 
     BOOST_CHECK(ifs);
     BOOST_CHECK(JMEReactionReader(ifs).read(rxn1));
 
-    const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Chem::DataFormat::SMILES);
+    const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Chem::DataFormat::SMILES);
 
     BOOST_CHECK(handler);
 
@@ -66,19 +65,49 @@ BOOST_AUTO_TEST_CASE(SMILESReactionOutputHandlerTest)
     BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("smi") == handler);
     BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("chemical/x-daylight-smiles") == handler);
 
-    std::ostringstream oss;
+    std::stringstream oss;
 
     BOOST_CHECK(oss);
 
     DataWriter<Reaction>::SharedPointer writer_ptr(handler->createWriter(oss));
 
-    writer_ptr->setParameter(ControlParameter::SMILES_WRITE_ATOM_STEREO, true);
-    writer_ptr->setParameter(ControlParameter::SMILES_WRITE_BOND_STEREO, true);
-    writer_ptr->setParameter(ControlParameter::SMILES_WRITE_RING_BOND_STEREO, true);
-    writer_ptr->setParameter(ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE, std::size_t(3));
+    setSMILESWriteAtomStereoParameter(*writer_ptr, true);
+    setSMILESWriteBondStereoParameter(*writer_ptr, true);
+    setSMILESWriteRingBondStereoParameter(*writer_ptr, true);
+    setSMILESMinStereoBondRingSizeParameter(*writer_ptr, std::size_t(3));
+    
+    BasicReaction rxn2;
 
-    Reaction rxn2;
+    for (auto& mol : rxn1)
+        makeHydrogenDeplete(mol);
+    
+    for (auto& mol : rxn1)
+        perceiveComponents(mol, false);
 
+    for (auto& mol : rxn1)
+        calcImplicitHydrogenCounts(mol, false);
+
+    for (auto& mol : rxn1)
+        perceiveHybridizationStates(mol, false);
+
+    for (auto& mol : rxn1)
+        perceiveSSSR(mol, false);
+
+    for (auto& mol : rxn1)
+        setRingFlags(mol, false);
+
+    for (auto& mol : rxn1)
+        setAromaticityFlags(mol, false);
+
+    for (auto& mol : rxn1)
+        calcCIPPriorities(mol, false);
+
+    for (auto& mol : rxn1)
+        calcAtomCIPConfigurations(mol, false);
+
+    for (auto& mol : rxn1)
+        calcBondCIPConfigurations(mol, false);
+    
     BOOST_CHECK(writer_ptr);
     BOOST_CHECK(writer_ptr->write(rxn1));
 
@@ -87,9 +116,36 @@ BOOST_AUTO_TEST_CASE(SMILESReactionOutputHandlerTest)
     BOOST_CHECK(iss);
     BOOST_CHECK(SMILESReactionReader(iss).read(rxn2));
 
-//    BOOST_MESSAGE(oss.str());
+    for (auto& mol : rxn2)
+        perceiveComponents(mol, false);
 
-    ControlParameterList::SharedPointer cpl(new ControlParameterList());
+    for (auto& mol : rxn2)
+        calcImplicitHydrogenCounts(mol, false);
+
+    for (auto& mol : rxn2)
+        perceiveHybridizationStates(mol, false);
+
+    for (auto& mol : rxn2)
+        perceiveSSSR(mol, false);
+
+    for (auto& mol : rxn2)
+        setRingFlags(mol, false);
+
+    for (auto& mol : rxn2)
+        setAromaticityFlags(mol, false);
+
+    for (auto& mol : rxn2)
+        calcCIPPriorities(mol, false);
+
+    for (auto& mol : rxn2)
+        calcAtomCIPConfigurations(mol, false);
+
+    for (auto& mol : rxn2)
+        calcBondCIPConfigurations(mol, false);
+    
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::REACTANT) == rxn2.getNumComponents(ReactionRole::REACTANT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::AGENT) == rxn2.getNumComponents(ReactionRole::AGENT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::PRODUCT) == rxn2.getNumComponents(ReactionRole::PRODUCT));
 
     unsigned int atom_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT
         | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY;
@@ -97,13 +153,6 @@ BOOST_AUTO_TEST_CASE(SMILESReactionOutputHandlerTest)
     unsigned int bond_flags = BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY 
         | BondPropertyFlag::CONFIGURATION;
 
-    cpl->setParameter(ControlParameter::ATOM_PROPERTY_FLAGS, atom_flags);
-    cpl->setParameter(ControlParameter::BOND_PROPERTY_FLAGS, bond_flags);
-
-    rxn1.setProperty(ReactionProperty::HASH_CODE_PARAMETERS, cpl);
-    rxn2.setProperty(ReactionProperty::HASH_CODE_PARAMETERS, cpl);
-
-    BOOST_CHECK(rxn1.getProperty<Base::uint64>(ReactionProperty::HASH_CODE) == 
-                rxn2.getProperty<Base::uint64>(ReactionProperty::HASH_CODE));
+    BOOST_CHECK(calcHashCode(rxn1, ReactionRole::ALL, atom_flags, bond_flags) == calcHashCode(rxn2, ReactionRole::ALL, atom_flags, bond_flags));
 }
 
