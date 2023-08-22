@@ -63,8 +63,8 @@ SET(test-suite_SRCS
     JMEReactionInputHandlerTest.cpp
     RXNReactionInputHandlerTest.cpp
     RDFReactionInputHandlerTest.cpp
-#    SMILESReactionInputHandlerTest.cpp
-#    SMARTSReactionInputHandlerTest.cpp
+    SMILESReactionInputHandlerTest.cpp
+    SMARTSReactionInputHandlerTest.cpp
 
     MatchConstraintListTest.cpp          # TODO
     MatchExpressionTest.cpp

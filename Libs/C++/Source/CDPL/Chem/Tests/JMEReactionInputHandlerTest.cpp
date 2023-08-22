@@ -35,6 +35,7 @@
 #include "CDPL/Chem/BasicReaction.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
+#include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 
 
