@@ -125,5 +125,9 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('descr_gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
 
     errors |= checkScriptOutput('forcefield_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
-        
+
+    errors |= checkScriptFileOutput('confgen_ensembles', outputFilePath('test.mol2'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2'), '-r', '0.3', '-n', '10', '-e', '10' ])
+    errors |= checkScriptFileOutput('confgen_3d_structs', outputFilePath('test.mol2'),
+                                    [ '-i', testDataFilePath('1ke7_ligands.sdf'), '-o', outputFilePath('test.mol2') ])
     sys.exit(errors)
