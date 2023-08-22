@@ -44,10 +44,10 @@ BOOST_AUTO_TEST_CASE(SMARTSReactionInputHandlerTest)
     using namespace Chem;
     using namespace Base;
 
-    Reaction rxn1;
-    Reaction rxn2;
+    BasicReaction rxn1;
+    BasicReaction rxn2;
 
-    const DataInputHandler<Reaction>* handler = DataIOManager<Reaction>::getInputHandlerByFormat(Chem::DataFormat::SMARTS);
+    const DataInputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getInputHandlerByFormat(Chem::DataFormat::SMARTS);
 
     BOOST_CHECK(handler);
 
@@ -79,8 +79,9 @@ BOOST_AUTO_TEST_CASE(SMARTSReactionInputHandlerTest)
     BOOST_CHECK(reader_ptr);
     BOOST_CHECK(reader_ptr->read(rxn2));
 
-    BOOST_CHECK(rxn1.getNumReactants() == rxn2.getNumReactants());
-    BOOST_CHECK(rxn1.getNumAgents() == rxn2.getNumAgents());
-    BOOST_CHECK(rxn1.getNumProducts() == rxn2.getNumProducts());
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::REACTANT) == rxn2.getNumComponents(ReactionRole::REACTANT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::AGENT) == rxn2.getNumComponents(ReactionRole::AGENT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::PRODUCT) == rxn2.getNumComponents(ReactionRole::PRODUCT));
+
 }
 

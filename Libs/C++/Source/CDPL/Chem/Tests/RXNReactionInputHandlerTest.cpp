@@ -29,15 +29,13 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/RXNReactionInputHandler.hpp"
-#include "CDPL/Chem/DataFormats.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"
 #include "CDPL/Chem/RXNReactionWriter.hpp"
-#include "CDPL/Chem/Reaction.hpp"
-#include "CDPL/Chem/ReactionProperties.hpp"
+#include "CDPL/Chem/BasicReaction.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataReader.hpp"
-#include "CDPL/Base/IntTypes.hpp"
 
 
 BOOST_AUTO_TEST_CASE(RXNReactionInputHandlerTest)
@@ -46,10 +44,10 @@ BOOST_AUTO_TEST_CASE(RXNReactionInputHandlerTest)
     using namespace Chem;
     using namespace Base;
 
-    Reaction rxn1;
-    Reaction rxn2;
+    BasicReaction rxn1;
+    BasicReaction rxn2;
 
-    const DataInputHandler<Reaction>* handler = DataIOManager<Reaction>::getInputHandlerByFormat(Chem::DataFormat::RXN);
+    const DataInputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getInputHandlerByFormat(Chem::DataFormat::RXN);
 
     BOOST_CHECK(handler);
 
@@ -64,8 +62,35 @@ BOOST_AUTO_TEST_CASE(RXNReactionInputHandlerTest)
     BOOST_CHECK(ifs);
 
     BOOST_CHECK(JMEReactionReader(ifs).read(rxn1));
+    
+    for (auto& mol : rxn1)
+        perceiveComponents(mol, false);
 
-    std::ostringstream oss;
+    for (auto& mol : rxn1)
+        calcImplicitHydrogenCounts(mol, false);
+
+    for (auto& mol : rxn1)
+        perceiveHybridizationStates(mol, false);
+
+    for (auto& mol : rxn1)
+        perceiveSSSR(mol, false);
+
+    for (auto& mol : rxn1)
+        setRingFlags(mol, false);
+
+    for (auto& mol : rxn1)
+        setAromaticityFlags(mol, false);
+
+    for (auto& mol : rxn1)
+        calcCIPPriorities(mol, false);
+
+    for (auto& mol : rxn1)
+        calcAtomCIPConfigurations(mol, false);
+
+    for (auto& mol : rxn1)
+        calcBondCIPConfigurations(mol, false);
+    
+    std::stringstream oss;
 
     BOOST_CHECK(oss);
 
@@ -79,11 +104,38 @@ BOOST_AUTO_TEST_CASE(RXNReactionInputHandlerTest)
 
     BOOST_CHECK(reader_ptr);
     BOOST_CHECK(reader_ptr->read(rxn2));
+    
+    for (auto& mol : rxn2)
+        perceiveComponents(mol, false);
 
-    BOOST_CHECK(rxn1.getNumReactants() == rxn2.getNumReactants());
-    BOOST_CHECK(rxn1.getNumAgents() == rxn2.getNumAgents());
-    BOOST_CHECK(rxn1.getNumProducts() == rxn2.getNumProducts());
+    for (auto& mol : rxn2)
+        calcImplicitHydrogenCounts(mol, false);
 
-    BOOST_CHECK(rxn1.getProperty<Base::uint64>(ReactionProperty::HASH_CODE) == rxn2.getProperty<Base::uint64>(ReactionProperty::HASH_CODE));
+    for (auto& mol : rxn2)
+        perceiveHybridizationStates(mol, false);
+
+    for (auto& mol : rxn2)
+        perceiveSSSR(mol, false);
+
+    for (auto& mol : rxn2)
+        setRingFlags(mol, false);
+
+    for (auto& mol : rxn2)
+        setAromaticityFlags(mol, false);
+
+    for (auto& mol : rxn2)
+        calcCIPPriorities(mol, false);
+
+    for (auto& mol : rxn2)
+        calcAtomCIPConfigurations(mol, false);
+
+    for (auto& mol : rxn2)
+        calcBondCIPConfigurations(mol, false);
+    
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::REACTANT) == rxn2.getNumComponents(ReactionRole::REACTANT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::AGENT) == rxn2.getNumComponents(ReactionRole::AGENT));
+    BOOST_CHECK(rxn1.getNumComponents(ReactionRole::PRODUCT) == rxn2.getNumComponents(ReactionRole::PRODUCT));
+
+    BOOST_CHECK(calcHashCode(rxn1) == calcHashCode(rxn2));
 }
 
