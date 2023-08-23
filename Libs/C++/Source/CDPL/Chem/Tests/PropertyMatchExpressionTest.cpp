@@ -28,10 +28,9 @@
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Chem/PropertyMatchExpression.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
-#include "CDPL/Base/PropertyManager.hpp"
-#include "CDPL/Base/PropertyKey.hpp"
+#include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -40,20 +39,20 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
     using namespace CDPL;
     using namespace Chem;
     using namespace Base;
-    using namespace std::placeholders;
     
-    PropertyKey key1 = PropertyManager::allocPropertyKey("key1");
+    const LookupKey key1 = LookupKey::create("key1");
 
-    Molecule mol1, mol2;
+    BasicMolecule mol1, mol2;
 
 //-----
 
-    PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int> expr1("test", key1);
+    PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int> expr1("test",
+                                                                                          [&](const Molecule& mol, const int&) -> const std::string& { return mol.getProperty<std::string>(key1); });
 
     BOOST_CHECK(!expr1.requiresAtomBondMapping());
 
-    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), CalculationFailed);
-    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), CalculationFailed);
+    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), ItemNotFound);
+    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), ItemNotFound);
 
     mol1.setProperty(key1, std::string("test"));
     mol2.setProperty(key1, std::string("te434st"));
@@ -68,15 +67,15 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-    expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>(key1);
+    expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>([&](const Molecule& mol, const int&) -> const std::string& { return mol.getProperty<std::string>(key1); });
 
     mol2.setProperty(key1, std::string("test"));
     mol1.removeProperty(key1);
 
     BOOST_CHECK(!expr1.requiresAtomBondMapping());
 
-    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), CalculationFailed);
-    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), CalculationFailed);
+    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), ItemNotFound);
+    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), ItemNotFound);
 
     mol1.setProperty(key1, std::string("test"));
 
@@ -98,19 +97,18 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-    expr1 =    PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>("test", 
-                                                                                             std::bind(std::bind(&MolecularGraph::getProperty<std::string>, 
-                                                                                                                 _1, std::ref(key1), true), _1, _2));
+    expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>("test", 
+                                                                                            [&](const Molecule& mol, const int&) -> const std::string& { return mol.getProperty<std::string>(key1); });
     mol1.removeProperty(key1);
     mol2.removeProperty(key1);
 
     BOOST_CHECK(!expr1.requiresAtomBondMapping());
 
-    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), CalculationFailed);
-    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), CalculationFailed);
+    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), ItemNotFound);
+    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), ItemNotFound);
 
-    BOOST_CHECK_THROW(expr1(mol2, 0, mol1, 0, 0), CalculationFailed);
-    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 0, AtomBondMapping(), 0)), CalculationFailed);
+    BOOST_CHECK_THROW(expr1(mol2, 0, mol1, 0, 0), ItemNotFound);
+    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 0, AtomBondMapping(), 0)), ItemNotFound);
 
     mol1.setProperty(key1, std::string("test"));
     mol2.setProperty(key1, std::string("te12st"));
@@ -126,16 +124,15 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-    expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>(std::bind(std::bind(&MolecularGraph::getProperty<std::string>, 
-                                                                                                                _1, std::ref(key1), true), _1, _2));
+    expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>([&](const Molecule& mol, const int&) -> const std::string& { return mol.getProperty<std::string>(key1); });
 
     mol2.setProperty(key1, std::string("testx"));
     mol1.removeProperty(key1);
 
     BOOST_CHECK(!expr1.requiresAtomBondMapping());
 
-    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), CalculationFailed);
-    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), CalculationFailed);
+    BOOST_CHECK_THROW(expr1(mol1, 0, mol2, 0, 0), ItemNotFound);
+    BOOST_CHECK_THROW((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol1, 0, mol2, 0, AtomBondMapping(), 0)), ItemNotFound);
 
     mol1.setProperty(key1, std::string("testx"));
 
@@ -157,7 +154,7 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----------------------
 
-    PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule> expr2(5, key1);
+    PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule> expr2(5, [&](const Molecule& mol) -> std::size_t { return mol.getProperty<std::size_t>(key1); });
 
     BOOST_CHECK_THROW(expr2(mol2, mol1, 0), BadCast);
     BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), BadCast);
@@ -176,17 +173,17 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-    expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(5, std::bind(std::bind(&MolecularGraph::getProperty<std::size_t>, 
-                                                                                                          _1, std::ref(key1), true), _1));
+    expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(5,
+                                                                                   [&](const Molecule& mol) -> std::size_t { return mol.getProperty<std::size_t>(key1); });
 
     mol1.removeProperty(key1);
     mol2.removeProperty(key1);
 
-    BOOST_CHECK_THROW(expr2(mol2, mol1, 0), CalculationFailed);
-    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), CalculationFailed);
+    BOOST_CHECK_THROW(expr2(mol2, mol1, 0), ItemNotFound);
+    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), ItemNotFound);
 
-    BOOST_CHECK_THROW(expr2(mol1, mol2, 0), CalculationFailed);
-    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol1, mol2, AtomBondMapping(), 0), CalculationFailed);
+    BOOST_CHECK_THROW(expr2(mol1, mol2, 0), ItemNotFound);
+    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol1, mol2, AtomBondMapping(), 0), ItemNotFound);
 
     mol1.setProperty(key1, std::size_t(5));
     mol2.setProperty(key1, std::size_t(17));
@@ -202,13 +199,13 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-    expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(key1);
+    expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>([&](const Molecule& mol) -> std::size_t { return mol.getProperty<std::size_t>(key1); });
 
     mol1.removeProperty(key1);
     mol2.setProperty(key1, std::size_t(5));
 
-    BOOST_CHECK_THROW(expr2(mol2, mol1, 0), CalculationFailed);
-    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), CalculationFailed);
+    BOOST_CHECK_THROW(expr2(mol2, mol1, 0), ItemNotFound);
+    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), ItemNotFound);
 
     mol1.setProperty(key1, std::size_t(5));
 
@@ -232,14 +229,13 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-    expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(std::bind(std::bind(&MolecularGraph::getProperty<std::size_t>, 
-                                                                                                       _1, std::ref(key1), true), _1));
+    expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>([&](const Molecule& mol) -> std::size_t { return mol.getProperty<std::size_t>(key1); });
 
     mol1.removeProperty(key1);
     mol2.setProperty(key1, std::size_t(6));
 
-    BOOST_CHECK_THROW(expr2(mol2, mol1, 0), CalculationFailed);
-    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), CalculationFailed);
+    BOOST_CHECK_THROW(expr2(mol2, mol1, 0), ItemNotFound);
+    BOOST_CHECK_THROW(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), 0), ItemNotFound);
 
     mol1.setProperty(key1, std::size_t(5));
 

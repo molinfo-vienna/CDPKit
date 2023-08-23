@@ -69,7 +69,7 @@ SET(test-suite_SRCS
     MatchConstraintListTest.cpp          # TODO
     MatchExpressionTest.cpp
     MatchExpressionListTest.cpp
-    #PropertyMatchExpressionTest.cpp
+    PropertyMatchExpressionTest.cpp
     ANDMatchExpressionListTest.cpp
     ORMatchExpressionListTest.cpp
     NOTMatchExpressionTest.cpp
