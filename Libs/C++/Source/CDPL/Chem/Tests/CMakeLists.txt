@@ -133,13 +133,6 @@ SET(test-suite_SRCS
     #MolecularGraphSSSRTest.cpp
     #MolecularGraphRingsTest.cpp
     #MolecularGraphHashCodeTest.cpp
-
-    #MoleculeReactionRoleTest.cpp
-
-    #ReactionComponentCountTest.cpp
-    #ReactionReactantCountTest.cpp
-    #ReactionAgentCountTest.cpp
-    #ReactionProductCountTest.cpp 
     )
 
 SET(CMAKE_BUILD_TYPE "Debug")
