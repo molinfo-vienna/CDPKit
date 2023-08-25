@@ -61,14 +61,14 @@ def main() -> None:
     # create writer for the generated conformer ensembles (format specified by file extension)
     writer = Chem.MolecularGraphWriter(args.out_file) 
 
-    # create and initialize an instance of the ConfGen.ConformerGenerator class which will perform
-    # the actual conformer ensemble generation work
+    # create and initialize an instance of the class ConfGen.ConformerGenerator which
+    # will perform the actual conformer ensemble generation work
     conf_gen = ConfGen.ConformerGenerator()
 
-    conf_gen.settings.timeout = args.max_time * 1000
-    conf_gen.settings.minRMSD = args.min_rmsd
-    conf_gen.settings.energyWindow = args.e_window
-    conf_gen.settings.maxNumOutputConformers = args.max_confs
+    conf_gen.settings.timeout = args.max_time * 1000          # apply the -t argument
+    conf_gen.settings.minRMSD = args.min_rmsd                 # apply the -r argument
+    conf_gen.settings.energyWindow = args.e_window            # apply the -e argument
+    conf_gen.settings.maxNumOutputConformers = args.max_confs # apply the -n argument
 
     # dictionary mapping status codes to human readable strings
     status_to_str = { ConfGen.ReturnCode.UNINITIALIZED                  : 'uninitialized',

@@ -31,7 +31,7 @@ import argparse
 import CDPL.Chem as Chem
 
 
-def main() -> None:
+def filterMolecules() -> None:
     args = parseArgs()
     
     # create reader for input molecules (format specified by file extension)
@@ -48,9 +48,9 @@ def main() -> None:
     except Exception as e:
         sys.exit('Error: parsing of SMARTS pattern failed: %s' % str(e))
 
-    # create and initialize an instance of the Chem.SubstructureSearch class that
-    # carries out the substructure searching task
-    sub_search = Chem.SubstructureSearch(sub_srch_ptn)
+    # create and initialize an instance of the class Chem.SubstructureSearch that
+    # implements the substructure searching algorithm
+    substr_srch = Chem.SubstructureSearch(sub_srch_ptn)
 
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
@@ -73,7 +73,7 @@ def main() -> None:
             try:
                 Chem.initSubstructureSearchTarget(mol, False)
 
-                if sub_srch.mappingExists(mol):
+                if substr_srch.mappingExists(mol):
                     if not args.quiet:
                         print(' -> substructure found, forwarding molecule to output file')
 
@@ -123,4 +123,4 @@ def parseArgs() -> argparse.Namespace:
     return parser.parse_args()
 
 if __name__ == '__main__':
-    main()
+    filterMolecules()

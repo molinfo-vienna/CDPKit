@@ -61,11 +61,11 @@ def main() -> None:
     # export only a single 3D structure (in case of multi-conf. input molecules)
     Chem.setMultiConfExportParameter(writer, False)
     
-    # create and initialize an instance of the ConfGen.StructureGenerator class which will perform
-    # the actual 3D structure generation work
+    # create and initialize an instance of the class ConfGen.StructureGenerator which will
+    # perform the actual 3D structure generation work
     struct_gen = ConfGen.StructureGenerator()
 
-    struct_gen.settings.timeout = args.max_time * 1000
+    struct_gen.settings.timeout = args.max_time * 1000 # apply the -t argument
 
     # dictionary mapping status codes to human readable strings
     status_to_str = { ConfGen.ReturnCode.UNINITIALIZED                  : 'uninitialized',
