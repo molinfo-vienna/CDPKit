@@ -42,7 +42,7 @@ For an installation of CDPKit from source please follow the steps below:
 - sqlite-devel V3 (optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
-- sphinxcontrib-bibtex (optional)
+- sphinxcontrib.bibtex (optional)
 - doxygen (V >= 1.8.5, optional)
 
 **Python Environment**: Ensure you have a working Python environment. CDPKit is primarily used with Python, so make sure you have Python 3.x installed on your system.

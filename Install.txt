@@ -13,7 +13,7 @@ have to be installed on the build host:
 - sqlite-devel V3 (optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
-- sphinxcontrib-bibtex (optional)
+- sphinxcontrib.bibtex (optional)
 - doxygen (V >= 1.8.5, optional)
 
 CDPKit requires CMake V3.17 or higher for generating 
