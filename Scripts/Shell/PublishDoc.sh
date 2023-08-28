@@ -23,6 +23,11 @@
 # Boston, MA 02111-1307, USA.
 ##
 
+if [[ $# -ne 2 ]]; then
+    echo "Usage: PublishDoc.sh <CDPKit build dir> <Output dir within local CDPKit-Doc repository copy>" >&2
+    exit 2
+fi
+
 cd $1
 make doc
 
