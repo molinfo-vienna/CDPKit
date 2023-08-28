@@ -59,7 +59,8 @@ release = version
 # ones.
 extensions = [
     'sphinx_rtd_theme',
-    'sphinxcontrib.bibtex'
+    'sphinxcontrib.bibtex',
+    'docs_versions_menu'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -107,3 +108,7 @@ html_css_files = [
 bibtex_bibfiles = ['references.bib']
 bibtex_default_style = 'unsrt'
 bibtex_reference_style = 'label'
+
+docs_versions_menu_conf = {
+    'github_project_url': 'https://github.com/molinfo-vienna/CDPKit'
+}
