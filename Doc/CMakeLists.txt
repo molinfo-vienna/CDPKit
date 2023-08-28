@@ -28,7 +28,9 @@ ENDIF(DOXYGEN_EXECUTABLE)
 IF(SPHINX_FOUND)
   ADD_SUBDIRECTORY(Sphinx)
 
-  ADD_CUSTOM_TARGET(doc ${CMAKE_COMMAND} -E copy_directory
+  ADD_CUSTOM_TARGET(doc
+    ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
+    COMMAND ${CMAKE_COMMAND} -E rename
     "${CMAKE_CURRENT_BINARY_DIR}/Sphinx/html" "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMENT "-- Generating CDPKit documentation HTML pages...")
 
@@ -36,11 +38,11 @@ IF(SPHINX_FOUND)
   
   IF(DOXYGEN_EXECUTABLE)
     ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy_directory
-      "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cxx_api")
+      COMMAND ${CMAKE_COMMAND} -E rename
+      "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/c++_api")
 
     ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy_directory
+      COMMAND ${CMAKE_COMMAND} -E rename
       "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/python_api")
 
     ADD_DEPENDENCIES(doc c++-api-doc python-api-doc)

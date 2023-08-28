@@ -36,15 +36,17 @@ ADD_CUSTOM_COMMAND(OUTPUT cxx_api_doc.db
   COMMENT "-- Extracting CDPL C++ API documentation blocks...")
 
 ADD_CUSTOM_TARGET(gen-python-api-doc-sources
-  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/GenDocSourceFiles.cmake"
+  ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/GenDocSourceFiles.cmake"
   COMMENT "-- Generating CDPL Python API documentation source files..."
   DEPENDS cxx_api_doc.db)
 
 ADD_CUSTOM_TARGET(copy-python-api-doc-sources
-  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake"
+  ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake"
   COMMENT "-- Copying CDPL Python API documentation source files...")
 
-ADD_CUSTOM_TARGET(python-api-doc "${DOXYGEN_EXECUTABLE}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+ADD_CUSTOM_TARGET(python-api-doc
+  ${CMAKE_COMMAND} -E rm -r -f "${CMAKE_CURRENT_BINARY_DIR}/html"
+  COMMAND "${DOXYGEN_EXECUTABLE}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
   COMMENT "-- Generating CDPL Python API documentation HTML files...")
 ADD_DEPENDENCIES(python-api-doc copy-python-api-doc-sources)
 

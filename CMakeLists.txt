@@ -350,10 +350,12 @@ CONFIGURE_FILE("${CDPL_INCLUDE_DIR}/CDPL/Config.hpp.in" "${CDPL_INCLUDE_DIR}/CDP
 CONFIGURE_FILE("${CDPL_INCLUDE_DIR}/CDPL/Version.hpp.in" "${CDPL_INCLUDE_DIR}/CDPL/Version.hpp") 
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/GenerateBuildInfoHeader.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake" @ONLY)
-ADD_CUSTOM_TARGET(gen-build-info-header ALL "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake")
+ADD_CUSTOM_TARGET(gen-build-info-header ALL
+  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/GenerateBuildInfoHeader.cmake")
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/CMakeUninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake" @ONLY)
-ADD_CUSTOM_TARGET(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake")
+ADD_CUSTOM_TARGET(uninstall
+  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/CMakeUninstall.cmake")
 
 INCLUDE_DIRECTORIES("${CDPL_INCLUDE_DIR}" "${Boost_INCLUDE_DIR}")
 
