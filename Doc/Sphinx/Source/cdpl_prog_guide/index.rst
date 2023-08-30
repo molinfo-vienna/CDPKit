@@ -1,4 +1,0 @@
-CDPL Programming Guide
-======================
-
-TODO

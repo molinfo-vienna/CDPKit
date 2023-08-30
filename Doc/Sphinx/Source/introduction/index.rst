@@ -1,30 +1,16 @@
 Introduction
 ============
 
-The CDPKit is an open-source software toolkit for cheminformatics, which stands for chemical informatics. 
-It is widely used in the field of computational chemistry and drug discovery. 
-CDPKit provides a wide range of functionality for handling and analyzing chemical structures, 
-including molecule representation, substructure searching, molecular fingerprinting, molecular visualization, and property prediction.
+About
+-----
 
-At its core, CDPKit allows scientists to manipulate and analyze molecules and chemical reactions using computer algorithms. 
-It provides a set of programming tools and libraries that enable researchers to work with molecular data in a systematic and efficient manner. 
-CDPKit supports a variety of chemical file formats, such as SDF, MOL, and SMILES, allowing seamless integration with other software and databases.
+The *Chemical Data Processing Toolkit* (CDPKit) is an open-source cheminformatics software toolkit implemented in C++. In addition to the C++ API a Python-interfacing layer is provided that allows to use all of CDPKit's functionality from Python scripts.
+CDPKit features a high-quality and well-tested modular implementation of basic functionality typically required by any higher-level software application in the field of cheminformatics. 
+This includes data structures for the representation and analysis of chemical structures and reactions, routines for the I/O of small molecule, macromolecular and reaction data in different file formats (MDL Mol, SDF, Rxn, RDF, Mol2, PDB, MMTF, SMILES, SMARTS, etc.), functionality for ring and aromaticity perception, pharmacophore generation, substructure searching, max. common substructure searching, molecular fingerprinting, molecule fragment generation (RECAP :cite:`doi:10.1021/ci970429i`, BRICS :cite:`https://doi.org/10.1002/cmdc.200800178`), 2D structure layout and visualization, 3D structure and conformer generation :cite:`doi:10.1021/acs.jcim.3c00563`, physicochemical property prediction, and so on.
 
-CDPKit offers a rich set of features for molecular representation and characterization. It provides methods for generating molecular fingerprints, 
-which are numerical representations of molecular structures used for similarity searching and machine learning. CDPKit also offers functionality for 
-calculating molecular descriptors, which are quantitative measures of molecular properties, such as size, shape, and chemical composition.
+At its core, CDPKit provides a set of command line tools and software libraries (CDPL) that enable researchers to work with molecular data in a systematic and efficient manner, allow a seamless integration with other software and databases, and to develop their own C++ or Python cheminformatics software applications.
 
-One of the key strengths of CDPKit is its ability to perform substructure searching. Given a query molecule or a substructure pattern, 
-CDPKit can efficiently search large chemical databases to find molecules that contain the specified substructure. 
-This capability is particularly useful in drug discovery, where scientists often need to find compounds that interact with specific target proteins or enzymes.
+CDPKit integrates especially well with machine learning and data mining libraries, enabling scientists to build predictive models for various molecular 
+properties. This makes it a valuable toolkit for developing software in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
+and other properties of potential drug candidates. An integration example can be found in the source code of the software described in :cite:t:`molecules26206185`.
 
-CDPKit also supports the visualization of molecular structures and properties. It provides methods for generating 2D and 3D molecular depictions, 
-allowing scientists to visualize and explore the spatial arrangement of atoms and bonds within a molecule. This visualization capability aids in 
-understanding the structure-activity relationships and rationalizing the behavior of chemical compounds.
-
-Furthermore, CDPKit integrates with various machine learning and data mining libraries, enabling scientists to build predictive models for molecular 
-properties. This makes it a valuable tool in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
-and other properties of potential drug candidates.
-
-In summary, CDPKit is a powerful and versatile toolkit for cheminformatics, offering a comprehensive set of tools and libraries for molecular manipulation, analysis, 
-and property prediction. Its wide range of functionality makes it an indispensable resource for scientists working in the field of computational chemistry and drug discovery.

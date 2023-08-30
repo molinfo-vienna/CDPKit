@@ -14,7 +14,7 @@
 
 CDPKit is an open-source cheminformatics software toolkit implemented in C++. In addition to the C++ API a Python-interfacing layer is provided that allows to use all of CDPKit's functionality
 from Python scripts. CDPKit features a high-quality and well-tested modular implementation of basic functionality typically required by any higher-level software application in the field of cheminformatics. 
-This includes data structures for the representation and analysis of chemical structures, routines for the I/O of small molecule and macromolecular data in different file formats (MDL Mol and SDF, Mol2, PDB, MMTF, SMILES, etc.), ring and aromaticity perception, pharmacophore generation, substructure searching, molecular fingerprinting, molecule fragment generation (RECAP, BRICS), 2D structure layout and visualization, 3D structure and conformer generation ([CONFORT](https://www.researchsquare.com/article/rs-1597257/v1)), physicochemical property prediction, and so on.
+This includes data structures for the representation and analysis of chemical structures, routines for the I/O of small molecule and macromolecular data in different file formats (MDL Mol and SDF, Mol2, PDB, MMTF, SMILES, etc.), ring and aromaticity perception, pharmacophore generation, substructure searching, molecular fingerprinting, molecule fragment generation (RECAP, BRICS), 2D structure layout and visualization, 3D structure and conformer generation ([CONFORGE](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00563)), physicochemical property prediction, and so on.
 
 At its core, CDPKit delivers a set of command line tools and software libraries (CDPL) that enable researchers to work with molecular data in a systematic and efficient manner, allowing seamless integration with other software and databases.
 
@@ -188,7 +188,7 @@ CDPKit offers a vast range of functionality beyond the basic usage example shown
 
 To learn more about CDPKit and explore its features in detail, refer to the official documentation and additional resources:
 
-- **CDPKit Documentation**: Visit the [CDPKit documentation](http://a7srv2.pch.univie.ac.at/cdpkit/getting_started/index.html#getting-started) for comprehensive information, tutorials, and examples (currently for UniVie staff only).
+- **CDPKit Documentation**: Visit the [CDPKit documentation](https://molinfo-vienna.github.io/CDPKit-Doc) for comprehensive information, tutorials, and examples.
 
 - **CDPKit GitHub Repository**: Check out the [CDPKit GitHub repository](https://github.com/molinfo-vienna/CDPKit) for source code, issue tracking, and community support.
 
