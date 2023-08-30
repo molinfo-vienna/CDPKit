@@ -445,12 +445,12 @@ Chem::Fragment& Chem::Fragment::operator-=(const MolecularGraph& molgraph)
         return *this;
     }
 
+    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
+                  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this, _1));
+
     std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
                   std::bind(static_cast<bool (Fragment::*)(const Atom&)>(&Fragment::removeAtom), this, _1));
 
-    std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
-                  std::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this, _1));
-    
     return *this;
 }
 

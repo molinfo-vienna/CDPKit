@@ -440,15 +440,6 @@ void Chem::BasicMolecule::remove(const MolecularGraph& molgraph)
         return;
     }
     
-    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-        const Atom& atom = *it;
-
-        if (!containsAtom(atom))
-            continue;
-
-        removeAtom(atom.getIndex());
-    }
-
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
         const Bond& bond = *it;
 
@@ -456,6 +447,15 @@ void Chem::BasicMolecule::remove(const MolecularGraph& molgraph)
             continue;
 
         removeBond(bond.getIndex());
+    }
+    
+    for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+        const Atom& atom = *it;
+
+        if (!containsAtom(atom))
+            continue;
+
+        removeAtom(atom.getIndex());
     }
 }
 
