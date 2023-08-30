@@ -14,3 +14,20 @@ CDPKit integrates especially well with machine learning and data mining librarie
 properties. This makes it a valuable toolkit for developing software in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
 and other properties of potential drug candidates. An integration example can be found in the source code of the software described in :cite:t:`molecules26206185`.
 
+Licensing
+---------
+
+Software Projects
+-----------------
+
+Scientific Publications
+-----------------------
+
+How to Cite
+-----------
+
+People
+------
+
+- `Thomas Seidel <https://cheminfo.univie.ac.at/people/senior-scientists/thomas-seidel>`__ (project founder, main developer)
+- `Oliver Wieder <https://cheminfo.univie.ac.at/people/post-doctoral-researchers/oliver-wieder>`__ (documentation)

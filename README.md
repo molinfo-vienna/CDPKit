@@ -188,11 +188,11 @@ CDPKit offers a vast range of functionality beyond the basic usage example shown
 
 To learn more about CDPKit and explore its features in detail, refer to the official documentation and additional resources:
 
-- **CDPKit Documentation**: Visit the [CDPKit documentation](https://molinfo-vienna.github.io/CDPKit-Doc) for comprehensive information, tutorials, and examples.
+- **CDPKit Documentation**: Visit the [CDPKit documentation](https://cdpkit.org) for comprehensive information, tutorials, and examples.
 
 - **CDPKit GitHub Repository**: Check out the [CDPKit GitHub repository](https://github.com/molinfo-vienna/CDPKit) for source code, issue tracking, and community support.
 
-- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](http://a7srv2.pch.univie.ac.at/cdpkit/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
+- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/master/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
 - **CDPKit Conformer Generator**: Have a look at the [CONFORGE](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00563) paper for detailed information about the integrated high-quality conformer generator.
 
