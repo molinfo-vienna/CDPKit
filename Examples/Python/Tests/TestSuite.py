@@ -102,6 +102,8 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('chem_sd_proc', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('chem_chembl_preproc', outputFilePath('chem_chembl_preproc.sdf'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_chembl_preproc.sdf') ])
+    errors |= checkScriptFileOutput('chem_prot_phys_cond', outputFilePath('chem_prot_phys_cond.smi'),
+                                    [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_prot_phys_cond.smi') ])
     errors |= checkScriptFileOutput('chem_substruct_filter', outputFilePath('chem_substruct_filter.smi'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_substruct_filter.smi'),
                                       '-p', 'c1ccccc1' ])
