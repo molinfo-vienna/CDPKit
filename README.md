@@ -4,11 +4,9 @@
 **[Installation from source](#installation)**<br>
 **[Installation via pip](#installation-via-pip-python-bindings-only)**<br>
 **[Generating CDPKit Documentation](#generating-cdpkit-documentation)**<br>
-**[CDPKit Website](#cdpkit-website)**<br>
 **[Basic Usage](#basic-usage)**<br>
 **[Further Exploration](#further-exploration)**<br>
 **[Documentation and Resources](#documentation-and-resources)**<br>
-
 
 # About
 
@@ -43,6 +41,7 @@ For an installation of CDPKit from source please follow the steps below:
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
 - sphinxcontrib.bibtex (optional)
+- docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
 
 **Python Environment**: Ensure you have a working Python environment. CDPKit is primarily used with Python, so make sure you have Python 3.x installed on your system.
@@ -111,37 +110,6 @@ If all prerequisites are fulfilled
 ```
 
 should successfully build the CDPKit documentation pages which can then be found in `<BUILD-DIR>/Doc/html`.
-
-### CDPKit Website 
-A dedicated CDPKit website with more elaborate documentation and tutorials will be available soon (end of September).
-In the meantime you can access it via `<BUILD-DIR>/Doc/html`.
-There, under the link `CDPL Python-API` you can find an overview of the currently provided classes and functions.
-You can also access the `CDPL Python Cookbook` there, which is a collection of stand alone scripts of common use cases, including
-
-- Processing of Chemical Data
-    - Input and Output
-    - Fragmentation and Extraction of Substructures
-    - Molecule Standardization and Curation
-
-- Pharmacophore Generation and Processing
-    - Plain Molecule Pharmacophores
-    - Ligand-Receptor Interaction Pharmacophores
-    - Retrieving Feature Properties
-    - Molecule to Reference Pharmacophore Alignment
-
-- Calculation of Atom and Bond Properties
-    - Connectivity Properties
-    - Chemical Element Properties
-    - Classification Properties
-    - Partial Charges and other Electronic Properties
-    - Physicochemical Properties
-
-- Calculation of Molecule and Pharmacophore Descriptors
-    - Extended Connectivity Fingerprints (ECFPs)
-    - FAME Atom Environment Fingerprints
-
-- Force Field Calculations
-    - MMFF94 Atom Charges
 
 ### Basic Usage
 

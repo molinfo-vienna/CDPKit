@@ -1,6 +1,8 @@
 Introduction
 ============
 
+.. index:: About
+
 About
 -----
 
@@ -14,18 +16,51 @@ CDPKit integrates especially well with machine learning and data mining librarie
 properties. This makes it a valuable toolkit for developing software in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
 and other properties of potential drug candidates. An integration example can be found in the source code of the software described in :cite:t:`molecules26206185`.
 
+.. index:: License
+
 Licensing
 ---------
 
-Software Projects
------------------
+The CDPKit source code is released under the terms of the `GNU Lesser General Public License (LGPL) V2.1-or-later <https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html>`_.
+CDPKit documentation is licensed under the terms of the `GNU Free Documentation License (GFDL) V1.2-or-later <https://www.gnu.org/licenses/old-licenses/fdl-1.2.en.html>`_.
 
-Scientific Publications
+.. index:: Related Software
+
+Related software projects
+-------------------------
+
+.. index:: Publications
+           
+Scientific publications
 -----------------------
 
-How to Cite
+.. bibliography::
+   :list: bullet
+   :filter: False
+
+   doi:10.1021/acs.jcim.3c00563
+   molecules26206185
+   doi:10.1021/acs.jcim.2c00814
+   ph15091122
+   Kohlbacher2021
+   doi:10.1021/acs.jctc.8b00495
+   doi:10.1021/acs.jcim.6b00674
+
+.. index:: Citing
+           
+How to cite
 -----------
 
+* Source code:
+  
+  Thomas Seidel, *Chemical Data Processing Toolkit source code repository*, https://github.com/molinfo-vienna/CDPKit
+  
+* Documentation:
+  
+  Thomas Seidel, Oliver Wieder, *Chemical Data Processing Toolkit documentation pages*, https://cdpkit.org
+
+.. index:: People, Authors
+           
 People
 ------
 
