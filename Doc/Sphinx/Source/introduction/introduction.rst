@@ -29,6 +29,8 @@ CDPKit documentation is licensed under the terms of the `GNU Free Documentation 
 Related software projects
 -------------------------
 
+- `Python scripts for the generation of GRAIL datasets <https://github.com/molinfo-vienna/GRAIL-Scripts>`_ :cite:`doi:10.1021/acs.jctc.8b00495`
+
 .. index:: Publications
            
 Scientific publications
@@ -51,12 +53,10 @@ Scientific publications
 How to cite
 -----------
 
-* Source code:
-  
+Source code:
   Thomas Seidel, *Chemical Data Processing Toolkit source code repository*, https://github.com/molinfo-vienna/CDPKit
   
-* Documentation:
-  
+Documentation:
   Thomas Seidel, Oliver Wieder, *Chemical Data Processing Toolkit documentation pages*, https://cdpkit.org
 
 .. index:: People, Authors

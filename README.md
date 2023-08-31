@@ -51,23 +51,23 @@ For an installation of CDPKit from source please follow the steps below:
 The makefiles are generated using cmake as follows (assuming a build on a Linux host):
 
 ```console
-$ mkdir <BUILD-DIR>
-$ cd <BUILD-DIR>
-$ cmake <CDPKIT-SOURCE-DIR>
+mkdir <BUILD-DIR>
+cd <BUILD-DIR>
+cmake <CDPKIT-SOURCE-DIR>
 ```
 
 If the makefiles have been generated without errors, invoking
 'make' from within `<BUILD-DIR>` starts the actual build process: 
 
 ```console
-$ make
+make
 ```
 
 Building CDPKit should proceed without any issues on current Linux systems.
 If the build finished without errors
 
 ```console
-$ make install
+make install
 ```
 
 will install CDPKit in the `/opt` directory of your system (a different install
@@ -87,14 +87,14 @@ and install the CDPL Python bindings. Please follow the steps below:
 
 2. **Install CDPL Python bindings via `pip` under specification of the Github repository URL**
 ```console
-$ pip install git+https://github.com/molinfo-vienna/CDPKit.git
+pip install git+https://github.com/molinfo-vienna/CDPKit.git
 ```
 
 2. **Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources**
 
 Change your CWD to the CDPKit source code folder and then from within the folder run:
 ```console
-$ pip install .
+pip install .
 ```
 
 ### Generating CDPKit Documentation
@@ -106,7 +106,7 @@ doxygen has to be installed.
 If all prerequisites are fulfilled
 
 ```console
-$ make doc
+make doc
 ```
 
 should successfully build the CDPKit documentation pages which can then be found in `<BUILD-DIR>/Doc/html`.
