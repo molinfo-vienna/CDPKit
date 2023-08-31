@@ -37,7 +37,7 @@ cp -r $1/Doc/html $2
 cd $2/..
 docs-versions-menu --no-downloads-file --default-branch master
 
-for i in `find . -name "docs-versions-menu.js"`; do sed -e "s/github\.io/cdpkit\.org/g" -i $i; done
+for i in `find . -name "docs-versions-menu.js"`; do cp docs-versions-menu-cdpkit.js $i; done
 
 git add -A
 git commit -a -m "Documentation update"
