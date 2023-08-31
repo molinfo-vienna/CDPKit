@@ -77,7 +77,7 @@ def filterMolecules() -> None:
                     if not args.quiet:
                         print(' -> substructure found, forwarding molecule to output file')
 
-                    # output the input molecule                 
+                    # output the matched molecule                 
                     if not writer.write(mol):   
                         sys.exit('Error: output of molecule failed')
 
