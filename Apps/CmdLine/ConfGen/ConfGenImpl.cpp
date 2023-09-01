@@ -452,7 +452,7 @@ ConfGenImpl::ConfGenImpl():
 
 const char* ConfGenImpl::getProgName() const
 {
-    return "ConfGen";
+    return "Conforge";
 }
 
 const char* ConfGenImpl::getProgCopyright() const
