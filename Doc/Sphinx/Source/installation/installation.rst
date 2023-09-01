@@ -10,7 +10,7 @@ Installation from source
 
 To install CDPKit from source, follow the steps outlined below:
 
-Prerequisites and Dependencies
+Prerequisites and dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Mandatory
@@ -34,10 +34,10 @@ Prerequisites and Dependencies
 
    Ensure you have a working Python environment. CDPKit is primarily used with Python, so ensure Python 3.x is installed on your system.
 
-Building and Installing CDPKit
+Building and installing CDPKit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Generate the makefiles using cmake:
+Generate the makefiles using :program:`cmake`:
 
 .. code-block:: bash
 
@@ -57,14 +57,14 @@ After a successful build:
 
    make install
 
-This will install CDPKit in the ``/opt`` directory. To specify a different installation location, use ``-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>`` with the :program:`cmake` command.
+This will install CDPKit in the ``/opt`` directory. To specify a different installation location, provide `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` as argument of the :program:`cmake` command.
 
 Installation via :program:`pip` (CDPL Python bindings only)
 -----------------------------------------------------------
 
 Using :program:`pip` will compile the sources on-the-fly (this may take some time) to build and install the CDPL Python bindings.
 
-Prerequisites and Dependencies
+Prerequisites and dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Mandatory
