@@ -32,7 +32,7 @@ iii) using the `pip` package manager (installs CDPL Python bindings only).
 #### Installation from source
 For an installation of CDPKit from source please follow the steps below:
 
-Build Requirements and Dependencies
+*Build Requirements and Dependencies*
 - C++11 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
 - boost-devel (V >= 1.63, mandatory)
@@ -46,7 +46,7 @@ Build Requirements and Dependencies
 - docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
 
-**Build and Install CDPKit**
+*Build and Install CDPKit*
 
 The makefiles are generated using `cmake` as follows (assuming a build on a Linux host):
 
@@ -74,7 +74,7 @@ will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
-**Direct installation**
+*Direct installation*
 To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
 
 ```console
@@ -92,12 +92,13 @@ Build Requirements and Dependencies
 - cairo-devel (V >= 1.14, optional)
 - sqlite-devel (V3, optional)
 
-**Install CDPL Python bindings via `pip` under specification of the Github repository URL**
+*Install CDPL Python bindings via `pip` under specification of the Github repository URL*
+
 ```console
 $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
 ```
 
-**Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources**
+*Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources*
 
 Change your CWD to the CDPKit source code folder and then from within the folder run
 
