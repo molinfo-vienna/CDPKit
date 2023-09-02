@@ -71,7 +71,7 @@ $ make install
 will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
-*Generating CDPKit documentation*
+*Generating CDPKit documentation (optional)x*
 
 For a successful build of the CDPKit documentation pages, `sphinx-build` and the Sphinx extensions `sphinx-rtd-themes`, `sphinxcontrib.bibtex`,
 and `docs-versions-menu` need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
