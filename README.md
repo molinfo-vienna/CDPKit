@@ -27,7 +27,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 ### Installation
 Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
 on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) build CDPKit from source and
-iii) the `pip` package manager (installs CDPL Python bindings only).
+iii) using the `pip` package manager (installs CDPL Python bindings only).
 
 #### Installation from source
 For an installation of CDPKit from source please follow the steps below:
@@ -52,23 +52,23 @@ For an installation of CDPKit from source please follow the steps below:
 
 The makefiles are generated using cmake as follows (assuming a build on a Linux host):
 
-```bash
+```console
 $ mkdir <BUILD-DIR>
 $ cd <BUILD-DIR>
 $ cmake <CDPKIT-SOURCE-DIR>
 ```
 
 If the makefiles have been generated without errors, invoking
-'make' from within `<BUILD-DIR>` starts the actual build process: 
+`make` from within `<BUILD-DIR>` starts the actual build process: 
 
-```bash
+```console
 $ make
 ```
 
 Building CDPKit should proceed without any issues on current Linux systems.
 If the build finished without errors
 
-```bash
+```console
 $ make install
 ```
 
@@ -76,7 +76,13 @@ will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
-`pip` will perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
+To install the CDPL Python bindings directly from PyPI type:
+
+```console
+$ pip install cdpkit
+```
+
+`pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
 and install the CDPL Python bindings. Please follow the steps below:
 
 **Build Requirements and Dependencies**
@@ -88,14 +94,14 @@ and install the CDPL Python bindings. Please follow the steps below:
 - sqlite-devel V3 (optional)
 
 **Install CDPL Python bindings via `pip` under specification of the Github repository URL**
-```bash
+```console
 $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
 ```
 
 **Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources**
 
 Change your CWD to the CDPKit source code folder and then from within the folder run:
-```bash
+```console
 $ pip install .
 ```
 
@@ -107,7 +113,7 @@ doxygen has to be installed.
 
 If all prerequisites are fulfilled
 
-```bash
+```console
 $ make doc
 ```
 
