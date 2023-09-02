@@ -25,14 +25,14 @@ and other properties of potential drug candidates. An example of the integration
 This short guide will help you get started with CDPKit and introduce you to some of its key features.
 
 ### Installation
+
 Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
 on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) installation after building CDPKit from source and
 iii) using the `pip` package manager (installs CDPL Python bindings only).
 
 #### Installation from source
-For an installation of CDPKit from source please follow the steps below:
 
-*Build Requirements and Dependencies*
+Build requirements and dependencies
 - C++11 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
 - boost-devel (V >= 1.63, mandatory)
@@ -46,7 +46,7 @@ For an installation of CDPKit from source please follow the steps below:
 - docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
 
-*Build and Install CDPKit*
+*Build and install CDPKit*
 
 The makefiles are generated using `cmake` as follows (assuming a build on a Linux host):
 
@@ -73,42 +73,7 @@ $ make install
 will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
-#### Installation via the `pip` command (installs CDPL Python bindings only)
-
-*Direct installation*
-
-To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
-
-```console
-$ pip install cdpkit
-```
-
-`pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
-and install the CDPL Python bindings. Please follow the steps below:
-
-*Build Requirements and Dependencies*
-- C++11 compliant compiler (mandatory)
-- boost-devel (V >= 1.63, mandatory)
-- python-devel and Python interpreter (V >= 3.6, mandatory)
-- Qt5-devel (optional)
-- cairo-devel (V >= 1.14, optional)
-- sqlite-devel (V3, optional)
-
-*Install CDPL Python bindings via `pip` under specification of the Github repository URL*
-
-```console
-$ pip install git+https://github.com/molinfo-vienna/CDPKit.git
-```
-
-*Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources*
-
-Change your CWD to the CDPKit source code folder and then from within the folder run
-
-```console
-$ pip install .
-```
-
-### Generating CDPKit Documentation
+*Generating CDPKit documentation*
 
 For a successful build of the CDPKit documentation pages, `sphinx-build` and the Sphinx extensions `sphinx-rtd-themes`, `sphinxcontrib.bibtex`,
 and `docs-versions-menu` need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
@@ -121,6 +86,43 @@ $ make doc
 ```
 
 should successfully build the CDPKit documentation pages which can then be found in `<BUILD-DIR>/Doc/html`.
+
+#### Installation via the `pip` Command (CDPL Python bindings only)
+
+*Direct installation*
+
+To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
+
+```console
+$ pip install cdpkit
+```
+
+*Installation from sources*
+
+`pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
+and install the CDPL Python bindings.
+
+Build requirements and dependencies
+- C++11 compliant compiler (mandatory)
+- boost-devel (V >= 1.63, mandatory)
+- python-devel and Python interpreter (V >= 3.6, mandatory)
+- Qt5-devel (optional)
+- cairo-devel (V >= 1.14, optional)
+- sqlite-devel (V3, optional)
+
+Installation under specification of the Github repository URL:
+
+```console
+$ pip install git+https://github.com/molinfo-vienna/CDPKit.git
+```
+
+Installation under specification of a local directory containing the CDPKit sources:
+
+Change your CWD to the CDPKit source code folder and then from within the folder run
+
+```console
+$ pip install .
+```
 
 ### Basic Usage
 
