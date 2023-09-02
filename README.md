@@ -32,7 +32,7 @@ iii) using the `pip` package manager (installs CDPL Python bindings only).
 #### Installation from source
 For an installation of CDPKit from source please follow the steps below:
 
-**Build Requirements and Dependencies**
+Build Requirements and Dependencies
 - C++11 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
 - boost-devel (V >= 1.63, mandatory)
@@ -84,7 +84,7 @@ $ pip install cdpkit
 `pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
 and install the CDPL Python bindings. Please follow the steps below:
 
-**Build Requirements and Dependencies**
+Build Requirements and Dependencies
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
