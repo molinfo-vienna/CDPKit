@@ -25,12 +25,14 @@ and other properties of potential drug candidates. An example of the integration
 This short guide will help you get started with CDPKit and introduce you to some of its key features.
 
 ### Installation
-Currently, CDPKit can be install in two ways. The first one is to build it from source and the second one is to use the pip package manager (CDPL Python bindings only).
+Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
+on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) build CDPKit from source and
+iii) the `pip` package manager (installs CDPL Python bindings only).
 
 #### Installation from source
 For an installation of CDPKit from source please follow the steps below:
 
-1. **Build Requirements and Dependencies**
+**Build Requirements and Dependencies**
 - C++11 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
 - boost-devel (V >= 1.63, mandatory)
@@ -46,38 +48,38 @@ For an installation of CDPKit from source please follow the steps below:
 
 **Python Environment**: Ensure you have a working Python environment. CDPKit is primarily used with Python, so make sure you have Python 3.x installed on your system.
 
-2. **Build and Install CDPKit**
+**Build and Install CDPKit**
 
 The makefiles are generated using cmake as follows (assuming a build on a Linux host):
 
-```console
-mkdir <BUILD-DIR>
-cd <BUILD-DIR>
-cmake <CDPKIT-SOURCE-DIR>
+```bash
+$ mkdir <BUILD-DIR>
+$ cd <BUILD-DIR>
+$ cmake <CDPKIT-SOURCE-DIR>
 ```
 
 If the makefiles have been generated without errors, invoking
 'make' from within `<BUILD-DIR>` starts the actual build process: 
 
-```console
-make
+```bash
+$ make
 ```
 
 Building CDPKit should proceed without any issues on current Linux systems.
 If the build finished without errors
 
-```console
-make install
+```bash
+$ make install
 ```
 
 will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
-`pip` will perform an on-the-fly compilation of the sources (may take some time) to build
+`pip` will perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
 and install the CDPL Python bindings. Please follow the steps below:
 
-1. **Build Requirements and Dependencies**
+**Build Requirements and Dependencies**
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
@@ -85,28 +87,28 @@ and install the CDPL Python bindings. Please follow the steps below:
 - cairo-devel (V >= 1.14, optional)
 - sqlite-devel V3 (optional)
 
-2. **Install CDPL Python bindings via `pip` under specification of the Github repository URL**
-```console
-pip install git+https://github.com/molinfo-vienna/CDPKit.git
+**Install CDPL Python bindings via `pip` under specification of the Github repository URL**
+```bash
+$ pip install git+https://github.com/molinfo-vienna/CDPKit.git
 ```
 
-2. **Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources**
+**Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources**
 
 Change your CWD to the CDPKit source code folder and then from within the folder run:
-```console
-pip install .
+```bash
+$ pip install .
 ```
 
 ### Generating CDPKit Documentation
 
-For a successful build of the CDPKit documentation pages, sphinx, the sphinx-rtd-theme and sphinxcontrib-bibtex
-need to be available on the build host. Furthermore, for the generation of the CDPL C++ and Python API-documentation,
+For a successful build of the CDPKit documentation pages, `sphinx` and the extensions `sphinx-rtd-themes`, `phinxcontrib.bibtex`,
+and `docs-versions-menu' need to be available on the build host. Furthermore, for the generation of the CDPL C++ and Python API-documentation,
 doxygen has to be installed.
 
 If all prerequisites are fulfilled
 
-```console
-make doc
+```bash
+$ make doc
 ```
 
 should successfully build the CDPKit documentation pages which can then be found in `<BUILD-DIR>/Doc/html`.
