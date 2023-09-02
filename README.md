@@ -55,7 +55,7 @@ $ cmake <CDPKIT-SOURCE-DIR>
 ```
 
 If the makefiles have been generated without errors, invoking
-`make` from within `<BUILD-DIR>` starts the actual build process.
+`make` from within `<BUILD-DIR>` starts the actual build process:
 
 ```console
 $ make
@@ -71,7 +71,7 @@ $ make install
 will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
-*Generating CDPKit documentation (optional)x*
+*Generating CDPKit documentation (optional)*
 
 For a successful build of the CDPKit documentation pages, `sphinx-build` and the Sphinx extensions `sphinx-rtd-themes`, `sphinxcontrib.bibtex`,
 and `docs-versions-menu` need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
