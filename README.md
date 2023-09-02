@@ -74,7 +74,9 @@ will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
+
 *Direct installation*
+
 To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
 
 ```console
@@ -84,7 +86,7 @@ $ pip install cdpkit
 `pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
 and install the CDPL Python bindings. Please follow the steps below:
 
-Build Requirements and Dependencies
+*Build Requirements and Dependencies*
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
