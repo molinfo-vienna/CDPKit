@@ -1,8 +1,7 @@
 # ![CDPKit logo](https://github.com/molinfo-vienna/CDPKit/blob/master/Doc/Graphics/Logo.svg)
 **[About](#about)**<br>
 **[Getting Started with CDPKit](#getting-started-with-cdpkit)**<br>
-**[Installation from source](#installation)**<br>
-**[Installation via the `pip` command (CDPL Python bindings only)](#installation-via-pip-python-bindings-only)**<br>
+**[Installation](#installation)**<br>
 **[Basic Usage](#basic-usage)**<br>
 **[Further Exploration](#further-exploration)**<br>
 **[Documentation and Resources](#documentation-and-resources)**<br>
@@ -88,7 +87,7 @@ should successfully build the CDPKit documentation pages which can then be found
 
 #### Installation via the `pip` command (CDPL Python bindings only)
 
-*Direct installation*
+*Option 1: Direct installation*
 
 To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
 
@@ -96,7 +95,7 @@ To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
 $ pip install cdpkit
 ```
 
-*Installation from source*
+*Option 2: Installation from source*
 
 `pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
 and install the CDPL Python bindings.
@@ -109,13 +108,13 @@ Build requirements and dependencies:
 - cairo-devel (V >= 1.14, optional)
 - sqlite-devel (V3, optional)
 
-- Installation under specification of the Github repository URL:
+Installation under specification of the Github repository URL:
 
 ```console
 $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
 ```
 
-- Installation under specification of a local directory containing the CDPKit sources:
+Installation under specification of a local directory containing the CDPKit sources:
 
 Change your CWD to the CDPKit source code folder and then from within the folder run
 
