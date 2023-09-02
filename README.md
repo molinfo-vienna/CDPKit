@@ -26,7 +26,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 
 ### Installation
 Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
-on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) build CDPKit from source and
+on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) installation after building CDPKit from source and
 iii) using the `pip` package manager (installs CDPL Python bindings only).
 
 #### Installation from source
@@ -50,7 +50,7 @@ For an installation of CDPKit from source please follow the steps below:
 
 **Build and Install CDPKit**
 
-The makefiles are generated using cmake as follows (assuming a build on a Linux host):
+The makefiles are generated using `cmake` as follows (assuming a build on a Linux host):
 
 ```console
 $ mkdir <BUILD-DIR>
@@ -76,7 +76,7 @@ will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
-To install the CDPL Python bindings directly from PyPI type:
+To install the CDPL Python bindings directly from [PyPI][https://pypi.org/] type:
 
 ```console
 $ pip install cdpkit
@@ -107,9 +107,9 @@ $ pip install .
 
 ### Generating CDPKit Documentation
 
-For a successful build of the CDPKit documentation pages, `sphinx` and the extensions `sphinx-rtd-themes`, `phinxcontrib.bibtex`,
-and `docs-versions-menu' need to be available on the build host. Furthermore, for the generation of the CDPL C++ and Python API-documentation,
-doxygen has to be installed.
+For a successful build of the CDPKit documentation pages, `sphinx-build` and the Sphinx extensions `sphinx-rtd-themes`, `sphinxcontrib.bibtex`,
+and `docs-versions-menu' need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
+`doxygen` has to be installed.
 
 If all prerequisites are fulfilled
 
