@@ -36,17 +36,15 @@ For an installation of CDPKit from source please follow the steps below:
 - C++11 compliant compiler (mandatory)
 - cmake (V >= 3.17, mandatory)
 - boost-devel (V >= 1.63, mandatory)
-- python-devel 3.x (optional) and Python interpreter (mandatory)
+- python-devel V3.x (optional) and Python V3.x interpreter (mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
-- sqlite-devel V3 (optional)
+- sqlite-devel (V3, optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
 - sphinxcontrib.bibtex (optional)
 - docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
-
-**Python Environment**: Ensure you have a working Python environment. CDPKit is primarily used with Python, so make sure you have Python 3.x installed on your system.
 
 **Build and Install CDPKit**
 
@@ -59,7 +57,7 @@ $ cmake <CDPKIT-SOURCE-DIR>
 ```
 
 If the makefiles have been generated without errors, invoking
-`make` from within `<BUILD-DIR>` starts the actual build process: 
+`make` from within `<BUILD-DIR>` starts the actual build process.
 
 ```console
 $ make
@@ -76,7 +74,7 @@ will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
-To install the CDPL Python bindings directly from [PyPI][https://pypi.org/] type:
+To install the CDPL Python bindings directly from [PyPI](https://pypi.org/]) type
 
 ```console
 $ pip install cdpkit
@@ -91,7 +89,7 @@ and install the CDPL Python bindings. Please follow the steps below:
 - python-devel and Python interpreter (V >= 3.6, mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
-- sqlite-devel V3 (optional)
+- sqlite-devel (V3, optional)
 
 **Install CDPL Python bindings via `pip` under specification of the Github repository URL**
 ```console
@@ -100,7 +98,8 @@ $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
 
 **Install CDPL Python bindings via `pip` under specification of a local directory containing the CDPKit sources**
 
-Change your CWD to the CDPKit source code folder and then from within the folder run:
+Change your CWD to the CDPKit source code folder and then from within the folder run
+
 ```console
 $ pip install .
 ```
