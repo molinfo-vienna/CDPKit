@@ -111,7 +111,7 @@ $ pip install .
 ### Generating CDPKit Documentation
 
 For a successful build of the CDPKit documentation pages, `sphinx-build` and the Sphinx extensions `sphinx-rtd-themes`, `sphinxcontrib.bibtex`,
-and `docs-versions-menu' need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
+and `docs-versions-menu` need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
 `doxygen` has to be installed.
 
 If all prerequisites are fulfilled
