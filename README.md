@@ -74,7 +74,8 @@ will install CDPKit in the `/opt` directory of your system (a different install
 location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 #### Installation via the `pip` command (installs CDPL Python bindings only)
-To install the CDPL Python bindings directly from [PyPI](https://pypi.org/]) type
+**Direct installation**
+To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
 
 ```console
 $ pip install cdpkit
