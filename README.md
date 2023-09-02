@@ -89,7 +89,7 @@ should successfully build the CDPKit documentation pages which can then be found
 
 *Option 1: Direct installation*
 
-To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type
+To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type:
 
 ```console
 $ pip install cdpkit
