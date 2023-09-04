@@ -6,80 +6,64 @@ Introduction
 About
 -----
 
-The *Chemical Data Processing Toolkit* (CDPKit) is an open-source cheminformatics software toolkit implemented in C++. In addition to the C++ API a Python-interfacing layer is provided that allows to use all of CDPKit's functionality from Python scripts.
-CDPKit features a high-quality and well-tested modular implementation of basic functionality typically required by any higher-level software application in the field of cheminformatics. 
-This includes data structures for the representation and analysis of chemical structures and reactions, routines for the I/O of small molecule, macromolecular and reaction data in different file formats (MDL Mol, SDF, Rxn, RDF, Mol2, PDB, MMTF, SMILES, SMARTS, etc.), functionality for ring and aromaticity perception, pharmacophore generation, substructure searching, max. common substructure searching, molecular fingerprinting, molecule fragment generation (RECAP :cite:`doi:10.1021/ci970429i`, BRICS :cite:`https://doi.org/10.1002/cmdc.200800178`), 2D structure layout and visualization, 3D structure and conformer generation :cite:`doi:10.1021/acs.jcim.3c00563`, physicochemical property prediction, and so on.
+The *Chemical Data Processing Toolkit* (CDPKit) is an open-source cheminformatics toolkit implemented in C++. 
+At its core, CDPKit delivers a suite of software tools and programming libraries (CDPL) that provide a high-quality and well-tested modular implementation
+of basic functionality typically required by any higher-level software application in the field of cheminformatics.
+In addition to the C++ API, a Python-interfacing layer is provided that allows users to harness all of CDPKit's functionality easily from Python code. 
 
-At its core, CDPKit provides a set of command line tools and software libraries (CDPL) that enable researchers to work with molecular data in a systematic and efficient manner, allow a seamless integration with other software and databases, and to develop their own C++ or Python cheminformatics software applications.
+**Key Features**
 
-CDPKit integrates especially well with machine learning and data mining libraries, enabling scientists to build predictive models for various molecular 
-properties. This makes it a valuable toolkit for developing software in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
-and other properties of potential drug candidates. An integration example can be found in the source code of the software described in :cite:t:`molecules26206185`.
+- Data structures for the representation and processing of molecules, chemical reactions and pharmacophores
+- Routines for all typical cheminformatics pre-processing tasks (e.g. ring and aromaticity perception, stereochemistry processing, ...)
+- Powerful methods for molecule and reaction substructure searching
+- Readers/writers for various file formats (MDL Mol, SDF, Rxn, RDF, Mol2, PDB, MMTF, SMILES, SMARTS, etc.) allowing the I/O of
+  small molecule, macromolecular, reaction and pharmacophore data 
+- Molecule fragmentation algorithms (RECAP :cite:`doi:10.1021/ci970429i`, BRICS :cite:`https://doi.org/10.1002/cmdc.200800178`)
+- Generation of molecule and pharmacophore fingerprints (e.g. ECFP :cite:t:`doi:10.1021/ci100050t`)
+- Large collection of implemented chemical structure descriptors
+- 2D structure layout and rendering of molecules and reactions
+- Gaussian shape-based molecule alignment and descriptor calculation
+- Pharmacophore generation, alignment and screening
+- 3D structure and conformer generation :cite:`doi:10.1021/acs.jcim.3c00563`
+- Prediction of a wide panel of physicochemical properties
+- Full-blown test-suite compliant implementation of the MMFF94 :cite:`https://doi.org/10.1002/(SICI)1096-987X(199604)17:5/6<490::AID-JCC1>3.0.CO;2-P` force field
+- ...
 
-.. **Oliver's Text**
+**Machine Learning Integration**
 
-.. CDPKit is an open-source cheminformatics software toolkit implemented in C++. 
-.. In addition to the C++ API, a Python-interfacing layer is provided that allows users to harness all of CDPKit's functionality from Python code. 
-.. CDPKit boasts a high-quality, well-tested, and modular implementation of basic functionality typically required by any higher-level 
-.. software application in the realm of cheminformatics. 
-
-.. Key Features
-.. ^^^^^^^^^^^^
-
-.. CDPKit offers a vast range of functionality beyond the basic usage example shown above. Some areas to explore include:
-
-.. - Substructure Searching 
-..   CDPKit provides powerful methods to search for substructures within molecules.
-
-.. - Descriptor Calculation 
-..   With CDPKit, you can calculate various molecular descriptors, such as Lipinski's Rule-of-Five properties, topological fingerprints, and much more. 
-..   These descriptors are pivotal for modeling molecular properties and predicting biological activities.
-
-.. - Chemical Reactions 
-..   CDPKit fully supports chemical reactions, offering dedicated data structures and functionality for I/O, reaction substructure search, 
-..   2D visualization, reaction transformations, and more.
-
-.. - Machine Learning Integration 
-..   Seamlessly integrate CDPKit with machine learning libraries like scikit-learn, PyTorch, and TensorFlow. Utilize CDPKit for 
-..   preprocessing molecular data, extracting features, and building predictive models for diverse chemical properties.
-
-.. Data Handling and Analysis
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. CDPKit features include data structures for the representation and analysis of chemical structures, routines for the I/O of small 
-.. molecule and macromolecular data in various file formats (MDL Mol and SDF, Mol2, PDB, MMTF, SMILES, etc.), ring and aromaticity perception, 
-.. pharmacophore generation, substructure searching, molecular fingerprinting, molecule fragment generation (RECAP, BRICS), 2D structure layout and 
-.. visualization, 3D structure and conformer generation (`CONFORT <https://www.researchsquare.com/article/rs-1597257/v1>`_), physicochemical property prediction, and more.
-
-.. Integration and Utility
-.. ^^^^^^^^^^^^^^^^^^^^^^^
-
-.. At its core, CDPKit delivers a suite of command line tools and software libraries (CDPL) that empower researchers to work with 
-.. molecular data systematically and efficiently. This ensures seamless integration with other software and databases. 
-.. Moreover, CDPKit's integration with various machine learning and data mining libraries enables scientists to construct predictive models 
-.. for molecular properties. This positions it as a valuable asset in computational drug discovery, where machine learning is harnessed 
-.. to predict the biological activity, site of metabolism prediction, toxicity, and other attributes of potential drug candidates. 
-.. An example of this integration is showcased in the source code of this `publication <https://www.mdpi.com/1420-3049/26/20/6185>`_.
+CDPKit seamlessly integrates with machine learning libraries like `scikit-learn <https://scikit-learn.org>`_, `PyTorch <https://pytorch.org/>`_, 
+and `TensorFlow <https://www.tensorflow.org/>`_. Utilizing CDPKit for molecular data processing, feature extraction and descriptor calculations, 
+greatly aids scientists that intend to build ML models for the prediction of physicochemical properties, biological activity, site of metabolism 
+prediction, toxicity, and other attributes of potential drug candidates. An example of such an integration with ML methods is showcased in the 
+source code of the software described in :cite:t:`molecules26206185`.
 
 .. index:: License
 
-Licensing
----------
+License
+-------
 
 The CDPKit source code is released under the terms of the `GNU Lesser General Public License (LGPL) V2.1-or-later <https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html>`_.
 CDPKit documentation is licensed under the terms of the `GNU Free Documentation License (GFDL) V1.2-or-later <https://www.gnu.org/licenses/old-licenses/fdl-1.2.en.html>`_.
 
 .. index:: Related Software
 
-Related software projects
--------------------------
+Related software
+----------------
+
+Examples of software projects using CDPKit functionality:
 
 - `Python scripts for the generation of GRAIL datasets <https://github.com/molinfo-vienna/GRAIL-Scripts>`_ :cite:`doi:10.1021/acs.jctc.8b00495`
+- `Scripts implementing the Common Hits Approach (CHA) <https://github.com/molinfo-vienna/commonHitsApproach>`_ :cite:`doi:10.1021/acs.jcim.6b00674`
+- `Workflow scripts for the generation of receptor-based pharmacophore models (apo2ph4) <https://github.com/molinfo-vienna/apo2ph4>`_ :cite:`ph15091122`
+- `Analysis of MD-trajectories of ligand-receptor complexes regarding the frequency of observable non-bonding interactions <https://github.com/molinfo-vienna/Ligand-Interaction-Maps>`_
+- `Implementation of the QPhAR algorithm <https://github.com/StefanKohlbacher/QuantPharmacophore>`_ :cite:`doi:10.1021/acs.jcim.6b00674`
 
 .. index:: Publications
            
 Scientific publications
 -----------------------
+
+Published scientific work that relies on CDPKit functionality:
 
 .. bibliography::
    :list: bullet
@@ -98,11 +82,8 @@ Scientific publications
 How to cite
 -----------
 
-Source code:
-  Thomas Seidel, *Chemical Data Processing Toolkit source code repository*, https://github.com/molinfo-vienna/CDPKit
-  
-Documentation:
-  Thomas Seidel, Oliver Wieder, *Chemical Data Processing Toolkit documentation pages*, https://cdpkit.org
+- **Source code:** Thomas Seidel, *Chemical Data Processing Toolkit source code repository*, https://github.com/molinfo-vienna/CDPKit
+- **Documentation:** Thomas Seidel, Oliver Wieder, *Chemical Data Processing Toolkit documentation pages*, https://cdpkit.org
 
 .. index:: People, Authors
            
