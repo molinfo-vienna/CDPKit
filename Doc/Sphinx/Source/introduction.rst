@@ -13,7 +13,7 @@ In addition to the C++ API, a Python-interfacing layer is provided that allows u
 
 .. index:: Key Features
 
-.. rubric:: **Key Features**
+.. rubric:: Key Features
 
 - Data structures for the representation and processing of molecules, chemical reactions and pharmacophores
 - Routines for all typical cheminformatics pre-processing tasks (e.g. ring and aromaticity perception, stereochemistry processing, ...)
@@ -31,7 +31,7 @@ In addition to the C++ API, a Python-interfacing layer is provided that allows u
 - Full-blown test-suite compliant implementation of the MMFF94 :cite:`https://doi.org/10.1002/(SICI)1096-987X(199604)17:5/6<490::AID-JCC1>3.0.CO;2-P` force field
 - ...
 
-.. rubric:: **Machine Learning Integration**
+.. rubric:: Machine Learning Integration
             
 CDPKit seamlessly integrates with machine learning libraries like `scikit-learn <https://scikit-learn.org>`_, `PyTorch <https://pytorch.org/>`_, 
 and `TensorFlow <https://www.tensorflow.org/>`_. Utilizing CDPKit for tasks like molecular data I/O, feature extraction, descriptor calculations, and so on,
