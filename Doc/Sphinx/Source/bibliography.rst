@@ -1,5 +1,7 @@
 Bibliography
 ============
 
+.. index:: Bibliography
+
 .. bibliography::
 

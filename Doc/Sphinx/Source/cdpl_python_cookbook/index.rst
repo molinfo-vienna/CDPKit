@@ -2,8 +2,9 @@ CDPL Python Cookbook
 ====================
 
 .. toctree::
-   :maxdepth: 2
-
+   :maxdepth: 4
+   :numbered:
+      
    chem/index
    pharm/index
    biomol/index
