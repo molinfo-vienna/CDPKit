@@ -25,7 +25,6 @@
 #include <algorithm>
 #include <iterator>
 
-#include "StringDataIOUtilities.hpp"
 #include "StringUtilities.hpp"
 
 

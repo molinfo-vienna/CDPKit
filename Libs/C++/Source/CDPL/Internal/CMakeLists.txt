@@ -30,7 +30,6 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC AND UNIX)
 SET(cdpl-internal_LIB_SRCS
     CDFDataWriterBase.cpp
     StringUtilities.cpp
-    ByteBuffer.cpp
     SHA1.cpp
     Time.cpp
    )
