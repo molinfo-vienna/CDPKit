@@ -107,7 +107,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<MDLDataReader> MDLDataReaderPtr;
+            typedef std::unique_ptr<MDLDataReader> MDLDataReaderPtr;
 
             MDLDataReaderPtr reader;
         };

@@ -74,7 +74,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<CDFPharmacophoreDataReader> CDFDataReaderPtr;
+            typedef std::unique_ptr<CDFPharmacophoreDataReader> CDFDataReaderPtr;
 
             CDFDataReaderPtr reader;
         };

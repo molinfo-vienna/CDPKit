@@ -642,8 +642,8 @@ namespace CDPL
             typedef Util::ObjectStack<PointListPrimitive2D>       PointListPrimitiveCache;
             typedef Util::ObjectStack<TextLabelPrimitive2D>       TextLabelPrimitiveCache;
 
-            typedef std::auto_ptr<StructureView2DParameters> StructureView2DParametersPtr;
-            typedef std::auto_ptr<Chem::Fragment>            FragmentPtr;
+            typedef std::unique_ptr<StructureView2DParameters> StructureView2DParametersPtr;
+            typedef std::unique_ptr<Chem::Fragment>            FragmentPtr;
 
             StructureView2DParametersPtr parameters;
             const Chem::MolecularGraph*  structure;

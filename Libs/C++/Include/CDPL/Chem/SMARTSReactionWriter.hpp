@@ -93,7 +93,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
+            typedef std::unique_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
 
             SMARTSReactionWriter(const SMARTSReactionWriter&);
 

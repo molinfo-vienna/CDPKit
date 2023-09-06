@@ -74,7 +74,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<PMLDataReader> PMLDataReaderPtr;
+            typedef std::unique_ptr<PMLDataReader> PMLDataReaderPtr;
 
             PMLDataReaderPtr reader;
         };

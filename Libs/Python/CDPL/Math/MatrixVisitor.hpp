@@ -440,7 +440,7 @@ namespace CDPLPythonMath
             using namespace CDPL;
             using namespace boost;
 
-            std::auto_ptr<MatrixType> mtx_ptr(new MatrixType());
+            std::unique_ptr<MatrixType> mtx_ptr(new MatrixType());
 
             if (!NumPy::checkSize(arr, mtx_ptr->getSize1(), mtx_ptr->getSize2())) {
                 PyErr_SetString(PyExc_ValueError, "Matrix: NumPy.NDArray size error");
@@ -495,7 +495,7 @@ namespace CDPLPythonMath
                 python::throw_error_already_set();
             }
 
-            std::auto_ptr<MatrixType> mtx_ptr(new MatrixType());
+            std::unique_ptr<MatrixType> mtx_ptr(new MatrixType());
 
             NumPy::resizeTarget2(*mtx_ptr, arr);
             NumPy::copyArray2(*mtx_ptr, arr);

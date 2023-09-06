@@ -29,8 +29,8 @@ h * along with this library; see the file COPYING. If not, write to
 #include <unordered_map>
 
 #include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
-#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -141,6 +141,9 @@ namespace
 
 MolProp::MHMOPiChargeCalculator::MHMOPiChargeCalculator():
     locPiBonds(false)
+{}
+
+MolProp::MHMOPiChargeCalculator::~MHMOPiChargeCalculator()
 {}
 
 MolProp::MHMOPiChargeCalculator::MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph):

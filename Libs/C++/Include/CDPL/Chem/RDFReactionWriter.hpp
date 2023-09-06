@@ -148,7 +148,7 @@ namespace CDPL
 
             RDFReactionWriter& operator=(const RDFReactionWriter&);
 
-            typedef std::auto_ptr<MDLDataWriter> MDLDataWriterPtr;
+            typedef std::unique_ptr<MDLDataWriter> MDLDataWriterPtr;
 
             std::ostream&    output;
             bool             state;

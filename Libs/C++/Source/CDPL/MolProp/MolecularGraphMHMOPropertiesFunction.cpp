@@ -33,49 +33,49 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 void MolProp::calcMHMOProperties(Chem::MolecularGraph& molgraph, bool overwrite)
 {
     if (!overwrite) {
-    Chem::MolecularGraph::ConstAtomIterator a_it = molgraph.getAtomsBegin(), a_end = molgraph.getAtomsEnd();
-        
-    for ( ; a_it != a_end; ++a_it) {
-        const Chem::Atom& atom = *a_it;
+        Chem::MolecularGraph::ConstAtomIterator a_it = molgraph.getAtomsBegin(), a_end = molgraph.getAtomsEnd();
 
-        if (!hasMHMOPiCharge(atom))
-        break;
-    }
-        
-    if (a_it == a_end) {
-        Chem::MolecularGraph::ConstBondIterator b_it = molgraph.getBondsBegin(), b_end = molgraph.getBondsEnd();
-        
-        for ( ; b_it != b_end; ++b_it) {
-        const Chem::Bond& bond = *b_it;
+        for (; a_it != a_end; ++a_it) {
+            const Chem::Atom& atom = *a_it;
 
-        if (!hasMHMOPiOrder(bond))
-            break;
+            if (!hasMHMOPiCharge(atom))
+                break;
         }
 
-        if (b_it == b_end)
-        return;
-    }
+        if (a_it == a_end) {
+            Chem::MolecularGraph::ConstBondIterator b_it = molgraph.getBondsBegin(), b_end = molgraph.getBondsEnd();
+
+            for (; b_it != b_end; ++b_it) {
+                const Chem::Bond& bond = *b_it;
+
+                if (!hasMHMOPiOrder(bond))
+                    break;
+            }
+
+            if (b_it == b_end)
+                return;
+        }
     }
 
     MHMOPiChargeCalculator calculator;
 
     calculator.calculate(molgraph);
-    
+
     for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
-    Chem::Atom& atom = molgraph.getAtom(i);
-        
-    setMHMOPiCharge(atom, calculator.getCharge(i));
+        Chem::Atom& atom = molgraph.getAtom(i);
+
+        setMHMOPiCharge(atom, calculator.getCharge(i));
     }
 
     for (std::size_t i = 0, num_bonds = molgraph.getNumBonds(); i < num_bonds; i++) {
-    Chem::Bond& bond = molgraph.getBond(i);
-        
-    setMHMOPiOrder(bond, calculator.getBondOrder(i));
+        Chem::Bond& bond = molgraph.getBond(i);
+
+        setMHMOPiOrder(bond, calculator.getBondOrder(i));
     }
 }

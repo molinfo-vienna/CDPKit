@@ -94,7 +94,7 @@ namespace CDPL
             void convertToQPolygon(const Math::Vector2DArray&);
 
             QPainter&                qPainter;
-            std::auto_ptr<QPolygonF> qPolygon;
+            std::unique_ptr<QPolygonF> qPolygon;
         };
     } // namespace Vis
 } // namespace CDPL

@@ -93,7 +93,7 @@ void FontEditWidget::updateGUI()
 
 void FontEditWidget::editFont()
 {
-    std::auto_ptr<FontChooserDialog> chooser_dlg(new FontChooserDialog(this, font, sizeSpec, parentSizeSpec, 
+    std::unique_ptr<FontChooserDialog> chooser_dlg(new FontChooserDialog(this, font, sizeSpec, parentSizeSpec, 
                                                                        sizeTypeEditable, policyEditable));
 
     if (chooser_dlg->exec() == QDialog::Accepted) {

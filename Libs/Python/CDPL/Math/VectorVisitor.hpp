@@ -411,7 +411,7 @@ namespace CDPLPythonMath
             using namespace CDPL;
             using namespace boost;
 
-            std::auto_ptr<VectorType> vec_ptr(new VectorType());
+            std::unique_ptr<VectorType> vec_ptr(new VectorType());
 
             if (!NumPy::checkSize(arr, vec_ptr->getSize())) {
                 PyErr_SetString(PyExc_ValueError, "Vector: NumPy.NDArray size error");
@@ -466,7 +466,7 @@ namespace CDPLPythonMath
                 python::throw_error_already_set();
             }
 
-            std::auto_ptr<VectorType> vec_ptr(new VectorType());
+            std::unique_ptr<VectorType> vec_ptr(new VectorType());
 
             NumPy::resizeTarget1(*vec_ptr, arr);
             NumPy::copyArray1(*vec_ptr, arr);

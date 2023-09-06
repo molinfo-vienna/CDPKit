@@ -230,9 +230,9 @@ namespace CDPL
                 std::size_t           lexicalOrder;
             };
 
-            typedef std::auto_ptr<BondDirectionCalculator>      BondDirCalculatorPtr;
-            typedef std::auto_ptr<CanonicalNumberingCalculator> CanonNumberingCalculatorPtr;
-            typedef std::auto_ptr<Fragment>                     FragmentPtr;
+            typedef std::unique_ptr<BondDirectionCalculator>      BondDirCalculatorPtr;
+            typedef std::unique_ptr<CanonicalNumberingCalculator> CanonNumberingCalculatorPtr;
+            typedef std::unique_ptr<Fragment>                     FragmentPtr;
             typedef std::vector<const Atom*>                    AtomList;
             typedef std::vector<DFSTreeNode*>                   NodeList;
             typedef std::vector<std::size_t>                    RingClosureNumberStack;

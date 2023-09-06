@@ -92,7 +92,7 @@ namespace CDPL
             std::size_t getNumInserted() const;
 
           private:
-            typedef std::auto_ptr<PSDScreeningDBCreatorImpl> ImplementationPointer;
+            typedef std::unique_ptr<PSDScreeningDBCreatorImpl> ImplementationPointer;
 
             PSDScreeningDBCreator(const PSDScreeningDBCreator&);
 

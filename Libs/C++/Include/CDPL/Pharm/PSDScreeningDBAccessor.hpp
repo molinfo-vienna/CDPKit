@@ -93,7 +93,7 @@ namespace CDPL
             const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const;
 
           private:
-            typedef std::auto_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
+            typedef std::unique_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
 
             PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
 

@@ -114,7 +114,7 @@ namespace CDPL
 
             FragmentConformerGenerator& operator=(const FragmentConformerGenerator&);
 
-            typedef std::auto_ptr<FragmentConformerGeneratorImpl> ImplementationPointer;
+            typedef std::unique_ptr<FragmentConformerGeneratorImpl> ImplementationPointer;
 
             ImplementationPointer impl;
         };

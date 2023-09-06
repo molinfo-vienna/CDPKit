@@ -369,7 +369,7 @@ BOOST_AUTO_TEST_CASE(MolecularGraphHashCodeTest)
 
         BOOST_CHECK(handler != 0);
 
-        std::auto_ptr<Base::DataReader<Molecule> > reader_ptr(handler->createReader(ifs));
+        std::unique_ptr<Base::DataReader<Molecule> > reader_ptr(handler->createReader(ifs));
         
         BOOST_CHECK(reader_ptr.get() != 0);
         BOOST_CHECK(reader_ptr->read(molecules[i]));

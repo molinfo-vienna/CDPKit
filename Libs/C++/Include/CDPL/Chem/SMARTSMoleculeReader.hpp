@@ -87,7 +87,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<SMARTSDataReader> SMARTSDataReaderPtr;
+            typedef std::unique_ptr<SMARTSDataReader> SMARTSDataReaderPtr;
 
             SMARTSDataReaderPtr reader;
         };

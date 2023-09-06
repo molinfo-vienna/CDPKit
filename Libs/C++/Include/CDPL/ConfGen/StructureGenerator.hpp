@@ -97,7 +97,7 @@ namespace CDPL
 
             StructureGenerator& operator=(const StructureGenerator&);
 
-            typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
+            typedef std::unique_ptr<ConformerGeneratorImpl> ImplementationPointer;
 
             ImplementationPointer      impl;
             StructureGeneratorSettings settings;

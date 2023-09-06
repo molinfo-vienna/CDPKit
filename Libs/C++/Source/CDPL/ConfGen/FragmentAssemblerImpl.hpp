@@ -168,7 +168,7 @@ namespace CDPL
             typedef std::pair<std::size_t, std::size_t>         IndexPair;
             typedef std::vector<IndexPair>                      IndexPairList;
             typedef std::vector<FragmentLibrary::SharedPointer> FragmentLibraryList;
-            typedef std::auto_ptr<MMFF94BondLengthTable>        BondLengthTablePtr;
+            typedef std::unique_ptr<MMFF94BondLengthTable>        BondLengthTablePtr;
 
             ConformerDataCache             confDataCache;
             FragmentAssemblerSettings      settings;

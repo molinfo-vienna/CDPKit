@@ -80,7 +80,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<PDBDataReader> PDBDataReaderPtr;
+            typedef std::unique_ptr<PDBDataReader> PDBDataReaderPtr;
 
             PDBDataReaderPtr reader;
         };

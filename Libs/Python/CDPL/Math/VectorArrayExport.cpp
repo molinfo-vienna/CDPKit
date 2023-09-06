@@ -176,7 +176,7 @@ namespace
                     python::throw_error_already_set();
                 }
 
-                std::auto_ptr<ArrayType> va_ptr(new ArrayType());
+                std::unique_ptr<ArrayType> va_ptr(new ArrayType());
                 ArrayType& va = *va_ptr;
 
                 va.resize(dims[0]);
@@ -197,7 +197,7 @@ namespace
                     python::throw_error_already_set();
                 }
 
-                std::auto_ptr<ArrayType> va_ptr(new ArrayType());
+                std::unique_ptr<ArrayType> va_ptr(new ArrayType());
                 ArrayType& va = *va_ptr;
 
                 va.resize(dims[0] / ArrayType::ValueType::Size);

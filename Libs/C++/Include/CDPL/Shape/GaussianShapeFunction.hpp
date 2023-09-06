@@ -106,7 +106,7 @@ namespace CDPL
 
             const GaussianProductList* getProductList() const;
 
-            typedef std::auto_ptr<GaussianProductList> ProductListPtr;
+            typedef std::unique_ptr<GaussianProductList> ProductListPtr;
 
             const GaussianShape* shape;
             double               volume;

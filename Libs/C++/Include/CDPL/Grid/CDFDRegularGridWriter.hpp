@@ -75,7 +75,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<CDFRegularGridDataWriter> CDFDataWriterPtr;
+            typedef std::unique_ptr<CDFRegularGridDataWriter> CDFDataWriterPtr;
 
             CDFDRegularGridWriter(const CDFDRegularGridWriter&);
 

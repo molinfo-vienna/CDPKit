@@ -76,7 +76,7 @@ namespace CDPL
 
             MOL2MolecularGraphWriter& operator=(const MOL2MolecularGraphWriter&);
 
-            typedef std::auto_ptr<MOL2DataWriter> MOL2DataWriterPtr;
+            typedef std::unique_ptr<MOL2DataWriter> MOL2DataWriterPtr;
 
             std::ostream&     output;
             bool              state;

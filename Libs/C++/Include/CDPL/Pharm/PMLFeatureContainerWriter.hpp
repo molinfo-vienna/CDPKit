@@ -78,7 +78,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<PMLDataWriter> PMLDataWriterPtr;
+            typedef std::unique_ptr<PMLDataWriter> PMLDataWriterPtr;
 
             PMLFeatureContainerWriter(const PMLFeatureContainerWriter&);
 

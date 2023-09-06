@@ -92,7 +92,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<SMILESDataReader> SMILESDataReaderPtr;
+            typedef std::unique_ptr<SMILESDataReader> SMILESDataReaderPtr;
 
             SMILESDataReaderPtr reader;
         };

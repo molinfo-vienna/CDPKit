@@ -122,7 +122,7 @@ namespace CDPL
 
             ConformerGenerator& operator=(const ConformerGenerator&);
 
-            typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
+            typedef std::unique_ptr<ConformerGeneratorImpl> ImplementationPointer;
 
             ImplementationPointer impl;
         };

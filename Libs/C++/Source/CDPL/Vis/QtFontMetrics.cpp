@@ -45,7 +45,7 @@ Vis::QtFontMetrics::~QtFontMetrics() {}
 
 void Vis::QtFontMetrics::setFont(const Font& font)
 {
-    qFontMetrics = std::auto_ptr<QFontMetricsF>(new QFontMetricsF(QtObjectFactory::createQFont(font), qPaintDevice));
+    qFontMetrics = std::unique_ptr<QFontMetricsF>(new QFontMetricsF(QtObjectFactory::createQFont(font), qPaintDevice));
 }
 
 double Vis::QtFontMetrics::getAscent() const

@@ -80,7 +80,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<MMTFDataWriter> MMTFDataWriterPtr;
+            typedef std::unique_ptr<MMTFDataWriter> MMTFDataWriterPtr;
 
             MMTFMolecularGraphWriter(const MMTFMolecularGraphWriter&);
 

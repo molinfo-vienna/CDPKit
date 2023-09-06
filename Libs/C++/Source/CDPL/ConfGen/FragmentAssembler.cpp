@@ -37,6 +37,9 @@ ConfGen::FragmentAssembler::FragmentAssembler():
     impl(new FragmentAssemblerImpl())
 {}
 
+ConfGen::FragmentAssembler::~FragmentAssembler()
+{}
+    
 const ConfGen::FragmentAssemblerSettings& 
 ConfGen::FragmentAssembler::getSettings() const
 {

@@ -492,7 +492,7 @@ namespace CDPLPythonMath
                 python::throw_error_already_set();
             }
 
-            std::auto_ptr<GridType> grd_ptr(new GridType());
+            std::unique_ptr<GridType> grd_ptr(new GridType());
 
             NumPy::resizeTarget3(*grd_ptr, arr);
             NumPy::copyArray3(*grd_ptr, arr);

@@ -709,7 +709,7 @@ namespace CDPL
             typedef Util::ObjectStack<StructureView2D>                 ComponentViewCache;
             typedef Util::ObjectStack<PolygonPrimitive2D>              PolygonPrimitiveCache;
             typedef Util::ObjectStack<LineSegmentListPrimitive2D>      LineSegListPrimitiveCache;
-            typedef std::auto_ptr<ReactionView2DParameters>            ReactionView2DParametersPtr;
+            typedef std::unique_ptr<ReactionView2DParameters>            ReactionView2DParametersPtr;
 
             const Chem::Reaction*       reaction;
             ReactionView2DParametersPtr parameters;

@@ -473,7 +473,7 @@ namespace CDPLPythonMath
             using namespace CDPL;
             using namespace boost;
 
-            std::auto_ptr<QuaternionType> quat_ptr(new QuaternionType());
+            std::unique_ptr<QuaternionType> quat_ptr(new QuaternionType());
 
             if (!NumPy::checkSize(arr, 4)) {
                 PyErr_SetString(PyExc_ValueError, "Quaternion: NumPy.NDArray size error");

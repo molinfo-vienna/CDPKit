@@ -75,7 +75,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<CDFDataWriter> CDFDataWriterPtr;
+            typedef std::unique_ptr<CDFDataWriter> CDFDataWriterPtr;
 
             CDFMolecularGraphWriter(const CDFMolecularGraphWriter&);
 

@@ -148,7 +148,7 @@ namespace CDPL
 
             SDFMolecularGraphWriter& operator=(const SDFMolecularGraphWriter&);
 
-            typedef std::auto_ptr<MDLDataWriter> MDLDataWriterPtr;
+            typedef std::unique_ptr<MDLDataWriter> MDLDataWriterPtr;
 
             std::ostream&    output;
             bool             state;

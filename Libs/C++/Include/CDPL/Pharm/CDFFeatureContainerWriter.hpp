@@ -75,7 +75,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<CDFPharmacophoreDataWriter> CDFDataWriterPtr;
+            typedef std::unique_ptr<CDFPharmacophoreDataWriter> CDFDataWriterPtr;
 
             CDFFeatureContainerWriter(const CDFFeatureContainerWriter&);
 

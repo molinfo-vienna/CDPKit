@@ -58,7 +58,7 @@ namespace CDPL
     {
 
         class PEOESigmaChargeCalculator;
-
+        
         /**
          * \brief MHMOPiChargeCalculator.
          * \see [\ref MHMO]
@@ -70,6 +70,8 @@ namespace CDPL
             typedef std::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
 
             MHMOPiChargeCalculator();
+
+            ~MHMOPiChargeCalculator();
 
             MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph);
 
@@ -133,14 +135,14 @@ namespace CDPL
                 double elecCount;
             };
 
-            typedef Math::Matrix<double>                     Matrix;
-            typedef Math::Vector<double>                     Vector;
-            typedef std::vector<const Chem::Bond*>           BondList;
-            typedef std::vector<std::size_t>                 CountsArray;
-            typedef std::vector<double>                      DoubleArray;
-            typedef std::vector<MODescr>                     MODescrArray;
-            typedef std::vector<MODescr*>                    MODescrPtrArray;
-            typedef std::auto_ptr<PEOESigmaChargeCalculator> PEOECalculatorPtr;
+            typedef Math::Matrix<double>                       Matrix;
+            typedef Math::Vector<double>                       Vector;
+            typedef std::vector<const Chem::Bond*>             BondList;
+            typedef std::vector<std::size_t>                   CountsArray;
+            typedef std::vector<double>                        DoubleArray;
+            typedef std::vector<MODescr>                       MODescrArray;
+            typedef std::vector<MODescr*>                      MODescrPtrArray;
+            typedef std::unique_ptr<PEOESigmaChargeCalculator> PEOECalculatorPtr;
 
             Matrix            hueckelMatrix;
             Matrix            hmEigenVectors;

@@ -403,7 +403,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<JMEDataReader> JMEDataReaderPtr;
+            typedef std::unique_ptr<JMEDataReader> JMEDataReaderPtr;
 
             JMEDataReaderPtr reader;
         };

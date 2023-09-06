@@ -106,7 +106,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
             setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
     }
 
-    std::auto_ptr<SubstituentBulkinessCalculator> blks_calc;
+    std::unique_ptr<SubstituentBulkinessCalculator> blks_calc;
 
     for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
         Bond& bond = *it;

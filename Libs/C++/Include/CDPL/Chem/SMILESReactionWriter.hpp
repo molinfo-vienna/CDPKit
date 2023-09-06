@@ -153,7 +153,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<SMILESDataWriter> SMILESDataWriterPtr;
+            typedef std::unique_ptr<SMILESDataWriter> SMILESDataWriterPtr;
 
             SMILESReactionWriter(const SMILESReactionWriter&);
 

@@ -65,6 +65,8 @@ namespace CDPL
 
             FragmentAssembler();
 
+            ~FragmentAssembler();
+            
             const FragmentAssemblerSettings& getSettings() const;
 
             FragmentAssemblerSettings& getSettings();
@@ -114,7 +116,7 @@ namespace CDPL
 
             FragmentAssembler& operator=(const FragmentAssembler&);
 
-            typedef std::auto_ptr<FragmentAssemblerImpl> ImplementationPointer;
+            typedef std::unique_ptr<FragmentAssemblerImpl> ImplementationPointer;
 
             ImplementationPointer impl;
         };

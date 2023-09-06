@@ -143,8 +143,8 @@ namespace CDPL
             const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
                                                    const FragmentTreeNode* node) const;
 
-            typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
-            typedef std::auto_ptr<ForceField::MMFF94InteractionData>          MMFF94InteractionDataPtr;
+            typedef std::unique_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
+            typedef std::unique_ptr<ForceField::MMFF94InteractionData>          MMFF94InteractionDataPtr;
             typedef std::vector<const Chem::Bond*>                            BondList;
             typedef std::vector<TorsionLibrary::SharedPointer>                TorsionLibraryList;
 

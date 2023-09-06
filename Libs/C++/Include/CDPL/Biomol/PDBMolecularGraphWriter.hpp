@@ -80,7 +80,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<PDBDataWriter> PDBDataWriterPtr;
+            typedef std::unique_ptr<PDBDataWriter> PDBDataWriterPtr;
 
             PDBMolecularGraphWriter(const PDBMolecularGraphWriter&);
 

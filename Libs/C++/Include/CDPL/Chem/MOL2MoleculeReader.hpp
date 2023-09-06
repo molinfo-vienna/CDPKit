@@ -71,7 +71,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<MOL2DataReader> MOL2DataReaderPtr;
+            typedef std::unique_ptr<MOL2DataReader> MOL2DataReaderPtr;
 
             MOL2DataReaderPtr reader;
         };

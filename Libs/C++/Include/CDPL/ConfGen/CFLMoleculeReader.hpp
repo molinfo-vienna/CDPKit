@@ -79,7 +79,7 @@ namespace CDPL
             bool skipData(std::istream&);
             bool moreData(std::istream&);
 
-            typedef std::auto_ptr<CFLDataReader> CFLDataReaderPtr;
+            typedef std::unique_ptr<CFLDataReader> CFLDataReaderPtr;
 
             CFLDataReaderPtr reader;
         };

@@ -97,7 +97,7 @@ namespace CDPL
 
             SMARTSMolecularGraphWriter& operator=(const SMARTSMolecularGraphWriter&);
 
-            typedef std::auto_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
+            typedef std::unique_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
 
             std::ostream&       output;
             bool                state;

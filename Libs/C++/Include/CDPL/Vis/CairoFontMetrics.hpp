@@ -88,7 +88,7 @@ namespace CDPL
             CairoFontMetrics& operator=(const CairoFontMetrics&);
 
             CairoPointer<cairo_t>       cairoContext;
-            std::auto_ptr<CairoExtents> cairoExtents;
+            std::unique_ptr<CairoExtents> cairoExtents;
         };
     } // namespace Vis
 } // namespace CDPL

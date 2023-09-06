@@ -144,7 +144,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<MDLDataWriter> MDLDataWriterPtr;
+            typedef std::unique_ptr<MDLDataWriter> MDLDataWriterPtr;
 
             MOLMolecularGraphWriter(const MOLMolecularGraphWriter&);
 

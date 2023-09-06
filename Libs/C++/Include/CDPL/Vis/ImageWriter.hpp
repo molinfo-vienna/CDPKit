@@ -80,8 +80,8 @@ namespace CDPL
 
             ImageWriter& operator=(const ImageWriter&);
 
-            typedef std::auto_ptr<StructureView2D> StructureViewPtr;
-            typedef std::auto_ptr<ReactionView2D>  ReactionViewPtr;
+            typedef std::unique_ptr<StructureView2D> StructureViewPtr;
+            typedef std::unique_ptr<ReactionView2D>  ReactionViewPtr;
 
             const Base::DataIOBase& ioBase;
             StructureViewPtr        structureView;

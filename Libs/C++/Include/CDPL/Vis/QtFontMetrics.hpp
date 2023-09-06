@@ -86,7 +86,7 @@ namespace CDPL
             QtFontMetrics& operator=(const QtFontMetrics&);
 
             QPaintDevice*                qPaintDevice;
-            std::auto_ptr<QFontMetricsF> qFontMetrics;
+            std::unique_ptr<QFontMetricsF> qFontMetrics;
         };
     } // namespace Vis
 } // namespace CDPL

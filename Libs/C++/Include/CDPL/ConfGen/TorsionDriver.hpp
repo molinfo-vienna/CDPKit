@@ -133,7 +133,7 @@ namespace CDPL
 
             TorsionDriver& operator=(const TorsionDriver&);
 
-            typedef std::auto_ptr<TorsionDriverImpl> ImplementationPointer;
+            typedef std::unique_ptr<TorsionDriverImpl> ImplementationPointer;
 
             ImplementationPointer impl;
         };

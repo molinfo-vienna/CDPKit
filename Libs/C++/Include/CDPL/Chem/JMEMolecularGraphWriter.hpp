@@ -467,7 +467,7 @@ namespace CDPL
             bool operator!() const;
 
           private:
-            typedef std::auto_ptr<JMEDataWriter> JMEDataWriterPtr;
+            typedef std::unique_ptr<JMEDataWriter> JMEDataWriterPtr;
 
             JMEMolecularGraphWriter(const JMEMolecularGraphWriter&);
 
