@@ -22,7 +22,7 @@
  */
 
 
-#include <cstddint>
+#include <cstdint>
 
 #include "CDPL/Chem/Entity3DMapping.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
