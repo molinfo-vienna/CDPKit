@@ -22,6 +22,8 @@
  */
 
 
+#include <cstddint>
+
 #include "CDPL/Chem/Entity3DMapping.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/Entity3D.hpp"
