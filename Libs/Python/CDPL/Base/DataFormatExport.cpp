@@ -26,10 +26,6 @@
 #include <iomanip>
 #include <memory>
 
-#if defined(_WIN32)
-# define _snprintf snprintf
-#endif // defined(_WIN32)
-
 #include <boost/python.hpp>
 #include <boost/python/ssize_t.hpp>
 

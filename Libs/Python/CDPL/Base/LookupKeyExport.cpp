@@ -24,10 +24,6 @@
 
 #include <sstream>
 
-#if defined(_WIN32)
-# define _snprintf snprintf
-#endif // defined(_WIN32)
-
 #include <boost/python.hpp>
 
 #include "CDPL/Base/LookupKey.hpp"
