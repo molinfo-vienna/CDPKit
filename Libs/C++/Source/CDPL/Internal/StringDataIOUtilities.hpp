@@ -45,24 +45,27 @@ namespace CDPL
     namespace Internal
     {
 
-        inline void checkStreamState(const std::istream& is, const char* err_msg)
-        {
-            if (!is.good())
-                throw Base::IOError(std::string(err_msg) + ": unexpected end of data or unspecified read error");
-        }
+        inline 
+        void checkStreamState(const std::istream& is, const char* err_msg);
 
+        inline 
         void skipChars(std::istream& is, std::size_t count, const char* err_msg = "Error", char eol_char = '\n');
 
+        inline 
         void skipLines(std::istream& is, std::size_t count = 1, const char* err_msg = "Error", char eol_char = '\n');
 
+        inline 
         std::string& readLine(std::istream& is, std::string& line, const char* err_msg = "Error", bool trim = false,
                               bool check_ll = false, std::size_t max_llen = 80, char eol_char = '\n');
 
+        inline 
         std::string& readString(std::istream& is, std::size_t field_size, std::string& str, bool clear = true,
                                 const char* err_msg = "Error", bool trim = true, char eol_char = '\n');
 
+        inline 
         bool skipToString(std::istream& is, const std::string& str, const char* err_msg = "Error", bool pos_after = false);
 
+        inline 
         bool readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg = "Error", bool inc_str = false);
 
         template <typename T>
@@ -143,12 +146,15 @@ namespace CDPL
             os << eol_char;
         }
 
+        inline 
         void writeLine(std::ostream& os, const std::string& line, const char* err_msg,
                        bool check_llen, bool trim, bool trunc, std::size_t max_llen = 80, char eol_char = '\n');
 
+        inline 
         void writeString(std::ostream& os, std::size_t field_size, const std::string& str,
                          const char* err_msg = "Error", bool trim = false, bool trunc = false, bool align_right = false);
 
+        inline 
         void writeSubstring(std::ostream& os, const std::string& str, std::size_t start, std::size_t end);
 
         template <typename T>
@@ -200,5 +206,7 @@ namespace CDPL
         }
     } // namespace Internal
 } // namespace CDPL
+
+#include "StringDataIOUtilitiesImpl.hpp"
 
 #endif // CDPL_INTERNAL_STRINGDATAIOUTILITIES_HPP

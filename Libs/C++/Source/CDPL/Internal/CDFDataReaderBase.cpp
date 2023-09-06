@@ -76,52 +76,6 @@ bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, std::uint8_t 
     return false;
 }
 
-bool Internal::CDFDataReaderBase::readHeader(std::istream& is, CDF::Header& header, ByteBuffer& bbuf) const
-{    
-    std::size_t num_read = bbuf.readBuffer(is, CDF::HEADER_SIZE);
-
-    if (is.bad() || (is.fail() && !is.eof()))
-        throw Base::IOError("CDFDataReaderBase: could not read CDF-header, input stream read error");
-
-    if (num_read != CDF::HEADER_SIZE) {
-        if (strictErrorChecks)
-            throw Base::IOError("CDFDataReaderBase: could not read CDF-header, unexpected end of input");
-
-        return false;
-    }
-
-    bbuf.setIOPointer(0);
-
-    return getHeader(header, bbuf);
-}
-
-bool Internal::CDFDataReaderBase::getHeader(CDF::Header& header, ByteBuffer& bbuf) const
-{    
-    bbuf.getInt(header.formatID);
-    bbuf.getInt(header.recordTypeID);
-    bbuf.getInt(header.recordFormatVersion);
-    bbuf.getInt(header.recordDataLength);
-
-    if (header.formatID == CDF::FORMAT_ID)
-        return true;
-
-    if (strictErrorChecks)
-        throw Base::IOError("CDFDataReaderBase: invalid CDF-header, format-ID mismatch");
-
-    return false;
-}
-
-void Internal::CDFDataReaderBase::readData(std::istream& is, std::size_t length, ByteBuffer& bbuf) const
-{
-    std::size_t num_read = bbuf.readBuffer(is, length);
-
-    if (!is.good())
-        throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, input stream read error");
-
-    if (num_read != length)
-        throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, unexpected end of input");
-}
-
 void Internal::CDFDataReaderBase::getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const
 {
     CDF::SizeType str_len; 

@@ -1,5 +1,5 @@
 /* 
- * StringDataIOUtilities.cpp
+ * StringDataIOUtilitiesImpl.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,10 +29,13 @@
 #include "StringUtilities.hpp"
 
 
-using namespace CDPL;
+void CDPL::Internal::checkStreamState(const std::istream& is, const char* err_msg)
+{
+    if (!is.good())
+        throw Base::IOError(std::string(err_msg) + ": unexpected end of data or unspecified read error");
+}
 
-
-void Internal::skipChars(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
+void CDPL::Internal::skipChars(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
 {
     char c = 0;
     
@@ -44,7 +47,7 @@ void Internal::skipChars(std::istream& is, std::size_t count, const char* err_ms
         is.putback(eol_char);
 }
 
-bool Internal::skipToString(std::istream& is, const std::string& str, const char* err_msg, bool pos_after)
+bool CDPL::Internal::skipToString(std::istream& is, const std::string& str, const char* err_msg, bool pos_after)
 {
     std::size_t str_len = str.length();
 
@@ -79,7 +82,7 @@ bool Internal::skipToString(std::istream& is, const std::string& str, const char
     return false;
 }
 
-bool Internal::readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg, bool inc_str)
+bool CDPL::Internal::readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg, bool inc_str)
 {
     std::size_t str_len = str.length();
 
@@ -113,7 +116,7 @@ bool Internal::readToString(std::istream& is, const std::string& str, std::strin
     return false;
 } 
 
-void Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
+void CDPL::Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
 {
     for (std::size_t i = 0; i < count && is.good(); i++)
         is.ignore(std::numeric_limits<std::streamsize>::max(), std::istream::traits_type::to_int_type(eol_char));
@@ -121,7 +124,7 @@ void Internal::skipLines(std::istream& is, std::size_t count, const char* err_ms
     checkStreamState(is, err_msg);
 }
         
-std::string& Internal::readLine(std::istream& is, std::string& line, const char* err_msg, bool trim, 
+std::string& CDPL::Internal::readLine(std::istream& is, std::string& line, const char* err_msg, bool trim, 
                                 bool check_ll, std::size_t max_llen, char eol_char)
 {
     std::getline(is, line, eol_char);
@@ -140,7 +143,7 @@ std::string& Internal::readLine(std::istream& is, std::string& line, const char*
     return line;
 }
 
-std::string& Internal::readString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
+std::string& CDPL::Internal::readString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
                                   const char* err_msg, bool trim, char eol_char)
 {
     if (clear)
@@ -173,7 +176,7 @@ std::string& Internal::readString(std::istream& is, std::size_t field_size, std:
     return str;
 }
 
-void Internal::writeLine(std::ostream& os, const std::string& line, const char* err_msg, 
+void CDPL::Internal::writeLine(std::ostream& os, const std::string& line, const char* err_msg, 
                          bool check_llen, bool trim, bool trunc, std::size_t max_llen, char eol_char)
 {
     if (check_llen && line.size() > max_llen) {
@@ -204,7 +207,7 @@ void Internal::writeLine(std::ostream& os, const std::string& line, const char* 
         os << (trim ? trimStringCopy(line) : line) << eol_char;
 }
 
-void Internal::writeString(std::ostream& os, std::size_t field_size, const std::string& str, 
+void CDPL::Internal::writeString(std::ostream& os, std::size_t field_size, const std::string& str, 
                            const char* err_msg, bool trim, bool trunc, bool align_right)
 {
     os << std::setw(field_size);
@@ -242,7 +245,7 @@ void Internal::writeString(std::ostream& os, std::size_t field_size, const std::
         os << (trim ? trimStringCopy(str) : str);
 }
 
-void Internal::writeSubstring(std::ostream& os, const std::string& str, std::size_t start, std::size_t end)
+void CDPL::Internal::writeSubstring(std::ostream& os, const std::string& str, std::size_t start, std::size_t end)
 {
     std::string::const_iterator str_beg = str.begin();
 
