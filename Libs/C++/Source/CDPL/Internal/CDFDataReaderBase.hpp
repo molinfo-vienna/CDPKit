@@ -25,7 +25,7 @@
 #ifndef CDPL_INTERNAL_CDFDATAREADERBASE_HPP
 #define CDPL_INTERNAL_CDFDATAREADERBASE_HPP
 
-#include <iosfwd>
+#include <istream>
 #include <cstddef>
 #include <cstdint>
 #include <string>
@@ -52,8 +52,10 @@ namespace CDPL
 
             virtual ~CDFDataReaderBase() {}
 
+            inline
             bool skipToRecord(std::istream& is, CDF::Header& header, std::uint8_t rec_type, bool seek_beg, ByteBuffer& bbuf) const;
 
+            inline
             bool skipNextRecord(std::istream& is, std::uint8_t rec_type, ByteBuffer& bbuf) const;
 
             inline
@@ -62,8 +64,10 @@ namespace CDPL
             inline
             void readData(std::istream& is, std::size_t length, ByteBuffer& bbuf) const;
 
+            inline
             unsigned int extractPropertyID(CDF::PropertySpec prop_spec) const;
 
+            inline
             std::size_t extractPropertyValueLength(CDF::PropertySpec prop_spec) const;
 
             inline
@@ -78,6 +82,7 @@ namespace CDPL
             template <typename Array>
             void getFloatArrayProperty(CDF::PropertySpec prop_spec, Array& array, ByteBuffer& bbuf) const;
 
+            inline
             void getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const;
 
             template <typename Vec, typename ValueType = typename Vec::ValueType>
@@ -101,12 +106,16 @@ namespace CDPL
             template <typename Grid>
             void getGrid(Grid& grid, ByteBuffer& bbuf, std::size_t fp_len) const;
 
+            inline
             void getString(std::string& str, ByteBuffer& bbuf) const;
 
+            inline
             unsigned int getPropertySpec(CDF::PropertySpec& prop_spec, ByteBuffer& bbuf) const;
 
+            inline
             bool strictErrorChecking() const;
 
+            inline
             void strictErrorChecking(bool strict);
 
           private:
@@ -117,6 +126,93 @@ namespace CDPL
 
 
 // Implementation
+
+bool CDPL::Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& header, std::uint8_t rec_type, bool seek_beg, ByteBuffer& bbuf) const
+{
+    while (true) {
+        std::istream::pos_type last_spos = is.tellg();
+
+        if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) 
+            break;
+
+        if (!readHeader(is, header, bbuf))
+            return false;
+
+        if (header.recordTypeID == rec_type) {
+            if (seek_beg)
+                is.seekg(last_spos);
+
+            return true;
+        }
+
+        is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
+    }
+
+    return false;
+}
+
+bool CDPL::Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, std::uint8_t rec_type, ByteBuffer& bbuf) const
+{
+    CDF::Header header;
+
+    while (true) {
+        std::istream::pos_type last_spos = is.tellg();
+
+        if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof()))
+            break;
+
+        if (!readHeader(is, header, bbuf))
+            return false;
+
+        is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
+
+        if (header.recordTypeID == rec_type)
+            return true;
+    }
+
+    return false;
+}
+
+void CDPL::Internal::CDFDataReaderBase::getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const
+{
+    CDF::SizeType str_len; 
+
+    getIntProperty(prop_spec, str_len, bbuf);
+
+    str.resize(str_len);
+
+    bbuf.getBytes(&str[0], str_len);
+}
+
+void CDPL::Internal::CDFDataReaderBase::getString(std::string& str, ByteBuffer& bbuf) const
+{
+    std::size_t size_len;
+    std::size_t str_len;
+
+    bbuf.getInt(size_len, 1);
+    bbuf.getInt(str_len, size_len); 
+
+    str.resize(str_len);
+
+    bbuf.getBytes(&str[0], str_len);
+}
+
+unsigned int CDPL::Internal::CDFDataReaderBase::getPropertySpec(CDF::PropertySpec& prop_spec, ByteBuffer& bbuf) const
+{
+    bbuf.getInt(prop_spec);
+
+    return extractPropertyID(prop_spec);
+}
+
+bool CDPL::Internal::CDFDataReaderBase::strictErrorChecking() const
+{
+    return strictErrorChecks;
+}
+
+void CDPL::Internal::CDFDataReaderBase::strictErrorChecking(bool strict)
+{
+    strictErrorChecks = strict;
+}
 
 inline unsigned int CDPL::Internal::CDFDataReaderBase::extractPropertyID(CDF::PropertySpec prop_spec) const
 {
@@ -377,6 +473,5 @@ void CDPL::Internal::CDFDataReaderBase::readData(std::istream& is, std::size_t l
     if (num_read != length)
         throw Base::IOError("CDFDataReaderBase: could not read CDF-record data, unexpected end of input");
 }
-
 
 #endif // CDPL_INTERNAL_CDFDATAREADERBASE_HPP
