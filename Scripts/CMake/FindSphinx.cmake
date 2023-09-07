@@ -142,8 +142,8 @@ endif ()
 # determine Python executable used by Sphinx
 if (Sphinx-build_EXECUTABLE)
   # extract python executable from shebang of sphinx-build
-  find_package (PythonInterp QUIET)
-  set (Sphinx_PYTHON_EXECUTABLE "${PYTHON_EXECUTABLE}")
+  find_package (Python3 QUIET REQUIRED Interpreter)
+  set (Sphinx_PYTHON_EXECUTABLE "${Python3_EXECUTABLE}")
   set (Sphinx_PYTHON_OPTIONS)
   file (STRINGS "${Sphinx-build_EXECUTABLE}" FIRST_LINE LIMIT_COUNT 1)
   if (FIRST_LINE MATCHES "^#!(.*/python.*)") # does not match "#!/usr/bin/env python" !
