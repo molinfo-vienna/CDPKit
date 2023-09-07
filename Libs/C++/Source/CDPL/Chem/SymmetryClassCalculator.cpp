@@ -270,8 +270,8 @@ void Chem::SymmetryClassCalculator::calcSVMNumbers()
         std::size_t max_num_classes = 0;    
 
         while (true) {
-            std::for_each(sorted_nodes_begin, sorted_nodes_end, std::mem_fun(&AtomNode::calcNextSVMNumber));
-            std::for_each(sorted_nodes_begin, sorted_nodes_end, std::mem_fun(&AtomNode::updateSVMNumber));
+            std::for_each(sorted_nodes_begin, sorted_nodes_end, std::mem_fn(&AtomNode::calcNextSVMNumber));
+            std::for_each(sorted_nodes_begin, sorted_nodes_end, std::mem_fn(&AtomNode::updateSVMNumber));
 
             std::sort(sorted_nodes_begin, sorted_nodes_end, cmp_func);
 
@@ -307,7 +307,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
         for (NodeList::iterator it = sorted_nodes_begin; it != sorted_nodes_end; num_classes++) {
             NodeList::iterator ub = std::upper_bound(it, sorted_nodes_end, *it, cmp_func);
 
-            std::for_each(it, ub, std::bind2nd(std::mem_fun(&AtomNode::setNextSymClassID), 
+            std::for_each(it, ub, std::bind2nd(std::mem_fn(&AtomNode::setNextSymClassID), 
                                                boost::math::prime(num_classes)));
             it = ub;
         }
@@ -315,7 +315,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
         if (num_classes <= max_num_classes)
             break;
 
-        std::for_each(sorted_nodes_begin, sorted_nodes_end, std::mem_fun(&AtomNode::update));
+        std::for_each(sorted_nodes_begin, sorted_nodes_end, std::mem_fn(&AtomNode::update));
 
         max_num_classes = num_classes;
     }

@@ -340,7 +340,7 @@ void Chem::CanonicalNumberingCalculator::canonicalize(std::size_t depth)
     std::size_t max_num_cells = 0;
 
     while (true) {
-        std::for_each(nodes_begin, nodes_end, std::mem_fun(&AtomNode::sortEdges));
+        std::for_each(nodes_begin, nodes_end, std::mem_fn(&AtomNode::sortEdges));
         std::sort(nodes_begin, nodes_end, node_cmp_func);
 
         std::size_t num_cells = 0;
@@ -354,7 +354,7 @@ void Chem::CanonicalNumberingCalculator::canonicalize(std::size_t depth)
             label += eq_range_len;
 
             if (eq_range_len > 1) {
-                std::for_each(it, ub, std::bind2nd(std::mem_fun(&AtomNode::setNewLabel), label));
+                std::for_each(it, ub, std::bind2nd(std::mem_fn(&AtomNode::setNewLabel), label));
 
                 if (eq_range_begin == eq_range_end || (eq_range_end - eq_range_begin > eq_range_len)) {
                     eq_range_begin = it - nodes_begin;
@@ -375,7 +375,7 @@ void Chem::CanonicalNumberingCalculator::canonicalize(std::size_t depth)
         max_num_cells = num_cells;
         eq_range_begin = eq_range_end = 0;
 
-        std::for_each(nodes_begin, nodes_end, std::mem_fun(&AtomNode::updateLabel));
+        std::for_each(nodes_begin, nodes_end, std::mem_fn(&AtomNode::updateLabel));
     }
 
     buildConnectionTable(testConnectionTable);

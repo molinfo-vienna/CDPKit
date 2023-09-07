@@ -143,7 +143,7 @@ void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
     std::size_t max_priority = 1;
 
     while (true) {
-        std::for_each(nodes_begin, nodes_end, std::mem_fun(&AtomNode::updateNbrList));
+        std::for_each(nodes_begin, nodes_end, std::mem_fn(&AtomNode::updateNbrList));
         std::sort(nodes_begin, nodes_end, node_cmp_func);
 
         std::size_t priority = 1;
@@ -151,11 +151,11 @@ void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
         for (NodeList::iterator it = nodes_begin; it != nodes_end; priority++) {
             NodeList::iterator ub = std::upper_bound(it, nodes_end, *it, node_cmp_func);
 
-            std::for_each(it, ub, std::bind2nd(std::mem_fun(&AtomNode::setNewPriority), priority));
+            std::for_each(it, ub, std::bind2nd(std::mem_fn(&AtomNode::setNewPriority), priority));
             it = ub;
         }
 
-        std::for_each(nodes_begin, nodes_end, std::mem_fun(&AtomNode::updatePriority));
+        std::for_each(nodes_begin, nodes_end, std::mem_fn(&AtomNode::updatePriority));
 
         if (priority <= max_priority)
             break;
