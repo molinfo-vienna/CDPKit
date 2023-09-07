@@ -151,7 +151,7 @@ void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
         for (NodeList::iterator it = nodes_begin; it != nodes_end; priority++) {
             NodeList::iterator ub = std::upper_bound(it, nodes_end, *it, node_cmp_func);
 
-            std::for_each(it, ub, std::bind2nd(std::mem_fn(&AtomNode::setNewPriority), priority));
+            std::for_each(it, ub, std::bind(&AtomNode::setNewPriority, std::placeholders::_1, priority));
             it = ub;
         }
 

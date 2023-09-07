@@ -354,7 +354,7 @@ void Chem::CanonicalNumberingCalculator::canonicalize(std::size_t depth)
             label += eq_range_len;
 
             if (eq_range_len > 1) {
-                std::for_each(it, ub, std::bind2nd(std::mem_fn(&AtomNode::setNewLabel), label));
+                std::for_each(it, ub, std::bind(&AtomNode::setNewLabel, std::placeholders::_1, label));
 
                 if (eq_range_begin == eq_range_end || (eq_range_end - eq_range_begin > eq_range_len)) {
                     eq_range_begin = it - nodes_begin;

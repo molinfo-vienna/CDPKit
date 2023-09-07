@@ -307,8 +307,8 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
         for (NodeList::iterator it = sorted_nodes_begin; it != sorted_nodes_end; num_classes++) {
             NodeList::iterator ub = std::upper_bound(it, sorted_nodes_end, *it, cmp_func);
 
-            std::for_each(it, ub, std::bind2nd(std::mem_fn(&AtomNode::setNextSymClassID), 
-                                               boost::math::prime(num_classes)));
+            std::for_each(it, ub, std::bind(&AtomNode::setNextSymClassID, std::placeholders::_1, 
+                                            boost::math::prime(num_classes)));
             it = ub;
         }
 
