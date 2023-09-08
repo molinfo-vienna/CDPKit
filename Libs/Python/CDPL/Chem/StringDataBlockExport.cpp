@@ -54,11 +54,15 @@ void CDPLPythonChem::exportStringDataBlock()
         .def("setData", &Chem::StringDataBlockEntry::setData, (python::arg("self"), python::arg("data")))
         .def("__eq__", &Chem::StringDataBlockEntry::operator==, (python::arg("self"), python::arg("entry")))
         .def("__ne__", &Chem::StringDataBlockEntry::operator!=, (python::arg("self"), python::arg("entry")))
+        .def("__le__", &Chem::StringDataBlockEntry::operator<=, (python::arg("self"), python::arg("entry")))
+        .def("__ge__", &Chem::StringDataBlockEntry::operator>=, (python::arg("self"), python::arg("entry")))
+        .def("__lt__", &Chem::StringDataBlockEntry::operator<, (python::arg("self"), python::arg("entry")))
+        .def("__gt__", &Chem::StringDataBlockEntry::operator>, (python::arg("self"), python::arg("entry")))
         .add_property("header", python::make_function(&Chem::StringDataBlockEntry::getHeader, 
                                                       python::return_value_policy<python::copy_const_reference>()),
                       &Chem::StringDataBlockEntry::setHeader)
         .add_property("data", python::make_function(&Chem::StringDataBlockEntry::getData, 
-                                                      python::return_value_policy<python::copy_const_reference>()),
+                                                    python::return_value_policy<python::copy_const_reference>()),
                       &Chem::StringDataBlockEntry::setData);
 
     python::class_<Chem::StringDataBlock, Chem::StringDataBlock::SharedPointer>("StringDataBlock", python::no_init)
@@ -69,6 +73,6 @@ void CDPLPythonChem::exportStringDataBlock()
              python::default_call_policies, python::default_call_policies>())
         .def("addEntry", &Chem::StringDataBlock::addEntry, 
              (python::arg("self"), python::arg("header"), python::arg("data")))
-        .def("__eq__", &Chem::StringDataBlock::operator==, (python::arg("self"), python::arg("data_block")))
-        .def("__ne__", &Chem::StringDataBlock::operator!=, (python::arg("self"), python::arg("data_block")));
+        .def("__eq__", &Util::operator==<Chem::StringDataBlockEntry>, (python::arg("self"), python::arg("data_block")))
+        .def("__ne__", &Util::operator!=<Chem::StringDataBlockEntry>, (python::arg("self"), python::arg("data_block")));
 }

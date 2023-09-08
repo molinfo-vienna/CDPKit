@@ -43,6 +43,6 @@ void CDPLPythonChem::exportElectronSystemList()
         .def(CDPLPythonUtil::ArrayVisitor<Chem::ElectronSystemList, 
              python::return_value_policy<python::copy_non_const_reference, python::with_custodian_and_ward_postcall<0, 1> >, 
              python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >())
-        .def("__eq__", &Chem::ElectronSystemList::operator==, (python::arg("self"), python::arg("list")))
-        .def("__ne__", &Chem::ElectronSystemList::operator!=, (python::arg("self"), python::arg("list")));
+        .def("__eq__", &Util::operator==<Chem::ElectronSystemList::BaseType::ElementType>, (python::arg("self"), python::arg("list")))
+        .def("__ne__", &Util::operator!=<Chem::ElectronSystemList::BaseType::ElementType>, (python::arg("self"), python::arg("list")));
 }

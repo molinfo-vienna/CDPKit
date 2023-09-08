@@ -62,9 +62,9 @@ namespace
                 .def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchExpressionList<ObjType1, ObjType2>::operator=),
                      (python::arg("self"), python::arg("expr")),
                      python::return_self<python::with_custodian_and_ward<1, 2> >())
-                .def("__eq__", &Chem::MatchExpressionList<ObjType1, ObjType2>::operator==, 
+                .def("__eq__", &Util::operator==<typename Chem::MatchExpressionList<ObjType1, ObjType2>::BaseType::ElementType>, 
                      (python::arg("self"), python::arg("expr")))
-                .def("__ne__", &Chem::MatchExpressionList<ObjType1, ObjType2>::operator!=, 
+                .def("__ne__", &Util::operator!=<typename Chem::MatchExpressionList<ObjType1, ObjType2>::BaseType::ElementType>,
                      (python::arg("self"), python::arg("expr")));
         }
     };

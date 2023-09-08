@@ -36,16 +36,19 @@ void CDPLPythonMolProp::exportElementHistogram()
     using namespace boost;
     using namespace CDPL;
 
+    typedef Util::Map<unsigned int, std::size_t, true> MapType;
+    typedef bool (*CompFuncType)(const MapType&, const MapType&);
+    
     python::class_<MolProp::ElementHistogram, MolProp::ElementHistogram::SharedPointer>("ElementHistogram", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const MolProp::ElementHistogram&>((python::arg("self"), python::arg("hist"))))
         .def(CDPLPythonUtil::MapVisitor<MolProp::ElementHistogram, 
              python::return_value_policy<python::copy_non_const_reference>, 
              python::default_call_policies, python::default_call_policies, python::default_call_policies, false>())
-        .def("__eq__", &MolProp::ElementHistogram::operator==, (python::arg("self"), python::arg("hist")))
-        .def("__ne__", &MolProp::ElementHistogram::operator!=, (python::arg("self"), python::arg("hist")))
-        .def("__le__", &MolProp::ElementHistogram::operator<=, (python::arg("self"), python::arg("hist")))
-        .def("__ge__", &MolProp::ElementHistogram::operator>=, (python::arg("self"), python::arg("hist")))
-        .def("__lt__", &MolProp::ElementHistogram::operator<, (python::arg("self"), python::arg("hist")))
-        .def("__gt__", &MolProp::ElementHistogram::operator>, (python::arg("self"), python::arg("hist")));
+        .def("__eq__", CompFuncType(&Util::operator==), (python::arg("self"), python::arg("hist")))
+        .def("__ne__", CompFuncType(&Util::operator!=), (python::arg("self"), python::arg("hist")))
+        .def("__le__", CompFuncType(&Util::operator<=), (python::arg("self"), python::arg("hist")))
+        .def("__ge__", CompFuncType(&Util::operator>=), (python::arg("self"), python::arg("hist")))
+        .def("__lt__", CompFuncType(&Util::operator<), (python::arg("self"), python::arg("hist")))
+        .def("__gt__", CompFuncType(&Util::operator>), (python::arg("self"), python::arg("hist")));
 }

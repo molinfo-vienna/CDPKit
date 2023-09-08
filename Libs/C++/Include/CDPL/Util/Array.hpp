@@ -512,81 +512,6 @@ namespace CDPL
              */
             ValueType& operator[](std::size_t idx);
 
-            /**
-             * \brief Equality comparison operator.
-             *
-             * This is an equivalence relation. It is linear in the size of the
-             * arrays. Two arrays are considered equivalent if their sizes are equal,
-             * and if the corresponding elements compare equal.
-             *
-             * \param array The other array to be compared with.
-             * \return \c true if the sizes and elements of the arrays are 
-             *         equal, and \c false otherwise.
-             * \note \a ValueType must be equality comparable.
-             */
-            bool operator==(const Array& array) const;
-
-            /**
-             * \brief Inequality comparison operator.
-             *
-             * The result is equivalent to <tt>!(*this == array)</tt>.
-             *
-             * \param array The array to be compared with.
-             * \return \c true if the sizes or elements of the arrays are 
-             *         non-equal, and \c false otherwise.
-             * \see operator==()
-             */
-            bool operator!=(const Array& array) const;
-
-            /**
-             * \brief Less or equal comparison operator.
-             *
-             * The result is equivalent to <tt>!(array < *this)</tt>.
-             *
-             * \param array The other array to be compared with.
-             * \return \c true if this array is lexicographically less
-             *         than or equal to \a array, and \c false otherwise.
-             * \see operator<()
-             */
-            bool operator<=(const Array& array) const;
-
-            /**
-             * \brief Greater or equal comparison operator.
-             *
-             * The result is equivalent to <tt>!(*this < array)</tt>.
-             *
-             * \param array The other array to be compared with.
-             * \return \c true if this array is lexicographically greater
-             *         than or equal to \a array, and \c false otherwise.
-             * \see operator<()
-             */
-            bool operator>=(const Array& array) const;
-
-            /**
-             * \brief Less than comparison operator.
-             *
-             * The result is \c true if the elements of the array are lexicographically less
-             * than the elements in \a array, and \c false otherwise.
-             *
-             * \param array The other array to be compared with.
-             * \return \c true if this array is lexicographically less than \a array, and 
-             *         \c false otherwise.
-             * \note \a ValueType must be less than comparable.
-             */
-            bool operator<(const Array& array) const;
-
-            /**
-             * \brief Greater than comparison operator.
-             *
-             * The result is equivalent to <tt>(array < *this)</tt>.
-             *
-             * \param array The other array to be compared with.
-             * \return \c true if this array is lexicographically greater than \a array, and 
-             *         \c false otherwise.
-             * \see operator<()
-             */
-            bool operator>(const Array& array) const;
-
           protected:
             void checkIfNonEmpty() const;
             void checkIndex(std::size_t idx, bool allow_end) const;
@@ -670,6 +595,73 @@ namespace CDPL
          * \brief An array of <tt>Util::BitSet</tt> objects.
          */
         typedef Array<BitSet> BitSetArray;
+
+        /**
+         * \brief Equality comparison operator.
+         *
+         * \param array1 The first array.
+         * \param array2 The second array.
+         * \return \c true if the sizes and elements of the arrays are 
+         *         equal, and \c false otherwise.
+         */
+        template <typename ValueType>
+        bool operator==(const Array<ValueType>& array1, const Array<ValueType>& array2);
+
+        /**
+         * \brief Inequality comparison operator.
+         *
+         * \param array1 The first array.
+         * \param array2 The second array.
+         * \return \c true if the sizes or elements of the arrays are 
+         *         non-equal, and \c false otherwise.
+         */
+        template <typename ValueType>
+        bool operator!=(const Array<ValueType>& array1, const Array<ValueType>& array2);
+
+        /**
+         * \brief Less or equal comparison operator.
+         *
+         * \param array1 The first array.
+         * \param array2 The second array.
+         * \return \c true if \a array1 is lexicographically less
+         *         than or equal to \a array2, and \c false otherwise.
+         */
+        template <typename ValueType>
+        bool operator<=(const Array<ValueType>& array1, const Array<ValueType>& array2);
+
+        /**
+         * \brief Greater or equal comparison operator.
+         *
+         * \param array1 The first array.
+         * \param array2 The second array.
+         * \return \c true if \a array1 is lexicographically greater
+         *         than or equal to \a array2, and \c false otherwise.
+         */
+        template <typename ValueType>
+        bool operator>=(const Array<ValueType>& array1, const Array<ValueType>& array2);
+
+        /**
+         * \brief Less than comparison operator.
+         *
+         * \param array1 The first array.
+         * \param array2 The second array.
+         * \return \c true if \a array1 is lexicographically less than \a array2, and 
+         *         \c false otherwise.
+         */
+        template <typename ValueType>
+        bool operator<(const Array<ValueType>& array1, const Array<ValueType>& array2);
+
+        /**
+         * \brief Greater than comparison operator.
+         *
+         * \param array1 The first array.
+         * \param array2 The second array.
+         * \return \c true if \a array1 is lexicographically greater than \a array2, and 
+         *         \c false otherwise.
+         */
+        template <typename ValueType>
+        bool operator>(const Array<ValueType>& array1, const Array<ValueType>& array2);
+
     } // namespace Util
 } // namespace CDPL
 
@@ -1001,42 +993,6 @@ ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx)
 }
 
 template <typename ValueType>
-bool CDPL::Util::Array<ValueType>::operator==(const Array& array) const
-{
-    return (data == array.data);
-}
-
-template <typename ValueType>
-bool CDPL::Util::Array<ValueType>::operator!=(const Array& array) const
-{
-    return (data != array.data);
-}
-
-template <typename ValueType>
-bool CDPL::Util::Array<ValueType>::operator<=(const Array& array) const
-{
-    return (data <= array.data);
-}
-
-template <typename ValueType>
-bool CDPL::Util::Array<ValueType>::operator>=(const Array& array) const
-{
-    return (data >= array.data);
-}
-
-template <typename ValueType>
-bool CDPL::Util::Array<ValueType>::operator<(const Array& array) const
-{
-    return (data < array.data);
-}
-
-template <typename ValueType>
-bool CDPL::Util::Array<ValueType>::operator>(const Array& array) const
-{
-    return (data > array.data);
-}
-
-template <typename ValueType>
 void CDPL::Util::Array<ValueType>::checkIfNonEmpty() const
 {
     if (data.empty())
@@ -1087,5 +1043,45 @@ const char* CDPL::Util::Array<ValueType>::getClassName() const
 {
     return "Array";
 }
+
+// \cond DOC_IMPL_DETAILS 
+
+template <typename ValueType>
+bool CDPL::Util::operator==(const Array<ValueType>& array1, const Array<ValueType>& array2)
+{
+    return (array1.getData() == array2.getData());
+}
+
+template <typename ValueType>
+bool CDPL::Util::operator!=(const Array<ValueType>& array1, const Array<ValueType>& array2)
+{
+    return (array1.getData() != array2.getData());
+}
+
+template <typename ValueType>
+bool CDPL::Util::operator<=(const Array<ValueType>& array1, const Array<ValueType>& array2)
+{
+    return (array1.getData() <= array2.getData());
+}
+
+template <typename ValueType>
+bool CDPL::Util::operator>=(const Array<ValueType>& array1, const Array<ValueType>& array2)
+{
+    return (array1.getData() >= array2.getData());
+}
+
+template <typename ValueType>
+bool CDPL::Util::operator<(const Array<ValueType>& array1, const Array<ValueType>& array2)
+{
+    return (array1.getData() < array2.getData());
+}
+
+template <typename ValueType>
+bool CDPL::Util::operator>(const Array<ValueType>& array1, const Array<ValueType>& array2)
+{
+    return (array1.getData() > array2.getData());
+}
+
+// \endcond
 
 #endif // CDPL_UTIL_ARRAY_HPP

@@ -104,6 +104,14 @@ namespace CDPL
              */
             bool operator!=(const StringDataBlockEntry& entry) const;
 
+            bool operator<(const StringDataBlockEntry& entry) const;
+
+            bool operator>(const StringDataBlockEntry& entry) const;
+
+            bool operator<=(const StringDataBlockEntry& entry) const;
+
+            bool operator>=(const StringDataBlockEntry& entry) const;
+            
           private:
             std::string header;
             std::string data;

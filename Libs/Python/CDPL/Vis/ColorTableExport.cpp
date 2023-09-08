@@ -71,6 +71,9 @@ void CDPLPythonVis::exportColorTable()
     using namespace boost;
     using namespace CDPL;
 
+    typedef Util::Map<std::size_t, Vis::Color> MapType;
+    typedef bool (*CompFuncType)(const MapType&, const MapType&);
+    
     python::class_<Vis::ColorTable, Vis::ColorTable::SharedPointer>("ColorTable", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Vis::ColorTable&>((python::arg("self"), python::arg("table"))))
@@ -78,6 +81,6 @@ void CDPLPythonVis::exportColorTable()
              python::return_internal_reference<>, python::default_call_policies, python::default_call_policies,
              python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>())    
         .def("__str__", &toString, python::arg("self"))
-        .def("__eq__", &Vis::ColorTable::operator==, (python::arg("self"), python::arg("table")))
-        .def("__ne__", &Vis::ColorTable::operator!=, (python::arg("self"), python::arg("table")));
+        .def("__eq__", CompFuncType(&Util::operator==), (python::arg("self"), python::arg("table")))
+        .def("__ne__", CompFuncType(&Util::operator!=), (python::arg("self"), python::arg("table")));
 }

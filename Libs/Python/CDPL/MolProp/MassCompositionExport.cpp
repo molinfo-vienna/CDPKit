@@ -36,16 +36,19 @@ void CDPLPythonMolProp::exportMassComposition()
     using namespace boost;
     using namespace CDPL;
 
+    typedef Util::Map<unsigned int, double, true> MapType;
+    typedef bool (*CompFuncType)(const MapType&, const MapType&);
+ 
     python::class_<MolProp::MassComposition, MolProp::MassComposition::SharedPointer>("MassComposition", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const MolProp::MassComposition&>((python::arg("self"), python::arg("mass_comp"))))
         .def(CDPLPythonUtil::MapVisitor<MolProp::MassComposition, 
              python::return_value_policy<python::copy_non_const_reference>, 
              python::default_call_policies, python::default_call_policies, python::default_call_policies, false>())
-        .def("__eq__", &MolProp::MassComposition::operator==, (python::arg("self"), python::arg("mass_comp")))
-        .def("__ne__", &MolProp::MassComposition::operator!=, (python::arg("self"), python::arg("mass_comp")))
-        .def("__le__", &MolProp::MassComposition::operator<=, (python::arg("self"), python::arg("mass_comp")))
-        .def("__ge__", &MolProp::MassComposition::operator>=, (python::arg("self"), python::arg("mass_comp")))
-        .def("__lt__", &MolProp::MassComposition::operator<, (python::arg("self"), python::arg("mass_comp")))
-        .def("__gt__", &MolProp::MassComposition::operator>, (python::arg("self"), python::arg("mass_comp")));
+        .def("__eq__", CompFuncType(&Util::operator==), (python::arg("self"), python::arg("mass_comp")))
+        .def("__ne__", CompFuncType(&Util::operator!=), (python::arg("self"), python::arg("mass_comp")))
+        .def("__le__", CompFuncType(&Util::operator<=), (python::arg("self"), python::arg("mass_comp")))
+        .def("__ge__", CompFuncType(&Util::operator>=), (python::arg("self"), python::arg("mass_comp")))
+        .def("__lt__", CompFuncType(&Util::operator<), (python::arg("self"), python::arg("mass_comp")))
+        .def("__gt__", CompFuncType(&Util::operator>), (python::arg("self"), python::arg("mass_comp")));
 }

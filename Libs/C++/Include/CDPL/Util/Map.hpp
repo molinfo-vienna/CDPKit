@@ -181,6 +181,10 @@ namespace CDPL
              */
             virtual ~Map() {}
 
+            StorageType& getData();
+
+            const StorageType& getData() const;
+            
             /**
              * \brief Returns the size (number of entries) of the map.
              * \return The size of the map.
@@ -567,81 +571,7 @@ namespace CDPL
              */
             ReverseEntryIterator getEntriesReverseEnd();
 
-            /**
-             * \brief Equality comparison operator.
-             *
-             * This is an equivalence relation. It is linear in the size of the
-             * map. Two maps are considered equivalent if their sizes are equal,
-             * and if the corresponding entries compare equal.
-             *
-             * \param map The other map to be compared with.
-             * \return \c true if the sizes and entries of the arrays are 
-             *         equal, and \c false otherwise.
-             * \note \a KeyType and \a ValueType must be equality comparable.
-             */
-            bool operator==(const Map& map) const;
-
-            /**
-             * \brief Inequality comparison operator.
-             *
-             * The result is equivalent to <tt>!(*this == map)</tt>.
-             *
-             * \param map The map to be compared with.
-             * \return \c true if the sizes or entries of the maps are 
-             *         non-equal, and \c false otherwise.
-             * \see operator==()
-             */
-            bool operator!=(const Map& map) const;
-
-            /**
-             * \brief Less or equal comparison operator.
-             *
-             * The result is equivalent to <tt>!(map < *this)</tt>.
-             *
-             * \param map The other map to be compared with.
-             * \return \c true if this map is lexicographically less
-             *         than or equal to \a map, and \c false otherwise.
-             * \see operator<()
-             */
-            bool operator<=(const Map& map) const;
-
-            /**
-             * \brief Greater or equal comparison operator.
-             *
-             * The result is equivalent to <tt>!(*this < map)</tt>.
-             *
-             * \param map The other map to be compared with.
-             * \return \c true if this map is lexicographically greater
-             *         than or equal to \a map, and \c false otherwise.
-             * \see operator<()
-             */
-            bool operator>=(const Map& map) const;
-
-            /**
-             * \brief Less than comparison operator.
-             *
-             * The result is \c true if the entries of the array are lexicographically less
-             * than the entries in \a map, and \c false otherwise.
-             *
-             * \param map The other map to be compared with.
-             * \return \c true if this map is lexicographically less than \a map, and 
-             *         \c false otherwise.
-             * \note \a KeyType and \a ValueType must be less than comparable.
-             */
-            bool operator<(const Map& map) const;
-
-            /**
-             * \brief Greater than comparison operator.
-             *
-             * The result is equivalent to <tt>(map < *this)</tt>.
-             *
-             * \param map The other map to be compared with.
-             * \return \c true if this map is lexicographically greater than \a map, and 
-             *         \c false otherwise.
-             * \see operator<()
-             */
-            bool operator>(const Map& map) const;
-
+          
           protected:
             /**
              * \brief Returns the name of the (derived) Map class.
@@ -677,11 +607,98 @@ namespace CDPL
 
             StorageType data;
         };
+
+        /**
+         * \brief Equality comparison operator.
+         *
+         * \param map1 The first map.
+         * \param map2 The second map.
+         * \return \c true if the sizes and elements of the maps are 
+         *         equal, and \c false otherwise.
+         */
+        template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+        bool operator==(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                        const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2);
+
+        /**
+         * \brief Inequality comparison operator.
+         *
+         * \param map1 The first map.
+         * \param map2 The second map.
+         * \return \c true if the sizes or elements of the maps are 
+         *         non-equal, and \c false otherwise.
+         */
+        template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+        bool operator!=(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                        const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2);
+
+        /**
+         * \brief Less or equal comparison operator.
+         *
+         * \param map1 The first map.
+         * \param map2 The second map.
+         * \return \c true if \a map1 is lexicographically less
+         *         than or equal to \a map2, and \c false otherwise.
+         */
+        template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+        bool operator<=(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                        const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2);
+
+        /**
+         * \brief Greater or equal comparison operator.
+         *
+         * \param map1 The first map.
+         * \param map2 The second map.
+         * \return \c true if \a map1 is lexicographically greater
+         *         than or equal to \a map2, and \c false otherwise.
+         */
+        template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+        bool operator>=(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                        const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2);
+
+        /**
+         * \brief Less than comparison operator.
+         *
+         * \param map1 The first map.
+         * \param map2 The second map.
+         * \return \c true if \a map1 is lexicographically less than \a map2, and 
+         *         \c false otherwise.
+         */
+        template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+        bool operator<(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                       const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2);
+
+        /**
+         * \brief Greater than comparison operator.
+         *
+         * \param map1 The first map.
+         * \param map2 The second map.
+         * \return \c true if \a map1 is lexicographically greater than \a map2, and 
+         *         \c false otherwise.
+         */
+        template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+        bool operator>(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                       const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2);
+        
     } // namespace Util
 } // namespace CDPL
 
 
 // Implementation
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+typename CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::StorageType&
+CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getData()
+{
+    return data;
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+const typename CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::StorageType&
+CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getData() const
+{
+    return data;
+}
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 std::size_t CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getSize() const
@@ -994,42 +1011,6 @@ CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesReverseEnd()
 }
 
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-bool CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::operator==(const Map& map) const
-{
-    return (data == map.data);
-}
-
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-bool CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::operator!=(const Map& map) const
-{
-    return (data != map.data);
-}
-
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-bool CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::operator<=(const Map& map) const
-{
-    return (data <= map.data);
-}
-
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-bool CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::operator>=(const Map& map) const
-{
-    return (data >= map.data);
-}
-
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-bool CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::operator<(const Map& map) const
-{
-    return (data < map.data);
-}
-
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
-bool CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::operator>(const Map& map) const
-{
-    return (data > map.data);
-}
-
-template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 const char* CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getClassName() const
 {
     return "Map";
@@ -1040,5 +1021,51 @@ const Value& CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getDefaul
 {
     return MapDefaultValue<Value, AllowDefValues>::get();
 }
+
+// \cond DOC_IMPL_DETAILS
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+bool CDPL::Util::operator==(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                            const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2)
+{
+    return (map1.getData() == map2.getData());
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+bool CDPL::Util::operator!=(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                            const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2)
+{
+    return (map1.getData() != map2.getData());
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+bool CDPL::Util::operator<=(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                            const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2)
+{
+    return (map1.getData() <= map2.getData());
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+bool CDPL::Util::operator>=(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                            const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2)
+{
+    return (map1.getData() >= map2.getData());
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+bool CDPL::Util::operator<(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                           const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2)
+{
+    return (map1.getData() < map2.getData());
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+bool CDPL::Util::operator>(const Map<Key, Value, AllowDefValues, KeyCompFunc>& map1,
+                           const Map<Key, Value, AllowDefValues, KeyCompFunc>& map2)
+{
+    return (map1.getData() > map2.getData());
+}
+
+// \endcond
 
 #endif // CDPL_UTIL_MAP_HPP

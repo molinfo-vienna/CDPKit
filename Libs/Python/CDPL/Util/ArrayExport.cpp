@@ -72,12 +72,12 @@ void CDPLPythonUtil::exportArrays()
         .def(ArrayVisitor<Util::UIArray, 
              python::return_value_policy<python::return_by_value>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::UIArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::UIArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::UIArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::UIArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::UIArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::UIArray::operator>, (python::arg("self"), python::arg("array")));
+        .def("__eq__", &Util::operator==<Util::UIArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::UIArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::UIArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::UIArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::UIArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::UIArray::ElementType>, (python::arg("self"), python::arg("array")));
 
     python::class_<Util::LArray, Util::LArray::SharedPointer>("LArray", python::no_init)
         .def(python::init<>(python::arg("self")))
@@ -85,12 +85,12 @@ void CDPLPythonUtil::exportArrays()
         .def(ArrayVisitor<Util::LArray, 
              python::return_value_policy<python::return_by_value>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::LArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::LArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::LArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::LArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::LArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::LArray::operator>, (python::arg("self"), python::arg("array")));
+        .def("__eq__", &Util::operator==<Util::LArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::LArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::LArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::LArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::LArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::LArray::ElementType>, (python::arg("self"), python::arg("array")));
 
     python::class_<Util::STArray, Util::STArray::SharedPointer>("STArray", python::no_init)
         .def(python::init<>(python::arg("self")))
@@ -98,12 +98,12 @@ void CDPLPythonUtil::exportArrays()
         .def(ArrayVisitor<Util::STArray, 
              python::return_value_policy<python::return_by_value>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::STArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::STArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::STArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::STArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::STArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::STArray::operator>, (python::arg("self"), python::arg("array")));
+        .def("__eq__", &Util::operator==<Util::STArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::STArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::STArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::STArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::STArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::STArray::ElementType>, (python::arg("self"), python::arg("array")));
 
     python::class_<Util::STPair>("STPair", python::no_init)
         .def(python::init<>(python::arg("self")))
@@ -136,12 +136,12 @@ void CDPLPythonUtil::exportArrays()
         .def(ArrayVisitor<Util::STPairArray, 
              python::return_internal_reference<>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::STPairArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::STPairArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::STPairArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::STPairArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::STPairArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::STPairArray::operator>, (python::arg("self"), python::arg("array")));
+        .def("__eq__", &Util::operator==<Util::STPairArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::STPairArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::STPairArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::STPairArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::STPairArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::STPairArray::ElementType>, (python::arg("self"), python::arg("array")));
     
     python::class_<Util::DArray, Util::DArray::SharedPointer>("DArray", python::no_init)
         .def(python::init<>(python::arg("self")))
@@ -149,12 +149,12 @@ void CDPLPythonUtil::exportArrays()
         .def(ArrayVisitor<Util::DArray, 
              python::return_value_policy<python::return_by_value>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::DArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::DArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::DArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::DArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::DArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::DArray::operator>, (python::arg("self"), python::arg("array")));
+        .def("__eq__", &Util::operator==<Util::DArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::DArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::DArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::DArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::DArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::DArray::ElementType>, (python::arg("self"), python::arg("array")));
 
     python::class_<Util::SArray, Util::SArray::SharedPointer>("SArray", python::no_init)
         .def(python::init<>(python::arg("self")))
@@ -162,23 +162,23 @@ void CDPLPythonUtil::exportArrays()
         .def(ArrayVisitor<Util::SArray, 
              python::return_value_policy<python::return_by_value>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::SArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::SArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::SArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::SArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::SArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::SArray::operator>, (python::arg("self"), python::arg("array")));
-
+        .def("__eq__", &Util::operator==<Util::SArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::SArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::SArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::SArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::SArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::SArray::ElementType>, (python::arg("self"), python::arg("array")));
+ 
     python::class_<Util::BitSetArray, Util::BitSetArray::SharedPointer>("BitSetArray", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Util::BitSetArray&>((python::arg("self"), python::arg("array"))))
         .def(ArrayVisitor<Util::BitSetArray, 
              python::return_internal_reference<>, python::default_call_policies,
              python::default_call_policies, python::default_call_policies>())
-        .def("__eq__", &Util::BitSetArray::operator==, (python::arg("self"), python::arg("array")))
-        .def("__ne__", &Util::BitSetArray::operator!=, (python::arg("self"), python::arg("array")))
-        .def("__le__", &Util::BitSetArray::operator<=, (python::arg("self"), python::arg("array")))
-        .def("__ge__", &Util::BitSetArray::operator>=, (python::arg("self"), python::arg("array")))
-        .def("__lt__", &Util::BitSetArray::operator<, (python::arg("self"), python::arg("array")))
-        .def("__gt__", &Util::BitSetArray::operator>, (python::arg("self"), python::arg("array")));
+        .def("__eq__", &Util::operator==<Util::BitSetArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ne__", &Util::operator!=<Util::BitSetArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__le__", &Util::operator<=<Util::BitSetArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__ge__", &Util::operator>=<Util::BitSetArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__lt__", &Util::operator< <Util::BitSetArray::ElementType>, (python::arg("self"), python::arg("array")))
+        .def("__gt__", &Util::operator><Util::BitSetArray::ElementType>, (python::arg("self"), python::arg("array")));
 }

@@ -36,16 +36,19 @@ void CDPLPythonPharm::exportFeatureTypeHistogram()
     using namespace boost;
     using namespace CDPL;
 
+    typedef Util::Map<unsigned int, std::size_t, true> MapType;
+    typedef bool (*CompFuncType)(const MapType&, const MapType&);
+ 
     python::class_<Pharm::FeatureTypeHistogram, Pharm::FeatureTypeHistogram::SharedPointer>("FeatureTypeHistogram", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Pharm::FeatureTypeHistogram&>((python::arg("self"), python::arg("ft_hist"))))
         .def(CDPLPythonUtil::MapVisitor<Pharm::FeatureTypeHistogram, 
              python::return_value_policy<python::copy_non_const_reference>, 
              python::default_call_policies, python::default_call_policies, python::default_call_policies, false>())
-        .def("__eq__", &Pharm::FeatureTypeHistogram::operator==, (python::arg("self"), python::arg("ft_hist")))
-        .def("__ne__", &Pharm::FeatureTypeHistogram::operator!=, (python::arg("self"), python::arg("ft_hist")))
-        .def("__le__", &Pharm::FeatureTypeHistogram::operator<=, (python::arg("self"), python::arg("ft_hist")))
-        .def("__ge__", &Pharm::FeatureTypeHistogram::operator>=, (python::arg("self"), python::arg("ft_hist")))
-        .def("__lt__", &Pharm::FeatureTypeHistogram::operator<, (python::arg("self"), python::arg("ft_hist")))
-        .def("__gt__", &Pharm::FeatureTypeHistogram::operator>, (python::arg("self"), python::arg("ft_hist")));
+        .def("__eq__", CompFuncType(&Util::operator==), (python::arg("self"), python::arg("ft_hist")))
+        .def("__ne__", CompFuncType(&Util::operator!=), (python::arg("self"), python::arg("ft_hist")))
+        .def("__le__", CompFuncType(&Util::operator<=), (python::arg("self"), python::arg("ft_hist")))
+        .def("__ge__", CompFuncType(&Util::operator>=), (python::arg("self"), python::arg("ft_hist")))
+        .def("__lt__", CompFuncType(&Util::operator<), (python::arg("self"), python::arg("ft_hist")))
+        .def("__gt__", CompFuncType(&Util::operator>), (python::arg("self"), python::arg("ft_hist")));
 }

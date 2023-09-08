@@ -177,15 +177,6 @@ namespace CDPL
              * \return \c true if the value of the query attribute has been set, \c false otherwise.
              */
             bool hasValue() const;
-
-#ifdef _MSC_VER // results in compilation errors if operators are missing         
-            bool operator==(const MatchConstraint&) const;
-            bool operator!=(const MatchConstraint&) const;
-            bool operator<=(const MatchConstraint&) const;
-            bool operator>=(const MatchConstraint&) const;
-            bool operator<(const MatchConstraint&) const;
-            bool operator>(const MatchConstraint&) const;
-#endif // _MSC_VER
             
           private:
             unsigned int id;

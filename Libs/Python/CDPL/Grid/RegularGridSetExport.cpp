@@ -70,8 +70,8 @@ namespace
             .def(CDPLPythonUtil::ArrayVisitor<GridSetType, python::return_value_policy<python::return_by_value>,
                                               python::default_call_policies, python::default_call_policies,
                                               python::default_call_policies>())
-            .def("__eq__", &GridSetType::operator==, (python::arg("self"), python::arg("set")))
-            .def("__ne__", &GridSetType::operator!=, (python::arg("self"), python::arg("set")));
+            .def("__eq__", &Util::operator==<typename GridSetType::BaseType::ElementType>, (python::arg("self"), python::arg("set")))
+            .def("__ne__", &Util::operator!=<typename GridSetType::BaseType::ElementType>, (python::arg("self"), python::arg("set")));
 
         AddPickleSupport<GridSetType, GridSetWriter, GridSetReader>::add(cls);
     }

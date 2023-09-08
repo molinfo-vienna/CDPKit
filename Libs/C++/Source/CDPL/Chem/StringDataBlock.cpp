@@ -61,3 +61,34 @@ bool Chem::StringDataBlockEntry::operator!=(const StringDataBlockEntry& entry) c
     return !this->operator==(entry);
 }
 
+bool Chem::StringDataBlockEntry::operator<(const StringDataBlockEntry& entry) const
+{
+    if (header == entry.header)
+        return (data < entry.data);
+
+    return (header < entry.header);
+}
+
+bool Chem::StringDataBlockEntry::operator>(const StringDataBlockEntry& entry) const
+{
+    if (header == entry.header)
+        return (data > entry.data);
+
+    return (header > entry.header);
+}
+
+bool Chem::StringDataBlockEntry::operator<=(const StringDataBlockEntry& entry) const
+{
+    if (header == entry.header)
+        return (data <= entry.data);
+
+    return (header < entry.header);
+}
+
+bool Chem::StringDataBlockEntry::operator>=(const StringDataBlockEntry& entry) const
+{
+    if (header == entry.header)
+        return (data >= entry.data);
+
+    return (header > entry.header);
+}

@@ -55,8 +55,8 @@ namespace
                 .def(CDPLPythonUtil::ArrayVisitor<ArrayType, 
                      python::return_internal_reference<>, python::default_call_policies, 
                      python::default_call_policies, python::default_call_policies>())
-                .def("__eq__", &ArrayType::operator==, (python::arg("self"), python::arg("array")))
-                .def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")))
+                .def("__eq__", &Util::operator==<typename ArrayType::ValueType>, (python::arg("self"), python::arg("array")))
+                .def("__ne__", &Util::operator!=<typename ArrayType::ValueType>, (python::arg("self"), python::arg("array")))
 #ifdef HAVE_NUMPY
                 .def("__init__", python::make_constructor(&construct, python::default_call_policies(), (python::arg("a"))))
                 .def("toArray", &toArray, (python::arg("self"), python::arg("as_vec")))
