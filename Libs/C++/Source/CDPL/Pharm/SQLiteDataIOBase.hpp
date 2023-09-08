@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 
-#include <sqlite3.h>
+#include "SQLite3/sqlite3.h"
 
 
 namespace CDPL

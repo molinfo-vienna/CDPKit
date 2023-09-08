@@ -25,8 +25,6 @@
 #ifndef CDPL_PYTHON_PHARM_CLASSEXPORTS_HPP
 #define CDPL_PYTHON_PHARM_CLASSEXPORTS_HPP
 
-#include "CDPL/Config.hpp"
-
 
 namespace CDPLPythonPharm
 {
@@ -69,8 +67,6 @@ namespace CDPLPythonPharm
 
     void exportFileScreeningHitCollector();
 
-#ifdef HAVE_SQLITE3
-
     void exportPSDPharmacophoreInputHandler();
     void exportPSDMoleculeInputHandler();
     void exportPSDMolecularGraphOutputHandler();
@@ -79,8 +75,6 @@ namespace CDPLPythonPharm
     void exportPSDMolecularGraphWriter();
     void exportPSDScreeningDBCreator();
     void exportPSDScreeningDBAccessor();
-
-#endif // HAVE_SQLITE3
 
     void exportFeatureGenerator();
     void exportPharmacophoreGenerator();

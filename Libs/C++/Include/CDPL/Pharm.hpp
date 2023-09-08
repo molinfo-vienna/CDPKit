@@ -29,7 +29,6 @@
 #ifndef CDPL_PHARM_HPP
 #define CDPL_PHARM_HPP
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/BasicFeature.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -120,9 +119,6 @@
 #include "CDPL/Pharm/CDFBZ2FeatureContainerWriter.hpp"
 #include "CDPL/Pharm/PharmacophoreReader.hpp"
 #include "CDPL/Pharm/FeatureContainerWriter.hpp"
-
-#ifdef HAVE_SQLITE3
-
 # include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
 # include "CDPL/Pharm/PSDMoleculeInputHandler.hpp"
 # include "CDPL/Pharm/PSDMolecularGraphOutputHandler.hpp"
@@ -132,5 +128,4 @@
 # include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 # include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 
-#endif // HAVE_SQLITE3
 #endif // CDPL_PHARM_HPP

@@ -28,7 +28,7 @@
 #include <locale>
 #include <cassert>
 
-#include "LibInChI/inchi_api.h"
+#include "InChI/inchi_api.h"
 
 #include "CDPL/Chem/INCHIMoleculeReader.hpp"
 #include "CDPL/Chem/Molecule.hpp"

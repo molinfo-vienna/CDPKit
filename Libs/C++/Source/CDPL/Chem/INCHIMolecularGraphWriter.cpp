@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <limits>
 
-#include "LibInChI/inchi_api.h"
+#include "InChI/inchi_api.h"
 
 #include "CDPL/Chem/INCHIMolecularGraphWriter.hpp"
 #include "CDPL/Chem/Atom.hpp"

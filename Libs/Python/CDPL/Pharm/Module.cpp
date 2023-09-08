@@ -24,8 +24,6 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
-
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
@@ -72,8 +70,6 @@ BOOST_PYTHON_MODULE(_pharm)
 
     exportFileScreeningHitCollector();
 
-#ifdef HAVE_SQLITE3
-
     exportPSDPharmacophoreInputHandler();
     exportPSDMoleculeInputHandler();
     exportPSDMolecularGraphOutputHandler();
@@ -82,8 +78,6 @@ BOOST_PYTHON_MODULE(_pharm)
     exportPSDMolecularGraphWriter();
     exportPSDScreeningDBCreator();
     exportPSDScreeningDBAccessor();
-
-#endif // HAVE_SQLITE3
 
     exportFeatureGenerator();
     exportPharmacophoreGenerator();

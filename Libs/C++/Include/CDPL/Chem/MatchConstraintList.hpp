@@ -178,6 +178,15 @@ namespace CDPL
              */
             bool hasValue() const;
 
+#ifdef _MSC_VER // results in compilation errors if operators are missing         
+            bool operator==(const Array& array) const;
+            bool operator!=(const Array& array) const;
+            bool operator<=(const Array& array) const;
+            bool operator>=(const Array& array) const;
+            bool operator<(const Array& array) const;
+            bool operator>(const Array& array) const;
+#endif // _MSC_VER
+            
           private:
             unsigned int id;
             Relation     relation;

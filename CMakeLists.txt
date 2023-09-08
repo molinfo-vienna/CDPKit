@@ -278,12 +278,6 @@ ELSE(NOT CAIRO_FOUND)
   CHECK_FUNCTION_EXISTS(cairo_svg_surface_create HAVE_CAIRO_SVG_SUPPORT)
 ENDIF(NOT CAIRO_FOUND)
 
-FIND_PACKAGE(SQLite3)
-
-IF(NOT SQLITE3_FOUND)
-  MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
-ENDIF(NOT SQLITE3_FOUND)
-
 IF(BUILD_PYTHON_MODULES)
   IF(NOT NUMPY_FOUND)
     MESSAGE("!! Warning: NumPy python package not found -> CDPL.Math NDArray support won't be built.")
@@ -356,7 +350,6 @@ IF(NOT FIXED_WIDTH_UINT_TYPES)
 ENDIF(NOT FIXED_WIDTH_UINT_TYPES)
 
 SET(HAVE_CAIRO ${CAIRO_FOUND})
-SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
 SET(HAVE_QT ${Qt5Gui_FOUND})
 SET(HAVE_NUMPY ${NUMPY_FOUND})
 

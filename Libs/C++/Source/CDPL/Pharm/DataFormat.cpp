@@ -24,7 +24,6 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Pharm/DataFormat.hpp"
@@ -32,15 +31,9 @@
 #include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
-
-#ifdef HAVE_SQLITE3
-
 #include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PSDMoleculeInputHandler.hpp"
 #include "CDPL/Pharm/PSDMolecularGraphOutputHandler.hpp"
-
-#endif // HAVE_SQLITE3
-
 #include "CDPL/Pharm/CDFGZPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
@@ -96,17 +89,13 @@ namespace
 
             DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFPharmacophoreInputHandler()));
             DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PMLPharmacophoreInputHandler()));
-        
+            
             DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFFeatureContainerOutputHandler()));
             DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new PMLFeatureContainerOutputHandler()));
-        
-#ifdef HAVE_SQLITE3
 
             DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PSDPharmacophoreInputHandler()));
             DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PSDMoleculeInputHandler()));
             DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSDMolecularGraphOutputHandler()));
-
-#endif // HAVE_SQLITE3
 
             DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFGZPharmacophoreInputHandler()));
             DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFBZ2PharmacophoreInputHandler()));

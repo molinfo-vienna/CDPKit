@@ -26,7 +26,7 @@
 
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 
-#include "LibInChI/inchi_api.h"
+#include "InChI/inchi_api.h"
 
 
 namespace CDPL 

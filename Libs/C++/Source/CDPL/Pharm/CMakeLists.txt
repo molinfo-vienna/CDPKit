@@ -88,7 +88,19 @@ SET(cdpl-pharm_LIB_SRCS
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
     FileScreeningHitCollector.cpp
-    
+    PSDScreeningDBCreator.cpp
+    PSDScreeningDBCreatorImpl.cpp
+    PSDScreeningDBAccessorImpl.cpp
+    PSDScreeningDBAccessor.cpp
+    SQLiteDataIOBase.cpp
+   
+    PSDPharmacophoreInputHandler.cpp
+    PSDMoleculeInputHandler.cpp
+    PSDMolecularGraphOutputHandler.cpp
+    PSDPharmacophoreReader.cpp
+    PSDMoleculeReader.cpp
+    PSDMolecularGraphWriter.cpp
+      
     CDFPharmacophoreDataReader.cpp
     CDFPharmacophoreDataWriter.cpp
     CDFPharmacophoreReader.cpp
@@ -125,30 +137,8 @@ SET(cdpl-pharm_LIB_SRCS
  
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
-IF(SQLITE3_FOUND)
-  SET(cdpl-pharm_LIB_SRCS
-      ${cdpl-pharm_LIB_SRCS}
-      PSDScreeningDBCreator.cpp
-      PSDScreeningDBAccessor.cpp
-
-      SQLiteDataIOBase.cpp
-      PSDScreeningDBCreatorImpl.cpp
-      PSDScreeningDBAccessorImpl.cpp
-
-      PSDPharmacophoreInputHandler.cpp
-      PSDMoleculeInputHandler.cpp
-      PSDMolecularGraphOutputHandler.cpp
-      PSDPharmacophoreReader.cpp
-      PSDMoleculeReader.cpp
-      PSDMolecularGraphWriter.cpp
-     )    
-
-  LINK_LIBRARIES(${SQLITE3_LIBRARY})
-  INCLUDE_DIRECTORIES("${SQLITE3_INCLUDE_DIR}")
-ENDIF(SQLITE3_FOUND)
-
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
-  ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+  ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:sqlite3> $<TARGET_OBJECTS:cdpl-internal>)
 
   SET_TARGET_PROPERTIES(cdpl-pharm-static PROPERTIES 
     OUTPUT_NAME cdpl-pharm
@@ -163,10 +153,14 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
     )
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
-ADD_LIBRARY(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
+ADD_LIBRARY(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:sqlite3> $<TARGET_OBJECTS:cdpl-internal>)
 
 TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-biomol-shared cdpl-base-shared
   cdpl-math-shared cdpl-util-shared)
+
+IF(UNIX)
+  TARGET_LINK_LIBRARIES(cdpl-pharm-shared dl) # for sqlite3
+ENDIF()
 
 SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
   OUTPUT_NAME cdpl-pharm

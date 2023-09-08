@@ -65,7 +65,16 @@ SET(pharm_MOD_SRCS
     ScreeningProcessorExport.cpp
     PharmacophoreFitScreeningScoreExport.cpp
     FileScreeningHitCollectorExport.cpp
-    
+
+    PSDScreeningDBCreatorExport.cpp
+    PSDScreeningDBAccessorExport.cpp
+    PSDPharmacophoreInputHandlerExport.cpp 
+    PSDMoleculeInputHandlerExport.cpp 
+    PSDMolecularGraphOutputHandlerExport.cpp 
+    PSDPharmacophoreReaderExport.cpp 
+    PSDMoleculeReaderExport.cpp 
+    PSDMolecularGraphWriterExport.cpp
+      
     FunctionWrapperExport.cpp
 
     FeatureGeneratorExport.cpp
@@ -134,22 +143,6 @@ SET(pharm_MOD_SRCS
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )
-
-IF(SQLITE3_FOUND)
-  SET(pharm_MOD_SRCS
-      ${pharm_MOD_SRCS}
-      PSDScreeningDBCreatorExport.cpp
-      PSDScreeningDBAccessorExport.cpp
-  
-      PSDPharmacophoreInputHandlerExport.cpp 
-      PSDMoleculeInputHandlerExport.cpp 
-      PSDMolecularGraphOutputHandlerExport.cpp 
-
-      PSDPharmacophoreReaderExport.cpp 
-      PSDMoleculeReaderExport.cpp 
-      PSDMolecularGraphWriterExport.cpp
-      )    
-ENDIF(SQLITE3_FOUND)
 
 ADD_LIBRARY(_pharm MODULE ${pharm_MOD_SRCS})
 
