@@ -378,7 +378,7 @@ void Chem::SymmetryClassCalculator::AtomNode::update()
 {
     using namespace std::placeholders;
         
-    nbrSymClassIDProd = std::accumulate(nbrNodes.begin(), nbrNodes.end(), 1,
+    nbrSymClassIDProd = std::accumulate(nbrNodes.begin(), nbrNodes.end(), std::uint64_t(1),
                                         std::bind(std::multiplies<std::uint64_t>(), _1, 
                                                   std::bind(&AtomNode::nextSymClassID, _2)));
     symClassID = nextSymClassID;

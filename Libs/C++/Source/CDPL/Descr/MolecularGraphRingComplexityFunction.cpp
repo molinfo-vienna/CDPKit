@@ -42,7 +42,7 @@ double Descr::calcRingComplexity(const Chem::MolecularGraph& molgraph)
     
     const FragmentList& sssr = *getSSSR(molgraph);
 
-    std::size_t sum_ring_sizes = std::accumulate(sssr.getElementsBegin(), sssr.getElementsEnd(), 0, 
+    std::size_t sum_ring_sizes = std::accumulate(sssr.getElementsBegin(), sssr.getElementsEnd(), std::size_t(0), 
                                                  std::bind(std::plus<std::size_t>(), _1, 
                                                            std::bind(&Fragment::getNumBonds, _2)));
 
