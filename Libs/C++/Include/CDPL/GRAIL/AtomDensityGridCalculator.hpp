@@ -44,12 +44,14 @@
 namespace CDPL
 {
 
+    // \cond DOC_IMPL_DETAILS
     namespace Internal
     {
 
         template <typename PT, typename CT, typename ST>
         class Octree;
     }
+    // \endcond
 
     namespace Chem
     {
