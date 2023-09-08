@@ -243,80 +243,44 @@ class LArray(Boost.Python.instance):
     def __setitem__(index: int, value: int) -> None: pass
 
     ##
-    # \brief Equality comparison operator.
-    # 
-    # This is an equivalence relation. It is linear in the size of the arrays. Two arrays are considered equivalent if their sizes are equal, and if the corresponding elements compare equal.
-    # 
-    # \param array The other array to be compared with.
-    # 
-    # \return <tt>True</tt> if the sizes and elements of the arrays are equal, and <tt>False</tt> otherwise. 
-    # 
-    # \note <em>ValueType</em> must be equality comparable.
+    # \brief Returns the result of the comparison operation <tt>self == array</tt>.
+    # \param array The \e %LArray instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __eq__(array: LArray) -> bool: pass
 
     ##
-    # \brief Inequality comparison operator.
-    # 
-    # The result is equivalent to <tt>!(self == array)</tt>.
-    # 
-    # \param array The array to be compared with.
-    # 
-    # \return <tt>True</tt> if the sizes or elements of the arrays are non-equal, and <tt>False</tt> otherwise. 
-    # 
-    # \see __eq__()
+    # \brief Returns the result of the comparison operation <tt>self != array</tt>.
+    # \param array The \e %LArray instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __ne__(array: LArray) -> bool: pass
 
     ##
-    # \brief Less or equal comparison operator.
-    # 
-    # The result is equivalent to <tt>!(array < self)</tt>.
-    # 
-    # \param array The other array to be compared with.
-    # 
-    # \return <tt>True</tt> if this array is lexicographically less than or equal to <em>array</em>, and <tt>False</tt> otherwise. 
-    # 
-    # \see __lt__()
+    # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
+    # \param array The \e %LArray instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __le__(array: LArray) -> bool: pass
 
     ##
-    # \brief Greater or equal comparison operator.
-    # 
-    # The result is equivalent to <tt>!(self < array)</tt>.
-    # 
-    # \param array The other array to be compared with.
-    # 
-    # \return <tt>True</tt> if this array is lexicographically greater than or equal to <em>array</em>, and <tt>False</tt> otherwise. 
-    # 
-    # \see __lt__()
+    # \brief Returns the result of the comparison operation <tt>self >= array</tt>.
+    # \param array The \e %LArray instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __ge__(array: LArray) -> bool: pass
 
     ##
-    # \brief Less than comparison operator.
-    # 
-    # The result is <tt>True</tt> if the elements of the array are lexicographically less than the elements in <em>array</em>, and <tt>False</tt> otherwise.
-    # 
-    # \param array The other array to be compared with.
-    # 
-    # \return <tt>True</tt> if this array is lexicographically less than <em>array</em>, and <tt>False</tt> otherwise. 
-    # 
-    # \note <em>ValueType</em> must be less than comparable.
+    # \brief Returns the result of the comparison operation <tt>self < array</tt>.
+    # \param array The \e %LArray instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __lt__(array: LArray) -> bool: pass
 
     ##
-    # \brief Greater than comparison operator.
-    # 
-    # The result is equivalent to <tt>(array < self)</tt>.
-    # 
-    # \param array The other array to be compared with.
-    # 
-    # \return <tt>True</tt> if this array is lexicographically greater than <em>array</em>, and <tt>False</tt> otherwise. 
-    # 
-    # \see __lt__()
+    # \brief Returns the result of the comparison operation <tt>self > array</tt>.
+    # \param array The \e %LArray instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __gt__(array: LArray) -> bool: pass
 

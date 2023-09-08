@@ -263,28 +263,16 @@ class Vector2ULArray(Boost.Python.instance):
     def __setitem__(index: int, value: Vector2UL) -> None: pass
 
     ##
-    # \brief Equality comparison operator.
-    # 
-    # This is an equivalence relation. It is linear in the size of the arrays. Two arrays are considered equivalent if their sizes are equal, and if the corresponding elements compare equal.
-    # 
-    # \param array The other array to be compared with.
-    # 
-    # \return <tt>True</tt> if the sizes and elements of the arrays are equal, and <tt>False</tt> otherwise. 
-    # 
-    # \note <em>ValueType</em> must be equality comparable.
+    # \brief Returns the result of the comparison operation <tt>self == array</tt>.
+    # \param array The \e %object instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __eq__(array: object) -> bool: pass
 
     ##
-    # \brief Inequality comparison operator.
-    # 
-    # The result is equivalent to <tt>!(self == array)</tt>.
-    # 
-    # \param array The array to be compared with.
-    # 
-    # \return <tt>True</tt> if the sizes or elements of the arrays are non-equal, and <tt>False</tt> otherwise. 
-    # 
-    # \see __eq__()
+    # \brief Returns the result of the comparison operation <tt>self != array</tt>.
+    # \param array The \e %object instance to be compared with.
+    # \return The result of the comparison operation.
     # 
     def __ne__(array: object) -> bool: pass
 

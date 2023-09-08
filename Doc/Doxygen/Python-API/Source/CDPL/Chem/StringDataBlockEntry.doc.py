@@ -112,6 +112,34 @@ class StringDataBlockEntry(Boost.Python.instance):
     # 
     def __ne__(entry: StringDataBlockEntry) -> bool: pass
 
+    ##
+    # \brief Returns the result of the comparison operation <tt>self <= entry</tt>.
+    # \param entry The \e %StringDataBlockEntry instance to be compared with.
+    # \return The result of the comparison operation.
+    # 
+    def __le__(entry: StringDataBlockEntry) -> bool: pass
+
+    ##
+    # \brief Returns the result of the comparison operation <tt>self >= entry</tt>.
+    # \param entry The \e %StringDataBlockEntry instance to be compared with.
+    # \return The result of the comparison operation.
+    # 
+    def __ge__(entry: StringDataBlockEntry) -> bool: pass
+
+    ##
+    # \brief Returns the result of the comparison operation <tt>self < entry</tt>.
+    # \param entry The \e %StringDataBlockEntry instance to be compared with.
+    # \return The result of the comparison operation.
+    # 
+    def __lt__(entry: StringDataBlockEntry) -> bool: pass
+
+    ##
+    # \brief Returns the result of the comparison operation <tt>self > entry</tt>.
+    # \param entry The \e %StringDataBlockEntry instance to be compared with.
+    # \return The result of the comparison operation.
+    # 
+    def __gt__(entry: StringDataBlockEntry) -> bool: pass
+
     objectID = property(getObjectID)
 
     header = property(getHeader, setHeader)

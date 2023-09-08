@@ -27,7 +27,7 @@ BUILD_SYSTEM = 'Linux-4.18.0-486.el8.x86_64'
 ##
 # \brief 
 #
-BUILD_TIME = 202308080847
+BUILD_TIME = 202309082115
 
 ##
 # \brief 
@@ -73,11 +73,6 @@ HAVE_NUMPY = True
 # \brief 
 #
 HAVE_QT = True
-
-##
-# \brief 
-#
-HAVE_SQLITE3 = True
 
 ##
 # \brief 
