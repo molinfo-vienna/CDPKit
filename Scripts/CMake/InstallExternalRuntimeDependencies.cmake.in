@@ -45,28 +45,36 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
 
   SET(EXCLUDE_PATTERNS
     "libcdpl"
-    "linux"
-    "libGL"
-    "libEGL"
-    "libX"
-    "libelf"
-    "libpython"
-    "libpthread"
-    "system32"
-    "ms-win-core"
-    "libstdc\\+\\+"
-    "libgcc"
-    "libm\\.so"
-    "libm-"
-    "libc\\.so"
-    "libc-"
-    "librt"
-    "libdl"
     "${CMAKE_INSTALL_PREFIX_X_PTN}"
     )
-
+  
   IF(APPLE)
-    LIST(APPEND EXCLUDE_PATTERNS "Qt")
+    LIST(APPEND EXCLUDE_PATTERNS
+      "Qt"
+      "libstdc\\+\\+"
+      )
+  ELSEIF(WIN32)
+    LIST(APPEND EXCLUDE_PATTERNS
+      "system32"
+      "ms-win-core"
+      )
+  ELSE()
+    LIST(APPEND EXCLUDE_PATTERNS
+      "libstdc\\+\\+"
+      "linux"
+      "libX"
+      "libGL"
+      "libelf"
+      "libpython"
+      "libpthread"
+      "libgcc"
+      "libm\\.so"
+      "libm-"
+      "libc\\.so"
+      "libc-"
+      "librt"
+      "libdl"
+      )
   ENDIF()
   
   GET_FILENAME_COMPONENT(FILE_SUFFIX "${BINARY_INPUT_FILE}" LAST_EXT)
