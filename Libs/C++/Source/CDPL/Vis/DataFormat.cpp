@@ -28,14 +28,26 @@
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/PNGReactionOutputHandler.hpp"
-#include "CDPL/Vis/PDFMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/PDFReactionOutputHandler.hpp"
-#include "CDPL/Vis/PSMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/PSReactionOutputHandler.hpp"
-#include "CDPL/Vis/SVGMolecularGraphOutputHandler.hpp"
-#include "CDPL/Vis/SVGReactionOutputHandler.hpp"
+
+#ifdef HAVE_CAIRO_PNG_SUPPORT
+# include "CDPL/Vis/PNGMolecularGraphOutputHandler.hpp"
+# include "CDPL/Vis/PNGReactionOutputHandler.hpp"
+#endif // HAVE_CAIRO_PNG_SUPPORT
+
+#ifdef HAVE_CAIRO_PDF_SUPPORT
+# include "CDPL/Vis/PDFMolecularGraphOutputHandler.hpp"
+# include "CDPL/Vis/PDFReactionOutputHandler.hpp"
+#endif // HAVE_CAIRO_PDF_SUPPORT
+
+#ifdef HAVE_CAIRO_PS_SUPPORT
+# include "CDPL/Vis/PSMolecularGraphOutputHandler.hpp"
+# include "CDPL/Vis/PSReactionOutputHandler.hpp"
+#endif // HAVE_CAIRO_PS_SUPPORT
+
+#ifdef HAVE_CAIRO_SVG_SUPPORT
+# include "CDPL/Vis/SVGMolecularGraphOutputHandler.hpp"
+# include "CDPL/Vis/SVGReactionOutputHandler.hpp"
+#endif // HAVE_CAIRO_SVG_SUPPORT
 
 
 namespace
