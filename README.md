@@ -40,7 +40,7 @@ Build requirements and dependencies:
 - sqlite-devel (V3, optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
-- sphinxcontrib.bibtex (optional)
+- sphinxcontrib-bibtex (optional)
 - docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
 
