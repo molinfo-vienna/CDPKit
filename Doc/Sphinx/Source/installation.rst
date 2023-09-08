@@ -58,7 +58,6 @@ boost-python3-devel         >=1.63   optional, required for building CDPL Python
 python-devel                3.x      optional, required for building CDPL Python bindings
 Qt5-devel                   5.x      optional, required for building Qt rendering backend and GUI application
 cairo-devel                 >=1.14   optional, required for building cairo rendering backend
-sqlite-devel                3        optional, required for pharmacophore screening functionality
 sphinx-build                >=4.5    optional, required for generating CDPKit documentation pages
 sphinx-rtd-theme            >=1.0.0  optional, required for generating CDPKit documentation pages
 sphinxcontrib-bibtex        >=2.5.5  optional, required for generating CDPKit documentation pages
@@ -166,7 +165,6 @@ Prerequisites and dependencies
   
   - Qt5-devel
   - cairo-devel (V >= 1.14)
-  - sqlite-devel V3
 
 Installing CDPL Python bindings via :program:`pip`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

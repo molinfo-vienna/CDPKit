@@ -37,7 +37,6 @@ Build requirements and dependencies:
 - python-devel V3.x (optional) and Python V3.x interpreter (mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
-- sqlite-devel (V3, optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
 - sphinxcontrib-bibtex (optional)
@@ -106,7 +105,6 @@ Build requirements and dependencies:
 - python-devel and Python interpreter (V >= 3.6, mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
-- sqlite-devel (V3, optional)
 
 Installation under specification of the Github repository URL:
 
