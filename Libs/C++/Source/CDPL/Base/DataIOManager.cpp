@@ -26,20 +26,26 @@
 
 #include "CDPL/Base/DataIOManager.hpp"
 
+#ifdef _MSC_VER
+# define _CDPL_BASE_API CDPL_BASE_API      
+#else
+# define _CDPL_BASE_API
+#endif // _MSC_VER
+ 
 
 using namespace CDPL;
 
 
-template class Base::DataIOManager<Chem::Molecule>;
+template class _CDPL_BASE_API Base::DataIOManager<Chem::Molecule>;
         
-template class Base::DataIOManager<Chem::MolecularGraph>;
+template class _CDPL_BASE_API Base::DataIOManager<Chem::MolecularGraph>;
         
-template class Base::DataIOManager<Chem::Reaction>;
+template class _CDPL_BASE_API Base::DataIOManager<Chem::Reaction>;
 
-template class Base::DataIOManager<Pharm::Pharmacophore>;
+template class _CDPL_BASE_API Base::DataIOManager<Pharm::Pharmacophore>;
 
-template class Base::DataIOManager<Pharm::FeatureContainer>;
+template class _CDPL_BASE_API Base::DataIOManager<Pharm::FeatureContainer>;
 
-template class Base::DataIOManager<Grid::RegularGrid<double, double> >;
+template class _CDPL_BASE_API Base::DataIOManager<Grid::RegularGrid<double, double> >;
 
-template class Base::DataIOManager<Grid::RegularGridSet<double, double> >;
+template class _CDPL_BASE_API Base::DataIOManager<Grid::RegularGridSet<double, double> >;

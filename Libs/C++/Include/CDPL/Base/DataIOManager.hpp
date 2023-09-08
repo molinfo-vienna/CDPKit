@@ -341,20 +341,28 @@ namespace CDPL
 
         // \cond DOC_IMPL_DETAILS
 
-        extern template class CDPL_BASE_API DataIOManager<Chem::Molecule>;
+#ifdef _MSC_VER
+# define _CDPL_BASE_API       
+#else
+# define _CDPL_BASE_API CDPL_BASE_API
+#endif // _MSC_VER
+        
+        extern template class _CDPL_BASE_API DataIOManager<Chem::Molecule>;
 
-        extern template class CDPL_BASE_API DataIOManager<Chem::MolecularGraph>;
+        extern template class _CDPL_BASE_API DataIOManager<Chem::MolecularGraph>;
 
-        extern template class CDPL_BASE_API DataIOManager<Chem::Reaction>;
+        extern template class _CDPL_BASE_API DataIOManager<Chem::Reaction>;
 
-        extern template class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
+        extern template class _CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
 
-        extern template class CDPL_BASE_API DataIOManager<Pharm::FeatureContainer>;
+        extern template class _CDPL_BASE_API DataIOManager<Pharm::FeatureContainer>;
 
-        extern template class CDPL_BASE_API DataIOManager<Grid::RegularGrid<double, double> >;
+        extern template class _CDPL_BASE_API DataIOManager<Grid::RegularGrid<double, double> >;
 
-        extern template class CDPL_BASE_API DataIOManager<Grid::RegularGridSet<double, double> >;
+        extern template class _CDPL_BASE_API DataIOManager<Grid::RegularGridSet<double, double> >;
 
+#undef _CDPL_BASE_API
+        
         // \endcond
     } // namespace Base
 } // namespace CDPL
