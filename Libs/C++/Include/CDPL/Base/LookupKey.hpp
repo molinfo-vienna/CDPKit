@@ -71,7 +71,7 @@ namespace CDPL
             /**
              * \brief Used to denote an invalid, unused or unspecified key.
              */
-            CDPL_BASE_API static const LookupKey NONE;
+            static const LookupKey NONE;
 
             /**
              * \brief Creates a new unique \c %LookupKey instance and registers it under the specified name.
