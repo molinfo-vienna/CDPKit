@@ -26,9 +26,14 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_
 SET(DATA_FILES
     TorsionLibrary.xml
     FallbackTorsionLibrary.xml
-    FragmentLibrary.cfl
    )
 
+IF(MSVC)
+  CONFIGURE_FILE(FragmentLibraryData.rc.in FragmentLibraryData.rc @ONLY)
+ELSE()
+  SET(DATA_FILES ${DATA_FILES} FragmentLibrary.cfl)
+ENDIF()
+    
 FOREACH(DATA_FILE ${DATA_FILES})
   ADD_CUSTOM_COMMAND(OUTPUT "${DATA_FILE}.str"
     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
@@ -108,6 +113,10 @@ SET(cdpl-confgen_LIB_SRCS
     FragmentAssemblerImpl.cpp
    )
 
+IF(MSVC)
+  SET(cdpl-confgen_LIB_SRCS ${cdpl-confgen_LIB_SRCS} FragmentLibraryData.rc)
+ENDIF()
+  
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)

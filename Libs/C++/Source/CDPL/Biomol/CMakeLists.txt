@@ -93,7 +93,10 @@ ENDIF(WIN32)
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-  ADD_DEPENDENCIES(cdpl-biomol-static gen-biomol-data-files)
+
+  IF(NOT MSVC)
+    ADD_DEPENDENCIES(cdpl-biomol-static gen-biomol-data-files)
+  ENDIF()
   
   SET_TARGET_PROPERTIES(cdpl-biomol-static PROPERTIES 
     OUTPUT_NAME cdpl-biomol
@@ -107,7 +110,10 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-biomol-shared SHARED ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
-ADD_DEPENDENCIES(cdpl-biomol-shared gen-biomol-data-files)
+
+IF(NOT MSVC)
+  ADD_DEPENDENCIES(cdpl-biomol-shared gen-biomol-data-files)
+ENDIF()
 
 TARGET_LINK_LIBRARIES(cdpl-biomol-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 
