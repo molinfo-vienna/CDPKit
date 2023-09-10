@@ -7,7 +7,7 @@ Welcome to the Chemical Data Processing Toolkit (CDPKit) Documentation Pages
 
    introduction
    Installation <installation>
-   cdpl_python_tutorial
+   cdpl_python_tutorial/index
    cdpl_python_cookbook/index
    cdpl_api_doc
    bibliography
