@@ -53,7 +53,7 @@ void CDPLPythonGRAIL::exportBuriednessGridCalculator()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const GRAIL::BuriednessGridCalculator&>((python::arg("self"), python::arg("calc"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BuriednessGridCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::BuriednessGridCalculator>(&GRAIL::BuriednessGridCalculator>(), 
+        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::BuriednessGridCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance, (python::arg("self"), python::arg("dist")))
         .def("getMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance, python::arg("self"))
