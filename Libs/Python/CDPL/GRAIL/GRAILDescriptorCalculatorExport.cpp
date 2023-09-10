@@ -227,7 +227,7 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const GRAIL::GRAILDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDescriptorCalculator>())
-        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDescriptorCalculator::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::GRAILDescriptorCalculator>(&GRAIL::GRAILDescriptorCalculator::operator=),
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("initTargetData", &GRAIL::GRAILDescriptorCalculator::initTargetData,
              (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("tgt_env_changed") = true))

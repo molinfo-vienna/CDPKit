@@ -65,7 +65,7 @@ void CDPLPythonGRAIL::exportBuriednessScore()
              (python::arg("self"), python::arg("func")))
         .def("getAtom3DCoordinatesFunction", &GRAIL::BuriednessScore::getAtom3DCoordinatesFunction,
              python::arg("self"), python::return_internal_reference<>())
-        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::BuriednessScore::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::BuriednessScore>(&GRAIL::BuriednessScore::operator=), 
              (python::arg("self"), python::arg("score")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("pos"), python::arg("atoms")))
         .add_property("probeRadius", &GRAIL::BuriednessScore::getProbeRadius, &GRAIL::BuriednessScore::setProbeRadius)

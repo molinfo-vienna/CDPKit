@@ -23,18 +23,20 @@
 
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}/MessagePack" "${CDPKIT_EXTERNAL_DIR}/MMTF")
 
-ADD_CUSTOM_COMMAND(OUTPUT ResidueDictionaryStructureData.cdf.str
-  COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
-  "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-  "ResidueDictionaryStructureData.cdf.str"
-  DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
-  COMMENT "-- Processing residue dictionary structure data..."
-  )
-ADD_CUSTOM_TARGET(gen-biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.str)
+IF(MSVC)
+  CONFIGURE_FILE(ResidueDictionaryStructureData.rc.in ResidueDictionaryStructureData.rc @ONLY)
+ELSE()
+  ADD_CUSTOM_COMMAND(OUTPUT ResidueDictionaryStructureData.cdf.str
+    COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+    "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+    "ResidueDictionaryStructureData.cdf.str"
+    DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
+    COMMENT "-- Processing residue dictionary structure data..."
+    )
+  ADD_CUSTOM_TARGET(gen-biomol-data-files DEPENDS ResidueDictionaryStructureData.cdf.str)
+ENDIF()
 
 SET(cdpl-biomol_LIB_SRCS
-    ResidueDictionaryStructureData.cdf.str
-
     PDBData.cpp
     ResidueDictionaryData.cpp
     ResidueDictionary.cpp
@@ -71,13 +73,23 @@ SET(cdpl-biomol_LIB_SRCS
     AtomUtilityFunctions.cpp
     MolecularGraphUtilityFunctions.cpp
     MoleculeUtilityFunctions.cpp
-   )
+    )
 
+IF(MSVC)
+  SET(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.rc)
+ELSE()
+  SET(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.cdf.str)
+ENDIF()
+ 
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-IF(WIN32 AND MINGW)             
-   LINK_LIBRARIES(libwsock32.a)
-ENDIF(WIN32 AND MINGW)
+IF(WIN32)
+  IF(MINGW)
+    LINK_LIBRARIES(libwsock32.a)
+  ELSEIF(MSVC)
+    LINK_LIBRARIES(ws2_32)
+  ENDIF()
+ENDIF(WIN32)
 
 IF(NOT CDPL_PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)

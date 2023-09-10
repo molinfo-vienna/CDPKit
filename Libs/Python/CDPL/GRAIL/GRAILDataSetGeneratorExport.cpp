@@ -57,7 +57,7 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const GRAIL::GRAILDataSetGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDataSetGenerator>())
-        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDataSetGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::GRAILDataSetGenerator>(&GRAIL::GRAILDataSetGenerator::operator=), 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("setScoringFunction", &GRAIL::GRAILDataSetGenerator::setScoringFunction, 
              (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type"), python::arg("func")))
