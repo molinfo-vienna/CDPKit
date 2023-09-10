@@ -49,7 +49,7 @@ void CDPLPythonForceField::exportMMFF94BondStretchingInteraction()
         .def("getReferenceLength", &ForceField::MMFF94BondStretchingInteraction::getReferenceLength, python::arg("self"))
         .def("setReferenceLength", &ForceField::MMFF94BondStretchingInteraction::setReferenceLength, 
              (python::arg("self"), python::arg("length")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingInteraction::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondStretchingInteraction>(),
              (python::arg("self"), python::arg("iactn")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingInteraction>())
         .add_property("atom1Index", &ForceField::MMFF94BondStretchingInteraction::getAtom1Index) 

@@ -45,7 +45,7 @@ void CDPLPythonDescr::exportAutoCorrelation2DVectorCalculator()
         .def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
                  (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AutoCorrelation2DVectorCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::AutoCorrelation2DVectorCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::AutoCorrelation2DVectorCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setMaxDistance", &Descr::AutoCorrelation2DVectorCalculator::setMaxDistance,
              (python::arg("self"), python::arg("max_dist")))

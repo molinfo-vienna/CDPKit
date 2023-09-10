@@ -43,7 +43,7 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::DGStructureGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGStructureGenerator>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGStructureGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::DGStructureGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("getExcludedHydrogenMask", &ConfGen::DGStructureGenerator::getExcludedHydrogenMask, python::arg("self"), 
              python::return_internal_reference<>())

@@ -59,7 +59,7 @@ namespace
                      python::with_custodian_and_ward_postcall<0, 1> >, 
                      python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, 
                      python::with_custodian_and_ward<1, 4> >())
-                .def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchExpressionList<ObjType1, ObjType2>::operator=),
+                .def("assign", CDPLPythonBase::copyAssOp<Chem::MatchExpressionList<ObjType1, ObjType2>>(),
                      (python::arg("self"), python::arg("expr")),
                      python::return_self<python::with_custodian_and_ward<1, 2> >())
                 .def("__eq__", &Util::operator==<typename Chem::MatchExpressionList<ObjType1, ObjType2>::BaseType::ElementType>, 

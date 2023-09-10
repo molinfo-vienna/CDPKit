@@ -43,7 +43,7 @@ void CDPLPythonVis::exportTextLabelPrimitive2D()
         python::bases<Vis::GraphicsPrimitive2D> >("TextLabelPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::TextLabelPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Vis::TextLabelPrimitive2D::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Vis::TextLabelPrimitive2D>(),
              (python::arg("self"), python::arg("prim")), 
              python::return_self<>())
         .def("setText", &Vis::TextLabelPrimitive2D::setText, (python::arg("self"), python::arg("txt")))

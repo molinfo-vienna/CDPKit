@@ -81,7 +81,7 @@ void CDPLPythonForceField::exportMMFF94SymbolicToNumericAtomTypeMap()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94SymbolicToNumericAtomTypeMap::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94SymbolicToNumericAtomTypeMap::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94SymbolicToNumericAtomTypeMap::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94SymbolicToNumericAtomTypeMap>(), 
              (python::arg("self"), python::arg("map")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94SymbolicToNumericAtomTypeMap::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))

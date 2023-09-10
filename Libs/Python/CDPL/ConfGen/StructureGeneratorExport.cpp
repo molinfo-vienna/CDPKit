@@ -42,7 +42,7 @@ void CDPLPythonConfGen::exportStructureGenerator()
         .def(python::init<>(python::arg("self")))
 //        .def(python::init<const ConfGen::StructureGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::StructureGenerator>())
-//        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::StructureGenerator::operator=), 
+//        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::StructureGenerator>(), 
 //             (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("getSettings", 
              static_cast<ConfGen::StructureGeneratorSettings& (ConfGen::StructureGenerator::*)()>

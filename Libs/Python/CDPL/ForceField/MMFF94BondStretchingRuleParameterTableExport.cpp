@@ -72,7 +72,7 @@ void CDPLPythonForceField::exportMMFF94BondStretchingRuleParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94BondStretchingRuleParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94BondStretchingRuleParameterTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingRuleParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondStretchingRuleParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94BondStretchingRuleParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -87,7 +87,7 @@ void CDPLPythonForceField::exportMMFF94BondStretchingRuleParameterTable()
         .def(python::init<unsigned int, unsigned int, double, double>(
                  (python::arg("self"), python::arg("atomic_no1"), python::arg("atomic_no2"), python::arg("force_const"), python::arg("ref_length"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingRuleParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingRuleParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondStretchingRuleParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAtomicNumber1", &ForceField::MMFF94BondStretchingRuleParameterTable::Entry::getAtomicNumber1, python::arg("self"))
         .def("getAtomicNumber2", &ForceField::MMFF94BondStretchingRuleParameterTable::Entry::getAtomicNumber2, python::arg("self"))

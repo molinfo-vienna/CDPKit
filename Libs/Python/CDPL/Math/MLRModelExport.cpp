@@ -56,7 +56,7 @@ namespace
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const ModelType&>((python::arg("self"), python::arg("model"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ModelType >())
-                .def("assign", CDPLPythonBase::copyAssOp(&ModelType::operator=), (python::arg("self"), python::arg("model")),
+                .def("assign", CDPLPythonBase::copyAssOp<ModelType>(), (python::arg("self"), python::arg("model")),
                      python::return_self<>())
                 .def("resizeDataSet", &ModelType::resizeDataSet, 
                      (python::arg("self"), python::arg("num_points"), python::arg("num_vars")))

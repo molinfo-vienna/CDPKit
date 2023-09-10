@@ -45,6 +45,6 @@ void CDPLPythonPharm::exportXBondAcceptorFeatureGenerator()
          (python::arg("self"), python::arg("gen"))))
     .def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(
          (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondAcceptorFeatureGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::XBondAcceptorFeatureGenerator>(), 
          (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

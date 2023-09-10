@@ -72,7 +72,7 @@ void CDPLPythonForceField::exportMMFF94BondChargeIncrementTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94BondChargeIncrementTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94BondChargeIncrementTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondChargeIncrementTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondChargeIncrementTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94BondChargeIncrementTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -87,7 +87,7 @@ void CDPLPythonForceField::exportMMFF94BondChargeIncrementTable()
         .def(python::init<unsigned int, unsigned int, unsigned int, double>(
                  (python::arg("self"), python::arg("bond_type_idx"), python::arg("atom1_type"), python::arg("atom2_type"), python::arg("bond_chg_inc"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondChargeIncrementTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondChargeIncrementTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondChargeIncrementTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getBondTypeIndex", &ForceField::MMFF94BondChargeIncrementTable::Entry::getBondTypeIndex, python::arg("self"))
         .def("getAtom1Type", &ForceField::MMFF94BondChargeIncrementTable::Entry::getAtom1Type, python::arg("self"))

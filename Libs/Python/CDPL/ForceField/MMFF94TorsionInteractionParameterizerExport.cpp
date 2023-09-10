@@ -58,7 +58,7 @@ void CDPLPythonForceField::exportMMFF94TorsionInteractionParameterizer()
              (python::arg("self"), python::arg("table")))
         .def("setParameterAtomTypeMap", &ForceField::MMFF94TorsionInteractionParameterizer::setParameterAtomTypeMap, 
              (python::arg("self"), python::arg("map")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94TorsionInteractionParameterizer::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94TorsionInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94TorsionInteractionParameterizer::parameterize, 
              (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));

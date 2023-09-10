@@ -52,7 +52,7 @@ namespace
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const Chem::ANDMatchExpressionList<ObjType1, ObjType2>&>((python::arg("self"), python::arg("expr")))
                      [python::with_custodian_and_ward<1, 2>()])
-                .def("assign", CDPLPythonBase::copyAssOp(&Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator=),
+                .def("assign", CDPLPythonBase::copyAssOp<Chem::ANDMatchExpressionList<ObjType1, ObjType2>>(),
                      (python::arg("self"), python::arg("expr")),
                      python::return_self<python::with_custodian_and_ward<1, 2> >());
         }

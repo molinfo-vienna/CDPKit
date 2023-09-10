@@ -118,7 +118,7 @@ namespace
                           python::arg("ub"))))
                 .def(python::init<const DistanceConstraint&>((python::arg("self"), python::arg("constr"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<DistanceConstraint>())
-                .def("assign", CDPLPythonBase::copyAssOp(&DistanceConstraint::operator=), 
+                .def("assign", CDPLPythonBase::copyAssOp<DistanceConstraint>(), 
                      (python::arg("self"), python::arg("constr")), python::return_self<>())
                 .def("getPoint1Index", &DistanceConstraint::getPoint1Index, python::arg("self"))
                 .def("getPoint2Index", &DistanceConstraint::getPoint2Index, python::arg("self"))
@@ -137,7 +137,7 @@ namespace
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const GeneratorType&>((python::arg("self"), python::arg("gen"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GeneratorType>())
-                .def("assign", CDPLPythonBase::copyAssOp(&GeneratorType::operator=), 
+                .def("assign", CDPLPythonBase::copyAssOp<GeneratorType>(), 
                      (python::arg("self"), python::arg("gen")), python::return_self<>())
                 .def("clearDistanceConstraints", &GeneratorType::clearDistanceConstraints, python::arg("self"))
                 .def("getNumDistanceConstraints", &GeneratorType::getNumDistanceConstraints, python::arg("self"))
@@ -221,7 +221,7 @@ void CDPLPythonUtil::exportDGCoordinatesGenerator()
                   python::arg("pt3_idx"), python::arg("pt4_idx"), python::arg("lb"), python::arg("ub"))))
         .def(python::init<const VolumeConstraint&>((python::arg("self"), python::arg("constr"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<VolumeConstraint>())
-        .def("assign", CDPLPythonBase::copyAssOp(&VolumeConstraint::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<VolumeConstraint>(), 
              (python::arg("self"), python::arg("constr")), python::return_self<>())
         .def("getPoint1Index", &VolumeConstraint::getPoint1Index, python::arg("self"))
         .def("getPoint2Index", &VolumeConstraint::getPoint2Index, python::arg("self"))

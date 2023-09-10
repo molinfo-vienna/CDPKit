@@ -76,7 +76,7 @@ void CDPLPythonConfGen::exportFragmentLibrary()
         .def("load", &ConfGen::FragmentLibrary::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ConfGen::FragmentLibrary::loadDefaults, python::arg("self")) 
         .def("save", &ConfGen::FragmentLibrary::save, (python::arg("self"), python::arg("os"))) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibrary::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentLibrary>(), 
              (python::arg("self"), python::arg("lib")), python::return_self<>())
         .add_property("numEntries", &ConfGen::FragmentLibrary::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))

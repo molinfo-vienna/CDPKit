@@ -44,7 +44,7 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::FragmentConformerGeneratorSettings::FragmentSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("setMaxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumSampledConformers, 
              (python::arg("self"), python::arg("max_num")))
@@ -90,7 +90,7 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::FragmentConformerGeneratorSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGeneratorSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGeneratorSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentConformerGeneratorSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("preserveInputBondingGeometries", SetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries), 
              (python::arg("self"), python::arg("preserve")))

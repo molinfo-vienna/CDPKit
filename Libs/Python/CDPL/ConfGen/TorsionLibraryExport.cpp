@@ -42,7 +42,7 @@ void CDPLPythonConfGen::exportTorsionLibrary()
         .def("load", &ConfGen::TorsionLibrary::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ConfGen::TorsionLibrary::loadDefaults, python::arg("self")) 
         .def("save", &ConfGen::TorsionLibrary::save, (python::arg("self"), python::arg("os"))) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionLibrary::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionLibrary>(), 
              (python::arg("self"), python::arg("lib")), python::return_self<>())
         .def("set", &ConfGen::TorsionLibrary::set, python::arg("map"))
         .staticmethod("set")

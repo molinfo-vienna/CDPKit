@@ -68,7 +68,7 @@ void CDPLPythonBiomol::exportResidueDictionary()
         .def("getNumEntries", &Biomol::ResidueDictionary::getNumEntries, python::arg("self")) 
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("loadDefaults", &Biomol::ResidueDictionary::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&Biomol::ResidueDictionary::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Biomol::ResidueDictionary>(), 
              (python::arg("self"), python::arg("dict")), python::return_self<>())
         .add_property("numEntries", &Biomol::ResidueDictionary::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -103,7 +103,7 @@ void CDPLPythonBiomol::exportResidueDictionary()
                   python::arg("obsolete"), python::arg("name"), python::arg("type"),
                   python::arg("struc_ret_func"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Biomol::ResidueDictionary::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Biomol::ResidueDictionary::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Biomol::ResidueDictionary::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getCode", &Biomol::ResidueDictionary::Entry::getCode, python::arg("self"),
              python::return_value_policy<python::copy_const_reference>())

@@ -61,7 +61,7 @@ void CDPLPythonPharm::exportOrthogonalPiPiInteractionConstraint()
         .def("getMaxHDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxHDistance, python::arg("self"))
         .def("getMaxVDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxVDistance, python::arg("self"))
         .def("getMaxAngle", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxAngle, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::OrthogonalPiPiInteractionConstraint::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::OrthogonalPiPiInteractionConstraint>(), 
              (python::arg("self"), python::arg("constr")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
         .add_property("minHDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMinHDistance)

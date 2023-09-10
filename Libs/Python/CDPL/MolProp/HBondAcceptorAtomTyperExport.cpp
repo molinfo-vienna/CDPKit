@@ -42,7 +42,7 @@ void CDPLPythonMolProp::exportHBondAcceptorAtomTyper()
         .def(python::init<const MolProp::HBondAcceptorAtomTyper&>((python::arg("self"), python::arg("typer"))))
         .def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("types"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::HBondAcceptorAtomTyper>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::HBondAcceptorAtomTyper::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<MolProp::HBondAcceptorAtomTyper>(),
              (python::arg("self"), python::arg("typer")), python::return_self<>())
         .def("perceiveTypes", &MolProp::HBondAcceptorAtomTyper::perceiveTypes, 
              (python::arg("self"), python::arg("molgraph"), python::arg("types")));

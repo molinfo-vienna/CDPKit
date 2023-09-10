@@ -54,7 +54,7 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionParameterizer()
              (python::arg("self"), python::arg("de_const")))
         .def("setDistanceExponent", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponent, 
              (python::arg("self"), python::arg("dist_expo")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteractionParameterizer::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94ElectrostaticInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize, 
              (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")))

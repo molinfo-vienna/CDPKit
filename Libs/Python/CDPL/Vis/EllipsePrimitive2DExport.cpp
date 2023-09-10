@@ -42,7 +42,7 @@ void CDPLPythonVis::exportEllipsePrimitive2D()
           .def(python::init<const Math::Vector2D&, double, double>(
                  (python::arg("self"), python::arg("pos"), python::arg("width"), python::arg("height"))))  
         .def(python::init<const Vis::EllipsePrimitive2D&>((python::arg("self"), python::arg("prim"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Vis::EllipsePrimitive2D::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Vis::EllipsePrimitive2D>(),
              (python::arg("self"), python::arg("prim")),
              python::return_self<>())
         .def("setWidth", &Vis::EllipsePrimitive2D::setWidth, (python::arg("self"), python::arg("width")))

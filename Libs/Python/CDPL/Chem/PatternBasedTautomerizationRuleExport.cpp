@@ -115,7 +115,7 @@ void CDPLPythonChem::exportPatternBasedTautomerizationRule()
     python::class_<Chem::PatternBasedTautomerizationRule::BondOrderChange, boost::noncopyable>("BondOrderChange", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::PatternBasedTautomerizationRule::BondOrderChange&>((python::arg("self"), python::arg("bond_chg"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::PatternBasedTautomerizationRule::BondOrderChange::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternBasedTautomerizationRule::BondOrderChange>(), 
              (python::arg("self"), python::arg("bond_chg")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedTautomerizationRule::BondOrderChange>())
         .def("getAtom1ID", &getAtom1ID, python::arg("self"))
@@ -136,6 +136,6 @@ void CDPLPythonChem::exportPatternBasedTautomerizationRule()
         .def("addExcludePattern", &Chem::PatternBasedTautomerizationRule::addExcludePattern, (python::arg("self"), python::arg("pattern")))
         .def("addExcludePatterns", &Chem::PatternBasedTautomerizationRule::addExcludePatterns, (python::arg("self"), python::arg("rule")))
         .def("clearExcludePatterns", &Chem::PatternBasedTautomerizationRule::clearExcludePatterns, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::PatternBasedTautomerizationRule::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternBasedTautomerizationRule>(), 
              (python::arg("self"), python::arg("rule")), python::return_self<>());
 }

@@ -54,7 +54,7 @@ namespace
                      [python::with_custodian_and_ward<1, 2>()])
                 .def(python::init<const typename Chem::MatchExpression<ObjType1, ObjType2>::SharedPointer&>((python::arg("self"), python::arg("expr_ptr")))
                      [python::with_custodian_and_ward<1, 2>()])
-                .def("assign", CDPLPythonBase::copyAssOp(&Chem::NOTMatchExpression<ObjType1, ObjType2>::operator=),
+                .def("assign", CDPLPythonBase::copyAssOp<Chem::NOTMatchExpression<ObjType1, ObjType2>>(),
                      (python::arg("self"), python::arg("expression")), 
                      python::return_self<python::with_custodian_and_ward<1, 2> >());
         }

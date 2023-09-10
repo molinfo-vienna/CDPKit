@@ -50,7 +50,7 @@ namespace
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const AlgoType&>((python::arg("self"), python::arg("algo"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<AlgoType >())
-                .def("assign", CDPLPythonBase::copyAssOp(&AlgoType::operator=), (python::arg("self"), python::arg("algo")),
+                .def("assign", CDPLPythonBase::copyAssOp<AlgoType>(), (python::arg("self"), python::arg("algo")),
                      python::return_self<>())
                 .def("getTransform", &AlgoType::getTransform, python::arg("self"), 
                      python::return_internal_reference<>())

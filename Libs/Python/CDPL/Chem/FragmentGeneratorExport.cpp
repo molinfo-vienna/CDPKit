@@ -48,7 +48,7 @@ void CDPLPythonChem::exportFragmentGenerator()
         .def(python::init<const Chem::MolecularGraph::SharedPointer&, unsigned int>(
                  (python::arg("self"), python::arg("match_ptn"), python::arg("id"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator::FragmentationRule>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::FragmentGenerator::FragmentationRule::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::FragmentGenerator::FragmentationRule>(), 
              (python::arg("self"), python::arg("rule")), python::return_self<>())
         .def("getMatchPattern", &Chem::FragmentGenerator::FragmentationRule::getMatchPattern,
              python::arg("self"), python::return_value_policy<python::copy_const_reference>())
@@ -72,7 +72,7 @@ void CDPLPythonChem::exportFragmentGenerator()
         .def(python::init<const Chem::MolecularGraph::SharedPointer&>(
                  (python::arg("self"), python::arg("match_ptn"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator::ExcludePattern>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::FragmentGenerator::ExcludePattern::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::FragmentGenerator::ExcludePattern>(), 
              (python::arg("self"), python::arg("excl_ptn")), python::return_self<>())
         .def("getMatchPattern", &Chem::FragmentGenerator::ExcludePattern::getMatchPattern,
              python::arg("self"), python::return_value_policy<python::copy_const_reference>())
@@ -102,7 +102,7 @@ void CDPLPythonChem::exportFragmentGenerator()
                   python::arg("rule_id"), python::arg("atom1_label"), python::arg("atom2_label")))
              [python::with_custodian_and_ward<1, 4>()])
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator::FragmentLink>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::FragmentGenerator::FragmentLink::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::FragmentGenerator::FragmentLink>(), 
              (python::arg("self"), python::arg("link")), python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("getFragment1Index", &Chem::FragmentGenerator::FragmentLink::getFragment1Index,
              python::arg("self"))

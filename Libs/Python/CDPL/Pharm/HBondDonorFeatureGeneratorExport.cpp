@@ -45,6 +45,6 @@ void CDPLPythonPharm::exportHBondDonorFeatureGenerator()
                  (python::arg("self"), python::arg("gen"))))
         .def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, bool>(
                  (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("static_h_bonds"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::HBondDonorFeatureGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::HBondDonorFeatureGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

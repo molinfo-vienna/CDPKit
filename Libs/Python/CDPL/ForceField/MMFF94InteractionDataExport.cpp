@@ -69,7 +69,7 @@ void CDPLPythonForceField::exportMMFF94InteractionData()
              static_cast<ForceField::MMFF94VanDerWaalsInteractionData& (ForceField::MMFF94InteractionData::*)()>(
                  &ForceField::MMFF94InteractionData::getVanDerWaalsInteractions), python::arg("self"),
              python::return_internal_reference<>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionData::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94InteractionData>(),
              (python::arg("self"), python::arg("ia_data")), python::return_self<>())
         .def("swap", &ForceField::MMFF94InteractionData::swap, (python::arg("self"), python::arg("ia_data")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94InteractionData>())

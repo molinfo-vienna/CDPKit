@@ -59,7 +59,7 @@ void CDPLPythonPharm::exportInteractionScoreCombiner()
         .def(python::init<const Pharm::InteractionScoreCombiner::ScoringFunction&, const Pharm::InteractionScoreCombiner::ScoringFunction&>(
                  (python::arg("self"), python::arg("func1"), python::arg("func2"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionScoreCombiner>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionScoreCombiner::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::InteractionScoreCombiner>(), 
              (python::arg("self"), python::arg("con")), python::return_self<>())
         .def("__call__", &callOperator, 
              (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")));

@@ -54,7 +54,7 @@ void CDPLPythonDescr::exportMoleculeAutoCorr3DDescriptorCalculator()
     .def(python::init<Chem::AtomContainer&, Math::DVector&>(
          (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
     .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeAutoCorr3DDescriptorCalculator>())    
-    .def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeAutoCorr3DDescriptorCalculator::operator=), 
+    .def("assign", CDPLPythonBase::copyAssOp<Descr::MoleculeAutoCorr3DDescriptorCalculator>(), 
          (python::arg("self"), python::arg("calc")), python::return_self<>())
     .def("setAtom3DCoordinatesFunction", &Descr::MoleculeAutoCorr3DDescriptorCalculator::setAtom3DCoordinatesFunction, 
          (python::arg("self"), python::arg("func")))

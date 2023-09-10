@@ -56,7 +56,7 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteractionParameterizer()
              (python::arg("self"), python::arg("table")))
         .def("setAtomTypePropertyTable", &ForceField::MMFF94StretchBendInteractionParameterizer::setAtomTypePropertyTable, 
              (python::arg("self"), python::arg("table")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94StretchBendInteractionParameterizer::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94StretchBendInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94StretchBendInteractionParameterizer::parameterize, 
              (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), 

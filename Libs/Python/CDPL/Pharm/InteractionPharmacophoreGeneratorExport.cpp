@@ -43,7 +43,7 @@ void CDPLPythonPharm::exportInteractionPharmacophoreGenerator()
                python::arg("env_ph4_gen_cfg") = Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
         .def(python::init<const Pharm::InteractionPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionPharmacophoreGenerator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionPharmacophoreGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::InteractionPharmacophoreGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("setCoreEnvironmentRadius", &Pharm::InteractionPharmacophoreGenerator::setCoreEnvironmentRadius, 
              (python::arg("self"), python::arg("radius")))

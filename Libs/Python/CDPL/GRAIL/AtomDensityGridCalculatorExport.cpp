@@ -57,7 +57,7 @@ void CDPLPythonGRAIL::exportAtomDensityGridCalculator()
                  (python::arg("self"), python::arg("density_func"), python::arg("comb_func"))))
         .def(python::init<const GRAIL::AtomDensityGridCalculator&>((python::arg("self"), python::arg("calc"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::AtomDensityGridCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::AtomDensityGridCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::AtomDensityGridCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setDistanceCutoff", &GRAIL::AtomDensityGridCalculator::setDistanceCutoff,
              (python::arg("self"), python::arg("dist")))

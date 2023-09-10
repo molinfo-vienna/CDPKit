@@ -41,7 +41,7 @@ void CDPLPythonConfGen::exportTorsionRule()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::TorsionRule&>((python::arg("self"), python::arg("rule"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRule>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRule::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionRule>(), 
              (python::arg("self"), python::arg("rule")), python::return_self<>())
         .def("getMatchPatternString", &ConfGen::TorsionRule::getMatchPatternString, python::arg("self"), 
              python::return_value_policy<python::copy_const_reference>())
@@ -82,7 +82,7 @@ void CDPLPythonConfGen::exportTorsionRule()
                  (python::arg("self"), python::arg("ang"), python::arg("tol1"), python::arg("tol2"), python::arg("score"))))
         .def(python::init<const ConfGen::TorsionRule::AngleEntry&>((python::arg("self"), python::arg("entry"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRule::AngleEntry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRule::AngleEntry::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionRule::AngleEntry>(), 
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAngle", &ConfGen::TorsionRule::AngleEntry::getAngle, python::arg("self"))
         .def("getScore", &ConfGen::TorsionRule::AngleEntry::getScore, python::arg("self"))

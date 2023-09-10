@@ -82,7 +82,7 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
         .def("getNumRandomStarts", &Shape::PrincipalAxesAlignmentStartGenerator::getNumRandomStarts, python::arg("self"))
         .def("setRandomSeed", &Shape::PrincipalAxesAlignmentStartGenerator::setRandomSeed,
              (python::arg("self"), python::arg("seed")))
-        .def("assign", CDPLPythonBase::copyAssOp(&Shape::PrincipalAxesAlignmentStartGenerator::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Shape::PrincipalAxesAlignmentStartGenerator>(),
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def_readonly("DEF_SYMMETRY_THRESHOLD", Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD)
         .def_readonly("DEF_NUM_RANDOM_STARTS", Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS)

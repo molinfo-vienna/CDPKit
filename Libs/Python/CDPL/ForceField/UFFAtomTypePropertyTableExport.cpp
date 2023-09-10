@@ -71,7 +71,7 @@ void CDPLPythonForceField::exportUFFAtomTypePropertyTable()
         .def("getNumEntries", &ForceField::UFFAtomTypePropertyTable::getNumEntries, python::arg("self")) 
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("loadDefaults", &ForceField::UFFAtomTypePropertyTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::UFFAtomTypePropertyTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::UFFAtomTypePropertyTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::UFFAtomTypePropertyTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -87,7 +87,7 @@ void CDPLPythonForceField::exportUFFAtomTypePropertyTable()
                  (python::arg("self"), python::arg("atom_type"), python::arg("atom_type_sym"), python::arg("atomic_no"), python::arg("bond_rad"), 
                   python::arg("bond_ang"), python::arg("vdw_dist"), python::arg("vdw_energy"), python::arg("vdw_scale"), python::arg("eff_charge"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::UFFAtomTypePropertyTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::UFFAtomTypePropertyTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::UFFAtomTypePropertyTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAtomType", &ForceField::UFFAtomTypePropertyTable::Entry::getAtomType, python::arg("self"))
         .def("getAtomicNumber", &ForceField::UFFAtomTypePropertyTable::Entry::getAtomicNumber, python::arg("self"))

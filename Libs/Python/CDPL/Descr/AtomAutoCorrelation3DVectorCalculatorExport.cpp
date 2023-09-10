@@ -54,7 +54,7 @@ void CDPLPythonDescr::exportAtomAutoCorrelation3DVectorCalculator()
     .def(python::init<Chem::AtomContainer&, Math::DVector&>(
          (python::arg("self"), python::arg("cntnr"), python::arg("vec"))))
     .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AtomAutoCorrelation3DVectorCalculator>())    
-    .def("assign", CDPLPythonBase::copyAssOp(&Descr::AtomAutoCorrelation3DVectorCalculator::operator=), 
+    .def("assign", CDPLPythonBase::copyAssOp<Descr::AtomAutoCorrelation3DVectorCalculator>(), 
          (python::arg("self"), python::arg("calc")), python::return_self<>())
     .def("setEntityPairWeightFunction", &Descr::AtomAutoCorrelation3DVectorCalculator::setEntityPairWeightFunction, 
          (python::arg("self"), python::arg("func")))

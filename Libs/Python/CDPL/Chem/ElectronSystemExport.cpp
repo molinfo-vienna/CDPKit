@@ -75,7 +75,7 @@ void CDPLPythonChem::exportElectronSystem()
         .def(python::init<const Chem::ElectronSystem&>((python::arg("self"), python::arg("elec_sys")))
              [python::with_custodian_and_ward<1, 2>()])
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ElectronSystem>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::ElectronSystem::operator=), (python::arg("self"), python::arg("elec_sys")),
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::ElectronSystem>(), (python::arg("self"), python::arg("elec_sys")),
              python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("addAtom", &addAtom, (python::arg("self"), python::arg("atom"), python::arg("elec_contrib")),
              python::with_custodian_and_ward<1, 2>())

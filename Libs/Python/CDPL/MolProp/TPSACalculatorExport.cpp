@@ -43,7 +43,7 @@ void CDPLPythonMolProp::exportTPSACalculator()
         .def(python::init<const MolProp::TPSACalculator&>((python::arg("self"), python::arg("calc"))))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::TPSACalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::TPSACalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<MolProp::TPSACalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("calculate", &MolProp::TPSACalculator::calculate, (python::arg("self"), python::arg("molgraph")))
         .def("getResult", &MolProp::TPSACalculator::getResult, python::arg("self"))

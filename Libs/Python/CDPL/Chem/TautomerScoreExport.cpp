@@ -42,7 +42,7 @@ void CDPLPythonChem::exportTautomerScore()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Chem::TautomerScore&>((python::arg("self"), python::arg("score"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TautomerScore>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::TautomerScore::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::TautomerScore>(), 
              (python::arg("self"), python::arg("score")), python::return_self<>())
         .def("__call__", &Chem::TautomerScore::operator(), (python::arg("self"), python::arg("molgraph")))
         ;

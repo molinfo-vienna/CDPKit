@@ -44,7 +44,7 @@ void CDPLPythonShape::exportScreeningSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Shape::ScreeningSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::ScreeningSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Shape::ScreeningSettings::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Shape::ScreeningSettings>(),
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("setScoringFunction", &Shape::ScreeningSettings::setScoringFunction,
              (python::arg("self"), python::arg("func")))

@@ -71,7 +71,7 @@ void CDPLPythonForceField::exportMMFF94FormalAtomChargeDefinitionTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94FormalAtomChargeDefinitionTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94FormalAtomChargeDefinitionTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94FormalAtomChargeDefinitionTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94FormalAtomChargeDefinitionTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94FormalAtomChargeDefinitionTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -86,7 +86,7 @@ void CDPLPythonForceField::exportMMFF94FormalAtomChargeDefinitionTable()
         .def(python::init<const std::string&, std::size_t, double, const std::string&>(
                  (python::arg("self"), python::arg("atom_type"), python::arg("ass_mode"), python::arg("charge"), python::arg("type_list"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAtomType", &ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::getAtomType, python::arg("self"), 
              python::return_value_policy<python::copy_const_reference>())

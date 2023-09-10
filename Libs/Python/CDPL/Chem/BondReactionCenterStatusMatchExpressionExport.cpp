@@ -40,6 +40,6 @@ void CDPLPythonChem::exportBondReactionCenterStatusMatchExpression()
         python::bases<Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph> > >("BondReactionCenterStatusMatchExpression", python::no_init)
         .def(python::init<const Chem::BondReactionCenterStatusMatchExpression&>((python::arg("self"), python::arg("expr"))))
         .def(python::init<unsigned int>((python::arg("self"), python::arg("status"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::BondReactionCenterStatusMatchExpression::operator=), (python::arg("self"), python::arg("expr")),
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::BondReactionCenterStatusMatchExpression>(), (python::arg("self"), python::arg("expr")),
              python::return_self<>());
 }

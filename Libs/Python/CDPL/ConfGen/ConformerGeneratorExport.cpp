@@ -42,7 +42,7 @@ void CDPLPythonConfGen::exportConformerGenerator()
         .def(python::init<>(python::arg("self")))
 //        .def(python::init<const ConfGen::ConformerGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGenerator>())
-//        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGenerator::operator=), 
+//        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::ConformerGenerator>(), 
 //             (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("generate", &ConfGen::ConformerGenerator::generate, 
              (python::arg("self"), python::arg("molgraph")))

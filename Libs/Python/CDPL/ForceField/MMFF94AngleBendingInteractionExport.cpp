@@ -54,7 +54,7 @@ void CDPLPythonForceField::exportMMFF94AngleBendingInteraction()
         .def("getReferenceAngle", &ForceField::MMFF94AngleBendingInteraction::getReferenceAngle, python::arg("self"))
         .def("setReferenceAngle", &ForceField::MMFF94AngleBendingInteraction::setReferenceAngle, 
              (python::arg("self"), python::arg("angle")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingInteraction::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AngleBendingInteraction>(),
              (python::arg("self"), python::arg("iactn")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AngleBendingInteraction>())
         .add_property("termAtom1Index", &ForceField::MMFF94AngleBendingInteraction::getTerminalAtom1Index) 

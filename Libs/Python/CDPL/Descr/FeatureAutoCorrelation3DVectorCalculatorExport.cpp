@@ -54,7 +54,7 @@ void CDPLPythonDescr::exportFeatureAutoCorrelation3DVectorCalculator()
         .def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
                  (python::arg("self"), python::arg("cntnr"), python::arg("vec"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::FeatureAutoCorrelation3DVectorCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::FeatureAutoCorrelation3DVectorCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::FeatureAutoCorrelation3DVectorCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setEntityPairWeightFunction", &Descr::FeatureAutoCorrelation3DVectorCalculator::setEntityPairWeightFunction, 
              (python::arg("self"), python::arg("func")))

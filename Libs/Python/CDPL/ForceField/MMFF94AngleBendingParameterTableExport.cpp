@@ -75,7 +75,7 @@ void CDPLPythonForceField::exportMMFF94AngleBendingParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94AngleBendingParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94AngleBendingParameterTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AngleBendingParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94AngleBendingParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -91,7 +91,7 @@ void CDPLPythonForceField::exportMMFF94AngleBendingParameterTable()
                  (python::arg("self"), python::arg("angle_type_idx"), python::arg("term_atom1_type"), python::arg("ctr_atom_type"),
                   python::arg("term_atom2_type"), python::arg("force_const"), python::arg("ref_angle"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AngleBendingParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AngleBendingParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAngleTypeIndex", &ForceField::MMFF94AngleBendingParameterTable::Entry::getAngleTypeIndex, python::arg("self"))
         .def("getTerminalAtom1Type", &ForceField::MMFF94AngleBendingParameterTable::Entry::getTerminalAtom1Type, python::arg("self"))

@@ -56,7 +56,7 @@ void CDPLPythonForceField::exportMMFF94AtomTyper()
              (python::arg("self"), python::arg("table")))
         .def("setAromaticRingSetFunction", &ForceField::MMFF94AtomTyper::setAromaticRingSetFunction, 
              (python::arg("self"), python::arg("func"))) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AtomTyper::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AtomTyper>(),
              (python::arg("self"), python::arg("typer")), python::return_self<>())
         .def("perceiveTypes", &ForceField::MMFF94AtomTyper::perceiveTypes, 
              (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 

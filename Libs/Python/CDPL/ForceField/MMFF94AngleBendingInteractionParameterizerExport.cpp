@@ -62,7 +62,7 @@ void CDPLPythonForceField::exportMMFF94AngleBendingInteractionParameterizer()
              (python::arg("self"), python::arg("table")))
         .def("setParameterAtomTypeMap", &ForceField::MMFF94AngleBendingInteractionParameterizer::setParameterAtomTypeMap, 
              (python::arg("self"), python::arg("map")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingInteractionParameterizer::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AngleBendingInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize, 
              (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));

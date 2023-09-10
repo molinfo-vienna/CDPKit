@@ -72,7 +72,7 @@ void CDPLPythonForceField::exportMMFF94AromaticAtomTypeDefinitionTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94AromaticAtomTypeDefinitionTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94AromaticAtomTypeDefinitionTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AromaticAtomTypeDefinitionTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AromaticAtomTypeDefinitionTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94AromaticAtomTypeDefinitionTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -87,7 +87,7 @@ void CDPLPythonForceField::exportMMFF94AromaticAtomTypeDefinitionTable()
                  (python::arg("self"), python::arg("old_type"), python::arg("aro_type"), python::arg("atomic_no"), 
                   python::arg("ring_size"), python::arg("het_atom_dist"), python::arg("im_cation"), python::arg("n5_anion"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AromaticAtomTypeDefinitionTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AromaticAtomTypeDefinitionTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94AromaticAtomTypeDefinitionTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getOldAtomType", &ForceField::MMFF94AromaticAtomTypeDefinitionTable::Entry::getOldAtomType, python::arg("self"),
              python::return_value_policy<python::copy_const_reference>())

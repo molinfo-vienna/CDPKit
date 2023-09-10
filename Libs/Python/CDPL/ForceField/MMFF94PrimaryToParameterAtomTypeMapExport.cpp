@@ -114,7 +114,7 @@ void CDPLPythonForceField::exportMMFF94PrimaryToParameterAtomTypeMap()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94PrimaryToParameterAtomTypeMap::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94PrimaryToParameterAtomTypeMap>(), 
              (python::arg("self"), python::arg("map")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -129,7 +129,7 @@ void CDPLPythonForceField::exportMMFF94PrimaryToParameterAtomTypeMap()
         .def("__init__", python::make_constructor(&makeEntry, python::default_call_policies(), 
                                                   (python::arg("atom_type"), python::arg("param_types"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAtomType", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::getAtomType, python::arg("self"))
         .def("getParameterAtomTypes", &getParameterAtomTypes, python::arg("self"))

@@ -61,7 +61,7 @@ void CDPLPythonPharm::exportScreeningProcessor()
         .def(python::init<const Pharm::ScreeningProcessor::SearchHit&>((python::arg("self"), python::arg("hit")))
              [python::with_custodian_and_ward<1, 2>()])
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::ScreeningProcessor::SearchHit>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::ScreeningProcessor::SearchHit::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::ScreeningProcessor::SearchHit>(),
              (python::arg("self"), python::arg("hit")),
              python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("getHitProvider", &Pharm::ScreeningProcessor::SearchHit::getHitProvider, python::arg("self"),

@@ -44,7 +44,7 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::ConformerGeneratorSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGeneratorSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGeneratorSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::ConformerGeneratorSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("setSamplingMode", &ConfGen::ConformerGeneratorSettings::setSamplingMode, 
              (python::arg("self"), python::arg("mode")))

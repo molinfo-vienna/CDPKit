@@ -61,7 +61,7 @@ void CDPLPythonPharm::exportParallelPiPiInteractionConstraint()
         .def("getMaxVDistance", &Pharm::ParallelPiPiInteractionConstraint::getMaxVDistance, python::arg("self"))
         .def("getMaxHDistance", &Pharm::ParallelPiPiInteractionConstraint::getMaxHDistance, python::arg("self"))
         .def("getMaxAngle", &Pharm::ParallelPiPiInteractionConstraint::getMaxAngle, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::ParallelPiPiInteractionConstraint::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::ParallelPiPiInteractionConstraint>(), 
              (python::arg("self"), python::arg("constr")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
         .add_property("minVDistance", &Pharm::ParallelPiPiInteractionConstraint::getMinVDistance)

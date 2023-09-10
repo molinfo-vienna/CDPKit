@@ -40,7 +40,7 @@ void CDPLPythonVis::exportPolygonPrimitive2D()
         python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PolygonPrimitive2D", python::no_init)
         .def(python::init<>(python::arg("self")))    
         .def(python::init<const Vis::PolygonPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Vis::PolygonPrimitive2D::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Vis::PolygonPrimitive2D>(),
              (python::arg("self"), python::arg("prim")),
              python::return_self<>())
         .def("setPen", &Vis::PolygonPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))

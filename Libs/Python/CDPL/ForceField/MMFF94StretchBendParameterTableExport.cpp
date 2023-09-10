@@ -75,7 +75,7 @@ void CDPLPythonForceField::exportMMFF94StretchBendParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94StretchBendParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94StretchBendParameterTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94StretchBendParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94StretchBendParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94StretchBendParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -91,7 +91,7 @@ void CDPLPythonForceField::exportMMFF94StretchBendParameterTable()
                  (python::arg("self"), python::arg("sb_type_idx"), python::arg("term_atom1_type"), python::arg("ctr_atom_type"),
                   python::arg("term_atom2_type"), python::arg("ijk_force_const"), python::arg("kji_force_const"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94StretchBendParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94StretchBendParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94StretchBendParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getStretchBendTypeIndex", &ForceField::MMFF94StretchBendParameterTable::Entry::getStretchBendTypeIndex, python::arg("self"))
         .def("getTerminalAtom1Type", &ForceField::MMFF94StretchBendParameterTable::Entry::getTerminalAtom1Type, python::arg("self"))

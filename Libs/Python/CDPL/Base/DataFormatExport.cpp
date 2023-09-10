@@ -176,7 +176,7 @@ void CDPLPythonBase::exportDataFormat()
         .def("isMultiRecordFormat", &Base::DataFormat::isMultiRecordFormat, python::arg("self"))
         .def("setMultiRecordFormat", &Base::DataFormat::setMultiRecordFormat, (python::arg("self"), python::arg("multi_rec")))
         .def("getFileExtensions", &getFileExtensions, python::arg("self"))
-        .def("assign", copyAssOp(&Base::DataFormat::operator=), (python::arg("self"), python::arg("fmt")), python::return_self<>())
+        .def("assign", copyAssOp<Base::DataFormat>(), (python::arg("self"), python::arg("fmt")), python::return_self<>())
         .def(ObjectIdentityCheckVisitor<Base::DataFormat>())
         .add_property("numFileExtensions", &Base::DataFormat::getNumFileExtensions)
         .add_property("description", 

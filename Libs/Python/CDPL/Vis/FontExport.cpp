@@ -68,7 +68,7 @@ void CDPLPythonVis::exportFont()
         .def(python::init<const std::string, double>((python::arg("self"), python::arg("family"), 
                                                       python::arg("size") = 12.0)))    
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Font>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Vis::Font::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Vis::Font>(),
              (python::arg("self"), python::arg("font")),
              python::return_self<>())
         .def("setFamily", &Vis::Font::setFamily, (python::arg("self"), python::arg("family")))

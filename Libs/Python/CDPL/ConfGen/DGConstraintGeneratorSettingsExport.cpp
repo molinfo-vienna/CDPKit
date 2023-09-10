@@ -44,7 +44,7 @@ void CDPLPythonConfGen::exportDGConstraintGeneratorSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::DGConstraintGeneratorSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGConstraintGeneratorSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGConstraintGeneratorSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::DGConstraintGeneratorSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("excludeHydrogens", SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
              (python::arg("self"), python::arg("exclude")))

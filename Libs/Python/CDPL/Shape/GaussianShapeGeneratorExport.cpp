@@ -48,7 +48,7 @@ void CDPLPythonShape::exportGaussianShapeGenerator()
         .def(python::init<const Shape::GaussianShapeGenerator&>((python::arg("self"), python::arg("gen")))
              [python::with_custodian_and_ward<1, 2>()])
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeGenerator>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Shape::GaussianShapeGenerator::operator=), (python::arg("self"), python::arg("gen")),
+        .def("assign", CDPLPythonBase::copyAssOp<Shape::GaussianShapeGenerator>(), (python::arg("self"), python::arg("gen")),
              python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("setPharmacophoreGenerator", &Shape::GaussianShapeGenerator::setPharmacophoreGenerator,
              (python::arg("self"), python::arg("gen")), python::with_custodian_and_ward<1, 2>())

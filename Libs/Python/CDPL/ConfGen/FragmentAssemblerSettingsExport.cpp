@@ -44,7 +44,7 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::FragmentAssemblerSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentAssemblerSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentAssemblerSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentAssemblerSettings>(), 
          (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("enumerateRings", SetBoolFunc(&ConfGen::FragmentAssemblerSettings::enumerateRings), 
              (python::arg("self"), python::arg("enumerate")))

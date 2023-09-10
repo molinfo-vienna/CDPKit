@@ -44,7 +44,7 @@ void CDPLPythonVis::exportLinePrimitive2D()
         .def(python::init<const Math::Vector2D&, const Math::Vector2D&>((python::arg("self"), 
                                                                          python::arg("beg"), 
                                                                          python::arg("end"))))    
-        .def("assign", CDPLPythonBase::copyAssOp(&Vis::LinePrimitive2D::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Vis::LinePrimitive2D>(),
              (python::arg("self"), python::arg("prim")), 
              python::return_self<>())
         .def("setPen", &Vis::LinePrimitive2D::setPen, (python::arg("self"), python::arg("pen")))

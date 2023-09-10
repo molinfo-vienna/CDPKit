@@ -58,7 +58,7 @@ void CDPLPythonPharm::exportFeaturePositionMatchFunctor()
         .def(python::init<const Pharm::FeaturePositionMatchFunctor&>((python::arg("self"), python::arg("func"))))
         .def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePositionMatchFunctor>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePositionMatchFunctor::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::FeaturePositionMatchFunctor>(), 
              (python::arg("self"), python::arg("func")), python::return_self<>())
         .def("queryMode", &Pharm::FeaturePositionMatchFunctor::queryMode, python::arg("self"))
         .def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))

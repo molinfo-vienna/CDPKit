@@ -42,9 +42,9 @@ void CDPLPythonConfGen::exportDGStructureGeneratorSettings()
     python::class_<ConfGen::DGStructureGeneratorSettings, python::bases<ConfGen::DGConstraintGeneratorSettings> >("DGStructureGeneratorSettings", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::DGStructureGeneratorSettings&>((python::arg("self"), python::arg("settings"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGStructureGeneratorSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::DGStructureGeneratorSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGConstraintGeneratorSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::DGConstraintGeneratorSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("setBoxSize", &ConfGen::DGStructureGeneratorSettings::setBoxSize, 
              (python::arg("self"), python::arg("size")))

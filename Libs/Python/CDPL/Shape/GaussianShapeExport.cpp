@@ -61,7 +61,7 @@ void CDPLPythonShape::exportGaussianShape()
                                          python::bases<Base::PropertyContainer> >("GaussianShape", python::no_init)
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Shape::GaussianShape&>((python::arg("self"), python::arg("shape"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Shape::GaussianShape::operator=), (python::arg("self"), python::arg("shape")),
+        .def("assign", CDPLPythonBase::copyAssOp<Shape::GaussianShape>(), (python::arg("self"), python::arg("shape")),
              python::return_self<>())
         .def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true))    
         .def("clear", &Shape::GaussianShape::clear, python::arg("self"))
@@ -84,7 +84,7 @@ void CDPLPythonShape::exportGaussianShape()
         .def(python::init<const Math::Vector3D&, double, std::size_t, double>((python::arg("pos"), python::arg("radius"),
                                                                                python::arg("color") = 0, python::arg("hardness") = 2.7)))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShape::Element>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Shape::GaussianShape::Element::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Shape::GaussianShape::Element>(),
              (python::arg("self"), python::arg("elem")), python::return_self<>())
         .def("setPosition", &Shape::GaussianShape::Element::setPosition, (python::arg("self"), python::arg("pos")))
         .def("getPosition", &Shape::GaussianShape::Element::getPosition, python::arg("self"), python::return_internal_reference<>())

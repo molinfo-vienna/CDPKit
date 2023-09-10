@@ -83,7 +83,7 @@ void CDPLPythonConfGen::exportDGConstraintGenerator()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::DGConstraintGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGConstraintGenerator>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGConstraintGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::DGConstraintGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("getExcludedHydrogenMask", &ConfGen::DGConstraintGenerator::getExcludedHydrogenMask, python::arg("self"), 
              python::return_internal_reference<>())

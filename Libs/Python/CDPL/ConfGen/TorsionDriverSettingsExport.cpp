@@ -44,7 +44,7 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::TorsionDriverSettings&>((python::arg("self"), python::arg("settings"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriverSettings>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionDriverSettings::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionDriverSettings>(), 
              (python::arg("self"), python::arg("settings")), python::return_self<>())
         .def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens), 
              (python::arg("self"), python::arg("sample")))

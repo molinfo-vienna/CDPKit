@@ -75,7 +75,7 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94OutOfPlaneBendingParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults, (python::arg("self"), python::arg("param_set"))) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94OutOfPlaneBendingParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94OutOfPlaneBendingParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -92,7 +92,7 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingParameterTable()
                  (python::arg("self"), python::arg("term_atom1_type"), python::arg("ctr_atom_type"),
                   python::arg("term_atom2_type"), python::arg("oop_atom_type"), python::arg("force_const"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getTerminalAtom1Type", &ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getTerminalAtom1Type, python::arg("self"))
         .def("getCenterAtomType", &ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getCenterAtomType, python::arg("self"))

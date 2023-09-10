@@ -55,7 +55,7 @@ void CDPLPythonForceField::exportMMFF94TorsionInteraction()
         .def("getTorsionParameter1", &ForceField::MMFF94TorsionInteraction::getTorsionParameter1, python::arg("self"))
         .def("getTorsionParameter2", &ForceField::MMFF94TorsionInteraction::getTorsionParameter2, python::arg("self"))
         .def("getTorsionParameter3", &ForceField::MMFF94TorsionInteraction::getTorsionParameter3, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94TorsionInteraction::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94TorsionInteraction>(),
              (python::arg("self"), python::arg("iactn")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94TorsionInteraction>())
         .add_property("termAtom1Index", &ForceField::MMFF94TorsionInteraction::getTerminalAtom1Index) 

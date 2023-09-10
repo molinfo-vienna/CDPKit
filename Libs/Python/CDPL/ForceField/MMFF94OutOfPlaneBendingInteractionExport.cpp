@@ -51,7 +51,7 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingInteraction()
         .def("getAtom3Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom3Index, python::arg("self"))
         .def("getAtom4Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getAtom4Index, python::arg("self"))
         .def("getForceConstant", &ForceField::MMFF94OutOfPlaneBendingInteraction::getForceConstant, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingInteraction::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94OutOfPlaneBendingInteraction>(),
              (python::arg("self"), python::arg("iactn")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94OutOfPlaneBendingInteraction>())
         .add_property("termAtom1Index", &ForceField::MMFF94OutOfPlaneBendingInteraction::getTerminalAtom1Index) 

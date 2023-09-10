@@ -54,7 +54,7 @@ void CDPLPythonDescr::exportAtomRDFCodeCalculator()
         .def(python::init<Chem::AtomContainer&, Math::DVector&>(
                  (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AtomRDFCodeCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::AtomRDFCodeCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::AtomRDFCodeCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setEntityPairWeightFunction", &Descr::AtomRDFCodeCalculator::setEntityPairWeightFunction, 
              (python::arg("self"), python::arg("func")))

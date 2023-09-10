@@ -110,7 +110,7 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteraction()
         .def("getEIJ", &ForceField::MMFF94VanDerWaalsInteraction::getEIJ, python::arg("self"))
         .def("getRIJ", &ForceField::MMFF94VanDerWaalsInteraction::getRIJ, python::arg("self"))
         .def("getRIJPow7", &ForceField::MMFF94VanDerWaalsInteraction::getRIJPow7, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsInteraction::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94VanDerWaalsInteraction>(),
              (python::arg("self"), python::arg("iactn")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94VanDerWaalsInteraction>())
         .add_property("atom1Index", &ForceField::MMFF94VanDerWaalsInteraction::getAtom1Index) 

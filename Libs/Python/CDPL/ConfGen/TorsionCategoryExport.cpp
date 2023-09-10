@@ -100,7 +100,7 @@ void CDPLPythonConfGen::exportTorsionCategory()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::TorsionCategory&>((python::arg("self"), python::arg("cat"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionCategory>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionCategory::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionCategory>(), 
              (python::arg("self"), python::arg("cat")), python::return_self<>())
         .def("getMatchPatternString", &ConfGen::TorsionCategory::getMatchPatternString, python::arg("self"), 
              python::return_value_policy<python::copy_const_reference>())

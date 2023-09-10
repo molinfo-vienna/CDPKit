@@ -72,7 +72,7 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94VanDerWaalsParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94VanDerWaalsParameterTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94VanDerWaalsParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94VanDerWaalsParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -103,7 +103,7 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsParameterTable()
                  (python::arg("self"), python::arg("atom_type"), python::arg("atom_pol"), python::arg("eff_el_num"), python::arg("fact_a"),
                   python::arg("fact_g"), python::arg("don_acc_type"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94VanDerWaalsParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94VanDerWaalsParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getAtomType", &ForceField::MMFF94VanDerWaalsParameterTable::Entry::getAtomType, python::arg("self"))
         .def("getAtomicPolarizability", &ForceField::MMFF94VanDerWaalsParameterTable::Entry::getAtomicPolarizability, python::arg("self"))

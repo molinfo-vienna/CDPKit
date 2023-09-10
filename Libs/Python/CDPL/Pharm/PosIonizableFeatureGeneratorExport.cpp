@@ -45,6 +45,6 @@ void CDPLPythonPharm::exportPosIonizableFeatureGenerator()
                  (python::arg("self"), python::arg("gen"))))
         .def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, bool>(
                  (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("chgd_groups_only"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::PosIonizableFeatureGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::PosIonizableFeatureGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

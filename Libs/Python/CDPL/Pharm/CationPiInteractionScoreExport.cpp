@@ -48,7 +48,7 @@ void CDPLPythonPharm::exportCationPiInteractionScore()
         .def("getMinDistance", &Pharm::CationPiInteractionScore::getMinDistance, python::arg("self"))
         .def("getMaxDistance", &Pharm::CationPiInteractionScore::getMaxDistance, python::arg("self"))
         .def("getMaxAngle", &Pharm::CationPiInteractionScore::getMaxAngle, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionScore::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::CationPiInteractionScore>(), 
              (python::arg("self"), python::arg("constr")), python::return_self<>())
         .add_property("minDistance", &Pharm::CationPiInteractionScore::getMinDistance)
         .add_property("maxDistance", &Pharm::CationPiInteractionScore::getMaxDistance)

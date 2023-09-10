@@ -52,7 +52,7 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionParameterizer()
              (python::arg("self"), python::arg("func"))) 
         .def("setVanDerWaalsParameterTable", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::setVanDerWaalsParameterTable, 
              (python::arg("self"), python::arg("table")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsInteractionParameterizer::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94VanDerWaalsInteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize, 
              (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));

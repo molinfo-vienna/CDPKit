@@ -44,7 +44,7 @@ void CDPLPythonMolProp::exportAtomHydrophobicityCalculator()
         .def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
                  (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::AtomHydrophobicityCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::AtomHydrophobicityCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<MolProp::AtomHydrophobicityCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("calculate", &MolProp::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")));
 }

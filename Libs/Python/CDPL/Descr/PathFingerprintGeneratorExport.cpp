@@ -63,7 +63,7 @@ void CDPLPythonDescr::exportPathFingerprintGenerator()
                  (python::arg("self"), python::arg("molgraph"), python::arg("fp"))))
         .def(python::init<const Descr::PathFingerprintGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PathFingerprintGenerator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::PathFingerprintGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::PathFingerprintGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("setAtomDescriptorFunction", &Descr::PathFingerprintGenerator::setAtomDescriptorFunction, 
              (python::arg("self"), python::arg("func")))

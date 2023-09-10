@@ -45,6 +45,6 @@ void CDPLPythonPharm::exportFeatureInteractionScoreCombiner()
                  (python::arg("self"), python::arg("score1"), python::arg("score2"), python::arg("comb_func"))))
         .def(python::init<const Pharm::FeatureInteractionScoreCombiner::InteractionScore&, const Pharm::FeatureInteractionScoreCombiner::InteractionScore&>(
                  (python::arg("self"), python::arg("score1"), python::arg("score2"))))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureInteractionScoreCombiner::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::FeatureInteractionScoreCombiner>(), 
              (python::arg("self"), python::arg("con")), python::return_self<>());
 }

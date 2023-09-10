@@ -74,7 +74,7 @@ void CDPLPythonForceField::exportMMFF94BondStretchingParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94BondStretchingParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94BondStretchingParameterTable::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondStretchingParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94BondStretchingParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -90,7 +90,7 @@ void CDPLPythonForceField::exportMMFF94BondStretchingParameterTable()
                  (python::arg("self"), python::arg("bond_type_idx"), python::arg("atom1_type"), python::arg("atom2_type"), 
                   python::arg("force_const"), python::arg("ref_length"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondStretchingParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getBondTypeIndex", &ForceField::MMFF94BondStretchingParameterTable::Entry::getBondTypeIndex, python::arg("self"))
         .def("getAtom1Type", &ForceField::MMFF94BondStretchingParameterTable::Entry::getAtom1Type, python::arg("self"))

@@ -60,7 +60,7 @@ void CDPLPythonPharm::exportSpatialFeatureMapping()
         .def(python::init<const Pharm::SpatialFeatureMapping&>((python::arg("self"), python::arg("mapping")))[python::with_custodian_and_ward<1, 2>()])
         .def(python::init<bool>((python::arg("self"), python::arg("query_mode") = false)))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::SpatialFeatureMapping>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::SpatialFeatureMapping::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::SpatialFeatureMapping>(), 
              (python::arg("self"), python::arg("mapping")), python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("perceive", &Pharm::SpatialFeatureMapping::perceive, 
              (python::arg("self"), python::arg("ref_ftrs"), python::arg("aligned_ftrs"), python::arg("xform")),

@@ -49,7 +49,7 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteraction()
         .def("getScalingFactor", &ForceField::MMFF94ElectrostaticInteraction::getScalingFactor, python::arg("self"))
         .def("getDielectricConstant", &ForceField::MMFF94ElectrostaticInteraction::getDielectricConstant, python::arg("self"))
         .def("getDistanceExponent", &ForceField::MMFF94ElectrostaticInteraction::getDistanceExponent, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteraction::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94ElectrostaticInteraction>(),
              (python::arg("self"), python::arg("iactn")), python::return_self<>())
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ElectrostaticInteraction>())
         .add_property("atom1Index", &ForceField::MMFF94ElectrostaticInteraction::getAtom1Index) 

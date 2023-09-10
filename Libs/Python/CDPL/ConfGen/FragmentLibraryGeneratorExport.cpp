@@ -42,7 +42,7 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
         .def(python::init<const ConfGen::FragmentLibrary::SharedPointer&>((python::arg("self"), python::arg("lib"))))
 //        .def(python::init<const ConfGen::FragmentLibraryGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryGenerator>())
-//        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibraryGenerator::operator=), 
+//        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentLibraryGenerator>(), 
 //             (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("setFragmentLibrary", &ConfGen::FragmentLibraryGenerator::setFragmentLibrary, 
              (python::arg("self"), python::arg("lib")))

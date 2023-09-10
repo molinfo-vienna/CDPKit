@@ -41,7 +41,7 @@ void CDPLPythonConfGen::exportFragmentLibraryEntry()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const ConfGen::FragmentLibraryEntry&>((python::arg("self"), python::arg("entry"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryEntry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibraryEntry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentLibraryEntry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("setHashCode", &ConfGen::FragmentLibraryEntry::setHashCode, (python::arg("self"), python::arg("hash_code")))
         .def("getHashCode", &ConfGen::FragmentLibraryEntry::getHashCode, python::arg("self"))

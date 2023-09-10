@@ -71,7 +71,7 @@ void CDPLPythonVis::exportPen()
                   python::arg("cap_style") = Vis::Pen::ROUND_CAP, 
                   python::arg("join_style") = Vis::Pen::ROUND_JOIN)))    
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Pen>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Vis::Pen::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Vis::Pen>(),
              (python::arg("self"), python::arg("pen")), python::return_self<>())
         .def("getCapStyle", &Vis::Pen::getCapStyle, python::arg("self"))    
         .def("setCapStyle", &Vis::Pen::setCapStyle, (python::arg("self"), python::arg("cap_style")))    

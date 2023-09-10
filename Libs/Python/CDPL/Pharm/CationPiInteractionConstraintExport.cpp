@@ -59,7 +59,7 @@ void CDPLPythonPharm::exportCationPiInteractionConstraint()
         .def("getMinDistance", &Pharm::CationPiInteractionConstraint::getMinDistance, python::arg("self"))
         .def("getMaxDistance", &Pharm::CationPiInteractionConstraint::getMaxDistance, python::arg("self"))
         .def("getMaxAngle", &Pharm::CationPiInteractionConstraint::getMaxAngle, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionConstraint::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::CationPiInteractionConstraint>(), 
              (python::arg("self"), python::arg("constr")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
         .add_property("minDistance", &Pharm::CationPiInteractionConstraint::getMinDistance)

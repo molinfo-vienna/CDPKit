@@ -43,7 +43,7 @@ void CDPLPythonPharm::exportFeatureDistanceScore()
         .def("setDistanceScoringFunction", &Pharm::FeatureDistanceScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
         .def("getMinDistance", &Pharm::FeatureDistanceScore::getMinDistance, python::arg("self"))
         .def("getMaxDistance", &Pharm::FeatureDistanceScore::getMaxDistance, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceScore::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::FeatureDistanceScore>(), 
              (python::arg("self"), python::arg("func")), python::return_self<>())
         .add_property("minDistance", &Pharm::FeatureDistanceScore::getMinDistance)
         .add_property("maxDistance", &Pharm::FeatureDistanceScore::getMaxDistance);

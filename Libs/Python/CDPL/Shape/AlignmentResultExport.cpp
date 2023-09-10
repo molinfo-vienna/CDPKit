@@ -41,7 +41,7 @@ void CDPLPythonShape::exportAlignmentResult()
         .def(python::init<>(python::arg("self")))
         .def(python::init<const Shape::AlignmentResult&>((python::arg("self"), python::arg("res"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::AlignmentResult>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Shape::AlignmentResult::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<Shape::AlignmentResult>(),
              (python::arg("self"), python::arg("res")), python::return_self<>())
         .def("getTransform", &Shape::AlignmentResult::getTransform, 
              python::arg("self"), python::return_internal_reference<>())

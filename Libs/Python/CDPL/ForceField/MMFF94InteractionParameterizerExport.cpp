@@ -98,7 +98,7 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
              (python::arg("self"), python::arg("dist_expo")))
         .def("setParameterSet", &ForceField::MMFF94InteractionParameterizer::setParameterSet, 
              (python::arg("self"), python::arg("param_set")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94InteractionParameterizer>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("parameterize", &ForceField::MMFF94InteractionParameterizer::parameterize, 
              (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), 

@@ -77,7 +77,7 @@ void CDPLPythonConfGen::exportTorsionRuleMatcher()
         .def("findMatches", &findMatches, 
              (python::arg("self"), python::arg("bond"), python::arg("molgraph"), python::arg("append") = false))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatcher>())
-        //.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRuleMatcher::operator=), 
+        //.def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionRuleMatcher>(), 
         //     (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("__getitem__", &ConfGen::TorsionRuleMatcher::getMatch, (python::arg("self"), python::arg("idx")), 
              python::return_internal_reference<1>())

@@ -54,7 +54,7 @@ void CDPLPythonDescr::exportPharmacophoreAutoCorr3DDescriptorCalculator()
         .def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
                  (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PharmacophoreAutoCorr3DDescriptorCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::PharmacophoreAutoCorr3DDescriptorCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::PharmacophoreAutoCorr3DDescriptorCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setFeature3DCoordinatesFunction", &Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setFeature3DCoordinatesFunction, 
              (python::arg("self"), python::arg("func")))

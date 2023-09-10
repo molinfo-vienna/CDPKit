@@ -76,7 +76,7 @@ void CDPLPythonForceField::exportMMFF94TorsionParameterTable()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94TorsionParameterTable::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94TorsionParameterTable::loadDefaults, (python::arg("self"), python::arg("param_set"))) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94TorsionParameterTable::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94TorsionParameterTable>(), 
              (python::arg("self"), python::arg("table")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94TorsionParameterTable::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))
@@ -94,7 +94,7 @@ void CDPLPythonForceField::exportMMFF94TorsionParameterTable()
                   python::arg("ctr_atom2_type"), python::arg("term_atom2_type"), python::arg("tor_param1"), python::arg("tor_param2"), 
                   python::arg("tor_param3"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94TorsionParameterTable::Entry>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94TorsionParameterTable::Entry::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94TorsionParameterTable::Entry>(),
              (python::arg("self"), python::arg("entry")), python::return_self<>())
         .def("getTorsionTypeIndex", &ForceField::MMFF94TorsionParameterTable::Entry::getTorsionTypeIndex, python::arg("self"))
         .def("getTerminalAtom1Type", &ForceField::MMFF94TorsionParameterTable::Entry::getTerminalAtom1Type, python::arg("self"))

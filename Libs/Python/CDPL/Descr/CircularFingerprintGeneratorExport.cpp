@@ -95,7 +95,7 @@ void CDPLPythonDescr::exportCircularFingerprintGenerator()
         .def("getFeatureSubstructures", &Descr::CircularFingerprintGenerator::getFeatureSubstructures,
              (python::arg("self"), python::arg("bit_idx"), python::arg("bs_size"), python::arg("frags"), python::arg("clear") = true),
              python::with_custodian_and_ward<4, 1>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::CircularFingerprintGenerator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::CircularFingerprintGenerator>(), 
              (python::arg("self"), python::arg("gen")), python::return_self<>())
         .add_property("numFeatures", &Descr::CircularFingerprintGenerator::getNumFeatures)
         .add_property("numIterations", &Descr::CircularFingerprintGenerator::getNumIterations,

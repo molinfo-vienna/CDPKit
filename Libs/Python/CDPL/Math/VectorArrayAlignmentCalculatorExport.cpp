@@ -51,7 +51,7 @@ namespace
                 .def(python::init<>(python::arg("self")))
                 .def(python::init<const CalculatorType&>((python::arg("self"), python::arg("algo"))))
                 .def(CDPLPythonBase::ObjectIdentityCheckVisitor<CalculatorType >())
-                .def("assign", CDPLPythonBase::copyAssOp(&CalculatorType::operator=), (python::arg("self"), python::arg("algo")),
+                .def("assign", CDPLPythonBase::copyAssOp<CalculatorType>(), (python::arg("self"), python::arg("algo")),
                      python::return_self<>())
                 .def("getTransform", &CalculatorType::getTransform, python::arg("self"), 
                      python::return_internal_reference<>())

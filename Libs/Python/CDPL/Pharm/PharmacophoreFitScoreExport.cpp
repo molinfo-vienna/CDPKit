@@ -45,7 +45,7 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
                                                    python::arg("pos_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT,
                                                    python::arg("geom_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT)))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreFitScore>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreFitScore::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::PharmacophoreFitScore>(), 
              (python::arg("self"), python::arg("score")), python::return_self<>())
         .def("__call__", static_cast<double (Pharm::PharmacophoreFitScore::*)
              (const Pharm::FeatureContainer&, const Pharm::FeatureContainer&, const Math::Matrix4D&)>(&Pharm::PharmacophoreFitScore::operator()),

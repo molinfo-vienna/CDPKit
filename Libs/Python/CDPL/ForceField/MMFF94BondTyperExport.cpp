@@ -49,7 +49,7 @@ void CDPLPythonForceField::exportMMFF94BondTyper()
              (python::arg("self"), python::arg("func"))) 
         .def("setAtomTypePropertyTable", &ForceField::MMFF94BondTyper::setAtomTypePropertyTable, 
              (python::arg("self"), python::arg("table")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondTyper::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94BondTyper>(),
              (python::arg("self"), python::arg("typer")), python::return_self<>())
         .def("perceiveTypes", &ForceField::MMFF94BondTyper::perceiveTypes, 
              (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict")));

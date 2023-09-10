@@ -81,7 +81,7 @@ void CDPLPythonForceField::exportMMFF94HeavyToHydrogenAtomTypeMap()
         .def("getEntries", &getEntries, python::arg("self")) 
         .def("load", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::load, (python::arg("self"), python::arg("is"))) 
         .def("loadDefaults", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults, python::arg("self")) 
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94HeavyToHydrogenAtomTypeMap::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94HeavyToHydrogenAtomTypeMap>(), 
              (python::arg("self"), python::arg("map")), python::return_self<>())
         .add_property("numEntries", &ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getNumEntries)
         .add_property("entries", python::make_function(&getEntries))

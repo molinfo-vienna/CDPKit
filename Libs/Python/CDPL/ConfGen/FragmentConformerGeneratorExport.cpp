@@ -42,7 +42,7 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
         .def(python::init<>(python::arg("self")))
 //        .def(python::init<const ConfGen::FragmentConformerGenerator&>((python::arg("self"), python::arg("gen"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGenerator>())
-//        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGenerator::operator=), 
+//        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::FragmentConformerGenerator>(), 
 //             (python::arg("self"), python::arg("gen")), python::return_self<>())
         .def("setAbortCallback", &ConfGen::FragmentConformerGenerator::setAbortCallback, 
              (python::arg("self"), python::arg("func")))

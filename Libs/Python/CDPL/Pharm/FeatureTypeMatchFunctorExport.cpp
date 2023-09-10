@@ -53,7 +53,7 @@ void CDPLPythonPharm::exportFeatureTypeMatchFunctor()
         .def(python::init<const Pharm::FeatureTypeMatchFunctor&>((python::arg("self"), python::arg("func"))))
         .def(python::init<>(python::arg("self")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureTypeMatchFunctor>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureTypeMatchFunctor::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::FeatureTypeMatchFunctor>(), 
              (python::arg("self"), python::arg("func")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
 }

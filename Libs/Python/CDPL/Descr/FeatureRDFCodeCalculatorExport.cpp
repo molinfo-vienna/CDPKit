@@ -54,7 +54,7 @@ void CDPLPythonDescr::exportFeatureRDFCodeCalculator()
         .def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
                  (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::FeatureRDFCodeCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Descr::FeatureRDFCodeCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Descr::FeatureRDFCodeCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("setEntityPairWeightFunction", &Descr::FeatureRDFCodeCalculator::setEntityPairWeightFunction, 
              (python::arg("self"), python::arg("func")))

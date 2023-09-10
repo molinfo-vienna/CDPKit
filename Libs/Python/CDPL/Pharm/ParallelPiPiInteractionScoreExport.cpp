@@ -50,7 +50,7 @@ void CDPLPythonPharm::exportParallelPiPiInteractionScore()
         .def("getMaxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance, python::arg("self"))
         .def("getMaxHDistance", &Pharm::ParallelPiPiInteractionScore::getMaxHDistance, python::arg("self"))
         .def("getMaxAngle", &Pharm::ParallelPiPiInteractionScore::getMaxAngle, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::ParallelPiPiInteractionScore::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::ParallelPiPiInteractionScore>(), 
              (python::arg("self"), python::arg("constr")), python::return_self<>())
         .add_property("minVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance)
         .add_property("maxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance)

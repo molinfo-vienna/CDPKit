@@ -93,7 +93,7 @@ void CDPLPythonConfGen::exportTorsionRuleMatch()
              python::return_internal_reference<>())
         .def("getRule", &ConfGen::TorsionRuleMatch::getRule, python::arg("self"), 
              python::return_internal_reference<>())
-        .def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRuleMatch::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<ConfGen::TorsionRuleMatch>(), 
              (python::arg("self"), python::arg("match")), python::return_self<python::with_custodian_and_ward<1, 2> >())
             .def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
         .add_property("rule", python::make_function(&ConfGen::TorsionRuleMatch::getRule, python::return_internal_reference<>()))

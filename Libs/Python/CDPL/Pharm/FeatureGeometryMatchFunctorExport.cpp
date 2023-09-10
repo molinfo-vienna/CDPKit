@@ -65,7 +65,7 @@ void CDPLPythonPharm::exportFeatureGeometryMatchFunctor()
                                                          python::arg("max_xbd_int_dir_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
                                                          python::arg("max_ar_orient_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_AR_ORIENTATION_DEVIATION)))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureGeometryMatchFunctor>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureGeometryMatchFunctor::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Pharm::FeatureGeometryMatchFunctor>(), 
              (python::arg("self"), python::arg("func")), python::return_self<>())
         .def("getMaxHBAInteractionDirAngle", &Pharm::FeatureGeometryMatchFunctor::getMaxHBAInteractionDirAngle,
              python::arg("self"))

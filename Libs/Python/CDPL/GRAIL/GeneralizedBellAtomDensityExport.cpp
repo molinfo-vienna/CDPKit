@@ -56,7 +56,7 @@ void CDPLPythonGRAIL::exportGeneralizedBellAtomDensity()
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GeneralizedBellAtomDensity>())
         .def("getProbeRadius", &GRAIL::GeneralizedBellAtomDensity::getProbeRadius, python::arg("self"))
         .def("getRadiusScalingFactor", &GRAIL::GeneralizedBellAtomDensity::getRadiusScalingFactor, python::arg("self"))
-        .def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GeneralizedBellAtomDensity::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<GRAIL::GeneralizedBellAtomDensity>(), 
              (python::arg("self"), python::arg("func")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("pos"), python::arg("atom_pos"), python::arg("atom")))
         .add_property("probeRadius", &GRAIL::GeneralizedBellAtomDensity::getProbeRadius)

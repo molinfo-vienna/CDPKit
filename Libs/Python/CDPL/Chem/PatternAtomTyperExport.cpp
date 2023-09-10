@@ -47,7 +47,7 @@ void CDPLPythonChem::exportPatternAtomTyper()
                  (python::arg("self"), python::arg("structure"), (python::arg("atom_label") = 0), (python::arg("priority") = 0), 
                   (python::arg("all_matches") = true), (python::arg("unique_matches") = false))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternAtomTyper::Pattern>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::PatternAtomTyper::Pattern::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternAtomTyper::Pattern>(), 
              (python::arg("self"), python::arg("ptn")), python::return_self<>())
         .def("getStructure", &Chem::PatternAtomTyper::Pattern::getStructure, python::arg("self"),  
              python::return_value_policy<python::copy_const_reference>())
@@ -83,7 +83,7 @@ void CDPLPythonChem::exportPatternAtomTyper()
         .def("getPatternIndex", &Chem::PatternAtomTyper::getPatternIndex, (python::arg("self"), python::arg("idx")))
         .def("hasAtomLabel", &Chem::PatternAtomTyper::hasAtomLabel, (python::arg("self"), python::arg("idx")))
         .def("execute", &Chem::PatternAtomTyper::execute, (python::arg("self"), python::arg("molgraph")))
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::PatternAtomTyper::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::PatternAtomTyper>(), 
              (python::arg("self"), python::arg("typer")), python::return_self<>())
         .add_property("numPatterns", &Chem::PatternAtomTyper::getNumPatterns);
 }

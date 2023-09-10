@@ -43,7 +43,7 @@ void CDPLPythonMolProp::exportXLogPCalculator()
         .def(python::init<const MolProp::XLogPCalculator&>((python::arg("self"), python::arg("calc"))))
         .def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::XLogPCalculator>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&MolProp::XLogPCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<MolProp::XLogPCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .def("calculate", &MolProp::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
         .def("getResult", &MolProp::XLogPCalculator::getResult, python::arg("self"))

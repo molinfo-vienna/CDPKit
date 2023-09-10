@@ -59,7 +59,7 @@ void CDPLPythonForceField::exportMMFF94ChargeCalculator()
              (python::arg("self"), python::arg("table")))
         .def("setPartialBondChargeIncrementTable", &ForceField::MMFF94ChargeCalculator::setPartialBondChargeIncrementTable, 
              (python::arg("self"), python::arg("table")))
-        .def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ChargeCalculator::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<ForceField::MMFF94ChargeCalculator>(),
              (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
         .def("calculate", &ForceField::MMFF94ChargeCalculator::calculate, 
              (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict")))

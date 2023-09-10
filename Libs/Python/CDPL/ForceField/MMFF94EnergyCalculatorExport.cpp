@@ -45,7 +45,7 @@ void CDPLPythonForceField::exportMMFF94EnergyCalculator()
         .def(python::init<const CalculatorType&>((python::arg("self"), python::arg("calc")))[python::with_custodian_and_ward<1, 2>()])
         .def(python::init<const ForceField::MMFF94InteractionData&>((python::arg("self"), python::arg("ia_data"))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<CalculatorType>())
-        .def("assign", CDPLPythonBase::copyAssOp(&CalculatorType::operator=),
+        .def("assign", CDPLPythonBase::copyAssOp<CalculatorType>(),
              (python::arg("self"), python::arg("calc")), python::return_self<python::with_custodian_and_ward<1, 2> >())
         .def("setEnabledInteractionTypes", &CalculatorType::setEnabledInteractionTypes, (python::arg("self"), python::arg("types")))
         .def("getEnabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, python::arg("self"))

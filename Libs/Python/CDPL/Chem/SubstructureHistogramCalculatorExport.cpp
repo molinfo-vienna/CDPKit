@@ -47,7 +47,7 @@ void CDPLPythonChem::exportSubstructureHistogramCalculator()
                  (python::arg("self"), python::arg("structure"), python::arg("id"), (python::arg("priority") = 0), 
                   (python::arg("all_matches") = true), (python::arg("unique_matches") = true))))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SubstructureHistogramCalculator::Pattern>())    
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::SubstructureHistogramCalculator::Pattern::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::SubstructureHistogramCalculator::Pattern>(), 
              (python::arg("self"), python::arg("ptn")), python::return_self<>())
         .def("getStructure", &Chem::SubstructureHistogramCalculator::Pattern::getStructure, python::arg("self"),  
              python::return_value_policy<python::copy_const_reference>())
@@ -81,7 +81,7 @@ void CDPLPythonChem::exportSubstructureHistogramCalculator()
         .def("getNumPatterns", &Chem::SubstructureHistogramCalculator::getNumPatterns, python::arg("self"))
         .def("calculate", &Chem::SubstructureHistogramCalculator::calculate<python::object>, 
              (python::arg("self"), python::arg("molgraph"), python::arg("histo")))
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::SubstructureHistogramCalculator::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::SubstructureHistogramCalculator>(), 
              (python::arg("self"), python::arg("calc")), python::return_self<>())
         .add_property("numPatterns", &Chem::SubstructureHistogramCalculator::getNumPatterns);
 }

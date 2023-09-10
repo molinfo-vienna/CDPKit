@@ -52,7 +52,7 @@ void CDPLPythonChem::exportAtom3DCoordinatesFunctor()
         .def(python::init<const Chem::Atom3DCoordinatesFunctor&>((python::arg("self"), python::arg("func"))))
         .def(python::init<>(python::arg("self")))
         .def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Atom3DCoordinatesFunctor>())
-        .def("assign", CDPLPythonBase::copyAssOp(&Chem::Atom3DCoordinatesFunctor::operator=), 
+        .def("assign", CDPLPythonBase::copyAssOp<Chem::Atom3DCoordinatesFunctor>(), 
              (python::arg("self"), python::arg("func")), python::return_self<>())
         .def("__call__", &callOperator, (python::arg("self"), python::arg("atom")),
              boost::python::return_internal_reference<2>());
