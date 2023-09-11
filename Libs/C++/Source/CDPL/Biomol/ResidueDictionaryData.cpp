@@ -76,12 +76,12 @@ namespace CDPL
                 HRSRC res = FindResource(hInstance_DLL, "RES_DICT_STRUCT_DATA", RT_RCDATA);
 
                 if (!res)
-                    throw Base::IOError(std::string("ResidueDictionaryData: could not find structure data resource record");
+                    throw Base::IOError("ResidueDictionaryData: could not find structure data resource record");
 
                 HGLOBAL res_handle = LoadResource(NULL, res);
 
                 if (!res_handle)
-                    throw Base::IOError(std::string("ResidueDictionaryData: could not load structure data resource");
+                    throw Base::IOError("ResidueDictionaryData: could not load structure data resource");
 
                 const char* res_data = static_cast<const char*>(LockResource(res_handle));
 

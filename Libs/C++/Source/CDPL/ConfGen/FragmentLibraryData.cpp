@@ -75,12 +75,12 @@ namespace CDPL
                 HRSRC res = FindResource(hInstance_DLL, "FRAG_LIB_DATA", RT_RCDATA);
 
                 if (!res)
-                    throw Base::IOError(std::string("FragmentLibraryData: could not find builtin fragment library data resource record");
+                    throw Base::IOError("FragmentLibraryData: could not find builtin fragment library data resource record");
 
                 HGLOBAL res_handle = LoadResource(NULL, res);
 
                 if (!res_handle)
-                    throw Base::IOError(std::string("FragmentLibraryData: could not load builtin fragment library data");
+                    throw Base::IOError("FragmentLibraryData: could not load builtin fragment library data");
 
                 const char* res_data = static_cast<const char*>(LockResource(res_handle));
 
