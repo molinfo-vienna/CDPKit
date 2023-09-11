@@ -47,11 +47,11 @@ namespace
         BONDCONTAINER_IMPL()
 
         const CDPL::Chem::Molecule& getMolecule() const {
-            return this->get_override("getMolecule")();
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("getMolecule").ptr());
         }
 
         CDPL::Chem::Molecule& getMolecule() {
-            return this->get_override("getMolecule")();
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("getMolecule").ptr());
         }
 
         const CDPL::Chem::Bond& getBondToAtom(const CDPL::Chem::Atom& atom) const {

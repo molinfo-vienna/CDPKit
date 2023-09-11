@@ -39,11 +39,11 @@ namespace
     {
 
         const CDPL::Pharm::Pharmacophore& getPharmacophore() const {
-            return this->get_override("getPharmacophore")();
+            return boost::python::call<CDPL::Pharm::Pharmacophore&>(this->get_override("getPharmacophore").ptr());
         }
 
         CDPL::Pharm::Pharmacophore& getPharmacophore() {
-            return this->get_override("getPharmacophore")();
+            return boost::python::call<CDPL::Pharm::Pharmacophore&>(this->get_override("getPharmacophore").ptr());
         }
 
         std::size_t getIndex() const {
