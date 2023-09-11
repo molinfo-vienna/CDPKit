@@ -114,7 +114,7 @@ namespace
         }
 
         CDPL::Chem::Molecule& addComponent(unsigned int role) {
-            return this->get_override("addComponent")(role);
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("addComponent").ptr(), role);
         }
 
         // CDPL::Chem::Molecule& addComponent(unsigned int role, const CDPL::Chem::Molecule& mol) {
@@ -134,19 +134,19 @@ namespace
         }
 
         CDPL::Chem::Molecule& getComponent(std::size_t idx) {
-            return this->get_override("getComponent")(idx);
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("getComponent").ptr(), idx);
         }
 
         CDPL::Chem::Molecule& getComponent(std::size_t idx, unsigned int role) {
-            return this->get_override("getComponent")(idx, role);
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("getComponent").ptr(), idx, role);
         }
     
         const CDPL::Chem::Molecule& getComponent(std::size_t idx) const {
-            return this->get_override("getComponent")(idx);
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("getComponent").ptr(), idx);
         }
 
         const CDPL::Chem::Molecule& getComponent(std::size_t idx, unsigned int role) const {
-            return this->get_override("getComponent")(idx, role);
+            return boost::python::call<CDPL::Chem::Molecule&>(this->get_override("getComponent").ptr(), idx, role);
         }
 
         void swapComponentRoles(unsigned int role1, unsigned int role2) {
