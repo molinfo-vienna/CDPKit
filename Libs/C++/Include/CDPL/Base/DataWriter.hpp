@@ -117,6 +117,10 @@ namespace CDPL
             virtual bool operator!() const = 0;
 
           protected:
+            DataWriter() {}
+
+            ~DataWriter() {}
+ 
             /**
              * \brief Assignment operator.
              * \param writer The \c %DataWriter instance to copy.

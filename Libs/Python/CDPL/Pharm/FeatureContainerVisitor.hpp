@@ -29,64 +29,64 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define FEATURECONTAINER_IMPL()                                         \
-    std::size_t getNumFeatures() const                                  \
-    {                                                                   \
-        return this->get_override("getNumFeatures")();                  \
-    }                                                                   \
-                                                                        \
-    const CDPL::Pharm::Feature& getFeature(std::size_t idx) const       \
-    {                                                                   \
+#define FEATURECONTAINER_IMPL()                                                                         \
+    std::size_t getNumFeatures() const                                                                  \
+    {                                                                                                   \
+        return this->get_override("getNumFeatures")();                                                  \
+    }                                                                                                   \
+                                                                                                        \
+    const CDPL::Pharm::Feature& getFeature(std::size_t idx) const                                       \
+    {                                                                                                   \
         return boost::python::call<CDPL::Pharm::Feature&>(this->get_override("getFeature").ptr(), idx); \
-    }                                                                   \
-                                                                        \
-    bool containsFeature(const CDPL::Pharm::Feature& ftr) const         \
-    {                                                                   \
-        return this->get_override("containsFeature")(boost::ref(ftr));  \
-    }                                                                   \
-                                                                        \
-    std::size_t getFeatureIndex(const CDPL::Pharm::Feature& ftr) const  \
-    {                                                                   \
-        return this->get_override("getFeatureIndex")(boost::ref(ftr));  \
-    }                                                                   \
-                                                                        \
-    CDPL::Pharm::Feature& getFeature(std::size_t idx)                   \
-    {                                                                   \
-        return  boost::python::call<CDPL::Pharm::Feature&>(this->get_override("getFeature").ptr(), idx); \
-    }                                                                   \
-                                                                        \
-    std::size_t getNumEntities() const                                  \
-    {                                                                   \
-        if (boost::python::override f = this->get_override("getNumEntities")) \
-            return f();                                                 \
-                                                                        \
-        return CDPL::Pharm::FeatureContainer::getNumEntities();         \
-    }                                                                   \
-                                                                        \
-    std::size_t getNumEntitiesDef() const                               \
-    {                                                                   \
-        return CDPL::Pharm::FeatureContainer::getNumEntities();         \
-    }                                                                   \
-                                                                        \
-    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const        \
-    {                                                                   \
-        if (boost::python::override f = this->get_override("getEntity"))     \
-            return boost::python::call<CDPL::Chem::Entity3D&>(f.ptr(), idx); \
-                                                                        \
-        return CDPL::Pharm::FeatureContainer::getEntity(idx);           \
-    }                                                                   \
-                                                                        \
-    CDPL::Chem::Entity3D& getEntity(std::size_t idx)                    \
-    {                                                                   \
-        if (boost::python::override f = this->get_override("getEntity"))     \
-            return boost::python::call<CDPL::Chem::Entity3D&>(f.ptr(), idx); \
-                                                                        \
-        return CDPL::Pharm::FeatureContainer::getEntity(idx);           \
-    }                                                                   \
-                                                                        \
-    CDPL::Chem::Entity3D& getEntityDef(std::size_t idx)                 \
-    {                                                                   \
-        return CDPL::Pharm::FeatureContainer::getEntity(idx);           \
+    }                                                                                                   \
+                                                                                                        \
+    bool containsFeature(const CDPL::Pharm::Feature& ftr) const                                         \
+    {                                                                                                   \
+        return this->get_override("containsFeature")(boost::ref(ftr));                                  \
+    }                                                                                                   \
+                                                                                                        \
+    std::size_t getFeatureIndex(const CDPL::Pharm::Feature& ftr) const                                  \
+    {                                                                                                   \
+        return this->get_override("getFeatureIndex")(boost::ref(ftr));                                  \
+    }                                                                                                   \
+                                                                                                        \
+    CDPL::Pharm::Feature& getFeature(std::size_t idx)                                                   \
+    {                                                                                                   \
+        return boost::python::call<CDPL::Pharm::Feature&>(this->get_override("getFeature").ptr(), idx); \
+    }                                                                                                   \
+                                                                                                        \
+    std::size_t getNumEntities() const                                                                  \
+    {                                                                                                   \
+        if (boost::python::override f = this->get_override("getNumEntities"))                           \
+            return f();                                                                                 \
+                                                                                                        \
+        return CDPL::Pharm::FeatureContainer::getNumEntities();                                         \
+    }                                                                                                   \
+                                                                                                        \
+    std::size_t getNumEntitiesDef() const                                                               \
+    {                                                                                                   \
+        return CDPL::Pharm::FeatureContainer::getNumEntities();                                         \
+    }                                                                                                   \
+                                                                                                        \
+    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const                                        \
+    {                                                                                                   \
+        if (boost::python::override f = this->get_override("getEntity"))                                \
+            return boost::python::call<CDPL::Chem::Entity3D&>(f.ptr(), idx);                            \
+                                                                                                        \
+        return CDPL::Pharm::FeatureContainer::getEntity(idx);                                           \
+    }                                                                                                   \
+                                                                                                        \
+    CDPL::Chem::Entity3D& getEntity(std::size_t idx)                                                    \
+    {                                                                                                   \
+        if (boost::python::override f = this->get_override("getEntity"))                                \
+            return boost::python::call<CDPL::Chem::Entity3D&>(f.ptr(), idx);                            \
+                                                                                                        \
+        return CDPL::Pharm::FeatureContainer::getEntity(idx);                                           \
+    }                                                                                                   \
+                                                                                                        \
+    CDPL::Chem::Entity3D& getEntityDef(std::size_t idx)                                                 \
+    {                                                                                                   \
+        return CDPL::Pharm::FeatureContainer::getEntity(idx);                                           \
     }
 
 
