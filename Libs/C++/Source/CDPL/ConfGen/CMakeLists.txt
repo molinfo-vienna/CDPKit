@@ -114,7 +114,7 @@ SET(cdpl-confgen_LIB_SRCS
    )
 
 IF(MSVC)
-  SET(cdpl-confgen_LIB_SRCS ${cdpl-confgen_LIB_SRCS} FragmentLibraryData.rc)
+  SET(cdpl-confgen_LIB_SRCS ${cdpl-confgen_LIB_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc")
 ENDIF()
   
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})

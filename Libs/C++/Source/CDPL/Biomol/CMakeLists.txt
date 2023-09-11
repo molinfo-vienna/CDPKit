@@ -76,7 +76,7 @@ SET(cdpl-biomol_LIB_SRCS
     )
 
 IF(MSVC)
-  SET(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.rc)
+  SET(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/ResidueDictionaryStructureData.rc")
 ELSE()
   SET(cdpl-biomol_LIB_SRCS ${cdpl-biomol_LIB_SRCS} ResidueDictionaryStructureData.cdf.str)
 ENDIF()

@@ -29,70 +29,70 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define ATOMCONTAINER_IMPL()                                            \
- void orderAtoms(const CDPL::Chem::AtomCompareFunction& func)           \
- {                                                                      \
-  this->get_override("orderAtoms")(boost::ref(func));                   \
- }                                                                      \
-                                                                        \
- std::size_t getNumAtoms() const                                        \
- {                                                                      \
-  return this->get_override("getNumAtoms")();                           \
- }                                                                      \
-                                                                        \
- const CDPL::Chem::Atom& getAtom(std::size_t idx) const                 \
- {                                                                      \
-  return this->get_override("getAtom")(idx);                            \
- }                                                                      \
-                                                                        \
- bool containsAtom(const CDPL::Chem::Atom& atom) const                  \
- {                                                                      \
-  return this->get_override("containsAtom")(boost::ref(atom));          \
- }                                                                      \
-                                                                        \
- std::size_t getAtomIndex(const CDPL::Chem::Atom& atom) const           \
- {                                                                      \
-  return this->get_override("getAtomIndex")(boost::ref(atom));          \
- }                                                                      \
-                                                                        \
- CDPL::Chem::Atom& getAtom(std::size_t idx)                             \
- {                                                                      \
-  return this->get_override("getAtom")(idx);                            \
- }                                                                      \
-                                                                        \
- std::size_t getNumEntities() const                                     \
- {                                                                      \
-  if (boost::python::override f = this->get_override("getNumEntities")) \
-   return f();                                                          \
-                                                                        \
-  return CDPL::Chem::AtomContainer::getNumEntities();                   \
- }                                                                      \
-                                                                        \
- std::size_t getNumEntitiesDef() const                                  \
- {                                                                      \
-  return CDPL::Chem::AtomContainer::getNumEntities();                   \
- }                                                                      \
-                                                                        \
- const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const           \
- {                                                                      \
-  if (boost::python::override f = this->get_override("getEntity"))      \
-   return f(idx);                                                       \
-                                                                        \
-  return CDPL::Chem::AtomContainer::getEntity(idx);                     \
- }                                                                      \
-                                                                        \
- CDPL::Chem::Entity3D& getEntity(std::size_t idx)                       \
- {                                                                      \
-  if (boost::python::override f = this->get_override("getEntity"))      \
-   return f(idx);                                                       \
-                                                                        \
-  return CDPL::Chem::AtomContainer::getEntity(idx);                     \
- }                                                                      \
-                                                                        \
- CDPL::Chem::Entity3D& getEntityDef(std::size_t idx)                    \
- {                                                                      \
-  return CDPL::Chem::AtomContainer::getEntity(idx);                     \
- }
+#define ATOMCONTAINER_IMPL()                                                      \
+    void orderAtoms(const CDPL::Chem::AtomCompareFunction& func)                  \
+    {                                                                             \
+        this->get_override("orderAtoms")(boost::ref(func));                       \
+    }                                                                             \
+                                                                                  \
+    std::size_t getNumAtoms() const                                               \
+    {                                                                             \
+        return this->get_override("getNumAtoms")();                               \
+    }                                                                             \
+                                                                                  \
+    const CDPL::Chem::Atom& getAtom(std::size_t idx) const                        \
+    {                                                                             \
+        return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getAtom").ptr(), idx); \
+    }                                                                             \
+                                                                                  \
+    bool containsAtom(const CDPL::Chem::Atom& atom) const                         \
+    {                                                                             \
+        return this->get_override("containsAtom")(boost::ref(atom));              \
+    }                                                                             \
+                                                                                  \
+    std::size_t getAtomIndex(const CDPL::Chem::Atom& atom) const                  \
+    {                                                                             \
+        return this->get_override("getAtomIndex")(boost::ref(atom));              \
+    }                                                                             \
+                                                                                  \
+    CDPL::Chem::Atom& getAtom(std::size_t idx)                                    \
+    {                                                                             \
+        return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getAtom").ptr(), idx); \
+    }                                                                             \
+                                                                                  \
+    std::size_t getNumEntities() const                                            \
+    {                                                                             \
+        if (boost::python::override f = this->get_override("getNumEntities"))     \
+            return f();                                                           \
+                                                                                  \
+        return CDPL::Chem::AtomContainer::getNumEntities();                       \
+    }                                                                             \
+                                                                                  \
+    std::size_t getNumEntitiesDef() const                                         \
+    {                                                                             \
+        return CDPL::Chem::AtomContainer::getNumEntities();                       \
+    }                                                                             \
+                                                                                  \
+    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const                  \
+    {                                                                             \
+        if (boost::python::override f = this->get_override("getEntity"))          \
+            return boost::python::call<CDPL::Chem::Atom&>(f.ptr(), idx);          \
+                                                                                  \
+        return CDPL::Chem::AtomContainer::getEntity(idx);                         \
+    }                                                                             \
+                                                                                  \
+    CDPL::Chem::Entity3D& getEntity(std::size_t idx)                              \
+    {                                                                             \
+        if (boost::python::override f = this->get_override("getEntity"))          \
+            return boost::python::call<CDPL::Chem::Atom&>(f.ptr(), idx);          \
+                                                                                  \
+        return CDPL::Chem::AtomContainer::getEntity(idx);                         \
+    }                                                                             \
+                                                                                  \
+    CDPL::Chem::Entity3D& getEntityDef(std::size_t idx)                           \
+    {                                                                             \
+        return CDPL::Chem::AtomContainer::getEntity(idx);                         \
+    }
 
 
 namespace CDPLPythonChem

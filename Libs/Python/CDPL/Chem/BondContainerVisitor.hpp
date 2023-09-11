@@ -29,36 +29,36 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define BONDCONTAINER_IMPL()                                   \
- void orderBonds(const CDPL::Chem::BondCompareFunction& func)  \
- {                                                             \
-  this->get_override("orderBonds")(boost::ref(func));          \
- }                                                             \
-                                                               \
- std::size_t getNumBonds() const                               \
- {                                                             \
-  return this->get_override("getNumBonds")();                  \
- }                                                             \
-                                                               \
- const CDPL::Chem::Bond& getBond(std::size_t idx) const        \
- {                                                             \
-  return this->get_override("getBond")(idx);                   \
- }                                                             \
-                                                               \
- bool containsBond(const CDPL::Chem::Bond& bond) const         \
- {                                                             \
-  return this->get_override("containsBond")(boost::ref(bond)); \
- }                                                             \
-                                                               \
- std::size_t getBondIndex(const CDPL::Chem::Bond& bond) const  \
- {                                                             \
-  return this->get_override("getBondIndex")(boost::ref(bond)); \
- }                                                             \
-                                                               \
- CDPL::Chem::Bond& getBond(std::size_t idx)                    \
- {                                                             \
-  return this->get_override("getBond")(idx);                   \
- }
+#define BONDCONTAINER_IMPL()                                                      \
+    void orderBonds(const CDPL::Chem::BondCompareFunction& func)                  \
+    {                                                                             \
+        this->get_override("orderBonds")(boost::ref(func));                       \
+    }                                                                             \
+                                                                                  \
+    std::size_t getNumBonds() const                                               \
+    {                                                                             \
+        return this->get_override("getNumBonds")();                               \
+    }                                                                             \
+                                                                                  \
+    const CDPL::Chem::Bond& getBond(std::size_t idx) const                        \
+    {                                                                             \
+        return boost::python::call<CDPL::Chem::Bond&>(this->get_override("getBond").ptr(), idx); \
+    }                                                                             \
+                                                                                  \
+    bool containsBond(const CDPL::Chem::Bond& bond) const                         \
+    {                                                                             \
+        return this->get_override("containsBond")(boost::ref(bond));              \
+    }                                                                             \
+                                                                                  \
+    std::size_t getBondIndex(const CDPL::Chem::Bond& bond) const                  \
+    {                                                                             \
+        return this->get_override("getBondIndex")(boost::ref(bond));              \
+    }                                                                             \
+                                                                                  \
+    CDPL::Chem::Bond& getBond(std::size_t idx)                                    \
+    {                                                                             \
+        return boost::python::call<CDPL::Chem::Bond&>(this->get_override("getBond").ptr(), idx); \
+    }
 
 
 namespace CDPLPythonChem

@@ -29,21 +29,31 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define ENTITY3DCONTAINER_IMPL()                              \
- std::size_t getNumEntities() const                           \
- {                                                            \
-  return this->get_override("getNumEntities")();              \
- }                                                            \
-                                                              \
- const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const \
- {                                                            \
-  return this->get_override("getEntity")(idx);                \
- }                                                            \
-                                                              \
- CDPL::Chem::Entity3D& getEntity(std::size_t idx)             \
- {                                                            \
-  return this->get_override("getEntity")(idx);                \
- }
+#define ENTITY3DCONTAINER_IMPL()                                        \
+    std::size_t getNumEntities() const                                  \
+    {                                                                   \
+        return this->get_override("getNumEntities")();                  \
+    }                                                                   \
+                                                                        \
+    const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const        \
+    {                                                                   \
+        return boost::python::call<CDPL::Chem::Entity3D&>(this->get_override("getEntity").ptr(), idx); \
+    }                                                                   \
+                                                                        \
+    CDPL::Chem::Entity3D& getEntity(std::size_t idx)                    \
+    {                                                                   \
+        return boost::python::call<CDPL::Chem::Entity3D&>(this->get_override("getEntity").ptr(), idx); \
+    }
+
+
+namespace
+{
+
+    CDPL::Chem::Entity3D& getEntity(CDPL::Chem::Entity3DContainer& cntnr, std::size_t idx)
+    {
+        return cntnr.getEntity(idx);
+    }
+}
 
 
 namespace CDPLPythonChem
