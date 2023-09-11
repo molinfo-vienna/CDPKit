@@ -26,6 +26,7 @@
 #define CDPL_CONFGEN_FRAGMENTLIBRARYDATA_HPP
 
 #include <cstddef>
+#include <utility>
 
 
 namespace CDPL
@@ -37,8 +38,8 @@ namespace CDPL
         namespace FragmentLibraryData
         {
 
-            extern const char        BUILTIN_FRAG_LIB_DATA[];
-            extern const std::size_t BUILTIN_FRAG_LIB_DATA_LEN;
+            std::pair<const char*, std::size_t> get();
+
         } // namespace FragmentLibraryData
     } // namespace ConfGen
 } // namespace CDPL

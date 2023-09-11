@@ -42,14 +42,14 @@
 namespace CDPLPythonMath
 {
 
-    template <typename ExpressionType, typename TriangType>
+    template <typename ExprType, typename TriangType>
     struct TriangularAdapterExport
     {
 
-        typedef CDPL::Math::TriangularAdapter<const ExpressionType, TriangType>                 TriangularAdapterType;
-        typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, TriangularAdapterType> TriangularAdapterWrapper;
-        typedef typename TriangularAdapterWrapper::ExpressionPointerType                        ExpressionPointerType;
-        typedef typename TriangularAdapterWrapper::SharedPointer                                WrapperPointerType;
+        typedef CDPL::Math::TriangularAdapter<const ExprType, TriangType>                 TriangularAdapterType;
+        typedef CDPLPythonMath::ExpressionAdapterWrapper<ExprType, TriangularAdapterType> TriangularAdapterWrapper;
+        typedef typename TriangularAdapterWrapper::ExpressionPointerType                  ExpressionPointerType;
+        typedef typename TriangularAdapterWrapper::SharedPointer                          WrapperPointerType;
 
         TriangularAdapterExport(const char* name)
         {

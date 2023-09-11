@@ -24,19 +24,60 @@
 
 #include "StaticInit.hpp"
 
+#ifdef _MSC_VER
+# include <winbase.h>
+#endif
+
+#include "CDPL/Base/Exceptions.hpp"
+
 #include "FragmentLibraryData.hpp"
 
 
-using namespace CDPL;
-using namespace ConfGen;
+namespace CDPL
+{
 
-// clang-format off
+    namespace ConfGen
+    {
 
-const char FragmentLibraryData::BUILTIN_FRAG_LIB_DATA[] =
-    #include "FragmentLibrary.cfl.str"
-    ;
+        namespace FragmentLibraryData
+        {
+            // clang-format off
 
-const std::size_t FragmentLibraryData::BUILTIN_FRAG_LIB_DATA_LEN =
-    sizeof(FragmentLibraryData::BUILTIN_FRAG_LIB_DATA) - 1;
+#ifndef _MSC_VER
 
-// clang-format on
+            const char BUILTIN_FRAG_LIB_DATA[] =
+                #include "FragmentLibrary.cfl.str"
+                ;
+
+            std::pair<const char*, std::size_t> get()
+            {
+                return std::make_pair(BUILTIN_FRAG_LIB_DATA, sizeof(BUILTIN_FRAG_LIB_DATA) - 1);
+            }
+#else
+            std::pair<const char*, std::size_t> getStructureData()
+            {
+                // NOTE: providing g_hInstance is important, NULL might not work
+                HRSRC res = FindResource(g_hInstance, "FRAG_LIB_DATA", RT_RCDATA);
+
+                if (!res)
+                    throw Base::IOError(std::string("FragmentLibraryData: could not find builtin fragment library data resource record");
+
+                HGLOBAL res_handle = LoadResource(NULL, res);
+
+                if (!res_handle)
+                    throw Base::IOError(std::string("FragmentLibraryData: could not load builtin fragment library data");
+
+                const char* res_data = static_cast<const char*>(LockResource(res_handle));
+
+                DWORD res_data_len = SizeofResource(NULL, res);
+
+                return std::make_pair(res_data, res_data_len);
+            }
+
+#endif // !_MSC_VER            
+
+            // clang-format on
+   
+        } // namespace FragmentLibraryData
+    }     // namespace ConfGen
+} // namespace CDPL

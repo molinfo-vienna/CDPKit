@@ -33,12 +33,12 @@
 namespace CDPLPythonMath
 {
 
-    template <typename ExpressionType, typename AdapterType>
+    template <typename ExprType, typename AdapterType>
     struct ExpressionAdapterWrapper : AdapterType,
                                       boost::python::wrapper<AdapterType>
     {
 
-        typedef typename ExpressionType::SharedPointer    ExpressionPointerType;
+        typedef typename ExprType::SharedPointer          ExpressionPointerType;
         typedef std::shared_ptr<ExpressionAdapterWrapper> SharedPointer;
 
         ExpressionAdapterWrapper(const ExpressionAdapterWrapper& ph):

@@ -64,12 +64,6 @@ namespace
 
     const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
-    boost::iostreams::stream<boost::iostreams::array_source>
-        resStructureIStream(Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA,
-                            Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
-
-    Chem::CDFMoleculeReader resStructureReader(resStructureIStream);
-
     const char* stdResidueList[] = { "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
                                      "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO",
                                      "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL",
@@ -109,6 +103,12 @@ namespace
         using namespace ResidueDictionaryData; 
 
         std::lock_guard<std::mutex> lock(loadStructureMutex);
+
+        static std::pair<const char*, std::size_t> res_struct_data = Biomol::ResidueDictionaryData::getStructureData();
+        static boost::iostreams::stream<boost::iostreams::array_source>
+            res_struct_is(res_struct_data.first, res_struct_data.second);
+        static Chem::CDFMoleculeReader rest_struct_reader(res_struct_is);
+
         StructureCache::const_iterator rsc_it = resStructureCache.find(code);
 
         if (rsc_it != resStructureCache.end())
@@ -123,7 +123,7 @@ namespace
         Molecule::SharedPointer mol_ptr(new BasicMolecule());
 
         try {
-            resStructureReader.read(data_entry.molIndex, *mol_ptr);
+            rest_struct_reader.read(data_entry.molIndex, *mol_ptr);
 
         } catch (std::exception& e) {
             throw Base::IOError(

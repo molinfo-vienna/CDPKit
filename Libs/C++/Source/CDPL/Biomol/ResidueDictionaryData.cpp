@@ -24,7 +24,12 @@
 
 #include "StaticInit.hpp"
 
+#ifdef _MSC_VER
+# include <winbase.h>
+#endif
+
 #include "CDPL/Biomol/ResidueType.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "ResidueDictionaryData.hpp"
 
@@ -39,12 +44,39 @@ namespace CDPL
         {
             // clang-format off
             
+#ifndef _MSC_VER
+
             const char RESIDUE_STRUCTURE_DATA[] =
                 #include "ResidueDictionaryStructureData.cdf.str"
                 ;
 
-            const std::size_t RESIDUE_STRUCTURE_DATA_LEN = sizeof(RESIDUE_STRUCTURE_DATA) - 1;
-            
+            std::pair<const char*, std::size_t> getStructureData()
+            {
+                return std::make_pair(RESIDUE_STRUCTURE_DATA, sizeof(RESIDUE_STRUCTURE_DATA) - 1);
+            }
+#else
+            std::pair<const char*, std::size_t> getStructureData()
+            {
+                // NOTE: providing g_hInstance is important, NULL might not work
+                HRSRC res = FindResource(g_hInstance, "RES_DICT_STRUCT_DATA", RT_RCDATA);
+
+                if (!res)
+                    throw Base::IOError(std::string("ResidueDictionaryData: could not find structure data resource record");
+
+                HGLOBAL res_handle = LoadResource(NULL, res);
+
+                if (!res_handle)
+                    throw Base::IOError(std::string("ResidueDictionaryData: could not load structure data resource");
+
+                const char* res_data = static_cast<const char*>(LockResource(res_handle));
+
+                DWORD res_data_len = SizeofResource(NULL, res);
+
+                return std::make_pair(res_data, res_data_len);
+            }
+
+#endif // !_MSC_VER            
+
             #include "ResidueDictionaryEntries.hpp"
 
             const std::size_t NUM_RESIDUE_ENTRIES = sizeof(RESIDUE_DATA) / sizeof(ResidueDataEntry);

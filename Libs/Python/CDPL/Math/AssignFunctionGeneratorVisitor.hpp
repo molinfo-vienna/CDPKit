@@ -34,7 +34,7 @@
 namespace CDPLPythonMath
 {
 
-    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList, typename Empty>
+    template <typename ObjectType, template <typename T> class ExprType, typename ValueTypeList, typename Empty>
     struct AssignFunctionGeneratorHelper
     {
 
@@ -50,18 +50,18 @@ namespace CDPLPythonMath
             cl.def("assign", &assign<ValueType>, (python::arg("self"), python::arg(var_name)),
                    python::return_self<>());
 
-            AssignFunctionGeneratorHelper<ObjectType, ExpressionType, NewValueTypeList, IsEmpty>::apply(cl, var_name);
+            AssignFunctionGeneratorHelper<ObjectType, ExprType, NewValueTypeList, IsEmpty>::apply(cl, var_name);
         }
 
         template <typename ValueType>
-        static void assign(ObjectType& obj, const typename ExpressionType<ValueType>::SharedPointer& expr_ptr)
+        static void assign(ObjectType& obj, const typename ExprType<ValueType>::SharedPointer& expr_ptr)
         {
             obj = *expr_ptr;
         }
     };
 
-    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList>
-    struct AssignFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, boost::mpl::true_>
+    template <typename ObjectType, template <typename T> class ExprType, typename ValueTypeList>
+    struct AssignFunctionGeneratorHelper<ObjectType, ExprType, ValueTypeList, boost::mpl::true_>
     {
 
         template <typename ClassType>
@@ -69,9 +69,9 @@ namespace CDPLPythonMath
         {}
     };
 
-    template <typename ObjectType, template <typename T> class ExpressionType,
+    template <typename ObjectType, template <typename T> class ExprType,
               typename ValueTypeList = SupportedValueTypes>
-    struct AssignFunctionGeneratorVisitor : public boost::python::def_visitor<AssignFunctionGeneratorVisitor<ObjectType, ExpressionType, ValueTypeList> >
+    struct AssignFunctionGeneratorVisitor : public boost::python::def_visitor<AssignFunctionGeneratorVisitor<ObjectType, ExprType, ValueTypeList> >
     {
 
         friend class boost::python::def_visitor_access;
@@ -84,7 +84,7 @@ namespace CDPLPythonMath
         {
             typedef typename boost::mpl::empty<ValueTypeList>::type IsEmpty;
 
-            AssignFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, IsEmpty>::apply(cl, variableName);
+            AssignFunctionGeneratorHelper<ObjectType, ExprType, ValueTypeList, IsEmpty>::apply(cl, variableName);
         }
 
         const char* variableName;

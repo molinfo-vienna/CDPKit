@@ -214,8 +214,9 @@ void ConfGen::FragmentLibrary::save(std::ostream& os) const
 
 void ConfGen::FragmentLibrary::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(FragmentLibraryData::BUILTIN_FRAG_LIB_DATA,
-                                                                FragmentLibraryData::BUILTIN_FRAG_LIB_DATA_LEN);
+    std::pair<const char*, std::size_t> builtin_frag_data = FragmentLibraryData::get();
+    boost::iostreams::stream<boost::iostreams::array_source> is(builtin_frag_data.first, builtin_frag_data.second);
+
     load(is);
 }
 

@@ -34,7 +34,7 @@
 namespace CDPLPythonMath
 {
 
-    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList, typename Empty>
+    template <typename ObjectType, template <typename T> class ExprType, typename ValueTypeList, typename Empty>
     struct InitFunctionGeneratorHelper
     {
 
@@ -51,18 +51,18 @@ namespace CDPLPythonMath
                                                         python::default_call_policies(),
                                                         (python::arg(var_name))));
 
-            InitFunctionGeneratorHelper<ObjectType, ExpressionType, NewValueTypeList, IsEmpty>::apply(cl, var_name);
+            InitFunctionGeneratorHelper<ObjectType, ExprType, NewValueTypeList, IsEmpty>::apply(cl, var_name);
         }
 
         template <typename ValueType>
-        static ObjectType* construct(const typename ExpressionType<ValueType>::SharedPointer& expr_ptr)
+        static ObjectType* construct(const typename ExprType<ValueType>::SharedPointer& expr_ptr)
         {
             return new ObjectType(*expr_ptr);
         }
     };
 
-    template <typename ObjectType, template <typename T> class ExpressionType, typename ValueTypeList>
-    struct InitFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, boost::mpl::true_>
+    template <typename ObjectType, template <typename T> class ExprType, typename ValueTypeList>
+    struct InitFunctionGeneratorHelper<ObjectType, ExprType, ValueTypeList, boost::mpl::true_>
     {
 
         template <typename ClassType>
@@ -70,9 +70,9 @@ namespace CDPLPythonMath
         {}
     };
 
-    template <typename ObjectType, template <typename T> class ExpressionType,
+    template <typename ObjectType, template <typename T> class ExprType,
               typename ValueTypeList = SupportedValueTypes>
-    struct InitFunctionGeneratorVisitor : public boost::python::def_visitor<InitFunctionGeneratorVisitor<ObjectType, ExpressionType, ValueTypeList> >
+    struct InitFunctionGeneratorVisitor : public boost::python::def_visitor<InitFunctionGeneratorVisitor<ObjectType, ExprType, ValueTypeList> >
     {
 
         friend class boost::python::def_visitor_access;
@@ -85,7 +85,7 @@ namespace CDPLPythonMath
         {
             typedef typename boost::mpl::empty<ValueTypeList>::type IsEmpty;
 
-            InitFunctionGeneratorHelper<ObjectType, ExpressionType, ValueTypeList, IsEmpty>::apply(cl, variableName);
+            InitFunctionGeneratorHelper<ObjectType, ExprType, ValueTypeList, IsEmpty>::apply(cl, variableName);
         }
 
         const char* variableName;

@@ -33,12 +33,12 @@
 namespace CDPLPythonMath
 {
 
-    template <typename ExpressionType, typename ProxySpec, typename ProxyType>
+    template <typename ExprType, typename ProxySpec, typename ProxyType>
     struct VectorExpressionProxyWrapper : ProxyType,
                                           boost::python::wrapper<ProxyType>
     {
 
-        typedef typename ExpressionType::SharedPointer        ExpressionPointerType;
+        typedef typename ExprType::SharedPointer              ExpressionPointerType;
         typedef std::shared_ptr<VectorExpressionProxyWrapper> SharedPointer;
 
         VectorExpressionProxyWrapper(const VectorExpressionProxyWrapper& ph):
@@ -55,12 +55,12 @@ namespace CDPLPythonMath
         ExpressionPointerType exprPointer;
     };
 
-    template <typename ExpressionType, typename ProxySpec, typename ProxyType>
+    template <typename ExprType, typename ProxySpec, typename ProxyType>
     struct MatrixExpressionProxyWrapper : ProxyType,
                                           boost::python::wrapper<ProxyType>
     {
 
-        typedef typename ExpressionType::SharedPointer        ExpressionPointerType;
+        typedef typename ExprType::SharedPointer              ExpressionPointerType;
         typedef std::shared_ptr<MatrixExpressionProxyWrapper> SharedPointer;
 
         MatrixExpressionProxyWrapper(const MatrixExpressionProxyWrapper& ph):
