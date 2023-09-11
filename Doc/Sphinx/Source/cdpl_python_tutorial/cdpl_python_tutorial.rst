@@ -6,17 +6,23 @@ Reading Molecules from an Input File
 ---------------------------------------
 
 To kick off your cheminformatics journey, you'll frequently need to read or write molecular data from a variety of file formats.
-Using CDPKit, you can easily read and write molecules from various file formats, including SDF, SMILES, MOL, MOL2, and others.
+Using CDPKit, you can easily read and write molecules from various file formats, including *SDF*, *SMILES*, *MOL*, *MOL2*, *CDF*, and others.
+
+.. note::
+    The CDF format is a binary format that can be used to store molecules and their associated metadata and is CDPKit's native file format.
+
+The `Chem.MoleculeReader <https://cdpkit.org/master/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ is versatile and can interpret different types of formats (SDF, SMILES, MOL, MOL2, CDF, etc.), 
+eliminating the need to call a specific reader for each format.
 Here is a simple example of how to read molecules from an input file:
 
 .. note::
-    The module CDPL.Chem provides functionality for the processing of chemical data.
+    The module `CDPL.Chem <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1Chem.html>`_ provides functionality for the processing of chemical data.
 
 .. code-block:: python
 
    import CDPL.Chem as Chem
 
-    def process_molecules_from_file(input_file: str) -> None:
+    def processMoleculesFromFile(input_file: str) -> None:
         """
         Reads molecules from the provided input file and outputs the number of atoms and bonds for each molecule.
 
@@ -44,21 +50,24 @@ Here is a simple example of how to read molecules from an input file:
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
-    process_molecules_from_file("path_to_mol_file.mol2")
-
-note::
-    The `Chem.MoleculeReader` is versatile and can interpret different types of formats (SDF, SMILES, MOL, MOL2, CDF, etc.), eliminating the need to call a specific reader for each format.
+    processMoleculesFromFile("path_to_mol_file.mol2")
 
 Retrieving MDL Structure Data from SD Files
 --------------------------------------------
 
-Sometimes, might want to read the metadata associated with a molecule in an SD file. CDPKit provides a convenient way to do this:
+Sometimes, one might want to read the metadata associated with a molecule in an SD file. CDPKit provides a convenient way to do this shown 
+in the following example:
+
+.. note::
+    You can either use Chem.MoleculeReader to read the structure data of each molecule in an SD file or 
+    use the specific reader like e.g. Chem.FileSDFMoleculeReader to read the structure data of each molecule in an SD file.
+    The convenient way is to use Chem.MoleculeReader.
 
 .. code-block:: python
 
    import CDPL.Chem as Chem
 
-   def retrieve_structure_data_from_sd(input_sd_file: str) -> None:
+   def processStructureDataFromSD(input_sd_file: str) -> None:
    """
     Retrieves the structure data of each molecule in the provided SD file and outputs it to the console.
 
@@ -96,15 +105,14 @@ Sometimes, might want to read the metadata associated with a molecule in an SD f
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
-   retrieve_structure_data_from_sd("path_to_sd_file.sdf")
+    processStructureDataFromSD("path_to_sd_file.sdf")
 
 Writing Molecules to an Output File
 ---------------------------------------
 
 
 Once you've processed or analyzed your molecules, you may want to save them to an output file. 
-CDPKit provides a convenient way to write molecules to various file formats. 
-The format of the output file is determined by its file extension, making it easy to save your molecules in formats such as SDF, MOL, MOL2, and others.
+The format of the output file is determined by its file extension, making it easy to save your molecules in formats such as SDF, MOL, MOL2, CDF, and others.
 
 .. note::
    Ensure that the file extension you provide matches the desired output format. For instance, use `.sdf` for Structure-Data Files, `.mol` for MDL Molfiles, and so on.
@@ -115,7 +123,7 @@ Here's a simple example of how to write a list of molecules to an output file:
 
    import CDPL.Chem as Chem
 
-   def write_molecules_to_file(mols: list[Chem.BasicMolecule], output_file: str) -> None:
+   def molsToFiles(mols: list[Chem.BasicMolecule], output_file: str) -> None:
        """
        Writes a list of molecules to the specified output file.
 
@@ -133,20 +141,23 @@ Here's a simple example of how to write a list of molecules to an output file:
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
-   write_molecules_to_file(list_of_molecules, "path_to_output_file.sdf")
+
+    mols = [list of BasicMolecules]  # Example list of BasicMolecules
+    molsToFiles(mols, "path_to_output_file.sdf")
 
 
 Extracting Atom Environments from Molecules and extract SMILES strings for the environments
 --------------------------------------------------------------------------------------------
 
 
-To understand the local chemical environments around specific atoms in a molecule, we can extract the structural environments of atoms within a given molecular graph and output them as SMILES strings.
+To understand the local chemical environments around specific atoms in a molecule, we can extract the structural environments of atoms 
+within a given molecular graph and output them as SMILES strings.
 
 .. code-block:: python
 
     import CDPL.Chem as Chem
 
-    def print_atom_environments(mols: list[Chem.BasicMolecule]) -> None:
+    def printAtomEnv(mols: list[Chem.BasicMolecule]) -> None:
         """
         Extracts the atom environments of each atom in the provided list of molecules and outputs them as SMILES strings.
 
@@ -177,14 +188,15 @@ To understand the local chemical environments around specific atoms in a molecul
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
-    mols = [list of BasicMolecules]
-    print_atom_environments(mols)
+    mols = [list of BasicMolecules] # Example list of BasicMolecules
+    printAtomEnv(mols)
 
 ChEMBL Molecule Standardization and Parent Structure Extraction
 ----------------------------------------------------------------
 
 
-CDPKit provides a convenient way to standardize molecules using the ChEMBL standardization pipeline. This process can be used to ensure that molecules are represented in a consistent and standardized manner, which is crucial for many cheminformatics tasks.
+CDPKit provides a convenient way to standardize molecules using the ChEMBL standardization pipeline. 
+This process can be used to ensure that molecules are represented in a consistent and standardized manner, which is crucial for many cheminformatics tasks.
 
 .. code-block:: python
 
@@ -296,8 +308,14 @@ CDPKit provides a convenient way to standardize molecules using the ChEMBL stand
 Protonation of Functional Groups 
 ---------------------------------
 
-In the realm of computational chemistry and molecular modeling, understanding and predicting the behavior of molecules often hinges on the finer details. One such critical detail is the protonation state of a molecule. 
-Protonation states influence a molecule's charge, conformation, and reactivity, playing a vital role in processes like drug binding, enzymatic reactions, and more.  
+In the realm of computational chemistry and molecular modeling, understanding and predicting the behavior of molecules often hinges on the finer details. 
+One such critical detail is the protonation state of a molecule. 
+Protonation states influence a molecule's charge, conformation, and reactivity, playing a vital role in processes like drug binding, 
+enzymatic reactions, and more.  
+
+.. note::
+    The method `Chem.ProtonationStateStandardizer.standardize <https://cdpkit.org/master/python_api_doc/classCDPL_1_1Chem_1_1ProtonationStateStandardizer.html>`_
+    implements the protonation state generation algorithm.
 
 In the following code snippet we will show how to protonate/deprotonate functional groups of a molecule for a given pH value and ionic strength.
 
@@ -358,14 +376,14 @@ Generating low-energy 3D Conformations
 
 This process involves generating 3D structures for molecules that may initially be represented in a 2D format. 
 
-Here's how you can generate 3D conformations for a molecule:
+Here's how you can generate low-energy 3D conformations for a molecule:
 
 .. code-block:: python
 
    import CDPL.Chem as Chem
    import CDPL.ConfGen as ConfGen
 
-    def generate_3d_conformation(mol: Chem.Molecule, struct_gen: ConfGen.StructureGenerator) -> int:
+    def generate3dConformation(mol: Chem.Molecule, struct_gen: ConfGen.StructureGenerator) -> int:
         """
         Generates a low-energy 3D structure of the argument molecule using the provided initialized ConfGen.StructureGenerator instance.
 
@@ -438,7 +456,7 @@ Here's how you can generate 3D conformations for a molecule:
 
             try:
                 # generate 3D structure of the read molecule
-                status = generate_3d_conformation(mol, struct_gen) 
+                status = generate3dConformation(mol, struct_gen) 
 
                 # check for severe error reported by status code
                 if status == ConfGen.ReturnCode.SUCCESS:
@@ -460,9 +478,11 @@ Here's how you can generate 3D conformations for a molecule:
 Generating Conformation Ensembles
 ---------------------------------------
 
-Sometimes, it's beneficial to generate multiple conformations for a molecule to capture its flexibility and understand its preferred orientations in various environments.
+Sometimes, it's beneficial to generate multiple conformations for a molecule to capture its flexibility and understand its preferred orientations in 
+various environments.
 
-The function generate_conformation_ensembles() generates a conformation ensemble for a given molecule using the provided initialized ConfGen.ConformerGenerator instance.
+The function generate_conformation_ensembles() generates a conformation ensemble for a given molecule using the provided initialized 
+`ConfGen.ConformerGenerator instance <https://cdpkit.org/master/python_api_doc/classCDPL_1_1ConfGen_1_1ConformerGenerator.html>`_.
 The flags min_rmsd, e_window, and max_confs are used to control the output conformer ensemble size and the conformation quality.
 They can be set at the beginning of the example script to the desired values. 
 
@@ -473,7 +493,7 @@ Here's how to generate conformation ensembles for a molecule:
    import CDPL.Chem as Chem
    import CDPL.ConfGen as ConfGen
 
-    def generate_conformation_ensembles(mol: Chem.BasicMolecule, conf_gen: ConfGen.ConformerGenerator) -> (int, int):
+    def generateConformationEnsembles(mol: Chem.BasicMolecule, conf_gen: ConfGen.ConformerGenerator) -> (int, int):
         """
         Generates a conformation ensemble for the argument molecule using the provided initialized ConfGen.ConformerGenerator instance.
         
@@ -542,9 +562,6 @@ Here's how to generate conformation ensembles for a molecule:
                       ConfGen.ReturnCode.TORSION_DRIVING_FAILED         : 'torsion driving failed',
                       ConfGen.ReturnCode.CONF_GEN_FAILED                : 'conformer generation failed' }
     
-    # create an instance of the default implementation of the Chem.Molecule interface
-    mol = Chem.BasicMolecule()
-    i = 1
     
     # read and process molecules one after the other until the end of input has been reached
     try:
@@ -559,7 +576,7 @@ Here's how to generate conformation ensembles for a molecule:
 
             try:
                 # generate conformer ensemble for read molecule
-                status, num_confs = generate_conformation_ensembles(mol, conf_gen) 
+                status, num_confs = generateConformationEnsembles(mol, conf_gen) 
 
                 # output generated ensemble (if available)
                 if num_confs > 0:
@@ -569,8 +586,6 @@ Here's how to generate conformation ensembles for a molecule:
             except Exception as e:
                 sys.exit('Error: conformer ensemble generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
-            i += 1
-                
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit('Error: reading molecule failed: ' + str(e))
 
@@ -580,26 +595,25 @@ Here's how to generate conformation ensembles for a molecule:
 Pharmacophore Generation and Processing
 ========================================
 
-This section is about the processing of pharmacophore models, which are abstract representations of 
-molecular features.
+This section is about the processing of pharmacophore models.
 The pharmacophore concept is widely used in drug design and cheminformatics to understand the
 interactions between ligands and their biological targets.
 
 .. note::
-    The module `CDPL.Pharm` provides functionality for the generation and processing of pharmacophore models. 
-    The possible pharmacophore input fotats are `pml` or `cdf`.
+    The module `CDPL.Pharm <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1Pharm.html>`_ provides functionality for the generation and processing of pharmacophore models. 
+    The possible pharmacophore input fotats are `PML` or `CDF`.
 
 Ligand-based Pharmacophore Generation using Conformations
 ------------------------------------------------------------
 The following example shows how to generate a ligand-based pharmacophore model from a set of molecules
-and output it to a '.pml' file.
+and output it to a PML file.
 
 .. code-block:: python
 
     import CDPL.Chem as Chem
     import CDPL.Pharm as Pharm
 
-    def generate_pharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
+    def generatePharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
         """
         Generates the pharmacophore of the molecule.
         
@@ -639,7 +653,7 @@ and output it to a '.pml' file.
             else:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
-                ph4 = genPharmacophore(mol)         # generate pharmacophore
+                ph4 = generatePharmacophore(mol)         # generate pharmacophore
 
                 if not writer.write(ph4):   # output pharmacophore
                     sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
@@ -665,7 +679,7 @@ The name of the pharmacophore is set to the name of the corresponding molecule.
     import CDPL.Chem as Chem
     import CDPL.Pharm as Pharm
 
-    def generate_pharmacophore(mol: Chem.Molecule, conf_idx: int) -> Pharm.Pharmacophore:
+    def generatePharmacophore(mol: Chem.Molecule, conf_idx: int) -> Pharm.Pharmacophore:
         """
         Generates the pharmacophore of the molecule using atom coordinates of the specified conformation.
         
@@ -719,7 +733,7 @@ The name of the pharmacophore is set to the name of the corresponding molecule.
 
             try:
                 for conf_idx in range(start_conf_idx, num_confs): # for each conformer
-                    ph4 = genPharmacophore(mol, conf_idx)         # generate pharmacophore
+                    ph4 = generatePharmacophore(mol, conf_idx)         # generate pharmacophore
 
                     if not writer.write(ph4):   # output pharmacophore
                         sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
@@ -727,8 +741,6 @@ The name of the pharmacophore is set to the name of the corresponding molecule.
             except Exception as e:
                 sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
-            i += 1
-                
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit('Error: reading molecule failed: ' + str(e))
 
@@ -738,15 +750,15 @@ Aligne Ligand-based Pharmacophores for a set of Conformations
 -------------------------------------------------------------------
 
 The following example shows how to align a set of ligand-based pharmacophores to a reference pharmacophore.
-The function readRefPharmacophore() reads and returns the specified alignment reference pharmacophore.
-The function genPharmacophore() generates and returns the pharmacophore of the specified molecule.
-The function clearFeatureOrientations() removes feature orientation informations and sets the feature geometry to Pharm.FeatureGeometry.SPHERE.
+The function *readRefPharmacophore()* reads and returns the specified alignment reference pharmacophore.
+The function *genPharmacophore()* generates and returns the pharmacophore of the specified molecule.
+The function *clearFeatureOrientations()* removes feature orientation informations and sets the feature geometry to Pharm.FeatureGeometry.SPHERE.
 The flag pos_only, min_pose_rmsd, exhaustive, and num_out_almnts are used to control the alignment process and can
 be set at the beginning of the example code.
-The flag pos_only is used to control if only the position of features is considered during alignment.
-The flag min_pose_rmsd is used to control the minimum required RMSD between two consecutively output molecule alignment poses.
-The flag num_out_almnts is used to control the number of top-ranked alignment solutions to output per molecule (default: best alignment solution only).
-The flag exhaustive is used to control if an exhaustive alignment search is performed.
+The flag *pos_only* is used to control if only the position of features is considered during alignment.
+The flag *min_pose_rmsd* is used to control the minimum required RMSD between two consecutively output molecule alignment poses.
+The flag *num_out_almnts* is used to control the number of top-ranked alignment solutions to output per molecule (default: best alignment solution only).
+The flag *exhaustive* is used to control if an exhaustive alignment search is performed.
 
 .. code-block:: python
 
@@ -778,7 +790,7 @@ The flag exhaustive is used to control if an exhaustive alignment search is perf
 
         return ph4
 
-    def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
+    def generatePharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
         """
         Generates the pharmacophore of the molecule.
 
@@ -852,7 +864,7 @@ The flag exhaustive is used to control if an exhaustive alignment search is perf
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
             try:
-                mol_ph4 = genPharmacophore(mol)    # generate input molecule pharmacophore
+                mol_ph4 = generatePharmacophore(mol)    # generate input molecule pharmacophore
 
                 if pos_only:                  # clear feature orientation information
                     clearFeatureOrientations(mol_ph4)
@@ -923,8 +935,6 @@ The flag exhaustive is used to control if an exhaustive alignment search is perf
             except Exception as e:
                 sys.exit('Error: pharmacophore alignment of molecule %s failed: %s' % (mol_id, str(e)))
 
-            i += 1
-                
     except Exception as e: # handle exception raised in case of severe read errors
         sys.exit('Error: reading input molecule failed: ' + str(e))
 
@@ -1027,7 +1037,7 @@ It also reads and preprocesses the specified receptor structure.
     import CDPL.Chem as Chem
     import CDPL.Pharm as Pharm
 
-    def process_receptor_structure(path: str, strip_res_list: bool) -> Chem.Molecule:
+    def processReceptorStructure(path: str, strip_res_list: bool) -> Chem.Molecule:
         """
         Reads and preprocesses the specified receptor structure.
 
@@ -1110,7 +1120,7 @@ It also reads and preprocesses the specified receptor structure.
     
     lig_mols = [list of BasicMolecules]  # Example list of BasicMolecules
 
-    rec_mol = process_receptor_structure(path_to_receptor_structure_file, strip_res_list)          # read and preprocess the receptor structure
+    rec_mol = processReceptorStructure(path_to_receptor_structure_file, strip_res_list)          # read and preprocess the receptor structure
     ph4_writer = Pharm.FeatureContainerWriter("path_to_pha_file.pml") # create writer for the generated pharmacophores (format specified by file extension)
 
     ia_ph4 = Pharm.BasicPharmacophore()     # create an instance of the default implementation of the Pharm.Pharmacophore
@@ -1166,6 +1176,9 @@ is useful for many cheminformatics tasks. The following code snippet shows how t
 and output the corresponding properties of each atom of the provided molecular graph. It includes
 the calculation of implicit hydrogen counts, atom hybridization states, smallest set of smallest rings,
 cycles, aromaticity, and H-bond donor and acceptor atom types.
+
+.. note::
+    The following example requires the CDPL.Chem and `CDPL.MolProp <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1MolProp.html>`_
 
 
 .. code-block:: python
@@ -1323,8 +1336,6 @@ cycles, aromaticity, and H-bond donor and acceptor atom types.
 Calculation of Connectivity Properties
 ---------------------------------------
 
-
-
 This code provides a way to calculate various properties of atoms and bonds in a molecule.
 The code snippet provided below shows how to calculate and output the corresponding properties of each atom of the provided molecular graph.
 It includes the calculation of implicit hydrogen counts, atom hybridization states, smallest set of smallest rings, cycles, aromaticity,
@@ -1431,7 +1442,7 @@ used for various cheminformatics tasks, such as:
 - **Chemical Analysis**: Identifying the presence of particular functional groups or fragments in molecules.
 
 .. note::
-    The CDPKit moduls CDPL.Descr and CDPL.Util provide a convenient way to calculate various molecular descriptors.
+    The CDPKit moduls `CDPL.Descr <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1Descr.html>`_ and `CDPL.Util <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1Util.html>`_ provide a convenient way to calculate various molecular descriptors.
 
 Extended Connectivity Fingerprints (ECFPs)
 -------------------------------------------
@@ -1529,8 +1540,9 @@ Following parameters can be set:
 
 FAME Atom Environment Fingerprints
 -------------------------------------
-The FAME (Fast Atom Environment) Atom Environment Fingerprints represent the local environment around atoms in molecules.
-It provide a high-resolution view of the molecular landscape, making them especially valuable for tasks like similarity searching, compound clustering, and structure-activity relationship studies. 
+The FAME Atom Environment Fingerprints represent the local environment around atoms in molecules.
+It provide a high-resolution view of the molecular landscape, making them especially valuable for tasks like similarity searching, compound clustering, 
+and structure-activity relationship studies. 
 Their detailed representation can capture nuances that more generic fingerprints might overlook, offering a more refined perspective on molecular structures.
 
 The following code snippet calculates and outputs the FAME descriptors of the provided molecules.
@@ -1618,6 +1630,9 @@ The MMFF94 force field, in particular, provides a method to calculate partial at
 
 The following code snippet calculates and outputs the MMFF94 charges of the atoms for a given list of molecules:
 
+.. note::
+    The CDPKit moduls `CDPL.ForceField <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1ForceField.html>`_ and `CDPL.Chem <https://cdpkit.org/master/python_api_doc/namespaceCDPL_1_1Chem.html>`_ provide a convenient way to calculate the MMFF94 charges of the atoms for a given molecule.
+
 .. code-block:: python
 
     import CDPL.Chem as Chem
@@ -1685,7 +1700,7 @@ CDPKit provides a convenient way to filter molecules that match a specific struc
 
    import CDPL.Chem as Chem
 
-    def filter_molecules_by_smarts(input_file: str, output_file: str, smarts_pattern: str, quiet: bool = False) -> None:
+    def filterMoleculesBySmarts(input_file: str, output_file: str, smarts_pattern: str, quiet: bool = False) -> None:
         """
         Filters molecules from the input file that match the provided SMARTS pattern and writes them to the output file.
         
@@ -1732,5 +1747,5 @@ CDPKit provides a convenient way to filter molecules that match a specific struc
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
-    filter_molecules_by_smarts("input.sdf", "output.sdf", "[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1")
+    filterMoleculesBySmarts("input.sdf", "output.sdf", "[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1")
 
