@@ -67,10 +67,10 @@ namespace
                 if (!PySequence_Check(row_ptr))
                     return 0;
 
-                if (PySequence_Size(row_ptr) != ssize_t(ArrayType::ValueType::Size))
+                if (PySequence_Size(row_ptr) != python::ssize_t(ArrayType::ValueType::Size))
                     return 0;
 
-                for (python::ssize_t j = 0; j < ssize_t(ArrayType::ValueType::Size); j++) 
+                for (python::ssize_t j = 0; j < python::ssize_t(ArrayType::ValueType::Size); j++) 
                     if (!python::extract<typename ArrayType::ValueType>(PySequence_GetItem(row_ptr, j)).check())
                         return 0;
             }
