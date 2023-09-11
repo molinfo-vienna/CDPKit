@@ -53,7 +53,7 @@ namespace
         }
 
         CDPL::Pharm::Feature& addFeature() {
-            return this->get_override("addFeature")();
+            return boost::python::call<CDPL::Pharm::Feature&>(this->get_override("addFeature").ptr());
         }
 
         void removeFeature(std::size_t idx) {

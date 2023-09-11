@@ -58,7 +58,7 @@ namespace
         }
 
         CDPL::Chem::Atom& addAtom() {
-            return this->get_override("addAtom")();
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("addAtom").ptr());
         }
 
         void removeAtom(std::size_t idx) {
@@ -66,7 +66,7 @@ namespace
         }
 
         CDPL::Chem::Bond& addBond(std::size_t atom1_idx, std::size_t atom2_idx) {
-            return this->get_override("addBond")(atom1_idx, atom2_idx);
+            return boost::python::call<CDPL::Chem::Bond&>(this->get_override("addBond").ptr(), atom1_idx, atom2_idx);
         }
 
         void removeBond(std::size_t idx) {
