@@ -55,11 +55,11 @@ namespace
         }
 
         const CDPL::Chem::Bond& getBondToAtom(const CDPL::Chem::Atom& atom) const {
-            return this->get_override("getBondToAtom")(boost::ref(atom));
+            return boost::python::call<CDPL::Chem::Bond&>(this->get_override("getBondToAtom").ptr(), boost::ref(atom));
         }
 
         CDPL::Chem::Bond& getBondToAtom(const CDPL::Chem::Atom& atom) {
-            return this->get_override("getBondToAtom")(boost::ref(atom));
+            return boost::python::call<CDPL::Chem::Bond&>(this->get_override("getBondToAtom").ptr(), boost::ref(atom));
         }
 
         const CDPL::Chem::Bond* findBondToAtom(const CDPL::Chem::Atom& atom) const {

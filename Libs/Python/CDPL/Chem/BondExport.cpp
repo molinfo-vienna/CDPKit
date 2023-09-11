@@ -56,27 +56,27 @@ namespace
         }
 
         const CDPL::Chem::Atom& getBegin() const {
-            return this->get_override("getBegin")();
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getBegin").ptr());
         }
 
         CDPL::Chem::Atom& getBegin() {
-            return this->get_override("getBegin")();
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getBegin").ptr());
         }
 
         const CDPL::Chem::Atom& getEnd() const {
-            return this->get_override("getEnd")();
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getEnd").ptr());
         }
 
         CDPL::Chem::Atom& getEnd() {
-            return this->get_override("getEnd")();
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getEnd").ptr());
         }
 
         const CDPL::Chem::Atom& getNeighbor(const CDPL::Chem::Atom& atom) const {
-            return this->get_override("getNeighbor")(boost::ref(atom));
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getNeighbor").ptr(), boost::ref(atom));
         }
 
         CDPL::Chem::Atom& getNeighbor(const CDPL::Chem::Atom& atom) {
-            return this->get_override("getNeighbor")(boost::ref(atom));
+            return boost::python::call<CDPL::Chem::Atom&>(this->get_override("getNeighbor").ptr(), boost::ref(atom));
         }
 
         static CDPL::Chem::Bond& assign(CDPL::Chem::Bond& self, CDPL::Chem::Bond& bond) {
