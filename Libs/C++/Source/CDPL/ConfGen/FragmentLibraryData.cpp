@@ -70,7 +70,7 @@ namespace CDPL
                 return std::make_pair(BUILTIN_FRAG_LIB_DATA, sizeof(BUILTIN_FRAG_LIB_DATA) - 1);
             }
 #else
-            std::pair<const char*, std::size_t> getStructureData()
+            std::pair<const char*, std::size_t> get()
             {
                 HRSRC res = FindResource(hInstance_DLL, "FRAG_LIB_DATA", RT_RCDATA);
 
