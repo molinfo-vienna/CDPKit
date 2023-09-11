@@ -25,13 +25,29 @@
 #include "StaticInit.hpp"
 
 #ifdef _MSC_VER
-# include <winbase.h>
-#endif
+# include <windows.h>
+#endif // _MSC_VER
 
 #include "CDPL/Biomol/ResidueType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "ResidueDictionaryData.hpp"
+
+#ifdef _MSC_VER
+
+namespace
+{
+
+    HINSTANCE hInstance_DLL = NULL;
+}
+
+
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
+{
+    hInstance_DLL = hinstDLL;
+}
+
+#endif // _MSC_VER
 
 
 namespace CDPL
@@ -57,8 +73,7 @@ namespace CDPL
 #else
             std::pair<const char*, std::size_t> getStructureData()
             {
-                // NOTE: providing g_hInstance is important, NULL might not work
-                HRSRC res = FindResource(g_hInstance, "RES_DICT_STRUCT_DATA", RT_RCDATA);
+                HRSRC res = FindResource(hInstance_DLL, "RES_DICT_STRUCT_DATA", RT_RCDATA);
 
                 if (!res)
                     throw Base::IOError(std::string("ResidueDictionaryData: could not find structure data resource record");
@@ -82,7 +97,6 @@ namespace CDPL
             const std::size_t NUM_RESIDUE_ENTRIES = sizeof(RESIDUE_DATA) / sizeof(ResidueDataEntry);
 
             // clang-format on
-            
         } // namespace ResidueDictionaryData
     }     // namespace Biomol
 } // namespace CDPL

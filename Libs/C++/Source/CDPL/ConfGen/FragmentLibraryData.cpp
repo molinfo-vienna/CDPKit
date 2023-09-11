@@ -25,12 +25,28 @@
 #include "StaticInit.hpp"
 
 #ifdef _MSC_VER
-# include <winbase.h>
-#endif
+# include <windows.h>
+#endif // _MSC_VER
 
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "FragmentLibraryData.hpp"
+
+#ifdef _MSC_VER
+
+namespace
+{
+
+    HINSTANCE hInstance_DLL = NULL;
+}
+
+
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
+{
+    hInstance_DLL = hinstDLL;
+}
+
+#endif // _MSC_VER
 
 
 namespace CDPL
@@ -56,8 +72,7 @@ namespace CDPL
 #else
             std::pair<const char*, std::size_t> getStructureData()
             {
-                // NOTE: providing g_hInstance is important, NULL might not work
-                HRSRC res = FindResource(g_hInstance, "FRAG_LIB_DATA", RT_RCDATA);
+                HRSRC res = FindResource(hInstance_DLL, "FRAG_LIB_DATA", RT_RCDATA);
 
                 if (!res)
                     throw Base::IOError(std::string("FragmentLibraryData: could not find builtin fragment library data resource record");
@@ -77,7 +92,6 @@ namespace CDPL
 #endif // !_MSC_VER            
 
             // clang-format on
-   
         } // namespace FragmentLibraryData
     }     // namespace ConfGen
 } // namespace CDPL
