@@ -35,7 +35,7 @@ rm -rf $2
 cp -r $1/Doc/html $2
 
 cd $2/..
-docs-versions-menu --no-downloads-file --default-branch master
+docs-versions-menu --no-downloads-file --no-write-index-html
 
 for i in `find . -name "docs-versions-menu.js"`; do cp docs-versions-menu-cdpkit.js $i; done
 
