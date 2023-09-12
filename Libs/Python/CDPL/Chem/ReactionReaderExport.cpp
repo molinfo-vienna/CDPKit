@@ -30,6 +30,12 @@
 
 #include "ClassExports.hpp"
 
+#ifdef _MSC_VER
+
+template class __declspec(dllimport) CDPL::Base::DataReader<CDPL::Chem::Reaction>;
+
+#endif // _MSC_VER
+
 
 void CDPLPythonChem::exportReactionReader()
 {

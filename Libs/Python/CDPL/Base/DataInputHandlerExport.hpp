@@ -49,7 +49,7 @@ namespace CDPLPythonBase
 
         const CDPL::Base::DataFormat& getDataFormat() const
         {
-            return this->get_override("getDataFormat")();
+            return boost::python::call<const CDPL::Base::DataFormat&>(this->get_override("getDataFormat").ptr());
         }
 
         typename ReaderType::SharedPointer createReader(std::istream& is) const

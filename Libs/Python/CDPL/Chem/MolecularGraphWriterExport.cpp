@@ -29,6 +29,12 @@
 
 #include "ClassExports.hpp"
 
+#ifdef _MSC_VER
+
+template class __declspec(dllimport) CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>;
+
+#endif // _MSC_VER
+
 
 void CDPLPythonChem::exportMolecularGraphWriter()
 {
