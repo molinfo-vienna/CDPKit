@@ -32,7 +32,7 @@ SET(CDPKIT_PATCH_VERSION 0)
 SET(CDPKIT_VERSION "${CDPKIT_MAJOR_VERSION}.${CDPKIT_MINOR_VERSION}.${CDPKIT_PATCH_VERSION}")
 
 IF(NOT CMAKE_BUILD_TYPE)
-  MESSAGE(STATUS "Setting build type to 'Release' as none was specified.")
+  MESSAGE(STATUS "Setting build type to 'Release' as none was specified")
   SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
 ENDIF()
 
