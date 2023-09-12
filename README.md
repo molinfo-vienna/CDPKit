@@ -41,6 +41,7 @@ Build requirements and dependencies:
 - cairo-devel (V >= 1.14, optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
+- sphinx-inline-tabs (optional)
 - sphinxcontrib-bibtex (optional)
 - docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
