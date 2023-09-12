@@ -44,6 +44,7 @@ namespace
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved )
 {
     hInstance_DLL = hinstDLL;
+    return TRUE;
 }
 
 #endif // _MSC_VER
