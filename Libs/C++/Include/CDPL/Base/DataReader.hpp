@@ -187,10 +187,6 @@ namespace CDPL
             virtual void close() {}
 
           protected:
-            DataReader() {}
-
-            ~DataReader() {}
-            
             /**
              * \brief Assignment operator.
              * \param reader The \c %DataReader instance to copy.
