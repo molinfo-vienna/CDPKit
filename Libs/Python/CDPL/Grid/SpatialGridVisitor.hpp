@@ -29,21 +29,21 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define SPATIALGRID_IMPL()                                         \
- const ValueType& operator()(std::size_t idx) const                \
- {                                                                 \
-  return this->get_override("__call__")(idx);                      \
- }                                                                 \
-                                                                   \
- ValueType& operator()(std::size_t idx)                            \
- {                                                                 \
-  return this->get_override("__call__")(idx);                      \
- }                                                                 \
-                                                                   \
- void getCoordinates(std::size_t i, CoordinatesType& coords) const \
- {                                                                 \
-  this->get_override("getCoordinates")(i, boost::ref(coords));     \
- }
+#define SPATIALGRID_IMPL()                                                                 \
+    const ValueType& operator()(std::size_t idx) const                                     \
+    {                                                                                      \
+        return boost::python::call<ValueType&>(this->get_override("__call__").ptr(), idx); \
+    }                                                                                      \
+                                                                                           \
+    ValueType& operator()(std::size_t idx)                                                 \
+    {                                                                                      \
+        return boost::python::call<ValueType&>(this->get_override("__call__").ptr(), idx); \
+    }                                                                                      \
+                                                                                           \
+    void getCoordinates(std::size_t i, CoordinatesType& coords) const                      \
+    {                                                                                      \
+        this->get_override("getCoordinates")(i, boost::ref(coords));                       \
+    }
 
 
 namespace CDPLPythonGrid

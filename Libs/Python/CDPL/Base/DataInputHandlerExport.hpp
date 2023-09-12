@@ -35,6 +35,10 @@
 
 #include "ObjectIdentityCheckVisitor.hpp"
 
+# ifdef _MSC_VER
+#  pragma warning(disable : 4172)
+# endif // _MSC_VER
+
 
 namespace CDPLPythonBase
 {
@@ -49,7 +53,7 @@ namespace CDPLPythonBase
 
         const CDPL::Base::DataFormat& getDataFormat() const
         {
-            return boost::python::call<const CDPL::Base::DataFormat&>(this->get_override("getDataFormat").ptr());
+            return this->get_override("getDataFormat")();
         }
 
         typename ReaderType::SharedPointer createReader(std::istream& is) const

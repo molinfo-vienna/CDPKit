@@ -57,7 +57,7 @@ setup(
     description='CDPKit CDPL Python-Bindings',
     author='Thomas Seidel',
     author_email='thomas.seidel@univie.ac.at',
-    url='https://github.com/molinfo-vienna/CDPKit',
+    url='https://cdpkit.org',
     license='LGPLv2',
     packages=['CDPL'],
     package_dir={'': 'Libs/Python'},

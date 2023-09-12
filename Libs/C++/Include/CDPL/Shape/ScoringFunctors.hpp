@@ -29,7 +29,6 @@
 #ifndef CDPL_SHAPE_SCORINGFUNCTORS_HPP
 #define CDPL_SHAPE_SCORINGFUNCTORS_HPP
 
-#include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
 
 
@@ -39,7 +38,7 @@ namespace CDPL
     namespace Shape
     {
 
-        class CDPL_SHAPE_API TotalOverlapTanimotoScore
+        class TotalOverlapTanimotoScore
         {
 
           public:
@@ -49,7 +48,7 @@ namespace CDPL
             }
         };
 
-        class CDPL_SHAPE_API ShapeTanimotoScore
+        class ShapeTanimotoScore
         {
 
           public:
@@ -59,7 +58,7 @@ namespace CDPL
             }
         };
 
-        class CDPL_SHAPE_API ColorTanimotoScore
+        class ColorTanimotoScore
         {
 
           public:
@@ -69,7 +68,7 @@ namespace CDPL
             }
         };
 
-        class CDPL_SHAPE_API TanimotoComboScore
+        class TanimotoComboScore
         {
 
           public:
@@ -79,7 +78,7 @@ namespace CDPL
             }
         };
 
-        class CDPL_SHAPE_API TotalOverlapTverskyScore
+        class TotalOverlapTverskyScore
         {
 
           public:
@@ -96,7 +95,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API ShapeTverskyScore
+        class ShapeTverskyScore
         {
 
           public:
@@ -113,7 +112,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API ColorTverskyScore
+        class ColorTverskyScore
         {
 
           public:
@@ -130,7 +129,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API TverskyComboScore
+        class TverskyComboScore
         {
 
           public:
@@ -147,7 +146,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API ReferenceTotalOverlapTverskyScore
+        class ReferenceTotalOverlapTverskyScore
         {
 
           public:
@@ -163,7 +162,7 @@ namespace CDPL
             double alpha;
         };
 
-        class CDPL_SHAPE_API ReferenceShapeTverskyScore
+        class ReferenceShapeTverskyScore
         {
 
           public:
@@ -179,7 +178,7 @@ namespace CDPL
             double alpha;
         };
 
-        class CDPL_SHAPE_API ReferenceColorTverskyScore
+        class ReferenceColorTverskyScore
         {
 
           public:
@@ -195,7 +194,7 @@ namespace CDPL
             double alpha;
         };
 
-        class CDPL_SHAPE_API ReferenceTverskyComboScore
+        class ReferenceTverskyComboScore
         {
 
           public:
@@ -211,7 +210,7 @@ namespace CDPL
             double alpha;
         };
 
-        class CDPL_SHAPE_API AlignedTotalOverlapTverskyScore
+        class AlignedTotalOverlapTverskyScore
         {
 
           public:
@@ -227,7 +226,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API AlignedShapeTverskyScore
+        class AlignedShapeTverskyScore
         {
 
           public:
@@ -243,7 +242,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API AlignedColorTverskyScore
+        class AlignedColorTverskyScore
         {
 
           public:
@@ -259,7 +258,7 @@ namespace CDPL
             double beta;
         };
 
-        class CDPL_SHAPE_API AlignedTverskyComboScore
+        class AlignedTverskyComboScore
         {
 
           public:

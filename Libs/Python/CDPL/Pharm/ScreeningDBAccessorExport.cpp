@@ -33,6 +33,10 @@
 
 #include "ClassExports.hpp"
 
+# ifdef _MSC_VER
+#  pragma warning(disable : 4172)
+# endif // _MSC_VER
+
 
 namespace
 {
