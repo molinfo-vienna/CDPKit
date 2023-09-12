@@ -29,8 +29,6 @@
 
 #include <cmath>
 
-#include "FastExp/fastexp.h"
-
 #include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 
@@ -39,9 +37,12 @@
 #include "Utilities.hpp"
 
 #if defined(__APPLE__) && defined(__clang__)
-#  define exp_func(arg) std::exp(arg)
+# define exp_func(arg) std::exp(arg)
+#elif defined(_MSC_VER)
+# define exp_func(arg) std::exp(arg)
 #else
-#  define exp_func(arg) fastexp::IEEE<double, 3>::evaluate(arg)
+# include "FastExp/fastexp.h"
+# define exp_func(arg) fastexp::IEEE<double, 3>::evaluate(arg)
 #endif
 
 

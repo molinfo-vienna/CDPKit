@@ -47,22 +47,23 @@ Compilation of the CDPKit source code requires a properly set up build environme
 (as do current versions of :program:`gcc` and (Apple) :program:`Clang`), the `CMake <https://cmake.org/>`_  makefile generator, and the
 development version of several software libraries. The following table provides a complete list of the CDPKit build requirements and dependencies:
 
-==========================  =======  ==========================================================================
-Build requirement           Version  Comment
-==========================  =======  ==========================================================================
-C++11 compliant compiler    -        mandatory
-cmake                       >=3.17   mandatory
-Python interpreter          3.x      mandatory
-boost-devel                 >=1.63   mandatory
-boost-python3-devel         >=1.63   optional, required for building CDPL Python bindings
-python-devel                3.x      optional, required for building CDPL Python bindings
-Qt5-devel                   5.x      optional, required for building Qt rendering backend and GUI application
-cairo-devel                 >=1.14   optional, required for building cairo rendering backend
-sphinx-build                >=4.5    optional, required for generating CDPKit documentation pages
-sphinx-rtd-theme            >=1.0.0  optional, required for generating CDPKit documentation pages
-sphinxcontrib-bibtex        >=2.5.5  optional, required for generating CDPKit documentation pages
-doxygen                     >=1.8.5  optional, required for generating C++ and Python API documentation
-==========================  =======  ==========================================================================
+==========================  =======       ==========================================================================
+Build requirement           Version       Comment
+==========================  =======       ==========================================================================
+C++11 compliant compiler    -             mandatory
+cmake                       >=3.17        mandatory
+Python interpreter          3.x           mandatory
+boost-devel                 >=1.63        mandatory
+boost-python3-devel         >=1.63        optional, required for building CDPL Python bindings
+python-devel                3.x           optional, required for building CDPL Python bindings
+Qt5-devel                   5.x           optional, required for building Qt rendering backend and GUI application
+cairo-devel                 >=1.14        optional, required for building cairo rendering backend
+sphinx-build                >=4.5         optional, required for generating CDPKit documentation pages
+sphinx-rtd-theme            >=1.0.0       optional, required for generating CDPKit documentation pages
+sphinx-inline-tabs          >=2021.4.11b8 optional, required for generating CDPKit documentation pages
+sphinxcontrib-bibtex        >=2.5.5       optional, required for generating CDPKit documentation pages
+doxygen                     >=1.8.5       optional, required for generating C++ and Python API documentation
+==========================  =======       ==========================================================================
 
 Package managers on modern *Linux* systems usually provide all listed software packages in the required minimum versions. 
 On *macOS* (version 11.x or higher) the recommended (tested and working) way to install the packages is to use the `Homebrew <https://brew.sh/index>`_ package manager.

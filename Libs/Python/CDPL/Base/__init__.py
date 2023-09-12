@@ -24,5 +24,7 @@
 
 from __future__ import absolute_import
 
+import CDPL
+
 from ._base import *
 from .Exceptions import *

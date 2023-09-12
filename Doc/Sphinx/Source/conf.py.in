@@ -60,6 +60,7 @@ release = version
 extensions = [
     'sphinx_rtd_theme',
     'sphinxcontrib.bibtex',
+    'sphinx_inline_tabs',
     'docs_versions_menu'
 ]
 

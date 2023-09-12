@@ -24,4 +24,14 @@
 
 from __future__ import absolute_import
 
+import os
+import sys
+import platform
+
+if sys.version_info[1] >= 8 and platform.system() == 'Windows':
+    if 'site-packages' in __file__:
+        os.add_dll_directory(os.path.dirname(__file__))
+    else:
+        os.add_dll_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'Bin'))
+
 from ._cdpl import *

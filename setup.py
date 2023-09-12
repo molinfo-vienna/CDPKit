@@ -54,7 +54,7 @@ def postproc_manifest(cmake_manifest):
 setup(
     name='CDPKit',
     version='1.0.0',
-    description='CDPKit CDPL Python-Bindings',
+    description='CDPKit CDPL Python Bindings',
     author='Thomas Seidel',
     author_email='thomas.seidel@univie.ac.at',
     url='https://cdpkit.org',
@@ -62,6 +62,6 @@ setup(
     packages=['CDPL'],
     package_dir={'': 'Libs/Python'},
     python_requires='>=3.6',
-    cmake_args=['-DCDPL_PYPI_PACKAGE_BUILD:BOOL=ON', '-Wno-dev'],
+    cmake_args=['-DCDPL_PYPI_PACKAGE_BUILD:BOOL=ON', '-DCMAKE_BUILD_TYPE=Release', '-Wno-dev'],
     cmake_process_manifest_hook=postproc_manifest,
 )
