@@ -1,5 +1,5 @@
-CDPL Python Tutorial
-====================
+Molecular input/output
+=======================
 
 
 Reading Molecules from an Input File
