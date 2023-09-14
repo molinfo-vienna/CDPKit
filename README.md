@@ -27,7 +27,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 ### Installation
 
 Currently, CDPKit can be install in three ways: i) using one of the CDPKit binary installers provided for download
-on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page, ii) installation after building CDPKit from source and
+on the [Releases](https://github.com/molinfo-vienna/CDPKit/releases) page (available soon!), ii) installation after building CDPKit from source and
 iii) using the `pip` package manager (installs CDPL Python bindings only).
 
 #### Installation from source
@@ -89,7 +89,7 @@ should successfully build the CDPKit documentation pages which can then be found
 
 #### Installation via the `pip` command (CDPL Python bindings only)
 
-*Option 1: Direct installation*
+*Option 1: Direct installation (not yet possible, but coming soon!)*
 
 To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type:
 
@@ -106,7 +106,6 @@ Build requirements and dependencies:
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
-- Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
 
 Installation under specification of the Github repository URL:
