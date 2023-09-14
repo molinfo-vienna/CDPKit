@@ -89,32 +89,27 @@ should successfully build the CDPKit documentation pages which can then be found
 
 #### Installation via the `pip` command (CDPL Python bindings only)
 
-*Option 1: Direct installation (not yet possible, but coming soon!)*
-
-To install the CDPL Python bindings directly from [PyPI](https://pypi.org/) type:
+Option 1: Installation of the CDPL Python bindings in the usual way via [PyPI](https://pypi.org/) type:
 
 ```console
 $ pip install cdpkit
 ```
 
-*Option 2: Installation from source*
+This will download the CDPKit sources of the latest stable release and perform an on-the-fly compilation and installation of the python bindings.
+For a succesfull build the requirements outlined below have to be fulfilled:
 
-`pip` can also perform an on-the-fly compilation of the CDPKit sources (may take some time) to build
-and install the CDPL Python bindings.
-
-Build requirements and dependencies:
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
 - cairo-devel (V >= 1.14, optional)
 
-Installation under specification of the Github repository URL:
+Option 2: Installation of the current development version under specification of the Github repository URL:
 
 ```console
 $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
 ```
 
-Installation under specification of a local directory containing the CDPKit sources:
+Option 3: Installation under specification of a local directory containing the CDPKit sources:
 
 Change your CWD to the CDPKit source code folder and then from within the folder run
 
@@ -171,7 +166,7 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit GitHub Repository**: Check out the [CDPKit GitHub repository](https://github.com/molinfo-vienna/CDPKit) for source code, issue tracking, and community support.
 
-- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/master/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
+- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](https://cdpkit.org/v1.0.0/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
 - **CDPKit Conformer Generator**: Have a look at the [CONFORGE](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00563) paper for detailed information about the integrated high-quality conformer generator.
 
