@@ -75,9 +75,8 @@ location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument o
 
 *Generating CDPKit documentation (optional)*
 
-For a successful build of the CDPKit documentation pages, `sphinx-build` and the Sphinx extensions `sphinx-rtd-themes`, `sphinxcontrib.bibtex`,
-and `docs-versions-menu` need to be available on the build host. Furthermore, for generating CDPL C++ and Python API-documentation,
-`doxygen` has to be installed.
+For a successful build of the CDPKit documentation pages, `sphinx-build` and the listed Sphinx extensions need to be available on the build host.
+Furthermore, for generating CDPL C++ and Python API-documentation, `doxygen` has to be installed.
 
 If all prerequisites are fulfilled
 
@@ -89,21 +88,21 @@ should successfully build the CDPKit documentation pages which can then be found
 
 #### Installation via the `pip` command (CDPL Python bindings only)
 
-Option 1: Installation of the CDPL Python bindings in the usual way via [PyPI](https://pypi.org/) type:
+Option 1: Installation of the latest stable CDPKit release deposited on [PyPI](https://pypi.org/):
 
 ```console
 $ pip install cdpkit
 ```
 
-This will download the CDPKit sources of the latest stable release and perform an on-the-fly compilation and installation of the python bindings.
-For a succesfull build the requirements outlined below have to be fulfilled:
+This will download the CDPKit sources and perform an on-the-fly compilation and installation of the Python bindings.
+For a succesfull build the following requirements and dependencies apply:
 
 - C++11 compliant compiler (mandatory)
 - boost-devel (V >= 1.63, mandatory)
 - python-devel and Python interpreter (V >= 3.6, mandatory)
 - cairo-devel (V >= 1.14, optional)
 
-Option 2: Installation of the current development version under specification of the Github repository URL:
+Option 2: Installation of the current development version by specifying the GitHub repository URL:
 
 ```console
 $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
@@ -119,7 +118,8 @@ $ pip install .
 
 ### Basic Usage
 
-Once CDPKit is installed, you can start using it in your Python code (note: `PYTHONPATH` has to include the `<INSTALL-DIR>/Python` directory).
+Once CDPKit is installed, you can start using it in your Python code (note: `PYTHONPATH` has to include the `<INSTALL-DIR>/Python` directory;
+this is automatically the case when installed via `pip`).
 Here's an example to get you started with basic ligand-based pharmacophore generation starting from a SMILES string:
 
 ```python
