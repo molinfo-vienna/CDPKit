@@ -25,9 +25,19 @@ Install official binary release
 
 Installers for macOS (DMG-file, Apple Silicon processors only), Linux x86_64 (self-extracting archive) and Windows 10 (graphical installer
 based on `NSIS <https://nsis.sourceforge.io/Download>`_) can be downloaded from the `Releases <https://github.com/molinfo-vienna/CDPKit/releases>`_
-page of the `CDPKit GitHub repository <https://github.com/molinfo-vienna/CDPKit>`_. 
-The installers also provide the external dependencies of CDPKit (except system libraries). Thus, after finishing the installation process, no additional
-software packages have to be installed. 
+page of the `CDPKit GitHub repository <https://github.com/molinfo-vienna/CDPKit>`_. These installer packages will provide everything CDPKit has to offer
+which comprises:
+
+- Command line tools and GUI-based applications
+- CDPL binaries for dynamic linking
+- CDPL binaries for static linking
+- CDPL C++ header files
+- CDPL Python bindings
+- CDPL Python examples
+- Offline CDPKit documentation
+  
+The installers incorporate and install all external dependencies of CDPKit. Thus, after finishing the installation process, no additional
+software packages need to be installed. 
 
 .. note::
 
@@ -50,7 +60,7 @@ list of the CDPKit build requirements and dependencies:
 ==========================  =============  =================================================================================================
 Build requirement           Version        Comment
 ==========================  =============  =================================================================================================
-C++11 compliant compiler    -              mandatory, tested: :program:`gcc` V4.8+, :program:`Apple Clang` V12.0+ , and :program:`MSVC` V14.3+
+C++11 compliant compiler    -              mandatory, tested: :program:`gcc` V4.8+, :program:`Apple Clang` V12.0+ , and :program:`MSVC` V1930+
 cmake                       3.17+          mandatory
 Python interpreter          3.6+           mandatory
 boost-devel                 1.63+          mandatory
@@ -74,32 +84,33 @@ Package managers on modern Linux systems usually provide all listed software pac
 
 .. rubric:: macOS
 
-On macOS (*Big Sur* is the minimum supported version) the recommended way to install everything needed for a successful build
+On macOS (*Big Sur* is the minimum supported version) the recommended way to install everything that is needed for a successful build
 is to use the `Homebrew <https://brew.sh/index>`_ package manager.
 
 .. rubric:: Windows
 
-On Windows (8/10/11) the fastest way to get started is to set up a :program:`MinGW` build environment via
-the `MSYS2 <https://www.msys2.org/>`_ software distribution. However, the major problem here is that the
-built CDPL Python bindings will only work with the Python interpreter provided by MSYS2.
-It is thus recommended to set up a build environment that will utilize Microsoft's C++ compiler (MSVC).  
+On Windows (8/10/11) the fastest way to get started is to set up a :program:`MinGW` build environment by installing packages
+from the `MSYS2 <https://www.msys2.org/>`_ software distribution. However, a major flaw here is that the built CDPL Python bindings
+will only work with the Python interpreter shipped by MSYS2.
+In order to make the CDPL Python bindings work with an official Python distribution obtained from https://www.python.org, a CDPKit build by means
+of Microsoft's Visual C++ compiler (:program:`MSVC`) toolchain is required.
 
------------
+------
 
 `Sphinx <https://www.sphinx-doc.org/en/master/>`_ and all listed extensions can be installed via the Python package installer :program:`pip`.
 
-Build system configuration and compilation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Build system configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The configuration and generation of the build system files is performed by the program :program:`cmake`.
+The configuration and generation of the build system files is performed by the command :command:`cmake`.
 In the following :file:`<BUILD-DIR>` refers to the directory that will contain the CDPKit build ouput and :file:`<SOURCE-DIR>` is the directory
 providing the CDPKit source code. 
-The description of the build steps on Windows depends on whether the build environment is based on MSYS2 (utilizing the *MinGW* :program:`gcc` port
-as C++ compiler) or on MSVC.
+The description of the build steps on Windows depends on whether the build environment is based on MSYS2 (employing the :program:`MinGW gcc` port
+as C++ compiler) or utilizes the :program:`MSVC` toolset.
 
 .. tab:: Linux and macOS
 
-         In a :program:`shell` session execute:
+         Open a terminal and execute:
             
          .. code-block:: bash
 
@@ -109,7 +120,7 @@ as C++ compiler) or on MSVC.
 
 .. tab:: Windows/MinGW
 
-         Open a `MSYS2 MinGW 64-bit command prompt <https://www.msys2.org/docs/terminals>`_ and execute:
+         Open a `MSYS2 MinGW 64-bit <https://www.msys2.org/docs/terminals>`_ command prompt and execute:
 
          .. code-block:: bash
                          
@@ -119,20 +130,43 @@ as C++ compiler) or on MSVC.
 
 .. tab:: Windows/MSVC
 
-         Open 
+         Open a `x64 Native Tools Command Promp <https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170>`_ via the
+         Windows start menu and execute:
 
          .. code-block:: console
 
                          > mkdir <BUILD-DIR>
                          > cd <BUILD-DIR>
+                         > cmake <SOURCE-DIR> -G "NMake Makefiles"
+
+If :command:`cmake` is executed as shown above the default build type will be ``Release``. Configuring for a different build type can be achieved via the argument
+*-DCMAKE_BUILD_TYPE=<BUILD-TYPE>* on the cmake command line. Possible values of ``<BUILD-TYPE>`` are:
+
+- Debug
+- Release
+- RelWithDebInfo
+- MinSizeRel
+
+Compilation
+^^^^^^^^^^^
+
+.. tab:: Linux and macOS
+            
+         .. code-block:: bash
+
+                         $ make
+
+.. tab:: Windows/MinGW
+
+         .. code-block:: bash
+                         
+                         $ mingw32-make
                          
 .. tab:: Windows/MSVC
 
          .. code-block:: console
 
                          > nmake
-
-
  
    
 Installation of the generated binaries
@@ -140,26 +174,34 @@ Installation of the generated binaries
 
 After a successful build
 
-.. code-block:: bash
+.. tab:: Linux and macOS
+         
+         .. code-block:: bash
 
-   $  make install
+                         $  make install
 
-on **Linux** and **macOS**, or
+.. tab:: Windows/MinGW
 
-.. code-block:: bash
+         .. code-block:: bash
+                         
+                         $ mingw32-make install
+                         
+.. tab:: Windows/MSVC
 
-   $  mingw32-make install
+         .. code-block:: console
 
-on *Windows*, will install CDPKit in a platform specific default directory (*Linux:* **/opt/**, *macOS:* **/Users/Shared/**, and *Windows:* **C:\\Program Files\\**).
-A different installation location can be specified by the argument `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` on
-the :program:`cmake` command line (see above).
+                         > nmake install
+
+will install CDPKit in a platform specific default directory (Linux: :file:`/opt`, macOS: :file:`/Users/Shared`, and
+Windows: :file:`C:\\Program Files`). A different installation location can be specified by the argument
+*-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>* on the :program:`cmake` command line (see above).
 
 .. _install_via_pip:
 
 Installation via :program:`pip` (CDPL Python bindings only)
 -----------------------------------------------------------
 
-Using :program:`pip` will compile the sources on-the-fly (this may take some time) to build and install the CDPL Python bindings.
+:program:`pip` will compile the sources on-the-fly (this may take some time) to build and install the CDPL Python bindings.
 
 Prerequisites and dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

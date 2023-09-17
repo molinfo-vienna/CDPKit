@@ -50,12 +50,27 @@ def postproc_manifest(cmake_manifest):
 
     return proc_manifest
 
+LONG_DESCRIPTION = r'''
+*CDPKit* (short for Chemical Data Processing Toolkit) is an open-source cheminformatics toolkit written in C++.
+
+CDPKit comprises a suite of software tools and a programming library called the *Chemical Data Processing Library* (CDPL).
+The CDPL provides a high-quality and well-tested modular implementation of basic functionality typically required by any
+higher-level software application in the field of cheminformatics.
+
+In addition to the CDPL C++ API, an equivalent Python-interfacing layer is provided that allows to harness all of CDPL's
+functionality easily from Python code.
+This PyPI project hosts pre-built binary packages (wheels) for a comfortable installation of the CDPL Python bindings on
+Linux, macOS and Windows via the :command:`pip` command.
+
+For more information about CDPKit and the CDPL please visit https://cdpkit.org.
+'''
 
 setup(
     name='CDPKit',
     version='0.9.0',
-    description='CDPKit CDPL Python Bindings',
-    long_description='CDPKit CDPL Python Bindings',
+    description='CDPKit:CDPL Python Bindings',
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type'text/x-rst',
     author='Thomas Seidel',
     author_email='thomas.seidel@univie.ac.at',
     url='https://cdpkit.org',
@@ -63,6 +78,6 @@ setup(
     packages=['CDPL'],
     package_dir={'': 'Libs/Python'},
     python_requires='>=3.6',
-    cmake_args=['-DCDPL_PYPI_PACKAGE_BUILD:BOOL=ON', '-DCMAKE_BUILD_TYPE=Release', '-Wno-dev'],
+    cmake_args=['-DCDPL_PYPI_PACKAGE_BUILD:BOOL=ON', '-DCMAKE_BUILD_TYPE:STRING=Release', '-Wno-dev'],
     cmake_process_manifest_hook=postproc_manifest,
 )
