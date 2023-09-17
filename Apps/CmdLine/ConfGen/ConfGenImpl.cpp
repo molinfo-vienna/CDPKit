@@ -452,7 +452,7 @@ ConfGenImpl::ConfGenImpl():
 
 const char* ConfGenImpl::getProgName() const
 {
-    return "Conforge";
+    return "CONFORGE";
 }
 
 const char* ConfGenImpl::getProgCopyright() const
@@ -462,7 +462,12 @@ const char* ConfGenImpl::getProgCopyright() const
 
 const char* ConfGenImpl::getProgAboutText() const
 {
-    return "Performs high-quality conformer generation for a set of input molecules.\n\n"
+    return "High-quality conformer generation for molecules in the drug-like chemical space.\n\n"
+           "For details regarding the implementation and performance of CONFORGE see:\n"
+           "Thomas Seidel, Christian Permann, Oliver Wieder, Stefan M. Kohlbacher, and Thierry\n"
+           "Langer, High-Quality Conformer Generation with CONFORGE: Algorithm and Performance\n"
+           "Assessment, Journal of Chemical Information and Modeling 2023, 63(17), 5549-5570\n"
+           "DOI: 10.1021/acs.jcim.3c00563\n\n"
            "Built-in torsion rules are based on the torsion library jointly developed by the\n"
            "University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
            "F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
