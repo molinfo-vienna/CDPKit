@@ -1,110 +1,110 @@
 Structure data (36 entries) of molecule '215':
 
 ----- Entry 1 -----
-Header:  <INCHI_IDENTIFIER>
+Header: <INCHI_IDENTIFIER>
 Data: InChI=1S/C20H21FN2O/c1-23(2)11-3-10-20(17-5-7-18(21)8-6-17)19-9-4-15(13-22)12-16(19)14-24-20/h4-9,12H,3,10-11,14H2,1-2H3
 ----- Entry 2 -----
-Header:  <SYNONYMS>
+Header: <SYNONYMS>
 Data: Nitalapram 
 ----- Entry 3 -----
-Header:  <JCHEM_RULE_OF_FIVE>
+Header: <JCHEM_RULE_OF_FIVE>
 Data: 1.0
 ----- Entry 4 -----
-Header:  <DRUGBANK_ID>
+Header: <DRUGBANK_ID>
 Data: DB00215
 ----- Entry 5 -----
-Header:  <JCHEM_VEBER_RULE>
+Header: <JCHEM_VEBER_RULE>
 Data: 1.0
 ----- Entry 6 -----
-Header:  <JCHEM_PKA_STRONGEST_BASIC>
+Header: <JCHEM_PKA_STRONGEST_BASIC>
 Data: 9.784978
 ----- Entry 7 -----
-Header:  <ALOGPS_SOLUBILITY>
+Header: <ALOGPS_SOLUBILITY>
 Data: 0.00588
 ----- Entry 8 -----
-Header:  <JCHEM_AVERAGE_POLARIZABILITY>
+Header: <JCHEM_AVERAGE_POLARIZABILITY>
 Data: 35.39618
 ----- Entry 9 -----
-Header:  <JCHEM_IUPAC>
+Header: <JCHEM_IUPAC>
 Data: 1-[3-(dimethylamino)propyl]-1-(4-fluorophenyl)-1,3-dihydro-2-benzofuran-5-carbonitrile
 ----- Entry 10 -----
-Header:  <JCHEM_TRADITIONAL_IUPAC>
+Header: <JCHEM_TRADITIONAL_IUPAC>
 Data: recital
 ----- Entry 11 -----
-Header:  <JCHEM_REFRACTIVITY>
+Header: <JCHEM_REFRACTIVITY>
 Data: 94.0202
 ----- Entry 12 -----
-Header:  <JCHEM_POLAR_SURFACE_AREA>
+Header: <JCHEM_POLAR_SURFACE_AREA>
 Data: 36.26
 ----- Entry 13 -----
-Header:  <ALOGPS_LOGS>
+Header: <ALOGPS_LOGS>
 Data: -4.74
 ----- Entry 14 -----
-Header:  <INCHI_KEY>
+Header: <INCHI_KEY>
 Data: WSEQXVZVJXJVFP-UHFFFAOYSA-N
 ----- Entry 15 -----
-Header:  <JCHEM_PHYSIOLOGICAL_CHARGE>
+Header: <JCHEM_PHYSIOLOGICAL_CHARGE>
 Data: 1.0
 ----- Entry 16 -----
-Header:  <ALOGPS_LOGP>
+Header: <ALOGPS_LOGP>
 Data: 3.58
 ----- Entry 17 -----
-Header:  <PRODUCTS>
+Header: <PRODUCTS>
 Data: Abbott-citalopram; Accel-citalopram Tablets; Act Citalopram; Ag-citalopram; Apo-citalopram; Auro-citalopram; Ava-citalopram; Celexa; Celexa 10 mg; Celexa 20 mg; Celexa 40 mg; Citalopram; Citalopram Hydrobromide; Citalopram Tablets; Citalopram Tablets USP; Citalopram-10; Citalopram-20; Citalopram-40; Citalopram-odan; Ctp 30; Direct Rx; Dom-citalopram; Ecl-citalopram; Ipg-citalopram; Jamp-citalopram; Manda-citalopram; Mar-citalopram; Mint-citalopram; Mylan-citalopram; Nat-citalopram; Nat-citalopram Tablets; Ng Citalopram; Novo-citalopram; Ntp-citalopram; Nu-citalopram; PHL-citalopram; PMS-citalopram; Pendo-citalopram; Perrigo Citalopram; Q-citalopram; Ran-citalo; Ran-citalopram; Ratio-citalopram; Riva-citalopram; Sandoz Citalopram; Sentralopram Am-10; Septa-citalopram; Teva-citalopram; Van-citalopram
 ----- Entry 18 -----
-Header:  <JCHEM_LOGP>
+Header: <JCHEM_LOGP>
 Data: 3.7643042
 ----- Entry 19 -----
-Header:  <DATABASE_NAME>
+Header: <DATABASE_NAME>
 Data: drugbank
 ----- Entry 20 -----
-Header:  <DRUG_GROUPS>
+Header: <DRUG_GROUPS>
 Data: approved
 ----- Entry 21 -----
-Header:  <SMILES>
+Header: <SMILES>
 Data: CN(C)CCCC1(OCC2=C1C=CC(=C2)C#N)C1=CC=C(F)C=C1
 ----- Entry 22 -----
-Header:  <EXACT_MASS>
+Header: <EXACT_MASS>
 Data: 324.1638
 ----- Entry 23 -----
-Header:  <JCHEM_ROTATABLE_BOND_COUNT>
+Header: <JCHEM_ROTATABLE_BOND_COUNT>
 Data: 5.0
 ----- Entry 24 -----
-Header:  <JCHEM_MDDR_LIKE_RULE>
+Header: <JCHEM_MDDR_LIKE_RULE>
 Data: 0.0
 ----- Entry 25 -----
-Header:  <JCHEM_GHOSE_FILTER>
+Header: <JCHEM_GHOSE_FILTER>
 Data: 1.0
 ----- Entry 26 -----
-Header:  <JCHEM_NUMBER_OF_RINGS>
+Header: <JCHEM_NUMBER_OF_RINGS>
 Data: 3.0
 ----- Entry 27 -----
-Header:  <GENERIC_NAME>
+Header: <GENERIC_NAME>
 Data: Citalopram
 ----- Entry 28 -----
-Header:  <JCHEM_BIOAVAILABILITY>
+Header: <JCHEM_BIOAVAILABILITY>
 Data: 1.0
 ----- Entry 29 -----
-Header:  <JCHEM_ACCEPTOR_COUNT>
+Header: <JCHEM_ACCEPTOR_COUNT>
 Data: 3.0
 ----- Entry 30 -----
-Header:  <FORMULA>
+Header: <FORMULA>
 Data: C20H21FN2O
 ----- Entry 31 -----
-Header:  <MOLECULAR_WEIGHT>
+Header: <MOLECULAR_WEIGHT>
 Data: 324.3919
 ----- Entry 32 -----
-Header:  <DATABASE_ID>
+Header: <DATABASE_ID>
 Data: DB00215
 ----- Entry 33 -----
-Header:  <SALTS>
+Header: <SALTS>
 Data: Citalopram Hydrobromide
 ----- Entry 34 -----
-Header:  <JCHEM_DONOR_COUNT>
+Header: <JCHEM_DONOR_COUNT>
 Data: 0.0
 ----- Entry 35 -----
-Header:  <INTERNATIONAL_BRANDS>
+Header: <INTERNATIONAL_BRANDS>
 Data: Akarin; Celapram; Ciazil; Cilift; Cipram; Cipramil; Ciprapine; Citabax; Citalec; Citol; Citopam; Citox; Citrol; Dalsan; Elopram; Humorup; Oropram; Pramcit; Recital; Seropram; Talam; Talohexal; Temperax; Vodelax; Zentius; Zetalo
 ----- Entry 36 -----
-Header:  <JCHEM_FORMAL_CHARGE>
+Header: <JCHEM_FORMAL_CHARGE>
 Data: 0.0

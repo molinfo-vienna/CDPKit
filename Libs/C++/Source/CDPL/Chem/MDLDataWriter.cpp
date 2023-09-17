@@ -1626,7 +1626,7 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
     std::size_t prefix_length = SDFile::DATA_HEADER_PREFIX.length();
 
     if (writeConfEnergySDEntry && multiConfExport && !std::isnan(confEnergy)) {
-        writeString(os, prefix_length + 1, SDFile::DATA_HEADER_PREFIX, 
+        writeString(os, prefix_length, SDFile::DATA_HEADER_PREFIX, 
                     "MDLDataWriter: error while writing structure data header prefix"); 
         writeMDLLine(os, confEnergySDTag, "MDLDataWriter: error while writing header for conformer energy structure data item", 
                      checkLineLength, false, truncateLines, MDL::MAX_LINE_LENGTH - prefix_length);    
@@ -1651,9 +1651,6 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
     for (StringDataBlock::ConstElementIterator it = data.getElementsBegin(); it != entries_end; ++it) {
         const StringDataBlockEntry& entry = *it;
         const std::string& header = entry.getHeader();
-
-        if (!header.empty() && !std::isspace(header[0], std::locale::classic()))
-            prefix_length++;
 
         writeString(os, prefix_length, SDFile::DATA_HEADER_PREFIX, 
                     "MDLDataWriter: error while writing structure data header prefix"); 

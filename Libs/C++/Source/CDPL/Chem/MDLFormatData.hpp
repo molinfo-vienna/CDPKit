@@ -370,7 +370,7 @@ namespace CDPL
             namespace SDFile
             {
 
-                const std::string DATA_HEADER_PREFIX = ">";
+                const std::string DATA_HEADER_PREFIX = "> ";
 
                 const std::string RECORD_DELIMITER = "$$$$";
             } // namespace SDFile
