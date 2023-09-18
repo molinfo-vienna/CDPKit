@@ -65,7 +65,7 @@ fi
 
 cpack_version
 echo "This is a self-extracting archive."
-toplevel="`pwd`"
+toplevel="@CMAKE_INSTALL_PREFIX@"
 if [ "x${cpack_prefix_dir}x" != "xx" ]
 then
   toplevel="${cpack_prefix_dir}"
