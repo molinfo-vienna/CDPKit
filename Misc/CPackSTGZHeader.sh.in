@@ -97,7 +97,7 @@ ____cpack__here_doc____
 
   if [ "x${cpack_include_subdir}x" = "xx" ]
   then
-    echo "By default the @CPACK_PACKAGE_NAME@ will be installed in:"
+    echo "@CPACK_PACKAGE_NAME@ will be installed in:"
     echo "  \"${toplevel}/@CPACK_PACKAGE_NAME@\""
     echo "Do you want to include the subdirectory @CPACK_PACKAGE_NAME@?"
     echo "Saying no will install in: \"${toplevel}\" [Yn]: "
@@ -132,6 +132,12 @@ tail $use_new_tail_syntax +1 "$0" > /dev/null 2> /dev/null || use_new_tail_synta
 
 tail $use_new_tail_syntax +###CPACK_HEADER_LENGTH### "$0" | gunzip | (cd "${toplevel}" && tar xf -) || cpack_echo_exit "Problem unpacking the @CPACK_PACKAGE_NAME@"
 
+sed -i '/^Exec=/d' "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
+sed -i '/^Icon=/d' "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
+
+echo "Exec=${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox" >> "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
+echo "Icon=${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.png" >> "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop"
+
 echo "Unpacking finished successfully"
 echo ""
 echo "Dou you want to create symbolic links and desktop entries (requires superuser privileges)? [yN]: "
@@ -140,9 +146,11 @@ read line leftover
 
 case ${line} in
   y* | Y*)
-    cp "${toplevel}/#CDPKIT_EXECUTABLE_INSTALL_DIR#/chox.desktop" /usr/share/applications/
-    cp "${toplevel}/#CDPKIT_EXECUTABLE_INSTALL_DIR#/chox.png" /usr/share/pixmaps/
-    ln -s "${toplevel}/#CDPKIT_EXECUTABLE_INSTALL_DIR#/chox" /usr/bin/chox;;
+    cp "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.desktop" /usr/share/applications/
+    for i in `find "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@" -executable -type f -printf "%f\n"`
+    do
+        ln -s "${toplevel}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/$i" "/usr/bin/$i"
+    done ;;
 esac
 
 exit 0
