@@ -1,6 +1,6 @@
-############################################################################
-Welcome to the Chemical Data Processing Toolkit (CDPKit) Documentation Pages
-############################################################################
+#########################################
+Welcome to the CDPKit Documentation Pages
+#########################################
 
 .. toctree::
    :maxdepth: 1
