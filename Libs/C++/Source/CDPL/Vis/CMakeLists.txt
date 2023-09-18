@@ -67,17 +67,6 @@ SET(cdpl-vis_LIB_SRCS
     TextLabelPrimitive2D.cpp
    )
 
-IF(Qt5Gui_FOUND)
-  SET(cdpl-vis_LIB_SRCS
-      ${cdpl-vis_LIB_SRCS}
-      QtRenderer2D.cpp
-      QtFontMetrics.cpp
-      QtObjectFactory.cpp
-     )    
-
-  LINK_LIBRARIES(Qt5::Gui)
-ENDIF(Qt5Gui_FOUND)
-
 IF(CAIRO_FOUND)
   SET(cdpl-vis_LIB_SRCS
       ${cdpl-vis_LIB_SRCS}
@@ -136,6 +125,26 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
   INSTALL(TARGETS cdpl-vis-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+
+  IF(Qt5Gui_FOUND)
+    LINK_LIBRARIES(Qt5::Gui)
+
+    SET(cdpl-vis-qt_LIB_SRCS
+        QtRenderer2D.cpp
+        QtFontMetrics.cpp
+        QtObjectFactory.cpp
+       )
+
+     ADD_LIBRARY(cdpl-vis-qt-static STATIC ${cdpl-vis-qt_LIB_SRCS})
+
+     SET_TARGET_PROPERTIES(cdpl-vis-qt-static PROPERTIES 
+       OUTPUT_NAME cdpl-vis-qt
+       CLEAN_DIRECT_OUTPUT 1
+       COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK")
+
+     INSTALL(TARGETS cdpl-vis-qt-static
+       DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+  ENDIF(Qt5Gui_FOUND)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)

@@ -22,8 +22,6 @@
  */
 
 
-#include "StaticInit.hpp"
-
 #include <QPainter>
 #include <QPolygonF>
 #include <QPointF>

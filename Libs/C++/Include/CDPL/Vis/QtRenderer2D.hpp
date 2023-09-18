@@ -31,7 +31,6 @@
 
 #include <memory>
 
-#include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
 
 
@@ -52,7 +51,7 @@ namespace CDPL
          * instance which has been created for the desired output device (screen, printer, off-screen image, ...). 
          * For more information about \c QPainter and the <em>Qt Toolkit</em> see [\ref QTDOC].
          */
-        class CDPL_VIS_API QtRenderer2D : public Renderer2D
+        class QtRenderer2D : public Renderer2D
         {
 
           public:

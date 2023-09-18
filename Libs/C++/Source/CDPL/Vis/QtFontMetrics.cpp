@@ -22,8 +22,6 @@
  */
 
 
-#include "StaticInit.hpp"
-
 #include <QFontMetricsF>
 #include <QFont>
 #include <QRectF>

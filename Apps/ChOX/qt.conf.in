@@ -1,0 +1,5 @@
+[Paths]
+Prefix = ../@CDPKIT_LIBRARY_INSTALL_DIR@/
+Plugins = plugins
+Imports = qml
+Qml2Imports = qml

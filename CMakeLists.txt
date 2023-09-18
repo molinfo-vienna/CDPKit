@@ -254,15 +254,17 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
   IF(NOT Qt5Gui_FOUND)
     MESSAGE("!! Warning: Qt5 not found -> can't build Qt rendering backend and Qt applications.")
-  ELSEIF(APPLE)
+  ELSE()
     GET_TARGET_PROPERTY(_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
-    GET_FILENAME_COMPONENT(_QT_BIN_DIR "${_QMAKE_EXECUTABLE}" DIRECTORY)
+    GET_FILENAME_COMPONENT(QT_BIN_DIR "${_QMAKE_EXECUTABLE}" DIRECTORY)
 
-    FIND_PROGRAM(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${_QT_BIN_DIR}")
+    IF(APPLE)
+      FIND_PROGRAM(MACDEPLOYQT_EXECUTABLE macdeployqt HINTS "${QT_BIN_DIR}")
 
-    IF(NOT MACDEPLOYQT_EXECUTABLE)
-      MESSAGE("!! Warning:: macdeployqt not found -> can't make Qt applications self-contained.")
-    ENDIF(NOT MACDEPLOYQT_EXECUTABLE)
+      IF(NOT MACDEPLOYQT_EXECUTABLE)
+        MESSAGE("!! Warning:: macdeployqt not found -> can't make Qt applications self-contained.")
+      ENDIF(NOT MACDEPLOYQT_EXECUTABLE)
+    ENDIF(APPLE)
   ENDIF(NOT Qt5Gui_FOUND)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 

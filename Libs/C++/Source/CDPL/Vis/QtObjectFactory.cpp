@@ -22,8 +22,6 @@
  */
 
 
-#include "StaticInit.hpp"
-
 #include <QFont>
 #include <QColor>
 #include <QPen>

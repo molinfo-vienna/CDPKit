@@ -31,7 +31,6 @@
 
 #include <memory>
 
-#include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
 
 
@@ -52,7 +51,7 @@ namespace CDPL
          * font specified by setFont(). For more information about \c QFontMetrics and the <em>Qt Toolkit</em> see
          * [\ref QTDOC].
          */
-        class CDPL_VIS_API QtFontMetrics : public FontMetrics
+        class QtFontMetrics : public FontMetrics
         {
 
           public:
@@ -85,7 +84,7 @@ namespace CDPL
 
             QtFontMetrics& operator=(const QtFontMetrics&);
 
-            QPaintDevice*                qPaintDevice;
+            QPaintDevice*                  qPaintDevice;
             std::unique_ptr<QFontMetricsF> qFontMetrics;
         };
     } // namespace Vis

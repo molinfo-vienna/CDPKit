@@ -2,10 +2,10 @@
 Name=ChOX
 GenericName=Chemical Object Explorer
 Comment=Load and inspect chemical data files
-Exec=/opt/CDPKit
-Icon=/usr/share/pixmaps/chox.png
+Exec=@CMAKE_INSTALL_PREFIX@/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox
+Icon=@CMAKE_INSTALL_PREFIX@/@CDPKIT_EXECUTABLE_INSTALL_DIR@/chox.png
 Terminal=false
-MultipleArgs=false
+MultipleArgs=true
 Type=Application
 Categories=Application;Science;
 StartupNotify=true
