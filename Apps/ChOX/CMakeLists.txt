@@ -201,9 +201,9 @@ ELSE(APPLE)
     SET(BINARY_INPUT_FILE "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins/platforms/libqxcb.so")
 
     CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
-      "${CMAKE_CURRENT_BINARY_DIR}/InstallExtraExternalRuntimeDependencies.cmake" @ONLY)
+      "${CMAKE_CURRENT_BINARY_DIR}/InstallQtPlatformModuleRuntimeDependencies.cmake" @ONLY)
 
-    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExtraExternalRuntimeDependencies.cmake" COMPONENT Applications)
+    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallQtPlatformModuleRuntimeDependencies.cmake" COMPONENT Applications)
 
     SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox")
   ENDIF(WIN32)

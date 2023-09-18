@@ -127,8 +127,6 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 
   IF(Qt5Gui_FOUND)
-    LINK_LIBRARIES(Qt5::Gui)
-
     SET(cdpl-vis-qt_LIB_SRCS
         QtRenderer2D.cpp
         QtFontMetrics.cpp
@@ -136,6 +134,8 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
        )
 
      ADD_LIBRARY(cdpl-vis-qt-static STATIC ${cdpl-vis-qt_LIB_SRCS})
+
+     TARGET_LINK_LIBRARIES(cdpl-vis-qt-static Qt5::Gui)
 
      SET_TARGET_PROPERTIES(cdpl-vis-qt-static PROPERTIES 
        OUTPUT_NAME cdpl-vis-qt
