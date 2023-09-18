@@ -32,6 +32,6 @@ if sys.version_info[1] >= 8 and platform.system() == 'Windows':
     if 'site-packages' in __file__:
         os.add_dll_directory(os.path.dirname(__file__))
     else:
-        os.add_dll_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'Bin'))
+        os.add_dll_directory(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '@CDPKIT_EXECUTABLE_INSTALL_DIR@'))
 
 from ._cdpl import *
