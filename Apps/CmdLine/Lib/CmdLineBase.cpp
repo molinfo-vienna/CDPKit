@@ -247,7 +247,7 @@ std::string CmdLineBase::getProgTitleString() const
     title += getProgVersion();
 
     if (getProgCopyright()) {
-        title += " © ";
+        title += " (c) ";
         title += getProgCopyright();
     }
 
