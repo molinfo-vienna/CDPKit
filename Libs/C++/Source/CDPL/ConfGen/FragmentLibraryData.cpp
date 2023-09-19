@@ -78,14 +78,14 @@ namespace CDPL
                 if (!res)
                     throw Base::IOError("FragmentLibraryData: could not find builtin fragment library data resource record");
 
-                HGLOBAL res_handle = LoadResource(NULL, res);
+                HGLOBAL res_handle = LoadResource(hInstance_DLL, res);
 
                 if (!res_handle)
                     throw Base::IOError("FragmentLibraryData: could not load builtin fragment library data");
 
                 const char* res_data = static_cast<const char*>(LockResource(res_handle));
 
-                DWORD res_data_len = SizeofResource(NULL, res);
+                DWORD res_data_len = SizeofResource(hInstance_DLL, res);
 
                 return std::make_pair(res_data, res_data_len);
             }
