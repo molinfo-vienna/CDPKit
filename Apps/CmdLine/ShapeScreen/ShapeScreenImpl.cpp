@@ -1119,8 +1119,8 @@ void ShapeScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? std::to_string(numBestHits) : std::string("All Hits")));
     printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
     printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ?
-                                                                      std::string("None") : (boost::format("%.4f") % settings.getScoreCutoff()).str()));
-    printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? (boost::format("%.4f") % shapeScoreCutoff).str() : std::string("None")));
+                                                                      std::string("None") : (boost::format("%.3f") % settings.getScoreCutoff()).str()));
+    printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? (boost::format("%.3f") % shapeScoreCutoff).str() : std::string("None")));
     printMessage(VERBOSE, " Merge Hit Lists:                     " + std::string(mergeHitLists ? "Yes" : "No"));
     printMessage(VERBOSE, " Output File Splitting:               " + std::string(splitOutFiles ? "Yes" : "No"));
     printMessage(VERBOSE, " Shape Alignment:                     " + std::string(scoringOnly ? "No" : "Yes"));

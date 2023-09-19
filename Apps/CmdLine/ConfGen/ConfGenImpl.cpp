@@ -1080,11 +1080,11 @@ void ConfGenImpl::printOptionSummary()
     printMessage(VERBOSE, " Max. Num. Output Conformers:         " + std::to_string(settings.getMaxNumOutputConformers()));
 
     if (settings.getMinRMSD() > 0.0)
-        printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.3f") % settings.getMinRMSD()).str());
+        printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.2f") % settings.getMinRMSD()).str());
     else
         printMessage(VERBOSE, " Min. RMSD:                           RMSD Checking disabled");
 
-    printMessage(VERBOSE, " Energy Window:                       " + (boost::format("%.3f") % settings.getEnergyWindow()).str());
+    printMessage(VERBOSE, " Energy Window:                       " + (boost::format("%.1f") % settings.getEnergyWindow()).str());
     printMessage(VERBOSE, " Nitrogen Enumeration Mode:           " + getNitrogenEnumModeString());
     printMessage(VERBOSE, " Enumerate Ring Conformers:           " + std::string(settings.enumerateRings() ? "Yes" : "No"));
     printMessage(VERBOSE, " Sample Hetero Atom Hydrogens:        " + std::string(settings.sampleHeteroAtomHydrogens() ? "Yes" : "No"));
