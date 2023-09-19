@@ -125,25 +125,6 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
   INSTALL(TARGETS cdpl-vis-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-
-  IF(Qt5Gui_FOUND)
-    SET(cdpl-vis-qt_LIB_SRCS
-        QtRenderer2D.cpp
-        QtFontMetrics.cpp
-        QtObjectFactory.cpp
-       )
-
-     ADD_LIBRARY(cdpl-vis-qt-static STATIC ${cdpl-vis-qt_LIB_SRCS})
-
-     TARGET_LINK_LIBRARIES(cdpl-vis-qt-static Qt5::Gui)
-
-     SET_TARGET_PROPERTIES(cdpl-vis-qt-static PROPERTIES 
-       OUTPUT_NAME cdpl-vis-qt
-       CLEAN_DIRECT_OUTPUT 1)
-
-     INSTALL(TARGETS cdpl-vis-qt-static
-       DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-  ENDIF(Qt5Gui_FOUND)
 ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
@@ -172,6 +153,40 @@ INSTALL(TARGETS cdpl-vis-shared
   ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
+
+IF(NOT CDPL_PYPI_PACKAGE_BUILD AND Qt5Gui_FOUND)
+  SET(cdpl-vis-qt_LIB_SRCS
+      QtRenderer2D.cpp
+      QtFontMetrics.cpp
+      QtObjectFactory.cpp
+     )
+
+  ADD_LIBRARY(cdpl-vis-qt-static STATIC ${cdpl-vis-qt_LIB_SRCS})
+
+  TARGET_LINK_LIBRARIES(cdpl-vis-qt-static cdpl-vis-static Qt5::Gui)
+
+  SET_TARGET_PROPERTIES(cdpl-vis-qt-static PROPERTIES 
+    OUTPUT_NAME cdpl-vis-qt
+    CLEAN_DIRECT_OUTPUT 1
+    COMPILE_DEFINITIONS "CDPL_VIS_QT_STATIC_LINK")
+
+  INSTALL(TARGETS cdpl-vis-qt-static
+    DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
+
+  ADD_LIBRARY(cdpl-vis-qt-shared SHARED ${cdpl-vis-qt_LIB_SRCS})
+
+  TARGET_LINK_LIBRARIES(cdpl-vis-qt-shared cdpl-vis-shared Qt5::Gui)
+
+  SET_TARGET_PROPERTIES(cdpl-vis-qt-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+    OUTPUT_NAME cdpl-vis-qt
+    CLEAN_DIRECT_OUTPUT 1
+    INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}")
+
+  INSTALL(TARGETS cdpl-vis-qt-shared
+    RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+    LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+    ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries)
+ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD AND Qt5Gui_FOUND)
 
 IF(CDPL_CXX_UNIT_TESTS_ENABLED)
   ADD_SUBDIRECTORY(Tests)

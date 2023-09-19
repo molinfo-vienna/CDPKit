@@ -31,6 +31,7 @@
 
 #include <memory>
 
+#include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
 
 
@@ -51,7 +52,7 @@ namespace CDPL
          * font specified by setFont(). For more information about \c QFontMetrics and the <em>Qt Toolkit</em> see
          * [\ref QTDOC].
          */
-        class QtFontMetrics : public FontMetrics
+        class CDPL_VIS_QT_API QtFontMetrics : public FontMetrics
         {
 
           public:

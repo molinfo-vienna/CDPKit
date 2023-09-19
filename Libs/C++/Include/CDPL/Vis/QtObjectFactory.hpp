@@ -29,6 +29,8 @@
 #ifndef CDPL_VIS_QTOBJECTFACTORY_HPP
 #define CDPL_VIS_QTOBJECTFACTORY_HPP
 
+#include "CDPL/Vis/APIPrefix.hpp"
+
 
 class QFont;
 class QBrush;
@@ -53,7 +55,7 @@ namespace CDPL
          *
          * For information about \c QFont, \c QColor, \c QPen and \c QBrush see [\ref QTDOC].
          */
-        class QtObjectFactory
+        class CDPL_VIS_QT_API QtObjectFactory
         {
 
           public:

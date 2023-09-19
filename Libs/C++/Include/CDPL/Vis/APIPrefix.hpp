@@ -40,8 +40,24 @@
 # endif // cdpl_vis_shared_EXPORTS
 #endif // CDPL_VIS_STATIC_LINK
 
+#ifdef CDPL_VIS_QT_STATIC_LINK
+# define CDPL_VIS_QT_API
+#else // CDPL_VIS_QT_STATIC_LINK
+# include "CDPL/APIPrefix.hpp"
+# ifdef cdpl_vis_qt_shared_EXPORTS
+#  define CDPL_VIS_QT_API CDPL_API_EXPORT
+# else
+#  define CDPL_VIS_QT_API CDPL_API_IMPORT
+# endif // cdpl_vis_qt_shared_EXPORTS
+#endif // CDPL_VIS_QT_STATIC_LINK
+
 /**
  * \def CDPL_VIS_API
+ * \brief Tells the compiler/linker which classes, functions and variables are part of the library API.
+ */
+
+/**
+ * \def CDPL_VIS_QT_API
  * \brief Tells the compiler/linker which classes, functions and variables are part of the library API.
  */
 

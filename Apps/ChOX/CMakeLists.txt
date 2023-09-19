@@ -173,7 +173,7 @@ ELSE(APPLE)
     SET_TARGET_PROPERTIES(chox PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
     CONFIGURE_FILE(chox.desktop.in "${CMAKE_CURRENT_BINARY_DIR}/chox.desktop" @ONLY)
-    CONFIGURE_FILE(qt.conf.in "${CMAKE_CURRENT_BINARY_DIR}/qt.conf" @ONLY)
+    CONFIGURE_FILE(qt.conf.in "${CMAKE_CURRENT_BINARY_DIR}/_qt.conf" @ONLY)
 
     INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/iconengines" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
     INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/imageformats" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
@@ -182,7 +182,7 @@ ELSE(APPLE)
     INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/printsupport" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
     INSTALL(DIRECTORY "${QT_BIN_DIR}/../plugins/xcbglintegrations" DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}/plugins")
 
-    INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/qt.conf" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+    INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/_qt.conf" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" RENAME "qt.conf" COMPONENT Applications)
     INSTALL(FILES "${CMAKE_CURRENT_BINARY_DIR}/chox.desktop" DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
     INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
     
@@ -198,7 +198,7 @@ ELSE(APPLE)
 
   CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" @ONLY)
-  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-vis-qt-static cdpl-biomol-shared
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-vis-qt-shared cdpl-biomol-shared
     cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 
