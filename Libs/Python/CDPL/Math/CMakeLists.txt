@@ -34,7 +34,7 @@ FOREACH(PYTHON_FILE ${PYTHON_FILES})
 ENDFOREACH(PYTHON_FILE)
 
 IF(MINGW)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual -Wno-maybe-uninitialized")
 ENDIF(MINGW)
 
 IF(NOT WIN32)

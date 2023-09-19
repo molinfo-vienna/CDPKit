@@ -158,19 +158,7 @@ IF(APPLE)
     cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ELSE(APPLE)
   IF(WIN32)
-    IF(MINGW) # resource compilation for mingw
-      FIND_PROGRAM(WINDRES_EXECUTABLE NAMES windres.exe windres)
-
-      IF(WINDRES_EXECUTABLE)
-        ADD_CUSTOM_COMMAND(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj"
-                           COMMAND "${WINDRES_EXECUTABLE}" "-I${CMAKE_CURRENT_SOURCE_DIR}/Icons"
-                                   "-i${CMAKE_CURRENT_SOURCE_DIR}/Icons/chox.rc"
-                                   "-o${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj")
-        SET(chox_SRCS ${chox_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj")
-      ELSE(WINDRES_EXECUTABLE)
-        MESSAGE("!! Warning: windres.exe not found -> can't compile application resource files.")
-      ENDIF(WINDRES_EXECUTABLE)
-    ENDIF(MINGW)
+    SET(chox_SRCS ${chox_SRCS} Icons/chox.rc)
 
     ADD_EXECUTABLE(chox WIN32 ${chox_SRCS})
     SET_TARGET_PROPERTIES(chox PROPERTIES OUTPUT_NAME ChOX)
