@@ -43,7 +43,6 @@ namespace PSDInfo
 
       private:
         const char* getProgName() const;
-        const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         int process();

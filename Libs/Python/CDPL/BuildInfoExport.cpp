@@ -1,5 +1,5 @@
 /* 
- * Exports.hpp 
+ * BuildInfoExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -22,16 +22,21 @@
  */
 
 
-#ifndef CDPL_PYTHON_EXPORTS_HPP
-#define CDPL_PYTHON_EXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/BuildInfo.hpp"
+
+#include "Exports.hpp"
 
 
-namespace CDPLPython
+void CDPLPython::exportBuildInfo()
 {
+    using namespace boost;
 
-    void exportVersionInfo();
-    void exportConfigInfo();
-    void exportBuildInfo();
-} // namespace CDPLPython
+    python::scope module;
 
-#endif // CDPL_PYTHON_EXPORTS_HPP
+    module.attr("BUILD_TIME") = CDPL_BUILD_TIME;
+    module.attr("BUILD_SYSTEM") = CDPL_BUILD_SYSTEM;
+    module.attr("COMPILER_ID") = CDPL_COMPILER_ID;
+    module.attr("COMPILER_VERSION") = CDPL_COMPILER_VERSION;
+}

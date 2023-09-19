@@ -187,11 +187,6 @@ const char* PSDCreateImpl::getProgName() const
     return "PSDCreate";
 }
 
-const char* PSDCreateImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* PSDCreateImpl::getProgAboutText() const
 {
     return "Creates a pharmacophore-screening database file from one or more molecule input files.";

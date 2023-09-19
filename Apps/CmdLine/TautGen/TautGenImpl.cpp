@@ -419,11 +419,6 @@ const char* TautGenImpl::getProgName() const
     return "TautGen";
 }
 
-const char* TautGenImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* TautGenImpl::getProgAboutText() const
 {
     return "Performs tautomer generation for a set of input molecules.";

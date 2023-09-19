@@ -81,11 +81,6 @@ const char* PSDMergeImpl::getProgName() const
     return "PSDMerge";
 }
 
-const char* PSDMergeImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* PSDMergeImpl::getProgAboutText() const
 {
     return "Merges multiple pharmacophore-screening databases into a single database.";

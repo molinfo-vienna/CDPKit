@@ -72,7 +72,6 @@ namespace GenFragLib
         };
 
         const char* getProgName() const;
-        const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         void applyPreset(const std::string& pres_str);

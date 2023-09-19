@@ -58,11 +58,6 @@ const char* PSDInfoImpl::getProgName() const
     return "PSDInfo";
 }
 
-const char* PSDInfoImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* PSDInfoImpl::getProgAboutText() const
 {
     return "Provides information about the content of pharmacophore-screening databases.";

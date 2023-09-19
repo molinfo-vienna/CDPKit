@@ -63,7 +63,6 @@ namespace StructGen
 
       private:
         const char* getProgName() const;
-        const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         void applyFragBuildPreset(const std::string& pres_str);

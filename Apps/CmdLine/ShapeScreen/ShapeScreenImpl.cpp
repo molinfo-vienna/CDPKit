@@ -221,11 +221,6 @@ const char* ShapeScreenImpl::getProgName() const
     return "ShapeScreen";
 }
 
-const char* ShapeScreenImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* ShapeScreenImpl::getProgAboutText() const
 {
     return "Performs a fast shape-based similarity screening of molecule databases.\n\n";

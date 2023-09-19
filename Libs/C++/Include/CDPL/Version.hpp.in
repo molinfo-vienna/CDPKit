@@ -30,28 +30,28 @@
 #define CDPL_VERSION_HPP
 
 /**
- * \brief The \e %CDPL major version number. 
+ * \brief The \e %CDPKit major version. 
  */
-#define CDPL_MAJOR_VERSION @CDPL_MAJOR_VERSION@
+#define CDPL_VERSION_MAJOR @CDPKIT_VERSION_MAJOR@
 
 /**
- * \brief The \e %CDPL minor version number. 
+ * \brief The \e %CDPKit minor version. 
  */
-#define CDPL_MINOR_VERSION @CDPL_MINOR_VERSION@
+#define CDPL_VERSION_MINOR @CDPKIT_VERSION_MINOR@
 
 /**
- * \brief The \e %CDPL patch-level. 
+ * \brief The \e %CDPKit patch-level. 
  */
-#define CDPL_PATCH_VERSION @CDPL_PATCH_VERSION@
+#define CDPL_VERSION_PATCH @CDPKIT_VERSION_PATCH@
 
 /**
- * \brief The \e %CDPL version as a string. 
+ * \brief The full \e %CDPKit version as string. 
  */
-#define CDPL_VERSION_STRING "@CDPL_VERSION@"
+#define CDPL_VERSION_STRING "@CDPKIT_VERSION@"
 
 /** 
- * \brief The full \e %CDPL version number. 
+ * \brief The full \e %CDPKit version number. 
  */
-#define CDPL_VERSION (CDPL_MAJOR_VERSION * 10000 + CDPL_MINOR_VERSION * 100 + CDPL_PATCH_VERSION)
+#define CDPL_VERSION (CDPL_VERSION_MAJOR * 10000 + CDPL_VERSION_MINOR * 100 + CDPL_VERSION_PATCH)
 
 #endif // CDPL_VERSION_HPP

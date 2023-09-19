@@ -231,21 +231,24 @@ boost::program_options::typed_value<bool>* CmdLineBase::boolSwitch(bool* v)
 
 const char* CmdLineBase::getProgVersion() const
 {
-    return CDPL_VERSION_STRING;
+    return 0;
 }
 
 const char* CmdLineBase::getProgCopyright() const
 {
-    return 0;
+    return "Thomas Seidel";
 }
 
 std::string CmdLineBase::getProgTitleString() const
 {
     std::string title(getProgName());
+    const char* prog_ver = getProgVersion();
 
-    title += " V";
-    title += getProgVersion();
-
+    if (prog_ver) {
+        title += " v";
+        title += prog_ver;
+    }
+    
     if (getProgCopyright()) {
         title += " (c) ";
         title += getProgCopyright();
@@ -404,9 +407,8 @@ void CmdLineBase::openLogFile()
 
 void CmdLineBase::printVersion() const
 {
-    std::cerr << getProgTitleString() << std::endl 
-              << "(CDPL-Version: " <<  CDPL_VERSION_STRING 
-              << ", Build: " << CDPL_BUILD_TIME << ", Compiler: " << CDPL_COMPILER_ID 
+    std::cerr << getProgTitleString() << " (CDPKit Version: " <<  CDPL_VERSION_STRING 
+              << ", Build Time: " << CDPL_BUILD_TIME << ", Compiler: " << CDPL_COMPILER_ID 
               << " " << CDPL_COMPILER_VERSION
               << " on " << CDPL_BUILD_SYSTEM << ")" << std::endl;
 }

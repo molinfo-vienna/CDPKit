@@ -353,11 +353,6 @@ const char* GenFragLibImpl::getProgName() const
     return "GenFragLib";
 }
 
-const char* GenFragLibImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* GenFragLibImpl::getProgAboutText() const
 {
     return "Creates, updates or merges fragment libraries for conformer generation.";

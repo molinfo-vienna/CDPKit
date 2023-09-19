@@ -72,7 +72,6 @@ namespace PSDScreen
         typedef CDPL::Pharm::ScreeningProcessor::SearchHit SearchHit;
 
         const char* getProgName() const;
-        const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         void setHitOutputFormat(const std::string& file_ext);

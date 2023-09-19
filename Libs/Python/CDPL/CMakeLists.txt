@@ -45,6 +45,7 @@ SET(cdpl_MOD_SRCS
     Module.cpp
     VersionInfoExport.cpp
     ConfigInfoExport.cpp
+    BuildInfoExport.cpp
    )
 
 ADD_LIBRARY(_cdpl MODULE ${cdpl_MOD_SRCS})

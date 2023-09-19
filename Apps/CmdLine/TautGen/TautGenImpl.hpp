@@ -70,7 +70,6 @@ namespace TautGen
         };
 
         const char* getProgName() const;
-        const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         void setMode(const std::string& mode_str);

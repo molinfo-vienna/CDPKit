@@ -455,11 +455,6 @@ const char* ConfGenImpl::getProgName() const
     return "CONFORGE";
 }
 
-const char* ConfGenImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* ConfGenImpl::getProgAboutText() const
 {
     return "High-quality conformer generation for molecules in the drug-like chemical space.\n\n"

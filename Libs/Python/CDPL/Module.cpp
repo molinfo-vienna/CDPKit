@@ -33,4 +33,5 @@ BOOST_PYTHON_MODULE(_cdpl)
 
     exportVersionInfo();
     exportConfigInfo();
+    exportBuildInfo();
 }

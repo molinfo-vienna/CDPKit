@@ -387,11 +387,6 @@ const char* StructGenImpl::getProgName() const
     return "StructGen";
 }
 
-const char* StructGenImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* StructGenImpl::getProgAboutText() const
 {
     return "Performs 3D structure generation for a set of input molecules.\n\n"

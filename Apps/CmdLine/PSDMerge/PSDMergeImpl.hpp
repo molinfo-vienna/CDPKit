@@ -46,7 +46,6 @@ namespace PSDMerge
 
       private:
         const char* getProgName() const;
-        const char* getProgCopyright() const;
         const char* getProgAboutText() const;
 
         void setCreationMode(const std::string& mode_str);

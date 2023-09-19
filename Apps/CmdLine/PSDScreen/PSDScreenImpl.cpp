@@ -216,11 +216,6 @@ const char* PSDScreenImpl::getProgName() const
     return "PSDScreen";
 }
 
-const char* PSDScreenImpl::getProgCopyright() const
-{
-    return "Thomas Seidel";
-}
-
 const char* PSDScreenImpl::getProgAboutText() const
 {
     return "Performs a pharmacophore-based virtual screening of molecule databases.";
