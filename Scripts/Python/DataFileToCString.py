@@ -22,8 +22,6 @@
 ##
 
 
-from __future__ import print_function 
-
 import sys
 
 
@@ -34,31 +32,21 @@ def convert():
 
     in_file = open(sys.argv[1], 'rb')
     out_file = open(sys.argv[2], 'w')
+    char_cnt = 0
 
     out_file.write('"')
 
-    char_cnt = 0
+    for c in in_file.read():
+        out_file.write('\\x{0:02x}'.format(c))
+        char_cnt += 1
 
-    if sys.version_info[0] < 3:
-        for c in in_file.read():
-            out_file.write('\\x{0:02x}'.format(ord(c)))
-            char_cnt += 1
-
-            if char_cnt % 20 == 0:
-                out_file.write('"\n"')
-    else:   
-        for c in in_file.read():
-            out_file.write('\\x{0:02x}'.format(c))
-            char_cnt += 1
-
-            if char_cnt % 20 == 0:
-                out_file.write('"\n"')
+        if char_cnt % 20 == 0:
+            out_file.write('"\n"')
 
     out_file.write('"')
     out_file.flush()
     out_file.close()
     in_file.close()
-
 
 if __name__ == '__main__':
     convert()
