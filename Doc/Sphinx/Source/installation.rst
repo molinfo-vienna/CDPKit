@@ -5,7 +5,7 @@ Installing CDPKit
 
 CDPKit can be installed in different ways:
 
-- :ref:`Install the latest official binary release <install_official_release>`. This
+- :ref:`By means of an official binary installer package <install_via_package>`. This
   is the best approach for most users. It will provide a full-featured stable CDPKit version
   and pre-built installers are available for most platforms.
 
@@ -18,25 +18,25 @@ CDPKit can be installed in different ways:
   :program:`pip` will only install the CDPL Python bindings. This is the best option for users who
   only want to develop or run Python software that uses CDPL functionality.
 
-.. _install_official_release:
+.. _install_via_package:
 
-Install official binary release
--------------------------------
+Installation via installer package
+----------------------------------
 
 Installers for macOS (DMG-file, *Apple Silicon* processors only), Linux x86_64 (self-extracting archive) and Windows 10 (graphical installer
 based on `NSIS <https://nsis.sourceforge.io/Download>`_) can be downloaded from the `Releases <https://github.com/molinfo-vienna/CDPKit/releases>`_
 page of the `CDPKit GitHub repository <https://github.com/molinfo-vienna/CDPKit>`_. These installer packages will provide everything CDPKit has to offer:
 
-- Command line tools and GUI-based applications
+- Command line tools and GUI applications
 - CDPL binaries for dynamic linking
 - CDPL binaries for static linking
 - CDPL C++ header files
 - CDPL Python bindings
-- CDPL Python examples
+- Python example scripts
 - Offline CDPKit documentation
   
-The installers provide all external dependencies of CDPKit. Thus, after finishing the installation process, no additional
-software packages have to be installed and CDPKit will be ready for use. 
+Installations of CDPKit are self-contained, i.e., after finishing the installation process no additional
+software packages have to be installed. 
 
 .. note::
 
@@ -56,25 +56,26 @@ Compilation of the CDPKit sources requires a properly set up build environment. 
 the `CMake <https://cmake.org/>`_ makefile generator, and the development version of several software libraries. The following table provides a complete
 list of the CDPKit build requirements and dependencies:
 
-==========================  =============  =================================================================================================
-Build requirement           Version        Comment
-==========================  =============  =================================================================================================
-C++11 compliant compiler    -              mandatory (tested compilers are: :program:`gcc` V4.8+, :program:`Apple Clang` V12.0+ , and
-                                           :program:`MSVC` V1930+)
-cmake                       3.17+          mandatory
-Python interpreter          3.6+           mandatory
-boost-devel                 1.63+          mandatory
-boost-python3-devel         1.63+          optional, required for building CDPL Python bindings
-python-devel                3.6+           optional, required for building CDPL Python bindings
-NumPy                       1.17+          optional, recommended to be installed for CDPL Python NumPy-conversion features
-Qt5-devel                   5.6+           optional, required for building Qt rendering backend and GUI application
-cairo-devel                 1.14+          optional, required for building cairo rendering backend
-Sphinx                      4.5+           optional, required for generating CDPKit documentation pages
-sphinx-rtd-theme            1.0.0+         optional, required for generating CDPKit documentation pages
-sphinx-inline-tabs          2021.4.11b8+   optional, required for generating CDPKit documentation pages
-sphinxcontrib-bibtex        2.5.5+         optional, required for generating CDPKit documentation pages
-Doxygen                     1.8.5+         optional, required for generating C++ and Python API documentation
-==========================  =============  =================================================================================================
+=============================  =============  ================================================================================
+Build requirement              Version        Comment
+=============================  =============  ================================================================================
+C++11 compliant compiler [#]_  \-             mandatory
+cmake                          3.17+          mandatory
+Python interpreter             3.6+           mandatory
+boost-devel                    1.63+          mandatory
+boost-python3-devel            1.63+          optional, required for building CDPL Python bindings
+python-devel                   3.6+           optional, required for building CDPL Python bindings
+NumPy                          1.17+          optional, recommended to be installed for CDPL Python NumPy-conversion features
+Qt5-devel                      5.6+           optional, required for building Qt rendering backend and GUI applications
+cairo-devel                    1.14+          optional, required for building cairo rendering backend
+Sphinx                         4.5+           optional, required for generating CDPKit documentation pages
+sphinx-rtd-theme               1.0.0+         optional, required for generating CDPKit documentation pages
+sphinx-inline-tabs             2021.4.11b8+   optional, required for generating CDPKit documentation pages
+sphinxcontrib-bibtex           2.5.5+         optional, required for generating CDPKit documentation pages
+Doxygen                        1.8.5+         optional, required for generating C++ and Python API documentation
+=============================  =============  ================================================================================
+
+.. [#] Tested and recommended compilers are: :program:`gcc` V4.8+, :program:`Apple Clang` V12.0+ , and :program:`MSVC` V1930+
 
 Build environment setup
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,19 +91,19 @@ is to use the `Homebrew <https://brew.sh/index>`_ package manager.
 
 .. rubric:: Windows
 
-On Windows (8/10/11) the easiest way to get started is to set up a :program:`MinGW` build environment by installing packages
+On Windows (8/10/11) the least error prone way to get started is to set up a :program:`MinGW` build environment by installing packages
 from the `MSYS2 <https://www.msys2.org/>`_ software distribution. However, the downside heare is that the built CDPL Python bindings
-will only work with the Python interpreter shipped by MSYS2.
+will only work with the Python interpreter shipped with MSYS2.
 In order to make the CDPL Python bindings work with an official Python distribution obtained from https://www.python.org, a build using
 Microsoft's Visual C++ compiler (:program:`MSVC`) toolchain is required. 
 
 Recommended sources for the software packages listed above are:
 
-- *MSVC*: https://visualstudio.microsoft.com/vs/features/cplusplus/
-- *CMake*: https://cmake.org/download/
-- *Python*: https://www.python.org/downloads/windows/
+- *MSVC*: https://visualstudio.microsoft.com/vs/features/cplusplus
+- *CMake*: https://cmake.org/download
+- *Python*: https://www.python.org/downloads/windows
 - *Qt5*: https://www.qt.io/download
-- *boost*: https://sourceforge.net/projects/boost/files/boost-binaries/
+- *boost*: https://sourceforge.net/projects/boost/files/boost-binaries
 - *cairo*: https://github.com/preshing/cairo-windows
 - *Doxygen*: https://www.doxygen.nl/download.html
 
@@ -112,8 +113,8 @@ Build system configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The configuration and generation of the build system files is performed by the command :command:`cmake`.
-In the following :file:`<BUILD-DIR>` refers to the directory that will contain the CDPKit build ouput and :file:`<SOURCE-DIR>` is the directory
-providing the CDPKit source code. 
+In the following :file:`<BUILD-DIR>` refers to the directory that will contain the CDPKit build ouput and :file:`<SOURCE-DIR>`
+refers to the directory hosting the CDPKit source tree. 
 The description of the build steps on Windows depends on whether the build environment is based on MSYS2 (employing the :program:`MinGW gcc` port
 as C++ compiler) or utilizes the :program:`MSVC` toolset.
 
@@ -159,6 +160,8 @@ If :command:`cmake` is executed as shown above the default build type will be ``
 Compilation
 ^^^^^^^^^^^
 
+If the build system configuration step proceeded without errors
+
 .. tab:: Linux and macOS
             
          .. code-block:: shell
@@ -177,19 +180,21 @@ Compilation
 
                          > nmake
 
+will start the build process.
+                         
 Build of HTML documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This step is optional and needs to be carried out only if a build of offline HTML documentation pages
-is desired. If they should be installed together with the compiled binaries then this step must be
-executed before carrying out the installation procedure described in the next section.
-For a successful build of the documentation, the command :command:`sphinx-build` and all Sphinx extensions listet in
-`Build requirements`_ have to be installed. Furthermore, for generating CDPL C++ and Python API-documentation,
-the program :program:`Doxygen` must be available.
+This step is optional and needs to be carried out only if a build of offline CDPKit documentation pages
+is required or desired. If the documentation should be installed together with the built binaries then this step must be
+executed *before* carrying out the installation procedure (see next section).
+Mandatory for a successful build is the availability of the `Sphinx <https://www.sphinx-doc.org/en/master/>`_ documentation generator
+plus the listed extensions (see `Build requirements`_). Furthermore, for generating CDPL C++ and Python API-documentation (optional),
+the program `Doxygen <https://www.doxygen.nl>`_ has to be installed.
 
 .. note::
 
-   `Sphinx <https://www.sphinx-doc.org/en/master/>`_ and all listed extensions can be installed via the Python package installer :program:`pip`.
+   Sphinx and its extensions can be installed via the Python package installer :program:`pip`.
 
 If all prerequisites are fulfilled
 
@@ -242,36 +247,65 @@ Windows: :file:`C:\\Program Files`). A different installation location can be sp
 
 .. _install_via_pip:
 
-Installation via :program:`pip` (CDPL Python bindings only)
------------------------------------------------------------
+Installation using :program:`pip`
+---------------------------------
 
-:program:`pip` will compile the sources on-the-fly (this may take some time) to build and install the CDPL Python bindings.
+.. note::
+   
+   :program:`pip` will only install the CDPL Python bindings. This is the recommended option for users who
+   only want to develop or run Python software that uses CDPL functionality.
 
-Prerequisites and dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installation of the latest binary release
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Mandatory
-  
-  - C++11 compliant compiler
-  - boost-devel (V >= 1.63)
-  - python-devel and Python interpreter (V >= 3.6)
+The latest binary release of the CDPL Python bindings deposited on `PyPI <https://pypi.org/project/CDPKit>`_
+can be installed by issuing the following command in a terminal session:
 
-- Optional
-  
-  - Qt5-devel
-  - cairo-devel (V >= 1.14)
+.. code-block:: shell
+                
+                $ pip install cdpkit
+                
+If no `wheel <https://packaging.python.org/en/latest/specifications/binary-distribution-format/#binary-distribution-format>`_ file
+for the platform (defined by OS, processor architecture and Python version) the command was executed on is available an on-the-fly build of
+the CDPKit sources is attempted. This will only proceed without errors if a proper build environment has been set up (see next section).
 
-Installing CDPL Python bindings via :program:`pip`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installation via a build of the sources
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To install directly from the GitHub repository:
+For a successful build of the CDPL Python bindings the information given in section `Installation from source`_ also applies
+here. However, since a full-featured CDPKit build is not required the list of requirements is a bit shorter:
+
+=============================  =============  ================================================================================
+Build requirement              Version        Comment
+=============================  =============  ================================================================================
+C++11 compliant compiler       \-             mandatory
+Python interpreter             3.6+           mandatory, implicitly fulfilled
+boost-devel                    1.63+          mandatory
+boost-python3-devel            1.63+          mandatary
+python-devel                   3.6+           mandatory
+NumPy                          1.17+          optional, will be installed automatically (listed as :program:`pip` installation requirement)
+cairo-devel                    1.14+          optional, required for building cairo rendering backend
+=============================  =============  ================================================================================
+
+.. rubric:: Option 1: Build the CDPKit sources deposited on `PyPI <https://pypi.org/project/CDPKit>`_
+
+This will be done automatically if no pre-built binary package is available (see previous section) but can also be enforced by:
 
 .. code-block:: shell
 
-   $  pip install git+https://github.com/molinfo-vienna/CDPKit.git
-
-Alternatively, to install from a local directory containing the CDPKit sources, navigate to the CDPKit source code folder and run:
+                $ pip install cpkit --no-binary :all:
+            
+.. rubric:: Option 2: Installation of the current development version by specifying the GitHub repository URL
 
 .. code-block:: shell
 
-   $  pip install .
+                $ pip install git+https://github.com/molinfo-vienna/CDPKit.git
+
+.. rubric:: Option 3: Installation under specification of a local directory containing the CDPKit sources
+
+Enter (:command:`cd`) the CDPKit source code folder and then from within the folder run
+
+.. code-block:: shell
+                
+                $ pip install .
+

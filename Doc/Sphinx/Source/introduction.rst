@@ -6,8 +6,8 @@ Introduction
 About
 -----
 
-The *Chemical Data Processing Toolkit* (CDPKit) is an open-source cheminformatics toolkit implemented in C++. 
-CDPKit comprises a suite of software tools and a programming library called the *Chemical Data Processing Library* which
+*CDPKit* (short for *Chemical Data Processing Toolkit*) is an open-source cheminformatics toolkit implemented in C++. 
+CDPKit comprises a suite of software tools and a programming library called the *Chemical Data Processing Library* (CDPL) which
 provides a high-quality and well-tested modular implementation of basic functionality typically required by any higher-level
 software application in the field of cheminformatics.
 In addition to the CDPL C++ API, an equivalent Python-interfacing layer is provided that allows to harness all of CDPL's
@@ -31,9 +31,9 @@ functionality easily from Python code.
 - 3D structure and conformer generation :cite:`doi:10.1021/acs.jcim.3c00563`
 - Prediction of a wide panel of physicochemical properties
 - Full-blown test-suite compliant implementation of the MMFF94 :cite:`https://doi.org/10.1002/(SICI)1096-987X(199604)17:5/6<490::AID-JCC1>3.0.CO;2-P` force field
-- Works on Linux, macOS and Windows
+- Runs without flaws on Linux, macOS and Windows
 - C++ implementation follows best practices for a maximum of robustness and speed
-- ...
+- ... and many more ...
 
 .. rubric:: Machine Learning Integration
             
