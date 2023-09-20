@@ -75,7 +75,7 @@ sphinxcontrib-bibtex           2.5.5+         optional, required for generating 
 Doxygen                        1.8.5+         optional, required for generating C++ and Python API documentation
 =============================  =============  ================================================================================
 
-.. [#] Tested and recommended compilers are: :program:`gcc` V4.8+, :program:`Apple Clang` V12.0+ , and :program:`MSVC` V1930+
+.. [#] Known to work: :program:`gcc` V4.8+, :program:`Apple Clang` V12.0+ , and :program:`MSVC` V1930+
 
 Build environment setup
 ^^^^^^^^^^^^^^^^^^^^^^^
