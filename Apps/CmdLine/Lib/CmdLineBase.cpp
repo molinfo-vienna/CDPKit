@@ -231,7 +231,7 @@ boost::program_options::typed_value<bool>* CmdLineBase::boolSwitch(bool* v)
 
 const char* CmdLineBase::getProgVersion() const
 {
-    return 0;
+    return CDPL_VERSION_STRING;
 }
 
 const char* CmdLineBase::getProgCopyright() const
@@ -242,15 +242,14 @@ const char* CmdLineBase::getProgCopyright() const
 std::string CmdLineBase::getProgTitleString() const
 {
     std::string title(getProgName());
-    const char* prog_ver = getProgVersion();
 
-    if (prog_ver) {
+    if (getProgVersion()) {
         title += " v";
-        title += prog_ver;
+        title += getProgVersion();
     }
     
     if (getProgCopyright()) {
-        title += " (c) ";
+        title += " (C) ";
         title += getProgCopyright();
     }
 
@@ -407,10 +406,11 @@ void CmdLineBase::openLogFile()
 
 void CmdLineBase::printVersion() const
 {
-    std::cerr << getProgTitleString() << " (CDPKit Version: " <<  CDPL_VERSION_STRING 
-              << ", Build Time: " << CDPL_BUILD_TIME << ", Compiler: " << CDPL_COMPILER_ID 
-              << " " << CDPL_COMPILER_VERSION
-              << " on " << CDPL_BUILD_SYSTEM << ")" << std::endl;
+    std::cerr << getProgTitleString() 
+              << " (Compiler: " << CDPL_COMPILER_ID << " " << CDPL_COMPILER_VERSION 
+              << ", Build OS: " << CDPL_BUILD_SYSTEM 
+              << ", Build Date: " << ((CDPL_BUILD_TIME / 1000000) % 100) << '/' << ((CDPL_BUILD_TIME / 10000) % 100) << '/' << (CDPL_BUILD_TIME / 100000000)
+              << ")" << std::endl;
 }
 
 void CmdLineBase::printHelp(const char* bin_path, const std::string& what) const
