@@ -24,7 +24,7 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}/MessagePack" "${CDPKIT_EXTERNAL_DIR}/MMTF")
 
 IF(MSVC)
-  CONFIGURE_FILE(ResidueDictionaryStructureData.rc.in ResidueDictionaryStructureData.rc @ONLY)
+  CONFIGURE_FILE(ResidueDictionaryStructureData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/ResidueDictionaryStructureData.rc" @ONLY)
 ELSE()
   ADD_CUSTOM_COMMAND(OUTPUT ResidueDictionaryStructureData.cdf.str
     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 

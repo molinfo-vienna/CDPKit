@@ -29,7 +29,7 @@ SET(DATA_FILES
    )
 
 IF(MSVC)
-  CONFIGURE_FILE(FragmentLibraryData.rc.in FragmentLibraryData.rc @ONLY)
+  CONFIGURE_FILE(FragmentLibraryData.rc.in "${CMAKE_CURRENT_BINARY_DIR}/FragmentLibraryData.rc" @ONLY)
 ELSE()
   SET(DATA_FILES ${DATA_FILES} FragmentLibrary.cfl)
 ENDIF()
