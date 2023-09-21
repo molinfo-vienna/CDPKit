@@ -26,10 +26,10 @@ SET(CXX_API_DOC_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
 CONFIGURE_FILE(Doxyfile.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
 CONFIGURE_FILE(Doxyfile-xml.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-xml" @ONLY)
-CONFIGURE_FILE(CopyHeaderFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopyHeaderFiles.cmake" @ONLY)
+CONFIGURE_FILE(CopyDocSourceFiles.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake" @ONLY)
 
 ADD_CUSTOM_TARGET(copy-c++-api-doc-sources
-  ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyHeaderFiles.cmake"
+  ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyDocSourceFiles.cmake"
   COMMENT "-- Copying CDPL C++ API documentation source files...")
 
 ADD_CUSTOM_TARGET(c++-api-doc
