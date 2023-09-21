@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief The header to include for \e %CDPL configuration information.
+ * \brief Provides \e %CDPKit build configuration information.
  */
 
 #ifndef CDPL_CONFIG_HPP

@@ -23,7 +23,7 @@
 
 /**
  * \file
- * \brief The header to include for \e %CDPL version and build time information.
+ * \brief Provides \e %CDPKit version information.
  */
 
 #ifndef CDPL_VERSION_HPP
