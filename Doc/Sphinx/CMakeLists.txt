@@ -50,25 +50,33 @@ IF(SPHINX_FOUND)
     "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMENT "-- Running Sphinx...")
 
-  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSources.cmake"
+  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSourceFiles.cmake"
     "FILE(COPY \"${SPHINX_SOURCE_DIR}\" DESTINATION \"${CMAKE_CURRENT_BINARY_DIR}\" PATTERN *.in EXCLUDE PATTERN *~ EXCLUDE)\n"
     "FILE(COPY \"${SPHINX_PROC_SOURCE_DIR}/\" DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}\")")
 
   ADD_CUSTOM_TARGET(copy-sphinx-sources
     ${CMAKE_COMMAND} -E rm -r -f "${SPHINX_BUILD_SOURCE_DIR}"
-    COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSources.cmake"
+    COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSourceFiles.cmake"
     COMMENT "-- Copying Sphinx source files...")
 
-  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceFiles.cmake"
+  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"
     "FILE(GLOB SOURCE_FILES \"${CDPKIT_EXAMPLES_DIR}/C++/*.cpp\" \"${CDPKIT_EXAMPLES_DIR}/Python/*.py\")\n"
     "FILE(COPY \$\{SOURCE_FILES\} DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/examples\")")
 
-  ADD_CUSTOM_TARGET(copy-example-files 
-    ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceFiles.cmake"
+  ADD_CUSTOM_TARGET(copy-sphinx-example-files 
+    ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceCodeFiles.cmake"
     COMMENT "-- Copying example source code files...")
 
-  ADD_DEPENDENCIES(copy-example-files copy-sphinx-sources)
-  ADD_DEPENDENCIES(sphinx-doc copy-sphinx-sources copy-example-files)
+  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyGraphicsFiles.cmake"
+    "FILE(COPY \"${CDPKIT_DOC_GRAPHICS_DIR}/\" DESTINATION \"${SPHINX_BUILD_SOURCE_DIR}/graphics\")")
+
+  ADD_CUSTOM_TARGET(copy-sphinx-graphics-files 
+    ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyGraphicsFiles.cmake"
+    COMMENT "-- Copying graphics files...")
+
+  ADD_DEPENDENCIES(copy-sphinx-example-files copy-sphinx-sources)
+  ADD_DEPENDENCIES(copy-sphinx-graphics-files copy-sphinx-sources)
+  ADD_DEPENDENCIES(sphinx-doc copy-sphinx-sources copy-sphinx-example-files copy-sphinx-graphics-files)
   
   CONFIGURE_FILES("${SPHINX_SOURCE_DIR}" "${SPHINX_PROC_SOURCE_DIR}")
 ENDIF(SPHINX_FOUND)

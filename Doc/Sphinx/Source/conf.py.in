@@ -61,7 +61,8 @@ extensions = [
     'sphinx_rtd_theme',
     'sphinxcontrib.bibtex',
     'sphinx_inline_tabs',
-    'docs_versions_menu'
+    'docs_versions_menu',
+    'sphinx_sitemap',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -113,3 +114,6 @@ bibtex_reference_style = 'label'
 docs_versions_menu_conf = {
     'github_project_url': 'https://github.com/molinfo-vienna/CDPKit'
 }
+
+html_baseurl = 'https://cdpkit.org/v@CDPKIT_VERSION@/'
+sitemap_url_scheme = "{link}"

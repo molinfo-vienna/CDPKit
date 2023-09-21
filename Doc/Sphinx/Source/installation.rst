@@ -1,3 +1,5 @@
+.. _cdpkit_installation:
+
 Installing CDPKit
 =================
 
@@ -71,6 +73,7 @@ cairo-devel                    1.14+          optional, required for building ca
 Sphinx                         4.5+           optional, required for generating CDPKit documentation pages
 sphinx-rtd-theme               1.0.0+         optional, required for generating CDPKit documentation pages
 sphinx-inline-tabs             2021.4.11b8+   optional, required for generating CDPKit documentation pages
+sphinx-sitemap                 2.5.1+         optional, required for generating CDPKit documentation pages
 sphinxcontrib-bibtex           2.5.5+         optional, required for generating CDPKit documentation pages
 Doxygen                        1.8.5+         optional, required for generating C++ and Python API documentation
 =============================  =============  ================================================================================
@@ -245,6 +248,8 @@ will install CDPKit in a platform specific default directory (Linux: :file:`/opt
 Windows: :file:`C:\\Program Files`). A different installation location can be specified by the argument
 *-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>* on the :program:`cmake` command line (see :ref:`above <build_system_config>`).
 
+.. index:: pip, PyPI
+ 
 .. _install_via_pip:
 
 Installation using :program:`pip`

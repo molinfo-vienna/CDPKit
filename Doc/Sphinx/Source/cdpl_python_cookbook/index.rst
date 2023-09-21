@@ -1,3 +1,5 @@
+.. index:: Code Snippets, Examples
+   
 CDPL Python Cookbook
 ====================
 

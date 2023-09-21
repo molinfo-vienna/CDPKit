@@ -43,6 +43,7 @@ Build requirements and dependencies:
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
 - sphinx-inline-tabs (optional)
+- sphinx-sitemap (optional)
 - sphinxcontrib-bibtex (optional)
 - docs-versions-menu (optional)
 - doxygen (V >= 1.8.5, optional)
