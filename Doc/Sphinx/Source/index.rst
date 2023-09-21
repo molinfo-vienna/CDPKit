@@ -7,7 +7,7 @@ Welcome to the CDPKit Documentation Pages
 
    introduction
    Installation <installation>
-   Applications <applications>
+   Applications <applications/index>
    cdpl_python_tutorial/index
    cdpl_python_cookbook/index
    cdpl_api_doc
