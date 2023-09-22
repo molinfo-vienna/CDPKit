@@ -478,18 +478,18 @@ const char* ConfGenImpl::getProgAboutText() const
 void ConfGenImpl::addOptionLongDescriptions()
 {
     StringList formats;
-    std::string formats_str = "Supported Input Formats:\n";
+    std::string formats_str = "Supported Input Formats:";
 
     CmdLineLib::getSupportedInputFormats<CDPL::Chem::Molecule>(std::back_inserter(formats));
 
     for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append(" - ").append(*it).push_back('\n');
+        formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("input-format", 
                              "Allows to explicitly specify the format of the input file(s) by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
                              "(because missing, misleading or not supported).");
 
     formats_str.pop_back();
@@ -499,18 +499,18 @@ void ConfGenImpl::addOptionLongDescriptions()
                              formats_str);
 
     formats.clear();
-    formats_str = "Supported Output Formats:\n";
+    formats_str = "Supported Output Formats:";
 
     CmdLineLib::getSupportedOutputFormats<CDPL::Chem::MolecularGraph>(std::back_inserter(formats));
 
     for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append(" - ").append(*it).push_back('\n');
+        formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("output-format", 
                              "Allows to explicitly specify the output format by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported)." +
                              "\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
 
@@ -518,7 +518,7 @@ void ConfGenImpl::addOptionLongDescriptions()
                              "Allows to explicitly specify the output format by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported).");
 
     formats_str.pop_back();
@@ -526,7 +526,7 @@ void ConfGenImpl::addOptionLongDescriptions()
     addOptionLongDescription("output", 
                              "Specifies the output file where the generated conformers will be stored.\n\n" +
                              formats_str +
-                             "\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
+                             "\n\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
 
     addOptionLongDescription("failed", 
                              "Specifies the output file for molecules where conformer generation failed.\n\n" +

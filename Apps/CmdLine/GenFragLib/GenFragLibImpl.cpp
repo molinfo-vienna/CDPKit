@@ -361,23 +361,23 @@ const char* GenFragLibImpl::getProgAboutText() const
 void GenFragLibImpl::addOptionLongDescriptions()
 {
     StringList formats;
-    std::string formats_str = "Supported Input Formats:\n";
+    std::string formats_str = "Supported Input Formats:";
 
     CmdLineLib::getSupportedInputFormats<CDPL::Chem::Molecule>(std::back_inserter(formats));
 
     for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append(" - ").append(*it).push_back('\n');
+        formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("input", 
                              "When operating in CREATE or UPDATE mode, specifies one or more input file(s) with molecules whose fragments shall be stored in the created fragment library.\n\n" +
                              formats_str +
-                             "In MERGE mode, specifies multiple existing fragment libraries in CDF format.");
+                             "\n\nIn MERGE mode, specifies multiple existing fragment libraries in CDF format.");
 
     addOptionLongDescription("input-format", 
                              "Allows to explicitly specify the format of the input file(s) by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
                              "(because missing, misleading or not supported).");
 }
 

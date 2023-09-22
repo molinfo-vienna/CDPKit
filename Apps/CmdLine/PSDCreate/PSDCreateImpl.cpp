@@ -195,23 +195,23 @@ const char* PSDCreateImpl::getProgAboutText() const
 void PSDCreateImpl::addOptionLongDescriptions()
 {
     StringList formats;
-    std::string formats_str = "Supported Input Formats:\n";
+    std::string formats_str = "Supported Input Formats:";
 
     CmdLineLib::getSupportedInputFormats<CDPL::Chem::Molecule>(std::back_inserter(formats));
 
     for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append(" - ").append(*it).push_back('\n');
+        formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("input", 
                              "Specifies one or more input file(s) with molecules that shall be stored in the created database.\n\n" +
                              formats_str +
-                             "\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
+                             "\n\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
 
     addOptionLongDescription("input-format", 
                              "Allows to explicitly specify the format of the input file(s) by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
                              "(because missing, misleading or not supported).\n"
                              "Note that only storage formats make sense that allow to store atom 3D-coordinates!");
 }

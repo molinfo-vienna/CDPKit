@@ -106,12 +106,12 @@ private:
 
         terminate = !parent->processHit(dbMolIndex - 1, getName(*molecule), molecule, res);
     }
-    
-    ShapeScreenImpl*                     parent;
-    CDPL::Shape::ScreeningProcessor      screeningProc;
-    MoleculePtr                          molecule;
-    std::size_t                          dbMolIndex;
-    bool                                 terminate;
+
+    ShapeScreenImpl*                parent;
+    CDPL::Shape::ScreeningProcessor screeningProc;
+    MoleculePtr                     molecule;
+    std::size_t                     dbMolIndex;
+    bool                            terminate;
 };
 
 
@@ -223,7 +223,7 @@ const char* ShapeScreenImpl::getProgName() const
 
 const char* ShapeScreenImpl::getProgAboutText() const
 {
-    return "Performs a fast shape-based similarity screening of molecule databases.\n\n";
+    return "Performs a fast Gaussian shape-based similarity screening of molecule databases.";
 }
 
 void ShapeScreenImpl::addOptionLongDescriptions()
@@ -232,49 +232,49 @@ void ShapeScreenImpl::addOptionLongDescriptions()
     typedef std::vector<std::string> StringList;
 
     StringList formats;
-    std::string formats_str = "Supported Input Formats:\n";
+    std::string formats_str = "Supported Input Formats:";
 
     CmdLineLib::getSupportedInputFormats<CDPL::Chem::Molecule>(std::back_inserter(formats));
 
     for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append(" - ").append(*it).push_back('\n');
+        formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("query-format", 
                              "Allows to explicitly specify the format of the query molecule file by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
-                             "(because missing, misleading or not supported).");
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
+                             "(because missing, misleading or not supported).\nNote that atom 3D-coordinates are required for shape screening!");
     addOptionLongDescription("database-format", 
                              "Allows to explicitly specify the format of the screening database file by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
-                             "(because missing, misleading or not supported).");
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file(s) "
+                             "(because missing, misleading or not supported).\nNote that atom 3D-coordinates are required for shape screening!");
     formats_str.pop_back();
 
     addOptionLongDescription("query", 
                              "The query molecule input file.\n\n" +
                              formats_str +
-                             "\nNote that atom 3D-coordinates are required for shape screening!");
+                             "\n\nNote that atom 3D-coordinates are required for shape screening!");
     addOptionLongDescription("database", 
                              "The screened database input file.\n\n" +
                              formats_str +
-                             "\nNote that atomic 3D-coordinates are required for shape screening!");
+                             "\n\nNote that atomic 3D-coordinates are required for shape screening!");
 
     formats.clear();
-    formats_str = "Supported Output Formats:\n";
+    formats_str = "Supported Output Formats:";
 
     CmdLineLib::getSupportedOutputFormats<CDPL::Chem::MolecularGraph>(std::back_inserter(formats));
 
     for (StringList::const_iterator it = formats.begin(), end = formats.end(); it != end; ++it)
-        formats_str.append(" - ").append(*it).push_back('\n');
+        formats_str.append("\n - ").append(*it);
 
     addOptionLongDescription("output-format", 
                              "Allows to explicitly specify the hit molecule output file format by providing one of the supported "
                              "file-extensions (without leading dot!) as argument.\n\n" +
                              formats_str +
-                             "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
+                             "\n\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
                              "(because missing, misleading or not supported).");
     formats_str.pop_back();
 
