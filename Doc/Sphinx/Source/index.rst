@@ -10,6 +10,6 @@ Welcome to the CDPKit Documentation Pages
    Applications <applications/index>
    cdpl_python_tutorial/index
    cdpl_python_cookbook/index
-   cdpl_api_doc
+   cdpl_api_doc/index
    bibliography
    genindex

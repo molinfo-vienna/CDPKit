@@ -38,12 +38,16 @@ IF(SPHINX_FOUND)
   
   IF(DOXYGEN_EXECUTABLE)
     ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E rm -r
+      "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/c++_api_doc"
       COMMAND ${CMAKE_COMMAND} -E rename
-      "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/c++_api_doc")
+      "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/c++_api_doc")
 
     ADD_CUSTOM_COMMAND(TARGET doc POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E rm -r
+      "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/python_api_doc"
       COMMAND ${CMAKE_COMMAND} -E rename
-      "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/python_api_doc")
+      "${CMAKE_CURRENT_BINARY_DIR}/Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cdpl_api_doc/python_api_doc")
 
     ADD_DEPENDENCIES(doc c++-api-doc python-api-doc)
   ENDIF(DOXYGEN_EXECUTABLE)
