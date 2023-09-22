@@ -1,5 +1,3 @@
-.. _cdpkit_installation:
-
 Installing CDPKit
 =================
 
@@ -7,20 +5,20 @@ Installing CDPKit
 
 CDPKit can be installed in different ways:
 
-- :ref:`By means of an official binary installer package <install_via_package>`. This
+- :ref:`By means of an official binary installer package <installation_via_installer_package>`. This
   is the best approach for most users. It will provide a full-featured stable CDPKit version
   and pre-built installers are available for most platforms.
 
-- :ref:`Build and install from source <install_from_source>`. This is the best option for users who want the
+- :ref:`Build and install from source <installation_from_source>`. This is the best option for users who want the
   latest-and-greatest features and aren't afraid of compiling C++ code and/or run brand-new software.
   This is also needed for users who run an operating system version for which no installer has been
   provided and for users who wish to contribute to the project.
 
-- :ref:`Installation via pip <install_via_pip>`.
+- :ref:`Installation via pip <installation_using_pip>`.
   :program:`pip` will only install the CDPL Python bindings. This is the best option for users who
   only want to develop or run Python software that uses CDPL functionality.
 
-.. _install_via_package:
+.. _installation_via_installer_package:
 
 Installation via installer package
 ----------------------------------
@@ -46,7 +44,7 @@ software packages have to be installed.
    below the CDPKit installation directory. Furthermore, to enable the use of the CDPL Python bindings, the **PYTHONPATH** environment variable
    must include the full path to the corresponding :file:`Python` subfolder. 
 
-.. _install_from_source:
+.. _installation_from_source:
 
 Installation from source
 ------------------------
@@ -109,8 +107,6 @@ Recommended sources for the software packages listed above are:
 - *boost*: https://sourceforge.net/projects/boost/files/boost-binaries
 - *cairo*: https://github.com/preshing/cairo-windows
 - *Doxygen*: https://www.doxygen.nl/download.html
-
-.. _build_system_config:
 
 Build system configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -246,12 +242,12 @@ If the previous steps proceeded without errors
 
 will install CDPKit in a platform specific default directory (Linux: :file:`/opt`, macOS: :file:`/Users/Shared`, and
 Windows: :file:`C:\\Program Files`). A different installation location can be specified by the argument
-*-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>* on the :program:`cmake` command line (see :ref:`above <build_system_config>`).
+*-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>* on the :program:`cmake` command line (see `Build system configuration`_).
 
 .. index:: pip, PyPI
- 
-.. _install_via_pip:
 
+.. _installation_using_pip:
+           
 Installation using :program:`pip`
 ---------------------------------
 
@@ -294,7 +290,8 @@ cairo-devel                    1.14+          optional, required for building ca
 
 .. rubric:: Option 1: Build the CDPKit sources deposited on `PyPI <https://pypi.org/project/CDPKit>`_
 
-This will be done automatically if no pre-built binary package is available (see previous section) but can also be enforced by:
+This will be done automatically if no pre-built binary package is available (see previous section) or can be enforced
+by specifying the argument *--no-binary :all:*:
 
 .. code-block:: shell
 
