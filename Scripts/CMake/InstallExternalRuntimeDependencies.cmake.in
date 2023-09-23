@@ -62,7 +62,7 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     LIST(APPEND EXCLUDE_PATTERNS
       "system32"
       "ms-win-"
-      "/python"
+      "^python"
       "libpython"
       )
   ELSE()

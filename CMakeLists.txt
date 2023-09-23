@@ -437,7 +437,7 @@ IF(WIN32)
   SET(CPACK_NSIS_CONTACT "Thomas Seidel <thomas.seidel@univie.ac.at>")
   SET(CPACK_NSIS_MENU_LINKS
     "${CDPKIT_DOC_INSTALL_DIR}/index.html" "Documentation"
-    "uninstall" "Uninstall"
+    "Uninstall" "Uninstall CDPKit"
     )
 
 ELSEIF(APPLE)
