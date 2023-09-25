@@ -1,4 +1,4 @@
-Plain Molecule Pharmacophores
+Plain molecule pharmacophores
 =============================
 
 .. literalinclude:: /examples/pharm_gen_mol_ph4s.py

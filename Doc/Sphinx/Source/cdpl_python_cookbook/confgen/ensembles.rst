@@ -1,4 +1,4 @@
-Conformer Ensembles
+Conformer ensembles
 ===================
 
 .. literalinclude:: /examples/confgen_ensembles.py

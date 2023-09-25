@@ -1,4 +1,4 @@
-Testing for the Presence of Substructures
+Testing for the presence of substructures
 =========================================
 
 .. literalinclude:: /examples/chem_substruct_filter.py

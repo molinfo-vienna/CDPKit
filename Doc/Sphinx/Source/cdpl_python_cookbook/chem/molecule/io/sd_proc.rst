@@ -1,4 +1,4 @@
-Retrieval and Processing of MDL SD-File Structure Data
+Retrieval and processing of mdl sd-file structure data
 ======================================================
 
 .. literalinclude:: /examples/chem_sd_proc.py

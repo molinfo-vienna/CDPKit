@@ -1,4 +1,4 @@
-Sequential Input
+Sequential input
 ================
 
 .. literalinclude:: /examples/pharm_seq_ph4_input.py

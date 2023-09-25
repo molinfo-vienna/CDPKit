@@ -1,21 +1,22 @@
-Molecular input/output
+Molecular Input/Output
 =======================
 
-Reading Molecules from an Input File
----------------------------------------
+Reading molecules from an input file
+------------------------------------
 
 To kick off your cheminformatics journey, you'll frequently need to read or write molecular data from a variety of file formats.
-Using CDPKit, you can easily read and write molecules from various file formats, including *SDF*, *SMILES*, *MOL*, *MOL2*, *CDF*, and others.
+Using CDPKit, you can easily read and write molecules saved in various file formats, including *SDF*, *SMILES*, *MOL*, *MOL2*, *CDF*, and others.
 
 .. note::
-    The CDF format is a binary format that can be used to store molecules and their associated metadata and is CDPKit's native file format.
+    The CDF format is a binary format and CDPKit's native file format that can be used to store molecules/pharmacophores and their associated metadata
+    in a space and processing time efficient manner.
 
-The `Chem.MoleculeReader <../python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ is versatile and can interpret different types of formats (SDF, SMILES, MOL, MOL2, CDF, etc.), 
-eliminating the need to call a specific reader for each format.
+The class `Chem.MoleculeReader <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ is rather versatile and can read molecules stored in
+different formats (SDF, SMILES, MOL, MOL2, CDF, etc.) thus eliminating the need to call a specific reader for each format.
 Here is a simple example of how to read molecules from an input file:
 
 .. note::
-    The module `CDPL.Chem <../python_api_doc/namespaceCDPL_1_1Chem.html>`_ provides functionality for the processing of chemical data.
+    The module `CDPL.Chem <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_ provides functionality for the processing of chemical data.
 
 .. code-block:: python
 
@@ -45,16 +46,18 @@ Here is a simple example of how to read molecules from an input file:
         except Exception as e: # handle exception raised in case of severe read errors
             sys.exit('Error: reading molecule failed: ' + str(e))
 
+            
     ###########################################################################
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+    
     processMoleculesFromFile("path_to_mol_file.mol2")
 
-Retrieving MDL Structure Data from SD Files
---------------------------------------------
+Retrieving structure data from MDL SD-files
+-------------------------------------------
 
-Sometimes, one might want to read the metadata associated with a molecule in an SD file. CDPKit provides a convenient way to do this shown 
+Sometimes, one might want to read the data associated with a molecule in an SD-file. With CDPKit this can be done easily as shown 
 in the following example:
 
 .. note::
@@ -100,21 +103,23 @@ in the following example:
         except Exception as e: # handle exception raised in case of severe read errors
             sys.exit('Error: reading molecule failed: ' + str(e))
 
+            
     ##########################################################################
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+    
     processStructureDataFromSD("path_to_sd_file.sdf")
 
-Writing Molecules to an Output File
----------------------------------------
-
+Writing molecules to an output file
+-----------------------------------
 
 Once you've processed or analyzed your molecules, you may want to save them to an output file. 
-The format of the output file is determined by its file extension, making it easy to save your molecules in formats such as SDF, MOL, MOL2, CDF, and others.
+In the constructor of the class `Chem.MolecularGraphWriter <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html>`_ the format of the output
+file is determined by its file extension, making it easy to save your molecules in formats such as SDF, MOL, MOL2, CDF, and others.
 
 .. note::
-   Ensure that the file extension you provide matches the desired output format. For instance, use `.sdf` for Structure-Data Files, `.mol` for MDL Molfiles, and so on.
+   Ensure that the file extension you provide matches the standard desired output format. For instance, use `.sdf` for Structure-Data Files, `.mol` for MDL Molfiles, and so on.
 
 Here's a simple example of how to write a list of molecules to an output file:
 
@@ -136,6 +141,7 @@ Here's a simple example of how to write a list of molecules to an output file:
        for mol in mols:
            writer.write(mol)
 
+           
     ###########################################################################
     ###########################################################################
     ###########################################################################
@@ -145,12 +151,12 @@ Here's a simple example of how to write a list of molecules to an output file:
     molsToFiles(mols, "path_to_output_file.sdf")
 
 
-Extracting Atom Environments from Molecules and extract SMILES strings for the environments
---------------------------------------------------------------------------------------------
+Description of structural atom environments as SMILES strings
+-------------------------------------------------------------
 
-
-To understand the local chemical environments around specific atoms in a molecule, we can extract the structural environments of atoms 
-within a given molecular graph and output them as SMILES strings.
+For the extaction of local chemical environments of atoms in a molecular graph CDPKit provides the utility function
+`Chem.getEnvironment <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a342acefab39f6928df4c67c2d86c209a>`_.
+Fur further processing they can, e.g., be output as SMILES strings as shown in the following example.
 
 .. code-block:: python
 
@@ -183,19 +189,21 @@ within a given molecular graph and output them as SMILES strings.
 
                 print('Atom #%s: %s' % (str(mol.getAtomIndex(atom)), smiles))
 
+                
     ###########################################################################
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+    
     mols = [list of BasicMolecules] # Example list of BasicMolecules
     printAtomEnv(mols)
 
-ChEMBL Molecule Standardization and Parent Structure Extraction
-----------------------------------------------------------------
+ChEMBL molecule standardization and parent structure extraction
+---------------------------------------------------------------
 
-
-CDPKit provides a convenient way to standardize molecules using the ChEMBL standardization pipeline. 
-This process can be used to ensure that molecules are represented in a consistent and standardized manner, which is crucial for many cheminformatics tasks.
+CDPKit provides a convenient way to standardize molecules using its implementaion of the ChEMBL standardization pipeline :cite:`Bento2020`. 
+This process ensures that molecules are represented in a consistent and standardized manner, which might be of high relevance
+for downstream processing steps.
 
 .. code-block:: python
 
@@ -287,6 +295,7 @@ This process can be used to ensure that molecules are represented in a consisten
 
         return f'Molecule {mol_id}: forwarded unchanged'
 
+        
     ###########################################################################
     ###########################################################################
     ###########################################################################
@@ -304,19 +313,18 @@ This process can be used to ensure that molecules are represented in a consisten
         print(log_msg)
 
 
-Protonation of Functional Groups 
----------------------------------
+Standardization/prediction of protonation states
+------------------------------------------------
 
-In the realm of computational chemistry and molecular modeling, understanding and predicting the behavior of molecules often hinges on the finer details. 
-One such critical detail is the protonation state of a molecule. 
-Protonation states influence a molecule's charge, conformation, and reactivity, playing a vital role in processes like drug binding, 
-enzymatic reactions, and more.  
+In the realm of computational chemistry and molecular modeling, understanding and predicting the behavior of molecules
+often hinges on the finer details. One such critical detail is the protonation state of the functional groups in a molecule. 
+Protonation states dictate formal charges of atoms and have an impact molecular structure and reactivity and, as a consequence,
+play a vital role in processes like drug binding, enzymatic reactions, and many more.  
 
-.. note::
-    The method `Chem.ProtonationStateStandardizer.standardize <../python_api_doc/classCDPL_1_1Chem_1_1ProtonationStateStandardizer.html>`_
-    implements the protonation state generation algorithm.
-
-In the following code snippet we will show how to protonate/deprotonate functional groups of a molecule for a given pH value and ionic strength.
+The class `Chem.ProtonationStateStandardizer <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ProtonationStateStandardizer.html>`_
+implements several protonation state generation flavors.
+In the following code snippet we will show how to generate protonation/formal charge states of acidic and basic function groups
+likely at physiological conditions.
 
 .. code-block:: python
 
@@ -328,53 +336,47 @@ In the following code snippet we will show how to protonate/deprotonate function
     # implements the protonation state generation algorithm
     prot_state_gen = Chem.ProtonationStateStandardizer()
     
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            # compose a simple molecule identifier
-            mol_id = Chem.getName(mol).strip() 
+    # process molecules one after the other
+    for mol in mols:
+        # compose a simple molecule identifier
+        mol_id = Chem.getName(mol).strip() 
 
-            if mol_id == '':
-                mol_id = '#' + str(i) # fallback if name is empty
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+        if mol_id == '':
+            mol_id = '#' + str(i) # fallback if name is empty
+        else:
+            mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
-            try:
-                # protonate/deprotonate functional groups for phys. conditions
-                prot_state_gen.standardize(mol, Chem.ProtonationStateStandardizer.PHYSIOLOGICAL_CONDITION_STATE)
+        try:
+            # protonate/deprotonate functional groups for phys. conditions
+            prot_state_gen.standardize(mol, Chem.ProtonationStateStandardizer.PHYSIOLOGICAL_CONDITION_STATE)
 
-                # enforce an update of the molecule components list (structure might have changed)
-                Chem.perceiveComponents(mol, True)
+            # enforce an update of the molecule components list (structure might have changed)
+            Chem.perceiveComponents(mol, True)
                 
-            except Exception as e:
-                sys.exit('Error: processing or output of molecule %s failed: %s' % (mol_id, str(e)))
-
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        except Exception as e:
+            sys.exit('Error: processing or output of molecule %s failed: %s' % (mol_id, str(e)))
 
     writer.close()
 
 
-Molecular Conformation and Generation
-======================================
+3D Structure and Conformer Ensemble Generation
+==============================================
 
-Molecular conformation refers to the spatial arrangement of atoms in a molecule. Each distinct spatial arrangement is a unique conformation. 
-In the realm of cheminformatics and molecular modeling, the ability to generate and analyze different conformations of a molecule is crucial. 
-This is especially important in drug design, where the biological activity of a molecule can be highly dependent on its conformation.
+In chemistry, conformational isomerism is a form of stereoisomerism in which the isomers can be interconverted just by rotations about formally single
+bonds. While any two arrangements of atoms in a molecule that differ by rotation about single bonds can be referred to as different conformations,
+conformations that correspond to local minima on the potential energy surface are specifically called conformational isomers or conformers.
 
-One of the notable conformation generation tools included in the CDPKit is `CONFORGE`. For details on its implementation, uses, and performance
+In the realm of cheminformatics and molecular modeling many methods and algorithms require 3D structures or even whole
+conformer ensembles as input. 
+For a seamless integration with such methods CDPKit provides functionality in package `CDPL.ConfGen <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_ that allows 
+to generate both single low-energy 3D structures and diverse conformer ensembles solely from connection table information.
+The high-quality conformer ensemble generation tool included in CDPKit is called *CONFORGE*. For details on its implementation and performance
 see :cite:`doi:10.1021/acs.jcim.3c00563`.
 
-.. note::
-    The module CDPL.ConfGen provides functionality for the generation of conformation ensembles in own scripts.
+Generating single low-energy 3D structures
+------------------------------------------
 
-Generating low-energy 3D Conformations
----------------------------------------
-
-
-This process involves generating 3D structures for molecules that may initially be represented in a 2D format. 
-
-Here's how you can generate low-energy 3D conformations for a molecule:
+Here's how you can generate a single low-energy 3D structure for a molecule:
 
 .. code-block:: python
 
@@ -406,12 +408,12 @@ Here's how you can generate low-energy 3D conformations for a molecule:
         # return status code
         return status
 
+        
     ###########################################################################
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
 
-    #Flags
     max_time = 3600 # Max. allowed molecule processing time in seconds (default: 3600 sec)
 
     mols = [list of BasicMolecules]  # Example list of BasicMolecules
@@ -441,50 +443,44 @@ Here's how you can generate low-energy 3D conformations for a molecule:
                       ConfGen.ReturnCode.TORSION_DRIVING_FAILED         : 'torsion driving failed',
                       ConfGen.ReturnCode.CONF_GEN_FAILED                : 'conformer generation failed' }
     
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            # compose a simple molecule identifier
-            mol_id = Chem.getName(mol).strip() 
+    # process molecules one after the other 
+    for mol in mols:
+        # compose a simple molecule identifier
+        mol_id = Chem.getName(mol).strip() 
 
-            if mol_id == '':
-                mol_id = '#' + str(i) # fallback if name is empty
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+        if mol_id == '':
+            mol_id = '#' + str(i) # fallback if name is empty
+        else:
+            mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
-            try:
-                # generate 3D structure of the read molecule
-                status = generate3dConformation(mol, struct_gen) 
+        try:
+            # generate 3D structure of the read molecule
+            status = generate3dConformation(mol, struct_gen) 
 
-                # check for severe error reported by status code
-                if status == ConfGen.ReturnCode.SUCCESS:
-                    # enforce the output of 3D coordinates in case of MDL file formats
-                    Chem.setMDLDimensionality(mol, 3)
+            # check for severe error reported by status code
+            if status == ConfGen.ReturnCode.SUCCESS:
+                # enforce the output of 3D coordinates in case of MDL file formats
+                Chem.setMDLDimensionality(mol, 3)
 
-                    # output the generated 3D structure                    
-                    if not writer.write(mol):   
-                        sys.exit('Error: writing 3D structure of molecule %s failed' % mol_id)
+                # output the generated 3D structure                    
+                if not writer.write(mol):   
+                    sys.exit('Error: writing 3D structure of molecule %s failed' % mol_id)
                         
-            except Exception as e:
-                sys.exit('Error: 3D structure generation or output for molecule %s failed: %s' % (mol_id, str(e)))
-
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        except Exception as e:
+            sys.exit('Error: 3D structure generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
     writer.close()
 
-Generating Conformation Ensembles
----------------------------------------
+Generating conformer ensembles
+------------------------------
 
-Sometimes, it's beneficial to generate multiple conformations for a molecule to capture its flexibility and understand its preferred orientations in 
-various environments.
+For some applications it is necessary to generate multiple conformations for a molecule, e.g. to assess its flexibility or investigate binding 
+capabilities towards a particular target receptor.
 
-The function generate_conformation_ensembles() generates a conformation ensemble for a given molecule using the provided initialized 
-`ConfGen.ConformerGenerator instance <../python_api_doc/classCDPL_1_1ConfGen_1_1ConformerGenerator.html>`_.
-The flags min_rmsd, e_window, and max_confs are used to control the output conformer ensemble size and the conformation quality.
-They can be set at the beginning of the example script to the desired values. 
-
-Here's how to generate conformation ensembles for a molecule:
+The function ``generate_conformation_ensembles()`` generates a conformer ensemble for a given molecule using the an initialized 
+instance of class `ConfGen.ConformerGenerator <../cdpl_api_doc/python_api_doc/classCDPL_1_1ConfGen_1_1ConformerGenerator.html>`_.
+The parameters *min_rmsd*, *e_window*, and *max_confs* are used to control the generated conformer ensemble's diversity, energy and size.
+They can be initialized at the beginning of the example script with the desired values. 
 
 .. code-block:: python
 
@@ -526,12 +522,11 @@ Here's how to generate conformation ensembles for a molecule:
     ###########################################################################
     ################################ Example usage:
 
-    #Flags
+    # Settings
     max_time = 3600 # Max. allowed molecule processing time in seconds (default: 3600 sec)
     min_rmsd = 0.5 # Output conformer RMSD threshold (default: 0.5)
     e_window = 20.0 # Output conformer energy window (default: 20.0)
     max_confs = 100 # Max. output ensemble size (default: 100)
-
 
     mols = [list of BasicMolecules]  # Example list of BasicMolecules
 
@@ -559,52 +554,51 @@ Here's how to generate conformation ensembles for a molecule:
                       ConfGen.ReturnCode.FRAGMENT_ALREADY_PROCESSED     : 'fragment already processed',
                       ConfGen.ReturnCode.TORSION_DRIVING_FAILED         : 'torsion driving failed',
                       ConfGen.ReturnCode.CONF_GEN_FAILED                : 'conformer generation failed' }
-    
-    
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            # compose a simple molecule identifier
-            mol_id = Chem.getName(mol).strip() 
 
-            if mol_id == '':
-                mol_id = '#' + str(i) # fallback if name is empty
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+   
+    # process molecules one after the other
+    for mol in mols:
+        # compose a simple molecule identifier
+        mol_id = Chem.getName(mol).strip() 
 
-            try:
-                # generate conformer ensemble for read molecule
-                status, num_confs = generateConformationEnsembles(mol, conf_gen) 
+        if mol_id == '':
+            mol_id = '#' + str(i) # fallback if name is empty
+        else:
+            mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
-                # output generated ensemble (if available)
-                if num_confs > 0:
-                    if not writer.write(mol):   
-                        sys.exit('Error: output of conformer ensemble for molecule %s failed' % mol_id)
+        try:
+            # generate conformer ensemble for read molecule
+            status, num_confs = generateConformationEnsembles(mol, conf_gen) 
+
+            # output generated ensemble (if available)
+            if num_confs > 0:
+                if not writer.write(mol):   
+                    sys.exit('Error: output of conformer ensemble for molecule %s failed' % mol_id)
                         
-            except Exception as e:
-                sys.exit('Error: conformer ensemble generation or output for molecule %s failed: %s' % (mol_id, str(e)))
-
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        except Exception as e:
+            sys.exit('Error: conformer ensemble generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
     writer.close()
 
 
 Pharmacophore Generation and Processing
-========================================
+=======================================
 
-This section is about the processing of pharmacophore models.
-The pharmacophore concept is widely used in drug design and cheminformatics to understand the
-interactions between ligands and their biological targets.
+This section is about the generation and processing of pharmacophore models.
+The pharmacophore concept is widely used in drug design and cheminformatics and represents a versatile tool to understand and
+describe interactions between ligands and their biological targets.
 
 .. note::
-    The module `CDPL.Pharm <../python_api_doc/namespaceCDPL_1_1Pharm.html>`_ provides functionality for the generation and processing of pharmacophore models. 
-    The possible pharmacophore input fotats are `PML` or `CDF`.
+    Functionality for the generation and processing of pharmacophore models resides in package
+    `CDPL.Pharm <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Pharm.html>`_. 
+    Currently available pharmacophore input/output formats are `LigandScout's <https://www.inteligand.com/ligandscout>`_ *PML* and
+    CDPKit's native *CDF* format.
 
-Ligand-based Pharmacophore Generation using Conformations
-------------------------------------------------------------
-The following example shows how to generate a ligand-based pharmacophore model from a set of molecules
-and output it to a PML file.
+Pharmacophore generation for single-conformer molecules
+-------------------------------------------------------
+
+The following example script generates a pharmacophore model for each input molecule
+and outputs the pharmacophore data to a PML file.
 
 .. code-block:: python
 
@@ -623,15 +617,16 @@ and output it to a PML file.
         """
         Pharm.prepareForPharmacophoreGeneration(mol)    # first call utility function preparing the molecule for pharmacophore generation
             
-        ph4_gen = Pharm.DefaultPharmacophoreGenerator()     # create an instance of the pharmacophore generator default implementation
-        ph4 = Pharm.BasicPharmacophore()                    # create an instance of the default implementation of the Pharm.Pharmacophore interface
-        ph4_name = Chem.getName(mol)                        # use the name of the input molecule as pharmacophore name
+        ph4_gen = Pharm.DefaultPharmacophoreGenerator() # create an instance of the pharmacophore generator default implementation
+        ph4 = Pharm.BasicPharmacophore()                # create an instance of the default implementation of the Pharm.Pharmacophore interface
+        ph4_name = Chem.getName(mol)                    # use the name of the input molecule as pharmacophore name
         
         ph4_gen.generate(mol, ph4)          # generate the pharmacophore
         Pharm.setName(ph4, ph4_name)        # set the pharmacophore name
 
         return ph4
 
+        
     ###########################################################################
     ###########################################################################
     ###########################################################################
@@ -640,37 +635,33 @@ and output it to a PML file.
 
     # create writer for the generated pharmacophores (format specified by file extension)
     writer = Pharm.FeatureContainerWriter("path_to_output_file.pml")
-     
-    try:
-        for mol in mols:
-            # compose a simple molecule identifier
-            mol_id = Chem.getName(mol).strip() 
+ 
+    for mol in mols:
+        # compose a simple molecule identifier
+        mol_id = Chem.getName(mol).strip() 
 
-            if mol_id == '':
-                mol_id = '#' + str(i) # fallback if name is empty
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+        if mol_id == '':
+            mol_id = '#' + str(i) # fallback if name is empty
+        else:
+            mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
-                ph4 = generatePharmacophore(mol)         # generate pharmacophore
+        try:
+            ph4 = generatePharmacophore(mol)         # generate pharmacophore
 
-                if not writer.write(ph4):   # output pharmacophore
-                    sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
+            if not writer.write(ph4):   # output pharmacophore
+                sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
                         
-            except Exception as e:
-                sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
-
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        except Exception as e:
+           sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
     writer.close()
 
+Pharmacophore generation for multi-conformer molecules
+------------------------------------------------------
 
-3D Ligand-based Pharmacophore Generation for a set of Conformations
--------------------------------------------------------------------
-
-The following example shows how to generate a ligand-based pharmacophore model from a set of molecules.
-The pharmacophore model is generated using the atom coordinates of the specified conformation of each molecule.
-The name of the pharmacophore is set to the name of the corresponding molecule.
+In the following example script a pharmacophore model for each conformer of the input molecule will be generated.
+The name of the generated pharmacophore is set to the name of the corresponding molecule plus a suffix specifying the
+conformer index.
 
 .. code-block:: python
 
@@ -686,7 +677,7 @@ The name of the pharmacophore is set to the name of the corresponding molecule.
         - conf_idx (int): Index of the conformation to use for the pharmacophore generation.
 
         Returns:
-        - Pharm.Pharmacophore: Pharmacophore of the argument molecule.
+        - Pharm.Pharmacophore: Pharmacophore of the argument molecule using coordinates of the specifies conformer.
         """
         if conf_idx < 1:                                    # for a new molecule
             Pharm.prepareForPharmacophoreGeneration(mol)    # first call utility function preparing the molecule for pharmacophore generation
@@ -694,16 +685,19 @@ The name of the pharmacophore is set to the name of the corresponding molecule.
         ph4_gen = Pharm.DefaultPharmacophoreGenerator()     # create an instance of the pharmacophore generator default implementation
         ph4 = Pharm.BasicPharmacophore()                    # create an instance of the default implementation of the Pharm.Pharmacophore interface
         ph4_name = Chem.getName(mol)                        # use the name of the input molecule as pharmacophore name
-        
-        if conf_idx >= 0:                                   # if mol is a multi-conf. molecule use atom 3D coordinates of the specified conf.
-            ph4_gen.setAtom3DCoordinatesFunction(Chem.AtomConformer3DCoordinatesFunctor(conf_idx))
-            ph4_name += '#' + str(conf_idx)                 # and append conformer index to the pharmacophore name
+
+        # use atom 3D coordinates of the specified conf.
+        ph4_gen.setAtom3DCoordinatesFunction(Chem.AtomConformer3DCoordinatesFunctor(conf_idx)) 
+
+        # append conformer index to the pharmacophore name
+        ph4_name += '#' + str(conf_idx)
             
         ph4_gen.generate(mol, ph4)          # generate the pharmacophore
         Pharm.setName(ph4, ph4_name)        # set the pharmacophore name
 
         return ph4
 
+        
     ###########################################################################
     ###########################################################################
     ###########################################################################
@@ -712,323 +706,39 @@ The name of the pharmacophore is set to the name of the corresponding molecule.
 
     # create writer for the generated pharmacophores (format specified by file extension)
     writer = Pharm.FeatureContainerWriter("path_to_output_file.pml")
-     
-    try:
-        for mol in mols:
-            # compose a simple molecule identifier
-            mol_id = Chem.getName(mol).strip() 
 
-            if mol_id == '':
-                mol_id = '#' + str(i) # fallback if name is empty
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+    for mol in mols:
+       # compose a simple molecule identifier
+       mol_id = Chem.getName(mol).strip() 
 
-            num_confs = Chem.getNumConformations(mol)
-            start_conf_idx = 0
+       if mol_id == '':
+           mol_id = '#' + str(i) # fallback if name is empty
+       else:
+           mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
-            if num_confs == 0:      # test if molecule has conformations
-                start_conf_idx = -1 # if not, make sure conformer loop body gets executed
+       num_confs = Chem.getNumConformations(mol)
 
-            try:
-                for conf_idx in range(start_conf_idx, num_confs): # for each conformer
-                    ph4 = generatePharmacophore(mol, conf_idx)         # generate pharmacophore
+       try:
+           for conf_idx in range(num_confs):               # for each conformer
+               ph4 = generatePharmacophore(mol, conf_idx)  # generate pharmacophore
 
-                    if not writer.write(ph4):   # output pharmacophore
-                        sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
+               if not writer.write(ph4):   # output pharmacophore
+                   sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
                         
-            except Exception as e:
-                sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
-
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+       except Exception as e:
+           sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
     writer.close()
-
-Aligne Ligand-based Pharmacophores for a set of Conformations
--------------------------------------------------------------------
-
-The following example shows how to align a set of ligand-based pharmacophores to a reference pharmacophore.
-The function *readRefPharmacophore()* reads and returns the specified alignment reference pharmacophore.
-The function *genPharmacophore()* generates and returns the pharmacophore of the specified molecule.
-The function *clearFeatureOrientations()* removes feature orientation informations and sets the feature geometry to Pharm.FeatureGeometry.SPHERE.
-The flag pos_only, min_pose_rmsd, exhaustive, and num_out_almnts are used to control the alignment process and can
-be set at the beginning of the example code.
-The flag *pos_only* is used to control if only the position of features is considered during alignment.
-The flag *min_pose_rmsd* is used to control the minimum required RMSD between two consecutively output molecule alignment poses.
-The flag *num_out_almnts* is used to control the number of top-ranked alignment solutions to output per molecule (default: best alignment solution only).
-The flag *exhaustive* is used to control if an exhaustive alignment search is performed.
-
-.. code-block:: python
-
-    import CDPL.Chem as Chem
-    import CDPL.Pharm as Pharm
-
-    def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
-        """
-        Reads and returns the specified alignment reference pharmacophore.
-
-        Parameters:
-        - filename (str): Name of the file containing the reference pharmacophore.
-
-        Returns:
-        - Pharm.Pharmacophore: Reference pharmacophore.
-        """
-        # create pharmacophore reader instance
-        reader = Pharm.PharmacophoreReader(filename)
-
-        # create an instance of the default implementation of the Pharm.Pharmacophore interface
-        ph4 = Pharm.BasicPharmacophore()
-
-        try:
-            if not reader.read(ph4): # read reference pharmacophore
-                sys.exit('Error: reading reference pharmacophore failed')
-                    
-        except Exception as e: # handle exception raised in case of severe read errors
-            sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
-
-        return ph4
-
-    def generatePharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
-        """
-        Generates the pharmacophore of the molecule.
-
-        Parameters:
-        - mol (Chem.Molecule): Molecule to generate a pharmacophore for.
-
-        Returns:
-        - Pharm.Pharmacophore: Pharmacophore of the argument molecule.
-        """
-
-        Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
-            
-        ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
-        ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
-
-        ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
-
-        return ph4
-
-    def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
-        """
-        Removes feature orientation informations and sets the feature geometry to Pharm.FeatureGeometry.SPHERE.
-        
-        Parameters:
-        - ph4 (Pharm.BasicPharmacophore): Pharmacophore to clear.
-        """
-        for ftr in ph4:
-            Pharm.clearOrientation(ftr)
-            Pharm.setGeometry(ftr, Pharm.FeatureGeometry.SPHERE)
-
-    ###########################################################################
-    ###########################################################################
-    ###########################################################################
-    ################################ Example usage:
-
-    # FLAGS
-    pos_only = True # True = only position of features is considered during alignment
-    num_out_almnts = 1 # Number of top-ranked alignment solutions to output per molecule (default: best alignment solution only)
-    min_pose_rmsd = 0.0 # Minimum required RMSD between two consecutively output molecule alignment poses
-    exhaustive = False # Perform an exhaustive alignment search (default: false)
-
-    mols = [list of BasicMolecules]  # Example list of BasicMolecules
-
-    # read the reference pharmacophore
-    ref_ph4 = readRefPharmacophore("path_to_reference_pharmacophore.pml") 
-
-    # create writer for aligned molecules (format specified by file extension)
-    mol_writer = Chem.MolecularGraphWriter("path_to_output_file.sdf") 
-
-    # create instance of class implementing the pharmacophore alignment algorithm
-    almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
-
-    if pos_only:                          # clear feature orientation information
-        clearFeatureOrientations(ref_ph4)
     
-    almnt.addFeatures(ref_ph4, True)               # set reference features (True = first set = reference)
-    almnt.performExhaustiveSearch(exhaustive) # set minimum number of top. mapped feature pairs
-    
-    # create pharmacophore fit score calculator instance
-    almnt_score = Pharm.PharmacophoreFitScore()
-    
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            # compose a simple molecule identifier
-            mol_id = Chem.getName(mol).strip() 
+Generating ligand-receptor interaction pharmacophores
+-----------------------------------------------------
 
-            if mol_id == '':
-                mol_id = '#' + str(i)  # fallback if name is empty
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
-
-            try:
-                mol_ph4 = generatePharmacophore(mol)    # generate input molecule pharmacophore
-
-                if pos_only:                  # clear feature orientation information
-                    clearFeatureOrientations(mol_ph4)
-
-                almnt.clearEntities(False)         # clear features of previously aligned pharmacophore
-                almnt.addFeatures(mol_ph4, False)  # specify features of the pharmacophore to align
-
-                almnt_solutions = []               # stores the found alignment solutions
-                
-                while almnt.nextAlignment():                                     # iterate over all alignment solutions that can be found
-                    score = almnt_score(ref_ph4, mol_ph4, almnt.getTransform())  # calculate alignment score
-                    xform = Math.Matrix4D(almnt.getTransform())                  # make a copy of the alignment transformation (mol. ph4 -> ref. ph4) 
-
-                    almnt_solutions.append((score, xform))
-
-                saved_coords = Math.Vector3DArray()      # create data structure for storing 3D coordinates
-
-                Chem.get3DCoordinates(mol, saved_coords) # save the original atom coordinates
-
-                struct_data = None
-
-                if Chem.hasStructureData(mol):           # get existing structure data if available
-                    struct_data = Chem.getStructureData(mol)
-                else:                                    # otherwise create and set new structure data
-                    struct_data = Chem.StringDataBlock()
-
-                    Chem.setStructureData(mol, strut)
-
-                # add alignment score entry to struct. data
-                struct_data.addEntry('<PharmFitScore>', '') 
-                
-                output_cnt = 0
-                last_pose = None
-                
-                # order solutions by desc. alignment score
-                almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
-
-                # output molecule alignment poses until the max. number of best output solutions has been reached
-                for solution in almnt_solutions:
-                    if output_cnt == num_out_almnts:
-                        break
-
-                    curr_pose = Math.Vector3DArray(saved_coords)
-
-                    Math.transform(curr_pose, solution[1])  # transform atom coordinates
-
-                    # check whether the current pose is 'different enough' from
-                    # the last pose to qualify for output
-                    if min_pose_rmsd > 0.0 and last_pose and Math.calcRMSD(last_pose, curr_pose) < min_pose_rmsd:
-                        continue
-
-                    # apply the transformed atom coordinates
-                    Chem.set3DCoordinates(mol, curr_pose)  
-
-                    # store alignment score in the struct. data entry
-                    struct_data[len(struct_data) - 1].setData(format(solution[0], '.4f'))     
-                    
-                    try:
-                        if not mol_writer.write(mol): # output the alignment pose of the molecule
-                            sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
-
-                    except Exception as e: # handle exception raised in case of severe write errors
-                        sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
-
-                    last_pose = curr_pose
-                    output_cnt += 1
-
-            except Exception as e:
-                sys.exit('Error: pharmacophore alignment of molecule %s failed: %s' % (mol_id, str(e)))
-
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading input molecule failed: ' + str(e))
-
-    mol_writer.close()
-
-Pharmacophore Features and Feature Types
------------------------------------------
-
-Pharmacophore features are abstract representations of molecular features.
-The script below shows how to process the properties of pharmacophore features.
-The function print_pharmacophore_properties() outputs all (available) properties of the features stored in the given feature container.
-E.g. the feature type, geometry, tolerance, weight, and hydrophobicity.
-
-.. code-block:: python
-
-    import CDPL.Chem as Chem
-    import CDPL.Pharm as Pharm
-
-    def print_pharmacophore_properties(ph4: Pharm.FeatureContainer) -> None: 
-        """
-        Outputs all (available) properties of the features stored in the given feature container.
-
-        Parameters:
-        - ph4 (Pharm.FeatureContainer): Feature container to process.
-        """
-        ftr_type_str = { Pharm.FeatureType.UNKNOWN               : 'UNKNOWN',
-                        Pharm.FeatureType.HYDROPHOBIC           : 'HYDROPHOBIC',
-                        Pharm.FeatureType.AROMATIC              : 'AROMATIC',
-                        Pharm.FeatureType.NEGATIVE_IONIZABLE    : 'NEGATIVE_IONIZABLE',
-                        Pharm.FeatureType.POSITIVE_IONIZABLE    : 'POSITIVE_IONIZABLE',
-                        Pharm.FeatureType.H_BOND_DONOR          : 'H_BOND_DONOR',
-                        Pharm.FeatureType.H_BOND_ACCEPTOR       : 'H_BOND_ACCEPTOR',
-                        Pharm.FeatureType.HALOGEN_BOND_DONOR    : 'HALOGEN_BOND_DONOR',
-                        Pharm.FeatureType.HALOGEN_BOND_ACCEPTOR : 'HALOGEN_BOND_ACCEPTOR',
-                        Pharm.FeatureType.EXCLUSION_VOLUME      : 'EXCLUSION_VOLUME' }
-    
-        geom_str = { Pharm.FeatureGeometry.UNDEF   : 'UNDEF',
-                    Pharm.FeatureGeometry.SPHERE  : 'SPHERE',
-                    Pharm.FeatureGeometry.VECTOR  : 'VECTOR',
-                    Pharm.FeatureGeometry.PLANE   : 'PLANE' }
-
-        print('Composition of pharmacophore \'%s\':' % Pharm.getName(ph4))
-
-        for i in range(0, len(ph4)):
-            ftr = ph4[i]
-
-            print(' - Feature #%s:' % str(i))
-            print('  - Type: %s' % ftr_type_str[Pharm.getType(ftr)])
-            print('  - Geometry: %s' % geom_str[Pharm.getGeometry(ftr)])
-            print('  - Tolerance: %s' % Pharm.getTolerance(ftr))
-            print('  - Weight: %s' % Pharm.getWeight(ftr))
-            print('  - Optional: %s' % Pharm.getOptionalFlag(ftr))
-            print('  - Disabled: %s' % Pharm.getDisabledFlag(ftr))
-            print('  - Length: %s' % Pharm.getLength(ftr))
-            print('  - Hydrophobicity: %s' % Pharm.getHydrophobicity(ftr))
-
-            if Chem.has3DCoordinates(ftr):         # Pharm.Feature derives from Chem.Entity3D - therefore a function from the Chem package is used here!
-                print('  - Position: %s' % Chem.get3DCoordinates(ftr))
-    
-            if Pharm.hasOrientation(ftr):
-                print('  - Orientation: %s' % Pharm.getOrientation(ftr))
-
-
-    ###########################################################################
-    ###########################################################################
-    ###########################################################################
-    ################################ Example usage:
-
-    # create reader for input pharmacophores (format specified by file extension)
-    reader = Pharm.PharmacophoreReader("path_to_input_file.pml") 
-
-    # create an instance of the default implementation of the Pharm.Pharmacophore interface
-    ph4 = Pharm.BasicPharmacophore()
-
-    # read and process pharmacophores one after the other until the end of input has been reached
-    try:
-        while reader.read(ph4):
-            try:
-                print_pharmacophore_properties(ph4)
-            except Exception as e:
-                sys.exit('Error: processing of pharmacophore failed: ' + str(e))
-                
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading pharmacophore failed: ' + str(e))
-
-
-3D Structure-based Pharmacophore Generation
---------------------------------------------
-
-The following example shows how to generate a 3D structure-based pharmacophore model from a set of molecules.
-It also reads and preprocesses the specified receptor structure.
+The following example shows how to generate 3D pharmacophore models that describe observed interactions between
+a molecule and surrounding residues in a receptor's binding site.
+The script also demonstrates how to read and preprocess biological macromolecules.
 
 .. note::
-    The receptor structure can be in the format `*.mol2, *.pdb, *.mmtf`
-
-
+    The receptor structure can be provided in the formats \*.mol2, \*.pdb, or \*.mmtf
 
 .. code-block:: python
 
@@ -1054,12 +764,13 @@ It also reads and preprocesses the specified receptor structure.
         sup_fmts = [ Chem.DataFormat.MOL2,
                     Biomol.DataFormat.PDB,
                     Biomol.DataFormat.MMTF ]
-                            
-        if reader.getDataFormat() not in sup_fmts:   # check if the format is supported by this script 
+
+        # check if the format is supported by this script 
+        if reader.getDataFormat() not in sup_fmts:   
             sys.exit('Error: receptor input file format \'%s\' not supported' % name_and_ext[1])
 
         rec_mol = Chem.BasicMolecule()    # create an instance of the default implementation of the
-                                        # Chem.Molecule interface that will store the receptor struct.
+                                          # Chem.Molecule interface that will store the receptor struct.
         try:
             if not reader.read(rec_mol):  # read receptor structure
                 sys.exit('Error: reading receptor structure failed')
@@ -1107,77 +818,349 @@ It also reads and preprocesses the specified receptor structure.
 
         return rec_mol
 
+        
     ###########################################################################
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
-    # Flags
+    
+    # Settings
     strip_res_list = False # Whitespace separated list of PDB three-letter codes specifying residues to remove from the receptor structure (e.g. an existing ligand)
-    gen_x_vols = False # Generate exclusion volume spheres on pharm. feature atoms of interacting residues
+    gen_x_vols = False     # Generate exclusion volume spheres on pharm. feature atoms of interacting residues
     
     
-    lig_mols = [list of BasicMolecules]  # Example list of BasicMolecules
+    lig_mols = [list of BasicMolecules]  # Example list of ligand molecules
 
-    rec_mol = processReceptorStructure(path_to_receptor_structure_file, strip_res_list)          # read and preprocess the receptor structure
-    ph4_writer = Pharm.FeatureContainerWriter("path_to_pha_file.pml") # create writer for the generated pharmacophores (format specified by file extension)
+    rec_mol = processReceptorStructure(path_to_receptor_structure_file, strip_res_list)  # read and preprocess the receptor structure
+    ph4_writer = Pharm.FeatureContainerWriter("path_to_pha_file.pml")                    # create writer for the generated pharmacophores
+                                                                                         # (format specified by file extension)
 
     ia_ph4 = Pharm.BasicPharmacophore()     # create an instance of the default implementation of the Pharm.Pharmacophore
                                             # interface that will store the generated pharmacophores
 
     ph4_gen = Pharm.InteractionPharmacophoreGenerator() # create an instance of the pharmacophore generator
 
-    ph4_gen.addExclusionVolumes(gen_x_vols)        # specify whether to generate exclusion volume spheres 
-                                                        # on pharm. feature atoms of interacting residues
-    try:
+    ph4_gen.addExclusionVolumes(gen_x_vols) # specify whether to generate exclusion volume spheres 
+                                            # on pharm. feature atoms of interacting residues
 
-        # read and process ligand molecules one after the other until the end of input has been reached (or a severe error occurs)
-        for lig_mol in lig_reader:
-            mol_id = Chem.getName(lig_mol).strip() # compose a simple ligand identifier for messages
+    # process ligand molecules one after the other 
+    for lig_mol in lig_mols:
+        mol_id = Chem.getName(lig_mol).strip() # compose a simple ligand identifier for messages
 
-            if mol_id == '':
-                mol_id = '#' + str(i)  # fallback if name is empty or not available
-            else:
-                mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+        if mol_id == '':
+            mol_id = '#' + str(i)  # fallback if name is empty or not available
+        else:
+            mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+
+        try:
+            Pharm.prepareForPharmacophoreGeneration(lig_mol) # make ligand ready for pharm. generation
+
+            ph4_gen.generate(lig_mol, rec_mol, ia_ph4, True) # generate the pharmacophore (True = extract ligand environment residues on-the-fly)
 
             try:
-                Pharm.prepareForPharmacophoreGeneration(lig_mol) # make ligand ready for pharm. generation
-
-                ph4_gen.generate(lig_mol, rec_mol, ia_ph4, True) # generate the pharmacophore (True = extract ligand environment residues on-the-fly)
-
-                try:
-                    if not ph4_writer.write(ia_ph4): # output pharmacophore
-                        sys.exit('Error: writing interaction pharmacophore of molecule %s failed: %s' % (mol_id, str(e)))
-
-                except Exception as e:               # handle exception raised in case of severe write errors
+                if not ph4_writer.write(ia_ph4): # output pharmacophore
                     sys.exit('Error: writing interaction pharmacophore of molecule %s failed: %s' % (mol_id, str(e)))
-                
-            except Exception as e:                   # handle exception raised in case of severe processing errors
-                sys.exit('Error: interaction pharmacophore generation for molecule %s failed: %s' % (mol_id, str(e)))
 
-    except Exception as e:                           # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule %s failed: %s' % (str(i), str(e)))
+            except Exception as e:               # handle exception raised in case of severe write errors
+                sys.exit('Error: writing interaction pharmacophore of molecule %s failed: %s' % (mol_id, str(e)))
+                
+        except Exception as e:                   # handle exception raised in case of severe processing errors
+            sys.exit('Error: interaction pharmacophore generation for molecule %s failed: %s' % (mol_id, str(e)))
 
     ph4_writer.close()
 
+Alignment of molecules to a reference pharmacophore
+---------------------------------------------------
 
-Calculation of Atom and Bond Properties
-========================================
+The following example shows how to align a set of molecules to a reference pharmacophore.
+
+The function ``readRefPharmacophore()`` reads the reference pharmacophore from a specified file.
+The function ``genPharmacophore()`` generates and returns the pharmacophore of a molecule.
+The function ``clearFeatureOrientations()`` removes feature orientation information and sets the feature geometry to ``Pharm.FeatureGeometry.SPHERE``.
+
+The following variables control the alignment process and reported results:
+
+- **pos_only**: Controls whether only the position of features is considered during alignment
+- **min_pose_rmsd**: Controls the minimum required RMSD between two consecutively output molecule alignment poses
+- **num_out_almnts**: Is used to control the number of top-ranked alignment solutions to output per molecule (default: best alignment solution only)
+- **exhaustive**: Specifies whether an exhaustive alignment search should be performed
+
+.. code-block:: python
+
+    import CDPL.Chem as Chem
+    import CDPL.Pharm as Pharm
+
+    def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
+        """
+        Reads and returns the specified alignment reference pharmacophore.
+
+        Parameters:
+        - filename (str): Name of the file storing the reference pharmacophore.
+
+        Returns:
+        - Pharm.Pharmacophore: Reference pharmacophore.
+        """
+        # create pharmacophore reader instance
+        reader = Pharm.PharmacophoreReader(filename)
+
+        # create an instance of the default implementation of the Pharm.Pharmacophore interface
+        ph4 = Pharm.BasicPharmacophore()
+
+        try:
+            if not reader.read(ph4): # read reference pharmacophore
+                sys.exit('Error: reading reference pharmacophore failed')
+                    
+        except Exception as e: # handle exception raised in case of severe read errors
+            sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
+
+        return ph4
+
+    def generatePharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
+        """
+        Generates the pharmacophore of the given molecule.
+
+        Parameters:
+        - mol (Chem.Molecule): Molecule to generate a pharmacophore for.
+
+        Returns:
+        - Pharm.Pharmacophore: Pharmacophore of the argument molecule.
+        """
+
+        Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
+            
+        ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
+        ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
+
+        ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
+
+        return ph4
+
+    def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
+        """
+        Removes feature orientation informations and sets the feature geometry to Pharm.FeatureGeometry.SPHERE.
+        
+        Parameters:
+        - ph4 (Pharm.BasicPharmacophore): Pharmacophore to edit.
+        """
+        for ftr in ph4:
+            Pharm.clearOrientation(ftr)
+            Pharm.setGeometry(ftr, Pharm.FeatureGeometry.SPHERE)
+
+            
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ################################ Example usage:
+
+    # Settings
+    pos_only = True     # True = only position of features is considered during alignment
+    num_out_almnts = 1  # Number of top-ranked alignment solutions to output per molecule (default: best alignment solution only)
+    min_pose_rmsd = 0.0 # Minimum required RMSD between two consecutively output molecule alignment poses
+    exhaustive = False  # Perform an exhaustive alignment search (default: False)
+
+    mols = [list of BasicMolecules]  # Example list of BasicMolecules
+
+    # read the reference pharmacophore
+    ref_ph4 = readRefPharmacophore("path_to_reference_pharmacophore.pml") 
+
+    # create writer for aligned molecules (format specified by file extension)
+    mol_writer = Chem.MolecularGraphWriter("path_to_output_file.sdf") 
+
+    # create instance of class implementing the pharmacophore alignment algorithm
+    almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
+
+    if pos_only:                          # clear feature orientation information
+        clearFeatureOrientations(ref_ph4)
+    
+    almnt.addFeatures(ref_ph4, True)               # set reference features (True = first set = reference)
+    almnt.performExhaustiveSearch(exhaustive) # set minimum number of top. mapped feature pairs
+    
+    # create pharmacophore fit score calculator instance
+    almnt_score = Pharm.PharmacophoreFitScore()
+    
+    # process molecules one after the other
+    for mol in mols:
+        # compose a simple molecule identifier
+        mol_id = Chem.getName(mol).strip() 
+
+        if mol_id == '':
+            mol_id = '#' + str(i)  # fallback if name is empty
+        else:
+            mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
+
+        try:
+            mol_ph4 = generatePharmacophore(mol)    # generate input molecule pharmacophore
+
+            if pos_only:                            # clear feature orientation information
+                clearFeatureOrientations(mol_ph4)
+
+            almnt.clearEntities(False)         # clear features of previously aligned pharmacophore
+            almnt.addFeatures(mol_ph4, False)  # specify features of the pharmacophore to align
+
+            almnt_solutions = []               # stores the found alignment solutions
+                
+            while almnt.nextAlignment():                                     # iterate over all alignment solutions that can be found
+                score = almnt_score(ref_ph4, mol_ph4, almnt.getTransform())  # calculate alignment score
+                xform = Math.Matrix4D(almnt.getTransform())                  # make a copy of the alignment transformation (mol. ph4 -> ref. ph4) 
+
+                almnt_solutions.append((score, xform))
+
+            saved_coords = Math.Vector3DArray()      # create data structure for storing 3D coordinates
+
+            Chem.get3DCoordinates(mol, saved_coords) # save the original atom coordinates
+
+            struct_data = None
+
+            if Chem.hasStructureData(mol):           # get existing structure data if available
+                struct_data = Chem.getStructureData(mol)
+            else:                                    # otherwise create and set new structure data
+                struct_data = Chem.StringDataBlock()
+
+                Chem.setStructureData(mol, strut)
+
+            # add alignment score entry to struct. data
+            struct_data.addEntry('<PharmFitScore>', '') 
+                
+            output_cnt = 0
+            last_pose = None
+                
+            # order solutions by desc. alignment score
+            almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
+
+            # output molecule alignment poses until the max. number of best output solutions has been reached
+            for solution in almnt_solutions:
+                if output_cnt == num_out_almnts:
+                    break
+
+                curr_pose = Math.Vector3DArray(saved_coords)
+
+                Math.transform(curr_pose, solution[1])  # transform atom coordinates
+
+                # check whether the current pose is 'different enough' from
+                # the last pose to qualify for output
+                if min_pose_rmsd > 0.0 and last_pose and Math.calcRMSD(last_pose, curr_pose) < min_pose_rmsd:
+                    continue
+
+                # apply the transformed atom coordinates
+                Chem.set3DCoordinates(mol, curr_pose)  
+
+                # store alignment score in the struct. data entry
+                struct_data[len(struct_data) - 1].setData(format(solution[0], '.4f'))     
+                    
+                try:
+                    if not mol_writer.write(mol): # output the alignment pose of the molecule
+                        sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
+
+                except Exception as e: # handle exception raised in case of severe write errors
+                    sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
+
+                last_pose = curr_pose
+                output_cnt += 1
+
+        except Exception as e:
+            sys.exit('Error: pharmacophore alignment of molecule %s failed: %s' % (mol_id, str(e)))
+
+    mol_writer.close()
+
+Retrieving information about pharmacophores and features
+--------------------------------------------------------
+
+The script below demonstrates how to retrieve basic properties of pharmacophore features.
+The function ``print_pharmacophore_properties()`` outputs all (available) properties of the features stored
+in the given feature container. Predefined properties are the feature type, geometry, tolerance, weight, and
+hydrophobicity.
+
+.. code-block:: python
+
+    import CDPL.Chem as Chem
+    import CDPL.Pharm as Pharm
+
+    def print_pharmacophore_properties(ph4: Pharm.FeatureContainer) -> None: 
+        """
+        Outputs all (available) properties of the features stored in the given feature container.
+
+        Parameters:
+        - ph4 (Pharm.FeatureContainer): Feature container to process.
+        """
+        ftr_type_str = { Pharm.FeatureType.UNKNOWN               : 'UNKNOWN',
+                         Pharm.FeatureType.HYDROPHOBIC           : 'HYDROPHOBIC',
+                         Pharm.FeatureType.AROMATIC              : 'AROMATIC',
+                         Pharm.FeatureType.NEGATIVE_IONIZABLE    : 'NEGATIVE_IONIZABLE',
+                         Pharm.FeatureType.POSITIVE_IONIZABLE    : 'POSITIVE_IONIZABLE',
+                         Pharm.FeatureType.H_BOND_DONOR          : 'H_BOND_DONOR',
+                         Pharm.FeatureType.H_BOND_ACCEPTOR       : 'H_BOND_ACCEPTOR',
+                         Pharm.FeatureType.HALOGEN_BOND_DONOR    : 'HALOGEN_BOND_DONOR',
+                         Pharm.FeatureType.HALOGEN_BOND_ACCEPTOR : 'HALOGEN_BOND_ACCEPTOR',
+                         Pharm.FeatureType.EXCLUSION_VOLUME      : 'EXCLUSION_VOLUME' }
+    
+        geom_str = { Pharm.FeatureGeometry.UNDEF   : 'UNDEF',
+                     Pharm.FeatureGeometry.SPHERE  : 'SPHERE',
+                     Pharm.FeatureGeometry.VECTOR  : 'VECTOR',
+                     Pharm.FeatureGeometry.PLANE   : 'PLANE' }
+
+        print('Composition of pharmacophore \'%s\':' % Pharm.getName(ph4))
+
+        for i in range(0, len(ph4)):
+            ftr = ph4[i]
+
+            print(' - Feature #%s:' % str(i))
+            print('  - Type: %s' % ftr_type_str[Pharm.getType(ftr)])
+            print('  - Geometry: %s' % geom_str[Pharm.getGeometry(ftr)])
+            print('  - Tolerance: %s' % Pharm.getTolerance(ftr))
+            print('  - Weight: %s' % Pharm.getWeight(ftr))
+            print('  - Optional: %s' % Pharm.getOptionalFlag(ftr))
+            print('  - Disabled: %s' % Pharm.getDisabledFlag(ftr))
+            print('  - Length: %s' % Pharm.getLength(ftr))
+            print('  - Hydrophobicity: %s' % Pharm.getHydrophobicity(ftr))
+
+            if Chem.has3DCoordinates(ftr):         # Pharm.Feature derives from Chem.Entity3D - therefore a function from the Chem package is used here!
+                print('  - Position: %s' % Chem.get3DCoordinates(ftr))
+    
+            if Pharm.hasOrientation(ftr):
+                print('  - Orientation: %s' % Pharm.getOrientation(ftr))
 
 
-CDPKit provides a convenient way to calculate various properties of atoms and bonds in a molecule.
+    ###########################################################################
+    ###########################################################################
+    ###########################################################################
+    ################################ Example usage:
 
-Calculation of Atomic Properties
----------------------------------------
+    # create reader for input pharmacophores (format specified by file extension)
+    reader = Pharm.PharmacophoreReader("path_to_input_file.pml") 
 
-Atomic properties provide important chemical information about each atom in a molecule that 
-is useful for many cheminformatics tasks. The following code snippet shows how to calculate
-and output the corresponding properties of each atom of the provided molecular graph. It includes
-the calculation of implicit hydrogen counts, atom hybridization states, smallest set of smallest rings,
-cycles, aromaticity, and H-bond donor and acceptor atom types.
+    # create an instance of the default implementation of the Pharm.Pharmacophore interface
+    ph4 = Pharm.BasicPharmacophore()
+
+    # process pharmacophores one after the other until the end of input has been reached
+    try:
+        while reader.read(ph4):
+            try:
+                print_pharmacophore_properties(ph4)
+            except Exception as e:
+                sys.exit('Error: processing of pharmacophore failed: ' + str(e))
+                
+    except Exception as e: # handle exception raised in case of severe read errors
+        sys.exit('Error: reading pharmacophore failed: ' + str(e))
+
+
+
+Calculation of Atom Properties
+==============================
+
+CDPKit provides a wide panel of pre-defined atom and bond properties. All of these properties can be retrieved and set/calculated
+by corresponding function calls as demonstrated in the following example scripts.
+
+Calculation of atom classification properties
+---------------------------------------------
+
+Atomic properties provide basic chemical information about each atom of a molecule. Such properties are
+e.g. chemical element, formal charge, implicit hydrogen counts, hybridization states, aromaticity, and so on.
+The following code snippet shows how to calculate and retrieve properties that provide higher-order information about
+the atoms in a molecular graph.
 
 .. note::
-    The following example requires the CDPL.Chem and `CDPL.MolProp <../python_api_doc/namespaceCDPL_1_1MolProp.html>`_
-
+   The following examples use functionality provided by the `CDPL.Chem <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_ and
+   `CDPL.MolProp <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1MolProp.html>`_ package.
 
 .. code-block:: python
 
@@ -1317,28 +1300,23 @@ cycles, aromaticity, and H-bond donor and acceptor atom types.
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+    
     mols = [list of BasicMolecules]  # Example list of BasicMolecules
 
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            try:
-                outputProperties(mol)
-            except Exception as e:
-                sys.exit('Error: processing of molecule failed: ' + str(e))
-                
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+    # process molecules one after the other
+    for mol in mols:
+        try:
+            outputProperties(mol)
+        except Exception as e:
+            sys.exit('Error: processing of molecule failed: ' + str(e))
 
-
-Calculation of Connectivity Properties
+Calculation of connectivity properties
 ---------------------------------------
 
-This code provides a way to calculate various properties of atoms and bonds in a molecule.
-The code snippet provided below shows how to calculate and output the corresponding properties of each atom of the provided molecular graph.
-It includes the calculation of implicit hydrogen counts, atom hybridization states, smallest set of smallest rings, cycles, aromaticity,
-and a variety of other connectivity properties such as the number of connected carbon atoms, heteroatoms, halogens, heavy atoms, chain atoms,
-ring atoms, aromatic atoms, incident bonds, and incident single bonds as well as valecny, coordination, and ring sizes.
+The code snippet below shows to calculate various atom properties that depend on their connectivity to other atoms of
+the molecular graph such as the number of connected carbon atoms, heteroatoms, halogens, heavy atoms, chain atoms,
+ring atoms, aromatic atoms, incident bonds, and incident single bonds as well as valency, coordination geometry, and sizes of
+containing rings.
 
 .. code-block:: python
 
@@ -1412,46 +1390,42 @@ ring atoms, aromatic atoms, incident bonds, and incident single bonds as well as
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+    
     mols = [list of BasicMolecules]  # Example list of BasicMolecules
     
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            try:
-                outputProperties(mol)
-            except Exception as e:
-                sys.exit('Error: processing of molecule failed: ' + str(e))
-                
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+    # process molecules one after the other
+    for mol in mols:
+        try:
+           outputProperties(mol)
+        except Exception as e:
+           sys.exit('Error: processing of molecule failed: ' + str(e))
 
 
+Calculation of Molecular Structure Descriptors
+==============================================
 
+The calculation of molecule structure descriptors is one of the fundamental operations in cheminformatics. 
+Such descriptors e.g. allow for a modeling and prediction of various structure-dependent properties
+with mathematical methods. However, they can also be put to use for numerous other applications such as:
 
-Calculation of Molecule and Pharmacophore Descriptors
-=========================================================
-
-The calculation of molecular descriptors is a fundamental operation in cheminformatics. 
-It allows for the quantification of various chemical properties of molecules, which can be
-used for various cheminformatics tasks, such as:
-
-- **Drug Discovery**: Identifying molecules that contain a particular pharmacophore or active site.
-- **Chemical Database Querying**: Filtering large chemical databases to retrieve molecules of interest.
-- **Chemical Analysis**: Identifying the presence of particular functional groups or fragments in molecules.
+- Search for molecules that are structurally similar to a query molcule
+- Pre-filtering step for substructure searching in large chemical databases
+- Identifying the presence of particular functional groups or fragments in molecules
 
 .. note::
-    The CDPKit moduls `CDPL.Descr <../python_api_doc/namespaceCDPL_1_1Descr.html>`_ and `CDPL.Util <../python_api_doc/namespaceCDPL_1_1Util.html>`_ provide a convenient way to calculate various molecular descriptors.
+    The `CDPL.Descr <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Descr.html>`_ package provides functionality for the generation
+    of various well-known molecule descriptors and fingerprints.
 
-Extended Connectivity Fingerprints (ECFPs)
--------------------------------------------
+Extended connectivity fingerprints (ECFPs)
+------------------------------------------
 
-Morgan circular fingerprints, also known as extended connectivity fingerprints (ECFPs), 
-are a type of structural fingerprints that encode the local chemical environment of each atom in a 
-molecule. They are widely used in cheminformatics for various tasks, such as similarity searching, 
+Morgan circular fingerprints, also known as extended connectivity fingerprints (ECFPs) :cite:`doi:10.1021/ci100050t`, 
+are a type of structural fingerprint that encodes the local chemical environment of each atom in a 
+molecule as a particular bit in a bitset. They are widely used in cheminformatics for various tasks, such as similarity searching, 
 virtual screening, and machine learning.
 
-The following code snippet calculates and outputs the ECFP4 fingerprints of the provided molecules.
-Following parameters can be set: 
+The following code snippet calculates and outputs the ECFP fingerprints of the provided molecules.
+The ECFP generation process can be influenced by the following parameters: 
 
 - **num_bits**: The number of bits of the fingerprint (default: 1024)
 - **radius**: Max. atom environment radius in number of bonds (default: 2)
@@ -1506,47 +1480,41 @@ Following parameters can be set:
         
         return fp
 
+        
     ###########################################################################
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
 
-    # set parameters
-    num_bits = 1024  # fingerprint size
-    radius = 4       # atom environment radius
-    inc_hs = True    # include explicit hydrogens
+    # Settings
+    num_bits = 1024   # fingerprint size
+    radius = 4        # atom environment radius
+    inc_hs = True     # include explicit hydrogens
     inc_config = True # include atom chirality
 
     mols = [list of BasicMolecules]  # Example list of BasicMolecules
 
+    # process molecules one after the other
+    for mol in mols:
+        try:
+            fp = genECFP(mol, num_bits, radius, inc_hs, inc_config)
 
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols:
-            try:
-                fp = genECFP(mol, num_bits, radius, inc_hs, inc_config)
+            # do something useful with the fingerprint
 
-                # do something with the fingerprint
-
-            except Exception as e:
-                sys.exit('Error: processing of molecule failed: ' + str(e))
-                
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
-
+        except Exception as e:
+            sys.exit('Error: processing of molecule failed: ' + str(e))
+   
     out_file.close()
 
-FAME Atom Environment Fingerprints
--------------------------------------
-The FAME Atom Environment Fingerprints represent the local environment around atoms in molecules.
-It provide a high-resolution view of the molecular landscape, making them especially valuable for tasks like similarity searching, compound clustering, 
-and structure-activity relationship studies. 
-Their detailed representation can capture nuances that more generic fingerprints might overlook, offering a more refined perspective on molecular structures.
+FAME atom environment fingerprints
+----------------------------------
 
-The following code snippet calculates and outputs the FAME descriptors of the provided molecules.
+This type of fingerprint encodes the local environment of individual atoms up to a configurable maximum bond-path length.
+The descriptor was developed for the classification of atoms in the well-known site of metabolism prediction
+software *FAME* :cite:`doi:10.1021/acs.jcim.9b00376`.
 
-Following parameters can be set: 
-- **radius**: Max. atom environment radius in number of bonds (default: 2)
+The following code snippet calculates and outputs the FAME descriptor for each atom of the provided molecules with
+the parameter *radius* specifying the max. atom environment radius in number of bonds (default: 2).
 
 .. code:: python
 
@@ -1569,12 +1537,12 @@ Following parameters can be set:
         descr = numpy.zeros((Chem.SybylAtomType.MAX_TYPE + 1) * (radius + 1))
         
         Chem.getEnvironment(ctr_atom, molgraph, radius, env)                       # extract environment of center atom reaching
-                                                                                # out up to 'radius' bonds
+                                                                                   # out up to 'radius' bonds
         for atom in env.atoms:                                                     # iterate over extracted environment atoms
             sybyl_type = Chem.getSybylType(atom)                                   # retrieve Sybyl type of environment atom
             top_dist = Chem.getTopologicalDistance(ctr_atom, atom, molgraph)       # get top. distance between center atom and environment atom
             descr[top_dist * (Chem.SybylAtomType.MAX_TYPE + 1) + sybyl_type] += 1  # instead of 1 (= Sybyl type presence) also any other numeric atom
-                                                                                # property could be summed up here
+                                                                                   # property could be summed up here
         return descr
             
     def procMolecule(molgraph: Chem.MolecularGraph) -> None: 
@@ -1604,32 +1572,28 @@ Following parameters can be set:
 
     mols = [list of BasicMolecules]  # Example list of BasicMolecules
     
-    # read and process molecules one after the other until the end of input has been reached
-    try:
-        for mol in mols: 
-            try:
-                procMolecule(mol)
-            except Exception as e:
-                sys.exit('Error: processing of molecule failed: ' + str(e))
+    # process molecules one after the other
+    for mol in mols: 
+        try:
+            procMolecule(mol)
+        except Exception as e:
+            sys.exit('Error: processing of molecule failed: ' + str(e))
                 
-    except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
-
 
 Force Field Calculations
 ==========================
 
 Force fields are mathematical models used to predict the molecular mechanics of molecules. They are essential in molecular modeling, helping to estimate the spatial arrangement of atoms in a molecule, their potential energy, and other properties. One of the widely recognized force fields is the Merck Molecular Force Field (MMFF94). It is designed to be applicable to a broad range of molecules, making it versatile for various computational chemistry tasks.
 
-MMFF94 Atom Charges Calculation
----------------------------------------
+Calculation of MMFF94 atom charges
+----------------------------------
 
 The MMFF94 force field, in particular, provides a method to calculate partial atomic charges, which can be crucial in understanding the electrostatic interactions of a molecule.
 
 The following code snippet calculates and outputs the MMFF94 charges of the atoms for a given list of molecules:
 
 .. note::
-    The CDPKit moduls `CDPL.ForceField <../python_api_doc/namespaceCDPL_1_1ForceField.html>`_ and `CDPL.Chem <../python_api_doc/namespaceCDPL_1_1Chem.html>`_ provide a convenient way to calculate the MMFF94 charges of the atoms for a given molecule.
+    Force field related functionality is provided via the `CDPL.ForceField <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1ForceField.html>`_ package.
 
 .. code-block:: python
 
@@ -1677,8 +1641,7 @@ This code provides a way to calculate the MMFF94 charges for each atom in a mole
 
 
 Substructure Searching and Matching
-====================================
-
+===================================
 
 Substructure search is a fundamental operation in cheminformatics. It allows for the identification of molecules that contain a specific structural motif or pattern. This is particularly useful in various applications, such as:
 
@@ -1686,9 +1649,8 @@ Substructure search is a fundamental operation in cheminformatics. It allows for
 - **Chemical Database Querying**: Filtering large chemical databases to retrieve molecules of interest.
 - **Chemical Analysis**: Identifying the presence of particular functional groups or fragments in molecules.
 
-Filtering Molecules Based on a SMARTS Pattern
------------------------------------------------
-
+Filtering molecules basedn on a SMARTS pattern
+----------------------------------------------
 
 The SMARTS notation (SMiles ARbitrary Target Specification) is a language used to describe structural patterns in molecules. It's an extension of the SMILES notation and allows for more complex and specific pattern descriptions.
 CDPKit provides a convenient way to filter molecules that match a specific structural motif described by a SMARTS pattern. This can be useful in various cheminformatics applications, such as database querying, drug discovery, and chemical analysis.
@@ -1696,7 +1658,7 @@ CDPKit provides a convenient way to filter molecules that match a specific struc
 
 .. code-block:: python
 
-   import CDPL.Chem as Chem
+    import CDPL.Chem as Chem
 
     def filterMoleculesBySmarts(input_file: str, output_file: str, smarts_pattern: str, quiet: bool = False) -> None:
         """
@@ -1745,5 +1707,5 @@ CDPKit provides a convenient way to filter molecules that match a specific struc
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+    
     filterMoleculesBySmarts("input.sdf", "output.sdf", "[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1")
-

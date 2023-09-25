@@ -1,4 +1,4 @@
-FAME Atom Environment Fingerprints
+FAME atom environment fingerprints
 ==================================
 
 .. literalinclude:: /examples/descr_gen_fame_fp.py

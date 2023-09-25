@@ -203,9 +203,9 @@ SET(Boost_USE_STATIC_LIBS OFF)
 SET(Boost_ADDITIONAL_VERSIONS "1.74.0" "1.75.0" "1.76.0" "1.77.0" "1.78.0" "1.79.0" "1.80.0" "1.82.0" "1.83.0" "1.84.0")
 
 IF(CDPL_PYPI_PACKAGE_BUILD)
-  FIND_PACKAGE(Boost ${CDPKIT_MIN_BOOST_VERSION} QUIET REQUIRED iostreams filesystem system)
+  FIND_PACKAGE(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams filesystem system)
 ELSE()
-  FIND_PACKAGE(Boost ${CDPKIT_MIN_BOOST_VERSION} QUIET REQUIRED iostreams filesystem system OPTIONAL_COMPONENTS program_options unit_test_framework)
+  FIND_PACKAGE(Boost ${CDPKIT_MIN_BOOST_VERSION} REQUIRED iostreams filesystem system OPTIONAL_COMPONENTS program_options unit_test_framework)
   
   IF(NOT Boost_PROGRAM_OPTIONS_FOUND)
     MESSAGE("!! Warning: Boost program_options library not found -> commandline applications won't be built.")

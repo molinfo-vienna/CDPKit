@@ -5,7 +5,7 @@ set -exu
 
 PY_VERSIONS_TO_BUILD="$*"
 
-# build all boost-python
+# build all boost-libraries except boost_python
 BOOST_ROOT="$( find /boost/* -maxdepth 0 -type d -name 'boost*' )"
 echo "Found boost sources at: $BOOST_ROOT"
 cd "${BOOST_ROOT}"
@@ -24,7 +24,9 @@ cd "${BOOST_ROOT}"
     --clean-all \
     > /dev/null
 
+# for each installed python version build only boost_python 
 echo "Will try building boost.python for python versions: ${PY_VERSIONS_TO_BUILD}"
+
 for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
 
     echo "#####################################################################"
@@ -97,5 +99,4 @@ for python_version_2_build in ${PY_VERSIONS_TO_BUILD}; do
         echo "Did not find an installed python env at /opt/python/ that matches ${PYVER}"
         exit 1
     fi
-
 done

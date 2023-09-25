@@ -1,4 +1,4 @@
-Extended Connectivity Fingerprints (ECFPs)
+Extended connectivity fingerprints (ECFPs)
 ==========================================
 
 .. literalinclude:: /examples/descr_gen_ecfp.py

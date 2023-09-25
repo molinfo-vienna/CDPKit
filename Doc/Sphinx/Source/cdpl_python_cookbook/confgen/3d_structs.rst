@@ -1,4 +1,4 @@
-Single Low-Energy 3D Structures
+Single low-energy 3D structures
 ===============================
 
 .. literalinclude:: /examples/confgen_3d_structs.py

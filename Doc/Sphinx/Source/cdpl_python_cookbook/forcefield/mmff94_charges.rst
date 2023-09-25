@@ -1,4 +1,4 @@
-MMFF94 Atom Charges
+MMFF94 atom charges
 ===================
 
 .. literalinclude:: /examples/forcefield_mmff94_charges.py

@@ -1,4 +1,4 @@
-Classification Properties
+Classification properties
 =========================
 
 .. literalinclude:: /examples/molprop_atom_class_props.py

@@ -1,4 +1,4 @@
-Substructure Search
+Substructure search
 ===================
 
 .. toctree::

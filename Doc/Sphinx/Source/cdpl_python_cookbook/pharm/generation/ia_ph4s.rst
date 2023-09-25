@@ -1,4 +1,4 @@
-Ligand-Receptor Interaction Pharmacophores
+Ligand-receptor interaction pharmacophores
 ==========================================
 
 .. literalinclude:: /examples/pharm_gen_ia_ph4s.py

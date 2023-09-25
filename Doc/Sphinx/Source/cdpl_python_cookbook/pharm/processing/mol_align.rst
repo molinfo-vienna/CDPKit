@@ -1,4 +1,4 @@
-Molecule to Reference Pharmacophore Alignment
+Molecule to reference pharmacophore alignment
 =============================================
 
 .. literalinclude:: /examples/pharm_align_mols.py

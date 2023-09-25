@@ -1,4 +1,4 @@
-Partial Charges and other Electronic Properties
+Partial charges and other electronic properties
 ===============================================
 
 .. literalinclude:: /examples/molprop_atom_elec_props.py

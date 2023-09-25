@@ -1,4 +1,4 @@
-Standardization and Curation
+Standardization and curation
 ============================
 
 .. toctree::
