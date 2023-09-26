@@ -880,10 +880,10 @@ The function ``clearFeatureOrientations()`` removes feature orientation informat
 
 The following variables control the alignment process and reported results:
 
-- **pos_only**: Controls whether only the position of features is considered during alignment
-- **min_pose_rmsd**: Controls the minimum required RMSD between two consecutively output molecule alignment poses
-- **num_out_almnts**: Is used to control the number of top-ranked alignment solutions to output per molecule (default: best alignment solution only)
-- **exhaustive**: Specifies whether an exhaustive alignment search should be performed
+- *pos_only*: Controls whether only the position of features is considered during alignment
+- *min_pose_rmsd*: Controls the minimum required RMSD between two consecutively output molecule alignment poses
+- *num_out_almnts*: Is used to control the number of top-ranked alignment solutions to output per molecule (default: best alignment solution only)
+- *exhaustive*: Specifies whether an exhaustive alignment search should be performed
 
 .. code-block:: python
 
@@ -1427,10 +1427,10 @@ virtual screening, and machine learning.
 The following code snippet calculates and outputs the ECFP fingerprints of the provided molecules.
 The ECFP generation process can be influenced by the following parameters: 
 
-- **num_bits**: The number of bits of the fingerprint (default: 1024)
-- **radius**: Max. atom environment radius in number of bonds (default: 2)
-- **inc_hs**: Whether to include explicit hydrogens (by default, the fingerprint is generated for the H-deplete molecular graph)
-- **inc_config**: Whether to include atom chirality (by default, the fingerprint is generated for the H-deplete molecular graph)
+- *num_bits*: The number of bits of the fingerprint (default: 1024)
+- *radius*: Max. atom environment radius in number of bonds (default: 2)
+- *inc_hs*: Whether to include explicit hydrogens (by default, the fingerprint is generated for the H-deplete molecular graph)
+- *inc_config*: Whether to include atom chirality (by default, the fingerprint is generated for the H-deplete molecular graph)
 
 .. code:: python
 
@@ -1583,12 +1583,19 @@ the parameter *radius* specifying the max. atom environment radius in number of 
 Force Field Calculations
 ==========================
 
-Force fields are mathematical models used to predict the molecular mechanics of molecules. They are essential in molecular modeling, helping to estimate the spatial arrangement of atoms in a molecule, their potential energy, and other properties. One of the widely recognized force fields is the Merck Molecular Force Field (MMFF94). It is designed to be applicable to a broad range of molecules, making it versatile for various computational chemistry tasks.
+Force fields are computational methods that estimate the forces between atoms within molecules and also between molecules.
+Since they allow for a computationally inexpensive, but nevertheless relatively accurate calculation of the potential energy of a system of atoms,
+they are essential for many tasks in the field of molecular modeling such as conformer generation and molecular dynamics (MD) simulations.
+One of the widely recognized force fields is the *Merck Molecular Force Field* (MMFF94) 
+:cite:`https://doi.org/10.1002/(SICI)1096-987X(199604)17:5/6<490::AID-JCC1>3.0.CO;2-P` which has been designed to be applicable to a
+broad range of organic molecules and thus found widespread use.
 
 Calculation of MMFF94 atom charges
 ----------------------------------
 
-The MMFF94 force field, in particular, provides a method to calculate partial atomic charges, which can be crucial in understanding the electrostatic interactions of a molecule.
+The MMFF94 force field provides a method and associated parameter set for the calculation of partial atomic charges. 
+They are not only crucial for the estimation of intra- and intermolecular electrostatic interactions but can also be
+used, e.g., as atom descriptors for ML-based model building. 
 
 The following code snippet calculates and outputs the MMFF94 charges of the atoms for a given list of molecules:
 
@@ -1622,6 +1629,7 @@ The following code snippet calculates and outputs the MMFF94 charges of the atom
 
 
         print('- MMFF94 partial charges')
+
         for atom in mol.atoms:
             print('Atom #%s: %s' % (str(atom.getIndex()), str(ForceField.getMMFF94Charge(atom))))
 
@@ -1629,31 +1637,31 @@ The following code snippet calculates and outputs the MMFF94 charges of the atom
     ###########################################################################
     ###########################################################################
     ################################ Example usage:
+
     mols = [list_of_BasicMolecules]
+
     for mol in mols:
         calc_and_output_charges(mol)
-
-For a deeper understanding of MMFF94 and its applications:
-
-- `MMFF94 Original Publication <https://pubs.acs.org/doi/abs/10.1021/ja9621760>`_
-
-This code provides a way to calculate the MMFF94 charges for each atom in a molecule, which can be essential for various cheminformatics analyses.
 
 
 Substructure Searching and Matching
 ===================================
 
-Substructure search is a fundamental operation in cheminformatics. It allows for the identification of molecules that contain a specific structural motif or pattern. This is particularly useful in various applications, such as:
+Substructure searching (a subgraph isomorphism problem) is one of the most fundamental operations in cheminformatics and allows for the
+identification of molecules that contain a specific structural motif or pattern. 
+Substructure searching needs to be performed in various application areas, such as:
 
-- **Drug Discovery**: Identifying molecules that contain a particular pharmacophore or active site.
-- **Chemical Database Querying**: Filtering large chemical databases to retrieve molecules of interest.
-- **Chemical Analysis**: Identifying the presence of particular functional groups or fragments in molecules.
+- *Drug Discovery*: Identifying molecules that contain a particular pharmacophore or motif
+- *Chemical Database Querying*: Filtering large chemical databases to retrieve molecules of interest
+- *Reactivity Analysis*: Identifying the presence of particular functional groups or fragments in molecules
 
-Filtering molecules basedn on a SMARTS pattern
-----------------------------------------------
+Filtering molecules based on a SMARTS pattern
+---------------------------------------------
 
-The SMARTS notation (SMiles ARbitrary Target Specification) is a language used to describe structural patterns in molecules. It's an extension of the SMILES notation and allows for more complex and specific pattern descriptions.
-CDPKit provides a convenient way to filter molecules that match a specific structural motif described by a SMARTS pattern. This can be useful in various cheminformatics applications, such as database querying, drug discovery, and chemical analysis.
+The SMARTS notation (SMiles ARbitrary Target Specification) is a language used to describe structural patterns. It's an
+extension of the SMILES notation and allows for more complex and specific pattern descriptions.
+The CDPL provides substructure searching functionality via the class `Chem.SubstructureSearch <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1SubstructureSearch.html>`_.
+The code snippet below demonstrates how this class can be used to identify molecules that match a specific structural motif described by a SMARTS pattern.
 
 
 .. code-block:: python
