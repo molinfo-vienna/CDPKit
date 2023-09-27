@@ -4,15 +4,15 @@ Molecular Input/Output
 Reading molecules from an input file
 ------------------------------------
 
-To kick off your cheminformatics journey, you'll frequently need to read or write molecular data from a variety of file formats.
-Using CDPKit, you can easily read and write molecules saved in various file formats, including *SDF*, *SMILES*, *MOL*, *MOL2*, *CDF*, and others.
+
+A frequent task in cheminformatics is to read molecular data from files in different formats.
+For this purpose, the CDPL provides data readers for various file formats including *SDF*, *SMILES*, *MOL*, *MOL2*, *CDF*, and others.
 
 .. note::
-    The CDF format is a binary format and CDPKit's native file format that can be used to store molecules/pharmacophores and their associated metadata
-    in a space and processing time efficient manner.
+    The CDF format is a binary format and CDPKit's native file format that can be used to store molecule, reaction, and pharmacophore data in a space and processing time efficient manner.
 
 The class `Chem.MoleculeReader <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_ is rather versatile and can read molecules stored in
-different formats (SDF, SMILES, MOL, MOL2, CDF, etc.) thus eliminating the need to call a specific reader for each format.
+any of the supported formats (SDF, SMILES, MOL, MOL2, CDF, etc.) thus eliminating the need to instantiate a format-specific reader implementation.
 Here is a simple example of how to read molecules from an input file:
 
 .. note::
@@ -57,13 +57,13 @@ Here is a simple example of how to read molecules from an input file:
 Retrieving structure data from MDL SD-files
 -------------------------------------------
 
-Sometimes, one might want to read the data associated with a molecule in an SD-file. With CDPKit this can be done easily as shown 
+Analyzing the data associated with a molecule in an SD-file can be done as shown 
 in the following example:
 
 .. note::
-    You can either use Chem.MoleculeReader to read the structure data of each molecule in an SD file or 
-    use the specific reader like e.g. Chem.FileSDFMoleculeReader to read the structure data of each molecule in an SD file.
-    The convenient way is to use Chem.MoleculeReader.
+    You can either use `Chem.MoleculeReader <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MoleculeReader.html>`_
+    or use the format-specific reader `Chem.FileSDFMoleculeReader <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1FileSDFMoleculeReader.html>`_
+    molecules from an SD-file. Usually, the more convenient and flexible way to read molecule data is to use Chem.MoleculeReader.
 
 .. code-block:: python
 
@@ -116,12 +116,13 @@ Writing molecules to an output file
 
 Once you've processed or analyzed your molecules, you may want to save them to an output file. 
 In the constructor of the class `Chem.MolecularGraphWriter <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1MolecularGraphWriter.html>`_ the format of the output
-file is determined by its file extension, making it easy to save your molecules in formats such as SDF, MOL, MOL2, CDF, and others.
+file is determined by its file extension, making it easy to save molecules in different formats such as SDF, MOL, MOL2, CDF, and others without having to write
+format-specific code.
 
 .. note::
-   Ensure that the file extension you provide matches the standard desired output format. For instance, use `.sdf` for Structure-Data Files, `.mol` for MDL Molfiles, and so on.
+   Ensure that the file extension you provide matches the standard desired output format. For instance, use `.sdf` for MDL Structure-Data Files, `.mol` for MDL Molfiles, and so on.
 
-Here's a simple example of how to write a list of molecules to an output file:
+Here's a simple example of how a list of molecules can be written to an output file:
 
 .. code-block:: python
 
@@ -154,9 +155,9 @@ Here's a simple example of how to write a list of molecules to an output file:
 Description of structural atom environments as SMILES strings
 -------------------------------------------------------------
 
-For the extaction of local chemical environments of atoms in a molecular graph CDPKit provides the utility function
+For the extraction of the local chemical environment of an atom in a molecular graph the CDPL provides the utility function
 `Chem.getEnvironment <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html#a342acefab39f6928df4c67c2d86c209a>`_.
-Fur further processing they can, e.g., be output as SMILES strings as shown in the following example.
+Fur further processing extracted environments can, e.g., be output as SMILES strings as shown in the following example.
 
 .. code-block:: python
 
@@ -201,9 +202,8 @@ Fur further processing they can, e.g., be output as SMILES strings as shown in t
 ChEMBL molecule standardization and parent structure extraction
 ---------------------------------------------------------------
 
-CDPKit provides a convenient way to standardize molecules using its implementaion of the ChEMBL standardization pipeline :cite:`Bento2020`. 
-This process ensures that molecules are represented in a consistent and standardized manner, which might be of high relevance
-for downstream processing steps.
+The CDPL provides a convenient way to standardize molecules using its implementaion of the ChEMBL standardization pipeline :cite:`Bento2020`. 
+This process ensures that molecules will be represented in a consistent and standardized manner when they enter downstream processing steps.
 
 .. code-block:: python
 
@@ -318,13 +318,14 @@ Standardization/prediction of protonation states
 
 In the realm of computational chemistry and molecular modeling, understanding and predicting the behavior of molecules
 often hinges on the finer details. One such critical detail is the protonation state of the functional groups in a molecule. 
-Protonation states dictate formal charges of atoms and have an impact molecular structure and reactivity and, as a consequence,
-play a vital role in processes like drug binding, enzymatic reactions, and many more.  
+Protonation states dictate formal charges of atoms and have an impact on molecular 3D structure and reactivity. Knowing the
+pre-dominant protonation states of functional groups under certain condition is therefore vital for methods predicting
+drug binding, enzymatic reactions, etc.  
 
 The class `Chem.ProtonationStateStandardizer <../cdpl_api_doc/python_api_doc/classCDPL_1_1Chem_1_1ProtonationStateStandardizer.html>`_
-implements several protonation state generation flavors.
-In the following code snippet we will show how to generate protonation/formal charge states of acidic and basic function groups
-likely at physiological conditions.
+implements several protonation state generation algorithms.
+The following code snippet shows how to generate protonation/formal charge states of acidic/basic functional groups that are likely
+to occur under physiological conditions.
 
 .. code-block:: python
 
@@ -368,7 +369,7 @@ conformations that correspond to local minima on the potential energy surface ar
 
 In the realm of cheminformatics and molecular modeling many methods and algorithms require 3D structures or even whole
 conformer ensembles as input. 
-For a seamless integration with such methods CDPKit provides functionality in package `CDPL.ConfGen <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1Chem.html>`_ that allows 
+For a seamless integration with such methods CDPKit provides functionality in package `CDPL.ConfGen <../cdpl_api_doc/python_api_doc/namespaceCDPL_1_1ConfGen.html>`_ that allows 
 to generate both single low-energy 3D structures and diverse conformer ensembles solely from connection table information.
 The high-quality conformer ensemble generation tool included in CDPKit is called *CONFORGE*. For details on its implementation and performance
 see :cite:`doi:10.1021/acs.jcim.3c00563`.
@@ -477,7 +478,7 @@ Generating conformer ensembles
 For some applications it is necessary to generate multiple conformations for a molecule, e.g. to assess its flexibility or investigate binding 
 capabilities towards a particular target receptor.
 
-The function ``generate_conformation_ensembles()`` generates a conformer ensemble for a given molecule using the an initialized 
+The function ``generate_conformation_ensembles()`` generates a conformer ensemble for a given molecule using an
 instance of class `ConfGen.ConformerGenerator <../cdpl_api_doc/python_api_doc/classCDPL_1_1ConfGen_1_1ConformerGenerator.html>`_.
 The parameters *min_rmsd*, *e_window*, and *max_confs* are used to control the generated conformer ensemble's diversity, energy and size.
 They can be initialized at the beginning of the example script with the desired values. 
@@ -598,7 +599,7 @@ Pharmacophore generation for single-conformer molecules
 -------------------------------------------------------
 
 The following example script generates a pharmacophore model for each input molecule
-and outputs the pharmacophore data to a PML file.
+and outputs the pharmacophore data in PML format.
 
 .. code-block:: python
 
@@ -734,7 +735,7 @@ Generating ligand-receptor interaction pharmacophores
 -----------------------------------------------------
 
 The following example shows how to generate 3D pharmacophore models that describe observed interactions between
-a molecule and surrounding residues in a receptor's binding site.
+a molecule and proximal binding site residues.
 The script also demonstrates how to read and preprocess biological macromolecules.
 
 .. note::
@@ -878,7 +879,7 @@ The function ``readRefPharmacophore()`` reads the reference pharmacophore from a
 The function ``genPharmacophore()`` generates and returns the pharmacophore of a molecule.
 The function ``clearFeatureOrientations()`` removes feature orientation information and sets the feature geometry to ``Pharm.FeatureGeometry.SPHERE``.
 
-The following variables control the alignment process and reported results:
+The following variables control the alignment process and the reported results:
 
 - *pos_only*: Controls whether only the position of features is considered during alignment
 - *min_pose_rmsd*: Controls the minimum required RMSD between two consecutively output molecule alignment poses
@@ -1067,7 +1068,7 @@ Retrieving information about pharmacophores and features
 
 The script below demonstrates how to retrieve basic properties of pharmacophore features.
 The function ``print_pharmacophore_properties()`` outputs all (available) properties of the features stored
-in the given feature container. Predefined properties are the feature type, geometry, tolerance, weight, and
+in the given feature container. Built-in feature properties are feature type, geometry, tolerance, weight, and
 hydrophobicity.
 
 .. code-block:: python
@@ -1147,7 +1148,7 @@ hydrophobicity.
 Calculation of Atom Properties
 ==============================
 
-CDPKit provides a wide panel of pre-defined atom and bond properties. All of these properties can be retrieved and set/calculated
+The CDPL provides a wide panel of pre-defined atom and bond properties. All of these properties can be retrieved and set/calculated
 by corresponding function calls as demonstrated in the following example scripts.
 
 Calculation of atom classification properties
@@ -1315,8 +1316,7 @@ Calculation of connectivity properties
 
 The code snippet below shows to calculate various atom properties that depend on their connectivity to other atoms of
 the molecular graph such as the number of connected carbon atoms, heteroatoms, halogens, heavy atoms, chain atoms,
-ring atoms, aromatic atoms, incident bonds, and incident single bonds as well as valency, coordination geometry, and sizes of
-containing rings.
+ring atoms, aromatic atoms, and many more.
 
 .. code-block:: python
 

@@ -1,10 +1,10 @@
-.. index:: Python Tutorial, Getting Started
+.. index:: Python Tutorial, Getting Started, Code Snippets, Examples
            
 CDPL Python Tutorial
 ====================
 
 .. note::
-   Please install CDPKit before proceeding with the tutorial. Detailed installation instructions can be found in chapter
+   Please install CDPKit before proceeding with the tutorial. Detailed installation instructions can be found in section
    :doc:`../installation`.
 
 Welcome to the "Getting Started with Python" tutorial! If you're familiar with cheminformatics 
