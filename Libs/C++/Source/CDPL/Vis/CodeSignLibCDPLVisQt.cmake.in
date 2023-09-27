@@ -1,7 +1,11 @@
+SET(BINARY_FILE "${CMAKE_INSTALL_PREFIX}/@CDPKIT_LIBRARY_INSTALL_DIR@/libcdpl-vis-qt.dylib...")
+
+MESSAGE(" -- Signing ${BINARY_FILE}")
+
 IF("@CDPKIT_CODE_SIGNING_IDENTITY@" STREQUAL "-")
-  EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--sign" "-" "libcdpl-vis-qt.dylib"
+  EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--sign" "-" "${BINARY_FILE}"
     OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
 ELSE()
-  EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--options" "runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "libcdpl-vis-qt.dylib"
+  EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--options" "runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "${BINARY_FILE}"
     OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
 ENDIF()
