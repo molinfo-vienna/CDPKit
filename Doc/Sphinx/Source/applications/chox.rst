@@ -9,7 +9,7 @@ the contents of chemical structure and reaction data files.
 - Can handle large files containing millions of molecules/reactions without
   memory or performance issues
 - Performs 2D structure layout on-the-fly if required/desired
-- A wide panel of structure/reaction visualization settings
+- A large array of structure/reaction visualization settings
 - Allows the selection of individual entries for export or printing
 - A wide panel of supported input and output file formats
             
