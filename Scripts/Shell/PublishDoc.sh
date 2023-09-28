@@ -39,6 +39,7 @@ docs-versions-menu --no-downloads-file --no-write-index-html
 
 for i in `find . -name "docs-versions-menu.js"`; do cp docs-versions-menu-cdpkit.js $i; done
 
+sync
 git add -A
 git commit -a -m "Documentation update"
 git push
