@@ -72,7 +72,7 @@ setup(
     version=VERSION,
     description='CDPKit:CDPL Python Bindings',
     long_description=LONG_DESCRIPTION,
-    long_description_content_type'text/x-rst',
+    long_description_content_type='text/x-rst',
     author='Thomas Seidel',
     author_email='thomas.seidel@univie.ac.at',
     url='https://cdpkit.org',
