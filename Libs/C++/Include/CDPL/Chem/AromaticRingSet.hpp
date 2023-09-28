@@ -85,6 +85,11 @@ namespace CDPL
 
             bool isAromatic(const Fragment::SharedPointer&);
 
+            const char* getClassName() const
+            {
+                return "AromaticRingSet";
+            }
+
             Util::BitSet          aromBondMask;
             const MolecularGraph* molGraph;
         };

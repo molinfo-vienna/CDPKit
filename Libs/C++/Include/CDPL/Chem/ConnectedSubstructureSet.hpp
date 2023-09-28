@@ -116,6 +116,11 @@ namespace CDPL
 
             SubstructDescriptorPtr allocSubstructDescriptor(const Bond&);
 
+            const char* getClassName() const
+            {
+                return "ConnectedSubstructureSet";
+            }
+
             class SubstructDescriptor
             {
 

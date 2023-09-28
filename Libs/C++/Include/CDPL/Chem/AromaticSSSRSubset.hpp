@@ -82,6 +82,11 @@ namespace CDPL
             void init(const MolecularGraph&);
             void findAromaticRings();
 
+            const char* getClassName() const
+            {
+                return "AromaticSSSRSubset";
+            }
+
             Util::BitSet          aromBondMask;
             const MolecularGraph* molGraph;
         };

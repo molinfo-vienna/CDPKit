@@ -97,6 +97,11 @@ namespace CDPL
 
             void initResidueID(const Chem::Atom& atom, ResidueID& res_id, unsigned int flags) const;
 
+            const char* getClassName() const
+            {
+                return "ResidueList";
+            }
+
             typedef std::unordered_map<ResidueID, Chem::Fragment::SharedPointer, ResidueIDHashFunc> ResidueIDToFragmentMap;
 
             ResidueIDToFragmentMap resIDsToFragments;

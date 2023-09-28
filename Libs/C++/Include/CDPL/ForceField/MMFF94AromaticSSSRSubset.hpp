@@ -98,6 +98,11 @@ namespace CDPL
             void perceiveAromaticRings(const Chem::FragmentList& sssr);
             void addToAromaticBondMask(const Chem::Fragment& ring);
 
+            const char* getClassName() const
+            {
+                return "MMFF94AromaticSSSRSubset";
+            }
+
             typedef std::vector<Chem::Fragment::SharedPointer> RingList;
 
             const Chem::MolecularGraph* molGraph;

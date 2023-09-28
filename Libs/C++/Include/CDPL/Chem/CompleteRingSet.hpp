@@ -102,6 +102,11 @@ namespace CDPL
             EdgePtr allocEdge(const EdgePtr&, const EdgePtr&, Node*, Node*, bool);
             EdgePtr allocEdge(const Bond&, Node*, Node*);
 
+            const char* getClassName() const
+            {
+                return "CompleteRingSet";
+            }
+
             class Node
             {
 

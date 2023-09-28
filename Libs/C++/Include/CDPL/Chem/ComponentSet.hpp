@@ -74,6 +74,11 @@ namespace CDPL
           private:
             void visitAtom(const Atom&, Fragment&);
 
+            const char* getClassName() const
+            {
+                return "ComponentSet";
+            }
+
             const MolecularGraph* molGraph;
             Util::BitSet          visAtomMask;
         };

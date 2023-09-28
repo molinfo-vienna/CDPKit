@@ -109,6 +109,11 @@ namespace CDPL
             void processRing(const MessagePtr&);
             void processEvenRings();
 
+            const char* getClassName() const
+            {
+                return "SmallestSetOfSmallestRings";
+            }
+
             class TNode
             {
 
