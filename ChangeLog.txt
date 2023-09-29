@@ -1,4 +1,4 @@
-v1.0.1:
+master:
 
  - Support for building manylinux2014 compliant wheels
  - Documentation updates
