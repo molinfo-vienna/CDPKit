@@ -55,12 +55,12 @@ LONG_DESCRIPTION = r'''
 
 CDPKit comprises a suite of software tools and a programming library called the *Chemical Data Processing Library* (CDPL).
 The CDPL provides a high-quality and well-tested modular implementation of basic functionality typically required by any
-higher-level software application in the field of cheminformatics.
+higher-level cheminformatics software application.
 
 In addition to the CDPL C++ API, an equivalent Python-interfacing layer is provided that allows to harness all of CDPL's
 functionality easily from Python code.
 This PyPI project hosts source and pre-built binary packages (wheels) for a comfortable installation of the CDPL Python bindings on
-Linux, macOS and Windows via the :command:`pip` command.
+Linux, macOS and Windows via the **pip** command.
 
 For more information about CDPKit and the CDPL please visit https://cdpkit.org.
 '''
@@ -70,7 +70,7 @@ VERSION = open('Version', 'r').readline().strip()
 setup(
     name='CDPKit',
     version=VERSION,
-    description='CDPKit:CDPL Python Bindings',
+    description='CDPKit/CDPL Python Bindings',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/x-rst',
     author='Thomas Seidel',
