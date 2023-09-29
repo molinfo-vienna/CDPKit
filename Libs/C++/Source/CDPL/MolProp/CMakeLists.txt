@@ -82,7 +82,7 @@ SET(cdpl-molprop_LIB_SRCS
     HBondAcceptorAtomTyper.cpp
    )
  
-IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+IF(NOT PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
   SET_TARGET_PROPERTIES(cdpl-molprop-static PROPERTIES 
@@ -94,7 +94,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
 
   TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
-ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
+ENDIF(NOT PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 

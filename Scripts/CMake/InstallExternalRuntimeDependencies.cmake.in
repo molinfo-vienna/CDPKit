@@ -27,7 +27,8 @@ IF(COMMAND CMAKE_POLICY)
   CMAKE_POLICY(SET CMP0007 NEW)
 ENDIF()
 
-SET(CDPL_PYPI_PACKAGE_BUILD "@CDPL_PYPI_PACKAGE_BUILD@")
+SET(PYPI_MANYLINUX_PACKAGE_BUILD "@PYPI_MANYLINUX_PACKAGE_BUILD@")
+SET(PATCHELF_EXECUTABLE "@PATCHELF_EXECUTABLE@")
 
 FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
   MESSAGE(" -- Installing external runtime dependencies of ${BINARY_INPUT_FILE}...")
@@ -67,21 +68,27 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
       )
   ELSE()
     LIST(APPEND EXCLUDE_PATTERNS
-      "libstdc\\+\\+"
-      "linux"
-      "libX"
-      "libGL"
-      "libEGL"
-      "libelf"
       "libpython"
-      "libpthread"
-      "libgcc"
+      "linux"
+      "libgcc_s\\.so"
+      "libstdc\\+\\+\\.so"
       "libm\\.so"
-      "libm-"
+      "libdl\\.so"
+      "librt\\.so"
       "libc\\.so"
-      "libc-"
-      "librt"
-      "libdl"
+      "libnsl\\.so"
+      "libutil\\.so"
+      "libpthread\\.so"
+      "libX11\\.so"
+      "libXext\\.so"
+      "libXrender\\.so"
+      "libICE\\.so"
+      "libSM\\.so"
+      "libGL\\.so"
+      "libgobject-"
+      "libgthread-"
+      "libglib-"
+      "libresolv\\.so"
       )
   ENDIF()
     
@@ -117,7 +124,7 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
       ELSE(LEVEL GREATER 0)
         EXECUTE_PROCESS(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "${DEPENDENCY}" "@rpath/${FILE_NAME}" "${BINARY_INPUT_FILE}"
                         OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
-      ENDIF()
+      ENDIF()   
     ENDIF()
     
     IF(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${DEPENDENCY_INSTALL_DIR}/${FILE_NAME}")
@@ -126,6 +133,9 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
       
       IF(APPLE)
         INSTALL_DEPENDENCIES("${CMAKE_INSTALL_PREFIX}/${DEPENDENCY_INSTALL_DIR}/${FILE_NAME}" 1)
+      ELSEIF(UNIX AND PYPI_MANYLINUX_PACKAGE_BUILD AND PATCHELF_EXECUTABLE)
+        EXECUTE_PROCESS(COMMAND "${PATCHELF_EXECUTABLE}" "--set-rpath" "$ORIGIN" "${CMAKE_INSTALL_PREFIX}/${DEPENDENCY_INSTALL_DIR}/${FILE_NAME}"
+          OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
       ENDIF()
     ENDIF()
   ENDFOREACH(DEPENDENCY)

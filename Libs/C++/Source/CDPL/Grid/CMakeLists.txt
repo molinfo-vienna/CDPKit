@@ -46,7 +46,7 @@ SET(cdpl-grid_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
-IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+IF(NOT PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
   TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static)
@@ -58,7 +58,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
   INSTALL(TARGETS cdpl-grid-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
+ENDIF(NOT PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-grid-shared SHARED ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 

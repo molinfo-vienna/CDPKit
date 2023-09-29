@@ -119,7 +119,7 @@ ENDIF()
   
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+IF(NOT PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
   ADD_DEPENDENCIES(cdpl-confgen-static gen-confgen-data-files)
   
@@ -133,7 +133,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
   INSTALL(TARGETS cdpl-confgen-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
+ENDIF(NOT PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 ADD_DEPENDENCIES(cdpl-confgen-shared gen-confgen-data-files)

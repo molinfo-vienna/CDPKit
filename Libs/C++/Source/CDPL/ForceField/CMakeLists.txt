@@ -123,7 +123,7 @@ SET(cdpl-forcefield_LIB_SRCS
 
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+IF(NOT PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
   ADD_DEPENDENCIES(cdpl-forcefield-static gen-forcefield-data-files)
   
@@ -136,7 +136,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
 
   INSTALL(TARGETS cdpl-forcefield-static
     DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
+ENDIF(NOT PYPI_PACKAGE_BUILD)
 
 ADD_LIBRARY(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 ADD_DEPENDENCIES(cdpl-forcefield-shared gen-forcefield-data-files)

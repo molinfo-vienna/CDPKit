@@ -45,7 +45,7 @@ SET(cdpl-grail_LIB_SRCS
     FeatureExtendedTypeFunction.cpp
     )
   
-IF(NOT CDPL_PYPI_PACKAGE_BUILD)
+IF(NOT PYPI_PACKAGE_BUILD)
   ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
   SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES 
@@ -57,7 +57,7 @@ IF(NOT CDPL_PYPI_PACKAGE_BUILD)
     cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)
 
   INSTALL(TARGETS cdpl-grail-static DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries)
-ENDIF(NOT CDPL_PYPI_PACKAGE_BUILD)
+ENDIF(NOT PYPI_PACKAGE_BUILD)
     
 ADD_LIBRARY(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 

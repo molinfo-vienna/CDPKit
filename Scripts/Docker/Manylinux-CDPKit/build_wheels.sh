@@ -17,9 +17,14 @@ do
 
         echo "Building wheel for Python version ${PY_VERS}..."
 
-        ${PY_INST}/bin/python setup.py bdist_wheel -DBOOST_PYTHON_VERSIONS="${PY_VERS_NO_DOT}" -DIGNORE_PYTHON_DEVEL_NOT_FOUND=TRUE
+        ${PY_INST}/bin/python setup.py bdist_wheel -DBOOST_PYTHON_VERSIONS="${PY_VERS_NO_DOT}" -DPYPI_MANYLINUX_PACKAGE_BUILD=TRUE
     done
 done
 
 rm -rf ../wheels
 mv dist ../wheels
+
+for WHEEL_FILE in /build/wheels/*.whl
+do
+    auditwheel repair "${WHEEL_FILE}"
+done
