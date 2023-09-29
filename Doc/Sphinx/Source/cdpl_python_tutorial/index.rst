@@ -1,4 +1,4 @@
-.. index:: Python Tutorial, Getting Started, Code Snippets, Examples
+.. index:: Python Tutorial, Getting Started
            
 CDPL Python Tutorial
 ====================

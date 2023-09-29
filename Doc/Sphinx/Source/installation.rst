@@ -149,10 +149,10 @@ as C++ compiler) or utilizes the :program:`MSVC` toolset.
                          > cmake <SOURCE-DIR> -DCMAKE_PREFIX_PATH=/path/to/Qt/installation/subdir/msvc<VER>_64 -DCAIRO_LIBRARIES=/path/to/cairo/cairo.lib -DCAIRO_INCLUDE_DIR=/path/to/cairo/include -G "NMake Makefiles"
 
 If :command:`cmake` is executed as shown above the default build type will be ``Release``. Configuring for a different build type can be achieved via the argument
-*-DCMAKE_BUILD_TYPE=<BUILD-TYPE>* on the cmake command line. Possible values of ``<BUILD-TYPE>`` are:
+*-DCMAKE_BUILD_TYPE=<BUILD-TYPE>* on the :command:`cmake` command line. Possible values of ``<BUILD-TYPE>`` are:
 
 - Debug
-- Release
+- Releasex
 - RelWithDebInfo
 - MinSizeRel
 
@@ -267,13 +267,13 @@ can be installed by issuing the following command in a terminal session:
                 $ pip install cdpkit
                 
 If no `wheel <https://packaging.python.org/en/latest/specifications/binary-distribution-format/#binary-distribution-format>`_ file
-for the platform (defined by OS, processor architecture and Python version) the command was executed on is available an on-the-fly build of
+for the platform (defined by OS, processor architecture and Python version) the command was executed on is available, an on-the-fly build of
 the CDPKit sources is attempted. This will only proceed without errors if a proper build environment has been set up (see next section).
 
 Installation via a build of the sources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For a successful build of the CDPL Python bindings the information given in section `Installation from source`_ also applies
+For a successful build of the CDPL Python bindings the information provided in section `Installation from source`_ applies also
 here. However, since a full-featured CDPKit build is not required the list of requirements is a bit shorter:
 
 =============================  =============  ================================================================================
@@ -291,7 +291,7 @@ cairo-devel                    1.14+          optional, required for building ca
 .. rubric:: Option 1: Build the CDPKit sources deposited on `PyPI <https://pypi.org/project/CDPKit>`_
 
 This will be done automatically if no pre-built binary package is available (see previous section) or can be enforced
-by specifying the argument *--no-binary :all:*:
+by adding the argument *--no-binary :all:*:
 
 .. code-block:: shell
 
