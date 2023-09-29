@@ -22,6 +22,8 @@
 ##
 
 
+import platform
+
 from os import path
 from os import listdir
 
@@ -31,7 +33,7 @@ from skbuild import setup
 def postproc_manifest(cmake_manifest):
     if len(cmake_manifest) == 0:
         return cmake_manifest
-    
+
     proc_manifest = []
     inst_dir = path.dirname(cmake_manifest[0])
     extra_files = [path.join(inst_dir, f) for f in listdir(inst_dir) if path.isfile(path.join(inst_dir, f))]
@@ -40,14 +42,17 @@ def postproc_manifest(cmake_manifest):
         if extra_file not in cmake_manifest:
             proc_manifest.append(extra_file)
 
-    for entry in cmake_manifest:
-        idx = entry.find('cdpl-')
+    if platform.system() != 'Windows':
+        for entry in cmake_manifest:
+            idx = entry.find('cdpl-')
         
-        if idx >= 0 and entry.count('.', idx) != 3:
-            continue
+            if idx >= 0 and entry.count('.', idx) != 3:
+                continue
         
-        proc_manifest.append(entry)
-
+            proc_manifest.append(entry)
+    else:
+        proc_manifest.extend(cmake_manifest)
+        
     return proc_manifest
 
 LONG_DESCRIPTION = r'''
