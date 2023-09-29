@@ -36,7 +36,7 @@ def postproc_manifest(cmake_manifest):
 
     proc_manifest = []
     inst_dir = path.dirname(cmake_manifest[0])
-    extra_files = [path.join(inst_dir, f) for f in listdir(inst_dir) if path.isfile(path.join(inst_dir, f))]
+    extra_files = [path.join(inst_dir, f) for f in listdir(inst_dir) if path.isfile(path.join(inst_dir, f)) and not f.endswith('.lib')]
 
     for extra_file in extra_files:
         if extra_file not in cmake_manifest:
@@ -51,11 +51,7 @@ def postproc_manifest(cmake_manifest):
         
             proc_manifest.append(entry)
     else:
-        for entry in cmake_manifest:
-            if entry.endswith('.lib'):
-                continue
-            
-            proc_manifest.append(entry)
+        proc_manifest.extend(cmake_manifest)
         
     return proc_manifest
 
