@@ -51,7 +51,11 @@ def postproc_manifest(cmake_manifest):
         
             proc_manifest.append(entry)
     else:
-        proc_manifest.extend(cmake_manifest)
+        for entry in cmake_manifest:
+            if entry.endswith('.lib'):
+                continue
+            
+            proc_manifest.append(entry)
         
     return proc_manifest
 
